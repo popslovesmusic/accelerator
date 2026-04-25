@@ -1,0 +1,110 @@
+{
+  "sim_project_governance_charter": {
+    "name": "IGSOA Simulation Governance Charter",
+    "version": "0.1",
+    "status": "active",
+    "purpose": [
+      "ensure all simulation outputs are reproducible",
+      "align simulation with process-based framework",
+      "enforce strict provenance and claim discipline",
+      "generate publication-ready data"
+    ],
+    "core_principles": [
+      "simulation_outputs_are_primary_empirical_source",
+      "all_results_must_be_reproducible",
+      "schema_before_execution",
+      "no_untracked_runs",
+      "representation_is_not_ontology"
+    ],
+    "run_governance": {
+      "run_id_required": true,
+      "config_snapshot_required": true,
+      "random_seed_required": true,
+      "code_version_required": true,
+      "notes_required": true
+    },
+    "directory_structure": {
+      "root": "sim_project/",
+      "subfolders": [
+        "configs/",
+        "runs/",
+        "outputs/",
+        "reports/",
+        "schemas/"
+      ]
+    },
+    "config_schema": {
+      "required_fields": [
+        "run_id",
+        "timestamp",
+        "parameters",
+        "grid_settings",
+        "time_settings",
+        "initial_conditions",
+        "seed",
+        "notes"
+      ]
+    },
+    "metrics_standard": [
+      "epsilon_mean",
+      "epsilon_max",
+      "rho_mean",
+      "residue_mean",
+      "alignment_rate",
+      "exclusion_rate",
+      "topology_writing_rate",
+      "regime_classification"
+    ],
+    "regime_classification": [
+      "collapse",
+      "persistent",
+      "oscillatory",
+      "metastable"
+    ],
+    "output_rules": {
+      "raw_data_required": true,
+      "summary_json_required": true,
+      "plots_required": true,
+      "no_manual_overwrites": true
+    },
+    "claim_mapping": {
+      "each_plot_must_map_to_run_id": true,
+      "each_claim_must_reference_output_file": true,
+      "no_claim_without_data": true
+    },
+    "provenance_rules": [
+      "every_result_traceable_to_config",
+      "no_deleted_runs_if_referenced",
+      "prior_results_tagged_if_missing_data"
+    ],
+    "language_alignment": {
+      "preferred_terms": [
+        "process",
+        "continuation",
+        "residue",
+        "alignment",
+        "suppression",
+        "stabilization"
+      ],
+      "allowed_bridge_terms": [
+        "state_variable",
+        "scalar_representation",
+        "interaction_term"
+      ]
+    },
+    "failure_policy": {
+      "invalid_run_conditions": [
+        "missing_config",
+        "missing_seed",
+        "untracked_parameters"
+      ],
+      "action": "invalidate_run"
+    },
+    "success_criteria": [
+      "reproducible_results",
+      "clear_regime_maps",
+      "clean_data_pipeline",
+      "publication_ready_outputs"
+    ]
+  }
+}

@@ -1,0 +1,259 @@
+{
+  "sim7_name": "bridge_corridor_refinement_kappa_0p05",
+  "purpose": "Refine and validate the three-regime bridge at low kappa, centered on the candidate_SS3 corridor identified by sim6. Primary goal: determine whether the mixed interface-bearing state at kappa=0.05 is transient SS2 approach or true sustained SS3-class persistence.",
+  "empirical_basis": {
+    "summary": "sim6 resolved a three-regime bridge at low kappa, strongest at kappa=0.05: runaway -> candidate_SS3 -> SS2. The bridge is IC-structured, with IC0 showing the strongest sustained mixed/interface state at final time.",
+    "source_notes": [
+      "Bridge-region interpretation from sim6 agent report and available summaries.",
+      "Time-series and final-state behavior are consistent with a real bridge corridor rather than a noisy transition. :contentReference[oaicite:0]{index=0}",
+      "Work narrative and TN support the directional-boundary interpretation and low-kappa priority. :contentReference[oaicite:1]{index=1} :contentReference[oaicite:2]{index=2}"
+    ]
+  },
+  "core_hypothesis": {
+    "H1": "At kappa=0.05 there exists a finite lambda interval in which IC0 sustains a mixed interface-bearing regime with exclusion_fraction in (0,1), rho > 0, and interface_count > 0 at long horizon.",
+    "H2": "This interval is the strongest current candidate for SS3-class continuation.",
+    "H3": "IC dependence near the bridge is genuine pathway sensitivity, not numerical noise."
+  },
+  "scan_strategy": {
+    "mode": "corridor_refinement",
+    "priority": 1,
+    "primary_slice": {
+      "kappa": 0.05,
+      "lambda_window": {
+        "min": 0.04,
+        "max": 0.10
+      },
+      "rationale": "Covers the strongest observed bridge corridor and the mixed/interface-bearing IC0 states reported by sim6."
+    },
+    "secondary_context_slices": [
+      {
+        "kappa": 0.04,
+        "lambda_window": {
+          "min": 0.04,
+          "max": 0.10
+        },
+        "purpose": "Check whether the bridge broadens or shifts downward in kappa."
+      },
+      {
+        "kappa": 0.06,
+        "lambda_window": {
+          "min": 0.04,
+          "max": 0.10
+        },
+        "purpose": "Check whether the bridge narrows or shifts upward in kappa."
+      }
+    ]
+  },
+  "phase_plan": [
+    {
+      "phase": "P0_refine_primary",
+      "description": "Dense lambda refinement at kappa=0.05 using current production settings plus longer horizon.",
+      "parameters": {
+        "kappa_values": [0.05],
+        "lambda_values": [
+          0.040,
+          0.043,
+          0.046,
+          0.049,
+          0.052,
+          0.055,
+          0.058,
+          0.061,
+          0.064,
+          0.067,
+          0.070,
+          0.073,
+          0.076,
+          0.079,
+          0.082,
+          0.085,
+          0.088,
+          0.091,
+          0.094,
+          0.097,
+          0.100
+        ],
+        "ics": ["IC0", "IC1", "IC2"],
+        "seeds_per_ic": 5,
+        "Nx": 512,
+        "T_max": 500,
+        "D_eps": 0.015,
+        "D_rho": 0.075
+      },
+      "expected_outcome": "Locate the corridor edges and identify which lambda values keep IC0 in mixed/interface-bearing continuation at final time."
+    },
+    {
+      "phase": "P1_long_horizon_validation",
+      "description": "Take the best candidate lambda values from P0 and test whether the mixed state persists or decays at longer time.",
+      "selection_rule": {
+        "retain_points_where": [
+          "final_exclusion_fraction > 0.05",
+          "final_exclusion_fraction < 0.95",
+          "final_mean_rho > 0.25",
+          "final_interface_count >= 1"
+        ]
+      },
+      "parameters": {
+        "kappa_values": [0.05],
+        "top_candidate_lambda_count": 5,
+        "ics_priority": ["IC0", "IC2", "IC1"],
+        "seeds_per_ic": 8,
+        "Nx": 512,
+        "T_max": 1000
+      },
+      "expected_outcome": "Separate transient bridge states from serious persistence candidates."
+    },
+    {
+      "phase": "P2_resolution_validation",
+      "description": "Test numerical robustness of the strongest long-horizon candidates.",
+      "parameters": {
+        "kappa_values": [0.05],
+        "top_candidate_lambda_count": 3,
+        "ics_priority": ["IC0"],
+        "seeds_per_ic": 8,
+        "Nx_values": [512, 1024],
+        "T_max": 1000
+      },
+      "expected_outcome": "Check whether candidate_SS3 survives refinement in spatial resolution."
+    },
+    {
+      "phase": "P3_cross_kappa_shape_check",
+      "description": "Map local curvature of the bridge surface around kappa=0.05.",
+      "parameters": {
+        "kappa_values": [0.04, 0.05, 0.06],
+        "lambda_values": "reuse top candidate band from P0/P1 with ±0.01 margin",
+        "ics": ["IC0", "IC2"],
+        "seeds_per_ic": 5,
+        "Nx": 512,
+        "T_max": 500
+      },
+      "expected_outcome": "Estimate whether the corridor is centered at kappa=0.05 or merely passes through it."
+    }
+  ],
+  "classification_logic": {
+    "runaway": {
+      "criteria_all": [
+        "final_exclusion_fraction >= 0.95",
+        "final_mean_rho <= 0.05",
+        "final_interface_count == 0"
+      ]
+    },
+    "SS2": {
+      "criteria_all": [
+        "final_exclusion_fraction <= 0.05",
+        "final_mean_rho approximately_equals alpha_over_gamma_or_empirical_plateau",
+        "final_interface_count == 0"
+      ]
+    },
+    "candidate_SS3": {
+      "criteria_all": [
+        "final_exclusion_fraction > 0.05",
+        "final_exclusion_fraction < 0.95",
+        "final_mean_rho > 0.25",
+        "final_interface_count >= 1"
+      ],
+      "strength_tiers": {
+        "weak": [
+          "survives at T_max=500 only"
+        ],
+        "moderate": [
+          "survives at T_max=1000",
+          "appears in more than one seed"
+        ],
+        "strong": [
+          "survives at T_max=1000",
+          "survives Nx increase",
+          "persists across neighboring lambda values"
+        ]
+      }
+    }
+  },
+  "metrics_to_compute": {
+    "final_state_metrics": [
+      "final_exclusion_fraction",
+      "final_mean_eps",
+      "final_mean_rho",
+      "final_mean_R",
+      "final_interface_count"
+    ],
+    "time_series_metrics": [
+      "interface_lifetime",
+      "max_interface_count",
+      "time_to_interface_loss",
+      "rho_plateau_value",
+      "eps_plateau_value",
+      "R_plateau_value",
+      "variance_of_collapse_time_by_parameter",
+      "IC_overlap_index"
+    ],
+    "bridge_specific_metrics": [
+      "mixed_state_duration_fraction",
+      "front_position_stability",
+      "front_width_stability",
+      "rho_exclusion_coexistence_duration",
+      "drift_to_SS2_time_if_present"
+    ],
+    "proxy_metrics": [
+      "D_sr_proxy",
+      "L_proxy",
+      "K_proxy"
+    ]
+  },
+  "decision_rules": {
+    "promote_to_SS3_candidate": [
+      "candidate_SS3 criteria met at T_max=1000",
+      "final_interface_count >= 1 in at least 50% of seeds for IC0",
+      "no monotone drift of all runs into SS2 by end of horizon"
+    ],
+    "reject_as_transient_to_SS2": [
+      "interface_count falls to 0 in nearly all seeds before end",
+      "final_exclusion_fraction trends toward 0 across longer horizon",
+      "final_mean_rho converges tightly to SS2 plateau"
+    ],
+    "reject_as_runaway_side": [
+      "final_exclusion_fraction trends toward 1",
+      "final_mean_rho trends toward 0",
+      "interface_count extinguishes"
+    ]
+  },
+  "deliverables": [
+    "sim7_parameter_summary.csv",
+    "sim7_run_results.csv",
+    "sim7_regime_map.csv",
+    "sim7_bridge_table.csv",
+    "sim7_timeseries_global.csv",
+    "sim7_front_metrics.csv",
+    "sim7_domain_metrics.csv",
+    "sim7_classification_summary.csv",
+    "sim7_phase_report.json",
+    "sim7_candidate_report.md"
+  ],
+  "figures": [
+    "kappa_0p05_lambda_refinement_regime_strip.png",
+    "candidate_SS3_corridor_heatmap.png",
+    "IC0_long_horizon_bridge_survival.png",
+    "interface_lifetime_vs_lambda_kappa0p05.png",
+    "final_exclusion_fraction_vs_lambda_by_IC.png",
+    "final_mean_rho_vs_lambda_by_IC.png",
+    "local_phase_surface_kappa004_005_006.png"
+  ],
+  "recommended_execution_order": [
+    "P0_refine_primary",
+    "P1_long_horizon_validation",
+    "P2_resolution_validation",
+    "P3_cross_kappa_shape_check"
+  ],
+  "minimal_success_condition": {
+    "statement": "At least one lambda value near kappa=0.05 yields IC0 runs with mixed final state and surviving interface at T_max=1000.",
+    "meaning": "Bridge corridor is real and not merely a short transient."
+  },
+  "strong_success_condition": {
+    "statement": "A contiguous lambda sub-band near kappa=0.05 sustains mixed interface-bearing continuation for IC0 across multiple seeds and survives Nx increase.",
+    "meaning": "First robust SS3-class corridor identified."
+  },
+  "notes": {
+    "interpretation": "This sim7 program is not a broad exploratory scan. It is a targeted validation/refinement campaign centered on the first resolved bridge region.",
+    "risk": "The corridor may shrink with longer horizon and resolve into SS2. That would still be a meaningful result because it would tightly locate the bridge geometry.",
+    "priority_message": "Do not spend compute expanding unrelated regions until the kappa=0.05 corridor is resolved."
+  }
+}

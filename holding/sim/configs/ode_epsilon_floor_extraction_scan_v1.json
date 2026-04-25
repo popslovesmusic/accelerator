@@ -1,0 +1,318 @@
+{
+  "batch_config": {
+    "name": "ode_epsilon_floor_extraction_scan_v1",
+    "status": "draft_ready_for_agent",
+    "purpose": "Estimate the minimum dynamically attainable epsilon, characterize near-floor behavior, and measure the smallest stable resolvable increment above the observed floor without prematurely naming the derived unit.",
+    "paper_alignment": {
+      "primary_question": "Does the local epsilon-rho-R system approach a nonzero floor under extreme suppression, and how does behavior change in the near-floor regime?",
+      "secondary_question": "Is the system approaching a hard floor, an asymptotic nonzero limit, or a weakly coupled oscillatory regime near minimum epsilon?"
+    },
+    "governance": {
+      "equation_mode": "ode",
+      "experiment_family": "epsilon_floor_extraction",
+      "run_manifest_required": true,
+      "config_snapshot_required": true,
+      "timeseries_global_required": true,
+      "final_summary_required": true,
+      "seed_required": true,
+      "classifier_required": true,
+      "diagnostic_note_required": true
+    },
+    "core_measurement_policy": {
+      "naming_rule": "Do not assign a formal unit name in outputs. Treat all extracted quantities as pre-lexical operational measurements.",
+      "target_quantities": [
+        "epsilon_min_observed",
+        "epsilon_floor_estimate",
+        "time_to_min_epsilon",
+        "near_floor_oscillation_amplitude",
+        "near_floor_bandwidth",
+        "delta_epsilon_min_resolved"
+      ]
+    },
+    "assumptions_for_agent": [
+      "Preserve existing solver behavior unless additive instrumentation is required.",
+      "Emit all resolved parameter values in each manifest.",
+      "If exact runtime schema differs, adapt field names minimally while preserving sweep intent.",
+      "If the solver can emit denser time samples near minimum epsilon, do so and record the policy in manifest."
+    ],
+    "global_settings": {
+      "integrator": "rk4",
+      "dt": 0.005,
+      "t_final": 120.0,
+      "sample_every": 5,
+      "termination_rules": {
+        "runaway_epsilon_threshold": 25.0,
+        "runaway_rho_threshold": 25.0,
+        "nan_or_inf_invalidates_run": true
+      },
+      "near_floor_sampling": {
+        "enabled": true,
+        "window_fraction_of_run": 0.25,
+        "record_dense_samples_near_global_min": true
+      }
+    },
+    "classifier_settings": {
+      "epsilon_collapse_threshold": 0.001,
+      "near_floor_band_relative_threshold": 0.01,
+      "oscillation_amplitude_threshold": 0.005,
+      "runaway_threshold": 25.0,
+      "labels": [
+        "near_floor_persistent",
+        "near_floor_oscillatory",
+        "persistent_above_floor",
+        "runaway",
+        "other_transitional"
+      ]
+    },
+    "derived_metrics_required": [
+      "epsilon_min_observed",
+      "epsilon_argmin_time",
+      "epsilon_last_window_mean",
+      "epsilon_last_window_std",
+      "epsilon_last_window_min",
+      "epsilon_last_window_max",
+      "epsilon_floor_estimate",
+      "near_floor_bandwidth",
+      "near_floor_oscillation_amplitude",
+      "delta_epsilon_min_resolved",
+      "rho_negative_flag"
+    ],
+    "fixed_parameters_template": {
+      "k": "USE_CURRENT_BASELINE_UNLESS_SCANNED",
+      "b": "USE_CURRENT_BASELINE_UNLESS_SCANNED",
+      "c": "USE_CURRENT_BASELINE_UNLESS_SCANNED",
+      "alpha": "USE_CURRENT_BASELINE_UNLESS_SCANNED",
+      "beta": "USE_CURRENT_BASELINE_UNLESS_SCANNED",
+      "gamma": "USE_CURRENT_BASELINE_UNLESS_SCANNED",
+      "kappa": "USE_CURRENT_BASELINE_UNLESS_SCANNED",
+      "lambda": "USE_CURRENT_BASELINE_UNLESS_SCANNED",
+      "v": "USE_CURRENT_BASELINE_UNLESS_SCANNED",
+      "s": "USE_CURRENT_BASELINE_UNLESS_SCANNED",
+      "h": "USE_CURRENT_BASELINE_UNLESS_SCANNED"
+    },
+    "initial_condition_families": [
+      {
+        "name": "tiny_epsilon_pressure_favored",
+        "epsilon0": 0.0005,
+        "rho0": 0.25,
+        "R0": 0.0,
+        "notes": "Pushes the system close to the smallest practical epsilon start."
+      },
+      {
+        "name": "small_epsilon_pressure_favored",
+        "epsilon0": 0.005,
+        "rho0": 0.25,
+        "R0": 0.0,
+        "notes": "Slightly less extreme start to test floor convergence robustness."
+      },
+      {
+        "name": "moderate_balanced",
+        "epsilon0": 0.1,
+        "rho0": 0.1,
+        "R0": 0.0,
+        "notes": "Reference start for comparison against floor-seeking starts."
+      }
+    ],
+    "seed_policy": {
+      "mode": "fixed_for_deterministic_ode_unless_noise_added",
+      "seeds": [
+        12345
+      ]
+    },
+    "scan_stages": [
+      {
+        "stage_id": "F1_floor_seek_no_residue",
+        "goal": "Estimate minimum epsilon with residue support disabled and growth weakened.",
+        "vary": {
+          "kappa": [
+            0.0
+          ],
+          "v": [
+            0.0
+          ],
+          "lambda": [
+            0.5,
+            1.0,
+            2.0
+          ],
+          "k": [
+            0.0005,
+            0.001,
+            0.005,
+            0.01
+          ],
+          "beta": [
+            4.0,
+            8.0,
+            16.0
+          ],
+          "c": [
+            4.0,
+            8.0,
+            16.0
+          ]
+        },
+        "hold_else_fixed": true,
+        "priority": 1,
+        "expected_value": "Primary floor-seeking sweep with support removed."
+      },
+      {
+        "stage_id": "F2_floor_seek_pressure_dominant",
+        "goal": "Drive rho dominance while keeping epsilon growth extremely weak.",
+        "vary": {
+          "kappa": [
+            0.0
+          ],
+          "v": [
+            0.0
+          ],
+          "k": [
+            0.0005,
+            0.001,
+            0.005
+          ],
+          "alpha": [
+            1.0,
+            2.0,
+            4.0,
+            8.0
+          ],
+          "gamma": [
+            1.0,
+            2.0,
+            4.0
+          ],
+          "beta": [
+            4.0,
+            8.0
+          ]
+        },
+        "hold_else_fixed": true,
+        "priority": 2,
+        "expected_value": "Tests whether epsilon approaches a lower nonzero band under strong pressure dominance."
+      },
+      {
+        "stage_id": "F3_near_floor_resolution_probe",
+        "goal": "Measure the smallest stable distinguishable increment above the observed floor candidates.",
+        "vary": {
+          "epsilon0": [
+            0.00025,
+            0.0005,
+            0.001,
+            0.002,
+            0.005
+          ],
+          "k": [
+            0.0005,
+            0.001
+          ],
+          "beta": [
+            8.0,
+            16.0
+          ],
+          "c": [
+            8.0,
+            16.0
+          ],
+          "kappa": [
+            0.0
+          ],
+          "v": [
+            0.0
+          ]
+        },
+        "hold_else_fixed": true,
+        "priority": 3,
+        "expected_value": "Supports estimation of delta_epsilon_min_resolved near the smallest observed stable band."
+      },
+      {
+        "stage_id": "F4_support_reintroduction_floor_shift",
+        "goal": "Check whether small residue support shifts the floor or only alters near-floor oscillation amplitude.",
+        "vary": {
+          "kappa": [
+            0.0,
+            0.001,
+            0.005
+          ],
+          "lambda": [
+            0.5,
+            1.0
+          ],
+          "v": [
+            0.0,
+            0.05,
+            0.1
+          ],
+          "k": [
+            0.0005,
+            0.001
+          ],
+          "beta": [
+            8.0,
+            16.0
+          ],
+          "c": [
+            8.0,
+            16.0
+          ]
+        },
+        "hold_else_fixed": true,
+        "priority": 4,
+        "expected_value": "Separates floor existence from support-driven lift away from floor."
+      }
+    ],
+    "analysis_rules": {
+      "epsilon_floor_estimate_rule": "Estimate epsilon_floor from the mean of epsilon over the final window when epsilon remains bounded and non-runaway.",
+      "near_floor_bandwidth_rule": "Compute last_window_max - last_window_min for epsilon over the final window.",
+      "near_floor_oscillation_amplitude_rule": "Use half the peak-to-peak epsilon amplitude in the final window.",
+      "delta_epsilon_min_resolved_rule": "Estimate from the smallest stable separation between repeated near-floor trajectories that remain distinguishable over the final window.",
+      "diagnostic_requirement": "If all runs remain clearly above a low-epsilon band, diagnostic_note.md must state that no floor-near regime was reached in the scanned region."
+    },
+    "batch_aggregation": {
+      "required_outputs": [
+        "batch_summary.csv",
+        "classification_summary.csv",
+        "epsilon_floor_summary.csv",
+        "near_floor_comparison_table.csv",
+        "top_floor_candidate_runs.csv",
+        "diagnostic_note.md"
+      ],
+      "required_groupbys": [
+        [
+          "stage_id",
+          "initial_condition_family",
+          "regime_classification"
+        ],
+        [
+          "k",
+          "beta",
+          "c",
+          "regime_classification"
+        ],
+        [
+          "kappa",
+          "lambda",
+          "v",
+          "regime_classification"
+        ]
+      ]
+    },
+    "paper_use_targets": {
+      "minimum_success_conditions": [
+        "At least one reproducible low-epsilon near-floor regime is identified, OR",
+        "It is documented that the scanned local ODE system resists approach to a low-epsilon floor under the tested forcing."
+      ],
+      "target_figures": [
+        "timeseries showing strongest floor-seeking run",
+        "table of epsilon_min_observed across floor-seeking stages",
+        "near-floor bandwidth/amplitude comparison for top candidates"
+      ]
+    },
+    "notes_to_agent": [
+      "Do not convert this into a naming or lexicon task; keep it purely operational and measurement-focused.",
+      "If a candidate near-floor regime is found, prioritize local refinement around that parameter set before expanding the sweep elsewhere.",
+      "Negative rho values should be flagged and not silently treated as physically meaningful.",
+      "All run ids should include stage_id and initial_condition_family."
+    ]
+  }
+}

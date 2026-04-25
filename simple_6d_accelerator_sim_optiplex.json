@@ -1,0 +1,207 @@
+{
+  "project": "simple_6d_accelerator_sim_optiplex",
+  "status": "proposed_next",
+  "hardware_target": {
+    "machine": "Dell Optiplex",
+    "cpu": "12 logical cores",
+    "ram": "24 GB",
+    "gpu": "not required",
+    "priority": "CPU-first, simple, expandable"
+  },
+  "goal": {
+    "summary": "Build a simple but functional 6D accelerator simulator that can run on the Optiplex now and later scale to the R730.",
+    "do_not_overbuild": true,
+    "preserve_backward_compatibility": true
+  },
+  "simulation_scope_v1": {
+    "state_vector": ["x", "px", "y", "py", "z", "delta"],
+    "particle_count_default": 10000,
+    "particle_count_max_recommended": 50000,
+    "steps_default": 1000,
+    "float_type": "float64",
+    "space_charge": false,
+    "field_maps": false,
+    "gpu": false
+  },
+  "required_features": {
+    "particles": {
+      "initialize_gaussian_bunch": true,
+      "track_alive_mask": true,
+      "remove_lost_particles": false,
+      "mark_lost_particles": true
+    },
+    "elements": [
+      {
+        "type": "drift",
+        "behavior": "advance x,y,z using px,py,delta"
+      },
+      {
+        "type": "quadrupole",
+        "behavior": "linear focusing/defocusing in x and y"
+      },
+      {
+        "type": "rf_cavity",
+        "behavior": "simple sinusoidal energy kick to delta"
+      },
+      {
+        "type": "aperture",
+        "behavior": "circular aperture loss using x^2 + y^2 > radius^2"
+      }
+    ],
+    "metrics": [
+      "step",
+      "alive_count",
+      "survival_fraction",
+      "x_mean",
+      "x_rms",
+      "y_mean",
+      "y_rms",
+      "z_mean",
+      "z_rms",
+      "delta_mean",
+      "delta_rms",
+      "px_rms",
+      "py_rms",
+      "emittance_proxy_x",
+      "emittance_proxy_y"
+    ],
+    "outputs": {
+      "write_metrics_csv": true,
+      "write_summary_json": true,
+      "write_snapshots_npz": true,
+      "snapshot_interval": 100,
+      "avoid_saving_every_particle_every_step": true
+    }
+  },
+  "directory_structure": {
+    "root": "accelerator_sim_v1/",
+    "files": [
+      "sim.py",
+      "configs/optiplex_default.json",
+      "configs/optiplex_stretch.json",
+      "outputs/.gitkeep",
+      "README.md"
+    ]
+  },
+  "config_default": {
+    "name": "optiplex_default",
+    "seed": 11,
+    "particles": 10000,
+    "steps": 1000,
+    "snapshot_interval": 100,
+    "aperture_radius": 0.03,
+    "initial_distribution": {
+      "x_sigma": 0.002,
+      "px_sigma": 0.0005,
+      "y_sigma": 0.002,
+      "py_sigma": 0.0005,
+      "z_sigma": 0.01,
+      "delta_sigma": 0.001
+    },
+    "lattice": [
+      {
+        "type": "drift",
+        "length": 1.0
+      },
+      {
+        "type": "quadrupole",
+        "k1": 0.4,
+        "length": 0.25
+      },
+      {
+        "type": "drift",
+        "length": 1.0
+      },
+      {
+        "type": "quadrupole",
+        "k1": -0.4,
+        "length": 0.25
+      },
+      {
+        "type": "rf_cavity",
+        "voltage": 0.001,
+        "phase": 0.0,
+        "harmonic": 1.0
+      },
+      {
+        "type": "aperture",
+        "radius": 0.03
+      }
+    ]
+  },
+  "implementation_rules": {
+    "language": "Python",
+    "dependencies": ["numpy", "pandas", "matplotlib"],
+    "optional_dependencies": [],
+    "parallelism": "avoid multiprocessing at first; use vectorized numpy",
+    "style": "single-file sim.py for now",
+    "cli_required": true,
+    "cli_example": "python sim.py --config configs/optiplex_default.json --out outputs/run_default",
+    "must_not_require_gpu": true,
+    "must_not_require_external_accelerator_libraries": true
+  },
+  "physics_notes": {
+    "model_class": "reduced research model",
+    "included": [
+      "6D state vector",
+      "two transverse planes",
+      "simplified longitudinal phase/energy coordinate",
+      "linear focusing",
+      "simple RF kick",
+      "circular aperture loss"
+    ],
+    "excluded_for_now": [
+      "space charge",
+      "wakefields",
+      "realistic RF cavity field maps",
+      "detailed magnetic field maps",
+      "full coupled nonlinear dynamics",
+      "synchrotron radiation",
+      "collimation physics beyond aperture loss"
+    ]
+  },
+  "validation_tests": {
+    "minimum_checks": [
+      "simulation runs without crashing",
+      "alive_count never increases",
+      "survival_fraction remains between 0 and 1",
+      "lost particles are excluded from metric calculations",
+      "outputs directory contains metrics.csv and summary.json",
+      "same seed produces repeatable results"
+    ],
+    "basic_expected_behavior": [
+      "larger aperture should lose fewer particles",
+      "stronger focusing should alter x/y rms",
+      "larger initial sigma should increase losses",
+      "RF voltage should change delta_rms"
+    ]
+  },
+  "future_compatibility": {
+    "later_additions": [
+      "elliptical aperture",
+      "dipole element",
+      "sextupole element",
+      "lattice JSON import/export",
+      "approximate grid-based space charge",
+      "R730 larger run config"
+    ],
+    "do_not_break": [
+      "existing config format",
+      "existing output format",
+      "existing CLI command"
+    ]
+  },
+  "deliverables_requested_from_agent": {
+    "primary": [
+      "complete sim.py",
+      "configs/optiplex_default.json",
+      "configs/optiplex_stretch.json",
+      "README.md"
+    ],
+    "secondary": [
+      "short explanation of model limits",
+      "example run command",
+      "example output summary"
+    ]
+  }
+}

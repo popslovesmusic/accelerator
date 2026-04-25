@@ -1,0 +1,321 @@
+{
+  "next_step_experiment_plan": {
+    "name": "level2_regime_mapping_plan",
+    "purpose": "Map the boundary between extinction, exclusion takeover, delayed front collapse, and bounded continuation for Level 2 under a frozen metric layer.",
+    "current_status": {
+      "engine_state": "running with improved metrics",
+      "current_anchor_result": "robust collapse at tested parameter point",
+      "interpretation": "parameter point appears outside bounded continuation window",
+      "immediate_need": "controlled regime mapping, not more ad hoc runs"
+    },
+    "governance": {
+      "freeze_now": [
+        "metric definition",
+        "threshold values",
+        "summary schema",
+        "run classification logic"
+      ],
+      "record_per_batch": [
+        "engine_version",
+        "metric_version",
+        "threshold_config",
+        "batch_id",
+        "scan_type",
+        "date_time",
+        "git_commit_or_manual_change_note"
+      ],
+      "rule": "Do not change metrics mid-scan unless a true correctness bug is found."
+    },
+    "regime_classes": [
+      {
+        "id": "R1",
+        "name": "rapid_extinction",
+        "definition": "rho collapses quickly, active_fraction drops strongly, no persistent finite-width interface survives.",
+        "diagnostic_signs": [
+          "final_mean_rho near 0",
+          "active_fraction low or vanishing",
+          "interface_count tends to 0 early",
+          "front metrics absent or meaningless"
+        ]
+      },
+      {
+        "id": "R2",
+        "name": "global_exclusion_takeover",
+        "definition": "active exclusion-dominated region spreads across most active nodes and eventually eliminates competing interface structure.",
+        "diagnostic_signs": [
+          "excluded_active_fraction approaches 1 on active nodes",
+          "active_fraction remains nontrivial for a while",
+          "interface_count eventually goes to 0",
+          "front may exist transiently before disappearing"
+        ]
+      },
+      {
+        "id": "R3",
+        "name": "delayed_front_collapse",
+        "definition": "a front forms and persists transiently, but later sharpens, destabilizes, or collapses into extinction or exclusion completion.",
+        "diagnostic_signs": [
+          "nonzero interface_count for extended transient",
+          "finite front width initially",
+          "late-time collapse of width or activity",
+          "eventual loss of persistent interface"
+        ]
+      },
+      {
+        "id": "R4",
+        "name": "bounded_continuation",
+        "definition": "a finite-width active interface persists over long times with bounded velocity and without runaway invalidity.",
+        "diagnostic_signs": [
+          "interface_count remains nonzero over long time window",
+          "front width stays finite and bounded away from zero",
+          "active_fraction remains nontrivial",
+          "velocity remains bounded",
+          "no invalid-state termination",
+          "no collapse of rho to zero everywhere"
+        ]
+      }
+    ],
+    "classification_rules": {
+      "note": "Thresholds below are placeholders and should be frozen before batch execution.",
+      "provisional_thresholds": {
+        "rho_dead_floor": 1e-8,
+        "activity_floor": 1e-8,
+        "excluded_active_high": 0.95,
+        "active_low": 0.05,
+        "finite_width_floor": 2.0,
+        "finite_width_ceiling": 0.2,
+        "late_window_fraction": 0.2
+      },
+      "decision_order": [
+        "Check invalid termination or gross numerical failure first",
+        "Check if active_fraction collapses to active_low or below -> rapid_extinction",
+        "Check if excluded_active_fraction exceeds excluded_active_high on active nodes and interface disappears -> global_exclusion_takeover",
+        "Check if front persists transiently but fails late -> delayed_front_collapse",
+        "Otherwise if front remains active, finite-width, bounded-speed, and stable over late window -> bounded_continuation"
+      ]
+    },
+    "sanity_tests": {
+      "purpose": "Anchor trust before scan expansion",
+      "required_before_major_scan": true,
+      "tests": [
+        {
+          "id": "T1",
+          "name": "dead_domain_test",
+          "goal": "Ensure near-zero epsilon and rho do not register false exclusion takeover."
+        },
+        {
+          "id": "T2",
+          "name": "malformed_state_rejection",
+          "goal": "Ensure size mismatch is rejected immediately."
+        },
+        {
+          "id": "T3",
+          "name": "stationary_interface_test",
+          "goal": "Ensure front detector can report persistent interface with near-zero velocity."
+        },
+        {
+          "id": "T4",
+          "name": "traveling_front_surrogate",
+          "goal": "Ensure front position and velocity reporting behave sensibly."
+        },
+        {
+          "id": "T5",
+          "name": "negative_blowup_test",
+          "goal": "Ensure symmetric invalid detection catches large negative excursions."
+        }
+      ]
+    },
+    "scan_strategy": {
+      "principle": "Coarse first, refine only where qualitative transitions appear.",
+      "anchor_point": {
+        "gamma": 0.45,
+        "lam": 0.75,
+        "kappa": 0.55,
+        "D_eps": 0.015,
+        "D_rho": 0.075
+      },
+      "initial_conditions": [
+        "front_seeded",
+        "near_uniform_noise",
+        "localized_seed"
+      ],
+      "seed_policy": {
+        "coarse_scan": 2,
+        "refinement_scan": 4,
+        "candidate_window_validation": 8
+      },
+      "scan_phases": [
+        {
+          "phase": "P1_anchor_confirmation",
+          "goal": "Confirm current anchor point still collapses under frozen metric layer.",
+          "runs": "3 IC x 2 seeds = 6 runs"
+        },
+        {
+          "phase": "P2_one_parameter_sweeps",
+          "goal": "Find first transition boundaries around anchor.",
+          "parameters": [
+            "lam",
+            "kappa",
+            "gamma"
+          ],
+          "method": "Vary one parameter at a time while holding others at anchor values."
+        },
+        {
+          "phase": "P3_diffusion_balance",
+          "goal": "Test whether finite-width front survival depends on diffusion structure.",
+          "parameters": [
+            "D_eps",
+            "D_rho",
+            "D_eps/D_rho"
+          ]
+        },
+        {
+          "phase": "P4_boundary_refinement",
+          "goal": "Densely sample only where class boundaries or candidate bounded windows appear."
+        }
+      ]
+    },
+    "proposed_coarse_sweeps": {
+      "lam": {
+        "values": [0.45, 0.55, 0.65, 0.75, 0.85],
+        "reason": "Likely strong control on exclusion forcing vs survivability."
+      },
+      "kappa": {
+        "values": [0.35, 0.45, 0.55, 0.65],
+        "reason": "Likely affects sharpening, collapse tendency, or interface rigidity."
+      },
+      "gamma": {
+        "values": [0.15, 0.25, 0.35, 0.45, 0.55],
+        "reason": "Likely controls redistribution / damping balance."
+      },
+      "D_eps": {
+        "values": [0.01, 0.015, 0.03, 0.05],
+        "reason": "May widen fronts and suppress singular sharpening."
+      },
+      "D_rho": {
+        "values": [0.03, 0.05, 0.075, 0.1],
+        "reason": "May alter recovery, persistence, and suppression of dead-domain collapse."
+      }
+    },
+    "batch_design": {
+      "phase_P1_anchor_confirmation": {
+        "total_runs": 6,
+        "config": "anchor point x 3 IC x 2 seeds"
+      },
+      "phase_P2_one_parameter_sweeps": {
+        "example_total_runs": 84,
+        "estimate_logic": "((5 lam values + 4 kappa values + 5 gamma values) x 3 IC x 2 seeds)"
+      },
+      "phase_P3_diffusion_balance": {
+        "example_total_runs": 48,
+        "estimate_logic": "((4 D_eps values + 4 D_rho values) x 3 IC x 2 seeds)"
+      },
+      "phase_P4_boundary_refinement": {
+        "total_runs": "adaptive",
+        "rule": "Only near suspected class transitions or candidate R4 windows"
+      }
+    },
+    "outputs_to_save": {
+      "per_run": [
+        "run_manifest.csv",
+        "timeseries_global.csv",
+        "domain_metrics.csv",
+        "front_metrics.csv",
+        "final_summary.csv"
+      ],
+      "per_batch": [
+        "batch_config.json",
+        "metric_config.json",
+        "classification_summary.csv",
+        "regime_map.csv",
+        "readme_notes.txt"
+      ],
+      "recommended_additions": [
+        "front_position_timeseries.csv",
+        "classification_reason.jsonl",
+        "engine_metric_version.json"
+      ]
+    },
+    "derived_products": {
+      "classification_summary": {
+        "columns": [
+          "run_id",
+          "IC_type",
+          "seed",
+          "gamma",
+          "lam",
+          "kappa",
+          "D_eps",
+          "D_rho",
+          "regime_class",
+          "classification_confidence",
+          "termination_reason",
+          "late_active_fraction",
+          "late_excluded_active_fraction",
+          "late_front_width",
+          "late_front_velocity"
+        ]
+      },
+      "regime_map": {
+        "purpose": "Two-parameter or one-parameter slice table showing dominant regime class by parameter setting.",
+        "example_views": [
+          "lam vs kappa at fixed gamma, D_eps, D_rho",
+          "gamma vs lam at fixed kappa, D_eps, D_rho",
+          "D_eps vs D_rho at fixed gamma, lam, kappa"
+        ]
+      }
+    },
+    "decision_points": [
+      {
+        "id": "D1",
+        "condition": "Anchor rerun no longer collapses",
+        "action": "Stop and audit code or metrics before broader scan."
+      },
+      {
+        "id": "D2",
+        "condition": "One-parameter scans show no transition trend at all",
+        "action": "Widen parameter ranges before increasing seeds."
+      },
+      {
+        "id": "D3",
+        "condition": "Candidate bounded window appears",
+        "action": "Increase runtime, resolution, and seed count locally."
+      },
+      {
+        "id": "D4",
+        "condition": "All windows still collapse",
+        "action": "Conclude current law set likely overdrives into collapse and revise dynamics rather than scanning blindly."
+      }
+    ],
+    "success_criteria": {
+      "minimum_success": "A credible regime map separating at least R1, R2, and R3.",
+      "strong_success": "Identification of one or more candidate R4 bounded continuation windows.",
+      "best_success": "R4 window survives longer runtime, higher resolution, and increased seed count."
+    },
+    "failure_criteria": {
+      "interpretive_failure": "Metrics change during scan without version split.",
+      "scientific_failure": "Large scan is run without formal regime classification.",
+      "practical_failure": "Too many seeds are used before locating transition neighborhoods."
+    },
+    "recommended_immediate_next_actions": [
+      {
+        "order": 1,
+        "action": "Freeze current metric thresholds and schema into a batch config file."
+      },
+      {
+        "order": 2,
+        "action": "Run P1 anchor confirmation: 3 IC x 2 seeds at current anchor point."
+      },
+      {
+        "order": 3,
+        "action": "Run coarse lam sweep first."
+      },
+      {
+        "order": 4,
+        "action": "Classify runs into R1-R4 before moving to broader scans."
+      }
+    ],
+    "theory_safe_claim_after_completion": {
+      "statement": "Level 2 supports a regime-based interpretation in which exclusion-redistribution dynamics produce distinct qualitative continuation classes, and the presence or absence of bounded continuation can be investigated as a parameter-dependent question rather than assumed."
+    }
+  }
+}

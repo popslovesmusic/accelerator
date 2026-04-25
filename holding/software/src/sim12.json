@@ -1,0 +1,35 @@
+{
+  "sim_name": "sim12_SS3_surface_mapping",
+  "purpose": "Map lambda_lower(kappa) and lambda_upper(kappa) to resolve the local SS3 surface geometry",
+
+  "kappa_values": [0.04, 0.05, 0.06],
+
+  "phase_A_lower_edge": {
+    "lambda_range": [0.038, 0.050],
+    "step": 0.001,
+    "goal": "refine lower SS3 boundary at each kappa"
+  },
+
+  "phase_B_upper_edge": {
+    "lambda_range": [0.100, 0.130],
+    "step": 0.001,
+    "goal": "refine upper SS3 boundary at each kappa"
+  },
+
+  "phase_C_IC_structure": {
+    "lambda_points": [
+      "lower edge",
+      "mid band",
+      "upper edge"
+    ],
+    "ICs": ["IC0", "IC1", "IC2"],
+    "goal": "map IC accessibility of SS3 across band"
+  },
+
+  "outputs": [
+    "lambda_lower(kappa)",
+    "lambda_upper(kappa)",
+    "band_width(kappa)",
+    "IC_accessibility_map"
+  ]
+}

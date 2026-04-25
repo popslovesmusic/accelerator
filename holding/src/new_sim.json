@@ -1,0 +1,440 @@
+{
+  "technical_note": {
+    "name": "level2_threshold_boundary_and_critical_seed_hypothesis",
+    "status": "provisional_but_testable",
+    "purpose": "Preserve the interpretation that Level-2 collapse timing differences may indicate approach to an admissibility boundary, and define a detailed simulation program to test that idea.",
+    "core_claim": {
+      "statement": "The current Level-2 results are consistent with a thresholded continuation boundary: initial structure changes how long the dynamics remain near an admissible continuation corridor, but the tested parameter point still lies in a collapse regime.",
+      "strong_form_if_confirmed": "Level-2 contains a critical basin-coherence threshold separating subcritical collapse from sustained bounded continuation.",
+      "safe_current_form": "The results suggest a near-threshold regime with long-lived transients and initial-condition sensitivity, but do not yet prove a true critical seed or a formal saddle-node bifurcation."
+    },
+    "procedural_interpretation": {
+      "deep_structure": [
+        "process",
+        "deviation",
+        "residue-written constraints",
+        "admissibility test",
+        "oriented continuation or exclusion completion"
+      ],
+      "observed_interpretation": {
+        "near_uniform_noise": "Likely misses or fails to assemble an admissible continuation corridor; collapse is rapid.",
+        "localized_seed": "Temporarily assembles a basin-like structure; continuation survives longer before losing admissibility.",
+        "front_seeded": "Begins closest to a coherent continuation corridor; survives longest, then collapses."
+      },
+      "threshold_language": {
+        "preferred_term": "minimum basin coherence required for sustained continuation",
+        "avoid_overclaiming": [
+          "Do not yet say 'proved bifurcation'",
+          "Do not yet say 'proved critical seed size'",
+          "Do not yet say 'collapse is only a metric artifact'"
+        ]
+      }
+    },
+    "theoretical_taxonomy": {
+      "classes": [
+        {
+          "id": "C1",
+          "name": "global_admissibility_failure",
+          "description": "No persistent basin forms; collapse occurs quickly."
+        },
+        {
+          "id": "C2",
+          "name": "transient_basin_interface_destabilization",
+          "description": "A basin forms and supports continuation transiently, but later loses admissibility."
+        },
+        {
+          "id": "C3",
+          "name": "bounded_continuation",
+          "description": "A finite-width active interface persists for long times with bounded metrics."
+        }
+      ],
+      "working_hypothesis": "The current anchor point lies in C1/C2 territory, near a boundary beyond which C3 may exist."
+    },
+    "hypotheses": [
+      {
+        "id": "H1",
+        "name": "critical_basin_coherence_hypothesis",
+        "statement": "There exists a minimum coherent seed configuration below which continuation always fails and above which a persistent basin can survive."
+      },
+      {
+        "id": "H2",
+        "name": "near_threshold_transient_hypothesis",
+        "statement": "Long-lived transients at the current parameter point reflect proximity to a lost or barely inaccessible admissible continuation branch."
+      },
+      {
+        "id": "H3",
+        "name": "projection_limit_hypothesis",
+        "statement": "Some observed collapse may reflect loss of representability of the basin in the projection variables rather than immediate disappearance of the deeper process structure."
+      }
+    ],
+    "simulation_program": {
+      "overall_design": {
+        "goal": "Differentiate true regime collapse, thresholded continuation, and projection-limited collapse.",
+        "phases": [
+          "P0_metric_freeze_and_validation",
+          "P1_anchor_reconfirmation",
+          "P2_parameter_threshold_search",
+          "P3_seed_threshold_search",
+          "P4_resolution_scaling",
+          "P5_long_run_validation_of_candidate_windows"
+        ],
+        "batch_governance": {
+          "freeze_before_scan": [
+            "metric definition",
+            "classification logic",
+            "threshold config",
+            "CSV schema"
+          ],
+          "record_per_batch": [
+            "batch_id",
+            "engine_version",
+            "metric_version",
+            "threshold_config",
+            "date",
+            "notes"
+          ]
+        }
+      },
+      "P0_metric_freeze_and_validation": {
+        "purpose": "Lock interpretation before scanning.",
+        "required_checks": [
+          {
+            "id": "V1",
+            "name": "dead_domain_test",
+            "spec": "Initialize epsilon≈0, rho≈0, residue≈0 everywhere. Verify excluded_active_fraction does not falsely approach 1."
+          },
+          {
+            "id": "V2",
+            "name": "stationary_interface_test",
+            "spec": "Construct a smooth stationary two-region interface. Verify nonzero interface count, finite width, near-zero velocity."
+          },
+          {
+            "id": "V3",
+            "name": "traveling_front_surrogate",
+            "spec": "Use a controlled synthetic front position sequence or a parameter set known to advect a front. Verify velocity extraction is sensible."
+          },
+          {
+            "id": "V4",
+            "name": "negative_blowup_test",
+            "spec": "Inject or induce a large negative excursion. Verify symmetric invalid detection catches it."
+          },
+          {
+            "id": "V5",
+            "name": "malformed_input_test",
+            "spec": "Pass state arrays with wrong length. Verify immediate explicit failure."
+          }
+        ]
+      },
+      "P1_anchor_reconfirmation": {
+        "purpose": "Reconfirm the present result under frozen metrics.",
+        "anchor_parameters": {
+          "gamma": 0.45,
+          "lam": 0.75,
+          "kappa": 0.55,
+          "D_eps": 0.015,
+          "D_rho": 0.075
+        },
+        "initial_conditions": [
+          "near_uniform_noise",
+          "localized_seed",
+          "front_seeded"
+        ],
+        "seeds": 2,
+        "total_runs": 6,
+        "required_outputs": [
+          "final_summary.csv",
+          "domain_metrics.csv",
+          "front_metrics.csv",
+          "timeseries_global.csv",
+          "run_manifest.csv",
+          "classification_summary.csv"
+        ],
+        "success_condition": "Reproduce qualitative ordering: near_uniform_noise collapses fastest; structured ICs survive longer; endpoint class remains collapse."
+      },
+      "P2_parameter_threshold_search": {
+        "purpose": "Search for an admissibility boundary in parameter space.",
+        "strategy": "One-parameter coarse sweeps first, holding all other parameters fixed at anchor values.",
+        "scan_order": [
+          "lam",
+          "kappa",
+          "gamma",
+          "D_eps",
+          "D_rho"
+        ],
+        "recommended_ranges": {
+          "lam": {
+            "values": [0.45, 0.55, 0.65, 0.75, 0.85],
+            "rationale": "Likely strongest control on exclusion completion vs survivability."
+          },
+          "kappa": {
+            "values": [0.35, 0.45, 0.55, 0.65],
+            "rationale": "Likely strong control on front sharpening or rigidity."
+          },
+          "gamma": {
+            "values": [0.15, 0.25, 0.35, 0.45, 0.55],
+            "rationale": "Likely strong control on redistribution / damping balance."
+          },
+          "D_eps": {
+            "values": [0.01, 0.015, 0.03, 0.05],
+            "rationale": "Tests whether wider exclusion fronts suppress singular collapse."
+          },
+          "D_rho": {
+            "values": [0.03, 0.05, 0.075, 0.1],
+            "rationale": "Tests whether continuation support / smoothing shifts the regime."
+          }
+        },
+        "IC_policy": {
+          "use_all_three_ICs": true,
+          "seeds_per_setting": 2,
+          "total_example_runs": 138
+        },
+        "derived_metrics": [
+          "collapse_time",
+          "time_to_interface_loss",
+          "late_active_fraction",
+          "late_excluded_active_fraction",
+          "late_front_width",
+          "late_front_velocity",
+          "final_mean_rho",
+          "termination_reason"
+        ],
+        "expected_signature_of_boundary": "Collapse time grows sharply over a narrow parameter interval, with structured ICs showing stronger lifetime extension near the boundary."
+      },
+      "P3_seed_threshold_search": {
+        "purpose": "Test whether a true critical seed / basin-coherence threshold exists.",
+        "priority": "high",
+        "design": {
+          "base_parameter_sets": [
+            "current_anchor_point",
+            "one_or_two_points_near_longest_transient_from_P2"
+          ],
+          "IC_families": [
+            {
+              "name": "localized_seed_radius_sweep",
+              "control_parameter": "seed_radius",
+              "values": [2, 4, 6, 8, 10, 12]
+            },
+            {
+              "name": "localized_seed_amplitude_sweep",
+              "control_parameter": "seed_amplitude",
+              "values": [0.25, 0.5, 0.75, 1.0, 1.25]
+            },
+            {
+              "name": "front_seed_width_sweep",
+              "control_parameter": "front_width",
+              "values": [2, 4, 6, 8, 12, 16]
+            },
+            {
+              "name": "front_seed_contrast_sweep",
+              "control_parameter": "front_contrast",
+              "values": [0.25, 0.5, 0.75, 1.0, 1.25]
+            }
+          ],
+          "seeds_per_setting": 3
+        },
+        "decision_rule": {
+          "subcritical": "All runs collapse and collapse_time remains finite without trend toward persistence.",
+          "marginal": "Collapse_time increases strongly and interface survives for long transients.",
+          "supercritical_candidate": "Interface persists over late window with bounded width and nonzero active fraction."
+        },
+        "critical_seed_evidence": [
+          "A narrow transition in survival time as radius or width changes",
+          "A switch from universal collapse to persistent continuation over a small parameter increment",
+          "Strong critical slowing-down near the threshold"
+        ]
+      },
+      "P4_resolution_scaling": {
+        "purpose": "Test whether observed collapse is a real process regime or a projection/representation limit.",
+        "design": {
+          "select_cases": [
+            "anchor_point_fast_collapse_case",
+            "anchor_point_long_transient_case",
+            "best_candidate_near_threshold_case"
+          ],
+          "resolution_levels": [
+            {
+              "name": "coarse",
+              "relative_Nx": 1.0,
+              "dt_policy": "baseline"
+            },
+            {
+              "name": "medium",
+              "relative_Nx": 2.0,
+              "dt_policy": "stability-adjusted"
+            },
+            {
+              "name": "fine",
+              "relative_Nx": 4.0,
+              "dt_policy": "stability-adjusted"
+            }
+          ]
+        },
+        "interpretation": {
+          "if_collapse_time_increases_with_resolution": "Representation scale may be suppressing or erasing real basin continuation.",
+          "if_qualitative_behavior_is_resolution_invariant": "Collapse is more likely a true regime property of the modeled dynamics."
+        }
+      },
+      "P5_long_run_validation_of_candidate_windows": {
+        "purpose": "Confirm whether candidate persistent regimes are truly bounded continuation rather than delayed collapse.",
+        "trigger": "Only after P2 or P3 reveals a candidate C3 window.",
+        "design": {
+          "extend_runtime_factor": 4,
+          "increase_seed_count": 8,
+          "increase_resolution": "at_least_one_level_higher_than_discovery_run",
+          "keep_metrics_frozen": true
+        },
+        "success_condition": "Finite-width interface persists across extended late-time window with bounded velocity and no invalid termination."
+      }
+    },
+    "detailed_run_specs": {
+      "common_numerical_requirements": {
+        "boundary_conditions": "Keep identical across all scan phases; document explicitly in batch config.",
+        "grid_policy": "Do not change grid convention mid-study.",
+        "snapshot_schedule": "Use fixed save cadence across comparison runs.",
+        "stability_policy": "Record dt, Nx, runtime, save interval, and any CFL-like constraints for every run."
+      },
+      "required_manifest_fields": [
+        "run_id",
+        "batch_id",
+        "engine_version",
+        "metric_version",
+        "IC_type",
+        "seed",
+        "gamma",
+        "lam",
+        "kappa",
+        "D_eps",
+        "D_rho",
+        "Nx",
+        "dt",
+        "T_final",
+        "save_every",
+        "threshold_config_path",
+        "notes"
+      ],
+      "required_summary_fields": [
+        "regime_class",
+        "classification_confidence",
+        "collapse_time",
+        "interface_loss_time",
+        "late_active_fraction",
+        "late_excluded_active_fraction",
+        "late_front_width",
+        "late_front_velocity",
+        "final_mean_rho",
+        "invalid_state_flag",
+        "termination_reason"
+      ],
+      "classification_logic": {
+        "C1_global_admissibility_failure": {
+          "signs": [
+            "rapid collapse_time",
+            "early interface_loss_time",
+            "active_fraction drops strongly or interface never stabilizes"
+          ]
+        },
+        "C2_transient_basin_destabilization": {
+          "signs": [
+            "nonzero interface persists for meaningful transient",
+            "front width initially finite",
+            "late-time collapse to interface loss or activity death"
+          ]
+        },
+        "C3_bounded_continuation": {
+          "signs": [
+            "nonzero interface over late window",
+            "finite front width bounded away from zero",
+            "bounded front velocity",
+            "no invalid state",
+            "active_fraction remains nontrivial"
+          ]
+        }
+      }
+    },
+    "analysis_products": {
+      "must_generate": [
+        {
+          "name": "classification_summary.csv",
+          "purpose": "One row per run with class assignment and key late-time metrics."
+        },
+        {
+          "name": "regime_map.csv",
+          "purpose": "Parameter-grid summary showing dominant class by setting."
+        },
+        {
+          "name": "collapse_time_scan.csv",
+          "purpose": "Makes threshold-like lifetime growth visible."
+        },
+        {
+          "name": "critical_seed_scan.csv",
+          "purpose": "Tracks seed radius/width/amplitude versus persistence outcome."
+        }
+      ],
+      "recommended_plots": [
+        "collapse_time_vs_lam",
+        "collapse_time_vs_kappa",
+        "collapse_time_vs_gamma",
+        "collapse_time_vs_seed_radius",
+        "late_front_width_vs_parameter",
+        "late_active_fraction_vs_parameter",
+        "regime_class_heatmap_for_parameter_pairs"
+      ]
+    },
+    "criteria_for_interpretation": {
+      "evidence_for_near_threshold_behavior": [
+        "Sharp increase in collapse time over a narrow parameter interval",
+        "Much stronger IC sensitivity near the same interval",
+        "Marginal runs with long plateaus before failure"
+      ],
+      "evidence_for_true_critical_seed": [
+        "A narrow seed-size or seed-width boundary separating universal collapse from sustained continuation",
+        "Consistency across multiple random seeds",
+        "Persistence that survives longer runtime and higher resolution"
+      ],
+      "evidence_for_projection_limited_collapse": [
+        "Candidate persistent basins become longer-lived or survive when Nx is increased",
+        "Front width relative to grid spacing is a strong predictor of collapse"
+      ],
+      "evidence_for_true_regime_collapse": [
+        "Qualitative collapse ordering is stable under resolution increase",
+        "No candidate persistent regime emerges even after threshold scans",
+        "All IC classes remain endpoint-invariant while only transients change"
+      ]
+    },
+    "safe_theoretical_statements_for_paper": [
+      "The current Level-2 results indicate that the tested parameter point lies in a collapse regime with strong initial-condition effects on transient lifetime but not on the final endpoint.",
+      "This behavior is consistent with proximity to an admissibility boundary where structured initial conditions can temporarily support basin-like continuation without preventing eventual exclusion completion.",
+      "A targeted threshold-search program is required to determine whether the system supports a true critical basin-coherence threshold and a bounded continuation regime.",
+      "Resolution scaling is necessary to distinguish true process collapse from collapse induced by loss of representability in the projected simulation variables."
+    ],
+    "unsafe_statements_to_avoid_for_now": [
+      "The system definitely has a saddle-node bifurcation.",
+      "A true critical seed size has already been discovered.",
+      "The observed collapse is only a metric artifact.",
+      "The process itself terminates whenever the projection collapses."
+    ],
+    "recommended_next_actions": [
+      {
+        "order": 1,
+        "action": "Freeze metric schema and threshold config."
+      },
+      {
+        "order": 2,
+        "action": "Run P1 anchor reconfirmation batch."
+      },
+      {
+        "order": 3,
+        "action": "Run P2 lam sweep first, classify all runs."
+      },
+      {
+        "order": 4,
+        "action": "Choose the longest-transient parameter neighborhood and run P3 seed-threshold search there."
+      },
+      {
+        "order": 5,
+        "action": "Run P4 resolution scaling on anchor, marginal, and best-candidate cases."
+      }
+    ],
+    "one_sentence_summary": "The Level-2 results are best treated as evidence for a possible thresholded admissibility boundary: structured initial conditions appear to buy temporary access to a continuation corridor, and the next simulation program should determine whether that corridor can become a true bounded regime under changed parameters, stronger seed coherence, or improved resolution."
+  }
+}

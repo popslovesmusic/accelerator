@@ -1,0 +1,656 @@
+Yes — here’s a **targeted spec** to bring the sim program in line with the theorem stack, shelf findings, and the current analyzer limits.
+
+This spec assumes:
+
+* the current coarse analyzer stays in place because it already handles batch-scale mapping, unanimity, and shelf detection well 
+* `sim17` makes shelf characterization the next real objective, not just further edge hunting 
+* the consciousness / SRC framework now needs internal morphology, persistence, and fold-oriented metrics, not only coarse regime labels 
+
+---
+
+# Sim Program Alignment Spec v1
+
+## 1. Purpose
+
+Bring the sim program into alignment with the new analysis stack by adding a **two-tier evaluation pipeline**:
+
+* **Tier A:** coarse phase mapping and candidate selection
+* **Tier B:** deep morphology and closure-proxy analysis
+
+The goal is to preserve current strengths while adding the missing structure needed for:
+
+* shelf subclassification
+* fold persistence
+* Box screening
+* SRC screening
+* theorem-target testing
+
+---
+
+## 2. Current gap summary
+
+The current Level 2 analyzer reads:
+
+* `final_summary.csv`
+* `timeseries_global.csv`
+* `domain_metrics.csv` 
+
+and does **not yet** read:
+
+* `front_metrics.csv`
+* `profiles/*.csv` 
+
+So right now the program can classify **where shelves exist**, but not **what shelf structure is doing internally**. That gap matters because `sim17` showed the shelves are finite-width, unanimous, and contiguous, so they should now be treated as structured regimes rather than residual blur. 
+
+---
+
+# 3. Required architecture
+
+## 3.1 Layer A — Coarse Analyzer (keep and stabilize)
+
+### Purpose
+
+Fast full-batch pass for:
+
+* dominant regime classification
+* unanimity checks
+* shelf-width estimation
+* candidate-point selection
+
+### Inputs
+
+* `final_summary.csv`
+* `timeseries_global.csv`
+* `domain_metrics.csv`
+
+### Outputs
+
+* `run_summary.csv`
+* `parameter_summary.csv`
+* contiguous shelf intervals
+* unanimous shelf points
+* candidate point list for deep pass
+
+### Status
+
+Keep current design. It is already useful and should remain the front-end selector. 
+
+---
+
+## 3.2 Layer B — Deep Morphology Analyzer (new)
+
+### Purpose
+
+Second-pass analysis on filtered candidate runs only.
+
+### Inputs
+
+Must add:
+
+* `front_metrics.csv`
+* `profiles/*.csv`
+
+Optional if available later:
+
+* local per-front trajectory files
+* local phase / orientation outputs
+* per-step residue field slices
+
+### Outputs
+
+* persistence metrics
+* fold metrics
+* shelf subclass labels
+* provisional Box/SRC screening fields
+* enriched per-run morphology report
+
+---
+
+# 4. Selection logic between layers
+
+## 4.1 Candidate classes from Layer A
+
+Layer A must export a candidate manifest containing at minimum these point types:
+
+* `shelf_center`
+* `shelf_lower_edge`
+* `shelf_upper_edge`
+* `ss3_adjacent_interior`
+* `outer_regime_adjacent`
+* `high_density_nonunanimous` if any appear
+* `control_ss2`
+* `control_runaway`
+
+### Why
+
+This lets sim18-style work compare:
+
+* inside shelf
+* shelf boundary
+* shelf neighbor inside SS3
+* shelf neighbor outside SS3
+
+That is exactly what the `sim17` result now calls for. 
+
+---
+
+# 5. New metrics required in Layer B
+
+## 5.1 Front persistence metrics
+
+### Inputs
+
+`front_metrics.csv`
+
+### Required derived quantities
+
+For final window (H):
+
+* mean front count
+* front count variance
+* mean front position drift
+* mean front speed drift
+* interface lifetime fraction
+* front roughness stability
+
+### Required outputs
+
+* `front_count_final`
+* `front_count_var_final_window`
+* `front_position_drift_final_window`
+* `front_speed_drift_final_window`
+* `interface_lifetime_fraction`
+* `front_persistence_score`
+
+### Purpose
+
+Distinguish:
+
+* persistent interface-bearing shelves
+* unstable transient shelves
+* rigid but low-dynamic shelves
+
+---
+
+## 5.2 Profile-based fold metrics
+
+### Inputs
+
+`profiles/*.csv`
+
+### Required derived quantities
+
+From final window profiles:
+
+* mean profile depth
+* mean transverse gradient magnitude
+* mean transverse curvature
+* profile shape similarity over time
+* profile width stability
+* profile peak count stability
+
+### Required outputs
+
+* `profile_depth_final`
+* `profile_wall_strength_final`
+* `profile_curvature_final`
+* `profile_shape_persistence`
+* `profile_width_stability`
+* `profile_peak_stability`
+
+### Purpose
+
+Supply the missing ingredients for fold and box proxies.
+
+---
+
+## 5.3 Composite persistence metric
+
+Layer B must compute:
+
+* `P_depth`
+* `P_wall`
+* `P_shape`
+* `P_front`
+* `P_Omega`
+
+Recommended composite:
+
+[
+P_\Omega = P_{depth}\cdot P_{wall}\cdot P_{shape}\cdot P_{front}
+]
+
+This extends the earlier persistence block so it can be computed from actual sim artifacts rather than idealized fields.
+
+---
+
+## 5.4 Fold score proxy
+
+Layer B must compute a normalized fold score:
+
+[
+\widetilde{F}_\Omega
+====================
+
+\widetilde{A}*\Omega,
+\widetilde{W}*\Omega,
+\widetilde{C}*\Omega,
+P*\Omega
+]
+
+Practical replacements if no explicit admissibility field is stored:
+
+* (\widetilde{A}_\Omega) → normalized profile depth
+* (\widetilde{W}_\Omega) → normalized wall strength
+* (\widetilde{C}_\Omega) → normalized curvature proxy
+
+### Required output
+
+* `fold_score_tilde`
+
+---
+
+## 5.5 Closure-proxy metrics
+
+If raw SRC terms are not yet directly computable, Layer B should compute provisional closure proxies:
+
+* `internal_coupling_proxy`
+* `residue_dominance_proxy`
+* `topology_self_maintenance_proxy`
+
+### Minimum required outputs
+
+* `L_proxy`
+* `Dsr_proxy`
+* `SRC_proxy_score`
+
+These can later be upgraded to exact metrics if more state fields are saved.
+
+---
+
+# 6. New regime subclass labels
+
+Layer B must assign one of the following provisional shelf subclasses:
+
+* `shelf_transient`
+* `shelf_persistent_interface`
+* `shelf_folded_nonbox`
+* `shelf_prebox`
+* `shelf_closure_approach`
+* `shelf_rigid_trivial`
+* `shelf_unresolved`
+
+## Suggested logic
+
+### shelf_transient
+
+* low persistence
+* unstable fronts
+* low profile similarity
+
+### shelf_persistent_interface
+
+* strong front persistence
+* moderate persistence
+* not enough fold score for box
+
+### shelf_folded_nonbox
+
+* persistence high
+* fold score high
+* mismatch still above threshold or closure weak
+
+### shelf_prebox
+
+* fold score high
+* mismatch near threshold
+* not yet Box
+
+### shelf_closure_approach
+
+* persistence high
+* dominance proxy high
+* coupling proxy rising
+* not yet SRC
+
+### shelf_rigid_trivial
+
+* low mismatch
+* weak fold score
+* low dynamical richness
+
+This is exactly the missing layer between coarse class label and theorem-stack interpretation.
+
+---
+
+# 7. File and schema requirements
+
+## 7.1 New input contract
+
+The sim program must ensure every run directory can expose, if deep mode is requested:
+
+* `final_summary.csv`
+* `timeseries_global.csv`
+* `domain_metrics.csv`
+* `front_metrics.csv`
+* `profiles/*.csv`
+
+If `front_metrics.csv` or `profiles` are absent, Layer B must mark the run:
+
+* `deep_metrics_status = "missing_required_inputs"`
+
+and skip subclassification cleanly.
+
+---
+
+## 7.2 New output artifacts
+
+### Layer A outputs
+
+Keep:
+
+* `run_summary.csv`
+* `parameter_summary.csv`
+
+Add:
+
+* `candidate_manifest.csv`
+
+### Layer B outputs
+
+Add:
+
+* `deep_run_summary.csv`
+* `deep_parameter_summary.csv`
+* `shelf_subclass_summary.csv`
+* `box_src_screening.csv`
+
+---
+
+# 8. Candidate manifest spec
+
+Each candidate row should include:
+
+* `run_id`
+* `batch`
+* `seed`
+* `kappa`
+* `lambda`
+* `dominant_regime`
+* `unanimity`
+* `candidate_type`
+* `shelf_interval_id`
+* `adjacent_lower_regime`
+* `adjacent_upper_regime`
+* `priority_score`
+
+### Candidate types
+
+Allowed values:
+
+* `shelf_center`
+* `shelf_lower_edge`
+* `shelf_upper_edge`
+* `ss3_adjacent_interior`
+* `outer_regime_adjacent`
+* `control_ss2`
+* `control_runaway`
+
+---
+
+# 9. Threshold policy
+
+Do not hard-wire ontological claims into thresholds.
+
+Use two levels:
+
+## 9.1 Operational thresholds
+
+For current sim use:
+
+* persistence thresholds
+* fold thresholds
+* box thresholds
+* closure-proxy thresholds
+
+## 9.2 Calibration mode
+
+Allow batch-relative calibration:
+
+* median-based normalization
+* percentile-based score cuts
+* fixed thresholds only when explicitly requested
+
+This matters because the current theorem stack is still partly metric-defined and not fully derived from first principles. 
+
+---
+
+# 10. Program modes
+
+The sim program should expose these modes:
+
+## `coarse`
+
+Run Layer A only.
+
+## `deep`
+
+Run Layer B on a supplied candidate manifest.
+
+## `coarse+deep`
+
+Run Layer A, auto-generate candidate manifest, then run Layer B.
+
+## `shelf-only`
+
+Restrict deep analysis to shelf candidates and immediate neighbors.
+
+That last mode is the most important near-term mode because of `sim17`. 
+
+---
+
+# 11. Required CLI additions
+
+Suggested new flags:
+
+```text
+--mode coarse|deep|coarse+deep|shelf-only
+--candidate-manifest <path>
+--deep-max-runs <int>
+--final-window-frac <float>
+--final-window-min <int>
+--enable-front-metrics
+--enable-profile-metrics
+--enable-box-screen
+--enable-src-screen
+--shelf-neighbor-radius <int>
+```
+
+---
+
+# 12. Minimum implementation priorities
+
+## Priority 1
+
+Add `candidate_manifest.csv` generation from current analyzer.
+
+## Priority 2
+
+Add ingestion for:
+
+* `front_metrics.csv`
+* `profiles/*.csv`
+
+## Priority 3
+
+Add deep persistence metrics:
+
+* front persistence
+* profile persistence
+* wall persistence
+
+## Priority 4
+
+Add fold proxy metrics and shelf subclass labels.
+
+## Priority 5
+
+Add provisional Box/SRC screening output.
+
+That is the right build order.
+
+---
+
+# 13. Acceptance criteria
+
+This spec is satisfied when the program can do all of the following:
+
+1. detect shelves in coarse mode
+2. export candidate shelf and neighbor points
+3. ingest front/profile artifacts for those candidates
+4. compute persistence and fold proxies
+5. assign shelf subclasses
+6. output provisional Box/SRC screen results
+7. do all this without requiring full-batch deep analysis
+
+---
+
+# 14. Concise build decision
+
+You do **not** need to rewrite the sim program.
+
+You need to **extend it with a deep-analysis lane** that hangs off the current coarse analyzer.
+
+That keeps the current batch-scale efficiency while making the shelf program and theorem stack testable.
+
+```json
+{
+  "sim_program_alignment_spec_v1": {
+    "goal": "align sim program with shelf characterization, fold metrics, and Box/SRC-oriented deep analysis",
+    "architecture": {
+      "layer_A": {
+        "name": "coarse_analyzer",
+        "status": "keep",
+        "inputs": [
+          "final_summary.csv",
+          "timeseries_global.csv",
+          "domain_metrics.csv"
+        ],
+        "outputs": [
+          "run_summary.csv",
+          "parameter_summary.csv",
+          "candidate_manifest.csv"
+        ],
+        "role": [
+          "regime mapping",
+          "unanimity screening",
+          "shelf detection",
+          "candidate selection"
+        ]
+      },
+      "layer_B": {
+        "name": "deep_morphology_analyzer",
+        "status": "add",
+        "inputs": [
+          "front_metrics.csv",
+          "profiles/*.csv"
+        ],
+        "outputs": [
+          "deep_run_summary.csv",
+          "deep_parameter_summary.csv",
+          "shelf_subclass_summary.csv",
+          "box_src_screening.csv"
+        ],
+        "role": [
+          "persistence metrics",
+          "fold proxy metrics",
+          "shelf subclassification",
+          "provisional Box/SRC screening"
+        ]
+      }
+    },
+    "candidate_types": [
+      "shelf_center",
+      "shelf_lower_edge",
+      "shelf_upper_edge",
+      "ss3_adjacent_interior",
+      "outer_regime_adjacent",
+      "control_ss2",
+      "control_runaway"
+    ],
+    "required_new_metrics": {
+      "front_metrics": [
+        "front_count_final",
+        "front_count_var_final_window",
+        "front_position_drift_final_window",
+        "front_speed_drift_final_window",
+        "interface_lifetime_fraction",
+        "front_persistence_score"
+      ],
+      "profile_metrics": [
+        "profile_depth_final",
+        "profile_wall_strength_final",
+        "profile_curvature_final",
+        "profile_shape_persistence",
+        "profile_width_stability",
+        "profile_peak_stability"
+      ],
+      "composites": [
+        "P_depth",
+        "P_wall",
+        "P_shape",
+        "P_front",
+        "P_Omega",
+        "fold_score_tilde",
+        "L_proxy",
+        "Dsr_proxy",
+        "SRC_proxy_score"
+      ]
+    },
+    "shelf_subclasses": [
+      "shelf_transient",
+      "shelf_persistent_interface",
+      "shelf_folded_nonbox",
+      "shelf_prebox",
+      "shelf_closure_approach",
+      "shelf_rigid_trivial",
+      "shelf_unresolved"
+    ],
+    "program_modes": [
+      "coarse",
+      "deep",
+      "coarse+deep",
+      "shelf-only"
+    ],
+    "cli_additions": [
+      "--mode",
+      "--candidate-manifest",
+      "--deep-max-runs",
+      "--final-window-frac",
+      "--final-window-min",
+      "--enable-front-metrics",
+      "--enable-profile-metrics",
+      "--enable-box-screen",
+      "--enable-src-screen",
+      "--shelf-neighbor-radius"
+    ],
+    "implementation_order": [
+      "candidate_manifest generation",
+      "front_metrics ingestion",
+      "profiles ingestion",
+      "deep persistence metrics",
+      "fold metrics and shelf subclasses",
+      "Box/SRC screening"
+    ],
+    "acceptance_criteria": [
+      "detect shelves in coarse mode",
+      "export candidate manifest",
+      "ingest front/profile artifacts for candidates",
+      "compute persistence and fold proxies",
+      "assign shelf subclasses",
+      "emit provisional Box/SRC screen results",
+      "avoid mandatory full-batch deep analysis"
+    ]
+  }
+}
+```

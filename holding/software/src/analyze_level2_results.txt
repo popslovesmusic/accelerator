@@ -1,0 +1,137 @@
+You said
+I have a large number of Level 2 result folders under outputs_batches, each with files like:
+
+run_manifest.csv
+timeseries_global.csv
+domain_metrics.csv
+front_metrics.csv
+final_summary.csv
+
+Can we programmatically analyze this data in a way that matches the current optimized backend?
+
+Codex said
+Yes. For this project, the right answer is not "load everything in Pandas". The simulation backend is already CPU-optimized in native code, so the analysis path should follow the same design principle:
+
+1. Stream CSVs instead of loading them all at once.
+2. Aggregate only the columns needed for the scientific question.
+3. Keep the heavy scan and classification work in C++ where possible.
+4. Use Python only for orchestration or plotting after the data volume has been reduced.
+
+What is different about this dataset
+The total volume is spread across many simulation folders rather than one giant file. That is good news, because it means the analysis problem is naturally partitioned.
+
+Each run folder already has a stable result schema:
+- run_manifest.csv
+- timeseries_global.csv
+- domain_metrics.csv
+- front_metrics.csv
+- final_summary.csv
+
+That means we do not need a general-purpose dataframe system first. We can write a project-specific analyzer that:
+
+- walks outputs and outputs_batches recursively
+- finds specific CSV types
+- extracts only the columns we care about
+- computes aggregate regime summaries by kappa, lambda, seed, IC, or batch
+- writes compact summary CSVs for later plotting
+
+Why C++ is a good fit here
+For this result shape, C++ gives three concrete benefits:
+
+1. Streaming performance
+   A native scanner can read line-by-line with low allocation overhead.
+
+2. Stable memory use
+   We can analyze tens of GB of CSVs without trying to hold them in RAM.
+
+3. Direct compatibility with the current project architecture
+   The solver is already native-first, so keeping heavy postprocessing native too avoids a Python bottleneck.
+
+Recommended architecture
+
+Phase 1: Native result scanner
+Read only:
+- final_summary.csv
+- run_manifest.csv
+
+This is enough for:
+- regime counts
+- edge tables
+- SS3 band width estimates
+- seed/IC stability summaries
+- kappa/lambda transition maps
+
+Phase 2: Optional deeper scan
+Only if needed, scan:
+- timeseries_global.csv
+- domain_metrics.csv
+- front_metrics.csv
+
+Use those for:
+- collapse-time distributions
+- interface lifetime
+- late-time front width / speed
+- shelf-state diagnostics
+
+Phase 3: Reduced outputs
+Write compact derived files such as:
+- parameter_regime_summary.csv
+- edge_brackets.csv
+- shelf_summary.csv
+- batch_inventory.csv
+
+Then Python can safely consume those much smaller outputs for plotting.
+
+Current project-specific recommendation
+Given the recent sim11 to sim17 work, the first useful native analyzer should focus on final_summary.csv and compute:
+
+- counts of runaway / SS3 / SS2 / other
+- lower and upper brackets by kappa
+- shelf widths where "other" is contiguous
+- seed unanimity checks
+
+That covers the main scientific questions already active in the project.
+
+Implementation direction
+I added a native source file:
+
+level2_results_analyzer.cpp
+
+This tool is designed to:
+- recursively scan result folders
+- read final_summary.csv in streaming mode
+- classify each row using the current project thresholds
+- aggregate by (kappa, lam)
+- write a compact summary CSV
+
+Why start with final_summary.csv
+Because it is the highest signal-per-byte file in the result tree.
+
+It already contains:
+- final exclusion fraction
+- final rho summary
+- final interface count
+
+That is enough to reconstruct the current regime maps without touching the heavier timeseries files.
+
+When Python still makes sense
+Python is still useful for:
+- driving the scanner
+- joining reduced summary outputs
+- plotting band surfaces
+- generating reports
+
+But the scan itself should be native if the dataset continues to grow.
+
+Best next step
+Compile and run the native analyzer first on:
+
+outputs_batches
+
+and generate:
+- one row per (kappa, lam)
+- class counts
+- dominant regime
+- unanimity flag
+
+After that, add a second native pass for shelf characterization using timeseries_global.csv and domain_metrics.csv only on the suspicious transition windows.

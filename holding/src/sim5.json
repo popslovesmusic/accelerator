@@ -1,0 +1,407 @@
+{
+  "simulation_spec_version": "surface_map_v1",
+  "project": {
+    "name": "critical_surface_mapping",
+    "purpose": "Map the persistence boundary surface separating global exclusion runaway from bounded continuation in parameter space.",
+    "framework_language": {
+      "runaway_side": "R2_global_exclusion_runaway",
+      "mixed_side": "R1m_mixed_regime",
+      "persistent_side": "R1_bounded_persistence",
+      "soft_boundary_band": "R2d_precritical_delay_band"
+    }
+  },
+  "governing_question": {
+    "primary": "For fixed D_eps and D_rho, what is the critical boundary lambda_c(kappa) at which full exclusion ceases to be guaranteed?",
+    "secondary": [
+      "How does collapse-time divergence behave near the boundary?",
+      "How does IC dependence weaken as the boundary is approached?",
+      "How do D_eps and D_rho shift or reshape the boundary surface?"
+    ]
+  },
+  "fixed_defaults": {
+    "D_eps": 0.015,
+    "D_rho": 0.075,
+    "grid_size": 256,
+    "initial_condition_families": ["IC0", "IC1", "IC2"],
+    "replicates_per_ic": 3,
+    "total_runs_per_parameter_point": 9,
+    "rng": {
+      "seed_mode": "deterministic_per_run",
+      "base_seed": 1000,
+      "seed_formula": "base_seed + 100000*kappa_index + 1000*lambda_index + 100*ic_index + replicate_index"
+    }
+  },
+  "simulation_horizon": {
+    "tier1": {
+      "T_max": 100,
+      "purpose": "coarse and intermediate scans"
+    },
+    "tier2": {
+      "T_max": 250,
+      "purpose": "rerun candidate non-runaway and near-boundary points"
+    },
+    "termination_conditions": [
+      {
+        "name": "full_exclusion_reached",
+        "rule": "exclusion_fraction >= 1.0"
+      },
+      {
+        "name": "horizon_reached",
+        "rule": "t >= T_max"
+      }
+    ]
+  },
+  "parameterization": {
+    "primary_surface_slice": {
+      "description": "Map lambda_c(kappa) at fixed D_eps and D_rho.",
+      "kappa_values": [0.1, 0.2, 0.35, 0.55, 0.75],
+      "lambda_search": {
+        "coarse": {
+          "start": 0.001,
+          "stop": 0.05,
+          "step": 0.005
+        },
+        "refine_1": {
+          "step": 0.001
+        },
+        "refine_2": {
+          "step": 0.0005
+        },
+        "refine_3": {
+          "step": 0.00025
+        }
+      }
+    },
+    "secondary_surface_slices": {
+      "D_eps_values": [0.01, 0.015, 0.02],
+      "D_rho_values": [0.05, 0.075, 0.1],
+      "activation_rule": "Only run after primary_surface_slice is complete and reviewed."
+    }
+  },
+  "scan_strategy": {
+    "mode": "adaptive_bracketing",
+    "stages": [
+      {
+        "name": "stage_A_coarse_scan",
+        "action": "Run coarse lambda scan for each kappa.",
+        "goal": "Locate intervals where regime class changes or soft-boundary indicators rise sharply."
+      },
+      {
+        "name": "stage_B_bracket_detection",
+        "action": "Identify adjacent lambda values with differing regime outcomes or clear boundary signatures.",
+        "goal": "Create [lambda_low, lambda_high] critical brackets per kappa."
+      },
+      {
+        "name": "stage_C_refine",
+        "action": "Rescan each bracket at successively finer lambda steps.",
+        "goal": "Reduce bracket width below target tolerance."
+      },
+      {
+        "name": "stage_D_tier2_validation",
+        "action": "Rerun all mixed/persistent/candidate points and immediate neighbors at extended horizon.",
+        "goal": "Reject false persistence caused by finite T_max."
+      }
+    ],
+    "bracketing_rules": {
+      "critical_interval_trigger": [
+        "adjacent lambda points differ in hard regime class",
+        "adjacent lambda points differ by >= 50% in mean collapse time",
+        "adjacent lambda points show onset of IC timing overlap",
+        "adjacent lambda points show large increase in collapse-time variance"
+      ],
+      "refinement_factor": 5,
+      "stop_when": [
+        "critical_bracket_width <= 0.0005",
+        "or no hard crossing detected and soft indicators saturate at scan edge"
+      ]
+    }
+  },
+  "classification_logic": {
+    "hard_regime_rules": {
+      "R1_bounded_persistence": {
+        "all_required": [
+          "at least one run survives to T_max without full exclusion",
+          "final_exclusion_fraction < 1.0 in at least one run",
+          "final_mean_rho > 0.0 in at least one run"
+        ]
+      },
+      "R1m_mixed_regime": {
+        "all_required": [
+          "same parameter point contains both collapsed and non-collapsed runs"
+        ]
+      },
+      "R2_global_exclusion_runaway": {
+        "all_required": [
+          "all runs reach full exclusion before T_max",
+          "all runs end with final_mean_rho == 0.0"
+        ]
+      }
+    },
+    "soft_subclasses_for_R2": {
+      "R2r_rigid_runaway": {
+        "indicators": [
+          "collapse times tightly clustered by IC",
+          "low within-IC variance",
+          "clear IC pathway quantization"
+        ]
+      },
+      "R2s_structured_runaway": {
+        "indicators": [
+          "all runs collapse",
+          "IC classes remain distinct",
+          "timing varies modestly with lambda or kappa"
+        ]
+      },
+      "R2d_precritical_delay_band": {
+        "indicators": [
+          "all runs still collapse",
+          "collapse-time mean rises sharply",
+          "collapse-time variance rises sharply",
+          "IC timing overlap appears",
+          "late-time front speed decreases strongly",
+          "long-lived interfaces or rho plateaus appear"
+        ]
+      }
+    }
+  },
+  "metrics": {
+    "per_run": [
+      "kappa",
+      "lambda",
+      "D_eps",
+      "D_rho",
+      "IC_family",
+      "replicate_id",
+      "seed",
+      "T_max",
+      "collapsed_bool",
+      "time_to_full_exclusion",
+      "final_exclusion_fraction",
+      "final_mean_rho",
+      "final_mean_R",
+      "final_mean_eps",
+      "max_interface_count",
+      "late_time_front_speed",
+      "interface_lifetime",
+      "rho_plateau_duration",
+      "resolution_check_pass",
+      "stability_check_pass"
+    ],
+    "per_parameter_point_aggregate": [
+      "n_runs",
+      "collapse_fraction",
+      "mean_time_to_exclusion",
+      "std_time_to_exclusion",
+      "max_time_to_exclusion",
+      "mean_final_exclusion_fraction",
+      "mean_final_mean_rho",
+      "mean_final_mean_R",
+      "mean_final_mean_eps",
+      "mean_late_time_front_speed",
+      "mean_interface_lifetime",
+      "IC_overlap_index",
+      "behavior_class",
+      "soft_subclass",
+      "candidate_boundary_bool"
+    ],
+    "derived_boundary_metrics": [
+      "lambda_runaway_upper",
+      "lambda_persistent_lower",
+      "critical_bracket_width",
+      "collapse_time_gradient_vs_lambda",
+      "collapse_time_variance_peak",
+      "IC_overlap_onset_lambda"
+    ]
+  },
+  "IC_overlap_index": {
+    "definition": "Measure of overlap among IC-specific collapse-time distributions at the same parameter point.",
+    "recommended_computation": {
+      "method": "normalized overlap of empirical intervals",
+      "steps": [
+        "compute min/max collapse time for each IC family",
+        "compute pairwise interval overlap lengths",
+        "sum pairwise overlaps",
+        "normalize by total union length"
+      ]
+    },
+    "interpretation": {
+      "0.0": "perfect IC separation",
+      "1.0": "complete overlap"
+    }
+  },
+  "timeseries_output": {
+    "capture_policy": {
+      "full_capture_for": [
+        "all tier2 validation runs",
+        "all candidate_boundary_bool points",
+        "all non-runaway runs",
+        "one representative run per IC for all coarse points"
+      ],
+      "reduced_capture_for": "all other runs"
+    },
+    "fields": [
+      "t",
+      "exclusion_fraction",
+      "mean_rho",
+      "mean_R",
+      "mean_eps",
+      "interface_count",
+      "front_speed"
+    ]
+  },
+  "output_files": {
+    "run_level_csv": "run_results.csv",
+    "parameter_summary_csv": "parameter_summary.csv",
+    "boundary_table_csv": "boundary_table.csv",
+    "timeseries_csv": "timeseries_global.csv",
+    "manifest_json": "surface_map_manifest.json",
+    "phase_report_json": "phase_report.json"
+  },
+  "boundary_table_schema": {
+    "columns": [
+      "D_eps",
+      "D_rho",
+      "kappa",
+      "lambda_runaway_upper",
+      "lambda_persistent_lower",
+      "critical_bracket_width",
+      "best_estimate_lambda_c",
+      "behavior_below_boundary",
+      "behavior_above_boundary",
+      "collapse_time_gradient_peak",
+      "collapse_time_variance_peak",
+      "IC_overlap_onset_lambda",
+      "tier2_validated",
+      "notes"
+    ],
+    "best_estimate_lambda_c_rule": "midpoint of [lambda_persistent_lower, lambda_runaway_upper] when both exist; otherwise null"
+  },
+  "execution_order": [
+    {
+      "phase": "P0",
+      "name": "baseline_reference",
+      "actions": [
+        "run kappa=0.55 coarse lambda scan first",
+        "verify outputs, classification, aggregation, and timeseries integrity"
+      ]
+    },
+    {
+      "phase": "P1",
+      "name": "primary_surface_curve",
+      "actions": [
+        "run coarse lambda scans for kappa in [0.1, 0.2, 0.35, 0.55, 0.75]",
+        "compute behavior class and candidate boundary brackets"
+      ]
+    },
+    {
+      "phase": "P2",
+      "name": "adaptive_refinement",
+      "actions": [
+        "refine all detected brackets to step 0.001",
+        "refine surviving brackets to step 0.0005",
+        "optionally refine strongest candidates to 0.00025"
+      ]
+    },
+    {
+      "phase": "P3",
+      "name": "tier2_validation",
+      "actions": [
+        "rerun all mixed/persistent/candidate boundary points at T_max=250",
+        "rerun immediate neighboring lambda points"
+      ]
+    },
+    {
+      "phase": "P4",
+      "name": "surface_extension",
+      "actions": [
+        "repeat P1-P3 at D_eps in [0.01, 0.02] with D_rho fixed",
+        "repeat P1-P3 at D_rho in [0.05, 0.1] with D_eps fixed"
+      ]
+    }
+  ],
+  "quality_control": {
+    "required_checks": [
+      "all run seeds unique",
+      "all parameter points have exactly 9 runs unless explicitly overridden",
+      "timeseries length consistent with termination condition",
+      "classification reproducible from raw metrics",
+      "aggregates match raw CSV"
+    ],
+    "reproducibility": {
+      "store_manifest": true,
+      "store_code_version": true,
+      "store_git_hash_if_available": true,
+      "store_compile_flags_if_available": true
+    }
+  },
+  "candidate_boundary_flag_rule": {
+    "set_true_if_any": [
+      "behavior_class != R2_global_exclusion_runaway",
+      "std_time_to_exclusion rises by >= 2x relative to previous lambda at same kappa",
+      "IC_overlap_index > 0.25",
+      "mean_late_time_front_speed drops by >= 50% relative to previous lambda at same kappa",
+      "one or more runs survive to T_max"
+    ]
+  },
+  "recommended_visuals": {
+    "plots": [
+      {
+        "name": "lambda_c_vs_kappa",
+        "source": "boundary_table.csv",
+        "purpose": "primary boundary curve at fixed D_eps and D_rho"
+      },
+      {
+        "name": "mean_collapse_time_vs_lambda_per_kappa",
+        "source": "parameter_summary.csv",
+        "purpose": "detect critical slowing"
+      },
+      {
+        "name": "collapse_time_variance_vs_lambda_per_kappa",
+        "source": "parameter_summary.csv",
+        "purpose": "detect precritical deformation"
+      },
+      {
+        "name": "IC_overlap_index_vs_lambda_per_kappa",
+        "source": "parameter_summary.csv",
+        "purpose": "measure loss of IC quantization"
+      },
+      {
+        "name": "phase_map_lambda_kappa",
+        "source": "parameter_summary.csv",
+        "purpose": "color by behavior class and soft subclass"
+      }
+    ]
+  },
+  "compute_budget_guidance": {
+    "coarse_phase_expected_points": 50,
+    "coarse_phase_expected_runs": 450,
+    "refinement_multiplier_estimate": 1.5,
+    "tier2_multiplier_estimate": 0.5,
+    "note": "Actual run count depends on number of brackets detected."
+  },
+  "success_criteria": {
+    "minimum": [
+      "obtain lambda_runaway_upper for each primary kappa",
+      "detect whether any primary kappa shows mixed or persistent behavior",
+      "produce first lambda_c(kappa) bracket table"
+    ],
+    "target": [
+      "resolve lambda_c(kappa) to bracket width <= 0.0005 for all primary kappas",
+      "validate candidate persistent points at extended horizon",
+      "produce first surface trend across D_eps or D_rho"
+    ]
+  },
+  "interpretation_rules": {
+    "do_not_claim": [
+      "single universal lambda threshold",
+      "true persistence from tier1 only",
+      "critical crossing without hard indicators"
+    ],
+    "allowed_claims": [
+      "directional persistence boundary",
+      "bracketed lambda_c(kappa) estimates",
+      "precritical delay band from soft indicators",
+      "anisotropic approach to persistence"
+    ]
+  }
+}

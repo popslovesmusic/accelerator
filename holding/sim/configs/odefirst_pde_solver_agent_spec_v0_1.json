@@ -1,0 +1,384 @@
+{
+  "agent_implementation_spec": {
+    "name": "IGSOA_OdeFirst_To_Pde_Relational_Solver_Spec",
+    "version": "0.1",
+    "status": "active_draft",
+    "goal": "Implement a fresh solver program that starts with an ODE validation layer and then extends to a 2D PDE solver, while preserving a continuous relational interpretation and avoiding ontology drift from numerical discretization.",
+    "implementation_choice": {
+      "selected_path": "B",
+      "summary": "Build ODE prototype first, validate local dynamics and governed outputs, then extend cleanly to PDE.",
+      "reason": [
+        "safer validation path",
+        "easier debugging",
+        "clean separation of model and numerics",
+        "better independent reproduction discipline"
+      ]
+    },
+    "governing_question": {
+      "paper_question": "Under what conditions does the epsilon-rho-R system sustain persistent nonzero structure rather than collapsing or washing out, and how does residue support alter that boundary?",
+      "solver_question_stage_1": "Does the local ODE system exhibit collapse, persistence, or oscillatory behavior as residue support parameters vary?",
+      "solver_question_stage_2": "Does the 2D PDE extension reproduce structured persistence, interfaces, and transition boundaries consistent with documented reference behavior?"
+    },
+    "ontology_and_representation_rules": {
+      "core_rule": "Representation is not ontology.",
+      "continuous_model_statement": "The modeled system is a continuous relational process expression.",
+      "numerical_statement": "Discrete mesh, timestep, and stencils are computational approximations only.",
+      "required_language_for_docs": [
+        "continuous relational PDE system",
+        "scalar representation for numerical tractability",
+        "local relational redistribution operator",
+        "mesh used only as numerical partition"
+      ],
+      "forbidden_language_for_docs": [
+        "grid as reality",
+        "lattice as ontology",
+        "scalar field as primitive substrate",
+        "space or location as primitive container"
+      ]
+    },
+    "equation_layer": {
+      "stage_1_ode_system": [
+        "d\u03b5/dt = k*\u03b5 - b*\u03b5*\u03c1 - c*\u03b5^2 + s",
+        "d\u03c1/dt = \u03b1*\u03c1 - \u03b2*\u03b5*\u03c1 - \u03b3*\u03c1^2 - v*R + h",
+        "dR/dt = \u03ba*\u03b5 - \u03bb*R"
+      ],
+      "stage_2_pde_system": [
+        "\u2202t \u03b5 = D\u03b5\u2207\u00b2\u03b5 + k*\u03b5 - b*\u03b5*\u03c1 - c*\u03b5^2 + s",
+        "\u2202t \u03c1 = D\u03c1\u2207\u00b2\u03c1 + \u03b1*\u03c1 - \u03b2*\u03b5*\u03c1 - \u03b3*\u03c1^2 - v*R + h",
+        "\u2202t R = DR\u2207\u00b2R + \u03ba*\u03b5 - \u03bb*R"
+      ],
+      "notes": [
+        "Use governed PDE form already aligned to the active charter.",
+        "Keep redistribution operator abstracted behind an interface so future relational operators can replace standard finite-difference Laplacian."
+      ]
+    },
+    "architecture": {
+      "design_principle": "Two-layer architecture: model layer separated from numerical realization layer.",
+      "modules": [
+        {
+          "name": "model.py",
+          "responsibility": [
+            "define ODE and PDE right-hand sides",
+            "hold parameter structure",
+            "provide operator-agnostic evolution definitions"
+          ]
+        },
+        {
+          "name": "operators.py",
+          "responsibility": [
+            "define redistribution operator interface",
+            "implement finite-difference Laplacian backend for stage 2",
+            "allow future graph/anisotropic/residue-weighted backends"
+          ]
+        },
+        {
+          "name": "integrators.py",
+          "responsibility": [
+            "implement ODE integrators for stage 1",
+            "implement PDE time stepping for stage 2",
+            "keep stage-appropriate stepping methods isolated"
+          ]
+        },
+        {
+          "name": "initial_conditions.py",
+          "responsibility": [
+            "generate ODE initial states",
+            "generate PDE initial fields",
+            "support seed-controlled perturbations and reference-style start conditions"
+          ]
+        },
+        {
+          "name": "metrics.py",
+          "responsibility": [
+            "compute global metrics",
+            "compute domain/front/interface metrics",
+            "compute timeseries summaries"
+          ]
+        },
+        {
+          "name": "classifier.py",
+          "responsibility": [
+            "assign regime labels using explicit thresholds and decision rules",
+            "separate raw metrics from classification logic"
+          ]
+        },
+        {
+          "name": "io_schema.py",
+          "responsibility": [
+            "enforce output file structure",
+            "write manifests and governed summaries",
+            "prevent untracked outputs"
+          ]
+        },
+        {
+          "name": "run_driver.py",
+          "responsibility": [
+            "run a single governed experiment from config",
+            "capture metadata and write outputs"
+          ]
+        },
+        {
+          "name": "batch_runner.py",
+          "responsibility": [
+            "execute parameter sweeps and seed sweeps",
+            "aggregate run summaries"
+          ]
+        },
+        {
+          "name": "plotting.py",
+          "responsibility": [
+            "create figures for paper use",
+            "keep plotting separate from solver logic"
+          ]
+        }
+      ]
+    },
+    "implementation_sequence": [
+      {
+        "phase": 1,
+        "name": "ode_core",
+        "objective": "Build and validate the local ODE system first.",
+        "tasks": [
+          "implement parameter dataclass or dict schema",
+          "implement ODE RHS",
+          "implement RK4 and one simple fallback integrator",
+          "implement single-run config execution",
+          "emit run manifest and timeseries output"
+        ],
+        "deliverables": [
+          "ODE solver runs from config",
+          "timeseries_global.csv",
+          "final_summary.csv",
+          "run_manifest.csv or json"
+        ],
+        "validation_questions": [
+          "Do trajectories remain numerically stable under expected parameter ranges?",
+          "Do collapse/persistence/oscillation behaviors appear at all?",
+          "Does residue support materially change behavior?"
+        ]
+      },
+      {
+        "phase": 2,
+        "name": "ode_classification_and_reference_alignment",
+        "objective": "Define observables and regime classifications for the ODE layer.",
+        "tasks": [
+          "define classification thresholds",
+          "implement collapse detection",
+          "implement persistence detection",
+          "implement oscillation detection",
+          "add seed repeat support if noise or perturbation is used"
+        ],
+        "deliverables": [
+          "classifier.py with explicit decision rules",
+          "summary metrics aligned to future paper claims"
+        ]
+      },
+      {
+        "phase": 3,
+        "name": "pde_extension",
+        "objective": "Extend the validated local model into a governed 2D PDE solver.",
+        "tasks": [
+          "implement 2D mesh support",
+          "implement finite-difference Laplacian backend",
+          "implement periodic and/or no-flux boundaries",
+          "implement stage-appropriate PDE timestepper",
+          "emit profile snapshots and front metrics"
+        ],
+        "deliverables": [
+          "2D solver",
+          "profiles/",
+          "profiles_relational/",
+          "front_metrics.csv",
+          "domain_metrics.csv"
+        ],
+        "validation_questions": [
+          "Do structured interfaces appear?",
+          "Can known anchor-style behaviors be reproduced qualitatively and quantitatively?",
+          "Do regime boundaries shift with parameters and seeds?"
+        ]
+      },
+      {
+        "phase": 4,
+        "name": "reference_driven_replication",
+        "objective": "Compare fresh solver outputs against documented reference targets without reusing prior implementation.",
+        "tasks": [
+          "define reference-target metrics from prior output documents",
+          "match naming conventions where useful",
+          "compare time series shape, final summaries, and profile behavior",
+          "record agreement and disagreement explicitly"
+        ],
+        "deliverables": [
+          "replication comparison reports",
+          "paper-usable figures and tables"
+        ]
+      }
+    ],
+    "numerical_methods": {
+      "stage_1_ode": {
+        "recommended_integrator": "RK4",
+        "fallback": "explicit Euler for smoke tests only",
+        "dt_policy": "configurable with guardrails and manifest capture"
+      },
+      "stage_2_pde": {
+        "recommended_integrator": "semi-implicit or IMEX",
+        "fallback": "explicit method for small smoke runs only",
+        "grid": "2D rectangular mesh",
+        "operator_backend_initial": "finite_difference_laplacian",
+        "boundary_conditions_initial": [
+          "periodic",
+          "no_flux"
+        ]
+      }
+    },
+    "config_and_run_schema": {
+      "required_config_fields": [
+        "run_id",
+        "experiment_family",
+        "equation_mode",
+        "parameters",
+        "time_settings",
+        "initial_conditions",
+        "seed",
+        "notes"
+      ],
+      "stage_2_additional_fields": [
+        "grid_settings",
+        "boundary_condition",
+        "snapshot_schedule"
+      ],
+      "required_manifest_fields": [
+        "run_id",
+        "timestamp",
+        "code_version",
+        "config_path_or_inline_hash",
+        "seed",
+        "equation_mode",
+        "notes"
+      ]
+    },
+    "output_contract": {
+      "stage_1_required": [
+        "run_manifest.csv",
+        "timeseries_global.csv",
+        "final_summary.csv",
+        "figures/"
+      ],
+      "stage_2_required": [
+        "run_manifest.csv",
+        "timeseries_global.csv",
+        "final_summary.csv",
+        "domain_metrics.csv",
+        "front_metrics.csv",
+        "profiles/",
+        "profiles_relational/",
+        "figures/"
+      ],
+      "rules": [
+        "No run is valid without manifest and config traceability.",
+        "No manually edited summary files.",
+        "All plots must map back to run_id."
+      ]
+    },
+    "observables": {
+      "stage_1_ode": [
+        "epsilon_mean_t",
+        "rho_mean_t",
+        "residue_mean_t",
+        "epsilon_final_mean",
+        "residue_final_mean",
+        "collapse_time",
+        "regime_classification"
+      ],
+      "stage_2_pde": [
+        "epsilon_mean_t",
+        "epsilon_max_t",
+        "rho_mean_t",
+        "R_mean_t",
+        "interface_count_t",
+        "front_width_t",
+        "exclusion_fraction_t",
+        "seed_unanimity",
+        "regime_classification"
+      ],
+      "relational_profiles": [
+        "profile snapshots phrased as relational readouts",
+        "gradient-based or interface-based summaries suitable for future process-language papers"
+      ]
+    },
+    "classification": {
+      "initial_regime_classes": [
+        "collapse_to_pressure",
+        "persistent_steady",
+        "oscillatory_persistent",
+        "runaway",
+        "other_transitional"
+      ],
+      "initial_rules_guidance": [
+        "collapse_to_pressure: epsilon trends to near-zero while rho remains dominant",
+        "persistent_steady: epsilon remains positive and settles within tolerance",
+        "oscillatory_persistent: epsilon remains positive with sustained oscillation above tolerance",
+        "runaway: unbounded or threshold-exceeding growth requiring termination",
+        "other_transitional: behaviors not cleanly classified by initial rule set"
+      ],
+      "requirement": "All thresholds must live in config or classifier settings, not hidden constants."
+    },
+    "reference_driven_replication": {
+      "position": "Use prior documented outputs as explicit reference targets, not as code source.",
+      "allowed_reference_artifacts": [
+        "run_manifest.csv",
+        "timeseries_global.csv",
+        "final_summary.csv",
+        "domain_metrics.csv",
+        "front_metrics.csv",
+        "profiles/",
+        "profiles_relational/"
+      ],
+      "disallowed_inputs": [
+        "copying prior solver code",
+        "hidden implementation shortcuts extracted from prior codebase"
+      ],
+      "comparison_axes": [
+        "regime labels",
+        "boundary location",
+        "time-series shape",
+        "profile shape",
+        "seed behavior"
+      ],
+      "scientific_rule": "Failure to reproduce is a valid result and must be recorded, not hidden."
+    },
+    "paper_alignment": {
+      "paper_role": "Support Paper 1 as a governed independent reproduction and refinement study.",
+      "paper_question_support": [
+        "Does the rebuilt system reproduce persistent structured regimes?",
+        "How does residue support alter the persistence boundary?",
+        "How robust are the reproduced structures under horizon, seed, and initial-condition variation?"
+      ],
+      "expected_paper_outputs": [
+        "one baseline ODE comparison figure",
+        "one PDE anchor or profile figure",
+        "one regime map or sweep figure",
+        "one robustness or sensitivity table"
+      ]
+    },
+    "agent_constraints": {
+      "must_read_as_continuous_in_spirit": true,
+      "must_not_treat_discretization_as_ontology": true,
+      "must_keep_model_and_numerics_separate": true,
+      "must_emit_governed_outputs": true,
+      "must_support_future_relational_operator_upgrade": true
+    },
+    "acceptance_criteria": {
+      "phase_1_complete_when": [
+        "ODE solver runs from config without manual patching",
+        "manifest and summaries are emitted",
+        "at least one collapse case and one persistent case are identified",
+        "classification is explicit and reproducible"
+      ],
+      "phase_3_complete_when": [
+        "2D PDE solver emits governed outputs",
+        "profile snapshots and domain metrics are available",
+        "at least one anchor-style structured regime appears or a documented failure-to-reproduce is clearly established"
+      ]
+    }
+  }
+}

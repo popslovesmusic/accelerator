@@ -1,0 +1,43 @@
+{
+  "objective": "detect SS3 persistence between runaway and SS2 regimes",
+
+  "strategy": "bridge_scan",
+
+  "kappa_values": {
+    "type": "focused_band",
+    "values": [0.05, 0.1, 0.15, 0.2, 0.25]
+  },
+
+  "lambda_values": {
+    "type": "log_sweep",
+    "range": [0.01, 0.5],
+    "points": 25
+  },
+
+  "grid": {
+    "Nx": 512,
+    "T_max": 300
+  },
+
+  "replicates": 9,
+
+  "key_detection": [
+    "exclusion_fraction between (0,1)",
+    "rho > 0",
+    "interface_count > 0 at T_max"
+  ],
+
+  "classification_targets": [
+    "runaway",
+    "SS2",
+    "candidate_SS3"
+  ],
+
+  "adaptive_followup": {
+    "if_transition_detected": {
+      "refine_lambda_window": true,
+      "increase_Tmax": 1000,
+      "increase_resolution": 1024
+    }
+  }
+}

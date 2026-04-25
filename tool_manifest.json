@@ -1,0 +1,128 @@
+{
+  "project": "Acellorator Research Ecosystem",
+  "version": "1.0.0",
+  "governance": "cross_verification_protocol.json",
+  "usage_policy": "Agent may execute tools but MUST NOT modify engine code or core scripts. MUST follow cross_verification_protocol.json for all research claims.",
+  "tools": [
+    {
+      "name": "agent_based_sim_v1",
+      "description": "Phase-space swarm simulation for local-to-global rules.",
+      "entry_point": "agent_based_sim_v1/sim.py",
+      "cli_command": "python agent_based_sim_v1/sim.py --config {config} --out {out_dir}",
+      "config_params": ["n_agents", "R_c", "K_phi", "kappa", "mismatch_rate"],
+      "metrics": ["order_parameter", "residue_mean", "local_coherence_mean"]
+    },
+    {
+      "name": "ca_admissibility_sim_v1",
+      "description": "2D Cellular Automata for admissibility and zero logic.",
+      "entry_point": "ca_admissibility_sim_v1/sim.py",
+      "cli_command": "python ca_admissibility_sim_v1/sim.py --config {config} --out {out_dir}",
+      "config_params": ["grid_size", "diffusion_rate", "residue_growth", "residue_decay"],
+      "metrics": ["active_fraction", "mean_mismatch", "mean_residue"]
+    },
+    {
+      "name": "graph_dynamics_sim_v1",
+      "description": "Dynamic network simulation for topological corridors.",
+      "entry_point": "graph_dynamics_sim_v1/sim.py",
+      "cli_command": "python graph_dynamics_sim_v1/sim.py --config {config} --out {out_dir}",
+      "config_params": ["n_nodes", "decouple_threshold", "recouple_threshold", "K_phi"],
+      "metrics": ["edge_count", "avg_degree", "order_parameter"]
+    },
+    {
+      "name": "stochastic_sim_v1",
+      "description": "Continuous SDE simulation for noise floors and onset.",
+      "entry_point": "stochastic_sim_v1/sim.py",
+      "cli_command": "python stochastic_sim_v1/sim.py --config {config} --out {out_dir}",
+      "config_params": ["sigma", "x_thresh", "kappa", "n_particles"],
+      "metrics": ["crossing_fraction", "mean_x", "std_x"]
+    },
+    {
+      "name": "kuramoto_sim_v1",
+      "description": "1D ring Kuramoto oscillators for shelf regimes.",
+      "entry_point": "kuramoto_sim_v1/sim.py",
+      "cli_command": "python kuramoto_sim_v1/sim.py --config {config} --out {out_dir}",
+      "config_params": ["n_oscillators", "K", "omega_std"],
+      "metrics": ["order_parameter", "local_coherence_mean"]
+    },
+    {
+      "name": "rd_moving_boundary_sim_v1",
+      "description": "PDE moving boundary for pocket/corridor testing.",
+      "entry_point": "rd_moving_boundary_sim_v1/sim.py",
+      "cli_command": "python rd_moving_boundary_sim_v1/sim.py --config {config} --out {out_dir}",
+      "config_params": ["beta", "growth_thresh", "S_diff", "domain_decay"],
+      "metrics": ["active_area", "total_signal"]
+    },
+    {
+      "name": "lb_fluid_sim_v1",
+      "description": "Lattice Boltzmann fluid with dynamic erosion.",
+      "entry_point": "lb_fluid_sim_v1/sim.py",
+      "cli_command": "python lb_fluid_sim_v1/sim.py --config {config} --out {out_dir}",
+      "config_params": ["u_inlet", "erosion_threshold", "tau"],
+      "metrics": ["fluid_volume", "mean_velocity"]
+    },
+    {
+      "name": "symplectic_sim_v1",
+      "description": "Symplectic Hamiltonian integration for conservation laws.",
+      "entry_point": "symplectic_sim_v1/sim.py",
+      "cli_command": "python symplectic_sim_v1/sim.py --config {config} --out {out_dir}",
+      "config_params": ["kappa", "dt", "initial_q_spread"],
+      "metrics": ["mean_H", "std_H", "q_rms"]
+    },
+    {
+      "name": "fsa_rule_engine_sim_v1",
+      "description": "Abstract state machine for Boolean admissibility logic.",
+      "entry_point": "fsa_rule_engine_sim_v1/sim.py",
+      "cli_command": "python fsa_rule_engine_sim_v1/sim.py --config {config} --out {out_dir}",
+      "config_params": ["n_states", "edge_prob", "residue_required"],
+      "metrics": ["active_count", "mean_residue"]
+    },
+    {
+      "name": "structural_box_sim_v2",
+      "description": "Level 2 1D PDE for Identity and SRC screening.",
+      "entry_point": "structural_box_sim_v2/sim.py",
+      "cli_command": "python structural_box_sim_v2/sim.py --config {config} --out {out_dir}",
+      "config_params": ["model.kappa", "model.lambda_R", "initial_condition.noise_std"],
+      "metrics": ["final.mean_epsilon", "final.mean_rho", "box_analysis.persistence"]
+    },
+    {
+      "name": "mc_ensemble_sim_v1",
+      "description": "Meta-orchestrator for parallel parameter sweeps.",
+      "entry_point": "mc_ensemble_sim_v1/mc_runner.py",
+      "cli_command": "python mc_ensemble_sim_v1/mc_runner.py --config {config} --out {out_dir}",
+      "config_params": ["trials", "scan_params"],
+      "metrics": ["Aggregate results in ensemble_results.csv"]
+    },
+    {
+      "name": "info_metrics_module_v1",
+      "description": "Post-processor for entropy and complexity.",
+      "entry_point": "info_metrics_module_v1/analyze_info.py",
+      "cli_command": "python info_metrics_module_v1/analyze_info.py --dir {data_dir}",
+      "config_params": [],
+      "metrics": ["entropy", "complexity"]
+    },
+    {
+      "name": "bifurcation_analyzer_v1",
+      "description": "Dynamic parameter ramp for regime mapping.",
+      "entry_point": "bifurcation_analyzer_v1/bifurcation_runner.py",
+      "cli_command": "python bifurcation_analyzer_v1/bifurcation_runner.py --config {config} --out {out_dir}",
+      "config_params": ["ramp_params.parameter", "ramp_params.start", "ramp_params.end"],
+      "metrics": ["bifurcation_trace.csv"]
+    },
+    {
+      "name": "tda_module_v1",
+      "description": "Topological Data Analysis (Betti-0) for spatial fields.",
+      "entry_point": "tda_module_v1/analyze_topology.py",
+      "cli_command": "python tda_module_v1/analyze_topology.py --dir {data_path} --threshold {threshold}",
+      "config_params": ["threshold", "mode"],
+      "metrics": ["count", "max_size", "active_fraction"]
+    },
+    {
+      "name": "falsification_suite_v1",
+      "description": "Automated harness for negative behavior tests.",
+      "entry_point": "falsification_suite_v1/run_falsification.py",
+      "cli_command": "python falsification_suite_v1/run_falsification.py --config {suite_config} --out {out_dir}",
+      "config_params": ["tests"],
+      "metrics": ["falsification_report.json"]
+    }
+  ]
+}

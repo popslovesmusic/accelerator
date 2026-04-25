@@ -1,0 +1,32 @@
+{
+  "tests": [
+    {
+      "name": "Agent Zero Coupling",
+      "target_script": "../agent_based_sim_v1/sim.py",
+      "base_config": "../agent_based_sim_v1/configs/default.json",
+      "overrides": {
+        "K_phi": 0.0,
+        "steps": 1000
+      },
+      "assertions": [
+        "order_parameter < 0.2"
+      ]
+    },
+    {
+      "name": "Box Zero Residue Coupling",
+      "target_script": "../structural_box_sim_v2/sim.py",
+      "base_config": "../structural_box_sim_v2/configs/default.json",
+      "overrides": {
+        "model": {
+          "u": 0.0
+        },
+        "grid": {
+          "t_final": 2.0
+        }
+      },
+      "assertions": [
+        "epsilon_active_fraction < 0.5"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,278 @@
+{
+  "batch_config": {
+    "name": "ode_forced_collapse_extreme_scan_v1",
+    "status": "draft_ready_for_agent",
+    "purpose": "Force the local ODE system toward collapse by removing residue support, starving growth, and applying extreme suppression so collapse can either be observed or meaningfully resisted.",
+    "paper_alignment": {
+      "paper_question": "Under what conditions does the local epsilon-rho-R system sustain persistent nonzero structure rather than collapsing or washing out?",
+      "reason_for_this_batch": "The prior ODE persistence boundary scan found no collapse_to_pressure cases. This batch deliberately pushes the system far outside the previously tested region."
+    },
+    "governance": {
+      "equation_mode": "ode",
+      "experiment_family": "forced_collapse_extreme_scan",
+      "run_manifest_required": true,
+      "config_snapshot_required": true,
+      "timeseries_global_required": true,
+      "final_summary_required": true,
+      "seed_required": true,
+      "classifier_required": true,
+      "diagnostic_note_required_if_no_collapse_found": true
+    },
+    "assumptions_for_agent": [
+      "Agent should preserve all existing solver functions unless explicit incompatibility requires additive extension only.",
+      "If exact runtime schema differs, adapt field names minimally while preserving the parameter content and sweep intent.",
+      "All classifier thresholds must be emitted in manifest or config snapshot.",
+      "Do not hide resolved defaults in code; write all resolved parameter values into each run manifest."
+    ],
+    "global_settings": {
+      "integrator": "rk4",
+      "dt": 0.01,
+      "t_final": 60.0,
+      "sample_every": 10,
+      "termination_rules": {
+        "runaway_epsilon_threshold": 25.0,
+        "runaway_rho_threshold": 25.0,
+        "nan_or_inf_invalidates_run": true
+      }
+    },
+    "classifier_settings": {
+      "epsilon_collapse_threshold": 0.005,
+      "persistence_settle_window_fraction": 0.2,
+      "oscillation_amplitude_threshold": 0.01,
+      "runaway_threshold": 25.0,
+      "labels": [
+        "collapse_to_pressure",
+        "persistent_steady",
+        "oscillatory_persistent",
+        "runaway",
+        "other_transitional"
+      ]
+    },
+    "fixed_parameters_template": {
+      "k": "USE_CURRENT_BASELINE_UNLESS_SCANNED",
+      "b": "USE_CURRENT_BASELINE_UNLESS_SCANNED",
+      "c": "USE_CURRENT_BASELINE_UNLESS_SCANNED",
+      "alpha": "USE_CURRENT_BASELINE_UNLESS_SCANNED",
+      "beta": "USE_CURRENT_BASELINE_UNLESS_SCANNED",
+      "gamma": "USE_CURRENT_BASELINE_UNLESS_SCANNED",
+      "kappa": "USE_CURRENT_BASELINE_UNLESS_SCANNED",
+      "lambda": "USE_CURRENT_BASELINE_UNLESS_SCANNED",
+      "v": "USE_CURRENT_BASELINE_UNLESS_SCANNED",
+      "s": "USE_CURRENT_BASELINE_UNLESS_SCANNED",
+      "h": "USE_CURRENT_BASELINE_UNLESS_SCANNED"
+    },
+    "initial_condition_families": [
+      {
+        "name": "tiny_epsilon_pressure_favored",
+        "epsilon0": 0.001,
+        "rho0": 0.2,
+        "R0": 0.0,
+        "notes": "Strongly favors epsilon extinction if collapse is available."
+      },
+      {
+        "name": "small_epsilon_pressure_dominant",
+        "epsilon0": 0.01,
+        "rho0": 0.25,
+        "R0": 0.0,
+        "notes": "More moderate version of collapse-favoring start."
+      },
+      {
+        "name": "moderate_balanced",
+        "epsilon0": 0.1,
+        "rho0": 0.1,
+        "R0": 0.0,
+        "notes": "Retained for contrast with the collapse-favoring starts."
+      }
+    ],
+    "seed_policy": {
+      "mode": "fixed_for_deterministic_ode_unless_noise_added",
+      "seeds": [
+        12345
+      ]
+    },
+    "scan_stages": [
+      {
+        "stage_id": "E1_no_residue_starve_growth",
+        "goal": "Remove support entirely and starve epsilon growth.",
+        "vary": {
+          "kappa": [
+            0.0
+          ],
+          "lambda": [
+            0.5,
+            1.0,
+            2.0
+          ],
+          "v": [
+            0.0
+          ],
+          "k": [
+            0.005,
+            0.01,
+            0.02,
+            0.05
+          ]
+        },
+        "hold_else_fixed": true,
+        "priority": 1,
+        "expected_value": "Determines whether the local system can collapse with residue support disabled and growth weakened."
+      },
+      {
+        "stage_id": "E2_extreme_suppression",
+        "goal": "Overpower epsilon with very strong coupling and self-limiting terms.",
+        "vary": {
+          "beta": [
+            2.0,
+            4.0,
+            8.0,
+            16.0
+          ],
+          "c": [
+            2.0,
+            4.0,
+            8.0,
+            16.0
+          ],
+          "v": [
+            0.0
+          ],
+          "kappa": [
+            0.0
+          ],
+          "lambda": [
+            1.0
+          ]
+        },
+        "hold_else_fixed": true,
+        "priority": 2,
+        "expected_value": "Tests whether aggressive suppression terms can extinguish epsilon even without residue support."
+      },
+      {
+        "stage_id": "E3_pressure_dominance_scan",
+        "goal": "Let rho dominate while epsilon growth remains weak.",
+        "vary": {
+          "alpha": [
+            0.5,
+            1.0,
+            2.0,
+            4.0
+          ],
+          "gamma": [
+            0.5,
+            1.0,
+            2.0,
+            4.0
+          ],
+          "k": [
+            0.005,
+            0.01,
+            0.02
+          ],
+          "kappa": [
+            0.0
+          ],
+          "v": [
+            0.0
+          ]
+        },
+        "hold_else_fixed": true,
+        "priority": 3,
+        "expected_value": "Checks whether strong pressure maintenance plus weak epsilon growth drives collapse_to_pressure."
+      },
+      {
+        "stage_id": "E4_combined_extreme_break_test",
+        "goal": "Combine weak growth, no residue, and extreme suppression in one aggressive search.",
+        "vary": {
+          "k": [
+            0.001,
+            0.005,
+            0.01
+          ],
+          "beta": [
+            4.0,
+            8.0,
+            16.0
+          ],
+          "c": [
+            4.0,
+            8.0,
+            16.0
+          ],
+          "alpha": [
+            1.0,
+            2.0,
+            4.0
+          ],
+          "gamma": [
+            1.0,
+            2.0,
+            4.0
+          ],
+          "kappa": [
+            0.0
+          ],
+          "lambda": [
+            1.0,
+            2.0
+          ],
+          "v": [
+            0.0
+          ]
+        },
+        "hold_else_fixed": true,
+        "priority": 4,
+        "expected_value": "If collapse exists in the current formulation, this stage should have a strong chance of revealing it."
+      }
+    ],
+    "batch_aggregation": {
+      "required_outputs": [
+        "batch_summary.csv",
+        "classification_summary.csv",
+        "parameter_regime_table.csv",
+        "top_runs_by_regime.csv",
+        "diagnostic_note.md"
+      ],
+      "required_groupbys": [
+        [
+          "stage_id",
+          "initial_condition_family",
+          "regime_classification"
+        ],
+        [
+          "k",
+          "kappa",
+          "lambda",
+          "regime_classification"
+        ],
+        [
+          "beta",
+          "c",
+          "regime_classification"
+        ],
+        [
+          "alpha",
+          "gamma",
+          "regime_classification"
+        ]
+      ]
+    },
+    "paper_use_targets": {
+      "minimum_success_conditions": [
+        "At least one collapse_to_pressure case is observed, OR",
+        "No collapse is observed even under the combined extreme break test and that resistance is documented as a result."
+      ],
+      "target_figures": [
+        "timeseries comparison: robust persistence vs strongest collapse candidate",
+        "regime table or heatmap from extreme suppression slices",
+        "diagnostic summary showing whether collapse remains absent under extreme forcing"
+      ]
+    },
+    "notes_to_agent": [
+      "If collapse_to_pressure is found in any early stage, refine around that local boundary before exhausting all later stages.",
+      "If no collapse is found in any stage, emit diagnostic_note.md stating that the tested local ODE system appears structurally collapse-resistant under extreme suppression and zero residue support.",
+      "Negative rho values should not be silently accepted as physically meaningful; emit a flag column rho_negative_flag in summaries.",
+      "All run ids should include stage_id and initial_condition_family.",
+      "This batch is designed to break the system, not merely probe it."
+    ]
+  }
+}

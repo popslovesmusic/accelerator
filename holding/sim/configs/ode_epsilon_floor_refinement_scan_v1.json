@@ -1,0 +1,243 @@
+{
+  "batch_config": {
+    "name": "ode_epsilon_floor_refinement_scan_v1",
+    "status": "draft_ready_for_agent",
+    "purpose": "Refine around previously identified near-floor candidates to determine whether the floor behaves as a tight oscillatory band, a convergent point, or a parameter-shifting lower bound.",
+    "paper_alignment": {
+      "primary_question": "What is the detailed structure of the near-floor regime in the local epsilon-rho-R system?",
+      "hypothesis_under_test": "Case B: the system approaches a narrow oscillatory band near the floor rather than a static fixed lower bound."
+    },
+    "governance": {
+      "equation_mode": "ode",
+      "experiment_family": "epsilon_floor_refinement",
+      "run_manifest_required": true,
+      "config_snapshot_required": true,
+      "timeseries_global_required": true,
+      "final_summary_required": true,
+      "seed_required": true,
+      "classifier_required": true,
+      "diagnostic_note_required": true
+    },
+    "core_measurement_policy": {
+      "naming_rule": "Do not assign any formal lexical name to derived units or floor quantities in outputs.",
+      "target_quantities": [
+        "epsilon_floor_estimate",
+        "epsilon_last_window_mean",
+        "epsilon_last_window_std",
+        "epsilon_last_window_min",
+        "epsilon_last_window_max",
+        "near_floor_bandwidth",
+        "near_floor_oscillation_amplitude",
+        "time_to_near_floor_window",
+        "delta_epsilon_min_resolved"
+      ]
+    },
+    "global_settings": {
+      "integrator": "rk4",
+      "dt_values": [
+        0.01,
+        0.005,
+        0.0025
+      ],
+      "t_final_values": [
+        120.0,
+        240.0
+      ],
+      "sample_every": 2,
+      "termination_rules": {
+        "runaway_epsilon_threshold": 25.0,
+        "runaway_rho_threshold": 25.0,
+        "nan_or_inf_invalidates_run": true
+      },
+      "near_floor_sampling": {
+        "enabled": true,
+        "window_fraction_of_run": 0.2,
+        "record_dense_samples_near_global_min": true
+      }
+    },
+    "classifier_settings": {
+      "epsilon_collapse_threshold": 0.001,
+      "near_floor_band_relative_threshold": 0.005,
+      "oscillation_amplitude_threshold": 0.002,
+      "runaway_threshold": 25.0,
+      "labels": [
+        "near_floor_convergent",
+        "near_floor_oscillatory",
+        "persistent_above_floor",
+        "runaway",
+        "other_transitional"
+      ]
+    },
+    "required_metrics": [
+      "epsilon_min_observed",
+      "epsilon_argmin_time",
+      "epsilon_last_window_mean",
+      "epsilon_last_window_std",
+      "epsilon_last_window_min",
+      "epsilon_last_window_max",
+      "epsilon_floor_estimate",
+      "near_floor_bandwidth",
+      "near_floor_oscillation_amplitude",
+      "delta_epsilon_min_resolved",
+      "rho_negative_flag"
+    ],
+    "candidate_reference_policy": {
+      "source": "Use the top candidates from the prior floor extraction batch as anchors for refinement.",
+      "agent_rule": "Read epsilon_floor_summary.csv or top_floor_candidate_runs.csv if available and select the lowest epsilon_floor_estimate cases with narrow bandwidths as refinement centers.",
+      "fallback_if_candidate_files_unavailable": "Use the lowest-k, highest-suppression, zero-support parameter combinations from the prior scan as provisional centers."
+    },
+    "initial_condition_families": [
+      {
+        "name": "tiny_epsilon_pressure_favored",
+        "epsilon0": 0.0005,
+        "rho0": 0.25,
+        "R0": 0.0,
+        "notes": "Primary floor-seeking start."
+      },
+      {
+        "name": "small_epsilon_pressure_favored",
+        "epsilon0": 0.001,
+        "rho0": 0.25,
+        "R0": 0.0,
+        "notes": "Perturbation around tiny-epsilon start."
+      },
+      {
+        "name": "micro_perturbation_pair",
+        "epsilon0_pair": [
+          0.0005,
+          0.0006
+        ],
+        "rho0": 0.25,
+        "R0": 0.0,
+        "notes": "Used to estimate whether nearby initial conditions collapse into the same band or remain distinguishable."
+      }
+    ],
+    "seed_policy": {
+      "mode": "fixed_for_deterministic_ode_unless_noise_added",
+      "seeds": [
+        12345
+      ]
+    },
+    "scan_stages": [
+      {
+        "stage_id": "R1_candidate_local_box",
+        "goal": "Perform a tight local parameter box scan around each selected near-floor candidate.",
+        "agent_instruction": "For each selected candidate center, scan \u00b110% around each active parameter using 5-point local spacing.",
+        "refine_parameters": [
+          "k",
+          "beta",
+          "c",
+          "alpha",
+          "gamma",
+          "kappa",
+          "lambda",
+          "v"
+        ],
+        "priority": 1,
+        "expected_value": "Determines whether the candidate floor is locally stable in parameter space or shifts sharply."
+      },
+      {
+        "stage_id": "R2_time_horizon_refinement",
+        "goal": "Extend the horizon to see whether the near-floor band tightens, drifts, or persists.",
+        "vary": {
+          "t_final": [
+            120.0,
+            240.0,
+            480.0
+          ]
+        },
+        "hold_near_best_candidates": true,
+        "priority": 2,
+        "expected_value": "Separates transient apparent floor behavior from sustained near-floor structure."
+      },
+      {
+        "stage_id": "R3_dt_convergence_probe",
+        "goal": "Check whether the near-floor bandwidth is numerical or dynamical.",
+        "vary": {
+          "dt": [
+            0.01,
+            0.005,
+            0.0025,
+            0.00125
+          ]
+        },
+        "hold_near_best_candidates": true,
+        "priority": 3,
+        "expected_value": "If bandwidth shrinks strongly with dt, it may be numerical. If it persists, it is more likely dynamical."
+      },
+      {
+        "stage_id": "R4_micro_ic_resolution_probe",
+        "goal": "Estimate the smallest stable distinguishable increment above the floor candidate.",
+        "vary": {
+          "epsilon0_micro_scan": [
+            0.0004,
+            0.0005,
+            0.0006,
+            0.0008,
+            0.001,
+            0.0015
+          ]
+        },
+        "hold_near_best_candidates": true,
+        "priority": 4,
+        "expected_value": "Supports delta_epsilon_min_resolved estimation and tests whether nearby starts merge into one band."
+      }
+    ],
+    "analysis_rules": {
+      "epsilon_floor_estimate_rule": "Estimate epsilon_floor from the final-window mean when the trajectory remains bounded and non-runaway.",
+      "near_floor_bandwidth_rule": "Compute epsilon_last_window_max - epsilon_last_window_min.",
+      "near_floor_oscillation_amplitude_rule": "Use half the peak-to-peak epsilon amplitude in the final window.",
+      "near_floor_convergent_rule": "If final-window bandwidth and std both shrink below threshold and continue shrinking with longer t_final and smaller dt, classify as near_floor_convergent.",
+      "near_floor_oscillatory_rule": "If final-window bandwidth remains positive and stable under longer t_final and smaller dt, classify as near_floor_oscillatory.",
+      "delta_epsilon_min_resolved_rule": "Estimate from the smallest pair of nearby initial conditions that remain distinguishable in final-window statistics under the same refined parameter set."
+    },
+    "batch_aggregation": {
+      "required_outputs": [
+        "batch_summary.csv",
+        "classification_summary.csv",
+        "epsilon_floor_refinement_summary.csv",
+        "near_floor_band_stability_table.csv",
+        "dt_convergence_table.csv",
+        "ic_resolution_table.csv",
+        "top_refined_floor_candidates.csv",
+        "diagnostic_note.md"
+      ],
+      "required_groupbys": [
+        [
+          "stage_id",
+          "candidate_id",
+          "regime_classification"
+        ],
+        [
+          "dt",
+          "t_final",
+          "regime_classification"
+        ],
+        [
+          "epsilon0_micro_scan",
+          "regime_classification"
+        ]
+      ]
+    },
+    "paper_use_targets": {
+      "minimum_success_conditions": [
+        "At least one near-floor candidate is shown to persist as an oscillatory band or convergent point under refinement.",
+        "dt and horizon sensitivity are explicitly characterized.",
+        "A preliminary estimate of delta_epsilon_min_resolved is produced."
+      ],
+      "target_figures": [
+        "best-candidate time series with final-window highlight",
+        "bandwidth vs dt for top candidate",
+        "bandwidth vs t_final for top candidate",
+        "micro-initial-condition resolution comparison table"
+      ]
+    },
+    "notes_to_agent": [
+      "Prioritize the lowest epsilon_floor_estimate candidates from the previous batch.",
+      "This batch is about characterization, not discovery of entirely new regions.",
+      "If the best candidates remain oscillatory with stable positive bandwidth under smaller dt and longer t_final, explicitly state support for the oscillatory-band hypothesis in diagnostic_note.md.",
+      "Negative rho values must be flagged and not silently treated as physically meaningful.",
+      "All run ids should include stage_id and candidate_id."
+    ]
+  }
+}

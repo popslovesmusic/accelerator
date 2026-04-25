@@ -1,0 +1,26 @@
+# Research Project: The Density-Stability Threshold
+## Hypothesis: Non-Linear Stabilization of Identity via Local Density
+
+### 1. Theoretical Grounding
+Based on Section VI and L10 of "THE LAW OF THE ONE PROCESS":
+- **SS2 Regime:** Weak identity, flickering mismatch, transient residue.
+- **SS3 Regime:** Admissibly stable identity, persistent mismatch trapped by residue.
+- **Section VI.2:** Coupled phase requires multiple -(i) references to sustain structure.
+
+### 2. Formal Hypothesis
+**The Density-Stability Threshold Hypothesis:**
+The stabilization of `identity` ($I$) is a threshold-dependent property of local `density` ($\rho$). In the `agent_based_sim_v1` model, increasing the number of agents within a fixed interaction radius ($R_c$) will trigger a non-linear transition from a 'flickering' regime (SS2), where `residue` ($R$) is transient, to a 'stable' regime (SS3), where $R$ effectively traps the `mismatch` ($\epsilon$) in a persistent invariant neighborhood.
+
+### 3. Canonical Mapping
+- **Density (ρ):** Proxy via `n_agents` within interaction volume defined by `R_c`.
+- **Identity Stability (I):** Measured by the inverse of the variance (Standard Deviation) of the `order_parameter`.
+- **Residue (R):** Quantified as `residue_mean`.
+
+### 4. Experimental Strategy
+- **Tool:** `agent_based_sim_v1` orchestrated by `bifurcation_analyzer_v1`.
+- **Parameter Ramp:** `n_agents` from 10 to 300.
+- **Observation:** Identify a "Critical Density" where `residue_mean` begins monotonic growth and `order_parameter` variance drops.
+- **Humility Note:** This test investigates the behavioral thresholds of the specific `SwarmDynamics` implementation. Results indicate model consistency with the proposed regime laws rather than universal ontological shifts.
+
+### 5. Falsification
+The hypothesis is falsified if `identity` stabilization (low variance in order parameter) is strictly linear with respect to `density`, or if stabilization occurs without the accumulation of persistent `residue`.

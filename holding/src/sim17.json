@@ -1,0 +1,32 @@
+{
+  "sim_name": "sim17_transition_shelf_resolution",
+  "purpose": "Resolve the lower and upper transition shelves that emerged at kappa=0.11 and 0.12 in sim16",
+  "kappa_values": [0.11, 0.12],
+  "execution_mode": "shelf_refinement_mapping",
+  "shared_runtime": {
+    "Nx": 1024,
+    "T_max": 2000,
+    "ics": ["IC0"],
+    "seeds_per_point": 8
+  },
+  "phase_A_lower_shelf": {
+    "goal": "Map the runaway-to-SS3 transition shelf at high resolution",
+    "windows": {
+      "0.11": [0.099, 0.102, 0.0005],
+      "0.12": [0.109, 0.119, 0.0005]
+    }
+  },
+  "phase_B_upper_shelf": {
+    "goal": "Map the SS3-to-SS2 transition shelf at high resolution",
+    "windows": {
+      "0.11": [0.660, 0.670, 0.0005],
+      "0.12": [0.730, 0.760, 0.0005]
+    }
+  },
+  "phase_C_outputs": [
+    "lower_shelf_table",
+    "upper_shelf_table",
+    "shelf_width_table",
+    "transition_regime_notes"
+  ]
+}

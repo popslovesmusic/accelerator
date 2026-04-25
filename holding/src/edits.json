@@ -1,0 +1,337 @@
+{
+  "fix_plan": {
+    "name": "level2_source_fix_priorities_current_state",
+    "goal": "Harden Level 2 native correctness, remove interpretation traps, and align the patch queue with the code as it exists now.",
+    "status_note": "This queue reflects the current repository state after native backend integration, metric cleanup, documented grid convention, native diagnostics, and upgraded front lifecycle tracking.",
+    "priority_scale": {
+      "P0": "must fix before trusting new scientific interpretation",
+      "P1": "should fix before next serious sweep",
+      "P2": "important cleanup / interpretability",
+      "P3": "nice to have"
+    },
+    "already_addressed_or_partially_addressed": [
+      {
+        "id": "A1",
+        "title": "Grid convention clarity",
+        "status": "mostly_done",
+        "notes": [
+          "Grid convention is now documented in pde_solver.py and docs/level2_protocol.md.",
+          "Remaining work, if any, is consistency cleanup in native comments rather than a missing design decision."
+        ]
+      },
+      {
+        "id": "A2",
+        "title": "Front tracking existence",
+        "status": "done_but_needs_refinement",
+        "notes": [
+          "Cross-time front matching and velocity estimation already exist in diagnostics.py.",
+          "Lifecycle metadata has also been added: created, continued, merged, split.",
+          "Remaining work is stronger scientific semantics, not adding front tracking from scratch."
+        ]
+      },
+      {
+        "id": "A3",
+        "title": "Negative undershoot naming cleanup",
+        "status": "partially_done",
+        "notes": [
+          "negative_undershoot_events now exists as the clearer public field.",
+          "The legacy alias nonnegativity_violations is still exposed intentionally for compatibility.",
+          "A later breaking cleanup can remove or deprecate the alias."
+        ]
+      }
+    ],
+    "items": [
+      {
+        "id": "P0_001",
+        "priority": "P0",
+        "title": "Validate state vector sizes against grid.Nx",
+        "files": [
+          "level2_pde_engine.cpp"
+        ],
+        "location_hint": "At start of run(), before any stepping or band construction",
+        "problem": "epsilon, rho, and residue are copied from initial_state but not checked against Nx.",
+        "risk_if_unfixed": "Undefined behavior, corrupted dynamics, misleading results, possible crashes.",
+        "required_change": {
+          "type": "guard_clause",
+          "checks": [
+            "epsilon.size() == grid.Nx",
+            "rho.size() == grid.Nx",
+            "residue.size() == grid.Nx"
+          ],
+          "failure_behavior": "throw std::runtime_error with explicit size report"
+        },
+        "acceptance_criteria": [
+          "Run aborts immediately on malformed initial state",
+          "Error message reports expected Nx and actual sizes for all arrays"
+        ]
+      },
+      {
+        "id": "P0_002",
+        "priority": "P0",
+        "title": "Make invalid-value detection symmetric",
+        "files": [
+          "level2_pde_engine.cpp"
+        ],
+        "location_hint": "invalid-value detection path in the native solver",
+        "problem": "Current logic detects non-finite values and large positive magnitudes, but not large negative magnitudes.",
+        "risk_if_unfixed": "Numerical blow-up can masquerade as physical extinction after clamping.",
+        "required_change": {
+          "type": "logic_update",
+          "replace": "value > invalid_threshold",
+          "with": "std::abs(value) > invalid_threshold"
+        },
+        "acceptance_criteria": [
+          "Large negative excursions trigger invalid-state handling",
+          "No negative blow-up survives into post-clamp interpretation"
+        ]
+      },
+      {
+        "id": "P0_003",
+        "priority": "P0",
+        "title": "Redesign exclusion metric near rho≈0 and low-activity states",
+        "files": [
+          "level2_pybind_module.cpp",
+          "diagnostics.py",
+          "classify.py"
+        ],
+        "location_hint": "node_ratio, exclusion_fraction, front detection, and any logic that assumes epsilon/(rho+delta) is always meaningful",
+        "problem": "epsilon/(rho+1e-9) becomes arbitrarily large when rho collapses, even if both fields are effectively inactive.",
+        "risk_if_unfixed": "False exclusion takeover, inflated sharpness, misleading front width, and distorted classification.",
+        "required_change": {
+          "type": "metric_redesign",
+          "recommended_options": [
+            {
+              "name": "masked_ratio",
+              "definition": "node_ratio = epsilon / max(rho, rho_floor), but classify only where epsilon + rho > activity_floor"
+            },
+            {
+              "name": "bounded_contrast",
+              "definition": "contrast = (epsilon - rho) / (epsilon + rho + floor)"
+            }
+          ],
+          "recommended_defaults": {
+            "rho_floor": 1e-6,
+            "activity_floor": 1e-8
+          },
+          "undefined_low_activity_behavior": "mark node as inactive or undefined and exclude it from exclusion classification"
+        },
+        "acceptance_criteria": [
+          "Low-activity regions no longer auto-count as exclusion-dominated",
+          "A run with rho collapse but vanishing epsilon does not report false full exclusion",
+          "Classification thresholds are revalidated against the revised metric"
+        ]
+      },
+      {
+        "id": "P1_001",
+        "priority": "P1",
+        "title": "Track and report low-activity mask explicitly",
+        "files": [
+          "level2_pybind_module.cpp",
+          "native_backend.py",
+          "batch_runner.py"
+        ],
+        "problem": "Current metrics still conflate meaningful phase competition with dead or nearly empty nodes.",
+        "risk_if_unfixed": "Interpretation of fronts and domain fractions remains ambiguous even after metric redesign.",
+        "required_change": {
+          "type": "new_metrics",
+          "add_fields": [
+            "inactive_fraction",
+            "active_fraction",
+            "excluded_active_fraction",
+            "undefined_ratio_fraction"
+          ]
+        },
+        "acceptance_criteria": [
+          "Summary outputs distinguish active exclusion from extinction or inactive regions"
+        ]
+      },
+      {
+        "id": "P1_002",
+        "priority": "P1",
+        "title": "Strengthen front tracking semantics for scientific interpretation",
+        "files": [
+          "diagnostics.py",
+          "batch_runner.py",
+          "classify.py"
+        ],
+        "problem": "Front tracking exists, but lifecycle semantics remain incomplete for review-grade interpretation.",
+        "risk_if_unfixed": "Merge/split behavior and disappearance events remain harder to analyze rigorously.",
+        "required_change": {
+          "type": "tracking_refinement",
+          "current_state": [
+            "front IDs persist across saved frames",
+            "front velocities are estimated across time",
+            "observed lifecycle fields already include created, continued, merged, split"
+          ],
+          "next_steps": [
+            "decide whether terminated states should be represented explicitly",
+            "tighten merge/split matching semantics if needed",
+            "use lifecycle metadata in classification or summary logic"
+          ]
+        },
+        "acceptance_criteria": [
+          "Traveling and pinned fronts remain easy to identify",
+          "Split and merge behavior is represented consistently in outputs"
+        ]
+      },
+      {
+        "id": "P1_003",
+        "priority": "P1",
+        "title": "Finalize undershoot metric contract",
+        "files": [
+          "level2_pde_engine.cpp",
+          "level2_pybind_module.cpp",
+          "native_backend.py",
+          "docs"
+        ],
+        "problem": "negative_undershoot_events is clearer than the old name, but its behavior is still a per-step event count rather than a true count of negative entries.",
+        "risk_if_unfixed": "Reviewers may still over-interpret the number.",
+        "required_change": {
+          "type": "choose_one",
+          "options": [
+            "Rename again to negative_undershoot_steps_detected",
+            "Implement a true count or richer summary such as count/min/sum_negative_magnitudes"
+          ],
+          "compatibility_note": "nonnegativity_violations is currently a compatibility alias and should only be removed with an explicit deprecation plan"
+        },
+        "acceptance_criteria": [
+          "Metric name fully matches behavior",
+          "Documentation and bindings are aligned"
+        ]
+      },
+      {
+        "id": "P2_001",
+        "priority": "P2",
+        "title": "Harden empty-input handling in metrics",
+        "files": [
+          "level2_pybind_module.cpp"
+        ],
+        "problem": "Several metric paths assume non-empty arrays and can divide by zero or access front/back on malformed input.",
+        "risk_if_unfixed": "Rare crashes or undefined metric behavior on degenerate input.",
+        "required_change": {
+          "type": "guard_clause",
+          "action": "Return safe defaults or throw explicit error on empty arrays"
+        },
+        "acceptance_criteria": [
+          "No divide-by-zero or front/back access on empty inputs"
+        ]
+      },
+      {
+        "id": "P2_002",
+        "priority": "P2",
+        "title": "Expose metric thresholds as named parameters",
+        "files": [
+          "level2_pybind_module.cpp",
+          "native_backend.py",
+          "batch_runner.py"
+        ],
+        "problem": "Thresholds like rho floors, activity floors, and exclusion thresholds are hidden constants.",
+        "risk_if_unfixed": "Results remain harder to calibrate, reproduce, and defend.",
+        "required_change": {
+          "type": "configurability",
+          "add_parameters": [
+            "rho_floor",
+            "activity_floor",
+            "exclusion_threshold",
+            "front_detection_threshold"
+          ]
+        },
+        "acceptance_criteria": [
+          "Thresholds appear in config or run metadata",
+          "Default values are explicit and documented"
+        ]
+      },
+      {
+        "id": "P2_003",
+        "priority": "P2",
+        "title": "Document native-side grid convention inline",
+        "files": [
+          "level2_engine.h",
+          "level2_pde_engine.cpp"
+        ],
+        "problem": "The overall grid convention is documented, but the native-side code still relies on implied meaning.",
+        "risk_if_unfixed": "Future native-only contributors may misread the spatial contract.",
+        "required_change": {
+          "type": "documentation",
+          "action": "Mirror the documented half-open grid convention in native comments near GridConfig and coordinate generation"
+        },
+        "acceptance_criteria": [
+          "Native code comments match the documented Python-side convention"
+        ]
+      },
+      {
+        "id": "P3_001",
+        "priority": "P3",
+        "title": "Make Python wrapper more robust to config object types",
+        "files": [
+          "native_backend.py"
+        ],
+        "problem": "asdict() assumes dataclass inputs.",
+        "risk_if_unfixed": "Wrapper can fail when passed dict-like or model objects.",
+        "required_change": {
+          "type": "interface_hardening",
+          "action": "Accept dataclasses, dicts, or objects with model_dump()/dict()"
+        },
+        "acceptance_criteria": [
+          "Wrapper works across common config container types"
+        ]
+      }
+    ],
+    "execution_order": [
+      "P0_001",
+      "P0_002",
+      "P0_003",
+      "P1_001",
+      "P1_002",
+      "P1_003",
+      "P2_001",
+      "P2_002",
+      "P2_003",
+      "P3_001"
+    ],
+    "minimum_revalidation_after_P0": {
+      "required": true,
+      "tests": [
+        {
+          "name": "malformed_state_size_test",
+          "purpose": "Confirm early abort on size mismatch"
+        },
+        {
+          "name": "negative_blowup_injection_test",
+          "purpose": "Confirm symmetric invalid detection catches large negative values"
+        },
+        {
+          "name": "dead_domain_metric_test",
+          "purpose": "Set epsilon≈0 and rho≈0 everywhere; ensure exclusion-like metrics do not falsely report dominance"
+        },
+        {
+          "name": "rho_collapse_without_epsilon_dominance_test",
+          "purpose": "Verify metric distinguishes extinction from exclusion dominance"
+        }
+      ]
+    },
+    "minimum_revalidation_after_P1": {
+      "required": true,
+      "tests": [
+        {
+          "name": "traveling_front_sanity_case",
+          "purpose": "Check that front velocity and width behave sensibly in a controlled moving-front setup"
+        },
+        {
+          "name": "steady_interface_case",
+          "purpose": "Check near-zero velocity for a stationary interface"
+        },
+        {
+          "name": "split_merge_tracking_case",
+          "purpose": "Check lifecycle metadata remains consistent for front branching behavior"
+        }
+      ]
+    },
+    "decision_rule": {
+      "before_P0_complete": "Do not trust exclusion-dominance interpretation in low-activity regimes and do not trust malformed-input robustness.",
+      "after_P0_complete_before_revalidation": "Treat new results as provisional until metric redesign revalidation is complete.",
+      "after_P0_revalidation": "Allowed to rerun targeted scans with revised metric semantics.",
+      "after_P1_complete": "Allowed to make stronger propagation and domain-interpretation claims."
+    }
+  }
+}

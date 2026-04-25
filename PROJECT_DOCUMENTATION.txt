@@ -1,0 +1,750 @@
+================================================================================
+ACELLORATOR PROJECT DOCUMENTATION
+Consolidated Project-Wide Readmes and Usage Guides
+Generated: 2026-04-25
+================================================================================
+
+--------------------------------------------------------------------------------
+FILE: D:\acellorator\README.md (Project Root)
+--------------------------------------------------------------------------------
+# Linear Particle Accelerator Simulation
+
+Research-oriented Python prototype for a linear particle accelerator simulation with longitudinal tracking and two transverse phase-space planes.
+
+The project emphasizes:
+
+- SI-unit consistency
+- Relativistic particle updates
+- Reproducible seeded beam initialization
+- Two-plane transverse phase-space and emittance diagnostics
+- Linear focusing lenses and aperture loss
+- Structured JSON/CSV outputs
+- Validation against analytic or expected limiting cases
+- Publication-oriented plots when Matplotlib is installed
+
+## Tooling Ecosystem
+
+- `linac_sim`: Standard linear particle accelerator model.
+- `accelerator_sim_v1`: 6D accelerator simulation.
+- `circular_accelerator_sim_v1`: Ring accelerator simulation.
+- `agent_based_sim_v1`: Phase-space swarm simulation for testing local rules, CSI coupling, and event chains.
+- `ca_admissibility_sim_v1`: 2D Cellular Automata for testing discrete admissibility, threshold propagation, and zero logic.
+- `graph_dynamics_sim_v1`: Dynamic network simulation for testing topological causal accessibility, decoupling, and recoupling between domains.
+- `stochastic_sim_v1`: Continuous SDE simulation for testing deviation floors, detection thresholds, and phase packet onset events.
+- `kuramoto_sim_v1`: 1D ring Kuramoto oscillator network for testing phase-locking, synchronization, and shelf regimes.
+- `rd_moving_boundary_sim_v1`: Reaction-Diffusion simulation with moving boundaries for testing dynamic topology, pockets, and corridor formation.
+- `lb_fluid_sim_v1`: 2D Lattice Boltzmann simulation for testing potential flow, coupling channels, and topology-guided motion through erosion.
+- `symplectic_sim_v1`: Hamiltonian phase-space simulation for testing conservation-style dynamics and symplectic integration.
+- `fsa_rule_engine_sim_v1`: Abstract state machine simulation for testing formal admissibility logic, exclusion rules, and residue-gated continuations.
+- `mc_ensemble_sim_v1`: Monte Carlo meta-orchestrator for running parallel parameter sweeps and mapping empirical regime boundaries.
+
+## Quick Start
+
+Run the default proton linac simulation:
+
+```powershell
+python -m linac_sim run
+```
+
+The default run tracks 500 protons through a 20-gap lattice with a 1 MeV initial beam energy.
+
+Run validation checks:
+
+```powershell
+python -m linac_sim validate
+```
+
+Generated files are written to `outputs/` by default.
+
+## Current Model
+
+The simulator tracks longitudinal motion plus two transverse planes. Particles travel along the accelerator axis through a sequence of drift regions, linear focusing lenses, and RF gaps. Each particle stores longitudinal position and momentum, `y/y'`, `z/z'`, kinetic energy, arrival phase diagnostics, and loss status.
+
+The RF field is modeled as:
+
+```text
+E(t) = E0 sin(omega t + phase)
+```
+
+The relativistic momentum update is:
+
+```text
+p(t + dt) = p(t) + q E dt
+v = p / (gamma m)
+gamma = sqrt(1 + (p / mc)^2)
+x(t + dt) = x(t) + v dt
+```
+
+This update preserves the speed limit `v < c` by construction.
+
+The transverse focusing model uses a paraxial linear approximation:
+
+```text
+dp_y / ds = -k_y p_s y
+dp_z / ds = -k_z p_s z
+```
+
+Particles are marked lost when their transverse radius exceeds the configured aperture radius.
+
+## Outputs
+
+Each run writes:
+
+- `metadata.json`: model parameters, seed, component layout, and summary statistics
+- `history.csv`: beam summary over time
+- `particles_final.csv`: final particle-level state
+- `gap_phases.csv`: RF phase diagnostics for particles crossing accelerating gaps
+- `figures/*.png`: optional plots if Matplotlib is installed
+
+Tracked transverse diagnostics include RMS beam size, RMS divergence, geometric RMS emittance, and normalized RMS emittance for both transverse planes, plus RMS radial beam size.
+
+## Limitations
+
+This is still a reduced research model. It includes two transverse planes, simplified linear focusing, and circular aperture loss, but does not yet include full 6D coupled dynamics, space charge, realistic RF cavity field maps, or detailed magnetic lattice modeling.
+
+--------------------------------------------------------------------------------
+FILE: D:\acellorator\mc_ensemble_sim_v1\README.md
+--------------------------------------------------------------------------------
+# Monte Carlo Ensemble Simulator (v1)
+
+This tool is a meta-orchestrator designed to map the parameter space of other simulators in the `acellorator` ecosystem. It runs randomized trials in parallel to identify **regime boundaries** and **probability surfaces**.
+
+## Theoretical Basis
+
+- **Ensemble Mapping:** Instead of a single trajectory, the model explores the statistical ensemble of outcomes across a range of parameters.
+- **Empirical Regime Boundaries:** Uses many trials to find critical transition points (e.g., the onset of synchronization or structural collapse).
+- **Robustness Analysis:** Tests how sensitive a regime (like SS3) is to noise or parameter variation.
+
+## Usage
+
+```powershell
+python mc_runner.py --config configs/sweep_kuramoto.json --out outputs/kuramoto_sweep
+```
+
+## Scan Configuration
+
+The tool expects a JSON file specifying:
+1. `target_script`: Path to the simulator's `sim.py`.
+2. `base_config`: Path to the base JSON for that simulator.
+3. `trials`: Number of Monte Carlo runs.
+4. `scan_params`: Dictionary of parameters to vary, with sampling rules:
+   - `{"type": "uniform", "min": 0, "max": 5}`
+   - `{"type": "choice", "values": [0.1, 0.5, 1.0]}`
+
+## Outputs
+
+- `ensemble_results.csv`: A flattened table containing all input parameters and final metrics for every trial.
+- `regime_map.png`: A scatter plot mapping the scanned parameters against output metrics (if Matplotlib is installed).
+
+--------------------------------------------------------------------------------
+FILE: D:\acellorator\fsa_rule_engine_sim_v1\README.md
+--------------------------------------------------------------------------------
+# Finite-State Automata / Rule Engine Simulation (v1)
+
+This simulation models an **Abstract State Machine** where agents walk a directed graph of discrete states. Transitions (continuations) between states are governed by a strict Boolean **Rule Engine** evaluating admissibility.
+
+## Theoretical Basis
+
+- **Admissible Continuation Set:** Only a subset of possible transitions are allowed based on the system's current configuration and agent history.
+- **Exclusion-by-Rule:** Certain states, like $\epsilon=0$ (perfect symmetry), are explicitly forbidden by the Rule Engine.
+- **Residue-Gated Transitions:** Transitions to "higher order" states may require the agent to have accumulated a specific amount of **Residue** (history/memory).
+- **Continuation Order:** Time is not primitive; it is the order induced by the sequence of admissible continuations.
+
+## Model Logic
+
+### State Graph
+- Nodes: Discrete mismatch levels $S_0, S_1, \dots, S_N$.
+- Edges: Potential transitions between levels.
+
+### Rule Engine
+1. **L0 Rule:** $S_0$ is forbidden. Any edge pointing to $S_0$ is inadmissible.
+2. **Residue Rule:** Transitions to states with index $> M$ require agent `residue` $> \theta$.
+3. **Connectivity Rule:** If no outgoing edge is admissible, the agent halts ("dead end").
+
+## Usage
+
+```powershell
+python sim.py --config configs/default.json --out outputs/fsa_run_01
+```
+
+## Outputs
+
+- `metrics.csv`: Time-series of active agent count and mean residue.
+- `summary.json`: Final distribution of agents across states.
+- `plots/`: Visualization of the state graph colored by agent density (if NetworkX and Matplotlib are installed).
+
+--------------------------------------------------------------------------------
+FILE: D:\acellorator\symplectic_sim_v1\README.md
+--------------------------------------------------------------------------------
+# Hamiltonian / Symplectic Simulation (v1)
+
+This simulation models a Hamiltonian system (Nonlinear Pendulum) using a **Symplectic Integrator** (Leapfrog/Verlet) to study conservation-style dynamics, phase-space structure, and Liouville's theorem.
+
+## Theoretical Basis
+
+- **Hamiltonian Dynamics:** Evolution of states $(q, p)$ where the Hamiltonian $\mathcal{H}$ is conserved.
+- **Symplectic Integration:** Numerical schemes that preserve the symplectic structure of phase space, ensuring no artificial energy drift.
+- **Liouville's Theorem:** Area conservation in phase space.
+- **Phase-Space Buckets:** Stable vs unstable regions (separatrix) in non-linear systems.
+
+## Model Equations
+
+### Hamiltonian (Nonlinear Pendulum)
+$$\mathcal{H}(q, p) = \frac{p^2}{2m} - \kappa \cos(q)$$
+
+### Symplectic Update (Leapfrog)
+1. $p_{n+1/2} = p_n - \frac{\Delta t}{2} \nabla V(q_n)$
+2. $q_{n+1} = q_n + \Delta t \frac{p_{n+1/2}}{m}$
+3. $p_{n+1} = p_{n+1/2} - \frac{\Delta t}{2} \nabla V(q_{n+1})$
+
+## Usage
+
+```powershell
+python sim.py --config configs/default.json --out outputs/symplectic_run_01
+```
+
+## Outputs
+
+- `metrics.csv`: Time-series of mean energy $\mathcal{H}$ and ensemble spread.
+- `summary.json`: Final energy statistics and orbit characterization.
+- `plots/`: Phase-space traces $(q, p)$ and energy conservation plots.
+
+--------------------------------------------------------------------------------
+FILE: D:\acellorator\lb_fluid_sim_v1\README.md
+--------------------------------------------------------------------------------
+# Lattice Boltzmann Fluid-like Simulation (v1)
+
+This simulation implements a 2D Lattice Boltzmann Method (LBM) using the D2Q9 model. It includes dynamic topology through "erosion," where fluid stress can break down solid boundaries, simulating the interaction between the **Load Channel** (fluid) and the **Closure Channel** (constraints).
+
+## Theoretical Basis
+
+- **LBM D2Q9:** A mesoscopic fluid model based on particle distribution functions.
+- **Load Channel ($\Sigma$):** Represented by the active fluid momentum and flow.
+- **Closure Channel ($\rho$):** Represented by the solid boundary constraints.
+- **Dynamic Erosion:** Boundaries are not static; they fail and become part of the flow domain when local stress exceeds a threshold, modeling the evolution of causal corridors.
+
+## Model Equations
+
+### LBM Step
+1. **Collision:** $f_i(x, t+\Delta t) = f_i(x, t) - \frac{1}{\tau} (f_i - f_i^{eq})$
+2. **Streaming:** $f_i(x+e_i\Delta t, t+\Delta t) = f_i(x, t+\Delta t)$
+
+### Erosion Rule
+A boundary cell $(x,y)$ becomes fluid if:
+$$|\mathbf{u}_{neighbor}| \cdot \rho_{neighbor} > \text{Threshold}$$
+
+## Usage
+
+```powershell
+python sim.py --config configs/default.json --out outputs/lb_run_01
+```
+
+## Outputs
+
+- `metrics.csv`: Time-series of fluid volume and mean velocity.
+- `summary.json`: Final parameters and status.
+- `plots/`: Velocity magnitude heatmaps and boundary evolution (if Matplotlib is installed).
+
+--------------------------------------------------------------------------------
+FILE: D:\acellorator\rd_moving_boundary_sim_v1\README.md
+--------------------------------------------------------------------------------
+# Reaction-Diffusion Moving Boundary Simulation (v1)
+
+This simulation models a coupled system where an "admissibility domain" ($D$) and a "signal process" ($S$) co-evolve. The domain itself deforms and moves based on the signal intensity, carves corridors through inert space, and forms isolated pockets.
+
+## Theoretical Basis
+
+- **Moving Boundaries:** The spatial domain of admissibility is dynamic, not fixed.
+- **Corridor Formation:** Channels of admissibility created by the propagation of an active signal.
+- **Dynamic Topology:** The ability of the domain to fracture, merge, and reform based on internal state pressure.
+- **Basins & Pockets:** Stable regions of high signal density that sustain a local domain even when disconnected from the primary source.
+
+## Model Equations
+
+### Domain Evolution (Phase-Field)
+$$\frac{\partial D}{\partial t} = D_{diff} \nabla^2 D + \beta D(1-D)(S - \theta_{growth}) - \gamma D$$
+
+### Signal Diffusion (Channeled)
+$$\frac{\partial S}{\partial t} = \nabla \cdot (D_{S} D \nabla S) + \text{Source} - \alpha S$$
+
+The term $\nabla \cdot (D \nabla S)$ ensures the signal only diffuses within the active domain $D$.
+
+## Usage
+
+```powershell
+python sim.py --config configs/default.json --out outputs/rd_run_01
+```
+
+## Outputs
+
+- `metrics.csv`: Time-series of active domain area and total signal mass.
+- `summary.json`: Final state and configuration summary.
+- `plots/`: Heatmaps showing the co-evolution of the Domain and Signal.
+
+--------------------------------------------------------------------------------
+FILE: D:\acellorator\kuramoto_sim_v1\README.md
+--------------------------------------------------------------------------------
+# Kuramoto Oscillator Network Simulation (v1)
+
+This simulation models a 1D ring of coupled non-linear oscillators to study phase-locking, synchronization, and the emergence of "shelf regimes."
+
+## Theoretical Basis
+
+- **Kuramoto Dynamics:** Oscillators influence each other's phases based on the sine of their phase difference.
+- **Local Coupling (Ring Topology):** Each oscillator only interacts with its immediate left and right neighbors.
+- **Shelf Regimes:** Metastable spatial domains of partial synchronization.
+- **$-(i)$ / Mismatch:** The phase difference at the boundaries of synchronized domains.
+
+## Model Equations
+
+### Governing Equation
+$$d\phi_i/dt = \omega_i + K \sum_{j \in \text{Neighbors}} \sin(\phi_j - \phi_i)$$
+
+For a 1D ring:
+$$d\phi_i/dt = \omega_i + K [\sin(\phi_{i+1} - \phi_i) + \sin(\phi_{i-1} - \phi_i)]$$
+
+## Usage
+
+```powershell
+python sim.py --config configs/default.json --out outputs/kuramoto_run_01
+```
+
+## Outputs
+
+- `metrics.csv`: Time-series of global order parameter and local coherence.
+- `summary.json`: Final state and configuration summary.
+- `plots/`: Spatiotemporal phase heatmaps and order parameter evolution.
+
+--------------------------------------------------------------------------------
+FILE: D:\acellorator\stochastic_sim_v1\README.md
+--------------------------------------------------------------------------------
+# Stochastic Threshold Simulation (v1)
+
+This simulation models an ensemble of states subject to continuous stochastic noise (Langevin dynamics) and deterministic restorative forces. It is designed to study **deviation floors**, **detection thresholds**, and **phase packet onset** events.
+
+## Theoretical Basis
+
+- **Deviation Floor:** The base level of stochastic fluctuation ($\sigma$) that prevents the system from reaching a perfect zero-mismatch state.
+- **Detection Threshold:** A defined barrier in state-space ($x_{\text{thresh}}$).
+- **Phase Packet Onset:** The stochastic crossing of the detection threshold, representing a discrete event emerging from continuous noise.
+- **Kramers Escape:** The simulation tracks the statistics of particles escaping a potential well due to noise.
+
+## Model Equations
+
+### Langevin Dynamics (Overdamped)
+$$dx_i = -\frac{dU}{dx_i} dt + \sigma dW_i$$
+where $U(x)$ is the potential, and $dW$ is a Wiener process.
+
+### Default Potential (Quadratic)
+$U(x) = \frac{1}{2} \kappa x^2$
+
+## Usage
+
+```powershell
+python sim.py --config configs/default.json --out outputs/stochastic_run_01
+```
+
+## Outputs
+
+- `metrics.csv`: Time-series of mean deviation and cumulative detection rate.
+- `summary.json`: Final stats and first-passage time distributions.
+- `plots/`: Trajectory traces and onset histograms (if Matplotlib is installed).
+
+--------------------------------------------------------------------------------
+FILE: D:\acellorator\graph_dynamics_sim_v1\README.md
+--------------------------------------------------------------------------------
+# Dynamic Graph / Network Dynamics Simulation (v1)
+
+This simulation models a network of nodes with internal phase states where the topology itself (edges) is dynamic, governed by local state alignment and stress-based admissibility rules.
+
+## Theoretical Basis
+
+- **Topological CSI:** Causal influence is restricted to the network's adjacency structure.
+- **Decoupling:** Edges are removed if the stress (state difference) between nodes exceeds a threshold.
+- **Recoupling:** New edges form between disconnected nodes if their states align.
+- **Causal Accessibility:** The set of nodes a node can reach depends on the current active topological corridors.
+
+## Model Equations
+
+### Node Phase Update
+$d\phi_i/dt = \omega_i + \frac{K}{N} \sum_{j} A_{ij} \sin(\phi_j - \phi_i)$
+
+### Rewiring Rules
+- **Decouple:** Remove edge $(i, j)$ if $|\sin(\phi_i - \phi_j)| > \theta_{\text{decouple}}$
+- **Recouple:** Add edge $(i, j)$ with probability $P$ if $|\sin(\phi_i - \phi_j)| < \theta_{\text{recouple}}$
+
+## Usage
+
+```powershell
+python sim.py --config configs/default.json --out outputs/graph_run_01
+```
+
+## Outputs
+
+- `metrics.csv`: Time-series of graph connectivity metrics (avg degree, connected components).
+- `summary.json`: Final state and configuration.
+- `plots/`: Visualizations of the network graph (if NetworkX and Matplotlib are installed).
+
+--------------------------------------------------------------------------------
+FILE: D:\acellorator\ca_admissibility_sim_v1\README.md
+--------------------------------------------------------------------------------
+# Cellular Automata Admissibility Simulation (v1)
+
+This simulation implements a 2D Continuous Threshold Cellular Automata designed to test the concepts of **Admissibility** and **Zero Logic** as defined in "THE LAW OF THE ONE PROCESS."
+
+## Theoretical Basis
+
+- **Zero is not Absence:** A cell with a value of 0 is not "empty" but represents perfect symmetry.
+- **Admissibility:** A cell only updates its state if the gradient (difference) from its neighbors exceeds its internal **Residue** threshold.
+- **Residue ($R$):** An internal threshold that grows when a cell is active (admissible) and decays when it is inert (decoupled).
+
+## Model Equations
+
+### Admissibility Condition
+An update to cell $(i,j)$ is admissible at time $t$ if:
+$$\Delta_{i,j}(t) > R_{i,j}(t)$$
+where $\Delta_{i,j}$ is the local mismatch gradient (sum of differences with neighbors).
+
+### Update Law
+If admissible:
+$$\epsilon_{i,j}(t+1) = \epsilon_{i,j}(t) + D \cdot \text{Laplacian}(\epsilon)_{i,j}$$
+If not admissible:
+$$\epsilon_{i,j}(t+1) = \epsilon_{i,j}(t)$$
+
+### Residue Evolution
+$$R_{i,j}(t+1) = R_{i,j}(t) \cdot (1 - \gamma_R) + \delta_R \cdot \text{ActiveMask}_{i,j}$$
+
+## Usage
+
+```powershell
+python sim.py --config configs/default.json --out outputs/ca_run_01
+```
+
+## Outputs
+
+- `metrics.csv`: Time-series of active cell fraction and mean mismatch.
+- `summary.json`: Final parameters and status.
+- `snapshots/`: Heatmaps of the $\epsilon$ and $R$ fields (if Matplotlib is installed).
+
+--------------------------------------------------------------------------------
+FILE: D:\acellorator\agent_based_sim_v1\README.md
+--------------------------------------------------------------------------------
+# Agent-Based Phase-Space Swarm Simulation (v1)
+
+This simulator implements a **Phase-Space Swarm** model where agents possess both physical trajectories and internal states. It is specifically designed to study the emergence of global constraints from local interactions, as described in "THE LAW OF THE ONE PROCESS."
+
+## 1. Theoretical Framework
+
+Agents in this model represent processes governed by:
+- **CSI (Causal Sphere of Influence):** Interaction is local. Two agents $i$ and $j$ only interact if their phase-space distance $d_{ij} = \sqrt{(x_i-x_j)^2 + (p_i-p_j)^2}$ is less than the radius $R_c$.
+- **Phase Locking:** Agents attempt to synchronize their internal phases ($\phi$) with their neighbors within their CSI.
+- **Mismatch ($\epsilon$):** Represents local deviation or "stress." Mismatch grows naturally but is relaxed when the agent is phase-locked with its neighbors.
+- **Residue ($R$):** The historical integration of mismatch, representing the accumulated "trace" of past constraints.
+
+## 2. Getting Started
+
+### Prerequisites
+- Python 3.8+
+- `numpy`, `pandas` (required for simulation and logging)
+- `matplotlib` (optional, for generating plots)
+
+### Quick Run
+Execute the default simulation (100 agents, 1000 steps):
+```powershell
+python sim.py --config configs/default.json --out outputs/my_first_run
+```
+
+## 3. Configuration Guide
+
+The simulator is driven by JSON configuration files. Key parameters include:
+
+| Parameter | Description |
+| :--- | :--- |
+| `n_agents` | Total number of agents in the swarm. |
+| `steps` | Number of integration steps. |
+| `dt` | Time step for RK4 integration. |
+| `R_c` | **Causal Radius.** The distance threshold for interactions. |
+| `K_phi` | **Coupling Strength.** How strongly agents align their phases. |
+| `kappa` | Harmonic confinement strength (keeps the swarm from drifting to infinity). |
+| `omega_mean` / `std` | The natural frequency distribution of the agents' internal oscillators. |
+| `mismatch_rate` | Rate at which internal mismatch grows. |
+| `initial_distribution` | `"gaussian"` for a single cluster, or `"two_clusters"` for isolation testing. |
+
+## 4. Pre-defined Experimental Scenarios
+
+We have provided several configurations to demonstrate different regimes:
+
+- **`configs/default.json`**: Standard coupled swarm. Shows rapid phase-locking and steady residue growth.
+- **`configs/no_coupling.json`**: Sets $K_{\phi} = 0$. Useful for verifying that global coherence does not emerge without interaction.
+- **`configs/csi_isolation.json`**: Places two clusters far apart. Demonstrates that phase-locking is local; the two groups will not synchronize with each other if $d > R_c$.
+- **`configs/event_chain_trigger.json`**: Low $R_c$ and high $K_{\phi}$. Designed to show a "cascade" or event chain where phase alignment propagates through the swarm like a wave.
+
+## 5. Interpreting Outputs
+
+Results are saved in the directory specified by `--out`:
+
+- **`metrics.csv`**: Time-series data including:
+    - `order_parameter`: Global phase coherence (0 to 1).
+    - `local_coherence_mean`: Average coherence between neighbors within their CSI.
+    - `residue_mean`: Average accumulated trace across the swarm.
+- **`summary.json`**: Final state snapshot and a copy of the configuration used.
+- **`plots/`** (if Matplotlib is installed):
+    - `evolution.png`: Trends for order parameter and residue.
+    - `phase_space.png`: Scatter plot of agents in $(x, p)$ colored by their internal phase $\phi$.
+
+## 6. Execution Command Reference
+
+```powershell
+# Basic execution
+python sim.py --config configs/default.json --out outputs/run_name
+
+# Test isolation behavior
+python sim.py --config configs/csi_isolation.json --out outputs/isolation_test
+
+# Observe a cascading event chain
+python sim.py --config configs/event_chain_trigger.json --out outputs/cascade
+```
+
+--------------------------------------------------------------------------------
+FILE: D:\acellorator\circular_accelerator_sim_v1\README.md
+--------------------------------------------------------------------------------
+# Simple Circular 6D Accelerator Simulation
+
+CPU-first reduced circular accelerator simulation for the Optiplex target.
+
+The state vector is:
+
+```text
+x, px, y, py, z, delta
+```
+
+The simulator tracks particles turn by turn through a repeated ring lattice. The longitudinal coordinate `z` is wrapped into one circumference after every turn.
+
+## Run
+
+From this directory:
+
+```powershell
+python ring_sim.py --config configs/optiplex_ring_default.json --out outputs/ring_default
+```
+
+Stretch run:
+
+```powershell
+python ring_sim.py --config configs/optiplex_ring_stretch.json --out outputs/ring_stretch
+```
+
+## Model
+
+Included:
+
+- Gaussian 6D bunch initialization
+- Alive mask for particle loss
+- Repeated ring lattice
+- Drift elements
+- Linear quadrupole elements
+- Simple sinusoidal RF cavity kick to `delta`
+- Linear momentum-compaction slip applied once per turn
+- Circular aperture loss using `x^2 + y^2 > radius^2`
+- Turn-level metrics CSV
+- Summary JSON
+- Compressed NPZ snapshots at configurable turn intervals
+
+Excluded for now:
+
+- Radiation damping
+- Quantum excitation
+- Space charge
+- Wakefields
+- Real RF or magnetic field maps
+- Full nonlinear coupled ring dynamics
+- Detailed collimation physics
+
+## Outputs
+
+Each run writes:
+
+- `turn_metrics.csv`: per-turn aggregate beam metrics
+- `summary.json`: final summary, runtime, model limits, and final metrics
+- `snapshots/*.npz`: compressed particle state and alive mask snapshots
+- `figures/*.png`: optional plots if Matplotlib is installed
+
+## Notes
+
+This is a circular counterpart to the simple linear 6D simulator. It is intentionally simple and should be treated as a reduced model for software development, diagnostics, and early research writing, not as a validated storage-ring physics engine.
+
+--------------------------------------------------------------------------------
+FILE: D:\acellorator\accelerator_sim_v1\README.md
+--------------------------------------------------------------------------------
+# Simple 6D Accelerator Simulation
+
+CPU-first reduced accelerator simulation for the Dell Optiplex target.
+
+The state vector is:
+
+```text
+x, px, y, py, z, delta
+```
+
+This is a simple research model, not a replacement for a production accelerator code. It is designed to be readable, reproducible, and expandable.
+
+## Run
+
+From this directory:
+
+```powershell
+python sim.py --config configs/optiplex_default.json --out outputs/run_default
+```
+
+Stretch run:
+
+```powershell
+python sim.py --config configs/optiplex_stretch.json --out outputs/run_stretch
+```
+
+## Model
+
+Included:
+
+- Gaussian 6D bunch initialization
+- Alive mask for particle loss
+- Drift elements
+- Linear quadrupole elements
+- Simple sinusoidal RF cavity kick to `delta`
+- Circular aperture loss using `x^2 + y^2 > radius^2`
+- Metrics CSV
+- Summary JSON
+- Compressed NPZ snapshots at a configurable interval
+
+Excluded for now:
+
+- Space charge
+- Wakefields
+- Real RF or magnetic field maps
+- Full nonlinear coupled dynamics
+- Synchrotron radiation
+- Detailed collimation physics
+
+## Outputs
+
+Each run writes:
+
+- `metrics.csv`: per-step aggregate beam metrics
+- `summary.json`: final summary, configuration identity, runtime, and model limits
+- `snapshots/*.npz`: compressed particle state and alive mask snapshots
+- `figures/*.png`: optional plots if Matplotlib is installed
+
+The simulator intentionally avoids saving every particle at every step.
+
+## Metrics
+
+Tracked metrics include:
+
+- `alive_count`
+- `survival_fraction`
+- `x_mean`, `x_rms`
+- `y_mean`, `y_rms`
+- `z_mean`, `z_rms`
+- `delta_mean`, `delta_rms`
+- `px_rms`, `py_rms`
+- `emittance_proxy_x`
+- `emittance_proxy_y`
+
+## Notes
+
+The default config uses 10,000 particles and 1,000 steps. The stretch config uses 50,000 particles and the same number of steps. Both are intended to run without GPU support.
+
+--------------------------------------------------------------------------------
+FILE: D:\acellorator\Simulation_engines_extracted_2026-04-25\dase_cli\QUICKSTART.txt
+--------------------------------------------------------------------------------
+================================================================================
+                        DASE CLI QUICK START GUIDE
+================================================================================
+
+IMPORTANT: JSON commands must be on a SINGLE LINE (no pretty-printing)!
+
+--------------------------------------------------------------------------------
+WINDOWS COMMAND PROMPT
+--------------------------------------------------------------------------------
+
+  Run from file:
+    type mission_short_corrected.json | dase_cli.exe
+
+  Using batch script:
+    run_mission.bat mission_short_corrected.json
+
+--------------------------------------------------------------------------------
+POWERSHELL
+--------------------------------------------------------------------------------
+
+  Get-Content mission_short_corrected.json | .\dase_cli.exe
+
+--------------------------------------------------------------------------------
+GIT BASH / LINUX
+--------------------------------------------------------------------------------
+
+  cat mission_short_corrected.json | ./dase_cli.exe
+
+--------------------------------------------------------------------------------
+EXAMPLE COMMANDS (single line JSON)
+--------------------------------------------------------------------------------
+
+Create Engine:
+{"command":"create_engine","params":{"engine_type":"phase4b","num_nodes":2048}}
+
+Run Mission:
+{"command":"run_mission","params":{"engine_id":"engine_001","num_steps":2000,"iterations_per_node":20}}
+
+Get Metrics:
+{"command":"get_metrics","params":{"engine_id":"engine_001"}}
+
+List All Engines:
+{"command":"list_engines","params":{}}
+
+Destroy Engine:
+{"command":"destroy_engine","params":{"engine_id":"engine_001"}}
+
+--------------------------------------------------------------------------------
+EXAMPLE FILES PROVIDED
+--------------------------------------------------------------------------------
+
+  mission_short_corrected.json  - Phase 4B engine example (AVX2 optimized)
+  mission_igsoa_complex.json    - IGSOA Complex engine example
+  examples.json                 - All commands demonstrated
+
+--------------------------------------------------------------------------------
+CONVERTING PRETTY-PRINTED JSON
+--------------------------------------------------------------------------------
+
+  python minify_json.py input.json output.json
+
+--------------------------------------------------------------------------------
+COMMON ISSUES
+--------------------------------------------------------------------------------
+
+  ❌ "JSON parse error"
+     → File is pretty-printed (multi-line). Must be single-line!
+     → Use minify_json.py to convert
+
+  ❌ "Missing 'command' field"
+     → Windows echo adds extra quotes
+     → Use 'type' command instead
+
+  ❌ "The system cannot find the file"
+     → Check you're in dase_cli directory: cd dase_cli
+     → Use .\dase_cli.exe (with dot-slash)
+
+  ⚠️  Segfault on exit
+     → Known issue - happens AFTER all commands complete
+     → Doesn't affect results - all data is correct
+     → Hide with: 2>nul (cmd) or 2>/dev/null (bash)
+
+--------------------------------------------------------------------------------
+PERFORMANCE EXPECTATIONS
+--------------------------------------------------------------------------------
+
+  Phase 4B Engine:    0.17-0.33 ns/op, 3-5 billion ops/sec, 50,000-85,000x
+  IGSOA Complex:      ~25 ns/op, 39 million ops/sec
+
+================================================================================
+

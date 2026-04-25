@@ -1,0 +1,133 @@
+{
+  "source_repo": "D:\\acellorator\\Simulation",
+  "extracted_to": "D:\\acellorator\\Simulation_engines_extracted_2026-04-25",
+  "cpp_source_root": "src/cpp",
+  "cli": [
+    {
+      "id": "dase_cli_json",
+      "name": "DASE strict JSON CLI",
+      "purpose": "Headless JSON interface for engine lifecycle, missions, state extraction, and analysis routing.",
+      "files": [
+        "dase_cli/src/main.cpp",
+        "dase_cli/src/command_router.h",
+        "dase_cli/src/command_router.cpp",
+        "dase_cli/src/engine_manager.h",
+        "dase_cli/src/engine_manager.cpp",
+        "dase_cli/src/analysis_router.h",
+        "dase_cli/src/analysis_router.cpp",
+        "dase_cli/src/engine_fft_analysis.h",
+        "dase_cli/src/engine_fft_analysis.cpp",
+        "dase_cli/src/python_bridge.h",
+        "dase_cli/src/python_bridge.cpp",
+        "dase_cli/src/json.hpp",
+        "dase_cli/src/json_helper.h",
+        "dase_cli/src/metric_emitter.h"
+      ],
+      "cmake_targets": [
+        "dase_cli_analysis_integration",
+        "dase_cli_json"
+      ],
+      "runtime_notes": [
+        "Loads dase_engine_phase4b.dll or dase_engine.dll via LoadLibrary on Windows.",
+        "When DASE_BUILD_JULIA_DLLS=ON, extracted root CMake copies engine DLLs next to dase_cli_json after build."
+      ]
+    }
+  ],
+  "build_files": [
+    "CMakeLists.txt"
+  ],
+  "external_runtime_deps": [
+    "FFTW3 (libfftw3-3.lib + fftw3.h; libfftw3-3.dll for runtime on Windows)"
+  ],
+  "engines": [
+    {
+      "id": "dase_analog_avx2",
+      "name": "D-ASE Analog Engine (AVX2)",
+      "purpose": "High-performance analog node/cellular engine with AVX2, OpenMP, FFTW; includes C API (FFI) and optional Python bindings.",
+      "files": [
+        "src/cpp/analog_universal_node_engine_avx2.h",
+        "src/cpp/analog_universal_node_engine_avx2.cpp",
+        "src/cpp/dase_capi.h",
+        "src/cpp/dase_capi.cpp",
+        "src/cpp/python_bindings.cpp",
+        "src/cpp/fftw_wisdom_cache.hpp"
+      ],
+      "interfaces": [
+        "C++ API (AnalogCellularEngineAVX2 / AnalogUniversalNodeAVX2)",
+        "C API (dase_capi.h)",
+        "Python bindings source (pybind11) present but not built by CMake"
+      ]
+    },
+    {
+      "id": "igsoa_complex",
+      "name": "IGSOA Complex Lattice Engines (1D/2D/3D)",
+      "purpose": "Complex psi + real phi lattice dynamics with non-local coupling, informational density, entropy-rate, phase diagnostics; C APIs for 1D and 2D provided.",
+      "files": [
+        "src/cpp/igsoa_complex_node.h",
+        "src/cpp/igsoa_complex_engine.h",
+        "src/cpp/igsoa_physics.h",
+        "src/cpp/igsoa_complex_engine_2d.h",
+        "src/cpp/igsoa_physics_2d.h",
+        "src/cpp/igsoa_state_init_2d.h",
+        "src/cpp/igsoa_complex_engine_3d.h",
+        "src/cpp/igsoa_physics_3d.h",
+        "src/cpp/igsoa_state_init_3d.h",
+        "src/cpp/igsoa_capi.h",
+        "src/cpp/igsoa_capi.cpp",
+        "src/cpp/igsoa_capi_2d.h",
+        "src/cpp/igsoa_capi_2d.cpp",
+        "src/cpp/igsoa_status.h",
+        "src/cpp/spatial_hash.h",
+        "src/cpp/kernel_cache.h",
+        "src/cpp/neighbor_cache.h",
+        "src/cpp/utils/logger.h",
+        "src/cpp/utils/logger.cpp"
+      ],
+      "interfaces": [
+        "C++ APIs (IGSOAComplexEngine*, IGSOAPhysics*)",
+        "C API (igsoa_capi.h, igsoa_capi_2d.h)"
+      ]
+    },
+    {
+      "id": "satp_higgs",
+      "name": "SATP+Higgs Coupled Field Engines (1D/2D/3D)",
+      "purpose": "Coupled phi/h wave-equation evolution with velocity Verlet integration; includes initialization helpers for vacuum and Gaussian profiles.",
+      "files": [
+        "src/cpp/satp_higgs_engine_1d.h",
+        "src/cpp/satp_higgs_physics_1d.h",
+        "src/cpp/satp_higgs_state_init_1d.h",
+        "src/cpp/satp_higgs_engine_2d.h",
+        "src/cpp/satp_higgs_physics_2d.h",
+        "src/cpp/satp_higgs_state_init_2d.h",
+        "src/cpp/satp_higgs_engine_3d.h",
+        "src/cpp/satp_higgs_physics_3d.h",
+        "src/cpp/satp_higgs_state_init_3d.h"
+      ],
+      "interfaces": [
+        "Header-based C++ APIs (SATPHiggsEngine1D/2D/3D)"
+      ]
+    },
+    {
+      "id": "igsoa_gw_core",
+      "name": "IGSOA Gravitational Wave Engine (Core)",
+      "purpose": "Symmetry field evolution with fractional solver, binary merger sources, projection operators, and echo generation; built by CMake as igsoa_gw_core.",
+      "files": [
+        "src/cpp/igsoa_gw_engine/core/symmetry_field.h",
+        "src/cpp/igsoa_gw_engine/core/symmetry_field.cpp",
+        "src/cpp/igsoa_gw_engine/core/fractional_solver.h",
+        "src/cpp/igsoa_gw_engine/core/fractional_solver.cpp",
+        "src/cpp/igsoa_gw_engine/core/source_manager.h",
+        "src/cpp/igsoa_gw_engine/core/source_manager.cpp",
+        "src/cpp/igsoa_gw_engine/core/projection_operators.h",
+        "src/cpp/igsoa_gw_engine/core/projection_operators.cpp",
+        "src/cpp/igsoa_gw_engine/core/echo_generator.h",
+        "src/cpp/igsoa_gw_engine/core/echo_generator.cpp",
+        "src/cpp/utils/logger.h",
+        "src/cpp/utils/logger.cpp"
+      ],
+      "interfaces": [
+        "C++ APIs (SymmetryField, FractionalSolver, BinaryMerger, ProjectionOperators, EchoGenerator)"
+      ]
+    }
+  ]
+}

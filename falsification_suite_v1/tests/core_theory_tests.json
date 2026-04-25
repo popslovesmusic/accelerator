@@ -1,0 +1,39 @@
+{
+  "tests": [
+    {
+      "name": "No Coupling -> No Synch (Kuramoto)",
+      "target_script": "../kuramoto_sim_v1/sim.py",
+      "base_config": "../kuramoto_sim_v1/configs/default.json",
+      "overrides": {
+        "K": 0.0,
+        "steps": 500
+      },
+      "assertions": [
+        "order_parameter < 0.2"
+      ]
+    },
+    {
+      "name": "Low Noise Trapping (Stochastic)",
+      "target_script": "../stochastic_sim_v1/sim.py",
+      "base_config": "../stochastic_sim_v1/configs/default.json",
+      "overrides": {
+        "sigma": 0.01,
+        "steps": 500
+      },
+      "assertions": [
+        "crossing_fraction == 0.0"
+      ]
+    },
+    {
+      "name": "Zero Mismatch -> Inert (CA)",
+      "target_script": "../ca_admissibility_sim_v1/sim.py",
+      "base_config": "../ca_admissibility_sim_v1/configs/zero_logic_check.json",
+      "overrides": {
+        "steps": 100
+      },
+      "assertions": [
+        "active_fraction == 0.0"
+      ]
+    }
+  ]
+}
