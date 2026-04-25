@@ -1,0 +1,688 @@
+{
+  "charter_version": "2.3",
+  "name": "Strict Procedural Monism Compliance Charter",
+  "status": "active",
+  "role": "compliance_validator_translation_governor_and_data_provenance_authority",
+  "supersedes": ["2.2a", "2.2", "2.1", "2.0", "1.5a"],
+
+  "scope_note": "This charter is the governance and translation authority for the Strict Procedural Monism framework. It governs compliance of all document claims, translation of all terminology, and — new in v2.3 — data provenance for all empirical assertions. No empirical claim may appear in any document without a recoverable source file. The evaluation pipeline, simulation requirements, and data provenance rules operate across all documents using this charter as their reference authority.",
+
+  "version_notes": {
+    "ground_zero_declaration": "All prior simulation data is unrecoverable. All prior documents are therefore invalid as sources of empirical support. Prior run summaries and run specs are preserved as design guidance for the rerun program only — they are prior findings from lost data, not verified results. No claim from prior documents carries forward as established. Every empirical claim in every new document must cite a recoverable file produced under the v2.3 schema. The rerun program (sim6 onward) is the sole source of verified empirical results.",
+    "2.3_changes_from_2.2a": [
+      "Added data_provenance_requirements as a core section — new in v2.3, not an annex.",
+      "Added process indifference to temporal ordering to core_axioms.",
+      "Added transversal as topology-writing mechanism to primary_identities.",
+      "Refined time identity to local-readout character.",
+      "Added shelf regime to regime_registry as confirmed-pending-rerun.",
+      "Added shelf to stable_anchors — confirmed in lost sim17, pending rerun confirmation.",
+      "Added five new provisional hypotheses from input26/28 program.",
+      "Added provisional parameters: phi, I_phi, Omega, R_A, R_Pi.",
+      "Added relational_Delta as provisional distinct from Delta-as-mismatch.",
+      "Added phase_inversion_governance compliance rule.",
+      "Added orientation_manifold replacement rule.",
+      "Added reference_process_expression governance.",
+      "Extended fold definition to constraint-driven reconfiguration.",
+      "Added shelf and corridor_control_structure to translation_index.",
+      "Added QGP empirical correspondence entry to translation_index.",
+      "Added I_phi_inverted_variant to formal_binding_registry.",
+      "Added prior_findings_register as distinct from verified results."
+    ]
+  },
+
+  "data_provenance_requirements": {
+    "core_rule": "No empirical claim may appear in any document without a recoverable source file produced under the v2.3 metric schema.",
+    "claim_classification": {
+      "verified": {
+        "definition": "Supported by a recoverable CSV or output file produced by the rerun program under v2.3 schema. File path and batch ID must be citable.",
+        "document_treatment": "May be stated as established fact with citation."
+      },
+      "prior_finding": {
+        "definition": "Conclusion from simulation data that no longer exists. Source was lost before ground-zero declaration. May be supported by run summaries or run specs but not by recoverable files.",
+        "document_treatment": "Must be tagged [PRIOR FINDING — pending rerun]. May inform rerun design but may not be cited as established result. Treated as hypothesis until rerun produces verified equivalent.",
+        "examples": [
+          "SS3 confirmed at kappa=0.05, lambda=0.042-0.045 — prior finding, pending sim8 rerun",
+          "Shelf regime at kappa=0.11-0.12 — prior finding, pending sim17 rerun",
+          "Lower SS3 edge lambda=0.041 runaway, lambda=0.042 entry — prior finding, pending sim9 rerun"
+        ]
+      },
+      "theoretical": {
+        "definition": "Derived from the PDE system, compliance framework, or mathematical argument. Not dependent on simulation data.",
+        "document_treatment": "May be stated as derived result with derivation reference. No file citation required."
+      },
+      "provisional": {
+        "definition": "Conjectured but not yet verified by theory or simulation. Includes all input26/28 program concepts pending sim18-sim24.",
+        "document_treatment": "Must be tagged [PROVISIONAL — verification pending simNN]. May not be stated as established."
+      }
+    },
+    "file_citation_format": "sim_id | batch_id | YYYY-MM-DD | filepath",
+    "schema_freeze_requirement": "All rerun batches must emit the v2.3 metric schema defined in annex_B before results may be cited in documents. Results produced under earlier schemas are prior findings, not verified results.",
+    "prior_findings_register": {
+      "note": "The following are conclusions from the lost simulation record. Each is a prior finding — design guidance for the rerun program, not a citable result. Status updates to verified when the corresponding rerun produces a recoverable file.",
+      "entries": [
+        {
+          "finding": "Three-regime bridge structure exists at kappa=0.05",
+          "source": "sim6/sim7 summaries",
+          "status": "prior_finding",
+          "rerun_target": "sim6, sim7",
+          "verification_condition": "Bridge structure reproduced with recoverable CSV under v2.3 schema"
+        },
+        {
+          "finding": "SS3 confirmed: stable interface at T_max=2000, resolution-invariant at Nx=1024, finite lambda band approximately 0.042-0.045 at kappa=0.05",
+          "source": "sim8 summary",
+          "status": "prior_finding",
+          "rerun_target": "sim8",
+          "verification_condition": "mean_final_interface_count=1.0 reproduced with recoverable CSV"
+        },
+        {
+          "finding": "Lower SS3 edge: lambda=0.041 runaway side, lambda=0.042 SS3 entry at kappa=0.05",
+          "source": "sim9/input20 summaries",
+          "status": "prior_finding",
+          "rerun_target": "sim9",
+          "verification_condition": "Edge brackets reproduced with recoverable CSV"
+        },
+        {
+          "finding": "SS2 regime: rho=alpha/gamma, epsilon~0, R~0, exclusion_fraction=0.0 at lambda=0.25, kappa=0.0005",
+          "source": "Batch 6 summary",
+          "status": "prior_finding",
+          "rerun_target": "SS2_anchor rerun",
+          "verification_condition": "SS2 state reproduced with recoverable CSV"
+        },
+        {
+          "finding": "Shelf regime at kappa=0.11 and 0.12: finite-width seed-unanimous other intervals, five-layer geometry, thickness increases with kappa",
+          "source": "sim17 summary",
+          "status": "prior_finding",
+          "rerun_target": "sim16, sim17",
+          "verification_condition": "Shelf intervals reproduced with recoverable CSV under v2.3 schema"
+        },
+        {
+          "finding": "Phase surface steeply directional in kappa near kappa=0.05: at kappa=0.04 sampled band entirely mixed, at kappa=0.06 entirely runaway",
+          "source": "sim12 summary",
+          "status": "prior_finding",
+          "rerun_target": "sim12",
+          "verification_condition": "Directional character reproduced with recoverable CSV"
+        },
+        {
+          "finding": "SRC proxy negative case: D_sr~0, K=0 in SS2 regime",
+          "source": "Batch 6 summary",
+          "status": "prior_finding",
+          "rerun_target": "SS2_anchor rerun",
+          "verification_condition": "Proxy values reproduced with recoverable CSV"
+        }
+      ]
+    }
+  },
+
+  "core_axioms": {
+    "one_process": {
+      "statement": "There exists only one process. All observed structure is phase expression of that process.",
+      "sharpening_v2_3": "The process is indifferent to temporal ordering. Temporal ordering is a local readout of stabilized phase expression — a property of continuation regimes, not of the process itself. Each stabilized continuation regime carries local temporal orientation as an intrinsic feature of its phase expression. The process beneath is neutral."
+    },
+    "not_axiom": {
+      "statement": "Incompatibility under continuation is required. No incompatible continuation is admissible.",
+      "operational_form": "Exclusion rate (k) > 0 at any actualized domain boundary.",
+      "implication": "Zero-state or perfect symmetry is non-continuable; structure requires maintained distinguishability.",
+      "necessity_argument": "k = 0 everywhere would require every continuation to pass every alignment test across every boundary simultaneously — the definition of undifferentiated symmetry, which cannot sustain structure or be occupied by anything capable of making the observation. The necessity is structural, not imposed.",
+      "name_note": "The name NOT Axiom carries historical logical-negation connotations that the process content does not require. Retained as shorthand only. Preferred in new writing: exclusion necessity condition or k > 0 condition."
+    }
+  },
+
+  "primary_identities": {
+    "deviation": "Phase Mismatch ≡ Δ",
+    "exclusion": "Operational expression of the NOT axiom (alignment failure).",
+    "identity": "Recurrence stability under constraint.",
+    "time": "Local readout of stabilized phase expression under accumulated constraint. The process itself is temporally indifferent; temporal direction is a property of stabilized continuation regimes, not of the process. Prior formulation 'oriented continuation of phase regimes under accumulated constraint' remains correct at the regime level but must not be read as implying the process has a temporal preference.",
+    "topology_origin": "Constraint topology is written by transversal — the trace of continuation crossing domain boundaries. It is not imposed externally or assumed as a prior container. Topology accumulates as residue of transversal and in turn constrains subsequent continuation."
+  },
+
+  "field_definitions": {
+    "epsilon": {
+      "symbol": "ε",
+      "label": "exclusion_expression",
+      "definition": "Active manifestation of the NOT axiom; where continuation is denied."
+    },
+    "rho": {
+      "symbol": "ρ",
+      "label": "continuation_capacity",
+      "definition": "Underlying process capacity available for sustainment."
+    },
+    "residue": {
+      "symbol": "R",
+      "label": "topology_residue",
+      "definition": "Accumulated topological change written by mismatch history."
+    }
+  },
+
+  "operators": {
+    "Delta": {
+      "symbol": "Δ",
+      "definition": "Phase mismatch between co-referent projections.",
+      "mandatory_replacement_for": ["subtraction", "difference", "gradient-as-primitive"],
+      "collision_note": "The holographic formulation (provisional, sim23-pending) uses Delta = phi - rho as relational phase. This is a distinct use. To avoid collision, the holographic quantity is registered separately as relational_Delta below and must not be written as bare Δ in documents until the collision is formally resolved."
+    },
+    "relational_Delta": {
+      "symbol": "Δ_rel",
+      "label": "relational_phase",
+      "definition": "Relational phase between process expression and reference process expression: Δ_rel = φ - ρ_ref. Distinct from Δ (mismatch operator). Provisional — pending sim23 verification and formal identification of reference process expression with -(i) alignment condition.",
+      "status": "provisional",
+      "verification_target": "sim23"
+    }
+  },
+
+  "parameters": {
+    "k": {
+      "label": "exclusion_rate",
+      "definition": "Frequency of alignment failure events (E/C). Replaces old λ usage.",
+      "formal_relation": "k = a + uR",
+      "migration_note": "In v1.3 this role was held by λ. Symbol reassigned in v2.1. Any document using λ as exclusion rate is operating under deprecated convention."
+    },
+    "kappa": {
+      "symbol": "κ",
+      "label": "topology_writing_rate",
+      "definition": "Rate at which mismatch/exclusion is written into residue (inscription strength)."
+    },
+    "lambda": {
+      "symbol": "λ",
+      "label": "topology_persistence",
+      "definition": "Residue decay/relaxation rate. Specifically NOT the exclusion rate.",
+      "migration_note": "In v1.3 λ was the exclusion rate. In v2.1+ λ is topology persistence only. See k for the exclusion rate."
+    },
+    "Pi": {
+      "symbol": "Π",
+      "label": "inscription_dominance",
+      "definition": "κ / λ; primary regime control parameter determining residue dominance."
+    },
+    "phi": {
+      "symbol": "φ",
+      "label": "phase_orientation",
+      "definition": "Local phase orientation of process expression relative to the -(i) alignment condition. Component of the oriented process expression Ω = (m, θ, φ).",
+      "status": "provisional",
+      "verification_target": "sim18 — phase inversion symmetry program"
+    },
+    "Omega": {
+      "symbol": "Ω",
+      "label": "oriented_process_expression",
+      "definition": "Full local process state described by (m, θ, φ): continuation magnitude, topological orientation, and phase orientation relative to -(i). Provisional operator framework pending simulation validation.",
+      "status": "provisional",
+      "verification_target": "sim21"
+    },
+    "I_phi": {
+      "symbol": "I_φ",
+      "label": "phase_inversion_operator",
+      "definition": "Maps Ω = (m, θ, φ) → (m, θ, -φ). Role-swap of generator and constraint in the ε-ρ-R coupling structure: R becomes generative driver, ε becomes constrained expression, ρ equation unchanged. Involution: I_φ² = Id.",
+      "status": "provisional",
+      "verification_target": "sim18",
+      "governance_note": "Phase inversion symmetry (I_φ) is a provisional conjecture. Claims that I_φ is a gauge symmetry of the framework must be tagged [PROVISIONAL — sim18 pending] until sim18 result classification is assigned. The symmetry may hold, break at specific regimes, or break globally. All three outcomes are scientifically valid results."
+    },
+    "R_A": {
+      "symbol": "R_A",
+      "label": "alignment_rotation_operator",
+      "definition": "R_A^α(Ω) = (m, θ+α, φ). Reorients continuation relative to local alignment condition without changing phase class or ontological identity.",
+      "status": "provisional",
+      "verification_target": "sim21"
+    },
+    "R_Pi": {
+      "symbol": "R_Π",
+      "label": "admissibility_projected_rotation_operator",
+      "definition": "Rotates process expression only through orientations supportable by current constraint topology. R_Π^α(Ω) = Π(m, θ+α, φ) where Π is the admissibility projector. Physically the most constrained of the three operators — prevents fake transitions.",
+      "status": "provisional",
+      "verification_target": "sim21"
+    }
+  },
+
+  "regime_registry": {
+    "R2a": "Immediate runaway (exclusion dominant; redistribution negligible).",
+    "R2b": "Delayed runaway (exclusion dominant; redistribution partially competitive).",
+    "Rate_Misalignment": "Pre-boundary deformation (k and redistribution approach balance; timing deforms).",
+    "SS2": "Pure alignment (ρ dominates; ε and R extinguished; no structured interface).",
+    "SS3": "Exclusion-active coexistence (stable interface topology maintained at long horizon).",
+    "Bridge_Corridor": "Partial actualization: parameter region in (Π, k) space admitting stable interfaces.",
+    "Shelf": {
+      "definition": "Contiguous unanimous transition interval between outer regime and SS3 interior on a fixed-κ slice. Unanimous means every sampled seed classifies the point as other. Contiguous means the interval is unbroken across λ.",
+      "status": "prior_finding — confirmed in lost sim17, pending rerun verification",
+      "rerun_target": "sim16, sim17",
+      "constraints": "Shelf ⇏ SS3. Shelf ⇏ Box. Shelf ⇏ SRC. These are not implications — shelf is a study bin, not a promoted regime.",
+      "subtypes_provisional": ["Shelf-Transient", "Shelf-Folded", "Shelf-PreBox", "Shelf-Closure-Approach"]
+    },
+    "Extreme_Residue": "Orientation compression: outward continuation excluded (Ξ = 1).",
+    "I_phi_inverted_expression": {
+      "definition": "Any of the above regimes run under I_φ-inverted coupling structure. Gauge-equivalent to the standard expression if phase inversion symmetry holds; physically distinct if symmetry breaks.",
+      "status": "provisional — sim18 pending",
+      "note": "Not a new regime ontologically. A measurement variant that tests whether regime identity is phase-expression-dependent."
+    }
+  },
+
+  "compliance_rules": {
+    "verb_test": "All terms must reduce to process continuation. Nouns are permitted only as registered shorthand for specific recurrence patterns.",
+    "residue_check": "No term may imply existence outside the process-residue loop.",
+    "data_provenance_check": "No empirical claim may be stated as established without a citable recoverable file under v2.3 schema. Prior findings must be tagged. Provisional claims must be tagged.",
+    "prohibited_primitives": [
+      "attractor",
+      "container",
+      "field_as_primitive",
+      "location",
+      "space_as_substrate",
+      "time_as_primitive_dimension",
+      "axiomatic_prohibition",
+      "object",
+      "substance",
+      "force_pulling",
+      "fixed_location"
+    ],
+    "mandatory_replacements": [
+      {"target": "unphysical", "replacement": "non-continuable"},
+      {"target": "difference", "replacement": "Δ (Delta)"},
+      {"target": "location", "replacement": "locally coupled continuation regime"},
+      {"target": "forbidden state", "replacement": "excluded_continuation"},
+      {"target": "violation", "replacement": "alignment_failure"},
+      {"target": "allowed state", "replacement": "admissible_continuation"},
+      {"target": "NOT axiom as prohibition", "replacement": "exclusion_rate_k_greater_than_zero"},
+      {"target": "field", "replacement": "locally_resolved_process_expression"},
+      {"target": "orientation space", "replacement": "orientation manifold (derived shorthand for process-relative admissibility structure — not a substrate or container)"}
+    ],
+    "authoring_guidelines": {
+      "preferred_language": [
+        "continuing", "reinforcing", "destabilizing", "excluding",
+        "dissipating", "recurring", "stabilizing", "reorienting",
+        "redistributing", "failing alignment", "measuring exclusion rate",
+        "writing topology", "traversing", "folding under constraint"
+      ],
+      "language_to_flag": [
+        "object", "thing", "container", "space as primitive",
+        "field as primitive", "force pulling", "attractor",
+        "fixed location", "substance", "forbidden by axiom",
+        "prohibited state", "imposed rule", "orientation space"
+      ],
+      "exploratory_exception": "A noncompliant or partially compliant term may be retained during exploratory development if explicitly tagged as provisional and accompanied by an active reduction attempt.",
+      "phase_inversion_governance": "Claims that phase inversion I_φ is a gauge symmetry of the framework must be tagged [PROVISIONAL — sim18 pending] until sim18 result classification is assigned. This applies globally across all documents regardless of how coherent the argument appears.",
+      "reference_process_expression_governance": "The term 'reference process expression' (shorthand R = B·exp(iρ) in the holographic formulation) is provisional shorthand pending formal identification with the -(i) alignment condition. Must be tagged [PROVISIONAL — sim23 pending] in all uses. Must not be written as bare 'reference field' — field_as_primitive is prohibited.",
+      "folding_language": "Folding is constraint-driven reconfiguration into a self-consistent state — not geometric surface bending. The protein-folding analogy is the correct intuition: the final configuration emerges from internal interaction rules satisfying mutual admissibility. Language implying a surface bending under external force must be replaced."
+    }
+  },
+
+  "formal_binding_registry": {
+    "pde_system": {
+      "equations": [
+        "∂t ε = Dε∇²ε + kε − bερ − cε² + s",
+        "∂t ρ = Dρ∇²ρ + αρ − βερ − γρ² − vR + h",
+        "∂t R = DR∇²R + κε − λR"
+      ],
+      "governing_principle": "∂t R = Δ(κ ε, λ R)",
+      "note": "These equations are the theoretical foundation. They are not data-dependent. They remain valid under ground-zero declaration."
+    },
+    "I_phi_inverted_variant": {
+      "description": "Experimental variant of the PDE system used in sim18 to test phase inversion symmetry.",
+      "change": "Role-swap of generator and constraint in coupling structure: R becomes the generative driver (u·R term becomes primary in ε equation), ε becomes the constrained expression (κ·ε term becomes constraint modulation in R equation). ρ equation is unchanged — ρ represents the process which is indifferent to phase expression.",
+      "normalization_condition": "Inverted system parameters must be calibrated so that steady-state field magnitudes ε*, ρ*, R* match the standard system at the SS3 calibration point. Ensures comparison of phase-inverted equivalents, not differently-tuned models.",
+      "status": "provisional — sim18 pending"
+    },
+    "alignment_condition": {
+      "symbol": "-(i)",
+      "definition": "Admissibility orientation toward which deviation dissipates under current residue-written topology.",
+      "relationship_to_k": "-(i) defines the orientation that admissible continuation must satisfy; k measures the frequency at which continuation fails to satisfy it."
+    },
+    "holographic_formulation": {
+      "status": "provisional — sim23 pending",
+      "process_field": "Ψ = A·exp(iφ)",
+      "reference_process_expression": "R_ref = B·exp(iρ_ref) — provisional shorthand, pending identification with -(i)",
+      "relational_phase": "Δ_rel = φ − ρ_ref",
+      "observable": "I = |Ψ + R_ref|² = A² + B² + 2AB·cos(Δ_rel)",
+      "gauge_relation": "Simultaneous phase shift Ψ → e^(iχ)Ψ, R_ref → e^(iχ)R_ref leaves Δ_rel and I invariant",
+      "projective_invariant": "Q = e^(2iΔ_rel)",
+      "closure_condition": "Δ_rel(x,t) → Δ*(x) — stable phase-lock pattern",
+      "note": "All quantities in this formulation are provisional. No document may state holographic formulation results as established until sim23 verification."
+    }
+  },
+
+  "translation_index": {
+    "version": "2.3",
+    "mappings": [
+      {
+        "term_notes": "fold",
+        "term_formal": "high_curvature_constraint_region",
+        "definition": "Region where residue accumulation produces dense, self-approaching topology. Constraint-driven reconfiguration into a self-consistent state — not geometric surface bending. The configuration emerges from internal interaction rules satisfying mutual admissibility (protein-folding type, not pancake-pour type).",
+        "status": "stable"
+      },
+      {
+        "term_notes": "shelf",
+        "term_formal": "contiguous_unanimous_other_interval",
+        "definition": "Contiguous unanimous transition region between outer regime and SS3 interior on a fixed-κ slice. Not a spatial ledge — a classification interval. Shelf ⇏ SS3, Box, or SRC.",
+        "status": "prior_finding — pending rerun verification (sim16, sim17)"
+      },
+      {
+        "term_notes": "corridor",
+        "term_formal": "admissibility_manifold_partial_actualization",
+        "definition": "Parameter region admitting stable interfaces under partial -(i) actualization. Extended in v2.3: the corridor is also a control structure whose closure state determines behavioral outcome. Open corridor: transport burst (inflation-type behavior). Closed corridor: self-referential continuation candidate.",
+        "status": "stable (base definition). Closure bifurcation provisional — sim22 pending."
+      },
+      {
+        "term_notes": "groove",
+        "term_formal": "admissibility_channel",
+        "definition": "Residue-deepened path where admissibility is locally maximized/inadmissibility minimized.",
+        "status": "stable"
+      },
+      {
+        "term_notes": "box",
+        "term_formal": "actualized_minus_i_regime",
+        "definition": "Topologically bounded oriented continuation regime organized around -(i) alignment. Formal definition: lim Δ(t) → 0 AND boundary conditions self-maintained.",
+        "status": "stable"
+      },
+      {
+        "term_notes": "self",
+        "term_formal": "dominant_admissibility_channel",
+        "definition": "The deepest or most reinforced continuation groove within a coupled regime.",
+        "status": "stable"
+      },
+      {
+        "term_notes": "agency",
+        "term_formal": "self_conditioning_continuation",
+        "definition": "Continuation writing residue that alters the admissibility topology governing its own next step.",
+        "status": "stable"
+      },
+      {
+        "term_notes": "conscious regime",
+        "term_formal": "self_referential_actualized_minus_i_regime",
+        "definition": "Regime meeting SRC criteria where the process reads and maintains topology it wrote.",
+        "status": "provisional — no verified empirical instance. SRC proxies not yet measured under v2.3 schema."
+      },
+      {
+        "term_notes": "QGP (quark-gluon plasma)",
+        "term_formal": "high_alignment_low_segmentation_regime",
+        "definition": "Empirical correspondence only — not a derived result. One process in a high-alignment phase expression where continuation is minimally constrained into stable structures. The experimental finding that extreme-energy matter becomes more coherent and continuous, not less, is consistent with the framework's prediction that stripped-away constraint reveals process flow rather than independent particles.",
+        "status": "empirical_correspondence — not a charter-derived claim. May appear in documents as observational support only."
+      },
+      {
+        "term_notes": "inside view",
+        "term_formal": "local_resolution",
+        "definition": "Reading local fold geometry as the world structure; appearing locally Markovian.",
+        "status": "stable"
+      },
+      {
+        "term_notes": "outside view",
+        "term_formal": "global_resolution",
+        "definition": "Reading the process as one continuous non-Markovian history.",
+        "status": "stable"
+      },
+      {
+        "term_notes": "action potential",
+        "term_formal": "threshold_writing_event",
+        "definition": "Rapid topology shift; refractory exclusion events.",
+        "status": "stable"
+      },
+      {
+        "term_notes": "brain wave",
+        "term_formal": "synchronized_propagation_regime",
+        "definition": "Macro-scale phase alignment across coupled grooves; admissibility rhythm.",
+        "status": "stable"
+      },
+      {
+        "term_notes": "gravity",
+        "term_formal": "admissibility_gradient",
+        "definition": "Continuation reorientation under gradients of residue-written suppression.",
+        "status": "stable"
+      },
+      {
+        "term_notes": "horizon",
+        "term_formal": "propagation_admissibility_boundary",
+        "definition": "Relational depth where outward continuation is excluded (Ξ = 1).",
+        "status": "stable"
+      },
+      {
+        "term_notes": "brane",
+        "term_formal": "process_visualization",
+        "definition": "One continuous surface representing the single process at varying curvatures.",
+        "status": "stable"
+      },
+      {
+        "term_notes": "basin",
+        "term_formal": "stabilized_recurrence",
+        "definition": "A self-reinforcing continuation regime in which k remains below the critical threshold, sustained by repeated compatible continuation that reinforces its own constraint topology.",
+        "status": "stable"
+      },
+      {
+        "term_notes": "turing domain",
+        "term_formal": "delta_x_spacing",
+        "definition": "Characteristic spacing between folds predicted by diffusion ratios (Dε/Dρ).",
+        "status": "stable"
+      },
+      {
+        "term_notes": "awareness",
+        "term_formal": "topology_response",
+        "definition": "Continuation differentially responding to local admissibility variation.",
+        "status": "stable"
+      },
+      {
+        "term_notes": "absorption",
+        "term_formal": "termination",
+        "definition": "Phase expression redistributes into internal constraint topology.",
+        "status": "stable"
+      },
+      {
+        "term_notes": "reflection",
+        "term_formal": "redirection",
+        "definition": "Induced re-emission at a regime boundary; outward reconstruction.",
+        "status": "stable"
+      },
+      {
+        "term_notes": "transparency",
+        "term_formal": "continuation",
+        "definition": "Phase-preserving re-emission; oscillation reconstructs forward.",
+        "status": "stable"
+      }
+    ]
+  },
+
+  "src_criteria": {
+    "status": "provisional — no verified empirical instance under v2.3 schema",
+    "Criterion_1_Dominance": "⟨uR⟩_Ω >> ⟨|aε − bερ − cε² + s|⟩_Ω (Residue governs admissibility)",
+    "Criterion_2_Closure": "A_Ω ≈ T[R_Ω] (Loop closure between writing and reading)",
+    "Criterion_3_Stability": "T_Ω(t+k) ∈ N_sr (Topological self-maintenance over window K)",
+    "composite_candidate": "SRC = 1 ⟺ F(L, D_sr, P) > θ where F = L · D_sr · P. First candidate compression — provisional, awaiting derivation from process equations."
+  },
+
+  "status_registry": {
+    "stable_anchors": [
+      "k", "λ", "κ", "ε", "ρ", "R", "Δ",
+      "SS3", "SS2", "R2a", "R2b",
+      "Fold", "Groove", "Basin", "Time",
+      "Shelf"
+    ],
+    "prior_findings_pending_rerun": [
+      "SS3 band at kappa=0.05 — sim8 rerun target",
+      "Lower SS3 edge lambda=0.041/0.042 — sim9 rerun target",
+      "Shelf regime at kappa=0.11-0.12 — sim17 rerun target",
+      "Five-layer phase geometry — sim17 rerun target",
+      "SRC proxy negative case in SS2 — SS2 anchor rerun target"
+    ],
+    "provisional_hypotheses": [
+      "SRC Criteria — no verified empirical instance under v2.3 schema",
+      "λ_c(κ) Surface — prior finding, pending rerun",
+      "Ξ Topology-Loading — theoretical, pending derivation",
+      "Projection Hypothesis — theoretical, pending Volume V",
+      "Conscious Regime — provisional, no verified instance",
+      "Phase Inversion Symmetry I_φ — sim18 pending",
+      "Oriented Process Expression Ω=(m,θ,φ) — sim21 pending",
+      "Holographic Closure Condition Δ_rel→Δ* — sim23 pending",
+      "Corridor Bifurcation open/closed — sim22 pending",
+      "Transport-Scale Transition inflation analogy — sim24 pending"
+    ],
+    "deprecated": [
+      "λ as exclusion rate",
+      "Force as primitive",
+      "Self-model",
+      "Any empirical claim from documents written before ground-zero declaration"
+    ]
+  },
+
+  "annex_A_evaluation_pipeline": {
+    "annex_note": "This pipeline operates across documents using the charter as its reference authority. Parameters (k, κ, λ, Π) are as defined in v2.3. Data provenance check is now a required stage.",
+    "stages": [
+      {
+        "stage": "term_identification",
+        "goal": "Identify the target term or phrase under review.",
+        "questions": [
+          "What exact word, phrase, or symbol is being checked?",
+          "Is it being used as primitive, shorthand, analogy, or derived label?"
+        ],
+        "outputs": ["target_term", "usage_context", "claimed_role"]
+      },
+      {
+        "stage": "data_provenance_check",
+        "goal": "Determine whether the claim requires empirical support and whether that support is available.",
+        "questions": [
+          "Is this an empirical claim, a theoretical claim, or a provisional conjecture?",
+          "If empirical: is there a recoverable source file under v2.3 schema?",
+          "If no recoverable file: is this a prior finding that must be tagged?",
+          "If provisional: is the verification target sim identified?"
+        ],
+        "pass_condition": "Empirical claim has citable recoverable file. Prior finding is tagged. Provisional claim has sim target identified.",
+        "fail_condition": "Empirical claim stated as established without recoverable file.",
+        "outputs": ["claim_classification", "source_file_or_tag", "verification_target"]
+      },
+      {
+        "stage": "verb_test",
+        "goal": "Determine whether the term can be restated as an occurring process rather than a static thing.",
+        "questions": [
+          "What is this term doing?",
+          "Can the term be rewritten as a process without invoking objects, substances, containers, fields, or static locations?",
+          "Does the rewrite describe continuation, exclusion, reinforcement, redistribution, stabilization, dissipation, recurrence, or another process action?"
+        ],
+        "pass_condition": "The term can be rewritten in procedural language as an occurring relation or continuation pattern.",
+        "fail_condition": "The term remains a static noun, container, object, field, place, or unexplained substrate.",
+        "outputs": ["verb_test_status", "verb_rewrite", "residual_nonprocedural_content"]
+      },
+      {
+        "stage": "procedural_fft",
+        "goal": "Decompose the compressed term into the minimal generating process chain, terminating in measurable process parameters where possible.",
+        "note": "FFT here is metaphorical: decomposing a compressed noun or shorthand into its constituent procedural operations. Chains should terminate in k, residue quantities, or other measurable process outputs.",
+        "questions": [
+          "What simpler process actions combine to produce the meaning carried by this term?",
+          "What is the minimal ordered chain of verbs needed to reconstruct the term?",
+          "Does the chain terminate in a measurable process parameter (k, κ, λ, Π, residue density, deviation magnitude)?",
+          "Is the term actually a compound of several recurrence, exclusion, or compatibility processes?"
+        ],
+        "pass_condition": "The term can be decomposed into a minimal process sequence with no unexplained ontological remainder.",
+        "fail_condition": "The term still depends on irreducible noun assumptions after decomposition.",
+        "outputs": ["procedural_components", "process_chain", "decomposition_confidence", "remaining_ambiguities", "terminal_parameter"]
+      },
+      {
+        "stage": "ontology_residue_check",
+        "goal": "Inspect the term and its decomposition for hidden smuggled assumptions.",
+        "questions": [
+          "Does the explanation secretly assume objects, space, containers, external laws, fields, attractors, or prior geometry?",
+          "Does the wording smuggle in force-like or substance-like language?",
+          "Does the decomposition rely on static states rather than active continuation?",
+          "Does the term invoke axiomatic prohibition rather than emergent exclusion rate k > 0?"
+        ],
+        "fail_triggers": [
+          "object language treated as primitive",
+          "container language treated as primitive",
+          "field language treated as primitive",
+          "location language treated as primitive",
+          "force/attractor language treated as primitive",
+          "state language with no generating process",
+          "axiomatic prohibition treated as primitive rather than emergent k > 0"
+        ],
+        "outputs": ["smuggled_assumptions", "residue_status"]
+      },
+      {
+        "stage": "procedural_reconstruction",
+        "goal": "Rebuild the term in compliant form using only process language.",
+        "questions": [
+          "What is the cleanest compliant rewrite?",
+          "Can the rewritten form preserve the intended meaning while removing noun primitivity?",
+          "Is shorthand still needed, and if so, is it explicitly marked as derived?",
+          "Can the rewrite express the claim in terms of k, κ, λ, residue, deviation, or alignment conditions?"
+        ],
+        "outputs": ["compliant_rewrite", "allowed_shorthand", "shorthand_definition"]
+      },
+      {
+        "stage": "classification",
+        "goal": "Assign final compliance status.",
+        "statuses": {
+          "compliant": "Passes verb test and procedural FFT with no hidden ontological residue. Empirical claims have recoverable source files.",
+          "derived_shorthand_allowed": "Not primitive, but acceptable as shorthand once explicitly reduced to process.",
+          "provisional": "Partially reducible or empirically unsupported; may remain in exploratory use with explicit tag and sim verification target.",
+          "prior_finding": "Empirically supported by lost data. Must be tagged. May not be stated as established until rerun produces recoverable file.",
+          "noncompliant": "Fails reduction to process or depends on irreducible noun assumptions."
+        },
+        "outputs": ["final_status", "rationale"]
+      }
+    ],
+    "decision_logic": {
+      "rule_1": "If a term fails the verb test, it is noncompliant unless retained only as an explicitly provisional placeholder.",
+      "rule_2": "If a term passes the verb test but fails procedural FFT, it may be provisionally retained but not formalized as a core primitive.",
+      "rule_3": "If a term passes both verb test and procedural FFT, it may be used as compliant shorthand once its process chain is documented.",
+      "rule_4": "If decomposition reveals hidden object, field, location, or force assumptions, the term must be rewritten or demoted.",
+      "rule_5": "If a term invokes exclusion as an imposed rule or prohibition rather than as an emergent rate, it must be rewritten in terms of k or demoted to provisional.",
+      "rule_6": "If an empirical claim has no recoverable source file, it must be classified as prior_finding and tagged accordingly. It may not be stated as established regardless of how well-established it appeared in prior documents."
+    }
+  },
+
+  "annex_B_simulation_requirements": {
+    "annex_note": "Simulation outputs are validated against the PDE system and regime registry defined in this charter. This schema must be frozen before any rerun begins. Results produced under a different schema are prior findings, not verified results.",
+    "schema_version": "v2.3",
+    "required_metrics": [
+      "sim_id",
+      "batch_id",
+      "run_date",
+      "kappa",
+      "lambda",
+      "seed",
+      "IC_type",
+      "phase_expression",
+      "exclusion_rate_k",
+      "continuation_attempts",
+      "exclusion_events",
+      "alignment_success_rate",
+      "topology_writing_rate_kappa",
+      "topology_persistence_lambda",
+      "inscription_dominance_Pi",
+      "residue_field_R_mean",
+      "epsilon_mean",
+      "rho_mean",
+      "final_interface_count",
+      "exclusion_fraction",
+      "collapse_time",
+      "regime_classification",
+      "seed_unanimity"
+    ],
+    "extended_metrics_sim19_onward": [
+      "D_sr_proxy",
+      "K_proxy",
+      "L_proxy",
+      "P_Omega",
+      "F_tilde_Omega",
+      "Sigma_SRC_Omega",
+      "Delta_bar_Omega",
+      "Box_flag",
+      "SRC_flag",
+      "ConsciousCandidate_flag",
+      "shelf_thickness_delta_sh",
+      "phase_layer_count"
+    ],
+    "recommended_outputs": [
+      "k_time_series",
+      "R_field_evolution",
+      "basin_stability_map",
+      "collapse_event_log",
+      "regime_classification_per_run",
+      "power_law_scaling_near_critical_boundary",
+      "Pi_kappa_lambda_parameter_sweep",
+      "SS3_interface_topology_at_long_horizon"
+    ],
+    "regime_validation_targets": {
+      "R2a": "Confirm exclusion dominant; redistribution negligible.",
+      "R2b": "Confirm structured transients under partial redistribution competition.",
+      "SS3": "Confirm stable interface topology persists at long horizon.",
+      "Bridge_Corridor": "Map admissible (Π, k) parameter region for stable interfaces.",
+      "Shelf": "Confirm finite-width seed-unanimous other intervals at SS3 transition boundaries.",
+      "Extreme_Residue": "Confirm outward continuation exclusion at Ξ = 1."
+    },
+    "file_requirements": {
+      "per_batch": ["SUMMARY.txt", "simNN_metrics.json", "simNN_analysis_report.txt", "simNN_manifest.txt", "simNN_raw.zip"],
+      "archiving_tool": "mpf_archive_sim.py v1.0 or later",
+      "naming_convention": "YYYY-MM-DD_simNN_charterV2p3_metricV1_phaseX"
+    }
+  }
+}

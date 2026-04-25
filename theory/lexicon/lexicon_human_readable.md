@@ -20,6 +20,21 @@ These terms represent the stabilized, high-integrity pillars of the SPM framewor
 
 ---
 
+## I.a Operational Canonicals (Promoted For Validation)
+The following terms were promoted to `canonical_term` status to support the **Lexicon Validation Program** and enable governed, role-specific operational definitions:
+
+- **epsilon** — operational mismatch / driver signal (validated by role in `lexicon_validation_registry.json`).
+- **rho** — participation / activity readout (promoted for consistency; role validation remains open).
+- **residue** — accumulated constraint state (validated by role as admissibility gate).
+- **admissibility** — filter / continuation acceptance (validated by role as residue-gated filter).
+- **continuation** — candidate vs admissible transition (partially verified by role; broader semantics remain open).
+- **mismatch** — surface-form for epsilon in many tools (promoted for translation consistency).
+- **coupling** — interaction reach / CSI (validated by role as synchrony gain control).
+
+These are operational canonicals: they are not metaphysical primitives; their “verification” refers to **within-model operational support** with recoverable artifacts, and charter-aware claim classification.
+
+---
+
 ## II. Technical Alias Map (High Signal)
 The following mappings are enforced to ensure that shorthand and common language are correctly resolved to the SPM engine's formal logic.
 
@@ -36,6 +51,12 @@ The following mappings are enforced to ensure that shorthand and common language
 | **mismatch** | mismatch |
 | **orientation** | orientation |
 | **basin** | basin |
+| **ε** | epsilon |
+| **varepsilon** | epsilon |
+| **ρ** | rho |
+| **R** | residue |
+| **CSI** | coupling |
+| **csi** | coupling |
 
 *(Note: The full alias map contains over 700 standardizations, including mathematical symbols like **$\varepsilon$**, **$\rho$**, and **$R$**.)*
 
@@ -57,11 +78,29 @@ The following terms have been identified across the corpus as highly frequent an
 
 ---
 
+## III.a Validation Registry (Charter-Aware)
+Role-specific validation status is tracked in:
+
+- `lexicon_validation_registry.json`
+
+This registry records:
+
+- Evidence levels `L0–L3` for **operational roles** (not global metaphysical truth).
+- Compliance charter metadata and **data provenance citations** for any empirical support.
+
+Important: Under **Compliance Charter v2.3** (`theory/lexicon/compliance_charter_v2_3.json`), empirical claims must cite recoverable source files and may require v2.3 metric schema compliance for “verified” status. The registry therefore distinguishes:
+
+- **Operational support (within these models)**: recoverable artifacts + multi-model/multi-seed + falsification where applicable.
+- **Charter claim classification**: a conservative tag (`verified`/`theoretical`/`provisional`/`prior_finding`) applied to how the claim may be written in documents.
+
+---
+
 ## IV. Lexicon Maintenance & Governance
 The lexicon is managed according to the following internal rules:
 *   **Monistic Enforcement:** Terms that imply independent "objects," "fields," or "time" are flagged as candidates for reduction or rejection.
 *   **Automatic Promotion:** Candidate terms with high document frequency and clear semantic alignment are prioritized for canonicalization.
 *   **Noise Filtering:** Common non-technical terms are sequestered to maintain the "Lexicon Lock" on the operational engine.
+*   **Compliance Charter v2.3:** All lexicon updates and all technical papers must follow `theory/lexicon/compliance_charter_v2_3.json`, including data provenance requirements for empirical assertions.
 
 ---
 
