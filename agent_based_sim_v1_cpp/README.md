@@ -8,14 +8,18 @@ This is a high-performance C++ implementation of the `agent_based_sim_v1` swarm 
 - **Symplectic Treatment:** Focused on phase-space stability for swarm agents.
 - **Python Integration:** C-API and `ctypes` wrapper for first-class Python support.
 
+## GPU Offloading (Intel UHD 770)
+The engine includes `AgentEngineSYCL.hpp` which utilizes **oneAPI (SYCL)** to offload swarm interaction kernels directly to the GPU.
+- **Optimization:** Kernels are adapted for **Single Precision (FP32)** to ensure compatibility with Intel UHD 770 hardware.
+- **Performance:** Significant speedups for large swarms (>10^5 agents) via parallel force calculation.
+
 ## Building
-Use the provided `build_and_run.bat` (Windows/MSVC) or the following command for GCC:
+### CPU (AVX2)
 ```bash
 g++ -O3 -mavx2 -fopenmp main.cpp AgentEngineAVX2.cpp -o agent_sim
 ```
 
-## Performance
-Designed to handle swarms of 10^4 to 10^5 agents with high-fidelity coupling rules.
-
-## Future GPU Offloading (Intel UHD 770)
-The SoA architecture and Spatial Hash are designed for migration to **oneAPI (SYCL)**. For very large swarms (>10^5), a SYCL-based tiled interaction kernel will provide substantial speedups.
+### GPU (SYCL)
+```bash
+icpx -fsycl -O3 AgentEngineSYCL.cpp -o agent_sim_gpu
+```

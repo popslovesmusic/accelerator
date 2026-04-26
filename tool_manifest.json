@@ -1,6 +1,6 @@
 {
   "project": "Acellorator Research Ecosystem",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "governance": "cross_verification_protocol.json",
   "usage_policy": "Agent may execute tools but MUST NOT modify engine code or core scripts. MUST follow cross_verification_protocol.json for all research claims.",
   "tools": [
@@ -21,8 +21,16 @@
       "metrics": ["active_fraction", "mean_mismatch", "mean_residue"]
     },
     {
+      "name": "fsa_rule_engine_sim_v1_cpp",
+      "description": "High-performance CSR-graph-based FSA agent engine with parallel navigation and SYCL/GPU acceleration (Intel UHD 770).",
+      "entry_point": "fsa_rule_engine_sim_v1_cpp/fsa_sim_benchmark.exe",
+      "cli_command": "./fsa_rule_engine_sim_v1_cpp/fsa_sim_benchmark.exe",
+      "config_params": ["num_agents", "n_states", "steps", "res_req"],
+      "metrics": ["active_count", "mean_residue", "runtime_ms"]
+    },
+    {
       "name": "ca_admissibility_sim_v1_cpp",
-      "description": "High-performance AVX2 2D Cellular Automata with gated diffusion rules.",
+      "description": "High-performance AVX2/SYCL 2D Cellular Automata with gated diffusion rules and GPU offloading (Intel UHD 770).",
       "entry_point": "ca_admissibility_sim_v1_cpp/ca_sim_benchmark.exe",
       "cli_command": "./ca_admissibility_sim_v1_cpp/ca_sim_benchmark.exe",
       "config_params": ["width", "height", "steps", "D", "delta_R"],
@@ -35,6 +43,14 @@
       "cli_command": "python graph_dynamics_sim_v1/sim.py --config {config} --out {out_dir}",
       "config_params": ["n_nodes", "decouple_threshold", "recouple_threshold", "K_phi"],
       "metrics": ["edge_count", "avg_degree", "order_parameter"]
+    },
+    {
+      "name": "graph_dynamics_sim_v1_cpp",
+      "description": "High-performance AVX2/SYCL dynamic network engine with parallel rewiring and GPU offloading (Intel UHD 770).",
+      "entry_point": "graph_dynamics_sim_v1_cpp/network_sim_benchmark.exe",
+      "cli_command": "./graph_dynamics_sim_v1_cpp/network_sim_benchmark.exe",
+      "config_params": ["n_nodes", "steps", "K", "theta_decouple"],
+      "metrics": ["order_parameter", "edge_count", "runtime_ms"]
     },
     {
       "name": "stochastic_sim_v1",
@@ -109,6 +125,14 @@
       "metrics": ["entropy", "complexity"]
     },
     {
+      "name": "info_metrics_module_v1_cpp",
+      "description": "High-performance SYCL/GPU accelerated information metrics post-processor (Intel UHD 770).",
+      "entry_point": "info_metrics_module_v1_cpp/analyze_info.py",
+      "cli_command": "python info_metrics_module_v1_cpp/analyze_info.py --dir {data_dir}",
+      "config_params": [],
+      "metrics": ["entropy", "complexity", "runtime_ms"]
+    },
+    {
       "name": "bifurcation_analyzer_v1",
       "description": "Dynamic parameter ramp for regime mapping.",
       "entry_point": "bifurcation_analyzer_v1/bifurcation_runner.py",
@@ -118,7 +142,7 @@
     },
     {
       "name": "bifurcation_analyzer_v1_cpp",
-      "description": "High-speed bifurcation and stability analyzer with Lyapunov exponents.",
+      "description": "High-speed AVX2/SYCL bifurcation and stability analyzer with Lyapunov exponents and GPU offloading (Intel UHD 770).",
       "entry_point": "bifurcation_analyzer_v1_cpp/bifurcation_benchmark.exe",
       "cli_command": "./bifurcation_analyzer_v1_cpp/bifurcation_benchmark.exe",
       "config_params": ["start", "end", "steps", "plateau_len"],
@@ -134,7 +158,7 @@
     },
     {
       "name": "circular_accelerator_sim_v1_cpp",
-      "description": "High-fidelity AVX2/Yoshida 6D ring simulation with turn-by-turn tracking.",
+      "description": "High-fidelity AVX2/SYCL/Yoshida 6D ring simulation with GPU offloading (Intel UHD 770).",
       "entry_point": "circular_accelerator_sim_v1_cpp/circular_sim_benchmark.exe",
       "cli_command": "./circular_accelerator_sim_v1_cpp/circular_sim_benchmark.exe",
       "config_params": ["particles", "turns", "circumference", "momentum_compaction"],
@@ -158,7 +182,7 @@
     },
     {
       "name": "agent_based_sim_v1_cpp",
-      "description": "High-performance AVX2/Spatial-Hash swarm simulation with RK4 integration.",
+      "description": "High-performance AVX2/SYCL swarm simulation with Spatial-Hash and GPU offloading (Intel UHD 770).",
       "entry_point": "agent_based_sim_v1_cpp/agent_sim_benchmark.exe",
       "cli_command": "./agent_based_sim_v1_cpp/agent_sim_benchmark.exe",
       "config_params": ["agent_count", "steps", "R_c", "K_phi"],
@@ -166,7 +190,7 @@
     },
     {
       "name": "accelerator_sim_v1_cpp",
-      "description": "High-fidelity AVX2/SYCL 6D accelerator simulation with PIC Space Charge, 4th-order Yoshida integration, and Field Map support.",
+      "description": "High-fidelity AVX2/SYCL 6D accelerator simulation with PIC Space Charge and GPU offloading (Intel UHD 770).",
       "entry_point": "accelerator_sim_v1_cpp/acc_sim",
       "cli_command": "./accelerator_sim_v1_cpp/acc_sim",
       "config_params": ["particles", "steps", "lattice_json", "use_gpu"],

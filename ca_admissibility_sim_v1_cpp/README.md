@@ -8,14 +8,18 @@ This is a high-performance C++ implementation of the `ca_admissibility_sim_v1` 2
 - **OpenMP Scaling:** Multi-core parallelization for large grid processing.
 - **Python Integration:** C-API and `ctypes` wrapper for interactive research.
 
+## GPU Offloading (Intel UHD 770)
+The engine includes `CAEngineSYCL.hpp` which utilizes **oneAPI (SYCL)** to offload transition rules to the GPU.
+- **Optimization:** Kernels use **Single Precision (FP32)** for Intel UHD 770 compatibility.
+- **Performance:** Real-time simulation of multi-million cell grids with zero CPU overhead.
+
 ## Building
-Use the provided `build_and_run.bat` (Windows/MSVC) or the following command for GCC:
+### CPU (AVX2)
 ```bash
 g++ -O3 -mavx2 -fopenmp main.cpp CAEngineAVX2.cpp -o ca_sim
 ```
 
-## Performance
-Optimized for massive 2D grids (e.g., 2048x2048 and beyond).
-
-## Future GPU Offloading (Intel UHD 770)
-The local stencil nature of this simulation is ideal for **oneAPI (SYCL)**. Moving the transition rules to the GPU will allow real-time simulation of multi-million cell grids with zero CPU overhead.
+### GPU (SYCL)
+```bash
+icpx -fsycl -O3 CAEngineSYCL.cpp -o ca_sim_gpu
+```
