@@ -1,0 +1,226 @@
+## Tech Note Companion
+
+### **Frame Extraction via Universal Fit: (ℰ≠0) ⇔ δ(ℰ>0)**
+
+---
+
+## 0) Purpose
+
+This note formalizes your method:
+
+> Use “everything” (all system classes) to extract the **minimal invariant** that must hold for any system to exist and evolve.
+
+The result is treated as a **frame-defining constraint**, not a domain model.
+
+---
+
+## 1) Core Statement
+
+[
+(\mathcal E \ne 0);\Longleftrightarrow;\delta(\mathcal E>0)
+]
+
+**Reading:**
+
+* **ℰ≠0** → nonzero / non-null / admissible state
+* **δ(ℰ>0)** → realized change / update / mapping
+* **⇔** → mutual constraint (state ↔ change)
+
+```json
+{
+  "frame": "(ℰ≠0) ⇔ δ(ℰ>0)",
+  "type": "frame_defining_invariant",
+  "role": "governs admissible existence and evolution"
+}
+```
+
+---
+
+## 2) Method: Frame by Intersection
+
+**Algorithmic extraction:**
+
+```json
+{
+  "procedure": [
+    "select system class",
+    "identify minimal condition for existence",
+    "identify minimal condition for change",
+    "check mutual implication",
+    "retain only statements invariant across classes"
+  ],
+  "output": "(ℰ≠0) ⇔ δ(ℰ>0)"
+}
+```
+
+---
+
+## 3) Cross-Domain Collapse
+
+### 3.1 Continuous (Dynamical Systems)
+
+* Existence: field/state is nonzero
+* Change: ∂t ≠ 0
+
+> nonzero field ⇔ evolving field
+
+---
+
+### 3.2 Discrete (Operators / Automata)
+
+* Existence: configuration ≠ null
+* Change: update rule applies
+
+> non-null state ⇔ update occurs
+
+---
+
+### 3.3 Topological / Logical
+
+* Existence: x ∈ A (admissible set)
+* Change: x → x′ (relation/mapping)
+
+> admissible element ⇔ relational mapping exists
+
+---
+
+### 3.4 Unified Pattern
+
+```json
+{
+  "state_condition": "nonzero / non-null / admissible",
+  "transition_condition": "change / update / mapping",
+  "equivalence": "state implies transition and vice versa"
+}
+```
+
+---
+
+## 4) Formal Embedding (CDHDS)
+
+Let (X) be the state space.
+
+* **Admissible set:** (A = {x \in X \mid \varepsilon(x) \neq 0})
+* **Forbidden set:** (F = X \setminus A)
+
+**Continuous flow (inside A):**
+[
+\partial_t x = \mathcal F(x, R, K)
+]
+
+**Event (boundary / threshold):**
+[
+x_{n+1} = \Phi(x_n, R_n, K_n),\quad x_{n+1} \in A
+]
+
+**Residue update:**
+[
+R_{n+1} = \Psi(R_n, x_n, x_{n+1})
+]
+
+**Master constraint (enforced):**
+[
+x \in A ;\Longleftrightarrow; \exists\ \delta:\ x \to x'
+]
+
+---
+
+## 5) Enforcement Rules (Operational)
+
+```json
+{
+  "rules": [
+    "No admissible state with ε = 0",
+    "No admissible state without possible update",
+    "Every update originates from ε ≠ 0",
+    "Every update must recouple into A",
+    "Continuous flow may not cross into F without δ"
+  ]
+}
+```
+
+---
+
+## 6) Dual Law Families (Compact)
+
+Each law has **two expressions** (exclusion vs addition) with the same role:
+
+```json
+{
+  "L0": {"exclusion": "zero inadmissible", "addition": "positive continuation present"},
+  "L1": {"exclusion": "no terminal state", "addition": "next state generated"},
+  "L2": {"exclusion": "change cannot vanish", "addition": "change deposits residue"},
+  "L3": {"exclusion": "invalid paths removed", "addition": "viable paths constructed"},
+  "L6": {"exclusion": "symmetry collapse blocked", "addition": "direction/orientation produced"},
+  "L14": {"exclusion": "incoherence rejected", "addition": "phase coherence formed"}
+}
+```
+
+> **Rule:** same structural job, different expression.
+
+---
+
+## 7) What the Frame Forbids
+
+```json
+{
+  "forbidden": [
+    "admissible ε = 0 states",
+    "stable states with no possible change",
+    "updates with no residue/effect",
+    "unconstrained all-allowed transitions"
+  ]
+}
+```
+
+---
+
+## 8) Interpretation
+
+> **Existence ⇔ Change**
+> Nonzero participation and realized change are the same condition viewed from two sides.
+
+```json
+{
+  "plain": "Nonzero relation and change are inseparable",
+  "use": "validate any system by checking both sides of the equivalence"
+}
+```
+
+---
+
+## 9) Minimal Engine Loop
+
+```json
+{
+  "loop": [
+    "assert ε(x) ≠ 0",
+    "evolve x via continuous dynamics",
+    "if threshold/boundary → apply δ",
+    "update residue R",
+    "project back into A",
+    "repeat"
+  ]
+}
+```
+
+---
+
+## 10) Next Steps (Testing)
+
+* Define **failure cases** per law
+* Simulate **flow + event handoff** (boundary-triggered δ)
+* Verify **no admissible ε=0** under all runs
+* Check **residue affects future admissibility**
+
+---
+
+## 11) Final Compression
+
+```json
+{
+  "frame": "(ℰ≠0) ⇔ δ(ℰ>0)",
+  "meaning": "admissible existence is nonzero continuation expressed as change",
+  "status": "candidate universal invariant / frame"
+}
+```

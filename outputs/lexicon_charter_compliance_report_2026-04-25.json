@@ -1,0 +1,61 @@
+{
+  "report_version": "1.0.0",
+  "run_date": "2026-04-25",
+  "charter": {
+    "path": "theory/lexicon/compliance_charter_v2_3.json",
+    "version": "2.3"
+  },
+  "files_in_scope": [
+    "theory/lexicon/lexicon_canonical.json",
+    "theory/lexicon/lexicon_alias_map.json",
+    "theory/lexicon/lexicon_gap_queue.json",
+    "holding/lexicon/lexicon_canonical.json",
+    "holding/lexicon/lexicon_alias_map.json",
+    "holding/lexicon/lexicon_gap_queue.json",
+    "lexicon_validation_registry.json"
+  ],
+  "actions_taken": [
+    "Added charter-mandated claim classification + provenance citation fields to lexicon_validation_registry.json roles.",
+    "Ensured provenance citations follow the charter file_citation_format: sim_id | batch_id | YYYY-MM-DD | filepath.",
+    "Improved alias normalization for ε/ρ/R/CSI to canonical terms (epsilon/rho/residue/coupling).",
+    "Promoted key primitives from candidate_new_term to canonical_term to close lexicon gaps for frequently-used primitives."
+  ],
+  "current_compliance_state": {
+    "registry_charter_mode": "charter-aware",
+    "empirical_claim_rule": "Any lexicon role marked L3 is treated as OPERATIONALLY supported within the tested models; charter_claim_classification remains provisional until annex_B v2.3 metric schema compliance is explicitly satisfied.",
+    "data_provenance": "All cited evidence paths are recoverable files in the workspace; schema compliance with annex_B is not asserted for non-rerun tools."
+  },
+  "remaining_open_roles": {
+    "admissibility": [
+      "structure_preservation",
+      "topological_continuity",
+      "semantic_admissibility"
+    ],
+    "residue": [
+      "memory_trace",
+      "structure_preserver",
+      "hysteresis_buffer",
+      "identity_support"
+    ],
+    "continuation": [
+      "time-as-order",
+      "event_chain_generation",
+      "recoupling_continuation"
+    ],
+    "epsilon": [
+      "NOT_axiom_floor",
+      "endogenous_generation",
+      "semantic_difference"
+    ],
+    "coupling": [
+      "topological_reach",
+      "corridor_formation",
+      "recoupling_thresholds"
+    ]
+  },
+  "notes": [
+    "This report does not attempt to retroactively certify annex_B schema compliance for existing simulators; it records provenance and enforces conservative claim classification.",
+    "To upgrade charter_claim_classification from provisional to verified, create rerun-program outputs that explicitly satisfy the charter annex_B v2.3 metric schema and cite those files."
+  ]
+}
+

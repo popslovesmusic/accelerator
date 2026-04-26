@@ -1,0 +1,208 @@
+{
+  "agent_task": "set_up_lexicon_validation",
+  "objective": "update agents.md/GEMINI.md so the agent treats lexicon validation as a governed workflow, and create a new lexicon_validation_registry.json file",
+
+  "files_available": {
+    "canonical": "lexicon_canonical.json",
+    "alias_map": "lexicon_alias_map.json",
+    "gap_queue": "lexicon_gap_queue.json",
+    "human_readable": "lexicon_human_readable.md"
+  },
+
+  "edit_agents_md": {
+    "target_file": "agents.md",
+    "fallback_target_file": "GEMINI.md",
+
+    "insert_after_section": "Theoretical Grounding & Lexicon",
+
+    "section_to_add": {
+      "heading": "## Lexicon Validation Program",
+      "content": [
+        "The agent MUST treat the lexicon as a testable operational system, not merely a glossary.",
+        "For any canonical term used in a research claim, the agent MUST check whether the term has an entry in lexicon_validation_registry.json.",
+        "If no registry entry exists, the term is UNVERIFIED and must be added to the registry with status L0 or GAP_OPEN.",
+        "A term may be verified by role rather than globally. Example: residue may be L3 as an admissibility gate while still L1 as memory trace.",
+        "The agent MUST NOT mark a term globally verified unless all listed roles have achieved L3 or have documented scope limits.",
+        "Definitions MUST remain humble: validation means the term is operationally supported inside tested models, not metaphysically proven.",
+        "All lexicon updates MUST preserve canonical names and aliases. Do not delete or rename canonical terms without explicit user approval."
+      ]
+    },
+
+    "add_to_research_workflow": {
+      "insert_after": "Analyze",
+      "new_step": {
+        "name": "Lexicon Resolve & Validate",
+        "rules": [
+          "Normalize user language using lexicon_alias_map.json.",
+          "Resolve terms to lexicon_canonical.json.",
+          "Check lexicon_validation_registry.json for evidence status.",
+          "If term is missing or weakly supported, create a validation plan before claiming it as grounded.",
+          "If the term appears in lexicon_gap_queue.json, preserve gap status unless the current run closes a specific role."
+        ]
+      }
+    },
+
+    "add_to_governance": {
+      "heading": "### Lexicon Claim Rules",
+      "rules": [
+        "L0: term exists but has no operational test.",
+        "L1: term has one model or one run supporting one operational role.",
+        "L2: term has multi-model agreement but lacks full robustness or falsification.",
+        "L3: term has multi-model, multi-seed, falsification-passed support for a specific operational role.",
+        "A paper may say 'term-role verified at L3' only for the exact tested role.",
+        "If a claim uses an unverified term, conclusion must say 'proposed interpretation' rather than 'supported definition'."
+      ]
+    }
+  },
+
+  "create_file": {
+    "path": "lexicon_validation_registry.json",
+    "if_exists": "merge_do_not_overwrite",
+
+    "initial_schema": {
+      "registry_version": "1.0.0",
+      "created_for": "SPM lexicon operational validation",
+      "evidence_levels": {
+        "L0": "listed term, no operational validation",
+        "L1": "single model or single-run operational support",
+        "L2": "multi-model agreement, incomplete robustness or falsification",
+        "L3": "multi-model + multi-seed + falsification passed"
+      },
+      "classification_rules": {
+        "verified": "only role-specific L3",
+        "partially_verified": "L1 or L2 for one or more roles",
+        "gap_open": "definition unclear, role untested, or evidence contradictory",
+        "deprecated": "term should not be used without user approval"
+      },
+      "terms": {}
+    }
+  },
+
+  "seed_registry_entries": [
+    {
+      "term": "admissibility",
+      "canonical_source": "lexicon_canonical.json",
+      "aliases": ["admissible continuation", "filter", "allowed continuation"],
+      "global_status": "partially_verified",
+      "roles": {
+        "residue_gated_filter": {
+          "status": "L3",
+          "operational_definition": "Fraction of candidate continuations or updates accepted under current gating conditions.",
+          "metrics": [
+            "active_fraction",
+            "admissible_update_fraction",
+            "continuing_agent_fraction"
+          ],
+          "models_used": [
+            "ca_admissibility_sim_v1",
+            "fsa_rule_engine_sim_v1"
+          ],
+          "evidence_paths": [
+            "outputs/research_residue_necessity_2026-04-25/analysis/sweep_summary.csv",
+            "outputs/research_residue_necessity_2026-04-25/analysis/cross_model_comparison.json",
+            "outputs/research_residue_necessity_2026-04-25/runs/falsification/falsification_report.json"
+          ],
+          "known_limits": [
+            "CA residue is inhibitory under current implementation.",
+            "FSA residue is a scalar gating requirement, not full physical memory.",
+            "This verifies filtering behavior, not full structure preservation."
+          ],
+          "classification": "verified"
+        }
+      },
+      "open_roles": [
+        "structure_preservation",
+        "topological_continuity",
+        "semantic_admissibility"
+      ]
+    },
+    {
+      "term": "residue",
+      "canonical_source": "lexicon_canonical.json",
+      "aliases": ["R", "trace", "memory", "constraint memory"],
+      "global_status": "partially_verified",
+      "roles": {
+        "admissibility_gate": {
+          "status": "L3",
+          "operational_definition": "Accumulated state variable that reduces admissible continuation under gating rules.",
+          "metrics": [
+            "residue_growth",
+            "initial_residue",
+            "residue_required",
+            "active_fraction"
+          ],
+          "models_used": [
+            "ca_admissibility_sim_v1",
+            "fsa_rule_engine_sim_v1"
+          ],
+          "evidence_paths": [
+            "outputs/research_residue_necessity_2026-04-25/analysis/cross_model_comparison.json"
+          ],
+          "known_limits": [
+            "Validated as gate/filter, not yet fully validated as historical structural memory."
+          ],
+          "classification": "verified"
+        }
+      },
+      "open_roles": [
+        "memory_trace",
+        "structure_preserver",
+        "hysteresis_buffer",
+        "identity_support"
+      ]
+    },
+    {
+      "term": "continuation",
+      "canonical_source": "lexicon_canonical.json",
+      "aliases": ["update", "transition", "event-chain step"],
+      "global_status": "partially_verified",
+      "roles": {
+        "candidate_vs_admissible_continuation": {
+          "status": "L2",
+          "operational_definition": "A proposed update or transition, only some of which are accepted by admissibility rules.",
+          "metrics": [
+            "active_fraction",
+            "active_count",
+            "continuing_agent_fraction"
+          ],
+          "models_used": [
+            "ca_admissibility_sim_v1",
+            "fsa_rule_engine_sim_v1"
+          ],
+          "evidence_paths": [
+            "outputs/research_residue_necessity_2026-04-25/analysis/sweep_summary.csv"
+          ],
+          "known_limits": [
+            "Continuation measured as activity/non-halting only; temporal/process interpretation remains broader."
+          ],
+          "classification": "partially_verified"
+        }
+      },
+      "open_roles": [
+        "time-as-order",
+        "event_chain_generation",
+        "recoupling_continuation"
+      ]
+    }
+  ],
+
+  "agent_execution_steps": [
+    "Open agents.md if present; otherwise open GEMINI.md.",
+    "Insert the Lexicon Validation Program section after Theoretical Grounding & Lexicon.",
+    "Insert Lexicon Resolve & Validate as a workflow step after Analyze.",
+    "Insert Lexicon Claim Rules into Governance.",
+    "Create lexicon_validation_registry.json if missing.",
+    "If registry already exists, merge schema fields and seed entries without deleting existing entries.",
+    "Verify JSON validity after editing.",
+    "Report changed files and any unresolved conflicts."
+  ],
+
+  "non_destructive_rules": [
+    "Do not overwrite lexicon_canonical.json.",
+    "Do not overwrite lexicon_alias_map.json.",
+    "Do not overwrite lexicon_gap_queue.json.",
+    "Do not delete existing registry entries.",
+    "Do not rename canonical terms.",
+    "Only append or merge unless user explicitly approves deeper edits."
+  ]
+}

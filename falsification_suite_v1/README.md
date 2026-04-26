@@ -16,6 +16,9 @@ Run the core theory suite:
 python run_falsification.py --config tests/core_theory_tests.json
 ```
 
+Relative paths in the suite JSON (e.g. `target_script`, `base_config`) resolve relative to the suite file location,
+so you can invoke the harness from any working directory.
+
 ## Test Definition Schema
 
 Each test in the JSON file defines:

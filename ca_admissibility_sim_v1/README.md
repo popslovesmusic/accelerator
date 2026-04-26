@@ -30,6 +30,16 @@ $$R_{i,j}(t+1) = R_{i,j}(t) \cdot (1 - \gamma_R) + \delta_R \cdot \text{ActiveMa
 python sim.py --config configs/default.json --out outputs/ca_run_01
 ```
 
+## Reproducible stochastic initialization (optional)
+
+The CA update rule is deterministic, but you can introduce *seeded* run-to-run variability by adding Gaussian noise at initialization:
+
+- `epsilon_noise_std` (default `0.0`): stddev of noise added to the initial mismatch field `epsilon`.
+- `residue_noise_std` (default `0.0`): stddev of noise added to the initial residue field `R` (clamped to nonnegative after noise).
+- `seed`: RNG seed used for the initialization noise.
+
+This preserves existing behavior unless you set the noise stddevs to non-zero values.
+
 ## Outputs
 
 - `metrics.csv`: Time-series of active cell fraction and mean mismatch.

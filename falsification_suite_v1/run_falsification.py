@@ -39,10 +39,35 @@ def evaluate_assertion(assertion, metrics):
     
     return passed, f"{val:.4f} {op} {threshold}"
 
-def run_test(test_def, output_root):
+def _find_repo_root(start: Path) -> Path | None:
+    for candidate in [start, *start.parents]:
+        if (candidate / "tool_manifest.json").exists():
+            return candidate
+    return None
+
+def _resolve_maybe_relative(path_value: str, suite_dir: Path, repo_root: Path | None) -> Path:
+    path = Path(path_value)
+    if path.is_absolute():
+        return path
+
+    # Prefer suite-relative paths, but keep backward compatibility with older suites that
+    # were authored assuming CWD == falsification_suite_v1 (and thus use "../tool/...").
+    base_dirs: list[Path] = [suite_dir, suite_dir.parent]
+    if repo_root is not None:
+        base_dirs.append(repo_root)
+
+    for base in base_dirs:
+        candidate = (base / path).resolve()
+        if candidate.exists():
+            return candidate
+
+    # Fall back to suite-relative resolution even if it doesn't exist to preserve errors.
+    return (suite_dir / path).resolve()
+
+def run_test(test_def, output_root, suite_dir: Path, repo_root: Path | None):
     test_name = test_def['name']
-    target_script = Path(test_def['target_script']).resolve()
-    base_config_path = Path(test_def['base_config']).resolve()
+    target_script = _resolve_maybe_relative(test_def['target_script'], suite_dir, repo_root)
+    base_config_path = _resolve_maybe_relative(test_def['base_config'], suite_dir, repo_root)
     
     # Strict sanitization for Windows paths
     safe_name = "".join([c if c.isalnum() else "_" for c in test_name])
@@ -110,7 +135,11 @@ def main():
     parser.add_argument("--out", type=str, default="outputs/falsification_report", help="Output directory")
     args = parser.parse_args()
     
-    with open(args.config, 'r') as f:
+    suite_path = Path(args.config).resolve()
+    suite_dir = suite_path.parent
+    repo_root = _find_repo_root(suite_path.parent)
+
+    with open(suite_path, 'r') as f:
         suite = json.load(f)
         
     output_root = Path(args.out)
@@ -121,7 +150,7 @@ def main():
     results = []
     for test_def in suite['tests']:
         print(f"Running: {test_def['name']}...", end="", flush=True)
-        res = run_test(test_def, output_root)
+        res = run_test(test_def, output_root, suite_dir=suite_dir, repo_root=repo_root)
         results.append(res)
         print(f" [{res['status']}]")
         if res['status'] == 'FAIL':

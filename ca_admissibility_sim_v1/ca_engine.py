@@ -6,10 +6,22 @@ class AdmissibilityCA:
         self.D = config['diffusion_rate']
         self.delta_R = config['residue_growth']
         self.gamma_R = config['residue_decay']
+        self.seed = int(config.get("seed", 42))
+        self.rng = np.random.default_rng(self.seed)
+
+        self.epsilon_noise_std = float(config.get("epsilon_noise_std", 0.0))
+        self.residue_noise_std = float(config.get("residue_noise_std", 0.0))
         
         # State: Mismatch (epsilon) and Residue (R)
         self.epsilon = np.zeros((self.size, self.size))
         self.R = np.full((self.size, self.size), config['initial_residue'])
+
+        if self.epsilon_noise_std > 0.0:
+            self.epsilon = self.epsilon + self.rng.normal(scale=self.epsilon_noise_std, size=self.epsilon.shape)
+
+        if self.residue_noise_std > 0.0:
+            self.R = self.R + self.rng.normal(scale=self.residue_noise_std, size=self.R.shape)
+            self.R = np.maximum(self.R, 0.0)
         
         # Optional: Initialize a central source
         center = self.size // 2

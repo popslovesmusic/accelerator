@@ -1,0 +1,307 @@
+{
+  "registry_version": "1.0.0",
+  "created_for": "SPM lexicon operational validation",
+  "compliance_charter": {
+    "path": "theory/lexicon/compliance_charter_v2_3.json",
+    "version": "2.3",
+    "notes": [
+      "This registry tracks lexicon evidence levels (L0–L3) and also records charter-aware claim classifications and provenance.",
+      "If an entry is marked L3 here but does not meet the charter's v2.3 metric schema requirements, it must be treated as PROVISIONAL for charter purposes until rerun outputs are produced."
+    ]
+  },
+  "evidence_levels": {
+    "L0": "listed term, no operational validation",
+    "L1": "single model or single-run operational support",
+    "L2": "multi-model agreement, incomplete robustness or falsification",
+    "L3": "multi-model + multi-seed + falsification passed"
+  },
+  "classification_rules": {
+    "verified": "only role-specific L3",
+    "partially_verified": "L1 or L2 for one or more roles",
+    "gap_open": "definition unclear, role untested, or evidence contradictory",
+    "deprecated": "term should not be used without user approval"
+  },
+  "terms": {
+    "admissibility": {
+      "canonical_source": "theory/lexicon/lexicon_canonical.json",
+      "aliases": [
+        "admissible continuation",
+        "filter",
+        "allowed continuation"
+      ],
+      "global_status": "partially_verified",
+      "roles": {
+        "residue_gated_filter": {
+          "status": "L3",
+          "charter_claim_classification": "provisional",
+          "charter_provenance_citations": [
+            "LEXICON | residue_necessity_2026-04-25 | 2026-04-25 | outputs/research_residue_necessity_2026-04-25/analysis/sweep_summary.csv",
+            "LEXICON | residue_necessity_2026-04-25 | 2026-04-25 | outputs/research_residue_necessity_2026-04-25/analysis/cross_model_comparison.json",
+            "LEXICON | residue_necessity_2026-04-25 | 2026-04-25 | outputs/research_residue_necessity_2026-04-25/runs/falsification/falsification_report.json"
+          ],
+          "charter_rationale": [
+            "Evidence files are recoverable and falsification was executed, but the outputs are not guaranteed to conform to the charter annex_B v2.3 metric schema.",
+            "Treat as operational support within these models; do not treat as charter-verified empirical establishment until rerun-schema compliance is explicitly satisfied."
+          ],
+          "operational_definition": "Fraction of candidate continuations or updates accepted under current gating conditions.",
+          "metrics": [
+            "active_fraction",
+            "admissible_update_fraction",
+            "continuing_agent_fraction"
+          ],
+          "models_used": [
+            "ca_admissibility_sim_v1",
+            "fsa_rule_engine_sim_v1"
+          ],
+          "evidence_paths": [
+            "outputs/research_residue_necessity_2026-04-25/analysis/sweep_summary.csv",
+            "outputs/research_residue_necessity_2026-04-25/analysis/cross_model_comparison.json",
+            "outputs/research_residue_necessity_2026-04-25/runs/falsification/falsification_report.json"
+          ],
+          "known_limits": [
+            "CA residue is inhibitory under current implementation.",
+            "FSA residue is a scalar gating requirement, not full physical memory.",
+            "This verifies filtering behavior, not full structure preservation."
+          ],
+          "classification": "verified"
+        }
+      },
+      "open_roles": [
+        "structure_preservation",
+        "topological_continuity",
+        "semantic_admissibility"
+      ]
+    },
+    "residue": {
+      "canonical_source": "theory/lexicon/lexicon_canonical.json",
+      "aliases": [
+        "R",
+        "trace",
+        "memory",
+        "constraint memory"
+      ],
+      "global_status": "partially_verified",
+      "roles": {
+        "admissibility_gate": {
+          "status": "L3",
+          "charter_claim_classification": "provisional",
+          "charter_provenance_citations": [
+            "LEXICON | residue_necessity_2026-04-25 | 2026-04-25 | outputs/research_residue_necessity_2026-04-25/analysis/cross_model_comparison.json"
+          ],
+          "charter_rationale": [
+            "Role-level behavior is supported by recoverable files in multiple model classes.",
+            "Do not treat as charter-verified establishment until rerun-schema compliance is explicitly satisfied."
+          ],
+          "operational_definition": "Accumulated state variable that reduces admissible continuation under gating rules.",
+          "metrics": [
+            "residue_growth",
+            "initial_residue",
+            "residue_required",
+            "active_fraction"
+          ],
+          "models_used": [
+            "ca_admissibility_sim_v1",
+            "fsa_rule_engine_sim_v1"
+          ],
+          "evidence_paths": [
+            "outputs/research_residue_necessity_2026-04-25/analysis/cross_model_comparison.json"
+          ],
+          "known_limits": [
+            "Validated as gate/filter, not yet fully validated as historical structural memory."
+          ],
+          "classification": "verified"
+        }
+      },
+      "open_roles": [
+        "memory_trace",
+        "structure_preserver",
+        "hysteresis_buffer",
+        "identity_support"
+      ]
+    },
+    "continuation": {
+      "canonical_source": "theory/lexicon/lexicon_canonical.json",
+      "aliases": [
+        "update",
+        "transition",
+        "event-chain step"
+      ],
+      "global_status": "partially_verified",
+      "roles": {
+        "candidate_vs_admissible_continuation": {
+          "status": "L2",
+          "charter_claim_classification": "provisional",
+          "charter_provenance_citations": [
+            "LEXICON | residue_necessity_2026-04-25 | 2026-04-25 | outputs/research_residue_necessity_2026-04-25/analysis/sweep_summary.csv"
+          ],
+          "charter_rationale": [
+            "Evidence is recoverable but role definition remains narrower than broader 'continuation' usage in the theory text."
+          ],
+          "operational_definition": "A proposed update or transition, only some of which are accepted by admissibility rules.",
+          "metrics": [
+            "active_fraction",
+            "active_count",
+            "continuing_agent_fraction"
+          ],
+          "models_used": [
+            "ca_admissibility_sim_v1",
+            "fsa_rule_engine_sim_v1"
+          ],
+          "evidence_paths": [
+            "outputs/research_residue_necessity_2026-04-25/analysis/sweep_summary.csv"
+          ],
+          "known_limits": [
+            "Continuation measured as activity/non-halting only; temporal/process interpretation remains broader."
+          ],
+          "classification": "partially_verified"
+        }
+      },
+      "open_roles": [
+        "time-as-order",
+        "event_chain_generation",
+        "recoupling_continuation"
+      ]
+    },
+    "epsilon": {
+      "canonical_source": "theory/lexicon/lexicon_canonical.json",
+      "aliases": [
+        "ε",
+        "varepsilon",
+        "mismatch",
+        "difference"
+      ],
+      "global_status": "partially_verified",
+      "roles": {
+        "driver_signal_for_activity": {
+          "status": "L3",
+          "charter_claim_classification": "provisional",
+          "charter_provenance_citations": [
+            "LEXICON | lexicon_validation_2026-04-25 | 2026-04-25 | outputs/lexicon_validation_program_2026-04-25/analysis/lexicon_validation_summary.json",
+            "LEXICON | lexicon_validation_2026-04-25 | 2026-04-25 | outputs/lexicon_validation_program_2026-04-25/batch_ca_epsilon_v2/analysis/index.csv",
+            "LEXICON | lexicon_validation_2026-04-25 | 2026-04-25 | outputs/lexicon_validation_program_2026-04-25/batch_agent_mismatch/analysis/index.csv",
+            "LEXICON | lexicon_validation_2026-04-25 | 2026-04-25 | outputs/lexicon_validation_program_2026-04-25/runs/falsification/falsification_report.json"
+          ],
+          "charter_rationale": [
+            "Evidence files are recoverable and include multi-seed runs plus falsification.",
+            "Treat as operational support within these model classes; do not treat as charter-verified empirical establishment until rerun-schema compliance is explicitly satisfied."
+          ],
+          "operational_definition": "A mismatch / difference signal whose magnitude controls admissible update activity or downstream residue growth.",
+          "metrics": [
+            "source_strength",
+            "active_fraction",
+            "mismatch_mean",
+            "residue_mean"
+          ],
+          "models_used": [
+            "ca_admissibility_sim_v1",
+            "agent_based_sim_v1"
+          ],
+          "evidence_paths": [
+            "outputs/lexicon_validation_program_2026-04-25/analysis/lexicon_validation_summary.json",
+            "outputs/lexicon_validation_program_2026-04-25/batch_ca_epsilon_v2/analysis/index.csv",
+            "outputs/lexicon_validation_program_2026-04-25/batch_agent_mismatch/analysis/index.csv",
+            "outputs/lexicon_validation_program_2026-04-25/runs/falsification/falsification_report.json"
+          ],
+          "known_limits": [
+            "CA epsilon is implemented as a static injected source and diffuses; it is not generated endogenously in this model.",
+            "Agent mismatch is a scalar state variable driven by mismatch_rate; it is not directly derived from spatial gradients."
+          ],
+          "classification": "verified"
+        }
+      },
+      "open_roles": [
+        "NOT_axiom_floor",
+        "endogenous_generation",
+        "semantic_difference"
+      ]
+    },
+    "coupling": {
+      "canonical_source": "theory/lexicon/lexicon_canonical.json",
+      "aliases": [
+        "CSI",
+        "csi",
+        "K",
+        "interaction domain"
+      ],
+      "global_status": "partially_verified",
+      "roles": {
+        "phase_synchrony_gain": {
+          "status": "L3",
+          "charter_claim_classification": "provisional",
+          "charter_provenance_citations": [
+            "LEXICON | lexicon_validation_2026-04-25 | 2026-04-25 | outputs/lexicon_validation_program_2026-04-25/analysis/lexicon_validation_summary.json",
+            "LEXICON | lexicon_validation_2026-04-25 | 2026-04-25 | outputs/lexicon_validation_program_2026-04-25/batch_kuramoto_coupling/analysis/index.csv",
+            "LEXICON | lexicon_validation_2026-04-25 | 2026-04-25 | outputs/lexicon_validation_program_2026-04-25/batch_agent_coupling/analysis/index.csv",
+            "LEXICON | lexicon_validation_2026-04-25 | 2026-04-25 | outputs/lexicon_validation_program_2026-04-25/runs/falsification/falsification_report.json"
+          ],
+          "charter_rationale": [
+            "Evidence files are recoverable and include multi-seed runs plus falsification.",
+            "Treat as operational support within these model classes; do not treat as charter-verified empirical establishment until rerun-schema compliance is explicitly satisfied."
+          ],
+          "operational_definition": "A coupling/reach parameter that increases phase coherence (order_parameter) across interacting units.",
+          "metrics": [
+            "K",
+            "K_phi",
+            "order_parameter",
+            "local_coherence_mean"
+          ],
+          "models_used": [
+            "kuramoto_sim_v1",
+            "agent_based_sim_v1"
+          ],
+          "evidence_paths": [
+            "outputs/lexicon_validation_program_2026-04-25/analysis/lexicon_validation_summary.json",
+            "outputs/lexicon_validation_program_2026-04-25/batch_kuramoto_coupling/analysis/index.csv",
+            "outputs/lexicon_validation_program_2026-04-25/batch_agent_coupling/analysis/index.csv",
+            "outputs/lexicon_validation_program_2026-04-25/runs/falsification/falsification_report.json"
+          ],
+          "known_limits": [
+            "This validates coupling as a synchrony gain control; it does not validate all uses of 'coupling' (e.g., structural reachability or semantic coupling)."
+          ],
+          "classification": "verified"
+        }
+      },
+      "open_roles": [
+        "topological_reach",
+        "corridor_formation",
+        "recoupling_thresholds"
+      ]
+    },
+    "delta": {
+      "canonical_source": "theory/lexicon/lexicon_canonical.json",
+      "aliases": [
+        "Δ",
+        "transition",
+        "activation_operator"
+      ],
+      "global_status": "gap_open",
+      "roles": {
+        "activation_transition_operator": {
+          "status": "L0",
+          "charter_claim_classification": "provisional",
+          "charter_provenance_citations": [],
+          "charter_rationale": [
+            "This entry records the term for the lexicon validation program; it has not yet been operationally verified by role under multi-model + falsification criteria."
+          ],
+          "operational_definition": "A procedural operator that conditionally triggers an admissible activation event (e.g., seeding mismatch or enabling an update) only when an admissibility predicate is satisfied.",
+          "metrics": [
+            "activation_events",
+            "inadmissible_activation_fraction_max",
+            "traceability_failure_fraction_max"
+          ],
+          "models_used": [],
+          "evidence_paths": [],
+          "known_limits": [
+            "In current engines, delta-like behavior may be implicit in update rules rather than an explicit operator."
+          ],
+          "classification": "gap_open"
+        }
+      },
+      "open_roles": [
+        "explicit_delta_gating",
+        "delta_parameterization",
+        "cross_model_delta_equivalence"
+      ]
+    }
+  }
+}

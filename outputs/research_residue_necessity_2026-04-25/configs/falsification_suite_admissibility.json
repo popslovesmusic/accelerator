@@ -1,0 +1,96 @@
+{
+  "tests": [
+    {
+      "name": "No Coupling -> No Synch (Kuramoto)",
+      "target_script": "D:\\acellorator\\kuramoto_sim_v1\\sim.py",
+      "base_config": "D:\\acellorator\\kuramoto_sim_v1\\configs\\default.json",
+      "overrides": {
+        "K": 0.0,
+        "steps": 500
+      },
+      "assertions": [
+        "order_parameter < 0.2"
+      ]
+    },
+    {
+      "name": "Low Noise Trapping (Stochastic)",
+      "target_script": "D:\\acellorator\\stochastic_sim_v1\\sim.py",
+      "base_config": "D:\\acellorator\\stochastic_sim_v1\\configs\\default.json",
+      "overrides": {
+        "sigma": 0.01,
+        "steps": 500
+      },
+      "assertions": [
+        "crossing_fraction == 0.0"
+      ]
+    },
+    {
+      "name": "Zero Mismatch -> Inert (CA)",
+      "target_script": "D:\\acellorator\\ca_admissibility_sim_v1\\sim.py",
+      "base_config": "D:\\acellorator\\ca_admissibility_sim_v1\\configs\\zero_logic_check.json",
+      "overrides": {
+        "steps": 100
+      },
+      "assertions": [
+        "active_fraction == 0.0"
+      ]
+    },
+    {
+      "name": "Admissibility Off (CA) -> Runaway Activity",
+      "target_script": "D:\\acellorator\\ca_admissibility_sim_v1\\sim.py",
+      "base_config": "D:\\acellorator\\ca_admissibility_sim_v1\\configs\\default.json",
+      "overrides": {
+        "steps": 200,
+        "residue_growth": 0.0,
+        "initial_residue": 0.0
+      },
+      "assertions": [
+        "active_fraction > 0.9"
+      ]
+    },
+    {
+      "name": "Strong Residue (CA) -> Low Activity",
+      "target_script": "D:\\acellorator\\ca_admissibility_sim_v1\\sim.py",
+      "base_config": "D:\\acellorator\\ca_admissibility_sim_v1\\configs\\default.json",
+      "overrides": {
+        "steps": 200,
+        "residue_growth": 0.1,
+        "initial_residue": 0.2
+      },
+      "assertions": [
+        "active_fraction < 0.05"
+      ]
+    },
+    {
+      "name": "Fully Gated (FSA) -> Immediate Halt",
+      "target_script": "D:\\acellorator\\fsa_rule_engine_sim_v1\\sim.py",
+      "base_config": "D:\\acellorator\\fsa_rule_engine_sim_v1\\configs\\default.json",
+      "overrides": {
+        "steps": 10,
+        "edge_prob": 1.0,
+        "residue_threshold_node": 0,
+        "residue_required": 1000,
+        "seed": 0
+      },
+      "assertions": [
+        "active_count == 0"
+      ]
+    },
+    {
+      "name": "No Gating + Dense Graph (FSA) -> All Active",
+      "target_script": "D:\\acellorator\\fsa_rule_engine_sim_v1\\sim.py",
+      "base_config": "D:\\acellorator\\fsa_rule_engine_sim_v1\\configs\\default.json",
+      "overrides": {
+        "steps": 10,
+        "edge_prob": 1.0,
+        "residue_threshold_node": 999,
+        "residue_required": 0,
+        "seed": 0
+      },
+      "assertions": [
+        "active_count == 1000"
+      ]
+    }
+  ]
+}
+

@@ -1,0 +1,103 @@
+{
+  "tests": [
+    {
+      "name": "Agent Mismatch Off -> Zero Residue",
+      "target_script": "../../../agent_based_sim_v1/sim.py",
+      "base_config": "agent_mismatch_mr0.json",
+      "overrides": {
+        "steps": 300,
+        "seed": 101
+      },
+      "assertions": [
+        "mismatch_mean == 0.0",
+        "residue_mean == 0.0"
+      ]
+    },
+    {
+      "name": "Agent Mismatch On -> Residue Grows",
+      "target_script": "../../../agent_based_sim_v1/sim.py",
+      "base_config": "agent_mismatch_mr1e2.json",
+      "overrides": {
+        "steps": 300,
+        "seed": 101
+      },
+      "assertions": [
+        "mismatch_mean > 0.01",
+        "residue_mean > 0.1"
+      ]
+    },
+    {
+      "name": "Kuramoto No Coupling -> Low Order",
+      "target_script": "../../../kuramoto_sim_v1/sim.py",
+      "base_config": "kuramoto_K0.json",
+      "overrides": {
+        "steps": 400,
+        "seed": 201
+      },
+      "assertions": [
+        "order_parameter < 0.2"
+      ]
+    },
+    {
+      "name": "Kuramoto Strong Coupling -> Higher Order",
+      "target_script": "../../../kuramoto_sim_v1/sim.py",
+      "base_config": "kuramoto_K2.json",
+      "overrides": {
+        "steps": 400,
+        "seed": 201
+      },
+      "assertions": [
+        "order_parameter > 0.25"
+      ]
+    },
+    {
+      "name": "Agent Coupling Off -> Low Order",
+      "target_script": "../../../agent_based_sim_v1/sim.py",
+      "base_config": "agent_coupling_kp0.json",
+      "overrides": {
+        "steps": 300,
+        "seed": 201
+      },
+      "assertions": [
+        "order_parameter < 0.2"
+      ]
+    },
+    {
+      "name": "Agent Coupling On -> High Order",
+      "target_script": "../../../agent_based_sim_v1/sim.py",
+      "base_config": "agent_coupling_kp2.json",
+      "overrides": {
+        "steps": 300,
+        "seed": 201
+      },
+      "assertions": [
+        "order_parameter > 0.8"
+      ]
+    },
+    {
+      "name": "CA Zero Source -> Inert",
+      "target_script": "../../../ca_admissibility_sim_v1/sim.py",
+      "base_config": "ca_epsilon_v2_src0.json",
+      "overrides": {
+        "steps": 200,
+        "seed": 101
+      },
+      "assertions": [
+        "active_fraction == 0.0"
+      ]
+    },
+    {
+      "name": "CA Nonzero Source -> Some Activity",
+      "target_script": "../../../ca_admissibility_sim_v1/sim.py",
+      "base_config": "ca_epsilon_v2_src10.json",
+      "overrides": {
+        "steps": 200,
+        "seed": 101
+      },
+      "assertions": [
+        "active_fraction > 0.0"
+      ]
+    }
+  ]
+}
+

@@ -1,0 +1,47 @@
+{
+  "tests": [
+    {
+      "name": "RT1 P1: CA forbids inadmissible updates",
+      "target_script": "../../wrappers/rt1_ca_runner.py",
+      "base_config": "../../configs/rt1_ca_baseline.json",
+      "overrides": {
+        "engine_config": {
+          "seed": 101,
+          "epsilon_noise_std": 0.02
+        }
+      },
+      "assertions": [
+        "inadmissible_update_fraction_max == 0.0",
+        "inadmissible_activation_fraction_max == 0.0"
+      ]
+    },
+    {
+      "name": "RT1 P1/P2: Graph forbids inadmissible recoupling",
+      "target_script": "../../wrappers/rt1_graph_runner.py",
+      "base_config": "../../configs/rt1_graph_baseline.json",
+      "overrides": {
+        "engine_config": {
+          "seed": 101,
+          "steps": 400
+        }
+      },
+      "assertions": [
+        "inadmissible_edge_add_fraction_max == 0.0"
+      ]
+    },
+    {
+      "name": "RT1 Negative Control: RD can leak signal outside domain when decay is fast",
+      "target_script": "../../wrappers/rt1_rd_runner.py",
+      "base_config": "../../configs/rt1_rd_falsify_leak.json",
+      "overrides": {
+        "engine_config": {
+          "seed": 101,
+          "steps": 400
+        }
+      },
+      "assertions": [
+        "signal_outside_domain_fraction_max > 0.0"
+      ]
+    }
+  ]
+}

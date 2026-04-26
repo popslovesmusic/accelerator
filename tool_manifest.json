@@ -21,6 +21,14 @@
       "metrics": ["active_fraction", "mean_mismatch", "mean_residue"]
     },
     {
+      "name": "ca_admissibility_sim_v1_cpp",
+      "description": "High-performance AVX2 2D Cellular Automata with gated diffusion rules.",
+      "entry_point": "ca_admissibility_sim_v1_cpp/ca_sim_benchmark.exe",
+      "cli_command": "./ca_admissibility_sim_v1_cpp/ca_sim_benchmark.exe",
+      "config_params": ["width", "height", "steps", "D", "delta_R"],
+      "metrics": ["active_fraction", "mean_mismatch", "runtime_ms"]
+    },
+    {
       "name": "graph_dynamics_sim_v1",
       "description": "Dynamic network simulation for topological corridors.",
       "entry_point": "graph_dynamics_sim_v1/sim.py",
@@ -109,6 +117,14 @@
       "metrics": ["bifurcation_trace.csv"]
     },
     {
+      "name": "bifurcation_analyzer_v1_cpp",
+      "description": "High-speed bifurcation and stability analyzer with Lyapunov exponents.",
+      "entry_point": "bifurcation_analyzer_v1_cpp/bifurcation_benchmark.exe",
+      "cli_command": "./bifurcation_analyzer_v1_cpp/bifurcation_benchmark.exe",
+      "config_params": ["start", "end", "steps", "plateau_len"],
+      "metrics": ["lyapunov_exponent", "observable_mean", "runtime_ms"]
+    },
+    {
       "name": "tda_module_v1",
       "description": "Topological Data Analysis (Betti-0) for spatial fields.",
       "entry_point": "tda_module_v1/analyze_topology.py",
@@ -117,12 +133,44 @@
       "metrics": ["count", "max_size", "active_fraction"]
     },
     {
+      "name": "circular_accelerator_sim_v1_cpp",
+      "description": "High-fidelity AVX2/Yoshida 6D ring simulation with turn-by-turn tracking.",
+      "entry_point": "circular_accelerator_sim_v1_cpp/circular_sim_benchmark.exe",
+      "cli_command": "./circular_accelerator_sim_v1_cpp/circular_sim_benchmark.exe",
+      "config_params": ["particles", "turns", "circumference", "momentum_compaction"],
+      "metrics": ["x_rms", "z_rms", "survival_fraction", "runtime_ms"]
+    },
+    {
       "name": "falsification_suite_v1",
       "description": "Automated harness for negative behavior tests.",
       "entry_point": "falsification_suite_v1/run_falsification.py",
       "cli_command": "python falsification_suite_v1/run_falsification.py --config {suite_config} --out {out_dir}",
       "config_params": ["tests"],
       "metrics": ["falsification_report.json"]
+    },
+    {
+      "name": "falsification_suite_v1_cpp",
+      "description": "High-performance parallel unit test and falsification harness.",
+      "entry_point": "falsification_suite_v1_cpp/falsification_benchmark.exe",
+      "cli_command": "./falsification_suite_v1_cpp/falsification_benchmark.exe",
+      "config_params": ["suite_json", "num_threads"],
+      "metrics": ["pass_rate", "failures", "runtime_ms"]
+    },
+    {
+      "name": "agent_based_sim_v1_cpp",
+      "description": "High-performance AVX2/Spatial-Hash swarm simulation with RK4 integration.",
+      "entry_point": "agent_based_sim_v1_cpp/agent_sim_benchmark.exe",
+      "cli_command": "./agent_based_sim_v1_cpp/agent_sim_benchmark.exe",
+      "config_params": ["agent_count", "steps", "R_c", "K_phi"],
+      "metrics": ["order_parameter", "residue_mean", "runtime_ms"]
+    },
+    {
+      "name": "accelerator_sim_v1_cpp",
+      "description": "High-fidelity AVX2/SYCL 6D accelerator simulation with PIC Space Charge, 4th-order Yoshida integration, and Field Map support.",
+      "entry_point": "accelerator_sim_v1_cpp/acc_sim",
+      "cli_command": "./accelerator_sim_v1_cpp/acc_sim",
+      "config_params": ["particles", "steps", "lattice_json", "use_gpu"],
+      "metrics": ["x_rms", "y_rms", "delta_rms", "survival_fraction", "emittance_proxy", "runtime_ns"]
     }
   ]
 }
