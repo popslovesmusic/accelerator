@@ -1,5 +1,5 @@
 @echo off
-call "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat"
+call "C:\Program Files\Microsoft Visual Studio\18\Community\VC\Auxiliary\Build\vcvars64.bat"
 
 echo Compiling FalsificationSuiteAVX2...
 cl /O2 /arch:AVX2 /openmp /EHsc /I. ^
@@ -12,3 +12,4 @@ if %ERRORLEVEL% EQU 0 (
 ) else (
     echo Compilation failed.
 )
+

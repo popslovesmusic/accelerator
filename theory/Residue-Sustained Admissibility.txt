@@ -1,0 +1,154 @@
+Technical Note: Residue-Sustained Admissibility
+Bridging State Persistence and Admissibility Windows
+0. Metadata
+{
+  "claim_id": "residue_sustains_admissibility_margin",
+  "status": "L2",
+  "classification": "theoretical + partially supported",
+  "models_used": ["structural_box_sim_v2"],
+  "model_classes": ["PDE"],
+  "seeds_used": 2,
+  "falsification_run": false,
+  "overreach_check": "passed"
+}
+1. Abstract
+
+We extend the admissibility-window formalism by introducing the admissibility margin μₜ and showing how residue (R) sustains continuation not only by preserving state deviation (ε ≠ 0), but by maintaining a non-empty admissible successor set. This establishes a direct bridge between empirical hysteresis behavior and formal continuation conditions.
+
+2. Theoretical Mapping
+{
+  "epsilon": "active deviation (ε ≠ 0)",
+  "residue": "historical trace influencing future admissibility",
+  "coupling": "ρ provides support scaling admissibility cost"
+}
+3. Core Definitions
+
+From the admissibility formalism:
+
+xₜ₊₁ ∈ Aₜ ⇔ Φ(xₜ₊₁; …) ≤ Θₜ
+
+Define:
+
+Admissibility Margin
+
+μₜ = Θₜ − Φₜ
+
+Condition	Meaning
+μₜ > 0	admissible
+μₜ = 0	boundary
+μₜ < 0	inadmissible
+4. Gap Statement
+
+Prior results show:
+
+Residue R sustains ε under decay conditions
+
+However, continuation is formally governed by:
+
+Aₜ ≠ ∅
+
+Thus the unresolved question:
+
+Does R sustain ε, or does R sustain Aₜ?
+
+5. Residue–Admissibility Mechanism
+
+We introduce the key dependency:
+
+μₜ = Θₜ − Φₜ
+
+Residue enters via two equivalent channels:
+
+5.1 Cost Reduction Model
+
+Φ = Φ₀ − kRₜ
+
+Residue lowers effective transition cost.
+
+5.2 Window Expansion Model
+
+Θₜ = Θ₀ + b|Rₜ|
+
+Residue increases tolerance.
+
+Result
+
+∂μₜ / ∂Rₜ > 0
+
+So:
+
+Residue increases admissibility margin
+
+6. Bridging Theorem
+Residue-Sustained Admissibility
+
+If:
+
+εₜ ≠ 0
+∧ (AND)
+∂μₜ/∂Rₜ > 0
+
+Then:
+
+Rₜ ⇒ μₜ ≥ 0 persists longer
+
+Therefore:
+
+Rₜ ⇒ Aₜ ≠ ∅ persists ⇒ continuation persists
+
+7. Empirical Alignment
+
+From hysteresis simulation:
+
+higher R → slower decay of ε
+persistence under negative growth
+
+Interpretation:
+
+sustained ε implies continued state evolution
+⇒ admissible transitions still exist
+⇒ μₜ remains ≥ 0 longer
+
+8. Observables (Required Upgrade)
+
+Introduce direct measurement:
+
+{
+  "observable": "admissibility_margin_mu",
+  "definition": "mu_t = Theta_t - Phi_t",
+  "goal": "measure time until mu_t < 0 under varying R"
+}
+
+Key test:
+
+compare high-R vs low-R systems
+measure time-to-decoupling (μₜ < 0)
+9. Classification
+Empirical support: ε persistence ✔
+Formal extension: μₜ dependence ✔
+Direct measurement of μₜ: ❌ (not yet done)
+
+→ L2: partially supported
+
+10. Conclusion
+
+Within these models:
+
+Residue does not merely preserve deviation—it structurally sustains continuation by maintaining a positive admissibility margin.
+
+This upgrades the interpretation of residue from:
+
+passive memory →
+active modifier of the admissibility window
+11. Next Steps
+implement μₜ measurement in all simulations
+run multi-model validation:
+PDE + CA + agent-based
+perform falsification:
+test regimes where R fails to sustain μₜ
+determine boundary conditions:
+when ∂μ/∂R ≤ 0
+Final Compression (your style)
+
+Continuation = admissibility ≠ ∅
+Residue ⇒ μₜ ≥ 0 ⇒ admissibility persists

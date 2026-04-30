@@ -34,7 +34,7 @@ Design priorities:
 Project directory:
 
 ```text
-D:\acellorator\accelerator_sim_v1
+D:\projects\acellorator\accelerator_sim_v1
 ```
 
 Main files:
@@ -60,7 +60,7 @@ x, px, y, py, z, delta
 ### Default Run Command
 
 ```powershell
-cd D:\acellorator\accelerator_sim_v1
+cd D:\projects\acellorator\accelerator_sim_v1
 python sim.py --config configs/optiplex_default.json --out outputs/run_default
 ```
 
@@ -94,7 +94,7 @@ The linear simulator was checked for:
 Default output directory:
 
 ```text
-D:\acellorator\accelerator_sim_v1\outputs\run_default
+D:\projects\acellorator\accelerator_sim_v1\outputs\run_default
 ```
 
 Generated files:
@@ -111,7 +111,7 @@ Generated files:
 Project directory:
 
 ```text
-D:\acellorator\circular_accelerator_sim_v1
+D:\projects\acellorator\circular_accelerator_sim_v1
 ```
 
 Main files:
@@ -138,7 +138,7 @@ x, px, y, py, z, delta
 ### Default Run Command
 
 ```powershell
-cd D:\acellorator\circular_accelerator_sim_v1
+cd D:\projects\acellorator\circular_accelerator_sim_v1
 python ring_sim.py --config configs/optiplex_ring_default.json --out outputs/ring_default
 ```
 
@@ -172,7 +172,7 @@ The circular simulator was checked for:
 Default output directory:
 
 ```text
-D:\acellorator\circular_accelerator_sim_v1\outputs\ring_default
+D:\projects\acellorator\circular_accelerator_sim_v1\outputs\ring_default
 ```
 
 Generated files:
@@ -215,3 +215,4 @@ Recommended next implementation tasks:
 - Add comparison plots across runs.
 - Add an R730-scale config for larger particle counts and longer runs.
 - Add optional elliptical aperture and dipole elements.
+

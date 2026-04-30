@@ -35,6 +35,7 @@ The project emphasizes:
 - `parameter_optimizer_v1`: Inverse problem solver using gradient-free optimization (Nelder-Mead) to discover optimal regimes.
 - `tda_module_v1`: Topological Data Analysis module for quantifying pockets, corridors, and fragmentation.
 - `falsification_suite_v1`: Unit test / falsification harness for verifying theoretical limiting cases and preventing self-confirmation bias.
+- `multi_sim_runner`: Governed orchestration tool for running multiple simulations in serial, parallel, or dependency-graph mode.
 
 ## Quick Start
 

@@ -1,866 +1,930 @@
-﻿{
-    "project":  "Acellorator Research Ecosystem",
-    "version":  "1.0.1",
-    "governance":  "cross_verification_protocol.json",
-    "usage_policy":  "Agent may execute tools but MUST NOT modify engine code or core scripts. MUST follow cross_verification_protocol.json for all research claims.",
-    "tools":  [
-                  {
-                      "name":  "agent_based_sim_v1",
-                      "description":  "Phase-space swarm simulation for local-to-global rules.",
-                      "entry_point":  "agent_based_sim_v1/sim.py",
-                      "cli_command":  "python agent_based_sim_v1/sim.py --config {config} --out {out_dir}",
-                      "config_params":  [
-                                            "n_agents",
-                                            "R_c",
-                                            "K_phi",
-                                            "kappa",
-                                            "mismatch_rate"
-                                        ],
-                      "metrics":  [
-                                      "order_parameter",
-                                      "residue_mean",
-                                      "local_coherence_mean"
-                                  ],
-                      "model_class":  "agent",
-                      "certification_level":  "C0",
-                      "validation_path":  "agent_based_sim_v1/validation/",
-                      "last_validation_date":  "",
-                      "has_falsification":  false,
-                      "numerical_stability_verified":  false,
-                      "uncertainty_quantified":  false,
-                      "provenance_verified":  false
-                  },
-                  {
-                      "name":  "ca_admissibility_sim_v1",
-                      "description":  "2D Cellular Automata for admissibility and zero logic.",
-                      "entry_point":  "ca_admissibility_sim_v1/sim.py",
-                      "cli_command":  "python ca_admissibility_sim_v1/sim.py --config {config} --out {out_dir}",
-                      "config_params":  [
-                                            "grid_size",
-                                            "diffusion_rate",
-                                            "residue_growth",
-                                            "residue_decay"
-                                        ],
-                      "metrics":  [
-                                      "active_fraction",
-                                      "mean_mismatch",
-                                      "mean_residue"
-                                  ],
-                      "model_class":  "discrete_ca",
-                      "certification_level":  "C0",
-                      "validation_path":  "ca_admissibility_sim_v1/validation/",
-                      "last_validation_date":  "",
-                      "has_falsification":  false,
-                      "numerical_stability_verified":  false,
-                      "uncertainty_quantified":  false,
-                      "provenance_verified":  false
-                  },
-                  {
-                      "name":  "fsa_rule_engine_sim_v1_cpp",
-                      "description":  "High-performance CSR-graph-based FSA agent engine with parallel navigation and SYCL/GPU acceleration (Intel UHD 770).",
-                      "entry_point":  "fsa_rule_engine_sim_v1_cpp/fsa_sim_benchmark.exe",
-                      "cli_command":  "./fsa_rule_engine_sim_v1_cpp/fsa_sim_benchmark.exe",
-                      "config_params":  [
-                                            "num_agents",
-                                            "n_states",
-                                            "steps",
-                                            "res_req"
-                                        ],
-                      "metrics":  [
-                                      "active_count",
-                                      "mean_residue",
-                                      "runtime_ms"
-                                  ],
-                      "model_class":  "finite_state",
-                      "certification_level":  "C0",
-                      "validation_path":  "fsa_rule_engine_sim_v1_cpp/validation/",
-                      "last_validation_date":  "",
-                      "has_falsification":  false,
-                      "numerical_stability_verified":  false,
-                      "uncertainty_quantified":  false,
-                      "provenance_verified":  false
-                  },
-                  {
-                      "name":  "ca_admissibility_sim_v1_cpp",
-                      "description":  "High-performance AVX2/SYCL 2D Cellular Automata with gated diffusion rules and GPU offloading (Intel UHD 770).",
-                      "entry_point":  "ca_admissibility_sim_v1_cpp/ca_sim_benchmark.exe",
-                      "cli_command":  "./ca_admissibility_sim_v1_cpp/ca_sim_benchmark.exe",
-                      "config_params":  [
-                                            "width",
-                                            "height",
-                                            "steps",
-                                            "D",
-                                            "delta_R"
-                                        ],
-                      "metrics":  [
-                                      "active_fraction",
-                                      "mean_mismatch",
-                                      "runtime_ms"
-                                  ],
-                      "model_class":  "discrete_ca",
-                      "certification_level":  "C0",
-                      "validation_path":  "ca_admissibility_sim_v1_cpp/validation/",
-                      "last_validation_date":  "",
-                      "has_falsification":  false,
-                      "numerical_stability_verified":  false,
-                      "uncertainty_quantified":  false,
-                      "provenance_verified":  false
-                  },
-                  {
-                      "name":  "graph_dynamics_sim_v1",
-                      "description":  "Dynamic network simulation for topological corridors.",
-                      "entry_point":  "graph_dynamics_sim_v1/sim.py",
-                      "cli_command":  "python graph_dynamics_sim_v1/sim.py --config {config} --out {out_dir}",
-                      "config_params":  [
-                                            "n_nodes",
-                                            "decouple_threshold",
-                                            "recouple_threshold",
-                                            "K_phi"
-                                        ],
-                      "metrics":  [
-                                      "edge_count",
-                                      "avg_degree",
-                                      "order_parameter"
-                                  ],
-                      "model_class":  "network",
-                      "certification_level":  "C0",
-                      "validation_path":  "graph_dynamics_sim_v1/validation/",
-                      "last_validation_date":  "",
-                      "has_falsification":  false,
-                      "numerical_stability_verified":  false,
-                      "uncertainty_quantified":  false,
-                      "provenance_verified":  false
-                  },
-                  {
-                      "name":  "graph_dynamics_sim_v1_cpp",
-                      "description":  "High-performance AVX2/SYCL dynamic network engine with parallel rewiring and GPU offloading (Intel UHD 770).",
-                      "entry_point":  "graph_dynamics_sim_v1_cpp/network_sim_benchmark.exe",
-                      "cli_command":  "./graph_dynamics_sim_v1_cpp/network_sim_benchmark.exe",
-                      "config_params":  [
-                                            "n_nodes",
-                                            "steps",
-                                            "K",
-                                            "theta_decouple"
-                                        ],
-                      "metrics":  [
-                                      "order_parameter",
-                                      "edge_count",
-                                      "runtime_ms"
-                                  ],
-                      "model_class":  "network",
-                      "certification_level":  "C0",
-                      "validation_path":  "graph_dynamics_sim_v1_cpp/validation/",
-                      "last_validation_date":  "",
-                      "has_falsification":  false,
-                      "numerical_stability_verified":  false,
-                      "uncertainty_quantified":  false,
-                      "provenance_verified":  false
-                  },
-                  {
-                      "name":  "stochastic_sim_v1",
-                      "description":  "Continuous SDE simulation for noise floors and onset.",
-                      "entry_point":  "stochastic_sim_v1/sim.py",
-                      "cli_command":  "python stochastic_sim_v1/sim.py --config {config} --out {out_dir}",
-                      "config_params":  [
-                                            "sigma",
-                                            "x_thresh",
-                                            "kappa",
-                                            "n_particles"
-                                        ],
-                      "metrics":  [
-                                      "crossing_fraction",
-                                      "mean_x",
-                                      "std_x"
-                                  ],
-                      "model_class":  "stochastic",
-                      "certification_level":  "C0",
-                      "validation_path":  "stochastic_sim_v1/validation/",
-                      "last_validation_date":  "",
-                      "has_falsification":  false,
-                      "numerical_stability_verified":  false,
-                      "uncertainty_quantified":  false,
-                      "provenance_verified":  false
-                  },
-                  {
-                      "name":  "kuramoto_sim_v1",
-                      "description":  "1D ring Kuramoto oscillators for shelf regimes.",
-                      "entry_point":  "kuramoto_sim_v1/sim.py",
-                      "cli_command":  "python kuramoto_sim_v1/sim.py --config {config} --out {out_dir}",
-                      "config_params":  [
-                                            "n_oscillators",
-                                            "K",
-                                            "omega_std"
-                                        ],
-                      "metrics":  [
-                                      "order_parameter",
-                                      "local_coherence_mean"
-                                  ],
-                      "model_class":  "ode_oscillator",
-                      "certification_level":  "C0",
-                      "validation_path":  "kuramoto_sim_v1/validation/",
-                      "last_validation_date":  "",
-                      "has_falsification":  false,
-                      "numerical_stability_verified":  false,
-                      "uncertainty_quantified":  false,
-                      "provenance_verified":  false
-                  },
-                  {
-                      "name":  "rd_moving_boundary_sim_v1",
-                      "description":  "PDE moving boundary for pocket/corridor testing.",
-                      "entry_point":  "rd_moving_boundary_sim_v1/sim.py",
-                      "cli_command":  "python rd_moving_boundary_sim_v1/sim.py --config {config} --out {out_dir}",
-                      "config_params":  [
-                                            "beta",
-                                            "growth_thresh",
-                                            "S_diff",
-                                            "domain_decay"
-                                        ],
-                      "metrics":  [
-                                      "active_area",
-                                      "total_signal"
-                                  ],
-                      "model_class":  "pde",
-                      "certification_level":  "C0",
-                      "validation_path":  "rd_moving_boundary_sim_v1/validation/",
-                      "last_validation_date":  "",
-                      "has_falsification":  false,
-                      "numerical_stability_verified":  false,
-                      "uncertainty_quantified":  false,
-                      "provenance_verified":  false
-                  },
-                  {
-                      "name":  "lb_fluid_sim_v1",
-                      "description":  "Lattice Boltzmann fluid with dynamic erosion.",
-                      "entry_point":  "lb_fluid_sim_v1/sim.py",
-                      "cli_command":  "python lb_fluid_sim_v1/sim.py --config {config} --out {out_dir}",
-                      "config_params":  [
-                                            "u_inlet",
-                                            "erosion_threshold",
-                                            "tau"
-                                        ],
-                      "metrics":  [
-                                      "fluid_volume",
-                                      "mean_velocity"
-                                  ],
-                      "model_class":  "lattice_boltzmann",
-                      "certification_level":  "C0",
-                      "validation_path":  "lb_fluid_sim_v1/validation/",
-                      "last_validation_date":  "",
-                      "has_falsification":  false,
-                      "numerical_stability_verified":  false,
-                      "uncertainty_quantified":  false,
-                      "provenance_verified":  false
-                  },
-                  {
-                      "name":  "symplectic_sim_v1",
-                      "description":  "Symplectic Hamiltonian integration for conservation laws.",
-                      "entry_point":  "symplectic_sim_v1/sim.py",
-                      "cli_command":  "python symplectic_sim_v1/sim.py --config {config} --out {out_dir}",
-                      "config_params":  [
-                                            "kappa",
-                                            "dt",
-                                            "initial_q_spread"
-                                        ],
-                      "metrics":  [
-                                      "mean_H",
-                                      "std_H",
-                                      "q_rms"
-                                  ],
-                      "model_class":  "hamiltonian",
-                      "certification_level":  "C0",
-                      "validation_path":  "symplectic_sim_v1/validation/",
-                      "last_validation_date":  "",
-                      "has_falsification":  false,
-                      "numerical_stability_verified":  false,
-                      "uncertainty_quantified":  false,
-                      "provenance_verified":  false
-                  },
-                  {
-                      "name":  "fsa_rule_engine_sim_v1",
-                      "description":  "Abstract state machine for Boolean admissibility logic.",
-                      "entry_point":  "fsa_rule_engine_sim_v1/sim.py",
-                      "cli_command":  "python fsa_rule_engine_sim_v1/sim.py --config {config} --out {out_dir}",
-                      "config_params":  [
-                                            "n_states",
-                                            "edge_prob",
-                                            "residue_required"
-                                        ],
-                      "metrics":  [
-                                      "active_count",
-                                      "mean_residue"
-                                  ],
-                      "model_class":  "finite_state",
-                      "certification_level":  "C0",
-                      "validation_path":  "fsa_rule_engine_sim_v1/validation/",
-                      "last_validation_date":  "",
-                      "has_falsification":  false,
-                      "numerical_stability_verified":  false,
-                      "uncertainty_quantified":  false,
-                      "provenance_verified":  false
-                  },
-                  {
-                      "name":  "structural_box_sim_v2",
-                      "description":  "Level 2 1D PDE for Identity and SRC screening.",
-                      "entry_point":  "structural_box_sim_v2/sim.py",
-                      "cli_command":  "python structural_box_sim_v2/sim.py --config {config} --out {out_dir}",
-                      "config_params":  [
-                                            "model.kappa",
-                                            "model.lambda_R",
-                                            "initial_condition.noise_std"
-                                        ],
-                      "metrics":  [
-                                      "final.mean_epsilon",
-                                      "final.mean_rho",
-                                      "box_analysis.persistence"
-                                  ],
-                      "model_class":  "pde",
-                      "certification_level":  "C0",
-                      "validation_path":  "structural_box_sim_v2/validation/",
-                      "last_validation_date":  "",
-                      "has_falsification":  false,
-                      "numerical_stability_verified":  false,
-                      "uncertainty_quantified":  false,
-                      "provenance_verified":  false
-                  },
-                  {
-                      "name":  "mc_ensemble_sim_v1",
-                      "description":  "Meta-orchestrator for parallel parameter sweeps.",
-                      "entry_point":  "mc_ensemble_sim_v1/mc_runner.py",
-                      "cli_command":  "python mc_ensemble_sim_v1/mc_runner.py --config {config} --out {out_dir}",
-                      "config_params":  [
-                                            "trials",
-                                            "scan_params"
-                                        ],
-                      "metrics":  [
-                                      "Aggregate results in ensemble_results.csv"
-                                  ],
-                      "model_class":  "orchestrator",
-                      "certification_level":  "C0",
-                      "validation_path":  "mc_ensemble_sim_v1/validation/",
-                      "last_validation_date":  "",
-                      "has_falsification":  false,
-                      "numerical_stability_verified":  false,
-                      "uncertainty_quantified":  false,
-                      "provenance_verified":  false
-                  },
-                  {
-                      "name":  "info_metrics_module_v1",
-                      "description":  "Post-processor for entropy and complexity.",
-                      "entry_point":  "info_metrics_module_v1/analyze_info.py",
-                      "cli_command":  "python info_metrics_module_v1/analyze_info.py --dir {data_dir}",
-                      "config_params":  [
-
-                                        ],
-                      "metrics":  [
-                                      "entropy",
-                                      "complexity"
-                                  ],
-                      "model_class":  "post_processor",
-                      "certification_level":  "C0",
-                      "validation_path":  "info_metrics_module_v1/validation/",
-                      "last_validation_date":  "",
-                      "has_falsification":  false,
-                      "numerical_stability_verified":  false,
-                      "uncertainty_quantified":  false,
-                      "provenance_verified":  false
-                  },
-                  {
-                      "name":  "info_metrics_module_v1_cpp",
-                      "description":  "High-performance SYCL/GPU accelerated information metrics post-processor (Intel UHD 770).",
-                      "entry_point":  "info_metrics_module_v1_cpp/metrics_benchmark.exe",
-                      "cli_command":  "./info_metrics_module_v1_cpp/metrics_benchmark.exe",
-                      "config_params":  [
-
-                                        ],
-                      "metrics":  [
-                                      "entropy",
-                                      "complexity",
-                                      "runtime_ms"
-                                  ],
-                      "model_class":  "post_processor",
-                      "certification_level":  "C0",
-                      "validation_path":  "info_metrics_module_v1_cpp/validation/",
-                      "last_validation_date":  "",
-                      "has_falsification":  false,
-                      "numerical_stability_verified":  false,
-                      "uncertainty_quantified":  false,
-                      "provenance_verified":  false
-                  },
-                  {
-                      "name":  "bifurcation_analyzer_v1",
-                      "description":  "Dynamic parameter ramp for regime mapping.",
-                      "entry_point":  "bifurcation_analyzer_v1/bifurcation_runner.py",
-                      "cli_command":  "python bifurcation_analyzer_v1/bifurcation_runner.py --config {config} --out {out_dir}",
-                      "config_params":  [
-                                            "ramp_params.parameter",
-                                            "ramp_params.start",
-                                            "ramp_params.end"
-                                        ],
-                      "metrics":  [
-                                      "bifurcation_trace.csv"
-                                  ],
-                      "model_class":  "analyzer",
-                      "certification_level":  "C0",
-                      "validation_path":  "bifurcation_analyzer_v1/validation/",
-                      "last_validation_date":  "",
-                      "has_falsification":  false,
-                      "numerical_stability_verified":  false,
-                      "uncertainty_quantified":  false,
-                      "provenance_verified":  false
-                  },
-                  {
-                      "name":  "bifurcation_analyzer_v1_cpp",
-                      "description":  "High-speed AVX2/SYCL bifurcation and stability analyzer with Lyapunov exponents and GPU offloading (Intel UHD 770).",
-                      "entry_point":  "bifurcation_analyzer_v1_cpp/bifurcation_benchmark.exe",
-                      "cli_command":  "./bifurcation_analyzer_v1_cpp/bifurcation_benchmark.exe",
-                      "config_params":  [
-                                            "start",
-                                            "end",
-                                            "steps",
-                                            "plateau_len"
-                                        ],
-                      "metrics":  [
-                                      "lyapunov_exponent",
-                                      "observable_mean",
-                                      "runtime_ms"
-                                  ],
-                      "model_class":  "analyzer",
-                      "certification_level":  "C0",
-                      "validation_path":  "bifurcation_analyzer_v1_cpp/validation/",
-                      "last_validation_date":  "",
-                      "has_falsification":  false,
-                      "numerical_stability_verified":  false,
-                      "uncertainty_quantified":  false,
-                      "provenance_verified":  false
-                  },
-                  {
-                      "name":  "tda_module_v1",
-                      "description":  "Topological Data Analysis (Betti-0) for spatial fields.",
-                      "entry_point":  "tda_module_v1/analyze_topology.py",
-                      "cli_command":  "python tda_module_v1/analyze_topology.py --dir {data_path} --threshold {threshold}",
-                      "config_params":  [
-                                            "threshold",
-                                            "mode"
-                                        ],
-                      "metrics":  [
-                                      "count",
-                                      "max_size",
-                                      "active_fraction"
-                                  ],
-                      "model_class":  "topology_analyzer",
-                      "certification_level":  "C0",
-                      "validation_path":  "tda_module_v1/validation/",
-                      "last_validation_date":  "",
-                      "has_falsification":  false,
-                      "numerical_stability_verified":  false,
-                      "uncertainty_quantified":  false,
-                      "provenance_verified":  false
-                  },
-                  {
-                      "name":  "tda_module_v1_cpp",
-                      "description":  "C++ Betti-0 connected-component topology analyzer with v2.3 recoverable reports.",
-                      "entry_point":  "tda_module_v1_cpp/tda_benchmark.exe",
-                      "cli_command":  "./tda_module_v1_cpp/tda_benchmark.exe --mode {mode} --file {grid_csv} --threshold {threshold} --out {out_dir}",
-                      "config_params":  [
-                                            "mode",
-                                            "threshold",
-                                            "grid_csv"
-                                        ],
-                      "metrics":  [
-                                      "count",
-                                      "max_size",
-                                      "mean_size",
-                                      "active_fraction"
-                                  ],
-                      "model_class":  "topology_analyzer",
-                      "certification_level":  "C0",
-                      "validation_path":  "tda_module_v1_cpp/validation/",
-                      "last_validation_date":  "",
-                      "has_falsification":  false,
-                      "numerical_stability_verified":  false,
-                      "uncertainty_quantified":  false,
-                      "provenance_verified":  false
-                  },
-                  {
-                      "name":  "symplectic_sim_v1_cpp",
-                      "description":  "C++ symplectic nonlinear pendulum simulator with FP32/FP64 precision drift and energy falsification checks.",
-                      "entry_point":  "symplectic_sim_v1_cpp/symplectic_sim_benchmark.exe",
-                      "cli_command":  "./symplectic_sim_v1_cpp/symplectic_sim_benchmark.exe",
-                      "config_params":  [
-                                            "n_particles",
-                                            "mass",
-                                            "kappa",
-                                            "dt",
-                                            "steps"
-                                        ],
-                      "metrics":  [
-                                      "mean_H",
-                                      "std_H",
-                                      "energy_drift_abs",
-                                      "precision_drift"
-                                  ],
-                      "model_class":  "hamiltonian",
-                      "certification_level":  "C0",
-                      "validation_path":  "symplectic_sim_v1_cpp/validation/",
-                      "last_validation_date":  "",
-                      "has_falsification":  false,
-                      "numerical_stability_verified":  false,
-                      "uncertainty_quantified":  false,
-                      "provenance_verified":  false
-                  },
-                  {
-                      "name":  "spectral_analysis_v1_cpp",
-                      "description":  "C++ spectral analysis layer for temporal signals and spatial grids with dominant-mode controls.",
-                      "entry_point":  "spectral_analysis_v1_cpp/spectral_analysis_benchmark.exe",
-                      "cli_command":  "./spectral_analysis_v1_cpp/spectral_analysis_benchmark.exe --mode temporal --file {file} --col {column} --out {out_dir}",
-                      "config_params":  [
-                                            "mode",
-                                            "file",
-                                            "column",
-                                            "fs"
-                                        ],
-                      "metrics":  [
-                                      "dominant_modes",
-                                      "total_power",
-                                      "dominant_power_fraction"
-                                  ],
-                      "model_class":  "spectral_analyzer",
-                      "certification_level":  "C0",
-                      "validation_path":  "spectral_analysis_v1_cpp/validation/",
-                      "last_validation_date":  "",
-                      "has_falsification":  false,
-                      "numerical_stability_verified":  false,
-                      "uncertainty_quantified":  false,
-                      "provenance_verified":  false
-                  },
-                  {
-                      "name":  "mc_ensemble_sim_v1_cpp",
-                      "description":  "C++ simulator-agnostic Monte Carlo parameter sweep orchestrator using executable command templates.",
-                      "entry_point":  "mc_ensemble_sim_v1_cpp/mc_ensemble_runner.exe",
-                      "cli_command":  "./mc_ensemble_sim_v1_cpp/mc_ensemble_runner.exe --config {config} --out {out_dir}",
-                      "config_params":  [
-                                            "trials",
-                                            "seed",
-                                            "command_template",
-                                            "base_config",
-                                            "scan_params"
-                                        ],
-                      "metrics":  [
-                                      "ensemble_results.csv",
-                                      "ensemble_report.json"
-                                  ],
-                      "model_class":  "orchestrator",
-                      "certification_level":  "C0",
-                      "validation_path":  "mc_ensemble_sim_v1_cpp/validation/",
-                      "last_validation_date":  "",
-                      "has_falsification":  false,
-                      "numerical_stability_verified":  false,
-                      "uncertainty_quantified":  false,
-                      "provenance_verified":  false
-                  },
-                  {
-                      "name":  "parameter_optimizer_v1_cpp",
-                      "description":  "C++ deterministic random-search parameter optimizer using executable command templates.",
-                      "entry_point":  "parameter_optimizer_v1_cpp/parameter_optimizer.exe",
-                      "cli_command":  "./parameter_optimizer_v1_cpp/parameter_optimizer.exe --config {config} --out {out_dir}",
-                      "config_params":  [
-                                            "max_evals",
-                                            "seed",
-                                            "command_template",
-                                            "base_config",
-                                            "search_params"
-                                        ],
-                      "metrics":  [
-                                      "optimization_trace.csv",
-                                      "best_config.json",
-                                      "optimization_report.json"
-                                  ],
-                      "model_class":  "optimizer",
-                      "certification_level":  "C0",
-                      "validation_path":  "parameter_optimizer_v1_cpp/validation/",
-                      "last_validation_date":  "",
-                      "has_falsification":  false,
-                      "numerical_stability_verified":  false,
-                      "uncertainty_quantified":  false,
-                      "provenance_verified":  false
-                  },
-                  {
-                      "name":  "linac_sim_cpp",
-                      "description":  "SYCL-accelerated linear accelerator port with FP32/FP64 precision drift and v2.3 metric reporting.",
-                      "entry_point":  "linac_sim_cpp/linac_sim_benchmark.exe",
-                      "cli_command":  "./linac_sim_cpp/linac_sim_benchmark.exe",
-                      "config_params":  [
-                                            "particles",
-                                            "steps",
-                                            "rf_gradient",
-                                            "seed"
-                                        ],
-                      "metrics":  [
-                                      "survival_fraction",
-                                      "energy_gain",
-                                      "precision_drift"
-                                  ],
-                      "model_class":  "accelerator",
-                      "certification_level":  "C0",
-                      "validation_path":  "linac_sim_cpp/validation/",
-                      "last_validation_date":  "",
-                      "has_falsification":  false,
-                      "numerical_stability_verified":  false,
-                      "uncertainty_quantified":  false,
-                      "provenance_verified":  false
-                  },
-                  {
-                      "name":  "stochastic_sim_cpp",
-                      "description":  "SYCL-accelerated stochastic threshold simulator with zero-noise falsification.",
-                      "entry_point":  "stochastic_sim_cpp/stochastic_sim_benchmark.exe",
-                      "cli_command":  "./stochastic_sim_cpp/stochastic_sim_benchmark.exe",
-                      "config_params":  [
-                                            "n_particles",
-                                            "steps",
-                                            "dt",
-                                            "kappa",
-                                            "sigma",
-                                            "x_thresh"
-                                        ],
-                      "metrics":  [
-                                      "crossing_fraction",
-                                      "mean_x",
-                                      "std_x",
-                                      "precision_drift"
-                                  ],
-                      "model_class":  "stochastic",
-                      "certification_level":  "C0",
-                      "validation_path":  "stochastic_sim_cpp/validation/",
-                      "last_validation_date":  "",
-                      "has_falsification":  false,
-                      "numerical_stability_verified":  false,
-                      "uncertainty_quantified":  false,
-                      "provenance_verified":  false
-                  },
-                  {
-                      "name":  "rd_sim_cpp",
-                      "description":  "SYCL-accelerated reaction-diffusion moving-boundary port with v2.3 reporting.",
-                      "entry_point":  "rd_sim_cpp/rd_sim_benchmark.exe",
-                      "cli_command":  "./rd_sim_cpp/rd_sim_benchmark.exe",
-                      "config_params":  [
-                                            "nx",
-                                            "ny",
-                                            "steps",
-                                            "beta",
-                                            "domain_decay"
-                                        ],
-                      "metrics":  [
-                                      "active_area",
-                                      "total_signal",
-                                      "precision_drift"
-                                  ],
-                      "model_class":  "pde",
-                      "certification_level":  "C0",
-                      "validation_path":  "rd_sim_cpp/validation/",
-                      "last_validation_date":  "",
-                      "has_falsification":  false,
-                      "numerical_stability_verified":  false,
-                      "uncertainty_quantified":  false,
-                      "provenance_verified":  false
-                  },
-                  {
-                      "name":  "structural_box_sim_cpp",
-                      "description":  "SYCL-accelerated Structural Box port with identity persistence metrics and zero-mismatch falsification.",
-                      "entry_point":  "structural_box_sim_cpp/box_sim_benchmark.exe",
-                      "cli_command":  "./structural_box_sim_cpp/box_sim_benchmark.exe",
-                      "config_params":  [
-                                            "nx",
-                                            "steps",
-                                            "kappa",
-                                            "lambda_R",
-                                            "s"
-                                        ],
-                      "metrics":  [
-                                      "epsilon_max",
-                                      "epsilon_active_fraction",
-                                      "alignment_success_rate",
-                                      "precision_drift"
-                                  ],
-                      "model_class":  "pde",
-                      "certification_level":  "C0",
-                      "validation_path":  "structural_box_sim_cpp/validation/",
-                      "last_validation_date":  "",
-                      "has_falsification":  false,
-                      "numerical_stability_verified":  false,
-                      "uncertainty_quantified":  false,
-                      "provenance_verified":  false
-                  },
-                  {
-                      "name":  "circular_accelerator_sim_v1_cpp",
-                      "description":  "High-fidelity AVX2/SYCL/Yoshida 6D ring simulation with GPU offloading (Intel UHD 770).",
-                      "entry_point":  "circular_accelerator_sim_v1_cpp/circular_sim_benchmark.exe",
-                      "cli_command":  "./circular_accelerator_sim_v1_cpp/circular_sim_benchmark.exe",
-                      "config_params":  [
-                                            "particles",
-                                            "turns",
-                                            "circumference",
-                                            "momentum_compaction"
-                                        ],
-                      "metrics":  [
-                                      "x_rms",
-                                      "z_rms",
-                                      "survival_fraction",
-                                      "runtime_ms"
-                                  ],
-                      "model_class":  "accelerator",
-                      "certification_level":  "C0",
-                      "validation_path":  "circular_accelerator_sim_v1_cpp/validation/",
-                      "last_validation_date":  "",
-                      "has_falsification":  false,
-                      "numerical_stability_verified":  false,
-                      "uncertainty_quantified":  false,
-                      "provenance_verified":  false
-                  },
-                  {
-                      "name":  "falsification_suite_v1",
-                      "description":  "Automated harness for negative behavior tests.",
-                      "entry_point":  "falsification_suite_v1/run_falsification.py",
-                      "cli_command":  "python falsification_suite_v1/run_falsification.py --config {suite_config} --out {out_dir}",
-                      "config_params":  [
-                                            "tests"
-                                        ],
-                      "metrics":  [
-                                      "falsification_report.json"
-                                  ],
-                      "model_class":  "falsification_harness",
-                      "certification_level":  "C0",
-                      "validation_path":  "falsification_suite_v1/validation/",
-                      "last_validation_date":  "",
-                      "has_falsification":  false,
-                      "numerical_stability_verified":  false,
-                      "uncertainty_quantified":  false,
-                      "provenance_verified":  false
-                  },
-                  {
-                      "name":  "falsification_suite_v1_cpp",
-                      "description":  "High-performance parallel unit test and falsification harness.",
-                      "entry_point":  "falsification_suite_v1_cpp/falsification_benchmark.exe",
-                      "cli_command":  "./falsification_suite_v1_cpp/falsification_benchmark.exe",
-                      "config_params":  [
-                                            "suite_json",
-                                            "num_threads"
-                                        ],
-                      "metrics":  [
-                                      "pass_rate",
-                                      "failures",
-                                      "runtime_ms"
-                                  ],
-                      "model_class":  "falsification_harness",
-                      "certification_level":  "C0",
-                      "validation_path":  "falsification_suite_v1_cpp/validation/",
-                      "last_validation_date":  "",
-                      "has_falsification":  false,
-                      "numerical_stability_verified":  false,
-                      "uncertainty_quantified":  false,
-                      "provenance_verified":  false
-                  },
-                  {
-                      "name":  "agent_based_sim_v1_cpp",
-                      "description":  "High-performance AVX2/SYCL swarm simulation with Spatial-Hash and GPU offloading (Intel UHD 770).",
-                      "entry_point":  "agent_based_sim_v1_cpp/agent_sim_benchmark.exe",
-                      "cli_command":  "./agent_based_sim_v1_cpp/agent_sim_benchmark.exe",
-                      "config_params":  [
-                                            "agent_count",
-                                            "steps",
-                                            "R_c",
-                                            "K_phi"
-                                        ],
-                      "metrics":  [
-                                      "order_parameter",
-                                      "residue_mean",
-                                      "runtime_ms"
-                                  ],
-                      "model_class":  "agent",
-                      "certification_level":  "C0",
-                      "validation_path":  "agent_based_sim_v1_cpp/validation/",
-                      "last_validation_date":  "",
-                      "has_falsification":  false,
-                      "numerical_stability_verified":  false,
-                      "uncertainty_quantified":  false,
-                      "provenance_verified":  false
-                  },
-                  {
-                      "name":  "lb_fluid_sim_v1_cpp",
-                      "description":  "High-performance SYCL/GPU accelerated Lattice Boltzmann fluid engine with D2Q9 model and Intel UHD 770 optimization.",
-                      "entry_point":  "lb_fluid_sim_v1_cpp/lb_benchmark.exe",
-                      "cli_command":  "./lb_fluid_sim_v1_cpp/lb_benchmark.exe",
-                      "config_params":  [
-                                            "nx",
-                                            "ny",
-                                            "tau",
-                                            "u_inlet",
-                                            "steps"
-                                        ],
-                      "metrics":  [
-                                      "fluid_volume",
-                                      "mean_velocity",
-                                      "runtime_ms"
-                                  ],
-                      "model_class":  "lattice_boltzmann",
-                      "certification_level":  "C0",
-                      "validation_path":  "lb_fluid_sim_v1_cpp/validation/",
-                      "last_validation_date":  "",
-                      "has_falsification":  false,
-                      "numerical_stability_verified":  false,
-                      "uncertainty_quantified":  false,
-                      "provenance_verified":  false
-                  },
-                  {
-                      "name":  "kuramoto_sim_v1_cpp",
-                      "description":  "High-performance SYCL/GPU accelerated Kuramoto oscillators with RK4 integration and ring coupling (Intel UHD 770).",
-                      "entry_point":  "kuramoto_sim_v1_cpp/kuramoto_benchmark.exe",
-                      "cli_command":  "./kuramoto_sim_v1_cpp/kuramoto_benchmark.exe",
-                      "config_params":  [
-                                            "n_oscillators",
-                                            "dt",
-                                            "K",
-                                            "steps"
-                                        ],
-                      "metrics":  [
-                                      "order_parameter",
-                                      "runtime_ms"
-                                  ],
-                      "model_class":  "ode_oscillator",
-                      "certification_level":  "C0",
-                      "validation_path":  "kuramoto_sim_v1_cpp/validation/",
-                      "last_validation_date":  "",
-                      "has_falsification":  false,
-                      "numerical_stability_verified":  false,
-                      "uncertainty_quantified":  false,
-                      "provenance_verified":  false
-                  },
-                  {
-                      "name":  "accelerator_sim_v1_cpp",
-                      "description":  "High-fidelity AVX2/SYCL 6D accelerator simulation with PIC Space Charge and GPU offloading (Intel UHD 770).",
-                      "entry_point":  "accelerator_sim_v1_cpp/acc_sim",
-                      "cli_command":  "./accelerator_sim_v1_cpp/acc_sim",
-                      "config_params":  [
-                                            "particles",
-                                            "steps",
-                                            "lattice_json",
-                                            "use_gpu"
-                                        ],
-                      "metrics":  [
-                                      "x_rms",
-                                      "y_rms",
-                                      "delta_rms",
-                                      "survival_fraction",
-                                      "emittance_proxy",
-                                      "runtime_ns"
-                                  ],
-                      "model_class":  "accelerator",
-                      "certification_level":  "C0",
-                      "validation_path":  "accelerator_sim_v1_cpp/validation/",
-                      "last_validation_date":  "",
-                      "has_falsification":  false,
-                      "numerical_stability_verified":  false,
-                      "uncertainty_quantified":  false,
-                      "provenance_verified":  false
-                  }
-              ]
+{
+    "project": "Acellorator Research Ecosystem",
+    "version": "1.0.1",
+    "governance": "cross_verification_protocol.json",
+    "usage_policy": "Agent may execute tools but MUST NOT modify engine code or core scripts. MUST follow cross_verification_protocol.json for all research claims.",
+    "tools": [
+        {
+            "name": "agent_based_sim_v1",
+            "description": "Phase-space swarm simulation for local-to-global rules.",
+            "entry_point": "agent_based_sim_v1/sim.py",
+            "cli_command": "python agent_based_sim_v1/sim.py --config {config} --out {out_dir}",
+            "config_params": [
+                "n_agents",
+                "R_c",
+                "K_phi",
+                "kappa",
+                "mismatch_rate"
+            ],
+            "metrics": [
+                "order_parameter",
+                "residue_mean",
+                "local_coherence_mean"
+            ],
+            "model_class": "agent",
+            "certification_level": "C0",
+            "validation_path": "agent_based_sim_v1/validation/",
+            "last_validation_date": "",
+            "has_falsification": false,
+            "numerical_stability_verified": false,
+            "uncertainty_quantified": false,
+            "provenance_verified": false
+        },
+        {
+            "name": "ca_admissibility_sim_v1",
+            "description": "2D Cellular Automata for admissibility and zero logic.",
+            "entry_point": "ca_admissibility_sim_v1/sim.py",
+            "cli_command": "python ca_admissibility_sim_v1/sim.py --config {config} --out {out_dir}",
+            "config_params": [
+                "grid_size",
+                "diffusion_rate",
+                "residue_growth",
+                "residue_decay"
+            ],
+            "metrics": [
+                "active_fraction",
+                "mean_mismatch",
+                "mean_residue"
+            ],
+            "model_class": "discrete_ca",
+            "certification_level": "C0",
+            "validation_path": "ca_admissibility_sim_v1/validation/",
+            "last_validation_date": "",
+            "has_falsification": false,
+            "numerical_stability_verified": false,
+            "uncertainty_quantified": false,
+            "provenance_verified": false
+        },
+        {
+            "name": "fsa_rule_engine_sim_v1_cpp",
+            "description": "High-performance CSR-graph-based FSA agent engine with parallel navigation and SYCL/GPU acceleration (Intel UHD 770).",
+            "entry_point": "fsa_rule_engine_sim_v1_cpp/fsa_sim_benchmark.exe",
+            "cli_command": "./fsa_rule_engine_sim_v1_cpp/fsa_sim_benchmark.exe",
+            "config_params": [
+                "num_agents",
+                "n_states",
+                "steps",
+                "res_req"
+            ],
+            "metrics": [
+                "active_count",
+                "mean_residue",
+                "runtime_ms"
+            ],
+            "model_class": "finite_state",
+            "certification_level": "C1",
+            "validation_path": "fsa_rule_engine_sim_v1_cpp/validation/",
+            "last_validation_date": "2026-04-29",
+            "has_falsification": false,
+            "numerical_stability_verified": false,
+            "uncertainty_quantified": false,
+            "provenance_verified": false
+        },
+        {
+            "name": "ca_admissibility_sim_v1_cpp",
+            "description": "High-performance AVX2/SYCL 2D Cellular Automata with gated diffusion rules and GPU offloading (Intel UHD 770).",
+            "entry_point": "ca_admissibility_sim_v1_cpp/ca_sim_benchmark.exe",
+            "cli_command": "./ca_admissibility_sim_v1_cpp/ca_sim_benchmark.exe",
+            "config_params": [
+                "width",
+                "height",
+                "steps",
+                "D",
+                "delta_R"
+            ],
+            "metrics": [
+                "active_fraction",
+                "mean_mismatch",
+                "runtime_ms"
+            ],
+            "model_class": "discrete_ca",
+            "certification_level": "C1",
+            "validation_path": "ca_admissibility_sim_v1_cpp/validation/",
+            "last_validation_date": "2026-04-29",
+            "has_falsification": false,
+            "numerical_stability_verified": false,
+            "uncertainty_quantified": false,
+            "provenance_verified": false
+        },
+        {
+            "name": "graph_dynamics_sim_v1",
+            "description": "Dynamic network simulation for topological corridors.",
+            "entry_point": "graph_dynamics_sim_v1/sim.py",
+            "cli_command": "python graph_dynamics_sim_v1/sim.py --config {config} --out {out_dir}",
+            "config_params": [
+                "n_nodes",
+                "decouple_threshold",
+                "recouple_threshold",
+                "K_phi"
+            ],
+            "metrics": [
+                "edge_count",
+                "avg_degree",
+                "order_parameter"
+            ],
+            "model_class": "network",
+            "certification_level": "C0",
+            "validation_path": "graph_dynamics_sim_v1/validation/",
+            "last_validation_date": "",
+            "has_falsification": false,
+            "numerical_stability_verified": false,
+            "uncertainty_quantified": false,
+            "provenance_verified": false
+        },
+        {
+            "name": "graph_dynamics_sim_v1_cpp",
+            "description": "High-performance AVX2/SYCL dynamic network engine with parallel rewiring and GPU offloading (Intel UHD 770).",
+            "entry_point": "graph_dynamics_sim_v1_cpp/network_sim_benchmark.exe",
+            "cli_command": "./graph_dynamics_sim_v1_cpp/network_sim_benchmark.exe",
+            "config_params": [
+                "n_nodes",
+                "steps",
+                "K",
+                "theta_decouple"
+            ],
+            "metrics": [
+                "order_parameter",
+                "edge_count",
+                "runtime_ms"
+            ],
+            "model_class": "network",
+            "certification_level": "C1",
+            "validation_path": "graph_dynamics_sim_v1_cpp/validation/",
+            "last_validation_date": "2026-04-29",
+            "has_falsification": false,
+            "numerical_stability_verified": false,
+            "uncertainty_quantified": false,
+            "provenance_verified": false
+        },
+        {
+            "name": "stochastic_sim_v1",
+            "description": "Continuous SDE simulation for noise floors and onset.",
+            "entry_point": "stochastic_sim_v1/sim.py",
+            "cli_command": "python stochastic_sim_v1/sim.py --config {config} --out {out_dir}",
+            "config_params": [
+                "sigma",
+                "x_thresh",
+                "kappa",
+                "n_particles"
+            ],
+            "metrics": [
+                "crossing_fraction",
+                "mean_x",
+                "std_x"
+            ],
+            "model_class": "stochastic",
+            "certification_level": "C0",
+            "validation_path": "stochastic_sim_v1/validation/",
+            "last_validation_date": "",
+            "has_falsification": false,
+            "numerical_stability_verified": false,
+            "uncertainty_quantified": false,
+            "provenance_verified": false
+        },
+        {
+            "name": "kuramoto_sim_v1",
+            "description": "1D ring Kuramoto oscillators for shelf regimes.",
+            "entry_point": "kuramoto_sim_v1/sim.py",
+            "cli_command": "python kuramoto_sim_v1/sim.py --config {config} --out {out_dir}",
+            "config_params": [
+                "n_oscillators",
+                "K",
+                "omega_std"
+            ],
+            "metrics": [
+                "order_parameter",
+                "local_coherence_mean"
+            ],
+            "model_class": "ode_oscillator",
+            "certification_level": "C0",
+            "validation_path": "kuramoto_sim_v1/validation/",
+            "last_validation_date": "",
+            "has_falsification": false,
+            "numerical_stability_verified": false,
+            "uncertainty_quantified": false,
+            "provenance_verified": false
+        },
+        {
+            "name": "rd_moving_boundary_sim_v1",
+            "description": "PDE moving boundary for pocket/corridor testing.",
+            "entry_point": "rd_moving_boundary_sim_v1/sim.py",
+            "cli_command": "python rd_moving_boundary_sim_v1/sim.py --config {config} --out {out_dir}",
+            "config_params": [
+                "beta",
+                "growth_thresh",
+                "S_diff",
+                "domain_decay"
+            ],
+            "metrics": [
+                "active_area",
+                "total_signal"
+            ],
+            "model_class": "pde",
+            "certification_level": "C0",
+            "validation_path": "rd_moving_boundary_sim_v1/validation/",
+            "last_validation_date": "",
+            "has_falsification": false,
+            "numerical_stability_verified": false,
+            "uncertainty_quantified": false,
+            "provenance_verified": false
+        },
+        {
+            "name": "lb_fluid_sim_v1",
+            "description": "Lattice Boltzmann fluid with dynamic erosion.",
+            "entry_point": "lb_fluid_sim_v1/sim.py",
+            "cli_command": "python lb_fluid_sim_v1/sim.py --config {config} --out {out_dir}",
+            "config_params": [
+                "u_inlet",
+                "erosion_threshold",
+                "tau"
+            ],
+            "metrics": [
+                "fluid_volume",
+                "mean_velocity"
+            ],
+            "model_class": "lattice_boltzmann",
+            "certification_level": "C0",
+            "validation_path": "lb_fluid_sim_v1/validation/",
+            "last_validation_date": "",
+            "has_falsification": false,
+            "numerical_stability_verified": false,
+            "uncertainty_quantified": false,
+            "provenance_verified": false
+        },
+        {
+            "name": "symplectic_sim_v1",
+            "description": "Symplectic Hamiltonian integration for conservation laws.",
+            "entry_point": "symplectic_sim_v1/sim.py",
+            "cli_command": "python symplectic_sim_v1/sim.py --config {config} --out {out_dir}",
+            "config_params": [
+                "kappa",
+                "dt",
+                "initial_q_spread"
+            ],
+            "metrics": [
+                "mean_H",
+                "std_H",
+                "q_rms"
+            ],
+            "model_class": "hamiltonian",
+            "certification_level": "C0",
+            "validation_path": "symplectic_sim_v1/validation/",
+            "last_validation_date": "",
+            "has_falsification": false,
+            "numerical_stability_verified": false,
+            "uncertainty_quantified": false,
+            "provenance_verified": false
+        },
+        {
+            "name": "fsa_rule_engine_sim_v1",
+            "description": "Abstract state machine for Boolean admissibility logic.",
+            "entry_point": "fsa_rule_engine_sim_v1/sim.py",
+            "cli_command": "python fsa_rule_engine_sim_v1/sim.py --config {config} --out {out_dir}",
+            "config_params": [
+                "n_states",
+                "edge_prob",
+                "residue_required"
+            ],
+            "metrics": [
+                "active_count",
+                "mean_residue"
+            ],
+            "model_class": "finite_state",
+            "certification_level": "C0",
+            "validation_path": "fsa_rule_engine_sim_v1/validation/",
+            "last_validation_date": "",
+            "has_falsification": false,
+            "numerical_stability_verified": false,
+            "uncertainty_quantified": false,
+            "provenance_verified": false
+        },
+        {
+            "name": "structural_box_sim_v2",
+            "description": "Level 2 1D PDE for Identity and SRC screening.",
+            "entry_point": "structural_box_sim_v2/sim.py",
+            "cli_command": "python structural_box_sim_v2/sim.py --config {config} --out {out_dir}",
+            "config_params": [
+                "model.kappa",
+                "model.lambda_R",
+                "initial_condition.noise_std"
+            ],
+            "metrics": [
+                "final.mean_epsilon",
+                "final.mean_rho",
+                "box_analysis.persistence"
+            ],
+            "model_class": "pde",
+            "certification_level": "C0",
+            "validation_path": "structural_box_sim_v2/validation/",
+            "last_validation_date": "",
+            "has_falsification": false,
+            "numerical_stability_verified": false,
+            "uncertainty_quantified": false,
+            "provenance_verified": false
+        },
+        {
+            "name": "mc_ensemble_sim_v1",
+            "description": "Meta-orchestrator for parallel parameter sweeps.",
+            "entry_point": "mc_ensemble_sim_v1/mc_runner.py",
+            "cli_command": "python mc_ensemble_sim_v1/mc_runner.py --config {config} --out {out_dir}",
+            "config_params": [
+                "trials",
+                "scan_params"
+            ],
+            "metrics": [
+                "Aggregate results in ensemble_results.csv"
+            ],
+            "model_class": "orchestrator",
+            "certification_level": "C0",
+            "validation_path": "mc_ensemble_sim_v1/validation/",
+            "last_validation_date": "",
+            "has_falsification": false,
+            "numerical_stability_verified": false,
+            "uncertainty_quantified": false,
+            "provenance_verified": false
+        },
+        {
+            "name": "info_metrics_module_v1",
+            "description": "Post-processor for entropy and complexity.",
+            "entry_point": "info_metrics_module_v1/analyze_info.py",
+            "cli_command": "python info_metrics_module_v1/analyze_info.py --dir {data_dir}",
+            "config_params": [],
+            "metrics": [
+                "entropy",
+                "complexity"
+            ],
+            "model_class": "post_processor",
+            "certification_level": "C0",
+            "validation_path": "info_metrics_module_v1/validation/",
+            "last_validation_date": "",
+            "has_falsification": false,
+            "numerical_stability_verified": false,
+            "uncertainty_quantified": false,
+            "provenance_verified": false
+        },
+        {
+            "name": "info_metrics_module_v1_cpp",
+            "description": "High-performance SYCL/GPU accelerated information metrics post-processor (Intel UHD 770).",
+            "entry_point": "info_metrics_module_v1_cpp/metrics_benchmark.exe",
+            "cli_command": "./info_metrics_module_v1_cpp/metrics_benchmark.exe",
+            "config_params": [],
+            "metrics": [
+                "entropy",
+                "complexity",
+                "runtime_ms"
+            ],
+            "model_class": "post_processor",
+            "certification_level": "C1",
+            "validation_path": "info_metrics_module_v1_cpp/validation/",
+            "last_validation_date": "2026-04-29",
+            "has_falsification": false,
+            "numerical_stability_verified": false,
+            "uncertainty_quantified": false,
+            "provenance_verified": false
+        },
+        {
+            "name": "bifurcation_analyzer_v1",
+            "description": "Dynamic parameter ramp for regime mapping.",
+            "entry_point": "bifurcation_analyzer_v1/bifurcation_runner.py",
+            "cli_command": "python bifurcation_analyzer_v1/bifurcation_runner.py --config {config} --out {out_dir}",
+            "config_params": [
+                "ramp_params.parameter",
+                "ramp_params.start",
+                "ramp_params.end"
+            ],
+            "metrics": [
+                "bifurcation_trace.csv"
+            ],
+            "model_class": "analyzer",
+            "certification_level": "C0",
+            "validation_path": "bifurcation_analyzer_v1/validation/",
+            "last_validation_date": "",
+            "has_falsification": false,
+            "numerical_stability_verified": false,
+            "uncertainty_quantified": false,
+            "provenance_verified": false
+        },
+        {
+            "name": "bifurcation_analyzer_v1_cpp",
+            "description": "High-speed AVX2/SYCL bifurcation and stability analyzer with Lyapunov exponents and GPU offloading (Intel UHD 770).",
+            "entry_point": "bifurcation_analyzer_v1_cpp/bifurcation_benchmark.exe",
+            "cli_command": "./bifurcation_analyzer_v1_cpp/bifurcation_benchmark.exe",
+            "config_params": [
+                "start",
+                "end",
+                "steps",
+                "plateau_len"
+            ],
+            "metrics": [
+                "lyapunov_exponent",
+                "observable_mean",
+                "runtime_ms"
+            ],
+            "model_class": "analyzer",
+            "certification_level": "C1",
+            "validation_path": "bifurcation_analyzer_v1_cpp/validation/",
+            "last_validation_date": "2026-04-29",
+            "has_falsification": false,
+            "numerical_stability_verified": false,
+            "uncertainty_quantified": false,
+            "provenance_verified": false
+        },
+        {
+            "name": "tda_module_v1",
+            "description": "Topological Data Analysis (Betti-0) for spatial fields.",
+            "entry_point": "tda_module_v1/analyze_topology.py",
+            "cli_command": "python tda_module_v1/analyze_topology.py --dir {data_path} --threshold {threshold}",
+            "config_params": [
+                "threshold",
+                "mode"
+            ],
+            "metrics": [
+                "count",
+                "max_size",
+                "active_fraction"
+            ],
+            "model_class": "topology_analyzer",
+            "certification_level": "C0",
+            "validation_path": "tda_module_v1/validation/",
+            "last_validation_date": "",
+            "has_falsification": false,
+            "numerical_stability_verified": false,
+            "uncertainty_quantified": false,
+            "provenance_verified": false
+        },
+        {
+            "name": "tda_module_v1_cpp",
+            "description": "C++ Betti-0 connected-component topology analyzer with v2.3 recoverable reports.",
+            "entry_point": "tda_module_v1_cpp/tda_benchmark.exe",
+            "cli_command": "./tda_module_v1_cpp/tda_benchmark.exe --mode {mode} --file {grid_csv} --threshold {threshold} --out {out_dir}",
+            "config_params": [
+                "mode",
+                "threshold",
+                "grid_csv"
+            ],
+            "metrics": [
+                "count",
+                "max_size",
+                "mean_size",
+                "active_fraction"
+            ],
+            "model_class": "topology_analyzer",
+            "certification_level": "C3",
+            "validation_path": "tda_module_v1_cpp/validation/",
+            "last_validation_date": "2026-04-29",
+            "has_falsification": true,
+            "numerical_stability_verified": true,
+            "uncertainty_quantified": false,
+            "provenance_verified": true
+        },
+        {
+            "name": "symplectic_sim_v1_cpp",
+            "description": "C++ symplectic nonlinear pendulum simulator with FP32/FP64 precision drift and energy falsification checks.",
+            "entry_point": "symplectic_sim_v1_cpp/symplectic_sim_benchmark.exe",
+            "cli_command": "./symplectic_sim_v1_cpp/symplectic_sim_benchmark.exe",
+            "config_params": [
+                "n_particles",
+                "mass",
+                "kappa",
+                "dt",
+                "steps"
+            ],
+            "metrics": [
+                "mean_H",
+                "std_H",
+                "energy_drift_abs",
+                "precision_drift"
+            ],
+            "model_class": "hamiltonian",
+            "certification_level": "C3",
+            "validation_path": "symplectic_sim_v1_cpp/validation/",
+            "last_validation_date": "2026-04-29",
+            "has_falsification": true,
+            "numerical_stability_verified": true,
+            "uncertainty_quantified": false,
+            "provenance_verified": true
+        },
+        {
+            "name": "spectral_analysis_v1_cpp",
+            "description": "C++ spectral analysis layer for temporal signals and spatial grids with dominant-mode controls.",
+            "entry_point": "spectral_analysis_v1_cpp/spectral_analysis_benchmark.exe",
+            "cli_command": "./spectral_analysis_v1_cpp/spectral_analysis_benchmark.exe --mode temporal --file {file} --col {column} --out {out_dir}",
+            "config_params": [
+                "mode",
+                "file",
+                "column",
+                "fs"
+            ],
+            "metrics": [
+                "dominant_modes",
+                "total_power",
+                "dominant_power_fraction"
+            ],
+            "model_class": "spectral_analyzer",
+            "certification_level": "C3",
+            "validation_path": "spectral_analysis_v1_cpp/validation/",
+            "last_validation_date": "2026-04-29",
+            "has_falsification": true,
+            "numerical_stability_verified": true,
+            "uncertainty_quantified": false,
+            "provenance_verified": true
+        },
+        {
+            "name": "mc_ensemble_sim_v1_cpp",
+            "description": "C++ simulator-agnostic Monte Carlo parameter sweep orchestrator using executable command templates.",
+            "entry_point": "mc_ensemble_sim_v1_cpp/mc_ensemble_runner.exe",
+            "cli_command": "./mc_ensemble_sim_v1_cpp/mc_ensemble_runner.exe --config {config} --out {out_dir}",
+            "config_params": [
+                "trials",
+                "seed",
+                "command_template",
+                "base_config",
+                "scan_params"
+            ],
+            "metrics": [
+                "ensemble_results.csv",
+                "ensemble_report.json"
+            ],
+            "model_class": "orchestrator",
+            "certification_level": "C3",
+            "validation_path": "mc_ensemble_sim_v1_cpp/validation/",
+            "last_validation_date": "2026-04-29",
+            "has_falsification": false,
+            "numerical_stability_verified": false,
+            "uncertainty_quantified": false,
+            "provenance_verified": true
+        },
+        {
+            "name": "parameter_optimizer_v1_cpp",
+            "description": "C++ deterministic random-search parameter optimizer using executable command templates.",
+            "entry_point": "parameter_optimizer_v1_cpp/parameter_optimizer.exe",
+            "cli_command": "./parameter_optimizer_v1_cpp/parameter_optimizer.exe --config {config} --out {out_dir}",
+            "config_params": [
+                "max_evals",
+                "seed",
+                "command_template",
+                "base_config",
+                "search_params"
+            ],
+            "metrics": [
+                "optimization_trace.csv",
+                "best_config.json",
+                "optimization_report.json"
+            ],
+            "model_class": "optimizer",
+            "certification_level": "C3",
+            "validation_path": "parameter_optimizer_v1_cpp/validation/",
+            "last_validation_date": "2026-04-29",
+            "has_falsification": false,
+            "numerical_stability_verified": false,
+            "uncertainty_quantified": false,
+            "provenance_verified": true
+        },
+        {
+            "name": "linac_sim_cpp",
+            "description": "SYCL-accelerated linear accelerator port with FP32/FP64 precision drift and v2.3 metric reporting.",
+            "entry_point": "linac_sim_cpp/linac_sim_benchmark.exe",
+            "cli_command": "./linac_sim_cpp/linac_sim_benchmark.exe",
+            "config_params": [
+                "particles",
+                "steps",
+                "rf_gradient",
+                "seed"
+            ],
+            "metrics": [
+                "survival_fraction",
+                "energy_gain",
+                "precision_drift"
+            ],
+            "model_class": "accelerator",
+            "certification_level": "C2",
+            "validation_path": "linac_sim_cpp/validation/",
+            "last_validation_date": "2026-04-29",
+            "has_falsification": false,
+            "numerical_stability_verified": false,
+            "uncertainty_quantified": false,
+            "provenance_verified": true
+        },
+        {
+            "name": "stochastic_sim_cpp",
+            "description": "SYCL-accelerated stochastic threshold simulator with zero-noise falsification.",
+            "entry_point": "stochastic_sim_cpp/stochastic_sim_benchmark.exe",
+            "cli_command": "./stochastic_sim_cpp/stochastic_sim_benchmark.exe",
+            "config_params": [
+                "n_particles",
+                "steps",
+                "dt",
+                "kappa",
+                "sigma",
+                "x_thresh"
+            ],
+            "metrics": [
+                "crossing_fraction",
+                "mean_x",
+                "std_x",
+                "precision_drift"
+            ],
+            "model_class": "stochastic",
+            "certification_level": "C2",
+            "validation_path": "stochastic_sim_cpp/validation/",
+            "last_validation_date": "2026-04-29",
+            "has_falsification": false,
+            "numerical_stability_verified": false,
+            "uncertainty_quantified": false,
+            "provenance_verified": true
+        },
+        {
+            "name": "rd_sim_cpp",
+            "description": "SYCL-accelerated reaction-diffusion moving-boundary port with v2.3 reporting.",
+            "entry_point": "rd_sim_cpp/rd_sim_benchmark.exe",
+            "cli_command": "./rd_sim_cpp/rd_sim_benchmark.exe",
+            "config_params": [
+                "nx",
+                "ny",
+                "steps",
+                "beta",
+                "domain_decay"
+            ],
+            "metrics": [
+                "active_area",
+                "total_signal",
+                "precision_drift"
+            ],
+            "model_class": "pde",
+            "certification_level": "C2",
+            "validation_path": "rd_sim_cpp/validation/",
+            "last_validation_date": "2026-04-29",
+            "has_falsification": false,
+            "numerical_stability_verified": false,
+            "uncertainty_quantified": false,
+            "provenance_verified": true
+        },
+        {
+            "name": "structural_box_sim_cpp",
+            "description": "SYCL-accelerated Structural Box port with identity persistence metrics and zero-mismatch falsification.",
+            "entry_point": "structural_box_sim_cpp/box_sim_benchmark.exe",
+            "cli_command": "./structural_box_sim_cpp/box_sim_benchmark.exe",
+            "config_params": [
+                "nx",
+                "steps",
+                "kappa",
+                "lambda_R",
+                "s"
+            ],
+            "metrics": [
+                "epsilon_max",
+                "epsilon_active_fraction",
+                "alignment_success_rate",
+                "precision_drift"
+            ],
+            "model_class": "pde",
+            "certification_level": "C2",
+            "validation_path": "structural_box_sim_cpp/validation/",
+            "last_validation_date": "2026-04-29",
+            "has_falsification": false,
+            "numerical_stability_verified": false,
+            "uncertainty_quantified": false,
+            "provenance_verified": true
+        },
+        {
+            "name": "circular_accelerator_sim_v1_cpp",
+            "description": "High-fidelity AVX2/SYCL/Yoshida 6D ring simulation with GPU offloading (Intel UHD 770).",
+            "entry_point": "circular_accelerator_sim_v1_cpp/circular_sim_benchmark.exe",
+            "cli_command": "./circular_accelerator_sim_v1_cpp/circular_sim_benchmark.exe",
+            "config_params": [
+                "particles",
+                "turns",
+                "circumference",
+                "momentum_compaction"
+            ],
+            "metrics": [
+                "x_rms",
+                "z_rms",
+                "survival_fraction",
+                "runtime_ms"
+            ],
+            "model_class": "accelerator",
+            "certification_level": "C1",
+            "validation_path": "circular_accelerator_sim_v1_cpp/validation/",
+            "last_validation_date": "2026-04-29",
+            "has_falsification": false,
+            "numerical_stability_verified": false,
+            "uncertainty_quantified": false,
+            "provenance_verified": false
+        },
+        {
+            "name": "falsification_suite_v1",
+            "description": "Automated harness for negative behavior tests.",
+            "entry_point": "falsification_suite_v1/run_falsification.py",
+            "cli_command": "python falsification_suite_v1/run_falsification.py --config {suite_config} --out {out_dir}",
+            "config_params": [
+                "tests"
+            ],
+            "metrics": [
+                "falsification_report.json"
+            ],
+            "model_class": "falsification_harness",
+            "certification_level": "C0",
+            "validation_path": "falsification_suite_v1/validation/",
+            "last_validation_date": "",
+            "has_falsification": false,
+            "numerical_stability_verified": false,
+            "uncertainty_quantified": false,
+            "provenance_verified": false
+        },
+        {
+            "name": "falsification_suite_v1_cpp",
+            "description": "High-performance parallel unit test and falsification harness.",
+            "entry_point": "falsification_suite_v1_cpp/falsification_benchmark.exe",
+            "cli_command": "./falsification_suite_v1_cpp/falsification_benchmark.exe",
+            "config_params": [
+                "suite_json",
+                "num_threads"
+            ],
+            "metrics": [
+                "pass_rate",
+                "failures",
+                "runtime_ms"
+            ],
+            "model_class": "falsification_harness",
+            "certification_level": "C1",
+            "validation_path": "falsification_suite_v1_cpp/validation/",
+            "last_validation_date": "2026-04-29",
+            "has_falsification": false,
+            "numerical_stability_verified": false,
+            "uncertainty_quantified": false,
+            "provenance_verified": false
+        },
+        {
+            "name": "agent_based_sim_v1_cpp",
+            "description": "High-performance AVX2/SYCL swarm simulation with Spatial-Hash and GPU offloading (Intel UHD 770).",
+            "entry_point": "agent_based_sim_v1_cpp/agent_sim_benchmark.exe",
+            "cli_command": "./agent_based_sim_v1_cpp/agent_sim_benchmark.exe",
+            "config_params": [
+                "agent_count",
+                "steps",
+                "R_c",
+                "K_phi"
+            ],
+            "metrics": [
+                "order_parameter",
+                "residue_mean",
+                "runtime_ms"
+            ],
+            "model_class": "agent",
+            "certification_level": "C1",
+            "validation_path": "agent_based_sim_v1_cpp/validation/",
+            "last_validation_date": "2026-04-29",
+            "has_falsification": false,
+            "numerical_stability_verified": false,
+            "uncertainty_quantified": false,
+            "provenance_verified": false
+        },
+        {
+            "name": "lb_fluid_sim_v1_cpp",
+            "description": "High-performance SYCL/GPU accelerated Lattice Boltzmann fluid engine with D2Q9 model and Intel UHD 770 optimization.",
+            "entry_point": "lb_fluid_sim_v1_cpp/lb_benchmark.exe",
+            "cli_command": "./lb_fluid_sim_v1_cpp/lb_benchmark.exe",
+            "config_params": [
+                "nx",
+                "ny",
+                "tau",
+                "u_inlet",
+                "steps"
+            ],
+            "metrics": [
+                "fluid_volume",
+                "mean_velocity",
+                "runtime_ms"
+            ],
+            "model_class": "lattice_boltzmann",
+            "certification_level": "C1",
+            "validation_path": "lb_fluid_sim_v1_cpp/validation/",
+            "last_validation_date": "2026-04-29",
+            "has_falsification": false,
+            "numerical_stability_verified": false,
+            "uncertainty_quantified": false,
+            "provenance_verified": false
+        },
+        {
+            "name": "kuramoto_sim_v1_cpp",
+            "description": "High-performance SYCL/GPU accelerated Kuramoto oscillators with RK4 integration and ring coupling (Intel UHD 770).",
+            "entry_point": "kuramoto_sim_v1_cpp/kuramoto_benchmark.exe",
+            "cli_command": "./kuramoto_sim_v1_cpp/kuramoto_benchmark.exe",
+            "config_params": [
+                "n_oscillators",
+                "dt",
+                "K",
+                "steps"
+            ],
+            "metrics": [
+                "order_parameter",
+                "runtime_ms"
+            ],
+            "model_class": "ode_oscillator",
+            "certification_level": "C1",
+            "validation_path": "kuramoto_sim_v1_cpp/validation/",
+            "last_validation_date": "2026-04-29",
+            "has_falsification": false,
+            "numerical_stability_verified": false,
+            "uncertainty_quantified": false,
+            "provenance_verified": false
+        },
+        {
+            "name": "accelerator_sim_v1_cpp",
+            "description": "High-fidelity AVX2/SYCL 6D accelerator simulation with PIC Space Charge and GPU offloading (Intel UHD 770).",
+            "entry_point": "accelerator_sim_v1_cpp/acc_sim",
+            "cli_command": "./accelerator_sim_v1_cpp/acc_sim",
+            "config_params": [
+                "particles",
+                "steps",
+                "lattice_json",
+                "use_gpu"
+            ],
+            "metrics": [
+                "x_rms",
+                "y_rms",
+                "delta_rms",
+                "survival_fraction",
+                "emittance_proxy",
+                "runtime_ns"
+            ],
+            "model_class": "accelerator",
+            "certification_level": "C1",
+            "validation_path": "accelerator_sim_v1_cpp/validation/",
+            "last_validation_date": "2026-04-29",
+            "has_falsification": false,
+            "numerical_stability_verified": false,
+            "uncertainty_quantified": false,
+            "provenance_verified": false
+        },
+        {
+            "name": "dase_analog_sim_cpp",
+            "description": "D-ASE Analog mission simulator with SYCL/GPU acceleration and FP32/FP64 drift reporting.",
+            "entry_point": "dase_analog_sim_cpp/dase_analog_benchmark.exe",
+            "cli_command": "./dase_analog_sim_cpp/dase_analog_benchmark.exe",
+            "config_params": [
+                "n_nodes",
+                "steps",
+                "iterations",
+                "dt"
+            ],
+            "metrics": [
+                "mean_output",
+                "precision_drift"
+            ],
+            "model_class": "analog_simulation",
+            "certification_level": "C2",
+            "validation_path": "dase_analog_sim_cpp/validation/",
+            "last_validation_date": "2026-04-29",
+            "has_falsification": false,
+            "numerical_stability_verified": true,
+            "uncertainty_quantified": false,
+            "provenance_verified": true
+        },
+        {
+            "name": "satp_higgs_sim_cpp",
+            "description": "SATP+Higgs 2D field simulator with SYCL/GPU acceleration and falsification controls.",
+            "entry_point": "satp_higgs_sim_cpp/satp_higgs_benchmark.exe",
+            "cli_command": "./satp_higgs_sim_cpp/satp_higgs_benchmark.exe",
+            "config_params": [
+                "size",
+                "steps"
+            ],
+            "metrics": [
+                "phi_rms",
+                "precision_drift"
+            ],
+            "model_class": "field_simulation",
+            "certification_level": "C2",
+            "validation_path": "satp_higgs_sim_cpp/validation/",
+            "last_validation_date": "2026-04-29",
+            "has_falsification": false,
+            "numerical_stability_verified": true,
+            "uncertainty_quantified": false,
+            "provenance_verified": true
+        },
+        {
+            "name": "satp_higgs_3d_sim_cpp",
+            "description": "SATP+Higgs 3D field simulator with SYCL/GPU acceleration and precision drift reporting.",
+            "entry_point": "satp_higgs_3d_sim_cpp/satp_higgs_3d_benchmark.exe",
+            "cli_command": "./satp_higgs_3d_sim_cpp/satp_higgs_3d_benchmark.exe",
+            "config_params": [
+                "size",
+                "steps"
+            ],
+            "metrics": [
+                "phi_rms",
+                "precision_drift"
+            ],
+            "model_class": "field_simulation",
+            "certification_level": "C2",
+            "validation_path": "satp_higgs_3d_sim_cpp/validation/",
+            "last_validation_date": "2026-04-29",
+            "has_falsification": false,
+            "numerical_stability_verified": true,
+            "uncertainty_quantified": false,
+            "provenance_verified": true
+        }
+    ]
 }

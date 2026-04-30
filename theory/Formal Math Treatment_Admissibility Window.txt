@@ -1,0 +1,259 @@
+Formal Math Treatment_Admissibility Window
+1. Primitive setting
+Let the system state be
+xt∈Xx_t \in \mathcal Xxt​∈X
+where X\mathcal XX is the realized state space.
+Let the framework primitives be:
+εt≠0\varepsilon_t \neq 0εt​=0
+ρt≥0\rho_t \ge 0ρt​≥0
+Rt∈RR_t \in \mathcal RRt​∈R
+where:
+SymbolMeaningεt\varepsilon_tεt​active mismatch / deviation driverρt\rho_tρt​sustaining capacity / constraint supportRtR_tRt​residue / memory left by prior realizationxtx_txt​realized state−(i)t-(i)_t−(i)t​local orientation referenceAt\mathcal A_tAt​admissibility window
+The system does not move into arbitrary next states. It moves only through states that remain admissible under the current mismatch, constraint, residue, and orientation conditions.
+
+Definition 1: Admissibility Window
+The admissibility window at time ttt is the subset of possible successor states allowed by the current procedural condition:
+At={xt+1∈X  :  Φ(xt+1;xt,εt,ρt,Rt,−(i)t)≤Θt}\mathcal A_t
+=
+\left\{
+x_{t+1} \in \mathcal X
+\;:\;
+\Phi(x_{t+1};x_t,\varepsilon_t,\rho_t,R_t,-(i)_t) \le \Theta_t
+\right\}At​={xt+1​∈X:Φ(xt+1​;xt​,εt​,ρt​,Rt​,−(i)t​)≤Θt​}
+where:
+TermMeaningΦ\PhiΦadmissibility cost / mismatch functionalΘt\Theta_tΘt​tolerance threshold / window widthAt\mathcal A_tAt​set of reachable lawful continuations
+So:
+xt+1∈Atx_{t+1} \in \mathcal A_txt+1​∈At​
+means the next state is allowed.
+xt+1∉Atx_{t+1} \notin \mathcal A_txt+1​∈/At​
+means the next state is forbidden under the present constraints.
+
+Definition 2: Admissibility Functional
+A useful general form is:
+Φ=αdX(xt+1,xt)+βdε(εt+1,εt)+γdR(Rt+1,Rt)+ηdi(−(i)t+1,−(i)t)−λρt\Phi
+=
+\alpha d_{\mathcal X}(x_{t+1},x_t)
++
+\beta d_{\varepsilon}(\varepsilon_{t+1},\varepsilon_t)
++
+\gamma d_R(R_{t+1},R_t)
++
+\eta d_i(-(i)_{t+1},-(i)_t)
+-
+\lambda \rho_tΦ=αdX​(xt+1​,xt​)+βdε​(εt+1​,εt​)+γdR​(Rt+1​,Rt​)+ηdi​(−(i)t+1​,−(i)t​)−λρt​
+where:
+TermMeaningdXd_{\mathcal X}dX​state displacement costdεd_\varepsilondε​mismatch-change costdRd_RdR​residue-incompatibility costdid_idi​orientation-change costρt\rho_tρt​support term reducing costα,β,γ,η,λ\alpha,\beta,\gamma,\eta,\lambdaα,β,γ,η,λcoupling weights
+The admissibility condition becomes:
+αdX+βdε+γdR+ηdi−λρt≤Θt\alpha d_{\mathcal X}
++
+\beta d_{\varepsilon}
++
+\gamma d_R
++
+\eta d_i
+-
+\lambda \rho_t
+\le
+\Theta_tαdX​+βdε​+γdR​+ηdi​−λρt​≤Θt​
+Interpretation:
+continuation is allowed when deviation cost is supportable.\text{continuation is allowed when deviation cost is supportable.}continuation is allowed when deviation cost is supportable.
+
+Definition 3: Window Width
+The threshold Θt\Theta_tΘt​ should not be fixed. In your framework, it should depend on residue, constraint, mismatch, and phase stability:
+Θt=Θ(εt,ρt,Rt,−(i)t)\Theta_t
+=
+\Theta(\varepsilon_t,\rho_t,R_t,-(i)_t)Θt​=Θ(εt​,ρt​,Rt​,−(i)t​)
+A simple model:
+Θt=Θ0+aρt+b∥Rt∥−c∣εt∣−qσi(t)\Theta_t
+=
+\Theta_0
++
+a\rho_t
++
+b\|R_t\|
+-
+c|\varepsilon_t|
+-
+q\sigma_i(t)Θt​=Θ0​+aρt​+b∥Rt​∥−c∣εt​∣−qσi​(t)
+where:
+TermEffectΘ0\Theta_0Θ0​baseline toleranceaρta\rho_taρt​stronger support widens the windowb∥Rt∥b\|R_t\|b∥Rt​∥stable residue can widen lawful continuation(-c\varepsilon_t−qσi(t)-q\sigma_i(t)−qσi​(t)orientation instability narrows the window
+So the admissibility window is dynamic:
+At≠At+1\mathcal A_t \neq \mathcal A_{t+1}At​=At+1​
+It evolves.
+
+Definition 4: Realization Rule
+The next realized state is selected from the admissible set:
+xt+1=Realize⁡(At)x_{t+1}
+=
+\operatorname{Realize}(\mathcal A_t)xt+1​=Realize(At​)
+or more explicitly:
+xt+1=arg⁡min⁡y∈AtΦ(y;xt,εt,ρt,Rt,−(i)t)x_{t+1}
+=
+\arg\min_{y \in \mathcal A_t}
+\Phi(y;x_t,\varepsilon_t,\rho_t,R_t,-(i)_t)xt+1​=argy∈At​min​Φ(y;xt​,εt​,ρt​,Rt​,−(i)t​)
+This gives the clean law:
+xt+1∈At\boxed{
+x_{t+1} \in \mathcal A_t
+}xt+1​∈At​​
+No lawful continuation occurs outside the admissibility window.
+
+Definition 5: Boundary of the Window
+The boundary is:
+∂At={xt+1∈X:Φ(xt+1;xt,εt,ρt,Rt,−(i)t)=Θt}\partial \mathcal A_t
+=
+\left\{
+x_{t+1}\in\mathcal X
+:
+\Phi(x_{t+1};x_t,\varepsilon_t,\rho_t,R_t,-(i)_t)
+=
+\Theta_t
+\right\}∂At​={xt+1​∈X:Φ(xt+1​;xt​,εt​,ρt​,Rt​,−(i)t​)=Θt​}
+Interior:
+Int⁡(At)={xt+1:Φ<Θt}\operatorname{Int}(\mathcal A_t)
+=
+\left\{
+x_{t+1}
+:
+\Phi < \Theta_t
+\right\}Int(At​)={xt+1​:Φ<Θt​}
+Exterior:
+X∖At={xt+1:Φ>Θt}\mathcal X \setminus \mathcal A_t
+=
+\left\{
+x_{t+1}
+:
+\Phi > \Theta_t
+\right\}X∖At​={xt+1​:Φ>Θt​}
+This is important because your framework often lives at the boundary.
+A corridor, shelf, or threshold event is not merely “inside” or “outside.” It is often a boundary phenomenon:
+xt+1≈∂Atx_{t+1} \approx \partial \mathcal A_txt+1​≈∂At​
+
+Definition 6: Decoupling
+A state decouples when no admissible coupled successor exists:
+Atcoupled=∅\mathcal A_t^{coupled} = \varnothingAtcoupled​=∅
+but this does not mean zero.
+Instead:
+xt↛0x_t \not\to 0xt​→0
+Rather:
+xt→Fx_t \to \mathcal Fxt​→F
+where F\mathcal FF is the deviation floor / decoupled phase region.
+So decoupling is:
+Atcoupled=∅⇒xt exits the coupled event chain\boxed{
+\mathcal A_t^{coupled}=\varnothing
+\quad\Rightarrow\quad
+x_t \text{ exits the coupled event chain}
+}Atcoupled​=∅⇒xt​ exits the coupled event chain​
+not:
+xt=0x_t = 0xt​=0
+This matches your statement:
+orientation persists, but coupled realization fails.\text{orientation persists, but coupled realization fails.}orientation persists, but coupled realization fails.
+
+Definition 7: Recoupling
+Recoupling occurs when a new admissibility window opens from the decoupled phase:
+At+kcoupled≠∅\mathcal A_{t+k}^{coupled} \neq \varnothingAt+kcoupled​=∅
+This can be written as:
+δ(E>0)⇒∃xt+k+1∈X:xt+k+1∈At+k\delta(\mathcal E>0)
+\Rightarrow
+\exists x_{t+k+1}\in\mathcal X
+:
+x_{t+k+1}\in\mathcal A_{t+k}δ(E>0)⇒∃xt+k+1​∈X:xt+k+1​∈At+k​
+In your dual notation:
+(E≠0)⟺δ(E>0)(\mathcal E\neq 0)
+\Longleftrightarrow
+\delta(\mathcal E>0)(E=0)⟺δ(E>0)
+the admissibility window is the mediator between the two sides:
+At=the local condition under which nonzero deviation becomes lawful continuation\boxed{
+\mathcal A_t
+=
+\text{the local condition under which nonzero deviation becomes lawful continuation}
+}At​=the local condition under which nonzero deviation becomes lawful continuation​
+
+Core Theorem: Continuation Through Admissibility
+If
+εt≠0\varepsilon_t \neq 0εt​=0
+and
+At≠∅\mathcal A_t \neq \varnothingAt​=∅
+then there exists at least one lawful continuation:
+∃xt+1∈X:xt+1∈At\exists x_{t+1}\in\mathcal X
+:
+x_{t+1}\in\mathcal A_t∃xt+1​∈X:xt+1​∈At​
+Therefore:
+εt≠0∧At≠∅⇒continuation occurs\boxed{
+\varepsilon_t \neq 0
+\land
+\mathcal A_t \neq \varnothing
+\Rightarrow
+\text{continuation occurs}
+}εt​=0∧At​=∅⇒continuation occurs​
+But if:
+εt≠0∧At=∅\varepsilon_t \neq 0
+\land
+\mathcal A_t = \varnothingεt​=0∧At​=∅
+then mismatch persists but coupled realization fails:
+εt≠0∧At=∅⇒decoupling\boxed{
+\varepsilon_t \neq 0
+\land
+\mathcal A_t = \varnothing
+\Rightarrow
+\text{decoupling}
+}εt​=0∧At​=∅⇒decoupling​
+This is a strong formal distinction:
+no admissible continuation≠zero\text{no admissible continuation} \neq \text{zero}no admissible continuation=zero
+
+PDE Form
+For field simulations, define fields:
+ε(x,t),ρ(x,t),R(x,t)\varepsilon(x,t),\rho(x,t),R(x,t)ε(x,t),ρ(x,t),R(x,t)
+Then the local admissibility window at spatial point xxx is:
+A(x,t)={u(x,t+Δt):Φ[u;ε,ρ,R,−(i)](x,t)≤Θ(x,t)}\mathcal A(x,t)
+=
+\left\{
+u(x,t+\Delta t)
+:
+\Phi[u;\varepsilon,\rho,R,-(i)](x,t)
+\le
+\Theta(x,t)
+\right\}A(x,t)={u(x,t+Δt):Φ[u;ε,ρ,R,−(i)](x,t)≤Θ(x,t)}
+The admissibility mask can be written:
+M(x,t)=H(Θ(x,t)−Φ(x,t))M(x,t)
+=
+H\left(\Theta(x,t)-\Phi(x,t)\right)M(x,t)=H(Θ(x,t)−Φ(x,t))
+where HHH is the Heaviside step function.
+So:
+M(x,t)=1M(x,t)=1M(x,t)=1
+means admissible.
+M(x,t)=0M(x,t)=0M(x,t)=0
+means inadmissible.
+For smoother simulations:
+M(x,t)=σ(k(Θ(x,t)−Φ(x,t)))M(x,t)
+=
+\sigma\left(k(\Theta(x,t)-\Phi(x,t))\right)M(x,t)=σ(k(Θ(x,t)−Φ(x,t)))
+where σ\sigmaσ is a sigmoid.
+That gives a soft admissibility window:
+M(x,t)∈[0,1]M(x,t)\in[0,1]M(x,t)∈[0,1]
+
+Simulation Observable
+A practical measurable value is the admissibility margin:
+μt=Θt−Φt\mu_t
+=
+\Theta_t-\Phi_tμt​=Θt​−Φt​
+where:
+ConditionMeaningμt>0\mu_t>0μt​>0inside the windowμt=0\mu_t=0μt​=0on the boundaryμt<0\mu_t<0μt​<0outside the window
+This gives direct diagnostics:
+{  "admissibility_window": {    "state": "allowed if margin >= 0",    "margin": "mu_t = Theta_t - Phi_t",    "inside": "mu_t > 0",    "boundary": "mu_t = 0",    "outside": "mu_t < 0",    "decoupling_condition": "A_t_coupled = empty",    "recoupling_condition": "A_t_coupled becomes nonempty again"  }}
+
+Compact Final Definition
+At={xt+1∈X:Φ(xt+1;xt,εt,ρt,Rt,−(i)t)≤Θ(εt,ρt,Rt,−(i)t)}\boxed{
+\mathcal A_t
+=
+\left\{
+x_{t+1}\in\mathcal X
+:
+\Phi(x_{t+1};x_t,\varepsilon_t,\rho_t,R_t,-(i)_t)
+\le
+\Theta(\varepsilon_t,\rho_t,R_t,-(i)_t)
+\right\}
+}At​={xt+1​∈X:Φ(xt+1​;xt​,εt​,ρt​,Rt​,−(i)t​)≤Θ(εt​,ρt​,Rt​,−(i)t​)}​
+Plain meaning:
+The admissibility window is the dynamically changing region of possible continuation where nonzero deviation can remain lawful, supported, oriented, and residue-compatible.
+It is not the cause of continuation by itself.
+It is the filter through which continuation becomes possible.

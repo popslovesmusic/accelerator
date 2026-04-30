@@ -12,9 +12,9 @@ if (!(Test-Path $script)) {
     throw "No build_and_run.bat found for $EngineDir"
 }
 
-Push-Location $repo
+Push-Location $enginePath
 try {
-    & cmd /c $script
+    & cmd /c "build_and_run.bat"
 } finally {
     Pop-Location
 }
