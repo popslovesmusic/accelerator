@@ -66,6 +66,7 @@ The C4 Elevation Program has promoted **12** tools to C4 status. Remaining **33*
 
 ## 4. Evidence Repository
 
-- **Audit Metadata:** `outputs/c4_elevation_audit_2026-04-30/`
-- **Governed Multi-Run:** `outputs/c4_phase2_smoke_all/`, `outputs/c4_phase3_uq_all/`
-- **Tool Local Artifacts:** `**/validation/` (smoke_report.json, uncertainty_report.json, provenance_report.json)
+- **Audit Metadata:** `outputs/audits/project_rectification_2026-04-30/`
+- **Governed Multi-Run:** `outputs/runs/c4_phase2_smoke_all/`, `outputs/runs/c4_phase3_uq_all/`
+- **Tool Local Artifacts:** `tools/**/validation/` (smoke_report.json, uncertainty_report.json, provenance_report.json)
+- **Central Registry:** `registry/` (tool_manifest.json, validation_index.json, path_mapping.json)
