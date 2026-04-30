@@ -23,21 +23,22 @@ repo governance rules.
 Current status:
 
 - `tool_manifest.json` lists 38 tools (including 23 C++ engines).
-- All 23 C++ tools have been built, smoke-tested, and certified at levels C1-C3.
-- New C++ ports for `symplectic`, `spectral`, `tda`, `mc_ensemble`, and
-  `parameter_optimizer` are certified at C3 with verified falsification controls.
-- UHD 770 support is confirmed for all SYCL-enabled engines with precision drift
-  reporting.
+- **C4 Status achieved** for 5 high-rigor tools (`symplectic`, `spectral`, `tda`, 
+  `mc_ensemble`, and `parameter_optimizer`).
+- Infrastructure for **Uncertainty Quantification** and **Automated Convergence** 
+  is integrated into the orchestrator.
+- Legacy Python prototypes for C4-certified tools have been retired to 
+  `python_archive/`.
 
 ## 3. Tool Inventory (Updated 2026-04-29)
 
 | Tool | Class | Status | Certification |
 | --- | --- | --- | --- |
-| `symplectic_sim_v1_cpp` | Hamiltonian | Verified | C3 |
-| `spectral_analysis_v1_cpp` | Spectral | Verified | C3 |
-| `tda_module_v1_cpp` | Topology | Verified | C3 |
-| `mc_ensemble_sim_v1_cpp` | Orchestrator | Verified | C3 |
-| `parameter_optimizer_v1_cpp` | Optimizer | Verified | C3 |
+| `symplectic_sim_v1_cpp` | Hamiltonian | Verified | C4 |
+| `spectral_analysis_v1_cpp` | Spectral | Verified | C4 |
+| `tda_module_v1_cpp` | Topology | Verified | C4 |
+| `mc_ensemble_sim_v1_cpp` | Orchestrator | Verified | C4 |
+| `parameter_optimizer_v1_cpp` | Optimizer | Verified | C4 |
 | `linac_sim_cpp` | Accelerator | Verified | C2 |
 | `rd_sim_cpp` | PDE | Verified | C2 |
 | `stochastic_sim_cpp` | Stochastic | Verified | C2 |
