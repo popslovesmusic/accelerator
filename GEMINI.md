@@ -415,13 +415,41 @@ Expected path:
 - Results MUST be consistent across seeds and mechanisms.
 - Failure in any single mechanism (e.g., failed falsification or contradictory drift) invalidates the claim.
 ---
-10.7.2 Confidence Scoring Matrix
+10.8 Confidence Scoring Matrix
 Level	Requirement
 C3	1 Dynamics mechanism + UQ pass
 C4	2 Dynamics mechanisms + 1 Independent measurement + UQ pass
 C4+	3 Dynamics mechanisms + 2 Independent measurements + UQ pass
 ---
-10.8 Tool Certification Report Schema
+10.9 Claim Registry & Status Ladder
+The claim registry is the central authority for the current validation state of all research assertions.
+Expected path:
+`registry/claim_registry.json`
+---
+10.9.1 Status Ladder (C0–C6)
+Level	Definition
+C0	Idea exists but not formalized
+C1	Claim clearly stated with scope
+C2	Falsifiable test designed
+C3	Supported by one mechanism with UQ
+C4	Supported by two independent mechanisms
+C5	Validated across tools, seeds, and parameter sweeps
+C6	Ready for publication or external critique
+H	Paused due to ambiguity or missing tooling
+R	Falsified or contradicted
+---
+10.10 Language Policy Mandate
+The language policy registry strictly constrains the linguistic humility of all generated reports and claims.
+Expected path:
+`registry/language_policy_registry.json`
+---
+10.10.1 Enforcement Rules
+- The agent MUST NOT use forbidden terms (e.g., "proves", "ultimate truth") for any claim below C6.
+- Claims at C3 or lower MUST use speculative language ("suggests", "hypothesized", "is consistent with").
+- Direct assertions of "support" are allowed only at C4 or higher.
+- Finality language is prohibited across all levels to preserve claim humility.
+---
+10.11 Tool Certification Report Schema
 ```json
 {
   "tools_checked": [],
