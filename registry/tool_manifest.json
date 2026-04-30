@@ -58,8 +58,8 @@
         {
             "name": "fsa_rule_engine_sim_v1_cpp",
             "description": "High-performance CSR-graph-based FSA agent engine with parallel navigation and SYCL/GPU acceleration (Intel UHD 770).",
-            "entry_point": "tools/fsa_rule_engine_sim_v1_cpp/fsa_sim_benchmark.exe",
-            "cli_command": "./tools/fsa_rule_engine_sim_v1_cpp/fsa_sim_benchmark.exe",
+            "entry_point": "tools/fsa_rule_engine_sim_v1_cpp/sim_governed.py",
+            "cli_command": "python tools/fsa_rule_engine_sim_v1_cpp/sim_governed.py --config {config} --out {out_dir}",
             "config_params": [
                 "num_agents",
                 "n_states",
@@ -83,8 +83,8 @@
         {
             "name": "ca_admissibility_sim_v1_cpp",
             "description": "High-performance AVX2/SYCL 2D Cellular Automata with gated diffusion rules and GPU offloading (Intel UHD 770).",
-            "entry_point": "tools/ca_admissibility_sim_v1_cpp/ca_sim_benchmark.exe",
-            "cli_command": "./tools/ca_admissibility_sim_v1_cpp/ca_sim_benchmark.exe",
+            "entry_point": "tools/ca_admissibility_sim_v1_cpp/sim_governed.py",
+            "cli_command": "python tools/ca_admissibility_sim_v1_cpp/sim_governed.py --config {config} --out {out_dir}",
             "config_params": [
                 "width",
                 "height",
@@ -134,23 +134,27 @@
         {
             "name": "graph_dynamics_sim_v1_cpp",
             "description": "High-performance AVX2/SYCL dynamic network engine with parallel rewiring and GPU offloading (Intel UHD 770).",
-            "entry_point": "tools/graph_dynamics_sim_v1_cpp/network_sim_benchmark.exe",
-            "cli_command": "./tools/graph_dynamics_sim_v1_cpp/network_sim_benchmark.exe",
+            "entry_point": "tools/graph_dynamics_sim_v1_cpp/sim_governed.py",
+            "cli_command": "python tools/graph_dynamics_sim_v1_cpp/sim_governed.py --config {config} --out {out_dir}",
             "config_params": [
                 "n_nodes",
                 "steps",
                 "K",
-                "theta_decouple"
+                "theta_de",
+                "theta_re",
+                "P_re",
+                "seed"
             ],
             "metrics": [
                 "order_parameter",
                 "edge_count",
+                "avg_degree",
                 "runtime_ms"
             ],
             "model_class": "network",
             "certification_level": "C1",
             "validation_path": "tools/graph_dynamics_sim_v1_cpp/validation/",
-            "last_validation_date": "2026-04-29",
+            "last_validation_date": "2026-04-30",
             "has_falsification": false,
             "numerical_stability_verified": false,
             "uncertainty_quantified": false,
@@ -610,8 +614,8 @@
         {
             "name": "stochastic_sim_cpp",
             "description": "SYCL-accelerated stochastic threshold simulator with zero-noise falsification.",
-            "entry_point": "tools/stochastic_sim_cpp/stochastic_sim_benchmark.exe",
-            "cli_command": "./tools/stochastic_sim_cpp/stochastic_sim_benchmark.exe",
+            "entry_point": "tools/stochastic_sim_cpp/sim_governed.py",
+            "cli_command": "python tools/stochastic_sim_cpp/sim_governed.py --config {config} --out {out_dir}",
             "config_params": [
                 "n_particles",
                 "steps",
@@ -638,8 +642,8 @@
         {
             "name": "rd_sim_cpp",
             "description": "SYCL-accelerated reaction-diffusion moving-boundary port with v2.3 reporting.",
-            "entry_point": "tools/rd_sim_cpp/rd_sim_benchmark.exe",
-            "cli_command": "./tools/rd_sim_cpp/rd_sim_benchmark.exe",
+            "entry_point": "tools/rd_sim_cpp/sim_governed.py",
+            "cli_command": "python tools/rd_sim_cpp/sim_governed.py --config {config} --out {out_dir}",
             "config_params": [
                 "nx",
                 "ny",
@@ -664,8 +668,8 @@
         {
             "name": "structural_box_sim_cpp",
             "description": "SYCL-accelerated Structural Box port with identity persistence metrics and zero-mismatch falsification.",
-            "entry_point": "tools/structural_box_sim_cpp/box_sim_benchmark.exe",
-            "cli_command": "./tools/structural_box_sim_cpp/box_sim_benchmark.exe",
+            "entry_point": "tools/structural_box_sim_cpp/sim_governed.py",
+            "cli_command": "python tools/structural_box_sim_cpp/sim_governed.py --config {config} --out {out_dir}",
             "config_params": [
                 "nx",
                 "steps",
@@ -760,8 +764,8 @@
         {
             "name": "agent_based_sim_v1_cpp",
             "description": "High-performance AVX2/SYCL swarm simulation with Spatial-Hash and GPU offloading (Intel UHD 770).",
-            "entry_point": "tools/agent_based_sim_v1_cpp/agent_sim_benchmark.exe",
-            "cli_command": "./tools/agent_based_sim_v1_cpp/agent_sim_benchmark.exe",
+            "entry_point": "tools/agent_based_sim_v1_cpp/sim_governed.py",
+            "cli_command": "python tools/agent_based_sim_v1_cpp/sim_governed.py --config {config} --out {out_dir}",
             "config_params": [
                 "agent_count",
                 "steps",
@@ -811,8 +815,8 @@
         {
             "name": "kuramoto_sim_v1_cpp",
             "description": "High-performance SYCL/GPU accelerated Kuramoto oscillators with RK4 integration and ring coupling (Intel UHD 770).",
-            "entry_point": "tools/kuramoto_sim_v1_cpp/kuramoto_benchmark.exe",
-            "cli_command": "./tools/kuramoto_sim_v1_cpp/kuramoto_benchmark.exe",
+            "entry_point": "tools/kuramoto_sim_v1_cpp/sim_governed.py",
+            "cli_command": "python tools/kuramoto_sim_v1_cpp/sim_governed.py --config {config} --out {out_dir}",
             "config_params": [
                 "n_oscillators",
                 "dt",
@@ -863,8 +867,8 @@
         {
             "name": "dase_analog_sim_cpp",
             "description": "D-ASE Analog mission simulator with SYCL/GPU acceleration and FP32/FP64 drift reporting.",
-            "entry_point": "tools/dase_analog_sim_cpp/dase_analog_benchmark.exe",
-            "cli_command": "./tools/dase_analog_sim_cpp/dase_analog_benchmark.exe",
+            "entry_point": "tools/dase_analog_sim_cpp/sim_governed.py",
+            "cli_command": "python tools/dase_analog_sim_cpp/sim_governed.py --config {config} --out {out_dir}",
             "config_params": [
                 "n_nodes",
                 "steps",
@@ -887,8 +891,8 @@
         {
             "name": "satp_higgs_sim_cpp",
             "description": "SATP+Higgs 2D field simulator with SYCL/GPU acceleration and falsification controls.",
-            "entry_point": "tools/satp_higgs_sim_cpp/satp_higgs_benchmark.exe",
-            "cli_command": "./tools/satp_higgs_sim_cpp/satp_higgs_benchmark.exe",
+            "entry_point": "tools/satp_higgs_sim_cpp/sim_governed.py",
+            "cli_command": "python tools/satp_higgs_sim_cpp/sim_governed.py --config {config} --out {out_dir}",
             "config_params": [
                 "size",
                 "steps"
@@ -909,8 +913,8 @@
         {
             "name": "satp_higgs_3d_sim_cpp",
             "description": "SATP+Higgs 3D field simulator with SYCL/GPU acceleration and precision drift reporting.",
-            "entry_point": "tools/satp_higgs_3d_sim_cpp/satp_higgs_3d_benchmark.exe",
-            "cli_command": "./tools/satp_higgs_3d_sim_cpp/satp_higgs_3d_benchmark.exe",
+            "entry_point": "tools/satp_higgs_3d_sim_cpp/sim_governed.py",
+            "cli_command": "python tools/satp_higgs_3d_sim_cpp/sim_governed.py --config {config} --out {out_dir}",
             "config_params": [
                 "size",
                 "steps"

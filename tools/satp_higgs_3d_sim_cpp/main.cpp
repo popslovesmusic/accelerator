@@ -82,11 +82,35 @@ void run_sim(sycl::queue& q, size_t nx, size_t ny, size_t nz, int steps, T dt, T
     };
 }
 
-int main() {
+int main(int argc, char** argv) {
+    std::string config_path = "";
+    std::string out_dir = "outputs/satp_higgs_3d_sim_cpp";
+
+    for (int i = 1; i < argc; ++i) {
+        std::string arg = argv[i];
+        if (arg == "--config" && i + 1 < argc) config_path = argv[++i];
+        else if (arg == "--out" && i + 1 < argc) out_dir = argv[++i];
+    }
+
+    // Default parameters
     size_t nx = 64, ny = 64, nz = 64;
     int steps = 100; // Fewer steps for 3D benchmark
     float dt = 0.001f;
     float dx = 0.01f;
+
+    json config_json;
+    if (!config_path.empty()) {
+        std::ifstream f(config_path);
+        if (f.is_open()) {
+            config_json = json::parse(f);
+            nx = config_json.value("nx", 64);
+            ny = config_json.value("ny", 64);
+            nz = config_json.value("nz", 64);
+            steps = config_json.value("steps", 100);
+            dt = config_json.value("dt", 0.001f);
+            dx = config_json.value("dx", 0.01f);
+        }
+    }
 
     SATPHiggsParamsSYCL<float> params_f;
     SATPHiggsParamsSYCL<double> params_d;
@@ -96,7 +120,7 @@ int main() {
 
     json report;
     report["sim_id"] = "satp_higgs_3d_v2p3_sycl_precision_study";
-    report["run_date"] = "2026-04-29";
+    report["run_date"] = "2026-04-30";
     report["hardware_gpu"] = q_gpu.get_device().get_info<sycl::info::device::name>();
     report["hardware_cpu"] = q_cpu.get_device().get_info<sycl::info::device::name>();
 
@@ -110,17 +134,23 @@ int main() {
     double drift_phi = std::abs(report["fp32_results"]["phi_rms"].get<double>() - report["fp64_results"]["phi_rms"].get<double>());
     report["precision_drift"] = {
         {"phi_rms_abs", drift_phi},
-        {"phi_rms_rel", drift_phi / report["fp64_results"]["phi_rms"].get<double>()}
+        {"phi_rms_rel", report["fp64_results"]["phi_rms"].get<double>() != 0 ? drift_phi / report["fp64_results"]["phi_rms"].get<double>() : 0.0}
     };
     
-    // Primitive mapping
     report["alignment_success_rate"] = 1.0 - (drift_phi / report["fp64_results"]["phi_rms"].get<double>());
 
-    std::filesystem::create_directories("outputs/satp_higgs_3d_sim_cpp");
-    std::ofstream o("outputs/satp_higgs_3d_sim_cpp/v2p3_report.json");
-    o << std::setw(4) << report << std::endl;
+    std::filesystem::create_directories(out_dir);
 
-    std::cout << "Simulation complete. Report saved to outputs/satp_higgs_3d_sim_cpp/v2p3_report.json" << std::endl;
+    json summary;
+    summary["config"] = config_json;
+    summary["final_metrics"] = report["fp64_results"];
+    summary["report"] = report;
+    summary["status"] = "completed";
+
+    std::ofstream o(std::filesystem::path(out_dir) / "summary.json");
+    o << std::setw(4) << summary << std::endl;
+
+    std::cout << "Simulation complete. Summary saved to " << out_dir << "/summary.json" << std::endl;
 
     return 0;
 }

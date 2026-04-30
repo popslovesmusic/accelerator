@@ -73,8 +73,17 @@ void run_sim(sycl::queue& q, size_t nx, int steps, T dt, T length,
     };
 }
 
-int main() {
-    // Standard parameters from Python ModelConfig
+int main(int argc, char** argv) {
+    std::string config_path = "";
+    std::string out_dir = "outputs/structural_box_sim_cpp";
+
+    for (int i = 1; i < argc; ++i) {
+        std::string arg = argv[i];
+        if (arg == "--config" && i + 1 < argc) config_path = argv[++i];
+        else if (arg == "--out" && i + 1 < argc) out_dir = argv[++i];
+    }
+
+    // Default parameters
     size_t nx = 256;
     int steps = 2000;
     float dt = 1e-4f;
@@ -88,12 +97,40 @@ int main() {
     float kappa = 0.60f, lambda_R = 0.80f, s = 0.01f, h = 0.08f;
     float activity_thresh = 0.05f;
 
+    json config_json;
+    if (!config_path.empty()) {
+        std::ifstream f(config_path);
+        if (f.is_open()) {
+            config_json = json::parse(f);
+            nx = config_json.value("nx", nx);
+            steps = config_json.value("steps", steps);
+            dt = config_json.value("dt", dt);
+            length = config_json.value("length", length);
+            D_epsilon = config_json.value("D_epsilon", D_epsilon);
+            D_rho = config_json.value("D_rho", D_rho);
+            D_R = config_json.value("D_R", D_R);
+            a = config_json.value("a", a);
+            b = config_json.value("b", b);
+            c = config_json.value("c", c);
+            alpha = config_json.value("alpha", alpha);
+            beta = config_json.value("beta", beta);
+            gamma = config_json.value("gamma", gamma);
+            u = config_json.value("u", u);
+            v = config_json.value("v", v);
+            kappa = config_json.value("kappa", kappa);
+            lambda_R = config_json.value("lambda_R", lambda_R);
+            s = config_json.value("s", s);
+            h = config_json.value("h", h);
+            activity_thresh = config_json.value("activity_thresh", activity_thresh);
+        }
+    }
+
     sycl::queue q_gpu(sycl::default_selector_v);
     sycl::queue q_cpu(sycl::cpu_selector_v);
 
     json report;
     report["sim_id"] = "structural_box_v2p3_sycl_precision_study";
-    report["run_date"] = "2026-04-29";
+    report["run_date"] = "2026-04-30";
     report["hardware_gpu"] = q_gpu.get_device().get_info<sycl::info::device::name>();
     report["hardware_cpu"] = q_cpu.get_device().get_info<sycl::info::device::name>();
 
@@ -119,18 +156,25 @@ int main() {
     double drift_e = std::abs(report["fp32_results"]["epsilon_max"].get<double>() - report["fp64_results"]["epsilon_max"].get<double>());
     report["precision_drift"] = {
         {"epsilon_max_abs", drift_e},
-        {"epsilon_max_rel", drift_e / report["fp64_results"]["epsilon_max"].get<double>()}
+        {"epsilon_max_rel", report["fp64_results"]["epsilon_max"].get<double>() != 0 ? drift_e / report["fp64_results"]["epsilon_max"].get<double>() : 0.0}
     };
     
     // Primitive mapping
     report["exclusion_rate_k"] = 1.0 - report["fp64_results"]["epsilon_active_fraction"].get<double>();
     report["alignment_success_rate"] = report["fp64_results"]["epsilon_active_fraction"].get<double>();
 
-    std::filesystem::create_directories("outputs/structural_box_sim_cpp");
-    std::ofstream o("outputs/structural_box_sim_cpp/v2p3_report.json");
-    o << std::setw(4) << report << std::endl;
+    std::filesystem::create_directories(out_dir);
 
-    std::cout << "Simulation complete. Report saved to outputs/structural_box_sim_cpp/v2p3_report.json" << std::endl;
+    json summary;
+    summary["config"] = config_json;
+    summary["final_metrics"] = report["fp64_results"];
+    summary["report"] = report;
+    summary["status"] = "completed";
+
+    std::ofstream o(std::filesystem::path(out_dir) / "summary.json");
+    o << std::setw(4) << summary << std::endl;
+
+    std::cout << "Simulation complete. Summary saved to " << out_dir << "/summary.json" << std::endl;
 
     return 0;
 }

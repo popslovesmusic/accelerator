@@ -63,18 +63,40 @@ void run_sim(sycl::queue& q, size_t n_nodes, int steps, int iterations, T dt, co
     };
 }
 
-int main() {
+int main(int argc, char** argv) {
+    std::string config_path = "";
+    std::string out_dir = "outputs/dase_analog_sim_cpp";
+
+    for (int i = 1; i < argc; ++i) {
+        std::string arg = argv[i];
+        if (arg == "--config" && i + 1 < argc) config_path = argv[++i];
+        else if (arg == "--out" && i + 1 < argc) out_dir = argv[++i];
+    }
+
+    // Default parameters
     size_t n_nodes = 10000;
     int steps = 1000;
     int iterations = 30; // Per node per step
     float dt = 1.0f / 48000.0f;
+
+    json config_json;
+    if (!config_path.empty()) {
+        std::ifstream f(config_path);
+        if (f.is_open()) {
+            config_json = json::parse(f);
+            n_nodes = config_json.value("n_nodes", n_nodes);
+            steps = config_json.value("steps", steps);
+            iterations = config_json.value("iterations", iterations);
+            dt = config_json.value("dt", dt);
+        }
+    }
 
     sycl::queue q_gpu(sycl::default_selector_v);
     sycl::queue q_cpu(sycl::cpu_selector_v);
 
     json report;
     report["sim_id"] = "dase_analog_v2p3_sycl_precision_study";
-    report["run_date"] = "2026-04-29";
+    report["run_date"] = "2026-04-30";
     report["hardware_gpu"] = q_gpu.get_device().get_info<sycl::info::device::name>();
     report["hardware_cpu"] = q_cpu.get_device().get_info<sycl::info::device::name>();
 
@@ -91,17 +113,20 @@ int main() {
         {"mean_output_rel", report["fp64_results"]["mean_output"].get<double>() != 0 ? drift_out / std::abs(report["fp64_results"]["mean_output"].get<double>()) : 0.0}
     };
     
-    // Primitive mapping
-    // exclusion_rate_k: fraction of nodes that hit the clamp limit (10.0 or -10.0)
-    // We'll approximate this by checking the max vs mean gap or something similar, 
-    // but for now let's just use the precision drift as an artifact indicator.
     report["alignment_success_rate"] = 1.0 - (drift_out / std::abs(report["fp64_results"]["mean_output"].get<double>()));
 
-    std::filesystem::create_directories("outputs/dase_analog_sim_cpp");
-    std::ofstream o("outputs/dase_analog_sim_cpp/v2p3_report.json");
-    o << std::setw(4) << report << std::endl;
+    std::filesystem::create_directories(out_dir);
 
-    std::cout << "Simulation complete. Report saved to outputs/dase_analog_sim_cpp/v2p3_report.json" << std::endl;
+    json summary;
+    summary["config"] = config_json;
+    summary["final_metrics"] = report["fp64_results"];
+    summary["report"] = report;
+    summary["status"] = "completed";
+
+    std::ofstream o(std::filesystem::path(out_dir) / "summary.json");
+    o << std::setw(4) << summary << std::endl;
+
+    std::cout << "Simulation complete. Summary saved to " << out_dir << "/summary.json" << std::endl;
 
     return 0;
 }

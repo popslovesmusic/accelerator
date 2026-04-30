@@ -73,7 +73,17 @@ void run_sim(sycl::queue& q, size_t n, int steps, T dt, T kappa, T sigma, T x_th
     };
 }
 
-int main() {
+int main(int argc, char** argv) {
+    std::string config_path = "";
+    std::string out_dir = "outputs/stochastic_sim_cpp";
+
+    for (int i = 1; i < argc; ++i) {
+        std::string arg = argv[i];
+        if (arg == "--config" && i + 1 < argc) config_path = argv[++i];
+        else if (arg == "--out" && i + 1 < argc) out_dir = argv[++i];
+    }
+
+    // Default parameters
     size_t n_particles = 100000;
     int steps = 1000;
     float dt = 0.01f;
@@ -83,12 +93,28 @@ int main() {
     float initial_x = 0.0f;
     uint32_t seed = 42;
 
+    json config_json;
+    if (!config_path.empty()) {
+        std::ifstream f(config_path);
+        if (f.is_open()) {
+            config_json = json::parse(f);
+            n_particles = config_json.value("n_particles", n_particles);
+            steps = config_json.value("steps", steps);
+            dt = config_json.value("dt", dt);
+            kappa = config_json.value("kappa", kappa);
+            sigma = config_json.value("sigma", sigma);
+            x_thresh = config_json.value("x_thresh", x_thresh);
+            initial_x = config_json.value("initial_x", initial_x);
+            seed = config_json.value("seed", seed);
+        }
+    }
+
     sycl::queue q_gpu(sycl::default_selector_v);
     sycl::queue q_cpu(sycl::cpu_selector_v);
 
     json report;
     report["sim_id"] = "stochastic_sim_v2p3_sycl_precision_study";
-    report["run_date"] = "2026-04-29";
+    report["run_date"] = "2026-04-30";
     report["hardware_gpu"] = q_gpu.get_device().get_info<sycl::info::device::name>();
     report["hardware_cpu"] = q_cpu.get_device().get_info<sycl::info::device::name>();
 
@@ -113,11 +139,18 @@ int main() {
     report["exclusion_rate_k"] = 1.0 - report["fp64_results"]["crossing_fraction"].get<double>(); // In this context, NOT crossing is exclusion
     report["alignment_success_rate"] = report["fp64_results"]["crossing_fraction"].get<double>();
 
-    std::filesystem::create_directories("outputs/stochastic_sim_cpp");
-    std::ofstream o("outputs/stochastic_sim_cpp/v2p3_report.json");
-    o << std::setw(4) << report << std::endl;
+    std::filesystem::create_directories(out_dir);
 
-    std::cout << "Simulation complete. Report saved to outputs/stochastic_sim_cpp/v2p3_report.json" << std::endl;
+    json summary;
+    summary["config"] = config_json;
+    summary["final_metrics"] = report["fp64_results"];
+    summary["report"] = report;
+    summary["status"] = "completed";
+
+    std::ofstream o(std::filesystem::path(out_dir) / "summary.json");
+    o << std::setw(4) << summary << std::endl;
+
+    std::cout << "Simulation complete. Summary saved to " << out_dir << "/summary.json" << std::endl;
 
     return 0;
 }

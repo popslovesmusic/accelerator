@@ -53,7 +53,17 @@ void run_sim(sycl::queue& q, size_t size, int steps, T dt, T D_diff, T S_diff, T
     };
 }
 
-int main() {
+int main(int argc, char** argv) {
+    std::string config_path = "";
+    std::string out_dir = "outputs/rd_sim_cpp";
+
+    for (int i = 1; i < argc; ++i) {
+        std::string arg = argv[i];
+        if (arg == "--config" && i + 1 < argc) config_path = argv[++i];
+        else if (arg == "--out" && i + 1 < argc) out_dir = argv[++i];
+    }
+
+    // Default parameters
     size_t size = 128;
     int steps = 1000;
     float dt = 0.01f;
@@ -67,12 +77,33 @@ int main() {
     size_t px = 64, py = 64;
     float radius = 5.0f;
 
+    json config_json;
+    if (!config_path.empty()) {
+        std::ifstream f(config_path);
+        if (f.is_open()) {
+            config_json = json::parse(f);
+            size = config_json.value("size", 128);
+            steps = config_json.value("steps", 1000);
+            dt = config_json.value("dt", 0.01f);
+            D_diff = config_json.value("D_diff", 0.1f);
+            S_diff = config_json.value("S_diff", 0.5f);
+            beta = config_json.value("beta", 1.0f);
+            theta_g = config_json.value("theta_g", 0.2f);
+            gamma = config_json.value("gamma", 0.01f);
+            alpha = config_json.value("alpha", 0.05f);
+            source_strength = config_json.value("source_strength", 0.1f);
+            px = config_json.value("px", 64);
+            py = config_json.value("py", 64);
+            radius = config_json.value("radius", 5.0f);
+        }
+    }
+
     sycl::queue q_gpu(sycl::default_selector_v);
     sycl::queue q_cpu(sycl::cpu_selector_v);
 
     json report;
     report["sim_id"] = "rd_moving_boundary_v2p3_sycl_precision_study";
-    report["run_date"] = "2026-04-29";
+    report["run_date"] = "2026-04-30";
     report["hardware_gpu"] = q_gpu.get_device().get_info<sycl::info::device::name>();
     report["hardware_cpu"] = q_cpu.get_device().get_info<sycl::info::device::name>();
 
@@ -90,17 +121,24 @@ int main() {
     double area_drift = std::abs(report["fp32_results"]["active_area"].get<double>() - report["fp64_results"]["active_area"].get<double>());
     report["precision_drift"] = {
         {"active_area_abs", area_drift},
-        {"active_area_rel", area_drift / report["fp64_results"]["active_area"].get<double>()}
+        {"active_area_rel", report["fp64_results"]["active_area"].get<double>() != 0 ? area_drift / report["fp64_results"]["active_area"].get<double>() : 0.0}
     };
     
     // Primitive mapping
-    report["exclusion_rate_k"] = report["falsification_high_decay"]["active_area"].get<double>() / report["fp64_results"]["active_area"].get<double>();
+    report["exclusion_rate_k"] = report["fp64_results"]["active_area"].get<double>() != 0 ? report["falsification_high_decay"]["active_area"].get<double>() / report["fp64_results"]["active_area"].get<double>() : 1.0;
 
-    std::filesystem::create_directories("outputs/rd_sim_cpp");
-    std::ofstream o("outputs/rd_sim_cpp/v2p3_report.json");
-    o << std::setw(4) << report << std::endl;
+    std::filesystem::create_directories(out_dir);
+    
+    json summary;
+    summary["config"] = config_json;
+    summary["final_metrics"] = report["fp64_results"];
+    summary["report"] = report;
+    summary["status"] = "completed";
 
-    std::cout << "Simulation complete. Report saved to outputs/rd_sim_cpp/v2p3_report.json" << std::endl;
+    std::ofstream o(std::filesystem::path(out_dir) / "summary.json");
+    o << std::setw(4) << summary << std::endl;
+
+    std::cout << "Simulation complete. Summary saved to " << out_dir << "/summary.json" << std::endl;
 
     return 0;
 }

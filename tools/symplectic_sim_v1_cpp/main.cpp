@@ -119,21 +119,44 @@ json run_case(size_t n, int steps, T mass, T kappa, T dt, double q_spread, doubl
 }
 }
 
-int main() {
-    std::filesystem::create_directories("outputs/symplectic_sim_v1_cpp");
+int main(int argc, char** argv) {
+    std::string config_path = "";
+    std::string out_dir = "outputs/symplectic_sim_v1_cpp";
 
-    const size_t n = 20000;
-    const int steps = 2000;
-    const double mass = 1.0;
-    const double kappa = 1.0;
-    const double dt = 0.01;
-    const double q_spread = 0.4;
-    const double p_spread = 0.25;
-    const uint32_t seed = 42;
+    for (int i = 1; i < argc; ++i) {
+        std::string arg = argv[i];
+        if (arg == "--config" && i + 1 < argc) config_path = argv[++i];
+        else if (arg == "--out" && i + 1 < argc) out_dir = argv[++i];
+    }
+
+    std::filesystem::create_directories(out_dir);
+
+    // Default parameters
+    size_t n = 20000;
+    int steps = 2000;
+    double mass = 1.0;
+    double kappa = 1.0;
+    double dt = 0.01;
+    double q_spread = 0.4;
+    double p_spread = 0.25;
+    uint32_t seed = 42;
+
+    json config_json;
+    if (!config_path.empty()) {
+        std::ifstream f(config_path);
+        if (f.is_open()) {
+            config_json = json::parse(f);
+            n = config_json.value("n_particles", 20000);
+            steps = config_json.value("steps", 2000);
+            kappa = config_json.value("kappa", 1.0);
+            dt = config_json.value("dt", 0.01);
+            seed = config_json.value("seed", 42);
+        }
+    }
 
     json report;
     report["sim_id"] = "symplectic_sim_v2p3_precision_study";
-    report["run_date"] = "2026-04-29";
+    report["run_date"] = "2026-04-30";
     report["schema"] = "v2.3_recoverable_report";
     report["model_class"] = "hamiltonian_symplectic";
     report["primitive_mapping"] = {
@@ -160,8 +183,15 @@ int main() {
     report["exclusion_rate_k"] = std::min(1.0, std::abs(fp64["energy_drift_rel"].get<double>()));
     report["alignment_success_rate"] = 1.0 - report["exclusion_rate_k"].get<double>();
 
-    std::ofstream out("outputs/symplectic_sim_v1_cpp/v2p3_report.json");
-    out << std::setw(2) << report << "\n";
-    std::cout << "Report saved to outputs/symplectic_sim_v1_cpp/v2p3_report.json\n";
+    json summary;
+    summary["config"] = config_json;
+    summary["final_metrics"] = report["fp64_results"];
+    summary["report"] = report;
+    summary["status"] = "completed";
+
+    std::ofstream out(std::filesystem::path(out_dir) / "summary.json");
+    out << std::setw(4) << summary << "\n";
+    
+    std::cout << "Simulation complete. Summary saved to " << out_dir << "/summary.json\n";
     return report["falsification"]["passed"].get<bool>() ? 0 : 2;
 }

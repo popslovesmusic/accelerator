@@ -1,0 +1,24 @@
+{
+  "run_id": "ca_sweep_gating",
+  "mode": "parallel",
+  "output_root": "outputs/runs/research_admissibility_recoupling_rt1_2026-04-30/ca_sweep_gating",
+  "execution": {
+    "max_workers": 4
+  },
+  "jobs": [
+    {
+      "job_id": "gating_sweep",
+      "tool": "ca_admissibility_sim_v1",
+      "config": "outputs/runs/research_admissibility_recoupling_rt1_2026-04-30/configs/ca_gating_base.json",
+      "seeds": [123, 456, 789],
+      "args": {
+        "residue_growth": "{residue_growth}",
+        "diffusion_rate": "{diffusion_rate}"
+      }
+    }
+  ],
+  "parameter_space": {
+    "residue_growth": [0.0, 0.05, 0.1, 0.2, 0.5],
+    "diffusion_rate": [0.01, 0.05, 0.1, 0.2]
+  }
+}
