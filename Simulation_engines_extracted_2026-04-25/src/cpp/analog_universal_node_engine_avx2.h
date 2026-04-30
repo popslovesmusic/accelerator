@@ -110,6 +110,14 @@ struct EngineMetrics {
 
     double avg_time_ns             = 0.0;
     double throughput_gflops       = 0.0;
+    double uhd770_execution_time_ms = 0.0;
+    double cpu_reference_time_ms    = 0.0;
+    double max_abs_drift            = 0.0;
+    double mean_abs_drift           = 0.0;
+    bool uhd770_used                = false;
+    bool drift_check_run            = false;
+    bool drift_check_passed         = false;
+    std::string backend             = "avx2_openmp";
 
     // legacy method declarations
     void reset() noexcept;
@@ -218,6 +226,13 @@ public:
                                      const double* control_patterns,
                                      std::uint64_t num_steps,
                                      std::uint32_t iterations_per_node = 30);
+
+    // UHD 770: oneAPI/SYCL FP32 path with optional CPU FP64 drift check.
+    void runMissionOptimized_UHD770(const double* input_signals,
+                                    const double* control_patterns,
+                                    std::uint64_t num_steps,
+                                    std::uint32_t iterations_per_node = 30,
+                                    bool run_cpu_drift_check = true);
 
     void runMassiveBenchmark(int iterations);
     double runDragRaceBenchmark(int num_runs);

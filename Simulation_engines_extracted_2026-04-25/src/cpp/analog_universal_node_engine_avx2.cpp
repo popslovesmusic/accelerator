@@ -9,6 +9,11 @@
 #include <omp.h>
 #include <unordered_map>
 #include <mutex>
+#include "uhd770_runtime.h"
+
+#if DASE_HAS_SYCL_RUNTIME
+#include <sycl/sycl.hpp>
+#endif
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
@@ -92,6 +97,14 @@ void EngineMetrics::reset() noexcept {
     avx2_operations = 0;
     node_processes = 0;
     harmonic_generations = 0;
+    uhd770_execution_time_ms = 0.0;
+    cpu_reference_time_ms = 0.0;
+    max_abs_drift = 0.0;
+    mean_abs_drift = 0.0;
+    uhd770_used = false;
+    drift_check_run = false;
+    drift_check_passed = false;
+    backend = "avx2_openmp";
 }
 
 void EngineMetrics::update_performance() noexcept {
@@ -877,6 +890,159 @@ void AnalogCellularEngineAVX2::runMissionOptimized_Phase4C(
 
     metrics_.print_metrics();
     std::cout << "=========================================" << std::endl;
+}
+
+void AnalogCellularEngineAVX2::runMissionOptimized_UHD770(
+    const double* input_signals,
+    const double* control_patterns,
+    std::uint64_t num_steps,
+    std::uint32_t iterations_per_node,
+    bool run_cpu_drift_check
+) {
+    metrics_.reset();
+    metrics_.backend = "uhd770_sycl_fp32";
+
+    const size_t n = nodes.size();
+    const uint64_t total_ops = num_steps * static_cast<uint64_t>(n) * iterations_per_node;
+    std::vector<float> integrator_f(n);
+    std::vector<float> feedback_f(n);
+    std::vector<float> output_f(n, 0.0f);
+    std::vector<double> cpu_integrator;
+    std::vector<double> cpu_output;
+
+    for (size_t i = 0; i < n; ++i) {
+        integrator_f[i] = static_cast<float>(nodes[i].integrator_state);
+        feedback_f[i] = static_cast<float>(nodes[i].feedback_gain);
+    }
+
+    if (run_cpu_drift_check) {
+        cpu_integrator.resize(n);
+        cpu_output.assign(n, 0.0);
+        for (size_t i = 0; i < n; ++i) {
+            cpu_integrator[i] = nodes[i].integrator_state;
+        }
+    }
+
+    auto cpu_ref_start = std::chrono::high_resolution_clock::now();
+    if (run_cpu_drift_check) {
+        for (uint64_t step = 0; step < num_steps; ++step) {
+            const double amplified = input_signals[step] * control_patterns[step];
+            const double spectral_approx = amplified * 0.01;
+            for (size_t i = 0; i < n; ++i) {
+                double state = cpu_integrator[i];
+                for (uint32_t iter = 0; iter < iterations_per_node; ++iter) {
+                    state += amplified * 0.1 * (1.0 / 48000.0);
+                    state *= 0.999999;
+                    state = std::max(-1e6, std::min(1e6, state));
+                    double out = state + state * nodes[i].feedback_gain + spectral_approx;
+                    cpu_output[i] = std::max(-10.0, std::min(10.0, out));
+                }
+                cpu_integrator[i] = state;
+            }
+        }
+    }
+    auto cpu_ref_end = std::chrono::high_resolution_clock::now();
+
+    auto gpu_start = std::chrono::high_resolution_clock::now();
+#if DASE_HAS_SYCL_RUNTIME
+    try {
+        sycl::queue q(sycl::gpu_selector_v);
+        float* d_integrator = sycl::malloc_shared<float>(n, q);
+        float* d_feedback = sycl::malloc_shared<float>(n, q);
+        float* d_output = sycl::malloc_shared<float>(n, q);
+        float* d_input = sycl::malloc_shared<float>(num_steps, q);
+        float* d_control = sycl::malloc_shared<float>(num_steps, q);
+        if (!d_integrator || !d_feedback || !d_output || !d_input || !d_control) {
+            throw std::bad_alloc();
+        }
+        for (size_t i = 0; i < n; ++i) {
+            d_integrator[i] = integrator_f[i];
+            d_feedback[i] = feedback_f[i];
+            d_output[i] = 0.0f;
+        }
+        for (uint64_t s = 0; s < num_steps; ++s) {
+            d_input[s] = static_cast<float>(input_signals[s]);
+            d_control[s] = static_cast<float>(control_patterns[s]);
+        }
+        q.parallel_for(sycl::range<1>(n), [=](sycl::id<1> idx) {
+            size_t i = idx.get(0);
+            float state = d_integrator[i];
+            const float feedback = d_feedback[i];
+            for (uint64_t step = 0; step < num_steps; ++step) {
+                const float amplified = d_input[step] * d_control[step];
+                const float spectral_approx = amplified * 0.01f;
+                for (uint32_t iter = 0; iter < iterations_per_node; ++iter) {
+                    state += amplified * 0.1f * (1.0f / 48000.0f);
+                    state *= 0.999999f;
+                    state = sycl::fmin(1000000.0f, sycl::fmax(-1000000.0f, state));
+                    float out = state + state * feedback + spectral_approx;
+                    d_output[i] = sycl::fmin(10.0f, sycl::fmax(-10.0f, out));
+                }
+            }
+            d_integrator[i] = state;
+        }).wait();
+        for (size_t i = 0; i < n; ++i) {
+            integrator_f[i] = d_integrator[i];
+            output_f[i] = d_output[i];
+        }
+        sycl::free(d_integrator, q);
+        sycl::free(d_feedback, q);
+        sycl::free(d_output, q);
+        sycl::free(d_input, q);
+        sycl::free(d_control, q);
+        metrics_.uhd770_used = true;
+    } catch (const std::exception& e) {
+        std::cerr << "[UHD770] SYCL mission failed, falling back to CPU FP32 recurrence: " << e.what() << std::endl;
+        metrics_.backend = "cpu_fp32_fallback";
+    }
+#else
+    metrics_.backend = "cpu_fp32_fallback";
+#endif
+
+    if (!metrics_.uhd770_used) {
+        for (uint64_t step = 0; step < num_steps; ++step) {
+            const float amplified = static_cast<float>(input_signals[step] * control_patterns[step]);
+            const float spectral_approx = amplified * 0.01f;
+            for (size_t i = 0; i < n; ++i) {
+                float state = integrator_f[i];
+                for (uint32_t iter = 0; iter < iterations_per_node; ++iter) {
+                    state += amplified * 0.1f * (1.0f / 48000.0f);
+                    state *= 0.999999f;
+                    state = std::max(-1000000.0f, std::min(1000000.0f, state));
+                    output_f[i] = std::max(-10.0f, std::min(10.0f, state + state * feedback_f[i] + spectral_approx));
+                }
+                integrator_f[i] = state;
+            }
+        }
+    }
+    auto gpu_end = std::chrono::high_resolution_clock::now();
+
+    for (size_t i = 0; i < n; ++i) {
+        nodes[i].integrator_state = static_cast<double>(integrator_f[i]);
+        nodes[i].current_output = static_cast<double>(output_f[i]);
+        nodes[i].previous_input = num_steps > 0 ? input_signals[num_steps - 1] : 0.0;
+    }
+
+    if (run_cpu_drift_check) {
+        double max_drift = 0.0;
+        double sum_drift = 0.0;
+        for (size_t i = 0; i < n; ++i) {
+            double drift = std::abs(static_cast<double>(output_f[i]) - cpu_output[i]);
+            max_drift = std::max(max_drift, drift);
+            sum_drift += drift;
+        }
+        metrics_.max_abs_drift = max_drift;
+        metrics_.mean_abs_drift = n > 0 ? sum_drift / static_cast<double>(n) : 0.0;
+        metrics_.drift_check_run = true;
+        metrics_.drift_check_passed = max_drift < 1e-4;
+    }
+
+    metrics_.uhd770_execution_time_ms = std::chrono::duration_cast<std::chrono::microseconds>(gpu_end - gpu_start).count() / 1000.0;
+    metrics_.cpu_reference_time_ms = std::chrono::duration_cast<std::chrono::microseconds>(cpu_ref_end - cpu_ref_start).count() / 1000.0;
+    metrics_.total_execution_time_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(gpu_end - gpu_start).count();
+    metrics_.total_operations = static_cast<long long>(total_ops);
+    metrics_.node_processes = metrics_.total_operations;
+    metrics_.update_performance();
 }
 
 // New: The massive benchmark function to simulate a continuous heavy load

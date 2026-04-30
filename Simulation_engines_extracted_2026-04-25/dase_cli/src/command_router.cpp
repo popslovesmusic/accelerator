@@ -10,6 +10,7 @@
 #include "analysis_router.h"
 #include "python_bridge.h"
 #include "engine_fft_analysis.h"
+#include "../../src/cpp/uhd770_runtime.h"
 #include <chrono>
 #include <cstdint>
 
@@ -24,6 +25,7 @@ CommandRouter::CommandRouter()
 
     // Register command handlers
     command_handlers["get_capabilities"] = [this](const json& p) { return handleGetCapabilities(p); };
+    command_handlers["get_acceleration_status"] = [this](const json& p) { return handleGetAccelerationStatus(p); };
     command_handlers["describe_engine"] = [this](const json& p) { return handleDescribeEngine(p); };
     command_handlers["list_engines"] = [this](const json& p) { return handleListEngines(p); };
     command_handlers["create_engine"] = [this](const json& p) { return handleCreateEngine(p); };
@@ -88,19 +90,69 @@ json CommandRouter::execute(const json& command) {
 }
 
 json CommandRouter::handleGetCapabilities(const json& params) {
+    auto accel = dase::uhd770::detectDevice();
     json result = {
         {"version", "1.0.0"},
-        {"status", "prototype"},
+        {"status", "prototype_uhd770_ready"},
         {"engines", json::array({"phase4b", "igsoa_complex", "igsoa_complex_2d", "igsoa_complex_3d", "satp_higgs_1d", "satp_higgs_2d", "satp_higgs_3d", "igsoa_gw"})},
         {"cpu_features", {
             {"avx2", true},
             {"avx512", false},
             {"fma", true}
         }},
+        {"gpu_features", {
+            {"target", "Intel UHD 770"},
+            {"backend", accel.backend},
+            {"sycl_compiled", accel.sycl_compiled},
+            {"gpu_available", accel.gpu_available},
+            {"uhd770_likely", accel.uhd770_likely},
+            {"fp32_default", true},
+            {"fp64_supported", accel.fp64_supported},
+            {"selected_device", accel.selected_device},
+            {"selected_vendor", accel.selected_vendor},
+            {"notes", accel.notes}
+        }},
         {"max_nodes", 1048576}
     };
 
     return createSuccessResponse("get_capabilities", result, 0);
+}
+
+json CommandRouter::handleGetAccelerationStatus(const json& params) {
+    bool run_probe = params.value("run_probe", false);
+    auto device = dase::uhd770::detectDevice();
+
+    json result = {
+        {"target", "Intel UHD 770"},
+        {"sycl_compiled", device.sycl_compiled},
+        {"gpu_available", device.gpu_available},
+        {"uhd770_likely", device.uhd770_likely},
+        {"fp32_default", true},
+        {"fp64_supported", device.fp64_supported},
+        {"selected_device", device.selected_device},
+        {"selected_vendor", device.selected_vendor},
+        {"backend", device.backend},
+        {"notes", device.notes},
+        {"engine_policy", {
+            {"cpu_fallback", "AVX2/OpenMP remains available for correctness and FP64 reference runs"},
+            {"gpu_primary", "UHD 770 oneAPI/SYCL FP32 kernels should be used for high-throughput production paths"},
+            {"verification", "Every promoted empirical result still requires recoverable output and CPU/GPU drift reporting"}
+        }}
+    };
+
+    if (run_probe) {
+        auto probe = dase::uhd770::runFp32VectorProbe();
+        result["probe"] = {
+            {"name", "fp32_vector_math"},
+            {"passed", probe.passed},
+            {"n", probe.n},
+            {"elapsed_ms", probe.elapsed_ms},
+            {"max_abs_error", probe.max_abs_error},
+            {"checksum", probe.checksum}
+        };
+    }
+
+    return createSuccessResponse("get_acceleration_status", result, 0);
 }
 
 json CommandRouter::handleDescribeEngine(const json& params) {
@@ -489,8 +541,10 @@ json CommandRouter::handleRunMission(const json& params) {
     std::string engine_id = params.value("engine_id", "");
     int num_steps = params.value("num_steps", 0);
     int iterations_per_node = params.value("iterations_per_node", 30);
+    std::string backend = params.value("backend", "auto");
+    bool drift_check = params.value("drift_check", true);
 
-    bool success = engine_manager->runMission(engine_id, num_steps, iterations_per_node);
+    bool success = engine_manager->runMission(engine_id, num_steps, iterations_per_node, backend, drift_check);
 
     if (!success) {
         return createErrorResponse("run_mission",
@@ -498,9 +552,21 @@ json CommandRouter::handleRunMission(const json& params) {
                                    "EXECUTION_FAILED");
     }
 
+    auto metrics = engine_manager->getMetrics(engine_id);
+
     json result = {
         {"steps_completed", num_steps},
-        {"total_operations", static_cast<double>(num_steps) * iterations_per_node * 1024}
+        {"backend_requested", backend},
+        {"drift_check_requested", drift_check},
+        {"total_operations", metrics.total_operations},
+        {"uhd770", {
+            {"used", metrics.uhd770_used},
+            {"gpu_time_ms", metrics.uhd770_time_ms},
+            {"cpu_reference_time_ms", metrics.cpu_reference_time_ms},
+            {"max_abs_drift", metrics.max_abs_drift},
+            {"mean_abs_drift", metrics.mean_abs_drift},
+            {"drift_check_passed", metrics.drift_check_passed}
+        }}
     };
 
     return createSuccessResponse("run_mission", result, 0);
@@ -578,7 +644,15 @@ json CommandRouter::handleGetMetrics(const json& params) {
         {"engine_type", engine_type},  // Use actual engine type from instance
         {"ns_per_op", metrics.ns_per_op},
         {"ops_per_sec", metrics.ops_per_sec},
-        {"total_operations", metrics.total_operations}
+        {"total_operations", metrics.total_operations},
+        {"uhd770", {
+            {"used", metrics.uhd770_used},
+            {"gpu_time_ms", metrics.uhd770_time_ms},
+            {"cpu_reference_time_ms", metrics.cpu_reference_time_ms},
+            {"max_abs_drift", metrics.max_abs_drift},
+            {"mean_abs_drift", metrics.mean_abs_drift},
+            {"drift_check_passed", metrics.drift_check_passed}
+        }}
     };
 
     return createSuccessResponse("get_metrics", result, 0);

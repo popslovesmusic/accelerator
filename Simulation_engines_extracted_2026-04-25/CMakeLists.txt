@@ -25,6 +25,8 @@ option(DASE_BUILD_TESTS "Build C++ unit tests" OFF)
 option(DASE_USE_GTEST "Use Google Test framework for tests" ON)
 option(DASE_ENABLE_AVX2 "Enable AVX2 SIMD instructions" ON)
 option(DASE_ENABLE_OPENMP "Enable OpenMP parallelization" ON)
+option(DASE_ENABLE_UHD770_SYCL "Enable Intel oneAPI/SYCL support for UHD 770 GPU paths and diagnostics" ON)
+option(DASE_UHD770_FP32_DEFAULT "Treat UHD 770 as an FP32-first target for GPU kernels" ON)
 option(DASE_BUILD_JSON_CLI "Build strict JSON CLI (dase_cli)" ON)
 
 # ============================================================================
@@ -103,6 +105,37 @@ else()
     set(DASE_COMPILE_FLAGS ${DASE_COMPILE_FLAGS_GCC})
 endif()
 
+set(DASE_UHD770_COMPILE_OPTIONS "")
+set(DASE_UHD770_LINK_OPTIONS "")
+set(DASE_UHD770_DEFINITIONS "")
+
+if(DASE_ENABLE_UHD770_SYCL)
+    list(APPEND DASE_UHD770_DEFINITIONS DASE_ENABLE_UHD770_SYCL)
+    if(DASE_UHD770_FP32_DEFAULT)
+        list(APPEND DASE_UHD770_DEFINITIONS DASE_UHD770_FP32_DEFAULT)
+    endif()
+
+    if(CMAKE_CXX_COMPILER_ID MATCHES "IntelLLVM")
+        list(APPEND DASE_UHD770_COMPILE_OPTIONS -fsycl)
+        list(APPEND DASE_UHD770_LINK_OPTIONS -fsycl)
+        message(STATUS "UHD 770 SYCL support enabled through IntelLLVM/oneAPI")
+    else()
+        message(WARNING "DASE_ENABLE_UHD770_SYCL is ON, but compiler is ${CMAKE_CXX_COMPILER_ID}. Configure with Intel oneAPI icx/icpx for actual SYCL kernels; CPU fallback diagnostics will still compile.")
+    endif()
+endif()
+
+function(dase_apply_uhd770 TARGET_NAME)
+    if(DASE_ENABLE_UHD770_SYCL)
+        target_compile_definitions(${TARGET_NAME} PRIVATE ${DASE_UHD770_DEFINITIONS})
+        if(DASE_UHD770_COMPILE_OPTIONS)
+            target_compile_options(${TARGET_NAME} PRIVATE ${DASE_UHD770_COMPILE_OPTIONS})
+        endif()
+        if(DASE_UHD770_LINK_OPTIONS)
+            target_link_options(${TARGET_NAME} PRIVATE ${DASE_UHD770_LINK_OPTIONS})
+        endif()
+    endif()
+endfunction()
+
 # ============================================================================
 # CORE LIBRARY (Static)
 # ============================================================================
@@ -121,6 +154,7 @@ target_link_libraries(dase_core PUBLIC ${FFTW3_LIBRARY})
 
 # Apply compiler optimizations
 target_compile_options(dase_core PRIVATE ${DASE_COMPILE_FLAGS})
+dase_apply_uhd770(dase_core)
 
 # ============================================================================
 # UTILITY LIBRARY (Logger and common utilities)
@@ -137,6 +171,7 @@ target_include_directories(igsoa_utils PUBLIC
 
 # Apply compiler optimizations
 target_compile_options(igsoa_utils PRIVATE ${DASE_COMPILE_FLAGS})
+dase_apply_uhd770(igsoa_utils)
 
 # ============================================================================
 # IGSOA GRAVITATIONAL WAVE ENGINE (Static Library)
@@ -160,6 +195,22 @@ target_link_libraries(igsoa_gw_core PUBLIC ${FFTW3_LIBRARY} igsoa_utils)
 
 # Apply compiler optimizations
 target_compile_options(igsoa_gw_core PRIVATE ${DASE_COMPILE_FLAGS})
+dase_apply_uhd770(igsoa_gw_core)
+
+# ============================================================================
+# UHD 770 DEVICE PROBE
+# ============================================================================
+
+add_executable(uhd770_device_probe
+    src/cpp/uhd770_device_probe.cpp
+)
+
+target_include_directories(uhd770_device_probe PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}
+)
+
+dase_apply_uhd770(uhd770_device_probe)
 
 # AVX2 support
 if(DASE_ENABLE_AVX2)
@@ -189,6 +240,7 @@ if(DASE_BUILD_JULIA_DLLS)
         target_link_libraries(${DLL_NAME} PRIVATE dase_core)
         target_compile_definitions(${DLL_NAME} PRIVATE DASE_BUILD_DLL)
         target_compile_options(${DLL_NAME} PRIVATE ${DASE_COMPILE_FLAGS})
+        dase_apply_uhd770(${DLL_NAME})
 
         if(DASE_ENABLE_AVX2)
             if(MSVC)
@@ -279,9 +331,12 @@ message(STATUS "C++ compiler:     ${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_
 message(STATUS "C++ standard:     C++${CMAKE_CXX_STANDARD}")
 message(STATUS "AVX2 enabled:     ${DASE_ENABLE_AVX2}")
 message(STATUS "OpenMP enabled:   ${DASE_ENABLE_OPENMP}")
+message(STATUS "UHD770 SYCL:      ${DASE_ENABLE_UHD770_SYCL}")
+message(STATUS "UHD770 FP32 path: ${DASE_UHD770_FP32_DEFAULT}")
 message(STATUS "")
 message(STATUS "Build targets:")
 message(STATUS "  - dase_core (static library)")
+message(STATUS "  - uhd770_device_probe (SYCL/GPU diagnostic)")
 if(DASE_BUILD_JULIA_DLLS)
     message(STATUS "  - Julia C API DLLs (5 versions)")
 endif()
@@ -317,6 +372,7 @@ if(DASE_BUILD_JSON_CLI)
 
     target_link_libraries(dase_cli_analysis_integration PRIVATE ${FFTW3_LIBRARY})
     target_compile_definitions(dase_cli_analysis_integration PRIVATE USE_FFTW3)
+    dase_apply_uhd770(dase_cli_analysis_integration)
 
     if(MSVC)
         target_compile_options(dase_cli_analysis_integration PRIVATE /O2 /EHsc)
@@ -338,6 +394,7 @@ if(DASE_BUILD_JSON_CLI)
     )
 
     target_link_libraries(dase_cli_json PRIVATE dase_cli_analysis_integration)
+    dase_apply_uhd770(dase_cli_json)
 
     if(MSVC)
         target_compile_options(dase_cli_json PRIVATE /W4 /EHsc /std:c++17)

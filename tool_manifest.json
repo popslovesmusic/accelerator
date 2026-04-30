@@ -127,8 +127,8 @@
     {
       "name": "info_metrics_module_v1_cpp",
       "description": "High-performance SYCL/GPU accelerated information metrics post-processor (Intel UHD 770).",
-      "entry_point": "info_metrics_module_v1_cpp/analyze_info.py",
-      "cli_command": "python info_metrics_module_v1_cpp/analyze_info.py --dir {data_dir}",
+      "entry_point": "info_metrics_module_v1_cpp/metrics_benchmark.exe",
+      "cli_command": "./info_metrics_module_v1_cpp/metrics_benchmark.exe",
       "config_params": [],
       "metrics": ["entropy", "complexity", "runtime_ms"]
     },
@@ -155,6 +155,78 @@
       "cli_command": "python tda_module_v1/analyze_topology.py --dir {data_path} --threshold {threshold}",
       "config_params": ["threshold", "mode"],
       "metrics": ["count", "max_size", "active_fraction"]
+    },
+    {
+      "name": "tda_module_v1_cpp",
+      "description": "C++ Betti-0 connected-component topology analyzer with v2.3 recoverable reports.",
+      "entry_point": "tda_module_v1_cpp/tda_benchmark.exe",
+      "cli_command": "./tda_module_v1_cpp/tda_benchmark.exe --mode {mode} --file {grid_csv} --threshold {threshold} --out {out_dir}",
+      "config_params": ["mode", "threshold", "grid_csv"],
+      "metrics": ["count", "max_size", "mean_size", "active_fraction"]
+    },
+    {
+      "name": "symplectic_sim_v1_cpp",
+      "description": "C++ symplectic nonlinear pendulum simulator with FP32/FP64 precision drift and energy falsification checks.",
+      "entry_point": "symplectic_sim_v1_cpp/symplectic_sim_benchmark.exe",
+      "cli_command": "./symplectic_sim_v1_cpp/symplectic_sim_benchmark.exe",
+      "config_params": ["n_particles", "mass", "kappa", "dt", "steps"],
+      "metrics": ["mean_H", "std_H", "energy_drift_abs", "precision_drift"]
+    },
+    {
+      "name": "spectral_analysis_v1_cpp",
+      "description": "C++ spectral analysis layer for temporal signals and spatial grids with dominant-mode controls.",
+      "entry_point": "spectral_analysis_v1_cpp/spectral_analysis_benchmark.exe",
+      "cli_command": "./spectral_analysis_v1_cpp/spectral_analysis_benchmark.exe --mode temporal --file {file} --col {column} --out {out_dir}",
+      "config_params": ["mode", "file", "column", "fs"],
+      "metrics": ["dominant_modes", "total_power", "dominant_power_fraction"]
+    },
+    {
+      "name": "mc_ensemble_sim_v1_cpp",
+      "description": "C++ simulator-agnostic Monte Carlo parameter sweep orchestrator using executable command templates.",
+      "entry_point": "mc_ensemble_sim_v1_cpp/mc_ensemble_runner.exe",
+      "cli_command": "./mc_ensemble_sim_v1_cpp/mc_ensemble_runner.exe --config {config} --out {out_dir}",
+      "config_params": ["trials", "seed", "command_template", "base_config", "scan_params"],
+      "metrics": ["ensemble_results.csv", "ensemble_report.json"]
+    },
+    {
+      "name": "parameter_optimizer_v1_cpp",
+      "description": "C++ deterministic random-search parameter optimizer using executable command templates.",
+      "entry_point": "parameter_optimizer_v1_cpp/parameter_optimizer.exe",
+      "cli_command": "./parameter_optimizer_v1_cpp/parameter_optimizer.exe --config {config} --out {out_dir}",
+      "config_params": ["max_evals", "seed", "command_template", "base_config", "search_params"],
+      "metrics": ["optimization_trace.csv", "best_config.json", "optimization_report.json"]
+    },
+    {
+      "name": "linac_sim_cpp",
+      "description": "SYCL-accelerated linear accelerator port with FP32/FP64 precision drift and v2.3 metric reporting.",
+      "entry_point": "linac_sim_cpp/linac_sim_benchmark.exe",
+      "cli_command": "./linac_sim_cpp/linac_sim_benchmark.exe",
+      "config_params": ["particles", "steps", "rf_gradient", "seed"],
+      "metrics": ["survival_fraction", "energy_gain", "precision_drift"]
+    },
+    {
+      "name": "stochastic_sim_cpp",
+      "description": "SYCL-accelerated stochastic threshold simulator with zero-noise falsification.",
+      "entry_point": "stochastic_sim_cpp/stochastic_sim_benchmark.exe",
+      "cli_command": "./stochastic_sim_cpp/stochastic_sim_benchmark.exe",
+      "config_params": ["n_particles", "steps", "dt", "kappa", "sigma", "x_thresh"],
+      "metrics": ["crossing_fraction", "mean_x", "std_x", "precision_drift"]
+    },
+    {
+      "name": "rd_sim_cpp",
+      "description": "SYCL-accelerated reaction-diffusion moving-boundary port with v2.3 reporting.",
+      "entry_point": "rd_sim_cpp/rd_sim_benchmark.exe",
+      "cli_command": "./rd_sim_cpp/rd_sim_benchmark.exe",
+      "config_params": ["nx", "ny", "steps", "beta", "domain_decay"],
+      "metrics": ["active_area", "total_signal", "precision_drift"]
+    },
+    {
+      "name": "structural_box_sim_cpp",
+      "description": "SYCL-accelerated Structural Box port with identity persistence metrics and zero-mismatch falsification.",
+      "entry_point": "structural_box_sim_cpp/box_sim_benchmark.exe",
+      "cli_command": "./structural_box_sim_cpp/box_sim_benchmark.exe",
+      "config_params": ["nx", "steps", "kappa", "lambda_R", "s"],
+      "metrics": ["epsilon_max", "epsilon_active_fraction", "alignment_success_rate", "precision_drift"]
     },
     {
       "name": "circular_accelerator_sim_v1_cpp",

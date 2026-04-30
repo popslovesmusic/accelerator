@@ -6,7 +6,7 @@ The CLI reads line-delimited JSON commands from stdin and writes JSON responses 
 
 ## Build (From Extracted Root)
 
-From `D:\acellorator\Simulation_engines_extracted_2026-04-25`:
+From `D:\projects\acellorator\Simulation_engines_extracted_2026-04-25`:
 
 ```powershell
 cmake -S . -B build -DDASE_BUILD_JSON_CLI=ON -DDASE_BUILD_JULIA_DLLS=ON
@@ -35,4 +35,5 @@ Example command JSON files in this folder:
 
 - `examples.json`
 - `quick_test_commands.json`
+
 

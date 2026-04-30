@@ -64,7 +64,7 @@ public:
     // Engine operations (Phase 4B)
     bool setNodeState(const std::string& engine_id, int node_index, double value);
     double getNodeState(const std::string& engine_id, int node_index);
-    bool runMission(const std::string& engine_id, int num_steps, int iterations_per_node);
+    bool runMission(const std::string& engine_id, int num_steps, int iterations_per_node, const std::string& backend = "auto", bool drift_check = true);
 
     // Engine operations (IGSOA Complex)
     bool setNodePsi(const std::string& engine_id, int node_index, double real, double imag);
@@ -108,6 +108,12 @@ public:
         double ops_per_sec;
         uint64_t total_operations;
         double speedup_factor;
+        double uhd770_time_ms;
+        double cpu_reference_time_ms;
+        double max_abs_drift;
+        double mean_abs_drift;
+        bool uhd770_used;
+        bool drift_check_passed;
     };
 
     EngineMetrics getMetrics(const std::string& engine_id);

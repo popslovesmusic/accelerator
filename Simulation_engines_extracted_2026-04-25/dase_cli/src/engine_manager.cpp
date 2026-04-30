@@ -42,6 +42,8 @@ typedef void* (*CreateEngineFunc)(uint32_t);
 typedef void (*DestroyEngineFunc)(void*);
 typedef void (*RunMissionFunc)(void*, const double*, const double*, uint64_t, uint32_t);
 typedef void (*GetMetricsFunc)(void*, double*, double*, double*, uint64_t*);
+typedef void (*RunMissionUHD770Func)(void*, const double*, const double*, uint64_t, uint32_t, int);
+typedef void (*GetUHD770MetricsFunc)(void*, double*, double*, double*, double*, int*, int*);
 
 // DLL handle and function pointers
 static HMODULE dll_handle = nullptr;
@@ -49,6 +51,8 @@ static CreateEngineFunc dase_create_engine = nullptr;
 static DestroyEngineFunc dase_destroy_engine = nullptr;
 static RunMissionFunc dase_run_mission_optimized_phase4c = nullptr;
 static GetMetricsFunc dase_get_metrics = nullptr;
+static RunMissionUHD770Func dase_run_mission_optimized_uhd770 = nullptr;
+static GetUHD770MetricsFunc dase_get_uhd770_metrics = nullptr;
 
 // Load the DASE DLL and get function pointers
 static bool loadDaseDLL() {
@@ -94,6 +98,12 @@ static bool loadDaseDLL() {
     dase_get_metrics = reinterpret_cast<GetMetricsFunc>(
         GetProcAddress(dll_handle, "dase_get_metrics"));
 
+    dase_run_mission_optimized_uhd770 = reinterpret_cast<RunMissionUHD770Func>(
+        GetProcAddress(dll_handle, "dase_run_mission_optimized_uhd770"));
+
+    dase_get_uhd770_metrics = reinterpret_cast<GetUHD770MetricsFunc>(
+        GetProcAddress(dll_handle, "dase_get_uhd770_metrics"));
+
     // Check if all functions were found
     if (!dase_create_engine) {
         std::cerr << "Failed to find dase_create_engine" << std::endl;
@@ -119,9 +129,12 @@ static bool loadDaseDLL() {
 }
 
 EngineManager::EngineManager() : next_engine_id(1) {
-    // Load the DLL on construction
+    // Load the D-ASE AVX2 DLL on construction when available. Do not fail the
+    // whole CLI if the DLL is absent: header-only engines, analysis commands,
+    // and UHD 770 diagnostics can still run. phase4b creation already checks
+    // for missing function pointers and returns an error-safe empty id.
     if (!loadDaseDLL()) {
-        throw std::runtime_error("Failed to load DASE engine DLL (dase_engine_phase4b.dll or dase_engine.dll)");
+        std::cerr << "[ENGINE MANAGER] DASE engine DLL not loaded; phase4b is unavailable in this process." << std::endl;
     }
 }
 
@@ -470,7 +483,7 @@ double EngineManager::getNodeState(const std::string& engine_id, int node_index)
     return 0.0;
 }
 
-bool EngineManager::runMission(const std::string& engine_id, int num_steps, int iterations_per_node) {
+bool EngineManager::runMission(const std::string& engine_id, int num_steps, int iterations_per_node, const std::string& backend, bool drift_check) {
     auto* instance = getEngine(engine_id);
     if (!instance || !instance->engine_handle) {
         return false;
@@ -496,13 +509,28 @@ bool EngineManager::runMission(const std::string& engine_id, int num_steps, int 
                 return false;
             }
 
-            dase_run_mission_optimized_phase4c(
-                instance->engine_handle,
-                input_signals.data(),
-                control_patterns.data(),
-                static_cast<uint64_t>(num_steps),
-                static_cast<uint32_t>(iterations_per_node)
-            );
+            auto* original_cout = std::cout.rdbuf();
+            std::cout.rdbuf(std::cerr.rdbuf());
+            if ((backend == "uhd770" || backend == "gpu" || backend == "compare") &&
+                dase_run_mission_optimized_uhd770) {
+                dase_run_mission_optimized_uhd770(
+                    instance->engine_handle,
+                    input_signals.data(),
+                    control_patterns.data(),
+                    static_cast<uint64_t>(num_steps),
+                    static_cast<uint32_t>(iterations_per_node),
+                    drift_check ? 1 : 0
+                );
+            } else {
+                dase_run_mission_optimized_phase4c(
+                    instance->engine_handle,
+                    input_signals.data(),
+                    control_patterns.data(),
+                    static_cast<uint64_t>(num_steps),
+                    static_cast<uint32_t>(iterations_per_node)
+                );
+            }
+            std::cout.rdbuf(original_cout);
 
         } else if (instance->engine_type == "igsoa_complex") {
             // IGSOA Complex - call directly
@@ -1359,6 +1387,12 @@ EngineManager::EngineMetrics EngineManager::getMetrics(const std::string& engine
     metrics.ops_per_sec = 0;
     metrics.total_operations = 0;
     metrics.speedup_factor = 0;
+    metrics.uhd770_time_ms = 0;
+    metrics.cpu_reference_time_ms = 0;
+    metrics.max_abs_drift = 0;
+    metrics.mean_abs_drift = 0;
+    metrics.uhd770_used = false;
+    metrics.drift_check_passed = false;
 
     auto* instance = getEngine(engine_id);
     if (!instance || !instance->engine_handle) {
@@ -1378,6 +1412,22 @@ EngineManager::EngineMetrics EngineManager::getMetrics(const std::string& engine
             &metrics.speedup_factor,
             &metrics.total_operations
         );
+
+        if (dase_get_uhd770_metrics) {
+            int uhd_used = 0;
+            int drift_passed = 0;
+            dase_get_uhd770_metrics(
+                instance->engine_handle,
+                &metrics.uhd770_time_ms,
+                &metrics.cpu_reference_time_ms,
+                &metrics.max_abs_drift,
+                &metrics.mean_abs_drift,
+                &uhd_used,
+                &drift_passed
+            );
+            metrics.uhd770_used = (uhd_used != 0);
+            metrics.drift_check_passed = (drift_passed != 0);
+        }
 
     } else if (instance->engine_type == "igsoa_complex") {
         // IGSOA Complex - get directly

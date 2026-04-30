@@ -1,6 +1,6 @@
 {
-  "source_repo": "D:\\acellorator\\Simulation",
-  "extracted_to": "D:\\acellorator\\Simulation_engines_extracted_2026-04-25",
+  "source_repo": "D:\\projects\\acellorator\\Simulation",
+  "extracted_to": "D:\\projects\\acellorator\\Simulation_engines_extracted_2026-04-25",
   "cpp_source_root": "src/cpp",
   "cli": [
     {
@@ -37,13 +37,33 @@
     "CMakeLists.txt"
   ],
   "external_runtime_deps": [
-    "FFTW3 (libfftw3-3.lib + fftw3.h; libfftw3-3.dll for runtime on Windows)"
+    "FFTW3 (libfftw3-3.lib + fftw3.h; libfftw3-3.dll for runtime on Windows)",
+    "Intel oneAPI DPC++/C++ compiler for UHD 770 SYCL builds (icx/icpx with -fsycl)"
   ],
   "engines": [
     {
+      "id": "uhd770_acceleration_layer",
+      "name": "Intel UHD 770 oneAPI/SYCL Acceleration Layer",
+      "purpose": "Device detection, FP32 vector probe, and runtime policy layer for moving extracted C++ engines toward UHD 770 execution while preserving AVX2/OpenMP CPU reference paths.",
+      "files": [
+        "src/cpp/uhd770_runtime.h",
+        "src/cpp/uhd770_device_probe.cpp"
+      ],
+      "interfaces": [
+        "C++ header API (dase::uhd770::detectDevice, runFp32VectorProbe)",
+        "CMake target uhd770_device_probe",
+        "CLI command get_acceleration_status"
+      ],
+      "runtime_notes": [
+        "Compile with IntelLLVM and DASE_ENABLE_UHD770_SYCL=ON for actual SYCL kernels.",
+        "UHD 770 production kernels should be treated as FP32-first.",
+        "CPU AVX2/OpenMP remains the reference path for drift checks."
+      ]
+    },
+    {
       "id": "dase_analog_avx2",
-      "name": "D-ASE Analog Engine (AVX2)",
-      "purpose": "High-performance analog node/cellular engine with AVX2, OpenMP, FFTW; includes C API (FFI) and optional Python bindings.",
+      "name": "D-ASE Analog Engine (AVX2, UHD 770-ready diagnostics)",
+      "purpose": "High-performance analog node/cellular engine with AVX2, OpenMP, FFTW; includes C API (FFI), optional Python bindings, and now shares the package-level UHD 770 diagnostic layer.",
       "files": [
         "src/cpp/analog_universal_node_engine_avx2.h",
         "src/cpp/analog_universal_node_engine_avx2.cpp",

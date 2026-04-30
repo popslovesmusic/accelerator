@@ -199,6 +199,24 @@ void dase_run_mission_optimized_phase4c(
                                         num_steps, iterations_per_node);
 }
 
+void dase_run_mission_optimized_uhd770(
+    DaseEngineHandle handle,
+    const double* input_signals,
+    const double* control_patterns,
+    uint64_t num_steps,
+    uint32_t iterations_per_node,
+    int run_cpu_drift_check
+) {
+    if (!handle || !input_signals || !control_patterns || num_steps == 0) {
+        return;
+    }
+
+    auto* engine = to_cpp_engine(handle);
+    engine->runMissionOptimized_UHD770(input_signals, control_patterns,
+                                       num_steps, iterations_per_node,
+                                       run_cpu_drift_check != 0);
+}
+
 // -----------------------------------------------------------------------------
 // Metrics Retrieval
 // -----------------------------------------------------------------------------
@@ -229,6 +247,30 @@ void dase_get_metrics(
     if (out_total_ops) {
         *out_total_ops = static_cast<uint64_t>(metrics.total_operations);
     }
+}
+
+void dase_get_uhd770_metrics(
+    DaseEngineHandle handle,
+    double* out_gpu_time_ms,
+    double* out_cpu_reference_time_ms,
+    double* out_max_abs_drift,
+    double* out_mean_abs_drift,
+    int* out_uhd770_used,
+    int* out_drift_check_passed
+) {
+    if (!handle) {
+        return;
+    }
+
+    auto* engine = to_cpp_engine(handle);
+    EngineMetrics metrics = engine->getMetrics();
+
+    if (out_gpu_time_ms) *out_gpu_time_ms = metrics.uhd770_execution_time_ms;
+    if (out_cpu_reference_time_ms) *out_cpu_reference_time_ms = metrics.cpu_reference_time_ms;
+    if (out_max_abs_drift) *out_max_abs_drift = metrics.max_abs_drift;
+    if (out_mean_abs_drift) *out_mean_abs_drift = metrics.mean_abs_drift;
+    if (out_uhd770_used) *out_uhd770_used = metrics.uhd770_used ? 1 : 0;
+    if (out_drift_check_passed) *out_drift_check_passed = metrics.drift_check_passed ? 1 : 0;
 }
 
 // -----------------------------------------------------------------------------

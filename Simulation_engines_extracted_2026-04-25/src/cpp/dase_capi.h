@@ -195,6 +195,22 @@ DASE_API void dase_run_mission_optimized_phase4c(
     uint32_t iterations_per_node
 );
 
+/**
+ * Run UHD 770 oneAPI/SYCL FP32 mission path.
+ *
+ * This path preserves the AVX2/OpenMP implementation as the CPU reference and
+ * writes CPU/GPU drift metrics into the engine metrics when run_cpu_drift_check
+ * is non-zero.
+ */
+DASE_API void dase_run_mission_optimized_uhd770(
+    DaseEngineHandle engine,
+    const double* input_signals,
+    const double* control_patterns,
+    uint64_t num_steps,
+    uint32_t iterations_per_node,
+    int run_cpu_drift_check
+);
+
 // =============================================================================
 // METRICS RETRIEVAL
 // =============================================================================
@@ -214,6 +230,16 @@ DASE_API void dase_get_metrics(
     double* out_ops_per_sec,
     double* out_speedup_factor,
     uint64_t* out_total_ops
+);
+
+DASE_API void dase_get_uhd770_metrics(
+    DaseEngineHandle engine,
+    double* out_gpu_time_ms,
+    double* out_cpu_reference_time_ms,
+    double* out_max_abs_drift,
+    double* out_mean_abs_drift,
+    int* out_uhd770_used,
+    int* out_drift_check_passed
 );
 
 // =============================================================================

@@ -2,15 +2,15 @@
 
 This directory is an engine-only extraction from:
 
-`D:\acellorator\Simulation`
+`D:\projects\acellorator\Simulation`
 
 Source engines live under:
 
-`D:\acellorator\Simulation\src\cpp`
+`D:\projects\acellorator\Simulation\src\cpp`
 
 Extracted to:
 
-`D:\acellorator\Simulation_engines_extracted_2026-04-25`
+`D:\projects\acellorator\Simulation_engines_extracted_2026-04-25`
 
 ## What Was Extracted
 
@@ -25,10 +25,41 @@ This extraction intentionally excludes most non-engine material from the full Si
 
 ## Engine Families
 
-### 1) D-ASE Analog Engine (AVX2)
+### 0) UHD 770 / oneAPI Acceleration Layer
+
+Purpose:
+- Provide a guarded Intel UHD 770 target path for C++ engines without removing
+  the existing AVX2/OpenMP CPU reference path.
+- Report SYCL compile status, selected Intel GPU device, FP64 support, and FP32
+  numeric probe results.
+
+Key files:
+- `src/cpp/uhd770_runtime.h`
+- `src/cpp/uhd770_device_probe.cpp`
+
+Build target:
+- `uhd770_device_probe`
+
+CLI support:
+- `get_capabilities` now reports `gpu_features`.
+- `get_acceleration_status` reports the UHD 770/SYCL state and can run an FP32
+  vector-math probe with `{"run_probe": true}`.
+
+Scientific policy:
+- UHD 770 is treated as an FP32-first production target.
+- CPU AVX2/OpenMP remains the FP64/reference path for drift checks.
+- Empirical claims still require recoverable output and CPU/GPU drift reporting.
+- The D-ASE Phase4B mission path now exposes a UHD 770 FP32 backend through
+  `run_mission` using `{"backend":"uhd770","drift_check":true}`.
+
+### 1) D-ASE Analog Engine (AVX2 + UHD 770-ready diagnostics)
 
 Purpose:
 - High-performance analog node/cellular signal simulation (AVX2 + OpenMP + FFTW).
+- The current extracted implementation remains CPU AVX2/OpenMP for its mission loop,
+  with UHD 770/SYCL device detection and probe infrastructure now wired into the
+  build and CLI. Engine-specific kernel migration should be done behind CPU/GPU
+  parity tests rather than by replacing the AVX2 reference path.
 
 Key files:
 - `src/cpp/analog_universal_node_engine_avx2.h`
@@ -99,7 +130,7 @@ Build notes:
 
 ## Build Quickstart (CMake)
 
-From `D:\acellorator\Simulation_engines_extracted_2026-04-25`:
+From `D:\projects\acellorator\Simulation_engines_extracted_2026-04-25`:
 
 ```powershell
 cmake -S . -B build -DDASE_BUILD_TESTS=OFF -DDASE_BUILD_PYTHON=OFF
@@ -109,6 +140,32 @@ cmake --build build --config Release
 Notes:
 - FFTW is expected in this directory root (already copied here).
 - Python bindings are present as source (`src/cpp/python_bindings.cpp`) but the provided `CMakeLists.txt` does not currently build them as a target.
+
+## UHD 770 Build Quickstart
+
+Use Intel oneAPI and configure with the IntelLLVM compiler so `-fsycl` is active:
+
+```powershell
+call "C:\Program Files (x86)\Intel\oneAPI\setvars.bat"
+cmake -S . -B build_uhd770 -G Ninja -DCMAKE_CXX_COMPILER=icx -DCMAKE_BUILD_TYPE=Release -DDASE_ENABLE_UHD770_SYCL=ON -DDASE_UHD770_FP32_DEFAULT=ON -DDASE_BUILD_JSON_CLI=ON -DDASE_BUILD_PYTHON=OFF -DDASE_BUILD_TESTS=OFF
+cmake --build build_uhd770 --target uhd770_device_probe
+.\build_uhd770\uhd770_device_probe.exe --out outputs\uhd770\device_probe\report.json
+```
+
+If CMake is configured with MSVC `cl`, the code still compiles, but the SYCL
+runtime reports CPU fallback. That is intentional: use `icx`/`icpx` for actual
+UHD 770 kernels.
+
+Helper scripts live under `scripts/`:
+
+```powershell
+.\scripts\build_uhd770_probe.bat
+.\scripts\build_uhd770_cli.bat
+.\scripts\run_uhd770_smoke.bat
+```
+
+Generated binaries go to `bin/uhd770/`. Recoverable run outputs go to
+`outputs/uhd770/<run-name>/`.
 
 ## Strict JSON CLI
 
@@ -124,9 +181,16 @@ Key files:
 Build target:
 - `dase_cli_json`
 
+UHD 770 commands:
+
+```json
+{"command":"get_acceleration_status","params":{"run_probe":true}}
+```
+
 Example build:
 
 ```powershell
 cmake -S . -B build -DDASE_BUILD_JSON_CLI=ON
 cmake --build build --config Release --target dase_cli_json
 ```
+
