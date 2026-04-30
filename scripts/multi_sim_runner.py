@@ -197,7 +197,15 @@ class MultiSimRunner:
         job_config = Path(job["config"]).as_posix()
         out_dir = Path(self.get_job_output_dir(job)).as_posix()
         
-        cmd = cmd_template.replace("{config}", job_config)
+        # C4 Enhancement: Only inject {config} if present in template
+        cmd = cmd_template
+        if "{config}" in cmd:
+            cmd = cmd.replace("{config}", job_config)
+        elif "config" in tool.get("config_params", []):
+             # heuristic: if config_params has 'config' but template doesn't have {config}
+             # we might need to append it? For now, we trust the template.
+             pass
+             
         cmd = cmd.replace("{out_dir}", out_dir)
         cmd = cmd.replace("{out}", out_dir) # support both
         
