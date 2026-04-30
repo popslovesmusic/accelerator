@@ -29,7 +29,8 @@ These tools have passed multi-seed UQ, support standardized CLI arguments, and a
 | `fsa_rule_engine_sim_v1` | Python | finite_state | **C4** | Admissibility Boolean logic |
 | `dase_analog_sim_v1` | Python | analog_simulation | **C4** | Analog feedback loop prototype |
 | `satp_higgs_sim_v1` | Python | field_simulation | **C4** | 2D finite-difference prototype |
-| `satp_higgs_3d_sim_v1` | Python | field_simulation | **C4** | 3D finite-difference prototype |
+| `satp_higgs_3d_sim_v1` | field_simulation | **C4** | 3D finite-difference prototype |
+| `signal_scope_phase_continuation_engine` | Python / AVX2 | agent_based_phase_continuation_sim | **C4** | RUC survivability gating & phase continuation |
 
 ## 3. C1-C2 Operational Tools (Regression Ready)
 These tools are functional and follow standardized interfaces but are held at lower certification pending full falsification or UQ completion.
