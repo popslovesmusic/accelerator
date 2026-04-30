@@ -1,0 +1,43 @@
+{
+  "id": "signal_scope_c4_ablation_matrix",
+  "status": "planned_not_executable",
+  "fixed_seeds": [101, 202, 303, 404, 505],
+  "ablations": [
+    {
+      "id": "disable_residue",
+      "primitive": "residue",
+      "method": "disable committed residue, trace segment feedback, and residue-derived bias"
+    },
+    {
+      "id": "force_operator",
+      "primitive": "orientation_minus_i",
+      "method": "replace operator selection with a fixed operator"
+    },
+    {
+      "id": "disable_survivability_gate",
+      "primitive": "mu",
+      "method": "bypass reinforce/hold/reject gate while logging the would-have-been decision"
+    },
+    {
+      "id": "disable_groove_memory",
+      "primitive": "residue",
+      "method": "disable groove creation, routing, and reinforcement"
+    },
+    {
+      "id": "disable_inductive_layer",
+      "primitive": "rho",
+      "method": "remove inductive motion memory during train, disconnect, and recouple"
+    },
+    {
+      "id": "disable_signal_x",
+      "primitive": "coupling",
+      "method": "remove cross-view consistency contribution from survivability checks"
+    }
+  ],
+  "expected_failure_observables": [
+    "increased_continuation_mismatch",
+    "reduced_phase_locking_value",
+    "reduced_trajectory_alignment",
+    "higher_rejection_or_hold_rate"
+  ]
+}

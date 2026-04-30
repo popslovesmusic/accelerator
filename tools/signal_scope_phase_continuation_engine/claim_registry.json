@@ -1,0 +1,38 @@
+{
+  "tool_name": "signal_scope_phase_continuation_engine",
+  "registry_status": "local_candidate_registry",
+  "claims": [
+    {
+      "claim_id": "SSPCE_C1_RUC_SURVIVABILITY_FILTER",
+      "statement": "The engine implements RUC as an admissibility filter over phase continuation candidates.",
+      "status": "C1_defined",
+      "primitive_mapping": ["epsilon", "mu", "orientation_minus_i"],
+      "observables": ["survivability_decision", "rejection_rate", "continuation_mismatch"],
+      "falsification": ["FV-2", "FV-3"]
+    },
+    {
+      "claim_id": "SSPCE_C2_RESIDUE_CLOSURE",
+      "statement": "Residue, trace segments, and groove memory alter future admissibility and continuity.",
+      "status": "C1_defined",
+      "primitive_mapping": ["residue", "rho", "epsilon"],
+      "observables": ["groove_state", "survival_metrics", "continuation_mismatch"],
+      "falsification": ["FV-3", "FV-4"]
+    },
+    {
+      "claim_id": "SSPCE_C3_ORIENTATION_SELECTION",
+      "statement": "The operator family `++`, `--`, `+-`, `-+` functions as the implementation surface of `-(i)` orientation selection.",
+      "status": "C1_defined",
+      "primitive_mapping": ["orientation_minus_i", "epsilon", "mu"],
+      "observables": ["operator_path", "phase_error", "trajectory_alignment"],
+      "falsification": ["FV-1", "FV-3"]
+    },
+    {
+      "claim_id": "SSPCE_C4_DISCONNECT_RECOUPLE_CONTINUITY",
+      "statement": "Inductive continuation preserves bounded phase motion during disconnect and restabilizes during recouple without teacher leakage.",
+      "status": "C1_defined",
+      "primitive_mapping": ["rho", "residue", "epsilon", "orientation_minus_i"],
+      "observables": ["phase_locking_value", "trajectory_alignment", "phase_error", "survival_metrics"],
+      "falsification": ["FV-1", "FV-4"]
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "tool_name": "signal_scope_phase_continuation_engine",
+  "model_class": "agent_based_phase_continuation_sim",
+  "mechanism_class": "agent_phase_continuation",
+  "version": "c4_candidate_v1",
+  "status": "C4_candidate_scaffold",
+  "certification_level": "C2",
+  "not_medical_tool": true,
+  "medical_domain_note": "EEG-style inputs are stress-test surfaces only and are not diagnostic, therapeutic, or clinical functionality.",
+  "entry_point": "tools/signal_scope_phase_continuation_engine/run_signal_scope.py",
+  "cli_command": "python tools/signal_scope_phase_continuation_engine/run_signal_scope.py --config {config} --out {out_dir}",
+  "implementation_status": "imported_smoke_validated",
+  "source_references": [
+    "native_platform/run_native_platform.py",
+    "native_platform/residue_phase_continuation.py",
+    "native_platform/operator_selection.py",
+    "native_platform/groove_router.py",
+    "native_platform/inductive_transformer.py",
+    "native_platform/eeg_feature_adapter.py",
+    "scripts/run_continuation_stress_tests.py",
+    "scripts/run_inductive_transformer_v2_tests.py",
+    "scripts/run_in_house_eeg_tests.py"
+  ],
+  "inputs": [
+    "synthetic_signal_frames",
+    "feature_frames",
+    "optional_eeg_like_stress_frames"
+  ],
+  "outputs": [
+    "continuation_mismatch",
+    "phase_error",
+    "survivability_decision",
+    "operator_path",
+    "groove_state",
+    "inductive_state",
+    "phase_locking_value",
+    "trajectory_alignment",
+    "rejection_rate",
+    "survival_metrics"
+  ],
+  "config_params": [
+    "fixed_seeds",
+    "mismatch_threshold",
+    "caution_threshold",
+    "signal_x_threshold",
+    "groove_create_threshold",
+    "groove_switch_margin",
+    "inductive_gain",
+    "disconnect_seconds",
+    "recouple_seconds"
+  ],
+  "validation_path": "tools/signal_scope_phase_continuation_engine/validation/",
+  "has_falsification": false,
+  "numerical_stability_verified": false,
+  "uncertainty_quantified": true,
+  "provenance_verified": true
+}

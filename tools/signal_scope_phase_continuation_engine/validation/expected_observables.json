@@ -1,0 +1,44 @@
+{
+  "continuation_mismatch": {
+    "description": "Mean mismatch between predicted and observed continuation state.",
+    "theoretical_mapping": "epsilon",
+    "units_or_scale": "non-negative scalar",
+    "expected_behavior": "Lower under admissible reinforced continuation than under shuffled or ablated controls.",
+    "failure_modes": ["teacher leakage", "overconstraint", "frozen stability"]
+  },
+  "phase_error": {
+    "description": "Angular error between phase continuation target and realized phase.",
+    "theoretical_mapping": "epsilon projected along orientation_minus_i",
+    "units_or_scale": "radians or degrees",
+    "expected_behavior": "Bounded during valid disconnect and reduced during recouple.",
+    "failure_modes": ["phase drift", "phase lock artifact"]
+  },
+  "survivability_decision": {
+    "description": "Discrete admissibility gate output.",
+    "theoretical_mapping": "RUC filter and mu",
+    "units_or_scale": "reinforce | hold | reject",
+    "expected_behavior": "Reject or hold under mismatch, low Signal X, and adversarial stress.",
+    "failure_modes": ["always reinforce", "always reject"]
+  },
+  "operator_path": {
+    "description": "Sequence of selected operators from the orientation family.",
+    "theoretical_mapping": "orientation_minus_i",
+    "units_or_scale": "categorical path over ++, --, +-, -+",
+    "expected_behavior": "Settles under stable continuation and destabilizes under primitive suppression.",
+    "failure_modes": ["fixed operator artifact", "excessive switching"]
+  },
+  "phase_locking_value": {
+    "description": "Phase consistency measure across train, disconnect, and recouple protocols.",
+    "theoretical_mapping": "phase accumulation and continuity",
+    "units_or_scale": "0 to 1",
+    "expected_behavior": "Degrades under shuffle control and remains bounded only when continuation is genuinely internal.",
+    "failure_modes": ["shuffle remains high", "teacher leakage"]
+  },
+  "trajectory_alignment": {
+    "description": "Alignment score between expected and realized continuation trajectory.",
+    "theoretical_mapping": "rho and residue-mediated continuity",
+    "units_or_scale": "0 to 1",
+    "expected_behavior": "Higher in valid continuation than ablated or shuffled controls.",
+    "failure_modes": ["alignment without motion", "overfit replay"]
+  }
+}

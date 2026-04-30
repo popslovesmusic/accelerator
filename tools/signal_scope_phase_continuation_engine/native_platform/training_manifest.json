@@ -1,0 +1,35 @@
+{
+  "training_mode": "residue_phase_imprinting",
+  "phases": [
+    {
+      "name": "baseline_learning",
+      "input": "stable wave A",
+      "passes": 3,
+      "goal": "repeated traversal deepens groove, low continuation_mismatch"
+    },
+    {
+      "name": "continuation_test",
+      "input": "wave A with tail removed",
+      "passes": 1,
+      "goal": "remove/reduce A and test whether internal phase path continues"
+    },
+    {
+      "name": "perturbation_test",
+      "input": "wave A plus noise or frequency drift",
+      "passes": 2,
+      "goal": "continuation_mismatch rises then recouples"
+    },
+    {
+      "name": "contrast_learning",
+      "input": "different wave B",
+      "passes": 2,
+      "goal": "separate residue basin"
+    },
+    {
+      "name": "transition_learning",
+      "input": "A -> unstable/event-like transition",
+      "passes": 3,
+      "goal": "continuation_mismatch rises before undesired event region"
+    }
+  ]
+}

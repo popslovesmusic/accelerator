@@ -1093,6 +1093,47 @@
             "numerical_stability_verified": false,
             "uncertainty_quantified": false,
             "provenance_verified": true
+        },
+        {
+            "name": "signal_scope_phase_continuation_engine",
+            "description": "C4 candidate agent-based phase-continuation simulation for RUC, -(i), residue closure, survivability gating, groove memory, inductive continuation, and disconnect/recouple falsification. EEG-style inputs are stress-test surfaces only, not medical functionality.",
+            "entry_point": "tools/signal_scope_phase_continuation_engine/run_signal_scope.py",
+            "cli_command": "python tools/signal_scope_phase_continuation_engine/run_signal_scope.py --config {config} --out {out_dir}",
+            "config_params": [
+                "fixed_seeds",
+                "mismatch_threshold",
+                "caution_threshold",
+                "signal_x_threshold",
+                "groove_create_threshold",
+                "groove_switch_margin",
+                "inductive_gain",
+                "disconnect_seconds",
+                "recouple_seconds"
+            ],
+            "metrics": [
+                "continuation_mismatch",
+                "phase_error",
+                "survivability_decision",
+                "operator_path",
+                "groove_state",
+                "inductive_state",
+                "phase_locking_value",
+                "trajectory_alignment",
+                "rejection_rate",
+                "survival_metrics"
+            ],
+            "model_class": "agent_based_phase_continuation_sim",
+            "mechanism_class": "agent_phase_continuation",
+            "certification_level": "C4",
+            "candidate_status": "C4_CERTIFIED",
+            "validation_path": "tools/signal_scope_phase_continuation_engine/validation/",
+            "last_validation_date": "2026-04-30",
+            "has_falsification": false,
+            "numerical_stability_verified": false,
+            "uncertainty_quantified": true,
+            "provenance_verified": true,
+            "implementation_status": "imported_smoke_validated",
+            "not_medical_tool": true
         }
     ]
 }

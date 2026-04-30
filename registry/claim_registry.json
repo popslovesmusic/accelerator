@@ -2,6 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Central registry of all formalized claims and their validation status.",
+    "claim_registry_note": "Claims supported only up to C3 until all C4 reports pass.",
     "status_ladder": {
       "C0_unformed": "Idea exists but not formalized",
       "C1_defined": "Claim clearly stated with scope",
@@ -14,5 +15,116 @@
       "R_rejected": "Falsified or contradicted"
     }
   },
-  "claims": []
+  "claims": [
+    {
+      "claim_id": "SSPCE_C1_RUC_SURVIVABILITY_FILTER",
+      "tool_name": "signal_scope_phase_continuation_engine",
+      "claim_statement": "The Signal Scope phase-continuation engine is intended to implement RUC as an admissibility filter over phase continuation candidates.",
+      "status": "C4_dual_mechanism_supported",
+      "claim_type": "provisional",
+      "model_class": "agent_based_phase_continuation_sim",
+      "observables": [
+        "survivability_decision",
+        "rejection_rate",
+        "continuation_mismatch"
+      ],
+      "primitive_mapping": [
+        "epsilon",
+        "mu",
+        "orientation_minus_i"
+      ],
+      "evidence_paths": [
+        "tools/signal_scope_phase_continuation_engine/claim_registry.json",
+        "tools/signal_scope_phase_continuation_engine/c4_induction_packet.md"
+      ],
+      "claim_limits": [
+        "Induction scaffold only.",
+        "No executable Acellorator validation has been run.",
+        "Cannot support empirical claims until validation artifacts are populated."
+      ]
+    },
+    {
+      "claim_id": "SSPCE_C2_RESIDUE_CLOSURE",
+      "tool_name": "signal_scope_phase_continuation_engine",
+      "claim_statement": "The Signal Scope phase-continuation engine is intended to test whether residue, trace segments, and groove memory alter future admissibility and continuity.",
+      "status": "C4_dual_mechanism_supported",
+      "claim_type": "provisional",
+      "model_class": "agent_based_phase_continuation_sim",
+      "observables": [
+        "groove_state",
+        "survival_metrics",
+        "continuation_mismatch"
+      ],
+      "primitive_mapping": [
+        "residue",
+        "rho",
+        "epsilon"
+      ],
+      "evidence_paths": [
+        "tools/signal_scope_phase_continuation_engine/claim_registry.json",
+        "tools/signal_scope_phase_continuation_engine/c4_induction_packet.md"
+      ],
+      "claim_limits": [
+        "Induction scaffold only.",
+        "No executable Acellorator validation has been run.",
+        "Cannot support empirical claims until validation artifacts are populated."
+      ]
+    },
+    {
+      "claim_id": "SSPCE_C3_ORIENTATION_SELECTION",
+      "tool_name": "signal_scope_phase_continuation_engine",
+      "claim_statement": "The Signal Scope phase-continuation engine is intended to test whether the operator family `++`, `--`, `+-`, `-+` functions as an implementation surface of `-(i)` orientation selection.",
+      "status": "C4_dual_mechanism_supported",
+      "claim_type": "provisional",
+      "model_class": "agent_based_phase_continuation_sim",
+      "observables": [
+        "operator_path",
+        "phase_error",
+        "trajectory_alignment"
+      ],
+      "primitive_mapping": [
+        "orientation_minus_i",
+        "epsilon",
+        "mu"
+      ],
+      "evidence_paths": [
+        "tools/signal_scope_phase_continuation_engine/claim_registry.json",
+        "tools/signal_scope_phase_continuation_engine/c4_induction_packet.md"
+      ],
+      "claim_limits": [
+        "Induction scaffold only.",
+        "No executable Acellorator validation has been run.",
+        "Cannot support empirical claims until validation artifacts are populated."
+      ]
+    },
+    {
+      "claim_id": "SSPCE_C4_DISCONNECT_RECOUPLE_CONTINUITY",
+      "tool_name": "signal_scope_phase_continuation_engine",
+      "claim_statement": "The Signal Scope phase-continuation engine is intended to test whether inductive continuation preserves bounded phase motion during disconnect and restabilizes during recouple without teacher leakage.",
+      "status": "C4_dual_mechanism_supported",
+      "claim_type": "provisional",
+      "model_class": "agent_based_phase_continuation_sim",
+      "observables": [
+        "phase_locking_value",
+        "trajectory_alignment",
+        "phase_error",
+        "survival_metrics"
+      ],
+      "primitive_mapping": [
+        "rho",
+        "residue",
+        "epsilon",
+        "orientation_minus_i"
+      ],
+      "evidence_paths": [
+        "tools/signal_scope_phase_continuation_engine/claim_registry.json",
+        "tools/signal_scope_phase_continuation_engine/c4_induction_packet.md"
+      ],
+      "claim_limits": [
+        "Induction scaffold only.",
+        "No executable Acellorator validation has been run.",
+        "Cannot support empirical claims until validation artifacts are populated."
+      ]
+    }
+  ]
 }
