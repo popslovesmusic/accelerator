@@ -403,7 +403,25 @@ A tool cannot reach C4 unless it demonstrates numerical stability and uncertaint
 GPU results MUST include CPU drift comparison before being treated as scientifically comparable.
 A failing validation stage triggers downgrade, blockage, or upgrade recommendation.
 ---
-10.7 Tool Certification Report Schema
+10.7 Validation Protocol v2.0: Multi-Mechanism Mandate
+The validation protocol v2.0 is the primary authority for multi-mechanism verification and confidence scoring.
+Expected path:
+`registry/validation_protocol_v2.json`
+---
+10.7.1 Core Requirements
+- Multi-seed UQ is mandatory for all C3+ claims (min 3 seeds).
+- At least two independent mechanisms are required for L2+ claims.
+- Independent measurement (e.g., TDA, Spectral) is required for C4+ verification.
+- Results MUST be consistent across seeds and mechanisms.
+- Failure in any single mechanism (e.g., failed falsification or contradictory drift) invalidates the claim.
+---
+10.7.2 Confidence Scoring Matrix
+Level	Requirement
+C3	1 Dynamics mechanism + UQ pass
+C4	2 Dynamics mechanisms + 1 Independent measurement + UQ pass
+C4+	3 Dynamics mechanisms + 2 Independent measurements + UQ pass
+---
+10.8 Tool Certification Report Schema
 ```json
 {
   "tools_checked": [],

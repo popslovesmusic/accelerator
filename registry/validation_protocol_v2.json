@@ -1,0 +1,45 @@
+{
+  "validation_protocol_v2": {
+    "requirements": {
+      "multi_seed_uq": true,
+      "min_seeds": 3,
+      "mechanism_count": 2,
+      "independent_measurement_required": true
+    },
+    "mechanism_types": {
+      "dynamics": [
+        "pde",
+        "ode",
+        "discrete_ca",
+        "agent"
+      ],
+      "measurement": [
+        "topology_analyzer",
+        "spectral_analyzer",
+        "network_analysis"
+      ]
+    },
+    "validation_rules": [
+      "A hypothesis must be supported by at least one dynamics engine",
+      "A hypothesis must be independently verified by at least one measurement engine",
+      "Results must be consistent across seeds",
+      "Failure in any mechanism invalidates the claim"
+    ],
+    "confidence_scoring": {
+      "C4+": {
+        "mechanisms": 3,
+        "independent_measurements": 2,
+        "uq_pass": true
+      },
+      "C4": {
+        "mechanisms": 2,
+        "independent_measurements": 1,
+        "uq_pass": true
+      },
+      "C3": {
+        "mechanisms": 1,
+        "uq_pass": true
+      }
+    }
+  }
+}
