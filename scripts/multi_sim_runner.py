@@ -128,7 +128,13 @@ class MultiSimRunner:
                 readiness["missing_artifacts"][tool_name] = readiness["missing_artifacts"].get(tool_name, []) + ["manifest_fields"]
                 raise ValueError(msg)
 
-            cert_path = Path(tool_name) / "validation" / "certification_manifest.json"
+            # C4 Elevation Fix: Use validation_path from manifest if present
+            vpath_str = tool.get("validation_path", f"tools/{tool_name}/validation")
+            val_dir = Path(vpath_str)
+            val_dir_exists = val_dir.is_dir()
+            readiness["validation_dir_present"][tool_name] = val_dir_exists
+
+            cert_path = val_dir / "certification_manifest.json"
             cert_exists = cert_path.exists()
             readiness["certification_manifest_present"][tool_name] = cert_exists
             
@@ -142,10 +148,6 @@ class MultiSimRunner:
                 else:
                     if readiness["runner_readiness_status"] == "ready":
                         readiness["runner_readiness_status"] = "degraded"
-
-            val_dir = Path(tool_name) / "validation"
-            val_dir_exists = val_dir.is_dir()
-            readiness["validation_dir_present"][tool_name] = val_dir_exists
             
             if not val_dir_exists:
                 readiness["missing_artifacts"][tool_name] = readiness["missing_artifacts"].get(tool_name, []) + ["validation_dir"]
