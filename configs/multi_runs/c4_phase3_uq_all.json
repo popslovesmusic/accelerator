@@ -1,0 +1,430 @@
+{
+  "run_id": "c4_phase3_uq_all",
+  "mode": "parallel",
+  "output_root": "outputs/c4_phase3_uq_all",
+  "governance": {
+    "require_tool_certification": false,
+    "require_validation_dir": true,
+    "dry_run_first": false,
+    "stop_on_failure": false
+  },
+  "execution": {
+    "max_workers": 4,
+    "timeout_seconds": 600
+  },
+  "jobs": [
+    {
+      "job_id": "uq_agent_based_sim_v1",
+      "tool": "agent_based_sim_v1",
+      "config": "agent_based_sim_v1/configs/default.json",
+      "seeds": [
+        10,
+        20,
+        30
+      ],
+      "claim_role": "evidence_generation",
+      "args": {}
+    },
+    {
+      "job_id": "uq_ca_admissibility_sim_v1",
+      "tool": "ca_admissibility_sim_v1",
+      "config": "ca_admissibility_sim_v1/configs/default.json",
+      "seeds": [
+        10,
+        20,
+        30
+      ],
+      "claim_role": "evidence_generation",
+      "args": {}
+    },
+    {
+      "job_id": "uq_fsa_rule_engine_sim_v1_cpp",
+      "tool": "fsa_rule_engine_sim_v1_cpp",
+      "config": "configs/examples/ca_residue_test.json",
+      "seeds": [
+        10,
+        20,
+        30
+      ],
+      "claim_role": "evidence_generation",
+      "args": {}
+    },
+    {
+      "job_id": "uq_ca_admissibility_sim_v1_cpp",
+      "tool": "ca_admissibility_sim_v1_cpp",
+      "config": "configs/examples/ca_residue_test.json",
+      "seeds": [
+        10,
+        20,
+        30
+      ],
+      "claim_role": "evidence_generation",
+      "args": {}
+    },
+    {
+      "job_id": "uq_graph_dynamics_sim_v1",
+      "tool": "graph_dynamics_sim_v1",
+      "config": "graph_dynamics_sim_v1/configs/default.json",
+      "seeds": [
+        10,
+        20,
+        30
+      ],
+      "claim_role": "evidence_generation",
+      "args": {}
+    },
+    {
+      "job_id": "uq_graph_dynamics_sim_v1_cpp",
+      "tool": "graph_dynamics_sim_v1_cpp",
+      "config": "configs/examples/ca_residue_test.json",
+      "seeds": [
+        10,
+        20,
+        30
+      ],
+      "claim_role": "evidence_generation",
+      "args": {}
+    },
+    {
+      "job_id": "uq_stochastic_sim_v1",
+      "tool": "stochastic_sim_v1",
+      "config": "stochastic_sim_v1/configs/default.json",
+      "seeds": [
+        10,
+        20,
+        30
+      ],
+      "claim_role": "evidence_generation",
+      "args": {}
+    },
+    {
+      "job_id": "uq_kuramoto_sim_v1",
+      "tool": "kuramoto_sim_v1",
+      "config": "kuramoto_sim_v1/configs/default.json",
+      "seeds": [
+        10,
+        20,
+        30
+      ],
+      "claim_role": "evidence_generation",
+      "args": {}
+    },
+    {
+      "job_id": "uq_rd_moving_boundary_sim_v1",
+      "tool": "rd_moving_boundary_sim_v1",
+      "config": "rd_moving_boundary_sim_v1/configs/default.json",
+      "seeds": [
+        10,
+        20,
+        30
+      ],
+      "claim_role": "evidence_generation",
+      "args": {}
+    },
+    {
+      "job_id": "uq_lb_fluid_sim_v1",
+      "tool": "lb_fluid_sim_v1",
+      "config": "lb_fluid_sim_v1/configs/default.json",
+      "seeds": [
+        10,
+        20,
+        30
+      ],
+      "claim_role": "evidence_generation",
+      "args": {}
+    },
+    {
+      "job_id": "uq_symplectic_sim_v1",
+      "tool": "symplectic_sim_v1",
+      "config": "symplectic_sim_v1/configs/default.json",
+      "seeds": [
+        10,
+        20,
+        30
+      ],
+      "claim_role": "evidence_generation",
+      "args": {}
+    },
+    {
+      "job_id": "uq_fsa_rule_engine_sim_v1",
+      "tool": "fsa_rule_engine_sim_v1",
+      "config": "fsa_rule_engine_sim_v1/configs/default.json",
+      "seeds": [
+        10,
+        20,
+        30
+      ],
+      "claim_role": "evidence_generation",
+      "args": {}
+    },
+    {
+      "job_id": "uq_structural_box_sim_v2",
+      "tool": "structural_box_sim_v2",
+      "config": "structural_box_sim_v2/configs/default.json",
+      "seeds": [
+        10,
+        20,
+        30
+      ],
+      "claim_role": "evidence_generation",
+      "args": {}
+    },
+    {
+      "job_id": "uq_info_metrics_module_v1",
+      "tool": "info_metrics_module_v1",
+      "config": "configs/examples/ca_residue_test.json",
+      "seeds": [
+        10,
+        20,
+        30
+      ],
+      "claim_role": "evidence_generation",
+      "args": {
+        "data_dir": "outputs/c4_phase2_smoke_all/jobs/smoke_ca_py"
+      }
+    },
+    {
+      "job_id": "uq_info_metrics_module_v1_cpp",
+      "tool": "info_metrics_module_v1_cpp",
+      "config": "configs/examples/ca_residue_test.json",
+      "seeds": [
+        10,
+        20,
+        30
+      ],
+      "claim_role": "evidence_generation",
+      "args": {}
+    },
+    {
+      "job_id": "uq_bifurcation_analyzer_v1_cpp",
+      "tool": "bifurcation_analyzer_v1_cpp",
+      "config": "configs/examples/ca_residue_test.json",
+      "seeds": [
+        10,
+        20,
+        30
+      ],
+      "claim_role": "evidence_generation",
+      "args": {}
+    },
+    {
+      "job_id": "uq_tda_module_v1",
+      "tool": "tda_module_v1",
+      "config": "configs/examples/ca_residue_test.json",
+      "seeds": [
+        10,
+        20,
+        30
+      ],
+      "claim_role": "evidence_generation",
+      "args": {
+        "data_path": "configs/canonical",
+        "threshold": 0.5
+      }
+    },
+    {
+      "job_id": "uq_symplectic_sim_v1_cpp",
+      "tool": "symplectic_sim_v1_cpp",
+      "config": "configs/examples/ca_residue_test.json",
+      "seeds": [
+        10,
+        20,
+        30
+      ],
+      "claim_role": "evidence_generation",
+      "args": {}
+    },
+    {
+      "job_id": "uq_linac_sim_cpp",
+      "tool": "linac_sim_cpp",
+      "config": "configs/examples/ca_residue_test.json",
+      "seeds": [
+        10,
+        20,
+        30
+      ],
+      "claim_role": "evidence_generation",
+      "args": {}
+    },
+    {
+      "job_id": "uq_stochastic_sim_cpp",
+      "tool": "stochastic_sim_cpp",
+      "config": "configs/examples/ca_residue_test.json",
+      "seeds": [
+        10,
+        20,
+        30
+      ],
+      "claim_role": "evidence_generation",
+      "args": {}
+    },
+    {
+      "job_id": "uq_rd_sim_cpp",
+      "tool": "rd_sim_cpp",
+      "config": "configs/examples/ca_residue_test.json",
+      "seeds": [
+        10,
+        20,
+        30
+      ],
+      "claim_role": "evidence_generation",
+      "args": {}
+    },
+    {
+      "job_id": "uq_structural_box_sim_cpp",
+      "tool": "structural_box_sim_cpp",
+      "config": "configs/examples/ca_residue_test.json",
+      "seeds": [
+        10,
+        20,
+        30
+      ],
+      "claim_role": "evidence_generation",
+      "args": {}
+    },
+    {
+      "job_id": "uq_circular_accelerator_sim_v1_cpp",
+      "tool": "circular_accelerator_sim_v1_cpp",
+      "config": "configs/examples/ca_residue_test.json",
+      "seeds": [
+        10,
+        20,
+        30
+      ],
+      "claim_role": "evidence_generation",
+      "args": {}
+    },
+    {
+      "job_id": "uq_falsification_suite_v1_cpp",
+      "tool": "falsification_suite_v1_cpp",
+      "config": "configs/examples/ca_residue_test.json",
+      "seeds": [
+        10,
+        20,
+        30
+      ],
+      "claim_role": "evidence_generation",
+      "args": {}
+    },
+    {
+      "job_id": "uq_agent_based_sim_v1_cpp",
+      "tool": "agent_based_sim_v1_cpp",
+      "config": "configs/examples/ca_residue_test.json",
+      "seeds": [
+        10,
+        20,
+        30
+      ],
+      "claim_role": "evidence_generation",
+      "args": {}
+    },
+    {
+      "job_id": "uq_lb_fluid_sim_v1_cpp",
+      "tool": "lb_fluid_sim_v1_cpp",
+      "config": "configs/examples/ca_residue_test.json",
+      "seeds": [
+        10,
+        20,
+        30
+      ],
+      "claim_role": "evidence_generation",
+      "args": {}
+    },
+    {
+      "job_id": "uq_kuramoto_sim_v1_cpp",
+      "tool": "kuramoto_sim_v1_cpp",
+      "config": "configs/examples/ca_residue_test.json",
+      "seeds": [
+        10,
+        20,
+        30
+      ],
+      "claim_role": "evidence_generation",
+      "args": {}
+    },
+    {
+      "job_id": "uq_accelerator_sim_v1_cpp",
+      "tool": "accelerator_sim_v1_cpp",
+      "config": "configs/examples/ca_residue_test.json",
+      "seeds": [
+        10,
+        20,
+        30
+      ],
+      "claim_role": "evidence_generation",
+      "args": {}
+    },
+    {
+      "job_id": "uq_dase_analog_sim_cpp",
+      "tool": "dase_analog_sim_cpp",
+      "config": "configs/examples/ca_residue_test.json",
+      "seeds": [
+        10,
+        20,
+        30
+      ],
+      "claim_role": "evidence_generation",
+      "args": {}
+    },
+    {
+      "job_id": "uq_satp_higgs_sim_cpp",
+      "tool": "satp_higgs_sim_cpp",
+      "config": "configs/examples/ca_residue_test.json",
+      "seeds": [
+        10,
+        20,
+        30
+      ],
+      "claim_role": "evidence_generation",
+      "args": {}
+    },
+    {
+      "job_id": "uq_satp_higgs_3d_sim_cpp",
+      "tool": "satp_higgs_3d_sim_cpp",
+      "config": "configs/examples/ca_residue_test.json",
+      "seeds": [
+        10,
+        20,
+        30
+      ],
+      "claim_role": "evidence_generation",
+      "args": {}
+    },
+    {
+      "job_id": "uq_dase_analog_sim_v1",
+      "tool": "dase_analog_sim_v1",
+      "config": "dase_analog_sim_v1/configs/default.json",
+      "seeds": [
+        10,
+        20,
+        30
+      ],
+      "claim_role": "evidence_generation",
+      "args": {}
+    },
+    {
+      "job_id": "uq_satp_higgs_sim_v1",
+      "tool": "satp_higgs_sim_v1",
+      "config": "configs/examples/ca_residue_test.json",
+      "seeds": [
+        10,
+        20,
+        30
+      ],
+      "claim_role": "evidence_generation",
+      "args": {}
+    },
+    {
+      "job_id": "uq_satp_higgs_3d_sim_v1",
+      "tool": "satp_higgs_3d_sim_v1",
+      "config": "configs/examples/ca_residue_test.json",
+      "seeds": [
+        10,
+        20,
+        30
+      ],
+      "claim_role": "evidence_generation",
+      "args": {}
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "run_id": "ecosystem_wide_verification",
+  "mode": "parallel",
+  "output_root": "outputs/ecosystem_verification",
+  "governance": {
+    "require_tool_certification": false,
+    "require_validation_dir": false,
+    "dry_run_first": false,
+    "stop_on_failure": false
+  },
+  "execution": {
+    "max_workers": 8,
+    "timeout_seconds": 600
+  },
+  "jobs": [
+    { "job_id": "ca_py", "tool": "ca_admissibility_sim_v1", "config": "configs/examples/ca_residue_test.json" },
+    { "job_id": "fsa_py", "tool": "fsa_rule_engine_sim_v1", "config": "configs/examples/fsa_residue_test.json" },
+    { "job_id": "analog_py", "tool": "dase_analog_sim_v1", "config": "dase_analog_sim_v1/configs/default.json" },
+    { "job_id": "symplectic_py", "tool": "symplectic_sim_v1", "config": "symplectic_sim_v1/configs/default.json" },
+    { "job_id": "agent_py", "tool": "agent_based_sim_v1", "config": "agent_based_sim_v1/configs/default.json" },
+    { "job_id": "stochastic_py", "tool": "stochastic_sim_v1", "config": "stochastic_sim_v1/configs/default.json" },
+    { "job_id": "kuramoto_py", "tool": "kuramoto_sim_v1", "config": "kuramoto_sim_v1/configs/default.json" },
+    { "job_id": "rd_py", "tool": "rd_moving_boundary_sim_v1", "config": "rd_moving_boundary_sim_v1/configs/default.json" },
+    { "job_id": "lb_py", "tool": "lb_fluid_sim_v1", "config": "lb_fluid_sim_v1/configs/default.json" },
+    { "job_id": "box_py", "tool": "structural_box_sim_v2", "config": "structural_box_sim_v2/configs/default.json" }
+  ]
+}

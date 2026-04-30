@@ -1,0 +1,39 @@
+{
+  "run_id": "conv_phase5_symplectic_dt_v3",
+  "mode": "serial",
+  "output_root": "outputs\\convergence_phase5_symplectic_dt_v3",
+  "governance": {
+    "dry_run_first": false,
+    "stop_on_failure": true
+  },
+  "jobs": [
+    {
+      "job_id": "sweep_0",
+      "tool": "symplectic_sim_v1_cpp",
+      "config": "outputs\\convergence_phase5_symplectic_dt_v3\\configs\\config_0.json",
+      "claim_role": "evidence_generation",
+      "sweep_val": 0.001
+    },
+    {
+      "job_id": "sweep_1",
+      "tool": "symplectic_sim_v1_cpp",
+      "config": "outputs\\convergence_phase5_symplectic_dt_v3\\configs\\config_1.json",
+      "claim_role": "evidence_generation",
+      "sweep_val": 0.002
+    },
+    {
+      "job_id": "sweep_2",
+      "tool": "symplectic_sim_v1_cpp",
+      "config": "outputs\\convergence_phase5_symplectic_dt_v3\\configs\\config_2.json",
+      "claim_role": "evidence_generation",
+      "sweep_val": 0.005
+    },
+    {
+      "job_id": "sweep_3",
+      "tool": "symplectic_sim_v1_cpp",
+      "config": "outputs\\convergence_phase5_symplectic_dt_v3\\configs\\config_3.json",
+      "claim_role": "evidence_generation",
+      "sweep_val": 0.01
+    }
+  ]
+}

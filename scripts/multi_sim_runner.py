@@ -53,12 +53,12 @@ class MultiSimRunner:
         with open(self.config_path, 'r') as f:
             self.config = json.load(f)
 
-        self.output_root = Path(self.config.get("output_root", f"outputs/{self.config['run_id']}"))
+        self.output_root = Path(self.config.get("output_root", f"outputs/runs/{self.config['run_id']}"))
         self.output_root.mkdir(parents=True, exist_ok=True)
         (self.output_root / "logs").mkdir(exist_ok=True)
         (self.output_root / "jobs").mkdir(exist_ok=True)
 
-        manifest_path = Path(self.config.get("manifest_path", "tool_manifest.json"))
+        manifest_path = Path(self.config.get("manifest_path", "registry/tool_manifest.json"))
         log(f"Loading tool manifest from {manifest_path}")
         with open(manifest_path, 'r') as f:
             self.manifest = json.load(f)
@@ -70,6 +70,12 @@ class MultiSimRunner:
         
         if self.stop_on_failure is None:
             self.stop_on_failure = self.config.get("governance", {}).get("stop_on_failure", True)
+
+        log(f"Current PATH contains {len(os.environ.get('PATH', '').split(os.pathsep))} entries")
+        if "oneAPI" in os.environ.get("PATH", ""):
+            log("oneAPI found in PATH")
+        else:
+            log("oneAPI NOT found in PATH", "WARNING")
 
         self.validate_jobs()
         self.expand_jobs()
@@ -201,23 +207,27 @@ class MultiSimRunner:
         cmd = cmd_template
         if "{config}" in cmd:
             cmd = cmd.replace("{config}", job_config)
-        elif "config" in tool.get("config_params", []):
-             # heuristic: if config_params has 'config' but template doesn't have {config}
-             # we might need to append it? For now, we trust the template.
-             pass
-             
+            
         cmd = cmd.replace("{out_dir}", out_dir)
         cmd = cmd.replace("{out}", out_dir) # support both
         
+        # C4 Enhancement: Support arbitrary placeholders from job args
+        for k, v in job.get("args", {}).items():
+            placeholder = f"{{{k}}}"
+            if placeholder in cmd:
+                cmd = cmd.replace(placeholder, str(v))
+
         # Add seed if applicable and requested
         if job["seed"] is not None and "seed_arg" in job.get("args", {}):
             seed_arg = job["args"]["seed_arg"]
             cmd += f" {seed_arg} {job['seed']}"
 
-        # Add other args
+        # Add remaining args as --key value
         for k, v in job.get("args", {}).items():
             if k == "seed_arg": continue
-            cmd += f" --{k} {v}"
+            placeholder = f"{{{k}}}"
+            if placeholder not in cmd_template: # only append if not already injected
+                cmd += f" --{k} {v}"
             
         return cmd
 
@@ -283,16 +293,28 @@ class MultiSimRunner:
         env = os.environ.copy()
         env.update(self.config.get("execution", {}).get("env", {}))
         
+        cwd = os.getcwd()
+        if cmd.startswith("./"):
+             tool_entry = self.tools[job["tool"]]["entry_point"]
+             tool_path = Path(tool_entry).absolute()
+             if tool_path.exists():
+                 cwd = str(tool_path.parent)
+                 cmd_list = shlex.split(cmd)
+                 # Use absolute path for the executable
+                 cmd_list[0] = str(tool_path)
+             else:
+                 cmd_list = shlex.split(cmd)
+        else:
+            cmd_list = shlex.split(cmd)
+
         try:
-            # Use shell=False as recommended unless configured (we stick to False for safety)
-            # shlex.split helps converting cmd string to list
             res = subprocess.run(
-                shlex.split(cmd),
+                cmd_list,
                 capture_output=True,
                 text=True,
                 env=env,
                 timeout=self.config.get("execution", {}).get("timeout_seconds", 3600),
-                cwd=os.getcwd()
+                cwd=cwd
             )
             exit_code = res.returncode
             stdout = res.stdout

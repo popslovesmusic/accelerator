@@ -1,0 +1,74 @@
+{
+  "run_id": "c4_phase4_falsification",
+  "mode": "serial",
+  "output_root": "outputs/c4_phase4_falsification",
+  "governance": {
+    "require_tool_certification": false,
+    "require_validation_dir": true,
+    "dry_run_first": false,
+    "stop_on_failure": false
+  },
+  "execution": {
+    "max_workers": 1,
+    "timeout_seconds": 300
+  },
+  "jobs": [
+    {
+      "job_id": "falsify_symplectic_sim_v1_cpp",
+      "tool": "symplectic_sim_v1_cpp",
+      "config": "configs/examples/ca_residue_test.json",
+      "claim_role": "falsification",
+      "args": {}
+    },
+    {
+      "job_id": "falsify_spectral_analysis_v1_cpp",
+      "tool": "spectral_analysis_v1_cpp",
+      "config": "configs/examples/ca_residue_test.json",
+      "claim_role": "falsification",
+      "args": {
+        "file": "configs/canonical/dummy_signal.csv",
+        "column": "signal",
+        "mode": "temporal"
+      }
+    },
+    {
+      "job_id": "falsify_tda_module_v1_cpp",
+      "tool": "tda_module_v1_cpp",
+      "config": "configs/examples/ca_residue_test.json",
+      "claim_role": "falsification",
+      "args": {
+        "mode": "grid",
+        "grid_csv": "configs/canonical/dummy_grid.csv",
+        "threshold": 0.5
+      }
+    },
+    {
+      "job_id": "falsify_stochastic_sim_cpp",
+      "tool": "stochastic_sim_cpp",
+      "config": "configs/examples/ca_residue_test.json",
+      "claim_role": "falsification",
+      "args": {}
+    },
+    {
+      "job_id": "falsify_structural_box_sim_cpp",
+      "tool": "structural_box_sim_cpp",
+      "config": "configs/examples/ca_residue_test.json",
+      "claim_role": "falsification",
+      "args": {}
+    },
+    {
+      "job_id": "falsify_satp_higgs_sim_cpp",
+      "tool": "satp_higgs_sim_cpp",
+      "config": "configs/examples/ca_residue_test.json",
+      "claim_role": "falsification",
+      "args": {}
+    },
+    {
+      "job_id": "falsify_falsification_suite_v1_cpp",
+      "tool": "falsification_suite_v1_cpp",
+      "config": "configs/examples/ca_residue_test.json",
+      "claim_role": "falsification",
+      "args": {}
+    }
+  ]
+}
