@@ -484,6 +484,17 @@ Falsification must close the following escape routes to establish L3 support:
 - Non-adversarial design (testing safe conditions) is a governance failure and requires re-execution.
 - Results MUST be consistent across all vectors; failure in any single vector invalidates the claim and triggers demotion per standard rules.
 ---
+11.3 Demotion Rules (Falsification Failure)
+- FV-1 Broken: Observable is generic. Action: Demote to C2, flag theoretical mapping for revision.
+- FV-2 Broken: Regime-specific. Action: Rescope to tested regime, may retain C3.
+- FV-3 Broken: Mapping wrong. Action: Full role chain restart (Return to THEORIST).
+- FV-4 Broken: Initialization-dependent. Action: Restrict scope to tested family.
+---
+11.4 Research Writer Falsification Disclosure
+- Every C4/L3 technical paper MUST include a mandatory falsification summary.
+- Disclosure must state: vectors attempted, adversarial conditions used, and pass result for each.
+- The writer MUST NOT generalize beyond the parameter regime confirmed by FV-2.
+---
 12. Independent Mechanism Requirement
 This requirement is mandatory and non-bypassable for claim promotion above L1.
 ---
