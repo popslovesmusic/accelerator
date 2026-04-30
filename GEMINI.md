@@ -51,11 +51,11 @@ Runs simulations exactly as specified. Does not modify engine code, reinterpret 
 ROLE: ANALYST
 Extracts metrics, normalizes outputs, compares observables, and reports measured behavior. Does not speculate beyond measured data.
 ROLE: FALSIFIER
-Attempts to break the claim using negative controls, adversarial conditions, boundary cases, or expected-failure tests. Mandatory for L3 or higher claims.
+Attempts to break the claim using the C4/L3 Four-Vector Falsification Standard. Responsible for designing and executing four independent adversarial tests (substitution, boundary, reduction, adversarial initialization). Mandatory for L3 or higher claims. Partial completion or non-adversarial design blocks C4 certification.
 ROLE: RESEARCH_WRITER
 Produces the final technical report strictly from validated role outputs, measured results, and claim-gate classification.
 ROLE: GOVERNANCE_CHECK
-Verifies role-chain completion, claim classification, falsification, provenance, lexicon use, tool certification, and the minimum two-independent-mechanism requirement for claims above L1.
+Verifies role-chain completion, claim classification, four-vector falsification, provenance, lexicon use, tool certification, and the minimum two-independent-mechanism requirement for claims above L1. Must verify that falsification vectors were genuinely adversarial, not merely formally completed.
 ---
 4.1 Default Role Chain
 Default chain:
@@ -76,6 +76,11 @@ Expected governance files include:
 `registry/lexicon_gap_queue.json`
 `registry/lexicon_validation_registry.json`
 `registry/compliance_charter_v2_3.json`
+`registry/validation_protocol_v2.json`
+`registry/claim_registry.json`
+`registry/evidence_registry.json`
+`registry/language_policy_registry.json`
+`registry/falsification_standard_v1_0.json`
 Primary Validation Tool: `scripts/lexicon_governor.py`
 If the active repository uses `theory/lexicon/`, the same rules apply to the corresponding files there.
 ---
@@ -228,7 +233,7 @@ Pivot outputs MUST be routed through THEORIST before entering the role chain.
 ---
 9.1 Multi-Source Pivot Workflow
 Extract core mechanisms from each source, not summaries.
-Compress each source into a constrained representation, such as tanka or another structured form.
+Compress each source into a structured form.
 Cluster sources by shared invariants or tensions.
 Generate cluster-level pivot lines representing alignment or contradiction.
 Combine cluster pivots into a master pivot synthesis.
@@ -461,10 +466,28 @@ Expected path:
 }
 ```
 ---
-11. Independent Mechanism Requirement
+11. C4/L3 Four-Vector Falsification Standard
+The Four-Vector Falsification Standard (FALSIFICATION_STANDARD_v1_0) is the non-bypassable requirement for reaching the highest tier of empirical validation.
+Expected path:
+`registry/falsification_standard_v1_0.json`
+---
+11.1 The Epistemological Escape Routes
+Falsification must close the following escape routes to establish L3 support:
+- Vector 1 (FV-1): Mechanism Substitution (closes "artifact escape").
+- Vector 2 (FV-2): Boundary Collapse (closes "favorable-regime escape").
+- Vector 3 (FV-3): Primitive Reduction (closes "theoretical-mismapping escape").
+- Vector 4 (FV-4): Adversarial Initialization (closes "lucky-conditions escape").
+---
+11.2 Enforcement Logic
+- A claim reaches C4/L3 ONLY when all four vectors have been genuinely attempted and failed to break the claim.
+- Partial completion (e.g., 3 of 4 vectors) blocks C4 certification.
+- Non-adversarial design (testing safe conditions) is a governance failure and requires re-execution.
+- Results MUST be consistent across all vectors; failure in any single vector invalidates the claim and triggers demotion per standard rules.
+---
+12. Independent Mechanism Requirement
 This requirement is mandatory and non-bypassable for claim promotion above L1.
 ---
-11.1 Definition: Independent Mechanism
+12.1 Definition: Independent Mechanism
 An independent mechanism is a simulation or model belonging to a distinct model class or dynamical basis.
 Examples:
 Cellular Automata / discrete threshold systems
@@ -483,7 +506,7 @@ Agent model + CA model = two mechanisms.
 PDE model + graph model = two mechanisms.
 CA + analyzer-only postprocessor = one mechanism unless the analyzer is paired with a distinct generating model.
 ---
-11.2 Claim-Level Mechanism Rules
+12.2 Claim-Level Mechanism Rules
 Claim Level	Minimum Requirement
 L0	exploratory or single run; no mechanism requirement
 L1	single mechanism allowed; multi-seed preferred
@@ -492,7 +515,7 @@ L3	at least two independent mechanisms + multi-seed + falsification required
 L4	three or more independent mechanisms, or equivalent theoretical + empirical convergence, required
 If the requirement is not met, the claim MUST be automatically downgraded.
 ---
-11.3 Mechanism Agreement Requirement
+12.3 Mechanism Agreement Requirement
 For L2+ claims, the independent mechanisms must show at least one of:
 matching threshold behavior,
 matching persistence behavior,
@@ -502,9 +525,9 @@ matching qualitative regime transition,
 compatible observable mapping under documented normalization.
 Disagreement across mechanisms MUST produce `INCONCLUSIVE`, `PARTIALLY_SUPPORTED`, or `NOT_SUPPORTED`, depending on severity.
 ---
-12. Research Workflow
+13. Research Workflow
 ---
-12.0 Role Chain Initialization
+13.0 Role Chain Initialization
 Before any run:
 declare role chain,
 lock execution order,
@@ -513,7 +536,7 @@ declare required evidence level,
 declare required mechanisms,
 log roles in metadata.
 ---
-12.1 THEORIST → Analyze
+13.1 THEORIST → Analyze
 Map the question to canonical primitives and candidate claim structure.
 Output:
 ```json
@@ -527,7 +550,7 @@ Output:
 }
 ```
 ---
-12.2 MATHEMATICIAN → Formalize
+13.2 MATHEMATICIAN → Formalize
 Translate hypothesis into constraints, invariants, or equations.
 Output:
 ```json
@@ -541,7 +564,7 @@ Output:
 }
 ```
 ---
-12.3 SIM_DESIGNER → Plan
+13.3 SIM_DESIGNER → Plan
 Select tools, parameters, observables, model classes, controls, and falsification tests.
 For L2+ intended claims, this role MUST select at least two independent mechanisms.
 Output:
@@ -559,7 +582,7 @@ Output:
 }
 ```
 ---
-12.4 EXECUTOR → Run
+13.4 EXECUTOR → Run
 Execute simulations with full provenance.
 Output:
 ```json
@@ -573,7 +596,7 @@ Output:
 }
 ```
 ---
-12.5 ANALYST → Evaluate
+13.5 ANALYST → Evaluate
 Extract metrics, normalize outputs, and compare observables.
 Output:
 ```json
@@ -587,7 +610,7 @@ Output:
 }
 ```
 ---
-12.6 FALSIFIER → Stress Test
+13.6 FALSIFIER → Stress Test
 Run negative controls, adversarial cases, and boundary tests.
 Output:
 ```json
@@ -601,7 +624,7 @@ Output:
 }
 ```
 ---
-12.7 GOVERNANCE_CHECK → Claim Gate
+13.7 GOVERNANCE_CHECK → Claim Gate
 Apply:
 role-chain completion,
 tool certification,
@@ -612,11 +635,11 @@ multi-seed requirement,
 minimum two independent model classes for L2+,
 humility and overreach checks.
 ---
-12.8 RESEARCH_WRITER → Output
+13.8 RESEARCH_WRITER → Output
 Generate the technical paper using the mandatory template.
 The writer MUST NOT upgrade the claim classification assigned by GOVERNANCE_CHECK.
 ---
-12.9 Save
+13.9 Save
 Create a new directory for each research program and save:
 configs,
 raw outputs,
@@ -627,9 +650,9 @@ final paper,
 role-chain log,
 artifact and robustness report.
 ---
-13. Agent Decision Tree
+14. Agent Decision Tree
 ---
-13.1 Primary Tool Selection
+14.1 Primary Tool Selection
 Research Target	Candidate Tools
 Emergence	`agent_based_sim_v1`, `agent_based_sim_v1_cpp`
 Admissibility	`ca_admissibility_sim_v1`, `fsa_rule_engine_sim_v1`
@@ -646,7 +669,7 @@ Optimization	`parameter_optimizer_v1_cpp`
 Accelerator dynamics	`linac_sim_cpp`, `circular_accelerator_sim_v1_cpp`, `accelerator_sim_v1_cpp`
 Falsification	`falsification_suite_v1`, `falsification_suite_v1_cpp`
 ---
-13.2 Cross-Mechanism Pairing Examples
+14.2 Cross-Mechanism Pairing Examples
 Primary Mechanism	Recommended Independent Mechanism
 CA	Agent, PDE, Graph, Stochastic
 Agent	CA, Graph, PDE, Spectral
@@ -656,9 +679,9 @@ Spectral	Agent, PDE, Symplectic
 Symplectic	Spectral, PDE, Agent
 Stochastic	CA, Agent, Graph
 ---
-14. Cross-Verification Protocol
+15. Cross-Verification Protocol
 ---
-14.1 Observables
+15.1 Observables
 Theoretical Target	Observable Examples
 Phase locking	`order_parameter`, `local_coherence_mean`
 Structure	`active_fraction`, topology metrics, interface count
@@ -669,13 +692,13 @@ Stability	persistence, variance, drift, recovery rate
 
 Falsification	expected failure behavior
 ---
-14.2 Multi-Mechanism Execution
+15.2 Multi-Mechanism Execution
 L2+ claims require at least two independent mechanisms.
 L3 claims require at least two independent mechanisms, multi-seed runs, and falsification.
 Three or more mechanisms are recommended for high-confidence papers.
 Analyzer-only tools may support measurement but do not count as independent generating mechanisms unless paired with a distinct model class.
 ---
-14.3 Comparison
+15.3 Comparison
 Normalize metrics using Z-score or `[0,1]` scaling.
 Report normalization method.
 Report qualitative match: threshold, persistence, topology, directionality, suppression, or failure mode.
@@ -689,7 +712,7 @@ Correlation guidance:
 ```
 Correlation is not sufficient alone; qualitative mechanism agreement must also be reported.
 ---
-14.4 Falsification
+15.4 Falsification
 If a claim is labeled L3 or Supported, falsification or negative-control testing is mandatory.
 Falsification should include at least one of:
 no-source condition,
@@ -700,10 +723,10 @@ broken coupling condition,
 randomized orientation condition,
 parameter regime expected to fail.
 ---
-15. Unified Claim Gate
+16. Unified Claim Gate
 No research claim may be finalized until it passes the Unified Claim Gate.
 ---
-15.1 Required Inputs
+16.1 Required Inputs
 claim statement,
 claim type,
 intended claim level,
@@ -718,19 +741,20 @@ lexicon terms used,
 falsification status,
 compliance charter classification.
 ---
-15.2 Gate Checks
-Role Chain Completion Check.
-Tool Certification Check.
-Scientific Validity Check.
-Lexicon Validation Check.
-Evidence Provenance Check.
-Multi-Mechanism Check.
-Multi-Seed Check.
-Falsification Check.
-Observable Mapping Check.
-Humility Check.
+16.2 Gate Checks
+- Role Chain Completion Check.
+- Tool Certification Check.
+- Scientific Validity Check.
+- Lexicon Validation Check.
+- Evidence Provenance Check.
+- Multi-Mechanism Check.
+- Multi-Seed Check.
+- Four-Vector Falsification Check (FV-1, FV-2, FV-3, FV-4).
+- Observable Mapping Check.
+- Humility Check.
+- Language Policy Alignment Check.
 ---
-15.3 Promotion and Downgrade Rules
+16.3 Promotion and Downgrade Rules
 Missing recoverable output → `PROVISIONAL` or `PRIOR_FINDING`.
 Any tool below required certification → downgrade or block.
 Any required lexicon role below L2 → claim must be labeled `PROPOSED_INTERPRETATION`.
@@ -742,7 +766,7 @@ Failed falsification → `NOT_SUPPORTED`.
 Contradictory cross-mechanism result → `NOT_SUPPORTED` or `INCONCLUSIVE`.
 Only claims passing all checks may be labeled `SUPPORTED` or charter `VERIFIED`.
 ---
-15.4 Claim Gate Schema
+16.4 Claim Gate Schema
 ```json
 {
   "claim_id": "",
@@ -818,9 +842,9 @@ Only claims passing all checks may be labeled `SUPPORTED` or charter `VERIFIED`.
 }
 ```
 ---
-16. Evidence Standards & Claim Governance
+17. Evidence Standards & Claim Governance
 ---
-16.1 Sufficiency
+17.1 Sufficiency
 A claim is sufficient for L2+ only if it has:
 at least two independent mechanisms,
 defined observables,
@@ -833,7 +857,7 @@ falsification or negative-control testing,
 passing claim gate,
 no unresolved overreach failure.
 ---
-16.2 Support Levels
+17.2 Support Levels
 ```json
 {
   "L0": "exploratory single run or hypothesis only",
@@ -844,7 +868,7 @@ no unresolved overreach failure.
 }
 ```
 ---
-16.3 Claim Classification
+17.3 Claim Classification
 `Supported` → L3 only.
 `Partially Supported` → L2 only, or L1 with explicit restriction.
 `Proposed Interpretation` → weak or unverified lexicon term involved.
@@ -852,7 +876,7 @@ no unresolved overreach failure.
 `Inconclusive` → conflicting or insufficient evidence.
 `Prior Finding` → reported without recoverable output or incomplete provenance.
 ---
-16.4 Required Artifact & Robustness Report
+17.4 Required Artifact & Robustness Report
 ```json
 {
   "seed_sensitivity": "",
@@ -865,7 +889,7 @@ no unresolved overreach failure.
 }
 ```
 ---
-16.5 Enforcement
+17.5 Enforcement
 Missing required sections → invalid.
 Supported without falsification → invalid.
 Supported with fewer than three seeds → invalid.
@@ -873,7 +897,7 @@ Claims above L1 with fewer than two independent mechanisms → invalid.
 Empirical claim without recoverable output → invalid or prior finding.
 Single-mechanism results may be valuable but cannot be promoted above L1.
 ---
-17. Technical Paper Template
+18. Technical Paper Template
 All technical papers MUST follow this structure.
 ---
 0. Metadata
@@ -986,7 +1010,7 @@ convergence testing,
 lexicon validation work,
 stronger falsification tests.
 ---
-18. Terminology Alignment
+19. Terminology Alignment
 Term	Preferred Alignment
 NOT_axiom	ε ≠ 0 / exclusion necessity condition
 Residue	R
@@ -1001,7 +1025,7 @@ structure	persistent pattern within tested model, not metaphysical object
 realization	model-level activation passing admissibility conditions
 persistence	sustained activity/structure under model dynamics
 ---
-19. Runtime Chain JSON
+20. Runtime Chain JSON
 Use this format to declare a governed run.
 ```json
 {
@@ -1026,7 +1050,7 @@ Use this format to declare a governed run.
 }
 ```
 ---
-20. Final Enforcement Summary
+21. Final Enforcement Summary
 The agent MUST NOT:
 modify engine code without explicit authorization,
 overwrite default configs,
@@ -1036,19 +1060,6 @@ use unvalidated terms as verified primitives,
 cite unrecoverable empirical results as verified,
 let tool-local artifacts self-certify claims,
 bypass the compliance charter,
-bypass the Unified Claim Gate,
-skip FALSIFIER for Supported claims,
-introduce new theory outside THEORIST.
-The agent MUST:
-preserve provenance,
-preserve claim humility,
-resolve terms through the lexicon,
-check tool readiness before experiments,
-use at least two independent mechanisms for L2+ claims,
-run falsification before Supported claims,
-document uncertainty and artifact risk,
-save all research program outputs in a dedicated directory,
-log role-chain execution in metadata.nce charter,
 bypass the Unified Claim Gate,
 skip FALSIFIER for Supported claims,
 introduce new theory outside THEORIST.

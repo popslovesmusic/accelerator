@@ -1,0 +1,187 @@
+{
+  "governance_document": {
+    "id": "FALSIFICATION_STANDARD_v1_0",
+    "title": "C4/L3 Four-Vector Falsification Standard",
+    "authority": "compliance_charter_v2_3.json",
+    "version": "1.0",
+    "date": "2026-04-30",
+    "status": "active",
+    "supersedes": null,
+    "description": "Defines the minimum falsification requirement for C4/L3 claim certification. A claim reaches C4/L3 only when four independent falsification vectors have each been genuinely attempted and each has failed to break the claim. Positive evidence from two independent mechanisms is necessary but not sufficient. All four vectors must also be closed."
+  },
+
+  "epistemological_basis": {
+    "core_principle": "A claim stands at C4/L3 because there is no remaining epistemological shelter. Each falsification vector closes a specific escape route. A claim that survives all four has no direction from which it can be broken without new evidence.",
+    "escape_routes_closed": {
+      "vector_1": "artifact escape — result is not a model-class artifact",
+      "vector_2": "favorable-regime escape — result is not regime-specific",
+      "vector_3": "theoretical-mismapping escape — result genuinely depends on the claimed primitives",
+      "vector_4": "lucky-conditions escape — result is not initialization-dependent"
+    }
+  },
+
+  "c4_l3_full_requirement": {
+    "positive_evidence": {
+      "minimum_independent_mechanisms": 2,
+      "minimum_seeds_per_mechanism": 3,
+      "mechanism_classes_must_be_distinct": true,
+      "note": "Positive evidence is necessary but not sufficient for C4/L3."
+    },
+    "falsification_requirement": {
+      "vectors_required": 4,
+      "all_must_be_attempted": true,
+      "all_must_fail_to_break_claim": true,
+      "partial_completion_blocks_c4": true,
+      "note": "A single falsification pass no longer satisfies C4/L3. All four vectors must be executed and reported."
+    }
+  },
+
+  "falsification_vectors": {
+    "vector_1": {
+      "id": "FV-1",
+      "name": "mechanism_substitution",
+      "epistemological_target": "artifact escape",
+      "question": "Can a completely different model class reproduce the same observable without the MPF machinery?",
+      "method": "Select a model class with no MPF primitives. Attempt to reproduce the claimed observable using only generic dynamical properties. If the observable appears, the result is a generic dynamical outcome, not MPF-specific evidence.",
+      "pass_condition": "The observable cannot be reproduced by a non-MPF model class under equivalent boundary conditions.",
+      "fail_condition": "The observable is reproduced by a model class that does not implement MPF primitives. Claim is broken — demote to C2 or R_rejected.",
+      "required_tools": "minimum one C4-certified tool from a distinct model class",
+      "required_seeds": 3,
+      "report_fields": [
+        "tool_used",
+        "model_class",
+        "observable_attempted",
+        "result",
+        "conclusion"
+      ]
+    },
+
+    "vector_2": {
+      "id": "FV-2",
+      "name": "boundary_collapse",
+      "epistemological_target": "favorable-regime escape",
+      "question": "Does the claim survive at the parameter space boundaries where framework assumptions are weakest?",
+      "method": "Identify the parameter regime in which the claim was established. Systematically push parameters toward the boundary conditions where MPF admissibility constraints become marginal or degenerate. Test whether the claimed observable persists or collapses.",
+      "pass_condition": "The observable persists or degrades gracefully with explicit documentation of the degradation boundary. The claim scope is updated to reflect tested limits.",
+      "fail_condition": "The observable collapses within the tested parameter space in a way that contradicts the claim scope as written. Claim must be rescoped or demoted.",
+      "required_tools": "same tools as positive evidence run, boundary config required",
+      "required_seeds": 3,
+      "report_fields": [
+        "boundary_parameters_tested",
+        "nominal_regime",
+        "boundary_regime",
+        "observable_at_boundary",
+        "collapse_detected",
+        "new_scope_if_rescoped"
+      ]
+    },
+
+    "vector_3": {
+      "id": "FV-3",
+      "name": "primitive_reduction",
+      "epistemological_target": "theoretical-mismapping escape",
+      "question": "Does the result genuinely depend on the primitives claimed in the theoretical mapping?",
+      "method": "For each primitive cited in the claim's theoretical mapping (epsilon, residue, rho, coupling, delta, orientation, mu), run a controlled suppression test: set that primitive to zero, null, or its identity value while holding all others constant. If the observable survives suppression of a primitive that the theoretical mapping claims is essential, the mapping is wrong.",
+      "pass_condition": "Suppression of each cited primitive either eliminates the observable or produces a qualitatively distinct result. The claim's primitive dependencies are confirmed.",
+      "fail_condition": "The observable survives suppression of one or more primitives listed as essential in the theoretical mapping. The THEORIST mapping must be revised before C4 is re-attempted.",
+      "required_tools": "same tools as positive evidence run, suppression configs required per primitive",
+      "required_seeds": 3,
+      "primitives_to_test": ["epsilon", "residue", "rho", "coupling", "delta", "orientation", "mu"],
+      "test_only_primitives_cited_in_claim": true,
+      "report_fields": [
+        "primitive_tested",
+        "suppression_method",
+        "observable_under_suppression",
+        "mapping_confirmed",
+        "mapping_violation_detected"
+      ]
+    },
+
+    "vector_4": {
+      "id": "FV-4",
+      "name": "adversarial_initialization",
+      "epistemological_target": "lucky-conditions escape",
+      "question": "Does the result depend on favorable starting conditions?",
+      "method": "Design initial conditions that are maximally unfavorable to the claimed observable — high-mismatch states, adversarial basin configurations, worst-case residue profiles. Run the full claim protocol from these initializations. If the observable only appears from favorable starts, the claim is initialization-dependent and not general.",
+      "pass_condition": "The observable appears from adversarial initializations, possibly after a longer transient, with the same qualitative character. Initialization-dependence is documented if partial.",
+      "fail_condition": "The observable fails to appear from adversarial initializations in a way that contradicts the claim's stated generality. Claim scope must be restricted or demoted.",
+      "required_tools": "same tools as positive evidence run, adversarial config required",
+      "required_seeds": 3,
+      "adversarial_design_principle": "Initializations must be genuinely hostile, not merely different. The designer must document why the chosen initialization is adversarial to the claim.",
+      "report_fields": [
+        "adversarial_initialization_description",
+        "rationale_for_adversarial_choice",
+        "observable_from_adversarial_start",
+        "transient_length_if_applicable",
+        "initialization_dependence_detected"
+      ]
+    }
+  },
+
+  "vector_completion_requirements": {
+    "all_four_required": true,
+    "order": "any order permitted, all must complete before GOVERNANCE_CHECK",
+    "partial_completion": {
+      "1_of_4": "claim is H_on_hold — falsification incomplete",
+      "2_of_4": "claim is H_on_hold — falsification incomplete",
+      "3_of_4": "claim is H_on_hold — falsification incomplete",
+      "4_of_4_all_passed": "claim may proceed to GOVERNANCE_CHECK for C4/L3 review",
+      "any_vector_broken": "claim is demoted — see demotion rules"
+    }
+  },
+
+  "demotion_rules": {
+    "FV1_broken": {
+      "result": "observable is generic — not MPF-specific",
+      "action": "demote to C2, flag theoretical mapping for THEORIST revision",
+      "charter_classification": "not_supported"
+    },
+    "FV2_broken": {
+      "result": "claim is regime-specific — scope too broad as written",
+      "action": "rescope claim to tested regime, re-run GOVERNANCE_CHECK at reduced scope, may retain C3",
+      "charter_classification": "provisional_rescoped"
+    },
+    "FV3_broken": {
+      "result": "theoretical mapping is wrong — primitive dependency not confirmed",
+      "action": "return to THEORIST, revise primitive mapping, full role chain restart required",
+      "charter_classification": "theoretical_revision_required"
+    },
+    "FV4_broken": {
+      "result": "claim is initialization-dependent — generality overstated",
+      "action": "restrict claim scope to initialization family tested, re-run GOVERNANCE_CHECK",
+      "charter_classification": "provisional_rescoped"
+    }
+  },
+
+  "governance_check_gate": {
+    "role": "GOVERNANCE_CHECK",
+    "c4_l3_checklist": [
+      "two independent C4-certified mechanisms with positive evidence — confirmed",
+      "minimum three seeds per mechanism — confirmed",
+      "FV-1 mechanism substitution — attempted and passed",
+      "FV-2 boundary collapse — attempted and passed",
+      "FV-3 primitive reduction — attempted and passed for all cited primitives",
+      "FV-4 adversarial initialization — attempted and passed",
+      "all vector reports recoverable with run_id and output_path",
+      "language policy C4 tier applied to all claim language",
+      "lexicon validation registry entries exist at L3 for all cited primitives",
+      "overreach check passed — no result written as universal truth"
+    ],
+    "any_item_failed": "block C4/L3 — state which item failed and required remediation",
+    "all_items_passed": "claim certified C4/L3 — proceed to RESEARCH_WRITER"
+  },
+
+  "research_writer_instruction": {
+    "on_c4_l3_certified_claim": "You may use language from the C4 tier of language_policy_registry.json. You must state which four falsification vectors were run and that all failed to break the claim. You must not generalize beyond the parameter regime confirmed by FV-2.",
+    "mandatory_falsification_disclosure": "Every C4/L3 paper section must include a falsification summary stating: vectors attempted, adversarial conditions used, and pass result for each. This is not optional.",
+    "forbidden_regardless_of_status": ["proves", "establishes fundamental law", "universal truth", "final theory", "absolute proof"]
+  },
+
+  "agent_enforcement_notes": {
+    "FALSIFIER_role": "You are responsible for designing and executing all four vectors. A falsification step that is not genuinely adversarial — that tests only safe boundary conditions, only favorable initializations, or only suppresses primitives not cited in the mapping — does not satisfy this standard. Document your adversarial intent explicitly in each vector report.",
+    "GOVERNANCE_CHECK_role": "You must verify that each falsification vector was genuinely adversarial, not merely formally completed. Review the adversarial design rationale in each report. If a vector appears confirmatory rather than adversarial, flag it and require re-execution.",
+    "no_new_theory_after_theorist": true,
+    "falsifier_cannot_be_skipped": true,
+    "partial_falsification_blocks_c4": true
+  }
+}
