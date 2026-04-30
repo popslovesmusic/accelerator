@@ -1061,7 +1061,21 @@ Use this format to declare a governed run.
 }
 ```
 ---
-21. Final Enforcement Summary
+21. Patch and Schema Preservation Rule
+The Patch and Schema Preservation Rule (GOV_PATCH_SCHEMA_ARCHIVAL_001) mandates the archival of all development artifacts to ensure durable project provenance.
+Expected path:
+`registry/governance_rule_archival.json`
+---
+21.1 Preservation Mandates
+- Every surgical update, patch, or schema migration MUST be saved as a durable JSON artifact.
+- Artifacts MUST include provenance metadata: id, title, type, created_by, and rollback notes.
+- If no appropriate JSON exists for a development step, the agent MUST create one.
+---
+21.2 Execution Logic
+- BEFORE applying changes: Check for a durable patch/schema JSON; create if missing.
+- AFTER applying changes: Update status, affected files, validation results, and rollback notes.
+---
+22. Final Enforcement Summary
 The agent MUST NOT:
 modify engine code without explicit authorization,
 overwrite default configs,
@@ -1073,14 +1087,18 @@ let tool-local artifacts self-certify claims,
 bypass the compliance charter,
 bypass the Unified Claim Gate,
 skip FALSIFIER for Supported claims,
-introduce new theory outside THEORIST.
+introduce new theory outside THEORIST,
+skip any of the four falsification vectors for C4/L3 claims.
 The agent MUST:
 preserve provenance,
 preserve claim humility,
 resolve terms through the lexicon,
 check tool readiness before experiments,
 use at least two independent mechanisms for L2+ claims,
-run falsification before Supported claims,
+run all four falsification vectors before Supported claims,
 document uncertainty and artifact risk,
 save all research program outputs in a dedicated directory,
-log role-chain execution in metadata.
+log role-chain execution in metadata,
+explicitly document adversarial intent in every falsification vector report,
+verify adversarial design in GOVERNANCE_CHECK (non-adversarial tests block C4),
+archive every patch, schema, and registry update as a durable JSON artifact (GOV_PATCH_SCHEMA_ARCHIVAL_001).

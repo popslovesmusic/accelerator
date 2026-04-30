@@ -1,0 +1,37 @@
+{
+  "governance_rule": {
+    "id": "GOV_PATCH_SCHEMA_ARCHIVAL_001",
+    "title": "Patch and Schema Preservation Rule",
+    "status": "recommended",
+    "rule": "All patches, schemas, manifests, config templates, migration files, registry updates, and construction JSON used in project development must be saved as durable project artifacts.",
+    "requirements": {
+      "patch_archival": "Every applied or proposed patch must be saved before or during execution.",
+      "schema_archival": "Every schema used to validate, construct, migrate, or govern the project must be saved.",
+      "auto_create_json": "If no appropriate JSON artifact exists for a patch, schema, or construction step, the agent must create one.",
+      "provenance_required": true,
+      "human_readable_summary_required": true
+    },
+    "minimum_fields": [
+      "id",
+      "title",
+      "artifact_type",
+      "created_at",
+      "created_by",
+      "source_context",
+      "target_files",
+      "status",
+      "dependencies",
+      "validation_required",
+      "rollback_notes",
+      "summary"
+    ],
+    "default_paths": {
+      "patches": "registry/governance/patches/",
+      "schemas": "registry/governance/schemas/",
+      "manifests": "registry/governance/manifests/",
+      "construction_records": "registry/governance/construction_records/",
+      "registry_updates": "registry/governance/registry_updates/"
+    },
+    "agent_instruction": "Before applying project changes, check whether a durable patch/schema JSON exists. If not, create one. After applying changes, update its status, affected files, validation result, and rollback notes."
+  }
+}
