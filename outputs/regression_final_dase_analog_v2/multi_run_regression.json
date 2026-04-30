@@ -1,0 +1,23 @@
+{
+  "run_id": "reg_final_dase_analog_v2",
+  "mode": "parallel",
+  "output_root": "outputs\\regression_final_dase_analog_v2",
+  "governance": {
+    "dry_run_first": false,
+    "stop_on_failure": false
+  },
+  "jobs": [
+    {
+      "job_id": "tool_a",
+      "tool": "dase_analog_sim_v1",
+      "config": "dase_analog_sim_v1/configs/default.json",
+      "claim_role": "comparison"
+    },
+    {
+      "job_id": "tool_b",
+      "tool": "dase_analog_sim_cpp",
+      "config": "dase_analog_sim_v1/configs/default.json",
+      "claim_role": "comparison"
+    }
+  ]
+}
