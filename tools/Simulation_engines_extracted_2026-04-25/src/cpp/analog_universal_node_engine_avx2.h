@@ -135,18 +135,24 @@ struct EngineMetrics {
     #define FORCE_INLINE inline __attribute__((always_inline))
 #endif
 
-class AnalogUniversalNodeAVX2 {
+// Aligned to 64 bytes (L2 Cache Line) to prevent false sharing and maximize throughput
+class alignas(64) AnalogUniversalNodeAVX2 {
 public:
-    double integrator_state = 0.0;
-    double previous_input   = 0.0;
-    double current_output   = 0.0;
-    double feedback_gain    = 0.0;
-    int    node_id          = 0;
+    double integrator_state = 0.0; // 8 bytes
+    double previous_input   = 0.0; // 8 bytes
+    double current_output   = 0.0; // 8 bytes
+    double feedback_gain    = 0.0; // 8 bytes
+    int    node_id          = 0;   // 4 bytes
 
     // Spatial coordinates for node positioning
-    int16_t x = 0;
-    int16_t y = 0;
-    int16_t z = 0;
+    int16_t x = 0; // 2 bytes
+    int16_t y = 0; // 2 bytes
+    int16_t z = 0; // 2 bytes
+
+    // Explicit padding to reach exactly 64 bytes (L2 alignment)
+    // Current total: 8+8+8+8+4+2+2+2 = 42 bytes
+    // Padding needed: 64 - 42 = 22 bytes
+    uint8_t l2_padding[22];
 
     AnalogUniversalNodeAVX2() = default;
 
