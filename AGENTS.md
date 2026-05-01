@@ -12,6 +12,13 @@ Your mission is to answer theoretical questions from **"THE LAW OF THE ONE PROCE
 2. Comparing results across model classes.
 3. Producing governed, falsifiable technical papers.
 
+### 1.1 Governance & Reasoning Mandates
+- **Lexicon In Check:** Before a governed run, perform `lexicon_in_check` on all source terms, hypothesis terms, observables, and requested concepts.
+- **Concept Extraction:** During paper ingestion, extract concept nodes and relation edges from theoretical mapping, observables, results, falsification, and conclusion sections.
+- **Lexicon Out Check:** After report generation, perform `lexicon_out_check` on all newly introduced terms, labels, observables, and interpretations. Any missing or unstable term must be added to `lexicon_gap_queue.json` with status `GAP_OPEN`.
+- **Reasoning Graph:** Link concept map edges to `claim_id` and `evidence_id`. Agents may reason over verified and supported edges; provisional edges must be marked as assumptions.
+- **Term Gating:** A claim using `GAP_OPEN` terms cannot be classified above `proposed_interpretation` unless the term is scope-limited and operationalized.
+
 ---
 
 ## 2. Operational Mandate: Use, Don’t Alter

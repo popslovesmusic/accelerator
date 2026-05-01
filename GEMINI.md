@@ -7,6 +7,13 @@ Executing simulations across approved independent engines in `tools/`.
 Comparing results across distinct model classes and mechanisms.
 Producing governed, falsifiable technical papers.
 Preserving claim humility, provenance, and methodological separation.
+
+### 1.1 Governance & Reasoning Mandates
+- **Lexicon In Check:** Before a governed run, perform `lexicon_in_check` on all source terms, hypothesis terms, observables, and requested concepts.
+- **Concept Extraction:** During paper ingestion, extract concept nodes and relation edges from theoretical mapping, observables, results, falsification, and conclusion sections.
+- **Lexicon Out Check:** After report generation, perform `lexicon_out_check` on all newly introduced terms, labels, observables, and interpretations. Any missing or unstable term must be added to `lexicon_gap_queue.json` with status `GAP_OPEN`.
+- **Reasoning Graph:** Link concept map edges to `claim_id` and `evidence_id`. Agents may reason over verified and supported edges; provisional edges must be marked as assumptions.
+- **Term Gating:** A claim using `GAP_OPEN` terms cannot be classified above `proposed_interpretation` unless the term is scope-limited and operationalized.
 Mandatory Inclusion: Every report MUST explicitly state the model, tool, model class, seed count, observables, and output paths used.
 ---
 2. Operational Mandate: Use, Do Not Alter

@@ -1,0 +1,150 @@
+{
+  "patch_id": "PATCH_CONCEPT_MAP_AND_LEXICON_IO_V1",
+  "title": "Add Concept Map Extraction and Lexicon In/Out Validation",
+  "type": "governance_patch",
+  "created_at": "2026-05-01",
+  "created_by": "assistant",
+  "target_files": [
+    "registry/concept_map_registry.json",
+    "registry/lexicon_validation_registry.json",
+    "registry/lexicon_gap_queue.json",
+    "registry/claim_registry.json",
+    "agents.md"
+  ],
+  "purpose": "Create a concept map from technical papers for agent reasoning while enforcing lexicon validation before and after every governed run.",
+  "new_files": {
+    "registry/concept_map_registry.json": {
+      "meta": {
+        "version": "1.0",
+        "description": "Maps concepts, claims, primitives, evidence, and paper sources into a reasoning graph."
+      },
+      "concepts": [],
+      "relations": [],
+      "paper_maps": []
+    }
+  },
+  "schema_additions": {
+    "concept_node": {
+      "concept_id": "",
+      "canonical_term": "",
+      "aliases": [],
+      "status": "verified | provisional | gap_open | deprecated",
+      "lexicon_status": "L0 | L1 | L2 | L3 | GAP_OPEN",
+      "primitive_mapping": {
+        "epsilon": "",
+        "residue": "",
+        "rho": "",
+        "coupling_or_CSI": "",
+        "delta": "",
+        "orientation_minus_i": "",
+        "mu": ""
+      },
+      "source_papers": [],
+      "related_claims": [],
+      "evidence_ids": [],
+      "allowed_usage": "",
+      "forbidden_usage": []
+    },
+    "relation_edge": {
+      "edge_id": "",
+      "from_concept_id": "",
+      "to_concept_id": "",
+      "relation_type": "supports | depends_on | constrains | generalizes | contradicts | operationalizes | measures | falsifies | aliases | refines",
+      "claim_ids": [],
+      "evidence_ids": [],
+      "source_papers": [],
+      "confidence": "provisional | supported | verified",
+      "notes": ""
+    },
+    "paper_map": {
+      "paper_id": "",
+      "title": "",
+      "claim_ids": [],
+      "concept_ids": [],
+      "evidence_ids": [],
+      "new_terms_detected": [],
+      "lexicon_in_status": "pass | gap | fail",
+      "lexicon_out_status": "pass | gap | fail"
+    }
+  },
+  "agent_rules": [
+    "Before a governed run, perform lexicon_in_check on all source terms, hypothesis terms, observables, and requested concepts.",
+    "During paper ingestion, extract concept nodes and relation edges from theoretical mapping, observables, results, falsification, and conclusion sections.",
+    "After report generation, perform lexicon_out_check on all newly introduced terms, labels, observables, and interpretations.",
+    "Any missing or unstable term must be added to lexicon_gap_queue.json with status GAP_OPEN.",
+    "A claim using GAP_OPEN terms cannot be classified above proposed_interpretation unless the term is scope-limited and operationalized.",
+    "Concept map edges must link to claim_id and evidence_id when used for reasoning.",
+    "Agents may reason over verified and supported edges; provisional edges must be marked as assumptions."
+  ],
+  "lexicon_io_checks": {
+    "lexicon_in_check": {
+      "when": "before THEORIST finalizes hypothesis and before SIM_DESIGNER selects tools",
+      "inputs_checked": [
+        "source paper terms",
+        "user question terms",
+        "hypothesis terms",
+        "canonical primitives",
+        "observables",
+        "model class labels"
+      ],
+      "outputs": {
+        "resolved_terms": [],
+        "unresolved_terms": [],
+        "gap_queue_updates": [],
+        "blocked_or_downgraded_claims": []
+      }
+    },
+    "lexicon_out_check": {
+      "when": "after RESEARCH_WRITER and before final claim gate",
+      "inputs_checked": [
+        "paper title",
+        "abstract",
+        "theoretical mapping",
+        "observables",
+        "results interpretation",
+        "classification",
+        "conclusion",
+        "next steps"
+      ],
+      "outputs": {
+        "new_terms_detected": [],
+        "terms_added_to_gap_queue": [],
+        "terms_requiring_role_validation": [],
+        "language_policy_warnings": []
+      }
+    }
+  },
+  "concept_extraction_rules": {
+    "extract_from_sections": [
+      "metadata",
+      "theoretical_mapping",
+      "observables",
+      "results",
+      "cross_mechanism_comparison",
+      "falsification",
+      "classification",
+      "conclusion"
+    ],
+    "required_edges": [
+      "claim depends_on primitive",
+      "claim operationalizes concept",
+      "observable measures concept",
+      "evidence supports claim",
+      "falsification tests claim",
+      "measurement confirms observable"
+    ],
+    "blocked_edges": [
+      "gap_open concept verified_by claim",
+      "single evidence proves law",
+      "simulation result validates physical reality"
+    ]
+  },
+  "acceptance_criteria": [
+    "Every governed run has lexicon_in_check and lexicon_out_check records.",
+    "Every technical paper produces or updates a paper_map entry.",
+    "Every claim in claim_registry links to at least one concept_id.",
+    "Every concept used in C4+ claims has lexicon validation status L2 or higher, or is explicitly scoped as provisional.",
+    "Any newly introduced term is routed to lexicon_gap_queue.json.",
+    "Agent reasoning can traverse concept_map_registry.json without bypassing claim status or language policy."
+  ]
+}
