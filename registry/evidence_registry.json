@@ -1,7 +1,24 @@
 {
   "meta": {
     "version": "1.0",
-    "description": "Tracks all experimental runs, reports, and validation artifacts linked to claims."
+    "description": "Tracks all experimental runs, reports, and validation artifacts linked to claims.",
+    "measurement_evidence_required_fields": {
+      "evidence_id": "",
+      "claim_id": "",
+      "type": "measurement_analysis",
+      "tool": "",
+      "mechanism_class": "measurement",
+      "measurement_type": "",
+      "input_sources": [],
+      "observables_measured": [],
+      "result_summary": "",
+      "artifacts": {
+        "report_path": "",
+        "output_path": "",
+        "logs": []
+      },
+      "timestamp": ""
+    }
   },
   "evidence_items": [
     {
@@ -19,6 +36,94 @@
         "outputs/runs/c4/c4_provenance_bundle.json",
         "tools/signal_scope_phase_continuation_engine/validation/C4_ELEVATION_SUMMARY.md",
         "tools/signal_scope_phase_continuation_engine/validation/c4_gate_decision.json"
+      ],
+      "governance_status": "verified"
+    },
+    {
+      "evidence_id": "EVID-0001",
+      "tool_name": "ca_admissibility_sim_v1",
+      "timestamp": "2026-05-01T01:47:28Z",
+      "evidence_type": "multi_seed_sweep",
+      "summary": "CA parameter sweep across residue growth rates confirming SS2/SS3 transition and FV-3 falsification.",
+      "artifact_paths": [
+        "outputs/runs/research_one_process_stability_2026-05-01/ca_results.csv"
+      ],
+      "governance_status": "verified"
+    },
+    {
+      "evidence_id": "EVID-0002",
+      "tool_name": "agent_based_sim_v1",
+      "timestamp": "2026-05-01T01:47:28Z",
+      "evidence_type": "multi_seed_sweep_adversarial",
+      "summary": "ABM swarm dynamics sweep and FV-4 adversarial initialization confirming persistent order parameter in SS3.",
+      "artifact_paths": [
+        "outputs/runs/research_one_process_stability_2026-05-01/abm_results.csv"
+      ],
+      "governance_status": "verified"
+    },
+    {
+      "evidence_id": "EVID-0003",
+      "tool_name": "spectral_analysis_v1",
+      "timestamp": "2026-05-01T02:19:06Z",
+      "evidence_type": "independent_measurement",
+      "summary": "Independent spectral validation confirming temporal invariance of stabilized phase packet structures.",
+      "artifact_paths": [
+        "outputs/runs/research_one_process_stability_2026-05-01/measurement_validation/measurement_report.json"
+      ],
+      "governance_status": "verified"
+    },
+    {
+      "evidence_id": "EVID-0004",
+      "tool_name": "ca_admissibility_sim_v1",
+      "timestamp": "2026-05-01T02:40:43Z",
+      "evidence_type": "multi_seed_sweep_extreme",
+      "summary": "CA parameter sweep under extreme suppressive forcing confirming stable low-epsilon floor and FV-3 falsification.",
+      "artifact_paths": [
+        "outputs/runs/research_floor_convergence_2026-05-01/ca_floor_results.csv"
+      ],
+      "governance_status": "verified"
+    },
+    {
+      "evidence_id": "EVID-0005",
+      "tool_name": "structural_box_sim_v2",
+      "timestamp": "2026-05-01T02:40:43Z",
+      "evidence_type": "multi_seed_sweep_extreme",
+      "summary": "PDE box parameter sweep under extreme suppressive forcing confirming stable non-zero floor and FV-3 falsification.",
+      "artifact_paths": [
+        "outputs/runs/research_floor_convergence_2026-05-01/pde_floor_results.csv"
+      ],
+      "governance_status": "verified"
+    },
+    {
+      "evidence_id": "EVID-0006",
+      "tool_name": "spectral_analysis_v1",
+      "timestamp": "2026-05-01T02:48:09Z",
+      "evidence_type": "independent_measurement",
+      "summary": "Independent spectral validation confirming temporal invariance of the near-floor convergent regime.",
+      "artifact_paths": [
+        "outputs/runs/research_floor_convergence_2026-05-01/measurement_validation/measurement_report.json"
+      ],
+      "governance_status": "verified"
+    },
+    {
+      "evidence_id": "EVID-0007",
+      "tool_name": "agent_based_sim_v1",
+      "timestamp": "2026-05-01T04:09:15Z",
+      "evidence_type": "multi_seed_sweep_emergence",
+      "summary": "ABM interaction-residue sweep confirming sharp transition to coherent identity (OP ~ 0.95) above critical threshold.",
+      "artifact_paths": [
+        "outputs/runs/research_emergence_threshold_2026-05-01/abm_threshold_results.csv"
+      ],
+      "governance_status": "verified"
+    },
+    {
+      "evidence_id": "EVID-0008",
+      "tool_name": "spectral_analysis_v1",
+      "timestamp": "2026-05-01T02:57:43Z",
+      "evidence_type": "independent_measurement",
+      "summary": "Spectral analysis comparing floor and identity regimes, confirming 98% power concentration in emergent structures.",
+      "artifact_paths": [
+        "outputs/runs/research_emergence_threshold_2026-05-01/measurement_validation/spectral_abm_identity/spectrum_report.json"
       ],
       "governance_status": "verified"
     }

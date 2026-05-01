@@ -40,6 +40,34 @@
         "mechanisms": 1,
         "uq_pass": true
       }
+    },
+    "independent_measurement_requirement": {
+      "version": "1.0",
+      "required_for_claim_levels": [
+        "C4",
+        "C5",
+        "C6"
+      ],
+      "minimum_measurements": {
+        "C4": 1,
+        "C5": 1,
+        "C6": 2
+      },
+      "valid_measurement_classes": [
+        "spectral_analyzer",
+        "topology_analyzer",
+        "tda",
+        "graph_analyzer",
+        "bifurcation_analyzer",
+        "measurement"
+      ],
+      "rule": "A claim may not be promoted to C4 or higher unless at least one independent measurement layer confirms the claimed structure or regime distinction.",
+      "failure_action": "automatic_downgrade",
+      "downgrade_targets": {
+        "C4": "C3_single_mechanism_supported",
+        "C5": "C4_dual_mechanism_supported",
+        "C6": "C5_replicated"
+      }
     }
   }
 }

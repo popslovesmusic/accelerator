@@ -1,0 +1,187 @@
+{
+  "patch_id": "PATCH_GOV_INDEPENDENT_MEASUREMENT_ENFORCEMENT_V1",
+  "title": "Enforce Independent Measurement for C4+ Claim Promotion",
+  "type": "governance_patch",
+  "created_at": "2026-05-01",
+  "created_by": "assistant",
+  "target_files": [
+    "registry/validation_protocol_v2.json",
+    "registry/claim_registry.json",
+    "registry/evidence_registry.json",
+    "registry/language_policy_registry.json",
+    "registry/governance_rule_archival.json",
+    "agents.md"
+  ],
+  "purpose": "Make independent measurement a mandatory, non-bypassable gate for C4+ claim promotion.",
+  "implementation_steps": [
+    {
+      "step": 1,
+      "file": "registry/validation_protocol_v2.json",
+      "action": "add_or_update_rule",
+      "patch": {
+        "independent_measurement_requirement": {
+          "version": "1.0",
+          "required_for_claim_levels": [
+            "C4",
+            "C5",
+            "C6"
+          ],
+          "minimum_measurements": {
+            "C4": 1,
+            "C5": 1,
+            "C6": 2
+          },
+          "valid_measurement_classes": [
+            "spectral_analyzer",
+            "topology_analyzer",
+            "tda",
+            "graph_analyzer",
+            "bifurcation_analyzer",
+            "measurement"
+          ],
+          "rule": "A claim may not be promoted to C4 or higher unless at least one independent measurement layer confirms the claimed structure or regime distinction.",
+          "failure_action": "automatic_downgrade",
+          "downgrade_targets": {
+            "C4": "C3_single_mechanism_supported",
+            "C5": "C4_dual_mechanism_supported",
+            "C6": "C5_replicated"
+          }
+        }
+      }
+    },
+    {
+      "step": 2,
+      "file": "registry/claim_registry.json",
+      "action": "extend_claim_schema",
+      "patch": {
+        "independent_measurement": {
+          "present": false,
+          "count": 0,
+          "measurement_types": [],
+          "evidence_ids": [],
+          "confirmed_observables": [],
+          "notes": ""
+        }
+      }
+    },
+    {
+      "step": 3,
+      "file": "registry/evidence_registry.json",
+      "action": "extend_evidence_schema",
+      "patch": {
+        "measurement_evidence_required_fields": {
+          "evidence_id": "",
+          "claim_id": "",
+          "type": "measurement_analysis",
+          "tool": "",
+          "mechanism_class": "measurement",
+          "measurement_type": "",
+          "input_sources": [],
+          "observables_measured": [],
+          "result_summary": "",
+          "artifacts": {
+            "report_path": "",
+            "output_path": "",
+            "logs": []
+          },
+          "timestamp": ""
+        }
+      }
+    },
+    {
+      "step": 4,
+      "file": "registry/language_policy_registry.json",
+      "action": "add_constraint",
+      "patch": {
+        "independent_measurement_language_constraint": {
+          "rule": "Do not use C4+ support language unless independent_measurement.present is true.",
+          "blocked_language_without_measurement": [
+            "validated across mechanisms",
+            "structurally confirmed",
+            "independently verified",
+            "robustly supports"
+          ],
+          "allowed_language_without_measurement": [
+            "is consistent with",
+            "suggests within tested dynamics",
+            "supported by dynamics mechanisms only"
+          ]
+        }
+      }
+    },
+    {
+      "step": 5,
+      "file": "agents.md",
+      "action": "update_governance_check_role",
+      "patch": {
+        "GOVERNANCE_CHECK_additions": [
+          "Verify independent measurement presence for any requested C4+ claim.",
+          "Downgrade any C4+ claim lacking independent measurement.",
+          "Confirm measurement evidence uses mechanism_class='measurement'.",
+          "Confirm measurement evidence links to generating evidence via input_sources.",
+          "Block language-policy promotion if independent measurement is absent."
+        ]
+      }
+    },
+    {
+      "step": 6,
+      "file": "agents.md",
+      "action": "update_sim_designer_role",
+      "patch": {
+        "SIM_DESIGNER_additions": [
+          "For any intended C4+ claim, select at least one independent measurement layer in addition to dynamics mechanisms.",
+          "Preferred measurement layers include spectral analysis, TDA, topology analysis, graph analysis, or bifurcation analysis.",
+          "Analyzer-only tools do not replace required dynamics mechanisms; they serve as measurement confirmation."
+        ]
+      }
+    },
+    {
+      "step": 7,
+      "file": "registry/governance_rule_archival.json",
+      "action": "archive_patch",
+      "patch": {
+        "archival_record": {
+          "patch_id": "PATCH_GOV_INDEPENDENT_MEASUREMENT_ENFORCEMENT_V1",
+          "status": "applied",
+          "affected_files": [
+            "registry/validation_protocol_v2.json",
+            "registry/claim_registry.json",
+            "registry/evidence_registry.json",
+            "registry/language_policy_registry.json",
+            "agents.md"
+          ],
+          "rollback_notes": "Remove independent_measurement schema fields, claim gate checks, and language constraints if reverted."
+        }
+      }
+    }
+  ],
+  "claim_gate_logic": {
+    "independent_measurement_check": {
+      "input_fields": [
+        "requested_level",
+        "independent_measurement.present",
+        "independent_measurement.count",
+        "evidence_registry.measurement_analysis"
+      ],
+      "rules": [
+        {
+          "if": "requested_level in ['C4','C5','C6'] AND independent_measurement.present == false",
+          "then": "downgrade"
+        },
+        {
+          "if": "requested_level == 'C4' AND independent_measurement.count < 1",
+          "then": "downgrade_to_C3"
+        },
+        {
+          "if": "requested_level == 'C5' AND independent_measurement.count < 1",
+          "then": "downgrade_to_C4"
+        },
+        {
+          "if": "requested_level == 'C6' AND independent_measurement.count < 2",
+          "then": "downgrade_to_C5"
+        }
+      ],
+      "pass_condition": "requested_level < C4 OR independent_measurement.count >= required_minimum_for_level"
+    }
+  }
+}
