@@ -103,6 +103,18 @@ PYBIND11_MODULE(dase_engine, m) {
     py::class_<AnalogCellularEngineAVX2>(m, "AnalogCellularEngineAVX2")
         .def(py::init<std::size_t>(), py::arg("num_nodes") = 1024)
         .def("run_mission", &AnalogCellularEngineAVX2::runMission)
+        .def("run_mission_optimized", [](AnalogCellularEngineAVX2& self, py::array_t<double> in, py::array_t<double> ctrl, uint64_t steps, uint32_t iters) {
+            self.runMissionOptimized(static_cast<const double*>(in.request().ptr), static_cast<const double*>(ctrl.request().ptr), steps, iters);
+        })
+        .def("run_mission_optimized_phase4b", [](AnalogCellularEngineAVX2& self, py::array_t<double> in, py::array_t<double> ctrl, uint64_t steps, uint32_t iters) {
+            self.runMissionOptimized_Phase4B(static_cast<const double*>(in.request().ptr), static_cast<const double*>(ctrl.request().ptr), steps, iters);
+        })
+        .def("run_mission_optimized_phase4c", [](AnalogCellularEngineAVX2& self, py::array_t<double> in, py::array_t<double> ctrl, uint64_t steps, uint32_t iters) {
+            self.runMissionOptimized_Phase4C(static_cast<const double*>(in.request().ptr), static_cast<const double*>(ctrl.request().ptr), steps, iters);
+        })
+        .def("run_mission_optimized_uhd770", [](AnalogCellularEngineAVX2& self, py::array_t<double> in, py::array_t<double> ctrl, uint64_t steps, uint32_t iters, bool drift) {
+            self.runMissionOptimized_UHD770(static_cast<const double*>(in.request().ptr), static_cast<const double*>(ctrl.request().ptr), steps, iters, drift);
+        }, py::arg("input_signals"), py::arg("control_patterns"), py::arg("num_steps"), py::arg("iterations_per_node") = 30, py::arg("run_cpu_drift_check") = true)
         .def("run_builtin_benchmark", &AnalogCellularEngineAVX2::runBuiltinBenchmark)
         .def("run_massive_benchmark", &AnalogCellularEngineAVX2::runMassiveBenchmark)
         .def("run_drag_race_benchmark", &AnalogCellularEngineAVX2::runDragRaceBenchmark)

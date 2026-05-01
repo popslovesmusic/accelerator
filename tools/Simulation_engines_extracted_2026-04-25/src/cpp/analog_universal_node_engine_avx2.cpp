@@ -884,9 +884,10 @@ void AnalogCellularEngineAVX2::runMissionOptimized(
 
     // Calculate metrics in bulk (not per operation) for Phase 4A
     metrics_.total_execution_time_ns = mission_duration.count();
-    metrics_.total_operations = num_steps * nodes.size() * iterations_per_node;
-    metrics_.node_processes = metrics_.total_operations;  // Same count
+    metrics_.total_operations = num_steps * nodes.size() * iterations_per_node * 12;
+    metrics_.node_processes = num_steps * nodes.size() * iterations_per_node;
     metrics_.update_performance();
+    metrics_.throughput_gflops = (double)metrics_.total_operations / (mission_duration.count());
 
     metrics_.print_metrics();
     std::cout << "=========================================" << std::endl;
@@ -960,9 +961,10 @@ void AnalogCellularEngineAVX2::runMissionOptimized_Phase4B(
     auto mission_duration = std::chrono::duration_cast<std::chrono::nanoseconds>(mission_end - mission_start);
 
     metrics_.total_execution_time_ns = mission_duration.count();
-    metrics_.total_operations = num_steps * nodes.size() * iterations_per_node;
-    metrics_.node_processes = metrics_.total_operations;
+    metrics_.total_operations = num_steps * nodes.size() * iterations_per_node * 12;
+    metrics_.node_processes = num_steps * nodes.size() * iterations_per_node;
     metrics_.update_performance();
+    metrics_.throughput_gflops = (double)metrics_.total_operations / (mission_duration.count());
 
     metrics_.print_metrics();
     std::cout << "=========================================" << std::endl;
@@ -1104,9 +1106,10 @@ void AnalogCellularEngineAVX2::runMissionOptimized_Phase4C(
     auto mission_duration = std::chrono::duration_cast<std::chrono::nanoseconds>(mission_end - mission_start);
 
     metrics_.total_execution_time_ns = mission_duration.count();
-    metrics_.total_operations = num_steps * nodes.size() * iterations_per_node;
-    metrics_.node_processes = metrics_.total_operations;
+    metrics_.total_operations = num_steps * nodes.size() * iterations_per_node * 12;
+    metrics_.node_processes = num_steps * nodes.size() * iterations_per_node;
     metrics_.update_performance();
+    metrics_.throughput_gflops = (double)metrics_.total_operations / (mission_duration.count());
 
     metrics_.print_metrics();
     std::cout << "=========================================" << std::endl;
