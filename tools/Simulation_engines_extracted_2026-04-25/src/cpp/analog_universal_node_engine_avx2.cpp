@@ -196,6 +196,57 @@ namespace AVX2Math {
         return _mm_cvtss_f32(sum) * 0.125f; // Divide by 8
     }
 
+    // --- SignalScope Phase Optimization (Phase 1) ---
+    
+    // Fast horizontal sum of 8 floats in __m256 (Shuffle-based, avoids slow hadd)
+    inline float hsum_avx2_fast(__m256 v) {
+        __m128 xhigh = _mm256_extractf128_ps(v, 1);
+        __m128 xlow = _mm256_castps256_ps128(v);
+        __m128 xsum = _mm_add_ps(xlow, xhigh);
+        __m128 xshuf = _mm_movehl_ps(xsum, xsum);
+        xsum = _mm_add_ps(xsum, xshuf);
+        xshuf = _mm_shuffle_ps(xsum, xsum, 0x1);
+        xsum = _mm_add_ps(xsum, xshuf);
+        return _mm_cvtss_f32(xsum);
+    }
+
+    void compute_phase_vector_optimized(const float* data_8, float* out_8) {
+        // data_8 layout: [W0, W1, W2, C, E, V0, V1, V2]
+        // Weights: [2.0, 2.0, 2.0, 1.5, 1.5, 2.0, 2.0, 2.0]
+        const __m256 weights = _mm256_set_ps(2.0f, 2.0f, 2.0f, 1.5f, 1.5f, 2.0f, 2.0f, 2.0f);
+        __m256 v = _mm256_load_ps(data_8);
+        v = _mm256_mul_ps(v, weights);
+        
+        // Normalize with fast rsqrt + Newton-Raphson refinement
+        __m256 v2 = _mm256_mul_ps(v, v);
+        float norm_sq = hsum_avx2_fast(v2);
+        
+        if (norm_sq > 1e-18f) {
+            __m256 norm_sq_vec = _mm256_set1_ps(norm_sq);
+            __m256 nr = _mm256_rsqrt_ps(norm_sq_vec);
+            // NR: y = y * (1.5 - 0.5 * x * y * y)
+            __m256 half = _mm256_set1_ps(0.5f);
+            __m256 one_five = _mm256_set1_ps(1.5f);
+            __m256 nr_sq = _mm256_mul_ps(nr, nr);
+            __m256 x_nr_sq = _mm256_mul_ps(norm_sq_vec, nr_sq);
+            __m256 correction = _mm256_sub_ps(one_five, _mm256_mul_ps(half, x_nr_sq));
+            __m256 inv_norm = _mm256_mul_ps(nr, correction);
+            v = _mm256_mul_ps(v, inv_norm);
+        }
+        _mm256_store_ps(out_8, v);
+    }
+
+    float phase_mismatch_optimized(const float* phi1, const float* phi2) {
+        __m256 v1 = _mm256_load_ps(phi1);
+        __m256 v2 = _mm256_load_ps(phi2);
+        __m256 vmul = _mm256_mul_ps(v1, v2); 
+        float dot = hsum_avx2_fast(vmul);
+        
+        if (dot > 1.0f) dot = 1.0f;
+        else if (dot < -1.0f) dot = -1.0f;
+        return 1.0f - dot;
+    }
+
 } // End AVX2Math namespace
 
 // AnalogUniversalNodeAVX2 Implementation
@@ -560,6 +611,175 @@ AnalogCellularEngineAVX2::AnalogCellularEngineAVX2(size_t num_nodes)
         nodes[i].y = static_cast<int16_t>((i / 10) % 10);
         nodes[i].z = static_cast<int16_t>(i / 100);
         nodes[i].node_id = static_cast<uint16_t>(i);
+    }
+    
+    // Phase 2: Integrated Buffers
+    phase_history.resize(64 * 8, 0.0f);
+    trace_segments.resize(128 * 8, 0.0f);
+    phase_continuation_initialized = false;
+}
+
+// -----------------------------------------------------------------------------
+// SignalScope Helpers (Phase 2)
+// -----------------------------------------------------------------------------
+namespace SignalScopeHelpers {
+    void compute_W_regional(const double* outputs, size_t n, float* W_out) {
+        if (n < 3) {
+            W_out[0] = 1.0f/3.0f; W_out[1] = 1.0f/3.0f; W_out[2] = 1.0f/3.0f;
+            return;
+        }
+        
+        size_t chunk_size = n / 3;
+        float regional_energy[3];
+        
+        for (int r = 0; r < 3; ++r) {
+            double sum_abs = 0.0;
+            size_t start = r * chunk_size;
+            size_t end = (r == 2) ? n : (r + 1) * chunk_size;
+            
+            for (size_t i = start; i < end; ++i) {
+                sum_abs += std::abs(outputs[i]);
+            }
+            regional_energy[r] = (float)(sum_abs / (end - start));
+        }
+        
+        float S = regional_energy[0] + regional_energy[1] + regional_energy[2];
+        if (S > 1e-9f) {
+            W_out[0] = regional_energy[0] / S;
+            W_out[1] = regional_energy[1] / S;
+            W_out[2] = regional_energy[2] / S;
+        } else {
+            W_out[0] = 1.0f/3.0f; W_out[1] = 1.0f/3.0f; W_out[2] = 1.0f/3.0f;
+        }
+    }
+
+    void compute_metrics_direct(const float* W_prev, const float* W, float& C, float& E, float* V) {
+        float max_w = std::max({W[0], W[1], W[2]});
+        float min_w = std::min({W[0], W[1], W[2]});
+        C = min_w / (max_w + 1e-12f);
+        
+        float e0 = W[0] - 1.0f/3.0f;
+        float e1 = W[1] - 1.0f/3.0f;
+        float e2 = W[2] - 1.0f/3.0f;
+        E = std::sqrt(e0*e0 + e1*e1 + e2*e2);
+        
+        V[0] = W[0] - W_prev[0];
+        V[1] = W[1] - W_prev[1];
+        V[2] = W[2] - W_prev[2];
+    }
+}
+
+void AnalogCellularEngineAVX2::runPhaseContinuationMissionAVX2(
+    const float* input_signals_stream,
+    float* output_phases_stream,
+    float* mismatches_stream,
+    uint64_t num_frames,
+    uint32_t engine_steps_per_frame,
+    bool use_eeg_input
+) {
+    if (!phase_continuation_initialized) {
+        for(int i=0; i<8; ++i) {
+            last_phi_oriented[i] = 0.0f;
+            last_phi_continued[i] = 0.0f;
+        }
+        phase_continuation_initialized = true;
+    }
+
+    for (uint64_t f = 0; f < num_frames; ++f) {
+        float input_scalar = 0.0f;
+        if (use_eeg_input) {
+            const float* frame_ptr = &input_signals_stream[f * 8];
+            float sum = 0.0f;
+            for(int i=0; i<8; ++i) sum += frame_ptr[i];
+            input_scalar = sum / 8.0f;
+        } else {
+            input_scalar = input_signals_stream[f];
+        }
+
+        // Engine Step - MUST match processSignalWaveAVX2 dynamics
+        double control_pattern = 1.0; 
+        for (uint32_t s = 0; s < engine_steps_per_frame; ++s) {
+            #pragma omp parallel for schedule(dynamic, 2)
+            for (int i = 0; i < (int)nodes.size(); ++i) {
+                for (int pass = 0; pass < 10; pass++) {
+                    double control = control_pattern + std::sin(static_cast<double>(i + pass) * 0.1) * 0.3;
+                    double aux_signal = (double)input_scalar * 0.5;
+
+                    alignas(32) float harmonics_result[8];
+                    AVX2Math::generate_harmonics_avx2(static_cast<float>(input_scalar),
+                                                     static_cast<float>(pass) * 0.1f, harmonics_result);
+
+                    for (int h = 0; h < 8; h++) {
+                        aux_signal += static_cast<double>(harmonics_result[h]);
+                    }
+
+                    nodes[i].processSignalAVX2(input_scalar, control, aux_signal);
+                }
+            }
+        }
+
+        // Scope Update
+        std::vector<double> node_outputs(nodes.size());
+        for(size_t i=0; i<nodes.size(); ++i) node_outputs[i] = nodes[i].getOutput();
+        
+        alignas(32) float current_W[3];
+        SignalScopeHelpers::compute_W_regional(node_outputs.data(), node_outputs.size(), current_W);
+        
+        float C, E;
+        alignas(32) float V[3];
+        SignalScopeHelpers::compute_metrics_direct(last_W_local, current_W, C, E, V);
+        for(int i=0; i<3; ++i) last_W_local[i] = current_W[i];
+
+        // Phase Vector
+        alignas(32) float phase_data[8];
+        phase_data[0] = current_W[0]; phase_data[1] = current_W[1]; phase_data[2] = current_W[2];
+        phase_data[3] = C; phase_data[4] = E;
+        phase_data[5] = V[0]; phase_data[6] = V[1]; phase_data[7] = V[2];
+        
+        alignas(32) float phi_actual[8];
+        AVX2Math::compute_phase_vector_optimized(phase_data, phi_actual);
+        
+        // Mismatch tracking
+        float mismatch = AVX2Math::phase_mismatch_optimized(last_phi_continued, phi_actual);
+        mismatches_stream[f] = mismatch;
+        for(int i=0; i<8; ++i) output_phases_stream[f*8 + i] = phi_actual[i];
+        
+        // History & Next Prediction
+        for(int i=0; i<8; ++i) phase_history[history_ptr * 8 + i] = phi_actual[i];
+        history_ptr = (history_ptr + 1) % 64;
+        if (history_count < 64) history_count++;
+
+        if (history_count >= 3) {
+            size_t p1 = (history_ptr + 64 - 1) % 64;
+            size_t p2 = (history_ptr + 64 - 2) % 64;
+            size_t p3 = (history_ptr + 64 - 3) % 64;
+            
+            alignas(32) float phi_curr[8], phi_p1[8], phi_p2[8];
+            for(int i=0; i<8; ++i) {
+                phi_curr[i] = phase_history[p1*8 + i];
+                phi_p1[i] = phase_history[p2*8 + i];
+                phi_p2[i] = phase_history[p3*8 + i];
+            }
+            
+            alignas(32) float v1[8], v2[8], curv[8], combined[8];
+            for(int i=0; i<8; ++i) {
+                v1[i] = phi_curr[i] - phi_p1[i];
+                v2[i] = phi_p1[i] - phi_p2[i];
+                curv[i] = v1[i] - v2[i];
+                combined[i] = phi_curr[i] + 1.15f * v1[i] + 0.35f * curv[i];
+            }
+            
+            __m256 v_comb = _mm256_load_ps(combined);
+            __m256 v2_comb = _mm256_mul_ps(v_comb, v_comb);
+            float nsq = AVX2Math::hsum_avx2_fast(v2_comb);
+            if (nsq > 1e-18f) {
+                float inv_n = 1.0f / std::sqrt(nsq);
+                v_comb = _mm256_mul_ps(v_comb, _mm256_set1_ps(inv_n));
+            }
+            _mm256_store_ps(last_phi_continued, v_comb);
+        } else {
+            for(int i=0; i<8; ++i) last_phi_continued[i] = phi_actual[i];
+        }
     }
 }
 
@@ -1273,6 +1493,14 @@ void AnalogCellularEngineAVX2::processBlockFrequencyDomain(std::vector<double>& 
     fftw_destroy_plan(p_inv);
     fftw_free(in);
     fftw_free(out);
+}
+
+std::vector<double> AnalogCellularEngineAVX2::getNodeOutputs() const {
+    std::vector<double> outputs(nodes.size());
+    for (size_t i = 0; i < nodes.size(); ++i) {
+        outputs[i] = nodes[i].getOutput();
+    }
+    return outputs;
 }
 
 EngineMetrics AnalogCellularEngineAVX2::getMetrics() const noexcept {

@@ -250,7 +250,36 @@ public:
     void printLiveMetrics();
     void resetMetrics();
     double generateNoiseSignal();
+    std::vector<double> getNodeOutputs() const;
+
+    // Integrated Phase Continuation (Optimization Phase 2)
+    void runPhaseContinuationMissionAVX2(
+        const float* input_signals_stream, // [num_frames * 8] or [num_frames]
+        float* output_phases_stream,       // [num_frames * 8]
+        float* mismatches_stream,          // [num_frames]
+        uint64_t num_frames,
+        uint32_t engine_steps_per_frame,
+        bool use_eeg_input = false         // if true, input_signals_stream is [num_frames * 8]
+    );
 
     // Metrics access
     EngineMetrics getMetrics() const noexcept;
+
+private:
+    // Integrated Phase Continuation State
+    alignas(32) float last_phi_oriented[8];
+    alignas(32) float last_phi_continued[8];
+    bool phase_continuation_initialized = false;
+
+    // Buffers for full integration (Phase 2)
+    std::vector<float> phase_history; // ring buffer [size * 8]
+    std::vector<float> trace_segments; // ring buffer [size * 8]
+    size_t history_ptr = 0;
+    size_t trace_ptr = 0;
+    size_t history_count = 0;
+    size_t trace_count = 0;
+
+    float running_mismatch_mean = 0.015f;
+    float last_W_local[3] = {1.0f/3.0f, 1.0f/3.0f, 1.0f/3.0f};
+    float last_W_global[3] = {1.0f/3.0f, 1.0f/3.0f, 1.0f/3.0f};
 };

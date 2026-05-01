@@ -1,9 +1,18 @@
 import numpy as np
+import os
+import sys
+
+# Windows DLL loading for dependencies (FFTW3, etc.)
+if sys.platform == "win32":
+    engine_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "Simulation_engines_extracted_2026-04-25"))
+    if os.path.exists(engine_root):
+        os.add_dll_directory(engine_root)
+
 try:
-    import engine_bridge
+    import dase_engine as engine_bridge
 except ImportError:
     engine_bridge = None
-    print("Warning: engine_bridge.so/pyd not found. Native AVX2 engine will be unavailable.")
+    print("Warning: dase_engine.so/pyd not found. Native AVX2 engine will be unavailable.")
 
 class EngineBridge:
     def __init__(self, num_nodes=100):
@@ -19,8 +28,8 @@ class EngineBridge:
         Processes one step of the engine.
         """
         if self.engine:
-            # We use processSignalWaveAVX2 as a single step proxy if runMission is too large
-            return self.engine.processSignalWaveAVX2(input_signal, control_pattern)
+            # We use process_signal_wave_avx2 as a single step proxy if runMission is too large
+            return self.engine.process_signal_wave_avx2(input_signal, control_pattern)
         else:
             # Dummy dynamics: leaky integrator + noise
             self.dummy_outputs = 0.9 * self.dummy_outputs + 0.1 * input_signal + np.random.normal(0, 0.01, self.num_nodes)
@@ -37,7 +46,7 @@ class EngineBridge:
 
     def get_node_outputs(self):
         if self.engine:
-            return np.array(self.engine.getNodeOutputs())
+            return np.array(self.engine.get_node_outputs())
         return self.dummy_outputs
 
     def get_node_states(self):

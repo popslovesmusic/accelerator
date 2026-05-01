@@ -111,9 +111,48 @@ PYBIND11_MODULE(dase_engine, m) {
         .def("process_block_frequency_domain", &AnalogCellularEngineAVX2::processBlockFrequencyDomain)
         .def("calculate_inter_node_coupling", &AnalogCellularEngineAVX2::calculateInterNodeCoupling)
         .def("generate_noise_signal", &AnalogCellularEngineAVX2::generateNoiseSignal)
+        .def("get_node_outputs", &AnalogCellularEngineAVX2::getNodeOutputs)
         .def("get_metrics", &AnalogCellularEngineAVX2::getMetrics)
         .def("print_live_metrics", &AnalogCellularEngineAVX2::printLiveMetrics)
-        .def("reset_metrics", &AnalogCellularEngineAVX2::resetMetrics);
+        .def("reset_metrics", &AnalogCellularEngineAVX2::resetMetrics)
+        // --- Integrated Phase Continuation Mission (Phase 2) ---
+        .def("run_phase_continuation_mission_avx2", [](AnalogCellularEngineAVX2& self,
+                                                     py::array_t<float> input_stream,
+                                                     uint32_t engine_steps_per_frame,
+                                                     bool use_eeg_input) {
+            py::buffer_info in_buf = input_stream.request();
+            
+            uint64_t num_frames = 0;
+            if (use_eeg_input) {
+                if (in_buf.ndim != 2 || in_buf.shape[1] != 8) {
+                    throw std::runtime_error("EEG input must be 2D array [frames, 8]");
+                }
+                num_frames = static_cast<uint64_t>(in_buf.shape[0]);
+            } else {
+                if (in_buf.ndim != 1) {
+                    throw std::runtime_error("Scalar input must be 1D array [frames]");
+                }
+                num_frames = static_cast<uint64_t>(in_buf.shape[0]);
+            }
+            
+            py::array_t<float> output_phases({num_frames, (uint64_t)8});
+            py::array_t<float> mismatches(num_frames);
+            
+            py::buffer_info out_phi_buf = output_phases.request();
+            py::buffer_info mis_buf = mismatches.request();
+            
+            self.runPhaseContinuationMissionAVX2(
+                static_cast<float*>(in_buf.ptr),
+                static_cast<float*>(out_phi_buf.ptr),
+                static_cast<float*>(mis_buf.ptr),
+                num_frames,
+                engine_steps_per_frame,
+                use_eeg_input
+            );
+            
+            return py::make_tuple(output_phases, mismatches);
+        }, py::arg("input_stream"), py::arg("engine_steps_per_frame") = 20, py::arg("use_eeg_input") = false,
+           "Run integrated SignalScope mission with zero Python loop overhead");
 
     // ------------------------------------------------------------------------
     //  Benchmark Helper
