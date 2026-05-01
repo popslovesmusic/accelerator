@@ -224,12 +224,10 @@ class MultiSimRunner:
             seed_arg = job["args"]["seed_arg"]
             cmd += f" {seed_arg} {job['seed']}"
 
-        # Add remaining args as --key value
-        for k, v in job.get("args", {}).items():
-            if k == "seed_arg": continue
-            placeholder = f"{{{k}}}"
-            if placeholder not in cmd_template: # only append if not already injected
-                cmd += f" --{k} {v}"
+        # C4 Enhancement: Do NOT automatically append args as --key value.
+        # They are already injected into the config file in execute_job,
+        # or replaced as placeholders above. 
+        # This prevents "unrecognized arguments" errors in governed tools.
             
         return cmd
 
@@ -264,12 +262,24 @@ class MultiSimRunner:
         out_dir.mkdir(parents=True, exist_ok=True)
         
         job_config = job["config"]
-        # C4 Enhancement: Auto-inject seed into config if no CLI seed_arg is specified
-        if job["seed"] is not None and "seed_arg" not in job.get("args", {}):
+        # C4 Enhancement: Auto-inject seed and other args into config if no CLI placeholders are specified
+        if job["seed"] is not None or job.get("args"):
             try:
                 with open(job_config, 'r') as f:
                     cdata = json.load(f)
-                cdata["seed"] = job["seed"]
+                
+                if job["seed"] is not None:
+                    cdata["seed"] = job["seed"]
+                
+                # Also inject all args from the job definition
+                # But only if they aren't explicitly in the CLI template (to avoid duplication if tool reads both)
+                tool = self.tools[job["tool"]]
+                cmd_template = tool["cli_command"]
+                for k, v in job.get("args", {}).items():
+                    if k == "seed_arg": continue
+                    placeholder = f"{{{k}}}"
+                    if placeholder not in cmd_template:
+                        cdata[k] = v
                 
                 new_config_path = out_dir / "config_seeded.json"
                 with open(new_config_path, 'w') as f:
@@ -280,7 +290,7 @@ class MultiSimRunner:
                 job["config"] = str(new_config_path)
                 job_config = str(new_config_path)
             except Exception as e:
-                log(f"Failed to inject seed into config: {e}", "WARNING")
+                log(f"Failed to inject args into config: {e}", "WARNING")
 
         cmd = self.resolve_command(job)
         

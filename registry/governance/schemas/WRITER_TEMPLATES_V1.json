@@ -1,0 +1,192 @@
+{
+  "template_system_id": "WRITER_TEMPLATES_V1",
+  "version": "1.0",
+  "description": "Unified template system for TECH_WRITER and ZENODO_PUBLICATION_WRITER with strict governance enforcement",
+  "global_rules": {
+    "mandatory_prefix_for_conclusion": "Within these models,",
+    "no_section_skip_allowed": true,
+    "missing_section_action": "block_or_downgrade",
+    "template_selected_by_claim_level": true
+  },
+  "templates": {
+    "C3_supported": {
+      "description": "Two mechanisms + UQ + falsification",
+      "required_sections": [
+        "metadata",
+        "abstract",
+        "theoretical_mapping",
+        "experimental_setup",
+        "observables",
+        "results_by_mechanism",
+        "cross_mechanism_comparison",
+        "falsification",
+        "artifact_analysis",
+        "classification",
+        "conclusion",
+        "next_steps"
+      ]
+    },
+    "C4_measurement_required": {
+      "description": "C3 + independent measurement layer",
+      "required_sections": [
+        "metadata",
+        "abstract",
+        "theoretical_mapping",
+        "experimental_setup",
+        "observables",
+        "results_by_mechanism",
+        "independent_measurement_layer",
+        "measurement_results",
+        "cross_mechanism_comparison",
+        "falsification",
+        "artifact_analysis",
+        "classification",
+        "conclusion",
+        "next_steps"
+      ]
+    },
+    "C5_replicated": {
+      "description": "Multi-mechanism + measurement + replication",
+      "required_sections": [
+        "metadata",
+        "abstract",
+        "theoretical_mapping",
+        "experimental_setup",
+        "observables",
+        "results_by_mechanism",
+        "independent_measurement_layer",
+        "measurement_results",
+        "cross_mechanism_comparison",
+        "falsification",
+        "artifact_analysis",
+        "classification",
+        "conclusion",
+        "next_steps"
+      ]
+    },
+    "ZENODO_PUBLICATION": {
+      "description": "Publication-ready version with governance disclosure",
+      "required_sections": [
+        "title",
+        "author_statement",
+        "abstract",
+        "governance_summary",
+        "claim_status",
+        "theoretical_background",
+        "canonical_term_mapping",
+        "methods",
+        "models_and_tools",
+        "independent_mechanisms",
+        "independent_measurement_layer",
+        "observables",
+        "results",
+        "cross_mechanism_comparison",
+        "falsification",
+        "artifact_analysis",
+        "limits_and_scope",
+        "conclusion",
+        "data_and_code_availability",
+        "claim_registry_entry",
+        "evidence_registry_links",
+        "lexicon_compliance_statement"
+      ]
+    }
+  },
+  "section_definitions": {
+    "independent_measurement_layer": {
+      "must_include": [
+        "measurement_tool",
+        "measurement_class",
+        "input_sources",
+        "observables_measured",
+        "method_summary"
+      ],
+      "failure_conditions": [
+        "missing_tool",
+        "missing_observables",
+        "no_input_sources"
+      ]
+    },
+    "measurement_results": {
+      "must_include": [
+        "quantitative_results",
+        "comparison_to_dynamics",
+        "interpretation"
+      ],
+      "failure_conditions": [
+        "no_results",
+        "no_link_to_claim",
+        "no_difference_from_dynamics"
+      ]
+    },
+    "observables": {
+      "must_include": [
+        "observable_name",
+        "definition",
+        "mapping_to_mechanism"
+      ],
+      "failure_conditions": [
+        "undefined_observable",
+        "no_mapping"
+      ]
+    },
+    "falsification": {
+      "must_include": [
+        "tests_run",
+        "adversarial_conditions",
+        "result"
+      ],
+      "failure_conditions": [
+        "missing_vectors",
+        "non_adversarial_tests"
+      ]
+    },
+    "classification": {
+      "must_include": [
+        "final_level",
+        "final_classification",
+        "justification"
+      ]
+    }
+  },
+  "validation_engine": {
+    "checks": [
+      {
+        "name": "measurement_section_required_for_C4",
+        "logic": "if claim_level >= C4 AND independent_measurement_layer missing → downgrade"
+      },
+      {
+        "name": "measurement_results_required",
+        "logic": "if measurement declared AND measurement_results missing → invalidate_measurement"
+      },
+      {
+        "name": "section_completeness",
+        "logic": "all required sections must exist"
+      },
+      {
+        "name": "language_policy",
+        "logic": "enforce allowed language based on claim level"
+      }
+    ],
+    "outputs": [
+      "section_validation_report",
+      "missing_sections",
+      "downgrade_actions",
+      "blocking_errors"
+    ]
+  },
+  "agent_integration": {
+    "TECH_WRITER": [
+      "Select template based on claim level",
+      "Populate all required sections",
+      "Do not invent missing sections",
+      "If missing inputs, return failure instead of guessing"
+    ],
+    "ZENODO_PUBLICATION_WRITER": [
+      "Use ZENODO_PUBLICATION template",
+      "Map internal sections to publication format",
+      "Include governance disclosure sections",
+      "Do not upgrade claim status"
+    ]
+  }
+}

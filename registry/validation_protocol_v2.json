@@ -42,7 +42,7 @@
       }
     },
     "independent_measurement_requirement": {
-      "version": "1.0",
+      "version": "1.1",
       "required_for_claim_levels": [
         "C4",
         "C5",
@@ -61,13 +61,22 @@
         "bifurcation_analyzer",
         "measurement"
       ],
-      "rule": "A claim may not be promoted to C4 or higher unless at least one independent measurement layer confirms the claimed structure or regime distinction.",
+      "rule": "Independent measurement is REQUIRED for any claim at C4 or higher. A claim may not be promoted unless at least one independent measurement layer confirms the structure or regime distinction.",
       "failure_action": "automatic_downgrade",
       "downgrade_targets": {
         "C4": "C3_single_mechanism_supported",
         "C5": "C4_dual_mechanism_supported",
         "C6": "C5_replicated"
       }
+    },
+    "cpp_preference_policy": {
+      "rule": "When both C++ and Python tools exist for the same model class, C++ MUST be selected for production and high-rigor runs.",
+      "preference_order": [
+        "C++ (native / AVX2 / SYCL)",
+        "Hybrid (C++ backend + Python interface)",
+        "Python (only if no C++ exists)"
+      ],
+      "enforcement": "Python usage for C4+ claims requires explicit justification and flags a governance warning."
     }
   }
 }

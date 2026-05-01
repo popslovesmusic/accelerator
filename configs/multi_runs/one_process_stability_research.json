@@ -1,0 +1,81 @@
+{
+  "run_id": "research_one_process_stability_2026-05-01",
+  "mode": "parallel",
+  "output_root": "outputs/runs/research_one_process_stability_2026-05-01",
+  "execution": {
+    "max_workers": 4,
+    "timeout_seconds": 600
+  },
+  "governance": {
+    "require_tool_certification": true,
+    "require_validation_dir": true,
+    "stop_on_failure": false,
+    "dry_run_first": true
+  },
+  "jobs": [
+    {
+      "job_id": "ca_low_residue",
+      "tool": "ca_admissibility_sim_v1",
+      "config": "configs/examples/ca_one_process_base.json",
+      "seeds": [1, 2, 3],
+      "args": { "residue_growth": 0.01 },
+      "claim_role": "theorist"
+    },
+    {
+      "job_id": "ca_mid_residue",
+      "tool": "ca_admissibility_sim_v1",
+      "config": "configs/examples/ca_one_process_base.json",
+      "seeds": [1, 2, 3],
+      "args": { "residue_growth": 0.05 },
+      "claim_role": "theorist"
+    },
+    {
+      "job_id": "ca_high_residue",
+      "tool": "ca_admissibility_sim_v1",
+      "config": "configs/examples/ca_one_process_base.json",
+      "seeds": [1, 2, 3],
+      "args": { "residue_growth": 0.1 },
+      "claim_role": "theorist"
+    },
+    {
+      "job_id": "ca_fv3_no_residue",
+      "tool": "ca_admissibility_sim_v1",
+      "config": "configs/examples/ca_one_process_base.json",
+      "seeds": [1, 2, 3],
+      "args": { "residue_growth": 0.0 },
+      "claim_role": "falsification"
+    },
+    {
+      "job_id": "abm_low_mismatch",
+      "tool": "agent_based_sim_v1",
+      "config": "configs/examples/abm_one_process_base.json",
+      "seeds": [1, 2, 3],
+      "args": { "mismatch_rate": 0.01 },
+      "claim_role": "theorist"
+    },
+    {
+      "job_id": "abm_mid_mismatch",
+      "tool": "agent_based_sim_v1",
+      "config": "configs/examples/abm_one_process_base.json",
+      "seeds": [1, 2, 3],
+      "args": { "mismatch_rate": 0.05 },
+      "claim_role": "theorist"
+    },
+    {
+      "job_id": "abm_high_mismatch",
+      "tool": "agent_based_sim_v1",
+      "config": "configs/examples/abm_one_process_base.json",
+      "seeds": [1, 2, 3],
+      "args": { "mismatch_rate": 0.1 },
+      "claim_role": "theorist"
+    },
+    {
+      "job_id": "abm_fv3_no_kappa",
+      "tool": "agent_based_sim_v1",
+      "config": "configs/examples/abm_one_process_base.json",
+      "seeds": [1, 2, 3],
+      "args": { "kappa": 0.0 },
+      "claim_role": "falsification"
+    }
+  ]
+}

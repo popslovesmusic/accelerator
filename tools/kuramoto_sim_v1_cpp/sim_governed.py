@@ -12,7 +12,7 @@ def run():
     
     os.makedirs(args.out, exist_ok=True)
     
-    exe_path = os.path.abspath(r"tools\kuramoto_sim_v1_cpp\kuramoto_sim.exe")
+    exe_path = os.path.abspath(r"tools\kuramoto_sim_v1_cpp\kuramoto_benchmark.exe")
     config_path = os.path.abspath(args.config)
     out_dir = os.path.abspath(args.out)
     

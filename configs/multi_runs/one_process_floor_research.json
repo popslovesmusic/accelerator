@@ -1,0 +1,49 @@
+{
+  "run_id": "research_floor_convergence_2026-05-01",
+  "mode": "parallel",
+  "output_root": "outputs/runs/research_floor_convergence_2026-05-01",
+  "execution": {
+    "max_workers": 4,
+    "timeout_seconds": 600
+  },
+  "governance": {
+    "require_tool_certification": true,
+    "require_validation_dir": true,
+    "stop_on_failure": false,
+    "dry_run_first": true
+  },
+  "jobs": [
+    {
+      "job_id": "ca_extreme_suppression",
+      "tool": "ca_admissibility_sim_v1",
+      "config": "configs/examples/ca_one_process_base.json",
+      "seeds": [1, 2, 3],
+      "args": { "source_strength": 0.1, "diffusion_rate": 0.5, "residue_growth": 0.1 },
+      "claim_role": "theorist"
+    },
+    {
+      "job_id": "ca_extreme_suppression_fv3",
+      "tool": "ca_admissibility_sim_v1",
+      "config": "configs/examples/ca_one_process_base.json",
+      "seeds": [1, 2, 3],
+      "args": { "source_strength": 0.1, "diffusion_rate": 0.5, "residue_growth": 0.0 },
+      "claim_role": "falsification"
+    },
+    {
+      "job_id": "pde_extreme_suppression",
+      "tool": "structural_box_sim_v2",
+      "config": "configs/examples/pde_floor_base.json",
+      "seeds": [10, 11, 12],
+      "args": { },
+      "claim_role": "theorist"
+    },
+    {
+      "job_id": "pde_extreme_suppression_fv3",
+      "tool": "structural_box_sim_v2",
+      "config": "configs/examples/pde_floor_base.json",
+      "seeds": [10, 11, 12],
+      "args": { },
+      "claim_role": "falsification"
+    }
+  ]
+}

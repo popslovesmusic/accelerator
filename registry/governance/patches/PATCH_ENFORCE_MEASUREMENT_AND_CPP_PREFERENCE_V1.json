@@ -1,0 +1,123 @@
+{
+  "patch_id": "PATCH_ENFORCE_MEASUREMENT_AND_CPP_PREFERENCE_V1",
+  "title": "Enforce Independent Measurement and Prefer C++ Toolchain",
+  "type": "governance_patch",
+  "created_at": "2026-05-01",
+  "created_by": "assistant",
+  "targets": [
+    "registry/validation_protocol_v2.json",
+    "registry/claim_registry.json",
+    "registry/evidence_registry.json",
+    "AGENTS.md",
+    "registry/governance_rule_archival.json"
+  ],
+  "status": "applied",
+  "summary": "Enforces structural validation (measurement) and computational rigor (C++ preference).",
+  "changes": {
+    "validation_protocol_v2": {
+      "independent_measurement_enforcement": {
+        "rule": "Independent measurement is REQUIRED for any claim at C4 or higher.",
+        "minimum_measurements": {
+          "C4": 1,
+          "C5": 1,
+          "C6": 2
+        },
+        "failure_action": "downgrade",
+        "downgrade_targets": {
+          "C4": "C3",
+          "C5": "C4",
+          "C6": "C5"
+        }
+      }
+    },
+    "claim_gate": {
+      "new_checks": [
+        {
+          "name": "independent_measurement_check",
+          "logic": [
+            "if requested_level >= C4 AND independent_measurement_count < 1 → downgrade_to_C3",
+            "if requested_level >= C5 AND independent_measurement_count < 1 → downgrade_to_C4"
+          ],
+          "required_fields": [
+            "independent_measurement_count",
+            "measurement_evidence_ids"
+          ]
+        },
+        {
+          "name": "cpp_preference_check",
+          "logic": [
+            "if cpp_tool_available_for_model_class == true AND selected_tool_language == 'python' → flag_warning",
+            "if strict_mode == true AND cpp_tool_available_for_model_class == true AND selected_tool_language == 'python' → downgrade_confidence"
+          ],
+          "effect": [
+            "adds governance warning",
+            "reduces certification confidence",
+            "requires justification note"
+          ]
+        }
+      ]
+    },
+    "claim_registry_extension": {
+      "fields": {
+        "independent_measurement_count": 0,
+        "measurement_evidence_ids": [],
+        "cpp_tools_used": [],
+        "python_tools_used": [],
+        "cpp_preference_violation": false
+      }
+    },
+    "evidence_registry_extension": {
+      "fields": {
+        "implementation_language": "cpp | python",
+        "is_preferred_backend": false,
+        "cpp_equivalent_available": false
+      }
+    },
+    "agents_md_updates": {
+      "SIM_DESIGNER": [
+        "For any intended claim level C4 or higher, MUST include at least one independent measurement tool.",
+        "When both C++ and Python tools exist for the same model class, MUST select C++ unless explicitly justified.",
+        "If Python is used when C++ is available, must log justification in run metadata.",
+        "Prefer C++ tools for all production, validation, and high-rigor runs."
+      ],
+      "EXECUTOR": [
+        "Record implementation_language for each tool execution.",
+        "Record whether a C++ equivalent tool was available."
+      ],
+      "GOVERNANCE_CHECK": [
+        "Verify independent measurement presence for any claim at C4 or higher.",
+        "If missing, downgrade claim automatically.",
+        "Verify measurement evidence is linked and uses mechanism_class='measurement'.",
+        "Check if Python tools were used when C++ equivalents exist.",
+        "If violation detected, flag cpp_preference_violation = true.",
+        "If strict_mode is enabled, reduce claim confidence or block promotion.",
+        "Require explicit justification for any Python usage when C++ exists."
+      ]
+    },
+    "tool_selection_policy": {
+      "preference_order": [
+        "C++ (native / AVX2 / SYCL)",
+        "Hybrid (C++ backend + Python interface)",
+        "Python (only if no C++ exists)"
+      ],
+      "rules": [
+        "C++ tools are REQUIRED for C4+ claims unless unavailable.",
+        "Python-only execution is allowed for exploratory or L0–L2 runs.",
+        "Python usage in C4+ must include justification and be flagged."
+      ]
+    },
+    "warnings_and_flags": {
+      "cpp_preference_violation": {
+        "trigger": "Python tool used when C++ equivalent exists",
+        "severity": "medium",
+        "effect": "confidence reduction, governance warning"
+      },
+      "missing_measurement": {
+        "trigger": "C4+ claim without independent measurement",
+        "severity": "critical",
+        "effect": "automatic downgrade"
+      }
+    }
+  },
+  "rollback_notes": "Remove claim_gate checks and tool selection policy entries."
+}

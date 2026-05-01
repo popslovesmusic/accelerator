@@ -450,6 +450,10 @@ Before running any experiment:
 - Read each selected tool’s `tools/<tool_name>/validation/certification_manifest.json` if present.
 - If missing, treat the tool as uncertified unless other recoverable validation evidence is provided.
 - Confirm the tool’s certification level is sufficient for the intended claim type.
+- **SIM_DESIGNER:** For any intended claim level C4 or higher, MUST include at least one independent measurement tool.
+- **SIM_DESIGNER:** When both C++ and Python tools exist for the same model class, MUST select C++ unless explicitly justified.
+- **SIM_DESIGNER:** If Python is used when C++ is available, must log justification in run metadata.
+- **SIM_DESIGNER:** Prefer C++ tools for all production, validation, and high-rigor runs.
 - Reject, downgrade, or mark exploratory any tool without required validation artifacts.
 - Log tool certification level in experiment metadata.
 
@@ -458,6 +462,8 @@ Before running any experiment:
 - Select tools via the decision tree.
 - Create new configs; do not overwrite defaults.
 - Run simulations.
+- **EXECUTOR:** Record implementation_language (cpp | python) for each tool execution.
+- **EXECUTOR:** Record whether a C++ equivalent tool was available.
 - Collect metrics and output paths.
 
 ### 10.7 Verify
@@ -475,11 +481,21 @@ Run before final conclusions:
 - Apply scientific validity limits.
 - Apply lexicon validation limits.
 - Apply compliance charter provenance rules.
+- **GOVERNANCE_CHECK:** Verify independent measurement presence for any claim at C4 or higher; downgrade if missing.
+- **GOVERNANCE_CHECK:** Verify measurement evidence is linked and uses mechanism_class='measurement'.
+- **GOVERNANCE_CHECK:** Check if Python tools were used when C++ equivalents exist; flag `cpp_preference_violation = true` if detected.
+- **GOVERNANCE_CHECK:** If strict_mode is enabled, reduce claim confidence or block promotion for C++ preference violations.
+- **GOVERNANCE_CHECK:** Require explicit justification for any Python usage when C++ exists.
 - Downgrade claim classification if any check fails.
 - Include gate result in final report metadata.
 
 ### 10.9 Write
 
+- **RESEARCH_WRITER:** MUST select the appropriate template from `registry/governance/schemas/WRITER_TEMPLATES_V1.json` based on the assigned claim level (C3, C4, C5).
+- **RESEARCH_WRITER:** MUST populate all required sections defined in the template. Missing sections block finalization.
+- **RESEARCH_WRITER:** MUST NOT invent or guess missing data. If inputs are insufficient for a required section, return a governance failure.
+- **RESEARCH_WRITER:** MUST adhere to the mandatory conclusion prefix: "Within these models,".
+- **RESEARCH_WRITER:** For publication-ready outputs, MUST use the `ZENODO_PUBLICATION` template and include all required governance disclosure sections.
 - Use the mandatory technical paper template.
 - Follow governance rules.
 - Apply compliance charter checks before finalizing output.
@@ -877,3 +893,21 @@ The agent MUST:
 - run falsification before Supported claims,
 - document uncertainty and artifact risk,
 - save all research program outputs in a new dedicated directory.
+
+---
+
+## 18. Tool Selection Policy
+
+### 18.1 Preference Order
+1. **C++ (native / AVX2 / SYCL)**
+2. **Hybrid (C++ backend + Python interface)**
+3. **Python (only if no C++ exists)**
+
+### 18.2 Selection Rules
+- **C++ tools are REQUIRED for C4+ claims unless unavailable.**
+- **Python-only execution is allowed for exploratory or L0–L2 runs.**
+- **Python usage in C4+ must include justification and be flagged with `cpp_preference_violation`.**
+
+### 18.3 Governance Flags
+- **`cpp_preference_violation`**: Triggered when a Python tool is used when a C++ equivalent exists. Severity: medium. Effect: confidence reduction, governance warning.
+- **`missing_measurement`**: Triggered when a C4+ claim is presented without independent measurement. Severity: critical. Effect: automatic downgrade.

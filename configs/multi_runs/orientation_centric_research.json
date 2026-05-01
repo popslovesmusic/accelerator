@@ -1,0 +1,89 @@
+{
+  "run_id": "orientation_centric_emergence_2026-05-01",
+  "mode": "parallel",
+  "output_root": "outputs/runs/orientation_centric_emergence_2026-05-01",
+  "execution": {
+    "max_workers": 4,
+    "timeout_seconds": 1800
+  },
+  "governance": {
+    "require_tool_certification": false,
+    "require_validation_dir": false,
+    "stop_on_failure": false,
+    "dry_run_first": false
+  },
+  "jobs": [
+    {
+      "job_id": "agent_low_coupling",
+      "tool": "agent_based_sim_v1_cpp",
+      "config": "configs/examples/agent_cpp_base.json",
+      "seeds": [101, 102, 103],
+      "args": { "K_phi": 0.1 },
+      "claim_role": "theorist"
+    },
+    {
+      "job_id": "agent_mid_coupling",
+      "tool": "agent_based_sim_v1_cpp",
+      "config": "configs/examples/agent_cpp_base.json",
+      "seeds": [101, 102, 103],
+      "args": { "K_phi": 0.5 },
+      "claim_role": "theorist"
+    },
+    {
+      "job_id": "agent_high_coupling",
+      "tool": "agent_based_sim_v1_cpp",
+      "config": "configs/examples/agent_cpp_base.json",
+      "seeds": [101, 102, 103],
+      "args": { "K_phi": 2.0 },
+      "claim_role": "theorist"
+    },
+    {
+      "job_id": "kuramoto_low_coupling",
+      "tool": "kuramoto_sim_v1_cpp",
+      "config": "configs/examples/kuramoto_cpp_base.json",
+      "seeds": [201, 202, 203],
+      "args": { "K": 0.1 },
+      "claim_role": "theorist"
+    },
+    {
+      "job_id": "kuramoto_mid_coupling",
+      "tool": "kuramoto_sim_v1_cpp",
+      "config": "configs/examples/kuramoto_cpp_base.json",
+      "seeds": [201, 202, 203],
+      "args": { "K": 0.5 },
+      "claim_role": "theorist"
+    },
+    {
+      "job_id": "kuramoto_high_coupling",
+      "tool": "kuramoto_sim_v1_cpp",
+      "config": "configs/examples/kuramoto_cpp_base.json",
+      "seeds": [201, 202, 203],
+      "args": { "K": 2.0 },
+      "claim_role": "theorist"
+    },
+    {
+      "job_id": "agent_fv2_ablated_coupling",
+      "tool": "agent_based_sim_v1_cpp",
+      "config": "configs/examples/agent_cpp_base.json",
+      "seeds": [101, 102, 103],
+      "args": { "K_phi": 0.0 },
+      "claim_role": "falsification"
+    },
+    {
+      "job_id": "kuramoto_fv2_ablated_coupling",
+      "tool": "kuramoto_sim_v1_cpp",
+      "config": "configs/examples/kuramoto_cpp_base.json",
+      "seeds": [201, 202, 203],
+      "args": { "K": 0.0 },
+      "claim_role": "falsification"
+    },
+    {
+      "job_id": "python_comparison_high_coupling",
+      "tool": "agent_based_sim_v1",
+      "config": "configs/examples/agent_cpp_base.json",
+      "seeds": [101],
+      "args": { "K_phi": 2.0 },
+      "claim_role": "theorist"
+    }
+  ]
+}
