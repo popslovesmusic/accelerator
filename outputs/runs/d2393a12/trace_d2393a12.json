@@ -1,0 +1,117 @@
+{
+  "run_id": "d2393a12",
+  "start_time": "2026-05-01T10:59:16.476617",
+  "entries": [
+    {
+      "timestamp": "2026-05-01T10:59:16.478396",
+      "component": "template_validator",
+      "action": "validate",
+      "status": "success",
+      "details": {
+        "missing_sections": [],
+        "invalid_sections": []
+      }
+    },
+    {
+      "timestamp": "2026-05-01T10:59:16.478891",
+      "component": "consistency_validator",
+      "action": "validate",
+      "status": "failed",
+      "details": {
+        "mismatches": [
+          "Measurement count mismatch: metadata=1, body=0"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-05-01T10:59:16.479151",
+      "component": "lexicon_validator",
+      "action": "lexicon_in_check",
+      "status": "complete",
+      "details": {
+        "input_terms": [],
+        "results": {
+          "valid": [],
+          "missing": [],
+          "aliases": {}
+        }
+      }
+    },
+    {
+      "timestamp": "2026-05-01T10:59:16.479368",
+      "component": "measurement_validator",
+      "action": "validate",
+      "status": "failed",
+      "details": {
+        "target_level": "C4",
+        "required": 1,
+        "found": 0,
+        "measurement_section_present": false,
+        "valid_measurements": [],
+        "reasons": [
+          "Measurement section missing from paper body."
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-05-01T10:59:16.479566",
+      "component": "falsification_validator",
+      "action": "validate",
+      "status": "failed",
+      "details": {
+        "vectors_present": [],
+        "vectors_missing": [
+          "FV-1",
+          "FV-2",
+          "FV-3",
+          "FV-4"
+        ],
+        "reasons": [
+          "No valid falsification vectors found."
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-05-01T10:59:16.479752",
+      "component": "cpp_preference_validator",
+      "action": "validate",
+      "status": "success",
+      "details": {
+        "target_level": "C4",
+        "violations": []
+      }
+    },
+    {
+      "timestamp": "2026-05-01T10:59:16.479950",
+      "component": "claim_gate",
+      "action": "process_claim",
+      "status": "block",
+      "details": {
+        "claim_id": "CLAIM-d2393a12",
+        "results": {
+          "claim_id": "CLAIM-d2393a12",
+          "requested_level": "C4",
+          "final_level": "C3",
+          "gate_result": "block",
+          "checks": {
+            "template_pass": true,
+            "lexicon_pass": true,
+            "measurement_pass": false,
+            "cpp_preference_pass": true,
+            "falsification_pass": false,
+            "consistency_pass": false,
+            "language_policy_pass": true
+          },
+          "downgrades_applied": [
+            "Insufficient independent measurements for requested level.",
+            "Falsification check failed."
+          ],
+          "blocked_reasons": [
+            "Measurement count mismatch: metadata=1, body=0"
+          ],
+          "intent": "validate"
+        }
+      }
+    }
+  ]
+}

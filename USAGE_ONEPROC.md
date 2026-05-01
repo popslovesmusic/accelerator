@@ -1,8 +1,10 @@
 # `oneproc` Usage Guide
 
-`oneproc` is the Governed Agent Residence CLI Wrapper for the `acellorator` ecosystem. it provides a single, governed entry point for conducting research simulations and generating technical papers using worker agents (Codex and Gemini).
+**IMPORTANT:** Always execute `oneproc` from the project root directory (`D:\projects\acellorator`). 
 
 ## 1. Overview
+`oneproc` is the Governed Agent Residence CLI Wrapper for the `acellorator` ecosystem. it provides a single, governed entry point for conducting research simulations and generating technical papers using worker agents (Codex and Gemini).
+
 The core purpose of `oneproc` is to ensure that all research activities, claim promotions, and technical publications adhere to the project's strict governance rules, including:
 - **Lexicon Compliance:** All terms must resolve to the canonical lexicon.
 - **Scientific Rigor:** High-rigor claims (C4+) require independent measurements and C++ tool preference.
@@ -17,10 +19,10 @@ pip install typer pydantic
 ```
 
 ### Initializing the Environment
-Before running research, initialize the workspace to ensure all registry files and output directories are present:
+Run this from the project root to ensure all registry files and output directories are present:
 
 ```bash
-python -m oneproc.cli init
+python -m oneproc init
 ```
 Use the `--repair` flag if you need to create missing empty registry files.
 
@@ -30,7 +32,7 @@ Use the `--repair` flag if you need to create missing empty registry files.
 The `run` command orchestrates the entire research lifecycle.
 
 ```bash
-python -m oneproc.cli run --question "Is the process epsilon stable?" --target C4 --intent validate --strict
+python -m oneproc run --question "Is the process epsilon stable?" --target C4 --intent validate --strict
 ```
 
 **New Flags:**
@@ -42,14 +44,14 @@ python -m oneproc.cli run --question "Is the process epsilon stable?" --target C
 You can call worker agents directly for specific tasks. `oneproc` wraps these calls to capture metadata and git diffs.
 
 ```bash
-python -m oneproc.cli worker ask --agent gemini --task "Draft a theoretical mapping for epsilon-rho coupling"
+python -m oneproc worker ask --agent gemini --task "Draft a theoretical mapping for epsilon-rho coupling"
 ```
 
 ### C. Paper Validation
 Validate an existing technical paper against the governance template and claim requirements.
 
 ```bash
-python -m oneproc.cli validate-paper check path/to/paper.md --level C4 --intent validate
+python -m oneproc validate-paper check path/to/paper.md --level C4 --intent validate
 ```
 
 **Subcommands:**

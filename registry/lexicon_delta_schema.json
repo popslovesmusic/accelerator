@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Lexicon Delta Schema",
+  "type": "object",
+  "properties": {
+    "run_id": { "type": "string" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "input_terms": { "type": "array", "items": { "type": "string" } },
+    "resolved_terms": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "raw_term": { "type": "string" },
+          "resolution_type": { "enum": ["canonical", "alias", "primitive_rewrite", "role_equivalence", "gap_open", "ambiguous_gap"] },
+          "canonical_term": { "type": "string" },
+          "working_definition": { "type": "string" },
+          "primitive_mapping": {
+            "type": "object",
+            "properties": {
+              "epsilon": { "type": "string" },
+              "residue": { "type": "string" },
+              "rho": { "type": "string" },
+              "coupling_or_CSI": { "type": "string" },
+              "delta": { "type": "string" },
+              "orientation_minus_i": { "type": "string" }
+            }
+          },
+          "validation_status": { "enum": ["GAP_OPEN", "L0", "L1", "L2", "L3"] },
+          "claim_ceiling": { "type": "string" },
+          "required_action": { "type": "string" }
+        }
+      }
+    },
+    "new_gaps": { "type": "array" },
+    "audit_warnings": { "type": "array" },
+    "claim_downgrades": { "type": "array" }
+  }
+}
