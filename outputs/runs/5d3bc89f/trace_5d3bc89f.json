@@ -1,0 +1,126 @@
+{
+  "run_id": "5d3bc89f",
+  "start_time": "2026-05-02T02:49:50.252706",
+  "entries": [
+    {
+      "timestamp": "2026-05-02T02:49:50.263334",
+      "component": "template_validator",
+      "action": "validate",
+      "status": "failed",
+      "details": {
+        "missing_sections": [
+          "Abstract",
+          "Theoretical Mapping",
+          "Experimental Setup",
+          "Observables",
+          "Results",
+          "Cross-Model Comparison",
+          "Falsification",
+          "Artifact Analysis",
+          "Classification",
+          "Conclusion"
+        ],
+        "invalid_sections": []
+      }
+    },
+    {
+      "timestamp": "2026-05-02T02:49:50.264098",
+      "component": "consistency_validator",
+      "action": "validate",
+      "status": "success",
+      "details": {
+        "mismatches": []
+      }
+    },
+    {
+      "timestamp": "2026-05-02T02:49:50.264398",
+      "component": "lexicon_validator",
+      "action": "lexicon_in_check",
+      "status": "complete",
+      "details": {
+        "input_terms": [],
+        "results": {
+          "valid": [],
+          "missing": [],
+          "aliases": {}
+        }
+      }
+    },
+    {
+      "timestamp": "2026-05-02T02:49:50.264696",
+      "component": "measurement_validator",
+      "action": "validate",
+      "status": "failed",
+      "details": {
+        "target_level": "C5",
+        "required": 1,
+        "found": 0,
+        "measurement_section_present": false,
+        "valid_measurements": [],
+        "reasons": [
+          "Measurement section missing from paper body."
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-05-02T02:49:50.264964",
+      "component": "falsification_validator",
+      "action": "validate",
+      "status": "failed",
+      "details": {
+        "vectors_present": [],
+        "vectors_missing": [
+          "FV-1",
+          "FV-2",
+          "FV-3",
+          "FV-4"
+        ],
+        "reasons": [
+          "No valid falsification vectors found."
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-05-02T02:49:50.265274",
+      "component": "cpp_preference_validator",
+      "action": "validate",
+      "status": "success",
+      "details": {
+        "target_level": "C5",
+        "violations": []
+      }
+    },
+    {
+      "timestamp": "2026-05-02T02:49:50.265511",
+      "component": "claim_gate",
+      "action": "process_claim",
+      "status": "block",
+      "details": {
+        "claim_id": "CLAIM-5d3bc89f",
+        "results": {
+          "claim_id": "CLAIM-5d3bc89f",
+          "requested_level": "C5",
+          "final_level": "C3",
+          "gate_result": "block",
+          "checks": {
+            "template_pass": false,
+            "lexicon_pass": true,
+            "measurement_pass": false,
+            "cpp_preference_pass": true,
+            "falsification_pass": false,
+            "consistency_pass": true,
+            "language_policy_pass": true
+          },
+          "downgrades_applied": [
+            "Insufficient independent measurements for requested level.",
+            "Falsification check failed."
+          ],
+          "blocked_reasons": [
+            "Missing sections: ['Abstract', 'Theoretical Mapping', 'Experimental Setup', 'Observables', 'Results', 'Cross-Model Comparison', 'Falsification', 'Artifact Analysis', 'Classification', 'Conclusion']"
+          ],
+          "intent": "validate"
+        }
+      }
+    }
+  ]
+}

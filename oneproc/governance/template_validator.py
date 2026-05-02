@@ -23,7 +23,9 @@ class TemplateValidator:
             if not s.strip():
                 continue
             lines = s.split("\n", 1)
-            header = lines[0].strip().lower()
+            # Remove leading numbers (e.g. '1. ', '4.1 ') and trailing symbols
+            header = re.sub(r'^[0-9\.]+\s+', '', lines[0])
+            header = re.sub(r'[:\(\)].*$', '', header).strip().lower()
             body = lines[1].strip() if len(lines) > 1 else ""
             section_map[header] = body
 
