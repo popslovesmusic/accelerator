@@ -473,27 +473,50 @@ Before running any experiment:
 - Normalize metrics.
 - Prepare cross-model comparison.
 
-### 10.8 Unified Claim Gate
+### 10.8 Unified Claim Gate (Data-Driven Enforcement)
 
-Run before final conclusions:
+The agent MUST apply the following governance mandates from `registry/compliance_charter_v2_3.json`. Even if `oneproc` is not used, these rules are binding and MUST be enforced through manual verification or prompt-based logic.
 
-- Apply tool certification limits.
-- Apply scientific validity limits.
-- Apply lexicon validation limits.
-- Apply compliance charter provenance rules.
-- **GOVERNANCE_CHECK:** Verify independent measurement presence for any claim at C4 or higher; downgrade if missing.
-- **GOVERNANCE_CHECK:** Verify measurement evidence is linked and uses mechanism_class='measurement'.
-- **GOVERNANCE_CHECK:** Check if Python tools were used when C++ equivalents exist; flag `cpp_preference_violation = true` if detected.
-- **GOVERNANCE_CHECK:** If strict_mode is enabled, reduce claim confidence or block promotion for C++ preference violations.
-- **GOVERNANCE_CHECK:** Require explicit justification for any Python usage when C++ exists.
-- Downgrade claim classification if any check fails.
-- Include gate result in final report metadata.
+#### 10.8.1 Claim Level Mandates
+| Level | Min. Independent Measurements | Required Falsification Vectors | C++ Preference |
+| :--- | :--- | :--- | :--- |
+| **C4** | 1 | FV-1, FV-2 | Warn if Python |
+| **C5** | 1 | FV-1, FV-2, FV-3, FV-4 | Downgrade if Python |
+| **C6** | 2 | FV-1, FV-2, FV-3, FV-4 | Block if Python |
 
-### 10.9 Write
+#### 10.8.2 Intent-Based Classification Caps
+The requested intent strictly limits the maximum allowable claim level:
+- **Explore:** Max level **C2**.
+- **Validate:** Max level **C5**.
+- **Publish:** Max level **C6**.
 
-- Use the mandatory technical paper template.
-- Follow governance rules.
-- Apply compliance charter checks before finalizing output.
+#### 10.8.3 Mandatory Paper Structure
+All research outputs MUST include these 11 sections in order:
+1. Abstract
+2. Theoretical Mapping
+3. Experimental Setup
+4. Observables
+5. Results
+6. Measurement
+7. Cross-Model Comparison
+8. Falsification
+9. Artifact Analysis
+10. Classification
+11. Conclusion (MUST start with "Within these models,")
+
+### 10.9 Writing and Template Selection
+- **RESEARCH_WRITER:** MUST select the appropriate template from `registry/governance/schemas/WRITER_TEMPLATES_V1.json` based on the assigned claim level (C3, C4, C5).
+- **RESEARCH_WRITER:** MUST populate all required sections. Empty sections or placeholder language (TODO/FIXME) block finalization.
+- **RESEARCH_WRITER:** MUST NOT invent data. If inputs are insufficient, return a governance failure.
+- **RESEARCH_WRITER:** For publication intent, use the `ZENODO_PUBLICATION` template and include all required disclosure sections.
+
+### 10.10 Manual Enforcement Protocol (CLI Fallback)
+If the `oneproc` CLI is bypassed, the agent MUST perform the following manual "Prompt Gate":
+1. **Self-Audit:** Review the drafted paper against the "Mandatory Paper Structure" list.
+2. **Evidence Count:** Explicitly count the `independent_measurement_count` and `models_used` in the metadata.
+3. **Falsification Check:** Verify every required FV code (per Section 10.8.1) appears in the Falsification section.
+4. **Humility Check:** Ensure the conclusion prefix is present and the classification reflects the lowest-common-denominator of tool readiness and evidence level.
+
 
 ### Multi-Tool Run Orchestration
 
