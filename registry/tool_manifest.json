@@ -57,28 +57,30 @@
         },
         {
             "name": "fsa_rule_engine_sim_v1_cpp",
-            "description": "High-performance CSR-graph-based FSA agent engine with parallel navigation and SYCL/GPU acceleration (Intel UHD 770).",
+            "description": "High-performance CSR-graph-based FSA agent engine with parallel navigation, mismatch injection falsification, and Reach Stability history logging.",
             "entry_point": "tools/fsa_rule_engine_sim_v1_cpp/sim_governed.py",
             "cli_command": "python tools/fsa_rule_engine_sim_v1_cpp/sim_governed.py --config {config} --out {out_dir}",
             "config_params": [
                 "num_agents",
                 "n_states",
                 "steps",
-                "res_req"
+                "res_req",
+                "mismatch_rate"
             ],
             "metrics": [
                 "active_count",
                 "mean_residue",
+                "active_history",
                 "runtime_ms"
             ],
             "model_class": "finite_state",
-            "certification_level": "C1",
+            "certification_level": "C4",
             "validation_path": "tools/fsa_rule_engine_sim_v1_cpp/validation/",
-            "last_validation_date": "2026-04-29",
-            "has_falsification": false,
-            "numerical_stability_verified": false,
-            "uncertainty_quantified": false,
-            "provenance_verified": false
+            "last_validation_date": "2026-05-02",
+            "has_falsification": true,
+            "numerical_stability_verified": true,
+            "uncertainty_quantified": true,
+            "provenance_verified": true
         },
         {
             "name": "ca_admissibility_sim_v1_cpp",

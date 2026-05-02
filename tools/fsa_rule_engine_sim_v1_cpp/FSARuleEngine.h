@@ -27,13 +27,21 @@ struct StateGraph {
  */
 class RuleEngine {
 public:
-    RuleEngine(int n_states, int forbidden, int res_thresh_node, int res_required)
+    RuleEngine(int n_states, int forbidden, int res_thresh_node, int res_required, double mismatch_rate = 0.0)
         : n_states_(n_states), forbidden_(forbidden), 
-          res_thresh_node_(res_thresh_node), res_required_(res_required) {}
+          res_thresh_node_(res_thresh_node), res_required_(res_required),
+          mismatch_rate_(mismatch_rate) {}
 
-    bool isAdmissible(int target_node, int agent_residue) const {
+    bool isAdmissible(int target_node, int agent_residue, std::mt19937& gen) const {
         if (target_node == forbidden_) return false;
         if (target_node >= res_thresh_node_ && agent_residue < res_required_) return false;
+        
+        // Falsification Injection: random mismatch
+        if (mismatch_rate_ > 0.0) {
+            std::uniform_real_distribution<double> dist(0.0, 1.0);
+            if (dist(gen) < mismatch_rate_) return false;
+        }
+        
         return true;
     }
 
@@ -44,6 +52,7 @@ private:
     int forbidden_;
     int res_thresh_node_;
     int res_required_;
+    double mismatch_rate_;
 };
 
 /**
@@ -62,6 +71,7 @@ public:
     };
     
     Metrics getMetrics() const;
+    const std::vector<int>& getActiveHistory() const { return active_history_; }
 
 private:
     int num_agents_;
@@ -72,6 +82,7 @@ private:
     std::vector<int> current_state_;
     std::vector<int> residue_;
     std::vector<bool> active_;
+    std::vector<int> active_history_;
     
     std::mt19937 gen_;
 };

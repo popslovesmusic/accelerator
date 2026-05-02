@@ -143,6 +143,46 @@ def gaps(
         typer.echo("Gap queue is in an unexpected format.")
 
 @app.command()
+def induce(
+    term: str = typer.Option(..., "--term", help="Term to induce"),
+    source: str = typer.Option(..., "--source", help="Source context or note"),
+    working_definition: str = typer.Option(..., "--working-definition", help="Provisional working definition"),
+    primitive_map: str = typer.Option(..., "--primitive-map", help="JSON string of primitive mappings"),
+    out: Optional[str] = typer.Option(None, "--out", help="Output path (registry/lexicon_gap_queue.json)")
+):
+    """Create a GAP_OPEN entry with provisional working definition and primitive mapping."""
+    orch = LexiconOrchestrator()
+    gap_queue = orch._load_json(orch.gap_queue_path)
+    
+    try:
+        p_map = json.loads(primitive_map)
+    except Exception as e:
+        typer.echo(f"Error parsing primitive map JSON: {e}")
+        raise typer.Exit(code=1)
+
+    new_entry = {
+        "term": term,
+        "status": "GAP_OPEN",
+        "default_claim_status": "PROVISIONAL",
+        "reason_for_induction": "Research synthesis",
+        "source_context": {
+            "source_type": "pivot_synthesis",
+            "source_path_or_note": source
+        },
+        "proposed_definition": working_definition,
+        "primitive_mapping": p_map,
+        "governance_status": "not_verified"
+    }
+
+    gap_queue[term] = new_entry
+    
+    save_path = out or orch.gap_queue_path
+    with open(save_path, "w", encoding="utf-8") as f:
+        json.dump(gap_queue, f, indent=2)
+    
+    typer.echo(f"Induced term '{term}' into {save_path}")
+
+@app.command()
 def audit(strict: bool = typer.Option(False, "--strict")):
     """Detect duplicate terms, orphan aliases, and registry drift."""
     orch = LexiconOrchestrator()

@@ -18,6 +18,8 @@ void FSAAgentEngine::initialize(int start_node, int seed) {
     std::fill(current_state_.begin(), current_state_.end(), start_node);
     std::fill(residue_.begin(), residue_.end(), 0);
     std::fill(active_.begin(), active_.end(), true);
+    active_history_.clear();
+    active_history_.push_back(num_agents_);
 }
 
 void FSAAgentEngine::step() {
@@ -37,7 +39,7 @@ void FSAAgentEngine::step() {
             std::vector<int> admissible;
             for (int j = start; j < end; ++j) {
                 int target = graph_->column_indices[j];
-                if (rules_->isAdmissible(target, residue_[i])) {
+                if (rules_->isAdmissible(target, residue_[i], local_gen)) {
                     admissible.push_back(target);
                 }
             }
@@ -51,6 +53,13 @@ void FSAAgentEngine::step() {
             }
         }
     }
+    
+    // Log active count
+    int active_count = 0;
+    for (int i = 0; i < num_agents_; ++i) {
+        if (active_[i]) active_count++;
+    }
+    active_history_.push_back(active_count);
 }
 
 FSAAgentEngine::Metrics FSAAgentEngine::getMetrics() const {

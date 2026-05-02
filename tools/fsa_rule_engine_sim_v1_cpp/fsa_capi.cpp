@@ -11,7 +11,7 @@ using namespace dase::fsa;
 
 extern "C" {
 
-EXPORT FSAAgentEngine* create_fsa_engine(int num_agents, int n_states, int forbidden, int res_thresh, int res_req) {
+EXPORT FSAAgentEngine* create_fsa_engine(int num_agents, int n_states, int forbidden, int res_thresh, int res_req, double mismatch_rate) {
     auto graph = std::make_shared<StateGraph>(n_states);
     
     // Default random graph building
@@ -36,7 +36,7 @@ EXPORT FSAAgentEngine* create_fsa_engine(int num_agents, int n_states, int forbi
     }
     graph->row_offsets[n_states] = current_offset;
 
-    auto rules = std::make_shared<RuleEngine>(n_states, forbidden, res_thresh, res_req);
+    auto rules = std::make_shared<RuleEngine>(n_states, forbidden, res_thresh, res_req, mismatch_rate);
     return new FSAAgentEngine(num_agents, graph, rules);
 }
 
@@ -61,6 +61,14 @@ EXPORT void get_fsa_metrics(FSAAgentEngine* engine, int* active_count, double* m
     auto m = engine->getMetrics();
     *active_count = m.active_count;
     *mean_residue = m.mean_residue;
+}
+
+EXPORT void get_active_history(FSAAgentEngine* engine, int* out_history, int* out_size) {
+    const auto& hist = engine->getActiveHistory();
+    *out_size = static_cast<int>(hist.size());
+    if (out_history) {
+        std::copy(hist.begin(), hist.end(), out_history);
+    }
 }
 
 }

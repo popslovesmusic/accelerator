@@ -1,29 +1,23 @@
-﻿{
-    "active_count":  {
-                         "description":  "",
-                         "theoretical_mapping":  "",
-                         "units_or_scale":  "",
-                         "expected_behavior":  "",
-                         "failure_modes":  [
-
-                                           ]
-                     },
-    "mean_residue":  {
-                         "description":  "",
-                         "theoretical_mapping":  "",
-                         "units_or_scale":  "",
-                         "expected_behavior":  "",
-                         "failure_modes":  [
-
-                                           ]
-                     },
-    "runtime_ms":  {
-                       "description":  "",
-                       "theoretical_mapping":  "",
-                       "units_or_scale":  "",
-                       "expected_behavior":  "",
-                       "failure_modes":  [
-
-                                         ]
-                   }
+{
+    "active_count": {
+        "description": "Number of agents currently in an admissible state.",
+        "theoretical_mapping": "Process continuity survival.",
+        "units_or_scale": "count",
+        "expected_behavior": "Should decrease over time as agents hit forbidden nodes or residue barriers.",
+        "failure_modes": ["Unexpected zeroing out due to overly aggressive rules."]
+    },
+    "mean_residue": {
+        "description": "Average number of steps taken by active agents.",
+        "theoretical_mapping": "Structural memory accumulation.",
+        "units_or_scale": "steps",
+        "expected_behavior": "Should increase monotonically for surviving agents.",
+        "failure_modes": ["Negative values or lack of growth."]
+    },
+    "active_history": {
+        "description": "Time-series of active agent counts.",
+        "theoretical_mapping": "Reach Stability kinetics.",
+        "units_or_scale": "array of counts",
+        "expected_behavior": "Used to calculate the residue seeding time constant (tau_R).",
+        "failure_modes": ["Discontinuity in time series."]
+    }
 }

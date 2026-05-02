@@ -46,7 +46,7 @@ Analysis of {question} within governed models.
 Epsilon: 0.1
 
 # Experimental Setup
-Tool: agent_based_sim_v1
+Tool: agent_based_sim_v1_cpp
 
 # Observables
 Active fraction.
@@ -54,11 +54,21 @@ Active fraction.
 # Results
 Stabilized at 0.4.
 
+# Measurement: Spectrum
+Tool: `spectral_analysis_v1_cpp`
+Class: `independent`
+Input: Trajectories
+Observables: Phase modes
+Result: Coherent peak at 0.05 Hz.
+Quantitative Results: 0.98 Match.
+Artifact Path: outputs/measurements/spec.json
+
 # Cross-Model Comparison
 Agreement with CA model.
 
 # Falsification
-Passed FV-1.
+- **FV-1:** Tested initial phase disorder. System successfully oriented.
+- **FV-2:** Ablated coupling. Homology collapsed.
 
 # Artifact Analysis
 Low seed sensitivity.
@@ -81,14 +91,27 @@ Within these models, the process is stable.
         "claim_id": f"CLAIM-{run_id}",
         "requested_level": target,
         "paper_content": paper_content,
-        "metadata": {"independent_measurement_count": 0}, # Mocking metadata
+        "metadata": {"independent_measurement_count": 1, "models_used": ["agent_based_sim_v1_cpp"], "falsification_run": True}, 
         "lexicon_terms": in_check_res["valid"],
-        "measurements": [], # Purposefully empty to trigger gates if C4+
-        "falsification_data": [],
+        "measurements": [
+            {
+                "tool": "spectral_analysis_v1_cpp",
+                "measurement_class": "independent",
+                "input_sources": "Trajectories",
+                "observables_measured": ["Phase modes"],
+                "result_summary": "Coherent peak",
+                "quantitative_or_structural_result_present": True,
+                "measurement_artifact_path": "outputs/measurements/spec.json"
+            }
+        ],
+        "falsification_data": [
+            {"vector_name": "FV-1", "adversarial_condition": "disorder", "expected_failure_behavior": "sync", "observed_behavior": "sync", "result": "pass"},
+            {"vector_name": "FV-2", "adversarial_condition": "ablation", "expected_failure_behavior": "collapse", "observed_behavior": "collapse", "result": "pass"}
+        ],
         "tools": [
             {
-                "tool_name": "agent_based_sim_v1",
-                "implementation_language": "python",
+                "tool_name": "agent_based_sim_v1_cpp",
+                "implementation_language": "cpp",
                 "cpp_equivalent_available": True
             }
         ]

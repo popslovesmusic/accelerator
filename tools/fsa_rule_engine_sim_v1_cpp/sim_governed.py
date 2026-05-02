@@ -14,6 +14,7 @@ def run_sim(config_path, out_dir):
     forbidden = config.get("forbidden", 9)
     res_thresh = config.get("res_thresh", 5)
     res_req = config.get("res_req", 2)
+    mismatch_rate = config.get("mismatch_rate", 0.0)
     steps = config.get("steps", 100)
     
     # Init parameters
@@ -21,7 +22,7 @@ def run_sim(config_path, out_dir):
     seed = config.get("seed", 42)
 
     print(f"Initializing FSAEngineCPP with {num_agents} agents and {n_states} states...")
-    engine = FSAEngineCPP(num_agents, n_states, forbidden, res_thresh, res_req)
+    engine = FSAEngineCPP(num_agents, n_states, forbidden, res_thresh, res_req, mismatch_rate)
     engine.initialize(start_node, seed)
 
     print(f"Running simulation for {steps} steps...")
@@ -33,10 +34,13 @@ def run_sim(config_path, out_dir):
     runtime_ms = (end_time - start_time) * 1000
     final_metrics = engine.get_metrics()
     final_metrics["runtime_ms"] = runtime_ms
+    
+    active_history = engine.get_active_history()
 
     output = {
         "config": config,
-        "final_metrics": final_metrics
+        "final_metrics": final_metrics,
+        "active_history": active_history
     }
 
     os.makedirs(out_dir, exist_ok=True)

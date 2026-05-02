@@ -4,7 +4,7 @@ import platform
 from pathlib import Path
 
 class FSAEngineCPP:
-    def __init__(self, num_agents, n_states, forbidden, res_thresh, res_req, lib_path=None):
+    def __init__(self, num_agents, n_states, forbidden, res_thresh, res_req, mismatch_rate=0.0, lib_path=None):
         if lib_path is None:
             ext = ".dll" if platform.system() == "Windows" else ".so"
             lib_name = f"fsa_capi{ext}"
@@ -22,7 +22,7 @@ class FSAEngineCPP:
 
         self.lib = ctypes.CDLL(lib_path)
         
-        self.lib.create_fsa_engine.argtypes = [ctypes.c_int, ctypes.c_int, ctypes.c_int, ctypes.c_int, ctypes.c_int]
+        self.lib.create_fsa_engine.argtypes = [ctypes.c_int, ctypes.c_int, ctypes.c_int, ctypes.c_int, ctypes.c_int, ctypes.c_double]
         self.lib.create_fsa_engine.restype = ctypes.c_void_p
         
         self.lib.destroy_fsa_engine.argtypes = [ctypes.c_void_p]
@@ -34,7 +34,12 @@ class FSAEngineCPP:
             ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_double)
         ]
 
-        self.obj = self.lib.create_fsa_engine(num_agents, n_states, forbidden, res_thresh, res_req)
+        self.lib.get_active_history.argtypes = [
+            ctypes.c_void_p,
+            ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_int)
+        ]
+
+        self.obj = self.lib.create_fsa_engine(num_agents, n_states, forbidden, res_thresh, res_req, mismatch_rate)
 
     def __del__(self):
         if hasattr(self, 'lib') and hasattr(self, 'obj'):
@@ -54,3 +59,10 @@ class FSAEngineCPP:
             "active_count": active_count.value,
             "mean_residue": mean_res.value
         }
+
+    def get_active_history(self):
+        size = ctypes.c_int()
+        self.lib.get_active_history(self.obj, None, ctypes.byref(size))
+        history = (ctypes.c_int * size.value)()
+        self.lib.get_active_history(self.obj, history, ctypes.byref(size))
+        return list(history)
