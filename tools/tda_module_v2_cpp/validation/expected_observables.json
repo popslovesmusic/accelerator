@@ -1,0 +1,37 @@
+{
+    "betti_0": {
+        "description": "Number of connected components (clusters).",
+        "theoretical_mapping": "Structural identity count.",
+        "units_or_scale": "integer >= 0",
+        "expected_behavior": "Should be 1 for a singular Phase Packet.",
+        "failure_modes": ["High value indicates fragmentation/noise."]
+    },
+    "betti_1": {
+        "description": "Number of holes or cycles (1D homology).",
+        "theoretical_mapping": "Stable periodic internal structure or structural enclosure.",
+        "units_or_scale": "integer >= 0",
+        "expected_behavior": "Should be >= 1 for hollow phase locked kernels.",
+        "failure_modes": ["Zero indicates lack of internal periodicity/enclosure."]
+    },
+    "max_component_size": {
+        "description": "Size of the largest connected component.",
+        "theoretical_mapping": "Residue-stabilized core size.",
+        "units_or_scale": "count of nodes/pixels",
+        "expected_behavior": "Should grow as coupling K increases.",
+        "failure_modes": ["Low value indicates lack of global stabilization."]
+    },
+    "active_fraction": {
+        "description": "Fraction of total nodes/pixels above threshold.",
+        "theoretical_mapping": "Process occupancy.",
+        "units_or_scale": "[0, 1]",
+        "expected_behavior": "Correlates with overall residue accumulation.",
+        "failure_modes": []
+    },
+    "persistence_landscape": {
+        "description": "Betti-0 and Betti-1 values swept across thresholds.",
+        "theoretical_mapping": "Structural persistence across scale.",
+        "units_or_scale": "array of Betti vectors",
+        "expected_behavior": "Plateaus indicate persistent structural identities.",
+        "failure_modes": ["Rapid fluctuations indicate lack of structural stability."]
+    }
+}

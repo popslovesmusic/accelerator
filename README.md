@@ -14,6 +14,12 @@ This repository is a governed research environment for exploring **"THE LAW OF T
 - **`registry/`**: Centralized manifests, tool indexes, and path mapping.
 - **`outputs/`**: Recoverable experiment results and audit logs.
 - **`scripts/`**: Governing orchestration and validation utilities.
+- **`zenodo/`**: Publication-ready packages and technical papers.
+
+## 🔬 Key Methodologies
+
+- **Multi-Dimensional TDA:** Using Persistent Homology (Betti-0, Betti-1) to prove structural identity across independent mechanism classes.
+- **Governed Multi-Sim:** Automated cross-verification between Agents, Kuramoto, and Dynamic Network models.
 
 ## 🚀 Quick Start
 
