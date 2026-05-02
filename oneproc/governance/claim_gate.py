@@ -6,10 +6,12 @@ from oneproc.governance.measurement_validator import MeasurementValidator
 from oneproc.governance.template_validator import TemplateValidator
 from oneproc.governance.falsification_validator import FalsificationValidator
 from oneproc.governance.consistency_validator import ConsistencyValidator
+from oneproc.governance.governance_loader import GovernanceLoader
 
 class ClaimGate:
     def __init__(self, tracer: Optional[TraceCapture] = None):
         self.tracer = tracer
+        self.loader = GovernanceLoader()
         self.lexicon_v = LexiconValidator(tracer=tracer)
         self.cpp_v = CppPreferenceValidator(tracer=tracer)
         self.measure_v = MeasurementValidator(tracer=tracer)
@@ -18,17 +20,12 @@ class ClaimGate:
         self.consistency_v = ConsistencyValidator(tracer=tracer)
 
     def process_claim(self, claim_data: Dict[str, Any], strict: bool = False, intent: str = "validate") -> Dict[str, Any]:
-        """Unified Claim Gate V2."""
+        """Data-driven Unified Claim Gate."""
         target_level = claim_data.get("requested_level", "C1")
         claim_id = claim_data.get("claim_id", "UNKNOWN")
         paper_content = claim_data.get("paper_content", "")
         
-        # Intent-based limits
-        intent_limits = {
-            "explore": "C2",
-            "validate": "C5",
-            "publish": "C6"
-        }
+        intent_limits = self.loader.get_intent_limits()
         allowed_max = intent_limits.get(intent, "C2")
         
         results = {
@@ -50,8 +47,6 @@ class ClaimGate:
             "intent": intent
         }
 
-        # Intent Check
-        # Convert levels to comparable integers if needed, but here we'll just check if requested > allowed
         levels = ["C0", "C1", "C2", "C3", "C4", "C5", "C6"]
         if levels.index(target_level) > levels.index(allowed_max):
             results["gate_result"] = "downgrade"
@@ -99,16 +94,23 @@ class ClaimGate:
             if results["gate_result"] != "block":
                 results["gate_result"] = "block" if strict else "downgrade"
             if not strict:
-                results["final_level"] = "C3" # Downgrade if not strict
+                results["final_level"] = "C3"
             results["blocked_reasons" if strict else "downgrades_applied"].append("Falsification check failed.")
 
         # 6. CPP Preference Check
         cpp_res = self.cpp_v.validate(claim_data.get("tools", []), target_level)
         results["checks"]["cpp_preference_pass"] = cpp_res["pass"]
         if not cpp_res["pass"]:
-            if strict:
+            mandate = self.loader.get_mandate(target_level)
+            pref_action = mandate.get("cpp_preference", "warn")
+            if pref_action == "block" or strict:
                 results["gate_result"] = "block"
-                results["blocked_reasons"].append("C++ preference violation in strict mode.")
+                results["blocked_reasons"].append("C++ preference violation.")
+            elif pref_action == "downgrade":
+                if results["gate_result"] != "block":
+                    results["gate_result"] = "downgrade"
+                results["final_level"] = "C3"
+                results["downgrades_applied"].append("C++ preference violation (downgraded per Charter).")
             else:
                 results["downgrades_applied"].append("C++ preference violation detected.")
 

@@ -1,15 +1,28 @@
 {
   "controls": [
     {
-      "control_id": "zero_mismatch_s_eq_0",
-      "purpose": "Negative control / falsification: identity should not be sustained purely by internal dynamics (unless model permits).",
+      "control_id": "positive_control_activity_sustained",
+      "purpose": "Positive control: baseline parameters where sustained activity is expected.",
       "binding": {
-        "config_field": "s",
-        "value": 0.0
+        "config_path": "configs/validation/structural_box_sim_cpp/full_rigor_control_regime.json"
       },
       "expected_behavior": {
-        "epsilon_max": "low",
-        "alignment_success_rate": "near_zero_or_decreases"
+        "epsilon_active_fraction": "nonzero",
+        "alignment_success_rate": "nonzero"
+      }
+    },
+    {
+      "control_id": "negative_control_zero_mismatch_s_eq_0",
+      "purpose": "Negative control / falsification: with s=0, activity should drop materially vs the positive control baseline in the same regime.",
+      "binding": {
+        "config_path": "configs/validation/structural_box_sim_cpp/full_rigor_control_regime.json",
+        "override": {
+          "s": 0.0
+        }
+      },
+      "expected_behavior": {
+        "epsilon_active_fraction": "lower_than_baseline_by_at_least_5pct",
+        "alignment_success_rate": "lower_than_baseline_by_at_least_5pct"
       }
     }
   ]

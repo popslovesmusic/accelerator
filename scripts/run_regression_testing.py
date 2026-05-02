@@ -8,10 +8,10 @@ import sys
 sys.path.append(os.getcwd())
 from scripts.multi_sim_runner import MultiSimRunner, log
 
-def run_regression_test(tool_a, tool_b, config_path, run_id):
+def run_regression_test(tool_a, tool_b, config_a_path, config_b_path, run_id):
     log(f"Starting regression test between {tool_a} and {tool_b}")
     
-    output_root = Path(f"outputs/regression_{run_id}")
+    output_root = Path(f"outputs/regression_{run_id}").resolve()
     output_root.mkdir(parents=True, exist_ok=True)
     
     # Generate multi-run config
@@ -27,13 +27,13 @@ def run_regression_test(tool_a, tool_b, config_path, run_id):
             {
                 "job_id": "tool_a",
                 "tool": tool_a,
-                "config": config_path,
+                "config": config_a_path,
                 "claim_role": "comparison"
             },
             {
                 "job_id": "tool_b",
                 "tool": tool_b,
-                "config": config_path,
+                "config": config_b_path,
                 "claim_role": "comparison"
             }
         ]
@@ -95,7 +95,8 @@ def run_regression_test(tool_a, tool_b, config_path, run_id):
     comparison = {
         "tool_a": tool_a,
         "tool_b": tool_b,
-        "config_path": config_path,
+        "config_a_path": config_a_path,
+        "config_b_path": config_b_path,
         "metrics_found": list(metrics.keys()),
         "matches": {},
         "mismatches": {}
@@ -156,8 +157,14 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Automated Python/C++ Regression Testing")
     parser.add_argument("--tool-a", type=str, required=True, help="First tool name")
     parser.add_argument("--tool-b", type=str, required=True, help="Second tool name (port)")
-    parser.add_argument("--config", type=str, required=True, help="Path to config JSON")
+    parser.add_argument("--config", type=str, required=True, help="Path to config JSON (used for tool A unless overridden).")
+    parser.add_argument("--config-a", type=str, default=None, help="Optional tool A config path override.")
+    parser.add_argument("--config-b", type=str, default=None, help="Optional tool B config path override.")
     parser.add_argument("--run-id", type=str, default="default", help="Unique ID for this test")
     args = parser.parse_args()
-    
-    run_regression_test(args.tool_a, args.tool_b, args.config, args.run_id)
+
+    config_a = args.config_a or args.config
+    config_b = args.config_b or args.config
+
+    report_path = run_regression_test(args.tool_a, args.tool_b, config_a, config_b, args.run_id)
+    log(f"Regression report: {report_path}")

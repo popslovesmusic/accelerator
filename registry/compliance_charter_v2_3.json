@@ -684,5 +684,46 @@
       "archiving_tool": "mpf_archive_sim.py v1.0 or later",
       "naming_convention": "YYYY-MM-DD_simNN_charterV2p3_metricV1_phaseX"
     }
+  },
+
+  "governance_enforcement_v2": {
+    "claim_level_mandates": {
+      "C4": {
+        "min_independent_measurements": 1,
+        "required_falsification_vectors": ["FV-1", "FV-2"],
+        "cpp_preference": "warn"
+      },
+      "C5": {
+        "min_independent_measurements": 1,
+        "required_falsification_vectors": ["FV-1", "FV-2", "FV-3", "FV-4"],
+        "cpp_preference": "downgrade"
+      },
+      "C6": {
+        "min_independent_measurements": 2,
+        "required_falsification_vectors": ["FV-1", "FV-2", "FV-3", "FV-4"],
+        "cpp_preference": "block"
+      }
+    },
+    "template_mandates": {
+      "mandatory_sections": [
+        "Abstract",
+        "Theoretical Mapping",
+        "Experimental Setup",
+        "Observables",
+        "Results",
+        "Measurement",
+        "Cross-Model Comparison",
+        "Falsification",
+        "Artifact Analysis",
+        "Classification",
+        "Conclusion"
+      ],
+      "mandatory_conclusion_prefix": "Within these models"
+    },
+    "intent_limits": {
+      "explore": "C2",
+      "validate": "C5",
+      "publish": "C6"
+    }
   }
 }

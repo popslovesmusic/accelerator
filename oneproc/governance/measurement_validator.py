@@ -1,17 +1,16 @@
 from typing import List, Dict, Any, Optional
 from oneproc.utils.trace_capture import TraceCapture
+from oneproc.governance.governance_loader import GovernanceLoader
 
 class MeasurementValidator:
     def __init__(self, tracer: Optional[TraceCapture] = None):
         self.tracer = tracer
+        self.loader = GovernanceLoader()
 
     def validate(self, paper_content: str, measurement_data: List[Dict[str, Any]], target_level: str) -> Dict[str, Any]:
-        """
-        Hardened Measurement Gate V2.
-        Required for C4, C5, C6.
-        """
-        requirements = {"C4": 1, "C5": 1, "C6": 2}
-        min_required = requirements.get(target_level, 0)
+        """Data-driven Measurement Gate."""
+        mandate = self.loader.get_mandate(target_level)
+        min_required = mandate.get("min_independent_measurements", 0)
         
         if min_required == 0:
             return {"pass": True, "details": {"reason": "No measurements required for this level."}}
@@ -19,7 +18,6 @@ class MeasurementValidator:
         valid_measurements = []
         reasons = []
 
-        # Check for measurement section in body
         import re
         has_section = re.search(r"^#+\s+Measurement", paper_content, re.MULTILINE | re.IGNORECASE)
         if not has_section:
@@ -27,15 +25,11 @@ class MeasurementValidator:
 
         for m in measurement_data:
             m_reasons = []
-            required_fields = [
-                "tool", "measurement_class", "input_sources", 
-                "observables_measured", "result_summary"
-            ]
+            required_fields = ["tool", "measurement_class", "input_sources", "observables_measured", "result_summary"]
             for field in required_fields:
                 if not m.get(field):
                     m_reasons.append(f"Missing field: {field}")
             
-            # Check for results in body (simple check for now)
             if not m.get("quantitative_or_structural_result_present", False):
                 m_reasons.append("Quantitative or structural results not declared.")
             

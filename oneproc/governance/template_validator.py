@@ -1,18 +1,18 @@
 import re
 from typing import List, Dict, Any, Optional
 from oneproc.utils.trace_capture import TraceCapture
+from oneproc.governance.governance_loader import GovernanceLoader
 
 class TemplateValidator:
     def __init__(self, tracer: Optional[TraceCapture] = None):
         self.tracer = tracer
-        self.required_sections = [
-            "Abstract", "Theoretical Mapping", "Experimental Setup", 
-            "Observables", "Results", "Cross-Model Comparison", 
-            "Falsification", "Artifact Analysis", "Classification", "Conclusion"
-        ]
+        self.loader = GovernanceLoader()
+        mandates = self.loader.get_template_mandates()
+        self.required_sections = mandates.get("mandatory_sections", [])
+        self.mandatory_prefix = mandates.get("mandatory_conclusion_prefix", "Within these models")
 
     def validate(self, paper_content: str) -> Dict[str, Any]:
-        """Hardened Template Gate V2."""
+        """Data-driven Template Gate."""
         missing_sections = []
         invalid_sections = []
         
@@ -23,7 +23,6 @@ class TemplateValidator:
             if not s.strip():
                 continue
             lines = s.split("\n", 1)
-            # Remove leading numbers (e.g. '1. ', '4.1 ') and trailing symbols
             header = re.sub(r'^[0-9\.]+\s+', '', lines[0])
             header = re.sub(r'[:\(\)].*$', '', header).strip().lower()
             body = lines[1].strip() if len(lines) > 1 else ""
@@ -45,8 +44,8 @@ class TemplateValidator:
         # Mandatory conclusion prefix
         conclusion_body = section_map.get("conclusion")
         if conclusion_body:
-            if not conclusion_body.startswith("Within these models"):
-                invalid_sections.append("Conclusion (does not start with 'Within these models')")
+            if not conclusion_body.startswith(self.mandatory_prefix):
+                invalid_sections.append(f"Conclusion (does not start with '{self.mandatory_prefix}')")
 
         success = not missing_sections and not invalid_sections
         details = {
