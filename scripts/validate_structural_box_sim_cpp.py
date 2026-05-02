@@ -201,7 +201,20 @@ def run_precision_and_controls(base_config: dict[str, Any], out_root: Path) -> d
     fals_activity = metrics.get("falsification_zero_s.epsilon_active_fraction")
     fals_pass = None
     if baseline_activity is not None and fals_activity is not None:
-        fals_pass = bool(fals_activity <= baseline_activity + 1e-9)
+        # Tool README claims s=0 should lead to collapse or lower activity. Treat "no meaningful change"
+        # as a falsification failure (capability exists, expected negative-control effect not observed).
+        min_drop_fraction = 0.05
+        target = baseline_activity * (1.0 - min_drop_fraction)
+        fals_pass = bool(fals_activity < target)
+    fals_notes = None
+    if baseline_activity is not None and fals_activity is not None:
+        fals_notes = {
+            "criterion": "fals_activity < baseline_activity*(1-0.05)",
+            "baseline_activity": baseline_activity,
+            "fals_activity": fals_activity,
+            "target": baseline_activity * 0.95,
+            "observed_drop_fraction": (baseline_activity - fals_activity) / max(baseline_activity, 1e-12),
+        }
 
     report = {
         "performed": True,
@@ -216,6 +229,7 @@ def run_precision_and_controls(base_config: dict[str, Any], out_root: Path) -> d
             "baseline_fp64_epsilon_active_fraction": baseline_activity,
             "falsification_epsilon_active_fraction": fals_activity,
             "passed": fals_pass,
+            "notes": fals_notes,
         },
         "artifacts": {
             "summary": str(res.summary_path),
@@ -333,4 +347,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

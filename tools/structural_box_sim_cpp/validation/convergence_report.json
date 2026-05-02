@@ -1,13 +1,58 @@
 {
-  "performed": false,
-  "reason": "Not yet generated. Run a grid/timestep refinement sweep and store outputs under tools/structural_box_sim_cpp/outputs/.",
-  "recommended_protocol": {
-    "vary": ["nx", "dt", "steps"],
-    "checks": ["metric_convergence:epsilon_max", "metric_convergence:alignment_success_rate"],
-    "acceptance": {
-      "relative_change_threshold": 0.02,
-      "stable_over_two_refinements": true
+  "performed": true,
+  "timestamp": "2026-05-02T03:25:42.694698+00:00",
+  "source_commit": "65b6c4fda63c3349f7b54c77bdeec99263332736",
+  "levels": [
+    {
+      "level_id": "L0",
+      "out_dir": "D:\\projects\\acellorator\\outputs\\validation\\structural_box_sim_cpp_full_rigor\\convergence\\L0",
+      "config_hash": "6b7eb541cb3097668a28cbe21ac1fbec271e47aa9fa44d9747b9ff7d7c69bdb1"
+    },
+    {
+      "level_id": "L1",
+      "out_dir": "D:\\projects\\acellorator\\outputs\\validation\\structural_box_sim_cpp_full_rigor\\convergence\\L1",
+      "config_hash": "a8cbaed5941c17d9e585d81e67aa430f19bb147d9b8e143b0637ff1a7abb58b7"
+    },
+    {
+      "level_id": "L2",
+      "out_dir": "D:\\projects\\acellorator\\outputs\\validation\\structural_box_sim_cpp_full_rigor\\convergence\\L2",
+      "config_hash": "55be6e855c56229cdf30763fe6dfa648e3da131f177cc0c1ccc765144e660f06"
     }
-  },
-  "artifacts": []
+  ],
+  "comparisons": [
+    {
+      "from": "L0",
+      "to": "L1",
+      "relative_changes": {
+        "fp64.epsilon_max": 4.3605586962391685e-06,
+        "fp64.epsilon_active_fraction": 0.006172839506172839,
+        "fp64.rho_min": 1.369396663861351e-07,
+        "fp64.residue_max": 3.1944714292973285e-05
+      },
+      "artifacts": {
+        "from": "D:\\projects\\acellorator\\outputs\\validation\\structural_box_sim_cpp_full_rigor\\convergence\\L0",
+        "to": "D:\\projects\\acellorator\\outputs\\validation\\structural_box_sim_cpp_full_rigor\\convergence\\L1"
+      }
+    },
+    {
+      "from": "L1",
+      "to": "L2",
+      "relative_changes": {
+        "fp64.epsilon_max": 6.509555550440109e-07,
+        "fp64.epsilon_active_fraction": 0.003067484662576687,
+        "fp64.rho_min": 2.5387646130680204e-09,
+        "fp64.residue_max": 1.4826833084935513e-05
+      },
+      "artifacts": {
+        "from": "D:\\projects\\acellorator\\outputs\\validation\\structural_box_sim_cpp_full_rigor\\convergence\\L1",
+        "to": "D:\\projects\\acellorator\\outputs\\validation\\structural_box_sim_cpp_full_rigor\\convergence\\L2"
+      }
+    }
+  ],
+  "key_metrics": [
+    "fp64.epsilon_max",
+    "fp64.epsilon_active_fraction",
+    "fp64.rho_min",
+    "fp64.residue_max"
+  ]
 }

@@ -12,15 +12,15 @@ class ConsistencyValidator:
 
         # 1. Independent measurement count
         meta_m_count = metadata.get("independent_measurement_count", 0)
-        # Count measurement entries in body (approximate)
+        # Count measurement entries in body (looking for headers like ## Measurement)
         body_m_count = len(re.findall(r"^#+\s+Measurement", paper_content, re.MULTILINE | re.IGNORECASE))
         if meta_m_count != body_m_count:
             mismatches.append(f"Measurement count mismatch: metadata={meta_m_count}, body={body_m_count}")
 
         # 2. Models used
         meta_models = set(metadata.get("models_used", []))
-        # Find model names in Experimental Setup or Results (approximate)
-        body_models = set(re.findall(r"Tool:\s*(\w+)", paper_content))
+        # Find model names (e.g. `agent_based_sim_v1_cpp` or agent_based_sim_v1_cpp)
+        body_models = set(re.findall(r"`?([\w_]+sim[\w_]+)`?", paper_content))
         missing_models = meta_models - body_models
         if missing_models:
             mismatches.append(f"Models listed in metadata but missing from body: {', '.join(missing_models)}")

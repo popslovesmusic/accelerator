@@ -1,6 +1,7 @@
 import argparse
 import json
 from pathlib import Path
+from json import JSONDecodeError
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -33,7 +34,11 @@ def check_sync(tool_manifest_path: Path, only_tools: set[str] | None = None) -> 
         if cert_path is None:
             continue
 
-        cert = _load_json(cert_path)
+        try:
+            cert = _load_json(cert_path)
+        except JSONDecodeError as e:
+            failures.append(f"{name}: invalid certification_manifest.json ({cert_path.as_posix()}): {e}")
+            continue
         sv = cert.get("scientific_validity", {}) if isinstance(cert, dict) else {}
 
         expected = {
@@ -76,4 +81,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

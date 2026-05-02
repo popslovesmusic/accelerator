@@ -1,0 +1,115 @@
+{
+  "run_id": "f3fb657c",
+  "start_time": "2026-05-02T03:40:00.337538",
+  "entries": [
+    {
+      "timestamp": "2026-05-02T03:40:00.341586",
+      "component": "template_validator",
+      "action": "validate",
+      "status": "success",
+      "details": {
+        "missing_sections": [],
+        "invalid_sections": []
+      }
+    },
+    {
+      "timestamp": "2026-05-02T03:40:00.342720",
+      "component": "consistency_validator",
+      "action": "validate",
+      "status": "success",
+      "details": {
+        "mismatches": []
+      }
+    },
+    {
+      "timestamp": "2026-05-02T03:40:00.342999",
+      "component": "lexicon_validator",
+      "action": "lexicon_in_check",
+      "status": "complete",
+      "details": {
+        "input_terms": [],
+        "results": {
+          "valid": [],
+          "missing": [],
+          "aliases": {}
+        }
+      }
+    },
+    {
+      "timestamp": "2026-05-02T03:40:00.343314",
+      "component": "measurement_validator",
+      "action": "validate",
+      "status": "failed",
+      "details": {
+        "target_level": "C5",
+        "required": 1,
+        "found": 0,
+        "measurement_section_present": true,
+        "valid_measurements": [],
+        "reasons": [
+          "Invalid measurement entry (unknown): Missing field: input_sources, Missing field: observables_measured",
+          "Invalid measurement entry (unknown): Missing field: input_sources, Missing field: observables_measured"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-05-02T03:40:00.343590",
+      "component": "falsification_validator",
+      "action": "validate",
+      "status": "failed",
+      "details": {
+        "vectors_present": [],
+        "vectors_missing": [
+          "FV-1",
+          "FV-2",
+          "FV-3",
+          "FV-4"
+        ],
+        "reasons": [
+          "Strict mode: Missing required falsification vectors: FV-1, FV-2, FV-3, FV-4"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-05-02T03:40:00.343821",
+      "component": "cpp_preference_validator",
+      "action": "validate",
+      "status": "success",
+      "details": {
+        "target_level": "C5",
+        "violations": []
+      }
+    },
+    {
+      "timestamp": "2026-05-02T03:40:00.344044",
+      "component": "claim_gate",
+      "action": "process_claim",
+      "status": "block",
+      "details": {
+        "claim_id": "ORIENTATION_EMERGENCE_TDA_V4",
+        "results": {
+          "claim_id": "ORIENTATION_EMERGENCE_TDA_V4",
+          "requested_level": "C5",
+          "final_level": "C3",
+          "gate_result": "block",
+          "checks": {
+            "template_pass": true,
+            "lexicon_pass": true,
+            "measurement_pass": false,
+            "cpp_preference_pass": true,
+            "falsification_pass": false,
+            "consistency_pass": true,
+            "language_policy_pass": true
+          },
+          "downgrades_applied": [
+            "Insufficient independent measurements for requested level."
+          ],
+          "blocked_reasons": [
+            "Falsification check failed."
+          ],
+          "intent": "validate"
+        }
+      }
+    }
+  ]
+}

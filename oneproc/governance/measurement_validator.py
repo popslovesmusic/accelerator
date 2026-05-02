@@ -47,7 +47,7 @@ class MeasurementValidator:
             else:
                 reasons.append(f"Invalid measurement entry ({m.get('tool', 'unknown')}): {', '.join(m_reasons)}")
 
-        success = len(valid_measurements) >= min_required and has_section
+        success = len(valid_measurements) >= min_required and bool(has_section)
         
         details = {
             "target_level": target_level,

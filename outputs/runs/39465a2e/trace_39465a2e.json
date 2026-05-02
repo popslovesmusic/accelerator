@@ -1,0 +1,121 @@
+{
+  "run_id": "39465a2e",
+  "start_time": "2026-05-02T03:38:15.245676",
+  "entries": [
+    {
+      "timestamp": "2026-05-02T03:38:15.255086",
+      "component": "template_validator",
+      "action": "validate",
+      "status": "success",
+      "details": {
+        "missing_sections": [],
+        "invalid_sections": []
+      }
+    },
+    {
+      "timestamp": "2026-05-02T03:38:15.255642",
+      "component": "consistency_validator",
+      "action": "validate",
+      "status": "failed",
+      "details": {
+        "mismatches": [
+          "Measurement count mismatch: metadata=2, body=0",
+          "Models listed in metadata but missing from body: agent_based_sim_v1_cpp, graph_dynamics_sim_v1_cpp, fsa_rule_engine_sim_v1_cpp, kuramoto_sim_v1_cpp",
+          "Metadata declares falsification run but section is missing in body."
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-05-02T03:38:15.255899",
+      "component": "lexicon_validator",
+      "action": "lexicon_in_check",
+      "status": "complete",
+      "details": {
+        "input_terms": [],
+        "results": {
+          "valid": [],
+          "missing": [],
+          "aliases": {}
+        }
+      }
+    },
+    {
+      "timestamp": "2026-05-02T03:38:15.256132",
+      "component": "measurement_validator",
+      "action": "validate",
+      "status": "failed",
+      "details": {
+        "target_level": "C5",
+        "required": 1,
+        "found": 0,
+        "measurement_section_present": false,
+        "valid_measurements": [],
+        "reasons": [
+          "Measurement section missing from paper body."
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-05-02T03:38:15.256315",
+      "component": "falsification_validator",
+      "action": "validate",
+      "status": "failed",
+      "details": {
+        "vectors_present": [],
+        "vectors_missing": [
+          "FV-1",
+          "FV-2",
+          "FV-3",
+          "FV-4"
+        ],
+        "reasons": [
+          "Strict mode: Missing required falsification vectors: FV-1, FV-2, FV-3, FV-4"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-05-02T03:38:15.256482",
+      "component": "cpp_preference_validator",
+      "action": "validate",
+      "status": "success",
+      "details": {
+        "target_level": "C5",
+        "violations": []
+      }
+    },
+    {
+      "timestamp": "2026-05-02T03:38:15.256662",
+      "component": "claim_gate",
+      "action": "process_claim",
+      "status": "block",
+      "details": {
+        "claim_id": "ORIENTATION_EMERGENCE_TDA_V4",
+        "results": {
+          "claim_id": "ORIENTATION_EMERGENCE_TDA_V4",
+          "requested_level": "C5",
+          "final_level": "C3",
+          "gate_result": "block",
+          "checks": {
+            "template_pass": true,
+            "lexicon_pass": true,
+            "measurement_pass": false,
+            "cpp_preference_pass": true,
+            "falsification_pass": false,
+            "consistency_pass": false,
+            "language_policy_pass": true
+          },
+          "downgrades_applied": [
+            "Insufficient independent measurements for requested level."
+          ],
+          "blocked_reasons": [
+            "Measurement count mismatch: metadata=2, body=0",
+            "Models listed in metadata but missing from body: agent_based_sim_v1_cpp, graph_dynamics_sim_v1_cpp, fsa_rule_engine_sim_v1_cpp, kuramoto_sim_v1_cpp",
+            "Metadata declares falsification run but section is missing in body.",
+            "Falsification check failed."
+          ],
+          "intent": "validate"
+        }
+      }
+    }
+  ]
+}
