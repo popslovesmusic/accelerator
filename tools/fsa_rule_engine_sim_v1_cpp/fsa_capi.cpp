@@ -13,6 +13,29 @@ extern "C" {
 
 EXPORT FSAAgentEngine* create_fsa_engine(int num_agents, int n_states, int forbidden, int res_thresh, int res_req) {
     auto graph = std::make_shared<StateGraph>(n_states);
+    
+    // Default random graph building
+    std::mt19937 gen(42);
+    std::uniform_int_distribution<int> state_dist(0, n_states - 1);
+    
+    std::vector<std::vector<int>> adj(n_states);
+    for (int i = 0; i < n_states; ++i) {
+        int degree = 5 + (gen() % 10);
+        for (int j = 0; j < degree; ++j) {
+            adj[i].push_back(state_dist(gen));
+        }
+    }
+    
+    int current_offset = 0;
+    for (int i = 0; i < n_states; ++i) {
+        graph->row_offsets[i] = current_offset;
+        for (int neighbor : adj[i]) {
+            graph->column_indices.push_back(neighbor);
+        }
+        current_offset += adj[i].size();
+    }
+    graph->row_offsets[n_states] = current_offset;
+
     auto rules = std::make_shared<RuleEngine>(n_states, forbidden, res_thresh, res_req);
     return new FSAAgentEngine(num_agents, graph, rules);
 }
