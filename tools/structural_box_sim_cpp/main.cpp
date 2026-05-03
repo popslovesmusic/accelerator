@@ -97,6 +97,7 @@ void run_sim(sycl::queue& q, size_t nx, T dt, T length,
         {"rho_min", d.rho_min},
         {"residue_max", d.residue_max},
         {"epsilon_active_fraction", d.epsilon_active_fraction},
+        {"alignment_success_rate", d.epsilon_active_fraction},
         {"time_ms", std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()}
     };
 }
