@@ -43,7 +43,7 @@ Diagnostic calculate_diagnostics(size_t nx, const T* epsilon, const T* rho, cons
 template<typename T>
 void run_sim(sycl::queue& q, size_t nx, int steps, T dt, T length,
              T D_epsilon, T D_rho, T D_R,
-             T a, T b, T c, T u, T s,
+             T a, T b, T c, T u, T s, int s_duration,
              T alpha, T beta, T gamma, T v, T h,
              T kappa, T lambda_R, T activity_thresh,
              const json& init_config,
@@ -72,7 +72,8 @@ void run_sim(sycl::queue& q, size_t nx, int steps, T dt, T length,
 
     auto start = std::chrono::high_resolution_clock::now();
     for (int i = 0; i < steps; ++i) {
-        engine.step(dt, dx, D_epsilon, D_rho, D_R, a, b, c, u, s, alpha, beta, gamma, v, h, kappa, lambda_R);
+        T current_s = (i < s_duration) ? s : static_cast<T>(0.0);
+        engine.step(dt, dx, D_epsilon, D_rho, D_R, a, b, c, u, current_s, alpha, beta, gamma, v, h, kappa, lambda_R);
     }
     auto end = std::chrono::high_resolution_clock::now();
 
@@ -100,6 +101,7 @@ int main(int argc, char** argv) {
     // Default parameters
     size_t nx = 256;
     int steps = 2000;
+    int s_duration = 2000; // Default to full duration
     float dt = 1e-4f;
     float length = 1.0f;
     float D_epsilon = 6e-4f;
@@ -119,6 +121,7 @@ int main(int argc, char** argv) {
             config_json = json::parse(f);
             nx = config_json.value("nx", nx);
             steps = config_json.value("steps", steps);
+            s_duration = config_json.value("s_duration", steps);
             dt = config_json.value("dt", dt);
             length = config_json.value("length", length);
             D_epsilon = config_json.value("D_epsilon", D_epsilon);
@@ -148,17 +151,17 @@ int main(int argc, char** argv) {
 
     json report;
     report["sim_id"] = "structural_box_v2p3_sycl_precision_study";
-    report["run_date"] = "2026-04-30";
+    report["run_date"] = "2026-05-03";
     report["hardware_gpu"] = q_gpu.get_device().get_info<sycl::info::device::name>();
     report["hardware_cpu"] = q_cpu.get_device().get_info<sycl::info::device::name>();
 
     std::cout << "Running FP32 on GPU..." << std::endl;
-    run_sim<float>(q_gpu, nx, steps, dt, length, D_epsilon, D_rho, D_R, a, b, c, u, s, alpha, beta, gamma, v, h, kappa, lambda_R, activity_thresh, init_config, "fp32_results", report);
+    run_sim<float>(q_gpu, nx, steps, dt, length, D_epsilon, D_rho, D_R, a, b, c, u, s, s_duration, alpha, beta, gamma, v, h, kappa, lambda_R, activity_thresh, init_config, "fp32_results", report);
 
     std::cout << "Running FP64 on CPU..." << std::endl;
     run_sim<double>(q_cpu, nx, steps, static_cast<double>(dt), static_cast<double>(length), 
                     static_cast<double>(D_epsilon), static_cast<double>(D_rho), static_cast<double>(D_R),
-                    static_cast<double>(a), static_cast<double>(b), static_cast<double>(c), static_cast<double>(u), static_cast<double>(s),
+                    static_cast<double>(a), static_cast<double>(b), static_cast<double>(c), static_cast<double>(u), static_cast<double>(s), s_duration,
                     static_cast<double>(alpha), static_cast<double>(beta), static_cast<double>(gamma), static_cast<double>(v), static_cast<double>(h),
                     static_cast<double>(kappa), static_cast<double>(lambda_R), static_cast<double>(activity_thresh), init_config, "fp64_results", report);
 
@@ -166,7 +169,7 @@ int main(int argc, char** argv) {
     std::cout << "Running Falsification (Zero Mismatch)..." << std::endl;
     run_sim<double>(q_cpu, nx, steps, static_cast<double>(dt), static_cast<double>(length), 
                     static_cast<double>(D_epsilon), static_cast<double>(D_rho), static_cast<double>(D_R),
-                    static_cast<double>(a), static_cast<double>(b), static_cast<double>(c), static_cast<double>(u), 0.0,
+                    static_cast<double>(a), static_cast<double>(b), static_cast<double>(c), static_cast<double>(u), 0.0, 0,
                     static_cast<double>(alpha), static_cast<double>(beta), static_cast<double>(gamma), static_cast<double>(v), static_cast<double>(h),
                     static_cast<double>(kappa), static_cast<double>(lambda_R), static_cast<double>(activity_thresh), init_config, "falsification_zero_s", report);
 
