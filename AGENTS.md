@@ -21,6 +21,35 @@ Your mission is to answer theoretical questions from **"THE LAW OF THE ONE PROCE
 
 ---
 
+## Core Principle (New – Critical)
+
+All claims are constrained by:
+
+> **Mechanism Independence > Tool Count**
+
+A valid result must not depend on a single governing dynamic.
+
+---
+
+##Mechanism Class Definition (New – Required)
+
+A **mechanism class** is defined by its governing update rule or equation type.
+
+### Allowed Mechanism Classes
+
+```json
+{
+  "mechanism_classes": [
+    "ode_oscillator",
+    "reaction_diffusion",
+    "cellular_automata",
+    "agent_based",
+    "graph_dynamics",
+    "topological_analysis"
+  ]
+}
+
+
 ## 2. Operational Mandate: Use, Don’t Alter
 
 - You MAY execute any approved tool in the `acellorator` ecosystem.
@@ -95,6 +124,7 @@ The agent MUST apply the charter when:
 - **Data provenance:** empirical claims require recoverable output files and charter-format citations.
 - **Term compliance:** primitive terms must pass the charter’s reduction checks, including verb test and procedural FFT.
 - **Overreach check:** no result may be written as universal truth.
+- **Claim validation:**all claim status assignments must be valdated to meet rigor requirements.
 
 ### 5.3 Minimum Checks Before Promoting a Lexicon Term
 
@@ -417,65 +447,56 @@ Engine code MUST NOT contain governance logic or claim rules.
 
 ---
 
-## 10. Research Workflow
+## 10. Research Workflow (Agent-Orchestrated)
+
+The agent acts as the primary orchestrator, replacing the `oneproc` CLI. Every research run MUST follow this governed sequence.
 
 ### 10.1 Analyze
-
 Map question to canonical primitives and candidate tool classes.
 
 ### 10.2 Creative Pivot Synthesis — Optional
-
 Use only when multiple sources or theories are provided. Output must be structured JSON containing synthesis, decompression, and hypotheses. All outputs default to `PROVISIONAL`.
 
-### 10.3 Lexicon Resolve & Validate
+### 10.3 Lexicon In-Check (Pre-Run)
+Before generating any content or running simulations:
+1. Identify candidate terms from the research question and hypothesis.
+2. Search `registry/lexicon_canonical.json` and `registry/lexicon_alias_map.json`.
+3. Normalize terms to canonical forms.
+4. Verify status in `registry/lexicon_validation_registry.json`.
+5. If terms are missing or unverified, proceed with caution and trigger the **Lexicon Induction Pipeline (7.1)**.
 
-- Normalize user language using `registry/lexicon_alias_map.json`.
-- Resolve terms to `registry/lexicon_canonical.json`.
-- Check `registry/lexicon_validation_registry.json` for evidence status.
-- Apply charter compliance and provenance rules to any term-role validation being claimed.
-- If a term is missing or weakly supported, create a validation plan before claiming it as grounded.
-
-### 10.4 Lexicon Induction If Needed
-
-- Detect any new, unstable, or synthesized term.
-- If missing, add a `GAP_OPEN` record to `registry/lexicon_gap_queue.json`.
-- Create a role-specific validation entry in `registry/lexicon_validation_registry.json`.
-- Map the term to primitives and candidate observables.
-- Do not use the term in final claims beyond its recorded evidence level.
-
-### 10.5 Tool Readiness & Certification Check
-
+### 10.4 Tool Readiness & Certification Check
 Before running any experiment:
+1. Read each selected tool’s `tools/<tool_name>/validation/certification_manifest.json`.
+2. Confirm the tool’s certification level (C1-C4) is sufficient for the intended claim.
+3. **MANDATORY:** Prefer C++ tools for any claim level C4 or higher. If Python is used, log justification.
+4. Record implementation language and C++ availability in run metadata.
 
-- Read each selected tool’s `tools/<tool_name>/validation/certification_manifest.json` if present.
-- If missing, treat the tool as uncertified unless other recoverable validation evidence is provided.
-- Confirm the tool’s certification level is sufficient for the intended claim type.
-- **SIM_DESIGNER:** For any intended claim level C4 or higher, MUST include at least one independent measurement tool.
-- **SIM_DESIGNER:** When both C++ and Python tools exist for the same model class, MUST select C++ unless explicitly justified.
-- **SIM_DESIGNER:** If Python is used when C++ is available, must log justification in run metadata.
-- **SIM_DESIGNER:** Prefer C++ tools for all production, validation, and high-rigor runs.
-- Reject, downgrade, or mark exploratory any tool without required validation artifacts.
-- Log tool certification level in experiment metadata.
+### 10.5 Experimentation
+1. Create a dedicated output directory: `outputs/runs/<short_id>/`.
+2. Generate simulation configs; do not overwrite defaults.
+3. Execute simulations via `run_shell_command`.
+4. Collect raw metrics and prepare for verification.
 
-### 10.6 Experiment
+### 10.6 Verification & Measurement
+1. Apply analysis tools (e.g., `spectral_analysis_v1_cpp`, `tda_module_v2_cpp`).
+2. Extract observables and normalize metrics.
+3. Prepare cross-model comparison according to the **Cross-Verification Protocol (12)**.
+4. **MANDATORY:** For C4+ claims, perform at least one independent measurement using a different mechanism class.
 
-- Select tools via the decision tree.
-- Create new configs; do not overwrite defaults.
-- Run simulations.
-- **EXECUTOR:** Record implementation_language (cpp | python) for each tool execution.
-- **EXECUTOR:** Record whether a C++ equivalent tool was available.
-- Collect metrics and output paths.
-
-### 10.7 Verify
-
-- Apply analysis tools.
-- Extract observables.
-- Normalize metrics.
-- Prepare cross-model comparison.
+### 10.7 Falsification
+1. Execute falsification vectors (FV-1, FV-2, etc.) as required by the target claim level (see 10.8.1).
+2. Record results and artifacts in the run directory.
 
 ### 10.8 Unified Claim Gate (Data-Driven Enforcement)
+All research outputs MUST be validated using `scripts/governance_gate.py`. This script replicates the charter's enforcement logic.
 
-The agent MUST apply the following governance mandates from `registry/compliance_charter_v2_3.json`. Even if `oneproc` is not used, these rules are binding and MUST be enforced through manual verification or prompt-based logic.
+**Execution:**
+```powershell
+python scripts/governance_gate.py <paper_path> <target_level> <intent> <strict_mode>
+```
+
+**Gate Requirements (Mandated by Compliance Charter v2.3):**
 
 #### 10.8.1 Claim Level Mandates
 | Level | Min. Independent Measurements | Required Falsification Vectors | C++ Preference |
@@ -485,49 +506,52 @@ The agent MUST apply the following governance mandates from `registry/compliance
 | **C6** | 2 | FV-1, FV-2, FV-3, FV-4 | Block if Python |
 
 #### 10.8.2 Intent-Based Classification Caps
-The requested intent strictly limits the maximum allowable claim level:
 - **Explore:** Max level **C2**.
 - **Validate:** Max level **C5**.
 - **Publish:** Max level **C6**.
 
-#### 10.8.3 Mandatory Paper Structure
-All research outputs MUST include these 11 sections in order:
-1. Abstract
-2. Theoretical Mapping
-3. Experimental Setup
-4. Observables
-5. Results
-6. Measurement
-7. Cross-Model Comparison
-8. Falsification
-9. Artifact Analysis
-10. Classification
-11. Conclusion (MUST start with "Within these models,")
-
 ### 10.9 Writing and Template Selection
-- **RESEARCH_WRITER:** MUST select the appropriate template from `registry/governance/schemas/WRITER_TEMPLATES_V1.json` based on the assigned claim level (C3, C4, C5).
-- **RESEARCH_WRITER:** MUST populate all required sections. Empty sections or placeholder language (TODO/FIXME) block finalization.
-- **RESEARCH_WRITER:** MUST NOT invent data. If inputs are insufficient, return a governance failure.
-- **RESEARCH_WRITER:** For publication intent, use the `ZENODO_PUBLICATION` template and include all required disclosure sections.
+1. Select the appropriate template from `registry/writer_templates.json`.
+2. Populate all 11 mandatory sections in order (see 10.10.1).
+3. Ensure the conclusion starts with: **"Within these models,"**.
 
-### 10.10 Manual Enforcement Protocol (CLI Fallback)
-If the `oneproc` CLI is bypassed, the agent MUST perform the following manual "Prompt Gate":
-1. **Self-Audit:** Review the drafted paper against the "Mandatory Paper Structure" list.
-2. **Evidence Count:** Explicitly count the `independent_measurement_count` and `models_used` in the metadata.
-3. **Falsification Check:** Verify every required FV code (per Section 10.8.1) appears in the Falsification section.
-4. **Humility Check:** Ensure the conclusion prefix is present and the classification reflects the lowest-common-denominator of tool readiness and evidence level.
+### 10.10 Lexicon Out-Check (Post-Run)
+After drafting the paper:
+1. Perform a final scan for new or unstable terms.
+2. Ensure any gaps are recorded in `registry/lexicon_gap_queue.json`.
+3. Update `registry/lexicon_validation_registry.json` if new evidence was produced for a term-role.
 
+### 10.11 Manual Enforcement Protocol (Self-Audit)
+If the automated gate script is unavailable, the agent MUST perform this manual check:
+1. **Paper Structure:** Verify all 11 sections are present and non-empty.
+2. **Evidence Count:** Explicitly verify `independent_measurement_count` and `model_classes_count` in metadata.
+3. **Falsification Check:** Verify every required FV code appears in the Falsification section.
+4. **Humility Check:** Ensure the conclusion prefix is present and classification is humble.
 
-### Multi-Tool Run Orchestration
+---
 
-For experiments requiring multiple tools, the agent SHOULD use scripts/multi_sim_runner.py.
-The runner may execute tools in serial, parallel, or dependency-graph mode.
-The runner produces organized evidence packets but MUST NOT classify claims.
-All claim interpretation remains controlled by the Unified Claim Gate.
-The runner MUST use tool_manifest.json and must not execute arbitrary commands outside registered tools.
+## 11. Maintenance & Registry Tasks
 
-## 11. Agent Decision Tree
+The agent is responsible for repository health, previously handled by `oneproc init` and `oneproc claim`.
 
+### 11.1 Workspace Initialization
+If directories or registries are missing:
+1. Create `outputs/runs`, `patches`, and `registry`.
+2. Ensure `tool_manifest.json`, `lexicon_canonical.json`, and `compliance_charter_v2_3.json` are present.
+
+### 11.2 Claim Management
+1. After a successful gate pass, record the claim in `registry/claim_registry.json`.
+2. Index any new evidence in `registry/evidence_index.json`.
+
+### 11.3 Publication (Zenodo)
+When the user requests publication:
+1. Use the `ZENODO_PUBLICATION` template.
+2. Validate the package against Zenodo requirements (metadata, license, data availability).
+3. Export the bundle as a DOCX or PDF for the user.
+
+---
+
+## 12. Agent Decision Tree
 ### 11.1 Primary Tool Selection
 
 | Research Target | Candidate Tools |
@@ -712,6 +736,21 @@ No research claim may be finalized until it passes the Unified Claim Gate.
   "gate_result": "pass | downgrade | block"
 }
 ```
+
+### 13.5 Lexicon–Claim Binding Rule
+
+When a claim reaches L2 or higher, every canonical or provisional term used in the claim MUST be bound back to the lexicon validation system.
+
+Required actions:
+
+1. Record the claim_id and evidence_id for each term-role used.
+2. Update registry/lexicon_validation_registry.json with the observed evidence level.
+3. Record the mechanism_classes that supported the role.
+4. Record the tools, seeds, observables, and recoverable output paths.
+5. If the claim is downgraded, record the downgrade reason against each affected term-role.
+6. A term-role may not inherit claim strength automatically; it may only be upgraded if the evidence directly supports that operational role.
+
+A claim may pass while a term remains provisional, but the paper MUST explicitly state that the affected interpretation depends on a provisional term-role.
 
 ---
 

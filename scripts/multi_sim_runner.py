@@ -460,10 +460,19 @@ class MultiSimRunner:
                 tools_used[tname] = {
                     "tool_name": tname,
                     "model_class": t.get("model_class", ""),
+                    "mechanism_class": t.get("mechanism_class", ""),
+                    "implementation_language": t.get("implementation_language", ""),
+                    "backend": t.get("backend", ""),
                     "certification_level": t.get("certification_level", ""),
                     "recoverable_outputs": []
                 }
             tools_used[tname]["recoverable_outputs"].append(res["output_dir"])
+
+        mechanism_labels = [
+            (t.get("mechanism_class") or t.get("model_class") or "").strip()
+            for t in tools_used.values()
+        ]
+        mechanism_labels = [m for m in mechanism_labels if m]
 
         claim_gate_input = {
             "run_id": self.config["run_id"],
@@ -473,7 +482,8 @@ class MultiSimRunner:
             "claim_interpretation_allowed": False,
             "tools": list(tools_used.values()),
             "evidence": {
-                "model_classes_count": len(set(t["model_class"] for t in tools_used.values())),
+                "model_classes_count": len(set(mechanism_labels)),
+                "mechanism_classes_count": len(set(mechanism_labels)),
                 "seeds_used": len(set(res["seed"] for res in self.results if res["seed"] is not None)),
                 "recoverable_output_paths": [res["output_dir"] for res in self.results],
                 "falsification_run": any(res["claim_role"] == "falsification" for res in self.results),
