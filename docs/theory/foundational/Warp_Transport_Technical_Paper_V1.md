@@ -1,7 +1,7 @@
 ### 0. Metadata
 ```json
 {
-  "claim_id": "WARP_TRANS_2026_05_02",
+  "claim_id": "BIAS_TRANS_2026_05_02",
   "status": "L2",
   "classification": "Proposed Interpretation",
   "charter_classification": "provisional",
@@ -47,7 +47,7 @@
 ```
 
 ### 1. Abstract
-This paper investigates the theoretical proposal that "warp transport" is a forced, residue-supported, orientation-opposed transport corridor in Strict Procedural Monism (SPM). By integrating the NOT-axiom threshold logic with the anchored-scale gravity formalism, we demonstrate through multi-model simulation that: (1) a sharp forcing `threshold_transition` exists for the formation of stable misalignment corridors, and (2) the collapse of such corridors exhibits a distinct `non_oscillatory_collapse_signature`, differentiating them from natural gravitational basin events.
+This paper investigates the theoretical proposal that "biased transport" is a forced, residue-supported, orientation-opposed transport corridor in Strict Procedural Monism (SPM). By integrating the NOT-axiom threshold logic with the anchored-scale gravity formalism, we demonstrate through multi-model simulation that: (1) a sharp forcing `threshold_transition` exists for the formation of stable misalignment corridors, and (2) the collapse of such corridors exhibits a distinct `non_oscillatory_collapse_signature`, differentiating them from natural gravitational basin events.
 
 ### 2. Theoretical Mapping
 ```json
@@ -151,7 +151,7 @@ We employed two independent mechanism classes for cross-verification:
 - **Tool:** `signal_scope_phase_continuation_engine`
 - **Measurement Class:** `agent_based`
 - **Justification:** This tool provides a unique agent-based phase-continuation implementation not currently available in native C++.
-- **Method:** Sudden loss of learned forcing signal (Alpha-tail removed) to simulate warp bubble collapse.
+- **Method:** Sudden loss of learned forcing signal (Alpha-tail removed) to simulate bias window collapse.
 - **Analysis:** C++ Spectral Analysis of phase-error transients.
 
 ### 4. Observables
@@ -218,7 +218,7 @@ For lexicon binding, `non_oscillatory_collapse_signature` refers to the exit beh
 *Capped at Proposed Interpretation because term-roles for `threshold_transition`, `stable_selection_regime`, and `non_oscillatory_collapse_signature` are currently below L3 in `registry/lexicon_validation_registry.json`.*
 
 ### 10. Conclusion
-Within these models, warp transport remains a **proposed interpretation** of a threshold-dependent, meta-stable state of participating difference, with entry, persistence, and collapse behavior now separated into distinct lexicon-bound roles. The `non_oscillatory_collapse_signature` is a procedural consequence of collapse without dominant oscillatory relaxation under the tested forcing-removal protocol.
+Within these models, biased transport remains a **proposed interpretation** of a threshold-dependent, meta-stable state of participating difference, with entry, persistence, and collapse behavior now separated into distinct lexicon-bound roles. The `non_oscillatory_collapse_signature` is a procedural consequence of collapse without dominant oscillatory relaxation under the tested forcing-removal protocol.
 
 ### 11. Next Steps
 - Implement 2D C++ multi-model ensembles to characterize scaling.
