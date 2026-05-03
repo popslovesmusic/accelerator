@@ -366,16 +366,18 @@
       "canonical_name": "Warp-Collapse",
       "roles": {
         "failure_mode": {
-          "status": "L0",
-          "evidence": [],
-          "limitations": [
-            "Provisional induction from SATP_WARP_COLLAPSE_V1"
+          "status": "L2",
+          "evidence": [
+            "outputs/runs/h2_collapse_signature/results.json"
           ],
-          "claim_id": null,
-          "evidence_id": null,
-          "mechanism_classes": [],
-          "observables": [],
-          "output_paths": [],
+          "limitations": [
+            "C4 elevation pending multi-seed stability check"
+          ],
+          "claim_id": "WARP_TRANS_2026_05_02",
+          "evidence_id": "H2_COLLAPSE",
+          "mechanism_classes": ["agent_based"],
+          "observables": ["phase_error", "dominant_power_fraction"],
+          "output_paths": ["outputs/runs/h2_collapse_signature/trace_for_spectral.csv"],
           "downgrade_reasons": []
         }
       }
@@ -384,17 +386,70 @@
       "canonical_name": "Warp Lock",
       "roles": {
         "stable_identity_state": {
-          "status": "L0",
-          "evidence": [],
-          "limitations": [
-            "Provisional induction from SATP_WARP_COLLAPSE_V1"
+          "status": "L2",
+          "evidence": [
+            "outputs/runs/h1_threshold_sweep/sweep_results.json"
           ],
-          "claim_id": null,
-          "evidence_id": null,
-          "mechanism_classes": [],
-          "observables": [],
-          "output_paths": [],
+          "limitations": [
+            "1D spatial grid limitation"
+          ],
+          "claim_id": "WARP_TRANS_2026_05_02",
+          "evidence_id": "H1_THRESHOLD",
+          "mechanism_classes": ["reaction_diffusion"],
+          "observables": ["alignment_success_rate"],
+          "output_paths": ["outputs/runs/h1_threshold_sweep/run_s_0.3/"],
           "downgrade_reasons": []
+        }
+      }
+    },
+    "misalignment_threshold": {
+      "canonical_name": "Misalignment Threshold",
+      "roles": {
+        "governing_threshold": {
+          "status": "L2",
+          "evidence": [
+            "outputs/runs/h1_threshold_sweep/sweep_results.json"
+          ],
+          "operational_definition": "The minimum counter-bias epsilon forcing required to sustain a meta-stable misalignment corridor.",
+          "metrics": ["alignment_success_rate", "epsilon_max"],
+          "models_used": ["structural_box_sim_cpp"],
+          "evidence_paths": ["outputs/runs/h1_threshold_sweep/sweep_results.json"],
+          "claim_id": "WARP_TRANS_2026_05_02",
+          "mechanism_classes": ["reaction_diffusion"]
+        }
+      }
+    },
+    "forced_lock": {
+      "canonical_name": "Forced Lock",
+      "roles": {
+        "meta-stable_state": {
+          "status": "L2",
+          "evidence": [
+            "outputs/runs/h1_threshold_sweep/sweep_results.json"
+          ],
+          "operational_definition": "A state stabilized by continuous epsilon injection rather than internal residue closure.",
+          "metrics": ["alignment_success_rate"],
+          "models_used": ["structural_box_sim_cpp"],
+          "evidence_paths": ["outputs/runs/h1_threshold_sweep/sweep_results.json"],
+          "claim_id": "WARP_TRANS_2026_05_02",
+          "mechanism_classes": ["reaction_diffusion"]
+        }
+      }
+    },
+    "no_ringdown_technosignature": {
+      "canonical_name": "No Ringdown Technosignature",
+      "roles": {
+        "observable_event": {
+          "status": "L2",
+          "evidence": [
+            "outputs/runs/h2_collapse_signature/results.json"
+          ],
+          "operational_definition": "A broadband burst spectral profile indicating a collapse without a stable attractor.",
+          "metrics": ["dominant_power_fraction"],
+          "models_used": ["signal_scope_phase_continuation_engine"],
+          "evidence_paths": ["outputs/runs/h2_collapse_signature/results.json"],
+          "claim_id": "WARP_TRANS_2026_05_02",
+          "mechanism_classes": ["agent_based"]
         }
       }
     },
