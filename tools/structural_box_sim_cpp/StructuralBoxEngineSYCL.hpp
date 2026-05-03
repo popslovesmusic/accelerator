@@ -3,6 +3,7 @@
 #include <sycl/sycl.hpp>
 #include <vector>
 #include <iostream>
+#include <cstdint>
 
 namespace dase {
 namespace structural_box {
@@ -35,6 +36,21 @@ public:
             T x = static_cast<T>(idx) * dx - static_cast<T>(0.5) * length;
             T r2 = (x - offset) * (x - offset);
             eps_ptr[idx] = base + amplitude * sycl::exp(-static_cast<T>(0.5) * r2 / (sigma * sigma));
+        }).wait();
+    }
+
+    void initialize_noise(T base, T noise_std, int seed) {
+        const size_t nx = nx_;
+        auto eps_ptr = epsilon;
+        q_.parallel_for(sycl::range<1>(nx), [=](sycl::id<1> i) {
+            size_t idx = i.get(0);
+            // Simple hash for deterministic noise per index
+            uint32_t x = static_cast<uint32_t>(idx) + static_cast<uint32_t>(seed) + 1;
+            x = ((x >> 16) ^ x) * 0x45d9f3b;
+            x = ((x >> 16) ^ x) * 0x45d9f3b;
+            x = (x >> 16) ^ x;
+            float norm = static_cast<float>(x) / 4294967295.0f; // / 2^32-1
+            eps_ptr[idx] = base + static_cast<T>(norm - 0.5f) * noise_std;
         }).wait();
     }
 

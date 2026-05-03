@@ -46,15 +46,29 @@ void run_sim(sycl::queue& q, size_t nx, int steps, T dt, T length,
              T a, T b, T c, T u, T s,
              T alpha, T beta, T gamma, T v, T h,
              T kappa, T lambda_R, T activity_thresh,
+             const json& init_config,
              const std::string& label, json& report) {
     
     StructuralBoxEngineSYCL<T> engine(nx, q);
     T dx = length / nx;
 
-    // Default initialization from Python sim.py
-    engine.initialize_gaussian(static_cast<T>(0.0), static_cast<T>(0.32), static_cast<T>(0.08), static_cast<T>(0.0), length);
-    engine.initialize_uniform(engine.rho, static_cast<T>(0.25));
-    engine.initialize_uniform(engine.residue, static_cast<T>(0.0));
+    // Configurable initialization
+    std::string kind = init_config.value("epsilon_kind", "gaussian");
+    if (kind == "gaussian") {
+        T base = init_config.value("epsilon_base", static_cast<T>(0.0));
+        T amp = init_config.value("amplitude", static_cast<T>(0.32));
+        T sigma = init_config.value("sigma", static_cast<T>(0.08));
+        T offset = init_config.value("offset", static_cast<T>(0.0));
+        engine.initialize_gaussian(base, amp, sigma, offset, length);
+    } else if (kind == "uniform") {
+        T base = init_config.value("epsilon_base", static_cast<T>(0.0));
+        T noise = init_config.value("noise_std", static_cast<T>(0.01));
+        int seed = init_config.value("seed", 42);
+        engine.initialize_noise(base, noise, seed);
+    }
+
+    engine.initialize_uniform(engine.rho, init_config.value("rho_base", static_cast<T>(0.25)));
+    engine.initialize_uniform(engine.residue, init_config.value("residue_base", static_cast<T>(0.0)));
 
     auto start = std::chrono::high_resolution_clock::now();
     for (int i = 0; i < steps; ++i) {
@@ -98,6 +112,7 @@ int main(int argc, char** argv) {
     float activity_thresh = 0.05f;
 
     json config_json;
+    json init_config = json::object(); // Default empty
     if (!config_path.empty()) {
         std::ifstream f(config_path);
         if (f.is_open()) {
@@ -122,6 +137,9 @@ int main(int argc, char** argv) {
             s = config_json.value("s", s);
             h = config_json.value("h", h);
             activity_thresh = config_json.value("activity_thresh", activity_thresh);
+            if (config_json.contains("initial_condition")) {
+                init_config = config_json["initial_condition"];
+            }
         }
     }
 
@@ -135,14 +153,14 @@ int main(int argc, char** argv) {
     report["hardware_cpu"] = q_cpu.get_device().get_info<sycl::info::device::name>();
 
     std::cout << "Running FP32 on GPU..." << std::endl;
-    run_sim<float>(q_gpu, nx, steps, dt, length, D_epsilon, D_rho, D_R, a, b, c, u, s, alpha, beta, gamma, v, h, kappa, lambda_R, activity_thresh, "fp32_results", report);
+    run_sim<float>(q_gpu, nx, steps, dt, length, D_epsilon, D_rho, D_R, a, b, c, u, s, alpha, beta, gamma, v, h, kappa, lambda_R, activity_thresh, init_config, "fp32_results", report);
 
     std::cout << "Running FP64 on CPU..." << std::endl;
     run_sim<double>(q_cpu, nx, steps, static_cast<double>(dt), static_cast<double>(length), 
                     static_cast<double>(D_epsilon), static_cast<double>(D_rho), static_cast<double>(D_R),
                     static_cast<double>(a), static_cast<double>(b), static_cast<double>(c), static_cast<double>(u), static_cast<double>(s),
                     static_cast<double>(alpha), static_cast<double>(beta), static_cast<double>(gamma), static_cast<double>(v), static_cast<double>(h),
-                    static_cast<double>(kappa), static_cast<double>(lambda_R), static_cast<double>(activity_thresh), "fp64_results", report);
+                    static_cast<double>(kappa), static_cast<double>(lambda_R), static_cast<double>(activity_thresh), init_config, "fp64_results", report);
 
     // Falsification: Zero Mismatch (s=0) should lead to structural collapse or lower activity
     std::cout << "Running Falsification (Zero Mismatch)..." << std::endl;
@@ -150,7 +168,7 @@ int main(int argc, char** argv) {
                     static_cast<double>(D_epsilon), static_cast<double>(D_rho), static_cast<double>(D_R),
                     static_cast<double>(a), static_cast<double>(b), static_cast<double>(c), static_cast<double>(u), 0.0,
                     static_cast<double>(alpha), static_cast<double>(beta), static_cast<double>(gamma), static_cast<double>(v), static_cast<double>(h),
-                    static_cast<double>(kappa), static_cast<double>(lambda_R), static_cast<double>(activity_thresh), "falsification_zero_s", report);
+                    static_cast<double>(kappa), static_cast<double>(lambda_R), static_cast<double>(activity_thresh), init_config, "falsification_zero_s", report);
 
     // Precision drift calculation
     double drift_e = std::abs(report["fp32_results"]["epsilon_max"].get<double>() - report["fp64_results"]["epsilon_max"].get<double>());
