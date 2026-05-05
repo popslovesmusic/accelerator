@@ -483,11 +483,12 @@ Before running any experiment:
 3. **MANDATORY:** Prefer C++ tools for any claim level C4 or higher. If Python is used, log justification.
 4. Record implementation language and C++ availability in run metadata.
 
-### 10.5 Experimentation
-1. Create a dedicated output directory: `outputs/runs/<short_id>/`.
-2. Generate simulation configs; do not overwrite defaults.
-3. Execute simulations via `run_shell_command`.
-4. Collect raw metrics and prepare for verification.
+### 10.5 Experimentation (Results Hygiene Standard)
+1. **Initialize Output Path:** Every research run MUST use a dedicated directory in `results/` following the schema: `results/<YYYY-MM-DD>_run<NN>_<human_readable_name>/`.
+2. **Path Resolution:** The agent MUST check the existing contents of `results/` to determine the next available run number (`NN`) for the current date.
+3. **Data Localization:** Save all raw metrics, simulation configs, and analysis outputs in a `data/` subdirectory within the run folder.
+4. **Artifact Localization:** Save all plots, logs, and certification manifests in an `artifacts/` subdirectory.
+5. **Execution:** Execute simulations via `run_shell_command`.
 
 ### 10.6 Verification & Measurement
 1. Apply analysis tools (e.g., `spectral_analysis_v1_cpp`, `tda_module_v2_cpp`).
@@ -497,7 +498,7 @@ Before running any experiment:
 
 ### 10.7 Falsification
 1. Execute falsification vectors (FV-1, FV-2, etc.) as required by the target claim level (see 10.8.1).
-2. Record results and artifacts in the run directory.
+2. Record results and artifacts in the `artifacts/` subdirectory of the run folder.
 
 ### 10.8 Unified Claim Gate (Data-Driven Enforcement)
 All research outputs MUST be validated using `scripts/governance_gate.py`. This script replicates the charter's enforcement logic.
@@ -522,9 +523,10 @@ python scripts/governance_gate.py <paper_path> <target_level> <intent> <strict_m
 - **Publish:** Max level **C6**.
 
 ### 10.9 Writing and Template Selection
-1. Select the appropriate template from `registry/writer_templates.json`.
-2. Populate all 11 mandatory sections in order (see 10.10.1).
-3. Ensure the conclusion starts with: **"Within these models,"**.
+1. **Paper Placement:** Technical papers MUST be saved as `paper.md` directly in the root of the run folder (e.g., `results/2026-05-04_run01_my_experiment/paper.md`).
+2. **Template Selection:** Select the appropriate template from `registry/writer_templates.json`.
+3. **Structure:** Populate all 11 mandatory sections in order (see 10.10.1).
+4. **Conclusion:** Ensure the conclusion starts with: **"Within these models,"**.
 
 ### 10.10 Lexicon Out-Check (Post-Run)
 After drafting the paper:
