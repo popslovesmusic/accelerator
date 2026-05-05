@@ -5,7 +5,7 @@
     "path": "theory/lexicon/compliance_charter_v2_3.json",
     "version": "2.3",
     "notes": [
-      "This registry tracks lexicon evidence levels (L0â€“L3) and also records charter-aware claim classifications and provenance.",
+      "This registry tracks lexicon evidence levels (L0\u00e2\u20ac\u201cL3) and also records charter-aware claim classifications and provenance.",
       "If an entry is marked L3 here but does not meet the charter's v2.3 metric schema requirements, it must be treated as PROVISIONAL for charter purposes until rerun outputs are produced.",
       "Lexicon In Check is mandatory before THEORIST finalizes hypothesis.",
       "Lexicon Out Check is mandatory after RESEARCH_WRITER and before final claim gate."
@@ -24,6 +24,33 @@
     "deprecated": "term should not be used without user approval"
   },
   "terms": {
+    "closure": {
+      "canonical_source": "registry/lexicon_canonical.json",
+      "aliases": ["stable loop", "fixed-point", "oscillatory locking"],
+      "global_status": "verified",
+      "roles": {
+        "continuation_convergence": {
+          "status": "L3",
+          "operational_definition": "Convergence of continuation into a stable loop under internal residue constraints.",
+          "mechanism_classes": ["agent_based", "reaction_diffusion"],
+          "evidence_id": "SPM_ADMISSIBILITY_RESOLUTION_V1",
+          "notes": "Verified through multi-seed persistence and stability sweeps."
+        }
+      }
+    },
+    "stability": {
+      "canonical_source": "registry/lexicon_canonical.json",
+      "aliases": ["persistent actualization", "bounded continuation"],
+      "global_status": "verified",
+      "roles": {
+        "sustained_phase_locking": {
+          "status": "L3",
+          "operational_definition": "Sustained, phase-locked oscillation or fixed-point persistence of structural metrics.",
+          "mechanism_classes": ["agent_based", "reaction_diffusion"],
+          "evidence_id": "SPM_ADMISSIBILITY_RESOLUTION_V1"
+        }
+      }
+    },
     "admissibility": {
       "canonical_source": "theory/lexicon/lexicon_canonical.json",
       "aliases": [
@@ -143,9 +170,12 @@
             "outputs/runs/two_threshold_rectification_2026-05-03/raw_results.csv",
             "outputs/runs/handoff_window_2026-05-03/handoff_results.csv",
             "outputs/runs/hysteresis_admissibility_rectification_2026-05-03/summary_hysteresis.csv",
-            "outputs/runs/hysteresis_admissibility_rectification_2026-05-03/raw_results.csv"
+            "outputs/runs/hysteresis_admissibility_rectification_2026-05-03/raw_results.csv",
+            "outputs/runs/phase_packets_2026-05-03/results.csv"
           ],
-          "downgrade_reasons": []
+          "downgrade_reasons": [
+            "lexicon_term_below_L2_caps_classification"
+          ]
         },
         "unbound_role_in_paper": {
           "status": "L0",
@@ -167,6 +197,23 @@
             "outputs/runs/handoff_window_2026-05-03/handoff_results.csv",
             "outputs/runs/hysteresis_admissibility_rectification_2026-05-03/summary_hysteresis.csv",
             "outputs/runs/hysteresis_admissibility_rectification_2026-05-03/raw_results.csv"
+          ],
+          "downgrade_reasons": [
+            "lexicon_term_below_L2_caps_classification"
+          ]
+        },
+        "phase_locked_admissibility_gate": {
+          "status": "L3",
+          "claim_id": "HYSTERETIC_INTERFERENCE_2026-05-03",
+          "evidence_id": "gate:hysteretic_interference_paper.md",
+          "mechanism_classes": [
+            "reaction_diffusion",
+            "agent_based"
+          ],
+          "observables": [],
+          "output_paths": [
+            "outputs/runs/hysteretic_interference_2026-05-03/aggregated_results.csv",
+            "outputs/runs/hysteretic_interference_abm_2026-05-03/results_abm_mismatch.csv"
           ],
           "downgrade_reasons": [
             "lexicon_term_below_L2_caps_classification"
@@ -232,7 +279,7 @@
     "epsilon": {
       "canonical_source": "theory/lexicon/lexicon_canonical.json",
       "aliases": [
-        "Îµ",
+        "\u00ce\u00b5",
         "varepsilon",
         "mismatch",
         "difference"
@@ -288,9 +335,12 @@
             "outputs/runs/two_threshold_rectification_2026-05-03/raw_results.csv",
             "outputs/runs/handoff_window_2026-05-03/handoff_results.csv",
             "outputs/runs/hysteresis_admissibility_rectification_2026-05-03/summary_hysteresis.csv",
-            "outputs/runs/hysteresis_admissibility_rectification_2026-05-03/raw_results.csv"
+            "outputs/runs/hysteresis_admissibility_rectification_2026-05-03/raw_results.csv",
+            "outputs/runs/phase_packets_2026-05-03/results.csv"
           ],
-          "downgrade_reasons": []
+          "downgrade_reasons": [
+            "lexicon_term_below_L2_caps_classification"
+          ]
         },
         "unbound_role_in_paper": {
           "status": "L0",
@@ -312,6 +362,23 @@
             "outputs/runs/handoff_window_2026-05-03/handoff_results.csv",
             "outputs/runs/hysteresis_admissibility_rectification_2026-05-03/summary_hysteresis.csv",
             "outputs/runs/hysteresis_admissibility_rectification_2026-05-03/raw_results.csv"
+          ],
+          "downgrade_reasons": [
+            "lexicon_term_below_L2_caps_classification"
+          ]
+        },
+        "signed_driver_signal": {
+          "status": "L3",
+          "claim_id": "HYSTERETIC_INTERFERENCE_2026-05-03",
+          "evidence_id": "gate:hysteretic_interference_paper.md",
+          "mechanism_classes": [
+            "reaction_diffusion",
+            "agent_based"
+          ],
+          "observables": [],
+          "output_paths": [
+            "outputs/runs/hysteretic_interference_2026-05-03/aggregated_results.csv",
+            "outputs/runs/hysteretic_interference_abm_2026-05-03/results_abm_mismatch.csv"
           ],
           "downgrade_reasons": [
             "lexicon_term_below_L2_caps_classification"
@@ -382,9 +449,12 @@
             "outputs/runs/two_threshold_rectification_2026-05-03/raw_results.csv",
             "outputs/runs/handoff_window_2026-05-03/handoff_results.csv",
             "outputs/runs/hysteresis_admissibility_rectification_2026-05-03/summary_hysteresis.csv",
-            "outputs/runs/hysteresis_admissibility_rectification_2026-05-03/raw_results.csv"
+            "outputs/runs/hysteresis_admissibility_rectification_2026-05-03/raw_results.csv",
+            "outputs/runs/phase_packets_2026-05-03/results.csv"
           ],
-          "downgrade_reasons": []
+          "downgrade_reasons": [
+            "lexicon_term_below_L2_caps_classification"
+          ]
         },
         "unbound_role_in_paper": {
           "status": "L0",
@@ -421,7 +491,7 @@
     "delta": {
       "canonical_source": "theory/lexicon/lexicon_canonical.json",
       "aliases": [
-        "Î”",
+        "\u00ce\u201d",
         "transition",
         "activation_operator"
       ],
@@ -697,6 +767,23 @@
           "downgrade_reasons": [
             "lexicon_term_below_L2_caps_classification"
           ]
+        },
+        "continuation_sustaining_capacity_inhibitor": {
+          "status": "L3",
+          "claim_id": "HYSTERETIC_INTERFERENCE_2026-05-03",
+          "evidence_id": "gate:hysteretic_interference_paper.md",
+          "mechanism_classes": [
+            "reaction_diffusion",
+            "agent_based"
+          ],
+          "observables": [],
+          "output_paths": [
+            "outputs/runs/hysteretic_interference_2026-05-03/aggregated_results.csv",
+            "outputs/runs/hysteretic_interference_abm_2026-05-03/results_abm_mismatch.csv"
+          ],
+          "downgrade_reasons": [
+            "lexicon_term_below_L2_caps_classification"
+          ]
         }
       }
     },
@@ -741,6 +828,23 @@
             "outputs/runs/handoff_window_2026-05-03/handoff_results.csv",
             "outputs/runs/hysteresis_admissibility_rectification_2026-05-03/summary_hysteresis.csv",
             "outputs/runs/hysteresis_admissibility_rectification_2026-05-03/raw_results.csv"
+          ],
+          "downgrade_reasons": [
+            "lexicon_term_below_L2_caps_classification"
+          ]
+        },
+        "polarity_of_phase_packet": {
+          "status": "L3",
+          "claim_id": "HYSTERETIC_INTERFERENCE_2026-05-03",
+          "evidence_id": "gate:hysteretic_interference_paper.md",
+          "mechanism_classes": [
+            "reaction_diffusion",
+            "agent_based"
+          ],
+          "observables": [],
+          "output_paths": [
+            "outputs/runs/hysteretic_interference_2026-05-03/aggregated_results.csv",
+            "outputs/runs/hysteretic_interference_abm_2026-05-03/results_abm_mismatch.csv"
           ],
           "downgrade_reasons": [
             "lexicon_term_below_L2_caps_classification"
@@ -1050,6 +1154,228 @@
             "outputs/runs/two_threshold_box_final_v3"
           ],
           "downgrade_reasons": []
+        }
+      }
+    },
+    "phase_packet": {
+      "roles": {
+        "relational_continuation_structure": {
+          "status": "L3",
+          "claim_id": "HYSTERETIC_PHASE_PACKETS_2026-05-03",
+          "evidence_id": "gate:hysteretic_phase_packets_paper.md",
+          "mechanism_classes": [
+            "reaction_diffusion",
+            "agent_based"
+          ],
+          "observables": [],
+          "output_paths": [
+            "outputs/runs/phase_packets_2026-05-03/results.csv"
+          ]
+        },
+        "coherent_process_structure": {
+          "status": "L3",
+          "claim_id": "HYSTERETIC_INTERFERENCE_2026-05-03",
+          "evidence_id": "gate:hysteretic_interference_paper.md",
+          "mechanism_classes": [
+            "reaction_diffusion",
+            "agent_based"
+          ],
+          "observables": [],
+          "output_paths": [
+            "outputs/runs/hysteretic_interference_2026-05-03/aggregated_results.csv",
+            "outputs/runs/hysteretic_interference_abm_2026-05-03/results_abm_mismatch.csv"
+          ],
+          "downgrade_reasons": [
+            "lexicon_term_below_L2_caps_classification"
+          ]
+        }
+      }
+    },
+    "hysteresis": {
+      "roles": {
+        "path_dependent_admissibility": {
+          "status": "L3",
+          "claim_id": "HYSTERETIC_PHASE_PACKETS_2026-05-03",
+          "evidence_id": "gate:hysteretic_phase_packets_paper.md",
+          "mechanism_classes": [
+            "reaction_diffusion",
+            "agent_based"
+          ],
+          "observables": [],
+          "output_paths": [
+            "outputs/runs/phase_packets_2026-05-03/results.csv"
+          ]
+        }
+      }
+    },
+    "interference": {
+      "roles": {
+        "phase_sensitive_barrier_modulation": {
+          "status": "L3",
+          "claim_id": "HYSTERETIC_INTERFERENCE_2026-05-03",
+          "evidence_id": "gate:hysteretic_interference_paper.md",
+          "mechanism_classes": [
+            "reaction_diffusion",
+            "agent_based"
+          ],
+          "observables": [],
+          "output_paths": [
+            "outputs/runs/hysteretic_interference_2026-05-03/aggregated_results.csv",
+            "outputs/runs/hysteretic_interference_abm_2026-05-03/results_abm_mismatch.csv"
+          ],
+          "downgrade_reasons": [
+            "lexicon_term_below_L2_caps_classification"
+          ]
+        }
+      }
+    },
+    "kappa": {
+      "roles": {
+        "phase_locked_inscription_coupling": {
+          "status": "L3",
+          "claim_id": "HYSTERETIC_INTERFERENCE_2026-05-03",
+          "evidence_id": "gate:hysteretic_interference_paper.md",
+          "mechanism_classes": [
+            "reaction_diffusion",
+            "agent_based"
+          ],
+          "observables": [],
+          "output_paths": [
+            "outputs/runs/hysteretic_interference_2026-05-03/aggregated_results.csv",
+            "outputs/runs/hysteretic_interference_abm_2026-05-03/results_abm_mismatch.csv"
+          ],
+          "downgrade_reasons": [
+            "lexicon_term_below_L2_caps_classification"
+          ]
+        }
+      }
+    },
+    "s_crit": {
+      "roles": {
+        "phase_sensitive_activation_threshold": {
+          "status": "L3",
+          "claim_id": "HYSTERETIC_INTERFERENCE_2026-05-03",
+          "evidence_id": "gate:hysteretic_interference_paper.md",
+          "mechanism_classes": [
+            "reaction_diffusion",
+            "agent_based"
+          ],
+          "observables": [],
+          "output_paths": [
+            "outputs/runs/hysteretic_interference_2026-05-03/aggregated_results.csv",
+            "outputs/runs/hysteretic_interference_abm_2026-05-03/results_abm_mismatch.csv"
+          ],
+          "downgrade_reasons": [
+            "lexicon_term_below_L2_caps_classification"
+          ]
+        }
+      }
+    },
+    "resolution_parameter": {
+      "canonical_source": "registry/lexicon_canonical.json",
+      "aliases": [
+        "B",
+        "boundary radius",
+        "resolution scale"
+      ],
+      "global_status": "verified",
+      "roles": {
+        "transition_index": {
+          "status": "L3",
+          "charter_claim_classification": "verified",
+          "charter_provenance_citations": [
+            "LEXICON | RESOLUTION_TRANSITION_2026-05-03 | 2026-05-04 | outputs/runs/research_resolution_threshold_2026-05-03/pde_synthesis.csv",
+            "LEXICON | RESOLUTION_TRANSITION_2026-05-03 | 2026-05-04 | outputs/runs/research_resolution_threshold_2026-05-03/agent_synthesis.csv"
+          ],
+          "charter_rationale": [
+            "Resolution B is confirmed as a dominant scale factor across PDE and Agent models.",
+            "High resolution (large B) sustains relational potential (QM-like) and suppresses global order.",
+            "Coarse resolution (small B) triggers collapse into geometric states (GR-like)."
+          ],
+          "operational_definition": "Scale parameter of the observing process that indexes the transition between relational potential and geometric realization.",
+          "metrics": [
+            "alignment_success_rate",
+            "order_parameter"
+          ],
+          "models_used": [
+            "structural_box_sim_cpp",
+            "agent_based_sim_v1_cpp"
+          ],
+          "evidence_paths": [
+            "outputs/runs/research_resolution_threshold_2026-05-03/pde_synthesis.csv",
+            "outputs/runs/research_resolution_threshold_2026-05-03/agent_synthesis.csv"
+          ],
+          "known_limits": [
+            "Numerical stability at extremely high resolutions remains untested.",
+            "Transition sharpness may depend on the specific coupling structure."
+          ],
+          "classification": "verified",
+          "claim_id": "RESOLUTION_TRANSITION_2026-05-03",
+          "evidence_id": "reports/resolution_transition_paper.md",
+          "mechanism_classes": [
+            "reaction_diffusion",
+            "agent_based"
+          ],
+          "observables": [
+            "alignment_success_rate",
+            "order_parameter"
+          ],
+          "output_paths": [
+            "outputs/runs/research_resolution_threshold_2026-05-03/pde_resolution_results.csv",
+            "outputs/runs/research_resolution_threshold_2026-05-03/agent_resolution_results.csv"
+          ]
+        }
+      }
+    },
+    "hysteretic_quantum-like_computation": {
+      "canonical_source": "registry/lexicon_canonical.json",
+      "aliases": [
+        "HQLC",
+        "hysteretic computation"
+      ],
+      "global_status": "partially_verified",
+      "roles": {
+        "computational_paradigm": {
+          "status": "L1",
+          "charter_claim_classification": "provisional",
+          "charter_provenance_citations": [
+            "LEXICON | HYSTERETIC_INTERFERENCE_2026-05-03 | 2026-05-04 | outputs/runs/research_hysteretic_interference_2026-05-03/pde_hqlc_synthesis.csv"
+          ],
+          "charter_rationale": [
+            "Demonstrated hysteretic activation contrast in PDE and Agent models.",
+            "Verified spatial interference of phase packets mediated by residue."
+          ],
+          "operational_definition": "A computational process where phase-coherent competing continuations evolve under path-dependent admissibility rules encoded in topological residue.",
+          "metrics": [
+            "alignment_success_rate",
+            "interference_contrast"
+          ],
+          "models_used": [
+            "structural_box_sim_cpp",
+            "agent_based_sim_v1_cpp"
+          ],
+          "evidence_paths": [
+            "outputs/runs/research_hysteretic_interference_2026-05-03/pde_hqlc_synthesis.csv"
+          ],
+          "known_limits": [
+            "Epsilon ghosting may contribute to short-term memory artifacts.",
+            "Full computational universality not yet demonstrated."
+          ],
+          "classification": "provisional",
+          "claim_id": "HYSTERETIC_INTERFERENCE_2026-05-03",
+          "evidence_id": "reports/hysteretic_interference_paper.md",
+          "mechanism_classes": [
+            "reaction_diffusion",
+            "agent_based"
+          ],
+          "observables": [
+            "alignment_success_rate",
+            "order_parameter"
+          ],
+          "output_paths": [
+            "outputs/runs/research_hysteretic_interference_2026-05-03/pde_hysteresis_results.csv",
+            "outputs/runs/research_hysteretic_falsification_2026-05-03/falsification_results.csv"
+          ]
         }
       }
     }
