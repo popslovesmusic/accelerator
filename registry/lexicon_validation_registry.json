@@ -871,6 +871,32 @@
             "outputs/runs/theory_fragment_v1/structural_box/"
           ],
           "downgrade_reasons": []
+        },
+        "topological_process_constraint_induction": {
+          "status": "L0",
+          "operational_definition": "A topological constraint where admissibility is localized to a narrow path of coherent orientation.",
+          "metrics": [
+            "topological_connectedness",
+            "betti_0"
+          ],
+          "models_used": [
+            "rd_moving_boundary_sim_v1"
+          ],
+          "scientific_validity": {
+            "implementation_verified": false,
+            "numerical_stability_verified": false,
+            "model_validation_passed": false,
+            "reproducibility_verified": false
+          },
+          "validation_plan": {
+            "tool": "tda_module_v2_cpp",
+            "source_model": "rd_moving_boundary_sim_v1",
+            "metrics": [
+              "topological_connectedness",
+              "betti_0"
+            ],
+            "falsification_condition": "Activity remains diffuse rather than forming narrow paths."
+          }
         }
       }
     },
@@ -1084,6 +1110,29 @@
           "observables": [],
           "output_paths": [],
           "downgrade_reasons": []
+        },
+        "terminology_migration_label": {
+          "status": "L0",
+          "operational_definition": "Validation of asymmetric transport metrics under bias forcing.",
+          "metrics": [
+            "transport_asymmetry_index"
+          ],
+          "models_used": [
+            "structural_box_sim_cpp"
+          ],
+          "scientific_validity": {
+            "implementation_verified": false,
+            "numerical_stability_verified": false,
+            "model_validation_passed": false,
+            "reproducibility_verified": false
+          },
+          "validation_plan": {
+            "tool": "structural_box_sim_cpp",
+            "metrics": [
+              "transport_asymmetry_index"
+            ],
+            "falsification_condition": "Transport remains symmetric despite bias forcing."
+          }
         }
       }
     },
@@ -1101,6 +1150,29 @@
           "observables": [],
           "output_paths": [],
           "downgrade_reasons": []
+        },
+        "terminology_migration_label": {
+          "status": "L0",
+          "operational_definition": "Localization of admissibility within a forcing-stabilized region.",
+          "metrics": [
+            "admissibility_localization_index"
+          ],
+          "models_used": [
+            "agent_based_sim_v1_cpp"
+          ],
+          "scientific_validity": {
+            "implementation_verified": false,
+            "numerical_stability_verified": false,
+            "model_validation_passed": false,
+            "reproducibility_verified": false
+          },
+          "validation_plan": {
+            "tool": "agent_based_sim_v1_cpp",
+            "metrics": [
+              "admissibility_localization_index"
+            ],
+            "falsification_condition": "Activity remains uniform; no localization of admissibility."
+          }
         }
       }
     },
@@ -1324,6 +1396,31 @@
             "outputs/runs/research_resolution_threshold_2026-05-03/pde_resolution_results.csv",
             "outputs/runs/research_resolution_threshold_2026-05-03/agent_resolution_results.csv"
           ]
+        },
+        "transition_index_induction": {
+          "status": "L0",
+          "operational_definition": "Variable that shifts the system between QM-like (g >> r) and GR-like (r >> g) regimes.",
+          "metrics": [
+            "active_fraction",
+            "s_crit"
+          ],
+          "models_used": [
+            "satp_higgs_1d_cpp"
+          ],
+          "scientific_validity": {
+            "implementation_verified": false,
+            "numerical_stability_verified": false,
+            "model_validation_passed": false,
+            "reproducibility_verified": false
+          },
+          "validation_plan": {
+            "tool": "satp_higgs_1d_cpp",
+            "metrics": [
+              "active_fraction",
+              "s_crit"
+            ],
+            "falsification_condition": "Invariant behavior under scaling (no regime transition)."
+          }
         }
       }
     },
@@ -1376,6 +1473,98 @@
             "outputs/runs/research_hysteretic_interference_2026-05-03/pde_hysteresis_results.csv",
             "outputs/runs/research_hysteretic_falsification_2026-05-03/falsification_results.csv"
           ]
+        },
+        "computational_paradigm_induction": {
+          "status": "L0",
+          "operational_definition": "Use of phase-sensitive interference and hysteretic threshold modification to perform state transitions.",
+          "metrics": [
+            "hysteresis_loop_area",
+            "switching_fidelity"
+          ],
+          "models_used": [
+            "fsa_rule_engine_sim_v1_cpp"
+          ],
+          "scientific_validity": {
+            "implementation_verified": false,
+            "numerical_stability_verified": false,
+            "model_validation_passed": false,
+            "reproducibility_verified": false
+          },
+          "validation_plan": {
+            "tool": "fsa_rule_engine_sim_v1_cpp",
+            "metrics": [
+              "hysteresis_loop_area",
+              "switching_fidelity"
+            ],
+            "falsification_condition": "Markovian behavior (memoryless outcomes)."
+          }
+        }
+      }
+    },
+    "-(i)": {
+      "canonical_source": "registry/lexicon_canonical.json",
+      "aliases": [
+        "orientation_minus_i",
+        "admissibility orientation"
+      ],
+      "global_status": "gap_open",
+      "roles": {
+        "admissibility_orientation_selection": {
+          "status": "L0",
+          "operational_definition": "An orientation operator selected under epsilon pressure that enables corridor formation.",
+          "metrics": [
+            "alignment_success_rate"
+          ],
+          "models_used": [
+            "structural_box_sim_cpp"
+          ],
+          "scientific_validity": {
+            "implementation_verified": false,
+            "numerical_stability_verified": false,
+            "model_validation_passed": false,
+            "reproducibility_verified": false
+          },
+          "validation_plan": {
+            "tool": "structural_box_sim_cpp",
+            "metrics": [
+              "alignment_success_rate"
+            ],
+            "falsification_condition": "Orientation remains random despite forcing."
+          }
+        }
+      }
+    },
+    "Relational Superposition": {
+      "canonical_source": "registry/lexicon_canonical.json",
+      "aliases": [
+        "multi-continuation admissibility"
+      ],
+      "global_status": "gap_open",
+      "roles": {
+        "computational_primitive": {
+          "status": "L0",
+          "operational_definition": "Coexistence of multiple admissible process continuations prior to selection-induced collapse.",
+          "metrics": [
+            "admissibility_overlap",
+            "interference_contrast"
+          ],
+          "models_used": [
+            "igsoa_complex_1d_cpp"
+          ],
+          "scientific_validity": {
+            "implementation_verified": false,
+            "numerical_stability_verified": false,
+            "model_validation_passed": false,
+            "reproducibility_verified": false
+          },
+          "validation_plan": {
+            "tool": "igsoa_complex_1d_cpp",
+            "metrics": [
+              "admissibility_overlap",
+              "interference_contrast"
+            ],
+            "falsification_condition": "System supports only one admissible continuation."
+          }
         }
       }
     }
