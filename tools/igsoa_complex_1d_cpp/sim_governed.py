@@ -39,7 +39,10 @@ def main():
     # 1. Create Engine
     create_cmd = {"command": "create_engine", "params": {
         "engine_type": "igsoa_complex",
-        "num_nodes": config.get("num_nodes", 1024)
+        "num_nodes": config.get("num_nodes", 1024),
+        "R_c": config.get("R_c", 1.0),
+        "kappa": config.get("kappa", 1.0),
+        "gamma": config.get("gamma", 0.1)
     }}
     process.stdin.write(json.dumps(create_cmd) + "\n")
     process.stdin.flush()
@@ -55,7 +58,21 @@ def main():
             print(f"Warning: Could not decode line: {line}")
 
     if engine_id:
-        # 2. Run Mission
+        # 2. Set State (Optional)
+        if config.get("init_state"):
+            init_cmd = {"command": "set_igsoa_state", "params": {
+                "engine_id": engine_id,
+                "profile_type": config["init_state"].get("type", "gaussian"),
+                "params": config["init_state"].get("params", {})
+            }}
+            process.stdin.write(json.dumps(init_cmd) + "\n")
+            process.stdin.flush()
+            line = process.stdout.readline()
+            if line:
+                try: outputs.append(json.loads(line))
+                except: pass
+
+        # 3. Run Mission
         run_cmd = {"command": "run_mission", "params": {
             "engine_id": engine_id,
             "num_steps": config.get("steps", 1000)
@@ -76,7 +93,21 @@ def main():
             try: outputs.append(json.loads(line))
             except: pass
 
-        # 4. Destroy Engine
+        # 4. Get Final State
+        state_cmd = {"command": "get_state", "params": {"engine_id": engine_id}}
+        process.stdin.write(json.dumps(state_cmd) + "\n")
+        process.stdin.flush()
+        line = process.stdout.readline()
+        if line:
+            try:
+                state_data = json.loads(line)
+                outputs.append(state_data)
+                if "result" in state_data:
+                    with open(args.out / "state_final.json", 'w') as f:
+                        json.dump(state_data["result"], f, indent=2)
+            except: pass
+
+        # 5. Destroy Engine
         destroy_cmd = {"command": "destroy_engine", "params": {"engine_id": engine_id}}
         process.stdin.write(json.dumps(destroy_cmd) + "\n")
         process.stdin.flush()

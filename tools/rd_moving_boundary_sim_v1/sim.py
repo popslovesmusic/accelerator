@@ -38,6 +38,9 @@ def run_simulation(config_path, output_dir):
     df = pd.DataFrame(history)
     df.to_csv(os.path.join(output_dir, 'metrics.csv'), index=False)
     
+    # Save final S field for TDA
+    np.savetxt(os.path.join(output_dir, 'final_S_field.csv'), engine.S, delimiter=',')
+
     # Save final summary
     summary = {
         "config": config,

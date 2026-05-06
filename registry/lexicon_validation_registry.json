@@ -211,7 +211,8 @@
             "outputs/runs/handoff_window_2026-05-03/handoff_results.csv",
             "outputs/runs/hysteresis_admissibility_rectification_2026-05-03/summary_hysteresis.csv",
             "outputs/runs/hysteresis_admissibility_rectification_2026-05-03/raw_results.csv",
-            "results/2026-05-05_run01_L001_admissible_increment_validation/data/"
+            "results/2026-05-05_run01_L001_admissible_increment_validation/data/",
+            "results/2026-05-05_run02_L002_fixed_point_stability_validation/data/"
           ],
           "downgrade_reasons": [
             "lexicon_term_below_L2_caps_classification"
@@ -378,7 +379,8 @@
             "outputs/runs/handoff_window_2026-05-03/handoff_results.csv",
             "outputs/runs/hysteresis_admissibility_rectification_2026-05-03/summary_hysteresis.csv",
             "outputs/runs/hysteresis_admissibility_rectification_2026-05-03/raw_results.csv",
-            "results/2026-05-05_run01_L001_admissible_increment_validation/data/"
+            "results/2026-05-05_run01_L001_admissible_increment_validation/data/",
+            "results/2026-05-05_run02_L002_fixed_point_stability_validation/data/"
           ],
           "downgrade_reasons": [
             "lexicon_term_below_L2_caps_classification"
@@ -494,7 +496,8 @@
             "outputs/runs/handoff_window_2026-05-03/handoff_results.csv",
             "outputs/runs/hysteresis_admissibility_rectification_2026-05-03/summary_hysteresis.csv",
             "outputs/runs/hysteresis_admissibility_rectification_2026-05-03/raw_results.csv",
-            "results/2026-05-05_run01_L001_admissible_increment_validation/data/"
+            "results/2026-05-05_run01_L001_admissible_increment_validation/data/",
+            "results/2026-05-05_run02_L002_fixed_point_stability_validation/data/"
           ],
           "downgrade_reasons": [
             "lexicon_term_below_L2_caps_classification"
@@ -563,7 +566,8 @@
             "outputs/runs/handoff_window_2026-05-03/handoff_results.csv",
             "outputs/runs/hysteresis_admissibility_rectification_2026-05-03/summary_hysteresis.csv",
             "outputs/runs/hysteresis_admissibility_rectification_2026-05-03/raw_results.csv",
-            "results/2026-05-05_run01_L001_admissible_increment_validation/data/"
+            "results/2026-05-05_run01_L001_admissible_increment_validation/data/",
+            "results/2026-05-05_run02_L002_fixed_point_stability_validation/data/"
           ],
           "downgrade_reasons": [
             "lexicon_term_below_L2_caps_classification"
@@ -785,7 +789,8 @@
             "outputs/runs/handoff_window_2026-05-03/handoff_results.csv",
             "outputs/runs/hysteresis_admissibility_rectification_2026-05-03/summary_hysteresis.csv",
             "outputs/runs/hysteresis_admissibility_rectification_2026-05-03/raw_results.csv",
-            "results/2026-05-05_run01_L001_admissible_increment_validation/data/"
+            "results/2026-05-05_run01_L001_admissible_increment_validation/data/",
+            "results/2026-05-05_run02_L002_fixed_point_stability_validation/data/"
           ],
           "downgrade_reasons": [
             "lexicon_term_below_L2_caps_classification"
@@ -852,7 +857,8 @@
             "outputs/runs/handoff_window_2026-05-03/handoff_results.csv",
             "outputs/runs/hysteresis_admissibility_rectification_2026-05-03/summary_hysteresis.csv",
             "outputs/runs/hysteresis_admissibility_rectification_2026-05-03/raw_results.csv",
-            "results/2026-05-05_run01_L001_admissible_increment_validation/data/"
+            "results/2026-05-05_run01_L001_admissible_increment_validation/data/",
+            "results/2026-05-05_run02_L002_fixed_point_stability_validation/data/"
           ],
           "downgrade_reasons": [
             "lexicon_term_below_L2_caps_classification"
@@ -880,20 +886,37 @@
     "corridor": {
       "roles": {
         "topological_process_constraint": {
-          "status": "L3",
+          "status": "L1",
           "claim_id": "THEORY_FRAGMENT_V1_VERIFICATION",
           "evidence_id": "outputs/runs/theory_fragment_v1/signal_scope/summary.json",
           "mechanism_classes": [
             "agent_based",
-            "reaction_diffusion"
+            "reaction_diffusion",
+            "topological_analysis"
           ],
+          "scientific_validity": {
+            "implementation_verified": false,
+            "numerical_stability_verified": true,
+            "model_validation_passed": false,
+            "reproducibility_verified": true
+          },
+          "validation_plan": {
+            "tool": "tda_module_v2_cpp",
+            "metrics": [
+              "betti_0"
+            ],
+            "falsification_condition": "Activity remains diffuse rather than forming narrow paths.",
+            "evidence_path": "results/2026-05-05_run07_lexicon_val_corridor/"
+          },
           "observables": [
             "phase_locking_value",
-            "alignment_success_rate"
+            "alignment_success_rate",
+            "betti_0"
           ],
           "output_paths": [
             "outputs/runs/theory_fragment_v1/signal_scope/",
-            "outputs/runs/theory_fragment_v1/structural_box/"
+            "outputs/runs/theory_fragment_v1/structural_box/",
+            "results/2026-05-05_run07_lexicon_val_corridor/data/"
           ],
           "downgrade_reasons": []
         },
@@ -1378,7 +1401,7 @@
       "global_status": "verified",
       "roles": {
         "transition_index": {
-          "status": "L3",
+          "status": "L1",
           "charter_claim_classification": "verified",
           "charter_provenance_citations": [
             "LEXICON | RESOLUTION_TRANSITION_2026-05-03 | 2026-05-04 | outputs/runs/research_resolution_threshold_2026-05-03/pde_synthesis.csv",
@@ -1389,6 +1412,20 @@
             "High resolution (large B) sustains relational potential (QM-like) and suppresses global order.",
             "Coarse resolution (small B) triggers collapse into geometric states (GR-like)."
           ],
+          "scientific_validity": {
+            "implementation_verified": false,
+            "numerical_stability_verified": true,
+            "model_validation_passed": false,
+            "reproducibility_verified": true
+          },
+          "validation_plan": {
+            "tool": "satp_higgs_1d_cpp",
+            "metrics": [
+              "phi_rms"
+            ],
+            "falsification_condition": "Invariant behavior under scaling (no regime transition).",
+            "evidence_path": "results/2026-05-05_run09_lexicon_val_resolution_parameter/"
+          },
           "operational_definition": "Scale parameter of the observing process that indexes the transition between relational potential and geometric realization.",
           "metrics": [
             "alignment_success_rate",
@@ -1415,11 +1452,13 @@
           ],
           "observables": [
             "alignment_success_rate",
-            "order_parameter"
+            "order_parameter",
+            "phi_rms"
           ],
           "output_paths": [
             "outputs/runs/research_resolution_threshold_2026-05-03/pde_resolution_results.csv",
-            "outputs/runs/research_resolution_threshold_2026-05-03/agent_resolution_results.csv"
+            "outputs/runs/research_resolution_threshold_2026-05-03/agent_resolution_results.csv",
+            "results/2026-05-05_run09_lexicon_val_resolution_parameter/data/"
           ]
         },
         "transition_index_induction": {
@@ -1467,6 +1506,20 @@
             "Demonstrated hysteretic activation contrast in PDE and Agent models.",
             "Verified spatial interference of phase packets mediated by residue."
           ],
+          "scientific_validity": {
+            "implementation_verified": false,
+            "numerical_stability_verified": true,
+            "model_validation_passed": false,
+            "reproducibility_verified": true
+          },
+          "validation_plan": {
+            "tool": "fsa_rule_engine_sim_v1_cpp",
+            "metrics": [
+              "active_count"
+            ],
+            "falsification_condition": "Markovian behavior (memoryless outcomes).",
+            "evidence_path": "results/2026-05-05_run08_lexicon_val_hqlc/"
+          },
           "operational_definition": "A computational process where phase-coherent competing continuations evolve under path-dependent admissibility rules encoded in topological residue.",
           "metrics": [
             "alignment_success_rate",
@@ -1492,11 +1545,13 @@
           ],
           "observables": [
             "alignment_success_rate",
-            "order_parameter"
+            "order_parameter",
+            "active_count"
           ],
           "output_paths": [
             "outputs/runs/research_hysteretic_interference_2026-05-03/pde_hysteresis_results.csv",
-            "outputs/runs/research_hysteretic_falsification_2026-05-03/falsification_results.csv"
+            "outputs/runs/research_hysteretic_falsification_2026-05-03/falsification_results.csv",
+            "results/2026-05-05_run08_lexicon_val_hqlc/data/"
           ]
         },
         "computational_paradigm_induction": {
@@ -1535,7 +1590,7 @@
       "global_status": "gap_open",
       "roles": {
         "admissibility_orientation_selection": {
-          "status": "L0",
+          "status": "L1",
           "operational_definition": "An orientation operator selected under epsilon pressure that enables corridor formation.",
           "metrics": [
             "alignment_success_rate"
@@ -1545,17 +1600,21 @@
           ],
           "scientific_validity": {
             "implementation_verified": false,
-            "numerical_stability_verified": false,
+            "numerical_stability_verified": true,
             "model_validation_passed": false,
-            "reproducibility_verified": false
+            "reproducibility_verified": true
           },
           "validation_plan": {
             "tool": "structural_box_sim_cpp",
             "metrics": [
               "alignment_success_rate"
             ],
-            "falsification_condition": "Orientation remains random despite forcing."
-          }
+            "falsification_condition": "Orientation remains random despite forcing.",
+            "evidence_path": "results/2026-05-05_run05_lexicon_val_orientation_selection/"
+          },
+          "observables": [
+            "alignment_success_rate"
+          ]
         }
       }
     },
@@ -1567,7 +1626,7 @@
       "global_status": "gap_open",
       "roles": {
         "computational_primitive": {
-          "status": "L0",
+          "status": "L1",
           "operational_definition": "Coexistence of multiple admissible process continuations prior to selection-induced collapse.",
           "metrics": [
             "admissibility_overlap",
@@ -1578,9 +1637,9 @@
           ],
           "scientific_validity": {
             "implementation_verified": false,
-            "numerical_stability_verified": false,
+            "numerical_stability_verified": true,
             "model_validation_passed": false,
-            "reproducibility_verified": false
+            "reproducibility_verified": true
           },
           "validation_plan": {
             "tool": "igsoa_complex_1d_cpp",
@@ -1588,8 +1647,12 @@
               "admissibility_overlap",
               "interference_contrast"
             ],
-            "falsification_condition": "System supports only one admissible continuation."
-          }
+            "falsification_condition": "System supports only one admissible continuation.",
+            "evidence_path": "results/2026-05-05_run06_lexicon_val_relational_superposition/"
+          },
+          "observables": [
+            "psi_squared_mean"
+          ]
         }
       }
     }
