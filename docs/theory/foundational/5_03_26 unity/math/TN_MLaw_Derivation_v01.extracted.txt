@@ -1,0 +1,262 @@
+﻿Technical Note
+TN_MLaw_Derivation_v01
+M-Law Derivations from the Core Expression
+Mono-Process Framework — Theoretical Foundations Series
+Abstract
+This note addresses whether the formal expression
+Eα > 0  ⇔_R  x'α = xα + Π_Aα ( Σ_{β ∈ CSI(α)} Nav_T(ωα, ωβ) )
+is generative with respect to the M-Laws of the Mono-Process Framework — that is, whether the M-Laws can be derived as consequences of the expression rather than merely summarized by it. The answer is affirmative. All fourteen laws are derivable from the expression, with three requiring supplementary definitional commitments (M5, M8, M10). In most cases the derived laws are stronger than the current candidate formulations: more mechanistic, more formally grounded, and in several instances revealing richer dynamics. Three candidate formulations are identified as gaps that the expression demands be filled. All results are presented as provisional theoretical findings under Charter v2.3 classification: theoretical.
+I. The Core Expression
+The expression under analysis is the fully indexed state-update biconditional:
+Eα > 0  ⇔_R  x'α = xα + Π_Aα ( Σ_{β ∈ CSI(α)} Nav_T(ωα, ωβ) )
+Each component carries a distinct structural role. The left side, Eα > 0, is the existence condition: α is non-null and participating. The biconditional arrow ⇔_R is residue-indexed, meaning the coupling is not bare logical equivalence but a historically conditioned gate — R is doing real work in every evaluation, not merely annotating the connective. The right side is a state update: continuation is an additive deviation from current state, filtered by the admissibility projection Π_Aα and sourced from the coherent source interface CSI(α) via the transport operator Nav_T.
+Component Glossary
+Eα                    
+Total deviation magnitude for process α; the existence scalar.
+⇔_R                   
+Residue-indexed biconditional; historically gated coupling. R encodes prior realizations.
+xα                    
+Current state of process α.
+x'α                   
+Updated state after one continuation step.
+Π_Aα                  
+Projection onto the admissibility window Aα; discards inadmissible deviations.
+CSI(α)                
+Coherent source interface: the set of processes β currently coupled to α.
+Nav_T(ωα, ωβ)         
+Navigated transport of the phase relationship between α and β; the deviation contribution of β.
+The expression is genuinely biconditional: the existence condition and the update rule are mutually entailing under residue history R. This is not a one-way implication in disguise. M14 (Closure Rule) is the metatheoretical statement of this fact, and the expression enforces it structurally rather than by assertion.
+II. M-Law Derivations
+The following derives each M-Law as a consequence of the core expression. For each law, the derivation identifies which component(s) of the expression generate the law, states the formal basis, and assesses the match against the current candidate formulation. Match ratings are: Perfect (direct reading), Strong (mechanistically supported), Moderate (partially supported), Partial (gap identified), Demanded (expression requires law to be defined).
+M0 — No-Thing Boundary
+Derivation.  
+When CSI(α) = ∅ and Eα = 0, the update equation collapses to x'α = xα — identity. No deviation, no projection, no change. This is not a void but the degenerate fixed-point of the update rule: a state that maps to itself under the full expression.
+CSI(α) = ∅  ⇒  Π_Aα(Σ Nav_T) = 0  ⇒  x'α = xα  [fixed point, not void]
+Vs. current candidate.  
+Strong match. The current candidate states that non-participating symmetry is a boundary condition, not a void. The expression grounds this: Eα = 0 means the RHS reduces to identity, not to nothing. The boundary is a degenerate update.
+Match: 
+Strong
+M1 — Nonzero Continuation
+Derivation.  
+Once Eα > 0 holds and the ⇔_R gate is satisfied, the RHS is non-trivial: Π_Aα acts on at least one non-zero Nav term. Forward enforcement of nonzero status operates through R: each realized update writes into R, which enters future evaluations of the gate. Re-entry into Eα = 0 requires R to have decayed sufficiently, which is constrained by the inscription and decay rates κ and λ.
+R_{t+1} = R_t + κ · Π_Aα(Σ Nav_T)  ⇒  ⇔_R harder to close once opened
+Vs. current candidate.  
+Mechanistically enriched vs. current candidate. The candidate states 'ℰ ≠ 0 is enforced forward' without specifying the mechanism. The expression shows how: through R accumulating in the biconditional gate. Persistence is not asserted; it is a consequence of residue inscription.
+Match: 
+Strong
+M2 — Activation Law
+Derivation.  
+Eα > 0 is necessary but not sufficient for a state update to occur. The ⇔_R gate must also be open — which depends on the admissibility valve A(ε, ρ, R). Non-null status alone does not trigger update; activation requires both the existence condition and the biconditional gate to be satisfied simultaneously.
+Eα > 0  AND  A(ε, ρ, R) > 0  ⇒  update occurs; neither condition alone suffices
+Vs. current candidate.  
+Strong match. The expression makes the two-condition structure explicit: existence and activation are formally distinct. The current candidate states this but does not show the mechanism that keeps them separate.
+Match: 
+Strong
+M3 — Distinguishable Mismatch
+Derivation.  
+Nav_T(ωα, ωβ) is non-zero precisely when ωα ≠ ωβ — when there is a phase mismatch between α and β. The sum over CSI(α) is therefore the total distinguishable mismatch input to α. Activation produces a structured deviation vector, not a scalar noise term.
+Nav_T(ωα, ωβ) ≠ 0  ⇔  ωα ≠ ωβ  [phase distinguishability condition]
+Vs. current candidate.  
+Strong match. Activation producing distinguishable mismatch is exactly what the Nav sum computes. The derivation adds that the mismatch is structured (phase-relative) rather than merely non-zero.
+Match: 
+Strong
+M4 — Selection Law
+Derivation.  
+Π_Aα is the selection operator. It projects the raw Nav sum onto the admissible subspace for α. Inadmissible directions are discarded. Selection is therefore a geometric projection operation, not a discrete choice among enumerated options.
+Π_Aα : Σ Nav_T  ↦  admissible component  [projection, not enumeration]
+Vs. current candidate.  
+Tightened vs. current candidate. The candidate states that mismatch requires local selection among admissible continuations. The expression shows selection is projection — a continuous operation with a geometric interpretation. This is a meaningful formal strengthening.
+Match: 
+Strong
+M5 — Reference / Orientation Law
+Derivation.  
+The admissibility window Aα is locally indexed to α, not globally fixed. Each process carries its own oriented reference frame for what counts as admissible. The −(i) reference condition in the candidate corresponds to the local indexing of Π_Aα, but the expression does not make the orientation structure of Aα explicit.
+Π_Aα  indexed to α  ⇒  local reference frame; −(i) condition requires Aα := f(ωα, Rα)
+Vs. current candidate.  
+Partial match. The expression supports the law but does not derive the −(i) structure. Aα must be given an explicit oriented definition — likely Aα := {δ : ωα + δ satisfies the local constraint} — before M5 is fully derivable rather than merely supported.
+Match: 
+Partial
+LIMIT / OPEN
+Gap: Aα needs an explicit oriented definition incorporating ωα and Rα.
+Candidate path: Aα := {δ ∈ T_xα M : ρα + αRα - β|δ| - θ > 0}.
+Until defined, M5 has no formal grounding in the expression.
+M6 — Residue Law
+Derivation.  
+The R subscript on the biconditional ⇔_R is the primary formal expression of residue. Each realized update x'α writes into R via the inscription rate κ. R then enters all future evaluations of the gate, making prior realizations a constraint on future admissibility. This is a feedback loop: realization → inscription → gate modification → constrained realization.
+R_{t+1} = R_t + κ · Π_Aα(Σ Nav_T) - λ R_t  [inscription minus decay]
+Vs. current candidate.  
+Significantly enriched vs. current candidate. The candidate states that realized selections leave residue and residue constrains later selections. The expression shows the full feedback loop: residue enters the biconditional gate directly, creating a path-dependent admissibility condition. This is a richer and more falsifiable mechanism.
+Match: 
+Strong
+M7 — Admissibility Window Law
+Derivation.  
+Π_Aα is the direct formal expression of the admissibility window. Only components of the Nav sum that fall within Aα survive into the state update. Components outside Aα are projected to zero. The window is the primary filter between raw mismatch and realized continuation.
+Π_Aα(Σ Nav_T) = { Nav component if δ ∈ Aα; 0 otherwise }
+Vs. current candidate.  
+Perfect match. M7 is a direct reading of the Π_Aα operator. The expression does not merely support this law; it is the formal statement of it.
+Match: 
+Perfect
+M8 — Deviation Propagation Law
+Derivation.  
+Nav_T(ωα, ωβ) is a transport operation: it propagates the phase relationship across a structured transport frame T. The T subscript marks this as more than raw phase difference — it is navigated transport through a residue-conditioned medium. Deviation persists by being transported, not merely transmitted.
+Nav_T(ωα, ωβ) := T(ωα - ωβ, R, ρ)  [transport frame T must be defined]
+Vs. current candidate.  
+Supported but not fully derived. The T subscript is necessary for M8 to follow from the expression, but T itself is not defined within the expression. Until T is given an explicit structure involving source, residue, and transport frames, M8 is supported rather than derived.
+Match: 
+Moderate
+LIMIT / OPEN
+Gap: Nav_T needs T defined explicitly as a function of residue R and transport geometry.
+Candidate path: Nav_T(ωα, ωβ) := P_T[(ωα - ωβ) ⊗ Rαβ], where P_T is parallel transport along the residue connection.
+Without this, M8 is phenomenological rather than derived.
+M9 — Biased Transport Law
+Derivation.  
+The Π_Aα projection is applied to the full Nav sum before that sum contributes to the update. Transport is therefore pre-filtered by the admissibility structure of α. The reference structure is admissibility-biased by construction: no Nav contribution reaches x'α unless it passes through Aα.
+Π_Aα applied to Σ Nav_T (not after)  ⇒  transport is admissibility-filtered, not neutral
+Vs. current candidate.  
+Strong match. The law follows directly from the position of Π_Aα in the expression. The projection wraps the entire Nav sum rather than being applied post-hoc, which is the formal meaning of biased transport.
+Match: 
+Strong
+M10 — Coherent Source Interface Formation Law [Demanded]
+Derivation.  
+The expression assumes CSI(α) is defined but provides no formation rule. The derivation demands that such a rule exist. The natural candidate: β ∈ CSI(α) if and only if Aβ and Aα have non-trivial overlap under current R — i.e., mutual admissibility is the coupling criterion. CSI is therefore dynamically constituted, not fixed.
+β ∈ CSI(α)  ⇔  Aα ∩ Aβ ≠ ∅  under current R  [mutual admissibility coupling]
+Vs. current candidate.  
+New law demanded by the expression. The current document flags M10 as implied but unnamed. The expression makes this gap explicit and provides the natural formation rule: coupling is constituted by mutual admissibility overlap, making CSI a function of R and the current admissibility windows. This is a significant theoretical addition.
+Match: 
+Demanded
+LIMIT / OPEN
+Gap: CSI(α) formation rule is required for the expression to be closed.
+Proposed M10: Coherent Source Interface membership is constituted by mutual admissibility: β ∈ CSI(α) ⇔ Aα ∩ Aβ ≠ ∅.
+Consequence: CSI is dynamic — it can gain and lose members as R evolves.
+This gives M10 a fully derived status once Aα is defined (see M5 gap).
+M11 — Geometry Projection Law
+Derivation.  
+When the update Π_Aα(Σ Nav_T) converges to a persistent structure across iterations — when the same projection recurs under accumulating R — that stable admissibility structure is geometry. Geometry is not imposed; it emerges from the convergence behavior of the projection operator under the residue feedback.
+Π_Aα(Σ Nav_T) → stable  as  R → R*  ⇒  persistent admissibility structure := geometry
+Vs. current candidate.  
+Strong match. The expression grounds geometry emergence in convergence under R. The current candidate states that resolved mismatch becomes persistent admissibility structure; the expression shows this is the fixed-point behavior of the update rule.
+Match: 
+Strong
+M12 — Curvature Failure Law
+Derivation.  
+Curvature failure occurs when Π_Aα fails to project coherently: the admissibility window Aα narrows to the point that Nav contributions from CSI(α) are systematically excluded. The projection norm approaches zero while the raw Nav sum remains non-zero. This is projection collapse under window contraction, a condition derivable from the expression.
+‖Π_Aα(Σ Nav_T)‖ → 0  while  Σ‖Nav_T‖ > 0  ⇒  curvature failure
+Vs. current candidate.  
+Cleaner than current candidate. The current document names M12 as Curvature Failure but does not fully define it. The expression provides a precise failure condition: projection collapse under window contraction. This is both formally derivable and more testable than the existing formulation.
+Match: 
+Strong
+M13 — Collapse Law
+Derivation.  
+Collapse occurs when Eα > 0 can no longer be maintained: the ⇔_R gate closes because the admissibility valve A(ε, ρ, R) falls below threshold. Formally, when ρ + αR - βε - θ < 0, the biconditional closes and x'α = xα despite Eα having been non-zero. Collapse is not absence of existence but failure of recoupling capacity.
+A(ε, ρ, R) = σ(ρ + αR - βε - θ)  < threshold  ⇒  ⇔_R closes  ⇒  x'α = xα
+Vs. current candidate.  
+Mechanistically precise. The valve law A(ε, ρ, R) from the coupling region directly yields the collapse condition. The current candidate states that collapse occurs when mismatch accumulation exceeds recoupling capacity; the expression gives the exact threshold function.
+Match: 
+Strong
+M14 — Closure Rule
+Derivation.  
+The ⇔_R connective imposes a metatheoretical constraint: any law derived from the left side of the expression (Eα > 0) must remain consistent when read from the right side (the update equation), and vice versa. The expression enforces this structurally: both sides are written as a single equation, not as two implications that happen to run both ways.
+(Eα > 0  ⇒  update)  AND  (update  ⇒  Eα > 0)  must hold simultaneously under R
+Vs. current candidate.  
+Perfect match. M14 is the statement that the ⇔_R is genuine. The expression makes this formal: the biconditional is not a notational convenience but a structural commitment that constrains every derived law to be readable from both directions.
+Match: 
+Perfect
+III. Summary Assessment
+The following table summarizes match ratings and identifies the three gaps the expression demands be filled before the M-Law system is closed.
+ID
+Name
+Match
+Notes
+M0
+No-Thing Boundary
+Strong
+—
+M1
+Nonzero Continuation
+Strong
+—
+M2
+Activation Law
+Strong
+—
+M3
+Distinguishable Mismatch
+Strong
+—
+M4
+Selection Law
+Strong
+Projection, not enumeration
+M5
+Reference / Orientation Law
+Partial
+Aα orientation undefined
+M6
+Residue Law
+Strong
+Feedback loop added
+M7
+Admissibility Window Law
+Perfect
+—
+M8
+Deviation Propagation Law
+Moderate
+Nav_T transport frame undefined
+M9
+Biased Transport Law
+Strong
+—
+M10
+CSI Formation Law
+Demanded
+New law required
+M11
+Geometry Projection Law
+Strong
+—
+M12
+Curvature Failure Law
+Strong
+Cleaner than candidate
+M13
+Collapse Law
+Strong
+—
+M14
+Closure Rule
+Perfect
+—
+IV. Required Definitions
+The expression is generative for all fourteen M-Laws but demands three supplementary definitional commitments before the derivation is closed. These are not defects in the expression; they are theoretical obligations that the expression makes explicit.
+Gap 1 — Aα Orientation (M5)
+The admissibility window Aα must be given an explicit oriented structure incorporating ωα and Rα. Without this, M5 (Reference / Orientation Law) is supported by the expression but not derived from it. The candidate definition:
+Aα := { δ ∈ T_{xα}M : ρα + αRα - β|δ| - θ > 0 }
+This ties the window boundary to the valve parameters, makes Aα a function of current state and residue, and gives the −(i) reference condition a geometric interpretation as the boundary of the tangent-space region satisfying the valve inequality.
+Gap 2 — Nav_T Transport Structure (M8)
+The T subscript on Nav_T must be given an explicit structure involving source, residue, and transport frames. Without this, M8 (Deviation Propagation Law) is phenomenological. The candidate definition:
+Nav_T(ωα, ωβ) := P_T[ (ωα - ωβ) ⊗ R_{αβ} ]
+where P_T is parallel transport along the residue connection R_{αβ}, and ⊗ denotes the residue-weighted phase difference. This makes deviation propagation depend on the shared residue history between α and β, not just their instantaneous phase difference.
+Gap 3 — CSI Formation Rule (M10)
+CSI(α) membership must be formally defined. The expression demands this; without it the sum over CSI(α) has no closed domain. The proposed M10:
+β ∈ CSI(α)  ⇔  Aα ∩ Aβ ≠ ∅  under current R
+Coupling is constituted by mutual admissibility overlap. CSI is dynamically constituted: it gains and loses members as R evolves and admissibility windows shift. This makes CSI a derived quantity rather than a primitive, closing the expression self-consistently. Note that this definition depends on Aα being defined (Gap 1), so the three gaps are partially ordered: Gap 1 → Gap 3 → closed expression.
+V. Conclusions
+RESULT
+The core expression Eα > 0 ⇔_R x'α = xα + Π_Aα(Σ Nav_T) is generative with respect to the M-Laws.
+All fourteen laws are derivable as consequences of the expression, subject to three gap closures.
+Derived laws are generally stronger than current candidates: more mechanistic, more formally grounded.
+Two laws match perfectly (M7, M14); eight are strongly supported; one is partial (M5); one is moderate (M8); one is demanded new (M10).
+LIMIT / OPEN
+Three definitions are required before the derivation is closed: Aα orientation, Nav_T transport structure, and CSI formation rule.
+These definitions are partially ordered: Aα must be defined before CSI can be closed.
+All results carry Charter v2.3 classification: theoretical. No simulation verification has been performed on the derived M-Law formulations.
+The epistemological consequence is significant. If the current M-Law candidates are phenomenological summaries, the expression allows them to be replaced by derived consequences — which is a stronger epistemic position. The M-Laws would no longer be stipulated but would follow from the single biconditional update rule, making the framework more internally unified and more amenable to systematic falsification.
+Document: 
+TN_MLaw_Derivation_v01
+Classification: 
+theoretical (Charter v2.3)
+Source expression: 
+(E≠ 0) ⇔ δ(E>0) working file, May 2026
+Status: 
+Draft. Gaps 1–3 require resolution before formal register entry.

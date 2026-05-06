@@ -17,6 +17,7 @@
 #include "../../src/cpp/igsoa_complex_engine.h"
 #include "../../src/cpp/igsoa_complex_engine_2d.h"
 #include "../../src/cpp/igsoa_complex_engine_3d.h"
+#include "../../src/cpp/igsoa_gw_engine.h"
 #include "../../src/cpp/igsoa_state_init_2d.h"
 #include "../../src/cpp/igsoa_state_init_3d.h"
 
@@ -274,6 +275,28 @@ std::string EngineManager::createEngine(const std::string& engine_type,
             return "";
         }
 
+    } else if (engine_type == "igsoa_gw") {
+        // IGSOA Gravitational Wave engine
+        if (N_x <= 0 || N_y <= 0 || N_z <= 0) {
+            return "";
+        }
+
+        try {
+            dase::igsoa::gw::SymmetryFieldConfig config;
+            config.nx = N_x;
+            config.ny = N_y;
+            config.nz = N_z;
+            config.dt = dt;
+            config.kappa = kappa;
+
+            auto* engine = new dase::igsoa::gw::IGSOAGWEngine(config);
+            handle = static_cast<void*>(engine);
+            instance->num_nodes = engine->getNumNodes();
+
+        } catch (...) {
+            return "";
+        }
+
     } else if (engine_type == "satp_higgs_1d") {
         // SATP+Higgs coupled field engine - 1D
         if (num_nodes <= 0) {
@@ -436,6 +459,9 @@ bool EngineManager::destroyEngine(const std::string& engine_id) {
         } else if (it->second->engine_type == "satp_higgs_3d") {
             auto* engine = static_cast<dase::satp_higgs::SATPHiggsEngine3D*>(it->second->engine_handle);
             delete engine;
+        } else if (it->second->engine_type == "igsoa_gw") {
+            auto* engine = static_cast<dase::igsoa::gw::IGSOAGWEngine*>(it->second->engine_handle);
+            delete engine;
         }
     }
 
@@ -571,6 +597,10 @@ bool EngineManager::runMission(const std::string& engine_id, int num_steps, int 
             // SATP+Higgs 3D engine
             auto* engine = static_cast<dase::satp_higgs::SATPHiggsEngine3D*>(instance->engine_handle);
             engine->evolve(static_cast<size_t>(num_steps));
+
+        } else if (instance->engine_type == "igsoa_gw") {
+            auto* engine = static_cast<dase::igsoa::gw::IGSOAGWEngine*>(instance->engine_handle);
+            engine->runMission(static_cast<uint64_t>(num_steps));
 
         } else {
             return false;
@@ -1387,6 +1417,15 @@ EngineManager::EngineMetrics EngineManager::getMetrics(const std::string& engine
     metrics.ops_per_sec = 0;
     metrics.total_operations = 0;
     metrics.speedup_factor = 0;
+
+    // Initialize scientific observables
+    metrics.phi_rms = 0.0;
+    metrics.energy_density = 0.0;
+    metrics.echo_intensity = 0.0;
+    metrics.entropy_rate = 0.0;
+    metrics.psi_squared_mean = 0.0;
+    metrics.mean_phi = 0.0;
+
     metrics.uhd770_time_ms = 0;
     metrics.cpu_reference_time_ms = 0;
     metrics.max_abs_drift = 0;
@@ -1400,6 +1439,7 @@ EngineManager::EngineMetrics EngineManager::getMetrics(const std::string& engine
     }
 
     if (instance->engine_type == "phase4b") {
+        // ... (rest of phase4b logic)
         // Phase 4B - get from DLL
         if (!dase_get_metrics) {
             return metrics;
@@ -1438,6 +1478,9 @@ EngineManager::EngineMetrics EngineManager::getMetrics(const std::string& engine
             metrics.speedup_factor,
             metrics.total_operations
         );
+        metrics.mean_phi = engine->getMeanPhi();
+        metrics.psi_squared_mean = engine->getPsiSquaredMean();
+        metrics.entropy_rate = engine->getAverageEntropyRate();
 
     } else if (instance->engine_type == "igsoa_complex_2d") {
         auto* engine = static_cast<dase::igsoa::IGSOAComplexEngine2D*>(instance->engine_handle);
@@ -1447,6 +1490,10 @@ EngineManager::EngineMetrics EngineManager::getMetrics(const std::string& engine
             metrics.speedup_factor,
             metrics.total_operations
         );
+        metrics.mean_phi = engine->getMeanPhi();
+        metrics.psi_squared_mean = engine->getPsiSquaredMean();
+        metrics.entropy_rate = engine->getAverageEntropyRate();
+
     } else if (instance->engine_type == "igsoa_complex_3d") {
         auto* engine = static_cast<dase::igsoa::IGSOAComplexEngine3D*>(instance->engine_handle);
         engine->getMetrics(
@@ -1455,6 +1502,38 @@ EngineManager::EngineMetrics EngineManager::getMetrics(const std::string& engine
             metrics.speedup_factor,
             metrics.total_operations
         );
+        metrics.mean_phi = engine->getMeanPhi();
+        metrics.psi_squared_mean = engine->getPsiSquaredMean();
+        metrics.entropy_rate = engine->getAverageEntropyRate();
+
+    } else if (instance->engine_type == "igsoa_gw") {
+        auto* engine = static_cast<dase::igsoa::gw::IGSOAGWEngine*>(instance->engine_handle);
+        engine->getMetrics(
+            metrics.ns_per_op,
+            metrics.ops_per_sec,
+            metrics.speedup_factor,
+            metrics.total_operations
+        );
+        metrics.energy_density = engine->getTotalEnergy() / (double)engine->getNumNodes();
+        metrics.phi_rms = std::sqrt(metrics.energy_density);
+
+    } else if (instance->engine_type == "satp_higgs_1d") {
+        auto* engine = static_cast<dase::satp_higgs::SATPHiggsEngine1D*>(instance->engine_handle);
+        metrics.energy_density = engine->computeTotalEnergy() / (double)engine->getN();
+        metrics.phi_rms = engine->computePhiRMS();
+        metrics.h_rms = engine->computeHiggsRMS();
+
+    } else if (instance->engine_type == "satp_higgs_2d") {
+        auto* engine = static_cast<dase::satp_higgs::SATPHiggsEngine2D*>(instance->engine_handle);
+        metrics.energy_density = engine->computeTotalEnergy() / (double)engine->getN();
+        metrics.phi_rms = engine->computePhiRMS();
+        metrics.h_rms = engine->computeHiggsRMS();
+
+    } else if (instance->engine_type == "satp_higgs_3d") {
+        auto* engine = static_cast<dase::satp_higgs::SATPHiggsEngine3D*>(instance->engine_handle);
+        metrics.energy_density = engine->computeTotalEnergy() / (double)engine->getN();
+        metrics.phi_rms = engine->computePhiRMS();
+        metrics.h_rms = engine->computeHiggsRMS();
     }
 
     return metrics;

@@ -179,6 +179,33 @@ public:
 
     void setSpeedupFactor(double factor) { speedup_factor_ = factor; }
 
+    /**
+     * Scientific Diagnostics
+     */
+    double getMeanPhi() const {
+        double sum = 0.0;
+        for (const auto& node : nodes_) {
+            sum += node.phi;
+        }
+        return sum / nodes_.size();
+    }
+
+    double getPsiSquaredMean() const {
+        double sum = 0.0;
+        for (const auto& node : nodes_) {
+            sum += node.F;
+        }
+        return sum / nodes_.size();
+    }
+
+    double getAverageEntropyRate() const {
+        double sum = 0.0;
+        for (const auto& node : nodes_) {
+            sum += node.entropy_rate;
+        }
+        return sum / nodes_.size();
+    }
+
 private:
     IGSOAComplexConfig config_;
     size_t N_x_;
