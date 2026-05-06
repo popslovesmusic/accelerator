@@ -39,12 +39,33 @@ def parse_markdown_item(file_path):
         # Clean up paths
         evidence_paths = [p.strip() for p in evidence_paths if p.strip()]
 
+    # Expanded fields from Patch Group F
+    proof_type = get_section("Proof Type")
+    if not proof_type: proof_type = "heuristic" # default
+    
+    def get_list_section(section_name):
+        section = get_section(section_name)
+        if not section: return []
+        # Split by lines and remove bullet points/whitespace
+        lines = [line.strip().lstrip('-').lstrip('*').strip() for line in section.split('\n') if line.strip()]
+        return lines
+
     return {
         "item_id": item_id,
         "title": title,
         "statement": statement,
         "dependencies_raw": dependencies_raw,
         "status": status,
+        "proof_type": proof_type,
+        "object_classes": get_list_section("Object Classes"),
+        "operators_used": get_list_section("Operators"),
+        "constraints_used": get_list_section("Constraints"),
+        "preserved_invariants": get_list_section("Invariants"),
+        "dependent_lemmas": get_list_section("Dependent Lemmas"),
+        "contradicted_by": get_list_section("Contradicted By"),
+        "simulation_bindings": get_list_section("Simulation Bindings"),
+        "known_scope_limits": get_list_section("Scope Limits"),
+        "failure_conditions": get_list_section("Failure Conditions"),
         "supersedes": supersedes,
         "path": str(file_path.absolute().relative_to(Path.cwd().absolute())),
         "evidence_paths": evidence_paths

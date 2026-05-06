@@ -313,9 +313,10 @@ class CppPreferenceValidator:
         return {"pass": len(violations) == 0, "violations": violations}
 
 class MathValidator:
-    def __init__(self, registry_dir: str = "registry"):
+    def __init__(self, mandates: Dict[str, Any] = None, registry_dir: str = "registry"):
         self.registry_path = os.path.join(registry_dir, "math_registry.json")
         self.registry = self._load_json(self.registry_path)
+        self.mandates = mandates.get("math_mandates", {}) if mandates else {}
 
     def _load_json(self, path: str) -> Dict[str, Any]:
         if os.path.exists(path):
@@ -325,16 +326,32 @@ class MathValidator:
 
     def validate(self, lemma_ids: List[str], target_level: str) -> Dict[str, Any]:
         """
-        Ensure lemmas have required validation status for the target claim level.
+        Ensure lemmas have required validation status and proof type for the target claim level.
         C5/C6 require 'simulated' or 'formally_proven'.
+        Heuristic proof type caps level at C2.
+        Constructive proof type caps level at C4.
         """
         results = {"pass": True, "errors": [], "details": []}
         if not lemma_ids:
             return results
 
-        # Index the registry for fast lookup
-        lemma_map = {l["item_id"]: l for l in self.registry.get("lemmas", [])}
-        proof_map = {p["item_id"]: p for p in self.registry.get("proofs", [])}
+        # Index the registry for fast lookup (support both item_id and lemma_id)
+        lemma_map = {}
+        for l in self.registry.get("lemmas", []):
+            lid = l.get("lemma_id") or l.get("item_id")
+            if lid: lemma_map[lid] = l
+            
+        proof_map = {}
+        for p in self.registry.get("proofs", []):
+            pid = p.get("proof_id") or p.get("item_id")
+            if pid: proof_map[pid] = p
+
+        level_order = ["C0", "C1", "C2", "C3", "C4", "C5", "C6"]
+        target_idx = level_order.index(target_level) if target_level in level_order else 0
+
+        # Get mandates from charter
+        proof_limits = self.mandates.get("proof_type_limits", {"heuristic": "C2", "constructive": "C4"})
+        status_reqs = self.mandates.get("status_requirements", {"C5": ["simulated", "formally_proven"], "C6": ["simulated", "formally_proven"]})
 
         for lid in lemma_ids:
             item = lemma_map.get(lid) or proof_map.get(lid)
@@ -343,11 +360,22 @@ class MathValidator:
                 continue
             
             status = item.get("status", "unverified").lower()
-            results["details"].append({"id": lid, "status": status})
+            proof_type = item.get("proof_type", "heuristic").lower()
+            
+            item_details = {"id": lid, "status": status, "proof_type": proof_type}
+            results["details"].append(item_details)
 
-            if target_level in ["C5", "C6"] and status == "unverified":
+            # Check status vs level (e.g. C5/C6)
+            required_statuses = status_reqs.get(target_level)
+            if required_statuses and status not in [s.lower() for s in required_statuses]:
                 results["pass"] = False
-                results["errors"].append(f"Math Error: Level {target_level} requires ID '{lid}' to be at least 'simulated' (currently 'unverified').")
+                results["errors"].append(f"Math Error: Level {target_level} requires ID '{lid}' to be one of {required_statuses} (currently '{status}').")
+
+            # Check proof type vs level (Patch Group B1)
+            limit_level = proof_limits.get(proof_type)
+            if limit_level and target_idx > level_order.index(limit_level):
+                results["pass"] = False
+                results["errors"].append(f"Math Error: ID '{lid}' has proof type '{proof_type}', which caps claim level at {limit_level} (requested {target_level}).")
 
         if results["errors"]:
             results["pass"] = False
@@ -366,7 +394,7 @@ class GovernanceGate:
         self.falsification_v = FalsificationValidator(self.charter, tracer=tracer)
         self.consistency_v = ConsistencyValidator()
         self.cpp_v = CppPreferenceValidator(self.charter)
-        self.math_v = MathValidator()
+        self.math_v = MathValidator(self.charter)
 
     def _write_json(self, path: str, data: Dict[str, Any]):
         os.makedirs(os.path.dirname(path), exist_ok=True)
