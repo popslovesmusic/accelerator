@@ -69,13 +69,13 @@ class EngineValidator:
             json.dump(config, f)
 
         if wrapper.suffix == ".py":
-            cmd = [sys.executable, str(wrapper), "--config", str(config_path), "--out", str(out_dir)]
+            cmd = [sys.executable, str(wrapper.absolute()), "--config", str(config_path.absolute()), "--out", str(out_dir.absolute())]
         else:
-            cmd = [str(wrapper), "--config", str(config_path), "--out", str(out_dir)]
+            cmd = [str(wrapper.absolute()), "--config", str(config_path.absolute()), "--out", str(out_dir.absolute())]
             
         try:
             # Run in the tool's directory if it's an executable that might need local DLLs
-            cwd = wrapper.parent
+            cwd = wrapper.parent.absolute()
             result = subprocess.run(cmd, capture_output=True, text=True, timeout=30, cwd=cwd)
             if result.returncode == 0:
                 return True, None

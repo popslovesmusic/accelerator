@@ -29,6 +29,7 @@ Your mission is to answer theoretical questions from **"THE LAW OF THE ONE PROCE
 - **Lexicon Out Check:** After report generation, perform `lexicon_out_check` on all newly introduced terms, labels, observables, and interpretations. Any missing or unstable term must be added to `lexicon_gap_queue.json` with status `GAP_OPEN`.
 - **Reasoning Graph:** Link concept map edges to `claim_id` and `evidence_id`. Agents may reason over verified and supported edges; provisional edges must be marked as assumptions.
 - **Term Gating:** A claim using `GAP_OPEN` terms cannot be classified above `proposed_interpretation` unless the term is scope-limited and operationalized.
+- **Math Alignment:** Before finalizing any claim at Level C5+, verify alignment with the mathematical lemmas in `registry/math_registry.json`. Claims contradicting `verified` or `simulated` lemmas must be downgraded.
 
 ---
 
@@ -89,6 +90,8 @@ All terms MUST resolve through the canonical lexicon and compliance authority:
 * `registry/lexicon_gap_queue.json`
 * `registry/lexicon_validation_registry.json`
 * `registry/compliance_charter_v2_3.json`
+* `registry/math_registry.json`
+* `registry/math_hashes.json`
 
 
 ### 4.1 Resolution Rule
@@ -666,7 +669,8 @@ No research claim may be finalized until it passes the Unified Claim Gate.
 6. Multi-Seed Check.
 7. Falsification Check.
 8. Observable Mapping Check.
-9. Humility Check.
+9. Math Foundation Check.
+10. Humility Check.
 
 ### 13.3 Promotion and Downgrade Rules
 
