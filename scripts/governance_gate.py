@@ -820,7 +820,41 @@ class GovernanceGate:
             })
 
         # --- Lexicon validation (term-role gating) ---
-        # ... (dedup logic)
+        required_term_roles: List[Dict[str, str]] = []
+        lexicon_meta = metadata.get("lexicon", {}) if isinstance(metadata, dict) else {}
+        terms_used = lexicon_meta.get("terms_used") if isinstance(lexicon_meta, dict) else None
+
+        if isinstance(terms_used, list) and terms_used:
+            for item in terms_used:
+                if isinstance(item, dict):
+                    required_term_roles.append(
+                        {"term": str(item.get("term", "")).strip(), "role": str(item.get("role", "")).strip()}
+                    )
+                elif isinstance(item, str):
+                    required_term_roles.append({"term": item.strip(), "role": ""})
+        else:
+            for t in metadata.get("primitive_mapping", []) if isinstance(metadata, dict) else []:
+                if isinstance(t, str):
+                    required_term_roles.append({"term": t.strip(), "role": ""})
+            for k in theoretical_mapping.keys() if isinstance(theoretical_mapping, dict) else []:
+                if isinstance(k, str):
+                    required_term_roles.append({"term": k.strip(), "role": ""})
+
+        # de-dup term-role pairs
+        seen = set()
+        deduped: List[Dict[str, str]] = []
+        for tr in required_term_roles:
+            term_key = (tr.get("term") or "").strip().lower()
+            role_key = (tr.get("role") or "").strip().lower()
+            if not term_key:
+                continue
+            key = (term_key, role_key)
+            if key in seen:
+                continue
+            seen.add(key)
+            deduped.append(tr)
+        required_term_roles = deduped
+
         lexicon_validation = self.lexicon_v.lexicon_validation_check(required_term_roles)
 
         # --- Math validation (foundational support) ---
