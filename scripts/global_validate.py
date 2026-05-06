@@ -145,6 +145,63 @@ class HygieneValidator:
             results["status"] = "failed"
         return results
 
+class MathValidator:
+    def __init__(self, root_dir):
+        self.root = Path(root_dir)
+        self.math_registry_path = self.root / "registry/math_registry.json"
+        self.math_hashes_path = self.root / "registry/math_hashes.json"
+
+    def calculate_hash(self, path):
+        import hashlib
+        try:
+            content = path.read_bytes()
+            return hashlib.sha256(content).hexdigest()
+        except:
+            return None
+
+    def run(self):
+        results = {"status": "success", "errors": []}
+        
+        if not self.math_registry_path.exists():
+            return results
+
+        with open(self.math_registry_path, 'r', encoding='utf-8') as f:
+            registry = json.load(f)
+
+        hashes = {}
+        if self.math_hashes_path.exists():
+            with open(self.math_hashes_path, 'r', encoding='utf-8') as f:
+                hashes = json.load(f)
+
+        new_hashes = {}
+        items = registry.get('lemmas', []) + registry.get('proofs', [])
+        
+        for item in items:
+            item_id = item['item_id']
+            path = self.root / item['path']
+            
+            if not path.exists():
+                results["errors"].append(f"Math Registry Sync Error: File for '{item_id}' not found at {item['path']}")
+                continue
+
+            current_hash = self.calculate_hash(path)
+            new_hashes[item_id] = current_hash
+
+            if item_id in hashes:
+                if hashes[item_id] != current_hash:
+                    # Check if it's a template
+                    if "TEMPLATE" in path.name: continue
+                    results["errors"].append(f"Governance Violation: Math file '{item['path']}' was modified (Additive-Only Rule Violation).")
+
+        # Update hashes (only if no errors, to prevent locking in broken states)
+        if not results["errors"]:
+            with open(self.math_hashes_path, 'w', encoding='utf-8') as f:
+                json.dump(new_hashes, f, indent=2)
+
+        if results["errors"]:
+            results["status"] = "failed"
+        return results
+
 def main():
     parser = argparse.ArgumentParser(description="Global Ecosystem Validation Harness")
     parser.add_argument("--root", default=".", help="Project root directory")
@@ -156,7 +213,8 @@ def main():
         "timestamp": datetime.now().isoformat(),
         "registry_validation": RegistryValidator(root).run(),
         "engine_validation": EngineValidator(root).run(),
-        "hygiene_validation": HygieneValidator(root).run()
+        "hygiene_validation": HygieneValidator(root).run(),
+        "math_validation": MathValidator(root).run()
     }
 
     report["overall_status"] = "pass" if all(v["status"] == "success" for k, v in report.items() if isinstance(v, dict)) else "fail"

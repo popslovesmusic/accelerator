@@ -985,6 +985,30 @@ The agent MUST:
 
 ---
 
+## 19. Mathematical Foundation Governance
+
+The mathematical foundations of the Mono-Process Framework are governed as core research objects, subject to the same rigor as simulation engines.
+
+### 19.1 Workflow & Additive-Only Rule
+- **Location:** All mathematical development must reside in `docs/theory/foundational/5_03_26 unity/math/`.
+- **Constraint:** The math directory is **ADDITIVE-ONLY**. Existing lemma (`LNNN`) and proof (`PNNN`) files MUST NOT be modified or deleted. 
+- **Revisions:** To revise a mathematical statement, a new file with a new ID must be created that explicitly declares it `Supersedes` the previous ID.
+- **Enforcement:** The `global_validate.py` harness programmatically verifies content hashes in `registry/math_hashes.json`. Any unauthorized modification blocks the research pipeline.
+
+### 19.2 The Mathematical Registry
+- **Truth Source:** `registry/math_registry.json` is the machine-readable index for all lemmas and proofs.
+- **Synchronization:** Run `python scripts/sync_math_registry.py` after adding new math files to update the central governance layer.
+
+### 19.3 Math-Empirical Interlock (Validation)
+- **Status Progression:** `unverified` (proven on paper) → `simulated` (supported by C4+ engine results) → `formally_proven` (symbolic/logic verification).
+- **Binding Rule:** Every lemma intended to support a published claim MUST be operationally tested. The `evidence_paths` in the math registry must point to a compliant `results/` directory.
+
+### 19.4 Publication Constraints (Gate Enforcement)
+- **C5/C6 Requirement:** A research paper cannot achieve Level C5 (Validate) or C6 (Publish) if it relies on mathematical foundations with status `unverified`.
+- **Falsification:** If a simulation run contradicts a lemma, the lemma status must be moved to `falsified`, and all dependent research claims are automatically downgraded to `proposed_interpretation`.
+
+---
+
 ## Runtime Governance Context Check
 Before validating or publishing a claim, record:
 

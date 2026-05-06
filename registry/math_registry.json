@@ -1,0 +1,57 @@
+{
+  "project": "Acellorator Foundational Math Program",
+  "version": "1.0.0",
+  "governance": {
+    "workflow": "additive-only",
+    "enforcement_script": "scripts/global_validate.py",
+    "sync_script": "scripts/sync_math_registry.py"
+  },
+  "lemmas": [
+    {
+      "item_id": "L001",
+      "title": "Admissible Increment",
+      "statement": "For any process index `\u03b1`, define the update increment `\u0394x\u03b1 := x'\u03b1 \u2212 x\u03b1`. If the update rule side of the core expression holds, then `\u0394x\u03b1 \u2208 A\u03b1`.",
+      "dependencies_raw": "- Definitions: D1 (Admissibility window), D2 (Projection/filter), D3\u2013D4 (well-typed sum/transport)\n- Assumptions: A1 (Well-typedness)\n- Prior lemmas: none",
+      "status": "draft",
+      "supersedes": "",
+      "path": "docs\\theory\\foundational\\5_03_26 unity\\math\\lemmas\\L001_admissible_increment.md"
+    },
+    {
+      "item_id": "L002",
+      "title": "Empty-Neighborhood Fixed Point",
+      "statement": "Assume `csi(\u03b1) = \u2205`. If the update rule side of the core expression is evaluated/active for `\u03b1`, then `x'\u03b1 = x\u03b1`.",
+      "dependencies_raw": "- Definitions: D2 (Projection/filter), D3 (Coupling neighborhood), D4 (Transport additive under `\u03a3`)\n- Assumptions: A1 (Well-typedness)\n- Prior lemmas: none",
+      "status": "draft",
+      "supersedes": "",
+      "path": "docs\\theory\\foundational\\5_03_26 unity\\math\\lemmas\\L002_empty_neighborhood_fixed_point.md"
+    },
+    {
+      "item_id": "L003",
+      "title": "Participation Boundary is a Boundary Condition (Not \u201cVoid\u201d)",
+      "statement": "Assume `csi(\u03b1) = \u2205` and the update rule side of the core expression is evaluated/active for `\u03b1`. Then `x\u03b1` is a fixed point of the continuation step for `\u03b1`. In this sense, the \u201cnon-participating symmetry\u201d regime can be treated as a boundary condition (a degenerate fixed point), not as an undefined state.",
+      "dependencies_raw": "- Definitions: D3 (Coupling neighborhood)\n- Assumptions: none beyond those used by L002\n- Prior lemmas: L002",
+      "status": "draft",
+      "supersedes": "",
+      "path": "docs\\theory\\foundational\\5_03_26 unity\\math\\lemmas\\L003_boundary_not_void.md"
+    },
+    {
+      "item_id": "L004",
+      "title": "Pre-Update Constraint Precedence (Admissibility First)",
+      "statement": "Assume admissibility filtering is enforced **before** state update addition (i.e., the update uses `x'\u03b1 = x\u03b1 + \u03a0_A\u03b1(\u2026)`). Then any inadmissible components of the candidate increment do not appear in the applied update increment `\u0394x\u03b1`.",
+      "dependencies_raw": "- Definitions: D2 (Projection/filter)\n- Assumptions: A2 (Admissibility enforced pre-update), A1 (Well-typedness)\n- Prior lemmas: none",
+      "status": "draft",
+      "supersedes": "",
+      "path": "docs\\theory\\foundational\\5_03_26 unity\\math\\lemmas\\L004_preupdate_constraint_precedence.md"
+    },
+    {
+      "item_id": "L005",
+      "title": "Residue-Conditioned Closure Constraint",
+      "statement": "Let `\u21d4_residue` be read as a residue-conditioned biconditional coupling between the existence condition `E\u03b1>0` and the update rule for `\u03b1`. Then any claim derived from only one side (existence side or update side) must remain consistent with the other side **under the same residue evaluation context**.",
+      "dependencies_raw": "- Definitions: D5 (Residue-gated biconditional)\n- Assumptions: A3 (Biconditional closure intent)\n- Prior lemmas: none",
+      "status": "draft",
+      "supersedes": "",
+      "path": "docs\\theory\\foundational\\5_03_26 unity\\math\\lemmas\\L005_residue_conditioned_closure.md"
+    }
+  ],
+  "proofs": []
+}

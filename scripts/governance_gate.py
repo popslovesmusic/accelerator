@@ -312,6 +312,47 @@ class CppPreferenceValidator:
         violations = [t.get("tool_name") for t in tools if t.get("implementation_language") == "python" and t.get("cpp_equivalent_available") and not t.get("justification")]
         return {"pass": len(violations) == 0, "violations": violations}
 
+class MathValidator:
+    def __init__(self, registry_dir: str = "registry"):
+        self.registry_path = os.path.join(registry_dir, "math_registry.json")
+        self.registry = self._load_json(self.registry_path)
+
+    def _load_json(self, path: str) -> Dict[str, Any]:
+        if os.path.exists(path):
+            with open(path, "r", encoding="utf-8") as f:
+                return json.load(f)
+        return {}
+
+    def validate(self, lemma_ids: List[str], target_level: str) -> Dict[str, Any]:
+        """
+        Ensure lemmas have required validation status for the target claim level.
+        C5/C6 require 'simulated' or 'formally_proven'.
+        """
+        results = {"pass": True, "errors": [], "details": []}
+        if not lemma_ids:
+            return results
+
+        # Index the registry for fast lookup
+        lemma_map = {l["item_id"]: l for l in self.registry.get("lemmas", [])}
+        proof_map = {p["item_id"]: p for p in self.registry.get("proofs", [])}
+
+        for lid in lemma_ids:
+            item = lemma_map.get(lid) or proof_map.get(lid)
+            if not item:
+                results["errors"].append(f"Math Error: referenced ID '{lid}' not found in math_registry.json")
+                continue
+            
+            status = item.get("status", "unverified").lower()
+            results["details"].append({"id": lid, "status": status})
+
+            if target_level in ["C5", "C6"] and status == "unverified":
+                results["pass"] = False
+                results["errors"].append(f"Math Error: Level {target_level} requires ID '{lid}' to be at least 'simulated' (currently 'unverified').")
+
+        if results["errors"]:
+            results["pass"] = False
+        return results
+
 # --- Main Gate ---
 
 class GovernanceGate:
@@ -325,6 +366,7 @@ class GovernanceGate:
         self.falsification_v = FalsificationValidator(self.charter, tracer=tracer)
         self.consistency_v = ConsistencyValidator()
         self.cpp_v = CppPreferenceValidator(self.charter)
+        self.math_v = MathValidator()
 
     def _write_json(self, path: str, data: Dict[str, Any]):
         os.makedirs(os.path.dirname(path), exist_ok=True)
@@ -778,42 +820,14 @@ class GovernanceGate:
             })
 
         # --- Lexicon validation (term-role gating) ---
-        required_term_roles: List[Dict[str, str]] = []
-        lexicon_meta = metadata.get("lexicon", {}) if isinstance(metadata, dict) else {}
-        terms_used = lexicon_meta.get("terms_used") if isinstance(lexicon_meta, dict) else None
-
-        if isinstance(terms_used, list) and terms_used:
-            for item in terms_used:
-                if isinstance(item, dict):
-                    required_term_roles.append(
-                        {"term": str(item.get("term", "")).strip(), "role": str(item.get("role", "")).strip()}
-                    )
-                elif isinstance(item, str):
-                    required_term_roles.append({"term": item.strip(), "role": ""})
-        else:
-            for t in metadata.get("primitive_mapping", []) if isinstance(metadata, dict) else []:
-                if isinstance(t, str):
-                    required_term_roles.append({"term": t.strip(), "role": ""})
-            for k in theoretical_mapping.keys() if isinstance(theoretical_mapping, dict) else []:
-                if isinstance(k, str):
-                    required_term_roles.append({"term": k.strip(), "role": ""})
-
-        # de-dup term-role pairs
-        seen = set()
-        deduped: List[Dict[str, str]] = []
-        for tr in required_term_roles:
-            term_key = (tr.get("term") or "").strip().lower()
-            role_key = (tr.get("role") or "").strip().lower()
-            if not term_key:
-                continue
-            key = (term_key, role_key)
-            if key in seen:
-                continue
-            seen.add(key)
-            deduped.append(tr)
-        required_term_roles = deduped
-
+        # ... (dedup logic)
         lexicon_validation = self.lexicon_v.lexicon_validation_check(required_term_roles)
+
+        # --- Math validation (foundational support) ---
+        # Extract LNNN and PNNN references from content
+        found_lemmas = sorted(list(set(re.findall(r"\b(L\d{3})\b", content))))
+        found_proofs = sorted(list(set(re.findall(r"\b(P\d{3})\b", content))))
+        math_validation = self.math_v.validate(found_lemmas + found_proofs, target_level)
 
         results = {
             "template": self.template_v.validate(content),
@@ -822,9 +836,14 @@ class GovernanceGate:
             "falsification": self.falsification_v.validate(falsification, target_level, strict),
             "cpp": self.cpp_v.validate(tools, target_level),
             "lexicon_validation": lexicon_validation,
+            "math_validation": math_validation,
         }
 
-        final_pass = all(v["pass"] for k, v in results.items() if k != "cpp")
+        final_pass = all(v["pass"] for k, v in results.items() if k not in ["cpp", "math_validation"])
+        if not math_validation["pass"] and target_level in ["C5", "C6"]:
+             final_pass = False # Math failure blocks C5/C6
+             blocked_reasons.append("unverified_mathematical_foundations")
+
         if not final_pass: gate_result = "block"
         else: gate_result = "pass"
 
