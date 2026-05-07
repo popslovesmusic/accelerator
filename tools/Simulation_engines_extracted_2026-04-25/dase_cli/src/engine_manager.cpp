@@ -130,6 +130,15 @@ static bool loadDaseDLL() {
 }
 
 EngineManager::EngineManager() : next_engine_id(1) {
+#if DASE_HAS_SYCL_RUNTIME
+    try {
+        sycl_q_ = std::make_unique<sycl::queue>(sycl::gpu_selector_v);
+    } catch (const std::exception& e) {
+        std::cerr << "[ENGINE MANAGER] SYCL Queue creation failed: " << e.what() << ". UHD 770 acceleration may be limited." << std::endl;
+        sycl_q_ = nullptr;
+    }
+#endif
+
     // Load the D-ASE AVX2 DLL on construction when available. Do not fail the
     // whole CLI if the DLL is absent: header-only engines, analysis commands,
     // and UHD 770 diagnostics can still run. phase4b creation already checks
@@ -289,7 +298,12 @@ std::string EngineManager::createEngine(const std::string& engine_type,
             config.dt = dt;
             config.kappa = kappa;
 
-            auto* engine = new dase::igsoa::gw::IGSOAGWEngine(config);
+            if (!sycl_q_) {
+                std::cerr << "[ENGINE MANAGER] Cannot create igsoa_gw: SYCL queue unavailable." << std::endl;
+                return "";
+            }
+
+            auto* engine = new dase::igsoa::gw::IGSOAGWEngine(config, *sycl_q_);
             handle = static_cast<void*>(engine);
             instance->num_nodes = engine->getNumNodes();
 

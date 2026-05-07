@@ -11,6 +11,7 @@
 #include <vector>
 #include <atomic>
 #include "json.hpp"
+#include "../../src/cpp/uhd770_runtime.h"
 
 // Engine instance wrapper
 struct EngineInstance {
@@ -131,6 +132,10 @@ public:
 private:
     std::map<std::string, std::unique_ptr<EngineInstance>> engines;
     std::atomic<int> next_engine_id;
+
+#if DASE_HAS_SYCL_RUNTIME
+    std::unique_ptr<sycl::queue> sycl_q_;
+#endif
 
     std::string generateEngineId();
     double getCurrentTimestamp();
