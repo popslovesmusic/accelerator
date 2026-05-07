@@ -16,3 +16,4 @@ L008 | Transport composition + identity scaffold | (transport def) | draft | min
 L009 | Transport residual propagation consistency | L008 | draft | defines δ_T check: δ_T=0 ⇒ compositional propagation identity (G2, conditional)
 L010 | CSI membership by admissibility overlap | (Aα def) | draft | defines β∈csi(α)⇔Aα∩Aβ≠∅ under residue context (G3, conditional)
 L011 | Overlap membership symmetry + residue dependence | L010 | draft | proves symmetry and residue-conditioned neighborhood consequence (G3)
+L012 | Compact–Strong Residue Equivalence | (R spec), (NavT spec) | draft | gap target: relate R=∫δC to R=ΣΠ_A(NavT) via explicit ℛ and Ψ

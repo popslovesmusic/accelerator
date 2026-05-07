@@ -3,7 +3,26 @@
   "meta": {
     "description": "Queue for newly detected terms during Lexicon Out checks requiring operational definition and role validation.",
     "routing_rule": "Every newly introduced term during a governed run MUST be added here with status GAP_OPEN.",
-    "schema_update": "V1 Feedback Loop"
+    "schema_update": "V1 Feedback Loop",
+    "cleanup_rule": "The gap queue should trend toward empty by resolving, promoting, aliasing, deprecating, or classifying terms as unresolvable gaps. Allowed terminal states: RESOLVED_TO_CANONICAL, RESOLVED_TO_ALIAS, RESOLVED_TO_NOISE, DEPRECATED, UNRESOLVABLE_GAP.",
+    "charter_enforcement": {
+      "queue_status": "active_resolution_pipeline",
+      "required_before_resolution": [
+        "verb_test",
+        "procedural_fft",
+        "ontology_residue_check",
+        "claim_classification",
+        "data_provenance_check"
+      ],
+      "allowed_terminal_states": [
+        "RESOLVED_TO_CANONICAL",
+        "RESOLVED_TO_ALIAS",
+        "RESOLVED_TO_NOISE",
+        "DEPRECATED",
+        "UNRESOLVABLE_GAP"
+      ],
+      "noncompliant_terms_must_not_promote": true
+    }
   },
   "candidate_new_terms": [
     {
@@ -399,6 +418,703 @@
         }
       ],
       "governance_status": "not_verified"
+    },
+    {
+      "term": "Aligned Asymmetry",
+      "aliases": [
+        "Love",
+        "co-navigation",
+        "shared geodesic"
+      ],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "Defined in Essay IV as the core mechanism of mutually stabilized continuation without identity collapse.",
+      "source_context": {
+        "source_type": "user_theory",
+        "source_path_or_note": "docs/theory/foundational/5_03_26 unity/# Essay Series Continuation, Love,.txt"
+      },
+      "proposed_definition": "The relational coupling of distinct process orientations that enables sustained shared continuation while preserving individual process distinction (E != 0).",
+      "process_rewrite": "Mutual re-orientation of processes toward a shared geodesic under the constraint that their states do not merge into symmetry.",
+      "primitive_mapping": {
+        "epsilon": "preserved_distinction",
+        "orientation_minus_i": "shared_geodesic",
+        "coupling": "relational_alignment"
+      },
+      "proposed_roles": [
+        {
+          "role_name": "relational_stabilizer",
+          "operational_definition": "The mechanism that prevents damping/collapse in coupled non-local systems by maintaining phase-shifted coherence.",
+          "metrics": [
+            "phase_locking_value",
+            "active_fraction",
+            "orientation_variance"
+          ],
+          "candidate_tools": [
+            "igsoa_complex_2d_cpp",
+            "agent_based_sim_v1_cpp"
+          ],
+          "falsification_condition": "System only achieves stability through exact phase fusion (E=0).",
+          "evidence_level": "L0",
+          "charter_classification": "provisional"
+        }
+      ]
+    },
+    {
+      "term": "Relational Cluster",
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "Emergent structure hypothesized from Aligned Asymmetry theory.",
+      "source_context": {
+        "source_type": "user_theory",
+        "source_path_or_note": "Hypothesis generation from Essay Series."
+      },
+      "proposed_definition": "A persistent topological grouping of processes that exhibit mutually stabilized continuation through shared residue and aligned orientations.",
+      "process_rewrite": "A localized region of the process field where Betti-0 persistence is maintained by Relational Alignment.",
+      "primitive_mapping": {
+        "rho": "cluster_density",
+        "residue": "cluster_history",
+        "topology": "cluster_boundary"
+      },
+      "proposed_roles": [
+        {
+          "role_name": "emergent_identity",
+          "operational_definition": "Measurable connected components in a phase-coherence field.",
+          "metrics": [
+            "betti_0",
+            "persistence_duration",
+            "active_area"
+          ],
+          "candidate_tools": [
+            "tda_module_v2_cpp",
+            "igsoa_complex_2d_cpp"
+          ],
+          "falsification_condition": "Clusters dissipate rapidly despite high internal coupling.",
+          "evidence_level": "L0",
+          "charter_classification": "provisional"
+        }
+      ]
+    },
+    {
+      "term": "Symmetric Collapse",
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "Defined in Essay I as the failure condition of perfect symmetry (unrealizable symmetry).",
+      "source_context": {
+        "source_type": "user_theory",
+        "source_path_or_note": "docs/theory/foundational/5_03_26 unity/# Essay Series Continuation, Love,.txt"
+      },
+      "proposed_definition": "The annihilation of process continuation that occurs when local distinction (epsilon) vanishes, leading to the zero-state.",
+      "process_rewrite": "Halting of the update rule when the summation of transport terms reaches zero due to perfect spatial or phase symmetry.",
+      "primitive_mapping": {
+        "epsilon": "vanishing_signal",
+        "rho": "halting_capacity",
+        "delta": "collapse_event"
+      },
+      "proposed_roles": [
+        {
+          "role_name": "failure_mode",
+          "operational_definition": "The abrupt cessation of activity when process gradients are eliminated.",
+          "metrics": [
+            "active_fraction_decay",
+            "mismatch_floor",
+            "halting_probability"
+          ],
+          "candidate_tools": [
+            "ca_admissibility_sim_v1_cpp",
+            "fsa_rule_engine_sim_v1_cpp"
+          ],
+          "falsification_condition": "Perfect symmetry sustains indefinite continuation (e.g. static uniform field is 'active').",
+          "evidence_level": "L0",
+          "charter_classification": "provisional"
+        }
+      ]
+    },
+    {
+      "term": "Mutually Stabilized Continuation",
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "Central relational mechanism defined in Essay IV.",
+      "source_context": {
+        "source_type": "user_theory",
+        "source_path_or_note": "docs/theory/foundational/5_03_26 unity/# Essay Series Continuation, Love,.txt"
+      },
+      "proposed_definition": "A state where two or more processes condition each other's admissibility futures to sustain shared persistence without fusion.",
+      "process_rewrite": "Interdependent update rules where the residue of process A maintains the admissibility of process B's geodesic, and vice-versa.",
+      "primitive_mapping": {
+        "rho": "shared_persistence",
+        "residue": "mutual_conditioning",
+        "coupling": "feedback_stabilization"
+      },
+      "proposed_roles": [
+        {
+          "role_name": "relational_attractor",
+          "operational_definition": "A persistent configuration of process states that resists external perturbations.",
+          "metrics": [
+            "persistence_duration",
+            "perturbation_recovery_time",
+            "cross_process_coherence"
+          ],
+          "candidate_tools": [
+            "igsoa_complex_2d_cpp",
+            "agent_based_sim_v1_cpp"
+          ],
+          "falsification_condition": "Processes remain independent or chaotic despite high mutual coupling.",
+          "evidence_level": "L0",
+          "charter_classification": "provisional"
+        }
+      ]
+    },
+    {
+      "term": "Existence Scalar",
+      "aliases": [
+        "existence_scalar",
+        "E_alpha",
+        "Eα",
+        "ℰ"
+      ],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "Compound mathematical label used in the ordered account of the Unity / Math folder.",
+      "source_context": {
+        "source_type": "paper_draft",
+        "source_path_or_note": "docs/theory/foundational/5_03_26 unity/math/02_ordered_account_of_mathematics.md"
+      },
+      "proposed_definition": "A scalar role marking non-null participation for an indexed process in the core residue-conditioned update expression.",
+      "process_rewrite": "The condition that an indexed process has nonzero distinguishable participation in the current residue evaluation context.",
+      "procedural_components": [
+        "epsilon",
+        "delta"
+      ],
+      "primitive_mapping": {
+        "epsilon": "non-null mismatch pressure",
+        "residue": "evaluation context",
+        "rho": "not specified",
+        "coupling_or_CSI": "participation context",
+        "delta": "activation/update side",
+        "orientation_minus_i": "not specified"
+      },
+      "proposed_roles": [
+        {
+          "role_name": "participation_condition",
+          "operational_definition": "Marks whether the left side of the core biconditional is active for a process index.",
+          "metrics": [],
+          "candidate_tools": [],
+          "falsification_condition": "A process has E_alpha > 0 but no distinguishable participation or update-side coherence under the same residue context.",
+          "evidence_level": "L0",
+          "charter_classification": "provisional",
+          "known_limits": [
+            "The ordered account is theoretical and does not provide simulation evidence."
+          ]
+        }
+      ],
+      "open_questions": [
+        "What exact observable computes E_alpha across mechanism classes?"
+      ],
+      "governance_status": "not_verified"
+    },
+    {
+      "term": "Residue-Conditioned Biconditional",
+      "aliases": [
+        "residue_conditioned_two_way_constraint",
+        "residue-indexed biconditional",
+        "⇔_R"
+      ],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "Compound mathematical label used to name the connective role in the ordered account.",
+      "source_context": {
+        "source_type": "paper_draft",
+        "source_path_or_note": "docs/theory/foundational/5_03_26 unity/math/02_ordered_account_of_mathematics.md; docs/theory/foundational/5_03_26 unity/math/# Formal Specification of ⇔(_R).txt"
+      },
+      "proposed_definition": "A residue-mediated admissible transformation relation between distinguishable configurations; not identity and not logical equivalence.",
+      "process_rewrite": "A nonzero distinction passes or fails continuation through an admissibility operator evaluated against residue and local orientation.",
+      "procedural_components": [
+        "residue",
+        "delta",
+        "coupling"
+      ],
+      "primitive_mapping": {
+        "epsilon": "participation pressure",
+        "residue": "history-gated evaluation state",
+        "rho": "continuation capacity not specified",
+        "coupling_or_CSI": "two-way constraint coupling",
+        "delta": "update activation",
+        "orientation_minus_i": "local orientation frame used in admissibility evaluation"
+      },
+      "proposed_roles": [
+        {
+          "role_name": "closure_connective",
+          "operational_definition": "Maps distinguishable state pairs plus residue and orientation context to an admissibility outcome while preserving residue-context coherence across the core expression.",
+          "metrics": [],
+          "candidate_tools": [],
+          "falsification_condition": "The operator behaves as identity or ordinary logical equivalence, or admits continuation when delta(A,B)=0 under the declared formal specification.",
+          "evidence_level": "L0",
+          "charter_classification": "provisional",
+          "known_limits": [
+            "Currently supported by theoretical lemmas, not empirical validation."
+          ]
+        }
+      ],
+      "open_questions": [
+        "What formal predicate semantics should be used for residue-conditioned biconditional evaluation?",
+        "Which mechanism-class observables should compute the admissible / unstable / forbidden outcomes?"
+      ],
+      "governance_status": "not_verified"
+    },
+    {
+      "term": "Admissibility Window",
+      "aliases": [
+        "admissibility_domain",
+        "A_alpha",
+        "Aα"
+      ],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "Compound mathematical object used throughout the ordered account and source notes.",
+      "source_context": {
+        "source_type": "paper_draft",
+        "source_path_or_note": "docs/theory/foundational/5_03_26 unity/math/02_ordered_account_of_mathematics.md"
+      },
+      "proposed_definition": "The local domain of candidate continuation increments allowed for a process index under mismatch, capacity, and residue conditions.",
+      "process_rewrite": "The constraint set that determines which candidate increments remain eligible before projection and selection.",
+      "procedural_components": [
+        "epsilon",
+        "rho",
+        "residue"
+      ],
+      "primitive_mapping": {
+        "epsilon": "mismatch pressure shaping the window",
+        "residue": "history shaping the window",
+        "rho": "continuation capacity",
+        "coupling_or_CSI": "overlap can induce coupling",
+        "delta": "candidate continuation increment",
+        "orientation_minus_i": "orientation may be induced from its boundary and selection"
+      },
+      "proposed_roles": [
+        {
+          "role_name": "constraint_domain",
+          "operational_definition": "Defines which candidate continuation increments may pass to projection or selection.",
+          "metrics": [],
+          "candidate_tools": [],
+          "falsification_condition": "Updates propagate outside the declared admissible domain without projection or selection failure.",
+          "evidence_level": "L0",
+          "charter_classification": "provisional",
+          "known_limits": [
+            "The folder provides theoretical scaffolds, not a final cross-model observable."
+          ]
+        }
+      ],
+      "open_questions": [
+        "Which inequality or predicate is canonical for A_alpha?"
+      ],
+      "governance_status": "not_verified"
+    },
+    {
+      "term": "Admissibility Projection",
+      "aliases": [
+        "admissibility_projection",
+        "Pi_A",
+        "Π_A"
+      ],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "Compound operator label used in the ordered account.",
+      "source_context": {
+        "source_type": "paper_draft",
+        "source_path_or_note": "docs/theory/foundational/5_03_26 unity/math/02_ordered_account_of_mathematics.md"
+      },
+      "proposed_definition": "An operator that filters a candidate increment into the admissibility window before state update.",
+      "process_rewrite": "Projection of aggregate transport contribution into the currently allowed continuation domain.",
+      "procedural_components": [
+        "delta",
+        "admissibility"
+      ],
+      "primitive_mapping": {
+        "epsilon": "not specified",
+        "residue": "evaluation context",
+        "rho": "not specified",
+        "coupling_or_CSI": "filters summed coupling contribution",
+        "delta": "candidate increment transformed into applied increment",
+        "orientation_minus_i": "not specified"
+      },
+      "proposed_roles": [
+        {
+          "role_name": "pre_update_filter",
+          "operational_definition": "Removes inadmissible components before the state update is applied.",
+          "metrics": [],
+          "candidate_tools": [],
+          "falsification_condition": "Inadmissible components enter the applied increment despite projection being declared active.",
+          "evidence_level": "L0",
+          "charter_classification": "provisional",
+          "known_limits": [
+            "Theoretical lemma support exists, but no new governed simulation was run for this account."
+          ]
+        }
+      ],
+      "open_questions": [
+        "Which projection class is used in each mechanism class?"
+      ],
+      "governance_status": "not_verified"
+    },
+    {
+      "term": "Coupling Neighborhood",
+      "aliases": [
+        "coupling_neighborhood",
+        "csi(alpha)",
+        "CSI(alpha)"
+      ],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "Compound role label used for csi(alpha) in the ordered account.",
+      "source_context": {
+        "source_type": "paper_draft",
+        "source_path_or_note": "docs/theory/foundational/5_03_26 unity/math/02_ordered_account_of_mathematics.md"
+      },
+      "proposed_definition": "The current set of process indices contributing transport terms to a target process update.",
+      "process_rewrite": "A residue-contextual membership set, proposed to be induced by admissibility-window overlap.",
+      "procedural_components": [
+        "coupling",
+        "residue",
+        "admissibility"
+      ],
+      "primitive_mapping": {
+        "epsilon": "not specified",
+        "residue": "context conditioning membership",
+        "rho": "not specified",
+        "coupling_or_CSI": "membership set for interaction",
+        "delta": "transport contributions summed over members",
+        "orientation_minus_i": "may condition transport once references are induced"
+      },
+      "proposed_roles": [
+        {
+          "role_name": "interaction_index_set",
+          "operational_definition": "Determines which neighbor contributions enter the update-side summation.",
+          "metrics": [],
+          "candidate_tools": [],
+          "falsification_condition": "The neighborhood cannot be computed from declared admissibility or coupling rules.",
+          "evidence_level": "L0",
+          "charter_classification": "provisional",
+          "known_limits": [
+            "Admissibility-overlap membership remains conditional in this folder."
+          ]
+        }
+      ],
+      "open_questions": [
+        "Should admissibility overlap be promoted as the canonical membership rule?"
+      ],
+      "governance_status": "not_verified"
+    },
+    {
+      "term": "Transport Operator",
+      "aliases": [
+        "transport_operator",
+        "Nav_T"
+      ],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "Compound operator label used in the ordered account to distinguish transport from generic transport vocabulary.",
+      "source_context": {
+        "source_type": "paper_draft",
+        "source_path_or_note": "docs/theory/foundational/5_03_26 unity/math/02_ordered_account_of_mathematics.md"
+      },
+      "proposed_definition": "A per-neighbor contribution operator producing a well-typed candidate increment for the target process update.",
+      "process_rewrite": "A mechanism for converting reference or phase relation between indices into an admissibility-filtered update contribution.",
+      "procedural_components": [
+        "delta",
+        "coupling",
+        "orientation_minus_i"
+      ],
+      "primitive_mapping": {
+        "epsilon": "phase or mismatch relation input",
+        "residue": "transport evaluation context",
+        "rho": "not specified",
+        "coupling_or_CSI": "source membership for contribution",
+        "delta": "deviation contribution",
+        "orientation_minus_i": "reference-mediated transport candidate"
+      },
+      "proposed_roles": [
+        {
+          "role_name": "deviation_contribution_operator",
+          "operational_definition": "Maps a pair of reference-bearing states into a candidate increment contribution.",
+          "metrics": [
+            "transport_residual"
+          ],
+          "candidate_tools": [],
+          "falsification_condition": "No stable contribution or composition residual can be defined for the operator.",
+          "evidence_level": "L0",
+          "charter_classification": "provisional",
+          "known_limits": [
+            "The ordered account records a gap-closure program, not a final implementation."
+          ]
+        }
+      ],
+      "open_questions": [
+        "What concrete transport composition law is canonical?"
+      ],
+      "governance_status": "not_verified"
+    },
+    {
+      "term": "Mismatch-Minimizing Selection",
+      "aliases": [
+        "mismatch_minimizing_selection",
+        "O_star",
+        "O*"
+      ],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "Compound selection label used in the ordered account and Paper 4 alignment.",
+      "source_context": {
+        "source_type": "paper_draft",
+        "source_path_or_note": "docs/theory/foundational/5_03_26 unity/math/02_ordered_account_of_mathematics.md"
+      },
+      "proposed_definition": "Selection of an admissible continuation or operator that minimizes a local relational mismatch objective.",
+      "process_rewrite": "Argmin over admissible candidates under local mismatch pressure.",
+      "procedural_components": [
+        "epsilon",
+        "admissibility",
+        "orientation_minus_i"
+      ],
+      "primitive_mapping": {
+        "epsilon": "mismatch objective input",
+        "residue": "evaluation context",
+        "rho": "not specified",
+        "coupling_or_CSI": "not specified",
+        "delta": "selected continuation candidate",
+        "orientation_minus_i": "reference induced from selected candidate"
+      },
+      "proposed_roles": [
+        {
+          "role_name": "orientation_inducing_selector",
+          "operational_definition": "Chooses among admissible candidates and induces a local reference from the selected result.",
+          "metrics": [
+            "mismatch_cost",
+            "degeneracy_count"
+          ],
+          "candidate_tools": [],
+          "falsification_condition": "Selection does not reduce mismatch or fails to induce a stable reference object.",
+          "evidence_level": "L0",
+          "charter_classification": "provisional",
+          "known_limits": [
+            "Operator semantics remain theoretical in this folder."
+          ]
+        }
+      ],
+      "open_questions": [
+        "What mismatch objective is canonical across model classes?"
+      ],
+      "governance_status": "not_verified"
+    },
+    {
+      "term": "Transport Residual Observable",
+      "aliases": [
+        "transport_residual_observable",
+        "delta_T",
+        "δ_T"
+      ],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "Compound observable label used in the ordered account and transport propagation scaffold.",
+      "source_context": {
+        "source_type": "paper_draft",
+        "source_path_or_note": "docs/theory/foundational/5_03_26 unity/math/02_ordered_account_of_mathematics.md"
+      },
+      "proposed_definition": "A discrepancy measure for failure of transport composition along an admissible chain.",
+      "process_rewrite": "A residual computed between direct transport and composed transport through an intermediate index.",
+      "procedural_components": [
+        "delta",
+        "coupling",
+        "residue"
+      ],
+      "primitive_mapping": {
+        "epsilon": "not specified",
+        "residue": "fixed evaluation context",
+        "rho": "not specified",
+        "coupling_or_CSI": "admissible chain for composition",
+        "delta": "composition discrepancy",
+        "orientation_minus_i": "reference-mediated transport input if available"
+      },
+      "proposed_roles": [
+        {
+          "role_name": "propagation_consistency_metric",
+          "operational_definition": "Measures whether direct and composed transport agree under the declared transport law.",
+          "metrics": [
+            "transport_residual"
+          ],
+          "candidate_tools": [],
+          "falsification_condition": "Residual is zero while direct and composed transport differ under the declared equality semantics.",
+          "evidence_level": "L0",
+          "charter_classification": "provisional",
+          "known_limits": [
+            "Requires a concrete transport law and distance functional."
+          ]
+        }
+      ],
+      "open_questions": [
+        "Which distance functional defines residual equality for each mechanism class?"
+      ],
+      "governance_status": "not_verified"
+    },
+    {
+      "term": "Admissibility Outcome",
+      "aliases": [
+        "admissibility_outcome",
+        "admissible",
+        "unstable",
+        "forbidden"
+      ],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "Outcome codomain introduced by the formal specification of the residue-conditioned biconditional.",
+      "source_context": {
+        "source_type": "paper_draft",
+        "source_path_or_note": "docs/theory/foundational/5_03_26 unity/math/# Formal Specification of ⇔(_R).txt; docs/theory/foundational/5_03_26 unity/math/02_ordered_account_of_mathematics.md"
+      },
+      "proposed_definition": "A categorical result of evaluating the residue-conditioned relation for a state pair under residue and orientation context.",
+      "process_rewrite": "Classify a proposed continuation relation as permitted, unstable, or forbidden after applying the admissibility test.",
+      "procedural_components": [
+        "epsilon",
+        "residue",
+        "admissibility",
+        "orientation_minus_i"
+      ],
+      "primitive_mapping": {
+        "epsilon": "nonzero distinction condition",
+        "residue": "history-sensitive evaluation context",
+        "rho": "continuation capacity not specified",
+        "coupling_or_CSI": "local relation domain",
+        "delta": "state-pair deviation",
+        "orientation_minus_i": "orientation frame for evaluation"
+      },
+      "proposed_roles": [
+        {
+          "role_name": "relation_codomain",
+          "operational_definition": "The output category of the residue-conditioned admissibility relation.",
+          "metrics": [],
+          "candidate_tools": [],
+          "falsification_condition": "The output categories cannot be distinguished from raw boolean equivalence in a governed implementation.",
+          "evidence_level": "L0",
+          "charter_classification": "provisional",
+          "known_limits": [
+            "The formal specification gives a type signature but no implemented classifier."
+          ]
+        }
+      ],
+      "open_questions": [
+        "Should the codomain be exactly ternary, or should mechanism-specific subcategories be allowed?"
+      ],
+      "governance_status": "not_verified"
+    },
+    {
+      "term": "Residue Update Operator",
+      "aliases": [
+        "residue_update_operator",
+        "Psi",
+        "Ψ"
+      ],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "Formal operator introduced by the standalone specification of R.",
+      "source_context": {
+        "source_type": "paper_draft",
+        "source_path_or_note": "docs/theory/foundational/5_03_26 unity/math/# Formal Specification of (R).txt; docs/theory/foundational/5_03_26 unity/math/02_ordered_account_of_mathematics.md"
+      },
+      "proposed_definition": "An update operator Ψ that maps current residue and continuation data into the next residue state, including admissibility and orientation dependence when required.",
+      "process_rewrite": "Accumulate the structural consequence of admissible continuation into residue so later admissibility and ⇔_R evaluation are history-sensitive.",
+      "procedural_components": [
+        "residue",
+        "delta",
+        "continuation"
+      ],
+      "primitive_mapping": {
+        "epsilon": "deviation or mismatch generating residue",
+        "residue": "updated constraint memory",
+        "rho": "continuation capacity not specified",
+        "coupling_or_CSI": "navigation contribution may accumulate through coupling",
+        "delta": "before/after continuation difference",
+        "orientation_minus_i": "orientation interaction may be retained in residue"
+      },
+      "proposed_roles": [
+        {
+          "role_name": "residue_accumulation_rule",
+          "operational_definition": "Computes R_{t+1} from R_t and continuation data, minimally (R_t, x_t, x_{t+1}) and, when required, (ω_t, Π_A).",
+          "metrics": [
+            "residue_growth",
+            "residue_decay",
+            "hysteresis_width"
+          ],
+          "candidate_tools": [],
+          "falsification_condition": "Residue dynamics cannot be distinguished from a memoryless state update.",
+          "evidence_level": "L0",
+          "charter_classification": "provisional",
+          "known_limits": [
+            "The formal specification gives a recurrence shape but not a concrete implementation."
+          ]
+        }
+      ],
+      "open_questions": [
+        "What concrete Psi update law should be used per mechanism class?",
+        "Which residue decay or saturation rule is canonical?",
+        "Can Ψ be specified as R_{t+1} = Ψ(R_t, x_t, x_{t+1}, ω_t, Π_A) without importing ungoverned primitives?",
+        "Is the candidate instantiation R_{t+1} = λR_t + ηΠ_{A_t}(NavT(ω_t, ω_{t+1})) acceptable as a provisional specification, and what are its failure conditions?"
+      ],
+      "governance_status": "not_verified"
+    },
+    {
+      "term": "Residue Space",
+      "aliases": [
+        "residue_space",
+        "ℛ",
+        "R_space"
+      ],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "Typed residue form R_t ∈ ℛ introduced by accepted review patch for the R/residue specification.",
+      "source_context": {
+        "source_type": "paper_draft",
+        "source_path_or_note": "docs/theory/foundational/5_03_26 unity/math/02_ordered_account_of_mathematics.md"
+      },
+      "proposed_definition": "A constraint-memory space that stores accumulated admissible orientation-transform contributions (the codomain of residue update).",
+      "process_rewrite": "A typed target space for residue accumulation, distinct from merely naming 'residue' as memory.",
+      "procedural_components": [
+        "residue",
+        "admissibility",
+        "orientation_minus_i"
+      ],
+      "primitive_mapping": {
+        "epsilon": "not specified",
+        "residue": "element of ℛ updated by Ψ",
+        "rho": "not specified",
+        "coupling_or_CSI": "may be represented via accumulated coupling constraints",
+        "delta": "not specified",
+        "orientation_minus_i": "contributions stored as constraint traces"
+      },
+      "proposed_roles": [
+        {
+          "role_name": "residue_codomain",
+          "operational_definition": "Defines where residue lives and what types of objects Ψ can accumulate (scalar, field, tensor, graph weights, etc.).",
+          "metrics": [],
+          "candidate_tools": [],
+          "falsification_condition": "Residue cannot be typed consistently across model implementations (e.g., treated as both scalar gate and geometric field without a projection mapping).",
+          "evidence_level": "L0",
+          "charter_classification": "provisional",
+          "known_limits": [
+            "Whether ℛ is identical to X, dual to X, or separate must be specified per mechanism class."
+          ]
+        }
+      ],
+      "open_questions": [
+        "Is ℛ identical to state space X, dual to X, or a separate constraint/tensor space per model?",
+        "What projection/mapping relates ℛ across mechanism classes for cross-verification?"
+      ],
+      "governance_status": "not_verified"
+    },
+    {
+      "term": "One Process",
+      "status": "RESOLVED_TO_ALIAS",
+      "resolved_to": "procedural_continuation_dynamics",
+      "notes": [
+        "'One Process' served as the developmental scaffold and is now retained as an alias only."
+      ]
     }
   ]
 }

@@ -11,6 +11,21 @@
       "Lexicon Out Check is mandatory after RESEARCH_WRITER and before final claim gate."
     ]
   },
+  "canonical_promotion_gate_v2_3": {
+    "required_checks": [
+      "verb_test",
+      "procedural_fft",
+      "ontology_residue_check",
+      "claim_classification",
+      "data_provenance_check"
+    ],
+    "pass_condition": "Term passes charter reduction checks or is explicitly marked as derived shorthand/provisional with limits.",
+    "fail_behavior": [
+      "retain_in_gap_queue",
+      "demote_to_provisional",
+      "block_canonical_promotion"
+    ]
+  },
   "evidence_levels": {
     "L0": "listed term, no operational validation",
     "L1": "single model or single-run operational support",
@@ -249,6 +264,33 @@
           "downgrade_reasons": [
             "lexicon_term_below_L2_caps_classification"
           ]
+        },
+        "accumulated_continuation_residue": {
+          "status": "L0",
+          "charter_claim_classification": "provisional",
+          "operational_definition": "Residue as the accumulated structural consequence of continuation, updated by a recurrence R_{t+1} = Psi(R_t, x_t, x_{t+1}).",
+          "metrics": [
+            "residue_growth",
+            "residue_decay",
+            "hysteresis_width"
+          ],
+          "models_used": [],
+          "scientific_validity": {
+            "implementation_verified": false,
+            "numerical_stability_verified": false,
+            "model_validation_passed": false,
+            "reproducibility_verified": false
+          },
+          "validation_plan": {
+            "tool": "undetermined",
+            "metrics": [
+              "residue_growth",
+              "residue_decay",
+              "hysteresis_width"
+            ],
+            "falsification_condition": "Residue dynamics are indistinguishable from memoryless updates or do not condition later admissibility.",
+            "evidence_path": "docs/theory/foundational/5_03_26 unity/math/# Formal Specification of (R).txt; docs/theory/foundational/5_03_26 unity/math/02_ordered_account_of_mathematics.md"
+          }
         }
       },
       "open_roles": [
@@ -1721,6 +1763,400 @@
             "cellular_automata",
             "reaction_diffusion"
           ]
+        }
+      }
+    },
+    "Existence Scalar": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "aliases": [
+        "existence_scalar",
+        "E_alpha",
+        "Eα",
+        "ℰ"
+      ],
+      "global_status": "gap_open",
+      "roles": {
+        "participation_condition": {
+          "status": "L0",
+          "operational_definition": "Marks whether the left side of the core biconditional is active for a process index.",
+          "metrics": [],
+          "models_used": [],
+          "scientific_validity": {
+            "implementation_verified": false,
+            "numerical_stability_verified": false,
+            "model_validation_passed": false,
+            "reproducibility_verified": false
+          },
+          "validation_plan": {
+            "tool": "undetermined",
+            "metrics": [],
+            "falsification_condition": "A process has E_alpha > 0 but no distinguishable participation or update-side coherence under the same residue context.",
+            "evidence_path": "docs/theory/foundational/5_03_26 unity/math/02_ordered_account_of_mathematics.md"
+          }
+        }
+      }
+    },
+    "Residue-Conditioned Biconditional": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "aliases": [
+        "residue_conditioned_two_way_constraint",
+        "residue-indexed biconditional",
+        "⇔_R"
+      ],
+      "global_status": "gap_open",
+      "roles": {
+        "closure_connective": {
+          "status": "L0",
+          "operational_definition": "Maps distinguishable state pairs plus residue and orientation context to an admissibility outcome while preserving residue-context coherence across the core expression.",
+          "metrics": [],
+          "models_used": [],
+          "scientific_validity": {
+            "implementation_verified": false,
+            "numerical_stability_verified": false,
+            "model_validation_passed": false,
+            "reproducibility_verified": false
+          },
+          "validation_plan": {
+            "tool": "undetermined",
+            "metrics": [],
+            "falsification_condition": "The operator behaves as identity or ordinary logical equivalence, or admits continuation when delta(A,B)=0 under the declared formal specification.",
+            "evidence_path": "docs/theory/foundational/5_03_26 unity/math/02_ordered_account_of_mathematics.md; docs/theory/foundational/5_03_26 unity/math/# Formal Specification of ⇔(_R).txt"
+          }
+        }
+      }
+    },
+    "Admissibility Window": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "aliases": [
+        "admissibility_domain",
+        "A_alpha",
+        "Aα"
+      ],
+      "global_status": "gap_open",
+      "roles": {
+        "constraint_domain": {
+          "status": "L0",
+          "operational_definition": "Defines which candidate continuation increments may pass to projection or selection.",
+          "metrics": [],
+          "models_used": [],
+          "scientific_validity": {
+            "implementation_verified": false,
+            "numerical_stability_verified": false,
+            "model_validation_passed": false,
+            "reproducibility_verified": false
+          },
+          "validation_plan": {
+            "tool": "undetermined",
+            "metrics": [],
+            "falsification_condition": "Updates propagate outside the declared admissible domain without projection or selection failure.",
+            "evidence_path": "docs/theory/foundational/5_03_26 unity/math/02_ordered_account_of_mathematics.md"
+          }
+        }
+      }
+    },
+    "Admissibility Projection": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "aliases": [
+        "admissibility_projection",
+        "Pi_A",
+        "Π_A"
+      ],
+      "global_status": "gap_open",
+      "roles": {
+        "pre_update_filter": {
+          "status": "L0",
+          "operational_definition": "Removes inadmissible components before the state update is applied.",
+          "metrics": [],
+          "models_used": [],
+          "scientific_validity": {
+            "implementation_verified": false,
+            "numerical_stability_verified": false,
+            "model_validation_passed": false,
+            "reproducibility_verified": false
+          },
+          "validation_plan": {
+            "tool": "undetermined",
+            "metrics": [],
+            "falsification_condition": "Inadmissible components enter the applied increment despite projection being declared active.",
+            "evidence_path": "docs/theory/foundational/5_03_26 unity/math/02_ordered_account_of_mathematics.md"
+          }
+        }
+      }
+    },
+    "Coupling Neighborhood": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "aliases": [
+        "coupling_neighborhood",
+        "csi(alpha)",
+        "CSI(alpha)"
+      ],
+      "global_status": "gap_open",
+      "roles": {
+        "interaction_index_set": {
+          "status": "L0",
+          "operational_definition": "Determines which neighbor contributions enter the update-side summation.",
+          "metrics": [],
+          "models_used": [],
+          "scientific_validity": {
+            "implementation_verified": false,
+            "numerical_stability_verified": false,
+            "model_validation_passed": false,
+            "reproducibility_verified": false
+          },
+          "validation_plan": {
+            "tool": "undetermined",
+            "metrics": [],
+            "falsification_condition": "The neighborhood cannot be computed from declared admissibility or coupling rules.",
+            "evidence_path": "docs/theory/foundational/5_03_26 unity/math/02_ordered_account_of_mathematics.md"
+          }
+        }
+      }
+    },
+    "Transport Operator": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "aliases": [
+        "transport_operator",
+        "Nav_T"
+      ],
+      "global_status": "gap_open",
+      "roles": {
+        "deviation_contribution_operator": {
+          "status": "L0",
+          "operational_definition": "Maps a pair of reference-bearing states into a candidate increment contribution.",
+          "metrics": [
+            "transport_residual"
+          ],
+          "models_used": [],
+          "scientific_validity": {
+            "implementation_verified": false,
+            "numerical_stability_verified": false,
+            "model_validation_passed": false,
+            "reproducibility_verified": false
+          },
+          "validation_plan": {
+            "tool": "undetermined",
+            "metrics": [
+              "transport_residual"
+            ],
+            "falsification_condition": "No stable contribution or composition residual can be defined for the operator.",
+            "evidence_path": "docs/theory/foundational/5_03_26 unity/math/02_ordered_account_of_mathematics.md"
+          }
+        }
+      }
+    },
+    "Mismatch-Minimizing Selection": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "aliases": [
+        "mismatch_minimizing_selection",
+        "O_star",
+        "O*"
+      ],
+      "global_status": "gap_open",
+      "roles": {
+        "orientation_inducing_selector": {
+          "status": "L0",
+          "operational_definition": "Chooses among admissible candidates and induces a local reference from the selected result.",
+          "metrics": [
+            "mismatch_cost",
+            "degeneracy_count"
+          ],
+          "models_used": [],
+          "scientific_validity": {
+            "implementation_verified": false,
+            "numerical_stability_verified": false,
+            "model_validation_passed": false,
+            "reproducibility_verified": false
+          },
+          "validation_plan": {
+            "tool": "undetermined",
+            "metrics": [
+              "mismatch_cost",
+              "degeneracy_count"
+            ],
+            "falsification_condition": "Selection does not reduce mismatch or fails to induce a stable reference object.",
+            "evidence_path": "docs/theory/foundational/5_03_26 unity/math/02_ordered_account_of_mathematics.md"
+          }
+        }
+      }
+    },
+    "Transport Residual Observable": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "aliases": [
+        "transport_residual_observable",
+        "delta_T",
+        "δ_T"
+      ],
+      "global_status": "gap_open",
+      "roles": {
+        "propagation_consistency_metric": {
+          "status": "L0",
+          "operational_definition": "Measures whether direct and composed transport agree under the declared transport law.",
+          "metrics": [
+            "transport_residual"
+          ],
+          "models_used": [],
+          "scientific_validity": {
+            "implementation_verified": false,
+            "numerical_stability_verified": false,
+            "model_validation_passed": false,
+            "reproducibility_verified": false
+          },
+          "validation_plan": {
+            "tool": "undetermined",
+            "metrics": [
+              "transport_residual"
+            ],
+            "falsification_condition": "Residual is zero while direct and composed transport differ under the declared equality semantics.",
+            "evidence_path": "docs/theory/foundational/5_03_26 unity/math/02_ordered_account_of_mathematics.md"
+          }
+        }
+      }
+    },
+    "Admissibility Outcome": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "aliases": [
+        "admissibility_outcome",
+        "admissible",
+        "unstable",
+        "forbidden"
+      ],
+      "global_status": "gap_open",
+      "roles": {
+        "relation_codomain": {
+          "status": "L0",
+          "operational_definition": "The output category of the residue-conditioned admissibility relation.",
+          "metrics": [],
+          "models_used": [],
+          "scientific_validity": {
+            "implementation_verified": false,
+            "numerical_stability_verified": false,
+            "model_validation_passed": false,
+            "reproducibility_verified": false
+          },
+          "validation_plan": {
+            "tool": "undetermined",
+            "metrics": [],
+            "falsification_condition": "The output categories cannot be distinguished from raw boolean equivalence in a governed implementation.",
+            "evidence_path": "docs/theory/foundational/5_03_26 unity/math/# Formal Specification of ⇔(_R).txt; docs/theory/foundational/5_03_26 unity/math/02_ordered_account_of_mathematics.md"
+          }
+        }
+      }
+    },
+    "Residue Update Operator": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "aliases": [
+        "residue_update_operator",
+        "Psi",
+        "Ψ"
+      ],
+      "global_status": "gap_open",
+      "roles": {
+        "residue_accumulation_rule": {
+          "status": "L0",
+          "operational_definition": "Computes R_{t+1} from R_t and continuation data, minimally (R_t, x_t, x_{t+1}) and, when required, (ω_t, Π_A).",
+          "metrics": [
+            "residue_growth",
+            "residue_decay",
+            "hysteresis_width"
+          ],
+          "models_used": [],
+          "scientific_validity": {
+            "implementation_verified": false,
+            "numerical_stability_verified": false,
+            "model_validation_passed": false,
+            "reproducibility_verified": false
+          },
+          "validation_plan": {
+            "tool": "undetermined",
+            "metrics": [
+              "residue_growth",
+              "residue_decay",
+              "hysteresis_width"
+            ],
+            "falsification_condition": "Residue dynamics cannot be distinguished from a memoryless state update.",
+            "evidence_path": "docs/theory/foundational/5_03_26 unity/math/# Formal Specification of (R).txt; docs/theory/foundational/5_03_26 unity/math/02_ordered_account_of_mathematics.md"
+          }
+        }
+      }
+    },
+    "Residue Space": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "aliases": [
+        "residue_space",
+        "ℛ",
+        "R_space"
+      ],
+      "global_status": "gap_open",
+      "roles": {
+        "residue_codomain": {
+          "status": "L0",
+          "operational_definition": "Defines where residue lives and what types of objects Ψ can accumulate (scalar, field, tensor, graph weights, etc.).",
+          "metrics": [],
+          "models_used": [],
+          "scientific_validity": {
+            "implementation_verified": false,
+            "numerical_stability_verified": false,
+            "model_validation_passed": false,
+            "reproducibility_verified": false
+          },
+          "validation_plan": {
+            "tool": "undetermined",
+            "metrics": [],
+            "falsification_condition": "Residue cannot be typed consistently across model implementations without a declared projection mapping.",
+            "evidence_path": "docs/theory/foundational/5_03_26 unity/math/02_ordered_account_of_mathematics.md"
+          }
+        }
+      }
+    },
+    "process": {
+      "canonical_source": "registry/lexicon_canonical.json",
+      "aliases": [],
+      "global_status": "verified",
+      "ontology_class": "fundamental_category",
+      "claim_status": "AXIOMATIC_WITHIN_FRAMEWORK",
+      "physics_status": "ANALOG_MODEL_ONLY",
+      "roles": {
+        "fundamental_substrate": {
+          "status": "L3",
+          "operational_definition": "The fundamental updating activity by which nonzero distinction, admissible coupling, residue inscription, and continuation are generated or constrained within the framework."
+        }
+      }
+    },
+    "procedural_continuation_dynamics": {
+      "canonical_source": "registry/lexicon_canonical.json",
+      "aliases": [
+        "PCD",
+        "Procedural Continuation Dynamics",
+        "One Process",
+        "the One Process",
+        "one process",
+        "one-process framework"
+      ],
+      "global_status": "registered",
+      "ontology_class": "framework_name",
+      "claim_status": "NOMENCLATURE_ONLY",
+      "operational_definition": "A framework-level label for the governed ontology and modeling program built around process, continuation, admissibility, residue, orientation, and causal accessibility.",
+      "roles": {
+        "framework_label": {
+          "status": "L0",
+          "operational_definition": "N/A for label itself; empirical claims made under PCD must be validated independently."
+        }
+      }
+    },
+    "causal_sphere_of_influence": {
+      "canonical_source": "registry/lexicon_canonical.json",
+      "aliases": [
+        "CSI",
+        "Causal Sphere of Influence"
+      ],
+      "global_status": "gap_open",
+      "ontology_class": "causal_domain",
+      "claim_status": "PROVISIONAL",
+      "physics_status": "ANALOG_MODEL_ONLY",
+      "roles": {
+        "causal_domain": {
+          "status": "L0",
+          "operational_definition": "The domain of causal accessibility available to a process element, indexing which other process states may contribute to admissible continuation."
         }
       }
     }

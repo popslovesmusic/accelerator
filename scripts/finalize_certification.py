@@ -33,24 +33,31 @@ def create_manifest(tool_name, cert_level, output_path, validated_observables, k
         json.dump(data, f, indent=4)
     print(f"Created/Updated {path}")
 
-# New tools
-create_manifest("dase_analog_sim_cpp", "C4", "outputs/v2p3_report.json", ["mean_output", "precision_drift"], model_class="analog_simulation")
-create_manifest("satp_higgs_sim_cpp", "C4", "outputs/v2p3_report.json", ["phi_rms", "precision_drift"], known_controls=["falsification_decoupled"], model_class="field_simulation")
-create_manifest("satp_higgs_3d_sim_cpp", "C4", "outputs/v2p3_report.json", ["phi_rms", "precision_drift"], model_class="field_simulation")
-create_manifest("stochastic_sim_cpp", "C4", "summary.json", ["crossing_fraction", "precision_drift"], model_class="stochastic")
-create_manifest("structural_box_sim_cpp", "C4", "summary.json", ["epsilon_max", "alignment_success_rate"], model_class="pde")
+# New tools (elevated to C4)
+elevated_tools = [
+    ("igsoa_gw_core_cpp", ["phi_rms", "energy_density", "echo_intensity"], "field_simulation"),
+    ("igsoa_complex_1d_cpp", ["mean_phi", "psi_squared_mean", "entropy_rate"], "lattice_dynamics"),
+    ("igsoa_complex_2d_cpp", ["mean_phi", "psi_squared_mean", "entropy_rate"], "lattice_dynamics"),
+    ("igsoa_complex_3d_cpp", ["mean_phi", "psi_squared_mean", "entropy_rate"], "lattice_dynamics"),
+    ("satp_higgs_1d_cpp", ["phi_rms", "h_rms"], "field_simulation"),
+    ("dase_analog_sim_cpp", ["mean_output", "precision_drift"], "analog_simulation"),
+    ("satp_higgs_sim_cpp", ["phi_rms", "precision_drift"], "field_simulation"),
+    ("satp_higgs_3d_sim_cpp", ["phi_rms", "precision_drift"], "field_simulation"),
+    ("stochastic_sim_cpp", ["crossing_fraction", "precision_drift"], "stochastic"),
+    ("structural_box_sim_cpp", ["epsilon_max", "alignment_success_rate"], "pde")
+]
+
+for name, obs, m_class in elevated_tools:
+    create_manifest(name, "C4", "outputs/v2p3_report.json", obs, model_class=m_class)
 
 # Update master manifest
 manifest_path = "registry/tool_manifest.json"
 with open(manifest_path, 'r', encoding='utf-8-sig') as f:
     manifest = json.load(f)
 
-manifest_tools = {t["name"]: t for t in manifest["tools"]}
-
 # Final pass to sync ALL C++ tools in manifest with their certification manifests
 for tool_entry in manifest["tools"]:
     tool_name = tool_entry["name"]
-    # Check both direct and tools/ prefixed paths
     possible_paths = [
         os.path.join(tool_name, "validation", "certification_manifest.json"),
         os.path.join("tools", tool_name, "validation", "certification_manifest.json")
@@ -64,17 +71,21 @@ for tool_entry in manifest["tools"]:
             
     if cert_path:
         with open(cert_path, 'r', encoding='utf-8-sig') as f:
-            content = f.read()
-            if not content.strip(): continue
-            cert_data = json.loads(content)
+            content = f.read().strip()
+            if not content: continue
+            try:
+                cert_data = json.loads(content)
+            except json.JSONDecodeError:
+                continue
         
-        tool_entry["certification_level"] = cert_data["certification_level"]
-        tool_entry["last_validation_date"] = "2026-04-30"
-        tool_entry["has_falsification"] = cert_data["scientific_validity"]["falsification_verified"]
-        tool_entry["numerical_stability_verified"] = cert_data["scientific_validity"]["numerical_stability_verified"]
-        tool_entry["uncertainty_quantified"] = cert_data["scientific_validity"]["uncertainty_quantified"]
-        tool_entry["provenance_verified"] = cert_data["scientific_validity"]["provenance_verified"]
-        print(f"Synced {tool_name} in manifest to {cert_data['certification_level']}")
+        if "certification_level" in cert_data:
+            tool_entry["certification_level"] = cert_data["certification_level"]
+            tool_entry["last_validation_date"] = "2026-05-06"
+            tool_entry["has_falsification"] = cert_data.get("scientific_validity", {}).get("falsification_verified", False)
+            tool_entry["numerical_stability_verified"] = cert_data.get("scientific_validity", {}).get("numerical_stability_verified", False)
+            tool_entry["uncertainty_quantified"] = cert_data.get("scientific_validity", {}).get("uncertainty_quantified", False)
+            tool_entry["provenance_verified"] = cert_data.get("scientific_validity", {}).get("provenance_verified", False)
+            print(f"Synced {tool_name} in manifest to {cert_data['certification_level']}")
 
 with open(manifest_path, 'w', encoding='utf-8') as f:
     json.dump(manifest, f, indent=4)
