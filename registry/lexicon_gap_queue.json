@@ -21,7 +21,37 @@
         "DEPRECATED",
         "UNRESOLVABLE_GAP"
       ],
-      "noncompliant_terms_must_not_promote": true
+      "noncompliant_terms_must_not_promote": true,
+      "resolution_lanes": [
+        "PROMOTE_TO_CANONICAL",
+        "MAP_TO_ALIAS",
+        "MARK_AS_DERIVED_SHORTHAND",
+        "MARK_AS_SURFACE_METAPHOR",
+        "MARK_AS_NOISE",
+        "RETAIN_AS_UNRESOLVABLE_GAP"
+      ],
+      "common_language_noise_filter_v1": {
+        "default_noise_examples": [
+          "the",
+          "and",
+          "but",
+          "where",
+          "can",
+          "above",
+          "after",
+          "because"
+        ],
+        "exception_rule": "If a common word is explicitly claimed as a governed primitive, route to manual charter review instead of noise."
+      },
+      "noun_to_verb_acceptance_rule_v1": {
+        "statement": "A noun may be accepted when its canonical definition reduces to an active process form and does not imply object, container, substrate, location, or substance primitivity.",
+        "required_checks": [
+          "verb_test",
+          "procedural_fft",
+          "ontology_residue_check",
+          "prohibited_primitive_check"
+        ]
+      }
     }
   },
   "candidate_new_terms": [
@@ -1107,6 +1137,207 @@
         "What projection/mapping relates ℛ across mechanism classes for cross-verification?"
       ],
       "governance_status": "not_verified"
+    },
+    {
+      "term": "process",
+      "status": "RESOLVED_TO_CANONICAL",
+      "resolution_lane": "PROMOTE_TO_CANONICAL",
+      "charter_compliance": {
+        "charter_version": "2.3",
+        "verb_test": "pass",
+        "procedural_fft": "pass",
+        "ontology_residue_check": "pass",
+        "claim_classification": "axiomatic_within_framework",
+        "final_compliance_status": "compliant"
+      },
+      "resolution_notes": [
+        "Axiomatic primitive. Reducibility confirmed."
+      ]
+    },
+    {
+      "term": "state",
+      "status": "RESOLVED_TO_ALIAS",
+      "resolution_lane": "MARK_AS_DERIVED_SHORTHAND",
+      "charter_compliance": {
+        "charter_version": "2.3",
+        "verb_test": "fail",
+        "procedural_fft": "provisional",
+        "ontology_residue_check": "fail",
+        "claim_classification": "provisional",
+        "final_compliance_status": "derived_shorthand_allowed",
+        "review_reason": "State implies static noun; must be used only as shorthand for 'locally stabilized phase expression'."
+      }
+    },
+    {
+      "term": "field",
+      "status": "RESOLVED_TO_ALIAS",
+      "resolution_lane": "MARK_AS_DERIVED_SHORTHAND",
+      "charter_compliance": {
+        "charter_version": "2.3",
+        "verb_test": "fail",
+        "procedural_fft": "pass",
+        "ontology_residue_check": "fail",
+        "claim_classification": "provisional",
+        "final_compliance_status": "derived_shorthand_allowed",
+        "review_reason": "Field-as-primitive is prohibited. Must map to 'locally resolved process expression'."
+      }
+    },
+    {
+      "term": "structure",
+      "status": "CHARTER_VERIFIED",
+      "resolution_lane": "MARK_AS_DERIVED_SHORTHAND",
+      "charter_compliance": {
+        "charter_version": "2.3",
+        "verb_test": "pass",
+        "procedural_fft": "pass",
+        "ontology_residue_check": "pass",
+        "claim_classification": "theoretical",
+        "final_compliance_status": "compliant"
+      },
+      "resolution_notes": [
+        "Shorthand for 'recurrence stability under constraint'."
+      ]
+    },
+    {
+      "term": "system",
+      "status": "CHARTER_VERIFIED",
+      "resolution_lane": "MARK_AS_DERIVED_SHORTHAND",
+      "charter_compliance": {
+        "charter_version": "2.3",
+        "verb_test": "pass",
+        "procedural_fft": "pass",
+        "ontology_residue_check": "pass",
+        "claim_classification": "theoretical",
+        "final_compliance_status": "compliant"
+      },
+      "resolution_notes": [
+        "Shorthand for 'coupled continuation regimes'."
+      ]
+    },
+    {
+      "term": "law",
+      "status": "MARK_AS_SURFACE_METAPHOR",
+      "resolution_lane": "MARK_AS_SURFACE_METAPHOR",
+      "charter_compliance": {
+        "charter_version": "2.3",
+        "verb_test": "fail",
+        "procedural_fft": "fail",
+        "ontology_residue_check": "fail",
+        "claim_classification": "provisional",
+        "final_compliance_status": "provisional",
+        "review_reason": "Imposed-rule metaphor. Must reduce to 'invariant update-rule behavior'."
+      }
+    },
+    {
+      "term": "topology",
+      "status": "RESOLVED_TO_CANONICAL",
+      "resolution_lane": "PROMOTE_TO_CANONICAL",
+      "charter_compliance": {
+        "charter_version": "2.3",
+        "verb_test": "pass",
+        "procedural_fft": "pass",
+        "ontology_residue_check": "pass",
+        "claim_classification": "theoretical",
+        "final_compliance_status": "compliant"
+      },
+      "resolution_notes": [
+        "Trace of continuation crossing domain boundaries (transversal)."
+      ]
+    },
+    {
+      "term": "projection",
+      "status": "CHARTER_VERIFIED",
+      "resolution_lane": "PROMOTE_TO_CANONICAL",
+      "charter_compliance": {
+        "charter_version": "2.3",
+        "verb_test": "pass",
+        "procedural_fft": "pass",
+        "ontology_residue_check": "pass",
+        "claim_classification": "theoretical",
+        "final_compliance_status": "compliant"
+      }
+    },
+    {
+      "term": "orientation",
+      "status": "CHARTER_VERIFIED",
+      "resolution_lane": "PROMOTE_TO_CANONICAL",
+      "charter_compliance": {
+        "charter_version": "2.3",
+        "verb_test": "pass",
+        "procedural_fft": "pass",
+        "ontology_residue_check": "pass",
+        "claim_classification": "theoretical",
+        "final_compliance_status": "compliant"
+      }
+    },
+    {
+      "term": "deviation",
+      "status": "CHARTER_VERIFIED",
+      "resolution_lane": "MAP_TO_ALIAS",
+      "resolved_to": "Delta",
+      "charter_compliance": {
+        "charter_version": "2.3",
+        "verb_test": "pass",
+        "procedural_fft": "pass",
+        "ontology_residue_check": "pass",
+        "claim_classification": "theoretical",
+        "final_compliance_status": "compliant"
+      }
+    },
+    {
+      "term": "delta",
+      "status": "CHARTER_VERIFIED",
+      "resolution_lane": "MAP_TO_ALIAS",
+      "resolved_to": "Delta",
+      "charter_compliance": {
+        "charter_version": "2.3",
+        "verb_test": "pass",
+        "procedural_fft": "pass",
+        "ontology_residue_check": "pass",
+        "claim_classification": "theoretical",
+        "final_compliance_status": "compliant"
+      }
+    },
+    {
+      "term": "corridor",
+      "status": "CHARTER_VERIFIED",
+      "resolution_lane": "PROMOTE_TO_CANONICAL",
+      "charter_compliance": {
+        "charter_version": "2.3",
+        "verb_test": "pass",
+        "procedural_fft": "pass",
+        "ontology_residue_check": "pass",
+        "claim_classification": "theoretical",
+        "final_compliance_status": "compliant"
+      }
+    },
+    {
+      "term": "basin",
+      "status": "CHARTER_VERIFIED",
+      "resolution_lane": "PROMOTE_TO_CANONICAL",
+      "charter_compliance": {
+        "charter_version": "2.3",
+        "verb_test": "pass",
+        "procedural_fft": "pass",
+        "ontology_residue_check": "pass",
+        "claim_classification": "theoretical",
+        "final_compliance_status": "compliant"
+      }
+    },
+    {
+      "term": "attractor",
+      "status": "BLOCKED_PRIMITIVE",
+      "resolution_lane": "MARK_AS_SURFACE_METAPHOR",
+      "replacement": "stabilized_recurrence_basin",
+      "charter_compliance": {
+        "charter_version": "2.3",
+        "verb_test": "fail",
+        "procedural_fft": "fail",
+        "ontology_residue_check": "fail",
+        "claim_classification": "noncompliant",
+        "final_compliance_status": "noncompliant",
+        "review_reason": "PROHIBITED PRIMITIVE. Attractor language treated as primitive is forbidden. Must reduce to stabilized_recurrence / basin."
+      }
     },
     {
       "term": "One Process",

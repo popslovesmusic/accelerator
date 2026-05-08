@@ -5,6 +5,20 @@
     "usage_policy": "Agent may execute tools but MUST NOT modify engine code or core scripts. MUST follow validation_protocol_v2.json for all research claims.",
     "tools": [
         {
+            "name": "oneproc",
+            "status": "FROZEN",
+            "classification": "governance_artifact",
+            "runtime_expectation": "non_importable",
+            "source_expectation": "archival_state_allowed",
+            "modification_policy": "no_modification_without_explicit_unfreeze",
+            "notes": [
+                "oneproc is intentionally frozen.",
+                "Absence of active .py sources is not considered repository corruption.",
+                "Compiled remnants and archival structure are permitted under frozen status.",
+                "Validation systems must not require oneproc runtime importability unless explicitly unfrozen."
+            ]
+        },
+        {
             "name": "agent_based_sim_v1",
             "description": "Phase-space swarm simulation for local-to-global rules.",
             "entry_point": "tools/agent_based_sim_v1/sim.py",

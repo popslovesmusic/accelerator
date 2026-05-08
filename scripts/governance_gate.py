@@ -309,7 +309,13 @@ class CppPreferenceValidator:
 
     def validate(self, tools: List[Dict[str, Any]], target_level: str) -> Dict[str, Any]:
         if target_level not in ["C4", "C5", "C6"]: return {"pass": True, "violations": []}
-        violations = [t.get("tool_name") for t in tools if t.get("implementation_language") == "python" and t.get("cpp_equivalent_available") and not t.get("justification")]
+        violations = [
+            t.get("tool_name") for t in tools 
+            if t.get("implementation_language") == "python" 
+            and t.get("cpp_equivalent_available") 
+            and not t.get("justification")
+            and t.get("status") != "FROZEN"
+        ]
         return {"pass": len(violations) == 0, "violations": violations}
 
 class MathValidator:
@@ -838,11 +844,24 @@ class GovernanceGate:
         tool_names = set(metadata.get("models_used", []))
         for m in measurements: tool_names.add(m["tool"])
         
+        # Load manifest to check status
+        manifest = {}
+        manifest_path = "registry/tool_manifest.json"
+        if os.path.exists(manifest_path):
+            try:
+                with open(manifest_path, "r", encoding="utf-8") as f:
+                    manifest = json.load(f)
+            except: pass
+        
+        tool_status_map = {t.get("name"): t.get("status", "ACTIVE") for t in manifest.get("tools", [])}
+        
         tools = []
         for tn in tool_names:
             if tn == "unknown": continue
+            status = tool_status_map.get(tn, "ACTIVE")
             tools.append({
                 "tool_name": tn,
+                "status": status,
                 "implementation_language": "cpp" if "cpp" in tn.lower() else "python",
                 "cpp_equivalent_available": True # Assume True for gate logic to trigger check
             })

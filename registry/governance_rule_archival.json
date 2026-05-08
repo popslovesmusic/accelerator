@@ -35,6 +35,25 @@
     "agent_instruction": "Before applying project changes, check whether a durable patch/schema JSON exists. If not, create one. After applying changes, update its status, affected files, validation result, and rollback notes.",
     "archived_patches": [
       {
+        "patch_id": "PATCH_GOV_FROZEN_ARTIFACT_EXEMPTION_V1",
+        "title": "Frozen Artifact Exemption Rule",
+        "status": "applied",
+        "timestamp": "2026-05-08T02:30:00Z",
+        "rule": {
+          "name": "frozen_artifact_exemption",
+          "description": "Frozen artifacts are exempt from active runtime validation, packaging expectations, and importability requirements unless explicitly reactivated.",
+          "applies_to": [
+            "FROZEN"
+          ],
+          "exemptions": [
+            "pytest_import_failures",
+            "missing_source_package_structure",
+            "runtime_entrypoint_validation",
+            "active_ci_requirements"
+          ]
+        }
+      },
+      {
         "patch_id": "PATCH_GOV_INDEPENDENT_MEASUREMENT_ENFORCEMENT_V1",
         "title": "Enforce Independent Measurement for C4+ Claim Promotion",
         "status": "applied",

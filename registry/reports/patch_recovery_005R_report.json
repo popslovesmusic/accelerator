@@ -1,0 +1,36 @@
+{
+  "patch_id": "LEXICON_PATCH_005R_RECOVERY",
+  "timestamp": "2026-05-08T02:22:00Z",
+  "verification_results": {
+    "lexicon_alias_map.json": {
+      "status": "passed",
+      "checks": {
+        "alias_must_preserve_charter_compliance": "present",
+        "csi_aliases": "present"
+      }
+    },
+    "lexicon_canonical.json": {
+      "status": "passed",
+      "checks": {
+        "root_authority_compliance_charter_v2_3": "present",
+        "charter_compliance_schema": "present",
+        "per_term_compliance_entries": "present"
+      }
+    },
+    "lexicon_gap_queue.json": {
+      "status": "passed",
+      "checks": {
+        "cleanup_rule": "present",
+        "charter_enforcement_metadata": "present",
+        "noncompliant_terms_must_not_promote": "present"
+      }
+    }
+  },
+  "missing_expected_changes": [],
+  "duplicate_risk_terms": [
+    "biased transport",
+    "bias window"
+  ],
+  "safe_resume_point": "op: resume_gap_queue_triage",
+  "notes": "Verified that core compliance architecture is landed. Proceeding to inject resolution lanes and filter noise."
+}
