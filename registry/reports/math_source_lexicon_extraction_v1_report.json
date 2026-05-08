@@ -1,0 +1,62 @@
+{
+  "report_id": "MATH_SOURCE_LEXICON_EXTRACTION_V1_REPORT",
+  "timestamp": "2026-05-08T12:00:00Z",
+  "status": "COMPLETED",
+  "patch_id": "PCD_MATH_SOURCE_LEXICON_EXTRACTION_V1",
+  "summary": "Bound lexicon definitions to mathematics source documents and classified terms by definition mode. Created math source registry and established gap tracking for partial derivations.",
+  "operations_summary": [
+    {
+      "operation": "register_definition_mode_schema",
+      "target": "registry/lexicon_canonical.json",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "register_math_source_documents",
+      "target": "registry/math_source_registry.json",
+      "status": "SUCCESS",
+      "documents_count": 5
+    },
+    {
+      "operation": "bind_terms_to_math_sources",
+      "target": "registry/lexicon_canonical.json",
+      "status": "SUCCESS",
+      "terms_bound": 8
+    },
+    {
+      "operation": "add_gap_rule",
+      "target": "registry/lexicon_gap_queue.json",
+      "status": "SUCCESS",
+      "rule": "partial_derivation_gap_tracking_v1"
+    }
+  ],
+  "definition_mode_integration": {
+    "axiomatic": [
+      "process"
+    ],
+    "operational": [
+      "phase_packet",
+      "Delta_phi_min_emp",
+      "delta_T",
+      "Delta_align"
+    ],
+    "derived": [
+      "geodesic",
+      "GRA",
+      "operational_curvature"
+    ],
+    "partially_derived": [
+      "-(i)"
+    ]
+  },
+  "manual_review_queue": [
+    {
+      "term": "-(i)",
+      "reason": "Explicit formal gaps listed in Ref(.) codomain, closed O operator algebra, etc."
+    }
+  ],
+  "charter_compliance_check": {
+    "charter_version": "2.3",
+    "status": "COMPLIANT",
+    "notes": "Term-source binding correctly implements humidity mandates by identifying formal gaps and grounding definitions in empirical/theoretical source documents."
+  }
+}

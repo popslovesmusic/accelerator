@@ -1,0 +1,62 @@
+{
+  "report_id": "RECONSTRUCTION_AND_INVERSION_RULES_V1_REPORT_REFINED",
+  "timestamp": "2026-05-08T10:45:00Z",
+  "status": "COMPLETED",
+  "patch_id": "PCD_RECONSTRUCTION_AND_INVERSION_RULES_V1",
+  "summary": "Formalized admissible reconstruction and inversion rules from projected observables back into constrained continuation structure. Included formal symbol 'Ξ' for the Xi operator and verified all foundational rules and guardrails.",
+  "operations_summary": [
+    {
+      "operation": "register_reconstruction_namespace",
+      "target": "registry/lexicon_canonical.json",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "define_reconstruction_operator",
+      "target": "registry/lexicon_canonical.json",
+      "term": "Xi",
+      "symbol": "Ξ",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "define_reconstruction_rule",
+      "target": "registry/lexicon_canonical.json",
+      "rule": "admissible_reconstruction_rule_v1",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "define_projection_aliasing_rule",
+      "target": "registry/lexicon_canonical.json",
+      "rule": "projection_aliasing_rule_v1",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "define_reconstruction_limit_rule",
+      "target": "registry/lexicon_gap_queue.json",
+      "rule": "no_complete_observable_recovery_v1",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "define_inverse_projection_guardrail",
+      "target": "registry/lexicon_gap_queue.json",
+      "rule": "no_inverse_projection_without_history_v1",
+      "status": "SUCCESS"
+    }
+  ],
+  "reconstruction_rules": [
+    "admissible_reconstruction_rule_v1",
+    "Xi (Ξ)"
+  ],
+  "projection_aliasing_rules": [
+    "projection_aliasing_rule_v1"
+  ],
+  "inverse_projection_guardrails": [
+    "no_complete_observable_recovery_v1",
+    "no_inverse_projection_without_history_v1"
+  ],
+  "manual_review_queue": [],
+  "charter_compliance_check": {
+    "charter_version": "2.3",
+    "status": "COMPLIANT",
+    "notes": "Reconstruction rules and the Xi (Ξ) operator correctly enforce history-dependence and resolution-limits, avoiding overdetermined inverse-projection claims."
+  }
+}

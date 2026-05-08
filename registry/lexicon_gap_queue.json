@@ -52,6 +52,207 @@
           "prohibited_primitive_check"
         ]
       }
+    },
+    "cross_class_collision_detection_v1": {
+      "name": "cross_class_collision_detection_v1",
+      "description": "A term may not simultaneously exist as incompatible ontology classes without explicit governance exemption.",
+      "example_conflicts": [
+        [
+          "surface_metaphor",
+          "primitive_process"
+        ],
+        [
+          "derived_shorthand",
+          "primitive_relation"
+        ],
+        [
+          "constraint_memory_field",
+          "surface_metaphor"
+        ]
+      ],
+      "failure_behavior": "route_to_manual_review"
+    },
+    "operator_signature_validation_v1": {
+      "name": "operator_signature_validation_v1",
+      "description": "Operators must declare typed input/output signatures compatible with ontology classes.",
+      "failure_behavior": "route_to_manual_review"
+    },
+    "illegal_cross_space_projection_v1": {
+      "name": "illegal_cross_space_projection_v1",
+      "description": "Operators may not directly transform between incompatible spaces without an explicit projection or transition operator.",
+      "example_invalid": [
+        "constraint_memory_space -> observable_projection_space without projection operator"
+      ],
+      "failure_behavior": "route_to_manual_review"
+    },
+    "state_space_transition_legality_v1": {
+      "name": "state_space_transition_legality_v1",
+      "statement": "No operator may transform between state spaces unless its operator_signature declares compatible source_space and target_space fields.",
+      "failure_behavior": "route_to_manual_review"
+    },
+    "constraint_geometry_not_substrate_v1": {
+      "name": "constraint_geometry_not_substrate_v1",
+      "statement": "Constraint Geometry must not be treated as primitive space, container, or background manifold.",
+      "failure_behavior": "rewrite_or_demote"
+    },
+    "constraint_geometry_not_physics_claim_v1": {
+      "name": "constraint_geometry_not_physics_claim_v1",
+      "statement": "Constraint Geometry may be used as theoretical PCD structure but must not be presented as an empirical physical geometry without recoverable validation.",
+      "failure_behavior": "tag_as_provisional_or_block_claim"
+    },
+    "no_incomplete_law_set_promotion_v1": {
+      "name": "no_incomplete_law_set_promotion_v1",
+      "statement": "Participation-only, residue-only, or transition-only descriptions must not be promoted as complete PCD law chains.",
+      "failure_behavior": "route_to_tripartite_completion_review"
+    },
+    "no_static_constraint_geometry_v1": {
+      "name": "no_static_constraint_geometry_v1",
+      "statement": "Constraint Geometry must not be treated as immutable background structure.",
+      "failure_behavior": "rewrite_as_dynamic_geometry"
+    },
+    "no_geometry_without_process_v1": {
+      "name": "no_geometry_without_process_v1",
+      "statement": "Constraint Geometry may not exist independently of admissible continuation processes.",
+      "failure_behavior": "demote_to_invalid_substrate_claim"
+    },
+    "no_literal_curvature_claim_v1": {
+      "name": "no_literal_curvature_claim_v1",
+      "statement": "Curvature language within PCD refers to admissibility deformation unless explicitly tied to validated physical interpretation.",
+      "failure_behavior": "mark_as_metaphorical_or_provisional"
+    },
+    "no_complete_observable_recovery_v1": {
+      "name": "no_complete_observable_recovery_v1",
+      "statement": "A projected observable must not be assumed to uniquely determine the full underlying continuation structure unless reconstruction legality is explicitly demonstrated.",
+      "failure_behavior": "mark_as_overdetermined_reconstruction_claim"
+    },
+    "no_inverse_projection_without_history_v1": {
+      "name": "no_inverse_projection_without_history_v1",
+      "statement": "Reconstruction claims require admissibility history and residue context; observable inversion without process history is incomplete.",
+      "failure_behavior": "mark_as_memoryless_reconstruction"
+    },
+    "simulation_validation_binding_v1": {
+      "name": "simulation_validation_binding_v1",
+      "statement": "Simulation outputs may not be classified as valid PCD evidence unless generated through a pipeline-compliant admissibility chain.",
+      "failure_behavior": "mark_as_ungoverned_output"
+    },
+    "reconstruction_validation_binding_v1": {
+      "name": "reconstruction_validation_binding_v1",
+      "statement": "Inverse reconstruction claims must declare projection resolution, residue context, and admissibility history.",
+      "failure_behavior": "mark_as_incomplete_reconstruction_claim"
+    },
+    "partial_derivation_gap_tracking_v1": {
+      "name": "partial_derivation_gap_tracking_v1",
+      "statement": "Partially derived terms may be canonical only if unresolved mathematical gaps are explicitly listed and routed to proof or operator-algebra work.",
+      "failure_behavior": "demote_to_provisional_definition"
+    },
+    "no_memoryless_update_v1": {
+      "name": "no_memoryless_update_v1",
+      "statement": "A transition using \u03b4 or NavT must not be treated as complete unless its residue or admissibility context is declared.",
+      "failure_behavior": "mark_as_memoryless_incomplete_law_set"
+    },
+    "no_static_existence_update_v1": {
+      "name": "no_static_existence_update_v1",
+      "statement": "E_alpha > 0 may establish participation, but may not by itself imply continuation or motion.",
+      "failure_behavior": "route_to_tripartite_incomplete_law_review"
+    },
+    "no_passive_residue_agency_v1": {
+      "name": "no_passive_residue_agency_v1",
+      "statement": "R may constrain or condition updates, but must not be described as acting independently outside process continuation.",
+      "failure_behavior": "rewrite_as_residue_conditioned_continuation"
+    },
+    "illegal_operator_chains_v1": [
+      {
+        "name": "direct_participation_to_observable",
+        "chain": [
+          "E_alpha",
+          "observable"
+        ],
+        "reason": "Participation alone does not generate observable continuation."
+      },
+      {
+        "name": "memoryless_transition",
+        "chain": [
+          "Delta",
+          "observable"
+        ],
+        "reason": "Transition without admissibility or residue mediation is incomplete."
+      },
+      {
+        "name": "residue_as_independent_agent",
+        "chain": [
+          "R",
+          "Delta"
+        ],
+        "reason": "Residue may condition transitions but must not independently generate them."
+      },
+      {
+        "name": "topology_as_primitive_container",
+        "chain": [
+          "topology",
+          "process"
+        ],
+        "reason": "Topology constrains continuation but is not a substrate containing process."
+      }
+    ],
+    "observable_projection_guardrail_v1": {
+      "name": "observable_projection_guardrail_v1",
+      "statement": "Observables are projections of constrained continuation and must not be treated as direct primitives of the framework.",
+      "failure_behavior": "rewrite_as_projection"
+    },
+    "no_absolute_observable_v1": {
+      "name": "no_absolute_observable_v1",
+      "statement": "Observables must not be treated as absolute primitives independent of projection context.",
+      "failure_behavior": "rewrite_as_projection"
+    },
+    "no_projection_without_transition_v1": {
+      "name": "no_projection_without_transition_v1",
+      "statement": "Projection operators may not generate observables directly from participation conditions without admissible transition structure.",
+      "failure_behavior": "illegal_projection_chain"
+    },
+    "no_resolution_independent_observable_v1": {
+      "name": "no_resolution_independent_observable_v1",
+      "statement": "Observable identity must not be assumed invariant across all projection resolutions unless explicitly demonstrated.",
+      "failure_behavior": "mark_as_resolution_assumption"
+    },
+    "no_untyped_law_claims_v1": {
+      "name": "no_untyped_law_claims_v1",
+      "statement": "No PCD law may be promoted unless it declares ontology role, state space, operator dependencies, and claim classification.",
+      "failure_behavior": "block_promotion"
+    },
+    "no_law_as_external_command_v1": {
+      "name": "no_law_as_external_command_v1",
+      "statement": "PCD laws must be described as stable update invariances or process constraints, not external commands imposed on process.",
+      "failure_behavior": "rewrite_or_demote"
+    },
+    "no_chain_without_admissibility_v1": {
+      "name": "no_chain_without_admissibility_v1",
+      "statement": "A linked transformation sequence without admissibility mediation must not be promoted as a valid process chain.",
+      "failure_behavior": "illegal_process_chain"
+    },
+    "no_recursive_projection_collapse_v1": {
+      "name": "no_recursive_projection_collapse_v1",
+      "statement": "Projected observables must not be recursively treated as primitive generators of their own continuation chain without explicit projection inversion logic.",
+      "failure_behavior": "projection_feedback_violation"
+    },
+    "no_disconnected_chain_segments_v1": {
+      "name": "no_disconnected_chain_segments_v1",
+      "statement": "Adjacent operators within a process chain must share compatible ontology outputs and inputs.",
+      "failure_behavior": "operator_chain_disconnect"
+    },
+    "formal_stack_lock_dependency_v1": {
+      "name": "formal_stack_lock_dependency_v1",
+      "statement": "Any future ontology, operator, simulation, or publication patch must cite the current PCD formal stack lockfile or explicitly declare incompatibility.",
+      "failure_behavior": "route_to_manual_review"
+    },
+    "no_unbound_theorem_claims_v1": {
+      "name": "no_unbound_theorem_claims_v1",
+      "statement": "No theorem, lemma, or proof claim may be promoted into the formal PCD stack unless it is bound to a registry entry, dependency path, and claim classification.",
+      "failure_behavior": "route_to_proof_binding_queue"
+    },
+    "lemma_requires_traceable_source_v1": {
+      "name": "lemma_requires_traceable_source_v1",
+      "statement": "All governed lemmas must bind to a source document, proof state, and dependency chain.",
+      "failure_behavior": "route_to_unbound_lemma_queue"
     }
   },
   "candidate_new_terms": [
@@ -599,8 +800,8 @@
       "aliases": [
         "existence_scalar",
         "E_alpha",
-        "Eα",
-        "ℰ"
+        "E\u03b1",
+        "\u2130"
       ],
       "status": "GAP_OPEN",
       "default_claim_status": "PROVISIONAL",
@@ -647,14 +848,14 @@
       "aliases": [
         "residue_conditioned_two_way_constraint",
         "residue-indexed biconditional",
-        "⇔_R"
+        "\u21d4_R"
       ],
       "status": "GAP_OPEN",
       "default_claim_status": "PROVISIONAL",
       "reason_for_induction": "Compound mathematical label used to name the connective role in the ordered account.",
       "source_context": {
         "source_type": "paper_draft",
-        "source_path_or_note": "docs/theory/foundational/5_03_26 unity/math/02_ordered_account_of_mathematics.md; docs/theory/foundational/5_03_26 unity/math/# Formal Specification of ⇔(_R).txt"
+        "source_path_or_note": "docs/theory/foundational/5_03_26 unity/math/02_ordered_account_of_mathematics.md; docs/theory/foundational/5_03_26 unity/math/# Formal Specification of \u21d4(_R).txt"
       },
       "proposed_definition": "A residue-mediated admissible transformation relation between distinguishable configurations; not identity and not logical equivalence.",
       "process_rewrite": "A nonzero distinction passes or fails continuation through an admissibility operator evaluated against residue and local orientation.",
@@ -696,7 +897,7 @@
       "aliases": [
         "admissibility_domain",
         "A_alpha",
-        "Aα"
+        "A\u03b1"
       ],
       "status": "GAP_OPEN",
       "default_claim_status": "PROVISIONAL",
@@ -744,7 +945,7 @@
       "aliases": [
         "admissibility_projection",
         "Pi_A",
-        "Π_A"
+        "\u03a0_A"
       ],
       "status": "GAP_OPEN",
       "default_claim_status": "PROVISIONAL",
@@ -939,7 +1140,7 @@
       "aliases": [
         "transport_residual_observable",
         "delta_T",
-        "δ_T"
+        "\u03b4_T"
       ],
       "status": "GAP_OPEN",
       "default_claim_status": "PROVISIONAL",
@@ -997,7 +1198,7 @@
       "reason_for_induction": "Outcome codomain introduced by the formal specification of the residue-conditioned biconditional.",
       "source_context": {
         "source_type": "paper_draft",
-        "source_path_or_note": "docs/theory/foundational/5_03_26 unity/math/# Formal Specification of ⇔(_R).txt; docs/theory/foundational/5_03_26 unity/math/02_ordered_account_of_mathematics.md"
+        "source_path_or_note": "docs/theory/foundational/5_03_26 unity/math/# Formal Specification of \u21d4(_R).txt; docs/theory/foundational/5_03_26 unity/math/02_ordered_account_of_mathematics.md"
       },
       "proposed_definition": "A categorical result of evaluating the residue-conditioned relation for a state pair under residue and orientation context.",
       "process_rewrite": "Classify a proposed continuation relation as permitted, unstable, or forbidden after applying the admissibility test.",
@@ -1039,7 +1240,7 @@
       "aliases": [
         "residue_update_operator",
         "Psi",
-        "Ψ"
+        "\u03a8"
       ],
       "status": "GAP_OPEN",
       "default_claim_status": "PROVISIONAL",
@@ -1048,8 +1249,8 @@
         "source_type": "paper_draft",
         "source_path_or_note": "docs/theory/foundational/5_03_26 unity/math/# Formal Specification of (R).txt; docs/theory/foundational/5_03_26 unity/math/02_ordered_account_of_mathematics.md"
       },
-      "proposed_definition": "An update operator Ψ that maps current residue and continuation data into the next residue state, including admissibility and orientation dependence when required.",
-      "process_rewrite": "Accumulate the structural consequence of admissible continuation into residue so later admissibility and ⇔_R evaluation are history-sensitive.",
+      "proposed_definition": "An update operator \u03a8 that maps current residue and continuation data into the next residue state, including admissibility and orientation dependence when required.",
+      "process_rewrite": "Accumulate the structural consequence of admissible continuation into residue so later admissibility and \u21d4_R evaluation are history-sensitive.",
       "procedural_components": [
         "residue",
         "delta",
@@ -1066,7 +1267,7 @@
       "proposed_roles": [
         {
           "role_name": "residue_accumulation_rule",
-          "operational_definition": "Computes R_{t+1} from R_t and continuation data, minimally (R_t, x_t, x_{t+1}) and, when required, (ω_t, Π_A).",
+          "operational_definition": "Computes R_{t+1} from R_t and continuation data, minimally (R_t, x_t, x_{t+1}) and, when required, (\u03c9_t, \u03a0_A).",
           "metrics": [
             "residue_growth",
             "residue_decay",
@@ -1084,8 +1285,8 @@
       "open_questions": [
         "What concrete Psi update law should be used per mechanism class?",
         "Which residue decay or saturation rule is canonical?",
-        "Can Ψ be specified as R_{t+1} = Ψ(R_t, x_t, x_{t+1}, ω_t, Π_A) without importing ungoverned primitives?",
-        "Is the candidate instantiation R_{t+1} = λR_t + ηΠ_{A_t}(NavT(ω_t, ω_{t+1})) acceptable as a provisional specification, and what are its failure conditions?"
+        "Can \u03a8 be specified as R_{t+1} = \u03a8(R_t, x_t, x_{t+1}, \u03c9_t, \u03a0_A) without importing ungoverned primitives?",
+        "Is the candidate instantiation R_{t+1} = \u03bbR_t + \u03b7\u03a0_{A_t}(NavT(\u03c9_t, \u03c9_{t+1})) acceptable as a provisional specification, and what are its failure conditions?"
       ],
       "governance_status": "not_verified"
     },
@@ -1093,12 +1294,12 @@
       "term": "Residue Space",
       "aliases": [
         "residue_space",
-        "ℛ",
+        "\u211b",
         "R_space"
       ],
       "status": "GAP_OPEN",
       "default_claim_status": "PROVISIONAL",
-      "reason_for_induction": "Typed residue form R_t ∈ ℛ introduced by accepted review patch for the R/residue specification.",
+      "reason_for_induction": "Typed residue form R_t \u2208 \u211b introduced by accepted review patch for the R/residue specification.",
       "source_context": {
         "source_type": "paper_draft",
         "source_path_or_note": "docs/theory/foundational/5_03_26 unity/math/02_ordered_account_of_mathematics.md"
@@ -1112,7 +1313,7 @@
       ],
       "primitive_mapping": {
         "epsilon": "not specified",
-        "residue": "element of ℛ updated by Ψ",
+        "residue": "element of \u211b updated by \u03a8",
         "rho": "not specified",
         "coupling_or_CSI": "may be represented via accumulated coupling constraints",
         "delta": "not specified",
@@ -1121,20 +1322,20 @@
       "proposed_roles": [
         {
           "role_name": "residue_codomain",
-          "operational_definition": "Defines where residue lives and what types of objects Ψ can accumulate (scalar, field, tensor, graph weights, etc.).",
+          "operational_definition": "Defines where residue lives and what types of objects \u03a8 can accumulate (scalar, field, tensor, graph weights, etc.).",
           "metrics": [],
           "candidate_tools": [],
           "falsification_condition": "Residue cannot be typed consistently across model implementations (e.g., treated as both scalar gate and geometric field without a projection mapping).",
           "evidence_level": "L0",
           "charter_classification": "provisional",
           "known_limits": [
-            "Whether ℛ is identical to X, dual to X, or separate must be specified per mechanism class."
+            "Whether \u211b is identical to X, dual to X, or separate must be specified per mechanism class."
           ]
         }
       ],
       "open_questions": [
-        "Is ℛ identical to state space X, dual to X, or a separate constraint/tensor space per model?",
-        "What projection/mapping relates ℛ across mechanism classes for cross-verification?"
+        "Is \u211b identical to state space X, dual to X, or a separate constraint/tensor space per model?",
+        "What projection/mapping relates \u211b across mechanism classes for cross-verification?"
       ],
       "governance_status": "not_verified"
     },

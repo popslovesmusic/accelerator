@@ -1,0 +1,75 @@
+{
+  "report_id": "CONSTRAINT_GEOMETRY_DYNAMICS_V1_REPORT",
+  "timestamp": "2026-05-08T10:15:00Z",
+  "status": "COMPLETED",
+  "patch_id": "PCD_CONSTRAINT_GEOMETRY_DYNAMICS_V1",
+  "summary": "Formalized the dynamics and evolution of Constraint Geometry, including deformation, topology mutation, stability, and recurrence basins.",
+  "operations_summary": [
+    {
+      "operation": "register_geometry_dynamics_namespace",
+      "target": "registry/lexicon_canonical.json",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "define_geometry_deformation_rule",
+      "target": "registry/lexicon_canonical.json",
+      "rule_name": "residue_geometry_deformation_v1",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "define_topology_mutation_rule",
+      "target": "registry/lexicon_canonical.json",
+      "rule_name": "topology_mutation_rule_v1",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "define_geometry_stability_rule",
+      "target": "registry/lexicon_canonical.json",
+      "rule_name": "constraint_geometry_stability_v1",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "define_basin_rule",
+      "target": "registry/lexicon_canonical.json",
+      "term": "stabilized_recurrence_basin",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "define_recursive_orientation_rule",
+      "target": "registry/lexicon_canonical.json",
+      "rule_name": "recursive_orientation_rebinding_v1",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "add_geometry_guardrails",
+      "target": "registry/lexicon_gap_queue.json",
+      "status": "SUCCESS",
+      "guardrails_added": [
+        "no_static_constraint_geometry_v1",
+        "no_geometry_without_process_v1",
+        "no_literal_curvature_claim_v1"
+      ]
+    }
+  ],
+  "geometry_deformation_rules": [
+    "residue_geometry_deformation_v1"
+  ],
+  "topology_mutation_rules": [
+    "topology_mutation_rule_v1"
+  ],
+  "geometry_stability_rules": [
+    "constraint_geometry_stability_v1"
+  ],
+  "basin_rules": [
+    "stabilized_recurrence_basin"
+  ],
+  "orientation_rebinding_rules": [
+    "recursive_orientation_rebinding_v1"
+  ],
+  "manual_review_queue": [],
+  "charter_compliance_check": {
+    "charter_version": "2.3",
+    "status": "COMPLIANT",
+    "notes": "Dynamic geometry rules correctly maintain process-primitivity and avoid literal spatial or manifold claims."
+  }
+}
