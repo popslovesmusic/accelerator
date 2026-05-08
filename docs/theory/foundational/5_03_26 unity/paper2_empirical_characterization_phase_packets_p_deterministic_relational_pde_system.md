@@ -1,3 +1,8 @@
+PCD-Formal-Stack: v1
+Compliance-Charter: v2.3
+Claim-Support-Matrix: required
+Math-Source-Binding: required
+
 # Empirical Characterization of Phase Packets (p) in a Deterministic, Relational PDE System
 
 ## Signature Block

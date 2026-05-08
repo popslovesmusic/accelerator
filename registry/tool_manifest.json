@@ -3,6 +3,13 @@
     "version": "1.0.1",
     "governance": "validation_protocol_v2.json",
     "usage_policy": "Agent may execute tools but MUST NOT modify engine code or core scripts. MUST follow validation_protocol_v2.json for all research claims.",
+    "governance_rules": [
+        {
+            "name": "certification_level_required_v1",
+            "statement": "Every registered tool must have a certification manifest and explicit certification_level.",
+            "failure_behavior": "mark_tool_uncertified_and_block_claim_support"
+        }
+    ],
     "tools": [
         {
             "name": "oneproc",

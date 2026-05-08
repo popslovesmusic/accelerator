@@ -1,3 +1,8 @@
+PCD-Formal-Stack: v1
+Compliance-Charter: v2.3
+Claim-Support-Matrix: required
+Math-Source-Binding: required
+
 # Deriving Local Reference -(i) from Admissible Mismatch-Minimizing Selection
 
 ## Signature Block

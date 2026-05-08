@@ -253,6 +253,126 @@
       "name": "lemma_requires_traceable_source_v1",
       "statement": "All governed lemmas must bind to a source document, proof state, and dependency chain.",
       "failure_behavior": "route_to_unbound_lemma_queue"
+    },
+    "no_simulation_claim_without_binding_v1": {
+      "name": "no_simulation_claim_without_binding_v1",
+      "statement": "A simulation result may not support a PCD claim unless the tool is bound to tested lemmas, operators, law chains, and provenance requirements.",
+      "failure_behavior": "mark_as_ungoverned_simulation_output"
+    },
+    "no_claim_support_above_tool_certification_v1": {
+      "name": "no_claim_support_above_tool_certification_v1",
+      "statement": "A tool may not support a claim class higher than its certification level permits.",
+      "failure_behavior": "downgrade_or_block_claim_support"
+    },
+    "no_lemma_support_without_operator_instantiation_v1": {
+      "name": "no_lemma_support_without_operator_instantiation_v1",
+      "statement": "A simulation may not be recorded as testing a lemma unless it instantiates the operators required by that lemma dependency chain.",
+      "failure_behavior": "route_to_binding_review"
+    },
+    "no_claim_without_support_matrix_entry_v1": {
+      "name": "no_claim_without_support_matrix_entry_v1",
+      "statement": "No governed PCD claim may be promoted in a paper, report, or validation artifact unless it has a claim_support_matrix entry.",
+      "failure_behavior": "route_to_claim_matrix_queue"
+    },
+    "no_claim_class_without_support_requirements_v1": {
+      "name": "no_claim_class_without_support_requirements_v1",
+      "statement": "Every claim class must declare required lemmas, operators, law chains, simulation bindings, and provenance status.",
+      "failure_behavior": "block_claim_classification"
+    },
+    "no_publication_claim_without_publication_allowed_v1": {
+      "name": "no_publication_claim_without_publication_allowed_v1",
+      "statement": "A claim may not appear as a publishable supported result unless publication_allowed is true.",
+      "failure_behavior": "rewrite_as_provisional_or_remove"
+    },
+    "no_paper_without_stack_header_v1": {
+      "name": "no_paper_without_stack_header_v1",
+      "statement": "Governed PCD papers must declare the active PCD formal stack version and compliance charter version.",
+      "failure_behavior": "block_publication_status"
+    },
+    "no_empirical_claim_without_recoverable_artifact_v1": {
+      "name": "no_empirical_claim_without_recoverable_artifact_v1",
+      "statement": "Empirical claims in governed papers require recoverable output files and claim-support matrix binding.",
+      "failure_behavior": "downgrade_to_provisional_or_prior_finding"
+    },
+    "no_theoretical_claim_without_math_binding_v1": {
+      "name": "no_theoretical_claim_without_math_binding_v1",
+      "statement": "Theoretical claims require binding to math sources, lemmas, proofs, law chains, or formal-stack rules.",
+      "failure_behavior": "route_to_claim_support_matrix_queue"
+    },
+    "no_proof_without_registered_dependencies_v1": {
+      "name": "no_proof_without_registered_dependencies_v1",
+      "statement": "A proof may not be promoted unless its lemma, term, operator, and gap dependencies are registered.",
+      "failure_behavior": "route_to_proof_dependency_review"
+    },
+    "no_gap_closure_without_explicit_gap_id_v1": {
+      "name": "no_gap_closure_without_explicit_gap_id_v1",
+      "statement": "A proof claiming to close a gap must identify the exact gap and state whether closure is complete, partial, or implementation-dependent.",
+      "failure_behavior": "mark_as_unverified_gap_closure"
+    },
+    "no_gap_resolution_without_dependency_graph_entry_v1": {
+      "name": "no_gap_resolution_without_dependency_graph_entry_v1",
+      "statement": "A mathematical gap may not be marked resolved unless its dependency graph entry is updated with closure requirements and downstream effects.",
+      "failure_behavior": "route_to_gap_graph_review"
+    },
+    "no_downstream_claim_promotion_with_open_gap_v1": {
+      "name": "no_downstream_claim_promotion_with_open_gap_v1",
+      "statement": "A claim depending on an open or partially closed gap may not be promoted beyond theoretical/provisional status unless the dependency is explicitly scoped.",
+      "failure_behavior": "downgrade_or_scope_claim"
+    },
+    "no_theorem_language_without_status_v1": {
+      "name": "no_theorem_language_without_status_v1",
+      "statement": "A statement may not be called a theorem, lemma, proof, or derived result unless it has a theorem_status_registry classification.",
+      "failure_behavior": "rewrite_or_route_to_theorem_status_review"
+    },
+    "no_unconditional_language_for_conditional_lemmas_v1": {
+      "name": "no_unconditional_language_for_conditional_lemmas_v1",
+      "statement": "TS2 conditional lemmas must preserve their stated assumptions and gap dependencies in publication language.",
+      "failure_behavior": "downgrade_language_or_block_claim"
+    },
+    "no_empirical_upgrade_without_artifacts_v1": {
+      "name": "no_empirical_upgrade_without_artifacts_v1",
+      "statement": "A theorem may not be promoted to simulation-supported status without recoverable governed artifacts and simulation-proof binding.",
+      "failure_behavior": "block_TS4_promotion"
+    },
+    "no_rhetorical_overpromotion_v1": {
+      "name": "no_rhetorical_overpromotion_v1",
+      "statement": "Publication language must not exceed the theorem status, claim class, or evidence level of the underlying result.",
+      "failure_behavior": "rewrite_or_downgrade_language"
+    },
+    "no_missing_uncertainty_scope_v1": {
+      "name": "no_missing_uncertainty_scope_v1",
+      "statement": "Conditional or provisional claims must preserve explicit uncertainty and dependency language.",
+      "failure_behavior": "route_to_epistemic_review"
+    },
+    "no_universal_claim_language_v1": {
+      "name": "no_universal_claim_language_v1",
+      "statement": "Universal or absolute language is prohibited unless explicitly supported by governed external validation policy.",
+      "failure_behavior": "block_publication_phrase"
+    },
+    "no_audience_scope_mismatch_v1": {
+      "name": "no_audience_scope_mismatch_v1",
+      "statement": "Publication language must remain compatible with the declared audience scope and theorem status ceiling.",
+      "failure_behavior": "rewrite_or_scope_demotion"
+    },
+    "no_public_explanation_without_disclaimer_v1": {
+      "name": "no_public_explanation_without_disclaimer_v1",
+      "statement": "Public-facing explanations of PCD must preserve uncertainty, development status, and non-finality disclaimers.",
+      "failure_behavior": "block_public_release"
+    },
+    "no_grandiose_summary_language_v1": {
+      "name": "no_grandiose_summary_language_v1",
+      "statement": "Summaries and abstracts must avoid rhetoric implying universal completion, total unification, or finality.",
+      "failure_behavior": "route_to_epistemic_review"
+    },
+    "semantic_drift_flagging_v1": {
+      "name": "semantic_drift_flagging_v1",
+      "statement": "Terms with known drift patterns must be flagged for context review before promotion, publication, or automated correction.",
+      "failure_behavior": "route_to_semantic_drift_review"
+    },
+    "no_auto_correction_without_context_v1": {
+      "name": "no_auto_correction_without_context_v1",
+      "statement": "Potential semantic substitutions must not be automatically corrected when both observed and intended forms may be meaningful in context.",
+      "failure_behavior": "require_human_review"
     }
   },
   "candidate_new_terms": [

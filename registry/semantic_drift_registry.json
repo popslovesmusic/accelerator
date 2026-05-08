@@ -1,0 +1,48 @@
+{
+  "registry_id": "PCD_SEMANTIC_DRIFT_REGISTRY",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "drift_id",
+      "source_term",
+      "observed_form",
+      "intended_form",
+      "drift_type",
+      "risk_level",
+      "detection_rule",
+      "correction_policy"
+    ]
+  },
+  "patterns": [
+    {
+      "drift_id": "DRIFT-001",
+      "source_term": "humility",
+      "observed_form": "humidity",
+      "intended_form": "humility",
+      "drift_type": "orthographic_semantic_substitution",
+      "risk_level": "medium",
+      "detection_rule": "grep / findstr for 'humidity' in non-weather contexts",
+      "correction_policy": "flag_for_context_review"
+    },
+    {
+      "drift_id": "DRIFT-002",
+      "source_term": "field",
+      "observed_form": "field_as_primitive",
+      "intended_form": "locally_resolved_process_expression",
+      "drift_type": "prohibited_primitive_reversion",
+      "risk_level": "high",
+      "detection_rule": "Lexicon compliance check failure on 'field'",
+      "correction_policy": "rewrite_or_block"
+    },
+    {
+      "drift_id": "DRIFT-003",
+      "source_term": "geometry",
+      "observed_form": "primitive_manifold_or_container",
+      "intended_form": "constraint-generated continuation structure",
+      "drift_type": "metaphor_to_substrate_drift",
+      "risk_level": "high",
+      "detection_rule": "Lexicon forbidden_reading check on 'geometry'",
+      "correction_policy": "rewrite_as_constraint_geometry"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 {
   "registry_id": "PCD_LEMMA_REGISTRY",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "schema": {
     "required_fields": [
       "lemma_id",
@@ -10,6 +10,7 @@
       "dependency_chain",
       "claim_classification",
       "proof_status",
+      "theorem_status",
       "related_terms"
     ]
   },
@@ -22,9 +23,42 @@
       "dependency_chain": [],
       "claim_classification": "theoretical",
       "proof_status": "BOUND_TO_EXISTING_PROOF",
+      "theorem_status": "TS3",
       "related_terms": [
         "Pi_A",
         "admissibility",
+        "continuation"
+      ]
+    },
+    {
+      "lemma_id": "L002",
+      "title": "Local Residue Stability",
+      "statement": "Local residue structure remains stable while admissible continuation maintains consistent inscription rules.",
+      "source_document": "math_ordered_account_2026_05_07",
+      "dependency_chain": [
+        "L001"
+      ],
+      "claim_classification": "theoretical",
+      "proof_status": "BOUND_TO_EXISTING_PROOF",
+      "theorem_status": "TS3",
+      "related_terms": [
+        "residue",
+        "stability"
+      ]
+    },
+    {
+      "lemma_id": "L003",
+      "title": "Transformation Legality",
+      "statement": "State transformations are legal only if they map to admissible continuation increments.",
+      "source_document": "math_ordered_account_2026_05_07",
+      "dependency_chain": [
+        "L001"
+      ],
+      "claim_classification": "theoretical",
+      "proof_status": "BOUND_TO_EXISTING_PROOF",
+      "theorem_status": "TS3",
+      "related_terms": [
+        "legality",
         "continuation"
       ]
     },
@@ -38,6 +72,7 @@
       ],
       "claim_classification": "theoretical",
       "proof_status": "BOUND_TO_EXISTING_PROOF",
+      "theorem_status": "TS3",
       "related_terms": [
         "Pi_A",
         "gate",
@@ -55,10 +90,109 @@
       ],
       "claim_classification": "theoretical",
       "proof_status": "BOUND_TO_EXISTING_PROOF",
+      "theorem_status": "TS3",
       "related_terms": [
-        "R",
+        "residue",
         "Leftrightarrow_R",
         "closure"
+      ]
+    },
+    {
+      "lemma_id": "L006",
+      "title": "Admissibility Orientation Selection",
+      "statement": "Epsilon pressure selects specific orientation vectors that minimize local mismatch.",
+      "source_document": "math_ordered_account_2026_05_07",
+      "dependency_chain": [
+        "L001"
+      ],
+      "claim_classification": "theoretical",
+      "proof_status": "PARTIAL_GAP_CLOSURE",
+      "theorem_status": "TS2",
+      "related_terms": [
+        "-(i)",
+        "orientation"
+      ]
+    },
+    {
+      "lemma_id": "L007",
+      "title": "Window-induced Alignment",
+      "statement": "Shared admissibility windows between coupled processes induce mutual orientation alignment.",
+      "source_document": "math_ordered_account_2026_05_07",
+      "dependency_chain": [
+        "L006"
+      ],
+      "claim_classification": "theoretical",
+      "proof_status": "PARTIAL_GAP_CLOSURE",
+      "theorem_status": "TS2",
+      "related_terms": [
+        "alignment",
+        "coupling"
+      ]
+    },
+    {
+      "lemma_id": "L008",
+      "title": "Transport Identity Persistence",
+      "statement": "Transport operators preserve process identity across admissible transition chains.",
+      "source_document": "math_ordered_account_2026_05_07",
+      "dependency_chain": [
+        "L001",
+        "L003"
+      ],
+      "claim_classification": "theoretical",
+      "proof_status": "PARTIAL_GAP_CLOSURE",
+      "theorem_status": "TS2",
+      "related_terms": [
+        "NavT",
+        "identity"
+      ]
+    },
+    {
+      "lemma_id": "L009",
+      "title": "Propagation Consistency",
+      "statement": "Composite transport along a geodesic remains consistent with direct transport if residual delta_T is bounded.",
+      "source_document": "math_ordered_account_2026_05_07",
+      "dependency_chain": [
+        "L008"
+      ],
+      "claim_classification": "theoretical",
+      "proof_status": "PARTIAL_GAP_CLOSURE",
+      "theorem_status": "TS2",
+      "related_terms": [
+        "geodesic",
+        "delta_T"
+      ]
+    },
+    {
+      "lemma_id": "L010",
+      "title": "Causal Sphere Membership",
+      "statement": "Membership in a causal sphere of influence is determined by admissibility window overlap.",
+      "source_document": "math_ordered_account_2026_05_07",
+      "dependency_chain": [
+        "L001",
+        "L007"
+      ],
+      "claim_classification": "theoretical",
+      "proof_status": "PARTIAL_GAP_CLOSURE",
+      "theorem_status": "TS2",
+      "related_terms": [
+        "csi",
+        "causal_sphere_of_influence"
+      ]
+    },
+    {
+      "lemma_id": "L011",
+      "title": "CSI Boundary Admissibility",
+      "statement": "Transitions across CSI boundaries are admitted only if they preserve residue-context coherence.",
+      "source_document": "math_ordered_account_2026_05_07",
+      "dependency_chain": [
+        "L010"
+      ],
+      "claim_classification": "theoretical",
+      "proof_status": "PARTIAL_GAP_CLOSURE",
+      "theorem_status": "TS2",
+      "related_terms": [
+        "csi",
+        "boundary"
       ]
     }
   ]

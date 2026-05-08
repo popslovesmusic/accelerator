@@ -1,0 +1,54 @@
+{
+  "report_id": "RHETORICAL_SCOPE_AND_AUDIENCE_BINDING_V1_REPORT",
+  "timestamp": "2026-05-08T16:00:00Z",
+  "status": "COMPLETED",
+  "patch_id": "PCD_RHETORICAL_SCOPE_AND_AUDIENCE_BINDING_V1",
+  "summary": "Established the formal Rhetorical Scope Registry and bound publication templates to audience-specific framing. Implemented governance guardrails for rhetorical humility, mandatory disclaimers, and claim-ceiling enforcement.",
+  "operations_summary": [
+    {
+      "operation": "create_rhetorical_scope_registry",
+      "target": "registry/rhetorical_scope_registry.json",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "register_audience_scopes",
+      "target": "registry/rhetorical_scope_registry.json",
+      "status": "SUCCESS",
+      "scopes_count": 3
+    },
+    {
+      "operation": "bind_publication_templates_to_scopes",
+      "target": "registry/publication_template_registry.json",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "add_rhetorical_guardrails",
+      "target": "registry/lexicon_gap_queue.json",
+      "status": "SUCCESS",
+      "guardrails_added": [
+        "no_audience_scope_mismatch_v1",
+        "no_public_explanation_without_disclaimer_v1",
+        "no_grandiose_summary_language_v1"
+      ]
+    }
+  ],
+  "rhetorical_governance_status": {
+    "scopes_registered": [
+      "internal_research_discussion",
+      "governed_theoretical_paper",
+      "public_summary_or_interview"
+    ],
+    "template_bindings": [
+      {
+        "template_id": "PCD_PAPER_TEMPLATE_V1",
+        "scope": "governed_theoretical_paper"
+      }
+    ],
+    "claim_ceilings_enforced": true
+  },
+  "charter_compliance_check": {
+    "charter_version": "2.3",
+    "status": "COMPLIANT",
+    "notes": "Rhetorical scope binding ensures that PCD communication remains humble and grounded by explicitly mapping allowed language and claim ceilings to specific audience types and formal proof statuses."
+  }
+}
