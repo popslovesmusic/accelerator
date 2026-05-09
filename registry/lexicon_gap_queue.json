@@ -444,6 +444,16 @@
       "statement": "A registry entry may not override a weaker dependency status without explicit theorem-status or claim-support review.",
       "failure_behavior": "route_to_dependency_review"
     },
+    "no_theorem_promotion_without_closure_analysis_v1": {
+      "name": "no_theorem_promotion_without_closure_analysis_v1",
+      "statement": "No lemma, proof, or theorem may be promoted without a theorem_closure_registry entry.",
+      "failure_behavior": "block_promotion"
+    },
+    "no_closed_status_with_open_gap_v1": {
+      "name": "no_closed_status_with_open_gap_v1",
+      "statement": "A theorem depending on an open or partially closed gap may not be marked closed unless scoped as conditional.",
+      "failure_behavior": "downgrade_to_conditional"
+    },
     "no_alias_masking_canonical_conflict_v1": {
       "name": "no_alias_masking_canonical_conflict_v1",
       "statement": "Alias entries must not hide semantic conflicts between canonical terms.",
