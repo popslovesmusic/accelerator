@@ -534,6 +534,21 @@
       "statement": "Any Q composition that changes the induced Ref(.) equivalence class must declare whether the change is admissible, residue-mediated, degenerate, or forbidden.",
       "failure_behavior": "route_to_orientation_equivalence_review"
     },
+    "no_memoryless_recoupling_v1": {
+      "name": "no_memoryless_recoupling_v1",
+      "statement": "A transition from inadmissible to admissible may not be claimed without residue context, admissibility-window change, or declared reconstruction logic.",
+      "failure_behavior": "mark_as_memoryless_reopening"
+    },
+    "no_residue_as_recoupling_agent_v1": {
+      "name": "no_residue_as_recoupling_agent_v1",
+      "statement": "Residue may condition recoupling but must not be described as independently causing continuation.",
+      "failure_behavior": "rewrite_as_residue_conditioned_admissibility"
+    },
+    "no_orientation_conflict_resolution_without_recoupling_rule_v1": {
+      "name": "no_orientation_conflict_resolution_without_recoupling_rule_v1",
+      "statement": "Orientation conflicts may not be treated as resolved unless R_RECOUPLING_V1 or a stricter successor rule is cited.",
+      "failure_behavior": "route_to_recoupling_review"
+    },
     "no_alias_masking_canonical_conflict_v1": {
       "name": "no_alias_masking_canonical_conflict_v1",
       "statement": "Alias entries must not hide semantic conflicts between canonical terms.",
