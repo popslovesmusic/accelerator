@@ -454,6 +454,16 @@
       "statement": "A theorem depending on an open or partially closed gap may not be marked closed unless scoped as conditional.",
       "failure_behavior": "downgrade_to_conditional"
     },
+    "no_proof_overclaim_without_saturation_v1": {
+      "name": "no_proof_overclaim_without_saturation_v1",
+      "statement": "A proof may not claim more lemma coverage than its registered dependencies and assumptions support.",
+      "failure_behavior": "downgrade_proof_status"
+    },
+    "no_saturated_status_with_missing_operator_v1": {
+      "name": "no_saturated_status_with_missing_operator_v1",
+      "statement": "A proof cannot be marked saturated if a required operator, term, or gap dependency is missing or unresolved.",
+      "failure_behavior": "mark_under_saturated"
+    },
     "no_alias_masking_canonical_conflict_v1": {
       "name": "no_alias_masking_canonical_conflict_v1",
       "statement": "Alias entries must not hide semantic conflicts between canonical terms.",
