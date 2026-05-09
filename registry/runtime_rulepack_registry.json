@@ -1,0 +1,85 @@
+{
+  "registry_id": "PCD_RUNTIME_RULEPACK_REGISTRY",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "rulepack_id",
+      "source_registry",
+      "checks",
+      "failure_level",
+      "repair_hint"
+    ]
+  },
+  "rulepacks": [
+    {
+      "rulepack_id": "lexicon_core_integrity",
+      "source_registry": "registry/lexicon_canonical.json",
+      "checks": [
+        "json_parse_ok",
+        "core_terms_validated",
+        "ontology_class_present",
+        "definition_mode_present"
+      ],
+      "failure_level": "BLOCK",
+      "repair_hint": "Check lexicon_canonical.json for parse errors and ensure core terms in meta are present in the terms list."
+    },
+    {
+      "rulepack_id": "alias_integrity",
+      "source_registry": "registry/lexicon_alias_map.json",
+      "checks": [
+        "alias_targets_exist",
+        "no_invalid_alias_canonical_collision"
+      ],
+      "failure_level": "BLOCK",
+      "repair_hint": "Run resolve_lexicon_collisions.py and audit_scaling_cycle.py to fix alias-to-canonical targets."
+    },
+    {
+      "rulepack_id": "proof_claim_integrity",
+      "source_registry": "registry/claim_support_matrix.json",
+      "checks": [
+        "claim_has_theorem_status",
+        "claim_has_required_lemmas",
+        "claim_has_required_operators",
+        "claim_has_provenance_policy"
+      ],
+      "failure_level": "DOWNGRADE",
+      "repair_hint": "Ensure claim_support_matrix.json entries declare required mathematical and operator support chains."
+    },
+    {
+      "rulepack_id": "epistemic_language_integrity",
+      "source_registry": "registry/epistemic_language_registry.json",
+      "checks": [
+        "no_forbidden_rhetoric",
+        "claim_verbs_match_theorem_status",
+        "humility_scope_present"
+      ],
+      "failure_level": "DOWNGRADE",
+      "repair_hint": "Review epistemic_language_registry.json for blocked rhetoric and verify allowed_statuses for claim verbs."
+    },
+    {
+      "rulepack_id": "dependency_cascade_integrity",
+      "source_registry": "registry/dependency_cascade_registry.json",
+      "checks": [
+        "source_objects_exist",
+        "dependent_objects_exist",
+        "trigger_conditions_declared",
+        "cascade_actions_declared"
+      ],
+      "failure_level": "BLOCK",
+      "repair_hint": "Ensure dependency_cascade_registry.json correctly maps valid sources to dependents with explicit actions."
+    },
+    {
+      "rulepack_id": "formal_consistency_engine_v1",
+      "source_registry": "registry/consistency_engine_manifest.json",
+      "checks": [
+        "no_claim_above_dependency_status",
+        "no_supported_claim_with_open_gap",
+        "no_operator_signature_mismatch",
+        "no_publication_language_above_status",
+        "no_simulation_support_without_certified_binding"
+      ],
+      "failure_level": "BLOCK_OR_DOWNGRADE",
+      "repair_hint": "Review contradiction_and_consistency_engine_v1_report.json for recommended downgrades and dependency conflicts."
+    }
+  ]
+}

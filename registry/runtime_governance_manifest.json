@@ -1,0 +1,56 @@
+{
+  "manifest_id": "PCD_RUNTIME_GOVERNANCE_MANIFEST",
+  "version": "1.0.0",
+  "failure_levels": {
+    "BLOCK": "Cannot proceed until repaired.",
+    "DOWNGRADE": "Claim may proceed only at reduced status.",
+    "WARN": "Proceed with explicit warning.",
+    "INFO": "Record only."
+  },
+  "required_checks": {
+    "json_parse_all": {
+      "level": "BLOCK",
+      "files": [
+        "registry/lexicon_canonical.json",
+        "registry/lexicon_alias_map.json",
+        "registry/lexicon_gap_queue.json",
+        "registry/lexicon_validation_registry.json",
+        "registry/pcd_formal_stack_lock_v1.json",
+        "registry/claim_support_matrix.json",
+        "registry/theorem_status_registry.json",
+        "registry/lemma_registry.json",
+        "registry/proof_registry.json",
+        "registry/gap_dependency_graph.json"
+      ]
+    },
+    "formal_stack_lock_present": {
+      "level": "BLOCK",
+      "target": "registry/pcd_formal_stack_lock_v1.json"
+    },
+    "core_terms_validated": {
+      "level": "BLOCK",
+      "registry": "registry/lexicon_validation_registry.json",
+      "check_type": "all_core_terms_present"
+    },
+    "alias_targets_exist": {
+      "level": "BLOCK",
+      "registry": "registry/lexicon_alias_map.json"
+    },
+    "claim_support_matrix_bound": {
+      "level": "WARN",
+      "registry": "registry/claim_support_matrix.json"
+    },
+    "theorem_status_bound": {
+      "level": "DOWNGRADE",
+      "registry": "registry/theorem_status_registry.json"
+    },
+    "semantic_drift_scan": {
+      "level": "WARN",
+      "registry": "registry/semantic_drift_registry.json"
+    },
+    "publication_scope_check": {
+      "level": "BLOCK",
+      "registry": "registry/rhetorical_scope_registry.json"
+    }
+  }
+}

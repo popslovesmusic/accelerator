@@ -1,0 +1,659 @@
+{
+  "registry_id": "PCD_FORMAL_OBJECT_REGISTRY",
+  "version": "1.0.1",
+  "schema": {
+    "required_fields": [
+      "object_id",
+      "object_class",
+      "title",
+      "status",
+      "source_bindings",
+      "dependency_links",
+      "claim_scope",
+      "governance_bindings",
+      "runtime_visibility"
+    ],
+    "object_classes": [
+      "primitive",
+      "operator",
+      "constraint",
+      "observable",
+      "projection",
+      "lemma",
+      "proof",
+      "gap",
+      "claim",
+      "simulation_binding",
+      "theorem_status",
+      "epistemic_rule",
+      "runtime_rulepack"
+    ]
+  },
+  "objects": [
+    {
+      "object_id": "OBJ-Delta",
+      "object_class": "operator",
+      "title": "Delta transition operator",
+      "status": "active",
+      "source_bindings": [
+        "registry/lexicon_canonical.json"
+      ],
+      "dependency_links": [],
+      "claim_scope": "universal",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true
+    },
+    {
+      "object_id": "OBJ-L001",
+      "object_class": "lemma",
+      "title": "Admissible Increment",
+      "status": "TS3",
+      "source_bindings": [
+        "registry/lemma_registry.json"
+      ],
+      "dependency_links": [],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true
+    },
+    {
+      "object_id": "OBJ-L002",
+      "object_class": "lemma",
+      "title": "Local Residue Stability",
+      "status": "TS3",
+      "source_bindings": [
+        "registry/lemma_registry.json"
+      ],
+      "dependency_links": [
+        "OBJ-L001"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true
+    },
+    {
+      "object_id": "OBJ-L003",
+      "object_class": "lemma",
+      "title": "Transformation Legality",
+      "status": "TS3",
+      "source_bindings": [
+        "registry/lemma_registry.json"
+      ],
+      "dependency_links": [
+        "OBJ-L001"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true
+    },
+    {
+      "object_id": "OBJ-L004",
+      "object_class": "lemma",
+      "title": "Pre-update Constraint Precedence",
+      "status": "TS3",
+      "source_bindings": [
+        "registry/lemma_registry.json"
+      ],
+      "dependency_links": [
+        "OBJ-L001"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true
+    },
+    {
+      "object_id": "OBJ-L005",
+      "object_class": "lemma",
+      "title": "Residue-conditioned Closure Constraint",
+      "status": "TS3",
+      "source_bindings": [
+        "registry/lemma_registry.json"
+      ],
+      "dependency_links": [
+        "OBJ-L001",
+        "OBJ-L004"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true
+    },
+    {
+      "object_id": "OBJ-P001",
+      "object_class": "proof",
+      "title": "Entry Structural Consequences",
+      "status": "BOUND_EXISTING_PROOF",
+      "source_bindings": [
+        "registry/proof_registry.json"
+      ],
+      "dependency_links": [
+        "OBJ-L001",
+        "OBJ-L002",
+        "OBJ-L003",
+        "OBJ-L004",
+        "OBJ-L005"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true
+    },
+    {
+      "object_id": "OBJ-P002",
+      "object_class": "proof",
+      "title": "Orientation from Admissibility Window",
+      "status": "PARTIAL_GAP_CLOSURE",
+      "source_bindings": [
+        "registry/proof_registry.json"
+      ],
+      "dependency_links": [
+        "OBJ-GAP-1"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true
+    },
+    {
+      "object_id": "OBJ-GAP-1",
+      "object_class": "gap",
+      "title": "Orientation from admissibility structure",
+      "status": "PARTIALLY_CLOSED",
+      "source_bindings": [
+        "registry/gap_dependency_graph.json"
+      ],
+      "dependency_links": [],
+      "claim_scope": "mathematical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true
+    },
+    {
+      "object_id": "OBJ-CLM-001",
+      "object_class": "claim",
+      "title": "Admissible updates require projection through active admissibility condition",
+      "status": "theoretical_supported",
+      "source_bindings": [
+        "registry/claim_support_matrix.json"
+      ],
+      "dependency_links": [
+        "OBJ-L001",
+        "OBJ-Delta"
+      ],
+      "claim_scope": "architectural",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true
+    },
+    {
+      "object_id": "OBJ-CLM-002",
+      "object_class": "claim",
+      "title": "Residue-conditioned evaluation prevents the update rule from being memoryless.",
+      "status": "theoretical_supported",
+      "source_bindings": [
+        "registry/claim_support_matrix.json"
+      ],
+      "dependency_links": [
+        "OBJ-L005"
+      ],
+      "claim_scope": "architectural",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true
+    },
+    {
+      "object_id": "OBJ-CLM-003",
+      "object_class": "claim",
+      "title": "Observable structure is projection-dependent and must not be treated as primitive.",
+      "status": "theoretical",
+      "source_bindings": [
+        "registry/claim_support_matrix.json"
+      ],
+      "dependency_links": [],
+      "claim_scope": "architectural",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true
+    },
+    {
+      "object_id": "OBJ-L006",
+      "object_class": "lemma",
+      "title": "Admissibility Orientation Selection",
+      "status": "PARTIAL_GAP_CLOSURE",
+      "source_bindings": [
+        "registry/lemma_registry.json"
+      ],
+      "dependency_links": [],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true
+    },
+    {
+      "object_id": "OBJ-L007",
+      "object_class": "lemma",
+      "title": "Window-induced Alignment",
+      "status": "PARTIAL_GAP_CLOSURE",
+      "source_bindings": [
+        "registry/lemma_registry.json"
+      ],
+      "dependency_links": [],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true
+    },
+    {
+      "object_id": "OBJ-L008",
+      "object_class": "lemma",
+      "title": "Transport Identity Persistence",
+      "status": "PARTIAL_GAP_CLOSURE",
+      "source_bindings": [
+        "registry/lemma_registry.json"
+      ],
+      "dependency_links": [],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true
+    },
+    {
+      "object_id": "OBJ-L009",
+      "object_class": "lemma",
+      "title": "Propagation Consistency",
+      "status": "PARTIAL_GAP_CLOSURE",
+      "source_bindings": [
+        "registry/lemma_registry.json"
+      ],
+      "dependency_links": [],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true
+    },
+    {
+      "object_id": "OBJ-L010",
+      "object_class": "lemma",
+      "title": "Causal Sphere Membership",
+      "status": "PARTIAL_GAP_CLOSURE",
+      "source_bindings": [
+        "registry/lemma_registry.json"
+      ],
+      "dependency_links": [],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true
+    },
+    {
+      "object_id": "OBJ-L011",
+      "object_class": "lemma",
+      "title": "CSI Boundary Admissibility",
+      "status": "PARTIAL_GAP_CLOSURE",
+      "source_bindings": [
+        "registry/lemma_registry.json"
+      ],
+      "dependency_links": [],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true
+    },
+    {
+      "object_id": "OBJ-P003",
+      "object_class": "proof",
+      "title": "Transport Propagation Identity",
+      "status": "PARTIAL_GAP_CLOSURE",
+      "source_bindings": [
+        "registry/proof_registry.json"
+      ],
+      "dependency_links": [],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true
+    },
+    {
+      "object_id": "OBJ-P004",
+      "object_class": "proof",
+      "title": "CSI Closure from Admissibility Overlap",
+      "status": "PARTIAL_GAP_CLOSURE",
+      "source_bindings": [
+        "registry/proof_registry.json"
+      ],
+      "dependency_links": [],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true
+    },
+    {
+      "object_id": "OBJ-GAP-2",
+      "object_class": "gap",
+      "title": "Transport structure sufficient for propagation identities",
+      "status": "PARTIALLY_CLOSED",
+      "source_bindings": [
+        "registry/gap_dependency_graph.json"
+      ],
+      "dependency_links": [],
+      "claim_scope": "mathematical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true
+    },
+    {
+      "object_id": "OBJ-GAP-3",
+      "object_class": "gap",
+      "title": "Closed coupling-neighborhood membership rule",
+      "status": "PARTIALLY_CLOSED",
+      "source_bindings": [
+        "registry/gap_dependency_graph.json"
+      ],
+      "dependency_links": [],
+      "claim_scope": "mathematical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true
+    },
+    {
+      "object_id": "OBJ-PAPER1_ODE_PERSISTENT_NONZERO_STRUCTURE_PERSISTENT_NONZERO_ODE_REGIMES",
+      "object_class": "claim",
+      "title": "Governed ODE scans support the emergence of structured persistent nonzero regimes under varying support and suppression.",
+      "status": "verified_or_supported_with_artifact",
+      "source_bindings": [
+        "registry/claim_support_matrix.json"
+      ],
+      "dependency_links": [],
+      "claim_scope": "architectural",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true
+    },
+    {
+      "object_id": "OBJ-PAPER1_ODE_PERSISTENT_NONZERO_STRUCTURE_NEAR_FLOOR_CONVERGENT_BEHAVIOR",
+      "object_class": "claim",
+      "title": "The system approaches a stable nonzero epsilon floor near 7.05e-3 rather than collapsing or oscillating.",
+      "status": "verified_or_supported_with_artifact",
+      "source_bindings": [
+        "registry/claim_support_matrix.json"
+      ],
+      "dependency_links": [],
+      "claim_scope": "architectural",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true
+    },
+    {
+      "object_id": "OBJ-PAPER1_ODE_PERSISTENT_NONZERO_STRUCTURE_COLLAPSE_RESISTANCE_WITHIN_TESTED_REGION",
+      "object_class": "claim",
+      "title": "The local ODE system exhibits robustness against collapse-to-pressure even under extreme forcing and support removal.",
+      "status": "verified_or_supported_with_artifact",
+      "source_bindings": [
+        "registry/claim_support_matrix.json"
+      ],
+      "dependency_links": [],
+      "claim_scope": "architectural",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true
+    },
+    {
+      "object_id": "OBJ-PAPER2_PHASE_PACKET_DETECTABILITY_TRAJECTORY_DIVERGENCE_DETECTABILITY",
+      "object_class": "claim",
+      "title": "Trajectory divergence remains detectable down to the resolution floor epsilon_min_emp.",
+      "status": "verified_or_supported_with_artifact",
+      "source_bindings": [
+        "registry/claim_support_matrix.json"
+      ],
+      "dependency_links": [],
+      "claim_scope": "architectural",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true
+    },
+    {
+      "object_id": "OBJ-PAPER2_PHASE_PACKET_DETECTABILITY_PHASE_PACKET_OPERATIONAL_DEFINITION",
+      "object_class": "claim",
+      "title": "Phase packets are operationally defined as bounded, coherent continuation structures emerging relative to the dynamic floor.",
+      "status": "verified_or_supported_with_artifact",
+      "source_bindings": [
+        "registry/claim_support_matrix.json"
+      ],
+      "dependency_links": [],
+      "claim_scope": "architectural",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true
+    },
+    {
+      "object_id": "OBJ-PAPER2_PHASE_PACKET_DETECTABILITY_MEASUREMENT_LIMITED_UPPER_BOUND",
+      "object_class": "claim",
+      "title": "Backfilled claim domain: measurement_limited_upper_bound",
+      "status": "verified_or_supported_with_artifact",
+      "source_bindings": [
+        "registry/claim_support_matrix.json"
+      ],
+      "dependency_links": [],
+      "claim_scope": "architectural",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true
+    },
+    {
+      "object_id": "OBJ-PAPER3_RELATIONAL_GEOMETRY_GRA_CURVATURE_LEAST_MISMATCH_GEODESICS",
+      "object_class": "claim",
+      "title": "Geodesics in relational geometry minimize accumulated mismatch rather than spatial distance.",
+      "status": "theoretical_supported",
+      "source_bindings": [
+        "registry/claim_support_matrix.json"
+      ],
+      "dependency_links": [],
+      "claim_scope": "architectural",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true
+    },
+    {
+      "object_id": "OBJ-PAPER3_RELATIONAL_GEOMETRY_GRA_CURVATURE_GRA_ALIGNMENT_CONDITION",
+      "object_class": "claim",
+      "title": "Backfilled claim domain: GRA_alignment_condition",
+      "status": "theoretical_supported",
+      "source_bindings": [
+        "registry/claim_support_matrix.json"
+      ],
+      "dependency_links": [],
+      "claim_scope": "architectural",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true
+    },
+    {
+      "object_id": "OBJ-PAPER3_RELATIONAL_GEOMETRY_GRA_CURVATURE_OPERATIONAL_CURVATURE",
+      "object_class": "claim",
+      "title": "Backfilled claim domain: operational_curvature",
+      "status": "theoretical_supported",
+      "source_bindings": [
+        "registry/claim_support_matrix.json"
+      ],
+      "dependency_links": [],
+      "claim_scope": "architectural",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true
+    },
+    {
+      "object_id": "OBJ-PAPER4_MINUS_I_SELECTION_DERIVATION_MINUS_I_PARTIAL_DERIVATION",
+      "object_class": "claim",
+      "title": "The local reference mechanism -(i) is derived as an admissible mismatch-minimizing selection operator.",
+      "status": "partially_derived",
+      "source_bindings": [
+        "registry/claim_support_matrix.json"
+      ],
+      "dependency_links": [],
+      "claim_scope": "architectural",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true
+    },
+    {
+      "object_id": "OBJ-PAPER4_MINUS_I_SELECTION_DERIVATION_MISMATCH_MINIMIZING_SELECTION",
+      "object_class": "claim",
+      "title": "Backfilled claim domain: mismatch_minimizing_selection",
+      "status": "theoretical_supported",
+      "source_bindings": [
+        "registry/claim_support_matrix.json"
+      ],
+      "dependency_links": [],
+      "claim_scope": "architectural",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true
+    },
+    {
+      "object_id": "OBJ-PAPER4_MINUS_I_SELECTION_DERIVATION_TRANSPORT_RESIDUAL_AND_DEGENERACY",
+      "object_class": "claim",
+      "title": "Backfilled claim domain: transport_residual_and_degeneracy",
+      "status": "theoretical_supported",
+      "source_bindings": [
+        "registry/claim_support_matrix.json"
+      ],
+      "dependency_links": [],
+      "claim_scope": "architectural",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true
+    },
+    {
+      "object_id": "OBJ-MATH_ORDERED_ACCOUNT_2026_05_07",
+      "object_class": "paper",
+      "title": "ordered_math_synthesis",
+      "status": "published",
+      "source_bindings": [
+        "docs/theory/foundational/5_03_26 unity/math/02_ordered_account_of_mathematics.md"
+      ],
+      "dependency_links": [],
+      "claim_scope": "academic",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true
+    },
+    {
+      "object_id": "OBJ-PAPER1_ODE_PERSISTENT_NONZERO_STRUCTURE",
+      "object_class": "paper",
+      "title": "empirical_model_math",
+      "status": "published",
+      "source_bindings": [
+        "docs/theory/foundational/paper1_persistent_nonzero_structure_governed_coupled_nonlinear_ode_system.md"
+      ],
+      "dependency_links": [],
+      "claim_scope": "academic",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true
+    },
+    {
+      "object_id": "OBJ-PAPER2_PHASE_PACKET_DETECTABILITY",
+      "object_class": "paper",
+      "title": "operational_measurement_math",
+      "status": "published",
+      "source_bindings": [
+        "docs/theory/foundational/5_03_26 unity/paper2_empirical_characterization_phase_packets_p_deterministic_relational_pde_system.md"
+      ],
+      "dependency_links": [],
+      "claim_scope": "academic",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true
+    },
+    {
+      "object_id": "OBJ-PAPER3_RELATIONAL_GEOMETRY_GRA_CURVATURE",
+      "object_class": "paper",
+      "title": "theoretical_relational_geometry",
+      "status": "published",
+      "source_bindings": [
+        "docs/theory/foundational/Warp_Transport_Technical_Paper_V1.md"
+      ],
+      "dependency_links": [],
+      "claim_scope": "academic",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true
+    },
+    {
+      "object_id": "OBJ-PAPER4_MINUS_I_SELECTION_DERIVATION",
+      "object_class": "paper",
+      "title": "operator_derivation_math",
+      "status": "published",
+      "source_bindings": [
+        "docs/theory/foundational/5_03_26 unity/math/paper4_deriving_local_reference_minus_i_from_admissible_mismatch_minimizing_selection.md"
+      ],
+      "dependency_links": [],
+      "claim_scope": "academic",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true
+    }
+  ],
+  "registry_bindings": [
+    {
+      "registry": "registry/lemma_registry.json",
+      "object_class": "lemma"
+    },
+    {
+      "registry": "registry/proof_registry.json",
+      "object_class": "proof"
+    },
+    {
+      "registry": "registry/gap_dependency_graph.json",
+      "object_class": "gap"
+    },
+    {
+      "registry": "registry/claim_support_matrix.json",
+      "object_class": "claim"
+    }
+  ]
+}

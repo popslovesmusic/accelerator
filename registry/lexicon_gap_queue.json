@@ -358,6 +358,7 @@
       "name": "no_public_explanation_without_disclaimer_v1",
       "statement": "Public-facing explanations of PCD must preserve uncertainty, development status, and non-finality disclaimers.",
       "failure_behavior": "block_public_release"
+    },
     "no_grandiose_summary_language_v1": {
       "name": "no_grandiose_summary_language_v1",
       "statement": "Summaries and abstracts must avoid rhetoric implying universal completion, total unification, or finality.",
@@ -377,7 +378,16 @@
       "name": "no_shorthand_reification_v1",
       "statement": "Derived shorthand terms may not inherit primitive status.",
       "failure_behavior": "rewrite_as_shorthand"
-    }
+    },
+    "no_format_token_canonicalization_v1": {
+      "name": "no_format_token_canonicalization_v1",
+      "statement": "Markdown, LaTeX fragments, parser residue, punctuation fragments, and document-format tokens must not be promoted as canonical terms without explicit human approval.",
+      "failure_behavior": "quarantine_artifact"
+    },
+    "math_symbol_requires_context_v1": {
+      "name": "math_symbol_requires_context_v1",
+      "statement": "A mathematical symbol may be canonical only if it has a declared role, source context, definition mode, and ontology class.",
+      "failure_behavior": "route_to_math_symbol_review"
     },
     "semantic_drift_flagging_v1": {
       "name": "semantic_drift_flagging_v1",
@@ -388,6 +398,66 @@
       "name": "no_auto_correction_without_context_v1",
       "statement": "Potential semantic substitutions must not be automatically corrected when both observed and intended forms may be meaningful in context.",
       "failure_behavior": "require_human_review"
+    },
+    "no_runtime_rule_without_rulepack_v1": {
+      "name": "no_runtime_rule_without_rulepack_v1",
+      "statement": "Any governance rule expected to execute at runtime must be registered in runtime_rulepack_registry.json.",
+      "failure_behavior": "route_to_runtime_rulepack_review"
+    },
+    "no_dependency_failure_without_cascade_review_v1": {
+      "name": "no_dependency_failure_without_cascade_review_v1",
+      "statement": "Any failed, contested, superseded, or falsified formal object must trigger dependency cascade review before dependent claims remain active.",
+      "failure_behavior": "block_dependent_claims_pending_review"
+    },
+    "no_claim_survival_after_support_loss_v1": {
+      "name": "no_claim_survival_after_support_loss_v1",
+      "statement": "A claim may not retain its support status after losing a required proof, lemma, tool certification, or gap closure dependency.",
+      "failure_behavior": "automatic_downgrade"
+    },
+    "no_governed_object_without_formal_object_identity_v1": {
+      "name": "no_governed_object_without_formal_object_identity_v1",
+      "statement": "Governed lemmas, proofs, gaps, claims, and operators must eventually resolve to formal_object identities.",
+      "failure_behavior": "route_to_unification_review"
+    },
+    "no_fragmented_dependency_reference_v1": {
+      "name": "no_fragmented_dependency_reference_v1",
+      "statement": "Cross-registry dependencies should resolve through shared formal-object references where available.",
+      "failure_behavior": "warn_and_queue_for_normalization"
+    },
+    "no_raw_cross_registry_reference_v1": {
+      "name": "no_raw_cross_registry_reference_v1",
+      "statement": "Cross-registry dependency references should resolve through formal_object identities whenever available.",
+      "failure_behavior": "route_to_reference_normalization_review"
+    },
+    "no_duplicate_formal_object_identity_v1": {
+      "name": "no_duplicate_formal_object_identity_v1",
+      "statement": "A governed object may not resolve to multiple conflicting formal-object identities.",
+      "failure_behavior": "block_identity_merge_pending_review"
+    },
+    "no_unreviewed_consistency_conflict_v1": {
+      "name": "no_unreviewed_consistency_conflict_v1",
+      "statement": "Detected contradictions or consistency failures must be resolved, scoped, or downgraded before dependent claims remain active.",
+      "failure_behavior": "block_dependent_claims"
+    },
+    "no_silent_dependency_override_v1": {
+      "name": "no_silent_dependency_override_v1",
+      "statement": "A registry entry may not override a weaker dependency status without explicit theorem-status or claim-support review.",
+      "failure_behavior": "route_to_dependency_review"
+    },
+    "no_alias_masking_canonical_conflict_v1": {
+      "name": "no_alias_masking_canonical_conflict_v1",
+      "statement": "Alias entries must not hide semantic conflicts between canonical terms.",
+      "failure_behavior": "route_to_alias_collision_review"
+    },
+    "canonical_self_map_allowed_v1": {
+      "name": "canonical_self_map_allowed_v1",
+      "statement": "Canonical self-map aliases are allowed when used for normalization and do not indicate duplicate ontology terms.",
+      "failure_behavior": "none"
+    },
+    "no_core_term_without_validation_v1": {
+      "name": "no_core_term_without_validation_v1",
+      "statement": "A core PCD term may not remain canonical without direct validation, inherited validation, or explicit partially-derived gap tracking.",
+      "failure_behavior": "block_publication_claims_using_term"
     }
   },
   "candidate_new_terms": [
@@ -1682,6 +1752,46 @@
       "notes": [
         "'One Process' served as the developmental scaffold and is now retained as an alias only."
       ]
+    },
+    {
+      "term": "$10^{120}$",
+      "status": "NOISE_OR_EXTRACTION_ARTIFACT_REVIEW",
+      "reason_for_induction": "Detected as potential extraction artifact during validation coverage backfill.",
+      "source_context": {
+        "source_type": "extraction_artifact"
+      }
+    },
+    {
+      "term": "$^7",
+      "status": "NOISE_OR_EXTRACTION_ARTIFACT_REVIEW",
+      "reason_for_induction": "Detected as potential extraction artifact during validation coverage backfill.",
+      "source_context": {
+        "source_type": "extraction_artifact"
+      }
+    },
+    {
+      "term": "($e",
+      "status": "NOISE_OR_EXTRACTION_ARTIFACT_REVIEW",
+      "reason_for_induction": "Detected as potential extraction artifact during validation coverage backfill.",
+      "source_context": {
+        "source_type": "extraction_artifact"
+      }
+    },
+    {
+      "term": "(paper",
+      "status": "NOISE_OR_EXTRACTION_ARTIFACT_REVIEW",
+      "reason_for_induction": "Detected as potential extraction artifact during validation coverage backfill.",
+      "source_context": {
+        "source_type": "extraction_artifact"
+      }
+    },
+    {
+      "term": "**field",
+      "status": "NOISE_OR_EXTRACTION_ARTIFACT_REVIEW",
+      "reason_for_induction": "Detected as potential extraction artifact during validation coverage backfill.",
+      "source_context": {
+        "source_type": "extraction_artifact"
+      }
     }
   ]
 }

@@ -1,0 +1,127 @@
+{
+  "registry_id": "PCD_DEPENDENCY_CASCADE_REGISTRY",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "dependency_id",
+      "source_object",
+      "dependent_objects",
+      "trigger_condition",
+      "cascade_action",
+      "severity",
+      "review_required"
+    ]
+  },
+  "cascade_rules": [
+    {
+      "dependency_id": "CASCADE-GAP-001",
+      "source_object": "GAP_1_orientation_from_admissibility_structure",
+      "dependent_objects": [
+        "-(i)",
+        "P002",
+        "P006",
+        "GRA",
+        "operational_curvature",
+        "paper3_relational_geometry_gra_curvature",
+        "paper4_minus_i_selection_derivation"
+      ],
+      "trigger_condition": "gap_status becomes OPEN, CONTESTED, or FALSIFIED",
+      "cascade_action": "downgrade_dependents_to_conditional_or_provisional",
+      "severity": "BLOCK",
+      "review_required": true
+    },
+    {
+      "dependency_id": "CASCADE-PROOF-001",
+      "source_object": "P001",
+      "dependent_objects": [
+        "L001",
+        "L002",
+        "L003",
+        "L004",
+        "L005",
+        "PCD-CLM-001",
+        "PCD-CLM-002"
+      ],
+      "trigger_condition": "proof_status becomes CONTESTED, INVALID, or SUPERSEDED",
+      "cascade_action": "downgrade_claims_and_require_reproof",
+      "severity": "BLOCK",
+      "review_required": true
+    },
+    {
+      "dependency_id": "CASCADE-TOOL-001",
+      "source_object": "structural_box_sim_cpp",
+      "dependent_objects": [
+        "SPB_structural_box_sim_cpp_v1",
+        "PCD-CLM-001",
+        "PCD-CLM-002"
+      ],
+      "trigger_condition": "certification_level drops below C4",
+      "cascade_action": "remove_C4_support_and_downgrade_claims",
+      "severity": "DOWNGRADE",
+      "review_required": true
+    },
+    {
+      "dependency_id": "CASCADE-PAPER-PAPER1_ODE_PERSISTENT_NONZERO_STRUCTURE",
+      "source_object": "OBJ-PAPER1_ODE_PERSISTENT_NONZERO_STRUCTURE",
+      "dependent_objects": [
+        "PAPER1_ODE_PERSISTENT_NONZERO_STRUCTURE_PERSISTENT_NONZERO_ODE_REGIMES",
+        "PAPER1_ODE_PERSISTENT_NONZERO_STRUCTURE_NEAR_FLOOR_CONVERGENT_BEHAVIOR",
+        "PAPER1_ODE_PERSISTENT_NONZERO_STRUCTURE_COLLAPSE_RESISTANCE_WITHIN_TESTED_REGION"
+      ],
+      "trigger_condition": "paper status becomes RETRACTED, CONTESTED, or OUTDATED",
+      "cascade_action": "downgrade_claims_to_provisional",
+      "severity": "BLOCK",
+      "review_required": true
+    },
+    {
+      "dependency_id": "CASCADE-PAPER-PAPER2_PHASE_PACKET_DETECTABILITY",
+      "source_object": "OBJ-PAPER2_PHASE_PACKET_DETECTABILITY",
+      "dependent_objects": [
+        "PAPER2_PHASE_PACKET_DETECTABILITY_TRAJECTORY_DIVERGENCE_DETECTABILITY",
+        "PAPER2_PHASE_PACKET_DETECTABILITY_PHASE_PACKET_OPERATIONAL_DEFINITION",
+        "PAPER2_PHASE_PACKET_DETECTABILITY_MEASUREMENT_LIMITED_UPPER_BOUND"
+      ],
+      "trigger_condition": "paper status becomes RETRACTED, CONTESTED, or OUTDATED",
+      "cascade_action": "downgrade_claims_to_provisional",
+      "severity": "BLOCK",
+      "review_required": true
+    },
+    {
+      "dependency_id": "CASCADE-PAPER-PAPER3_RELATIONAL_GEOMETRY_GRA_CURVATURE",
+      "source_object": "OBJ-PAPER3_RELATIONAL_GEOMETRY_GRA_CURVATURE",
+      "dependent_objects": [
+        "PAPER3_RELATIONAL_GEOMETRY_GRA_CURVATURE_LEAST_MISMATCH_GEODESICS",
+        "PAPER3_RELATIONAL_GEOMETRY_GRA_CURVATURE_GRA_ALIGNMENT_CONDITION",
+        "PAPER3_RELATIONAL_GEOMETRY_GRA_CURVATURE_OPERATIONAL_CURVATURE"
+      ],
+      "trigger_condition": "paper status becomes RETRACTED, CONTESTED, or OUTDATED",
+      "cascade_action": "downgrade_claims_to_provisional",
+      "severity": "BLOCK",
+      "review_required": true
+    },
+    {
+      "dependency_id": "CASCADE-PAPER-PAPER4_MINUS_I_SELECTION_DERIVATION",
+      "source_object": "OBJ-PAPER4_MINUS_I_SELECTION_DERIVATION",
+      "dependent_objects": [
+        "PAPER4_MINUS_I_SELECTION_DERIVATION_MINUS_I_PARTIAL_DERIVATION",
+        "PAPER4_MINUS_I_SELECTION_DERIVATION_MISMATCH_MINIMIZING_SELECTION",
+        "PAPER4_MINUS_I_SELECTION_DERIVATION_TRANSPORT_RESIDUAL_AND_DEGENERACY"
+      ],
+      "trigger_condition": "paper status becomes RETRACTED, CONTESTED, or OUTDATED",
+      "cascade_action": "downgrade_claims_to_provisional",
+      "severity": "BLOCK",
+      "review_required": true
+    },
+    {
+      "dependency_id": "CASCADE-CLM-003",
+      "source_object": "OBJ-P004",
+      "dependent_objects": [
+        "PCD-CLM-003"
+      ],
+      "trigger_condition": "foundation proof P004 is invalidated",
+      "cascade_action": "downgrade_claim",
+      "severity": "DOWNGRADE",
+      "review_required": true
+    }
+  ]
+}

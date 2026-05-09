@@ -1,0 +1,36 @@
+{
+  "manifest_id": "PCD_CONSISTENCY_ENGINE_MANIFEST",
+  "version": "1.0.0",
+  "rules": [
+    {
+      "rule_id": "CONSISTENCY-001",
+      "name": "no_claim_above_dependency_status",
+      "statement": "A claim may not exceed the weakest required theorem, lemma, proof, gap, or simulation dependency.",
+      "failure_behavior": "downgrade_claim"
+    },
+    {
+      "rule_id": "CONSISTENCY-002",
+      "name": "no_supported_claim_with_open_gap",
+      "statement": "A claim depending on an open or contested gap may not be labeled supported unless scoped as conditional.",
+      "failure_behavior": "mark_conditional_or_provisional"
+    },
+    {
+      "rule_id": "CONSISTENCY-003",
+      "name": "no_operator_signature_mismatch",
+      "statement": "An operator may not be used in a proof, claim, or simulation binding with inputs or outputs outside its registered signature.",
+      "failure_behavior": "block_or_route_to_operator_review"
+    },
+    {
+      "rule_id": "CONSISTENCY-004",
+      "name": "no_publication_language_above_status",
+      "statement": "Publication rhetoric must not exceed theorem status, claim class, evidence level, or rhetorical scope.",
+      "failure_behavior": "rewrite_or_block_publication_phrase"
+    },
+    {
+      "rule_id": "CONSISTENCY-005",
+      "name": "no_simulation_support_without_certified_binding",
+      "statement": "A simulation may not support a claim unless its tool certification, simulation-proof binding, and recoverable provenance satisfy the claim class.",
+      "failure_behavior": "remove_support_or_downgrade_claim"
+    }
+  ]
+}

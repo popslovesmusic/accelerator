@@ -392,6 +392,17 @@ class MathValidator:
 class GovernanceGate:
     def __init__(self, tracer: TraceCapture):
         self.tracer = tracer
+        
+        # --- Runtime Governance Check (PCD_RUNTIME_GOVERNANCE_ENGINE_SCAFFOLD_V1) ---
+        try:
+            import scripts.runtime_governance_check as rgc
+            self.runtime_status = rgc.run_checks()
+            if self.runtime_status["status"] == "BLOCK":
+                 print(f"FATAL: Runtime Governance Block. Details: {json.dumps(self.runtime_status['failures'], indent=2)}")
+                 sys.exit(1)
+        except ImportError:
+            self.runtime_status = {"status": "MISSING", "failures": [{"error": "runtime_governance_check.py not found"}]}
+        
         with open("registry/compliance_charter_v2_3.json", "r", encoding="utf-8") as f:
             self.charter = json.load(f).get("governance_enforcement_v2", {})
         self.lexicon_v = LexiconValidator(tracer=tracer)

@@ -1,0 +1,53 @@
+{
+  "report_id": "ALIAS_CANONICAL_COLLISION_RESOLUTION_V1_REPORT",
+  "timestamp": "2026-05-08T17:30:00Z",
+  "status": "SUCCESS",
+  "patch_id": "PCD_ALIAS_CANONICAL_COLLISION_RESOLUTION_V1",
+  "summary": "Resolved alias/canonical collisions and established a formal normalization policy. Cleaned up valid self-maps and identified semantic role conflicts for manual review.",
+  "operations_summary": [
+    {
+      "operation": "create_alias_collision_policy",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "classify_collisions",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "add_collision_guardrails",
+      "status": "SUCCESS"
+    }
+  ],
+  "collision_metrics": {
+    "total_collisions_identified": 795,
+    "canonical_self_maps": 791,
+    "invalid_collisions_pending_review": 4
+  },
+  "manual_review_queue": [
+    {
+      "alias": "csi",
+      "target": "causal_sphere_of_influence",
+      "issue": "SEMANTIC_ROLE_CONFLICT"
+    },
+    {
+      "alias": "filtering",
+      "target": "filter",
+      "issue": "SEMANTIC_ROLE_CONFLICT"
+    },
+    {
+      "alias": "filters",
+      "target": "filter",
+      "issue": "SEMANTIC_ROLE_CONFLICT"
+    },
+    {
+      "alias": "varepsilon",
+      "target": "epsilon",
+      "issue": "SEMANTIC_ROLE_CONFLICT"
+    }
+  ],
+  "charter_compliance_check": {
+    "charter_version": "2.3",
+    "status": "COMPLIANT",
+    "notes": "Lexicon normalization ensures that surface forms do not mask canonical conflicts, preserving the unambiguous traceability required for governed claims."
+  }
+}
