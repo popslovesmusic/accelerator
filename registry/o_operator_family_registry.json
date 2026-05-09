@@ -1,0 +1,39 @@
+{
+  "registry_id": "PCD_O_OPERATOR_FAMILY_REGISTRY",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "operator_family_id",
+      "members",
+      "admissibility_component",
+      "orientation_component",
+      "precedence_rule",
+      "composition_rule",
+      "degeneracy_rule",
+      "relation_to_minus_i",
+      "remaining_gaps"
+    ]
+  },
+  "entries": [
+    {
+      "operator_family_id": "O_ADM_ORIENT_V1",
+      "members": {
+        "L": ["+", "-"],
+        "Q": ["++", "+-", "-+", "--"]
+      },
+      "admissibility_component": "L determines admissible/inadmissible continuation gating before orientation is evaluated.",
+      "orientation_component": "Q specifies local orientation relation among admissible continuation candidates.",
+      "precedence_rule": "L precedes Q: orientation cannot be evaluated as valid until admissibility has first constrained the candidate continuation.",
+      "composition_rule": "O=(L,Q) composition is valid only when the output admissibility state of the first operator is compatible with the input admissibility state of the next.",
+      "degeneracy_rule": "If multiple O candidates minimize relational mismatch equally, O* is set-valued and induces a set-valued -(i) equivalence class.",
+      "relation_to_minus_i": "-(i) is the local admissibility reference induced by O* through Ref(.), not O* itself.",
+      "remaining_gaps": [
+        "full composition table for O_i ∘ O_j",
+        "identity element or neutral operator condition",
+        "inverse/undo condition if any",
+        "stability theorem for minimizer switching",
+        "formal topology of degeneracy regions"
+      ]
+    }
+  ]
+}
