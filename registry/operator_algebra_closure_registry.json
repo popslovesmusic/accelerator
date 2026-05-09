@@ -1,0 +1,104 @@
+{
+  "registry_id": "PCD_OPERATOR_ALGEBRA_CLOSURE_REGISTRY",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "operator_id",
+      "closure_status",
+      "known_signature",
+      "missing_definitions",
+      "composition_rules_needed",
+      "identity_rules_needed",
+      "inverse_or_reconstruction_rules_needed",
+      "blocked_claims",
+      "target_proofs"
+    ]
+  },
+  "operators": [
+    {
+      "operator_id": "O",
+      "closure_status": "UNDERDEFINED",
+      "known_signature": {
+        "description": "Orientation-transform operator family."
+      },
+      "missing_definitions": [
+        "closed operator family",
+        "composition table",
+        "admissibility precedence rules",
+        "degeneracy behavior"
+      ],
+      "composition_rules_needed": true,
+      "identity_rules_needed": true,
+      "inverse_or_reconstruction_rules_needed": false,
+      "blocked_claims": [
+        "complete_minus_i_derivation",
+        "closed_orientation_algebra"
+      ],
+      "target_proofs": ["OBJ-P002", "OBJ-P006"]
+    },
+    {
+      "operator_id": "Ref",
+      "closure_status": "UNDERDEFINED",
+      "known_signature": {
+        "description": "Reference-projection/selection operator."
+      },
+      "missing_definitions": [
+        "codomain",
+        "equivalence-class behavior",
+        "relation to orientation_space",
+        "set-valued degeneracy handling"
+      ],
+      "composition_rules_needed": false,
+      "identity_rules_needed": true,
+      "inverse_or_reconstruction_rules_needed": true,
+      "blocked_claims": [
+        "full_minus_i_derivation",
+        "complete_reconstruction_of_orientation_reference"
+      ],
+      "target_proofs": ["OBJ-P002", "OBJ-P006"]
+    },
+    {
+      "operator_id": "NavT",
+      "closure_status": "PARTIALLY_DEFINED",
+      "known_signature": {
+        "inputs": ["orientation_space", "orientation_space"],
+        "outputs": ["transition_space"]
+      },
+      "missing_definitions": [
+        "transport composition law",
+        "identity transport condition",
+        "failure residual threshold",
+        "associativity conditions"
+      ],
+      "composition_rules_needed": true,
+      "identity_rules_needed": true,
+      "inverse_or_reconstruction_rules_needed": true,
+      "blocked_claims": [
+        "closed_transport_propagation_identity",
+        "full_geodesic_transport_calculus"
+      ],
+      "target_proofs": ["OBJ-P003"]
+    },
+    {
+      "operator_id": "Pi_A",
+      "closure_status": "PARTIALLY_DEFINED",
+      "known_signature": {
+        "inputs": ["transition_space", "topological_constraint_space"],
+        "outputs": ["transition_space"]
+      },
+      "missing_definitions": [
+        "projection idempotence condition",
+        "interaction with gate",
+        "interaction with residue context",
+        "composition with NavT"
+      ],
+      "composition_rules_needed": true,
+      "identity_rules_needed": true,
+      "inverse_or_reconstruction_rules_needed": false,
+      "blocked_claims": [
+        "closed_admissibility_projection_algebra"
+      ],
+      "target_proofs": ["OBJ-P001", "OBJ-P004"]
+    }
+  ]
+}
