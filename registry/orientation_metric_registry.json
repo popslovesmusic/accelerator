@@ -1,6 +1,6 @@
 {
   "registry_id": "PCD_ORIENTATION_METRIC_REGISTRY",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "schema": {
     "required_fields": [
       "metric_id",
@@ -11,6 +11,7 @@
       "equivalence_behavior",
       "boundedness_conditions",
       "degeneracy_behavior",
+      "classification",
       "claim_limits"
     ]
   },
@@ -21,6 +22,8 @@
       "distance_function": "d_Omega",
       "domain": "orientation_space × orientation_space",
       "codomain": "nonnegative_real_or_ordered_cost",
+      "classification": "PSEUDOMETRIC_SCAFFOLD",
+      "reason": "Distinct local references may have zero distance when they induce the same Ref(.) equivalence class.",
       "equivalence_behavior": "d_Omega(a,b)=0 when a and b induce the same Ref(.) equivalence class under the active O family.",
       "boundedness_conditions": [
         "finite mismatch cost difference",
@@ -28,12 +31,27 @@
         "declared residue context when equivalence class changes"
       ],
       "degeneracy_behavior": "set-valued references are compared by minimum, maximum, or Hausdorff-style distance over their induced equivalence classes; exact choice remains implementation-dependent.",
+      "required_for_metric_upgrade": [
+        "identity_of_indiscernibles_on_quotient_space",
+        "symmetry_proof",
+        "triangle_inequality_proof",
+        "set_valued_distance_rule",
+        "quotient_orientation_space_definition"
+      ],
       "claim_limits": [
         "metric scaffold only",
         "not yet a full metric proof",
         "triangle inequality not yet established",
         "may be pseudometric until equivalence-class quotient is formalized"
       ]
+    }
+  ],
+  "quotient_spaces": [
+    {
+      "space_id": "orientation_space_mod_ref_equivalence",
+      "notation": "orientation_space / ~_Ref",
+      "definition": "The quotient space formed by identifying local references that induce the same admissibility-preserving continuation class under the active O family.",
+      "status": "PROVISIONAL_QUOTIENT_SPACE"
     }
   ],
   "usage_rules": [
