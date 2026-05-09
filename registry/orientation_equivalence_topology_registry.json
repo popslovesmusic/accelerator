@@ -1,0 +1,50 @@
+{
+  "registry_id": "PCD_ORIENTATION_EQUIVALENCE_TOPOLOGY_REGISTRY",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "topology_id",
+      "base_space",
+      "equivalence_relation",
+      "equivalence_classes",
+      "degeneracy_regions",
+      "transition_boundaries",
+      "stability_conditions",
+      "failure_modes"
+    ]
+  },
+  "entries": [
+    {
+      "topology_id": "REF_EQUIV_TOPOLOGY_V1",
+      "base_space": "orientation_space",
+      "equivalence_relation": "Two local references are equivalent when they induce the same admissibility-preserving continuation class under the active O=(L,Q) operator family.",
+      "equivalence_classes": [
+        "reinforcing_ref_class",
+        "suppressive_ref_class",
+        "transition_ref_class",
+        "degenerate_ref_family"
+      ],
+      "degeneracy_regions": "Regions where multiple O candidates minimize relational mismatch within tolerance and therefore induce set-valued -(i).",
+      "transition_boundaries": "Boundaries where the minimizing O* changes, bifurcates, or becomes set-valued.",
+      "stability_conditions": [
+        "bounded_mismatch_increase",
+        "admissibility_preserved",
+        "no_forbidden_Q_transition",
+        "residue_context_declared_when_required"
+      ],
+      "failure_modes": [
+        "orientation_conflict_without_recoupling",
+        "unbounded_ref_divergence",
+        "degeneracy_without_set_valued_handling",
+        "invalid_Q_transition"
+      ]
+    }
+  ],
+  "rules": [
+    {
+      "name": "minimizer_switching_rule_v1",
+      "statement": "A transition between O* minimizers is admissible only if it preserves Ref(.) equivalence or passes through a declared degeneracy boundary, residue-mediated recoupling event, or admissibility-window change.",
+      "failure_behavior": "invalid_orientation_transition"
+    }
+  ]
+}
