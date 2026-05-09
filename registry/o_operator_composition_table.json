@@ -1,15 +1,28 @@
 {
   "registry_id": "PCD_O_OPERATOR_COMPOSITION_TABLE",
-  "version": "1.0.0",
-  "schema": {
-    "required_fields": [
-      "left_operator",
-      "right_operator",
-      "composition_result",
-      "validity",
-      "condition",
-      "failure_mode"
-    ]
+  "version": "1.1.0",
+  "schemas": {
+    "L_composition": {
+      "required_fields": [
+        "left_operator",
+        "right_operator",
+        "composition_result",
+        "validity",
+        "condition",
+        "failure_mode"
+      ]
+    },
+    "Q_composition": {
+      "required_fields": [
+        "left_Q",
+        "right_Q",
+        "composition_result",
+        "ref_equivalence_status",
+        "validity",
+        "condition",
+        "failure_mode"
+      ]
+    }
   },
   "admissibility_component_composition": [
     {
@@ -46,13 +59,111 @@
     }
   ],
   "orientation_component_composition_meta": {
-    "rule_statement": "Q composition is valid only after L composition is valid or conditionally reopened.",
-    "orientation_members": ["++", "+-", "-+", "--"],
+    "statement": "Q composition describes local orientation-relation transition among admissible candidates. It is evaluated only after L/admissibility permits or conditionally reopens continuation.",
+    "members": ["++", "+-", "-+", "--"],
+    "interpretation": {
+      "++": "same-sign reinforcing orientation relation",
+      "+-": "positive-to-negative orientation transition",
+      "-+": "negative-to-positive orientation transition",
+      "--": "same-sign suppressive orientation relation"
+    },
     "composition_status": "PARTIAL_TABLE",
     "remaining_work": [
       "define orientation-composition multiplication table",
       "define equivalence classes under same induced Ref(.)",
       "define switch boundaries between Q minimizers"
     ]
-  }
+  },
+  "orientation_component_composition": [
+    {
+      "left_Q": "++",
+      "right_Q": "++",
+      "composition_result": "++",
+      "ref_equivalence_status": "preserved",
+      "validity": "valid",
+      "condition": "reinforcing orientation remains in same Ref(.) equivalence class",
+      "failure_mode": "N/A"
+    },
+    {
+      "left_Q": "--",
+      "right_Q": "--",
+      "composition_result": "--",
+      "ref_equivalence_status": "preserved",
+      "validity": "valid",
+      "condition": "suppressive orientation remains in same Ref(.) equivalence class",
+      "failure_mode": "N/A"
+    },
+    {
+      "left_Q": "++",
+      "right_Q": "+-",
+      "composition_result": "+-",
+      "ref_equivalence_status": "changed",
+      "validity": "conditional",
+      "condition": "requires admissible orientation transition and bounded mismatch increase",
+      "failure_mode": "unauthorized_orientation_shift"
+    },
+    {
+      "left_Q": "++",
+      "right_Q": "-+",
+      "composition_result": "-+",
+      "ref_equivalence_status": "changed",
+      "validity": "conditional",
+      "condition": "requires admissible orientation transition and bounded mismatch increase",
+      "failure_mode": "unauthorized_orientation_shift"
+    },
+    {
+      "left_Q": "+-",
+      "right_Q": "-+",
+      "composition_result": "orientation_reversal_pair",
+      "ref_equivalence_status": "may_preserve_or_change",
+      "validity": "conditional",
+      "condition": "valid only if Ref(.) equivalence class is preserved or transition is residue-mediated",
+      "failure_mode": "unstable_reversal"
+    },
+    {
+      "left_Q": "-+",
+      "right_Q": "+-",
+      "composition_result": "orientation_reversal_pair",
+      "ref_equivalence_status": "may_preserve_or_change",
+      "validity": "conditional",
+      "condition": "valid only if Ref(.) equivalence class is preserved or transition is residue-mediated",
+      "failure_mode": "unstable_reversal"
+    },
+    {
+      "left_Q": "+-",
+      "right_Q": "+-",
+      "composition_result": "+-",
+      "ref_equivalence_status": "unstable_repeat_transition",
+      "validity": "conditional",
+      "condition": "requires stabilizing residue context or explicit degeneracy handling",
+      "failure_mode": "infinite_orientation_loop_risk"
+    },
+    {
+      "left_Q": "-+",
+      "right_Q": "-+",
+      "composition_result": "-+",
+      "ref_equivalence_status": "unstable_repeat_transition",
+      "validity": "conditional",
+      "condition": "requires stabilizing residue context or explicit degeneracy handling",
+      "failure_mode": "infinite_orientation_loop_risk"
+    },
+    {
+      "left_Q": "++",
+      "right_Q": "--",
+      "composition_result": "orientation_conflict",
+      "ref_equivalence_status": "changed_or_forbidden",
+      "validity": "conditional_or_invalid",
+      "condition": "requires explicit admissibility transition, residue-mediated recoupling, or bifurcation classification",
+      "failure_mode": "orientation_conflict_without_recoupling"
+    },
+    {
+      "left_Q": "--",
+      "right_Q": "++",
+      "composition_result": "orientation_conflict",
+      "ref_equivalence_status": "changed_or_forbidden",
+      "validity": "conditional_or_invalid",
+      "condition": "requires explicit admissibility transition, residue-mediated recoupling, or bifurcation classification",
+      "failure_mode": "orientation_conflict_without_recoupling"
+    }
+  ]
 }
