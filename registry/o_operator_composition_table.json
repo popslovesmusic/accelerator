@@ -1,0 +1,58 @@
+{
+  "registry_id": "PCD_O_OPERATOR_COMPOSITION_TABLE",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "left_operator",
+      "right_operator",
+      "composition_result",
+      "validity",
+      "condition",
+      "failure_mode"
+    ]
+  },
+  "admissibility_component_composition": [
+    {
+      "left_operator": "+",
+      "right_operator": "+",
+      "composition_result": "+",
+      "validity": "valid",
+      "condition": "successive admissible continuations remain admissible",
+      "failure_mode": "N/A"
+    },
+    {
+      "left_operator": "+",
+      "right_operator": "-",
+      "composition_result": "blocked_transition",
+      "validity": "conditional",
+      "condition": "second operation rejects continuation after initial admissibility",
+      "failure_mode": "continuation_halt"
+    },
+    {
+      "left_operator": "-",
+      "right_operator": "+",
+      "composition_result": "reopened_transition",
+      "validity": "conditional",
+      "condition": "requires explicit residue-mediated recoupling or admissibility window change",
+      "failure_mode": "unstable_recoupling"
+    },
+    {
+      "left_operator": "-",
+      "right_operator": "-",
+      "composition_result": "-",
+      "validity": "valid",
+      "condition": "continuation remains inadmissible under both evaluations",
+      "failure_mode": "N/A"
+    }
+  ],
+  "orientation_component_composition_meta": {
+    "rule_statement": "Q composition is valid only after L composition is valid or conditionally reopened.",
+    "orientation_members": ["++", "+-", "-+", "--"],
+    "composition_status": "PARTIAL_TABLE",
+    "remaining_work": [
+      "define orientation-composition multiplication table",
+      "define equivalence classes under same induced Ref(.)",
+      "define switch boundaries between Q minimizers"
+    ]
+  }
+}
