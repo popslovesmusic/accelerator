@@ -399,6 +399,16 @@
       "statement": "Potential semantic substitutions must not be automatically corrected when both observed and intended forms may be meaningful in context.",
       "failure_behavior": "require_human_review"
     },
+    "no_unprojected_transport_update_v1": {
+      "name": "no_unprojected_transport_update_v1",
+      "statement": "Transport/NavT contributions must not be treated as admissible updates unless projected through Π_A and evaluated by gate.",
+      "failure_behavior": "mark_as_illegal_composition"
+    },
+    "no_residue_write_without_admissible_transition_v1": {
+      "name": "no_residue_write_without_admissible_transition_v1",
+      "statement": "Residue update claims require an admissible transition condition and explicit Ψ behavior.",
+      "failure_behavior": "route_to_residue_update_review"
+    },
     "no_runtime_rule_without_rulepack_v1": {
       "name": "no_runtime_rule_without_rulepack_v1",
       "statement": "Any governance rule expected to execute at runtime must be registered in runtime_rulepack_registry.json.",
