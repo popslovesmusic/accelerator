@@ -7,6 +7,7 @@ def validate_msv_001_run(run_dir):
     Validate MSV-001 experiment configs, required outputs, observable fields, 
     falsification reports, and provenance manifests.
     """
+    run_dir = run_dir.rstrip(os.sep).rstrip('/')
     result = {
         "run_id": os.path.basename(run_dir),
         "validation_id": "MSV-001",
