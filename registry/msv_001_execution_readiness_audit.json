@@ -1,0 +1,64 @@
+{
+  "registry_id": "PCD_MSV_001_EXECUTION_READINESS_AUDIT",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "audit_id",
+      "target_validation",
+      "required_files",
+      "readiness_checks",
+      "blocking_failures",
+      "warnings",
+      "readiness_status"
+    ]
+  },
+  "audits": [
+    {
+      "audit_id": "MSV-001-READINESS-V1",
+      "target_validation": "MSV-001",
+      "required_files": {
+        "registry/msv_001_experiment_config_schema.json": "EXISTS",
+        "registry/msv_001_output_validation_registry.json": "EXISTS",
+        "registry/msv_001_runtime_validation_result_schema.json": "EXISTS",
+        "scripts/validate_msv_001_run.py": "EXISTS",
+        "scripts/run_msv_001_dry_harness.py": "EXISTS",
+        "experiments/msv_001/configs/msv_001_reference_config_index.json": "EXISTS",
+        "experiments/msv_001/configs/msv_001_graph_dynamics_reference_v1.json": "EXISTS",
+        "experiments/msv_001/configs/msv_001_ca_admissibility_reference_v1.json": "EXISTS",
+        "registry/msv_001_execution_plan.json": "EXISTS",
+        "registry/msv_001_results_template.json": "EXISTS",
+        "registry/msv_001_theorem_promotion_gate.json": "EXISTS",
+        "registry/msv_001_post_promotion_cascade_rules.json": "EXISTS"
+      },
+      "readiness_checks": [
+        {
+          "check": "config_schema_conformance",
+          "status": "PASS",
+          "notes": "Reference configs conform to the formal schema."
+        },
+        {
+          "check": "tool_certification_audit",
+          "status": "FAIL",
+          "notes": "graph_dynamics_sim_v1_cpp and ca_admissibility_sim_v1_cpp are currently certified at C1; SPB_MSV_001 requires C4 for TS4 promotion."
+        },
+        {
+          "check": "runtime_validator_contract",
+          "status": "PASS",
+          "notes": "scripts/validate_msv_001_run.py correctly implements the validation contract."
+        },
+        {
+          "check": "promotion_and_cascade_bindings",
+          "status": "PASS",
+          "notes": "Theorems are correctly bound to the promotion gate and post-promotion cascades."
+        }
+      ],
+      "blocking_failures": [
+        "BLOCK-READINESS-001: Required tools (graph_dynamics_sim_v1_cpp, ca_admissibility_sim_v1_cpp) are below C4 certification level, blocking TS4 promotion eligibility."
+      ],
+      "warnings": [
+        "WARN-READINESS-001: Dry-run harness generated mock PASS_TS4_ELIGIBLE, but actual engine execution requires C4 tools for supported status."
+      ],
+      "readiness_status": "BLOCK_FULL_EXECUTION_ELIGIBILITY"
+    }
+  ]
+}
