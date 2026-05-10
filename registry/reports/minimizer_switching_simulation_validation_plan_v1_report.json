@@ -1,0 +1,45 @@
+{
+  "report_id": "MINIMIZER_SWITCHING_SIMULATION_VALIDATION_PLAN_V1_REPORT",
+  "timestamp": "2026-05-10T01:00:00Z",
+  "status": "COMPLETED",
+  "patch_id": "PCD_MINIMIZER_SWITCHING_SIMULATION_VALIDATION_PLAN_V1",
+  "summary": "Defined the formal simulation-validation plan (MSV-001) for MST-001 and OASSOC-001. Established the validation plan registry and bound it to the simulation proof registry.",
+  "operations_summary": [
+    {
+      "operation": "create_simulation_validation_plan",
+      "target": "registry/minimizer_switching_simulation_validation_plan.json",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "register_validation_plan",
+      "id": "MSV-001",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "bind_validation_plan_to_simulation_proof_registry",
+      "binding_id": "SPB_MSV_001",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "add_simulation_validation_guardrails",
+      "target": "registry/lexicon_gap_queue.json",
+      "status": "SUCCESS",
+      "guardrails_added": [
+        "no_MST_TS4_without_MSV001_v1",
+        "no_recoupling_validation_single_mechanism_v1"
+      ]
+    }
+  ],
+  "validation_status": {
+    "validation_id": "MSV-001",
+    "mechanism_classes_required": 2,
+    "observables_count": 9,
+    "falsification_vectors_count": 4,
+    "claim_ceiling": "TS4"
+  },
+  "charter_compliance_check": {
+    "charter_version": "2.3",
+    "status": "COMPLIANT",
+    "notes": "The simulation validation plan correctly enforces mechanism independence and tool-count mandates by requiring at least two independent mechanism classes and C4-certified tools for TS4 promotion."
+  }
+}

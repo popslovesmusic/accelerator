@@ -1,0 +1,75 @@
+{
+  "registry_id": "PCD_MINIMIZER_SWITCHING_SIMULATION_VALIDATION_PLAN",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "validation_id",
+      "target_theorems",
+      "operators_tested",
+      "required_mechanism_classes",
+      "candidate_tools",
+      "observables",
+      "falsification_vectors",
+      "success_criteria",
+      "failure_criteria",
+      "claim_ceiling"
+    ]
+  },
+  "plans": [
+    {
+      "validation_id": "MSV-001",
+      "target_theorems": [
+        "MST-001",
+        "OASSOC-001"
+      ],
+      "operators_tested": [
+        "O",
+        "Ref",
+        "-(i)",
+        "d_Omega",
+        "R_RECOUPLING_V1",
+        "Pi_A",
+        "gate"
+      ],
+      "required_mechanism_classes": [
+        "graph_dynamics",
+        "cellular_automata"
+      ],
+      "candidate_tools": [
+        "graph_dynamics_sim_v1_cpp",
+        "ca_admissibility_sim_v1_cpp",
+        "signal_scope_phase_continuation_engine"
+      ],
+      "observables": [
+        "minimizer_switch_count",
+        "ref_equivalence_preservation_rate",
+        "d_Omega_max",
+        "d_Omega_mean",
+        "degeneracy_region_count",
+        "set_valued_reference_events",
+        "recoupling_event_count",
+        "invalid_transition_count",
+        "orientation_conflict_count"
+      ],
+      "falsification_vectors": [
+        "FV-1_shuffle_or_zero_mismatch_control",
+        "FV-2_boundary_collapse",
+        "FV-3_primitive_suppression_ablation",
+        "FV-4_adversarial_initialization"
+      ],
+      "success_criteria": [
+        "equivalence-preserving minimizer switches keep bounded d_Omega",
+        "degenerate regions preserve set-valued references",
+        "equivalence-changing switches require declared recoupling or admissibility-window change",
+        "invalid Q or memoryless reopening cases are classified as failures"
+      ],
+      "failure_criteria": [
+        "stable switching occurs without admissibility or recoupling context",
+        "degenerate regions collapse to unique references without tie rule",
+        "d_Omega diverges while switch is marked stable",
+        "forbidden Q transitions are classified as valid"
+      ],
+      "claim_ceiling": "TS4_if_C4_tools_and_recoverable_outputs_pass"
+    }
+  ]
+}
