@@ -559,6 +559,16 @@
       "statement": "MSV-001 reference configs must include FV-1 through FV-4.",
       "failure_behavior": "mark_config_incomplete"
     },
+    "no_dry_run_as_theorem_support_v1": {
+      "name": "no_dry_run_as_theorem_support_v1",
+      "statement": "MSV-001 dry-run outputs validate harness readiness only and must not support MST-001 or OASSOC-001 theorem promotion.",
+      "failure_behavior": "rewrite_as_harness_validation"
+    },
+    "no_MSV001_execution_before_dry_run_pass_v1": {
+      "name": "no_MSV001_execution_before_dry_run_pass_v1",
+      "statement": "Full MSV-001 execution should not proceed until dry-run config and output validation scaffolds pass.",
+      "failure_behavior": "route_to_harness_repair"
+    },
     "no_MSV001_TS4_without_runtime_validation_v1": {
       "name": "no_MSV001_TS4_without_runtime_validation_v1",
       "statement": "MSV-001 may not support TS4 promotion unless validate_msv_001_run.py returns PASS_TS4_ELIGIBLE.",

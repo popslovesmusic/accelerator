@@ -78,7 +78,7 @@ def validate_msv_001_run(run_dir):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Validate MSV-001 simulation run.")
-    parser.parse_argument("run_dir", help="Path to the simulation run directory.")
+    parser.add_argument("run_dir", help="Path to the simulation run directory.")
     args = parser.parse_args()
 
     validation_result = validate_msv_001_run(args.run_dir)
