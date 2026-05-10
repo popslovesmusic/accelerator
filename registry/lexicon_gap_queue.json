@@ -984,6 +984,21 @@
       "statement": "Reasoning traces are explanatory governance artifacts and must not supersede canonical registries, reports, or empirical evidence.",
       "failure_behavior": "prevent_authority_inversion"
     },
+    "no_stale_knowledge_index_for_governed_review_v1": {
+      "name": "no_stale_knowledge_index_for_governed_review_v1",
+      "statement": "Theorem reviews, certification reviews, publication reviews, and contradiction reviews may not rely on stale SQLite indexes without warning or rebuild.",
+      "failure_behavior": "warn_or_trigger_rebuild"
+    },
+    "no_unrecoverable_context_source_v1": {
+      "name": "no_unrecoverable_context_source_v1",
+      "statement": "Context packets and agent memory entries must not reference missing canonical sources without being marked stale or untrusted.",
+      "failure_behavior": "mark_context_untrusted"
+    },
+    "no_rebuild_without_report_v1": {
+      "name": "no_rebuild_without_report_v1",
+      "statement": "A knowledge-index rebuild must emit a report recording sources scanned, rows indexed, failures, warnings, and final status.",
+      "failure_behavior": "mark_rebuild_unverified"
+    },
     "no_raw_payload_storage_in_sqlite_v1": {
       "name": "no_raw_payload_storage_in_sqlite_v1",
       "statement": "Large raw simulation outputs must not be stored directly in SQLite; only metadata, summaries, hashes, and paths may be indexed.",
