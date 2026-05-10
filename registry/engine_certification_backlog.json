@@ -1,0 +1,81 @@
+{
+  "registry_id": "PCD_ENGINE_CERTIFICATION_BACKLOG",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "backlog_id",
+      "tool_id",
+      "current_status",
+      "target_status",
+      "required_for",
+      "blocking_issues",
+      "required_evidence_package",
+      "priority",
+      "next_action"
+    ]
+  },
+  "items": [
+    {
+      "backlog_id": "CERT-BACKLOG-001",
+      "tool_id": "graph_dynamics_sim_v1_cpp",
+      "current_status": "C1",
+      "target_status": "C4",
+      "required_for": [
+        "MSV-001"
+      ],
+      "blocking_issues": [
+        "missing C4 evidence package",
+        "missing multi-seed stability report",
+        "missing falsification report",
+        "missing uncertainty report"
+      ],
+      "required_evidence_package": "engine_certification_evidence_template",
+      "priority": "P0",
+      "next_action": "generate C4 certification evidence package"
+    },
+    {
+      "backlog_id": "CERT-BACKLOG-002",
+      "tool_id": "ca_admissibility_sim_v1_cpp",
+      "current_status": "C1",
+      "target_status": "C4",
+      "required_for": [
+        "MSV-001"
+      ],
+      "blocking_issues": [
+        "missing C4 evidence package",
+        "missing control cases",
+        "missing falsification report",
+        "missing uncertainty report"
+      ],
+      "required_evidence_package": "engine_certification_evidence_template",
+      "priority": "P0",
+      "next_action": "generate C4 certification evidence package"
+    },
+    {
+      "backlog_id": "CERT-BACKLOG-003",
+      "tool_id": "fsa_rule_engine_sim_v1_cpp",
+      "current_status": "runtime_failed_missing_fsa_capi_dll",
+      "target_status": "C4",
+      "required_for": [
+        "MSV-001_alternate_or_recoupling_probe"
+      ],
+      "blocking_issues": [
+        "missing fsa_capi.dll",
+        "runtime binary manifest failed",
+        "no post-repair smoke run",
+        "no C4 evidence package"
+      ],
+      "required_evidence_package": "runtime repair package before C4 evidence package",
+      "priority": "P1",
+      "next_action": "repair runtime binary and rerun smoke validation"
+    }
+  ],
+  "promotion_rule": {
+    "statement": "A backlog item may be marked complete only when its certification evidence package passes the C4 certification gate or its target status is explicitly downgraded.",
+    "completion_statuses": [
+      "C4_CERTIFIED",
+      "DOWNGRADED_NOT_REQUIRED",
+      "SUPERSEDED_BY_ALTERNATE_TOOL"
+    ]
+  }
+}
