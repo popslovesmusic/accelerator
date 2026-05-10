@@ -136,6 +136,15 @@
       ],
       "failure_level": "WARNING",
       "repair_hint": "Ensure high-impact governance actions emit a reasoning trace. Use capture_reasoning_trace.py to record decision logic."
+    },
+    {
+      "rulepack_id": "temporal_knowledge_evolution_v1",
+      "source_registry": "registry/temporal_knowledge_evolution_registry.json",
+      "script": "scripts/track_temporal_knowledge_evolution.py",
+      "rule": {
+        "statement": "High-impact actions such as theorem promotion, claim downgrade, operator refinement, contradiction resolution, confidence propagation, publication supersession, and certification change must emit temporal evolution events.",
+        "failure_behavior": "mark_action_history_incomplete"
+      }
     }
   ]
 }
