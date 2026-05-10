@@ -694,7 +694,22 @@
       "statement": "Single-mechanism MSV-001 results may inform diagnostics but cannot support TS4 theorem promotion.",
       "failure_behavior": "downgrade_to_single_mechanism_probe"
     },
-    "no_non_idempotent_projection_v1": {
+    "no_partial_P0_C4_upgrade_v1": {
+      "name": "no_partial_P0_C4_upgrade_v1",
+      "statement": "A P0 engine may not be upgraded to C4 until all blocking gaps are closed and the certification gate passes.",
+      "failure_behavior": "retain_current_level"
+    },
+    "no_TS4_without_both_P0_engines_v1": {
+      "name": "no_TS4_without_both_P0_engines_v1",
+      "statement": "MSV-001 TS4 promotion remains blocked until both graph_dynamics_sim_v1_cpp and ca_admissibility_sim_v1_cpp achieve C4.",
+      "failure_behavior": "retain_TS2_conditional_status"
+    },
+    "no_partial_P0_C4_upgrade_v1": {
+      "name": "no_partial_P0_C4_upgrade_v1",
+      "statement": "A P0 engine may not be upgraded to C4 until all blocking gaps are closed and the certification gate passes.",
+      "failure_behavior": "retain_current_level"
+    },
+    "no_O_full_algebra_closure_from_OASSOC001_v1": {
       "name": "no_non_idempotent_projection_v1",
       "statement": "Pi_A must be idempotent; multiple projections of the same increment into a stable window must not change the result.",
       "failure_behavior": "mark_projection_unstable"
