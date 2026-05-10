@@ -524,6 +524,16 @@
       "statement": "NavT(a,a) must evaluate to identity; any nonzero result indicates illegal reference or phase drift.",
       "failure_behavior": "mark_identity_failure"
     },
+    "no_non_local_transport_without_path_validity_v1": {
+      "name": "no_non_local_transport_without_path_validity_v1",
+      "statement": "Non-local transport claims must show an admissible chain of local coupling neighbors and a bounded total transport residual.",
+      "failure_behavior": "rewrite_as_provisional_propagation_claim"
+    },
+    "no_instantaneous_non_local_coupling_v1": {
+      "name": "no_instantaneous_non_local_coupling_v1",
+      "statement": "Non-local interaction must propagate through intermediate NavT composition unless a verified non-local mechanism (e.g., long-range graph edge) is explicitly declared.",
+      "failure_behavior": "route_to_topology_review"
+    },
     "no_OASSOC_promotion_with_pending_obligations_v1": {
       "name": "no_OASSOC_promotion_with_pending_obligations_v1",
       "statement": "OASSOC-001 may not promote while any required proof obligation remains pending or blocked.",
