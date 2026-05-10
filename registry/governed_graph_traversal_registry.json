@@ -1,0 +1,137 @@
+{
+  "registry_id": "PCD_GOVERNED_GRAPH_TRAVERSAL_REGISTRY",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "traversal_id",
+      "request_type",
+      "start_object_class",
+      "allowed_edge_types",
+      "max_depth",
+      "stop_conditions",
+      "confidence_policy",
+      "contradiction_policy",
+      "output_requirements"
+    ]
+  },
+  "traversal_profiles": [
+    {
+      "traversal_id": "TRAV-THEOREM-REVIEW",
+      "request_type": "theorem_review",
+      "start_object_class": "theorem",
+      "allowed_edge_types": [
+        "depends_on",
+        "derives_from",
+        "supports",
+        "blocks",
+        "contradicts",
+        "documents"
+      ],
+      "max_depth": 4,
+      "stop_conditions": [
+        "unrouted_contradiction",
+        "missing_support_source",
+        "open_gap_blocks_promotion",
+        "stale_ingestion_hash"
+      ],
+      "confidence_policy": "use_lowest_confidence_along_support_path",
+      "contradiction_policy": "block_on_unresolved",
+      "output_requirements": [
+        "path_trace",
+        "confidence_ceiling"
+      ]
+    },
+    {
+      "traversal_id": "TRAV-CLAIM-SUPPORT",
+      "request_type": "claim_support_review",
+      "start_object_class": "claim",
+      "allowed_edge_types": [
+        "depends_on",
+        "supports",
+        "tests",
+        "blocks",
+        "contradicts"
+      ],
+      "max_depth": 5,
+      "stop_conditions": [
+        "C1_tool_on_TS4_path",
+        "CB_below_required_ceiling",
+        "missing_empirical_result_package",
+        "unledgered_status_change"
+      ],
+      "confidence_policy": "claim_confidence_cannot_exceed_weakest_required_support_edge",
+      "contradiction_policy": "block_on_unresolved",
+      "output_requirements": [
+        "evidence_chain",
+        "certification_check"
+      ]
+    },
+    {
+      "traversal_id": "TRAV-PUBLICATION-REVIEW",
+      "request_type": "publication_review",
+      "start_object_class": "publication",
+      "allowed_edge_types": [
+        "documents",
+        "depends_on",
+        "supports",
+        "blocks",
+        "contradicts",
+        "supersedes"
+      ],
+      "max_depth": 4,
+      "stop_conditions": [
+        "blocked_language_detected",
+        "unsupported_support_edge",
+        "unbound_empirical_claim",
+        "confidence_band_language_mismatch"
+      ],
+      "confidence_policy": "publication_language_limited_by_lowest_linked_claim_ceiling",
+      "contradiction_policy": "block_on_unresolved",
+      "output_requirements": [
+        "language_ceiling",
+        "epistemic_drift_report"
+      ]
+    },
+    {
+      "traversal_id": "TRAV-TECH-NOTE-CONTEXT",
+      "request_type": "tech_note_context",
+      "start_object_class": "tech_note",
+      "allowed_edge_types": [
+        "documents",
+        "refines",
+        "aliases",
+        "supersedes",
+        "depends_on"
+      ],
+      "max_depth": 3,
+      "stop_conditions": [
+        "conceptual_note_attempts_support_edge",
+        "missing_frontmatter",
+        "duplicate_without_supersession"
+      ],
+      "confidence_policy": "conceptual_context_only_unless_bound_to_governed_evidence",
+      "contradiction_policy": "warn_only",
+      "output_requirements": [
+        "context_neighborhood"
+      ]
+    }
+  ],
+  "path_validity_rules": [
+    {
+      "name": "support_path_requires_governed_source_v1",
+      "statement": "Any support path must terminate in a governed proof, theorem, empirical result package, certification artifact, or validated registry entry."
+    },
+    {
+      "name": "contradiction_path_stops_promotion_v1",
+      "statement": "A path crossing an unresolved contradiction edge must stop promotion and route to contradiction or anomaly review."
+    },
+    {
+      "name": "documents_edge_cannot_raise_confidence_v1",
+      "statement": "A documents edge may add context but cannot increase theorem status, claim support, or empirical confidence."
+    },
+    {
+      "name": "supersession_path_preserves_lineage_v1",
+      "statement": "Traversal across supersedes edges must retain the superseded object and reason for replacement."
+    }
+  ]
+}

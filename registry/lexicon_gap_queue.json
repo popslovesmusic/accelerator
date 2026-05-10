@@ -1014,7 +1014,22 @@
       "statement": "Contradiction relationships affecting active claims must trigger dependency cascade or anomaly review.",
       "failure_behavior": "route_to_contradiction_review"
     },
-    "no_semantic_graph_ingestion_without_audit_v1": {
+    "no_support_inference_from_context_only_path_v1": {
+      "name": "no_support_inference_from_context_only_path_v1",
+      "statement": "Agents may not infer support from paths composed only of documents/refines/contextual edges.",
+      "failure_behavior": "downgrade_to_contextual_relevance"
+    },
+    "no_confidence_increase_across_weak_path_v1": {
+      "name": "no_confidence_increase_across_weak_path_v1",
+      "statement": "Traversal may not raise confidence above the weakest required edge or object status in the path.",
+      "failure_behavior": "apply_lowest_confidence_ceiling"
+    },
+    "no_ignored_contradiction_edge_v1": {
+      "name": "no_ignored_contradiction_edge_v1",
+      "statement": "Contradiction edges encountered in a governed traversal must be reported and routed before dependent promotion continues.",
+      "failure_behavior": "block_promotion_or_route_to_review"
+    },
+    "no_raw_payload_storage_in_sqlite_v1": {
       "name": "no_semantic_graph_ingestion_without_audit_v1",
       "statement": "Extracted semantic graph edges must pass audit before being used for governed retrieval or context assembly.",
       "failure_behavior": "mark_graph_untrusted"
