@@ -124,6 +124,18 @@
         "epistemic_drift_scan_passed"
       ],
       "failure_level": "BLOCK_OR_DOWNGRADE"
+    },
+    {
+      "rulepack_id": "agent_reasoning_trace_v1",
+      "source_registry": "registry/agent_memory_registry.json",
+      "script": "scripts/capture_reasoning_trace.py",
+      "checks": [
+        "high_impact_action_traceable",
+        "context_lineage_preserved",
+        "provenance_links_validated"
+      ],
+      "failure_level": "WARNING",
+      "repair_hint": "Ensure high-impact governance actions emit a reasoning trace. Use capture_reasoning_trace.py to record decision logic."
     }
   ]
 }
