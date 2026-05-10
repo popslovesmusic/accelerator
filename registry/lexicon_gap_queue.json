@@ -1029,6 +1029,21 @@
       "statement": "Contradiction edges encountered in a governed traversal must be reported and routed before dependent promotion continues.",
       "failure_behavior": "block_promotion_or_route_to_review"
     },
+    "no_graph_context_without_traversal_audit_v1": {
+      "name": "no_graph_context_without_traversal_audit_v1",
+      "statement": "Semantic graph context may not support governed theorem, claim, or publication review unless traversal audit passes.",
+      "failure_behavior": "downgrade_to_unverified_context"
+    },
+    "no_context_packet_confidence_above_traversal_ceiling_v1": {
+      "name": "no_context_packet_confidence_above_traversal_ceiling_v1",
+      "statement": "A context packet may not recommend a confidence or theorem ceiling above the lowest valid traversal path ceiling.",
+      "failure_behavior": "apply_traversal_ceiling"
+    },
+    "no_blocked_path_suppression_v1": {
+      "name": "no_blocked_path_suppression_v1",
+      "statement": "Blocked graph paths must be preserved in context packets rather than omitted from summaries.",
+      "failure_behavior": "mark_context_packet_incomplete"
+    },
     "no_raw_payload_storage_in_sqlite_v1": {
       "name": "no_semantic_graph_ingestion_without_audit_v1",
       "statement": "Extracted semantic graph edges must pass audit before being used for governed retrieval or context assembly.",
