@@ -1,0 +1,84 @@
+{
+  "registry_id": "PCD_MECHANISM_ALGEBRA_MAPPING_REGISTRY",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "mechanism_class",
+      "target_operators",
+      "thresholds",
+      "topology_rules",
+      "observable_mappings"
+    ]
+  },
+  "mappings": [
+    {
+      "mechanism_class": "graph_dynamics",
+      "target_operators": [
+        "NavT",
+        "csi",
+        "Pi_A"
+      ],
+      "thresholds": {
+        "tau_T": 1e-06,
+        "tau_A": 0.5,
+        "degeneracy_epsilon": 1e-09
+      },
+      "topology_rules": {
+        "csi_membership": "adjacency_list_overlap",
+        "NavT_composition": "edge_weight_multiplication",
+        "Pi_A_projection": "node_degree_scaling"
+      },
+      "observable_mappings": {
+        "minimizer_switch_count": "edge_reversal_events",
+        "ref_equivalence_preservation_rate": "clique_stability_index",
+        "active_fraction": "nonzero_node_fraction"
+      }
+    },
+    {
+      "mechanism_class": "cellular_automata",
+      "target_operators": [
+        "NavT",
+        "csi",
+        "Pi_A"
+      ],
+      "thresholds": {
+        "tau_T": 0.0,
+        "tau_A": 1.0,
+        "degeneracy_epsilon": 0.0
+      },
+      "topology_rules": {
+        "csi_membership": "moore_neighborhood_overlap",
+        "NavT_composition": "discrete_shift_composition",
+        "Pi_A_projection": "local_rule_masking"
+      },
+      "observable_mappings": {
+        "minimizer_switch_count": "rule_set_transition_events",
+        "ref_equivalence_preservation_rate": "pattern_persistence_rate",
+        "active_fraction": "alive_cell_fraction"
+      }
+    },
+    {
+      "mechanism_class": "ode_oscillator",
+      "target_operators": [
+        "NavT",
+        "csi",
+        "Pi_A"
+      ],
+      "thresholds": {
+        "tau_T": 0.0001,
+        "tau_A": 0.1,
+        "degeneracy_epsilon": 1e-07
+      },
+      "topology_rules": {
+        "csi_membership": "phase_coherence_threshold",
+        "NavT_composition": "phase_shift_addition",
+        "Pi_A_projection": "amplitude_thresholding"
+      },
+      "observable_mappings": {
+        "minimizer_switch_count": "bifurcation_events",
+        "ref_equivalence_preservation_rate": "synchronization_index",
+        "active_fraction": "super_threshold_amplitude_fraction"
+      }
+    }
+  ]
+}
