@@ -1,0 +1,54 @@
+{
+  "report_id": "MSV_001_EXPERIMENT_CONFIG_SCHEMA_V1_REPORT",
+  "timestamp": "2026-05-10T02:00:00Z",
+  "status": "COMPLETED",
+  "patch_id": "PCD_MSV_001_EXPERIMENT_CONFIG_SCHEMA_V1",
+  "summary": "Defined the experiment config schema (MSV-001) for minimizer switching and restricted O-composition validation. Established mechanism and seed requirements, required observables, and output contracts.",
+  "operations_summary": [
+    {
+      "operation": "create_experiment_config_schema",
+      "target": "registry/msv_001_experiment_config_schema.json",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "define_seed_and_mechanism_requirements",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "define_required_observables",
+      "count": 9,
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "define_falsification_config_requirements",
+      "count": 4,
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "define_output_contract",
+      "count": 10,
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "add_config_schema_guardrails",
+      "target": "registry/lexicon_gap_queue.json",
+      "status": "SUCCESS",
+      "guardrails_added": [
+        "no_MSV001_run_without_config_schema_v1",
+        "no_MSV001_claim_without_required_observables_v1"
+      ]
+    }
+  ],
+  "config_schema_status": {
+    "validation_id": "MSV-001",
+    "minimum_mechanism_classes": 2,
+    "minimum_seeds_per_mechanism": 3,
+    "required_outputs_count": 10,
+    "observables_count": 9
+  },
+  "charter_compliance_check": {
+    "charter_version": "2.3",
+    "status": "COMPLIANT",
+    "notes": "The experiment config schema ensures reproducible validation by mandating specific seeds, independent mechanisms, and comprehensive output traces for all formal switching claims."
+  }
+}
