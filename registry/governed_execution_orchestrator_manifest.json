@@ -1,0 +1,88 @@
+{
+  "registry_id": "PCD_GOVERNED_EXECUTION_ORCHESTRATOR_MANIFEST",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "campaign_id",
+      "target_tools",
+      "mechanism_classes",
+      "execution_phases",
+      "required_configs",
+      "required_outputs",
+      "validation_scripts",
+      "aggregation_rules",
+      "failure_routing",
+      "result_package_policy"
+    ]
+  },
+  "campaigns": [
+    {
+      "campaign_id": "P0-C4-ELEVATION-ORCH-V1",
+      "target_tools": [
+        "graph_dynamics_sim_v1_cpp",
+        "ca_admissibility_sim_v1_cpp"
+      ],
+      "mechanism_classes": [
+        "network",
+        "discrete_ca"
+      ],
+      "execution_phases": [
+        "runtime_smoke",
+        "control_cases",
+        "multi_seed_stability",
+        "parameter_sensitivity",
+        "falsification",
+        "uncertainty_quantification",
+        "provenance_packaging",
+        "c4_gate_check"
+      ],
+      "required_configs": [
+        "registry/p0_engine_c4_elevation_campaign.json",
+        "registry/p0_engine_c4_evidence_generation_matrix.json",
+        "registry/engine_full_certification_execution_plan.json"
+      ],
+      "required_outputs": [
+        "stability_report.json",
+        "falsification_report.json",
+        "uncertainty_report.json",
+        "cross_model_validation_report.json",
+        "provenance_manifest.json",
+        "recoverable_output_index.json",
+        "engine_certification_evidence_package.json"
+      ],
+      "validation_scripts": [
+        "scripts/check_runtime_binaries.py",
+        "scripts/check_c4_engine_certification.py",
+        "scripts/check_empirical_governance.py"
+      ],
+      "result_package_policy": "emit_empirical_result_package_after_successful_validation"
+    }
+  ],
+  "failure_routing": {
+    "runtime_failure": "route_to_runtime_binary_repair_plan",
+    "control_case_failure": "route_to_model_validation_review",
+    "stability_failure": "route_to_uncertainty_and_stability_review",
+    "falsification_failure": "route_to_falsification_protocol_review",
+    "cross_model_contradiction": "route_to_simulation_anomaly_routing_registry",
+    "provenance_failure": "route_to_runtime_provenance_review",
+    "certification_gate_failure": "retain_current_certification_and_open_backlog_item"
+  },
+  "aggregation_rules": {
+    "per_tool": [
+      "aggregate_seed_statistics",
+      "aggregate_parameter_sensitivity",
+      "summarize_control_case_results",
+      "summarize_falsification_results"
+    ],
+    "cross_tool": [
+      "compare_common_observables",
+      "compute_alignment_rate",
+      "flag_mechanism_dependence",
+      "flag_contradictions"
+    ],
+    "claim_support": [
+      "do_not_promote_until_all_required_gates_pass",
+      "write_empirical_claim_ledger_only_after_result_package_created"
+    ]
+  }
+}
