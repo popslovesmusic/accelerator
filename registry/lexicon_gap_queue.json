@@ -614,7 +614,17 @@
       "statement": "CB3 or CB4 confidence classifications require recoverable provenance and runtime validation.",
       "failure_behavior": "downgrade_confidence_band"
     },
-    "no_confidence_propagation_without_conditions_v1": {
+    "no_empirical_status_change_without_ledger_v1": {
+      "name": "no_empirical_status_change_without_ledger_v1",
+      "statement": "Empirical claim status may not change without a durable ledger entry recording source result, confidence band, artifacts, and reason.",
+      "failure_behavior": "block_status_change"
+    },
+    "no_restored_claim_without_recertification_event_v1": {
+      "name": "no_restored_claim_without_recertification_event_v1",
+      "statement": "A downgraded or invalidated empirical claim may not be restored without recertification, rerun validation, or explicit review event.",
+      "failure_behavior": "retain_downgraded_status"
+    },
+    "no_silent_anomaly_absorption_v1": {
       "name": "no_confidence_propagation_without_conditions_v1",
       "statement": "Empirical confidence may not propagate to theorem or claim status unless all required conditions for the confidence band are satisfied.",
       "failure_behavior": "block_status_update"
