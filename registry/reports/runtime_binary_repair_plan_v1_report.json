@@ -1,0 +1,44 @@
+{
+  "report_id": "RUNTIME_BINARY_REPAIR_PLAN_V1_REPORT",
+  "timestamp": "2026-05-10T04:30:00Z",
+  "status": "COMPLETED",
+  "patch_id": "PCD_RUNTIME_BINARY_REPAIR_PLAN_V1",
+  "summary": "Defined the formal repair plan for missing or invalid runtime binaries. Established the repair registry, registered the FSA repair case, and implemented binary integrity checking and governance guardrails.",
+  "operations_summary": [
+    {
+      "operation": "create_runtime_repair_plan",
+      "target": "registry/runtime_binary_repair_plan.json",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "register_fsa_repair_case",
+      "tool": "fsa_rule_engine_sim_v1_cpp",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "create_binary_integrity_check_script",
+      "path": "scripts/check_runtime_binaries.py",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "add_repair_guardrails",
+      "target": "registry/lexicon_gap_queue.json",
+      "status": "SUCCESS",
+      "guardrails_added": [
+        "no_binary_repair_without_hash_v1",
+        "no_loader_path_guessing_v1"
+      ]
+    }
+  ],
+  "repair_governance_status": {
+    "repair_registry_active": true,
+    "fsa_repair_plan_documented": true,
+    "integrity_check_script_ready": true,
+    "hash_enforcement_active": true
+  },
+  "charter_compliance_check": {
+    "charter_version": "2.3",
+    "status": "COMPLIANT",
+    "notes": "The binary repair plan correctly enforces humility and provenance mandates by requiring explicit build metadata and hash recording before any engine certification increases following a repair."
+  }
+}
