@@ -1,0 +1,104 @@
+{
+  "registry_id": "PCD_MSV_001_OUTPUT_VALIDATION_REGISTRY",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "validation_rule_id",
+      "required_output",
+      "required_fields",
+      "acceptance_criteria",
+      "failure_criteria",
+      "failure_behavior"
+    ]
+  },
+  "rules": [
+    {
+      "validation_rule_id": "MSVOUT-001",
+      "required_output": "operator_trace.json",
+      "required_fields": [
+        "step",
+        "L_state",
+        "Q_state",
+        "O_star",
+        "admissibility_status",
+        "transition_validity"
+      ],
+      "acceptance_criteria": "Every recorded transition must declare L, Q, O*, admissibility status, and transition validity.",
+      "failure_criteria": "Missing operator trace fields or untyped transition records.",
+      "failure_behavior": "mark_run_ungoverned"
+    },
+    {
+      "validation_rule_id": "MSVOUT-002",
+      "required_output": "minimizer_switch_trace.csv",
+      "required_fields": [
+        "step",
+        "previous_O_star",
+        "next_O_star",
+        "switch_mode",
+        "mismatch_cost_delta",
+        "stability_classification"
+      ],
+      "acceptance_criteria": "Every minimizer switch must classify switch mode and boundedness.",
+      "failure_criteria": "Switches recorded without mismatch-cost delta or stability classification.",
+      "failure_behavior": "downgrade_to_exploratory_probe"
+    },
+    {
+      "validation_rule_id": "MSVOUT-003",
+      "required_output": "ref_equivalence_trace.csv",
+      "required_fields": [
+        "step",
+        "previous_ref_class",
+        "next_ref_class",
+        "d_Omega",
+        "equivalence_preserved"
+      ],
+      "acceptance_criteria": "Ref(.) equivalence transitions must declare whether equivalence was preserved and report d_Omega.",
+      "failure_criteria": "Reference transition lacks equivalence or pseudometric information.",
+      "failure_behavior": "downgrade_to_exploratory_probe"
+    },
+    {
+      "validation_rule_id": "MSVOUT-004",
+      "required_output": "recoupling_trace.csv",
+      "required_fields": [
+        "step",
+        "recoupling_event",
+        "residue_context",
+        "admissibility_window_change",
+        "recoupling_validity"
+      ],
+      "acceptance_criteria": "Every recoupling event must cite residue context and admissibility-window change or valid recoupling rule.",
+      "failure_criteria": "Recoupling event is memoryless or lacks residue/admissibility context.",
+      "failure_behavior": "mark_recoupling_claim_invalid"
+    },
+    {
+      "validation_rule_id": "MSVOUT-005",
+      "required_output": "falsification_report.json",
+      "required_fields": [
+        "FV-1_shuffle_or_zero_mismatch_control",
+        "FV-2_boundary_collapse",
+        "FV-3_primitive_suppression_ablation",
+        "FV-4_adversarial_initialization",
+        "summary"
+      ],
+      "acceptance_criteria": "All required falsification vectors must be executed and classified.",
+      "failure_criteria": "Missing required falsification vector or unclassified falsification result.",
+      "failure_behavior": "block_TS4_promotion"
+    },
+    {
+      "validation_rule_id": "MSVOUT-006",
+      "required_output": "provenance_manifest.json",
+      "required_fields": [
+        "tool_id",
+        "tool_certification_level",
+        "source_commit",
+        "config_hash",
+        "run_id",
+        "timestamp",
+        "output_paths"
+      ],
+      "acceptance_criteria": "All outputs must be recoverable and tied to tool certification, source commit, and config hash.",
+      "failure_criteria": "Missing provenance, unrecoverable outputs, or uncertified tool reference.",
+      "failure_behavior": "block_claim_support"
+    }
+  ]
+}
