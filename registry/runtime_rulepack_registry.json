@@ -80,6 +80,20 @@
       ],
       "failure_level": "BLOCK_OR_DOWNGRADE",
       "repair_hint": "Review contradiction_and_consistency_engine_v1_report.json for recommended downgrades and dependency conflicts."
+    },
+    {
+      "rulepack_id": "msv_001_runtime_validation",
+      "source_registry": "registry/msv_001_output_validation_registry.json",
+      "script": "scripts/validate_msv_001_run.py",
+      "checks": [
+        "config_schema_conformance",
+        "required_outputs_exist",
+        "required_fields_present",
+        "falsification_vectors_present",
+        "provenance_manifest_complete"
+      ],
+      "failure_level": "BLOCK_OR_DOWNGRADE",
+      "repair_hint": "Check run directory for missing traces or falsification reports. Use validate_msv_001_run.py for details."
     }
   ]
 }

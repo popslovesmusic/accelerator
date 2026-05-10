@@ -549,7 +549,17 @@
       "statement": "MSV-001 results may not support MST-001 or OASSOC-001 unless all required observables are present.",
       "failure_behavior": "downgrade_to_exploratory_probe"
     },
-    "no_MSV001_acceptance_without_output_validation_v1": {
+    "no_MSV001_TS4_without_runtime_validation_v1": {
+      "name": "no_MSV001_TS4_without_runtime_validation_v1",
+      "statement": "MSV-001 may not support TS4 promotion unless validate_msv_001_run.py returns PASS_TS4_ELIGIBLE.",
+      "failure_behavior": "retain_TS2_or_downgrade"
+    },
+    "no_manual_override_without_governance_note_v1": {
+      "name": "no_manual_override_without_governance_note_v1",
+      "statement": "Manual override of MSV-001 runtime validation requires a recorded governance note and cannot exceed conditional theorem status.",
+      "failure_behavior": "block_unrecorded_override"
+    },
+    "no_O_full_algebra_closure_from_OASSOC001_v1": {
       "name": "no_MSV001_acceptance_without_output_validation_v1",
       "statement": "MSV-001 runs may not support MST-001 or OASSOC-001 unless all required output validation rules pass.",
       "failure_behavior": "block_theorem_promotion"
