@@ -579,7 +579,17 @@
       "statement": "Manual override of MSV-001 runtime validation requires a recorded governance note and cannot exceed conditional theorem status.",
       "failure_behavior": "block_unrecorded_override"
     },
-    "no_O_full_algebra_closure_from_OASSOC001_v1": {
+    "no_MSV001_TS4_before_full_execution_v1": {
+      "name": "no_MSV001_TS4_before_full_execution_v1",
+      "statement": "MST-001 and OASSOC-001 may not be promoted above TS2 until MSV-001 full execution passes runtime validation across both required mechanism classes.",
+      "failure_behavior": "retain_TS2_conditional_status"
+    },
+    "no_single_mechanism_MSV001_promotion_v1": {
+      "name": "no_single_mechanism_MSV001_promotion_v1",
+      "statement": "Single-mechanism MSV-001 results may inform diagnostics but cannot support TS4 theorem promotion.",
+      "failure_behavior": "downgrade_to_single_mechanism_probe"
+    },
+    "no_MSV001_acceptance_without_output_validation_v1": {
       "name": "no_MSV001_acceptance_without_output_validation_v1",
       "statement": "MSV-001 runs may not support MST-001 or OASSOC-001 unless all required output validation rules pass.",
       "failure_behavior": "block_theorem_promotion"
