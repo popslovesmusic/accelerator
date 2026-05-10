@@ -17,3 +17,6 @@ L009 | Transport residual propagation consistency | L008 | draft | defines δ_T 
 L010 | CSI membership by admissibility overlap | (Aα def) | draft | defines β∈csi(α)⇔Aα∩Aβ≠∅ under residue context (G3, conditional)
 L011 | Overlap membership symmetry + residue dependence | L010 | draft | proves symmetry and residue-conditioned neighborhood consequence (G3)
 L012 | Compact–Strong Residue Equivalence | (R spec), (NavT spec) | draft | gap target: relate R=∫δC to R=ΣΠ_A(NavT) via explicit ℛ and Ψ
+L013 | Admissible Increment (v2) | D1,D2 | simulated | Supersedes L001; verified via MSI-REF-2026-05-10
+L014 | Empty-Neighborhood Fixed Point (v2) | D2,D3,D4 | simulated | Supersedes L002; verified via MSI-REF-2026-05-10
+L015 | Residue-Conditioned Closure (v2) | D5 | simulated | Supersedes L005; verified via MSI-REF-2026-05-10

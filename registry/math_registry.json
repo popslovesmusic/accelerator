@@ -26,7 +26,7 @@
       "supersedes": "",
       "path": "docs\\theory\\foundational\\5_03_26 unity\\math\\lemmas\\L001_admissible_increment.md",
       "evidence_paths": [
-        "results/2026-05-05_run01_L001_admissible_increment_validation/"
+        "results/2026-05-10_run03_MSI_L001_L002/"
       ]
     },
     {
@@ -48,7 +48,7 @@
       "supersedes": "",
       "path": "docs\\theory\\foundational\\5_03_26 unity\\math\\lemmas\\L002_empty_neighborhood_fixed_point.md",
       "evidence_paths": [
-        "results/2026-05-05_run02_L002_fixed_point_stability_validation/"
+        "results/2026-05-10_run03_MSI_L001_L002/"
       ]
     },
     {
@@ -114,7 +114,7 @@
       "supersedes": "",
       "path": "docs\\theory\\foundational\\5_03_26 unity\\math\\lemmas\\L005_residue_conditioned_closure.md",
       "evidence_paths": [
-        "results/2026-05-05_run04_L005_residue_conditioned_closure_validation/"
+        "results/2026-05-10_run04_MSI_L005/"
       ]
     },
     {
@@ -239,6 +239,86 @@
       "failure_conditions": [],
       "supersedes": "",
       "path": "docs\\theory\\foundational\\5_03_26 unity\\math\\lemmas\\L011_overlap_membership_is_symmetric_and_residue_dependent.md",
+      "evidence_paths": []
+    },
+    {
+      "item_id": "L012",
+      "title": "Compact\u2013Strong Residue Equivalence (Gap target; open)",
+      "statement": "Define the compact residue form:\n\n`R = \u222b \u03b4C`\n\nand the strong (discrete) candidate form:\n\n`R = \u03a3_k \u03a0_{A_k}( NavT(\u03c9_k, \u03c9_{k+1}) )`.\n\nThis lemma\u2019s goal is to *prove or define* a precise relation between these forms (e.g., as a discrete specification of a residue update operator `\u03a8` whose continuous limit yields the compact form), under an explicit choice of:\n\n- residue space `\u211b` (typed form `R_t \u2208 \u211b`),\n- residue update operator `\u03a8`,\n- admissibility projection family `\u03a0_A`,\n- and a transport/navigation operator `NavT`.",
+      "dependencies_raw": "- Sources:\n  - `# Formal Specification of (R).txt` (introduces `R_{t+1}=\u03a8(...)` and the compact/strong forms)\n  - `02_ordered_account_of_mathematics.md` (records the accepted review patch constraints and reconciliation)\n- Assumptions (to be declared when this lemma is closed):\n  - Well-typedness of `R` and all operator outputs in `\u211b`\n  - A specific discretization scheme linking `\u03b4C` to admissible navigation increments",
+      "status": "draft",
+      "proof_type": "heuristic",
+      "object_classes": [],
+      "operators_used": [],
+      "constraints_used": [],
+      "preserved_invariants": [],
+      "dependent_lemmas": [],
+      "contradicted_by": [],
+      "simulation_bindings": [],
+      "known_scope_limits": [],
+      "failure_conditions": [],
+      "supersedes": "",
+      "path": "docs\\theory\\foundational\\5_03_26 unity\\math\\lemmas\\L012_compact_strong_residue_equivalence.md",
+      "evidence_paths": []
+    },
+    {
+      "item_id": "L013",
+      "title": "Admissible Increment (v2)",
+      "statement": "For any process index `\u03b1`, define the update increment `\u0394x\u03b1 := x'\u03b1 \u2212 x\u03b1`. If the update rule side of the core expression holds, then `\u0394x\u03b1 \u2208 A\u03b1`.",
+      "dependencies_raw": "- Definitions: D1 (Admissibility window), D2 (Projection/filter), D3\u2013D4 (well-typed sum/transport)\n- Assumptions: A1 (Well-typedness)\n- Prior lemmas: none",
+      "status": "simulated",
+      "proof_type": "heuristic",
+      "object_classes": [],
+      "operators_used": [],
+      "constraints_used": [],
+      "preserved_invariants": [],
+      "dependent_lemmas": [],
+      "contradicted_by": [],
+      "simulation_bindings": [],
+      "known_scope_limits": [],
+      "failure_conditions": [],
+      "supersedes": "Supersedes: L001",
+      "path": "docs\\theory\\foundational\\5_03_26 unity\\math\\lemmas\\L013_admissible_increment_v2.md",
+      "evidence_paths": []
+    },
+    {
+      "item_id": "L014",
+      "title": "Empty-Neighborhood Fixed Point (v2)",
+      "statement": "Assume `csi(\u03b1) = \u2205`. If the update rule side of the core expression is evaluated/active for `\u03b1`, then `x'\u03b1 = x\u03b1`.",
+      "dependencies_raw": "- Definitions: D2 (Projection/filter), D3 (Coupling neighborhood), D4 (Transport additive under `\u03a3`)\n- Assumptions: A1 (Well-typedness)\n- Prior lemmas: none",
+      "status": "simulated",
+      "proof_type": "heuristic",
+      "object_classes": [],
+      "operators_used": [],
+      "constraints_used": [],
+      "preserved_invariants": [],
+      "dependent_lemmas": [],
+      "contradicted_by": [],
+      "simulation_bindings": [],
+      "known_scope_limits": [],
+      "failure_conditions": [],
+      "supersedes": "Supersedes: L002",
+      "path": "docs\\theory\\foundational\\5_03_26 unity\\math\\lemmas\\L014_empty_neighborhood_fixed_point_v2.md",
+      "evidence_paths": []
+    },
+    {
+      "item_id": "L015",
+      "title": "Residue-Conditioned Closure Constraint (v2)",
+      "statement": "Let `\u21d4_residue` be read as a residue-conditioned biconditional coupling between the existence condition `E\u03b1>0` and the update rule for `\u03b1`. Then any claim derived from only one side (existence side or update side) must remain consistent with the other side **under the same residue evaluation context**.",
+      "dependencies_raw": "- Definitions: D5 (Residue-gated biconditional)\n- Assumptions: A3 (Biconditional closure intent)\n- Prior lemmas: none",
+      "status": "simulated",
+      "proof_type": "heuristic",
+      "object_classes": [],
+      "operators_used": [],
+      "constraints_used": [],
+      "preserved_invariants": [],
+      "dependent_lemmas": [],
+      "contradicted_by": [],
+      "simulation_bindings": [],
+      "known_scope_limits": [],
+      "failure_conditions": [],
+      "supersedes": "Supersedes: L005",
+      "path": "docs\\theory\\foundational\\5_03_26 unity\\math\\lemmas\\L015_residue_conditioned_closure_v2.md",
       "evidence_paths": []
     }
   ],

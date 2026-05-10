@@ -1,0 +1,36 @@
+{
+  "experiment_id": "MSI-REF-2026-05-10-L001-L002",
+  "tool": "fsa_rule_engine_sim_v1_cpp",
+  "intent": "validate_lemmas_L001_L002",
+  "seeds": [101, 202, 303, 404, 505],
+  "base_config": {
+    "num_agents": 100,
+    "n_states": 10,
+    "steps": 100,
+    "res_req": 0.5,
+    "mismatch_rate": 0.1,
+    "forbidden_node": 9,
+    "edge_prob": 0.3,
+    "residue_required": 0.5,
+    "residue_threshold_node": 0.1,
+    "initial_agents": 100
+  },
+  "variations": [
+    {
+      "name": "L001_admissibility_test",
+      "config_override": {
+        "mismatch_rate": 0.5
+      },
+      "description": "High mismatch pressure to test that all applied updates remain within the admissibility window (L001)."
+    },
+    {
+      "name": "L002_empty_neighborhood_test",
+      "config_override": {
+        "num_agents": 1,
+        "n_states": 1000,
+        "mismatch_rate": 0.0
+      },
+      "description": "Single agent in a large state space to simulate empty neighborhood (csi=0) and verify fixed-point stability (L002)."
+    }
+  ]
+}
