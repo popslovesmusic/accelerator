@@ -614,6 +614,16 @@
       "statement": "CB3 or CB4 confidence classifications require recoverable provenance and runtime validation.",
       "failure_behavior": "downgrade_confidence_band"
     },
+    "no_confidence_propagation_without_conditions_v1": {
+      "name": "no_confidence_propagation_without_conditions_v1",
+      "statement": "Empirical confidence may not propagate to theorem or claim status unless all required conditions for the confidence band are satisfied.",
+      "failure_behavior": "block_status_update"
+    },
+    "no_confidence_survival_after_runtime_drift_v1": {
+      "name": "no_confidence_survival_after_runtime_drift_v1",
+      "statement": "Empirical confidence must decay when runtime, provenance, certification, or contradiction state changes.",
+      "failure_behavior": "trigger_confidence_reassessment"
+    },
     "no_silent_anomaly_absorption_v1": {
       "name": "no_silent_anomaly_absorption_v1",
       "statement": "Anomalous or contradictory simulation behavior must not be absorbed into supporting interpretation without a registered review lane.",

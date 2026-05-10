@@ -1,0 +1,109 @@
+{
+  "registry_id": "PCD_EMPIRICAL_CONFIDENCE_PROPAGATION_REGISTRY",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "propagation_id",
+      "source_result_classification",
+      "source_confidence_band",
+      "target_objects",
+      "allowed_status_updates",
+      "blocked_status_updates",
+      "required_conditions",
+      "downgrade_triggers"
+    ]
+  },
+  "propagation_rules": [
+    {
+      "propagation_id": "CB-PROP-001",
+      "source_result_classification": "SUPPORTED_SIMULATION_RESULT",
+      "source_confidence_band": "CB4",
+      "target_objects": [
+        "theorem_status",
+        "claim_support_matrix",
+        "publication_template_registry"
+      ],
+      "allowed_status_updates": [
+        "TS2_to_TS4",
+        "conditional_claim_to_simulation_supported",
+        "publication_language_to_formal_result_with_governed_simulation_support"
+      ],
+      "blocked_status_updates": [
+        "physical_validation",
+        "universal_proof",
+        "full_metric_closure",
+        "full_operator_algebra_closure"
+      ],
+      "required_conditions": [
+        "two_or_more_certified_mechanism_classes",
+        "required_falsification_vectors_classified",
+        "recoverable_provenance",
+        "runtime_validation_passed",
+        "no_active_contradiction"
+      ]
+    },
+    {
+      "propagation_id": "CB-PROP-002",
+      "source_result_classification": "SINGLE_MECHANISM_PROBE",
+      "source_confidence_band": "CB2",
+      "target_objects": [
+        "theorem_status",
+        "claim_support_matrix"
+      ],
+      "allowed_status_updates": [
+        "retain_TS2",
+        "add_single_mechanism_probe_note",
+        "mark_mechanism_local_consistency"
+      ],
+      "blocked_status_updates": [
+        "TS4_promotion",
+        "cross_mechanism_support_language"
+      ],
+      "required_conditions": [
+        "recoverable_outputs",
+        "single_mechanism_repeatability"
+      ]
+    },
+    {
+      "propagation_id": "CB-PROP-003",
+      "source_result_classification": "CONTRADICTED_OR_INCONCLUSIVE",
+      "source_confidence_band": "CB1_or_CB2",
+      "target_objects": [
+        "theorem_status",
+        "dependency_cascade_registry",
+        "gap_dependency_graph"
+      ],
+      "allowed_status_updates": [
+        "mark_contested",
+        "downgrade_to_TS1_or_conditional",
+        "open_assumption_gap"
+      ],
+      "blocked_status_updates": [
+        "supported_language",
+        "promotion"
+      ],
+      "required_conditions": [
+        "anomaly_review_lane_created",
+        "contradiction_provenance_recorded"
+      ]
+    }
+  ],
+  "confidence_decay_rules": [
+    {
+      "name": "confidence_decay_on_runtime_drift_v1",
+      "statement": "If runtime binary hash, tool certification, or provenance status changes, dependent empirical confidence bands must be downgraded pending recertification.",
+      "downgrade": {
+        "CB4": "CB2_or_CB0_pending_review",
+        "CB3": "CB1_or_CB0_pending_review"
+      }
+    },
+    {
+      "name": "confidence_decay_on_open_contradiction_v1",
+      "statement": "If a cross-mechanism contradiction is opened, affected CB3/CB4 claims must be downgraded or marked contested until resolved.",
+      "downgrade": {
+        "CB4": "CONTESTED",
+        "CB3": "INCONCLUSIVE"
+      }
+    }
+  ]
+}
