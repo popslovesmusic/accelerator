@@ -1014,7 +1014,22 @@
       "statement": "A downgraded, contradicted, or invalidated object may not be restored without referencing the prior downgrade and the recovery evidence.",
       "failure_behavior": "block_restoration"
     },
-    "no_raw_payload_storage_in_sqlite_v1": {
+    "no_temporal_history_without_replayability_v1": {
+      "name": "no_temporal_history_without_replayability_v1",
+      "statement": "Temporal histories for governed objects must be replayable from canonical artifacts or marked incomplete.",
+      "failure_behavior": "mark_temporal_history_untrusted"
+    },
+    "no_active_support_from_invalid_temporal_chain_v1": {
+      "name": "no_active_support_from_invalid_temporal_chain_v1",
+      "statement": "Objects with invalid temporal chains may not provide active support for theorem, claim, publication, or certification status.",
+      "failure_behavior": "block_or_downgrade_support"
+    },
+    "no_state_reconstruction_without_source_artifacts_v1": {
+      "name": "no_state_reconstruction_without_source_artifacts_v1",
+      "statement": "Reconstructed states must cite source artifacts, event records, or reports used during replay.",
+      "failure_behavior": "mark_reconstruction_unverified"
+    },
+    "no_untyped_semantic_edge_v1": {
       "name": "no_untyped_semantic_edge_v1",
       "statement": "Semantic graph edges must declare a relationship_type and object class for both source and target.",
       "failure_behavior": "route_to_relationship_review"
