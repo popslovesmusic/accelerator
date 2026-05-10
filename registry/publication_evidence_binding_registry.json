@@ -1,0 +1,97 @@
+{
+  "registry_id": "PCD_PUBLICATION_EVIDENCE_BINDING_REGISTRY",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "publication_id",
+      "publication_type",
+      "linked_theorems",
+      "linked_claims",
+      "linked_result_packages",
+      "minimum_confidence_band",
+      "maximum_allowed_language",
+      "required_disclaimers",
+      "blocked_language",
+      "publication_status"
+    ]
+  },
+  "language_ceiling_rules": [
+    {
+      "confidence_band": "CB0",
+      "allowed_language": [
+        "runtime-invalid",
+        "exploratory-only"
+      ],
+      "blocked_language": [
+        "support",
+        "evidence",
+        "validation"
+      ]
+    },
+    {
+      "confidence_band": "CB1",
+      "allowed_language": [
+        "exploratory observation",
+        "preliminary behavior"
+      ],
+      "blocked_language": [
+        "repeatable support",
+        "cross-mechanism consistency"
+      ]
+    },
+    {
+      "confidence_band": "CB2",
+      "allowed_language": [
+        "repeatable within one mechanism",
+        "single-mechanism consistency"
+      ],
+      "blocked_language": [
+        "simulation-supported theorem",
+        "cross-mechanism support"
+      ]
+    },
+    {
+      "confidence_band": "CB3",
+      "allowed_language": [
+        "cross-mechanism agreement under governed limits"
+      ],
+      "blocked_language": [
+        "universal validation",
+        "physical proof"
+      ]
+    },
+    {
+      "confidence_band": "CB4",
+      "allowed_language": [
+        "simulation-supported theorem behavior within governed models"
+      ],
+      "blocked_language": [
+        "physical proof",
+        "final closure",
+        "universal law"
+      ]
+    }
+  ],
+  "disclaimer_templates": [
+    {
+      "template_id": "DISC-MODEL-ONLY",
+      "required_for": [
+        "CB1",
+        "CB2",
+        "CB3",
+        "CB4"
+      ],
+      "text": "Results describe governed behavior within the modeled system and are not claims of physical proof or universal validation."
+    },
+    {
+      "template_id": "DISC-CONDITIONAL-THEOREM",
+      "required_for": [
+        "TS2",
+        "TS3",
+        "TS4"
+      ],
+      "text": "Formal support remains conditional on declared assumptions, governed falsification handling, and runtime-valid evidence sources."
+    }
+  ],
+  "entries": []
+}
