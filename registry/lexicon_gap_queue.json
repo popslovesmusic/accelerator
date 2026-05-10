@@ -949,6 +949,26 @@
       "statement": "-(i) remains partially derived until metric proof, restricted O associativity proof, and minimizer-switching simulation validation are complete or superseded.",
       "failure_behavior": "retain_partially_derived_status"
     },
+    "sqlite_is_not_canonical_authority_v1": {
+      "name": "sqlite_is_not_canonical_authority_v1",
+      "statement": "SQLite indexes are derived search/state indexes and must not replace canonical JSON, Markdown, report, or provenance artifacts.",
+      "failure_behavior": "block_authority_inversion"
+    },
+    "no_tech_note_without_markdown_archive_v1": {
+      "name": "no_tech_note_without_markdown_archive_v1",
+      "statement": "Technical notes intended for future reuse must be archived as Markdown under docs/tech_notes/ before database indexing.",
+      "failure_behavior": "route_to_tech_note_archive"
+    },
+    "no_database_only_claim_state_v1": {
+      "name": "no_database_only_claim_state_v1",
+      "statement": "Claim, theorem, certification, or empirical status changes may not exist only in SQLite; they must be recoverable from canonical filesystem artifacts.",
+      "failure_behavior": "block_status_update"
+    },
+    "no_agent_search_without_ingestion_report_v1": {
+      "name": "no_agent_search_without_ingestion_report_v1",
+      "statement": "Agent search results from SQLite must be tied to a recent ingestion report and content hashes.",
+      "failure_behavior": "warn_or_reingest"
+    },
     "no_closed_operator_claim_without_algebra_v1": {
       "statement": "An operator may not be described as algebraically closed until its composition, identity, codomain, and failure rules are registered.",
       "failure_behavior": "downgrade_to_partially_defined"

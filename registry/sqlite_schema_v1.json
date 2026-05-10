@@ -1,0 +1,83 @@
+{
+  "registry_id": "PCD_SQLITE_SCHEMA",
+  "version": "1.0.0",
+  "tables": {
+    "tech_notes": [
+      "note_id",
+      "title",
+      "path",
+      "created",
+      "status",
+      "tags_json",
+      "linked_theorems_json",
+      "linked_operators_json",
+      "linked_claims_json",
+      "confidence_scope",
+      "content_hash",
+      "full_text"
+    ],
+    "formal_objects": [
+      "object_id",
+      "object_class",
+      "title",
+      "status",
+      "source_path",
+      "dependency_links_json",
+      "content_hash"
+    ],
+    "theorems": [
+      "theorem_id",
+      "status",
+      "closure_status",
+      "proof_ids_json",
+      "gap_dependencies_json",
+      "claim_scope"
+    ],
+    "claims": [
+      "claim_id",
+      "claim_class",
+      "claim_status",
+      "required_theorems_json",
+      "required_tools_json",
+      "confidence_band",
+      "publication_allowed"
+    ],
+    "tools": [
+      "tool_id",
+      "model_class",
+      "certification_level",
+      "runtime_status",
+      "manifest_path",
+      "required_for_json"
+    ],
+    "empirical_results": [
+      "result_package_id",
+      "execution_id",
+      "tool_ids_json",
+      "mechanism_classes_json",
+      "confidence_band",
+      "interpretation_classification",
+      "provenance_status",
+      "path"
+    ],
+    "publications": [
+      "publication_id",
+      "publication_type",
+      "status",
+      "linked_claims_json",
+      "linked_result_packages_json",
+      "maximum_allowed_language"
+    ]
+  },
+  "fts_tables": [
+    {
+      "name": "tech_notes_fts",
+      "source_table": "tech_notes",
+      "indexed_columns": [
+        "title",
+        "full_text",
+        "tags_json"
+      ]
+    }
+  ]
+}
