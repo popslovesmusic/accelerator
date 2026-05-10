@@ -999,7 +999,22 @@
       "statement": "A knowledge-index rebuild must emit a report recording sources scanned, rows indexed, failures, warnings, and final status.",
       "failure_behavior": "mark_rebuild_unverified"
     },
-    "no_backfilled_note_without_frontmatter_v1": {
+    "no_untyped_semantic_edge_v1": {
+      "name": "no_untyped_semantic_edge_v1",
+      "statement": "Semantic graph edges must declare a relationship_type and object class for both source and target.",
+      "failure_behavior": "route_to_relationship_review"
+    },
+    "no_support_edge_without_governed_source_v1": {
+      "name": "no_support_edge_without_governed_source_v1",
+      "statement": "Support relationships must cite governed proof, evidence, theorem, or result-package sources.",
+      "failure_behavior": "downgrade_to_documents_or_refines"
+    },
+    "no_contradiction_edge_without_cascade_review_v1": {
+      "name": "no_contradiction_edge_without_cascade_review_v1",
+      "statement": "Contradiction relationships affecting active claims must trigger dependency cascade or anomaly review.",
+      "failure_behavior": "route_to_contradiction_review"
+    },
+    "no_raw_payload_storage_in_sqlite_v1": {
       "name": "no_backfilled_note_without_frontmatter_v1",
       "statement": "Backfilled tech notes must include required frontmatter before SQLite ingestion.",
       "failure_behavior": "mark_note_not_ingestion_ready"
