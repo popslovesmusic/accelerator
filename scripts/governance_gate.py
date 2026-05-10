@@ -403,6 +403,14 @@ class GovernanceGate:
         except ImportError:
             self.runtime_status = {"status": "MISSING", "failures": [{"error": "runtime_governance_check.py not found"}]}
         
+        # --- Empirical Governance Check (PCD_EMPIRICAL_GOVERNANCE_RUNTIME_INTEGRATION_V1) ---
+        try:
+            import scripts.check_empirical_governance as ceg
+            # Note: This would pass the paper path or claim ID in process()
+            self.empirical_governance_status = {"status": "ACTIVE", "script": "scripts/check_empirical_governance.py"}
+        except ImportError:
+            self.empirical_governance_status = {"status": "MISSING", "error": "check_empirical_governance.py not found"}
+        
         with open("registry/compliance_charter_v2_3.json", "r", encoding="utf-8") as f:
             self.charter = json.load(f).get("governance_enforcement_v2", {})
         self.lexicon_v = LexiconValidator(tracer=tracer)
@@ -829,6 +837,14 @@ class GovernanceGate:
         }
 
     def process(self, paper_path: str, target_level: str = "C4", intent: str = "validate", strict: bool = False, _recovery_enabled: bool = True):
+        # --- Empirical Governance Check (PCD_EMPIRICAL_GOVERNANCE_RUNTIME_INTEGRATION_V1) ---
+        if hasattr(self, 'empirical_governance_status') and self.empirical_governance_status["status"] == "ACTIVE":
+             import scripts.check_empirical_governance as ceg
+             empirical_res = ceg.check_empirical_governance(paper_path)
+             if empirical_res["final_result"] == "BLOCKED":
+                  print(f"FATAL: Empirical Governance Block. Details: {json.dumps(empirical_res['blocking_failures'], indent=2)}")
+                  sys.exit(1)
+        
         with open(paper_path, "r", encoding="utf-8") as f:
             content = f.read()
         

@@ -105,6 +105,25 @@
         "assumption_gap_detection"
       ],
       "failure_level": "BLOCK_OR_DOWNGRADE"
+    },
+    {
+      "rulepack_id": "empirical_governance_runtime_v1",
+      "source_registries": [
+        "registry/empirical_result_package_schema.json",
+        "registry/empirical_confidence_propagation_registry.json",
+        "registry/empirical_claim_ledger.json",
+        "registry/publication_evidence_binding_registry.json",
+        "registry/epistemic_drift_monitor_registry.json"
+      ],
+      "script": "scripts/check_empirical_governance.py",
+      "checks": [
+        "result_package_required_for_empirical_claims",
+        "confidence_band_conditions_satisfied",
+        "ledger_entry_exists_for_status_change",
+        "publication_bound_to_result_package",
+        "epistemic_drift_scan_passed"
+      ],
+      "failure_level": "BLOCK_OR_DOWNGRADE"
     }
   ]
 }
