@@ -614,6 +614,16 @@
       "statement": "CB3 or CB4 confidence classifications require recoverable provenance and runtime validation.",
       "failure_behavior": "downgrade_confidence_band"
     },
+    "no_silent_anomaly_absorption_v1": {
+      "name": "no_silent_anomaly_absorption_v1",
+      "statement": "Anomalous or contradictory simulation behavior must not be absorbed into supporting interpretation without a registered review lane.",
+      "failure_behavior": "route_to_anomaly_review"
+    },
+    "no_theorem_support_from_unresolved_contradiction_v1": {
+      "name": "no_theorem_support_from_unresolved_contradiction_v1",
+      "statement": "A theorem cannot receive simulation-supported status while unresolved cross-mechanism contradiction remains active.",
+      "failure_behavior": "block_TS4_promotion"
+    },
     "no_MSV001_TS4_without_runtime_validation_v1": {
       "name": "no_MSV001_TS4_without_runtime_validation_v1",
       "statement": "MSV-001 may not support TS4 promotion unless validate_msv_001_run.py returns PASS_TS4_ELIGIBLE.",
