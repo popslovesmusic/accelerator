@@ -1,0 +1,81 @@
+{
+  "registry_id": "PCD_GOVERNED_CONTEXT_ASSEMBLY_REGISTRY",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "context_packet_id",
+      "request_type",
+      "required_sources",
+      "retrieval_scope",
+      "status_filters",
+      "confidence_filters",
+      "provenance_requirements",
+      "output_format"
+    ]
+  },
+  "packet_types": [
+    {
+      "context_packet_id": "CTX-THEOREM-REVIEW",
+      "request_type": "theorem_review",
+      "required_sources": [
+        "formal_object_registry",
+        "theorem_status_registry",
+        "theorem_closure_registry",
+        "proof_registry",
+        "gap_dependency_graph",
+        "empirical_claim_ledger"
+      ],
+      "retrieval_scope": "theorem_and_dependencies",
+      "status_filters": [],
+      "confidence_filters": [],
+      "provenance_requirements": "not_specified",
+      "output_format": "json_and_markdown_summary"
+    },
+    {
+      "context_packet_id": "CTX-ENGINE-CERTIFICATION",
+      "request_type": "engine_certification_review",
+      "required_sources": [
+        "tool_manifest",
+        "runtime_binary_manifest",
+        "engine_certification_evidence_template",
+        "engine_certification_backlog",
+        "simulation_artifact_governance"
+      ],
+      "retrieval_scope": "tool_runtime_and_evidence_chain",
+      "status_filters": [],
+      "confidence_filters": [],
+      "provenance_requirements": "auditable_provenance_required",
+      "output_format": "json"
+    },
+    {
+      "context_packet_id": "CTX-PUBLICATION-REVIEW",
+      "request_type": "publication_review",
+      "required_sources": [
+        "publication_evidence_binding_registry",
+        "claim_support_matrix",
+        "empirical_result_package_schema",
+        "epistemic_drift_monitor_registry",
+        "rhetorical_scope_registry"
+      ],
+      "retrieval_scope": "publication_claims_evidence_and_language",
+      "status_filters": [],
+      "confidence_filters": [],
+      "provenance_requirements": "full_chain_provenance_required",
+      "output_format": "markdown_review_packet"
+    },
+    {
+      "context_packet_id": "CTX-TECH-NOTE-SEARCH",
+      "request_type": "tech_note_search",
+      "required_sources": [
+        "docs/tech_notes",
+        "pcd_governance.db",
+        "sqlite_ingestion_report"
+      ],
+      "retrieval_scope": "full_text_and_frontmatter",
+      "status_filters": [],
+      "confidence_filters": [],
+      "provenance_requirements": "filesystem_sync_required",
+      "output_format": "ranked_results_with_paths"
+    }
+  ]
+}
