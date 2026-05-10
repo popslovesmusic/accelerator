@@ -1,0 +1,150 @@
+{
+  "registry_id": "PCD_P0_ENGINE_C4_EVIDENCE_GENERATION_MATRIX",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "matrix_id",
+      "tool_id",
+      "gap_id",
+      "required_runs",
+      "required_metrics",
+      "required_artifacts",
+      "pass_conditions",
+      "failure_conditions",
+      "evidence_targets"
+    ]
+  },
+  "matrices": [
+    {
+      "matrix_id": "GRAPH-C4-MATRIX-001",
+      "tool_id": "graph_dynamics_sim_v1_cpp",
+      "gaps": [
+        {
+          "gap_id": "numerical_stability_verified",
+          "required_runs": [
+            "multi_seed_stability_runs",
+            "parameter_variation_runs"
+          ],
+          "required_metrics": [
+            "order_parameter_variance",
+            "runtime_variance",
+            "divergence_rate"
+          ],
+          "required_artifacts": [
+            "stability_report.json"
+          ],
+          "pass_conditions": [
+            "bounded_variance",
+            "no_unexplained_divergence"
+          ],
+          "failure_conditions": [
+            "chaotic_unbounded_instability"
+          ]
+        },
+        {
+          "gap_id": "cross_model_validated",
+          "required_runs": [
+            "compare_against_fsa_rule_engine_sim_v1_cpp"
+          ],
+          "required_metrics": [
+            "observable_alignment_rate"
+          ],
+          "required_artifacts": [
+            "cross_model_validation_report.json"
+          ],
+          "pass_conditions": [
+            "repeatable_partial_alignment"
+          ],
+          "failure_conditions": [
+            "persistent_mechanism_contradiction"
+          ]
+        },
+        {
+          "gap_id": "falsification_verified",
+          "required_runs": [
+            "FV-1",
+            "FV-2",
+            "expected_failure_case"
+          ],
+          "required_metrics": [
+            "failure_response_rate"
+          ],
+          "required_artifacts": [
+            "falsification_report.json"
+          ],
+          "pass_conditions": [
+            "expected_degradation_detected"
+          ],
+          "failure_conditions": [
+            "failure_vectors_produce_false_support"
+          ]
+        }
+      ]
+    },
+    {
+      "matrix_id": "CA-C4-MATRIX-001",
+      "tool_id": "ca_admissibility_sim_v1_cpp",
+      "gaps": [
+        {
+          "gap_id": "numerical_stability_verified",
+          "required_runs": [
+            "multi_seed_stability_runs",
+            "boundary_transition_runs"
+          ],
+          "required_metrics": [
+            "active_fraction_variance",
+            "mismatch_variance"
+          ],
+          "required_artifacts": [
+            "stability_report.json"
+          ],
+          "pass_conditions": [
+            "stable_boundary_behavior"
+          ],
+          "failure_conditions": [
+            "unbounded_transition_instability"
+          ]
+        },
+        {
+          "gap_id": "cross_model_validated",
+          "required_runs": [
+            "compare_against_graph_dynamics_sim_v1_cpp",
+            "compare_against_fsa_rule_engine_sim_v1_cpp"
+          ],
+          "required_metrics": [
+            "admissibility_alignment_rate"
+          ],
+          "required_artifacts": [
+            "cross_model_validation_report.json"
+          ],
+          "pass_conditions": [
+            "repeatable_structural_alignment"
+          ],
+          "failure_conditions": [
+            "irreconcilable_cross_model_behavior"
+          ]
+        },
+        {
+          "gap_id": "falsification_verified",
+          "required_runs": [
+            "FV-1",
+            "FV-2",
+            "expected_failure_case"
+          ],
+          "required_metrics": [
+            "collapse_response_rate"
+          ],
+          "required_artifacts": [
+            "falsification_report.json"
+          ],
+          "pass_conditions": [
+            "controlled_collapse_behavior"
+          ],
+          "failure_conditions": [
+            "false_positive_support"
+          ]
+        }
+      ]
+    }
+  ]
+}
