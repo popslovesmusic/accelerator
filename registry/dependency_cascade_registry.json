@@ -122,6 +122,37 @@
       "cascade_action": "downgrade_claim",
       "severity": "DOWNGRADE",
       "review_required": true
+    },
+    {
+      "dependency_id": "CASCADE-MSV001-SUCCESS",
+      "source_object": "MSV-001-THEOREM-PROMOTION-GATE-V1",
+      "dependent_objects": [
+        "MST-001",
+        "OASSOC-001",
+        "-(i)",
+        "O",
+        "GAP_1_orientation_from_admissibility_structure"
+      ],
+      "trigger_condition": "promotion_gate_pass",
+      "cascade_action": "apply_success_cascade_with_review",
+      "severity": "REVIEW",
+      "review_required": true
+    },
+    {
+      "dependency_id": "CASCADE-MSV001-FAILURE",
+      "source_object": "MSV-001-THEOREM-PROMOTION-GATE-V1",
+      "dependent_objects": [
+        "MST-001",
+        "OASSOC-001",
+        "-(i)",
+        "O",
+        "GRA",
+        "operational_curvature"
+      ],
+      "trigger_condition": "promotion_gate_fail_or_inconclusive",
+      "cascade_action": "retain_or_downgrade_dependent_claims",
+      "severity": "BLOCK_OR_DOWNGRADE",
+      "review_required": true
     }
   ]
 }

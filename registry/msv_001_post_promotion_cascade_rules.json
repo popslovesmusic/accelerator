@@ -1,0 +1,68 @@
+{
+  "registry_id": "PCD_MSV_001_POST_PROMOTION_CASCADE_RULES",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "cascade_id",
+      "trigger",
+      "affected_objects",
+      "allowed_updates",
+      "blocked_updates",
+      "review_required"
+    ]
+  },
+  "cascade_rules": [
+    {
+      "cascade_id": "MSV001-SUCCESS-CASCADE-V1",
+      "trigger": "MST-001 and OASSOC-001 pass MSV-001-THEOREM-PROMOTION-GATE-V1",
+      "affected_objects": [
+        "-(i)",
+        "O",
+        "Ref",
+        "d_Omega",
+        "GAP_1_orientation_from_admissibility_structure",
+        "operator_algebra_closure_registry",
+        "paper4_minus_i_selection_derivation"
+      ],
+      "allowed_updates": [
+        "mark minimizer switching as simulation-supported",
+        "mark restricted O associativity as simulation-supported",
+        "upgrade selected dependent claims to TS4/C4 where all other dependencies pass",
+        "reduce GAP_1 blocking scope"
+      ],
+      "blocked_updates": [
+        "do not mark -(i) fully derived",
+        "do not mark O algebra globally closed",
+        "do not claim full metric proof for d_Omega",
+        "do not claim physical validation"
+      ],
+      "review_required": true
+    },
+    {
+      "cascade_id": "MSV001-FAILURE-CASCADE-V1",
+      "trigger": "MSV-001 validation fails, contradicts expected behavior, or lacks required provenance",
+      "affected_objects": [
+        "MST-001",
+        "OASSOC-001",
+        "-(i)",
+        "O",
+        "GRA",
+        "operational_curvature",
+        "paper3_relational_geometry_gra_curvature",
+        "paper4_minus_i_selection_derivation"
+      ],
+      "allowed_updates": [
+        "retain TS2 conditional status",
+        "mark simulation result as inconclusive, contested, or exploratory",
+        "route contradiction to dependency cascade review",
+        "create new gap entry if failure exposes missing formal condition"
+      ],
+      "blocked_updates": [
+        "no theorem promotion",
+        "no supported claim language",
+        "no publication upgrade"
+      ],
+      "review_required": true
+    }
+  ]
+}
