@@ -1,0 +1,55 @@
+{
+  "patch_id": "PCD_ZENODO_PUBLICATION_TEMPLATE_V1",
+  "priority": "PUBLICATION_GOVERNANCE",
+  "intent": "Define the governed Zenodo publication template, requiring formal stack declaration, charter compliance, data availability, and citation provenance.",
+  "operations": [
+    {
+      "op": "register_zenodo_template",
+      "target_file": "registry/publication_template_registry.json",
+      "template": {
+        "template_id": "ZENODO_PUBLICATION_V1",
+        "document_type": "archival_bundle",
+        "pcd_formal_stack_version": "PCD-Formal-Stack: v1",
+        "charter_version": "2.3",
+        "required_metadata": [
+          "title",
+          "authors",
+          "description",
+          "license",
+          "keywords",
+          "doi_or_placeholder"
+        ],
+        "required_bundle_contents": [
+          "paper.md",
+          "run_metadata.json",
+          "provenance_manifest.json",
+          "falsification_report.json",
+          "metrics.json",
+          "configs/"
+        ],
+        "data_availability_statement": "All simulation data and configuration files required to reproduce the results are included in this bundle.",
+        "citation_provenance_rule": "Every claim must cite its evidence_id and recovery_path within the bundle."
+      }
+    },
+    {
+      "op": "add_publication_guardrails",
+      "target_file": "registry/lexicon_gap_queue.json",
+      "rules": [
+        {
+          "name": "no_zenodo_publication_without_complete_bundle_v1",
+          "statement": "Zenodo-targeted publications must include paper, metadata, provenance, falsification, and config subdirectories.",
+          "failure_behavior": "block_publication_export"
+        },
+        {
+          "name": "no_citation_without_evidence_id_v1",
+          "statement": "Claims in Zenodo bundles must cite evidence_id and auditable recovery paths.",
+          "failure_behavior": "mark_citation_incomplete"
+        }
+      ]
+    },
+    {
+      "op": "emit_report",
+      "output_path": "registry/reports/zenodo_publication_template_v1_report.json"
+    }
+  ]
+}
