@@ -1,0 +1,45 @@
+{
+  "report_id": "MSV_001_RESULTS_TEMPLATE_V1_REPORT",
+  "timestamp": "2026-05-10T07:00:00Z",
+  "status": "COMPLETED",
+  "patch_id": "PCD_MSV_001_RESULTS_TEMPLATE_V1",
+  "summary": "Defined the formal reporting template for MSV-001 results. Established the results template registry and implemented governance guardrails for theorem promotion and cross-mechanism comparison.",
+  "operations_summary": [
+    {
+      "operation": "create_results_template",
+      "target": "registry/msv_001_results_template.json",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "define_mechanism_result_block",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "define_cross_mechanism_summary",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "define_theorem_status_decision_rules",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "add_results_guardrails",
+      "target": "registry/lexicon_gap_queue.json",
+      "status": "SUCCESS",
+      "guardrails_added": [
+        "no_MSV001_result_without_template_v1",
+        "no_MSV001_promotion_without_cross_mechanism_summary_v1"
+      ]
+    }
+  ],
+  "template_status": {
+    "reporting_template_ready": true,
+    "cross_mechanism_rules_active": true,
+    "decision_rules_registered": true
+  },
+  "charter_compliance_check": {
+    "charter_version": "2.3",
+    "status": "COMPLIANT",
+    "notes": "The results template correctly enforces humility and mechanism independence by mandating standardized cross-mechanism summaries and explicit decision rules for all theorem-status updates."
+  }
+}
