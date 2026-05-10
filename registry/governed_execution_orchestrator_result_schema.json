@@ -1,0 +1,67 @@
+{
+  "registry_id": "PCD_GOVERNED_EXECUTION_ORCHESTRATOR_RESULT_SCHEMA",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "campaign_id",
+      "execution_id",
+      "timestamp",
+      "tools_executed",
+      "mechanism_classes",
+      "phase_results",
+      "artifacts_generated",
+      "aggregation_summary",
+      "failure_routes",
+      "certification_recommendations",
+      "empirical_result_packages",
+      "claim_ledger_updates",
+      "final_campaign_status"
+    ]
+  },
+  "phase_result_block": {
+    "required_fields": [
+      "phase_name",
+      "tool_id",
+      "status",
+      "outputs",
+      "metrics_summary",
+      "blocking_failures",
+      "warnings",
+      "failure_route"
+    ],
+    "allowed_statuses": [
+      "PASS",
+      "FAIL",
+      "WARNING",
+      "SKIPPED"
+    ]
+  },
+  "certification_recommendation_block": {
+    "required_fields": [
+      "tool_id",
+      "current_certification",
+      "recommended_certification",
+      "recommendation_reason",
+      "remaining_gaps",
+      "required_next_actions"
+    ],
+    "allowed_certification_levels": [
+      "C0",
+      "C1",
+      "C2",
+      "C3",
+      "C4",
+      "BLOCKED"
+    ]
+  },
+  "final_campaign_status_values": [
+    "PASS_CERTIFICATION_READY",
+    "PASS_WITH_WARNINGS",
+    "PARTIAL_PASS_REVIEW_REQUIRED",
+    "DOWNGRADE_REQUIRED",
+    "BLOCKED_RUNTIME",
+    "BLOCKED_PROVENANCE",
+    "BLOCKED_CONTRADICTION",
+    "BLOCKED_CERTIFICATION_GATE"
+  ]
+}
