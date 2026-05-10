@@ -1,0 +1,87 @@
+{
+  "patch_id": "PCD_NAVT_TRANSPORT_ALGEBRA_V1",
+  "priority": "ACTIVE_FORMAL_REASONING",
+  "intent": "Define the first algebraic rules for NavT (Transport), including composition along chains, identity transport, and residual thresholding.",
+  "operations": [
+    {
+      "op": "create_navt_composition_registry",
+      "target_file": "registry/navt_composition_registry.json",
+      "schema": {
+        "required_fields": [
+          "expression",
+          "result",
+          "property",
+          "condition",
+          "failure_mode"
+        ]
+      }
+    },
+    {
+      "op": "register_navt_rules",
+      "target_file": "registry/navt_composition_registry.json",
+      "rules": [
+        {
+          "expression": "NavT(a,b) ∘ NavT(b,c)",
+          "result": "NavT(a,c) + delta_T",
+          "property": "chain_composition",
+          "condition": "composition of transport operators along an admissible chain",
+          "failure_mode": "transport_discontinuity"
+        },
+        {
+          "expression": "NavT(a,a)",
+          "result": "I_transport",
+          "property": "identity_transport",
+          "condition": "transport to self is the identity transform",
+          "failure_mode": "identity_drift"
+        }
+      ]
+    },
+    {
+      "op": "define_transport_residual_rule",
+      "target_file": "registry/navt_composition_registry.json",
+      "rule": {
+        "name": "transport_residual_rule_v1",
+        "statement": "The transport residual delta_T = (NavT(a,b) ∘ NavT(b,c)) - NavT(a,c) must remain below a declared threshold tau_T for the chain to be considered consistent.",
+        "failure_behavior": "mark_propagation_inconsistent"
+      }
+    },
+    {
+      "op": "add_navt_guardrails",
+      "target_file": "registry/lexicon_gap_queue.json",
+      "rules": [
+        {
+          "name": "no_associative_transport_without_residual_check_v1",
+          "statement": "Transport composition must not be assumed associative (NavT(a,b) ∘ NavT(b,c) = NavT(a,c)) unless the residual delta_T is proven to be zero.",
+          "failure_behavior": "require_residual_analysis"
+        },
+        {
+          "name": "no_identity_transport_drift_v1",
+          "statement": "NavT(a,a) must evaluate to identity; any nonzero result indicates illegal reference or phase drift.",
+          "failure_behavior": "mark_identity_failure"
+        }
+      ]
+    },
+    {
+      "op": "update_operator_algebra_closure_registry",
+      "target_file": "registry/operator_algebra_closure_registry.json",
+      "operator_id": "NavT",
+      "updates": {
+        "closure_status": "PARTIAL_TRANSPORT_ALGEBRA_DEFINED",
+        "closed_items": [
+          "chain composition rule",
+          "identity transport condition",
+          "transport residual rule"
+        ],
+        "missing_definitions": [
+          "formal composition law for non-local indices",
+          "associativity conditions under varying residue",
+          "explicit threshold tau_T per mechanism class"
+        ]
+      }
+    },
+    {
+      "op": "emit_report",
+      "output_path": "registry/reports/navt_transport_algebra_v1_report.json"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "registry_id": "PCD_NAVT_COMPOSITION_REGISTRY",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "expression",
+      "result",
+      "property",
+      "condition",
+      "failure_mode"
+    ]
+  },
+  "rules": [
+    {
+      "expression": "NavT(a,b) ∘ NavT(b,c)",
+      "result": "NavT(a,c) + delta_T",
+      "property": "chain_composition",
+      "condition": "composition of transport operators along an admissible chain",
+      "failure_mode": "transport_discontinuity"
+    },
+    {
+      "expression": "NavT(a,a)",
+      "result": "I_transport",
+      "property": "identity_transport",
+      "condition": "transport to self is the identity transform",
+      "failure_mode": "identity_drift"
+    }
+  ],
+  "residual_rules": [
+    {
+      "name": "transport_residual_rule_v1",
+      "statement": "The transport residual delta_T = (NavT(a,b) ∘ NavT(b,c)) - NavT(a,c) must remain below a declared threshold tau_T for the chain to be considered consistent.",
+      "failure_behavior": "mark_propagation_inconsistent"
+    }
+  ]
+}

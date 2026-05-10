@@ -514,6 +514,16 @@
       "statement": "Transport contributions must be projected through Pi_A before they are summed or applied to state updates.",
       "failure_behavior": "mark_update_illegal"
     },
+    "no_associative_transport_without_residual_check_v1": {
+      "name": "no_associative_transport_without_residual_check_v1",
+      "statement": "Transport composition must not be assumed associative (NavT(a,b) ∘ NavT(b,c) = NavT(a,c)) unless the residual delta_T is proven to be zero.",
+      "failure_behavior": "require_residual_analysis"
+    },
+    "no_identity_transport_drift_v1": {
+      "name": "no_identity_transport_drift_v1",
+      "statement": "NavT(a,a) must evaluate to identity; any nonzero result indicates illegal reference or phase drift.",
+      "failure_behavior": "mark_identity_failure"
+    },
     "no_OASSOC_promotion_with_pending_obligations_v1": {
       "name": "no_OASSOC_promotion_with_pending_obligations_v1",
       "statement": "OASSOC-001 may not promote while any required proof obligation remains pending or blocked.",
@@ -609,7 +619,17 @@
       "statement": "Transport contributions must be projected through Pi_A before they are summed or applied to state updates.",
       "failure_behavior": "mark_update_illegal"
     },
-    "no_MSV001_acceptance_without_output_validation_v1": {
+    "no_csi_membership_without_admissibility_overlap_v1": {
+      "name": "no_csi_membership_without_admissibility_overlap_v1",
+      "statement": "CSI membership must not be assumed without demonstrating admissibility-window overlap or a declared non-local coupling rule.",
+      "failure_behavior": "route_to_csi_review"
+    },
+    "no_interaction_with_incompatible_residue_v1": {
+      "name": "no_interaction_with_incompatible_residue_v1",
+      "statement": "Processes with mutually exclusive residue constraints (R_i ⊥ R_j) must be excluded from mutual CSI membership.",
+      "failure_behavior": "mark_interaction_illegal"
+    },
+    "no_OASSOC_promotion_with_pending_obligations_v1": {
       "name": "no_MSV001_acceptance_without_output_validation_v1",
       "statement": "MSV-001 runs may not support MST-001 or OASSOC-001 unless all required output validation rules pass.",
       "failure_behavior": "block_theorem_promotion"
