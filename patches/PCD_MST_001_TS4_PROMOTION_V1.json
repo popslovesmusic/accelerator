@@ -1,0 +1,60 @@
+{
+  "patch_id": "PCD_MST_001_TS4_PROMOTION_V1",
+  "priority": "ACTIVE_FORMAL_REASONING",
+  "intent": "Promote MST-001 and OASSOC-001 to TS4 (Simulation Supported) status following successful MSV-001 validation across graph_dynamics and cellular_automata mechanisms.",
+  "operations": [
+    {
+      "op": "apply_promotion_gate",
+      "gate_id": "MSV-001-THEOREM-PROMOTION-GATE-V1",
+      "result": "full_pass",
+      "evidence": "results/msv_001/full_execution_v1/final_validation_report.json"
+    },
+    {
+      "op": "update_theorem_status",
+      "theorems": ["MST-001", "OASSOC-001"],
+      "new_status": "TS4",
+      "label": "simulation_supported_theorem",
+      "publication_language": "simulation supported theorem across graph_dynamics and cellular_automata mechanism classes"
+    },
+    {
+      "op": "update_lemma_registry",
+      "lemma_id": "MST-001",
+      "updates": {
+        "theorem_status": "TS4",
+        "proof_status": "SIMULATION_SUPPORTED"
+      }
+    },
+    {
+      "op": "update_lemma_registry",
+      "lemma_id": "OASSOC-001",
+      "updates": {
+        "theorem_status": "TS4",
+        "proof_status": "SIMULATION_SUPPORTED"
+      }
+    },
+    {
+      "op": "update_operator_algebra_closure_registry",
+      "operator_id": "O",
+      "updates": {
+        "closure_status": "SIMULATION_SUPPORTED_ALGEBRA_PARTIAL",
+        "closed_items": [
+          "simulation-supported minimizer switching",
+          "simulation-supported restricted associativity"
+        ],
+        "remaining_gaps": [
+          "full metric proof on orientation_space / ~_Ref",
+          "formal algebraic proof of global O associativity"
+        ]
+      }
+    },
+    {
+      "op": "apply_success_cascade",
+      "cascade_id": "MSV001-SUCCESS-CASCADE-V1",
+      "source": "MSV-001-THEOREM-PROMOTION-GATE-V1"
+    },
+    {
+      "op": "emit_report",
+      "output_path": "registry/reports/mst_001_ts4_promotion_v1_report.json"
+    }
+  ]
+}

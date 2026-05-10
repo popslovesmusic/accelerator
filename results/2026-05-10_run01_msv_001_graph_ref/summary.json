@@ -1,0 +1,59 @@
+{
+    "config": {
+        "experiment_id": "MSV-001-GRAPH-REF-V1",
+        "validation_id": "MSV-001",
+        "target_theorems": [
+            "MST-001",
+            "OASSOC-001"
+        ],
+        "mechanism_class": "graph_dynamics",
+        "tool_id": "graph_dynamics_sim_v1_cpp",
+        "seed_set": [
+            101,
+            202,
+            303
+        ],
+        "operator_family": "O_ADM_ORIENT_V1",
+        "admissibility_window": "declared_local_A",
+        "mismatch_cost_function": "mu_rel_reference_v1",
+        "ref_equivalence_rule": "REF_EQUIV_TOPOLOGY_V1",
+        "orientation_metric": "OMEGA_METRIC_V1",
+        "degeneracy_tolerance": 1e-09,
+        "recoupling_rule": "R_RECOUPLING_V1",
+        "observables": [
+            "minimizer_switch_count",
+            "ref_equivalence_preservation_rate",
+            "d_Omega_max",
+            "d_Omega_mean",
+            "degeneracy_region_count",
+            "set_valued_reference_events",
+            "recoupling_event_count",
+            "invalid_transition_count",
+            "orientation_conflict_count"
+        ],
+        "falsification_vectors": [
+            "FV-1_shuffle_or_zero_mismatch_control",
+            "FV-2_boundary_collapse",
+            "FV-3_primitive_suppression_ablation",
+            "FV-4_adversarial_initialization"
+        ],
+        "output_requirements": [
+            "run_metadata.json",
+            "config_snapshot.json",
+            "summary.json",
+            "metrics.json",
+            "operator_trace.json",
+            "minimizer_switch_trace.csv",
+            "ref_equivalence_trace.csv",
+            "recoupling_trace.csv",
+            "falsification_report.json",
+            "provenance_manifest.json"
+        ]
+    },
+    "final_metrics": {
+        "avg_degree": 0.36,
+        "edge_count": 18,
+        "order_parameter": 0.1732479956683043,
+        "runtime_ms": 3.8056373596191406
+    }
+}

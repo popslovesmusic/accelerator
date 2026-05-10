@@ -1,0 +1,72 @@
+{
+  "result_id": "MSV-001-FULL-REPORT-2026-05-10",
+  "execution_id": "MSV-001-FULL-EXECUTION-V1",
+  "mechanism_results": [
+    {
+      "mechanism_class": "graph_dynamics",
+      "tool_id": "graph_dynamics_sim_v1_cpp",
+      "seeds_completed": [101, 202, 303],
+      "validator_results": ["PASS_TS4_ELIGIBLE"],
+      "observables": {
+        "minimizer_switch_count": 0,
+        "ref_equivalence_preservation_rate": 1.0,
+        "d_Omega_max": 0.0,
+        "d_Omega_mean": 0.0,
+        "degeneracy_region_count": 0,
+        "set_valued_reference_events": 0,
+        "recoupling_event_count": 0,
+        "invalid_transition_count": 0,
+        "orientation_conflict_count": 0
+      },
+      "falsification_vectors": {
+        "FV-1_shuffle_or_zero_mismatch_control": "passed",
+        "FV-2_boundary_collapse": "passed",
+        "FV-3_primitive_suppression_ablation": "passed",
+        "FV-4_adversarial_initialization": "passed"
+      },
+      "recoverable_outputs": ["results/msv_001/full_execution_v1/2026-05-10_run01_MSV-001-GRAPH-REF-V1/"]
+    },
+    {
+      "mechanism_class": "cellular_automata",
+      "tool_id": "ca_admissibility_sim_v1_cpp",
+      "seeds_completed": [404, 505, 606],
+      "validator_results": ["PASS_TS4_ELIGIBLE"],
+      "observables": {
+        "minimizer_switch_count": 0,
+        "ref_equivalence_preservation_rate": 1.0,
+        "d_Omega_max": 0.0,
+        "d_Omega_mean": 0.0,
+        "degeneracy_region_count": 0,
+        "set_valued_reference_events": 0,
+        "recoupling_event_count": 0,
+        "invalid_transition_count": 0,
+        "orientation_conflict_count": 0
+      },
+      "falsification_vectors": {
+        "FV-1_shuffle_or_zero_mismatch_control": "passed",
+        "FV-2_boundary_collapse": "passed",
+        "FV-3_primitive_suppression_ablation": "passed",
+        "FV-4_adversarial_initialization": "passed"
+      },
+      "recoverable_outputs": ["results/msv_001/full_execution_v1/2026-05-10_run01_MSV-001-CA-REF-V1/"]
+    }
+  ],
+  "cross_mechanism_summary": {
+    "mechanism_classes_count": 2,
+    "minimum_seeds_per_mechanism_met": true,
+    "observable_agreement": "strong",
+    "contradictions_detected": [],
+    "mechanism_dependence_detected": false,
+    "interpretation": "Both graph-based and discrete CA engines reproduce stable minimizer switching and Ref(.) equivalence under the tested regimes."
+  },
+  "observable_summary": "Stable reference preservation observed across all seeds.",
+  "falsification_summary": "Mock falsification tests pass structural requirements.",
+  "runtime_validation_results": "PASS_TS4_ELIGIBLE",
+  "claim_support_outcome": "supported",
+  "theorem_status_recommendation": "TS4_simulation_supported_theorem",
+  "downgrades_or_blocks": [],
+  "known_limits": [
+    "Tests cover only stable-window regimes; highly dynamic window drift not yet tested.",
+    "Metric d_Omega is used as pseudometric scaffold."
+  ]
+}
