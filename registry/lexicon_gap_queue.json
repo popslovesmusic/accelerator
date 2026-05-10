@@ -1014,6 +1014,16 @@
       "statement": "Contradiction relationships affecting active claims must trigger dependency cascade or anomaly review.",
       "failure_behavior": "route_to_contradiction_review"
     },
+    "no_semantic_graph_ingestion_without_audit_v1": {
+      "name": "no_semantic_graph_ingestion_without_audit_v1",
+      "statement": "Extracted semantic graph edges must pass audit before being used for governed retrieval or context assembly.",
+      "failure_behavior": "mark_graph_untrusted"
+    },
+    "no_support_edge_from_conceptual_note_v1": {
+      "name": "no_support_edge_from_conceptual_note_v1",
+      "statement": "Conceptual tech notes may document or refine objects but cannot create support edges unless bound to governed proof or empirical evidence.",
+      "failure_behavior": "downgrade_edge_to_documents"
+    },
     "no_raw_payload_storage_in_sqlite_v1": {
       "name": "no_backfilled_note_without_frontmatter_v1",
       "statement": "Backfilled tech notes must include required frontmatter before SQLite ingestion.",
