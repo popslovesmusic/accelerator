@@ -59,7 +59,23 @@ Known gap-closures to unlock stronger results:
 
 ---
 
-## 3) Registry updates when proofs are written
+## 3) Series 2: Ontological Stabilization (Addendum 2026-05-10)
+
+The goal of Series 2 is to formalize the transition from **calculable rules** to **stabilized projections** (Geometry, Particles, Fields) based on the "Recursive Residue-Conditioned Continuation" refinements.
+
+### P016 — The Tree Theorem (Branching Projections)
+**Goal:** Prove that particle-like and field-like regimes are differentiated projection branches of the same root recursive process.
+**Uses:** L025, L026, L027
+**Output file:** `proofs/P016_Tree_Theorem.md`
+
+### Initial Series 2 Lemmas:
+- **L025 (Process Cycle Integrity):** Formalize the 6-stage recursive cycle.
+- **L026 (Geometric Projection Identity):** Define geometry as a stabilized projection $\mathcal{P}$ of the process phase.
+- **L027 (Relational Orientation Array):** Define the global $-(i)$ array as a distributed orientation topology supporting branching.
+
+---
+
+## 4) Registry updates when proofs are written
 
 When any `P00N` file is added:
 1. Add the proof to `REGISTRY_proofs.md` (append a new line).

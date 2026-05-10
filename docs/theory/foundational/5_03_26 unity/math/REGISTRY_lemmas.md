@@ -6,17 +6,35 @@ Format:
 ---
 
 L001 | Admissible increment | D1,D2 | draft | from core expression
-L002 | Empty-neighborhood fixed point | D2,D3,D4 | draft | requires “update side evaluated”
-L003 | Participation boundary as fixed-point boundary | L002 | draft | boundary-not-void reading
-L004 | Pre-update constraint precedence | D2,A2 | draft | narrative; can formalize later
-L005 | R-conditioned closure constraint | D5,A3 | draft | tighten via explicit predicate if desired
-L006 | Oriented window from valve inequality | D1 | draft | provides boundary-normal orientation scaffold for Aα (G1)
-L007 | Induced reference -(i) from selection | L006 | draft | defines -(i)α as Ref(selection output); set-valued under degeneracy (G1, conditional)
-L008 | Transport composition + identity scaffold | (transport def) | draft | minimal axioms required to make propagation identities meaningful (G2)
-L009 | Transport residual propagation consistency | L008 | draft | defines δ_T check: δ_T=0 ⇒ compositional propagation identity (G2, conditional)
-L010 | CSI membership by admissibility overlap | (Aα def) | draft | defines β∈csi(α)⇔Aα∩Aβ≠∅ under residue context (G3, conditional)
-L011 | Overlap membership symmetry + residue dependence | L010 | draft | proves symmetry and residue-conditioned neighborhood consequence (G3)
-L012 | Compact–Strong Residue Equivalence | (R spec), (NavT spec) | draft | gap target: relate R=∫δC to R=ΣΠ_A(NavT) via explicit ℛ and Ψ
+L002 | Empty-neighborhood fixed point | D2,D3,D4 | draft | requires “zero sum” identity
+L003 | Participation boundary | L002 | draft | fixed point as boundary condition
+L004 | Pre-update precedence | D2 | draft | admissibility filtering is pre-update
+L005 | Residue-conditioned closure | D5 | draft | consistency across biconditional
+L006 | Oriented Window | D1 | draft | oriented boundary from gradient
+L007 | Induced Reference | L006 | draft | orientation from mismatch selection
+L008 | Transport composition | (NavT spec) | draft | identity + composition scaffold
+L009 | Transport residual | L008 | draft | residual measures consistency
+L010 | Neighborhood membership | (csi spec) | draft | membership by window overlap
+L011 | Overlap membership symmetry | L010 | draft | proves symmetry and residue dependence
+L012 | Compact–Strong Equivalence | (R spec) | draft | gap target for residue forms
 L013 | Admissible Increment (v2) | D1,D2 | simulated | Supersedes L001; verified via MSI-REF-2026-05-10
-L014 | Empty-Neighborhood Fixed Point (v2) | D2,D3,D4 | simulated | Supersedes L002; verified via MSI-REF-2026-05-10
-L015 | Residue-Conditioned Closure (v2) | D5 | simulated | Supersedes L005; verified via MSI-REF-2026-05-10
+L014 | Empty-Neighborhood (v2) | D2,D3,D4 | simulated | Supersedes L002; verified via MSI-REF-2026-05-10
+L015 | Residue Closure (v2) | D5 | simulated | Supersedes L005; verified via MSI-REF-2026-05-10
+L016 | Oriented Window (v2) | D1 | simulated | Supersedes L006; verified via G1-ORIENTATION
+L017 | Induced Reference (v2) | L016 | simulated | Supersedes L007; verified via G1-ORIENTATION
+L018 | Transport Composition (v2) | (NavT spec) | simulated | Supersedes L008; verified via G2-TRANSPORT
+L019 | Transport Residual (v2) | L018 | simulated | Supersedes L009; verified via G2-TRANSPORT
+L020 | Neighborhood Membership (v2) | (csi spec) | simulated | Supersedes L010; verified via G3-NEIGHBORHOOD
+L021 | csi Symmetry (v2) | L020 | simulated | Supersedes L011; verified via G3-NEIGHBORHOOD
+L022 | Admissible Increment (v3) | D1, D2 | formally_proven | Supersedes L013; symbolic proof P009
+L023 | Empty Neighborhood (v3) | D2, D3, D4 | formally_proven | Supersedes L014; symbolic proof P010
+L024 | Residue Closure (v3) | D5 | formally_proven | Supersedes L015; symbolic proof P011
+L025 | Process Cycle Integrity (v1) | (Cycle spec) | draft | heuristic definition of 6-stage cycle
+L026 | Geometric Projection (v1) | (Projection spec) | draft | heuristic definition of geometry as shadow
+L027 | Relational Array (v1) | (Array spec) | draft | heuristic definition of branching topology
+L028 | Process Cycle Integrity (v2) | L024 | simulated | Supersedes L025; verified via PHASE2-ONTOLOGY
+L029 | Geometric Projection (v2) | (P spec) | simulated | Supersedes L026; verified via PHASE2-ONTOLOGY
+L030 | Relational Array (v2) | L017 | simulated | Supersedes L027; verified via PHASE2-ONTOLOGY
+L031 | Process Cycle Integrity (v3) | P017 | formally_proven | Supersedes L028; symbolic proof P017
+L032 | Geometric Projection (v3) | P018 | formally_proven | Supersedes L029; symbolic proof P018
+L033 | Relational Array (v3) | P019 | formally_proven | Supersedes L030; symbolic proof P019
