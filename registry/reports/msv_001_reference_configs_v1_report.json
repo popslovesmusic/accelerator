@@ -1,0 +1,37 @@
+{
+  "report_id": "MSV_001_REFERENCE_CONFIGS_V1_REPORT",
+  "timestamp": "2026-05-10T04:30:00Z",
+  "status": "COMPLETED",
+  "patch_id": "PCD_MSV_001_REFERENCE_CONFIGS_V1",
+  "summary": "Created reference MSV-001 experiment configs for graph dynamics and cellular automata mechanisms. Established a central reference index and implemented governance guardrails for reproducible validation.",
+  "operations_summary": [
+    {
+      "operation": "create_reference_config",
+      "ids": ["MSV-001-GRAPH-REF-V1", "MSV-001-CA-REF-V1"],
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "create_reference_config_index",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "add_reference_config_guardrails",
+      "target": "registry/lexicon_gap_queue.json",
+      "status": "SUCCESS",
+      "guardrails_added": [
+        "no_MSV001_reference_claim_without_two_configs_v1",
+        "no_MSV001_config_without_falsification_vectors_v1"
+      ]
+    }
+  ],
+  "reference_status": {
+    "graph_dynamics_ref_ready": true,
+    "cellular_automata_ref_ready": true,
+    "reproducible_validation_enabled": true
+  },
+  "charter_compliance_check": {
+    "charter_version": "2.3",
+    "status": "COMPLIANT",
+    "notes": "Reference configurations correctly enforce mechanism independence by providing standardized test cases for distinct engine classes, fulfilling the requirement for cross-model validation."
+  }
+}

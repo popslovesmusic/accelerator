@@ -549,6 +549,16 @@
       "statement": "MSV-001 results may not support MST-001 or OASSOC-001 unless all required observables are present.",
       "failure_behavior": "downgrade_to_exploratory_probe"
     },
+    "no_MSV001_reference_claim_without_two_configs_v1": {
+      "name": "no_MSV001_reference_claim_without_two_configs_v1",
+      "statement": "MSV-001 reference validation requires at least graph_dynamics and cellular_automata reference configs before TS4 eligibility.",
+      "failure_behavior": "downgrade_to_single_mechanism_probe"
+    },
+    "no_MSV001_config_without_falsification_vectors_v1": {
+      "name": "no_MSV001_config_without_falsification_vectors_v1",
+      "statement": "MSV-001 reference configs must include FV-1 through FV-4.",
+      "failure_behavior": "mark_config_incomplete"
+    },
     "no_MSV001_TS4_without_runtime_validation_v1": {
       "name": "no_MSV001_TS4_without_runtime_validation_v1",
       "statement": "MSV-001 may not support TS4 promotion unless validate_msv_001_run.py returns PASS_TS4_ELIGIBLE.",
