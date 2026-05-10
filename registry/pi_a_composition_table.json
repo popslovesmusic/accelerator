@@ -1,0 +1,43 @@
+{
+  "registry_id": "PCD_PI_A_COMPOSITION_TABLE",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "expression",
+      "result",
+      "property",
+      "condition",
+      "failure_mode"
+    ]
+  },
+  "rules": [
+    {
+      "expression": "Pi_A(Pi_A(Delta))",
+      "result": "Pi_A(Delta)",
+      "property": "idempotence",
+      "condition": "projection into a stable admissibility window remains in the window",
+      "failure_mode": "unstable_window_drift"
+    },
+    {
+      "expression": "Pi_A(Delta) where gate(Delta) == false",
+      "result": "0_transition",
+      "property": "null_projection",
+      "condition": "inadmissible increments are projected to null",
+      "failure_mode": "leaky_admissibility_filter"
+    },
+    {
+      "expression": "Pi_A(NavT(a,b))",
+      "result": "admissible_transport_contribution",
+      "property": "transport_filtering",
+      "condition": "raw transport contributions must be projected through Pi_A before accumulation",
+      "failure_mode": "unprojected_transport_violation"
+    },
+    {
+      "expression": "Pi_A(Delta) where Delta is already in A",
+      "result": "Delta",
+      "property": "identity_within_window",
+      "condition": "admissible increments are preserved under projection",
+      "failure_mode": "over-projection_distortion"
+    }
+  ]
+}

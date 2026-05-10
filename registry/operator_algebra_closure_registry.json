@@ -60,15 +60,20 @@
     },
     {
       "operator_id": "Ref",
-      "closure_status": "UNDERDEFINED",
+      "closure_status": "PARTIALLY_DEFINED",
       "known_signature": {
         "description": "Reference-projection/selection operator."
       },
+      "closed_items": [
+        "codomain (orientation_space)",
+        "equivalence-class behavior (REF_EQUIV_TOPOLOGY_V1)",
+        "relation to -(i)",
+        "set-valued degeneracy handling (MST-001 scaffold)"
+      ],
       "missing_definitions": [
-        "codomain",
-        "equivalence-class behavior",
-        "relation to orientation_space",
-        "set-valued degeneracy handling"
+        "full identity rule",
+        "inverse/reconstruction logic",
+        "formal mapping to specific mechanism-class observables"
       ],
       "composition_rules_needed": false,
       "identity_rules_needed": true,
@@ -103,16 +108,26 @@
     },
     {
       "operator_id": "Pi_A",
-      "closure_status": "PARTIALLY_DEFINED",
+      "closure_status": "PARTIAL_PROJECTION_ALGEBRA_DEFINED",
       "known_signature": {
-        "inputs": ["transition_space", "topological_constraint_space"],
-        "outputs": ["transition_space"]
+        "inputs": [
+          "transition_space",
+          "topological_constraint_space"
+        ],
+        "outputs": [
+          "transition_space"
+        ]
       },
+      "closed_items": [
+        "idempotence rule",
+        "null projection rule",
+        "transport filtering requirement",
+        "identity within window rule"
+      ],
       "missing_definitions": [
-        "projection idempotence condition",
-        "interaction with gate",
-        "interaction with residue context",
-        "composition with NavT"
+        "interaction with varying residue context",
+        "formal composition law with non-local NavT",
+        "idempotence stability under window drift"
       ],
       "composition_rules_needed": true,
       "identity_rules_needed": true,
@@ -120,7 +135,10 @@
       "blocked_claims": [
         "closed_admissibility_projection_algebra"
       ],
-      "target_proofs": ["OBJ-P001", "OBJ-P004"]
+      "target_proofs": [
+        "OBJ-P001",
+        "OBJ-P004"
+      ]
     }
   ]
 }
