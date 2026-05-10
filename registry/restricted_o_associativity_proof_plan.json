@@ -1,0 +1,78 @@
+{
+  "registry_id": "PCD_RESTRICTED_O_ASSOCIATIVITY_PROOF_PLAN",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "theorem_id",
+      "proof_goal",
+      "scope",
+      "assumptions",
+      "required_definitions",
+      "proof_obligations",
+      "failure_cases",
+      "promotion_criteria"
+    ]
+  },
+  "theorems": [
+    {
+      "theorem_id": "OASSOC-001",
+      "proof_goal": "Show that O composition is associative only within a restricted domain where intermediate admissibility, Ref(.) equivalence, residue context, and legal recoupling conditions are preserved.",
+      "scope": "restricted_conditional_associativity_not_global_associativity",
+      "assumptions": [
+        "all L compositions remain admissible or legally recoupled",
+        "all Q transitions preserve Ref(.) equivalence or cite R_RECOUPLING_V1",
+        "no unresolved degeneracy collapse occurs",
+        "residue context remains consistent across groupings",
+        "d_Omega divergence remains bounded where reference comparison is required"
+      ],
+      "required_definitions": [
+        "O_ADM_ORIENT_V1",
+        "REF_MINUS_I_V1",
+        "REF_EQUIV_TOPOLOGY_V1",
+        "R_RECOUPLING_V1",
+        "OMEGA_METRIC_V1",
+        "O-ASSOC-001"
+      ],
+      "proof_obligations": [
+        {
+          "obligation_id": "OASSOC-PO-001",
+          "statement": "Show that L-component associativity holds for admissible-preserving chains."
+        },
+        {
+          "obligation_id": "OASSOC-PO-002",
+          "statement": "Show that Q-component grouping equivalence holds when Ref(.) equivalence class is preserved."
+        },
+        {
+          "obligation_id": "OASSOC-PO-003",
+          "statement": "Show that equivalence-changing groupings remain conditionally associative only when R_RECOUPLING_V1 supplies the same legal recoupling context to both groupings."
+        },
+        {
+          "obligation_id": "OASSOC-PO-004",
+          "statement": "Show that degeneracy boundaries preserve grouping equivalence only when set-valued -(i) is retained."
+        },
+        {
+          "obligation_id": "OASSOC-PO-005",
+          "statement": "Classify all blocked-L, forbidden-Q, memoryless-recouping, and inconsistent-residue cases as non-associative or invalid."
+        }
+      ],
+      "failure_cases": [
+        "blocked_intermediate_L_without_recoupling",
+        "forbidden_Q_transition",
+        "Ref_equivalence_change_without_R_RECOUPLING_V1",
+        "degeneracy_collapse_to_single_reference",
+        "inconsistent_residue_context_between_groupings",
+        "unbounded_d_Omega_divergence"
+      ],
+      "promotion_criteria": {
+        "from": "ASSOCIATIVITY_ANALYSIS_REGISTERED",
+        "to": "CONDITIONAL_ASSOCIATIVITY_THEOREM",
+        "requires": [
+          "all OASSOC proof obligations discharged conditionally or fully",
+          "failure cases classified",
+          "operator_algebra_closure_registry updated",
+          "theorem_status_registry updated"
+        ]
+      }
+    }
+  ]
+}
