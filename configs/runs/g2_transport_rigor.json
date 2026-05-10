@@ -1,0 +1,27 @@
+{
+  "experiment_id": "G2-REF-2026-05-10-TRANSPORT",
+  "intent": "validate_gap_2_transport",
+  "seeds": [701, 802, 903, 1004, 1105],
+  "components": [
+    {
+      "tool": "igsoa_complex_1d_cpp",
+      "base_config": {
+        "num_nodes": 512,
+        "R_c": 1.5,
+        "kappa": 0.8,
+        "gamma": 0.05,
+        "steps": 500
+      },
+      "observable": "psi_squared_mean"
+    },
+    {
+      "tool": "signal_scope_phase_continuation_engine",
+      "base_config": {
+        "mismatch_threshold": 0.5,
+        "inductive_gain": 1.2,
+        "steps": 1000
+      },
+      "observable": "phase_locking_value"
+    }
+  ]
+}
