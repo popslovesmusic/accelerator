@@ -1,0 +1,57 @@
+{
+  "registry_id": "PCD_SIMULATION_RESULT_ARTIFACT_GOVERNANCE",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "artifact_id",
+      "execution_id",
+      "artifact_type",
+      "canonical_path",
+      "content_hash",
+      "size_bytes",
+      "storage_tier",
+      "retention_policy",
+      "compression_status",
+      "sqlite_index_status",
+      "provenance_binding"
+    ]
+  },
+  "artifact_classes": {
+    "raw_output": {
+      "storage": "filesystem_only",
+      "sqlite_policy": "metadata_path_hash_summary_only"
+    },
+    "derived_metric": {
+      "storage": "filesystem_and_sqlite_summary",
+      "sqlite_policy": "summary_values_allowed"
+    },
+    "trace_file": {
+      "storage": "filesystem_only_or_compressed",
+      "sqlite_policy": "path_hash_schema_summary_only"
+    },
+    "report": {
+      "storage": "filesystem_canonical",
+      "sqlite_policy": "indexed_text_and_metadata_allowed"
+    },
+    "empirical_result_package": {
+      "storage": "filesystem_canonical",
+      "sqlite_policy": "full_metadata_index_allowed"
+    }
+  },
+  "storage_tiers": {
+    "hot": "Recent active campaign artifacts needed for validation or review.",
+    "warm": "Completed campaign artifacts retained for claim support and reproducibility.",
+    "cold": "Archived artifacts retained for provenance but not frequent querying.",
+    "quarantine": "Invalid, contradictory, corrupted, or provenance-failed artifacts retained for audit only."
+  },
+  "hash_and_recovery_policy": {
+    "hash_required": true,
+    "allowed_hashes": [
+      "sha256"
+    ],
+    "recoverable_path_required": true,
+    "provenance_manifest_required": true,
+    "missing_artifact_behavior": "invalidate_or_downgrade_dependent_claims"
+  },
+  "entries": []
+}

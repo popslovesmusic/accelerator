@@ -969,6 +969,21 @@
       "statement": "Agent search results from SQLite must be tied to a recent ingestion report and content hashes.",
       "failure_behavior": "warn_or_reingest"
     },
+    "no_raw_payload_storage_in_sqlite_v1": {
+      "name": "no_raw_payload_storage_in_sqlite_v1",
+      "statement": "Large raw simulation outputs must not be stored directly in SQLite; only metadata, summaries, hashes, and paths may be indexed.",
+      "failure_behavior": "route_to_artifact_storage_review"
+    },
+    "no_claim_support_from_unhashed_artifact_v1": {
+      "name": "no_claim_support_from_unhashed_artifact_v1",
+      "statement": "Simulation artifacts may not support claims unless they have recoverable paths, hashes, and provenance bindings.",
+      "failure_behavior": "downgrade_or_block_claim_support"
+    },
+    "no_artifact_deletion_without_retention_review_v1": {
+      "name": "no_artifact_deletion_without_retention_review_v1",
+      "statement": "Artifacts linked to active claims, theorem support, contradiction review, or certification status may not be deleted without retention review.",
+      "failure_behavior": "block_deletion"
+    },
     "no_closed_operator_claim_without_algebra_v1": {
       "statement": "An operator may not be described as algebraically closed until its composition, identity, codomain, and failure rules are registered.",
       "failure_behavior": "downgrade_to_partially_defined"
