@@ -1,0 +1,132 @@
+{
+  "audit_metadata": {
+    "id": "PCD_SYSTEM_AUDIT_20260511_V1",
+    "timestamp": "2026-05-11T10:00:00Z",
+    "auditor": "Gemini-CLI",
+    "governance_context": {
+      "charter": "2.3",
+      "local_authority": "GEMINI.md"
+    }
+  },
+  "executive_summary": "The research platform is structurally locked and ready for elevation campaigns. Significant progress has been made in May 2026 with multiple C4 claims verified under the Ground-Zero declaration of Charter v2.3. However, critical blockers remain in tool certification levels for certain core engines, particularly graph_dynamics and ca_admissibility which remain at C1.",
+  "system_map": {
+    "governance": "registry/governance/",
+    "lexicon": "registry/lexicon_canonical.json, registry/lexicon_alias_map.json, registry/lexicon_validation_registry.json",
+    "math": "registry/math_registry.json, docs/theory/foundational/5_03_26 unity/math/",
+    "simulations": "tools/, oneproc/workers/",
+    "orchestration": "oneproc/, scripts/multi_sim_runner.py",
+    "results": "results/, outputs/runs/"
+  },
+  "canonical_files": [
+    "GEMINI.md",
+    "registry/compliance_charter_v2_3.json",
+    "registry/lexicon_canonical.json",
+    "registry/math_registry.json",
+    "scripts/governance_gate.py"
+  ],
+  "deprecated_or_uncertain_files": [
+    "results prior to 2026-05-01 (lost data per Ground-Zero declaration in Charter v2.3)",
+    "lexicon.json (superseded by lexicon_canonical.json)",
+    "registry/legacy_tools_backup.json"
+  ],
+  "governance_status": {
+    "status": "PASS",
+    "active_gates": [
+      "C1-C6 Claim Ladder",
+      "Lexicon In/Out Validation",
+      "Independent Measurement Enforcement (C4+)",
+      "C++ Preference Rule"
+    ],
+    "fail_points": [
+      "C++ binary dependency failures (oneAPI) in FSA engine",
+      "Core engines lagging at C1 certification"
+    ]
+  },
+  "lexicon_status": {
+    "canonical_terms": 876,
+    "aliases": 822,
+    "gap_queue": 46,
+    "validated_terms": 64,
+    "status": "PARTIAL",
+    "blockers": [
+      "Core operator 'delta' remains at L0/gap_open",
+      "Mathematical objects (E_alpha, Pi_A) lack L3 operational validation"
+    ]
+  },
+  "math_status": {
+    "total_lemmas": 33,
+    "simulated": [
+      "L001 (Admissible Increment)",
+      "L002 (Empty-Neighborhood Fixed Point)",
+      "L003 (Boundary Condition)",
+      "L004 (Constraint Precedence)",
+      "L005 (Residue-Conditioned Closure)"
+    ],
+    "verified": [
+      "L005 (Rigor-5 via MSI-REF-2026-05-10)"
+    ],
+    "status": "CURRENT"
+  },
+  "simulation_status": {
+    "engines": 55,
+    "c4_certified": [
+      "fsa_rule_engine_sim_v1_cpp",
+      "tda_module_v1_cpp",
+      "tda_module_v2_cpp",
+      "agent_based_sim_v1_cpp",
+      "structural_box_sim_cpp",
+      "satp_higgs_sim_cpp"
+    ],
+    "c1_blocked": [
+      "graph_dynamics_sim_v1_cpp",
+      "ca_admissibility_sim_v1_cpp"
+    ],
+    "status": "WARNING",
+    "notes": "oneAPI dependency issues prevent C++ FSA load; fallback to Python reference is active."
+  },
+  "validation_status": {
+    "falsification_vectors": [
+      "FV-1 (Zero Mismatch)",
+      "FV-2 (Max Residue)",
+      "FV-3 (Random Orientation)",
+      "FV-4 (Coupling Decoupling)"
+    ],
+    "multi_seed_rigor": "Standardized at 5 seeds for C4 claims",
+    "cross_mechanism": "Mandatory dual-mechanism support for C4+",
+    "status": "PASS"
+  },
+  "claim_status": {
+    "c4_claims": 10,
+    "latest_claim": "MSI-REF-2026-05-10 (Mathematical-Simulation Interlock)",
+    "status": "CURRENT"
+  },
+  "publication_status": {
+    "papers_compliant": [
+      "MSI-REF-2026-05-10",
+      "RESOLUTION_TRANSITION_2026-05-03",
+      "TECHNICAL_PAPER_ONE_PROCESS_STABILITY_2026-05-01"
+    ],
+    "templates": "registry/writer_templates.json",
+    "status": "CURRENT"
+  },
+  "blocking_issues": [
+    {
+      "id": "BLOCK-P0-CERT",
+      "desc": "Core engines (graph_dynamics, ca_admissibility) at C1 block TS4 promotion for major lemmas."
+    },
+    {
+      "id": "CPP-DEP-FAIL",
+      "desc": "FSA C++ binary dependency (oneAPI) causing fallback to Python in C4+ runs."
+    }
+  ],
+  "warnings": [
+    "Ground-Zero declaration: No empirical claims prior to May 2026 are valid for verification.",
+    "Delta operator primarily implicit; requires explicit operationalization for L3 status."
+  ],
+  "recommended_next_actions": [
+    "Resolve oneAPI dependency for fsa_rule_engine_sim_v1_cpp.",
+    "Elevate graph_dynamics and ca_admissibility certification to C2+.",
+    "Perform Lexicon Out-Check on all provisional 'warp' terminology migrations."
+  ],
+  "agent_notes_for_chatgpt": "The system is strictly governed by Charter v2.3. All empirical evidence MUST be recoverable from 2026-05-xx directories. Mathematical lemmas are the current priority for MSI validation. Use scripts/governance_gate.py to verify all claims before publication."
+}
