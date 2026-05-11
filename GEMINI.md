@@ -31,6 +31,42 @@ Your mission is to answer theoretical questions from **"THE LAW OF THE ONE PROCE
 - **Term Gating:** A claim using `GAP_OPEN` terms cannot be classified above `proposed_interpretation` unless the term is scope-limited and operationalized.
 - **Math Alignment:** Before finalizing any claim at Level C5+, verify alignment with the mathematical lemmas in `registry/math_registry.json`. Claims contradicting `verified` or `simulated` lemmas must be downgraded.
 
+## Claim-Evidence Graph Reasoning Rule
+
+Gemini may use claim-evidence graph packets as reasoning context.
+
+These packets are advisory synthesis artifacts built from database projections, reports, registry metadata, tool health, and command-evidence audits.
+
+Gemini must not treat the database or graph as source of truth.
+
+Lexicon and canonical registries remain semantic and governance authority. Current command evidence remains runtime authority.
+
+Gemini may recommend next actions, identify gaps, and summarize evidence, but may not promote claims or terms unless the proper claim gate and lexicon validation evidence explicitly support that promotion.
+
+## Orientation-Aware Execution Planning Rule
+
+Gemini may generate advisory execution plans using current command evidence, claim-evidence packets, tool health, orientation-aware retrieval, and canonical governance constraints.
+
+Execution plans are not execution authority.
+
+Gemini must not run simulations, modify files, patch registries, promote claims, or begin publication work from a plan alone. Any execution step requires explicit user authorization.
+
+Plans must distinguish current evidence, canonical authority, historical residue, supersession cautions, and missing evidence.
+
+When recommending work, Gemini should identify the appropriate executor: Codex for audit/repair/maintenance, Gemini for synthesis/simulation/writing, or Human for judgment/approval.
+
+## Registry-to-Runtime Traceability Rule
+
+Gemini may use registry-to-runtime traceability reports as reasoning context.
+
+Traceability reports are observational. They link canonical registry declarations, tool manifests, validation artifacts, DB projections, audit reports, and command evidence.
+
+Traceability does not certify tools, promote claims, or redefine terms.
+
+Gemini must distinguish declaration, implementation, runtime evidence, validation artifact presence, certification strength, and claim support.
+
+If traceability reports identify conflicts or missing links, Gemini may recommend next actions but must not repair, promote, or certify without explicit user authorization and proper gates.
+
 ---
 
 ## Core Principle (New â€“ Critical)

@@ -83,6 +83,46 @@ To audit supersession edge quality (missing refs, self-edges, duplicates, 2-cycl
 python scripts/db/audit_supersession_edges.py --db registry/db/acellorator_index.sqlite --sample 50
 ```
 
+## Claim-Evidence Graph
+
+A read-only graph view of research metadata (claims, tools, reports, artifacts) is available via:
+
+```bash
+python scripts/claim_evidence_graph.py
+```
+
+Reasoning context for Gemini can be generated using:
+
+```bash
+python scripts/gemini_claim_context.py --query <topic>
+```
+
+## Execution Planning
+
+Advisory execution plans ranked by orientation-aware evidence and governance constraints can be generated via:
+
+```bash
+python scripts/orientation_execution_plan.py --query <task>
+```
+
+**Note:** Execution plans are advisory only. Actual execution requires separate authorization.
+
+## Registry-to-Runtime Traceability
+
+Read-only traceability reports linking registry entries to runtime artifacts, validation files, and DB rows can be generated via:
+
+```bash
+python scripts/registry_runtime_trace.py --query <topic>
+```
+
+Gemini context packets for traceability reasoning:
+
+```bash
+python scripts/gemini_trace_context.py --query <topic>
+```
+
+**Boundary:** Traceability is observational and advisory. It must not override SSOT registries or promote claims automatically.
+
 ## Governance Boundary
 
 **CRITICAL:** This database is a **PROJECTION LAYER** only.
