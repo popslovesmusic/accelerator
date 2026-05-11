@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Registry for operators, domains, codomains, and composition semantics.",
+    "status": "provisional"
+  },
+  "operators": [
+    {
+      "symbol": "Delta",
+      "name": "Transition Operator",
+      "domain": ["process_state"],
+      "codomain": ["process_state"],
+      "arity": "unary",
+      "orientation_requirements": ["orientation_frame"],
+      "residue_constraints": ["residue_state"],
+      "composition_rules": ["sequential"],
+      "closure_status": "partial",
+      "known_failures": [],
+      "open_questions": ["explicit representation of orientation sensitivity"],
+      "provisional_status": true
+    },
+    {
+      "symbol": "Pi_A",
+      "name": "Admissibility Projection",
+      "domain": ["process_state", "admissibility_window"],
+      "codomain": ["process_state"],
+      "arity": "binary",
+      "orientation_requirements": ["orientation_frame"],
+      "closure_status": "undefined",
+      "known_failures": [],
+      "open_questions": ["threshold behavior at window boundaries"],
+      "provisional_status": true
+    },
+    {
+      "symbol": "NavT",
+      "name": "Transport Operator",
+      "domain": ["process_state"],
+      "codomain": ["csi_domain"],
+      "arity": "unary",
+      "orientation_requirements": ["orientation_frame"],
+      "closure_status": "partial",
+      "known_failures": [],
+      "open_questions": ["conservation of residue during transport"],
+      "provisional_status": true
+    }
+  ]
+}

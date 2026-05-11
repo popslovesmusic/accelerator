@@ -103,6 +103,20 @@ CREATE TABLE IF NOT EXISTS supersession_edges (
     FOREIGN KEY (to_artifact_id) REFERENCES artifacts(id)
 );
 
+CREATE TABLE IF NOT EXISTS compressed_residue (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    packet_id TEXT UNIQUE NOT NULL,
+    query TEXT,
+    compression_mode TEXT,
+    source_count INTEGER,
+    confidence TEXT,
+    path TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    source_hash TEXT,
+    orientation_status TEXT,
+    FOREIGN KEY (orientation_status) REFERENCES orientation_status_types(status)
+);
+
 CREATE INDEX IF NOT EXISTS idx_artifacts_path ON artifacts(path);
 CREATE INDEX IF NOT EXISTS idx_artifacts_status ON artifacts(orientation_status);
 CREATE INDEX IF NOT EXISTS idx_audit_reports_report_id ON audit_reports(report_id);

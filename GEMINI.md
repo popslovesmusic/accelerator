@@ -67,7 +67,74 @@ Gemini must distinguish declaration, implementation, runtime evidence, validatio
 
 If traceability reports identify conflicts or missing links, Gemini may recommend next actions but must not repair, promote, or certify without explicit user authorization and proper gates.
 
+## Governed Memory Rule
+
+Gemini may use governed memory packets as contextual assistance.
+
+Memory packets are orientation-aware retrieval artifacts assembled from audits, reports, traceability links, claim packets, and current command evidence.
+
+Memory is not semantic authority, claim authority, or runtime authority.
+
+Gemini must preserve residue labels, uncertainty, supersession cautions, and conflicts when reasoning from memory.
+
+Gemini may summarize and recommend next actions from memory, but may not promote claims, redefine terms, or treat memory synthesis as proof.
+
+## Cross-Tool Causal Provenance Rule
+
+Gemini may use cross-tool causal provenance packets as reasoning context.
+
+Causal provenance is observational lineage metadata connecting audits, reports, simulations, validations, claims, runtime evidence, and registry declarations.
+
+Provenance is not semantic authority or proof.
+
+Gemini must preserve edge confidence, residue labels, conflicts, and cycle risks.
+
+Provenance may reason about influence, support, contradiction, and dependency relationships, but may not promote claims or redefine terms from provenance synthesis alone.
+
+## Semantic Residue Compression Rule
+
+Gemini may use semantic residue compression packets as context-reduction aids.
+
+Compressed residue summarizes historical reports, audits, provenance chains, memory packets, and evidence context while preserving links to original sources.
+
+Compressed residue is not source of truth and must not be used to promote claims, redefine terms, or certify tools.
+
+Gemini must preserve uncertainty, conflicts, excluded sources, supersession cautions, and orientation labels when reasoning from compressed residue.
+
+## Formal Object Ontology Rule
+
+Gemini may reason over formal object ontology scaffolds, operator registries, relation registries, and axiom scaffolds.
+
+These structures are provisional mathematical formalization artifacts.
+
+They are not experimentally verified physics.
+
+Gemini must preserve unresolved closure conditions, undefined behavior, known failures, and provisional status labels when discussing the formal math program.
+
+Gemini may assist with consistency analysis, dependency tracing, and closure-gap identification, but may not declare global closure or physical truth from scaffold structure alone.
+
+## Well-Posedness Reasoning Rule
+
+Gemini may reason over well-posedness scaffolds for existence, uniqueness, stability, closure, and failure conditions.
+
+These scaffolds are provisional mathematical artifacts.
+
+Gemini must distinguish local, conditional, conjectured, simulation-supported, symbolic, and formal well-posedness states.
+
+Gemini must not claim global well-posedness, physical truth, or complete closure unless the relevant registry entries and proof status explicitly support it.
+
+## Reconstruction and Inversion Reasoning Rule
+
+Gemini may reason over reconstruction and inversion scaffolds for formal process systems.
+
+These scaffolds describe when projected or observed structures may be mapped back to candidate process states, residue states, orientation frames, admissibility windows, or transport histories.
+
+Gemini must distinguish unique, conditional, partial, multi-valued, and non-invertible reconstruction states.
+
+Gemini must not claim global invertibility, unique reconstruction, physical truth, or complete closure unless the relevant registry entries and proof status explicitly support it.
+
 ---
+
 
 ## Core Principle (New â€“ Critical)
 

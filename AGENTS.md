@@ -372,6 +372,58 @@ DB validation must check:
 
 A healthy DB means the projection layer is usable. It does not mean claims are true, terms are verified, or registries are superseded.
 
+## Governed Memory Rule
+
+Codex/manual patch workflows may use governed memory packets for audit, maintenance, and repair context.
+
+Memory packets are advisory retrieval artifacts only.
+
+Memory may assist with continuity, provenance, traceability, and residue detection, but must not override current command evidence, canonical registries, or explicit user authorization.
+
+Any repair, deletion, suppression, promotion, or migration action still requires explicit authorization.
+
+## Cross-Tool Causal Provenance Rule
+
+Codex/manual patch workflows may use causal provenance packets for audit, maintenance, traceability, and repair planning.
+
+Provenance edges are advisory lineage metadata only.
+
+Pattern-detected or inferred provenance relationships must preserve confidence labels and must not justify deletion, suppression, migration, or promotion without explicit evidence and authorization.
+
+## Semantic Residue Compression Rule
+
+Codex/manual patch workflows may create or inspect semantic residue compression packets for audit, repair, and maintenance context.
+
+Compressed residue is advisory and lossy. It must preserve source links, uncertainty, orientation status, and SSOT boundaries.
+
+Compressed residue must not replace original artifacts, justify deletion, promote claims, or override current command evidence.
+
+## Formal Object Ontology Rule
+
+Codex/manual patch workflows may maintain formal object registries, operator registries, relation registries, and axiom scaffolds.
+
+These structures are provisional formalization artifacts.
+
+Patch workflows must preserve unresolved conditions, known failures, and provisional status labels.
+
+Formal-object scaffolding must not be treated as proof of physical correctness or complete mathematical closure.
+
+## Well-Posedness Maintenance Rule
+
+Codex/manual patch workflows may maintain well-posedness registries and validation scripts.
+
+Do not remove failure modes, open questions, or provisional status labels without explicit authorization and evidence.
+
+Well-posedness scaffolds must not be treated as proof of global closure or physical correctness.
+
+## Reconstruction and Inversion Maintenance Rule
+
+Codex/manual patch workflows may maintain reconstruction and inversion registries and validation scripts.
+
+Do not remove failure modes, information-loss notes, equivalence-class ambiguity, open questions, or provisional status labels without explicit authorization and evidence.
+
+Reconstruction scaffolds must not be treated as proof of global invertibility or physical correctness.
+
 ## Orientation-Aware Retrieval Rule
 
 Orientation-aware retrieval ranks artifacts by admissible relevance to the current task.

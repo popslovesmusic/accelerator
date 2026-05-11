@@ -18,6 +18,7 @@ See `schema.sql` for table definitions.
 - `registry_snapshots`: Metadata about point-in-time registry states.
 - `claim_evidence_links`: Mapping between claims and their supporting evidence artifacts.
 - `supersession_edges`: Explicit tracking of which artifacts supersede others.
+- `compressed_residue`: Metadata for governed semantic summaries.
 
 ## Orientation Status Values
 
@@ -73,11 +74,11 @@ python scripts/db/build_supersession_edges.py --apply
 
 Confidence levels:
 
-- `verified`: Direct current evidence identifies one artifact as superseding another (e.g., explicit declaration or governed registry authority recorded in `evidence_path`).
-- `probable`: Strong filename/path/version relationship supports lineage but no direct declaration.
-- `weak`: Pattern-only suggestion (useful as a hint; do not over-trust).
+- `verified`: Direct current evidence identifies one artifact as superseding another.
+- `probable`: Strong filename/path/version relationship supports lineage.
+- `weak`: Pattern-only suggestion.
 
-To audit supersession edge quality (missing refs, self-edges, duplicates, 2-cycles, confidence ratios):
+To audit supersession edge quality:
 
 ```bash
 python scripts/db/audit_supersession_edges.py --db registry/db/acellorator_index.sqlite --sample 50
@@ -109,7 +110,7 @@ python scripts/orientation_execution_plan.py --query <task>
 
 ## Registry-to-Runtime Traceability
 
-Read-only traceability reports linking registry entries to runtime artifacts, validation files, and DB rows can be generated via:
+Read-only traceability reports linking registry entries to runtime artifacts, validation files, and DB rows:
 
 ```bash
 python scripts/registry_runtime_trace.py --query <topic>
@@ -121,7 +122,101 @@ Gemini context packets for traceability reasoning:
 python scripts/gemini_trace_context.py --query <topic>
 ```
 
-**Boundary:** Traceability is observational and advisory. It must not override SSOT registries or promote claims automatically.
+## Governed Agent Memory
+
+Orientation-aware agent memory for reasoning and maintenance context:
+
+```bash
+python scripts/gemini_memory_context.py --query <topic>
+python scripts/codex_memory_context.py --query <topic>
+```
+
+Memory health and boundary validation:
+
+```bash
+python scripts/agent_memory/memory_health_check.py
+```
+
+## Cross-Tool Causal Provenance
+
+Observational lineage mapping across claims, artifacts, and tools:
+
+```bash
+python scripts/provenance/provenance_query.py --query <topic>
+```
+
+Provenance health and cycle detection:
+
+```bash
+python scripts/provenance/provenance_health_check.py
+```
+
+Reasoning context for Gemini/Codex:
+
+```bash
+python scripts/provenance/provenance_packet_builder.py --query <topic>
+```
+
+## Semantic Residue Compression
+
+Lossy context reduction for large historical research chains:
+
+```bash
+python scripts/residue/compress_residue.py --query <topic> --out outputs/reports/residue_summary.json
+```
+
+Query and health check:
+
+```bash
+python scripts/residue/residue_query.py --query <topic>
+python scripts/residue/residue_health_check.py --path <path>
+```
+
+## Formal Object Ontology
+
+Provisional mathematical scaffolding for process mathematics:
+
+```bash
+python scripts/math/validate_formal_objects.py
+python scripts/math/object_dependency_trace.py --query <topic>
+```
+
+Registries:
+- `registry/formal_objects/formal_object_registry.json`
+- `registry/math/operator_registry.json`
+- `registry/math/relation_registry.json`
+- `registry/math/object_axiom_scaffold.json`
+
+**Boundary:** Formal scaffolding is provisional and does not assert physical truth.
+
+## Governance Boundary
+
+
+The projection layer includes automated health and maintenance utilities.
+
+### Health Check
+
+Integrity, schema, and retrieval readiness are verified via:
+
+```bash
+python scripts/db/db_health_check.py
+```
+
+DB health is also integrated into `scripts/global_validate.py`.
+
+### Maintenance
+
+Routine diagnostics and non-mutating cleanup:
+
+```bash
+python scripts/db/db_maintenance.py --report-only
+```
+
+Mutating operations (VACUUM, ANALYZE) require explicit flags:
+
+```bash
+python scripts/db/db_maintenance.py --mutate
+```
 
 ## Governance Boundary
 
@@ -130,6 +225,7 @@ python scripts/gemini_trace_context.py --query <topic>
 - Ingestion indexes and links evidence; it does not promote claims or terms.
 - Registry snapshots record metadata; they do not replace JSON registries as SSOT.
 - Supersession edges are advisory; they do not move or delete files.
+- Memory and compression are contextual aids; they do not redefine lexicon meaning or claim status.
 - If the database conflicts with a canonical registry, the registry wins.
 
 ## Orientation-Aware Retrieval
@@ -141,18 +237,10 @@ The retrieval layer (`scripts/orientation_retrieval.py`) ranks artifacts by **ad
 Score is calculated as:
 `score = 0.35*orientation_status + 0.25*authority_scope + 0.20*evidence_confidence + 0.10*freshness + 0.10*text_match`
 
-- **Orientation Status:** Prioritizes `current_command_evidence` and `canonical_active`.
-- **Authority Scope:** Prioritizes `lexicon` and `registry` files.
-- **Evidence Confidence:** Prioritizes `verified` artifacts.
-- **Freshness:** Decay based on time since indexing/modification.
-- **Text Match:** Keyword matching on path/filename.
-
 ### Usage
 
 ```bash
-python scripts/orientation_retrieval.py --query graph_dynamics --explain
+python scripts/orientation_retrieval.py --query <query> --explain
 ```
 
 **Note:** Retrieval rankings are advisory. They must not override the SSOT registries or the compliance charter.
-
-When `--explain` is used and `supersession_edges` are present, retrieval includes advisory lineage diagnostics per-result (relation/confidence counts, pattern-only warnings, and cycle-risk warnings). These cautions must not be used as authority for deletion, suppression, or overriding canonical registries.
