@@ -202,6 +202,37 @@ class MathValidator:
             results["status"] = "failed"
         return results
 
+class DBValidator:
+    def __init__(self, root_dir):
+        self.root = Path(root_dir)
+        self.db_path = self.root / "registry/db/acellorator_index.sqlite"
+        self.schema_path = self.root / "registry/db/schema.sql"
+
+    def run(self):
+        try:
+            from scripts.db.db_health_check import run_db_health_check
+        except ImportError:
+            import sys
+            sys.path.append(str(self.root / "scripts/db"))
+            try:
+                from db_health_check import run_db_health_check
+            except ImportError:
+                return {"status": "failed", "errors": ["Could not import db_health_check script."]}
+
+        health, errors = run_db_health_check(str(self.db_path), str(self.schema_path))
+        
+        results = {
+            "status": "success" if health["status"] != "fail" else "failed",
+            "errors": errors,
+            "warnings": health["stale_index_warnings"],
+            "db_health": health
+        }
+        
+        if health["status"] == "warning":
+            results["status"] = "warning"
+            
+        return results
+
 def main():
     parser = argparse.ArgumentParser(description="Global Ecosystem Validation Harness")
     parser.add_argument("--root", default=".", help="Project root directory")
@@ -214,10 +245,11 @@ def main():
         "registry_validation": RegistryValidator(root).run(),
         "engine_validation": EngineValidator(root).run(),
         "hygiene_validation": HygieneValidator(root).run(),
-        "math_validation": MathValidator(root).run()
+        "math_validation": MathValidator(root).run(),
+        "db_validation": DBValidator(root).run()
     }
 
-    report["overall_status"] = "pass" if all(v["status"] == "success" for k, v in report.items() if isinstance(v, dict)) else "fail"
+    report["overall_status"] = "pass" if all(v["status"] in ["success", "warning"] for k, v in report.items() if isinstance(v, dict)) else "fail"
 
     out_path = Path(args.out)
     out_path.parent.mkdir(parents=True, exist_ok=True)

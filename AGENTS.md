@@ -25,7 +25,7 @@ If the JSON does not authorize an action, do not perform it.
 
 Default mode is Audit Mode.
 
-Enter Manual Patch Mode only when the user explicitly provides a JSON object with one of these fields:
+Enter Manual Patch Mode when the user explicitly provides a JSON object OR uses a clear command phrase such as `manual`, `patch`, `repair`, `maintain`, `manual patch`, `patch mode`, or `maintenance mode` with one of these fields:
 
 ```json
 {
@@ -44,6 +44,41 @@ or
 or an equivalent explicit repair/maintenance instruction.
 
 If mode is ambiguous, remain in Audit Mode.
+
+## Command Activation Rule
+
+The user may activate Manual Patch Mode without JSON by using clear command phrases, including:
+
+- `manual`
+- `patch`
+- `manual patch`
+- `patch mode`
+- `repair`
+- `maintain`
+- `maintenance mode`
+
+The user may authorize report persistence without JSON by using clear command phrases, including:
+
+- `save`
+- `save report`
+- `audit-save`
+- `write report`
+- `persist report`
+
+When command activation is used, infer the narrowest safe scope from the user request.
+
+If the user says `patch save`, `manual save`, or `audit-save`, the agent may create or write reports only in approved report locations:
+
+- `outputs/audits/`
+- `outputs/reports/`
+- `outputs/maintenance/`
+- `audit_reports/`
+- `maintenance_reports/`
+- `reports/`
+
+Do not overwrite existing files unless the user explicitly says `overwrite` or names the file to replace.
+
+Do not edit source, registry, config, tool, or documentation files unless the command clearly authorizes that scope.
 
 ## 4. Manual Patch Mode Permissions
 
@@ -275,3 +310,74 @@ When saving reports, the final response must include:
 - files written,
 - overwrite status,
 - verification status.
+
+## Supersession Edge Confidence Rule
+
+Supersession edges in the database are advisory lineage metadata.
+
+They must not be treated as source-of-truth unless independently verified by current evidence or explicit registry authority.
+
+Pattern-detected edges are useful for retrieval and cleanup planning, but they may not justify deleting, moving, suppressing, or overriding artifacts.
+
+Any reasoning based on supersession edges must preserve the edge confidence label: `verified`, `probable`, or `weak`.
+
+## Database Projection Layer Rule
+
+The database is an index, archive, retrieval, and provenance projection layer only.
+
+The database is not the source of truth.
+
+Canonical semantic authority remains in the lexicon and validation registries. Claim authority remains in the claim/compliance registries and current command evidence.
+
+The agent may create, initialize, and update database indexes only when explicitly authorized. Database entries must preserve orientation status and must not redefine canonical terms, promote claims, or override registry authority.
+
+Allowed database roles:
+
+- artifact index,
+- report index,
+- audit snapshot index,
+- tool health snapshot index,
+- provenance map,
+- supersession edge map,
+- orientation status map.
+
+Forbidden database roles:
+
+- semantic authority,
+- claim authority,
+- lexicon replacement,
+- registry replacement,
+- truth source.
+
+## Database Health and Maintenance Rule
+
+Database health checks are part of global validation.
+
+The database remains a projection/index layer only and must never become source of truth.
+
+The agent may run DB health checks, schema checks, integrity checks, retrieval smoke tests, and report-only maintenance diagnostics when requested or during global validation.
+
+Mutating DB maintenance operations such as VACUUM, ANALYZE, REINDEX, or rebuilding indexes require explicit user authorization.
+
+DB validation must check:
+
+- SQLite integrity,
+- required tables,
+- required columns,
+- orientation status values,
+- row-count summaries,
+- stale index warnings,
+- retrieval smoke readiness,
+- SSOT boundary compliance.
+
+A healthy DB means the projection layer is usable. It does not mean claims are true, terms are verified, or registries are superseded.
+
+## Orientation-Aware Retrieval Rule
+
+Orientation-aware retrieval ranks artifacts by admissible relevance to the current task.
+
+Retrieval ranking is advisory. It does not override the lexicon, canonical registries, claim gates, or current command evidence.
+
+The retrieval layer may use orientation_status, authority_scope, evidence_confidence, freshness, and text match. Timestamp or semantic similarity must never outrank canonical authority by itself.
+
+If retrieval results conflict with current command evidence, current command evidence wins.
