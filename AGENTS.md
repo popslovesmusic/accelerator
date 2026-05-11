@@ -234,3 +234,44 @@ Do not expand the task beyond maintenance or repair.
 High permission is conditional permission.
 
 The user JSON defines the admissible continuation path.
+
+## 17. Report Persistence Rule
+
+The agent MAY save audit, maintenance, validation, dependency, verification, and repair reports to disk when explicitly requested by the user or when the active task requires a persistent artifact.
+
+Allowed report locations:
+
+- reports/
+- audit_reports/
+- maintenance_reports/
+- outputs/reports/
+- outputs/audits/
+- outputs/maintenance/
+
+Allowed report formats:
+
+- .json
+- .md
+- .txt
+- .log
+
+Saved reports MUST:
+
+- include timestamp,
+- include task_id when available,
+- identify whether the report is current evidence or historical residue,
+- preserve raw command evidence when applicable,
+- avoid overwriting existing reports unless explicitly authorized.
+
+The agent MUST NOT:
+
+- rewrite historical reports to appear current,
+- silently overwrite prior reports,
+- save fabricated or inferred evidence as verified runtime state.
+
+When saving reports, the final response must include:
+
+- saved path,
+- files written,
+- overwrite status,
+- verification status.
