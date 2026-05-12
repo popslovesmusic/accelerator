@@ -1,0 +1,75 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Registry for recovering selection behavior from observed continuation events.",
+    "status": "provisional",
+    "last_updated": "2026-05-12"
+  },
+  "reconstruction_classes": [
+    {
+      "class": "strictly_reconstructable",
+      "meaning": "Unique selection rule and parameters can be recovered from observation."
+    },
+    {
+      "class": "conditionally_reconstructable",
+      "meaning": "Selection can be recovered only under strict orientation, residue, and admissibility constraints."
+    },
+    {
+      "class": "equivalence_class_reconstructable",
+      "meaning": "Selection can be recovered up to a declared equivalence class of rules/parameters."
+    },
+    {
+      "class": "multi_preimage_reconstructable",
+      "meaning": "Multiple possible selection scenarios are consistent with the observed continuation."
+    },
+    {
+      "class": "non_reconstructable",
+      "meaning": "Selection behavior cannot be reliably recovered from observed events."
+    },
+    {
+      "class": "undefined",
+      "meaning": "Reconstruction status has not been established."
+    }
+  ],
+  "reconstruction_entries": [
+    {
+      "entry_id": "SR-001",
+      "target": "delta",
+      "reconstruction_class": "multi_preimage_reconstructable",
+      "constraints": [
+        "must_preserve_multi_valued_continuation",
+        "must_preserve_branch_ambiguity"
+      ],
+      "provisional_status": true
+    },
+    {
+      "entry_id": "SR-002",
+      "target": "NavT",
+      "reconstruction_class": "non_reconstructable",
+      "constraints": [
+        "must_preserve_known_non_invertibility"
+      ],
+      "provisional_status": true
+    },
+    {
+      "entry_id": "SR-003",
+      "target": "observable_projection",
+      "reconstruction_class": "equivalence_class_reconstructable",
+      "constraints": [
+        "must_preserve_projection_equivalence"
+      ],
+      "provisional_status": true
+    },
+    {
+      "entry_id": "SR-004",
+      "target": "selection_trace",
+      "reconstruction_class": "conditionally_reconstructable",
+      "constraints": [
+        "requires_strict_orientation_constraints",
+        "requires_residue_history",
+        "requires_branch_pruning_audit"
+      ],
+      "provisional_status": true
+    }
+  ]
+}

@@ -33,6 +33,7 @@ def validate_math_program():
     validators = {
         "formal_objects": "validate_formal_objects.py",
         "participation_laws": "validate_participation_laws.py",
+        "participation_measure_refinement": "validate_participation_measure_refinement.py",
         "epsilon_null_measure": "validate_epsilon_null_measure.py",
         "boundary_case_classification": "validate_boundary_case_classification.py",
         "continuation_laws": "validate_continuation_laws.py",
@@ -63,6 +64,7 @@ def validate_math_program():
         "well_posedness": "validate_well_posedness.py",
         "reconstruction": "validate_reconstruction.py",
         "reconstruction_uniqueness": "validate_reconstruction_uniqueness.py",
+        "selection_reconstruction": "validate_selection_reconstruction.py",
         "reduction_chains": "validate_reduction_chains.py",
         "pi_a_idempotence": "validate_pi_a_idempotence.py",
         "navt_identity": "validate_navt_identity.py",
