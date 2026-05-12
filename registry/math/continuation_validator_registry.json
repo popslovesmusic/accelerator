@@ -1,0 +1,60 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Registry for Continuation Validator configurations, metrics, and transition rules.",
+    "status": "provisional",
+    "last_updated": "2026-05-11"
+  },
+  "validators": [
+    {
+      "validator_id": "MPF-CV-001",
+      "name": "Continuation Validator",
+      "law_reference": "MPF-CV-001",
+      "inputs": [
+        {
+          "name": "process_state",
+          "type": "process_state"
+        },
+        {
+          "name": "residue",
+          "type": "residue_state"
+        },
+        {
+          "name": "orientation",
+          "type": "orientation_frame"
+        },
+        {
+          "name": "window",
+          "type": "admissibility_window"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "continuation_events",
+          "type": "continuation_event"
+        },
+        {
+          "name": "flux",
+          "type": "transition_flux"
+        }
+      ],
+      "admissibility_rules": [
+        {
+          "rule_id": "AR-001",
+          "description": "Projection-based filtering.",
+          "expression": "Pi_A(candidate, window) == candidate"
+        },
+        {
+          "rule_id": "AR-002",
+          "description": "Residue-mediated constraint.",
+          "expression": "residue_constraint(candidate, residue) == satisfied"
+        }
+      ],
+      "success_conditions": [
+        "All propagated events satisfy AR-001 and AR-002",
+        "Inadmissible candidates are excluded from continuation_events"
+      ],
+      "provisional_status": true
+    }
+  ]
+}

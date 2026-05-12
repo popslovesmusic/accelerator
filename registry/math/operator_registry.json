@@ -26,8 +26,9 @@
       "codomain": ["process_state"],
       "arity": "binary",
       "orientation_requirements": ["orientation_frame"],
-      "closure_status": "undefined",
-      "known_failures": [],
+      "closure_status": "conditional",
+      "closure_condition": "Pi_A maps any admissible input candidate into the declared admissibility_window codomain when the admissibility window is non-empty, stable under the projection rule, and residue/orientation constraints are satisfied.",
+      "known_failure_modes": ["FM-001", "FM-006", "FM-007", "FM-004", "FM-011"],
       "open_questions": ["threshold behavior at window boundaries"],
       "provisional_status": true
     },
@@ -41,6 +42,35 @@
       "closure_status": "partial",
       "known_failures": [],
       "open_questions": ["conservation of residue during transport"],
+      "provisional_status": true
+    },
+    {
+      "symbol": "residue_update",
+      "name": "Residue Update Operator",
+      "domain": ["residue_state", "process_state", "continuation_event"],
+      "codomain": ["residue_state"],
+      "arity": "binary",
+      "closure_status": "partial",
+      "known_failures": [],
+      "open_questions": ["explicit functional form", "conservation during transport"],
+      "provisional_status": true
+    },
+    {
+      "symbol": "delta",
+      "name": "delta_continuation_operator",
+      "role": "actualization_or_continuation_operator",
+      "domain": ["process_state", "residue_state", "orientation_frame", "admissibility_window", "non_null_mismatch_condition"],
+      "codomain": ["continuation_event"],
+      "arity": "n-ary",
+      "closure_status": "partial",
+      "proof_status": "none",
+      "known_failure_modes": ["empty_admissible_domain", "non_unique_continuation", "orientation_conflict", "residue_divergence", "threshold_instability"],
+      "open_questions": [
+        "Does delta require deterministic selection or allow multi-valued continuation?",
+        "What conditions make delta locally well-posed?",
+        "How does delta compose with Pi_A and NavT?",
+        "Can delta be reconstructed from observed continuation events?"
+      ],
       "provisional_status": true
     }
   ]

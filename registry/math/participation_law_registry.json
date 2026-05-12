@@ -1,0 +1,49 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Registry for participation laws and left-aspect formal derivations from (E != 0).",
+    "status": "provisional",
+    "last_updated": "2026-05-11"
+  },
+  "laws": [
+    {
+      "law_id": "MPF-PV-001",
+      "source_expression": "(E != 0)",
+      "aspect": "left_projection",
+      "domain": [
+        "distinction",
+        "addressability",
+        "participation"
+      ],
+      "input_objects": [
+        "process_state",
+        "non_null_mismatch_condition"
+      ],
+      "output_objects": [
+        "participation_space"
+      ],
+      "metrics": [
+        "participation_density",
+        "null_exclusion_count",
+        "non_null_locus_count"
+      ],
+      "success_condition": "null states excluded from participation_space",
+      "claim_boundary": "formal_procedural_only",
+      "closure_status": "local",
+      "proof_status": "scaffolded",
+      "provisional_status": true,
+      "open_questions": [
+        "How should epsilon_null be formalized across mechanism classes?",
+        "Does participation_space require finite, countable, or measure-theoretic structure?",
+        "How does participation relate to right-aspect continuation without collapsing into delta?"
+      ]
+    }
+  ],
+  "definitions": {
+    "participation_space": "The indexed set of loci alpha for which E_alpha is non-null under the declared null rule.",
+    "null_rule": "A locus is null if E_alpha = 0 exactly or lies below the declared numerical/formal null tolerance when numerical models are used.",
+    "admissible_discussability": "A locus is discussable only if it satisfies E_alpha != 0.",
+    "participation_density": "The ratio or measure of non-null addressable loci within the evaluated domain.",
+    "left_aspect_boundary": "This validator detects distinction/addressability only and does not test actualized continuation."
+  }
+}

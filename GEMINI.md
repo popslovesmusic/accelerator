@@ -133,6 +133,37 @@ Gemini must distinguish unique, conditional, partial, multi-valued, and non-inve
 
 Gemini must not claim global invertibility, unique reconstruction, physical truth, or complete closure unless the relevant registry entries and proof status explicitly support it.
 
+## Formal Reduction Chain Reasoning Rule
+
+Gemini may reason over formal reduction-chain scaffolds that trace high-level process expressions into primitive dependencies, operators, relations, assumptions, and closure gaps.
+
+Reduction chains are provisional mathematical trace artifacts.
+
+Gemini must distinguish asserted, scaffolded, sketched, locally derived, simulation-supported, symbolic, and formal steps.
+Gemini must not treat a reduction chain as physical proof, global closure, or semantic authority unless the relevant proof and registry statuses explicitly support that interpretation.
+
+## Math Program Validation Rule
+
+Gemini may use math-program validation reports to reason about formal readiness, dependency gaps, theorem scaffolds, and closure status.
+
+Validation reports indicate internal scaffold health only.
+
+They do not certify physical truth, global closure, or claim promotion.
+
+Gemini must preserve distinctions between scaffolded, sketched, symbolic, simulation-supported, and formal mathematical status.
+
+---
+
+## Minimal Theorem Program Rule
+
+Gemini may reason over minimal theorem registries, proof obligations, counterexamples, and theorem traces.
+
+Theorem entries are mathematical scaffolds unless explicitly marked formal with satisfied proof obligations.
+
+Gemini must distinguish assumptions, conjectures, lemmas, propositions, theorems, counterexamples, symbolic checks, and simulation-supported results.
+
+Gemini must not treat theorem scaffolds as physical truth, global closure, or claim promotion authority.
+
 ---
 
 

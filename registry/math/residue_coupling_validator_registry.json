@@ -1,0 +1,64 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Registry for Residue Coupling Validator configurations, recursive stabilization metrics, and coupling conditions.",
+    "status": "provisional",
+    "last_updated": "2026-05-11"
+  },
+  "validators": [
+    {
+      "validator_id": "MPF-RCV-001",
+      "name": "Residue Coupling Validator",
+      "law_reference": "MPF-RCV-001",
+      "inputs": [
+        {
+          "name": "participation",
+          "type": "participation_space"
+        },
+        {
+          "name": "continuation",
+          "type": "continuation_space"
+        },
+        {
+          "name": "residue",
+          "type": "residue_state"
+        },
+        {
+          "name": "orientation",
+          "type": "orientation_frame"
+        },
+        {
+          "name": "window",
+          "type": "admissibility_window"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "basin",
+          "type": "stabilized_recurrence_basin"
+        },
+        {
+          "name": "structure",
+          "type": "observable_persistence_structure"
+        }
+      ],
+      "coupling_conditions": [
+        {
+          "condition_id": "CC-001",
+          "description": "Recursive return to participation loci.",
+          "expression": "delta(loci in participation_space) -> loci in participation_space"
+        },
+        {
+          "condition_id": "CC-002",
+          "description": "Residue-mediated admissibility stabilization.",
+          "expression": "residue_update(residue) stabilizes admissibility_window"
+        }
+      ],
+      "success_conditions": [
+        "Observable persistence structures emerge from recursive admissible coupling",
+        "Stabilization score exceeds threshold over T cycles"
+      ],
+      "provisional_status": true
+    }
+  ]
+}

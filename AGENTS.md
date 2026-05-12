@@ -424,6 +424,24 @@ Do not remove failure modes, information-loss notes, equivalence-class ambiguity
 
 Reconstruction scaffolds must not be treated as proof of global invertibility or physical correctness.
 
+## Formal Reduction Chain Maintenance Rule
+
+Codex/manual patch workflows may maintain formal reduction-chain registries, dependency maps, validation scripts, and trace tools.
+
+Do not remove assumptions, known gaps, open questions, provisional status labels, or nonformal step labels without explicit authorization and evidence.
+
+Reduction-chain scaffolds must not be treated as proof of physical correctness or complete mathematical closure.
+
+## Minimal Theorem Program Maintenance Rule
+
+Codex/manual patch workflows may maintain theorem registries, proof-obligation registries, counterexample registries, validation scripts, and trace tools.
+
+Do not relabel conjectures or sketches as formal without satisfied proof obligations.
+
+Do not remove counterexamples, failure modes, assumptions, open questions, or provisional status labels without explicit authorization and evidence.
+
+Theorem scaffolds must not be treated as proof of physical correctness.
+
 ## Orientation-Aware Retrieval Rule
 
 Orientation-aware retrieval ranks artifacts by admissible relevance to the current task.

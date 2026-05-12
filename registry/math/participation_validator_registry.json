@@ -1,0 +1,57 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Registry for Participation Validator configurations, metrics, and null rules.",
+    "status": "provisional",
+    "last_updated": "2026-05-11"
+  },
+  "validators": [
+    {
+      "validator_id": "MPF-PV-001",
+      "name": "Participation Validator",
+      "law_reference": "MPF-PV-001",
+      "inputs": [
+        {
+          "name": "E_field",
+          "type": "process_state",
+          "description": "Mismatch field or process state representation."
+        },
+        {
+          "name": "null_tolerance",
+          "type": "float",
+          "default": 0.0,
+          "description": "Threshold for nullity."
+        }
+      ],
+      "outputs": [
+        {
+          "name": "participation_mask",
+          "type": "participation_space",
+          "description": "Boolean or measure-based mask of non-null loci."
+        },
+        {
+          "name": "density",
+          "type": "participation_density",
+          "description": "Measure of participating loci."
+        }
+      ],
+      "null_rules": [
+        {
+          "rule_id": "NR-001",
+          "description": "Exact zero exclusion.",
+          "expression": "E_alpha == 0"
+        },
+        {
+          "rule_id": "NR-002",
+          "description": "Numerical epsilon tolerance.",
+          "expression": "abs(E_alpha) < epsilon_null"
+        }
+      ],
+      "success_conditions": [
+        "All loci in participation_space satisfy (E_alpha != 0)",
+        "Empty E_field results in empty participation_space"
+      ],
+      "provisional_status": true
+    }
+  ]
+}

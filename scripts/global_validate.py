@@ -233,6 +233,24 @@ class DBValidator:
             
         return results
 
+class MathProgramValidator:
+    def __init__(self, root_dir):
+        self.root = Path(root_dir)
+
+    def run(self):
+        try:
+            from scripts.math.math_program_validate import validate_math_program
+        except ImportError:
+            import sys
+            sys.path.append(str(self.root / "scripts/math"))
+            try:
+                from math_program_validate import validate_math_program
+            except ImportError:
+                return {"status": "failed", "errors": ["Could not import math_program_validate script."]}
+
+        res = validate_math_program()
+        return res["math_program_validation"]
+
 def main():
     parser = argparse.ArgumentParser(description="Global Ecosystem Validation Harness")
     parser.add_argument("--root", default=".", help="Project root directory")
@@ -246,7 +264,8 @@ def main():
         "engine_validation": EngineValidator(root).run(),
         "hygiene_validation": HygieneValidator(root).run(),
         "math_validation": MathValidator(root).run(),
-        "db_validation": DBValidator(root).run()
+        "db_validation": DBValidator(root).run(),
+        "math_program_validation": MathProgramValidator(root).run()
     }
 
     report["overall_status"] = "pass" if all(v["status"] in ["success", "warning"] for k, v in report.items() if isinstance(v, dict)) else "fail"
