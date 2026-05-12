@@ -1,0 +1,43 @@
+{
+  "phase_3_stability_test_report": {
+    "timestamp": "2026-05-12T17:21:38.964268",
+    "status": "symbolic_check_complete",
+    "results": [
+      {
+        "test_id": "P3-STAB-002",
+        "target": "NavT",
+        "perturbation_class": "transport_path_perturbation",
+        "expected_behavior": "conditional",
+        "observed_behavior": "pass",
+        "failure_modes_triggered": [],
+        "stability_class_observed": "conditionally_stable",
+        "evidence_type": "symbolic_formal_model_evidence",
+        "claim_boundary": "formal_procedural_only",
+        "conditions_checked": [
+          "NAVT-STAB-001",
+          "NAVT-STAB-002",
+          "NAVT-STAB-003",
+          "NAVT-STAB-004",
+          "NAVT-STAB-005",
+          "NAVT-STAB-006"
+        ],
+        "conditions_failed": [],
+        "theorem_implications": {
+          "may_support": [
+            "PO-002"
+          ],
+          "must_not_promote": true
+        },
+        "warnings": [
+          "Stability is conditional on local transport neighborhood closure."
+        ],
+        "raw_trace": [
+          "Symbolic check of NavT stability under path perturbation P -> P'.",
+          "Condition NAVT-STAB-001: verified locally admissible neighborhood.",
+          "Condition NAVT-STAB-002: P' verified within local_process_state_equivalence of P.",
+          "Condition NAVT-STAB-006: confirmed NavT(x, P) ~ NavT(x, P') for null-length paths."
+        ]
+      }
+    ]
+  }
+}

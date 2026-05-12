@@ -38,6 +38,8 @@ def validate_math_program():
         "equivalence_relations": "validate_equivalence_relations.py",
         "symbolic_reduction_chains": "validate_symbolic_reduction_chains.py",
         "operational_stability_baseline": "validate_operational_stability_baseline.py",
+        "phase_3_stability": "validate_phase_3_stability.py",
+        "phase_3_test_results": "validate_phase_3_test_results.py --path outputs/math_tests/phase_3_stability_results.json",
         "well_posedness": "validate_well_posedness.py",
         "reconstruction": "validate_reconstruction.py",
         "reconstruction_uniqueness": "validate_reconstruction_uniqueness.py",
