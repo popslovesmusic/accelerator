@@ -1,0 +1,88 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Registry for residue behavior classes and transport conditions in Phase 2 of the Mono-Process Formal Law Program.",
+    "status": "provisional",
+    "last_updated": "2026-05-11"
+  },
+  "behavior_classes": [
+    {
+      "class": "conserved",
+      "meaning": "Total residue is preserved under declared transport/update conditions."
+    },
+    {
+      "class": "dissipative",
+      "meaning": "Residue decreases or disperses under update or transport."
+    },
+    {
+      "class": "saturating",
+      "meaning": "Residue grows toward an upper bound or admissibility ceiling."
+    },
+    {
+      "class": "amplifying",
+      "meaning": "Residue increases under recursive coupling or transport."
+    },
+    {
+      "class": "redistributed",
+      "meaning": "Residue changes local distribution while preserving or bounding total measure."
+    },
+    {
+      "class": "undefined",
+      "meaning": "No formal residue balance condition has been established."
+    }
+  ],
+  "behavior_entries": [
+    {
+      "entry_id": "RB-001",
+      "target_operator": "residue_update",
+      "target_law": "MPF-RCV-001",
+      "behavior_class": "undefined",
+      "balance_expression": "undefined",
+      "stability_implication": "undefined",
+      "convergence_implication": "undefined",
+      "failure_modes": ["RBFM-008"],
+      "proof_status": "none",
+      "claim_boundary": "formal_procedural_only",
+      "provisional_status": true
+    },
+    {
+      "entry_id": "RB-002",
+      "target_operator": "NavT",
+      "target_law": "MPF-CV-001",
+      "behavior_class": "redistributed",
+      "balance_expression": "sum(NavT(R_alpha)) <= sum(R_alpha)",
+      "stability_implication": "conditional",
+      "convergence_implication": "requires_bound",
+      "failure_modes": ["RBFM-005"],
+      "proof_status": "scaffolded",
+      "claim_boundary": "formal_procedural_only",
+      "provisional_status": true
+    },
+    {
+      "entry_id": "RB-003",
+      "target_operator": "residue_update",
+      "target_law": "MPF-RCV-001",
+      "behavior_class": "saturating",
+      "balance_expression": "residue_update(R) -> R_max",
+      "stability_implication": "stabilizing",
+      "convergence_implication": "supports_convergence",
+      "failure_modes": ["RBFM-003"],
+      "proof_status": "scaffolded",
+      "claim_boundary": "formal_procedural_only",
+      "provisional_status": true
+    },
+    {
+      "entry_id": "RB-004",
+      "target_operator": "residue_update",
+      "target_law": "MPF-RCV-001",
+      "behavior_class": "amplifying",
+      "balance_expression": "residue_update(R) > R",
+      "stability_implication": "destabilizing",
+      "convergence_implication": "permits_divergence",
+      "failure_modes": ["RBFM-001", "RBFM-004", "RBFM-007"],
+      "proof_status": "scaffolded",
+      "claim_boundary": "formal_procedural_only",
+      "provisional_status": true
+    }
+  ]
+}

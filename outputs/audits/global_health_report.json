@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-05-11T07:01:29.869523",
+  "timestamp": "2026-05-11T19:01:41.203493",
   "registry_validation": {
     "status": "success",
     "errors": []
@@ -48,11 +48,13 @@
     "errors": []
   },
   "db_validation": {
-    "status": "success",
+    "status": "warning",
     "errors": [],
-    "warnings": [],
+    "warnings": [
+      "Supersession edges are mostly non-verified or contain cycle/duplicate risks; treat lineage as advisory."
+    ],
     "db_health": {
-      "status": "pass",
+      "status": "warning",
       "db_path": "registry\\db\\acellorator_index.sqlite",
       "schema_path": "registry\\db\\schema.sql",
       "integrity_check": "ok",
@@ -66,14 +68,14 @@
         "orientation_status_types": "present"
       },
       "row_counts": {
-        "artifacts": 20731,
-        "audit_reports": 0,
-        "tool_health": 0,
-        "registry_snapshots": 0,
+        "artifacts": 20736,
+        "audit_reports": 22,
+        "tool_health": 39,
+        "registry_snapshots": 7,
         "claim_evidence_links": 0,
-        "supersession_edges": 0,
+        "supersession_edges": 12848,
         "orientation_status_types": 9,
-        "last_artifact_index": "2026-05-11 11:00:08"
+        "last_artifact_index": "2026-05-11 12:43:11"
       },
       "orientation_status_values": {
         "current_command_evidence": "present",
@@ -89,10 +91,176 @@
       "retrieval_smoke": {
         "status": "pass"
       },
-      "stale_index_warnings": [],
+      "supersession_edge_quality": {
+        "status": "warning",
+        "total_edges": 12848,
+        "by_relation": {
+          "version_variant_of": 10792,
+          "shadow_of": 2056
+        },
+        "by_confidence": {
+          "probable": 12848
+        },
+        "reference_integrity": {
+          "missing_from_artifact": 0,
+          "missing_to_artifact": 0,
+          "self_edges": 0,
+          "weak_confidence_ratio": 0.0,
+          "probable_confidence_ratio": 1.0,
+          "verified_confidence_ratio": 0.0
+        },
+        "risk_summary": [
+          {
+            "rule": "cycle_candidates",
+            "severity": "warning",
+            "detail": "2-cycle candidates detected (A->B and B->A).",
+            "count": 16
+          },
+          {
+            "rule": "verified_confidence_ratio_under_0_05",
+            "severity": "warning",
+            "detail": "Very few edges are verified; do not over-trust lineage.",
+            "count": 0
+          },
+          {
+            "rule": "pattern_only_edges",
+            "severity": "advisory",
+            "detail": "Edges appear pattern-detected (no evidence_path/reason). Keep advisory in retrieval explanations.",
+            "count": 12848
+          },
+          {
+            "rule": "retrieval_impact_warning",
+            "severity": "warning",
+            "detail": "Lineage edges are mostly non-verified; orientation-aware retrieval must avoid treating lineage as authoritative."
+          }
+        ],
+        "recommendations": [
+          "Treat `supersession_edges` as advisory lineage metadata; do not use as SSOT for deletion/migration decisions.",
+          "Consider adding a mechanism to record explicit verified supersession declarations (evidence_path + confidence=verified)."
+        ]
+      },
+      "stale_index_warnings": [
+        "Supersession edges are mostly non-verified or contain cycle/duplicate risks; treat lineage as advisory."
+      ],
       "ssot_boundary": "pass",
       "maintenance_recommendations": []
     }
+  },
+  "math_program_validation": {
+    "status": "warning",
+    "timestamp": "2026-05-11T19:02:03.194733",
+    "validators_run": [
+      "validate_formal_objects.py",
+      "validate_well_posedness.py",
+      "validate_reconstruction.py",
+      "validate_reduction_chains.py",
+      "validate_minimal_theorems.py"
+    ],
+    "domain_status": {
+      "formal_objects": {
+        "status": "pass",
+        "object_count": 8,
+        "operator_count": 3,
+        "relation_count": 3,
+        "warnings": [],
+        "open_questions": [
+          "explicit representation of orientation sensitivity",
+          "threshold behavior at window boundaries",
+          "conservation of residue during transport"
+        ],
+        "closure_gaps": [
+          "Operator Pi_A has undefined closure."
+        ]
+      },
+      "well_posedness": {
+        "status": "warning",
+        "entry_count": 3,
+        "failure_mode_count": 10,
+        "undefined_existence": [],
+        "undefined_uniqueness": [],
+        "undefined_stability": [],
+        "closure_gaps": [],
+        "open_questions": [
+          "idempotence proofs",
+          "stability at epsilon=0",
+          "non-local transport closure"
+        ],
+        "warnings": [
+          "Well-posedness target 'residue_update' not found in formal registries."
+        ]
+      },
+      "reconstruction": {
+        "status": "pass",
+        "entry_count": 3,
+        "failure_mode_count": 10,
+        "undefined_inversion": [],
+        "undefined_reconstruction": [],
+        "non_invertible_targets": [
+          "NavT"
+        ],
+        "multi_valued_targets": [
+          "observable_projection"
+        ],
+        "missing_failure_bindings": [],
+        "open_questions": [
+          "Preimage uniqueness under strict orientation constraints"
+        ],
+        "warnings": []
+      },
+      "reduction_chains": {
+        "status": "pass",
+        "chain_count": 1,
+        "step_count": 2,
+        "unresolved_dependencies": [],
+        "nonformal_steps": [
+          "STEP-01",
+          "STEP-02"
+        ],
+        "closure_gaps": [
+          "RC-001"
+        ],
+        "open_questions": [],
+        "warnings": []
+      },
+      "minimal_theorems": {
+        "status": "pass",
+        "theorem_count": 3,
+        "proof_obligation_count": 2,
+        "open_obligations": [
+          "PO-001",
+          "PO-002"
+        ],
+        "blocked_theorems": [],
+        "dependency_gaps": [],
+        "counterexample_warnings": [],
+        "closure_gaps": [
+          "MT-003"
+        ],
+        "warnings": []
+      }
+    },
+    "readiness_summary": {
+      "ready_for_local_theorem_work": true,
+      "ready_for_global_closure_claims": false,
+      "ready_for_physics_claims": false
+    },
+    "closure_gaps": [
+      "Operator Pi_A has undefined closure.",
+      "RC-001",
+      "MT-003"
+    ],
+    "open_questions": [
+      "explicit representation of orientation sensitivity",
+      "threshold behavior at window boundaries",
+      "conservation of residue during transport",
+      "idempotence proofs",
+      "stability at epsilon=0",
+      "non-local transport closure",
+      "Preimage uniqueness under strict orientation constraints"
+    ],
+    "warnings": [
+      "Well-posedness target 'residue_update' not found in formal registries."
+    ]
   },
   "overall_status": "fail"
 }

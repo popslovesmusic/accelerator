@@ -180,12 +180,30 @@ Provisional mathematical scaffolding for process mathematics:
 python scripts/math/validate_formal_objects.py
 python scripts/math/object_dependency_trace.py --query <topic>
 ```
-
 Registries:
 - `registry/formal_objects/formal_object_registry.json`
 - `registry/math/operator_registry.json`
 - `registry/math/relation_registry.json`
 - `registry/math/object_axiom_scaffold.json`
+
+## Formal Reduction Chains
+
+Advisory trace scaffolds connecting high-level expressions to primitives:
+
+```bash
+python scripts/math/validate_reduction_chains.py
+python scripts/math/reduction_chain_trace.py --query <expression>
+```
+
+Registries:
+- `registry/math/reduction_chain_registry.json`
+- `registry/math/primitive_dependency_registry.json`
+- `registry/math/derivation_status_registry.json`
+- `registry/math/reduction_gap_registry.json`
+
+**Boundary:** Reduction chains are formal trace artifacts and do not assert physical truth.
+
+## Governance Boundary
 
 **Boundary:** Formal scaffolding is provisional and does not assert physical truth.
 

@@ -1,0 +1,83 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Registry for orientation minimization rule classes and metrics in Phase 2 of the Mono-Process Formal Law Program.",
+    "status": "provisional",
+    "last_updated": "2026-05-11"
+  },
+  "rule_classes": [
+    {
+      "class": "minimum_deviation",
+      "meaning": "Select candidate minimizing deviation from the local orientation frame."
+    },
+    {
+      "class": "residue_weighted_minimum",
+      "meaning": "Select candidate minimizing orientation deviation weighted by residue compatibility."
+    },
+    {
+      "class": "admissibility_preserving_minimum",
+      "meaning": "Select candidate minimizing orientation deviation subject to preserving admissibility-window membership."
+    },
+    {
+      "class": "multi_minimum_retention",
+      "meaning": "Retain multiple candidates when distinct minima are equivalent or unresolved."
+    },
+    {
+      "class": "undefined_or_contextual",
+      "meaning": "Orientation selection depends on mechanism-specific context or remains undefined."
+    }
+  ],
+  "minimization_entries": [
+    {
+      "entry_id": "OMR-001",
+      "target_operator": "delta",
+      "target_law": "MPF-CV-001",
+      "rule_class": "minimum_deviation",
+      "orientation_metric": "angular_deviation",
+      "domain_conditions": [],
+      "residue_conditions": [],
+      "admissibility_conditions": [],
+      "tie_behavior": "multi_minimum",
+      "stability_implication": "conditional",
+      "failure_modes": ["OFM-001", "OFM-002", "OFM-003"],
+      "proof_status": "scaffolded",
+      "claim_boundary": "formal_procedural_only",
+      "provisional_status": true,
+      "open_questions": ["How to select among degenerate angular minima?"]
+    },
+    {
+      "entry_id": "OMR-002",
+      "target_operator": "Pi_A",
+      "target_law": "MPF-CV-001",
+      "rule_class": "admissibility_preserving_minimum",
+      "orientation_metric": "L2_frame_norm",
+      "domain_conditions": [],
+      "residue_conditions": [],
+      "admissibility_conditions": ["must_remain_in_window"],
+      "tie_behavior": "weighted",
+      "stability_implication": "stabilizing",
+      "failure_modes": ["OFM-008"],
+      "proof_status": "scaffolded",
+      "claim_boundary": "formal_procedural_only",
+      "provisional_status": true,
+      "open_questions": ["Interaction between window shrinkage and orientation minima."]
+    },
+    {
+      "entry_id": "OMR-003",
+      "target_operator": "NavT",
+      "target_law": "MPF-RCV-001",
+      "rule_class": "residue_weighted_minimum",
+      "orientation_metric": "residue_weighted_deviation",
+      "domain_conditions": [],
+      "residue_conditions": ["high_residue_preference"],
+      "admissibility_conditions": [],
+      "tie_behavior": "undefined",
+      "stability_implication": "conditional",
+      "failure_modes": ["OFM-004", "OFM-006"],
+      "proof_status": "scaffolded",
+      "claim_boundary": "formal_procedural_only",
+      "provisional_status": true,
+      "open_questions": ["Transport of orientation-frame bias."]
+    }
+  ]
+}

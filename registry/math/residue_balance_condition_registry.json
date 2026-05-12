@@ -1,0 +1,41 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Registry for residue balance conditions and their implications for stability and convergence in Phase 2 of the Mono-Process Formal Law Program.",
+    "status": "provisional",
+    "last_updated": "2026-05-11"
+  },
+  "balance_conditions": [
+    {
+      "condition_id": "RBC-001",
+      "name": "residue_conservation",
+      "expression": "Delta(sum(R)) == 0",
+      "behavior_class_reference": "conserved"
+    },
+    {
+      "condition_id": "RBC-002",
+      "name": "residue_dissipation",
+      "expression": "Delta(sum(R)) < 0",
+      "behavior_class_reference": "dissipative"
+    },
+    {
+      "condition_id": "RBC-003",
+      "name": "residue_saturation",
+      "expression": "R <= R_max",
+      "behavior_class_reference": "saturating"
+    }
+  ],
+  "stability_implications": [
+    "stabilizing",
+    "destabilizing",
+    "neutral",
+    "conditional",
+    "undefined"
+  ],
+  "convergence_implications": [
+    "supports_convergence",
+    "permits_divergence",
+    "requires_bound",
+    "undefined"
+  ]
+}

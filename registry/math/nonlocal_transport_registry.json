@@ -1,0 +1,93 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Registry for non-local transport classes, propagation assumptions, and closure conditions.",
+    "status": "provisional",
+    "last_updated": "2026-05-12"
+  },
+  "transport_classes": [
+    {
+      "class": "local_transport",
+      "meaning": "Transport restricted to bounded/local admissibility neighborhoods."
+    },
+    {
+      "class": "bounded_nonlocal_transport",
+      "meaning": "Transport may connect distant admissible loci but remains bounded by declared constraints."
+    },
+    {
+      "class": "residue_conditioned_transport",
+      "meaning": "Transport admissibility depends on residue compatibility/history."
+    },
+    {
+      "class": "orientation_preserving_transport",
+      "meaning": "Transport preserves or minimally perturbs orientation structure."
+    },
+    {
+      "class": "branching_transport",
+      "meaning": "Transport produces multiple admissible continuation branches."
+    },
+    {
+      "class": "undefined_transport",
+      "meaning": "Transport structure or closure conditions remain unspecified."
+    }
+  ],
+  "transport_entries": [
+    {
+      "entry_id": "NTC-001",
+      "target_operator": "NavT",
+      "target_law": "MPF-CV-001",
+      "transport_class": "bounded_nonlocal_transport",
+      "closure_class": "conditional_closure",
+      "orientation_conditions": ["frame_alignment_required"],
+      "residue_conditions": ["residue_gradient_constrained"],
+      "branch_conditions": [],
+      "admissibility_conditions": ["target_locus_must_be_admissible"],
+      "reconstruction_implication": "ambiguous",
+      "stability_implication": "conditional",
+      "convergence_implication": "requires_bound",
+      "failure_modes": ["NTFM-001", "NTFM-002", "NTFM-006"],
+      "proof_status": "scaffolded",
+      "claim_boundary": "formal_procedural_only",
+      "provisional_status": true,
+      "open_questions": ["Metric for non-local distance in CSI domain."]
+    },
+    {
+      "entry_id": "NTC-002",
+      "target_operator": "NavT",
+      "target_law": "MPF-RCV-001",
+      "transport_class": "branching_transport",
+      "closure_class": "bounded_closure",
+      "orientation_conditions": [],
+      "residue_conditions": ["residue_mediated_coupling"],
+      "branch_conditions": ["max_branch_width_N"],
+      "admissibility_conditions": ["recursive_admissibility_preservation"],
+      "reconstruction_implication": "non_invertible",
+      "stability_implication": "conditional",
+      "convergence_implication": "requires_bound",
+      "failure_modes": ["NTFM-005", "NTFM-008"],
+      "proof_status": "scaffolded",
+      "claim_boundary": "formal_procedural_only",
+      "provisional_status": true,
+      "open_questions": ["Effect of non-local transport on recurrence basin stability."]
+    },
+    {
+      "entry_id": "NTC-003",
+      "target_operator": "NavT",
+      "target_law": "MPF-RCV-001",
+      "transport_class": "undefined_transport",
+      "closure_class": "undefined_closure",
+      "orientation_conditions": [],
+      "residue_conditions": [],
+      "branch_conditions": [],
+      "admissibility_conditions": [],
+      "reconstruction_implication": "undefined",
+      "stability_implication": "undefined",
+      "convergence_implication": "undefined",
+      "failure_modes": ["NTFM-008"],
+      "proof_status": "none",
+      "claim_boundary": "formal_procedural_only",
+      "provisional_status": true,
+      "open_questions": ["Definition of transport closure for infinite recursive systems."]
+    }
+  ]
+}

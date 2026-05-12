@@ -1,0 +1,70 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Registry for transition_flux convergence conditions, boundedness classes, and dependency assumptions.",
+    "status": "provisional",
+    "last_updated": "2026-05-11"
+  },
+  "convergence_classes": [
+    "finite_domain_bounded",
+    "conditionally_bounded",
+    "summable_under_decay",
+    "bounded_under_projection",
+    "branching_but_truncated",
+    "divergent",
+    "undefined"
+  ],
+  "convergence_entries": [
+    {
+      "entry_id": "TFC-001",
+      "target_law": "MPF-CV-001",
+      "target_metric": "transition_flux",
+      "domain_conditions": ["finite_addressable_domain"],
+      "csi_conditions": ["effectively_truncated_CSI"],
+      "admissibility_conditions": ["stable_admissibility_window"],
+      "residue_conditions": ["bounded_residue_state"],
+      "selection_rule_dependencies": ["DSR-001", "DSR-002"],
+      "convergence_class": "bounded_under_projection",
+      "boundedness_statement": "transition_flux is provisionally bounded when Pi_A rejects or projects inadmissible candidates and CSI contribution is finite or effectively truncated.",
+      "failure_modes": ["CFM-001", "CFM-003", "CFM-005"],
+      "proof_status": "scaffolded",
+      "claim_boundary": "formal_procedural_only",
+      "provisional_status": true,
+      "open_questions": ["Exact decay rates required for CSI summation."]
+    },
+    {
+      "entry_id": "TFC-002",
+      "target_law": "MPF-RCV-001",
+      "target_metric": "transition_flux",
+      "domain_conditions": ["recursive_return_mapping"],
+      "csi_conditions": [],
+      "admissibility_conditions": ["residue_mediated_window_stabilization"],
+      "residue_conditions": ["residue_conservation_or_damping"],
+      "selection_rule_dependencies": ["DSR-001", "DSR-002"],
+      "convergence_class": "conditionally_bounded",
+      "boundedness_statement": "recursive transition_flux is conditionally bounded when residue_update does not amplify candidate generation faster than admissibility rejection/projection suppresses it.",
+      "failure_modes": ["CFM-002", "CFM-004", "CFM-007"],
+      "proof_status": "scaffolded",
+      "claim_boundary": "formal_procedural_only",
+      "provisional_status": true,
+      "open_questions": ["Existence of globally stable recurrence basins under iteration."]
+    },
+    {
+      "entry_id": "TFC-003",
+      "target_law": "MPF-RCV-001",
+      "target_metric": "transition_flux",
+      "domain_conditions": ["infinite_domain"],
+      "csi_conditions": ["non_decaying_CSI"],
+      "admissibility_conditions": ["expanding_window"],
+      "residue_conditions": ["unbounded_accumulation"],
+      "selection_rule_dependencies": ["DSR-003"],
+      "convergence_class": "undefined",
+      "boundedness_statement": "infinite recursive coupling remains undefined without a residue damping, conservation, or truncation condition.",
+      "failure_modes": ["CFM-001", "CFM-002", "CFM-004"],
+      "proof_status": "none",
+      "claim_boundary": "formal_procedural_only",
+      "provisional_status": true,
+      "open_questions": ["Conditions for branch-pruning in multi-valued delta."]
+    }
+  ]
+}

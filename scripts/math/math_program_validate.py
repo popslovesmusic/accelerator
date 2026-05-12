@@ -23,10 +23,20 @@ def validate_math_program():
     validators = {
         "formal_objects": "validate_formal_objects.py",
         "participation_laws": "validate_participation_laws.py",
+        "epsilon_null_measure": "validate_epsilon_null_measure.py",
         "continuation_laws": "validate_continuation_laws.py",
         "residue_coupling_laws": "validate_residue_coupling_laws.py",
+        "operational_stability": "validate_operational_stability.py",
+        "delta_selection": "validate_delta_selection.py",
+        "transition_flux_convergence": "validate_transition_flux_convergence.py",
+        "residue_behavior": "validate_residue_behavior.py",
+        "orientation_minimization": "validate_orientation_minimization.py",
+        "branch_pruning": "validate_branch_pruning.py",
+        "nonlocal_transport": "validate_nonlocal_transport.py",
+        "theory_induction_template": "validate_theory_induction_template.py",
         "well_posedness": "validate_well_posedness.py",
         "reconstruction": "validate_reconstruction.py",
+        "reconstruction_uniqueness": "validate_reconstruction_uniqueness.py",
         "reduction_chains": "validate_reduction_chains.py",
         "minimal_theorems": "validate_minimal_theorems.py"
     }
