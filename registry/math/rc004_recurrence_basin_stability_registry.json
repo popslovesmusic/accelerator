@@ -1,0 +1,86 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Registry for bounded recurrence-basin stability conditions and preservation in Phase 3.",
+    "status": "provisional",
+    "last_updated": "2026-05-12"
+  },
+  "stability_entries": [
+    {
+      "id": "RC-004",
+      "name": "Bounded Recurrence-Basin Stability",
+      "status": "symbolic_supported_candidate",
+      "purpose": "Strengthen local recurrence-basin retention rules after RC-003 scaffolding.",
+      "depends_on": [
+        "RC-003",
+        "recursive_convergence",
+        "phase_3_stability",
+        "operational_stability_baseline",
+        "orientation_minimization",
+        "branch_pruning",
+        "residue_behavior",
+        "transition_flux_convergence"
+      ],
+      "stability_conditions": [
+        {
+          "id": "SC-001",
+          "name": "bounded_iteration_domain",
+          "description": "The sequence of recursive updates remains within a finite composition length or locally closed neighborhood."
+        },
+        {
+          "id": "SC-002",
+          "name": "basin_membership_preserved_under_update",
+          "description": "Admissible continuation maps process states back into the declared recurrence basin."
+        },
+        {
+          "id": "SC-003",
+          "name": "orientation_drift_below_escape_threshold",
+          "description": "Orientation frame deviation remains small enough to prevent basin escape or regime switching."
+        },
+        {
+          "id": "SC-004",
+          "name": "transport_flux_finite",
+          "description": "The measure of realizing events propagated per update does not diverge."
+        },
+        {
+          "id": "SC-005",
+          "name": "residue_accumulation_not_saturated",
+          "description": "Residue update sequence remains below the saturation point where admissibility collapses."
+        },
+        {
+          "id": "SC-006",
+          "name": "admissibility_window_not_collapsed",
+          "description": "Recursion does not result in an empty admissible image A."
+        },
+        {
+          "id": "SC-007",
+          "name": "branch_pruning_preserves_at_least_one_required_witness",
+          "description": "Selection and pruning rules always leave a non-empty admissible candidate set."
+        },
+        {
+          "id": "SC-008",
+          "name": "perturbation_response_remains_bounded",
+          "description": "Finite input perturbations do not result in unbounded state or admissibility drift."
+        }
+      ],
+      "failure_modes_to_preserve": [
+        "basin_escape",
+        "orientation_drift_accumulation",
+        "residue_saturation",
+        "window_collapse",
+        "transport_flux_divergence",
+        "branch_explosion",
+        "degenerate_minima",
+        "selection_instability"
+      ],
+      "governance_constraints": {
+        "infinite_convergence_claimed": false,
+        "global_fixed_point_claimed": false,
+        "physics_validation_claimed": false,
+        "global_closure_claimed": false,
+        "basin_stability_is_local_only": true
+      },
+      "provisional_status": true
+    }
+  ]
+}

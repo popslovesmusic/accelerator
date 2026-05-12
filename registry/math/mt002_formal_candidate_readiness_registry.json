@@ -1,0 +1,63 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Formal-candidate readiness registry for MT-002: Transport Identity on Null Path.",
+    "status": "provisional",
+    "last_updated": "2026-05-12"
+  },
+  "readiness_summary": {
+    "theorem_id": "MT-002",
+    "current_status": "scaffolded",
+    "readiness_level": "symbolic_supported_candidate",
+    "evidence_links": [
+      "outputs/math_tests/p3_stab_002_navt_symbolic_result.json",
+      "registry/math/navt_identity_proof_scaffold.json"
+    ]
+  },
+  "blocker_status": [
+    {
+      "blocker_id": "BLK-002",
+      "status": "formalized",
+      "requirement": "local_process_state_equivalence formal properties",
+      "resolution_link": "registry/math/equivalence_property_registry.json#EQP-002"
+    },
+    {
+      "blocker_id": "BLK-003",
+      "status": "formalized",
+      "requirement": "Orientation drift and residue drift case classification",
+      "resolution_link": "registry/math/theorem_boundary_condition_registry.json"
+    }
+  ],
+  "readiness_criteria_check": [
+    {
+      "criterion": "all proof obligations have symbolic support",
+      "status": "satisfied",
+      "evidence": "PO-002 supported by P3-STAB-002"
+    },
+    {
+      "criterion": "all domains and codomains resolve",
+      "status": "satisfied",
+      "evidence": "NavT domain (process_state) and codomain (csi_domain) registered"
+    },
+    {
+      "criterion": "all equivalence relations are declared",
+      "status": "satisfied",
+      "evidence": "EQ-002 registered"
+    },
+    {
+      "criterion": "all boundary cases are classified",
+      "status": "satisfied",
+      "evidence": "theorem_boundary_condition_registry.json bindings complete for MT-002"
+    },
+    {
+      "criterion": "all reduction steps are symbolic_supported or stronger",
+      "status": "satisfied",
+      "evidence": "RC-001/STEP-02 and RC-002 elevated to symbolic_supported/scaffolded"
+    }
+  ],
+  "pending_requirements": [
+    "Formal proof artifact (e.g. proof.md or formal_verification.json)",
+    "Explicit bound for 'null-length' path in local context",
+    "Explicit user authorization for status promotion to formal_candidate"
+  ]
+}

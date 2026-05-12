@@ -1,0 +1,25 @@
+{
+  "meta": {
+    "version": "1.0",
+    "theorem_id": "MT-003",
+    "status": "provisional_proof_artifact"
+  },
+  "formal_verification": {
+    "target": "existence(e) <=> image(Pi_A o S(C)) != empty",
+    "logic_type": "existence_dependency",
+    "quantifier": {
+      "type": "bounded_existential",
+      "witness_domain": "C_S",
+      "conditions": ["NEI-001", "NEI-002", "NEI-003", "NEI-004", "NEI-005"]
+    },
+    "logical_trace": [
+      { "step": 1, "logic": "e exists -> e in C", "basis": "proposal" },
+      { "step": 2, "logic": "e in C and e exists -> e in A", "basis": "admissibility mandate" },
+      { "step": 3, "logic": "e in A and e exists -> e in S(C)", "basis": "selection mandate" },
+      { "step": 4, "logic": "e in (A intersect S(C)) -> image != empty", "basis": "membership" }
+    ],
+    "verification_status": "symbolic_verified_under_assumptions",
+    "failure_modes_addressed": ["BCFM-010", "BFM-003", "BFM-001"],
+    "must_not_promote": true
+  }
+}

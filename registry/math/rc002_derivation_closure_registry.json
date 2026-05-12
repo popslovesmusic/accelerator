@@ -1,0 +1,89 @@
+{
+  "meta": {
+    "version": "1.1",
+    "target_chain": "RC-002",
+    "name": "Bounded Derivation-Step Legality Preservation",
+    "status": "symbolic_supported_candidate",
+    "purpose": "Track whether symbolic reduction chains preserve admissibility conditions across bounded operator composition.",
+    "last_updated": "2026-05-12"
+  },
+  "depends_on": [
+    "operator_composition",
+    "symbolic_reduction_chains",
+    "reduction_step_formalization",
+    "symbolic_derivation_closure",
+    "participation_laws",
+    "continuation_laws",
+    "residue_coupling_laws"
+  ],
+  "preservation_conditions": [
+    {
+      "id": "LC-001",
+      "name": "non_null_participation_preserved",
+      "description": "Reduction must not eliminate participating loci required for the next operator application."
+    },
+    {
+      "id": "LC-002",
+      "name": "admissibility_window_respected",
+      "description": "Reduction must maintain results within the relevant admissibility window A."
+    },
+    {
+      "id": "LC-003",
+      "name": "residue_legality_preserved",
+      "description": "Reduction must preserve residue-state equivalence and conditioning roles."
+    },
+    {
+      "id": "LC-004",
+      "name": "orientation_compatibility_preserved",
+      "description": "Reduction must maintain alignment with the local orientation frame or minimization rules."
+    },
+    {
+      "id": "LC-005",
+      "name": "branch_pruning_does_not_destroy_required_witness",
+      "description": "Reduction must remain within declared branch-width and pruning bounds, ensuring at least one witness remains where existence is required."
+    },
+    {
+      "id": "LC-006",
+      "name": "NavT_noninvertibility_preserved",
+      "description": "Reduction must not assume unique preimage recovery for transport."
+    },
+    {
+      "id": "LC-007",
+      "name": "delta_nondeterminism_preserved",
+      "description": "Reduction must preserve multi-valued continuation behavior."
+    }
+  ],
+  "failure_modes_to_preserve": [
+    "boundary_collapse",
+    "degenerate_minima",
+    "branch_explosion",
+    "noninvertible_transport",
+    "multi_valued_delta",
+    "preimage_ambiguity",
+    "residue_saturation",
+    "orientation_frame_bias"
+  ],
+  "step_resolutions": [
+    {
+      "step_id": "STEP-01",
+      "status": "symbolic_supported_candidate",
+      "basis": "Mapped to MT-002 formal verification and local process-state equivalence; preserves non_null_participation and orientation_compatibility.",
+      "satisfied_conditions": ["LC-001", "LC-004", "LC-006"],
+      "evidence_links": ["DE-STEP-RC002-01", "PA-MT002-001"]
+    },
+    {
+      "step_id": "STEP-02",
+      "status": "symbolic_supported_candidate",
+      "basis": "Mapped to MT-003 formal verification and non-empty image existence logic; preserves non_null_continuation and branch_pruning_stability.",
+      "satisfied_conditions": ["LC-002", "LC-003", "LC-005", "LC-007"],
+      "evidence_links": ["DE-STEP-RC002-02", "PA-MT003-001"]
+    }
+  ],
+  "closure_criteria_check": {
+    "all_steps_supported": true,
+    "blockers_resolved": true,
+    "ready_for_formal_candidate_review": true,
+    "is_global_closure_claim": false,
+    "is_physics_validation_claim": false
+  }
+}

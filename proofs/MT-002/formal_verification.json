@@ -1,0 +1,25 @@
+{
+  "meta": {
+    "version": "1.0",
+    "theorem_id": "MT-002",
+    "status": "provisional_proof_artifact"
+  },
+  "formal_verification": {
+    "target": "NavT(x, P_null) ~ x",
+    "equivalence_relation": "EQ-002",
+    "quantifier": {
+      "type": "local_universal",
+      "path_condition": "NI-001",
+      "state_condition": "NI-002"
+    },
+    "logical_trace": [
+      { "step": 1, "logic": "x' = NavT(x, P_null)", "basis": "operation" },
+      { "step": 2, "logic": "invariant(R, Frame, A)", "basis": "NI-003, NI-004, NI-005" },
+      { "step": 3, "logic": "x' = x", "basis": "null path definition" },
+      { "step": 4, "logic": "x' ~ x", "basis": "EQ-002 reflexivity" }
+    ],
+    "verification_status": "symbolic_verified_under_assumptions",
+    "failure_modes_addressed": ["NTFM-003", "TIFM-005"],
+    "must_not_promote": true
+  }
+}
