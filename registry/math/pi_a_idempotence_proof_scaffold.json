@@ -1,0 +1,68 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Symbolic proof scaffold for Pi_A idempotence under stable admissibility.",
+    "status": "provisional",
+    "last_updated": "2026-05-12"
+  },
+  "proof_scaffold": {
+    "theorem_reference": "MT-001",
+    "obligation_reference": "PO-001",
+    "target_statement": "Pi_A(Pi_A(x)) ~ Pi_A(x) under stable admissibility conditions SA-001 through SA-005.",
+    "equivalence_relation": "admissibility_equivalence",
+    "conditions": [
+      {
+        "condition_id": "SA-001",
+        "statement": "The admissibility window A is non-empty."
+      },
+      {
+        "condition_id": "SA-002",
+        "statement": "Pi_A maps every candidate in its declared domain into A."
+      },
+      {
+        "condition_id": "SA-003",
+        "statement": "For y in A, Pi_A(y) is equivalent to y under the declared admissibility equivalence relation."
+      },
+      {
+        "condition_id": "SA-004",
+        "statement": "Residue and orientation constraints remain stable between first and second application."
+      },
+      {
+        "condition_id": "SA-005",
+        "statement": "No boundary drift changes A between Pi_A(x) and Pi_A(Pi_A(x))."
+      }
+    ],
+    "symbolic_steps": [
+      {
+        "step": 1,
+        "expression": "y = Pi_A(x)",
+        "description": "Apply first projection. By SA-002, y is in A."
+      },
+      {
+        "step": 2,
+        "expression": "z = Pi_A(y)",
+        "description": "Apply second projection to result of first."
+      },
+      {
+        "step": 3,
+        "expression": "z ~ y",
+        "description": "Since y is in A, apply SA-003 fixed point property."
+      },
+      {
+        "step": 4,
+        "expression": "Pi_A(Pi_A(x)) ~ Pi_A(x)",
+        "description": "Substitution of y and z confirms idempotence under SA conditions."
+      }
+    ],
+    "proof_status": "scaffolded",
+    "claim_boundary": "formal_procedural_only",
+    "not_claimed": [
+      "global idempotence",
+      "idempotence under dynamic admissibility windows",
+      "idempotence under residue drift",
+      "idempotence under orientation conflict",
+      "physical truth"
+    ],
+    "provisional_status": true
+  }
+}

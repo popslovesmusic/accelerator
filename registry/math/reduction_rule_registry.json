@@ -1,0 +1,40 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Registry for provisional symbolic rewrite/reduction rules and admissibility-preserving transforms.",
+    "status": "provisional",
+    "last_updated": "2026-05-12"
+  },
+  "reduction_rules": [
+    {
+      "rule_id": "RR-001",
+      "expression": "Pi_A(Pi_A(x)) -> Pi_A(x)",
+      "condition": "stable admissibility equivalence",
+      "implication": "idempotence_scaffolded"
+    },
+    {
+      "rule_id": "RR-002",
+      "expression": "branch_equivalent(a,b) -> representative(a,b)",
+      "condition": "declared branch equivalence relation",
+      "implication": "branch_reduction"
+    },
+    {
+      "rule_id": "RR-003",
+      "expression": "projection_equivalent(x,y) -> observable_class(x)",
+      "condition": "projection equivalence holds",
+      "implication": "projection_reduction"
+    },
+    {
+      "rule_id": "RR-004",
+      "expression": "orientation_minimized(delta(x)) -> reduced_candidate_set",
+      "condition": "orientation metric defined",
+      "implication": "selection_constrained"
+    },
+    {
+      "rule_id": "RR-005",
+      "expression": "bounded_transport_chain -> transport_normal_form",
+      "condition": "transport closure preserved",
+      "implication": "transport_reduction"
+    }
+  ]
+}

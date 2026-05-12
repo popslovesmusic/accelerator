@@ -34,10 +34,17 @@ def validate_math_program():
         "branch_pruning": "validate_branch_pruning.py",
         "nonlocal_transport": "validate_nonlocal_transport.py",
         "theory_induction_template": "validate_theory_induction_template.py",
+        "operator_composition": "validate_operator_composition.py",
+        "equivalence_relations": "validate_equivalence_relations.py",
+        "symbolic_reduction_chains": "validate_symbolic_reduction_chains.py",
+        "operational_stability_baseline": "validate_operational_stability_baseline.py",
         "well_posedness": "validate_well_posedness.py",
         "reconstruction": "validate_reconstruction.py",
         "reconstruction_uniqueness": "validate_reconstruction_uniqueness.py",
         "reduction_chains": "validate_reduction_chains.py",
+        "pi_a_idempotence": "validate_pi_a_idempotence.py",
+        "navt_identity": "validate_navt_identity.py",
+        "continuation_nonempty_image": "validate_continuation_nonempty_image.py",
         "minimal_theorems": "validate_minimal_theorems.py"
     }
 

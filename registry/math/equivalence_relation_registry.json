@@ -1,0 +1,135 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Registry for formal equivalence relations used by operators, theorem scaffolds, reconstruction, projection, and pruning.",
+    "status": "provisional",
+    "last_updated": "2026-05-12"
+  },
+  "equivalence_relation_classes": [
+    {
+      "class": "admissibility_equivalence",
+      "meaning": "Two objects are equivalent if they occupy the same admissibility class under declared window and projection constraints."
+    },
+    {
+      "class": "local_process_state_equivalence",
+      "meaning": "Two process states are equivalent within a local transport or identity context."
+    },
+    {
+      "class": "residue_equivalence",
+      "meaning": "Two residue states are equivalent if they preserve the same admissibility-conditioning role under declared constraints."
+    },
+    {
+      "class": "orientation_equivalence",
+      "meaning": "Two orientation states are equivalent up to declared frame/deviation tolerance."
+    },
+    {
+      "class": "projection_equivalence",
+      "meaning": "Distinct preimages may be equivalent under a shared projected observable structure."
+    },
+    {
+      "class": "branch_equivalence",
+      "meaning": "Multiple branches may be collapsed if equivalent under declared admissibility, residue, orientation, or projection criteria."
+    },
+    {
+      "class": "reconstruction_equivalence",
+      "meaning": "Recovered preimages are equivalent up to declared ambiguity class."
+    }
+  ],
+  "equivalence_relation_entries": [
+    {
+      "entry_id": "EQ-001",
+      "relation_class": "admissibility_equivalence",
+      "domain_objects": ["process_state", "continuation_event"],
+      "equivalence_conditions": ["SA-003", "AE-001"],
+      "supports_theorems": ["MT-001", "MT-003"],
+      "supports_operators": ["Pi_A", "delta"],
+      "reflexive_status": "conditional",
+      "symmetric_status": "conditional",
+      "transitive_status": "conditional",
+      "failure_modes": ["EQFM-001", "EQFM-004", "EQFM-008"],
+      "proof_status": "scaffolded",
+      "claim_boundary": "formal_procedural_only",
+      "provisional_status": true
+    },
+    {
+      "entry_id": "EQ-002",
+      "relation_class": "local_process_state_equivalence",
+      "domain_objects": ["process_state"],
+      "equivalence_conditions": ["NI-002"],
+      "supports_theorems": ["MT-002"],
+      "supports_operators": ["NavT"],
+      "reflexive_status": "conditional",
+      "symmetric_status": "conditional",
+      "transitive_status": "conditional",
+      "failure_modes": ["EQFM-001", "EQFM-004"],
+      "proof_status": "scaffolded",
+      "claim_boundary": "formal_procedural_only",
+      "provisional_status": true
+    },
+    {
+      "entry_id": "EQ-003",
+      "relation_class": "residue_equivalence",
+      "domain_objects": ["residue_state"],
+      "supports_operators": ["residue_update", "NavT"],
+      "reflexive_status": "conditional",
+      "symmetric_status": "conditional",
+      "transitive_status": "undefined",
+      "failure_modes": ["EQFM-007"],
+      "proof_status": "none",
+      "claim_boundary": "formal_procedural_only",
+      "provisional_status": true
+    },
+    {
+      "entry_id": "EQ-004",
+      "relation_class": "orientation_equivalence",
+      "domain_objects": ["orientation_frame"],
+      "supports_operators": ["orientation_minimization", "delta", "NavT"],
+      "reflexive_status": "conditional",
+      "symmetric_status": "conditional",
+      "transitive_status": "undefined",
+      "failure_modes": ["EQFM-006"],
+      "proof_status": "none",
+      "claim_boundary": "formal_procedural_only",
+      "provisional_status": true
+    },
+    {
+      "entry_id": "EQ-005",
+      "relation_class": "projection_equivalence",
+      "domain_objects": ["process_state"],
+      "supports_operators": ["Pi_A", "observable_projection"],
+      "reflexive_status": "conditional",
+      "symmetric_status": "conditional",
+      "transitive_status": "conditional",
+      "failure_modes": ["EQFM-001", "EQFM-009"],
+      "proof_status": "scaffolded",
+      "claim_boundary": "formal_procedural_only",
+      "provisional_status": true
+    },
+    {
+      "entry_id": "EQ-006",
+      "relation_class": "branch_equivalence",
+      "domain_objects": ["continuation_event"],
+      "supports_operators": ["branch_pruning", "delta"],
+      "reflexive_status": "conditional",
+      "symmetric_status": "conditional",
+      "transitive_status": "undefined",
+      "failure_modes": ["EQFM-010"],
+      "proof_status": "none",
+      "claim_boundary": "formal_procedural_only",
+      "provisional_status": true
+    },
+    {
+      "entry_id": "EQ-007",
+      "relation_class": "reconstruction_equivalence",
+      "domain_objects": ["process_state"],
+      "supports_operators": ["observable_projection", "NavT", "delta"],
+      "reflexive_status": "conditional",
+      "symmetric_status": "conditional",
+      "transitive_status": "conditional",
+      "failure_modes": ["EQFM-011"],
+      "proof_status": "none",
+      "claim_boundary": "formal_procedural_only",
+      "provisional_status": true
+    }
+  ]
+}
