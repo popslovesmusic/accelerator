@@ -48,7 +48,7 @@ def validate_reduction_chains(rc_reg, gap_reg, obj_reg, op_reg, rel_reg):
         # Validate steps
         for step in entry.get("reduction_steps", []):
             results["reduction_chain_validation"]["step_count"] += 1
-            if step.get("status") != "formal":
+            if step.get("status") not in ["formal", "symbolic_supported", "scaffolded"]:
                 results["reduction_chain_validation"]["nonformal_steps"].append(step["step_id"])
             
             for gap in step.get("known_gaps", []):

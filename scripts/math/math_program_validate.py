@@ -5,14 +5,24 @@ import subprocess
 import sys
 from datetime import datetime
 
-def run_math_validator(script_name):
+def run_math_validator(script_spec):
     try:
+        # spec can be a simple script name or script + args
+        parts = script_spec.split(' ', 1)
+        script_name = parts[0]
+        args = parts[1] if len(parts) > 1 else ""
+        
         # Construct absolute path to handle execution from root
         script_path = os.path.join("scripts/math", script_name)
         if not os.path.exists(script_path):
             return {"status": "fail", "warnings": [f"Validator script missing: {script_name}"]}
             
-        result = subprocess.run([sys.executable, script_path], capture_output=True, text=True)
+        cmd = [sys.executable, script_path]
+        if args:
+            # Simple split for space-separated args; may need more robustness for complex args
+            cmd.extend(args.split(' '))
+            
+        result = subprocess.run(cmd, capture_output=True, text=True)
         if result.returncode != 0:
              return {"status": "fail", "warnings": [f"Script crashed: {result.stderr}"]}
         return json.loads(result.stdout)
@@ -24,19 +34,29 @@ def validate_math_program():
         "formal_objects": "validate_formal_objects.py",
         "participation_laws": "validate_participation_laws.py",
         "epsilon_null_measure": "validate_epsilon_null_measure.py",
+        "boundary_case_classification": "validate_boundary_case_classification.py",
         "continuation_laws": "validate_continuation_laws.py",
         "residue_coupling_laws": "validate_residue_coupling_laws.py",
         "operational_stability": "validate_operational_stability.py",
         "delta_selection": "validate_delta_selection.py",
         "transition_flux_convergence": "validate_transition_flux_convergence.py",
         "residue_behavior": "validate_residue_behavior.py",
+        "residue_conservation": "validate_residue_conservation.py",
         "orientation_minimization": "validate_orientation_minimization.py",
         "branch_pruning": "validate_branch_pruning.py",
         "nonlocal_transport": "validate_nonlocal_transport.py",
         "theory_induction_template": "validate_theory_induction_template.py",
+        "quantifier_explicitness": "validate_quantifier_explicitness.py",
         "operator_composition": "validate_operator_composition.py",
         "equivalence_relations": "validate_equivalence_relations.py",
+        "equivalence_properties": "validate_equivalence_properties.py",
+        "operator_functional_forms": "validate_operator_functional_forms.py",
         "symbolic_reduction_chains": "validate_symbolic_reduction_chains.py",
+        "reduction_step_formalization": "validate_reduction_step_formalization.py",
+        "recursive_convergence": "validate_recursive_convergence.py",
+        "recursive_transport_closure": "validate_recursive_transport_closure.py",
+        "selection_uniqueness": "validate_selection_uniqueness.py",
+        "theorem_proof_strengthening": "validate_theorem_proof_strengthening.py",
         "operational_stability_baseline": "validate_operational_stability_baseline.py",
         "phase_3_stability": "validate_phase_3_stability.py",
         "phase_3_test_results": "validate_phase_3_test_results.py --path outputs/math_tests/phase_3_stability_results.json",

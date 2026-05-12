@@ -1,0 +1,97 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Registry for recursive convergence classes, boundedness assumptions, and iteration conditions in Phase 3.",
+    "status": "provisional",
+    "last_updated": "2026-05-12"
+  },
+  "convergence_classes": [
+    {
+      "class": "finite_iteration_bounded",
+      "meaning": "Behavior remains bounded within a finite number of iterations."
+    },
+    {
+      "class": "conditionally_convergent",
+      "meaning": "Convergence depends on explicit residue, orientation, pruning, or admissibility constraints."
+    },
+    {
+      "class": "eventually_periodic",
+      "meaning": "System state eventually enters a periodic cycle within a bounded domain."
+    },
+    {
+      "class": "bounded_oscillatory",
+      "meaning": "System state oscillates within a stable, bounded region."
+    },
+    {
+      "class": "stabilized_recurrence",
+      "meaning": "System state enters and remains within a stable recurrence basin."
+    },
+    {
+      "class": "branch_bounded",
+      "meaning": "The number of active branches remains finite or conditionally bounded under recursion."
+    },
+    {
+      "class": "divergent",
+      "meaning": "System state or branch count grows without bound under iteration."
+    },
+    {
+      "class": "undefined",
+      "meaning": "Convergence or boundedness has not yet been established for the target system."
+    }
+  ],
+  "convergence_entries": [
+    {
+      "entry_id": "RCNV-001",
+      "target": "MPF-RCV-001",
+      "convergence_class": "conditionally_convergent",
+      "conditions": [
+        "residue_update is bounded or saturating",
+        "branch pruning enforces finite or conditionally finite branch width",
+        "transport closure is retained under declared bounds",
+        "admissibility windows do not collapse"
+      ],
+      "failure_modes": ["RDFM-001", "RDFM-003", "RDFM-004", "RDFM-006"],
+      "proof_status": "scaffolded",
+      "provisional_status": true
+    },
+    {
+      "entry_id": "RCNV-002",
+      "target": "delta",
+      "convergence_class": "branch_bounded",
+      "conditions": [
+        "multi-valued continuation remains pruned",
+        "branch explosion failure mode remains active",
+        "selection does not force unique continuation"
+      ],
+      "failure_modes": ["RDFM-002", "RDFM-009"],
+      "proof_status": "scaffolded",
+      "provisional_status": true
+    },
+    {
+      "entry_id": "RCNV-003",
+      "target": "NavT",
+      "convergence_class": "conditionally_convergent",
+      "conditions": [
+        "transport path remains locally or conditionally closed",
+        "orientation drift remains bounded",
+        "residue transport instability does not trigger"
+      ],
+      "failure_modes": ["RDFM-004", "RDFM-005"],
+      "proof_status": "scaffolded",
+      "provisional_status": true
+    },
+    {
+      "entry_id": "RCNV-004",
+      "target": "symbolic_reduction_chains",
+      "convergence_class": "undefined",
+      "conditions": [
+        "termination not globally proven",
+        "reduction loops remain registered failure modes",
+        "normal forms are not assumed universal"
+      ],
+      "failure_modes": ["RDFM-007", "RDFM-008"],
+      "proof_status": "none",
+      "provisional_status": true
+    }
+  ]
+}

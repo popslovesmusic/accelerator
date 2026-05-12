@@ -1,0 +1,50 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Registry for candidate symbolic/functional forms for Mono-Process operators.",
+    "status": "provisional",
+    "last_updated": "2026-05-12"
+  },
+  "symbolic_forms": [
+    {
+      "form_id": "SF-DELTA-001",
+      "operator": "delta",
+      "expression": "delta(E, R, -(i)) = { c in C | S(c, E, R, -(i)) is maximal }",
+      "description": "Selection-constrained multi-valued continuation where S is a composite selection metric.",
+      "multi_valued": true,
+      "status": "candidate"
+    },
+    {
+      "form_id": "SF-PIA-001",
+      "operator": "Pi_A",
+      "expression": "Pi_A(x, A) = proj(x, A)",
+      "description": "Admissibility projection mapping states into window A. Defined by Pi_A(x) = x for x in A.",
+      "idempotent": "conditional",
+      "status": "candidate"
+    },
+    {
+      "form_id": "SF-NAVT-001",
+      "operator": "NavT",
+      "expression": "NavT(x_alpha, path) = x_beta + residue_drift(path)",
+      "description": "Transport from locus alpha to beta. Non-invertibility arises from path-dependent residue drift.",
+      "invertible": false,
+      "status": "candidate"
+    },
+    {
+      "form_id": "SF-RES-001",
+      "operator": "residue_update",
+      "expression": "R_prime = f(R, E, delta)",
+      "description": "Residue update function. Can be modeled as R + dR (amplifying) or R * k (dissipative/saturating).",
+      "balance_classes": ["saturating", "amplifying", "dissipative"],
+      "status": "candidate"
+    },
+    {
+      "form_id": "SF-OMIN-001",
+      "operator": "orientation_minimization",
+      "expression": "arg min_{c} dist(c, frame_-(i))",
+      "description": "Selection of candidates minimizing orientation distance. Degeneracy occurs when arg min returns a set.",
+      "unique": "locally_only",
+      "status": "candidate"
+    }
+  ]
+}

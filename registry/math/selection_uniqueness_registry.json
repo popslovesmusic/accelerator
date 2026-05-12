@@ -1,0 +1,96 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Registry for selection uniqueness, nonuniqueness, degeneracy, and local uniqueness conditions in Phase 3.",
+    "status": "provisional",
+    "last_updated": "2026-05-12"
+  },
+  "selection_uniqueness_classes": [
+    {
+      "class": "locally_unique",
+      "meaning": "Selection is unique within a bounded local neighborhood or context."
+    },
+    {
+      "class": "conditionally_unique",
+      "meaning": "Uniqueness depends on explicit residue, orientation, or admissibility predicates."
+    },
+    {
+      "class": "equivalence_class_unique",
+      "meaning": "Selection is unique only up to a declared equivalence relation."
+    },
+    {
+      "class": "multi_valued_bounded",
+      "meaning": "Multiple candidates are selected, but the set size is formally bounded."
+    },
+    {
+      "class": "degenerate_minimum",
+      "meaning": "Multiple distinct candidates satisfy the selection metric equally."
+    },
+    {
+      "class": "branching_retained",
+      "meaning": "All admissible candidates are retained as concurrent process branches."
+    },
+    {
+      "class": "stochastic_or_undefined",
+      "meaning": "Selection behavior is intentionally unspecified or probabilistically modeled."
+    },
+    {
+      "class": "nonunique_unbounded",
+      "meaning": "Selection results in an unconstrained number of candidates."
+    }
+  ],
+  "uniqueness_entries": [
+    {
+      "entry_id": "SU-001",
+      "target": "delta",
+      "uniqueness_class": "multi_valued_bounded",
+      "conditions": [
+        "delta may return multiple admissible candidates",
+        "branch pruning bounds candidate growth",
+        "unique continuation is not assumed"
+      ],
+      "failure_modes": ["SUFM-001", "SUFM-006"],
+      "proof_status": "scaffolded",
+      "provisional_status": true
+    },
+    {
+      "entry_id": "SU-002",
+      "target": "orientation_minimization",
+      "uniqueness_class": "degenerate_minimum",
+      "conditions": [
+        "multiple candidates may share equal minimum orientation deviation",
+        "degenerate minima require explicit tie handling",
+        "local uniqueness holds only when the minimum is strict"
+      ],
+      "failure_modes": ["SUFM-002", "SUFM-003", "SUFM-004"],
+      "proof_status": "scaffolded",
+      "provisional_status": true
+    },
+    {
+      "entry_id": "SU-003",
+      "target": "branch_pruning",
+      "uniqueness_class": "equivalence_class_unique",
+      "conditions": [
+        "branches may collapse to equivalence classes",
+        "representative selection is not identical to unique physical continuation",
+        "branch equivalence transitivity limits remain explicit"
+      ],
+      "failure_modes": ["SUFM-007", "SUFM-008"],
+      "proof_status": "scaffolded",
+      "provisional_status": true
+    },
+    {
+      "entry_id": "SU-004",
+      "target": "reconstruction_uniqueness",
+      "uniqueness_class": "conditionally_unique",
+      "conditions": [
+        "selection may be reconstructable only under strict orientation, residue, and admissibility constraints",
+        "NavT non-invertibility remains active",
+        "observable_projection and delta remain multi-valued targets"
+      ],
+      "failure_modes": ["SUFM-009", "SUFM-010"],
+      "proof_status": "scaffolded",
+      "provisional_status": true
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Registry for provisional tie-resolution classes for degenerate minima and equivalent candidates in Phase 3.",
+    "status": "provisional",
+    "last_updated": "2026-05-12"
+  },
+  "tie_resolution_classes": [
+    {
+      "class": "retain_all_minima",
+      "meaning": "Degenerate minima are preserved as multiple admissible candidates unless an additional rule is declared."
+    },
+    {
+      "class": "residue_weighted_tiebreak",
+      "meaning": "Candidate preference may be weighted by residue compatibility without forcing global uniqueness."
+    },
+    {
+      "class": "orientation_secondary_metric",
+      "meaning": "Use an additional orientation-based metric to resolve ties between degenerate minima."
+    },
+    {
+      "class": "admissibility_priority_tiebreak",
+      "meaning": "Prioritize candidates with higher future admissibility retention or stability."
+    },
+    {
+      "class": "branch_width_bound_tiebreak",
+      "meaning": "Candidate retention may be bounded by declared branch-width constraints."
+    },
+    {
+      "class": "equivalence_class_collapse",
+      "meaning": "Multiple preimages may be treated as equivalent only under declared reconstruction equivalence."
+    },
+    {
+      "class": "defer_selection",
+      "meaning": "Selection is delayed until further process evolution resolves the ambiguity."
+    },
+    {
+      "class": "undefined_tiebreak",
+      "meaning": "No formal rule has been established for tie resolution in the target system."
+    }
+  ],
+  "tie_resolution_entries": [
+    {
+      "entry_id": "TR-001",
+      "target": "orientation_minimization",
+      "tie_resolution_class": "retain_all_minima",
+      "meaning": "Degenerate minima are preserved as multiple admissible candidates unless an additional rule is declared.",
+      "provisional_status": true
+    },
+    {
+      "entry_id": "TR-002",
+      "target": "delta",
+      "tie_resolution_class": "residue_weighted_tiebreak",
+      "meaning": "Candidate preference may be weighted by residue compatibility without forcing global uniqueness.",
+      "provisional_status": true
+    },
+    {
+      "entry_id": "TR-003",
+      "target": "branch_pruning",
+      "tie_resolution_class": "branch_width_bound_tiebreak",
+      "meaning": "Candidate retention may be bounded by declared branch-width constraints.",
+      "provisional_status": true
+    },
+    {
+      "entry_id": "TR-004",
+      "target": "reconstruction_uniqueness",
+      "tie_resolution_class": "equivalence_class_collapse",
+      "meaning": "Multiple preimages may be treated as equivalent only under declared reconstruction equivalence.",
+      "provisional_status": true
+    }
+  ]
+}
