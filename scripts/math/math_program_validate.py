@@ -62,6 +62,7 @@ def validate_math_program():
         "mt001_readiness": "validate_mt001_formal_candidate_readiness.py",
         "mt001_theorem_consolidation": "validate_mt001_theorem_consolidation.py",
         "mt002_readiness": "validate_mt002_formal_candidate_readiness.py",
+        "mt002_theorem_consolidation": "validate_mt002_theorem_consolidation.py",
         "mt003_readiness": "validate_mt003_formal_candidate_readiness.py",
         "formal_proof_artifacts": "validate_formal_proof_artifacts.py",
         "formal_verification_artifacts": "validate_formal_verification_artifacts.py",
