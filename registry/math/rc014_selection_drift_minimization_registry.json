@@ -1,0 +1,94 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Registry for bounded selection-drift minimization conditions and candidate modes in Phase 3.",
+    "status": "provisional",
+    "last_updated": "2026-05-12"
+  },
+  "drift_minimization_entries": [
+    {
+      "id": "RC-014",
+      "name": "Selection Drift Minimization",
+      "status": "symbolic_supported_candidate",
+      "purpose": "Represent bounded admissibility-sensitive tradeoffs between local deviation minimization and long-term orientation drift stabilization.",
+      "depends_on": [
+        "RC-005",
+        "RC-008",
+        "RC-013",
+        "orientation_minimization",
+        "delta_selection",
+        "selection_uniqueness",
+        "recursive_convergence",
+        "transition_flux_convergence",
+        "residue_behavior"
+      ],
+      "drift_minimization_conditions": [
+        {
+          "id": "DMC-001",
+          "name": "local_deviation_minimization_remains_defined",
+          "description": "The system must maintain formal metrics for evaluating single-step orientation error."
+        },
+        {
+          "id": "DMC-002",
+          "name": "long_term_orientation_drift_remains_bounded",
+          "description": "Cumulative frame error over multiple recursive steps must not exceed stability limits."
+        },
+        {
+          "id": "DMC-003",
+          "name": "selection_does_not_force_unique_trajectory",
+          "description": "Drift-minimization rules do not collapse the set of admissible continuation paths."
+        },
+        {
+          "id": "DMC-004",
+          "name": "orientation_bias_accumulation_detectable",
+          "description": "Formal mechanisms must exist to track the buildup of systematic frame deviation."
+        },
+        {
+          "id": "DMC-005",
+          "name": "recursive_selection_updates_remain_admissible",
+          "description": "Each step in the drift-balanced selection sequence must satisfy current process windows."
+        },
+        {
+          "id": "DMC-006",
+          "name": "window_shrinkage_does_not_force_global_alignment",
+          "description": "Reduction in admissibility domain does not imply convergence to a unique global frame."
+        },
+        {
+          "id": "DMC-007",
+          "name": "branch_pruning_preserves_required_drift_witness",
+          "description": "Pruning of high-drift branches must not eliminate all viable stabilization paths."
+        },
+        {
+          "id": "DMC-008",
+          "name": "transport_coupled_drift_instability_detectable",
+          "description": "Runaway drift triggered by nonlocal transport must be formally registerable."
+        }
+      ],
+      "candidate_drift_modes": [
+        "local_deviation_sensitive_selection",
+        "long_horizon_orientation_stabilization",
+        "window_constrained_drift_minimization",
+        "residue_sensitive_drift_response",
+        "recursive_orientation_bias_compensation"
+      ],
+      "failure_modes_to_preserve": [
+        "orientation_drift_divergence",
+        "forced_global_alignment",
+        "recursive_drift_locking",
+        "transport_induced_orientation_instability",
+        "window_collapse_under_drift_pressure",
+        "selection_collapse_to_short_horizon_minima",
+        "residue_accumulation_drift_instability",
+        "multi_branch_drift_fragmentation"
+      ],
+      "governance_constraints": {
+        "global_trajectory_optimization_claimed": false,
+        "deterministic_selection_claimed": false,
+        "unique_drift_minima_claimed": false,
+        "physics_validation_claimed": false,
+        "global_closure_claimed": false
+      },
+      "provisional_status": true
+    }
+  ]
+}

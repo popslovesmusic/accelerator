@@ -1,0 +1,47 @@
+{
+  "rc008_orientation_sensitivity_representation_result": {
+    "timestamp": "2026-05-12T19:29:45.452162",
+    "target": "RC-008",
+    "objective": "analyze_orientation_sensitivity",
+    "observed_behavior": "pass",
+    "orientation_audit": {
+      "local_reference": "established (D_ori bounded)",
+      "drift_stability": "verified (drift < 0.12 across 10 steps)",
+      "selection_bias": "permitted (multiple directions retained)",
+      "transport_coupling": "finite (flux remains within basin limits)",
+      "nondeterminism": "preserved (no directional locking observed)",
+      "admissibility": "legal (recursive updates respect Pi_A)",
+      "instability_detection": "active (monitor registered frame deviation)"
+    },
+    "orientation_modes_tested": [
+      "local_reference_orientation",
+      "residue_sensitive_orientation",
+      "transport_coupled_orientation",
+      "window_constrained_orientation",
+      "recursive_orientation_alignment"
+    ],
+    "stability_status": {
+      "is_sensitive_stable": true,
+      "domain": "recursive_continuation_structure",
+      "evidence": "Simulated orientation-coupled continuation with bounded frame drift and preserved multi-branching.",
+      "constraints": [
+        "no absolute frame",
+        "no global alignment"
+      ]
+    },
+    "failure_modes_tracked": [
+      "orientation_locking",
+      "orientation_frame_collapse",
+      "recursive_drift_accumulation",
+      "transport_orientation_divergence",
+      "forced_global_alignment",
+      "orientation_induced_branch_explosion",
+      "basin_escape_via_orientation_shift",
+      "orientation_resolution_instability"
+    ],
+    "readiness": "symbolic_supported_candidate",
+    "must_not_promote": true,
+    "governance_constraints_satisfied": true,
+    "notes": "No absolute reference frames or globally unique orientation resolution claimed."
+  }
+}

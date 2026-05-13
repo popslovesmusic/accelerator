@@ -1,0 +1,94 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Registry for bounded admissibility-window perturbation and recursive flux-response behavior across continuation systems in Phase 3.",
+    "status": "provisional",
+    "last_updated": "2026-05-12"
+  },
+  "window_perturbation_entries": [
+    {
+      "id": "RC-024",
+      "name": "Window Perturbation Flux Bounds",
+      "status": "symbolic_supported_candidate",
+      "purpose": "Represent bounded admissibility-window perturbation and recursive flux-response behavior across continuation systems.",
+      "depends_on": [
+        "RC-012",
+        "RC-020",
+        "RC-023",
+        "transition_flux_convergence",
+        "operational_stability",
+        "boundary_case_classification",
+        "epsilon_null_measure",
+        "branch_pruning",
+        "recursive_convergence"
+      ],
+      "window_perturbation_conditions": [
+        {
+          "id": "WPC-001",
+          "name": "window_perturbation_flux_behavior_remains_defined",
+          "description": "Formal support for evaluating how shifts in the admissibility window impact continuation flux."
+        },
+        {
+          "id": "WPC-002",
+          "name": "recursive_flux_updates_remain_admissible",
+          "description": "Flux variations resulting from repeated window perturbations must satisfy current process windows."
+        },
+        {
+          "id": "WPC-003",
+          "name": "window_boundary_instability_remains_detectable",
+          "description": "Formal mechanisms must exist to track and register instability triggered at window boundaries."
+        },
+        {
+          "id": "WPC-004",
+          "name": "epsilon_boundary_drift_does_not_force_global_flux_divergence",
+          "description": "Drift in the null boundary doesn't imply an unconstrained explosion of realized events."
+        },
+        {
+          "id": "WPC-005",
+          "name": "orientation_sensitive_flux_perturbation_remains_bounded",
+          "description": "The influence of frame orientation on flux response to window shifts must stay within stable limits."
+        },
+        {
+          "id": "WPC-006",
+          "name": "branch_pruning_preserves_required_flux_witness",
+          "description": "Pruning of isolated branches near perturbed boundaries must not eliminate all possible continuation flux."
+        },
+        {
+          "id": "WPC-007",
+          "name": "transport_flux_under_window_shift_remains_classifiable",
+          "description": "Nonlocal flux behavior following a window perturbation must map to registered transport classes."
+        },
+        {
+          "id": "WPC-008",
+          "name": "window_perturbation_instability_remains_detectable",
+          "description": "Formal mechanisms must exist to detect and register the breakdown of flux boundedness under perturbation."
+        }
+      ],
+      "candidate_flux_modes": [
+        "bounded_window_flux_response",
+        "orientation_sensitive_flux_perturbation",
+        "epsilon_sensitive_window_drift",
+        "recursive_flux_fragmentation_control",
+        "window_constrained_transport_flux"
+      ],
+      "failure_modes_to_preserve": [
+        "global_flux_divergence",
+        "window_boundary_transport_explosion",
+        "recursive_flux_fragmentation",
+        "orientation_locked_flux_instability",
+        "epsilon_boundary_flux_collapse",
+        "branch_pruning_overcollapse_under_perturbation",
+        "transport_nonclosure_under_window_shift",
+        "deterministic_window_stabilization_locking"
+      ],
+      "governance_constraints": {
+        "global_flux_boundedness_claimed": false,
+        "deterministic_window_stability_claimed": false,
+        "exact_boundary_continuity_claimed": false,
+        "physics_validation_claimed": false,
+        "global_closure_claimed": false
+      },
+      "provisional_status": true
+    }
+  ]
+}

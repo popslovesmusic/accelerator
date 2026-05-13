@@ -1,0 +1,95 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Registry for bounded residue transport dissipation and conservation-leakage conditions in Phase 3.",
+    "status": "provisional",
+    "last_updated": "2026-05-12"
+  },
+  "residue_dissipation_entries": [
+    {
+      "id": "RC-027",
+      "name": "Residue Transport Dissipation Bounds",
+      "status": "symbolic_supported_candidate",
+      "purpose": "Represent bounded residue transport dissipation and admissibility-sensitive conservation leakage across recursive continuation systems.",
+      "depends_on": [
+        "RC-007",
+        "RC-009",
+        "RC-022",
+        "RC-026",
+        "residue_conservation",
+        "residue_transport",
+        "nonlocal_transport",
+        "transition_flux_convergence",
+        "residue_behavior",
+        "recursive_transport_closure"
+      ],
+      "residue_dissipation_conditions": [
+        {
+          "id": "RDC-001",
+          "name": "residue_transport_dissipation_remains_defined",
+          "description": "Formal metrics must exist to track the loss or dispersion of residue measure during nonlocal transport."
+        },
+        {
+          "id": "RDC-002",
+          "name": "conservation_leakage_behavior_remains_detectable",
+          "description": "The system must maintain formal predicates to identify where exact conservation fails due to leakage."
+        },
+        {
+          "id": "RDC-003",
+          "name": "recursive_residue_updates_remain_admissible",
+          "description": "Dissipative residue transitions must satisfy current admissibility windows at each step."
+        },
+        {
+          "id": "RDC-004",
+          "name": "nonlocal_transport_does_not_force_exact_conservation",
+          "description": "Propagating influence acrossInteraction domains does not imply lossless residue persistence."
+        },
+        {
+          "id": "RDC-005",
+          "name": "orientation_sensitive_residue_decay_remains_bounded",
+          "description": "Drift in residue decay rates triggered by frame orientation must stay within stability thresholds."
+        },
+        {
+          "id": "RDC-006",
+          "name": "transition_flux_under_residue_transport_remains_finite",
+          "description": "Dissipative transport must ensure that realization measure does not diverge under recursion."
+        },
+        {
+          "id": "RDC-007",
+          "name": "branch_pruning_preserves_required_residue_transport_witness",
+          "description": "Pruning of highly dissipative states must not eliminate all valid residue-coupled paths."
+        },
+        {
+          "id": "RDC-008",
+          "name": "residue_transport_instability_remains_detectable",
+          "description": "Formal mechanisms must exist to detect and register the breakdown of balance bounds or runaway leakage."
+        }
+      ],
+      "candidate_dissipation_modes": [
+        "bounded_recursive_residue_decay",
+        "orientation_sensitive_transport_dissipation",
+        "window_constrained_residue_flux",
+        "nonlocal_residue_leakage_propagation",
+        "recursive_transport_limited_conservation"
+      ],
+      "failure_modes_to_preserve": [
+        "forced_exact_global_conservation",
+        "recursive_residue_divergence",
+        "nonlocal_transport_residue_explosion",
+        "orientation_locked_residue_decay",
+        "window_boundary_transport_leakage_instability",
+        "transition_flux_overaccumulation",
+        "recursive_transport_nonclosure_under_residue",
+        "deterministic_residue_persistence_locking"
+      ],
+      "governance_constraints": {
+        "exact_global_residue_conservation_claimed": false,
+        "deterministic_residue_persistence_claimed": false,
+        "complete_nonlocal_transport_closure_claimed": false,
+        "physics_validation_claimed": false,
+        "global_closure_claimed": false
+      },
+      "provisional_status": true
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Registry for bounded infinite-iteration stability conditions and candidate modes in Phase 3.",
+    "status": "provisional",
+    "last_updated": "2026-05-12"
+  },
+  "asymptotic_stability_entries": [
+    {
+      "id": "RC-020",
+      "name": "Infinite Iteration Stability",
+      "status": "symbolic_supported_candidate",
+      "purpose": "Represent bounded asymptotic stabilization behavior under infinite recursive continuation systems.",
+      "depends_on": [
+        "RC-003",
+        "RC-004",
+        "RC-019",
+        "recursive_convergence",
+        "recursive_transport_closure",
+        "transition_flux_convergence",
+        "operational_stability",
+        "branch_pruning",
+        "selection_uniqueness"
+      ],
+      "infinite_iteration_conditions": [
+        {
+          "id": "IIC-001",
+          "name": "asymptotic_stability_behavior_remains_detectable",
+          "description": "Formal support for detecting long-term stabilization trends beyond finite simulation horizons."
+        },
+        {
+          "id": "IIC-002",
+          "name": "recursive_iteration_updates_remain_bounded",
+          "description": "The sequence of admissibility-preserving updates must not lead to state or flux divergence at infinity."
+        },
+        {
+          "id": "IIC-003",
+          "name": "infinite_iteration_does_not_force_global_convergence",
+          "description": "Asymptotic stability does not imply the existence of a unique, globally attracting fixed point."
+        },
+        {
+          "id": "IIC-004",
+          "name": "selection_induced_branching_remains_admissible_under_iteration",
+          "description": "Branching structures must satisfy admissibility windows at every step of the infinite sequence."
+        },
+        {
+          "id": "IIC-005",
+          "name": "transport_flux_under_asymptotic_iteration_remains_finite",
+          "description": "The limit of accumulated transport flux as iterations approach infinity must be formally bounded."
+        },
+        {
+          "id": "IIC-006",
+          "name": "recursive_basin_instability_remains_detectable",
+          "description": "Formal mechanisms must exist to register when an infinite chain escapes its local recurrence basin."
+        },
+        {
+          "id": "IIC-007",
+          "name": "branch_pruning_preserves_required_asymptotic_witness",
+          "description": "Pruning of divergent paths at long horizons must not eliminate all possible asymptotic continuation witnesses."
+        },
+        {
+          "id": "IIC-008",
+          "name": "infinite_iteration_divergence_modes_remain_classifiable",
+          "description": "Breakdown in asymptotic stability must map to registered divergence failure modes."
+        }
+      ],
+      "candidate_asymptotic_modes": [
+        "bounded_recursive_asymptotic_stabilization",
+        "orientation_sensitive_asymptotic_decay",
+        "window_constrained_recursive_iteration",
+        "residue_sensitive_asymptotic_persistence",
+        "recursive_transport_limited_stabilization"
+      ],
+      "failure_modes_to_preserve": [
+        "infinite_iteration_divergence",
+        "forced_global_convergence",
+        "recursive_basin_fragmentation",
+        "transport_flux_asymptotic_instability",
+        "selection_induced_asymptotic_branch_explosion",
+        "orientation_locked_recursive_collapse",
+        "window_boundary_asymptotic_breakdown",
+        "nonlocal_recursive_transport_divergence"
+      ],
+      "governance_constraints": {
+        "global_recursive_convergence_claimed": false,
+        "exact_asymptotic_identity_claimed": false,
+        "deterministic_infinite_iteration_behavior_claimed": false,
+        "physics_validation_claimed": false,
+        "global_closure_claimed": false
+      },
+      "provisional_status": true
+    }
+  ]
+}

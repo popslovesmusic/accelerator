@@ -1,0 +1,95 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Registry for bounded nonlocal transport-closure conditions and candidate modes in Phase 3.",
+    "status": "provisional",
+    "last_updated": "2026-05-12"
+  },
+  "transport_closure_entries": [
+    {
+      "id": "RC-007",
+      "name": "Nonlocal Transport Closure",
+      "status": "symbolic_supported_candidate",
+      "purpose": "Represent bounded admissibility-preserving transport closure across nonlocal CSI-linked continuation structures.",
+      "depends_on": [
+        "RC-004",
+        "RC-005",
+        "RC-006",
+        "nonlocal_transport",
+        "recursive_transport_closure",
+        "transition_flux_convergence",
+        "recursive_convergence",
+        "residue_behavior",
+        "branch_pruning"
+      ],
+      "transport_closure_conditions": [
+        {
+          "id": "TCC-001",
+          "name": "transport_flux_remains_finite",
+          "description": "Measurement of transported continuation events does not diverge per recursive step."
+        },
+        {
+          "id": "TCC-002",
+          "name": "nonlocal_admissibility_preserved",
+          "description": "Transport across non-adjacent process loci must satisfy nonlocal window constraints."
+        },
+        {
+          "id": "TCC-003",
+          "name": "recursive_transport_updates_remain_bounded",
+          "description": "Composition of transport operators over multiple steps remains within a finite or conditionally stable neighborhood."
+        },
+        {
+          "id": "TCC-004",
+          "name": "CSI_linkage_remains_defined",
+          "description": "Interaction domains (CSI) must remain formally registered and mapped for transport to proceed."
+        },
+        {
+          "id": "TCC-005",
+          "name": "transport_does_not_force_unique_reconstruction",
+          "description": "Nonlocal propagation does not bypass preimage ambiguity or non-invertibility."
+        },
+        {
+          "id": "TCC-006",
+          "name": "noninvertible_transport_preserved",
+          "description": "The path-dependent nature of NavT is maintained across the closure structure."
+        },
+        {
+          "id": "TCC-007",
+          "name": "branch_pruning_preserves_required_transport_witness",
+          "description": "Pruning of nonlocal branches must not eliminate all possible transport paths."
+        },
+        {
+          "id": "TCC-008",
+          "name": "residue_accumulation_does_not_force_transport_divergence",
+          "description": "Accumulated residue must not trigger runaway transport flux or basin escape."
+        }
+      ],
+      "candidate_transport_modes": [
+        "bounded_recursive_transport",
+        "CSI_weighted_transport",
+        "orientation_sensitive_transport",
+        "window_constrained_transport",
+        "residue_sensitive_transport"
+      ],
+      "failure_modes_to_preserve": [
+        "transport_divergence",
+        "CSI_disconnect_instability",
+        "recursive_flux_explosion",
+        "orientation_transport_locking",
+        "basin_escape_via_transport",
+        "forced_unique_reconstruction",
+        "nonlocal_branch_explosion",
+        "transport_closure_breakdown"
+      ],
+      "governance_constraints": {
+        "global_transport_closure_claimed": false,
+        "infinite_transport_convergence_claimed": false,
+        "transport_invertibility_claimed": false,
+        "unique_reconstruction_claimed": false,
+        "physics_validation_claimed": false,
+        "global_closure_claimed": false
+      },
+      "provisional_status": true
+    }
+  ]
+}
