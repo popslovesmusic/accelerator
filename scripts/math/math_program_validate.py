@@ -60,6 +60,7 @@ def validate_math_program():
         "recursive_transport_closure": "validate_recursive_transport_closure.py",
         "selection_uniqueness": "validate_selection_uniqueness.py",
         "mt001_readiness": "validate_mt001_formal_candidate_readiness.py",
+        "mt001_theorem_consolidation": "validate_mt001_theorem_consolidation.py",
         "mt002_readiness": "validate_mt002_formal_candidate_readiness.py",
         "mt003_readiness": "validate_mt003_formal_candidate_readiness.py",
         "formal_proof_artifacts": "validate_formal_proof_artifacts.py",
