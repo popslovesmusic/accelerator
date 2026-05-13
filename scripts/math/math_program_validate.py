@@ -110,7 +110,14 @@ def validate_math_program():
         "pi_a_idempotence": "validate_pi_a_idempotence.py",
         "navt_identity": "validate_navt_identity.py",
         "continuation_nonempty_image": "validate_continuation_nonempty_image.py",
-        "minimal_theorems": "validate_minimal_theorems.py"
+        "minimal_theorems": "validate_minimal_theorems.py",
+        "sum_operator_convergence": "validate_sum_operator_convergence.py",
+        "audit001_numerical_correctness_triage": "validate_audit001_numerical_correctness_triage.py",
+        "audit002_dependency_reproducibility_lock": "validate_audit002_dependency_reproducibility_lock.py",
+        "audit003_tda_adjacency_threshold": "validate_audit003_tda_adjacency_threshold.py",
+        "audit004_rd_boundary_scaling_policy": "validate_audit004_rd_boundary_scaling_policy.py",
+        "audit005_poisson_sign_convention": "validate_audit005_poisson_sign_convention.py",
+        "audit006_structural_euler_stability_bounds": "validate_audit006_structural_euler_stability_bounds.py"
     }
 
     report = {

@@ -1,0 +1,80 @@
+{
+  "id": "AUDIT-001",
+  "name": "Numerical Correctness Triage",
+  "status": "active",
+  "timestamp": "2026-05-13T10:00:00Z",
+  "audit_findings": [
+    {
+      "finding": "RD moving-boundary sim can crash on short runs because history[-1] assumes at least one metrics entry.",
+      "path": "tools/rd_moving_boundary_sim_v1/sim.py",
+      "resolution": "Guard empty history before final metrics access.",
+      "priority": "immediate",
+      "confidence": "high",
+      "status": "resolved",
+      "verification": "tests/test_rd_moving_boundary_short_runs.py"
+    },
+    {
+      "finding": "No minimal regression test exists for short RD runs.",
+      "path": "tests/test_rd_moving_boundary_short_runs.py",
+      "resolution": "Add regression test verifying steps < 10 does not crash.",
+      "priority": "immediate",
+      "confidence": "high",
+      "status": "resolved"
+    },
+    {
+      "finding": "RD boundary behavior uses np.roll, implying periodic boundaries.",
+      "path": "tools/rd_moving_boundary_sim_v1/rd_engine.py",
+      "action": "Document current convention and defer behavioral change until boundary policy is approved.",
+      "priority": "high",
+      "confidence": "medium",
+      "status": "documented",
+      "document": "docs/math/numerical_conventions_audit.md"
+    },
+    {
+      "finding": "RD Laplacian/divergence omit dx/dy scaling.",
+      "path": "tools/rd_moving_boundary_sim_v1/rd_engine.py",
+      "action": "Document unit-grid convention or prepare later explicit dx/dy scaling patch.",
+      "priority": "high",
+      "confidence": "medium",
+      "status": "documented",
+      "document": "docs/math/numerical_conventions_audit.md"
+    },
+    {
+      "finding": "TDA adjacency graph may over-connect on floating noise.",
+      "path": "tools/tda_module_v1/tda_engine.py",
+      "action": "Stage thresholding patch with explicit default policy.",
+      "priority": "high",
+      "confidence": "high",
+      "status": "documented",
+      "document": "docs/math/numerical_conventions_audit.md"
+    },
+    {
+      "finding": "Poisson solver sign convention requires audit before modification.",
+      "path": "tools/accelerator_sim_v1_cpp/PoissonSolver.cpp",
+      "action": "Document sign convention and downstream usage before any sign change.",
+      "priority": "medium",
+      "confidence": "medium",
+      "status": "documented",
+      "document": "docs/math/numerical_conventions_audit.md"
+    },
+    {
+      "finding": "Requirements are unpinned.",
+      "path": "requirements.txt",
+      "action": "Prepare reproducibility patch to add pinned lockfile or constrained numerical dependency versions.",
+      "priority": "high",
+      "confidence": "high",
+      "status": "documented",
+      "document": "docs/math/numerical_conventions_audit.md"
+    }
+  ],
+  "triage_conditions_met": [
+    "high_confidence_crash_fix_applied",
+    "short_run_regression_test_added",
+    "medium_risk_numerical_behavior_not_silently_changed",
+    "boundary_condition_convention_documented",
+    "discretization_scaling_ambiguity_documented",
+    "tda_thresholding_staged",
+    "poisson_sign_convention_staged",
+    "theorem_and_physics_claims_unchanged"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "AUDIT-006",
+  "name": "Structural Euler Stability Bounds",
+  "status": "active",
+  "timestamp": "2026-05-13T13:00:00Z",
+  "depends_on": ["AUDIT-001", "AUDIT-002", "AUDIT-004", "AUDIT-005"],
+  "stability_conditions_met": [
+    "explicit_euler_update_usage_documented",
+    "dt_sensitivity_documented",
+    "stiff_regime_risk_documented",
+    "nonnegativity_clamp_role_documented",
+    "stability_diagnostics_present",
+    "fragile_configuration_warning_present",
+    "regression_tests_present",
+    "no_full_stability_claim_introduced"
+  ],
+  "policy_document": "docs/math/structural_box_euler_stability_policy.md",
+  "verification_test": "tests/test_structural_box_euler_stability_bounds.py",
+  "implementation": {
+    "tool": "tools/structural_box_sim_v2/sim.py",
+    "integrator": "explicit_euler",
+    "diagnostics": "check_stability"
+  }
+}

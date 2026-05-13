@@ -1,0 +1,35 @@
+{
+  "id": "AUDIT-002",
+  "name": "Dependency Reproducibility Lock",
+  "status": "active",
+  "timestamp": "2026-05-13T10:30:00Z",
+  "depends_on": ["AUDIT-001"],
+  "reproducibility_artifacts": {
+    "lockfile": "requirements.lock.txt",
+    "policy": "docs/math/dependency_reproducibility_policy.md"
+  },
+  "environment_baseline": {
+    "python_version": "3.14.4",
+    "numerical_stack": {
+      "numpy": "2.4.4",
+      "pandas": "3.0.2",
+      "scipy": "1.17.1",
+      "networkx": "3.6.1",
+      "matplotlib": "3.10.9"
+    },
+    "validation_stack": {
+      "pytest": "9.0.3",
+      "jsonschema": "4.26.0"
+    }
+  },
+  "reproducibility_conditions_met": [
+    "dependency_lockfile_present",
+    "numerical_dependency_versions_recorded",
+    "validation_dependency_versions_recorded",
+    "lockfile_generation_method_documented",
+    "unpinned_requirements_risk_documented",
+    "implementation_verified_blocked_until_lock_policy_exists",
+    "no_numerical_behavior_changed",
+    "no_theorem_or_physics_claim_changed"
+  ]
+}

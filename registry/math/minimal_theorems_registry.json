@@ -1,0 +1,94 @@
+{
+  "meta": {
+    "version": "1.1",
+    "description": "Registry of minimal local theorems, consolidated state.",
+    "status": "consolidated",
+    "last_updated": "2026-05-13",
+    "atlas_links": {
+      "meta004_registry": "registry/math/meta004_derivation_graph_atlas_registry.json",
+      "theorem_dependency_graph": "docs/math/atlas_theorem_dependency_graph.md",
+      "derivation_graph": "docs/math/atlas_derivation_graph.md",
+      "operator_flow_map": "docs/math/atlas_operator_flow_map.md",
+      "open_question_dependency_map": "docs/math/atlas_open_question_dependency_map.md"
+    }
+  },
+  "theorems": [
+    {
+      "theorem_id": "MT-001",
+      "name": "Projection Idempotence Under Stable Admissibility",
+      "statement": "Pi_A(Pi_A(x)) ~ Pi_A(x) under stable admissibility conditions SA-001 through SA-005.",
+      "entry_type": "theorem",
+      "scope": "conditional",
+      "status": "consolidated",
+      "dependencies": {
+        "operators": ["Pi_A"],
+        "well_posedness_entries": ["WP-001"],
+        "composition_laws": ["OC-001", "OC-002"],
+        "proof_scaffold": "registry/math/pi_a_idempotence_proof_scaffold.json"
+      },
+      "assumptions": [
+        "SA-001: Non-empty admissibility window A",
+        "SA-002: Pi_A maps into A",
+        "SA-003: Fixed point property for y in A",
+        "SA-004: Stability of residue/orientation constraints",
+        "SA-005: Absence of boundary drift"
+      ],
+      "proof_obligations": ["PO-001"],
+      "known_failure_modes": ["FM-007", "CFM-004", "RUFM-003"],
+      "closure_status": "conditional",
+      "claim_boundary": "formal_procedural_only",
+      "provisional_status": false
+    },
+    {
+      "theorem_id": "MT-002",
+      "name": "Transport Identity on Null Path",
+      "statement": "NavT_identity(x) ~ x under identity transport conditions NI-001 through NI-005.",
+      "entry_type": "proposition",
+      "scope": "local",
+      "status": "consolidated",
+      "dependencies": {
+        "operators": ["NavT"],
+        "well_posedness_entries": ["WP-002"],
+        "nonlocal_transport_entries": ["NTC-001"],
+        "proof_scaffold": "registry/math/navt_identity_proof_scaffold.json"
+      },
+      "assumptions": [
+        "NI-001: Null-length transport path",
+        "NI-002: Locally closed process state",
+        "NI-003: Residue invariance",
+        "NI-004: Orientation invariance",
+        "NI-005: Absence of window drift"
+      ],
+      "proof_obligations": ["PO-002"],
+      "known_failure_modes": ["FM-008", "NTFM-006", "RUFM-004"],
+      "closure_status": "local",
+      "claim_boundary": "formal_procedural_only",
+      "provisional_status": false
+    },
+    {
+      "theorem_id": "MT-003",
+      "name": "Continuation Requires Non-Empty Admissible Image",
+      "statement": "existence(continuation_event) => image(Pi_A ∘ delta_selection(candidate_set)) != empty under conditions NEI-001 through NEI-005.",
+      "entry_type": "lemma",
+      "scope": "conditional",
+      "status": "consolidated",
+      "dependencies": {
+        "operators": ["Pi_A", "delta"],
+        "object_classes": ["continuation_event", "participation_space", "continuation_space", "admissibility_window"],
+        "proof_scaffold": "registry/math/continuation_nonempty_image_proof_scaffold.json"
+      },
+      "assumptions": [
+        "NEI-001: Non-null participation_space",
+        "NEI-002: Non-empty admissibility_window",
+        "NEI-003: Pi_A maps at least one candidate into window",
+        "NEI-004: delta has at least one admissible candidate after constraints",
+        "NEI-005: Residue/orientation do not eliminate all candidates"
+      ],
+      "proof_obligations": ["PO-003"],
+      "known_failure_modes": ["FM-001", "CFM-006", "RUFM-005"],
+      "closure_status": "conditional",
+      "claim_boundary": "formal_procedural_only",
+      "provisional_status": false
+    }
+  ]
+}

@@ -5,6 +5,11 @@ class RDEngine:
         self.size = config['grid_size']
         self.dt = config['dt']
         
+        # Numerical Conventions (AUDIT-004)
+        self.boundary_mode = config.get('boundary_mode', 'periodic')
+        self.dx = config.get('dx', 1.0)
+        self.dy = config.get('dy', 1.0)
+        
         # Coefficients
         self.D_diff = config['D_diff']
         self.S_diff = config['S_diff']
