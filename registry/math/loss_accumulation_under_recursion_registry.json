@@ -1,0 +1,49 @@
+{
+  "loss_accumulation_under_recursion": {
+    "version": "1.0",
+    "description": "Registry for tracking the accumulation of information loss in recursive process systems.",
+    "accumulation_classes": [
+      {
+        "id": "LAC-001",
+        "name": "monotone_bounded_loss",
+        "behavior": "Loss increases with N but converges to a fixed structural limit.",
+        "condition": "Stable fixed-point recursion with bounded dissipation."
+      },
+      {
+        "id": "LAC-002",
+        "name": "monotone_divergent_loss",
+        "behavior": "Information is erased linearly or exponentially with each iteration.",
+        "condition": "Chaotic or resonance-prone transport cycles."
+      },
+      {
+        "id": "LAC-003",
+        "name": "recursive_accumulation_loss",
+        "behavior": "Loss scales with the complexity of branch generation.",
+        "condition": "Unpruned multi-branch continuation."
+      }
+    ],
+    "operator_recursion_mapping": [
+      {
+        "operator": "NavT",
+        "accumulation_type": "monotone_bounded_loss",
+        "basis": "Aggregate flux stabilizes under bounded residue R."
+      },
+      {
+        "operator": "delta",
+        "accumulation_type": "recursive_accumulation_loss",
+        "basis": "Branch count may explode without explicit pruning OMR-001."
+      },
+      {
+        "operator": "Pi_A",
+        "accumulation_type": "monotone_bounded_loss",
+        "basis": "Iterative projection converges to stable admissibility set."
+      },
+      {
+        "operator": "observable_projection",
+        "accumulation_type": "monotone_divergent_loss",
+        "basis": "Repeated projection to low-dimensional metrics compounds preimage ambiguity."
+      }
+    ],
+    "last_updated": "2026-05-13"
+  }
+}
