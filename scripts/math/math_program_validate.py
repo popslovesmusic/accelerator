@@ -170,7 +170,13 @@ def validate_math_program():
         "law025_persistence_decay_forgetting_law": "validate_law025_persistence_decay_forgetting_law.py",
         "law026_metastability_temporary_lawlike_regime_law": "validate_law026_metastability_temporary_lawlike_regime_law.py",
         "law027_admissibility_phase_transition_law": "validate_law027_admissibility_phase_transition_law.py",
-        "law028_topological_invariants_under_continuation_law": "validate_law028_topological_invariants_under_continuation_law.py"
+        "law028_topological_invariants_under_continuation_law": "validate_law028_topological_invariants_under_continuation_law.py",
+        "law029_recursive_arbitration_conflict_resolution_law": "validate_law029_recursive_arbitration_conflict_resolution_law.py",
+        "law030_multiscale_coherence_transfer_law": "validate_law030_multiscale_coherence_transfer_law.py",
+        "law031_discrete_continuous_transition_mechanics_law": "validate_law031_discrete_continuous_transition_mechanics_law.py",
+        "law032_recursive_failure_mode_taxonomy_law": "validate_law032_recursive_failure_mode_taxonomy_law.py",
+        "law033_hidden_topology_inaccessible_continuation_domains_law": "validate_law033_hidden_topology_inaccessible_continuation_domains_law.py",
+        "law034_continuation_grammar_compositional_structure_law": "validate_law034_continuation_grammar_compositional_structure_law.py"
     }
 
     report = {

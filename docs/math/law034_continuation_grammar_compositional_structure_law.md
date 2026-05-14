@@ -1,0 +1,43 @@
+# Law-034: Continuation Grammar and Compositional Structure Law
+
+## 1. Definition
+The **Continuation Grammar and Compositional Structure Law** formalizes the bounded rules governing the combination and simplification of continuation-law objects. It defines a compositional grammar ($G_C$) that ensures higher-order constructions (sequences of operators, nested basins, arbitrated channel networks) remain admissibility-preserving, budget-aware, and failure-mode-consistent, preventing the framework's symbolic language from drifting into unconstrained abstraction.
+
+## 2. Formal Statement
+Within the recursive continuation framework:
+
+- **Orientation Array**: {-(i)_α}
+- **Grammar Candidate ($G_C$)**: $G_C := (\Sigma_C, R_C, Comp_C, Fail_C)$ is the tuple defining the symbols, rules, composition constraints, and failure modes of the continuation language.
+- **Symbol Set ($\Sigma_C$)**: The set of irreducible and emergent process objects: $\{\delta, \Pi_A, NavT, CSI, C_P, B_U, Arb_A, \Xi, D_A, Top_A\}$.
+- **Composition Rule Candidate ($Comp_C(X, Y)$)**: A rule permitting the combination of structures $X$ and $Y$ only if domain/codomain compatibility, admissibility preservation ($LAW-002$), budget constraints ($LAW-021$), and reconstruction limits ($LAW-016$) are satisfied.
+- **Reduction Rule Candidate ($Reduce_C(expr)$)**: A procedure for simplifying complex continuation expressions that is valid only if failure modes, branch ambiguity, and boundedness conditions are strictly preserved.
+- **Invalid Composition Condition ($Invalid_C(X, Y)$)**: Occurs when a proposed combination hides failure modes ($LAW-032$), forces artificial uniqueness (erasing multi-valued $\delta$), suppresses reconstruction loss, or reintroduces primitive geometry/time/law assumptions.
+- **Grammar Scope Clause**: The grammar is fundamentally local, provisional, and governance-bound. It does not claim to be a universal language or a complete formal logic.
+- **Failure-Mode Preservation**: All grammar operations must preserve the visibility of underlying failure modes; composition cannot be used as a "black box" to bypass governance checks.
+
+## 3. Core Principles
+- **Grammar as Constraint**: The grammar does not enable "any" symbolic operation but restricts operations to those that are operationally grounded in the process mechanics.
+- **Ordered Composition**: The sequence of continuation events is governed by admissibility-preconditioning ($LAW-007$), which the grammar must respect.
+- **Loss-Aware Reduction**: Simplification of expressions must account for the accumulation of recursive loss ($Loss(C_P, n)$).
+- **Admissibility Gating**: Every step in a compositional sequence is subject to local admissibility budget checks.
+
+## 4. Governance & Limits
+- **No Physics Claim**: This law defines a formal grammar for the Mono-Process Framework and does not claim to describe physical laws of composition, group theory in physics, or fundamental logic.
+- **No Universal Language Claim**: The grammar is not claimed to be capable of representing all possible systems or "the language of the universe."
+- **No Complete Formal Logic**: MPF does not assert that this grammar forms a complete or consistent axiomatic logic system in the Gödelian sense.
+- **No Catch-All Projection**: Using "projection" ($\Pi_A$) as a symbolic shortcut to hide unresolved process contradictions is explicitly blocked.
+- **Preserve Failure Modes**: Composition must not be used to mask transitions into failure states ($Fail_A$).
+- **Preserve Branch Ambiguity**: Reductions that collapse multi-valued selection into a single deterministic path without an admissible selection rule are blocked.
+
+## 5. Failure Modes
+- **Universal Language Overclaim**: Asserting that $G_C$ can describe any phenomenon without limit.
+- **Complete Formal Logic Overclaim**: Claiming the grammar is a final, absolute axiomatization of reality.
+- **Unconstrained Projection Language**: Treating $\Pi_A$ as an unconstrained operator that can "fix" any invalid state.
+- **Symbolic Collapse Without Admissibility**: Performing symbolic manipulations that ignore the core admissibility constraints.
+- **Composition Hides Failure Modes**: Building complex structures where internal failures are invisible to local observability.
+- **Reduction Erases Branch Ambiguity**: Forcing deterministic outcomes during expression simplification.
+- **Primitive Geometry/Time/Law Reintroduction**: Using grammar rules to sneak in background coordinates or eternal laws.
+- **Physics Claim Leakage**: Citing the grammar as a validation of mathematical physics or formal logic.
+
+---
+[Back to Master Index](codex_master_index.md)

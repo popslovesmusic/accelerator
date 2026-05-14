@@ -143,6 +143,46 @@ Orientation governs the "directionality" of continuation and transport.
   - **Reinforcement and Reconstruction Invariants**: Preservation of history-overlap and observational equivalence.
   - **Bounded Invariance**: Preservation is valid only within declared tolerances.
   - **No Global Conservation Clause**: Invariants are local and conditional; no universal conservation is claimed.
+- **Recursive Arbitration and Conflict Resolution Law (LAW-029)**: Defines local arbitration behavior among competing continuation possibilities.
+  - **Arbitration Operator**: Resolves conflicts by selecting, deferring, splitting, merging, pruning, or collapsing candidates.
+  - **Conflict Condition**: Triggered when simultaneous persistence exceeds local admissibility budgets or destabilizes invariants.
+  - **Priority Scoring**: Operational measure based on admissibility margin, reinforcement, and perturbation resilience.
+  - **Tie-Resolution**: Allows for multi-branch continuation, deferred selection, or persistent ambiguity.
+  - **Recursive Feedback**: Arbitration outcomes reorganization local topology and influence future budgets.
+  - **Non-Unique Clause**: Arbitration is not assumed unique, deterministic, or globally optimal.
+- **Multi-Scale Coherence Transfer Law (LAW-030)**: Defines how locally stabilized structures coordinate across scale-like organization layers.
+  - **Scale-Like Layers**: Emergent organization strata induced by coherent reconciliation structure.
+  - **Coherence Transfer**: Alignment between local, regional, and higher-order continuation layers.
+  - **Upward Transfer**: Local coherence reinforcing higher-order stabilization structures.
+  - **Downward Constraint**: Higher-order coherence narrowing local admissible continuation options.
+  - **Scale Decoupling**: Incompatibility between layers blocking effective coherence transfer.
+  - **Non-Primitive Scale Clause**: Organization strata are emergent, not primitive background coordinates.
+- **Discrete-Continuous Transition Mechanics Law (LAW-031)**: Defines how continuous gradients produce discrete continuation outcomes.
+  - **Continuous Gradients**: Gradual variation in admissibility, reinforcement, or budget.
+  - **Operational Thresholds**: Limits mediating the transition from continuous to discrete structure.
+  - **Discrete Events**: Abrupt stabilization outcomes such as pruning, bifurcation, or regime shifts.
+  - **Stabilization Quantization**: Emergent partitioning of process outcomes across threshold boundaries.
+  - **Continuity Preservation**: Gradient structure persists underlying the discrete appearance.
+  - **Non-Physical Clause**: Discreteness is an operational outcome, not a physical quantization claim.
+- **Recursive Failure Mode Taxonomy Law (LAW-032)**: Defines a unified taxonomy of failure states in recursive continuation.
+  - **Failure Families**: Runaway, deadlock, fragmentation, reinforcement lock, admissibility collapse, budget exhaustion, perturbation cascade, and reconstruction failure.
+  - **Structural Failure**: Failure is a governed transition into an unstable or non-reconstructible state, not a simple "end."
+  - **Cascades**: Local failures propagate regional instability through shared dependencies.
+  - **Non-Suppression Clause**: Failures must be explicitly recorded and preserved as structural outcomes.
+  - **Constraint Dependency**: Failures emerge from the violation of admissibility, budget, or reconstruction limits.
+- **Hidden Topology and Inaccessible Continuation Domains Law (LAW-033)**: Defines stable continuation structures existing outside local reconstruction reach.
+  - **Hidden Domains**: Loci that are topologically unreachable or reconstructively opaque.
+  - **Inaccessibility Conditions**: Arise from finite-flux decay, horizons, fragmentation, or compression loss.
+  - **Partial Traces**: Hidden structures influence accessible domains through indirect residues and distortions.
+  - **Non-Absolute Hiddenness**: Hiddenness is a local relational property, not an absolute metaphysical state.
+  - **Non-Observer Completion**: No domain or process is capable of complete global topology recovery.
+- **Continuation Grammar and Compositional Structure Law (LAW-034)**: Defines rules governing the combination and simplification of continuation-law objects.
+  - **Bounded Grammar**: Composition is restricted to admissibility-preserving and budget-aware operations.
+  - **Symbol Set**: Irreducible and emergent objects from which higher-order constructions are built.
+  - **Composition Rules**: Rules for combining operators, channels, and basins under reconstruction limits.
+  - **Invalid Composition**: Operations that hide failure modes or force artificial uniqueness are blocked.
+  - **Reduction Rules**: Admissibility-preserving simplification of complex process expressions.
+  - **Grammar Scope Clause**: The grammar is local and provisional, not a universal formal logic.
 
 ## 4. delta (Selection Operator)
 The mechanism that selects the next state from the admissible candidate set.

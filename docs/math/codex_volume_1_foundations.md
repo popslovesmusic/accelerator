@@ -54,6 +54,27 @@ The framework is built upon the principle of strict procedural monism, where eve
 - **Avalanche(M_U) (Instability Cascade)**: propagated transition events through shared resource or accessibility dependencies (Formalized in LAW-027).
 - **Inv_A(U) (Invariant Candidate Family)**: the set of relational properties preserved under bounded transformations (Formalized in LAW-028).
 - **I_p, I_a, I_r, I_xi (Relational Invariants)**: candidates for preserved structural properties across continuation mutation (Formalized in LAW-028).
+- **Q_α (Arbitration Candidate Set)**: the set of admissible continuation candidates competing at or reachable from locus α (Formalized in LAW-029).
+- **Arb_A(Q_α) (Arbitration Operator)**: operational resolution of competing continuation candidates under local admissibility constraints (Formalized in LAW-029).
+- **Priority_A(q_i) (Arbitration Priority)**: operational measure used to rank competing continuation candidates (Formalized in LAW-029).
+- **Conflict(Q_α) (Arbitration Conflict)**: the condition where simultaneous persistence of candidates exceeds local budgets or destabilizes invariants (Formalized in LAW-029).
+- **S_k (Scale-Like Layer)**: admissibility-bounded organization strata induced by coherent reconciliation structure (Formalized in LAW-030).
+- **Coh(S_i, S_j) (Multi-Scale Coherence)**: operational measure of alignment and synchronization between organization layers (Formalized in LAW-030).
+- **Transfer(S_i → S_j) (Upward Coherence Transfer)**: process of local coherence reinforcing higher-order continuation structures (Formalized in LAW-030).
+- **Constrain(S_j → S_i) (Downward Constraint Propagation)**: narrowing of local admissibility options by regional organization structure (Formalized in LAW-030).
+- **G_A(U) (Continuous Admissibility Gradient)**: continuous measure of admissibility margin or reinforcement across a region (Formalized in LAW-031).
+- **Θ_D(U) (Discreteness Threshold)**: operational limit beyond which continuous variation produces discrete events (Formalized in LAW-031).
+- **E_D (Discrete Event)**: threshold-crossed outcome selected from {stabilize, prune, bifurcate, collapse, merge, redirect, regime_shift} (Formalized in LAW-031).
+- **Q_stab(U) (Stabilization Quantization)**: emergent partitioning of continuation outcomes induced by threshold crossings (Formalized in LAW-031).
+- **Fail_A (Failure Mode Family)**: the set of distinguishable failure states in recursive continuation {runaway, deadlock, fragmentation, reinforcement_lock, admissibility_collapse, budget_exhaustion, perturbation_cascade, reconstruction_failure} (Formalized in LAW-032).
+- **Cascade (Failure Cascade)**: process where local failure propagates regional instability through shared dependencies (Formalized in LAW-032).
+- **Deadlock (Arbitration Deadlock)**: condition where competing candidates cannot be resolved without constraint violation (Formalized in LAW-032).
+- **H_A(α) (Hidden Domain)**: the set of loci topologically unreachable or reconstructively opaque from locus α (Formalized in LAW-033).
+- **Top_H(U) (Hidden Topology)**: continuation topology weakly accessible, compressed, fragmented, or reconstructively ambiguous relative to region U (Formalized in LAW-033).
+- **G_C (Continuation Grammar)**: the set of symbols and compositional rules governing the valid combination of law objects (Formalized in LAW-034).
+- **Σ_C (Grammar Symbol Set)**: the alphabet of irreducible and emergent process primitives {δ, Π_A, NavT, ...} (Formalized in LAW-034).
+- **Comp_C(X, Y) (Composition Rule)**: operational constraint on how structures X and Y may admissibly combine (Formalized in LAW-034).
+- **Invalid_C(X, Y) (Invalid Composition)**: condition where composition violates admissibility, budget, or failure-mode preservation (Formalized in LAW-034).
 
 ## 3. The NOT-Axiom
 Exclusion necessity condition: ε ≠ 0. This drives the necessity of process continuation.
