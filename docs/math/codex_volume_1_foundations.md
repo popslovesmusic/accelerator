@@ -31,6 +31,14 @@ The framework is built upon the principle of strict procedural monism, where eve
 - **~_obs (Observational Equivalence)**: relational equivalence between continuation structures under bounded reconstruction accessibility (Formalized in LAW-017).
 - **H_A(α) (Accessibility Horizon)**: locus-specific limit of admissible continuation influence across the orientation array (Formalized in LAW-018).
 - **D_A(α) (Reachable Domain)**: the set of orientation-array loci admissibly reachable from locus α under finite transport and reconstruction constraints (Formalized in LAW-018).
+- **Cause_A(α, β) (Local Causality)**: emergent accessibility-conditioned ordering between continuation events within a reachable domain (Formalized in LAW-019).
+- **Id_A(C_P, C_P') (Identity Persistence)**: emergent operational continuity relation across mutated continuation channels (Formalized in LAW-020).
+- **B_A(α) (Local Admissibility Budget)**: finite local admissibility capacity governing continuation propagation (Formalized in LAW-021).
+- **Cost_A(R_α) (Continuation Cost)**: operational cost associated with sustaining a continuation event under budget constraints (Formalized in LAW-021).
+- **P_Δ (Perturbation Operator)**: operational disturbance to local or regional continuation structure (Formalized in LAW-022).
+- **Resilience(U) (Stabilization Resilience)**: emergent capacity of a region U to absorb perturbation without topology collapse (Formalized in LAW-022).
+- **Obs_α(U) (Local Observable Subset)**: the bounded portion of continuation topology reconstructively accessible from locus α (Formalized in LAW-023).
+- **F_Ξ(α, β) (Reconstruction Fidelity)**: operational measure of the strength and clarity of a reconstruction link between loci (Formalized in LAW-023).
 
 ## 3. The NOT-Axiom
 Exclusion necessity condition: ε ≠ 0. This drives the necessity of process continuation.

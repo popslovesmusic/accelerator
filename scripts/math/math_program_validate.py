@@ -160,7 +160,12 @@ def validate_math_program():
         "law015_channel_memory_reinforcement_history_law": "validate_law015_channel_memory_reinforcement_history_law.py",
         "law016_channel_reconstruction_asymmetry_law": "validate_law016_channel_reconstruction_asymmetry_law.py",
         "law017_continuation_compression_equivalence_law": "validate_law017_continuation_compression_equivalence_law.py",
-        "law018_accessibility_horizon_reachability_limit_law": "validate_law018_accessibility_horizon_reachability_limit_law.py"
+        "law018_accessibility_horizon_reachability_limit_law": "validate_law018_accessibility_horizon_reachability_limit_law.py",
+        "law019_local_causality_accessibility_order_law": "validate_law019_local_causality_accessibility_order_law.py",
+        "law020_identity_persistence_under_mutation_law": "validate_law020_identity_persistence_under_mutation_law.py",
+        "law021_finite_admissibility_budget_law": "validate_law021_finite_admissibility_budget_law.py",
+        "law022_perturbation_error_dynamics_law": "validate_law022_perturbation_error_dynamics_law.py",
+        "law023_reconstruction_limited_observability_law": "validate_law023_reconstruction_limited_observability_law.py"
     }
 
     report = {

@@ -85,6 +85,32 @@ Orientation governs the "directionality" of continuation and transport.
   - **Accessibility Horizon**: $H_A(\alpha)$ is the limit beyond which continuation influence becomes inadmissible, too weak, or unreachable.
   - **Decay Condition**: Reachability decays with $W_{CSI}$ and reinforcement support.
   - **Non-Spacetime Horizon**: Horizons are topological and dynamic array-limits, not primitive physical lightcones.
+- **Local Causality as Accessibility Order Law (LAW-019)**: Defines local causal structure as an emergent property of admissibility-conditioned accessibility ordering.
+  - **Local Causality Candidate**: $Cause_A(\alpha, \beta)$ holds if $\beta \in D_A(\alpha)$, admissibility is preserved, and continuation ordering permits transport.
+  - **Ordering Condition**: $\alpha \prec_A \beta$ is defined locally through recursive continuation density and admissibility-compatible propagation.
+  - **Bounded Causality**: Causal accessibility is strictly bounded by finite transport flux, reinforcement stability, and admissibility thresholds.
+  - **Non-Global Clause**: Local causality does not imply a global total ordering or universal causal closure.
+  - **Non-Spacetime Clause**: Causal accessibility is a topology-conditioned continuation relation, not a primitive spacetime geometry.
+- **Identity Persistence Under Mutation Law (LAW-020)**: Formalizes identity as an emergent operational continuity relation across channel mutation.
+  - **Identity Relation Candidate**: $Id_A(C_P, C_P')$ holds if continuity metric, mutation drift, and reinforcement history overlap are within tolerance.
+  - **Fork and Merge**: Identity may branch or merge based on partial continuity thresholds.
+  - **Identity Collapse**: Occurs when drift, loss, or discontinuity exceeds tolerance.
+  - **Non-Primitive Identity**: Identity is an operational persistence relation, not a primitive object substance.
+- **Finite Admissibility Budget Law (LAW-021)**: Formalizes continuation as a budget-constrained process.
+  - **Budget Condition**: Continuation is admissible only if its cost ($Cost_A$) remains within the local budget ($B_A$).
+  - **Depletion and Recovery**: Budgets are consumed by transitions and recovered during stabilization.
+  - **Saturation and Failure**: Exceeding the budget triggers pruning, delay, redirection, or collapse.
+  - **No Energy Equivalence**: Admissibility budgets are operational constraints, not physical energy.
+- **Perturbation and Error Dynamics Law (LAW-022)**: Defines how perturbations propagate and stabilization structures respond to disturbance.
+  - **Propagation and Damping**: Perturbations propagate through accessibility links and may be dampened by stabilization basins.
+  - **Amplification and Cascade**: Exceeding resilience limits triggers amplification and recursive destabilization cascades.
+  - **Corruption**: Disturbances may corrupt history, reconstruction, and identity persistence.
+  - **No Thermodynamic Equivalence**: Perturbation is modeled as topology turbulence, not thermodynamic entropy.
+- **Reconstruction-Limited Observability Law (LAW-023)**: Formalizes local observability as bounded reconstruction over accessible continuation topology.
+  - **Observable Subset**: Observation is limited to the subset of the array that remains accessible and reconstructible ($Obs_\alpha$).
+  - **Fidelity and Ambiguity**: Observability decays with loss and corruption; indistinguishability creates ambiguity regions.
+  - **Hidden Topology**: Process structures may exist beyond the reach of any local observation.
+  - **Non-Observer Absolutism**: There is no universal or privileged observer standpoint.
 
 ## 4. delta (Selection Operator)
 The mechanism that selects the next state from the admissible candidate set.

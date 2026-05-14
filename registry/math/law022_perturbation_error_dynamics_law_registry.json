@@ -1,0 +1,62 @@
+{
+  "id": "LAW-022",
+  "name": "Perturbation and Error Dynamics Law",
+  "status": "candidate_law_form",
+  "purpose": "Define how perturbations propagate through constrained continuation systems.",
+  "depends_on": [
+    "LAW-011",
+    "LAW-013",
+    "LAW-014",
+    "LAW-021",
+    "recursive_loss_accumulation",
+    "admissibility_topology_transitions",
+    "boundary_case_classification",
+    "transition_flux_convergence",
+    "recursive_transport_closure",
+    "orientation_sensitive_equivalence_geometry"
+  ],
+  "law_conditions": [
+    "orientation_array_dependency_explicit",
+    "perturbation_operator_candidate_explicit",
+    "propagation_condition_explicit",
+    "amplification_condition_explicit",
+    "damping_condition_explicit",
+    "cascade_condition_explicit",
+    "corruption_condition_explicit",
+    "resilience_clause_explicit"
+  ],
+  "failure_modes_to_preserve": [
+    "perfect_stability_overclaim",
+    "noise_free_continuation_assumption",
+    "infinite_resilience_overclaim",
+    "unbounded_perturbation_propagation",
+    "topology_without_disturbance_response",
+    "physics_noise_equivalence_leakage",
+    "thermodynamics_equivalence_leakage",
+    "physics_claim_leakage"
+  ],
+  "candidate_law_statement": {
+    "informal": "Perturbations modify continuation structure by altering admissibility margins, transport pathways, reinforcement stability, and reconstruction accessibility.",
+    "formal": {
+      "orientation_array": "{-(i)_α}",
+      "perturbation_operator_candidate": "P_Δ",
+      "local_perturbation": "P_Δ(R_α)",
+      "propagation_condition": "Perturbations may propagate when accessibility relations and transport conditions permit admissibility-compatible continuation transfer.",
+      "amplification_condition": "Amplify(P_Δ) may occur when perturbation reinforcement exceeds local stabilization tolerance.",
+      "damping_condition": "Damp(P_Δ) may occur when stabilization basins absorb perturbation within bounded admissibility margin.",
+      "cascade_condition": "Cascade(P_Δ) may occur when perturbation-induced budget depletion triggers recursive destabilization across connected continuation channels.",
+      "corruption_condition": "Corrupt(P_Δ) may alter reconstruction accessibility, reinforcement history continuity, or identity persistence beyond declared tolerance.",
+      "resilience_clause": "Stabilization resilience depends on reinforcement depth, accessibility redundancy, admissibility margin reserve, and topology connectivity."
+    }
+  },
+  "governance": {
+    "must_not_claim_physics_validation": true,
+    "must_not_claim_thermodynamic_equivalence": true,
+    "must_not_claim_signal_noise_equivalence": true,
+    "must_not_claim_perfect_stability": true,
+    "must_not_claim_infinite_resilience": true,
+    "must_preserve_cascade_failure_modes": true,
+    "must_preserve_finite_budget_dependency": true,
+    "must_preserve_failure_modes": true
+  }
+}
