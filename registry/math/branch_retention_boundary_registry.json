@@ -1,0 +1,23 @@
+{
+  "branch_retention_boundary": {
+    "version": "1.0",
+    "description": "Geometry of transition boundaries for multi-branch retention and pruning.",
+    "boundaries": [
+      {
+        "id": "BRB-001",
+        "name": "degeneracy_splitting_boundary",
+        "condition": "mismatch_difference < machine_precision",
+        "geometry": "equivalence_singular_surface",
+        "impact": "Induces multi-branch retention (REC-EQ-004)."
+      },
+      {
+        "id": "BRB-002",
+        "name": "pruning_decision_surface",
+        "condition": "admissibility_score < pruning_threshold",
+        "geometry": "admissibility_gradient_surface",
+        "impact": "Irreversible branch collapse (RCC-003)."
+      }
+    ],
+    "last_updated": "2026-05-13"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "transport_threshold_boundary": {
+    "version": "1.0",
+    "description": "Geometry of thresholds governing non-local transport legality.",
+    "thresholds": [
+      {
+        "id": "TTB-001",
+        "name": "CSI_radius_cutoff",
+        "condition": "r > R_interaction",
+        "geometry": "spherical_domain_boundary",
+        "impact": "Flux truncation; transport legality loss."
+      },
+      {
+        "id": "TTB-002",
+        "name": "metric_decay_limit",
+        "condition": "decay_rate < stability_threshold",
+        "geometry": "asymptotic_decay_manifold",
+        "impact": "Loss of transport convergence (GAP-001)."
+      }
+    ],
+    "last_updated": "2026-05-13"
+  }
+}

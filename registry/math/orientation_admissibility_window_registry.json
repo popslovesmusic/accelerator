@@ -1,0 +1,30 @@
+{
+  "orientation_admissibility_window": {
+    "version": "1.0",
+    "description": "Geometry of admissibility windows refined by orientation sensitivity -(i).",
+    "window_refinements": [
+      {
+        "id": "OAW-001",
+        "base_window": "Pi_A epsilon-window",
+        "refinement": "orientation_angular_limit",
+        "condition": "deviation(-(i)) < theta_threshold",
+        "geometry": "cone_sector | constrained_manifold"
+      },
+      {
+        "id": "OAW-002",
+        "base_window": "NavT transport domain",
+        "refinement": "orientation_bias_window",
+        "condition": "alignment(transport_flux, orientation_frame) > 0.8",
+        "geometry": "flux_aligned_volume"
+      }
+    ],
+    "failure_modes": [
+      {
+        "id": "OAW-FM-001",
+        "name": "window_splitting_failure",
+        "description": "Orientation refinement splits a single stable basin into divergent, non-communicating regions."
+      }
+    ],
+    "last_updated": "2026-05-13"
+  }
+}

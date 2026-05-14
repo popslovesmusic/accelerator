@@ -91,6 +91,7 @@ def validate_math_program():
         "reconstruction_equivalence_geometry": "validate_reconstruction_equivalence_geometry.py",
         "orientation_sensitive_equivalence_geometry": "validate_orientation_sensitive_equivalence_geometry.py",
         "strict_preimage_uniqueness_constraints": "validate_strict_preimage_uniqueness_constraints.py",
+        "admissibility_boundary_geometry": "validate_admissibility_boundary_geometry.py",
         "rc002_derivation_closure": "validate_rc002_derivation_closure.py",
         "rc002_counterexample_obligation": "validate_rc002_counterexample_obligation.py",
         "rc003_recursive_fixed_point_scaffold": "validate_rc003_recursive_fixed_point_scaffold.py",
