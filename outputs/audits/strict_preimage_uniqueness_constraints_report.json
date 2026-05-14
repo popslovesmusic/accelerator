@@ -1,0 +1,42 @@
+{
+  "strict_preimage_uniqueness_constraints_report": {
+    "patch_id": "STRICT-PREIMAGE-UNIQUENESS-CONSTRAINTS-001",
+    "status": "pass",
+    "formalization_summary": {
+      "uniqueness_constraints_scaffolded": true,
+      "splitting_rules_mapped": 2,
+      "local_constraints_defined": 3,
+      "failure_modes_documented": 5,
+      "hypothesis_conversions_active": 3
+    },
+    "key_constraints": [
+      {
+        "id": "SPU-001",
+        "name": "locally_unique_preimage",
+        "basis": "Unique mismatch AND orientation signature"
+      },
+      {
+        "id": "SPU-002",
+        "name": "orientation_split_preimage",
+        "basis": "Orientation-refined distinguishability"
+      },
+      {
+        "id": "SPU-004",
+        "name": "global_uniqueness_blocked",
+        "basis": "Structural aggregate aggregation/loss"
+      }
+    ],
+    "reconstructability_summary": {
+      "LRC-001": "window_interior_constraint (epsilon > threshold)",
+      "LRC-002": "orientation_rank_constraint (Unique signature)",
+      "LRC-003": "finite_history_constraint (Sub-horizon count)"
+    },
+    "governance_locks": {
+      "global_uniqueness_blocked": "pass",
+      "humility_maintained": "pass",
+      "theorem_promotion_prevented": "pass"
+    },
+    "verification_result": "SUCCESS",
+    "last_audit": "2026-05-13"
+  }
+}

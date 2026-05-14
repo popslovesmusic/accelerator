@@ -1,0 +1,44 @@
+{
+  "preimage_failure_mode": {
+    "version": "1.0",
+    "description": "Failure modes specifically blocking strict preimage uniqueness.",
+    "failure_modes": [
+      {
+        "id": "PFM-001",
+        "name": "projection_collapsed_preimage",
+        "operator": "Pi_A",
+        "description": "Irreducible overlap of distinct preimages at the window boundary.",
+        "severity": "local_singular"
+      },
+      {
+        "id": "PFM-002",
+        "name": "transport_collapsed_preimage",
+        "operator": "NavT",
+        "description": "Loss of uniqueness through aggregate flux summation over CSI domains.",
+        "severity": "global_blocking"
+      },
+      {
+        "id": "PFM-003",
+        "name": "branch_indeterminate_preimage",
+        "operator": "delta",
+        "description": "Persistence of multi-valuedness despite orientation minimization.",
+        "severity": "high"
+      },
+      {
+        "id": "PFM-004",
+        "name": "boundary_failed_preimage",
+        "operator": "Xi",
+        "description": "Reconstruction failure for states exactly on the threshold of admissibility.",
+        "severity": "local_singular"
+      },
+      {
+        "id": "PFM-005",
+        "name": "recursive_loss_failed_preimage",
+        "operator": "Xi",
+        "description": "Historical ambiguity becomes divergent after N exceeds the reconstruction horizon.",
+        "severity": "asymptotic"
+      }
+    ],
+    "last_updated": "2026-05-13"
+  }
+}

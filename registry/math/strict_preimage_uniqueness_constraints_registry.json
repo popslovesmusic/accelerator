@@ -1,0 +1,59 @@
+{
+  "strict_preimage_uniqueness_constraints": {
+    "version": "1.0",
+    "description": "Formal scaffold for constraints on strict preimage uniqueness in orientation-conditioned reconstruction.",
+    "core_principles": [
+      "Strict uniqueness is a local property contingent on orientation-signature distinguishability.",
+      "Global uniqueness is structurally blocked by many-to-one operator aggregation.",
+      "Local uniqueness requires membership in the open admissibility window and non-degenerate orientation state."
+    ],
+    "constraint_classes": [
+      {
+        "id": "SPU-001",
+        "name": "locally_unique_preimage",
+        "condition": "Unique mismatch minimum AND unique orientation signature -(i) within finite CSI domain.",
+        "description": "Xi isolates a single admissible history."
+      },
+      {
+        "id": "SPU-002",
+        "name": "orientation_split_preimage",
+        "condition": "Metric trace is identical but histories have divergent -(i) signatures.",
+        "description": "Xi splits the observable class into multiple unique preimages."
+      },
+      {
+        "id": "SPU-003",
+        "name": "bounded_multi_preimage",
+        "condition": "Degenerate orientation signatures across symmetric delta branches.",
+        "description": "Xi recovers a finite set of admissible preimages."
+      },
+      {
+        "id": "SPU-004",
+        "name": "global_uniqueness_blocked",
+        "condition": "Membership in a saturated recursive loss basin (REB-001) or NavT aggregate class.",
+        "description": "Strict uniqueness is formally impossible for global causal history."
+      },
+      {
+        "id": "SPU-005",
+        "name": "projection_collapsed_preimage",
+        "operator": "Pi_A",
+        "condition": "Sub-threshold states map to null state history.",
+        "description": "Information lost in projection creates indistinguishable preimages."
+      },
+      {
+        "id": "SPU-006",
+        "name": "boundary_failed_preimage",
+        "operator": "Xi",
+        "condition": "States on the epsilon boundary saturation limit.",
+        "description": "Singular limit prevents unique preimage isolation."
+      },
+      {
+        "id": "SPU-007",
+        "name": "observable_underdetermined_preimage",
+        "operator": "observable_projection",
+        "condition": "Insufficient metrics to constrain high-dimensional state preimages.",
+        "description": "Metric traces form equivalence fibers rather than points."
+      }
+    ],
+    "last_updated": "2026-05-13"
+  }
+}
