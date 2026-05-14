@@ -33,6 +33,43 @@ Orientation governs the "directionality" of continuation and transport.
   $$D_R(U) := \frac{\# \text{ of admissible reconciliation events in region } U}{\mu_A(U)}$$
   $$R_\alpha \prec R_\beta \iff R_\alpha \text{ is admissibility-preconditioned for } R_\beta$$
 - **Apparent Temporality**: Apparent time is a projection of ordered reconciliation density, not a primitive coordinate.
+- **Array Topology and Accessibility Law (LAW-008)**: Defines interaction domains and reachability as orientation-array topology structures.
+  $$\alpha \sim_A \beta \iff \beta \text{ is admissibly reachable from } \alpha \text{ under orientation array topology}$$
+  $$CSI(\alpha) := \{ \beta : \alpha \sim_A \beta \text{ and } \Phi(\alpha, \beta) \text{ is finite} \}$$
+  $$Reach(\alpha, \beta) \iff \text{admissibility compatibility} \land \text{finite flux} \land \text{non-collapsed } A_\alpha$$
+- **Local Neighborhoods**: Neighborhoods are relational and defined by orientation relation $\omega_\alpha \rightarrow \omega_\beta$, not absolute spatial distance.
+- **Apparent Temporality Projection Law (LAW-009)**: Formalizes apparent time as a derived projection of ordered reconciliation density.
+  $$T_{app}(U) := Proj_{time}(O_U, D_R(U), \prec_U)$$
+  - **No Primitive Time**: $T_{app}$ is a bookkeeping parameter, not a background coordinate.
+  - **Density-Dependent Appearance**: High reconciliation density regions project to high update-density (fast apparent time); low density regions project to low update-density (slow apparent time).
+- **Apparent Geometry Projection Law (LAW-010)**: Defines apparent geometry as a projection of stabilized reconciliation topology.
+  $$Geom_{app}(U) := Proj_{geom}(G_U, D_R(U), Reach(U), Top_A(U))$$
+  - **Non-Primitive Geometry**: Geometry is a derived appearance, not a primitive metric substrate.
+  - **Topology-First**: Accessibility relations and admissibility topology determine geometric structure.
+- **Stabilized Reconciliation Basin Law (LAW-011)**: Defines how persistent reconciliation structures stabilize into basin-like organizations.
+  $$B_U := \{ \alpha \in U : R_\alpha \text{ recurs with bounded drift and finite transport flux} \}$$
+  - **Non-Attractor Persistence**: Basins are stabilized recurrence organizations, not static attractors or fixed points.
+  - **Bounded Drift**: Persistence requires $\sup_{\alpha \in B_U} drift_A(R_\alpha) < \eta_B$.
+  - **Dynamic Stability**: Stability is maintained through active reconciliation recurrence rather than global equilibrium.
+- **Law-Like Persistence Channel Law (LAW-012)**: Defines how repeated stabilized reconciliation basins reinforce persistent continuation channels.
+  $$C_P := \{ \alpha \in \{-(i)_\alpha\} : \text{continuation repeatedly stabilizes along pathways } P \}$$
+  - **Non-Primitive Law**: Law-like structure is an emergent stabilized continuation tendency, not a primitive governing substance.
+  - **Preferential Propagation**: Future continuation preferentially propagates through reinforced channels, creating the appearance of "following a law."
+  - **No Universal Necessity**: Channels are contingent on recursive reconciliation reinforcement and are not eternally fixed.
+- **Channel Fracture and Transition Law (LAW-013)**: Defines how continuation channels evolve and destabilize.
+  - **Fracture and Bifurcation**: Channels may split when multiple accessibility pathways stabilize.
+  - **Merge and Redirection**: Channels may converge or redirect under admissibility-boundary pressure.
+  - **Collapse**: Dissolution occurs when recursive reinforcement fails to maintain persistence.
+  - **Topology-Conditioned Evolution**: Transitions are dynamic reconciliation events, not deterministic phase changes.
+- **Channel Competition and Selection Law (LAW-014)**: Defines how multiple channels interact under finite resources.
+  - **Finite Budget Constraint**: Channels draw from a shared budget of admissibility, transport flux, and reconciliation recurrence.
+  - **Suppression and Co-Stabilization**: Reinforcement of one channel may suppress others or enable co-stabilization if compatible.
+  - **Non-Unique Selection**: Selection is an emergent dynamic property, not a deterministic or globally optimal "winner-takes-all" rule.
+- **Channel Memory and Reinforcement History Law (LAW-015)**: Defines how channels retain history without reifying memory or residue.
+  - **Reinforcement History**: $H(C_P, n)$ is the record of recurrent reconciliation supporting a channel.
+  - **Memory Projection**: $Mem_{app}(C_P)$ is the apparent memory projected from reinforcement history.
+  - **Non-Primitive Trace**: Memory and residue are projections of reinforced continuation history, not independent substances.
+  - **Asymmetric Retention**: History is subject to reconstruction asymmetry and active reconciliation recurrence.
 
 ## 4. delta (Selection Operator)
 The mechanism that selects the next state from the admissible candidate set.

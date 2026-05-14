@@ -149,7 +149,15 @@ def validate_math_program():
         "law004_csi_summation_finite_flux_law": "validate_law004_csi_summation_finite_flux_law.py",
         "law005_admissibility_boundary_transition_law": "validate_law005_admissibility_boundary_transition_law.py",
         "law006_orientation_array_distinction_law": "validate_law006_orientation_array_distinction_law.py",
-        "law007_recursion_density_ordering_law": "validate_law007_recursion_density_ordering_law.py"
+        "law007_recursion_density_ordering_law": "validate_law007_recursion_density_ordering_law.py",
+        "law008_array_topology_accessibility_law": "validate_law008_array_topology_accessibility_law.py",
+        "law009_apparent_temporality_projection_law": "validate_law009_apparent_temporality_projection_law.py",
+        "law010_apparent_geometry_projection_law": "validate_law010_apparent_geometry_projection_law.py",
+        "law011_stabilized_reconciliation_basin_law": "validate_law011_stabilized_reconciliation_basin_law.py",
+        "law012_lawlike_persistence_channel_law": "validate_law012_lawlike_persistence_channel_law.py",
+        "law013_channel_fracture_transition_law": "validate_law013_channel_fracture_transition_law.py",
+        "law014_channel_competition_selection_law": "validate_law014_channel_competition_selection_law.py",
+        "law015_channel_memory_reinforcement_history_law": "validate_law015_channel_memory_reinforcement_history_law.py"
     }
 
     report = {
