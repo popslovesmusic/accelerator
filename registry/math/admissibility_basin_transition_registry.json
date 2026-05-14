@@ -1,0 +1,30 @@
+{
+  "admissibility_basin_transition": {
+    "version": "1.0",
+    "description": "Registry for tracking the evolution of stable admissibility basins.",
+    "transitions": [
+      {
+        "id": "ABT-001",
+        "name": "basin_expansion",
+        "target": "Pi_A epsilon-window",
+        "trigger": "residue_update dissipation > threshold",
+        "outcome": "Increase in admissible state volume."
+      },
+      {
+        "id": "ABT-002",
+        "name": "basin_narrowing",
+        "target": "Pi_A epsilon-window",
+        "trigger": "residue accumulation > dissipation",
+        "outcome": "Restricted admissibility; increased risk of clipping failure."
+      },
+      {
+        "id": "ABT-003",
+        "name": "basin_fragmentation",
+        "target": "recursive_stability_manifold",
+        "trigger": "multi-valued selection divergence",
+        "outcome": "Disjoint stable channels; loss of global transport unity."
+      }
+    ],
+    "last_updated": "2026-05-13"
+  }
+}
