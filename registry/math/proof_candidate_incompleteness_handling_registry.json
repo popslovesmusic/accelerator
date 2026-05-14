@@ -1,0 +1,54 @@
+{
+  "proof_candidate_incompleteness_handling": {
+    "version": "1.0",
+    "description": "Procedures for handling and classifying incomplete proofs in the review pipeline.",
+    "incompleteness_classes": [
+      {
+        "id": "INC-001",
+        "class": "missing_dependency",
+        "handling_rule": "Downgrade to rejected_with_gaps or incomplete_but_traceable."
+      },
+      {
+        "id": "INC-002",
+        "class": "unresolved_boundary_case",
+        "handling_rule": "Mark as local_only with boundary warning; status cannot exceed incomplete_but_traceable."
+      },
+      {
+        "id": "INC-003",
+        "class": "counterexample_not_reviewed",
+        "handling_rule": "Block status elevation beyond review_ready."
+      },
+      {
+        "id": "INC-004",
+        "class": "equivalence_requirement_unproven",
+        "handling_rule": "Treat as assumption; classify as local_derivation."
+      },
+      {
+        "id": "INC-005",
+        "class": "quantifier_scope_ambiguous",
+        "handling_rule": "Require explicit quantifier trace; block proof_candidate status."
+      },
+      {
+        "id": "INC-006",
+        "class": "human_only_proof",
+        "handling_rule": "Classify as proof_candidate (unverified) or informal_scaffold."
+      },
+      {
+        "id": "INC-007",
+        "class": "machine_check_pending",
+        "handling_rule": "Maintain current status; add wait-lock for machine review."
+      },
+      {
+        "id": "INC-008",
+        "class": "semantic_gap",
+        "handling_rule": "Add to lexicon_gap_queue; block elevation to formalized."
+      },
+      {
+        "id": "INC-009",
+        "class": "acceptable_local_incompleteness",
+        "handling_rule": "Permit proof_candidate status with documented scope limits."
+      }
+    ],
+    "last_updated": "2026-05-13"
+  }
+}
