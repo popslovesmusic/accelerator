@@ -84,6 +84,7 @@ def validate_math_program():
         "structural_incompleteness_classification": "validate_structural_incompleteness_classification.py",
         "irreducible_incompleteness_analysis": "validate_irreducible_incompleteness_analysis.py",
         "global_closure_impossibility_analysis": "validate_global_closure_impossibility_analysis.py",
+        "continuation_reconstruction_asymmetry": "validate_continuation_reconstruction_asymmetry.py",
         "rc002_derivation_closure": "validate_rc002_derivation_closure.py",
         "rc002_counterexample_obligation": "validate_rc002_counterexample_obligation.py",
         "rc003_recursive_fixed_point_scaffold": "validate_rc003_recursive_fixed_point_scaffold.py",
