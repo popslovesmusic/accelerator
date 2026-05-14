@@ -165,7 +165,12 @@ def validate_math_program():
         "law020_identity_persistence_under_mutation_law": "validate_law020_identity_persistence_under_mutation_law.py",
         "law021_finite_admissibility_budget_law": "validate_law021_finite_admissibility_budget_law.py",
         "law022_perturbation_error_dynamics_law": "validate_law022_perturbation_error_dynamics_law.py",
-        "law023_reconstruction_limited_observability_law": "validate_law023_reconstruction_limited_observability_law.py"
+        "law023_reconstruction_limited_observability_law": "validate_law023_reconstruction_limited_observability_law.py",
+        "law024_competitive_basin_ecology_law": "validate_law024_competitive_basin_ecology_law.py",
+        "law025_persistence_decay_forgetting_law": "validate_law025_persistence_decay_forgetting_law.py",
+        "law026_metastability_temporary_lawlike_regime_law": "validate_law026_metastability_temporary_lawlike_regime_law.py",
+        "law027_admissibility_phase_transition_law": "validate_law027_admissibility_phase_transition_law.py",
+        "law028_topological_invariants_under_continuation_law": "validate_law028_topological_invariants_under_continuation_law.py"
     }
 
     report = {

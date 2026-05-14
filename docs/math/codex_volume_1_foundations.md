@@ -39,6 +39,21 @@ The framework is built upon the principle of strict procedural monism, where eve
 - **Resilience(U) (Stabilization Resilience)**: emergent capacity of a region U to absorb perturbation without topology collapse (Formalized in LAW-022).
 - **Obs_α(U) (Local Observable Subset)**: the bounded portion of continuation topology reconstructively accessible from locus α (Formalized in LAW-023).
 - **F_Ξ(α, β) (Reconstruction Fidelity)**: operational measure of the strength and clarity of a reconstruction link between loci (Formalized in LAW-023).
+- **𝔅_U (Basin Family)**: the set of active stabilized reconciliation basins within a region U (Formalized in LAW-024).
+- **Compete(B_i, B_j) (Basin Competition)**: operational interaction between basins sharing finite resources (Formalized in LAW-024).
+- **Collapse(B_i) (Basin Collapse)**: the failure and dissolution of a stabilization basin under resource depletion or perturbation (Formalized in LAW-024).
+- **D_λ(C_P, n) (Decay Operator)**: operational weakening of continuation structure over recursion depth n (Formalized in LAW-025).
+- **Forget(C_P) (Forgetting)**: emergent loss of accessible reinforcement continuity and reconstruction fidelity (Formalized in LAW-025).
+- **Erode(C_P) (Reinforcement Erosion)**: the decline of active reinforcement support for a continuation channel (Formalized in LAW-025).
+- **M_U (Metastable Regime)**: a coherent organization of reinforced continuation channels valid within a bounded window (Formalized in LAW-026).
+- **V(M_U) (Validity Window)**: the bounded interval or depth over which a metastable regime remains admissible and coherent (Formalized in LAW-026).
+- **Transition(M_U → M_V) (Regime Transition)**: the structural reorganization process between distinct metastable regimes (Formalized in LAW-026).
+- **P_T(M_U) (Transition Pressure)**: operational measure of instability load acting on a metastable regime (Formalized in LAW-027).
+- **Θ_T(M_U) (Tipping Threshold)**: operational limit for metastable regime admissibility (Formalized in LAW-027).
+- **PhaseShift(M_U) (Admissibility Phase Transition)**: sudden abrupt reorganization of continuation topology (Formalized in LAW-027).
+- **Avalanche(M_U) (Instability Cascade)**: propagated transition events through shared resource or accessibility dependencies (Formalized in LAW-027).
+- **Inv_A(U) (Invariant Candidate Family)**: the set of relational properties preserved under bounded transformations (Formalized in LAW-028).
+- **I_p, I_a, I_r, I_xi (Relational Invariants)**: candidates for preserved structural properties across continuation mutation (Formalized in LAW-028).
 
 ## 3. The NOT-Axiom
 Exclusion necessity condition: ε ≠ 0. This drives the necessity of process continuation.

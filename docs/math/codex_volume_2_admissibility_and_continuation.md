@@ -111,6 +111,38 @@ Orientation governs the "directionality" of continuation and transport.
   - **Fidelity and Ambiguity**: Observability decays with loss and corruption; indistinguishability creates ambiguity regions.
   - **Hidden Topology**: Process structures may exist beyond the reach of any local observation.
   - **Non-Observer Absolutism**: There is no universal or privileged observer standpoint.
+- **Competitive Basin Ecology Law (LAW-024)**: Defines interaction dynamics among stabilization basins under finite continuation resources.
+  - **Basin Overlap**: Interaction occurs when accessibility, channels, or budgets are shared.
+  - **Competition and Starvation**: Basins compete for finite resources; depletion leads to starvation.
+  - **Cannibalization**: One basin may stabilize by redirecting resources from another.
+  - **Co-Stabilization**: Compatible basins may mutually reinforce stability.
+  - **Collapse Propagation**: Failure of one basin may destabilize neighbors through shared constraints.
+  - **Non-Biological Clause**: Basin ecology is a structural analogy, not a biological claim.
+- **Persistence Decay and Forgetting Law (LAW-025)**: Defines the weakening, erosion, and eventual loss of reinforced continuation structures.
+  - **Reinforcement Erosion**: Channels weaken when active reinforcement fails to offset intrinsic loss or budget depletion.
+  - **Forgetting**: Prior history becomes inaccessible when reinforcement history falls below reconstruction thresholds.
+  - **Basin Weakening**: Admissibility margin and accessibility coherence decline without active support.
+  - **Transient Law-Like Persistence**: Channels are metastable and regime-dependent, not eternal.
+  - **Non-Primitive Memory**: Forgetting is structural loss, not erasure of a memory substance.
+- **Metastability and Temporary Law-Like Regime Law (LAW-026)**: Defines temporary law-like regimes as metastable continuation organizations.
+  - **Metastable Regimes**: Coherent clusters of channels valid within bounded windows.
+  - **Validity Windows**: Finite spans in the orientation array and continuation depth.
+  - **Lifespan**: Depends on reinforcement renewal, decay, and perturbation load.
+  - **Regime Transitions**: Structural reorganization between distinct metastable states.
+  - **Temporary Law Clause**: Regimes are locally valid properties, not eternal governing rules.
+- **Admissibility Phase Transition Law (LAW-027)**: Defines abrupt topology reorganization under admissibility-threshold crossing.
+  - **Transition Pressure**: Instability load from boundary pressure, budget, and decay.
+  - **Tipping Thresholds**: Limits beyond which regimes can no longer satisfy admissibility.
+  - **Phase Transitions**: Sudden abrupt reorganization of continuation topology.
+  - **Avalanches**: Cascading instability through shared resource or accessibility links.
+  - **Regime Shifts**: Transitions between distinct metastable law-like organizations.
+  - **No Physics Clause**: Phase transitions are topological reorganization events, not physical matter shifts.
+- **Topological Invariants Under Continuation Law (LAW-028)**: Defines candidate invariants preserved across recursive continuation transformations.
+  - **Invariant Families**: Relational properties preserved under admissibility-compatible transformations.
+  - **Persistence and Accessibility Invariants**: Stability of basins and reachability-equivalence classes.
+  - **Reinforcement and Reconstruction Invariants**: Preservation of history-overlap and observational equivalence.
+  - **Bounded Invariance**: Preservation is valid only within declared tolerances.
+  - **No Global Conservation Clause**: Invariants are local and conditional; no universal conservation is claimed.
 
 ## 4. delta (Selection Operator)
 The mechanism that selects the next state from the admissible candidate set.
