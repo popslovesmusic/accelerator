@@ -148,7 +148,8 @@ def validate_math_program():
         "law003_navt_transport_operator_law": "validate_law003_navt_transport_operator_law.py",
         "law004_csi_summation_finite_flux_law": "validate_law004_csi_summation_finite_flux_law.py",
         "law005_admissibility_boundary_transition_law": "validate_law005_admissibility_boundary_transition_law.py",
-        "law006_orientation_array_distinction_law": "validate_law006_orientation_array_distinction_law.py"
+        "law006_orientation_array_distinction_law": "validate_law006_orientation_array_distinction_law.py",
+        "law007_recursion_density_ordering_law": "validate_law007_recursion_density_ordering_law.py"
     }
 
     report = {

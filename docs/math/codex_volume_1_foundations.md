@@ -12,6 +12,8 @@ The framework is built upon the principle of strict procedural monism, where eve
 - **K (CSI)**: Coupling, reach, or interaction domain.
 - **-(i) (Orientation Operator)**: Local orientation-conditioned continuation operator.
 - **{-(i)} (Orientation Array)**: Distributed reconciliation topology over local orientation operators (Distinction formalized in LAW-006).
+- **D_R (Recursion Density)**: Density of admissible reconciliation events across the orientation array (Formalized in LAW-007).
+- **≺ (Ordering Relation)**: Admissibility-preconditioned dependency between reconciliation events (Formalized in LAW-007).
 
 ## 3. The NOT-Axiom
 Exclusion necessity condition: ε ≠ 0. This drives the necessity of process continuation.

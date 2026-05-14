@@ -29,6 +29,10 @@ Orientation governs the "directionality" of continuation and transport.
   $$\{-(i)_\alpha\} := \text{distributed reconciliation topology over local orientation operators}$$
 - **Operational Roles**: $-(i)_\alpha$ governs local mechanics; $\{-(i)_\alpha\}$ governs distributed reconciliation, recursion density, and ordering emergence.
 - **Anti-Collapse**: Maintaining the distinction prevents the introduction of forced global orientation frames.
+- **Recursion Density and Ordering Law (LAW-007)**: Defines how distributed reconciliation density across $\{-(i)_\alpha\}$ generates ordered continuation without primitive time.
+  $$D_R(U) := \frac{\# \text{ of admissible reconciliation events in region } U}{\mu_A(U)}$$
+  $$R_\alpha \prec R_\beta \iff R_\alpha \text{ is admissibility-preconditioned for } R_\beta$$
+- **Apparent Temporality**: Apparent time is a projection of ordered reconciliation density, not a primitive coordinate.
 
 ## 4. delta (Selection Operator)
 The mechanism that selects the next state from the admissible candidate set.
