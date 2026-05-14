@@ -157,7 +157,10 @@ def validate_math_program():
         "law012_lawlike_persistence_channel_law": "validate_law012_lawlike_persistence_channel_law.py",
         "law013_channel_fracture_transition_law": "validate_law013_channel_fracture_transition_law.py",
         "law014_channel_competition_selection_law": "validate_law014_channel_competition_selection_law.py",
-        "law015_channel_memory_reinforcement_history_law": "validate_law015_channel_memory_reinforcement_history_law.py"
+        "law015_channel_memory_reinforcement_history_law": "validate_law015_channel_memory_reinforcement_history_law.py",
+        "law016_channel_reconstruction_asymmetry_law": "validate_law016_channel_reconstruction_asymmetry_law.py",
+        "law017_continuation_compression_equivalence_law": "validate_law017_continuation_compression_equivalence_law.py",
+        "law018_accessibility_horizon_reachability_limit_law": "validate_law018_accessibility_horizon_reachability_limit_law.py"
     }
 
     report = {

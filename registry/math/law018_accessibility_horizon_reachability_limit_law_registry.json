@@ -1,0 +1,61 @@
+{
+  "id": "LAW-018",
+  "name": "Accessibility Horizon and Reachability Limit Law",
+  "status": "candidate_law_form",
+  "purpose": "Define bounded reachability and accessibility horizons across the orientation array.",
+  "depends_on": [
+    "LAW-004",
+    "LAW-008",
+    "LAW-017",
+    "recursive_transport_closure",
+    "rc017_csi_metric_decay_structure",
+    "rc022_nonlocal_transport_closure_limits",
+    "information_loss_geometry",
+    "continuation_reconstruction_asymmetry",
+    "orientation_sensitive_equivalence_geometry",
+    "boundary_case_classification"
+  ],
+  "law_conditions": [
+    "orientation_array_dependency_explicit",
+    "reachability_relation_explicit",
+    "reachable_domain_candidate_explicit",
+    "accessibility_horizon_candidate_explicit",
+    "finite_flux_dependency_explicit",
+    "decay_condition_explicit",
+    "reconstruction_limit_clause_explicit",
+    "non_spacetime_horizon_clause_explicit"
+  ],
+  "failure_modes_to_preserve": [
+    "spacetime_lightcone_overclaim",
+    "global_causality_claim_leakage",
+    "unbounded_reachability_assumption",
+    "absolute_inaccessibility_overclaim",
+    "hidden_metric_distance_reintroduction",
+    "projection_as_universal_explanation",
+    "physics_claim_leakage",
+    "global_closure_overclaim"
+  ],
+  "candidate_law_statement": {
+    "informal": "A locus or channel has an accessibility horizon when continuation influence becomes inadmissible, too weak, too lossy, or unreachable under finite transport and reconstruction constraints.",
+    "formal": {
+      "orientation_array": "{-(i)_α}",
+      "reachability_relation": "Reach(α,β)",
+      "accessibility_horizon_candidate": "H_A(α) := { β ∈ {-(i)_α} : Reach(α,β) fails under admissibility, finite-flux, decay, or reconstruction constraints }",
+      "reachable_domain_candidate": "D_A(α) := { β : β ∈ CSI(α), ||NavT(ω_α,ω_β)|| < ∞, and Π_A remains defined }",
+      "decay_condition": "Reachability may decay when W_CSI(α,β), reinforcement support, or admissibility margin falls below declared threshold.",
+      "reconstruction_limit_clause": "Some inaccessible regions may remain observationally compressed or reconstructively ambiguous rather than absolutely absent.",
+      "non_spacetime_clause": "Accessibility horizons are array-topology limits, not primitive spacetime light cones or physical causal horizons."
+    }
+  },
+  "governance": {
+    "must_not_claim_physics_validation": true,
+    "must_not_claim_spacetime_lightcone_equivalence": true,
+    "must_not_claim_global_causality": true,
+    "must_not_claim_absolute_inaccessibility": true,
+    "must_not_reintroduce_metric_distance_as_primitive": true,
+    "must_not_use_projection_as_catch_all": true,
+    "must_preserve_bounded_accessibility": true,
+    "must_preserve_reconstruction_asymmetry": true,
+    "must_preserve_failure_modes": true
+  }
+}

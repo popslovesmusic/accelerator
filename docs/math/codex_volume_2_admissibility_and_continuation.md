@@ -70,6 +70,21 @@ Orientation governs the "directionality" of continuation and transport.
   - **Memory Projection**: $Mem_{app}(C_P)$ is the apparent memory projected from reinforcement history.
   - **Non-Primitive Trace**: Memory and residue are projections of reinforced continuation history, not independent substances.
   - **Asymmetric Retention**: History is subject to reconstruction asymmetry and active reconciliation recurrence.
+- **Channel Reconstruction Asymmetry Law (LAW-016)**: Formalizes why present continuation-channel structure cannot generally reconstruct its full prior reinforcement history.
+  - **Asymmetry Condition**: $\Xi(C_P)$ may yield multiple admissible prehistories or incomplete reconstruction under recursive continuation dynamics.
+  - **Recursive Loss**: $Loss(C_P, n)$ accumulates when continuation events compress, merge, redirect, fracture, or suppress prior reinforcement structure.
+  - **Non-Unique Prehistory**: Distinct reinforcement histories may project into observationally equivalent continuation-channel states.
+  - **Reconstruction Asymmetry**: Irreversibility is treated as a limit on reconstruction ($\Xi$) rather than a primitive temporal arrow or entropy increase.
+- **Continuation Compression and Equivalence Law (LAW-017)**: Formalizes how multiple distinct continuation histories compress into equivalent observable continuation structures.
+  - **History Family**: $\mathcal{H}(C_P) := \{ H_i : H_i \text{ admissibly projects into observable channel state } C_P \}$
+  - **Compression**: $Compress(H_i \rightarrow C_P)$ removes discriminating structure via reinforcement loss, topology transition, or admissibility filtering.
+  - **Observational Equivalence**: $H_i \sim_{obs} H_j \iff \Xi(H_i)$ and $\Xi(H_j)$ produce observationally equivalent continuation structures.
+  - **Bounded Equivalence**: Equivalence is local, projection-dependent, and constrained by finite reconstruction reachability.
+- **Accessibility Horizon and Reachability Limit Law (LAW-018)**: Defines intrinsic reachability limits and accessibility horizons across the orientation array.
+  - **Reachable Domain**: $D_A(\alpha)$ is the set of loci reachable under finite transport flux and defined admissibility.
+  - **Accessibility Horizon**: $H_A(\alpha)$ is the limit beyond which continuation influence becomes inadmissible, too weak, or unreachable.
+  - **Decay Condition**: Reachability decays with $W_{CSI}$ and reinforcement support.
+  - **Non-Spacetime Horizon**: Horizons are topological and dynamic array-limits, not primitive physical lightcones.
 
 ## 4. delta (Selection Operator)
 The mechanism that selects the next state from the admissible candidate set.

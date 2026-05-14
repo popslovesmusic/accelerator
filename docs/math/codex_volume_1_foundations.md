@@ -25,6 +25,12 @@ The framework is built upon the principle of strict procedural monism, where eve
 - **S(C_i) (Selection Pressure)**: operational measure determining the persistence support for a continuation channel (Formalized in LAW-014).
 - **H(C_P, n) (Reinforcement History)**: ordered record of recurrence events supporting a continuation channel (Formalized in LAW-015).
 - **Mem_app(C_P) (Memory Projection)**: apparent memory of a channel projected from its reinforcement history (Formalized in LAW-015).
+- **Ξ(C_P) (Reconstruction Candidate)**: admissibility-constrained reconstruction attempt from present continuation structure (Formalized in LAW-016).
+- **Loss(C_P, n) (Recursive Loss)**: accumulation of structural loss across recursive continuation events (Formalized in LAW-016).
+- **ℋ(C_P) (History Family)**: set of distinct continuation histories projecting into equivalent observable channel states (Formalized in LAW-017).
+- **~_obs (Observational Equivalence)**: relational equivalence between continuation structures under bounded reconstruction accessibility (Formalized in LAW-017).
+- **H_A(α) (Accessibility Horizon)**: locus-specific limit of admissible continuation influence across the orientation array (Formalized in LAW-018).
+- **D_A(α) (Reachable Domain)**: the set of orientation-array loci admissibly reachable from locus α under finite transport and reconstruction constraints (Formalized in LAW-018).
 
 ## 3. The NOT-Axiom
 Exclusion necessity condition: ε ≠ 0. This drives the necessity of process continuation.
