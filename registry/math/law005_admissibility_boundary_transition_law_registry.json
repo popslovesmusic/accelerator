@@ -1,0 +1,51 @@
+{
+  "law005_admissibility_boundary_transition_law": {
+    "id": "LAW-005",
+    "name": "Admissibility Boundary Transition Law",
+    "status": "candidate_law_form",
+    "purpose": "Define explicit transition behavior near admissibility boundaries under projected transport updates.",
+    "timestamp": "2026-05-14T09:45:00Z",
+    "depends_on": [
+      "LAW-001",
+      "LAW-002",
+      "LAW-003",
+      "LAW-004",
+      "admissibility_boundary_geometry",
+      "boundary_case_classification",
+      "topology_transitions",
+      "window_collapse_dynamics",
+      "branch_pruning",
+      "recursive_transport_closure"
+    ],
+    "law_conditions": [
+      "boundary_definition_explicit",
+      "interior_admissibility_condition_explicit",
+      "boundary_transition_condition_explicit",
+      "projection_failure_condition_explicit",
+      "branch_splitting_allowed",
+      "branch_pruning_allowed",
+      "multi_valued_continuation_preserved",
+      "no_global_boundary_stability_claim"
+    ],
+    "candidate_law_statement": {
+      "informal": "Projected continuation approaching admissibility boundaries may stabilize, split, collapse, prune, or fail depending on admissibility margin, transport magnitude, and local topology constraints.",
+      "boundary_definition": "∂A_α := { z : admissibility_margin_A(z) = 0 }",
+      "stable_projection_condition": "If admissibility_margin_A(Π_{A_α}(T_α)) > 0, continuation remains interior-admissible.",
+      "boundary_transition_condition": "If admissibility_margin_A(Π_{A_α}(T_α)) → 0, boundary-sensitive continuation modes may activate.",
+      "projection_failure_condition": "If Π_{A_α}(T_α) is undefined or leaves A_α, continuation may branch-collapse, prune, destabilize, or enter preserved failure states.",
+      "branch_transition_condition": "Boundary proximity may preserve multi-valued continuation through branch splitting or branch pruning rather than forced unique projection.",
+      "important_note": "This is a candidate admissibility-boundary transition law, not a proof of global stability, smooth boundary topology, or physical transition structure."
+    },
+    "failure_modes_to_preserve": [
+      "projection_failure",
+      "boundary_instability",
+      "window_collapse",
+      "branch_overcollapse",
+      "forced_unique_projection",
+      "topology_discontinuity",
+      "transport_induced_boundary_divergence",
+      "physics_claim_leakage"
+    ],
+    "last_updated": "2026-05-14"
+  }
+}

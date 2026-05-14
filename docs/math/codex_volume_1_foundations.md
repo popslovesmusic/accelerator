@@ -10,6 +10,8 @@ The framework is built upon the principle of strict procedural monism, where eve
 - **R (Residue)**: Memory, constraint, or trace persisting across transitions.
 - **ρ (Rho)**: Continuation capacity.
 - **K (CSI)**: Coupling, reach, or interaction domain.
+- **-(i) (Orientation Operator)**: Local orientation-conditioned continuation operator.
+- **{-(i)} (Orientation Array)**: Distributed reconciliation topology over local orientation operators (Distinction formalized in LAW-006).
 
 ## 3. The NOT-Axiom
 Exclusion necessity condition: ε ≠ 0. This drives the necessity of process continuation.

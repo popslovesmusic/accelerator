@@ -1,0 +1,52 @@
+{
+  "law003_navt_transport_operator_law": {
+    "id": "LAW-003",
+    "name": "NavT Transport Operator Law",
+    "status": "candidate_law_form",
+    "purpose": "Define a first explicit law-program candidate for NavT as bounded orientation-sensitive transport.",
+    "timestamp": "2026-05-14T09:15:00Z",
+    "depends_on": [
+      "LAW-001",
+      "LAW-002",
+      "navt_identity",
+      "nonlocal_transport",
+      "recursive_transport_closure",
+      "transition_flux_convergence",
+      "sum_operator_convergence",
+      "operator_composition",
+      "orientation_minimization",
+      "information_loss_geometry",
+      "continuation_reconstruction_asymmetry"
+    ],
+    "law_conditions": [
+      "orientation_pair_inputs_explicit",
+      "CSI_domain_explicit",
+      "transport_weighting_explicit",
+      "finite_flux_condition_explicit",
+      "noninvertibility_preserved",
+      "reconstruction_loss_preserved",
+      "composition_with_Pi_A_explicit",
+      "no_global_transport_closure_claim"
+    ],
+    "candidate_law_statement": {
+      "informal": "Given local orientation state omega_alpha and related orientation state omega_beta inside CSI(alpha), NavT returns a transport contribution from beta to alpha, weighted by orientation compatibility, admissibility context, and bounded nonlocal decay.",
+      "symbolic_candidate": "NavT(ω_α,ω_β) := W_CSI(α,β) · K_orient(ω_α,ω_β) · τ(ω_β → ω_α)",
+      "csi_summed_form": "T_α := Σ_{β∈CSI(α)} NavT(ω_α,ω_β)",
+      "law001_embedding": "δ(E_α > 0) uses Π_{A_α}(T_α) as the projected admissible continuation contribution.",
+      "noninvertibility_condition": "NavT^{-1} is not assumed to exist; multiple preimage transport configurations may yield observationally equivalent T_α.",
+      "finite_flux_condition": "Σ_{β∈CSI(α)} ||NavT(ω_α,ω_β)|| < ∞ under declared CSI weighting conditions.",
+      "important_note": "This is a candidate transport law, not a proof of physical transport, invertibility, convergence under all CSI domains, or global closure."
+    },
+    "failure_modes_to_preserve": [
+      "hidden_transport_invertibility",
+      "unbounded_CSI_summation",
+      "forced_global_transport_closure",
+      "orientation_locking",
+      "transport_flux_divergence",
+      "preimage_collapse",
+      "false_physical_transport_claim",
+      "operator_identity_overclaim"
+    ],
+    "last_updated": "2026-05-14"
+  }
+}

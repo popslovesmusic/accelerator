@@ -1,0 +1,39 @@
+{
+  "law003_navt_transport_operator_law_result": {
+    "status": "success",
+    "timestamp": "2026-05-14T09:07:30.028257",
+    "candidate_form": {
+      "symbolic": "NavT(omega_alpha, omega_beta) := W_CSI(alpha, beta) * K_orient(omega_alpha, omega_beta) * tau(omega_beta -> omega_alpha)",
+      "csi_summed": "T_alpha := Sum_{beta in CSI(alpha)} NavT(omega_alpha, omega_beta)",
+      "finite_flux_required": true,
+      "invertibility_assumed": false
+    },
+    "derivation_steps": [
+      {
+        "step": "L01",
+        "description": "Establish orientation-pair dependency",
+        "result": "NavT as binary relation on omega"
+      },
+      {
+        "step": "L02",
+        "description": "Map CSI weighting and decay",
+        "result": "W_CSI(alpha, beta) constraint"
+      },
+      {
+        "step": "L03",
+        "description": "Formulate aggregate transport vector",
+        "result": "Finite sum T_alpha"
+      },
+      {
+        "step": "L04",
+        "description": "Verify non-invertibility [Lossy projection]",
+        "result": "T_alpha maps many preimages to one state"
+      }
+    ],
+    "governance_compliance": {
+      "humility_maintained": true,
+      "noninvertibility_preserved": true,
+      "reconstruction_loss_mapped": true
+    }
+  }
+}

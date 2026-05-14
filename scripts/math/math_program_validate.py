@@ -141,7 +141,14 @@ def validate_math_program():
         "audit003_tda_adjacency_threshold": "validate_audit003_tda_adjacency_threshold.py",
         "audit004_rd_boundary_scaling_policy": "validate_audit004_rd_boundary_scaling_policy.py",
         "audit005_poisson_sign_convention": "validate_audit005_poisson_sign_convention.py",
-        "audit006_structural_euler_stability_bounds": "validate_audit006_structural_euler_stability_bounds.py"
+        "audit006_structural_euler_stability_bounds": "validate_audit006_structural_euler_stability_bounds.py",
+        "audit007_implementation_triage_closure": "validate_audit007_implementation_triage_closure.py",
+        "law001_explicit_delta_functional_form": "validate_law001_explicit_delta_functional_form.py",
+        "law002_pi_a_admissibility_projection_law": "validate_law002_pi_a_admissibility_projection_law.py",
+        "law003_navt_transport_operator_law": "validate_law003_navt_transport_operator_law.py",
+        "law004_csi_summation_finite_flux_law": "validate_law004_csi_summation_finite_flux_law.py",
+        "law005_admissibility_boundary_transition_law": "validate_law005_admissibility_boundary_transition_law.py",
+        "law006_orientation_array_distinction_law": "validate_law006_orientation_array_distinction_law.py"
     }
 
     report = {
