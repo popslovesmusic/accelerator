@@ -36,7 +36,8 @@ def validate_asymptotic_mapping():
     blocking_reg = "registry/math/proof_blocking_incompleteness_registry.json"
     if os.path.exists(blocking_reg):
         with open(blocking_reg, 'r') as f:
-            blockers = json.load(f).get("blockers", [])
+            data = json.load(f)
+            blockers = data.get("proof_blocking_incompleteness", {}).get("blockers", [])
             if len(blockers) < 3:
                 results["asymptotic_incompleteness_mapping_validation"]["status"] = "warning"
                 results["asymptotic_incompleteness_mapping_validation"]["warnings"].append("Proof-blocking incompleteness set seems sparse.")

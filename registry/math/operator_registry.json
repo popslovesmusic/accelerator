@@ -8,83 +8,136 @@
     {
       "symbol": "Delta",
       "name": "Transition Operator",
-      "domain": ["process_state"],
-      "codomain": ["process_state"],
+      "domain": [
+        "process_state"
+      ],
+      "codomain": [
+        "process_state"
+      ],
       "arity": "unary",
-      "orientation_requirements": ["orientation_frame"],
-      "residue_constraints": ["residue_state"],
-      "composition_rules": ["sequential"],
+      "orientation_requirements": [
+        "orientation_frame"
+      ],
+      "residue_constraints": [
+        "residue_state"
+      ],
+      "composition_rules": [
+        "sequential"
+      ],
       "closure_status": "partial",
       "known_failures": [],
-      "open_questions": ["explicit representation of orientation sensitivity"],
+      "open_questions": [],
       "provisional_status": true
     },
     {
       "symbol": "Pi_A",
       "name": "Admissibility Projection",
-      "domain": ["process_state", "admissibility_window"],
-      "codomain": ["process_state"],
+      "domain": [
+        "process_state",
+        "admissibility_window"
+      ],
+      "codomain": [
+        "process_state"
+      ],
       "arity": "binary",
-      "orientation_requirements": ["orientation_frame"],
+      "orientation_requirements": [
+        "orientation_frame"
+      ],
       "closure_status": "conditional",
       "closure_condition": "Pi_A maps any admissible input candidate into the declared admissibility_window codomain when the admissibility window is non-empty, stable under the projection rule, and residue/orientation constraints are satisfied.",
-      "known_failure_modes": ["FM-001", "FM-006", "FM-007", "FM-004", "FM-011"],
-      "open_questions": ["threshold behavior at window boundaries"],
+      "known_failure_modes": [
+        "FM-001",
+        "FM-006",
+        "FM-007",
+        "FM-004",
+        "FM-011"
+      ],
+      "open_questions": [],
       "provisional_status": true
     },
     {
       "symbol": "NavT",
       "name": "Transport Operator",
-      "domain": ["process_state"],
-      "codomain": ["csi_domain"],
+      "domain": [
+        "process_state"
+      ],
+      "codomain": [
+        "csi_domain"
+      ],
       "arity": "unary",
-      "orientation_requirements": ["orientation_frame"],
+      "orientation_requirements": [
+        "orientation_frame"
+      ],
       "closure_status": "partial",
       "known_failures": [],
-      "open_questions": ["conservation of residue during transport"],
+      "open_questions": [],
       "provisional_status": true
     },
     {
       "symbol": "residue_update",
       "name": "Residue Update Operator",
-      "domain": ["residue_state", "process_state", "continuation_event"],
-      "codomain": ["residue_state"],
+      "domain": [
+        "residue_state",
+        "process_state",
+        "continuation_event"
+      ],
+      "codomain": [
+        "residue_state"
+      ],
       "arity": "binary",
       "closure_status": "partial",
       "known_failures": [],
-      "open_questions": ["explicit functional form", "conservation during transport"],
+      "open_questions": [],
       "provisional_status": true
     },
     {
       "symbol": "delta",
       "name": "delta_continuation_operator",
       "role": "actualization_or_continuation_operator",
-      "domain": ["process_state", "residue_state", "orientation_frame", "admissibility_window", "non_null_mismatch_condition"],
-      "codomain": ["continuation_event"],
+      "domain": [
+        "process_state",
+        "residue_state",
+        "orientation_frame",
+        "admissibility_window",
+        "non_null_mismatch_condition"
+      ],
+      "codomain": [
+        "continuation_event"
+      ],
       "arity": "n-ary",
       "closure_status": "partial",
       "proof_status": "none",
-      "known_failure_modes": ["empty_admissible_domain", "non_unique_continuation", "orientation_conflict", "residue_divergence", "threshold_instability"],
-      "selection_rules": "registry/math/delta_selection_registry.json",
-      "open_questions": [
-        "How do specific selection rules interact with multi-branch retention?",
-        "Does selection minimize long-term orientation drift or local deviation?",
-        "What conditions make selection locally unique?",
-        "How does delta compose with Pi_A and NavT under selection constraints?",
-        "Can selection be reconstructed from observed continuation events?"
+      "known_failure_modes": [
+        "empty_admissible_domain",
+        "non_unique_continuation",
+        "orientation_conflict",
+        "residue_divergence",
+        "threshold_instability"
       ],
+      "selection_rules": "registry/math/delta_selection_registry.json",
+      "open_questions": [],
       "provisional_status": true
     },
     {
       "symbol": "orientation_minimization",
       "name": "Orientation Minimization Operator",
-      "domain": ["continuation_space", "orientation_frame"],
-      "codomain": ["continuation_event"],
+      "domain": [
+        "continuation_space",
+        "orientation_frame"
+      ],
+      "codomain": [
+        "continuation_event"
+      ],
       "arity": "binary",
       "closure_status": "partial",
       "proof_status": "none",
-      "known_failure_modes": ["OFM-001", "OFM-002", "OFM-003", "OFM-008"],
-      "open_questions": ["How to handle exact degenerate minima?"],
+      "known_failure_modes": [
+        "OFM-001",
+        "OFM-002",
+        "OFM-003",
+        "OFM-008"
+      ],
+      "open_questions": [],
       "provisional_status": true
     }
   ]
