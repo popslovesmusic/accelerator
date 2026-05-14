@@ -87,6 +87,7 @@ def validate_math_program():
         "continuation_reconstruction_asymmetry": "validate_continuation_reconstruction_asymmetry.py",
         "xi_reconstruction_bounds": "validate_xi_reconstruction_bounds.py",
         "information_loss_geometry": "validate_information_loss_geometry.py",
+        "recursive_loss_accumulation": "validate_recursive_loss_accumulation.py",
         "rc002_derivation_closure": "validate_rc002_derivation_closure.py",
         "rc002_counterexample_obligation": "validate_rc002_counterexample_obligation.py",
         "rc003_recursive_fixed_point_scaffold": "validate_rc003_recursive_fixed_point_scaffold.py",
