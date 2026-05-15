@@ -1,0 +1,67 @@
+{
+  "hardening_id": "VAL-TS4-BH-001",
+  "patch_id": "MPF-PF-024",
+  "name": "TS4 Boundary Hardening Registry",
+  "status": "active",
+  "target_candidate": "LTC-001",
+  "boundary_hardening_targets": [
+    {
+      "target_id": "TS4-BH-001",
+      "name": "Implicit Globalization Hardening",
+      "requirement": "Prevent any restricted-local proof statement from being recursively reinterpreted as global continuation behavior."
+    },
+    {
+      "target_id": "TS4-BH-002",
+      "name": "Composition Leakage Hardening",
+      "requirement": "Prevent local LAW034 composition support from implying unrestricted compositional closure."
+    },
+    {
+      "target_id": "TS4-BH-003",
+      "name": "Identity Drift Hardening",
+      "requirement": "Detect and isolate cases where admissible persistence survives while identity reconstruction becomes ambiguous."
+    },
+    {
+      "target_id": "TS4-BH-004",
+      "name": "Boundary Expansion Hardening",
+      "requirement": "Prevent admissibility boundary growth beyond declared restricted-local domains."
+    },
+    {
+      "target_id": "TS4-BH-005",
+      "name": "Failure Geometry Persistence Hardening",
+      "requirement": "Ensure preserved blockers remain structurally attached after hardening passes."
+    }
+  ],
+  "hardening_failure_classes": [
+    {
+      "failure_id": "TS4-BH-F001",
+      "name": "Recursive Scope Bleed",
+      "meaning": "Local proof stability recursively propagates into undeclared domains."
+    },
+    {
+      "failure_id": "TS4-BH-F002",
+      "name": "Compositional Closure Leakage",
+      "meaning": "Restricted-local composition implicitly reconstructs unresolved global closure."
+    },
+    {
+      "failure_id": "TS4-BH-F003",
+      "name": "Persistence-Identity Decoupling",
+      "meaning": "Admissibility image persists while identity continuity becomes unrecoverable."
+    },
+    {
+      "failure_id": "TS4-BH-F004",
+      "name": "Hidden Boundary Inflation",
+      "meaning": "Admissibility domain expands beyond declared D_L constraints."
+    },
+    {
+      "failure_id": "TS4-BH-F005",
+      "name": "Failure Geometry Suppression",
+      "meaning": "Hardening pass incorrectly removes preserved blockers or excluded domains."
+    }
+  ],
+  "governance": {
+    "theorem_status": "NOT_PROVEN",
+    "proof_status": "TS4_boundary_hardening_only",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL"
+  }
+}
