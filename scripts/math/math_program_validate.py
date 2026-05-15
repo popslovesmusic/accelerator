@@ -198,7 +198,13 @@ def validate_math_program():
         "mt_law_a_reentry_conditions": "validate_mt_law_a_reentry_conditions.py",
         "mt_law_a_boundary_consistency": "validate_mt_law_a_scope_boundary_consistency.py",
         "mt_law_a_restricted_review": "validate_mt_law_a_restricted_lemma_review.py",
-        "mt_law_a_stability_consolidation": "validate_mt_law_a_restricted_domain_stability.py"
+        "mt_law_a_stability_consolidation": "validate_mt_law_a_restricted_domain_stability.py",
+        "mt_law_a_local_readiness": "validate_mt_law_a_local_theorem_readiness.py",
+        "mt_law_a_ts4_review_gate": "validate_mt_law_a_ts4_review_gate.py",
+        "mt_law_a_ts4_restricted_review": "validate_mt_law_a_ts4_restricted_domain_review.py",
+        "mt_law_a_ts4_stability_reconciliation": "validate_mt_law_a_ts4_stability_reconciliation.py",
+        "mt_law_a_ts4_boundary_hardening": "validate_mt_law_a_ts4_boundary_hardening.py",
+        "mt_law_a_foundations_audit": "validate_mt_law_a_foundations_dependency_audit.py"
     }
 
     report = {
