@@ -1,0 +1,66 @@
+{
+  "gate_id": "VAL-RDAG-001",
+  "patch_id": "MPF-DEP-005",
+  "name": "Recursive Dependency Admission Gate Registry",
+  "status": "active",
+  "purpose": "Create a formal admission gate that determines whether any recursive dependency may enter theorem-facing, simulation-facing, or review-facing infrastructure after passing the Recursive Inheritance Firewall.",
+  "admission_targets": [
+    {
+      "target_id": "RDAG-T001",
+      "name": "Theorem-Facing Admission",
+      "requirement": "Only INHERITANCE-ALLOWED or explicitly constrained INHERITANCE-CONDITIONAL artifacts may enter theorem-facing review."
+    },
+    {
+      "target_id": "RDAG-T002",
+      "name": "Simulation-Facing Admission",
+      "requirement": "Simulation inputs must exclude quarantined, blocked, deceptive, or unresolved global-composition artifacts unless explicitly used as stress-test cases."
+    },
+    {
+      "target_id": "RDAG-T003",
+      "name": "Review-Facing Admission",
+      "requirement": "Review artifacts must preserve all open blockers, excluded domains, and simulation-evidence limits."
+    },
+    {
+      "target_id": "RDAG-T004",
+      "name": "Quarantine Enforcement",
+      "requirement": "INHERITANCE-BLOCKED and INHERITANCE-QUARANTINED artifacts must not enter proof-supporting chains."
+    },
+    {
+      "target_id": "RDAG-T005",
+      "name": "LAW034 Composition Guard",
+      "requirement": "No admitted dependency may imply global compositional closure."
+    }
+  ],
+  "admission_classes": [
+    {
+      "class_id": "ADMISSION-GRANTED",
+      "meaning": "Dependency may enter restricted-local review infrastructure.",
+      "allowed_scope": "restricted_local_review_only"
+    },
+    {
+      "class_id": "ADMISSION-CONDITIONAL",
+      "meaning": "Dependency may enter only with explicit constraints, blockers, and review-required status.",
+      "allowed_scope": "restricted_local_review_with_constraints"
+    },
+    {
+      "class_id": "ADMISSION-STRESS-ONLY",
+      "meaning": "Dependency may be used only as adversarial simulation or failure-testing input.",
+      "allowed_scope": "simulation_stress_testing_only"
+    },
+    {
+      "class_id": "ADMISSION-DENIED",
+      "meaning": "Dependency may not enter theorem-facing, review-facing, or proof-supporting infrastructure.",
+      "allowed_scope": "none"
+    },
+    {
+      "class_id": "ADMISSION-QUARANTINED",
+      "meaning": "Dependency retained only for historical, diagnostic, or failure-geometry reference.",
+      "allowed_scope": "historical_or_failure_analysis_only"
+    }
+  ],
+  "governance": {
+    "theorem_status": "NOT_PROVEN",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL"
+  }
+}
