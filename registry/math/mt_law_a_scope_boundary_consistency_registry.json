@@ -1,0 +1,51 @@
+{
+  "id": "MT-LAW-A017",
+  "name": "Bounded Continuation Persistence Scope Boundary Consistency",
+  "status": "implemented",
+  "consistency_rules": [
+    {
+      "id": "BC-A001",
+      "rule": "If C_A > B_local(alpha), the case must be excluded from restricted-domain persistence.",
+      "linked_exclusion": "ED-A001"
+    },
+    {
+      "id": "BC-A002",
+      "rule": "If T_access <= severance_threshold, topology accessibility failure must block persistence scope.",
+      "linked_exclusion": "ED-A002"
+    },
+    {
+      "id": "BC-A003",
+      "rule": "If R_divergence > epsilon_crit, reconstruction ambiguity must block unique persistence claims.",
+      "linked_exclusion": "ED-A003"
+    },
+    {
+      "id": "BC-A004",
+      "rule": "If I_continuity fragments into non-equivalent branches, identity persistence must remain ambiguous.",
+      "linked_exclusion": "ED-A004"
+    },
+    {
+      "id": "BC-A005",
+      "rule": "If oscillatory continuation fails bounded stabilization criteria, active continuation must not count as persistence.",
+      "linked_exclusion": "ED-A005"
+    },
+    {
+      "id": "BC-A006",
+      "rule": "If cross-mechanism divergence exceeds tolerance, mechanism-independent persistence must not be claimed.",
+      "linked_exclusion": "ED-A006"
+    }
+  ],
+  "checks_verified": [
+    "restricted_domain_conditions_do_not_overlap_excluded_domains",
+    "excluded_domains_have_explicit_reentry_conditions",
+    "reentry_conditions_do_not_erase_failure_history",
+    "counterexamples_remain_active_outside_scope",
+    "nonuniversality_declaration_present",
+    "no_global_or_physics_claims_present"
+  ],
+  "governance_flags": {
+    "proof_status": "TS3_scope_boundary_consistency",
+    "theorem_status": "NOT_PROVEN",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL"
+  }
+}

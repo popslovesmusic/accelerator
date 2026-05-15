@@ -15,7 +15,7 @@ This volume documents the current status and strengthening efforts of the Minima
 - **Goal**: Formalize existence requirement for admissible continuation images.
 
 ## 4. MT-LAW-A: Bounded Continuation Persistence Lemma
-- **Status**: TS3_REENTRY_CONDITION_MAPPING.
+- **Status**: TS3_RESTRICTED_LEMMA_REVIEW.
 - **Goal**: Formalize persistence metrics and constraints under admissibility and finite budgets.
 - [Definitional Foundation](mt_law_a_bounded_continuation_persistence_definition.md)
 - [Counterexample Obligations](mt_law_a_counterexample_obligations.md)
@@ -33,6 +33,8 @@ This volume documents the current status and strengthening efforts of the Minima
 - [Restricted-Domain Lemma Candidate](mt_law_a_restricted_domain_lemma_candidate.md)
 - [Excluded Domains](mt_law_a_excluded_domains.md)
 - [Reentry Conditions](mt_law_a_reentry_conditions.md)
+- [Scope Boundary Consistency](mt_law_a_scope_boundary_consistency.md)
+- [Restricted-Lemma Review](mt_law_a_restricted_lemma_review.md)
 
 ## 5. Proof Elevation & Obligations
 Detailed tracking of satisfaction criteria (PO-001 through PO-003) and formal blocker resolution.

@@ -30,6 +30,14 @@ Local theorem candidates (MT-001, MT-002, MT-003) and proof elevation status.
 - [Candidate: MT-LAW-A Restricted-Domain Lemma Candidate](mt_law_a_restricted_domain_lemma_candidate.md)
 - [Exclusions: MT-LAW-A Excluded Domains](mt_law_a_excluded_domains.md)
 - [Reentry: MT-LAW-A Reentry Conditions](mt_law_a_reentry_conditions.md)
+- [Consistency: MT-LAW-A Scope Boundary Consistency](mt_law_a_scope_boundary_consistency.md)
+- [Review: MT-LAW-A Restricted-Lemma Review](mt_law_a_restricted_lemma_review.md)
+- [Consolidation: MT-LAW-A Restricted-Domain Stability Consolidation](mt_law_a_restricted_domain_stability_consolidation.md)
+- [Audit: MT-LAW-A Local Theorem Readiness Audit](mt_law_a_local_theorem_readiness_audit.md)
+- [Gate: MT-LAW-A TS4 Review Gate](mt_law_a_ts4_review_gate.md)
+- [Review: MT-LAW-A TS4 Restricted-Domain Review](mt_law_a_ts4_restricted_domain_review.md)
+- [Reconciliation: MT-LAW-A TS4 Stability Reconciliation](mt_law_a_ts4_stability_reconciliation.md)
+- [Hardening: MT-LAW-A TS4 Boundary Hardening](mt_law_a_ts4_boundary_hardening.md)
 
 ### [Volume 5: Counterexamples and Open Frontiers](codex_volume_5_counterexample_and_open_frontiers.md)
 Adversarial campaigns, open questions, and closure gaps.

@@ -195,7 +195,10 @@ def validate_math_program():
         "mt_law_a_local_validation": "validate_mt_law_a_local_discharge_validation.py",
         "mt_law_a_restricted_domain": "validate_mt_law_a_restricted_domain_lemma_candidate.py",
         "mt_law_a_excluded_domains": "validate_mt_law_a_excluded_domains.py",
-        "mt_law_a_reentry_conditions": "validate_mt_law_a_reentry_conditions.py"
+        "mt_law_a_reentry_conditions": "validate_mt_law_a_reentry_conditions.py",
+        "mt_law_a_boundary_consistency": "validate_mt_law_a_scope_boundary_consistency.py",
+        "mt_law_a_restricted_review": "validate_mt_law_a_restricted_lemma_review.py",
+        "mt_law_a_stability_consolidation": "validate_mt_law_a_restricted_domain_stability.py"
     }
 
     report = {
