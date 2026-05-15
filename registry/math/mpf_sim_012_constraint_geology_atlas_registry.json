@@ -1,0 +1,89 @@
+{
+  "sim_id": "MPF-SIM-012",
+  "name": "Constraint Geology Atlas",
+  "status": "active",
+  "purpose": "Consolidate simulation evidence from groove formation, decay, reset, recovery, hysteresis, scars, and failure geometry into a governed atlas of constraint-geology structures.",
+  "atlas_targets": [
+    {
+      "target_id": "SIM012-T001",
+      "name": "Admissibility Groove Taxonomy",
+      "requirement": "Classify stable, fragile, deceptive, residual, and scarred groove structures."
+    },
+    {
+      "target_id": "SIM012-T002",
+      "name": "Constraint Scar Mapping",
+      "requirement": "Map irreversible or semi-irreversible deformation left by blocker activation."
+    },
+    {
+      "target_id": "SIM012-T003",
+      "name": "Recovery Geology",
+      "requirement": "Classify whether recovered basins return cleanly, elastically, plastically, or deceptively."
+    },
+    {
+      "target_id": "SIM012-T004",
+      "name": "Path-Dependent Basin Stratification",
+      "requirement": "Layer basin behavior by recursive history, decay state, and hysteresis class."
+    },
+    {
+      "target_id": "SIM012-T005",
+      "name": "Proof Eligibility Terrain",
+      "requirement": "Map which constraint-geology structures support review, require review, or block proof use."
+    }
+  ],
+  "geology_classes": [
+    {
+      "class_id": "CG-STABLE-GROOVE",
+      "meaning": "Repeated admissible recursion forms a stable local pathway.",
+      "proof_effect": "supports_review_only"
+    },
+    {
+      "class_id": "CG-FRAGILE-GROOVE",
+      "meaning": "Admissibility pathway exists but remains threshold-sensitive.",
+      "proof_effect": "review_required"
+    },
+    {
+      "class_id": "CG-DECEPTIVE-GROOVE",
+      "meaning": "Pathway appears stable but later reveals false stability or hidden instability.",
+      "proof_effect": "blocked"
+    },
+    {
+      "class_id": "CG-RESIDUAL-GROOVE",
+      "meaning": "Decayed constraint memory weakly biases future admissibility.",
+      "proof_effect": "review_required"
+    },
+    {
+      "class_id": "CG-ELASTIC-DEFORMATION",
+      "meaning": "Basin recovers with bounded deformation and preserved local admissibility.",
+      "proof_effect": "review_required"
+    },
+    {
+      "class_id": "CG-PLASTIC-DEFORMATION",
+      "meaning": "Basin recovers but retains lasting path-dependent deformation.",
+      "proof_effect": "review_required_or_blocked"
+    },
+    {
+      "class_id": "CG-SCARRED-REGION",
+      "meaning": "Prior failure geometry activation leaves persistent destabilizing structure.",
+      "proof_effect": "blocked"
+    },
+    {
+      "class_id": "CG-SEVERED-REGION",
+      "meaning": "Topology loses admissibility connectivity or boundary access.",
+      "proof_effect": "blocked"
+    }
+  ],
+  "governance": {
+    "theorem_status": "NOT_PROVEN",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL"
+  },
+  "dependencies": [
+    "MPF-SIM-009",
+    "MPF-SIM-010",
+    "MPF-SIM-011",
+    "MPF-SIM-008",
+    "MPF-SIM-006",
+    "failure_geometry_registry",
+    "operator_signature_registry"
+  ]
+}
