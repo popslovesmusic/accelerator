@@ -217,7 +217,8 @@ def validate_math_program():
         "stable_basin_eligibility": "validate_stable_basin_proof_eligibility_filter.py",
         "restricted_proof_segment": "validate_restricted_local_proof_segment.py",
         "restricted_proof_consistency": "validate_restricted_local_proof_consistency_audit.py",
-        "restricted_stability_consolidation": "validate_restricted_local_stability_consolidation.py"
+        "restricted_stability_consolidation": "validate_restricted_local_stability_consolidation.py",
+        "local_theorem_readiness": "validate_local_theorem_readiness_audit.py"
     }
 
     report = {
