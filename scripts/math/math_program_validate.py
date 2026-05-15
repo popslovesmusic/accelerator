@@ -219,7 +219,8 @@ def validate_math_program():
         "restricted_proof_consistency": "validate_restricted_local_proof_consistency_audit.py",
         "restricted_stability_consolidation": "validate_restricted_local_stability_consolidation.py",
         "local_theorem_readiness": "validate_local_theorem_readiness_audit.py",
-        "ts4_review_gate": "validate_ts4_review_gate.py"
+        "ts4_review_gate": "validate_ts4_review_gate.py",
+        "ts4_restricted_review": "validate_ts4_restricted_local_review.py"
     }
 
     report = {
