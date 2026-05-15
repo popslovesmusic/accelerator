@@ -1,0 +1,67 @@
+{
+  "atlas_id": "ATLAS-CE-RECONCILIATION-001",
+  "patch_id": "MPF-PF-014",
+  "name": "Pi_A Counterexample Reconciliation Atlas",
+  "status": "active",
+  "atlas_rules": [
+    "counterexamples_are_structural_information",
+    "reconciliation_is_not_discharge",
+    "all_counterexamples_must_remain_traceable",
+    "excluded_domains_must_be_preserved",
+    "recursive_instabilities_must_be_logged",
+    "local_restricted_scope_must_be_enforced"
+  ],
+  "counterexample_reconciliation_entries": [
+    {
+      "counterexample_id": "CE-013-001",
+      "name": "Admissibility Budget Exhaustion",
+      "classification": "bounded_continuation_failure",
+      "affected_operators": ["Pi_A", "delta"],
+      "affected_laws": ["LAW021", "LAW032"],
+      "reconciliation_strategy": "local_budget_threshold_mapping",
+      "discharge_status": "NOT_DISCHARGED"
+    },
+    {
+      "counterexample_id": "CE-013-002",
+      "name": "Topology Severance Injection",
+      "classification": "topological_disconnect_failure",
+      "affected_operators": ["K", "Pi_A"],
+      "affected_laws": ["LAW028", "LAW033"],
+      "reconciliation_strategy": "restricted_boundary_partitioning",
+      "discharge_status": "NOT_DISCHARGED"
+    },
+    {
+      "counterexample_id": "CE-013-003",
+      "name": "Oscillatory Non-Stabilization Loop",
+      "classification": "recursive_instability_failure",
+      "affected_operators": ["delta", "NavT"],
+      "affected_laws": ["LAW011", "LAW032"],
+      "reconciliation_strategy": "metastable_region_classification",
+      "discharge_status": "NOT_DISCHARGED"
+    },
+    {
+      "counterexample_id": "CE-013-004",
+      "name": "Identity Ambiguity Mutation",
+      "classification": "continuity_identity_failure",
+      "affected_operators": ["R", "Pi_A"],
+      "affected_laws": ["LAW020", "LAW023"],
+      "reconciliation_strategy": "identity_trace_restriction",
+      "discharge_status": "NOT_DISCHARGED"
+    },
+    {
+      "counterexample_id": "CE-013-005",
+      "name": "LAW034 Composition Divergence",
+      "classification": "compositional_instability_failure",
+      "affected_operators": ["Pi_A", "NavT", "higher_order_relation"],
+      "affected_laws": ["LAW034"],
+      "reconciliation_strategy": "local_composition_scope_limiting",
+      "discharge_status": "NOT_DISCHARGED"
+    }
+  ],
+  "governance": {
+    "theorem_status": "NOT_PROVEN",
+    "proof_status": "LTC_counterexample_reconciliation_active",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL"
+  }
+}
