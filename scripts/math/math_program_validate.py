@@ -239,7 +239,8 @@ def validate_math_program():
         "mpf_dep_002_rc_map": "validate_rc_series_recovery_closure_map.py",
         "mpf_dep_003_rc_repair": "validate_rc_repair_queue_execution.py",
         "mpf_dep_004_firewall": "validate_recursive_inheritance_firewall.py",
-        "mpf_dep_005_admission": "validate_recursive_dependency_admission_gate.py"
+        "mpf_dep_005_admission": "validate_recursive_dependency_admission_gate.py",
+        "mpf_dep_006_closure_audit": "validate_dependency_repair_closure_audit.py"
     }
 
     report = {
