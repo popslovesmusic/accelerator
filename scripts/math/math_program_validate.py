@@ -224,7 +224,8 @@ def validate_math_program():
         "ts4_stability_reconciliation": "validate_ts4_stability_reconciliation.py",
         "ts4_boundary_hardening": "validate_ts4_boundary_hardening.py",
         "mpf_sim_001_stability": "validate_mpf_sim_001.py",
-        "mpf_sim_002_boundary_inflation": "validate_mpf_sim_002_boundary_inflation.py"
+        "mpf_sim_002_boundary_inflation": "validate_mpf_sim_002_boundary_inflation.py",
+        "mpf_sim_003_metastability": "validate_mpf_sim_003_metastability_oscillation.py"
     }
 
     report = {
