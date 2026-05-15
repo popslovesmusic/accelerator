@@ -1,0 +1,72 @@
+{
+  "sim_id": "MPF-SIM-002",
+  "name": "Recursive Boundary Inflation Stress Test",
+  "status": "active",
+  "purpose": "Test whether restricted-local admissibility composition remains bounded under recursive Pi_A application, or leaks into hidden boundary expansion / implicit globalization.",
+  "simulation_targets": [
+    {
+      "target_id": "SIM002-T001",
+      "name": "Boundary Inflation Detection",
+      "metric": "boundary_growth_ratio"
+    },
+    {
+      "target_id": "SIM002-T002",
+      "name": "Scope Bleed Detection",
+      "metric": "scope_bleed_flag"
+    },
+    {
+      "target_id": "SIM002-T003",
+      "name": "Composition Leakage Detection",
+      "metric": "composition_leakage_score"
+    },
+    {
+      "target_id": "SIM002-T004",
+      "name": "Idempotence Drift Under Boundary Pressure",
+      "metric": "idempotence_error_delta"
+    },
+    {
+      "target_id": "SIM002-T005",
+      "name": "Failure Geometry Activation",
+      "metric": "failure_geometry_triggered"
+    }
+  ],
+  "simulation_scenarios": [
+    {
+      "scenario_id": "SIM002-S001",
+      "name": "Stable Local Boundary"
+    },
+    {
+      "scenario_id": "SIM002-S002",
+      "name": "Metastable Boundary"
+    },
+    {
+      "scenario_id": "SIM002-S003",
+      "name": "Hidden Boundary Inflation"
+    },
+    {
+      "scenario_id": "SIM002-S004",
+      "name": "Recursive Composition Leakage"
+    },
+    {
+      "scenario_id": "SIM002-S005",
+      "name": "Topology Severance Under Boundary Stress"
+    }
+  ],
+  "governance": {
+    "theorem_status": "NOT_PROVEN",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL"
+  },
+  "dependencies": [
+    "MPF-SIM-001",
+    "MPF-PF-024",
+    "MPF-PF-023",
+    "MPF-PF-018",
+    "LAW021",
+    "LAW032",
+    "LAW033",
+    "LAW034",
+    "operator_signature_registry",
+    "failure_geometry_registry"
+  ]
+}
