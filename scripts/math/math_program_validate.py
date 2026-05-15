@@ -205,7 +205,8 @@ def validate_math_program():
         "mt_law_a_ts4_stability_reconciliation": "validate_mt_law_a_ts4_stability_reconciliation.py",
         "mt_law_a_ts4_boundary_hardening": "validate_mt_law_a_ts4_boundary_hardening.py",
         "mt_law_a_foundations_audit": "validate_mt_law_a_foundations_dependency_audit.py",
-        "operator_discipline": "validate_operator_discipline.py"
+        "operator_discipline": "validate_operator_discipline.py",
+        "ltc_selection_gate": "validate_local_theorem_candidate_selection_gate.py"
     }
 
     report = {

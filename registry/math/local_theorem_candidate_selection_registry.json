@@ -1,0 +1,59 @@
+{
+  "gate_id": "GATE-LTC-SELECTION-001",
+  "name": "Local Theorem Candidate Selection Gate",
+  "status": "implemented",
+  "purpose": "Select the first high-priority local theorem candidate from the stabilized operator-typed program.",
+  "candidate_pool": [
+    {
+      "candidate_id": "LTC-001",
+      "name": "Pi_A Local Idempotent Persistence Candidate",
+      "basis": ["MT-001", "LAW002", "MT-LAW-A", "MPF-PF-002"],
+      "risk": "May overstate persistence if excluded domains are ignored.",
+      "operator_bindings": ["Pi_A"],
+      "status": "SELECTED"
+    },
+    {
+      "candidate_id": "LTC-002",
+      "name": "Lambda Non-Empty Fixed-Point Candidate",
+      "basis": ["MT-003", "standing_wave_lambda_prototype", "MPF-PF-004"],
+      "risk": "Prototype evidence is not symbolic proof.",
+      "operator_bindings": ["Pi_A", "Lambda"],
+      "status": "POOLED"
+    },
+    {
+      "candidate_id": "LTC-003",
+      "name": "Failure-Preserved Restricted Continuation Candidate",
+      "basis": ["LAW032", "failure_geometry_registry", "MT-LAW-A015"],
+      "risk": "May classify failure without proving continuation.",
+      "operator_bindings": ["Pi_A", "NavT", "delta"],
+      "status": "POOLED"
+    },
+    {
+      "candidate_id": "LTC-004",
+      "name": "LAW034 Local Composition Preservation Candidate",
+      "basis": ["LAW034", "MPF-PF-003", "operator_signature_registry"],
+      "risk": "Most important but likely hardest.",
+      "operator_bindings": ["composition_operator"],
+      "status": "POOLED"
+    }
+  ],
+  "selection_criteria_verified": [
+    "candidate_has_complete_dependency_trace",
+    "candidate_preserves_NOT_PROVEN_status",
+    "candidate_has_explicit_excluded_domains",
+    "candidate_has_operator_type_bindings",
+    "candidate_has_failure_geometry_links",
+    "candidate_does_not_make_physics_claims",
+    "candidate_is_local_restricted_domain_only"
+  ],
+  "recommended_selection": {
+    "candidate_id": "LTC-001",
+    "reason": "Pi_A is now the central stabilizing operator, MT-001 already supports idempotence, and MT-LAW-A depends heavily on admissibility persistence."
+  },
+  "governance": {
+    "theorem_status": "NOT_PROVEN",
+    "proof_status": "LTC_selection_gate_only",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL"
+  }
+}
