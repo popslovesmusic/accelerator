@@ -1,0 +1,77 @@
+{
+  "attempt_id": "PA-LTC-001-001",
+  "patch_id": "MPF-PF-012",
+  "name": "Pi_A Local Proof Attempt Skeleton",
+  "status": "skeleton_created",
+  "restricted_domain_declaration": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+  "candidate_id": "LTC-001",
+  "candidate_statement": {
+    "formal": "For local domain D_L, if x in Im(Pi_A) and excluded_domains(D_L)=false, then Pi_A(Pi_A(x)) ~ Pi_A(x)."
+  },
+  "operator_type_bindings": ["Pi_A", "delta", "R"],
+  "dependency_chain": [
+    "MPF-PF-010",
+    "MPF-PF-011",
+    "PATCH-MT-LAW-A026",
+    "MT-001",
+    "LAW002",
+    "LAW021",
+    "LAW032",
+    "LAW033",
+    "LAW034",
+    "failure_geometry_registry"
+  ],
+  "proof_attempt_steps": [
+    {
+      "step_id": "PAS-001",
+      "goal": "Establish admissible-image membership.",
+      "operation": "Assume x in Im(Pi_A) under restricted local domain D_L.",
+      "dependency": ["LAW002", "MT-001"]
+    },
+    {
+      "step_id": "PAS-002",
+      "goal": "Apply second admissibility projection.",
+      "operation": "Evaluate Pi_A(Pi_A(x)).",
+      "dependency": ["operator_signature_registry"]
+    },
+    {
+      "step_id": "PAS-003",
+      "goal": "Constrain evaluation to local admissibility scope.",
+      "operation": "Reject unrestricted continuation or global admissibility assumptions.",
+      "dependency": ["LAW021", "LAW033", "PATCH-MT-LAW-A026"]
+    },
+    {
+      "step_id": "PAS-004",
+      "goal": "Apply local idempotence relation.",
+      "operation": "Invoke MT-001 only within declared restricted local domain.",
+      "dependency": ["MT-001"]
+    },
+    {
+      "step_id": "PAS-005",
+      "goal": "Preserve unresolved failure conditions.",
+      "operation": "Prevent proof completion if excluded failures are triggered.",
+      "dependency": ["LAW032", "failure_geometry_registry"]
+    }
+  ],
+  "explicit_non_claims": [
+    "does_not_prove_global_persistence",
+    "does_not_prove_universal_idempotence",
+    "does_not_prove_QM_GR_unification",
+    "does_not_prove_physical_correspondence",
+    "does_not_remove_excluded_domains"
+  ],
+  "mandatory_open_conditions": [
+    "topology_severance_divergence_hotspots",
+    "identity_continuity_ambiguity",
+    "oscillatory_non_stabilization_regions",
+    "cross_mechanism_divergence_regions",
+    "threshold_sensitive_metastability",
+    "LAW034_global_composition_unresolved"
+  ],
+  "governance": {
+    "theorem_status": "NOT_PROVEN",
+    "proof_status": "LTC_proof_attempt_skeleton_only",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL"
+  }
+}

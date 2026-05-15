@@ -209,7 +209,8 @@ def validate_math_program():
         "ltc_selection_gate": "validate_local_theorem_candidate_selection_gate.py",
         "pi_a_persistence_scaffold": "validate_pi_a_local_persistence_proof_scaffold.py",
         "pi_a_boundary_mapping": "validate_pi_a_proof_obligation_boundary_mapping.py",
-        "mt_law_a_foundations_resolution": "validate_mt_law_a_foundations_resolution.py"
+        "mt_law_a_foundations_resolution": "validate_mt_law_a_foundations_resolution.py",
+        "pi_a_proof_attempt": "validate_pi_a_local_proof_attempt.py"
     }
 
     report = {
