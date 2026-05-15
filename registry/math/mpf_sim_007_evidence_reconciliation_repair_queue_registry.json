@@ -1,0 +1,65 @@
+{
+  "queue_id": "SIM-REPAIR-QUEUE-001",
+  "patch_id": "MPF-SIM-007",
+  "name": "Evidence-Reconciliation Repair Queue Registry",
+  "status": "active",
+  "repair_targets": [
+    {
+      "target_id": "SIM007-R001",
+      "name": "Metastability Threshold Reconciliation",
+      "trigger": "SIM-EVIDENCE-MIXED",
+      "goal": "Determine whether metastable regions can be sharply bounded or remain inherently fuzzy."
+    },
+    {
+      "target_id": "SIM007-R002",
+      "name": "Topology Severance Recovery Mapping",
+      "trigger": "SIM-EVIDENCE-BLOCKING",
+      "goal": "Classify whether severed basins can recover admissibility under restricted-local re-entry conditions."
+    },
+    {
+      "target_id": "SIM007-R003",
+      "name": "Lambda Drift Repair Analysis",
+      "trigger": "lambda_drift_rate exceeds threshold",
+      "goal": "Determine whether Lambda drift is transient, metastable, or proof-blocking."
+    },
+    {
+      "target_id": "SIM007-R004",
+      "name": "Composition Leakage Containment",
+      "trigger": "composition_leakage_score exceeds threshold",
+      "goal": "Prevent local composition from silently reconstructing hidden global closure."
+    },
+    {
+      "target_id": "SIM007-R005",
+      "name": "False Stability Recurrence Tracking",
+      "trigger": "False Stability Trap detected",
+      "goal": "Track whether false stability events recur under altered admissibility parameters."
+    }
+  ],
+  "repair_classes": [
+    {
+      "class_id": "SIM-REPAIR-LOCALIZED",
+      "meaning": "Issue bounded to identifiable local conditions.",
+      "proof_effect": "review_allowed_with_constraints"
+    },
+    {
+      "class_id": "SIM-REPAIR-METASTABLE",
+      "meaning": "Issue remains threshold-sensitive and cannot yet be sharply stabilized.",
+      "proof_effect": "review_required"
+    },
+    {
+      "class_id": "SIM-REPAIR-BLOCKING",
+      "meaning": "Issue fundamentally breaks restricted-local stability assumptions.",
+      "proof_effect": "proof_use_blocked"
+    },
+    {
+      "class_id": "SIM-REPAIR-UNRESOLVED",
+      "meaning": "Insufficient evidence or conflicting traces prevent reconciliation.",
+      "proof_effect": "manual_review_required"
+    }
+  ],
+  "governance": {
+    "theorem_status": "NOT_PROVEN",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL"
+  }
+}
