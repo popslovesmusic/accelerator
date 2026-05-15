@@ -1,0 +1,97 @@
+{
+  "sim_id": "MPF-SIM-008",
+  "name": "Admissibility Recovery and Re-Entry Mapping",
+  "status": "active",
+  "purpose": "Map whether metastable, oscillatory, severed, or blocked basins can recover admissibility and re-enter restricted-local proof eligibility under controlled boundary and topology conditions.",
+  "simulation_targets": [
+    {
+      "target_id": "SIM008-T001",
+      "name": "Metastable Basin Recovery",
+      "metric": "recovery_probability"
+    },
+    {
+      "target_id": "SIM008-T002",
+      "name": "Oscillatory Basin Damping",
+      "metric": "oscillation_decay_rate"
+    },
+    {
+      "target_id": "SIM008-T003",
+      "name": "Topology Reconnection Viability",
+      "metric": "topology_reconnection_score"
+    },
+    {
+      "target_id": "SIM008-T004",
+      "name": "Boundary Re-Entry Stability",
+      "metric": "reentry_stability_score"
+    },
+    {
+      "target_id": "SIM008-T005",
+      "name": "False Recovery Detection",
+      "metric": "false_recovery_flag"
+    }
+  ],
+  "simulation_scenarios": [
+    {
+      "scenario_id": "SIM008-S001",
+      "name": "Metastable Basin Cooling"
+    },
+    {
+      "scenario_id": "SIM008-S002",
+      "name": "Oscillatory Damping Recovery"
+    },
+    {
+      "scenario_id": "SIM008-S003",
+      "name": "Topology Reconnection Attempt"
+    },
+    {
+      "scenario_id": "SIM008-S004",
+      "name": "False Recovery Trap"
+    },
+    {
+      "scenario_id": "SIM008-S005",
+      "name": "Boundary Re-Entry Compression"
+    }
+  ],
+  "recovery_classes": [
+    {
+      "class_id": "SIM-RECOVERY-STABLE",
+      "meaning": "Recovered basin remains stably admissible within restricted-local constraints.",
+      "proof_effect": "eligible_or_review_required"
+    },
+    {
+      "class_id": "SIM-RECOVERY-FRAGILE",
+      "meaning": "Recovered basin remains threshold-sensitive or compressed.",
+      "proof_effect": "review_required"
+    },
+    {
+      "class_id": "SIM-RECOVERY-FALSE",
+      "meaning": "Apparent recovery later collapses back into instability or severance.",
+      "proof_effect": "blocked"
+    },
+    {
+      "class_id": "SIM-RECOVERY-BLOCKED",
+      "meaning": "Recovery attempt fails and instability persists.",
+      "proof_effect": "blocked"
+    }
+  ],
+  "governance": {
+    "theorem_status": "NOT_PROVEN",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL",
+    "claim_limit": "recovery_behavior_supports_review_only_not_proof"
+  },
+  "dependencies": [
+    "MPF-SIM-007",
+    "MPF-SIM-006",
+    "MPF-SIM-005",
+    "MPF-SIM-003",
+    "MPF-PF-016",
+    "LAW021",
+    "LAW028",
+    "LAW032",
+    "LAW033",
+    "LAW034",
+    "failure_geometry_registry",
+    "operator_signature_registry"
+  ]
+}

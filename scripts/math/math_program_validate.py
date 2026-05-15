@@ -229,7 +229,8 @@ def validate_math_program():
         "mpf_sim_004_lambda": "validate_mpf_sim_004_lambda_fixed_point.py",
         "mpf_sim_005_phase_transition": "validate_mpf_sim_005_admissibility_phase_transition.py",
         "mpf_sim_006_atlas": "validate_mpf_sim_006_cross_simulation_evidence_atlas.py",
-        "mpf_sim_007_repair_queue": "validate_mpf_sim_007_evidence_reconciliation_queue.py"
+        "mpf_sim_007_repair_queue": "validate_mpf_sim_007_evidence_reconciliation_queue.py",
+        "mpf_sim_008_recovery": "validate_mpf_sim_008_admissibility_recovery.py"
     }
 
     report = {
