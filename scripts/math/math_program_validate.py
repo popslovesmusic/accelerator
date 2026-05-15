@@ -213,7 +213,8 @@ def validate_math_program():
         "pi_a_proof_attempt": "validate_pi_a_local_proof_attempt.py",
         "pi_a_counterexample_campaign": "validate_pi_a_counterexample_injection_campaign.py",
         "pi_a_reconciliation_atlas": "validate_pi_a_counterexample_reconciliation_atlas.py",
-        "recursive_basin_classification": "validate_recursive_stability_basin_classification.py"
+        "recursive_basin_classification": "validate_recursive_stability_basin_classification.py",
+        "stable_basin_eligibility": "validate_stable_basin_proof_eligibility_filter.py"
     }
 
     report = {
