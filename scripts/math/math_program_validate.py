@@ -231,7 +231,8 @@ def validate_math_program():
         "mpf_sim_006_atlas": "validate_mpf_sim_006_cross_simulation_evidence_atlas.py",
         "mpf_sim_007_repair_queue": "validate_mpf_sim_007_evidence_reconciliation_queue.py",
         "mpf_sim_008_recovery": "validate_mpf_sim_008_admissibility_recovery.py",
-        "mpf_sim_009_memory": "validate_mpf_sim_009_recursive_constraint_memory.py"
+        "mpf_sim_009_memory": "validate_mpf_sim_009_recursive_constraint_memory.py",
+        "mpf_sim_011_hysteresis": "validate_mpf_sim_011_admissibility_hysteresis.py"
     }
 
     report = {
