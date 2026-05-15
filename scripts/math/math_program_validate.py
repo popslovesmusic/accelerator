@@ -226,7 +226,8 @@ def validate_math_program():
         "mpf_sim_001_stability": "validate_mpf_sim_001.py",
         "mpf_sim_002_boundary_inflation": "validate_mpf_sim_002_boundary_inflation.py",
         "mpf_sim_003_metastability": "validate_mpf_sim_003_metastability_oscillation.py",
-        "mpf_sim_004_lambda": "validate_mpf_sim_004_lambda_fixed_point.py"
+        "mpf_sim_004_lambda": "validate_mpf_sim_004_lambda_fixed_point.py",
+        "mpf_sim_005_phase_transition": "validate_mpf_sim_005_admissibility_phase_transition.py"
     }
 
     report = {
