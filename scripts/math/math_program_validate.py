@@ -235,7 +235,8 @@ def validate_math_program():
         "mpf_sim_011_hysteresis": "validate_mpf_sim_011_admissibility_hysteresis.py",
         "mpf_sim_012_geology": "validate_mpf_sim_012_constraint_geology_atlas.py",
         "mpf_sim_013_impact_audit": "validate_mpf_sim_013_constraint_geology_proof_impact.py",
-        "mpf_dep_001_reconciliation": "validate_interrupted_series_dependency_reconciliation.py"
+        "mpf_dep_001_reconciliation": "validate_interrupted_series_dependency_reconciliation.py",
+        "mpf_dep_002_rc_map": "validate_rc_series_recovery_closure_map.py"
     }
 
     report = {
