@@ -1,0 +1,73 @@
+{
+  "sim_id": "MPF-SIM-004",
+  "name": "Lambda Fixed-Point Persistence Stress Test",
+  "status": "active",
+  "purpose": "Stress-test whether Lambda admissibility fixed points remain locally persistent under recursive perturbation, boundary pressure, and composition constraints without collapsing into hidden global closure.",
+  "simulation_targets": [
+    {
+      "target_id": "SIM004-T001",
+      "name": "Lambda Fixed-Point Persistence",
+      "metric": "lambda_persistence_score"
+    },
+    {
+      "target_id": "SIM004-T002",
+      "name": "Fixed-Point Drift Detection",
+      "metric": "lambda_drift_rate"
+    },
+    {
+      "target_id": "SIM004-T003",
+      "name": "Boundary-Constrained Survival",
+      "metric": "boundary_survival_ratio"
+    },
+    {
+      "target_id": "SIM004-T004",
+      "name": "Composition Leakage Interaction",
+      "metric": "lambda_composition_leakage_score"
+    },
+    {
+      "target_id": "SIM004-T005",
+      "name": "Topology Severance Sensitivity",
+      "metric": "topology_severance_response"
+    }
+  ],
+  "simulation_scenarios": [
+    {
+      "scenario_id": "SIM004-S001",
+      "name": "Stable Lambda Basin"
+    },
+    {
+      "scenario_id": "SIM004-S002",
+      "name": "Boundary-Constrained Lambda Compression"
+    },
+    {
+      "scenario_id": "SIM004-S003",
+      "name": "Lambda Drift Under Recursive Pressure"
+    },
+    {
+      "scenario_id": "SIM004-S004",
+      "name": "Topology Severance Collapse"
+    },
+    {
+      "scenario_id": "SIM004-S005",
+      "name": "Hidden Global Closure Mimicry"
+    }
+  ],
+  "governance": {
+    "theorem_status": "NOT_PROVEN",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL"
+  },
+  "dependencies": [
+    "MPF-PF-004",
+    "MPF-SIM-001",
+    "MPF-SIM-002",
+    "MPF-SIM-003",
+    "LAW021",
+    "LAW028",
+    "LAW032",
+    "LAW033",
+    "LAW034",
+    "failure_geometry_registry",
+    "operator_signature_registry"
+  ]
+}
