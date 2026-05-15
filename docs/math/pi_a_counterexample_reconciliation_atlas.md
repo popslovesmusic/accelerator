@@ -4,10 +4,10 @@
 This document establishes a **governed reconciliation atlas** for the counterexamples identified during the Pi_A local proof research. It classifies surviving instabilities, traces their lineage across the operator chain, and integrates them into the structural framework without discharging them as solved obligations.
 
 ## 2. Atlas Rules
-- **Structural Information**: Counterexamples are treated as valuable structural information about the continuation program.
-- **No Discharge**: Reconciliation acknowledges the failure mode but does not remove it.
+- **Structural Information**: counterexamples are structural information about the continuation program.
+- **No Discharge**: reconciliation is not discharge.
 - **Traceability**: All counterexamples must remain traceable to their origin patches.
-- **Scope Enforcement**: The **STRICTLY_LOCAL_RESTRICTED_DOMAIN** scope must be preserved during all reconciliation steps.
+- **Scope Enforcement**: The STRICTLY_LOCAL_RESTRICTED_DOMAIN scope must be preserved during all reconciliation steps.
 
 ## 3. Counterexample Inventory and Mapping
 

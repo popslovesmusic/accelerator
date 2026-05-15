@@ -249,7 +249,9 @@ def validate_math_program():
         "mpf_res_006_failure_geometry": "validate_failure_geometry_registry.py",
         "mpf_res_006_boundary_isolation": "validate_boundary_object_isolation.py",
         "mpf_res_006_quarantine_integrity": "validate_recursive_quarantine_integrity.py",
-        "mpf_res_006_cross_lane_containment": "validate_cross_lane_containment.py"
+        "mpf_res_006_cross_lane_containment": "validate_cross_lane_containment.py",
+        "mpf_res_007_adaptive_incompleteness": "validate_adaptive_incompleteness_registry.py",
+        "mpf_res_007_irreducible_preservation": "validate_irreducible_preservation_policy.py"
     }
 
     report = {
