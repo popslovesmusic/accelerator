@@ -242,7 +242,8 @@ def validate_math_program():
         "mpf_dep_005_admission": "validate_recursive_dependency_admission_gate.py",
         "mpf_dep_006_closure_audit": "validate_dependency_repair_closure_audit.py",
         "mpf_res_001_taxonomy": "validate_unresolved_structure_taxonomy.py",
-        "mpf_res_002_queue": "validate_unresolved_structure_resolution_queue.py"
+        "mpf_res_002_queue": "validate_unresolved_structure_resolution_queue.py",
+        "mpf_res_003_lifecycle": "validate_resolution_lifecycle_governance.py"
     }
 
     report = {
