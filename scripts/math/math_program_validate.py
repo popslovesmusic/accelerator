@@ -222,7 +222,8 @@ def validate_math_program():
         "ts4_review_gate": "validate_ts4_review_gate.py",
         "ts4_restricted_review": "validate_ts4_restricted_local_review.py",
         "ts4_stability_reconciliation": "validate_ts4_stability_reconciliation.py",
-        "ts4_boundary_hardening": "validate_ts4_boundary_hardening.py"
+        "ts4_boundary_hardening": "validate_ts4_boundary_hardening.py",
+        "mpf_sim_001_stability": "validate_mpf_sim_001.py"
     }
 
     report = {
