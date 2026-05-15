@@ -1,0 +1,48 @@
+{
+  "scaffold_id": "SCAFFOLD-LTC-001-001",
+  "candidate_id": "LTC-001",
+  "name": "Pi_A Local Idempotent Persistence Proof Scaffold",
+  "status": "scaffolded",
+  "candidate_statement": {
+    "informal": "Within a strictly local restricted domain, repeated application of Pi_A does not alter an already admissible continuation image.",
+    "formal_draft": "For local domain D_L, if x in Im(Pi_A) and excluded_domains(D_L)=false, then Pi_A(Pi_A(x)) ~ Pi_A(x).",
+    "status": "DRAFT_ONLY_NOT_PROVEN"
+  },
+  "allowed_domain": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+  "excluded_domains": ["ED-A001", "ED-A002", "ED-A003", "ED-A004", "ED-A005", "ED-A006"],
+  "operator_dependencies": ["Pi_A"],
+  "law_dependencies": ["LAW002", "MT-LAW-A", "MT-001"],
+  "proof_obligations": [
+    {
+      "id": "PO-010-001",
+      "name": "Admissible Image Membership",
+      "requirement": "Show that x remains inside Im(Pi_A) after first projection.",
+      "status": "OPEN"
+    },
+    {
+      "id": "PO-010-002",
+      "name": "Local Idempotence Preservation",
+      "requirement": "Use MT-001 to justify Pi_A o Pi_A ~ Pi_A only inside restricted local scope.",
+      "status": "OPEN"
+    },
+    {
+      "id": "PO-010-003",
+      "name": "Failure Boundary Exclusion",
+      "requirement": "Verify topology severance, identity ambiguity, oscillatory non-stabilization, and threshold metastability are excluded.",
+      "status": "OPEN"
+    },
+    {
+      "id": "PO-010-004",
+      "name": "No Persistence Overclaim",
+      "requirement": "State that idempotence of projection does not prove global basin persistence.",
+      "status": "OPEN"
+    }
+  ],
+  "failure_geometry_links": ["FG-A001", "FG-A002", "FG-A003", "FG-A004", "FG-A005", "FG-A006"],
+  "governance": {
+    "theorem_status": "NOT_PROVEN",
+    "proof_status": "LTC_proof_scaffold_only",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL"
+  }
+}
