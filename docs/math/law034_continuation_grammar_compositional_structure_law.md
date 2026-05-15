@@ -39,5 +39,26 @@ Within the recursive continuation framework:
 - **Primitive Geometry/Time/Law Reintroduction**: Using grammar rules to sneak in background coordinates or eternal laws.
 - **Physics Claim Leakage**: Citing the grammar as a validation of mathematical physics or formal logic.
 
+## 6. Operational Composition Test Cases (Operationalization Gate)
+The following test cases move LAW034 from symbolic integration toward operational validation.
+
+### 6.1 Local-to-Local Composition Test (TEST-C034-001)
+- **Goal**: Verify that sequential continuation $\delta_2(\delta_1(x))$ preserves local admissibility.
+- **Condition**: $\Pi_A(\delta_1(x)) \in A_1$ AND $\Pi_A(\delta_2(x')) \in A_2$.
+- **Success**: Combined budget $C_A(\delta_1) + C_A(\delta_2) \le B_{total}$ AND failure states remain visible.
+
+### 6.2 Nested-Basin Composition Test (TEST-C034-002)
+- **Goal**: Test grammar rules for state membership across nested stability basins $B_{U1} \subset B_{U2}$.
+- **Condition**: Transition must satisfy constraints of the most restrictive basin.
+- **Success**: Internal basin failure does not "leak" into higher-order basin as hidden persistence.
+
+### 6.3 Branch-Explosion Boundary Test (TEST-C034-003)
+- **Goal**: Verify grammar limits on multi-valued $\delta$ actualization.
+- **Condition**: Composition of $N$ branching events must not exceed local budget or observability horizon.
+- **Success**: `BRANCH_AMBIGUITY` is correctly registered when selection rules cannot resolve the sequence.
+
+## 7. Integration Status
+- **MT-LAW-A024 Weak Integration Note**: The current integration between the continuation grammar (LAW034) and the TS4 boundary hardening (MT-LAW-A024) is primarily symbolic. Operational testing of the grammar rules against hardened boundaries is required in the next review cycle.
+
 ---
 [Back to Master Index](codex_master_index.md)
