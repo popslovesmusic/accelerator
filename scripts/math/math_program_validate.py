@@ -237,7 +237,8 @@ def validate_math_program():
         "mpf_sim_013_impact_audit": "validate_mpf_sim_013_constraint_geology_proof_impact.py",
         "mpf_dep_001_reconciliation": "validate_interrupted_series_dependency_reconciliation.py",
         "mpf_dep_002_rc_map": "validate_rc_series_recovery_closure_map.py",
-        "mpf_dep_003_rc_repair": "validate_rc_repair_queue_execution.py"
+        "mpf_dep_003_rc_repair": "validate_rc_repair_queue_execution.py",
+        "mpf_dep_004_firewall": "validate_recursive_inheritance_firewall.py"
     }
 
     report = {
