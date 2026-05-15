@@ -214,7 +214,8 @@ def validate_math_program():
         "pi_a_counterexample_campaign": "validate_pi_a_counterexample_injection_campaign.py",
         "pi_a_reconciliation_atlas": "validate_pi_a_counterexample_reconciliation_atlas.py",
         "recursive_basin_classification": "validate_recursive_stability_basin_classification.py",
-        "stable_basin_eligibility": "validate_stable_basin_proof_eligibility_filter.py"
+        "stable_basin_eligibility": "validate_stable_basin_proof_eligibility_filter.py",
+        "restricted_proof_segment": "validate_restricted_local_proof_segment.py"
     }
 
     report = {

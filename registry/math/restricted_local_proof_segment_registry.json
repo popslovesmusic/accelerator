@@ -1,0 +1,50 @@
+{
+  "segment_id": "RLP-SEGMENT-001",
+  "patch_id": "MPF-PF-017",
+  "name": "Restricted Local Proof Segment Draft",
+  "status": "drafted",
+  "restricted_scope": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+  "eligible_basin_trace": "PFE-SUM-001",
+  "operator_chain": ["Pi_A"],
+  "projection_sequence": [
+    {
+      "step_id": "RLP-001",
+      "operation": "Select locally eligible admissibility basin.",
+      "constraint": "Must originate from MPF-PF-016 eligibility filter."
+    },
+    {
+      "step_id": "RLP-002",
+      "operation": "Apply Pi_A to admissible local image.",
+      "constraint": "Restricted local domain only."
+    },
+    {
+      "step_id": "RLP-003",
+      "operation": "Apply repeated Pi_A projection.",
+      "constraint": "MT-001 invoked only under restricted conditions."
+    },
+    {
+      "step_id": "RLP-004",
+      "operation": "Compare admissibility image persistence.",
+      "constraint": "No global persistence interpretation allowed."
+    },
+    {
+      "step_id": "RLP-005",
+      "operation": "Check failure geometry activation state.",
+      "constraint": "Any triggered blocker halts proof continuation."
+    }
+  ],
+  "mandatory_preservations": [
+    "all_open_blockers",
+    "all_counterexample_lineage",
+    "all_excluded_domains",
+    "LAW034_global_composition_unresolved",
+    "NOT_PROVEN_status",
+    "STRICTLY_LOCAL_RESTRICTED_DOMAIN_scope"
+  ],
+  "governance": {
+    "theorem_status": "NOT_PROVEN",
+    "proof_status": "LTC_restricted_local_proof_segment_only",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL"
+  }
+}
