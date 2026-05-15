@@ -244,7 +244,12 @@ def validate_math_program():
         "mpf_res_001_taxonomy": "validate_unresolved_structure_taxonomy.py",
         "mpf_res_002_queue": "validate_unresolved_structure_resolution_queue.py",
         "mpf_res_003_lifecycle": "validate_resolution_lifecycle_governance.py",
-        "mpf_res_005_drift_audit": "validate_recursive_governance_drift_registry.py"
+        "mpf_res_005_drift_audit": "validate_recursive_governance_drift_registry.py",
+        "mpf_res_006_containment_stress": "validate_recursive_containment_registry.py",
+        "mpf_res_006_failure_geometry": "validate_failure_geometry_registry.py",
+        "mpf_res_006_boundary_isolation": "validate_boundary_object_isolation.py",
+        "mpf_res_006_quarantine_integrity": "validate_recursive_quarantine_integrity.py",
+        "mpf_res_006_cross_lane_containment": "validate_cross_lane_containment.py"
     }
 
     report = {
