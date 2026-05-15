@@ -1,0 +1,81 @@
+{
+  "id": "META-006",
+  "name": "Theorem Target Selection and Strengthening Plan",
+  "status": "implemented",
+  "purpose": "Select and prepare high-priority local theorem candidates for formal strengthening.",
+  "selected_targets": [
+    {
+      "id": "MT-LAW-A",
+      "name": "Bounded Continuation Persistence Lemma",
+      "priority": "highest",
+      "depends_on": ["LAW-001", "LAW-002", "LAW-004", "LAW-011", "LAW-021"],
+      "candidate_statement": "A continuation structure can persist only while admissibility projection remains defined, transport flux remains finite, and local admissibility cost remains within declared budget tolerance.",
+      "proof_blockers": [
+        "need explicit persistence metric",
+        "need admissibility-cost formalization",
+        "need finite-flux bound assumptions",
+        "need tolerance definitions"
+      ]
+    },
+    {
+      "id": "MT-LAW-B",
+      "name": "Projectional Geometry Dependency Lemma",
+      "priority": "high",
+      "depends_on": ["LAW-006", "LAW-008", "LAW-010"],
+      "candidate_statement": "Apparent geometry depends on stabilized accessibility topology over the orientation array and cannot be introduced as a primitive metric substrate.",
+      "proof_blockers": [
+        "need explicit accessibility topology definition",
+        "need projection-map conditions",
+        "need nonprimitive-geometry exclusion criterion"
+      ]
+    },
+    {
+      "id": "MT-LAW-C",
+      "name": "Reconstruction Non-Uniqueness Lemma",
+      "priority": "high",
+      "depends_on": ["LAW-016", "LAW-017", "LAW-023"],
+      "candidate_statement": "Distinct continuation histories may reconstruct into equivalent observable structures when compression loss erases discriminating structure.",
+      "proof_blockers": [
+        "need equivalence relation over reconstructed states",
+        "need compression-loss metric",
+        "need ambiguity-region criteria"
+      ]
+    },
+    {
+      "id": "MT-LAW-D",
+      "name": "Finite Budget Competition Lemma",
+      "priority": "medium",
+      "depends_on": ["LAW-014", "LAW-021", "LAW-024", "LAW-029"],
+      "candidate_statement": "When competing continuation structures share finite admissibility budgets, arbitration outcomes must be preserved as possible outcomes.",
+      "proof_blockers": [
+        "need shared-budget definition",
+        "need competition relation",
+        "need arbitration outcome taxonomy"
+      ]
+    }
+  ],
+  "strengthening_plan": {
+    "phase_1_definition_tightening": [
+      "Define persistence metric",
+      "Define admissibility-cost metric",
+      "Define local budget tolerance",
+      "Define reconstruction equivalence relation",
+      "Define compression-loss metric"
+    ],
+    "phase_2_counterexample_obligations": [
+      "Construct cases where persistence fails under undefined projection",
+      "Construct cases where persistence fails under unbounded flux",
+      "Construct cases where histories are distinct but observationally equivalent"
+    ],
+    "phase_3_simulation_targets": [
+      "finite budget saturation simulation",
+      "persistence failure under flux growth",
+      "history compression equivalence simulation"
+    ]
+  },
+  "governance": {
+    "no_law_expansion": true,
+    "no_theorem_promotion": true,
+    "no_physics_claims": true
+  }
+}

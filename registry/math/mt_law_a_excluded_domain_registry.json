@@ -1,0 +1,79 @@
+{
+  "id": "MT-LAW-A015",
+  "name": "Bounded Continuation Persistence Excluded-Domain Registry",
+  "status": "implemented",
+  "excluded_domains": [
+    {
+      "excluded_domain_id": "ED-A001",
+      "name": "Budget Overflow Domain",
+      "exclusion_condition": "C_A > B_local(alpha)",
+      "linked_counterexample": "CE-A001",
+      "linked_proof_obligation": "PO-A001",
+      "blocked_claim": "unbounded budget persistence",
+      "required_failure_signature": "ERR_BUDGET_EXCEEDED",
+      "reentry_condition": "C_A <= B_local(alpha) through budget replenishment or cost reduction",
+      "status": "ACTIVE_EXCLUSION"
+    },
+    {
+      "excluded_domain_id": "ED-A002",
+      "name": "Topology Severance Domain",
+      "exclusion_condition": "T_access <= severance_threshold",
+      "linked_counterexample": "CE-A003",
+      "linked_proof_obligation": "PO-A005",
+      "blocked_claim": "non-local reachability",
+      "required_failure_signature": "ACCESS_SEVERED",
+      "reentry_condition": "T_access > severance_threshold through topology reorganization",
+      "status": "ACTIVE_EXCLUSION"
+    },
+    {
+      "excluded_domain_id": "ED-A003",
+      "name": "Unbounded Reconstruction Divergence Domain",
+      "exclusion_condition": "R_divergence > epsilon_crit",
+      "linked_counterexample": "CE-A006",
+      "linked_proof_obligation": "PO-A004",
+      "blocked_claim": "perfect history recovery",
+      "required_failure_signature": "HISTORY_AMBIGUITY",
+      "reentry_condition": "R_divergence <= epsilon_crit through fidelity improvement",
+      "status": "ACTIVE_EXCLUSION"
+    },
+    {
+      "excluded_domain_id": "ED-A004",
+      "name": "Identity Fragmentation Domain",
+      "exclusion_condition": "I_continuity splits into non-equivalent branches",
+      "linked_counterexample": "CE-A004",
+      "linked_proof_obligation": "PO-A006",
+      "blocked_claim": "absolute identity preservation",
+      "required_failure_signature": "BRANCH_AMBIGUITY",
+      "reentry_condition": "arbitration resolves split into single continuity class",
+      "status": "ACTIVE_EXCLUSION"
+    },
+    {
+      "excluded_domain_id": "ED-A005",
+      "name": "Oscillatory Non-Stabilization Domain",
+      "exclusion_condition": "continuation remains active but fails bounded stabilization criteria",
+      "linked_counterexample": "CE-A007",
+      "linked_proof_obligation": "PO-A003",
+      "blocked_claim": "active continuation implies persistence",
+      "required_failure_signature": "CONVERGE_FAIL",
+      "reentry_condition": "convergence to stable basin or channel established",
+      "status": "ACTIVE_EXCLUSION"
+    },
+    {
+      "excluded_domain_id": "ED-A006",
+      "name": "Cross-Mechanism Divergence Domain",
+      "exclusion_condition": "mechanism classes disagree beyond declared tolerance",
+      "linked_counterexample": "CE-A001 through CE-A007",
+      "linked_proof_obligation": "PO-A007",
+      "blocked_claim": "universal mechanism independence",
+      "required_failure_signature": "CROSS_MECH_DIVERGENCE",
+      "reentry_condition": "alignment verified within tolerance",
+      "status": "ACTIVE_EXCLUSION"
+    }
+  ],
+  "governance_flags": {
+    "proof_status": "TS3_excluded_domain_mapping",
+    "theorem_status": "NOT_PROVEN",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL"
+  }
+}

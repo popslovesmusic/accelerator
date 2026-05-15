@@ -1,0 +1,79 @@
+{
+  "id": "MT-LAW-A016",
+  "name": "Bounded Continuation Persistence Reentry Conditions",
+  "status": "implemented",
+  "reentry_conditions": [
+    {
+      "reentry_id": "RE-A001",
+      "linked_excluded_domain": "ED-A001",
+      "name": "Budget Reentry",
+      "reentry_condition": "C_A <= B_local(alpha) after bounded adjustment",
+      "required_metric_signature": "C_A_WITHIN_BUDGET",
+      "required_evidence": "budget_replenishment_log",
+      "failure_history_preservation": "prior budget overflow event remains recorded",
+      "counterexample_status": "COUNTEREXAMPLE_REMAINS_ACTIVE_OUTSIDE_RESTRICTED_SCOPE",
+      "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN"
+    },
+    {
+      "reentry_id": "RE-A002",
+      "linked_excluded_domain": "ED-A002",
+      "name": "Topology Accessibility Reentry",
+      "reentry_condition": "T_access rises above severance_threshold with accessibility path restored",
+      "required_metric_signature": "REACHABILITY_RESTORED",
+      "required_evidence": "topology_reorganization_audit",
+      "failure_history_preservation": "prior topology severance remains a blocked interval",
+      "counterexample_status": "COUNTEREXAMPLE_REMAINS_ACTIVE_OUTSIDE_RESTRICTED_SCOPE",
+      "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN"
+    },
+    {
+      "reentry_id": "RE-A003",
+      "linked_excluded_domain": "ED-A003",
+      "name": "Reconstruction Bound Reentry",
+      "reentry_condition": "R_divergence <= epsilon_crit under declared reconstruction tolerance",
+      "required_metric_signature": "RECONSTRUCTION_FIDELITY_STABILIZED",
+      "required_evidence": "fidelity_threshold_audit",
+      "failure_history_preservation": "prior reconstruction ambiguity remains non-erased",
+      "counterexample_status": "COUNTEREXAMPLE_REMAINS_ACTIVE_OUTSIDE_RESTRICTED_SCOPE",
+      "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN"
+    },
+    {
+      "reentry_id": "RE-A004",
+      "linked_excluded_domain": "ED-A004",
+      "name": "Identity Continuity Reentry",
+      "reentry_condition": "branch behavior returns to bounded continuity-class equivalence",
+      "required_metric_signature": "BRANCH_CONVERGENCE",
+      "required_evidence": "arbitration_outcome_log",
+      "failure_history_preservation": "fragmentation event and branch ambiguity remain recorded",
+      "counterexample_status": "COUNTEREXAMPLE_REMAINS_ACTIVE_OUTSIDE_RESTRICTED_SCOPE",
+      "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN"
+    },
+    {
+      "reentry_id": "RE-A005",
+      "linked_excluded_domain": "ED-A005",
+      "name": "Stabilization Reentry",
+      "reentry_condition": "active continuation satisfies bounded stabilization criteria",
+      "required_metric_signature": "BASIN_CONVERGENCE_VERIFIED",
+      "required_evidence": "persistence_metric_audit",
+      "failure_history_preservation": "prior oscillatory non-stabilization remains outside persistence claim",
+      "counterexample_status": "COUNTEREXAMPLE_REMAINS_ACTIVE_OUTSIDE_RESTRICTED_SCOPE",
+      "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN"
+    },
+    {
+      "reentry_id": "RE-A006",
+      "linked_excluded_domain": "ED-A006",
+      "name": "Mechanism Alignment Reentry",
+      "reentry_condition": "mechanism disagreement returns within declared local tolerance",
+      "required_metric_signature": "CROSS_MECH_ALIGNMENT",
+      "required_evidence": "equivalence_test_output",
+      "failure_history_preservation": "prior cross-mechanism divergence remains documented",
+      "counterexample_status": "COUNTEREXAMPLE_REMAINS_ACTIVE_OUTSIDE_RESTRICTED_SCOPE",
+      "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN"
+    }
+  ],
+  "governance_flags": {
+    "proof_status": "TS3_reentry_conditions_mapped",
+    "theorem_status": "NOT_PROVEN",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL"
+  }
+}

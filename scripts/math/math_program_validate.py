@@ -176,7 +176,26 @@ def validate_math_program():
         "law031_discrete_continuous_transition_mechanics_law": "validate_law031_discrete_continuous_transition_mechanics_law.py",
         "law032_recursive_failure_mode_taxonomy_law": "validate_law032_recursive_failure_mode_taxonomy_law.py",
         "law033_hidden_topology_inaccessible_continuation_domains_law": "validate_law033_hidden_topology_inaccessible_continuation_domains_law.py",
-        "law034_continuation_grammar_compositional_structure_law": "validate_law034_continuation_grammar_compositional_structure_law.py"
+        "law034_continuation_grammar_compositional_structure_law": "validate_law034_continuation_grammar_compositional_structure_law.py",
+        "meta005_law_program_consolidation_atlas": "validate_meta005_law_program_consolidation_atlas.py",
+        "meta006_theorem_target_selection": "validate_meta006_theorem_target_selection.py",
+        "mt_law_a_foundation": "validate_mt_law_a_definition_tightening.py",
+        "mt_law_a_counterexamples": "validate_mt_law_a_counterexample_obligations.py",
+        "mt_law_a_semantic_integrity": "validate_mt_law_a_semantic_integrity.py",
+        "mt_law_a_primitive_detection": "detect_mt_law_a_forbidden_primitives.py",
+        "mt_law_a_reference_models": "validate_mt_law_a_reference_models.py",
+        "mt_law_a_multi_seed_stability": "validate_mt_law_a_multi_seed_stability.py",
+        "mt_law_a_threshold_sensitivity": "validate_mt_law_a_threshold_sensitivity.py",
+        "mt_law_a_cross_mechanism_equivalence": "validate_mt_law_a_cross_mechanism_equivalence.py",
+        "mt_law_a_scaffold": "validate_mt_law_a_formal_lemma_scaffold.py",
+        "mt_law_a_obligations": "validate_mt_law_a_proof_obligation_mapping.py",
+        "mt_law_a_sketch": "validate_mt_law_a_local_proof_sketch.py",
+        "mt_law_a_stress": "validate_mt_law_a_counterexample_stress_domains.py",
+        "mt_law_a_discharge_candidates": "validate_mt_law_a_obligation_discharge_candidate.py",
+        "mt_law_a_local_validation": "validate_mt_law_a_local_discharge_validation.py",
+        "mt_law_a_restricted_domain": "validate_mt_law_a_restricted_domain_lemma_candidate.py",
+        "mt_law_a_excluded_domains": "validate_mt_law_a_excluded_domains.py",
+        "mt_law_a_reentry_conditions": "validate_mt_law_a_reentry_conditions.py"
     }
 
     report = {

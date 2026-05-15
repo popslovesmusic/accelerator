@@ -14,7 +14,27 @@ This volume documents the current status and strengthening efforts of the Minima
 - **Status**: Consolidated.
 - **Goal**: Formalize existence requirement for admissible continuation images.
 
-## 4. Proof Elevation & Obligations
+## 4. MT-LAW-A: Bounded Continuation Persistence Lemma
+- **Status**: TS3_REENTRY_CONDITION_MAPPING.
+- **Goal**: Formalize persistence metrics and constraints under admissibility and finite budgets.
+- [Definitional Foundation](mt_law_a_bounded_continuation_persistence_definition.md)
+- [Counterexample Obligations](mt_law_a_counterexample_obligations.md)
+- [Validator Depth Upgrade](mt_law_a_validator_depth_upgrade.md)
+- [Reference Models](mt_law_a_reference_models.md)
+- [Multi-Seed Statistical Stability](mt_law_a_multi_seed_statistical_stability.md)
+- [Threshold Sensitivity](mt_law_a_threshold_sensitivity.md)
+- [Cross-Mechanism Equivalence](mt_law_a_cross_mechanism_equivalence.md)
+- [Formal Lemma Scaffold](mt_law_a_formal_lemma_scaffold.md)
+- [Proof Obligation Mapping](mt_law_a_proof_obligation_mapping.md)
+- [Local Proof Sketch](mt_law_a_local_proof_sketch.md)
+- [Counterexample Stress Domains](mt_law_a_counterexample_stress_domains.md)
+- [Obligation Discharge Candidate](mt_law_a_obligation_discharge_candidate.md)
+- [Local Discharge Validation](mt_law_a_local_discharge_validation.md)
+- [Restricted-Domain Lemma Candidate](mt_law_a_restricted_domain_lemma_candidate.md)
+- [Excluded Domains](mt_law_a_excluded_domains.md)
+- [Reentry Conditions](mt_law_a_reentry_conditions.md)
+
+## 5. Proof Elevation & Obligations
 Detailed tracking of satisfaction criteria (PO-001 through PO-003) and formal blocker resolution.
 
 ## Atlas Links (META004)
