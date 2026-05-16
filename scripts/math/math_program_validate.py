@@ -311,7 +311,8 @@ def validate_math_program():
         "mpf_palg_027_orientation_dynamics": "validate_projection_induced_orientation_dynamics.py",
         "mpf_palg_028_failure_atlas": "validate_projection_failure_mode_atlas.py",
         "mpf_palg_029_stress_scaffold": "validate_projection_coherence_stress_test_scaffold.py",
-        "mpf_palg_030_consolidation_review": "validate_projection_mechanics_consolidation_review.py"
+        "mpf_palg_030_consolidation_review": "validate_projection_mechanics_consolidation_review.py",
+        "mpf_palg_031_bridge_phase": "validate_restricted_projection_bridge_phase.py"
     }
 
     report = {
