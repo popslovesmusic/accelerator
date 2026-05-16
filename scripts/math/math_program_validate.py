@@ -274,7 +274,8 @@ def validate_math_program():
         "mpf_topo_005_pathway_maps": "validate_admissibility_pathway_maps.py",
         "mpf_topo_006_basin_formation": "validate_constraint_basin_registry.py",
         "mpf_topo_006_basin_constraints": "validate_basin_constraints.py",
-        "mpf_topo_006_basin_maps": "validate_constraint_basin_maps.py"
+        "mpf_topo_006_basin_maps": "validate_constraint_basin_maps.py",
+        "mpf_topo_core_001_primitives": "validate_topology_primitives.py"
     }
 
     report = {
