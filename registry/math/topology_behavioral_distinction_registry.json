@@ -2,52 +2,68 @@
   "patch_id": "MPF-TOPO-DIST-001",
   "name": "Topology Behavioral Distinction Registry",
   "status": "frozen",
-  "purpose": "Enforce non-collapse between topology behavioral categories to ensure categorical precision.",
+  "purpose": "Prevent semantic collapse between topology behavioral categories before corridor, failure, and advanced orientation layers are expanded.",
+  "core_rule": "Behavioral categories may interact operationally without becoming interchangeable primitives.",
   "mandatory_status_labels": [
     "NOT_PROVEN",
     "STRICTLY_LOCAL",
     "NON_PHYSICAL_ANALOG_MODEL"
   ],
+  "blocked_language": [
+    "all topology behaviors are equivalent",
+    "universal topology primitive",
+    "single master topology behavior",
+    "globalized behavioral closure",
+    "proof of behavioral unification"
+  ],
+  "semantic_collapse_detection": {
+    "required": true,
+    "detects": [
+      "behavioral categories recursively defined only in terms of each other",
+      "multiple primitives collapsing into a universal placeholder",
+      "orientation silently treated as transport",
+      "corridor silently treated as unrestricted path",
+      "failure silently treated as invalidity",
+      "reconfiguration silently treated as transition",
+      "admissibility silently treated as guaranteed continuation"
+    ]
+  },
   "required_distinctions": [
     {
       "id": "DIST-001",
       "pair": ["transition", "reconfiguration"],
-      "definitions": {
-        "transition": "Changes topology state classification (e.g., from expansion to contraction).",
-        "reconfiguration": "Rearranges internal relations within a fixed state classification."
-      },
-      "fundamental_difference": "transition changes topology state classification; reconfiguration rearranges internal relations.",
-      "collapse_risk": "High: treating an internal rearrangement as a state change causes classification drift."
+      "difference": "transition changes topology state classification; reconfiguration rearranges internal relations.",
+      "status_labels": ["NOT_PROVEN", "STRICTLY_LOCAL", "NON_PHYSICAL_ANALOG_MODEL"]
     },
     {
       "id": "DIST-002",
       "pair": ["corridor", "path"],
-      "definitions": {
-        "corridor": "A persistent, constrained admissibility structure defining traversable regions.",
-        "path": "A specific traversal instance or sequence of states through a corridor."
-      },
-      "fundamental_difference": "corridor is a constrained admissibility structure; path is a traversal instance.",
-      "collapse_risk": "Moderate: confuses the structural constraint with the behavior it permits."
+      "difference": "corridor is a constrained admissibility structure; path is a traversal instance.",
+      "status_labels": ["NOT_PROVEN", "STRICTLY_LOCAL", "NON_PHYSICAL_ANALOG_MODEL"]
     },
     {
       "id": "DIST-003",
       "pair": ["orientation", "transport"],
-      "definitions": {
-        "orientation": "A local relational field that constrains admissibility directionality.",
-        "transport": "The active process or behavior of state movement through defined paths."
-      },
-      "fundamental_difference": "orientation constrains admissibility directionality; transport describes movement behavior.",
-      "collapse_risk": "High: confuses the governing field with the resulting process dynamics."
+      "difference": "orientation constrains admissibility directionality; transport describes traversal or propagation behavior.",
+      "status_labels": ["NOT_PROVEN", "STRICTLY_LOCAL", "NON_PHYSICAL_ANALOG_MODEL"]
     },
     {
       "id": "DIST-004",
       "pair": ["failure", "invalidity"],
-      "definitions": {
-        "failure": "Bounded structural degradation where topology relationships break down locally.",
-        "invalidity": "A violation of governance constraints (e.g., globalization attempts) that renders an operation inadmissible."
-      },
-      "fundamental_difference": "failure is bounded structural degradation; invalidity violates governance constraints.",
-      "collapse_risk": "Critical: treating a governance breach as a structural failure hides non-compliance."
+      "difference": "failure is bounded structural degradation; invalidity violates governance or admissibility rules.",
+      "status_labels": ["NOT_PROVEN", "STRICTLY_LOCAL", "NON_PHYSICAL_ANALOG_MODEL"]
+    },
+    {
+      "id": "DIST-005",
+      "pair": ["boundary", "termination"],
+      "difference": "a boundary constrains continuation conditions; termination is cessation of admissible continuation.",
+      "status_labels": ["NOT_PROVEN", "STRICTLY_LOCAL", "NON_PHYSICAL_ANALOG_MODEL"]
+    },
+    {
+      "id": "DIST-006",
+      "pair": ["admissibility", "continuation"],
+      "difference": "admissibility defines allowed possibility conditions; continuation describes active persistence behavior.",
+      "status_labels": ["NOT_PROVEN", "STRICTLY_LOCAL", "NON_PHYSICAL_ANALOG_MODEL"]
     }
   ]
 }
