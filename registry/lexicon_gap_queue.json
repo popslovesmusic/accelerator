@@ -401,12 +401,12 @@
     },
     "no_unprojected_transport_update_v1": {
       "name": "no_unprojected_transport_update_v1",
-      "statement": "Transport/NavT contributions must not be treated as admissible updates unless projected through Π_A and evaluated by gate.",
+      "statement": "Transport/NavT contributions must not be treated as admissible updates unless projected through \u03a0_A and evaluated by gate.",
       "failure_behavior": "mark_as_illegal_composition"
     },
     "no_residue_write_without_admissible_transition_v1": {
       "name": "no_residue_write_without_admissible_transition_v1",
-      "statement": "Residue update claims require an admissible transition condition and explicit Ψ behavior.",
+      "statement": "Residue update claims require an admissible transition condition and explicit \u03a8 behavior.",
       "failure_behavior": "route_to_residue_update_review"
     },
     "no_runtime_rule_without_rulepack_v1": {
@@ -516,7 +516,7 @@
     },
     "no_associative_transport_without_residual_check_v1": {
       "name": "no_associative_transport_without_residual_check_v1",
-      "statement": "Transport composition must not be assumed associative (NavT(a,b) ∘ NavT(b,c) = NavT(a,c)) unless the residual delta_T is proven to be zero.",
+      "statement": "Transport composition must not be assumed associative (NavT(a,b) \u2218 NavT(b,c) = NavT(a,c)) unless the residual delta_T is proven to be zero.",
       "failure_behavior": "require_residual_analysis"
     },
     "no_identity_transport_drift_v1": {
@@ -610,9 +610,9 @@
       "failure_behavior": "rewrite_to_governed_model_language"
     },
     "no_success_cascade_to_full_closure_v1": {
-      "name": "no_simulation_as_physical_proof_v1",
-      "statement": "Simulation agreement may support theorem behavior within the governed model but must not be described as physical proof.",
-      "failure_behavior": "rewrite_as_model_supported_behavior"
+      "name": "no_success_cascade_to_full_closure_v1",
+      "statement": "Successful MSV-001 validation may support theorem promotion but must not automatically close -(i), O algebra, or d_Omega metric gaps.",
+      "failure_behavior": "block_overpromotion"
     },
     "no_cross_mechanism_claim_without_cross_mechanism_evidence_v1": {
       "name": "no_cross_mechanism_claim_without_cross_mechanism_evidence_v1",
@@ -660,16 +660,6 @@
       "failure_behavior": "open_epistemic_review"
     },
     "no_theorem_support_from_unresolved_contradiction_v1": {
-      "name": "no_supported_language_beyond_confidence_band_v1",
-      "statement": "Publication language may not exceed the ceiling permitted by the linked confidence band and theorem status.",
-      "failure_behavior": "rewrite_or_block"
-    },
-    "no_unresolved_gap_closure_language_v1": {
-      "name": "no_unresolved_gap_closure_language_v1",
-      "statement": "Documents may not describe partially derived systems as fully closed while unresolved gaps remain active.",
-      "failure_behavior": "open_epistemic_review"
-    },
-    "no_theorem_support_from_unresolved_contradiction_v1": {
       "name": "no_theorem_support_from_unresolved_contradiction_v1",
       "statement": "A theorem cannot receive simulation-supported status while unresolved cross-mechanism contradiction remains active.",
       "failure_behavior": "block_TS4_promotion"
@@ -704,20 +694,10 @@
       "statement": "MSV-001 TS4 promotion remains blocked until both graph_dynamics_sim_v1_cpp and ca_admissibility_sim_v1_cpp achieve C4.",
       "failure_behavior": "retain_TS2_conditional_status"
     },
-    "no_partial_P0_C4_upgrade_v1": {
-      "name": "no_partial_P0_C4_upgrade_v1",
-      "statement": "A P0 engine may not be upgraded to C4 until all blocking gaps are closed and the certification gate passes.",
-      "failure_behavior": "retain_current_level"
-    },
     "no_O_full_algebra_closure_from_OASSOC001_v1": {
-      "name": "no_non_idempotent_projection_v1",
-      "statement": "Pi_A must be idempotent; multiple projections of the same increment into a stable window must not change the result.",
-      "failure_behavior": "mark_projection_unstable"
-    },
-    "no_unprojected_transport_accumulation_v1": {
-      "name": "no_unprojected_transport_accumulation_v1",
-      "statement": "Transport contributions must be projected through Pi_A before they are summed or applied to state updates.",
-      "failure_behavior": "mark_update_illegal"
+      "name": "no_O_full_algebra_closure_from_OASSOC001_v1",
+      "statement": "OASSOC-001 closes only restricted associativity assumptions and does not close the full O operator algebra.",
+      "failure_behavior": "retain_partial_algebra_closure_status"
     },
     "no_csi_membership_without_admissibility_overlap_v1": {
       "name": "no_csi_membership_without_admissibility_overlap_v1",
@@ -726,7 +706,7 @@
     },
     "no_interaction_with_incompatible_residue_v1": {
       "name": "no_interaction_with_incompatible_residue_v1",
-      "statement": "Processes with mutually exclusive residue constraints (R_i ⊥ R_j) must be excluded from mutual CSI membership.",
+      "statement": "Processes with mutually exclusive residue constraints (R_i \u22a5 R_j) must be excluded from mutual CSI membership.",
       "failure_behavior": "mark_interaction_illegal"
     },
     "no_full_window_metric_claim_without_proof_v1": {
@@ -738,11 +718,6 @@
       "name": "no_coupling_strength_without_d_Phi_v1",
       "statement": "Quantitative claims about coupling strength must cite d_Phi or an equivalent window-distance metric.",
       "failure_behavior": "route_to_window_metric_review"
-    },
-    "no_OASSOC_promotion_with_pending_obligations_v1": {
-      "name": "no_OASSOC_promotion_with_pending_obligations_v1",
-      "statement": "OASSOC-001 may not promote while any required proof obligation remains pending or blocked.",
-      "failure_behavior": "block_theorem_promotion"
     },
     "no_C4_gap_closure_without_matrix_evidence_v1": {
       "name": "no_C4_gap_closure_without_matrix_evidence_v1",
@@ -779,11 +754,6 @@
       "statement": "Binary hash, compiler provenance, and runtime environment changes must trigger runtime review before maintaining prior certification level.",
       "failure_behavior": "route_to_runtime_recertification"
     },
-    "no_C4_gap_closure_without_matrix_evidence_v1": {
-      "name": "no_C4_gap_closure_without_matrix_evidence_v1",
-      "statement": "A P0 engine gap may not be marked closed unless the required evidence matrix runs, metrics, artifacts, and pass conditions are satisfied.",
-      "failure_behavior": "retain_gap_open"
-    },
     "no_empirical_claim_bypass_runtime_governance_v1": {
       "name": "no_empirical_claim_bypass_runtime_governance_v1",
       "statement": "Empirical claims may not bypass result-package, confidence-band, ledger, publication-binding, and epistemic-drift runtime checks.",
@@ -795,9 +765,9 @@
       "failure_behavior": "block_or_rewrite_publication"
     },
     "no_MSV001_promotion_without_cross_mechanism_summary_v1": {
-      "name": "no_binary_repair_without_hash_v1",
-      "statement": "A repaired compiled binary must record binary hash, build provenance, and runtime environment before certification can increase.",
-      "failure_behavior": "retain_failed_runtime_status"
+      "name": "no_MSV001_promotion_without_cross_mechanism_summary_v1",
+      "statement": "TS4 promotion requires a cross-mechanism summary comparing graph dynamics and cellular automata outputs.",
+      "failure_behavior": "retain_TS2_conditional_status"
     },
     "no_loader_path_guessing_v1": {
       "name": "no_loader_path_guessing_v1",
@@ -844,11 +814,6 @@
       "statement": "C1 engines may support exploratory probes only and must not support theorem promotion.",
       "failure_behavior": "downgrade_to_exploratory"
     },
-    "no_MSV001_promotion_without_cross_mechanism_summary_v1": {
-      "name": "no_MSV001_promotion_without_cross_mechanism_summary_v1",
-      "statement": "TS4 promotion requires a cross-mechanism summary comparing graph dynamics and cellular automata outputs.",
-      "failure_behavior": "retain_TS2_conditional_status"
-    },
     "no_orchestrator_success_without_result_schema_v1": {
       "name": "no_orchestrator_success_without_result_schema_v1",
       "statement": "A governed execution campaign may not be marked successful unless it emits a valid orchestrator result record.",
@@ -894,50 +859,30 @@
       "statement": "Minimizer switching stability claims require minimizer_switch_trace.csv and ref_equivalence_trace.csv.",
       "failure_behavior": "downgrade_to_unvalidated_interpretation"
     },
-    "no_O_full_algebra_closure_from_OASSOC001_v1": {
-      "name": "no_O_full_algebra_closure_from_OASSOC001_v1",
-      "statement": "OASSOC-001 closes only restricted associativity assumptions and does not close the full O operator algebra.",
-      "failure_behavior": "retain_partial_algebra_closure_status"
-    },
     "no_missing_binary_claim_without_directory_evidence_v1": {
       "name": "no_missing_binary_claim_without_directory_evidence_v1",
       "statement": "A final audit may not classify a binary as missing unless it records searched paths, directory listing evidence, and candidate discovery results.",
       "failure_behavior": "mark_binary_status_unverified"
     },
     "no_empirical_interpretation_without_result_package_v1": {
-      "name": "no_real_campaign_before_orchestrator_dry_run_v1",
-      "statement": "The P0 C4 elevation campaign should not proceed to real engine execution until the governed orchestrator dry-run passes.",
-      "failure_behavior": "route_to_orchestrator_repair"
+      "name": "no_empirical_interpretation_without_result_package_v1",
+      "statement": "Empirical results may not support theorem, claim, or publication updates unless packaged in the governed empirical result package schema.",
+      "failure_behavior": "downgrade_to_unpackaged_observation"
     },
     "no_dry_run_certification_upgrade_v1": {
       "name": "no_dry_run_certification_upgrade_v1",
       "statement": "Execution campaign dry-runs validate orchestration readiness only and may not upgrade tool certification.",
       "failure_behavior": "block_certification_upgrade"
     },
-    "no_empirical_interpretation_without_result_package_v1": {
-      "name": "no_empirical_interpretation_without_result_package_v1",
-      "statement": "Empirical results may not support theorem, claim, or publication updates unless packaged in the governed empirical result package schema.",
-      "failure_behavior": "downgrade_to_unpackaged_observation"
-    },
     "no_result_package_without_runtime_context_v1": {
       "name": "no_result_package_without_runtime_context_v1",
       "statement": "A result package without runtime context, binary hashes, certification levels, and provenance cannot support CB3 or CB4 confidence.",
       "failure_behavior": "downgrade_confidence_band"
     },
-    "no_success_cascade_to_full_closure_v1": {
-      "name": "no_zenodo_publication_without_complete_bundle_v1",
-      "statement": "Zenodo-targeted publications must include paper, metadata, provenance, falsification, and config subdirectories.",
-      "failure_behavior": "block_publication_export"
-    },
     "no_citation_without_evidence_id_v1": {
       "name": "no_citation_without_evidence_id_v1",
       "statement": "Claims in Zenodo bundles must cite evidence_id and auditable recovery paths.",
       "failure_behavior": "mark_citation_incomplete"
-    },
-    "no_success_cascade_to_full_closure_v1": {
-      "name": "no_success_cascade_to_full_closure_v1",
-      "statement": "Successful MSV-001 validation may support theorem promotion but must not automatically close -(i), O algebra, or d_Omega metric gaps.",
-      "failure_behavior": "block_overpromotion"
     },
     "no_failed_MSV001_without_dependency_review_v1": {
       "name": "no_failed_MSV001_without_dependency_review_v1",
@@ -1080,19 +1025,14 @@
       "failure_behavior": "mark_context_packet_incomplete"
     },
     "no_raw_payload_storage_in_sqlite_v1": {
-      "name": "no_semantic_graph_ingestion_without_audit_v1",
-      "statement": "Extracted semantic graph edges must pass audit before being used for governed retrieval or context assembly.",
-      "failure_behavior": "mark_graph_untrusted"
+      "name": "no_raw_payload_storage_in_sqlite_v1",
+      "statement": "Large raw simulation outputs must not be stored directly in SQLite; only metadata, summaries, hashes, and paths may be indexed.",
+      "failure_behavior": "route_to_artifact_storage_review"
     },
     "no_support_edge_from_conceptual_note_v1": {
       "name": "no_support_edge_from_conceptual_note_v1",
       "statement": "Conceptual tech notes may document or refine objects but cannot create support edges unless bound to governed proof or empirical evidence.",
       "failure_behavior": "downgrade_edge_to_documents"
-    },
-    "no_raw_payload_storage_in_sqlite_v1": {
-      "name": "no_backfilled_note_without_frontmatter_v1",
-      "statement": "Backfilled tech notes must include required frontmatter before SQLite ingestion.",
-      "failure_behavior": "mark_note_not_ingestion_ready"
     },
     "no_conversation_summary_as_evidence_v1": {
       "name": "no_conversation_summary_as_evidence_v1",
@@ -1103,11 +1043,6 @@
       "name": "no_duplicate_tech_note_without_supersession_v1",
       "statement": "Duplicate or overlapping tech notes must either be linked as related notes or marked superseded by a newer canonical note.",
       "failure_behavior": "route_to_note_deduplication_review"
-    },
-    "no_raw_payload_storage_in_sqlite_v1": {
-      "name": "no_raw_payload_storage_in_sqlite_v1",
-      "statement": "Large raw simulation outputs must not be stored directly in SQLite; only metadata, summaries, hashes, and paths may be indexed.",
-      "failure_behavior": "route_to_artifact_storage_review"
     },
     "no_claim_support_from_unhashed_artifact_v1": {
       "name": "no_claim_support_from_unhashed_artifact_v1",
@@ -1175,7 +1110,7 @@
     },
     "no_Q_composition_after_blocked_L_v1": {
       "name": "no_Q_composition_after_blocked_L_v1",
-      "statement": "Orientation composition Q_i ∘ Q_j is invalid if the admissibility component L has blocked continuation and no recoupling rule is declared.",
+      "statement": "Orientation composition Q_i \u2218 Q_j is invalid if the admissibility component L has blocked continuation and no recoupling rule is declared.",
       "failure_behavior": "invalid_operator_composition"
     },
     "no_reopened_transition_without_residue_context_v1": {
@@ -2551,6 +2486,320 @@
       "source_context": {
         "source_type": "extraction_artifact"
       }
+    }
+  ],
+  "queue": [
+    {
+      "term": "symbolic_overgrowth",
+      "aliases": [],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "governed_research_expansion",
+      "source_context": {
+        "source_type": "research_output",
+        "source_path_or_note": "MPF-RES-005"
+      },
+      "proposed_definition": "Accumulation of terminology without operational reduction.",
+      "induction_timestamp": "2026-05-16T05:31:01.518000"
+    },
+    {
+      "term": "silent_globalization",
+      "aliases": [],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "governed_research_expansion",
+      "source_context": {
+        "source_type": "research_output",
+        "source_path_or_note": "MPF-RES-005"
+      },
+      "proposed_definition": "Unintentional promotion of local results to global claims.",
+      "induction_timestamp": "2026-05-16T05:31:42.187747"
+    },
+    {
+      "term": "epistemic_saturation",
+      "aliases": [],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "governed_research_expansion",
+      "source_context": {
+        "source_type": "research_output",
+        "source_path_or_note": "MPF-RES-007"
+      },
+      "proposed_definition": "State where intervention no longer improves stability.",
+      "induction_timestamp": "2026-05-16T05:31:42.203563"
+    },
+    {
+      "term": "containment_symbiosis",
+      "aliases": [],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "governed_research_expansion",
+      "source_context": {
+        "source_type": "research_output",
+        "source_path_or_note": "MPF-RES-008"
+      },
+      "proposed_definition": "Multiple structures stabilizing each other without closure.",
+      "induction_timestamp": "2026-05-16T05:31:42.224114"
+    },
+    {
+      "term": "closure_pressure_temperature",
+      "aliases": [],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "governed_research_expansion",
+      "source_context": {
+        "source_type": "research_output",
+        "source_path_or_note": "MPF-RES-009"
+      },
+      "proposed_definition": "Measure of urgency to force-resolve local results.",
+      "induction_timestamp": "2026-05-16T05:31:42.243069"
+    },
+    {
+      "term": "globalization_wind_shear",
+      "aliases": [],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "governed_research_expansion",
+      "source_context": {
+        "source_type": "research_output",
+        "source_path_or_note": "MPF-RES-009"
+      },
+      "proposed_definition": "Tendency for local objects to drift toward global claims.",
+      "induction_timestamp": "2026-05-16T05:31:42.265617"
+    },
+    {
+      "term": "quarantine_storm_risk",
+      "aliases": [],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "governed_research_expansion",
+      "source_context": {
+        "source_type": "research_output",
+        "source_path_or_note": "MPF-RES-009"
+      },
+      "proposed_definition": "Probability of systemic instability requiring isolation.",
+      "induction_timestamp": "2026-05-16T05:31:42.289397"
+    },
+    {
+      "term": "local_topology_region",
+      "aliases": [],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "governed_research_expansion",
+      "source_context": {
+        "source_type": "research_output",
+        "source_path_or_note": "MPF-TOPO-CORE-001"
+      },
+      "proposed_definition": "Finite domain where topology is operationally evaluated.",
+      "induction_timestamp": "2026-05-16T05:31:42.310652"
+    },
+    {
+      "term": "finite_admissibility_boundary",
+      "aliases": [],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "governed_research_expansion",
+      "source_context": {
+        "source_type": "research_output",
+        "source_path_or_note": "MPF-TOPO-CORE-001"
+      },
+      "proposed_definition": "Limit of admissibility within a local topology region.",
+      "induction_timestamp": "2026-05-16T05:31:42.331868"
+    },
+    {
+      "term": "topology_variation",
+      "aliases": [],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "governed_research_expansion",
+      "source_context": {
+        "source_type": "research_output",
+        "source_path_or_note": "MPF-TOPO-CORE-001"
+      },
+      "proposed_definition": "Local change in relational structure between primitives.",
+      "induction_timestamp": "2026-05-16T05:31:42.353742"
+    },
+    {
+      "term": "local_continuation_path",
+      "aliases": [],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "governed_research_expansion",
+      "source_context": {
+        "source_type": "research_output",
+        "source_path_or_note": "MPF-TOPO-CORE-001"
+      },
+      "proposed_definition": "Sequence of admissible states within finite domains.",
+      "induction_timestamp": "2026-05-16T05:31:42.378215"
+    },
+    {
+      "term": "orientation_neighbor_relation",
+      "aliases": [],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "governed_research_expansion",
+      "source_context": {
+        "source_type": "research_output",
+        "source_path_or_note": "MPF-TOPO-CORE-001"
+      },
+      "proposed_definition": "Relational link between orientation field elements.",
+      "induction_timestamp": "2026-05-16T05:31:42.403541"
+    },
+    {
+      "term": "bounded_traversal_corridor",
+      "aliases": [],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "governed_research_expansion",
+      "source_context": {
+        "source_type": "research_output",
+        "source_path_or_note": "MPF-TOPO-CORE-001"
+      },
+      "proposed_definition": "Constrained region permitting local continuation.",
+      "induction_timestamp": "2026-05-16T05:31:42.424298"
+    },
+    {
+      "term": "topology_failure_boundary",
+      "aliases": [],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "governed_research_expansion",
+      "source_context": {
+        "source_type": "research_output",
+        "source_path_or_note": "MPF-TOPO-CORE-001"
+      },
+      "proposed_definition": "Region where topology relationships break down locally.",
+      "induction_timestamp": "2026-05-16T05:31:42.448215"
+    },
+    {
+      "term": "non_globalization_constraint",
+      "aliases": [],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "governed_research_expansion",
+      "source_context": {
+        "source_type": "research_output",
+        "source_path_or_note": "MPF-TOPO-CORE-001"
+      },
+      "proposed_definition": "Formal rule preventing escalation to global claims.",
+      "induction_timestamp": "2026-05-16T05:31:42.470848"
+    },
+    {
+      "term": "hard_boundary",
+      "aliases": [],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "governed_research_expansion",
+      "source_context": {
+        "source_type": "research_output",
+        "source_path_or_note": "MPF-TOPO-BOUND-001"
+      },
+      "proposed_definition": "Boundary where no traversal or reconfiguration is admissible.",
+      "induction_timestamp": "2026-05-16T05:31:42.490696"
+    },
+    {
+      "term": "soft_boundary",
+      "aliases": [],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "governed_research_expansion",
+      "source_context": {
+        "source_type": "research_output",
+        "source_path_or_note": "MPF-TOPO-BOUND-001"
+      },
+      "proposed_definition": "Boundary allowing controlled local traversal.",
+      "induction_timestamp": "2026-05-16T05:31:42.583956"
+    },
+    {
+      "term": "orientation_boundary",
+      "aliases": [],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "governed_research_expansion",
+      "source_context": {
+        "source_type": "research_output",
+        "source_path_or_note": "MPF-TOPO-BOUND-001"
+      },
+      "proposed_definition": "Boundary where orientation relations may shift locally.",
+      "induction_timestamp": "2026-05-16T05:31:42.604405"
+    },
+    {
+      "term": "admissibility_exhaustion_boundary",
+      "aliases": [],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "governed_research_expansion",
+      "source_context": {
+        "source_type": "research_output",
+        "source_path_or_note": "MPF-TOPO-BOUND-001"
+      },
+      "proposed_definition": "Boundary where continuation stalls due to budget loss.",
+      "induction_timestamp": "2026-05-16T05:31:42.623532"
+    },
+    {
+      "term": "corridor_exit_boundary",
+      "aliases": [],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "governed_research_expansion",
+      "source_context": {
+        "source_type": "research_output",
+        "source_path_or_note": "MPF-TOPO-BOUND-001"
+      },
+      "proposed_definition": "Point where traversal exits a bounded corridor.",
+      "induction_timestamp": "2026-05-16T05:31:42.644006"
+    },
+    {
+      "term": "failure_containment_boundary",
+      "aliases": [],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "governed_research_expansion",
+      "source_context": {
+        "source_type": "research_output",
+        "source_path_or_note": "MPF-TOPO-BOUND-001"
+      },
+      "proposed_definition": "Boundary containing local failure behavior.",
+      "induction_timestamp": "2026-05-16T05:31:42.666361"
+    },
+    {
+      "term": "local_neighbor_rebinding",
+      "aliases": [],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "governed_research_expansion",
+      "source_context": {
+        "source_type": "research_output",
+        "source_path_or_note": "MPF-TOPO-RECONFIG-001"
+      },
+      "proposed_definition": "Internal rearrangement of neighbor links.",
+      "induction_timestamp": "2026-05-16T05:31:42.686766"
+    },
+    {
+      "term": "bounded_path_rerouting",
+      "aliases": [],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "governed_research_expansion",
+      "source_context": {
+        "source_type": "research_output",
+        "source_path_or_note": "MPF-TOPO-RECONFIG-001"
+      },
+      "proposed_definition": "Rerouting a path through different local routes.",
+      "induction_timestamp": "2026-05-16T05:31:42.705929"
+    },
+    {
+      "term": "boundary_induced_reconfiguration",
+      "aliases": [],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "governed_research_expansion",
+      "source_context": {
+        "source_type": "research_output",
+        "source_path_or_note": "MPF-TOPO-RECONFIG-001"
+      },
+      "proposed_definition": "Rearrangement forced by boundary conditions.",
+      "induction_timestamp": "2026-05-16T05:31:42.726339"
     }
   ]
 }
