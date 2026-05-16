@@ -307,7 +307,8 @@ def validate_math_program():
         "mpf_palg_023_recoverability_limits": "validate_projection_recoverability_limits.py",
         "mpf_palg_024_multi_projection_coherence": "validate_multi_projection_coherence.py",
         "mpf_palg_025_projection_geometry": "validate_projection_induced_geometry.py",
-        "mpf_palg_026_persistence_dynamics": "validate_projection_persistence_dynamics.py"
+        "mpf_palg_026_persistence_dynamics": "validate_projection_persistence_dynamics.py",
+        "mpf_palg_027_orientation_dynamics": "validate_projection_induced_orientation_dynamics.py"
     }
 
     report = {
