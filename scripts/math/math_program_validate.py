@@ -278,7 +278,8 @@ def validate_math_program():
         "mpf_topo_core_001_primitives": "validate_topology_primitives.py",
         "mpf_topo_bound_001_boundaries": "validate_topology_boundary_conditions.py",
         "mpf_topo_trans_001_transitions": "validate_topology_transition_mapping.py",
-        "mpf_topo_reconfig_001_audit": "validate_topology_reconfiguration.py"
+        "mpf_topo_reconfig_001_audit": "validate_topology_reconfiguration.py",
+        "mpf_topo_dist_001_distinctions": "validate_topology_distinctions.py"
     }
 
     report = {
