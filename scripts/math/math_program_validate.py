@@ -297,7 +297,8 @@ def validate_math_program():
         "mpf_palg_012_semantics_governance": "validate_nested_relation_semantics_governance.py",
         "mpf_palg_013_projected_equality": "validate_projection_derived_equality.py",
         "mpf_palg_014_projected_implication": "validate_projection_derived_implication.py",
-        "mpf_palg_015_projected_composition": "validate_projection_derived_composition.py"
+        "mpf_palg_015_projected_composition": "validate_projection_derived_composition.py",
+        "mpf_palg_016_projected_biconditional": "validate_projection_derived_biconditional.py"
     }
 
     report = {
