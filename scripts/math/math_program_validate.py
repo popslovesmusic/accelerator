@@ -301,7 +301,8 @@ def validate_math_program():
         "mpf_palg_016_projected_biconditional": "validate_projection_derived_biconditional.py",
         "mpf_palg_017_loss_matrix": "validate_projection_loss_accounting_matrix.py",
         "mpf_palg_018_simultaneity": "validate_recursive_aspect_simultaneity.py",
-        "mpf_palg_019_flattening_risk": "validate_whole_relation_flattening_risk_audit.py"
+        "mpf_palg_019_flattening_risk": "validate_whole_relation_flattening_risk_audit.py",
+        "mpf_palg_021_projection_operators": "validate_projection_operator_formalization.py"
     }
 
     report = {
