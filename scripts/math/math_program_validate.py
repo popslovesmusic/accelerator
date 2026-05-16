@@ -262,7 +262,10 @@ def validate_math_program():
         "mpf_topo_001_restart": "validate_restricted_local_topology_registry.py",
         "mpf_topo_001_constraints": "validate_local_topology_constraints.py",
         "mpf_topo_002_bounded_transition": "validate_bounded_transition_registry.py",
-        "mpf_topo_002_transition_constraints": "validate_local_transition_constraints.py"
+        "mpf_topo_002_transition_constraints": "validate_local_transition_constraints.py",
+        "mpf_topo_003_reconfiguration": "validate_constraint_reconfiguration_registry.py",
+        "mpf_topo_003_reconfig_constraints": "validate_reconfiguration_constraints.py",
+        "mpf_topo_003_topology_maps": "validate_local_constraint_topology_maps.py"
     }
 
     report = {
