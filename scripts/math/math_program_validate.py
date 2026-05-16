@@ -258,7 +258,9 @@ def validate_math_program():
         "mpf_res_009_climate_registry": "validate_epistemic_climate_registry.py",
         "mpf_res_009_climate_thresholds": "validate_climate_thresholds.py",
         "mpf_res_010_resumption_gate": "validate_governed_resumption_readiness_gate.py",
-        "mpf_res_010_topology_constraints": "validate_topology_resumption_constraints.py"
+        "mpf_res_010_topology_constraints": "validate_topology_resumption_constraints.py",
+        "mpf_topo_001_restart": "validate_restricted_local_topology_registry.py",
+        "mpf_topo_001_constraints": "validate_local_topology_constraints.py"
     }
 
     report = {

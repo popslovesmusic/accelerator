@@ -1,0 +1,38 @@
+import json
+import os
+from datetime import datetime
+
+def validate_topology_registry():
+    registry_path = "registry/math/restricted_local_topology_restart_registry.json"
+    val_out_path = "validation/results/restricted_local_topology_validation_result.json"
+    
+    report = {
+        "validation_id": "VAL-RLT-REG-VALID-001",
+        "status": "pass",
+        "domains_verified": 0,
+        "governance_violations": [],
+        "timestamp": datetime.now().isoformat()
+    }
+    
+    if not os.path.exists(registry_path):
+        report["status"] = "fail"
+        return report
+
+    with open(registry_path, 'r') as f:
+        registry = json.load(f)
+        report["domains_verified"] = len(registry["allowed_local_domains"])
+        
+        # Check for mandatory invariants
+        gov = registry["governance"]
+        if gov["theorem_status"] != "NOT_PROVEN" or gov["scope_status"] != "STRICTLY_LOCAL_RESTRICTED_DOMAIN":
+            report["status"] = "fail"
+            report["governance_violations"].append("core governance invariants missing or incorrect in registry")
+
+    with open(val_out_path, 'w') as f:
+        json.dump(report, f, indent=2)
+        
+    return report
+
+if __name__ == "__main__":
+    res = validate_topology_registry()
+    print(json.dumps(res, indent=2))
