@@ -314,7 +314,8 @@ def validate_math_program():
         "mpf_palg_030_consolidation_review": "validate_projection_mechanics_consolidation_review.py",
         "mpf_palg_031_bridge_phase": "validate_restricted_projection_bridge_phase.py",
         "mpf_palg_032_qm_domain": "validate_qm_like_projection_domain.py",
-        "mpf_palg_033_gr_domain": "validate_gr_like_projection_domain.py"
+        "mpf_palg_033_gr_domain": "validate_gr_like_projection_domain.py",
+        "mpf_palg_034_bridge_schema": "validate_bridge_comparison_schema.py"
     }
 
     report = {

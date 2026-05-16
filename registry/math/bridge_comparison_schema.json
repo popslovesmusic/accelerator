@@ -1,0 +1,70 @@
+{
+  "schema_id": "BRIDGE_COMPARISON_SCHEMA_001",
+  "patch_id": "MPF-PALG-034",
+  "name": "Bridge Comparison Schema Registry",
+  "status": "active",
+  "schema_status": "CANDIDATE_BRIDGE_SCHEMA",
+  "purpose": "Define the structure for comparing distinct projection domains through shared traceability and loss accounting.",
+  "governance_status": {
+    "theorem_status": "NOT_PROVEN",
+    "schema_status": "CANDIDATE_BRIDGE_SCHEMA",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL"
+  },
+  "comparison_schema": {
+    "comparison_id": "string",
+    "source_relation": "string",
+    "domain_a": {
+      "domain_id": "string",
+      "projection_operator_id": "string",
+      "projection_depth": "string",
+      "retained_features": ["string"]
+    },
+    "domain_b": {
+      "domain_id": "string",
+      "projection_operator_id": "string",
+      "projection_depth": "string",
+      "retained_features": ["string"]
+    },
+    "shared_trace_id": "string",
+    "feature_alignment": [
+      {
+        "feature_a": "string",
+        "feature_b": "string",
+        "alignment_type": "compatible | complementary | conflicting | orthogonal"
+      }
+    ],
+    "differential_loss": {
+      "lost_in_a_retained_in_b": ["string"],
+      "lost_in_b_retained_in_a": ["string"],
+      "lost_in_both": ["string"]
+    },
+    "coherence_class": "MPC-1 | MPC-2 | MPC-3 | MPC-4",
+    "claim_level": "BRIDGE_ANALOG_ONLY",
+    "unification_claim_blocked": true
+  },
+  "comparison_rules": [
+    {
+      "rule_id": "BCS-RULE-001",
+      "rule": "Comparison requires a single shared source_relation link."
+    },
+    {
+      "rule_id": "BCS-RULE-002",
+      "rule": "Feature alignment must identify conflicts explicitly."
+    },
+    {
+      "rule_id": "BCS-RULE-003",
+      "rule": "Differential loss accounting is mandatory."
+    },
+    {
+      "rule_id": "BCS-RULE-004",
+      "rule": "Comparison agreement does not imply source identity or physical derivation."
+    }
+  ],
+  "forbidden_outcomes": [
+    "Accepting comparison as proof of physical unification.",
+    "Collapsing conflicting features into a unified model.",
+    "Omitting the source_relation trace.",
+    "Promoting a bridge comparison to C5+ claim level."
+  ]
+}
