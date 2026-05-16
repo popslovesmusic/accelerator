@@ -284,7 +284,8 @@ def validate_math_program():
         "mpf_topo_007_flow_constraints": "validate_flow_constraints.py",
         "mpf_topo_007_flow_mapping": "validate_flow_mapping.py",
         "mpf_palg_001_phase": "validate_process_algebra_phase.py",
-        "mpf_palg_002_bc_equivalence": "validate_residue_bound_equivalence_operator.py"
+        "mpf_palg_002_bc_equivalence": "validate_residue_bound_equivalence_operator.py",
+        "mpf_palg_003_exclusion": "validate_exclusion_admissibility_operator.py"
     }
 
     report = {
