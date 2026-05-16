@@ -289,7 +289,8 @@ def validate_math_program():
         "mpf_palg_004_polarity_preservation": "validate_recursive_polarity_preservation_law.py",
         "mpf_palg_005_non_separability": "validate_aspect_non_separability_principle.py",
         "mpf_palg_006_projection_governance": "validate_projection_boundary_governance.py",
-        "mpf_palg_007_aspect_trace": "validate_aspect_relation_trace_schema.py"
+        "mpf_palg_007_aspect_trace": "validate_aspect_relation_trace_schema.py",
+        "mpf_palg_008_whole_relation_gate": "validate_whole_relation_gate.py"
     }
 
     report = {

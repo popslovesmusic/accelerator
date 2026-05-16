@@ -1,5 +1,10 @@
 # LAW-002: Pi_A Admissibility Projection Law
 
+## 1. Purpose
+This document establishes **LAW-002** (Pi_A Admissibility Projection Law).
+- **Source Relation**: $(E \neq 0) \iff_R \delta(E > 0)$
+- **Non-Separability Acknowledged**: True.
+
 ## Candidate Law Statement
 ### Informal
 Given a candidate update $y_\alpha$, $\Pi_A$ maps $y_\alpha$ into the admissible continuation window $A_\alpha$ when possible, while preserving boundary cases and failure modes when projection is undefined, multi-valued, or unstable.

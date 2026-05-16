@@ -1,7 +1,10 @@
 # Aspect Non-Separability Principle (MPF-PALG-005-REFORM)
 
 ## 1. Purpose
-This document defines the **Aspect Non-Separability Principle** as a candidate foundational principle within the Mono-Process Framework. It replaces previous proposals for fragmented composition operators with a stricter rule of indivisibility: recursive continuation aspects are locally distinguishable but not independently fundamental outside their whole relation.
+This document defines the **Aspect Non-Separability Principle** as a candidate foundational principle within the Mono-Process Framework. 
+- **Source Relation**: $(E \neq 0) \iff_R \delta(E > 0)$
+- **Non-Separability Acknowledged**: True. Aspects are analytically distinguishable but not fundamental.
+ It replaces previous proposals for fragmented composition operators with a stricter rule of indivisibility: recursive continuation aspects are locally distinguishable but not independently fundamental outside their whole relation.
 
 ## 2. Principle Definition
 

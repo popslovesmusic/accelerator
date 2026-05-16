@@ -1,7 +1,9 @@
 # Projection Boundary Governance (MPF-PALG-006)
 
 ## 1. Purpose
-This document defines how indivisible recursive process relations are projected into domain-specific symbolic layers. To maintain mathematical and governance precision, it is mandatory to distinguish between a **primitive process relation** and its **symbolic projections** (e.g., arithmetic-like or physics-like expressions).
+This document defines how indivisible recursive process relations are projected into domain-specific symbolic layers. 
+- **Source Relation**: $(E \neq 0) \iff_R \delta(E > 0)$
+- **Non-Separability Acknowledged**: True. All projections are aspects of an indivisible whole.
 
 ## 2. Core Rule: Projection != Primitive
 Any domain-specific expression (Arithmetic, Topology, Geometry, QM-like, or GR-like) derived from a process relation is a **projection layer** unless separately proven otherwise.

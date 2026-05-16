@@ -1,5 +1,10 @@
 # LAW-010: Apparent Geometry Projection Law
 
+## 1. Purpose
+This document establishes **LAW-010** (Apparent Geometry Projection Law).
+- **Source Relation**: $(E \neq 0) \iff_R \delta(E > 0)$
+- **Non-Separability Acknowledged**: True.
+
 ## Status
 - **ID:** LAW-010
 - **Level:** candidate_law_form
