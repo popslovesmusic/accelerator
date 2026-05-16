@@ -22,34 +22,45 @@ def validate_process_algebra_phase():
     with open(registry_path, 'r') as f:
         registry = json.load(f)
         
-    # 1. Governance Invariant Check
-    constraints = registry.get("governance_constraints", {})
-    if constraints.get("theorem_status") != "NOT_PROVEN":
+    # 1. Phase ID Check
+    if registry.get("phase_id") != "PROCESS_ALGEBRA_PHASE_001":
         report["status"] = "fail"
-        report["governance_violations"].append("forbidden theorem status escalation in phase registry")
+        report["governance_violations"].append("phase_id mismatch")
+
+    # 2. Governance Status Check
+    gov = registry.get("governance_status", {})
+    if gov.get("theorem_status") != "NOT_PROVEN":
+        report["status"] = "fail"
+        report["governance_violations"].append("forbidden theorem status escalation")
         
-    if constraints.get("scope_status") != "STRICTLY_LOCAL_RESTRICTED_DOMAIN":
+    if gov.get("scope_status") != "STRICTLY_LOCAL_RESTRICTED_DOMAIN":
         report["status"] = "fail"
-        report["governance_violations"].append("forbidden scope status escalation in phase registry")
+        report["governance_violations"].append("forbidden scope status escalation")
+        
+    if gov.get("physics_status") != "NON_PHYSICAL_ANALOG_MODEL":
+        report["status"] = "fail"
+        report["governance_violations"].append("physics status must be NON_PHYSICAL_ANALOG_MODEL")
 
-    # 2. Forbidden Escalation Completeness
-    forbidden = constraints.get("forbidden_escalations", [])
-    required_forbidden = [
-        "do_not_claim_QM_GR_unification",
-        "do_not_claim_new_arithmetic_replaces_standard_arithmetic"
-    ]
-    for req in required_forbidden:
-        if req not in forbidden:
+    # 3. Forbidden Claims Presence
+    if not registry.get("forbidden_claims"):
+        report["status"] = "fail"
+        report["governance_violations"].append("missing forbidden_claims in registry")
+
+    # 4. Operator Candidates Status Check
+    for op in registry.get("operator_candidates", []):
+        if op.get("status") not in ["candidate_operator", "candidate_object"]:
             report["status"] = "fail"
-            report["governance_violations"].append(f"missing mandatory forbidden escalation rule: {req}")
+            report["governance_violations"].append(f"operator {op.get('symbol')} has illegal final status")
 
-    # 3. Documentation Alignment
+    # 5. Documentation Alignment
     if os.path.exists(doc_path):
         with open(doc_path, 'r') as f:
             content = f.read()
-            if "NOT_PROVEN" not in content or "STRICTLY_LOCAL" not in content:
-                report["status"] = "fail"
-                report["governance_violations"].append("mandatory status labels missing from documentation")
+            mandatory_labels = ["NOT_PROVEN", "STRICTLY_LOCAL", "NON_PHYSICAL_ANALOG_MODEL"]
+            for label in mandatory_labels:
+                if label not in content:
+                    report["status"] = "fail"
+                    report["governance_violations"].append(f"mandatory status label '{label}' missing from documentation")
     else:
         report["status"] = "warning"
         report["governance_violations"].append("phase documentation missing")
