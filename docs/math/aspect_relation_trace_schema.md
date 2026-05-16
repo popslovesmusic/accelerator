@@ -35,7 +35,7 @@ A trace is invalidated if any of the following occur:
 ### 5.2 Forbidden Uses
 - Using a traced aspect as an independent primitive or "building block."
 - Treating traceability as proof of the relation.
-- Dropping the source relation link after projection.
+- Dropping the source relation link once projection is complete.
 - Claiming physical interpretations directly from aspect traces.
 
 ## 6. Governance Footer

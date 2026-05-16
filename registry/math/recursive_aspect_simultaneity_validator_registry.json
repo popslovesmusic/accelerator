@@ -1,0 +1,68 @@
+{
+  "validator_id": "VAL-RASV-001",
+  "patch_id": "MPF-PALG-018",
+  "name": "Recursive Aspect Simultaneity Validator Registry",
+  "status": "active",
+  "validator_status": "CANDIDATE_VALIDATOR",
+  "purpose": "Define the checks and requirements for detecting and rejecting non-simultaneous interpretations of ⇔R aspect structures.",
+  "governance_status": {
+    "theorem_status": "NOT_PROVEN",
+    "validator_status": "CANDIDATE_VALIDATOR",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL"
+  },
+  "validator_checks": [
+    {
+      "check_id": "RASV-001",
+      "name": "reject_sequential_language",
+      "reject_terms": [
+        "then",
+        "after",
+        "next causes",
+        "leads to",
+        "first A then B",
+        "A produces B as later stage"
+      ]
+    },
+    {
+      "check_id": "RASV-002",
+      "name": "reject_unlicensed_associativity",
+      "reject_patterns": [
+        "(A ⇔R B) ⇔R C = A ⇔R (B ⇔R C)",
+        "nested ⇔R is associative",
+        "brackets do not matter"
+      ]
+    },
+    {
+      "check_id": "RASV-003",
+      "name": "reject_unlicensed_transitivity",
+      "reject_patterns": [
+        "A ⇔R B and B ⇔R C imply A ⇔R C",
+        "⇔R is transitive by default"
+      ]
+    },
+    {
+      "check_id": "RASV-004",
+      "name": "require_simultaneity_declaration",
+      "required_fields": [
+        "simultaneity_rule",
+        "non_separability_acknowledged",
+        "source_relation",
+        "lost_or_abstracted_features"
+      ]
+    },
+    {
+      "check_id": "RASV-005",
+      "name": "require_projection_exception_for_sequence",
+      "rule": "Any sequential, causal, equality, implication, composition, or biconditional reading must be declared as PROJECTION_ONLY with loss accounting."
+    }
+  ],
+  "input_targets": [
+    "registry/math/*process_algebra*.json",
+    "registry/math/*projection*.json",
+    "registry/math/*aspect*.json",
+    "docs/math/*process_algebra*.md",
+    "docs/math/*projection*.md",
+    "docs/math/*aspect*.md"
+  ]
+}

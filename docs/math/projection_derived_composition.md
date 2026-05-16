@@ -6,7 +6,7 @@ This document defines composition ($\circ$) as an **ordered projection-shadow** 
 ## 2. Projection Rule: Ordered Shadowing
 Composition is treated as a derivative convenience that imposes an analytical order on the holistic process core.
 - **Projection Form**: $\boxed{ \Pi_{compose}(A \iff_R B) \to A \circ B }$
-- **Core Insight**: Simultaneous recursive participation is flattened into ordered structural combination only after the whole-relation context is abstracted away.
+- **Core Insight**: Simultaneous recursive participation is flattened into ordered structural combination only upon the abstraction of the whole-relation context.
 
 ## 3. Loss Accounting
 Projections into the domain of composition are inherently lossy. The following features are explicitly recorded as abstracted or lost:
@@ -19,7 +19,7 @@ Projections into the domain of composition are inherently lossy. The following f
 
 ### 4.1 Allowed Uses
 - Using composition as a projection convenience for local symbolic chaining.
-- Representing ordered participation after simultaneity is intentionally abstracted.
+- Representing ordered participation once simultaneity is intentionally abstracted.
 - Supporting local analytical combinations under **strictly declared projection contexts**.
 
 ### 4.2 Forbidden Uses

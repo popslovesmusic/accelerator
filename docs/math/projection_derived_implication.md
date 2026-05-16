@@ -6,7 +6,7 @@ This document defines implication ($\to$) as a **sequentialized projection** of 
 ## 2. Projection Rule: Directional Flattening
 Implication is treated as a derivative convenience that selects a specific direction of dependency while abstracting away the holistic process core.
 - **Projection Form**: $\boxed{ \Pi_{imply}(A \iff_R B) \to A \to B }$
-- **Core Insight**: Directional dependency arises only after the co-presence of the whole relation is filtered through a directional analytical frame.
+- **Core Insight**: Directional dependency arises upon the filtering of whole-relation co-presence through a directional analytical frame.
 
 ## 3. Loss Accounting
 Projections into the domain of implication are inherently lossy. The following features are explicitly recorded as abstracted or lost:
@@ -19,7 +19,7 @@ Projections into the domain of implication are inherently lossy. The following f
 
 ### 4.1 Allowed Uses
 - Using implication as a local projection convenience for logical mapping.
-- Describing directional dependency after simultaneity is explicitly acknowledged as abstracted.
+- Describing directional dependency following the explicit acknowledgment of simultaneity abstraction.
 - Supporting local inference only under a **strictly declared projection context**.
 
 ### 4.2 Forbidden Uses

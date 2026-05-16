@@ -6,7 +6,7 @@ This document defines ordinary equality ($=$) as a **projection-reduced form** o
 ## 2. Projection Rule: Flattening Equality
 Equality is treated as a derivative convenience rather than a primitive identity.
 - **Projection Form**: $\boxed{ \Pi_{equal}(A \iff_R B) \to A = B }$
-- **Core Insight**: Two aspects are made substitutable only after their process history is removed from the immediate analytical frame.
+- **Core Insight**: Two aspects are made substitutable upon the abstraction of their process history from the immediate analytical frame.
 
 ## 3. Loss Accounting
 Projections into the domain of equality are inherently lossy. The following features are explicitly recorded as abstracted or lost:
@@ -19,7 +19,7 @@ Projections into the domain of equality are inherently lossy. The following feat
 ### 4.1 Allowed Uses
 - Using equality as a restricted projection convenience for calculation or comparison.
 - Recording when two expressions may be treated as equivalent within a **strictly declared local context**.
-- Comparing reduced forms after explicit loss accounting.
+- Comparing reduced forms following explicit loss accounting.
 
 ### 4.2 Forbidden Uses
 - Treating equality ($=$) as more primitive or fundamental than residue-bound equivalence ($\iff_R$).
