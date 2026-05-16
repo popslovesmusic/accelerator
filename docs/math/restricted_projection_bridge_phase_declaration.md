@@ -1,39 +1,64 @@
 # Restricted Projection Bridge Phase Declaration (MPF-PALG-031)
 
 ## 1. Purpose
-This document formally declares the **Restricted Projection Bridge Phase**. 
-- **Status**: ANALOG_ONLY.
-- **Unification Claim Blocked**: True.
+Declare the QM-like / GR-like bridge phase as restricted comparison scaffolding only, preventing escalation into unification, derivation, or physical-law claims.
 
-## 2. Scope: Comparison Scaffolding ONLY
-The bridge phase is strictly restricted to **comparison and diagnostic mapping**. It is not a path to physical theory.
-- **Bridge Status**: SCAFFOLD_ONLY.
-- **Goal**: Analyze how distinct symbolic regimes (distinction/exclusion vs. continuation/flow) can be traced to the same relational process core.
+## 2. Phase Definition
+- **Canonical Statement**: The restricted projection bridge phase permits comparison between QM-like and GR-like projection domains only as governed projection analogs sharing possible source-relation traceability.
+- **Short Form**: `bridge_phase := projection_comparison_only`
+- **Non-Unification Rule**: No bridge comparison may be interpreted as unification, derivation, or proof of physical equivalence.
 
-## 3. Hard Governance Constraints
-To prevent conceptual collapse and "theory creep," the following hard constraints are enforced:
-- **No QM-GR unification**: Explicitly prohibits claims of physical unification.
-- **No Physical Derivation**: Prohibits claiming the derivation of physical theories.
-- **No Physical Laws**: Prohibits promoting symbolic patterns to the status of physical laws.
-- **Non-Primitive**: Prohibits promoting any projection-derived bridge structure to primitive status.
-- **Non-Evidentiary**: Bridge agreement must not be treated as proof of the underlying relational core.
+## 3. Governance Status
+- **Theorem Status**: NOT_PROVEN
+- **Bridge Phase Status**: RESTRICTED_SCAFFOLD_ONLY
+- **Scope Status**: STRICTLY_LOCAL_RESTRICTED_DOMAIN
+- **Physics Status**: NON_PHYSICAL_ANALOG_MODEL
 
-## 4. Phase Objectives
-- Define features of QM-like domains (distinction, thresholding, participation).
-- Define features of GR-like domains (smoothness, flow, geometry-like persistence).
-- Map shared source-relation traceability across domain boundaries.
-- Perform differential loss accounting between compared projections.
-- Implement specialized "Non-Unification Gates" to block escalatory language.
+## 4. Bridge Scope
+### Allowed Domains
+- `QM_like_projection_domain`
+- `GR_like_projection_domain`
 
-## 5. Distinction: Analog vs. Physical
-- **QM-like / GR-like**: Governed symbolic analogs within the Process Algebra framework.
-- **QM / GR**: Actual physical theories of the universe (excluded from this framework's scope).
+### Allowed Operations
+- projection_feature_comparison
+- projection_loss_comparison
+- shared_traceability_analysis
+- projection_coherence_analysis
+- projection_failure_analysis
 
-## 6. Governance Footer
-- **Theorem Status**: NOT_PROVEN.
-- **Bridge Status**: SCAFFOLD_ONLY.
-- **Scope Status**: STRICTLY_LOCAL_RESTRICTED_DOMAIN.
-- **Physics Status**: NON_PHYSICAL_ANALOG_MODEL.
+### Blocked Operations
+- physical_unification
+- derivation_of_quantum_mechanics
+- derivation_of_general_relativity
+- physical_law_generation
+- primitive_identity_claims
+- projection_to_reality_promotion
+
+## 5. Bridge Governance Rules
+- **RPB-RULE-001**: QM-like and GR-like domains remain projection-derived analog structures.
+- **RPB-RULE-002**: Bridge coherence cannot be interpreted as source identity.
+- **RPB-RULE-003**: All bridge artifacts require source_relation traceability and projection depth declarations.
+- **RPB-RULE-004**: Projection loss accounting is mandatory across bridge comparisons.
+- **RPB-RULE-005**: Bridge analysis remains ANALOG_ONLY and NON_PHYSICAL.
+- **RPB-RULE-006**: Any bridge artifact implying unification, derivation, or physical equivalence must fail validation.
+
+## 6. Forbidden Claims
+- QM-like projection equals quantum mechanics.
+- GR-like projection equals general relativity.
+- Bridge coherence proves unification.
+- ⇔R derives physical law.
+- Projection bridge proves reality.
+- Projection agreement eliminates loss accounting.
+
+## 7. Required Bridge Metadata
+- `source_relation`
+- `projection_operator_id`
+- `projection_depth`
+- `recoverability_class`
+- `retained_features`
+- `lost_or_abstracted_features`
+- `claim_level`
+- `non_physical_status`
 
 ---
 [Back to Master Index](codex_master_index.md)

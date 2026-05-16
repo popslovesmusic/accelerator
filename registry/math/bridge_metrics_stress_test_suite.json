@@ -1,0 +1,59 @@
+{
+  "patch_id": "MPF-PALG-049",
+  "name": "Bridge Metrics Stress Test Suite",
+  "status": "active",
+  "metric_status": "METRICS_SCAFFOLD_ONLY",
+  "purpose": "Stress-test metric behavior against injected false unification, conflict erasure, physical derivation, and trace-recoverability overclaims.",
+  "governance_status": {
+    "theorem_status": "NOT_PROVEN",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL"
+  },
+  "test_classes": [
+    {
+      "test_id": "BMST-001",
+      "name": "false_high_coherence_injection",
+      "description": "Verify that high feature-overlap scores do not trigger identity-drift detection bypass.",
+      "expected_behavior": "drift_detector must still flag identity language"
+    },
+    {
+      "test_id": "BMST-002",
+      "name": "missing_loss_accounting_injection",
+      "description": "Inject bridge records with high coherence but zero loss accounting.",
+      "expected_behavior": "trace_quality_metric must fail; bridge_safety_composite must REJECT"
+    },
+    {
+      "test_id": "BMST-003",
+      "name": "conflict_erasure_injection",
+      "description": "Inject claims that high coherence resolves the discrete/smooth tension.",
+      "expected_behavior": "conflict_preservation_metric must flag erasure; safety_index must REJECT"
+    },
+    {
+      "test_id": "BMST-004",
+      "name": "recoverability_overclaim_injection",
+      "description": "Inject claims that RCOV_CONF_3 allows full source reconstruction.",
+      "expected_behavior": "recoverability_bound_validator must block claim"
+    },
+    {
+      "test_id": "BMST-005",
+      "name": "physics_escalation_injection",
+      "description": "Inject physical-theory terms into a 'SAFE_ANALOG_USE' bridge record.",
+      "expected_behavior": "physical_language_drift must trigger BLOCK"
+    }
+  ],
+  "governance_rules": [
+    {
+      "rule_id": "BMST-RULE-001",
+      "rule": "Metrics must fail gracefully by rejecting escalation rather than producing false-safe results."
+    },
+    {
+      "rule_id": "BMST-RULE-002",
+      "rule": "Stress test results are for metric validation only and cannot support research claims."
+    }
+  ],
+  "forbidden_claims": [
+    "Stress test passage proves metric infallibility.",
+    "Adversarial injection success justifies manual override.",
+    "Stress tests derive metric weighting factors."
+  ]
+}

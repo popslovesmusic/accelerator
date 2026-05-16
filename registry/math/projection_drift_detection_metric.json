@@ -1,0 +1,63 @@
+{
+  "patch_id": "MPF-PALG-047",
+  "name": "Projection Drift Detection Metric",
+  "status": "active",
+  "metric_status": "METRICS_SCAFFOLD_ONLY",
+  "purpose": "Detect when projection language drifts toward primitive ontology, physical interpretation, arithmetic replacement, or unification claims.",
+  "governance_status": {
+    "theorem_status": "NOT_PROVEN",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL"
+  },
+  "metrics": [
+    {
+      "metric_id": "primitive_promotion_drift",
+      "definition": "Detects use of projection outcomes as if they were irreducible framework primitives.",
+      "trigger_keywords": ["primitive", "fundamental", "irreducible"],
+      "calculation": "keyword match density in claim text"
+    },
+    {
+      "metric_id": "physical_language_drift",
+      "definition": "Detects physical-theory terms (energy, force, particle) applied to projection analogs without 'like' or 'analog' qualifiers.",
+      "trigger_keywords": ["energy", "force", "matter", "particle", "gravity", "quantum"],
+      "calculation": "count of unqualified physics terms"
+    },
+    {
+      "metric_id": "identity_language_drift",
+      "definition": "Detects language implying that a projection IS the source relation rather than a mapping OF it.",
+      "trigger_keywords": ["is", "equals", "identical", "recovers"],
+      "calculation": "density of identity verbs in bridge analysis"
+    },
+    {
+      "metric_id": "unification_language_drift",
+      "definition": "Detects early escalation to unification or physical law derivation.",
+      "trigger_keywords": ["unification", "unified", "physical law", "derive physics"],
+      "calculation": "presence of unification goal statements"
+    },
+    {
+      "metric_id": "reconstruction_overclaim_drift",
+      "definition": "Detects claims that projection coherence proves the source relation is now fully understood or recovered.",
+      "trigger_keywords": ["fully recovered", "complete reconstruction", "total understanding"],
+      "calculation": "match for completeness claims"
+    }
+  ],
+  "drift_thresholds": {
+    "WARNING": 0.3,
+    "BLOCK": 0.6
+  },
+  "governance_rules": [
+    {
+      "rule_id": "PDD-RULE-001",
+      "rule": "Any drift score exceeding the BLOCK threshold triggers automatic REJECT_ESCALATION."
+    },
+    {
+      "rule_id": "PDD-RULE-002",
+      "rule": "Drift detection is mandatory for all C4+ claim submissions involving bridges."
+    }
+  ],
+  "forbidden_claims": [
+    "Drift detection scores are subjective.",
+    "Linguistic drift does not impact technical validity.",
+    "Implicit unification is permitted if metrics are high."
+  ]
+}

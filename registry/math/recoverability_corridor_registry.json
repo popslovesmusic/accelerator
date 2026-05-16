@@ -1,0 +1,76 @@
+{
+  "patch_id": "MPF-RTOP-004",
+  "name": "Recoverability Corridor Registry",
+  "status": "active",
+  "metric_status": "TOPOLOGY_SCAFFOLD_ONLY",
+  "purpose": "Define admissible transformation corridors that preserve bounded reconstructability without collapsing projection distinctions.",
+  "governance_status": {
+    "theorem_status": "NOT_PROVEN",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL"
+  },
+  "corridor_classes": [
+    {
+      "class_id": "RC_STABLE_TRACE",
+      "definition": "Transformation paths where source-relation traceability remains GOLD or SILVER throughout.",
+      "reconstructability_stability": "STABLE"
+    },
+    {
+      "class_id": "RC_PARTIAL_DEFORMATION",
+      "definition": "Corridors where projection deformation accumulates but remains within defined recovery bounds.",
+      "reconstructability_stability": "GRADUAL_DECAY"
+    },
+    {
+      "class_id": "RC_CONFLICT_LOCKED",
+      "definition": "Paths constrained by mandatory conflict preservation (e.g., discrete/smooth boundary).",
+      "reconstructability_stability": "CONSTRAINED"
+    },
+    {
+      "class_id": "RC_COLLAPSE_RISK",
+      "definition": "Corridors approaching deformation limits where projection distinctions may be lost.",
+      "reconstructability_stability": "UNSTABLE"
+    },
+    {
+      "class_id": "RC_TERMINATED",
+      "definition": "Transformation paths that have exceeded recoverability limits.",
+      "reconstructability_stability": "NONE"
+    }
+  ],
+  "corridor_properties": [
+    {
+      "property_id": "trace_continuity",
+      "definition": "Measures the persistence of the source-relation link along the corridor.",
+      "value_type": "float"
+    },
+    {
+      "property_id": "projection_integrity",
+      "definition": "Evaluates the degree to which projection-domain distinctions are preserved.",
+      "value_type": "float"
+    },
+    {
+      "property_id": "loss_accumulation_rate",
+      "definition": "The rate at which feature loss increases per transformation step.",
+      "calculation": "delta_loss / delta_transformation"
+    },
+    {
+      "property_id": "conflict_preservation_requirement",
+      "definition": "Boolean check if the corridor is mandated to preserve specific neighborhood conflicts.",
+      "value_type": "boolean"
+    }
+  ],
+  "governance_rules": [
+    {
+      "rule_id": "RC-RULE-001",
+      "rule": "Every recoverability corridor must declare its stability class and loss accumulation rate."
+    },
+    {
+      "rule_id": "RC-RULE-002",
+      "rule": "Corridors with RC_COLLAPSE_RISK status trigger mandatory drift detection reviews."
+    }
+  ],
+  "forbidden_claims": [
+    "Stable corridors derive physical conservation laws.",
+    "Corridor continuity proves the existence of a source manifold.",
+    "Terminated corridors justify the deletion of historical trace metadata."
+  ]
+}

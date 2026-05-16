@@ -1,0 +1,81 @@
+{
+  "patch_id": "MPF-RTOP-002",
+  "name": "Reconstruction Neighborhood Registry",
+  "status": "active",
+  "metric_status": "TOPOLOGY_SCAFFOLD_ONLY",
+  "purpose": "Define bounded neighborhoods describing which projections retain partial mutual reconstructability under controlled loss conditions.",
+  "governance_status": {
+    "theorem_status": "NOT_PROVEN",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL"
+  },
+  "neighborhood_classes": [
+    {
+      "class_id": "RN_LOCAL_TRACE",
+      "definition": "Projections sharing a direct source-relation trace with minimal deformation.",
+      "reconstructability_level": "HIGH_LOCAL"
+    },
+    {
+      "class_id": "RN_PARTIAL_RECOVERABLE",
+      "definition": "Projections where some lost features can be recovered through multi-projection alignment.",
+      "reconstructability_level": "MODERATE"
+    },
+    {
+      "class_id": "RN_CONFLICT_BOUNDARY",
+      "definition": "Neighborhoods defined by irreducible projection conflicts (e.g., discrete/smooth tension).",
+      "reconstructability_level": "LOW_CONFLICT_LOCKED"
+    },
+    {
+      "class_id": "RN_DEFORMATION_LIMIT",
+      "definition": "Boundaries where projection distortion prevents any meaningful reconstruction.",
+      "reconstructability_level": "NEGLIGIBLE"
+    },
+    {
+      "class_id": "RN_NONRECOVERABLE",
+      "definition": "Projections completely detached from recoverable source metadata.",
+      "reconstructability_level": "ZERO"
+    }
+  ],
+  "metrics": [
+    {
+      "metric_id": "trace_overlap_density",
+      "definition": "Measures the density of shared source metadata within a neighborhood.",
+      "calculation": "ratio of shared_metadata to total_projection_metadata"
+    },
+    {
+      "metric_id": "recoverability_locality_score",
+      "definition": "Quantifies how localized the reconstruction information is within the projection set.",
+      "calculation": "inverse of the dispersion of recovery metadata"
+    },
+    {
+      "metric_id": "projection_boundary_integrity",
+      "definition": "Evaluates whether neighborhood boundaries explicitly preserve projection distinctions.",
+      "value_type": "float"
+    },
+    {
+      "metric_id": "loss_isolation_clarity",
+      "definition": "Measures if losses are isolated to specific neighborhood classes or diffused.",
+      "calculation": "score based on loss-category localization"
+    }
+  ],
+  "neighborhood_requirements": [
+    "RN_CONFLICT_BOUNDARY must preserve conflicts.",
+    "RN_LOCAL_TRACE requires SILVER+ trace quality score.",
+    "No neighborhood may claim source identity."
+  ],
+  "governance_rules": [
+    {
+      "rule_id": "RN-RULE-001",
+      "rule": "Neighborhoods are analytic containers for comparison, not physical regions."
+    },
+    {
+      "rule_id": "RN-RULE-002",
+      "rule": "High overlap density does not prove source identity."
+    }
+  ],
+  "forbidden_claims": [
+    "Reconstruction neighborhoods represent physical spacetime regions.",
+    "High locality scores derive physical particles.",
+    "Neighborhood alignment eliminates projection loss."
+  ]
+}

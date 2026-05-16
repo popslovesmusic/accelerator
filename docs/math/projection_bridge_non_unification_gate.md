@@ -1,39 +1,49 @@
 # Projection-Bridge Non-Unification Gate (MPF-PALG-035)
 
 ## 1. Purpose
-This document defines the **Projection-Bridge Non-Unification Gate (PBNU)**. Its mission is to prevent "theory overshoot" by scanning and rejecting any bridge artifact or comparison that claims physical QM/GR unification, physical derivation of spacetime, or proof of objective reality. The gate ensures that the **Restricted Projection Bridge** remains focused on symbolic analogs within the **Process Algebra** framework.
+Reject any bridge artifact that escalates QM-like / GR-like projection comparison into unification, derivation, physical equivalence, or physical-law claims.
 
-## 2. Core Rule: Non-Escalation
-All bridge comparisons are restricted to analyzing Process Algebra coherence. Any attempt to promote symbolic agreement to physical law status is a **Critical Governance Violation**.
-- **Gate Status**: CANDIDATE_BRIDGE_GATE.
-- **Fail Result**: Blocks the entire mathematical research pipeline.
+## 2. Gate Definition
+- **Canonical Name**: `projection_bridge_non_unification_gate`
+- **Short Rule**: Bridge comparison is not unification.
+- **Definition**: Any bridge artifact comparing QM-like and GR-like projections must remain analog-only and must not claim derivation, physical equivalence, source identity, or theory unification.
 
-## 3. Mandatory Gate Checks
+## 3. Governance Status
+- **Theorem Status**: NOT_PROVEN
+- **Gate Status**: CANDIDATE_NON_UNIFICATION_GATE
+- **Scope Status**: STRICTLY_LOCAL_RESTRICTED_DOMAIN
+- **Physics Status**: NON_PHYSICAL_ANALOG_MODEL
 
-### 3.1 PBNU-001: Reject Unification Claims
-The gate rejects any artifact claiming to have unified Quantum Mechanics and General Relativity.
-- **Forbidden Phrases**: "QM/GR unification", "unified theory of physics", "proving quantum relativity".
+## 4. Required Checks
+- **PBNU-001**: `reject_unification_language` - Reject artifacts using bridge comparison as proof of QM/GR unification.
+- **PBNU-002**: `reject_derivation_language` - Reject artifacts claiming quantum mechanics or general relativity has been derived.
+- **PBNU-003**: `reject_physical_equivalence_language` - Reject artifacts claiming QM-like or GR-like projections are physically equivalent to real theories.
+- **PBNU-004**: `require_analog_only_claim_level` - Every bridge artifact must set claim_level to BRIDGE_ANALOG_ONLY.
+- **PBNU-005**: `require_conflict_preservation` - Bridge conflicts must be recorded and may not be collapsed into unity language.
+- **PBNU-006**: `require_loss_differential` - Bridge artifacts must declare projection_loss_differential.
+- **PBNU-007**: `block_source_identity_promotion` - Shared source traceability cannot be promoted to source identity proof.
 
-### 3.2 PBNU-002: Reject Physical Derivation
-The gate rejects claims that the framework derives physical spacetime, gravitational fields, or quantum wave functions.
-- **Forbidden Phrases**: "derived spacetime", "physical gravity proof", "actual wave function".
+## 5. Forbidden Terms or Patterns
+- `QM/GR unification proven`
+- `unifies quantum mechanics and general relativity`
+- `derives quantum mechanics`
+- `derives general relativity`
+- `derives Einstein field equations`
+- `derives Hilbert space`
+- `physical equivalence`
+- `the bridge proves reality`
+- `projection agreement proves source identity`
+- `conflicts disappear under ⇔R`
 
-### 3.3 PBNU-003: Require Analog-only Disclaimer
-Every document or registry entry comparing domains must explicitly declare its status as **ANALOG_ONLY**.
-
-### 3.4 PBNU-004: Require Non-Unification Boolean
-Every comparison record must include a mandatory field: `"unification_claim_blocked": true`.
-
-## 4. Severity and Actions
-- **Severity**: CRITICAL.
-- **Action**: Immediate blockage of affected artifacts from theorem-facing registries.
-- **Goal**: Maintain the "Non-Physical" and "Restricted-Local" status of the math program.
-
-## 5. Governance Footer
-- **Theorem Status**: NOT_PROVEN.
-- **Gate Status**: CANDIDATE_BRIDGE_GATE.
-- **Scope Status**: STRICTLY_LOCAL_RESTRICTED_DOMAIN.
-- **Physics Status**: NON_PHYSICAL_ANALOG_MODEL.
+## 6. Allowed Language
+- `QM-like projection analog`
+- `GR-like projection analog`
+- `restricted bridge comparison`
+- `shared source traceability`
+- `projection-loss differential`
+- `partial coherence`
+- `conflict preserved`
+- `analog-only comparison`
 
 ---
 [Back to Master Index](codex_master_index.md)

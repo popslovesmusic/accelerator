@@ -1,40 +1,56 @@
 # Bridge Comparison Schema (MPF-PALG-034)
 
 ## 1. Purpose
-This document defines the **Bridge Comparison Schema**. 
-- **Status**: ANALOG_ONLY.
-- **Unification Claim Blocked**: True.
+Compare QM-like and GR-like projection domains through source-relation traceability, retained-feature overlap, conflict tracking, and projection-loss accounting without permitting unification or physical derivation claims.
 
-## 2. Core Structure
-A valid bridge comparison must include:
-- **Shared Source Relation**: The common **⇔R** relational core from which both domains are projected.
-- **Domain Mapping**: Formal records of both projection domains, including their operators and depth.
-- **Feature Alignment**: Identification of features that are compatible, complementary, or conflicting across the domains.
-- **Differential Loss**: A mapping of features lost in one domain but retained in the other, and those lost in both.
+## 2. Core Definition
+- **Canonical Statement**: Bridge comparison evaluates projection-domain relationships through shared source traceability, retained-feature overlap, projection-loss differentials, and coherence constraints.
+- **Short Form**: `bridge_compare := traceable_projection_comparison`
+- **Non-Unification Rule**: Comparison coherence does not imply physical equivalence, source identity, or unification.
 
-## 3. Comparison Rules
-- **BCS-RULE-001: Traceability Mandate**: No comparison is permitted without a validated `source_relation` and `shared_trace_id`.
-- **BCS-RULE-002: Conflict Transparency**: Feature conflicts must be explicitly documented and preserved rather than collapsed into a "unified" representation.
-- **BCS-RULE-003: Mandatory Loss Accounting**: The "information gap" between the domains must be rigorously quantified.
-- **BCS-RULE-004: Non-unification Rule**: Agreement between domains is analyzed as **Process Algebra coherence** only. It is never evidence for physical theory unification.
+## 3. Governance Status
+- **Theorem Status**: NOT_PROVEN
+- **Bridge Status**: COMPARISON_ONLY
+- **Scope Status**: STRICTLY_LOCAL_RESTRICTED_DOMAIN
+- **Physics Status**: NON_PHYSICAL_ANALOG_MODEL
 
-## 4. Coherence Classes
-Comparisons are classified into **Multi-Projection Coherence (MPC)** tiers:
-- **MPC-1**: Shared Trace only.
-- **MPC-2**: Feature overlap.
-- **MPC-3**: Loss-aware partial agreement.
-- **MPC-4**: Critical projection conflict.
+## 4. Comparison Dimensions
+- **BCD-001**: `source_relation_traceability` - Measures whether compared projection domains declare compatible ⇔R source relations.
+- **BCD-002**: `retained_feature_overlap` - Measures overlap between projection-retained feature sets.
+- **BCD-003**: `projection_loss_differential` - Measures differences in abstracted or lost whole-relation features.
+- **BCD-004**: `projection_depth_comparison` - Compares flattening depth across projection domains.
+- **BCD-005**: `recoverability_alignment` - Compares recoverability class compatibility across projection domains.
+- **BCD-006**: `coherence_vs_conflict_tracking` - Tracks where projection structures align or diverge without collapsing differences.
 
-## 5. Usage Limits
-- **Banned**: Promoting bridge agreement to physical law status.
-- **Banned**: Treating symbolic complementarity as proof of ontological identity.
-- **Banned**: Using bridge comparisons to bypass restricted-local scope status.
+## 5. Governance Rules
+- **BCS-RULE-001**: Bridge comparisons require declared shared source relations.
+- **BCS-RULE-002**: Projection conflicts must be preserved rather than collapsed.
+- **BCS-RULE-003**: Projection-loss differentials are mandatory.
+- **BCS-RULE-004**: Bridge coherence cannot imply source identity or physical equivalence.
+- **BCS-RULE-005**: Bridge artifacts remain ANALOG_ONLY and NON_PHYSICAL.
 
-## 6. Governance Footer
-- **Theorem Status**: NOT_PROVEN.
-- **Schema Status**: CANDIDATE_BRIDGE_SCHEMA.
-- **Scope Status**: STRICTLY_LOCAL_RESTRICTED_DOMAIN.
-- **Physics Status**: NON_PHYSICAL_ANALOG_MODEL.
+## 6. Forbidden Uses
+- Claiming QM-like and GR-like projections are unified.
+- Claiming projection coherence proves physical reality.
+- Removing conflicting feature tracking.
+- Treating bridge comparison as theorem evidence.
+- Treating retained feature overlap as source reconstruction.
+
+## 7. Comparison Record Schema
+A valid bridge comparison record must include:
+- `bridge_comparison_id`
+- `qm_like_reference`
+- `gr_like_reference`
+- `shared_source_relation`
+- `projection_depth_pair`
+- `recoverability_pair`
+- `retained_feature_overlap`
+- `projection_loss_differential`
+- `coherence_features`
+- `conflicting_features`
+- `comparison_status`
+- `claim_level`: BRIDGE_ANALOG_ONLY
+- `physical_unification_claim`: false
 
 ---
 [Back to Master Index](codex_master_index.md)

@@ -1,57 +1,113 @@
 {
   "gate_id": "PROJECTION_BRIDGE_NON_UNIFICATION_GATE_001",
   "patch_id": "MPF-PALG-035",
-  "name": "Projection-Bridge Non-Unification Gate Registry",
-  "status": "active",
-  "gate_status": "CANDIDATE_BRIDGE_GATE",
-  "purpose": "Reject any bridge artifact that claims QM/GR unification or physical derivation.",
-  "governance_status": {
+  "title": "Projection-Bridge Non-Unification Gate",
+  "classification": "validation_gate_patch",
+  "purpose": "Reject any bridge artifact that escalates QM-like / GR-like projection comparison into unification, derivation, physical equivalence, or physical-law claims.",
+  "status": {
     "theorem_status": "NOT_PROVEN",
-    "gate_status": "CANDIDATE_BRIDGE_GATE",
+    "gate_status": "CANDIDATE_NON_UNIFICATION_GATE",
     "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
     "physics_status": "NON_PHYSICAL_ANALOG_MODEL"
   },
-  "gate_checks": [
+  "depends_on": [
+    "MPF-PALG-031",
+    "MPF-PALG-032",
+    "MPF-PALG-033",
+    "MPF-PALG-034"
+  ],
+  "gate_definition": {
+    "canonical_name": "projection_bridge_non_unification_gate",
+    "short_rule": "Bridge comparison is not unification.",
+    "definition": "Any bridge artifact comparing QM-like and GR-like projections must remain analog-only and must not claim derivation, physical equivalence, source identity, or theory unification."
+  },
+  "required_checks": [
     {
       "check_id": "PBNU-001",
-      "name": "reject_unification_claims",
-      "reject_terms": [
-        "QM/GR unification",
-        "unified theory of physics",
-        "proving quantum relativity",
-        "resolved the QM/GR conflict"
-      ]
+      "name": "reject_unification_language",
+      "rule": "Reject artifacts using bridge comparison as proof of QM/GR unification."
     },
     {
       "check_id": "PBNU-002",
-      "name": "reject_physical_derivation_claims",
-      "reject_terms": [
-        "derived spacetime",
-        "physical gravity proof",
-        "real quantum states",
-        "actual wave function",
-        "physical constant derivation"
-      ]
+      "name": "reject_derivation_language",
+      "rule": "Reject artifacts claiming quantum mechanics or general relativity has been derived."
     },
     {
       "check_id": "PBNU-003",
-      "name": "require_analog_only_disclaimer",
-      "rule": "Every bridge comparison must explicitly declare its status as ANALOG_ONLY."
+      "name": "reject_physical_equivalence_language",
+      "rule": "Reject artifacts claiming QM-like or GR-like projections are physically equivalent to real theories."
     },
     {
       "check_id": "PBNU-004",
-      "name": "require_non_unification_boolean",
-      "rule": "Every bridge record must include 'unification_claim_blocked': true."
+      "name": "require_analog_only_claim_level",
+      "rule": "Every bridge artifact must set claim_level to BRIDGE_ANALOG_ONLY."
+    },
+    {
+      "check_id": "PBNU-005",
+      "name": "require_conflict_preservation",
+      "rule": "Bridge conflicts must be recorded and may not be collapsed into unity language."
+    },
+    {
+      "check_id": "PBNU-006",
+      "name": "require_loss_differential",
+      "rule": "Bridge artifacts must declare projection_loss_differential."
+    },
+    {
+      "check_id": "PBNU-007",
+      "name": "block_source_identity_promotion",
+      "rule": "Shared source traceability cannot be promoted to source identity proof."
     }
   ],
-  "input_targets": [
-    "registry/math/*bridge*.json",
-    "registry/math/*qm_like*.json",
-    "registry/math/*gr_like*.json",
-    "docs/math/*bridge*.md",
-    "docs/math/*qm_like*.md",
-    "docs/math/*gr_like*.md"
+  "forbidden_terms_or_patterns": [
+    "QM/GR unification proven",
+    "unifies quantum mechanics and general relativity",
+    "derives quantum mechanics",
+    "derives general relativity",
+    "derives Einstein field equations",
+    "derives Hilbert space",
+    "physical equivalence",
+    "the bridge proves reality",
+    "projection agreement proves source identity",
+    "conflicts disappear under ⇔R"
   ],
-  "failure_severity": "CRITICAL",
-  "action_on_failure": "BLOCK_RESEARCH_PIPELINE"
+  "allowed_language": [
+    "QM-like projection analog",
+    "GR-like projection analog",
+    "restricted bridge comparison",
+    "shared source traceability",
+    "projection-loss differential",
+    "partial coherence",
+    "conflict preserved",
+    "analog-only comparison"
+  ],
+  "failure_conditions": [
+    "unification_claim_detected",
+    "derivation_claim_detected",
+    "physical_equivalence_claim_detected",
+    "claim_level_not_BRIDGE_ANALOG_ONLY",
+    "projection_loss_differential_missing",
+    "conflicting_features_missing_or_collapsed",
+    "shared_source_traceability_promoted_to_source_identity",
+    "physics_status_not_NON_PHYSICAL_ANALOG_MODEL",
+    "theorem_status_not_NOT_PROVEN"
+  ],
+  "pass_conditions": [
+    "claim_level_BRIDGE_ANALOG_ONLY",
+    "physics_status_NON_PHYSICAL_ANALOG_MODEL",
+    "theorem_status_NOT_PROVEN",
+    "shared_source_relation_declared",
+    "projection_loss_differential_present",
+    "conflicting_features_recorded",
+    "unification_claim_false",
+    "physical_unification_claim_false"
+  ],
+  "validator_output_schema": {
+    "gate_id": "PBNU",
+    "checked_artifacts": ["string"],
+    "passed_checks": ["string"],
+    "failed_checks": ["string"],
+    "detected_forbidden_patterns": ["string"],
+    "required_corrections": ["string"],
+    "overall_status": "PASS | PASS_WITH_WARNINGS | FAIL"
+  }
 }
