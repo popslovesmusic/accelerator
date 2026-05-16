@@ -1,7 +1,9 @@
 # Restricted Projection Bridge Phase Declaration (MPF-PALG-031)
 
 ## 1. Purpose
-This document formally declares the **Restricted Projection Bridge Phase**. This phase establishes tightly governed comparison scaffolding between QM-like and GR-like projection domains. Its mission is to analyze high-level symbolic analogs through the lens of **Process Algebra** without permitting unification, physical derivation, or globalized truth claims.
+This document formally declares the **Restricted Projection Bridge Phase**. 
+- **Status**: ANALOG_ONLY.
+- **Unification Claim Blocked**: True.
 
 ## 2. Scope: Comparison Scaffolding ONLY
 The bridge phase is strictly restricted to **comparison and diagnostic mapping**. It is not a path to physical theory.
@@ -10,8 +12,8 @@ The bridge phase is strictly restricted to **comparison and diagnostic mapping**
 
 ## 3. Hard Governance Constraints
 To prevent conceptual collapse and "theory creep," the following hard constraints are enforced:
-- **No Unification**: Explicitly prohibits claims of QM/GR unification.
-- **No Derivation**: Prohibits claiming the derivation of physical quantum mechanics or general relativity.
+- **No QM-GR unification**: Explicitly prohibits claims of physical unification.
+- **No Physical Derivation**: Prohibits claiming the derivation of physical theories.
 - **No Physical Laws**: Prohibits promoting symbolic patterns to the status of physical laws.
 - **Non-Primitive**: Prohibits promoting any projection-derived bridge structure to primitive status.
 - **Non-Evidentiary**: Bridge agreement must not be treated as proof of the underlying relational core.

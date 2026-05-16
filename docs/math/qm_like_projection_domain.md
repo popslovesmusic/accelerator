@@ -1,7 +1,9 @@
 # QM-like Projection Domain (MPF-PALG-032)
 
 ## 1. Purpose
-This document defines the **QM-like Projection Domain**. This domain captures symbolic features of discreteness, exclusion, and participation within the Process Algebra framework. It serves as a governed analog for analyzing discrete relational structures without claiming the derivation of physical quantum mechanics.
+This document defines the **QM-like Projection Domain**. 
+- **Status**: ANALOG_ONLY.
+- **Unification Claim Blocked**: True.
 
 ## 2. Core Features (QMF)
 

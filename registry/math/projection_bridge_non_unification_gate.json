@@ -1,0 +1,57 @@
+{
+  "gate_id": "PROJECTION_BRIDGE_NON_UNIFICATION_GATE_001",
+  "patch_id": "MPF-PALG-035",
+  "name": "Projection-Bridge Non-Unification Gate Registry",
+  "status": "active",
+  "gate_status": "CANDIDATE_BRIDGE_GATE",
+  "purpose": "Reject any bridge artifact that claims QM/GR unification or physical derivation.",
+  "governance_status": {
+    "theorem_status": "NOT_PROVEN",
+    "gate_status": "CANDIDATE_BRIDGE_GATE",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL"
+  },
+  "gate_checks": [
+    {
+      "check_id": "PBNU-001",
+      "name": "reject_unification_claims",
+      "reject_terms": [
+        "QM/GR unification",
+        "unified theory of physics",
+        "proving quantum relativity",
+        "resolved the QM/GR conflict"
+      ]
+    },
+    {
+      "check_id": "PBNU-002",
+      "name": "reject_physical_derivation_claims",
+      "reject_terms": [
+        "derived spacetime",
+        "physical gravity proof",
+        "real quantum states",
+        "actual wave function",
+        "physical constant derivation"
+      ]
+    },
+    {
+      "check_id": "PBNU-003",
+      "name": "require_analog_only_disclaimer",
+      "rule": "Every bridge comparison must explicitly declare its status as ANALOG_ONLY."
+    },
+    {
+      "check_id": "PBNU-004",
+      "name": "require_non_unification_boolean",
+      "rule": "Every bridge record must include 'unification_claim_blocked': true."
+    }
+  ],
+  "input_targets": [
+    "registry/math/*bridge*.json",
+    "registry/math/*qm_like*.json",
+    "registry/math/*gr_like*.json",
+    "docs/math/*bridge*.md",
+    "docs/math/*qm_like*.md",
+    "docs/math/*gr_like*.md"
+  ],
+  "failure_severity": "CRITICAL",
+  "action_on_failure": "BLOCK_RESEARCH_PIPELINE"
+}

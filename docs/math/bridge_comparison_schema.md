@@ -1,7 +1,9 @@
 # Bridge Comparison Schema (MPF-PALG-034)
 
 ## 1. Purpose
-This document defines the **Bridge Comparison Schema**. It provides the formal structural requirements for comparing distinct projection domains (e.g., QM-like vs. GR-like) within the Process Algebra framework. The schema ensures that domain comparisons are grounded in **shared source-relation traceability** and explicit **differential loss accounting**.
+This document defines the **Bridge Comparison Schema**. 
+- **Status**: ANALOG_ONLY.
+- **Unification Claim Blocked**: True.
 
 ## 2. Core Structure
 A valid bridge comparison must include:
@@ -14,7 +16,7 @@ A valid bridge comparison must include:
 - **BCS-RULE-001: Traceability Mandate**: No comparison is permitted without a validated `source_relation` and `shared_trace_id`.
 - **BCS-RULE-002: Conflict Transparency**: Feature conflicts must be explicitly documented and preserved rather than collapsed into a "unified" representation.
 - **BCS-RULE-003: Mandatory Loss Accounting**: The "information gap" between the domains must be rigorously quantified.
-- **BCS-RULE-004: Non-unification Rule**: Agreement between domains is analyzed as **Process Algebra coherence** only. It is never evidence for physical QM/GR unification.
+- **BCS-RULE-004: Non-unification Rule**: Agreement between domains is analyzed as **Process Algebra coherence** only. It is never evidence for physical theory unification.
 
 ## 4. Coherence Classes
 Comparisons are classified into **Multi-Projection Coherence (MPC)** tiers:

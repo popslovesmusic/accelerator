@@ -1,7 +1,9 @@
 # GR-like Projection Domain (MPF-PALG-033)
 
 ## 1. Purpose
-This document defines the **GR-like Projection Domain**. This domain captures symbolic features of continuity, smoothness, and field-like persistence within the Process Algebra framework. It serves as a governed analog for analyzing continuous relational structures without claiming the derivation of physical general relativity.
+This document defines the **GR-like Projection Domain**. 
+- **Status**: ANALOG_ONLY.
+- **Unification Claim Blocked**: True.
 
 ## 2. Core Features (GRF)
 
