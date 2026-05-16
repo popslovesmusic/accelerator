@@ -303,7 +303,8 @@ def validate_math_program():
         "mpf_palg_018_simultaneity": "validate_recursive_aspect_simultaneity.py",
         "mpf_palg_019_flattening_risk": "validate_whole_relation_flattening_risk_audit.py",
         "mpf_palg_021_projection_operators": "validate_projection_operator_formalization.py",
-        "mpf_palg_022_projection_depth": "validate_projection_depth_taxonomy.py"
+        "mpf_palg_022_projection_depth": "validate_projection_depth_taxonomy.py",
+        "mpf_palg_023_recoverability_limits": "validate_projection_recoverability_limits.py"
     }
 
     report = {
