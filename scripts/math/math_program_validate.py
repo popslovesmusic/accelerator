@@ -309,7 +309,8 @@ def validate_math_program():
         "mpf_palg_025_projection_geometry": "validate_projection_induced_geometry.py",
         "mpf_palg_026_persistence_dynamics": "validate_projection_persistence_dynamics.py",
         "mpf_palg_027_orientation_dynamics": "validate_projection_induced_orientation_dynamics.py",
-        "mpf_palg_028_failure_atlas": "validate_projection_failure_mode_atlas.py"
+        "mpf_palg_028_failure_atlas": "validate_projection_failure_mode_atlas.py",
+        "mpf_palg_029_stress_scaffold": "validate_projection_coherence_stress_test_scaffold.py"
     }
 
     report = {

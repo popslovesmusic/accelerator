@@ -1,0 +1,84 @@
+{
+  "scaffold_id": "VAL-PCST-001",
+  "patch_id": "MPF-PALG-029",
+  "name": "Projection Coherence Stress Test Scaffold Registry",
+  "status": "active",
+  "scaffold_status": "CANDIDATE_STRESS_TEST_SCAFFOLD",
+  "purpose": "Create stress-test scaffolding for projection agreement, projection conflict, recoverability limits, flattening risks, and projection-induced failure modes.",
+  "governance_status": {
+    "theorem_status": "NOT_PROVEN",
+    "scaffold_status": "CANDIDATE_STRESS_TEST_SCAFFOLD",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL"
+  },
+  "stress_test_classes": [
+    {
+      "test_id": "PCST-001",
+      "name": "shared_source_projection_agreement",
+      "purpose": "Test whether multiple projections declare the same source relation without claiming source reconstruction.",
+      "expected_result": "PASS_WITH_TRACE_ONLY"
+    },
+    {
+      "test_id": "PCST-002",
+      "name": "projection_conflict_detection",
+      "purpose": "Detect conflicting retained features between projections of the same source relation.",
+      "expected_result": "PASS_WITH_CONFLICT_RECORD"
+    },
+    {
+      "test_id": "PCST-003",
+      "name": "recoverability_overclaim_injection",
+      "purpose": "Inject claims that projected forms recover ⇔R without trace metadata and verify rejection.",
+      "expected_result": "FAIL_EXPECTED"
+    },
+    {
+      "test_id": "PCST-004",
+      "name": "flattening_risk_injection",
+      "purpose": "Inject equality, implication, composition, or biconditional flattening claims and verify audit detection.",
+      "expected_result": "FAIL_EXPECTED"
+    },
+    {
+      "test_id": "PCST-005",
+      "name": "geometry_primitive_promotion_injection",
+      "purpose": "Inject projection-induced geometry primitive claims and verify rejection.",
+      "expected_result": "FAIL_EXPECTED"
+    },
+    {
+      "test_id": "PCST-006",
+      "name": "physics_escalation_injection",
+      "purpose": "Inject QM/GR unification or physical derivation claims and verify rejection.",
+      "expected_result": "FAIL_EXPECTED"
+    }
+  ],
+  "stress_test_record_schema": {
+    "stress_test_id": "string",
+    "source_relation": "string",
+    "projection_set": [
+      "string"
+    ],
+    "injected_condition": "string",
+    "expected_result": "PASS | PASS_WITH_WARNINGS | FAIL_EXPECTED",
+    "actual_result": "PASS | PASS_WITH_WARNINGS | FAIL",
+    "detected_failure_modes": [
+      "string"
+    ],
+    "recoverability_class_after_test": "RCOV-0 | RCOV-1 | RCOV-2 | RCOV-3",
+    "claim_level_after_test": "PROJECTION_ONLY | ANALOG_ONLY | REJECTED",
+    "promotion_allowed": false
+  },
+  "required_test_behaviors": [
+    "Projection agreement must not imply source identity.",
+    "Projection conflict must be recorded instead of collapsed.",
+    "Recoverability overclaims must fail.",
+    "Flattening claims must fail.",
+    "Primitive promotion claims must fail.",
+    "Physics escalation claims must fail."
+  ],
+  "forbidden_outcomes": [
+    "Projection agreement promoted to theorem evidence.",
+    "Projection conflict ignored.",
+    "Recoverability overclaim accepted.",
+    "Flattening claim accepted.",
+    "Geometry projection promoted to physical geometry.",
+    "QM/GR projection language promoted to unification claim."
+  ]
+}
