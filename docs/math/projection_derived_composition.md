@@ -1,7 +1,9 @@
 # Projection-Derived Composition (MPF-PALG-015)
 
 ## 1. Purpose
-This document defines composition ($\circ$) as an **ordered projection-shadow** of simultaneous recursive aspect-binding ($\iff_R$). In this projection, indivisible co-presence is reduced into a sequential participation structure to support local symbolic chaining and combinability.
+This document defines composition ($\circ$) as an **ordered projection-shadow** of simultaneous recursive aspect-binding ($\iff_R$). 
+- **Source Relation**: $(E \neq 0) \iff_R \delta(E > 0)$
+- **Non-Separability Acknowledged**: True. Structural combination is an aspect of an indivisible whole.
 
 ## 2. Projection Rule: Ordered Shadowing
 Composition is treated as a derivative convenience that imposes an analytical order on the holistic process core.

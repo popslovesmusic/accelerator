@@ -1,7 +1,9 @@
 # Projection-Derived Implication (MPF-PALG-014)
 
 ## 1. Purpose
-This document defines implication ($\to$) as a **sequentialized projection** of simultaneous recursive aspect-binding ($\iff_R$). In this projection, co-presence and mutuality are flattened into a directional dependency relation to support local inference and explanatory shorthand.
+This document defines implication ($\to$) as a **sequentialized projection** of simultaneous recursive aspect-binding ($\iff_R$). 
+- **Source Relation**: $(E \neq 0) \iff_R \delta(E > 0)$
+- **Non-Separability Acknowledged**: True. Directional dependency is an aspect of an indivisible whole.
 
 ## 2. Projection Rule: Directional Flattening
 Implication is treated as a derivative convenience that selects a specific direction of dependency while abstracting away the holistic process core.

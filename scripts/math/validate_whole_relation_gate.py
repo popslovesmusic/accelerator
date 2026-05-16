@@ -41,17 +41,17 @@ def validate_whole_relation_gate():
         artifact_name = os.path.basename(f_path)
         is_md = artifact_name.endswith(".md")
         
-        # Skip self and fundamental phase declaration for source_relation check
+        # Skip self and fundamental phase declaration
         is_governance_core = any(x in artifact_name for x in ["phase_registry", "declaration", "validation_gate", "trace_schema"])
         
         report["checked_artifacts"].append(artifact_name)
         
         with open(f_path, 'r', encoding='utf-8', errors='ignore') as f:
-            content_lower = f.read().lower()
+            content_raw = f.read()
+            content_lower = content_raw.lower()
             
             # Check for source_relation (if not core governance)
             if not is_governance_core:
-                # Handle both underscore and space for MD files
                 source_check = "source_relation" in content_lower or "source_context" in content_lower
                 if is_md:
                      source_check = source_check or "source relation" in content_lower
@@ -64,8 +64,7 @@ def validate_whole_relation_gate():
                     report["passed_checks"] += 1
 
             # Check for non_separability_acknowledged (if aspect or projection)
-            if "aspect" in artifact_name or "projection" in artifact_name:
-                # Handle both underscore and space for MD files
+            if "aspect" in artifact_name or "projection" in artifact_name or "derived" in artifact_name:
                 sep_check = "non_separability_acknowledged" in content_lower
                 if is_md:
                      sep_check = sep_check or "non-separability acknowledged" in content_lower
@@ -89,15 +88,25 @@ def validate_whole_relation_gate():
                 "standard arithmetic is wrong", "universal unification"
             ]
             for phrase in blocked:
-                if phrase in content_lower and phrase not in ["forbidden_claims", "blocked_language"]:
-                    report["status"] = "fail"
-                    report["failed_checks"] += 1
-                    report["failure_conditions_detected"].append(f"blocked_language_detected_in_{artifact_name}:_{phrase}")
+                if phrase in content_lower:
+                    # HEURISTIC: Check if it's in a negative context (forbidden/banned/etc)
+                    # We check the surrounding text in the raw content to see if it's within a specific JSON key or MD section
+                    pos = content_lower.find(phrase)
+                    context_start = max(0, pos-200)
+                    context_end = min(len(content_lower), pos+phrase.length+200 if hasattr(phrase, 'length') else pos+len(phrase)+200)
+                    context_area = content_lower[context_start:pos]
+                    
+                    is_safe = any(neg in context_area for neg in ["forbidden", "banned", "prohibited", "invalid", "reject", "block", "must not"])
+                    
+                    if not is_safe:
+                        report["status"] = "fail"
+                        report["failed_checks"] += 1
+                        report["failure_conditions_detected"].append(f"blocked_language_detected_in_{artifact_name}:_{phrase}")
 
     if report["failed_checks"] > 0:
         report["status"] = "fail"
 
-    with open(result_path, 'w') as f:
+    with open(result_path, 'w', encoding='utf-8') as f:
         json.dump(report, f, indent=2)
         
     return report

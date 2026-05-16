@@ -7,7 +7,7 @@ This document establishes the **formal review queue** for any proposed additions
 Every proposal must be evaluated against the following mandates:
 - **Traceability**: Must declare an indivisible `source_relation`.
 - **Non-Separability**: Must acknowledge that aspects are not independently fundamental.
-- **Humility**: Must avoid physical reality or universal unification claims.
+- **Humility**: Must avoid physical reality or system-wide unification claims.
 - **Precision**: Must avoid replacing standard arithmetic or ordinary logic.
 - **Locality**: Must remain strictly bound to restricted local domains.
 

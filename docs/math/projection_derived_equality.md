@@ -1,7 +1,9 @@
 # Projection-Derived Equality (MPF-PALG-013)
 
 ## 1. Purpose
-This document defines ordinary equality ($=$) as a **projection-reduced form** of simultaneous recursive aspect-binding ($\iff_R$). In this projection, residue-history, aspect simultaneity, and non-separability are intentionally flattened or abstracted away to permit symbolic substitutability within declared contexts.
+This document defines ordinary equality ($=$) as a **projection-reduced form** of simultaneous recursive aspect-binding ($\iff_R$). 
+- **Source Relation**: $(E \neq 0) \iff_R \delta(E > 0)$
+- **Non-Separability Acknowledged**: True. All symbolic identities are aspects of an indivisible whole.
 
 ## 2. Projection Rule: Flattening Equality
 Equality is treated as a derivative convenience rather than a primitive identity.

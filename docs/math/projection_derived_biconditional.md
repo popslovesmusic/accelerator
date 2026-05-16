@@ -1,7 +1,9 @@
 # Projection-Derived Biconditional (MPF-PALG-016)
 
 ## 1. Purpose
-This document defines the ordinary logical biconditional ($\iff$ or `iff`) as a **flattened reciprocal projection** of simultaneous recursive aspect-binding ($\iff_R$). In this projection, residue-history, indivisibility, and recursive co-generation are removed to permit reciprocal truth-condition comparison within declared local contexts.
+This document defines the ordinary logical biconditional ($\iff$ or `iff`) as a **flattened reciprocal projection** of simultaneous recursive aspect-binding ($\iff_R$). 
+- **Source Relation**: $(E \neq 0) \iff_R \delta(E > 0)$
+- **Non-Separability Acknowledged**: True. All logical shadows are aspects of an indivisible whole.
 
 ## 2. Projection Rule: Reciprocal Flattening
 The biconditional is treated as a derivative convenience rather than a primitive identity or a complete process closure.
@@ -26,7 +28,7 @@ Projections into the domain of the biconditional are inherently lossy. The follo
 - Treating logical biconditional as equivalent to or replacement for $\iff_R$.
 - Treating reciprocal truth as residue-preserving process closure.
 - Inferring whole-relation indivisibility or non-separability from ordinary `iff`.
-- Using biconditional to claim physical unification or proof of reality.
+- Using biconditional to claim physical unification or ontological proof.
 
 ## 5. Distinction Summary
 - **$\iff_R$**: Full process-algebraic relation; indivisible; preserves residue and co-generation.

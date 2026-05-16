@@ -1,6 +1,7 @@
 {
-  "validation_id": "VAL-PALG-GATE-AUDIT-001",
-  "status": "pass",
+  "audit_id": "WRF-AUDIT-SUM-001",
+  "timestamp": "2026-05-16T13:09:45.729652",
+  "overall_status": "FAIL",
   "checked_artifacts": [
     "process_algebra_expansion_review_queue.json",
     "process_algebra_minimal_expression_set.json",
@@ -34,9 +35,33 @@
     "aspect_relation_trace_schema.md",
     "recursive_aspect_simultaneity_validator.md"
   ],
-  "passed_checks": 52,
-  "failed_checks": 0,
-  "failure_conditions_detected": [],
-  "recommendations": [],
-  "timestamp": "2026-05-16T13:10:01.486752"
+  "detected_risks": [
+    {
+      "risk_id": "WRF-006",
+      "category": "physics_escalation",
+      "severity": "CRITICAL",
+      "artifact": "process_algebra_phase_registry.json",
+      "excerpt": "dinary mathematics.\",     \"\u21d4r proves qm/gr unification.\",     \"topology flow implies a glo",
+      "recommended_correction": "Explicitly mark as projection or remove unearned claim: 'proves QM/GR unification'"
+    },
+    {
+      "risk_id": "WRF-001",
+      "category": "equality_flattening",
+      "severity": "MEDIUM",
+      "artifact": "projection_derived_equality_registry.json",
+      "excerpt": "cording loss.\",     \"claiming -1 = +1 in standard arithmetic.\",     \"claiming qm = gr.\",  ",
+      "recommended_correction": "Explicitly mark as projection or remove unearned claim: '-1 = +1'"
+    },
+    {
+      "risk_id": "WRF-001",
+      "category": "equality_flattening",
+      "severity": "MEDIUM",
+      "artifact": "projection_derived_equality.md",
+      "excerpt": "etic numeric identity (e.g., $-1 = +1$) or physical qm/gr equality. - erasing residue-hist",
+      "recommended_correction": "Explicitly mark as projection or remove unearned claim: '-1 = +1'"
+    }
+  ],
+  "governance_recommendations": [
+    "Review detected risks and ensure all reductions are marked PROJECTION_ONLY."
+  ]
 }

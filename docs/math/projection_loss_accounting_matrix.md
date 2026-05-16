@@ -1,7 +1,8 @@
 # Projection Loss Accounting Matrix (MPF-PALG-017)
 
 ## 1. Purpose
-This document unifies the tracking of whole-relation features that are retained or lost when the primitive **⇔R** (residue-bound equivalence) is projected into secondary symbolic forms. It serves as a formal safeguard against mistaking analytical "shadows" for the holistic process core.
+This document unifies the tracking of whole-relation features that are retained or lost when the primitive **⇔R** (residue-bound equivalence) is projected into secondary symbolic forms. 
+- **Non-Separability Acknowledged**: True. All matrix entries are aspects of an indivisible whole.
 
 ## 2. Source Relation: ⇔R
 - **Interpretation**: Simultaneous Recursive Aspect-Binding.
