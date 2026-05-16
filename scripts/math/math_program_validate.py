@@ -287,7 +287,8 @@ def validate_math_program():
         "mpf_palg_002_bc_equivalence": "validate_residue_bound_equivalence_operator.py",
         "mpf_palg_003_exclusion": "validate_exclusion_admissibility_operator.py",
         "mpf_palg_004_polarity_preservation": "validate_recursive_polarity_preservation_law.py",
-        "mpf_palg_005_non_separability": "validate_aspect_non_separability_principle.py"
+        "mpf_palg_005_non_separability": "validate_aspect_non_separability_principle.py",
+        "mpf_palg_006_projection_governance": "validate_projection_boundary_governance.py"
     }
 
     report = {
