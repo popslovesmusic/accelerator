@@ -265,7 +265,10 @@ def validate_math_program():
         "mpf_topo_002_transition_constraints": "validate_local_transition_constraints.py",
         "mpf_topo_003_reconfiguration": "validate_constraint_reconfiguration_registry.py",
         "mpf_topo_003_reconfig_constraints": "validate_reconfiguration_constraints.py",
-        "mpf_topo_003_topology_maps": "validate_local_constraint_topology_maps.py"
+        "mpf_topo_003_topology_maps": "validate_local_constraint_topology_maps.py",
+        "mpf_topo_004_orientation_field": "validate_orientation_field_registry.py",
+        "mpf_topo_004_orientation_constraints": "validate_orientation_constraints.py",
+        "mpf_topo_004_gradient_maps": "validate_orientation_gradient_maps.py"
     }
 
     report = {
