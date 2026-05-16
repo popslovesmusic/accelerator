@@ -62,3 +62,8 @@ Declare the QM-like / GR-like bridge phase as restricted comparison scaffolding 
 
 ---
 [Back to Master Index](codex_master_index.md)
+
+
+---
+**source_relation**: (E≠0) ⇔R δ(E>0)
+**non_separability_acknowledged**: non-separability acknowledged

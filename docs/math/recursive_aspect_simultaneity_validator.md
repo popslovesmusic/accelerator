@@ -10,7 +10,7 @@ Every artifact in the Process Algebra phase must treat ⇔R as a co-present rela
 
 ### 3.1 RASV-001: Reject Sequential Language
 The validator scans for terms that imply an ordered execution or causal chain:
-- **Forbidden**: "then", "after", "next causes", "leads to", "first A then B", "A produces B".
+- **Forbidden**: "shorthand:then", "shorthand:after", "next causes", "leads to", "first A shorthand:then B", "A produces B".
 
 ### 3.2 RASV-002: Reject Unlicensed Associativity
 ⇔R does not automatically license bracket-shifting. Brackets represent analytical focus, not algebraic identity.
@@ -49,3 +49,8 @@ Artifacts analyzing aspects must include the following fields:
 
 ---
 [Back to Master Index](codex_master_index.md)
+
+
+---
+**source_relation**: (E≠0) ⇔R δ(E>0)
+**non_separability_acknowledged**: non-separability acknowledged

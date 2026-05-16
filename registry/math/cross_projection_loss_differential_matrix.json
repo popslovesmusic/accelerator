@@ -3,7 +3,7 @@
   "patch_id": "MPF-PALG-037",
   "title": "Cross-Projection Loss Differential Matrix",
   "classification": "loss_differential_matrix_patch",
-  "purpose": "Track what QM-like and GR-like projections each preserve, lose, and distort relative to their shared ⇔R source relation.",
+  "purpose": "Track what QM-like and GR-like projections each preserve, lose, and distort relative to their shared \u21d4R source relation.",
   "status": {
     "theorem_status": "NOT_PROVEN",
     "matrix_status": "CANDIDATE_CROSS_PROJECTION_LOSS_DIFFERENTIAL",
@@ -17,21 +17,35 @@
   ],
   "core_rule": {
     "name": "differential_loss_not_contradiction_rule",
-    "definition": "QM-like and GR-like projections may preserve different aspects of a shared ⇔R source relation without either projection invalidating the other.",
-    "short_form": "loss_difference(QM_like, GR_like) ≠ contradiction"
+    "definition": "QM-like and GR-like projections may preserve different aspects of a shared \u21d4R source relation without either projection invalidating the other.",
+    "short_form": "loss_difference(QM_like, GR_like) \u2260 contradiction"
   },
   "matrix_schema": {
     "matrix_id": "string",
     "shared_source_relation": "string",
     "qm_like_projection_ref": "string",
     "gr_like_projection_ref": "string",
-    "qm_preserved_features": ["string"],
-    "gr_preserved_features": ["string"],
-    "shared_preserved_features": ["string"],
-    "qm_lost_features": ["string"],
-    "gr_lost_features": ["string"],
-    "qm_distortion_risks": ["string"],
-    "gr_distortion_risks": ["string"],
+    "qm_preserved_features": [
+      "string"
+    ],
+    "gr_preserved_features": [
+      "string"
+    ],
+    "shared_preserved_features": [
+      "string"
+    ],
+    "qm_lost_features": [
+      "string"
+    ],
+    "gr_lost_features": [
+      "string"
+    ],
+    "qm_distortion_risks": [
+      "string"
+    ],
+    "gr_distortion_risks": [
+      "string"
+    ],
     "differential_status": "COMPLEMENTARY | PARTIAL | CONFLICTING | INDETERMINATE",
     "claim_level": "BRIDGE_ANALOG_ONLY",
     "physical_unification_claim": false
@@ -39,7 +53,7 @@
   "initial_matrix_records": [
     {
       "matrix_id": "CPLD-001",
-      "shared_source_relation": "(E≠0) ⇔R δ(E>0)",
+      "shared_source_relation": "(E\u22600) \u21d4R \u03b4(E>0)",
       "qm_like_projection_ref": "QMP-REL-001",
       "gr_like_projection_ref": "GRP-REL-001",
       "qm_preserved_features": [
@@ -86,7 +100,7 @@
   "governance_rules": [
     {
       "rule_id": "CPLD-RULE-001",
-      "rule": "Loss differentials must be recorded before bridge coherence is evaluated."
+      "rule": "Loss differentials must be recorded shorthand:shorthand:before bridge coherence is evaluated."
     },
     {
       "rule_id": "CPLD-RULE-002",
@@ -111,5 +125,7 @@
     "Treating GR-like loss as QM-like superiority.",
     "Collapsing projection distortions into physical claims.",
     "Using differential matrix as theorem evidence."
-  ]
+  ],
+  "source_relation": "(E\u22600) \u21d4R \u03b4(E>0)",
+  "non_separability_acknowledged": true
 }

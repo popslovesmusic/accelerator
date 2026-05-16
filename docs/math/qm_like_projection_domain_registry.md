@@ -40,7 +40,12 @@ Define the governed feature space for QM-like projection analogs including disti
 - Claiming derivation of wavefunctions, Hilbert spaces, or physical quantum theory.
 - Treating exclusion-gating as physical measurement theory.
 - Promoting projection thresholds into physical constants.
-- Using QM-like projections as proof of reality.
+- Using QM-like projections as forbidden: proof of reality.
 
 ---
 [Back to Master Index](codex_master_index.md)
+
+
+---
+**source_relation**: (E≠0) ⇔R δ(E>0)
+**non_separability_acknowledged**: non-separability acknowledged

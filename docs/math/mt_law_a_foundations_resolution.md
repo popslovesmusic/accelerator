@@ -19,7 +19,7 @@ No missing dependencies were detected.
 
 ## 6. Repair Obligation Mapping
 - **REP-A026-001**: Implement operational composition tests for LAW034.
-- **Status**: **COMPLETED**. Verification provided by the pass result of `validate_restricted_local_proof_consistency_audit.py`.
+- **Status**: **COMPLETED**. Verification provided by the pass result of `scripts/math/validate_restricted_local_proof_consistency_audit.py`.
 
 ## 7. Continuation Eligibility Review
 Based on the successful verification of all core foundational dependencies and the completion of hardening repairs, MT-LAW-A is formally authorized for continued TS4 restricted-domain work.

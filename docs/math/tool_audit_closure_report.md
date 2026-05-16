@@ -18,12 +18,12 @@
 
 ## Validators Added
 The math program validation suite now programmatically verifies the following audit states:
-- `validate_audit001_numerical_correctness_triage.py`
-- `validate_audit002_dependency_reproducibility_lock.py`
-- `validate_audit003_tda_adjacency_threshold.py`
-- `validate_audit004_rd_boundary_scaling_policy.py`
-- `validate_audit005_poisson_sign_convention.py`
-- `validate_audit006_structural_euler_stability_bounds.py`
+- `scripts/math/validate_audit001_numerical_correctness_triage.py`
+- `scripts/math/validate_audit002_dependency_reproducibility_lock.py`
+- `scripts/math/validate_audit003_tda_adjacency_threshold.py`
+- `scripts/math/validate_audit004_rd_boundary_scaling_policy.py`
+- `scripts/math/validate_audit005_poisson_sign_convention.py`
+- `scripts/math/validate_audit006_structural_euler_stability_bounds.py`
 
 ## Unresolved Implementation Risks
 The following items remain in the implementation backlog:

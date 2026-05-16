@@ -58,3 +58,8 @@ The framework monitors for state transitions, such as:
 
 ---
 [Back to Master Index](codex_master_index.md)
+
+
+---
+**source_relation**: (E≠0) ⇔R δ(E>0)
+**non_separability_acknowledged**: non-separability acknowledged

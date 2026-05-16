@@ -11,8 +11,8 @@
   },
   "core_rule": {
     "name": "projection_agreement_not_identity_rule",
-    "short_form": "cohere(Πa(WholeR), Πb(WholeR)) != recover(WholeR)",
-    "definition": "Agreement between multiple projections may indicate shared source consistency, but it does not reconstruct or prove the full ⇔R source relation."
+    "short_form": "cohere(\u03a0a(WholeR), \u03a0b(WholeR)) != recover(WholeR)",
+    "definition": "Agreement between multiple projections may indicate shared source consistency, but it does not reconstruct or prove the full \u21d4R source relation."
   },
   "coherence_schema": {
     "coherence_id": "string",
@@ -25,9 +25,15 @@
         "recoverability_class": "RCOV-0 | RCOV-1 | RCOV-2 | RCOV-3"
       }
     ],
-    "shared_retained_features": ["string"],
-    "conflicting_features": ["string"],
-    "lost_features_union": ["string"],
+    "shared_retained_features": [
+      "string"
+    ],
+    "conflicting_features": [
+      "string"
+    ],
+    "lost_features_union": [
+      "string"
+    ],
     "coherence_status": "COHERENT | PARTIAL | CONFLICTING | INDETERMINATE",
     "claim_level": "PROJECTION_ONLY",
     "source_identity_proven": false
@@ -57,16 +63,16 @@
   "example_records": [
     {
       "coherence_id": "PALG-MPC-001",
-      "source_relation": "(E!=0) ⇔R delta(E>0)",
+      "source_relation": "(E!=0) \u21d4R delta(E>0)",
       "projection_set": [
         {
-          "projection_operator_id": "Π_imply",
+          "projection_operator_id": "\u03a0_imply",
           "projection_expression": "(E!=0) -> delta(E>0)",
           "projection_depth": "PD-3",
           "recoverability_class": "RCOV-1"
         },
         {
-          "projection_operator_id": "Π_biconditional",
+          "projection_operator_id": "\u03a0_biconditional",
           "projection_expression": "(E!=0) iff delta(E>0)",
           "projection_depth": "PD-3",
           "recoverability_class": "RCOV-1"
@@ -114,10 +120,12 @@
   ],
   "forbidden_claims": [
     "Projection agreement proves the source relation.",
-    "Multiple projections reconstruct ⇔R by convergence alone.",
+    "Multiple projections reconstruct \u21d4R by convergence alone.",
     "QM-like and GR-like projection agreement proves unification.",
     "Arithmetic-like projection agreement replaces standard arithmetic.",
     "Conflicting projection features can be ignored.",
     "Projection coherence is theorem evidence by default."
-  ]
+  ],
+  "source_relation": "(E\u22600) \u21d4R \u03b4(E>0)",
+  "non_separability_acknowledged": true
 }

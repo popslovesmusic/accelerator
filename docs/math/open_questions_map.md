@@ -1,6 +1,6 @@
 # Open Questions Map
 
-This document tracks and categorizes open mathematical questions within the Mono-Process Framework, providing a human-readable counterpart to `registry/math/math_registry.json`.
+This document tracks and categorizes open mathematical questions within the Mono-Process Framework, providing a human-readable counterpart to `registry/math_registry.json`.
 
 ## Categorized Open Questions
 

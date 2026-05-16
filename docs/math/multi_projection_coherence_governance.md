@@ -34,7 +34,7 @@ Projected forms produce incompatible retained-feature claims or inconsistent sou
 
 ## 6. Forbidden Claims
 - Claiming projection convergence proves the source relation.
-- Claiming that QM-like and GR-like projection agreement proves unified physics.
+- Claiming that QM-like and GR-like projection agreement proves forbidden: unified physics.
 - Ignoring conflicting features to force a "stable" result.
 - Using multi-projection coherence as proof of global closure.
 
@@ -46,3 +46,8 @@ Projected forms produce incompatible retained-feature claims or inconsistent sou
 
 ---
 [Back to Master Index](codex_master_index.md)
+
+
+---
+**source_relation**: (E≠0) ⇔R δ(E>0)
+**non_separability_acknowledged**: non-separability acknowledged

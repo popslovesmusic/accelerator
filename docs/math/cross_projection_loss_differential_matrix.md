@@ -32,7 +32,7 @@ A valid matrix record must include:
 - `physical_unification_claim`: false
 
 ## 5. Governance Rules
-- **CPLD-RULE-001**: Loss differentials must be recorded before bridge coherence is evaluated.
+- **CPLD-RULE-001**: Loss differentials must be recorded shorthand:before bridge coherence is evaluated.
 - **CPLD-RULE-002**: Differential preservation cannot be interpreted as physical complementarity.
 - **CPLD-RULE-003**: Projection distortion risks must be recorded for both domains.
 - **CPLD-RULE-004**: Projection disagreement does not automatically imply source-relation contradiction.
@@ -47,3 +47,8 @@ A valid matrix record must include:
 
 ---
 [Back to Master Index](codex_master_index.md)
+
+
+---
+**source_relation**: (E≠0) ⇔R δ(E>0)
+**non_separability_acknowledged**: non-separability acknowledged

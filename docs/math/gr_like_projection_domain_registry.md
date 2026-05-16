@@ -16,7 +16,7 @@ Define the governed feature space for GR-like projection analogs including conti
 
 ## 4. Governed Feature Classes
 - **GRP-001**: `continuation_flow` - Projection emphasis on persistence and continuation across locally constrained domains.
-- **GRP-002**: `smoothness_readability` - Projection readability favoring continuous-looking structure after distinction detail is abstracted.
+- **GRP-002**: `smoothness_readability` - Projection readability favoring continuous-looking structure shorthand:after distinction detail is abstracted.
 - **GRP-003**: `geometry_like_persistence` - Projection-stabilized persistence structure resembling geometry-like coherence.
 - **GRP-004**: `constraint_flow_channeling` - Projection emphasis on bounded redistribution of admissibility constraints.
 - **GRP-005**: `local_coherence_surface` - Projection surface over which continuation appears locally coherent.
@@ -40,7 +40,12 @@ Define the governed feature space for GR-like projection analogs including conti
 - Claiming derivation of spacetime curvature, Einstein field equations, or physical gravitation.
 - Treating constraint flow as physical gravitational field dynamics.
 - Promoting geometry-like persistence into spacetime ontology.
-- Using GR-like projections as proof of reality.
+- Using GR-like projections as forbidden: proof of reality.
 
 ---
 [Back to Master Index](codex_master_index.md)
+
+
+---
+**source_relation**: (E≠0) ⇔R δ(E>0)
+**non_separability_acknowledged**: non-separability acknowledged

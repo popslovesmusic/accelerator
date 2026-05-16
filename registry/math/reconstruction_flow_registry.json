@@ -1,0 +1,85 @@
+{
+  "patch_id": "MPF-RDYN-002",
+  "name": "Reconstruction Flow Registry",
+  "status": "active",
+  "metric_status": "DYNAMICS_SCAFFOLD_ONLY",
+  "purpose": "Define bounded flow classes describing how reconstruction accessibility changes under projection transformations.",
+  "governance_status": {
+    "theorem_status": "NOT_PROVEN",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL",
+    "non_separability_acknowledged": true,
+    "source_relation": "(E≠0) ⇔R δ(E>0)"
+  },
+  "flow_classes": [
+    {
+      "class_id": "RF_STABLE",
+      "definition": "Flows where reconstruction accessibility remains constant or improves within bounded limits.",
+      "dynamic_stability": "STABLE"
+    },
+    {
+      "class_id": "RF_PARTIAL_DRIFT",
+      "definition": "Flows where accessibility metadata begins to decouple from the local neighborhood.",
+      "dynamic_stability": "DRIFT_DETECTED"
+    },
+    {
+      "class_id": "RF_CONFLICT_LOCKED",
+      "definition": "Flows that are arrested at neighborhood boundaries by irreducible projection tensions.",
+      "dynamic_stability": "STABILIZED_CONFLICT"
+    },
+    {
+      "class_id": "RF_DEFORMATION_CASCADE",
+      "definition": "Flows where projection distortion propagates and amplifies across the sequence.",
+      "dynamic_stability": "UNSTABLE"
+    },
+    {
+      "class_id": "RF_ACCESSIBILITY_DECAY",
+      "definition": "Flows resulting in the gradual loss of all meaningful reconstruction metadata.",
+      "dynamic_stability": "DECAYING"
+    },
+    {
+      "class_id": "RF_TERMINATED",
+      "definition": "Flows where the reconstruction link is broken due to excessive deformation.",
+      "dynamic_stability": "NONE"
+    }
+  ],
+  "metrics": [
+    {
+      "metric_id": "flow_trace_retention",
+      "definition": "Measures the persistence of the source-relation trace along a dynamic flow.",
+      "calculation": "ratio of retained_trace_metadata to initial_trace_metadata"
+    },
+    {
+      "metric_id": "recoverability_gradient",
+      "definition": "The rate of change of accessibility quality across the flow sequence.",
+      "calculation": "delta_accessibility / delta_step"
+    },
+    {
+      "metric_id": "projection_integrity_decay",
+      "definition": "Measures the loss of projection-domain distinctions during the flow.",
+      "value_type": "float"
+    },
+    {
+      "metric_id": "conflict_stability_density",
+      "definition": "Evaluates if conflicts are preserved or erased in the stabilized state of the flow.",
+      "calculation": "score based on conflict_metadata preservation"
+    }
+  ],
+  "governance_rules": [
+    {
+      "rule_id": "RF-RULE-001",
+      "rule": "Every reconstruction flow must declare its stability class and trace retention score."
+    },
+    {
+      "rule_id": "RF-RULE-002",
+      "rule": "Flows with RF_DEFORMATION_CASCADE status trigger mandatory drift detection review."
+    }
+  ],
+  "forbidden_claims": [
+    "Stable flows prove physical conservation of information.",
+    "Flow gradients derive physical time evolution operators.",
+    "Accessibility decay justifies the assumption of external detachment."
+  ],
+  "source_relation": "(E≠0) ⇔R δ(E>0)",
+  "non_separability_acknowledged": true
+}

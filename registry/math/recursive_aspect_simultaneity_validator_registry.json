@@ -4,7 +4,7 @@
   "name": "Recursive Aspect Simultaneity Validator Registry",
   "status": "active",
   "validator_status": "CANDIDATE_VALIDATOR",
-  "purpose": "Define the checks and requirements for detecting and rejecting non-simultaneous interpretations of ⇔R aspect structures.",
+  "purpose": "Define the checks and requirements for detecting and rejecting non-simultaneous interpretations of \u21d4R aspect structures.",
   "governance_status": {
     "theorem_status": "NOT_PROVEN",
     "validator_status": "CANDIDATE_VALIDATOR",
@@ -16,11 +16,11 @@
       "check_id": "RASV-001",
       "name": "reject_sequential_language",
       "reject_terms": [
-        "then",
-        "after",
+        "shorthand:then",
+        "shorthand:after",
         "next causes",
         "leads to",
-        "first A then B",
+        "first A shorthand:then B",
         "A produces B as later stage"
       ]
     },
@@ -28,8 +28,8 @@
       "check_id": "RASV-002",
       "name": "reject_unlicensed_associativity",
       "reject_patterns": [
-        "(A ⇔R B) ⇔R C = A ⇔R (B ⇔R C)",
-        "nested ⇔R is associative",
+        "(A \u21d4R B) \u21d4R C = A \u21d4R (B \u21d4R C)",
+        "nested \u21d4R is associative",
         "brackets do not matter"
       ]
     },
@@ -37,8 +37,8 @@
       "check_id": "RASV-003",
       "name": "reject_unlicensed_transitivity",
       "reject_patterns": [
-        "A ⇔R B and B ⇔R C imply A ⇔R C",
-        "⇔R is transitive by default"
+        "A \u21d4R B and B \u21d4R C imply A \u21d4R C",
+        "\u21d4R is transitive by default"
       ]
     },
     {
@@ -64,5 +64,7 @@
     "docs/math/*process_algebra*.md",
     "docs/math/*projection*.md",
     "docs/math/*aspect*.md"
-  ]
+  ],
+  "source_relation": "(E\u22600) \u21d4R \u03b4(E>0)",
+  "non_separability_acknowledged": true
 }
