@@ -1,0 +1,106 @@
+{
+  "patch_id": "MPF-PALG-007",
+  "name": "Aspect-Relation Trace Schema Registry",
+  "status": "active",
+  "schema_status": "CANDIDATE_TRACE_SCHEMA",
+  "purpose": "Define a recoverable schema for recording how any analyzed aspect remains bound to its indivisible source relation.",
+  "governance_status": {
+    "theorem_status": "NOT_PROVEN",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL"
+  },
+  "core_rule": {
+    "name": "aspect_traceability_rule",
+    "definition": "Every isolated aspect must retain a recoverable trace to the indivisible source relation from which it was analytically projected.",
+    "short_form": "aspect(x) -> trace_to(WholeR)"
+  },
+  "trace_schema": {
+    "trace_id": "string",
+    "source_relation": "string",
+    "aspect_label": "string",
+    "aspect_role": [
+      "exclusion",
+      "continuation",
+      "residue_binding",
+      "polarity",
+      "projection",
+      "orientation",
+      "admissibility"
+    ],
+    "analysis_mode": [
+      "projection_only",
+      "local_analysis",
+      "analogy_only"
+    ],
+    "retained_features": [
+      "distinction",
+      "continuation",
+      "residue_history",
+      "admissibility",
+      "orientation",
+      "polarity"
+    ],
+    "lost_or_abstracted_features": [
+      "string"
+    ],
+    "non_separability_acknowledged": true,
+    "primitive_status": false,
+    "claim_level": "ANALOG_MODEL_ONLY",
+    "promotion_allowed": false
+  },
+  "valid_trace_examples": [
+    {
+      "trace_id": "PALG-TRACE-001",
+      "source_relation": "(E!=0) <=>R delta(E>0)",
+      "aspect_label": "(E!=0)",
+      "aspect_role": "exclusion",
+      "analysis_mode": "local_analysis",
+      "retained_features": [
+        "distinction",
+        "admissibility"
+      ],
+      "lost_or_abstracted_features": [
+        "simultaneous continuation aspect",
+        "full residue-binding context"
+      ],
+      "non_separability_acknowledged": true,
+      "primitive_status": false,
+      "claim_level": "ANALOG_MODEL_ONLY",
+      "promotion_allowed": false
+    },
+    {
+      "trace_id": "PALG-TRACE-002",
+      "source_relation": "(-1) <=>R (+1)",
+      "aspect_label": "-1",
+      "aspect_role": "polarity",
+      "analysis_mode": "projection_only",
+      "retained_features": [
+        "exclusion",
+        "polarity"
+      ],
+      "lost_or_abstracted_features": [
+        "continuation-pole simultaneity",
+        "whole polarity relation"
+      ],
+      "non_separability_acknowledged": true,
+      "primitive_status": false,
+      "claim_level": "ANALOG_MODEL_ONLY",
+      "promotion_allowed": false
+    }
+  ],
+  "invalid_trace_conditions": [
+    "aspect_has_no_source_relation",
+    "aspect_promoted_to_primitive",
+    "non_separability_not_acknowledged",
+    "lost_features_not_recorded",
+    "claim_level_exceeds_ANALOG_MODEL_ONLY",
+    "projection_used_as_proof"
+  ],
+  "forbidden_uses": [
+    "independent_primitive",
+    "traceability_as_proof",
+    "dropping_source_relation",
+    "bypass_non_separability_governance",
+    "physical_interpretation_from_traces"
+  ]
+}
