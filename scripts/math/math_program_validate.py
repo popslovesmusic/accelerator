@@ -271,7 +271,10 @@ def validate_math_program():
         "mpf_topo_004_gradient_maps": "validate_orientation_gradient_maps.py",
         "mpf_topo_005_corridor_analysis": "validate_admissibility_corridor_registry.py",
         "mpf_topo_005_corridor_constraints": "validate_corridor_constraints.py",
-        "mpf_topo_005_pathway_maps": "validate_admissibility_pathway_maps.py"
+        "mpf_topo_005_pathway_maps": "validate_admissibility_pathway_maps.py",
+        "mpf_topo_006_basin_formation": "validate_constraint_basin_registry.py",
+        "mpf_topo_006_basin_constraints": "validate_basin_constraints.py",
+        "mpf_topo_006_basin_maps": "validate_constraint_basin_maps.py"
     }
 
     report = {
