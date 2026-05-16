@@ -294,7 +294,8 @@ def validate_math_program():
         "mpf_palg_009_minimal_expressions": "validate_process_algebra_minimal_expression_set.py",
         "mpf_palg_010_expansion_queue": "validate_process_algebra_expansion_review_queue.py",
         "mpf_palg_011_nested_review": "validate_nested_whole_relation_candidate_review.py",
-        "mpf_palg_012_semantics_governance": "validate_nested_relation_semantics_governance.py"
+        "mpf_palg_012_semantics_governance": "validate_nested_relation_semantics_governance.py",
+        "mpf_palg_013_projected_equality": "validate_projection_derived_equality.py"
     }
 
     report = {
