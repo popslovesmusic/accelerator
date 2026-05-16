@@ -254,7 +254,9 @@ def validate_math_program():
         "mpf_res_007_irreducible_preservation": "validate_irreducible_preservation_policy.py",
         "mpf_res_008_ecology_registry": "validate_recursive_boundary_ecology_registry.py",
         "mpf_res_008_topology": "validate_boundary_interaction_topology.py",
-        "mpf_res_008_pressure_fields": "validate_epistemic_pressure_fields.py"
+        "mpf_res_008_pressure_fields": "validate_epistemic_pressure_fields.py",
+        "mpf_res_009_climate_registry": "validate_epistemic_climate_registry.py",
+        "mpf_res_009_climate_thresholds": "validate_climate_thresholds.py"
     }
 
     report = {
