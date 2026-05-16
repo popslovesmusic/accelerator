@@ -251,7 +251,10 @@ def validate_math_program():
         "mpf_res_006_quarantine_integrity": "validate_recursive_quarantine_integrity.py",
         "mpf_res_006_cross_lane_containment": "validate_cross_lane_containment.py",
         "mpf_res_007_adaptive_incompleteness": "validate_adaptive_incompleteness_registry.py",
-        "mpf_res_007_irreducible_preservation": "validate_irreducible_preservation_policy.py"
+        "mpf_res_007_irreducible_preservation": "validate_irreducible_preservation_policy.py",
+        "mpf_res_008_ecology_registry": "validate_recursive_boundary_ecology_registry.py",
+        "mpf_res_008_topology": "validate_boundary_interaction_topology.py",
+        "mpf_res_008_pressure_fields": "validate_epistemic_pressure_fields.py"
     }
 
     report = {
