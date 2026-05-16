@@ -279,7 +279,10 @@ def validate_math_program():
         "mpf_topo_bound_001_boundaries": "validate_topology_boundary_conditions.py",
         "mpf_topo_trans_001_transitions": "validate_topology_transition_mapping.py",
         "mpf_topo_reconfig_001_audit": "validate_topology_reconfiguration.py",
-        "mpf_topo_dist_001_distinctions": "validate_topology_behavioral_distinctions.py"
+        "mpf_topo_dist_001_distinctions": "validate_topology_behavioral_distinctions.py",
+        "mpf_topo_007_flow": "validate_constraint_flow_registry.py",
+        "mpf_topo_007_flow_constraints": "validate_flow_constraints.py",
+        "mpf_topo_007_flow_mapping": "validate_flow_mapping.py"
     }
 
     report = {
