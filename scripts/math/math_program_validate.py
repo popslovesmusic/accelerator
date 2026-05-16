@@ -282,7 +282,8 @@ def validate_math_program():
         "mpf_topo_dist_001_distinctions": "validate_topology_behavioral_distinctions.py",
         "mpf_topo_007_flow": "validate_constraint_flow_registry.py",
         "mpf_topo_007_flow_constraints": "validate_flow_constraints.py",
-        "mpf_topo_007_flow_mapping": "validate_flow_mapping.py"
+        "mpf_topo_007_flow_mapping": "validate_flow_mapping.py",
+        "mpf_palg_001_phase": "validate_process_algebra_phase.py"
     }
 
     report = {
