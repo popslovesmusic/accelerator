@@ -11,6 +11,7 @@ This document provides operational instructions for using the rectified and gove
   - `tool_manifest.json`: Master tool registry.
   - `validation_index.json`: Global validation status.
   - `compliance_charter_v2_3.json`: Mathematical and provenance authority.
+- **`registry/math/` + `docs/math/`**: Math core registries + codex (interpretation and governance; not physics proof).
 - **`configs/`**: Standardized configurations.
   - `multi_runs/`: Orchestration configs for `multi_sim_runner.py`.
   - `examples/`: Tool-specific reference configs.

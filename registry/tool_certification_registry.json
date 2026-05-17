@@ -1,17 +1,51 @@
 {
   "registry_id": "PCD_TOOL_CERTIFICATION_REGISTRY",
-  "version": "1.0.0",
+  "version": "2.0.0",
+  "governance_status": {
+    "series_status": "EQUIVALENCE_HARDENING_ONLY",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL",
+    "non_separability_acknowledged": true,
+    "source_relation": "(E≠0) ⇔R δ(E>0)"
+  },
+  "certification_states": {
+    "UNVERIFIED": "Tool registered but no validation evidence exists.",
+    "REFERENCE_BASELINE_ONLY": "Tool is a governed reference (Python) but has no performance equivalent.",
+    "EQUIVALENCE_PENDING": "Performance implementation exists but equivalence check is incomplete.",
+    "EQUIVALENCE_VERIFIED": "Performance implementation passes equivalence against reference baseline.",
+    "CERTIFIED_C1": "Runs and emits recoverable output.",
+    "CERTIFIED_C2": "Observable mapping and core scientific validity checks exist.",
+    "CERTIFIED_C3": "Cross-model validation and falsification available.",
+    "CERTIFIED_C4": "Multi-seed stable, uncertainty characterized, equivalence verified.",
+    "CERTIFICATION_REVOKED": "Tool failed drift or equivalence audit and is blocked from claim support."
+  },
+  "tools": [
+    { "name": "fsa_rule_engine_sim_v1_cpp", "state": "CERTIFIED_C4", "last_audit": "2026-05-06" },
+    { "name": "ca_admissibility_sim_v1_cpp", "state": "CERTIFIED_C1", "last_audit": "2026-05-06" },
+    { "name": "graph_dynamics_sim_v1_cpp", "state": "CERTIFIED_C1", "last_audit": "2026-05-06" },
+    { "name": "tda_module_v1_cpp", "state": "CERTIFIED_C4", "last_audit": "2026-05-06" },
+    { "name": "tda_module_v2_cpp", "state": "CERTIFIED_C4", "last_audit": "2026-05-06" },
+    { "name": "symplectic_sim_v1_cpp", "state": "CERTIFIED_C4", "last_audit": "2026-05-06" },
+    { "name": "spectral_analysis_v1_cpp", "state": "CERTIFIED_C4", "last_audit": "2026-05-06" },
+    { "name": "mc_ensemble_sim_v1_cpp", "state": "CERTIFIED_C4", "last_audit": "2026-05-06" },
+    { "name": "parameter_optimizer_v1_cpp", "state": "CERTIFIED_C4", "last_audit": "2026-05-06" },
+    { "name": "stochastic_sim_cpp", "state": "CERTIFIED_C4", "last_audit": "2026-05-06" },
+    { "name": "structural_box_sim_cpp", "state": "CERTIFIED_C4", "last_audit": "2026-05-06" },
+    { "name": "agent_based_sim_v1_cpp", "state": "CERTIFIED_C4", "last_audit": "2026-05-06" },
+    { "name": "dase_analog_sim_cpp", "state": "CERTIFIED_C4", "last_audit": "2026-05-06" },
+    { "name": "satp_higgs_sim_cpp", "state": "CERTIFIED_C4", "last_audit": "2026-05-06" },
+    { "name": "satp_higgs_3d_sim_cpp", "state": "CERTIFIED_C4", "last_audit": "2026-05-06" },
+    { "name": "igsoa_gw_core_cpp", "state": "CERTIFIED_C4", "last_audit": "2026-05-06" },
+    { "name": "igsoa_complex_1d_cpp", "state": "CERTIFIED_C4", "last_audit": "2026-05-06" },
+    { "name": "igsoa_complex_2d_cpp", "state": "CERTIFIED_C4", "last_audit": "2026-05-06" },
+    { "name": "igsoa_complex_3d_cpp", "state": "CERTIFIED_C4", "last_audit": "2026-05-06" },
+    { "name": "satp_higgs_1d_cpp", "state": "CERTIFIED_C4", "last_audit": "2026-05-06" }
+  ],
   "governance_rules": [
     {
-      "rule_id": "CERT-RULE-001",
-      "statement": "A governed engine may not exceed C1 certification if runtime binaries, dependencies, or provenance contracts are unresolved.",
-      "enforcement_level": "FATAL_BLOCK"
+      "rule_id": "TCR-RULE-001",
+      "rule": "C4 certification requires verified implementation equivalence against a reference baseline."
     }
   ],
-  "bindings": [
-    {
-      "binding_class": "runtime_binary_manifest",
-      "target_registry": "registry/runtime_binary_manifest.json"
-    }
-  ]
+  "source_relation": "(E≠0) ⇔R δ(E>0)",
+  "non_separability_acknowledged": true
 }

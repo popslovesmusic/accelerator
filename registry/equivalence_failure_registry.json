@@ -1,0 +1,41 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Authoritative registry for implementation-equivalence failures and drift boundaries.",
+    "governance_status": {
+      "series_status": "EQUIVALENCE_HARDENING_ONLY",
+      "physics_status": "NON_PHYSICAL_ANALOG_MODEL",
+      "non_separability_acknowledged": true,
+      "source_relation": "(E≠0) ⇔R δ(E>0)"
+    }
+  },
+  "failure_records": [],
+  "failure_classes": [
+    {
+      "id": "metric_divergence",
+      "description": "Numerical difference between implementations exceeding relative/absolute tolerances."
+    },
+    {
+      "id": "tolerance_breach",
+      "description": "A specific simulation run (seed/config) that failed equivalence checks."
+    },
+    {
+      "id": "phase_drift",
+      "description": "Divergence in emergent regime classification or phase transition boundaries."
+    },
+    {
+      "id": "seed_instability",
+      "description": "Numerical sensitivity where small changes in seeds produce non-equivalent outputs across backends."
+    },
+    {
+      "id": "nondeterminism",
+      "description": "Failure of an implementation to produce bit-identical results across identical runs (if required)."
+    },
+    {
+      "id": "optimization_mutation",
+      "description": "Performance optimizations (e.g., SIMD, GPU precision) that changed the semantic behavior of the process."
+    }
+  ],
+  "source_relation": "(E≠0) ⇔R δ(E>0)",
+  "non_separability_acknowledged": true
+}

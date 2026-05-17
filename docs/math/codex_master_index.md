@@ -57,3 +57,6 @@ Graph-structured navigation artifacts (cartography only; no theorem elevation).
 
 ## Governance Statement
 This codex is a human-readable reconstruction of the mathematical system. It does not alter formal theorem status, governance rules, or validation rigor. All claims are restricted to local theorem scope. No global closure or physics validation is implied.
+
+## Integration (MPF-ACELL-INTEG)
+- [Acellorator Math-Core Integration Phase Declaration](acellorator_math_core_integration_phase_declaration.md)

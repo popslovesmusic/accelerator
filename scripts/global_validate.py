@@ -12,6 +12,7 @@ class RegistryValidator:
         self.tool_manifest_path = self.root / "registry/tool_manifest.json"
         self.lexicon_val_path = self.root / "registry/lexicon_validation_registry.json"
         self.claim_reg_path = self.root / "registry/claim_registry.json"
+        self.claim_scope_binding_path = self.root / "registry/claim_scope_binding_registry.json"
         self.gap_queue_path = self.root / "registry/lexicon_gap_queue.json"
 
     def validate_json_load(self, path):
@@ -34,12 +35,30 @@ class RegistryValidator:
         claims, err = self.validate_json_load(self.claim_reg_path)
         if err: results["errors"].append(f"Claim Registry Load Error: {err}")
 
+        scope_bindings, err = self.validate_json_load(self.claim_scope_binding_path)
+        if err: results["errors"].append(f"Claim Scope Binding Registry Load Error: {err}")
+
         gap_queue, err = self.validate_json_load(self.gap_queue_path)
         if err: results["errors"].append(f"Gap Queue Load Error: {err}")
 
         if results["errors"]:
             results["status"] = "failed"
             return results
+
+        # 2a. Claim-scope binding must be referenced by claim registry meta
+        meta = claims.get("meta", {}) if isinstance(claims, dict) else {}
+        binding_ref = meta.get("claim_scope_binding_registry")
+        if not binding_ref:
+            results["errors"].append("Governance Error: claim_registry.meta.claim_scope_binding_registry is missing.")
+        else:
+            # Only require that it resolves to the canonical path or ends with the filename.
+            if "claim_scope_binding_registry.json" not in str(binding_ref):
+                results["errors"].append("Governance Error: claim_registry.meta.claim_scope_binding_registry does not reference claim_scope_binding_registry.json.")
+
+        mandatory_phrase = None
+        if isinstance(scope_bindings, dict):
+            mandatory_phrase = (scope_bindings.get("meta") or {}).get("mandatory_scope_phrase")
+        mandatory_phrase = mandatory_phrase or "Within these models..."
 
         # 2. Integrity Checks: All tools in lexicon registry must exist in tool manifest
         manifest_tools = {t["name"] for t in manifest.get("tools", [])}
@@ -48,6 +67,30 @@ class RegistryValidator:
                 for model in role_data.get("models_used", []):
                     if model not in manifest_tools and "_v1" not in model: # v1 often python counterparts
                         results["errors"].append(f"Integrity Error: Term '{term}' role '{role}' uses unregistered tool '{model}'")
+
+        # 3. Claim registry: if a claim statement is present, enforce the mandatory scope phrase.
+        for c in claims.get("claims", []):
+            stmt = c.get("claim_statement")
+            if not stmt:
+                continue
+            if mandatory_phrase not in stmt:
+                results["errors"].append(f"Claim Scope Error: claim_id '{c.get('claim_id')}' claim_statement missing mandatory scope phrase '{mandatory_phrase}'.")
+
+        # 4. Python↔C++ equivalence gate (manifest must declare reference implementation for C++ tools at/above C1)
+        for tool in manifest.get("tools", []):
+            if tool.get("implementation_language") != "cpp":
+                continue
+            level = str(tool.get("certification_level", "C0"))
+            if level.startswith("C") and len(level) >= 2:
+                try:
+                    numeric = int(level[1])
+                except:
+                    numeric = 0
+            else:
+                numeric = 0
+            if numeric >= 1:
+                if not tool.get("reference_implementation") or not tool.get("has_reference_implementation"):
+                    results["errors"].append(f"Equivalence Gate Error: C++ tool '{tool.get('name')}' (level {level}) missing reference_implementation/has_reference_implementation.")
 
         if results["errors"]:
             results["status"] = "failed"
@@ -148,8 +191,13 @@ class HygieneValidator:
 class MathValidator:
     def __init__(self, root_dir):
         self.root = Path(root_dir)
+        # Legacy math registry (kept for backward compatibility if present)
         self.math_registry_path = self.root / "registry/math_registry.json"
         self.math_hashes_path = self.root / "registry/math_hashes.json"
+        # Stabilized math-core lock (registry + codex)
+        self.math_core_dir = self.root / "registry/math"
+        self.math_codex_dir = self.root / "docs/math"
+        self.math_core_hashes_path = self.root / "registry/math_core_hashes.json"
 
     def calculate_hash(self, path):
         import hashlib
@@ -160,46 +208,79 @@ class MathValidator:
             return None
 
     def run(self):
-        results = {"status": "success", "errors": []}
+        results = {"status": "success", "errors": [], "warnings": []}
         
-        if not self.math_registry_path.exists():
+        # If neither legacy nor stabilized math core exists, treat as no-op.
+        if (not self.math_registry_path.exists()) and (not self.math_core_dir.exists()) and (not self.math_codex_dir.exists()):
             return results
 
-        with open(self.math_registry_path, 'r', encoding='utf-8') as f:
-            registry = json.load(f)
+        # Legacy check (if present)
+        if self.math_registry_path.exists():
+            with open(self.math_registry_path, 'r', encoding='utf-8') as f:
+                registry = json.load(f)
 
-        hashes = {}
-        if self.math_hashes_path.exists():
-            with open(self.math_hashes_path, 'r', encoding='utf-8') as f:
-                hashes = json.load(f)
+            hashes = {}
+            if self.math_hashes_path.exists():
+                with open(self.math_hashes_path, 'r', encoding='utf-8') as f:
+                    hashes = json.load(f)
 
-        new_hashes = {}
-        items = registry.get('lemmas', []) + registry.get('proofs', [])
-        
-        for item in items:
-            item_id = item['item_id']
-            path = self.root / item['path']
-            
-            if not path.exists():
-                results["errors"].append(f"Math Registry Sync Error: File for '{item_id}' not found at {item['path']}")
-                continue
+            new_hashes = {}
+            items = registry.get('lemmas', []) + registry.get('proofs', [])
+            for item in items:
+                item_id = item['item_id']
+                path = self.root / item['path']
+                if not path.exists():
+                    results["errors"].append(f"Math Registry Sync Error: File for '{item_id}' not found at {item['path']}")
+                    continue
 
-            current_hash = self.calculate_hash(path)
-            new_hashes[item_id] = current_hash
+                current_hash = self.calculate_hash(path)
+                new_hashes[item_id] = current_hash
 
-            if item_id in hashes:
-                if hashes[item_id] != current_hash:
-                    # Check if it's a template
-                    if "TEMPLATE" in path.name: continue
+                if item_id in hashes and hashes[item_id] != current_hash:
+                    if "TEMPLATE" in path.name:
+                        continue
                     results["errors"].append(f"Governance Violation: Math file '{item['path']}' was modified (Additive-Only Rule Violation).")
 
-        # Update hashes (only if no errors, to prevent locking in broken states)
-        if not results["errors"]:
-            with open(self.math_hashes_path, 'w', encoding='utf-8') as f:
-                json.dump(new_hashes, f, indent=2)
+            if not results["errors"]:
+                with open(self.math_hashes_path, 'w', encoding='utf-8') as f:
+                    json.dump(new_hashes, f, indent=2)
+
+        # Stabilized math-core lock (hash registry/math/*.json and docs/math/*.md)
+        core_paths = []
+        if self.math_core_dir.is_dir():
+            core_paths.extend(sorted(self.math_core_dir.glob("*.json")))
+        if self.math_codex_dir.is_dir():
+            core_paths.extend(sorted(self.math_codex_dir.glob("*.md")))
+
+        if core_paths:
+            prior = {}
+            if self.math_core_hashes_path.exists():
+                try:
+                    with open(self.math_core_hashes_path, "r", encoding="utf-8-sig") as f:
+                        prior = json.load(f)
+                except Exception as e:
+                    results["errors"].append(f"Math Core Hash Load Error: {e}")
+
+            current = {"meta": {"generated_at": datetime.now().isoformat()}, "files": {}}
+            for p in core_paths:
+                rel = str(p.relative_to(self.root)).replace("\\", "/")
+                current["files"][rel] = self.calculate_hash(p)
+
+            if prior and isinstance(prior, dict) and "files" in prior:
+                for rel, h in current["files"].items():
+                    if rel in prior["files"] and prior["files"][rel] != h:
+                        results["errors"].append(f"Math Core Lock Violation: '{rel}' changed since last lock baseline.")
+            else:
+                results["warnings"].append("Math Core Lock: baseline missing; writing initial math_core_hashes.json.")
+
+            if not results["errors"]:
+                with open(self.math_core_hashes_path, "w", encoding="utf-8") as f:
+                    json.dump(current, f, indent=2)
 
         if results["errors"]:
             results["status"] = "failed"
+        elif results["warnings"]:
+            results["status"] = "warning"
         return results
 
 class DBValidator:
@@ -251,6 +332,58 @@ class MathProgramValidator:
         res = validate_math_program()
         return res["math_program_validation"]
 
+class ImplementationValidator:
+    def __init__(self, root_dir):
+        self.root = Path(root_dir)
+        self.tool_manifest_path = self.root / "registry/tool_manifest.json"
+        self.cert_reg_path = self.root / "registry/tool_certification_registry.json"
+        self.equiv_failures_path = self.root / "registry/equivalence_failure_registry.json"
+
+    def validate_json_load(self, path):
+        try:
+            with open(path, 'r', encoding='utf-8-sig') as f:
+                return json.load(f), None
+        except Exception as e:
+            return None, str(e)
+
+    def run(self):
+        results = {"status": "success", "errors": [], "warnings": []}
+        
+        manifest, err = self.validate_json_load(self.tool_manifest_path)
+        if err: return {"status": "failed", "errors": [f"Manifest Load: {err}"]}
+        
+        cert_reg, err = self.validate_json_load(self.cert_reg_path)
+        if err: results["errors"].append(f"Certification Registry Load: {err}")
+
+        # 1. Compiled tools have reference declared
+        for tool in manifest.get("tools", []):
+            if tool.get("implementation_language") in ["cpp", "hybrid", "cuda"]:
+                if tool.get("equivalence_required") is True:
+                    ref = tool.get("reference_baseline")
+                    if not ref or ref == "NOT_DECLARED":
+                        results["errors"].append(f"Equivalence Error: Tool '{tool['name']}' missing reference_baseline.")
+
+        # 2. Certification state valid
+        if cert_reg:
+            manifest_tool_names = {t["name"] for t in manifest.get("tools", [])}
+            for entry in cert_reg.get("tools", []):
+                tname = entry.get("name")
+                if tname not in manifest_tool_names:
+                    results["errors"].append(f"Certification Error: Registry tool '{tname}' missing from manifest.")
+                
+                state = entry.get("state")
+                if state == "CERTIFIED_C4":
+                    # Check tool manifest for equivalence verified status
+                    mtool = next((t for t in manifest["tools"] if t["name"] == tname), None)
+                    if mtool and mtool.get("latest_equivalence_packet") == "NONE":
+                        results["warnings"].append(f"Certification Warning: Tool '{tname}' is C4 but has no equivalence packet indexed.")
+
+        if results["errors"]:
+            results["status"] = "failed"
+        elif results["warnings"]:
+            results["status"] = "warning"
+        return results
+
 def main():
     parser = argparse.ArgumentParser(description="Global Ecosystem Validation Harness")
     parser.add_argument("--root", default=".", help="Project root directory")
@@ -265,7 +398,8 @@ def main():
         "hygiene_validation": HygieneValidator(root).run(),
         "math_validation": MathValidator(root).run(),
         "db_validation": DBValidator(root).run(),
-        "math_program_validation": MathProgramValidator(root).run()
+        "math_program_validation": MathProgramValidator(root).run(),
+        "implementation_validation": ImplementationValidator(root).run()
     }
 
     report["overall_status"] = "pass" if all(v["status"] in ["success", "warning"] for k, v in report.items() if isinstance(v, dict)) else "fail"

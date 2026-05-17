@@ -1,0 +1,68 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Binds claim classes to allowed evidence types, required validation levels, and mandatory claim-humility phrasing. This registry constrains interpretation without asserting truth.",
+    "mandatory_scope_phrase": "Within these models..."
+  },
+  "bindings": [
+    {
+      "claim_type": "provisional",
+      "allowed_evidence_types": [
+        "definitions",
+        "formal_scaffolds",
+        "proof_obligations",
+        "audit_reports"
+      ],
+      "max_status": "C2_test_designed",
+      "requires_scope_phrase": true,
+      "forbidden_language_flags": [
+        "physics_derivation",
+        "unification_promotion",
+        "simulation_as_proof",
+        "ontology_closure"
+      ]
+    },
+    {
+      "claim_type": "empirical",
+      "allowed_evidence_types": [
+        "recoverable_run_artifacts",
+        "validation_reports",
+        "falsification_reports",
+        "uncertainty_reports",
+        "provenance_reports"
+      ],
+      "min_required_status_for_external_ready": "C6_external_ready",
+      "requires_scope_phrase": true,
+      "required_run_fields": [
+        "config_hash",
+        "source_commit",
+        "seed_set",
+        "tool_manifest_snapshot",
+        "outputs",
+        "validation_records"
+      ],
+      "forbidden_language_flags": [
+        "physics_derivation",
+        "unification_promotion",
+        "simulation_as_proof",
+        "global_ontology_closure"
+      ]
+    },
+    {
+      "claim_type": "verified",
+      "allowed_evidence_types": [
+        "recoverable_run_artifacts",
+        "equivalence_evidence",
+        "cross_mechanism_validation"
+      ],
+      "requires_scope_phrase": true,
+      "requires_python_cpp_equivalence_when_applicable": true,
+      "forbidden_language_flags": [
+        "physics_derivation",
+        "unification_promotion",
+        "simulation_as_proof",
+        "global_ontology_closure"
+      ]
+    }
+  ]
+}

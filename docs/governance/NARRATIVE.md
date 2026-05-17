@@ -18,6 +18,14 @@ In this repo, we do not believe in "things" that interact. We believe in **proce
 
 If you can’t describe your simulation results using these terms, you aren't doing "One Process" science yet.
 
+### 1.1 The Math Core (Interpretation, Not Proof)
+The repository includes a stabilized **math core** (`docs/math/` and `registry/math/`) that defines operators, law families, failure families, gaps, and proof obligations. It functions as an **interpretive and governance layer**:
+- it constrains what simulation outputs are allowed to mean,
+- it labels formal status (e.g., NOT_PROVEN / restricted-domain),
+- and it blocks claim inflation (no theorem elevation, no ontology closure, no physics escalation).
+
+All writing that uses simulation evidence must use claim-humble language, beginning with: **"Within these models..."**.
+
 ### 2. The Two Worlds: Python and C++
 Our ecosystem is built on a **Requirement of Equivalence**. 
 *   **The Python World:** This is where we think. We have 15+ prototypes (NumPy-based) that define the logical baseline. They are readable, flexible, and serve as the "Source of Truth" for how a model *should* behave.

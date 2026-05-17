@@ -33,6 +33,16 @@ def hash_file(path):
     except:
         return "unknown"
 
+def load_json_if_exists(path):
+    try:
+        p = Path(path)
+        if not p.exists():
+            return None
+        with open(p, "r", encoding="utf-8-sig") as f:
+            return json.load(f)
+    except:
+        return None
+
 class MultiSimRunner:
     def __init__(self, config_path, dry_run=False, max_workers=None, stop_on_failure=None):
         self.config_path = Path(config_path)
@@ -59,6 +69,7 @@ class MultiSimRunner:
         (self.output_root / "jobs").mkdir(exist_ok=True)
 
         manifest_path = Path(self.config.get("manifest_path", "registry/tool_manifest.json"))
+        self.manifest_hash = hash_file(str(manifest_path))
         log(f"Loading tool manifest from {manifest_path}")
         with open(manifest_path, 'r') as f:
             self.manifest = json.load(f)
@@ -85,6 +96,8 @@ class MultiSimRunner:
             "config_path": str(self.config_path),
             "config_hash": self.config_hash,
             "source_commit": self.source_commit,
+            "tool_manifest_path": str(manifest_path),
+            "tool_manifest_hash": self.manifest_hash,
             "output_root": str(self.output_root),
             "jobs_count": len(self.config["jobs"]),
             "expanded_jobs_count": len(self.expanded_jobs),
@@ -353,7 +366,8 @@ class MultiSimRunner:
             "output_dir": str(out_dir),
             "tool": job["tool"],
             "claim_role": job.get("claim_role", "exploratory"),
-            "config_path": job_config
+            "config_path": job_config,
+            "falsification_vector": job.get("falsification_vector") or job.get("args", {}).get("falsification_vector")
         }
         return result
 
@@ -432,6 +446,8 @@ class MultiSimRunner:
             "timestamp": datetime.datetime.now().isoformat(),
             "source_commit": self.source_commit,
             "config_hash": self.config_hash,
+            "tool_manifest_path": str(self.config.get("manifest_path", "registry/tool_manifest.json")),
+            "tool_manifest_hash": getattr(self, "manifest_hash", "unknown"),
             "results": self.results
         }
         with open(self.output_root / "run_manifest.json", 'w') as f:
@@ -452,6 +468,22 @@ class MultiSimRunner:
 
     def generate_claim_gate_input(self):
         log("Generating claim gate input packet...")
+        scope_binding_path = self.config.get("governance", {}).get(
+            "claim_scope_binding_registry",
+            "registry/claim_scope_binding_registry.json"
+        )
+        scope_binding = load_json_if_exists(scope_binding_path)
+        mandatory_scope_phrase = None
+        if scope_binding and isinstance(scope_binding, dict):
+            mandatory_scope_phrase = (scope_binding.get("meta") or {}).get("mandatory_scope_phrase")
+
+        concept_mapping_path = self.config.get("math_core", {}).get(
+            "concept_mapping_path",
+            "registry/simulation_math_concept_mapping.json"
+        )
+        concept_mapping = load_json_if_exists(concept_mapping_path) or {"tool_mappings": {}}
+        tool_mappings = concept_mapping.get("tool_mappings", {}) if isinstance(concept_mapping, dict) else {}
+
         tools_used = {}
         for res in self.results:
             tname = res["tool"]
@@ -464,6 +496,9 @@ class MultiSimRunner:
                     "implementation_language": t.get("implementation_language", ""),
                     "backend": t.get("backend", ""),
                     "certification_level": t.get("certification_level", ""),
+                    "reference_implementation": t.get("reference_implementation"),
+                    "has_reference_implementation": t.get("has_reference_implementation"),
+                    "math_core_mapping": tool_mappings.get(tname, {}),
                     "recoverable_outputs": []
                 }
             tools_used[tname]["recoverable_outputs"].append(res["output_dir"])
@@ -479,14 +514,27 @@ class MultiSimRunner:
             "generated_by": "multi_sim_runner.py",
             "source_commit": self.source_commit,
             "config_hash": self.config_hash,
+            "tool_manifest_hash": getattr(self, "manifest_hash", "unknown"),
             "claim_interpretation_allowed": False,
+            "mandatory_scope_phrase": mandatory_scope_phrase or "Within these models...",
+            "claim_scope_binding_registry": scope_binding_path,
+            "math_core": {
+                "concept_mapping_path": concept_mapping_path,
+                "operator_registry_path": "registry/math/operator_registry.json"
+            },
             "tools": list(tools_used.values()),
             "evidence": {
                 "model_classes_count": len(set(mechanism_labels)),
                 "mechanism_classes_count": len(set(mechanism_labels)),
                 "seeds_used": len(set(res["seed"] for res in self.results if res["seed"] is not None)),
+                "seed_set": sorted(list(set(res["seed"] for res in self.results if res["seed"] is not None))),
                 "recoverable_output_paths": [res["output_dir"] for res in self.results],
                 "falsification_run": any(res["claim_role"] == "falsification" for res in self.results),
+                "falsification_vectors": sorted(list(set(
+                    (res.get("falsification_vector") or "").strip()
+                    for res in self.results
+                    if res.get("falsification_vector")
+                ))),
                 "observables": [] # To be filled by analysis
             },
             "notes": ["This packet is evidence input only. It does not classify claims."]
@@ -570,7 +618,13 @@ class MultiSimRunner:
         seeds = sorted(list(set(res["seed"] for res in self.results if res["seed"] is not None)))
         outputs = [res["output_dir"] for res in self.results]
         failures = [res["job_id"] for res in self.results if res["exit_code"] != 0]
-        
+
+        concept_mapping_path = self.config.get("math_core", {}).get(
+            "concept_mapping_path",
+            "registry/simulation_math_concept_mapping.json"
+        )
+        concept_mapping = load_json_if_exists(concept_mapping_path) or {"tool_mappings": {}}
+
         found_artifacts = []
         missing_artifacts = []
         
@@ -589,12 +643,20 @@ class MultiSimRunner:
 
         packet = {
             "run_id": self.config["run_id"],
+            "source_commit": self.source_commit,
+            "config_hash": self.config_hash,
+            "tool_manifest_hash": getattr(self, "manifest_hash", "unknown"),
             "tools_used": tools_used,
             "seeds_executed": seeds,
             "outputs_generated": outputs,
             "validation_artifacts_found": found_artifacts,
             "validation_artifacts_missing": missing_artifacts,
             "execution_failures": failures,
+            "math_core": {
+                "concept_mapping_path": concept_mapping_path,
+                "operator_registry_path": "registry/math/operator_registry.json",
+                "tool_mappings_present": sorted(list((concept_mapping.get("tool_mappings") or {}).keys())) if isinstance(concept_mapping, dict) else []
+            },
             "provenance_ready": len(missing_artifacts) == 0 and len(failures) == 0
         }
         

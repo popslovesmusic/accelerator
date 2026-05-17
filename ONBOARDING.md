@@ -35,6 +35,7 @@ If you’re new, prefer running an existing config end-to-end before changing an
 - `registry/`: canonical manifests, lexicon, and compliance artifacts
 - `docs/`: narrative, theory notes, and paper-like writeups
 - `reports/`: audits and tool rigor summaries
+- `docs/math/` + `registry/math/`: the stabilized math core (operators/laws/gaps/obligations) used to interpret simulation evidence without elevating theorem/physics claims
 
 ## Evidence and claim strength (what “governed” means here)
 
@@ -72,4 +73,3 @@ If a document sounds more confident than the evidence trail suggests, the best n
 - and whether the result was cross-checked in a different mechanism class.
 
 That is not a criticism of the text—just a reminder of the project’s bias toward evidence you can rerun.
-

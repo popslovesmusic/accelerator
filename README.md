@@ -2,12 +2,19 @@
 
 This repository is a governed research environment for exploring **"THE LAW OF THE ONE PROCESS."**
 
+## Math-Core Integration (Interpretation Layer, Not Proof)
+
+This repo includes a stabilized **math core** (see `docs/math/` and `registry/math/`) that governs interpretation and terminology. Simulations provide **bounded evidence only** and must be written as: **"Within these models..."**.
+
+The math core does not elevate theorems, close ontology, or justify physics claims. C++ engines still require Python↔C++ equivalence evidence before certification.
+
 ## 📂 Repository Structure
 
 - **`docs/`**: Canonical documentation, including:
   - **`governance/`**: Project mission, agent mandates, and onboarding narratives.
   - **`reports/`**: Tool scientific rigor reports and ecosystem audits.
   - **`theory/`**: Mathematical grounding and research findings.
+  - **`math/`**: Mathematical codex + math program validation (restricted, non-physics).
 - **`tools/`**: Simulation engines (C++ and Python comparison suite).
   - Each tool contains its own `validation/` directory with C4 evidence artifacts.
 - **`configs/`**: Standardized experiment configurations.
@@ -18,7 +25,7 @@ This repository is a governed research environment for exploring **"THE LAW OF T
 
 ## 🔬 Key Methodologies
 
-- **Multi-Dimensional TDA:** Using Persistent Homology (Betti-0, Betti-1) to prove structural identity across independent mechanism classes.
+- **Multi-Dimensional TDA:** Using Persistent Homology (Betti-0, Betti-1) to assess structural similarity across independent mechanism classes (evidence only; not proof).
 - **Governed Multi-Sim:** Automated cross-verification between Agents, Kuramoto, and Dynamic Network models.
 
 ## 🚀 Quick Start

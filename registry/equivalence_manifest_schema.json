@@ -1,0 +1,61 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Tool Equivalence Manifest Schema",
+  "description": "Mandatory schema for declaring Python↔C++ equivalence requirements and tracking validation state.",
+  "type": "object",
+  "required": [
+    "tool_name",
+    "model_class",
+    "implementation_language",
+    "reference_python_tool",
+    "equivalence_metrics",
+    "tolerance_policy",
+    "seed_policy",
+    "failure_policy",
+    "governance_boilerplate"
+  ],
+  "properties": {
+    "tool_name": { "type": "string" },
+    "model_class": { "type": "string" },
+    "implementation_language": { "type": "string", "enum": ["cpp", "hybrid", "cuda", "sycl"] },
+    "reference_python_tool": { "type": "string" },
+    "equivalence_metrics": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "tolerance_policy": {
+      "type": "object",
+      "properties": {
+        "absolute_tolerance": { "type": "number" },
+        "relative_tolerance": { "type": "number" },
+        "distributional_match_threshold": { "type": "number" }
+      }
+    },
+    "seed_policy": {
+      "type": "object",
+      "properties": {
+        "fixed_seeds_required": { "type": "boolean" },
+        "minimum_seed_count": { "type": "integer" }
+      }
+    },
+    "failure_policy": {
+      "type": "string",
+      "enum": ["HALT_ON_DIVERGENCE", "LOG_AND_INDEX", "DOWNGRADE_CERTIFICATION"]
+    },
+    "last_equivalence_validation": {
+      "type": "object",
+      "properties": {
+        "timestamp": { "type": "string", "format": "date-time" },
+        "verdict": { "type": "string", "enum": ["PASS", "FAIL", "PARTIAL"] },
+        "evidence_packet_path": { "type": "string" }
+      }
+    },
+    "governance_boilerplate": {
+      "type": "object",
+      "properties": {
+        "source_relation": { "type": "string", "const": "(E≠0) ⇔R δ(E>0)" },
+        "non_separability_acknowledged": { "type": "boolean", "const": true }
+      }
+    }
+  }
+}
