@@ -384,6 +384,49 @@ class ImplementationValidator:
             results["status"] = "warning"
         return results
 
+class EvidenceValidator:
+    def __init__(self, root_dir):
+        self.root = Path(root_dir)
+        self.pb_reg_path = self.root / "registry/prediction_binding_registry.json"
+        self.ds_reg_path = self.root / "registry/public_dataset_registry.json"
+
+    def validate_json_load(self, path):
+        try:
+            with open(path, 'r', encoding='utf-8-sig') as f:
+                return json.load(f), None
+        except Exception as e:
+            return None, str(e)
+
+    def run(self):
+        results = {"status": "success", "errors": [], "warnings": []}
+        
+        pb, err = self.validate_json_load(self.pb_reg_path)
+        if err: results["errors"].append(f"Prediction Binding Registry Load: {err}")
+        
+        ds, err = self.validate_json_load(self.ds_reg_path)
+        if err: results["errors"].append(f"Public Dataset Registry Load: {err}")
+
+        if results["errors"]:
+            results["status"] = "failed"
+            return results
+
+        # 1. Prediction bindings have falsification conditions
+        for binding in pb.get("bindings", []):
+            if not binding.get("falsification_condition"):
+                results["errors"].append(f"Evidence Error: Prediction binding '{binding['binding_id']}' missing falsification_condition.")
+
+        # 2. Datasets have associated prediction bindings
+        if ds:
+            for dataset in ds.get("datasets", []):
+                if not dataset.get("associated_prediction_bindings"):
+                    results["warnings"].append(f"Evidence Warning: Dataset '{dataset['dataset_id']}' has no associated prediction bindings.")
+
+        if results["errors"]:
+            results["status"] = "failed"
+        elif results["warnings"]:
+            results["status"] = "warning"
+        return results
+
 def main():
     parser = argparse.ArgumentParser(description="Global Ecosystem Validation Harness")
     parser.add_argument("--root", default=".", help="Project root directory")
@@ -399,7 +442,8 @@ def main():
         "math_validation": MathValidator(root).run(),
         "db_validation": DBValidator(root).run(),
         "math_program_validation": MathProgramValidator(root).run(),
-        "implementation_validation": ImplementationValidator(root).run()
+        "implementation_validation": ImplementationValidator(root).run(),
+        "evidence_validation": EvidenceValidator(root).run()
     }
 
     report["overall_status"] = "pass" if all(v["status"] in ["success", "warning"] for k, v in report.items() if isinstance(v, dict)) else "fail"

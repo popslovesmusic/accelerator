@@ -1,0 +1,41 @@
+{
+  "registry_id": "PCD_FALSIFICATION_PROTOCOL_REGISTRY",
+  "version": "1.0.0",
+  "governance_status": {
+    "series_status": "MATH_BOUND_EVIDENCE_ONLY",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL",
+    "non_separability_acknowledged": true,
+    "source_relation": "(E≠0) ⇔R δ(E>0)"
+  },
+  "protocols": [
+    {
+      "protocol_id": "shuffle_control",
+      "description": "Randomize spatial/temporal order while preserving first-order statistics to test for relational structure.",
+      "status": "MANDATORY"
+    },
+    {
+      "protocol_id": "random_topology_control",
+      "description": "Substitute neighbor accessibility with random graph connections to test for local reach constraints.",
+      "status": "MANDATORY"
+    },
+    {
+      "protocol_id": "parameter_ablation",
+      "description": "Systematically remove individual operators (e.g., set CSI=0) to verify their irreducible contribution to the signature.",
+      "status": "MANDATORY"
+    },
+    {
+      "protocol_id": "noise_baseline",
+      "description": "Inject white noise up to the threshold of the predicted signature to measure robustness.",
+      "status": "MANDATORY"
+    }
+  ],
+  "governance_rules": [
+    {
+      "rule_id": "FPR-RULE-001",
+      "rule": "Every evidence campaign must report the result of at least three mandatory falsification protocols."
+    }
+  ],
+  "source_relation": "(E≠0) ⇔R δ(E>0)",
+  "non_separability_acknowledged": true,
+  "required_statement": "Observed signatures are interpreted only through restricted local analog structure."
+}

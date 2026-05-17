@@ -1,0 +1,41 @@
+{
+  "registry_id": "PCD_OBSERVABLE_PROXY_METRIC_REGISTRY",
+  "version": "1.0.0",
+  "governance_status": {
+    "series_status": "MATH_BOUND_EVIDENCE_ONLY",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL",
+    "non_separability_acknowledged": true,
+    "source_relation": "(E≠0) ⇔R δ(E>0)"
+  },
+  "metric_classes": [
+    {
+      "class_id": "threshold_transition_metrics",
+      "metrics": ["transition_point", "jump_discontinuity_magnitude", "threshold_mismatch_gradient"],
+      "predicted_signature": "PB-001-THRESHOLD"
+    },
+    {
+      "class_id": "coherence_metrics",
+      "metrics": ["multiscale_mutual_information", "coherence_length_scaling", "aspect_binding_stability"],
+      "predicted_signature": "PB-002-COHERENCE"
+    },
+    {
+      "class_id": "fragmentation_metrics",
+      "metrics": ["neighborhood_connectivity_loss", "transport_discontinuity_count"],
+      "governed_failure": "FF-001_relational_fragmentation"
+    },
+    {
+      "class_id": "reconstruction_loss_metrics",
+      "metrics": ["aspect_divergence_entropy", "selection_inversion_error"],
+      "governed_failure": "FF-004_observability_loss"
+    }
+  ],
+  "governance_rules": [
+    {
+      "rule_id": "OPM-RULE-001",
+      "rule": "Every measurable proxy must be formally derivable from the operator basis of its bound prediction."
+    }
+  ],
+  "source_relation": "(E≠0) ⇔R δ(E>0)",
+  "non_separability_acknowledged": true,
+  "required_statement": "Observed signatures are interpreted only through restricted local analog structure."
+}
