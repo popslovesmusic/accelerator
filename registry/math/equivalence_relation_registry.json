@@ -1,200 +1,80 @@
 {
-  "meta": {
-    "version": "1.0",
-    "description": "Registry for formal equivalence relations used by operators, theorem scaffolds, reconstruction, projection, and pruning.",
-    "status": "provisional",
-    "last_updated": "2026-05-12"
+  "patch_id": "MPF-FSUB-004",
+  "name": "Equivalence Relation Registry",
+  "status": "active",
+  "series_status": "FORMAL_SUBSTRATE_SCAFFOLD",
+  "purpose": "Define restricted equivalence relations used in MT-001, MT-002, and later local theorem candidates.",
+  "governance_status": {
+    "theorem_status": "NOT_PROVEN",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL",
+    "non_separability_acknowledged": true,
+    "source_relation": "(E≠0) ⇔R δ(E>0)"
   },
-  "equivalence_relation_classes": [
+  "equivalence_relations": [
     {
-      "class": "admissibility_equivalence",
-      "meaning": "Two objects are equivalent if they occupy the same admissibility class under declared window and projection constraints."
+      "relation_id": "projection_equivalence",
+      "definition": "Two preimages are equivalent if they map to the same projected image Im_A.",
+      "preserved_features": ["observable image", "admissibility status"],
+      "discarded_features": ["internal distinction detail", "non-projected aspect roles"],
+      "supports_theorem": "MT-001"
     },
     {
-      "class": "local_process_state_equivalence",
-      "meaning": "Two process states are equivalent within a local transport or identity context."
+      "relation_id": "transport_equivalence",
+      "definition": "Two states are equivalent if they preserve relational identity under NavT transport.",
+      "preserved_features": ["relational identity", "orientation frame"],
+      "discarded_features": ["absolute coordinate", "path history"],
+      "supports_theorem": "MT-002"
     },
     {
-      "class": "residue_equivalence",
-      "meaning": "Two residue states are equivalent if they preserve the same admissibility-conditioning role under declared constraints."
+      "relation_id": "trace_equivalence",
+      "definition": "Two artifacts are equivalent if they trace back to the same source-relation aspect role.",
+      "preserved_features": ["source pointer", "non-separability metadata"],
+      "discarded_features": ["local coordinate", "projection depth"],
+      "supports_theorem": "MT-LAW-A"
     },
     {
-      "class": "orientation_equivalence",
-      "meaning": "Two orientation states are equivalent up to declared frame/deviation tolerance."
+      "relation_id": "residue_compatibility",
+      "definition": "Two residue states are equivalent if they provide the same admissibility-conditioning capability.",
+      "preserved_features": ["conditioning role", "memory weight"],
+      "discarded_features": ["accumulation sequence", "decay history"]
     },
     {
-      "class": "projection_equivalence",
-      "meaning": "Distinct preimages may be equivalent under a shared projected observable structure."
-    },
-    {
-      "class": "branch_equivalence",
-      "meaning": "Multiple branches may be collapsed if equivalent under declared admissibility, residue, orientation, or projection criteria."
-    },
-    {
-      "class": "reconstruction_equivalence",
-      "meaning": "Recovered preimages are equivalent up to declared ambiguity class."
+      "relation_id": "orientation_compatibility",
+      "definition": "Two orientation states are equivalent up to declared frame/deviation tolerance.",
+      "preserved_features": ["alignment role", "minimization target"],
+      "discarded_features": ["literal spatial vector", "rotation count"]
     }
   ],
-  "equivalence_relation_entries": [
+  "mandatory_constraints": [
     {
-      "entry_id": "EQ-001",
-      "relation_class": "admissibility_equivalence",
-      "domain_objects": [
-        "process_state",
-        "continuation_event"
-      ],
-      "equivalence_conditions": [
-        "SA-003",
-        "AE-001"
-      ],
-      "supports_theorems": [
-        "MT-001",
-        "MT-003"
-      ],
-      "supports_operators": [
-        "Pi_A",
-        "delta"
-      ],
-      "reflexive_status": "conditional",
-      "symmetric_status": "conditional",
-      "transitive_status": "conditional",
-      "failure_modes": [
-        "EQFM-001",
-        "EQFM-004",
-        "EQFM-008"
-      ],
-      "proof_status": "scaffolded",
-      "claim_boundary": "formal_procedural_only",
-      "provisional_status": true
+      "constraint_id": "EQ-CON-001",
+      "statement": "Equivalence is local and declared."
     },
     {
-      "entry_id": "EQ-002",
-      "relation_class": "local_process_state_equivalence",
-      "domain_objects": [
-        "process_state"
-      ],
-      "equivalence_conditions": [
-        "NI-002"
-      ],
-      "supports_theorems": [
-        "MT-002"
-      ],
-      "supports_operators": [
-        "NavT"
-      ],
-      "reflexive_status": "conditional",
-      "symmetric_status": "conditional",
-      "transitive_status": "conditional",
-      "failure_modes": [
-        "EQFM-001",
-        "EQFM-004"
-      ],
-      "proof_status": "scaffolded",
-      "claim_boundary": "formal_procedural_only",
-      "provisional_status": true
+      "constraint_id": "EQ-CON-002",
+      "statement": "Equivalence does not imply identity."
     },
     {
-      "entry_id": "EQ-003",
-      "relation_class": "residue_equivalence",
-      "domain_objects": [
-        "residue_state"
-      ],
-      "supports_operators": [
-        "residue_update",
-        "NavT"
-      ],
-      "reflexive_status": "conditional",
-      "symmetric_status": "conditional",
-      "transitive_status": "undefined",
-      "failure_modes": [
-        "EQFM-007"
-      ],
-      "proof_status": "none",
-      "claim_boundary": "formal_procedural_only",
-      "provisional_status": true
-    },
-    {
-      "entry_id": "EQ-004",
-      "relation_class": "orientation_equivalence",
-      "domain_objects": [
-        "orientation_frame"
-      ],
-      "supports_operators": [
-        "orientation_minimization",
-        "delta",
-        "NavT"
-      ],
-      "reflexive_status": "conditional",
-      "symmetric_status": "conditional",
-      "transitive_status": "undefined",
-      "failure_modes": [
-        "EQFM-006"
-      ],
-      "proof_status": "none",
-      "claim_boundary": "formal_procedural_only",
-      "provisional_status": true
-    },
-    {
-      "entry_id": "EQ-005",
-      "relation_class": "projection_equivalence",
-      "domain_objects": [
-        "process_state"
-      ],
-      "supports_operators": [
-        "Pi_A",
-        "observable_projection"
-      ],
-      "reflexive_status": "conditional",
-      "symmetric_status": "conditional",
-      "transitive_status": "conditional",
-      "failure_modes": [
-        "EQFM-001",
-        "EQFM-009"
-      ],
-      "proof_status": "scaffolded",
-      "claim_boundary": "formal_procedural_only",
-      "provisional_status": true
-    },
-    {
-      "entry_id": "EQ-006",
-      "relation_class": "branch_equivalence",
-      "domain_objects": [
-        "continuation_event"
-      ],
-      "supports_operators": [
-        "branch_pruning",
-        "delta"
-      ],
-      "reflexive_status": "conditional",
-      "symmetric_status": "conditional",
-      "transitive_status": "undefined",
-      "failure_modes": [
-        "EQFM-010"
-      ],
-      "proof_status": "none",
-      "claim_boundary": "formal_procedural_only",
-      "provisional_status": true
-    },
-    {
-      "entry_id": "EQ-007",
-      "relation_class": "reconstruction_equivalence",
-      "domain_objects": [
-        "process_state"
-      ],
-      "supports_operators": [
-        "observable_projection",
-        "NavT",
-        "delta"
-      ],
-      "reflexive_status": "conditional",
-      "symmetric_status": "conditional",
-      "transitive_status": "conditional",
-      "failure_modes": [
-        "EQFM-011"
-      ],
-      "proof_status": "none",
-      "claim_boundary": "formal_procedural_only",
-      "provisional_status": true
+      "constraint_id": "EQ-CON-003",
+      "statement": "Equivalence does not imply ontology sameness."
     }
-  ]
+  ],
+  "governance_rules": [
+    {
+      "rule_id": "EQ-RULE-001",
+      "rule": "Every equivalence relation must explicitly declare preserved and discarded features."
+    },
+    {
+      "rule_id": "EQ-RULE-002",
+      "rule": "Equivalence mappings remain strictly within the LOCAL_RESTRICTED_DOMAIN."
+    }
+  ],
+  "forbidden_claims": [
+    "Formal equivalence proves physical identity.",
+    "Equivalence relations derive universal symmetry laws.",
+    "Relational equivalence eliminates projection loss."
+  ],
+  "source_relation": "(E≠0) ⇔R δ(E>0)",
+  "non_separability_acknowledged": true
 }

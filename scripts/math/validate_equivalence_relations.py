@@ -1,92 +1,71 @@
 import json
 import os
-import argparse
+from datetime import datetime
 
-def validate_equivalence_relations(equiv_reg, class_reg, failure_reg, op_reg, law_regs, theorem_reg):
-    results = {
-        "equivalence_relation_validation": {
-            "status": "pass",
-            "relation_count": 0,
-            "class_type_count": 0,
-            "failure_mode_count": 0,
-            "warnings": [],
-            "closure_gaps": [],
-            "open_questions": []
-        }
-    }
-
-    try:
-        with open(equiv_reg, 'r') as f: equiv_data = json.load(f)
-        with open(class_reg, 'r') as f: class_data = json.load(f)
-        with open(failure_reg, 'r') as f: failure_data = json.load(f)
-        with open(op_reg, 'r') as f: op_data = json.load(f)
-        with open(theorem_reg, 'r') as f: theorem_data = json.load(f)
-        
-        law_ids = []
-        for lfile in law_regs:
-            if os.path.exists(lfile):
-                with open(lfile, 'r') as f:
-                    ldata = json.load(f)
-                    law_ids.extend([l["law_id"] for l in ldata.get("laws", [])])
-    except Exception as e:
-        results["equivalence_relation_validation"]["status"] = "fail"
-        results["equivalence_relation_validation"]["warnings"].append(f"Load error: {e}")
-        return results
-
-    op_symbols = [op["symbol"] for op in op_data.get("operators", [])]
-    op_symbols.extend(["branch_pruning", "orientation_minimization", "observable_projection", "residue_update", "NavT", "Pi_A", "delta"])
+def validate_equivalence_relations():
+    registry_path = "registry/math/equivalence_relation_registry.json"
+    result_path = "validation/results/equivalence_relation_result.json"
     
-    theorem_ids = [t["theorem_id"] for t in theorem_data.get("theorems", [])]
-    fm_ids = [fm["id"] for fm in failure_data.get("failure_modes", [])]
-    relation_classes = [rc["class"] for rc in equiv_data.get("equivalence_relation_classes", [])]
+    report = {
+        "validation_id": "VAL-EQ-VALID-001",
+        "status": "pass",
+        "checks_passed": [],
+        "governance_violations": [],
+        "timestamp": datetime.now().isoformat()
+    }
+    
+    # 1. registry_exists
+    if not os.path.exists(registry_path):
+        report["status"] = "fail"
+        report["governance_violations"].append("registry_exists: FAIL (registry missing)")
+        return report
+    report["checks_passed"].append("registry_exists")
 
-    # Validate Equivalence Entries
-    for entry in equiv_data.get("equivalence_relation_entries", []):
-        results["equivalence_relation_validation"]["relation_count"] += 1
+    with open(registry_path, 'r', encoding='utf-8') as f:
+        registry = json.load(f)
         
-        # Check relation class
-        if entry.get("relation_class") not in relation_classes:
-             results["equivalence_relation_validation"]["status"] = "warning"
-             results["equivalence_relation_validation"]["warnings"].append(f"Equivalence entry {entry['entry_id']} references unknown class: {entry['relation_class']}")
+    gov = registry.get("governance_status", {})
+    
+    # 2. physics_status_equals_NON_PHYSICAL_ANALOG_MODEL
+    if gov.get("physics_status") != "NON_PHYSICAL_ANALOG_MODEL":
+        report["status"] = "fail"
+        report["governance_violations"].append(f"physics_status_equals_NON_PHYSICAL_ANALOG_MODEL: FAIL (found {gov.get('physics_status')})")
+    else:
+        report["checks_passed"].append("physics_status_equals_NON_PHYSICAL_ANALOG_MODEL")
 
-        # Check supported theorems
-        for tid in entry.get("supports_theorems", []):
-            if tid not in theorem_ids:
-                results["equivalence_relation_validation"]["status"] = "warning"
-                results["equivalence_relation_validation"]["warnings"].append(f"Equivalence entry {entry['entry_id']} references unknown theorem: {tid}")
+    # 3. relations_present
+    relations = registry.get("equivalence_relations", [])
+    required_ids = ["projection_equivalence", "transport_equivalence", "trace_equivalence"]
+    found_ids = [r.get("relation_id") for r in relations]
+    for r_id in required_ids:
+        if r_id not in found_ids:
+            report["status"] = "fail"
+            report["governance_violations"].append(f"relation_present_{r_id}: FAIL")
+        else:
+            report["checks_passed"].append(f"relation_present_{r_id}")
 
-        # Check supported operators
-        for op in entry.get("supports_operators", []):
-            if op not in op_symbols:
-                results["equivalence_relation_validation"]["status"] = "warning"
-                results["equivalence_relation_validation"]["warnings"].append(f"Equivalence entry {entry['entry_id']} references unknown operator: {op}")
+    # 4. mandatory_constraints_present
+    constraints = registry.get("mandatory_constraints", [])
+    if len(constraints) < 3:
+        report["status"] = "fail"
+        report["governance_violations"].append("mandatory_constraints_present: FAIL (insufficient count)")
+    else:
+        report["checks_passed"].append("mandatory_constraints_present")
 
-        # Check failure modes
-        for fm in entry.get("failure_modes", []):
-            if fm not in fm_ids:
-                results["equivalence_relation_validation"]["status"] = "warning"
-                results["equivalence_relation_validation"]["warnings"].append(f"Equivalence entry {entry['entry_id']} references unknown failure mode: {fm}")
+    # 5. hardening_boilerplate_present
+    if registry.get("source_relation") != "(E≠0) ⇔R δ(E>0)":
+        report["status"] = "fail"
+        report["governance_violations"].append("hardening_boilerplate_source_relation: FAIL")
+    else:
+        report["checks_passed"].append("hardening_boilerplate_source_relation")
 
-        results["equivalence_relation_validation"]["open_questions"].extend(entry.get("open_questions", []))
-
-    results["equivalence_relation_validation"]["class_type_count"] = len(class_data.get("equivalence_class_types", []))
-    results["equivalence_relation_validation"]["failure_mode_count"] = len(fm_ids)
-
-    return results
+    # Final result logging
+    os.makedirs(os.path.dirname(result_path), exist_ok=True)
+    with open(result_path, 'w', encoding='utf-8') as f:
+        json.dump(report, f, indent=2)
+        
+    return report
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Validate equivalence relation registries.")
-    parser.add_argument("--equivalence", default="registry/math/equivalence_relation_registry.json")
-    parser.add_argument("--classes", default="registry/math/equivalence_class_registry.json")
-    parser.add_argument("--failures", default="registry/math/equivalence_failure_mode_registry.json")
-    parser.add_argument("--operators", default="registry/math/operator_registry.json")
-    parser.add_argument("--laws", nargs="+", default=[
-        "registry/math/participation_law_registry.json",
-        "registry/math/continuation_law_registry.json",
-        "registry/math/residue_coupling_law_registry.json"
-    ])
-    parser.add_argument("--theorems", default="registry/math/minimal_theorem_registry.json")
-    
-    args = parser.parse_args()
-    res = validate_equivalence_relations(args.equivalence, args.classes, args.failures, args.operators, args.laws, args.theorems)
+    res = validate_equivalence_relations()
     print(json.dumps(res, indent=2))

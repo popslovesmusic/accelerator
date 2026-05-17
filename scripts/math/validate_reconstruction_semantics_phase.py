@@ -39,6 +39,11 @@ def validate_reconstruction_semantics_phase():
         report["governance_violations"].append("phase_definition_present: FAIL")
     else:
         report["checks_passed"].append("phase_definition_present")
+        if "conceptual_breakthrough" not in registry["phase_definition"]:
+            report["status"] = "fail"
+            report["governance_violations"].append("conceptual_breakthrough_missing: FAIL")
+        else:
+            report["checks_passed"].append("conceptual_breakthrough_present")
 
     # 4. terminology_freeze_present
     if "terminology_freeze" not in registry:

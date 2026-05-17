@@ -1,0 +1,69 @@
+{
+  "patch_id": "MPF-FSUB-009",
+  "name": "Minimal Theorem Dependency Binding",
+  "status": "active",
+  "series_status": "FORMAL_SUBSTRATE_SCAFFOLD",
+  "purpose": "Bind MT-001, MT-002, and MT-003 explicitly to the formal substrate objects they require.",
+  "governance_status": {
+    "theorem_status": "NOT_PROVEN",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL",
+    "non_separability_acknowledged": true,
+    "source_relation": "(E≠0) ⇔R δ(E>0)"
+  },
+  "theorem_bindings": [
+    {
+      "theorem_id": "MT-001",
+      "theorem_name": "Projection Idempotence",
+      "required_substrate_objects": [
+        "Pi_A signature",
+        "A_alpha definition",
+        "projection_equivalence",
+        "Im_A definition"
+      ],
+      "mandatory_preconditions": ["idempotence preconditions"],
+      "critical_failure_modes": ["projection_non_idempotence"]
+    },
+    {
+      "theorem_id": "MT-002",
+      "theorem_name": "Transport Identity",
+      "required_substrate_objects": [
+        "NavT signature",
+        "orientation space (omega_alpha)",
+        "transport_equivalence",
+        "CSI_alpha neighborhood"
+      ],
+      "mandatory_preconditions": ["identity transport preconditions"],
+      "critical_failure_modes": ["transport_identity_failure"]
+    },
+    {
+      "theorem_id": "MT-003",
+      "theorem_name": "Non-Empty Admissible Image",
+      "required_substrate_objects": [
+        "delta selection semantics",
+        "admissible image definition (Im_A)",
+        "residue space (R_alpha)",
+        "selection rules"
+      ],
+      "mandatory_preconditions": ["mismatch_non_null (E≠0)"],
+      "critical_failure_modes": ["admissible_image_empty", "selection_undefined"]
+    }
+  ],
+  "governance_rules": [
+    {
+      "rule_id": "TDB-RULE-001",
+      "rule": "No MT target may be promoted to proof candidate without complete substrate binding."
+    },
+    {
+      "rule_id": "TDB-RULE-002",
+      "rule": "Substrate objects must be formally defined and validated before theorem dependency is confirmed."
+    }
+  ],
+  "forbidden_claims": [
+    "Theorem binding proves that the theorem is true.",
+    "Dependency coverage makes the substrate ontologically complete.",
+    "Binding eliminates the risk of hidden undefined primitives."
+  ],
+  "source_relation": "(E≠0) ⇔R δ(E>0)",
+  "non_separability_acknowledged": true
+}

@@ -5,6 +5,7 @@ Freeze admissible semantic terminology and establish semantic-governance boundar
 
 ## 2. Phase Definition
 - **Canonical Statement**: The reconstruction semantics phase permits the formalization of bounded semantic persistence, participatory interpretation, and translation corridors as governance-only analog indicators for projection systems.
+- **Conceptual Breakthrough**: Meaning is not located in sides or truth values, but in the **recursively inseparable relation itself**. (See [Recursively Inseparable Aspect Semantics](recursively_inseparable_aspect_semantics.md))
 - **Short Form**: `reconstruction_semantics := bounded_interpretation_only`
 - **Non-Escalation Rule**: No semantic structure, persistence score, or translation map may be treated as ontologically primitive, physical proof, or final truth.
 
