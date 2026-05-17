@@ -1,0 +1,75 @@
+{
+  "patch_id": "MPF-FRPR-002",
+  "name": "Proof Skeleton Registry",
+  "status": "active",
+  "series_status": "RESTRICTED_FORMAL_PROOF_CONSTRUCTION",
+  "purpose": "Construct explicit proof skeletons for MT-001, MT-002, and MT-003 using only FSUB-declared objects and RPCR-approved assumptions.",
+  "governance_status": {
+    "theorem_status": "LOCAL_PROOF_REVIEW_ONLY",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL",
+    "non_separability_acknowledged": true,
+    "source_relation": "(E≠0) ⇔R δ(E>0)"
+  },
+  "proof_skeletons": [
+    {
+      "target_theorem": "MT-001",
+      "declared_assumptions": ["A1", "A2", "A3"],
+      "dependency_chain": ["Pi_A signature", "A_alpha definition", "projection_equivalence"],
+      "proof_steps": [
+        "1. Apply Pi_A to local state x in Neighborhood_alpha.",
+        "2. Define output x' as projected admissible state in Im_A.",
+        "3. Apply Pi_A to x'.",
+        "4. Show x'' is equivalent to x' under projection_equivalence."
+      ],
+      "equivalence_usage": "projection_equivalence (observable image matching)",
+      "failure_exposure_points": ["recursive_divergence in neighborhood", "admissible_image_empty"],
+      "counterexample_dependencies": ["projection_non_idempotence"]
+    },
+    {
+      "target_theorem": "MT-002",
+      "declared_assumptions": ["finite flux", "neighborhood accessibility"],
+      "dependency_chain": ["NavT signature", "orientation space omega_alpha", "transport_equivalence"],
+      "proof_steps": [
+        "1. Initialize state x and orientation omega at index alpha.",
+        "2. Apply NavT to (x, omega) across index alpha -> beta.",
+        "3. Verify transported state x_beta and omega_beta preserve relational identity.",
+        "4. Show (x_beta, omega_beta) is equivalent to (x, omega) under transport_equivalence."
+      ],
+      "equivalence_usage": "transport_equivalence (relational identity preservation)",
+      "failure_exposure_points": ["orientation_locking", "flux overflow"],
+      "counterexample_dependencies": ["transport_identity_failure"]
+    },
+    {
+      "target_theorem": "MT-003",
+      "declared_assumptions": ["mismatch_non_null (E≠0)", "active selection rule"],
+      "dependency_chain": ["delta semantics", "admissible image Im_A", "residue space R_alpha"],
+      "proof_steps": [
+        "1. Given non-null mismatch pressure E in Neighborhood_alpha.",
+        "2. Identify admissibility set A_alpha and residue state R_alpha.",
+        "3. Map constraints to non-empty admissible image Im_A.",
+        "4. Show delta operator returns at least one actualization in Im_A."
+      ],
+      "equivalence_usage": "none (existence theorem)",
+      "failure_exposure_points": ["branch_explosion", "admissible_image_empty"],
+      "counterexample_dependencies": ["empty_admissible_image"]
+    }
+  ],
+  "governance_rules": [
+    {
+      "rule_id": "SKEL-RULE-001",
+      "rule": "Every skeleton must include explicit failure exposure points where the proof attempt could break."
+    },
+    {
+      "rule_id": "SKEL-RULE-002",
+      "rule": "Skeleton steps must remain restricted to local neighborhood transformations."
+    }
+  ],
+  "forbidden_claims": [
+    "Skeletons prove the targeted theorems.",
+    "The dependency chain is ontologically complete.",
+    "Proof steps represent physical causal events."
+  ],
+  "source_relation": "(E≠0) ⇔R δ(E>0)",
+  "non_separability_acknowledged": true
+}
