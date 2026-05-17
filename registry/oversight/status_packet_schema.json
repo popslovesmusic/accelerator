@@ -1,0 +1,61 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Human-Readable Status Packet Schema",
+  "description": "Standard schema for surfacing operational state to the human overseer in plain language.",
+  "type": "object",
+  "required": [
+    "status_id",
+    "timestamp",
+    "overall_state",
+    "plain_english_summary",
+    "active_warnings",
+    "blocking_issues",
+    "next_best_action"
+  ],
+  "properties": {
+    "status_id": { "type": "string" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "overall_state": { 
+      "type": "string", 
+      "enum": ["STABLE", "WARNING", "BLOCKED", "DEGRADED"] 
+    },
+    "plain_english_summary": { "type": "string" },
+    "active_warnings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": { "type": "string" },
+          "meaning": { "type": "string" },
+          "risk": { "type": "string" }
+        }
+      }
+    },
+    "blocking_issues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "issue": { "type": "string" },
+          "resolution_required": { "type": "string" }
+        }
+      }
+    },
+    "next_best_action": {
+      "type": "object",
+      "properties": {
+        "description": { "type": "string" },
+        "reason": { "type": "string" },
+        "expected_impact": { "type": "string" },
+        "human_judgment_required": { "type": "boolean" }
+      }
+    },
+    "governance_boilerplate": {
+      "type": "object",
+      "properties": {
+        "source_relation": { "type": "string", "const": "(E≠0) ⇔R δ(E>0)" },
+        "non_separability_acknowledged": { "type": "boolean", "const": true }
+      }
+    }
+  }
+}
