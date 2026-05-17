@@ -326,7 +326,8 @@ def validate_math_program():
         "mpf_frpr_formal_proof_review": "validate_formal_restricted_proof_consolidation.py",
         "mpf_palg_conv_repair": "validate_palg_convergence_repair.py",
         "mpf_law_cons_consolidation": "validate_law_family_consolidation.py",
-        "mpf_rfpr_peer_review_prep": "validate_restricted_formal_review_consolidation.py"
+        "mpf_rfpr_peer_review_prep": "validate_restricted_formal_review_consolidation.py",
+        "mpf_pfs_participatory_scrutiny": "validate_participatory_formal_scrutiny_consolidation.py"
     }
 
     report = {
