@@ -4,6 +4,9 @@
 Inject and reject prohibited bridge claims including false unification, physical derivation, projection identity, conflict erasure, and loss-differential overreading.
 
 ## 2. Governance Status
+- **Source Relation**: (E≠0) ⇔R δ(E>0)
+- **Non-Separability Acknowledged**: true (left/right readings are incomplete without <->_R)
+- **No Unification Guardrail**: No QM/GR unification, derivation, replacement, or physics claim; only analog projection behavior.
 - **Theorem Status**: NOT_PROVEN
 - **Scaffold Status**: CANDIDATE_BRIDGE_STRESS_TEST_SCAFFOLD
 - **Scope Status**: STRICTLY_LOCAL_RESTRICTED_DOMAIN

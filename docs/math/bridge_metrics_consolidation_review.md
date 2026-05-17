@@ -13,6 +13,9 @@ Review MPF-PALG-041 through MPF-PALG-049 as a coherent metrics scaffold and dete
 - **Safety Index**: Streamlines governance by combining all indicator types.
 
 ## 3. Governance Status
+- **Source Relation**: (E≠0) ⇔R δ(E>0)
+- **Non-Separability Acknowledged**: true (left/right readings are incomplete without <->_R)
+- **No Unification Guardrail**: No QM/GR unification, derivation, replacement, or physics claim; only analog projection behavior.
 - **Theorem Status**: NOT_PROVEN
 - **Review Status**: CONSOLIDATION_REVIEW_ONLY
 - **Scope Status**: STRICTLY_LOCAL_RESTRICTED_DOMAIN

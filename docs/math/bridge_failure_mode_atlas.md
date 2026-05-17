@@ -4,6 +4,9 @@
 Classify bridge-specific risks including false unification, category confusion, physical escalation, projection identity error, and loss-differential overreading.
 
 ## 2. Governance Status
+- **Source Relation**: (E≠0) ⇔R δ(E>0)
+- **Non-Separability Acknowledged**: true (left/right readings are incomplete without <->_R)
+- **No Unification Guardrail**: No QM/GR unification, derivation, replacement, or physics claim; only analog projection behavior.
 - **Theorem Status**: NOT_PROVEN
 - **Atlas Status**: CANDIDATE_BRIDGE_FAILURE_MODE_ATLAS
 - **Scope Status**: STRICTLY_LOCAL_RESTRICTED_DOMAIN
