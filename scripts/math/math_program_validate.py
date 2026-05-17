@@ -316,7 +316,17 @@ def validate_math_program():
         "mpf_palg_032_qm_domain": "validate_qm_like_projection_domain.py",
         "mpf_palg_033_gr_domain": "validate_gr_like_projection_domain.py",
         "mpf_palg_034_bridge_schema": "validate_bridge_comparison_schema.py",
-        "mpf_palg_035_bridge_gate": "validate_projection_bridge_gate.py"
+        "mpf_palg_035_bridge_gate": "validate_projection_bridge_gate.py",
+        "mpf_palg_bridge_metrics": "validate_bridge_metrics_consolidation.py",
+        "mpf_rtop_reconstruction_topology": "validate_reconstruction_topology_consolidation.py",
+        "mpf_rdyn_reconstruction_dynamics": "validate_reconstruction_dynamics_consolidation.py",
+        "mpf_rsem_reconstruction_semantics": "validate_reconstruction_semantics_consolidation.py",
+        "mpf_fsub_formal_substrate": "validate_formal_substrate_consolidation.py",
+        "mpf_rpcr_proof_candidate_review": "validate_restricted_proof_candidate_consolidation.py",
+        "mpf_frpr_formal_proof_review": "validate_formal_restricted_proof_consolidation.py",
+        "mpf_palg_conv_repair": "validate_palg_convergence_repair.py",
+        "mpf_law_cons_consolidation": "validate_law_family_consolidation.py",
+        "mpf_rfpr_peer_review_prep": "validate_restricted_formal_review_consolidation.py"
     }
 
     report = {
