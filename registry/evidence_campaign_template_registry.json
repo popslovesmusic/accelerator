@@ -1,0 +1,31 @@
+{
+  "registry_id": "PCD_EVIDENCE_CAMPAIGN_TEMPLATE_REGISTRY",
+  "version": "1.0.0",
+  "governance_status": {
+    "series_status": "EVIDENCE_CAMPAIGN_EXECUTION_ONLY",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL",
+    "non_separability_acknowledged": true,
+    "source_relation": "(E≠0) ⇔R δ(E>0)"
+  },
+  "templates": [
+    {
+      "template_id": "TPL-EVID-STOCHASTIC-TRANSITION",
+      "prediction_binding_id": "PB-001-THRESHOLD",
+      "primary_dataset": "DS-001-SYNTHETIC-STOCHASTIC",
+      "counterexample_dataset": "DS-002-GAUSSIAN-NOISE-BASELINE",
+      "null_model": "linear_random_walk",
+      "proxy_metrics": ["transition_point", "jump_discontinuity_magnitude"],
+      "falsification_vectors": ["shuffle_control", "parameter_ablation"],
+      "claim_scope": "STRICTLY_LOCAL_RESTRICTED_ANALOG"
+    }
+  ],
+  "governance_rules": [
+    {
+      "rule_id": "CTR-RULE-001",
+      "rule": "Every campaign template must specify a counterexample dataset or an adversarial null model."
+    }
+  ],
+  "source_relation": "(E≠0) ⇔R δ(E>0)",
+  "non_separability_acknowledged": true,
+  "required_statement": "Observed signatures are interpreted only through restricted local analog structure."
+}

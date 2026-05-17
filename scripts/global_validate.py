@@ -427,6 +427,49 @@ class EvidenceValidator:
             results["status"] = "warning"
         return results
 
+class CampaignValidator:
+    def __init__(self, root_dir):
+        self.root = Path(root_dir)
+        self.tpl_reg_path = self.root / "registry/evidence_campaign_template_registry.json"
+        self.cp_reg_path = self.root / "registry/cross_dataset_pairing_registry.json"
+
+    def validate_json_load(self, path):
+        try:
+            with open(path, 'r', encoding='utf-8-sig') as f:
+                return json.load(f), None
+        except Exception as e:
+            return None, str(e)
+
+    def run(self):
+        results = {"status": "success", "errors": [], "warnings": []}
+        
+        tpl, err = self.validate_json_load(self.tpl_reg_path)
+        if err: results["errors"].append(f"Campaign Template Registry Load: {err}")
+        
+        cp, err = self.validate_json_load(self.cp_reg_path)
+        if err: results["errors"].append(f"Cross-Dataset Pairing Registry Load: {err}")
+
+        if results["errors"]:
+            results["status"] = "failed"
+            return results
+
+        # 1. Templates have counterexamples or null models
+        for template in tpl.get("templates", []):
+            if not template.get("counterexample_dataset") and not template.get("null_model"):
+                results["errors"].append(f"Campaign Error: Template '{template['template_id']}' missing adversarial control.")
+
+        # 2. Pairings are verified
+        if cp:
+            for pairing in cp.get("pairings", []):
+                if pairing.get("status") != "VERIFIED":
+                    results["warnings"].append(f"Campaign Warning: Pairing '{pairing['pairing_id']}' not yet verified.")
+
+        if results["errors"]:
+            results["status"] = "failed"
+        elif results["warnings"]:
+            results["status"] = "warning"
+        return results
+
 def main():
     parser = argparse.ArgumentParser(description="Global Ecosystem Validation Harness")
     parser.add_argument("--root", default=".", help="Project root directory")
@@ -443,7 +486,8 @@ def main():
         "db_validation": DBValidator(root).run(),
         "math_program_validation": MathProgramValidator(root).run(),
         "implementation_validation": ImplementationValidator(root).run(),
-        "evidence_validation": EvidenceValidator(root).run()
+        "evidence_validation": EvidenceValidator(root).run(),
+        "campaign_validation": CampaignValidator(root).run()
     }
 
     report["overall_status"] = "pass" if all(v["status"] in ["success", "warning"] for k, v in report.items() if isinstance(v, dict)) else "fail"

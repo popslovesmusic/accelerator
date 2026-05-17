@@ -1,0 +1,38 @@
+{
+  "registry_id": "PCD_EVIDENCE_NEGATIVE_RESULT_REGISTRY",
+  "version": "1.0.0",
+  "governance_status": {
+    "series_status": "EVIDENCE_CAMPAIGN_EXECUTION_ONLY",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL",
+    "non_separability_acknowledged": true,
+    "source_relation": "(E≠0) ⇔R δ(E>0)"
+  },
+  "negative_results": [],
+  "failure_classes": [
+    {
+      "id": "prediction_absent",
+      "description": "The expected mathematical signature was not found in the primary dataset."
+    },
+    {
+      "id": "counterexample_match",
+      "description": "The adversarial counterexample dataset successfully satisfied the signature check."
+    },
+    {
+      "id": "null_model_equivalent",
+      "description": "Primary data results were statistically indistinguishable from randomized controls."
+    },
+    {
+      "id": "metric_instability",
+      "description": "Observed signatures failed to maintain stability across seeds or thresholds."
+    }
+  ],
+  "governance_rules": [
+    {
+      "rule_id": "NRR-RULE-002",
+      "rule": "Campaigns with 'counterexample_match' failures must be classified as 'NULL_SUPPORT'."
+    }
+  ],
+  "source_relation": "(E≠0) ⇔R δ(E>0)",
+  "non_separability_acknowledged": true,
+  "required_statement": "Observed signatures are interpreted only through restricted local analog structure."
+}
