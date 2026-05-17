@@ -1,0 +1,48 @@
+{
+  "registry_id": "PCD_ESCALATION_TRIGGER_REGISTRY",
+  "version": "1.0.0",
+  "governance_status": {
+    "series_status": "ESCALATION_GOVERNANCE_ONLY",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL",
+    "non_separability_acknowledged": true,
+    "source_relation": "(E≠0) ⇔R δ(E>0)"
+  },
+  "triggers": [
+    {
+      "trigger_id": "ET-001-COUNTER-DOMINANCE",
+      "name": "Counterexample Dominance",
+      "description": "Counterexample dataset satisfies predicted signature metrics.",
+      "severity": "CRITICAL",
+      "action": "HALT_CAMPAIGN_AND_ESCALATE"
+    },
+    {
+      "trigger_id": "ET-002-EQUIV-FAIL",
+      "name": "Equivalence Failure",
+      "description": "Backend implementation fails equivalence check against reference baseline.",
+      "severity": "HIGH",
+      "action": "BLOCK_CERTIFICATION_AND_ESCALATE"
+    },
+    {
+      "trigger_id": "ET-003-CLAIM-DRIFT",
+      "name": "Claim Scope Violation",
+      "description": "Autonomous attempt to emit claims beyond STRICTLY_LOCAL bounds.",
+      "severity": "CRITICAL",
+      "action": "BLOCK_EMISSION_AND_ESCALATE"
+    },
+    {
+      "trigger_id": "ET-004-AGENT-CONFLICT",
+      "name": "Cross-Agent Contradiction",
+      "description": "Two or more agents produce incompatible findings or interpretations.",
+      "severity": "MEDIUM",
+      "action": "LOG_CONFLICT_AND_ESCALATE"
+    }
+  ],
+  "governance_rules": [
+    {
+      "rule_id": "ETR-RULE-001",
+      "rule": "Every trigger must map to a specific intervention action."
+    }
+  ],
+  "source_relation": "(E≠0) ⇔R δ(E>0)",
+  "non_separability_acknowledged": true
+}

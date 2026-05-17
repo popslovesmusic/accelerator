@@ -1,0 +1,34 @@
+{
+  "registry_id": "PCD_AUTONOMOUS_STOP_CONDITIONS",
+  "version": "1.0.0",
+  "governance_status": {
+    "series_status": "ESCALATION_GOVERNANCE_ONLY",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL",
+    "non_separability_acknowledged": true,
+    "source_relation": "(E≠0) ⇔R δ(E>0)"
+  },
+  "stop_conditions": [
+    {
+      "condition_id": "SC-001-EQUIV-FATAL",
+      "trigger": "ET-002-EQUIV-FAIL",
+      "threshold": 3,
+      "metric": "repeated_failures_per_tool",
+      "action": "HALT_ALL_TOOL_SESSIONS"
+    },
+    {
+      "condition_id": "SC-002-GOVERNANCE-BREACH",
+      "trigger": "ET-003-CLAIM-DRIFT",
+      "threshold": 1,
+      "metric": "violation_count",
+      "action": "LOCK_ECOSYSTEM_REGISTRIES"
+    }
+  ],
+  "governance_rules": [
+    {
+      "rule_id": "ASR-RULE-001",
+      "rule": "Every autonomous orchestrator must check stop conditions before every execution turn."
+    }
+  ],
+  "source_relation": "(E≠0) ⇔R δ(E>0)",
+  "non_separability_acknowledged": true
+}

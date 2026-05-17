@@ -1,0 +1,33 @@
+{
+  "registry_id": "PCD_PRIORITY_ARBITRATION_REGISTRY",
+  "version": "1.0.0",
+  "governance_status": {
+    "series_status": "ESCALATION_GOVERNANCE_ONLY",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL",
+    "non_separability_acknowledged": true,
+    "source_relation": "(E≠0) ⇔R δ(E>0)"
+  },
+  "priority_levels": [
+    { "level": "CRITICAL", "weight": 100, "description": "Immediate block of all dependent autonomous operations." },
+    { "level": "HIGH", "weight": 75, "description": "Block of specific tool certification or technical paper emission." },
+    { "level": "MEDIUM", "weight": 50, "description": "Escalate for arbitration; operation continues with warning." },
+    { "level": "LOW", "weight": 25, "description": "Log for review; no immediate operational block." },
+    { "level": "INFORMATIONAL", "weight": 0, "description": "Surface for awareness; no risk to governance." }
+  ],
+  "arbitration_rules": [
+    {
+      "rule_id": "PAR-RULE-001",
+      "trigger": "ET-003-CLAIM-DRIFT",
+      "assigned_priority": "CRITICAL",
+      "logic": "Governance breach regarding claim scope is always CRITICAL."
+    },
+    {
+      "rule_id": "PAR-RULE-002",
+      "trigger": "ET-001-COUNTER-DOMINANCE",
+      "assigned_priority": "HIGH",
+      "logic": "Falsification failure is HIGH risk to evidence integrity."
+    }
+  ],
+  "source_relation": "(E≠0) ⇔R δ(E>0)",
+  "non_separability_acknowledged": true
+}
