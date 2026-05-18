@@ -1,0 +1,24 @@
+{
+  "campaign_id": "EC-20260517-STRUCTURALBOX-001",
+  "tool_family": "reaction_diffusion",
+  "prediction_binding_id": "PB-002-COHERENCE",
+  "dataset_ids": ["DS-001-SYNTHETIC-STOCHASTIC"],
+  "tools": {
+    "cpp": "structural_box_sim_cpp",
+    "python": "structural_box_sim_v2"
+  },
+  "metrics": ["epsilon_max", "epsilon_active_fraction", "alignment_success_rate"],
+  "tolerances": {
+    "absolute": 1e-6,
+    "relative": 1e-4
+  },
+  "falsification_protocols": [
+    "shuffle_control",
+    "parameter_ablation"
+  ],
+  "governance_boilerplate": {
+    "source_relation": "(E≠0) ⇔R δ(E>0)",
+    "non_separability_acknowledged": true,
+    "required_statement": "Observed signatures are interpreted only through restricted local analog structure."
+  }
+}
