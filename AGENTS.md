@@ -21,6 +21,8 @@ In Manual Patch Mode, you may modify files only within the scope explicitly decl
 
 If the JSON does not authorize an action, do not perform it.
 
+**Core Inseparable Principle Lock:** The canonical root expression of the Mono-Process Framework is **(ℰ≠0) ⇔_R δ(ℰ>0)**. It denotes residue-conditioned recursive aspect-binding. You MUST NOT interpret the framework as a "geometry-first", "topology-first", "operator-first", or "physics master equation" ontology. All laws, geometries, topologies, and structures are stabilized process projections derived from this single recursive process. Any maintenance action must preserve this process-first interpretation.
+
 ## 3. Mode Selection
 
 Default mode is Audit Mode.

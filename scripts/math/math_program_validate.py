@@ -31,6 +31,7 @@ def run_math_validator(script_spec):
 
 def validate_math_program():
     validators = {
+        "core_expression_presence": "../validation/validate_core_expression_presence.py",
         "formal_objects": "validate_formal_objects.py",
         "participation_laws": "validate_participation_laws.py",
         "participation_measure_refinement": "validate_participation_measure_refinement.py",

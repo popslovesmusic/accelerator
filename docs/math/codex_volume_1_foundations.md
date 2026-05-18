@@ -1,13 +1,19 @@
 # Codex Volume 1: Foundations
 
+The Mono-Process Framework begins from a single inseparable process principle: (ℰ≠0) ⇔_R δ(ℰ>0). This does not state that two things are equal. It states that distinction and continuation are mutually constituting aspects of one recursive process. All later operators, laws, geometries, topologies, campaigns, and theorem candidates are subordinate derivations or projections of this root principle.
+
 This volume documents the irreducible primitives and foundational expressions of the Mono-Process Framework.
 
 ## 1. The Core Expression
-The framework is built upon the principle of strict procedural monism, where every state transition is a continuation event governed by mismatch minimization.
+The framework is built upon the principle of strict procedural monism, where every state transition is a continuation event governed by mismatch minimization. The canonical root expression is **(ℰ≠0) ⇔_R δ(ℰ>0)**.
 
 ## 2. Primitive Terms
-- **ε (Epsilon)**: Mismatch, signal, or pressure driving transition.
-- **R (Residue)**: Memory, constraint, or trace persisting across transitions.
+- **Distinction / ε (Epsilon)**: Mismatch, signal, or pressure driving transition, denoted as (ℰ≠0) in the core expression.
+- **Continuation / δ**: The selection operator or continuation event, denoted as δ(ℰ>0).
+- **Recursive Binding (⇔_R)**: Residue-conditioned recursive aspect-binding between distinction and continuation.
+- **R (Residue)**: R-conditioned persistence of prior continuation into future admissibility.
+- **Structure**: Stabilized projection of the recursive process.
+- **Topology & Geometry**: Derived apparent structures (stabilized projections) of the underlying recursive process.
 - **ρ (Rho)**: Continuation capacity.
 - **K (CSI)**: Coupling, reach, or interaction domain.
 - **-(i) (Orientation Operator)**: Local orientation-conditioned continuation operator.

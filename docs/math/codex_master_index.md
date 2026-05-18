@@ -1,6 +1,12 @@
 # Mathematical Codex Master Index
 
-Welcome to the unified mathematical codex of the Mono-Process Framework. This codex assembles theorem lineage, operator definitions, derivation chronology, and recursive campaign progression into a navigable manuscript.
+The Mono-Process Framework begins from a single inseparable process principle: (ℰ≠0) ⇔_R δ(ℰ>0). This does not state that two things are equal. It states that distinction and continuation are mutually constituting aspects of one recursive process. All later operators, laws, geometries, topologies, campaigns, and theorem candidates are subordinate derivations or projections of this root principle.
+
+This codex assembles theorem lineage, operator definitions, derivation chronology, and recursive campaign progression into a navigable manuscript.
+
+## Core Directives
+- [Core Expression: Canonical Statement](core_expression_canonical_statement.md)
+- [Derived Structure Doctrine](derived_structure_doctrine.md)
 
 ## Volumes
 

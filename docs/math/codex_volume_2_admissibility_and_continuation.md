@@ -1,5 +1,7 @@
 # Codex Volume 2: Admissibility and Continuation
 
+*Note: All operators and topological bounds detailed in this volume are [stabilized process projections derived from the canonical core expression](derived_structure_doctrine.md) **(ℰ≠0) ⇔_R δ(ℰ>0)**, not independent primitives.*
+
 This volume maps the operational dynamics of admissibility and state transition.
 
 ## 1. Pi_A (Admissibility Projection)
