@@ -1,0 +1,24 @@
+{
+  "campaign_id": "EC-20260517-TDA-002",
+  "tool_family": "tda_module",
+  "prediction_binding_id": "PB-002-COHERENCE",
+  "dataset_ids": ["DS-001-SYNTHETIC-STOCHASTIC"],
+  "tools": {
+    "cpp": "tda_module_v2_cpp",
+    "python": "tools/tda_module_v2_cpp/reference/sim_reference.py"
+  },
+  "metrics": ["betti_0", "betti_1", "max_component_size"],
+  "tolerances": {
+    "absolute": 1e-6,
+    "relative": 1e-4
+  },
+  "falsification_protocols": [
+    "shuffle_control",
+    "parameter_ablation"
+  ],
+  "governance_boilerplate": {
+    "source_relation": "(E≠0) ⇔R δ(E>0)",
+    "non_separability_acknowledged": true,
+    "required_statement": "Observed signatures are interpreted only through restricted local analog structure."
+  }
+}
