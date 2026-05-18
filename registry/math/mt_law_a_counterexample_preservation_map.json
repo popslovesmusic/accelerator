@@ -1,0 +1,63 @@
+{
+  "registry_id": "PCD_MT_LAW_A_COUNTEREXAMPLE_PRESERVATION_MAP",
+  "version": "1.0.0",
+  "description": "Counterexample preservation map for MT-LAW-A, identifying active adversarial boundaries that must be preserved to prevent confirmation bias and overreach in stability claims.",
+  "governance_status": "PROVISIONAL_HARDENING_SERIES",
+  "active_adversarial_boundaries": [
+    {
+      "id": "BOUNDARY-DIV-001",
+      "name": "Recursive Divergence",
+      "description": "The condition where recursive updates fail to converge to a stable basin, leading to unbounded mismatch (epsilon) or budget exhaustion.",
+      "counterexample_ref": "CE-A007_oscillatory_instability",
+      "adversarial_role": "Prevents claiming that all active processes eventually stabilize."
+    },
+    {
+      "id": "BOUNDARY-EXP-002",
+      "name": "Branch Explosion",
+      "description": "The sudden increase in the number of admissible continuation branches beyond the regional arbitration capacity.",
+      "counterexample_ref": "CE-A004_identity_fragmentation",
+      "adversarial_role": "Prevents claiming unique structural identity persistence across high-mismatch transitions."
+    },
+    {
+      "id": "BOUNDARY-LOCK-003",
+      "name": "Orientation Locking",
+      "description": "A state where the local orientation array {-(i)_alpha} becomes fixed in a configuration that blocks all further admissible continuation transitions.",
+      "counterexample_ref": "CE-A002_admissibility_exhaustion",
+      "adversarial_role": "Prevents claiming that persistence can always be recovered from any process state."
+    }
+  ],
+  "preservation_rules": [
+    {
+      "id": "RULE-PRES-001",
+      "description": "Simulations MUST NOT use 'soft-clamping' or artificial damping to suppress divergence at the boundaries.",
+      "enforcement": "MANDATORY"
+    },
+    {
+      "id": "RULE-PRES-002",
+      "description": "Branching events MUST be tracked as multi-valued outcomes; selecting a single branch 'for convenience' is prohibited for TS4+ work.",
+      "enforcement": "MANDATORY"
+    }
+  ],
+  "mapping_to_laws": [
+    {
+      "boundary_id": "BOUNDARY-DIV-001",
+      "law_id": "LAW025",
+      "note": "Linked to persistence decay and forgetting."
+    },
+    {
+      "boundary_id": "BOUNDARY-EXP-002",
+      "law_id": "LAW029",
+      "note": "Linked to recursive arbitration failure."
+    },
+    {
+      "boundary_id": "BOUNDARY-LOCK-003",
+      "law_id": "LAW018",
+      "note": "Linked to accessibility horizon reachability limits."
+    }
+  ],
+  "provenance": {
+    "patch_id": "MT-LAW-A-TS4-008",
+    "series": "MT-LAW-A-TS4-STABILITY-HARDENING-001-010",
+    "status": "INITIAL_DRAFT"
+  }
+}

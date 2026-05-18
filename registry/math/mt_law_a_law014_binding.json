@@ -1,0 +1,41 @@
+{
+  "registry_id": "PCD_MT_LAW_A_LAW014_BINDING",
+  "version": "1.0.0",
+  "description": "Mathematical binding between MT-LAW-A persistence and LAW014 selection pressure, disambiguating the role of pressure in structural stability.",
+  "governance_status": "PROVISIONAL_HARDENING_SERIES",
+  "binding_logic": {
+    "pressure_vs_resilience": "LAW014 Selection Pressure (S_C_i) is mapped to MT-LAW-A Stabilization-Pressure (P_stab). It is an external or internal forcing that maintains the channel. MT-LAW-A Cost-to-Destabilize (S_C) is the structural resilience of that channel against adversarial perturbation. They are distinct quantities.",
+    "causal_coupling": "High P_stab (LAW014) maintains S_achieved (Persistence), but may negatively impact S_C (Resilience) if the pressure exhausts the finite admissibility budget (LAW021)."
+  },
+  "formal_mappings": [
+    {
+      "pcd_object": "MT-LAW-A:P_stab",
+      "law_object": "LAW014:S(C_i)",
+      "mapping_type": "identity_role",
+      "operational_note": "The selection pressure defined in LAW014 provides the continuous forcing required to sustain a persistence channel."
+    },
+    {
+      "pcd_object": "MT-LAW-A:S_C",
+      "law_object": "LAW014:BoundaryMargin(C_i)",
+      "mapping_type": "proportional_contribution",
+      "operational_note": "The boundary margin in LAW014 contributes to the overall cost-to-destabilize, but S_C also includes budget and residue factors not fully defined in LAW014."
+    }
+  ],
+  "interaction_rules": [
+    {
+      "id": "BIND-LAW014-001",
+      "description": "Persistence (S_achieved) is sustained only while P_stab > 0 and the cost of maintaining P_stab < B_A (local budget).",
+      "constraint": "P_stab(t) > 0 => Persistence(t) > 0"
+    },
+    {
+      "id": "BIND-LAW014-002",
+      "description": "Increasing P_stab (Selection Pressure) beyond the optimal threshold may induce channel fracture (LAW013) by depleting local resilience.",
+      "failure_mode_reference": "LAW013_channel_fracture"
+    }
+  ],
+  "provenance": {
+    "patch_id": "MT-LAW-A-TS4-003",
+    "series": "MT-LAW-A-TS4-STABILITY-HARDENING-001-010",
+    "status": "INITIAL_DRAFT"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "registry_id": "PCD_MT_LAW_A_METASTABILITY_BINDING",
+  "version": "1.0.0",
+  "description": "Mathematical binding between MT-LAW-A persistence and LAW026 metastability, framing persistence as a temporary law-like regime with a finite validity window.",
+  "governance_status": "PROVISIONAL_HARDENING_SERIES",
+  "binding_logic": {
+    "metastable_persistence": "Persistence in MT-LAW-A is classified as a Metastable Regime (LAW026:M_U). It is not a proof of permanent or universal stability but a locally law-like organization of continuation channels.",
+    "validity_window_constraint": "Every MT-LAW-A persistence claim MUST be accompanied by a defined Validity Window V(M_U). The claim is invalid outside this window's bounds (iterations, budget, or local topology)."
+  },
+  "formal_mappings": [
+    {
+      "pcd_object": "MT-LAW-A:Persistence_Regime",
+      "law_object": "LAW026:M_U",
+      "mapping_type": "identity_role",
+      "operational_note": "MT-LAW-A identifies a specific class of metastable regimes that maintain coherence under budget constraints."
+    },
+    {
+      "pcd_object": "MT-LAW-A:Persistence_Duration",
+      "law_object": "LAW026:Life(M_U)",
+      "mapping_type": "proportional_measure",
+      "operational_note": "The lifespan of persistence depends on the reinforcement history and the decay of residue basins."
+    }
+  ],
+  "enforcement_rules": [
+    {
+      "id": "BIND-LAW026-001",
+      "description": "All TS4 persistence claims MUST declare the expected Validity Window V(M_U).",
+      "requirement_level": "MANDATORY_FOR_TS4"
+    },
+    {
+      "id": "BIND-LAW026-002",
+      "description": "Claims of 'global' or 'infinite' persistence are strictly prohibited and MUST be downgraded to 'PROVISIONAL' or 'REJECTED'.",
+      "failure_action": "automatic_downgrade"
+    }
+  ],
+  "provenance": {
+    "patch_id": "MT-LAW-A-TS4-006",
+    "series": "MT-LAW-A-TS4-STABILITY-HARDENING-001-010",
+    "status": "INITIAL_DRAFT"
+  }
+}

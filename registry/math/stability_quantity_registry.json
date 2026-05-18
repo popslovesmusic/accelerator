@@ -1,0 +1,105 @@
+{
+  "registry_id": "PCD_STABILITY_QUANTITY_REGISTRY",
+  "version": "1.0.0",
+  "description": "Disambiguation registry for structural stability quantities within the Mono-Process Framework, specifically for the MT-LAW-A TS4 hardening series.",
+  "governance_status": "PROVISIONAL_HARDENING_SERIES",
+  "quantities": [
+    {
+      "id": "STAB-ACHIEVED",
+      "term": "stability-achieved",
+      "ontology_class": "observable",
+      "definition": "The observed persistence and structural coherence of an admissible continuation channel or structure.",
+      "mathematical_role": "state_persistence_observable",
+      "laws_referenced": [
+        "LAW012",
+        "LAW026"
+      ],
+      "metrics": [
+        {
+          "name": "persistence_duration",
+          "unit": "iterations",
+          "description": "Number of consecutive iterations an admissible channel remains active."
+        },
+        {
+          "name": "active_fraction",
+          "unit": "normalized_ratio",
+          "description": "The fraction of the local domain participating in the stable channel."
+        }
+      ],
+      "boundary_conditions": {
+        "failure_mode": "LAW027_transition_threshold",
+        "recovery_mode": "LAW029_conflict_resolution"
+      }
+    },
+    {
+      "id": "STAB-PRESSURE",
+      "term": "stabilization-pressure",
+      "ontology_class": "update_operator_condition",
+      "definition": "The magnitude of epsilon-forcing or selection pressure actively required to sustain an admissible channel.",
+      "mathematical_role": "forcing_magnitude",
+      "laws_referenced": [
+        "LAW014",
+        "LAW030"
+      ],
+      "metrics": [
+        {
+          "name": "epsilon_mean",
+          "unit": "epsilon_magnitude",
+          "description": "The mean mismatch magnitude injected into the channel update rule."
+        },
+        {
+          "name": "selection_pressure_magnitude",
+          "unit": "dimensionless_intensity",
+          "description": "The intensity of LAW014 selection favoring the current channel orientation."
+        }
+      ],
+      "operator_bindings": {
+        "Delta": "transforms pressure into transition",
+        "Pi_A": "filters pressure by admissibility"
+      }
+    },
+    {
+      "id": "COST-TO-DESTAB",
+      "term": "cost-to-destabilize",
+      "aliases": [
+        "S_C"
+      ],
+      "ontology_class": "metric",
+      "definition": "The minimum perturbation or mismatch-injection required to force an admissible channel into fracture or collapse.",
+      "mathematical_role": "resilience_threshold",
+      "laws_referenced": [
+        "LAW021",
+        "LAW022",
+        "LAW027"
+      ],
+      "metrics": [
+        {
+          "name": "s_crit",
+          "unit": "perturbation_magnitude",
+          "description": "The critical threshold of adversarial epsilon at which stability-achieved drops to zero."
+        },
+        {
+          "name": "admissibility_budget_consumption",
+          "unit": "B_A_units",
+          "description": "The amount of B_A (LAW021) consumed to resist a specific perturbation."
+        }
+      ],
+      "falsification_vectors": [
+        "FV-1_shuffle_or_zero_mismatch_control",
+        "FV-3_primitive_suppression_ablation"
+      ]
+    }
+  ],
+  "composition_rules": [
+    {
+      "rule_id": "STAB-COMP-001",
+      "description": "Stability-achieved is a function of stabilization-pressure filtered through the cost-to-destabilize threshold.",
+      "form": "S_achieved = f(P_stabilize, S_C, R, A_alpha)"
+    }
+  ],
+  "provenance": {
+    "patch_id": "MT-LAW-A-TS4-001",
+    "series": "MT-LAW-A-TS4-STABILITY-HARDENING-001-010",
+    "status": "INITIAL_DRAFT"
+  }
+}
