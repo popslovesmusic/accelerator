@@ -12,9 +12,20 @@ def run():
     
     os.makedirs(args.out, exist_ok=True)
     
-    exe_path = os.path.abspath(r"tools\rd_sim_cpp\rd_sim.exe")
+    script_dir = Path(__file__).parent.resolve()
+    exe_path = script_dir / "rd_sim.exe"
     config_path = os.path.abspath(args.config)
     out_dir = os.path.abspath(args.out)
+    
+    if not exe_path.exists():
+        # Try fallback names or locations
+        fallback = script_dir / "rd_sim_benchmark.exe"
+        if fallback.exists():
+            exe_path = fallback
+        else:
+            raise FileNotFoundError(f"Could not find rd_sim.exe or rd_sim_benchmark.exe in {script_dir}")
+    
+    exe_path = str(exe_path.resolve())
     
     setvars = r"C:\Program Files (x86)\Intel\oneAPI\setvars.bat"
     # Use a single string with shell=True, and let cmd handle the quotes

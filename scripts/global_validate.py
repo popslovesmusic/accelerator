@@ -490,7 +490,7 @@ def main():
         "campaign_validation": CampaignValidator(root).run()
     }
 
-    report["overall_status"] = "pass" if all(v["status"] in ["success", "warning"] for k, v in report.items() if isinstance(v, dict)) else "fail"
+    report["overall_status"] = "pass" if all(v["status"] in ["success", "warning", "pass"] for k, v in report.items() if isinstance(v, dict)) else "fail"
 
     out_path = Path(args.out)
     out_path.parent.mkdir(parents=True, exist_ok=True)

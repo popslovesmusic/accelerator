@@ -19,64 +19,59 @@ class FSAEngineCPP:
                     break
         
         if not lib_path:
-            raise FileNotFoundError(f"Could not find {lib_name} shared library in {[str(p) for p in search_paths]}")
+            raise FileNotFoundError(f"Could not find shared library in {[str(p) for p in search_paths]}")
 
-        # On Windows, we might need to add the library directory and its dependencies to the DLL search path
+        # On Windows, we need to add the library directory and its dependencies to the DLL search path
         if platform.system() == "Windows":
-            lib_dir = str(Path(lib_path).parent.resolve())
+            lib_dir = os.path.dirname(os.path.abspath(lib_path))
             try:
                 os.add_dll_directory(lib_dir)
             except Exception as e:
                 print(f"Warning: Could not add {lib_dir} to DLL directory: {e}")
 
-            # Also add oneAPI/SYCL directories from PATH
+            # Also add oneAPI/SYCL directories from PATH and common locations
             path_env = os.environ.get("PATH", "")
-            added_count = 0
+            potential_dirs = set()
             for directory in path_env.split(";"):
                 if not directory or not os.path.isdir(directory):
                     continue
-                
                 dir_lower = directory.lower()
-                # Check for oneAPI or Intel related directories that might contain SYCL DLLs
                 if "oneapi" in dir_lower or "intel" in dir_lower or "sycl" in dir_lower:
-                    try:
-                        # Be a bit more specific: check if directory contains any .dll files
-                        # (optional, but helps avoid adding empty or irrelevant folders)
-                        has_dlls = any(f.endswith(".dll") for f in os.listdir(directory))
-                        if has_dlls:
-                            os.add_dll_directory(os.path.abspath(directory))
-                            added_count += 1
-                    except Exception:
-                        pass
-            
-            if added_count > 0:
-                print(f"Added {added_count} oneAPI/Intel/SYCL directories from PATH to DLL search path.")
+                    potential_dirs.add(os.path.abspath(directory))
 
-        print(f"Loading library from: {lib_path}")
+            # Common oneAPI/Intel locations if not in PATH
+            common_locations = [
+                r"C:\Program Files (x86)\Intel\oneAPI\compiler\latest\bin",
+                r"C:\Program Files (x86)\Intel\oneAPI\compiler\latest\windows\bin",
+                r"C:\Program Files\Intel\oneAPI\compiler\latest\bin",
+                r"C:\Program Files\Intel\oneAPI\compiler\latest\windows\bin"
+            ]
+            for loc in common_locations:
+                if os.path.isdir(loc):
+                    potential_dirs.add(os.path.abspath(loc))
+
+            for directory in potential_dirs:
+                try:
+                    # Check if directory contains any .dll files to avoid cluttering search path
+                    if any(f.endswith(".dll") for f in os.listdir(directory)):
+                        os.add_dll_directory(directory)
+                except Exception:
+                    pass
+
+        print(f"Loading FSA CAPI library from: {lib_path}")
         try:
-            # winmode=0 can also be used on Python 3.8+ to use the default search order (including PATH)
-            # but os.add_dll_directory is the preferred modern way.
             self.lib = ctypes.CDLL(lib_path)
         except Exception as e:
-            print(f"\nFATAL ERROR: Could not load {lib_path}")
-            print(f"Error detail: {e}")
-            print(f"System PATH: {os.environ.get('PATH')}")
             if platform.system() == "Windows":
-                print("Checking for common oneAPI dependencies in PATH...")
-                missing = []
-                for dep in ["sycl7.dll", "pi_win_proxy_loader.dll", "libmmd.dll"]:
-                    found = False
-                    for directory in path_env.split(";"):
-                        if os.path.exists(os.path.join(directory, dep)):
-                            found = True
-                            print(f"  [FOUND] {dep} in {directory}")
-                            break
-                    if not found:
-                        missing.append(dep)
-                if missing:
-                    print(f"  [MISSING] {missing}")
-            raise
-        
+                try:
+                    # Fallback to LOAD_WITH_ALTERED_SEARCH_PATH
+                    self.lib = ctypes.CDLL(lib_path, winmode=8)
+                except Exception as e2:
+                    print(f"FATAL: Failed to load DLL. Error: {e}, Fallback error: {e2}")
+                    raise
+            else:
+                raise
+
         self.lib.create_fsa_engine.argtypes = [ctypes.c_int, ctypes.c_int, ctypes.c_int, ctypes.c_int, ctypes.c_int, ctypes.c_double]
         self.lib.create_fsa_engine.restype = ctypes.c_void_p
         
@@ -118,6 +113,8 @@ class FSAEngineCPP:
     def get_active_history(self):
         size = ctypes.c_int()
         self.lib.get_active_history(self.obj, None, ctypes.byref(size))
+        if size.value <= 0:
+            return []
         history = (ctypes.c_int * size.value)()
         self.lib.get_active_history(self.obj, history, ctypes.byref(size))
         return list(history)
