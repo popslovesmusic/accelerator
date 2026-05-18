@@ -1,0 +1,24 @@
+{
+  "campaign_id": "EC-20260517-SPECTRAL-001",
+  "tool_family": "spectral_analysis",
+  "prediction_binding_id": "PB-001-THRESHOLD",
+  "dataset_ids": ["DS-001-SYNTHETIC-STOCHASTIC"],
+  "tools": {
+    "cpp": "spectral_analysis_v1_cpp",
+    "python": "spectral_analysis_v1"
+  },
+  "metrics": ["dominant_modes", "total_power", "dominant_power_fraction"],
+  "tolerances": {
+    "absolute": 1e-6,
+    "relative": 1e-4
+  },
+  "falsification_protocols": [
+    "shuffle_control",
+    "parameter_ablation"
+  ],
+  "governance_boilerplate": {
+    "source_relation": "(E≠0) ⇔R δ(E>0)",
+    "non_separability_acknowledged": true,
+    "required_statement": "Observed signatures are interpreted only through restricted local analog structure."
+  }
+}
