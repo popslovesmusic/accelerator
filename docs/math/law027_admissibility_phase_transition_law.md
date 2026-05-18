@@ -19,7 +19,7 @@ Within the recursive continuation framework:
 - **Threshold-Driven Reorganization**: Changes in the metastable state are often abrupt and triggered by crossing specific operational thresholds.
 - **Non-Linear Stability**: Stability is not a continuous gradient; regimes remain coherent until a tipping point is reached.
 - **Instability Cascades**: Because continuation structures are interconnected through shared budgets and channels, local failure can propagate into regional "avalanches."
-- **Topology Precedence**: The transition is fundamentally a reorganization of admissibility topology ($\sim_A$) rather than a change in a primitive geometric substrate.
+- **Topology Precedence**: The transition is fundamentally a reorganization of admissibility topology ($\sim_A$) rather than a change in a primitive background geometric space.
 
 ## 4. Governance & Limits
 - **No Physics Claim**: This law defines phase transitions within the Mono-Process Framework and does not claim to describe physical phase changes (e.g., solid to liquid) or critical phenomena. There is no physical phase transition claim made here.

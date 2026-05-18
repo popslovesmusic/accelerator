@@ -22,7 +22,7 @@ Formalize irreducible projection conflicts as structural information rather than
 
 ### 2.5 Embedded/Externality Conflict
 - **Class ID**: `EMBEDDED_EXTERNALITY_CONFLICT`
-- **Definition**: The tension between embedded observer limits and the assumption of external viewpoint metadata.
+- **Definition**: The tension between embedded observer limits and the assumption of a privileged, non-process viewpoint.
 
 ## 3. Governance Status
 - **Source Relation**: (E≠0) ⇔R δ(E>0)

@@ -6,7 +6,7 @@ Define bounded reconstruction limits arising from embedded participation within 
 ## 2. Observer Constraints
 ### 2.1 No Complete Externality
 - **Constraint ID**: `no_complete_externality`
-- **Definition**: The observer cannot access the source relation from an external viewpoint.
+- **Definition**: The observer cannot access the source relation from a privileged, non-process viewpoint.
 
 ### 2.2 Bounded Self-Description
 - **Constraint ID**: `bounded_self_description`

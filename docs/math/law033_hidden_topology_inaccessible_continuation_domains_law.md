@@ -36,7 +36,7 @@ Within the recursive continuation framework:
 - **Absolute Hiddenness Overclaim**: Modeling hiddenness as a permanent or universal property rather than a local relational one.
 - **Perfect Observability Overclaim**: Assuming everything within a certain radius is perfectly reconstructible.
 - **Inaccessibility Without Budget or Topology**: Modeling hiddenness as a random effect rather than a consequence of specific process limits.
-- **Primitive External Reality Reintroduction**: Treating hidden domains as a pre-existing container for the process.
+- **Primitive External Reality Reintroduction**: Treating hidden domains as a pre-existing space for the process.
 - **Physics Claim Leakage**: Citing hidden topology as a validation of physical dark-sector theories.
 
 ---
