@@ -1759,6 +1759,43 @@
             "backend": "python"
         },
         {
+            "name": "signal_scope_phase_continuation_engine_cpp",
+            "description": "High-performance SYCL/AVX2 accelerated Signal Scope engine for phase and coherence analysis.",
+            "entry_point": "tools/signal_scope_phase_continuation_engine/native_platform/run_native_platform.py",
+            "cli_command": "python tools/signal_scope_phase_continuation_engine/native_platform/run_native_platform.py --config {config} --out {out_dir}",
+            "config_params": [
+                "num_frames",
+                "num_nodes",
+                "use_integrated_cpp"
+            ],
+            "metrics": [
+                "phase_locking_value",
+                "coherence_mean",
+                "residue_trace"
+            ],
+            "model_class": "agent_based_phase_continuation_sim",
+            "certification_level": "C4",
+            "validation_path": "tools/signal_scope_phase_continuation_engine/validation/",
+            "last_validation_date": "2026-05-06",
+            "has_falsification": true,
+            "numerical_stability_verified": true,
+            "uncertainty_quantified": true,
+            "provenance_verified": true,
+            "mechanism_class": "agent_based",
+            "implementation_language": "hybrid",
+            "backend": "cpp",
+            "reference_implementation": "tools/signal_scope_phase_continuation_engine/run_signal_scope.py",
+            "has_reference_implementation": true,
+            "reference_baseline": "tools/signal_scope_phase_continuation_engine/run_signal_scope.py",
+            "equivalence_required": true,
+            "certification_gate": "equivalence_verified",
+            "latest_equivalence_packet": "outputs/audits/equivalence/EP-20260517-SIGNALSCOPE-001.json",
+            "allowed_tolerances": {
+                "absolute": 1e-06,
+                "relative": 0.0001
+            }
+        },
+        {
             "name": "accelerator_sim_v1",
             "description": "CPU-first reduced 6D accelerator research simulator (x,px,y,py,z,delta).",
             "entry_point": "tools/accelerator_sim_v1/sim.py",
