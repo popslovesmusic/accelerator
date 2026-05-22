@@ -17,7 +17,8 @@ def validate_core_expression():
         "(ℰ≠0) ⇔_R δ(ℰ>0)",
         "recursive aspect-binding",
         "derived structure doctrine",
-        "core_expression_dependency"
+        "core_expression_dependency",
+        "organization-mode"
     ]
     blocked_readings = [
         "ordinary equation",

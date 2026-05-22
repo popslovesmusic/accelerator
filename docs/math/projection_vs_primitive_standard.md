@@ -20,7 +20,7 @@ An object or structure is a **stabilized projection** if it meets the following 
 When evaluating a new concept, ask:
 - Can this object exist without the core process relation? (If yes, it is forbidden substance reification).
 - Does it have a finite lifespan or is it claimed to be permanent? (If permanent, it is forbidden reification).
-- Is it a "thing" or is it a "pattern of doing"? (If a thing, it is forbidden reification).
+- Is it a "thing" or is it a "pattern of doing"? (If a thing, it is forbidden reification). An entity must be presented as an **organization-mode** of the recursive process.
 
 ## Governance Traceability
 - **Source Relation:** (ℰ≠0) ⇔_R δ(ℰ>0)
