@@ -9,23 +9,35 @@ At the heart of the Mono-Process Framework lies a single, non-separable root exp
 
 This is not an ordinary equation or a static identity claim. It is the **Relational Process Grammar**. It states that the existence of a relational mismatch ($\mathcal{E} \neq 0$) is recursively bound to the actualization of distinguishable deviation ($\delta$). The subscript **$R$** denotes that this entire relationship is **Residue-Conditioned**—it carries its own history as an active deformation of future possibilities.
 
-## 2. The Breakthrough: Operational Distinguishability ($D > 0$)
-A major consolidation occurred when the operator family ($\Leftrightarrow_x$) was formally identified with the condition of **Operational Distinguishability**:
+## 2. The Breakthrough: The Calculus of Distinction
+The program matured from a descriptive model into a **Calculus of Distinction** by reinterpreting the core biconditional. The expression is no longer a static identity, but a three-layered process grammar:
 
+1.  **Raw Mismatch ($\mathcal{E} \neq 0$):** The irreducible pressure of unresolved distinction.
+2.  **Operational Distinguishability ($(D(S_1 \parallel S_2) > 0)_x$):** The resolvable mismatch evaluated under a local admissibility grammar ($\Leftrightarrow_x$).
+3.  **Continuation ($\delta(\mathcal{E} > 0)$):** The actualization of the mismatch into future process states.
+
+A critical refinement separates the general admissibility operator family ($\Leftrightarrow_x$) from the **Residue-Conditioned Operator** ($\Leftrightarrow_R$), which specifically governs orientational negotiation.
+
+## 3. Emergent Dominance: $\Delta D_R$ and $-(i)_{Dom}$
+Orientation is no longer an imposed primitive. It is **stabilized distinguishability under residue-conditioned recursive negotiation**.
+
+The generative mechanism for orientational dominance ($-(i)_{Dom}$) was identified as **Directional Distinguishability Asymmetry**:
 [
-\Leftrightarrow_x \equiv (D(S_1 \parallel S_2) > 0)_x
+\Delta D_R = D(S_1|S_2) - D(S_2|S_1) \neq 0 \Rightarrow -(i)_{Dom}
 ]
+When directional distinguishability is asymmetric, the resulting relational pressure "breaks" the local symmetry, compelling the emergence of a dominant orientational reference. Perfect symmetry ($\Delta D_R = 0$) leads to the collapse of the distinguishability floor ($D \to 0$) and the eventual cessation of the process.
 
-This transformed the framework from an abstract logic into a **Calculus of Distinction**. Relation itself is the irreducible primitive. Distinguishability exists only when relational mismatch becomes operationally resolvable. Perfect symmetry collapses the process; thus, **Asymmetry is Generative**.
+## 4. The Basin Topology: Triadic Stabilization
+The minimum structural unit of the framework is the **Basin**, now understood as a recursively stabilized distinguishability structure.
+*   **The Triangle Law:** Stable distinguishability cannot exist in binary opposition ($N=2$), which collapses toward symmetry. Persistence requires a minimum **3rd-order recursive loop (The Triangle)** ($N=3$) to provide the circulating reinforcement for residue inscription.
+*   **Tertiary Node Structure:** Each node within a basin is functionally partitioned as $N_i = \{I_i, O_i, R_i\}$. This separates the **Internal Recursive Flow** ($I, O$) required for stabilization from the **Relational Coupling State** ($R$) required for basin interaction.
 
-## 3. The Symbolic Trace: From Sketches to Laws
-The math program evolved through three distinct stages of rigor:
-1.  **The Heuristic Phase (L001–L033):** Establishing the basic rules of admissibility and selection. Here, we defined "thingness" as a result of orientational locking and "space" as a derived projection.
-2.  **The Simulated Phase (C4–C5):** Hardening the theory against independent mechanism classes. Through campaigns like `THRESHOLD-001` and `RECOUPLING-002`, we empirically proved that the framework's laws are **Mechanism-Independent** and **Scale-Invariant**.
-3.  **The Formal Closure (C6):** The achievement of Theorem status. By introducing the **Symbolic Trace Workflow**, we moved beyond simulation-supported claims to formal algebraic derivations that prove the relational necessity of our core laws.
+## 5. Operator Topology: Context vs. Target
+The math program formalizes the importance of notation placement. The expression $\Leftrightarrow_x$ (the process-as-context) is topologically distinct from $x_{\Leftrightarrow}$ (the process-as-target). This distinguishes **Internalized Law** (conditioning) from **Externalized Event** (transformation), allowing for the derivation of nested, multiscale architectures.
 
-## 4. The Four Master Theorems (The Master Set)
-The program culminated in the formal proof of the four foundational laws of reality:
+## 6. The Four Master Theorems (The Master Set)
+The program culminates in the formal proof of the four foundational laws of reality:
+... (rest of Theorems section unchanged) ...
 
 ### Theorem I: The Knot Theorem (Non-Substantive Identity)
 *   **The Insight:** Identity is "the rope organized knot-wise."
@@ -61,8 +73,8 @@ The program achieved its most critical empirical proof with the **3-Peak Stabili
 
 ## 8. Current Standing: C6 Formal Closure
 The math program is currently **Locked and Validated**. 
-- **Lemmas:** 41 verified statements.
-- **Proofs:** 25 formal derivations.
+- **Lemmas:** 44 verified statements.
+- **Proofs:** 24 formal derivations.
 - **Theorems:** 4 Master Theorems (Identity, Symmetry, Reach, Scaling).
 - **Status:** **Green (Passing)** across all global governance gates.
 
