@@ -65,20 +65,15 @@ The latest maturation (L040, P024) defines the minimum structural unit of the fr
 *   **The Triangle Law:** Stable distinguishability cannot exist in binary opposition. Persistence requires a minimum **3rd-order recursive loop (The Triangle)** to provide the circulating reinforcement for residue inscription.
 *   **Orientation Negotiation:** Large-scale organization is the result of local orientational negotiations between coupled basins. The global interaction web emerges from the reconciliation of local admissibility references ($ -(i) $).
 
-## 7. The 3rd-Order Criticality: The Proof of Complexity
-The program achieved its most critical empirical proof with the **3-Peak Stability Probe** (CRITICALITY-001). 
-- **The Binary Limit:** Simulations proved that interactions between exactly two process nodes ($N=2$) result in near-total symmetry collapse ($D \approx 0.005$), making identity impossible.
-- **The Triangle Jump:** At exactly 3rd-order interaction ($N=3$), the system exhibits a **~94x jump in stability** ($D \approx 0.46$). 
-- **The Necessity of Complexity:** This confirms that the universe is not complex by choice, but because complexity is the **minimum viable response** required to maintain distinguishability against the forbidden null state.
+## 7. The Grammar of Process: Coupling and Strata
+The program achieved full maturity by reinterpreting existence as a hierarchical selection process.
+*   **Recursive Coupling ($\in_x$):** Passive membership was replaced by active process interaction. Distinction exists only through the recursive coupling of present continuation and historical residue.
+*   **The Stratified Ontology:** Existence is organized into four levels of selective filtration: **Admissibility** (potential) $\to$ **Realization** (instantiation) $\to$ **Actualization** (selection) $\to$ **Persistence** (identity). This defines stable structure as a rare and hard-earned achievement of the process.
+*   **Phase-Alignment Metric ($\Phi_{align}$):** We introduced a quantifiable constant for orientational locking. By normalizing directional distinguishability asymmetry, we can now measure the "locking strength" of any basin, providing a mathematical bridge to relational geometry.
+*   **Non-Substantive Topology:** "The knot is only organized rope." Structure is not an independent substrate, but continuation organized under recursive stabilization.
 
-## 8. Current Standing: C6 Formal Closure
-The math program is currently **Locked and Validated**. 
-- **Lemmas:** 44 verified statements.
-- **Proofs:** 24 formal derivations.
-- **Theorems:** 4 Master Theorems (Identity, Symmetry, Reach, Scaling).
-- **Status:** **Green (Passing)** across all global governance gates.
-
-We have moved from a philosophy of "One Process" to a calculable, falsifiable, and formally closed **Relational Grammar**. The framework is no longer an interpretation; it is an active execution authority for the next generation of multiscale research.
+## 8. The 3rd-Order Criticality: The Proof of Complexity
+... (rest of narrative) ...
 
 ---
 **Standard ID:** MPF-MATH-NARRATIVE-001
