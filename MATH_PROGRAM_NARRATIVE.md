@@ -29,8 +29,9 @@ The program culminated in the formal proof of the three foundational laws of rea
 
 ### Theorem I: The Knot Theorem (Non-Substantive Identity)
 *   **The Insight:** Identity is "the rope organized knot-wise."
-*   **The Math:** Proves that persistent "entities" emerge exclusively from recursive orientational locking.
-*   **The Verdict:** Reification is forbidden. There is no mass or material primitive—only stabilized modes of continuation.
+*   **The 3-Peak Rule:** A knot topologically requires a minimum of **3 crossings**. Binary opposition ($N=2$) cannot lock; it simply "slides off" into symmetry.
+*   **The Math:** Proves that because the null state is forbidden and binary interaction is unstable, the process is **structurally compelled** toward 3rd-order recursion (The Triangle).
+*   **The Verdict:** Identity is the minimum viable response to the avoidance of collapse. Reification is forbidden—there is only stabilized complexity.
 
 ### Theorem II: The Meta-Bridge Symmetry (Mechanism Independence)
 *   **The Insight:** The grammar is universal; the substrate is secondary.

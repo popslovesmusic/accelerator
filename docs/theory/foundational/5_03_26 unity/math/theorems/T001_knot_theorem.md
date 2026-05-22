@@ -1,7 +1,7 @@
 # Theorem I — The Knot Theorem (Principle of Non-Substantive Identity)
 
 ## 1. Abstract
-This theorem formally proves that in any recursive process obeying the core biconditional $(\mathcal{E} \neq 0) \Leftrightarrow_R \delta(\mathcal{E} > 0)$, persistent structural identity (entities) emerge exclusively from recursive orientational locking (knots). The proof demonstrates that "thingness" is a topological consequence of constrained continuation, requiring no material or mass primitives.
+This theorem formally proves that in any recursive process obeying the core biconditional $(\mathcal{E} \neq 0) \Leftrightarrow_R \delta(\mathcal{E} > 0)$, persistent structural identity (entities) emerge exclusively from recursive orientational locking (knots). A knot topologically requires a minimum of **3 crossings (peaks)** to achieve structural closure. The proof demonstrates that because binary opposition ($N=2$) cannot lock and the null state is forbidden, the process is structurally compelled toward **3rd-order recursion (The Triangle)**. Identity is the minimum viable response to the avoidance of collapse.
 
 ## 2. Symbolic Trace (Formal Closure)
 
@@ -10,33 +10,28 @@ This theorem formally proves that in any recursive process obeying the core bico
 - **Mismatch ($\mathcal{E} \in \mathbb{S}$):** The relational signal field.
 - **Residue ($R \in \mathcal{R}$):** The manifold-deforming inscription operator.
 - **Operator ($\Leftrightarrow_R$):** The residue-mediated admissibility coupling.
-- **Selection ($e \in \mathbb{E}$):** The actualized transition event.
+- **Crossing ($N \in \mathbb{Z}^+$):** The number of relational peaks (structural complexity).
 
 ### 2.2 Formal Derivation
-1. **Axiom of Necessity:** $(\mathcal{E} \neq 0) \Leftrightarrow_R \delta(\mathcal{E} > 0)$.
-2. **Expansion of $\Leftrightarrow_R$:** 
-   The operator $\Leftrightarrow_R$ decomposes into an admissibility leg $L$ and an orientation leg $Q$:
-   $L: R \to A \subset \mathcal{P}$ (determines WHERE updates are possible).
-   $Q: \mathcal{E} \to -(i)$ (determines HOW updates are oriented).
-3. **The Recursive Step:**
-   An event $e_t$ occurs if $\exists \Delta \in A(R_t)$ such that $\Delta \succcurlyeq \theta$.
-   The subsequent residue is updated: $R_{t+1} = \Psi(R_t, e_t, -(i)_t)$.
-4. **The Locking Condition (The Knot):**
-   Define a **Stable Knot** as a region where the residue update operator $\Psi$ induces a fixed point in the orientation frame:
-   $FixedPoint(\Psi) \implies -(i)_{t+1} = -(i)_t$.
-5. **Topological Closure:**
-   When orientational locking occurs, the admissibility window $A(R)$ narrows monotonically:
-   $A(R_{t+n}) \subseteq A(R_t)$.
-   This narrowing "freezes" the process into a persistent mode.
-6. **Independence Proof:**
-   The derivation depends only on the relational operators $(\Psi, L, Q)$. Since these are defined over the phase-state of the process, the resulting persistence is independent of the implementation mechanism (discrete CA or continuous PDE).
-7. **Convergence:**
-   For any localized asymmetry $\mathcal{E}_L$, the recursive application of the process cycle $\mathcal{C}$ converges to a stabilized orientational lock $K$ (The Knot) if $\delta_R / \gamma_R > \lambda_c$ (Reinforcement/Decay ratio exceeds the critical stability limit).
+1. **Axiom of Necessity:** $(\mathcal{E} \neq 0) \Leftrightarrow_R \delta(\mathcal{E} > 0)$. (Zero state is forbidden).
+2. **Binary Instability ($N=2$):**
+   In a system with exactly two crossings, the orientational references $-(i)_1, -(i)_2$ are mutually antagonistic without circular reinforcement. The "knot" slides off the process.
+   $Derivation: \lim_{t \to \infty} D(S_1 \parallel S_2)_{N=2} = 0$.
+3. **The Forbidden State Trap:**
+   Since $N=2$ leads to $D=0$ (Symmetry), and $D=0$ is forbidden by the Axiom of Necessity, the process cannot stabilize at 2nd-order complexity.
+4. **The 3-Peak Lock ($N=3$):**
+   Introducing a third crossing $-(i)_3$ provides the topological anchor needed to "tie" the orientational locking sequence.
+   $Condition: -(i)_3 \in A(R_1 \cap R_2)$.
+5. **Emergent Identity:**
+   Once $N=3$ is achieved, the residue update operator $\Psi$ induces a fixed point in the orientation frame. The admissibility window $A(R)$ narrows monotonically, "freezing" the loop into a persistent entity.
+6. **Necessity of Identity:**
+   Structural persistence is not "chosen" but is the only admissible mode of continuation that avoids the forbidden null state. Identity is "reality organized knot-wise" at the minimum viable complexity.
+7. **Conclusion:** Identity is a non-substantive topological necessity. ∎
 
 ## 3. Falsification of Alternatives
-- **Substance-First Hypothesis:** Assume identity requires a material primitive $M$.
-- **Contradiction:** If $M$ is not subject to the update rule $\Delta \in A(R)$, it violates the Monistic Process Axiom (nothing exists outside the process). If $M$ *is* subject to the rule, its persistence is derived from $A(R)$, making $M$ a redundant projection of the knot.
-- **Conclusion:** Identity must be non-substantive.
+- **Simple Symmetry Hypothesis:** Assume the process can stabilize in a perfectly symmetric or binary state.
+- **Contradiction:** Perfect symmetry ($D=0$) violates the core biconditional (ℰ≠0). Binary opposition ($N=2$) collapses to symmetry. Therefore, any persistent state *must* be complex ($N \ge 3$).
+- **Conclusion:** Identity must be complex and non-substantive.
 
 ## 4. Status
 - **Claim ID:** THEOREM-001
