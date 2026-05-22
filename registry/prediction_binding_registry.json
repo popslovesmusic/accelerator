@@ -22,12 +22,46 @@
     {
       "binding_id": "PB-002-COHERENCE",
       "math_family": "LF-007_invariance_arbitration_multiscale",
-      "operator_basis": ["CSI", "NavT", "-(i)"],
+      "operator_basis": [
+        "CSI",
+        "NavT",
+        "-(i)"
+      ],
       "predicted_signature": "Persistent multiscale coherence transfer across neighborhood boundaries.",
       "observable_proxy": "coherence_metrics",
       "dataset_class": "spatial_network_dynamics",
       "null_model": "uncoupled_random_nodes",
       "falsification_condition": "Rapid decay of coherence beyond nearest-neighbor radius regardless of CSI reach.",
+      "allowed_claim_scope": "STRICTLY_LOCAL_ANALOG_SUPPORT"
+    },
+    {
+      "binding_id": "PB-003-DISTINGUISHABILITY",
+      "math_family": "LF-001_admissibility_and_selection",
+      "operator_basis": [
+        "epsilon",
+        "delta",
+        "distinguishability_threshold"
+      ],
+      "predicted_signature": "Discrete selection events emerge if and only if relationally detectable mismatch exceeds the local threshold \u03b8.",
+      "observable_proxy": "mismatch_floor_metrics",
+      "dataset_class": "stochastic_timeseries",
+      "null_model": "continuous_linear_drift",
+      "falsification_condition": "Selection occurs below declared \u03b8 floor or fails to select when D >> \u03b8.",
+      "allowed_claim_scope": "STRICTLY_LOCAL_ANALOG_SUPPORT"
+    },
+    {
+      "binding_id": "PB-004-RATCHET-DEFORMATION",
+      "math_family": "LF-015_channel_memory",
+      "operator_basis": [
+        "residue",
+        "ratchet_event",
+        "admissibility_manifold"
+      ],
+      "predicted_signature": "Discrete selection events induce asymmetric deformations in the future admissibility manifold, creating persistent continuation channels.",
+      "observable_proxy": "admissibility_deformation_metrics",
+      "dataset_class": "recursive_process_traces",
+      "null_model": "memoryless_markov_continuation",
+      "falsification_condition": "Admissibility window and selection probability remain invariant to historical selection sequence.",
       "allowed_claim_scope": "STRICTLY_LOCAL_ANALOG_SUPPORT"
     }
   ],

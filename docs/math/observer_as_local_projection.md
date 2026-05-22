@@ -19,6 +19,10 @@ An "observer" is a metastable structure whose continuation depends on successful
 ## 3. Rejection of Privileged Frames
 This doctrine strictly forbids any claims based on privileged, absolute, or cost-free observation. All knowledge within the framework is local, contingent, and derived from finite process interaction.
 
+## Governance Traceability
+- **Source Relation:** (ℰ≠0) ⇔_R δ(ℰ>0)
+- **Non-Separability Acknowledged:** This projection is recursively inseparable from the root process.
+
 ## Status Footer
 - **Patch ID:** MPF-ONTO-035
 - **Status:** CLARIFICATION_COMPLETE

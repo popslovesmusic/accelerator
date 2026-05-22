@@ -16,6 +16,10 @@ A **Metastable Basin** is the observable "valley" projected from a region of hig
 ## 3. Governance: No Reification of Geometry
 Under the Core Lock, it is strictly forbidden to treat geometry as a primitive. All geometric arguments must trace their lineage back to the core process expression.
 
+## Governance Traceability
+- **Source Relation:** (ℰ≠0) ⇔_R δ(ℰ>0)
+- **Non-Separability Acknowledged:** This projection is recursively inseparable from the root process.
+
 ## Status Footer
 - **Patch ID:** MPF-CORE-TRACE-014
 - **Status:** CLARIFICATION_COMPLETE

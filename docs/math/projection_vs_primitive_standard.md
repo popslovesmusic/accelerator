@@ -22,6 +22,10 @@ When evaluating a new concept, ask:
 - Does it have a finite lifespan or is it claimed to be permanent? (If permanent, it is forbidden reification).
 - Is it a "thing" or is it a "pattern of doing"? (If a thing, it is forbidden reification).
 
+## Governance Traceability
+- **Source Relation:** (ℰ≠0) ⇔_R δ(ℰ>0)
+- **Non-Separability Acknowledged:** This standard is recursively inseparable from the root process.
+
 ## Status Footer
 - **Patch ID:** MPF-ONTO-032
 - **Status:** STANDARD_DEFINED

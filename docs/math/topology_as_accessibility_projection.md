@@ -16,6 +16,10 @@ Changes in topology (e.g., fracture, merge) are not arbitrary deformations of a 
 ## 3. Governance: No Reification of Topology
 Under the Core Lock, it is strictly forbidden to treat topology as a primitive substrate. All topological arguments (e.g., Betti numbers, connected components) must trace their lineage back to the accessibility and continuation rules derived from the core expression.
 
+## Governance Traceability
+- **Source Relation:** (ℰ≠0) ⇔_R δ(ℰ>0)
+- **Non-Separability Acknowledged:** This projection is recursively inseparable from the root process.
+
 ## Status Footer
 - **Patch ID:** MPF-CORE-TRACE-015
 - **Status:** CLARIFICATION_COMPLETE
