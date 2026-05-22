@@ -5,10 +5,10 @@ This document defines the formal criteria for distinguishing the true primitives
 
 ## 2. The Primitives
 The framework has only **one** primitive: the inseparable process relation itself.
-$$ (\mathcal{E} 
-e 0) \Leftrightarrow_R \delta(\mathcal{E} > 0) $$
-The core "aspects" of this relation—Distinction (ℰ≠0), Continuation (δ(ℰ>0)), and Residue-Binding (⇔_R)—are the axiomatic components.
+$$ (\mathcal{E} \neq 0) \Leftrightarrow_x \delta(\mathcal{E} > 0) $$
+The core "aspects" of this relation—Distinction (ℰ≠0), Continuation (δ(ℰ>0)), and Aspect-Binding (⇔_x)—are the axiomatic components.
 
+Historically, the binding aspect was first defined as **⇔_R** (residue-binding), which remains a foundational member of the broader ⇔_x operator family.
 ## 3. Criteria for a Stabilized Projection
 An object or structure is a **stabilized projection** if it meets the following criteria:
 1.  **Derivability:** It can be formally derived from the recursive application of the core process expression.
@@ -23,7 +23,7 @@ When evaluating a new concept, ask:
 - Is it a "thing" or is it a "pattern of doing"? (If a thing, it is forbidden reification). An entity must be presented as an **organization-mode** of the recursive process.
 
 ## Governance Traceability
-- **Source Relation:** (ℰ≠0) ⇔_R δ(ℰ>0)
+- **Source Relation:** (ℰ≠0) ⇔_x δ(ℰ>0)
 - **Non-Separability Acknowledged:** This standard is recursively inseparable from the root process.
 
 ## Status Footer

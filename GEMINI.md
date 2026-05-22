@@ -216,7 +216,33 @@ A **mechanism class** is defined by its governing update rule or equation type.
 
 ---
 
-## 4. Theoretical Grounding & Lexicon
+## 4. Non-Occlusive Humility Clause (MANDATORY)
+
+### 4.1 Core Rule
+No unrestricted ontological, physical, mathematical, or universal truth claims may be made from framework structure, metaphor, simulation, analogy, or internal consistency alone. Agents MUST report what was observed, defined, simulated, compared, or structurally mapped, with explicit scope.
+
+### 4.2 Required Claim Framing
+- **Must Use:** "Within this framework...", "Within the tested regime...", "This model treats...", "This result is consistent with...", "This structurally resembles...", "This does not establish external physical truth...", "The comparison is analogical, not an identity claim..."
+- **Must NOT Use (Unqualified):** proves, solves, demonstrates reality, shows that the universe, establishes as fact, confirms physical truth, unifies physics, replaces existing theory, is the actual mechanism of nature.
+
+### 4.3 Claim Classification (C0â€“C5)
+- **C0 (Definition):** Internal terminology or notation only.
+- **C1 (Model-Relative):** Statement valid only inside the declared framework or formal scaffold. (**DEFAULT**)
+- **C2 (Simulation-Observed):** Outcome observed within a declared simulation/config/seed regime.
+- **C3 (Structural Comparison):** Comparison to external theory/data as resemblance, analogy, or contrast only.
+- **C4 (Supported Internal):** Internally supported by multiple governed mechanisms, tests, and falsification attempts.
+- **C5 (External Claim):** Requires external peer review, independent reproduction, and domain evidence. (**BLOCKED BY DEFAULT**)
+
+### 4.4 Non-Occlusion Mandate
+- Do not hide uncertainty behind vague humility language.
+- Do not soften claims so much that mechanisms become unclear.
+- Always expose scope, evidence type, failure conditions, and NaN/null/failed results.
+- Distinguish observation from interpretation and analogy from identity.
+- Preserve negative results and boundary cases.
+
+---
+
+## 5. Theoretical Grounding & Lexicon
 
 All terms MUST resolve through the canonical lexicon and compliance authority:
 

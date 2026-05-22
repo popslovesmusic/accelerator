@@ -20,7 +20,7 @@ An "observer" is a metastable structure whose continuation depends on successful
 This doctrine strictly forbids any claims based on privileged, absolute, or cost-free observation. All knowledge within the framework is local, contingent, and derived from finite process interaction.
 
 ## Governance Traceability
-- **Source Relation:** (ℰ≠0) ⇔_R δ(ℰ>0)
+- **Source Relation:** (ℰ≠0) ⇔_x δ(ℰ>0)
 - **Non-Separability Acknowledged:** This projection is recursively inseparable from the root process.
 
 ## Status Footer

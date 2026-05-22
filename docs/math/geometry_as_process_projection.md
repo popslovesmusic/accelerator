@@ -1,9 +1,10 @@
 # Geometry as Process Projection
 
 ## 1. Purpose
-This document clarifies that geometric objects within the Mono-Process Framework (e.g., threshold manifolds, fracture surfaces, basin ridges) are **not** independent primitive substrates. They are **stabilized process projections** derived from the core recursive process relation, (ℰ≠0) ⇔_R δ(ℰ>0).
+This document clarifies that geometric objects within the Mono-Process Framework (e.g., threshold manifolds, fracture surfaces, basin ridges) are **not** independent primitive substrates. They are **stabilized process projections** derived from the generalized core recursive process relation, (ℰ≠0) ⇔_x δ(ℰ>0).
 
-## 2. The Projection Doctrine
+- **Source Relation:** (ℰ≠0) ⇔_x δ(ℰ>0)
+- **Geometry Definition:** Geometry is the operational accessibility structure of topology under a specific deformation regime **x**.
 Apparent geometry is a derived, observer-dependent projection of stabilized process dynamics.
 $$ Geom_{app}(U) := Proj_{geom}(	ext{stabilized process}) $$
 
@@ -17,7 +18,7 @@ A **Metastable Basin** is the observable "valley" projected from a region of hig
 Under the Core Lock, it is strictly forbidden to treat geometry as a primitive. All geometric arguments must trace their lineage back to the core process expression.
 
 ## Governance Traceability
-- **Source Relation:** (ℰ≠0) ⇔_R δ(ℰ>0)
+- **Source Relation:** (ℰ≠0) ⇔_x δ(ℰ>0)
 - **Non-Separability Acknowledged:** This projection is recursively inseparable from the root process.
 
 ## Status Footer

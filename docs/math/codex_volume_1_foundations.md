@@ -1,19 +1,20 @@
 # Codex Volume 1: Foundations
 
-The Mono-Process Framework begins from a single inseparable process principle: (ℰ≠0) ⇔_R δ(ℰ>0). This does not state that two things are equal. It states that distinction and continuation are mutually constituting aspects of one recursive process. All later operators, laws, geometries, topologies, campaigns, and theorem candidates are subordinate derivations or projections of this root principle.
+The Mono-Process Framework begins from a single inseparable process principle: (ℰ≠0) ⇔_x δ(ℰ>0). This does not state that two things are equal. It states that distinction and continuation are mutually constituting aspects of one recursive process, co-conditioned under an admissibility grammar or deformation regime x. All later operators, laws, geometries, topologies, campaigns, and theorem candidates are subordinate derivations or projections of this root principle.
 
 This volume documents the irreducible primitives and foundational expressions of the Mono-Process Framework.
 
 ## 1. The Core Expression
-The framework is built upon the principle of strict procedural monism, where every state transition is a continuation event governed by mismatch minimization. The canonical root expression is **(ℰ≠0) ⇔_R δ(ℰ>0)**.
+The framework is built upon the principle of strict procedural monism, where every state transition is a continuation event governed by mismatch minimization. The generalized canonical root expression is **(ℰ≠0) ⇔_x δ(ℰ>0)**.
 
 ## 2. Primitive Terms
 - **Distinction / ε (Epsilon)**: Mismatch, signal, or pressure driving transition, denoted as (ℰ≠0) in the core expression.
-- **Continuation / δ**: The selection operator or continuation event, denoted as δ(ℰ>0).
-- **Recursive Binding (⇔_R)**: Residue-conditioned recursive aspect-binding between distinction and continuation.
+- **Continuation / δ**: The continuation/deviation event operator that generates or exposes candidate continuation under nonzero distinguishability, denoted as δ(ℰ>0).
+- **Deformation-Regime Binding (⇔_x)**: The operator family representing recursive aspect-binding between distinction and continuation under deformation regime x.
+- **Residue-Binding (⇔_R)**: A specific member of the ⇔_x family representing recursive binding through retained continuation history (residue).
 - **R (Residue)**: R-conditioned persistence of prior continuation into future admissibility.
 - **Structure**: Stabilized projection of the recursive process.
-- **Topology & Geometry**: Derived apparent structures (stabilized projections) of the underlying recursive process.
+- **Topology & Geometry**: Derived apparent structures (stabilized projections) of the underlying recursive process, recursively co-conditioning each other (Topology ⇔_x Geometry).
 - **ρ (Rho)**: Continuation capacity.
 - **K (CSI)**: Coupling, reach, or interaction domain.
 - **-(i) (Orientation Operator)**: Local orientation-conditioned continuation operator.
@@ -82,11 +83,23 @@ The framework is built upon the principle of strict procedural monism, where eve
 - **Comp_C(X, Y) (Composition Rule)**: operational constraint on how structures X and Y may admissibly combine (Formalized in LAW-034).
 - **Invalid_C(X, Y) (Invalid Composition)**: condition where composition violates admissibility, budget, or failure-mode preservation (Formalized in LAW-034).
 
-## 3. The NOT-Axiom
-Exclusion necessity condition: ε ≠ 0. This drives the necessity of process continuation.
+## 3. Operator Family Generalization
+The operator region of the core expression, **⇔_x**, represents a family of recursive co-conditioning relations. The subscript **x** defines the admissible deformation regime, selection grammar, or topology of transformation. It is not merely decoration; x specifies what invariants are preserved and how the aspects of the process (relation, topology, geometry, residue, and continuation) co-condition one another.
 
-## 4. Admissibility Foundations
-Admissibility defines the window within which continuation is possible. It is the core constraint on the selection of next states.
+### 3.1 Initial Operator Family
+- **⇔_R (Residue-binding)**: Binding through retained continuation history. Preserves residue continuity, recursive persistence, and history pressure.
+- **⇔_D (Deviation-binding)**: Binding through nonzero mismatch/deformation pressure. Preserves asymmetry, distinguishability, and prevents terminal symmetry collapse.
+- **⇔_A (Admissibility-binding)**: Binding through admissible transformation bounds. Preserves the admissibility window, budget constraints, and failure visibility.
+- **⇔_T (Topology-binding)**: Binding through stabilized residue organization. Preserves structural locking, continuation memory, and basin form.
+- **⇔_G (Geometry-binding)**: Binding through relational accessibility and admissible path structure. Preserves reachability, orientation pathing, and accessibility.
+- **⇔_Ω (Orientation-binding)**: Binding through local/global orientation negotiation. Preserves directionality, local frame distinction, and orientation asymmetry.
+- **⇔_Ξ (Reconstruction-binding)**: Binding present structure to possible histories under reconstruction limits. Preserves bounded recoverability, observational equivalence, and loss-awareness.
+
+## 4. The NOT-Axiom
+Exclusion necessity condition: ε ≠ 0. This drives the necessity of process continuation and enforces the conservation of asymmetry.
+
+## 5. Admissibility Foundations
+Admissibility defines the window within which continuation is possible. It is the core constraint on the selection of next states, governed by the specific deformation regime x.
 
 ---
 [Back to Master Index](codex_master_index.md)

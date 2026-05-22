@@ -1,6 +1,6 @@
 # Codex Volume 2: Admissibility and Continuation
 
-*Note: All operators and topological bounds detailed in this volume are [stabilized process projections derived from the canonical core expression](derived_structure_doctrine.md) **(ℰ≠0) ⇔_R δ(ℰ>0)**, not independent primitives.*
+*Note: All operators and topological bounds detailed in this volume are [stabilized process projections derived from the canonical core expression](derived_structure_doctrine.md) **(ℰ≠0) ⇔_x δ(ℰ>0)**, not independent primitives.*
 
 This volume maps the operational dynamics of admissibility and state transition.
 
@@ -44,10 +44,18 @@ Orientation governs the "directionality" of continuation and transport.
   $$T_{app}(U) := Proj_{time}(O_U, D_R(U), \prec_U)$$
   - **No Primitive Time**: $T_{app}$ is a bookkeeping parameter, not a background coordinate.
   - **Density-Dependent Appearance**: High reconciliation density regions project to high update-density (fast apparent time); low density regions project to low update-density (slow apparent time).
-- **Apparent Geometry Projection Law (LAW-010)**: Defines apparent geometry as a projection of stabilized reconciliation topology.
+- **Apparent Geometry Projection Law (LAW-010)**: Defines apparent geometry as a projection of stabilized reconciliation topology, co-conditioned by accessibility.
   $$Geom_{app}(U) := Proj_{geom}(G_U, D_R(U), Reach(U), Top_A(U))$$
   - **Non-Primitive Geometry**: Geometry is a derived appearance, not a primitive metric substrate.
-  - **Topology-First**: Accessibility relations and admissibility topology determine geometric structure.
+  - **Topology-Geometry Biconditional**: Geometry is the operational accessibility of topology; topology is the stabilized memory of geometric continuation. They recursively co-condition each other (**Topology ⇔_x Geometry**).
+
+### 3.1 Topology–Geometry Biconditional Coupling
+The framework rejects a one-way derivation where topology linearly determines geometry. Instead, topology and geometry are recursively co-conditioned under the admissibility grammar **x**.
+- **Principle**: "No structure ⇒ No geometry."
+- **Recursive Co-conditioning**: Topology constrains the active geometry (accessibility) of a basin, while geometry in turn constrains the domain where future topological ratchet events may occur.
+- **Ratchet Discreteness**: (ℰ≠0) enforces conservation of asymmetry through the chain: 
+  $$(ℰ≠0) \rightarrow \text{ratchet event} \rightarrow \text{residue } R \rightarrow \text{Topology} \Leftrightarrow_x \text{Geometry} \rightarrow \delta(ℰ>0)$$
+  Ratchet events convert collapse-pressure into discrete stabilized residue, preventing terminal symmetry collapse.
 - **Stabilized Reconciliation Basin Law (LAW-011)**: Defines how persistent reconciliation structures stabilize into basin-like organizations.
   $$B_U := \{ \alpha \in U : R_\alpha \text{ recurs with bounded drift and finite transport flux} \}$$
   - **Non-Attractor Persistence**: Basins are stabilized recurrence organizations, not static attractors or fixed points.
@@ -186,15 +194,17 @@ Orientation governs the "directionality" of continuation and transport.
   - **Reduction Rules**: Admissibility-preserving simplification of complex process expressions.
   - **Grammar Scope Clause**: The grammar is local and provisional, not a universal formal logic.
 
-## 4. delta (Selection Operator)
-The mechanism that selects the next state from the admissible candidate set.
+## 4. delta (Continuation/Deviation Operator)
+The mechanism that generates or exposes candidate continuation under nonzero distinguishability.
 - **Explicit Functional Form Candidate (LAW-001)**:
   $$\delta(E_\alpha > 0) := \{ x'_\alpha \in A_\alpha : x'_\alpha = x_\alpha + \Pi_{A_\alpha}(\sum_{\beta \in CSI(\alpha)} NavT(\omega_\alpha, \omega_\beta)), \text{ and } E_\alpha > \epsilon_{null} \}$$
-- **Mismatch Minimization**: The governing principle of delta.
+- **Role Correction**: $\delta$ is the continuation/deviation event operator. It identifies valid transitions within the admissible domain.
+- **Joint Selection**: Selection of the specific next state is produced jointly by $\delta$ operating inside the deformation regime specified by the operator family **⇔_x**.
+- **Mismatch Minimization**: The governing principle driving the evolution of $\delta$.
 - **Non-Empty Image**: Existence condition formalized in MT-003.
 
-## 4. Selection Rules
-Specific rules (SR-001, etc.) that resolve multi-valued delta outputs in degenerate minima scenarios.
+## 5. Selection Rules
+Specific rules (SR-001, etc.) that resolve multi-valued delta outputs in degenerate minima scenarios, further constrained by the active deformation regime **x**.
 
 ---
 [Back to Master Index](codex_master_index.md)

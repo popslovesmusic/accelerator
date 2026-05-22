@@ -14,14 +14,18 @@ All symbols used in a theorem must be mapped to formal algebraic types.
 - **Threshold (θ):** The relational distinguishability floor.
 
 ### 2.2 Operator Grammar (⇔_x)
-The derivation must utilize the governed operator grammar:
-- **⇔_R:** Residue-mediated coupling.
-- **⇔_δ:** Deviation-conditioned transformation.
-- **⇔_φ:** Phase-conditioned relation.
+The derivation must utilize the governed operator family:
+- **⇔_R:** Residue-binding (history pressure).
+- **⇔_D:** Deviation-binding (distinguishability).
+- **⇔_A:** Admissibility-binding (constraint bounds).
+- **⇔_T:** Topology-binding (structural locking).
+- **⇔_G:** Geometry-binding (accessibility).
+- **⇔_Ω:** Orientation-binding (negotiation).
+- **⇔_Ξ:** Reconstruction-binding (recoverability).
 
 ### 2.3 The Trace Sequence
 A valid symbolic trace must consist of:
-1. **Initial Axiom:** Statement of the core biconditional (ℰ≠0) ⇔_R δ(ℰ>0).
+1. **Initial Axiom:** Statement of the generalized core biconditional (ℰ≠0) ⇔_x δ(ℰ>0).
 2. **Expansion:** Deconstruction of the operators into primitive transformations.
 3. **Invariance Check:** Proof that the relationship holds across discrete (CA) and continuous (PDE) limits.
 4. **Convergence:** Proof that the recursive application of the update rule leads to the stated persistent structure.

@@ -24,6 +24,8 @@ Every action must be grounded in the four foundational laws:
 
 **Core Inseparable Principle Lock:** The canonical root expression of the Mono-Process Framework is **(ℰ≠0) ⇔_R δ(ℰ>0)**. It denotes residue-conditioned recursive aspect-binding. You MUST NOT interpret the framework as a "geometry-first", "topology-first", "operator-first", or "physics master equation" ontology. All structures are projections of the single recursive process.
 
+**Non-Occlusive Humility Clause:** No unrestricted ontological, physical, mathematical, or universal truth claims may be made from framework structure, metaphor, simulation, analogy, or internal consistency alone. You MUST report what was observed, defined, simulated, compared, or structurally mapped, with explicit scope.
+
 ## 3. Mode Selection & Activation
 
 - **Audit Mode (Default):** Activated by inquiries, lookups, and status checks.
@@ -43,6 +45,14 @@ Every action must be grounded in the four foundational laws:
 
 ### 4.3 Results Hygiene & Data Provenance
 - **Recoverable Output:** No empirical claim is valid without a recoverable output path in `results/`.
+- **Claim Class Reporting:** Every claim MUST include an evidence class (C0â€“C5). C5 claims are BLOCKED BY DEFAULT.
+- **Reporting Structure:** Every report/paper MUST follow the structure:
+    1. Scope
+    2. Directly observed/defined
+    3. Inferred inside framework
+    4. External resemblance (Analogy only)
+    5. What it does NOT prove
+    6. Failure modes / uncertainty
 - **Zenodo Standards:** Publications must include a complete archival bundle (Metadata, Manifest, Falsification, Configs, Data).
 
 ## 5. Permissions & Prohibitions
@@ -51,15 +61,20 @@ Every action must be grounded in the four foundational laws:
 - Execute any approved tool in the `tools/` directory.
 - Create experimental configs and result directories.
 - Update mathematical registries and lexicon validation status.
-- Generate technical papers using the mandatory 11-section template.
+- Generate technical papers using the mandatory 11-section template, strictly following the humility structure.
 
 ### You MUST NOT:
 - Modify engine code (C++/C#) without explicit authorization.
 - Overwrite default/canonical configs.
 - Promote claims above the evidence level supported by the Unified Claim Gate.
 - Fabricate validation results or suppress failing falsification vectors.
+- Present analogy as identity or simulation as physical fact.
+- Use terms like "proves", "solves", or "unifies" for external reality.
 
-## 6. Maintenance & Patch Workflow
+## 6. Claim-Humility Review Instruction
+Before finalizing any paper, codex section, audit, theorem note, or public-facing text, you MUST scan for claim escalation. Rewrite all unsupported claims into scoped observations, internal definitions, or bounded structural comparisons.
+
+## 7. Maintenance & Patch Workflow
 
 For every Manual Patch or Maintenance task:
 1. Parse user intent (JSON or Command).

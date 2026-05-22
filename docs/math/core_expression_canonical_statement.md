@@ -1,7 +1,9 @@
 # MPF Core Expression: Canonical Statement
 
 ## 1. The Canonical Expression
-The expression **(ℰ≠0) ⇔_R δ(ℰ>0)** is the canonical root expression of the Mono-Process Framework. It encodes the inseparable recursive relation between distinction and continuation under residue-conditioned closure.
+The expression **(ℰ≠0) ⇔_x δ(ℰ>0)** is the generalized canonical root expression of the Mono-Process Framework. It encodes the inseparable recursive relation between distinction and continuation under an admissibility-conditioned deformation regime **x**. 
+
+Historically, this relation was first identified in its residue-conditioned form, **(ℰ≠0) ⇔_R δ(ℰ>0)**, which remains a primary and valid member of the broader ⇔_x operator family.
 
 ## 2. Residue-Conditioned Aspect Binding
 **⇔_R** does not denote ordinary equality, implication, or logical biconditional. It denotes residue-conditioned recursive aspect-binding: distinction and continuation co-condition each other as inseparable aspects of one process.

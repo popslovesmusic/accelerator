@@ -1,7 +1,10 @@
 # Topology as Accessibility Projection
 
 ## 1. Purpose
-This document clarifies that topology within the Mono-Process Framework is **not** a primitive container or background grid. It is an **admissibility-conditioned accessibility structure** derived from the core recursive process relation, (ℰ≠0) ⇔_R δ(ℰ>0).
+This document clarifies that topology within the Mono-Process Framework is **not** a primitive container or background grid. It is an **admissibility-conditioned accessibility structure** derived from the generalized core recursive process relation, (ℰ≠0) ⇔_x δ(ℰ>0).
+
+- **Source Relation:** (ℰ≠0) ⇔_x δ(ℰ>0)
+- **Topology Definition:** Topology is the stabilized memory of geometric continuation under a specific deformation regime **x**. It recursively co-conditions geometry (Topology ⇔_x Geometry).
 
 ## 2. The Accessibility Doctrine
 Apparent topology is a projection of the stabilized graph of admissible continuation paths.
@@ -17,7 +20,7 @@ Changes in topology (e.g., fracture, merge) are not arbitrary deformations of a 
 Under the Core Lock, it is strictly forbidden to treat topology as a primitive substrate. All topological arguments (e.g., Betti numbers, connected components) must trace their lineage back to the accessibility and continuation rules derived from the core expression.
 
 ## Governance Traceability
-- **Source Relation:** (ℰ≠0) ⇔_R δ(ℰ>0)
+- **Source Relation:** (ℰ≠0) ⇔_x δ(ℰ>0)
 - **Non-Separability Acknowledged:** This projection is recursively inseparable from the root process.
 
 ## Status Footer

@@ -14,7 +14,7 @@ def validate_core_expression():
     }
     
     required_strings = [
-        "(ℰ≠0) ⇔_R δ(ℰ>0)",
+        "(ℰ≠0) ⇔_x δ(ℰ>0)",
         "recursive aspect-binding",
         "derived structure doctrine",
         "core_expression_dependency",

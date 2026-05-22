@@ -1,6 +1,6 @@
 # Mathematical Codex Master Index
 
-The Mono-Process Framework begins from a single inseparable process principle: (ℰ≠0) ⇔_R δ(ℰ>0). This does not state that two things are equal. It states that distinction and continuation are mutually constituting aspects of one recursive process. All later operators, laws, geometries, topologies, campaigns, and theorem candidates are subordinate derivations or projections of this root principle.
+The Mono-Process Framework begins from a single inseparable process principle: (ℰ≠0) ⇔_x δ(ℰ>0). This does not state that two things are equal. It states that distinction and continuation are mutually constituting aspects of one recursive process, co-conditioned under an admissibility grammar or deformation regime x. All later operators, laws, geometries, topologies, campaigns, and theorem candidates are subordinate derivations or projections of this root principle.
 
 This codex assembles theorem lineage, operator definitions, derivation chronology, and recursive campaign progression into a navigable manuscript.
 

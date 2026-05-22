@@ -1,7 +1,10 @@
 # Operator Lineage from Core Expression
 
 ## 1. Purpose
-This document formally traces the lineage of the primary operators of the Mono-Process Framework back to the canonical root expression: **(ℰ≠0) ⇔_R δ(ℰ>0)**. This ensures they are understood as derived aspects of the core process, not independent primitives.
+This document formally traces the lineage of the primary operators of the Mono-Process Framework back to the generalized canonical root expression: **(ℰ≠0) ⇔_x δ(ℰ>0)**. This ensures they are understood as derived aspects of the core process, not independent primitives.
+
+- **Source Relation:** (ℰ≠0) ⇔_x δ(ℰ>0)
+- **Operator Maturation:** The connective **⇔_x** represents a family of recursive co-conditioning relations. Historically, **⇔_R** (residue-binding) was the first member identified, but it is now understood as one branch of the broader **x** deformation-regime set.
 
 ## 2. Operator Derivations
 

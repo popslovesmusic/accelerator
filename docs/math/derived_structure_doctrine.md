@@ -1,7 +1,7 @@
 # Derived Structure Doctrine
 
 ## 1. Statement of Doctrine
-Operators, laws, basins, channels, thresholds, manifolds, geometries, topologies, and theorem objects are not independent primitives. They are stabilized process projections derived from the canonical inseparable process relation: **(ℰ≠0) ⇔_R δ(ℰ>0)**.
+Operators, laws, basins, channels, thresholds, manifolds, geometries, topologies, and theorem objects are not independent primitives. They are stabilized process projections derived from the generalized canonical inseparable process relation: **(ℰ≠0) ⇔_x δ(ℰ>0)**.
 
 ## 2. Implications for the Framework
 - **Process is Primary:** Structure is a stabilized projection of process.
