@@ -1,75 +1,43 @@
-# Acellorator — Onboarding (honest + humble)
+# Onboarding: The Mono-Process Framework (MPF)
 
-Acellorator is a **governed research workspace** for exploring and stress-testing ideas related to *“The Law of the One Process”* using **multiple simulation engines**, shared experiment configs, and reproducible outputs.
+Welcome to the Acellorator research environment. You are operating within the **Calculus of Distinction**, a formal relational grammar for multiscale process research.
 
-It is best read as a lab notebook that is being actively structured into a more formal system: some parts are polished; others are still scaffolding.
+## 1. Governance Authority
+- **Authority:** The project-local `GEMINI.md` is the active execution authority.
+- **Narrative:** `MATH_PROGRAM_NARRATIVE.md` traces the genesis of the theory to its current **Level C6 Formal Closure**.
+- **Charter:** `registry/compliance_charter_v2_3.json` governs all claims, translations, and data provenance.
 
-## What this project is (and isn’t)
+## 2. Core Laws (The Master Set)
+Every researcher and agent must adhere to the four foundational pillars:
+1.  **3-Peak Rule (T001):** Stability requires $N \ge 3$; complexity is a necessity.
+2.  **Singularity Rebound (SING-001):** Singularity is a recursive trigger state, not an endpoint.
+3.  **Tertiary Node Structure (L043):** Persistence requires functional partitioning into $\{I, O, R\}$.
+4.  **Topology-Geometry Biconditional (L045):** Geometry is emergent relational accessibility.
 
-- It **is** a place to run model experiments across different *mechanism classes* (e.g., reaction–diffusion, agent-based, cellular automata, graph dynamics) and compare observables.
-- It **is** opinionated about governance: terminology, evidence provenance, and claim strength are intentionally constrained.
-- It **is not** a guarantee of “truth” about the world. When the repo says “supported,” it should be read as “supported **within these models and protocols**,” not as a universal statement.
-- It **is not** a single monolithic simulator. Think “ecosystem + workflow” rather than “one engine.”
+## 3. Standard Workflows
 
-## How to get value quickly
+### 3.1 Mathematical Development (Additive-Only)
+- **Location:** `docs/theory/foundational/5_03_26 unity/math/`
+- **Rule:** Never modify existing lemmas/proofs. Create new files and declare them `Supersedes: [OLD_ID]`.
+- **Sync:** Run `python scripts/sync_math_registry.py` after adding math objects.
 
-1. Read the governance narrative and rules of the road:
-   - `docs/governance/NARRATIVE.md`
-   - `docs/governance/AGENTS.md`
-2. Skim usage guides (choose what matches what you’re doing):
-   - `USAGE.md`
-   - `USAGE_ONEPROC.md`
-   - `USAGE_LEXICON.md`
-3. Pick a small, reproducible run to start with:
-   - `configs/` contains example configs
-   - `outputs/` is where recoverable run artifacts go
+### 3.2 Research Campaigns
+- **Output:** All results must be saved in `results/YYYY-MM-DD_runNN_name/`.
+- **Hygiene:** Every run must contain a `data/` and `artifacts/` subdirectory.
+- **Reporting:** Every campaign must produce a `paper.md` using the 11-section governed template.
 
-If you’re new, prefer running an existing config end-to-end before changing anything.
+### 3.3 Lexicon Induction
+- Missing terms must be added to `registry/lexicon_gap_queue.json` as `GAP_OPEN`.
+- Promotion to `L2 (Partially Verified)` requires evidence recorded in `registry/lexicon_validation_registry.json`.
 
-## Repository map (practical mental model)
+## 4. Verification & Validation
+- **Global Validate:** Run `./run_global_validation.bat` before any commit.
+- **Claim Gate:** Use `scripts/governance_gate.py` to classify research papers.
 
-- `tools/`: the engines and analysis tools (often with `validation/` evidence)
-- `configs/`: experiment configs (prefer creating new configs over editing defaults)
-- `scripts/`: orchestration, governance checks, and report tooling
-- `outputs/`: run artifacts intended to be recoverable and auditable
-- `registry/`: canonical manifests, lexicon, and compliance artifacts
-- `docs/`: narrative, theory notes, and paper-like writeups
-- `reports/`: audits and tool rigor summaries
-- `docs/math/` + `registry/math/`: the stabilized math core (operators/laws/gaps/obligations) used to interpret simulation evidence without elevating theorem/physics claims
+## 5. Publication
+- Official results are exported as **Zenodo Publication Bundles** in the `zenodo/` directory.
+- Bundles must include a SHA256 `provenance_manifest.json` for all data and artifacts.
 
-## Evidence and claim strength (what “governed” means here)
-
-This project tries to avoid two common failure modes:
-
-- **Overreach:** treating a model behavior as a universal fact.
-- **Single-mechanism lock-in:** treating one engine’s update rule as the whole story.
-
-The working norm is:
-
-- Prefer **mechanism independence** over “more runs of the same tool.”
-- Prefer **recoverable outputs** over screenshots or uncited claims.
-- Prefer **explicit observables and falsification conditions** over metaphor.
-
-## Terminology note (read gently)
-
-The repo uses a specialized vocabulary (e.g., *epsilon*, *residue*, *rho*, *coupling/CSI*, *admissibility*). These terms can overlap with standard physics words but are not guaranteed to mean the same thing. When in doubt:
-
-- treat definitions as **operational** (what is measured / what changes under what rule),
-- and look to `registry/` for canonical mappings and validation status.
-
-## If you want to contribute (safe defaults)
-
-- Add new experiments by creating **new config JSON** in `configs/` and writing outputs to a **new** run directory under `outputs/`.
-- Avoid editing engine/core simulation logic unless you explicitly intend to do engine development.
-- When writing new docs or papers, keep claims scoped and start conclusions with **“Within these models…”**.
-
-## Where to look if something feels “too strong”
-
-If a document sounds more confident than the evidence trail suggests, the best next step is usually to locate:
-
-- the run artifacts under `outputs/`,
-- the tool’s `validation/` materials (if present),
-- the governance/claim gate script outputs (if present),
-- and whether the result was cross-checked in a different mechanism class.
-
-That is not a criticism of the text—just a reminder of the project’s bias toward evidence you can rerun.
+---
+**Status:** ARCHIVAL READY
+**Compliance:** Charter v2.3
