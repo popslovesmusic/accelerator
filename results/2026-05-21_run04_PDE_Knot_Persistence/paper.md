@@ -27,62 +27,53 @@
 ```
 
 ## 1. Abstract
-Within these models... we verify the stability of localized "knots" in a continuous PDE system (Structural Box). We prove that a high-residue region maintains its structural identity (active_fraction) even after external update pressure ($\varepsilon$) is removed, confirming that entities are stabilized modes of continuation rather than material primitives.
+The Mono-Process Framework is founded on the principle that distinguishability and continuation are inseparable aspects of one recursive process, encoded as (ℰ≠0) ⇔_x δ(ℰ>0). Within these models, we observe the stability of localized "knots" in a continuous PDE system (Structural Box). We observed that high-residue regions maintain structural identity (active_fraction) even after external update pressure ($\varepsilon$) is removed. This result is consistent with the framework's treatment of entities as stabilized modes of continuation rather than material primitives.
 
-## 2. Theoretical Mapping
-```json
-{
-  "residue": "admissibility_deformation_layer",
-  "knot_stabilization": "persistent_organization_mode",
-  "entity": "stabilized_continuation_mode"
-}
-```
+## 2. Scope
+This investigation is limited to the `structural_box_sim_cpp` engine using a continuous PDE mechanism class. The parameters are focused on the persistence of activity in high-residue regions ($R=1.5$) under zero external pressure.
 
-## 3. Experimental Setup
+## 3. Direct Observation and Definition
+We observed that in a continuous field, localized regions with accumulated residue ($R=1.5$) maintained a non-zero activity fraction (12.4%) following the removal of external pressure. In contrast, control regions with zero residue exhibited 0% activity. This persistent activity is defined as **knot stabilization**.
+
+## 4. Framework-Internal Inference
+Within the framework, these observations are interpreted as the (ℰ≠0) ⇔_x δ(ℰ>0) process becoming recursively locked through historical residue. Entities are inferred to be stabilized modes of continuation where historical residue deforms the admissibility manifold to favor persistent activity.
+
+## 5. External Structural Resemblance (Analogy)
+The observed localized persistence structurally resembles solitons in non-linear optics or stable wave packets in fluid dynamics. These similarities are presented as analogies for conceptual bridging only.
+
+## 6. Non-Proof and Limits
+This result does not prove the existence of material atoms or provide a replacement for particle physics. It demonstrates a computational mechanism for structural persistence within a continuous field governed by recursive residue.
+
+## 7. Failure Modes and Uncertainty
+Potential failure modes include numerical dissipation over very long timescales (exceeding 2000 steps) and potential artifacts related to the spatial discretization of the SYCL-based PDE engine.
+
+## 8. Experimental Setup
 - **Mechanism:** Structural Box PDE (C++ SYCL).
 - **Control:** Zero residue, zero pressure.
 - **Experiment:** Initial residue = 1.5 (Knot), zero pressure.
 - **Goal:** Measure persistence ratio of activity.
 
-## 4. Observables
-```json
-{
-  "observable_1": "epsilon_active_fraction",
-  "normalization": "Persistence Ratio (Exp / Control)"
-}
-```
+## 9. Observables
+- **epsilon_active_fraction:** measure of local update activity.
+- **Persistence Ratio:** Ratio of experimental activity to control floor.
 
-## 5. Results
+## 10. Results
 - **Control:** 0% activity at zero pressure.
 - **Experiment:** 12.4% activity maintained via residue lock.
-- **Persistence Ratio:** Infinite (relative to control floor).
+- **Persistence Ratio:** Infinite relative to the zero-activity control floor.
 
-## 6. Cross-Model Comparison
-```json
-{
-  "agreement_type": "inhibitory_stabilization_symmetry",
-  "qualitative_match": ["The PDE knot exhibits the same 'locking' behavior observed in the CA hysteresis loop."]
-}
-```
+## 11. Cross-Model Comparison
+The PDE knot exhibits behavior consistent with the 'locking' observed in Cellular Automata hysteresis loops, suggesting a mechanism-independent principle of residue-driven stabilization.
 
-## 7. Falsification
-```json
-{
-  "tests_run": ["Zero Pressure Persistence (FV-5)"],
-  "result": "PASSED",
-  "notes": "Spontaneous activity dissolution failed to occur in the presence of residue, proving the stabilizing effect of the knot."
-}
-```
+## 12. Falsification
+Verified that spontaneous activity dissolution failed to occur in the presence of residue ($R=1.5$) after pressure removal, supporting the stabilizing effect of the residue-mediated knot.
 
-## 8. Artifact Analysis
-- **Numerical Stability:** Verified for 2000 steps.
+## 13. Classification
+Partially Supported (L2). The persistence of localized modes is consistent with the framework's predictions in this high-rigor C++ PDE engine.
 
-## 9. Classification
-- **Partially Supported (L2):** Demonstrated in a high-rigor C++ PDE engine.
+## 14. Conclusion
+Within these models, structural persistence is consistent with being an emergent result of recursive orientational locking. Entities are consistent with the description of "reality organized entity-wise" through stabilized continuation modes.
 
-## 10. Conclusion
-Within these models... structural persistence is an emergent result of recursive orientational locking. Entities are "reality organized entity-wise."
-
-## 11. Next Steps
+## 15. Next Steps
 - Multi-seed PDE runs.
 - Promote L037 to simulated.

@@ -1,14 +1,4 @@
-### 2.1 Lexicon Role Binding
-```json
-{
-  "term_roles": [],
-  "lexicon": {
-    "terms_used": []
-  }
-}
-```
-
-# Lexicon Validation (L1): Admissibility Orientation Selection (-(i))
+# TECHNICAL PAPER: Lexicon Validation - Admissibility Orientation Selection (-(i))
 
 ## 0. Metadata
 ```json
@@ -33,27 +23,33 @@
 ```
 
 ## 1. Abstract
-This paper operationally validates the lexicon term **`-(i)`** (Admissibility Orientation Selection). Using the C4-certified `structural_box_sim_cpp` engine, we demonstrate that the process of orientation selection is measurable through the `alignment_success_rate` metric, which quantifies the fraction of process increments successfully projected onto the admissibility window under mismatch forcing.
+The Mono-Process Framework is founded on the principle that distinguishability and continuation are inseparable aspects of one recursive process, encoded as (ℰ≠0) ⇔_x δ(ℰ>0). This paper explores the operational binding of the lexicon term `-(i)` (Admissibility Orientation Selection). Using the `structural_box_sim_cpp` engine, we observe that the process of orientation selection is measurable through the `alignment_success_rate` (ASR) metric.
 
-## 2. Theoretical Mapping
-```json
-{
-  "epsilon": "mismatch_field",
-  "residue": "excluded_increment",
-  "rho": "continuation_capacity",
-  "coupling": "structural_reach",
-  "delta": "realized_increment",
-  "orientation_minus_i": "selection_operator"
-}
-```
+## 2. Scope
+This validation is limited to the L1 evidence level within the structural dynamics model class. It focuses on the measurability and stability of the orientation selection operator under mismatch forcing.
 
-## 3. Experimental Setup
+## 3. Direct Observation and Definition
+We define the `-(i)` operator as the mechanism that selects an admissible orientation for process increments. We observe that ASR quantifies the fraction of increments successfully projected onto the admissibility window. In the tested model, ASR remains stable across variations in the admissibility threshold $\kappa$.
+
+## 4. Framework-Internal Inference
+The framework treats `-(i)` as a necessary operator for resolving the tension between (ℰ≠0) and the requirement for continuation. The stability of ASR suggests that the orientation selection is an intrinsic property of the coupling geometry within the model.
+
+## 5. External Structural Resemblance (Analogy)
+The `-(i)` operator structurally resembles the projection of a force vector onto a constraint surface in classical mechanics, or the selection of a branch in a decision tree based on feasibility constraints.
+
+## 6. Non-Proof and Limits
+These observations do not prove that `-(i)` exists as a physical primitive. The result is specific to the `structural_box_sim_cpp` implementation and the defined ASR metric.
+
+## 7. Failure Modes and Uncertainty
+ASR is sensitive to the magnitude and distribution of the mismatch field $\epsilon$. Under zero forcing, the metric is undefined. Numerical stability was confirmed for 100 steps.
+
+## 8. Experimental Setup
 *   **Tool:** `structural_box_sim_cpp`
 *   **Target Term:** `-(i)`
 *   **Role:** `admissibility_orientation_selection`
-*   **Method:** Parameter sweep across `kappa` (admissibility threshold) to verify the stability and measurability of the selection process.
+*   **Method:** Parameter sweep across `kappa` to verify the stability of the selection process.
 
-## 4. Observables
+## 9. Observables
 ```json
 {
   "asr": "alignment_success_rate",
@@ -62,8 +58,8 @@ This paper operationally validates the lexicon term **`-(i)`** (Admissibility Or
 }
 ```
 
-## 5. Results
-The `alignment_success_rate` (ASR) represents the efficiency of the `-(i)` operator in finding an admissible orientation.
+## 10. Results
+The simulation results show a stable `alignment_success_rate` (ASR) across the tested range.
 
 | Kappa ($\kappa$) | Alignment Success Rate (ASR) |
 | :--- | :--- |
@@ -71,27 +67,15 @@ The `alignment_success_rate` (ASR) represents the efficiency of the `-(i)` opera
 | 0.1 | 0.3554... |
 | 0.5 | 0.3554... |
 
-The invariance of ASR across the tested `kappa` range indicates that for the current mismatch configuration, the selection process maintains a stable operational efficiency of approximately 35.5%.
+## 11. Cross-Model Comparison
+Baseline established in C++ core; cross-model verification is scheduled for L2.
 
-## 6. Cross-Model Comparison
-(Scheduled for L2; baseline established in C++ core).
+## 12. Falsification
+*   **FV-1 (Zero-Logic):** Under zero forcing, ASR was observed to be zero/undefined.
+*   **FV-3 (Random Orientation):** Replacing `-(i)` with a random generator resulted in a significant drop in ASR, consistent with the deterministic operator's efficiency.
 
-## 7. Falsification
-*   **FV-1 (Zero-Logic):** Under zero forcing, ASR should be undefined or zero. (Passed).
-*   **FV-3 (Random Orientation):** Replacing the selection operator with a purely random vector generator.
-*   **Expectation:** ASR drops to near-zero as random increments are unlikely to fall within the narrow admissibility window $A_\alpha$.
-*   **Result:** Simulation results with random forcing confirm that the deterministic `-(i)` selection is significantly more efficient than random trial-and-error.
+## 13. Classification
+**Supported (L1)**. The term `-(i)` is consistent with the operational metric of `alignment_success_rate` in the tested model.
 
-## 8. Artifact Analysis
-*   **Stability:** High (constant across threshold variations).
-*   **Convergence:** Metric stabilized within 100 steps.
-
-## 9. Classification
-**Supported (L1)**. The term `-(i)` is operationally bound to the `alignment_success_rate` in the structural box model class.
-
-## 10. Conclusion
-Within these models, the term **`-(i)`** is operationally validated at L1. It successfully represents the mechanism of orientation selection within the admissibility window, providing a quantifiable metric for process efficiency.
-
-## 11. Next Steps
-1.  Promote `-(i)` role `admissibility_orientation_selection` to L1 in `lexicon_validation_registry.json`.
-2.  Validate **Relational Superposition** using `igsoa_complex_1d_cpp`.
+## 14. Conclusion
+Within these models, the term `-(i)` is operationally consistent with the mechanism of orientation selection. The results provide an L1 baseline for measuring the efficiency of admissibility projection within the structural box regime.

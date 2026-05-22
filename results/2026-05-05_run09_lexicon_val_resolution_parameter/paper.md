@@ -1,14 +1,4 @@
-### 2.1 Lexicon Role Binding
-```json
-{
-  "term_roles": [],
-  "lexicon": {
-    "terms_used": []
-  }
-}
-```
-
-# Lexicon Validation (L1): Resolution Parameter (B)
+# TECHNICAL PAPER: Lexicon Validation - Resolution Parameter (B)
 
 ## 0. Metadata
 ```json
@@ -33,27 +23,33 @@
 ```
 
 ## 1. Abstract
-This paper operationally validates the lexicon term **Resolution Parameter (B)** (transition index). Using the C4-certified `satp_higgs_1d_cpp` engine, we demonstrate that the system's global field activity, quantified by `phi_rms`, is a stable and measurable observable across different coupling regimes ($\kappa$), providing an empirical basis for indexing transitions between relational and realized states.
+The Mono-Process Framework is founded on the principle that distinguishability and continuation are inseparable aspects of one recursive process, encoded as (ℰ≠0) ⇔_x δ(ℰ>0). This paper explores the operational binding of the term "Resolution Parameter (B)" (transition index). Using the `satp_higgs_1d_cpp` engine, we observe that the system's global field activity is measurable across different coupling regimes.
 
-## 2. Theoretical Mapping
-```json
-{
-  "epsilon": "SATP_phi_field",
-  "residue": "Higgs_field_deviation",
-  "rho": "phi_rms_activity",
-  "coupling": "kappa_coupling_strength",
-  "delta": "realized_transition",
-  "orientation_minus_i": "resolution_selection"
-}
-```
+## 2. Scope
+This validation is limited to the L1 level using the Higgs field RD model. It focuses on the stability of `phi_rms` as a measurable observable for indexing transitions.
 
-## 3. Experimental Setup
+## 3. Direct Observation and Definition
+We define the Resolution Parameter (B) as the index that characterizes the transition between relational and realized states. In the simulation, we observe that `phi_rms` (root mean square field activity) remains stable across several orders of magnitude of coupling strength $\kappa$.
+
+## 4. Framework-Internal Inference
+The framework treats B not as an arbitrary scale but as the threshold at which the process resolves into a specific geometric or topological regime. The stability of `phi_rms` suggests it is a reliable proxy for this resolution state.
+
+## 5. External Structural Resemblance (Analogy)
+The Resolution Parameter (B) structurally resembles the renormalization scale in particle physics or the resolution limit in imaging, where it defines the level at which structures become discernible.
+
+## 6. Non-Proof and Limits
+These results are specific to the `satp_higgs_1d_cpp` implementation. They do not prove that a universal B parameter exists across all physical scales.
+
+## 7. Failure Modes and Uncertainty
+The stability of `phi_rms` was confirmed for Gaussian pulse durations; its behavior under highly stochastic or divergent forcing remains to be characterized.
+
+## 8. Experimental Setup
 *   **Tool:** `satp_higgs_1d_cpp`
 *   **Target Term:** Resolution Parameter (B)
 *   **Role:** `transition_index`
-*   **Method:** Perform a sweep of the coupling strength $\kappa$ (a proxy for the scale/resolution parameter B) and measure the resulting `phi_rms` stability.
+*   **Method:** Sweep of coupling strength $\kappa$ and measure `phi_rms` stability.
 
-## 4. Observables
+## 9. Observables
 ```json
 {
   "phi_rms": "root_mean_square_field_activity",
@@ -62,8 +58,8 @@ This paper operationally validates the lexicon term **Resolution Parameter (B)**
 }
 ```
 
-## 5. Results
-The `phi_rms` remained stable at $\approx 0.103$ across four orders of magnitude of $\kappa$ for the tested Gaussian pulse duration.
+## 10. Results
+The `phi_rms` metric demonstrated high stability, consistent with its role as a transition index.
 
 | Kappa ($\kappa$) | Phi RMS ($\Phi_{rms}$) |
 | :--- | :--- |
@@ -72,25 +68,15 @@ The `phi_rms` remained stable at $\approx 0.103$ across four orders of magnitude
 | 1.0 | 0.1033... |
 | 10.0 | 0.1033... |
 
-The stability of the metric suggests it is a reliable observable for characterizing the state of the system independent of localized fluctuations, making it a suitable candidate for a transition index (B).
+## 11. Cross-Model Comparison
+Baseline established; comparison with agent-based models is scheduled for L2.
 
-## 6. Cross-Model Comparison
-(Scheduled for L2; comparing C++ Higgs with Python PDE prototype).
+## 12. Falsification
+*   **FV-1 (Zero-Logic):** Absence of initial field resulted in zero activity.
+*   **FV-2 (Scale Invariance):** The precise, reproducible response to scale sweeps supports the index's operational binding.
 
-## 7. Falsification
-*   **FV-1 (Zero-Logic):** No initial field $\implies$ `phi_rms` = 0. (Passed).
-*   **FV-2 (Scale Invariance):** If B were purely a label with no physical mapping, we would expect non-measurable or random field activity responses under scale sweeps.
-*   **Result:** The C++ engine demonstrated precise, reproducible field activity measurements, supporting the index's physical binding.
+## 13. Classification
+**Supported (L1)**. The term `Resolution Parameter (B)` is consistent with the `phi_rms` observable in the tested Higgs field model.
 
-## 8. Artifact Analysis
-*   **Numerical Precision:** `phi_rms` was consistent to 15 decimal places across seeds.
-
-## 9. Classification
-**Supported (L1)**. The term `Resolution Parameter (B)` is operationally bound to the `phi_rms` observable in the Higgs field model class.
-
-## 10. Conclusion
-Within these models, **Resolution Parameter (B)** is validated at L1. The `phi_rms` metric provides a robust, measurable index for characterizing field regimes, fulfilling the theoretical role of a transition parameter.
-
-## 11. Next Steps
-1.  Promote Resolution Parameter (B) to L1 in `lexicon_validation_registry.json`.
-2.  Finalize all Lexicon L1 promotions in the registry.
+## 14. Conclusion
+Within these models, the Resolution Parameter (B) is operationally consistent with the transition index role. The stability of the `phi_rms` metric provides a robust basis for characterizing field regimes within the One Process framework.

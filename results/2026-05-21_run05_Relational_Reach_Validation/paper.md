@@ -29,74 +29,57 @@
 ```
 
 ## 1. Abstract
-Within these models... we validate the principle of **Residue-Mediated Coupling** (L034) by demonstrating that the effective interaction reach ($K$) between process knots is regulated by the orientational stress tolerance ($\theta_{decouple}$). Using a Graph Dynamics mechanism class, we show that increasing the stress threshold by 9x leads to a ~11.8x increase in the density of stable continuation pathways (avg_degree). This proves that "Reach" is not a static background property but an emergent relational outcome of history-conditioned admissibility.
+The Mono-Process Framework is founded on the principle that distinguishability and continuation are inseparable aspects of one recursive process, encoded as (ℰ≠0) ⇔_x δ(ℰ>0). Within these models, we validate the principle of **Residue-Mediated Coupling** (L034). We observed that the effective interaction reach ($K$) between process knots is regulated by orientational stress tolerance ($\theta_{decouple}$). Using a Graph Dynamics mechanism class, we observed that increasing the stress threshold by 9x is associated with a ~11.8x increase in the density of stable continuation pathways (avg_degree). This result is consistent with the framework's treatment of reach as an emergent relational outcome of history-conditioned admissibility.
 
-## 2. Theoretical Mapping
-```json
-{
-  "epsilon": "orientational_stress (std(phi_j - phi_i))",
-  "theta": "theta_decouple (Stress Tolerance)",
-  "coupling": "avg_degree (Interaction Reach)",
-  "operator_family": "O_RESIDUE_MEDIATED_V1 (Leftrightarrow_R)"
-}
-```
+## 2. Scope
+This investigation is conducted within the `graph_dynamics` model class using 128 nodes. The focus is on the scaling of interaction reach under varying stress thresholds $\theta_{decouple} \in [0.1, 0.9]$ with a global coupling constant $K=5.0$.
 
-## 3. Experimental Setup
-- **Mechanism:** Graph Dynamics (AVX2 optimized Kuramoto-with-rewiring).
+## 3. Direct Observation and Definition
+We observed that the average graph degree ($K_{avg}$), used as a proxy for interaction reach, increased monotonically with the stress tolerance threshold. At low tolerance ($\theta=0.1$), the system exhibited rapid decoupling, while at high tolerance ($\theta=0.9$), stable pathways were preserved. This emergent connectivity is defined as **relational reach**.
+
+## 4. Framework-Internal Inference
+Within the framework, these observations are interpreted as the (ℰ≠0) ⇔_x δ(ℰ>0) process regulating its own connectivity through the relational operator grammar $\Leftrightarrow_R$. Reach is inferred to be a dynamic variable rather than a background constant, where pathways are preserved only when the process's stress tolerance exceeds the local orientational mismatch.
+
+## 5. External Structural Resemblance (Analogy)
+The observed scaling of reach structurally resembles the range of physical forces (e.g., gravitational or nuclear) and the connectivity dynamics in social or biological networks. These similarities are presented as analogies for conceptual bridging only.
+
+## 6. Non-Proof and Limits
+This report does not prove the range of physical forces or provide a basis for social network theory. The findings are limited to the behavior of the specified computational graph models under orientational stress.
+
+## 7. Failure Modes and Uncertainty
+Potential failure modes include artifacts arising from the discrete rewiring frequency (e.g., `i % 10`) used in the simulation. True process continuity may require more frequent updates to avoid discretization noise.
+
+## 8. Experimental Setup
+- **Mechanism:** Graph Dynamics (AVX2 optimized).
 - **Nodes:** 128.
 - **Stress Threshold Sweep:** $\theta_{decouple} \in [0.1, 0.9]$.
 - **Global Coupling:** $K = 5.0$.
-- **Frequency Diversity:** $\omega_{std} = 0.5$ (to ensure constant orientational pressure).
-- **Falsification:** Infinite stress limit (verify total decoupling at $\theta \to 0$).
+- **Frequency Diversity:** $\omega_{std} = 0.5$ (to maintain orientational pressure).
+- **Falsification:** Infinite stress limit (verify decoupling at $\theta \to 0$).
 
-## 4. Observables
-```json
-{
-  "observable_1": "avg_degree (Reach magnitude)",
-  "observable_2": "order_parameter (Coherence magnitude)",
-  "normalization": "Reach Gain Ratio (High-theta / Low-theta)"
-}
-```
+## 9. Observables
+- **avg_degree:** Measure of interaction reach magnitude.
+- **order_parameter:** Measure of coherence magnitude.
+- **Reach Gain Ratio:** Ratio of reach at high threshold vs low threshold.
 
-## 5. Results
-- **Reach Scaling:** Avg degree increased monotonically from 0.16 ($\theta=0.1$) to 1.96 ($\theta=0.9$).
-- **Reach Gain Ratio:** 11.79x.
-- **Coherence Stability:** Order parameter remained low ($\approx 0.1$) despite reach gain, indicating that stress-mediated decoupling prevents global synchronization in diverse-frequency regimes.
+## 10. Results
+- **Reach Scaling:** Avg degree increased from 0.16 ($\theta=0.1$) to 1.96 ($\theta=0.9$).
+- **Reach Gain Ratio:** 11.79x increase observed over the threshold sweep.
+- **Coherence Stability:** Order parameter remained low ($\approx 0.1$), indicating that stress-mediated decoupling prevents global synchronization.
 
-## 6. Cross-Model Comparison
-```json
-{
-  "correlation": "N/A (Single Mechanism class)",
-  "agreement_type": "internal_scaling_law",
-  "qualitative_match": ["The 11.8x gain in interaction reach confirms that L034 correctly predicts stress-gated recoupling."]
-}
-```
+## 11. Cross-Model Comparison
+The 11.8x gain in interaction reach is consistent with the predictions of Lemma L034 within the `graph_dynamics` class. Cross-model validation with Reaction-Diffusion is planned to achieve higher claim levels.
 
-## 7. Falsification
-```json
-{
-  "tests_run": ["Zero Stress Tolerance (FV-4)"],
-  "result": "PASSED",
-  "notes": "At low stress tolerance (theta=0.1), the system rapidly decoupled to a near-zero edge state, as predicted."
-}
-```
+## 12. Falsification
+Verified through the "Zero Stress Tolerance" test (FV-4) that the system rapidly decouples to a near-zero edge state when tolerance is low, as predicted by the framework.
 
-## 8. Artifact Analysis
-```json
-{
-  "seed_sensitivity": "Low. Consistent scaling observed across all 3 seeds.",
-  "parameter_sensitivity": "High. The slope of reach gain depends on frequency diversity (omega_std).",
-  "artifact_risk": "Rewiring frequency (i % 10) acts as a discrete simulation artifact; true process continuity requires i % 1."
-}
-```
+## 13. Classification
+Partially Supported (L2). The relationship between stress-gating and interaction reach is robustly demonstrated in these graph models.
 
-## 9. Classification
-- **Partially Supported (L2):** The relationship between stress-gating and interaction reach is robustly demonstrated in the graph class. Multi-model agreement with Reaction-Diffusion is required for C5+.
+## 14. Conclusion
+Within these models, interaction reach ($K$) is consistent with being a dynamic variable regulated by the relational operator grammar $\Leftrightarrow_R$. Stable continuation pathways are preserved through the interaction of orientational mismatch and historical tolerance, establishing a basis for structure formation within the relational web.
 
-## 10. Conclusion
-Within these models... interaction reach ($K$) is a dynamic variable regulated by the relational operator grammar $\Leftrightarrow_R$. High-coherence pathways (filaments) are preserved only when the process's stress tolerance exceeds the local orientational mismatch. This establishes the mathematical basis for the formation of "webs" from localized "knots."
-
-## 11. Next Steps
+## 15. Next Steps
 - Implement the stress-gating rule in `rd_moving_boundary_sim_v1_cpp` for cross-model validation.
 - Map the "Critical Recoupling Point" where $K$ enables global connectivity.
 - Promote L034 to `simulated`.

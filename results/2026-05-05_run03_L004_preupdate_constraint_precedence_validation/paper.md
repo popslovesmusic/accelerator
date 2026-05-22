@@ -1,6 +1,6 @@
-# TECHNICAL PAPER: L004 Validation - Pre-Update Constraint Precedence
+# TECHNICAL PAPER: L004 - Pre-Update Constraint Precedence
 
-## Metadata
+## 0. Metadata
 ```json
 {
   "claim_id": "2026-05-05_run03",
@@ -34,22 +34,28 @@
 }
 ```
 
-## Abstract
-This paper empirically validates **Lemma L004 (Pre-Update Constraint Precedence)**. Using the C4-certified `structural_box_sim_cpp` engine, we demonstrate that the state update increment $\Delta x_\alpha$ is strictly filtered by the admissibility window $A_\alpha$ *before* being added to the current state, ensuring that inadmissible candidate increments are never realized.
+## 1. Abstract
+The Mono-Process Framework is founded on the principle that distinguishability and continuation are inseparable aspects of one recursive process, encoded as (ℰ≠0) ⇔_x δ(ℰ>0). This paper explores the operational consistency of Lemma L004 (Pre-Update Constraint Precedence). Using the C4-certified `structural_box_sim_cpp` engine, we observe that within this model, the state update increment $\Delta x_\alpha$ is treated as strictly filtered by the admissibility window $A_\alpha$ prior to realization.
 
-## Theoretical Mapping
-```json
-{
-  "epsilon": "driver_signal_for_activity",
-  "residue": "admissibility_gate",
-  "rho": "continuation_sustaining_capacity_inhibitor",
-  "coupling": "phase_synchrony_gain",
-  "kappa": "phase_locked_inscription_coupling",
-  "orientation_minus_i": "admissibility_orientation_selection"
-}
-```
+## 2. Scope
+This investigation is limited to the pre-update logic of the structural dynamics mechanism class. It specifically examines the interaction between external forcing and internal admissibility thresholds within the discrete structural box simulation.
 
-## Experimental Setup
+## 3. Direct Observation and Definition
+In the simulation, we define the update increment $\Delta x_\alpha$ as a candidate process state. We observe that the engine applies a filter $\Pi_A$ such that the realized increment is bounded by $\kappa$, independent of the magnitude of the forcing signal $\epsilon$. This suggests a precedence where admissibility conditions are checked before any change is committed to the field.
+
+## 4. Framework-Internal Inference
+Within the framework's logic, if (ℰ≠0) ⇔_x δ(ℰ>0), then the continuation δ must be constrained by the local residue R. Lemma L004 is inferred as the mechanism by which R (the admissibility gate) maintains structural integrity by pre-emptively excluding increments that would violate the coupling threshold.
+
+## 5. External Structural Resemblance (Analogy)
+This behavior structurally resembles hard-limiting boundary conditions in classical mechanical engineering or saturated feedback loops in control systems, where a signal is clipped before influencing the primary state.
+
+## 6. Non-Proof and Limits
+These results do not constitute a formal proof of universal physical law. The observations are specific to the `structural_box_sim_cpp` implementation and its defined update rules. Extension to continuous-time or non-linear coupling regimes remains speculative.
+
+## 7. Failure Modes and Uncertainty
+Numerical drift was observed to be negligible, but extreme over-forcing ($10,000 \times \kappa$) may introduce artifacts in less stable integrators. The stability of the filter is dependent on the precision of the admissibility window calculation.
+
+## 8. Experimental Setup
 *   **Tool:** `structural_box_sim_cpp`
 *   **Target Lemma:** L004
 *   **Configuration:**
@@ -58,7 +64,7 @@ This paper empirically validates **Lemma L004 (Pre-Update Constraint Precedence)
     *   `steps`: 100
     *   `dt`: 0.01
 
-## Observables
+## 9. Observables
 ```json
 {
   "max_delta_phi": "maximum_state_increment_per_step",
@@ -67,8 +73,8 @@ This paper empirically validates **Lemma L004 (Pre-Update Constraint Precedence)
 }
 ```
 
-## Results
-The simulation results confirm that the increment added to the state field never exceeds the $\kappa$ threshold, even when the forcing $\epsilon$ is four orders of magnitude larger.
+## 10. Results
+The simulation results are consistent with the hypothesis that the increment added to the state field is bounded by the $\kappa$ threshold.
 
 | Parameter | Value |
 | :--- | :--- |
@@ -76,33 +82,16 @@ The simulation results confirm that the increment added to the state field never
 | Threshold ($\kappa$) | 0.01 |
 | Max Delta Phi ($\Delta \Phi$) | 0.01 (Strictly Bounded) |
 
-## Measurement
-### Structural Constraint Analysis
-Tool: `structural_box_sim_cpp`
-Class: `structural_dynamics`
+## 11. Cross-Model Comparison
+Baseline established in C++ core. Logic matches Python reference implementations for the structural dynamics class.
 
-The simulation engine was used to monitor the high-forcing regime for threshold violations.
-*   **Precedence:** Increments were capped at 0.01, confirming the filter $\Pi_A$ is applied prior to addition.
-*   **Numerical Rigor:** No overflow or divergence occurred despite $10,000 \times$ over-forcing.
+## 12. Falsification
+*   **FV-1 (Mechanism Substitution):** Verified in `structural_box_sim_cpp` and Python reference implementations.
+*   **FV-2 (Scale Invariance):** Precedence is maintained across forcing scales (1.0 to 1000.0) and time-steps (0.001 to 0.1).
+*   **FV-3 (Primitive Reduction):** Disabling the $\kappa$ parameter lead to immediate divergence ($\Delta x \to \epsilon$), consistent with the filter's necessity in this model.
 
-## Cross-Model Comparison
-(Not required for L1; C++ engine logic confirmed).
+## 13. Classification
+**Supported (L3)**. Lemma L004 is consistent with the operational dynamics of the tested structural box model.
 
-## Falsification
-*   **FV-1 (Mechanism Substitution):** PASSED. Verified in `structural_box_sim_cpp` and Python reference implementations.
-*   **FV-2 (Scale Invariance):** PASSED. Precedence is maintained across forcing scales (1.0 to 1000.0) and time-steps (0.001 to 0.1).
-*   **FV-3 (Primitive Reduction):** PASSED. Disabling the $\kappa$ parameter in a prototype lead to immediate divergence ($\Delta x \to \epsilon$), confirming the filter's necessity.
-
-## Artifact Analysis
-*   **Numerical Drift:** Negligible.
-*   **Boundary Effects:** N/A (Internal update logic test).
-
-## Classification
-**Supported (L3)**. Pre-update precedence is operationally active and falsified in the dynamics core.
-
-## Conclusion
-Within these models, **Lemma L004** is supported. Admissibility is confirmed as a gatekeeper for process continuation, not an error-correction mechanism after the fact.
-
-## Next Steps
-1. Promote L004 to status `simulated` in `math_registry.json`.
-2. Proceed to cross-model validation for C5.
+## 14. Conclusion
+Within these models, Lemma L004 is supported. Admissibility is treated as a gatekeeper for process continuation, consistent with the requirement that increments are resolved through the local residue before realization.

@@ -1,5 +1,6 @@
-# Technical Paper: Lexicon L2 Promotion Validation (Run 073933)
+# TECHNICAL PAPER: Lexicon L2 Promotion Validation (Run 073933)
 
+## 0. Metadata
 ```json
 {
   "claim_id": "LEX-L2-073933",
@@ -16,44 +17,48 @@
 }
 ```
 
-### 1. Abstract
-This paper documents an automated validation run for Lexicon L2 promotion. The run targeted multiple terms including "corridor", "-(i)" (orientation), and "Relational Superposition" across several mechanism classes.
+## 1. Abstract
+The Mono-Process Framework is founded on the principle that distinguishability and continuation are inseparable aspects of one recursive process, encoded as (ℰ≠0) ⇔_x δ(ℰ>0). This paper documents an automated validation run for Lexicon L2 promotion, targeting multiple terms across several mechanism classes.
 
-### 2. Theoretical Mapping
-- **epsilon (ε):** Mismatch in orientation or spatial continuity.
-- **residue (R):** Persistent spatial structures (corridors).
-- **rho (ρ):** Continuation capacity across regions.
-- **coupling (K):** Interaction between neighboring agents or cells.
-- **delta (Δ):** Transition between states.
-- **orientation_minus_i (-(i)):** Directional admissibility operator.
+## 2. Scope
+This study covers the L2 evidence level for the terms "corridor", "-(i)", and "Relational Superposition." It compares CA, PDE, Agent, and Lattice model classes.
 
-### 3. Experimental Setup
-- **Tools:** Internal simulation engines (CA, PDE, Agent, Lattice).
-- **Configs:** Automated L2 promotion harness configurations.
-- **Paths:** `results/2026-05-06_run073933_lexicon_l2_promotion/data/`.
+## 3. Direct Observation and Definition
+We observe qualitative agreement between distinct mechanism classes for the targeted terms. In particular, the spatial persistence of structures and the coherence of orientation vectors are measurable and consistent across CA and PDE (for corridors) and PDE and Agent (for orientation).
 
-### 4. Observables
-- **Spatial persistence:** Duration of stable structures.
-- **Orientation alignment:** Coherence of orientation vectors.
-- **Superposition count:** Number of overlapping states in lattice.
+## 4. Framework-Internal Inference
+The framework treats these terms as operational primitives that should exhibit mechanism independence if they are truly foundational. The observed consistency is consistent with the inference that these terms represent robust process invariants.
 
-### 5. Results
-The simulations produced raw metrics indicating stability in the "corridor" and "orientation" models across CA and PDE classes.
+## 5. External Structural Resemblance (Analogy)
+The cross-model consistency structurally resembles the way physical constants or thermodynamic laws remain valid regardless of the specific microscopic details of a substance.
 
-### 6. Cross-Model Comparison
-Qualitative agreement was observed between PDE and CA models for the "corridor" term, and between PDE and Agent models for the "-(i)" term.
+## 6. Non-Proof and Limits
+This automated run is a survey and does not constitute a formal proof of universality. The agreement is limited to the tested parameter regimes and automated configurations.
 
-### 7. Falsification
-Standard L2 falsification vectors were applied. No immediate contradictions were found in the primary observables for the tested regimes.
+## 7. Failure Modes and Uncertainty
+CA results showed expected discretization artifacts. PDE implementations demonstrated low sensitivity to parameter fluctuations. Long-term stability was not exhaustively tested in this run.
 
-### 8. Artifact Analysis
-Low sensitivity to minor parameter fluctuations was noted in the PDE implementations. CA results showed expected discretization artifacts.
+## 8. Experimental Setup
+*   **Tools:** Internal engines (CA, PDE, Agent, Lattice).
+*   **Configs:** Automated L2 promotion harness.
+*   **Paths:** `results/2026-05-06_run073933_lexicon_l2_promotion/data/`.
 
-### 9. Classification
-Status: **L2** (Multi-model agreement).
+## 9. Observables
+*   **Spatial persistence:** Duration of stable structures.
+*   **Orientation alignment:** Coherence of orientation vectors.
+*   **Superposition count:** Number of overlapping states.
 
-### 10. Conclusion
-Within these models, the terms "corridor" and "-(i)" demonstrate sufficient cross-model consistency to warrant L2 promotion consideration.
+## 10. Results
+The simulations produced raw metrics consistent with stable behavior in the targeted models across multiple classes.
 
-### 11. Next Steps
-Perform multi-seed robustness testing (L3) and formal falsification sweeps.
+## 11. Cross-Model Comparison
+Qualitative agreement observed between PDE/CA (corridor) and PDE/Agent (-(i)), consistent with the goal of mechanism independence.
+
+## 12. Falsification
+Standard L2 falsification vectors showed no immediate contradictions in primary observables for the tested regimes.
+
+## 13. Classification
+**Partially Supported (L2)**. The cross-model consistency is consistent with the requirements for L2 lexicon promotion.
+
+## 14. Conclusion
+Within these models, the terms "corridor" and "-(i)" demonstrate sufficient consistency to warrant L2 promotion consideration. The results are consistent with the framework's mandate of Mechanism Independence > Tool Count.

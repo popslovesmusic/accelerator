@@ -21,39 +21,56 @@
 ```
 
 ## 1. Abstract
-Within these models... we executed a four-vector adversarial attack suite (FALSIFICATION-STRESS-001) against the foundational laws of the Mono-Process Framework. Despite extreme parameter tuning and brute-force attempts to invalidate the framework's core theorems (3-Peak Rule, Singularity Rebound, Tertiary Stability, and Topology-Geometry Biconditional), the framework's predictions held. All four attacks failed to provide a valid counterexample, further hardening the framework's Level C6 status.
+The Mono-Process Framework is founded on the principle that distinguishability and continuation are inseparable aspects of one recursive process, encoded as (ℰ≠0) ⇔_x δ(ℰ>0). Within these models, we executed a four-vector adversarial attack suite (FALSIFICATION-STRESS-001) against the foundational laws of the framework. Despite extreme parameter tuning and brute-force attempts to invalidate the framework's core theorems—including the 3-Peak Rule, Singularity Rebound, Tertiary Stability, and Topology-Geometry Biconditional—the framework's predictions remained unrefuted within the tested regimes. All four attacks failed to provide a valid counterexample, supporting the framework's Level C6 classification.
 
-## 2. Attack A: The Binary Lock Attack (Target: T001)
-- **Objective:** Force an $N=2$ (binary) system to stabilize into a persistent identity ($D > 0$).
-- **Method:** Applied extreme frequency diversity ($\omega_{std} = 5.0$) and high coupling ($K=10.0$).
-- **Result:** $OP = 0.429$. While diversity prevented total synchronization, the system remained unstable and failed to achieve a locked orientational fixed point. Persistence required triadic closure.
-- **Verdict:** **FAILURE.** T001 stands.
+## 2. Scope
+This investigation is bounded by the `graph_dynamics` mechanism class as implemented in the `acellorator` C++ engine. The parameter space explored includes relational complexity $N \in [2, 12]$ and coupling magnitude $K \in [0, 20]$, with frequency diversity $\omega_{std}$ up to 5.0.
 
-## 3. Attack B: The Symmetrical Death Attack (Target: SING-001)
-- **Objective:** Kill the Singularity Rebound by forcing absolute global symmetry.
-- **Method:** Set $N=3$, extreme compression ($K=20.0$), and zero frequency diversity ($\omega_{std} = 0.0$).
-- **Result:** $OP = 0.589$. Despite forcing absolute symmetry in the starting frequencies, the system **spontaneously rebounded** to maintain a distinguishability floor ($D \approx 0.411$). 
-- **Verdict:** **FAILURE.** SING-001 is a robust law; symmetry is operationally unstable.
+## 3. Direct Observation and Definition
+We observed that binary systems ($N=2$) failed to achieve stable orientational locking regardless of frequency diversity. Triadic systems ($N=3$) spontaneously broke symmetry even when initialized at perfect global synchronization. Nodes without tertiary gating ({I, O, R}) exhibited chaotic dissolution under intense coupling, and systems with zero topological residue produced no measurable geometric order.
 
-## 4. Attack C: Monolithic Persistence Attack (Target: L043)
-- **Objective:** Force a monolithic node (zero gating) to persist through an intense relational shock.
-- **Method:** $N=6$, $K=15.0$, $\theta_{de} = 0.0$.
-- **Result:** $OP = 0.268$. The system maintained some distinguishability, but the "monolithic" nature actually resulted in **chaotic instability** rather than persistent identity. Structural coherence was lost.
-- **Verdict:** **FAILURE.** Tertiary structure $\{I, O, R\}$ is necessary for organized persistence.
+## 4. Framework-Internal Inference
+Within the framework, these observations are inferred to be operational evidence of the (ℰ≠0) ⇔_x δ(ℰ>0) principle. The failure of $N=2$ to lock and the spontaneous rebound of $N=3$ are interpreted as the recursive process earning its identity through minimum 3rd-order relational closure to avoid the forbidden null state.
 
-## 5. Attack D: The Ghost Geometry Attack (Target: L045)
-- **Objective:** Detect a geometric signal (ordered accessibility) in a system with zero topological residue.
-- **Method:** $N=12$, $K=0.0$ (Zero edges).
-- **Result:** $OP = 0.041$. No measurable geometric order emerged without topological connectivity.
-- **Verdict:** **FAILURE.** "No structure $\Rightarrow$ No geometry" is empirically verified.
+## 5. External Structural Resemblance (Analogy)
+The observed stability thresholds structurally resemble phase transitions in condensed matter physics and the inherent instabilities of the classical 3-body problem. These similarities are presented as analogies for conceptual bridging only.
 
-## 6. Classification
-- **Falsification Passed (C5):** The foundational pillars of the Calculus of Distinction have survived targeted adversarial attacks.
+## 6. Non-Proof and Limits
+This report does not prove universal physical laws, unify existing physical frameworks, or demonstrate absolute reality. The findings are limited to the behavior of the specified computational models under the declared constraints.
 
-## 7. Conclusion
-Within these models... the Mono-Process Framework demonstrates exceptional structural integrity. The core laws are not merely "supported" by evidence; they appear to be **topologically compelled**. Perfect symmetry collapses, binary relations are insufficient for identity, and geometry cannot exist without structure.
+## 7. Failure Modes and Uncertainty
+Potential failure modes include numerical precision limits (floating-point drift) at extremely high coupling values ($K > 50$) and high sensitivity to initial seed conditions within chaotic regimes ($N > 6$), which may mask underlying stability floors.
 
-## 8. Next Steps
+## 8. Experimental Setup
+- **Mechanism:** Graph Dynamics (AVX2 optimized).
+- **Attack A:** $N=2$, $\omega_{std}=5.0$, $K=10.0$ (Binary Lock Attack).
+- **Attack B:** $N=3$, $\omega_{std}=0.0$, $K=20.0$ (Symmetrical Death Attack).
+- **Attack C:** $N=6$, $\theta_{de}=0.0$, $K=15.0$ (Monolithic Persistence Attack).
+- **Attack D:** $N=12$, $K=0.0$ (Ghost Geometry Attack).
+
+## 9. Observables
+- **Order Parameter (OP):** Measure of global synchronization.
+- **Distinguishability (D):** $D = 1 - OP$, measure of structural identity.
+
+## 10. Results
+- **Attack A:** $OP = 0.429$. No locked orientational fixed point. T001 remains unrefuted.
+- **Attack B:** $OP = 0.589$. System rebounded to $D \approx 0.411$. SING-001 behavior is robustly observed.
+- **Attack C:** $OP = 0.268$. Resulted in chaotic instability. L043 requirement is supported.
+- **Attack D:** $OP = 0.041$. No geometric signal without topology. L045 is empirically supported.
+
+## 11. Cross-Model Comparison
+The results across these adversarial vectors demonstrate internal consistency within the `graph_dynamics` class. The spontaneous rebound of $N=3$ systems matches the topological predictions of the framework's core axioms.
+
+## 12. Falsification
+The attack suite itself serves as a rigorous falsification attempt. The failure of these vectors to invalidate the core theorems indicates that the framework's predicted behaviors are topologically favored within these parameters.
+
+## 13. Classification
+Falsification Passed (C5). The foundational pillars of the Calculus of Distinction have survived targeted adversarial attacks within these models.
+
+## 14. Conclusion
+Within these models, the Mono-Process Framework demonstrates structural integrity across diverse stress conditions. The core behaviors are consistent with the principle that distinguishability and continuation are inseparable. Perfect symmetry appears operationally unstable, binary relations are insufficient for identity, and geometry is dependent on structure.
+
+## 15. Next Steps
 - Finalize the Zenodo Bundle for C6 Readiness Export.
 - Prepare the "Final Audit" documentation.
 - Transition to "Publication Phase."

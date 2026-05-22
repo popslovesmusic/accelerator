@@ -1,14 +1,4 @@
-### 2.1 Lexicon Role Binding
-```json
-{
-  "term_roles": [],
-  "lexicon": {
-    "terms_used": []
-  }
-}
-```
-
-# Lexicon Validation (L1): Hysteretic Quantum-Like Computation (HQLC)
+# TECHNICAL PAPER: Lexicon Validation - Hysteretic Quantum-Like Computation (HQLC)
 
 ## 0. Metadata
 ```json
@@ -33,27 +23,33 @@
 ```
 
 ## 1. Abstract
-This paper operationally validates the lexicon term **Hysteretic Quantum-Like Computation (HQLC)** (computational paradigm). Using the C4-certified `fsa_rule_engine_sim_v1_cpp` engine, we demonstrate that process evolution can be governed by state-dependent admissibility rules (residue-conditioned transitions), providing a quantifiable framework for rule-based computation within the "One Process" ecosystem.
+The Mono-Process Framework is founded on the principle that distinguishability and continuation are inseparable aspects of one recursive process, encoded as (ℰ≠0) ⇔_x δ(ℰ>0). This paper explores the operational binding of the term "Hysteretic Quantum-Like Computation" (HQLC). Using the `fsa_rule_engine_sim_v1_cpp` engine, we observe that process evolution can be governed by state-dependent admissibility rules.
 
-## 2. Theoretical Mapping
-```json
-{
-  "epsilon": "mismatch_rate_forcing",
-  "residue": "agent_move_history",
-  "rho": "active_agent_count",
-  "coupling": "state_transition_graph",
-  "delta": "state_index_increment",
-  "orientation_minus_i": "rule_based_selection"
-}
-```
+## 2. Scope
+This study is limited to the L1 validation of HQLC within an agent-based FSA model. It focuses on the measurability of state-dependent transition logic under mismatch forcing.
 
-## 3. Experimental Setup
+## 3. Direct Observation and Definition
+We define HQLC as a computational paradigm where transitions are conditioned by the local residue (history). We observe that the `active_count` of agents responding to the `mismatch_rate` $\epsilon$ is measurable and consistent with the application of residue-gated rules.
+
+## 4. Framework-Internal Inference
+The framework treats computation not as an external logic applied to matter, but as the inherent path-dependency of the process itself. HQLC is inferred as the regime where the history R significantly constrains the possible continuations δ, creating a state-dependent behavioral profile.
+
+## 5. External Structural Resemblance (Analogy)
+HQLC structurally resembles magnetic hysteresis in material science or state machines in computer science, where the current response depends on prior states.
+
+## 6. Non-Proof and Limits
+These results do not prove that all process computation is hysteretic or "quantum-like." The observations are specific to the FSA implementation and the chosen rule set.
+
+## 7. Failure Modes and Uncertainty
+At the tested temporal scale, the system reaches steady state rapidly, which may mask path-dependency (hysteresis area). The sensitivity to the memory increment logic was confirmed but not fully characterized.
+
+## 8. Experimental Setup
 *   **Tool:** `fsa_rule_engine_sim_v1_cpp`
 *   **Target Term:** HQLC
 *   **Role:** `computational_paradigm`
-*   **Method:** Perform a cyclic sweep of the `mismatch_rate` ($\epsilon$) parameter from 0.0 to 1.0 and back to 0.0. Measure the response of the `active_count` ($\rho$) to detect path-dependency.
+*   **Method:** Cyclic sweep of `mismatch_rate` ($\epsilon$) to detect path-dependency.
 
-## 4. Observables
+## 9. Observables
 ```json
 {
   "active_count": "number_of_agents_successfully_updating",
@@ -62,8 +58,8 @@ This paper operationally validates the lexicon term **Hysteretic Quantum-Like Co
 }
 ```
 
-## 5. Results
-The `active_count` demonstrated a non-linear response to `mismatch_rate`.
+## 10. Results
+The simulation results are consistent with residue-conditioned transition logic.
 
 | Epsilon ($\epsilon$) | Active Count (Up) | Active Count (Down) |
 | :--- | :--- | :--- |
@@ -72,26 +68,15 @@ The `active_count` demonstrated a non-linear response to `mismatch_rate`.
 | 0.8 | 26 | 26 |
 | 1.0 | 0 | - |
 
-While the current configuration reached steady state rapidly (zero hysteresis area), the underlying mechanism for memory-dependent computation (residue-conditioned transition logic) was confirmed to be active and measurable.
+## 11. Cross-Model Comparison
+Baseline established; comparison with CA-based admissibility models is scheduled for L2.
 
-## 6. Cross-Model Comparison
-(Scheduled for L2; inter-tool comparison with `ca_admissibility_sim_v1`).
+## 12. Falsification
+*   **FV-1 (Zero-Logic):** Full mismatch ($\epsilon=1.0$) resulted in zero activity.
+*   **FV-4 (Memory Reset):** Disabling the residue logic altered transition statistics, consistent with the role of state-history in the paradigm.
 
-## 7. Falsification
-*   **FV-1 (Zero-Logic):** $\epsilon = 1.0 \implies$ No activity. (Passed).
-*   **FV-4 (Memory Reset):** Intentionally disabling the residue increment logic.
-*   **Expectation:** Transition rates become purely stochastic based on $\epsilon$.
-*   **Result:** The engine confirmed that removing residue-dependency altered the transition statistics, supporting the role of state-history in the paradigm.
+## 13. Classification
+**Supported (L1)**. The term `HQLC` is consistent with the residue-gated transition logic of the tested FSA model.
 
-## 8. Artifact Analysis
-*   **Equilibration:** The system reaches steady state within < 10 steps, masking path-dependency at the current temporal scale.
-
-## 9. Classification
-**Supported (L1)**. The term `HQLC` is operationally bound to the residue-gated transition logic of the FSA model class.
-
-## 10. Conclusion
-Within these models, **HQLC** is validated at L1. The framework successfully implements state-dependent rules that govern process activity, providing the foundational primitives for more complex computational claims.
-
-## 11. Next Steps
-1.  Promote HQLC to L1 in `lexicon_validation_registry.json`.
-2.  Validate **Resolution Parameter (B)** using `satp_higgs_1d_cpp`.
+## 14. Conclusion
+Within these models, HQLC is operationally consistent with the framework's state-dependent rules. The results provide an L1 baseline for characterizing rule-based process computation within the One Process ecosystem.

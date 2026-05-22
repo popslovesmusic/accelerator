@@ -1,4 +1,4 @@
-# Research Paper: Relational Alignment and the Geometry of Mutually Stabilized Continuation
+# RESEARCH PAPER: Relational Alignment and the Geometry of Mutually Stabilized Continuation
 
 ## 0. Metadata
 ```json
@@ -21,35 +21,43 @@
 ```
 
 ## 1. Abstract
-This paper investigates the "Relational Alignment" hypothesis derived from the philosophical essay series *Continuation, Love, and the Geometry of Becoming*. We test the proposition that stable relational structures emerge through "Aligned Asymmetry"—the maintenance of phase-coherent distinction between coupled processes. Simulations across two independent mechanism classes (Lattice Dynamics and Agent-Based Swarms) compare asymmetric initializations (representing distinction) with symmetric ones (representing fusion). Results indicate that while both regimes sustain activity, asymmetric structures maintain structural persistence (Relational Clusters) and significant coherence, supporting the model of reality as mutually stabilized continuation under preserved distinction.
+The Mono-Process Framework is founded on the principle that distinguishability and continuation are inseparable aspects of one recursive process, encoded as (ℰ≠0) ⇔_x δ(ℰ>0). This paper investigates the "Relational Alignment" hypothesis, testing the proposition that stable relational structures emerge through "Aligned Asymmetry." Using Lattice Dynamics and Agent-Based Swarms, we observe that asymmetric initializations sustain structural persistence and phase coherence.
 
-## 2. Theoretical Mapping
-| Primitive | Theoretical Alignment | Role in Experiment |
-| :--- | :--- | :--- |
-| **ε (epsilon)** | Preserved Distinction | Initial phase/position variance |
-| **R (residue)** | History / Memory | Accumulated causal field (phi) |
-| **ρ (rho)** | Continuation Capacity | Active process fraction |
-| **K (coupling)** | Relational Alignment | Interaction strength (kappa) |
-| **-(i)** | Shared Geodesic | Orientation toward phase locking |
+## 2. Scope
+This study compares symmetric and asymmetric regimes across two mechanism classes to explore the conditions for stable continuation. It is limited to L2 evidence with single-seed runs and specific coupling parameters.
 
-## 3. Experimental Setup
+## 3. Direct Observation and Definition
+We define Aligned Asymmetry as the maintenance of phase-coherent distinction between coupled processes. We observe that in both CA and Agent models, asymmetric structures form persistent "Relational Clusters" (measured by Betti-0 and order parameters) that do not collapse into a zero-state.
+
+## 4. Framework-Internal Inference
+The framework treats distinction (epsilon) not as a barrier to stability but as the prerequisite for continuation. If (ℰ≠0) ⇔_x δ(ℰ>0), then absolute symmetry (ℰ=0) would imply the cessation of the process. The results are consistent with the inference that mutually stabilized continuation requires preserved distinction.
+
+## 5. External Structural Resemblance (Analogy)
+Aligned Asymmetry structurally resembles the maintenance of orbital stability in a two-body system or the synchronization of oscillators with different natural frequencies, where distinction is preserved within a stable collective.
+
+## 6. Non-Proof and Limits
+These results are not a proof of the philosophical origins of reality. The "Symmetric Collapse" condition was not fully realized, possibly due to numerical noise or the discrete nature of the tested systems.
+
+## 7. Failure Modes and Uncertainty
+Betti-0 results are sensitive to intensity thresholds. The ABM order parameter varies with initial frequency distributions. Discrete systems may struggle to reach the "perfect symmetry" required to test the theoretical collapse limit.
+
+## 8. Experimental Setup
 - **Lattice Simulation (IGSOA Complex 2D):**
   - Grid: 64x64, Toroidal.
-  - Coupling (K): 0.5, Radius (Rc): 2.5.
-  - Scenarios: Asymmetric (Gaussian initialization), Symmetric (Uniform initialization), Control (K=0).
+  - Scenarios: Asymmetric (Gaussian), Symmetric (Uniform), Control (K=0).
 - **Agent Simulation (ABM V1):**
   - Agents: 1000.
-  - Coupling (kappa): 0.5.
-  - Scenarios: Asymmetric (x_std=0.5, p_std=0.5), Symmetric (x_std=0.0, p_std=0.0).
-- **Topology Analysis:** TDA Module V2 (Betti-0 extraction).
+  - Scenarios: Asymmetric (variance), Symmetric (zero variance).
+- **Topology Analysis:** TDA Module V2.
 
-## 4. Observables
-- **`psi_squared_mean`**: Average informational density (Lattice).
-- **`order_parameter`**: Global phase coherence (ABM).
-- **`betti_0`**: Persistence of connected components (Topological).
-- **`mean_phi`**: Average residue density.
+## 9. Observables
+- **`psi_squared_mean`**: Average informational density.
+- **`order_parameter`**: Global phase coherence.
+- **`betti_0`**: Persistence of connected components.
 
-## 5. Results
+## 10. Results
+The simulations show that coupling sustains activity levels, and asymmetric structures maintain robust stability.
+
 ### Lattice Dynamics (500 steps)
 | Scenario | `psi_squared_mean` | `mean_phi` | `betti_0` |
 | :--- | :--- | :--- | :--- |
@@ -63,26 +71,15 @@ This paper investigates the "Relational Alignment" hypothesis derived from the p
 | Asymmetric | 0.331 | 0.530 |
 | Symmetric | 0.575 | 0.523 |
 
-## 6. Cross-Model Comparison
-- **Correlation**: High. Both models demonstrate that coupling (K > 0) sustains significantly higher activity levels than the uncoupled control.
-- **Agreement Type**: Qualitative. In both models, the presence of initial "asymmetry" (distinction) does not prevent the emergence of stable, coherent structures.
-- **Qualitative Match**: The ABM results specifically show that while symmetric fusion (Perfect Symmetry) leads to higher global coherence (0.57), Aligned Asymmetry (0.33) sustains a robust stable regime without collapsing into the zero-state.
+## 11. Cross-Model Comparison
+High correlation; both models show that K > 0 sustains activity. Symmetric fusion leads to higher global coherence but asymmetric structures remain stable, consistent with Aligned Asymmetry.
 
-## 7. Falsification
-- **FV-1 (Zero-Logic Check)**: Control run with K=0 showed near-zero informational density (2.7e4 vs 1.5e7+), confirming that activity is indeed relational and driven by the alignment mechanism.
-- **Symmetric Collapse Prediction**: The hypothesis that symmetric fusion leads to "collapse" was partially contradicted by the high intensity in the symmetric lattice run. This suggests that "collapse" in the framework may refer to the loss of *topological variety* or *information density* rather than raw energetic cessation, or that numerical noise prevents perfect unrealizable symmetry in discrete systems.
+## 12. Falsification
+- **FV-1 (Zero-Logic Check):** Control run (K=0) showed near-zero density, consistent with the relational nature of the activity.
+- **Symmetric Collapse Prediction:** Partially contradicted by high intensity in symmetric lattice runs, suggesting numerical noise or a more nuanced definition of "collapse" (e.g., loss of topological variety).
 
-## 8. Artifact Analysis
-- **Threshold Sensitivity**: The Betti-0 results were sensitive to the intensity threshold; at high thresholds, the asymmetric Gaussian formed a distinct localized cluster, whereas the symmetric uniform field vanished simultaneously across the domain.
-- **Seed Sensitivity**: Preliminary checks suggest stability across seeds, though the ABM order parameter varies with initial frequency distribution.
+## 13. Classification
+**Partially Supported**. The emergence of stable clusters under Aligned Asymmetry is consistent with the behavior of these models.
 
-## 9. Classification
-**Partially Supported**: The emergence of Relational Clusters under Aligned Asymmetry is operationally established across two models. The "Symmetric Collapse" condition remains theoretical and was not fully realized due to numerical noise in the symmetric test case.
-
-## 10. Conclusion
-Within these models, existence is demonstrated to be a process of mutually stabilized continuation. The results support the philosophical intuition that reality continues through aligned asymmetry; distinction (epsilon) is not a barrier to stability but the prerequisite for it. While symmetric fusion appears energetically high in discrete simulations, it lacks the structural variety found in asymmetric regimes. Aligned Asymmetry allows processes to co-navigate shared geodesics while preserving the distinctions necessary for continued emergence.
-
-## 11. Next Steps
-- Implement higher-precision (FP64) symmetric checks to see if activity halts as epsilon approaches machine epsilon.
-- Perform multi-seed TDA sweeps to characterize the distribution of Relational Clusters.
-- Introduce "Interior" (private) vs "Relational" (public) state separation to test the Essay III proposition.
+## 14. Conclusion
+Within these models, existence is treated as a process of mutually stabilized continuation. The results are consistent with the intuition that distinction (epsilon) is a prerequisite for stability rather than a barrier. Aligned Asymmetry allows processes to co-navigate shared geodesics while preserving the distinctions necessary for continued emergence.

@@ -28,68 +28,56 @@
 ```
 
 ## 1. Abstract
-Within these models... we empirically prove the **Necessity of Tertiary Node Structure** ($N_i = \{I, O, R\}$). We demonstrate that functional partitioning is the mechanism that prevents "Structural Collapse" during relational interaction. By comparing monolithic nodes (direct coupling) against tertiary nodes (residue-gated coupling), we show that tertiary structures maintain **1.4x higher distinguishability** ($D \approx 0.744$ vs $0.531$) under intense coupling conditions ($K=5.0$). This confirms that the separation of internal recursive flow from external relational gating is fundamental for multiscale persistence.
+The Mono-Process Framework is founded on the principle that distinguishability and continuation are inseparable aspects of one recursive process, encoded as (ℰ≠0) ⇔_x δ(ℰ>0). Within these models, we validate the **Necessity of Tertiary Node Structure** ($N_i = \{I, O, R\}$). We observed that functional partitioning is a key mechanism associated with preventing structural collapse during relational interaction. By comparing monolithic nodes (direct coupling) against tertiary nodes (residue-gated coupling), we observed that tertiary structures maintain **1.4x higher distinguishability** ($D \approx 0.744$ vs $0.531$) under intense coupling conditions ($K=5.0$).
 
-## 2. Theoretical Mapping
-```json
-{
-  "I_O_flow": "internal_continuation_persistence",
-  "R_state": "relational_admissibility_gate (theta_de)",
-  "monolithic": "zero_gating (theta_de -> 0)",
-  "tertiary": "high_gating (theta_de -> 0.9)"
-}
-```
+## 2. Scope
+This study is conducted within 10-node heterogeneous swarms using the `graph_dynamics` model class. The experimental boundaries are defined by coupling magnitudes up to $K=10.0$ and gating thresholds $\theta_{de}$ ranging from 0.1 to 0.9.
 
-## 3. Experimental Setup
-- **Mechanism:** Graph Dynamics (AVX2 optimized Kuramoto).
+## 3. Direct Observation and Definition
+We observed that monolithic nodes (low gating, $\theta_{de}=0.1$) tended to synchronize globally, resulting in the dissolution of individual distinguishability ($D \approx 0.531$). In contrast, tertiary nodes (high gating, $\theta_{de}=0.9$) maintained distinctiveness ($D \approx 0.744$) even under intense relational pressure.
+
+## 4. Framework-Internal Inference
+Within the framework, these observations are interpreted as the separation of internal recursive flow from external relational gating being a requirement for multiscale persistence. The functional partitioning $\{I, O, R\}$ is inferred to be the mechanical basis for preventing the (ℰ≠0) ⇔_x δ(ℰ>0) process from collapsing into a featureless symmetry upon interaction.
+
+## 5. External Structural Resemblance (Analogy)
+The observed stabilization through functional partitioning structurally resembles cellular compartmentalization in biology and the use of interfaces or "gating" in modular software architectures. These similarities are presented as analogies for conceptual bridging only.
+
+## 6. Non-Proof and Limits
+This report does not prove the necessity of biological compartments or justify specific architectural patterns in engineering. The results are limited to the behavior of the specified computational swarms under relational stress.
+
+## 7. Failure Modes and Uncertainty
+Potential failure modes include sensitivity to the specific value of the gating threshold $\theta_{de}$ and potential scaling limits where tertiary structures might still collapse under extreme, non-linear relational shocks.
+
+## 8. Experimental Setup
+- **Mechanism:** Graph Dynamics (AVX2 optimized).
 - **Environment:** 10-node heterogeneous swarm.
 - **Control:** Monolithic nodes (theta_de = 0.1).
 - **Experiment:** Tertiary nodes (theta_de = 0.9).
-- **Stress:** Intense coupling ($K=5.0$) to force global synchronization.
+- **Stress:** Intense coupling ($K=5.0$) to simulate high relational pressure.
 - **Metric:** Distinguishability ($D = 1 - order\_parameter$).
 
-## 4. Measurements: Identity Preservation
-- **Tool:** `graph_dynamics_sim_v1_cpp`
-- **Class:** `graph_dynamics`
-- **Metric:** `order_parameter` (Normalized to $D$)
-- **Monolithic Results:** $D = 0.531$. Swarm partially synchronizes, dissolving individual node identities.
-- **Tertiary Results:** $D = 0.744$. Nodes maintain distinctiveness despite intense interaction.
-- **Identity Gain:** Nodes with tertiary functional partitioning preserve **40% more identity** than monolithic nodes.
+## 9. Observables
+- **Distinguishability (D):** Measure of structural identity maintenance.
+- **Order Parameter:** Measure of global synchronization/collapse.
 
-## 5. Results
-| Node Type | Distinguishability (D) | Identity Preservation |
-| :--- | :--- | :--- |
-| Monolithic | 0.5306 | 1.00x |
-| Tertiary | 0.7436 | 1.40x |
+## 10. Results
+- **Monolithic Results:** $D = 0.531$. Individual node identities were partially dissolved.
+- **Tertiary Results:** $D = 0.744$. Nodes maintained distinctiveness despite intense interaction.
+- **Identity Gain:** Tertiary nodes preserved **40% more identity** than monolithic nodes within this regime.
 
-## 6. Cross-Model Comparison
-```json
-{
-  "agreement_type": "functional_partitioning_stability",
-  "qualitative_match": ["The results confirm Lemma L043: functional partitioning {I, O, R} is required to prevent structural collapse upon external coupling."]
-}
-```
+## 11. Cross-Model Comparison
+The results are consistent with Lemma L043, which posits that functional partitioning is associated with preventing structural collapse upon external coupling. This consistency is observed within the tested graph dynamics swarms.
 
-## 7. Falsification
-```json
-{
-  "tests_run": ["Coupling Saturation Test (FV-8)"],
-  "result": "PASSED",
-  "notes": "Verified that increasing K further (K=10) causes monolithic nodes to collapse to D < 0.2, while tertiary nodes maintain D > 0.5."
-}
-```
+## 12. Falsification
+Verified that increasing coupling magnitude further ($K=10.0$) causes monolithic nodes to collapse to $D < 0.2$, while tertiary nodes maintain $D > 0.5$, supporting the robustness of the tertiary structure as a stabilization mechanism.
 
-## 8. Artifact Analysis
-- **Threshold Sensitivity:** The advantage of tertiary structure scales non-linearly with the gating threshold $\theta_{de}$.
-- **Scaling:** The 1.4x gain is robust across swarm sizes (N=6 to N=10).
+## 13. Classification
+Validated (C5). The tertiary node structure is consistent with the requirements for structural persistence in these models.
 
-## 9. Classification
-- **Validated (C5):** The Tertiary Node Structure is confirmed as the irreducible mechanical basis for basin persistence.
+## 14. Conclusion
+Within these models, identity is consistent with the result of **functional partitioning**. The separation of internal continuation from external gating ($N_i = \{I, O, R\}$) is what allows a stabilized mode of continuation to persist within a broader relational web. This mechanism appears fundamental for preventing the process from collapsing into symmetry.
 
-## 10. Conclusion
-Within these models... identity is not a static property but the result of **functional partitioning**. The Separation of internal continuation from external gating ($N_i = \{I, O, R\}$) is what allows a "Knot" to persist within a "Web." Without this tertiary structure, the One Process would collapse into a featureless symmetry upon the first interaction.
-
-## 11. Next Steps
+## 15. Next Steps
 - Implement explicit $\{I, O, R\}$ nodes in the `agent_based_sim_v1_cpp` engine.
 - Map the co-evolution of $R$ states in coupled basins (Theorem III).
 - Explore "Web-to-Rope" transitions in large swarms.

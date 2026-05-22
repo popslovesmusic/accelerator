@@ -1,4 +1,4 @@
-# Lexicon Validation (L1): Corridor
+# TECHNICAL PAPER: Lexicon Validation - Corridor
 
 ## 0. Metadata
 ```json
@@ -23,28 +23,34 @@
 ```
 
 ## 1. Abstract
-This paper operationally validates the lexicon term **corridor** (topological process constraint). Using a combined Reaction-Diffusion and Topological Data Analysis (TDA) pipeline, we demonstrate that emergent process activity can form stable, connected regions characterized by a Betti-0 number of 1. These regions act as constrained "corridors" for signal transport, fulfilling the theoretical prediction of localized process persistence.
+The Mono-Process Framework is founded on the principle that distinguishability and continuation are inseparable aspects of one recursive process, encoded as (ℰ≠0) ⇔_x δ(ℰ>0). This paper examines the operational binding of the term "corridor" (topological process constraint). Using a Reaction-Diffusion and TDA pipeline, we observe that emergent process activity can form stable, connected regions characterized by a Betti-0 number of 1.
 
-## 2. Theoretical Mapping
-```json
-{
-  "epsilon": "RD_signal_S",
-  "residue": "domain_complement",
-  "rho": "moving_boundary_D",
-  "coupling": "S_diff_coefficient",
-  "delta": "boundary_increment",
-  "orientation_minus_i": "TDA_threshold_filter"
-}
-```
+## 2. Scope
+This validation is limited to L1 evidence using the RD mechanism class and Persistent Homology analysis. It focuses on the topological connectedness of localized process activity.
 
-## 3. Experimental Setup
+## 3. Direct Observation and Definition
+We define a "corridor" as a topologically connected region of process activity within the field. We observe that under stable RD evolution, the active signal $S$ forms a single connected component ($H_0 = 1$), as measured by the `tda_module_v2_cpp` tool.
+
+## 4. Framework-Internal Inference
+The framework treats corridors as emergent constraints that guide the flow of continuation. The formation of a single connected component suggests that the process establishes a unified domain of reach, consistent with the theoretical prediction of localized persistence.
+
+## 5. External Structural Resemblance (Analogy)
+The corridor structurally resembles a waveguide in electromagnetics or a percolation cluster in statistical physics, where activity is confined to a connected path.
+
+## 6. Non-Proof and Limits
+These results do not prove that all physical corridors are topological in this manner. The observation is specific to the RD parameters and the thresholding used in the TDA analysis.
+
+## 7. Failure Modes and Uncertainty
+Fragmentation of the corridor ($H_0 > 1$) can occur under low-diffusion or high-noise regimes. The stability of the $H_0=1$ state is sensitive to the TDA intensity threshold.
+
+## 8. Experimental Setup
 *   **Primary Tool:** `rd_moving_boundary_sim_v1`
-*   **Analysis Tool:** `tda_module_v2_cpp` (C5 certified)
+*   **Analysis Tool:** `tda_module_v2_cpp`
 *   **Target Term:** corridor
 *   **Role:** `topological_process_constraint`
-*   **Method:** Simulate a moving boundary RD system until stabilization, then perform Persistent Homology analysis to verify topological connectedness ($H_0$).
+*   **Method:** Simulate RD system until stabilization, then perform Persistent Homology analysis.
 
-## 4. Observables
+## 9. Observables
 ```json
 {
   "betti_0": "count_of_connected_components",
@@ -53,8 +59,8 @@ This paper operationally validates the lexicon term **corridor** (topological pr
 }
 ```
 
-## 5. Results
-The TDA analysis of the stabilized RD signal field ($S$) confirms the formation of a single connected component.
+## 10. Results
+The TDA results are consistent with the formation of a topologically connected corridor.
 
 | Topological Metric | Observed Value |
 | :--- | :--- |
@@ -62,27 +68,15 @@ The TDA analysis of the stabilized RD signal field ($S$) confirms the formation 
 | Max Component Size | 293 nodes |
 | Active Fraction | 7.15% |
 
-The result $H_0 = 1$ rigorously supports the existence of a continuous "corridor" of activity spanning the domain.
+## 11. Cross-Model Comparison
+Baseline established; cross-model comparison with CA or Agent models is scheduled for L2.
 
-## 6. Cross-Model Comparison
-(Scheduled for L2; inter-tool RD/TDA pipeline established).
+## 12. Falsification
+*   **FV-1 (Zero-Logic):** Zero signal resulted in Betti-0 of zero.
+*   **FV-2 (Diffusion Over-damping):** Setting diffusion to near-zero resulted in $H_0 \gg 1$, consistent with corridor fragmentation.
 
-## 7. Falsification
-*   **FV-1 (Zero-Logic):** Zero signal $\implies$ Betti-0 is zero. (Passed).
-*   **FV-2 (Diffusion Over-damping):** Intentionally setting diffusion $S_{diff}$ to near-zero.
-*   **Expectation:** The corridor fragments into isolated "islands" of activity ($H_0 > 1$).
-*   **Result:** High-damping runs showed Betti-0 $\gg 1$, falsifying the corridor condition when transport is inhibited.
+## 13. Classification
+**Supported (L1)**. The term `corridor` is consistent with the connected topological component ($H_0=1$) observed in this model.
 
-## 8. Artifact Analysis
-*   **Grid Dependency:** Connectedness was stable across grid refinement (32x32 to 64x64).
-*   **Threshold Sensitivity:** Betti-0 remained 1 for thresholds between 0.05 and 0.25.
-
-## 9. Classification
-**Supported (L1)**. The term `corridor` is operationally validated as a connected topological component ($H_0=1$).
-
-## 10. Conclusion
-Within these models, the term **corridor** is operationally supported at L1. Emergent process activity forms a single, topologically connected region that constrains subsequent signal evolution, matching the theoretical definition.
-
-## 11. Next Steps
-1.  Promote `corridor` to L1 in `lexicon_validation_registry.json`.
-2.  Validate **HQLC** using `fsa_rule_engine_sim_v1_cpp`.
+## 14. Conclusion
+Within these models, the term corridor is operationally consistent with the emergence of topologically connected regions. The results provide an L1 basis for characterizing localized process persistence within the One Process framework.

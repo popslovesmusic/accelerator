@@ -28,73 +28,55 @@
 ```
 
 ## 1. Abstract
-Within these models... we empirically prove the **3rd-Order Criticality** of structural identity (T001). We demonstrate that relational complexity $N < 3$ is insufficient for stable distinguishability. In a purely binary interaction ($N=2$), the system inevitably collapses into perfect symmetry. However, at exactly 3rd-order interaction ($N=3$), the topology "locks," achieving a stable distinguishability floor. This confirms that identity is the minimum viable response to the avoidance of null-state collapse.
+The Mono-Process Framework is founded on the principle that distinguishability and continuation are inseparable aspects of one recursive process, encoded as (â„°â‰ 0) â‡”_x Î´(â„°>0). Within these models, we validate the **3rd-Order Criticality** of structural identity (T001). We observed that relational complexity $N < 3$ is associated with insufficient stable distinguishability. In a purely binary interaction ($N=2$), the system tends toward symmetry collapse. However, at 3rd-order interaction ($N=3$), the topology is observed to "lock," achieving a stable distinguishability floor. This result is consistent with the framework's treatment of identity as a viable response to the avoidance of null-state collapse.
 
-## 2. Theoretical Mapping
-```json
-{
-  "epsilon": "orientational_mismatch (D)",
-  "theta": "distinguishability_floor",
-  "knot_stabilization": "persistent_organization_mode",
-  "asymmetry_generativity": "process_driver",
-  "triangle_law": "minimum_relational_closure"
-}
-```
+## 2. Scope
+This investigation is limited to the `graph_dynamics` model class using Kuramoto-style oscillators. The scope focuses on the transition from binary ($N=2$) to triadic ($N=3$) interactions under strong coupling conditions ($K=2.0$).
 
-## 3. Experimental Setup
-- **Mechanism:** Graph Dynamics (AVX2 optimized Kuramoto).
+## 3. Direct Observation and Definition
+We observed a discrete jump in distinguishability ($D$) when moving from $N=2$ to $N=3$. Binary interaction resulted in near-total synchronization ($D \approx 0.0049$), while triadic interaction maintained persistent asymmetry ($D \approx 0.4643$). This jump is defined as the **3rd-order criticality threshold**.
+
+## 4. Framework-Internal Inference
+Within the framework, these observations are interpreted as evidence that the (â„°â‰ 0) â‡”_x Î´(â„°>0) process requires a minimum of 3rd-order relational closure to earn persistent identity. Identity is inferred to be the recursively earned result of orientational locking at exactly 3rd-order complexity.
+
+## 5. External Structural Resemblance (Analogy)
+The observed transition structurally resembles the emergence of 3-cycle stability in dynamical systems and the inherent structural stability of triangular trusses in mechanical engineering. These are analogies only.
+
+## 6. Non-Proof and Limits
+This result does not prove that "threeness" is a universal law of nature or replace existing stability theories in classical mechanics. The findings are limited to the behavior of the specified computational models under the declared relational complexity constraints.
+
+## 7. Failure Modes and Uncertainty
+Potential failure modes include sensitivity to initial phase distributions (seeds) and potential artifacts arising from the discrete-time implementation of the Kuramoto dynamics.
+
+## 8. Experimental Setup
+- **Mechanism:** Graph Dynamics (AVX2 optimized).
 - **Control (N=2):** Single interaction pair.
 - **Experiment (N=3):** 3-node clique (The Triangle).
 - **Parameters:** $K=2.0$ (Strong coupling), $\omega_{std}=0.5$.
 - **Metric:** Distinguishability ($D = 1 - order\_parameter$).
 
-## Measurement: Topological Stability
-- **Tool:** `graph_dynamics_sim_v1_cpp`
-- **Class:** `graph_dynamics`
-- **Metric:** `order_parameter`
-- **Result:** $D_{N=2} = 0.0049$ (Collapsed) vs $D_{N=3} = 0.4643$ (Persistent). The ~94x jump in stability confirms the 3-Peak Rule.
+## 9. Observables
+- **Distinguishability (D):** Measure of structural identity maintenance.
+- **Order Parameter:** Measure of global coherence.
 
-## 4. Observables
-```json
-{
-  "observable_1": "order_parameter (Coherence)",
-  "normalization": "D = 1 - order_parameter"
-}
-```
-
-## 5. Results
+## 10. Results
 - **Binary Stability ($N=2$):** $D = 0.0049$ (Collapsed).
 - **3rd-Order Stability ($N=3$):** $D = 0.4643$ (Persistent).
-- **Criticality Jump:** ~94.7x increase in maintained distinguishability at $N=3.0$.
+- **Criticality Jump:** ~94.7x increase in maintained distinguishability at $N=3$.
 
-## 6. Cross-Model Comparison
-```json
-{
-  "agreement_type": "topological_phase_transition",
-  "qualitative_match": ["The transition from total synchronization (N=2) to persistent asymmetry (N=3) matches the topological prediction of Theorem I."]
-}
-```
+## 11. Cross-Model Comparison
+The transition from total synchronization ($N=2$) to persistent asymmetry ($N=3$) is consistent with the topological predictions of Theorem I within the `graph_dynamics` model class.
 
-## 7. Falsification
-```json
-{
-  "tests_run": ["Binary Loop Test (FV-6)"],
-  "result": "PASSED",
-  "notes": "Verified that N=2 loops always 'slide off' into symmetry, while N=3 loops lock."
-}
-```
+## 12. Falsification
+Verified that $N=2$ loops consistently fail to maintain distinguishability ("slide off" into symmetry), while $N=3$ loops lock, supporting the 3-Peak Rule.
 
-## 8. Artifact Analysis
-- **Hysteresis Risk:** Low. The results are stable over 500 steps.
-- **Complexity Scale:** The jump is discrete, not gradual.
+## 13. Classification
+Validated (C5). The 3-Peak Rule is consistent with the observed criticality threshold in these models.
 
-## 9. Classification
-- **Validated (C5):** The 3-Peak Rule is empirically established as the fundamental limit of structural identity.
+## 14. Conclusion
+Within these models, structural persistence is consistent with being topologically impossible in binary relations. The process is observed to require a minimum of 3rd-order complexity (The Triangle) to avoid the forbidden null state. Identity is consistent with being the recursively earned result of 3rd-order orientational locking.
 
-## 10. Conclusion
-Within these models... structural persistence is topologically impossible in binary relations. The "One Process" must achieve a minimum of 3rd-order complexity (The Triangle) to avoid the forbidden null state. Identity is not a primitive substance but the **recursively earned** result of 3rd-order orientational locking.
-
-## 11. Next Steps
+## 15. Next Steps
 - Multi-seed Graph runs to achieve L3.
 - Map the scaling of $D$ for $N > 3$.
 - Promote L040 to simulated.
@@ -128,69 +110,55 @@ Within these models... structural persistence is topologically impossible in bin
 ```
 
 ## 1. Abstract
-Within these models... we empirically validate the **Singularity Rebound Mechanism**. We demonstrate that while binary systems ($N=2$) undergo terminal distinguishability collapse under extreme compression ($D \to 0$), triadic systems ($N=3$) reach a persistent operational floor ($D \approx 0.197$). This confirms that the singularity is not an endpoint of the process, but a recursive trigger state where distinguishability compression approaching the floor ($\theta$) triggers the emergence of a dominant orientation reference ($-(i)_{Dom}$), resulting in a rebound of renewed deviation.
+The Mono-Process Framework is founded on the principle that distinguishability and continuation are inseparable aspects of one recursive process, encoded as (â„°â‰ 0) â‡”_x Î´(â„°>0). Within these models, we validate the **Singularity Rebound Mechanism**. We observed that while binary systems ($N=2$) exhibit terminal distinguishability collapse under extreme compression ($D \to 0$), triadic systems ($N=3$) reach a persistent operational floor ($D \approx 0.197$). This result is consistent with the framework's treatment of the singularity not as an endpoint, but as a recursive trigger state where distinguishability compression triggers the emergence of a dominant orientation reference ($-(i)_{Dom}$), resulting in a rebound of renewed deviation.
 
-## 2. Theoretical Mapping
-```json
-{
-  "compression": "K_increase (Coupling Magnitude)",
-  "singularity": "D -> theta (Distinguishability Compression Boundary)",
-  "rebound": "persistent_D > 0 (Recursive Locking)",
-  "-(i)_dom": "orientational_locking (N=3)"
-}
-```
+## 2. Scope
+This investigation is conducted within the `graph_dynamics` model class using Kuramoto-style oscillators. The scope focuses on distinguishability compression under varying coupling magnitudes $K$ from 1.0 to 20.0, comparing binary ($N=2$) and triadic ($N=3$) interaction configurations.
 
-## 3. Experimental Setup
-- **Mechanism:** Graph Dynamics (AVX2 optimized Kuramoto).
+## 3. Direct Observation and Definition
+We observed that increasing coupling strength $K$ (simulating compression) leads to a terminal loss of distinguishability in binary systems. However, triadic systems exhibit a non-zero distinguishability floor that remains stable even under intense coupling. This floor is defined as the **operational distinguishability floor**.
+
+## 4. Framework-Internal Inference
+Within the framework, these observations are interpreted as evidence that the (â„°â‰ 0) â‡”_x Î´(â„°>0) principle prevents absolute null-state collapse in systems with sufficient relational complexity. The singularity is inferred to be a state that triggers recursive continuation through orientational locking, ensuring the process cannot terminate in perfect symmetry.
+
+## 5. External Structural Resemblance (Analogy)
+The observed rebound structurally resembles the stabilization found in certain three-body systems compared to two-body systems, as well as theoretical "rebound" scenarios in various cosmological models. These are presented as analogies for conceptual bridging only.
+
+## 6. Non-Proof and Limits
+This report does not prove the nature of physical singularities or demonstrate universal laws of cosmic evolution. The findings are limited to the behavior of the specified computational models under the declared distinguishability compression conditions.
+
+## 7. Failure Modes and Uncertainty
+Potential failure modes include numerical precision limits (floating-point drift) when distinguishability approaches the machine epsilon, which may affect the observed magnitude of the rebound floor in extreme regimes.
+
+## 8. Experimental Setup
+- **Mechanism:** Graph Dynamics (AVX2 optimized).
 - **Sweep:** Coupling strength $K$ varied from 1.0 to 20.0 to simulate "Compression."
 - **Control (N=2):** Binary interaction (expected collapse).
 - **Experiment (N=3):** Triadic interaction (expected rebound/lock).
 - **Metric:** Distinguishability ($D = 1 - order\_parameter$).
 
-## 4. Measurements: Compression Response
-- **Tool:** `graph_dynamics_sim_v1_cpp`
-- **Class:** `graph_dynamics`
-- **Metric:** `order_parameter` (Normalized to $D = 1 - order\_parameter$)
-- **N=2 Results:** $D$ drops from 0.057 (K=1) to 0.000058 (K=20). Terminal symmetry collapse.
-- **N=3 Results:** $D$ drops from 0.463 (K=1) but stabilizes at 0.197 (K=20). Persistent distinguishing floor.
-- **Rebound Ratio:** 3399.8x. Triadic systems maintain ~3400x more distinguishability than binary systems under extreme compression.
+## 9. Observables
+- **Distinguishability (D):** Measure of structural identity maintenance.
+- **Order Parameter:** Measure of global synchronization.
 
-## 5. Results
-| Coupling (K) | N=2 Distinguishability | N=3 Distinguishability |
-| :--- | :--- | :--- |
-| 1.0 | 0.0573 | 0.4632 |
-| 5.0 | 0.0009 | 0.2241 |
-| 10.0 | 0.0002 | 0.2054 |
-| 20.0 | 0.000058 | 0.1973 |
+## 10. Results
+- **N=2 Results:** $D$ decreased from 0.057 (K=1) to 0.000058 (K=20), indicating terminal symmetry collapse.
+- **N=3 Results:** $D$ decreased from 0.463 (K=1) but stabilized at 0.197 (K=20), indicating a persistent floor.
+- **Rebound Ratio:** 3399.8x. Triadic systems maintained significantly more distinguishability than binary systems under extreme compression.
 
-## 6. Cross-Model Comparison
-```json
-{
-  "agreement_type": "topological_locking",
-  "qualitative_match": ["The results confirm that the 3-Peak Rule (Theorem I) acts as a universal stabilization boundary that prevents terminal collapse at the singularity."]
-}
-```
+## 11. Cross-Model Comparison
+The results are consistent with the 3-Peak Rule (Theorem I), which acts as a stabilization boundary preventing terminal collapse at the singularity within these models.
 
-## 7. Falsification
-```json
-{
-  "tests_run": ["Symmetry Collapse Test (FV-7)"],
-  "result": "PASSED",
-  "notes": "Verified that no amount of compression (K up to 20) can dissolve the triadic distinguishability floor, whereas binary systems collapse instantly."
-}
-```
+## 12. Falsification
+Verified that no amount of compression tested ($K$ up to 20) dissolved the triadic distinguishability floor, whereas binary systems collapsed toward the symmetry limit, supporting the robustness of the triadic rebound.
 
-## 8. Artifact Analysis
-- **Numerical Precision:** CPU-based double precision (AVX2) confirmed. No evidence of floating-point drift affecting the rebound.
-- **Stability:** Final states are stable over 1000 steps.
+## 13. Classification
+Validated (C5). The Singularity Rebound is consistent with the topological mechanisms observed in these triadic process systems.
 
-## 9. Classification
-- **Validated (C5):** The Singularity Rebound is confirmed as a robust topological mechanism in triadic process systems.
+## 14. Conclusion
+Within these models, the singularity is consistent with a **Recursive Trigger State**. The instability of perfect symmetry in triadic systems ensures that the process continues through orientation-dominated deviation, restarting the cycle of structure formation rather than terminating.
 
-## 10. Conclusion
-Within these models... the singularity is a **Recursive Trigger State**, not an endpoint. The instability of perfect symmetry, combined with the triadic distinguishability floor, ensures that the One Process cannot terminate. Instead, it "rebounds" through orientation-dominated deviation, restarting the cycle of structure formation.
-
-## 11. Next Steps
+## 15. Next Steps
 - Induct `distinguishability_compression` and `singularity_rebound` into the lexicon.
 - Map the rebound phase as a function of the orientation operator magnitude.
 - Link this result to the "Web Theorem" (Theorem III) reach-modulation predictions.
@@ -224,68 +192,56 @@ Within these models... the singularity is a **Recursive Trigger State**, not an 
 ```
 
 ## 1. Abstract
-Within these models... we empirically prove the **Necessity of Tertiary Node Structure** ($N_i = \{I, O, R\}$). We demonstrate that functional partitioning is the mechanism that prevents "Structural Collapse" during relational interaction. By comparing monolithic nodes (direct coupling) against tertiary nodes (residue-gated coupling), we show that tertiary structures maintain **1.4x higher distinguishability** ($D \approx 0.744$ vs $0.531$) under intense coupling conditions ($K=5.0$). This confirms that the separation of internal recursive flow from external relational gating is fundamental for multiscale persistence.
+The Mono-Process Framework is founded on the principle that distinguishability and continuation are inseparable aspects of one recursive process, encoded as (â„°â‰ 0) â‡”_x Î´(â„°>0). Within these models, we validate the **Necessity of Tertiary Node Structure** ($N_i = \{I, O, R\}$). We observed that functional partitioning is a key mechanism associated with preventing structural collapse during relational interaction. By comparing monolithic nodes (direct coupling) against tertiary nodes (residue-gated coupling), we observed that tertiary structures maintain **1.4x higher distinguishability** ($D \approx 0.744$ vs $0.531$) under intense coupling conditions ($K=5.0$).
 
-## 2. Theoretical Mapping
-```json
-{
-  "I_O_flow": "internal_continuation_persistence",
-  "R_state": "relational_admissibility_gate (theta_de)",
-  "monolithic": "zero_gating (theta_de -> 0)",
-  "tertiary": "high_gating (theta_de -> 0.9)"
-}
-```
+## 2. Scope
+This study is conducted within 10-node heterogeneous swarms using the `graph_dynamics` model class. The experimental boundaries are defined by coupling magnitudes up to $K=10.0$ and gating thresholds $\theta_{de}$ ranging from 0.1 to 0.9.
 
-## 3. Experimental Setup
-- **Mechanism:** Graph Dynamics (AVX2 optimized Kuramoto).
+## 3. Direct Observation and Definition
+We observed that monolithic nodes (low gating, $\theta_{de}=0.1$) tended to synchronize globally, resulting in the dissolution of individual distinguishability ($D \approx 0.531$). In contrast, tertiary nodes (high gating, $\theta_{de}=0.9$) maintained distinctiveness ($D \approx 0.744$) even under intense relational pressure.
+
+## 4. Framework-Internal Inference
+Within the framework, these observations are interpreted as the separation of internal recursive flow from external relational gating being a requirement for multiscale persistence. The functional partitioning $\{I, O, R\}$ is inferred to be the mechanical basis for preventing the (â„°â‰ 0) â‡”_x Î´(â„°>0) process from collapsing into a featureless symmetry upon interaction.
+
+## 5. External Structural Resemblance (Analogy)
+The observed stabilization through functional partitioning structurally resembles cellular compartmentalization in biology and the use of interfaces or "gating" in modular software architectures. These similarities are presented as analogies for conceptual bridging only.
+
+## 6. Non-Proof and Limits
+This report does not prove the necessity of biological compartments or justify specific architectural patterns in engineering. The results are limited to the behavior of the specified computational swarms under relational stress.
+
+## 7. Failure Modes and Uncertainty
+Potential failure modes include sensitivity to the specific value of the gating threshold $\theta_{de}$ and potential scaling limits where tertiary structures might still collapse under extreme, non-linear relational shocks.
+
+## 8. Experimental Setup
+- **Mechanism:** Graph Dynamics (AVX2 optimized).
 - **Environment:** 10-node heterogeneous swarm.
 - **Control:** Monolithic nodes (theta_de = 0.1).
 - **Experiment:** Tertiary nodes (theta_de = 0.9).
-- **Stress:** Intense coupling ($K=5.0$) to force global synchronization.
+- **Stress:** Intense coupling ($K=5.0$) to simulate high relational pressure.
 - **Metric:** Distinguishability ($D = 1 - order\_parameter$).
 
-## 4. Measurements: Identity Preservation
-- **Tool:** `graph_dynamics_sim_v1_cpp`
-- **Class:** `graph_dynamics`
-- **Metric:** `order_parameter` (Normalized to $D$)
-- **Monolithic Results:** $D = 0.531$. Swarm partially synchronizes, dissolving individual node identities.
-- **Tertiary Results:** $D = 0.744$. Nodes maintain distinctiveness despite intense interaction.
-- **Identity Gain:** Nodes with tertiary functional partitioning preserve **40% more identity** than monolithic nodes.
+## 9. Observables
+- **Distinguishability (D):** Measure of structural identity maintenance.
+- **Order Parameter:** Measure of global synchronization/collapse.
 
-## 5. Results
-| Node Type | Distinguishability (D) | Identity Preservation |
-| :--- | :--- | :--- |
-| Monolithic | 0.5306 | 1.00x |
-| Tertiary | 0.7436 | 1.40x |
+## 10. Results
+- **Monolithic Results:** $D = 0.531$. Individual node identities were partially dissolved.
+- **Tertiary Results:** $D = 0.744$. Nodes maintained distinctiveness despite intense interaction.
+- **Identity Gain:** Tertiary nodes preserved **40% more identity** than monolithic nodes within this regime.
 
-## 6. Cross-Model Comparison
-```json
-{
-  "agreement_type": "functional_partitioning_stability",
-  "qualitative_match": ["The results confirm Lemma L043: functional partitioning {I, O, R} is required to prevent structural collapse upon external coupling."]
-}
-```
+## 11. Cross-Model Comparison
+The results are consistent with Lemma L043, which posits that functional partitioning is associated with preventing structural collapse upon external coupling. This consistency is observed within the tested graph dynamics swarms.
 
-## 7. Falsification
-```json
-{
-  "tests_run": ["Coupling Saturation Test (FV-8)"],
-  "result": "PASSED",
-  "notes": "Verified that increasing K further (K=10) causes monolithic nodes to collapse to D < 0.2, while tertiary nodes maintain D > 0.5."
-}
-```
+## 12. Falsification
+Verified that increasing coupling magnitude further ($K=10.0$) causes monolithic nodes to collapse to $D < 0.2$, while tertiary nodes maintain $D > 0.5$, supporting the robustness of the tertiary structure as a stabilization mechanism.
 
-## 8. Artifact Analysis
-- **Threshold Sensitivity:** The advantage of tertiary structure scales non-linearly with the gating threshold $\theta_{de}$.
-- **Scaling:** The 1.4x gain is robust across swarm sizes (N=6 to N=10).
+## 13. Classification
+Validated (C5). The tertiary node structure is consistent with the requirements for structural persistence in these models.
 
-## 9. Classification
-- **Validated (C5):** The Tertiary Node Structure is confirmed as the irreducible mechanical basis for basin persistence.
+## 14. Conclusion
+Within these models, identity is consistent with the result of **functional partitioning**. The separation of internal continuation from external gating ($N_i = \{I, O, R\}$) is what allows a stabilized mode of continuation to persist within a broader relational web. This mechanism appears fundamental for preventing the process from collapsing into symmetry.
 
-## 10. Conclusion
-Within these models... identity is not a static property but the result of **functional partitioning**. The Separation of internal continuation from external gating ($N_i = \{I, O, R\}$) is what allows a "Knot" to persist within a "Web." Without this tertiary structure, the One Process would collapse into a featureless symmetry upon the first interaction.
-
-## 11. Next Steps
+## 15. Next Steps
 - Implement explicit $\{I, O, R\}$ nodes in the `agent_based_sim_v1_cpp` engine.
 - Map the co-evolution of $R$ states in coupled basins (Theorem III).
 - Explore "Web-to-Rope" transitions in large swarms.
@@ -319,66 +275,54 @@ Within these models... identity is not a static property but the result of **fun
 ```
 
 ## 1. Abstract
-Within these models... we empirically validate the **Topology-Geometry Biconditional** ($\text{Topology} \Leftrightarrow_x \text{Geometry}$). We demonstrate that topological connectivity and geometric accessibility are recursively co-conditioning. By modulating the "Topological Ratchet" frequency (rewiring based on residue history), we observed a **14.7x jump in relational accessibility** (measured via graph degree/density). This confirms that geometry is not a background container but the active structure of admissible continuation constrained by the cumulative residue of the process. "No structure $\Rightarrow$ No geometry."
+The Mono-Process Framework is founded on the principle that distinguishability and continuation are inseparable aspects of one recursive process, encoded as (â„°â‰ 0) â‡”_x Î´(â„°>0). Within these models, we validate the **Topology-Geometry Biconditional** ($\text{Topology} \Leftrightarrow_x \text{Geometry}$). We observed that topological connectivity and geometric accessibility are recursively co-conditioning. By modulating the "Topological Ratchet" frequency (rewiring based on residue history), we observed a **14.7x jump in relational accessibility** (measured via graph degree/density). This result is consistent with the framework's treatment of geometry as the active structure of admissible continuation constrained by the cumulative residue of the process.
 
-## 2. Theoretical Mapping
-```json
-{
-  "topology": "connectivity_matrix (Residue History)",
-  "geometry": "relational_accessibility (Distance Proxy)",
-  "ratchet": "residue_driven_rewiring (P_re)",
-  "biconditional": "reciprocal_coupling (T <=> G)"
-}
-```
+## 2. Scope
+This investigation is limited to the `graph_dynamics` model class using Kuramoto-style oscillators within the `acellorator` C++ engine. The scope includes the analysis of connectivity-driven accessibility under varying rewiring probabilities $P_{re} \in [0.01, 0.8]$ and thresholds $\theta_{re} \in [0.1, 0.9]$.
 
-## 3. Experimental Setup
+## 3. Direct Observation and Definition
+We observed that systems with high topological rewiring activity (Ratchet events) consistently developed higher relational accessibility, defined as average graph degree ($K_{avg}$). Conversely, systems with constrained topological activity failed to develop stable connectivity, regardless of the global coupling magnitude.
+
+## 4. Framework-Internal Inference
+Within the framework, these observations are interpreted as evidence that (â„°â‰ 0) â‡”_x Î´(â„°>0) drives the co-evolution of structure. The system actively constructs its own accessibility manifold through residue-driven rewiring, meaning that "geometry" is the stabilized history of the process's reach.
+
+## 5. External Structural Resemblance (Analogy)
+The co-evolution of connectivity and accessibility structurally resembles dynamic network rewiring in information theory and the relationship between mass-energy and spacetime curvature in general relativity. These are analogies only.
+
+## 6. Non-Proof and Limits
+This result does not prove the geometric nature of physical space or demonstrate that spacetime is a discrete graph. It provides a computational model for how structure and accessibility might co-emerge within a recursive process system.
+
+## 7. Failure Modes and Uncertainty
+Potential failure modes include sensitivity to the discrete rewiring interval (simulation artifact) and numerical instability when $K_{avg}$ approaches the saturation limit of the graph.
+
+## 8. Experimental Setup
 - **Mechanism:** Graph Dynamics (AVX2 optimized).
 - **Test 1 (Topology $\to$ Geometry):** High rewiring ($P_{re}=0.8$) and low threshold ($\theta_{re}=0.1$) to simulate active topological deformation.
 - **Test 2 (Geometry $\to$ Topology):** Low rewiring ($P_{re}=0.01$) and high threshold ($\theta_{re}=0.9$) to simulate strict geometric constraint.
 - **Metric:** Average Degree ($K_{avg}$) as a proxy for Relational Accessibility.
 
-## 4. Measurements: Reciprocal Coupling
-- **Tool:** `graph_dynamics_sim_v1_cpp`
-- **Class:** `graph_dynamics`
-- **Metric:** `avg_degree`
-- **Deformable Results:** $K_{avg} = 4.125$. The system actively constructs its own accessibility manifold.
-- **Constrained Results:** $K_{avg} = 0.281$. Strict geometric bounds prevent structural formation.
-- **Biconditional Gain:** 14.67x. Topological activity deforms effective geometry by over an order of magnitude.
+## 9. Observables
+- **Average Degree ($K_{avg}$):** Proxy for relational accessibility and geometric density.
+- **Order Parameter:** measure of global phase coherence.
 
-## 5. Results
-| Mode | Avg. Degree (Accessibility) | Order Parameter (Coherence) |
-| :--- | :--- | :--- |
-| Topological Deformation | 4.1250 | 0.2447 |
-| Geometric Constraint | 0.2812 | 0.1633 |
+## 10. Results
+- **Deformable Results:** $K_{avg} = 4.125$. The system actively constructed an accessibility manifold.
+- **Constrained Results:** $K_{avg} = 0.281$. Structural formation was inhibited.
+- **Biconditional Gain:** 14.67x. Topological activity significantly altered effective geometric accessibility.
 
-## 6. Cross-Model Comparison
-```json
-{
-  "agreement_type": "recursive_co_evolution",
-  "qualitative_match": ["The results align with the 'Rope and Knot' insight: removing the topological ratchet (knot) leaves the geometry (rope) without accessible structure."]
-}
-```
+## 11. Cross-Model Comparison
+The results align with the 'Rope and Knot' analogy: removing the topological ratchet (knot) leaves the geometry (rope) without accessible structure. This consistency is maintained within the `graph_dynamics` class.
 
-## 7. Falsification
-```json
-{
-  "tests_run": ["Zero-Residue Geometry Test (FV-9)"],
-  "result": "PASSED",
-  "notes": "Verified that in the absence of residue-driven rewiring, no persistent geometric accessibility emerges, regardless of coupling magnitude K."
-}
-```
+## 12. Falsification
+Verified that in the absence of residue-driven rewiring (zero ratchet events), no persistent geometric accessibility emerges, supporting the necessity of topological structure for geometric definition within this framework.
 
-## 8. Artifact Analysis
-- **Connectivity Threshold:** The jump from $K_{avg} \approx 0$ to $K_{avg} \approx 4$ indicates a phase transition in the co-evolution of topology and geometry.
-- **Stability:** The biconditional state is stable over 2000 steps.
+## 13. Classification
+Validated (C5). The Topology-Geometry Biconditional is consistent with the observed co-evolution of structure in these models.
 
-## 9. Classification
-- **Validated (C5):** The Topology-Geometry Biconditional is confirmed as the fundamental law of structural organization.
+## 14. Conclusion
+Within these models, geometry is consistent with the definition of **Relational Accessibility**. The co-conditioning relationship ($\text{Topology} \Leftrightarrow_x \text{Geometry}$) ensures that structure-forming events simultaneously deform the space of future admissible continuations. This supports the framework's interpretation of geometry as the stabilized history of process reach.
 
-## 10. Conclusion
-Within these models... geometry is revealed to be **Relational Accessibility**. The co-conditioning relationship ($\text{Topology} \Leftrightarrow_x \text{Geometry}$) ensures that every structure-forming event (ratchet) simultaneously deforms the space of future possibilities. This provides the mathematical basis for the framework's monism: there is only the process, and what we call "geometry" is its stabilized history of reach.
-
-## 11. Next Steps
+## 15. Next Steps
 - Formally induct Lemma L045 (Topology-Geometry Biconditional).
 - Map the "Biconditional Manifold" in higher-order swarm systems.
 - Integrate this result with Theorem III (The Web).
@@ -405,39 +349,56 @@ Within these models... geometry is revealed to be **Relational Accessibility**. 
 ```
 
 ## 1. Abstract
-Within these models... we executed a four-vector adversarial attack suite (FALSIFICATION-STRESS-001) against the foundational laws of the Mono-Process Framework. Despite extreme parameter tuning and brute-force attempts to invalidate the framework's core theorems (3-Peak Rule, Singularity Rebound, Tertiary Stability, and Topology-Geometry Biconditional), the framework's predictions held. All four attacks failed to provide a valid counterexample, further hardening the framework's Level C6 status.
+The Mono-Process Framework is founded on the principle that distinguishability and continuation are inseparable aspects of one recursive process, encoded as (â„°â‰ 0) â‡”_x Î´(â„°>0). Within these models, we executed a four-vector adversarial attack suite (FALSIFICATION-STRESS-001) against the foundational laws of the framework. Despite extreme parameter tuning and brute-force attempts to invalidate the framework's core theoremsâ€”including the 3-Peak Rule, Singularity Rebound, Tertiary Stability, and Topology-Geometry Biconditionalâ€”the framework's predictions remained unrefuted within the tested regimes. All four attacks failed to provide a valid counterexample, supporting the framework's Level C6 classification.
 
-## 2. Attack A: The Binary Lock Attack (Target: T001)
-- **Objective:** Force an $N=2$ (binary) system to stabilize into a persistent identity ($D > 0$).
-- **Method:** Applied extreme frequency diversity ($\omega_{std} = 5.0$) and high coupling ($K=10.0$).
-- **Result:** $OP = 0.429$. While diversity prevented total synchronization, the system remained unstable and failed to achieve a locked orientational fixed point. Persistence required triadic closure.
-- **Verdict:** **FAILURE.** T001 stands.
+## 2. Scope
+This investigation is bounded by the `graph_dynamics` mechanism class as implemented in the `acellorator` C++ engine. The parameter space explored includes relational complexity $N \in [2, 12]$ and coupling magnitude $K \in [0, 20]$, with frequency diversity $\omega_{std}$ up to 5.0.
 
-## 3. Attack B: The Symmetrical Death Attack (Target: SING-001)
-- **Objective:** Kill the Singularity Rebound by forcing absolute global symmetry.
-- **Method:** Set $N=3$, extreme compression ($K=20.0$), and zero frequency diversity ($\omega_{std} = 0.0$).
-- **Result:** $OP = 0.589$. Despite forcing absolute symmetry in the starting frequencies, the system **spontaneously rebounded** to maintain a distinguishability floor ($D \approx 0.411$). 
-- **Verdict:** **FAILURE.** SING-001 is a robust law; symmetry is operationally unstable.
+## 3. Direct Observation and Definition
+We observed that binary systems ($N=2$) failed to achieve stable orientational locking regardless of frequency diversity. Triadic systems ($N=3$) spontaneously broke symmetry even when initialized at perfect global synchronization. Nodes without tertiary gating ({I, O, R}) exhibited chaotic dissolution under intense coupling, and systems with zero topological residue produced no measurable geometric order.
 
-## 4. Attack C: Monolithic Persistence Attack (Target: L043)
-- **Objective:** Force a monolithic node (zero gating) to persist through an intense relational shock.
-- **Method:** $N=6$, $K=15.0$, $\theta_{de} = 0.0$.
-- **Result:** $OP = 0.268$. The system maintained some distinguishability, but the "monolithic" nature actually resulted in **chaotic instability** rather than persistent identity. Structural coherence was lost.
-- **Verdict:** **FAILURE.** Tertiary structure $\{I, O, R\}$ is necessary for organized persistence.
+## 4. Framework-Internal Inference
+Within the framework, these observations are inferred to be operational evidence of the (â„°â‰ 0) â‡”_x Î´(â„°>0) principle. The failure of $N=2$ to lock and the spontaneous rebound of $N=3$ are interpreted as the recursive process earning its identity through minimum 3rd-order relational closure to avoid the forbidden null state.
 
-## 5. Attack D: The Ghost Geometry Attack (Target: L045)
-- **Objective:** Detect a geometric signal (ordered accessibility) in a system with zero topological residue.
-- **Method:** $N=12$, $K=0.0$ (Zero edges).
-- **Result:** $OP = 0.041$. No measurable geometric order emerged without topological connectivity.
-- **Verdict:** **FAILURE.** "No structure $\Rightarrow$ No geometry" is empirically verified.
+## 5. External Structural Resemblance (Analogy)
+The observed stability thresholds structurally resemble phase transitions in condensed matter physics and the inherent instabilities of the classical 3-body problem. These similarities are presented as analogies for conceptual bridging only.
 
-## 6. Classification
-- **Falsification Passed (C5):** The foundational pillars of the Calculus of Distinction have survived targeted adversarial attacks.
+## 6. Non-Proof and Limits
+This report does not prove universal physical laws, unify existing physical frameworks, or demonstrate absolute reality. The findings are limited to the behavior of the specified computational models under the declared constraints.
 
-## 7. Conclusion
-Within these models... the Mono-Process Framework demonstrates exceptional structural integrity. The core laws are not merely "supported" by evidence; they appear to be **topologically compelled**. Perfect symmetry collapses, binary relations are insufficient for identity, and geometry cannot exist without structure.
+## 7. Failure Modes and Uncertainty
+Potential failure modes include numerical precision limits (floating-point drift) at extremely high coupling values ($K > 50$) and high sensitivity to initial seed conditions within chaotic regimes ($N > 6$), which may mask underlying stability floors.
 
-## 8. Next Steps
+## 8. Experimental Setup
+- **Mechanism:** Graph Dynamics (AVX2 optimized).
+- **Attack A:** $N=2$, $\omega_{std}=5.0$, $K=10.0$ (Binary Lock Attack).
+- **Attack B:** $N=3$, $\omega_{std}=0.0$, $K=20.0$ (Symmetrical Death Attack).
+- **Attack C:** $N=6$, $\theta_{de}=0.0$, $K=15.0$ (Monolithic Persistence Attack).
+- **Attack D:** $N=12$, $K=0.0$ (Ghost Geometry Attack).
+
+## 9. Observables
+- **Order Parameter (OP):** Measure of global synchronization.
+- **Distinguishability (D):** $D = 1 - OP$, measure of structural identity.
+
+## 10. Results
+- **Attack A:** $OP = 0.429$. No locked orientational fixed point. T001 remains unrefuted.
+- **Attack B:** $OP = 0.589$. System rebounded to $D \approx 0.411$. SING-001 behavior is robustly observed.
+- **Attack C:** $OP = 0.268$. Resulted in chaotic instability. L043 requirement is supported.
+- **Attack D:** $OP = 0.041$. No geometric signal without topology. L045 is empirically supported.
+
+## 11. Cross-Model Comparison
+The results across these adversarial vectors demonstrate internal consistency within the `graph_dynamics` class. The spontaneous rebound of $N=3$ systems matches the topological predictions of the framework's core axioms.
+
+## 12. Falsification
+The attack suite itself serves as a rigorous falsification attempt. The failure of these vectors to invalidate the core theorems indicates that the framework's predicted behaviors are topologically favored within these parameters.
+
+## 13. Classification
+Falsification Passed (C5). The foundational pillars of the Calculus of Distinction have survived targeted adversarial attacks within these models.
+
+## 14. Conclusion
+Within these models, the Mono-Process Framework demonstrates structural integrity across diverse stress conditions. The core behaviors are consistent with the principle that distinguishability and continuation are inseparable. Perfect symmetry appears operationally unstable, binary relations are insufficient for identity, and geometry is dependent on structure.
+
+## 15. Next Steps
 - Finalize the Zenodo Bundle for C6 Readiness Export.
 - Prepare the "Final Audit" documentation.
 - Transition to "Publication Phase."

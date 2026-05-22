@@ -1,6 +1,6 @@
-# TECHNICAL PAPER: L005 Validation - Residue-Conditioned Closure Constraint
+# TECHNICAL PAPER: L005 - Residue-Conditioned Closure Constraint
 
-## Metadata
+## 0. Metadata
 ```json
 {
   "claim_id": "2026-05-05_run04",
@@ -22,24 +22,34 @@
 }
 ```
 
-## Abstract
-This paper operationally validates **Lemma L005 (Residue-Conditioned Closure Constraint)**. Within the IGSOA framework, we demonstrate that the existence side (informational density $F = |\Psi|^2$) and the update side (realized field $\Phi$) are coupled in a consistent closure, such that non-zero latent activity ($F > 0$) is always associated with the activation of the update rule, fulfilling the requirements for residue-conditioned biconditional logic.
+## 1. Abstract
+The Mono-Process Framework is founded on the principle that distinguishability and continuation are inseparable aspects of one recursive process, encoded as (ℰ≠0) ⇔_x δ(ℰ>0). This paper examines the operational consistency of Lemma L005 (Residue-Conditioned Closure Constraint). Within the IGSOA mechanism class, we observe that the existence side (informational density $F = |\Psi|^2$) and the update side (realized field $\Phi$) are coupled in a consistent closure.
 
-## Theoretical Mapping
-```json
-{
-  "epsilon": "driver_signal_for_activity",
-  "residue": "admissibility_gate"
-}
-```
+## 2. Scope
+This study is limited to 1D cellular automata within the IGSOA framework. It focuses on the biconditional relationship between latent informational density and realized field updates.
 
-## Experimental Setup
+## 3. Direct Observation and Definition
+In the simulation, we define informational density $F$ as the square magnitude of the latent field $\Psi$. We observe that nodes with non-zero $F$ coincide with nodes undergoing state updates in the realized field $\Phi$. This behavior is consistent with the requirement for residue-conditioned biconditional logic.
+
+## 4. Framework-Internal Inference
+The framework treats latent potential not as a separate entity but as a residue of prior process activity that conditions future continuation. Lemma L005 is inferred as the constraint that ensures the process remains "closed"—that is, activity and existence are two views of the same recursive step.
+
+## 5. External Structural Resemblance (Analogy)
+The coupling between $|\Psi|^2$ and $\Delta \Phi$ structurally resembles the relationship between probability density and observable outcomes in quantum wave mechanics, though here it is treated as a deterministic update rule.
+
+## 6. Non-Proof and Limits
+These results are limited to the IGSOA CA implementation. They do not prove universal closure in non-discrete systems or across different mechanism classes.
+
+## 7. Failure Modes and Uncertainty
+Minor numerical accumulation in $\Phi$ was noted at lattice boundaries, which may introduce artifacts in long-duration runs. The precision of the closure is sensitive to the choice of coupling radius $R_c$.
+
+## 8. Experimental Setup
 *   **Tool:** `igsoa_complex_1d_cpp`
 *   **Target Lemma:** L005
 *   **Method:** Observe concurrent evolution of $\Psi$ and $\Phi$.
 *   **Config:** `num_nodes=512`, `steps=100`, `R_c=5.0`, `kappa=0.1`.
 
-## Observables
+## 9. Observables
 ```json
 {
   "psi_squared": "informational_density_F",
@@ -48,8 +58,8 @@ This paper operationally validates **Lemma L005 (Residue-Conditioned Closure Con
 }
 ```
 
-## Results
-The simulation confirms that wherever informational density exists, the realized field follows an update trajectory.
+## 10. Results
+The simulation results are consistent with the coupling of informational density and realized field updates.
 
 | Parameter | Value |
 | :--- | :--- |
@@ -57,31 +67,16 @@ The simulation confirms that wherever informational density exists, the realized
 | Initial Phi ($\Phi$) | 0.0 |
 | Final Phi ($\Phi$) | 32.795 |
 
-## Measurement
-### Lattice Closure Analysis
-Tool: `igsoa_complex_1d_cpp`
-Class: `cellular_automata`
+## 11. Cross-Model Comparison
+C++ engine logic confirmed; results match Python prototypes for the cellular automata class.
 
-The dual-field lattice was monitored for conservation of the closure relation.
-*   **Biconditional Logic:** Active updates were observed specifically at nodes with non-zero $|\Psi|^2$, confirming the $F \iff \Delta \Phi$ mapping.
-*   **Stability:** The closure remained stable over 100 steps of wave-packet propagation.
+## 12. Falsification
+*   **FV-1 (Mechanism Substitution):** Verified in `igsoa_complex_1d_cpp` and Python prototypes.
+*   **FV-2 (Scale Invariance):** Closure is maintained across node counts (128 to 1024) and coupling radii.
+*   **FV-3 (Primitive Reduction):** Setting $\Psi = 0$ results in $\Delta \Phi = 0$, as predicted by the closure constraint.
 
-## Cross-Model Comparison
-(Not required for L1; C++ engine logic confirmed).
+## 13. Classification
+**Supported (L3)**. Lemma L005 is consistent with the behavior of the tested IGSOA model.
 
-## Falsification
-*   **FV-1 (Mechanism Substitution):** PASSED. Verified in `igsoa_complex_1d_cpp` and Python prototypes.
-*   **FV-2 (Scale Invariance):** PASSED. Closure is maintained across node counts (128 to 1024) and coupling radii.
-*   **FV-3 (Primitive Reduction):** PASSED. Setting $\Psi = 0$ results in $\Delta \Phi = 0$.
-
-## Artifact Analysis
-*   **Numerical Drift:** Minor accumulation in $\Phi$ at boundaries.
-
-## Classification
-**Supported (L3)**. Lemma L005 is validated for the cellular automata mechanism class.
-
-## Conclusion
-Within these models, **Lemma L005** is validated. The residue-conditioned biconditional successfully maps latent potential to realized process activity.
-
-## Next Steps
-*   Proceed to validate further topological lemmas.
+## 14. Conclusion
+Within these models, Lemma L005 is consistent with the framework's core principles. The residue-conditioned biconditional successfully maps latent potential to realized process activity in the tested cellular automata regime.

@@ -28,66 +28,54 @@
 ```
 
 ## 1. Abstract
-Within these models... we empirically validate the **Topology-Geometry Biconditional** ($\text{Topology} \Leftrightarrow_x \text{Geometry}$). We demonstrate that topological connectivity and geometric accessibility are recursively co-conditioning. By modulating the "Topological Ratchet" frequency (rewiring based on residue history), we observed a **14.7x jump in relational accessibility** (measured via graph degree/density). This confirms that geometry is not a background container but the active structure of admissible continuation constrained by the cumulative residue of the process. "No structure $\Rightarrow$ No geometry."
+The Mono-Process Framework is founded on the principle that distinguishability and continuation are inseparable aspects of one recursive process, encoded as (ℰ≠0) ⇔_x δ(ℰ>0). Within these models, we validate the **Topology-Geometry Biconditional** ($\text{Topology} \Leftrightarrow_x \text{Geometry}$). We observed that topological connectivity and geometric accessibility are recursively co-conditioning. By modulating the "Topological Ratchet" frequency (rewiring based on residue history), we observed a **14.7x jump in relational accessibility** (measured via graph degree/density). This result is consistent with the framework's treatment of geometry as the active structure of admissible continuation constrained by the cumulative residue of the process.
 
-## 2. Theoretical Mapping
-```json
-{
-  "topology": "connectivity_matrix (Residue History)",
-  "geometry": "relational_accessibility (Distance Proxy)",
-  "ratchet": "residue_driven_rewiring (P_re)",
-  "biconditional": "reciprocal_coupling (T <=> G)"
-}
-```
+## 2. Scope
+This investigation is limited to the `graph_dynamics` model class using Kuramoto-style oscillators within the `acellorator` C++ engine. The scope includes the analysis of connectivity-driven accessibility under varying rewiring probabilities $P_{re} \in [0.01, 0.8]$ and thresholds $\theta_{re} \in [0.1, 0.9]$.
 
-## 3. Experimental Setup
+## 3. Direct Observation and Definition
+We observed that systems with high topological rewiring activity (Ratchet events) consistently developed higher relational accessibility, defined as average graph degree ($K_{avg}$). Conversely, systems with constrained topological activity failed to develop stable connectivity, regardless of the global coupling magnitude.
+
+## 4. Framework-Internal Inference
+Within the framework, these observations are interpreted as evidence that (ℰ≠0) ⇔_x δ(ℰ>0) drives the co-evolution of structure. The system actively constructs its own accessibility manifold through residue-driven rewiring, meaning that "geometry" is the stabilized history of the process's reach.
+
+## 5. External Structural Resemblance (Analogy)
+The co-evolution of connectivity and accessibility structurally resembles dynamic network rewiring in information theory and the relationship between mass-energy and spacetime curvature in general relativity. These are analogies only.
+
+## 6. Non-Proof and Limits
+This result does not prove the geometric nature of physical space or demonstrate that spacetime is a discrete graph. It provides a computational model for how structure and accessibility might co-emerge within a recursive process system.
+
+## 7. Failure Modes and Uncertainty
+Potential failure modes include sensitivity to the discrete rewiring interval (simulation artifact) and numerical instability when $K_{avg}$ approaches the saturation limit of the graph.
+
+## 8. Experimental Setup
 - **Mechanism:** Graph Dynamics (AVX2 optimized).
 - **Test 1 (Topology $\to$ Geometry):** High rewiring ($P_{re}=0.8$) and low threshold ($\theta_{re}=0.1$) to simulate active topological deformation.
 - **Test 2 (Geometry $\to$ Topology):** Low rewiring ($P_{re}=0.01$) and high threshold ($\theta_{re}=0.9$) to simulate strict geometric constraint.
 - **Metric:** Average Degree ($K_{avg}$) as a proxy for Relational Accessibility.
 
-## 4. Measurements: Reciprocal Coupling
-- **Tool:** `graph_dynamics_sim_v1_cpp`
-- **Class:** `graph_dynamics`
-- **Metric:** `avg_degree`
-- **Deformable Results:** $K_{avg} = 4.125$. The system actively constructs its own accessibility manifold.
-- **Constrained Results:** $K_{avg} = 0.281$. Strict geometric bounds prevent structural formation.
-- **Biconditional Gain:** 14.67x. Topological activity deforms effective geometry by over an order of magnitude.
+## 9. Observables
+- **Average Degree ($K_{avg}$):** Proxy for relational accessibility and geometric density.
+- **Order Parameter:** measure of global phase coherence.
 
-## 5. Results
-| Mode | Avg. Degree (Accessibility) | Order Parameter (Coherence) |
-| :--- | :--- | :--- |
-| Topological Deformation | 4.1250 | 0.2447 |
-| Geometric Constraint | 0.2812 | 0.1633 |
+## 10. Results
+- **Deformable Results:** $K_{avg} = 4.125$. The system actively constructed an accessibility manifold.
+- **Constrained Results:** $K_{avg} = 0.281$. Structural formation was inhibited.
+- **Biconditional Gain:** 14.67x. Topological activity significantly altered effective geometric accessibility.
 
-## 6. Cross-Model Comparison
-```json
-{
-  "agreement_type": "recursive_co_evolution",
-  "qualitative_match": ["The results align with the 'Rope and Knot' insight: removing the topological ratchet (knot) leaves the geometry (rope) without accessible structure."]
-}
-```
+## 11. Cross-Model Comparison
+The results align with the 'Rope and Knot' analogy: removing the topological ratchet (knot) leaves the geometry (rope) without accessible structure. This consistency is maintained within the `graph_dynamics` class.
 
-## 7. Falsification
-```json
-{
-  "tests_run": ["Zero-Residue Geometry Test (FV-9)"],
-  "result": "PASSED",
-  "notes": "Verified that in the absence of residue-driven rewiring, no persistent geometric accessibility emerges, regardless of coupling magnitude K."
-}
-```
+## 12. Falsification
+Verified that in the absence of residue-driven rewiring (zero ratchet events), no persistent geometric accessibility emerges, supporting the necessity of topological structure for geometric definition within this framework.
 
-## 8. Artifact Analysis
-- **Connectivity Threshold:** The jump from $K_{avg} \approx 0$ to $K_{avg} \approx 4$ indicates a phase transition in the co-evolution of topology and geometry.
-- **Stability:** The biconditional state is stable over 2000 steps.
+## 13. Classification
+Validated (C5). The Topology-Geometry Biconditional is consistent with the observed co-evolution of structure in these models.
 
-## 9. Classification
-- **Validated (C5):** The Topology-Geometry Biconditional is confirmed as the fundamental law of structural organization.
+## 14. Conclusion
+Within these models, geometry is consistent with the definition of **Relational Accessibility**. The co-conditioning relationship ($\text{Topology} \Leftrightarrow_x \text{Geometry}$) ensures that structure-forming events simultaneously deform the space of future admissible continuations. This supports the framework's interpretation of geometry as the stabilized history of process reach.
 
-## 10. Conclusion
-Within these models... geometry is revealed to be **Relational Accessibility**. The co-conditioning relationship ($\text{Topology} \Leftrightarrow_x \text{Geometry}$) ensures that every structure-forming event (ratchet) simultaneously deforms the space of future possibilities. This provides the mathematical basis for the framework's monism: there is only the process, and what we call "geometry" is its stabilized history of reach.
-
-## 11. Next Steps
+## 15. Next Steps
 - Formally induct Lemma L045 (Topology-Geometry Biconditional).
 - Map the "Biconditional Manifold" in higher-order swarm systems.
 - Integrate this result with Theorem III (The Web).
