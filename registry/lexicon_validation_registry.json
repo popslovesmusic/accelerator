@@ -68,7 +68,8 @@
           "observables": [],
           "output_paths": [
             "results/2026-05-21_run05_Relational_Reach_Validation/artifacts/reach_metrics.csv",
-            "results/2026-05-21_run05_Relational_Reach_Validation/artifacts/reach_report.json"
+            "results/2026-05-21_run05_Relational_Reach_Validation/artifacts/reach_report.json",
+            "results/2026-05-21_run06_Global_Persistence_Scaling/artifacts/scaling_metrics.csv"
           ],
           "downgrade_reasons": [
             "lexicon_term_below_L2_caps_classification"
@@ -273,7 +274,8 @@
             "results/2026-05-21_run03_Ratchet_Hysteresis_Validation/artifacts/hysteresis_report.json",
             "results/2026-05-21_run03_Ratchet_Hysteresis_Validation/data/python_ref/summary.json",
             "results/2026-05-21_run05_Relational_Reach_Validation/artifacts/reach_metrics.csv",
-            "results/2026-05-21_run05_Relational_Reach_Validation/artifacts/reach_report.json"
+            "results/2026-05-21_run05_Relational_Reach_Validation/artifacts/reach_report.json",
+            "results/2026-05-21_run06_Global_Persistence_Scaling/artifacts/scaling_metrics.csv"
           ],
           "downgrade_reasons": [
             "lexicon_term_below_L2_caps_classification"
@@ -595,7 +597,8 @@
           "operational_definition": "Accumulated trace of selection events that deforms future admissibility.",
           "mechanism_classes": [
             "cellular_automata",
-            "discrete_stochastic"
+            "discrete_stochastic",
+            "graph_dynamics"
           ],
           "metrics": [
             "mean_residue",
@@ -610,7 +613,8 @@
           "output_paths": [
             "results/2026-05-21_run03_Ratchet_Hysteresis_Validation/artifacts/hysteresis_metrics.csv",
             "results/2026-05-21_run03_Ratchet_Hysteresis_Validation/artifacts/hysteresis_report.json",
-            "results/2026-05-21_run03_Ratchet_Hysteresis_Validation/data/python_ref/summary.json"
+            "results/2026-05-21_run03_Ratchet_Hysteresis_Validation/data/python_ref/summary.json",
+            "results/2026-05-21_run06_Global_Persistence_Scaling/artifacts/scaling_metrics.csv"
           ],
           "downgrade_reasons": [
             "lexicon_term_below_L2_caps_classification"
@@ -3108,20 +3112,20 @@
       "global_status": "partially_verified",
       "roles": {
         "meta_bridge_operator": {
-          "status": "L1",
-          "claim_id": "THRESHOLD-004",
-          "evidence_id": "THRESHOLD-004",
+          "status": "L2",
+          "claim_id": "PERSISTENCE-001",
+          "evidence_id": "PERSISTENCE-001",
           "mechanism_classes": [
-            "graph_dynamics"
+            "graph_dynamics",
+            "cellular_automata"
           ],
           "observables": [],
           "output_paths": [
             "results/2026-05-21_run05_Relational_Reach_Validation/artifacts/reach_metrics.csv",
-            "results/2026-05-21_run05_Relational_Reach_Validation/artifacts/reach_report.json"
+            "results/2026-05-21_run05_Relational_Reach_Validation/artifacts/reach_report.json",
+            "results/2026-05-21_run06_Global_Persistence_Scaling/artifacts/scaling_metrics.csv"
           ],
-          "downgrade_reasons": [
-            "lexicon_term_below_L2_caps_classification"
-          ]
+          "downgrade_reasons": []
         }
       }
     },
@@ -3129,19 +3133,48 @@
       "global_status": "partially_verified",
       "roles": {
         "transport_corridor": {
-          "status": "L1",
-          "claim_id": "THRESHOLD-004",
-          "evidence_id": "THRESHOLD-004",
+          "status": "L2",
+          "claim_id": "PERSISTENCE-001",
+          "evidence_id": "PERSISTENCE-001",
           "mechanism_classes": [
-            "graph_dynamics"
+            "graph_dynamics",
+            "cellular_automata"
           ],
           "observables": [],
           "output_paths": [
             "results/2026-05-21_run05_Relational_Reach_Validation/artifacts/reach_metrics.csv",
-            "results/2026-05-21_run05_Relational_Reach_Validation/artifacts/reach_report.json"
+            "results/2026-05-21_run05_Relational_Reach_Validation/artifacts/reach_report.json",
+            "results/2026-05-21_run06_Global_Persistence_Scaling/artifacts/scaling_metrics.csv"
           ],
-          "downgrade_reasons": [
-            "lexicon_term_below_L2_caps_classification"
+          "downgrade_reasons": []
+        }
+      }
+    },
+    "continuation_density": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "aliases": [
+        "process_density",
+        "reinforcement_density"
+      ],
+      "global_status": "partially_verified",
+      "roles": {
+        "relational_reinforcement_metric": {
+          "status": "L2",
+          "operational_definition": "The frequency of selection events per admissibility update cycle.",
+          "mechanism_classes": [
+            "graph_dynamics",
+            "cellular_automata"
+          ],
+          "metrics": [
+            "selection_density",
+            "reinforcement_rate"
+          ],
+          "evidence_id": "PERSISTENCE-001",
+          "downgrade_reasons": [],
+          "claim_id": "PERSISTENCE-001",
+          "observables": [],
+          "output_paths": [
+            "results/2026-05-21_run06_Global_Persistence_Scaling/artifacts/scaling_metrics.csv"
           ]
         }
       }

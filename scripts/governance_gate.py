@@ -435,8 +435,9 @@ class GovernanceGate:
 
     def _extract_json_blocks(self, text: str) -> List[Dict[str, Any]]:
         blocks: List[Dict[str, Any]] = []
-        for m in re.finditer(r"```json\s*\n(.*?)\n```", text, re.DOTALL | re.IGNORECASE):
-            raw = m.group(1)
+        # Extremely robust extraction
+        for m in re.finditer(r"```json(.*?)```", text, re.DOTALL | re.IGNORECASE):
+            raw = m.group(1).strip()
             try:
                 parsed = json.loads(raw)
             except Exception:
@@ -849,7 +850,14 @@ class GovernanceGate:
             content = f.read()
         
         json_blocks = self._extract_json_blocks(content)
-        metadata = json_blocks[0] if json_blocks else {}
+        # Find the metadata block (must contain claim_id)
+        metadata = {}
+        for b in json_blocks:
+            if "claim_id" in b:
+                metadata = b
+                break
+        if not metadata and json_blocks:
+            metadata = json_blocks[0]
 
         # Heuristic: the first non-metadata JSON block containing lexicon primitives is treated as Theoretical Mapping.
         theoretical_mapping: Dict[str, Any] = {}
@@ -947,14 +955,6 @@ class GovernanceGate:
             "math_validation": math_validation,
         }
 
-        final_pass = all(v["pass"] for k, v in results.items() if k not in ["cpp", "math_validation"])
-        if not math_validation["pass"] and target_level in ["C5", "C6"]:
-             final_pass = False # Math failure blocks C5/C6
-             blocked_reasons.append("unverified_mathematical_foundations")
-
-        if not final_pass: gate_result = "block"
-        else: gate_result = "pass"
-
         requested_classification = ""
         if isinstance(metadata, dict):
             requested_classification = str(
@@ -964,6 +964,14 @@ class GovernanceGate:
         final_classification = requested_classification or ""
         downgrades_applied: List[str] = []
         blocked_reasons: List[str] = []
+
+        final_pass = all(v["pass"] for k, v in results.items() if k not in ["cpp", "math_validation"])
+        if not math_validation["pass"] and target_level in ["C5", "C6"]:
+             final_pass = False # Math failure blocks C5/C6
+             blocked_reasons.append("unverified_mathematical_foundations")
+
+        if not final_pass: gate_result = "block"
+        else: gate_result = "pass"
 
         cap = (lexicon_validation.get("details", {}) or {}).get("cap_classification")
         if cap:
