@@ -1,0 +1,46 @@
+{
+  "registry_id": "MPF_FORMAL_PRIMITIVE_DEFINITIONS",
+  "version": "1.0.0",
+  "primitives": {
+    "epsilon": {
+      "symbol": "\u2130",
+      "formal_type": "RelationalSignalField",
+      "properties": ["non_null_necessity", "asymmetry_source"],
+      "composition": "Additive"
+    },
+    "residue": {
+      "symbol": "R",
+      "formal_type": "RecursiveInscriptionOperator",
+      "properties": ["hysteretic", "manifold_deforming"],
+      "recurrence": "R_{t+1} = \u03a8(R_t, e_t, -(i)_t)"
+    },
+    "rho": {
+      "symbol": "\u03c1",
+      "formal_type": "ContinuationCapacity",
+      "properties": ["scalar_magnitude", "update_budget"]
+    },
+    "delta": {
+      "symbol": "\u0394",
+      "formal_type": "TransformationOperator",
+      "properties": ["admissibility_constrained", "discrete_onset"]
+    },
+    "theta": {
+      "symbol": "\u03b8",
+      "formal_type": "DistinguishabilityThreshold",
+      "properties": ["relational_floor", "selection_gate"]
+    }
+  },
+  "operator_grammar": {
+    "core_biconditional": "(\u2130 \u2260 0) \u21d4_R \u03b4(\u2130 > 0)",
+    "rules": [
+      {
+        "name": "Precedence",
+        "description": "Admissibility check precedes transformation: \u0394 \u2208 A(R)"
+      },
+      {
+        "name": "Ratchet",
+        "description": "Selection updates residue: e_t \u21d2 R_{t+1}"
+      }
+    ]
+  }
+}

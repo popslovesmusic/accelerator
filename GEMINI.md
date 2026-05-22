@@ -1142,7 +1142,14 @@ The mathematical foundations of the Mono-Process Framework are governed as core 
 - **Status Progression:** `unverified` (proven on paper) → `simulated` (supported by C4+ engine results) → `formally_proven` (symbolic/logic verification).
 - **Binding Rule:** Every lemma intended to support a published claim MUST be operationally tested. The `evidence_paths` in the math registry must point to a compliant `results/` directory.
 
-### 19.4 Publication Constraints (Gate Enforcement)
+### 19.4 Symbolic Trace Workflow (C6 Formal Closure)
+For a mathematical statement to achieve Level C6 (Theorem status), it must pass the **Symbolic Trace Workflow**:
+1.  **Primitive Formalization:** Primitives (ε, R, ρ, Δ, θ) must be mapped to formal algebraic types with defined properties and composition rules.
+2.  **Operator Trace:** The derivation must be presented as a sequence of transformation steps using the governed operator grammar (⇔_x).
+3.  **Mechanism Independence Check:** The trace must explicitly show that the result holds regardless of the specific mechanism class (PDE, CA, Graph, etc.), depending only on the relational structure.
+4.  **Convergence Proof:** The trace must demonstrate that the recursive process cycle (C) converges to the stated theorem (T) under all admissible initial conditions.
+
+### 19.5 Publication Constraints (Gate Enforcement)
 - **C5/C6 Requirement:** A research paper cannot achieve Level C5 (Validate) or C6 (Publish) if it relies on mathematical foundations with status `unverified`.
 - **Falsification:** If a simulation run contradicts a lemma, the lemma status must be moved to `falsified`, and all dependent research claims are automatically downgraded to `proposed_interpretation`.
 
