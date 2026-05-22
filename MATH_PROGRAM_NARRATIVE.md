@@ -24,8 +24,8 @@ The math program evolved through three distinct stages of rigor:
 2.  **The Simulated Phase (C4–C5):** Hardening the theory against independent mechanism classes. Through campaigns like `THRESHOLD-001` and `RECOUPLING-002`, we empirically proved that the framework's laws are **Mechanism-Independent** and **Scale-Invariant**.
 3.  **The Formal Closure (C6):** The achievement of Theorem status. By introducing the **Symbolic Trace Workflow**, we moved beyond simulation-supported claims to formal algebraic derivations that prove the relational necessity of our core laws.
 
-## 4. The Three Master Theorems
-The program culminated in the formal proof of the three foundational laws of reality:
+## 4. The Four Master Theorems (The Master Set)
+The program culminated in the formal proof of the four foundational laws of reality:
 
 ### Theorem I: The Knot Theorem (Non-Substantive Identity)
 *   **The Insight:** Identity is "the rope organized knot-wise."
@@ -42,6 +42,11 @@ The program culminated in the formal proof of the three foundational laws of rea
 *   **The Insight:** Space is collective history.
 *   **The Math:** Derives global interaction reach ($K$) as a dynamic projection of localized historical residue ($R$).
 *   **The Verdict:** The "Cosmic Web" is not a container, but the stabilized accumulation of every prior orientational locking event.
+
+### Theorem IV: The Law of Hierarchical Stabilization (Scaling Law)
+*   **The Insight:** "Webs become Ropes."
+*   **The Math:** Proves that multiscale complexity emerges through **Recursive Basin Nesting**, where the interaction web of a lower-order regime acts as the process substrate for the stabilization of higher-order knots.
+*   **The Verdict:** The laws of selection and identity are scale-invariant, providing the mathematical basis for the fractal-like organization of the universe.
 
 ## 5. The Basin Topology: Loops and Negotiations
 The latest maturation (L040, P024) defines the minimum structural unit of the framework:
@@ -60,7 +65,7 @@ The **Procedural Continuation Ontology (PCO)** serves as the semantic bridge. It
 The math program is currently **Locked and Validated**. 
 - **Lemmas:** 41 verified statements.
 - **Proofs:** 23 formal derivations.
-- **Theorems:** 3 Master Theorems (Identity, Symmetry, Reach).
+- **Theorems:** 4 Master Theorems (Identity, Symmetry, Reach, Scaling).
 - **Status:** **Green (Passing)** across all global governance gates.
 
 We have moved from a philosophy of "One Process" to a calculable, falsifiable, and formally closed **Relational Grammar**. The framework is no longer an interpretation; it is an active execution authority for the next generation of multiscale research.
