@@ -20,3 +20,23 @@ draft
 
 ## Supersedes / Superseded-by
 None.
+
+## Metadata (Migrated from LAW-031)
+- **Law Conditions:**
+  - orientation_array_dependency_explicit
+  - continuous_gradient_candidate_explicit
+  - threshold_candidate_explicit
+  - discrete_event_candidate_explicit
+  - threshold_crossing_condition_explicit
+  - stabilization_quantization_candidate_explicit
+  - continuity_preservation_clause_explicit
+  - nonphysical_discreteness_clause_explicit
+- **Failure Modes:**
+  - physical_quantization_overclaim
+  - quantum_mechanics_leakage
+  - universal_discretization_overclaim
+  - continuity_erasure
+  - threshold_without_tolerance
+  - discrete_event_without_admissibility
+  - primitive_discrete_substance_reintroduction
+  - physics_claim_leakage

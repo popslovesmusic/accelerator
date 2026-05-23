@@ -24,3 +24,23 @@ draft
 
 ## Supersedes / Superseded-by
 
+## Metadata (Migrated from LAW-004)
+- **Law Conditions:**
+  - CSI_domain_explicit
+  - summation_index_beta_explicit
+  - CSI_weighting_explicit
+  - orientation_kernel_explicit
+  - finite_flux_condition_explicit
+  - decay_or_truncation_condition_explicit
+  - projection_into_A_alpha_required_or_failure_preserved
+  - no_global_convergence_claim
+- **Failure Modes:**
+  - unbounded_CSI_summation
+  - transport_flux_divergence
+  - weighting_kernel_collapse
+  - orientation_kernel_overconstraint
+  - hidden_global_convergence_claim
+  - projection_failure_after_transport
+  - nonlocal_transport_fragmentation
+  - physics_claim_leakage
+

@@ -32,15 +32,15 @@ A locus `β` is reachable from `α` (`Reach(α, β)`) if:
 3. The projection into the local admissibility window `A_α` is non-collapsed.
 
 ## 3. Governance Constraints
-- **No Physics Claim:** This law defines mathematical accessibility topology and does not claim to describe physical space or distance.
-- **No Spacetime Metric:** This law does not assume or imply a primitive spacetime metric or absolute distance.
+- **No Physics Claim:** This law defines mathematical accessibility topology and does not claim to describe physical\_space\_proj or distance\_obs.
+- **No Spacetime\_metric\_analog:** This law does not assume or imply a primitive spacetime\_metric\_analog or absolute distance\_obs.
 - **No Global Accessibility:** Reachability is local and relational; this law does not claim global causal reach or universal accessibility.
-- **Relational Topology:** Neighborhoods are defined by orientation and transport, not by simple distance balls.
+- **Relational Topology:** Neighborhoods are defined by orientation and transport, not by simple distance\_obs balls.
 
 ## 4. Failure Modes to Preserve
-- Reintroducing spacetime metric assumptions.
+- Reintroducing spacetime\_metric\_analog assumptions.
 - Overclaiming global accessibility.
-- Treating CSI as a simple Euclidean distance ball.
+- Treating CSI as a simple Euclidean distance\_obs ball.
 - Unbounded reachability without finite flux limits.
 - Transport without satisfying admissibility conditions.
 - Collapse of array topology into a single local operator.

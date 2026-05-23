@@ -21,3 +21,43 @@ draft
 
 ## Supersedes / Superseded-by
 None.
+
+## Metadata (Migrated from LAW-028)
+- **Law Conditions:**
+  - orientation_array_dependency_explicit
+  - invariant_candidate_family_explicit
+  - persistence_invariant_candidate_explicit
+  - accessibility_invariant_candidate_explicit
+  - reinforcement_invariant_candidate_explicit
+  - reconstruction_invariant_candidate_explicit
+  - invariant_failure_condition_explicit
+  - non_global_invariant_clause_explicit
+- **Failure Modes:**
+  - global_conservation_overclaim
+  - universal_invariant_overclaim
+  - physics_invariant_leakage
+  - invariance_without_tolerance
+  - topology_change_denial
+  - perfect_identity_preservation_overclaim
+  - reconstruction_loss_suppression
+  - global_closure_overclaim
+
+## Metadata (Migrated from LAW-033)
+- **Law Conditions:**
+  - orientation_array_dependency_explicit
+  - accessible_domain_definition_explicit
+  - hidden_domain_candidate_explicit
+  - hidden_topology_candidate_explicit
+  - inaccessibility_condition_explicit
+  - partial_trace_condition_explicit
+  - nonabsolute_hiddenness_clause_explicit
+  - nonobserver_completion_clause_explicit
+- **Failure Modes:**
+  - hidden_variable_overclaim
+  - metaphysical_external_world_overclaim
+  - complete_global_reconstruction_overclaim
+  - absolute_hiddenness_overclaim
+  - perfect_observability_overclaim
+  - inaccessibility_without_budget_or_topology
+  - primitive_external_reality_reintroduction
+  - physics_claim_leakage

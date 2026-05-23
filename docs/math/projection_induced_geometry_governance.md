@@ -1,12 +1,12 @@
 # Projection-Induced Geometry Governance (MPF-PALG-025)
 
 ## 1. Purpose
-This document defines **geometry-like structure** as stabilized persistence behavior emerging within projection-reduced recursive aspect-binding domains. It ensures that geometric analogies (e.g., continuation channels, constraint basins) are treated as projection artifacts rather than independently fundamental primitives or physical spacetime geometries.
+This document defines **geometry-like structure\_proj** as stabilized persistence behavior emerging within projection-reduced recursive aspect-binding domains. It ensures that geometric analogies (e.g., continuation channels, constraint basins) are treated as projection\_proj artifacts rather than independently fundamental primitives or physical spacetime\_geometry\_app.
 
-## 2. Core Definition: Geometry-Like Structure
-Geometry-like structure is the observation of **stabilized persistence** within a projected relational field. It is a secondary projection of the underlying process dynamics.
-- **Short Form**: $\boxed{ \text{geometry\_like} := \text{stabilized\_projection\_persistence} }$
-- **Non-Primitive Rule**: Geometry-like structure is not a primitive; it must remain subordinate to the **⇔R** source relations.
+## 2. Core Definition: Geometry-Like Structure\_proj
+Geometry-like structure\_proj is the observation of **stabilized persistence** within a projected relational field\_analog. It is a secondary projection of the underlying process dynamics.
+- **Short Form**: $\boxed{ \text{geometry\_like} \approx \text{stabilized\_projection\_persistence} }$
+- **Non-Primitive Rule**: Geometry-like structure\_proj is not a primitive; it must remain subordinate to the **⇔R** source relations.
 
 ## 3. Geometry-Like Classes
 
@@ -28,7 +28,7 @@ Geometry-like structure is the observation of **stabilized persistence** within 
 ## 4. Governance Rules
 - **PGEO-RULE-001**: All geometry-like structures must explicitly declare their originating `source_relation` and `projection_depth`.
 - **PGEO-RULE-002**: Structures remain projection-derived and non-primitive.
-- **PGEO-RULE-003**: No geometry-like structure may claim the derivation of physical spacetime or spacetime curvature.
+- **PGEO-RULE-003**: No geometry-like structure\_proj may claim the derivation of physical spacetime\_analog or spacetime\_curvature\_analog.
 - **PGEO-RULE-004**: Stabilized persistence does not imply ontological independence from the process core.
 - **PGEO-RULE-005**: Loss accounting is mandatory for all geometry-like mapping.
 

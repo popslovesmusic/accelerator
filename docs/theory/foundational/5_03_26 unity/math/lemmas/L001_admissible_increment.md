@@ -18,3 +18,23 @@ draft
 
 ## Supersedes / Superseded-by
 
+## Metadata (Migrated from LAW-001)
+- **Law Conditions:**
+  - delta_defined_only_for_non_null_participation
+  - epsilon_null_threshold_explicit
+  - admissibility_window_projection_explicit
+  - NavT_transport_input_explicit
+  - CSI_domain_explicit
+  - multi_valued_continuation_preserved
+  - selection_not_forced_unique
+  - noninvertibility_preserved
+- **Failure Modes:**
+  - deterministic_delta_collapse
+  - unique_continuation_overclaim
+  - global_operator_closure_overclaim
+  - implicit_invertibility
+  - epsilon_null_boundary_ambiguity
+  - empty_continuation_image
+  - unbounded_CSI_sum
+  - physics_claim_leakage
+

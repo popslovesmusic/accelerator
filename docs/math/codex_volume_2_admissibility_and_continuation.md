@@ -34,27 +34,27 @@ Orientation governs the "directionality" of continuation and transport.
 - **Recursion Density and Ordering Law (LAW-007)**: Defines how distributed reconciliation density across $\{-(i)_\alpha\}$ generates ordered continuation without primitive time.
   $$D_R(U) := \frac{\# \text{ of admissible reconciliation events in region } U}{\mu_A(U)}$$
   $$R_\alpha \prec R_\beta \iff R_\alpha \text{ is admissibility-preconditioned for } R_\beta$$
-- **Apparent Temporality**: Apparent time is a projection of ordered reconciliation density, not a primitive coordinate.
+- **Apparent Temporality\_app**: Apparent time (**time\_app**) is a projection of ordered reconciliation density, not a primitive coordinate.
 - **Array Topology and Accessibility Law (LAW-008)**: Defines interaction domains and reachability as orientation-array topology structures.
   $$\alpha \sim_A \beta \iff \beta \text{ is admissibly reachable from } \alpha \text{ under orientation array topology}$$
   $$CSI(\alpha) := \{ \beta : \alpha \sim_A \beta \text{ and } \Phi(\alpha, \beta) \text{ is finite} \}$$
   $$Reach(\alpha, \beta) \iff \text{admissibility compatibility} \land \text{finite flux} \land \text{non-collapsed } A_\alpha$$
-- **Local Neighborhoods**: Neighborhoods are relational and defined by orientation relation $\omega_\alpha \rightarrow \omega_\beta$, not absolute spatial distance.
-- **Apparent Temporality Projection Law (LAW-009)**: Formalizes apparent time as a derived projection of ordered reconciliation density.
-  $$T_{app}(U) := Proj_{time}(O_U, D_R(U), \prec_U)$$
-  - **No Primitive Time**: $T_{app}$ is a bookkeeping parameter, not a background coordinate.
-  - **Density-Dependent Appearance**: High reconciliation density regions project to high update-density (fast apparent time); low density regions project to low update-density (slow apparent time).
-- **Apparent Geometry Projection Law (LAW-010)**: Defines apparent geometry as a projection of stabilized reconciliation topology, co-conditioned by accessibility.
-  $$Geom_{app}(U) := Proj_{geom}(G_U, D_R(U), Reach(U), Top_A(U))$$
-  - **Non-Primitive Geometry**: Geometry is a derived appearance, not a primitive metric substrate.
-  - **Topology-Geometry Biconditional**: Geometry is the operational accessibility of topology; topology is the stabilized memory of geometric continuation. They recursively co-condition each other (**Topology ⇔_x Geometry**).
+- **Local Neighborhoods**: Neighborhoods are relational and defined by orientation relation $\omega_\alpha \rightarrow \omega_\beta$, not absolute spatial distance (**distance\_obs**).
+- **Apparent Temporality Projection Law (LAW-009)**: Formalizes apparent time (**time\_app**) as a derived projection of ordered reconciliation density.
+  $$time\_app(U) \approx Proj_{time}(O_U, D_R(U), \prec_U)$$
+  - **No Primitive Time**: **time\_app** is a bookkeeping parameter, not a background coordinate.
+  - **Density-Dependent Appearance**: High reconciliation density regions project to high update-density (fast apparent **time\_app**); low density regions project to low update-density (slow apparent **time\_app**).
+- **Apparent Geometry Projection Law (LAW-010)**: Defines apparent geometry (**geometry\_app**) as a projection of stabilized reconciliation topology, co-conditioned by accessibility.
+  $$geometry\_app(U) \approx Proj_{geom}(G_U, D_R(U), Reach(U), Top_A(U))$$
+  - **Non-Primitive Geometry**: Geometry (**geometry\_proj**) is a derived appearance, not a primitive metric substrate.
+  - **Topology-Geometry Biconditional**: Geometry (**geometry\_proj**) is the operational accessibility of topology; topology (**topology\_proc**) is the stabilized memory of geometric continuation. They recursively co-condition each other (**topology\_proc ⇔_x geometry\_proj**).
 
 ### 3.1 Topology–Geometry Biconditional Coupling
-The framework rejects a one-way derivation where topology linearly determines geometry. Instead, topology and geometry are recursively co-conditioned under the admissibility grammar **x**.
-- **Principle**: "No structure ⇒ No geometry."
-- **Recursive Co-conditioning**: Topology constrains the active geometry (accessibility) of a basin, while geometry in turn constrains the domain where future topological ratchet events may occur.
+The framework rejects a one-way derivation where topology linearly determines geometry. Instead, topology (**topology\_proc**) and geometry (**geometry\_proj**) are recursively co-conditioned under the admissibility grammar **x**.
+- **Principle**: "No structure ⇒ No geometry\_proj."
+- **Recursive Co-conditioning**: Topology constrains the active geometry\_app (accessibility) of a basin, while geometry\_app in turn constrains the domain where future topological ratchet events may occur.
 - **Ratchet Discreteness**: (ℰ≠0) enforces conservation of asymmetry through the chain: 
-  $$(ℰ≠0) \rightarrow \text{ratchet event} \rightarrow \text{residue } R \rightarrow \text{Topology} \Leftrightarrow_x \text{Geometry} \rightarrow \delta(ℰ>0)$$
+  $$(ℰ≠0) \rightarrow \text{ratchet event} \rightarrow \text{residue } R \rightarrow \text{topology\_proc} \Leftrightarrow_x \text{geometry\_proj} \rightarrow \delta(ℰ>0)$$
   Ratchet events convert collapse-pressure into discrete stabilized residue, preventing terminal symmetry collapse.
 - **Stabilized Reconciliation Basin Law (LAW-011)**: Defines how persistent reconciliation structures stabilize into basin-like organizations.
   $$B_U := \{ \alpha \in U : R_\alpha \text{ recurs with bounded drift and finite transport flux} \}$$
@@ -64,7 +64,7 @@ The framework rejects a one-way derivation where topology linearly determines ge
 - **Law-Like Persistence Channel Law (LAW-012)**: Defines how repeated stabilized reconciliation basins reinforce persistent continuation channels.
   $$C_P := \{ \alpha \in \{-(i)_\alpha\} : \text{continuation repeatedly stabilizes along pathways } P \}$$
   - **Non-Primitive Law**: Law-like structure is an emergent stabilized continuation tendency, not a primitive governing substance.
-  - **Preferential Propagation**: Future continuation preferentially propagates through reinforced channels, creating the appearance of "following a law."
+  - **Preferential Propagation**: Future continuation preferentially propagates through reinforced channels, creating the appearance of "following a law\_app."
   - **No Universal Necessity**: Channels are contingent on recursive reconciliation reinforcement and are not eternally fixed.
 - **Channel Fracture and Transition Law (LAW-013)**: Defines how continuation channels evolve and destabilize.
   - **Fracture and Bifurcation**: Channels may split when multiple accessibility pathways stabilize.
@@ -76,13 +76,13 @@ The framework rejects a one-way derivation where topology linearly determines ge
   - **Suppression and Co-Stabilization**: Reinforcement of one channel may suppress others or enable co-stabilization if compatible.
   - **Non-Unique Selection**: Selection is an emergent dynamic property, not a deterministic or globally optimal "winner-takes-all" rule.
 - **Channel Memory and Reinforcement History Law (LAW-015)**: Defines how channels retain history without reifying memory or residue.
-  - **Reinforcement History**: $H(C_P, n)$ is the record of recurrent reconciliation supporting a channel.
-  - **Memory Projection**: $Mem_{app}(C_P)$ is the apparent memory projected from reinforcement history.
+  - **Reinforcement History**: $history\_proc(C_P, n)$ is the record of recurrent reconciliation supporting a channel.
+  - **Memory Projection**: $memory\_app(C_P) \approx Proj_{mem}(history\_proc)$ is the apparent memory projected from reinforcement history.
   - **Non-Primitive Trace**: Memory and residue are projections of reinforced continuation history, not independent substances.
   - **Asymmetric Retention**: History is subject to reconstruction asymmetry and active reconciliation recurrence.
 - **Channel Reconstruction Asymmetry Law (LAW-016)**: Formalizes why present continuation-channel structure cannot generally reconstruct its full prior reinforcement history.
   - **Asymmetry Condition**: $\Xi(C_P)$ may yield multiple admissible prehistories or incomplete reconstruction under recursive continuation dynamics.
-  - **Recursive Loss**: $Loss(C_P, n)$ accumulates when continuation events compress, merge, redirect, fracture, or suppress prior reinforcement structure.
+  - **Recursive Loss**: $loss\_proc(C_P, n)$ accumulates when continuation events compress, merge, redirect, fracture, or suppress prior reinforcement structure.
   - **Non-Unique Prehistory**: Distinct reinforcement histories may project into observationally equivalent continuation-channel states.
   - **Reconstruction Asymmetry**: Irreversibility is treated as a limit on reconstruction ($\Xi$) rather than a primitive temporal arrow or entropy increase.
 - **Continuation Compression and Equivalence Law (LAW-017)**: Formalizes how multiple distinct continuation histories compress into equivalent observable continuation structures.
@@ -94,9 +94,9 @@ The framework rejects a one-way derivation where topology linearly determines ge
   - **Reachable Domain**: $D_A(\alpha)$ is the set of loci reachable under finite transport flux and defined admissibility.
   - **Accessibility Horizon**: $H_A(\alpha)$ is the limit beyond which continuation influence becomes inadmissible, too weak, or unreachable.
   - **Decay Condition**: Reachability decays with $W_{CSI}$ and reinforcement support.
-  - **Non-Spacetime Horizon**: Horizons are topological and dynamic array-limits, not primitive physical lightcones.
-- **Local Causality as Accessibility Order Law (LAW-019)**: Defines local causal structure as an emergent property of admissibility-conditioned accessibility ordering.
-  - **Local Causality Candidate**: $Cause_A(\alpha, \beta)$ holds if $\beta \in D_A(\alpha)$, admissibility is preserved, and continuation ordering permits transport.
+  - **Non-Spacetime Horizon**: Horizons are topological and dynamic array-limits, not primitive physical lightcones\_analog.
+- **Local Causality as Accessibility Order Law (LAW-019)**: Defines local causal structure (**causality\_app**) as an emergent property of admissibility-conditioned accessibility ordering.
+  - **Local Causality Candidate**: $causality\_app(\alpha, \beta)$ holds if $\beta \in D_A(\alpha)$, admissibility is preserved, and continuation ordering permits transport.
   - **Ordering Condition**: $\alpha \prec_A \beta$ is defined locally through recursive continuation density and admissibility-compatible propagation.
   - **Bounded Causality**: Causal accessibility is strictly bounded by finite transport flux, reinforcement stability, and admissibility thresholds.
   - **Non-Global Clause**: Local causality does not imply a global total ordering or universal causal closure.

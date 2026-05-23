@@ -21,3 +21,23 @@ draft
 
 ## Supersedes / Superseded-by
 None.
+
+## Metadata (Migrated from LAW-007)
+- **Law Conditions:**
+  - orientation_array_dependency_explicit
+  - local_reconciliation_event_explicit
+  - recursion_density_candidate_explicit
+  - ordering_relation_candidate_explicit
+  - absolute_time_not_primitive
+  - apparent_temporality_as_projection
+  - local_ordering_not_global_total_order
+  - no_physics_validation_claim
+- **Failure Modes:**
+  - absolute_time_reintroduction
+  - global_total_order_overclaim
+  - physics_time_dilation_claim_leakage
+  - array_topology_collapse
+  - recursion_density_overgeneralization
+  - causality_overclaim
+  - ordering_relation_circularity
+  - hidden_global_clock

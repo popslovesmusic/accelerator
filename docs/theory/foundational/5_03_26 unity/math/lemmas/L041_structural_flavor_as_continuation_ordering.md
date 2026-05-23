@@ -21,3 +21,23 @@ draft
 
 ## Supersedes / Superseded-by
 None.
+
+## Metadata (Migrated from LAW-014)
+- **Law Conditions:**
+  - channel_family_explicit
+  - competition_condition_explicit
+  - selection_pressure_candidate_explicit
+  - suppression_condition_explicit
+  - co_stabilization_condition_explicit
+  - finite_budget_dependency_explicit
+  - nonunique_selection_preserved
+  - no_global_optimality_claim
+- **Failure Modes:**
+  - deterministic_selection_overclaim
+  - global_optimality_leakage
+  - single_winner_collapse
+  - unbounded_resource_assumption
+  - selection_without_admissibility
+  - primitive_law_reintroduction
+  - absolute_time_reintroduction
+  - physics_claim_leakage

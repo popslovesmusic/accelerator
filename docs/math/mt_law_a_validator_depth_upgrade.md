@@ -36,7 +36,7 @@ This document formalizes the shift from structural validation (presence checks) 
 ## Forbidden Primitive Detection
 The validator explicitly searches for and blocks:
 - **Block Absolute Persistence**: Claims of eternal structure.
-- **Block Primitive Spacetime**/Geometry: Background coordinates or metric substrates.
+- **Block Primitive Spacetime\_analog**/Geometry\_proj: Background coordinates or metric substrates.
 - **Block Intrinsic Identity**: Sameness not grounded in continuity classes.
 - **Block Observer-Independent** Certainty: Perfect reconstruction without loss.
 

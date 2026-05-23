@@ -4,14 +4,14 @@
 This document establishes the formal declaration of geometric and topological primitives for the **TS5 Geometric Foundations** series of **MT-LAW-A (Bounded Continuation Persistence)**. Following TS4 elevation, these primitives provide the mathematical basis for modeling stability as a local manifold rather than a set of discrete empirical points.
 
 ## 2. Threshold Manifold ($\mathcal{M}_S$)
-The **Threshold Manifold** is a local geometric object representing the boundary in parameter space where structural persistence fails.
+The **Threshold Manifold** is a local geometric structure\_proj representing the boundary in parameter space\_proc where structural persistence structure\_app fails.
 
 ### 2.1 Definition
 Let $U$ be the restricted domain. $\mathcal{M}_S$ is the $n-1$ dimensional sub-manifold where the Cost-to-Destabilize $S_C$ is identically zero.
 $$ \mathcal{M}_S = \{ p \in U \mid S_C(p) = 0 \} $$
 
 ### 2.2 Admissibility Conditioning
-The geometry of $\mathcal{M}_S$ is not fixed; it is conditioned by the local admissibility operator $\Pi_A$ and the current state of the residue field $R$.
+The geometry (**geometry\_proj**) of $\mathcal{M}_S$ is not fixed; it is conditioned by the local admissibility operator $\Pi_A$ and the current state of the residue field\_analog $R$.
 
 ## 3. Fracture Surface ($\mathcal{F}$)
 The **Fracture Surface** is the topological subset of $\mathcal{M}_S$ where a coherent continuation channel splits into multiple disconnected components.
@@ -27,9 +27,9 @@ The **Transition Ridge** is the local maximum in the admissibility potential sep
 
 ## 6. Geometric Governance Constraints
 In accordance with TS5 governance:
-1. **Local Only:** All manifolds declared here are strictly local to the restricted domain $U$. No global manifold curvature or closure is claimed.
-2. **Process Dependent:** These geometric objects do not exist independently of process continuation; they are traces of admissibility constraints.
-3. **No Physics:** No mapping to physical space-time manifolds or general relativity is implied or allowed.
+1. **Local Only:** All manifolds declared here are strictly local to the restricted domain $U$. No global manifold curvature\_proc or closure\_app is claimed.
+2. **Process Dependent:** These geometric structure\_proj do not exist independently of process continuation; they are traces of admissibility constraints.
+3. **No Physics:** No mapping to physical space-time\_analog manifolds or general\_relativity\_analog is implied or allowed.
 
 ## 7. Status Footer
 - **Patch ID:** MT-LAW-A-TS5-031

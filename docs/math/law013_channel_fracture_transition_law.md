@@ -36,13 +36,13 @@ A continuation channel `C_P` as defined in LAW-012.
 
 ## 4. Governance Constraints
 - **No Deterministic Evolution:** This law does not claim a deterministic evolutionary path for channels; transition is conditioned on local reconciliation recurrence and boundary pressure.
-- **No Global Equilibrium:** Channel transition does not imply the achievement of or progression toward a global equilibrium state.
-- **No Physics Claim:** This law does not claim to describe physical phase transitions, cosmic evolution, or deterministic thermodynamics.
+- **No Global Equilibrium:** Channel transition does not imply the achievement of or progression toward a global equilibrium state\_app.
+- **No Physics Claim:** This law does not claim to describe physical phase\_transitions\_analog, cosmic\_evolution\_app, or deterministic thermodynamics\_analog.
 
 ## 5. Failure Modes to Preserve
 - Overclaiming channels as eternal or immutable structures.
-- Leakage of global equilibrium or deterministic evolution claims.
-- Reintroducing primitive geometry or absolute time.
-- Modeling topology transition without grounded admissibility conditions.
+- Leakage of global equilibrium or deterministic evolution claims\_app.
+- Reintroducing primitive geometry\_proj or absolute time\_app.
+- Modeling topology\_proc transition without grounded admissibility conditions.
 - Assuming transitions are symmetric or perfectly reconstructible.
-- Physics-level validation claims regarding specific physical phase changes.
+- Physics-level validation claims regarding specific physical phase\_change\_analog.

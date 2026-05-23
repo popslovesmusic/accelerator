@@ -26,7 +26,7 @@ $-(i)_\alpha$ acts locally on continuation and transport; $\{-(i)_\alpha\}$ gove
 NavT operates between local $-(i)_\alpha$ operators, while CSI and recursion-density structure emerge from the array topology.
 
 ### Ordering Relation
-Ordered continuation is generated through distributed admissibility-regulated reconciliation across $\{-(i)_\alpha\}$, not from isolated local operators alone.
+Ordered continuation is generated through distributed admissibility-regulated reconciliation across $\{-(i)_\alpha\}$, not from isolated local operators alone. Apparent time\_app is a projection of this ordering.
 
 ## Context & Objectives
 This law formally distinguishes the local mechanics of orientation-conditioned continuation from the global/distributed structures that emerge from their interaction. It prevents a common category error where the local operator is confused with the distributed topological array.
@@ -34,7 +34,7 @@ This law formally distinguishes the local mechanics of orientation-conditioned c
 The primary objectives are:
 - **Object Distinction:** Separate local operators from distributed topologies.
 - **Topological Foundation:** Establish the orientation array as the basis for reconciliation density and transport accessibility.
-- **Ordering Genesis:** Formally locate the emergence of ordering (and apparent temporality) in the distributed array reconciliation, not the local operator.
+- **Ordering Genesis:** Formally locate the emergence of ordering (and apparent temporality\_app) in the distributed array reconciliation, not the local operator.
 - **Anti-Collapse Governance:** Prevent the introduction of a forced global orientation frame by maintaining the distinction.
 
 ## Law Conditions
@@ -51,11 +51,11 @@ The primary objectives are:
 - **Local-Global Orientation Collapse:** Treating the local operator and the global array as the same object.
 - **Array as Simple Collection Error:** Assuming the array is just a set without reconciliation topology.
 - **Forced Global Orientation Frame:** Artifacts introduced by assuming a universal orientation.
-- **Geometry as Primitive Leakage:** Assuming spatial geometry before orientation reconciliation.
-- **Hidden Absolute Time Reintroduction:** Assuming temporal ordering before array-governed recursion.
+- **Geometry\_proj as Primitive Leakage:** Assuming spatial geometry\_proj before orientation reconciliation.
+- **Hidden Absolute Time\_app Reintroduction:** Assuming temporal ordering before array-governed recursion.
 - **Distributed Reconciliation Loss:** Failing to account for the reconciliation between local orientation operators.
 - **Orientation Operator Overextension:** Attributing global topological properties to local $-(i)_\alpha$.
-- **Physics Claim Leakage:** Treating this mathematical distinction as a verified physical field.
+- **Physics Claim Leakage:** Treating this mathematical distinction as a verified physical field\_phys.
 
 ## Next Steps
 Following the distinction between local and distributed orientation structures, the law program will address the mechanics of recursion density and ordering emergence (LAW-007).

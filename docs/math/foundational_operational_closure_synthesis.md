@@ -38,7 +38,7 @@ Exclusion acts as a projection operator ($\Pi_E^2 = \Pi_E$). It creates admissib
 Laws are not eternal static equations but **deeply stabilized continuation channels** or "grooves" in the process geology, reinforced through recursive admissibility.
 
 ## 5. Projection Layers (QM and GR)
-The relation $(QM) = \text{true} \iff_R (GR) = \text{true}$ states that Quantum Mechanics (distinction/participation) and General Relativity (continuation/geometry) are coupled projection layers of the same underlying continuation structure. Neither can achieve closure independently.
+The relation $(QM\_analog) = \text{true} \iff_R (GR\_analog) = \text{true}$ states that Quantum\_Mechanics\_analog (distinction/participation) and General\_Relativity\_analog (continuation/geometry) are coupled projection layers of the same underlying continuation structure. Neither can achieve closure independently.
 
 ---
 [Back to Master Index](codex_master_index.md)

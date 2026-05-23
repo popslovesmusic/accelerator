@@ -32,14 +32,14 @@ A continuation channel `C_P` along a set of pathways `P` is defined as:
 - **Preferential Propagation:** Stabilized channels determine the most admissible continuation pathways, creating the appearance of "following a law."
 
 ## 4. Governance Constraints
-- **No Primitive Laws:** Laws are not treated as irreducible primitives, eternal rules, or external governing entities.
-- **No Universal Necessity:** This law defines mathematical persistence channels and does not claim universal necessity or final closure of physical laws.
-- **No Physics Claim:** This law does not claim to derive physical laws (e.g., electromagnetism, gravity) from first principles.
+- **No Primitive Law\_app:** Laws\_app are not treated as irreducible primitives, eternal rules, or external governing entities.
+- **No Universal Necessity:** This law defines mathematical persistence channels and does not claim universal necessity or final closure of physical laws\_app.
+- **No Physics Claim:** This law does not claim to derive physical laws\_app (e.g., electromagnetism\_analog, gravity\_app) from first principles.
 
 ## 5. Failure Modes to Preserve
-- Reintroducing laws as primitive substances or external governing rules.
+- Reintroducing laws\_app as primitive substances or external governing rules.
 - Overclaiming "eternal rules" or "universal necessity."
 - Assuming static channels that do not depend on active reconciliation recurrence.
 - Leakage of global equilibrium or absolute coordinate frames.
-- Reintroducing primitive geometry or absolute time.
-- Physics-level validation claims regarding specific physical law derivation.
+- Reintroducing primitive geometry\_proj or absolute time\_app.
+- Physics-level validation claims regarding specific physical law\_app derivation.

@@ -35,15 +35,15 @@ A reconciliation basin `B_U` for a region `U` is defined as:
 - **Topology-First Stabilization:** Persistence is a property of the relational topology across `{-(i)_α}`, not an underlying geometric container.
 
 ## 4. Governance Constraints
-- **No Physics Claim:** This law defines mathematical basin-like persistence and does not claim to describe physical matter, particles, or field attractors.
-- **No Global Equilibrium:** This law does not claim the existence of a universal minimum or global equilibrium state.
-- **No Static Attractor:** Basins are dynamic recurrence organizations, not fixed points in a static phase space.
+- **No Physics Claim:** This law defines mathematical basin-like persistence and does not claim to describe physical matter\_analog, particles\_analog, or field\_analog attractors.
+- **No Global Equilibrium:** This law does not claim the existence of a universal minimum or global equilibrium state\_app.
+- **No Static Attractor:** Basins are dynamic recurrence organizations, not fixed points in a static phase space\_app.
 
 ## 5. Failure Modes to Preserve
 - Overclaiming basins as static attractors or fixed points.
-- Leakage of global equilibrium or universal stability claims.
-- Reintroducing primitive geometry or absolute time.
+- Leakage of global equilibrium or universal stability claims\_app.
+- Reintroducing primitive geometry\_proj or absolute time\_app.
 - Unbounded basin growth or lack of defined tolerance.
 - Defining stability without grounded reconciliation recurrence.
 - Collapse into a hidden total ordering of events.
-- Physics-level validation claims regarding physical structure formation.
+- Physics-level validation claims regarding physical structure\_app formation.

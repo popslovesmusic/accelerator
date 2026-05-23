@@ -43,7 +43,7 @@ The primary objectives are:
 - **Hidden Global Convergence Claim:** Assuming convergence without checking local conditions.
 - **Projection Failure after Transport:** $T_\alpha$ lying in a region where $\Pi_A$ is undefined.
 - **Nonlocal Transport Fragmentation:** Incoherent aggregate behavior.
-- **Physics Claim Leakage:** Treating this summation as a physical field integral.
+- **Physics Claim Leakage:** Treating this summation as a physical field\_phys integral.
 
 ## Next Steps
 Following the bounding of aggregate transport, the law program will address the behavior of transitions at the admissibility boundary (LAW-005).

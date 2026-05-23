@@ -1,49 +1,39 @@
-# Codex Volume 4: Theorem Program
+# Codex Volume 4: Master Theorem Program
 
-This volume documents the current status and strengthening efforts of the Minimal Theorem (MT) program.
+This volume documents the four pillars of the Mono-Process Framework. These Master Theorems synthesize granular lemmas into the foundational principles governing multiscale emergence.
 
-## 1. MT-001: Projection Idempotence
-- **Status**: Consolidated.
-- **Goal**: Formally prove Pi_A ∘ Pi_A ~ Pi_A under stable admissibility.
+## 1. Theorem I: The Knot Theorem (Principle of Non-Substantive Identity)
+- **Status**: Level C5 Validated.
+- **Core Proof**: P001-P005.
+- **Goal**: Proves that identity (**identity\_proc**) is a recursively stabilized organizational mode (The Knot) rather than a primitive substance.
+- **Key Outcome**: The 3-Peak Rule. Binary systems collapse; triadic systems lock.
 
-## 2. MT-002: Transport Identity
-- **Status**: Consolidated.
-- **Goal**: Symbolically verify NavT(0) ~ Identity for locally closed states.
+## 2. Theorem II: The Meta-Bridge Symmetry (Law of Mechanism Independence)
+- **Status**: Level C5 Validated.
+- **Core Proof**: P006-P010.
+- **Goal**: Establishes topological equivalence between discrete (CA) and continuous (PDE) process projections.
+- **Key Outcome**: Mechanism Independence > Tool Count.
 
-## 3. MT-003: Non-Empty Admissible Image
-- **Status**: Consolidated.
-- **Goal**: Formalize existence requirement for admissible continuation images.
+## 3. Theorem III: The Web Theorem (Law of Relational Reach)
+- **Status**: Level C5 Validated.
+- **Core Proof**: P011-P015.
+- **Goal**: Derives global interaction reach (K) as a dynamic projection of localized historical residue (R) (**space\_app** ↦ collective history).
+- **Key Outcome**: Apparent space (**space\_app**) is collective history.
 
-## 4. MT-LAW-A: Bounded Continuation Persistence Lemma
-- **Status**: TS3_RESTRICTED_LEMMA_REVIEW.
-- **Goal**: Formalize persistence metrics and constraints under admissibility and finite budgets.
-- [Definitional Foundation](mt_law_a_bounded_continuation_persistence_definition.md)
-- [Counterexample Obligations](mt_law_a_counterexample_obligations.md)
-- [Validator Depth Upgrade](mt_law_a_validator_depth_upgrade.md)
-- [Reference Models](mt_law_a_reference_models.md)
-- [Multi-Seed Statistical Stability](mt_law_a_multi_seed_statistical_stability.md)
-- [Threshold Sensitivity](mt_law_a_threshold_sensitivity.md)
-- [Cross-Mechanism Equivalence](mt_law_a_cross_mechanism_equivalence.md)
-- [Formal Lemma Scaffold](mt_law_a_formal_lemma_scaffold.md)
-- [Proof Obligation Mapping](mt_law_a_proof_obligation_mapping.md)
-- [Local Proof Sketch](mt_law_a_local_proof_sketch.md)
-- [Counterexample Stress Domains](mt_law_a_counterexample_stress_domains.md)
-- [Obligation Discharge Candidate](mt_law_a_obligation_discharge_candidate.md)
-- [Local Discharge Validation](mt_law_a_local_discharge_validation.md)
-- [Restricted-Domain Lemma Candidate](mt_law_a_restricted_domain_lemma_candidate.md)
-- [Excluded Domains](mt_law_a_excluded_domains.md)
-- [Reentry Conditions](mt_law_a_reentry_conditions.md)
-- [Scope Boundary Consistency](mt_law_a_scope_boundary_consistency.md)
-- [Restricted-Lemma Review](mt_law_a_restricted_lemma_review.md)
+## 4. Theorem IV: The Law of Hierarchical Stabilization (Scaling Law)
+- **Status**: Level C5 Validated.
+- **Core Proof**: P016-P020.
+- **Goal**: Proves that multiscale complexity emerges through Recursive Basin Nesting.
+- **Key Outcome**: Webs (**web\_analog**) become Ropes (**rope\_analog**).
 
-## 5. Proof Elevation & Obligations
-Detailed tracking of satisfaction criteria (PO-001 through PO-003) and formal blocker resolution.
+---
 
-## Atlas Links (META004)
-- [Atlas: Theorem Dependency Graph](atlas_theorem_dependency_graph.md)
-- [Atlas: Derivation Graph](atlas_derivation_graph.md)
-- [Atlas: Operator Flow Map](atlas_operator_flow_map.md)
-- [Atlas: Open Question Dependency Map](atlas_open_question_dependency_map.md)
+## 5. Formal Trace Standard
+All theorems in this program must satisfy the [MPF-SYM-TRACE-001 Standard](../theory/foundational/5_03_26%20unity/math/symbolic_trace_standard.md), requiring:
+1. Primitive Formalization.
+2. Operator Trace ($\Leftrightarrow_x$).
+3. Mechanism Independence.
+4. Convergence Proof.
 
 ---
 [Back to Master Index](codex_master_index.md)

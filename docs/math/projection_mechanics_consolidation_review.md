@@ -11,8 +11,8 @@ This document performs the **Consolidation Review** for the Projection Mechanics
 - **Finding PMCR-003**: **Recoverability Limits** are strictly enforced. The framework correctly identifies that projection shadows are non-reconstructible without external trace metadata.
 
 ### 2.2 Relational Integrity
-- **Finding PMCR-004**: **Multi-Projection Coherence** prevents agreement between reduced forms (e.g., equality and implication) from being mistaken for source identity or whole-relation proof.
-- **Finding PMCR-005**: Emergent structures—**Geometry-like**, **Persistence**, and **Orientation**—remain constrained as projection-derived analogs. They are prohibited from claiming physical spacetime derivation or independent ontology.
+- **Finding PMCR-004**: **Multi-Projection Coherence** prevents agreement between reduced forms (e.g., equality and implication) from being mistaken for source identity\_proc or whole-relation proof.
+- **Finding PMCR-005**: Emergent structures—**Geometry-like\_proj**, **Persistence\_app**, and **Orientation\_proc**—remain constrained as projection-derived analogs. They are prohibited from claiming physical spacetime\_analog derivation or independent ontology\_proc.
 
 ### 2.3 Containment and Mitigation
 - **Finding PMCR-006**: The **Failure-Mode Atlas** and **Stress-Test Scaffolding** provide a robust diagnostic layer. Escalation risks (physics, arithmetic, primitive) are detected and blocked at the symbolic level.
@@ -35,9 +35,9 @@ This document performs the **Consolidation Review** for the Projection Mechanics
 - **Allowed Next Phase**: Restricted Projection Bridge Scaffolding ONLY.
 
 ## 6. Forbidden Next Steps
-- Claiming QM/GR unification or derivation.
-- Promoting projection mechanics to physical law.
-- Treating geometry-like structures as evidence for physical spacetime curvature.
+- Claiming QM/GR\_analog unification or derivation.
+- Promoting projection mechanics to physical law\_app.
+- Treating geometry-like structure\_proj as evidence for physical spacetime\_curvature\_analog.
 
 ## 7. Governance Footer
 - **Theorem Status**: NOT_PROVEN.

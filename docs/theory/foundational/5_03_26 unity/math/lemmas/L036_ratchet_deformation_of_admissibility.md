@@ -21,3 +21,23 @@ draft
 
 ## Supersedes / Superseded-by
 Refines: L015 (adds geometric deformation language and knot metaphor)
+
+## Metadata (Migrated from LAW-013)
+- **Law Conditions:**
+  - orientation_array_dependency_explicit
+  - continuation_channel_dependency_explicit
+  - fracture_condition_explicit
+  - bifurcation_condition_explicit
+  - merge_condition_explicit
+  - collapse_condition_explicit
+  - nonstatic_channel_clause_explicit
+  - no_deterministic_evolution_claim
+- **Failure Modes:**
+  - eternal_channel_overclaim
+  - global_equilibrium_leakage
+  - deterministic_evolution_overclaim
+  - primitive_geometry_reintroduction
+  - absolute_time_reintroduction
+  - topology_without_transition
+  - transition_without_admissibility
+  - physics_claim_leakage
