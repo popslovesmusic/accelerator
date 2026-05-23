@@ -1016,6 +1016,8 @@ class GovernanceGate:
             evidence_id = f"gate:{os.path.basename(paper_path)}"
         mechanism_classes = metadata.get("model_classes", []) if isinstance(metadata, dict) else []
         output_paths = metadata.get("recoverable_outputs", []) if isinstance(metadata, dict) else []
+        seeds_used = metadata.get("seeds_used", 0) if isinstance(metadata, dict) else 0
+        tools_used = list(tool_names)
 
         lexicon_record = self.lexicon_v.record_term_role_evidence(
             claim_id=claim_id,
@@ -1027,6 +1029,9 @@ class GovernanceGate:
             downgrade_reasons=downgrades_applied,
         )
 
+        # Always update evidence index
+        evidence_index_update = self._update_evidence_index(claim_id, output_paths, tools_used, seeds_used)
+
         # Update claim registry with gate outcome (non-destructive merge).
         claim_registry_update = {"updated": False, "reason": "not_attempted"}
         if claim_id and os.path.exists("registry/claim_registry.json"):
@@ -1034,6 +1039,8 @@ class GovernanceGate:
                 with open("registry/claim_registry.json", "r", encoding="utf-8") as f:
                     cr = json.load(f)
                 claims = cr.get("claims", [])
+                
+                found = False
                 for c in claims:
                     if c.get("claim_id") == claim_id or c.get("source_claim_id") == claim_id:
                         c["last_gate_check"] = {
@@ -1047,8 +1054,45 @@ class GovernanceGate:
                             "downgrades_applied": downgrades_applied,
                             "blocked_reasons": blocked_reasons,
                         }
-                        claim_registry_update = {"updated": True}
+                        # If gate passed, update top-level status
+                        if gate_result == "pass":
+                            c["status"] = self.charter.get("claim_level_mandates", {}).get(final_level, {}).get("status_ladder_target", c.get("status"))
+                        
+                        claim_registry_update = {"updated": True, "action": "updated_existing"}
+                        found = True
                         break
+                
+                if not found and gate_result == "pass":
+                    # Register new claim
+                    new_claim = {
+                        "claim_id": claim_id,
+                        "title": os.path.basename(os.path.dirname(paper_path)),
+                        "claim_statement": f"Within these models... See {os.path.basename(paper_path)} for details.",
+                        "status": self.charter.get("claim_level_mandates", {}).get(final_level, {}).get("status_ladder_target", "C4_dual_mechanism_supported"),
+                        "claim_type": metadata.get("claim_type", "empirical"),
+                        "classification": final_classification,
+                        "model_classes": mechanism_classes,
+                        "models_used": tools_used,
+                        "seeds_used": seeds_used,
+                        "falsification_run": metadata.get("falsification_run", False),
+                        "evidence_paths": output_paths,
+                        "paper_path": paper_path,
+                        "last_updated": datetime.utcnow().strftime("%Y-%m-%d"),
+                        "last_gate_check": {
+                            "timestamp": datetime.utcnow().isoformat(),
+                            "paper_path": paper_path,
+                            "target_level": target_level,
+                            "final_level": final_level,
+                            "gate_result": gate_result,
+                            "requested_classification": requested_classification,
+                            "final_classification": final_classification,
+                            "downgrades_applied": downgrades_applied,
+                            "blocked_reasons": blocked_reasons,
+                        }
+                    }
+                    claims.append(new_claim)
+                    claim_registry_update = {"updated": True, "action": "registered_new"}
+
                 if claim_registry_update.get("updated"):
                     with open("registry/claim_registry.json", "w", encoding="utf-8") as f:
                         json.dump(cr, f, indent=2, ensure_ascii=False)
@@ -1066,6 +1110,7 @@ class GovernanceGate:
             "lexicon_failure_recovery": recovery_result,
             "registry_updates": {
                 "lexicon_validation_registry": lexicon_record,
+                "evidence_index": evidence_index_update,
                 "claim_registry": claim_registry_update,
             },
             "checks": results,
