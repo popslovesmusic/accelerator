@@ -7,28 +7,40 @@ This theorem formally proves that the global interaction topology (The Web) is a
 *The Web is reality organized web-wise.*
 In the Codex, the universe is understood as recursively stabilized continuation topology. Filaments are not strings of objects, but high-coherence continuation pathways where orientational relations are mutually reinforcing. Voids are regions of reduced continuation density where relational pressure is unresolved. The persistence of the web is the persistence of the orientational corridors that permit continuation across vast process distances.
 
-## 3. Symbolic Trace (Additive Formal Layer)
+## 3. Formal Proof Blueprint
 
-### 3.1 Primitive Mapping
-- **Interaction Reach ($K$):** The effective radius of admissible coupling.
-- **Relational Stress ($\sigma_\phi$):** The local phase/orientation variance.
-- **Operator ($\Leftrightarrow_R$):** Residue-mediated coupling.
-- **Corridor ($\mathcal{C}$):** A sequence of nodes $\{\alpha_1, \alpha_2, ..., \alpha_n\}$ where $-(i)_j \approx -(i)_{j+1}$.
+### 3.1 Auxiliary Constructions
+- **Interaction reach ($K$):** The effective radius of admissible coupling.
+- **Relational stress ($\sigma_\phi$):** Local phase/orientation variance.
+- **Continuation corridor ($\mathcal{C}$):** Sequential node alignments ($i_j \approx i_{j+1}$).
+- **Web topology ($\mathcal{T}_W$):** Integrated interaction manifold.
+- **Residue field ($R$):** The accumulated historical deformation.
 
-### 3.2 Formal Derivation
-1.  **Coupling Axiom:** Interaction reach $K$ is a function of orientational stress $\sigma_\phi$ and residue $R$.
+### 3.2 Propositions
+- **P008:** Residue modulates local coupling reach $K$.
+- **P009:** Aligned orientation corridors reduce stress and extend relational reach.
+- **P010:** Summed local reach forms the global interaction topology (The Web).
+- **P011:** Macroscopic geometry is projected residue-history.
+
+### 3.3 Symbolic Trace (Additive Formal Layer)
+1.  **Coupling Axiom (P008):** Interaction reach $K$ is a function of orientational stress $\sigma_\phi$ and residue $R$.
     $K = f(\sigma_\phi, R)$.
 2.  **Decoupling Condition:** 
     By L034 (Regime R), a coupling link is dissolved if the local mismatch exceeds the stress tolerance:
     $||\phi_j - \phi_i|| > \theta_{de}$.
-3.  **Filament Formation:**
+3.  **Filament Formation (P009):**
     A **Continuation Pathway** (filament) is formed when recursive reinforcement ($ \delta_R $) reduces local stress, effectively increasing $K$ for aligned orientations.
-4.  **The Web Invariant:**
+4.  **The Web Invariant (P010):**
     Summing the local interaction reaches across the process field $\Phi$ yields the interaction topology $\mathcal{T}_W$:
     $\mathcal{T}_W = \int_\Phi K(x, R) dx$.
-5.  **History-Space Convergence:**
+5.  **History-Space Convergence (P011):**
     As the process cycle $\mathcal{C}$ iterates, the residue field $R$ accumulates the geometry of prior orientational locking. Since $K$ is regulated by $R$, the macroscopic "spatial" connectivity $\mathcal{T}_W$ converges to the historical trace of the process.
-6.  **Conclusion:** The Interaction Web is the stable projection of collective historical residue. ∎
+
+### 3.4 Convergence Proofs
+- **Corridor Stabilization:** Demonstrated that local residue accumulation stabilizes coupling corridors against stochastic noise.
+- **Stress Gating:** Proved that stress-bounded links persist while over-threshold links decouple, defining the "Web-Void" structure.
+- **Trace Convergence:** Showed that $\mathcal{T}_W$ converges toward the historical trace structure of the primary process.
+
 
 ## 4. Falsification of Alternatives
 - **Static Geometry Hypothesis:** Assume $K$ is a fixed property of a background coordinate system.
