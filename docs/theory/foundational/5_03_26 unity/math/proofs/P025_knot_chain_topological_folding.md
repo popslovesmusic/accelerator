@@ -19,7 +19,9 @@ Prove that a recursive distinguishability chain (a sequence of $D > 0$ excitatio
 8. Since the "knot" is composed entirely of the sequence of "rope" updates, it is non-substantive. ∎
 
 ## Status
-draft
+- Status: simulated
+- Proof Type: symbolic
+- Evidence: [FOLDING-V1](../../../../../../results/2026-05-23_run11_P025_Knot_Folding/paper.md)
 
 ## Supersedes / Superseded-by
 None.

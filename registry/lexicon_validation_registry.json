@@ -180,10 +180,12 @@
             "results/2026-05-21_run03_Ratchet_Hysteresis_Validation/data/python_ref/summary.json",
             "results/2026-05-22_run01_3Peak_Criticality_Validation/artifacts/graph_criticality_report.json",
             "results/2026-05-21_run04_PDE_Knot_Persistence/artifacts/persistence_report.json",
-            "results/2026-05-22_run04_Topology_Geometry_Biconditional/artifacts/biconditional_report.json"
+            "results/2026-05-22_run04_Topology_Geometry_Biconditional/artifacts/biconditional_report.json",
+            "results/2026-05-22_run06_LOCAL_STRESS_3Peak/artifacts/audit_results.json"
           ],
           "downgrade_reasons": [
-            "lexicon_term_below_L2_caps_classification"
+            "lexicon_term_below_L2_caps_classification",
+            "intent_limit_applied"
           ]
         },
         "unbound_role_in_paper": {
@@ -1077,15 +1079,19 @@
           "status": "L2",
           "operational_definition": "The condition where ΔD_R != 0 induces a dominant local orientational reference.",
           "mechanism_classes": [
-            "graph_dynamics"
+            "graph_dynamics",
+            "ode_oscillator"
           ],
           "metrics": [
             "asymmetry_index",
-            "dominance_duration"
+            "dominance_duration",
+            "asymmetry_delta_mi"
           ],
           "evidence_id": "SINGULARITY-REBOUND-001",
-          "recoverable_output_paths": [],
-          "claim_id": "SINGULARITY-REBOUND-001",
+          "recoverable_output_paths": [
+            "results/2026-05-23_run08_Relational_Asymmetry/data/results.json"
+          ],
+          "claim_id": "L042-ASYMMETRY-V1",
           "observables": [],
           "output_paths": []
         }
@@ -1354,18 +1360,21 @@
             "reaction_diffusion",
             "agent_based",
             "cellular_automata",
-            "topological_analysis"
+            "topological_analysis",
+            "ode_oscillator"
           ],
           "observables": [
             "alignment_success_rate",
-            "phase_locking_value"
+            "phase_locking_value",
+            "order_parameter"
           ],
           "output_paths": [
             "outputs/runs/theory_fragment_v1/structural_box/",
             "outputs/runs/theory_fragment_v1/signal_scope/",
             "results/2026-05-10_run03_MSI_L001_L002/",
             "results/2026-05-10_run04_MSI_L005/",
-            "results/2026-05-10_run05_G1_ORIENTATION/"
+            "results/2026-05-10_run05_G1_ORIENTATION/",
+            "results/2026-05-23_run07_Orientation_Negotiation/data/results.json"
           ],
           "downgrade_reasons": []
         },
@@ -3248,7 +3257,11 @@
           ],
           "observables": [],
           "output_paths": [
-            "results/2026-05-22_run01_3Peak_Criticality_Validation/artifacts/graph_criticality_report.json"
+            "results/2026-05-22_run01_3Peak_Criticality_Validation/artifacts/graph_criticality_report.json",
+            "results/2026-05-22_run06_LOCAL_STRESS_3Peak/artifacts/audit_results.json"
+          ],
+          "downgrade_reasons": [
+            "intent_limit_applied"
           ]
         }
       }
@@ -3268,9 +3281,12 @@
           "output_paths": [
             "results/2026-05-22_run01_3Peak_Criticality_Validation/artifacts/graph_criticality_report.json",
             "results/2026-05-21_run04_PDE_Knot_Persistence/artifacts/persistence_report.json",
-            "results/2026-05-22_run04_Topology_Geometry_Biconditional/artifacts/biconditional_report.json"
+            "results/2026-05-22_run04_Topology_Geometry_Biconditional/artifacts/biconditional_report.json",
+            "results/2026-05-22_run06_LOCAL_STRESS_3Peak/artifacts/audit_results.json"
           ],
-          "downgrade_reasons": []
+          "downgrade_reasons": [
+            "intent_limit_applied"
+          ]
         }
       }
     },
@@ -3374,12 +3390,44 @@
           "claim_id": "TERTIARY-STABILITY-001",
           "evidence_id": "gate:paper.md",
           "mechanism_classes": [
-            "graph_dynamics"
+            "graph_dynamics",
+            "ode_oscillator"
           ],
-          "observables": [],
+          "observables": [
+            "specialization_ratio",
+            "directional_mi"
+          ],
           "output_paths": [
-            "results/2026-05-22_run03_Tertiary_Node_Stability/artifacts/distinguishability_report.json"
+            "results/2026-05-22_run03_Tertiary_Node_Stability/artifacts/distinguishability_report.json",
+            "results/2026-05-23_run08_Relational_Asymmetry/data/results.json"
           ]
+        }
+      }
+    },
+    "hierarchical_stabilization": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "aliases": [
+        "recursive_basin_nesting",
+        "scaling_law"
+      ],
+      "global_status": "partially_verified",
+      "roles": {
+        "multiscale_admissibility_substrate": {
+          "status": "L2",
+          "operational_definition": "The principle where lower-order stabilized regimes act as the admissibility substrate for higher-order structures.",
+          "mechanism_classes": [
+            "cellular_automata",
+            "discrete_ca"
+          ],
+          "metrics": [
+            "active_fraction_scaling",
+            "cross_layer_coherence"
+          ],
+          "evidence_id": "T004-NESTING-V1",
+          "recoverable_output_paths": [
+            "results/2026-05-23_run09_Hierarchical_Nesting/data/results.json"
+          ],
+          "claim_id": "T004-NESTING-V1"
         }
       }
     },
@@ -3481,6 +3529,132 @@
           "observables": [],
           "output_paths": [
             "results/2026-05-22_run04_Topology_Geometry_Biconditional/artifacts/biconditional_report.json"
+          ]
+        }
+      }
+    },
+    "anchored_scale": {
+      "roles": {
+        "orientation_referenced_metric": {
+          "status": "L0",
+          "claim_id": "GRAVITY-SCALE-001",
+          "evidence_id": "gate:paper.md",
+          "mechanism_classes": [
+            "agent_based",
+            "reaction_diffusion"
+          ],
+          "observables": [],
+          "output_paths": [
+            "results/2026-05-23_run03_Procedural_Gravity_Scale_Campaign/data/campaign_report.json"
+          ],
+          "downgrade_reasons": [
+            "lexicon_term_below_L2_caps_classification",
+            "intent_limit_applied"
+          ]
+        }
+      }
+    },
+    "orientation_array": {
+      "roles": {
+        "global_law_structure": {
+          "status": "L0",
+          "claim_id": "GRAVITY-SCALE-001",
+          "evidence_id": "gate:paper.md",
+          "mechanism_classes": [
+            "agent_based",
+            "reaction_diffusion"
+          ],
+          "observables": [],
+          "output_paths": [
+            "results/2026-05-23_run03_Procedural_Gravity_Scale_Campaign/data/campaign_report.json"
+          ],
+          "downgrade_reasons": [
+            "lexicon_term_below_L2_caps_classification",
+            "intent_limit_applied"
+          ]
+        }
+      }
+    },
+    "procedural_gravity": {
+      "roles": {
+        "continuation_projection": {
+          "status": "L0",
+          "claim_id": "GRAVITY-SCALE-001",
+          "evidence_id": "gate:paper.md",
+          "mechanism_classes": [
+            "agent_based",
+            "reaction_diffusion"
+          ],
+          "observables": [],
+          "output_paths": [
+            "results/2026-05-23_run03_Procedural_Gravity_Scale_Campaign/data/campaign_report.json"
+          ],
+          "downgrade_reasons": [
+            "lexicon_term_below_L2_caps_classification",
+            "intent_limit_applied"
+          ]
+        }
+      }
+    },
+    "phase_signature": {
+      "roles": {
+        "identity_observable": {
+          "status": "L0",
+          "claim_id": "PHASE-NEGOTIATION-001",
+          "evidence_id": "gate:paper.md",
+          "mechanism_classes": [
+            "ode_oscillator",
+            "agent_based"
+          ],
+          "observables": [],
+          "output_paths": [
+            "results/2026-05-23_run04_Phase_Negotiation_Campaign/data/phase_campaign_report.json"
+          ],
+          "downgrade_reasons": [
+            "lexicon_term_below_L2_caps_classification",
+            "intent_limit_applied"
+          ]
+        }
+      }
+    },
+    "imaginary_operators": {
+      "roles": {
+        "phase_regulator": {
+          "status": "L0",
+          "claim_id": "PHASE-NEGOTIATION-001",
+          "evidence_id": "gate:paper.md",
+          "mechanism_classes": [
+            "ode_oscillator",
+            "agent_based"
+          ],
+          "observables": [],
+          "output_paths": [
+            "results/2026-05-23_run04_Phase_Negotiation_Campaign/data/phase_campaign_report.json"
+          ],
+          "downgrade_reasons": [
+            "lexicon_term_below_L2_caps_classification",
+            "intent_limit_applied"
+          ]
+        }
+      }
+    },
+    "operational_curvature": {
+      "roles": {
+        "interaction_metric": {
+          "status": "L0",
+          "claim_id": "PHASE-NEGOTIATION-001",
+          "evidence_id": "gate:paper.md",
+          "mechanism_classes": [
+            "ode_oscillator",
+            "agent_based"
+          ],
+          "observables": [],
+          "output_paths": [
+            "results/2026-05-23_run04_Phase_Negotiation_Campaign/data/phase_campaign_report.json"
+          ],
+          "downgrade_reasons": [
+            "lexicon_term_below_L2_caps_classification",
+            "intent_limit_applied"
           ]
         }
       }

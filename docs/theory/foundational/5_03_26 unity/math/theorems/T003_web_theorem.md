@@ -41,6 +41,10 @@ In the Codex, the universe is understood as recursively stabilized continuation 
 - **Proof Type:** symbolic
 - **Verification:** [THRESHOLD-004](../../../../../../results/2026-05-21_run05_Relational_Reach_Validation/paper.md) (Simulated Reach)
 
+## 5. Supersedes / Superseded-by
+- **Supersedes:** L008, L009, L010, L018, L019, L020, L034.
+- **Notes:** These lemmas are now formally encapsulated by Theorem III.
+
 ## 6. Status Footer
 - **Compliance:** [Compliance Charter v2.3](../../../../../../registry/compliance_charter_v2_3.json)
 - **Trace standard:** [MPF-SYM-TRACE-001](../../../../math/symbolic_trace_standard.md)

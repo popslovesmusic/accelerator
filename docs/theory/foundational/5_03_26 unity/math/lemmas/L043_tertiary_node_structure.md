@@ -17,7 +17,9 @@ To maintain stability against symmetry collapse while participating in relationa
 7. Triadic internal circulation $\{I, O\}$ + Relational coupling $\{R\}$ constitutes the minimum viable node structure.
 
 ## Status
-draft
+- Status: simulated
+- Proof Type: symbolic
+- Evidence: [ASYMMETRY-V1](../../../../../../results/2026-05-23_run08_Relational_Asymmetry/paper.md)
 
 ## Supersedes / Superseded-by
 None.

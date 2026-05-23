@@ -20,3 +20,26 @@ draft
 
 ## Supersedes / Superseded-by
 None.
+
+## Metadata (Migrated from LAW-029)
+- **Law Conditions:**
+  - orientation_array_dependency_explicit
+  - candidate_set_definition_explicit
+  - arbitration_operator_candidate_explicit
+  - conflict_condition_explicit
+  - priority_score_candidate_explicit
+  - tie_resolution_condition_explicit
+  - nonunique_arbitration_clause_explicit
+  - recursive_feedback_clause_explicit
+- **Failure Modes:**
+  - deterministic_selection_overclaim
+  - global_optimality_overclaim
+  - single_winner_collapse
+  - arbitration_without_budget_constraint
+  - tie_resolution_overclaim
+  - invariant_violation_suppression
+  - primitive_law_reintroduction
+  - physics_claim_leakage
+
+## Supersedes / Superseded-by
+None.

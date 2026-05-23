@@ -41,6 +41,10 @@ This theorem formally proves that discrete operational reality (e.g., Cellular A
 - **Proof Type:** symbolic
 - **Verification:** [PERSISTENCE-001](../../../../../../results/2026-05-21_run06_Global_Persistence_Scaling/paper.md) (C5 Evidence)
 
-## 5. Status Footer
+## 5. Supersedes / Superseded-by
+- **Supersedes:** L035, L039.
+- **Notes:** These lemmas are now formally encapsulated by Theorem II.
+
+## 6. Status Footer
 - **Compliance:** [Compliance Charter v2.3](../../../../../../registry/compliance_charter_v2_3.json)
 - **Trace standard:** [MPF-SYM-TRACE-001](../../../../math/symbolic_trace_standard.md)

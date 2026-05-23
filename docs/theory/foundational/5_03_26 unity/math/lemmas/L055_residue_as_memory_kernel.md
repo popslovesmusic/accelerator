@@ -28,3 +28,63 @@ draft
 
 ## Supersedes / Superseded-by
 None.
+
+## Metadata (Migrated from LAW-011)
+- **Law Conditions:**
+  - orientation_array_dependency_explicit
+  - reconciliation_event_dependency_explicit
+  - basin_candidate_definition_explicit
+  - persistence_condition_explicit
+  - pool_drift_condition_explicit
+  - finite_flux_condition_preserved
+  - not_static_attractor
+  - no_global_equilibrium_claim
+- **Failure Modes:**
+  - static_attractor_overclaim
+  - global_equilibrium_leakage
+  - primitive_geometry_reintroduction
+  - absolute_time_reintroduction
+  - unbounded_basin_growth
+  - hidden_total_order
+  - stability_without_tolerance
+  - physics_claim_leakage
+
+## Metadata (Migrated from LAW-015)
+- **Law Conditions:**
+  - orientation_array_dependency_explicit
+  - channel_dependency_explicit
+  - reinforcement_history_candidate_explicit
+  - history_update_condition_explicit
+  - memory_projection_explicit
+  - nonprimitive_memory_clause_explicit
+  - nonprimitive_residue_clause_explicit
+  - no_physical_memory_claim
+- **Failure Modes:**
+  - memory_substance_reintroduction
+  - primitive_residue_reification
+  - static_channel_history_overclaim
+  - perfect_history_reconstruction_overclaim
+  - hidden_absolute_time_ordering
+  - primitive_law_reintroduction
+  - causal_storage_overclaim
+  - physics_claim_leakage
+
+## Metadata (Migrated from LAW-025)
+- **Law Conditions:**
+  - orientation_array_dependency_explicit
+  - decay_operator_candidate_explicit
+  - reinforcement_erosion_condition_explicit
+  - forgetting_condition_explicit
+  - basin_weakening_condition_explicit
+  - transient_lawlike_clause_explicit
+  - nonprimitive_memory_clause_explicit
+  - eternal_accumulation_blocked
+- **Failure Modes:**
+  - eternal_reinforcement_overclaim
+  - perfect_memory_persistence_overclaim
+  - decay_as_physical_entropy_leakage
+  - psychological_memory_claim_leakage
+  - primitive_memory_reintroduction
+  - lawlike_channel_eternity_overclaim
+  - forgetting_without_reconstruction_limit
+  - physics_claim_leakage

@@ -19,7 +19,29 @@ Relational distinguishability between two process states $S_1$ and $S_2$ is inhe
 8. Therefore, orientational dominance is not a primitive but a consequence of unresolved directional distinguishability.
 
 ## Status
-draft
+- Status: simulated
+- Proof Type: symbolic
+- Evidence: [ASYMMETRY-V1](../../../../../../results/2026-05-23_run08_Relational_Asymmetry/paper.md)
 
 ## Supersedes / Superseded-by
 None.
+
+## Metadata (Migrated from LAW-018)
+- **Law Conditions:**
+  - orientation_array_dependency_explicit
+  - reachability_relation_explicit
+  - reachable_domain_candidate_explicit
+  - accessibility_horizon_candidate_explicit
+  - finite_flux_dependency_explicit
+  - decay_condition_explicit
+  - reconstruction_limit_clause_explicit
+  - non_spacetime_horizon_clause_explicit
+- **Failure Modes:**
+  - spacetime_lightcone_overclaim
+  - global_causality_claim_leakage
+  - unbounded_reachability_assumption
+  - absolute_inaccessibility_overclaim
+  - hidden_metric_distance_reintroduction
+  - projection_as_universal_explanation
+  - physics_claim_leakage
+  - global_closure_overclaim

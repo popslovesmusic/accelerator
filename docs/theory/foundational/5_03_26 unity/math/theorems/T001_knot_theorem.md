@@ -39,6 +39,10 @@ This theorem formally proves that in any recursive process obeying the core bico
 - **Proof Type:** symbolic
 - **Verification:** [PERSISTENCE-001](../../../../../../results/2026-05-21_run06_Global_Persistence_Scaling/paper.md) (C5 Evidence)
 
-## 5. Status Footer
+## 5. Supersedes / Superseded-by
+- **Supersedes:** L036, L037, L040, L049, L051, L054.
+- **Notes:** These lemmas are now formally encapsulated by Theorem I. They remain in the repository for historical traceability but are logically superseded by the higher-level theorem closure.
+
+## 6. Status Footer
 - **Compliance:** [Compliance Charter v2.3](../../../../../../registry/compliance_charter_v2_3.json)
 - **Trace standard:** [MPF-SYM-TRACE-001](../../../../math/symbolic_trace_standard.md)

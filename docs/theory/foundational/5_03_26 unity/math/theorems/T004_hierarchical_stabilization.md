@@ -42,6 +42,30 @@ In the Codex, the universe is a fractal hierarchy of nested stabilization. There
 - **Proof Type:** symbolic
 - **Verification:** [PERSISTENCE-001](../../../../../../results/2026-05-21_run06_Global_Persistence_Scaling/paper.md) (Scaling Symmetry)
 
+## 5. Supersedes / Superseded-by
+- **Supersedes:** L050.
+- **Notes:** This lemma is now formally encapsulated by Theorem IV.
+
+## Metadata (Migrated from LAW-030)
+- **Law Conditions:**
+  - orientation_array_dependency_explicit
+  - scale_like_layer_candidate_explicit
+  - coherence_metric_candidate_explicit
+  - upward_transfer_condition_explicit
+  - downward_constraint_condition_explicit
+  - scale_decoupling_condition_explicit
+  - nonprimitive_scale_clause_explicit
+  - global_synchronization_claim_blocked
+- **Failure Modes:**
+  - primitive_scale_hierarchy_reintroduction
+  - global_synchronization_overclaim
+  - physical_scale_equivalence_leakage
+  - coherence_without_admissibility
+  - transfer_without_budget_constraint
+  - single_scale_reductionism
+  - unbounded_cross_scale_coupling
+  - physics_claim_leakage
+
 ## 6. Status Footer
 - **Compliance:** [Compliance Charter v2.3](../../../../../../registry/compliance_charter_v2_3.json)
 - **Trace standard:** [MPF-SYM-TRACE-001](../../../../math/symbolic_trace_standard.md)

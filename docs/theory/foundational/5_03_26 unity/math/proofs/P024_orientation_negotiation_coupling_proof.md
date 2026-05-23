@@ -21,7 +21,9 @@ Prove that when two stabilized process basins ($B_A, B_B$) couple, the resulting
 7. Therefore, large-scale structures (webs) are hierarchies of recursively negotiated dominant orientation regimes. ∎
 
 ## Status
-draft
+- Status: simulated
+- Proof Type: symbolic
+- Evidence: [NEGOTIATION-V1](../../../../../../results/2026-05-23_run07_Orientation_Negotiation/paper.md)
 
 ## Supersedes / Superseded-by
 None.
