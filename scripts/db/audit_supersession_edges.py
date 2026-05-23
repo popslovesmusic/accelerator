@@ -3,11 +3,11 @@ import json
 import os
 import sqlite3
 from collections import Counter, defaultdict
-from datetime import datetime, timezone
+import datetime
 
 
 def _utc_now_iso():
-    return datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+    return datetime.datetime.now(datetime.timezone.utc).isoformat().replace("+00:00", "Z")
 
 
 def _connect(db_path):

@@ -3,7 +3,7 @@ import json
 import argparse
 import hashlib
 import uuid
-from datetime import datetime
+import datetime
 
 def track_evolution():
     """
@@ -22,7 +22,7 @@ def track_evolution():
     
     report = {
         "tracking_id": f"EVOL-{str(uuid.uuid4())[:8].upper()}",
-        "timestamp": datetime.now(datetime.UTC).isoformat() + "Z",
+        "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat() + "Z",
         "events_detected": 0,
         "states_archived": 0,
         "lineage_conflicts": 0,

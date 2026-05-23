@@ -2,7 +2,7 @@ import sqlite3
 import json
 import argparse
 import os
-from datetime import datetime, timezone
+import datetime
 try:
     from db.orientation_scoring import calculate_orientation_score
 except ImportError:
@@ -27,7 +27,7 @@ def get_freshness_score(timestamp_str):
     try:
         # Assuming ISO format from SQLite CURRENT_TIMESTAMP or similar
         ts = datetime.fromisoformat(timestamp_str.replace('Z', '+00:00'))
-        now = datetime.now(timezone.utc)
+        now = datetime.datetime.now(datetime.timezone.utc)
         delta = now - ts
         # Score 1.0 for < 1 day, 0.5 for 1 week, 0.1 for > 1 month
         days = delta.days

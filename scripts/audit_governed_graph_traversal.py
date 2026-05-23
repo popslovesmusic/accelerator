@@ -1,7 +1,7 @@
 import os
 import json
 import argparse
-from datetime import datetime
+import datetime
 
 def audit_traversal(traversal_run_id):
     """
@@ -20,7 +20,7 @@ def audit_traversal(traversal_run_id):
     
     report = {
       "audit_id": f"AUDIT-TRAV-{traversal_run_id[:8].upper()}",
-      "timestamp": datetime.now(datetime.UTC).isoformat() + "Z",
+      "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat() + "Z",
       "traversal_run_id": traversal_run_id,
       "paths_checked": 0,
       "invalid_paths": 0,

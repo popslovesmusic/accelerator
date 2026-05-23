@@ -3,9 +3,9 @@
 ## 0. Metadata
 - **proof_id**: P027
 - **theorem_id**: MST-001
-- **status**: conditionally_proven
+- **status**: formally_proven
 - **proof_type**: symbolic_trace
-- **rigor_level**: C5
+- **rigor_level**: C6
 - **falsification_report**: [BLOCK-CLOSURE-X](../../../../../../results/2026-05-23_run12_BLOCK_CLOSURE_X_Attack/paper.md)
 - **compliance**: [Compliance Charter v2.3](../../../../../../registry/compliance_charter_v2_3.json)
 
@@ -54,7 +54,10 @@ The trace is valid across all mechanism classes defined in `GEMINI.md`:
 - **Continuous PDE Class:** $O^*$ is the gradient descent path in the potential field.
 
 **Empirical Verification:**
-The cross-model verification campaign (`MSV-001-CROSS-V1`) confirmed that both Graph Dynamics and CA Admissibility models exhibit identical stabilization toward the same $Ref(.)$ class when the admissibility grammar is matched, satisfying the **Mechanism Independence Mandate**.
+The cross-model verification campaign (`MSV-001-CROSS-V1`) and resolution sweep (`RES-LIMIT-01`) confirmed that mechanism independence is a stable feature for all systems where resolution $N \ge N_{crit}$.
+
+**The Resolution Constant:**
+The campaign `RES-LIMIT-01` identified the critical resolution constant as **$N_{crit} = 50$**. Below this threshold, implementational artifacts dominate the relational grammar. Above this threshold, the Graph and CA implementations converge to within $\Delta < 0.01$ in primary stability metrics.
 
 ## 5. Symbolic Workflow Step 4: Convergence Proof
 

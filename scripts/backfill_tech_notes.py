@@ -1,7 +1,7 @@
 import os
 import json
 import argparse
-from datetime import datetime
+import datetime
 from pathlib import Path
 
 def backfill_tech_notes(backfill_id):
@@ -20,7 +20,7 @@ def backfill_tech_notes(backfill_id):
     
     report = {
         "backfill_id": backfill_id,
-        "timestamp": datetime.now(datetime.UTC).isoformat() + "Z",
+        "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat() + "Z",
         "notes_converted": 0,
         "frontmatter_applied": False,
         "final_status": "PASS_WITH_WARNINGS",

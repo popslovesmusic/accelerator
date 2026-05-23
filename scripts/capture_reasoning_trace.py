@@ -2,7 +2,7 @@ import os
 import json
 import argparse
 import uuid
-from datetime import datetime
+import datetime
 
 def capture_trace(event_type, summary, action):
     """
@@ -27,7 +27,7 @@ def capture_trace(event_type, summary, action):
         "linked_outputs": [],
         "review_required": False,
         "summary_text": summary,
-        "created_at": datetime.now(datetime.UTC).isoformat() + "Z"
+        "created_at": datetime.datetime.now(datetime.timezone.utc).isoformat() + "Z"
     }
     
     # In a full implementation, this would:

@@ -2,7 +2,7 @@ import os
 import json
 import sqlite3
 import hashlib
-from datetime import datetime
+import datetime
 from pathlib import Path
 
 def rebuild_index():
@@ -23,7 +23,7 @@ def rebuild_index():
     
     report = {
         "rebuild_id": "REBUILD-V1-SCAFFOLD",
-        "timestamp": datetime.now(datetime.UTC).isoformat() + "Z",
+        "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat() + "Z",
         "database_path": db_path,
         "source_files_scanned": 0,
         "rows_inserted_by_table": {},

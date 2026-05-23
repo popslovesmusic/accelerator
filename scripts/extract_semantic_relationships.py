@@ -1,7 +1,7 @@
 import os
 import json
 import argparse
-from datetime import datetime
+import datetime
 
 def extract_relationships():
     """
@@ -20,7 +20,7 @@ def extract_relationships():
     
     report = {
       "extraction_id": "EXTRACT-V1-SCAFFOLD",
-      "timestamp": datetime.now(datetime.UTC).isoformat() + "Z",
+      "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat() + "Z",
       "relationships_found": 0,
       "objects_indexed": 0,
       "conflicts_detected": 0,

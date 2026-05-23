@@ -1,7 +1,7 @@
 import json
 import os
 import argparse
-from datetime import datetime
+import datetime
 try:
     from scripts.orientation_status_check import classify_path
 except ImportError:
@@ -10,7 +10,7 @@ except ImportError:
 def audit_current_state():
     # Gather evidence of the current state
     evidence = {
-        "timestamp": datetime.now(datetime.UTC).isoformat() + "Z",
+        "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat() + "Z",
         "active_command_evidence": [],
         "system_inventory": {
             "registry_count": len(os.listdir('registry')) if os.path.exists('registry') else 0,

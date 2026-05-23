@@ -2,7 +2,7 @@ import json
 import argparse
 import os
 import sqlite3
-from datetime import datetime
+import datetime
 try:
     from scripts.orientation_retrieval import retrieve_artifacts
     from scripts.db.db_health_check import run_db_health_check
@@ -19,7 +19,7 @@ def generate_execution_plan(query, db_path, limit=10):
     
     plan = {
         "execution_plan": {
-            "task_id": f"PLAN-{datetime.now(datetime.UTC).strftime('%Y%m%d%H%M%S')}",
+            "task_id": f"PLAN-{datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%d%H%M%S')}",
             "query": query,
             "mode": "advisory_plan_only",
             "orientation_context": {

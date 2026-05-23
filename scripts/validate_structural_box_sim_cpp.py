@@ -4,7 +4,7 @@ import json
 import os
 import subprocess
 from dataclasses import dataclass
-from datetime import datetime, timezone
+import datetime
 from pathlib import Path
 from typing import Any
 
@@ -16,7 +16,7 @@ VALIDATION_DIR = REPO_ROOT / "tools" / TOOL_NAME / "validation"
 
 
 def _utc_now() -> str:
-    return datetime.now(timezone.utc).isoformat()
+    return datetime.datetime.now(datetime.timezone.utc).isoformat()
 
 
 def _sha256_bytes(data: bytes) -> str:

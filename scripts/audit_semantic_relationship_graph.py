@@ -1,7 +1,7 @@
 import os
 import json
 import argparse
-from datetime import datetime
+import datetime
 
 def audit_graph():
     """
@@ -19,7 +19,7 @@ def audit_graph():
     
     report = {
       "audit_id": "AUDIT-V1-SCAFFOLD",
-      "timestamp": datetime.now(datetime.UTC).isoformat() + "Z",
+      "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat() + "Z",
       "edges_checked": 0,
       "objects_checked": 0,
       "invalid_edges": 0,

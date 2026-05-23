@@ -1,7 +1,7 @@
 import os
 import json
 import argparse
-from datetime import datetime
+import datetime
 try:
     from scripts.orientation_status_check import classify_path
 except ImportError:
@@ -20,7 +20,7 @@ def save_report(content, path, task_id, orientation=None, force=False):
         report_data = {
             "audit_metadata": {
                 "id": os.path.basename(path).replace('.json', ''),
-                "timestamp": datetime.now(datetime.UTC).isoformat() + "Z",
+                "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat() + "Z",
                 "task_id": task_id,
                 "evidence_orientation": orientation
             },
