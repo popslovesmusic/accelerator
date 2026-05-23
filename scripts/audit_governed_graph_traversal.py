@@ -20,7 +20,7 @@ def audit_traversal(traversal_run_id):
     
     report = {
       "audit_id": f"AUDIT-TRAV-{traversal_run_id[:8].upper()}",
-      "timestamp": datetime.utcnow().isoformat() + "Z",
+      "timestamp": datetime.now(datetime.UTC).isoformat() + "Z",
       "traversal_run_id": traversal_run_id,
       "paths_checked": 0,
       "invalid_paths": 0,

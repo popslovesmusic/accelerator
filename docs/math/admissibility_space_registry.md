@@ -7,7 +7,7 @@ Define admissibility sets, admissibility distance or constraint measure, admissi
 ### 2.1 A_alpha: Local Admissibility Set
 - **Symbol**: $A_\alpha$
 - **Role**: Local admissibility set or constraint region.
-- **Definition**: The subset of state space satisfying local continuation constraints.
+- **Definition**: The subset of state space\_proc satisfying local continuation constraints.
 - **Locality**: `STRICTLY_LOCAL`.
 
 ### 2.2 d_A: Admissibility Distance

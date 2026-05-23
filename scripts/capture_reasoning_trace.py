@@ -27,7 +27,7 @@ def capture_trace(event_type, summary, action):
         "linked_outputs": [],
         "review_required": False,
         "summary_text": summary,
-        "created_at": datetime.utcnow().isoformat() + "Z"
+        "created_at": datetime.now(datetime.UTC).isoformat() + "Z"
     }
     
     # In a full implementation, this would:

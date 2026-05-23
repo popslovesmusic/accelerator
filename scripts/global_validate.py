@@ -225,7 +225,7 @@ class MathValidator:
                     hashes = json.load(f)
 
             new_hashes = {}
-            items = registry.get('lemmas', []) + registry.get('proofs', [])
+            items = registry.get('theorems', []) + registry.get('lemmas', []) + registry.get('proofs', [])
             for item in items:
                 item_id = item['item_id']
                 path = self.root / item['path']

@@ -17,26 +17,26 @@ The stabilization of projection-induced persistence structures into "geometric" 
 The directional propagation of admissibility constraints through a projected field. This simulates the behavior of "influence" or "flux" within a continuous domain.
 
 ### 2.4 Orientation Curvature Analog (GRF-4)
-The gradual deformation of local orientation consistency within persistent structures. This acts as a symbolic analog for spacetime curvature without requiring physical mass-energy or geodesics.
+The gradual deformation of local orientation consistency within persistent structures. This acts as a symbolic analog for spacetime\_curvature\_analog without requiring physical mass-energy or geodesics.
 
 ### 2.5 Non-Local Transport History (GRF-5)
-The retention of residue-history across multiple transition boundaries. This creates the symbolic effect of a persistent field that carries information across the process landscape.
+The retention of residue-history across multiple transition boundaries. This creates the symbolic effect of a persistent field\_analog that carries information across the process landscape.
 
 ## 3. Governance Constraints
 - **Analog Only**: Features are defined strictly as Process Algebra projections.
-- **No Spacetime Derivation**: Prohibits deriving the metric tensor, Einstein equations, or cosmological models.
+- **No Spacetime Derivation**: Prohibits deriving the metric tensor, Einstein equations, or cosmological\_models\_app.
 - **Mandatory Traceability**: Every continuous state must trace back to an indivisible **⇔R** source relation.
 
 ## 4. Usage Rules
 
 ### 4.1 Allowed Uses
 - Analyzing smooth transition gradients as shadows of the process core.
-- Modeling persistence-based "geometry" through orientation mapping.
-- Using "GR-like" language to describe field-like continuity within a **strictly declared analog scope**.
+- Modeling persistence-based "geometry\_proj" through orientation mapping.
+- Using "GR-like" language to describe field\_analog-like continuity within a **strictly declared analog scope**.
 
 ### 4.2 Forbidden Uses
-- Claiming physical gravitational attraction.
-- Using analogs to support black hole or big bang theories.
+- Claiming physical gravitational attraction\_phys.
+- Using analogs to support black hole or BigBang\_analog theories.
 - Removing loss accounting (e.g., ignoring discrete exclusion events) when modeling continuous structures.
 
 ## 5. Governance Footer

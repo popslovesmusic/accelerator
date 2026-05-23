@@ -19,7 +19,7 @@ def generate_execution_plan(query, db_path, limit=10):
     
     plan = {
         "execution_plan": {
-            "task_id": f"PLAN-{datetime.utcnow().strftime('%Y%m%d%H%M%S')}",
+            "task_id": f"PLAN-{datetime.now(datetime.UTC).strftime('%Y%m%d%H%M%S')}",
             "query": query,
             "mode": "advisory_plan_only",
             "orientation_context": {

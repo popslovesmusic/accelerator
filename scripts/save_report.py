@@ -20,7 +20,7 @@ def save_report(content, path, task_id, orientation=None, force=False):
         report_data = {
             "audit_metadata": {
                 "id": os.path.basename(path).replace('.json', ''),
-                "timestamp": datetime.utcnow().isoformat() + "Z",
+                "timestamp": datetime.now(datetime.UTC).isoformat() + "Z",
                 "task_id": task_id,
                 "evidence_orientation": orientation
             },

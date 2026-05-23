@@ -20,7 +20,7 @@ def extract_relationships():
     
     report = {
       "extraction_id": "EXTRACT-V1-SCAFFOLD",
-      "timestamp": datetime.utcnow().isoformat() + "Z",
+      "timestamp": datetime.now(datetime.UTC).isoformat() + "Z",
       "relationships_found": 0,
       "objects_indexed": 0,
       "conflicts_detected": 0,

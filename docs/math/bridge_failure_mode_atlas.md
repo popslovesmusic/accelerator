@@ -14,7 +14,7 @@ Classify bridge-specific risks including false unification, category confusion, 
 
 ## 3. Failure Mode Classes
 - **BFM-001**: `false_unification` - Bridge comparison is misread as proof that QM-like and GR-like domains are unified. (Severity: CRITICAL)
-- **BFM-002**: `category_confusion` - Projection analogs are confused with physical quantum mechanics or general relativity. (Severity: CRITICAL)
+- **BFM-002**: `category_confusion` - Projection analogs are confused with physical quantum\_mechanics\_analog or general\_relativity\_analog. (Severity: CRITICAL)
 - **BFM-003**: `projection_identity_error` - Shared source traceability is mistaken for identity between projections. (Severity: HIGH)
 - **BFM-004**: `loss_differential_overreading` - Different projection losses are interpreted as physical complementarity or explanatory proof. (Severity: HIGH)
 - **BFM-005**: `conflict_erasure` - Discrete/smooth or threshold/flow conflicts are erased rather than recorded. (Severity: HIGH)

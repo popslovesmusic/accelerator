@@ -29,14 +29,23 @@ def validate_audit():
     with open(audit_registry_path, 'r') as f:
         registry = json.load(f)
 
-    # Validate Law Dependencies
-    law_deps = registry["dependencies_audited"]["law_dependencies"]
-    for law in law_deps:
-        # Check registry
-        reg_pattern = f"registry/math/{law.lower()}"
-        found_reg = any(f.startswith(law.lower()) and f.endswith("_registry.json") for f in os.listdir("registry/math/"))
-        if not found_reg:
-             report["governance_violations"].append(f"missing registry for {law}")
+    # Validate Dependencies (Theorems/Lemmas)
+    deps = registry["dependencies_audited"]["law_dependencies"]
+    math_registry_path = "registry/math_registry.json"
+    if not os.path.exists(math_registry_path):
+        report["validation_status"] = "fail"
+        report["governance_violations"].append("missing math registry (SSOT)")
+        return report
+        
+    with open(math_registry_path, 'r', encoding='utf-8') as mf:
+        math_reg = json.load(mf)
+    
+    all_math_items = math_reg.get('theorems', []) + math_reg.get('lemmas', []) + math_reg.get('proofs', [])
+    registered_ids = [item['item_id'] for item in all_math_items]
+
+    for dep in deps:
+        if dep not in registered_ids:
+             report["governance_violations"].append(f"missing registry entry for {dep}")
         else:
              report["law_dependencies_verified"] += 1
 

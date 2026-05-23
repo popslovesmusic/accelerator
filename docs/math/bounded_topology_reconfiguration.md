@@ -7,7 +7,7 @@ This document defines how **Restricted Local Topology** regions may reconfigure 
 All reconfiguration modes and their resulting audit logs MUST be marked with:
 - **NOT_PROVEN**: Theorem status is unverified.
 - **STRICTLY_LOCAL**: Reconfiguration effects and rules apply only to finite local domains.
-- **NON_PHYSICAL_ANALOG_MODEL**: No claims of physical reality, structural transformation of spacetime, or universal laws are permitted.
+- **NON_PHYSICAL_ANALOG_MODEL**: No claims of physical reality, structural transformation of spacetime\_analog, or universal laws are permitted.
 
 ## 3. Reconfiguration Modes
 

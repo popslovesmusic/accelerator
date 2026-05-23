@@ -18,10 +18,10 @@ Declare the theorem-preparation phase and freeze the allowed formal-substrate vo
 
 ## 4. Terminology Freeze
 ### Allowed Terms
-- `state space`
-- `orientation space`
-- `residue space`
-- `admissibility space`
+- `state space\_proc`
+- `orientation space\_proc`
+- `residue space\_proc`
+- `admissibility space\_proc`
 - `operator domain`
 - `operator codomain`
 - `equivalence relation`
@@ -38,15 +38,15 @@ Declare the theorem-preparation phase and freeze the allowed formal-substrate vo
 
 ## 5. Governance Rules
 - **FS-RULE-001**: Every definition must declare its restricted domain and associated failure conditions.
-- **FS-RULE-002**: Formal objects must maintain NON_PHYSICAL and ANALOG_ONLY status.
+- **FS-RULE-002**: Formal objects must maintain NON\_PHYSICAL and ANALOG\_ONLY status.
 - **FS-RULE-003**: Theorem readiness requires explicit binding of MT targets to substrate objects.
-- **FS-RULE-004**: Symbolic structures do not imply physical substrate behavior or ontology identity.
+- **FS-RULE-004**: Symbolic structures do not imply physical substrate behavior or ontology identity\_proc.
 
 ## 6. Forbidden Claims
-- The formal substrate proves the framework is 'real'.
-- Substrate definitions derive physical constants.
+- The formal substrate proves the framework is 'real\_phys'.
+- Substrate definitions derive physical constants\_phys.
 - Mathematical closure is achieved in this phase.
-- Substrate objects represent literal physical particles or fields.
+- Substrate objects represent literal physical particles\_analog or field\_analog.
 
 ## 7. Required Metadata
 - `object_id`

@@ -47,7 +47,7 @@ Track how embedded participation dynamically alters reconstruction accessibility
 ## 6. Forbidden Claims
 - Embedded observers can achieve detached dynamic analysis.
 - Measurement deformation can be 'compensated' for to reveal source truth.
-- Dynamic bounds derive the observer-dependent physics of relativity.
+- Dynamic bounds derive the observer-dependent physics\_of\_relativity\_analog.
 
 ## 7. Governance Boilerplate
 - **Source Relation**: (E≠0) ⇔R δ(E>0)

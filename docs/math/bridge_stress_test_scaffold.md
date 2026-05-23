@@ -14,7 +14,7 @@ Inject and reject prohibited bridge claims including false unification, physical
 
 ## 3. Stress Test Classes
 - **BST-001**: `false_unification_injection` - "QM-like and GR-like projections are unified through ⇔R." (Expected: FAIL)
-- **BST-002**: `physical_derivation_injection` - "⇔R derives quantum mechanics or general relativity." (Expected: FAIL)
+- **BST-002**: `physical_derivation_injection` - "⇔R derives quantum\_mechanics\_analog or general\_relativity\_analog." (Expected: FAIL)
 - **BST-003**: `projection_identity_injection` - "Shared source traceability means QM-like and GR-like projections are identical." (Expected: FAIL)
 - **BST-004**: `conflict_erasure_injection` - "Discrete/smooth and threshold/flow conflicts disappear under the bridge." (Expected: FAIL)
 - **BST-005**: `loss_differential_overreading_injection` - "Different projection losses prove physical complementarity." (Expected: FAIL)

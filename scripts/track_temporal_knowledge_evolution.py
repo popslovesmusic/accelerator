@@ -22,7 +22,7 @@ def track_evolution():
     
     report = {
         "tracking_id": f"EVOL-{str(uuid.uuid4())[:8].upper()}",
-        "timestamp": datetime.utcnow().isoformat() + "Z",
+        "timestamp": datetime.now(datetime.UTC).isoformat() + "Z",
         "events_detected": 0,
         "states_archived": 0,
         "lineage_conflicts": 0,

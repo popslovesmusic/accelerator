@@ -20,7 +20,7 @@ def backfill_tech_notes(backfill_id):
     
     report = {
         "backfill_id": backfill_id,
-        "timestamp": datetime.utcnow().isoformat() + "Z",
+        "timestamp": datetime.now(datetime.UTC).isoformat() + "Z",
         "notes_converted": 0,
         "frontmatter_applied": False,
         "final_status": "PASS_WITH_WARNINGS",

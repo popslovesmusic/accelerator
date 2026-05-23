@@ -23,7 +23,7 @@ def rebuild_index():
     
     report = {
         "rebuild_id": "REBUILD-V1-SCAFFOLD",
-        "timestamp": datetime.utcnow().isoformat() + "Z",
+        "timestamp": datetime.now(datetime.UTC).isoformat() + "Z",
         "database_path": db_path,
         "source_files_scanned": 0,
         "rows_inserted_by_table": {},

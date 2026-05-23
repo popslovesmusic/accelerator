@@ -19,7 +19,7 @@ def audit_graph():
     
     report = {
       "audit_id": "AUDIT-V1-SCAFFOLD",
-      "timestamp": datetime.utcnow().isoformat() + "Z",
+      "timestamp": datetime.now(datetime.UTC).isoformat() + "Z",
       "edges_checked": 0,
       "objects_checked": 0,
       "invalid_edges": 0,

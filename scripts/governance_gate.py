@@ -10,7 +10,7 @@ from typing import Any, Dict, List, Optional
 
 class TraceEntry:
     def __init__(self, component: str, action: str, status: str, details: Dict[str, Any] = None):
-        self.timestamp = datetime.utcnow().isoformat()
+        self.timestamp = datetime.now(datetime.UTC).isoformat()
         self.component = component
         self.action = action
         self.status = status
@@ -28,7 +28,7 @@ class TraceEntry:
 class TraceLog:
     def __init__(self, run_id: str):
         self.run_id = run_id
-        self.start_time = datetime.utcnow().isoformat()
+        self.start_time = datetime.now(datetime.UTC).isoformat()
         self.entries: List[TraceEntry] = []
 
     def add_entry(self, component: str, action: str, status: str, details: Dict[str, Any] = None):
@@ -530,7 +530,7 @@ class GovernanceGate:
             "evidence_paths": metadata.get("recoverable_outputs", []),
             "terms_used": [{"term": tr.get("term", ""), "role": tr.get("role", "")} for tr in term_roles],
             "paper_path": paper_path,
-            "last_updated": datetime.utcnow().date().isoformat(),
+            "last_updated": datetime.now(datetime.UTC).date().isoformat(),
         }
         data["claims"].append(entry)
         self._write_json(path, data)
@@ -1044,7 +1044,7 @@ class GovernanceGate:
                 for c in claims:
                     if c.get("claim_id") == claim_id or c.get("source_claim_id") == claim_id:
                         c["last_gate_check"] = {
-                            "timestamp": datetime.utcnow().isoformat(),
+                            "timestamp": datetime.now(datetime.UTC).isoformat(),
                             "paper_path": paper_path,
                             "target_level": target_level,
                             "final_level": final_level,
@@ -1077,9 +1077,9 @@ class GovernanceGate:
                         "falsification_run": metadata.get("falsification_run", False),
                         "evidence_paths": output_paths,
                         "paper_path": paper_path,
-                        "last_updated": datetime.utcnow().strftime("%Y-%m-%d"),
+                        "last_updated": datetime.now(datetime.UTC).strftime("%Y-%m-%d"),
                         "last_gate_check": {
-                            "timestamp": datetime.utcnow().isoformat(),
+                            "timestamp": datetime.now(datetime.UTC).isoformat(),
                             "paper_path": paper_path,
                             "target_level": target_level,
                             "final_level": final_level,
