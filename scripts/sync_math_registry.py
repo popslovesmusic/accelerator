@@ -7,7 +7,7 @@ def parse_markdown_item(file_path):
     content = file_path.read_text(encoding='utf-8')
     
     # Extract ID and Title from the first line (# L001 — Admissible Increment or # Theorem I — ...)
-    header_match = re.search(r'^#\s+(?:(L|P|T)(\d+)|Theorem\s+(I+V?|VI*|X))\s+—\s+(.*)$', content, re.MULTILINE)
+    header_match = re.search(r'^#\s+(?:(?:Lemma|Proof|Theorem)\s+)?(?:(L|P|T)(\d+)|Theorem\s+(I+V?|VI*|X|V))\s+—\s+(.*)$', content, re.MULTILINE)
     
     if not header_match:
         return None
