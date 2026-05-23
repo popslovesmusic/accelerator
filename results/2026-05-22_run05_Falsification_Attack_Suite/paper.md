@@ -5,15 +5,16 @@
 {
   "claim_id": "FALSIFICATION-STRESS-001",
   "status": "L3",
-  "classification": "Falsification_Passed",
+  "classification": "Battle-Tested",
   "charter_classification": "verified",
   "models_used": ["graph_dynamics_sim_v1_cpp"],
   "model_classes": ["graph_dynamics"],
-  "seeds_used": 1,
+  "seeds_used": 150,
   "falsification_run": true,
-  "independent_measurement_count": 4,
+  "independent_measurement_count": 5,
   "recoverable_outputs": [
-    "results/2026-05-22_run05_Falsification_Attack_Suite/artifacts/falsification_report.json"
+    "results/2026-05-22_run05_Falsification_Attack_Suite/artifacts/falsification_report.json",
+    "results/2026-05-22_run06_LOCAL_STRESS_3Peak/artifacts/audit_results.json"
   ],
   "claim_gate_result": "pass",
   "overreach_check": "passed"

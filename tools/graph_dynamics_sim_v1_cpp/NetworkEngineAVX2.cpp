@@ -49,32 +49,30 @@ void NetworkEngineAVX2::computeDerivatives(const double* phi_in, double* dphi_ou
         double phi_i = phi_in[i];
         __m256d phi_i_vec = _mm256_set1_pd(phi_i);
 
-        // Vectorized loop over neighbors
-        for (int j = 0; j < n_; j += 4) {
+        double total_coupling = 0.0;
+        
+        // Vectorized loop over neighbors (multiples of 4)
+        int j = 0;
+        for (; j <= n_ - 4; j += 4) {
             __m256d phi_j = _mm256_load_pd(&phi_in[j]);
             __m256d diff = _mm256_sub_pd(phi_j, phi_i_vec);
             
-            // sin(diff) approx (simplified here, but can use vectorized sin)
-            // For the benchmark, we'll use scalar sin to ensure correctness
             alignas(32) double diffs[4];
             _mm256_store_pd(diffs, diff);
             
-            alignas(32) double sins[4];
             for(int k=0; k<4; ++k) {
                 if (A_[i * n_ + (j+k)]) {
-                    sins[k] = std::sin(diffs[k]);
-                } else {
-                    sins[k] = 0.0;
+                    total_coupling += std::sin(diffs[k]);
                 }
             }
-            __m256d sin_vec = _mm256_load_pd(sins);
-            sum_coupling = _mm256_add_pd(sum_coupling, sin_vec);
         }
-
-        // Reduce coupling sum
-        alignas(32) double res[4];
-        _mm256_store_pd(res, sum_coupling);
-        double total_coupling = res[0] + res[1] + res[2] + res[3];
+        
+        // Tail loop for remaining neighbors
+        for (; j < n_; ++j) {
+            if (A_[i * n_ + j]) {
+                total_coupling += std::sin(phi_in[j] - phi_i);
+            }
+        }
         
         dphi_out[i] = omega_[i] + k_n * total_coupling;
     }
