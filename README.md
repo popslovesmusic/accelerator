@@ -1,6 +1,6 @@
 # Acellorator Research Ecosystem
 
-> **Reviewer Orientation Note:** The Mono-Process Framework is not primarily a topology theory, geometry theory, simulation theory, or physics theory. It is a process-first framework. Its central claim is that distinguishability and continuation are inseparable aspects of one recursive process, formalized as (ℰ≠0) ⇔_R δ(ℰ>0). All structures within are derived projections of this principle. See [Reviewer Orientation Note](docs/reviewer_notes/core_expression_orientation_note.md).
+> **Reviewer Orientation Note:** The Mono-Process Framework is not primarily a topology\_proc theory, geometry\_proj theory, simulation\_app theory, or physics\_app theory. It is a process-first framework. Its central claim is that distinguishability and continuation are inseparable aspects of one recursive process, formalized as (ℰ≠0) ⇔_R δ(ℰ>0). All structures within are derived projections\_proj of this principle. See [Reviewer Orientation Note](docs/reviewer_notes/core_expression_orientation_note.md).
 
 This repository is a governed research environment for exploring **"THE LAW OF THE ONE PROCESS."**
 
@@ -8,7 +8,7 @@ This repository is a governed research environment for exploring **"THE LAW OF T
 
 This repo includes a stabilized **math core** (see `docs/math/` and `registry/math/`) that governs interpretation and terminology. Simulations provide **bounded evidence only** and must be written as: **"Within these models..."**.
 
-The math core does not elevate theorems, close ontology, or justify physics claims. C++ engines still require Python↔C++ equivalence evidence before certification.
+The math core does not elevate theorems, close ontology, or justify physics\_phys claims. C++ engines still require Python↔C++ equivalence evidence before certification.
 
 ## 📂 Repository Structure
 

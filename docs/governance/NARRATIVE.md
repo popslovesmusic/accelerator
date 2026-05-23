@@ -2,7 +2,7 @@
 
 Welcome, Researcher. You have just stepped into the **Acellorator Research Ecosystem**. 
 
-This is not merely a repository of simulation scripts; it is a governed engine for exploring **"THE LAW OF THE ONE PROCESS."** Our mission is to move beyond "object-oriented" physics and into a world where everything—from particle swarms to the vacuum itself—is understood as a series of irreducible processes.
+This is not merely a repository of simulation scripts; it is a governed engine for exploring **"THE LAW OF THE ONE PROCESS."** Our mission is to move beyond "object-oriented" physics\_app and into a world where everything—from particle\_analog swarms to the vacuum\_analog itself—is understood as a series of irreducible processes\_proc.
 
 Here is your guide to surviving and contributing to this high-rigor environment.
 

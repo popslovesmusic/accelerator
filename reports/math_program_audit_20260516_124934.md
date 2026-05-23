@@ -72,7 +72,7 @@ Examples:
 These are not under `registry/math/` but directly govern math-program semantics and promotion constraints:
 
 - `registry/theorem_status_registry.json` (status taxonomy and promotion ceilings)
-- `registry/lemma_registry.json`
+- `registry/math_registry.json`
 - `registry/theorem_closure_registry.json`
 - `registry/formal_object_registry.json` (formal object list and bindings)
 - `registry/proof_registry.json` (general proof registry)

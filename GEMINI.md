@@ -92,6 +92,18 @@ Gemini must preserve edge confidence, residue labels, conflicts, and cycle risks
 
 Provenance may reason about influence, support, contradiction, and dependency relationships, but may not promote claims or redefine terms from provenance synthesis alone.
 
+## Semantic Projection Governance Rule
+
+Gemini must apply semantic projection governance to prevent ontological overclaim and preserve communication clarity.
+
+All externally recognizable physics or cosmology terminology (e.g., gravity, space, time, Big Bang) used within the framework MUST be explicitly marked with projection suffixes defined in `registry/governance/semantic_projection_policy.json` (e.g., `gravity_app`, `space_proj`, `BigBang_analog`).
+
+Unmarked physics terminology is prohibited inside formal derivations unless explicitly referring to canonical physics.
+
+Gemini must prefer projection relations ($\mapsto$, $\approx$, $\Rightarrow_{proj}$) over equality symbols ($=, \equiv, \Leftrightarrow$) when relating framework primitives to analog observables.
+
+Projection language must not imply ontological identity. Primitives (ε, ρ, δ, R, Π_A, NavT, -(i)) must remain semantically separated from projected observables (space_app, time_app, gravity_app).
+
 ## Semantic Residue Compression Rule
 
 Gemini may use semantic residue compression packets as context-reduction aids.
