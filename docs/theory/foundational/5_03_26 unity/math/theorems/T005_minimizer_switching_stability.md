@@ -23,12 +23,16 @@ The proof is formally established via the **Symbolic Trace Workflow** (P027).
 The theorem holds across **Graph Dynamics**, **Cellular Automata**, and **PDE** mechanism classes, as verified in campaign `MSV-001-CROSS-V1`. Stability is a structural invariant of the relational grammar, not a property of the implementation substrate.
 
 ## 5. Status
-- **Status:** formally_proven
+- **Status:** conditionally_proven
 - **ID:** MST-001
-- **Rigor Level:** C6 (Theorem)
-- **Symbolic Trace:** [P027](../../../../../../docs/theory/foundational/5_03_26%20unity/math/proofs/P027_MST_001_symbolic_trace.md)
-- **Empirical Evidence:** [MSV-001-CROSS-V1](../../../../../../results/2026-05-23_run06_MSV_001_Cross_Model_Verification/paper.md)
+- **Rigor Level:** C5 (Conditional Theorem)
+- **Fracture Point:** [BLOCK-CLOSURE-X-V1](../../../../../../results/2026-05-23_run12_BLOCK_CLOSURE_X_Attack/paper.md)
+- **Scope Limit:** Stability is implementation-contingent below the critical resolution limit ($N < 10$).
 
-## 6. Status Footer
+## 6. Symbolic Trace
+- **Trace:** [P027](../../../../../../docs/theory/foundational/5_03_26%20unity/math/proofs/P027_MST_001_symbolic_trace.md)
+- **Evidence:** [MSV-001-CROSS-V1](../../../../../../results/2026-05-23_run06_MSV_001_Cross_Model_Verification/paper.md)
+
+## 7. Status Footer
 - **Compliance:** [Compliance Charter v2.3](../../../../../../registry/compliance_charter_v2_3.json)
 - **Authority:** Mono-Process Framework Core Math Program. ∎

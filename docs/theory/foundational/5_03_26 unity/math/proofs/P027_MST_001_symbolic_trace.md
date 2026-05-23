@@ -3,9 +3,10 @@
 ## 0. Metadata
 - **proof_id**: P027
 - **theorem_id**: MST-001
-- **status**: formally_proven
+- **status**: conditionally_proven
 - **proof_type**: symbolic_trace
-- **rigor_level**: C6
+- **rigor_level**: C5
+- **falsification_report**: [BLOCK-CLOSURE-X](../../../../../../results/2026-05-23_run12_BLOCK_CLOSURE_X_Attack/paper.md)
 - **compliance**: [Compliance Charter v2.3](../../../../../../registry/compliance_charter_v2_3.json)
 
 ## 1. Abstract
