@@ -267,16 +267,39 @@ class MeasurementValidator:
         self.tracer = tracer
         self.mandates = mandates
 
-    def validate(self, paper_content: str, measurement_data: List[Dict[str, Any]], target_level: str) -> Dict[str, Any]:
+    def validate(self, paper_content: str, measurement_data: List[Dict[str, Any]], target_level: str, metadata: Dict[str, Any]) -> Dict[str, Any]:
         level_mandate = self.mandates.get("claim_level_mandates", {}).get(target_level, {})
         min_required = level_mandate.get("min_independent_measurements", 0)
-        if min_required == 0: return {"pass": True, "details": {}}
         
-        has_section = bool(re.search(r"^#+\s+Measurement", paper_content, re.MULTILINE | re.IGNORECASE))
+        results = {"pass": True, "errors": [], "details": {}}
+        
+        # 1. Measurement Count
         valid_count = len([m for m in measurement_data if all(m.get(f) for f in ["tool", "measurement_class"])])
-        
-        success = valid_count >= min_required and has_section
-        return {"pass": success, "details": {"found": valid_count, "required": min_required}}
+        if min_required > 0:
+            has_section = bool(re.search(r"^#+\s+Measurement", paper_content, re.MULTILINE | re.IGNORECASE))
+            if valid_count < min_required or not has_section:
+                results["pass"] = False
+                results["errors"].append(f"Measurement Rigor: Level {target_level} requires {min_required} measurements (found {valid_count}).")
+
+        # 2. Adversarial Protection (Mandatory for C4+)
+        level_order = ["C0", "C1", "C2", "C3", "C4", "C5", "C6"]
+        if level_order.index(target_level) >= level_order.index("C4"):
+            outputs = metadata.get("recoverable_outputs", [])
+            has_protected = False
+            for out_path in outputs:
+                # Check for shadow report in the output path
+                # Path might be relative to project root
+                shadow_path = Path(out_path) / "artifacts/shadow_report.json"
+                if shadow_path.exists():
+                    has_protected = True
+                    break
+            
+            if not has_protected:
+                results["pass"] = False
+                results["errors"].append(f"Adversarial Integrity: Level {target_level} requires adversarial protection (shadow_report.json not found in outputs).")
+
+        results["details"] = {"found": valid_count, "required": min_required, "adversary_protected": has_protected if level_order.index(target_level) >= level_order.index("C4") else "not_required"}
+        return results
 
 class FalsificationValidator:
     def __init__(self, mandates: Dict[str, Any], tracer: Optional[TraceCapture] = None):
