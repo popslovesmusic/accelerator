@@ -74,7 +74,7 @@ class RegistryValidator:
 class EngineValidator:
     def __init__(self, root_dir):
         self.root = Path(root_dir)
-        self.tool_manifest_path = self.root / "registry/tool_manifest.json"
+        self.manifest_path = self.root / "registry/governance_manifest.json"
 
     def run_smoke_test(self, tool_name, entry_point):
         wrapper = self.root / entry_point
@@ -104,19 +104,21 @@ class EngineValidator:
     def run(self):
         results = {"status": "success", "tools_tested": [], "failures": [], "skipped": []}
         
-        with open(self.tool_manifest_path, 'r', encoding='utf-8-sig') as f:
+        with open(self.manifest_path, 'r', encoding='utf-8') as f:
             manifest = json.load(f)
 
-        for tool in manifest.get("tools", []):
-            if tool.get("certification_level") == "C4":
+        nodes = manifest.get("nodes", {})
+        for nid, node in nodes.items():
+            if node.get("type") == "tool" and node.get("status") == "C4":
+                tool = node.get("data", {})
                 # Only smoke test tools with governed wrappers
                 if "sim_governed.py" in tool.get("entry_point", ""):
                     success, err = self.smoke_test_tool(tool)
-                    results["tools_tested"].append(tool["name"])
+                    results["tools_tested"].append(nid)
                     if not success:
-                        results["failures"].append({"tool": tool["name"], "error": err})
+                        results["failures"].append({"tool": nid, "error": err})
                 else:
-                    results["skipped"].append(tool["name"])
+                    results["skipped"].append(nid)
 
         if results["failures"]:
             results["status"] = "failed"
