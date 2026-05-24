@@ -16,7 +16,7 @@ Across the three documents, the same objects appear under slightly different gly
 
 - `Eα` and `ℰ` as the same scalar: **total deviation magnitude / existence scalar** for process `α`.
   - Use `Eα` when indexing matters; use `ℰ` when talking about the non-indexed regime.
-- `δ(ℰ > 0)` in the working capture as shorthand for “the **process/update side** is active”.
+- `δ_a(ℰ > 0)` in the working capture as shorthand for “the **process/update side** is active”.
   - In indexed form this can be read as the update increment:
     - `Δxα := x'α − xα = Π_Aα ( Σ_{β ∈ CSI(α)} Nav_T(ωα, ωβ) )`
 - `ωα` as a **phase-like state descriptor** for `α` (input to transport).
@@ -102,4 +102,6 @@ These are the exact items that currently prevent the set from being a single clo
    - `TN_Admissibility_Window_and_Local_R` proposes a clean closure via admissibility-overlap; the working capture and derivation note should converge on *one* rule statement.
 
 Until these are specified, the safest internal status for all three documents is: **theoretical / draft**, with explicit “gap” markers (which `TN_MLaw_Derivation_v01` already does).
+
+oes).
 

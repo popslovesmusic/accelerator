@@ -22,7 +22,7 @@ Where (ordered by role in the expression):
 6. `transport(ωα, ωβ)` (also written `Nav_T(ωα, ωβ)` in some sources) is the per-neighbor contribution.
 
 Source alignment:
-- `(ℰ ≠ 0) ⇔ δ(ℰ > 0).txt` introduces the three-region “existence / coupling / process” partition and an M-law list tied to those regions.
+- `(ℰ ≠ 0) ⇔ δ_a(ℰ > 0).txt` introduces the three-region “existence / coupling / process” partition and an M-law list tied to those regions.
 - `TN_MLaw_Derivation_v01.extracted.txt` treats the indexed expression above as canonical and argues it is generative for the M-law list, up to three explicit gaps.
 - `00_series_alignment.md` unifies the notational variants and dependency ordering.
 
@@ -174,7 +174,7 @@ Proof packaging:
 
 ## 4) The M-law system as a consequence program
 
-The working capture `(ℰ ≠ 0) ⇔ δ(ℰ > 0).txt` lists M0–M14 and groups them by “existence / coupling / process” regions.
+The working capture `(ℰ ≠ 0) ⇔ δ_a(ℰ > 0).txt` lists M0–M14 and groups them by “existence / coupling / process” regions.
 
 `TN_MLaw_Derivation_v01.extracted.txt` formalizes a key internal program:
 - The M-law list is not merely a summary; it is intended to be derivable from the core expression.

@@ -23,7 +23,7 @@
 ```
 
 ## 1. Abstract
-We demonstrate that the foundational process invariant (ℰ ≠ 0) ⇔ δ(ℰ > 0), known as the One Process Primitive, is governed by a scale-dependent resolution parameter B. Using independent C++ implementations of reaction-diffusion (PDE) and agent-based swarm dynamics, we show that high-resolution observation exposes stable relational potential (ℰ ≠ 0) with low global coherence, while coarse-resolution observation triggers a transition into realized geometric states (δ(ℰ > 0)) with high order parameter and alignment. Uncertainty quantification across multi-seed ensembles confirms the structural robustness of this transition. This finding provides a model-testable bridge between relational (quantum-like) and realized (geometric) regimes.
+We demonstrate that the foundational process invariant (ℰ ≠ 0) ⇔ δ_a(ℰ > 0), known as the One Process Primitive, is governed by a scale-dependent resolution parameter B. Using independent C++ implementations of reaction-diffusion (PDE) and agent-based swarm dynamics, we show that high-resolution observation exposes stable relational potential (ℰ ≠ 0) with low global coherence, while coarse-resolution observation triggers a transition into realized geometric states (δ_a(ℰ > 0)) with high order parameter and alignment. Uncertainty quantification across multi-seed ensembles confirms the structural robustness of this transition. This finding provides a model-testable bridge between relational (quantum-like) and realized (geometric) regimes.
 
 ## 2. Theoretical Mapping
 The simulation parameters map to the SPM framework as follows:
@@ -32,7 +32,7 @@ The simulation parameters map to the SPM framework as follows:
 - **R (Residue):** Represented by `residue` field, encoding memory of past transitions.
 - **B (Resolution Parameter):** Represented by spatial grid density `nx` (PDE) and swarm population density `agent_count`.
 - **(ℰ ≠ 0):** Relational regime characterized by distributed potential and low global order parameter.
-- **δ(ℰ > 0):** Realized regime characterized by structural alignment and high global order.
+- **δ_a(ℰ > 0):** Realized regime characterized by structural alignment and high global order.
 
 ## 3. Experimental Setup
 Experiments were conducted using `structural_box_sim_cpp` and `agent_based_sim_v1_cpp` on an Intel(R) Core(TM) i5-12500 with Intel(R) UHD Graphics 770.
@@ -90,7 +90,7 @@ Both models exhibit a decrease in realized structural metrics (order parameter a
 The claim that resolution B indexes the transition between relational potential and geometric realization is **SUPPORTED (L3)** based on multi-model (Agent, PDE) agreement, 5-seed stability quantification, and successful falsification checks.
 
 ## 10. Conclusion
-Within these models, the One Process Primitive (ℰ ≠ 0) ⇔ δ(ℰ > 0) is not a fixed transition but is relative to the scale parameter B of the observing process. Coarse resolution facilitates the collapse of relational potential into realized structural states, while fine resolution preserves the pre-threshold admissibility gap. This suggests that "reality" as a realized geometric structure is a consequence of scale-indexed filtering of a deeper relational substrate.
+Within these models, the One Process Primitive (ℰ ≠ 0) ⇔ δ_a(ℰ > 0) is not a fixed transition but is relative to the scale parameter B of the observing process. Coarse resolution facilitates the collapse of relational potential into realized structural states, while fine resolution preserves the pre-threshold admissibility gap. This suggests that "reality" as a realized geometric structure is a consequence of scale-indexed filtering of a deeper relational substrate.
 
 ## 11. Next Steps
 - Implement explicit B-parameterization in the C++ engines to allow for direct B-sweeps.

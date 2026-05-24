@@ -23,7 +23,7 @@
 ```
 
 ## 1. Abstract
-We elevate the One Process Primitive (ℰ ≠ 0) ⇔ δ(ℰ > 0) into a formal information-geometric dynamical system. By defining the state vector $x(t) = (\epsilon(t), \rho(t), R(t))$, we demonstrate that structural emergence is governed by an **Admissible Valve** mechanism $dx/dt = A(x) \cdot F(x)$, where $A(x)$ is the valve throughput (alignment) and $R(t)$ is the geometric inscription of resolved information mismatch. Through high-rigor C5 simulations, we confirm that Geometry ($R$) emerges as a persistent attractor that stabilizes information throughput and exerts back-pressure on the generative driver ($\epsilon$).
+We elevate the One Process Primitive (ℰ ≠ 0) ⇔ δ_a(ℰ > 0) into a formal information-geometric dynamical system. By defining the state vector $x(t) = (\epsilon(t), \rho(t), R(t))$, we demonstrate that structural emergence is governed by an **Admissible Valve** mechanism $dx/dt = A(x) \cdot F(x)$, where $A(x)$ is the valve throughput (alignment) and $R(t)$ is the geometric inscription of resolved information mismatch. Through high-rigor C5 simulations, we confirm that Geometry ($R$) emerges as a persistent attractor that stabilizes information throughput and exerts back-pressure on the generative driver ($\epsilon$).
 
 ## 2. Theoretical Mapping (Elevated)
 The system is defined by the state vector **$x(t) = (\epsilon(t), \rho(t), R(t))$**:
