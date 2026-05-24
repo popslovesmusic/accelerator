@@ -48,7 +48,7 @@ This theorem formally proves that in any recursive process obeying the core bico
 - **Proof Type:** symbolic_trace
 - **Rigor Level:** C6
 - **Proof Trace:** [P028 — T001 Symbolic Trace](../proofs/P028_T001_symbolic_trace.md)
-- **Verification:** [PERSISTENCE-001](../../../../../../results/2026-05-21_run06_Global_Persistence_Scaling/paper.md) (C5 Evidence), [L078-STRESS-C5](../../../../../../results/2026-05-24_campaign_interaction_hierarchy_falsification/metrics.json)
+- **Verification:** [PERSISTENCE-001](../../../../../../results/2026-05-21_run06_Global_Persistence_Scaling/paper.md) (C5 Evidence), [L078-STRESS-C5](../../../../../../results/2026-05-24_run01_interaction_hierarchy_falsification/metrics.json)
 
 ## 5. Supersedes / Superseded-by
 - **Supersedes:** L036, L037, L040, L049, L051, L054.

@@ -68,7 +68,7 @@ Theorem I (The Knot Theorem) is formally closed. Identity is proven to be the mi
 - **Status:** formally_proven
 - **Proof Type**: symbolic_trace
 - **Rigor Level**: C6
-- **Evidence**: [MSV-001-CROSS-V1](../../../../../../results/2026-05-23_run06_MSV_001_Cross_Model_Verification/paper.md), [L078-STRESS-C5](../../../../../../results/2026-05-24_campaign_interaction_hierarchy_falsification/metrics.json)
+- **Evidence**: [MSV-001-CROSS-V1](../../../../../../results/2026-05-23_run06_MSV_001_Cross_Model_Verification/paper.md), [L078-STRESS-C5](../../../../../../results/2026-05-24_run01_interaction_hierarchy_falsification/metrics.json)
 
 ## 8. Status Footer
 - **Compliance:** [Compliance Charter v2.3](../../../../../../registry/compliance_charter_v2_3.json)
