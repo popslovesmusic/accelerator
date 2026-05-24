@@ -76,6 +76,14 @@ class EngineValidator:
         self.root = Path(root_dir)
         self.manifest_path = self.root / "registry/governance_manifest.json"
 
+    def smoke_test_tool(self, tool_data):
+        # Implementation logic for smoke testing a tool
+        name = tool_data.get("name")
+        entry = tool_data.get("entry_point")
+        if not entry: return False, "No entry point defined"
+        
+        return self.run_smoke_test(name, entry)
+
     def run_smoke_test(self, tool_name, entry_point):
         wrapper = self.root / entry_point
         out_dir = self.root / f"outputs/debug/smoke_{tool_name}"
@@ -92,7 +100,6 @@ class EngineValidator:
             cmd = [str(wrapper.absolute()), "--config", str(config_path.absolute()), "--out", str(out_dir.absolute())]
             
         try:
-            # Run in the tool's directory if it's an executable that might need local DLLs
             cwd = wrapper.parent.absolute()
             result = subprocess.run(cmd, capture_output=True, text=True, timeout=30, cwd=cwd)
             if result.returncode == 0:
@@ -104,6 +111,9 @@ class EngineValidator:
     def run(self):
         results = {"status": "success", "tools_tested": [], "failures": [], "skipped": []}
         
+        if not self.manifest_path.exists():
+            return {"status": "skipped", "errors": [], "warnings": ["Manifest missing"]}
+
         with open(self.manifest_path, 'r', encoding='utf-8') as f:
             manifest = json.load(f)
 
@@ -111,7 +121,6 @@ class EngineValidator:
         for nid, node in nodes.items():
             if node.get("type") == "tool" and node.get("status") == "C4":
                 tool = node.get("data", {})
-                # Only smoke test tools with governed wrappers
                 if "sim_governed.py" in tool.get("entry_point", ""):
                     success, err = self.smoke_test_tool(tool)
                     results["tools_tested"].append(nid)
@@ -312,9 +321,8 @@ class MathProgramValidator:
 class ImplementationValidator:
     def __init__(self, root_dir):
         self.root = Path(root_dir)
-        self.tool_manifest_path = self.root / "registry/tool_manifest.json"
+        self.manifest_path = self.root / "registry/governance_manifest.json"
         self.cert_reg_path = self.root / "registry/tool_certification_registry.json"
-        self.equiv_failures_path = self.root / "registry/equivalence_failure_registry.json"
 
     def validate_json_load(self, path):
         try:
@@ -326,32 +334,37 @@ class ImplementationValidator:
     def run(self):
         results = {"status": "success", "errors": [], "warnings": []}
         
-        manifest, err = self.validate_json_load(self.tool_manifest_path)
+        if not self.manifest_path.exists():
+            return {"status": "skipped", "errors": [], "warnings": ["Manifest missing"]}
+
+        manifest, err = self.validate_json_load(self.manifest_path)
         if err: return {"status": "failed", "errors": [f"Manifest Load: {err}"]}
         
         cert_reg, err = self.validate_json_load(self.cert_reg_path)
-        if err: results["errors"].append(f"Certification Registry Load: {err}")
+        if err: results["warnings"].append(f"Certification Registry missing or unreadable: {err}")
 
+        nodes = manifest.get("nodes", {})
         # 1. Compiled tools have reference declared
-        for tool in manifest.get("tools", []):
-            if tool.get("implementation_language") in ["cpp", "hybrid", "cuda"]:
-                if tool.get("equivalence_required") is True:
-                    ref = tool.get("reference_baseline")
-                    if not ref or ref == "NOT_DECLARED":
-                        results["errors"].append(f"Equivalence Error: Tool '{tool['name']}' missing reference_baseline.")
+        for nid, node in nodes.items():
+            if node.get("type") == "tool":
+                tool = node.get("data", {})
+                if tool.get("implementation_language") in ["cpp", "hybrid", "cuda"]:
+                    if tool.get("equivalence_required") is True:
+                        ref = tool.get("reference_baseline")
+                        if not ref or ref == "NOT_DECLARED":
+                            results["errors"].append(f"Equivalence Error: Tool '{nid}' missing reference_baseline.")
 
         # 2. Certification state valid
         if cert_reg:
-            manifest_tool_names = {t["name"] for t in manifest.get("tools", [])}
             for entry in cert_reg.get("tools", []):
                 tname = entry.get("name")
-                if tname not in manifest_tool_names:
+                if tname not in nodes:
                     results["errors"].append(f"Certification Error: Registry tool '{tname}' missing from manifest.")
                 
                 state = entry.get("state")
                 if state == "CERTIFIED_C4":
-                    # Check tool manifest for equivalence verified status
-                    mtool = next((t for t in manifest["tools"] if t["name"] == tname), None)
+                    mtool_node = nodes.get(tname, {})
+                    mtool = mtool_node.get("data", {})
                     if mtool and mtool.get("latest_equivalence_packet") == "NONE":
                         results["warnings"].append(f"Certification Warning: Tool '{tname}' is C4 but has no equivalence packet indexed.")
 

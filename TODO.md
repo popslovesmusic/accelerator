@@ -30,13 +30,14 @@ This document tracks the strategic objectives following the successful consolida
 ### 3. Governance Debt Reduction (In Progress)
 - [x] **Task 3.1: Auto-Narrative Integration**
     - [x] Integrate `generate_paper()` into `scripts/adversary_harness.py`.
-- [ ] **Task 3.2: Unified Manifest Migration**
+- [x] **Task 3.2: Unified Manifest Migration**
     - [x] Design graph-based schema in `registry/governance_manifest.json`.
     - [x] Implement migration script `scripts/db/migrate_to_unified_manifest.py`.
-    - [ ] Update `governance_gate.py` and `global_validate.py` to use the unified manifest.
-    - [ ] Archive legacy registries.
-- [ ] **Task 3.3: CI-Locking Hook**
-    - [ ] Implement automated hash verification for foundational documents.
+    - [x] Update `governance_gate.py` and `global_validate.py` to use the unified manifest.
+    - [x] Archive legacy registries.
+- [x] **Task 3.3: CI-Locking Hook**
+    - [x] Implement automated hash verification for foundational documents (`scripts/governance/enforce_locks.py`).
+    - [x] Integrate lock enforcement into `run_global_validation.bat`.
 
 ---
 **Standard ID:** MPF-ROADMAP-002

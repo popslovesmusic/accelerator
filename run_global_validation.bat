@@ -12,6 +12,14 @@ if exist %SETVARS% (
     echo [INFO] Loading Intel oneAPI environment...
     call %SETVARS% >nul 2>&1
 )
+
+echo [GOVERNANCE] Checking foundational locks...
+python %PROJECT_ROOT%\scripts\governance\enforce_locks.py
+if %errorlevel% neq 0 (
+    echo [CRITICAL] Core Lock Violation. Global validation aborted.
+    exit /b 1
+)
+
 python %PROJECT_ROOT%\scripts\global_validate.py --root %PROJECT_ROOT%
 
 if %errorlevel% neq 0 (
