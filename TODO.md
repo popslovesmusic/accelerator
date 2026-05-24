@@ -27,12 +27,16 @@ This document tracks the strategic objectives following the successful consolida
     - [x] Update Symbolic Trace (P027) with the $N_{crit}$ boundary.
     - [x] Re-promote Theorem V to Level C6 (Theorem) with formal scope limits.
 
-### 3. Scientific Validation: Procedural Gravity (Level C5)
-- [x] **Task 3.1: High-Rigor Gravity Re-run**
-    - [x] Use certified C++ engines and the Adversary Harness to re-run the 1/r^2 scaling campaign.
-    - [x] Satisfy the double-measurement mandate using TDA or Spectral analysis.
-- [x] **Task 3.2: Formal C5 Publication**
-    - [x] Draft and gate a C5-level paper on Procedural Gravity as an emergent Relational property.
+### 3. Governance Debt Reduction (In Progress)
+- [x] **Task 3.1: Auto-Narrative Integration**
+    - [x] Integrate `generate_paper()` into `scripts/adversary_harness.py`.
+- [ ] **Task 3.2: Unified Manifest Migration**
+    - [x] Design graph-based schema in `registry/governance_manifest.json`.
+    - [x] Implement migration script `scripts/db/migrate_to_unified_manifest.py`.
+    - [ ] Update `governance_gate.py` and `global_validate.py` to use the unified manifest.
+    - [ ] Archive legacy registries.
+- [ ] **Task 3.3: CI-Locking Hook**
+    - [ ] Implement automated hash verification for foundational documents.
 
 ---
 **Standard ID:** MPF-ROADMAP-002

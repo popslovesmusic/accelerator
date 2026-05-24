@@ -493,7 +493,67 @@ class GovernanceGate:
             return "L2"
         return "L1"
 
-    def _update_evidence_index(self, claim_id: str, run_paths: List[str], tools_used: List[str], seeds_used: int):
+    def _update_unified_manifest(self, claim_id: str, paper_path: str, metadata: Dict[str, Any], gate_result: str, final_level: str, tools_used: List[str]):
+        manifest_path = "registry/governance_manifest.json"
+        if not os.path.exists(manifest_path):
+            return {"updated": False, "reason": "manifest_not_found"}
+
+        try:
+            with open(manifest_path, 'r', encoding='utf-8') as f:
+                manifest = json.load(f)
+
+            nodes = manifest.get("nodes", {})
+            edges = manifest.get("edges", [])
+
+            # 1. Update/Add Claim Node
+            nodes[claim_id] = {
+                "type": "claim",
+                "status": final_level,
+                "data": {
+                    "paper_path": paper_path,
+                    "gate_result": gate_result,
+                    "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat()
+                }
+            }
+
+            # 2. Add Run Node (if available)
+            run_id = metadata.get("run_id") or os.path.basename(os.path.dirname(paper_path))
+            nodes[run_id] = {
+                "type": "run",
+                "status": "complete",
+                "data": {
+                    "path": os.path.dirname(paper_path),
+                    "tools": tools_used
+                }
+            }
+
+            # 3. Add Edges
+            # Claim -> Paper
+            edges.append({"source": claim_id, "target": paper_path, "relation": "documented_in"})
+            # Claim -> Run
+            edges.append({"source": claim_id, "target": run_id, "relation": "supported_by"})
+            # Run -> Tools
+            for tool in tools_used:
+                edges.append({"source": run_id, "target": tool, "relation": "executed_via"})
+
+            # Deduplicate edges
+            seen = set()
+            new_edges = []
+            for e in edges:
+                key = (e["source"], e["target"], e["relation"])
+                if key not in seen:
+                    new_edges.append(e)
+                    seen.add(key)
+            manifest["edges"] = new_edges
+
+            with open(manifest_path, 'w', encoding='utf-8') as f:
+                json.dump(manifest, f, indent=2)
+
+            return {"updated": True}
+        except Exception as e:
+            return {"updated": False, "reason": str(e)}
+
+    def _update_evidence_index(self, claim_id: str, output_paths: List[str], tools_used: List[str], seeds_used: int):
         """
         Append a minimal evidence index entry. Does not overwrite existing entries.
         """
@@ -1055,6 +1115,9 @@ class GovernanceGate:
 
         # Always update evidence index
         evidence_index_update = self._update_evidence_index(claim_id, output_paths, tools_used, seeds_used)
+
+        # Update Unified Manifest (Task 3.2: Relational Graph)
+        manifest_update = self._update_unified_manifest(claim_id, paper_path, metadata, gate_result, final_level, tools_used)
 
         # Update claim registry with gate outcome (non-destructive merge).
         claim_registry_update = {"updated": False, "reason": "not_attempted"}

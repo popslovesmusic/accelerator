@@ -1,0 +1,110 @@
+import json
+import os
+from pathlib import Path
+from datetime import datetime, UTC
+
+def migrate():
+    root = Path(".")
+    manifest_path = root / "registry/governance_manifest.json"
+    
+    # 1. Load Sources
+    registries = {
+        "tool": root / "registry/tool_manifest.json",
+        "math": root / "registry/math_registry.json",
+        "claim": root / "registry/claim_registry.json",
+        "evidence": root / "registry/evidence_index.json"
+    }
+    
+    data = {}
+    for key, path in registries.items():
+        if path.exists():
+            with open(path, 'r', encoding='utf-8-sig') as f:
+                data[key] = json.load(f)
+        else:
+            data[key] = {}
+
+    # 2. Initialize Unified Manifest
+    unified = {
+        "meta": {
+            "version": "1.0.0",
+            "generated_at": datetime.now(UTC).isoformat(),
+            "project": "Acellorator Foundational Math Program"
+        },
+        "nodes": {},
+        "edges": []
+    }
+
+    nodes = unified["nodes"]
+    edges = unified["edges"]
+
+    # 3. Migrate Tools
+    for tool in data["tool"].get("tools", []):
+        tid = tool["name"]
+        nodes[tid] = {
+            "type": "tool",
+            "status": tool.get("certification_level", "C0"),
+            "data": tool
+        }
+
+    # 4. Migrate Math (Theorems, Lemmas, Proofs)
+    math = data["math"]
+    for cat in ["theorems", "lemmas", "proofs"]:
+        for item in math.get(cat, []):
+            iid = item["item_id"]
+            nodes[iid] = {
+                "type": cat[:-1], # theorem, lemma, proof
+                "status": item.get("status", "draft"),
+                "data": item
+            }
+            # Extract internal math links
+            # (Note: math_registry uses dependencies_raw string, harder to parse perfectly here)
+            # But we can look at evidence_paths
+            for ep in item.get("evidence_paths", []):
+                # Check if EP matches a run_id in evidence_index
+                # Heuristic: results/YYYY-MM-DD_runNN_name
+                run_name = Path(ep).name
+                edges.append({"source": iid, "target": run_name, "relation": "verified_by"})
+
+    # 5. Migrate Evidence (Runs)
+    for run in data["evidence"]:
+        rid = run.get("run_id") or run.get("evidence_id")
+        if not rid: continue
+        
+        nodes[rid] = {
+            "type": "run",
+            "status": run.get("status", "complete"),
+            "data": run
+        }
+        # Links to tools
+        for tool in run.get("tools_used", []):
+            if tool in nodes:
+                edges.append({"source": rid, "target": tool, "relation": "executed_via"})
+
+    # 6. Migrate Claims
+    for claim in data["claim"].get("claims", []):
+        cid = claim["claim_id"]
+        nodes[cid] = {
+            "type": "claim",
+            "status": claim.get("status", "C1_defined"),
+            "data": claim
+        }
+        # Links to math items
+        # Heuristic: search paper content? No, look at item_id match in metadata if present
+        # For now, link to paper_path
+        if claim.get("paper_path"):
+            edges.append({"source": cid, "target": claim["paper_path"], "relation": "documented_in"})
+        
+        # Links to runs (evidence_paths)
+        for ep in claim.get("evidence_paths", []):
+            run_name = Path(ep).name
+            edges.append({"source": cid, "target": run_name, "relation": "supported_by"})
+
+    # 7. Save
+    with open(manifest_path, 'w', encoding='utf-8') as f:
+        json.dump(unified, f, indent=2)
+    
+    print(f"Migration complete. Governance manifest saved to {manifest_path}")
+    print(f"Nodes: {len(nodes)}, Edges: {len(edges)}")
+
+if __name__ == "__main__":
+    migrate()
