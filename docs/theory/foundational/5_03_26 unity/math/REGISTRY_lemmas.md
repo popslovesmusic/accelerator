@@ -38,3 +38,9 @@ L030 | Relational Array (v2) | L017 | simulated | Supersedes L027; verified via 
 L031 | Process Cycle Integrity (v3) | P017 | formally_proven | Supersedes L028; symbolic proof P017
 L032 | Geometric Projection (v3) | P018 | formally_proven | Supersedes L029; symbolic proof P018
 L033 | Relational Array (v3) | P019 | formally_proven | Supersedes L030; symbolic proof P019
+L068 | Recursive Mismatch Volume | L051 | provisional | Triadic interior as active arbitration regime
+L069 | Admissibility Occupancy Pressure | L060 | provisional | Reinforcement saturation narrowing freedom
+L070 | Arbitration Topology | L026, L069 | provisional | Organization of selection constraints
+L071 | Vacuum Fluctuation | L035 | provisional | Threshold crossing in background arbitration
+L072 | Gravitational Attenuation | L070 | provisional | Five-stage signal loss derivation
+L073 | Directional Imbalance | L042 | provisional | Operational surplus driving orientation
