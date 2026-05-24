@@ -44,3 +44,8 @@ L070 | Arbitration Topology | L026, L069 | provisional | Organization of selecti
 L071 | Vacuum Fluctuation | L035 | provisional | Threshold crossing in background arbitration
 L072 | Gravitational Attenuation | L070 | provisional | Five-stage signal loss derivation
 L073 | Directional Imbalance | L042 | provisional | Operational surplus driving orientation
+L074 | Phase Mismatch Pressure | L073 | provisional | Generative tension for interactions
+L075 | Interaction Thresholds | L074 | provisional | Organizational regimes of P_delta
+L076 | Triadic Confinement | L068, L075 | provisional | Mismatch coherence against dispersal
+L077 | Transport Channel Regime | L075 | provisional | Directional propagation (electromotive analog)
+L078 | Reciprocal Scale Coupling | L070, L076 | provisional | Coupling between confinement and gravity
