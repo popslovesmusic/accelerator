@@ -49,3 +49,6 @@ L075 | Interaction Thresholds | L074 | provisional | Organizational regimes of P
 L076 | Triadic Confinement | L068, L075 | provisional | Mismatch coherence against dispersal
 L077 | Transport Channel Regime | L075 | provisional | Directional propagation (electromotive analog)
 L078 | Reciprocal Scale Coupling | L070, L076 | provisional | Coupling between confinement and gravity
+L079 | Recursive Coupling Grammar | L031 | provisional | Operator family for active procedural modes
+L080 | Cross-Basin Projection | L079 | provisional | Scaling of micro-updates to macro-geometry
+L081 | Distinguishability Conservation | L074, L080 | provisional | Preservation of distinction density across scales
