@@ -18,6 +18,9 @@
 
 # 1. CERTIFICATION PURPOSE
 
+**NOTICE: INTERNAL GOVERNANCE LABEL**  
+The term "certification" in this project is used exclusively as an internal governance label designed for the Accellorator/Mono-Process validation environment. It does not represent formal certification by an accredited standards body, university, journal, laboratory, professional society, or independent scientific authority. Any certification tier assigned within the project should be understood as a self-defined procedural rigor classification, indicating the level of internal review, adversarial testing, traceability, and claim-governance applied by the author’s system. It should not be interpreted as external peer review, empirical validation, institutional endorsement, or proof of physical truth.
+
 This document certifies the operational rigor level, validation posture, governance architecture, and evidentiary handling standards of the Accellorator platform.
 
 This certification does **not** certify metaphysical truth, physical correctness, cosmological accuracy, or universal validity of any theoretical interpretation produced within the platform.
