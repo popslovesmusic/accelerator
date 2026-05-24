@@ -116,82 +116,63 @@ def parse_markdown_item(file_path):
 
 def main():
     root = Path("docs/theory/foundational/5_03_26 unity/math")
-    registry_path = Path("registry/math_registry.json")
+    manifest_path = Path("registry/governance_manifest.json")
     
-    with open(registry_path, 'r', encoding='utf-8') as f:
-        registry = json.load(f)
+    if not manifest_path.exists():
+        print(f"Error: Manifest not found at {manifest_path}")
+        return
 
-    # Helper to find existing item for merging
-    def find_existing(item_id, category):
-        for item in registry.get(category, []):
-            if item['item_id'] == item_id:
-                return item
-        return None
+    with open(manifest_path, 'r', encoding='utf-8') as f:
+        manifest = json.load(f)
 
-    # Process Theorems
-    theorems_dir = root / "theorems"
-    theorems = []
-    if theorems_dir.exists():
-        for f in theorems_dir.glob("T*.md"):
+    nodes = manifest.get("nodes", {})
+    edges = manifest.get("edges", [])
+
+    # Process categories
+    categories = {
+        "theorems": ("theorems", "T*.md"),
+        "lemmas": ("lemmas", "L*.md"),
+        "proofs": ("proofs", "P*.md")
+    }
+
+    for type_name, (folder, pattern) in categories.items():
+        folder_path = root / folder
+        if not folder_path.exists(): continue
+        
+        for f in folder_path.glob(pattern):
+            if f.name in ["LEMMA_TEMPLATE.md", "PROOF_TEMPLATE.md"]: continue
+            
             item = parse_markdown_item(f)
-            if item:
-                existing = find_existing(item['item_id'], 'theorems')
-                if existing:
-                    if not item['evidence_paths'] and 'evidence_paths' in existing:
-                        item['evidence_paths'] = existing['evidence_paths']
-                    if item['status'] == "draft" and existing['status'] != "draft":
-                        item['status'] = existing['status']
-                theorems.append(item)
-
-    # Process Lemmas
-    lemmas_dir = root / "lemmas"
-    lemmas = []
-    for f in lemmas_dir.glob("L*.md"):
-        if f.name == "LEMMA_TEMPLATE.md": continue
-        item = parse_markdown_item(f)
-        if item:
-            existing = find_existing(item['item_id'], 'lemmas')
-            if existing:
-                # Merge: prefer file content, but keep evidence_paths if file is empty
-                if not item['evidence_paths'] and 'evidence_paths' in existing:
-                    item['evidence_paths'] = existing['evidence_paths']
+            if not item: continue
+            
+            iid = item["item_id"]
+            node_type = type_name[:-1] # theorem, lemma, proof
+            
+            # Update Node
+            nodes[iid] = {
+                "type": node_type,
+                "status": item.get("status", "draft"),
+                "data": item
+            }
+            
+            # Update Edges (verified_by)
+            for ep in item.get("evidence_paths", []):
+                run_name = Path(ep).parent.name if "paper.md" in ep else Path(ep).name
+                if run_name == "data": run_name = Path(ep).parent.name
                 
-                # Trust registry status if it's been upgraded and we have evidence
-                if item['status'] == "draft" and existing['status'] != "draft":
-                    if item['evidence_paths'] or existing.get('evidence_paths'):
-                        item['status'] = existing['status']
-            lemmas.append(item)
+                # Check for existing verified_by edge
+                new_edge = {"source": iid, "target": run_name, "relation": "verified_by"}
+                if new_edge not in edges:
+                    edges.append(new_edge)
+
+    manifest["nodes"] = nodes
+    manifest["edges"] = edges
+
+    with open(manifest_path, 'w', encoding='utf-8') as f:
+        json.dump(manifest, f, indent=2)
     
-    # Process Proofs
-    proofs_dir = root / "proofs"
-    proofs = []
-    for f in proofs_dir.glob("P*.md"):
-        if f.name == "PROOF_TEMPLATE.md": continue
-        item = parse_markdown_item(f)
-        if item:
-            existing = find_existing(item['item_id'], 'proofs')
-            if existing:
-                if not item['evidence_paths'] and 'evidence_paths' in existing:
-                    item['evidence_paths'] = existing['evidence_paths']
-                
-                if item['status'] == "draft" and existing['status'] != "draft":
-                    if item['evidence_paths'] or existing.get('evidence_paths'):
-                        item['status'] = existing['status']
-            proofs.append(item)
-
-    # Simple sort by ID
-    theorems.sort(key=lambda x: x['item_id'])
-    lemmas.sort(key=lambda x: x['item_id'])
-    proofs.sort(key=lambda x: x['item_id'])
-
-    registry['theorems'] = theorems
-    registry['lemmas'] = lemmas
-    registry['proofs'] = proofs
-
-    with open(registry_path, 'w', encoding='utf-8') as f:
-        json.dump(registry, f, indent=2)
-    
-    print(f"Sync complete. Registered {len(theorems)} theorems, {len(lemmas)} lemmas, and {len(proofs)} proofs.")
+    math_count = len([n for n in nodes.values() if n.get("type") in ["theorem", "lemma", "proof"]])
+    print(f"Sync complete. Registered {math_count} mathematical items in the unified manifest.")
 
 if __name__ == "__main__":
     main()
