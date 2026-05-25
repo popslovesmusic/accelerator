@@ -50,8 +50,10 @@ In the Codex, the universe is understood as recursively stabilized continuation 
 ## 5. Status
 - **Claim ID:** THEOREM-003
 - **Status:** formally_proven
-- **Proof Type:** symbolic
-- **Verification:** [THRESHOLD-004](../../../../../../results/2026-05-21_run05_Relational_Reach_Validation/paper.md) (Simulated Reach)
+- **Proof Type:** symbolic_trace
+- **Rigor Level:** C6
+- **Proof Trace:** [P030 — T003 Symbolic Trace](../proofs/P030_T003_symbolic_trace.md)
+- **Verification:** [THRESHOLD-004](../../../../../../results/2026-05-21_run05_Relational_Reach_Validation/paper.md) (C5 Evidence), [L078-STRESS-C5](../../../../../../results/2026-05-24_campaign_interaction_hierarchy_falsification/metrics.json)
 
 ## 5. Supersedes / Superseded-by
 - **Supersedes:** L008, L009, L010, L018, L019, L020, L034.
