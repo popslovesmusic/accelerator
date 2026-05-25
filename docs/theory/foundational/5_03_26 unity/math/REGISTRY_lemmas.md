@@ -54,3 +54,5 @@ L080 | Cross-Basin Projection | L079 | provisional | Scaling of micro-updates to
 L081 | Distinguishability Conservation | L074, L080 | provisional | Preservation of distinction density across scales
 L082 | Operator Precedence | L079 | provisional | Execution hierarchy for recursive cycle
 L083 | Operator Composition Axioms | L082 | provisional | Algebraic rules for valid composition and idempotence
+L084 | Orientation-Driven Ordering | L079 | provisional | Universal time replaced by procedural ordering (prec)
+L085 | Elimination of Primitive Time | L084 | provisional | Time as secondary projection of orientation array I
