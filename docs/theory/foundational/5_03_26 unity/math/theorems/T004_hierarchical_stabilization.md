@@ -51,8 +51,10 @@ In the Codex, the universe is a fractal hierarchy of nested stabilization. There
 ## 5. Status
 - **Claim ID:** THEOREM-004
 - **Status:** formally_proven
-- **Proof Type:** symbolic
-- **Verification:** [PERSISTENCE-001](../../../../../../results/2026-05-21_run06_Global_Persistence_Scaling/paper.md) (Scaling Symmetry)
+- **Proof Type:** symbolic_trace
+- **Rigor Level:** C6
+- **Proof Trace:** [P031 — T004 Symbolic Trace](../proofs/P031_T004_symbolic_trace.md)
+- **Verification:** [PERSISTENCE-001](../../../../../../results/2026-05-21_run06_Global_Persistence_Scaling/paper.md) (Scaling Symmetry), [L078-STRESS-C5](../../../../../../results/2026-05-24_campaign_interaction_hierarchy_falsification/metrics.json)
 
 ## 5. Supersedes / Superseded-by
 - **Supersedes:** L050.
