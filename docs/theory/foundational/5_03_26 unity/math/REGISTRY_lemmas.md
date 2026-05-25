@@ -52,3 +52,5 @@ L078 | Reciprocal Scale Coupling | L070, L076 | provisional | Coupling between c
 L079 | Recursive Coupling Grammar | L031 | provisional | Operator family for active procedural modes
 L080 | Cross-Basin Projection | L079 | provisional | Scaling of micro-updates to macro-geometry
 L081 | Distinguishability Conservation | L074, L080 | provisional | Preservation of distinction density across scales
+L082 | Operator Precedence | L079 | provisional | Execution hierarchy for recursive cycle
+L083 | Operator Composition Axioms | L082 | provisional | Algebraic rules for valid composition and idempotence
