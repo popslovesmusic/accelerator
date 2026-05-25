@@ -1,0 +1,179 @@
+{
+  "policy_id": "MPF_MULTI_SEED_INVARIANCE_HARD_RULE_V1",
+  "status": "ACTIVE",
+  "classification": "hard_governance_constraint",
+  "scope": [
+    "all simulation campaigns",
+    "all falsification campaigns",
+    "all rigor endorsement evaluations",
+    "all theorem-supporting empirical analog runs",
+    "all publication-bound evidence claims"
+  ],
+  "purpose": "Prevent single-seed artifacts, accidental synchronization bias, and false stabilization claims from being interpreted as mechanism support.",
+  "core_rule": {
+    "name": "multi_seed_invariance_required",
+    "statement": "No stabilization, emergence, persistence, projection, or mechanism-support claim may receive rigor endorsement unless invariance is demonstrated across multiple independent randomized seeds.",
+    "hard_fail_condition": "Any claim supported solely by single-seed execution is automatically downgraded to exploratory or anecdotal status."
+  },
+  "minimum_seed_requirements": {
+    "L0_exploratory": {
+      "min_seeds": 1,
+      "allowed_use": [
+        "debugging",
+        "visual inspection",
+        "operator tuning",
+        "early exploratory behavior"
+      ],
+      "forbidden_use": [
+        "rigor endorsement",
+        "publication support",
+        "mechanism independence claims",
+        "stabilization claims"
+      ]
+    },
+    "L1_structural": {
+      "min_seeds": 5,
+      "required": [
+        "basic variance reporting"
+      ]
+    },
+    "L2_supported": {
+      "min_seeds": 25,
+      "required": [
+        "mean/stdev",
+        "failure rate",
+        "collapse rate"
+      ]
+    },
+    "L3_strong_support": {
+      "min_seeds": 100,
+      "required": [
+        "distribution analysis",
+        "parameter perturbation",
+        "seed robustness"
+      ]
+    },
+    "L4_mechanism_independent": {
+      "min_seeds": 200,
+      "required": [
+        "cross-engine reproduction",
+        "cross-topology reproduction",
+        "adversarial perturbation",
+        "null controls",
+        "shuffle controls"
+      ]
+    },
+    "L5_rigor_endorsed": {
+      "min_seeds": 500,
+      "required": [
+        "multi-engine agreement",
+        "statistical confidence intervals",
+        "effect-size reporting",
+        "collapse-boundary analysis",
+        "parameter sweep invariance",
+        "symmetry-fracture attacks",
+        "transport randomization attacks"
+      ]
+    }
+  },
+  "mandatory_reporting": {
+    "required_metrics": [
+      "seed_count",
+      "successful_runs",
+      "collapse_runs",
+      "variance",
+      "confidence_interval",
+      "mean_behavior",
+      "max_deviation",
+      "parameter_sensitivity"
+    ],
+    "required_disclosures": [
+      "all failed seeds must be reported",
+      "discarded runs prohibited",
+      "manual cherry-picking prohibited",
+      "seed selection criteria must be logged"
+    ]
+  },
+  "required_falsification_vectors": {
+    "FV_1_zero_mismatch": {
+      "required": true,
+      "purpose": "verify collapse under null distinguishability"
+    },
+    "FV_2_seed_variance": {
+      "required": true,
+      "purpose": "verify stabilization invariance across randomized initial conditions"
+    },
+    "FV_3_symmetry_forcing": {
+      "required": true,
+      "purpose": "test asymmetry necessity"
+    },
+    "FV_4_transport_shuffle": {
+      "required": true,
+      "purpose": "test NavT dependence"
+    },
+    "FV_5_admissibility_narrowing": {
+      "required": true,
+      "purpose": "test continuation collapse boundaries"
+    }
+  },
+  "hard_prohibitions": {
+    "forbidden_claims": [
+      "single-seed stabilization proves mechanism",
+      "single-run emergence demonstrates ontology",
+      "single-engine confirmation establishes rigor",
+      "visual coherence alone implies support"
+    ],
+    "automatic_downgrades": [
+      {
+        "condition": "seed_count < required_threshold",
+        "action": "downgrade_to_exploratory"
+      },
+      {
+        "condition": "variance_not_reported",
+        "action": "rigor_fail"
+      },
+      {
+        "condition": "failed_seeds_hidden",
+        "action": "governance_violation"
+      }
+    ]
+  },
+  "cross_engine_requirements": {
+    "mechanism_independence_definition": "Observed behavior must persist across distinct implementation classes rather than implementation-specific numerical artifacts.",
+    "minimum_engine_classes": 2,
+    "preferred_classes": [
+      "graph_dynamics",
+      "pde",
+      "stochastic",
+      "topological",
+      "agent_based"
+    ]
+  },
+  "registry_requirements": {
+    "all_runs_must_record": [
+      "seed",
+      "config_hash",
+      "engine_version",
+      "operator_registry_snapshot",
+      "parameter_vector",
+      "collapse_state",
+      "output_hash"
+    ]
+  },
+  "publication_language_guard": {
+    "required_language": [
+      "Within these models",
+      "under tested parameters",
+      "across the tested seed ensemble"
+    ],
+    "forbidden_language": [
+      "proved",
+      "confirmed universally",
+      "established physical truth",
+      "demonstrated reality"
+    ]
+  },
+  "governance_principle": {
+    "statement": "Persistence must survive variation. Any phenomenon dependent on a privileged seed is classified as accidental organization rather than supported recursive stabilization."
+  }
+}

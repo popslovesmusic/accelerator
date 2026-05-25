@@ -734,7 +734,47 @@
   },
 
   "governance_enforcement_v2": {
+    "policy_reference": "registry/governance/MPF_MULTI_SEED_INVARIANCE_HARD_RULE_V1.json",
     "claim_level_mandates": {
+      "L0_exploratory": {
+        "min_seeds": 1,
+        "max_claim_level": "C2",
+        "intent": "explore",
+        "allowed_use": ["debugging", "visual_inspection"]
+      },
+      "L1_structural": {
+        "min_seeds": 5,
+        "max_claim_level": "C3",
+        "required_metrics": ["basic_variance"]
+      },
+      "L2_supported": {
+        "min_seeds": 25,
+        "max_claim_level": "C4",
+        "required_falsification_vectors": ["FV-1", "FV-2"],
+        "required_metrics": ["mean", "stdev", "failure_rate"]
+      },
+      "L3_strong_support": {
+        "min_seeds": 100,
+        "max_claim_level": "C4",
+        "required_falsification_vectors": ["FV-1", "FV-2", "FV-3"],
+        "required_metrics": ["distribution_analysis", "parameter_perturbation"]
+      },
+      "L4_mechanism_independent": {
+        "min_seeds": 200,
+        "max_claim_level": "C5",
+        "min_independent_mechanisms": 2,
+        "required_falsification_vectors": ["FV-1", "FV-2", "FV-3", "FV-4"],
+        "required_metrics": ["cross_engine_reproduction"]
+      },
+      "L5_rigor_endorsed": {
+        "min_seeds": 500,
+        "max_claim_level": "C6",
+        "min_independent_mechanisms": 2,
+        "required_falsification_vectors": ["FV-1", "FV-2", "FV-3", "FV-4", "FV-5"],
+        "required_metrics": ["statistical_confidence", "parameter_sweep_invariance"]
+      }
+    },
+    "legacy_claim_level_mandates_backup": {
       "C4": {
         "min_independent_measurements": 1,
         "required_falsification_vectors": ["FV-1", "FV-2"],

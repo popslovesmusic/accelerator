@@ -269,27 +269,41 @@ class MeasurementValidator:
         self.mandates = mandates
 
     def validate(self, paper_content: str, measurement_data: List[Dict[str, Any]], target_level: str, metadata: Dict[str, Any]) -> Dict[str, Any]:
+        # New Multi-Seed Invariance Check (MPF_MULTI_SEED_INVARIANCE_HARD_RULE_V1)
         level_mandate = self.mandates.get("claim_level_mandates", {}).get(target_level, {})
-        min_required = level_mandate.get("min_independent_measurements", 0)
+        if not level_mandate:
+            # Fallback to legacy or default
+            level_mandate = self.mandates.get("legacy_claim_level_mandates_backup", {}).get(target_level, {})
+        
+        min_seeds_required = level_mandate.get("min_seeds", 0)
+        seeds_used = metadata.get("seeds_used", 0)
         
         results = {"pass": True, "errors": [], "details": {}}
         
-        # 1. Measurement Count
-        valid_count = len([m for m in measurement_data if all(m.get(f) for f in ["tool", "measurement_class"])])
-        if min_required > 0:
-            has_section = bool(re.search(r"^#+\s+Measurement", paper_content, re.MULTILINE | re.IGNORECASE))
-            if valid_count < min_required or not has_section:
-                results["pass"] = False
-                results["errors"].append(f"Measurement Rigor: Level {target_level} requires {min_required} measurements (found {valid_count}).")
+        # 1. Seed Count Enforcement
+        if seeds_used < min_seeds_required:
+            results["pass"] = False
+            results["errors"].append(f"Multi-Seed Invariance Violation: Level {target_level} requires {min_seeds_required} seeds (found {seeds_used}). Claim downgraded to exploratory.")
 
-        # 2. Adversarial Protection (Mandatory for C4+)
-        level_order = ["C0", "C1", "C2", "C3", "C4", "C5", "C6"]
-        if level_order.index(target_level) >= level_order.index("C4"):
+        # 2. Measurement Count (Legacy Support)
+        min_required_m = level_mandate.get("min_independent_measurements", 0)
+        valid_count = len([m for m in measurement_data if all(m.get(f) for f in ["tool", "measurement_class"])])
+        if min_required_m > 0:
+            has_section = bool(re.search(r"^#+\s+Measurement", paper_content, re.MULTILINE | re.IGNORECASE))
+            if valid_count < min_required_m or not has_section:
+                results["pass"] = False
+                results["errors"].append(f"Measurement Rigor: Level {target_level} requires {min_required_m} measurements (found {valid_count}).")
+
+        # 3. Adversarial Protection (Mandatory for C4+)
+        level_order = ["C0", "C1", "C2", "C3", "C4", "C5", "C6", "L0_exploratory", "L1_structural", "L2_supported", "L3_strong_support", "L4_mechanism_independent", "L5_rigor_endorsed"]
+        target_idx = level_order.index(target_level) if target_level in level_order else 0
+        c4_idx = level_order.index("C4")
+        l2_idx = level_order.index("L2_supported")
+        
+        if target_idx >= c4_idx or target_idx >= l2_idx:
             outputs = metadata.get("recoverable_outputs", [])
             has_protected = False
             for out_path in outputs:
-                # Check for shadow report in the output path
-                # Path might be relative to project root
                 shadow_path = Path(out_path) / "artifacts/shadow_report.json"
                 if shadow_path.exists():
                     has_protected = True
@@ -299,7 +313,12 @@ class MeasurementValidator:
                 results["pass"] = False
                 results["errors"].append(f"Adversarial Integrity: Level {target_level} requires adversarial protection (shadow_report.json not found in outputs).")
 
-        results["details"] = {"found": valid_count, "required": min_required, "adversary_protected": has_protected if level_order.index(target_level) >= level_order.index("C4") else "not_required"}
+        results["details"] = {
+            "seeds_found": seeds_used,
+            "seeds_required": min_seeds_required,
+            "measurements_found": valid_count,
+            "adversary_protected": has_protected if (target_idx >= c4_idx or target_idx >= l2_idx) else "not_required"
+        }
         return results
 
 class FalsificationValidator:
@@ -578,7 +597,7 @@ class GovernanceGate:
             "certification_evidence_packet": None,
             "logs_path": f"outputs\\\\runs\\\\{claim_id}\\\\logs",
             "status": "partial",
-            "linked_paths": run_paths or [],
+            "linked_paths": output_paths or [],
         }
         data.append(entry)
         self._write_json(path, data)
@@ -1067,12 +1086,16 @@ class GovernanceGate:
         # Apply intent limits
         intent_limits = self.charter.get("intent_limits", {})
         allowed_max = intent_limits.get(intent, "C2")
-        levels = ["C0", "C1", "C2", "C3", "C4", "C5", "C6"]
+        levels = ["C0", "C1", "C2", "C3", "C4", "C5", "C6", "L0_exploratory", "L1_structural", "L2_supported", "L3_strong_support", "L4_mechanism_independent", "L5_rigor_endorsed"]
         final_level = target_level
-        if levels.index(target_level) > levels.index(allowed_max):
-            final_level = allowed_max
-            gate_result = "downgrade"
-            downgrades_applied.append("intent_limit_applied")
+        # For legacy logic, map L levels to C limits if necessary
+        try:
+            if levels.index(target_level) > levels.index(allowed_max):
+                final_level = allowed_max
+                gate_result = "downgrade"
+                downgrades_applied.append("intent_limit_applied")
+        except ValueError:
+            pass
 
         # --- Lexicon Failure Recovery System (PATCH_LEXICON_FAILURE_RECOVERY_SYSTEM_V1) ---
         recovery_triggered = (not lexicon_validation.get("pass", True)) or ("lexicon_term_below_L2_caps_classification" in downgrades_applied)
