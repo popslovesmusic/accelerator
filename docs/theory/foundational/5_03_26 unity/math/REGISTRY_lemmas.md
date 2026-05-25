@@ -56,3 +56,9 @@ L082 | Operator Precedence | L079 | provisional | Execution hierarchy for recurs
 L083 | Operator Composition Axioms | L082 | provisional | Algebraic rules for valid composition and idempotence
 L084 | Orientation-Driven Ordering | L079 | provisional | Universal time replaced by procedural ordering (prec)
 L085 | Elimination of Primitive Time | L084 | provisional | Time as secondary projection of orientation array I
+L086 | Inertia of Stabilized Identity | L068 | provisional | Mass analog as resistance to reference shift
+L087 | Conserved Action Potential | L074, L081 | provisional | Energy analog as conserved mismatch budget
+L088 | Quantization of Orientation Braids | L068, L084 | provisional | Spin and Charge analogs as discrete closure modes
+L089 | Dimensionality of Accessibility | L068, L080 | provisional | 3D analog as triadic closure projection
+L090 | Entanglement as Shared Residue | L084, L081 | provisional | Correlation through common constraint resolution
+L091 | Universal Boundary Invariants | L072, L085 | provisional | c, h, G analogs as invariant continuation limits
