@@ -62,7 +62,7 @@ All tested seeds passed with a 1.0 reference equivalence preservation rate, conf
 Internal consistency within the CA mechanism class is confirmed. Cross-model validation with the Graph Dynamics reference implementation is scheduled for the next phase of MSV-001.
 
 ## 12. Falsification
-Falsification vectors FV-1 through FV-4 were executed; the system correctly identified and rejected non-admissible patterns, as required by the L3 certification standard.
+Falsification vectors FV-1 through FV-4 were executed; the system correctly identified and rejected non-admissible patterns, as required by the L3 rigor endorsement standard.
 
 ## 13. Classification
 Supported (L3).

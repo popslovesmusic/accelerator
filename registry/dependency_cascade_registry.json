@@ -55,7 +55,7 @@
         "PCD-CLM-001",
         "PCD-CLM-002"
       ],
-      "trigger_condition": "certification_level drops below C4",
+      "trigger_condition": "rigor endorsement_level drops below C4",
       "cascade_action": "remove_C4_support_and_downgrade_claims",
       "severity": "DOWNGRADE",
       "review_required": true
@@ -152,6 +152,24 @@
       "trigger_condition": "promotion_gate_fail_or_inconclusive",
       "cascade_action": "retain_or_downgrade_dependent_claims",
       "severity": "BLOCK_OR_DOWNGRADE",
+      "review_required": true
+    },
+    {
+      "dependency_id": "CASCADE-CORE-DERIVATION-TREE",
+      "source_object": "PCD_CORE_DERIVATION_TREE",
+      "dependent_objects": [
+        "DERIV-ROOT",
+        "DERIV-001",
+        "DERIV-002",
+        "DERIV-003",
+        "DERIV-004",
+        "DERIV-005",
+        "DERIV-006",
+        "DERIV-007"
+      ],
+      "trigger_condition": "Any node in the core derivation tree fails algebraic survival check or invariant violation detected",
+      "cascade_action": "global_lock_and_downgrade_all_claims_to_provisional",
+      "severity": "CRITICAL",
       "review_required": true
     }
   ]

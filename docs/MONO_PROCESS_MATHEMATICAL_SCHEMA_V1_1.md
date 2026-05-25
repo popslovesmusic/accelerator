@@ -6,7 +6,7 @@
 ## 0. METADATA AND SCOPE GUARDRAILS
 - **ID:** MPF-MATH-SCHEMA-2026-05-24-V1.1
 - **Status:** DRAFT / PROPOSED SSOT
-- **Compliance:** Charter-aligned draft; certification pending registry verification.
+- **Compliance:** Charter-aligned draft; rigor endorsement pending registry verification.
 - **Physics Scope:** Analogy-layer projection only.
 - **Forbidden Claims:** No claim of QM/GR unification; no claim of new physical laws; no treatment of analogs as physical forces.
 

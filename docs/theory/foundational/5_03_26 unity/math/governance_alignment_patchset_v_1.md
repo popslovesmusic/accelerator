@@ -6,7 +6,7 @@ This patchset aligns the newly integrated mathematical governance program with t
 
 - claim gate architecture,
 - lexicon governance,
-- simulation certification,
+- simulation rigor endorsement,
 - provenance system,
 - publication controls,
 - and mechanism-independence philosophy.
@@ -285,7 +285,7 @@ Contains:
 
 ### Layer 2 — Simulation Governance
 Contains:
-- tool certification,
+- tool rigor endorsement,
 - falsification,
 - cross-model validation,
 - numerical stability.

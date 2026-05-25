@@ -1,7 +1,7 @@
 # Failure-First Equivalence Protocols (MPF-ACELL-EQUIV-005)
 
 ## 1. Purpose
-Mandate the preservation and indexing of failed implementation-equivalence runs as first-class evidence. These failures define the boundaries of implementation robustness and provide critical information for drift detection and certification gating.
+Mandate the preservation and indexing of failed implementation-equivalence runs as first-class evidence. These failures define the boundaries of implementation robustness and provide critical information for drift detection and rigor endorsement gating.
 
 ## 2. Failure Classes
 The following failure types must be recorded and indexed:
@@ -16,7 +16,7 @@ The following failure types must be recorded and indexed:
 1. **Detect**: Implementation divergence detected during equivalence campaign.
 2. **Archive**: Full output data, config, and binary hashes of the failed run archived in `outputs/audits/equivalence/failures/`.
 3. **Index**: Record the failure in `registry/equivalence_failure_registry.json`.
-4. **Govern**: Failure blocks certification upgrade to C4 until a mitigation or tolerance update is formally approved.
+4. **Govern**: Failure blocks rigor endorsement upgrade to C4 until a mitigation or tolerance update is formally approved.
 
 ## 4. Governance Boilerplate
 - **Source Relation**: (E≠0) ⇔R δ(E>0)

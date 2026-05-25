@@ -14,7 +14,7 @@ See `schema.sql` for table definitions.
 
 - `artifacts`: Filesystem index with orientation metadata.
 - `audit_reports`: Registry of generated system audits.
-- `tool_health`: Snapshots of tool certification and runtime status.
+- `tool_health`: Snapshots of tool rigor endorsement and runtime status.
 - `registry_snapshots`: Metadata about point-in-time registry states.
 - `claim_evidence_links`: Mapping between claims and their supporting evidence artifacts.
 - `supersession_edges`: Explicit tracking of which artifacts supersede others.
@@ -54,7 +54,7 @@ python scripts/db/ingest_reports.py
 
 ### Tool Health Extraction
 
-Tool certification and status summaries are extracted from reports via:
+Tool rigor endorsement and status summaries are extracted from reports via:
 
 ```bash
 python scripts/db/ingest_tool_health.py

@@ -1,0 +1,66 @@
+{
+  "campaign_id": "MPF_FINAL_ANALOG_SIM_VALIDATION_C5",
+  "status": "initialized",
+  "mission": "Execute cross-mechanism simulation validation for the newly inducted physical analogs to satisfy Level C5 (Mechanism Independent) requirements.",
+  "target_analogs": [
+    "L086: Mass/Inertia (Relational Inertia)",
+    "L087: Energy (Conserved Mismatch Budget)",
+    "L088: Spin/Charge (Braid Quantization)",
+    "L089: Dimensionality (3D Accessibility)",
+    "L090: Entanglement (Shared Residue)",
+    "L091: Constants (c, h, G Analogs)"
+  ],
+  "verification_strategy": {
+    "step_1_mass_inertia": {
+      "tool": "structural_box_sim_cpp",
+      "test": "Apply P_delta perturbation to stabilized triadic locks of varying residue density.",
+      "metric": "resistance_coefficient_m",
+      "expected": "m scales linearly with rho * Omega."
+    },
+    "step_2_energy_conservation": {
+      "tool": "dase_analog_sim_cpp",
+      "test": "Monitor global H_app scalar during regime transitions (e.g., transformation to confinement).",
+      "metric": "H_app_variance",
+      "expected": "Delta H_app < epsilon_precision across closed basins."
+    },
+    "step_3_braid_quantization": {
+      "tool": "signal_scope_phase_continuation_engine",
+      "test": "Initialize orientation cycles and filter for admissible closure signatures.",
+      "metric": "closure_signature_m",
+      "expected": "Only discrete integer/half-integer analogs satisfy FixedPoint(Psi)."
+    },
+    "step_4_dimensionality_rank": {
+      "tool": "tda_module_v2_cpp",
+      "test": "Perform rank analysis on the independent closure-constraint set of stabilized knots.",
+      "metric": "rank(C_K)",
+      "expected": "rank=3 for stable triadic volumes projecting 3D accessibility."
+    },
+    "step_5_shared_residue_entanglement": {
+      "tool": "agent_based_sim_v1_cpp",
+      "test": "Execute arbitration at locus alpha and monitor admissibility updates at locus beta with shared manifold.",
+      "metric": "correlation_lag_prec",
+      "expected": "Instantaneous update in beta's admissibility set under ordering prec."
+    },
+    "step_6_boundary_invariants": {
+      "tool": "mc_ensemble_sim_v1_cpp",
+      "test": "Parameter sweep across multiple seeds to identify upper propagation bounds and signal loss constants.",
+      "metric": "c_app, h_app, G_app",
+      "expected": "Invariance of limits across independent mechanism classes."
+    }
+  },
+  "mechanism_classes": [
+    "field_substrate",
+    "agent_based",
+    "pde_confinement",
+    "topology_analyzer",
+    "stochastic_ensemble"
+  ],
+  "claim_gate": {
+    "rigor_endorsement_level": "C5",
+    "requirements": [
+      "cross_mechanism_agreement < 15%",
+      "falsification_vector_survival_all",
+      "zero_mismatch_annihilation_verified"
+    ]
+  }
+}

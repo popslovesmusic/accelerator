@@ -1,6 +1,6 @@
 # Acellorator: Features & Safeguards (Project Narrative)
 
-This repository is not "one simulator"; it is a **governed research workspace** designed to run, compare, and constrain simulation-based exploration of **"THE LAW OF THE ONE PROCESS"** across multiple independent mechanism classes. The project's center of gravity is **workflow governance**: terminology control, evidence provenance, tool certification, and claim-strength gating.
+This repository is not "one simulator"; it is a **governed research workspace** designed to run, compare, and constrain simulation-based exploration of **"THE LAW OF THE ONE PROCESS"** across multiple independent mechanism classes. The project's center of gravity is **workflow governance**: terminology control, evidence provenance, tool rigor endorsement, and claim-strength gating.
 
 The rest of this narrative describes (1) what the project *does* (features) and (2) what it is engineered to *prevent* (safeguards).
 
@@ -17,10 +17,10 @@ The `tools/` directory is an ecosystem of simulation and analysis tools spanning
 
 The tool inventory and interfaces are centralized in:
 
-- `registry/tool_manifest.json` (tool list, entry points, CLI templates, mechanism class, declared certification status)
+- `registry/tool_manifest.json` (tool list, entry points, CLI templates, mechanism class, declared rigor endorsement status)
 - `registry/tool_index.json` and `registry/validation_index.json` (indexing / validation metadata)
 
-Each tool typically contains a `validation/` directory with an explicit `certification_manifest.json` describing observables, controls, known limits, and the scientific-validity checklist (implementation verification, numerical stability, reproducibility, cross-model checks, falsification, UQ, provenance).
+Each tool typically contains a `validation/` directory with an explicit `rigor endorsement_manifest.json` describing observables, controls, known limits, and the scientific-validity checklist (implementation verification, numerical stability, reproducibility, cross-model checks, falsification, UQ, provenance).
 
 ### 1.2 Standardized, config-driven execution (reproducible runs)
 
@@ -114,13 +114,13 @@ And the falsification requirement is specified in:
 
 - `registry/falsification_standard_v1_0.json` (four-vector falsification standard, FV-1..FV-4)
 
-Practical effect: high-level claim strength is not “negotiated”; it is **computed** from tool certification, evidence artifacts, and governance rules.
+Practical effect: high-level claim strength is not “negotiated”; it is **computed** from tool rigor endorsement, evidence artifacts, and governance rules.
 
-### 2.4 Tool certification manifests (explicit scientific-validity checklist)
+### 2.4 Tool rigor endorsement manifests (explicit scientific-validity checklist)
 
-Each tool’s `validation/certification_manifest.json` is a compact “safety contract” for research use. It typically records:
+Each tool’s `validation/rigor endorsement_manifest.json` is a compact “safety contract” for research use. It typically records:
 
-- declared certification level (C0–C4)
+- declared rigor endorsement level (C0–C4)
 - validated observables
 - known controls and known limits
 - required metadata fields (seed, config hash, backend, precision, timestamp, source commit)
@@ -161,7 +161,7 @@ If your goal is to understand capabilities and constraints quickly:
 2) Skim `docs/reports/TOOL_SCIENTIFIC_RIGOR_REPORT_2026-04-30.md` to see which tools are considered claim-ready and why.  
 3) Open `registry/tool_manifest.json` to see the actual execution interface and declared mechanism classes.  
 4) Open `scripts/governance_gate.py` to see which checks are enforced at validation time.  
-5) Inspect a tool’s `validation/certification_manifest.json` to see its current scientific-validity posture and known limits.  
+5) Inspect a tool’s `validation/rigor endorsement_manifest.json` to see its current scientific-validity posture and known limits.  
 
 ---
 

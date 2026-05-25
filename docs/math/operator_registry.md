@@ -37,8 +37,9 @@ This registry provides the formal algebraic definitions for the major operators 
 ### 3.5 Cross-Basin Projection ($\Leftrightarrow_{xb}$)
 - **Domain:** $\sum \delta_{a,i}(\mathcal{E} > 0)$ (Micro-update density)
 - **Codomain:** $\mathcal{M}_{coarse}$ (Macro-relational topology)
-- **Closure:** Update density exceeds the structural scale threshold $\tau$.
-- **Collapse Mode:** **Projection Failure**. Insufficient micro-density to sustain coarse representation.
+- **Closure:** Update density exceeds the structural scale threshold $\tau$ and satisfies the homogenization condition (L094).
+- **Collapse Mode:** **Projection Failure**. Occurs when micro-density is insufficient or variance is too high to sustain a coarse representation.
+- **Rules:** Subject to the **Projection Calculus** (L092-L094): relational convolution, non-invertibility, and information loss.
 
 ### 3.6 Residue-History Conditioned Realization ($\Leftrightarrow_R$)
 - **Domain:** $\{\mathcal{E}, R, A\}$ (Primitive basis)

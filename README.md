@@ -8,7 +8,7 @@ This repository is a governed research environment for exploring **"THE LAW OF T
 
 This repo includes a stabilized **math core** (see `docs/math/` and `registry/math/`) that governs interpretation and terminology. Simulations provide **bounded evidence only** and must be written as: **"Within these models..."**.
 
-The math core does not elevate theorems, close ontology, or justify physics\_phys claims. C++ engines still require Python↔C++ equivalence evidence before certification.
+The math core does not elevate theorems, close ontology, or justify physics\_phys claims. C++ engines still require Python↔C++ equivalence evidence before rigor endorsement.
 
 ## 📂 Repository Structure
 

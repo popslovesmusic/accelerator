@@ -21,7 +21,7 @@
     },
     "cpp_preference": {
       "for_C4_or_higher": "prefer tools where implementation_language == cpp or backend == cpp",
-      "if_python_C4_and_cpp_counterpart_lower": "flag certification_asymmetry",
+      "if_python_C4_and_cpp_counterpart_lower": "flag rigor endorsement_asymmetry",
       "do_not_auto_promote_cpp_counterpart": true
     }
   },
@@ -84,10 +84,10 @@
     "mechanism_class": "",
     "implementation_language": "python | cpp | hybrid | unknown",
     "backend": "python | cpp | avx2 | sycl | unknown",
-    "certification_level": "C0 | C1 | C2 | C3 | C4",
+    "rigor endorsement_level": "C0 | C1 | C2 | C3 | C4",
     "claim_use_limit": "",
     "manifest_synced": true,
-    "certification_asymmetry": false,
+    "rigor endorsement_asymmetry": false,
     "cpp_counterpart": "",
     "python_counterpart": "",
     "governance_warnings": []
@@ -106,12 +106,12 @@
       "description": "Add signal_scope_phase_continuation_engine and tda_module_v2_cpp to tool_index.json from tool_manifest.json."
     },
     {
-      "action": "detect_certification_asymmetry",
-      "description": "For Python/C++ counterpart pairs with mismatched certification levels, mark certification_asymmetry=true and add governance warning."
+      "action": "detect_rigor endorsement_asymmetry",
+      "description": "For Python/C++ counterpart pairs with mismatched rigor endorsement levels, mark rigor endorsement_asymmetry=true and add governance warning."
     },
     {
       "action": "update_orchestrator_selection_rule",
-      "description": "For C4+ claims, select by mechanism_class and certification_level, then prefer C++/hybrid implementations when available."
+      "description": "For C4+ claims, select by mechanism_class and rigor endorsement_level, then prefer C++/hybrid implementations when available."
     }
   ],
   "governance_warnings_to_emit": [
@@ -128,8 +128,8 @@
       "condition": "model_class cannot be mapped to allowed mechanism_class"
     },
     {
-      "warning": "certification_asymmetry",
-      "condition": "Python and C++ counterpart tools have different certification levels"
+      "warning": "rigor endorsement_asymmetry",
+      "condition": "Python and C++ counterpart tools have different rigor endorsement levels"
     },
     {
       "warning": "manifest_index_mismatch",

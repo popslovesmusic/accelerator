@@ -5,13 +5,13 @@ Define the authoritative machine-readable triggers for system escalation. This r
 
 ## 2. Authoritative Triggers
 - **ET-001-COUNTER-DOMINANCE**: High risk of generic signatures or metric overbreadth. Requires human review of proxy metrics.
-- **ET-002-EQUIV-FAIL**: Blocked certification. Requires investigation of implementation precision or algorithmic drift.
+- **ET-002-EQUIV-FAIL**: Blocked rigor endorsement. Requires investigation of implementation precision or algorithmic drift.
 - **ET-003-CLAIM-DRIFT**: Critical violation of claim-humility disclaimers. Blocks autonomous technical paper emission.
 - **ET-004-AGENT-CONFLICT**: Material disagreement between autonomous agents. Requires human arbitration.
 
 ## 3. Intervention Actions
 - `HALT_CAMPAIGN_AND_ESCALATE`: Stop the specific evidence campaign immediately.
-- `BLOCK_CERTIFICATION_AND_ESCALATE`: Prevent tool certification upgrades.
+- `BLOCK_rigor endorsement_AND_ESCALATE`: Prevent tool rigor endorsement upgrades.
 - `BLOCK_EMISSION_AND_ESCALATE`: Stop technical paper or result packet emission.
 - `LOG_CONFLICT_AND_ESCALATE`: Continue but surface the contradiction prominently.
 

@@ -49,7 +49,7 @@ This document outlines the strategic roadmap to elevate the Acellorator ecosyste
 - **Action:** Add schema validation to the preflight check.
 
 ## 10. Integrated Governance Output (R10)
-- **Status:** `claim_gate_input.json` and `certification_evidence_packet.json` implemented.
+- **Status:** `claim_gate_input.json` and `rigor endorsement_evidence_packet.json` implemented.
 - **Goal:** Maintain and automate verification of these artifacts.
 - **Action:** (Complete)
 
@@ -60,10 +60,10 @@ This document outlines the strategic roadmap to elevate the Acellorator ecosyste
 - Enhance `multi_sim_runner.py` with uncertainty and provenance features.
 - Implement `run_convergence_sweep.py` and `run_regression_testing.py`.
 
-### Phase 2: Tool Certification
+### Phase 2: Tool rigor endorsement
 - Run regression tests for all Python/C++ pairs.
 - Run convergence sweeps for all PDE/ODE tools.
-- Update all `certification_manifest.json` files to C4 where applicable.
+- Update all `rigor endorsement_manifest.json` files to C4 where applicable.
 
 ### Phase 3: Validation & Archival
 - Update Scientific Rigor Report.

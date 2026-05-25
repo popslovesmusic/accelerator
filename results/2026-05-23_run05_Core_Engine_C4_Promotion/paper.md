@@ -17,7 +17,7 @@
 ```
 
 ## 1. Abstract
-This report documents the C4 certification of the core dynamics engines. Both `graph_dynamics_sim_v1_cpp` and `ca_admissibility_sim_v1_cpp` have passed stability, uncertainty, and falsification tests.
+This report documents the C4 rigor endorsement of the core dynamics engines. Both `graph_dynamics_sim_v1_cpp` and `ca_admissibility_sim_v1_cpp` have passed stability, uncertainty, and falsification tests.
 
 ## 2. Results
 - **Graph Dynamics:** Stable under seed variance; passed FV-2 (Boundary Collapse).

@@ -259,9 +259,9 @@
       "statement": "A simulation result may not support a PCD claim unless the tool is bound to tested lemmas, operators, law chains, and provenance requirements.",
       "failure_behavior": "mark_as_ungoverned_simulation_output"
     },
-    "no_claim_support_above_tool_certification_v1": {
-      "name": "no_claim_support_above_tool_certification_v1",
-      "statement": "A tool may not support a claim class higher than its certification level permits.",
+    "no_claim_support_above_tool_rigor endorsement_v1": {
+      "name": "no_claim_support_above_tool_rigor endorsement_v1",
+      "statement": "A tool may not support a claim class higher than its rigor endorsement level permits.",
       "failure_behavior": "downgrade_or_block_claim_support"
     },
     "no_lemma_support_without_operator_instantiation_v1": {
@@ -421,7 +421,7 @@
     },
     "no_claim_survival_after_support_loss_v1": {
       "name": "no_claim_survival_after_support_loss_v1",
-      "statement": "A claim may not retain its support status after losing a required proof, lemma, tool certification, or gap closure dependency.",
+      "statement": "A claim may not retain its support status after losing a required proof, lemma, tool rigor endorsement, or gap closure dependency.",
       "failure_behavior": "automatic_downgrade"
     },
     "no_governed_object_without_formal_object_identity_v1": {
@@ -629,9 +629,9 @@
       "statement": "Empirical claim status may not change without a durable ledger entry recording source result, confidence band, artifacts, and reason.",
       "failure_behavior": "block_status_change"
     },
-    "no_restored_claim_without_recertification_event_v1": {
-      "name": "no_restored_claim_without_recertification_event_v1",
-      "statement": "A downgraded or invalidated empirical claim may not be restored without recertification, rerun validation, or explicit review event.",
+    "no_restored_claim_without_rerigor endorsement_event_v1": {
+      "name": "no_restored_claim_without_rerigor endorsement_event_v1",
+      "statement": "A downgraded or invalidated empirical claim may not be restored without rerigor endorsement, rerun validation, or explicit review event.",
       "failure_behavior": "retain_downgraded_status"
     },
     "no_confidence_propagation_without_conditions_v1": {
@@ -641,7 +641,7 @@
     },
     "no_confidence_survival_after_runtime_drift_v1": {
       "name": "no_confidence_survival_after_runtime_drift_v1",
-      "statement": "Empirical confidence must decay when runtime, provenance, certification, or contradiction state changes.",
+      "statement": "Empirical confidence must decay when runtime, provenance, rigor endorsement, or contradiction state changes.",
       "failure_behavior": "trigger_confidence_reassessment"
     },
     "no_silent_anomaly_absorption_v1": {
@@ -686,7 +686,7 @@
     },
     "no_partial_P0_C4_upgrade_v1": {
       "name": "no_partial_P0_C4_upgrade_v1",
-      "statement": "A P0 engine may not be upgraded to C4 until all blocking gaps are closed and the certification gate passes.",
+      "statement": "A P0 engine may not be upgraded to C4 until all blocking gaps are closed and the rigor endorsement gate passes.",
       "failure_behavior": "retain_current_level"
     },
     "no_TS4_without_both_P0_engines_v1": {
@@ -741,7 +741,7 @@
     },
     "no_C4_without_runtime_manifest_v1": {
       "name": "no_C4_without_runtime_manifest_v1",
-      "statement": "Simulation engines may not achieve C4 certification without runtime_binary_manifest coverage and recoverable build provenance.",
+      "statement": "Simulation engines may not achieve C4 rigor endorsement without runtime_binary_manifest coverage and recoverable build provenance.",
       "failure_behavior": "retain_C1_or_C2"
     },
     "no_missing_binary_execution_claim_v1": {
@@ -751,8 +751,8 @@
     },
     "no_silent_runtime_drift_v1": {
       "name": "no_silent_runtime_drift_v1",
-      "statement": "Binary hash, compiler provenance, and runtime environment changes must trigger runtime review before maintaining prior certification level.",
-      "failure_behavior": "route_to_runtime_recertification"
+      "statement": "Binary hash, compiler provenance, and runtime environment changes must trigger runtime review before maintaining prior rigor endorsement level.",
+      "failure_behavior": "route_to_runtime_rerigor endorsement"
     },
     "no_empirical_claim_bypass_runtime_governance_v1": {
       "name": "no_empirical_claim_bypass_runtime_governance_v1",
@@ -774,35 +774,35 @@
       "statement": "DLL or shared-library loading paths must be explicit and recoverable; hidden environment-dependent loading may not support governed claims.",
       "failure_behavior": "route_to_runtime_path_review"
     },
-    "no_C4_without_certification_gate_v1": {
-      "name": "no_C4_without_certification_gate_v1",
-      "statement": "A tool may not be marked C4 unless check_c4_engine_certification.py passes or an equivalent governed certification report exists.",
-      "failure_behavior": "retain_lower_certification"
+    "no_C4_without_rigor endorsement_gate_v1": {
+      "name": "no_C4_without_rigor endorsement_gate_v1",
+      "statement": "A tool may not be marked C4 unless check_c4_engine_rigor endorsement.py passes or an equivalent governed rigor endorsement report exists.",
+      "failure_behavior": "retain_lower_rigor endorsement"
     },
-    "no_certification_without_evidence_package_v1": {
-      "name": "no_certification_without_evidence_package_v1",
-      "statement": "Engine certification may not increase without a complete evidence package.",
-      "failure_behavior": "block_certification_upgrade"
+    "no_rigor endorsement_without_evidence_package_v1": {
+      "name": "no_rigor endorsement_without_evidence_package_v1",
+      "statement": "Engine rigor endorsement may not increase without a complete evidence package.",
+      "failure_behavior": "block_rigor endorsement_upgrade"
     },
     "no_control_case_free_C4_v1": {
       "name": "no_control_case_free_C4_v1",
       "statement": "A C4 engine must include at least one known control case and one expected-failure or falsification case.",
       "failure_behavior": "retain_below_C4"
     },
-    "no_C4_upgrade_from_certification_dry_run_v1": {
-      "name": "no_C4_upgrade_from_certification_dry_run_v1",
-      "statement": "Certification dry-runs validate evidence-package readiness only and cannot upgrade engine certification.",
-      "failure_behavior": "block_certification_upgrade"
+    "no_C4_upgrade_from_rigor endorsement_dry_run_v1": {
+      "name": "no_C4_upgrade_from_rigor endorsement_dry_run_v1",
+      "statement": "rigor endorsement dry-runs validate evidence-package readiness only and cannot upgrade engine rigor endorsement.",
+      "failure_behavior": "block_rigor endorsement_upgrade"
     },
-    "no_full_certification_without_dry_run_or_equivalent_v1": {
-      "name": "no_full_certification_without_dry_run_or_equivalent_v1",
-      "statement": "P0 engines should not enter full C4 certification until a dry-run or equivalent evidence-package readiness check passes.",
-      "failure_behavior": "route_to_certification_readiness_review"
+    "no_full_rigor endorsement_without_dry_run_or_equivalent_v1": {
+      "name": "no_full_rigor endorsement_without_dry_run_or_equivalent_v1",
+      "statement": "P0 engines should not enter full C4 rigor endorsement until a dry-run or equivalent evidence-package readiness check passes.",
+      "failure_behavior": "route_to_rigor endorsement_readiness_review"
     },
-    "no_C4_without_full_certification_execution_v1": {
-      "name": "no_C4_without_full_certification_execution_v1",
-      "statement": "P0 engines may not be upgraded to C4 without passing full certification execution and the C4 certification gate.",
-      "failure_behavior": "retain_current_certification"
+    "no_C4_without_full_rigor endorsement_execution_v1": {
+      "name": "no_C4_without_full_rigor endorsement_execution_v1",
+      "statement": "P0 engines may not be upgraded to C4 without passing full rigor endorsement execution and the C4 rigor endorsement gate.",
+      "failure_behavior": "retain_current_rigor endorsement"
     },
     "no_MSV001_full_execution_before_P0_C4_v1": {
       "name": "no_MSV001_full_execution_before_P0_C4_v1",
@@ -819,14 +819,14 @@
       "statement": "A governed execution campaign may not be marked successful unless it emits a valid orchestrator result record.",
       "failure_behavior": "block_campaign_success_status"
     },
-    "no_certification_recommendation_without_phase_trace_v1": {
-      "name": "no_certification_recommendation_without_phase_trace_v1",
-      "statement": "Certification recommendations require phase-level traces for runtime, control, stability, falsification, uncertainty, and provenance checks.",
-      "failure_behavior": "retain_current_certification"
+    "no_rigor endorsement_recommendation_without_phase_trace_v1": {
+      "name": "no_rigor endorsement_recommendation_without_phase_trace_v1",
+      "statement": "rigor endorsement recommendations require phase-level traces for runtime, control, stability, falsification, uncertainty, and provenance checks.",
+      "failure_behavior": "retain_current_rigor endorsement"
     },
     "no_manual_campaign_status_without_orchestrator_record_v1": {
       "name": "no_manual_campaign_status_without_orchestrator_record_v1",
-      "statement": "Campaign completion, certification promotion, or theorem-support claims require an orchestrator record or equivalent governed execution report.",
+      "statement": "Campaign completion, rigor endorsement promotion, or theorem-support claims require an orchestrator record or equivalent governed execution report.",
       "failure_behavior": "route_to_execution_record_review"
     },
     "no_evidence_aggregation_without_failure_routing_v1": {
@@ -834,14 +834,14 @@
       "statement": "Aggregated evidence must preserve failed runs, anomalous outputs, and contradiction routing rather than reporting only successful summaries.",
       "failure_behavior": "mark_aggregation_incomplete"
     },
-    "no_MSV001_full_execution_until_P0_certification_resolved_v1": {
-      "name": "no_MSV001_full_execution_until_P0_certification_resolved_v1",
-      "statement": "MSV-001 full TS4 execution may not proceed until P0 engine certification backlog items are resolved or downgraded with an approved alternate mechanism plan.",
+    "no_MSV001_full_execution_until_P0_rigor endorsement_resolved_v1": {
+      "name": "no_MSV001_full_execution_until_P0_rigor endorsement_resolved_v1",
+      "statement": "MSV-001 full TS4 execution may not proceed until P0 engine rigor endorsement backlog items are resolved or downgraded with an approved alternate mechanism plan.",
       "failure_behavior": "retain_dry_run_or_exploratory_status"
     },
-    "no_certification_backlog_completion_without_gate_v1": {
-      "name": "no_certification_backlog_completion_without_gate_v1",
-      "statement": "Certification backlog items cannot be marked complete without a passing certification gate or explicit supersession record.",
+    "no_rigor endorsement_backlog_completion_without_gate_v1": {
+      "name": "no_rigor endorsement_backlog_completion_without_gate_v1",
+      "statement": "rigor endorsement backlog items cannot be marked complete without a passing rigor endorsement gate or explicit supersession record.",
       "failure_behavior": "reopen_backlog_item"
     },
     "no_TS4_without_MSV001_promotion_gate_v1": {
@@ -869,14 +869,14 @@
       "statement": "Empirical results may not support theorem, claim, or publication updates unless packaged in the governed empirical result package schema.",
       "failure_behavior": "downgrade_to_unpackaged_observation"
     },
-    "no_dry_run_certification_upgrade_v1": {
-      "name": "no_dry_run_certification_upgrade_v1",
-      "statement": "Execution campaign dry-runs validate orchestration readiness only and may not upgrade tool certification.",
-      "failure_behavior": "block_certification_upgrade"
+    "no_dry_run_rigor endorsement_upgrade_v1": {
+      "name": "no_dry_run_rigor endorsement_upgrade_v1",
+      "statement": "Execution campaign dry-runs validate orchestration readiness only and may not upgrade tool rigor endorsement.",
+      "failure_behavior": "block_rigor endorsement_upgrade"
     },
     "no_result_package_without_runtime_context_v1": {
       "name": "no_result_package_without_runtime_context_v1",
-      "statement": "A result package without runtime context, binary hashes, certification levels, and provenance cannot support CB3 or CB4 confidence.",
+      "statement": "A result package without runtime context, binary hashes, rigor endorsement levels, and provenance cannot support CB3 or CB4 confidence.",
       "failure_behavior": "downgrade_confidence_band"
     },
     "no_citation_without_evidence_id_v1": {
@@ -911,7 +911,7 @@
     },
     "no_database_only_claim_state_v1": {
       "name": "no_database_only_claim_state_v1",
-      "statement": "Claim, theorem, certification, or empirical status changes may not exist only in SQLite; they must be recoverable from canonical filesystem artifacts.",
+      "statement": "Claim, theorem, rigor endorsement, or empirical status changes may not exist only in SQLite; they must be recoverable from canonical filesystem artifacts.",
       "failure_behavior": "block_status_update"
     },
     "no_agent_search_without_ingestion_report_v1": {
@@ -936,7 +936,7 @@
     },
     "no_stale_knowledge_index_for_governed_review_v1": {
       "name": "no_stale_knowledge_index_for_governed_review_v1",
-      "statement": "Theorem reviews, certification reviews, publication reviews, and contradiction reviews may not rely on stale SQLite indexes without warning or rebuild.",
+      "statement": "Theorem reviews, rigor endorsement reviews, publication reviews, and contradiction reviews may not rely on stale SQLite indexes without warning or rebuild.",
       "failure_behavior": "warn_or_trigger_rebuild"
     },
     "no_unrecoverable_context_source_v1": {
@@ -951,7 +951,7 @@
     },
     "no_state_change_without_temporal_event_v1": {
       "name": "no_state_change_without_temporal_event_v1",
-      "statement": "Governed objects may not change theorem status, claim status, confidence band, certification level, or publication status without a temporal evolution event.",
+      "statement": "Governed objects may not change theorem status, claim status, confidence band, rigor endorsement level, or publication status without a temporal evolution event.",
       "failure_behavior": "mark_change_untracked"
     },
     "no_supersession_without_history_v1": {
@@ -971,7 +971,7 @@
     },
     "no_active_support_from_invalid_temporal_chain_v1": {
       "name": "no_active_support_from_invalid_temporal_chain_v1",
-      "statement": "Objects with invalid temporal chains may not provide active support for theorem, claim, publication, or certification status.",
+      "statement": "Objects with invalid temporal chains may not provide active support for theorem, claim, publication, or rigor endorsement status.",
       "failure_behavior": "block_or_downgrade_support"
     },
     "no_state_reconstruction_without_source_artifacts_v1": {
@@ -1051,7 +1051,7 @@
     },
     "no_artifact_deletion_without_retention_review_v1": {
       "name": "no_artifact_deletion_without_retention_review_v1",
-      "statement": "Artifacts linked to active claims, theorem support, contradiction review, or certification status may not be deleted without retention review.",
+      "statement": "Artifacts linked to active claims, theorem support, contradiction review, or rigor endorsement status may not be deleted without retention review.",
       "failure_behavior": "block_deletion"
     },
     "no_closed_operator_claim_without_algebra_v1": {

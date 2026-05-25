@@ -68,4 +68,4 @@ Falsification vectors FV-1 through FV-4 were executed; the implementation behave
 Supported (L3).
 
 ## 14. Conclusion
-Within these models, the graph dynamics implementation correctly preserves reference equivalence. The C++ backend demonstrates the numerical stability required for L3 certification, confirming that the Ref(.) identity is operationally robust within the tested regime.
+Within these models, the graph dynamics implementation correctly preserves reference equivalence. The C++ backend demonstrates the numerical stability required for L3 rigor endorsement, confirming that the Ref(.) identity is operationally robust within the tested regime.

@@ -1,22 +1,23 @@
 {
   "governance_document": {
     "id": "FALSIFICATION_STANDARD_v1_0",
-    "title": "C4/L3 Four-Vector Falsification Standard",
+    "title": "C4/L3 Five-Vector Falsification Standard",
     "authority": "compliance_charter_v2_3.json",
-    "version": "1.0",
-    "date": "2026-04-30",
+    "version": "1.1",
+    "date": "2026-05-24",
     "status": "active",
-    "supersedes": null,
-    "description": "Defines the minimum falsification requirement for C4/L3 claim certification. A claim reaches C4/L3 only when four independent falsification vectors have each been genuinely attempted and each has failed to break the claim. Positive evidence from two independent mechanisms is necessary but not sufficient. All four vectors must also be closed."
+    "supersedes": "1.0",
+    "description": "Defines the minimum falsification requirement for C4/L3 claim rigor endorsement. A claim reaches C4/L3 only when five independent falsification vectors have each been genuinely attempted and each has failed to break the claim. Positive evidence from two independent mechanisms is necessary but not sufficient. All five vectors must also be closed."
   },
 
   "epistemological_basis": {
-    "core_principle": "A claim stands at C4/L3 because there is no remaining epistemological shelter. Each falsification vector closes a specific escape route. A claim that survives all four has no direction from which it can be broken without new evidence.",
+    "core_principle": "A claim stands at C4/L3 because there is no remaining epistemological shelter. Each falsification vector closes a specific escape route. A claim that survives all five has no direction from which it can be broken without new evidence.",
     "escape_routes_closed": {
       "vector_1": "artifact escape — result is not a model-class artifact",
       "vector_2": "favorable-regime escape — result is not regime-specific",
       "vector_3": "theoretical-mismapping escape — result genuinely depends on the claimed primitives",
-      "vector_4": "lucky-conditions escape — result is not initialization-dependent"
+      "vector_4": "lucky-conditions escape — result is not initialization-dependent",
+      "vector_5": "phenomenal-masking escape — result genuinely depends on the survival of the algebra, not just the appearance of emergence"
     }
   },
 
@@ -28,11 +29,11 @@
       "note": "Positive evidence is necessary but not sufficient for C4/L3."
     },
     "falsification_requirement": {
-      "vectors_required": 4,
+      "vectors_required": 5,
       "all_must_be_attempted": true,
       "all_must_fail_to_break_claim": true,
       "partial_completion_blocks_c4": true,
-      "note": "A single falsification pass no longer satisfies C4/L3. All four vectors must be executed and reported."
+      "note": "A single falsification pass no longer satisfies C4/L3. All five vectors must be executed and reported."
     }
   },
 
@@ -115,17 +116,37 @@
         "transient_length_if_applicable",
         "initialization_dependence_detected"
       ]
+    },
+
+    "vector_5": {
+      "id": "FV-5",
+      "name": "algebraic_invariance",
+      "epistemological_target": "phenomenal-masking escape",
+      "question": "Does the formalized operator algebra survive parameter stress, or is the result merely a phenomenal mask?",
+      "method": "Execute the simulation across the established regime while measuring operator invariants and projection legality. Apply parameter stress (e.g., varying timestep, grid resolution, or coupling strength) and test whether the algebra collapses (invariant violation) even if the emergent phenomena (e.g., interface persistence) appears to survive. A passed vector requires that the algebra remains intact throughout the regime.",
+      "pass_condition": "Operator invariants and projection legality are maintained across the tested regime. Algebraic survival is confirmed.",
+      "fail_condition": "Operator invariants are violated or projection legality is lost, even if the emergent phenomena persists. Claim is demoted — the algebra did not survive.",
+      "required_tools": "minimum one C4-certified tool with invariant tracking enabled",
+      "required_seeds": 3,
+      "report_fields": [
+        "invariants_tested",
+        "projection_legality_score",
+        "parameter_stress_applied",
+        "phenomenal_persistence_status",
+        "algebraic_survival_status"
+      ]
     }
   },
 
   "vector_completion_requirements": {
-    "all_four_required": true,
+    "all_five_required": true,
     "order": "any order permitted, all must complete before GOVERNANCE_CHECK",
     "partial_completion": {
-      "1_of_4": "claim is H_on_hold — falsification incomplete",
-      "2_of_4": "claim is H_on_hold — falsification incomplete",
-      "3_of_4": "claim is H_on_hold — falsification incomplete",
-      "4_of_4_all_passed": "claim may proceed to GOVERNANCE_CHECK for C4/L3 review",
+      "1_of_5": "claim is H_on_hold — falsification incomplete",
+      "2_of_5": "claim is H_on_hold — falsification incomplete",
+      "3_of_5": "claim is H_on_hold — falsification incomplete",
+      "4_of_5": "claim is H_on_hold — falsification incomplete",
+      "5_of_5_all_passed": "claim may proceed to GOVERNANCE_CHECK for C4/L3 review",
       "any_vector_broken": "claim is demoted — see demotion rules"
     }
   },
@@ -150,6 +171,11 @@
       "result": "claim is initialization-dependent — generality overstated",
       "action": "restrict claim scope to initialization family tested, re-run GOVERNANCE_CHECK",
       "charter_classification": "provisional_rescoped"
+    },
+    "FV5_broken": {
+      "result": "algebraic collapse — result is phenomenal masking, not algebraic survival",
+      "action": "demote to C2 or PROVISIONAL, require operator revision",
+      "charter_classification": "algebraic_collapse_detected"
     }
   },
 
@@ -162,6 +188,7 @@
       "FV-2 boundary collapse — attempted and passed",
       "FV-3 primitive reduction — attempted and passed for all cited primitives",
       "FV-4 adversarial initialization — attempted and passed",
+      "FV-5 algebraic invariance — attempted and passed",
       "all vector reports recoverable with run_id and output_path",
       "language policy C4 tier applied to all claim language",
       "lexicon validation registry entries exist at L3 for all cited primitives",
@@ -172,13 +199,13 @@
   },
 
   "research_writer_instruction": {
-    "on_c4_l3_certified_claim": "You may use language from the C4 tier of language_policy_registry.json. You must state which four falsification vectors were run and that all failed to break the claim. You must not generalize beyond the parameter regime confirmed by FV-2.",
+    "on_c4_l3_certified_claim": "You may use language from the C4 tier of language_policy_registry.json. You must state which five falsification vectors were run and that all failed to break the claim. You must not generalize beyond the parameter regime confirmed by FV-2 and the algebraic limits confirmed by FV-5.",
     "mandatory_falsification_disclosure": "Every C4/L3 paper section must include a falsification summary stating: vectors attempted, adversarial conditions used, and pass result for each. This is not optional.",
     "forbidden_regardless_of_status": ["proves", "establishes fundamental law", "universal truth", "final theory", "absolute proof"]
   },
 
   "agent_enforcement_notes": {
-    "FALSIFIER_role": "You are responsible for designing and executing all four vectors. A falsification step that is not genuinely adversarial — that tests only safe boundary conditions, only favorable initializations, or only suppresses primitives not cited in the mapping — does not satisfy this standard. Document your adversarial intent explicitly in each vector report.",
+    "FALSIFIER_role": "You are responsible for designing and executing all five vectors. A falsification step that is not genuinely adversarial — that tests only safe boundary conditions, only favorable initializations, or only suppresses primitives not cited in the mapping — does not satisfy this standard. Document your adversarial intent explicitly in each vector report.",
     "GOVERNANCE_CHECK_role": "You must verify that each falsification vector was genuinely adversarial, not merely formally completed. Review the adversarial design rationale in each report. If a vector appears confirmatory rather than adversarial, flag it and require re-execution.",
     "no_new_theory_after_theorist": true,
     "falsifier_cannot_be_skipped": true,

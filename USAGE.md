@@ -41,10 +41,10 @@ Verify Python/C++ parity:
 cmd /c scripts/run_regression_governed.bat --tool-a <py_tool> --tool-b <cpp_tool> --config <config>
 ```
 
-## 📊 Checking Certification Status
+## 📊 Checking rigor endorsement Status
 
 - Review the **Scientific Rigor Report**: `docs/reports/TOOL_SCIENTIFIC_RIGOR_REPORT_2026-04-30.md`.
-- Check tool-local manifests: `tools/<name>/validation/certification_manifest.json`.
+- Check tool-local manifests: `tools/<name>/validation/rigor endorsement_manifest.json`.
 
 ## ⚖️ Governance Mandate
 

@@ -72,7 +72,7 @@ Distinguishability density cannot be lost; it re-expresses as macro-scale relati
 ---
 
 ## 6. VALIDATION & RIGOR SCHEMA
-### 6.1 Certification Tiers
+### 6.1 rigor endorsement Tiers
 - **C4 (Adversarially Hardened):** Passed 200-seed claim-killing suites.
 - **C5 (Mechanism Independent):** Field/Agent/PDE convergence established.
 - **C6 (Structurally Survivable):** Formal symbolic trace and extreme-state persistence verified.
@@ -88,4 +88,4 @@ Distinguishability density cannot be lost; it re-expresses as macro-scale relati
 - **ID:** MPF-MATH-SCHEMA-2026-05-24
 - **Status:** AUTHORIZED / SSOT
 - **Authority:** Mono-Process Math Program.
-- **Compliance:** Charter v2.3 / Platform Certification Level C4+ ∎
+- **Compliance:** Charter v2.3 / Platform rigor endorsement Level C4+ ∎

@@ -55,9 +55,13 @@
       "name": "Cross-Basin Projection (Bridge)",
       "domain": "Micro-procedural update density sum(delta_a,i)",
       "codomain": "Coarse macro-relational topology (geometry_app)",
-      "closure_condition": "Update density crosses scale threshold tau",
-      "collapse_mode": "Projection Failure (Update density < tau)",
-      "composition_rules": ["Gated by stabilization operator K"]
+      "closure_condition": "Update density crosses scale threshold tau and satisfies homogenization (L094)",
+      "collapse_mode": "Projection Failure (Update density < tau or Variance too high)",
+      "composition_rules": [
+        "Gated by stabilization operator K",
+        "Subject to non-invertibility and information loss (L093)",
+        "Requires Relational Convolution Kernel K (L092)"
+      ]
     },
     {
       "symbol": "R",

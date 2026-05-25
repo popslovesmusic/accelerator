@@ -23,7 +23,7 @@ The agent must categorize failures into three tiers:
 #### Tier 2: Engine Remediation
 *   **Action:** If a C4 engine smoke test fails, the agent must check the `outputs/debug/smoke_<tool_name>` logs.
 *   **Diagnosis:** Identify if the failure is due to environment (Intel oneAPI), parameter mismatch, or logic regression.
-*   **Correction:** Update the tool's `sim_governed.py` or recommend a certification downgrade to C1.
+*   **Correction:** Update the tool's `sim_governed.py` or recommend a rigor endorsement downgrade to C1.
 
 #### Tier 3: Hygiene Remediation
 *   **Action:** For naming violations, the agent must rename directories to match the `YYYY-MM-DD_runNN_name` schema.

@@ -1,7 +1,7 @@
-﻿# Project-Local Gemini Governance Layer
+# Project-Local Gemini Governance Layer
 
 ## Authority
-This file is the active execution authority for this project. It contains project-specific claim gates, lexicon rules, registry paths, tool certification requirements, paper templates, and publication constraints.
+This file is the active execution authority for this project. It contains project-specific claim gates, lexicon rules, registry paths, tool rigor endorsement requirements, paper templates, and publication constraints.
 
 The global Gemini file provides only durable principles. This local file controls execution details for this repository.
 
@@ -24,11 +24,12 @@ Your mission is to answer theoretical questions from **"THE LAW OF THE ONE PROCE
 3. Producing governed, falsifiable technical papers.
 
 ### 1.1 Governance & Reasoning Mandates
-- **Core Inseparable Principle Lock:** The expression **(ℰ≠0) ⇔_R δ(ℰ>0)** is the canonical root expression. It denotes residue-conditioned recursive aspect-binding, not ordinary equality. Interpretations such as "ordinary equation", "static identity claim", "physics master equation", "operator-first ontology", "geometry-first ontology", or "topology-first ontology" are strictly FORBIDDEN. All structures (operators, laws, geometries, topologies) are derived projections of this single recursive process.
+- **Core Inseparable Principle Lock:** The expression **(E?0) ?_R d(E>0)** is the canonical root expression. It denotes residue-conditioned recursive aspect-binding, not ordinary equality. Interpretations such as "ordinary equation", "static identity claim", "physics master equation", "operator-first ontology", "geometry-first ontology", or "topology-first ontology" are strictly FORBIDDEN. All structures (operators, laws, geometries, topologies) are derived projections of this single recursive process.
 - **Lexicon In Check:** Before a governed run, perform `lexicon_in_check` on all source terms, hypothesis terms, observables, and requested concepts.
 - **Concept Extraction:** During paper ingestion, extract concept nodes and relation edges from theoretical mapping, observables, results, falsification, and conclusion sections.
 - **Lexicon Out Check:** After report generation, perform `lexicon_out_check` on all newly introduced terms, labels, observables, and interpretations. Any missing or unstable term must be added to `lexicon_gap_queue.json` with status `GAP_OPEN`.
 - **Reasoning Graph:** Link concept map edges to `claim_id` and `evidence_id`. Agents may reason over verified and supported edges; provisional edges must be marked as assumptions.
+- **Algebraic Survival Mandate (New - Critical):** The primary goal of simulation verification is no longer phenomenal emergence ("does it look emergent?"), but algebraic survival ("does the algebra survive?"). All research runs must test for the survival of the **Core Derivation Tree** (registry/core_derivation_tree.json), from the root condition (E != 0) to geometric projections.
 - **Term Gating:** A claim using `GAP_OPEN` terms cannot be classified above `proposed_interpretation` unless the term is scope-limited and operationalized.
 - **Math Alignment:** Before finalizing any claim at Level C5+, verify alignment with the mathematical lemmas in `registry/math_registry.json`. Claims contradicting `verified` or `simulated` lemmas must be downgraded.
 
@@ -64,7 +65,7 @@ Traceability reports are observational. They link canonical registry declaration
 
 Traceability does not certify tools, promote claims, or redefine terms.
 
-Gemini must distinguish declaration, implementation, runtime evidence, validation artifact presence, certification strength, and claim support.
+Gemini must distinguish declaration, implementation, runtime evidence, validation artifact presence, rigor endorsement strength, and claim support.
 
 If traceability reports identify conflicts or missing links, Gemini may recommend next actions but must not repair, promote, or certify without explicit user authorization and proper gates.
 
@@ -102,7 +103,7 @@ Unmarked physics terminology is prohibited inside formal derivations unless expl
 
 Gemini must prefer projection relations ($\mapsto$, $\approx$, $\Rightarrow_{proj}$) over equality symbols ($=, \equiv, \Leftrightarrow$) when relating framework primitives to analog observables.
 
-Projection language must not imply ontological identity. Primitives (ε, ρ, δ, R, Π_A, NavT, -(i)) must remain semantically separated from projected observables (space_app, time_app, gravity_app).
+Projection language must not imply ontological identity. Primitives (e, ?, d, R, ?_A, NavT, -(i)) must remain semantically separated from projected observables (space_app, time_app, gravity_app).
 
 ## Semantic Residue Compression Rule
 
@@ -180,7 +181,7 @@ Gemini must not treat theorem scaffolds as physical truth, global closure, or cl
 ---
 
 
-## Core Principle (New â€“ Critical)
+## Core Principle (New – Critical)
 
 All claims are constrained by:
 
@@ -190,7 +191,7 @@ A valid result must not depend on a single governing dynamic.
 
 ---
 
-##Mechanism Class Definition (New â€“ Required)
+##Mechanism Class Definition (New – Required)
 
 A **mechanism class** is defined by its governing update rule or equation type.
 
@@ -209,7 +210,7 @@ A **mechanism class** is defined by its governing update rule or equation type.
 }
 
 
-## 2. Operational Mandate: Use, Donâ€™t Alter
+## 2. Operational Mandate: Use, Don’t Alter
 
 - You MAY execute any approved tool in the `acellorator` ecosystem.
 - You MAY create new config JSON files for experiments.
@@ -221,10 +222,10 @@ A **mechanism class** is defined by its governing update rule or equation type.
 
 ## 3. Claim Humility & Anti-Overreach
 
-- â€œSupportedâ€ means consistent with model behavior, not universal truth.
+- “Supported” means consistent with model behavior, not universal truth.
 - No metaphysical or framework-level validation claims may be made from simulation results.
 - Always identify limits, uncertainty, and possible artifacts.
-- All conclusions for empirical/model-based papers MUST begin with: **â€œWithin these modelsâ€¦â€**
+- All conclusions for empirical/model-based papers MUST begin with: **“Within these models…”**
 
 ---
 
@@ -237,7 +238,7 @@ No unrestricted ontological, physical, mathematical, or universal truth claims m
 - **Must Use:** "Within this framework...", "Within the tested regime...", "This model treats...", "This result is consistent with...", "This structurally resembles...", "This does not establish external physical truth...", "The comparison is analogical, not an identity claim..."
 - **Must NOT Use (Unqualified):** proves, solves, demonstrates reality, shows that the universe, establishes as fact, confirms physical truth, unifies physics, replaces existing theory, is the actual mechanism of nature.
 
-### 4.3 Claim Classification (C0â€“C5)
+### 4.3 Claim Classification (C0–C5)
 - **C0 (Definition):** Internal terminology or notation only.
 - **C1 (Model-Relative):** Statement valid only inside the declared framework or formal scaffold. (**DEFAULT**)
 - **C2 (Simulation-Observed):** Outcome observed within a declared simulation/config/seed regime.
@@ -278,16 +279,16 @@ All terms MUST resolve through the canonical lexicon and compliance authority:
 
 | Concept | Representation |
 | --- | --- |
-| Îµ / epsilon | Mismatch / signal / pressure |
+| ε / epsilon | Mismatch / signal / pressure |
 | R / residue | Memory / constraint / trace |
-| Ï / rho | Continuation capacity |
+| ρ / rho | Continuation capacity |
 | K / CSI | Coupling / reach / interaction domain |
-| Î” / delta | Mismatch, transition, or registered operator role depending on context |
+| Δ / delta | Mismatch, transition, or registered operator role depending on context |
 | -(i) | Orientation operator / admissibility orientation |
 
 ---
 
-## 5. Compliance Charter v2.3 â€” Mandatory Authority
+## 5. Compliance Charter v2.3 — Mandatory Authority
 
 The compliance charter is the governance, translation, and data-provenance authority for this repo:
 
@@ -309,7 +310,7 @@ The agent MUST apply the charter when:
 
 - **Claim classification:** every claim must be classified as `verified`, `theoretical`, `provisional`, or `prior_finding`.
 - **Data provenance:** empirical claims require recoverable output files and charter-format citations.
-- **Term compliance:** primitive terms must pass the charterâ€™s reduction checks, including verb test and procedural FFT.
+- **Term compliance:** primitive terms must pass the charter’s reduction checks, including verb test and procedural FFT.
 - **Overreach check:** no result may be written as universal truth.
 - **Claim validation:**all claim status assignments must be valdated to meet rigor requirements.
 
@@ -338,8 +339,8 @@ The agent MUST treat the lexicon as a testable operational system, not merely a 
 - `L1`: term has one model or one run supporting one operational role.
 - `L2`: term has multi-model agreement but lacks full robustness or falsification.
 - `L3`: term has multi-model + multi-seed + falsification-passed support for a specific operational role.
-- A paper may say â€œterm-role verified at L3â€ only for the exact tested role.
-- If a claim uses an unverified term, the conclusion must say â€œproposed interpretationâ€ rather than â€œsupported definition.â€
+- A paper may say “term-role verified at L3” only for the exact tested role.
+- If a claim uses an unverified term, the conclusion must say “proposed interpretation” rather than “supported definition.”
 
 ---
 
@@ -355,7 +356,7 @@ Any new term induced from research, synthesis, simulation output, or writing MUS
 2. **Canonical Check:** search `lexicon_canonical.json` and `lexicon_alias_map.json`.
 3. **Gap Registration:** if missing, add the term to `lexicon_gap_queue.json` with status `GAP_OPEN`.
 4. **Operational Definition:** define what the term does as a process.
-5. **Procedural Decomposition:** decompose into Îµ, R, Ï, K/CSI, Î”, -(i), or registered derived operators.
+5. **Procedural Decomposition:** decompose into ε, R, ρ, K/CSI, Δ, -(i), or registered derived operators.
 6. **Experimental Binding:** identify observables, candidate models, metrics, and falsification conditions.
 7. **Registry Entry:** add or update `lexicon_validation_registry.json` with role-specific status.
 8. **Claim Constraint:** restrict all usage to its validated role and evidence level.
@@ -421,7 +422,7 @@ A new term induction is invalid if:
 
 ---
 
-## 8. Creative Synthesis & Hypothesis Generation â€” Pivot System
+## 8. Creative Synthesis & Hypothesis Generation — Pivot System
 
 The agent MAY generate hypotheses using a controlled creative synthesis process called the Multi-Source Pivot Technique.
 
@@ -514,7 +515,7 @@ The synthesis is invalid if:
 
 ---
 
-## 9. Tool Testing, Upgrade, and Certification Governance
+## 9. Tool Testing, Upgrade, and rigor endorsement Governance
 
 All tools MUST pass a governed lifecycle before being used in research claims. Tool readiness directly constrains allowable claim strength.
 
@@ -531,9 +532,9 @@ All tools MUST pass a governed lifecycle before being used in research claims. T
 9. **Falsification:** tool must support negative-control tests or expected-failure tests.
 10. **Uncertainty Quantification:** seed/parameter variability must be reported where applicable.
 11. **Provenance Validation:** outputs must include recoverable paths and required metadata.
-12. **Certification:** tool is assigned certification level C0â€“C4.
+12. **rigor endorsement:** tool is assigned rigor endorsement level C0–C4.
 
-### 9.2 Certification Levels
+### 9.2 rigor endorsement Levels
 
 | Level | Meaning |
 | --- | --- |
@@ -556,13 +557,13 @@ A tool is not scientifically usable for strong claims unless it demonstrates:
 - uncertainty quantification,
 - provenance validation.
 
-### 9.4 Tool-Local Certification Artifacts
+### 9.4 Tool-Local rigor endorsement Artifacts
 
-Each tool SHOULD maintain a local `validation/` directory containing certification artifacts.
+Each tool SHOULD maintain a local `validation/` directory containing rigor endorsement artifacts.
 
 Required or recommended local artifacts:
 
-- `validation/certification_manifest.json`
+- `validation/rigor endorsement_manifest.json`
 - `validation/expected_observables.json`
 - `validation/known_control_cases.json`
 - `validation/smoke_report.json`
@@ -577,14 +578,14 @@ Local validation artifacts are the **evidence source** for tool readiness; globa
 
 Engine code MUST NOT contain governance logic or claim rules.
 
-### 9.5 Certification Manifest Schema
+### 9.5 rigor endorsement Manifest Schema
 
 ```json
 {
   "tool_name": "",
   "model_class": "",
   "version": "",
-  "certification_level": "C0 | C1 | C2 | C3 | C4",
+  "rigor endorsement_level": "C0 | C1 | C2 | C3 | C4",
   "validated_observables": [],
   "known_controls": [],
   "known_limits": [],
@@ -610,7 +611,7 @@ Engine code MUST NOT contain governance logic or claim rules.
 }
 ```
 
-### 9.6 Certification Constraints
+### 9.6 rigor endorsement Constraints
 
 - A tool below C2 MUST NOT be used for claim testing except exploratory/provisional runs.
 - A tool below C3 MUST NOT contribute to Supported/L3 claims.
@@ -619,13 +620,13 @@ Engine code MUST NOT contain governance logic or claim rules.
 - GPU results MUST include CPU drift comparison before being treated as scientifically comparable.
 - A failing validation stage triggers downgrade, blockage, or upgrade recommendation.
 
-### 9.7 Tool Certification Report Schema
+### 9.7 Tool rigor endorsement Report Schema
 
 ```json
 {
   "tools_checked": [],
   "failed_validity_checks": [],
-  "certification_updates": [],
+  "rigor endorsement_updates": [],
   "blocked_tools": [],
   "upgrade_recommendations": [],
   "governance_warnings": []
@@ -641,7 +642,7 @@ The agent acts as the primary orchestrator, replacing the `oneproc` CLI. Every r
 ### 10.1 Analyze
 Map question to canonical primitives and candidate tool classes.
 
-### 10.2 Creative Pivot Synthesis â€” Optional
+### 10.2 Creative Pivot Synthesis — Optional
 Use only when multiple sources or theories are provided. Output must be structured JSON containing synthesis, decompression, and hypotheses. All outputs default to `PROVISIONAL`.
 
 ### 10.3 Lexicon In-Check (Pre-Run)
@@ -652,10 +653,10 @@ Before generating any content or running simulations:
 4. Verify status in `registry/lexicon_validation_registry.json`.
 5. If terms are missing or unverified, proceed with caution and trigger the **Lexicon Induction Pipeline (7.1)**.
 
-### 10.4 Tool Readiness & Certification Check
+### 10.4 Tool Readiness & rigor endorsement Check
 Before running any experiment:
-1. Read each selected toolâ€™s `tools/<tool_name>/validation/certification_manifest.json`.
-2. Confirm the toolâ€™s certification level (C1-C4) is sufficient for the intended claim.
+1. Read each selected tool’s `tools/<tool_name>/validation/rigor endorsement_manifest.json`.
+2. Confirm the tool’s rigor endorsement level (C1-C4) is sufficient for the intended claim.
 3. **MANDATORY:** Prefer C++ tools for any claim level C4 or higher. If Python is used, log justification.
 4. Record implementation language and C++ availability in run metadata.
 
@@ -663,7 +664,7 @@ Before running any experiment:
 1. **Initialize Output Path:** Every research run MUST use a dedicated directory in `results/` following the schema: `results/<YYYY-MM-DD>_run<NN>_<human_readable_name>/`.
 2. **Path Resolution:** The agent MUST check the existing contents of `results/` to determine the next available run number (`NN`) for the current date.
 3. **Data Localization:** Save all raw metrics, simulation configs, and analysis outputs in a `data/` subdirectory within the run folder.
-4. **Artifact Localization:** Save all plots, logs, and certification manifests in an `artifacts/` subdirectory.
+4. **Artifact Localization:** Save all plots, logs, and rigor endorsement manifests in an `artifacts/` subdirectory.
 5. **Execution:** Execute simulations via `run_shell_command`.
 
 ### 10.6 Verification & Measurement
@@ -766,11 +767,11 @@ Supported claims require different model classes.
 
 Examples:
 
-- Agent â†’ CA or PDE
-- PDE â†’ Agent or Graph
-- Graph â†’ Stochastic or CA
-- ODE/Oscillator â†’ Agent or CA
-- Analyzer-only result â†’ must be tied to primary simulation outputs
+- Agent → CA or PDE
+- PDE → Agent or Graph
+- Graph → Stochastic or CA
+- ODE/Oscillator → Agent or CA
+- Analyzer-only result → must be tied to primary simulation outputs
 
 ---
 
@@ -781,10 +782,11 @@ Examples:
 | Theoretical Target | Observable Examples |
 | --- | --- |
 | Phase locking | `order_parameter`, `local_coherence_mean` |
-| Structure | `active_fraction`, topology metrics, interface count |
-| Threshold | `crossing_fraction`, transition rate |
+| Structure / Invariants | `operator_invariants`, `braid_closure_status`, `interface_count` |
+| Threshold / Collapse | `collapse_threshold`, `crossing_fraction`, `transition_rate` |
 | Residue | `residue_mean`, `residue_field_R_mean` |
-| Stability | persistence, variance, drift |
+| Stability / Persistence | `basin_persistence`, `persistence_mean`, `variance`, `drift` |
+| Conservation / Legality | `H_app_conservation_error`, `projection_legality_score` |
 | Falsification | expected failure behavior |
 
 ### 12.2 Multi-Model Execution
@@ -834,7 +836,7 @@ No research claim may be finalized until it passes the Unified Claim Gate.
 
 ### 13.2 Gate Checks
 
-1. Tool Certification Check.
+1. Tool rigor endorsement Check.
 2. Scientific Validity Check.
 3. Lexicon Validation Check.
 4. Evidence Provenance Check.
@@ -842,19 +844,20 @@ No research claim may be finalized until it passes the Unified Claim Gate.
 6. Multi-Seed Check.
 7. Falsification Check.
 8. Observable Mapping Check.
-9. Math Foundation Check.
-10. Humility Check.
+9. Algebraic Integrity Check (New - Critical): Verification that operator invariants and projection legality hold across tested regimes.
+10. Math Foundation Check.
+11. Humility Check.
 
 ### 13.3 Promotion and Downgrade Rules
 
-- Missing recoverable output â†’ `PROVISIONAL` or `PRIOR_FINDING`.
-- Any tool below C3 â†’ claim cannot exceed `PARTIALLY_SUPPORTED`.
-- Any required lexicon role below L2 â†’ claim must be labeled `PROPOSED_INTERPRETATION`.
-- Missing falsification â†’ claim cannot be `SUPPORTED`.
-- Fewer than three seeds â†’ claim cannot be `SUPPORTED`.
-- Fewer than two model classes â†’ claim cannot be `SUPPORTED`.
-- Failed falsification â†’ `NOT_SUPPORTED`.
-- Contradictory cross-model result â†’ `NOT_SUPPORTED` or `INCONCLUSIVE`.
+- Missing recoverable output → `PROVISIONAL` or `PRIOR_FINDING`.
+- Any tool below C3 → claim cannot exceed `PARTIALLY_SUPPORTED`.
+- Any required lexicon role below L2 → claim must be labeled `PROPOSED_INTERPRETATION`.
+- Missing falsification → claim cannot be `SUPPORTED`.
+- Fewer than three seeds → claim cannot be `SUPPORTED`.
+- Fewer than two model classes → claim cannot be `SUPPORTED`.
+- Failed falsification → `NOT_SUPPORTED`.
+- Contradictory cross-model result → `NOT_SUPPORTED` or `INCONCLUSIVE`.
 - Only claims passing all checks may be labeled `SUPPORTED` or charter `VERIFIED`.
 
 ### 13.4 Claim Gate Schema
@@ -871,7 +874,7 @@ No research claim may be finalized until it passes the Unified Claim Gate.
     {
       "tool_name": "",
       "model_class": "",
-      "certification_level": "C0 | C1 | C2 | C3 | C4",
+      "rigor endorsement_level": "C0 | C1 | C2 | C3 | C4",
       "rigor_level": "R0 | R1 | R2 | R3 | R4",
       "output_schema_version": "",
       "recoverable_outputs": [],
@@ -910,7 +913,7 @@ No research claim may be finalized until it passes the Unified Claim Gate.
     "induced_terms": []
   },
   "gate_checks": {
-    "tool_certification_pass": false,
+    "tool_rigor endorsement_pass": false,
     "scientific_validity_pass": false,
     "lexicon_validation_pass": false,
     "evidence_provenance_pass": false,
@@ -927,7 +930,7 @@ No research claim may be finalized until it passes the Unified Claim Gate.
 }
 ```
 
-### 13.5 Lexiconâ€“Claim Binding Rule
+### 13.5 Lexicon–Claim Binding Rule
 
 When a claim reaches L2 or higher, every canonical or provisional term used in the claim MUST be bound back to the lexicon validation system.
 
@@ -972,11 +975,11 @@ Otherwise, it is insufficient, provisional, or partially supported depending on 
 
 ### 14.3 Claim Classification
 
-- `Supported` â†’ L3 only.
-- `Partially Supported` â†’ L1 or L2.
-- `Proposed Interpretation` â†’ weak or unverified lexicon term involved.
-- `Not Supported` â†’ contradiction, failed falsification, or no effect.
-- `Inconclusive` â†’ conflicting or insufficient evidence.
+- `Supported` → L3 only.
+- `Partially Supported` → L1 or L2.
+- `Proposed Interpretation` → weak or unverified lexicon term involved.
+- `Not Supported` → contradiction, failed falsification, or no effect.
+- `Inconclusive` → conflicting or insufficient evidence.
 
 ### 14.4 Required Artifact & Robustness Report
 
@@ -991,11 +994,11 @@ Otherwise, it is insufficient, provisional, or partially supported depending on 
 
 ### 14.5 Enforcement
 
-- Missing required sections â†’ invalid.
-- Supported without falsification â†’ invalid.
-- Supported with fewer than three seeds â†’ invalid.
-- Supported with fewer than two model classes â†’ invalid.
-- Empirical claim without recoverable output â†’ invalid or prior finding.
+- Missing required sections → invalid.
+- Supported without falsification → invalid.
+- Supported with fewer than three seeds → invalid.
+- Supported with fewer than two model classes → invalid.
+- Empirical claim without recoverable output → invalid or prior finding.
 
 ---
 
@@ -1093,7 +1096,7 @@ Supported = L3 only.
 
 ### 10. Conclusion
 
-Must start: **â€œWithin these modelsâ€¦â€**
+Must start: **“Within these models…”**
 
 No universal generalization.
 
@@ -1107,7 +1110,7 @@ Include more seeds, more models, parameter scans, convergence testing, or lexico
 
 | Term | Preferred Alignment |
 | --- | --- |
-| NOT_axiom | Îµ â‰  0 / exclusion necessity condition |
+| NOT_axiom | ε ≠ 0 / exclusion necessity condition |
 | Residue | R |
 | CSI | interaction domain / coupling reach |
 | -(i) | orientation operator |
@@ -1152,7 +1155,7 @@ The agent MUST:
 
 ### 18.2 Selection Rules
 - **C++ tools are REQUIRED for C4+ claims unless unavailable.**
-- **Python-only execution is allowed for exploratory or L0â€“L2 runs.**
+- **Python-only execution is allowed for exploratory or L0–L2 runs.**
 - **Python usage in C4+ must include justification and be flagged with `cpp_preference_violation`.**
 
 ### 18.3 Governance Flags
@@ -1177,13 +1180,13 @@ The mathematical foundations of the Mono-Process Framework are governed as core 
 - **Synchronization:** Run `python scripts/sync_math_registry.py` after adding new math files to update the central governance layer.
 
 ### 19.3 Math-Empirical Interlock (Validation)
-- **Status Progression:** `unverified` (proven on paper) → `simulated` (supported by C4+ engine results) → `formally_proven` (symbolic/logic verification).
+- **Status Progression:** `unverified` (proven on paper) ? `simulated` (supported by C4+ engine results) ? `formally_proven` (symbolic/logic verification).
 - **Binding Rule:** Every lemma intended to support a published claim MUST be operationally tested. The `evidence_paths` in the math registry must point to a compliant `results/` directory.
 
 ### 19.4 Symbolic Trace Workflow (C6 Formal Closure)
 For a mathematical statement to achieve Level C6 (Theorem status), it must pass the **Symbolic Trace Workflow**:
-1.  **Primitive Formalization:** Primitives (ε, R, ρ, Δ, θ) must be mapped to formal algebraic types with defined properties and composition rules.
-2.  **Operator Trace:** The derivation must be presented as a sequence of transformation steps using the governed operator grammar (⇔_x).
+1.  **Primitive Formalization:** Primitives (e, R, ?, ?, ?) must be mapped to formal algebraic types with defined properties and composition rules.
+2.  **Operator Trace:** The derivation must be presented as a sequence of transformation steps using the governed operator grammar (?_x).
 3.  **Mechanism Independence Check:** The trace must explicitly show that the result holds regardless of the specific mechanism class (PDE, CA, Graph, etc.), depending only on the relational structure.
 4.  **Convergence Proof:** The trace must demonstrate that the recursive process cycle (C) converges to the stated theorem (T) under all admissible initial conditions.
 
@@ -1198,7 +1201,7 @@ For a mathematical statement to achieve Level C6 (Theorem status), it must pass 
   "mathematical_object_classes": {
     "primitive": {
       "definition": "Irreducible operational element used in formal derivation.",
-      "examples": ["ε", "ρ", "R", "Δ", "-(i)"],
+      "examples": ["e", "?", "R", "?", "-(i)"],
       "constraints": [
         "Must map to operational process behavior",
         "Must not imply prohibited primitive ontology"
@@ -1206,7 +1209,7 @@ For a mathematical statement to achieve Level C6 (Theorem status), it must pass 
     },
     "operator": {
       "definition": "Transformation or relational action applied to primitives or derived structures.",
-      "examples": ["Δ", "I_φ", "R_A", "R_Π"],
+      "examples": ["?", "I_f", "R_A", "R_?"],
       "constraints": [
         "Must define domain and codomain",
         "Must specify admissibility conditions"
@@ -1356,7 +1359,7 @@ For a mathematical statement to achieve Level C6 (Theorem status), it must pass 
 }
 ```
 
-### 19.9 Lemma–Simulation Binding Rules
+### 19.9 Lemma�Simulation Binding Rules
 
 ```json
 {

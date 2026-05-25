@@ -25,7 +25,7 @@ This document declares the **Mono-Process math core** as a stabilized interpreti
 - No QM/GR unification language.
 - Every simulation-facing statement must begin with: **"Within these models..."**.
 - Python prototypes remain reference baselines.
-- C++ engines require Python↔C++ equivalence evidence before certification.
+- C++ engines require Python↔C++ equivalence evidence before rigor endorsement.
 - Run artifacts must be recoverable via configs, seeds, outputs, and validation records.
 - Math-core relation integrity must not be weakened by simulation terminology.
 

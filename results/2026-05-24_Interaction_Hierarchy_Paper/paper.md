@@ -3,7 +3,7 @@
 **Authors:** Gemini CLI (Auto-Edit) / Mono-Process Math Program  
 **Date:** May 24, 2026  
 **Document ID:** MPF-PAPER-2026-05-24-001  
-**Certification:** Level C5 (Mechanism Independent)
+**rigor endorsement:** Level C5 (Mechanism Independent)
 
 ---
 
@@ -25,11 +25,11 @@
 The Mono-Process Framework is founded on the principle that distinguishability and continuation are inseparable aspects of one recursive process, encoded as $(\mathcal{E} \neq 0) \Leftrightarrow_R \delta_a(\mathcal{E} > 0)$. This paper demonstrates that what are classically interpreted as independent fundamental forces emerge as hierarchical organizational resolutions of a single substrate primitive: **Recursive Phase Mismatch Pressure** ($P_\Delta$). Through a series of adversarial Level C5 campaigns, we show that interaction analogs are threshold-dependent projections of ordered relational asymmetry, establishing a formal link between local triadic confinement and global arbitration topology.
 
 ## 2. Scope
-Within the Accellorator validation environment, this work satisfies the Level C5 procedural certification. This paper models organizational relational behaviors within the framework and does not claim to derive established physical laws or discover new universal forces. All interactions are treated as analogy-layer projections (`_app`).
+Within the Accellorator validation environment, this work satisfies the Level C5 procedural rigor endorsement. This paper models organizational relational behaviors within the framework and does not claim to derive established physical laws or discover new universal forces. All interactions are treated as analogy-layer projections (`_app`).
 
-## 3. Certification
+## 3. rigor endorsement
 **NOTICE: INTERNAL GOVERNANCE LABEL**  
-The term "certification" in this project is used exclusively as an internal governance label. It reflects the degree of procedural scrutiny survived within the platform and should not be interpreted as independent empirical confirmation of physical truth claims or external institutional endorsement.
+The term "rigor endorsement" in this project is used exclusively as an internal governance label. It reflects the degree of procedural scrutiny survived within the platform and should not be interpreted as independent empirical confirmation of physical truth claims or external institutional endorsement.
 
 ## 4. Direct Observation and Definition
 The generative engine of all interactions is the **Relational Pressure** ($P_\Delta$), defined as the sum of directional asymmetries across coupled states:

@@ -6,7 +6,7 @@
 ## 0. METADATA AND SCOPE GUARDRAILS
 - **ID:** MPF-MATH-SCHEMA-2026-05-24-V1.2
 - **Status:** DRAFT / PROPOSED SSOT
-- **Compliance:** Charter-aligned draft; certification pending registry verification.
+- **Compliance:** Charter-aligned draft; rigor endorsement pending registry verification.
 - **Physics Scope:** Analogy-layer projection only.
 - **Forbidden Claims:** No claim of QM/GR unification; no claim of new physical laws; no treatment of analogs as physical forces.
 
@@ -132,7 +132,7 @@ $$P_\Delta=\sum |D(S_i\parallel S_j)-D(S_j\parallel S_i)|$$
 ## 11. VALIDATION AND RIGOR TARGETS
 
 **NOTICE: INTERNAL GOVERNANCE LABEL**  
-The term "certification" in this project is used exclusively as an internal governance label designed for the Accellorator/Mono-Process validation environment. It does not represent formal certification by an accredited standards body, university, journal, laboratory, professional society, or independent scientific authority. Any certification tier assigned within the project should be understood as a self-defined procedural rigor classification, indicating the level of internal review, adversarial testing, traceability, and claim-governance applied by the author’s system. It should not be interpreted as external peer review, empirical validation, institutional endorsement, or proof of physical truth.
+The term "rigor endorsement" in this project is used exclusively as an internal governance label designed for the Accellorator/Mono-Process validation environment. It does not represent formal rigor endorsement by an accredited standards body, university, journal, laboratory, professional society, or independent scientific authority. Any rigor endorsement tier assigned within the project should be understood as a self-defined procedural rigor classification, indicating the level of internal review, adversarial testing, traceability, and claim-governance applied by the author’s system. It should not be interpreted as external peer review, empirical validation, institutional endorsement, or proof of physical truth.
 
 Rigor levels indicate degree of procedural scrutiny survived, not proof of truth:
 - **C4 (Adversarially Hardened):** Targeted for multi-seed falsification.

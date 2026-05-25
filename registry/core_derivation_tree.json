@@ -1,0 +1,141 @@
+{
+  "registry_id": "PCD_CORE_DERIVATION_TREE",
+  "version": "1.0.0",
+  "meta": {
+    "description": "Machine-readable derivation tree mapping the core recursive process from the root condition (E != 0) to geometric projections. Codifies conceptual dependencies to prevent drift.",
+    "authority": "compliance_charter_v2_3.json",
+    "root_expression": "(E≠0) ⇔_R δ(E>0)"
+  },
+  "derivation_tree": {
+    "node_id": "DERIV-ROOT",
+    "label": "E != 0",
+    "concept": "NOT Axiom / Mismatch Necessity",
+    "prerequisite_operators": [],
+    "collapse_dependencies": [
+      "E -> 0 (Total Symmetry / Absolute Null)"
+    ],
+    "governing_invariants": [
+      "E != 0 (Non-null mismatch condition)"
+    ],
+    "description": "The root requirement that the process must not be in a state of perfect symmetry. All structure emerges from this exclusion necessity.",
+    "children": [
+      {
+        "node_id": "DERIV-001",
+        "label": "delta_a",
+        "concept": "Governed Actualization / Continuation",
+        "prerequisite_operators": ["⇔_R"],
+        "collapse_dependencies": [
+          "empty_admissible_domain",
+          "selection_failure"
+        ],
+        "governing_invariants": [
+          "residue_conservation",
+          "continuity_of_action"
+        ],
+        "description": "The operator mapping mismatch pressure into admissible process continuation under residue constraints.",
+        "children": [
+          {
+            "node_id": "DERIV-002",
+            "label": "admissibility ordering",
+            "concept": "Admissibility Ranking / Selection Manifold",
+            "prerequisite_operators": ["Pi_A", "delta_a"],
+            "collapse_dependencies": [
+              "ordering_degeneracy",
+              "window_closure"
+            ],
+            "governing_invariants": [
+              "Pi_A idempotence (Pi_A^2 = Pi_A)",
+              "minimization_consistency"
+            ],
+            "description": "The ordering of candidate continuations based on their compatibility with existing residue-written topology.",
+            "children": [
+              {
+                "node_id": "DERIV-003",
+                "label": "recursive transport",
+                "concept": "Iterative Propagation / NavT",
+                "prerequisite_operators": ["NavT", "admissibility ordering"],
+                "collapse_dependencies": [
+                  "residue_divergence",
+                  "transport_burst"
+                ],
+                "governing_invariants": [
+                  "path_continuity",
+                  "reach_preservation"
+                ],
+                "description": "The recursive application of admissibility-filtered continuation, forming structured histories.",
+                "children": [
+                  {
+                    "node_id": "DERIV-004",
+                    "label": "pressure accumulation",
+                    "concept": "Local Epsilon Buildup / Stress Localization",
+                    "prerequisite_operators": ["residue_update", "recursive transport"],
+                    "collapse_dependencies": [
+                      "saturation_collapse",
+                      "inscription_failure"
+                    ],
+                    "governing_invariants": [
+                      "monotonic_inscription",
+                      "local_recurrence_stability"
+                    ],
+                    "description": "The buildup of mismatch pressure (epsilon) where continuation is restricted, leading to topology writing.",
+                    "children": [
+                      {
+                        "node_id": "DERIV-005",
+                        "label": "knot stabilization",
+                        "concept": "Topological Closure / Braid Formation",
+                        "prerequisite_operators": ["Braid_Closure_Operator", "pressure accumulation"],
+                        "collapse_dependencies": [
+                          "braid_unraveling",
+                          "closure_failure"
+                        ],
+                        "governing_invariants": [
+                          "braid_index_preservation",
+                          "topological_winding_number"
+                        ],
+                        "description": "The stabilization of recursive transport paths into closed or self-reinforcing topological loops (braids).",
+                        "children": [
+                          {
+                            "node_id": "DERIV-006",
+                            "label": "field projection",
+                            "concept": "Observable Resolve / Process Mapping",
+                            "prerequisite_operators": ["Projection_Operator", "knot stabilization"],
+                            "collapse_dependencies": [
+                              "projection_loss_limit",
+                              "decoherence"
+                            ],
+                            "governing_invariants": [
+                              "H_app_conservation",
+                              "observable_consistency"
+                            ],
+                            "description": "The projection of high-dimensional topological process dynamics into locally resolved observable fields (e.g., epsilon, rho fields).",
+                            "children": [
+                              {
+                                "node_id": "DERIV-007",
+                                "label": "geometry projection",
+                                "concept": "Metric Emergence / Spatial Analogy",
+                                "prerequisite_operators": ["Metric_Projection_Operator", "field projection"],
+                                "collapse_dependencies": [
+                                  "metric_signature_violation",
+                                  "coordinate_degeneracy"
+                                ],
+                                "governing_invariants": [
+                                  "diffeomorphism_invariance_analog",
+                                  "curvature_continuity"
+                                ],
+                                "description": "The final projection of field dynamics into geometric/spatial manifolds, establishing the spatial analogy (geometry_proj)."
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

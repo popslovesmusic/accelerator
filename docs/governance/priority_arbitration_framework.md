@@ -5,7 +5,7 @@ Rank operational issues and escalation triggers by governance severity and overs
 
 ## 2. Priority Levels
 - **CRITICAL**: Immediate block. Threatens the core Source Relation or non-separability mandates.
-- **HIGH**: Local block. Threatens the validity of a specific theorem package or tool certification.
+- **HIGH**: Local block. Threatens the validity of a specific theorem package or tool rigor endorsement.
 - **MEDIUM**: Warning. Material disagreement or ambiguity that requires clarification.
 - **LOW**: Minor drift or notation inconsistency.
 - **INFORMATIONAL**: Updates on progress or resolved low-risk issues.

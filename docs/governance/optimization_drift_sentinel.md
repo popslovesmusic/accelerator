@@ -10,7 +10,7 @@ Monitor and detect semantic drift introduced by performance-oriented modificatio
 - **seed_stability**: Protecting against chaotic divergence caused by implementation-specific numerical noise.
 
 ## 3. Enforcement
-The sentinel is integrated into the `global_validate.py` harness. Any tool failing a drift check is automatically downgraded in the `tool_certification_registry.json`.
+The sentinel is integrated into the `global_validate.py` harness. Any tool failing a drift check is automatically downgraded in the `tool_rigor endorsement_registry.json`.
 
 ## 4. Governance Boilerplate
 - **Source Relation**: (E≠0) ⇔R δ(E>0)

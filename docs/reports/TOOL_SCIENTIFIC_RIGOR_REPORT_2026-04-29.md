@@ -32,7 +32,7 @@ Current status:
 
 ## 3. Tool Inventory (Updated 2026-04-29)
 
-| Tool | Class | Status | Certification |
+| Tool | Class | Status | rigor endorsement |
 | --- | --- | --- | --- |
 | `accelerator_sim_v1_cpp` | accelerator | Verified | C1 |
 | `circular_accelerator_sim_v1` | accelerator | Verified | C1 |
