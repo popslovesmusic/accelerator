@@ -1,0 +1,86 @@
+{
+  "campaign_metadata": {
+    "campaign_id": "PALG_TIME_ORDERING_FALSIFICATION_C5",
+    "description": "Adversarial suite targeting operator precedence and emergent temporal ordering.",
+    "status": "design_complete",
+    "target_certification": "C5",
+    "governance_locks": {
+      "no_primitive_time": true,
+      "operator_precedence": "strict_hierarchy"
+    }
+  },
+  "mechanism_classes": [
+    "field_substrate",
+    "agent_based_ordering",
+    "topological_reachability",
+    "stochastic_precedence",
+    "pde_gradient_nullification"
+  ],
+  "parameter_sweeps": {
+    "seeds": 200,
+    "Delta_R": ["zero", "asymmetric", "inverted"],
+    "orientation_noise": [0.0, 0.1, 0.5, 1.0],
+    "reconciliation_density": ["sparse", "dense"],
+    "precedence_enforcement": ["standard", "adversarial_reorder"]
+  },
+  "core_metrics": {
+    "ordering_asymmetry": "non_commutativity_index (Phi' o Phi != Phi o Phi')",
+    "reachability_partial_order": "partial_order_depth (prec)",
+    "precedence_failure_rate": "void_expression_count",
+    "stability_gate_integrity": "projection_survival_under_instability",
+    "zero_time_convergence": "ordering_collapse_at_P_delta_zero"
+  },
+  "falsification_attacks": [
+    {
+      "id": "FV-T1",
+      "name": "Hidden Clock Kill-Test",
+      "attack": "Force identical residue history (R_t+1 = R_t) across state updates.",
+      "expected_behavior": "Ordering (prec) should collapse into a symmetric oscillation; perceived duration_app must vanish.",
+      "failure_if": "Directed temporal ordering persists without residue update."
+    },
+    {
+      "id": "FV-O1",
+      "name": "Precedence Bypass Attack",
+      "attack": "Inject interaction coupling (⇔_xa) while programmatically bypassing admissibility gating (⇔_a).",
+      "expected_behavior": "Engine must return VOID/NULL; no state update x' should be reachable.",
+      "failure_if": "Interaction occurs without prior admissibility selection."
+    },
+    {
+      "id": "FV-C1",
+      "name": "Composition Gate Fracture",
+      "attack": "Compose cross-basin projection (⇔_xb) with an unstable triadic configuration (N=2).",
+      "expected_behavior": "Macro-geometry_app must fail to project; scale threshold tau should remain uncrossed.",
+      "failure_if": "Macro-structure emerges from non-stabilized local relations."
+    },
+    {
+      "id": "FV-I1",
+      "name": "Array Fragmentation Attack",
+      "attack": "Isolate local orientation references (-(i)_alpha) such that reconciliation density -> 0.",
+      "expected_behavior": "Global ordering (prec) must fragment into isolated local sequences with no shared durational_app.",
+      "failure_if": "Coherent global time_app persists across fragmented orientation references."
+    },
+    {
+      "id": "FV-S1",
+      "name": "Symmetry-Induced Zero-Time",
+      "attack": "Set D(S1|S2) = D(S2|S1) exactly across the orientation array.",
+      "expected_behavior": "The arrow of ordering must vanish; reachability becomes bi-directional and durationless.",
+      "failure_if": "One-way temporality persists under exact relational symmetry."
+    }
+  ],
+  "claim_gate_conditions": [
+    "Ordering is provably non-commutative and path-dependent.",
+    "Interaction requires verified admissibility (Precedence L2 -> L3).",
+    "Projection requires verified stabilization (Composition Axiom 3).",
+    "Zero-mismatch or zero-asymmetry results in 'Zero-Time' collapse.",
+    "Results replicate across at least three mechanism classes (Independence)."
+  ],
+  "output_configuration": {
+    "directory": "results/2026-05-24_campaign_palg_time_falsification/",
+    "required_artifacts": [
+      "commutativity_matrix.json",
+      "precedence_audit.csv",
+      "partial_order_depth_map.png",
+      "falsification_summary.json"
+    ]
+  }
+}
