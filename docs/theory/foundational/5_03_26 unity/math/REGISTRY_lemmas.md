@@ -62,3 +62,10 @@ L088 | Quantization of Orientation Braids | L068, L084 | provisional | Spin and 
 L089 | Dimensionality of Accessibility | L068, L080 | provisional | 3D analog as triadic closure projection
 L090 | Entanglement as Shared Residue | L084, L081 | provisional | Correlation through common constraint resolution
 L091 | Universal Boundary Invariants | L072, L085 | provisional | c, h, G analogs as invariant continuation limits
+L092 | Projection Kernels | L080, L081 | provisional | Relational convolution over the orientation array
+L093 | Non-Invertibility of Projection | L072, L092 | provisional | Information loss and irreversibility of the macro-bridge
+L094 | Coarse-Graining Legality | L080, L092 | provisional | The tau criterion and homogenization bounds
+L095 | Admissibility Exhaustion | L082 | provisional | Hard-collapse mode via mismatch overflow
+L096 | Residue Decoherence | L085, L090 | provisional | Collapse of shared constraints and coupling fracture
+L097 | Knot Destabilization | T001, L089 | provisional | Dissolution of identity via threshold failure or rank loss
+L098 | Basin Ecology Collapse | L078, L094 | provisional | Scale fracture under global occupancy saturation
