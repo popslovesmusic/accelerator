@@ -4,7 +4,7 @@
 This theorem formally proves the stability of local orientation selection ($O^*$) in recursive process loops. It establishes that a local minimizer shift is stable provided it preserves orientational equivalence ($Ref(\omega)$) or occurs across a formally governed boundary (degeneracy/recoupling). This theorem provides the formal closure for the **Principle of Admissible Persistence**.
 
 ## 2. Formal Statement
-Let $(\mathcal{E} \neq 0) \Leftrightarrow_R \delta(\mathcal{E} > 0)$ be the governing process cycle. Let $O^*(e, r) = \text{argmin}_{\omega \in \mathcal{W}_{adm}} \|\mathcal{E}(\omega, r)\|$ be the selection operator. 
+Let $(\mathcal{E} \neq 0) \Leftrightarrow_R \delta_a(\mathcal{E} > 0)$ be the governing process cycle. Let $O^*(e, r) = \text{argmin}_{\omega \in \mathcal{W}_{adm}} \|\mathcal{E}(\omega, r)\|$ be the selection operator. 
 
 The process transition $T: S_t \to S_{t+1}$ is **Orientationaly Stable** if:
 1.  **Admissibility Preservation:** $\omega_{t+1} \in \mathcal{W}_{adm}$.

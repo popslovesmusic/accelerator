@@ -27,7 +27,7 @@ We map the framework's primitives to formal algebraic types:
 
 ## 3. Symbolic Workflow Step 2: Operator Trace
 
-The derivation follows the core biconditional $(\mathcal{E} \neq 0) \Leftrightarrow_R \delta(\mathcal{E} > 0)$ as a sequence of transformation steps:
+The derivation follows the core biconditional $(\mathcal{E} \neq 0) \Leftrightarrow_R \delta_a(\mathcal{E} > 0)$ as a sequence of transformation steps:
 
 **Step 2.1: Selection Definition**
 The selection operator $O^*$ is defined as the argument that minimizes local mismatch under residue conditioning:
