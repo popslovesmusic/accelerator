@@ -1,0 +1,48 @@
+{
+  "campaign_id": "MST001_RESOLUTION_FRONTIER_CAMPAIGN_V1",
+  "claim_id": "PCD-CLM-MST-001",
+  "goal": "Find the resolution frontier where MST-001 cross-mechanism agreement becomes stable.",
+  "primary_question": "At what resolution, admissibility window, residue reinscription rate, or topology scale does graph_ca_agreement recover?",
+  "variables_to_sweep": [
+    "N",
+    "admissibility_window_width",
+    "residue_reinscription_rate",
+    "switching_frequency",
+    "topology_density",
+    "seed",
+    "mechanism_backend"
+  ],
+  "mechanism_classes": [
+    "graph_dynamics",
+    "cellular_automata",
+    "pde_projection"
+  ],
+  "required_metrics": [
+    "graph_ca_agreement",
+    "graph_pde_agreement",
+    "ca_pde_agreement",
+    "tri_mechanism_agreement",
+    "switching_stability",
+    "residue_persistence",
+    "boundary_violation_rate",
+    "first_divergence_iteration"
+  ],
+  "success_condition": {
+    "tri_mechanism_agreement": ">= declared_threshold",
+    "boundary_violation_rate": "<= declared_tolerance",
+    "multi_seed_required": true,
+    "minimum_seed_count": 30,
+    "must_survive_FV4": true
+  },
+  "failure_condition": {
+    "agreement_remains_low_across_all_resolution_scales": "retire global mechanism-independence claim",
+    "agreement_recovers_only_locally": "preserve bounded conditional theorem",
+    "agreement_depends_on_one_backend": "classify as implementation artifact"
+  },
+  "outputs": [
+    "outputs/audits/mst001_resolution_frontier_results.json",
+    "outputs/audits/mst001_resolution_frontier_matrix.csv",
+    "outputs/audits/mst001_fv4_resolution_report.md"
+  ]
+}
+

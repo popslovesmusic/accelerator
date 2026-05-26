@@ -1,0 +1,299 @@
+{
+  "campaign_spec": {
+    "id": "TRIADIC_CLOSURE_SUBSTRATE_CAMPAIGN_V1",
+    "purpose": "Evaluate whether recursive triadic closure with residue-conditioned continuation generates persistent distinguishability structures above the admissibility floor more robustly than non-triadic controls.",
+    "scope_guardrail": "Simulation and analogy layer only. No direct claims regarding physical spacetime, quantum mechanics, gravity, or particle ontology.",
+    "core_hypothesis": {
+      "statement": "Triads are the minimum recursively stable detectable mismatch structures above the floor.",
+      "canonical_relations": [
+        "(ℰ≠0) <->_R δ_a(ℰ>0)",
+        "D(S1|S2)>0 <->_xa 0<(S2|S1)D",
+        "space_app <->_x matter_app <-> energy_app"
+      ]
+    },
+
+    "global_rules": {
+      "all_runs_require": [
+        "fixed random seed logging",
+        "full config persistence",
+        "backend metadata",
+        "hardware metadata",
+        "JSON result export",
+        "scalar reference validation",
+        "multi-seed ensembles"
+      ],
+      "required_backends": [
+        "CPU_scalar_reference",
+        "CPU_AVX2",
+        "UHD770_layered"
+      ],
+      "minimum_seeds": 16,
+      "minimum_steps_small": 10000,
+      "minimum_steps_large": 100000,
+      "block_size": 256,
+      "floating_point_modes": [
+        "FP32",
+        "FP64_reference"
+      ]
+    },
+
+    "metrics": {
+      "core_metrics": [
+        "closure_strength",
+        "residue_density",
+        "residue_half_life",
+        "orientation_stability",
+        "inside_admissibility_rate",
+        "collapse_rate",
+        "reentry_probability",
+        "cross_triad_coupling_strength",
+        "global_ordering_metric",
+        "dyad_triad_stability_gap"
+      ],
+      "advanced_metrics": [
+        "residue_entropy",
+        "orientation_entropy",
+        "closure_hysteresis",
+        "phase_mismatch_density",
+        "coupling_field_gradient",
+        "basin_survival_time",
+        "collapse_propagation_velocity",
+        "boundary_condition_sensitivity"
+      ]
+    },
+
+    "simulation_campaign": {
+      "phase_0_reference_validation": {
+        "purpose": "Establish deterministic correctness.",
+        "runs": [
+          {
+            "name": "scalar_reference",
+            "backend": "CPU_scalar_reference",
+            "triads": 1,
+            "steps": 10000
+          },
+          {
+            "name": "avx2_reference_compare",
+            "backend": "CPU_AVX2",
+            "triads": 1,
+            "steps": 10000
+          }
+        ],
+        "success_conditions": [
+          "FP32_vs_FP64_drift < 1e-5",
+          "AVX2_vs_scalar_drift < 1e-5"
+        ]
+      },
+
+      "phase_1_single_triad_dynamics": {
+        "purpose": "Characterize baseline triadic closure behavior.",
+        "parameter_sweeps": {
+          "floor_threshold": [0.0001, 0.001, 0.01, 0.1],
+          "recursive_gain": [0.0, 0.1, 0.25, 0.5, 1.0],
+          "residue_decay": [0.0, 0.001, 0.01, 0.1],
+          "coupling_strength": [0.0, 0.1, 0.25, 0.5],
+          "orientation_bias": [0.0, 0.25, 0.5, 1.0]
+        },
+        "tests": [
+          "closure emergence",
+          "collapse threshold",
+          "orientation persistence",
+          "residue formation",
+          "recursive reinforcement dependence"
+        ]
+      },
+
+      "phase_2_dyad_vs_triad_comparison": {
+        "purpose": "Test triad minimality hypothesis.",
+        "structures": [
+          "dyad",
+          "triad",
+          "broken_triad",
+          "tetrad",
+          "random_graph_3"
+        ],
+        "comparisons": [
+          "stability_duration",
+          "residue_persistence",
+          "orientation_coherence",
+          "collapse_frequency",
+          "recovery_after_perturbation"
+        ],
+        "target_result": "Triads maintain detectable mismatch above floor more robustly than controls."
+      },
+
+      "phase_3_hot_block_validation": {
+        "purpose": "Validate cache-hot AVX2 execution.",
+        "triads": 256,
+        "tests": [
+          "isolated_triads",
+          "ring_coupling",
+          "chain_coupling",
+          "dense_local_coupling",
+          "residue_conditioned_coupling"
+        ],
+        "required_outputs": [
+          "L2_cache_efficiency",
+          "AVX2_lane_utilization",
+          "backend_drift_metrics",
+          "step_time_statistics"
+        ]
+      },
+
+      "phase_4_multi_block_substrate": {
+        "purpose": "Test cross-basin interaction and ordered relational extension.",
+        "triads": [
+          4096,
+          16384,
+          65536
+        ],
+        "tests": [
+          "cross_block_mismatch_gradients",
+          "orientation_field_formation",
+          "collapse_propagation",
+          "basin_reentry",
+          "residue_path_dependence",
+          "coupling_channel_synchronization"
+        ]
+      },
+
+      "phase_5_large_scale_layered_execution": {
+        "purpose": "Validate AVX2-to-UHD770 layered co-computation.",
+        "triads": [
+          65536,
+          262144,
+          1048576
+        ],
+        "execution_model": {
+          "cpu_avx2": "local recursive closure",
+          "uhd770": "global coupling/arbitration field"
+        },
+        "sync_intervals": [
+          16,
+          32,
+          64,
+          128
+        ],
+        "tests": [
+          "global_ordering_metric",
+          "cross_basin_coupling",
+          "global_field_stability",
+          "large_scale_residue_persistence",
+          "space_app_projection_behavior"
+        ]
+      }
+    },
+
+    "falsification_campaign": {
+      "purpose": "Attempt to destroy all major claims through adversarial controls.",
+      "vectors": [
+        {
+          "id": "FV_1",
+          "name": "Residue Shuffle",
+          "attack": "Randomly exchange residue histories between triads.",
+          "failure_condition": "Persistence unaffected."
+        },
+        {
+          "id": "FV_2",
+          "name": "Residue Nullification",
+          "attack": "Force residue memory to zero every step.",
+          "failure_condition": "Stable closure still persists identically."
+        },
+        {
+          "id": "FV_3",
+          "name": "Recursive Channel Cut",
+          "attack": "Disable recursive reinforcement channels.",
+          "failure_condition": "Triadic stability unchanged."
+        },
+        {
+          "id": "FV_4",
+          "name": "Orientation Scramble",
+          "attack": "Randomize -(i) mediation each step.",
+          "failure_condition": "Orientation coherence unaffected."
+        },
+        {
+          "id": "FV_5",
+          "name": "Floor Inversion",
+          "attack": "Invert or randomize detectability floor.",
+          "failure_condition": "Persistence remains stable."
+        },
+        {
+          "id": "FV_6",
+          "name": "Dyad Equivalence",
+          "attack": "Tune dyads aggressively for stability.",
+          "failure_condition": "Dyads equal triads."
+        },
+        {
+          "id": "FV_7",
+          "name": "Broken Triad",
+          "attack": "Remove one recursive channel.",
+          "failure_condition": "Broken triad behaves identically."
+        },
+        {
+          "id": "FV_8",
+          "name": "Topology Randomization",
+          "attack": "Randomize coupling graph repeatedly.",
+          "failure_condition": "Global ordering survives unchanged."
+        },
+        {
+          "id": "FV_9",
+          "name": "Saturation Attack",
+          "attack": "Force extreme uniform drive.",
+          "failure_condition": "Closure metrics falsely report stability."
+        },
+        {
+          "id": "FV_10",
+          "name": "Backend Drift",
+          "attack": "Compare scalar, AVX2, and UHD layered outputs.",
+          "failure_condition": "Claims depend strongly on backend."
+        },
+        {
+          "id": "FV_11",
+          "name": "Coupling Nullification",
+          "attack": "Disable <->_R coupling channels.",
+          "failure_condition": "Cross-basin ordering remains unchanged."
+        },
+        {
+          "id": "FV_12",
+          "name": "Boundary Fracture",
+          "attack": "Aggressively perturb boundary conditions.",
+          "failure_condition": "Orientation basins remain unaffected."
+        }
+      ]
+    },
+
+    "claim_gating": {
+      "minimum_requirements": [
+        "multi_seed_consistency",
+        "backend_equivalence",
+        "dyad_control_failure",
+        "broken_triad_instability",
+        "residue_dependence",
+        "recursive_channel_dependence",
+        "orientation_dependence",
+        "non_saturation_validation"
+      ],
+      "promotion_rule": "Claims may only be elevated if all falsification vectors fail to destroy the observed effect.",
+      "downgrade_rule": "If any major effect survives control removal, interpretive claims must be downgraded."
+    },
+
+    "maximum_supported_claim": {
+      "allowed_statement": "Within this simulation model, recursive triadic closure with residue-conditioned continuation generates more persistent detectable mismatch structures above the floor than dyadic or broken-triad controls."
+    },
+
+    "reporting": {
+      "format": "JSON",
+      "required_sections": [
+        "config",
+        "hardware",
+        "backend",
+        "seed",
+        "metrics",
+        "falsification_results",
+        "drift_analysis",
+        "collapse_statistics",
+        "claim_gate_status"
+      ]
+    }
+  }
+}

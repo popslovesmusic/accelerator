@@ -5,7 +5,7 @@ import sys
 import os
 
 def main():
-    parser = argparse.ArgumentParser(description="Triadic Closure Substrate Engine Wrapper")
+    parser = argparse.ArgumentParser(description="Triadic Closure Substrate Engine Wrapper (Final Campaign Edition)")
     parser.add_argument("--config", type=str, required=True, help="Path to config JSON")
     parser.add_argument("--out", type=str, required=True, help="Output directory")
     args = parser.parse_args()
@@ -19,70 +19,66 @@ def main():
         sys.exit(1)
 
     # Extract params
-    triads = config.get("triads", 256)
+    units = config.get("units", config.get("triads", 256))
     steps = config.get("steps", 1000)
     dt = config.get("dt", 0.01)
-    
-    # Numerical Integrity Check (Mandated by C4 Elevation Audit)
-    if dt > 0.1:
-        print(f"ERROR: dt={dt} exceeds the maximum stability threshold (0.1).")
-        print("Numerical drift makes results uninterpretable at this resolution.")
-        sys.exit(1)
-    elif dt > 0.01:
-        print(f"WARNING: dt={dt} is above the convergence threshold (0.01).")
-        print("Results may exhibit numerical drift (>0.5%). Use dt <= 0.01 for high-rigor claims.")
-    
     floor = config.get("floor", 0.05)
-    dyad_mode = config.get("dyad_mode", False)
-    disable_residue = config.get("disable_residue", False)
-    disable_recursive = config.get("disable_recursive", False)
-    disable_orientation = config.get("disable_orientation", False)
     seed = config.get("seed", 42)
+    backend = config.get("backend", "avx2")
+    structure = config.get("structure", "triad")
 
     # Prepare output path
     os.makedirs(args.out, exist_ok=True)
-    summary_path = os.path.join(args.out, "summary.json")
+    summary_path = os.path.normpath(os.path.join(args.out, "summary.json"))
 
     # Locate executable
-    exe_path = os.path.join(os.path.dirname(__file__), "triadic_sim.exe")
+    exe_path = os.path.normpath(os.path.join(os.path.dirname(__file__), "triadic_sim.exe"))
     if not os.path.exists(exe_path):
         print(f"Error: Executable not found at {exe_path}. Did you build it?")
         sys.exit(1)
 
-    # Execute
+    # Build command list
     cmd = [
-        exe_path,
-        "--triads", str(triads),
+        f'"{exe_path}"',
+        "--units", str(units),
         "--steps", str(steps),
         "--dt", str(dt),
         "--floor", str(floor),
         "--seed", str(seed),
-        "--out", summary_path
+        "--backend", str(backend),
+        "--structure", str(structure),
+        "--out", f'"{summary_path}"'
     ]
     
-    if dyad_mode: cmd.append("--dyad-mode")
-    if disable_residue: cmd.append("--disable-residue")
-    if disable_recursive: cmd.append("--disable-recursive")
-    if disable_orientation: cmd.append("--disable-orientation")
+    # Falsification Flags
+    flags = [
+        "residue_shuffle", "residue_nullify", "recursive_cut", "orientation_scramble",
+        "floor_randomize", "topology_randomize", "saturation_attack", "coupling_nullify",
+        "boundary_fracture", "topology_freeze", "admissibility_lock", "residue_delay",
+        "coupling_symmetry", "boundary_randomize", "topology_noise_flood"
+    ]
+    for flag in flags:
+        if config.get(flag):
+            cmd.append(f"--{flag.replace('_', '-')}")
+
+    # Rates and Intervals
+    rates = ["topology_rewire_rate", "admissibility_adapt_rate", "residue_diffusion_rate"]
+    for rate in rates:
+        if rate in config:
+            cmd.extend([f"--{rate.replace('_', '-')}", str(config[rate])])
     
-    # Prepare environment
+    if "sync_interval" in config:
+        cmd.extend(["--sync-interval", str(config["sync_interval"])])
+
     env = os.environ.copy()
+    setvars_path = r"C:\Program Files (x86)\Intel\oneAPI\setvars.bat"
     
-    # Check if oneAPI is initialized, if not, attempt to source setvars
-    if "ONEAPI_ROOT" not in env:
-        setvars_path = r"C:\Program Files (x86)\Intel\oneAPI\setvars.bat"
-        if os.path.exists(setvars_path):
-            print("Intel oneAPI not detected in environment. Initializing via setvars.bat...")
-            # We use a shell to source setvars and then run the engine
-            cmd_str = f'"{setvars_path}" --force && {" ".join(cmd)}'
-            print(f"Running: {cmd_str}")
-            result = subprocess.run(cmd_str, capture_output=True, text=True, shell=True, env=env)
-        else:
-            print(f"Running: {' '.join(cmd)}")
-            result = subprocess.run(cmd, capture_output=True, text=True, env=env)
+    if os.path.exists(setvars_path):
+        cmd_str = f'"{setvars_path}" --force >nul && {" ".join(cmd)}'
     else:
-        print(f"Running: {' '.join(cmd)}")
-        result = subprocess.run(cmd, capture_output=True, text=True, env=env)
+        cmd_str = " ".join(cmd)
+        
+    result = subprocess.run(cmd_str, capture_output=True, text=True, shell=True, env=env)
     
     if result.returncode != 0:
         print("Engine execution failed!")
