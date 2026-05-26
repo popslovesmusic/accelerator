@@ -22,10 +22,21 @@ def main():
     triads = config.get("triads", 256)
     steps = config.get("steps", 1000)
     dt = config.get("dt", 0.01)
+    
+    # Numerical Integrity Check (Mandated by C4 Elevation Audit)
+    if dt > 0.1:
+        print(f"ERROR: dt={dt} exceeds the maximum stability threshold (0.1).")
+        print("Numerical drift makes results uninterpretable at this resolution.")
+        sys.exit(1)
+    elif dt > 0.01:
+        print(f"WARNING: dt={dt} is above the convergence threshold (0.01).")
+        print("Results may exhibit numerical drift (>0.5%). Use dt <= 0.01 for high-rigor claims.")
+    
     floor = config.get("floor", 0.05)
     dyad_mode = config.get("dyad_mode", False)
     disable_residue = config.get("disable_residue", False)
     disable_recursive = config.get("disable_recursive", False)
+    disable_orientation = config.get("disable_orientation", False)
     seed = config.get("seed", 42)
 
     # Prepare output path
@@ -52,9 +63,26 @@ def main():
     if dyad_mode: cmd.append("--dyad-mode")
     if disable_residue: cmd.append("--disable-residue")
     if disable_recursive: cmd.append("--disable-recursive")
+    if disable_orientation: cmd.append("--disable-orientation")
     
-    print(f"Running: {' '.join(cmd)}")
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    # Prepare environment
+    env = os.environ.copy()
+    
+    # Check if oneAPI is initialized, if not, attempt to source setvars
+    if "ONEAPI_ROOT" not in env:
+        setvars_path = r"C:\Program Files (x86)\Intel\oneAPI\setvars.bat"
+        if os.path.exists(setvars_path):
+            print("Intel oneAPI not detected in environment. Initializing via setvars.bat...")
+            # We use a shell to source setvars and then run the engine
+            cmd_str = f'"{setvars_path}" --force && {" ".join(cmd)}'
+            print(f"Running: {cmd_str}")
+            result = subprocess.run(cmd_str, capture_output=True, text=True, shell=True, env=env)
+        else:
+            print(f"Running: {' '.join(cmd)}")
+            result = subprocess.run(cmd, capture_output=True, text=True, env=env)
+    else:
+        print(f"Running: {' '.join(cmd)}")
+        result = subprocess.run(cmd, capture_output=True, text=True, env=env)
     
     if result.returncode != 0:
         print("Engine execution failed!")

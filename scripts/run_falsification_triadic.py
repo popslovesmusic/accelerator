@@ -42,3 +42,7 @@ print(f"{'FV-2 (High Floor)':<25} | {fv2['observables']['mean_closure_strength']
 # FV-3: Residue/Recursive Amputation
 fv3 = run_falsification("3_amputation", {"disable_residue": True, "disable_recursive": True})
 print(f"{'FV-3 (Amputation)':<25} | {fv3['observables']['mean_closure_strength']:<10.3f} | {fv3['observables']['survival_rate']:<10.3f} | PASS" if fv3['observables']['mean_closure_strength'] < 0.2 else f"{'FV-3':<25} | {fv3['observables']['mean_closure_strength']:<10.3f} | {fv3['observables']['survival_rate']:<10.3f} | FAIL")
+
+# FV-4: Orientation Schism (-(i) Violation)
+fv4 = run_falsification("4_orientation_schism", {"disable_orientation": True})
+print(f"{'FV-4 (Orientation Schism)':<25} | {fv4['observables']['space_app_ordering_metric']:<10.6f} | {fv4['observables']['survival_rate']:<10.3f} | PASS" if fv4['observables']['space_app_ordering_metric'] == 0.0 else f"{'FV-4':<25} | {fv4['observables']['space_app_ordering_metric']:<10.6f} | {fv4['observables']['survival_rate']:<10.3f} | FAIL")

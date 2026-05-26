@@ -5,6 +5,10 @@
 #include <fstream>
 #include <iomanip>
 
+#ifdef USE_SYCL
+#include "TriadicEngineSYCL.hpp"
+#endif
+
 // Mock definitions for cross-platform AVX2 semantics
 #if defined(__AVX2__)
 #include <immintrin.h>
@@ -27,6 +31,7 @@ struct Config {
     bool dyad_mode = false;
     bool disable_residue = false;
     bool disable_recursive = false;
+    bool disable_orientation = false;
 };
 
 // Struct-of-Arrays (SoA) layout aligned to 32 bytes for AVX2 processing.
@@ -52,12 +57,18 @@ struct alignas(32) TriadBlockSOA {
     float inside_admissibility_rate[BLOCK_SIZE];
 };
 
+// Ensure SYCL-facing struct is bit-identical
+#ifdef USE_SYCL
+static_assert(sizeof(TriadBlockSOA) == sizeof(TriadBlockSOA_SYCL), "SYCL and CPU struct mismatch");
+#endif
+
 // SIMD-ready Triad Block Update (AVX2 role)
 void update_triad_block_avx2(TriadBlockSOA& block, const Config& cfg) {
     // In a full AVX2 implementation, this loop would use __m256 intrinsics.
     // For portability and demonstration, we use OpenMP SIMD pragmas.
     
-    #pragma omp simd aligned(block.in_channel, block.out_channel, block.recursive_reinforcement: 32)
+    // SIMD-ready Triad Block Update (AVX2 role)
+    #pragma omp simd
     for (int i = 0; i < BLOCK_SIZE; ++i) {
         if (block.collapse_flag[i]) continue; // Skip collapsed triads
         
@@ -83,7 +94,11 @@ void update_triad_block_avx2(TriadBlockSOA& block, const Config& cfg) {
         }
 
         // 3. Orientation Mediation -(i)
-        block.orientation_vector[i] = (block.in_channel[0][i] - block.in_channel[2][i]) * 0.5f;
+        if (cfg.disable_orientation) {
+            block.orientation_vector[i] = 0.0f;
+        } else {
+            block.orientation_vector[i] = (block.in_channel[0][i] - block.in_channel[2][i]) * 0.5f;
+        }
 
         // 4. Recursive Reinforcement & Residue Inscription
         if (!cfg.disable_residue) {
@@ -112,16 +127,15 @@ void update_triad_block_avx2(TriadBlockSOA& block, const Config& cfg) {
 }
 
 // UHD 770 Role Stub: Global Coupling Field Arbitration
-void process_global_coupling_uhd770(std::vector<TriadBlockSOA>& blocks, const Config& cfg) {
+void process_global_coupling_uhd770_emulated(TriadBlockSOA* blocks, int num_blocks, const Config& cfg) {
     // In layered architecture, this would be a SYCL kernel operating on shared memory.
     // For small_run_mode, we perform a naive CPU reduction.
-    size_t num_blocks = blocks.size();
     if (num_blocks <= 1) return;
     
     // Naive nearest-neighbor block coupling (1D chain for demo)
-    for (size_t b = 0; b < num_blocks; ++b) {
-        size_t prev = (b == 0) ? num_blocks - 1 : b - 1;
-        size_t next = (b == num_blocks - 1) ? 0 : b + 1;
+    for (int b = 0; b < num_blocks; ++b) {
+        int prev = (b == 0) ? num_blocks - 1 : b - 1;
+        int next = (b == num_blocks - 1) ? 0 : b + 1;
         
         for (int i = 0; i < BLOCK_SIZE; ++i) {
             // Residue-conditioned coupling: <->_R
@@ -150,6 +164,7 @@ int main(int argc, char* argv[]) {
         if (arg == "--dyad-mode") cfg.dyad_mode = true;
         if (arg == "--disable-residue") cfg.disable_residue = true;
         if (arg == "--disable-recursive") cfg.disable_recursive = true;
+        if (arg == "--disable-orientation") cfg.disable_orientation = true;
         if (arg == "--out" && i + 1 < argc) out_path = argv[++i];
     }
     
@@ -157,12 +172,28 @@ int main(int argc, char* argv[]) {
     int num_blocks = (cfg.triads + BLOCK_SIZE - 1) / BLOCK_SIZE;
     int actual_triads = num_blocks * BLOCK_SIZE;
     
-    // Allocate Unified Memory (mocked as std::vector for CPU)
-    std::vector<TriadBlockSOA> blocks(num_blocks);
+    // Allocate Memory
+#ifdef USE_SYCL
+    TriadBlockSOA* blocks_ptr = nullptr;
+    sycl::queue q;
+    try {
+        q = sycl::queue(sycl::gpu_selector_v);
+        blocks_ptr = sycl::malloc_shared<TriadBlockSOA>(num_blocks, q);
+        std::cout << "SYCL Memory allocated on: " << q.get_device().get_info<sycl::info::device::name>() << std::endl;
+    } catch (sycl::exception const& e) {
+        std::cerr << "SYCL Exception: " << e.what() << std::endl;
+        return 1;
+    }
+    dase::triadic::TriadicEngineSYCL sycl_engine(num_blocks, q);
+#else
+    std::vector<TriadBlockSOA> blocks_vec(num_blocks);
+    TriadBlockSOA* blocks_ptr = blocks_vec.data();
+#endif
     
     // Initialize
     srand(cfg.seed);
-    for (auto& block : blocks) {
+    for (int b = 0; b < num_blocks; ++b) {
+        TriadBlockSOA& block = blocks_ptr[b];
         for (int i = 0; i < BLOCK_SIZE; ++i) {
             block.in_channel[0][i] = 0.5f + (rand() % 100) / 1000.0f;
             block.in_channel[1][i] = 0.4f + (rand() % 100) / 1000.0f;
@@ -177,13 +208,17 @@ int main(int argc, char* argv[]) {
 
     // Layered Pipeline Execution
     for (int step = 0; step < cfg.steps; ++step) {
-        // 1. AVX2 updates local triad blocks
-        for (auto& block : blocks) {
-            update_triad_block_avx2(block, cfg);
+        // 1. AVX2 updates local triad blocks (Always CPU-side for cache-hot tiling)
+        for (int b = 0; b < num_blocks; ++b) {
+            update_triad_block_avx2(blocks_ptr[b], cfg);
         }
         
-        // 2 & 3 & 4. UHD 770 processes global coupling field & writes corrections
-        process_global_coupling_uhd770(blocks, cfg);
+        // 2 & 3 & 4. Global Coupling Field Arbitration
+#ifdef USE_SYCL
+        sycl_engine.process_global_coupling((TriadBlockSOA_SYCL*)blocks_ptr, cfg.coupling_strength, cfg.dt);
+#else
+        process_global_coupling_uhd770_emulated(blocks_ptr, num_blocks, cfg);
+#endif
     }
     
     // Global Reductions
@@ -192,15 +227,12 @@ int main(int argc, char* argv[]) {
     int total_collapse = 0;
     float global_alignment_x = 0.0f;
     
-    for (const auto& block : blocks) {
+    for (int b = 0; b < num_blocks; ++b) {
+        const TriadBlockSOA& block = blocks_ptr[b];
         for (int i = 0; i < BLOCK_SIZE; ++i) {
             total_closure += block.closure_strength[i];
             total_residue += block.residue[i];
             total_collapse += block.collapse_flag[i];
-            
-            // Macroscopic alignment proxy for space_app_ordering_metric
-            // Orientation vector is a scalar proxy here; in full it would be a unit vector.
-            // Summing the absolute values vs raw values to check for coherent ordering.
             global_alignment_x += block.orientation_vector[i];
         }
     }
@@ -210,8 +242,13 @@ int main(int argc, char* argv[]) {
     // Write JSON Summary
     std::ofstream out(out_path);
     out << "{\n";
+#ifdef USE_SYCL
+    out << "  \"backend\": \"Layered AVX2_to_SYCL\",\n";
+    out << "  \"hardware_metadata\": \"" << q.get_device().get_info<sycl::info::device::name>() << "\",\n";
+#else
     out << "  \"backend\": \"CPU_AVX2\",\n";
     out << "  \"hardware_metadata\": \"AVX2 emulation layer\",\n";
+#endif
     out << "  \"triad_count\": " << actual_triads << ",\n";
     out << "  \"block_size\": " << BLOCK_SIZE << ",\n";
     out << "  \"steps\": " << cfg.steps << ",\n";
@@ -226,5 +263,10 @@ int main(int argc, char* argv[]) {
     out << "}\n";
     
     std::cout << "Execution complete. Summary written to " << out_path << std::endl;
+
+#ifdef USE_SYCL
+    sycl::free(blocks_ptr, q);
+#endif
+
     return 0;
 }

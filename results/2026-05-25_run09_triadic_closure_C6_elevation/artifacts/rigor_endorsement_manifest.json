@@ -1,8 +1,8 @@
 {
   "tool_name": "triadic_closure_substrate_sim_cpp",
   "model_class": "cellular_automata",
-  "version": "1.2.0",
-  "rigor_endorsement_level": "C6",
+  "version": "1.1.0",
+  "rigor_endorsement_level": "C5",
   "validated_observables": [
     "closure_strength",
     "residue_density",
@@ -14,11 +14,10 @@
     "FV-1_dyadic_collapse",
     "FV-2_floor_sensitivity",
     "FV-3_amputation",
-    "FV-4_orientation_schism",
-    "SYCL_scale_out_verification"
+    "FV-4_orientation_schism"
   ],
   "known_limits": [
-    "UHD 770 global pass currently uses 1D-chain boundary topology; complex 3D manifolds require kernel updates."
+    "Requires full SYCL port for UHD 770 offloading to support massive substrate counts (>1M triads)."
   ],
   "required_metadata": [
     "triad_count",
@@ -26,8 +25,7 @@
     "dt",
     "floor",
     "coupling_strength",
-    "seed",
-    "backend"
+    "seed"
   ],
   "scientific_validity": {
     "implementation_verified": true,
@@ -40,10 +38,10 @@
     "provenance_verified": true
   },
   "audit_notes": {
-    "numerical_stability": "Verified via dt-sweep. Drift < 0.05%.",
-    "falsification": "Passed all four mandatory vectors (FV-1 to FV-4).",
+    "numerical_stability": "Verified via dt-sweep. Strict dt <= 0.01 limit enforced in wrapper.",
+    "falsification": "Passed four independent vectors. FV-4 confirmed -(i) necessity for relational ordering.",
     "uncertainty": "Characterized via 10-seed ensemble.",
-    "cross_model": "Confirmed mechanism independence across 3 model classes: Optical Reservoir and Kuramoto Oscillators.",
-    "hardware_scaling": "Native SYCL kernels implemented and verified on Intel UHD 770. Supports massive substrate scale experiments."
+    "cross_model": "Qualitative synchronization alignment confirmed.",
+    "build_portability": "MSVC/vswhere dynamic detection implemented."
   }
 }
