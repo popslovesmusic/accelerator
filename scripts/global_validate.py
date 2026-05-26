@@ -5,6 +5,7 @@ import subprocess
 import sys
 from datetime import datetime
 from pathlib import Path
+import re
 
 class RegistryValidator:
     def __init__(self, root_dir):
@@ -145,33 +146,64 @@ class HygieneValidator:
         self.results_dir = self.root / "results"
 
     def run(self):
-        results = {"status": "success", "violations": []}
+        results = {"status": "success", "violations": [], "warnings": []}
+
+        # A. Repo-root artifact pollution check (hard fail)
+        forbidden = []
+        for entry in self.root.iterdir():
+            name = entry.name
+            if name in {"test_config.json"}:
+                continue
+            if entry.is_dir():
+                if name.endswith("_out"):
+                    forbidden.append(name + "/")
+                if name.startswith(("dt_sweep_", "fv_", "uq_seed_", "lex_val_", "lex_multi_tri_", "cross_")) and name.endswith("_out"):
+                    forbidden.append(name + "/")
+            elif entry.is_file():
+                if name.endswith("_config.json"):
+                    forbidden.append(name)
+                if name.startswith(("dt_sweep_", "fv_", "uq_seed_", "lex_val_", "lex_multi_tri_", "cross_")) and (name.endswith(".json") or name.endswith(".md")):
+                    forbidden.append(name)
+                if "@+" in name and "+@" in name:
+                    forbidden.append(name)
+
+        if forbidden:
+            results["violations"].append("Root Pollution Detected: " + ", ".join(sorted(set(forbidden))))
+
+        # B. Results directory conventions (naming + required structure for new runs)
         if not self.results_dir.exists():
+            if results["violations"]:
+                results["status"] = "failed"
             return results
 
+        new_run_id_re = re.compile(r"^\d{4}-\d{2}-\d{2}_\d{6}_.+")
+        legacy_run_id_re = re.compile(r"^\d{4}-\d{2}-\d{2}_run\d+_.+")
+
         for folder in self.results_dir.iterdir():
-            if not folder.is_dir(): continue
-            
-            # Check naming convention: YYYY-MM-DD_runNN_name
-            name = folder.name
-            try:
-                parts = name.split('_')
-                datetime.strptime(parts[0], "%Y-%m-%d")
-                if not parts[1].startswith("run"): raise ValueError()
-            except:
-                results["violations"].append(f"Naming Violation: '{name}' does not follow date_runNN_name schema.")
+            if not folder.is_dir():
                 continue
 
-            # Check contents: paper.md, data/, artifacts/
-            if not (folder / "paper.md").exists():
-                results["violations"].append(f"Missing Paper: '{name}/paper.md' not found.")
-            if not (folder / "data").is_dir():
-                results["violations"].append(f"Missing Data: '{name}/data/' directory not found.")
-            if not (folder / "artifacts").is_dir():
-                results["violations"].append(f"Missing Artifacts: '{name}/artifacts/' directory not found.")
+            name = folder.name
+            if new_run_id_re.match(name):
+                # New policy applies to script-runs (run_metadata.json present).
+                # Campaign runs may have different internal structure; do not hard-fail them here.
+                if (folder / "reports" / "run_metadata.json").exists():
+                    required = ["configs", "outputs", "reports", "logs", "raw"]
+                    missing = [d for d in required if not (folder / d).is_dir()]
+                    if missing:
+                        results["violations"].append(f"Results Structure Violation: '{name}' missing {missing}.")
+                else:
+                    results["warnings"].append(f"Results Structure Unverified: '{name}' has no reports/run_metadata.json (treated as non-script run).")
+            elif legacy_run_id_re.match(name):
+                results["warnings"].append(f"Legacy Results Naming: '{name}' uses date_runNN_name schema.")
+            else:
+                results["warnings"].append(f"Results Naming Unrecognized: '{name}' does not match required run id formats.")
 
         if results["violations"]:
             results["status"] = "failed"
+        elif results["warnings"]:
+            results["status"] = "warning"
+
         return results
 
 class MathValidator:

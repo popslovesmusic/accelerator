@@ -22,6 +22,12 @@ def main():
     units = config.get("units", config.get("triads", 256))
     steps = config.get("steps", 1000)
     dt = config.get("dt", 0.01)
+    
+    # Numerical Integrity Check
+    if dt > 0.1:
+        print(f"ERROR: dt={dt} exceeds the maximum stability threshold (0.1).")
+        sys.exit(1)
+    
     floor = config.get("floor", 0.05)
     seed = config.get("seed", 42)
     backend = config.get("backend", "avx2")
@@ -55,20 +61,24 @@ def main():
         "residue_shuffle", "residue_nullify", "recursive_cut", "orientation_scramble",
         "floor_randomize", "topology_randomize", "saturation_attack", "coupling_nullify",
         "boundary_fracture", "topology_freeze", "admissibility_lock", "residue_delay",
-        "coupling_symmetry", "boundary_randomize", "topology_noise_flood"
+        "coupling_symmetry", "boundary_randomize", "topology_noise_flood",
+        "flatten_cost_gradients", "force_boundary_symmetry"
     ]
     for flag in flags:
         if config.get(flag):
             cmd.append(f"--{flag.replace('_', '-')}")
 
     # Rates and Intervals
-    rates = ["topology_rewire_rate", "admissibility_adapt_rate", "residue_diffusion_rate"]
+    rates = ["topology_rewire_rate", "admissibility_adapt_rate", "residue_diffusion_rate", "probe_speed"]
     for rate in rates:
         if rate in config:
             cmd.extend([f"--{rate.replace('_', '-')}", str(config[rate])])
     
     if "sync_interval" in config:
         cmd.extend(["--sync-interval", str(config["sync_interval"])])
+    
+    if "probe_count" in config:
+        cmd.extend(["--probe-count", str(config["probe_count"])])
 
     env = os.environ.copy()
     setvars_path = r"C:\Program Files (x86)\Intel\oneAPI\setvars.bat"

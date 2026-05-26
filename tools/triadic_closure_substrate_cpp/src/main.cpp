@@ -46,7 +46,7 @@ struct Config {
     BackendMode backend = BackendMode::AVX2;
     StructureType structure = StructureType::TRIAD;
 
-    // Patch V2: Dynamic Topology & Admissibility
+    // Patch V2: Adaptive mechanisms
     float topology_rewire_rate = 0.01f;
     float admissibility_adapt_rate = 0.05f;
     float residue_diffusion_rate = 0.02f;
@@ -72,6 +72,12 @@ struct Config {
     bool boundary_randomize = false;
     bool topology_noise_flood = false;
     int sync_interval = 1;
+
+    // gravity_app Campaign
+    bool flatten_cost_gradients = false;
+    bool force_boundary_symmetry = false;
+    int probe_count = 100;
+    float probe_speed = 1.0f;
 };
 
 // Struct-of-Arrays (SoA) layout aligned to 32 bytes
@@ -99,10 +105,19 @@ struct alignas(32) UnitBlockSOA {
     float neighbor_weight_prev[BLOCK_SIZE];
     float neighbor_weight_next[BLOCK_SIZE];
 
+    // Relational Curvature
+    float continuation_cost[BLOCK_SIZE];
+
     // Observables
     float persistence_score[BLOCK_SIZE];
     float inside_admissibility_rate[BLOCK_SIZE];
     float identity_signature[BLOCK_SIZE]; // Proxy for basin_signature_hash
+};
+
+struct Probe {
+    float x;
+    float v;
+    float total_deflection;
 };
 
 // SIMD-ready Unit Block Update
@@ -123,6 +138,7 @@ void update_unit_block(UnitBlockSOA& block, const Config& cfg) {
                 block.neighbor_weight_prev[i] *= 0.95f;
                 block.neighbor_weight_next[i] *= 0.95f;
             }
+            block.continuation_cost[i] = 100.0f;
             continue;
         }
 
@@ -156,6 +172,7 @@ void update_unit_block(UnitBlockSOA& block, const Config& cfg) {
         if (mismatch < current_floor) {
             block.collapse_flag[i] = 1;
             block.closure_strength[i] = 0.0f;
+            block.continuation_cost[i] = 100.0f;
             continue;
         }
 
@@ -207,6 +224,13 @@ void update_unit_block(UnitBlockSOA& block, const Config& cfg) {
             block.neighbor_weight_next[i] = (static_cast<float>(rand()) / RAND_MAX) * 2.0f;
         }
 
+        // Relational Curvature: Continuation Cost
+        if (cfg.flatten_cost_gradients) {
+            block.continuation_cost[i] = 1.0f;
+        } else {
+            block.continuation_cost[i] = 1.0f / (0.1f + block.residue[i]);
+        }
+
         block.persistence_score[i] += block.closure_strength[i] * cfg.dt;
         block.identity_signature[i] = block.residue[i] * block.orientation_vector[i];
     }
@@ -241,6 +265,12 @@ void process_global_coupling_uhd770_emulated(UnitBlockSOA* blocks, int num_block
                 blocks[b].in_channel[0][i] = (static_cast<float>(rand()) / RAND_MAX);
             }
         }
+        if (cfg.force_boundary_symmetry && (b == 0 || b == num_blocks - 1)) {
+             int opp = (b == 0) ? num_blocks - 1 : 0;
+             for (int i = 0; i < BLOCK_SIZE; ++i) {
+                 blocks[b].in_channel[0][i] = blocks[opp].out_channel[0][i];
+             }
+        }
 
         int prev = (b == 0) ? num_blocks - 1 : b - 1;
         int next = (b == num_blocks - 1) ? 0 : b + 1;
@@ -257,8 +287,37 @@ void process_global_coupling_uhd770_emulated(UnitBlockSOA* blocks, int num_block
 
             blocks[b].coupling_channel[0][i] = (blocks[prev].out_channel[0][i] * w_prev + 
                                                blocks[next].out_channel[0][i] * w_next) * coupling_factor;
+            
             blocks[b].in_channel[0][i] += blocks[b].coupling_channel[0][i] * effective_dt;
         }
+    }
+}
+
+// Relational Probe Movement
+void update_probes(std::vector<Probe>& probes, UnitBlockSOA* blocks, int total_units, const Config& cfg) {
+    for (auto& p : probes) {
+        int idx = static_cast<int>(p.x);
+        if (idx < 0 || idx >= total_units) {
+             p.x = (static_cast<float>(rand()) / RAND_MAX) * (total_units - 1);
+             p.v = cfg.probe_speed;
+             continue;
+        }
+
+        int prev_idx = (idx == 0) ? total_units - 1 : idx - 1;
+        int next_idx = (idx == total_units - 1) ? 0 : idx + 1;
+
+        float cost_prev = blocks[prev_idx / BLOCK_SIZE].continuation_cost[prev_idx % BLOCK_SIZE];
+        float cost_next = blocks[next_idx / BLOCK_SIZE].continuation_cost[next_idx % BLOCK_SIZE];
+        
+        float gradient = cost_prev - cost_next;
+        float acceleration = gradient * 0.1f;
+        
+        p.v += acceleration * cfg.dt;
+        p.total_deflection += std::abs(acceleration) * cfg.dt;
+        p.x += p.v * cfg.dt;
+
+        if (p.x < 0) p.x += total_units;
+        if (p.x >= total_units) p.x -= total_units;
     }
 }
 
@@ -299,20 +358,20 @@ int main(int argc, char* argv[]) {
         if (arg == "--saturation-attack") cfg.saturation_attack = true;
         if (arg == "--coupling-nullify") cfg.coupling_nullify = true;
         if (arg == "--boundary-fracture") cfg.boundary_fracture = true;
-
-        // Patch V2 flags
         if (arg == "--topology-freeze") cfg.topology_freeze = true;
         if (arg == "--admissibility-lock") cfg.admissibility_lock = true;
         if (arg == "--residue-delay") cfg.residue_delay = true;
         if (arg == "--coupling-symmetry") cfg.coupling_symmetry = true;
         if (arg == "--boundary-randomize") cfg.boundary_randomize = true;
         if (arg == "--topology-noise-flood") cfg.topology_noise_flood = true;
+        if (arg == "--flatten-cost-gradients") cfg.flatten_cost_gradients = true;
+        if (arg == "--force-boundary-symmetry") cfg.force_boundary_symmetry = true;
+        
         if (arg == "--sync-interval" && i + 1 < argc) cfg.sync_interval = std::stoi(argv[++i]);
-
-        // Patch V2 rates
         if (arg == "--topology-rewire-rate" && i + 1 < argc) cfg.topology_rewire_rate = std::stof(argv[++i]);
         if (arg == "--admissibility-adapt-rate" && i + 1 < argc) cfg.admissibility_adapt_rate = std::stof(argv[++i]);
         if (arg == "--residue-diffusion-rate" && i + 1 < argc) cfg.residue_diffusion_rate = std::stof(argv[++i]);
+        if (arg == "--probe-count" && i + 1 < argc) cfg.probe_count = std::stoi(argv[++i]);
         
         if (arg == "--out" && i + 1 < argc) out_path = argv[++i];
     }
@@ -358,13 +417,19 @@ int main(int argc, char* argv[]) {
             block.inside_admissibility_rate[i] = 0.0f;
             block.identity_signature[i] = 0.0f;
             block.orientation_vector[i] = 0.0f;
-
-            // Patch V2 Init
+            block.continuation_cost[i] = 1.0f;
             block.dynamic_window_low[i] = 0.1f; 
             block.dynamic_window_high[i] = cfg.admissibility_window; 
             block.neighbor_weight_prev[i] = 1.0f;
             block.neighbor_weight_next[i] = 1.0f;
         }
+    }
+
+    std::vector<Probe> probes(cfg.probe_count);
+    for (auto& p : probes) {
+        p.x = (static_cast<float>(rand()) / RAND_MAX) * (actual_units - 1);
+        p.v = cfg.probe_speed;
+        p.total_deflection = 0.0f;
     }
 
     for (int step = 0; step < cfg.steps; ++step) {
@@ -383,13 +448,10 @@ int main(int argc, char* argv[]) {
             process_global_coupling_uhd770_emulated(blocks_ptr, num_blocks, cfg, cfg.sync_interval);
 #endif
         }
+        update_probes(probes, blocks_ptr, actual_units, cfg);
     }
     
-    // Global Reductions
-    double total_closure = 0.0;
-    double total_residue = 0.0;
-    double total_persistence = 0.0;
-    double total_admissibility = 0.0;
+    double total_closure = 0.0, total_residue = 0.0, total_persistence = 0.0, total_admissibility = 0.0;
     int total_collapse = 0;
     double global_alignment_x = 0.0;
     
@@ -405,15 +467,16 @@ int main(int argc, char* argv[]) {
         }
     }
     
-    // Global Orientation Entropy
+    double total_deflection = 0.0;
+    for (const auto& p : probes) total_deflection += p.total_deflection;
+
     const int bins = 20;
     std::vector<int> histogram(bins, 0);
     for (int b = 0; b < num_blocks; ++b) {
         for (int i = 0; i < BLOCK_SIZE; ++i) {
             float val = blocks_ptr[b].orientation_vector[i];
             int bin = static_cast<int>((val + 1.0f) * 0.5f * (bins - 1));
-            bin = std::max(0, std::min(bins - 1, bin));
-            histogram[bin]++;
+            histogram[std::max(0, std::min(bins - 1, bin))]++;
         }
     }
     double entropy = 0.0;
@@ -436,21 +499,18 @@ int main(int argc, char* argv[]) {
     out << "    \"mean_inside_admissibility_rate\": " << (total_admissibility / actual_units) / cfg.steps << ",\n";
     out << "    \"survival_rate\": " << 1.0 - (double)total_collapse / actual_units << ",\n";
     out << "    \"global_ordering_metric\": " << std::abs(global_alignment_x) / actual_units << ",\n";
-    out << "    \"global_orientation_entropy\": " << entropy << "\n";
+    out << "    \"global_orientation_entropy\": " << entropy << ",\n";
+    out << "    \"mean_trajectory_deflection\": " << total_deflection / cfg.probe_count << "\n";
     out << "  },\n";
     out << "  \"collapse_events\": " << total_collapse << ",\n";
     out << "  \"validation_status\": \"pass\"\n";
     out << "}\n";
 
 #ifdef USE_SYCL
-    if (cfg.backend == BackendMode::SYCL) {
-        sycl::free(blocks_ptr, q);
-        delete sycl_engine;
-    }
+    if (cfg.backend == BackendMode::SYCL) { sycl::free(blocks_ptr, q); delete sycl_engine; }
     else delete[] blocks_ptr;
 #else
     delete[] blocks_ptr;
 #endif
-
     return 0;
 }

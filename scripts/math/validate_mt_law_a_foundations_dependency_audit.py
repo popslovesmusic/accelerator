@@ -31,17 +31,42 @@ def validate_audit():
 
     # Validate Dependencies (Theorems/Lemmas)
     deps = registry["dependencies_audited"]["law_dependencies"]
-    math_registry_path = "registry/math_registry.json"
-    if not os.path.exists(math_registry_path):
-        report["validation_status"] = "fail"
-        report["governance_violations"].append("missing math registry (SSOT)")
-        return report
-        
-    with open(math_registry_path, 'r', encoding='utf-8') as mf:
-        math_reg = json.load(mf)
     
-    all_math_items = math_reg.get('theorems', []) + math_reg.get('lemmas', []) + math_reg.get('proofs', [])
-    registered_ids = [item['item_id'] for item in all_math_items]
+    # SSOT: Search governance_manifest.json and granular registries
+    registered_ids = set()
+    
+    # 1. From governance_manifest.json
+    manifest_path = "registry/governance_manifest.json"
+    if os.path.exists(manifest_path):
+        with open(manifest_path, 'r', encoding='utf-8') as f:
+            manifest = json.load(f)
+            nodes = manifest.get("nodes", {})
+            for nid in nodes:
+                registered_ids.add(nid)
+
+    # 2. From granular math registries
+    math_dir = "registry/math/"
+    if os.path.exists(math_dir):
+        for filename in os.listdir(math_dir):
+            if filename.endswith(".json"):
+                with open(os.path.join(math_dir, filename), 'r') as f:
+                    try:
+                        data = json.load(f)
+                        # Check various potential ID locations in granular registries
+                        if isinstance(data, dict):
+                            # Direct ID
+                            if "item_id" in data: registered_ids.add(data["item_id"])
+                            if "theorem_id" in data: registered_ids.add(data["theorem_id"])
+                            if "lemma_id" in data: registered_ids.add(data["lemma_id"])
+                            # Lists of items
+                            for key in ["theorems", "lemmas", "proofs", "laws", "law_families"]:
+                                if key in data and isinstance(data[key], list):
+                                    for item in data[key]:
+                                        if isinstance(item, dict):
+                                            for id_key in ["item_id", "theorem_id", "lemma_id", "law_id", "family_id"]:
+                                                if id_key in item: registered_ids.add(item[id_key])
+                    except:
+                        continue
 
     for dep in deps:
         if dep not in registered_ids:
