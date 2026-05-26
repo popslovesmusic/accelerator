@@ -1998,13 +1998,13 @@
     },
     "T005": {
       "type": "theorem",
-      "status": "formally_proven",
+      "status": "conditional_operational_lemma",
       "data": {
         "item_id": "T005",
         "title": "The Minimizer Switching Stability Theorem (MST-001)",
-        "statement": "This theorem formally proves the stability of local orientation selection ($O^*$) in recursive process loops. It establishes that a local minimizer shift is stable provided it preserves orientational equivalence ($Ref(\\omega)$) or occurs across a formally governed boundary (degeneracy/recoupling). This theorem provides the formal closure for the **Principle of Admissible Persistence**.",
+        "statement": "This theorem procedurally supports under stated constraints the stability of local orientation selection ($O^*$) in recursive process loops. It establishes that a local minimizer shift is stable provided it preserves orientational equivalence ($Ref(\\omega)$) or occurs across a formally governed boundary (degeneracy/recoupling). This theorem is **falsification-challenged** under FV-4 and is not treated as unconditional C6 closure.",
         "dependencies_raw": "",
-        "status": "formally_proven",
+        "status": "conditional_operational_lemma",
         "proof_type": "heuristic",
         "object_classes": [],
         "operators_used": [],
@@ -4182,13 +4182,13 @@
     },
     "P027": {
       "type": "proof",
-      "status": "formally_proven",
+      "status": "conditional_operational_lemma",
       "data": {
         "item_id": "P027",
         "title": "MST-001 Symbolic Trace (Minimizer Switching Stability)",
-        "statement": "This document provides the formal **Symbolic Trace** for the Master Theorem (MST-001), proving the stability of local orientation selection ($O^*$) under minimizer switching. It satisfies the Level C6 formal closure requirements by defining formal primitives, tracing operator transformations, verifying mechanism independence, and proving recursive convergence.",
+        "statement": "This document provides a **Symbolic Trace** for the Master Theorem (MST-001), procedurally supporting under stated constraints the stability of local orientation selection ($O^*$) under minimizer switching. It is not treated as unconditional C6 closure while FV-4 remains unresolved; its role here is bounded traceability, dependency disclosure, and controlled operational reasoning.",
         "dependencies_raw": "",
-        "status": "formally_proven",
+        "status": "conditional_operational_lemma",
         "proof_type": "heuristic",
         "object_classes": [],
         "operators_used": [],
@@ -4202,8 +4202,8 @@
         "supersedes": "",
         "path": "docs\\theory\\foundational\\5_03_26 unity\\math\\proofs\\P027_MST_001_symbolic_trace.md",
         "evidence_paths": [
-          "results/2026-05-23_run06_MSV_001_Cross_Model_Verification/paper.md",
-          "results/2026-05-23_run12_BLOCK_CLOSURE_X_Attack/paper.md"
+          "results/2026-05-23_run12_BLOCK_CLOSURE_X_Attack/paper.md",
+          "results/2026-05-23_run06_MSV_001_Cross_Model_Verification/paper.md"
         ]
       }
     },
@@ -6268,8 +6268,8 @@
         "supersedes": "",
         "path": "docs\\theory\\foundational\\5_03_26 unity\\math\\proofs\\P028_T001_symbolic_trace.md",
         "evidence_paths": [
-          "results/2026-05-23_run06_MSV_001_Cross_Model_Verification/paper.md",
-          "results/2026-05-24_run01_interaction_hierarchy_falsification/metrics.json"
+          "results/2026-05-24_run01_interaction_hierarchy_falsification/metrics.json",
+          "results/2026-05-23_run06_MSV_001_Cross_Model_Verification/paper.md"
         ]
       }
     },
@@ -6833,6 +6833,27 @@
         "path": "docs\\theory\\foundational\\5_03_26 unity\\math\\lemmas\\L098_basin_ecology_collapse.md",
         "evidence_paths": []
       }
+    },
+    "L5_RIGOR_FORKED_ATTACK": {
+      "type": "claim",
+      "status": "C6",
+      "data": {
+        "paper_path": "results\\2026-05-25_L5_RIGOR_FORKED_ATTACK\\paper.md",
+        "gate_result": "downgrade",
+        "timestamp": "2026-05-25T04:56:58.178692+00:00"
+      }
+    },
+    "2026-05-25_L5_RIGOR_FORKED_ATTACK": {
+      "type": "run",
+      "status": "complete",
+      "data": {
+        "path": "results\\2026-05-25_L5_RIGOR_FORKED_ATTACK",
+        "tools": [
+          "graph_dynamics_sim_v1_cpp",
+          "unknown",
+          "ca_admissibility_sim_v1_cpp"
+        ]
+      }
     }
   },
   "edges": [
@@ -7073,11 +7094,6 @@
     },
     {
       "source": "P025",
-      "target": "paper.md",
-      "relation": "verified_by"
-    },
-    {
-      "source": "P027",
       "target": "paper.md",
       "relation": "verified_by"
     },
@@ -7670,6 +7686,31 @@
       "source": "P031",
       "target": "metrics.json",
       "relation": "verified_by"
+    },
+    {
+      "source": "L5_RIGOR_FORKED_ATTACK",
+      "target": "results\\2026-05-25_L5_RIGOR_FORKED_ATTACK\\paper.md",
+      "relation": "documented_in"
+    },
+    {
+      "source": "L5_RIGOR_FORKED_ATTACK",
+      "target": "2026-05-25_L5_RIGOR_FORKED_ATTACK",
+      "relation": "supported_by"
+    },
+    {
+      "source": "2026-05-25_L5_RIGOR_FORKED_ATTACK",
+      "target": "graph_dynamics_sim_v1_cpp",
+      "relation": "executed_via"
+    },
+    {
+      "source": "2026-05-25_L5_RIGOR_FORKED_ATTACK",
+      "target": "unknown",
+      "relation": "executed_via"
+    },
+    {
+      "source": "2026-05-25_L5_RIGOR_FORKED_ATTACK",
+      "target": "ca_admissibility_sim_v1_cpp",
+      "relation": "executed_via"
     }
   ]
 }

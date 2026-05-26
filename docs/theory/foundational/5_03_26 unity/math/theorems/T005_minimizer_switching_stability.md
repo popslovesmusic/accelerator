@@ -1,7 +1,19 @@
 # Theorem V — The Minimizer Switching Stability Theorem (MST-001)
 
+```yaml
+claim_id: PCD-CLM-MST-001
+theorem_id: T005
+theorem_type: conditional_operational_lemma
+closure_status: falsification_challenged
+blocked_elevation: true
+blocked_reason: "FV-4 Mechanism Implementation Schism produced graph_ca_agreement=0.32"
+claim_ceiling_before_resolution: TS2
+claim_ceiling_after_success: TS4
+requires_campaign: MST001_RESOLUTION_FRONTIER_CAMPAIGN_V1
+```
+
 ## 1. Abstract
-This theorem formally proves the stability of local orientation selection ($O^*$) in recursive process loops. It establishes that a local minimizer shift is stable provided it preserves orientational equivalence ($Ref(\omega)$) or occurs across a formally governed boundary (degeneracy/recoupling). This theorem provides the formal closure for the **Principle of Admissible Persistence**.
+This theorem procedurally supports under stated constraints the stability of local orientation selection ($O^*$) in recursive process loops. It establishes that a local minimizer shift is stable provided it preserves orientational equivalence ($Ref(\omega)$) or occurs across a formally governed boundary (degeneracy/recoupling). This theorem is **falsification-challenged** under FV-4 and is not treated as unconditional C6 closure.
 
 ## 2. Formal Statement
 Let $(\mathcal{E} \neq 0) \Leftrightarrow_R \delta_a(\mathcal{E} > 0)$ be the governing process cycle. Let $O^*(e, r) = \text{argmin}_{\omega \in \mathcal{W}_{adm}} \|\mathcal{E}(\omega, r)\|$ be the selection operator. 
@@ -41,12 +53,12 @@ The proof is formally established via the **Symbolic Trace Workflow** (P027).
 
 
 ## 4. Mechanism Independence
-The theorem holds across **Graph Dynamics**, **Cellular Automata**, and **PDE** mechanism classes, as verified in campaign `MSV-001-CROSS-V1`. Stability is a structural invariant of the relational grammar, not a property of the implementation substrate.
+The theorem is treated as mechanism-aligned only within declared resolution bounds and stated constraints. Cross-mechanism alignment was evaluated in campaign `MSV-001-CROSS-V1` and is further constrained by the FV-4 failure recorded in `BLOCK-CLOSURE-X` and the resolution-frontier limitations recorded in `RES-LIMIT-01`.
 
 ## 5. Status
-- **Status:** formally_proven
+- **Status:** conditional_operational_lemma
 - **ID:** MST-001
-- **Rigor Level:** C6 (Theorem)
+- **Rigor Level:** bounded / pending FV-4 resolution
 - **Resolution Boundary:** $N \ge 50$ (Identified in `RES-LIMIT-01`)
 - **Symbolic Trace:** [P027](../../../../../../docs/theory/foundational/5_03_26%20unity/math/proofs/P027_MST_001_symbolic_trace.md)
 - **Empirical Evidence:** [MSV-001-CROSS-V1](../../../../../../results/2026-05-23_run06_MSV_001_Cross_Model_Verification/paper.md)

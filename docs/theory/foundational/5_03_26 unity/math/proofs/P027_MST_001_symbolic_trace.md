@@ -3,14 +3,17 @@
 ## 0. Metadata
 - **proof_id**: P027
 - **theorem_id**: MST-001
-- **status**: formally_proven
+- **status**: conditional_operational_lemma
 - **proof_type**: symbolic_trace
-- **rigor_level**: C6
+- **rigor_level**: bounded / pending FV-4 resolution
 - **falsification_report**: [BLOCK-CLOSURE-X](../../../../../../results/2026-05-23_run12_BLOCK_CLOSURE_X_Attack/paper.md)
+- **closure_status**: falsification_challenged
+- **blocked_elevation**: true
+- **blocked_reason**: FV-4 Mechanism Implementation Schism (graph_ca_agreement=0.32)
 - **compliance**: [Compliance Charter v2.3](../../../../../../registry/compliance_charter_v2_3.json)
 
 ## 1. Abstract
-This document provides the formal **Symbolic Trace** for the Master Theorem (MST-001), proving the stability of local orientation selection ($O^*$) under minimizer switching. It satisfies the Level C6 formal closure requirements by defining formal primitives, tracing operator transformations, verifying mechanism independence, and proving recursive convergence.
+This document provides a **Symbolic Trace** for the Master Theorem (MST-001), procedurally supporting under stated constraints the stability of local orientation selection ($O^*$) under minimizer switching. It is not treated as unconditional C6 closure while FV-4 remains unresolved; its role here is bounded traceability, dependency disclosure, and controlled operational reasoning.
 
 ## 2. Symbolic Workflow Step 1: Primitive Formalization
 
@@ -53,8 +56,8 @@ The trace is valid across all mechanism classes defined in `GEMINI.md`:
 - **Discrete CA Class:** $O^*$ is the rule selection for cell state transitions.
 - **Continuous PDE Class:** $O^*$ is the gradient descent path in the potential field.
 
-**Empirical Verification:**
-The cross-model verification campaign (`MSV-001-CROSS-V1`) and resolution sweep (`RES-LIMIT-01`) confirmed that mechanism independence is a stable feature for all systems where resolution $N \ge N_{crit}$.
+**Empirical Verification (bounded):**
+The cross-model verification campaign (`MSV-001-CROSS-V1`) and resolution sweep (`RES-LIMIT-01`) support cross-mechanism alignment only within declared resolution bounds and constraints. The adversarial report `BLOCK-CLOSURE-X` records an FV-4 mechanism-implementation schism; therefore, unqualified “mechanism independence” language is blocked pending FV-4 resolution.
 
 **The Resolution Constant:**
 The campaign `RES-LIMIT-01` identified the critical resolution constant as **$N_{crit} = 50$**. Below this threshold, implementational artifacts dominate the relational grammar. Above this threshold, the Graph and CA implementations converge to within $\Delta < 0.01$ in primary stability metrics.
@@ -69,14 +72,14 @@ We prove that the recursive cycle $C: S_t \to S_{t+1}$ converges to the stable t
 4.  **Convergence:** The sequence $\{\omega_t\}$ produced by the recursive application of $O^*$ is a Cauchy sequence in $\Omega / \sim_{Ref}$, converging to the fixed-point orientation $-(i)_{Dom}$.
 
 ## 6. Conclusion
-Within these formal constraints, the Master Theorem (MST-001) is formally closed. The stability of orientation selection is a necessary consequence of the recursive mismatch-minimization grammar.
+Within these formal constraints, MST-001 is supported as a bounded conditional operational stability claim. Unqualified closure language (“formally closed”, “necessary consequence” without scope) is blocked pending FV-4 resolution and any superseding governed report.
 
 ## 7. Status
-- **Status:** formally_proven
+- **Status:** conditional_operational_lemma
 - **Proof Type:** symbolic_trace
 - **Evidence:** [MSV-001-CROSS-V1](../../../../../../results/2026-05-23_run06_MSV_001_Cross_Model_Verification/paper.md)
 
 ## 8. Status Footer
 - **Compliance:** [Compliance Charter v2.3](../../../../../../registry/compliance_charter_v2_3.json)
-- **Gate:** Passed Level C6 Symbolic Trace Finalization.
+- **Gate:** C6 elevation blocked pending FV-4 resolution.
 - **Authority:** Mono-Process Framework Core Math Program. ∎

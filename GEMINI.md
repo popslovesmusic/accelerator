@@ -748,11 +748,11 @@ When the user requests publication:
 | --- | --- |
 | Emergence | `agent_based_sim_v1`, `agent_based_sim_v1_cpp` |
 | Admissibility | `ca_admissibility_sim_v1`, `fsa_rule_engine_sim_v1` |
-| Identity / stability | `structural_box_sim_v2`, `structural_box_sim_cpp` |
+| Identity / stability | `structural_box_sim_v2`, `structural_box_sim_cpp`, `optical_reservoir_sim_v1` |
 | Topology | `rd_moving_boundary_sim_v1`, `rd_sim_cpp`, `graph_dynamics_sim_v1` |
 | Regimes | `bifurcation_analyzer_v1`, `bifurcation_analyzer_v1_cpp` |
 | Threshold/noise | `stochastic_sim_v1`, `stochastic_sim_cpp` |
-| Phase locking | `kuramoto_sim_v1`, `kuramoto_sim_v1_cpp` |
+| Phase locking | `kuramoto_sim_v1`, `kuramoto_sim_v1_cpp`, `optical_reservoir_sim_v1` |
 | Conservation/Hamiltonian behavior | `symplectic_sim_v1`, `symplectic_sim_v1_cpp` |
 | Spectral behavior | `spectral_analysis_v1_cpp` |
 | Topological data analysis | `tda_module_v1`, `tda_module_v1_cpp` |
