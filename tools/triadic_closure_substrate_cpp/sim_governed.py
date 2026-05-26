@@ -21,6 +21,12 @@ def main():
     # Extract params
     triads = config.get("triads", 256)
     steps = config.get("steps", 1000)
+    dt = config.get("dt", 0.01)
+    floor = config.get("floor", 0.05)
+    dyad_mode = config.get("dyad_mode", False)
+    disable_residue = config.get("disable_residue", False)
+    disable_recursive = config.get("disable_recursive", False)
+    seed = config.get("seed", 42)
 
     # Prepare output path
     os.makedirs(args.out, exist_ok=True)
@@ -37,8 +43,15 @@ def main():
         exe_path,
         "--triads", str(triads),
         "--steps", str(steps),
+        "--dt", str(dt),
+        "--floor", str(floor),
+        "--seed", str(seed),
         "--out", summary_path
     ]
+    
+    if dyad_mode: cmd.append("--dyad-mode")
+    if disable_residue: cmd.append("--disable-residue")
+    if disable_recursive: cmd.append("--disable-recursive")
     
     print(f"Running: {' '.join(cmd)}")
     result = subprocess.run(cmd, capture_output=True, text=True)

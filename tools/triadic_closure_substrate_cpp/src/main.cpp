@@ -21,6 +21,12 @@ struct Config {
     float coupling_strength = 0.1f;
     float reinforcement_rate = 0.05f;
     float admissibility_window = 0.8f;
+    int seed = 42;
+
+    // Falsification Flags
+    bool dyad_mode = false;
+    bool disable_residue = false;
+    bool disable_recursive = false;
 };
 
 // Struct-of-Arrays (SoA) layout aligned to 32 bytes for AVX2 processing.
@@ -55,10 +61,17 @@ void update_triad_block_avx2(TriadBlockSOA& block, const Config& cfg) {
     for (int i = 0; i < BLOCK_SIZE; ++i) {
         if (block.collapse_flag[i]) continue; // Skip collapsed triads
         
-        // 1. Calculate local mismatch across the 3 nodes
-        float mismatch = std::abs(block.in_channel[0][i] - block.in_channel[1][i]) + 
-                         std::abs(block.in_channel[1][i] - block.in_channel[2][i]) + 
-                         std::abs(block.in_channel[2][i] - block.in_channel[0][i]);
+        // 1. Calculate local mismatch
+        float mismatch = 0.0f;
+        if (cfg.dyad_mode) {
+            // Dyad Mode: Only 2 nodes contribute to mismatch.
+            mismatch = std::abs(block.in_channel[0][i] - block.in_channel[1][i]);
+        } else {
+            // Triad Mode: 3 nodes form a closure.
+            mismatch = std::abs(block.in_channel[0][i] - block.in_channel[1][i]) + 
+                       std::abs(block.in_channel[1][i] - block.in_channel[2][i]) + 
+                       std::abs(block.in_channel[2][i] - block.in_channel[0][i]);
+        }
         
         block.detectable_mismatch[i] = mismatch;
 
@@ -70,12 +83,12 @@ void update_triad_block_avx2(TriadBlockSOA& block, const Config& cfg) {
         }
 
         // 3. Orientation Mediation -(i)
-        // Simple heuristic: cross product / phase difference proxy
         block.orientation_vector[i] = (block.in_channel[0][i] - block.in_channel[2][i]) * 0.5f;
 
         // 4. Recursive Reinforcement & Residue Inscription
-        // Residue builds up conditionally
-        block.residue[i] += cfg.dt * (mismatch * cfg.reinforcement_rate - block.residue[i] * 0.01f);
+        if (!cfg.disable_residue) {
+            block.residue[i] += cfg.dt * (mismatch * cfg.reinforcement_rate - block.residue[i] * 0.01f);
+        }
         
         // 5. Admissibility Gating
         bool inside = (block.residue[i] < cfg.admissibility_window);
@@ -83,7 +96,9 @@ void update_triad_block_avx2(TriadBlockSOA& block, const Config& cfg) {
         
         // 6. Output Projection (Space_app, Matter_app, Energy_app precursors)
         if (inside) {
-            block.closure_strength[i] = std::min(1.0f, block.closure_strength[i] + cfg.dt * 0.1f);
+            float inc = (cfg.disable_recursive) ? 0.0f : cfg.dt * 0.1f;
+            block.closure_strength[i] = std::min(1.0f, block.closure_strength[i] + inc);
+            
             block.out_channel[0][i] = block.in_channel[0][i] * block.closure_strength[i];
             block.out_channel[1][i] = block.in_channel[1][i] * block.closure_strength[i];
             block.out_channel[2][i] = block.in_channel[2][i] * block.closure_strength[i];
@@ -129,6 +144,12 @@ int main(int argc, char* argv[]) {
         std::string arg = argv[i];
         if (arg == "--triads" && i + 1 < argc) cfg.triads = std::stoi(argv[++i]);
         if (arg == "--steps" && i + 1 < argc) cfg.steps = std::stoi(argv[++i]);
+        if (arg == "--dt" && i + 1 < argc) cfg.dt = std::stof(argv[++i]);
+        if (arg == "--floor" && i + 1 < argc) cfg.floor = std::stof(argv[++i]);
+        if (arg == "--seed" && i + 1 < argc) cfg.seed = std::stoi(argv[++i]);
+        if (arg == "--dyad-mode") cfg.dyad_mode = true;
+        if (arg == "--disable-residue") cfg.disable_residue = true;
+        if (arg == "--disable-recursive") cfg.disable_recursive = true;
         if (arg == "--out" && i + 1 < argc) out_path = argv[++i];
     }
     
@@ -140,6 +161,7 @@ int main(int argc, char* argv[]) {
     std::vector<TriadBlockSOA> blocks(num_blocks);
     
     // Initialize
+    srand(cfg.seed);
     for (auto& block : blocks) {
         for (int i = 0; i < BLOCK_SIZE; ++i) {
             block.in_channel[0][i] = 0.5f + (rand() % 100) / 1000.0f;
@@ -168,14 +190,22 @@ int main(int argc, char* argv[]) {
     float total_closure = 0.0f;
     float total_residue = 0.0f;
     int total_collapse = 0;
+    float global_alignment_x = 0.0f;
     
     for (const auto& block : blocks) {
         for (int i = 0; i < BLOCK_SIZE; ++i) {
             total_closure += block.closure_strength[i];
             total_residue += block.residue[i];
             total_collapse += block.collapse_flag[i];
+            
+            // Macroscopic alignment proxy for space_app_ordering_metric
+            // Orientation vector is a scalar proxy here; in full it would be a unit vector.
+            // Summing the absolute values vs raw values to check for coherent ordering.
+            global_alignment_x += block.orientation_vector[i];
         }
     }
+    
+    float ordering_metric = std::abs(global_alignment_x) / actual_triads;
     
     // Write JSON Summary
     std::ofstream out(out_path);
@@ -188,7 +218,8 @@ int main(int argc, char* argv[]) {
     out << "  \"observables\": {\n";
     out << "    \"mean_closure_strength\": " << total_closure / actual_triads << ",\n";
     out << "    \"mean_residue_density\": " << total_residue / actual_triads << ",\n";
-    out << "    \"survival_rate\": " << 1.0f - (float)total_collapse / actual_triads << "\n";
+    out << "    \"survival_rate\": " << 1.0f - (float)total_collapse / actual_triads << ",\n";
+    out << "    \"space_app_ordering_metric\": " << ordering_metric << "\n";
     out << "  },\n";
     out << "  \"collapse_events\": " << total_collapse << ",\n";
     out << "  \"validation_status\": \"pass\"\n";
