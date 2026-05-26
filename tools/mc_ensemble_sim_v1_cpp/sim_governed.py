@@ -1,7 +1,6 @@
 import os
 import subprocess
 import argparse
-import json
 from pathlib import Path
 
 def run():
@@ -13,7 +12,10 @@ def run():
     os.makedirs(args.out, exist_ok=True)
     
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    exe_path = os.path.join(script_dir, "symplectic_sim.exe")
+    exe_path = os.path.join(script_dir, "mc_ensemble.exe")
+    if not os.path.exists(exe_path):
+        exe_path = os.path.join(script_dir, "mc_ensemble_runner.exe")
+    
     config_path = os.path.abspath(args.config)
     out_dir = os.path.abspath(args.out)
     
