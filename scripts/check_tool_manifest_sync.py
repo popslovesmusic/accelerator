@@ -60,7 +60,7 @@ def check_sync(tool_manifest_path: Path, only_tools: set[str] | None = None) -> 
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Check registry/tool_manifest.json matches tool-local certification manifests.")
+    parser = argparse.ArgumentParser(description="Check registry/tool_manifest.json matches tool-local rigor endorsement manifests.")
     parser.add_argument("--manifest", default="registry/tool_manifest.json", help="Path to tool_manifest.json")
     parser.add_argument("--tool", action="append", default=None, help="Tool name to check (repeatable).")
     args = parser.parse_args()
@@ -75,7 +75,7 @@ def main() -> int:
             print(" -", f)
         return 1
 
-    print("OK: tool_manifest matches certification manifests.")
+    print("OK: tool_manifest matches rigor endorsement manifests.")
     return 0
 
 

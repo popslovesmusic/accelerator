@@ -55,7 +55,7 @@ manifest_path = "registry/tool_manifest.json"
 with open(manifest_path, 'r', encoding='utf-8-sig') as f:
     manifest = json.load(f)
 
-# Final pass to sync ALL C++ tools in manifest with their certification manifests
+# Final pass to sync ALL C++ tools in manifest with their rigor endorsement manifests
 for tool_entry in manifest["tools"]:
     tool_name = tool_entry["name"]
     possible_paths = [

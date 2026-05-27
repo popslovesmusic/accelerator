@@ -47,7 +47,7 @@ Within these models, Signal Scope is intended to act as a discrete, agent-based 
 | FV-3 primitive reduction | Disable residue, operator selection, survivability gate, groove memory, inductive layer, and Signal X independently. |
 | FV-4 adversarial initialization | Use disconnect, noisy signal, dropout, spike transition, mixed-band stress, and hostile initial residue/operator states. |
 
-## Certification Path
+## Rigor Endorsement Path
 
 - Current: `C0` registered scaffold.
 - Candidate target after executable import and smoke output: `C1`.

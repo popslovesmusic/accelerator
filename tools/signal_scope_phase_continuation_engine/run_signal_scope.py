@@ -90,7 +90,7 @@ def flatten_trace_metrics(trace_path: Path) -> dict[str, Any]:
     hold_rate = decisions.count("hold") / total
     reinforce_rate = decisions.count("reinforce") / total
 
-    # Alignment proxy: bounded inverse error. This is a reporting metric, not a certification proof.
+    # Alignment proxy: bounded inverse error. This is a reporting metric, not a rigor endorsement proof.
     phase_error = mean_float("phase_error")
     trajectory_alignment = float(max(0.0, min(1.0, 1.0 - phase_error)))
 

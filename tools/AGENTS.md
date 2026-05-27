@@ -4,7 +4,7 @@ Applies to `tools/**` only.
 
 ## Authority
 
-This file governs tool health inspection, validation artifacts, smoke tests, and certification evidence inside tool directories.
+This file governs tool health inspection, validation artifacts, smoke tests, and rigor endorsement evidence inside tool directories.
 
 Root `AGENTS.md` still applies unless this file explicitly grants narrower local maintenance permission.
 
@@ -21,7 +21,7 @@ Root `AGENTS.md` still applies unless this file explicitly grants narrower local
 
 - Modify engine code without explicit user authorization.
 - Rewrite simulation logic.
-- Upgrade certification level without direct evidence.
+- Upgrade rigor endorsement level without direct evidence.
 - Treat a successful smoke test as scientific validation.
 - Treat local validation artifacts as self-certifying claims.
 - Delete tool outputs, binaries, or validation files without explicit approval.
@@ -37,8 +37,8 @@ For any tool health claim, include:
 - stderr excerpt,
 - artifact path if applicable.
 
-## Certification Boundary
+## Rigor Endorsement Boundary
 
-Runtime health, certification level, and claim strength are separate categories.
+Runtime health, rigor endorsement level, and claim strength are separate categories.
 
-A tool may run successfully while still lacking sufficient certification for strong claims.
+A tool may run successfully while still lacking sufficient rigor endorsement for strong claims.

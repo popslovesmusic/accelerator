@@ -73,7 +73,7 @@ def generate_execution_plan(query, db_path, limit=10):
         plan["execution_plan"]["candidate_actions"].append({
             "action_id": "ACT-002",
             "action_type": "validation",
-            "description": "Run tool health and certification check for associated engines.",
+            "description": "Run tool health and rigor endorsement check for associated engines.",
             "recommended_agent": "Codex",
             "risk_level": "medium",
             "claim_impact": "provisional_context"

@@ -6,7 +6,7 @@ def check_c4_certification(tool_id):
     """
     Evaluate whether a tool satisfies C4 requirements.
     """
-    print(f"Checking C4 certification for tool: {tool_id}")
+    print(f"Checking C4 rigor endorsement for tool: {tool_id}")
     
     # Placeholder for actual checks
     # In a real implementation, this would look up:

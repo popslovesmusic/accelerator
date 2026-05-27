@@ -7,9 +7,9 @@ from pathlib import Path
 def run_full_engine_certification(tool_id):
     """
     Execute control, stability, falsification, uncertainty, and provenance 
-    runs for an engine seeking C4 certification.
+    runs for an engine seeking C4 rigor endorsement.
     """
-    print(f"Starting full C4 certification execution for: {tool_id}")
+    print(f"Starting full C4 rigor endorsement execution for: {tool_id}")
     
     # In a real implementation, this would:
     # 1. Read registry/engine_full_certification_execution_plan.json
@@ -54,7 +54,7 @@ def run_full_engine_certification(tool_id):
     return result
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Run full engine certification.")
+    parser = argparse.ArgumentParser(description="Run full engine rigor endorsement.")
     parser.add_argument("tool_id", help="ID of the simulation engine to certify.")
     args = parser.parse_args()
     run_full_engine_certification(args.tool_id)

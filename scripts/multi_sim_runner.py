@@ -154,7 +154,7 @@ class MultiSimRunner:
             if not cert_exists:
                 readiness["missing_artifacts"][tool_name] = readiness["missing_artifacts"].get(tool_name, []) + ["certification_manifest"]
                 if governance.get("require_tool_certification", False):
-                    msg = f"Certification manifest missing for tool '{tool_name}' at {cert_path}"
+                    msg = f"Rigor Endorsement manifest missing for tool '{tool_name}' at {cert_path}"
                     log(msg, "ERROR")
                     readiness["runner_readiness_status"] = "blocked"
                     raise ValueError(msg)
@@ -613,7 +613,7 @@ class MultiSimRunner:
             collection[prefix].append(data)
 
     def generate_certification_evidence_packet(self):
-        log("Generating certification evidence packet...")
+        log("Generating rigor endorsement evidence packet...")
         tools_used = sorted(list(set(res["tool"] for res in self.results)))
         seeds = sorted(list(set(res["seed"] for res in self.results if res["seed"] is not None)))
         outputs = [res["output_dir"] for res in self.results]

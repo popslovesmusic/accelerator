@@ -6,9 +6,9 @@ from pathlib import Path
 def run_engine_certification_dry_run(tool_id):
     """
     Validate that a tool's C4 evidence package structure is complete before 
-    full certification execution.
+    full rigor endorsement execution.
     """
-    print(f"Executing engine certification dry-run for: {tool_id}")
+    print(f"Executing engine rigor endorsement dry-run for: {tool_id}")
     
     # In a real run, this would check against registry/engine_certification_evidence_template.json
     # and look for files in tools/<tool_id>/validation/
@@ -55,13 +55,13 @@ def run_engine_certification_dry_run(tool_id):
             if not result["falsification_block_pass"]: result["blocking_gaps"].append("Falsification block incomplete")
             if not result["uncertainty_block_pass"]: result["blocking_gaps"].append("Uncertainty block incomplete")
         else:
-            result["readiness_status"] = "READY_FOR_FULL_CERTIFICATION"
+            result["readiness_status"] = "READY_FOR_FULL_RIGOR_ENDORSEMENT"
     
     print(json.dumps(result, indent=2))
     return result
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Run engine certification dry-run.")
+    parser = argparse.ArgumentParser(description="Run engine rigor endorsement dry-run.")
     parser.add_argument("tool_id", help="ID of the simulation engine to dry-run.")
     args = parser.parse_args()
     run_engine_certification_dry_run(args.tool_id)

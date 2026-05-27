@@ -373,7 +373,7 @@ class ImplementationValidator:
         if err: return {"status": "failed", "errors": [f"Manifest Load: {err}"]}
         
         cert_reg, err = self.validate_json_load(self.cert_reg_path)
-        if err: results["warnings"].append(f"Certification Registry missing or unreadable: {err}")
+        if err: results["warnings"].append(f"Rigor Endorsement Registry missing or unreadable: {err}")
 
         nodes = manifest.get("nodes", {})
         # 1. Compiled tools have reference declared
@@ -386,19 +386,19 @@ class ImplementationValidator:
                         if not ref or ref == "NOT_DECLARED":
                             results["errors"].append(f"Equivalence Error: Tool '{nid}' missing reference_baseline.")
 
-        # 2. Certification state valid
+        # 2. Rigor Endorsement state valid
         if cert_reg:
             for entry in cert_reg.get("tools", []):
                 tname = entry.get("name")
                 if tname not in nodes:
-                    results["errors"].append(f"Certification Error: Registry tool '{tname}' missing from manifest.")
+                    results["errors"].append(f"Rigor Endorsement Error: Registry tool '{tname}' missing from manifest.")
                 
                 state = entry.get("state")
                 if state == "CERTIFIED_C4":
                     mtool_node = nodes.get(tname, {})
                     mtool = mtool_node.get("data", {})
                     if mtool and mtool.get("latest_equivalence_packet") == "NONE":
-                        results["warnings"].append(f"Certification Warning: Tool '{tname}' is C4 but has no equivalence packet indexed.")
+                        results["warnings"].append(f"Rigor Endorsement Warning: Tool '{tname}' is C4 but has no equivalence packet indexed.")
 
         if results["errors"]:
             results["status"] = "failed"
