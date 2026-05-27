@@ -15,13 +15,13 @@ TOKEN_RE = re.compile(r"[A-Za-z0-9_]+|ε|ρ|R|CSI", re.UNICODE)
 def repo_root_from(start: Path) -> Path:
     p = start.resolve()
     for candidate in [p, *p.parents]:
-        if (candidate / "tool_manifest.json").exists():
+        if (candidate / "GEMINI.md").exists():
             return candidate
     raise SystemExit(f"Could not locate repo root from {start}")
 
 
 def load_alias_map(repo_root: Path) -> dict[str, str]:
-    alias_path = repo_root / "theory" / "lexicon" / "lexicon_alias_map.json"
+    alias_path = repo_root / "registry" / "lexicon_alias_map.json"
     payload = json.loads(alias_path.read_text(encoding="utf-8"))
     aliases: dict[str, str] = payload.get("aliases", {})
     # Make lookup case-insensitive by adding lowered keys when absent.
@@ -170,7 +170,7 @@ def main() -> None:
     out: dict[str, Any] = {
         "source": source,
         "lexicon": {
-            "alias_map": str(repo_root / "theory" / "lexicon" / "lexicon_alias_map.json"),
+            "alias_map": str(repo_root / "registry" / "lexicon_alias_map.json"),
         },
         "stats": {
             "raw_token_count": len(raw_tokens),
