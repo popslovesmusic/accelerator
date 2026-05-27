@@ -1,0 +1,23 @@
+{
+  "rule_id": "GOV-TOOLS-C4-ENDORSEMENT-LOCK-V1",
+  "status": "active",
+  "statement": "Every registered tool must maintain an individual rigor endorsement of at least C4. No tool may be modified while its rigor endorsement is locked. To change a tool, the endorsement must be explicitly unlocked, the change record completed, required tests rerun, endorsement evidence updated, and the endorsement relocked.",
+  "minimum_required_status": "C4",
+  "enforcement": "hard_fail",
+  "failure_conditions": [
+    "registered_tool_count != 59",
+    "any_tool_missing_endorsement_record",
+    "any_tool_endorsement_level < C4",
+    "any_tool_missing_test_evidence",
+    "any_tool_modified_while_endorsement_locked",
+    "any_tool_unlocked_without_change_record",
+    "any_tool_relocked_without_updated_validation_evidence",
+    "any_active_tool_report_uses_certification_language"
+  ],
+  "terminology_lock": {
+    "active_term": "rigor endorsement",
+    "deprecated_term": "certification",
+    "hard_fail_on_active_use_of_deprecated_term": true,
+    "allowed_exception": "Historical references only, clearly marked as legacy terminology."
+  }
+}
