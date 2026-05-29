@@ -11,7 +11,7 @@
   "operators": [
     {
       "symbol": "delta_a",
-      "latex": "\\delta_a",
+      "latex": "\delta_a",
       "name": "Admissibility-Constrained Continuation",
       "domain": "Nonzero distinguishability (E != 0)",
       "codomain": "Admissible continuation candidate set {Q_alpha} subset A",
@@ -21,7 +21,7 @@
     },
     {
       "symbol": "NavT",
-      "latex": "\\text{NavT}",
+      "latex": "	ext{NavT}",
       "name": "Orientation-Array Transport",
       "domain": "Locus state S_alpha, Mismatch E, Orientation reference -(i)_alpha",
       "codomain": "Transport neighborhood T subset Lambda",
@@ -31,7 +31,7 @@
     },
     {
       "symbol": "Arb_A",
-      "latex": "\\text{Arb}_A",
+      "latex": "	ext{Arb}_A",
       "name": "Admissibility-Governed Arbitration",
       "domain": "Continuation candidate set {Q_alpha}",
       "codomain": "Realized future state S_t+1",
@@ -50,8 +50,71 @@
       "composition_rules": ["Requires N=3 independent closure constraints"]
     },
     {
+      "symbol": "->a",
+      "latex": "ightarrow_a",
+      "name": "Forward Admissibility Projection",
+      "domain": "Domain A",
+      "codomain": "Domain B (Admissibly reachable)",
+      "closure_condition": "Existence of admissible correspondence from A to B",
+      "status": "CANDIDATE"
+    },
+    {
+      "symbol": "<-a",
+      "latex": "\leftarrow_a",
+      "name": "Reverse Admissibility Projection",
+      "domain": "Domain B",
+      "codomain": "Domain A (Admissibly reachable)",
+      "closure_condition": "Existence of admissible correspondence from B to A",
+      "status": "CANDIDATE"
+    },
+    {
+      "symbol": "->r",
+      "latex": "ightarrow_r",
+      "name": "Forward Residue Continuation",
+      "domain": "Residue source A",
+      "codomain": "Residue sink B",
+      "closure_condition": "Residue in A supports continuation toward B",
+      "status": "CANDIDATE"
+    },
+    {
+      "symbol": "<-r",
+      "latex": "\leftarrow_r",
+      "name": "Reverse Residue Support",
+      "domain": "Residue source B",
+      "codomain": "Residue sink A",
+      "closure_condition": "B provides residue support relative to A",
+      "status": "CANDIDATE"
+    },
+    {
+      "symbol": "->a ⊗ <-r",
+      "latex": "ightarrow_a \otimes \leftarrow_r",
+      "name": "Admissibility-Residue Coupling Operator",
+      "domain": "Relational basins A, B",
+      "codomain": "Stabilized correspondence state",
+      "closure_condition": "Joint support from forward admissibility and reverse residue",
+      "status": "EXPERIMENTAL_CANDIDATE"
+    },
+    {
+      "symbol": "Omega_a",
+      "latex": "\Omega_a",
+      "name": "Asymmetry Ratio",
+      "domain": "Relational distinction pair (D(S1|S2), D(S2|S1))",
+      "codomain": "Orientation regulation scalar",
+      "closure_condition": "D12/D21 regulated by distinguishability floor epsilon",
+      "status": "CANDIDATE"
+    },
+    {
+      "symbol": "=>Omega_a",
+      "latex": "\Rightarrow_{\Omega_a}",
+      "name": "Asymmetry Bridge Operator",
+      "domain": "Distinction asymmetry state (D1 != D2)",
+      "codomain": "Local orientation reference -(i)",
+      "closure_condition": "Generative induction of orientation from asymmetry ratio",
+      "status": "EXPERIMENTAL_CANDIDATE"
+    },
+    {
       "symbol": "xb",
-      "latex": "\\Leftrightarrow_{xb}",
+      "latex": "\Leftrightarrow_{xb}",
       "name": "Cross-Basin Projection (Bridge)",
       "domain": "Micro-procedural update density sum(delta_a,i)",
       "codomain": "Coarse macro-relational topology (geometry_app)",
@@ -65,7 +128,7 @@
     },
     {
       "symbol": "R",
-      "latex": "\\Leftrightarrow_R",
+      "latex": "\Leftrightarrow_R",
       "name": "Residue-History Conditioned Realization",
       "domain": "Primitive basis {E, R, A}",
       "codomain": "Recursive process cycle C",
@@ -85,13 +148,31 @@
     },
     {
       "symbol": "Pi",
-      "latex": "\\Pi",
+      "latex": "\Pi",
       "name": "Projection Operators (Pi_A, Pi_R)",
       "domain": "Substrate process states",
       "codomain": "Analogy-layer observables (_app)",
       "closure_condition": "Mapping to invariant relational signatures",
       "collapse_mode": "Mapping Drift / Information Loss",
       "composition_rules": ["Terminal derivation stage"]
+    },
+    {
+      "symbol": "⇔_m",
+      "latex": "\Leftrightarrow_m",
+      "name": "Metric Projection Operator",
+      "domain": "Asymmetry Domain ((asym_app)nDOF)",
+      "codomain": "Asymmetry Metrics (D1, D2)",
+      "closure_condition": "Successful mapping of relational structure to scalar metrics",
+      "status": "CANDIDATE"
+    },
+    {
+      "symbol": "⇔_s",
+      "latex": "\Leftrightarrow_s",
+      "name": "Statistical Projection Operator",
+      "domain": "Asymmetry Metrics (D1, D2)",
+      "codomain": "Statistical Observables (P)",
+      "closure_condition": "Successful projection of metric quantities to statistical realizations",
+      "status": "CANDIDATE"
     }
   ]
 }
