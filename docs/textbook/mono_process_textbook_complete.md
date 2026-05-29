@@ -77,15 +77,29 @@ $\mathcal{E}$ is formally defined as a **mismatch functional** that maps a proce
 
 ---
 
-## 1.4 Distinction and Mismatch ($\mathcal{E} \neq 0$)
+## 1.4 Constraint and Realization ($\mathcal{E} \neq 0 \to \mathcal{E} > 0$)
 
-For a process to be defined, there must be a distinction. A state of zero distinction ($\mathcal{E} = 0$) is equivalent to non-existence within the framework.
+The Mono-Process Framework identifies a foundational asymmetry between the **existence of a constraint** and its **successful realization**.
 
-**Formal Block 1.4.1: The Distinction Condition**
-$$ \mathcal{E} > 0 \implies [ \text{MISSING DEFINITION: Formal definition of what counts as } \mathcal{E} > 0 ] $$
+**Definition 1.4.1: Constraint State ($\mathcal{E} \neq 0$)**
+The condition where distinction or mismatch exists within the framework. Aliases: *constraint present*, *distinction exists*, *non-null process condition* [Source: IND-CORE-ASYM-REALIZATION-001].
+
+**Definition 1.4.2: Realization State ($\mathcal{E} > 0$)**
+The condition where a constraint successfully realizes through admissible continuation. Aliases: *constraint realized*, *admissible continuation exists*, *realized distinction* [Source: IND-CORE-ASYM-REALIZATION-001].
+
+**Formal Statement 1.4.3: Constraint-Realization Asymmetry**
+$$ (\mathcal{E} \neq 0) \to_a (\mathcal{E} > 0) $$
+
+**Theorem 1.4.4: Constraint Realization Asymmetry (TC-001)**
+The existence of a constraint does not guarantee its realization.
+$$ (\mathcal{E} \neq 0) \not\implies (\mathcal{E} > 0) $$
+
+**Theorem 1.4.5: Realization Presupposes Constraint (TC-002)**
+Every realization presupposes a prior constraint condition.
+$$ (\mathcal{E} > 0) \implies (\mathcal{E} \neq 0) $$
 
 **Commentary:**
-$\mathcal{E} > 0$ denotes a "positive mismatch." This is the drive that necessitates a continuation. If the process ever reaches absolute equilibrium ($\mathcal{E} = 0$), the recursive chain terminates. The framework explores the regimes under which this termination is avoided through recursive re-orientation.
+While the Primary Axiom (Axiom 1.2.1) is symmetric in its algebraic form, its operational realization is strictly asymmetric and directional. A constraint ($\mathcal{E} \neq 0$) establishes the *necessity* of continuation, but realization ($\mathcal{E} > 0$) only occurs if an admissible path ($\delta_a$) exists. If no path is admissible, the constraint remains unrealized, potentially leading to local process termination or "stalling."
 
 ---
 
@@ -307,25 +321,48 @@ The directed distinction relation $D(S_1|S_2)$ introduced in Chapter 3 acts as t
 
 We identify two primary relational domains based on the symmetry or asymmetry of the distinction relation: the **Asymmetry Domain** and the **Symmetry Domain**.
 
-The induction of these domains follows the **Refined Induction Hierarchy (v2)**:
-1. **Layer 0:** $(\mathcal{E} \neq 0)$ — Root Condition
-2. **Layer 1:** $D(S_a|S_b)>0$ — Positive Distinction
-3. **Layer 2:** $N_{ab}$ — Distinction-Node Formation
-4. **Layer 3:** $N_{ab} \iff_x N_{ba}$ — Node-Pair Coupling
-5. **Layer 4:** **Relational Asymmetry**
-6. **Layer 5:** $(asym\_app)nDOF$ — Asymmetry Domain
-7. **Layer 6:** $-(i)$ — Orientation Selection
-8. **Layer 7:** $\to_a$ — Directional Admissibility
-9. **Layer 8:** $\text{Arb}_A$ — Arbitration
-10. **Layer 9:** $\Psi$ — Inscription
-11. **Layer 10:** $R$ — Residue Accumulation
-12. **Layer 11:** $K$ — Knot Stabilization
-13. **Layer 12:** $B_K$ — Braid Formation
-14. **Layer 13:** $\_app$ — Application Projection
+The induction of these domains follows the **Refined Induction Hierarchy (v3)**:
+1. **Layer 0:** $(\mathcal{E} \neq 0)$ — Constraint Existence
+2. **Layer 1:** $\delta_a$ — Admissibility Filter
+3. **Layer 2:** $(\mathcal{E} > 0)$ — Realization State
+4. **Layer 3:** $N_{ab} := D(S_a|S_b)>0$ — Distinction-Node Formation
+5. **Layer 4:** $N_{ab} \iff_x N_{ba}$ — Ordered Node-Pair Relation
+6. **Layer 5:** **Relational Asymmetry**
+7. **Layer 6:** $(asym\_app)nDOF$ — Asymmetry Domain
+8. **Layer 7:** $-(i)$ — Orientation Selection
+9. **Layer 8:** $\to_a$ — Admissible Transport
+10. **Layer 9:** $\text{Arb}_A$ — Arbitration
+11. **Layer 10:** $\Psi$ — Residue Inscription
+12. **Layer 11:** $R$ — Residue Accumulation
+13. **Layer 12:** $K$ — Closure (Knot)
+14. **Layer 13:** $B_K$ — Braid Closure
+15. **Layer 14:** $\_app$ — Application Projection
+16. **Layer 15:** $\iff_m$ — Metric Extraction
+17. **Layer 16:** $\Omega_a$ — Asymmetry Ratio
+18. **Layer 17:** $\iff_s$ — Statistical Projection
+19. **Layer 18:** $P$ — Probability
 
 ---
 
-## 4.1A Relational Asymmetry
+## 4.1A Induced Duality and Meta-Observation
+
+A recurring pattern in the Mono-Process Framework is the use of **symmetric descriptions for asymmetric realizations** [Source: IND-CORE-ASYM-REALIZATION-001].
+
+**Meta-Observation 4.1.2: Symmetric-Asymmetric Duality (META-001)**
+Symmetric representations (like ⇔_R or ⇔_x) require orientation, ordering, residue, or admissibility to be realized.
+
+Examples include:
+*   Axiom 1.2.1: $(\mathcal{E} \neq 0) \iff_R \delta_a(\mathcal{E} > 0)$
+*   Distinction-Constraint Duality: $distinction\_app \iff_x constraint\_app$
+*   Continuation-Realization Duality: $continuation\_app \iff_x realization\_app$
+*   Node-Coupling: $N_{ab} \iff_x N_{ba}$
+*   Domain Relation: $(QM\_app) \iff_{xa} (GR\_app)$
+
+Within this framework, duality does not imply identity but **projectional equivalence**. Two descriptions may be equivalent views of the same process state observed from different orientations.
+
+---
+
+## 4.1B Relational Asymmetry
 
 Relational asymmetry is the structural state defined through the closure-coupling of ordered distinction-nodes [Source: MPF-REFINE-V2 RI-003].
 
@@ -634,8 +671,19 @@ Consider a local process where the realized transitions are observed with specif
 - Measured Probability $P(S_2|S_1) = 0.05$
 - Inferred Metric Ratio $\Omega_a \approx 18$
 
+---
+
+## 7.4A Projection Domain Equivalence
+
+A fundamental principle of the framework's measurement program is that the application projections and the relational nDOF representations are equivalent descriptions of the same underlying process state [Source: IND-CORE-ASYM-REALIZATION-001].
+
+**Theorem 7.4.2: Projection Domain Equivalence (TC-003)**
+Application projections and nDOF representations are relationally equivalent descriptions of the same process state.
+$$ (\mathcal{E} \neq 0_{app}) \iff_x (\mathcal{E} \neq 0)nDOF $$
+$$ (\mathcal{E} > 0_{app}) \iff_x (\mathcal{E} > 0)nDOF $$
+
 **Commentary:**
-In this example, the statistical extractor $\iff_s$ allows us to map frequentist observations back to the underlying relational asymmetry $\Omega_a$. Within the framework, the "likelihood" of $S_1$ being distinguished relative to $S_2$ is 18 times greater than the reverse, indicating a highly oriented process domain.
+This theorem ensures that results observed in simulation "measurements" (application space) are rigorously linked to the structural relations (nDOF space). The operator $\iff_x$ here acts as the bridge that preserves structural information across the projection boundary. Any asymmetric realization in the relational domain must have a corresponding asymmetric signature in the application projection.
 
 ---
 
@@ -1119,10 +1167,10 @@ By enforcing these governance and induction rules, we ensure that the Mono-Proce
 
 | Symbol | Name | Description | Chapter Ref |
 | :--- | :--- | :--- | :--- |
-| $\mathcal{E}$ | Process-Expression Field | The primary variable representing mismatch, pressure, or intensity. | 1.3 |
-| $R$ | Residue | The structural memory or accumulated constraint of process history. | 2.1 |
-| $\delta_a$ | Admissibility Filter | The operator that selects allowed next states from the candidate set. | 1.5, 6.1 |
-| $\iff_R$ | Recursive Closure | The operator denoting that process and continuation are bound by residue. | 1.6, 2.3 |
+| $\mathcal{E} \neq 0$ | Constraint State | The condition where distinction or mismatch exists. Aliases: *constraint present*, *distinction exists*. | 1.4 |
+| $\mathcal{E} > 0$ | Realization State | Successful realization of a constraint through admissible continuation. Aliases: *constraint realized*, *admissible continuation exists*. | 1.4 |
+| $\iff_R$ | Recursive Closure | Axiomatic operator denoting biconditional necessity between constraint and realization. | 1.2, 1.6, 2.3 |
+| $\iff_x$ | Projectional Equivalence | Operator denoting duality or equivalent views across domains or descriptions. | 4.1A, 7.4A |
 | $D(S_1\|S_2)$ | Directed Distinction | The non-symmetric relational primitive measuring mismatch between states. | 3.1 |
 | $\epsilon$ | The Floor | The minimum possible distinguishability regularizer. | 3.4, 8.1 |
 | $-(i)$ | Orientation Operator | The relational reference frame selected to resolve asymmetry. | 5.1 |
@@ -1228,6 +1276,14 @@ This appendix summarizes the standards for classifying and promoting research cl
 | **C5** | Validate | External Alignment | Independent measurement, 4+ Falsification Vectors. |
 | **C6** | Theorem | Formal Closure | Universal mechanism independence, formal derivation from Axiomatic Floor. |
 
+### Theorem Candidates
+| ID | Name | Statement | Ref |
+| :--- | :--- | :--- | :--- |
+| **TC-001** | Constraint Realization Asymmetry | $(\mathcal{E} \neq 0) \not\implies (\mathcal{E} > 0)$ | 1.4 |
+| **TC-002** | Realization Presupposes Constraint | $(\mathcal{E} > 0) \implies (\mathcal{E} \neq 0)$ | 1.4 |
+| **TC-003** | Projection Domain Equivalence | $(\mathcal{E}_{app}) \iff_x (\mathcal{E})_{nDOF}$ | 7.4A |
+| **A001** | Asymmetric Triadic Closure | $TC_{asym} := N_1 \iff_x (N_2 \mid N_3)$ | 4.X |
+
 ### Validation Mandates
 1. **The Axiomatic Floor:** The core expression is the system's foundational axiom. It does not require proof but serves as the root from which all C6 Theorems must be derived.
 2. **Falsification Vector (FV):** A targeted test designed to force a failure of the claim. A claim cannot reach C4 without passing at least two FVs.
@@ -1289,6 +1345,7 @@ These items remain unsettled and are the primary targets for future induction an
 - **Closure-Coupling Signature ($\iff_x$):** Defining whether $\iff_x$ is a foundational relation, a comparison, or a specific closure operator family.
 - **Vertical Bar Operator ($\mid$):** Formally fixing the meaning of "grouped closure participation" in triadic closure.
 - **Orientation Space $\mathcal{O}$:** Formal definition required to resolve the orientation-closure bridge.
+- **Formal definition of $\delta_a$:** High Priority. Sit directly between constraint and realization [Source: IND-CORE-ASYM-REALIZATION-001].
 - **Topology-to-Geometry Transform:** The operator that maps braid group invariants ($B_K$) to metric properties. (Ref: 11.3, 11.5)
 - **Empirical Mapping Standards:** Mapping framework metrics ($\Omega_a$, $B_K$) to physical constants ($G, h, c$). (Ref: 12.5)
 - **Formal definition of $\otimes$:** The composition and interference rules for composite directional coupling. (Ref: 9.1, 9.4)
@@ -1317,6 +1374,7 @@ This textbook draft is derived from and cross-referenced with the following foun
 | **MPF-MATH-SCHEMA-V1.9** | [MONO-PROCESS MATHEMATICAL SCHEMA](D:/projects/acellorator/docs/MONO_PROCESS_MATHEMATICAL_SCHEMA_V1_9.md) | v1.9 | Unified formalism for recursive coupling, identity dynamics, and interaction hierarchies. |
 | **TECH-NOTE-ASYM** | [Technical Note: Asymmetry Ratio and Orientation Selection](D:/projects/acellorator/docs/asym.txt) | Exploratory | Deep dive into the $\Omega_a$ metric and the bridge from asymmetry to orientation. |
 | **MPF-NARRATIVE** | [The Law of the One Process: Narrative Synthesis](D:/projects/acellorator/docs/narrative.txt) | Synthesis | Detailed conceptual derivation of the four organizational resolutions (forces) and the nature of process. |
+| **IND-CORE-ASYM-REALIZATION-001** | [Induction: Core Asymmetry and Realization](D:/projects/acellorator/docs/textbook/mono_process_textbook_complete.md) | 2026-05-29 | Formalization of constraint vs. realization and projectional duality. |
 
 ### Secondary References and Registries
 - **Compliance Charter v2.3:** [compliance_charter_v2_3.json](D:/projects/acellorator/docs/registry/compliance_charter_v2_3.json) - Governance authority.
