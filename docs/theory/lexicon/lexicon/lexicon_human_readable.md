@@ -75,6 +75,10 @@ The following terms have been identified across the corpus as highly frequent an
 | **orientation** | 24 | Local preferred direction operator ($-(i)$). |
 | **identity** | 11 | Persistent recurrence of stabilized structure. |
 | **regime** | 11 | Dominance-ordered behavioral zones. |
+| **Distinction-Node** | 1 | Ordered distinction primitive ($N_{ab} := D(S_a|S_b)>0$). |
+| **Relational Asymmetry** | 1 | Closure-coupling of non-equivalent nodes ($N_{ab} \iff_x N_{ba}$). |
+| **Asymmetric Triadic Closure** | 1 | Higher-order stabilization regime ($TC_{asym}$). |
+| **Anchored Triad** | 1 | Orientation-anchored closure ordering ($TC_{asym,a}$). |
 
 ---
 
