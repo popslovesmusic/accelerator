@@ -56,6 +56,8 @@ $$ (\mathcal{E} \neq 0) \iff_R \delta_a(\mathcal{E} > 0) $$
 **Commentary:**
 As the system's axiom, this expression is the primitive starting point for all subsequent logic. It represents the necessity of distinction for the existence of any formal structure. This is known as the **"Generation-by-Constraint"** principle: nonzero distinguishability does not produce unconstrained continuation; it produces admissibility-filtered continuation [Source: MPF-NARRATIVE].
 
+In this refined reading, **$\mathcal{E} \neq 0$** is the constraint/distinction condition, while **$\mathcal{E} > 0$** is the realized constraint or admissible continuation condition. The Core Expression states that **process existence requires residue-conditioned closure** between constraint and realization [Source: MPF-IND-REFINE-R-DUAL-PHASE-CORE-CLOSURE-2026-05-29].
+
 The operator $\iff_R$ in this axiom carries three simultaneous readings [Source: The Statement.txt]:
 1. **Logical:** Both sides of the relation hold as a biconditional necessity.
 2. **Relational:** The symbol names the structural relationship between POTENTIAL ($\mathcal{E} \neq 0$) and REALIZATION ($\delta_a(\mathcal{E} > 0)$).
@@ -204,6 +206,37 @@ Time is what an observer perceives when they reconstruct the sequence of residue
 
 ---
 
+## 2.X Dual-Phase Residue: $R_{\leftrightarrow}$ and $\leftrightarrow_R$
+
+Residue appears in two distinct operational phases: as a relational operand and as a closure-conditioning structure [Source: MPF-IND-REFINE-R-DUAL-PHASE-CORE-CLOSURE-2026-05-29].
+
+**Definition 2.X.1: Residue Relation ($R_{\leftrightarrow}$)**
+Residue as operand. In this phase, residue structures couple, decouple, and recouple. This studies relations among residue states themselves (e.g., $R_1 \leftrightarrow R_2$).
+
+**Definition 2.X.2: Residue-Conditioned Closure ($\leftrightarrow_R$)**
+Residue as conditioning structure. A relation between $A$ and $B$ is valid because it is supported by residue-conditioned closure (e.g., $A \leftrightarrow_R B$).
+
+**Commentary:**
+It is critical not to collapse the residue relation ($R_{\leftrightarrow}$) into the residue-conditioned closure ($\leftrightarrow_R$). While the residue relation may generate or sustain the closure ($R_{\leftrightarrow} \to_a \leftrightarrow_R$), they are distinct operational levels. One describes the *state* of the memory manifold, the other describes the *support* that manifold provides to process realizations.
+
+---
+
+## 2.X Residue-Conditioned Closure as Truth Condition
+
+Within the Mono-Process Framework, a residue-conditioned closure can be evaluated as a **Truth Condition**.
+
+**Formal Statement 2.X.3: The R-Truth Condition (TRUTH-R-001)**
+$$ (A \leftrightarrow_R B) = \text{True} $$
+
+**Commentary:**
+The relation between $A$ and $B$ is valid ("True") while residue-conditioned closure is maintained. If decoupling breaks the closure, the condition becomes False. 
+
+**The Zero-State Rule:**
+If the primary core closure decouples, the framework collapses into the **0-state** (non-existence).
+$$ \neg [ ((\mathcal{E} \neq 0) \leftrightarrow_R \delta_a(\mathcal{E} > 0)) ] \to 0\text{-state} $$
+
+---
+
 ## 2.6 Missing and Provisional Formalisms
 
 To achieve formal closure, the following induction targets must be resolved:
@@ -321,26 +354,27 @@ The directed distinction relation $D(S_1|S_2)$ introduced in Chapter 3 acts as t
 
 We identify two primary relational domains based on the symmetry or asymmetry of the distinction relation: the **Asymmetry Domain** and the **Symmetry Domain**.
 
-The induction of these domains follows the **Refined Induction Hierarchy (v3)**:
-1. **Layer 0:** $(\mathcal{E} \neq 0)$ — Constraint Existence
-2. **Layer 1:** $\delta_a$ — Admissibility Filter
-3. **Layer 2:** $(\mathcal{E} > 0)$ — Realization State
-4. **Layer 3:** $N_{ab} := D(S_a|S_b)>0$ — Distinction-Node Formation
-5. **Layer 4:** $N_{ab} \iff_x N_{ba}$ — Ordered Node-Pair Relation
-6. **Layer 5:** **Relational Asymmetry**
-7. **Layer 6:** $(asym\_app)nDOF$ — Asymmetry Domain
-8. **Layer 7:** $-(i)$ — Orientation Selection
-9. **Layer 8:** $\to_a$ — Admissible Transport
-10. **Layer 9:** $\text{Arb}_A$ — Arbitration
-11. **Layer 10:** $\Psi$ — Residue Inscription
-12. **Layer 11:** $R$ — Residue Accumulation
-13. **Layer 12:** $K$ — Closure (Knot)
-14. **Layer 13:** $B_K$ — Braid Closure
-15. **Layer 14:** $\_app$ — Application Projection
-16. **Layer 15:** $\iff_m$ — Metric Extraction
-17. **Layer 16:** $\Omega_a$ — Asymmetry Ratio
-18. **Layer 17:** $\iff_s$ — Statistical Projection
-19. **Layer 18:** $P$ — Probability
+The induction of these domains follows the **Refined Induction Hierarchy (v4)**:
+1. **Layer 0:** 0-state Exclusion — Foundation
+2. **Layer 1:** $(\mathcal{E} \neq 0)$ — Constraint/Distinction Present
+3. **Layer 2:** $\delta_a$ — Admissibility Filter
+4. **Layer 3:** $(\mathcal{E} > 0)$ — Constraint Realized / Admissible Continuation
+5. **Layer 4:** $N_{ab} := D(S_a|S_b)>0$ — Distinction-Node
+6. **Layer 5:** Ordered Node Relation — Structural Coupling
+7. **Layer 6:** Asymmetric Triadic Closure — Structural Stabilization
+8. **Layer 7:** $R_{\leftrightarrow}$ — Residue Relation (Operand)
+9. **Layer 8:** $\leftrightarrow_R$ — Residue-Conditioned Closure (Condition)
+10. **Layer 9:** Truth Condition: $(A \leftrightarrow_R B) = \text{True}$
+11. **Layer 10:** $\to_a \otimes \gets_r$ — Admissibility-Residue Coupling
+12. **Layer 11:** $\text{NavT}$ — Orientation Reconciliation
+13. **Layer 12:** $\text{Arb}_A$ — Realization Arbitration
+14. **Layer 13:** $\Psi$ — Residue Inscription
+15. **Layer 14:** $K$ — Knot Stabilization (Closure)
+16. **Layer 15:** $B_K$ — Braid Closure
+17. **Layer 16:** $\_app$ — Application Projection
+18. **Layer 17:** $\iff_m$ — Metric Extraction
+19. **Layer 18:** $\iff_s$ — Statistical Projection
+20. **Layer 19:** $P$ — Probability
 
 ---
 
@@ -550,14 +584,30 @@ By establishing orientation as a primitive operator $-(i)$, we move from static 
 
 ## 6.1 The Filter of the Possible: $\delta_a$
 
-As established in Chapter 1, the process does not transition into any arbitrary state. The set of potential continuations is constrained by the **Admissibility Filter**, denoted as $\delta_a$. This filter is constrained by the Admissibility Window ($A$), which acts as the structural constraint filtering raw difference into persistence [Source: MPF-CORE-V1 Sec 1.3].
+As established in Chapter 1, the process does not transition into any arbitrary state. The set of potential continuations is constrained by the **Admissibility Filter**, denoted as $\delta_a$. This filter is constrained by the **Admissibility Window** ($A(c)$), which acts as the structural constraint filtering raw difference into persistence [Source: MPF-CORE-V1 Sec 1.3].
 
 **Formal Statement 6.1.1: The Admissibility Predicate**
-$$ \delta_a(\mathcal{E}_k) \to \{ \mathcal{E}_{k+1} \mid P_{\text{adm}}(\mathcal{E}_{k+1}, \mathcal{E}_k, R, -(i)) = \text{true} \} $$
-$$ P_{\text{adm}} := [ \text{MISSING DEFINITION: Formal admissibility predicate} ] $$
+$$ P_{\text{adm}}(x;c) :\iff x \in A(c) $$
 
 **Commentary:**
-The operator $\delta_a$ uses a predicate $P_{\text{adm}}$ to evaluate candidate continuations. This predicate is the mathematical representation of the "laws" of the system at step $k$. A state is admissible only if it satisfies the constraints imposed by the current mismatch ($\mathcal{E}$), the historical residue ($R$), and the selected orientation ($-(i)$).
+The operator $\delta_a$ uses a predicate $P_{\text{adm}}$ to evaluate candidate continuations. This predicate is the mathematical representation of the "laws" of the system at step $k$. A state is admissible only if it resides within the membership of the window $A(c)$ [Source: MS-SCRATCH-V1 Sec 3.1].
+
+---
+
+## 6.1A The Composition of $\delta_a$
+
+The Admissibility Filter is not a single irreducible action, but a **composition of three functional operations** that transform a constraint condition ($\mathcal{E} \neq 0$) into a realized state ($\mathcal{E} > 0$).
+
+**Formal Block 6.1.2: The Update Composition Rule**
+$$ \delta_a(x;c) := \Pi_A \left( S(\text{Cand}(x;c);c) ; c \right) $$
+
+**Functional Components:**
+1. **$\text{Cand}$ (Candidate Generation):** Proposes a set of possible next states from the current state $x$ [Source: MS-SCRATCH-V1 Sec 5.1].
+2. **$S$ (Selection/Pruning):** Filters the candidate set based on an arbitration rule (see Chapter 10).
+3. **$\Pi_A$ (Admissibility Projection):** Ensures that the final selection is mapped onto the admissible window $A(c)$ [Source: MS-SCRATCH-V1 Sec 3.2].
+
+**Commentary:**
+This composition rule is the "operational engine" of the framework. It defines the mechanism by which the process traverses its state space. If the result of this composition is the empty set ($\delta_a = \emptyset$), the process has reached an inadmissible state and must either terminate or undergo a radical re-orientation [Source: MS-SCRATCH-V1 Sec 5.3].
 
 ---
 
@@ -793,6 +843,8 @@ $$ \otimes := [ \text{MISSING DEFINITION: Formal definition of the coupling oper
 
 **Commentary:**
 The notation $A \to_a \otimes \gets_r B$ indicates that the transition from state $A$ to state $B$ is realized only if $B$ is forward-admissible from $A$ *and* $B$ is supported by the reverse-facing constraints of the residue accumulated at $A$. The operator $\otimes$ (tensor-like coupling) represents the "interference" or "alignment" between what the process *can* do (admissibility) and what it *has* done (residue).
+
+The operator $\to_a \otimes \gets_r$ should be treated as a **constraint-realization stabilizer** operating downstream of residue relation ($R_{\leftrightarrow}$) and upstream of arbitration ($\text{Arb}_A$) [Source: MPF-IND-REFINE-R-DUAL-PHASE-CORE-CLOSURE-2026-05-29].
 
 ---
 
@@ -1049,6 +1101,23 @@ Within the framework, these are not contradictory theories but different **obser
 
 ---
 
+## 12.X Mirror-Closure Hypothesis for $QM\_app$ and $GR\_app$
+
+The Mono-Process Framework proposes that the apparent divergence between quantum and relativistic regimes is a result of mirrored projection domains generated through a common **residue-conditioned closure** [Source: MPF-IND-REFINE-R-DUAL-PHASE-CORE-CLOSURE-2026-05-29].
+
+**Hypothesis 12.X.1: Mirror Closure (UH-001)**
+$QM\_app$ and $GR\_app$ are mirrored projection domains generated through common residue-conditioned closure ($\leftrightarrow_R$).
+
+**Reading:**
+*   $QM\_app$ contains a **GR-signature** (large-scale alignment potential).
+*   $GR\_app$ contains a **QM-signature** (local selection discreteness).
+*   The shared structure is not direct equality, but a symmetric participation in the same underlying closure relation.
+
+**Commentary:**
+This is an internal structural hypothesis, not a physical unification claim. It suggests that what we perceive as "gravity" and "quantum mechanics" are equivalent views of the same process transition ($distinction \to continuation$) viewed from different orientations. In this model, $\leftrightarrow_R$ acts as the mirror axis that preserves structural information across the projection boundary.
+
+---
+
 ## 12.5 Missing and Provisional Formalisms
 
 The applications presented in this chapter are **provisional projections** and require rigorous induction to become formal physical claims:
@@ -1171,6 +1240,9 @@ By enforcing these governance and induction rules, we ensure that the Mono-Proce
 | $\mathcal{E} > 0$ | Realization State | Successful realization of a constraint through admissible continuation. Aliases: *constraint realized*, *admissible continuation exists*. | 1.4 |
 | $\iff_R$ | Recursive Closure | Axiomatic operator denoting biconditional necessity between constraint and realization. | 1.2, 1.6, 2.3 |
 | $\iff_x$ | Projectional Equivalence | Operator denoting duality or equivalent views across domains or descriptions. | 4.1A, 7.4A |
+| $\delta_a$ | Admissibility Filter | Composite operator ($\Pi_A \circ S \circ \text{Cand}$) that transforms constraint into realization. | 1.5, 6.1, 6.1A |
+| $A(c)$ | Admissibility Window | The structural constraint filtering raw difference into persistence. | 6.1 |
+| $\Pi_A$ | Admissibility Projection | Operator ensuring final selections map onto the admissible window. | 6.1A |
 | $D(S_1\|S_2)$ | Directed Distinction | The non-symmetric relational primitive measuring mismatch between states. | 3.1 |
 | $\epsilon$ | The Floor | The minimum possible distinguishability regularizer. | 3.4, 8.1 |
 | $-(i)$ | Orientation Operator | The relational reference frame selected to resolve asymmetry. | 5.1 |
@@ -1187,6 +1259,10 @@ By enforcing these governance and induction rules, we ensure that the Mono-Proce
 | $B_K$ | Braid | A grouping of stable process strands (higher-level invariants). | 11.2 |
 | $\_app$ | Application Suffix | Marker indicating a projected observable domain (e.g., matter_app). | 11.4, 12.1 |
 | $\Psi$ | Inscription Operator | The operator that updates the residue $R$ based on process realization. | 2.2 |
+| $R_{\leftrightarrow}$ | Residue Relation | Residue as operand; studies coupling/recoupling among residue states. | 2.X |
+| $\leftrightarrow_R$ | Residue-Conditioned Closure | Residue as conditioning structure; supports valid process relations. | 2.X |
+| $(A \leftrightarrow_R B) = \text{True}$ | R-Truth Condition | Condition denoting that a relation is valid while closure is maintained. | 2.X |
+| $0\text{-state}$ | Zero State | The state of non-existence resulting from core closure decoupling. | 2.X |
 | $N$ | Distinction-Node | The ordered distinction itself, intrinsically containing ordering. | 3.1A |
 | $TC_{asym}$ | Asymmetric Triadic Closure | Higher-order closure relation involving three or more distinction-nodes. | 4.X, 11.2 |
 | $\mid$ | Closure Participation | Marker for grouped participation in a closure relation (e.g., $N_2 \mid N_3$). | 4.X |
@@ -1201,8 +1277,13 @@ This registry tracks the status and classification of operators within the Mono-
 ### Core Operators
 | Symbol | Name | Status | Function |
 | :--- | :--- | :--- | :--- |
-| $\iff_R$ | Recursive Closure | Core | Binds existence and continuation to residue. |
-| $\delta_a$ | Admissibility Filter | Core | Constraints the possible next states. |
+| $\iff_R$ | Recursive Closure | Core | Axiomatic biconditional necessity between constraint and realization. |
+| $\delta_a$ | Admissibility Filter | Core | Composite update engine ($\Pi_A \circ S \circ \text{Cand}$). |
+| $\Pi_A$ | Admissibility Projection | Core | Maps final selection onto admissible window. |
+| $R_{\leftrightarrow}$ | Residue Relation | Core Candidate | Residue as relational operand (studies coupling/recoupling). |
+| $\leftrightarrow_R$ | Residue Closure | Core Candidate | Residue as conditioning structure for process validity. |
+| $(A \leftrightarrow_R B)=\text{True}$ | R-Truth Condition | Candidate | Denotes that a relation is valid while closure is maintained. |
+| $0\text{-state}$ | Zero State | Core | The state of non-existence resulting from closure decoupling. |
 | $D(S_1\|S_2)$ | Directed Distinction | Core Candidate | Measures directed relational mismatch. |
 | $-(i)$ | Orientation Ref | Core Candidate | Provides the reference frame for resolving asymmetry. |
 | $\Psi$ | Inscription | Active | Updates the residue from process realizations. |
@@ -1330,10 +1411,9 @@ This appendix tracks the formal status of critical gaps identified during the dr
 ### 1. Provisional / Scratch Defined
 These items have candidate formalisms in the "Scratch Schema" (MS-SCRATCH-V1) or "Ordered Account" (Unity Math) but require canonical promotion.
 
-- **Formal operational definition of $\mathcal{E}$:** Defined as mismatch functional $\mathcal{E} : \mathcal{X}\times\mathcal{C}\to \mathbb{R}_{\ge 0} [Source: MS-SCRATCH-V1 Sec 2.1].
+- **Formal operational definition of $\mathcal{E}$:** Defined as mismatch functional $\mathcal{E} : \mathcal{X}\times\mathcal{C}\to \mathbb{R}_{\ge 0}$ [Source: MS-SCRATCH-V1 Sec 2.1].
 - **Formal structure of $\mathcal{S}$ and $\mathcal{R}$:** Defined as state space $\mathcal{X}$ and residue carrier $\mathcal{R}$ [Source: MS-SCRATCH-V1 Sec 1.1, 4.1].
 - **Update Law for $\Psi$:** Defined as $R_{t+1} = \Psi(R_t, x_t, x_{t+1}, \omega_t, \Pi_A)$ [Source: Unity Math Sec 2.2].
-- **Definition of $\text{Arb}_A$:** Defined as selection rule $S$ pruning candidates [Source: MS-SCRATCH-V1 Sec 5.2].
 - **Definition of $O^*$:** Defined as the mismatch-minimizing selection set $O^*(x;c)$ [Source: MS-SCRATCH-V1 Sec 7.3].
 - **Formal definition of $\iff_m$:** Defined as measurement map $\mathrm{Meas} : \mathcal{X}\times\mathcal{C}\to \mathbb{R}^d$ [Source: MS-SCRATCH-V1 Sec 8.1].
 - **Orientation Update Rule:** Defined via "Switching Events" and the switching stability predicate [Source: MS-SCRATCH-V1 Sec 7.5].
@@ -1342,10 +1422,15 @@ These items have candidate formalisms in the "Scratch Schema" (MS-SCRATCH-V1) or
 These items remain unsettled and are the primary targets for future induction and research runs.
 
 - **Formal definition of State $S$:** High Priority. The framework now depends more heavily on the rigorous meaning of $S$ (as manifold point, graph node, or aspect-frame) than on the exact metric form of $D$ [Source: MPF-REFINE-V2 RI-001].
+- **Formal definition of Residue Relation ($R_{\leftrightarrow}$):** Defining the signature and interaction rules for residue as operand.
+- **Formal difference between $R_{\leftrightarrow}$ and $\leftrightarrow_R$:** Rigorous distinction between memory state and closure support.
+- **Formal rules for Decoupling:** Defining the conditions under which a truth-condition becomes False.
+- **Zero-state Condition:** Formal algebraic definition of the collapse resulting from core decoupling.
+- **Projection-signature:** Defining how domain-specific signatures (QM vs GR) are extracted from $\leftrightarrow_R$.
+- **Formal operand of $\leftrightarrow_R$:** Defining the types allowed to participate in residue-conditioned closure.
 - **Closure-Coupling Signature ($\iff_x$):** Defining whether $\iff_x$ is a foundational relation, a comparison, or a specific closure operator family.
 - **Vertical Bar Operator ($\mid$):** Formally fixing the meaning of "grouped closure participation" in triadic closure.
 - **Orientation Space $\mathcal{O}$:** Formal definition required to resolve the orientation-closure bridge.
-- **Formal definition of $\delta_a$:** High Priority. Sit directly between constraint and realization [Source: IND-CORE-ASYM-REALIZATION-001].
 - **Topology-to-Geometry Transform:** The operator that maps braid group invariants ($B_K$) to metric properties. (Ref: 11.3, 11.5)
 - **Empirical Mapping Standards:** Mapping framework metrics ($\Omega_a$, $B_K$) to physical constants ($G, h, c$). (Ref: 12.5)
 - **Formal definition of $\otimes$:** The composition and interference rules for composite directional coupling. (Ref: 9.1, 9.4)
