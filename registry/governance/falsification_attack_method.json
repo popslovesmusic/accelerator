@@ -1,0 +1,180 @@
+{
+  "patch_id": "MPF_PATCH_FALSIFICATION_ATTACK_METHOD_V1",
+  "patch_type": "governance_method",
+  "target": "Mono-Process Framework falsification protocol",
+  "status": "ACTIVE",
+  "method_name": "Center-Control Falsification Attack",
+  "core_intent": {
+    "description": "A structured adversarial method for attacking high-level framework claims by first controlling definitions, then opening exposed bridge assumptions, then running matched mathematical and simulation ablations.",
+    "inspiration": "Chess attacking principles translated into formal falsification procedure.",
+    "primary_rule": "Do not attack downstream application claims until the core bridge dependencies are locked and isolated."
+  },
+  "attack_mapping": {
+    "control_center": {
+      "chess_meaning": "Secure central squares before attacking.",
+      "formal_meaning": "Lock the core definitions and dependency chain before testing.",
+      "mpf_targets": [
+        "D(Sa|Sb)>0",
+        "N_ab",
+        "-(i)",
+        "delta_a",
+        "R",
+        "Arb_A",
+        "TC_asym",
+        "K"
+      ]
+    },
+    "develop_pieces": {
+      "chess_meaning": "Bring pieces into coordinated attacking positions.",
+      "formal_meaning": "Construct matched model variants before evaluation.",
+      "required_models": [
+        "M0_full_mechanism",
+        "M1_no_orientation",
+        "M2_no_residue",
+        "M3_symmetric_distinction",
+        "M4_random_admissibility"
+      ]
+    },
+    "open_files": {
+      "chess_meaning": "Open lines toward the king.",
+      "formal_meaning": "Expose the vulnerable bridge claim directly.",
+      "target_bridge": "orientation_closure_bridge"
+    },
+    "sacrifice": {
+      "chess_meaning": "Remove material to expose the king.",
+      "formal_meaning": "Deliberately remove one claimed support mechanism and test whether the result still survives.",
+      "allowed_sacrifices": [
+        "erase_orientation",
+        "shuffle_orientation",
+        "erase_residue",
+        "shuffle_residue",
+        "force_symmetry",
+        "randomize_admissibility"
+      ]
+    },
+    "attack_king": {
+      "chess_meaning": "Attack the decisive target.",
+      "formal_meaning": "Attack the strongest claim, not a weak paraphrase.",
+      "king_claim": "Stable non-collapsing triadic closure requires orientation-conditioned admissibility plus residue support."
+    },
+    "avoid_premature_attack": {
+      "chess_meaning": "Do not attack before pieces are coordinated.",
+      "formal_meaning": "Do not test gravity_app, matter_app, field_app, or QM/GR bridge claims until lower bridge claims survive ablation."
+    }
+  },
+  "formal_claim_under_attack": {
+    "claim_id": "MPF_CLAIM_ORIENTATION_RESIDUE_TRIADIC_CLOSURE_REQUIRED",
+    "claim": "Stable non-collapsing triadic closure requires orientation-conditioned admissibility plus residue support.",
+    "formal_chain": [
+      "D(Sa|Sb)>0 -> N_ab",
+      "N_set + -(i)_a -> ordered closure candidate",
+      "delta_a filters candidate transitions",
+      "R provides reverse residue support",
+      "Arb_A selects T_star",
+      "TC_asym or K stabilizes if closure persists"
+    ]
+  },
+  "models": {
+    "M0_full_mechanism": {
+      "description": "All claimed support mechanisms active.",
+      "orientation": "coherent",
+      "residue": "history_conditioned",
+      "distinction": "directed_asymmetric",
+      "admissibility": "governed_delta_a"
+    },
+    "M1_no_orientation": {
+      "description": "Orientation removed or randomized.",
+      "orientation": "null_or_randomized",
+      "residue": "history_conditioned",
+      "distinction": "directed_asymmetric",
+      "admissibility": "governed_delta_a"
+    },
+    "M2_no_residue": {
+      "description": "Residue removed or shuffled.",
+      "orientation": "coherent",
+      "residue": "null_or_shuffled",
+      "distinction": "directed_asymmetric",
+      "admissibility": "governed_delta_a"
+    },
+    "M3_symmetric_distinction": {
+      "description": "Directed distinction forced into symmetry.",
+      "orientation": "coherent",
+      "residue": "history_conditioned",
+      "distinction": "D(Sa|Sb)=D(Sb|Sa)",
+      "admissibility": "governed_delta_a"
+    },
+    "M4_random_admissibility": {
+      "description": "Admissibility replaced by matched random filter.",
+      "orientation": "coherent",
+      "residue": "history_conditioned",
+      "distinction": "directed_asymmetric",
+      "admissibility": "matched_random_filter"
+    }
+  },
+  "falsification_tests": {
+    "primary_test": {
+      "metric": "triad_survival_rate",
+      "condition": "M0_full_mechanism must outperform every ablated model by threshold tau.",
+      "falsifier": "If any ablated model equals or exceeds M0 within tau, the strong claim fails."
+    },
+    "orientation_test": {
+      "metric": "orientation_coherence_predictive_value",
+      "condition": "Orientation coherence must predict closure survival.",
+      "falsifier": "If orientation coherence has near-zero predictive value, the orientation-closure bridge fails."
+    },
+    "residue_test": {
+      "metric": "residue_support_dependence",
+      "condition": "History-conditioned residue must improve closure survival over shuffled or erased residue.",
+      "falsifier": "If shuffled/no-residue variants survive equally, residue support is not required."
+    },
+    "symmetry_test": {
+      "metric": "closure_under_forced_symmetry",
+      "condition": "Forced symmetry should reduce directional closure stability.",
+      "falsifier": "If symmetric distinction performs equally, asymmetry requirement is weakened or false."
+    },
+    "admissibility_test": {
+      "metric": "governed_vs_random_admissibility",
+      "condition": "delta_a must outperform matched-random admissibility.",
+      "falsifier": "If random admissibility performs equally, delta_a is not carrying the claimed burden."
+    }
+  },
+  "simulation_campaign_template": {
+    "campaign_id": "MPF_SIM_FALSIFICATION_ATTACK_CAMPAIGN_V1",
+    "seed_count_minimum": 64,
+    "sample_sizes": {
+      "debug": 1000,
+      "main": 100000,
+      "stress": 1000000
+    },
+    "required_outputs": [
+      "triad_survival_rate",
+      "closure_duration",
+      "collapse_rate",
+      "orientation_coherence",
+      "residue_density",
+      "degenerate_selection_rate",
+      "recovery_after_perturbation",
+      "effect_size",
+      "confidence_interval",
+      "seed_variance"
+    ]
+  },
+  "decision_gate": {
+    "support": "M0 significantly outperforms all ablated controls across seeds.",
+    "downgrade": "M0 weakly outperforms controls or depends on narrow tuned parameters.",
+    "falsify": "Any broken model matches or exceeds M0 under matched conditions.",
+    "claim_level_result": {
+      "strong_support": "C4_candidate",
+      "mixed_result": "C2_to_C3_only",
+      "failure": "retire_or_rewrite_claim"
+    }
+  },
+  "governance_rules": [
+    "No downstream app claim may be tested until upstream bridge dependencies are isolated.",
+    "Every claim must identify its king_claim before attack begins.",
+    "Every simulation must include at least one matched-random control.",
+    "Every survival result must report seed variance.",
+    "Every support claim must survive ablation, not merely produce interesting behavior.",
+    "Premature application projection is prohibited during bridge falsification."
+  ]
+}

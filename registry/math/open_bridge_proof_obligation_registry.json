@@ -1,0 +1,137 @@
+{
+  "registry_id": "OPEN_BRIDGE_PROOF_OBLIGATION_REGISTRY",
+  "version": "1.0.0",
+  "obligations": [
+    {
+      "obligation_id": "PO_OPEN_BRIDGE_001_ORIENTATION_CLOSURE",
+      "bridge_id": "OPEN_BRIDGE_001",
+      "bridge_name": "Orientation-Closure Bridge",
+      "claim": "Orientation coherence participates causally or structurally in stable triadic closure.",
+      "must_establish": [
+        {
+          "id": "PO_001",
+          "requirement": "Orientation coherence is measurable.",
+          "formal_need": "Define C_orient in a way that does not presuppose closure."
+        },
+        {
+          "id": "PO_002",
+          "requirement": "Closure stability is measurable.",
+          "formal_need": "Define S_closure independently from orientation coherence."
+        },
+        {
+          "id": "PO_003",
+          "requirement": "Orientation coherence predicts closure stability.",
+          "formal_need": "Show S_closure = f(C_orient, R, delta_a) with nonzero orientation contribution."
+        },
+        {
+          "id": "PO_004",
+          "requirement": "Orientation cannot be replaced by matched random orientation.",
+          "formal_need": "M0_full must outperform M1_random_orientation."
+        },
+        {
+          "id": "PO_005",
+          "requirement": "Orientation is not merely residue in disguise.",
+          "formal_need": "M0_full must outperform M2_residue_dominance_or_orientation_erasure."
+        },
+        {
+          "id": "PO_006",
+          "requirement": "Orientation is not merely admissibility in disguise.",
+          "formal_need": "M0_full must outperform M3_admissibility_dominance_or_orientation_erasure."
+        },
+        {
+          "id": "PO_007",
+          "requirement": "Orientation contribution survives seed variance.",
+          "formal_need": "Effect remains across multi-seed simulation campaign."
+        }
+      ],
+      "formal_minimum": {
+        "orientation_coherence_metric": "C_orient",
+        "closure_stability_metric": "S_closure",
+        "minimum_relation": "partial_effect(C_orient -> S_closure | R, delta_a, topology) > tau"
+      },
+      "hypotheses": {
+        "null": {
+          "id": "H0_OPEN_BRIDGE_001",
+          "statement": "Orientation coherence has no independent contribution to closure stability once residue, admissibility, and topology are controlled."
+        },
+        "alternative": {
+          "id": "H1_OPEN_BRIDGE_001",
+          "statement": "Orientation coherence has an independent contribution to closure stability after residue, admissibility, and topology are controlled."
+        }
+      },
+      "mathematical_obligation": {
+        "must_define": [
+          "C_orient",
+          "S_closure",
+          "R_support",
+          "A_width",
+          "topology_fixed_control",
+          "tau"
+        ],
+        "required_form": {
+          "controlled_relation": "S_closure = beta_0 + beta_1*C_orient + beta_2*R_support + beta_3*A_width + beta_4*Topology + epsilon_noise",
+          "support_condition": "beta_1 > tau and statistically stable",
+          "failure_condition": "beta_1 approx 0 or unstable across controls"
+        },
+        "non_regression_rule": "C_orient must not be defined using S_closure; otherwise the proof is circular."
+      },
+      "simulation_obligation": {
+        "required_controls": [
+          "full_mechanism",
+          "orientation_removed",
+          "orientation_randomized",
+          "orientation_shuffled",
+          "residue_removed",
+          "residue_shuffled",
+          "admissibility_randomized",
+          "topology_fixed_orientation_removed"
+        ],
+        "required_reports": [
+          "mean_closure_survival",
+          "mean_closure_duration",
+          "collapse_rate",
+          "orientation_coherence",
+          "residue_support",
+          "admissibility_width",
+          "effect_size",
+          "confidence_interval",
+          "seed_variance"
+        ],
+        "minimum_seed_count": 64,
+        "minimum_main_sample_size": 100000
+      },
+      "decision_rules": {
+        "support": {
+          "condition": "Orientation contribution is positive, stable, and survives all matched ablation controls.",
+          "allowed_claim_level": "C4_candidate"
+        },
+        "downgrade": {
+          "condition": "Orientation contribution appears but is weak, parameter-sensitive, or confounded with residue/admissibility.",
+          "allowed_claim_level": "C2_to_C3"
+        },
+        "falsify": {
+          "condition": "Orientation contribution disappears under controls, or randomized/removed orientation performs equally.",
+          "allowed_claim_level": "FALSIFIED_OR_REWRITE_REQUIRED"
+        }
+      },
+      "governance_effect": {
+        "if_supported": [
+          "OPEN_BRIDGE_001 may be marked SUPPORTED_PENDING_REPLICATION.",
+          "Immediate structural claims may request promotion review.",
+          "Application projections remain blocked until independently tested."
+        ],
+        "if_downgraded": [
+          "OPEN_BRIDGE_001 remains open.",
+          "Dependent structural claims cannot exceed bridge claim level.",
+          "Simulation assumptions must be rewritten."
+        ],
+        "if_falsified": [
+          "OPEN_BRIDGE_001 enters REVIEW_LOCK.",
+          "TC_asym, K, B_K, topology_app, geometry_app, field_app, gravity_app, and QM_app_GR_app bridge enter dependency review.",
+          "A replacement bridge must be proposed before downstream promotion."
+        ]
+      },
+      "patch_reference": "MPF_PATCH_001D_PROOF_OBLIGATION_OBJECT"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "patch_id": "MPF-P1-004",
+  "status": "ACTIVE",
+  "target": "Proof Governance",
+  "purpose": "Define governance rules and promotion criteria for projectional equivalence proofs.",
+  "canonical_claim_form": {
+    "single_invariant": "(A) ⇔x[I_k] (B)",
+    "multi_invariant": "(A) ⇔x[{I_1, I_2, ..., I_n}] (B)"
+  },
+  "promotion_rules": {
+    "C1": "Claim is syntactically valid and invariant-indexed.",
+    "C2": "Domains and invariant are defined.",
+    "C3": "Preservation argument is internally coherent.",
+    "C4": "Simulation or worked examples support preservation.",
+    "C5": "Counterexamples have been tested or bounded.",
+    "C6": "Formal derivation from the axiomatic floor is complete."
+  },
+  "hard_blocks": [
+    {
+      "id": "BLOCK-PE-001",
+      "block": "Unindexed ⇔x",
+      "effect": "Automatic rejection of claim status elevation above C0.",
+      "reason": "Projectional equivalence is undefined without a specific invariant index."
+    },
+    {
+      "id": "BLOCK-PE-002",
+      "block": "Undefined invariant",
+      "effect": "Automatic rejection of claim status elevation above C0.",
+      "reason": "The indexed invariant must exist in the Invariant Registry."
+    },
+    {
+      "id": "BLOCK-PE-003",
+      "block": "No failure condition",
+      "effect": "Claim status cannot exceed C2.",
+      "reason": "Falsifiability is required for structural and supported claims (C3+)."
+    },
+    {
+      "id": "BLOCK-PE-004",
+      "block": "No preservation argument",
+      "effect": "Claim status cannot exceed C2.",
+      "reason": "Operational justification of preservation is required for structural and supported claims (C3+)."
+    },
+    {
+      "id": "BLOCK-PE-005",
+      "block": "No derivation from Axiom 1.2.1",
+      "effect": "Claim status cannot reach C6.",
+      "reason": "Level C6 requires formal closure rooted in the axiomatic floor."
+    }
+  ]
+}
