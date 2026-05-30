@@ -389,27 +389,29 @@ The directed distinction relation $D(S_1|S_2)$ introduced in Chapter 3 acts as t
 
 We identify two primary relational domains based on the symmetry or asymmetry of the distinction relation: the **Asymmetry Domain** and the **Symmetry Domain**.
 
-The induction of these domains follows the **Refined Induction Hierarchy (v4)**:
+The induction of these domains follows the **Refined Induction Hierarchy (v6)**:
 1. **Layer 0:** 0-state Exclusion — Foundation
 2. **Layer 1:** $(\mathcal{E} \neq 0)$ — Constraint/Distinction Present
 3. **Layer 2:** $\delta_a$ — Admissibility Filter
 4. **Layer 3:** $(\mathcal{E} > 0)$ — Constraint Realized / Admissible Continuation
-5. **Layer 4:** $N_{ab} := D(S_a|S_b)>0$ — Distinction-Node
-6. **Layer 5:** Ordered Node Relation — Structural Coupling
-7. **Layer 6:** Asymmetric Triadic Closure — Structural Stabilization
-8. **Layer 7:** $R_{\leftrightarrow}$ — Residue Relation (Operand)
-9. **Layer 8:** $\leftrightarrow_R$ — Residue-Conditioned Closure (Condition)
-10. **Layer 9:** Truth Condition: $(A \leftrightarrow_R B) = \text{True}$
-11. **Layer 10:** $\to_a \otimes \gets_r$ — Admissibility-Residue Coupling
-12. **Layer 11:** $\text{NavT}$ — Orientation Reconciliation
-13. **Layer 12:** $\text{Arb}_A$ — Realization Arbitration
-14. **Layer 13:** $\Psi$ — Residue Inscription
-15. **Layer 14:** $K$ — Knot Stabilization (Closure)
-16. **Layer 15:** $B_K$ — Braid Closure
-17. **Layer 16:** $\_app$ — Application Projection
-18. **Layer 17:** $\iff_m$ — Metric Extraction
-19. **Layer 18:** $\iff_s$ — Statistical Projection
-20. **Layer 19:** $P$ — Probability
+5. **Layer 4:** $T(S_a \to S_b)$ — Transition Primitive
+6. **Layer 5:** $N_{ab} := D(S_a|S_b)>0$ — Distinction-Node
+7. **Layer 6:** Ordered Node Relation — Structural Coupling
+8. **Layer 7:** Asymmetric Triadic Closure — Structural Stabilization
+9. **Layer 8:** $R_{\leftrightarrow}$ — Residue Relation (Operand)
+10. **Layer 9:** $\leftrightarrow_R$ — Residue-Conditioned Closure (Condition)
+11. **Layer 10:** Truth Condition: $(A \leftrightarrow_R B) = \text{True}$
+12. **Layer 11:** $\to_a \otimes \gets_r$ — Admissibility-Residue Coupling
+13. **Layer 12:** $\text{NavT}$ — Orientation Reconciliation / Update Rule
+14. **Layer 13:** $\text{Arb}_A$ — Realization Arbitration / Selection ($O^*$)
+15. **Layer 14:** $\Psi$ — Residue Inscription
+16. **Layer 15:** $K$ — Knot Stabilization (Closure)
+17. **Layer 16:** $B_K$ — Braid Closure
+18. **Layer 17:** $\_app$ — Application Projection
+19. **Layer 18:** $\iff_m$ — Metric Extraction
+20. **Layer 19:** $\Omega_a$ — Asymmetry Ratio
+21. **Layer 20:** $\iff_s$ — Statistical Projection
+22. **Layer 21:** $P$ — Probability
 
 ---
 
@@ -583,24 +585,22 @@ Directional admissibility ($\to_a$) requires an orientation reference $-(i)$. Wi
 
 ## 5.4 Orientation-Indexed Update Chains
 
-Each procedural step $k$ in the process is associated with an orientation $-(i_k)$. The transition from $k$ to $k+1$ involves a potential re-orientation to reconcile the updated residue and mismatch. This represents an admissible orientation chain rather than a temporal succession [Source: TECH-NOTE-ASYM Sec 8].
+Each procedural step $k$ in the process is associated with an orientation reference frame. The transition from $k$ to $k+1$ is governed by the **Navigation Transform** (NavT), which reconciles the orientation to the realized transition and residue gradients [Source: IND-NAVT-ORIENTATION-001].
 
-**Formal Block 5.4.1: Update Chains**
-$$ D(S_1|S_2) \text{ @ } -(i_k) \to_a D(S_1|S_2) \text{ @ } -(i_{k+1}) $$
-$$ k = \text{procedural step} $$
-$$ -(i_k) = \text{orientation at step } k $$
+**Formal Block 5.4.1: The Orientation Update Chain**
+$$ -(i)_{k+1} = \text{NavT}( -(i)_k, T^*, R, A ) $$
 
 **Commentary:**
-The transition from $k$ to $k+1$ involves a potential re-orientation to reconcile the updated residue and mismatch. This follows the universal orientation-driven array update: $X' = \{x_\alpha + \Pi_{A_\alpha}(-(i)_\alpha[\varepsilon_\alpha, r_\alpha])\}$ [Source: MPF-CORE-V1 Sec 4.3]. This chain of orientations is what an observer eventually reconstructs as a "trajectory" or "field line."
+This represents an **admissible orientation chain** rather than a temporal succession. Each step follows the universal orientation-driven update: $X' = \{x_\alpha + \Pi_{A_\alpha}(-(i)_\alpha[\varepsilon_\alpha, r_\alpha])\}$ [Source: MPF-CORE-V1 Sec 4.3]. The NavT operator ensures that the selected orientation is the one that most effectively reconciles the mismatch pressure with the historical constraints. This chain of orientations is what an observer eventually reconstructs as a "trajectory" or "field line."
 
 ---
 
 ## 5.5 Missing and Provisional Formalisms
 
-To achieve formal closure for the orientation program, the following must be resolved:
+To achieve formal closure for the orientation program, the following must be induced:
 
 1.  **Definition of Orientation Space $\mathcal{O}$:** [ **MISSING DEFINITION** ] Is $\mathcal{O}$ a manifold of unit vectors, a discrete set of aspect-labels, or a more complex topological space of relational frames?
-2.  **Orientation Update Rule:** [ **MISSING DEFINITION** ] What is the formal rule for $-(i_{k+1}) = f(-(i_k), \mathcal{E}, R)$? How does the process "decide" to shift its orientation?
+2.  **Orientation Update Rule:** [ **PROVISIONAL DEFINITION** ] The formal update law $-(i)_{k+1} = \text{NavT}( -(i)_k, T^*, R, A )$ requires a specific computation rule for implementation.
 3.  **Orientation Equivalence:** [ **MISSING DEFINITION** ] Under what conditions are two orientations $-(i_a)$ and $-(i_b)$ considered equivalent? This is critical for defining symmetries in projected geometries.
 
 ---
@@ -1008,13 +1008,24 @@ The arbitration process faces several critical **Failure Modes** that necessitat
 
 ## 10.3 NavT and Orientation Reconciliation
 
-During the realization process, the orientation selected in the previous step ($-(i_k)$) must be reconciled with the candidate states for the next step. This is handled by the **Relational Navigation Transform (NavT)**.
+During the realization process, the orientation selected in the previous step ($-(i)_k$) must be reconciled with the realized transition ($T^*$). This is handled by the **Relational Navigation Transform (NavT)** [Source: IND-NAVT-ORIENTATION-001].
 
-**Formal Block 10.3.1: Orientation Reconciliation**
-$$ \text{NavT} : (-(i_k), \text{Candidates}) \to \{ \text{Reconciled Orientations} \} $$
+**Formal Statement 10.3.1: The Navigation Transform**
+$$ -(i)_{k+1} := \text{NavT}( -(i)_k, T^*, R, A ) $$
 
 **Commentary:**
-NavT (Navigation Transform) is the operator that "steers" the process. It reconciles the selected orientation with the admissibility gradients. If a candidate state requires a radical shift in orientation that is unsupported by the residue, NavT will assign it a lower priority in the arbitration process.
+NavT is the operator that "steers" the process without assuming external time or pre-existing geometry. It maps the current orientation, the realized transition, the residue, and the admissibility window into the **next local orientation reference** ($-(i)_{k+1}$). By evaluating the transition against residue gradients, NavT ensures that the process maintains a coherent relational "trajectory."
+
+---
+
+## 10.3A Navigation Failure Modes
+
+To ensure stable trajectories in simulation, NavT must mitigate several critical failure modes [Source: IND-NAVT-ORIENTATION-001]:
+
+1. **Orientation Scramble:** Occurs when NavT fails to preserve coherent orientation across updates.
+2. **Residue Mismatch:** Orientation update conflicts with the structural memory of $R_{\leftrightarrow}$ or the truth-condition of $\leftrightarrow_R$.
+3. **Closure Break:** Update causes a valid relation to decouple, resulting in $(A \leftrightarrow_R B) = \text{False}$.
+4. **Degenerate Orientation:** Multiple orientations satisfy constraints equally with no arbitration rule.
 
 ---
 
@@ -1025,8 +1036,8 @@ The complete cycle from potential to realized to residue inscription can be summ
 **Formal Block 10.4.1: The Realization Cycle**
 1. **$\delta_a$** filters candidate continuations.
 2. **$\to_a \otimes \gets_r$** biases the candidates based on coupling.
-3. **NavT** reconciles the orientation gradients.
-4. **Arb_A** selects the realized state (based on $O^*$).
+3. **$\text{Arb}_A$** selects the realized transition $T^*$ (based on $O^*$).
+4. **$\text{NavT}$** reconciles the next orientation reference $-(i)_{k+1}$.
 5. **$\iff_R$** (via **$\Psi$**) inscribes the new residue.
 
 ---
@@ -1345,8 +1356,10 @@ By enforcing these governance and induction rules, we ensure that the Mono-Proce
 | $\otimes$ | Composite Coupling | The operator representing the interference of $\to_a$ and $\gets_r$. | 9.1 |
 | $\text{Arb}_A$ | Arbitration Operator | The operator that selects a specific realized state from the admissible set. | 10.1 |
 | $O^*$ | Optimal Mismatch | The target value for the arbitration selection principle. | 10.2 |
-| $\text{NavT}$ | Navigation Transform | The operator that reconciles orientation during transition. | 10.3 |
+| $\text{NavT}$ | Navigation Transform | Operator mapping current orientation, realized transition, and residue into the next orientation reference. | 5.4, 10.3 |
+| $T(S_a \to S_b)$ | Transition Primitive | The minimum process event connecting two states (addressable aspects). | 3.1C |
 | $K$ | Knot | A closed cycle of relational necessity (persistent structural unit). | 11.1 |
+
 | $B_K$ | Braid | A grouping of stable process strands (higher-level invariants). | 11.2 |
 | $\_app$ | Application Suffix | Marker indicating a projected observable domain (e.g., matter_app). | 11.4, 12.1 |
 | $\Psi$ | Inscription Operator | The operator that updates the residue $R$ based on process realization. | 2.2 |
