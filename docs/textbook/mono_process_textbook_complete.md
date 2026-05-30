@@ -767,15 +767,22 @@ Consider a local process where the realized transitions are observed with specif
 
 ## 7.4A Projection Domain Equivalence
 
-A fundamental principle of the framework's measurement program is that the application projections and the relational nDOF representations are equivalent descriptions of the same underlying process state [Source: IND-CORE-ASYM-REALIZATION-001].
+A fundamental principle of the framework's measurement program is that the application projections and the relational nDOF representations are equivalent descriptions of the same underlying process state [Source: IND-CORE-ASYM-REALIZATION-001]. This is governed by the operator **Projectional Equivalence** ($\iff_x$).
 
-**Theorem 7.4.2: Projection Domain Equivalence (TC-003)**
-Application projections and nDOF representations are relationally equivalent descriptions of the same process state.
+**Formal Statement 7.4.2: Truth Condition for $\iff_x$ (MPF-P1-001)**
+Two expressions are projectionally equivalent when they preserve the same **admissible procedural invariant** ($I$) under projection.
+$$ (A) \iff_x (B) \iff I(A) = I(B) $$
+
+**Commentary:**
+The operator $\iff_x$ acts as a bridge that preserves structural information across projection boundaries. It does **not** imply equality of representation ($A=B$), identical dynamics, or identical measurement. Rather, it signifies that both domains are "looking at" the same procedural fact, even if their local signatures differ.
+
+**Theorem 7.4.3: Projection Domain Equivalence (TC-003)**
+Application projections and nDOF representations are relationally equivalent descriptions of the same process state because they preserve common procedural invariants.
 $$ (\mathcal{E} \neq 0_{app}) \iff_x (\mathcal{E} \neq 0)nDOF $$
 $$ (\mathcal{E} > 0_{app}) \iff_x (\mathcal{E} > 0)nDOF $$
 
-**Commentary:**
-This theorem ensures that results observed in simulation "measurements" (application space) are rigorously linked to the structural relations (nDOF space). The operator $\iff_x$ here acts as the bridge that preserves structural information across the projection boundary. Any asymmetric realization in the relational domain must have a corresponding asymmetric signature in the application projection.
+**Governance Rule:**
+Every $\iff_x$ claim must explicitly identify the preserved invariant. The absence of a specified invariant invalidates the equivalence claim.
 
 ---
 
