@@ -63,6 +63,9 @@ The operator $\iff_R$ in this axiom carries three simultaneous readings [Source:
 2. **Relational:** The symbol names the structural relationship between POTENTIAL ($\mathcal{E} \neq 0$) and REALIZATION ($\delta_a(\mathcal{E} > 0)$).
 3. **Processual:** The operator encodes the transition itself (accumulation $\to$ decoupling $\to$ recoupling).
 
+**The Symmetry/Asymmetry Duality:**
+The Primary Axiom is a symmetric expression whose symmetry is broken by the asymmetric residue payload it carries. The biconditional is correct precisely because neither view (relational nor selection) is prior; however, picking one as a starting point is itself an act of orientation ($-(i)$). The form of the axiom enacts the content of the framework [Source: MPF-IND-ARB-DELTA-DUAL-PHASE RI-001].
+
 Within the governance layer, Axiom 1.2.1 constitutes the **Axiomatic Floor**. It does not require proof; rather, it defines the conditions under which "proof" and "law" become possible.
 
 ---
@@ -75,7 +78,10 @@ The symbol $\mathcal{E}$ represents the "mismatch" or "signal" that characterize
 $$ \mathcal{E} : \mathcal{X} \times \mathcal{C} \to \mathbb{R}_{\ge 0} $$
 
 **Commentary:**
-$\mathcal{E}$ is formally defined as a **mismatch functional** that maps a process state $\mathcal{X}$ and a governance context $\mathcal{C}$ to a non-negative scalar value representing pressure, deviation, or non-fit [Source: MS-SCRATCH-V1 Sec 2.1]. Within current models, $\mathcal{E}$ is treated as the primary variable whose non-zero state constitutes the framework's "existence."
+$\mathcal{E}$ is formally defined as a **mismatch functional** that maps a process state $\mathcal{X}$ and a governance context $\mathcal{C}$ to a non-negative scalar value representing pressure, deviation, or non-fit [Source: MS-SCRATCH-V1 Sec 2.1]. 
+
+**The "Type Without Rule" Insight:**
+Mismatch is not a property of a state in isolation, but a property of a state *relative* to its governing conditions. While $\mathcal{E}$ has a formal **type** (what kind of thing it is), current models lack a universal **computation rule** (the actual operation performed on $\mathcal{X}$ and $\mathcal{C}$). This "Type Without Rule" status allows for derivation of downstream structures while preserving specific model flexibility [Source: MPF-IND-ARB-DELTA-DUAL-PHASE RI-005].
 
 ---
 
@@ -84,24 +90,19 @@ $\mathcal{E}$ is formally defined as a **mismatch functional** that maps a proce
 The Mono-Process Framework identifies a foundational asymmetry between the **existence of a constraint** and its **successful realization**.
 
 **Definition 1.4.1: Constraint State ($\mathcal{E} \neq 0$)**
-The condition where distinction or mismatch exists within the framework. Aliases: *constraint present*, *distinction exists*, *non-null process condition* [Source: IND-CORE-ASYM-REALIZATION-001].
+The condition where distinction or mismatch exists within the framework. Aliases: *constraint present*, *distinction exists*, *non-null process condition*.
+$$ (\mathcal{E} \neq 0) \iff \text{distinction\_app} \iff_x \text{constraint\_app} $$
 
 **Definition 1.4.2: Realization State ($\mathcal{E} > 0$)**
-The condition where a constraint successfully realizes through admissible continuation. Aliases: *constraint realized*, *admissible continuation exists*, *realized distinction* [Source: IND-CORE-ASYM-REALIZATION-001].
-
-**Formal Statement 1.4.3: Constraint-Realization Asymmetry**
-$$ (\mathcal{E} \neq 0) \to_a (\mathcal{E} > 0) $$
-
-**Theorem 1.4.4: Constraint Realization Asymmetry (TC-001)**
-The existence of a constraint does not guarantee its realization.
-$$ (\mathcal{E} \neq 0) \not\implies (\mathcal{E} > 0) $$
-
-**Theorem 1.4.5: Realization Presupposes Constraint (TC-002)**
-Every realization presupposes a prior constraint condition.
-$$ (\mathcal{E} > 0) \implies (\mathcal{E} \neq 0) $$
+The condition where a constraint successfully realizes through admissible continuation. Aliases: *constraint realized*, *admissible continuation exists*, *realized distinction*.
+$$ (\mathcal{E} > 0) \iff \text{continuation\_app} \iff_x \text{realization\_app} $$
 
 **Commentary:**
-While the Primary Axiom (Axiom 1.2.1) is symmetric in its algebraic form, its operational realization is strictly asymmetric and directional. A constraint ($\mathcal{E} \neq 0$) establishes the *necessity* of continuation, but realization ($\mathcal{E} > 0$) only occurs if an admissible path ($\delta_a$) exists. If no path is admissible, the constraint remains unrealized, potentially leading to local process termination or "stalling."
+The relational reading (distinction) and the selection reading (constraint) are symmetric inverse descriptions of the same process transition. A distinction is simultaneously a constraint: the moment $D(S_1|S_2) > 0$ exists, the distinction excludes certain possibilities, making not all continuations admissible. Conversely, an admissible continuation is a realized constraint [Source: MPF-IND-ARB-DELTA-DUAL-PHASE IND-001].
+
+**Mismatch Relatvity:**
+Mismatch is not a property of a thing in isolation. It is a property of a state relative to its governing conditions (context). The same state in a different context may have a completely different mismatch value [Source: MPF-IND-ARB-DELTA-DUAL-PHASE IND-005].
+... (rest of 1.4) ...
 
 ---
 
@@ -265,11 +266,45 @@ In classical geometry, distance is typically defined as a symmetric scalar value
 
 **Formal Statement 3.1.1: Directed Distinction**
 $$ D: \mathcal{S} \times \mathcal{S} \to \mathcal{V}_{\text{rel}} $$
-$$ \mathcal{S} := [ \text{MISSING DEFINITION: Formal domain of states or aspect-frames } \mathcal{S} ] $$
-$$ \mathcal{V}_{\text{rel}} := [ \text{MISSING DEFINITION: Formal codomain of relational values} ] $$
+$$ S \in \mathcal{S} $$
+$$ \mathcal{S} := \text{The set of addressable process-aspects under context } \mathcal{C} $$
 
 **Commentary:**
-$D(S_1|S_2)$ represents the distinction of state $S_1$ relative to $S_2$. Unlike a standard metric, $D$ is inherently directed. It measures the "pressure" or "gradient" required to reconcile $S_1$ within the context of $S_2$. Within this framework, ---
+$D(S_1|S_2)$ represents the distinction of state $S_1$ relative to $S_2$. Unlike a standard metric, $D$ is inherently directed. It measures the "pressure" or "gradient" required to reconcile $S_1$ within the context of $S_2$. Within this framework, distinction is the primitive from which all secondary properties, including spatial extension, are projected.
+
+---
+
+## 3.1B The Nature of State $S$
+
+To maintain strict monism, the framework requires a non-circular definition of the **State Primitive** ($S$) that does not presuppose physical space or objecthood [Source: IND-STATE-S-001].
+
+**Definition 3.1.3: Process-State Aspect ($S$)**
+$S$ is a **locally addressable aspect-condition** of the mono-process, sufficient to participate in directed distinction, admissibility, residue inscription, and closure.
+
+**Negative Constraints (What $S$ is NOT):**
+*   **Not a particle:** $S$ has no inherent mass or substance.
+*   **Not a point in space:** $S$ does not inhabit a pre-existing location; rather, locations are projected from relations between $S$ values.
+*   **Not an object:** $S$ has no persistent identity outside of its recursive participation in the process.
+
+**Commentary:**
+By defining $S$ as an "aspect-condition," we ensure that the framework derives geometry rather than assuming it. $S$ represents a specific "vantage point" or "configuration" of the process activity. The state space $\mathcal{S}$ is the collection of all such addressable configurations available under a given governance context $\mathcal{C}$.
+
+---
+
+## 3.1C The Transition Primitive ($T$)
+
+The framework defines how a state changes before arbitration or optimization rules are introduced through the **Transition Primitive** ($T$) [Source: IND-TRANSITION-T-001].
+
+**Formal Statement 3.1.4: Transition Event**
+$$ T(S_a \to S_b) $$
+
+**Definition:**
+$T$ is the **minimum process event** connecting two states (addressable aspects) $S_a$ and $S_b$.
+
+**Commentary:**
+$T$ is the operationalization of the distinction $D(S_a|S_b)$. While $D$ measures the mismatch, $T$ is the *event of change* itself. Crucially, $T$ is **non-temporal**; it represents a procedural step in the recursive cycle rather than a duration in time. $T$ is the primary object evaluated by the Admissibility Filter ($\delta_a$): an event happens only if $T$ is admissible.
+
+---
 
 ## 3.1A Directed Distinction as Node Formation
 
@@ -601,13 +636,13 @@ The Admissibility Filter is not a single irreducible action, but a **composition
 **Formal Block 6.1.2: The Update Composition Rule**
 $$ \delta_a(x;c) := \Pi_A \left( S(\text{Cand}(x;c);c) ; c \right) $$
 
-**Functional Components:**
-1. **$\text{Cand}$ (Candidate Generation):** Proposes a set of possible next states from the current state $x$ [Source: MS-SCRATCH-V1 Sec 5.1].
-2. **$S$ (Selection/Pruning):** Filters the candidate set based on an arbitration rule (see Chapter 10).
-3. **$\Pi_A$ (Admissibility Projection):** Ensures that the final selection is mapped onto the admissible window $A(c)$ [Source: MS-SCRATCH-V1 Sec 3.2].
+**Functional Components (The Operational Funnel):**
+1. **$\text{Cand}$ (Candidate Generation):** Proposes the full possibility space based on current **position** (where you are) [Source: MS-SCRATCH-V1 Sec 5.1].
+2. **$S$ (Selection/Pruning):** A rough-cut plausibility filter based on **arbitration** (what is worth pursuing). This operates upstream of the law-governed check.
+3. **$\Pi_A$ (Admissibility Projection):** The enforcer of **residue** (what history permits). It maps surviving candidates onto the admissible window $A(c)$ [Source: MS-SCRATCH-V1 Sec 3.2].
 
 **Commentary:**
-This composition rule is the "operational engine" of the framework. It defines the mechanism by which the process traverses its state space. If the result of this composition is the empty set ($\delta_a = \emptyset$), the process has reached an inadmissible state and must either terminate or undergo a radical re-orientation [Source: MS-SCRATCH-V1 Sec 5.3].
+This composition rule is the mechanism of realization. It defines how the abstract necessity of the Primary Axiom is procedurally manifested. The funnel narrows from raw potentiality ($\text{Cand}$) through intentional bias ($S$) to historical legality ($\Pi_A$), resulting in the admissible set from which a single event will be realized [Source: MPF-IND-ARB-DELTA-DUAL-PHASE IND-002].
 
 ---
 
@@ -636,15 +671,22 @@ This notation indicates that state $A$ permits a transition to state $B$ *given 
 
 ---
 
-## 6.4 Admissibility Failure
+## 6.4 Admissibility Failure: The Empty Set Condition
 
-A critical aspect of the framework is the possibility of **Admissibility Failure**.
+A critical aspect of the framework is the possibility of **Admissibility Failure**, occurring when the composition $\delta_a$ returns the empty set ($\emptyset$).
 
-**Formal Block 6.4.1: Failure Condition**
-$$ \delta_a(\mathcal{E}_k) = \emptyset \implies \text{Process Termination or Re-orientation Necessity} $$
+**Formal Block 6.4.1: The Two-Level Fork (IND-003)**
+When $\delta_a(x;c) = \emptyset$, the process faces a structured fork resolved by $\text{Arb}_A$ at a higher level:
+
+1. **Branch 1: Re-orientation (Crisis Regime):**
+   If the residue $R$ can reopen the admissibility window under a different orientation $-(i)$, $\text{Arb}_A$ selects a new orientation reference rather than a new state. The landscape shifts, and what was blocked becomes open. "If you cannot move from where you are standing, you change where you are standing from" [Source: MPF-IND-ARB-DELTA-DUAL-PHASE].
+
+2. **Branch 2: Collapse (0-state Regime):**
+   If available orientations are exhausted and the window remains empty, the right side of the Primary Axiom fails. The closure decouples, and the framework collapses into the **0-state**.
+   $$ \neg [ (\mathcal{E} \neq 0) \iff_R \delta_a(\mathcal{E} > 0) ] \to 0\text{-state} $$
 
 **Commentary:**
-If no candidate continuation satisfies $P_{\text{adm}}$, the process faces a singular condition. This may result in the "death" of the local process (zero-collapse) or, more commonly, it forces a radical **re-orientation** ($k \to \text{Arb}_A$) to find a new orientation where the window of admissibility is once again open.
+The 0-state is not just process termination; it is the collapse of the conditions under which existence was possible. Process existence is not a static given; it is continuously earned by the availability of admissible continuation.
 
 ---
 
@@ -903,25 +945,64 @@ By formalizing the composite directional coupling, we move from the separate con
 
 ## 10.1 From Potential to Realized
 
-The **Admissibility Filter ($\delta_a$)** introduced in Chapter 6 provides a *set* of candidate continuations. However, for the process to advance a single step and update its residue, a specific state must be selected. This selection process is known as **Arbitration**, and it is governed by the operator **Arb_A** (alternatively the selector $S$).
+The **Admissibility Filter ($\delta_a$)** introduced in Chapter 6 provides the **Candidate Set** ($C_A(S)$) of allowed transitions connecting the current state $S$ to potential next aspects [Source: IND-ARBITRATION-O-001].
 
-**Formal Statement 10.1.1: The Arbitration Operator**
-$$ \text{Arb}_A : \{ \text{Candidates} \} \to \text{Realized State} $$
+**Formal Statement 10.1.1: The Candidate Set**
+$$ C_A(S) := \{ T_i \mid \delta_a(T_i) = \text{true} \} $$
 
 **Commentary:**
-Arbitration is the "collapse" of potentiality into a single realized event. It is formally defined as a pruning operator $S$ such that $S(C;c) \subseteq C$ [Source: MS-SCRATCH-V1 Sec 5.2]. This operator is the gatekeeper of realization, ensuring that the process maintains its structural integrity and recursive closure.
+The process cannot advance until a specific transition is selected from this set. This selection process is known as **Arbitration**, and it is governed by the operator **Arb_A**.
+
+**Formal Statement 10.1.2: The Arbitration Operator**
+$$ T^* := \text{Arb}_A( C_A(S), R, -(i), \epsilon ) $$
+
+**Commentary:**
+Arbitration is the "collapse" of potential transitions into a single **Realized Transition** ($T^*$). It is the gatekeeper of realization, ensuring that the process maintains its structural integrity and recursive closure by evaluating candidates against historical residue ($R$), local orientation ($-(i)$), and the floor ($\epsilon$).
 
 ---
 
 ## 10.2 Selection and the Optimal Mismatch Principle ($O^*$)
 
-The selection of a realized state is not arbitrary. Within the Mono-Process Framework, arbitration is governed by the principle of **Optimal Mismatch Minimization**, denoted as $O^*$.
+The selection of a realized state is not arbitrary. Within the Mono-Process Framework, arbitration is governed by the **Optimal Mismatch Principle**, denoted as $O^*$.
 
-**Formal Block 10.2.1: The $O^*$ Principle**
-$$ O^*(x;c) := \operatorname{argmin}_{\omega \in W_{\text{adm}}(c)} \mathcal{E}_\Omega(\omega, x; c) $$
+**Formal Statement 10.2.1: The $O^*$ Optimization Rule**
+$$ O^*(T_i) := \operatorname{argmin}_{T_i \in C_A(S)} \mathcal{E}(T_i) \text{ such that } (S \leftrightarrow_R S') = \text{True} $$
 
 **Commentary:**
-The process "seeks" a next state that minimizes the tension between its current mismatch ($\mathcal{E}$) and its historical residue ($R$). $O^*$ represents the set of minimizers (degeneracy allowed) of the orientation-conditioned mismatch $\mathcal{E}_\Omega$ [Source: MS-SCRATCH-V1 Sec 7.3]. This "minimizer switching" is stable and necessary for continuation [Source: MPF-CORE-V1 Sec 9].
+The process "seeks" a transition that **minimizes mismatch pressure** while simultaneously **preserving residue-conditioned closure**. $O^*$ represents the operational balance point where the process continues with the least structural "drag" [Source: MS-SCRATCH-V1 Sec 7.3]. This "minimizer switching" is what produces the appearance of stable trajectories and persistent laws.
+
+**The Character of the Process:**
+Arbitration is where the **character** of the process resides. While the admissibility filter $\delta_a$ defines what is legal, the arbitration rule $O^*$ defines what kind of process it is. Two processes with identical admissibility windows but different selection biases will evolve completely differently.
+
+---
+
+## 10.2A The Selection Function ($\text{Sel}_A$)
+
+For implementation in specific models, the framework utilizes a computable **Selection Function** ($\text{Sel}_A$) that applies the $O^*$ rule to the candidate set.
+
+**Formal Block 10.2.2: Computable Selection**
+$$ T^* = \text{Sel}_A( C_A(S) \mid R, -(i) ) $$
+
+**Commentary:**
+$\text{Sel}_A$ is the algorithmic realization of the arbitration principle. It handles the specific tie-breaking and weighting required to extract a single event from a potentially degenerate candidate set.
+
+---
+
+## 10.2B Failure Modes and Higher-Order Arbitration
+
+The arbitration process faces several critical **Failure Modes** that necessitate higher-order intervention [Source: IND-ARBITRATION-O-001].
+
+1. **Empty Candidate Set ($C_A(S) = \emptyset$):**
+   Triggers the **Empty Set Fork** (see Chapter 6.4), leading to either radical re-orientation or core collapse ($0\text{-state}$).
+
+2. **Degenerate Selection:**
+   Occurs when multiple transition candidates satisfy $O^*$ equally. This leads to **selection degeneracy**, requiring higher-order arbitration rules, stochastic branching, or local oscillation until the tie is broken by residue accumulation.
+
+3. **Residue Conflict:**
+   A candidate is admissible under $\delta_a$ but strongly violates established residue patterns. In such cases, $\text{Arb}_A$ may penalize or reject the candidate to preserve structural closure.
+
+4. **Orientation Conflict:**
+   A candidate requires an orientation shift that is unsupported by the current residue gradient. This triggers **NavT Intervention**, where the Relational Navigation Transform must reconcile the orientation frame before the transition can be realized.
 
 ---
 
@@ -1097,7 +1178,17 @@ $$ (\text{QM\_app}) \iff_{xa} (\text{GR\_app}) $$
 **Commentary:**
 - **QM\_app:** Emerges when observing the discrete, orientation-indexed selection steps (Arb\_A) of the local process.
 - **GR\_app:** Emerges when observing the large-scale, continuous-like stabilization of orientation gradients (NavT).
-Within the framework, these are not contradictory theories but different **observational perspectives** on the same mono-process.
+---
+
+## 12.4A Physics as Arbitration Projection
+
+A core hypothesis of the framework's application program is that the laws of physics are not added "on top" of the process, but are the projected signatures of the **arbitration rule** [Source: MPF-IND-ARB-DELTA-DUAL-PHASE IND-004].
+
+**Hypothesis 12.4.2: The Arbitration-Physics Bridge**
+Force laws, equations of motion, and field equations are candidate formalizations of the arbitration rule ($O^*$) operating within specific orientation regimes and residue conditions.
+
+**Commentary:**
+Within this framework, "physics" is what arbitration looks like when viewed through the **Metric Extractor** ($\iff_m$). What we perceive as the "path of a particle" or the "evolution of a field" is the sequence of realized states selected by $\text{Arb}_A$ to minimize mismatch. The "character" of different forces (gravity, electromagnetism) arises from the specific way $\text{Arb}_A$ reconciles different topological constraints in the residue.
 
 ---
 
@@ -1239,7 +1330,7 @@ By enforcing these governance and induction rules, we ensure that the Mono-Proce
 | $\mathcal{E} \neq 0$ | Constraint State | The condition where distinction or mismatch exists. Aliases: *constraint present*, *distinction exists*. | 1.4 |
 | $\mathcal{E} > 0$ | Realization State | Successful realization of a constraint through admissible continuation. Aliases: *constraint realized*, *admissible continuation exists*. | 1.4 |
 | $\iff_R$ | Recursive Closure | Axiomatic operator denoting biconditional necessity between constraint and realization. | 1.2, 1.6, 2.3 |
-| $\iff_x$ | Projectional Equivalence | Operator denoting duality or equivalent views across domains or descriptions. | 4.1A, 7.4A |
+| $\iff_x$ | Projectional Equivalence | Meta-level operator marking equivalent views across descriptions. | 1.4, 4.1A, 7.4A |
 | $\delta_a$ | Admissibility Filter | Composite operator ($\Pi_A \circ S \circ \text{Cand}$) that transforms constraint into realization. | 1.5, 6.1, 6.1A |
 | $A(c)$ | Admissibility Window | The structural constraint filtering raw difference into persistence. | 6.1 |
 | $\Pi_A$ | Admissibility Projection | Operator ensuring final selections map onto the admissible window. | 6.1A |
@@ -1417,11 +1508,15 @@ These items have candidate formalisms in the "Scratch Schema" (MS-SCRATCH-V1) or
 - **Definition of $O^*$:** Defined as the mismatch-minimizing selection set $O^*(x;c)$ [Source: MS-SCRATCH-V1 Sec 7.3].
 - **Formal definition of $\iff_m$:** Defined as measurement map $\mathrm{Meas} : \mathcal{X}\times\mathcal{C}\to \mathbb{R}^d$ [Source: MS-SCRATCH-V1 Sec 8.1].
 - **Orientation Update Rule:** Defined via "Switching Events" and the switching stability predicate [Source: MS-SCRATCH-V1 Sec 7.5].
+- **Formal definition of State $S$:** Defined as locally addressable aspect-condition [Source: IND-STATE-S-001].
 
 ### 2. High-Priority Gaps (GAP_OPEN)
 These items remain unsettled and are the primary targets for future induction and research runs.
 
-- **Formal definition of State $S$:** High Priority. The framework now depends more heavily on the rigorous meaning of $S$ (as manifold point, graph node, or aspect-frame) than on the exact metric form of $D$ [Source: MPF-REFINE-V2 RI-001].
+- **$\mathcal{E}$ Computation Rule:** Formal rule/operation performed on $\mathcal{X} \times \mathcal{C}$ to produce the scalar mismatch [Source: MPF-IND-ARB-DELTA-DUAL-PHASE GAP-E-RULE].
+- **Re-orientation Trigger Condition:** Formal condition for $\text{Arb}_A$ to escalate to orientation-selection [Source: MPF-IND-ARB-DELTA-DUAL-PHASE GAP-REORIENTATION-TRIGGER].
+- **$S$ Arbitration Rule:** Formal rule for the pruning stage inside the $\delta_a$ composition [Source: MPF-IND-ARB-DELTA-DUAL-PHASE GAP-S-RULE].
+- **$\text{Arb}_A$ Selection Rule:** Formal rule for the internal logic of arbitration selection [Source: MPF-IND-ARB-DELTA-DUAL-PHASE GAP-ARB-A-RULE].
 - **Formal definition of Residue Relation ($R_{\leftrightarrow}$):** Defining the signature and interaction rules for residue as operand.
 - **Formal difference between $R_{\leftrightarrow}$ and $\leftrightarrow_R$:** Rigorous distinction between memory state and closure support.
 - **Formal rules for Decoupling:** Defining the conditions under which a truth-condition becomes False.
@@ -1460,6 +1555,9 @@ This textbook draft is derived from and cross-referenced with the following foun
 | **TECH-NOTE-ASYM** | [Technical Note: Asymmetry Ratio and Orientation Selection](D:/projects/acellorator/docs/asym.txt) | Exploratory | Deep dive into the $\Omega_a$ metric and the bridge from asymmetry to orientation. |
 | **MPF-NARRATIVE** | [The Law of the One Process: Narrative Synthesis](D:/projects/acellorator/docs/narrative.txt) | Synthesis | Detailed conceptual derivation of the four organizational resolutions (forces) and the nature of process. |
 | **IND-CORE-ASYM-REALIZATION-001** | [Induction: Core Asymmetry and Realization](D:/projects/acellorator/docs/textbook/mono_process_textbook_complete.md) | 2026-05-29 | Formalization of constraint vs. realization and projectional duality. |
+| **MPF-IND-ARB-DELTA-DUAL-PHASE** | [Induction: Arbitration and Delta Dual Phase](D:/projects/acellorator/docs/textbook/mono_process_textbook_complete.md) | 2026-05-29 | Formalization of the delta_a funnel, empty set forks, and process character. |
+| **MPF-IND-REFINE-R-DUAL-PHASE-CORE-CLOSURE** | [Induction: Dual-Phase Residue and Mirror-Closure](D:/projects/acellorator/docs/textbook/mono_process_textbook_complete.md) | 2026-05-29 | Formalization of residue relation, truth conditions, and mirror axis. |
+| **IND-STATE-S-001** | [Induction: State Primitive Grounding](D:/projects/acellorator/docs/textbook/mono_process_textbook_complete.md) | 2026-05-29 | Non-spatial, monistic definition of the state aspect S. |
 
 ### Secondary References and Registries
 - **Compliance Charter v2.3:** [compliance_charter_v2_3.json](D:/projects/acellorator/docs/registry/compliance_charter_v2_3.json) - Governance authority.
