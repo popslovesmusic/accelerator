@@ -1,0 +1,125 @@
+{
+  "campaign_spec": {
+    "id": "MEGA_TRIAD_RELATIONAL_COMPASS_V1",
+    "purpose": "Stress-test the Relational Compass and Selection Operator at scale (1,000,000 triads) to verify orientation stability and residue-conditioned cost reduction in massive ensembles.",
+
+    "scope_guardrail": {
+      "allowed_claims": [
+        "large-scale orientation stability",
+        "selection operator noise rejection at scale",
+        "residue-conditioned stabilization speedup",
+        "node asymmetry survival in 10^6 triad systems"
+      ],
+      "forbidden_claims": [
+        "direct cosmological mapping",
+        "physical vacuum derivation",
+        "new physical laws"
+      ]
+    },
+
+    "primary_question": "Does the relational compass -(i_a) maintain coherent orientation and cost-reduction across 1,000,000 triads, and does this coherence depend strictly on node asymmetry?",
+
+    "core_hypothesis": {
+      "statement": "Large-scale orientation coherence emerges from asymmetric relational distinguishability and is sustained by residue-conditioned cost reduction; symmetrizing the distinguishability metric destroys the ordering field regardless of scale.",
+      "canonical_relations": [
+        "Pi_sel[D(S1|S2)] <->_xa Pi_sel[D(S2|S1)] ↑ -(i_a)",
+        "cost_next = base_cost - residue_affinity(signature, orientation)"
+      ]
+    },
+
+    "execution_model": {
+      "tool": "optical_reservoir_sim_v1",
+      "target_scale": {
+        "triads": 1000000,
+        "topology": "sparse_ring",
+        "inter_strength": 0.05
+      },
+      "resource_strategy": {
+        "strategy": "Sparse_Matrix_Optimization",
+        "note": "Implementation must bypass full O(N^2) T-matrix for N=10^6. Use neighbor-indexed adjacency lists."
+      }
+    },
+
+    "phase_1_selection_scaling": {
+      "purpose": "Verify Selection Operator noise rejection across 1M triads.",
+      "tests": [
+        "floor_violation_check",
+        "noise_floor_stability",
+        "selection_rate_homogeneity"
+      ],
+      "required_metrics": [
+        "selection_rate",
+        "above_floor_mismatch_rate"
+      ]
+    },
+
+    "phase_2_orientation_coherence": {
+      "purpose": "Measure global orientation stability -(i_a) across the 1M triad ring.",
+      "tests": [
+        "global_orientation_entropy",
+        "local_coherence_correlation",
+        "orientation_domain_count"
+      ],
+      "required_metrics": [
+        "relational_compass_coherence",
+        "orientation_reference_stability"
+      ]
+    },
+
+    "phase_3_residue_acceleration": {
+      "purpose": "Test if residue cost reduction accelerates loop closure at scale.",
+      "tests": [
+        "stabilization_time_vs_residue_strength",
+        "continuation_cost_delta_profile"
+      ],
+      "required_metrics": [
+        "continuation_cost_delta",
+        "inside_admissibility_rate"
+      ]
+    },
+
+    "falsification_attack": {
+      "id": "SYMMETRY_FRACTURE_RIGOR_MATCHED",
+      "purpose": "Attempt to reproduce coherence in a symmetric substrate of equal scale.",
+      "vectors": [
+        {
+          "id": "FV_SYMM_01",
+          "name": "Global Symmetry Fracture",
+          "attack": "Force D(S1|S2) = D(S2|S1) for all 1,000,000 triads.",
+          "failure_condition": "Orientation coherence persists above noise floor."
+        },
+        {
+          "id": "FV_SEL_01",
+          "name": "Selection Floor Bypass",
+          "attack": "Set selection floor to 0.0 (Disable Pi_sel).",
+          "failure_condition": "System maintains basin identity under ambient noise."
+        },
+        {
+          "id": "FV_COST_01",
+          "name": "Residue Cost Flattening",
+          "attack": "Zero the residue_affinity term in the cost function.",
+          "failure_condition": "Stabilization speed is unaffected at 1M triad scale."
+        }
+      ],
+      "rigor_requirement": "Falsification runs must use identical seed, triad count, and topology as the primary phase."
+    },
+
+    "required_metrics": {
+      "primary": [
+        "relational_compass_coherence",
+        "selection_rate",
+        "continuation_cost_delta",
+        "global_inside_rate"
+      ],
+      "falsification": [
+        "coherence_collapse_ratio",
+        "noise_contamination_index",
+        "stabilization_delay_factor"
+      ]
+    },
+
+    "maximum_supported_claim": {
+      "statement": "Within this model, the Relational Compass generates scale-invariant orientation coherence across 1,000,000 triads, which is strictly dependent on node asymmetry and selection filtering."
+    }
+  }
+}
