@@ -1364,13 +1364,40 @@ Falsification campaigns are linked directly to the textbook update flow. A campa
 | Bridge ID | Bridge Name | Claim Under Attack | Linked Campaign | Status | Claim Level | Downstream Cap |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **OPEN_BRIDGE_001** | Orientation-Closure Bridge | Orientation coherence participates in stable triadic closure. | LFCR_001 | **UNDER_ATTACK** | C2_PENDING | C2 unless tested |
+**Infrastructure Campaign Status: SCAFFOLD_COMPLETE**
+- **Patch Campaign:** MPF_PATCH_CAMPAIGN_001_LIVING_FALSIFICATION_CAMPAIGNS
+- **Result:** Governance, dependency, and auditable trail infrastructure established for the Orientation-Closure Attack (LFCR_001).
+- **Remaining Blockers:** Executable engine binding, metric code implementation, physical textbook edits.
 
-**Current Campaign Details: LFCR_001**
-- **Mathematical Spec:** DEFINED
-- **Simulation Status:** NOT_YET_RUN
-- **Dependency Risk:** HIGH
-- **Downstream Review Targets:** TC_asym, K, B_K, topology_app, geometry_app, field_app, gravity_app, QM_app_GR_app_bridge.
-- **Next Required Action:** Create simulation-ready config matrix and evidence report schema.
+**Next Required Action:** Initialize Phase II: Textbook Integration and Executable Attack (MPF_PATCH_002A).
+
+---
+### Live Theorem Status Registry
+
+| Object | Type | Status | Claim Level | Active Campaigns | Evidence Count | Dependencies | Review Locks |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **OPEN_BRIDGE_001** | OPEN_BRIDGE | **UNDER_ATTACK** | C2_PENDING | LFCR_001 | 0 | 4 | 8 |
+| **TC_asym** | THEOREM | **DRAFT** | C2_MAX | LFCR_001 | 0 | 1 | 0 |
+| **gravity_app** | APPLICATION | **DRAFT** | C1 | - | 0 | 3 | 0 |
+
+### Dependency Graph Registry
+
+The formal program is maintained as a directed dependency graph. Claims, operators, bridges, and application projections are nodes. Derivation, support, attack, falsification, and review-lock relations are edges. Status propagation is controlled by edge type and edge strength.
+
+**Key Propagation Rules:**
+- **Support Propagation:** Support travels only one dependency level unless explicit evidence exists for deeper nodes.
+- **Falsification Propagation:** Falsification travels downstream through **REQUIRED** dependency edges.
+- **Claim Cap Propagation:** No formal object may hold a stronger claim level than its weakest unresolved **REQUIRED** dependency (CLAIM_CAP_PRINCIPLE_001).
+- **Speculative Edge Rule:** **SPECULATIVE** edges may guide research but cannot support promotion.
+
+### Graph-Derived Claim Caps (MPF_PATCH_001P)
+
+Theorem status is no longer manually assigned alone; it is constrained by dependency graph state. The current verified maturity of application-level physics analogs (gravity, matter) is strictly bound to the verified survival of the underlying mathematical bridges.
+
+| Object | Root Blocker | Current Cap | Reason |
+| :--- | :--- | :--- | :--- |
+| **TC_asym** | OPEN_BRIDGE_001 | C2_PENDING_ATTACK | REQUIRED dependency under attack. |
+| **gravity_app** | OPEN_BRIDGE_001 | C2_PENDING_ATTACK | Downstream of unresolved root bridge. |
 
 ---
 
@@ -1545,6 +1572,17 @@ This appendix summarizes the standards for classifying and promoting research cl
     - **OPEN_BRIDGE_001 Promotion Block:** Cannot exceed C2 until LFCR_001 is completed.
     - **Downstream Cap Rule:** Dependent structural/application claims cannot exceed bridge level unless separately tested.
 
+### Review Lock Governance (MPF_PATCH_001Q)
+
+Review locks prevent unsupported promotion and require explicit repair patches. Objects under **REVIEW_LOCK** cannot be cited as supported or used as required dependencies.
+
+**Allowed Exit Paths:**
+1. **Rewrite:** Modify locked claim to remove failed dependency.
+2. **Reroute:** Replace failed dependency with valid alternate path.
+3. **Downgrade:** Lower claim level to match available support.
+4. **Retire:** Remove from active theorem status (historical preservation only).
+5. **Retest:** Initialize new campaign after repair.
+
 \pagebreak
 
 # Appendix E: Simulation Evidence Index
@@ -1617,7 +1655,7 @@ These items remain unsettled and are the primary targets for future induction an
 ### 3. Open Theoretical Questions
 - **OPEN_BRIDGE_001 (Orientation and Closure):** **UNDER_ATTACK** [Campaign: LFCR_001].
     - **Failure Condition:** Closure stability remains equal under removed, randomized, or shuffled orientation controls.
-    - **Support Condition:** Coherent orientation improves closure stability after residue, admissibility, and topology controls. (Ref: 5.2A)
+    - **Support Condition:** Coherent orientation improves closure stability after residue, admissibility, and topology controls. (Ref: 5.2A, registry/math/dependency_graph_registry.json)
 - **Selection Uniqueness:** Does the process support selection degeneracy? (Discussed in MS-SCRATCH-V1 as set-valued $O^*$).
 - **Residue Decay:** Does $R$ persist indefinitely? (Requirement for $\Psi$ [Source: Unity Math Sec 2.2]).
 - **Asymmetry vs. Symmetry:** Rigorous proof that asymmetry generates orientation.

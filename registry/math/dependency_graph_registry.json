@@ -1,0 +1,231 @@
+{
+  "registry_id": "MPF_DEPENDENCY_GRAPH_REGISTRY_V1",
+  "patch_id": "MPF_PATCH_001O",
+  "status": "ACTIVE",
+  "purpose": "Create a directed dependency graph registry so support, downgrade, falsification, and review locks propagate through the formal program in a controlled way.",
+  "nodes": [
+    {
+      "node_id": "AXIOM_1_2_1",
+      "node_type": "AXIOM",
+      "name": "Primary Axiom of Distinction and Continuation",
+      "status": "LOCKED",
+      "claim_level": "AXIOMATIC_FLOOR",
+      "textbook_locations": [
+        "Chapter 1.2"
+      ],
+      "last_updated": "2026-05-29T12:00:00Z"
+    },
+    {
+      "node_id": "OPEN_BRIDGE_001",
+      "node_type": "OPEN_BRIDGE",
+      "name": "Orientation-Closure Bridge",
+      "status": "UNDER_ATTACK",
+      "claim_level": "C2_PENDING_ATTACK",
+      "textbook_locations": [
+        "Chapter 5.2A",
+        "Appendix F"
+      ],
+      "active_campaigns": [
+        "LFCR_ORIENTATION_TRIADIC_CLOSURE_ATTACK_001"
+      ],
+      "last_updated": "2026-05-29T12:00:00Z"
+    },
+    {
+      "node_id": "LFCR_ORIENTATION_TRIADIC_CLOSURE_ATTACK_001",
+      "node_type": "SIMULATION_CAMPAIGN",
+      "name": "Orientation-Triadic Closure Falsification Attack",
+      "status": "ACTIVE_UNDER_ATTACK",
+      "textbook_locations": [
+        "Chapter 13",
+        "Appendix E",
+        "Appendix F"
+      ],
+      "last_updated": "2026-05-29T12:00:00Z"
+    },
+    {
+      "node_id": "TC_ASYM",
+      "node_type": "THEOREM",
+      "name": "Asymmetric Triadic Closure",
+      "status": "DEPENDENT",
+      "claim_level": "C2_MAX",
+      "textbook_locations": [
+        "Chapter 4.X"
+      ],
+      "last_updated": "2026-05-29T12:00:00Z"
+    },
+    {
+      "node_id": "K_STABILIZATION",
+      "node_type": "THEOREM",
+      "name": "Knot Stabilization",
+      "status": "DEPENDENT",
+      "claim_level": "C2_MAX",
+      "textbook_locations": [
+        "Chapter 11"
+      ],
+      "last_updated": "2026-05-29T12:00:00Z"
+    },
+    {
+      "node_id": "GRAVITY_APP",
+      "node_type": "APPLICATION_PROJECTION",
+      "name": "gravity_app",
+      "status": "DEPENDENT",
+      "claim_level": "C2_MAX",
+      "textbook_locations": [
+        "Chapter 12"
+      ],
+      "last_updated": "2026-05-29T12:00:00Z"
+    }
+  ],
+  "edges": [
+    {
+      "edge_id": "EDGE_OPEN_BRIDGE_001_TO_AXIOM",
+      "from_node": "OPEN_BRIDGE_001",
+      "to_node": "AXIOM_1_2_1",
+      "edge_type": "DEPENDS_ON",
+      "strength": "REQUIRED",
+      "reason": "Bridge claims must trace to the core expression.",
+      "last_verified": "2026-05-29T12:00:00Z"
+    },
+    {
+      "edge_id": "EDGE_TC_ASYM_TO_OPEN_BRIDGE_001",
+      "from_node": "TC_ASYM",
+      "to_node": "OPEN_BRIDGE_001",
+      "edge_type": "DEPENDS_ON",
+      "strength": "REQUIRED",
+      "reason": "Triadic closure claim depends on orientation participating in closure formation.",
+      "last_verified": "2026-05-29T12:00:00Z"
+    },
+    {
+      "edge_id": "EDGE_K_TO_TC_ASYM",
+      "from_node": "K_STABILIZATION",
+      "to_node": "TC_ASYM",
+      "edge_type": "DEPENDS_ON",
+      "strength": "REQUIRED",
+      "reason": "Knot stabilization depends on prior triadic closure stability.",
+      "last_verified": "2026-05-29T12:00:00Z"
+    },
+    {
+      "edge_id": "EDGE_GRAVITY_TO_K",
+      "from_node": "GRAVITY_APP",
+      "to_node": "K_STABILIZATION",
+      "edge_type": "DEPENDS_ON",
+      "strength": "SUPPORTIVE",
+      "reason": "gravity_app is downstream of topology/geometry stabilization.",
+      "last_verified": "2026-05-29T12:00:00Z"
+    },
+    {
+      "edge_id": "EDGE_CAMPAIGN_ATTACKS_OPEN_BRIDGE_001",
+      "from_node": "LFCR_ORIENTATION_TRIADIC_CLOSURE_ATTACK_001",
+      "to_node": "OPEN_BRIDGE_001",
+      "edge_type": "ATTACKS",
+      "strength": "REQUIRED",
+      "reason": "Campaign directly attacks the Orientation-Closure Bridge.",
+      "last_verified": "2026-05-29T12:00:00Z"
+    }
+  ],
+  "propagation_rules": {
+    "support_propagation": "Support travels only one dependency level unless explicit evidence exists for deeper nodes.",
+    "falsification_propagation": "Falsification travels downstream through REQUIRED dependency edges.",
+    "claim_cap_propagation": "No formal object may hold a stronger claim level than its weakest unresolved REQUIRED dependency (CLAIM_CAP_PRINCIPLE_001).",
+    "speculative_edge_rule": "SPECULATIVE edges may guide research but cannot support promotion.",
+    "review_lock_exit_protocol": "Objects in REVIEW_LOCK may only exit via defined paths: rewrite, reroute, downgrade, retire, or retest (MPF_PATCH_001Q)."
+  },
+  "review_lock_governance": {
+    "triggers": [
+      {
+        "id": "RL_TRIGGER_001",
+        "name": "Required Dependency Falsified"
+      },
+      {
+        "id": "RL_TRIGGER_002",
+        "name": "Bridge Failure"
+      },
+      {
+        "id": "RL_TRIGGER_003",
+        "name": "Operator Semantics Change"
+      },
+      {
+        "id": "RL_TRIGGER_004",
+        "name": "Evidence Conflict"
+      },
+      {
+        "id": "RL_TRIGGER_005",
+        "name": "Circular Support Detected"
+      }
+    ],
+    "exit_paths": {
+      "rewrite": {
+        "requires": [
+          "rewrite_patch",
+          "new_claim_statement",
+          "updated_dependency_graph"
+        ],
+        "status": "REWRITTEN_PENDING_REVIEW"
+      },
+      "reroute": {
+        "requires": [
+          "reroute_patch",
+          "new_dependency_edges",
+          "claim_cap_recalculation"
+        ],
+        "status": "REROUTED_PENDING_ATTACK"
+      },
+      "downgrade": {
+        "requires": [
+          "downgrade_patch",
+          "new_claim_level",
+          "audit_entry"
+        ],
+        "status": "DOWNGRADED"
+      },
+      "retire": {
+        "requires": [
+          "retirement_patch",
+          "historical_record",
+          "downstream_cleanup"
+        ],
+        "status": "RETIRED"
+      },
+      "retest": {
+        "requires": [
+          "new_campaign_id",
+          "new_sim_config",
+          "audit_entry"
+        ],
+        "status": "UNDER_ATTACK"
+      }
+    }
+  },
+  "dependency_strength_definitions": {
+    "REQUIRED": {
+      "cap_applies": true,
+      "description": "Downstream object cannot exceed this dependency's current claim level."
+    },
+    "SUPPORTIVE": {
+      "cap_applies": false,
+      "description": "Dependency informs confidence but does not automatically cap promotion unless declared essential."
+    },
+    "SPECULATIVE": {
+      "cap_applies": false,
+      "description": "May guide research but cannot support or block claim promotion."
+    },
+    "BLOCKING": {
+      "cap_applies": true,
+      "description": "Downstream object is frozen until blocker is resolved."
+    }
+  },
+  "claim_level_order": [
+    "FALSIFIED",
+    "REVIEW_LOCK",
+    "C0_UNFORMED",
+    "C1_DEFINED",
+    "C2_PLAUSIBLE",
+    "C2_PENDING_ATTACK",
+    "C3_ARGUMENT_SUPPORTED",
+    "C4_SIM_SUPPORTED",
+    "C4_PENDING_REPLICATION",
+    "C5_INDEPENDENTLY_REPLICATED",
+    "C6_FORMAL_PROOF_LOCKED",
+    "AXIOMATIC_FLOOR"
+  ]
+}

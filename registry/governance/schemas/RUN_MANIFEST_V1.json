@@ -1,0 +1,67 @@
+{
+  "schema_id": "MPF_RUN_MANIFEST_V1",
+  "patch_id": "MPF_PATCH_001M",
+  "status": "ACTIVE",
+  "purpose": "Define the canonical run manifest used to launch, reproduce, validate, and audit a falsification campaign run.",
+  "required_fields": {
+    "run_id": "string",
+    "campaign_id": "string",
+    "bridge_id": "string",
+    "run_metadata": {
+      "created_at": "string",
+      "created_by": "string",
+      "engine": "string",
+      "engine_version": "string",
+      "git_commit": "string",
+      "config_hash": "string"
+    },
+    "execution_profile": {
+      "mode": "enum(debug, main, stress)",
+      "sample_size": "integer",
+      "seed_count": "integer",
+      "seed_generation_method": "string",
+      "parallelism": "integer"
+    },
+    "models_enabled": "object",
+    "parameter_freeze": {
+      "orientation_rules_hash": "string",
+      "residue_rules_hash": "string",
+      "admissibility_rules_hash": "string",
+      "topology_rules_hash": "string",
+      "selection_rules_hash": "string"
+    },
+    "expected_outputs": "array"
+  },
+  "reproducibility_rules": [
+    "Every run must have a unique run_id.",
+    "Every run must preserve config hash.",
+    "Every run must preserve parameter freeze hashes.",
+    "Every run must record engine version.",
+    "Every run must record random seed generation method."
+  ],
+  "audit_requirements": {
+    "required_before_run": [
+      "Campaign registry entry exists.",
+      "Proof obligation exists.",
+      "Simulation config matrix exists."
+    ],
+    "required_after_run": [
+      "Evidence report generated.",
+      "Audit trail entry generated.",
+      "Textbook update patch generated.",
+      "Claim-level review generated."
+    ]
+  },
+  "run_lifecycle_states": [
+    "DEFINED",
+    "QUEUED",
+    "RUNNING",
+    "COMPLETED",
+    "FAILED",
+    "AUDITED",
+    "ARCHIVED"
+  ],
+  "promotion_gate": {
+    "rule": "No evidence report may be accepted unless produced by a manifest-compliant run."
+  }
+}
