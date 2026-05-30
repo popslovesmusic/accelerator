@@ -769,20 +769,27 @@ Consider a local process where the realized transitions are observed with specif
 
 A fundamental principle of the framework's measurement program is that the application projections and the relational nDOF representations are equivalent descriptions of the same underlying process state [Source: IND-CORE-ASYM-REALIZATION-001]. This is governed by the operator **Projectional Equivalence** ($\iff_x$).
 
-**Formal Statement 7.4.2: Truth Condition for $\iff_x$ (MPF-P1-001)**
-Two expressions are projectionally equivalent when they preserve the same **admissible procedural invariant** ($I$) under projection.
-$$ (A) \iff_x (B) \iff I(A) = I(B) $$
+**Formal Statement 7.4.2: Truth Condition for $\iff_x[I_k]$ (MPF-P1-002)**
+Two expressions are projectionally equivalent with respect to a specific **procedural invariant** ($I_k$) when they preserve the same value for that invariant under projection.
+$$ (A) \iff_x[I_k] (B) \iff I_k(A) = I_k(B) $$
+
+**Governance Rule (R-PE-001):**
+Any use of $\iff_x$ without an invariant index is incomplete. The operator must specify which structural property is being preserved to bridge the domains.
+
+**Approved Initial Invariants:**
+*   **$I_{closure}$:** Preservation of recursive closure structure.
+*   **$I_{admissibility}$:** Preservation of admissible continuation condition.
+*   **$I_{residue}$:** Preservation of residue-conditioned history dependence.
+*   **$I_{orientation}$:** Preservation of orientation-reference relation.
+*   **$I_{selection}$:** Preservation of selection/filtering rule.
 
 **Commentary:**
-The operator $\iff_x$ acts as a bridge that preserves structural information across projection boundaries. It does **not** imply equality of representation ($A=B$), identical dynamics, or identical measurement. Rather, it signifies that both domains are "looking at" the same procedural fact, even if their local signatures differ.
+The operator $\iff_x[I_k]$ acts as a precision bridge. It does **not** imply equality of representation ($A=B$). Rather, it signifies that both domains preserve the same "procedural fact" ($I_k$), even if their local signatures differ.
 
 **Theorem 7.4.3: Projection Domain Equivalence (TC-003)**
-Application projections and nDOF representations are relationally equivalent descriptions of the same process state because they preserve common procedural invariants.
-$$ (\mathcal{E} \neq 0_{app}) \iff_x (\mathcal{E} \neq 0)nDOF $$
-$$ (\mathcal{E} > 0_{app}) \iff_x (\mathcal{E} > 0)nDOF $$
-
-**Governance Rule:**
-Every $\iff_x$ claim must explicitly identify the preserved invariant. The absence of a specified invariant invalidates the equivalence claim.
+Application projections and nDOF representations are projectionally equivalent because they preserve common admissibility invariants [Source: MPF-P1-002].
+$$ (\mathcal{E} \neq 0_{app}) \iff_x[I_{admissibility}] (\mathcal{E} \neq 0)nDOF $$
+$$ (\mathcal{E} > 0_{app}) \iff_x[I_{admissibility}] (\mathcal{E} > 0)nDOF $$
 
 ---
 
