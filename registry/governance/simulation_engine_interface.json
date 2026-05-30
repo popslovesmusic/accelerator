@@ -1,0 +1,56 @@
+{
+  "patch_id": "MPF_PATCH_002G",
+  "status": "ACTIVE",
+  "target": "LFCR_ORIENTATION_TRIADIC_CLOSURE_ATTACK_001",
+  "purpose": "Define the formal simulation engine interface to resolve BLOCKER_001.",
+
+  "cli_interface": {
+    "command_template": "./engine --model {model_id} --seed {seed} --samples {sample_size} --config {config_path} --out {output_path}",
+    "required_args": [
+      "model_id",
+      "seed",
+      "sample_size",
+      "config_path",
+      "output_path"
+    ]
+  },
+
+  "input_requirements": {
+    "config_schema": "registry/governance/schemas/LFCR_CONFIG_V1.json",
+    "supported_models": [
+      "M0_full",
+      "M1_no_orientation",
+      "M2_random_orientation",
+      "M3_shuffled_orientation",
+      "M4_residue_only",
+      "M5_admissibility_only",
+      "M6_fixed_topology_no_orientation",
+      "M7_random_admissibility"
+    ]
+  },
+
+  "output_requirements": {
+    "format": "jsonl",
+    "required_fields_per_sample": [
+      "step_count",
+      "survival_status",
+      "C_orient",
+      "S_closure",
+      "R_support",
+      "A_width",
+      "state_hash"
+    ],
+    "summary_stats": "summary_statistics.json"
+  },
+
+  "engine_verification_rules": [
+    "Engine must pass smoke test with 8 seeds for each model.",
+    "Engine must demonstrate deterministic output for fixed seeds.",
+    "Engine must report rule hashes for parameter-freeze validation."
+  ],
+
+  "binding_targets": {
+    "high_performance": "tools/acellorator_engine_cpp",
+    "exploratory": "tools/pde_engine_v2_python"
+  }
+}

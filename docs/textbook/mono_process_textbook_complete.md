@@ -16,6 +16,14 @@
 11. [Chapter 11: Topology, Knots, Braids, and Projection](#chapter-11-topology-knots-braids-and-projection)
 12. [Chapter 12: Field, Matter, Energy, and Gravity Applications](#chapter-12-field-matter-energy-and-gravity-applications)
 13. [Chapter 13: Governance, Claim Levels, and Induction Rules](#chapter-13-governance-claim-levels-and-induction-rules)
+    - 13.1 Claim Levels (L-Levels and C-Levels)
+    - 13.2 Induction and Promotion Rules
+    - 13.3 Living Research Governance Layer
+    - 13.4 Theorem Status Registry
+    - 13.5 Dependency Graph Registry
+    - 13.6 Review Lock Protocol
+    - 13.7 Campaign Registry
+    - 13.8 Evidence Integration Workflow
 
 ### Appendices
 - [Appendix A: Complete Symbol Glossary](#appendix-a-complete-symbol-glossary)
@@ -318,6 +326,46 @@ A distinction-node is the **ordered distinction itself**, not a container or obj
 
 ---
 
+## 3.1D The Distinction Split: Value vs. Operation
+
+To maintain strict monism, the framework distinguishes between the **relational value** of a distinction and the **procedural act** of distinguishing.
+
+**Formal Statement 3.1.5: The Distinction Split**
+1.  **$D(S_a|S_b)$ (Relational Value):** The "how much" of the mismatch. It serves as the primary operand for metric extraction ($\iff_m$) and statistical projection ($\iff_s$).
+2.  **$(D)_n$ (Process Operation):** The "how many ways" the process distinguishes across $n$ independent Relational Axes. It is the procedural regime sustaining the root condition $(\mathcal{E} \neq 0)$.
+
+**The Structural Chain (Process Lineage):**
+$(D)_n \to$ Relational Asymmetry $\to (asym\_app)_n \to -(i) \to \to_a$
+
+**The Observational Chain (Metric Lineage):**
+$D(S_a|S_b) \xrightarrow{\iff_m} \Omega_a \xrightarrow{\iff_s} P$
+
+**Commentary:**
+This split prevents the reification of $D$ as a pre-existing "distance." $(D)_n$ represents the process's internal organizational capacity. When this capacity is configured asymmetrically, it induces **Orientation** ($-(i)$) to resolve the resulting pressure.
+
+---
+
+## 3.1E Relational Capacity and the $n$ Subscript
+
+The subscript $n$ denotes the number of independent **Relational Axes (Degrees of Freedom)** active in a process transition. It represents the number of ways the process can concurrently fail to be identical to itself.
+
+**Formal Statement 3.1.6: The Capacity Count**
+$$ n = | \{ D_1, D_2, \dots, D_n \} | $$
+where each $D_k$ is relationally independent (non-reducible).
+
+**The Derivation Chain:**
+$$ S \xrightarrow{\text{distinguish}} \{D_1, D_2, \dots, D_n\} \implies (D)_n $$
+
+**Commentary:**
+The operation $(D)_n$ is the primitive ancestor of physical dimensionality. In the **Asymmetry Domain**, $n$ determines the structural complexity available for stabilization:
+- **$D_1$:** Single axis (Binary oscillation/collapse).
+- **$D_2$:** Two axes (Planar stabilization).
+- **$D_3$:** Three axes (Minimum required for stable triadic closure/volume).
+
+By using $n$ as a subscript, the framework acknowledges that the process may operate in different capacity regimes (e.g., $D_2 \to D_3$ phase transitions) while remaining a single mono-process.
+
+---
+
 ## 3.2 Non-Symmetry and Asymmetry
 
 The most critical property of the distinction relation is its non-symmetry. The mismatch experienced from $S_1$ to $S_2$ is not necessarily equal to the mismatch from $S_2$ to $S_1$ [Source: TECH-NOTE-ASYM Sec 1].
@@ -557,39 +605,77 @@ One can change orientation without advancing the process "forward" in time (e.g.
 
 ---
 
-## 5.2A The Orientation-Closure Bridge (OPEN_BRIDGE_001) (UNDER_ATTACK)
+## 5.2A OPEN_BRIDGE_001 : Orientation-Closure Bridge (LIVE_LINKED) (FALSIFIED) (REVIEW_LOCK_ACTIVE)
 
-A critical open question in the mathematical program is the exact procedural relationship between orientation selection and closure realization. This bridge has been formally registered for adversarial testing [Source: MPF_PATCH_001A_OPEN_BRIDGE_001_FORMALIZATION].
+The Orientation-Closure Bridge concerns the foundational relationship between orientation structure and stable closure formation. This bridge has been **FALSIFIED** through adversarial stress testing [Source: LFCR_001_STRESS_REPORT_001].
 
-**Bridge Status: UNDER_ATTACK (Campaign: LFCR_001)**
+**Formal Statement:**
+- **Claim:** Orientation coherence participates in stable triadic closure.
+- **Status:** **FALSIFIED** (Campaign: LFCR_001)
+- **Current Claim Level:** FALSIFIED
 
-Two candidate models are currently under investigation:
+**Falsification Summary:**
+Adversarial ablation testing (Campaign: LFCR_001) demonstrated that orientation coherence has a negligible effect on stable triadic closure survival ($\Delta S < 0.01$). Randomizing orientation (Ablation M2) under high-pressure stress conditions (floor=0.15) did not significantly degrade structural persistence compared to the full mechanism (M0). Consequently, the strong participatory claim (Model B) is invalidated for the tested mechanism class.
 
-*   **Model A (Orientation After Asymmetry):**
-    `D(Sa|Sb)>0` → `relational asymmetry` $\to$ $-(i)$ $\to$ `closure realization`.
-    In this model, orientation is a secondary consequence of asymmetry, induced after the relational pressure is already established.
+**Dependency Status:**
+All downstream dependencies are now in **REVIEW_LOCK** pending the proposal of a replacement bridge or a fundamental rewrite of the triadic closure stabilization mechanics.
 
-*   **Model B (Orientation Participatory):**
-    `D(Sa|Sb)>0` → $-(i)$ $\to$ `ordered node structure` $\to$ `closure realization`.
-    In this model, orientation functions as an active closure-forming component, ordering the distinction-nodes before the closure triad is stabilized.
+---
 
-**Testing Strategy:**
-The bridge is evaluated by testing whether orientation coherence predicts closure survival better than randomized controls. This involves systematic ablation across several defined attack surfaces [Source: MPF_PATCH_001C_ATTACK_SURFACE_MAP]. The bridge has been converted into an **auditable proof obligation** (PO_OPEN_BRIDGE_001) with explicit support and falsification conditions [Source: MPF_PATCH_001D_PROOF_OBLIGATION_OBJECT].
+**Historical Context:**
+Earlier formulations treated orientation as a secondary consequence of asymmetry. Subsequent development suggested that orientation functions as a local ordering anchor required for the "knotting" of distinction-nodes. Subsequent development suggested orientation may participate directly in closure realization. The bridge remains unresolved and serves as the primary attack target for the current research cycle.
 
-**Primary Attack Surfaces:**
-1. **Orientation Removal:** Can closure survive if $-(i)$ is completely eliminated?
-2. **Orientation Randomization:** Can random orientation perform as well as coherent orientation?
-3. **Residue/Admissibility Dominance:** Is orientation redundant if other mechanisms are strengthened?
-4. **Symmetry Injection:** Does asymmetry actually generate the required orientation?
+### Competing Models
 
-**Mathematical Requirement:**
-Stable closure survival ($S_{closure}$) must be shown to be a function of orientation coherence ($C_{orient}$), residue support ($R$), and admissibility ($\delta_a$), with a non-zero, statistically stable contribution from orientation that survives all ablation controls.
+*   **Model A: Orientation After Closure**
+    *   **Statement:** Orientation emerges after closure has already formed.
+    *   **Dependency:** distinction $\to$ asymmetry $\to$ closure $\to$ orientation.
+*   **Model B: Orientation Participates In Closure**
+    *   **Statement:** Orientation contributes directly to closure formation.
+    *   **Dependency:** distinction $\to$ orientation $\to$ closure $\to$ stabilization.
 
-**Critical Failure Modes:**
-- **FM_001 (Irrelevance):** Closure is unaffected by orientation structure.
-- **FM_002 (Redundancy):** Other mechanisms (residue, admissibility) completely explain the stability.
-- **FM_004 (Epiphenomenon):** Orientation appears only *after* closure is already established.
+### Proof Obligation: PO_OPEN_BRIDGE_001
+The bridge has been converted into an auditable proof obligation [Source: MPF_PATCH_001D].
+1. **Predictive Value:** Orientation coherence must possess measurable predictive value for closure survival.
+2. **Independence:** Closure stability must be independently measurable from orientation.
+3. **Ablation Survival:** Orientation must survive matched ablation controls (removal, randomization, shuffling).
+4. **Non-Reduction:** Orientation effect must not reduce to residue or admissibility alone.
 
+### Active Attack Campaign: LFCR_001
+This bridge is currently undergoing systematic falsification [Source: registry/governance/living_falsification_campaign_registry.json].
+- **Attack Surfaces:** orientation_removal, randomization, shuffle, residue_dominance, admissibility_dominance, topology_dominance, random_admissibility.
+
+### Executable Metric Definitions (MPF_PATCH_002E)
+To ensure auditable falsification, the following metrics are used to evaluate the bridge survival:
+- **C_orient (Orientation Coherence):** Degree of mutual consistency across closure candidates. Range [0.0, 1.0].
+- **S_closure (Closure Stability):** Persistence of closure structure through update cycles. Primary target metric.
+- **R_support (Residue Support):** Influence of accumulated residue on closure persistence.
+- **A_width (Admissibility Width):** Effective admissible transition volume available.
+- **T_preserve (Topology Preservation):** Degree to which connectivity survives perturbation.
+
+**Derived Effects:**
+- **orientation_effect:** $S_{closure}(M0) - S_{closure}(M1)$. Must be $> \tau$ to support bridge.
+
+### Dependency Table
+
+| Level | Affected Items |
+| :--- | :--- |
+| **Upstream** | AXIOM_1_2_1, D(Sa|Sb)>0, delta_a, R, -(i) |
+| **Immediate Downstream** | TC_asym, ordered_node_structure, closure_survival |
+| **Extended Downstream** | K_STABILIZATION, B_K, topology_app, geometry_app, field_app, gravity_app, QM_app_GR_app_bridge |
+
+**Claim Cap Notice:**
+No downstream dependency may exceed the current claim level of **OPEN_BRIDGE_001** (**C2_PENDING_ATTACK**) unless independently justified.
+
+### Failure and Support Consequences
+
+*   **If Falsified:** TC_asym, K_STABILIZATION, B_K, topology_app, geometry_app, field_app, gravity_app, and QM_app_GR_app_bridge enter **REVIEW_LOCK**.
+*   **If Supported:** Immediate structural claims become eligible for promotion review. Bridge status advances to **SUPPORTED_PENDING_REPLICATION**. No automatic support propagates to application projections.
+
+**Future Update Rule:**
+Any evidence report affecting **OPEN_BRIDGE_001** automatically updates this section, Appendix E, Appendix F, and the **Theorem Status Registry**.
+
+---
 ---
 
 ## 5.3 Direction Requires Orientation
@@ -1081,6 +1167,23 @@ The complete cycle from potential to realized to residue inscription can be summ
 4. **$\text{NavT}$** reconciles the next orientation reference $-(i)_{k+1}$.
 5. **$\iff_R$** (via **$\Psi$**) inscribes the new residue.
 
+### 10.4A Simulation Realization Cycle (LFCR_001)
+To evaluate the **Orientation-Closure Bridge**, simulation engines utilize a strictly ordered realization cycle for every procedural step $k$ [Source: MPF_PATCH_002F].
+
+**State Model:**
+- **$S$:** locally addressable aspect $\{id, \phi\}$.
+- **$N_{ab}$:** Distinction-node $D(S_a|S_b) > \epsilon$.
+- **$-(i)$:** Orientation vector in relational capacity $n$.
+
+**Ablation Update Rule:**
+Every campaign run M0-M7 follows the controlled update sequence:
+1. **Candidate Check:** Identify $\{T_i\}$ via $D_n$.
+2. **Orientation Ordering:** Apply $-(i)$ to order candidates (M0/M7 baseline; Bypassed in M1/M2).
+3. **Ablation Injection:** Execute model-specific mechanism change (e.g., randomize -(i) in M2; force symmetry in M3).
+4. **Admissibility Selection:** Execute $\delta_a$ funnel.
+5. **Decision:** Select $T^*$ via $O^*$.
+6. **Provenance:** Record state hash and metric extraction.
+
 ---
 
 ## 10.5 Missing and Provisional Formalisms
@@ -1284,38 +1387,20 @@ By defining these applications as projections, we provide a path for the Mono-Pr
 
 # Chapter 13: Governance, Claim Levels, and Induction Rules
 
-## 13.1 The Necessity of Rigor
+## 13.1 Claim Levels (L-Levels and C-Levels)
 
-The Mono-Process Mathematical Program is a governed research activity. Because the framework deals with fundamental primitives and projected physical behaviors, it is prone to ontological inflation and overclaim. To prevent this, the framework imposes a strict **Governance Layer** on all terminology, mathematical statements, and research results, following the authorized SSOT reference layer [Source: MPF-CORE-V1 Sec 0].
+Terminology and results within the framework are categorized by their operational readiness and evidential strength.
 
-**Formal Statement 13.1.1: The Traceability Requirement**
-$$ \text{Claim}_X \implies \text{Trace}(\text{Core Expression}) $$
-
-**Commentary:**
-Every major definition, theorem, and application must be explicitly traced back to the core recursive expression $(\mathcal{E} \neq 0) \iff_R \delta_a(\mathcal{E} > 0)$. Any statement that cannot be traced to these primitives is classified as a **proposed interpretation** and cannot be used as foundational evidence for higher-level claims.
-
----
-
-## 13.2 Lexicon Validation (L-Levels)
-
-Terminology within the framework is not merely descriptive; it is operational. The **Lexicon Validation System** tracks the operational readiness of every term.
-
-**Formal Block 13.2.1: Lexicon Levels**
+### 13.1.1 Lexicon Validation (L-Levels)
+The **Lexicon Validation System** tracks the operational readiness of every term [Source: MPF-CORE-V1 Sec 0].
 - **L0 (Definition):** Internal terminology or notation only.
 - **L1 (Observed):** Term has one model or run supporting one operational role.
 - **L2 (Multi-Model):** Term has agreement across independent mechanism classes (e.g., Agent-based and PDE).
 - **L3 (Verified):** Term has multi-model + multi-seed + falsification-passed support.
 
-**Commentary:**
-A paper or derivation may use an L0 term, but it must explicitly state that the affected interpretation depends on a **provisional** term-role. Only terms at L3 are considered "canonical primitives" for the purpose of formal theorem construction.
-
----
-
-## 13.3 Claim Classification (C-Levels)
-
+### 13.1.2 Claim Classification (C-Levels)
 The strength of a research result or mathematical proof is governed by its **Claim Level (C-Level)**.
-
-**Formal Block 13.3.1: Claim Levels**
+- **C0 (Axiom / Definition):** Internal foundation (Starting point Axiom 1.2.1).
 - **C1 (Model-Relative):** Statement valid only inside a specific formal scaffold.
 - **C2 (Simulation-Observed):** Outcome observed within a specific simulation regime.
 - **C3 (Structural Comparison):** Comparison to external theory as resemblance or analogy.
@@ -1323,85 +1408,115 @@ The strength of a research result or mathematical proof is governed by its **Cla
 - **C5 (Validate):** Requires external peer review and domain evidence.
 - **C6 (Theorem):** Requires formal symbolic closure and universal mechanism independence.
 
-**Commentary:**
-The transition from C2 to C4 requires **falsification testing** and **multi-model verification**. A claim that fails its falsification vector is automatically downgraded to **NOT\_SUPPORTED**.
-
 ---
 
-## 13.4 Falsification and Independent Measurement
+## 13.2 Induction and Promotion Rules
 
-To achieve high-level claim status (C4+), the framework mandates adversarial testing.
+The promotion of a term or claim from provisional to verified is a governed process.
 
-**Formal Block 13.4.1: Validation Mandates**
-- **Independent Measurements:** For C4+, at least one independent measurement using a different mechanism class is required.
-- **Falsification Vectors (FV):** For C5+, multiple targeted failure tests (FV-1, FV-2, etc.) must be executed to confirm the claim's robustness.
-
-**Commentary:**
-Rigor is not determined by the number of successful runs, but by the failure of the framework to be falsified under stress. "Supported" status is earned through survival, not just observation.
-
----
-
-## 13.5 Induction and Promotion Rules
-
-The promotion of a term or claim from provisional to verified is a governed process. All validation and rigor targets are subject to internal governance labels and self-defined procedural rigor classifications [Source: MPF-MATH-SCHEMA-V1.9 Sec 8].
-
-**Formal Block 13.5.1: Promotion Thresholds**
+**Formal Block 13.2.1: Promotion Thresholds**
 $$ \text{Promotion}(L_n \to L_{n+1}) \iff \text{Evidence Pack} \in \text{Registry} $$
 
-**Commentary:**
+**Mandates:**
 - **Trace-to-Core:** A term cannot reach L2 without an explicit process-rewrite using ε, R, and δ primitives.
 - **Adversarial Tests:** Promotion to L3 or C4 requires an explicitly documented "red team" analysis of potential artifacts.
 - **Contradiction Resolution:** If a simulation run contradicts a mathematical lemma, the lemma is downgraded to **contested** pending a formal derivation audit.
 
 ---
 
-## 13.6 Living Patch-Linked Falsification Campaigns (LIVE_LINKED)
+## 13.3 Living Research Governance Layer
 
-Falsification campaigns are linked directly to the textbook update flow. A campaign is not merely an external test record; it is a living governance object that updates chapters, appendices, operator registries, claim levels, and bridge-status tables whenever mathematical specifications or simulation evidence changes.
+The Mono-Process Program is maintained as a living research system rather than a static collection of claims. Every theorem, bridge, operator, invariant, and application projection exists within a governed evidence structure. Claims are not promoted solely by argument. Claims advance through formal definition, proof obligation, attack, evidence review, replication, and governance review.
+
+The purpose of governance is not to protect claims from falsification. The purpose of governance is to ensure that falsification, support, revision, and retirement occur transparently and traceably. All support and failure events are recorded through campaign-linked audit trails.
+
+**Governance Note:** The purpose of the governance layer is not to establish truth. Its purpose is to preserve the relationship between claims, evidence, dependencies, and revision history.
+
+---
+
+## 13.4 Live Formal Status Dashboard (LIVE_LINKED)
+
+The dashboard provides the current operational state of the formal program. It is generated from registry data rather than narrative text. All claim-level decisions, campaigns, evidence reports, and review locks are reflected here. 
+
+**Dashboard Authority (DASHBOARD_RULE_001):**
+If the dashboard and chapter text disagree, the dashboard is authoritative until reconciliation occurs. This prevents stale narrative sections from overriding current evidence.
+
+| Object ID | Type | Status | Claim Level | Dependencies | Active Campaigns | Evidence | Review Lock | Last Update |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **AXIOM_1_2_1** | AXIOM | **LOCKED** | AXIOMATIC | 0 | - | - | - | 2026-05-29 |
+| **OPEN_BRIDGE_001** | BRIDGE | **FALSIFIED** | FALSIFIED | 4 | LFCR_001 | 2 | - | 2026-05-30 |
+| **TC_asym** | THEOREM | **REVIEW_LOCK** | REVIEW_LOCK | 1 | LFCR_001 | 0 | **LOCKED** | 2026-05-30 |
+| **gravity_app** | APPLICATION | **REVIEW_LOCK** | REVIEW_LOCK | 3 | - | 0 | **LOCKED** | 2026-05-30 |
+
+---
+
+## 13.5 Dependency Graph Registry
+
+The formal program is represented as a directed dependency graph. Nodes represent axioms, definitions, operators, lemmas, theorems, bridges, invariants, application projections, campaigns, and evidence reports. Edges represent dependency, support, attack, falsification, update, and review-lock relations. Dependency edges determine promotion limits, review-lock propagation, and evidence scope. No claim may exceed the support level of unresolved required dependencies.
+
+**Graph Principles:**
+- Support propagates conservatively.
+- Falsification propagates aggressively through **REQUIRED** dependencies.
+- Speculative edges cannot promote claims.
+- Blocking edges prevent promotion until resolved.
+
+**Graph-Derived Claim Caps:**
+| Object | Root Blocker | Current Cap | Reason |
+| :--- | :--- | :--- | :--- |
+| **TC_asym** | OPEN_BRIDGE_001 | **REVIEW_LOCK** | Root dependency FALSIFIED. |
+| **gravity_app** | OPEN_BRIDGE_001 | **REVIEW_LOCK** | Downstream of falsified bridge. |
+
+---
+
+## 13.6 Review Lock Protocol
+
+Review Lock is the formal state applied to claims whose required dependencies have failed, become unresolved, or entered contradiction. Review Lock does not imply that a claim is false; it indicates that the current support structure is insufficient. Claims under Review Lock may only exit through rewrite, reroute, downgrade, retirement, or retest procedures.
+
+**Exit Pathways:**
+- **rewrite**
+- **reroute**
+- **downgrade**
+- **retire**
+- **retest**
+
+All Review Lock actions shall preserve historical traceability.
+
+---
+
+## 13.7 Campaign Registry
+
+A campaign is a living governance object responsible for attacking, verifying, or reviewing a target claim. Campaigns maintain proof obligations, attack surfaces, evidence reports, simulation manifests, and textbook synchronization records. Campaigns remain active until supported, downgraded, falsified, retired, or superseded. Every active campaign shall possess a unique identifier and audit trail.
 
 ### Living Campaign Status Table
 
 | Bridge ID | Bridge Name | Claim Under Attack | Linked Campaign | Status | Claim Level | Downstream Cap |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **OPEN_BRIDGE_001** | Orientation-Closure Bridge | Orientation coherence participates in stable triadic closure. | LFCR_001 | **UNDER_ATTACK** | C2_PENDING | C2 unless tested |
-**Infrastructure Campaign Status: SCAFFOLD_COMPLETE**
-- **Patch Campaign:** MPF_PATCH_CAMPAIGN_001_LIVING_FALSIFICATION_CAMPAIGNS
-- **Result:** Governance, dependency, and auditable trail infrastructure established for the Orientation-Closure Attack (LFCR_001).
-- **Remaining Blockers:** Executable engine binding, metric code implementation, physical textbook edits.
+| **OPEN_BRIDGE_001** | Orientation-Closure Bridge | Orientation coherence participates in stable triadic closure. | LFCR_001 | **FALSIFIED** | FALSIFIED | **REVIEW_LOCK** |
 
-**Next Required Action:** Initialize Phase II: Textbook Integration and Executable Attack (MPF_PATCH_002A).
-
----
-### Live Theorem Status Registry
-
-| Object | Type | Status | Claim Level | Active Campaigns | Evidence Count | Dependencies | Review Locks |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **OPEN_BRIDGE_001** | OPEN_BRIDGE | **UNDER_ATTACK** | C2_PENDING | LFCR_001 | 0 | 4 | 8 |
-| **TC_asym** | THEOREM | **DRAFT** | C2_MAX | LFCR_001 | 0 | 1 | 0 |
-| **gravity_app** | APPLICATION | **DRAFT** | C1 | - | 0 | 3 | 0 |
-
-### Dependency Graph Registry
-
-The formal program is maintained as a directed dependency graph. Claims, operators, bridges, and application projections are nodes. Derivation, support, attack, falsification, and review-lock relations are edges. Status propagation is controlled by edge type and edge strength.
-
-**Key Propagation Rules:**
-- **Support Propagation:** Support travels only one dependency level unless explicit evidence exists for deeper nodes.
-- **Falsification Propagation:** Falsification travels downstream through **REQUIRED** dependency edges.
-- **Claim Cap Propagation:** No formal object may hold a stronger claim level than its weakest unresolved **REQUIRED** dependency (CLAIM_CAP_PRINCIPLE_001).
-- **Speculative Edge Rule:** **SPECULATIVE** edges may guide research but cannot support promotion.
-
-### Graph-Derived Claim Caps (MPF_PATCH_001P)
-
-Theorem status is no longer manually assigned alone; it is constrained by dependency graph state. The current verified maturity of application-level physics analogs (gravity, matter) is strictly bound to the verified survival of the underlying mathematical bridges.
-
-| Object | Root Blocker | Current Cap | Reason |
-| :--- | :--- | :--- | :--- |
-| **TC_asym** | OPEN_BRIDGE_001 | C2_PENDING_ATTACK | REQUIRED dependency under attack. |
-| **gravity_app** | OPEN_BRIDGE_001 | C2_PENDING_ATTACK | Downstream of unresolved root bridge. |
+**Current Campaign Details: LFCR_001**
+- **Status:** ACTIVE (FALSIFIED)
+- **Purpose:** Systematic ablation of orientation to verify triadic closure survival.
+- **Mathematical Spec:** DEFINED
+- **Simulation Status:** ABLATION_COMPLETE (LFCR_001_STRESS_REPORT_001)
+- **Falsification Result:** Orientation effect (0.008) failed threshold tau=0.05. Strong participatory claim (Model B) invalidated.
+- **Next Required Action:** Resolve REVIEW_LOCK via exit path protocol (MPF_PATCH_002L).
 
 ---
 
-## 13.7 Missing and Provisional Formalisms
+## 13.8 Evidence Integration Workflow
+
+Evidence enters the program through mathematical review, simulation results, replication studies, or governance audits. Evidence alone does not modify theorem status; it must pass validation, produce an evidence report, and generate a governance review. Status changes propagate through the dependency graph according to claim-cap and review-lock rules. All updates shall be reflected in the textbook, registry system, and audit trail.
+
+**Workflow Steps:**
+1. **Launch:** Reproduced using the **Run Manifest Template**.
+2. **Execution:** Matched models M0-M7 evaluated across 64+ seeds.
+3. **Analysis:** Effect sizes and confidence intervals calculated.
+4. **Decision:** Result categorized as SUPPORT, DOWNGRADE, or FALSIFY.
+5. **Injection:** Textbook and registries updated via the **Update Patch Template**.
+
+---
+
+## 13.9 Missing and Provisional Formalisms
 
 To complete the governance program, the following must be induced:
 
@@ -1534,11 +1649,11 @@ This checklist defines the rigorous steps required to promote a **Candidate Oper
 
 \pagebreak
 
-# Appendix D: Claim-Level Governance
+# Appendix D: Claim Governance Framework
 
 This appendix summarizes the standards for classifying and promoting research claims within the framework.
 
-### Classification Table
+### D.1 Classification Table
 | Level | Name | Scope | Requirements |
 | :--- | :--- | :--- | :--- |
 | **C0** | Axiom / Definition | Internal foundation | Starting point (Axiom 1.2.1). |
@@ -1549,39 +1664,30 @@ This appendix summarizes the standards for classifying and promoting research cl
 | **C5** | Validate | External Alignment | Independent measurement, 4+ Falsification Vectors. |
 | **C6** | Theorem | Formal Closure | Universal mechanism independence, formal derivation from Axiomatic Floor. |
 
-### Theorem Candidates
-| ID | Name | Statement | Ref |
-| :--- | :--- | :--- | :--- |
-| **TC-001** | Constraint Realization Asymmetry | $(\mathcal{E} \neq 0) \not\implies (\mathcal{E} > 0)$ | 1.4 |
-| **TC-002** | Realization Presupposes Constraint | $(\mathcal{E} > 0) \implies (\mathcal{E} \neq 0)$ | 1.4 |
-| **TC-003** | Projection Domain Equivalence | $(\mathcal{E}_{app}) \iff_x (\mathcal{E})_{nDOF}$ | 7.4A |
-| **A001** | Asymmetric Triadic Closure | $TC_{asym} := N_1 \iff_x (N_2 \mid N_3)$ | 4.X |
+### D.2 Claim Cap Propagation
+No formal object may hold a stronger claim level than its weakest unresolved **REQUIRED** dependency (**CLAIM_CAP_PRINCIPLE_001**). REQUIRED dependencies cap downstream objects at their current level. BLOCKING dependencies freeze downstream objects until resolved.
 
-### Validation Mandates
-1. **The Axiomatic Floor:** The core expression is the system's foundational axiom. It does not require proof but serves as the root from which all C6 Theorems must be derived.
-2. **Falsification Vector (FV):** A targeted test designed to force a failure of the claim. A claim cannot reach C4 without passing at least two FVs.
-2. **Mechanism Class Independence:** A claim is mechanism-independent if its behavior is reproduced by tools with different governing update rules (e.g., CA vs. PDE).
-3. **Humility Prefix:** All conclusions for C1-C4 claims must begin with: **"Within these models..."** or **"Within this framework..."**.
-4. **Residue Labels:** Any result that depends on a provisional operator or missing definition must be marked with a **residue label** (e.g., "[Residue: Provisional Arb_A]").
+### D.3 Promotion Requirements
+- All REQUIRED dependencies at or above requested level.
+- No active REVIEW_LOCK on the target or its upstream required nodes.
+- No active falsification campaign with unresolved or failed evidence.
+- At least one evidence report or formal proof obligation satisfying the requested level.
 
-### Promotion and Downgrade Rules
-- **Promotion:** Requires an evidence pack containing raw data, analysis, and falsification reports.
-- **Downgrade:** Any failed falsification or contradictory measurement from an independent model class triggers an automatic downgrade to **NOT\_SUPPORTED** or **INCONCLUSIVE**.
-- **Contradiction:** If a C4 simulation result contradicts a C6 theorem, the C6 status is suspended (moved to **CONTESTED**) until the derivation is re-audited.
-- **Bridge-Induced Cap (New):** Any claim downstream of an unresolved bridge (e.g., OPEN_BRIDGE_001) is capped at its current verified maturity level. 
-    - **OPEN_BRIDGE_001 Promotion Block:** Cannot exceed C2 until LFCR_001 is completed.
-    - **Downstream Cap Rule:** Dependent structural/application claims cannot exceed bridge level unless separately tested.
+### D.4 Review Lock Conditions
+Review Lock is triggered when a required dependency is falsified, an evidence report contradicts a claim, bridge failure occurs, or operator semantics change in a way that invalidates prior proof.
 
-### Review Lock Governance (MPF_PATCH_001Q)
+### D.5 Exit Path Protocols
+Objects under REVIEW_LOCK may only exit via defined pathways:
+- **rewrite:** Remove failed dependency.
+- **reroute:** Replace with valid alternate path.
+- **downgrade:** Match available support level.
+- **retire:** Move to historical record (active theorem status removed).
+- **retest:** Initialize new campaign after repair.
 
-Review locks prevent unsupported promotion and require explicit repair patches. Objects under **REVIEW_LOCK** cannot be cited as supported or used as required dependencies.
+### D.6 Dependency Constraints
+Dependency edges determine promotion limits and evidence scope. Support propagates conservatively, typically only one level, while falsification propagates aggressively through required dependencies.
 
-**Allowed Exit Paths:**
-1. **Rewrite:** Modify locked claim to remove failed dependency.
-2. **Reroute:** Replace failed dependency with valid alternate path.
-3. **Downgrade:** Lower claim level to match available support.
-4. **Retire:** Remove from active theorem status (historical preservation only).
-5. **Retest:** Initialize new campaign after repair.
+---
 
 \pagebreak
 
@@ -1613,6 +1719,14 @@ To be listed in this index, a run must provide:
 
 ### Accessing Evidence
 Raw data and simulation artifacts for the above runs are archived in the `results/` folder. For access to the specific codebase versions used for these runs, refer to the `source_commit` field in the run metadata JSON.
+
+### E.6 Metric Registry (MPF_PATCH_002E)
+Canonical definitions for metrics used in research campaigns. [Reference: registry/math/executable_metric_registry.json]
+- **C_orient:** Orientation Coherence.
+- **S_closure:** Closure Stability.
+- **R_support:** Residue Support.
+- **A_width:** Admissibility Width.
+- **T_preserve:** Topology Preservation.
 
 \pagebreak
 
@@ -1652,16 +1766,28 @@ These items remain unsettled and are the primary targets for future induction an
 - **Formal definition of $\otimes$:** The composition and interference rules for composite directional coupling. (Ref: 9.1, 9.4)
 - **Formal definition of $\iff_s$:** The exact mapping between mismatch intensity and statistical realization. (Ref: 7.3)
 
-### 3. Open Theoretical Questions
-- **OPEN_BRIDGE_001 (Orientation and Closure):** **UNDER_ATTACK** [Campaign: LFCR_001].
-    - **Failure Condition:** Closure stability remains equal under removed, randomized, or shuffled orientation controls.
-    - **Support Condition:** Coherent orientation improves closure stability after residue, admissibility, and topology controls. (Ref: 5.2A, registry/math/dependency_graph_registry.json)
-- **Selection Uniqueness:** Does the process support selection degeneracy? (Discussed in MS-SCRATCH-V1 as set-valued $O^*$).
-- **Residue Decay:** Does $R$ persist indefinitely? (Requirement for $\Psi$ [Source: Unity Math Sec 2.2]).
-- **Asymmetry vs. Symmetry:** Rigorous proof that asymmetry generates orientation.
+### F.3 Open Bridge Registry
+| Bridge ID | Name | Current Status | Claim Cap |
+| :--- | :--- | :--- | :--- |
+| **OPEN_BRIDGE_001** | Orientation-Closure | **FALSIFIED** | **REVIEW_LOCK** |
+
+### F.4 Bridge Dependency Tables
+- **OPEN_BRIDGE_001 Blocks:** TC_asym, K, B_K, gravity_app, matter_app, field_app, QM_app_GR_app_bridge.
+
+### F.5 Active Attack Campaigns
+- **LFCR_001:** Attacking OPEN_BRIDGE_001. Surfaces: AS_001 through AS_008.
+
+### F.6 Bridge Resolution History
+- **OPEN_BRIDGE_001:** Falsified 2026-05-30 via Campaign LFCR_001 (Stress ablation Model B). Status: REVIEW_LOCK.
+
+### F.7 Bridge Measurement Definitions (MPF_PATCH_002E)
+Formal measurement rules for bridge falsification campaigns.
+- **Orientation Coherence ($C_{orient}$):** $1 - \text{norm\_disagreement}$.
+- **Closure Stability ($S_{closure}$):** $\text{survival\_cycles} / \text{total\_cycles}$.
+- **Minimum Effect Threshold ($\tau$):** 0.05 (Target for $\beta_1$).
 
 ---
-**Status:** Items in Section 1 are awaiting promotion to the Canonical Lexicon. Items in Section 2 and newly induced Section 3 items are marked as **GAP_OPEN** in the lexicon gap queue.
+**Status:** Items in Section F.1 are active research targets. Resolved bridges are archived in F.4. Failed bridges are archived in F.5. Section F.7 tracks the measurement rules for active attacks.
 
 \pagebreak
 

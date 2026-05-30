@@ -1,0 +1,92 @@
+{
+  "registry_id": "EXECUTABLE_METRIC_REGISTRY",
+  "version": "1.0.0",
+  "patch_id": "MPF_PATCH_002E",
+  "status": "ACTIVE",
+  "purpose": "Convert proof-obligation quantities into executable metrics suitable for simulation, statistical testing, and falsification.",
+  "governance_note": {
+    "important": "These are operational metrics, not ontological definitions.",
+    "meaning": "A metric may later be replaced while the underlying concept remains unchanged."
+  },
+  "metrics": {
+    "C_orient": {
+      "name": "Orientation Coherence",
+      "concept": "Degree to which orientation references remain mutually consistent across closure candidates.",
+      "range": [0.0, 1.0],
+      "operational_definition": "1 - normalized_orientation_disagreement",
+      "interpretation": {
+        "0.0": "fully random orientation",
+        "0.5": "partially ordered",
+        "1.0": "fully coherent orientation"
+      },
+      "falsification_use": [
+        "orientation_removal",
+        "orientation_randomization",
+        "orientation_shuffle"
+      ]
+    },
+    "S_closure": {
+      "name": "Closure Stability",
+      "concept": "Persistence of a closure structure through update cycles.",
+      "range": [0.0, 1.0],
+      "operational_definition": "surviving_cycles / total_cycles",
+      "interpretation": {
+        "0.0": "immediate collapse",
+        "1.0": "persistent closure"
+      },
+      "primary_target_metric": true
+    },
+    "R_support": {
+      "name": "Residue Support",
+      "concept": "Influence of accumulated residue on closure persistence.",
+      "range": [0.0, 1.0],
+      "operational_definition": "normalized_residue_contribution",
+      "falsification_use": [
+        "residue_dominance_attack"
+      ]
+    },
+    "A_width": {
+      "name": "Admissibility Width",
+      "concept": "Effective admissible transition volume available to a structure.",
+      "range": [0.0, 1.0],
+      "operational_definition": "admissible_transitions / possible_transitions",
+      "falsification_use": [
+        "admissibility_dominance_attack"
+      ]
+    },
+    "T_preserve": {
+      "name": "Topology Preservation",
+      "concept": "Degree to which connectivity survives perturbation.",
+      "range": [0.0, 1.0],
+      "operational_definition": "preserved_connections / original_connections",
+      "falsification_use": [
+        "topology_dominance_attack"
+      ]
+    }
+  },
+  "derived_metrics": {
+    "orientation_effect": {
+      "definition": "S_closure(M0) - S_closure(M1)"
+    },
+    "residue_effect": {
+      "definition": "S_closure(M0) - S_closure(M4)"
+    },
+    "admissibility_effect": {
+      "definition": "S_closure(M0) - S_closure(M5)"
+    },
+    "topology_effect": {
+      "definition": "S_closure(M0) - S_closure(M6)"
+    }
+  },
+  "mathematical_tests": [
+    {
+      "test_id": "OB001_TEST_001",
+      "hypothesis": {
+        "H0": "orientation_effect ≈ 0",
+        "H1": "orientation_effect > 0"
+      },
+      "pass_condition": "orientation_effect > tau",
+      "fail_condition": "orientation_effect <= tau"
+    }
+  ]
+}

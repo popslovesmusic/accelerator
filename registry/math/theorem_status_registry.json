@@ -1,6 +1,6 @@
 {
   "registry_id": "MPF_THEOREM_STATUS_REGISTRY_V1",
-  "patch_id": "MPF_PATCH_001N",
+  "patch_id": "MPF_PATCH_002D",
   "status": "ACTIVE",
   "purpose": "Canonical live status registry for all formal objects in the Mono-Process Program.",
   "object_types": [
@@ -16,12 +16,34 @@
   ],
   "status_records": [
     {
+      "object_id": "AXIOM_1_2_1",
+      "object_name": "Primary Axiom of Distinction and Continuation",
+      "object_type": "AXIOM",
+      "current_status": "LOCKED",
+      "claim_level": {
+        "current": "AXIOMATIC_FLOOR",
+        "maximum_allowed": "AXIOMATIC_FLOOR"
+      },
+      "dependency_tracking": {
+        "depends_on": [],
+        "supports": [
+          "OPEN_BRIDGE_001"
+        ]
+      },
+      "evidence_tracking": {
+        "evidence_count": 0
+      },
+      "audit_tracking": {
+        "last_update": "2026-05-29T12:00:00Z"
+      }
+    },
+    {
       "object_id": "OPEN_BRIDGE_001",
       "object_name": "Orientation-Closure Bridge",
       "object_type": "OPEN_BRIDGE",
-      "current_status": "UNDER_ATTACK",
+      "current_status": "FALSIFIED_OR_REWRITE_REQUIRED",
       "claim_level": {
-        "current": "C2_PENDING_ATTACK",
+        "current": "FALSIFIED",
         "maximum_allowed": "C4_candidate"
       },
       "dependency_tracking": {
@@ -56,25 +78,34 @@
         "campaign_count": 1
       },
       "evidence_tracking": {
-        "evidence_reports": [],
-        "simulation_runs": [],
+        "evidence_reports": [
+          "LFCR_001_M0_REPORT_001",
+          "LFCR_001_STRESS_REPORT_001"
+        ],
+        "simulation_runs": [
+          "results/LFCR_001_M0_baseline",
+          "results/LFCR_001_M0_stress_ensemble",
+          "results/LFCR_001_M2_stress_ensemble"
+        ],
         "mathematical_reviews": [],
-        "evidence_count": 0
+        "evidence_count": 2
       },
       "audit_tracking": {
         "audit_entries": [
-          "AUDIT_LFCR_001_BOOTSTRAP"
+          "AUDIT_LFCR_001_BOOTSTRAP",
+          "AUDIT_LFCR_001_FALSIFICATION"
         ],
-        "last_update": "2026-05-29T10:00:00"
+        "last_update": "2026-05-30T10:00:00Z"
+      }
       }
     },
     {
       "object_id": "TC_asym",
       "object_name": "Asymmetric Triadic Closure",
       "object_type": "THEOREM",
-      "current_status": "DRAFT",
+      "current_status": "REVIEW_LOCK",
       "claim_level": {
-        "current": "C2_MAX",
+        "current": "REVIEW_LOCK",
         "maximum_allowed": "C6"
       },
       "dependency_tracking": {
@@ -95,15 +126,18 @@
       },
       "evidence_tracking": {
         "evidence_count": 0
+      },
+      "audit_tracking": {
+        "last_update": "2026-05-30T10:00:00Z"
       }
     },
     {
       "object_id": "gravity_app",
       "object_name": "Gravity Projection",
       "object_type": "APPLICATION_PROJECTION",
-      "current_status": "DRAFT",
+      "current_status": "REVIEW_LOCK",
       "claim_level": {
-        "current": "C1",
+        "current": "REVIEW_LOCK",
         "maximum_allowed": "C5"
       },
       "dependency_tracking": {
@@ -115,6 +149,9 @@
       },
       "evidence_tracking": {
         "evidence_count": 0
+      },
+      "audit_tracking": {
+        "last_update": "2026-05-30T10:00:00Z"
       }
     }
   ],
@@ -122,6 +159,10 @@
     {
       "rule_id": "TSR_001",
       "rule": "No theorem, bridge, operator, or application projection may be promoted without a corresponding status registry entry."
+    },
+    {
+      "rule_id": "DASHBOARD_RULE_001",
+      "rule": "If the dashboard and chapter text disagree, the dashboard is authoritative until reconciliation occurs."
     }
   ]
 }

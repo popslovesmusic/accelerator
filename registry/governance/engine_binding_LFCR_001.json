@@ -1,0 +1,47 @@
+{
+  "patch_id": "MPF_PATCH_002H",
+  "status": "ACTIVE",
+  "target": "LFCR_ORIENTATION_TRIADIC_CLOSURE_ATTACK_001",
+  "purpose": "Formally bind the C6 triadic closure substrate engine to the research campaign.",
+
+  "engine_binding": {
+    "campaign_id": "LFCR_ORIENTATION_TRIADIC_CLOSURE_ATTACK_001",
+    "engine_id": "triadic_closure_substrate_sim_cpp",
+    "executable_path": "tools/triadic_closure_substrate_cpp/triadic_sim.exe",
+    "wrapper_path": "tools/triadic_closure_substrate_cpp/sim_governed.py",
+    "rigor_level": "C6"
+  },
+
+  "model_implementation_mapping": {
+    "M0_full": {
+      "flags": []
+    },
+    "M1_no_orientation": {
+      "flags": ["recursive_cut"]
+    },
+    "M2_random_orientation": {
+      "flags": ["orientation_scramble"]
+    },
+    "M3_shuffled_orientation": {
+      "flags": ["coupling_symmetry"]
+    },
+    "M4_residue_only": {
+      "flags": ["residue_shuffle"]
+    },
+    "M5_admissibility_only": {
+      "flags": ["admissibility_lock"]
+    },
+    "M6_fixed_topology_no_orientation": {
+      "flags": ["topology_freeze", "recursive_cut"]
+    },
+    "M7_random_admissibility": {
+      "flags": ["floor_randomize"]
+    }
+  },
+
+  "governance_locks": [
+    "Do not change dt or floor between M0 and ablation variants.",
+    "Do not change triad count between models.",
+    "Record state hash and summary statistics for every run."
+  ]
+}

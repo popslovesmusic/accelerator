@@ -1,0 +1,87 @@
+{
+  "patch_id": "MPF_PATCH_002F",
+  "status": "ACTIVE",
+  "target": "LFCR_ORIENTATION_TRIADIC_CLOSURE_ATTACK_001",
+  "purpose": "Define the formal simulation state representation and update rule logic for ablation models M0-M7.",
+
+  "state_representation": {
+    "S_aspect": {
+      "type": "struct",
+      "fields": {
+        "id": "uint64",
+        "phi": "float64",
+        "last_update": "uint64"
+      }
+    },
+    "N_node": {
+      "type": "relation",
+      "expression": "D(S_a|S_b) > epsilon",
+      "fields": {
+        "source_id": "uint64",
+        "target_id": "uint64",
+        "mismatch": "float64",
+        "ordered": "bool"
+      }
+    },
+    "orientation_frame": {
+      "symbol": "-(i)",
+      "type": "vector_n",
+      "dimension": "Relational Capacity n",
+      "constraints": [
+        "unit_norm",
+        "coherent_with_node_set"
+      ]
+    },
+    "closure_triad": {
+      "type": "graph_cycle",
+      "elements": [
+        "N_12",
+        "N_23",
+        "N_31"
+      ]
+    }
+  },
+
+  "update_logic_M0_baseline": {
+    "step_1": "Evaluate candidate transitions Cand(S) based on D_n.",
+    "step_2": "Apply orientation frame -(i) to order the candidate set.",
+    "step_3": "Execute delta_a funnel (Cand -> S_arb -> Pi_A).",
+    "step_4": "Select realized transition T* via Optimal Mismatch O*.",
+    "step_5": "Inscribe residue Psi(R, T*) and update NavT(-(i))."
+  },
+
+  "ablation_rules": {
+    "M1_no_orientation": {
+      "action": "Remove orientation-frame dependency.",
+      "implementation": "Randomize selection among equally admissible candidates (Arb_A bypass)."
+    },
+    "M2_random_orientation": {
+      "action": "Randomize orientation-frame every step.",
+      "implementation": "-(i)_k+1 = sample_random_unit_vector()."
+    },
+    "M3_shuffled_orientation": {
+      "action": "Destroy orientation ordering.",
+      "implementation": "Permute the association between nodes and relational axes."
+    },
+    "M4_residue_dominance": {
+      "action": "Overpower orientation with historical residue.",
+      "implementation": "Set Psi_strength >> orientation_coherence_weight."
+    },
+    "M5_admissibility_dominance": {
+      "action": "Overpower orientation with admissibility filtering.",
+      "implementation": "Narrow A_width to force single-path realization regardless of orientation."
+    }
+  },
+
+  "governance_constraints": [
+    "All models must share the same initial state S_0 and node triad TC_0.",
+    "Engine must report state hashes every 1000 steps to detect drift.",
+    "CPU vs GPU drift must be recorded for C4+ validation."
+  ],
+
+  "textbook_updates": {
+    "chapter_10_4": {
+      "insert": "Simulation Realization Cycle for LFCR_001"
+    }
+  }
+}
