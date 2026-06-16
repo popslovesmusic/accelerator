@@ -99,16 +99,16 @@ The Mono-Process Framework identifies a foundational asymmetry between the **exi
 
 **Definition 1.4.1: Constraint State ($\mathcal{E} \neq 0$)**
 The condition where distinction or mismatch exists within the framework. Aliases: *constraint present*, *distinction exists*, *non-null process condition*.
-$$ (\mathcal{E} \neq 0) \iff \text{distinction\_app} \iff_x \text{constraint\_app} $$
+$$ (\mathcal{E} \neq 0) \iff \text{distinction\_app} \iff_R \text{constraint\_app} $$
 
 **Definition 1.4.2: Realization State ($\mathcal{E} > 0$)**
 The condition where a constraint successfully realizes through admissible continuation. Aliases: *constraint realized*, *admissible continuation exists*, *realized distinction*.
-$$ (\mathcal{E} > 0) \iff \text{continuation\_app} \iff_x \text{realization\_app} $$
+$$ (\mathcal{E} > 0) \iff \text{continuation\_app} \iff_R \text{realization\_app} $$
 
 **Commentary:**
 The relational reading (distinction) and the selection reading (constraint) are symmetric inverse descriptions of the same process transition. A distinction is simultaneously a constraint: the moment $D(S_1|S_2) > 0$ exists, the distinction excludes certain possibilities, making not all continuations admissible. Conversely, an admissible continuation is a realized constraint [Source: MPF-IND-ARB-DELTA-DUAL-PHASE IND-001].
 
-**Mismatch Relatvity:**
+**Mismatch Relativity:**
 Mismatch is not a property of a thing in isolation. It is a property of a state relative to its governing conditions (context). The same state in a different context may have a completely different mismatch value [Source: MPF-IND-ARB-DELTA-DUAL-PHASE IND-005].
 ... (rest of 1.4) ...
 
@@ -243,6 +243,26 @@ The relation between $A$ and $B$ is valid ("True") while residue-conditioned clo
 **The Zero-State Rule:**
 If the primary core closure decouples, the framework collapses into the **0-state** (non-existence).
 $$ \neg [ ((\mathcal{E} \neq 0) \leftrightarrow_R \delta_a(\mathcal{E} > 0)) ] \to 0\text{-state} $$
+
+---
+
+## 2.7 Residue-Admissible Identity Continuation (IND-001)
+
+A realized identity persists not through static equality, but through admissible continuation preserving residue relations [Source: IND_001_PERSISTENT_IDENTITY_RA].
+
+**Formal Statement 2.7.1: Persistence Relation**
+$$ B \to_{ra} [B_a \iff_{ra} B] $$
+$$ B_a \neq B $$
+$$ B_a <\neq>_{ra} B $$
+
+**Commentary:**
+- **$B$:** Current realized closure or identity state.
+- **$B_a$:** Admissible continuation of $B$.
+- **$\to_{ra}$:** Residue-conditioned admissible transition.
+- **$\iff_{ra}$:** Recursive residue-preserving correspondence.
+- **$<\neq>_{ra}$:** Non-collapse relation preserving distinction across continuation.
+
+This induction rejects identity as exact equality ($B=B_a$). Instead, it treats persistence as a dynamic process of residue-conditioned admissible reconstruction. The "knot" is not the "rope"; it is a temporary stable closure within the continuing field that maintains its relational signature even as its local state updates.
 
 ---
 
@@ -419,6 +439,43 @@ To complete the formal program for directed distinction, the following must be i
 
 ---
 
+## 3.X Preserved Non-Identity Relation Candidate ($<\neq>_X$)
+
+The current induction program includes a provisional candidate for statements where relation must be declared without allowing collapse into strict identity.
+
+**Formal Candidate 3.X.1: Preserved Non-Identity Relation**
+$$ A <\neq>_X B $$
+
+**Reading:**
+$A$ remains related to $B$ under typed context $X$, while the distinction between $A$ and $B$ remains nonzero.
+
+**Commentary:**
+This candidate is introduced to make explicit a constraint that is often only implicit in projection-heavy discussions. The framework frequently needs to say that two terms are coupled, mutually conditioning, or co-stabilized without permitting the shorthand inference that they are identical at the same operational layer. The candidate operator $<\neq>_X$ is intended to state that restriction directly.
+
+The candidate does **not** replace $\iff_X$ or $\iff_R$. Instead, it adds a narrower reading:
+- $\iff_X$ may state coupling or admissible relation.
+- $<\neq>_X$ would state that the relation holds while non-identity is preserved.
+
+**Minimum Candidate Truth Conditions:**
+1. $D(A|B) > 0$ remains satisfied within the declared context $X$.
+2. A relation between $A$ and $B$ is already declared or derivable, typically through a coupling form such as $A \iff_X B$.
+3. The relation preserves typed role distinction, so $A$ and $B$ do not collapse into the same operational slot under $X$.
+4. Any admissible update on one side must not force an unrestricted primitive identity claim on the other side.
+
+**Restricted Examples:**
+- $Sprite <\neq>_{obs} Entity$
+- $Organism <\neq>_{bio} Subsystem$
+- $Observer <\neq>_{obs} Observed$
+
+**Governance Status:**
+- Status: **PROVISIONAL_RESEARCH_SCAFFOLD**
+- Claim Class: **C1_DEFINED**
+- Theorem Status: **TS0-style unbound scaffold**
+
+Accordingly, this operator should be read as a textbook induction target rather than a settled law of the formal stack.
+
+---
+
 ## Summary of Chapter 3 Dependencies
 
 - **Chapter 1** introduced $\mathcal{E} \neq 0$ as the core requirement.
@@ -468,13 +525,13 @@ The induction of these domains follows the **Refined Induction Hierarchy (v6)**:
 A recurring pattern in the Mono-Process Framework is the use of **symmetric descriptions for asymmetric realizations** [Source: IND-CORE-ASYM-REALIZATION-001].
 
 **Meta-Observation 4.1.2: Symmetric-Asymmetric Duality (META-001)**
-Symmetric representations (like ⇔_R or ⇔_x) require orientation, ordering, residue, or admissibility to be realized.
+Symmetric representations (like ⇔_R or ⇔_m) require orientation, ordering, residue, or admissibility to be realized.
 
 Examples include:
 *   Axiom 1.2.1: $(\mathcal{E} \neq 0) \iff_R \delta_a(\mathcal{E} > 0)$
-*   Distinction-Constraint Duality: $distinction\_app \iff_x constraint\_app$
-*   Continuation-Realization Duality: $continuation\_app \iff_x realization\_app$
-*   Node-Coupling: $N_{ab} \iff_x N_{ba}$
+*   Distinction-Constraint Duality: $distinction\_app \iff_R constraint\_app$
+*   Continuation-Realization Duality: $continuation\_app \iff_R realization\_app$
+*   Node-Coupling: $N_{ab} \iff_R N_{ba}$
 *   Domain Relation: $(QM\_app) \iff_{xa} (GR\_app)$
 
 Within this framework, duality does not imply identity but **projectional equivalence**. Two descriptions may be equivalent views of the same process state observed from different orientations.
@@ -486,11 +543,11 @@ Within this framework, duality does not imply identity but **projectional equiva
 Relational asymmetry is the structural state defined through the closure-coupling of ordered distinction-nodes [Source: MPF-REFINE-V2 RI-003].
 
 **Formal Statement 4.1.2: Relational Asymmetry Definition (A001)**
-$$ N_{ab} \iff_x N_{ba} $$
-$$ D(S_a|S_b)>0 \iff_x D(S_b|S_a)>0 $$
+$$ N_{ab} \iff_R N_{ba} $$
+$$ D(S_a|S_b)>0 \iff_R D(S_b|S_a)>0 $$
 
 **Commentary:**
-Asymmetry exists when ordered nodes remain non-equivalent under closure-coupling ($\iff_x$). It is a structural relation rather than a numerical ratio. Note that $\Omega_a \neq 1$ is a later metric projection of this already existing relational state, not its definition.
+Asymmetry exists when ordered nodes remain non-equivalent under closure-coupling ($\iff_R$). It is a structural relation rather than a numerical ratio. Note that $\Omega_a \neq 1$ is a later metric projection of this already existing relational state, not its definition.
 
 ---
 
@@ -512,7 +569,7 @@ The induction of the **asymmetry application domain** ($asym\_app$) signifies th
 Asymmetric triadic closure is a higher-order stabilization regime where a closure relation forms between one ordered distinction-node and a structured set of additional nodes. This claim is currently undergoing adversarial ablation testing [Campaign: LFCR_001].
 
 **Formal Statement 4.X.1: Asymmetric Triadic Closure Theorem (A001)**
-$$ TC_{asym} := N_1 \iff_x (N_2 \mid N_3) $$
+$$ TC_{asym} := N_1 \iff_R (N_2 \mid N_3) $$
 
 **Commentary:**
 Triadic asymmetry is a closure-level property and cannot generally be reduced to a single pairwise asymmetry relation [Source: MPF-REFINE-V2 RI-004]. The vertical bar ($\mid$) indicates **grouped closure participation**, not a logical OR or exclusive choice. This theorem establishes the minimum structural requirement for a self-reinforcing process basin.
@@ -605,25 +662,34 @@ One can change orientation without advancing the process "forward" in time (e.g.
 
 ---
 
-## 5.2A OPEN_BRIDGE_001 : Orientation-Closure Bridge (LIVE_LINKED) (FALSIFIED) (REVIEW_LOCK_ACTIVE)
+## 5.2A OPEN_BRIDGE_001 : Orientation-Closure Bridge (LIVE_LINKED) (FALSIFIED) (REWRITE_PENDING)
 
-The Orientation-Closure Bridge concerns the foundational relationship between orientation structure and stable closure formation. This bridge has been **FALSIFIED** through adversarial stress testing [Source: LFCR_001_STRESS_REPORT_001].
+The Orientation-Closure Bridge was tested as a claim that orientation structure directly supports stable closure formation. That claim was **FALSIFIED** on 2026-05-30 through adversarial stress testing [Source: LFCR_001_STRESS_REPORT_001].
 
-**Formal Statement:**
-- **Claim:** Orientation coherence participates in stable triadic closure.
-- **Status:** **FALSIFIED** (Campaign: LFCR_001)
-- **Current Claim Level:** FALSIFIED
+**Current Status: REWRITE_PENDING (v3 Independent Aspect Model)**
 
-**Falsification Summary:**
-Adversarial ablation testing (Campaign: LFCR_001) demonstrated that orientation coherence has a negligible effect on stable triadic closure survival ($\Delta S < 0.01$). Randomizing orientation (Ablation M2) under high-pressure stress conditions (floor=0.15) did not significantly degrade structural persistence compared to the full mechanism (M0). Consequently, the strong participatory claim (Model B) is invalidated for the tested mechanism class.
+### v1/v2 Falsification Summary
+Adversarial ablation testing (`LFCR_001`) showed that orientation coherence had a negligible effect on stable triadic closure survival ($\Delta S < 0.01$). Randomizing orientation (Ablation M2) under stress did not significantly degrade structural persistence compared to the full mechanism (M0). Statistical analysis of the stress ensemble (64 seeds) showed near-zero correlation ($< 0.1$) between triadic closure strength and orientation coherence. Within the tested regime, orientation is not induced by closure, nor does it drive it.
+
+### v3 Proposal: Independent Aspect Projection (Model C)
+The current working hypothesis is the **Independent Aspect Model**, which reroutes the formal dependency to avoid the falsified causal link.
+
+- **v3 Formal Statement:** Orientation and closure are decoupled signatures of a common underlying recursive residue field ($K$).
+- **Dependency Shift:** $K \to \text{Aspect}_1(\text{Orientation}) \text{ and } K \to \text{Aspect}_2(\text{Closure})$.
+
+Within the tested models, the observed co-occurrence of orientation and closure in high-residue regimes is treated as a structural co-presence of a deeper stabilization driver ($K$), not as a direct causal bridge.
+
+**Proof Obligation: PO_OPEN_BRIDGE_001_V3**
+1. **Common Driver:** Identify the invariant $I_K$ that generates both orientation and closure.
+2. **Decoupled Ablation:** Show that removing orientation (M1) does not break closure, and breaking closure does not prevent local orientation ordering.
 
 **Dependency Status:**
-All downstream dependencies are now in **REVIEW_LOCK** pending the proposal of a replacement bridge or a fundamental rewrite of the triadic closure stabilization mechanics.
+Immediate structural claims ($TC_{asym}$) and application projections ($gravity\_app$) remain in **REVIEW_LOCK** until the bridge is rewritten and the common generator $K$ is formally defined and tested.
 
 ---
 
 **Historical Context:**
-Earlier formulations treated orientation as a secondary consequence of asymmetry. Subsequent development suggested that orientation functions as a local ordering anchor required for the "knotting" of distinction-nodes. Subsequent development suggested orientation may participate directly in closure realization. The bridge remains unresolved and serves as the primary attack target for the current research cycle.
+Earlier formulations treated orientation as a secondary consequence of asymmetry. Later drafts treated orientation as a local ordering anchor for distinction-node knotting. The current registry state keeps the bridge unresolved and places it under rewrite rather than support.
 
 ### Competing Models
 
@@ -642,7 +708,7 @@ The bridge has been converted into an auditable proof obligation [Source: MPF_PA
 4. **Non-Reduction:** Orientation effect must not reduce to residue or admissibility alone.
 
 ### Active Attack Campaign: LFCR_001
-This bridge is currently undergoing systematic falsification [Source: registry/governance/living_falsification_campaign_registry.json].
+This bridge is tracked by the living falsification registry and remains linked to rewrite handling rather than support [Source: registry/governance/living_falsification_campaign_registry.json].
 - **Attack Surfaces:** orientation_removal, randomization, shuffle, residue_dominance, admissibility_dominance, topology_dominance, random_admissibility.
 
 ### Executable Metric Definitions (MPF_PATCH_002E)
@@ -874,17 +940,17 @@ Consider a local process where the realized transitions are observed with specif
 
 ## 7.4A Projection Domain Equivalence
 
-A fundamental principle of the framework's measurement program is that the application projections and the relational nDOF representations are equivalent descriptions of the same underlying process state [Source: IND-CORE-ASYM-REALIZATION-001]. This is governed by the operator **Projectional Equivalence** ($\iff_x$ or $\iff\_x$).
+A fundamental principle of the framework's measurement program is that the application projections and the relational nDOF representations are equivalent descriptions of the same underlying process state [Source: IND-CORE-ASYM-REALIZATION-001]. This is governed by the operator **Projectional Equivalence** ($\iff_m$).
 
-**Formal Statement 7.4.2: Truth Condition for $\iff_x[I_k]$ (MPF-P1-003)**
+**Formal Statement 7.4.2: Truth Condition for $\iff_m[I_k]$ (MPF-P1-003)**
 Two expressions are projectionally equivalent with respect to a specific **procedural invariant** ($I_k$) when they preserve the same value for that invariant under projection.
-$$ (A) \iff_x[I_k] (B) \iff I_k(A) = I_k(B) $$
+$$ (A) \iff_m[I_k] (B) \iff I_k(A) = I_k(B) $$
 
 **Governance Rule (R-INV-001):**
-No invariant may be used in $\iff_x[I_k]$ unless it appears in the formal **Invariant Registry** (`registry/math/invariant_registry.json`).
+No invariant may be used in $\iff_m[I_k]$ unless it appears in the formal **Invariant Registry** (`registry/math/invariant_registry.json`).
 
 **Governance Rule (R-INV-004):**
-Multiple invariant claims must be listed independently rather than collapsed into a general equivalence claim. The valid form is: $(A) \iff_x[\{I_1, I_2, \dots, I_n\}] (B)$.
+Multiple invariant claims must be listed independently rather than collapsed into a general equivalence claim. The valid form is: $(A) \iff_m[\{I_1, I_2, \dots, I_n\}] (B)$.
 
 **Canonical Invariants (Source: MPF-P1-003):**
 *   **$I_{closure}$:** Preservation of recursive closure structure.
@@ -894,12 +960,12 @@ Multiple invariant claims must be listed independently rather than collapsed int
 *   **$I_{selection}$:** Preservation of selection/filtering rule.
 
 **Commentary:**
-The operator $\iff_x[I_k]$ acts as a precision bridge. It does **not** imply equality of representation ($A=B$). Rather, it signifies that both domains preserve the same "procedural fact" ($I_k$), even if their local signatures differ. Any proof of projectional equivalence must follow the **Formal Proof Template** (MPF-P1-004), requiring independent verification of each indexed invariant.
+The operator $\iff_m[I_k]$ acts as a precision bridge. It does **not** imply equality of representation ($A=B$). Rather, it signifies that both domains preserve the same "procedural fact" ($I_k$), even if their local signatures differ. Any proof of projectional equivalence must follow the **Formal Proof Template** (MPF-P1-004), requiring independent verification of each indexed invariant.
 
 **Theorem 7.4.3: Projection Domain Equivalence (TC-003)**
 Application projections and nDOF representations are projectionally equivalent because they preserve common admissibility invariants.
-$$ (\mathcal{E} \neq 0_{app}) \iff_x[I_{admissibility}] (\mathcal{E} \neq 0)nDOF $$
-$$ (\mathcal{E} > 0_{app}) \iff_x[I_{admissibility}] (\mathcal{E} > 0)nDOF $$
+$$ (\mathcal{E} \neq 0_{app}) \iff_m[I_{admissibility}] (\mathcal{E} \neq 0)nDOF $$
+$$ (\mathcal{E} > 0_{app}) \iff_m[I_{admissibility}] (\mathcal{E} > 0)nDOF $$
 
 ---
 
@@ -939,7 +1005,19 @@ The floor $\epsilon$ is the minimum possible distinguishability between any two 
 
 ---
 
-## 8.2 Prevention of Singular Ratios
+## 8.2 Singularity Rebound (L2_PROMOTED)
+
+The floor $\epsilon$ is not merely a mathematical convenience but a physical-like boundary known as the **Operational Distinguishability Floor**. Recent simulations of extreme compression (`SINGULARITY-REBOUND-001`) have identified a stable recovery mechanism occurring at this boundary.
+
+**Definition 8.2.1: Singularity Rebound**
+The process state where extreme **Distinguishability Compression** reaches the $\epsilon$ floor, triggering a recursive re-orientation rather than termination.
+
+**Commentary:**
+Within these models, the singularity is consistent with a **Recursive Trigger State**. The instability of perfect symmetry in triadic systems ensures that the process continues through orientation-dominated deviation, restarting the cycle of structure formation rather than terminating. This rebound ensures the persistence of $(\mathcal{E} \neq 0)$ even under maximum structural stress [Source: SINGULARITY-REBOUND-001].
+
+---
+
+## 8.3 Prevention of Singular Ratios
 
 The floor $\epsilon$ plays a critical role in stabilizing derived metrics like the **Asymmetry Ratio ($\Omega_a$)** introduced in Chapter 7.
 
@@ -1081,7 +1159,7 @@ The process cannot advance until a specific transition is selected from this set
 $$ T^* := \text{Arb}_A( C_A(S), R, -(i), \epsilon ) $$
 
 **Commentary:**
-Arbitration is the "collapse" of potential transitions into a single **Realized Transition** ($T^*$). It is the gatekeeper of realization, ensuring that the process maintains its structural integrity and recursive closure by evaluating candidates against historical residue ($R$), local orientation ($-(i)$), and the floor ($\epsilon$).
+Arbitration is the "collapse" of potential transitions into a single **Realized Transition** ($T^*$). It is the gatekeeper of realization, ensuring that the process maintains its structural integrity and recursive closure by evaluating candidates against historical residue ($R$), local orientation ($-(i)$), and the floor ($\epsilon$). Recent simulations of extreme procedural stress (`CLS_003_RUN_001`) have demonstrated the stability of **Zeta-functional mapping** (`Pi_zeta`) as a selection stabilizer, ensuring that the orientation equilibrium manifold survives even during localized collapse.
 
 ---
 
@@ -1222,6 +1300,30 @@ A "Knot" ($K$) in this framework is not a physical rope but a **closed cycle of 
 
 ---
 
+## 11.1A Relational Basin Signatures ($\Sigma_R$)
+
+A basin is not treated as a geometric path-container. Within the relational reading, a basin is an **Admissibility Window ($W_a$)** carrying an evolving **Orientation-Event Chain ($R_{-(i)}$)**. Its identity is not the exact trajectory traced through projected quadrant space, but the **coupled relational expression**:
+
+**Formal Statement 11.1.2: Relational Signature ($\Sigma_R$)**
+$$ \text{RT}(\Sigma_R) := (W_a \to_r \rho_D \to_r \chi \to_r R_{-(i)} \to_r M_{dom}) $$
+
+**Components:**
+- **$W_a$ (Admissibility Window):** The phase relationship admissibility class defining the structural limits of the basin.
+- **$\rho_D$ (Distinction Density):** The density of distinguishing activity used to determine dominance weighting.
+- **$\chi$ (Rotational Character):** The CW/CCW directional character of the orientation-event organization.
+- **$R_{-(i)}$ (Orientation-Event Chain):** The residue-coupled dynamic sequence of orientation events.
+- **$M_{dom}$ (Dominant Mismatch):** The largest effective magnitude within the window.
+
+**Governance Rule (R-SIG-001):**
+The full coupled expression is the **evaluative unit**. No single component (e.g., $W_a$ or $\chi$) may be promoted as the independent primary for identity or classification claims.
+
+**Commentary:**
+Distinction density $\rho_D$ participates in dominance selection, rotational character $\chi$ captures stable directional organization, and **boundary-front behavior** ($\partial W_a$) records interactions between adjacent windows rather than failure of the basin identity. 
+
+Module **CLS_004R** supports this reinterpretation within tested synthetic models: rotation and window-width invariants remained stable (100%) under perturbation, while 85% of distinct trajectories collapsed into shared admissibility classes. This reclassifies the "quadrant volatility" observed in geometric models as a boundary-front interaction observable rather than identity instability [Source: CLS_004R_REPORT].
+
+---
+
 ## 11.2 Braids and Triadic Closure ($B_K$)
 
 Individual knots rarely exist in isolation. They interact through the shared orientation space, grouping into more complex structures known as **Braids ($B_K$)**. This grouping represents the **Triadic Closure** principle: where three or more positive ordered distinction-nodes ($N_1, N_2, N_3$) lock into mutually reinforcing asymmetry, a stable arbitration regime forms [Source: MPF-NARRATIVE; Source: MPF-REFINE-ASYM Sec 4].
@@ -1291,7 +1393,7 @@ By formalizing the emergence of topology from recursive process activity, we pro
 The Mono-Process Framework is not a theory *of* physics, but a mathematical program whose recursive dynamics can be projected into physical-like representations. These representations are categorized into **Application Domains** ($\_app$), representing various modes of process stabilization and observation.
 
 **Formal Statement 12.1.1: The Primary Application Relation**
-$$ \text{space\_app} \iff_x (\text{matter\_app} \iff \text{energy\_app}) $$
+$$ \text{space\_app} \iff_R (\text{matter\_app} \iff \text{energy\_app}) $$
 
 **Commentary:**
 Within this framework, space, matter, and energy are not independent primitives. **space\_app** represents the projected relational extension between stabilized process basins. **matter\_app** and **energy\_app** represent an inseparable stabilization/continuation pair: matter corresponds to the persistent topological invariants ($B_K$), while energy corresponds to the intensity of the active continuation ($\mathcal{E}$) within those structures.
@@ -1319,7 +1421,7 @@ Gravity is not treated as a fundamental force or a curvature of an independent s
 $$ \kappa(s) = \frac{d}{ds} \Delta_{\text{align}}(s) + \lambda \delta_T(s) \implies_{\text{proj}} \text{gravity\_app} $$
 
 **Commentary:**
-Gravity is weak because it is "late"—it is the residual of a residual, having passed through multiple attenuation stages before reaching the geometry projection layer [Source: MPF-NARRATIVE]. In this provisional projection, **gravity\_app** emerges from the rate of change of orientation alignment ($\Delta_{\text{align}}$) across the process field. Basins of high $R$-density (matter\_app) create "drag" or "refraction" in the orientation space, forcing nearby process strands to re-orient. This re-orientation is perceived by an embedded observer as a "curvature" or "gravitational pull."
+Gravity is weak because it is late - it is the residual of a residual, having passed through multiple attenuation stages before reaching the geometry projection layer [Source: MPF-NARRATIVE]. In this provisional projection, **gravity\_app** emerges from the rate of change of orientation alignment ($\Delta_{\text{align}}$) across the process field. Basins of high $R$-density (matter\_app) create drag or refraction in the orientation space, forcing nearby process strands to re-orient. Within these models, the bending of relational probes toward high-residue regions has been operationally observed and classified as a **Projected Observable** at Level C5 [Source: GRAVITY-APP-001].
 
 ---
 
@@ -1343,7 +1445,7 @@ A core hypothesis of the framework's application program is that the laws of phy
 Force laws, equations of motion, and field equations are candidate formalizations of the arbitration rule ($O^*$) operating within specific orientation regimes and residue conditions.
 
 **Commentary:**
-Within this framework, "physics" is what arbitration looks like when viewed through the **Metric Extractor** ($\iff_m$). What we perceive as the "path of a particle" or the "evolution of a field" is the sequence of realized states selected by $\text{Arb}_A$ to minimize mismatch. The "character" of different forces (gravity, electromagnetism) arises from the specific way $\text{Arb}_A$ reconciles different topological constraints in the residue.
+Within this framework, physics-like behavior is what arbitration looks like when viewed through the **Metric Extractor** ($\iff_m$). What we perceive as the path of a particle or the evolution of a field is the sequence of realized states selected by $\text{Arb}_A$ to minimize mismatch. The character of different forces (gravity, electromagnetism) arises from the specific way $\text{Arb}_A$ reconciles different topological constraints in the residue.
 
 ---
 
@@ -1360,16 +1462,16 @@ $QM\_app$ and $GR\_app$ are mirrored projection domains generated through common
 *   The shared structure is not direct equality, but a symmetric participation in the same underlying closure relation.
 
 **Commentary:**
-This is an internal structural hypothesis, not a physical unification claim. It suggests that what we perceive as "gravity" and "quantum mechanics" are equivalent views of the same process transition ($distinction \to continuation$) viewed from different orientations. In this model, $\leftrightarrow_R$ acts as the mirror axis that preserves structural information across the projection boundary.
+This is an internal structural hypothesis, not a physical unification claim. It suggests that what we perceive as gravity-like and quantum-like behavior are equivalent views of the same process transition ($distinction \to continuation$) viewed from different orientations. In this model, $\leftrightarrow_R$ acts as the mirror axis that preserves structural information across the projection boundary.
 
 ---
 
 ## 12.5 Missing and Provisional Formalisms
 
-The applications presented in this chapter are **provisional projections** and require rigorous induction to become formal physical claims:
+The applications presented in this chapter are provisional projections and require rigorous induction to become formal physical claims:
 
 1.  **Empirical Mapping Standards:** [ **MISSING DEFINITION** ] What specific metrics in the framework (e.g., $\Omega_a$, $B_K$ invariants) map to physical constants (e.g., $G$, $h$, $c$)?
-2.  **Separation of Claim Levels:** [ **REQUIRES GOVERNANCE** ] Simulation results showing "gravity-like" behavior must not be conflated with a proof of physical gravity. All physical-like results must be marked as analogies or structural comparisons until externally validated.
+2.  **Separation of Claim Levels:** [ **REQUIRES GOVERNANCE** ] Simulation results showing gravity-like behavior must not be conflated with a proof of physical gravity. All physical-like results must be marked as analogies or structural comparisons until externally validated, and downstream applications remain under REVIEW_LOCK while OPEN_BRIDGE_001 is unresolved.
 3.  **Conservation Laws:** [ **REQUIRES PROOF** ] How do the internal invariants of the $\Psi$ and $\delta_a$ operators project into the physical conservation laws of mass, energy, and momentum?
 
 ---
@@ -1444,9 +1546,10 @@ If the dashboard and chapter text disagree, the dashboard is authoritative until
 | Object ID | Type | Status | Claim Level | Dependencies | Active Campaigns | Evidence | Review Lock | Last Update |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **AXIOM_1_2_1** | AXIOM | **LOCKED** | AXIOMATIC | 0 | - | - | - | 2026-05-29 |
-| **OPEN_BRIDGE_001** | BRIDGE | **FALSIFIED** | FALSIFIED | 4 | LFCR_001 | 2 | - | 2026-05-30 |
+| **OPEN_BRIDGE_001** | BRIDGE | **FALSIFIED** | FALSIFIED | 4 | LFCR_001 | 3 | - | 2026-05-30 |
 | **TC_asym** | THEOREM | **REVIEW_LOCK** | REVIEW_LOCK | 1 | LFCR_001 | 0 | **LOCKED** | 2026-05-30 |
-| **gravity_app** | APPLICATION | **REVIEW_LOCK** | REVIEW_LOCK | 3 | - | 0 | **LOCKED** | 2026-05-30 |
+| **gravity_app** | APPLICATION | **SUPPORTED** | **C5** | 3 | - | GRAVITY-APP-001 | - | 2026-06-16 |
+| **L5_RIGOR_FORKED_ATTACK** | CLAIM | **SUPPORTED** | **C5** | 5 | CLS_003 | CLS_003_RUN_001 | - | 2026-06-16 |
 
 ---
 
@@ -1487,19 +1590,16 @@ All Review Lock actions shall preserve historical traceability.
 
 A campaign is a living governance object responsible for attacking, verifying, or reviewing a target claim. Campaigns maintain proof obligations, attack surfaces, evidence reports, simulation manifests, and textbook synchronization records. Campaigns remain active until supported, downgraded, falsified, retired, or superseded. Every active campaign shall possess a unique identifier and audit trail.
 
-### Living Campaign Status Table
-
 | Bridge ID | Bridge Name | Claim Under Attack | Linked Campaign | Status | Claim Level | Downstream Cap |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **OPEN_BRIDGE_001** | Orientation-Closure Bridge | Orientation coherence participates in stable triadic closure. | LFCR_001 | **FALSIFIED** | FALSIFIED | **REVIEW_LOCK** |
+| **OPEN_BRIDGE_001** | Orientation-Closure Bridge | Orientation coherence participates in stable triadic closure. | LFCR_001 | **REWRITE_PENDING** | FALSIFIED | **REVIEW_LOCK** |
 
 **Current Campaign Details: LFCR_001**
-- **Status:** ACTIVE (FALSIFIED)
-- **Purpose:** Systematic ablation of orientation to verify triadic closure survival.
-- **Mathematical Spec:** DEFINED
-- **Simulation Status:** ABLATION_COMPLETE (LFCR_001_STRESS_REPORT_001)
-- **Falsification Result:** Orientation effect (0.008) failed threshold tau=0.05. Strong participatory claim (Model B) invalidated.
-- **Next Required Action:** Resolve REVIEW_LOCK via exit path protocol (MPF_PATCH_002L).
+- **Status:** REWRITE_PENDING (v1 Falsified)
+- **Purpose:** Transition to Model A (Induced Alignment) following Model B falsification.
+- **Mathematical Spec:** REWRITE_REQUIRED
+- **Simulation Status:** ABLATION_COMPLETE (v1 results archived)
+- **Next Required Action:** Formalize v2 Induced Alignment proof obligation and config matrix (MPF_PATCH_002M).
 
 ---
 
@@ -1543,7 +1643,7 @@ By enforcing these governance and induction rules, we ensure that the Mono-Proce
 | $\mathcal{E} \neq 0$ | Constraint State | The condition where distinction or mismatch exists. Aliases: *constraint present*, *distinction exists*. | 1.4 |
 | $\mathcal{E} > 0$ | Realization State | Successful realization of a constraint through admissible continuation. Aliases: *constraint realized*, *admissible continuation exists*. | 1.4 |
 | $\iff_R$ | Recursive Closure | Axiomatic operator denoting biconditional necessity between constraint and realization. | 1.2, 1.6, 2.3 |
-| $\iff_x$ | Projectional Equivalence | Operator marking equivalent views across descriptions via preservation of procedural invariants. | 1.4, 4.1A, 7.4A |
+| $\iff_m$ | Projectional Equivalence | Operator marking equivalent views across descriptions via preservation of procedural invariants. | 1.4, 4.1A, 7.4A |
 | $\delta_a$ | Admissibility Filter | Composite operator ($\Pi_A \circ S \circ \text{Cand}$) that transforms constraint into realization. | 1.5, 6.1, 6.1A |
 | $A(c)$ | Admissibility Window | The structural constraint filtering raw difference into persistence. | 6.1 |
 | $\Pi_A$ | Admissibility Projection | Operator ensuring final selections map onto the admissible window. | 6.1A |
@@ -1573,12 +1673,43 @@ By enforcing these governance and induction rules, we ensure that the Mono-Proce
 | $TC_{asym}$ | Asymmetric Triadic Closure | Higher-order closure relation involving three or more distinction-nodes. | 4.X, 11.2 |
 | $\mid$ | Closure Participation | Marker for grouped participation in a closure relation (e.g., $N_2 \mid N_3$). | 4.X |
 | $TC_{asym,a}$ | Anchored Triad | An asymmetric triadic closure ordered relative to an orientation anchor. | 5.1 |
+| $B$ | Identity State | Current realized closure or identity state. | 2.7 |
+| $B_a$ | Admissible Identity | Admissible continuation of an identity state. | 2.7 |
+| $\to_{ra}$ | Residue-Admissible Transition | Transition preserving residue signature and identity. | 2.7 |
+| $\iff_{ra}$ | Residue-Admissible Correspondence | Recursive residue-preserving correspondence across continuation. | 2.7 |
+| $<\neq>_{ra}$ | Identity Non-Collapse | Relation asserting non-zero distinguishability across identity continuation. | 2.7 |
 
 \pagebreak
 
 # Appendix B: Operator Registry
 
 This registry tracks the status and classification of operators within the Mono-Process Framework as of the current textbook draft.
+
+### Operator Meta-Family
+The schema `<*>_x` is a meta-language construct only. It names the space of legal binary relation operators without itself becoming a legal proof operator.
+
+**Meta-Family Rules**
+- `R1`: `<*>_x` may appear only in definitions, induction notes, and registry discussions.
+- `R2`: `<*>_x` may not appear in proofs, derivations, or theorem statements.
+- `R3`: Every legal binary relation operator must be expressible as an instance of the meta-schema.
+- `R4`: Every instantiated operator must possess its own truth conditions.
+- `R5`: No truth condition may be inherited solely from the meta-schema.
+
+**Operator Family Scope**
+- **Closure family:** `<=>_R`, `<=>_{ra}`
+- **Admissibility family:** `-> _a`, `<- _a`, `->_{ra}`
+- **Residue family:** `-> _r`, `<- _r`
+- **Preservation family:** `<≠>_P`, `<≠>_{ra}`
+- **Meta family:** `<*>_x`
+
+The `x` in `<*>_x` is a reserved discussion placeholder in this induction packet. It is not itself a proof rule, a domain label, or a type identifier.
+
+**Typed Grammar Freeze**
+- Legal suffixes are limited to reserved typed families such as `R`, `a`, `r`, `m`, `s`, `ra`, `app`, `obs`, `bio`, `fld`, `eco`, and `top`.
+- `x` is reserved for meta-language discussion only and may not appear as a legal operator suffix in proofs, derivations, or theorem statements.
+- `A` and `B` may occupy the operands of a legal binary relation operator only when they are declared process states, residue states, orientation-typed projections, admissible continuation candidates, or application-layer observables.
+- `A` and `B` may not be governance labels, proof status tags, registry keys, or undeclared meta terms.
+- Every legal operator instance must supply its own truth conditions; the meta-schema only licenses the family shape.
 
 ### Core Operators
 | Symbol | Name | Status | Function |
@@ -1599,6 +1730,8 @@ This registry tracks the status and classification of operators within the Mono-
 | :--- | :--- | :--- | :--- |
 | $\to_a$ | Forward Admissibility | Candidate | Maps forward from current state. |
 | $\gets_a$ | Reverse Admissibility | Candidate | Validates backward support. |
+| $\to_{ra}$ | Residue-Admissible Transition | Candidate | Transition preserving identity signature. |
+| $\iff_{ra}$ | Residue-Admissible Correspondence | Candidate | Correspondence across identity continuation. |
 | $\to_r$ | Forward Residue | Candidate | Biases the next state based on history. |
 | $\gets_r$ | Reverse Residue | Candidate | Anchors the current state in history. |
 | $\to_a \otimes \gets_r$ | Composite Coupling | Experimental | Couples potential and history for realization. |
@@ -1606,10 +1739,12 @@ This registry tracks the status and classification of operators within the Mono-
 ### Projection & Transport Operators
 | Symbol | Name | Status | Function |
 | :--- | :--- | :--- | :--- |
-| $\iff_x$ | Projectional Equivalence | Active | Bidirectional preservation of procedural invariants across domains. |
+| $\iff_m$ | Projectional Equivalence | Active | Bidirectional preservation of procedural invariants across domains. |
 | $\text{NavT}$ | Navigation Transform | Active | Steers the process in orientation space. |
 | $\iff_m$ | Metric Extractor | Proposed | Converts relations to scalar measurements. |
 | $\iff_s$ | Statistical Extractor | Proposed | Converts relations to probability projections. |
+| $<\neq>_{ra}$ | Identity Non-Collapse | Candidate | Preserves non-identity across identity transition. |
+| $<\neq>_X$ | Preserved Non-Identity Relation | Provisional Research Scaffold | States that a typed relation holds while distinction remains nonzero and identity collapse is forbidden. |
 | $\text{Arb}_A$ | Arbitration | Missing Definition | Selects a single realized state. |
 | $\Xi$ | Reconstruction | Active | Maps observables back to process states. |
 | $\Pi_A$ | Participation | Active | Governs interaction between process strands. |
@@ -1698,17 +1833,19 @@ This index points to the primary evidence pools supporting the claims made in th
 ### Key Evidence Packages
 | Target Claim | Supporting Run(s) | Mechanism Classes | Status |
 | :--- | :--- | :--- | :--- |
-| **Pi-A Stability** | `results/mpf_sim_001_pi_a_stability/` | Agent, CA | Supported (C4) |
-| **Metastability Basins** | `results/mpf_sim_003_metastability_oscillatory/` | ODE, PDE | Partially Supported (C2) |
-| **Braid Formation** | `results/mpf_sim_005_braid_triadic_closure/` | Graph, Agent | Provisional (C1) |
-| **Orientation Bias** | `results/mpf_sim_008_orientation_selection/` | CA, Graph | Supported (C4) |
-| **Gravity-like Gradient** | `results/mpf_sim_012_alignment_refraction/` | PDE | Structural Comparison (C3) |
+| **Pi-A Stability** | `results/LFCR_001_M0_baseline/` | Agent, CA | Supported (C4) |
+| **Metastability Basins** | `results/2026-06-16_run03_CLS_003_EXTREME/` | ODE, PDE | Supported (C5) |
+| **Braid Formation** | `results/LFCR_001_M2_randomization/` | Graph, Agent | Provisional (C1) |
+| **Orientation Bias** | `results/LFCR_001_v2_analysis/` | CA, Graph | Supported (C4) |
+| **Gravity-like Gradient** | `results/2026-05-25_232611_GRAVITY_APP_V1/` | PDE | Supported (C5) |
+| **Zeta Mapping** | `results/2026-06-16_run03_CLS_003_EXTREME/` | Graph, Box | Supported (L2) |
+| **Singularity Rebound** | `results/2026-05-22_run02_Singularity_Rebound/` | Graph | Supported (L3) |
 
-### Active Simulation Campaigns (AWAITING_EVIDENCE)
+### Historical Simulation Campaigns
 **Campaign ID: LFCR_001 (Orientation-Closure Attack)**
-- **Status:** NOT_YET_RUN
-- **Required Controls:** M0_full, M1_no_orientation, M2_random_orientation, M3_shuffled_orientation, M4_residue_only, M5_admissibility_only, M6_fixed_topology_no_orientation.
-- **Required Outputs:** closure_survival_rate, closure_duration_mean, collapse_rate, orientation_coherence, effect_size, confidence_interval, seed_variance.
+- **Status:** ARCHIVED, FALSIFIED, REWRITE_PENDING
+- **Recorded Controls:** M0_full, M1_no_orientation, M2_random_orientation, M3_shuffled_orientation, residue-only and admissibility-only ablations, plus fixed-topology variants.
+- **Recorded Outputs:** closure_survival_rate, closure_duration_mean, collapse_rate, orientation_coherence, effect_size, confidence_interval, seed_variance.
 
 ### Evidence Requirements
 To be listed in this index, a run must provide:
@@ -1744,7 +1881,7 @@ These items have candidate formalisms in the "Scratch Schema" (MS-SCRATCH-V1) or
 - **Formal definition of $\iff_m$:** Defined as measurement map $\mathrm{Meas} : \mathcal{X}\times\mathcal{C}\to \mathbb{R}^d$ [Source: MS-SCRATCH-V1 Sec 8.1].
 - **Orientation Update Rule:** Defined via "Switching Events" and the switching stability predicate [Source: MS-SCRATCH-V1 Sec 7.5].
 - **Formal definition of State $S$:** Defined as locally addressable aspect-condition [Source: IND-STATE-S-001].
-- **Closure-Coupling Signature ($\iff_x$):** Formally defined as bidirectional preservation of procedural invariants (Source: MPF-P1-003).
+- **Closure-Coupling Signature ($\iff_m$):** Formally defined as bidirectional preservation of procedural invariants (Source: MPF-P1-003).
 
 ### 2. High-Priority Gaps (GAP_OPEN)
 These items remain unsettled and are the primary targets for future induction and research runs.
@@ -1765,6 +1902,8 @@ These items remain unsettled and are the primary targets for future induction an
 - **Empirical Mapping Standards:** Mapping framework metrics ($\Omega_a$, $B_K$) to physical constants ($G, h, c$). (Ref: 12.5)
 - **Formal definition of $\otimes$:** The composition and interference rules for composite directional coupling. (Ref: 9.1, 9.4)
 - **Formal definition of $\iff_s$:** The exact mapping between mismatch intensity and statistical realization. (Ref: 7.3)
+- **Truth conditions for $<\neq>_X$:** Formal criteria for when preserved non-identity holds, fails, becomes directional, or reduces to already existing coupling language. (Ref: 3.X)
+- **Meta Relation Schema ($<*>_x$):** Formal family-level language for legal binary relation operators without granting the schema proof-operator status. (Ref: Appendix B)
 
 ### F.3 Open Bridge Registry
 | Bridge ID | Name | Current Status | Claim Cap |
@@ -1800,6 +1939,9 @@ This textbook draft is derived from and cross-referenced with the following foun
 | Source ID | Document Title | Version/ID | Description |
 | :--- | :--- | :--- | :--- |
 | **MPF-CORE-V1** | [MPF-CORE: MINIMAL WORKING FORMALISM](D:/projects/acellorator/docs/MPF_Core_Formalism_v1.md) | v1.0 | The authorized SSOT for primitive terms, generative conditions, and core operator algebra. |
+| **SINGULARITY-REBOUND-001** | [The Singularity Rebound Mechanism](results/2026-05-22_run02_Singularity_Rebound/paper.md) | C5/L3 | Validation of the operational distinguishability floor and recursive trigger state. |
+| **LFCR_004_PILOT** | [Phase-Lag Pilot Falsification](results/2026-06-10_run03_LFCR_004_PILOT/paper.md) | C2/L1 | Falsification of phase-lag residue as a foundational requirement for closure. |
+| **CLS_003_REPORT** | [Collapse and Reformation Basin Validation](results/2026-06-16_run03_CLS_003_EXTREME/paper.md) | C5/L2 | Multi-mechanism validation of basin stability and Zeta-mapping survivors. |
 | **MPF-MATH-SCHEMA-V1.9** | [MONO-PROCESS MATHEMATICAL SCHEMA](D:/projects/acellorator/docs/MONO_PROCESS_MATHEMATICAL_SCHEMA_V1_9.md) | v1.9 | Unified formalism for recursive coupling, identity dynamics, and interaction hierarchies. |
 | **TECH-NOTE-ASYM** | [Technical Note: Asymmetry Ratio and Orientation Selection](D:/projects/acellorator/docs/asym.txt) | Exploratory | Deep dive into the $\Omega_a$ metric and the bridge from asymmetry to orientation. |
 | **MPF-NARRATIVE** | [The Law of the One Process: Narrative Synthesis](D:/projects/acellorator/docs/narrative.txt) | Synthesis | Detailed conceptual derivation of the four organizational resolutions (forces) and the nature of process. |

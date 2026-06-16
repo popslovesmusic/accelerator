@@ -718,7 +718,13 @@ After drafting the paper:
 2. Ensure any gaps are recorded in `registry/lexicon_gap_queue.json`.
 3. Update `registry/lexicon_validation_registry.json` if new evidence was produced for a term-role.
 
-### 10.11 Manual Enforcement Protocol (Self-Audit)
+### 10.11 Textbook Synchronization (Mandatory Post-Run)
+The Mono-Process Framework is a living mathematical program. After every research run that produces, modifies, or validates an induction, theorem, or bridge:
+1. The agent MUST update `docs/textbook/mono_process_textbook_complete.md` to reflect the new state of the formal program.
+2. This includes updating relevant chapters, the Symbol Glossary (Appendix A), the Operator Registry (Appendix B), and resolving Open Bridges (Appendix F).
+3. Textbook updates must be committed as part of the run's final state hygiene.
+
+### 10.12 Manual Enforcement Protocol (Self-Audit)
 If the automated gate script is unavailable, the agent MUST perform this manual check:
 1. **Paper Structure:** Verify all 11 sections are present and non-empty.
 2. **Evidence Count:** Explicitly verify `independent_measurement_count` and `model_classes_count` in metadata.

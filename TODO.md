@@ -52,7 +52,33 @@ This document tracks the strategic objectives following the successful consolida
 - [x] **Task 4.3: Execute Module CLS_002 (Geometry and Ratchet Continuity)**
     - [x] Run hysteresis ramps in `structural_box_sim_cpp`.
     - [x] Test geometry deformation and residue lag vectors.
-- [ ] **Task 4.4: Execute Module CLS_003 (Collapse and Reformation Basin Validation)**
+- [x] **Task 4.3.1: Lexicon Gap Resolution (MNT-LEX-001)**
+    - [x] Promoted 'Singularity/Rebound' cluster to L2 (evidence: SINGULARITY-REBOUND-001).
+    - [x] Evaluated 'Phase Dynamics' cluster; downgraded to L1/Descriptive (evidence: LFCR_004).
+    - [x] Deferred Zeta/Center clusters pending primitive mapping.
+    - [x] Unified registry sync passed.
+- [x] **Task 4.4: Execute Module CLS_003 (Collapse and Reformation Basin Validation)**
+    - [x] Measurement channels and pass/fail criteria verified across `structural_box` and `graph_dynamics`.
+    - [x] Zeta mapping probes (`Pi_zeta`, `Center_Control_Functional`) promoted to L2 status.
+    - [x] Elevated `L5_RIGOR_FORKED_ATTACK` to supported C5 status.
+- [x] **Task 4.5: Basin Signature Formalization (CLS_004)**
+    - [x] Implemented `scripts/cls_004_basin_analyzer.py` for $\Sigma$ extraction.
+    - [x] Verified 100% rotation stability under perturbation.
+    - [x] Identified quadrant occupancy volatility as a resolution artifact.
+- [x] **Task 4.6: Relational Basin Signature Validation (CLS_004R)**
+    - [x] Implemented `scripts/cls_004R_relational_analyzer.py` for $\Sigma_R$ extraction.
+    - [x] Verified 100% stability for Rotation ($\chi$) and Window ($W_a$) invariants.
+    - [x] Confirmed $\Sigma_R$ functions as a **Class Marker** (85% collision rate across distinct trajectories).
+    - [x] Reclassified quadrant volatility as **Boundary-Front Interaction**.
+- [ ] **Task 4.6.1: CLS_004R Follow-up Induction**
+    - [x] Register $\Sigma_R$ as provisional relational signature object.
+    - [x] Add $W_a$, $\rho_D$, $\chi$, $R_{-(i)}$, and boundary_front to lexicon gap queue.
+    - [x] Add CLS_004R results to claim registry with status L2.
+    - [ ] Audit **OPEN_BRIDGE_001** to determine whether prior falsification tested isolated variables rather than whole RT expressions.
+- [ ] **Task 4.7: Macroscopic Projection and Behavioral Prediction**
+    - [ ] Map $\Sigma_R$ to predicted response basins in `structural_box_sim_cpp`.
+    - [ ] Verify that $W_a$ membership predicts perturbation survival.
+
 
 ### 5. Procedural PDE Engine (2D/3D Campaign Spec V0.1)
 - [x] **Task 5.1: Create 2D C++ baseline engine**

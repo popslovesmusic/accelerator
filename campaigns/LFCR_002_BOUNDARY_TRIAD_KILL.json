@@ -1,0 +1,151 @@
+{
+  "campaign_id": "LFCR_002_BOUNDARY_TRIAD_KILL",
+  "mode": "falsification_attack",
+  "intent": "Kill or downgrade the claim that stable K-closure requires residue-conditioned admissible triadic orientation and D-boundary-mediated coupling.",
+  "target_claim": {
+    "formal": "δ_ra[D ->_a D1 ->_a D2]-(i_ra) ->_a K",
+    "plain": "Stable K-like closure requires residue, admissibility, triadic dependency, realized orientation, and boundary-mediated coupling."
+  },
+  "null_hypothesis": {
+    "formal": "K_obs persists without one or more required operators",
+    "plain": "Observed closure is an artifact of density, topology, smoothing, metric choice, or generic graph dynamics."
+  },
+  "invariant": "(ℰ≠0)",
+  "core_non_invariants": [
+    "K",
+    "D1",
+    "D2",
+    "-(i)",
+    "-(i_a)",
+    "-(i_ra)",
+    "geometry_app",
+    "particle_app",
+    "force_app",
+    "entanglement_app"
+  ],
+  "required_observables": {
+    "S_closure": "survival_cycles / total_cycles",
+    "C_orient": "1 - normalized_orientation_disagreement",
+    "R_persistence": "residue_correlation_across_updates",
+    "B_integrity": "fraction_of_interactions_mediated_only_through_D_boundary",
+    "K_detect": "binary_or_continuous_knot_closure_score"
+  },
+  "thresholds": {
+    "minimum_effect_tau": 0.05,
+    "closure_survival_minimum": 0.75,
+    "orientation_coherence_minimum": 0.70,
+    "residue_persistence_minimum": 0.65,
+    "boundary_integrity_minimum": 0.95
+  },
+  "baseline_model": {
+    "id": "M0_FULL",
+    "expression": "δ_ra[D ->_a D1 ->_a D2]-(i_ra) ->_a K",
+    "requirements": [
+      "residue_enabled",
+      "admissibility_enabled",
+      "triadic_dependency_enabled",
+      "orientation_enabled",
+      "D_boundary_only_coupling_enabled"
+    ]
+  },
+  "ablations": [
+    {
+      "id": "M1_NO_RESIDUE",
+      "change": "Replace δ_ra with δ_a",
+      "falsifies_if": "S_closure ≈ M0 within tau"
+    },
+    {
+      "id": "M2_NO_ADMISSIBILITY",
+      "change": "Allow unconstrained continuation",
+      "falsifies_if": "S_closure >= M0 - tau"
+    },
+    {
+      "id": "M3_NO_ORIENTATION",
+      "change": "Neutralize -(i_ra)",
+      "falsifies_if": "S_closure ≈ M0 within tau"
+    },
+    {
+      "id": "M4_DIRECT_PHASE_COUPLING",
+      "change": "Allow -(i) <-> -(i) interaction without D(*|*) boundary",
+      "falsifies_if": "M4 matches or outperforms M0"
+    },
+    {
+      "id": "M5_DYAD_ONLY",
+      "change": "Allow D and D1 but block D2",
+      "falsifies_if": "Stable K persists"
+    },
+    {
+      "id": "M6_RANDOM_TRIADS",
+      "change": "Preserve triad count but randomize D,D1,D2 dependency",
+      "falsifies_if": "Random triads produce stable K at M0 rate"
+    },
+    {
+      "id": "M7_TOPOLOGY_SPOOF",
+      "change": "Preserve apparent topology but destroy residue history",
+      "falsifies_if": "K_detect and S_closure remain stable"
+    },
+    {
+      "id": "M8_METRIC_SPOOF",
+      "change": "Randomize projection metric/extractor while preserving raw states",
+      "falsifies_if": "Conclusion depends on metric choice"
+    }
+  ],
+  "run_matrix": {
+    "mechanism_classes_required": [
+      "graph_dynamics",
+      "cellular_automata",
+      "field_or_pde"
+    ],
+    "seeds_per_model_minimum": 100,
+    "parameter_regimes": [
+      "low_noise",
+      "critical_noise",
+      "high_noise",
+      "sparse_coupling",
+      "dense_coupling",
+      "near_boundary_instability"
+    ]
+  },
+  "success_condition_for_framework": {
+    "plain": "M0 must significantly outperform all core ablations across independent mechanisms.",
+    "formal": "S_closure(M0) - S_closure(Mi) >= tau for M1,M2,M3,M5,M6 in at least two mechanism classes"
+  },
+  "failure_condition_for_framework": {
+    "plain": "If any supposedly required component can be removed without loss of closure, the claim is downgraded or falsified.",
+    "formal": "exists Mi such that abs(S_closure(M0) - S_closure(Mi)) < tau"
+  },
+  "hard_fail_conditions": [
+    "M5_DYAD_ONLY produces stable K",
+    "M4_DIRECT_PHASE_COUPLING matches M0",
+    "M6_RANDOM_TRIADS match M0",
+    "M7_TOPOLOGY_SPOOF preserves K without residue",
+    "Results fail to reproduce across mechanism classes"
+  ],
+  "outputs_required": [
+    "raw_state_logs",
+    "seed_table",
+    "parameter_table",
+    "observable_timeseries",
+    "ablation_comparison_csv",
+    "effect_size_report",
+    "failure_case_examples",
+    "reproducibility_manifest",
+    "claim_downgrade_recommendation"
+  ],
+  "governance": {
+    "default_result": "do_not_promote",
+    "if_pass": "retain_as_candidate_supported",
+    "if_fail": "downgrade_to_falsified_or_provisional",
+    "publication_language_allowed": [
+      "falsification-tested candidate",
+      "model-class dependent result",
+      "provisional support"
+    ],
+    "publication_language_blocked": [
+      "proved",
+      "established physical law",
+      "confirmed theory",
+      "universal result"
+    ]
+  }
+}

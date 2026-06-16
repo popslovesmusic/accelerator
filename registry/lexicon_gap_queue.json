@@ -1156,6 +1156,203 @@
   },
   "candidate_new_terms": [
     {
+      "term": "Omega_R",
+      "aliases": [
+        "Residue Orientation Functional"
+      ],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "Primary functional for orientation pressure in AMP-IND-ZETA-001.",
+      "source_context": {
+        "source_type": "research_output",
+        "source_path_or_note": "results/accelerator_math_program/AMP-IND-ZETA-001/gap_objects.json"
+      },
+      "proposed_definition": "A functional mapping accumulated process residue (R) and orientation state (omega) to a local orientation pressure.",
+      "process_rewrite": "Recursive mapping of residue history to admissibility-frame pressure.",
+      "procedural_components": [
+        "residue",
+        "-(i)"
+      ],
+      "primitive_mapping": {
+        "residue": "R",
+        "orientation_minus_i": "omega"
+      },
+      "proposed_roles": [
+        {
+          "role_name": "orientation_pressure_functional",
+          "operational_definition": "Computes the orientation force induced by prior continuation residues.",
+          "metrics": [
+            "orientation_equilibrium_error"
+          ],
+          "candidate_tools": [
+            "circular_accelerator_sim_v1_cpp"
+          ],
+          "falsification_condition": "Functional returns zero or constant value regardless of residue accumulation.",
+          "evidence_level": "L0",
+          "charter_classification": "provisional"
+        }
+      ],
+      "governance_status": "not_verified"
+    },
+    {
+      "term": "Pi_zeta",
+      "aliases": [
+        "Zeta Projection Map"
+      ],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "Mapping operator for zeta domain correspondence in AMP-IND-ZETA-001.",
+      "source_context": {
+        "source_type": "research_output",
+        "source_path_or_note": "results/accelerator_math_program/AMP-IND-ZETA-001/gap_objects.json"
+      },
+      "proposed_definition": "A projection map from the orientation equilibrium manifold to the complex s-plane, specifically targeting the zeta function critical line.",
+      "process_rewrite": "Projecting stable orientation invariants into the zeta-domain s-plane.",
+      "procedural_components": [
+        "orientation_minus_i",
+        "projection"
+      ],
+      "primitive_mapping": {
+        "orientation_minus_i": "omega",
+        "delta": "projection_step"
+      },
+      "proposed_roles": [
+        {
+          "role_name": "mathematical_projection_map",
+          "operational_definition": "Maps orientation invariants to zeta-domain coordinates.",
+          "metrics": [
+            "zeta_projection_residual"
+          ],
+          "candidate_tools": [
+            "circular_accelerator_sim_v1_cpp"
+          ],
+          "falsification_condition": "Projection fails to map to a coherent structure in the s-plane.",
+          "evidence_level": "L0",
+          "charter_classification": "provisional"
+        }
+      ],
+      "governance_status": "not_verified"
+    },
+    {
+      "term": "CSI_functional",
+      "aliases": [
+        "Coupled Structural Interaction functional"
+      ],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "Necessary coupling functional for information transfer in AMP-IND-ZETA-001.",
+      "source_context": {
+        "source_type": "research_output",
+        "source_path_or_note": "results/accelerator_math_program/AMP-IND-ZETA-001/csi_formalization.json"
+      },
+      "proposed_definition": "A functional formalizing information transfer between residue regions, allowing gradients in residue to induce orientation pressure.",
+      "process_rewrite": "Relational propagation of residue constraints across admissibility basins.",
+      "procedural_components": [
+        "residue",
+        "coupling_or_CSI"
+      ],
+      "primitive_mapping": {
+        "residue": "R",
+        "coupling_or_CSI": "K"
+      },
+      "proposed_roles": [
+        {
+          "role_name": "residue_coupling_functional",
+          "operational_definition": "Mediates the influence of residue gradients on local admissibility selection.",
+          "metrics": [
+            "CSI coupling coefficient"
+          ],
+          "candidate_tools": [
+            "circular_accelerator_sim_v1_cpp"
+          ],
+          "falsification_condition": "Orientation pressure emerges despite CSI = 0 (disconnected basins).",
+          "evidence_level": "L0",
+          "charter_classification": "provisional"
+        }
+      ],
+      "governance_status": "not_verified"
+    },
+    {
+      "term": "orientation_equilibrium",
+      "aliases": [
+        "Omega_R = 0",
+        "Symmetry Closure Condition"
+      ],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "Key condition for symmetry closure in AMP-IND-ZETA-001.",
+      "source_context": {
+        "source_type": "research_output",
+        "source_path_or_note": "results/accelerator_math_program/AMP-IND-ZETA-001/orientation_equilibrium_condition.json"
+      },
+      "proposed_definition": "The condition where opposing orientation pressures from residue-conditioned continuation reach a stable equilibrium (net pressure is zero).",
+      "process_rewrite": "Cancellation of admissible orientation biases in a coupled recursive loop.",
+      "procedural_components": [
+        "Omega_R",
+        "CSI"
+      ],
+      "primitive_mapping": {
+        "orientation_minus_i": "balanced_selection",
+        "residue": "persistent_memory"
+      },
+      "proposed_roles": [
+        {
+          "role_name": "symmetry_closure_condition",
+          "operational_definition": "Defines the manifold where process continuation remains orientation-neutral.",
+          "metrics": [
+            "orientation_equilibrium_error"
+          ],
+          "candidate_tools": [
+            "circular_accelerator_sim_v1_cpp"
+          ],
+          "falsification_condition": "Orientation equilibrium is unreachable or inherently unstable in all tested regimes.",
+          "evidence_level": "L0",
+          "charter_classification": "provisional"
+        }
+      ],
+      "governance_status": "not_verified"
+    },
+    {
+      "term": "Center_Control_Functional",
+      "aliases": [
+        "C_R",
+        "Midpoint Selection Functional"
+      ],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "Functional for unique center selection in AMP-IND-ZETA-001.",
+      "source_context": {
+        "source_type": "research_output",
+        "source_path_or_note": "results/accelerator_math_program/AMP-IND-ZETA-001/center_control_equilibrium.json"
+      },
+      "proposed_definition": "A functional used to determine a unique center-control point within an orientation equilibrium manifold by minimizing admissible directional imbalance.",
+      "process_rewrite": "Intrinsic selection of a stable symmetry midpoint within balanced residue fields.",
+      "procedural_components": [
+        "orientation_equilibrium",
+        "residue"
+      ],
+      "primitive_mapping": {
+        "residue": "intrinsic_midpoint",
+        "orientation_minus_i": "unbiased_center"
+      },
+      "proposed_roles": [
+        {
+          "role_name": "midpoint_selection_operator",
+          "operational_definition": "Identifies the unique structural center of a coupled residue-orientation system.",
+          "metrics": [
+            "center_drift_rate"
+          ],
+          "candidate_tools": [
+            "circular_accelerator_sim_v1_cpp"
+          ],
+          "falsification_condition": "Functional fails to identify a unique stable minimum in connected systems.",
+          "evidence_level": "L0",
+          "charter_classification": "provisional"
+        }
+      ],
+      "governance_status": "not_verified"
+    },
+    {
       "term": "distinguishability_compression",
       "status": "RESOLVED_L2",
       "default_claim_status": "PROVISIONAL",
@@ -3383,6 +3580,33 @@
       "governance_status": "partially_verified"
     },
     {
+      "term": "meta_relation_schema",
+      "aliases": [
+        "<*>_x",
+        "operator meta-family",
+        "relation capacity schema"
+      ],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "MPF operator meta-family packet for legal binary relation operator generation without proof-operator promotion.",
+      "source_context": {
+        "source_type": "manual_patch_packet",
+        "source_path_or_note": "MPF_IND_OPERATOR_META_FAMILY_001"
+      },
+      "proposed_definition": "A meta-language-only schema for describing legal binary relation operators as instances without granting the schema proof-operator status.",
+      "process_rewrite": "Relation capacity generates operator instances; the schema itself remains descriptive and non-derivational.",
+      "proposed_roles": [
+        {
+          "role_name": "operator_meta_schema",
+          "operational_definition": "Defines the legal family space for binary relation operators without serving as a proof rule.",
+          "falsification_condition": "schema is used as a derivation step or cannot distinguish instance from family",
+          "evidence_level": "L0",
+          "charter_classification": "provisional"
+        }
+      ],
+      "governance_status": "not_verified"
+    },
+    {
       "term": "deviation_by_addition",
       "aliases": [
         "additive distinguishability",
@@ -4134,16 +4358,72 @@
     },
     {
       "term": "restorative_multi_reference_constraint",
-      "aliases": ["biconditional_restoration", "R-tension"],
+      "aliases": ["biconditional_restoration", "R-tension", "⇔_ra", "⇔_R"],
       "status": "GAP_OPEN",
       "default_claim_status": "PROVISIONAL",
-      "reason_for_induction": "Narrative refinement of the operator ⇔_R as a restorative force.",
+      "reason_for_induction": "Narrative refinement of the operator ⇔_R as a restorative force in IND_001_PERSISTENT_IDENTITY_RA.",
       "source_context": {
-        "source_type": "pivot_synthesis",
-        "source_path_or_note": "Foundational Narrative Refinement (2026-05-23)"
+        "source_type": "user_theory",
+        "source_path_or_note": "TN_Realizability_Actualization_and_Persistence_v01"
       },
-      "proposed_definition": "The formal tension within the core biconditional where every orientational shift must be balanced by a residue reinforcement.",
+      "proposed_definition": "The formal tension within the core biconditional where every orientational shift must be balanced by a residue reinforcement, preserving identity across continuation.",
       "process_rewrite": "Recursive asymmetrical compensation of mismatch via historical residue.",
+      "governance_status": "not_verified"
+    },
+    {
+      "term": "residue_admissible_actualization",
+      "aliases": ["δ_ra"],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "Formalizes actualization specifically under residue-conditioned admissibility (IND_001).",
+      "source_context": {
+        "source_type": "user_theory",
+        "source_path_or_note": "TN_Realizability_Actualization_and_Persistence_v01"
+      },
+      "proposed_definition": "The actualization operator delta (δ) restricted to the residue-admissible continuation domain.",
+      "process_rewrite": "Instance of process continuation that maintains residue-linked historical continuity.",
+      "governance_status": "not_verified"
+    },
+    {
+      "term": "residue_admissible_transition",
+      "aliases": ["→_ra"],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "Formalizes the transition between states that preserves identity (IND_001).",
+      "source_context": {
+        "source_type": "user_theory",
+        "source_path_or_note": "TN_Realizability_Actualization_and_Persistence_v01"
+      },
+      "proposed_definition": "A relational transition operator from a current state to an admissible continuation state under residue-preserving conditions.",
+      "process_rewrite": "Process update that carries the procedural signature of the prior state.",
+      "governance_status": "not_verified"
+    },
+    {
+      "term": "non_collapse_distinction_relation",
+      "aliases": ["<≠>_ra"],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "Formalizes the requirement that continuation must not collapse into static identity or absolute null (IND_001).",
+      "source_context": {
+        "source_type": "user_theory",
+        "source_path_or_note": "TN_Realizability_Actualization_and_Persistence_v01"
+      },
+      "proposed_definition": "A relational operator asserting that two states maintain non-zero distinguishability across a residue-admissible transition.",
+      "process_rewrite": "Preservation of relational 'mismatch' across process updates.",
+      "governance_status": "not_verified"
+    },
+    {
+      "term": "persistent_identity_continuation",
+      "aliases": ["IND_001_PERSISTENT_IDENTITY_RA"],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "New foundational induction describing persistence as relational continuity (2026-06-10).",
+      "source_context": {
+        "source_type": "user_theory",
+        "source_path_or_note": "TN_Realizability_Actualization_and_Persistence_v01"
+      },
+      "proposed_definition": "The induction that realized identity persists through residue-preserving admissible continuation rather than static equality.",
+      "process_rewrite": "Dynamic stability of a procedural signature across recursive updates.",
       "governance_status": "not_verified"
     },
     {
@@ -4621,7 +4901,7 @@
       "term": "asymmetry_bridge_operator",
       "status": "GAP_OPEN",
       "reason_for_induction": "Generative mapping from distinction asymmetry to orientation selection.",
-      "proposed_definition": "Operational operator $\Rightarrow_{\Omega_a}$ inducing orientation -(i) from asymmetry $\Omega_a$.",
+      "proposed_definition": "Operational operator $\\Rightarrow_{\\Omega_a}$ inducing orientation -(i) from asymmetry $\\Omega_a$.",
       "proposed_roles": [
         {
           "role_name": "generative_induction",
@@ -4630,6 +4910,194 @@
         }
       ],
       "governance_status": "not_verified"
+    },
+    {
+      "term": "non_identity_relation_operator",
+      "aliases": ["<≠>_X", "non-collapse relation operator"],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "MPF BFT induction packet for preserved distinction under relation.",
+      "source_context": {
+        "source_type": "manual_patch_packet",
+        "source_path_or_note": "mpf_bft_induction_packet 2026-06-07"
+      },
+      "proposed_definition": "A typed relation operator asserting that A remains related to B under context X while the distinction between A and B is preserved.",
+      "process_rewrite": "A non-collapse relation marker requiring co-survival of relation and nonzero distinction under a declared context.",
+      "primitive_mapping": {
+        "epsilon": "distinction pressure supporting non-identity",
+        "residue": "possible persistence context for repeated coupling",
+        "delta": "admissible update applied without identity collapse"
+      },
+      "proposed_roles": [
+        {
+          "role_name": "distinction_preserving_relation",
+          "operational_definition": "Marks a relation as active while forbidding shorthand collapse into strict identity.",
+          "falsification_condition": "declared relation forces A and B into the same operational slot under the same context",
+          "evidence_level": "L0",
+          "charter_classification": "provisional"
+        }
+      ],
+      "governance_status": "not_verified"
+    },
+    {
+      "term": "preserved_distinction_operator_family",
+      "aliases": [
+        "Bracketed Relational Operators",
+        "Preserved-Distinction Operators",
+        "Non-Collapse Relation Operators"
+      ],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "MPF BFT induction packet family scaffold for A <R>_X B notation.",
+      "source_context": {
+        "source_type": "manual_patch_packet",
+        "source_path_or_note": "mpf_bft_induction_packet 2026-06-07"
+      },
+      "proposed_definition": "A family of typed bracketed relation operators intended to state how relation holds without forcing identicality.",
+      "process_rewrite": "A notation family for preserving distinction while varying relation character by inner symbol and context subscript.",
+      "proposed_roles": [
+        {
+          "role_name": "operator_family",
+          "operational_definition": "Provides a schema for context-typed non-collapse relation statements such as <≠>_X.",
+          "falsification_condition": "family adds no readable distinction beyond existing operators or fragments context typing",
+          "evidence_level": "L0",
+          "charter_classification": "provisional"
+        }
+      ],
+      "governance_status": "not_verified"
+    },
+    {
+      "term": "preserved_non_identity_relation",
+      "aliases": ["coupled_non_collapse"],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "MPF BFT induction packet semantic target for <≠>_X.",
+      "source_context": {
+        "source_type": "manual_patch_packet",
+        "source_path_or_note": "mpf_bft_induction_packet 2026-06-07"
+      },
+      "proposed_definition": "A scoped relation condition in which entities remain coupled without collapsing into strict identity.",
+      "process_rewrite": "A local co-survival condition for relation and distinction.",
+      "proposed_roles": [
+        {
+          "role_name": "relation_predicate",
+          "operational_definition": "Used when a relation claim must explicitly preserve non-identity.",
+          "falsification_condition": "the only stable reading is identity or total separation",
+          "evidence_level": "L0",
+          "charter_classification": "provisional"
+        }
+      ],
+      "governance_status": "not_verified"
+    },
+    {
+      "term": "phase_signature",
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "Primary parameter in IND_PHASE_LAG_CLOSURE_001.",
+      "source_context": {
+        "source_type": "user_theory",
+        "source_path_or_note": "IND_PHASE_LAG_CLOSURE_001"
+      },
+      "proposed_definition": "The relative phase state (phi) of a directed distinction relation, representing its position in a recursive cycle.",
+      "process_rewrite": "The state of a process cycle at a specific procedural order point.",
+      "primitive_mapping": {
+        "epsilon": "mismatch phase",
+        "rho": "continuation phase"
+      },
+      "governance_status": "not_verified"
+    },
+    {
+      "term": "phase_lag_residue",
+      "aliases": [
+        "Delta_phi_R"
+      ],
+      "status": "RESOLVED_TO_CANONICAL",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "Load-bearing requirement in IND_PHASE_LAG_CLOSURE_001.",
+      "source_context": {
+        "source_type": "user_theory",
+        "source_path_or_note": "IND_PHASE_LAG_CLOSURE_001"
+      },
+      "proposed_definition": "The non-zero residue produced by finite propagation or non-instantaneous reciprocal influence that prevents perfect phase cancellation.",
+      "process_rewrite": "The accumulated memory of phase-shifted continuation that conditions future recurrence.",
+      "primitive_mapping": {
+        "residue": "phase-shift memory",
+        "delta": "lagged update"
+      },
+      "governance_status": "not_verified"
+    },
+    {
+      "term": "non_canceling_phase",
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "Success condition for stable closure in IND_PHASE_LAG_CLOSURE_001.",
+      "source_context": {
+        "source_type": "user_theory",
+        "source_path_or_note": "IND_PHASE_LAG_CLOSURE_001"
+      },
+      "proposed_definition": "A condition where phase-lag residue is maintained above a zero-sum cancellation threshold, ensuring persistent distinguishability.",
+      "process_rewrite": "Maintenance of (E != 0) through phase interference.",
+      "primitive_mapping": {
+        "epsilon": "non-zero interference"
+      },
+      "governance_status": "not_verified"
+    },
+    {
+      "term": "Wa",
+      "aliases": ["Admissibility Window Basin"],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "Proposed in CLS_004R as the fundamental relational model for basins.",
+      "proposed_definition": "A phase relationship admissibility class defining the structural limits of a recursive process basin.",
+      "primitive_mapping": {
+        "epsilon": "distinguishability_floor",
+        "rho": "continuation_capacity"
+      }
+    },
+    {
+      "term": "rho_D",
+      "aliases": ["Distinction Density"],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "Dominance weighting metric proposed in CLS_004R.",
+      "proposed_definition": "A metric representing the persistence or dominance of specific mismatch states within an admissibility window.",
+      "primitive_mapping": {
+        "epsilon": "mismatch_magnitude"
+      }
+    },
+    {
+      "term": "chi",
+      "aliases": ["Rotational Character"],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "High-stability rotational invariant identified in CLS_004 and formalized in CLS_004R.",
+      "proposed_definition": "The CW/CCW rotational invariant characterizing the orientation-event chain.",
+      "primitive_mapping": {
+        "orientation_minus_i": "rotational_alignment"
+      }
+    },
+    {
+      "term": "orientation_event_chain",
+      "symbol": "R_minus_i",
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "Defined in CLS_004R as the residue-coupled dynamic sequence of orientation events.",
+      "proposed_definition": "A dynamic chain of orientation events, written as -(i)_1 ->_r -(i)_2 ->_r ... , representing an evolving orientating process.",
+      "primitive_mapping": {
+        "residue": "event_memory",
+        "orientation_minus_i": "event_state"
+      }
+    },
+    {
+      "term": "boundary_front",
+      "symbol": "partial_W_a",
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "Reclassified in CLS_004R as the source of quadrant volatility.",
+      "proposed_definition": "The active interaction region between admissibility windows where boundary flicker or transitions appear as process-front behavior.",
+      "primitive_mapping": {
+        "delta": "boundary_transition"
+      }
     }
   ]
 }

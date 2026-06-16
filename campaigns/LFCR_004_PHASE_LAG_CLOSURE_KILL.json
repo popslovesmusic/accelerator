@@ -1,0 +1,132 @@
+{
+  "campaign_id": "LFCR_004_PHASE_LAG_CLOSURE_KILL",
+  "mode": "falsification_attack",
+  "target_claim": {
+    "formal": "D(A|B)_φ ⇔_ra D(B|A)_{φ+Δφ_R} > 0",
+    "plain": "Stable closure is better explained by non-canceling phase-lagged relational recurrence than by node count, triadic topology, or generic attractor dynamics."
+  },
+  "null_hypothesis": {
+    "formal": "S_closure is independent of Δφ_R once topology, density, and update strength are controlled.",
+    "plain": "Phase lag is descriptive only; closure is caused by ordinary attractor dynamics."
+  },
+  "baseline": {
+    "id": "M0_PHASE_LAG_RA",
+    "requirements": [
+      "nonzero_distinction",
+      "reciprocal_relation",
+      "controlled_phase_lag",
+      "residue_conditioning",
+      "admissible_return"
+    ],
+    "expression": "D(A|B)_φ ⇔_ra D(B|A)_{φ+Δφ_R} > 0"
+  },
+  "ablations": [
+    {
+      "id": "M1_ZERO_LAG",
+      "change": "Set Δφ_R = 0",
+      "kills_if": "S_closure(M0) - S_closure(M1) >= tau"
+    },
+    {
+      "id": "M2_RANDOM_LAG",
+      "change": "Randomize Δφ_R each recurrence while preserving lag magnitude distribution",
+      "kills_if": "S_closure(M2) matches M0"
+    },
+    {
+      "id": "M3_CANCELING_LAG",
+      "change": "Force phase relation into known cancellation bands",
+      "kills_if": "Closure survives cancellation"
+    },
+    {
+      "id": "M4_MEMORYLESS_LAG",
+      "change": "Keep phase lag but remove residue dependence across recurrences",
+      "kills_if": "Closure persists without R"
+    },
+    {
+      "id": "M5_TOPOLOGY_MATCH",
+      "change": "Preserve topology and node count but scramble phase residue",
+      "kills_if": "Topology alone reproduces M0"
+    },
+    {
+      "id": "M6_DENSITY_MATCH",
+      "change": "Preserve interaction density and coupling strength but remove coherent phase lag",
+      "kills_if": "Density alone reproduces M0"
+    },
+    {
+      "id": "M7_TRIAD_MATCH",
+      "change": "Use triadic topology with no non-canceling phase residue",
+      "kills_if": "Triads match or outperform phase-lag dyads"
+    },
+    {
+      "id": "M8_GENERIC_ATTRACTOR",
+      "change": "Use standard attractor update with matched persistence but no phase-lag semantics",
+      "kills_if": "Generic attractor matches identity and recurrence metrics"
+    }
+  ],
+  "observables": {
+    "S_closure": "survival_cycles / total_cycles",
+    "P_lag": "phase_lag_coherence_across_recurrences",
+    "R_phase": "correlation between prior phase residue and next recurrence",
+    "C_cancel": "measured cancellation proximity",
+    "I_recur": "identity-like recurrence under changing local realization",
+    "A_return": "fraction of recurrences satisfying admissible return"
+  },
+  "thresholds": {
+    "tau": 0.05,
+    "phase_lag_coherence_minimum": 0.70,
+    "residue_phase_correlation_minimum": 0.60,
+    "closure_survival_minimum": 0.70
+  },
+  "hard_fail_conditions": [
+    "M1_ZERO_LAG matches M0",
+    "M2_RANDOM_LAG matches M0",
+    "M3_CANCELING_LAG preserves closure",
+    "M4_MEMORYLESS_LAG preserves recurrence identity",
+    "M5_TOPOLOGY_MATCH matches M0",
+    "M8_GENERIC_ATTRACTOR matches M0 on all observables"
+  ],
+  "success_condition_for_hypothesis": {
+    "plain": "Phase-lagged residue must explain closure better than topology, density, node count, random lag, or generic attractors.",
+    "formal": "S_closure(M0) - S_closure(Mi) >= tau for M1,M2,M3,M4,M5,M6,M8"
+  },
+  "run_matrix": {
+    "mechanism_classes_required": [
+      "phase_oscillator_network",
+      "cellular_automata_with_phase",
+      "graph_phase_dynamics",
+      "delay_coupled_agent_model"
+    ],
+    "seeds_per_model_minimum": 100,
+    "parameter_regimes": [
+      "low_noise",
+      "critical_noise",
+      "high_noise",
+      "weak_coupling",
+      "strong_coupling",
+      "near_cancellation",
+      "near_zero_lag",
+      "high_delay"
+    ]
+  },
+  "outputs_required": [
+    "raw_phase_timeseries",
+    "relation_recurrence_logs",
+    "phase_residue_logs",
+    "closure_survival_table",
+    "ablation_comparison_csv",
+    "effect_size_report",
+    "failure_cases",
+    "projection_scope_note",
+    "governance_recommendation"
+  ],
+  "governance": {
+    "default_status": "candidate_under_attack",
+    "if_pass": "supported_pending_replication",
+    "if_fail": "downgrade_to_descriptive_or_generic_attractor_equivalent",
+    "blocked_language": [
+      "proved",
+      "necessary law",
+      "physical truth",
+      "universal closure law"
+    ]
+  }
+}
