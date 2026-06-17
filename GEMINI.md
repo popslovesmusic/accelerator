@@ -718,11 +718,14 @@ After drafting the paper:
 2. Ensure any gaps are recorded in `registry/lexicon_gap_queue.json`.
 3. Update `registry/lexicon_validation_registry.json` if new evidence was produced for a term-role.
 
-### 10.11 Textbook Synchronization (Mandatory Post-Run)
-The Mono-Process Framework is a living mathematical program. After every research run that produces, modifies, or validates an induction, theorem, or bridge:
-1. The agent MUST update `docs/textbook/mono_process_textbook_complete.md` to reflect the new state of the formal program.
-2. This includes updating relevant chapters, the Symbol Glossary (Appendix A), the Operator Registry (Appendix B), and resolving Open Bridges (Appendix F).
-3. Textbook updates must be committed as part of the run's final state hygiene.
+## 10.11 Living SSOT Mandate: Textbook Synchronization (MANDATORY)
+The Mono-Process Framework is a living mathematical program. **`docs/textbook/mono_process_textbook_complete.md` is the Living Single Source of Truth (SSOT)** for the formal state of the project.
+
+**Mandate:** After every research run that produces, modifies, or validates an induction, theorem, bridge, or relational hierarchy:
+1.  **Mandatory Update:** The agent MUST update the textbook to reflect the new state of the formal program.
+2.  **Scope:** This includes updating relevant chapters, the Symbol Glossary (Appendix A), the Operator Registry (Appendix B), the Status Dashboard (Appendix D), and resolving Open Bridges (Appendix F).
+3.  **Hygiene:** Textbook updates MUST be committed as part of the run's final state hygiene. No research run is considered "DONE" until the Living SSOT is synchronized.
+4.  **Authority:** If a conflict exists between a registry and the textbook, the textbook (provided it contains valid evidence citations) is the primary authority for the formal program.
 
 ### 10.12 Manual Enforcement Protocol (Self-Audit)
 If the automated gate script is unavailable, the agent MUST perform this manual check:
