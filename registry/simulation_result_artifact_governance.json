@@ -13,7 +13,11 @@
       "retention_policy",
       "compression_status",
       "sqlite_index_status",
-      "provenance_binding"
+      "provenance_binding",
+      "tool_rigor_status",
+      "classification",
+      "claim_ceiling",
+      "evidentiary_weight"
     ]
   },
   "artifact_classes": {
@@ -53,5 +57,120 @@
     "provenance_manifest_required": true,
     "missing_artifact_behavior": "invalidate_or_downgrade_dependent_claims"
   },
-  "entries": []
+  "tool_rigor_status_states": {
+    "UNREVIEWED": "Toolchain or evaluator has not passed Rigor Endorsement review.",
+    "UNDER_REVIEW": "Toolchain or evaluator is in a formal review process but is not yet endorsable.",
+    "RIGOR_ENDORSED": "Toolchain or evaluator passed tool review, implementation audit, metric audit, reproducibility audit, and governance approval.",
+    "REVOKED": "Previously endorsed toolchain or evaluator failed drift, implementation, or governance review."
+  },
+  "governance_rules": [
+    {
+      "rule_id": "RIGOR_TOOL_001",
+      "rule": "Artifacts produced by non-endorsed toolchains are retained for reference but cannot be used for promotion, endorsement, theorem advancement, dependency propagation, or framework validation."
+    }
+  ],
+  "entries": [
+    {
+      "artifact_id": "MPF_GOV_DEMOTION_UNENDORSED_TOOL_001_PATCH",
+      "execution_id": "MPF_GOV_DEMOTION_UNENDORSED_TOOL_001",
+      "artifact_type": "report",
+      "canonical_path": "registry/governance/patches/MPF_GOV_DEMOTION_UNENDORSED_TOOL_001.json",
+      "content_hash": "sha256:27dd4cac775071f7b2c6c5ea67aa99318cfb45869323ee0c727c9a141edb3b00",
+      "size_bytes": 5915,
+      "storage_tier": "warm",
+      "retention_policy": "retain_for_governance_audit",
+      "compression_status": "none",
+      "sqlite_index_status": "metadata_only",
+      "provenance_binding": "governance_patch_artifact",
+      "tool_rigor_status": "RIGOR_ENDORSED",
+      "classification": "ACTIVE_GOVERNANCE_RECORD",
+      "claim_ceiling": "NOT_APPLICABLE",
+      "evidentiary_weight": "GOVERNANCE_AUTHORITY"
+    },
+    {
+      "artifact_id": "MPF_SIM_ARRAY_GRAPH_001_SUMMARY_2026_06_17",
+      "execution_id": "2026-06-17_run01_MPF_SIM_ARRAY_GRAPH_001",
+      "artifact_type": "report",
+      "canonical_path": "results/2026-06-17_run01_MPF_SIM_ARRAY_GRAPH_001/simulation_summary.md",
+      "content_hash": "sha256:f31739a275302770c1590402662170ddc7c5ecc3f21759993b66bf49a4c89f49",
+      "size_bytes": 1162,
+      "storage_tier": "warm",
+      "retention_policy": "retained_for_reference_only",
+      "compression_status": "none",
+      "sqlite_index_status": "metadata_only",
+      "provenance_binding": "campaign_summary",
+      "tool_rigor_status": "UNREVIEWED",
+      "classification": "PROVISIONAL_PENDING_RIGOR",
+      "claim_ceiling": "C1_DEFINED_PROVISIONAL",
+      "evidentiary_weight": "LOW"
+    },
+    {
+      "artifact_id": "MPF_SIM_ARRAY_GRAPH_001_FALSIFICATION_AUDIT_2026_06_17",
+      "execution_id": "2026-06-17_run01_MPF_SIM_ARRAY_GRAPH_001",
+      "artifact_type": "report",
+      "canonical_path": "results/2026-06-17_run01_MPF_SIM_ARRAY_GRAPH_001/falsification_audit.json",
+      "content_hash": "sha256:c40cf7cbc9b76c1cf911a107251e64a8c411087668ef6a778182a5d82e3b88dc",
+      "size_bytes": 488,
+      "storage_tier": "warm",
+      "retention_policy": "retained_for_reference_only",
+      "compression_status": "none",
+      "sqlite_index_status": "metadata_only",
+      "provenance_binding": "campaign_audit",
+      "tool_rigor_status": "UNREVIEWED",
+      "classification": "PROVISIONAL_PENDING_RIGOR",
+      "claim_ceiling": "C1_DEFINED_PROVISIONAL",
+      "evidentiary_weight": "LOW"
+    },
+    {
+      "artifact_id": "MPF_SIM_ARRAY_GRAPH_001_GOV_NOTE_2026_06_17",
+      "execution_id": "2026-06-17_run01_MPF_SIM_ARRAY_GRAPH_001",
+      "artifact_type": "report",
+      "canonical_path": "results/2026-06-17_run01_MPF_SIM_ARRAY_GRAPH_001/governance_update_patch.json",
+      "content_hash": "sha256:ece9aa752830b52868a27c53e613ab8de84db703a549b8984e1f3e3b1311e4b5",
+      "size_bytes": 481,
+      "storage_tier": "warm",
+      "retention_policy": "retained_for_reference_only",
+      "compression_status": "none",
+      "sqlite_index_status": "metadata_only",
+      "provenance_binding": "campaign_governance_note",
+      "tool_rigor_status": "UNREVIEWED",
+      "classification": "PROVISIONAL_PENDING_RIGOR",
+      "claim_ceiling": "C1_DEFINED_PROVISIONAL",
+      "evidentiary_weight": "LOW"
+    },
+    {
+      "artifact_id": "MPF_SIM_ART_001_SUMMARY_2026_06_17",
+      "execution_id": "2026-06-17_run01_MPF_SIM_ART_001",
+      "artifact_type": "report",
+      "canonical_path": "results/2026-06-17_run01_MPF_SIM_ART_001/simulation_summary.md",
+      "content_hash": "sha256:b7cbddb0728ea0d25ba0b4f76f19f3e589de1f040e0df68640a042bb9517b84a",
+      "size_bytes": 1121,
+      "storage_tier": "warm",
+      "retention_policy": "retained_for_reference_only",
+      "compression_status": "none",
+      "sqlite_index_status": "metadata_only",
+      "provenance_binding": "campaign_summary",
+      "tool_rigor_status": "UNREVIEWED",
+      "classification": "PROVISIONAL_PENDING_RIGOR",
+      "claim_ceiling": "C1_DEFINED_PROVISIONAL",
+      "evidentiary_weight": "LOW"
+    },
+    {
+      "artifact_id": "MPF_SIM_ART_001_FALSIFICATION_AUDIT_2026_06_17",
+      "execution_id": "2026-06-17_run01_MPF_SIM_ART_001",
+      "artifact_type": "report",
+      "canonical_path": "results/2026-06-17_run01_MPF_SIM_ART_001/falsification_audit.json",
+      "content_hash": "sha256:1cc320eee0eb8b46310bfd57f93d250bdf2eca0c23c349590236937e15c29eb6",
+      "size_bytes": 547,
+      "storage_tier": "warm",
+      "retention_policy": "retained_for_reference_only",
+      "compression_status": "none",
+      "sqlite_index_status": "metadata_only",
+      "provenance_binding": "campaign_audit",
+      "tool_rigor_status": "UNREVIEWED",
+      "classification": "PROVISIONAL_PENDING_RIGOR",
+      "claim_ceiling": "C1_DEFINED_PROVISIONAL",
+      "evidentiary_weight": "LOW"
+    }
+  ]
 }

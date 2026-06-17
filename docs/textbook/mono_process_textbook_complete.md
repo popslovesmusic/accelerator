@@ -103,6 +103,9 @@ When these members preserve lawful distinction, ordering, and admissibility, the
 3. **Aspect Positions:** States are treated as aspect positions within the whole relation.
 4. **Projected Patterns:** Nodes and entities are projected persistent patterns of the underlying whole-expression activity.
 
+**Governance Note (2026-06-17):**
+The June 17, 2026 ad hoc campaigns `MPF_SIM_ARRAY_GRAPH_001` and `MPF_SIM_ART_001` are currently labeled **[PROVISIONAL_PENDING_RIGOR]**. Within the current governance layer, any orientation-necessity, whole-expression-support, `aRT`-support, residue, or epsilon finding drawn from those runs is hypothesis-generating only and may not be used for theorem promotion, framework confirmation, ontology confirmation, dependency propagation, or evidence-based endorsement until the toolchain is Rigor-Endorsed and independently replicated.
+
 [Source: MPF_PATCH_RT_WHOLE_EXPRESSION_PRIMACY_001]
 
 **Formal Principle 1.2.3: Relation as Primitive (Option C)**
@@ -861,11 +864,14 @@ One can change orientation without advancing the process "forward" in time (e.g.
 
 ---
 
-## 5.2A OPEN_BRIDGE_001 : Orientation-Closure Bridge (LIVE_LINKED) (SUPPORTED_PENDING_REPLICATION)
+## 5.2A OPEN_BRIDGE_001 : Orientation-Closure Bridge (LIVE_LINKED) ([PROVISIONAL_PENDING_RIGOR])
 
-The Orientation-Closure Bridge no longer stands in its earlier direct-support form. That earlier formulation was **FALSIFIED** on 2026-05-30 through adversarial stress testing [Source: LFCR_001_STRESS_REPORT_001], the later procedural re-audit did **not** restore direct closure support [Source: results/pd_cg_v2_reaudit/reaudit_report.md], and the subsequent relational-conditioning retest also failed to support promotion on that stronger route [Source: results/pd_cg_v2r_relational_conditioning_retest/retest_report.md]. The active bridge was then reformulated on 2026-06-17 as a **Topological Selector** claim and its proof obligation was satisfied within the Run 08 campaign [Source: results/2026-06-16_run08_OPEN_BRIDGE_001_SATISFACTION/paper.md].
+The Orientation-Closure Bridge no longer stands in its earlier direct-support form. That earlier formulation was **FALSIFIED** on 2026-05-30 through adversarial stress testing [Source: LFCR_001_STRESS_REPORT_001], the later procedural re-audit did **not** restore direct closure support [Source: results/pd_cg_v2_reaudit/reaudit_report.md], and the subsequent relational-conditioning retest also failed to support promotion on that stronger route [Source: results/pd_cg_v2r_relational_conditioning_retest/retest_report.md]. The active bridge was then reformulated on 2026-06-17 as a **Topological Selector** claim and later entered governance containment because the supporting run remains pending tool-rigor qualification [Source: results/2026-06-16_run08_OPEN_BRIDGE_001_SATISFACTION/paper.md].
 
-**Current Status: SUPPORTED_PENDING_REPLICATION / STRUCTURAL_ONLY**
+**Current Status: [PROVISIONAL_PENDING_RIGOR] / STRUCTURAL_ONLY**
+
+**Containment Rule (2026-06-17):**
+Within the current governance layer, the reformulated selector-form bridge is retained as a provisional research object only. It may guide hypothesis generation, campaign planning, metric exploration, candidate induction targets, and tool development guidance, but it may not be used for theorem promotion, framework confirmation, ontology confirmation, dependency promotion, or evidence-based endorsement until the supporting toolchain receives Rigor Endorsement and the result is independently replicated.
 
 ### v1/v2 Falsification Summary
 Adversarial ablation testing (`LFCR_001`) showed that orientation coherence had a negligible effect on stable triadic closure survival ($\Delta S < 0.01$). Randomizing orientation under stress did not significantly degrade structural persistence compared to the full mechanism. Within the tested regime of that campaign, orientation was not supported as a direct closure driver.
@@ -912,10 +918,10 @@ The later retest respected the correction that `_R` must be handled as a relatio
 - **Scope limit:** this packaging remains `formal_procedural_only`, does not promote theorem status, and preserves explicit admissibility-window collapse, null-boundary, and equivalence-failure boundaries rather than suppressing them.
 
 ### Run 08 Satisfaction Summary
-The reformulated proof obligation attacked a narrower statement: orientation coherence conditions admissible knot-class selection, while closure stability remains residue-conditioned. Within the Run 08 campaign, coherent orientation regimes collapsed the observed knot-class distribution to a single modal class while ablated regimes retained high topological variance. Within these models, that satisfies the selector-form proof obligation for **OPEN_BRIDGE_001**.
+The reformulated proof obligation attacked a narrower statement: orientation coherence conditions admissible knot-class selection, while closure stability remains residue-conditioned. Within the Run 08 campaign, coherent orientation regimes collapsed the observed knot-class distribution to a single modal class while ablated regimes retained high topological variance. Within these models, that pattern remains a provisional observation pending tool-rigor qualification and independent replication; it is not currently admissible as established bridge support.
 
 ### Current Working Constraint
-Within the tested models, the safest governed reading is narrower than the original participatory-closure claim: orientation is supported as a selector on admissible topology, not as an independently sufficient driver of closure stability. The bridge is therefore supported only in its reformulated topological-selector form and remains pending cross-mechanism replication.
+Within the tested models, the safest governed reading is narrower than the original participatory-closure claim: orientation may act as a selector on admissible topology, not as an independently sufficient driver of closure stability. Under the present containment rule, even this narrower reading remains provisional until the generating toolchain is Rigor-Endorsed and the result is independently replicated.
 
 **Dependency Status:**
 Immediate structural claims are now eligible for rewrite or reroute review against the selector-form bridge, but they are not automatically promoted. Application projections ($gravity\_app$ and peers) remain blocked from promotion because bridge support does not propagate directly to high-level projections.
@@ -1829,7 +1835,7 @@ If the dashboard and chapter text disagree, the dashboard is authoritative until
 | Object ID | Type | Status | Claim Level | Dependencies | Active Campaigns | Evidence | Review Lock | Last Update |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **AXIOM_1_2_1** | AXIOM | **LOCKED** | AXIOMATIC | 0 | - | - | - | 2026-05-29 |
-| **OPEN_BRIDGE_001** | BRIDGE | **SUPPORTED_PENDING_REPLICATION** | **C4_STRUCTURAL_ONLY** | 4 | LFCR_001, PD_CG_PATCH_004, Run 08 | 5 | - | 2026-06-17 |
+| **OPEN_BRIDGE_001** | BRIDGE | **PROVISIONAL_PENDING_RIGOR** | **C1_DEFINED_PROVISIONAL / STRUCTURAL_ONLY** | 4 | LFCR_001, PD_CG_PATCH_004, Run 08 | 5 | - | 2026-06-17 |
 | **TC_asym** | THEOREM | **REVIEW_LOCK** | REVIEW_LOCK | 1 | LFCR_001 | 0 | **LOCKED** | 2026-05-30 |
 | **gravity_app** | APPLICATION | **REVIEW_LOCK** | **REVIEW_LOCK** | 3 | - | GRAVITY-APP-001 | **LOCKED** | 2026-06-17 |
 | **L5_RIGOR_FORKED_ATTACK** | CLAIM | **SUPPORTED** | **C5** | 5 | CLS_003 | CLS_003_RUN_001 | - | 2026-06-16 |
@@ -1849,8 +1855,8 @@ The formal program is represented as a directed dependency graph. Nodes represen
 **Graph-Derived Claim Caps:**
 | Object | Root Blocker | Current Cap | Reason |
 | :--- | :--- | :--- | :--- |
-| **TC_asym** | OPEN_BRIDGE_001 | **REVIEW_LOCK** | Current theorem wording still depends on a stronger participatory-closure reading than the supported selector bridge. |
-| **gravity_app** | OPEN_BRIDGE_001 | **REVIEW_LOCK** | Downstream of the bridge, but selector-form support does not authorize projection-level promotion. |
+| **TC_asym** | OPEN_BRIDGE_001 | **REVIEW_LOCK** | Current theorem wording still depends on a stronger participatory-closure reading than the provisional selector bridge. |
+| **gravity_app** | OPEN_BRIDGE_001 | **REVIEW_LOCK** | Downstream of the bridge, but provisional selector-form observations do not authorize projection-level promotion. |
 
 ---
 
@@ -1875,15 +1881,15 @@ A campaign is a living governance object responsible for attacking, verifying, o
 
 | Bridge ID | Bridge Name | Claim Under Attack | Linked Campaign | Status | Claim Level | Downstream Cap |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **OPEN_BRIDGE_001** | Orientation-Closure Bridge (Topological Selection) | Orientation coherence conditions admissible knot-class selection but is not independently sufficient for closure stability. | LFCR_001; PD_CG_V2R; PD_CG_PATCH_004; Run 08 | **SUPPORTED_PENDING_REPLICATION** | **C4** | **STRUCTURAL_ONLY** |
+| **OPEN_BRIDGE_001** | Orientation-Closure Bridge (Topological Selection) | Orientation coherence conditions admissible knot-class selection but is not independently sufficient for closure stability. | LFCR_001; PD_CG_V2R; PD_CG_PATCH_004; Run 08 | **PROVISIONAL_PENDING_RIGOR** | **C1** | **STRUCTURAL_ONLY** |
 
 **Current Campaign Details: OPEN_BRIDGE_001**
 - **LFCR_001:** Earlier bridge formulation falsified under stress ablation (direct support failed).
 - **PD_CG_V2R:** Re-audit confirmed orientation does not independently improve basin stability.
 - **PD_CG_PATCH_004:** Reformulated bridge as a **Topological Selector**. Orientation is now a constraint on admissible topology $T$ in the chain $\Delta \to R \to T \to A_{adm} \to \delta_a$.
 - **Run 08 (Satisfying Campaign):** Multi-seed TDA verification ($N=64$) established that orientation coherence narrows topological variance by $100\%$ ($Var(B_1)=0.000$ vs $0.085$). 
-- **Governed Interpretation:** Within these models, the bridge is **SUPPORTED_PENDING_REPLICATION** as a topological selection mechanism. Stability arises from residue-conditioned topological admissibility (Principle 2.X).
-- **Next Required Action:** Perform cross-mechanism verification in Graph Dynamics.
+- **Governed Interpretation:** Within these models, the bridge remains **PROVISIONAL_PENDING_RIGOR** as a topological selection mechanism candidate. Stability claims remain blocked from promotion pending tool-rigor qualification and independent replication.
+- **Next Required Action:** Complete tool-rigor qualification, then perform cross-mechanism verification in Graph Dynamics.
 
 ---
 
@@ -2138,10 +2144,15 @@ This index points to the primary evidence pools supporting the claims made in th
 | **Metastability Basins** | `results/2026-06-16_run03_CLS_003_EXTREME/` | ODE, PDE | Supported (C5) |
 | **Braid Formation** | `results/LFCR_001_M2_randomization/` | Graph, Agent | Provisional (C1) |
 | **Orientation Bias** | `results/LFCR_001_v2_analysis/` | CA, Graph | Supported (C4) |
-| **OPEN_BRIDGE_001 Topological Selector** | `results/2026-06-16_run08_OPEN_BRIDGE_001_SATISFACTION/` | PDE, Topological Analysis | Supported pending replication (C4 structural only) |
+| **[PROVISIONAL_PENDING_RIGOR] MPF_SIM_ARRAY_GRAPH_001** | `results/2026-06-17_run01_MPF_SIM_ARRAY_GRAPH_001/` | Python ad hoc graph simulation | Provisional pending rigor (C1 defined provisional) |
+| **[PROVISIONAL_PENDING_RIGOR] MPF_SIM_ART_001** | `results/2026-06-17_run01_MPF_SIM_ART_001/` | Python ad hoc whole-expression perturbation simulation | Provisional pending rigor (C1 defined provisional) |
+| **OPEN_BRIDGE_001 Topological Selector** | `results/2026-06-16_run08_OPEN_BRIDGE_001_SATISFACTION/` | PDE, Topological Analysis | Provisional pending rigor (C1 structural only) |
 | **Gravity-like Gradient** | `results/2026-05-25_232611_GRAVITY_APP_V1/` | PDE | Supported (C5) |
 | **Zeta Mapping** | `results/2026-06-16_run03_CLS_003_EXTREME/` | Graph, Box | Supported (L2) |
 | **Singularity Rebound** | `results/2026-05-22_run02_Singularity_Rebound/` | Graph | Supported (L3) |
+
+**Governance Containment Note (2026-06-17):**
+The two June 17 ad hoc campaign outputs listed above are retained for reference with **low evidentiary weight**. They may be used for hypothesis generation, campaign planning, metric exploration, candidate induction targets, and tool development guidance only.
 
 ### Historical Simulation Campaigns
 **Campaign ID: LFCR_001 (Orientation-Closure Attack)**
@@ -2201,7 +2212,7 @@ These items remain unsettled and are the primary targets for future induction an
 ### F.3 Open Bridge Registry
 | Bridge ID | Name | Current Status | Claim Cap |
 | :--- | :--- | :--- | :--- |
-| **OPEN_BRIDGE_001** | Orientation-Closure | **SUPPORTED_PENDING_REPLICATION** | **STRUCTURAL_ONLY** |
+| **OPEN_BRIDGE_001** | Orientation-Closure | **PROVISIONAL_PENDING_RIGOR** | **STRUCTURAL_ONLY** |
 
 ### F.4 Bridge Dependency Tables
 - **OPEN_BRIDGE_001 Requires Rewrite/Reroute Review For:** TC_asym, K, B_K.
@@ -2218,8 +2229,8 @@ These items remain unsettled and are the primary targets for future induction an
 - **OPEN_BRIDGE_001:** Earlier direct-support formulation falsified 2026-05-30 via Campaign LFCR_001 (Stress ablation Model B).
 - **OPEN_BRIDGE_001:** Later procedural re-audit dated 2026-06-17 did not restore the stronger direct-support bridge because residue-coupling did not separate in the tested model.
 - **OPEN_BRIDGE_001:** Later relational-conditioning retest dated 2026-06-17 respected `_R` as relation conditioning rather than residue removal, but still did not support promotion because basin reformation did not improve and boundary-front mediation worsened on average.
-- **OPEN_BRIDGE_001:** Reformulated 2026-06-17 as a **Topological Selector** bridge. The new claim identifies orientation as a constraint on admissible knot-class selection ($T$) rather than a direct driver of stability. Status moved to **C2_PENDING_ATTACK**.
-- **OPEN_BRIDGE_001:** Run 08 dated 2026-06-16, reviewed 2026-06-17, satisfied the selector-form proof obligation by showing coherent orientation narrowed admissible knot-class variance under the tested PDE + TDA stack. Status advanced to **SUPPORTED_PENDING_REPLICATION**.
+- **OPEN_BRIDGE_001:** Reformulated 2026-06-17 as a **Topological Selector** bridge. The new claim identifies orientation as a constraint on admissible knot-class selection ($T$) rather than a direct driver of stability. Its current governed state is **PROVISIONAL_PENDING_RIGOR** with a **C1_DEFINED_PROVISIONAL** ceiling under `RIGOR_TOOL_001`.
+- **OPEN_BRIDGE_001:** Run 08 dated 2026-06-16, reviewed 2026-06-17, showed coherent orientation narrowing admissible knot-class variance under the tested PDE + TDA stack. Under `RIGOR_TOOL_001`, that observation is retained as **PROVISIONAL_PENDING_RIGOR** pending tool qualification and independent replication rather than advanced to supported status.
 - **OPEN_BRIDGE_001:** Governance reset `PD_CG_PATCH_003` dated 2026-06-17 retained bare `<≠>` as the active preserved-distinction baseline, treated subscripts as tested qualifiers only, and blocked promotional reuse of `<≠>_R` / `<≠>_r` without a new direct baseline win.
 - **OPEN_BRIDGE_001:** Later affix-position test dated 2026-06-17 found that reciprocal affix position changed bounded model behavior, but neither `<=>_r` nor `r_<=>` beat bare `<=>`; no bridge promotion followed.
 
