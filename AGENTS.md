@@ -54,6 +54,7 @@ Every action must be grounded in the four foundational laws:
     5. What it does NOT prove
     6. Failure modes / uncertainty
 - **Zenodo Standards:** Publications must include a complete archival bundle (Metadata, Manifest, Falsification, Configs, Data).
+- **Textbook Synchronization Rule:** At the end of every governed task, audit `docs/textbook/mono_process_textbook_complete.md` against the task outputs, active registries, and current claim gates. If any linked textbook section is stale, patch it before finalizing the task or explicitly report the remaining mismatch.
 
 ## 5. Permissions & Prohibitions
 

@@ -1,0 +1,53 @@
+{
+  "campaign_id": "PD_CG_V3_SUBSCRIPT_DISCOVERY",
+  "title": "Preserved-Distinction Subscript Discovery",
+  "target": "OPEN_BRIDGE_001",
+  "status": "INDUCTED",
+  "purpose": "Determine whether preserved distinction needs a conditioning subscript, and if so which one.",
+  "governance_patch_reference": "PD_CG_PATCH_003_SUBSCRIPT_BASELINE_RESET",
+  "baseline_relation": {
+    "symbol": "<≠>",
+    "name": "Preserved Distinction",
+    "status": "CANDIDATE_BASELINE_RELATION",
+    "claim_status": "untested_after_V2R",
+    "formal_form": "(A <≠> a) ->_r O_-i ->_r partial_W_a ->_r W_a"
+  },
+  "candidate_subscript_rule": {
+    "rule_id": "R-SUB-001",
+    "statement": "A subscript on <≠> is permitted only if it specifies a tested conditioning mode that improves explanatory, predictive, or classificatory performance over the bare <≠> baseline.",
+    "baseline_required": true,
+    "default_action_if_untested": "omit_subscript"
+  },
+  "root_trace_requirement": {
+    "root_expression": "(E != 0) iff_R delta_a(E > 0)",
+    "rule": "Every candidate subscript x must include a proposed root-trace explanation before testing. If no root trace can be written, do not test it as formal notation."
+  },
+  "comparison": {
+    "baseline_test_form": "(A <≠> a) ->_r O_-i ->_r partial_W_a ->_r W_a",
+    "candidate_test_form": "(A <≠>_x a) ->_r O_-i ->_r partial_W_a ->_r W_a",
+    "comparison_rule": "candidate_test_form must be compared directly against baseline_test_form"
+  },
+  "primary_metrics": [
+    "basin_survival_gain",
+    "basin_reformation_gain",
+    "admissibility_class_recovery_gain",
+    "boundary_front_mediation_gain",
+    "whole_expression_RT_pass_rate",
+    "conditioned_vs_baseline_pass_rate"
+  ],
+  "success_condition": "A candidate subscript x is retained only if it improves at least one primary target without degrading boundary-front mediation or whole-expression pass rate.",
+  "failure_condition": "If no candidate subscript beats the bare baseline, retain <≠> without subscript.",
+  "allowed_claims": [
+    "PD_CG_V2R falsified the _R-conditioned improvement route within the tested model context.",
+    "<≠> remains an unpromoted candidate baseline relation.",
+    "Future subscripts must be tested against the bare preserved-distinction baseline."
+  ],
+  "blocked_claims": [
+    "Preserved distinction is verified.",
+    "Preserved distinction is falsified.",
+    "_R is universally invalid.",
+    "No subscript is needed.",
+    "A new subscript is valid without comparison to baseline.",
+    "OPEN_BRIDGE_001 is resolved."
+  ]
+}

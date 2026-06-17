@@ -1,0 +1,44 @@
+{
+  "registry_id": "P_ADM_CONSTRAINT_FAMILY_REGISTRY",
+  "version": "1.0.0",
+  "status": "ACTIVE",
+  "patch_id": "PADM_GAMMA_SEPARATION_001",
+  "description": "Registry defining the constituent constraint families of the Admissibility Predicate (P_adm).",
+  "logical_form": "P_adm = Gamma_E AND Gamma_R AND Gamma_T AND Gamma_O",
+  "families": [
+    {
+      "id": "Gamma_E",
+      "name": "Mismatch Preservation",
+      "role": "Non-null distinction maintenance",
+      "formal_placeholder": "mu_rel(x') > 0",
+      "description": "Ensures that the transition maintains active distinction and satisfies context mismatch thresholds."
+    },
+    {
+      "id": "Gamma_R",
+      "name": "Residue Compatibility",
+      "role": "History-conditioned legality",
+      "formal_placeholder": "R_constraint(x', R_t) = 1",
+      "description": "Ensures that the transition satisfies constraints established by the established relational trace (Principle 2.X)."
+    },
+    {
+      "id": "Gamma_T",
+      "name": "Topology Compatibility",
+      "role": "Topological admissibility",
+      "formal_definition": "Gamma_T(x', c, R, -(i)) = 1 iff T(x') is compatible with A_adm(t)",
+      "associated_object": "T",
+      "description": "Ensures that the transition produces an organization belonging to an admissible topological class (e.g. knot/braid selection)."
+    },
+    {
+      "id": "Gamma_O",
+      "name": "Orientation Compatibility",
+      "role": "Directional compatibility constraint",
+      "formal_placeholder": "O_alignment(x', -(i)) = 1",
+      "description": "Ensures the transition is directionally compatible with the current orientation reference frame."
+    }
+  ],
+  "governance": {
+    "evaluation_order": "implementation_dependent",
+    "strictness": "conjunctive_only",
+    "note": "Separates abstract boolean check from mechanism-specific realization."
+  }
+}

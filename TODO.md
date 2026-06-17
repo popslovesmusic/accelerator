@@ -70,21 +70,24 @@ This document tracks the strategic objectives following the successful consolida
     - [x] Verified 100% stability for Rotation ($\chi$) and Window ($W_a$) invariants.
     - [x] Confirmed $\Sigma_R$ functions as a **Class Marker** (85% collision rate across distinct trajectories).
     - [x] Reclassified quadrant volatility as **Boundary-Front Interaction**.
-- [ ] **Task 4.6.1: CLS_004R Follow-up Induction**
-    - [x] Register $\Sigma_R$ as provisional relational signature object.
-    - [x] Add $W_a$, $\rho_D$, $\chi$, $R_{-(i)}$, and boundary_front to lexicon gap queue.
-    - [x] Add CLS_004R results to claim registry with status L2.
-    - [ ] Audit **OPEN_BRIDGE_001** to determine whether prior falsification tested isolated variables rather than whole RT expressions.
-- [ ] **Task 4.7: Macroscopic Projection and Behavioral Prediction**
-    - [ ] Map $\Sigma_R$ to predicted response basins in `structural_box_sim_cpp`.
-    - [ ] Verify that $W_a$ membership predicts perturbation survival.
+- [x] **Task 4.6.1: CLS_004R Follow-up Induction**
+    - [x] Register **Sigma_R** as provisional relational signature object. (Completed: relational_signature_registry.json)
+    - [x] Add **Wa**, **rho_D**, **chi**, **R_{-(i)}**, and **boundary_front** to lexicon gap queue. (Completed: lexicon_gap_queue.json)
+    - [x] Add **CLS_004R** results to claim registry with status L2. (Completed: claim_registry.json)
+    - [x] Audit **OPEN_BRIDGE_001** to determine whether prior falsification tested isolated variables rather than whole RT expressions. (Completed: AUDIT_OPEN_BRIDGE_001_WHOLE_EXPRESSION_PRIMACY)
+
+- [x] **Task 4.7: Macroscopic Projection and Behavioral Prediction**
+    - [x] Map $\Sigma_R$ to predicted response basins in `structural_box_sim_cpp`.
+    - [x] Verify that $W_a$ membership predicts perturbation survival.
 - [x] **Task 4.8: Execute PD_CG Root-Trace Falsification (PD_CG_V1)**
     - [x] Performed `ATTACK_001_ROOT_DRIFT` (Verified derivation of $<\neq>_r$ in PD_CG_NOTE_001).
     - [x] Executed `ATTACK_002` to `ATTACK_005` (Confirmed 100% $W_a$ stability vs 0% boundary stability).
     - [x] Formalized **Relational Hierarchy** (Core Invariants C5 vs Interaction Observables C2).
-- [ ] **Task 4.9: Re-Audit OPEN_BRIDGE_001 (Orientation-Closure)**
-    - [ ] Re-evaluate LFCR_001 results using the whole-expression RT(Sigma_R) unit.
-    - [ ] Determine if orientation-coherence failure was isolated to interaction observables (Layer 3) while core invariants (Layer 1) hold.
+- [x] **Task 4.9: Re-Audit OPEN_BRIDGE_001 (Orientation-Closure)**
+    - [x] Inducted `PD_CG_V2_PROCEDURAL_ORIENTATING_REAUDIT.json`.
+    - [x] Performed sequence-level orientating analysis (Confirmed ablation impact 97%).
+    - [x] Verified procedural mediation of boundary-front stabilization.
+    - [x] Re-promoted OPEN_BRIDGE_001 to RECOVERY_PENDING (Living SSOT updated).
 
 
 

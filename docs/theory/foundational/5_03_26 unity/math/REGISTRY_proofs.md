@@ -26,3 +26,6 @@ P018 | Formal Proof: Geometric Projection | L029 | formally_proven | P-operator 
 P019 | Formal Proof: Relational Array | L030 | formally_proven | multi-relational branching topology derivation
 P020 | Formal Proof: Tree Theorem | L031, L032, L033 | formally_proven | unified ontological unity derivation
 P021 | Tree Theorem (v2) | L028, L029, L030 | simulated | verified differentiated field-rms stabilization
+P032 | MT-003 Restricted Local Proof (Non-Empty Admissible Image) | MT-003 | restricted_local_argument_only | additive bounded proof artifact; no theorem promotion
+P033 | MT-002 Restricted Local Proof (Null-Path Transport Identity) | MT-002 | restricted_local_argument_only | additive bounded proof artifact; no theorem promotion
+P034 | MT-001 Restricted Local Proof (Projection Idempotence Under Stable Admissibility) | MT-001 | restricted_local_argument_only | additive bounded proof artifact; no theorem promotion

@@ -5077,6 +5077,61 @@
       }
     },
     {
+      "term": "orientation_pattern",
+      "aliases": [
+        "Orientation Field",
+        "Tuning Condition"
+      ],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "Introduced in MPF_PATCH_ORIENTATION_PATTERN_PRINCIPLE_001. Distinguishes orientation as a tuning condition over the RT-expression field rather than a spatial vector.",
+      "proposed_definition": "The array-wide tuning condition that determines which distinction-pattern relations become admissible, coupled, selected, or projected.",
+      "primitive_mapping": {
+        "orientation_minus_i": "pattern_tuning"
+      }
+    },
+    {
+      "term": "W_a",
+      "aliases": [
+        "Admissibility Window"
+      ],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "Defined in CLS_004R as the fundamental bounding region for process continuation.",
+      "proposed_definition": "The locally resolved domain of admissible transitions for a given process state.",
+      "primitive_mapping": {
+        "delta": "boundary_limit"
+      }
+    },
+    {
+      "term": "rho_D",
+      "aliases": [
+        "Continuation Density"
+      ],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "Introduced in CLS_004R to measure the local intensity of process continuation events.",
+      "proposed_definition": "The density of admissible updates within a localized process region.",
+      "primitive_mapping": {
+        "rho": "event_density"
+      }
+    },
+    {
+      "term": "chi",
+      "aliases": [
+        "Process Sensitivity",
+        "Susceptibility"
+      ],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "Identified in CLS_004R as the response coefficient of a process basin to external orientation forcing.",
+      "proposed_definition": "The degree to which a process basin re-aligns its orientation aspects in response to epsilon pressure.",
+      "primitive_mapping": {
+        "epsilon": "forcing_input",
+        "orientation_minus_i": "alignment_response"
+      }
+    },
+    {
       "term": "orientation_event_chain",
       "symbol": "R_minus_i",
       "status": "GAP_OPEN",
@@ -5100,16 +5155,385 @@
       }
     },
     {
+      "term": "boundary_front_mediation",
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "Introduced in PD_CG_V2 procedural re-audit as an explicit observable for whether orientating shifts co-vary with boundary-front reorganization.",
+      "source_context": {
+        "source_type": "governed_run_output",
+        "source_path_or_note": "results/pd_cg_v2_reaudit/reaudit_results.json"
+      },
+      "proposed_definition": "An operational observable measuring whether orientating-step variation covaries with boundary-front reorganization inside a tested procedural model.",
+      "process_rewrite": "A scoped co-variation measure between orientating updates and boundary-front reorganization events.",
+      "primitive_mapping": {
+        "delta": "boundary-front transition pressure",
+        "orientation_minus_i": "orientating-step variation",
+        "residue": "history-conditioned coupling context"
+      },
+      "proposed_roles": [
+        {
+          "role_name": "interaction_observable",
+          "operational_definition": "Used to test whether orientating dynamics mediate boundary-front reorganization in a bounded simulation.",
+          "metrics": [
+            "correlation_or_covariation_score"
+          ],
+          "candidate_tools": [
+            "pd_cg_v2_reaudit_analyzer.py"
+          ],
+          "falsification_condition": "boundary-front reorganization remains unchanged under orientating ablation or shows no measurable co-variation with orientating updates",
+          "evidence_level": "L0",
+          "charter_classification": "provisional"
+        }
+      ],
+      "governance_status": "not_verified"
+    },
+    {
+      "term": "sequence_recoverability",
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "Introduced in PD_CG_V2 procedural re-audit as an operational observable for recoverable orientating chains.",
+      "source_context": {
+        "source_type": "governed_run_output",
+        "source_path_or_note": "results/pd_cg_v2_reaudit/reaudit_results.json"
+      },
+      "proposed_definition": "An operational observable measuring whether a sequence of orientating states remains recoverably ordered across update steps inside a tested model.",
+      "process_rewrite": "A bounded measure of step-to-step orientating continuity for a residue-conditioned procedure.",
+      "primitive_mapping": {
+        "orientation_minus_i": "stepwise orientating state",
+        "residue": "historical coupling continuity"
+      },
+      "proposed_roles": [
+        {
+          "role_name": "sequence_observable",
+          "operational_definition": "Used to test whether orientating is recoverable as a sequence rather than only as isolated labels.",
+          "metrics": [
+            "stepwise continuity score"
+          ],
+          "candidate_tools": [
+            "pd_cg_v2_reaudit_analyzer.py"
+          ],
+          "falsification_condition": "stepwise orientating continuity is indistinguishable from randomized orientating sequences",
+          "evidence_level": "L0",
+          "charter_classification": "provisional"
+        }
+      ],
+      "governance_status": "not_verified"
+    },
+    {
+      "term": "Sigma_null",
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "Introduced in PD_CG_V2R as a null-conditioning whole-expression control for relational basin signature comparison.",
+      "source_context": {
+        "source_type": "governed_run_output",
+        "source_path_or_note": "results/pd_cg_v2r_relational_conditioning_retest/retest_results.json"
+      },
+      "proposed_definition": "A null-conditioning control expression used to compare whole-expression procedural organization against Sigma_R inside a bounded model.",
+      "process_rewrite": "A control whole-expression in which relation conditioning is withheld rather than removed as a residue-like variable.",
+      "primitive_mapping": {
+        "orientation_minus_i": "orientating chain under null conditioning",
+        "delta": "unconditioned admissibility transition context"
+      },
+      "proposed_roles": [
+        {
+          "role_name": "control_expression",
+          "operational_definition": "Used as the whole-expression control against Sigma_R in conditioned-vs-null comparisons.",
+          "metrics": [
+            "whole_expression_distance",
+            "comparative recovery metrics"
+          ],
+          "candidate_tools": [
+            "pd_cg_v2r_relational_conditioning_retest.py"
+          ],
+          "falsification_condition": "Sigma_null is treated as a semantic primitive rather than a bounded comparison control",
+          "evidence_level": "L0",
+          "charter_classification": "provisional"
+        }
+      ],
+      "governance_status": "not_verified"
+    },
+    {
+      "term": "relational_conditioning_mode",
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "Introduced in PD_CG_V2R to operationalize _R as a relation-conditioning mode rather than a residue variable.",
+      "source_context": {
+        "source_type": "governed_run_output",
+        "source_path_or_note": "results/pd_cg_v2r_relational_conditioning_retest/retest_results.json"
+      },
+      "proposed_definition": "A bounded process mode in which a relation is evaluated under relational conditioning.",
+      "process_rewrite": "A contextual coupling qualifier applied to a whole relation rather than a state noun or independent operator.",
+      "primitive_mapping": {
+        "residue": "constraint-persistence qualifier",
+        "delta": "conditioned transition context"
+      },
+      "proposed_roles": [
+        {
+          "role_name": "contextual_qualifier",
+          "operational_definition": "Used to compare conditioned vs unconditioned relation behavior inside a procedural model.",
+          "metrics": [
+            "comparative recovery metrics"
+          ],
+          "candidate_tools": [
+            "pd_cg_v2r_relational_conditioning_retest.py"
+          ],
+          "falsification_condition": "conditioned and null relation behavior remain indistinguishable across the declared whole-expression comparisons",
+          "evidence_level": "L0",
+          "charter_classification": "provisional"
+        }
+      ],
+      "governance_status": "not_verified"
+    },
+    {
+      "term": "basin_reformation_rate",
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "Introduced in PD_CG_V2R as a recovery observable for post-shock whole-expression reformation.",
+      "source_context": {
+        "source_type": "governed_run_output",
+        "source_path_or_note": "results/pd_cg_v2r_relational_conditioning_retest/retest_results.json"
+      },
+      "proposed_definition": "An operational observable measuring whether a basin reforms within a bounded recovery horizon after disruption.",
+      "process_rewrite": "A post-disruption re-entry measure for procedural admissibility organization.",
+      "primitive_mapping": {
+        "delta": "post-shock transition pressure",
+        "rho": "continuation capacity during recovery"
+      },
+      "proposed_roles": [
+        {
+          "role_name": "recovery_observable",
+          "operational_definition": "Used to test whole-expression reformation after declared shocks in a bounded model.",
+          "metrics": [
+            "post-shock recovery fraction"
+          ],
+          "candidate_tools": [
+            "pd_cg_v2r_relational_conditioning_retest.py"
+          ],
+          "falsification_condition": "post-shock reformation is indistinguishable across conditioned and null controls",
+          "evidence_level": "L0",
+          "charter_classification": "provisional"
+        }
+      ],
+      "governance_status": "not_verified"
+    },
+    {
+      "term": "admissibility_class_recovery",
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "Introduced in PD_CG_V2R as a recovery observable for return to admissibility-class organization after disruption.",
+      "source_context": {
+        "source_type": "governed_run_output",
+        "source_path_or_note": "results/pd_cg_v2r_relational_conditioning_retest/retest_results.json"
+      },
+      "proposed_definition": "An operational observable measuring whether a disturbed process returns to its prior admissibility-class organization within a bounded horizon.",
+      "process_rewrite": "A scoped return-to-class measure for whole-expression procedural organization.",
+      "primitive_mapping": {
+        "rho": "admissibility-class membership continuity",
+        "orientation_minus_i": "orientating class continuity"
+      },
+      "proposed_roles": [
+        {
+          "role_name": "class_recovery_observable",
+          "operational_definition": "Used to test whether conditioned procedural organization returns to its baseline admissibility class after a disturbance.",
+          "metrics": [
+            "class-return fraction"
+          ],
+          "candidate_tools": [
+            "pd_cg_v2r_relational_conditioning_retest.py"
+          ],
+          "falsification_condition": "class return does not improve or collapses under conditioned-vs-null comparison",
+          "evidence_level": "L0",
+          "charter_classification": "provisional"
+        }
+      ],
+      "governance_status": "not_verified"
+    },
+    {
+      "term": "<\u2260>",
+      "aliases": ["Preserved Distinction"],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "PD_CG_PATCH_003 baseline reset establishing bare preserved distinction as the active comparison baseline after the failed _R-conditioned route.",
+      "source_context": {
+        "source_type": "governance_patch",
+        "source_path_or_note": "PD_CG_PATCH_003_SUBSCRIPT_BASELINE_RESET"
+      },
+      "proposed_definition": "A baseline relation in which two processes remain distinguishable while participating in a procedural relation.",
+      "process_rewrite": "A bare preserved-distinction relation used as the default comparison baseline before any subscript qualification is retained.",
+      "primitive_mapping": {
+        "epsilon": "preserved distinguishability pressure",
+        "delta": "admissible procedural participation"
+      },
+      "proposed_roles": [
+        {
+          "role_name": "baseline_relation",
+          "operational_definition": "Used as the bare preserved-distinction baseline against which any candidate subscripted form must be compared.",
+          "falsification_condition": "the bare preserved-distinction relation introduces a floating primitive or fails root trace requirements",
+          "evidence_level": "L0",
+          "charter_classification": "provisional"
+        }
+      ],
+      "governance_status": "not_verified"
+    },
+    {
       "term": "<\u2260>_r",
       "aliases": ["Residue-Coupled Preserved Distinction"],
       "status": "GAP_OPEN",
       "default_claim_status": "PROVISIONAL",
       "reason_for_induction": "Candidate derived operator proposed in PD_CG_V1 for coupling Affect and Admissibility.",
-      "proposed_definition": "A derived operator where two processes remain residue-coupled while preserving non-identity.",
+      "source_context": {
+        "source_type": "governance_patch",
+        "source_path_or_note": "PD_CG_PATCH_003_SUBSCRIPT_BASELINE_RESET"
+      },
+      "proposed_definition": "A candidate conditioning-qualified form of preserved distinction where two processes were tested under an _R-style qualifier while preserving non-identity.",
+      "process_rewrite": "A candidate subscripted preserved-distinction relation that must outperform the bare <≠> baseline before retention.",
       "primitive_mapping": {
         "epsilon": "preserved_distinction",
         "residue": "coupling_history"
-      }
+      },
+      "proposed_roles": [
+        {
+          "role_name": "candidate_conditioning_qualifier",
+          "operational_definition": "A tested but currently non-promoting qualifier on preserved distinction.",
+          "falsification_condition": "the qualifier fails to improve explanatory, predictive, or classificatory performance over the bare <≠> baseline",
+          "evidence_level": "L0",
+          "charter_classification": "provisional",
+          "notes": [
+            "PD_CG_V2R falsified the _R-conditioned improvement route within the tested synthetic model context.",
+            "Do not use <≠>_R or <≠>_r for promotion until a new baseline comparison supports a specific qualifier."
+          ]
+        }
+      ],
+      "governance_status": "do_not_use_for_promotion"
+    },
+    {
+      "term": "candidate_subscript_qualifier",
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "PD_CG_PATCH_003 rule R-SUB-001 governing when a subscript may appear on <≠>.",
+      "source_context": {
+        "source_type": "governance_patch",
+        "source_path_or_note": "PD_CG_PATCH_003_SUBSCRIPT_BASELINE_RESET"
+      },
+      "proposed_definition": "A tested conditioning mode placed on <≠> only when it improves performance over the bare preserved-distinction baseline.",
+      "process_rewrite": "A non-decorative qualifier that earns inclusion by direct comparison to bare preserved distinction.",
+      "proposed_roles": [
+        {
+          "role_name": "qualification_rule",
+          "operational_definition": "Used to govern whether a candidate subscript x is retained on <≠>.",
+          "falsification_condition": "a candidate subscript is retained without direct baseline comparison or without measurable improvement",
+          "evidence_level": "L0",
+          "charter_classification": "provisional"
+        }
+      ],
+      "governance_status": "not_verified"
+    },
+    {
+      "term": "<=>",
+      "aliases": ["bare_reciprocal_relation"],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "Introduced in PD_CG_V3_AFFIX_POSITION_TEST as the bare reciprocal relation baseline for affix-position comparison.",
+      "source_context": {
+        "source_type": "governed_campaign",
+        "source_path_or_note": "campaigns/PD_CG_V3_AFFIX_POSITION_TEST.json"
+      },
+      "proposed_definition": "A candidate reciprocal procedural relation in which Affecting and admissibility stand in an unqualified mutual relation.",
+      "process_rewrite": "A bare reciprocal relation used as the baseline against which affixed reciprocal forms are compared.",
+      "primitive_mapping": {
+        "epsilon": "distinguishing reciprocity pressure",
+        "delta": "mutual admissible continuation"
+      },
+      "proposed_roles": [
+        {
+          "role_name": "baseline_relation",
+          "operational_definition": "Used as the bare reciprocal baseline in affix-position comparisons.",
+          "falsification_condition": "the bare reciprocal relation cannot be operationalized without collapsing into a hidden affixed or floating primitive form",
+          "evidence_level": "L0",
+          "charter_classification": "provisional"
+        }
+      ],
+      "governance_status": "not_verified"
+    },
+    {
+      "term": "<=>_r",
+      "aliases": ["subscripted_reciprocal_relation"],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "Introduced in PD_CG_V3_AFFIX_POSITION_TEST as the subscripted reciprocal relation candidate.",
+      "source_context": {
+        "source_type": "governed_campaign",
+        "source_path_or_note": "campaigns/PD_CG_V3_AFFIX_POSITION_TEST.json"
+      },
+      "proposed_definition": "A candidate reciprocal relation evaluated under r-conditioning at the relation level.",
+      "process_rewrite": "A subscript-qualified reciprocal relation that must outperform bare <=> before retention.",
+      "primitive_mapping": {
+        "epsilon": "reciprocal distinction pressure",
+        "residue": "relation-level conditioning context"
+      },
+      "proposed_roles": [
+        {
+          "role_name": "candidate_conditioning_qualifier",
+          "operational_definition": "Used to test whether relation-level r-conditioning improves reciprocal procedural organization over bare <=>.",
+          "falsification_condition": "the subscripted form fails to improve bounded model performance over the bare reciprocal baseline",
+          "evidence_level": "L0",
+          "charter_classification": "provisional"
+        }
+      ],
+      "governance_status": "not_verified"
+    },
+    {
+      "term": "r_<=>",
+      "aliases": ["prefixed_reciprocal_relation"],
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "Introduced in PD_CG_V3_AFFIX_POSITION_TEST as the prefixed reciprocal relation candidate.",
+      "source_context": {
+        "source_type": "governed_campaign",
+        "source_path_or_note": "campaigns/PD_CG_V3_AFFIX_POSITION_TEST.json"
+      },
+      "proposed_definition": "A candidate reciprocal relation in which an r-mode governs or generates the reciprocal procedural relation.",
+      "process_rewrite": "A prefixed reciprocal relation form that must be tested separately from the subscripted form and from the bare baseline.",
+      "primitive_mapping": {
+        "epsilon": "reciprocal distinction pressure",
+        "residue": "procedure-governing r-mode"
+      },
+      "proposed_roles": [
+        {
+          "role_name": "candidate_generator_modifier",
+          "operational_definition": "Used to test whether an r-governed reciprocal procedure outperforms bare <=> without being collapsed into <=>_r.",
+          "falsification_condition": "the prefixed form fails to improve bounded model performance over the bare reciprocal baseline or is treated as equivalent to the subscripted form without testing",
+          "evidence_level": "L0",
+          "charter_classification": "provisional"
+        }
+      ],
+      "governance_status": "not_verified"
+    },
+    {
+      "term": "affix_position_separation_score",
+      "status": "GAP_OPEN",
+      "default_claim_status": "PROVISIONAL",
+      "reason_for_induction": "Introduced in PD_CG_V3_AFFIX_POSITION_TEST as a metric for behavioral separation between reciprocal relation affix forms.",
+      "source_context": {
+        "source_type": "governed_campaign",
+        "source_path_or_note": "campaigns/PD_CG_V3_AFFIX_POSITION_TEST.json"
+      },
+      "proposed_definition": "A bounded whole-expression distance score measuring whether two affix-position variants behave differently inside the tested procedural model.",
+      "process_rewrite": "A scoped separation metric for comparing bare, subscripted, and prefixed reciprocal relation forms.",
+      "primitive_mapping": {
+        "rho": "whole-expression organizational difference",
+        "delta": "comparative procedural separation"
+      },
+      "proposed_roles": [
+        {
+          "role_name": "comparison_metric",
+          "operational_definition": "Used to decide whether affix position changes bounded model behavior.",
+          "falsification_condition": "the compared affix forms remain indistinguishable under the declared whole-expression metric",
+          "evidence_level": "L0",
+          "charter_classification": "provisional"
+        }
+      ],
+      "governance_status": "not_verified"
     },
     {
       "term": "~_A",

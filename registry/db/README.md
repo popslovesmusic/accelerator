@@ -62,11 +62,13 @@ python scripts/db/ingest_tool_health.py
 
 ### Supersession Detection
 
-Shadow, backup, and legacy relationships are detected and linked via:
+Explicit supersession declarations in governed source artifacts are linked via:
 
 ```bash
 python scripts/db/build_supersession_edges.py --apply
 ```
+
+The builder backfills missing `docs/**/*.md` and `registry/**/*.md` artifact rows before rebuilding the graph, then emits only explicit lineage edges it can resolve to real indexed artifacts.
 
 ### Supersession Edge Confidence & Audit
 
@@ -75,8 +77,8 @@ python scripts/db/build_supersession_edges.py --apply
 Confidence levels:
 
 - `verified`: Direct current evidence identifies one artifact as superseding another.
-- `probable`: Strong filename/path/version relationship supports lineage.
-- `weak`: Pattern-only suggestion.
+- `probable`: Reserved for future curated heuristics; not emitted by the current builder.
+- `weak`: Reserved for future low-confidence suggestions; not emitted by the current builder.
 
 To audit supersession edge quality:
 

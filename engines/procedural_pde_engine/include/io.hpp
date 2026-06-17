@@ -18,6 +18,8 @@ inline void save_snapshot_2d(const std::string& path, const SimulationState& sta
     out.write(reinterpret_cast<const char*>(state.epsilon.data()), n * sizeof(float));
     out.write(reinterpret_cast<const char*>(state.R.data()), n * sizeof(float));
     out.write(reinterpret_cast<const char*>(state.A.data()), n * sizeof(float));
+    out.write(reinterpret_cast<const char*>(state.I.x.data()), n * sizeof(float));
+    out.write(reinterpret_cast<const char*>(state.I.y.data()), n * sizeof(float));
 }
 
 } // namespace pde

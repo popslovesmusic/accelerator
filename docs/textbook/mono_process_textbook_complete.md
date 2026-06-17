@@ -78,15 +78,26 @@ Within the governance layer, Axiom 1.2.1 constitutes the **Axiomatic Floor**. It
 
 ---
 
-## 1.2A The RT/Core Indivisibility and Affect-Effect (Provisional Scaffold)
+## 1.2A The RT/Core Indivisibility and Whole Expression Primacy
 
 Within the root statement, the framework identifies the **RT/Core** expression as an indivisible structural unit.
 
-**Formal Statement 1.2.2: RT/Core Indivisibility**
+**Formal Statement 1.2.2: RT/Core Indivisibility (PATCH_RT_001)**
 $$ \text{RT/Core} := \{ \text{Law}, \text{Operator}, \text{Truth} \} $$
 
 **Commentary:**
 Law, Operator, and Truth are not separate components but three process-aspects of the indivisible RT/Core expression. The expression cannot be decomposed into independent physical or logical parts [Source: IND_RT_CORE_AFFECT_EFFECT_001].
+
+**Formal Principle 1.2.2B: Whole Expression Primacy (PATCH_RT_WHOLE_EXPRESSION_PRIMACY_001)**
+An RT expression is the minimum admissible unit of analysis. Internal aspect positions (e.g., orientation, residue, admissibility) are not granted ontological priority over the complete expression. 
+$$ \text{Process} = [\mathcal{E}, \mathcal{R}, \rho, \mathcal{K}, \delta, -(i)]_{\text{whole}} $$
+
+**Governing Effect:**
+1. **No Modular Ablation:** Testing an isolated aspect by randomizing it while keeping others fixed is methodologically inconsistent with the framework ontology.
+2. **Aspect Positions:** States are treated as aspect positions within the whole relation.
+3. **Projected Patterns:** Nodes and entities are projected persistent patterns of the underlying whole-expression activity.
+
+[Source: MPF_PATCH_RT_WHOLE_EXPRESSION_PRIMACY_001]
 
 **Formal Principle 1.2.3: Relation as Primitive (Option C)**
 Within this framework, **Relation ($D$) is the fundamental primitive**. A distinction array $\chi_D$ is not a state container but a **structural organization of relations**.
@@ -809,17 +820,20 @@ By classifying these pre-scalar domains, we provide a rigorous way to distinguis
 
 In the Mono-Process Framework, **Orientation** is the relational reference frame selected by the process to resolve an asymmetric distinction. It is denoted by the operator $-(i)$.
 
-**Formal Statement 5.1.1: Orientation Induction**
+**Formal Principle 5.1.1: Orientation Pattern Principle (PATCH_ORIENTATION_PATTERN_PRINCIPLE_001)**
+In a distinction array, orientation is not a primitive direction through pre-existing space. It is a tuning condition over the array’s RT-expression field. Changing the orientation pattern does not move objects inside the array; it changes which distinction-pattern relations become admissible, coupled, selected, or projected.
+
+**Formal Statement 5.1.2: Orientation Induction**
 $$ (asym\_app)nDOF \downarrow -(i) $$
 $$ -(i) \in \mathcal{O} $$
-$$ \mathcal{O} := [ \text{MISSING DEFINITION: Formal definition of Orientation Space } \mathcal{O} ] $$
+$$ \mathcal{O} := \{ \text{Tuning conditions over the RT-expression field} \} $$
 
 **Commentary:**
 Orientation is not an inherent property of space; it is an operational requirement of the process. When a mismatch is asymmetric ($D(S_1|S_2) \neq D(S_2|S_1)$), the process must "orient" itself to determine the path of least resistance for the next continuation. $-(i)$ represents the current state of that relational alignment.
 
 In the context of asymmetric triadic closure ($TC_{asym}$), a local orientation reference $-(i)_a$ may participate in **ordering the distinction-node set**, functioning as the local anchor for closure formation [Source: MPF-REFINE-ASYM Sec 5].
 
-**Formal Statement 5.1.2: Anchored Closure**
+**Formal Statement 5.1.3: Anchored Closure**
 $$ TC_{asym,a} := \{N_1, N_2, N_3\}_{-(i)_a} $$
 
 **Commentary:**
@@ -841,14 +855,17 @@ One can change orientation without advancing the process "forward" in time (e.g.
 
 ---
 
-## 5.2A OPEN_BRIDGE_001 : Orientation-Closure Bridge (LIVE_LINKED) (UNRESOLVED) (DO_NOT_PROMOTE)
+## 5.2A OPEN_BRIDGE_001 : Orientation-Closure Bridge (LIVE_LINKED) (SUPPORTED_PENDING_REPLICATION)
 
-The Orientation-Closure Bridge remains unresolved. Its earlier direct-support formulation was **FALSIFIED** on 2026-05-30 through adversarial stress testing [Source: LFCR_001_STRESS_REPORT_001], the later procedural re-audit did **not** restore bridge support [Source: results/pd_cg_v2_reaudit/reaudit_report.md], and the subsequent relational-conditioning retest also failed to support promotion [Source: results/pd_cg_v2r_relational_conditioning_retest/retest_report.md].
+The Orientation-Closure Bridge no longer stands in its earlier direct-support form. That earlier formulation was **FALSIFIED** on 2026-05-30 through adversarial stress testing [Source: LFCR_001_STRESS_REPORT_001], the later procedural re-audit did **not** restore direct closure support [Source: results/pd_cg_v2_reaudit/reaudit_report.md], and the subsequent relational-conditioning retest also failed to support promotion on that stronger route [Source: results/pd_cg_v2r_relational_conditioning_retest/retest_report.md]. The active bridge was then reformulated on 2026-06-17 as a **Topological Selector** claim and its proof obligation was satisfied within the Run 08 campaign [Source: results/2026-06-16_run08_OPEN_BRIDGE_001_SATISFACTION/paper.md].
 
-**Current Status: REWRITE_PENDING / DO_NOT_PROMOTE**
+**Current Status: SUPPORTED_PENDING_REPLICATION / STRUCTURAL_ONLY**
 
 ### v1/v2 Falsification Summary
 Adversarial ablation testing (`LFCR_001`) showed that orientation coherence had a negligible effect on stable triadic closure survival ($\Delta S < 0.01$). Randomizing orientation under stress did not significantly degrade structural persistence compared to the full mechanism. Within the tested regime of that campaign, orientation was not supported as a direct closure driver.
+
+**Methodological Audit (2026-06-17):**
+The `LFCR_001` campaign is now subject to a **Methodological Warning**. The ablation strategy used (Model B) randomized orientation independently of residue and admissibility aspects. Under the **Whole Expression Primacy** rule (1.2.2B), this constitutes a "component-first" analytical decomposition. The observed decoupling may be an artifact of this fragmentation rather than a property of the whole process [Source: AUDIT_OPEN_BRIDGE_001_WHOLE_EXPRESSION_PRIMACY].
 
 ### PD_CG_V2 Procedural Re-Audit Summary
 The later procedural re-audit changed the evaluative unit from static orientation labels to a sequence-level orientating procedure inside whole-expression `RT(Sigma_R)` analysis.
@@ -888,16 +905,19 @@ The later retest respected the correction that `_R` must be handled as a relatio
 - **Governed note:** `MT-001` now has an additive restricted-domain proof artifact for projection idempotence under stable admissibility.
 - **Scope limit:** this packaging remains `formal_procedural_only`, does not promote theorem status, and preserves explicit admissibility-window collapse, null-boundary, and equivalence-failure boundaries rather than suppressing them.
 
+### Run 08 Satisfaction Summary
+The reformulated proof obligation attacked a narrower statement: orientation coherence conditions admissible knot-class selection, while closure stability remains residue-conditioned. Within the Run 08 campaign, coherent orientation regimes collapsed the observed knot-class distribution to a single modal class while ablated regimes retained high topological variance. Within these models, that satisfies the selector-form proof obligation for **OPEN_BRIDGE_001**.
+
 ### Current Working Constraint
-Within the tested models, the safest governed reading is narrower than either the original bridge claim or a recovery claim: procedural orientating is measurably relevant inside the tested synthetic procedure, but neither the procedural re-audit nor the `_R`-corrected conditioning retest satisfies the full proof obligation for **OPEN_BRIDGE_001** or justifies promotion to supported bridge status.
+Within the tested models, the safest governed reading is narrower than the original participatory-closure claim: orientation is supported as a selector on admissible topology, not as an independently sufficient driver of closure stability. The bridge is therefore supported only in its reformulated topological-selector form and remains pending cross-mechanism replication.
 
 **Dependency Status:**
-Immediate structural claims ($TC_{asym}$) and application projections ($gravity\_app$) remain capped by the unresolved bridge until rewrite, reroute, or stronger evidence satisfies the proof obligation.
+Immediate structural claims are now eligible for rewrite or reroute review against the selector-form bridge, but they are not automatically promoted. Application projections ($gravity\_app$ and peers) remain blocked from promotion because bridge support does not propagate directly to high-level projections.
 
 ---
 
 **Historical Context:**
-Earlier formulations treated orientation as a secondary consequence of asymmetry. Later drafts treated orientation as a local ordering anchor for distinction-node knotting. The current governed evidence keeps the bridge unresolved and places it under rewrite rather than support.
+Earlier formulations treated orientation as a secondary consequence of asymmetry. Later drafts treated orientation as a local ordering anchor for distinction-node knotting. The current governed evidence rejects the strong participatory-closure reading but retains a narrower supported selector-form bridge.
 
 ### Competing Models
 
@@ -915,8 +935,8 @@ The bridge has been converted into an auditable proof obligation [Source: MPF_PA
 3. **Ablation Survival:** Orientation must survive matched ablation controls (removal, randomization, shuffling).
 4. **Non-Reduction:** Orientation effect must not reduce to residue or admissibility alone.
 
-### Active Attack Campaign: LFCR_001
-This bridge is tracked by the living falsification registry and remains linked to rewrite handling rather than support [Source: registry/governance/living_falsification_campaign_registry.json].
+### Historical Attack Campaign: LFCR_001
+The original direct-support bridge claim remains tracked in the living falsification registry as a historical falsified formulation. It does not override the later selector-form satisfaction result [Source: registry/governance/living_falsification_campaign_registry.json].
 - **Attack Surfaces:** orientation_removal, randomization, shuffle, residue_dominance, admissibility_dominance, topology_dominance, random_admissibility.
 
 ### Executable Metric Definitions (MPF_PATCH_002E)
@@ -939,12 +959,12 @@ To ensure auditable falsification, the following metrics are used to evaluate th
 | **Extended Downstream** | K_STABILIZATION, B_K, topology_app, geometry_app, field_app, gravity_app, QM_app_GR_app_bridge |
 
 **Claim Cap Notice:**
-No downstream dependency may exceed the current claim level implied by the unresolved bridge state and the open proof obligation. The procedural re-audit did not authorize bridge promotion.
+No downstream dependency may exceed the current claim level implied by the supported selector-form bridge and its structural-only propagation rule. Support does not automatically discharge stronger participatory-closure claims or promote application projections.
 
 ### Failure and Support Consequences
 
-*   **If Falsified or Unresolved After Re-Audit:** TC_asym, K_STABILIZATION, B_K, topology_app, geometry_app, field_app, gravity_app, and QM_app_GR_app_bridge remain capped, review-locked, or rewrite-bound according to dependency policy.
-*   **If Supported in the Future:** Immediate structural claims become eligible for promotion review. No automatic support propagates to application projections.
+*   **Historical Outcome (Direct-Support Formulation):** TC_asym, K_STABILIZATION, B_K, topology_app, geometry_app, field_app, gravity_app, and QM_app_GR_app_bridge entered capped or review-bound handling when the stronger bridge formulation failed.
+*   **Current Outcome (Selector Formulation):** Immediate structural claims become eligible for rewrite or promotion review if recast against the narrower selector bridge. No automatic support propagates to application projections.
 
 **Future Update Rule:**
 Any evidence report affecting **OPEN_BRIDGE_001** automatically updates this section, Appendix E, Appendix F, and the **Theorem Status Registry**.
@@ -1003,10 +1023,16 @@ By establishing orientation as a primitive operator $-(i)$, we move from static 
 As established in Chapter 1, the process does not transition into any arbitrary state. The set of potential continuations is constrained by the **Admissibility Filter**, denoted as $\delta_a$. This filter is constrained by the **Admissibility Window** ($A(c)$), which acts as the structural constraint filtering raw difference into persistence [Source: MPF-CORE-V1 Sec 1.3].
 
 **Formal Statement 6.1.1: The Admissibility Predicate**
-$$ P_{\text{adm}}(x;c) :\iff x \in A(c) $$
+$$ P_{\text{adm}}(x', c, R, -(i)) = \Gamma_{\mathcal{E}} \land \Gamma_R \land \Gamma_T \land \Gamma_{\mathcal{O}} $$
 
 **Commentary:**
-The operator $\delta_a$ uses a predicate $P_{\text{adm}}$ to evaluate candidate continuations. This predicate is the mathematical representation of the "laws" of the system at step $k$. A state is admissible only if it resides within the membership of the window $A(c)$ [Source: MS-SCRATCH-V1 Sec 3.1].
+The operator $\delta_a$ uses a predicate $P_{\text{adm}}$ to evaluate candidate continuations. This predicate is the mathematical representation of the "laws" of the system at step $k$. A state is admissible only if it satisfies all four constituent constraint families ($\Gamma$):
+1. **Mismatch Preservation ($\Gamma_{\mathcal{E}}$):** Non-null distinction maintenance.
+2. **Residue Compatibility ($\Gamma_R$):** History-conditioned legality.
+3. **Topology Compatibility ($\Gamma_T$):** Admissible organization class.
+4. **Orientation Compatibility ($\Gamma_{\mathcal{O}}$):** Directional alignment.
+
+This conjunctive kernel separates the abstract logical check from mechanism-specific realization (e.g., PDE-specific topology rules) [Source: PADM_GAMMA_SEPARATION_001].
 
 ---
 
@@ -1071,13 +1097,18 @@ The 0-state is not just process termination; it is the collapse of the condition
 
 ---
 
-## 6.5 Missing and Provisional Formalisms
+## 6.5 Formal Closure of the Admissibility Kernel
 
-To achieve formal closure for the admissibility program, the following must be induced:
+With the release of **MPF-Core-Minimal v0.1**, the primary logical gaps in the admissibility program have been closed.
 
-1.  **The Admissibility Predicate $P_{\text{adm}}$:** [ **MISSING DEFINITION** ] What is the exact algebraic check? Does it involve a threshold on $\mathcal{E}$, a conservation of $R$-invariants, or a topological braid-matching rule?
-2.  **Composition Rules for $\to_a$:** [ **MISSING DEFINITION** ] If $A \to_a B$ and $B \to_a C$, does $A \to_a C$ follow? The associativity and transitivity of admissibility are not assumed.
-3.  **Admissibility Boundaries:** [ **REQUIRES INDUCTION** ] How do we formally define the "edge" of the admissibility window $\mathcal{A}$? Is it a sharp cutoff or a dissipative gradient?
+1.  **The Admissibility Predicate $P_{\text{adm}}$:** Formally defined as a conjunctive boolean kernel: $P_{adm} = \Gamma_{\mathcal{E}} \land \Gamma_R \land \Gamma_T \land \Gamma_{\mathcal{O}}$ [Source: PADM_GAMMA_SEPARATION_001].
+2.  **Composition and Image Existence:** Formally proven as **THM_PADM_001**. A nonempty admissible image guarantees continuation existence within the Universal Law Schema.
+3.  **Crisis Fork Trigger:** Formally proven as **THM_PADM_002**. Admissibility failure ($\delta_a = \emptyset$) triggers an exhaustive fork between NavT reorientation and 0-state collapse.
+4.  **Non-Transitivity:** Formally proven as **THM_PADM_003**. Admissibility is strictly non-transitive due to state-dependent residue evolution ($R \to T \to A_{adm}$).
+
+These foundational rules now govern all higher-level topological and physical projections.
+
+---
 
 ---
 
@@ -1364,7 +1395,7 @@ The **Admissibility Filter ($\delta_a$)** introduced in Chapter 6 provides the *
 $$ C_A(S) := \{ T_i \mid \delta_a(T_i) = \text{true} \} $$
 
 **Commentary:**
-The process cannot advance until a specific transition is selected from this set. This selection process is known as **Arbitration**, and it is governed by the operator **Arb_A**. This operator is currently under adversarial attack to determine if its dependency on orientation is load-bearing [Campaign: LFCR_001].
+The process cannot advance until a specific transition is selected from this set. This selection process is known as **Arbitration**, and it is governed by the operator **Arb_A**. Historically, the dependency of this operator on orientation was subjected to adversarial attack [Campaign: LFCR_001]. That original direct-support formulation was falsified, leading to the reformulation of the Orientation-Closure Bridge as a Topological Selector [Source: AUDIT_OPEN_BRIDGE_001_WHOLE_EXPRESSION_PRIMACY].
 
 **Formal Statement 10.1.2: The Arbitration Operator**
 $$ T^* := \text{Arb}_A( C_A(S), R, -(i), \epsilon ) $$
@@ -1512,11 +1543,21 @@ By formalizing the arbitration and realization mechanics, we provide the "engine
 As the process repeats its realization cycle over many iterations, the accumulated residue ($R$) and the coupled directional pressures ($\to_a \otimes \gets_r$) begin to organize into stable, higher-level patterns. These patterns are the **topological invariants** of the framework, denoted as **K** (Knots).
 
 **Formal Statement 11.1.1: Topological Stabilization**
-$$ \text{Recursive Pressure} \to K $$
-$$ K := [ \text{MISSING DEFINITION: Rigorous formal definition of Knot } K ] $$
+$$ \text{Recursive Pressure} \to T \to K $$
+
+**Definition 11.1.2: The Topological Organization Object ($T$)**
+$T$ is the typed constraint structure through which the process organizes connectivity and closure invariants. It is the bridge between historical residue and future admissibility.
+$$ T_t = (\Lambda_t, N_t, B_t, O_t, K_t, R_t) $$
+Where:
+- $\Lambda_t$: Connectivity/Adjacency relations.
+- $N_t$: Nodes of distinction.
+- $B_t$: Boundary structure / Interface geometry.
+- $O_t$: Orientation constraints.
+- $K_t$: Closure class (knot invariant).
+- $R_t$: Residue marks.
 
 **Commentary:**
-A "Knot" ($K$) in this framework is not a physical rope but a **closed cycle of relational necessity**. It represents a regime where the process has become so deeply inscribed in the residue that the admissibility window forces a self-reinforcing, periodic path. This is the minimum viability for non-collapsing volume [Source: MPF-CORE-V1 Sec 5.1]. $K$ is the primitive structural unit of persistent "objects," treated as the stabilized recursive closure of **distinction-node triads** [Source: MPF-REFINE-ASYM Sec 11].
+A "Knot" ($K$) in this framework is a stable realization of $T$ where the closure class $K_t$ remains invariant across continuation steps. $T$ is the primitive structural unit of persistent "objects," treated as the stabilized recursive closure of **distinction-node triads** [Source: TOPOLOGICAL_ORGANIZATION_TYPEDEF_001].
 
 ---
 
@@ -1710,7 +1751,7 @@ This is an internal structural hypothesis, not a physical unification claim. It 
 The applications presented in this chapter are provisional projections and require rigorous induction to become formal physical claims:
 
 1.  **Empirical Mapping Standards:** [ **MISSING DEFINITION** ] What specific metrics in the framework (e.g., $\Omega_a$, $B_K$ invariants) map to physical constants (e.g., $G$, $h$, $c$)?
-2.  **Separation of Claim Levels:** [ **REQUIRES GOVERNANCE** ] Simulation results showing gravity-like behavior must not be conflated with a proof of physical gravity. All physical-like results must be marked as analogies or structural comparisons until externally validated, and downstream applications remain under REVIEW_LOCK while OPEN_BRIDGE_001 is unresolved.
+2.  **Separation of Claim Levels:** [ **REQUIRES GOVERNANCE** ] Simulation results showing gravity-like behavior must not be conflated with a proof of physical gravity. All physical-like results must be marked as analogies or structural comparisons until externally validated. Downstream applications remain under REVIEW_LOCK because selector-form bridge support does not authorize projection-level promotion.
 3.  **Conservation Laws:** [ **REQUIRES PROOF** ] How do the internal invariants of the $\Psi$ and $\delta_a$ operators project into the physical conservation laws of mass, energy, and momentum?
 
 ---
@@ -1785,7 +1826,7 @@ If the dashboard and chapter text disagree, the dashboard is authoritative until
 | Object ID | Type | Status | Claim Level | Dependencies | Active Campaigns | Evidence | Review Lock | Last Update |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **AXIOM_1_2_1** | AXIOM | **LOCKED** | AXIOMATIC | 0 | - | - | - | 2026-05-29 |
-| **OPEN_BRIDGE_001** | BRIDGE | **C2_PENDING_ATTACK** | **PROVISIONAL** | 4 | LFCR_001, PD_CG_V2R, PD_CG_PATCH_004 | 4 | - | 2026-06-17 |
+| **OPEN_BRIDGE_001** | BRIDGE | **SUPPORTED_PENDING_REPLICATION** | **C4_STRUCTURAL_ONLY** | 4 | LFCR_001, PD_CG_PATCH_004, Run 08 | 5 | - | 2026-06-17 |
 | **TC_asym** | THEOREM | **REVIEW_LOCK** | REVIEW_LOCK | 1 | LFCR_001 | 0 | **LOCKED** | 2026-05-30 |
 | **gravity_app** | APPLICATION | **REVIEW_LOCK** | **REVIEW_LOCK** | 3 | - | GRAVITY-APP-001 | **LOCKED** | 2026-06-17 |
 | **L5_RIGOR_FORKED_ATTACK** | CLAIM | **SUPPORTED** | **C5** | 5 | CLS_003 | CLS_003_RUN_001 | - | 2026-06-16 |
@@ -1805,8 +1846,8 @@ The formal program is represented as a directed dependency graph. Nodes represen
 **Graph-Derived Claim Caps:**
 | Object | Root Blocker | Current Cap | Reason |
 | :--- | :--- | :--- | :--- |
-| **TC_asym** | OPEN_BRIDGE_001 | **REVIEW_LOCK** | Root dependency remains unresolved after re-audit. |
-| **gravity_app** | OPEN_BRIDGE_001 | **REVIEW_LOCK** | Downstream of unresolved bridge; promotion remains blocked. |
+| **TC_asym** | OPEN_BRIDGE_001 | **REVIEW_LOCK** | Current theorem wording still depends on a stronger participatory-closure reading than the supported selector bridge. |
+| **gravity_app** | OPEN_BRIDGE_001 | **REVIEW_LOCK** | Downstream of the bridge, but selector-form support does not authorize projection-level promotion. |
 
 ---
 
@@ -1831,14 +1872,14 @@ A campaign is a living governance object responsible for attacking, verifying, o
 
 | Bridge ID | Bridge Name | Claim Under Attack | Linked Campaign | Status | Claim Level | Downstream Cap |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **OPEN_BRIDGE_001** | Orientation-Closure Bridge (Topological Selection) | Orientation coherence conditions admissible knot-class selection but is not independently sufficient for closure stability. | LFCR_001; PD_CG_V2R; PD_CG_PATCH_004; Run 08 | **SUPPORTED** | **C4** | **RELEASED** |
+| **OPEN_BRIDGE_001** | Orientation-Closure Bridge (Topological Selection) | Orientation coherence conditions admissible knot-class selection but is not independently sufficient for closure stability. | LFCR_001; PD_CG_V2R; PD_CG_PATCH_004; Run 08 | **SUPPORTED_PENDING_REPLICATION** | **C4** | **STRUCTURAL_ONLY** |
 
 **Current Campaign Details: OPEN_BRIDGE_001**
 - **LFCR_001:** Earlier bridge formulation falsified under stress ablation (direct support failed).
 - **PD_CG_V2R:** Re-audit confirmed orientation does not independently improve basin stability.
 - **PD_CG_PATCH_004:** Reformulated bridge as a **Topological Selector**. Orientation is now a constraint on admissible topology $T$ in the chain $\Delta \to R \to T \to A_{adm} \to \delta_a$.
 - **Run 08 (Satisfying Campaign):** Multi-seed TDA verification ($N=64$) established that orientation coherence narrows topological variance by $100\%$ ($Var(B_1)=0.000$ vs $0.085$). 
-- **Governed Interpretation:** The bridge is **SUPPORTED** as a topological selection mechanism. Stability arises from residue-conditioned topological admissibility (Principle 2.X).
+- **Governed Interpretation:** Within these models, the bridge is **SUPPORTED_PENDING_REPLICATION** as a topological selection mechanism. Stability arises from residue-conditioned topological admissibility (Principle 2.X).
 - **Next Required Action:** Perform cross-mechanism verification in Graph Dynamics.
 
 ---
@@ -1955,8 +1996,9 @@ The `x` in `<*>_x` is a reserved discussion placeholder in this induction packet
 | Symbol | Name | Status | Function |
 | :--- | :--- | :--- | :--- |
 | $U_{\Omega}$ | Universal Law Schema | Core | The master process chain: $\chi_D \xrightarrow{E} \delta_a \xrightarrow{\text{Arb}_A} \Delta \xrightarrow{} \chi_D'$. All other operators are constrained elaborations of segments of this chain. |
+| $P_{adm}$ | Admissibility Predicate | Active | Conjunctive boolean check for legality ($\Gamma_{\mathcal{E}} \land \Gamma_R \land \Gamma_T \land \Gamma_{\mathcal{O}}$). |
 | $\iff_R$ | Recursive Closure | Core | Axiomatic biconditional necessity between constraint and realization. |
-| $\delta_a$ | Admissibility Filter | Core | Composite update engine ($\Pi_A \circ S \circ \text{Cand}$). |
+| $\delta_a$ | Admissibility Filter | Core | Composite update engine returning the admissible image $\{x' \mid P_{adm}(x') = 1\}$. |
 | $\Pi_A$ | Admissibility Projection | Core | Maps final selection onto admissible window. |
 | $R_{\leftrightarrow}$ | Residue Relation | Core Candidate | Residue as relational operand (studies coupling/recoupling). |
 | $\leftrightarrow_R$ | Residue Closure | Core Candidate | Residue as conditioning structure for process validity. |
@@ -2093,6 +2135,7 @@ This index points to the primary evidence pools supporting the claims made in th
 | **Metastability Basins** | `results/2026-06-16_run03_CLS_003_EXTREME/` | ODE, PDE | Supported (C5) |
 | **Braid Formation** | `results/LFCR_001_M2_randomization/` | Graph, Agent | Provisional (C1) |
 | **Orientation Bias** | `results/LFCR_001_v2_analysis/` | CA, Graph | Supported (C4) |
+| **OPEN_BRIDGE_001 Topological Selector** | `results/2026-06-16_run08_OPEN_BRIDGE_001_SATISFACTION/` | PDE, Topological Analysis | Supported pending replication (C4 structural only) |
 | **Gravity-like Gradient** | `results/2026-05-25_232611_GRAVITY_APP_V1/` | PDE | Supported (C5) |
 | **Zeta Mapping** | `results/2026-06-16_run03_CLS_003_EXTREME/` | Graph, Box | Supported (L2) |
 | **Singularity Rebound** | `results/2026-05-22_run02_Singularity_Rebound/` | Graph | Supported (L3) |
@@ -2151,7 +2194,7 @@ These items remain unsettled and are the primary targets for future induction an
 - **Projection-signature:** Defining how domain-specific signatures (QM vs GR) are extracted from $\leftrightarrow_R$.
 - **Formal operand of $\leftrightarrow_R$:** Defining the types allowed to participate in residue-conditioned closure.
 - **Vertical Bar Operator ($\mid$):** Formally fixing the meaning of "grouped closure participation" in triadic closure.
-- **Orientation Space $\mathcal{O}$:** Formal definition required to resolve the orientation-closure bridge.
+- **Orientation Space $\mathcal{O}$:** Formal definition still required to close the calculus-level semantics of the selector bridge and to reroute downstream theorems cleanly.
 - **Topology-to-Geometry Transform:** The operator that maps braid group invariants ($B_K$) to metric properties. (Ref: 11.3, 11.5)
 - **Empirical Mapping Standards:** Mapping framework metrics ($\Omega_a$, $B_K$) to physical constants ($G, h, c$). (Ref: 12.5)
 - **Formal definition of $\otimes$:** The composition and interference rules for composite directional coupling. (Ref: 9.1, 9.4)
@@ -2162,10 +2205,11 @@ These items remain unsettled and are the primary targets for future induction an
 ### F.3 Open Bridge Registry
 | Bridge ID | Name | Current Status | Claim Cap |
 | :--- | :--- | :--- | :--- |
-| **OPEN_BRIDGE_001** | Orientation-Closure | **REWRITE_PENDING** | **DO_NOT_PROMOTE** |
+| **OPEN_BRIDGE_001** | Orientation-Closure | **SUPPORTED_PENDING_REPLICATION** | **STRUCTURAL_ONLY** |
 
 ### F.4 Bridge Dependency Tables
-- **OPEN_BRIDGE_001 Blocks:** TC_asym, K, B_K, gravity_app, matter_app, field_app, QM_app_GR_app_bridge.
+- **OPEN_BRIDGE_001 Requires Rewrite/Reroute Review For:** TC_asym, K, B_K.
+- **OPEN_BRIDGE_001 Does Not Auto-Promote:** topology_app, geometry_app, gravity_app, matter_app, field_app, QM_app_GR_app_bridge.
 
 ### F.5 Active Attack Campaigns
 - **LFCR_001:** Attacking OPEN_BRIDGE_001. Surfaces: AS_001 through AS_008.
@@ -2176,9 +2220,10 @@ These items remain unsettled and are the primary targets for future induction an
 
 ### F.6 Bridge Resolution History
 - **OPEN_BRIDGE_001:** Earlier direct-support formulation falsified 2026-05-30 via Campaign LFCR_001 (Stress ablation Model B).
-- **OPEN_BRIDGE_001:** Later procedural re-audit dated 2026-06-17 did not restore bridge support; the bridge remains unresolved with governed status **DO_NOT_PROMOTE** because residue-coupling did not separate in the tested model.
+- **OPEN_BRIDGE_001:** Later procedural re-audit dated 2026-06-17 did not restore the stronger direct-support bridge because residue-coupling did not separate in the tested model.
 - **OPEN_BRIDGE_001:** Later relational-conditioning retest dated 2026-06-17 respected `_R` as relation conditioning rather than residue removal, but still did not support promotion because basin reformation did not improve and boundary-front mediation worsened on average.
 - **OPEN_BRIDGE_001:** Reformulated 2026-06-17 as a **Topological Selector** bridge. The new claim identifies orientation as a constraint on admissible knot-class selection ($T$) rather than a direct driver of stability. Status moved to **C2_PENDING_ATTACK**.
+- **OPEN_BRIDGE_001:** Run 08 dated 2026-06-16, reviewed 2026-06-17, satisfied the selector-form proof obligation by showing coherent orientation narrowed admissible knot-class variance under the tested PDE + TDA stack. Status advanced to **SUPPORTED_PENDING_REPLICATION**.
 - **OPEN_BRIDGE_001:** Governance reset `PD_CG_PATCH_003` dated 2026-06-17 retained bare `<≠>` as the active preserved-distinction baseline, treated subscripts as tested qualifiers only, and blocked promotional reuse of `<≠>_R` / `<≠>_r` without a new direct baseline win.
 - **OPEN_BRIDGE_001:** Later affix-position test dated 2026-06-17 found that reciprocal affix position changed bounded model behavior, but neither `<=>_r` nor `r_<=>` beat bare `<=>`; no bridge promotion followed.
 

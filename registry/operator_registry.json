@@ -39,6 +39,35 @@
   ],
   "operators": [
     {
+      "symbol": "P_adm",
+      "latex": "P_{adm}",
+      "name": "Admissibility Predicate",
+      "domain": "Candidate state x', context c, residue R, orientation -(i)",
+      "codomain": "{0, 1}",
+      "closure_condition": "AND conjunction of Gamma_E, Gamma_R, Gamma_T, Gamma_O",
+      "collapse_mode": "Legality Failure (Any Gamma_j = 0)",
+      "composition_rules": [
+        "Basis for delta_a set-builder",
+        "Non-transitive due to residue evolution",
+        "Separates kernel shell from mechanism constraints"
+      ],
+      "status": "CORE_v0.1_GAMMA_SEP"
+    },
+    {
+      "symbol": "T",
+      "latex": "T",
+      "name": "Topological Organization Object",
+      "domain": "Process State aspects",
+      "codomain": "Constraint structure (Lambda, N, B, O, K, R)",
+      "closure_condition": "Maintains connectivity and closure class invariants",
+      "collapse_mode": "Topological Rupture",
+      "composition_rules": [
+        "Updated by residue (R -> T)",
+        "Input to Admissibility (T -> A_adm)"
+      ],
+      "status": "PROVISIONAL_v0.1"
+    },
+    {
       "symbol": "delta_a",
       "latex": "\\delta_a",
       "name": "Admissibility-Constrained Continuation",
@@ -206,18 +235,19 @@
     {
       "symbol": "<≠>",
       "latex": "<\\neq>",
-      "name": "Non-Identity Relation Operator",
+      "name": "Preserved Distinction",
       "operator_family": "preserved_distinction_relation",
-      "domain": "Two distinguishable relata A, B with declared context X and active distinction D(A|B) > 0",
-      "codomain": "A typed relation claim asserting coupling without identity collapse",
-      "closure_condition": "Relation and distinction co-survive under context X without collapsing A and B into the same operational role",
-      "collapse_mode": "Identity Collapse / Untyped Context Drift / Relation Without Distinction",
+      "domain": "Two distinguishable process relata A, B with active distinction D(A|B) > 0",
+      "codomain": "A baseline relation claim asserting procedural participation without identity collapse",
+      "closure_condition": "Relation and distinction co-survive without collapsing A and B into the same operational role",
+      "collapse_mode": "Identity Collapse / Relation Without Distinction / Untested Conditioning Drift",
       "composition_rules": [
-        "Requires explicit context subscript X",
+        "Acts as the bare preserved-distinction baseline",
+        "Subscripts are candidate conditioning qualifiers and must outperform the bare baseline before retention",
         "Does not replace residue-conditioned closure ⇔_R",
         "Remains provisional until truth conditions and counterexamples are formally settled"
       ],
-      "status": "PROVISIONAL_RESEARCH_SCAFFOLD"
+      "status": "CANDIDATE_BASELINE_RELATION"
     }
   ]
 }
