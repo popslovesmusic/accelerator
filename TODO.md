@@ -79,6 +79,16 @@ This document tracks the strategic objectives following the successful consolida
 - [x] **Task 4.7: Macroscopic Projection and Behavioral Prediction**
     - [x] Map $\Sigma_R$ to predicted response basins in `structural_box_sim_cpp`.
     - [x] Verify that $W_a$ membership predicts perturbation survival.
+
+---
+## Phase III: Emergence & Triadic Closure Topologies
+
+- [ ] **Task 5.0: Array-Backed Directed Relational Graph Simulation** (`MPF_SIM_ARRAY_GRAPH_001`)
+    - [ ] Develop Python (`numpy` based) simulation engine (`sim_array_graph_001.py`).
+    - [ ] Implement $U_\Omega$ update loop tracking distinction matrix $\chi_D$, orientation, residue, and admissibility.
+    - [ ] Implement control models (M0-M6) representing various ablation regimes (random arbitration, no residue, no orientation, no floor, etc.).
+    - [ ] Execute minimum viable exploratory run ($N=64$, 20 seeds, 1000 iterations).
+    - [ ] Generate summary reports, plots, and falsification audit.
 - [x] **Task 4.8: Execute PD_CG Root-Trace Falsification (PD_CG_V1)**
     - [x] Performed `ATTACK_001_ROOT_DRIFT` (Verified derivation of $<\neq>_r$ in PD_CG_NOTE_001).
     - [x] Executed `ATTACK_002` to `ATTACK_005` (Confirmed 100% $W_a$ stability vs 0% boundary stability).
