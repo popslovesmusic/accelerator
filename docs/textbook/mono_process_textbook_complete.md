@@ -92,10 +92,16 @@ Law, Operator, and Truth are not separate components but three process-aspects o
 An RT expression is the minimum admissible unit of analysis. Internal aspect positions (e.g., orientation, residue, admissibility) are not granted ontological priority over the complete expression. 
 $$ \text{Process} = [\mathcal{E}, \mathcal{R}, \rho, \mathcal{K}, \delta, -(i)]_{\text{whole}} $$
 
-**Governing Effect:**
-1. **No Modular Ablation:** Testing an isolated aspect by randomizing it while keeping others fixed is methodologically inconsistent with the framework ontology.
-2. **Aspect Positions:** States are treated as aspect positions within the whole relation.
-3. **Projected Patterns:** Nodes and entities are projected persistent patterns of the underlying whole-expression activity.
+**Formal Principle 1.2.2C: Aspectual RT Set as Higher-Order RT (aRT) (MPF_IND_ART_SET_OF_RTS_001)**
+A lawful set of RT expressions is itself an aspectual RT expression (`aRT`). The set of operational aspects (distinction, asymmetry, orientation, admissibility, residue, closure) are not independent modules but are themselves RT-bearing expressions.
+$$ aRT := RT(\{RT_1, RT_2, \dots, RT_n\}) $$
+When these members preserve lawful distinction, ordering, and admissibility, they form a higher-order process expression.
+
+**Governing Effect (GOV_ART_001):**
+1. **No Modular Ablation:** Testing an isolated aspect by randomizing it while keeping others fixed is methodologically inconsistent with the framework ontology. Component ablation results are hypothesis-generating only unless an admissible whole-expression substitute is defined.
+2. **Deformation over Removal:** Instead of removing orientation or residue, one must ask: "Does the modified run still instantiate a lawful $aRT$?"
+3. **Aspect Positions:** States are treated as aspect positions within the whole relation.
+4. **Projected Patterns:** Nodes and entities are projected persistent patterns of the underlying whole-expression activity.
 
 [Source: MPF_PATCH_RT_WHOLE_EXPRESSION_PRIMACY_001]
 
@@ -156,19 +162,20 @@ The symbol $\mathcal{E}$ represents the "mismatch" or "signal" that characterize
 
 **Formal Block 1.3.1: $\mathcal{E}$ Operational Definition**
 $$ \mathcal{E} : \mathcal{X} \times \mathcal{C} \to \mathbb{R}_{\ge 0} $$
+Defined as a mismatch functional over the state space $\mathcal{X}$ and configuration space $\mathcal{C}$ [Source: MS-SCRATCH-V1; Grounded in $\mu_{\text{rel}}$ via Paper 4].
 
 **Formal Principle 1.3.2: Universal Rule $U_{\Omega}$ (The Master Process Chain)**
 Every lawful transformation within the framework is a preservation of non-null distinction through admissible continuation. This operates as a master procedural schema from which all other operators are derived.
-$$ U_{\Omega} := [ \chi_D \xrightarrow{E} \delta_a \xrightarrow{\text{Arb}_A} \Delta \xrightarrow{} \chi_D' ] $$
+$$ U_{\Omega} := [ \chi_D \xrightarrow{\mathcal{E}} \delta_a \xrightarrow{\text{Arb}_A} \Delta \xrightarrow{} \chi_D' ] $$
 
 **The Universal Calculative Sequence:**
 To move the framework from a descriptive to a calculative state, the transition from potentiality to realized event is governed by this strict operational sequence:
 
-**C1: Distinction Array Evaluation**
+**C1: Distinction Array Evaluation ($\mathcal{E}$ Computation Rule)**
 Input: $\chi_D = \{d_1, d_2, \dots, d_n\}$ (organization of relations).
-Computation: $E(\chi_D) = \mu_{\text{rel}}(\chi_D)$, where $\mu_{\text{rel}}$ is the relational mismatch functional.
-Output: $E \ge 0$.
-Failure: $E=0$ (Complete distinction collapse).
+Computation: $\mathcal{E}(\chi_D) = \mu_{\text{rel}}(\chi_D)$, grounded via the Calculative Chain as evaluation over a distinction array $\chi_D$ [Source: MPF-CALC-001].
+Output: $\mathcal{E} \ge 0$.
+Failure: $\mathcal{E}=0$ (Complete distinction collapse).
 
 **C2: Affect Gate (Legality Condition)**
 Affect ($A$) functions as the foundational legality gate, representing the universal rule that *there is no continuation without distinction*:
@@ -272,10 +279,10 @@ In the Mono-Process Framework, **Residue ($R$)** is the structural accumulation 
 
 **Formal Statement 2.1.1: Residue as Constraint**
 $$ R \in \mathcal{R} $$
-$$ \mathcal{R} \implies [ \text{MISSING DEFINITION: Formal structure of Residue Space } \mathcal{R} ] $$
+$$ \mathcal{R} := \text{The Residue Carrier Space} $$
 
 **Commentary:**
-Within this framework, residue is the mechanism by which "laws" emerge. As the process cycles, it leaves a trace. The system remembers, and that memory shapes what can happen. Each cycle is not a reset—it is an accumulation [Source: MPF-NARRATIVE]. If the process is a path, $R$ is the groove worn into the landscape by previous traversals.
+Within this framework, residue is the mechanism by which "laws" emerge. As the process cycles, it leaves a trace. The system remembers, and that memory shapes what can happen. Each cycle is not a reset—it is an accumulation [Source: MPF-NARRATIVE]. If the process is a path, $R$ is the groove worn into the landscape by previous traversals. The Residue Carrier $\mathcal{R}$ is the formal topological structure that maintains this history [Source: MS-SCRATCH-V1 Sec 4.1].
 
 ---
 
@@ -623,8 +630,7 @@ Within the framework, absolute zero distinction ($D = 0$) is an excluded state. 
 To complete the formal program for directed distinction, the following must be induced:
 
 1.  **Nature of $D$:** [ **MISSING DEFINITION** ] Is $D$ a Kullback-Leibler like divergence, a non-symmetric Finsler metric, or a primitive operator family?
-2.  **Domain $\mathcal{S}$:** [ **MISSING DEFINITION** ] What are the "states" $S_n$? Are they points in a manifold, nodes in a graph, or aspect-frames in a recursive hierarchy?
-3.  **Composition Rules:** [ **REQUIRES PROOF** ] How do multiple directed distinctions combine? Is there a relational equivalent to the triangle inequality for non-symmetric $D$?
+2.  **Composition Rules:** [ **REQUIRES PROOF** ] How do multiple directed distinctions combine? Is there a relational equivalent to the triangle inequality for non-symmetric $D$?
 
 ---
 
@@ -992,7 +998,7 @@ Each procedural step $k$ in the process is associated with an orientation refere
 $$ -(i)_{k+1} = \text{NavT}( -(i)_k, T^*, R, A ) $$
 
 **Commentary:**
-This represents an **admissible orientation chain** rather than a temporal succession. Each step follows the universal orientation-driven update: $X' = \{x_\alpha + \Pi_{A_\alpha}(-(i)_\alpha[\varepsilon_\alpha, r_\alpha])\}$ [Source: MPF-CORE-V1 Sec 4.3]. The NavT operator ensures that the selected orientation is the one that most effectively reconciles the mismatch pressure with the historical constraints. This chain of orientations is what an observer eventually reconstructs as a "trajectory" or "field line."
+This represents an **admissible orientation chain** rather than a temporal succession. The NavT operator ensures that the selected orientation is the one that most effectively reconciles the mismatch pressure with the historical constraints. Formally, this update rule is defined via "Switching Events" and the switching stability predicate, determining when and how the orientation shifts to preserve admissibility [Source: MS-SCRATCH-V1 Sec 7.5]. This chain of orientations is what an observer eventually reconstructs as a "trajectory" or "field line."
 
 ---
 
@@ -1001,8 +1007,7 @@ This represents an **admissible orientation chain** rather than a temporal succe
 To achieve formal closure for the orientation program, the following must be induced:
 
 1.  **Definition of Orientation Space $\mathcal{O}$:** [ **MISSING DEFINITION** ] Is $\mathcal{O}$ a manifold of unit vectors, a discrete set of aspect-labels, or a more complex topological space of relational frames?
-2.  **Orientation Update Rule:** [ **PROVISIONAL DEFINITION** ] The formal update law $-(i)_{k+1} = \text{NavT}( -(i)_k, T^*, R, A )$ requires a specific computation rule for implementation.
-3.  **Orientation Equivalence:** [ **MISSING DEFINITION** ] Under what conditions are two orientations $-(i_a)$ and $-(i_b)$ considered equivalent? This is critical for defining symmetries in projected geometries.
+2.  **Orientation Equivalence:** [ **MISSING DEFINITION** ] Under what conditions are two orientations $-(i_a)$ and $-(i_b)$ considered equivalent? This is critical for defining symmetries in projected geometries.
 
 ---
 
@@ -1519,9 +1524,7 @@ Every campaign run M0-M7 follows the controlled update sequence:
 
 To complete the formalization of the arbitration program, the following must be induced:
 
-1.  **Full Definition of Arb_A:** [ **MISSING DEFINITION** ] Is Arb_A a deterministic minimization algorithm, a stochastic sampler, or a topological selection rule?
-2.  **Formalization of $O^*$:** [ **MISSING DEFINITION** ] How is "optimal mismatch" mathematically calculated? Does it involve an energy-like functional or a relational divergence minimum?
-3.  **Selection Uniqueness:** [ **REQUIRES PROOF** ] Is the realized state always unique, or can the process support **selection degeneracy** (multiple simultaneous realizations)? This has critical implications for the derivation of quantum-like behaviors.
+1.  **Selection Uniqueness:** [ **REQUIRES PROOF** ] Is the realized state always unique, or can the process support **selection degeneracy** (multiple simultaneous realizations)? This has critical implications for the derivation of quantum-like behaviors.
 
 ---
 
@@ -2173,14 +2176,7 @@ This appendix tracks the formal status of critical gaps identified during the dr
 ### 1. Provisional / Scratch Defined
 These items have candidate formalisms in the "Scratch Schema" (MS-SCRATCH-V1) or "Ordered Account" (Unity Math) but require canonical promotion.
 
-- **Formal operational definition of $\mathcal{E}$:** Defined as mismatch functional $\mathcal{E} : \mathcal{X}\times\mathcal{C}\to \mathbb{R}_{\ge 0}$ [Source: MS-SCRATCH-V1; Grounded in $\mu_{\text{rel}}$ via Paper 4].
-- **$\mathcal{E}$ Computation Rule:** Formally grounded via the Calculative Chain (C1) as evaluation over a distinction array $\chi_D$ [Source: MPF-CALC-001].
-- **$\text{Arb}_A$ Selection Rule:** Defined as the mismatch-minimizing selection set $O^*$ with mandatory tie-breaking [Source: Paper 4 Sec 4; MPF-CALC-001].
-- **Formal structure of $\mathcal{S}$ and $\mathcal{R}$:** Defined as state space $\mathcal{X}$ and residue carrier $\mathcal{R}$ [Source: MS-SCRATCH-V1 Sec 1.1, 4.1].
-- **Formal definition of $\iff_m$:** Defined as measurement map $\mathrm{Meas} : \mathcal{X}\times\mathcal{C}\to \mathbb{R}^d$ [Source: MS-SCRATCH-V1 Sec 8.1].
-- **Orientation Update Rule:** Defined via "Switching Events" and the switching stability predicate [Source: MS-SCRATCH-V1 Sec 7.5].
-- **Formal definition of State $S$:** Defined as locally addressable aspect-condition [Source: IND-STATE-S-001].
-- **Closure-Coupling Signature ($\iff_m$):** Formally defined as bidirectional preservation of procedural invariants (Source: MPF-P1-003).
+(All items previously listed here have been canonically promoted into the textbook text and are no longer provisional).
 
 ### 2. High-Priority Gaps (GAP_OPEN)
 These items remain unsettled and are the primary targets for future induction and research runs.
