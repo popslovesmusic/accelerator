@@ -81,14 +81,19 @@ This document tracks the strategic objectives following the successful consolida
     - [x] Verify that $W_a$ membership predicts perturbation survival.
 
 ---
-## Phase III: Emergence & Triadic Closure Topologies
+## Phase IV: Whole-Expression RT Validation (aRT)
 
-- [ ] **Task 5.0: Array-Backed Directed Relational Graph Simulation** (`MPF_SIM_ARRAY_GRAPH_001`)
-    - [ ] Develop Python (`numpy` based) simulation engine (`sim_array_graph_001.py`).
-    - [ ] Implement $U_\Omega$ update loop tracking distinction matrix $\chi_D$, orientation, residue, and admissibility.
-    - [ ] Implement control models (M0-M6) representing various ablation regimes (random arbitration, no residue, no orientation, no floor, etc.).
-    - [ ] Execute minimum viable exploratory run ($N=64$, 20 seeds, 1000 iterations).
-    - [ ] Generate summary reports, plots, and falsification audit.
+- [x] **Task 6.0: Whole-Expression RT Perturbation Campaign** (`MPF_SIM_ART_001`)
+    - [x] Develop Python simulation engine (`sim_art_001.py`) to test aRT deformations vs component ablation.
+    - [x] Implement control models M0_full_aRT, M1_simple_ablation, M2_substituted_orientation, M3_substituted_residue, M4_random_shuffle, M5_trace_preserving.
+    - [x] Execute multi-seed campaign ($N=64$, 20 seeds, 1000 iterations).
+    - [x] Generate summary reports and falsification audit.
+
+    - [x] Develop Python (`numpy` based) simulation engine (`sim_array_graph_001.py`).
+    - [x] Implement $U_\Omega$ update loop tracking distinction matrix $\chi_D$, orientation, residue, and admissibility.
+    - [x] Implement control models (M0-M6) representing various ablation regimes (random arbitration, no residue, no orientation, no floor, etc.).
+    - [x] Execute minimum viable exploratory run ($N=64$, 20 seeds, 1000 iterations).
+    - [x] Generate summary reports, plots, and falsification audit.
 - [x] **Task 4.8: Execute PD_CG Root-Trace Falsification (PD_CG_V1)**
     - [x] Performed `ATTACK_001_ROOT_DRIFT` (Verified derivation of $<\neq>_r$ in PD_CG_NOTE_001).
     - [x] Executed `ATTACK_002` to `ATTACK_005` (Confirmed 100% $W_a$ stability vs 0% boundary stability).
