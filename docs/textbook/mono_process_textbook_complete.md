@@ -78,18 +78,121 @@ Within the governance layer, Axiom 1.2.1 constitutes the **Axiomatic Floor**. It
 
 ---
 
-## 1.3 The Process-Expression Field ($\mathcal{E}$)
+## 1.2A The RT/Core Indivisibility and Affect-Effect (Provisional Scaffold)
+
+Within the root statement, the framework identifies the **RT/Core** expression as an indivisible structural unit.
+
+**Formal Statement 1.2.2: RT/Core Indivisibility**
+$$ \text{RT/Core} := \{ \text{Law}, \text{Operator}, \text{Truth} \} $$
+
+**Commentary:**
+Law, Operator, and Truth are not separate components but three process-aspects of the indivisible RT/Core expression. The expression cannot be decomposed into independent physical or logical parts [Source: IND_RT_CORE_AFFECT_EFFECT_001].
+
+**Formal Principle 1.2.3: Relation as Primitive (Option C)**
+Within this framework, **Relation ($D$) is the fundamental primitive**. A distinction array $\chi_D$ is not a state container but a **structural organization of relations**.
+$$ D(x,y) \xrightarrow{\text{organize}} \chi_D \xrightarrow{\text{eval}} E $$
+
+**Commentary:**
+This "Relation-First" ontology ensures that even the distinction array is not fundamental; it is a projected organization of underlying relational events. This prevents the reintroduction of "state" as a substrate [Source: AFFECT_ASPECTUAL_GENERATIVITY_001].
+
+**Formal Block 1.2.4: Formal Definition of Affect ($A$)**
+$$ A(\chi_D) \implies (\mathcal{E}(\chi_D) \neq 0) $$
+
+**Commentary:**
+**Affect ($A$)** is the **necessity condition for non-null distinction organization**. It is the aspect of the mono-process that asserts the internal pressure for continuation. It is the primitive "Source" of the primary biconditional. In calculative models, Affect asserts that admissible process persistence requires the relational mismatch ($\mathcal{E}$) associated with a **distinction array** ($\chi_D$) to remain non-zero [Source: AFFECT_FORMALIZATION_REVIEW_001].
+
+**Formal Principle 1.2.5: Aspectual Generativity of Affect**
+$$ A \equiv_{\text{RT/Core}} \text{Necessity}(\chi_D \neq 0) $$
+$$ A \leftrightarrow_{\text{aspect}} \chi_D $$
+
+**Commentary:**
+Affect does not generate distinction organization as an external cause acting on a state. Since a state is not primitive but is instead a distinction array $\chi_D$, Affect must be read as the **necessity-aspect** of the same mono-process event whose **operator-aspect** appears as organized non-null distinction. Viewed through the Law aspect, Affect appears as the necessity that distinction not vanish. Viewed through the Operator aspect, the same event appears as organized non-null distinction. Thus Affect is generative only in the aspectual sense: the requirement that distinction not vanish is inseparable from the processual presentation of distinction organization [Source: AFFECT_ASPECTUAL_GENERATIVITY_001].
+
+**Operational Roles:**
+1.  **Source of Law:** Affect provides the pressure that requires structural resolution (Law).
+2.  **Relational Tension:** It maintains the non-collapse relation with Effect ($E$) via the relation $A <\neq> E$.
+3.  **Residue Support:** Affect is stabilized through recursive residue-conditioned closure.
+
+Affect is not an "entity" but a **procedural requirement**. It is the "Affecting" phase of the process cycle where the need for distinction is established before admissibility filtering occurs [Source: PD_CG_NOTE_001].
+
+---
+
+## 1.2.6 Formal Principle 1.2.6: Trace Priority Over Projection
+
+### Statement
+
+Projection equivalence does not imply process identity. Two lawful process histories may generate identical observable projections while remaining operationally distinct. Therefore Truth within RT/Core cannot be determined solely from final-state projection.
+
+Formally,
+$$ P(H_1) = P(H_2) \not\implies H_1 = H_2 $$
+where $P$ denotes projection and $H$ denotes process history.
+
+Truth requires the **lawful continuation trace** through which projection is produced. Accordingly, projection is evidential but not identity-defining.
+
+### Process Reading
+
+Process identity is defined by the **trace** (history) of lawful continuation events, not by the surface observables ($P$) that result from that trace. While multiple distinct histories can converge to identical macroscopic images, they remain unique process lineages. Identity is "trace-prior."
+
+### Consequence
+
+One cannot "prove" process identity from projection equivalence. Truth is coupled to the lineage of the recursive loop ($H$), not to the static output of the projection mapping ($P$). This prevents the collapse of process distinction into observable-only ontology.
+
+---
+
+## 1.3 The Process-Expression Field ($\mathcal{E}$) and the Universal Law Schema ($U_{\Omega}$)
 
 The symbol $\mathcal{E}$ represents the "mismatch" or "signal" that characterizes the process at a given stage. It is defined as the fundamental condition of non-null difference [Source: MPF-CORE-V1 Sec 1.1].
 
 **Formal Block 1.3.1: $\mathcal{E}$ Operational Definition**
 $$ \mathcal{E} : \mathcal{X} \times \mathcal{C} \to \mathbb{R}_{\ge 0} $$
 
-**Commentary:**
-$\mathcal{E}$ is formally defined as a **mismatch functional** that maps a process state $\mathcal{X}$ and a governance context $\mathcal{C}$ to a non-negative scalar value representing pressure, deviation, or non-fit [Source: MS-SCRATCH-V1 Sec 2.1]. 
+**Formal Principle 1.3.2: Universal Rule $U_{\Omega}$ (The Master Process Chain)**
+Every lawful transformation within the framework is a preservation of non-null distinction through admissible continuation. This operates as a master procedural schema from which all other operators are derived.
+$$ U_{\Omega} := [ \chi_D \xrightarrow{E} \delta_a \xrightarrow{\text{Arb}_A} \Delta \xrightarrow{} \chi_D' ] $$
 
-**The "Type Without Rule" Insight:**
-Mismatch is not a property of a state in isolation, but a property of a state *relative* to its governing conditions. While $\mathcal{E}$ has a formal **type** (what kind of thing it is), current models lack a universal **computation rule** (the actual operation performed on $\mathcal{X}$ and $\mathcal{C}$). This "Type Without Rule" status allows for derivation of downstream structures while preserving specific model flexibility [Source: MPF-IND-ARB-DELTA-DUAL-PHASE RI-005].
+**The Universal Calculative Sequence:**
+To move the framework from a descriptive to a calculative state, the transition from potentiality to realized event is governed by this strict operational sequence:
+
+**C1: Distinction Array Evaluation**
+Input: $\chi_D = \{d_1, d_2, \dots, d_n\}$ (organization of relations).
+Computation: $E(\chi_D) = \mu_{\text{rel}}(\chi_D)$, where $\mu_{\text{rel}}$ is the relational mismatch functional.
+Output: $E \ge 0$.
+Failure: $E=0$ (Complete distinction collapse).
+
+**C2: Affect Gate (Legality Condition)**
+Affect ($A$) functions as the foundational legality gate, representing the universal rule that *there is no continuation without distinction*:
+$$ A(\chi_D) := \begin{cases} \text{PASS} & E(\chi_D) \neq 0 \\ \text{FAIL} & E(\chi_D) = 0 \end{cases} $$
+$$ \Delta(\chi_D) \text{ exists } \iff E(\chi_D) \neq 0 $$
+If $A$ fails, the process collapses into the $0\text{-state}$.
+
+**C3: Admissibility Evaluation**
+Once $E(\chi_D) > 0$ is validated, the Admissibility Filter ($\delta_a$) evaluates the candidate continuation set $Q$.
+$$ Q = \delta_a(E, \chi_D, R) $$
+Output: $Q = \{q_1, q_2, \dots, q_m\}$.
+Failure: $Q = \emptyset$ (Admissibility collapse).
+
+**C4: Arbitration and Realization**
+The final event selection is performed by the Arbitration operator ($\text{Arb}_A$).
+$$ q^* = \operatorname{argmin}_{q_i \in Q} \mu_{\text{rel}}(q_i) $$
+The realized continuation is then executed via the transition operator $\Delta$, updating the distinction organization:
+$$ \chi_{D, t+1} = \Delta(\text{Arb}_A[\delta_a(\mu_{\text{rel}}(\chi_{D, t}))]) $$
+
+**Commentary:**
+This $U_{\Omega}$ schema resolves the "Type Without Rule" status of $\mathcal{E}$ and $A$. The primitive computable object is the **Relation ($D$)**, and $\chi_D$ serves as the structural organization of those relations. Because $U_{\Omega}$ is a universal schema, every other operator in the framework (e.g., NavT, $\Psi$, $\iff_m$) must be reducible to a constrained elaboration of some segment of this single unbroken chain.
+
+**Falsification Audit: Universal Law Schema ($U_{\Omega}$)**
+The $U_{\Omega}$ schema has been subjected to five classes of exclusionary falsification attacks based on historical simulation records.
+
+| Attack ID | Name | Finding | Status |
+| :--- | :--- | :--- | :--- |
+| **FA-001** | Zero-distinction continuation | Continuation operations cease when $\mathcal{E}(\chi_D)$ is forced to 0. | **Survived** |
+| **FA-002** | Random-continuation equivalence | Randomized selection diverges structurally from $\delta_a$-filtered continuation. | **Survived** |
+| **FA-003** | Mismatch-independence | Ablating $\mu_{\text{rel}}$ collapses the persistence of the continuation chain. | **Survived** |
+| **FA-004** | Projection-aliasing | Equivalent observables arise from distinct histories, but do not license process identity. | **Survived** |
+| **FA-005** | Memoryless-control | Memoryless dynamics fail to match the topology of residue-conditioned dynamics. | **Survived** |
+
+**Ruling:** **Provisionally Retained.**
+Survival under attack raises confidence only by exclusion, never by confirmation. The $U_{\Omega}$ schema is provisionally retained for continued use as the master operational rule [Source: U_OMEGA_FALSIFICATION_ATTACK_REPORT].
 
 ---
 
@@ -244,6 +347,78 @@ The relation between $A$ and $B$ is valid ("True") while residue-conditioned clo
 If the primary core closure decouples, the framework collapses into the **0-state** (non-existence).
 $$ \neg [ ((\mathcal{E} \neq 0) \leftrightarrow_R \delta_a(\mathcal{E} > 0)) ] \to 0\text{-state} $$
 
+**Truth Revision: Generative Exclusion (IND_RT_CORE_AFFECT_EFFECT_001)**
+Classical logic equates "invalid" with "failure." The process reading states that an **excluded state** is a meaningful boundary-generation event. It is a first-class process outcome because it contributes to admissibility constraint geometry. Therefore, we distinguish between:
+1. **Excluded State:** A meaningful non-admitted process boundary (writes constraint geometry).
+2. **Zero-State ($0$-state):** The total collapse of the conditions for process participation.
+
+Exclusion is generative, not merely negating. It permits distinction and constrains admissibility.
+
+---
+
+## 2.X Formal Principle 2.X: Residue-Conditioned Topological Admissibility
+
+### Statement
+
+Residue is not an operator. Residue is a continuation-conditioned trace produced by lawful process activity. Residue does not itself perform continuation; rather, it conditions the topological organization within which future continuation is evaluated.
+
+Formally,
+$$ \Delta \to R $$
+where $\Delta$ denotes lawful continuation and $R$ denotes the residue condition inscribed by that continuation.
+
+Residue conditions topology:
+$$ R \to T $$
+where $T$ denotes the admissibility-relevant topological organization of the process.
+
+Topology conditions admissibility:
+$$ T \to A_{adm} $$
+where $A_{adm}$ is the admissibility structure governing future continuation.
+
+Admissibility constrains continuation:
+$$ A_{adm} \to \delta_a $$
+and therefore conditions future lawful updates.
+
+The complete recursive chain is:
+$$ \Delta \to R \to T \to A_{adm} \to \delta_a \to \Delta' $$
+
+### Process Reading
+
+A lawful continuation leaves residue.
+Residue alters the topological organization of the process.
+The modified topology alters the admissibility structure.
+The modified admissibility structure changes which future continuations are lawful.
+Thus continuation recursively alters the conditions of its own future continuation.
+
+Residue is therefore neither a memory object nor an update operator. It is a conditioning trace through which prior continuation modifies future continuation legality.
+
+### Anti-Reification Note
+
+Residue must not be interpreted as a substance, stored object, or independent state container. Residue exists only as a process-conditioned constraint relation arising from prior continuation activity.
+
+The framework therefore rejects the reading:
+$$ R \to \Delta $$
+as a direct causal mechanism.
+
+The correct reading is:
+$$ \Delta \to R \to T \to A_{adm} \to \delta_a \to \Delta' $$
+where residue influences future continuation only through its effects on topology and admissibility.
+
+### Consequence
+
+Admissibility is not a fixed rule set. Admissibility evolves through residue-conditioned topological deformation generated by prior lawful continuation.
+Accordingly,
+$$ A_{adm}(t+1) = F(A_{adm}(t), R(t)) $$
+and the legality landscape of future continuation is itself a process-generated structure.
+
+**Corollary 2.X.1: Admissibility Evolution (COR_2X_001)**
+Admissibility is not a fixed law table external to process. Admissibility evolves through residue-conditioned topological organization generated by prior lawful continuation. Future continuation legality may differ from past continuation legality even under similar local mismatch conditions.
+
+**Axiom Boundary Clarification:**
+The **Primary Axiom** remains invariant while admissibility structure evolves.
+- **Invariant:** $(E \neq 0) \iff_R \delta_a(E > 0)$
+- **Evolving:** Topology, residue conditions, and admissibility structure.
+**Forbidden Interpretation:** Residue modifies the Primary Axiom.
+
 ---
 
 ## 2.7 Residue-Admissible Identity Continuation (IND-001)
@@ -331,6 +506,9 @@ $T$ is the **minimum process event** connecting two states (addressable aspects)
 
 **Commentary:**
 $T$ is the operationalization of the distinction $D(S_a|S_b)$. While $D$ measures the mismatch, $T$ is the *event of change* itself. Crucially, $T$ is **non-temporal**; it represents a procedural step in the recursive cycle rather than a duration in time. $T$ is the primary object evaluated by the Admissibility Filter ($\delta_a$): an event happens only if $T$ is admissible.
+
+**Motion Projection Note (IND_RT_CORE_AFFECT_EFFECT_001):**
+Discrete state updates ($T$) may be reconstructed by an observer as smooth continuation or "motion." This follows the **"LED chaser analogy"**: nothing physical actually moves from $S_a$ to $S_b$. Rather, local state changes project as apparent motion across the sequence. It is a critical error to reify this apparent motion as the continuous transport of a substrate through pre-existing space.
 
 ---
 
@@ -466,6 +644,7 @@ The candidate does **not** replace $\iff_X$ or $\iff_R$. Instead, it adds a narr
 - $Sprite <\neq>_{obs} Entity$
 - $Organism <\neq>_{bio} Subsystem$
 - $Observer <\neq>_{obs} Observed$
+- $A <\neq> E$ (Affect-Effect pre-distinction relational tension)
 
 **Governance Status:**
 - Status: **PROVISIONAL_RESEARCH_SCAFFOLD**
@@ -662,34 +841,63 @@ One can change orientation without advancing the process "forward" in time (e.g.
 
 ---
 
-## 5.2A OPEN_BRIDGE_001 : Orientation-Closure Bridge (LIVE_LINKED) (FALSIFIED) (REWRITE_PENDING)
+## 5.2A OPEN_BRIDGE_001 : Orientation-Closure Bridge (LIVE_LINKED) (UNRESOLVED) (DO_NOT_PROMOTE)
 
-The Orientation-Closure Bridge was tested as a claim that orientation structure directly supports stable closure formation. That claim was **FALSIFIED** on 2026-05-30 through adversarial stress testing [Source: LFCR_001_STRESS_REPORT_001].
+The Orientation-Closure Bridge remains unresolved. Its earlier direct-support formulation was **FALSIFIED** on 2026-05-30 through adversarial stress testing [Source: LFCR_001_STRESS_REPORT_001], the later procedural re-audit did **not** restore bridge support [Source: results/pd_cg_v2_reaudit/reaudit_report.md], and the subsequent relational-conditioning retest also failed to support promotion [Source: results/pd_cg_v2r_relational_conditioning_retest/retest_report.md].
 
-**Current Status: REWRITE_PENDING (v3 Independent Aspect Model)**
+**Current Status: REWRITE_PENDING / DO_NOT_PROMOTE**
 
 ### v1/v2 Falsification Summary
-Adversarial ablation testing (`LFCR_001`) showed that orientation coherence had a negligible effect on stable triadic closure survival ($\Delta S < 0.01$). Randomizing orientation (Ablation M2) under stress did not significantly degrade structural persistence compared to the full mechanism (M0). Statistical analysis of the stress ensemble (64 seeds) showed near-zero correlation ($< 0.1$) between triadic closure strength and orientation coherence. Within the tested regime, orientation is not induced by closure, nor does it drive it.
+Adversarial ablation testing (`LFCR_001`) showed that orientation coherence had a negligible effect on stable triadic closure survival ($\Delta S < 0.01$). Randomizing orientation under stress did not significantly degrade structural persistence compared to the full mechanism. Within the tested regime of that campaign, orientation was not supported as a direct closure driver.
 
-### v3 Proposal: Independent Aspect Projection (Model C)
-The current working hypothesis is the **Independent Aspect Model**, which reroutes the formal dependency to avoid the falsified causal link.
+### PD_CG_V2 Procedural Re-Audit Summary
+The later procedural re-audit changed the evaluative unit from static orientation labels to a sequence-level orientating procedure inside whole-expression `RT(Sigma_R)` analysis.
 
-- **v3 Formal Statement:** Orientation and closure are decoupled signatures of a common underlying recursive residue field ($K$).
-- **Dependency Shift:** $K \to \text{Aspect}_1(\text{Orientation}) \text{ and } K \to \text{Aspect}_2(\text{Closure})$.
+- **Directly observed within the tested procedural model:** sequence-level orientating analysis passed, boundary-front mediation analysis passed at 0.78125, whole-expression `RT(Sigma_R)` evaluation passed, and procedural ablation strongly separated from randomized orientation.
+- **Bridge-critical failure:** the residue-coupling part of the campaign hypothesis failed. The measured `residue_effect_mean` was `0.0`, so the tested procedure did not establish the claimed residue-coupled mediation.
+- **Governed result:** within these models, the campaign hypothesis was **not supported as written**, and bridge promotion remained **DO_NOT_PROMOTE**.
 
-Within the tested models, the observed co-occurrence of orientation and closure in high-residue regimes is treated as a structural co-presence of a deeper stabilization driver ($K$), not as a direct causal bridge.
+### PD_CG_V2R Relational Conditioning Retest Summary
+The later retest respected the correction that `_R` must be handled as a relation-conditioning subscript rather than as a removable residue variable, and compared whole-expression conditioned vs null-control forms.
 
-**Proof Obligation: PO_OPEN_BRIDGE_001_V3**
-1. **Common Driver:** Identify the invariant $I_K$ that generates both orientation and closure.
-2. **Decoupled Ablation:** Show that removing orientation (M1) does not break closure, and breaking closure does not prevent local orientation ordering.
+- **Directly observed within the tested procedural model:** whole-expression `RT(Sigma_R)` differed from the null-conditioning control on 0.921875 of seeds, basin survival improved modestly (`+0.0374` mean), and admissibility-class recovery improved (`+0.1163` mean).
+- **Bridge-critical failures:** basin reformation gain remained `0.0`, boundary-front mediation gain was negative (`-0.0392` mean), and the conditioned-vs-null pass rate was `0.0`.
+- **Governed result:** within these models, the relational-conditioning improvement claim was **not supported as written**, and bridge promotion remained **DO_NOT_PROMOTE**.
+
+### PD_CG_PATCH_003 Baseline Reset
+- **Directly observed within the tested model context:** `PD_CG_V2R` falsified the specific `_R`-conditioned improvement route on preserved distinction.
+- **Active governed baseline:** bare `<≠>` is now the preserved-distinction comparison baseline.
+- **Qualification rule:** any subscript on `<≠>` is a candidate conditioning qualifier that must outperform bare `<≠>` before retention.
+- **Current prohibition:** `<≠>_R` / `<≠>_r` must not be used for promotion by habit or decorative carryover.
+
+### PD_CG_V3 Affix Position Test Note
+- **Governed note:** affix position is under test and not assumed equivalent.
+- **Candidate forms under test:** `<=>`, `<=>_r`, and `r_<=>`.
+- **Current limitation:** no affixed reciprocal form may be treated as interchangeable with another without a direct bounded comparison.
+- **Latest bounded result (2026-06-17):** affix position changed behavior within the tested model, but neither `<=>_r` nor `r_<=>` outperformed bare `<=>` because both failed the boundary-front criterion and neither improved basin reformation.
+
+### MT-003 Local Proof Packaging Note
+- **Governed note:** `MT-003` now has an additive restricted-domain proof artifact for the implication from `existence(continuation_event)` to non-empty admissible image.
+- **Scope limit:** this packaging remains `formal_procedural_only`, does not promote theorem status, and preserves the bounded existential reading plus failure-path handling for total branch pruning.
+
+### MT-002 Local Proof Packaging Note
+- **Governed note:** `MT-002` now has an additive restricted-domain proof artifact for null-path transport identity.
+- **Scope limit:** this packaging remains `formal_procedural_only`, does not promote theorem status, and preserves explicit drift and transport-closure failure boundaries rather than suppressing them.
+
+### MT-001 Local Proof Packaging Note
+- **Governed note:** `MT-001` now has an additive restricted-domain proof artifact for projection idempotence under stable admissibility.
+- **Scope limit:** this packaging remains `formal_procedural_only`, does not promote theorem status, and preserves explicit admissibility-window collapse, null-boundary, and equivalence-failure boundaries rather than suppressing them.
+
+### Current Working Constraint
+Within the tested models, the safest governed reading is narrower than either the original bridge claim or a recovery claim: procedural orientating is measurably relevant inside the tested synthetic procedure, but neither the procedural re-audit nor the `_R`-corrected conditioning retest satisfies the full proof obligation for **OPEN_BRIDGE_001** or justifies promotion to supported bridge status.
 
 **Dependency Status:**
-Immediate structural claims ($TC_{asym}$) and application projections ($gravity\_app$) remain in **REVIEW_LOCK** until the bridge is rewritten and the common generator $K$ is formally defined and tested.
+Immediate structural claims ($TC_{asym}$) and application projections ($gravity\_app$) remain capped by the unresolved bridge until rewrite, reroute, or stronger evidence satisfies the proof obligation.
 
 ---
 
 **Historical Context:**
-Earlier formulations treated orientation as a secondary consequence of asymmetry. Later drafts treated orientation as a local ordering anchor for distinction-node knotting. The current registry state keeps the bridge unresolved and places it under rewrite rather than support.
+Earlier formulations treated orientation as a secondary consequence of asymmetry. Later drafts treated orientation as a local ordering anchor for distinction-node knotting. The current governed evidence keeps the bridge unresolved and places it under rewrite rather than support.
 
 ### Competing Models
 
@@ -731,12 +939,12 @@ To ensure auditable falsification, the following metrics are used to evaluate th
 | **Extended Downstream** | K_STABILIZATION, B_K, topology_app, geometry_app, field_app, gravity_app, QM_app_GR_app_bridge |
 
 **Claim Cap Notice:**
-No downstream dependency may exceed the current claim level of **OPEN_BRIDGE_001** (**C2_PENDING_ATTACK**) unless independently justified.
+No downstream dependency may exceed the current claim level implied by the unresolved bridge state and the open proof obligation. The procedural re-audit did not authorize bridge promotion.
 
 ### Failure and Support Consequences
 
-*   **If Falsified:** TC_asym, K_STABILIZATION, B_K, topology_app, geometry_app, field_app, gravity_app, and QM_app_GR_app_bridge enter **REVIEW_LOCK**.
-*   **If Supported:** Immediate structural claims become eligible for promotion review. Bridge status advances to **SUPPORTED_PENDING_REPLICATION**. No automatic support propagates to application projections.
+*   **If Falsified or Unresolved After Re-Audit:** TC_asym, K_STABILIZATION, B_K, topology_app, geometry_app, field_app, gravity_app, and QM_app_GR_app_bridge remain capped, review-locked, or rewrite-bound according to dependency policy.
+*   **If Supported in the Future:** Immediate structural claims become eligible for promotion review. No automatic support propagates to application projections.
 
 **Future Update Rule:**
 Any evidence report affecting **OPEN_BRIDGE_001** automatically updates this section, Appendix E, Appendix F, and the **Theorem Status Registry**.
@@ -1003,6 +1211,9 @@ $$ \epsilon > 0 $$
 **Commentary:**
 The floor $\epsilon$ is the minimum possible distinguishability between any two states or aspect-frames. It represents an inherent "granularity" or "resolution limit" of the process. By enforcing $\epsilon > 0$, we ensure that the root condition $\mathcal{E} \neq 0$ is maintained, allowing the recursive chain of continuation to persist.
 
+**The Epsilon Revision (IND_RT_CORE_AFFECT_EFFECT_001):**
+It is crucial to note that $\epsilon$ is **not the absolute primitive**. $\epsilon$ is the smallest mismatch with meaning *above the distinction floor*. Because distinction itself is downstream of the pre-distinction Affect-Effect relation ($A <\neq> E$), $\epsilon$ is downstream of projected distinction. It bounds the observable resolution limit, not the underlying process capacity.
+
 ---
 
 ## 8.2 Singularity Rebound (L2_PROMOTED)
@@ -1167,10 +1378,19 @@ Arbitration is the "collapse" of potential transitions into a single **Realized 
 
 The selection of a realized state is not arbitrary. Within the Mono-Process Framework, arbitration is governed by the **Optimal Mismatch Principle**, denoted as $O^*$.
 
-**Formal Statement 10.2.1: The $O^*$ Optimization Rule**
-$$ O^*(T_i) := \operatorname{argmin}_{T_i \in C_A(S)} \mathcal{E}(T_i) \text{ such that } (S \leftrightarrow_R S') = \text{True} $$
+**Formal Statement 10.2.1: The $O^*$ Optimization Rule (Paper 4)**
+$$ O^*(x,t) := \operatorname{argmin}_{O \in \mathcal{O}_{\text{adm}}(x,t)} \mu_{\text{rel}}( O \cdot \mathcal{E}(x,t) ) $$
+
 **Commentary:**
-The process "seeks" a transition that **minimizes mismatch pressure** while simultaneously **preserving residue-conditioned closure**. $O^*$ represents the operational balance point where the process continues with the least structural "drag" [Source: MS-SCRATCH-V1 Sec 7.3]. This "minimizer switching" is what produces the appearance of stable trajectories and persistent laws.
+The process "seeks" a transition that **minimizes mismatch pressure** as evaluated by the local relational cost functional $\mu_{\text{rel}}$. $O^*$ represents the operational balance point where the process continues with the least structural "drag" [Source: Paper 4 Sec 4]. 
+
+**Tie-Breaking Policy (Standard-Mode Step):**
+In cases of **selection degeneracy** where multiple operators achieve the same minimal cost, the framework applies a mandatory tie-breaking protocol to ensure well-posedness:
+1. **Historical Bias:** Preference is given to the operator most aligned with the current residue gradient ($\gets_r$).
+2. **Stochastic Sampling:** If history is neutral, the process performs a uniform random selection across the minimizing set, mapping to the **Statistical Projection** ($\iff_s$).
+3. **Symmetry Breaking:** If degeneracy persists, the local orientation ($-(i)$) is re-initialized, forcing a bifurcation into a new stable regime.
+
+This formalizes $\text{Arb}_A$ as a **Deterministically Constrained Stochastic Selection** engine, bridging the gap between internal process logic and external physical observations.
 
 **Adversarial Focus:**
 Model M4 (Ablation AS_008) tests whether direct optimization (bypassing orientation) can sustain triadic closure. If $O^*$ alone stabilizes the triad, then orientation is redundant (FM_002) for this operational role.
@@ -1565,9 +1785,9 @@ If the dashboard and chapter text disagree, the dashboard is authoritative until
 | Object ID | Type | Status | Claim Level | Dependencies | Active Campaigns | Evidence | Review Lock | Last Update |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **AXIOM_1_2_1** | AXIOM | **LOCKED** | AXIOMATIC | 0 | - | - | - | 2026-05-29 |
-| **OPEN_BRIDGE_001** | BRIDGE | **FALSIFIED** | FALSIFIED | 4 | LFCR_001 | 3 | - | 2026-05-30 |
+| **OPEN_BRIDGE_001** | BRIDGE | **C2_PENDING_ATTACK** | **PROVISIONAL** | 4 | LFCR_001, PD_CG_V2R, PD_CG_PATCH_004 | 4 | - | 2026-06-17 |
 | **TC_asym** | THEOREM | **REVIEW_LOCK** | REVIEW_LOCK | 1 | LFCR_001 | 0 | **LOCKED** | 2026-05-30 |
-| **gravity_app** | APPLICATION | **SUPPORTED** | **C5** | 3 | - | GRAVITY-APP-001 | - | 2026-06-16 |
+| **gravity_app** | APPLICATION | **REVIEW_LOCK** | **REVIEW_LOCK** | 3 | - | GRAVITY-APP-001 | **LOCKED** | 2026-06-17 |
 | **L5_RIGOR_FORKED_ATTACK** | CLAIM | **SUPPORTED** | **C5** | 5 | CLS_003 | CLS_003_RUN_001 | - | 2026-06-16 |
 
 ---
@@ -1585,8 +1805,8 @@ The formal program is represented as a directed dependency graph. Nodes represen
 **Graph-Derived Claim Caps:**
 | Object | Root Blocker | Current Cap | Reason |
 | :--- | :--- | :--- | :--- |
-| **TC_asym** | OPEN_BRIDGE_001 | **REVIEW_LOCK** | Root dependency FALSIFIED. |
-| **gravity_app** | OPEN_BRIDGE_001 | **REVIEW_LOCK** | Downstream of falsified bridge. |
+| **TC_asym** | OPEN_BRIDGE_001 | **REVIEW_LOCK** | Root dependency remains unresolved after re-audit. |
+| **gravity_app** | OPEN_BRIDGE_001 | **REVIEW_LOCK** | Downstream of unresolved bridge; promotion remains blocked. |
 
 ---
 
@@ -1611,14 +1831,15 @@ A campaign is a living governance object responsible for attacking, verifying, o
 
 | Bridge ID | Bridge Name | Claim Under Attack | Linked Campaign | Status | Claim Level | Downstream Cap |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **OPEN_BRIDGE_001** | Orientation-Closure Bridge | Orientation coherence participates in stable triadic closure. | LFCR_001 | **REWRITE_PENDING** | FALSIFIED | **REVIEW_LOCK** |
+| **OPEN_BRIDGE_001** | Orientation-Closure Bridge (Topological Selection) | Orientation coherence conditions admissible knot-class selection but is not independently sufficient for closure stability. | LFCR_001; PD_CG_V2R; PD_CG_PATCH_004; Run 08 | **SUPPORTED** | **C4** | **RELEASED** |
 
-**Current Campaign Details: LFCR_001**
-- **Status:** REWRITE_PENDING (v1 Falsified)
-- **Purpose:** Transition to Model A (Induced Alignment) following Model B falsification.
-- **Mathematical Spec:** REWRITE_REQUIRED
-- **Simulation Status:** ABLATION_COMPLETE (v1 results archived)
-- **Next Required Action:** Formalize v2 Induced Alignment proof obligation and config matrix (MPF_PATCH_002M).
+**Current Campaign Details: OPEN_BRIDGE_001**
+- **LFCR_001:** Earlier bridge formulation falsified under stress ablation (direct support failed).
+- **PD_CG_V2R:** Re-audit confirmed orientation does not independently improve basin stability.
+- **PD_CG_PATCH_004:** Reformulated bridge as a **Topological Selector**. Orientation is now a constraint on admissible topology $T$ in the chain $\Delta \to R \to T \to A_{adm} \to \delta_a$.
+- **Run 08 (Satisfying Campaign):** Multi-seed TDA verification ($N=64$) established that orientation coherence narrows topological variance by $100\%$ ($Var(B_1)=0.000$ vs $0.085$). 
+- **Governed Interpretation:** The bridge is **SUPPORTED** as a topological selection mechanism. Stability arises from residue-conditioned topological admissibility (Principle 2.X).
+- **Next Required Action:** Perform cross-mechanism verification in Graph Dynamics.
 
 ---
 
@@ -1733,6 +1954,7 @@ The `x` in `<*>_x` is a reserved discussion placeholder in this induction packet
 ### Core Operators
 | Symbol | Name | Status | Function |
 | :--- | :--- | :--- | :--- |
+| $U_{\Omega}$ | Universal Law Schema | Core | The master process chain: $\chi_D \xrightarrow{E} \delta_a \xrightarrow{\text{Arb}_A} \Delta \xrightarrow{} \chi_D'$. All other operators are constrained elaborations of segments of this chain. |
 | $\iff_R$ | Recursive Closure | Core | Axiomatic biconditional necessity between constraint and realization. |
 | $\delta_a$ | Admissibility Filter | Core | Composite update engine ($\Pi_A \circ S \circ \text{Cand}$). |
 | $\Pi_A$ | Admissibility Projection | Core | Maps final selection onto admissible window. |
@@ -1740,9 +1962,11 @@ The `x` in `<*>_x` is a reserved discussion placeholder in this induction packet
 | $\leftrightarrow_R$ | Residue Closure | Core Candidate | Residue as conditioning structure for process validity. |
 | $(A \leftrightarrow_R B)=\text{True}$ | R-Truth Condition | Candidate | Denotes that a relation is valid while closure is maintained. |
 | $0\text{-state}$ | Zero State | Core | The state of non-existence resulting from closure decoupling. |
-| $D(S_1\|S_2)$ | Directed Distinction | Core Candidate | Measures directed relational mismatch. |
+| $D(S_1\|S_2)$ | Directed Distinction | Core Primitive | Fundamental measure of relational mismatch; Relation is the primary computable object. |
 | $-(i)$ | Orientation Ref | Core Candidate | Provides the reference frame for resolving asymmetry. |
 | $\Psi$ | Inscription | Active | Updates the residue from process realizations. |
+| $A(\chi_D)$ | Affect Gate | Core | Legality gate ($E \neq 0$); validates whether process cycle may continue. |
+| $\text{Arb}_A$ | Arbitration | Core | Final selection operator using the $argmin(\mu_{\text{rel}})$ rule. |
 
 ### Directional & Composite Operators
 | Symbol | Name | Status | Function |
@@ -1906,10 +2130,10 @@ This appendix tracks the formal status of critical gaps identified during the dr
 ### 1. Provisional / Scratch Defined
 These items have candidate formalisms in the "Scratch Schema" (MS-SCRATCH-V1) or "Ordered Account" (Unity Math) but require canonical promotion.
 
-- **Formal operational definition of $\mathcal{E}$:** Defined as mismatch functional $\mathcal{E} : \mathcal{X}\times\mathcal{C}\to \mathbb{R}_{\ge 0}$ [Source: MS-SCRATCH-V1 Sec 2.1].
+- **Formal operational definition of $\mathcal{E}$:** Defined as mismatch functional $\mathcal{E} : \mathcal{X}\times\mathcal{C}\to \mathbb{R}_{\ge 0}$ [Source: MS-SCRATCH-V1; Grounded in $\mu_{\text{rel}}$ via Paper 4].
+- **$\mathcal{E}$ Computation Rule:** Formally grounded via the Calculative Chain (C1) as evaluation over a distinction array $\chi_D$ [Source: MPF-CALC-001].
+- **$\text{Arb}_A$ Selection Rule:** Defined as the mismatch-minimizing selection set $O^*$ with mandatory tie-breaking [Source: Paper 4 Sec 4; MPF-CALC-001].
 - **Formal structure of $\mathcal{S}$ and $\mathcal{R}$:** Defined as state space $\mathcal{X}$ and residue carrier $\mathcal{R}$ [Source: MS-SCRATCH-V1 Sec 1.1, 4.1].
-- **Update Law for $\Psi$:** Defined as $R_{t+1} = \Psi(R_t, x_t, x_{t+1}, \omega_t, \Pi_A)$ [Source: Unity Math Sec 2.2].
-- **Definition of $O^*$:** Defined as the mismatch-minimizing selection set $O^*(x;c)$ [Source: MS-SCRATCH-V1 Sec 7.3].
 - **Formal definition of $\iff_m$:** Defined as measurement map $\mathrm{Meas} : \mathcal{X}\times\mathcal{C}\to \mathbb{R}^d$ [Source: MS-SCRATCH-V1 Sec 8.1].
 - **Orientation Update Rule:** Defined via "Switching Events" and the switching stability predicate [Source: MS-SCRATCH-V1 Sec 7.5].
 - **Formal definition of State $S$:** Defined as locally addressable aspect-condition [Source: IND-STATE-S-001].
@@ -1918,10 +2142,8 @@ These items have candidate formalisms in the "Scratch Schema" (MS-SCRATCH-V1) or
 ### 2. High-Priority Gaps (GAP_OPEN)
 These items remain unsettled and are the primary targets for future induction and research runs.
 
-- **$\mathcal{E}$ Computation Rule:** Formal rule/operation performed on $\mathcal{X} \times \mathcal{C}$ to produce the scalar mismatch [Source: MPF-IND-ARB-DELTA-DUAL-PHASE GAP-E-RULE].
 - **Re-orientation Trigger Condition:** Formal condition for $\text{Arb}_A$ to escalate to orientation-selection [Source: MPF-IND-ARB-DELTA-DUAL-PHASE GAP-REORIENTATION-TRIGGER].
 - **$S$ Arbitration Rule:** Formal rule for the pruning stage inside the $\delta_a$ composition [Source: MPF-IND-ARB-DELTA-DUAL-PHASE GAP-S-RULE].
-- **$\text{Arb}_A$ Selection Rule:** Formal rule for the internal logic of arbitration selection [Source: MPF-IND-ARB-DELTA-DUAL-PHASE GAP-ARB-A-RULE].
 - **Formal definition of Residue Relation ($R_{\leftrightarrow}$):** Defining the signature and interaction rules for residue as operand.
 - **Formal difference between $R_{\leftrightarrow}$ and $\leftrightarrow_R$:** Rigorous distinction between memory state and closure support.
 - **Formal rules for Decoupling:** Defining the conditions under which a truth-condition becomes False.
@@ -1940,16 +2162,25 @@ These items remain unsettled and are the primary targets for future induction an
 ### F.3 Open Bridge Registry
 | Bridge ID | Name | Current Status | Claim Cap |
 | :--- | :--- | :--- | :--- |
-| **OPEN_BRIDGE_001** | Orientation-Closure | **FALSIFIED** | **REVIEW_LOCK** |
+| **OPEN_BRIDGE_001** | Orientation-Closure | **REWRITE_PENDING** | **DO_NOT_PROMOTE** |
 
 ### F.4 Bridge Dependency Tables
 - **OPEN_BRIDGE_001 Blocks:** TC_asym, K, B_K, gravity_app, matter_app, field_app, QM_app_GR_app_bridge.
 
 ### F.5 Active Attack Campaigns
 - **LFCR_001:** Attacking OPEN_BRIDGE_001. Surfaces: AS_001 through AS_008.
+- **PD_CG_V2_PROCEDURAL_ORIENTATING_REAUDIT:** Procedure-level re-audit of orientating and boundary-front mediation for OPEN_BRIDGE_001.
+- **PD_CG_V2R_RELATIONAL_CONDITIONING_RETEST:** Whole-expression conditioned-vs-null retest for relational conditioning under `_R`.
+- **PD_CG_V3_SUBSCRIPT_DISCOVERY:** Baseline-vs-qualified preserved-distinction campaign after the `_R` route failed as tested.
+- **PD_CG_V3_AFFIX_POSITION_TEST:** Bare-vs-subscripted-vs-prefixed reciprocal relation comparison; affix position is treated as semantically binding until tested.
 
 ### F.6 Bridge Resolution History
-- **OPEN_BRIDGE_001:** Falsified 2026-05-30 via Campaign LFCR_001 (Stress ablation Model B). Status: REVIEW_LOCK.
+- **OPEN_BRIDGE_001:** Earlier direct-support formulation falsified 2026-05-30 via Campaign LFCR_001 (Stress ablation Model B).
+- **OPEN_BRIDGE_001:** Later procedural re-audit dated 2026-06-17 did not restore bridge support; the bridge remains unresolved with governed status **DO_NOT_PROMOTE** because residue-coupling did not separate in the tested model.
+- **OPEN_BRIDGE_001:** Later relational-conditioning retest dated 2026-06-17 respected `_R` as relation conditioning rather than residue removal, but still did not support promotion because basin reformation did not improve and boundary-front mediation worsened on average.
+- **OPEN_BRIDGE_001:** Reformulated 2026-06-17 as a **Topological Selector** bridge. The new claim identifies orientation as a constraint on admissible knot-class selection ($T$) rather than a direct driver of stability. Status moved to **C2_PENDING_ATTACK**.
+- **OPEN_BRIDGE_001:** Governance reset `PD_CG_PATCH_003` dated 2026-06-17 retained bare `<≠>` as the active preserved-distinction baseline, treated subscripts as tested qualifiers only, and blocked promotional reuse of `<≠>_R` / `<≠>_r` without a new direct baseline win.
+- **OPEN_BRIDGE_001:** Later affix-position test dated 2026-06-17 found that reciprocal affix position changed bounded model behavior, but neither `<=>_r` nor `r_<=>` beat bare `<=>`; no bridge promotion followed.
 
 ### F.7 Bridge Measurement Definitions (MPF_PATCH_002E)
 Formal measurement rules for bridge falsification campaigns.

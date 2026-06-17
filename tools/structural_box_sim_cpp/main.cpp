@@ -41,6 +41,18 @@ Diagnostic calculate_diagnostics(size_t nx, const T* epsilon, const T* rho, cons
 }
 
 template<typename T>
+void save_grid(size_t nx, const T* data, const std::string& path) {
+    std::ofstream f(path);
+    if (f.is_open()) {
+        for (size_t i = 0; i < nx; ++i) {
+            f << static_cast<double>(data[i]) << (i == nx - 1 ? "" : ",");
+        }
+        f << std::endl;
+        f.close();
+    }
+}
+
+template<typename T>
 void run_sim(sycl::queue& q, size_t nx, T dt, T length,
              T D_epsilon, T D_rho, T D_R,
              T a, T b, T c, T u,
@@ -48,7 +60,8 @@ void run_sim(sycl::queue& q, size_t nx, T dt, T length,
              T kappa, T lambda_R, T activity_thresh,
              const json& init_config,
              const json& sequence,
-             const std::string& label, json& report) {
+             const std::string& label, json& report,
+             bool save_final_grid = false, const std::string& out_dir = "") {
     
     StructuralBoxEngineSYCL<T> engine(nx, q);
     T dx = length / nx;
@@ -92,6 +105,10 @@ void run_sim(sycl::queue& q, size_t nx, T dt, T length,
 
     Diagnostic d = calculate_diagnostics(nx, engine.epsilon, engine.rho, engine.residue, activity_thresh);
     
+    if (save_final_grid && !out_dir.empty()) {
+        save_grid(nx, engine.epsilon, (std::filesystem::path(out_dir) / (label + "_epsilon.csv")).string());
+    }
+
     report[label] = {
         {"epsilon_max", d.epsilon_max},
         {"rho_min", d.rho_min},
@@ -178,15 +195,17 @@ int main(int argc, char** argv) {
     report["hardware_gpu"] = q_gpu.get_device().get_info<sycl::info::device::name>();
     report["hardware_cpu"] = q_cpu.get_device().get_info<sycl::info::device::name>();
 
+    bool save_grid_flag = config_json.value("save_grid", false);
+
     std::cout << "Running FP32 on GPU..." << std::endl;
-    run_sim<float>(q_gpu, nx, dt, length, D_epsilon, D_rho, D_R, a, b, c, u, alpha, beta, gamma, v, h, kappa, lambda_R, activity_thresh, init_config, sequence, "fp32_results", report);
+    run_sim<float>(q_gpu, nx, dt, length, D_epsilon, D_rho, D_R, a, b, c, u, alpha, beta, gamma, v, h, kappa, lambda_R, activity_thresh, init_config, sequence, "fp32_results", report, false, "");
 
     std::cout << "Running FP64 on CPU..." << std::endl;
     run_sim<double>(q_cpu, nx, static_cast<double>(dt), static_cast<double>(length), 
                     static_cast<double>(D_epsilon), static_cast<double>(D_rho), static_cast<double>(D_R),
                     static_cast<double>(a), static_cast<double>(b), static_cast<double>(c), static_cast<double>(u),
                     static_cast<double>(alpha), static_cast<double>(beta), static_cast<double>(gamma), static_cast<double>(v), static_cast<double>(h),
-                    static_cast<double>(kappa), static_cast<double>(lambda_R), static_cast<double>(activity_thresh), init_config, sequence, "fp64_results", report);
+                    static_cast<double>(kappa), static_cast<double>(lambda_R), static_cast<double>(activity_thresh), init_config, sequence, "fp64_results", report, save_grid_flag, out_dir);
 
     // Falsification: Zero Mismatch (s=0) should lead to structural collapse or lower activity
     std::cout << "Running Falsification (Zero Mismatch)..." << std::endl;
@@ -202,7 +221,7 @@ int main(int argc, char** argv) {
                     static_cast<double>(D_epsilon), static_cast<double>(D_rho), static_cast<double>(D_R),
                     static_cast<double>(a), static_cast<double>(b), static_cast<double>(c), static_cast<double>(u),
                     static_cast<double>(alpha), static_cast<double>(beta), static_cast<double>(gamma), static_cast<double>(v), static_cast<double>(h),
-                    static_cast<double>(kappa), static_cast<double>(lambda_R), static_cast<double>(activity_thresh), init_config, fals_seq, "falsification_zero_s", report);
+                    static_cast<double>(kappa), static_cast<double>(lambda_R), static_cast<double>(activity_thresh), init_config, fals_seq, "falsification_zero_s", report, false, "");
 
     // Precision drift calculation
     double drift_e = std::abs(report["fp32_results"]["epsilon_max"].get<double>() - report["fp64_results"]["epsilon_max"].get<double>());

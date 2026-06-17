@@ -42,8 +42,49 @@
         "description": "The operator mapping mismatch pressure into admissible process continuation under residue constraints.",
         "children": [
           {
-            "node_id": "DERIV-002",
-            "label": "admissibility ordering",
+            "node_id": "DERIV-001.5",
+            "label": "residue-conditioned loop",
+            "concept": "Recursive Admissibility Evolution / PRIN-2-X",
+            "prerequisite_operators": [
+              "Delta",
+              "R",
+              "-(i)",
+              "Psi"
+            ],
+            "collapse_dependencies": [
+              "loop_decoupling",
+              "topological_collapse"
+            ],
+            "governing_invariants": [
+              "Delta -> R -> T -> A_adm",
+              "A_adm(t+1) = F(A_adm(t), R(t))",
+              "-(i) conditions selection on T"
+            ],
+            "description": "The recursive chain where continuation leaves residue, conditioning topology and future admissibility, with orientation constraining admissible knot-classes.",
+            "children": [
+              {
+                "node_id": "DERIV-001.5A",
+                "label": "admissibility evolution loop",
+                "concept": "Evolutionary Legality / COR-2-X-001",
+                "prerequisite_operators": [
+                  "Delta",
+                  "R",
+                  "T",
+                  "A_adm",
+                  "-(i)"
+                ],
+                "collapse_dependencies": [
+                  "loop_decoupling",
+                  "topological_collapse"
+                ],
+                "governing_invariants": [
+                  "A_adm(t+1) = F(A_adm(t), R(t))"
+                ],
+                "description": "The specific recursive loop where admissibility structure evolves through process-generated trace and orientation-constrained topology.",
+                "children": [
+                  {
+                    "node_id": "DERIV-002",
+                    "label": "admissibility ordering",
             "concept": "Admissibility Ranking / Selection Manifold",
             "prerequisite_operators": [
               "Pi_A",

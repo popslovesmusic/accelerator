@@ -38,12 +38,17 @@ def main():
     subprocess.run(full_cmd, shell=True, check=True)
     
     # Extract results and write metrics.json
-    # Assume it produces summary.json
-    summary_path = Path(args.out) / "summary.json"
-    if summary_path.exists():
-        with open(summary_path, 'r') as f:
-            summary = json.load(f)
-            metrics = summary.get("metrics", {})
+    # Matches main.cpp output: tda_report_v2.json
+    report_path = Path(args.out) / "tda_report_v2.json"
+    if report_path.exists():
+        with open(report_path, 'r') as f:
+            report = json.load(f)
+            # Extract topology metrics
+            metrics = report.get("topology", {})
+            # If landscape mode
+            if not metrics and "persistence_landscape" in report:
+                metrics = report["persistence_landscape"][-1] # Take last step
+            
             with open(Path(args.out) / "metrics.json", 'w') as mf:
                 json.dump(metrics, mf, indent=2)
 

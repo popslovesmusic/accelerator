@@ -4,78 +4,78 @@
   "bridges": [
     {
       "bridge_id": "OPEN_BRIDGE_001",
-      "name": "Orientation-Closure Bridge",
-      "status": "REWRITE_PENDING",
+      "name": "Orientation-Closure Bridge (Topological Selection)",
+      "status": "SUPPORTED",
       "statement": {
-        "informal": "Orientation participates in closure formation.",
-        "formal": "Stable closure probability depends on coherent orientation structure."
+        "informal": "Orientation coherence conditions admissible knot-class selection but is not independently sufficient for closure stability.",
+        "formal": "-(i) conditions selection on T in the chain Delta -> R -> T -> A_adm -> delta_a"
       },
       "candidate_models": {
-        "MODEL_A": {
-          "name": "Orientation After Asymmetry",
-          "chain": [
-            "D(Sa|Sb)>0",
-            "relational asymmetry",
-            "-(i)",
-            "closure realization"
-          ],
-          "description": "Orientation is induced after asymmetry and does not participate directly in closure generation."
-        },
-        "MODEL_B": {
-          "name": "Orientation Participatory",
-          "chain": [
-            "D(Sa|Sb)>0",
-            "-(i)",
-            "ordered node structure",
-            "closure realization"
-          ],
-          "description": "Orientation is an active closure-forming component."
+        "MODEL_D": {
+          "name": "Topological Selection Model",
+          "description": "Orientation is a selector/constraint on admissible closure topology, while stability arises from residue-conditioned topological admissibility (Principle 2.X)."
         }
       },
       "hypotheses": {
-        "H0": "Closure stability is independent of orientation coherence.",
-        "H1": "Closure stability depends on orientation coherence."
+        "H0": "Orientation coherence has no independent effect on knot-class selection or admissible topology.",
+        "H1": "Orientation coherence narrows the set of admissible knot-classes (T)."
       },
       "observables": [
-        "closure_survival",
-        "closure_duration",
-        "collapse_rate",
+        "knot_class_distribution",
+        "topological_stability_mean",
         "orientation_coherence",
-        "recovery_rate"
+        "alignment_success_rate"
       ],
-      "success_condition": "Orientation coherence predicts closure persistence significantly better than random controls.",
+      "success_condition": "Orientation coherence significantly narrows the distribution of observed knot-classes in admissible regimes.",
       "failure_conditions": {
-        "minimum": "Orientation coherence provides no measurable predictive value.",
-        "strong": "Randomized orientation performs as well or better than coherent orientation."
+        "minimum": "Knot-class distribution is identical regardless of orientation coherence.",
+        "strong": "Knot stability depends only on residue accumulation (R), with orientation providing no predictive shift in topological class."
       },
-      "patch_reference": "MPF_PATCH_001A_OPEN_BRIDGE_001_FORMALIZATION",
+      "resolution_history": [
+        {
+          "date": "2026-05-30",
+          "event": "falsified_as_direct_support_bridge",
+          "source": "LFCR_001"
+        },
+        {
+          "date": "2026-06-17",
+          "event": "reformulated_as_topological_selector",
+          "source": "PRIN_2X_ADMISS_EVOL_REFINEMENT_001"
+        },
+        {
+          "date": "2026-06-17",
+          "event": "satisfied_empirical_obligation",
+          "source": "PO_OPEN_BRIDGE_001_SATISFACTION_REPORT"
+        }
+      ],
+      "evidence_paths": [
+        "results/2026-06-16_run08_OPEN_BRIDGE_001_SATISFACTION"
+      ],
+      "patch_reference": "PD_CG_PATCH_004_BRIDGE_REFORMULATION",
       "dependency_map": "registry/math/bridge_dependency_registry.json",
-      "attack_surface_map": "registry/math/attack_surface_registry.json",
-      "proof_obligation": "registry/math/open_bridge_proof_obligation_registry.json",
-      "executable_metrics": "registry/math/executable_metric_registry.json",
-      "falsification_report": "LFCR_001_STRESS_REPORT_001",
-      "superseded_by": "OPEN_BRIDGE_001_v2"
+      "proof_obligation": "registry/math/open_bridge_proof_obligation_registry.json"
     },
     {
-      "bridge_id": "OPEN_BRIDGE_001_v2",
-      "name": "Orientation-Closure Bridge (Consequence Model)",
-      "status": "PROPOSED",
+      "bridge_id": "OPEN_BRIDGE_001_v3",
+      "name": "Orientation-Closure Bridge (Procedural Model)",
+      "status": "RECOVERY_PENDING",
       "statement": {
-        "informal": "Orientation is a consequence of stable triadic closure.",
-        "formal": "Coherent orientation is induced by the stabilized triadic closure of distinction-nodes."
+        "informal": "Procedural orientating maintains the core invariants of the admissibility window.",
+        "formal": "A <\u2260> a ->_r O_-i ->_r partial_W_a ->_r W_a"
       },
       "candidate_models": {
-        "MODEL_A_V2": {
-          "name": "Induced Alignment",
-          "chain": [
-            "TC_asym",
-            "-(i)_alignment",
-            "NavT_stabilization"
-          ]
+        "MODEL_C": {
+          "name": "Independent Aspect Model",
+          "description": "Orientation (procedure) and closure (structural invariant) are decoupled signatures of a common underlying recursive residue field (K)."
         }
       },
-      "reason_for_rewrite": "LFCR_001 demonstrated that orientation coherence does not drive closure stability (Model B falsified). v2 shifts the dependency to Model A where orientation is a signature or secondary stabilizer of already-formed closure.",
-      "exit_path": "REWRITE"
+      "reason_for_rewrite": "PD_CG_V2 justified procedure-level re-audit, but PD_CG_V2R did not support promotion of the _R-conditioned improvement route. The active governed baseline is now bare preserved distinction pending direct baseline-vs-qualifier testing.",
+      "evidence_paths": [
+        "results/pd_cg_v2_reaudit/reaudit_results.json",
+        "results/pd_cg_v2r_relational_conditioning_retest/retest_results.json"
+      ],
+      "governance_note": "PD_CG_PATCH_003_SUBSCRIPT_BASELINE_RESET: use bare <\u2260> as baseline; treat subscripts as candidate conditioning qualifiers only; do not promote <\u2260>_R / <\u2260>_r without a new direct baseline comparison win.",
+      "exit_path": "RECOVERY"
     }
   ]
 }

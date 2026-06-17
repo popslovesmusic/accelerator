@@ -3,135 +3,106 @@
   "version": "1.0.0",
   "obligations": [
     {
-      "obligation_id": "PO_OPEN_BRIDGE_001_ORIENTATION_CLOSURE",
+      "obligation_id": "PO_OPEN_BRIDGE_001_ORIENTATION_SELECTION",
       "bridge_id": "OPEN_BRIDGE_001",
-      "bridge_name": "Orientation-Closure Bridge",
-      "claim": "Orientation coherence participates causally or structurally in stable triadic closure.",
+      "bridge_name": "Orientation-Closure Bridge (Topological Selection)",
+      "claim": "Orientation coherence conditions admissible knot-class selection (T) but is not independently sufficient for closure stability.",
       "must_establish": [
         {
           "id": "PO_001",
           "requirement": "Orientation coherence is measurable.",
-          "formal_need": "Define C_orient in a way that does not presuppose closure."
+          "formal_need": "Define C_orient in a way that does not presuppose closure topology."
         },
         {
           "id": "PO_002",
-          "requirement": "Closure stability is measurable.",
-          "formal_need": "Define S_closure independently from orientation coherence."
+          "requirement": "Knot-class distribution is measurable.",
+          "formal_need": "Define a topological metric (e.g., braid index) to categorize observed closures."
         },
         {
           "id": "PO_003",
-          "requirement": "Orientation coherence predicts closure stability.",
-          "formal_need": "Show S_closure = f(C_orient, R, delta_a) with nonzero orientation contribution."
+          "requirement": "Orientation coherence narrows admissible knot-classes.",
+          "formal_need": "Show that Var(T | C_orient > 0.8) < Var(T | C_orient approx 0)."
         },
         {
           "id": "PO_004",
-          "requirement": "Orientation cannot be replaced by matched random orientation.",
-          "formal_need": "M0_full must outperform M1_random_orientation."
+          "requirement": "Stability arises from Principle 2.X, not orientation.",
+          "formal_need": "Show that closure survival S_closure is highly correlated with R_support but poorly correlated with C_orient once T is fixed."
         },
         {
           "id": "PO_005",
-          "requirement": "Orientation is not merely residue in disguise.",
-          "formal_need": "M0_full must outperform M2_residue_dominance_or_orientation_erasure."
-        },
-        {
-          "id": "PO_006",
-          "requirement": "Orientation is not merely admissibility in disguise.",
-          "formal_need": "M0_full must outperform M3_admissibility_dominance_or_orientation_erasure."
-        },
-        {
-          "id": "PO_007",
-          "requirement": "Orientation contribution survives seed variance.",
-          "formal_need": "Effect remains across multi-seed simulation campaign."
+          "requirement": "Orientation acts as a selector.",
+          "formal_need": "Verify that specific knot-classes T_k only emerge in compatible orientation regimes."
         }
       ],
       "formal_minimum": {
         "orientation_coherence_metric": "C_orient",
-        "closure_stability_metric": "S_closure",
-        "minimum_relation": "partial_effect(C_orient -> S_closure | R, delta_a, topology) > tau"
+        "topological_class_variance": "Var(T)",
+        "minimum_relation": "Effect(C_orient -> T_class) > tau"
       },
       "hypotheses": {
         "null": {
-          "id": "H0_OPEN_BRIDGE_001",
-          "statement": "Orientation coherence has no independent contribution to closure stability once residue, admissibility, and topology are controlled."
+          "id": "H0_OPEN_BRIDGE_001_REFORMULATED",
+          "statement": "Orientation coherence has no independent effect on knot-class selection or admissible topology T."
         },
         "alternative": {
-          "id": "H1_OPEN_BRIDGE_001",
-          "statement": "Orientation coherence has an independent contribution to closure stability after residue, admissibility, and topology are controlled."
+          "id": "H1_OPEN_BRIDGE_001_REFORMULATED",
+          "statement": "Orientation coherence narrows the set of admissible knot-classes T."
         }
       },
       "mathematical_obligation": {
         "must_define": [
           "C_orient",
+          "T_class_metric",
           "S_closure",
           "R_support",
-          "A_width",
-          "topology_fixed_control",
           "tau"
         ],
         "required_form": {
-          "controlled_relation": "S_closure = beta_0 + beta_1*C_orient + beta_2*R_support + beta_3*A_width + beta_4*Topology + epsilon_noise",
-          "support_condition": "beta_1 > tau and statistically stable",
-          "failure_condition": "beta_1 approx 0 or unstable across controls"
-        },
-        "non_regression_rule": "C_orient must not be defined using S_closure; otherwise the proof is circular."
+          "controlled_relation": "T_class = f(C_orient, R_support, Delta) + noise",
+          "support_condition": "Orientation coherence significantly shifts the modal T_class.",
+          "failure_condition": "T_class distribution is invariant to orientation structure."
+        }
       },
       "simulation_obligation": {
         "required_controls": [
           "full_mechanism",
-          "orientation_removed",
-          "orientation_randomized",
           "orientation_shuffled",
-          "residue_removed",
-          "residue_shuffled",
-          "admissibility_randomized",
-          "topology_fixed_orientation_removed"
+          "fixed_orientation_regimes",
+          "residue_depleted"
         ],
         "required_reports": [
-          "mean_closure_survival",
-          "mean_closure_duration",
-          "collapse_rate",
-          "orientation_coherence",
-          "residue_support",
-          "admissibility_width",
-          "effect_size",
-          "confidence_interval",
-          "seed_variance"
+          "knot_class_histogram",
+          "mean_topological_stability",
+          "residue_contribution_to_S",
+          "orientation_contribution_to_T"
         ],
-        "minimum_seed_count": 64,
-        "minimum_main_sample_size": 100000
+        "minimum_seed_count": 64
       },
       "decision_rules": {
         "support": {
-          "condition": "Orientation contribution is positive, stable, and survives all matched ablation controls.",
+          "condition": "Orientation coherence significantly and predictably narrows the distribution of knot-classes.",
           "allowed_claim_level": "C4_candidate"
         },
         "downgrade": {
-          "condition": "Orientation contribution appears but is weak, parameter-sensitive, or confounded with residue/admissibility.",
+          "condition": "Orientation effect on T is weak or easily overridden by high residue pressure.",
           "allowed_claim_level": "C2_to_C3"
         },
         "falsify": {
-          "condition": "Orientation contribution disappears under controls, or randomized/removed orientation performs equally.",
+          "condition": "Topological selection is independent of orientation coherence.",
           "allowed_claim_level": "FALSIFIED_OR_REWRITE_REQUIRED"
         }
       },
       "governance_effect": {
         "if_supported": [
-          "OPEN_BRIDGE_001 may be marked SUPPORTED_PENDING_REPLICATION.",
-          "Immediate structural claims may request promotion review.",
-          "Application projections remain blocked until independently tested."
-        ],
-        "if_downgraded": [
-          "OPEN_BRIDGE_001 remains open.",
-          "Dependent structural claims cannot exceed bridge claim level.",
-          "Simulation assumptions must be rewritten."
+          "OPEN_BRIDGE_001 may be promoted to SUPPORTED.",
+          "Triadic closure TC_asym may exit REVIEW_LOCK into T-class specific promotion."
         ],
         "if_falsified": [
-          "OPEN_BRIDGE_001 enters REVIEW_LOCK.",
-          "TC_asym, K, B_K, topology_app, geometry_app, field_app, gravity_app, and QM_app_GR_app bridge enter dependency review.",
-          "A replacement bridge must be proposed before downstream promotion."
+          "Orientation is retired as a structural selector.",
+          "Knot-class selection must be rerouted to pure residue-admissibility dynamics."
         ]
       },
-      "patch_reference": "MPF_PATCH_001D_PROOF_OBLIGATION_OBJECT"
+      "patch_reference": "PD_CG_PATCH_004_BRIDGE_REFORMULATION"
     }
   ]
 }
