@@ -78,6 +78,15 @@ This document tracks the strategic objectives following the successful consolida
 - [ ] **Task 4.7: Macroscopic Projection and Behavioral Prediction**
     - [ ] Map $\Sigma_R$ to predicted response basins in `structural_box_sim_cpp`.
     - [ ] Verify that $W_a$ membership predicts perturbation survival.
+- [x] **Task 4.8: Execute PD_CG Root-Trace Falsification (PD_CG_V1)**
+    - [x] Performed `ATTACK_001_ROOT_DRIFT` (Verified derivation of $<\neq>_r$ in PD_CG_NOTE_001).
+    - [x] Executed `ATTACK_002` to `ATTACK_005` (Confirmed 100% $W_a$ stability vs 0% boundary stability).
+    - [x] Formalized **Relational Hierarchy** (Core Invariants C5 vs Interaction Observables C2).
+- [ ] **Task 4.9: Re-Audit OPEN_BRIDGE_001 (Orientation-Closure)**
+    - [ ] Re-evaluate LFCR_001 results using the whole-expression RT(Sigma_R) unit.
+    - [ ] Determine if orientation-coherence failure was isolated to interaction observables (Layer 3) while core invariants (Layer 1) hold.
+
+
 
 
 ### 5. Procedural PDE Engine (2D/3D Campaign Spec V0.1)

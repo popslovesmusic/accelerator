@@ -1322,6 +1322,25 @@ Distinction density $\rho_D$ participates in dominance selection, rotational cha
 
 Module **CLS_004R** supports this reinterpretation within tested synthetic models: rotation and window-width invariants remained stable (100%) under perturbation, while 85% of distinct trajectories collapsed into shared admissibility classes. This reclassifies the "quadrant volatility" observed in geometric models as a boundary-front interaction observable rather than identity instability [Source: CLS_004R_REPORT].
 
+### 11.1A.1 The Relational Hierarchy of Identity
+
+Based on the success of the **PD_CG_V1** root-trace falsification attack, process identity is formally governed by a hierarchy of stability:
+
+1.  **Core Invariants (Level C5):**
+    - **Admissibility Window ($W_a$):** The primary phase relationship limits.
+    - **Rotational Character ($\chi$):** The stable CW/CCW directional character.
+    - *Status:* 100% stable under perturbation; verified as root-traceable invariants.
+
+2.  **Selection Dynamics (Level C4):**
+    - **Distinction Density ($\rho_D$):** Weighted persistence of mismatch states.
+    - **Dominant Mismatch ($M_{dom}$):** The largest effective magnitude.
+    - *Status:* ~70% stable; sensitive to noise amplitudes but structurally consistent.
+
+3.  **Interaction Observables (Level C2):**
+    - **Boundary Fronts ($\partial W_a$):** Active regions between admissibility windows.
+    - **Orientation Events ($R_{-(i)}$):** The discrete event sequence within the chain.
+    - *Status:* 0% stability; highly volatile results reclassified as boundary interaction dynamics rather than identity markers.
+
 ---
 
 ## 11.2 Braids and Triadic Closure ($B_K$)
@@ -1735,6 +1754,8 @@ The `x` in `<*>_x` is a reserved discussion placeholder in this induction packet
 | $\to_r$ | Forward Residue | Candidate | Biases the next state based on history. |
 | $\gets_r$ | Reverse Residue | Candidate | Anchors the current state in history. |
 | $\to_a \otimes \gets_r$ | Composite Coupling | Experimental | Couples potential and history for realization. |
+| $<\neq>_r$ | Relational Non-Identity | Core | Derived structural compression of the root expression $(A \iff_R a \text{ where } A \neq a)$. |
+| $\sim_A$ | Admissibility Equivalence | Candidate | Relation asserting that two RT expressions belong to the same admissibility organization. |
 
 ### Projection & Transport Operators
 | Symbol | Name | Status | Function |
@@ -1798,6 +1819,17 @@ This appendix summarizes the standards for classifying and promoting research cl
 | **C4** | Supported Internal | Multi-Model support | 2+ Mechanism Classes, 3+ Seeds, Falsification passed. |
 | **C5** | Validate | External Alignment | Independent measurement, 4+ Falsification Vectors. |
 | **C6** | Theorem | Formal Closure | Universal mechanism independence, formal derivation from Axiomatic Floor. |
+
+### D.1A Relational Hierarchy and Whole-Expression Rule
+
+Identity claims within the framework must adhere to the **Relational Hierarchy** established in Module CLS_004R:
+
+1.  **Core Invariants (C5):** Admissibility Window ($W_a$), Rotational Character ($\chi$).
+2.  **Selection Dynamics (C4):** Distinction Density ($\rho_D$), Dominant Mismatch ($M_{dom}$).
+3.  **Interaction Observables (C2):** Boundary Fronts ($\partial W_a$), Orientation Events ($R_{-(i)}$).
+
+**Governance Rule (R-SIG-001):**
+The full coupled expression of a signature (e.g., $\Sigma_R$) is the mandatory **evaluative unit**. No claim of identity, equivalence, or classification may be based solely on isolated components from Layer 2 or Layer 3 of the hierarchy. Promotion of an identity claim to Level C4+ requires stability verification of all Core Invariants.
 
 ### D.2 Claim Cap Propagation
 No formal object may hold a stronger claim level than its weakest unresolved **REQUIRED** dependency (**CLAIM_CAP_PRINCIPLE_001**). REQUIRED dependencies cap downstream objects at their current level. BLOCKING dependencies freeze downstream objects until resolved.
