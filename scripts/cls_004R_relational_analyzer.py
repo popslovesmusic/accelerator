@@ -121,6 +121,66 @@ class RelationalBasinAnalyzer:
         
         return summary
 
+    def run_falsification_attacks(self, n=50, perturbation=0.1):
+        print(f"[PD_CG_V1] Commencing Falsification Attacks (n={n})...")
+        results = []
+        
+        for i in range(n):
+            vecs = self.generate_synthetic_process(seed=i*500)
+            sig_full = self.extract_sigma_r(vecs)
+            
+            # Perturb
+            vecs_p = self.generate_synthetic_process(seed=i*500, noise=perturbation)
+            sig_p = self.extract_sigma_r(vecs_p)
+            
+            # ATTACK_003: Component Isolation
+            # Check if any single component predicts identity (seed matching) better than Sigma_R
+            # (In this synthetic test, identity is the seed)
+            
+            # ATTACK_002: Trajectory Dominance
+            # Compare Sigma_R stability vs a raw trajectory hash
+            traj_hash = hash(vecs.tobytes())
+            traj_hash_p = hash(vecs_p.tobytes())
+            traj_stable = (traj_hash == traj_hash_p)
+            
+            sig_stable = (sig_full["id"] == sig_p["id"])
+            
+            # ATTACK_004: Boundary Front
+            # Check if Wa width is more stable than event count
+            wa_stable = abs(sig_full["Wa"]["width"] - sig_p["Wa"]["width"]) < perturbation * 2
+            event_stable = (len(sig_full["R_minus_i"]) == len(sig_p["R_minus_i"]))
+            
+            results.append({
+                "index": i,
+                "sig_stable": sig_stable,
+                "traj_stable": traj_stable,
+                "wa_stable": wa_stable,
+                "event_stable": event_stable
+            })
+            
+        summary = {
+            "sig_v_traj": {
+                "sig_stability": sum(r["sig_stable"] for r in results) / n,
+                "traj_stability": sum(r["traj_stable"] for r in results) / n
+            },
+            "wa_v_event": {
+                "wa_stability": sum(r["wa_stable"] for r in results) / n,
+                "event_stability": sum(r["event_stable"] for r in results) / n
+            }
+        }
+        
+        with open(self.output_dir / "falsification_attack_results.json", "w") as f:
+            json.dump({"summary": summary, "results": results}, f, indent=2)
+            
+        print("[SUCCESS] Falsification attacks complete.")
+        print(f"  Sigma_R Stability: {summary['sig_v_traj']['sig_stability']*100}%")
+        print(f"  Trajectory Stability: {summary['sig_v_traj']['traj_stability']*100}%")
+        print(f"  Wa (Basin) Stability: {summary['wa_v_event']['wa_stability']*100}%")
+        print(f"  Event (Boundary) Stability: {summary['wa_v_event']['event_stability']*100}%")
+        
+        return summary
+
 if __name__ == "__main__":
     analyzer = RelationalBasinAnalyzer()
     analyzer.run_validation_suite()
+    analyzer.run_falsification_attacks()

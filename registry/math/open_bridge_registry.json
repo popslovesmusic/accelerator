@@ -5,7 +5,7 @@
     {
       "bridge_id": "OPEN_BRIDGE_001",
       "name": "Orientation-Closure Bridge",
-      "status": "FORMALIZED",
+      "status": "REWRITE_PENDING",
       "statement": {
         "informal": "Orientation participates in closure formation.",
         "formal": "Stable closure probability depends on coherent orientation structure."
@@ -51,7 +51,31 @@
       "patch_reference": "MPF_PATCH_001A_OPEN_BRIDGE_001_FORMALIZATION",
       "dependency_map": "registry/math/bridge_dependency_registry.json",
       "attack_surface_map": "registry/math/attack_surface_registry.json",
-      "proof_obligation": "registry/math/open_bridge_proof_obligation_registry.json"
+      "proof_obligation": "registry/math/open_bridge_proof_obligation_registry.json",
+      "executable_metrics": "registry/math/executable_metric_registry.json",
+      "falsification_report": "LFCR_001_STRESS_REPORT_001",
+      "superseded_by": "OPEN_BRIDGE_001_v2"
+    },
+    {
+      "bridge_id": "OPEN_BRIDGE_001_v2",
+      "name": "Orientation-Closure Bridge (Consequence Model)",
+      "status": "PROPOSED",
+      "statement": {
+        "informal": "Orientation is a consequence of stable triadic closure.",
+        "formal": "Coherent orientation is induced by the stabilized triadic closure of distinction-nodes."
+      },
+      "candidate_models": {
+        "MODEL_A_V2": {
+          "name": "Induced Alignment",
+          "chain": [
+            "TC_asym",
+            "-(i)_alignment",
+            "NavT_stabilization"
+          ]
+        }
+      },
+      "reason_for_rewrite": "LFCR_001 demonstrated that orientation coherence does not drive closure stability (Model B falsified). v2 shifts the dependency to Model A where orientation is a signature or secondary stabilizer of already-formed closure.",
+      "exit_path": "REWRITE"
     }
   ]
 }

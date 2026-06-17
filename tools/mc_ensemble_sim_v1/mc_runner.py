@@ -60,10 +60,11 @@ def run_trial(trial_id, target_script, base_config, scan_params, output_root):
     result = {"trial_id": trial_id}
     result.update(sampled)
     
-    # simulator summaries usually have a 'final_metrics' dict
-    if 'final_metrics' in summary:
-        for k, v in summary['final_metrics'].items():
-            result[f"metric_{k}"] = v
+    # Aggregation: look for common result keys
+    for key in ['final_metrics', 'observables']:
+        if key in summary:
+            for k, v in summary[key].items():
+                result[f"metric_{k}"] = v
             
     return result
 

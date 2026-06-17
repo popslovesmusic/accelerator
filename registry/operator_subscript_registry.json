@@ -3,6 +3,22 @@
     "version": "1.0",
     "status": "AUTHORIZED",
     "description": "Registry of operational relation subscripts defining coupling modes.",
+    "legal_suffixes": [
+      "R",
+      "a",
+      "r",
+      "m",
+      "s",
+      "app",
+      "obs",
+      "bio",
+      "fld",
+      "eco",
+      "top"
+    ],
+    "reserved_suffixes": [
+      "x"
+    ],
     "subscripts": [
       {
         "symbol": "R",
@@ -25,22 +41,23 @@
       },
       {
         "symbol": "x",
-        "name": "Relational-Distance Projection",
-        "operator_family": "projection",
-        "meaning": "Couples asymmetric relational distance expressions without asserting equality.",
-        "domain": "D(S1|S2), D(S2|S1)",
-        "codomain": "Relational asymmetry mapping",
+        "name": "Reserved Meta Discussion Path",
+        "operator_family": "meta",
+        "reserved_meta_only": true,
+        "meaning": "Reserved for meta-language discussion only; not a legal operator suffix.",
+        "domain": "Meta-induction notes and grammar discussions",
+        "codomain": "Reserved discussion space",
         "preserved_invariants": [
-          "order sensitivity",
-          "nonzero relational distinction",
-          "asymmetric pairing"
+          "meta-only usage",
+          "no proof-operator promotion",
+          "no domain typing"
         ],
         "failure_modes": [
-          "false symmetry",
-          "distance collapse",
-          "loss of order-dependence"
+          "illegal proof usage",
+          "suffix overloading",
+          "domain drift"
         ],
-        "governance_ceiling": "C5"
+        "governance_ceiling": "C0"
       },
       {
         "symbol": "xa",
@@ -210,8 +227,104 @@
         "meaning": "Legacy symbol for non-interacting or baseline coupled state.",
         "status": "deprecated",
         "governance_ceiling": "C2"
+      },
+      {
+        "symbol": "obs",
+        "name": "Observation Context",
+        "operator_family": "measurement",
+        "meaning": "Relation evaluated at the observer-facing projection layer rather than at deep identity or residue closure.",
+        "preserved_invariants": [
+          "observer-observed distinction",
+          "projection-loss visibility",
+          "non-identity under appearance changes"
+        ],
+        "failure_modes": [
+          "observable-identity collapse",
+          "projection scope drift"
+        ],
+        "governance_ceiling": "C3"
+      },
+      {
+        "symbol": "id",
+        "name": "Identity Trace Context",
+        "operator_family": "closure",
+        "meaning": "Relation evaluated against stabilized identity traces or persistence signatures without asserting primitive sameness.",
+        "preserved_invariants": [
+          "persistence trace distinction",
+          "non-primitive identity",
+          "residue-linked continuity"
+        ],
+        "failure_modes": [
+          "identity reification",
+          "trace flattening"
+        ],
+        "governance_ceiling": "C3"
+      },
+      {
+        "symbol": "bio",
+        "name": "Biological Coupling Context",
+        "operator_family": "projection",
+        "meaning": "Relation evaluated within organism-subsystem or system-environment biological coupling without collapse into sameness.",
+        "preserved_invariants": [
+          "organism-subsystem distinction",
+          "interaction specificity",
+          "bounded coupling"
+        ],
+        "failure_modes": [
+          "whole-part collapse",
+          "overextension to empirical biology"
+        ],
+        "governance_ceiling": "C2"
+      },
+      {
+        "symbol": "fld",
+        "name": "Field Relation Context",
+        "operator_family": "projection",
+        "meaning": "Relation evaluated between field-like structure and excitation-like structure without treating either as primitive substance.",
+        "preserved_invariants": [
+          "field-excitation distinction",
+          "projection scope",
+          "non-substance reading"
+        ],
+        "failure_modes": [
+          "field-substance reification",
+          "projection conflation"
+        ],
+        "governance_ceiling": "C2"
+      },
+      {
+        "symbol": "eco",
+        "name": "Ecological Context",
+        "operator_family": "projection",
+        "meaning": "Relation evaluated across environment-organism coupling while preserving local role asymmetry.",
+        "preserved_invariants": [
+          "environment-organism distinction",
+          "context dependence",
+          "bounded ecological interaction"
+        ],
+        "failure_modes": [
+          "context washout",
+          "mutual-collapse shorthand"
+        ],
+        "governance_ceiling": "C2"
+      },
+      {
+        "symbol": "top",
+        "name": "Topological Projection Context",
+        "operator_family": "projection",
+        "meaning": "Relation evaluated relative to topological organization without treating topology as a primitive container.",
+        "preserved_invariants": [
+          "process-topology distinction",
+          "reachability structure",
+          "non-container reading"
+        ],
+        "failure_modes": [
+          "topology as substrate",
+          "projection flattening"
+        ],
+        "governance_ceiling": "C3"
       }
     ],
-    "audit_rule": "Any expression using <->_\u03b1 or \u21d4_\u03b1 must fail validation unless \u03b1 exists in the operator_subscript_registry and has a declared operator family."
+    "audit_rule": "Any expression using <->_\u03b1 or \u21d4_\u03b1 must fail validation unless \u03b1 exists in the operator_subscript_registry, is not reserved_meta_only, and has a declared operator family."
   }
 }

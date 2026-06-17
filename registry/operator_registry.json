@@ -8,10 +8,39 @@
     "analogy_scoped": true,
     "no_primitive_time": true
   },
+  "meta_schemas": [
+    {
+      "symbol": "<*>_x",
+      "name": "Meta Relation Schema",
+      "classification": "META_LANGUAGE_ONLY",
+      "meaning": "Generic admissible relation schema for legal binary relation operators.",
+      "reading": "A stands in some legal relation to B along an admissible continuation path x.",
+      "reserved_path_variable": "x",
+      "reserved_path_variable_note": "Reserved for generic discussion only within this meta-schema; not a proof operator suffix.",
+      "scope": [
+        "definitions",
+        "induction notes",
+        "registry discussions"
+      ],
+      "restrictions": [
+        "Not a legal proof operator.",
+        "May not appear in proofs, derivations, or theorem statements.",
+        "Does not itself confer truth conditions."
+      ],
+      "instantiates": [
+        "<=>_R",
+        "->a",
+        "<-a",
+        "->r",
+        "<-r",
+        "<≠>_P"
+      ]
+    }
+  ],
   "operators": [
     {
       "symbol": "delta_a",
-      "latex": "\delta_a",
+      "latex": "\\delta_a",
       "name": "Admissibility-Constrained Continuation",
       "domain": "Nonzero distinguishability (E != 0)",
       "codomain": "Admissible continuation candidate set {Q_alpha} subset A",
@@ -21,7 +50,7 @@
     },
     {
       "symbol": "NavT",
-      "latex": "	ext{NavT}",
+      "latex": "\\text{NavT}",
       "name": "Orientation-Array Transport",
       "domain": "Locus state S_alpha, Mismatch E, Orientation reference -(i)_alpha",
       "codomain": "Transport neighborhood T subset Lambda",
@@ -31,7 +60,7 @@
     },
     {
       "symbol": "Arb_A",
-      "latex": "	ext{Arb}_A",
+      "latex": "\\text{Arb}_A",
       "name": "Admissibility-Governed Arbitration",
       "domain": "Continuation candidate set {Q_alpha}",
       "codomain": "Realized future state S_t+1",
@@ -51,7 +80,7 @@
     },
     {
       "symbol": "->a",
-      "latex": "ightarrow_a",
+      "latex": "\\rightarrow_a",
       "name": "Forward Admissibility Projection",
       "domain": "Domain A",
       "codomain": "Domain B (Admissibly reachable)",
@@ -60,7 +89,7 @@
     },
     {
       "symbol": "<-a",
-      "latex": "\leftarrow_a",
+      "latex": "\\leftarrow_a",
       "name": "Reverse Admissibility Projection",
       "domain": "Domain B",
       "codomain": "Domain A (Admissibly reachable)",
@@ -69,7 +98,7 @@
     },
     {
       "symbol": "->r",
-      "latex": "ightarrow_r",
+      "latex": "\\rightarrow_r",
       "name": "Forward Residue Continuation",
       "domain": "Residue source A",
       "codomain": "Residue sink B",
@@ -78,7 +107,7 @@
     },
     {
       "symbol": "<-r",
-      "latex": "\leftarrow_r",
+      "latex": "\\leftarrow_r",
       "name": "Reverse Residue Support",
       "domain": "Residue source B",
       "codomain": "Residue sink A",
@@ -87,7 +116,7 @@
     },
     {
       "symbol": "->a ⊗ <-r",
-      "latex": "ightarrow_a \otimes \leftarrow_r",
+      "latex": "\\rightarrow_a \\otimes \\leftarrow_r",
       "name": "Admissibility-Residue Coupling Operator",
       "domain": "Relational basins A, B",
       "codomain": "Stabilized correspondence state",
@@ -96,7 +125,7 @@
     },
     {
       "symbol": "Omega_a",
-      "latex": "\Omega_a",
+      "latex": "\\Omega_a",
       "name": "Asymmetry Ratio",
       "domain": "Relational distinction pair (D(S1|S2), D(S2|S1))",
       "codomain": "Orientation regulation scalar",
@@ -105,7 +134,7 @@
     },
     {
       "symbol": "=>Omega_a",
-      "latex": "\Rightarrow_{\Omega_a}",
+      "latex": "\\Rightarrow_{\\Omega_a}",
       "name": "Asymmetry Bridge Operator",
       "domain": "Distinction asymmetry state (D1 != D2)",
       "codomain": "Local orientation reference -(i)",
@@ -114,7 +143,7 @@
     },
     {
       "symbol": "xb",
-      "latex": "\Leftrightarrow_{xb}",
+      "latex": "\\Leftrightarrow_{xb}",
       "name": "Cross-Basin Projection (Bridge)",
       "domain": "Micro-procedural update density sum(delta_a,i)",
       "codomain": "Coarse macro-relational topology (geometry_app)",
@@ -128,7 +157,7 @@
     },
     {
       "symbol": "R",
-      "latex": "\Leftrightarrow_R",
+      "latex": "\\Leftrightarrow_R",
       "name": "Residue-History Conditioned Realization",
       "domain": "Primitive basis {E, R, A}",
       "codomain": "Recursive process cycle C",
@@ -148,7 +177,7 @@
     },
     {
       "symbol": "Pi",
-      "latex": "\Pi",
+      "latex": "\\Pi",
       "name": "Projection Operators (Pi_A, Pi_R)",
       "domain": "Substrate process states",
       "codomain": "Analogy-layer observables (_app)",
@@ -158,7 +187,7 @@
     },
     {
       "symbol": "⇔_m",
-      "latex": "\Leftrightarrow_m",
+      "latex": "\\Leftrightarrow_m",
       "name": "Metric Projection Operator",
       "domain": "Asymmetry Domain ((asym_app)nDOF)",
       "codomain": "Asymmetry Metrics (D1, D2)",
@@ -167,12 +196,28 @@
     },
     {
       "symbol": "⇔_s",
-      "latex": "\Leftrightarrow_s",
+      "latex": "\\Leftrightarrow_s",
       "name": "Statistical Projection Operator",
       "domain": "Asymmetry Metrics (D1, D2)",
       "codomain": "Statistical Observables (P)",
       "closure_condition": "Successful projection of metric quantities to statistical realizations",
       "status": "CANDIDATE"
+    },
+    {
+      "symbol": "<≠>",
+      "latex": "<\\neq>",
+      "name": "Non-Identity Relation Operator",
+      "operator_family": "preserved_distinction_relation",
+      "domain": "Two distinguishable relata A, B with declared context X and active distinction D(A|B) > 0",
+      "codomain": "A typed relation claim asserting coupling without identity collapse",
+      "closure_condition": "Relation and distinction co-survive under context X without collapsing A and B into the same operational role",
+      "collapse_mode": "Identity Collapse / Untyped Context Drift / Relation Without Distinction",
+      "composition_rules": [
+        "Requires explicit context subscript X",
+        "Does not replace residue-conditioned closure ⇔_R",
+        "Remains provisional until truth conditions and counterexamples are formally settled"
+      ],
+      "status": "PROVISIONAL_RESEARCH_SCAFFOLD"
     }
   ]
 }

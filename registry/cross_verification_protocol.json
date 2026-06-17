@@ -1,50 +1,86 @@
 {
-"cross_verification_protocol": {
-"version": "v1.0",
-
-```
-"step_1_define_observable": {
-  "description": "Convert theory into measurable outputs",
-  "examples": {
-    "phase_locking": ["order_parameter"],
-    "structure": ["active_fraction", "connected_components"],
-    "threshold_behavior": ["crossing_fraction"],
-    "topology": ["betti_0_count"]
+  "registry_id": "CROSS_VERIFICATION_PROTOCOL_001",
+  "version": "1.1.0",
+  "status": "active",
+  "purpose": "Define the minimum governed workflow for comparing results across independent tools and mechanism classes before a result may be treated as supported.",
+  "cross_verification_protocol": {
+    "minimum_tools": 2,
+    "recommended_tools": 3,
+    "minimum_mechanism_classes": 2,
+    "supported_outcome_requires_falsification": true,
+    "steps": [
+      {
+        "step_id": "CVP-001",
+        "name": "define_observables",
+        "description": "Convert the target claim into measurable outputs that can be extracted consistently across tools.",
+        "examples": {
+          "phase_locking": [
+            "order_parameter"
+          ],
+          "structure": [
+            "active_fraction",
+            "connected_components"
+          ],
+          "threshold_behavior": [
+            "crossing_fraction"
+          ],
+          "topology": [
+            "betti_0_count"
+          ]
+        }
+      },
+      {
+        "step_id": "CVP-002",
+        "name": "run_multiple_tools",
+        "description": "Execute at least two tools representing different mechanism classes rather than repeated runs of a single update rule.",
+        "requirements": {
+          "minimum_tools": 2,
+          "recommended_tools": 3,
+          "mechanism_rule": "Tools must represent different mechanism classes such as discrete, continuous, network, stochastic, or independent measurement."
+        }
+      },
+      {
+        "step_id": "CVP-003",
+        "name": "normalize_outputs",
+        "description": "Normalize observables before comparing tools so that agreement is not an artifact of scale choice.",
+        "normalization_methods": [
+          "rescale_to_unit_interval",
+          "z_score"
+        ],
+        "purpose": "Make cross-tool comparison valid."
+      },
+      {
+        "step_id": "CVP-004",
+        "name": "compare_agreement",
+        "description": "Compare normalized outputs and classify the degree of agreement between tools.",
+        "agreement_thresholds": {
+          "strong_agreement": "correlation > 0.8",
+          "partial_agreement": "0.4 < correlation <= 0.8",
+          "contradiction": "correlation <= 0.4"
+        }
+      },
+      {
+        "step_id": "CVP-005",
+        "name": "classify_result",
+        "description": "Map the comparison outcome into the governed claim vocabulary.",
+        "allowed_outputs": [
+          "supported",
+          "partially_supported",
+          "not_supported",
+          "inconclusive"
+        ]
+      },
+      {
+        "step_id": "CVP-006",
+        "name": "run_falsification_if_supported",
+        "description": "A result may not remain classified as supported unless it survives an explicit falsification pass.",
+        "requirement": "Run falsification_suite_v1 or falsification_suite_v1_cpp if the provisional outcome is supported.",
+        "purpose": "Prevent trivial or forced agreement from being mistaken for real support."
+      }
+    ],
+    "notes": [
+      "This protocol governs agreement structure only and does not certify external truth.",
+      "Independent measurement layers should be used when required by validation_protocol_v2.json."
+    ]
   }
-},
-
-"step_2_run_multiple_tools": {
-  "min_tools": 2,
-  "recommended": 3,
-  "rule": "tools must represent different model classes (discrete, continuous, network, stochastic)"
-},
-
-"step_3_normalize_outputs": {
-  "method": "rescale all observables to [0,1] or z-score",
-  "purpose": "make cross-tool comparison valid"
-},
-
-"step_4_compare": {
-  "agreement_thresholds": {
-    "strong_agreement": "correlation > 0.8",
-    "partial_agreement": "0.4 < correlation <= 0.8",
-    "contradiction": "correlation <= 0.4"
-  }
-},
-
-"step_5_classify_result": {
-  "outputs": [
-    "supported",
-    "partially_supported",
-    "not_supported"
-  ]
-},
-
-"step_6_falsification_check": {
-  "requirement": "run falsification_suite_v1 if result is 'supported'",
-  "purpose": "ensure behavior is not trivial or forced"
-}
-```
-
-}
 }
