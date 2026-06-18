@@ -1,0 +1,129 @@
+{
+  "patch_id": "MPF_PATCH_R_DUAL_PHASE_FIXES_002",
+  "status": "ACTIVE",
+  "scope": "High-priority GAP_OPEN fixes",
+  "claim_level": "C1_DEFINED_PROVISIONAL",
+  "core_fix": {
+    "R_bidir": {
+      "symbol": "R_↔",
+      "definition": "Residue relation as operand: the structured trace-relation among residue conditions produced by lawful continuation.",
+      "not": "Not itself the closure operator and not a direct causal updater."
+    },
+    "closure_R": {
+      "symbol": "↔_R",
+      "definition": "Residue-conditioned closure: a relation between operands that is true while supported by admissible residue-conditioned topology.",
+      "not": "Not the residue state itself."
+    },
+    "distinction": "R_↔ is residue-as-operand; ↔_R is closure-support-through-residue."
+  },
+  "formal_chain": {
+    "lawful_continuation": "Δ",
+    "residue_inscription": "Δ -> R_↔",
+    "topology_conditioning": "R_↔ -> T",
+    "admissibility_conditioning": "T -> A_adm",
+    "closure_support": "A ↔_R B is true iff closure support remains admissible under A_adm",
+    "future_continuation": "A_adm -> δ_a -> Δ'"
+  },
+  "operand_rules_for_closure_R": {
+    "allowed_operands": [
+      "RT expressions",
+      "aRT expressions",
+      "distinction-nodes N_ab",
+      "triadic closure candidates",
+      "admissible topology signatures",
+      "projection signatures only when explicitly marked _app"
+    ],
+    "forbidden_operands": [
+      "undefined metaphors",
+      "bare physical objects",
+      "untyped scalar outputs",
+      "projection-only observables treated as process identity"
+    ]
+  },
+  "decoupling_rules": {
+    "definition": "Decoupling occurs when residue-conditioned support no longer preserves admissible closure between operands.",
+    "truth_transition": "(A ↔_R B) = True -> False",
+    "conditions": [
+      "nonzero distinction between operands is lost",
+      "admissibility support becomes empty",
+      "required trace relation breaks",
+      "operand type compatibility fails",
+      "closure topology cannot be preserved under allowed deformation"
+    ],
+    "important_note": "Decoupling is not automatically zero-state. It may be a local exclusion or boundary-generation event."
+  },
+  "zero_state_condition": {
+    "definition": "Zero-state is total collapse of process participation caused by failure of the primary RT/Core closure.",
+    "formal_candidate": "¬[((E ≠ 0) ↔_R δ_a(E > 0))] -> 0-state",
+    "local_exclusion_not_zero_state": true,
+    "zero_state_requires": [
+      "global E collapse",
+      "no admissible continuation",
+      "failure of primary closure",
+      "no residue-conditioned reconstruction path"
+    ]
+  },
+  "vertical_bar_operator": {
+    "symbol": "|",
+    "name": "Grouped closure participation",
+    "definition": "Within TC_asym, the vertical bar marks grouped co-participation inside one closure expression, not logical OR, division, or separable alternatives.",
+    "example": "TC_asym := N1 ↔_R (N2 | N3)",
+    "reading": "N2 and N3 participate as a grouped closure-side under residue-conditioned support."
+  },
+  "reorientation_trigger": {
+    "symbol": "Trigger_Reorient",
+    "definition": "Arb_A escalates to orientation-selection when current admissible continuation cannot preserve closure support under the existing orientation pattern.",
+    "formal_candidate": "Trigger_Reorient iff Q_current = ∅ OR closure support drops below its admissible threshold OR admissible deformation requires new -(i)",
+    "status": "CANDIDATE_RULE"
+  },
+  "S_arbitration_rule": {
+    "definition": "The S-stage inside δ_a prunes candidate continuations that violate nonzero distinction, operand typing, residue compatibility, or closure support.",
+    "candidate_order": [
+      "type admissibility",
+      "epsilon / nonzero distinction check",
+      "residue compatibility",
+      "topology preservation",
+      "orientation compatibility",
+      "arbitration ranking"
+    ],
+    "status": "CANDIDATE_RULE"
+  },
+  "meta_relation_schema": {
+    "symbol": "<*>_x",
+    "definition": "Family-level placeholder for legal typed binary relation operators.",
+    "constraint": "It is not a proof operator and does not grant truth by itself.",
+    "legal_use": "A <*>_x B requires x to specify admissibility, typing, and truth conditions."
+  },
+  "preserved_non_identity": {
+    "symbol": "<≠>_X",
+    "truth_conditions": [
+      "D(A|B) > ε or typed nonzero distinction is preserved",
+      "A and B remain coupled under context X",
+      "A and B do not collapse into the same operational role",
+      "updates preserve typed role distinction"
+    ],
+    "failure_conditions": [
+      "distinction collapses below ε",
+      "coupling fails",
+      "role identity collapses",
+      "context X is undefined"
+    ]
+  },
+  "blocked_items": {
+    "remain_gap_open": [
+      "Projection-signature extraction",
+      "Orientation Space O full calculus",
+      "Topology-to-Geometry Transform",
+      "Empirical Mapping Standards",
+      "formal iff_s",
+      "formal otimes"
+    ],
+    "reason": "These depend on stabilized residue, closure, operand, and decoupling definitions."
+  },
+  "governance_note": {
+    "simulation_dependency": false,
+    "tool_dependency": false,
+    "endorsement": "formal patch only; not simulation evidence",
+    "promotion_block": "No downstream theorem or physics projection may promote from this patch alone."
+  }
+}

@@ -119,9 +119,30 @@ This document tracks the strategic objectives following the successful consolida
     - [x] Implement `engine_3d.cpp` and update `main.cpp`.
     - [x] Run 3D baseline (16 seeds) and compare invariants against 2D.
 
+### 7. Induction Integration Follow-ups (PROVISIONAL - 2026-06-17)
+- [x] **Task 7.0: Initial Integration of MPF_IND_2026_06_17_CORE_REDUCTION**
+    - [x] Archive induction payload in `outputs/reports/`.
+    - [x] Register 3 provisional claims in `claim_registry.json`.
+    - [x] Update Chapter 1.2A and 1.7 of `mono_process_textbook_complete.md`.
+    - [x] Induct core terms (RT, Generative Exclusion, Evaluation Process, Sign) into gap queue.
+- [ ] **Task 7.1: Resolve RT Formation Gap (GAP_RT_FORMAL_CRITERION)**
+    - [ ] Define the precise admissibility condition ($ \mathcal{A} $) under which a precursor distinction becomes an RT.
+- [ ] **Task 7.2: Formalize RT Core Equivalence (GAP_RT_CORE_EQUIVALENCE)**
+    - [ ] Investigate and prove whether $ RT := [D \neq 0 \langle * \rangle_x D = 0] $ is formally equivalent to the canonical core or structurally analogous.
+- [ ] **Task 7.3: Define Sign Semantics (GAP_SIGN_SEMANTICS)**
+    - [ ] Formalize the notation for additive-signature vs. exclusion-signature and map to generative process pathways.
+- [ ] **Task 7.4: Map Evaluation Architecture (GAP_EVALUATION_ARCHITECTURE)**
+    - [ ] Formally define the relationship between the framework's governance process and the underlying admissibility/evaluation process.
 
-
-
+### 8. Repository Maintenance & Governance Debt
+- [/] **Task 8.1: Lexicon Gap Resolution (MNT-LEX-002)**
+    - [x] Initial Phase: Resolved 28 priority gaps (Core, Basin, Mathematical objects) and cleaned up noise artifacts.
+    - [ ] Ongoing: Resolve remaining 137 outstanding gaps in `registry/lexicon_gap_queue.json`.
+- [ ] **Task 8.2: Results Hygiene - Legacy Cleanup (MNT-RES-001)**
+    - [ ] Standardize the naming of legacy result folders to match the required `YYYY-MM-DD_runNN_name` schema.
+- [ ] **Task 8.3: Living SSOT Formalization (MNT-SSOT-001)**
+    - [ ] Address 'Syntax Closure' and 'Semantic Closure' requirements in the textbook as identified in `docs/textbook/textbook_formal_system_gap_assessment.md`.
+    - [ ] Specify formal object classes and well-formedness rules for the core calculus.
 
 ---
 **Standard ID:** MPF-ROADMAP-002

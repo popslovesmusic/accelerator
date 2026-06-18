@@ -1,0 +1,115 @@
+{
+  "patch_id": "MPF_OTIMES_COMPOSITION_OPERATOR_001",
+  "status": "ACTIVE",
+  "objective": "Formalize otimes as the typed composition operator for lawful coupling of RT, aRT, and orientation-conditioned process structures.",
+  "trigger": {
+    "previous_patch": "MPF_O_CALCULUS_FORMALIZATION_001",
+    "unlocked_by": "O_calculus promoted to typed provisional operator calculus",
+    "current_debt_target": "incomplete otimes"
+  },
+  "formal_definition": {
+    "title": "Formal Principle 9.X: Typed Composition Operator",
+    "status": "C1_DEFINED_PROVISIONAL",
+    "core_definition": "The operator otimes is the typed partial composition rule by which lawful process expressions couple without collapsing their role distinction.",
+    "formal_skeleton": [
+      "X otimes_Y Z is defined iff Type(X), Type(Z), and Context(Y) are declared",
+      "D(X|Z) > epsilon must remain satisfied after composition unless the composition is explicitly a collapse-boundary event",
+      "delta_a(X otimes_Y Z) != emptyset",
+      "closure_class(X) and closure_class(Z) must be compatible under Y",
+      "Result(X otimes_Y Z) in RT union aRT union typed_closure_candidate",
+      "X otimes_Y Z != Z otimes_Y X unless symmetry is separately proven under Y",
+      "(X otimes_Y Z) otimes_Y W = X otimes_Y (Z otimes_Y W) only inside a declared associativity domain"
+    ],
+    "failure_conditions": [
+      "FAIL_OTIMES_001: missing or invalid operand typing",
+      "FAIL_OTIMES_002: undefined composition context",
+      "FAIL_OTIMES_003: distinction collapse below epsilon",
+      "FAIL_OTIMES_004: admissibility empty-set",
+      "FAIL_OTIMES_005: closure-class incompatibility",
+      "FAIL_OTIMES_006: ordering collapse",
+      "FAIL_OTIMES_007: projection equivalence mistaken for process identity",
+      "FAIL_OTIMES_008: unproven commutativity or associativity assumed"
+    ],
+    "anti_reification_note": "otimes is not ordinary multiplication and not physical joining. It is typed lawful coupling between process expressions."
+  },
+  "registry_updates": {
+    "operator_registry": {
+      "operator": "otimes",
+      "symbol": "\\otimes",
+      "class": "typed_partial_composition_operator",
+      "operand_types": [
+        "RT",
+        "aRT",
+        "orientation_conditioned_RT",
+        "orientation_conditioned_aRT",
+        "typed_closure_candidate"
+      ],
+      "status": "C1_DEFINED_PROVISIONAL",
+      "properties": {
+        "partial": true,
+        "commutative": "not_assumed",
+        "associative": "context_bound_only",
+        "identity": "I_otimes"
+      }
+    },
+    "formal_object_registry": {
+      "id": "typed_composition_structure",
+      "symbol": "otimes_composition",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "depends_on": [
+        "rt_core_expression",
+        "aspectual_rt_structure",
+        "orientation_calculus",
+        "admissibility_structure",
+        "residue_relation"
+      ],
+      "provides": [
+        "typed_process_composition",
+        "composition_failure_conditions",
+        "closure_class_compatibility_rule"
+      ]
+    }
+  },
+  "appendix_f_update": {
+    "move_from": "D1_FORMAL_MISSING",
+    "move_to": "C1_DEFINED_PROVISIONAL",
+    "item": "otimes",
+    "note": "otimes no longer listed as incomplete missing formalism after typed partial composition rules and failure conditions were added."
+  },
+  "governance_constraints": {
+    "allowed": [
+      "formal operator definition",
+      "operator typing",
+      "failure condition definition",
+      "dependency registry update",
+      "glossary synchronization",
+      "Appendix F debt reclassification"
+    ],
+    "forbidden": [
+      "claiming global associativity",
+      "claiming global commutativity",
+      "treating otimes as scalar multiplication",
+      "bridge closure",
+      "physics application promotion",
+      "simulation-backed theorem promotion"
+    ],
+    "status_cap": "C1_DEFINED_PROVISIONAL"
+  },
+  "success_condition": {
+    "minimum_completed": [
+      "otimes operand types declared",
+      "typed composition rule defined",
+      "partiality rule defined",
+      "identity rule defined",
+      "non-commutativity default declared",
+      "associativity boundary declared",
+      "failure conditions explicit",
+      "Appendix F debt status updated"
+    ],
+    "result": "otimes reduced from incomplete formal debt to typed provisional composition operator."
+  },
+  "next_dependency_unlocked": [
+    "MPF_IFF_S_STATISTICAL_PROJECTION_001"
+  ],
+  "governance_note": "This patch is a formal scaffold closure only. It does not claim global associativity, global commutativity, bridge closure, or any physics application promotion."
+}

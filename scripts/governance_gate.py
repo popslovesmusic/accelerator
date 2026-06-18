@@ -346,6 +346,85 @@ class ConsistencyValidator:
             mismatches.append(f"Measurement count mismatch: metadata={meta_m_count}, body={body_m_count}")
         return {"pass": len(mismatches) == 0, "details": {"mismatches": mismatches}}
 
+class SemanticProjectionValidator:
+    def __init__(self, policy_path: str = "registry/governance/semantic_projection_policy.json"):
+        self.policy_path = policy_path
+        self.policy = self._load_json(policy_path).get("semantic_projection_governance", {})
+        self.protected_terms = self.policy.get("protected_ontology_terms", [])
+        self.blocked_identity_phrases = [
+            p.lower() for p in self.policy.get("blocked_identity_phrases", [])
+        ]
+        self.scope_requirements = self.policy.get("classification_scope_requirements", {})
+
+    def _load_json(self, path: str) -> Dict[str, Any]:
+        if os.path.exists(path):
+            with open(path, "r", encoding="utf-8") as f:
+                return json.load(f)
+        return {}
+
+    def _find_unmarked_protected_terms(self, text: str) -> List[Dict[str, Any]]:
+        violations: List[Dict[str, Any]] = []
+        lines = text.splitlines()
+        for line_no, line in enumerate(lines, start=1):
+            lower = line.lower()
+            for term in self.protected_terms:
+                pattern = r"\b" + re.escape(term) + r"\b"
+                if re.search(pattern, lower):
+                    violations.append({
+                        "term": term,
+                        "line": line_no,
+                        "excerpt": line.strip()[:240],
+                    })
+        return violations
+
+    def _find_identity_language(self, text: str) -> List[Dict[str, Any]]:
+        violations: List[Dict[str, Any]] = []
+        lines = text.splitlines()
+        regexes = [
+            r"\b(gravity|space|time|matter|energy|field|particle|vacuum|cosmos|universe|relativity|quantum)\b\s+(?:is|are|equals|equivalent to)\b",
+            r"\b(proves physics|demonstrates reality|is literally)\b",
+        ]
+        for line_no, line in enumerate(lines, start=1):
+            lower = line.lower()
+            if any(phrase in lower for phrase in self.blocked_identity_phrases):
+                violations.append({
+                    "line": line_no,
+                    "excerpt": line.strip()[:240],
+                    "rule": "blocked_identity_phrase",
+                })
+                continue
+            for pattern in regexes:
+                if re.search(pattern, lower):
+                    violations.append({
+                        "line": line_no,
+                        "excerpt": line.strip()[:240],
+                        "rule": "identity_shape",
+                    })
+                    break
+        return violations
+
+    def validate(self, paper_content: str, requested_classification: str, metadata: Dict[str, Any]) -> Dict[str, Any]:
+        unmarked_terms = self._find_unmarked_protected_terms(paper_content)
+        identity_violations = self._find_identity_language(paper_content)
+
+        scope_phrase = self.scope_requirements.get((requested_classification or "").lower())
+        scope_violation = None
+        if scope_phrase and scope_phrase.lower() not in paper_content.lower():
+            scope_violation = {
+                "required_phrase": scope_phrase,
+                "requested_classification": requested_classification,
+            }
+
+        return {
+            "pass": not unmarked_terms and not identity_violations and scope_violation is None,
+            "details": {
+                "unmarked_protected_terms": unmarked_terms,
+                "identity_violations": identity_violations,
+                "scope_violation": scope_violation,
+                "policy_path": self.policy_path,
+            },
+        }
+
 class CppPreferenceValidator:
     def __init__(self, mandates: Dict[str, Any]):
         self.mandates = mandates
@@ -461,6 +540,7 @@ class GovernanceGate:
         self.measure_v = MeasurementValidator(self.charter, tracer=tracer)
         self.falsification_v = FalsificationValidator(self.charter, tracer=tracer)
         self.consistency_v = ConsistencyValidator()
+        self.semantic_projection_v = SemanticProjectionValidator()
         self.cpp_v = CppPreferenceValidator(self.charter)
         self.math_v = MathValidator(self.charter)
 
@@ -1048,6 +1128,14 @@ class GovernanceGate:
         found_proofs = sorted(list(set(re.findall(r"\b(P\d{3})\b", content))))
         math_validation = self.math_v.validate(found_lemmas + found_proofs, target_level)
 
+        requested_classification = ""
+        if isinstance(metadata, dict):
+            requested_classification = str(
+                metadata.get("classification", metadata.get("requested_classification", "")) or ""
+            ).strip().lower()
+
+        semantic_projection_validation = self.semantic_projection_v.validate(content, requested_classification, metadata)
+
         results = {
             "template": self.template_v.validate(content),
             "consistency": self.consistency_v.validate(content, metadata),
@@ -1056,13 +1144,8 @@ class GovernanceGate:
             "cpp": self.cpp_v.validate(tools, target_level),
             "lexicon_validation": lexicon_validation,
             "math_validation": math_validation,
+            "semantic_projection": semantic_projection_validation,
         }
-
-        requested_classification = ""
-        if isinstance(metadata, dict):
-            requested_classification = str(
-                metadata.get("classification", metadata.get("requested_classification", "")) or ""
-            ).strip().lower()
 
         final_classification = requested_classification or ""
         downgrades_applied: List[str] = []
@@ -1072,6 +1155,14 @@ class GovernanceGate:
         if not math_validation["pass"] and target_level in ["C5", "C6"]:
              final_pass = False # Math failure blocks C5/C6
              blocked_reasons.append("unverified_mathematical_foundations")
+        if not semantic_projection_validation["pass"]:
+             final_pass = False
+             if semantic_projection_validation["details"].get("unmarked_protected_terms"):
+                 blocked_reasons.append("semantic_projection_unmarked_protected_term")
+             if semantic_projection_validation["details"].get("identity_violations"):
+                 blocked_reasons.append("semantic_projection_identity_language")
+             if semantic_projection_validation["details"].get("scope_violation") is not None:
+                 blocked_reasons.append("semantic_projection_scope_phrase_missing")
 
         if not final_pass: gate_result = "block"
         else: gate_result = "pass"

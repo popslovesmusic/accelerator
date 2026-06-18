@@ -1628,14 +1628,15 @@ Braids ($B_K$) are formed when multiple process strands (knots) become entangled
 
 ## 11.3 Topology $\iff$ Geometry
 
-In the Mono-Process Framework, **topology is primary and geometry is secondary**. What we perceive as "shape," "distance," or "curvature" is a projection of the underlying topological constraints.
+In the Mono-Process Framework, `topology_app` and `geometry_app` are treated as co-conditioned projections of one recursive process rather than separate primitive ontologies. Any operational map from `topology_app` into `geometry_app` is therefore governed as a projection step with explicit legality requirements before interpretation or downstream reuse.
 
 **Formal Statement 11.3.1: The Geometric Projection**
 $$ \text{Topology} \iff \text{Geometry} $$
-$$ \text{Geometry} \approx [ \text{PROVISIONAL MAPPING: Topology to Geometric Observable} ] $$
+$$ \Pi_{\mathrm{geo}} : \mathrm{Topology\_app} \to \mathrm{Geometry\_app} $$
+$$ \text{Geometry\_app} \approx \Pi_{\mathrm{geo}}(\text{Topology\_app}) \quad \text{only if projection legality is retained} $$
 
 **Commentary:**
-The transformation from topology ($K, B_K$) to geometry is a result of the **Metric Extractor ($\iff_m$)** introduced in Chapter 7. The observer reconstructs the "tightness" of the topological braids as the "curvature" of the projected space.
+The active program does not treat topology-to-geometry as an already solved metric extractor. The current governed position is that a candidate projection operator `Pi_geo` must preserve distinction class, admissibility status, orientation traceability, and closure traceability before any geometric interpretation is admitted. This is a projection-legality gate, not a proof of physical geometry.
 
 ---
 
@@ -1660,7 +1661,9 @@ To complete the formalization of the topological program, the following must be 
 
 1.  **Rigorous Definition of $K$:** [ **MISSING DEFINITION** ] Is $K$ a knot in the sense of knot theory (S1 into R3), or is it an abstract graph-cycle invariant or a periodic orbit in orientation space?
 2.  **Braid Formation Rule:** [ **MISSING DEFINITION** ] What are the formal mechanics of triadic closure? How do the individual strands of $\mathcal{E}$ "knot" together under the $\iff_R$ operator?
-3.  **Topology-to-Geometry Transform:** [ **MISSING DEFINITION** ] What is the exact mathematical operator that maps the braid group invariants of $B_K$ to the metric properties of a Riemannian or Finslerian geometry?
+3.  **Topology-to-Geometry Transform:** [ **PROVISIONAL OPERATOR / LEGALITY GATE** ] The candidate operator is
+    $$ \Pi_{\mathrm{geo}} : \mathrm{Topology\_app} \to \mathrm{Geometry\_app}. $$
+    Its admissibility is currently governed by the projection-legality conditions in `L099`, the hardening gate in `L100`, and the pending validation campaign `GEO_PROJECTION_VALIDATION_001`. No physical metric theory is promoted from this placeholder.
 
 ---
 
@@ -2202,7 +2205,7 @@ These items remain unsettled and are the primary targets for future induction an
 - **Formal operand of $\leftrightarrow_R$:** Defining the types allowed to participate in residue-conditioned closure.
 - **Vertical Bar Operator ($\mid$):** Formally fixing the meaning of "grouped closure participation" in triadic closure.
 - **Orientation Space $\mathcal{O}$:** Formal definition still required to close the calculus-level semantics of the selector bridge and to reroute downstream theorems cleanly.
-- **Topology-to-Geometry Transform:** The operator that maps braid group invariants ($B_K$) to metric properties. (Ref: 11.3, 11.5)
+- **Topology-to-Geometry Transform:** Provisional `Pi_geo : Topology_app -> Geometry_app` legality gate. Promotion requires distinction, admissibility, orientation, and closure preservation plus campaign evidence. (Ref: 11.3, 11.5)
 - **Empirical Mapping Standards:** Mapping framework metrics ($\Omega_a$, $B_K$) to physical constants ($G, h, c$). (Ref: 12.5)
 - **Formal definition of $\otimes$:** The composition and interference rules for composite directional coupling. (Ref: 9.1, 9.4)
 - **Formal definition of $\iff_s$:** The exact mapping between mismatch intensity and statistical realization. (Ref: 7.3)
@@ -2217,6 +2220,7 @@ These items remain unsettled and are the primary targets for future induction an
 ### F.4 Bridge Dependency Tables
 - **OPEN_BRIDGE_001 Requires Rewrite/Reroute Review For:** TC_asym, K, B_K.
 - **OPEN_BRIDGE_001 Does Not Auto-Promote:** topology_app, geometry_app, gravity_app, matter_app, field_app, QM_app_GR_app_bridge.
+- **Topology_to_Geometry_Hardening:** `Topology_app -> Geometry_app` remains `PROJECTION_LEGALITY_REQUIRED` pending `L099`, `L100`, and `GEO_PROJECTION_VALIDATION_001`; no downstream auto-promotion follows from geometric expressiveness alone.
 
 ### F.5 Active Attack Campaigns
 - **LFCR_001:** Attacking OPEN_BRIDGE_001. Surfaces: AS_001 through AS_008.

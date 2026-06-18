@@ -1,0 +1,62 @@
+{
+  "patch_id": "MPF_IFF_S_STATISTICAL_PROJECTION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-06-18",
+  "objective": "Formalize iff_s as the typed statistical projection operator that maps lawful process structures into probability/statistical observables without collapsing projection into process identity.",
+  "status_cap": "C1_DEFINED_PROVISIONAL",
+  "governance_note": "This patch closes language-level statistical projection scaffolds only. It does not certify physics correspondence, convert raw simulation frequency into governed probability, or promote bridge claims.",
+  "formal_definition": {
+    "title": "Formal Principle 7.X: Statistical Projection Operator",
+    "core_definition": "The operator \\iff_s is the typed projection relation by which lawful process structures are represented as statistical observables under declared admissibility and normalization conditions.",
+    "formal_skeleton": [
+      "X \\iff_s P_X is defined iff Type(X) is declared and ProjectionMap_s(X) is declared.",
+      "X must be an RT, aRT, typed composition structure, metric projection, asymmetry ratio, or admissibility distribution candidate.",
+      "A_adm(X) != emptyset.",
+      "P_X must be marked as statistical_projection_app.",
+      "Norm(P_X) must be one of: normalized, conditionally_normalized, comparative_weight.",
+      "P_X = P_Y does not imply X = Y.",
+      "X = Y may imply compatible P_X and P_Y only under a declared projection map."
+    ],
+    "failure_conditions": [
+      "FAIL_IFF_S_001: missing or invalid operand typing",
+      "FAIL_IFF_S_002: undeclared statistical projection map",
+      "FAIL_IFF_S_003: admissibility empty-set",
+      "FAIL_IFF_S_004: normalization status undeclared",
+      "FAIL_IFF_S_005: projection equivalence mistaken for process identity",
+      "FAIL_IFF_S_006: raw simulation frequency treated as governed probability",
+      "FAIL_IFF_S_007: probability assigned outside declared admissibility window"
+    ],
+    "anti_reification_note": "iff_s does not create probability as a primitive substance. It marks a projection layer from lawful process structure into statistical observable form."
+  },
+  "registry_updates": {
+    "operator_registry": {
+      "symbol": "\\iff_s",
+      "class": "typed_statistical_projection_operator",
+      "status": "C1_DEFINED_PROVISIONAL"
+    },
+    "formal_object_registry": {
+      "id": "statistical_projection_structure",
+      "symbol": "iff_s_projection",
+      "status": "C1_DEFINED_PROVISIONAL"
+    },
+    "appendix_f_update": {
+      "move_from": "D1_FORMAL_MISSING",
+      "move_to": "C1_DEFINED_PROVISIONAL",
+      "item": "iff_s",
+      "note": "iff_s no longer listed as incomplete missing formalism after typed statistical projection rules, normalization requirements, and failure conditions are added."
+    }
+  },
+  "forbidden_promotions": [
+    "claiming probability is primitive",
+    "claiming statistical equivalence proves process identity",
+    "treating raw simulation frequency as governed probability",
+    "physics application promotion",
+    "bridge closure",
+    "simulation-backed theorem promotion"
+  ],
+  "next_dependency_unlocked": [
+    "formal_debt_reconciliation_pass",
+    "projection_layer_audit",
+    "metric_to_statistical_bridge_hardening"
+  ]
+}

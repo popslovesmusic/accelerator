@@ -69,3 +69,5 @@ L095 | Admissibility Exhaustion | L082 | provisional | Hard-collapse mode via mi
 L096 | Residue Decoherence | L085, L090 | provisional | Collapse of shared constraints and coupling fracture
 L097 | Knot Destabilization | T001, L089 | provisional | Dissolution of identity via threshold failure or rank loss
 L098 | Basin Ecology Collapse | L078, L094 | provisional | Scale fracture under global occupancy saturation
+L099 | Projection Legality | L045, L080 | unproven | Definition of Pi_geo admissibility requirements
+L100 | Topology-Geometry Hardening Gate | L045, L080, L099, OPEN_BRIDGE_001 | conditional | Promotion gate: Topology_app -> Geometry_app requires Pi_geo legality plus GEO_PROJECTION_VALIDATION_001

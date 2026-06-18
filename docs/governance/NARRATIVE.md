@@ -56,6 +56,29 @@ We are simulators of process, not masters of reality.
 
 ---
 
+### 5.1 Adversarial Hardening as Living SSOT Maintenance
+Adversarial hardening is now an official **Living SSOT maintenance process** rather than an ad hoc cleanup activity. The active anchor for this process is `MPF_ADV_HARDENING_SERIES_001_GOVERNANCE_ANCHOR`, recorded in `registry/governance/adversarial_hardening_registry.json`.
+
+This maintenance layer exists to absorb recurring attack lessons before they re-enter the theory stack as hidden assumptions. Its minimum required checks are:
+1. **Ontology leakage review:** Detect when projection, implementation, or object-language drifts into process-ontology claims.
+2. **Meta-level declaration:** Require every critique, patch, and formal argument to declare the level being addressed.
+3. **Whole-expression compliance:** Prevent aspect analysis from being misread as ontological independence.
+4. **Aspect decomposition governance:** Preserve analytical decomposition as an inspection method rather than a foundation claim.
+5. **Implementation firewall review:** Block code structure, array layout, update order, or execution artifacts from being used as ontology evidence.
+
+The current adversarial hardening backfill order is:
+1. `MPF_ADV_HARDENING_SERIES_001_GOVERNANCE_ANCHOR`
+2. `MPF_ADV_HARDENING_SERIES_002_WHOLE_EXPRESSION_BACKFILL`
+3. `MPF_ADV_HARDENING_SERIES_003_AFFECT_EFFECT_BACKFILL`
+4. `MPF_ADV_HARDENING_SERIES_004_DUAL_INSCRIPTION_BACKFILL`
+5. `MPF_ADV_HARDENING_SERIES_005_META_LEVEL_STACK_BACKFILL`
+6. `MPF_ADV_HARDENING_SERIES_006_CONDITIONAL_ARRAY_BACKFILL`
+7. `MPF_ADV_HARDENING_SERIES_007_CLOSURE_NEIGHBORHOOD_BACKFILL`
+
+This order is governance infrastructure first, theory backfill second. No downstream rewrite in the series is treated as authoritative until the hardening anchor remains synchronized across the registry layer, the textbook, the claim ledger, and the validation annotations.
+
+---
+
 ### Where to Start?
 1.  **Read `registry/tool_manifest.json`:** See the 38 tools available to you.
 2.  **Check `docs/reports/TOOL_SCIENTIFIC_RIGOR_REPORT_2026-04-30.md`:** See which tools are C4-ready and which are blocked.

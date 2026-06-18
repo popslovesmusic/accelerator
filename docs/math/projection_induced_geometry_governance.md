@@ -31,6 +31,7 @@ Geometry-like structure\_proj is the observation of **stabilized persistence** w
 - **PGEO-RULE-003**: No geometry-like structure\_proj may claim the derivation of physical spacetime\_analog or spacetime\_curvature\_analog.
 - **PGEO-RULE-004**: Stabilized persistence does not imply ontological independence from the process core.
 - **PGEO-RULE-005**: Loss accounting is mandatory for all geometry-like mapping.
+- **PGEO-RULE-006**: Any `Topology_app -> Geometry_app` mapping must pass the `Pi_geo` legality gate defined by `L099` and hardened by `L100` before bridge promotion, physical interpretation, or downstream application usage.
 
 ## 5. Usage Rules
 
@@ -47,7 +48,7 @@ Geometry-like structure\_proj is the observation of **stabilized persistence** w
 
 ## 6. Governance Footer
 - **Theorem Status**: NOT_PROVEN.
-- **Governance Status**: CANDIDATE_PROJECTION_GEOMETRY.
+- **Governance Status**: CANDIDATE_PROJECTION_GEOMETRY / PROJECTION_LEGALITY_REQUIRED.
 - **Scope Status**: STRICTLY_LOCAL_RESTRICTED_DOMAIN.
 - **Physics Status**: NON_PHYSICAL_ANALOG_MODEL.
 

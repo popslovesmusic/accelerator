@@ -20,10 +20,15 @@ This document tracks and categorizes open mathematical questions within the Mono
 - **Q-OP-01**: How does `delta` compose with `Pi_A` and `NavT` under selection constraints?
 - **Q-OP-02**: Can selection be reconstructed from observed continuation events?
 
+### Projection Legality
+- **Q-PG-01**: What candidate form of `Pi_geo : Topology_app -> Geometry_app` preserves distinction, admissibility, orientation traceability, and closure traceability without illegal smoothing?
+- **Q-PG-02**: Which loss-accounting schema is sufficient to distinguish lawful geometry projection from uncontrolled topology collapse?
+
 ## Dependency Mapping
 - **MT-001 Resilience** depends on resolution of **Q-UN-01**.
 - **MT-002 Stability** depends on resolution of **Q-TR-01**.
 - **MT-003 Validity** depends on resolution of **Q-EX-01**.
+- **Topology_to_Geometry_Hardening** depends on resolution of **Q-PG-01** and measured retention under `GEO_PROJECTION_VALIDATION_001`.
 
 ## Governance Note
 Open questions are documented for research guidance. Resolution requires formal proof obligations and evidence-ladder satisfaction.
