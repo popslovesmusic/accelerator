@@ -1234,7 +1234,7 @@ To complete the bridge between relational primitives and metric observables, the
 - **Chapter 3** provided the $D(S_1|S_2)$ primitive.
 - **Chapter 4** introduced the asymmetry domains that these metrics characterize.
 - **Chapter 8** will formalize the **Floor $\epsilon$** that regularizes the calculation of $\Omega_a$.
-- **Chapter 12** will use these projections to derive empirical analogs like **matter_app** and **energy_app**.
+- **Chapter 12** will examine candidate projection pathways for domains such as **matter_app** and **energy_app**, subject to the active legality and bridge-governance gates rather than assuming automatic promotion.
 
 By distinguishing between the internal process relations and their metric/statistical projections, we preserve the "process-first" ontology of the framework while still allowing for rigorous comparison to external data.
 
@@ -1322,7 +1322,7 @@ To complete the formalization of the floor condition, the following must be reso
 - **Chapter 1** established the necessity of $\mathcal{E} \neq 0$.
 - **Chapter 3** introduced $D(S_1|S_2)$ as the relational primitive.
 - **Chapter 7** used $\epsilon$ to stabilize the $\Omega_a$ ratio.
-- **Chapter 12** will explore how the $\epsilon$ floor contributes to the stability of **matter_app** projections.
+- **Chapter 12** will explore whether the $\epsilon$ floor contributes to the stability of candidate **matter_app** projections within the currently governed projection limits.
 
 By establishing the floor $\epsilon$ as a foundational regularizer, we ensure the mathematical and operational stability of the entire recursive process, preventing the singularities and collapses that often plague unregulated field theories.
 
@@ -1648,9 +1648,9 @@ The projected structures are categorized into specific **Application Domains**, 
 $$ B_K \xrightarrow{\text{proj}} \text{Observable}_{\text{app}} $$
 
 **Commentary:**
-- **space\_app:** Projected relational extension.
-- **matter\_app:** Projected topological invariants of stable braids.
-- **field\_app:** Projected gradients of orientation selection.
+- **space\_app:** Candidate projected relational extension.
+- **matter\_app:** Candidate projection of stable braid invariants; downstream promotion remains governed and is not automatic.
+- **field\_app:** Candidate projection of orientation-selection gradients; downstream promotion remains governed and is not automatic.
 By separating the underlying process from these application domains, we can describe how the same recursive activity gives rise to diverse physical-like phenomena.
 
 ---
@@ -1737,7 +1737,7 @@ A core hypothesis of the framework's application program is that the laws of phy
 Force laws, equations of motion, and field equations are candidate formalizations of the arbitration rule ($O^*$) operating within specific orientation regimes and residue conditions.
 
 **Commentary:**
-Within this framework, physics-like behavior is what arbitration looks like when viewed through the **Metric Extractor** ($\iff_m$). What we perceive as the path of a particle or the evolution of a field is the sequence of realized states selected by $\text{Arb}_A$ to minimize mismatch. The character of different forces (gravity, electromagnetism) arises from the specific way $\text{Arb}_A$ reconciles different topological constraints in the residue.
+Within this framework, physics-like behavior is studied through candidate measurement and projection operators rather than treated as already derived physical law. Descriptions such as a particle path or field evolution are analogy-level readings of realized states selected by $\text{Arb}_A$ under mismatch minimization, and any topology-to-geometry step remains subject to the `Pi_geo` legality gate before downstream interpretation.
 
 ---
 
@@ -2038,9 +2038,9 @@ The `x` in `<*>_x` is a reserved discussion placeholder in this induction packet
 ### Projection & Transport Operators
 | Symbol | Name | Status | Function |
 | :--- | :--- | :--- | :--- |
-| $\iff_m$ | Projectional Equivalence | Active | Bidirectional preservation of procedural invariants across domains. |
+| $\iff_m[I_k]$ | Projectional Equivalence | Active | Indexed preservation of declared procedural invariants across domains. |
 | $\text{NavT}$ | Navigation Transform | Active | Steers the process in orientation space. |
-| $\iff_m$ | Metric Extractor | Proposed | Converts relations to scalar measurements. |
+| $\iff_m$ | Metric Extractor | Proposed | Candidate extractor converting relations to scalar measurements within declared scope. |
 | $\iff_s$ | Statistical Extractor | Proposed | Converts relations to probability projections. |
 | $<\neq>_{ra}$ | Identity Non-Collapse | Candidate | Preserves non-identity across identity transition. |
 | $<\neq>_X$ | Preserved Non-Identity Relation | Provisional Research Scaffold | States that a typed relation holds while distinction remains nonzero and identity collapse is forbidden. |

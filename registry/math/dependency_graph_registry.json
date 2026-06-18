@@ -19,8 +19,8 @@
       "node_id": "OPEN_BRIDGE_001",
       "node_type": "OPEN_BRIDGE",
       "name": "Orientation-Closure Bridge",
-      "status": "SUPPORTED_PENDING_REPLICATION",
-      "claim_level": "C4_PENDING_REPLICATION",
+      "status": "PROVISIONAL_PENDING_RIGOR",
+      "claim_level": "C1_DEFINED_PROVISIONAL",
       "textbook_locations": [
         "Chapter 5.2A",
         "Appendix F"
@@ -28,7 +28,7 @@
       "active_campaigns": [
         "OPEN_BRIDGE_001_RUN08_SATISFACTION"
       ],
-      "last_updated": "2026-06-17T04:41:04Z"
+      "last_updated": "2026-06-18T17:00:00-04:00"
     },
     {
       "node_id": "LFCR_ORIENTATION_TRIADIC_CLOSURE_ATTACK_001",
@@ -74,6 +74,90 @@
         "Chapter 12"
       ],
       "last_updated": "2026-05-29T12:00:00Z"
+    },
+    {
+      "node_id": "L099",
+      "node_type": "LEMMA",
+      "name": "Projection Legality",
+      "status": "UNPROVEN",
+      "claim_level": "C1_DEFINED_PROVISIONAL",
+      "textbook_locations": [
+        "Chapter 11.3",
+        "Appendix F"
+      ],
+      "last_updated": "2026-06-18T17:00:00-04:00"
+    },
+    {
+      "node_id": "L100",
+      "node_type": "LEMMA",
+      "name": "Topology-Geometry Hardening Gate",
+      "status": "CONDITIONAL",
+      "claim_level": "C1_DEFINED_PROVISIONAL",
+      "textbook_locations": [
+        "Chapter 11.3",
+        "Appendix F"
+      ],
+      "last_updated": "2026-06-18T17:00:00-04:00"
+    },
+    {
+      "node_id": "GEO_PROJECTION_VALIDATION_001",
+      "node_type": "SIMULATION_CAMPAIGN",
+      "name": "Topology-to-Geometry Projection Validation",
+      "status": "DESIGNED",
+      "claim_level": "C0_UNFORMED",
+      "textbook_locations": [
+        "Chapter 11.5",
+        "Appendix F"
+      ],
+      "last_updated": "2026-06-18T17:00:00-04:00"
+    },
+    {
+      "node_id": "TOPOLOGY_TO_GEOMETRY_HARDENING",
+      "node_type": "APPLICATION_PROJECTION",
+      "name": "Topology_to_Geometry_Hardening",
+      "status": "PROJECTION_LEGALITY_REQUIRED",
+      "claim_level": "C1_DEFINED_PROVISIONAL",
+      "textbook_locations": [
+        "Chapter 11.3",
+        "Appendix F"
+      ],
+      "last_updated": "2026-06-18T17:00:00-04:00"
+    },
+    {
+      "node_id": "GEOMETRY_APP",
+      "node_type": "APPLICATION_PROJECTION",
+      "name": "geometry_app",
+      "status": "PROJECTION_LEGALITY_REQUIRED",
+      "claim_level": "C1_DEFINED_PROVISIONAL",
+      "textbook_locations": [
+        "Chapter 11.3",
+        "Chapter 11.4"
+      ],
+      "last_updated": "2026-06-18T17:00:00-04:00"
+    },
+    {
+      "node_id": "FIELD_APP",
+      "node_type": "APPLICATION_PROJECTION",
+      "name": "field_app",
+      "status": "DEPENDENT_REVIEW_GATED",
+      "claim_level": "C1_DEFINED_PROVISIONAL",
+      "textbook_locations": [
+        "Chapter 11.4",
+        "Chapter 12"
+      ],
+      "last_updated": "2026-06-18T17:00:00-04:00"
+    },
+    {
+      "node_id": "MATTER_APP",
+      "node_type": "APPLICATION_PROJECTION",
+      "name": "matter_app",
+      "status": "DEPENDENT_REVIEW_GATED",
+      "claim_level": "C1_DEFINED_PROVISIONAL",
+      "textbook_locations": [
+        "Chapter 11.4",
+        "Chapter 12"
+      ],
+      "last_updated": "2026-06-18T17:00:00-04:00"
     }
   ],
   "edges": [
@@ -112,6 +196,69 @@
       "strength": "SUPPORTIVE",
       "reason": "gravity_app is downstream of topology/geometry stabilization.",
       "last_verified": "2026-05-29T12:00:00Z"
+    },
+    {
+      "edge_id": "EDGE_L099_TO_TG_HARDENING",
+      "from_node": "TOPOLOGY_TO_GEOMETRY_HARDENING",
+      "to_node": "L099",
+      "edge_type": "DEPENDS_ON",
+      "strength": "REQUIRED",
+      "reason": "Projection legality is a prerequisite for topology-to-geometry hardening.",
+      "last_verified": "2026-06-18T17:00:00-04:00"
+    },
+    {
+      "edge_id": "EDGE_L100_TO_L099",
+      "from_node": "L100",
+      "to_node": "L099",
+      "edge_type": "DEPENDS_ON",
+      "strength": "REQUIRED",
+      "reason": "The hardening gate depends on the invariant-preservation requirements defined in Projection Legality.",
+      "last_verified": "2026-06-18T17:00:00-04:00"
+    },
+    {
+      "edge_id": "EDGE_TG_HARDENING_TO_OPEN_BRIDGE",
+      "from_node": "TOPOLOGY_TO_GEOMETRY_HARDENING",
+      "to_node": "OPEN_BRIDGE_001",
+      "edge_type": "DEPENDS_ON",
+      "strength": "REQUIRED",
+      "reason": "Topology-to-geometry hardening remains capped by the unresolved bridge status.",
+      "last_verified": "2026-06-18T17:00:00-04:00"
+    },
+    {
+      "edge_id": "EDGE_GEO_CAMPAIGN_TO_L100",
+      "from_node": "GEO_PROJECTION_VALIDATION_001",
+      "to_node": "L100",
+      "edge_type": "DEPENDS_ON",
+      "strength": "REQUIRED",
+      "reason": "The validation campaign exists to test the hardening gate rather than bypass it.",
+      "last_verified": "2026-06-18T17:00:00-04:00"
+    },
+    {
+      "edge_id": "EDGE_GEOMETRY_APP_TO_TG_HARDENING",
+      "from_node": "GEOMETRY_APP",
+      "to_node": "TOPOLOGY_TO_GEOMETRY_HARDENING",
+      "edge_type": "DEPENDS_ON",
+      "strength": "REQUIRED",
+      "reason": "geometry_app remains gated by topology-to-geometry legality requirements.",
+      "last_verified": "2026-06-18T17:00:00-04:00"
+    },
+    {
+      "edge_id": "EDGE_FIELD_APP_TO_GEOMETRY_APP",
+      "from_node": "FIELD_APP",
+      "to_node": "GEOMETRY_APP",
+      "edge_type": "DEPENDS_ON",
+      "strength": "REQUIRED",
+      "reason": "field_app must not outrun the legality status of geometry_app.",
+      "last_verified": "2026-06-18T17:00:00-04:00"
+    },
+    {
+      "edge_id": "EDGE_MATTER_APP_TO_GEOMETRY_APP",
+      "from_node": "MATTER_APP",
+      "to_node": "GEOMETRY_APP",
+      "edge_type": "DEPENDS_ON",
+      "strength": "REQUIRED",
+      "reason": "matter_app must not outrun the legality status of geometry_app.",
+      "last_verified": "2026-06-18T17:00:00-04:00"
     },
     {
       "edge_id": "EDGE_CAMPAIGN_ATTACKS_OPEN_BRIDGE_001",

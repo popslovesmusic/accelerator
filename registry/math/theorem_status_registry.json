@@ -161,6 +161,168 @@
       }
     },
     {
+      "object_id": "L099",
+      "object_name": "Projection Legality",
+      "object_type": "LEMMA",
+      "current_status": "UNPROVEN",
+      "claim_level": {
+        "current": "C1_defined_provisional",
+        "maximum_allowed": "C1_defined_provisional"
+      },
+      "dependency_tracking": {
+        "depends_on": [
+          "Pi_geo",
+          "L045",
+          "L080"
+        ],
+        "supports": [
+          "L100",
+          "geometry_app"
+        ]
+      },
+      "evidence_tracking": {
+        "evidence_count": 0
+      },
+      "audit_tracking": {
+        "last_update": "2026-06-18T17:00:00-04:00"
+      }
+    },
+    {
+      "object_id": "L100",
+      "object_name": "Topology-Geometry Hardening Gate",
+      "object_type": "LEMMA",
+      "current_status": "CONDITIONAL",
+      "claim_level": {
+        "current": "C1_defined_provisional",
+        "maximum_allowed": "C1_defined_provisional"
+      },
+      "dependency_tracking": {
+        "depends_on": [
+          "L099",
+          "OPEN_BRIDGE_001"
+        ],
+        "supports": [
+          "geometry_app",
+          "field_app",
+          "matter_app"
+        ]
+      },
+      "evidence_tracking": {
+        "evidence_reports": [
+          "docs/theory/foundational/5_03_26 unity/math/lemmas/L100_topology_geometry_hardening_gate.md"
+        ],
+        "evidence_count": 1
+      },
+      "audit_tracking": {
+        "last_update": "2026-06-18T17:00:00-04:00"
+      }
+    },
+    {
+      "object_id": "GEO_PROJECTION_VALIDATION_001",
+      "object_name": "Topology-to-Geometry Projection Validation",
+      "object_type": "CAMPAIGN",
+      "current_status": "DESIGNED",
+      "claim_level": {
+        "current": "C0_unformed",
+        "maximum_allowed": "C1_defined_provisional"
+      },
+      "dependency_tracking": {
+        "depends_on": [
+          "L099",
+          "L100"
+        ],
+        "supports": [
+          "geometry_app"
+        ]
+      },
+      "evidence_tracking": {
+        "evidence_reports": [
+          "docs/theory/foundational/5_03_26 unity/math/campaigns/GEO_PROJECTION_VALIDATION_001_design.md"
+        ],
+        "evidence_count": 1
+      },
+      "audit_tracking": {
+        "last_update": "2026-06-18T17:00:00-04:00"
+      }
+    },
+    {
+      "object_id": "geometry_app",
+      "object_name": "Geometry Projection",
+      "object_type": "APPLICATION_PROJECTION",
+      "current_status": "PROJECTION_LEGALITY_REQUIRED",
+      "claim_level": {
+        "current": "C1_defined_provisional",
+        "maximum_allowed": "C1_defined_provisional"
+      },
+      "dependency_tracking": {
+        "depends_on": [
+          "L099",
+          "L100",
+          "GEO_PROJECTION_VALIDATION_001",
+          "OPEN_BRIDGE_001"
+        ],
+        "supports": [
+          "field_app",
+          "matter_app",
+          "gravity_app"
+        ]
+      },
+      "evidence_tracking": {
+        "evidence_count": 0
+      },
+      "audit_tracking": {
+        "last_update": "2026-06-18T17:00:00-04:00"
+      }
+    },
+    {
+      "object_id": "field_app",
+      "object_name": "Field Projection",
+      "object_type": "APPLICATION_PROJECTION",
+      "current_status": "REVIEW_GATED",
+      "claim_level": {
+        "current": "C1_defined_provisional",
+        "maximum_allowed": "C1_defined_provisional"
+      },
+      "dependency_tracking": {
+        "depends_on": [
+          "geometry_app",
+          "OPEN_BRIDGE_001"
+        ],
+        "supports": [
+          "gravity_app"
+        ]
+      },
+      "evidence_tracking": {
+        "evidence_count": 0
+      },
+      "audit_tracking": {
+        "last_update": "2026-06-18T17:00:00-04:00"
+      }
+    },
+    {
+      "object_id": "matter_app",
+      "object_name": "Matter Projection",
+      "object_type": "APPLICATION_PROJECTION",
+      "current_status": "REVIEW_GATED",
+      "claim_level": {
+        "current": "C1_defined_provisional",
+        "maximum_allowed": "C1_defined_provisional"
+      },
+      "dependency_tracking": {
+        "depends_on": [
+          "geometry_app",
+          "TC_asym"
+        ],
+        "supports": []
+      },
+      "evidence_tracking": {
+        "evidence_count": 0
+      },
+      "audit_tracking": {
+        "last_update": "2026-06-18T17:00:00-04:00"
+      }
+    },
+    {
       "object_id": "THM_PADM_001",
       "object_name": "Admissible Image Existence Theorem",
       "object_type": "THEOREM",
