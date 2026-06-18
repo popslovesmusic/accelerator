@@ -1,0 +1,108 @@
+{
+  "patch_id": "GEO_GAP_REDUCTION_SEQUENCE_001",
+  "status": "APPLIED",
+  "applied_date": "2026-06-18T17:11:30-04:00",
+  "target": "Topology_to_Geometry_Hardening",
+  "core_move": "Reclassify the gap from 'missing geometry' to 'missing admissible projection legality'.",
+  "governance_note": "This patch reduces the Topology-to-Geometry gap without claiming geometry is physically real. It only defines when geometric projection is legal inside the framework.",
+  "claim_authority": "C1_STRUCTURAL_PROJECTION_ONLY — no downstream physical interpretation, metric realism, field_app, matter_app, or gravity_app claim inherits support automatically.",
+  "gap_reduction_order": [
+    {
+      "step": 1,
+      "gap": "Pi_geo legality",
+      "action": "Define Pi_geo as a governed projection operator, not a geometry-producing theorem.",
+      "result": "Topology_app may map into Geometry_app only if required invariants survive.",
+      "registry_changes": [
+        "formal_object_registry.json: OBJ-OP-PI-GEO — added operator_classification, status, claim_scope, mandatory_invariant_checks, blocked_from, dependency_links, patch metadata."
+      ],
+      "status": "APPLIED"
+    },
+    {
+      "step": 2,
+      "gap": "Invariant preservation",
+      "action": "Add four mandatory preservation checks: distinction, admissibility, orientation trace, closure trace.",
+      "result": "Geometry_app becomes trace-preserving projection, not coordinate decoration.",
+      "registry_changes": [
+        "formal_object_registry.json: OBJ-OP-PI-GEO — mandatory_invariant_checks declared.",
+        "formal_object_registry.json: OBJ-GAP-4-TOPOLOGY-GEOMETRY — new gap object added.",
+        "gap_dependency_graph.json: GAP_4_topology_to_geometry_projection_legality — new open gap entry added.",
+        "math/theorem_status_registry.json: GEO_PROJECTION_VALIDATION_001 — minimum_pass_conditions declared."
+      ],
+      "status": "APPLIED"
+    },
+    {
+      "step": 3,
+      "gap": "OPEN_BRIDGE_001 dependency",
+      "action": "Use selector-form bridge only as structural routing, not as promotion support.",
+      "result": "Orientation may constrain topological selection without claiming it causes closure stability.",
+      "registry_changes": [
+        "math/theorem_status_registry.json: L100 supports_note added — OPEN_BRIDGE_001 role restricted to selector-routing.",
+        "math/theorem_status_registry.json: L100 supports list — field_app and matter_app removed.",
+        "gap_dependency_graph.json: GAP_4 bridge_dependency_note declares OPEN_BRIDGE_001 selector-routing-only role."
+      ],
+      "status": "APPLIED"
+    },
+    {
+      "step": 4,
+      "gap": "Physical overclaim",
+      "action": "Cap Geometry_app at structural/projection status until EMS is satisfied.",
+      "result": "No gravity_app, field_app, matter_app, or physical metric claim inherits support automatically.",
+      "registry_changes": [
+        "math/theorem_status_registry.json: geometry_app — claim_level capped to C1_STRUCTURAL_PROJECTION_ONLY.",
+        "math/theorem_status_registry.json: geometry_app — supports_blocked: true, supports_blocked_note added.",
+        "math/theorem_status_registry.json: geometry_app — claim_cap_note added."
+      ],
+      "status": "APPLIED"
+    },
+    {
+      "step": 5,
+      "gap": "Simulation evidence",
+      "action": "Require GEO_PROJECTION_VALIDATION_001 with shuffled, residue-depleted, closure-perturbed, and orientation-perturbed controls.",
+      "result": "Promotion depends on measured invariant survival, not visual plausibility.",
+      "registry_changes": [
+        "math/theorem_status_registry.json: GEO_PROJECTION_VALIDATION_001 — status upgraded to DESIGNED_ADVERSARIAL_CONTROLS_REQUIRED.",
+        "math/theorem_status_registry.json: GEO_PROJECTION_VALIDATION_001 — required_control_runs and minimum_pass_conditions declared.",
+        "gap_dependency_graph.json: GAP_4 still_blocking entries record that adversarial control runs have not yet executed."
+      ],
+      "status": "APPLIED_CAMPAIGN_PENDING_EXECUTION"
+    }
+  ],
+  "new_claim_cap": {
+    "Geometry_app": "C1_STRUCTURAL_PROJECTION_ONLY",
+    "blocked_from": [
+      "physical interpretation",
+      "metric realism",
+      "field_app promotion",
+      "matter_app promotion",
+      "gravity_app promotion"
+    ]
+  },
+  "minimum_pass_conditions": {
+    "distinction_preservation": "D_topology > 0 implies D_geometry > 0",
+    "admissibility_preservation": "P_adm(T)=1 implies P_adm(Pi_geo(T))=1",
+    "orientation_trace": "orientation class remains recoverable after projection",
+    "closure_trace": "closure identity remains traceable after projection"
+  },
+  "files_modified": [
+    "registry/formal_object_registry.json",
+    "registry/math/theorem_status_registry.json",
+    "registry/gap_dependency_graph.json"
+  ],
+  "files_created": [
+    "patches/GEO_GAP_REDUCTION_SEQUENCE_001.json"
+  ],
+  "open_obligations": [
+    {
+      "obligation_id": "PO-GEO-001",
+      "description": "Prove Pi_geo legality: L099 must move from UNPROVEN to at least symbolic_checked.",
+      "status": "OPEN"
+    },
+    {
+      "obligation_id": "GEO-CAMPAIGN-001",
+      "description": "Execute GEO_PROJECTION_VALIDATION_001 with all four adversarial control runs.",
+      "status": "PENDING_EXECUTION"
+    }
+  ],
+  "human_arbitration_required": false,
+  "claim_class": "C1"
+}

@@ -1,0 +1,123 @@
+{
+  "patch_id": "PO_GEO_001_EXPLICIT_DEFINITION_PASS_001",
+  "status": "APPLIED",
+  "applied_date": "2026-06-18T17:23:21-04:00",
+  "scope": "C1_MODEL_RELATIVE_ONLY",
+  "target": "PO-GEO-001A through PO-GEO-001D — advance from defined_pending_explicit_check to explicit_defined",
+  "purpose": "Define the minimum formal terms required for L099 symbolic checking while preserving the geometry_app hard cap.",
+  "governance_note": "This patch moves the symbolic machinery from prepared to explicitly defined. It does not prove Pi_geo, validate geometry_app, or discharge GEO-CAMPAIGN-001.",
+
+  "status_transitions": {
+    "PO_GEO_001": {
+      "before": "decomposed_symbolic_prep",
+      "after": "explicit_defined_pending_symbolic_check"
+    },
+    "PO_GEO_001A": {"before": "defined_pending_explicit_check", "after": "explicit_defined"},
+    "PO_GEO_001B": {"before": "defined_pending_explicit_check", "after": "explicit_defined"},
+    "PO_GEO_001C": {"before": "defined_pending_explicit_check", "after": "explicit_defined"},
+    "PO_GEO_001D": {"before": "defined_pending_explicit_check", "after": "explicit_defined"},
+    "L099": {
+      "before": "SYMBOLIC_CHECK_IN_PROGRESS",
+      "after": "SYMBOLIC_CHECK_READY"
+    }
+  },
+
+  "new_formal_definitions_declared": {
+    "registry": "registry/math/geo_projection_legality_definitions.json",
+    "definitions": [
+      {
+        "symbol": "Dom(Pi_geo)",
+        "name": "Domain of Pi_geo",
+        "admission_rule": "T must carry all four invariant labels (distinction_class, admissibility_status, orientation_class, closure_class) in Trace_geo(T) before entry"
+      },
+      {
+        "symbol": "Cod(Pi_geo)",
+        "name": "Codomain of Pi_geo",
+        "forbidden_reading": "NOT physical space, metric manifold, field content, or matter content",
+        "admission_rule": "G enters Cod only if tau_geo(G) returns all four labels without conflict or alias"
+      },
+      {
+        "symbol": "Trace_geo(T)",
+        "name": "Topology-Origin Trace Record",
+        "fields": ["T_id", "distinction_class", "admissibility_status", "orientation_class", "closure_class"],
+        "rule": "All fields mandatory; no field may be inferred after projection"
+      },
+      {
+        "symbol": "tau_geo undefined when",
+        "conditions": [
+          "TAU-UNDEF-1: G not produced by Pi_geo",
+          "TAU-UNDEF-2: any required label missing",
+          "TAU-UNDEF-3: any label conflicts with Trace_geo(T) ground truth",
+          "TAU-UNDEF-4: closure_class aliased across distinct T objects"
+        ]
+      },
+      {
+        "symbol": "~_geo",
+        "name": "Geometry_app equivalence relation",
+        "constraint": "Coarser than or equal to topology equivalence — may not collapse distinct topology classes"
+      }
+    ]
+  },
+
+  "sub_obligation_explicit_checks": [
+    {
+      "id": "PO-GEO-001A",
+      "explicit_check": "Trace_geo(T_A).distinction_class != Trace_geo(T_B).distinction_class implies tau_geo(Pi_geo(T_A)).distinction_class != tau_geo(Pi_geo(T_B)).distinction_class",
+      "failure_mode": "distinction_alias",
+      "failure_active": true
+    },
+    {
+      "id": "PO-GEO-001B",
+      "explicit_check": "Trace_geo(T).admissibility_status == PASS implies tau_geo(Pi_geo(T)).admissibility_status == PASS",
+      "failure_mode": "admissibility_violation",
+      "failure_active": true
+    },
+    {
+      "id": "PO-GEO-001C",
+      "explicit_check": "tau_geo(Pi_geo(T)).orientation_class == Trace_geo(T).orientation_class",
+      "failure_mode": "orientation_trace_loss",
+      "failure_active": true
+    },
+    {
+      "id": "PO-GEO-001D",
+      "explicit_check": "tau_geo(Pi_geo(T)).closure_class == Trace_geo(T).closure_class AND closure_class mapping injective across T objects",
+      "failure_mode": "closure_trace_loss_or_alias",
+      "failure_active": true
+    }
+  ],
+
+  "symbolic_check_rule_satisfied": {
+    "Dom_Pi_geo_declared": true,
+    "Cod_Pi_geo_declared": true,
+    "Trace_geo_declared": true,
+    "tau_geo_undefined_conditions_declared": true,
+    "all_sub_obligations_explicit_defined": true,
+    "all_failure_modes_active_and_testable": true
+  },
+
+  "unchanged_caps": {
+    "geometry_app": "C1_STRUCTURAL_PROJECTION_ONLY — unchanged",
+    "field_app": "supports_blocked — unchanged",
+    "matter_app": "supports_blocked — unchanged",
+    "gravity_app": "REVIEW_LOCK — unchanged"
+  },
+
+  "next_gate": {
+    "action": "governed symbolic review",
+    "requirement": "Explicit confirmation that all four check conditions hold and no failure mode is suppressed under the declared definitions. No simulation required at this gate.",
+    "result_if_passed": "L099 -> symbolic_checked; PO-GEO-001 -> symbolic_checked",
+    "geometry_app_note": "geometry_app remains C1_STRUCTURAL_PROJECTION_ONLY even after symbolic_checked; GEO-CAMPAIGN-001 must pass separately"
+  },
+
+  "files_created": [
+    "registry/math/geo_projection_legality_definitions.json",
+    "patches/PO_GEO_001_EXPLICIT_DEFINITION_PASS_001.json"
+  ],
+  "files_modified": [
+    "registry/math/proof_obligation_registry.json",
+    "registry/math/theorem_status_registry.json"
+  ],
+
+  "human_arbitration_required": false,
+  "claim_class": "C1"
+}

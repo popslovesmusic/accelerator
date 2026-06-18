@@ -1,0 +1,125 @@
+{
+  "patch_id": "ECON_EXECUTABLE_EVIDENCE_HARDENING_001",
+  "status": "ACTIVE",
+  "source": "ECONOMICS_AUDIT_PASS_001",
+  "purpose": "Close the two highest-priority economics department gaps: executable reproduction and raw-data provenance.",
+  "audit_summary": {
+    "foundations": "PASS",
+    "registries": "PASS",
+    "projection_legality": "PASS",
+    "ssot_integrity": "PASS",
+    "simulation_coverage_ratio": 1.0,
+    "ci_integration": "PASS",
+    "remaining_critical_gaps": [
+      "executable_reproduction",
+      "raw_data_provenance"
+    ]
+  },
+  "new_debt_items": [
+    {
+      "debt_id": "ECON_DEBT_EXEC_0001",
+      "category": "SIMULATION",
+      "severity": "CRITICAL",
+      "status": "OPEN",
+      "description": "SIM_TOPOLOGY_001 lacks executable reproduction pathway.",
+      "reason": "Evidence currently depends on manually constructed topology comparison rather than reproducible simulation execution.",
+      "blocking": [
+        "reproducible_evidence",
+        "future_metric_validation",
+        "higher_confidence_claim_promotion"
+      ],
+      "resolution_criteria": [
+        "Executable campaign exists",
+        "Campaign produces deterministic outputs",
+        "Campaign generates evidence artifacts",
+        "Campaign passes economics validation"
+      ]
+    },
+    {
+      "debt_id": "ECON_DEBT_PROV_0001",
+      "category": "EVIDENCE",
+      "severity": "HIGH",
+      "status": "OPEN",
+      "description": "Simulation evidence lacks raw-data provenance artifacts.",
+      "reason": "Evidence objects exist without archived output tables, metrics, or plots.",
+      "resolution_criteria": [
+        "CSV outputs generated",
+        "JSON outputs generated",
+        "Evidence linked to outputs",
+        "Validation confirms provenance chain"
+      ]
+    }
+  ],
+  "simulation_campaign": {
+    "simulation_id": "SIM_TOPOLOGY_001_EXECUTABLE",
+    "status": "COMPLETED",
+    "purpose": "Create executable reproduction of foundational Org_a topology experiment.",
+    "inventory": {
+      "type": "fixed_mismatch_inventory",
+      "size": 3
+    },
+    "structures": [
+      "linear_cascade",
+      "closed_ring",
+      "star_hub"
+    ],
+    "measurements": [
+      "recovery_score",
+      "coupling_score",
+      "fragility_score",
+      "deformation_score"
+    ],
+    "outputs": [
+      "topology_results.csv",
+      "topology_results.json",
+      "topology_summary.md",
+      "topology_comparison_plot.png"
+    ]
+  },
+  "evidence_chain": {
+    "required_form": [
+      "Executable Simulation",
+      "Raw Data",
+      "Evidence Object",
+      "Result",
+      "SSOT Citation"
+    ],
+    "current_state": [
+      "Executable Simulation",
+      "Raw Data",
+      "Evidence Object",
+      "Result",
+      "SSOT Citation"
+    ]
+  },
+  "new_validation_requirements": {
+    "E2_organizational_construction": {
+      "additional_rule": "Foundational organizational claims require executable reproduction artifacts."
+    },
+    "evidence_validation": {
+      "additional_rule": "Evidence objects must resolve to raw-data outputs."
+    }
+  },
+  "required_output_locations": {
+    "simulation": "docs/economics/simulations/topology/",
+    "raw_data": "docs/economics/outputs/data/",
+    "plots": "docs/economics/outputs/plots/",
+    "evidence": "docs/economics/evidence/",
+    "audit": "docs/economics/outputs/audits/"
+  },
+  "health_report_additions": {
+    "executable_simulation_coverage_ratio": {
+      "symbol": "ESCR",
+      "definition": "validated_executable_simulations / total_simulation_claims",
+      "target": 1.0
+    },
+    "provenance_coverage_ratio": {
+      "symbol": "PCR",
+      "definition": "evidence_with_raw_data / total_evidence_objects",
+      "target": 1.0
+    }
+  },
+  "promotion_rule": {
+    "statement": "No foundational economics result may advance beyond C1_STRUCTURAL_RESULT unless executable reproduction and raw-data provenance requirements are satisfied."
+  }
+}

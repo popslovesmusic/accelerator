@@ -760,8 +760,8 @@
       "object_id": "OBJ-OP-RA-DELTA",
       "object_class": "operator",
       "title": "Residue-Admissible Actualization",
-      "symbol": "δ_ra",
-      "formal_definition": "δ restricted to the residue-admissible domain",
+      "symbol": "\u03b4_ra",
+      "formal_definition": "\u03b4 restricted to the residue-admissible domain",
       "source_bindings": [
         "registry/lexicon_gap_queue.json"
       ],
@@ -774,7 +774,7 @@
       "object_id": "OBJ-OP-RA-ARROW",
       "object_class": "operator",
       "title": "Residue-Admissible Transition",
-      "symbol": "→_ra",
+      "symbol": "\u2192_ra",
       "formal_definition": "Relational transition preserving residue signature",
       "source_bindings": [
         "registry/lexicon_gap_queue.json"
@@ -788,7 +788,7 @@
       "object_id": "OBJ-OP-RA-IFF",
       "object_class": "operator",
       "title": "Residue-Admissible Correspondence",
-      "symbol": "⇔_ra",
+      "symbol": "\u21d4_ra",
       "formal_definition": "Recursive residue-preserving correspondence",
       "source_bindings": [
         "registry/lexicon_gap_queue.json"
@@ -802,7 +802,7 @@
       "object_id": "OBJ-OP-RA-NON-COLLAPSE",
       "object_class": "operator",
       "title": "Non-Collapse Distinction Relation",
-      "symbol": "<≠>_ra",
+      "symbol": "<\u2260>_ra",
       "formal_definition": "Relational operator asserting non-zero distinguishability across transition",
       "source_bindings": [
         "registry/lexicon_gap_queue.json"
@@ -816,7 +816,7 @@
       "object_id": "OBJ-IND-001",
       "object_class": "claim",
       "title": "Residue-Admissible Identity Continuation",
-      "formal_statement": "B →_ra [B_a ⇔_ra B], B_a ≠ B, B_a <≠>_ra B",
+      "formal_statement": "B \u2192_ra [B_a \u21d4_ra B], B_a \u2260 B, B_a <\u2260>_ra B",
       "source_bindings": [
         "registry/lexicon_gap_queue.json"
       ],
@@ -837,13 +837,38 @@
       "object_class": "operator",
       "title": "Geometry Projection Operator",
       "symbol": "Pi_geo",
-      "formal_definition": "Pi_geo : Topology_app -> Geometry_app governed mapping layer preserving invariants",
+      "operator_classification": "governed_projection_operator",
+      "formal_definition": "Pi_geo : Topology_app -> Geometry_app, admissible only when four mandatory invariants survive projection",
+      "operator_note": "Pi_geo is NOT a geometry-producing theorem. It is a legality-conditioned routing operator. Geometry_app is reachable only if distinction, admissibility, orientation-trace, and closure-trace all survive the mapping.",
+      "status": "active_conditional",
+      "claim_scope": "C1_STRUCTURAL_PROJECTION_ONLY",
+      "mandatory_invariant_checks": [
+        "distinction_preservation: D_topology > 0 implies D_geometry > 0",
+        "admissibility_preservation: P_adm(T)=1 implies P_adm(Pi_geo(T))=1",
+        "orientation_trace: orientation class remains recoverable after projection",
+        "closure_trace: closure identity remains traceable after projection"
+      ],
+      "blocked_from": [
+        "physical_interpretation",
+        "metric_realism",
+        "field_app_promotion",
+        "matter_app_promotion",
+        "gravity_app_promotion"
+      ],
+      "dependency_links": [
+        "OBJ-L099",
+        "OBJ-L100",
+        "OBJ-GEO-PROJECTION-VALIDATION-001"
+      ],
       "source_bindings": [
-        "docs/math/geometry_as_process_projection.md"
+        "docs/math/geometry_as_process_projection.md",
+        "patches/GEO_GAP_REDUCTION_SEQUENCE_001.json"
       ],
       "governance_bindings": [
         "charter_v2.3"
       ],
+      "patch_applied": "GEO_GAP_REDUCTION_SEQUENCE_001",
+      "patch_date": "2026-06-18",
       "runtime_visibility": true
     },
     {
@@ -919,6 +944,48 @@
       "runtime_visibility": true
     },
     {
+      "object_id": "OBJ-GEO-TRACE-001",
+      "object_class": "operator",
+      "title": "Geometry-to-Topology Projection Trace Map",
+      "symbol": "tau_geo",
+      "operator_classification": "recoverability_trace_operator",
+      "formal_definition": "tau_geo : Geometry_app -> Topology_app_trace, a partial inverse-style trace map used to verify that required invariant labels of a topological state T survive projection under Pi_geo",
+      "operator_note": "tau_geo is NOT a full inverse of Pi_geo. It is a recoverability check: tau_geo(Pi_geo(T)) must retain the required invariant labels (orientation class, closure identity) of the original T for the projection to be considered legal. If tau_geo fails to recover any required label, Pi_geo is inadmissible for that class of inputs.",
+      "status": "active_conditional",
+      "claim_scope": "C1_STRUCTURAL_PROJECTION_ONLY",
+      "recoverability_obligations": [
+        {
+          "obligation_id": "PO-GEO-001C",
+          "invariant": "orientation_class",
+          "check": "tau_geo(Pi_geo(T)) retains orientation class label of T"
+        },
+        {
+          "obligation_id": "PO-GEO-001D",
+          "invariant": "closure_identity",
+          "check": "tau_geo(Pi_geo(T)) retains closure identity label of T; tau_geo is injective w.r.t. closure equivalence classes"
+        }
+      ],
+      "must_not_claim": [
+        "full inverse of Pi_geo",
+        "physical recoverability",
+        "metric reconstruction",
+        "matter or field content recovery"
+      ],
+      "dependency_links": [
+        "OBJ-OP-PI-GEO",
+        "OBJ-L099"
+      ],
+      "source_bindings": [
+        "patches/PO_GEO_001_SYMBOLIC_CHECK_PREP_001.json"
+      ],
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "patch_applied": "PO_GEO_001_SYMBOLIC_CHECK_PREP_001",
+      "patch_date": "2026-06-18T17:17:49-04:00",
+      "runtime_visibility": true
+    },
+    {
       "object_id": "OBJ-TOPOLOGY-GEOMETRY-HARDENING",
       "object_class": "projection",
       "title": "Topology-to-Geometry Hardening Gate",
@@ -933,6 +1000,127 @@
         "OBJ-GEO-PROJECTION-VALIDATION-001"
       ],
       "claim_scope": "strictly_local_restricted_domain",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true
+    },
+    {
+      "object_id": "OBJ-GAP-4-TOPOLOGY-GEOMETRY",
+      "object_class": "gap",
+      "title": "Topology-to-Geometry Admissible Projection Legality Gap",
+      "gap_classification": "missing_admissible_projection_legality",
+      "gap_reclassification_note": "Gap reclassified by GEO_GAP_REDUCTION_SEQUENCE_001. The gap is NOT missing geometry; it is missing proof that Pi_geo is a legally admissible projection. Geometry_app cannot be promoted until all four invariant preservation checks pass and GEO_PROJECTION_VALIDATION_001 runs with full control battery.",
+      "status": "OPEN_PARTIALLY_GOVERNED",
+      "claim_scope": "C1_STRUCTURAL_PROJECTION_ONLY",
+      "blocking_checks": [
+        "distinction_preservation",
+        "admissibility_preservation",
+        "orientation_trace",
+        "closure_trace"
+      ],
+      "bridge_routing_note": "OPEN_BRIDGE_001 may constrain topological selection (selector-form) but does NOT provide promotion support for Geometry_app. Its role here is structural routing only.",
+      "simulation_gate": "GEO_PROJECTION_VALIDATION_001",
+      "simulation_control_requirements": [
+        "shuffled_control",
+        "residue_depleted_control",
+        "closure_perturbed_control",
+        "orientation_perturbed_control"
+      ],
+      "dependency_links": [
+        "OBJ-OP-PI-GEO",
+        "OBJ-L099",
+        "OBJ-L100",
+        "OBJ-GEO-PROJECTION-VALIDATION-001"
+      ],
+      "source_bindings": [
+        "patches/GEO_GAP_REDUCTION_SEQUENCE_001.json"
+      ],
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "patch_applied": "GEO_GAP_REDUCTION_SEQUENCE_001",
+      "patch_date": "2026-06-18",
+      "runtime_visibility": true
+    },
+    {
+      "object_id": "ECONOMICS_APP_INDUCTION_001",
+      "object_class": "projection",
+      "title": "Economics Application Induction",
+      "status": "PROVISIONAL_INDUCTION_TARGET",
+      "source_bindings": [
+        "registry/economics/theorem_status_registry.json"
+      ],
+      "dependency_links": [],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true
+    },
+    {
+      "object_id": "ECON_APP_ORG_A_001",
+      "object_class": "operator",
+      "title": "Org_a Axioms",
+      "status": "PROVISIONAL_INDUCTION_TARGET",
+      "source_bindings": [
+        "registry/economics/theorem_status_registry.json"
+      ],
+      "dependency_links": [
+        "ECONOMICS_APP_INDUCTION_001"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true
+    },
+    {
+      "object_id": "ECON_APP_SIGMA_D_001",
+      "object_class": "constraint",
+      "title": "Sigma_D Structures",
+      "status": "PROVISIONAL_INDUCTION_TARGET",
+      "source_bindings": [
+        "registry/economics/theorem_status_registry.json"
+      ],
+      "dependency_links": [
+        "ECON_APP_ORG_A_001"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true
+    },
+    {
+      "object_id": "ECON_APP_DEFORMATION_001",
+      "object_class": "lemma",
+      "title": "Admissible Deformation of Sigma_D",
+      "status": "PROVISIONAL_INDUCTION_TARGET",
+      "source_bindings": [
+        "registry/economics/theorem_status_registry.json"
+      ],
+      "dependency_links": [
+        "ECON_APP_SIGMA_D_001"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true
+    },
+    {
+      "object_id": "ECON_APP_DWI_001",
+      "object_class": "projection",
+      "title": "Distinction Wealth Index",
+      "status": "PROVISIONAL_INDUCTION_TARGET",
+      "source_bindings": [
+        "registry/economics/theorem_status_registry.json"
+      ],
+      "dependency_links": [
+        "ECON_APP_DEFORMATION_001"
+      ],
+      "claim_scope": "theoretical",
       "governance_bindings": [
         "charter_v2.3"
       ],

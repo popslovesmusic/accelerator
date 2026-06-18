@@ -1,8 +1,9 @@
 {
   "meta": {
-    "version": "1.0",
+    "version": "1.2",
     "description": "Registry of proof obligations required to elevate theorem status.",
-    "status": "provisional"
+    "status": "provisional",
+    "last_updated": "2026-06-18T17:23:21-04:00"
   },
   "obligations": [
     {
@@ -75,16 +76,146 @@
     {
       "obligation_id": "PO-GEO-001",
       "theorem_id": "GEO_LEMMA_001",
+      "target_lemma": "L099",
       "description": "Discharge the projection-legality obligation for Pi_geo across distinction, admissibility, orientation, and closure preservation.",
       "required_for_status": "symbolic_checked_and_campaign_bound",
-      "current_status": "open",
+      "current_status": "symbolic_review_passed",
+      "current_status_note": "All 8 symbolic review checks (SR-GEO-001 through SR-GEO-008) passed under PO_GEO_001_SYMBOLIC_REVIEW_001. L099 has advanced to symbolic_checked. No failure condition was suppressed. geometry_app remains C1_STRUCTURAL_PROJECTION_ONLY. The sole remaining gate is GEO-CAMPAIGN-001 (empirical validation).",
+      "symbolic_review_result": {
+        "review_id": "PO_GEO_001_SYMBOLIC_REVIEW_001",
+        "review_date": "2026-06-18T17:27:21-04:00",
+        "outcome": "PASS_ALL",
+        "checks_passed": 8,
+        "checks_failed": 0,
+        "failure_conditions_suppressed": false,
+        "check_summary": [
+          {"id": "SR-GEO-001", "name": "Domain completeness", "result": "PASS"},
+          {"id": "SR-GEO-002", "name": "Codomain containment", "result": "PASS"},
+          {"id": "SR-GEO-003", "name": "Trace non-inversion", "result": "PASS"},
+          {"id": "SR-GEO-004", "name": "Distinction preservation", "result": "PASS"},
+          {"id": "SR-GEO-005", "name": "Admissibility preservation", "result": "PASS"},
+          {"id": "SR-GEO-006", "name": "Orientation trace preservation", "result": "PASS"},
+          {"id": "SR-GEO-007", "name": "Closure trace preservation", "result": "PASS"},
+          {"id": "SR-GEO-008", "name": "No downstream leakage", "result": "PASS"}
+        ]
+      },
+      "formal_definitions_registry": "registry/math/geo_projection_legality_definitions.json",
+      "definitions_satisfied": {
+        "Dom_Pi_geo": "DECLARED",
+        "Cod_Pi_geo": "DECLARED",
+        "Trace_geo": "DECLARED",
+        "tau_geo_undefined_conditions": "DECLARED",
+        "geometry_app_equivalence_relation": "DECLARED"
+      },
+      "symbolic_check_requirements": {
+        "must_define": [
+          "domain of Pi_geo — SATISFIED: Dom(Pi_geo) declared",
+          "codomain of Pi_geo — SATISFIED: Cod(Pi_geo) declared",
+          "equivalence relation used for geometry_app — SATISFIED: ~_geo declared",
+          "trace map tau_geo from Geometry_app back to Topology_app_trace — SATISFIED: OBJ-GEO-TRACE-001 registered",
+          "failure conditions for invariant loss — SATISFIED: all four failure modes declared"
+        ],
+        "must_not_claim": [
+          "physical geometry",
+          "metric realism",
+          "field support",
+          "matter support",
+          "gravity support",
+          "bridge promotion"
+        ]
+      },
+      "critical_test": {
+        "condition": "tau_geo(Pi_geo(T)) preserves required invariant labels of T",
+        "reading": "Projection is legal only if its topology-origin trace remains recoverable."
+      },
+      "promotion_gate": {
+        "symbolic_checked": "All four sub-obligations are now explicit_defined. Symbolic_checked requires a governed symbolic review confirming all four checks hold and no failure condition is suppressed.",
+        "geometry_app_unaffected": "geometry_app remains C1_STRUCTURAL_PROJECTION_ONLY after symbolic_checked unless GEO-CAMPAIGN-001 also passes."
+      },
       "satisfaction_criteria": [
-        "Explicit binding of Pi_geo to Topology_app -> Geometry_app in the observable projection registry",
-        "Declared invariant set: distinction, admissibility, orientation, closure",
-        "Proof-facing linkage from L099 to L100 recorded in formal object and dependency registries",
-        "Validation campaign GEO_PROJECTION_VALIDATION_001 remains attached as the empirical legality check"
+        "Explicit binding of Pi_geo to Topology_app -> Geometry_app in the observable projection registry — SATISFIED",
+        "Declared invariant set: distinction, admissibility, orientation, closure — SATISFIED",
+        "Proof-facing linkage from L099 to L100 recorded in formal object and dependency registries — SATISFIED",
+        "Validation campaign GEO_PROJECTION_VALIDATION_001 remains attached as the empirical legality check — SATISFIED",
+        "All four sub-obligations PO-GEO-001A through D explicitly defined with failure conditions — SATISFIED",
+        "tau_geo trace map registered as OBJ-GEO-TRACE-001 in formal_object_registry.json — SATISFIED"
       ],
-      "provisional_status": true
+      "sub_obligations": [
+        {
+          "id": "PO-GEO-001A",
+          "name": "Distinction Preservation",
+          "current_status": "explicit_defined",
+          "status_history": ["defined_pending_explicit_check", "explicit_defined"],
+          "claim": "D_topology(A|B) > 0 implies D_geometry(Pi_geo(A)|Pi_geo(B)) > 0",
+          "formal_reading": "For all topological states A, B in Dom(Pi_geo): if A and B are topologically distinct, then their geometric images under Pi_geo must remain distinct.",
+          "explicit_definition": "Distinction preservation holds iff distinct topology-origin distinction classes remain distinct after projection and recover through tau_geo.",
+          "explicit_check": "Trace_geo(T_A).distinction_class != Trace_geo(T_B).distinction_class implies tau_geo(Pi_geo(T_A)).distinction_class != tau_geo(Pi_geo(T_B)).distinction_class",
+          "check_mechanism": "Compare Trace_geo(T).distinction_class against tau_geo(Pi_geo(T)).distinction_class for all T in Dom(Pi_geo). Any case where distinct source classes map to the same image class is a failure event.",
+          "failure_mode": "distinction_alias",
+          "failure_consequence": "Pi_geo is a lossy compression, not a legal projection. Geometry_app would alias distinct topological states and cannot be admitted.",
+          "failure_active": true,
+          "equivalence_constraint": "~_geo must not collapse non-equivalent Topology_app distinction classes; see geo_projection_legality_definitions.json equivalence_relation_declaration",
+          "provisional_status": true,
+          "patch_applied": "PO_GEO_001_EXPLICIT_DEFINITION_PASS_001"
+        },
+        {
+          "id": "PO-GEO-001B",
+          "name": "Admissibility Preservation",
+          "current_status": "explicit_defined",
+          "status_history": ["defined_pending_explicit_check", "explicit_defined"],
+          "claim": "P_adm(T) = 1 implies P_adm(Pi_geo(T)) = 1",
+          "formal_reading": "If a topological state T is admissible, then its geometric image Pi_geo(T) must also be admissible.",
+          "explicit_definition": "Admissibility preservation holds iff every projected Geometry_app object retains PASS admissibility status under inherited topology-origin labels.",
+          "explicit_check": "Trace_geo(T).admissibility_status == PASS implies tau_geo(Pi_geo(T)).admissibility_status == PASS",
+          "check_mechanism": "For all T in Dom(Pi_geo) where Trace_geo(T).admissibility_status == PASS: confirm tau_geo(Pi_geo(T)).admissibility_status == PASS. A PASS-to-FAIL transition is a failure event. Note: T with admissibility_status == FAIL is outside Dom(Pi_geo) by admission_rule.",
+          "failure_mode": "admissibility_violation",
+          "failure_consequence": "Pi_geo would generate inadmissible states from admissible inputs, breaking the admissibility invariant. geometry_app would not be a lawful continuation.",
+          "failure_active": true,
+          "provisional_status": true,
+          "patch_applied": "PO_GEO_001_EXPLICIT_DEFINITION_PASS_001"
+        },
+        {
+          "id": "PO-GEO-001C",
+          "name": "Orientation Trace Preservation",
+          "current_status": "explicit_defined",
+          "status_history": ["defined_pending_explicit_check", "explicit_defined"],
+          "claim": "orientation class of T remains recoverable from Pi_geo(T)",
+          "formal_reading": "For any T in Dom(Pi_geo), the orientation class label declared in Trace_geo(T) must be recoverable from Pi_geo(T) via tau_geo.",
+          "explicit_definition": "Orientation trace preservation holds iff the orientation class declared before projection is recoverable after projection.",
+          "explicit_check": "tau_geo(Pi_geo(T)).orientation_class == Trace_geo(T).orientation_class",
+          "check_mechanism": "For all T in Dom(Pi_geo): compute tau_geo(Pi_geo(T)).orientation_class and compare against Trace_geo(T).orientation_class. Any mismatch, null, or undefined return from tau_geo is a failure event (TAU-UNDEF-2).",
+          "failure_mode": "orientation_trace_loss",
+          "failure_consequence": "The orientation-conditioned selection routing through Topology_app becomes opaque after projection. OPEN_BRIDGE_001 structural routing becomes untraceable. The selector-routing role of OPEN_BRIDGE_001 is undermined.",
+          "failure_active": true,
+          "tau_geo_dependency": "OBJ-GEO-TRACE-001 — undefined if orientation class is missing or conflicted (TAU-UNDEF-2, TAU-UNDEF-3)",
+          "provisional_status": true,
+          "patch_applied": "PO_GEO_001_EXPLICIT_DEFINITION_PASS_001"
+        },
+        {
+          "id": "PO-GEO-001D",
+          "name": "Closure Trace Preservation",
+          "current_status": "explicit_defined",
+          "status_history": ["defined_pending_explicit_check", "explicit_defined"],
+          "claim": "closure identity of T remains traceable after Pi_geo(T)",
+          "formal_reading": "For any T in Dom(Pi_geo), the closure class declared in Trace_geo(T) must remain traceable in Pi_geo(T) via tau_geo. Distinct closures must not be aliased.",
+          "explicit_definition": "Closure trace preservation holds iff closure classes remain recoverable and non-aliased after projection.",
+          "explicit_check": "tau_geo(Pi_geo(T)).closure_class == Trace_geo(T).closure_class AND closure_class mapping is injective across compared T objects",
+          "check_mechanism": "Two-part check: (1) For all T in Dom(Pi_geo): tau_geo(Pi_geo(T)).closure_class must equal Trace_geo(T).closure_class. (2) For all T_A, T_B in Dom(Pi_geo) with distinct closure classes: tau_geo(Pi_geo(T_A)).closure_class must differ from tau_geo(Pi_geo(T_B)).closure_class. Failure of either part is a failure event (TAU-UNDEF-4 for aliasing).",
+          "failure_mode": "closure_trace_loss_or_alias",
+          "failure_consequence": "Closure-stability arguments grounding Topology_app become untraceable in Geometry_app. Any downstream structural claim invoking closure support is disconnected from its basis.",
+          "failure_active": true,
+          "tau_geo_dependency": "OBJ-GEO-TRACE-001 — undefined if closure class is missing, conflicted, or aliased (TAU-UNDEF-2, TAU-UNDEF-3, TAU-UNDEF-4)",
+          "provisional_status": true,
+          "patch_applied": "PO_GEO_001_EXPLICIT_DEFINITION_PASS_001"
+        }
+      ],
+      "provisional_status": true,
+      "patches_applied": [
+        "PO_GEO_001_SYMBOLIC_CHECK_PREP_001",
+        "PO_GEO_001_EXPLICIT_DEFINITION_PASS_001",
+        "PO_GEO_001_SYMBOLIC_REVIEW_001"
+      ],
+      "patch_date": "2026-06-18T17:27:21-04:00"
     }
   ]
 }

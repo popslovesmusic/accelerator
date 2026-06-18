@@ -1,0 +1,110 @@
+{
+  "patch_id": "ECON_VALIDATION_GOVERNANCE_001",
+  "status": "PROPOSED_INDUCTION",
+  "department": "economics_app",
+  "purpose": "Establish a dedicated validation hierarchy for Procedural Economics above global framework validation.",
+  "rationale": {
+    "statement": "Passing global_validate.py demonstrates framework consistency but does not establish economic legitimacy.",
+    "implication": "Economics_app requires domain-specific validation gates before metrics, policy, or governance claims become admissible."
+  },
+  "validation_hierarchy": {
+    "parent": "global_validate.py",
+    "child": "economics_validate.py",
+    "relationship": "Economics validation may only execute after successful global validation."
+  },
+  "economic_gate_stack": {
+    "E0": {
+      "name": "Registry Integrity",
+      "status": "required",
+      "purpose": "Verify economics registries, references, dependencies, and governance metadata.",
+      "inputs": [
+        "economic_operator_registry.json",
+        "economic_metric_registry.json",
+        "economic_claim_registry.json",
+        "economic_case_registry.json",
+        "economic_falsification_registry.json"
+      ]
+    },
+    "E1": {
+      "name": "Projection Legality",
+      "status": "required",
+      "purpose": "Verify all economics_app concepts trace to MPF primitives.",
+      "success_condition": "Every economics concept resolves through Sigma_D, Org_a, and D(A|B)>epsilon_a.",
+      "failure_state": "INVALID_PROJECTION"
+    },
+    "E2": {
+      "name": "Organizational Construction",
+      "status": "required",
+      "purpose": "Verify Org_a can generate multiple Sigma_D structures from identical mismatch inventory.",
+      "success_condition": "Same inventory yields distinguishable Sigma_D organizations.",
+      "existing_result": {
+        "id": "ECON_RESULT_001",
+        "status": "PASS",
+        "finding": "Organization carries independent economic information."
+      }
+    },
+    "E3": {
+      "name": "Sigma_D Distinguishability",
+      "status": "next_target",
+      "purpose": "Verify Sigma_D structures remain distinguishable solely through organizational differences.",
+      "success_condition": "Sigma_D1 != Sigma_D2 despite identical inventory.",
+      "failure_interpretation": "Organization collapses into bookkeeping."
+    },
+    "E4": {
+      "name": "Deformation Stability",
+      "status": "pending",
+      "purpose": "Determine whether Sigma_D survives admissible deformation.",
+      "outputs": [
+        "stability_window",
+        "deformation_limit",
+        "fragility_profile"
+      ]
+    },
+    "E5": {
+      "name": "Recovery Validity",
+      "status": "pending",
+      "purpose": "Distinguish recovery from replacement.",
+      "success_condition": "Recoverable Sigma_D can be demonstrated after admissible loss."
+    },
+    "E6": {
+      "name": "Wealth Metric Legality",
+      "status": "blocked",
+      "dependency": [
+        "E0",
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5"
+      ],
+      "purpose": "Validate DWI, ADW, RDW, DR, DL, DE, and DC metrics."
+    },
+    "E7": {
+      "name": "Policy Admissibility",
+      "status": "blocked",
+      "dependency": [
+        "E6"
+      ],
+      "purpose": "Authorize governance and policy claims derived from economics_app."
+    }
+  },
+  "current_health_report": {
+    "E0_registry_integrity": "pending",
+    "E1_projection_legality": "pending",
+    "E2_organizational_construction": "pass",
+    "E3_sigma_d_distinguishability": "next_target",
+    "E4_deformation_stability": "blocked",
+    "E5_recovery_validity": "blocked",
+    "E6_metric_legality": "blocked",
+    "E7_policy_admissibility": "blocked"
+  },
+  "immediate_action": {
+    "next_patch": "ECON_GATE_E3_001",
+    "objective": "Demonstrate distinguishability of Sigma_D structures using organization alone.",
+    "reason": "E3 is the final proof that organization carries independent information before continuity and recovery are constructed."
+  },
+  "governance_rule": {
+    "statement": "No Distinction Wealth Index, economic metric, simulation result, or policy recommendation may exceed the highest validated gate status."
+  },
+  "strong_statement": "Global validation proves framework consistency. Economic validation proves economic legitimacy."
+}

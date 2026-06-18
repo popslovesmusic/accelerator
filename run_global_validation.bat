@@ -28,5 +28,12 @@ if %errorlevel% neq 0 (
     exit /b 1
 )
 
+echo [GOVERNANCE] Running economics validation...
+python %PROJECT_ROOT%\scripts\economics_validate.py
+if %errorlevel% neq 0 (
+    echo [ERROR] Economics validation failed.
+    exit /b 1
+)
+
 echo [SUCCESS] Global ecosystem health is verified.
 exit /b 0
