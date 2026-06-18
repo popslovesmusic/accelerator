@@ -29,3 +29,4 @@ P021 | Tree Theorem (v2) | L028, L029, L030 | simulated | verified differentiate
 P032 | MT-003 Restricted Local Proof (Non-Empty Admissible Image) | MT-003 | restricted_local_argument_only | additive bounded proof artifact; no theorem promotion
 P033 | MT-002 Restricted Local Proof (Null-Path Transport Identity) | MT-002 | restricted_local_argument_only | additive bounded proof artifact; no theorem promotion
 P034 | MT-001 Restricted Local Proof (Projection Idempotence Under Stable Admissibility) | MT-001 | restricted_local_argument_only | additive bounded proof artifact; no theorem promotion
+P_GEO_001 | Projection Legality Lemma Scaffold | L099,L100,OPEN_BRIDGE_001 | restricted_local_argument_only | bounded proof path for PO-GEO-001; no geometry or physics promotion
