@@ -137,7 +137,7 @@ This document tracks the strategic objectives following the successful consolida
 ### 8. Repository Maintenance & Governance Debt
 - [/] **Task 8.1: Lexicon Gap Resolution (MNT-LEX-002)**
     - [x] Initial Phase: Resolved 28 priority gaps (Core, Basin, Mathematical objects) and cleaned up noise artifacts.
-    - [ ] Ongoing: Resolve remaining 137 outstanding gaps in `registry/lexicon_gap_queue.json`.
+    - [ ] Ongoing: Resolve the remaining 17 `GAP_OPEN` entries in `registry/lexicon_gap_queue.json` and keep `registry/lexicon_validation_registry.json` aligned with the core validation set.
 - [ ] **Task 8.2: Results Hygiene - Legacy Cleanup (MNT-RES-001)**
     - [ ] Standardize the naming of legacy result folders to match the required `YYYY-MM-DD_runNN_name` schema.
 - [ ] **Task 8.3: Living SSOT Formalization (MNT-SSOT-001)**

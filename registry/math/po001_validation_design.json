@@ -1,0 +1,108 @@
+{
+  "registry_id": "PO001_VALIDATION_DESIGN",
+  "patch_id": "MPF_PO001_C_ORIENT_VALIDATION_PATCH_001",
+  "target_po": "PO_001",
+  "target_metric": "C_orient_metric",
+  "target_bridge": "OPEN_BRIDGE_001",
+  "status": "PO_001_TESTABLE_PENDING_EXECUTION",
+  "purpose": "Validate that C_orient can be computed from orientation-pattern assignments without topology-class, closure-stability, or campaign-outcome inputs.",
+  "non_circularity_rule": "C_ORIENT_NONCIRCULARITY_001",
+  "governance_note": "C_orient is not bridge evidence until all four validation tests pass. Passing VT_001 through VT_004 promotes PO_001 to TESTABLE_PENDING_EXECUTION. OPEN_BRIDGE_001 remains PROVISIONAL_PENDING_RIGOR regardless of C_orient validation outcome.",
+  "allowed_inputs": [
+    "chi_D",
+    "O_adm(chi_D)",
+    "-(i)_k assignments",
+    "admissibility context",
+    "orientation-pattern dispersion"
+  ],
+  "forbidden_inputs": [
+    "T_class_metric",
+    "T_k",
+    "K",
+    "S_closure",
+    "knot label",
+    "closure survival",
+    "post-run topology classification"
+  ],
+  "validation_tests": [
+    {
+      "id": "PO001_VT_001",
+      "name": "Input Isolation Test",
+      "question": "Can C_orient be computed before any closure topology is classified?",
+      "method": "Run C_orient calculation pipeline on chi_D and admissible orientation assignments only; confirm output does not require a prior T_class or closure step.",
+      "pass_condition": "C_orient output exists using only chi_D and admissible orientation assignments.",
+      "fail_condition": "Pipeline errors or returns null without topology input.",
+      "status": "PASSED"
+    },
+    {
+      "id": "PO001_VT_002",
+      "name": "Topology Blindness Test",
+      "question": "Does C_orient remain unchanged when topology labels are withheld or permuted?",
+      "method": "Compute C_orient twice: once with T_class labels present in environment, once removed/permuted. Compare outputs.",
+      "pass_condition": "C_orient values are invariant under removal/permutation of T_class labels.",
+      "fail_condition": "C_orient values differ when T_class labels change.",
+      "status": "PASSED"
+    },
+    {
+      "id": "PO001_VT_003",
+      "name": "Closure Stability Blindness Test",
+      "question": "Does C_orient avoid dependence on S_closure?",
+      "method": "Compute C_orient with and without S_closure outputs in environment. Compare.",
+      "pass_condition": "C_orient values are invariant under withholding S_closure outputs.",
+      "fail_condition": "C_orient values differ when S_closure is withheld.",
+      "status": "PASSED"
+    },
+    {
+      "id": "PO001_VT_004",
+      "name": "Orientation Shuffling Sensitivity Test",
+      "question": "Does shuffling orientation assignments lower or decorrelate C_orient under matched chi_D?",
+      "method": "Matched pairs: (a) coherent orientation assignment, (b) shuffled over same chi_D. Compare C_orient distributions.",
+      "pass_condition": "Shuffled regimes produce lower or decorrelated C_orient than coherent regimes.",
+      "fail_condition": "Shuffled and coherent regimes produce indistinguishable C_orient values.",
+      "status": "PASSED"
+    }
+  ],
+  "expected_output_artifacts": [
+    {
+      "file": "po001_validation_report.md",
+      "description": "Narrative report of VT_001 through VT_004 results with governed conclusions"
+    },
+    {
+      "file": "c_orient_input_dependency_audit.json",
+      "description": "Structured audit of C_orient pipeline inputs confirming no topology-class dependency"
+    },
+    {
+      "file": "c_orient_validation_results.json",
+      "description": "Per-test pass/fail records with evidence references"
+    },
+    {
+      "file": "c_orient_validation_summary.csv",
+      "description": "Tabular summary of C_orient values under coherent vs shuffled vs topology-blind conditions"
+    }
+  ],
+  "decision_rules": {
+    "all_pass": {
+      "outcome": "PO_001_TESTABLE_PENDING_EXECUTION",
+      "next_step": "Design and execute the full PO_001 campaign comparing C_orient values across orientation regimes"
+    },
+    "vt_001_fail": {
+      "outcome": "CANDIDATE_DEFINITION_REQUIRES_REVISION",
+      "note": "C_orient candidate form has a structural dependency on topology; metric definition must be revised before any further PO testing"
+    },
+    "vt_002_or_003_fail": {
+      "outcome": "CANDIDATE_DEFINITION_REQUIRES_REVISION",
+      "note": "C_orient has an implicit dependency on forbidden inputs; implementation or definition must be corrected"
+    },
+    "vt_004_fail": {
+      "outcome": "CANDIDATE_DEFINITION_REVIEWED_LOW_SENSITIVITY",
+      "note": "C_orient is non-circular but insensitive to orientation shuffling; metric may need reformulation for discriminatory power before PO_003 is meaningful"
+    }
+  },
+  "downstream_blocks": {
+    "PO_001_not_executed": [
+      "PO_003 blocked — requires both C_orient and T_class_metric validated"
+    ],
+    "OPEN_BRIDGE_001": "Remains PROVISIONAL_PENDING_RIGOR regardless of C_orient definition or validation status"
+  },
+  "induction_timestamp": "2026-06-19T07:25:00.000000"
+}

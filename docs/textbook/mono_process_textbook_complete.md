@@ -849,6 +849,64 @@ $$ TC_{asym,a} := \{N_1, N_2, N_3\}_{-(i)_a} $$
 **Commentary:**
 Different orientation references may yield different closure organizations from the same set of distinction-nodes. Orientation is thus not merely a consequence of asymmetry, but a participant in the structural ordering of the process basins.
 
+**Formal Statement 5.1.4: Orientation Space as Derived Container (MPF_ORIENTATION_STALENESS_AUDIT_001 P1)**
+$$ \mathcal{O} := \{ -(i)_k \mid -(i)_k \text{ is an admissible tuning condition over the RT-expression field} \} $$
+$$ -(i) \in \mathcal{O} $$
+
+**Commentary:**
+$\mathcal{O}$ is a **derived container**, not an independent primitive. It is the codomain and family type for orientation operator instances. The process first induces a specific $-(i)$ through asymmetric distinction (\u00a75.1.2); $\mathcal{O}$ is the space of all such admissible orientation operators. The **forbidden reading** is $\mathcal{O}$ as a primitive space that precedes or replaces $-(i)$. The correct reading is $-(i)_k \in \mathcal{O}$, where $\mathcal{O}$ provides typing, equivalence, and codomain structure. $\mathcal{O}$ also serves as the admissibility condition for the organization operator $\text{Org}_a$, which requires $\exists o \in \mathcal{O}(G)$ [Source: operator_registry.json]. Candidate formal definition: $O(G) := \text{admissible space of participation directions governing bar expressions, } \text{Org}_a \text{ preservation, and knot-class selection}$ [Source: formal_object_registry OBJ-orientation-space].
+
+---
+
+**Formal Statement 5.1.5: Orientation Coherence Metric Candidate $C_{\text{orient}}$ (MPF_C_ORIENT_METRIC_DEFINITION_PATCH_001)**
+
+[ **DEFINITION_CANDIDATE_NOT_VALIDATED** ]
+
+**Symbol:** $C_{\text{orient}}$ &ensp; **Range:** $[0, 1]$
+
+**Candidate Definition:**
+$$ C_{\text{orient}}(\chi_D) := 1 - \text{Var}_{\text{norm}}\!\left(\{ -(i)_k \mid -(i)_k \in \mathcal{O}_{\text{adm}}(\chi_D) \}\right) $$
+
+where $\chi_D$ is the local distinction array and $\mathcal{O}_{\text{adm}}(\chi_D)$ is the family of admissible orientation-pattern assignments over that array, derived from $\delta_a$-context only.
+
+**Interpretations:**
+- $C_{\text{orient}} \approx 0$: orientation assignments are mutually incoherent or randomly dispersed across $\mathcal{O}_{\text{adm}}(\chi_D)$.
+- $C_{\text{orient}} \approx 1$: orientation assignments converge to a coherent admissible pattern.
+
+**Non-Circularity Constraint (C_ORIENT_NONCIRCULARITY_001):**
+$C_{\text{orient}}$ must be computable from $\chi_D$ and admissible orientation assignments **alone**, before any topology class, knot class, or closure stability result is evaluated. Forbidden inputs: $K$, $T_{\text{class}}$, $S_{\text{closure}}$, knot-class labels, post-hoc topology classification. Required for PO_001 of OPEN_BRIDGE_001 [Source: registry/math/open_bridge_proof_obligation_registry.json].
+*Governance Note:* $C_{\text{orient}}$ is not bridge evidence until PO001 validation demonstrates non-circular computability.
+
+**Commentary:**
+This candidate metric operationalizes PO_001: "Orientation coherence is measurable without presupposing closure topology." The candidate computes normalized variance across the admissible orientation-pattern family and inverts it to a coherence score. High $C_{\text{orient}}$ means the process selects a narrow, consistent region of $\mathcal{O}$; low $C_{\text{orient}}$ means orientation is underdetermined or randomized. This statement does **not** assert that high $C_{\text{orient}}$ causes stable closure — that causal claim remains in OPEN_BRIDGE_001 at PROVISIONAL_PENDING_RIGOR. This statement only defines the metric candidate.
+
+**Validation Requirements (before PO_001 is testable):**
+1. Show $C_{\text{orient}}$ computable from $\chi_D$ and admissible orientation assignments only.
+2. Show no dependency on $T_{\text{class\_metric}}$ or $S_{\text{closure}}$.
+3. Show shuffled/random orientation lowers or decorrelates $C_{\text{orient}}$ under matched input conditions.
+4. Show fixed coherent regimes increase $C_{\text{orient}}$ without using topology labels.
+
+**Expected Unblocks (conditional on validation):** PO_001 becomes testable. PO_003 can later compare knot-class variance conditional on $C_{\text{orient}}$ bins. OPEN_BRIDGE_001 remains STRUCTURAL_ONLY pending $T_{\text{class\_metric}}$ and campaign evidence.
+
+**Governance Note (MPF_PO001_C_ORIENT_VALIDATION_PATCH_001):**
+[ **VALIDATION_DESIGNED_PENDING_EXECUTION** ]
+
+$C_{\text{orient}}$ is a **definition candidate only**. It is **not bridge evidence** and does not constitute support for OPEN_BRIDGE_001 until PO_001 validation is executed and all four validation tests pass:
+
+| Test | Name | Pass Condition |
+| :--- | :--- | :--- |
+| PO001_VT_001 | Input Isolation | $C_{\text{orient}}$ computable from $\chi_D$ and orientation assignments alone |
+| PO001_VT_002 | Topology Blindness | $C_{\text{orient}}$ invariant under $T_{\text{class}}$ removal/permutation |
+| PO001_VT_003 | Closure Stability Blindness | $C_{\text{orient}}$ invariant under $S_{\text{closure}}$ withholding |
+| PO001_VT_004 | Shuffling Sensitivity | Shuffled orientation produces lower/decorrelated $C_{\text{orient}}$ than coherent orientation |
+
+Until these tests are executed: PO_001 status = `VALIDATION_DESIGNED_PENDING_EXECUTION`. Until PO_001 and PO_002 both pass: PO_003 status = `BLOCKED_PENDING_PO001_AND_PO002_VALIDATION`. OPEN_BRIDGE_001 status = `STILL_PROVISIONAL_PENDING_RIGOR` — this does not change from metric definition or validation design alone.
+
+Validation design registry: `registry/math/po001_validation_design.json`.
+
+[Source: MPF_C_ORIENT_METRIC_DEFINITION_PATCH_001; Basis: MPF_ORIENTATION_STALENESS_AUDIT_001]
+[Validation Design: MPF_PO001_C_ORIENT_VALIDATION_PATCH_001]
+
 ---
 
 ## 5.2 Orientation is Not Time
@@ -930,7 +988,7 @@ Immediate structural claims are now eligible for rewrite or reroute review again
 ---
 
 **Historical Context:**
-Earlier formulations treated orientation as a secondary consequence of asymmetry. Later drafts treated orientation as a local ordering anchor for distinction-node knotting. The current governed evidence rejects the strong participatory-closure reading but retains a narrower supported selector-form bridge.
+Earlier formulations treated orientation as a secondary consequence of asymmetry. Later drafts treated orientation as a local ordering anchor for distinction-node knotting. The current governed evidence rejects the strong participatory-closure reading and retains only a narrower provisional selector-form bridge under tool-rigor containment.
 
 ### Competing Models
 
@@ -943,10 +1001,10 @@ Earlier formulations treated orientation as a secondary consequence of asymmetry
 
 ### Proof Obligation: PO_OPEN_BRIDGE_001
 The bridge has been converted into an auditable proof obligation [Source: MPF_PATCH_001D].
-1. **Predictive Value:** Orientation coherence must possess measurable predictive value for closure survival.
-2. **Independence:** Closure stability must be independently measurable from orientation.
-3. **Ablation Survival:** Orientation must survive matched ablation controls (removal, randomization, shuffling).
-4. **Non-Reduction:** Orientation effect must not reduce to residue or admissibility alone.
+1. **Predictive Value:** Orientation coherence must possess measurable predictive value for admissible knot-class selection.
+2. **Independence:** Closure stability must be independently measurable from orientation and tested as residue-conditioned once topology class is fixed.
+3. **Selector Specificity:** Orientation must shift admissible topology class or class variance under matched controls.
+4. **Non-Reduction:** Any observed selector effect must not reduce to residue or admissibility alone.
 
 ### Historical Attack Campaign: LFCR_001
 The original direct-support bridge claim remains tracked in the living falsification registry as a historical falsified formulation. It does not override the later selector-form satisfaction result [Source: registry/governance/living_falsification_campaign_registry.json].
@@ -961,23 +1019,23 @@ To ensure auditable falsification, the following metrics are used to evaluate th
 - **T_preserve (Topology Preservation):** Degree to which connectivity survives perturbation.
 
 **Derived Effects:**
-- **orientation_effect:** $S_{closure}(M0) - S_{closure}(M1)$. Must be $> \tau$ to support bridge.
+- **selector_effect:** $Var(T \mid M1) - Var(T \mid M0)$. Must exceed $\tau$ in the governed metric family to support only the selector-form bridge.
 
 ### Dependency Table
 
 | Level | Affected Items |
 | :--- | :--- |
 | **Upstream** | AXIOM_1_2_1, D(Sa|Sb)>0, delta_a, R, -(i) |
-| **Immediate Downstream** | TC_asym, ordered_node_structure, closure_survival |
+| **Immediate Downstream** | TC_asym, ordered_node_structure, topological_selector_routing |
 | **Extended Downstream** | K_STABILIZATION, B_K, topology_app, geometry_app, field_app, gravity_app, QM_app_GR_app_bridge |
 
 **Claim Cap Notice:**
-No downstream dependency may exceed the current claim level implied by the supported selector-form bridge and its structural-only propagation rule. Support does not automatically discharge stronger participatory-closure claims or promote application projections.
+No downstream dependency may exceed the current claim level implied by the provisional selector-form bridge and its structural-only propagation rule. This provisional result does not automatically discharge stronger participatory-closure claims or promote application projections.
 
 ### Failure and Support Consequences
 
 *   **Historical Outcome (Direct-Support Formulation):** TC_asym, K_STABILIZATION, B_K, topology_app, geometry_app, field_app, gravity_app, and QM_app_GR_app_bridge entered capped or review-bound handling when the stronger bridge formulation failed.
-*   **Current Outcome (Selector Formulation):** Immediate structural claims become eligible for rewrite or promotion review if recast against the narrower selector bridge. No automatic support propagates to application projections.
+*   **Current Outcome (Selector Formulation):** Immediate structural claims become eligible for rewrite or promotion review only if recast against the narrower provisional selector bridge. No automatic support propagates to application projections.
 
 **Future Update Rule:**
 Any evidence report affecting **OPEN_BRIDGE_001** automatically updates this section, Appendix E, Appendix F, and the **Theorem Status Registry**.
@@ -1011,10 +1069,10 @@ This represents an **admissible orientation chain** rather than a temporal succe
 
 ## 5.5 Missing and Provisional Formalisms
 
-To achieve formal closure for the orientation program, the following must be induced:
+To achieve formal closure for the orientation program, the following items have candidate definitions and require promotion:
 
-1.  **Definition of Orientation Space $\mathcal{O}$:** [ **MISSING DEFINITION** ] Is $\mathcal{O}$ a manifold of unit vectors, a discrete set of aspect-labels, or a more complex topological space of relational frames?
-2.  **Orientation Equivalence:** [ **MISSING DEFINITION** ] Under what conditions are two orientations $-(i_a)$ and $-(i_b)$ considered equivalent? This is critical for defining symmetries in projected geometries.
+1.  **Definition of Orientation Space $\mathcal{O}$:** [ **DEFINITION_CANDIDATE_PENDING_FORMAL_CANONICALIZATION** ] A working informal definition is active in §5.1.2 and §5.1.4: $\mathcal{O} := \{-(i)_k \mid -(i)_k \text{ is an admissible tuning condition over the RT-expression field}\}$. A candidate formal definition exists in `formal_object_registry [OBJ-orientation-space]`: $O(G) := \text{admissible space of participation directions governing bar expressions, } \text{Org}_a \text{ preservation, and knot-class selection}$. Open question: what is the full topological or algebraic type of $\mathcal{O}$? Is it a quotient space $\mathcal{O} / \sim_{\text{Ref}}$, a discrete label set, or a relational frame manifold? This must be resolved before $\text{Org}_a$ axioms can be formally closed. [Audit: MPF_ORIENTATION_STALENESS_AUDIT_001 P2]
+2.  **Orientation Equivalence:** [ **DEFINITION_CANDIDATE_PENDING_FORMAL_CANONICALIZATION** ] A candidate exists in `formal_object_registry [OBJ-orientation-space, L1222]`: Two orientation configurations $G$ and $G'$ are equivalent under $\simeq_O$ if there exist $o \in \mathcal{O}(G)$, $o' \in \mathcal{O}(G')$ such that participation directions, roles, and closure are preserved under $\iff_R$. Formally: $G \simeq_O G' :\iff \exists o \in \mathcal{O}(G),\, \exists o' \in \mathcal{O}(G') : G \iff_R G' \text{ with participation directions, roles, and closure preserved}$. Open question: does $\simeq_O$ satisfy full equivalence axioms (reflexivity, symmetry, transitivity) under all admissibility regimes? Full metric proof on $\mathcal{O} / \sim_{\text{Ref}}$ is a registered open obligation [Source: `registry/operator_algebra_closure_registry.json`]. [Audit: MPF_ORIENTATION_STALENESS_AUDIT_001 P3]
 
 ---
 
@@ -1660,11 +1718,92 @@ By separating the underlying process from these application domains, we can desc
 
 To complete the formalization of the topological program, the following must be induced:
 
-1.  **Rigorous Definition of $K$:** [ **MISSING DEFINITION** ] Is $K$ a knot in the sense of knot theory (S1 into R3), or is it an abstract graph-cycle invariant or a periodic orbit in orientation space?
+1.  **Rigorous Definition of $K$:** [ **MISSING DEFINITION** ] Is $K$ a knot in the sense of knot theory ($S^1$ into $\mathbb{R}^3$), or is it an abstract graph-cycle invariant or a periodic orbit in orientation space?
 2.  **Braid Formation Rule:** [ **MISSING DEFINITION** ] What are the formal mechanics of triadic closure? How do the individual strands of $\mathcal{E}$ "knot" together under the $\iff_R$ operator?
-3.  **Topology-to-Geometry Transform:** [ **PROVISIONAL OPERATOR / LEGALITY GATE** ] The candidate operator is
+3.  **Topology-Class Metric:** [ **DEFINITION_CANDIDATE_PENDING_VALIDATION** ] A candidate metric $T_{\text{class\_metric}}$ is now defined — see Formal Statement 11.X below and `registry/math/metric_registry.json`.
+4.  **Topology-to-Geometry Transform:** [ **PROVISIONAL OPERATOR / LEGALITY GATE** ] The candidate operator is
     $$ \Pi_{\mathrm{geo}} : \mathrm{Topology\_app} \to \mathrm{Geometry\_app}. $$
     Its admissibility is currently governed by the projection-legality conditions in `L099`, the hardening gate in `L100`, and the pending validation campaign `GEO_PROJECTION_VALIDATION_001`. No physical metric theory is promoted from this placeholder.
+
+---
+
+## 11.X Formal Statement 11.X: Topology-Class Metric Candidate $T_{\text{class\_metric}}$ (MPF_T_CLASS_METRIC_DEFINITION_PATCH_001)
+
+[ **DEFINITION_CANDIDATE_NOT_VALIDATED** ]
+
+**Symbol:** $T_{\text{class\_metric}}$ **Input:** Realized closure trace $K_{\text{obs}}$ or closure graph $G_K$ **Output:** topology-class label $T_k$ and optional braid index $b(T_k)$
+
+**Reading:** A measurement procedure that assigns observed closure structures to topology classes without using orientation coherence as an input.
+
+**Candidate Definitions:**
+
+**Step 1 — Closure Trace:**
+$$ K_{\text{obs}} := \text{trace}(\Delta \to R \to T \to A_{\text{adm}} \to \delta_a \to \Delta') $$
+
+**Step 2 — Topology Graph:**
+$$ G_K := \text{graph}(K_{\text{obs}}) $$
+
+**Step 3 — Class Assignment:**
+$$ T_{\text{class\_metric}}(G_K) := [T_k,\; b(T_k),\; \text{inv}(G_K)] $$
+
+where $T_k$ is the topology-class label, $b(T_k)$ is the optional braid index, and $\text{inv}(G_K)$ is the structural invariant signature of the closure graph.
+
+**Step 4 — Class Distribution:**
+$$ P(T_k) := \frac{\text{count}(T_k)}{N} $$
+
+**Step 5 — Variance Target (for PO\_003):**
+$$ \text{Var}(T) := \text{dispersion}(\{T_k\}) \text{ over matched runs} $$
+
+**Minimal Class Family (Operational Candidate):**
+
+| Class | Label | Description |
+| :--- | :--- | :--- |
+| $T_0$ | `null_or_no_closure` | No closure formed; process did not stabilize |
+| $T_1$ | `simple_closure_organization` | Minimal single-cycle closure |
+| $T_2$ | `linked_closure_organization` | Two coupled loops; minimal braid interaction |
+| $T_3$ | `low_index_braided_organization` | Low braid-index closure ($b \leq 3$) |
+| $T_4$ | `high_index_braided_organization` | Higher braid-index closure ($b > 3$) |
+| $T_x$ | `valid_but_unclassified_topological_organization` | Valid closure not fitting $T_1$–$T_4$; requires further analysis |
+
+**Note:** This class family is intentionally operational. It may be replaced by stricter knot/braid invariants (e.g., Alexander polynomial, Jones polynomial, writhe) in later formalization without requiring this statement to be superseded — only updated.
+
+**Non-Circularity Constraint (T_CLASS_NONCIRCULARITY_001):**
+$T_{\text{class\_metric}}$ must classify topology after closure observation but **before** orientation-conditioned variance claims are evaluated. Forbidden inputs: $C_{\text{orient}}$, $-(i)$, $\mathcal{O}$, orientation regime labels, $S_{\text{closure}}$ scores, campaign outcome labels. Required because PO\_003 compares $\text{Var}(T \mid C_{\text{orient}} \text{ high})$ against $\text{Var}(T \mid C_{\text{orient}} \text{ low})$ — $T$ must be evaluated blind to the orientation bin.
+*Governance Note:* T_class_metric remains a candidate until an executable classifier demonstrates trace-only classification and orientation blindness.
+
+**Allowed Inputs:** realized closure trace, closure graph adjacency, braid/loop/crossing structure, connectivity preservation record, residue-conditioned closure output.
+
+**Commentary:**
+This candidate metric operationalizes PO\_002 ("knot-class distribution is measurable") and provides the distributional object needed for PO\_003 ("orientation coherence narrows admissible knot-classes"). The class family is a minimal operational scaffold — it separates null-closure from valid closure, and distinguishes low from high topological complexity, without introducing external mathematical primitives that are not already present in the framework's closure-trace language. Braid index $b(T_k)$ is included as an optional output to allow later comparison with formal knot theory; its inclusion does not constitute a claim that realized closure structures are literal knots in the mathematical sense.
+
+This statement does **not** assert that topology class determines closure stability (that is PO\_004's domain) or that orientation selects topology class (that is OPEN\_BRIDGE\_001's claim). This statement only defines the measurement procedure.
+
+**Governance Status After Patch:**
+- $T_{\text{class\_metric}}$: TOOL_SPEC_DEFINED_PENDING_BUILD
+- PO\_002: IMPLEMENTATION_SPEC_DEFINED_PENDING_BUILD
+- PO\_003: BLOCKED_PENDING_PO001_AND_PO002_VALIDATION
+- OPEN\_BRIDGE\_001: STILL PROVISIONAL_PENDING_RIGOR
+
+**Validation Requirements:**
+1. Classify observed closure traces without $C_{\text{orient}}$ input.
+2. Produce a stable class label $T_k$ or $T_x$ for every valid observed closure.
+3. Distinguish null/no-closure ($T_0$) from valid closure.
+4. Produce distribution $P(T_k)$ over repeated runs.
+5. Produce $\text{Var}(T)$ or equivalent dispersion measure for PO\_003.
+6. Remain blind to orientation regime during classification.
+
+**Expected Unblocks (conditional on validation):**
+- PO\_002 becomes testable.
+- PO\_003 becomes structurally testable once $C_{\text{orient}}$ validation also passes.
+- OPEN\_BRIDGE\_001 remains PROVISIONAL_PENDING_RIGOR pending evidence, attacks, and tool rigor.
+
+**Ontology Ruling (MPF_T_ONTOLOGY_CLARIFICATION_001):**
+- **$T$:** topological organization generated by continuation under constraint.
+- **$K$:** stabilized closure regime of $T$.
+- **graph / braid_index / closure_trace:** projections of $T$ / continuation history.
+- **Consequence:** $T_{\text{class\_metric}}$ classifies topological organizations themselves. Implementation observables (graph features, cycle structure, braid proxies, closure invariants) must not be conflated with the underlying topological organization $T$.
+
+[Source: MPF_T_CLASS_METRIC_DEFINITION_PATCH_001; Basis: MPF_ORIENTATION_CANONICALIZATION_PATCH_001, MPF_C_ORIENT_METRIC_DEFINITION_PATCH_001; Ontology Clarification: MPF_T_ONTOLOGY_CLARIFICATION_001]
 
 ---
 
@@ -2414,8 +2553,11 @@ These items remain unsettled and are the primary targets for future induction an
 - **Zero-state Condition:** Formal algebraic definition of the collapse resulting from core decoupling.
 - **Projection-signature:** Defining how domain-specific signatures (QM vs GR) are extracted from $\leftrightarrow_R$.
 - **Formal operand of $\leftrightarrow_R$:** Defining the types allowed to participate in residue-conditioned closure.
-- **Vertical Bar Operator ($\mid$):** Formally fixing the meaning of "grouped closure participation" in triadic closure.
-- **Orientation Space $\mathcal{O}$:** Formal definition still required to close the calculus-level semantics of the selector bridge and to reroute downstream theorems cleanly.
+- **Vertical Bar Operator ($\mid$):** [ **DEFINITION_CANDIDATE_PENDING_FORMAL_PROMOTION** ] Formally fixing the meaning of "grouped closure participation" in triadic closure. A candidate formal definition exists in `formal_object_registry [OBJ-grouped-bar-closure]` and `operator_registry.json` (status: `MUST_DEFINE_BEFORE_ORG_A_CLOSURE`). Group closure candidate symbol: $\text{Adm}_{|}^{G}$. Associativity and permutability default to NON-PROVEN until tested. [Audit: MPF_ORIENTATION_STALENESS_AUDIT_001 P5]
+- **Orientation Space $\mathcal{O}$:** [ **DEFINITION_CANDIDATE_PENDING_FORMAL_PROMOTION** ] Working informal definition active in §5.1.2 and §5.1.4. Candidate formal definition in `formal_object_registry [OBJ-orientation-space]`. Open requirement for OPEN_BRIDGE_001 is the **measurable metric** $C_{\text{orient}}$ and topological class measure $T_{\text{class metric}}$, not the space definition itself. Space definition is no longer classified as GAP_OPEN. [Audit: MPF_ORIENTATION_STALENESS_AUDIT_001 P4]
+- **Orientation Coherence Metric ($C_{\text{orient}}$):** [ **DEFINITION_CANDIDATE_PENDING_VALIDATION** ] Candidate definition active in textbook §5.1.5 (Formal Statement 5.1.5): $C_{\text{orient}}(\chi_D) := 1 - \text{Var}_{\text{norm}}(\{-(i)_k \mid -(i)_k \in \mathcal{O}_{\text{adm}}(\chi_D)\})$. Non-circularity constraint active (C_ORIENT_NONCIRCULARITY_001): metric must be computable before topology class or closure stability is evaluated. Canonical registry entry: `registry/math/metric_registry.json`. Binds to OPEN_BRIDGE_001 PO_001. [Patch: MPF_C_ORIENT_METRIC_DEFINITION_PATCH_001]
+- **Topological Class Variance Measure ($T_{\text{class\_metric}}$):** [ **TOOL_SPEC_DEFINED_PENDING_BUILD** ] Candidate definition active in textbook §11.X (Formal Statement 11.X): $T_{\text{class\_metric}}(G_K) := [T_k, b(T_k), \text{inv}(G_K)]$ with minimal class family $T_0$–$T_4$, $T_x$. Non-circularity constraint active (T_CLASS_NONCIRCULARITY_001): must classify topology blind to orientation regime. Canonical registry entry: `registry/math/metric_registry.json`. Binds to OPEN_BRIDGE_001 PO_002 and PO_003. [Patch: MPF_T_CLASS_METRIC_DEFINITION_PATCH_001]
+
 - **Topology-to-Geometry Transform:** Provisional `Pi_geo : Topology_app -> Geometry_app` legality gate. Promotion requires distinction, admissibility, orientation, and closure preservation plus campaign evidence. (Ref: 11.3, 11.5)
 - **Empirical Mapping Standards:** Mapping framework metrics ($\Omega_a$, $B_K$) to physical constants ($G, h, c$). (Ref: 12.5)
 - **Formal definition of $\otimes$:** The composition and interference rules for composite directional coupling. (Ref: 9.1, 9.4)
@@ -2451,8 +2593,9 @@ These items remain unsettled and are the primary targets for future induction an
 
 ### F.7 Bridge Measurement Definitions (MPF_PATCH_002E)
 Formal measurement rules for bridge falsification campaigns.
-- **Orientation Coherence ($C_{orient}$):** $1 - \text{norm\_disagreement}$.
-- **Closure Stability ($S_{closure}$):** $\text{survival\_cycles} / \text{total\_cycles}$.
+- **Orientation Coherence ($C_{\text{orient}}$):** [ **DEFINITION_CANDIDATE_NOT_VALIDATED** ] Candidate form: $1 - \text{Var}_{\text{norm}}(\{-(i)_k \mid -(i)_k \in \mathcal{O}_{\text{adm}}(\chi_D)\})$. Canonical inputs: $-(i)$, $\mathcal{O}$, $\chi_D$, $\delta_a$-context. Forbidden inputs: $K$, $T_{\text{class}}$, $S_{\text{closure}}$. Non-circularity constraint C_ORIENT_NONCIRCULARITY_001 active. Full definition: textbook §5.1.5; registry: `registry/math/metric_registry.json`. [Patch: MPF_C_ORIENT_METRIC_DEFINITION_PATCH_001]
+- **Topology-Class Metric ($T_{\text{class\_metric}}$):** [ **TOOL_SPEC_DEFINED_PENDING_BUILD** ] Candidate form: $T_{\text{class\_metric}}(G_K) := [T_k, b(T_k), \text{inv}(G_K)]$ with class family $T_0$–$T_4$, $T_x$. Allowed inputs: realized closure trace, graph adjacency, braid/loop structure. Forbidden inputs: $C_{\text{orient}}$, $-(i)$, $\mathcal{O}$, orientation regime labels. Non-circularity constraint T_CLASS_NONCIRCULARITY_001 active. Full definition: textbook §11.X; registry: `registry/math/metric_registry.json`. [Patch: MPF_T_CLASS_METRIC_DEFINITION_PATCH_001]
+- **Closure Stability ($S_{\text{closure}}$):** $\text{survival\_cycles} / \text{total\_cycles}$.
 - **Minimum Effect Threshold ($\tau$):** 0.05 (Target for $\beta_1$).
 
 ---

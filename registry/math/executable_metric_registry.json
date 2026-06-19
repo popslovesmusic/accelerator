@@ -11,13 +11,24 @@
   "metrics": {
     "C_orient": {
       "name": "Orientation Coherence",
-      "concept": "Degree to which orientation references remain mutually consistent across closure candidates.",
+      "status": "DEFINITION_CANDIDATE_NOT_VALIDATED",
+      "definition_source": "textbook §5.1.5 (Formal Statement 5.1.5); patch MPF_C_ORIENT_METRIC_DEFINITION_PATCH_001",
+      "canonical_registry": "registry/math/metric_registry.json",
+      "concept": "Degree of coherence among admissible orientation-pattern assignments over a shared RT-expression field.",
       "range": [0.0, 1.0],
+      "candidate_form": "C_orient(chi_D) := 1 - Var_norm({-(i)_k | -(i)_k in O_adm(chi_D)})",
       "operational_definition": "1 - normalized_orientation_disagreement",
       "interpretation": {
-        "0.0": "fully random orientation",
+        "0.0": "fully random / incoherent orientation",
         "0.5": "partially ordered",
         "1.0": "fully coherent orientation"
+      },
+      "canonical_inputs": ["-(i)", "O := {-(i)_k}", "chi_D", "A_adm or delta_a-context"],
+      "forbidden_inputs": ["K", "T_class", "S_closure", "knot_class_label", "closure_stability_result", "post-hoc topology classification"],
+      "non_circularity_constraint": {
+        "rule_id": "C_ORIENT_NONCIRCULARITY_001",
+        "statement": "C_orient must be computable before topology class, knot class, or closure stability is evaluated.",
+        "status": "CONSTRAINT_ACTIVE"
       },
       "falsification_use": [
         "orientation_removal",
@@ -25,6 +36,7 @@
         "orientation_shuffle"
       ]
     },
+
     "S_closure": {
       "name": "Closure Stability",
       "concept": "Persistence of a closure structure through update cycles.",

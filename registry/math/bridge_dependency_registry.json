@@ -5,8 +5,8 @@
     {
       "bridge_id": "OPEN_BRIDGE_001",
       "name": "Orientation-Closure Bridge",
-      "root_statement": "Orientation coherence participates in closure stability.",
-      "formal_dependency": "closure_survival = f(orientation_coherence, residue_support, admissibility)",
+      "root_statement": "Orientation coherence conditions admissible knot-class selection under selector-form routing; closure stability remains residue-conditioned.",
+      "formal_dependency": "knot_class_selection = f(orientation_coherence, residue_support, admissibility); closure_survival = f(residue_support, admissibility, topology_class)",
       "tree": {
         "level_0_root": [
           "Primary Axiom remains untouched"
@@ -17,7 +17,7 @@
         "level_2_structural": [
           "ordered_node_structure",
           "asymmetric_triadic_closure",
-          "closure_survival",
+          "topological_selector_routing",
           "non_collapsing_triad"
         ],
         "level_3_stabilization": [
@@ -76,14 +76,16 @@
           ]
         }
       },
-      "required_primitive_input": "orientation_space_O"
+      "required_primitive_input": "C_orient_metric, T_class_metric",
+      "required_primitive_input_note": "orientation_space_O is no longer an open primitive input. O is defined as a derived container per textbook §5.1.2 and §5.1.4. The actual unresolved measurable requirements for OPEN_BRIDGE_001 proof obligations PO_001-PO_003 are C_orient (orientation coherence metric, must not presuppose closure topology) and T_class_metric (topological class variance measure). [Audit: MPF_ORIENTATION_STALENESS_AUDIT_001 P6]"
+
     }
   ],
   "governance_rules": [
     {
       "rule_id": "OPEN_BRIDGE_DEPENDENCY_RULE_001",
       "rule": "Any claim downstream of an unresolved bridge may not be promoted above the bridge's current claim level.",
-      "effect": "If OPEN_BRIDGE_001 is C2, dependent claims cannot exceed C2 except as explicitly marked speculative projections."
+        "effect": "If OPEN_BRIDGE_001 is C1_defined_provisional, dependent claims cannot exceed that ceiling except as explicitly marked speculative projections."
     },
     {
       "rule_id": "OPEN_BRIDGE_FAILURE_PROPAGATION_001",
@@ -102,11 +104,11 @@
     {
       "rule_id": "OPEN_BRIDGE_SUPPORT_PROPAGATION_001",
       "rule": "If OPEN_BRIDGE_001 survives falsification, support propagates only to immediate structural claims unless separately tested.",
-      "allowed_support_targets": [
-        "ordered_node_structure",
-        "asymmetric_triadic_closure",
-        "closure_survival"
-      ],
+        "allowed_support_targets": [
+          "ordered_node_structure",
+          "asymmetric_triadic_closure",
+          "topological_selector_routing"
+        ],
       "blocked_support_targets": [
         "gravity_app",
         "matter_app",
