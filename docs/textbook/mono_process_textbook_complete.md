@@ -900,7 +900,7 @@ $C_{\text{orient}}$ is a **definition candidate only**. It is **not bridge evide
 | PO001_VT_003 | Closure Stability Blindness | $C_{\text{orient}}$ invariant under $S_{\text{closure}}$ withholding |
 | PO001_VT_004 | Shuffling Sensitivity | Shuffled orientation produces lower/decorrelated $C_{\text{orient}}$ than coherent orientation |
 
-PO_001 status is `PASSED_PENDING_RIGOR_ENDORSEMENT` (via [MPF_PO001_C_ORIENT_VALIDATION_EXECUTION_PATCH_001](file:///D:/projects/acellorator/patches/MPF_PO001_C_ORIENT_VALIDATION_EXECUTION_PATCH_001.json)). PO_002 status is `PASSED_PENDING_RIGOR_ENDORSEMENT` (via [MPF_PO002_VALIDATION_CLOSURE_PATCH_001](file:///D:/projects/acellorator/patches/MPF_PO002_VALIDATION_CLOSURE_PATCH_001.json)). PO_003 status is `DESIGNED_PENDING_EXECUTION` (via [MPF_PO003_VARIANCE_TEST_DESIGN_PATCH_001](file:///D:/projects/acellorator/patches/MPF_PO003_VARIANCE_TEST_DESIGN_PATCH_001.json)). OPEN_BRIDGE_001 status is `AWAITING_FIRST_DIRECT_EVIDENCE` under selector-bridge rules.
+PO_001 status is `PASSED_PENDING_RIGOR_ENDORSEMENT` (via [MPF_PO001_C_ORIENT_VALIDATION_EXECUTION_PATCH_001](file:///D:/projects/acellorator/patches/MPF_PO001_C_ORIENT_VALIDATION_EXECUTION_PATCH_001.json)). PO_002 status is `PASSED_PENDING_RIGOR_ENDORSEMENT` (via [MPF_PO002_VALIDATION_CLOSURE_PATCH_001](file:///D:/projects/acellorator/patches/MPF_PO002_VALIDATION_CLOSURE_PATCH_001.json)). PO_003 status is `PASSED_PENDING_RIGOR_ENDORSEMENT` (via [MPF_PO003_VARIANCE_CAMPAIGN_RUN_001](file:///D:/projects/acellorator/patches/MPF_PO003_VARIANCE_CAMPAIGN_RUN_001.json)). OPEN_BRIDGE_001 status is `C4_CANDIDATE_PENDING_RIGOR` (via [MPF_OPEN_BRIDGE_PROMOTION_REVIEW_001](file:///D:/projects/acellorator/patches/MPF_OPEN_BRIDGE_PROMOTION_REVIEW_001.json)) under selector-bridge rules.
 
 Validation design registry: `registry/math/po001_validation_design.json`.
 
@@ -2568,7 +2568,7 @@ These items remain unsettled and are the primary targets for future induction an
 ### F.3 Open Bridge Registry
 | Bridge ID | Name | Current Status | Claim Cap |
 | :--- | :--- | :--- | :--- |
-| **OPEN_BRIDGE_001** | Orientation-Closure | **AWAITING_FIRST_DIRECT_EVIDENCE** | **STRUCTURAL_ONLY** |
+| **OPEN_BRIDGE_001** | Orientation-Closure | **C4_CANDIDATE_PENDING_RIGOR** | **STRUCTURAL_ONLY** |
 
 ### F.4 Bridge Dependency Tables
 - **OPEN_BRIDGE_001 Requires Rewrite/Reroute Review For:** TC_asym, K, B_K.

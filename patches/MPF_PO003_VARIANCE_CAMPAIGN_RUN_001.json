@@ -1,0 +1,50 @@
+{
+  "patch_id": "MPF_PO003_VARIANCE_CAMPAIGN_RUN_001",
+  "status": "PROPOSED",
+  "scope": "campaign_execution",
+  "claim_effect": "EVIDENCE_GENERATION_ONLY",
+  "target": "PO_003",
+  "purpose": "Execute the authorized variance campaign testing whether high C_orient narrows T_class variance.",
+  "statement_under_test": "Var(T | C_orient_high) < Var(T | C_orient_low)",
+  "minimum_seeds": 64,
+  "required_regimes": [
+    "full_mechanism",
+    "orientation_shuffled",
+    "fixed_orientation_regimes",
+    "residue_depleted"
+  ],
+  "required_metrics": [
+    "C_orient",
+    "T_class",
+    "P(T_k)",
+    "Var(T)",
+    "selector_effect",
+    "control_delta"
+  ],
+  "required_outputs": [
+    "outputs/po003_variance_campaign/po003_variance_results.json",
+    "outputs/po003_variance_campaign/po003_variance_summary.csv",
+    "outputs/po003_variance_campaign/po003_control_comparison.json",
+    "outputs/po003_variance_campaign/po003_variance_report.md"
+  ],
+  "ruling_boundary": {
+    "can_support": "selector-form OPEN_BRIDGE_001 only",
+    "cannot_support": [
+      "direct closure stability",
+      "gravity_app",
+      "matter_app",
+      "field_app",
+      "QM_app_GR_app_bridge"
+    ]
+  },
+  "status_after_execution": {
+    "if_pass": {
+      "PO_003": "PASSED_PENDING_RIGOR_ENDORSEMENT",
+      "OPEN_BRIDGE_001": "SELECTOR_EVIDENCE_PRESENT_PENDING_ATTACK_SUITE"
+    },
+    "if_fail": {
+      "PO_003": "FAILED_OR_INCONCLUSIVE",
+      "OPEN_BRIDGE_001": "REVIEW_OR_REROUTE_REQUIRED"
+    }
+  }
+}
