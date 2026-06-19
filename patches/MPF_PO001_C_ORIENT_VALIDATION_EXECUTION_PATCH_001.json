@@ -1,0 +1,61 @@
+{
+  "patch_id": "MPF_PO001_C_ORIENT_VALIDATION_EXECUTION_PATCH_001",
+  "scope": "validation_execution",
+  "claim_effect": "NO_THEOREM_PROMOTION",
+  "target": "PO_001",
+  "purpose": "Validate that C_orient is computable from orientation-pattern assignments without topology-class, closure-stability, or campaign-outcome inputs.",
+  "basis": [
+    "MPF_C_ORIENT_METRIC_DEFINITION_PATCH_001",
+    "MPF_PO001_C_ORIENT_VALIDATION_PATCH_001",
+    "MPF_PO002_VALIDATION_CLOSURE_PATCH_001"
+  ],
+  "required_tests": [
+    {
+      "id": "PO001_VT_001",
+      "name": "Input Isolation Test",
+      "pass_condition": "C_orient output is produced using only χ_D, 𝒪_adm(χ_D), and -(i)_k assignments."
+    },
+    {
+      "id": "PO001_VT_002",
+      "name": "Topology Blindness Test",
+      "pass_condition": "C_orient is invariant when T_class labels are withheld, removed, or permuted."
+    },
+    {
+      "id": "PO001_VT_003",
+      "name": "Closure Stability Blindness Test",
+      "pass_condition": "C_orient is invariant when S_closure outputs are withheld, removed, or permuted."
+    },
+    {
+      "id": "PO001_VT_004",
+      "name": "Orientation Shuffling Sensitivity Test",
+      "pass_condition": "Shuffled orientation assignments lower or decorrelate C_orient under matched χ_D."
+    }
+  ],
+  "forbidden_inputs": [
+    "T_class_metric",
+    "T_k",
+    "K",
+    "S_closure",
+    "knot_label",
+    "closure_survival",
+    "campaign_result_label",
+    "post_run_topology_classification"
+  ],
+  "required_outputs": [
+    "outputs/c_orient_validation/c_orient_validation_results.json",
+    "outputs/c_orient_validation/c_orient_input_dependency_audit.json",
+    "outputs/c_orient_validation/c_orient_validation_summary.csv",
+    "outputs/c_orient_validation/po001_validation_report.md"
+  ],
+  "success_condition": "All four PO001 validation tests pass and the dependency audit confirms no topology or closure-stability leakage.",
+  "status_if_passed": {
+    "C_orient_metric": "VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT",
+    "PO_001": "PASSED_PENDING_RIGOR_ENDORSEMENT",
+    "PO_003": "READY_FOR_VARIANCE_TEST_DESIGN"
+  },
+  "status_if_failed": {
+    "C_orient_metric": "DEFINED_CANDIDATE_REPAIR_REQUIRED",
+    "PO_001": "VALIDATION_FAILED_REPAIR_REQUIRED",
+    "PO_003": "BLOCKED_PENDING_PO001_REPAIR"
+  }
+}

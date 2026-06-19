@@ -1,0 +1,52 @@
+{
+  "patch_id": "MPF_PO003_VARIANCE_TEST_DESIGN_PATCH_001",
+  "scope": "campaign_design",
+  "claim_effect": "NO_THEOREM_PROMOTION",
+  "target": "PO_003",
+  "purpose": "Design the experimental campaign that tests whether orientation coherence narrows topological organization variance.",
+  "statement_under_test": {
+    "candidate": "Var(T | high C_orient) < Var(T | low C_orient)",
+    "interpretation": "Orientation coherence functions as a topological selector."
+  },
+  "inputs": [
+    "validated C_orient_metric",
+    "validated T_class_metric"
+  ],
+  "required_regimes": [
+    {
+      "name": "high_orientation_coherence",
+      "condition": "upper C_orient band"
+    },
+    {
+      "name": "low_orientation_coherence",
+      "condition": "lower C_orient band"
+    }
+  ],
+  "required_controls": [
+    "orientation_shuffled",
+    "orientation_removed",
+    "fixed_orientation_regime",
+    "residue_depleted"
+  ],
+  "minimum_seeds": 64,
+  "outputs": [
+    "P(T_k | high C_orient)",
+    "P(T_k | low C_orient)",
+    "Var(T | high C_orient)",
+    "Var(T | low C_orient)",
+    "effect_size",
+    "confidence_interval"
+  ],
+  "failure_conditions": [
+    "No variance reduction observed",
+    "Variance reduction explained entirely by residue controls",
+    "Orientation-shuffled regime performs equivalently"
+  ],
+  "success_condition": {
+    "statement": "Variance reduction persists across controls and exceeds minimum effect threshold."
+  },
+  "status_after_design": {
+    "PO_003": "DESIGNED_PENDING_EXECUTION",
+    "OPEN_BRIDGE_001": "AWAITING_FIRST_DIRECT_EVIDENCE"
+  }
+}
