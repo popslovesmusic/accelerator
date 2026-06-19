@@ -1871,19 +1871,43 @@ The textbook provides the overview and projection pathway. All active economics 
 
 # Chapter 14: Governance, Claim Levels, and Induction Rules
 
+## 14.0 The Critical Path Roadmap
+
+To move the Mono-Process Framework from broad debt listing toward staged, rigorous resolution, the program defines two parallel critical paths: the **Operator Closure Path** and the **Structural Closure Path**. These paths enforce a strict order of buildability—downstream structures or application projections cannot be closed before their primitive mathematical operators are formally defined.
+
+```mermaid
+graph TD
+    subgraph Operator Closure Path
+        A0["Stage 0: Primitive Participation<br>vertical_bar, O, tensor"] --> A1["Stage 1: Org_a Axiomatization"]
+        A1 --> A3["Stage 3: Residue Calculus<br>R_bidir, leftrightarrow_R, decoupling"]
+        A3 --> A4["Stage 4: Projection Calculus<br>leftrightarrow_R operands, iff_s"]
+    end
+    
+    subgraph Structural Closure Path
+        B2["Stage 2: Topology Closure<br>OPEN_BRIDGE_001, K, B_K, TC_asym"] --> B5["Stage 5: Economics Buildability<br>Org_a engine, Sigma_D tools, DWI"]
+    end
+    
+    A1 -.-> B2
+    A4 -.-> B5
+```
+
+1. **Operator Closure Path**: Resolves the operational primitives, transition definitions, and residue relations. Primitive participation rules for the vertical bar operator (`|`) and Orientation Space ($O$) must be made explicit at Stage 0 before `Org_a` axioms can be closed at Stage 1. Similarly, Stage 3 (Residue Calculus) must separate memory states ($R$) from residue coupling ($\leftrightarrow_R$) before Stage 4 (Projection Calculus) can resolve mathematical constraints.
+2. **Structural Closure Path**: Governs the progression of topological invariants and application domains. Stage 2 (Topology Closure) requires orientation space $O$ to participate in selection rules before `OPEN_BRIDGE_001` can close. Stage 5 (Economics Buildability) acts as the final integration domain, which becomes buildable only after the upstream operator and structural stages are fully resolved.
+
+---
 
 ## 14.1 Claim Levels (L-Levels and C-Levels)
 
 Terminology and results within the framework are categorized by their operational readiness and evidential strength.
 
-### 13.1.1 Lexicon Validation (L-Levels)
+### 14.1.1 Lexicon Validation (L-Levels)
 The **Lexicon Validation System** tracks the operational readiness of every term [Source: MPF-CORE-V1 Sec 0].
 - **L0 (Definition):** Internal terminology or notation only.
 - **L1 (Observed):** Term has one model or run supporting one operational role.
 - **L2 (Multi-Model):** Term has agreement across independent mechanism classes (e.g., Agent-based and PDE).
 - **L3 (Verified):** Term has multi-model + multi-seed + falsification-passed support.
 
-### 13.1.2 Claim Classification (C-Levels)
+### 14.1.2 Claim Classification (C-Levels)
 The strength of a research result or mathematical proof is governed by its **Claim Level (C-Level)**.
 - **C0 (Axiom / Definition):** Internal foundation (Starting point Axiom 1.2.1).
 - **C1 (Model-Relative):** Statement valid only inside a specific formal scaffold.
@@ -2096,9 +2120,104 @@ The `x` in `<*>_x` is a reserved discussion placeholder in this induction packet
 - `A` and `B` may not be governance labels, proof status tags, registry keys, or undeclared meta terms.
 - Every legal operator instance must supply its own truth conditions; the meta-schema only licenses the family shape.
 
+### Vertical Bar Operator: Admissible Participation Separator
+
+The vertical bar operator (`|`) serves as the primitive admissible participation separator within distinction-generating expressions. It is structured under the following rules:
+
+- **Not Ordinary Division:** The vertical bar is not ordinary division or a static ratio.
+- **Not Mere Notation:** It is not mere syntactic punctuation or set separation.
+- **Order-Sensitive:** $A|B$ is order-sensitive ($A|B \not\equiv B|A$) unless orientation reversal is explicitly proven.
+- **Minimal Admissibility Gate:** $D(A|B) > \epsilon_a$ acts as the minimal positive admissibility gate for distinction participation.
+- **Grouped Participation:** Grouped bar expressions (e.g., $A|B|C$) are not automatically reducible to binary closure and require a separate group-closure pass.
+
+**Formal Block B.0.1: Vertical Bar Expression**
+$$ \text{Adm}_{|}(A,B) := [\text{Typed}_a(A) \land \text{Typed}_a(B) \land \text{Eval}_D(A|B) \land D(A|B) > \epsilon_a] $$
+
+**Commentary:**
+The vertical bar marks the comparison interface through which operands co-participate. The expression $A|B$ does not assert truth or realized distinction on its own; it becomes active only when evaluated by $D$ or a registered comparison context.
+
+### Grouped Bar Closure and Triadic Participation
+
+Grouped vertical bar participation governs expressions containing more than two participants (e.g., $A|B|C$ or nested arrangements). It is constrained by the following principles:
+
+- **No Automatic Propagation:** Binary bar closure does not automatically imply grouped closure. A grouped expression is not simply a shorthand for a collection of binary pairings.
+- **Non-Associative by Default:** Grouped expressions are not automatically associative; $(A|B)|C$ is not equivalent to $A|(B|C)$ unless an explicit admissible regrouping is proven.
+- **Non-Permutable by Default:** Grouped expressions are not automatically permutable; participant order is semantically binding ($A|B|C \not\equiv B|A|C$).
+- **First-Class Triads:** Triadic participation fields ($A|B|C$) are treated as first-class structures where the middle participant may serve as a mediator, operator, or comparison interface (e.g., $Law|Operator|Truth$).
+- **Orientation Dependency:** Grouped closure preserves orientation-consistent structure across all interfaces. Grouped closure ($\text{Adm}_{|}^G$) remains dependent on the formal definition of orientation space $O$.
+
+**Formal Block B.0.2: Grouped Bar Closure**
+$$ \text{Adm}_{|}^G(A_1, \dots, A_n; G) := [\forall A_i \text{Typed}_a(A_i)] \land [\forall e_{ij} \in E(G), \text{Adm}_{|}(A_i, A_j)] \land \text{Preserve}_O(G) \land D_G(G) > \epsilon_a $$
+
+**Commentary:**
+Here, $G$ represents the declared participation graph or grouping structure, and $E(G)$ represents the adjacent bar interfaces. Grouped closure is evaluated by a grouped distinction evaluator $D_G$ rather than assumed to factor into binary $D$ calls.
+
+### Orientation Space O
+
+Orientation Space ($O$) is defined as the admissible space of participation directions available to distinction organizations. It is governed by the following core claims:
+
+- **Participation Constraint:** Orientation determines how distinction participates; it is not merely spatial direction, coordinate axes, object location, or visual layout.
+- **Interface Orientation:** The vertical bar interface carries orientation, rendering $A|B$ order-sensitive by default unless a reversal condition is explicitly proven.
+- **Grouped Preservation:** Grouped bar closure is orientation-preserving. Regrouping, permutation, or flattening of expressions without proving orientation preservation is inadmissible.
+- **Organizational Invariant:** The organization operator $Org_a$ must preserve admissible orientation structure across all legal transformations.
+- **Topological Selection Bridge:** With Orientation Space formalized, the orientation-closure bridge (`OPEN_BRIDGE_001`) can now be attacked through the hypothesis that admissible orientation selections restrict the admissible knot classes ($K$).
+
+**Formal Block B.0.3: Orientation Space**
+$$ O(G) := \{ o \mid \text{Adm}_O(G, o) \} $$
+
+**Commentary:**
+For a participation graph $G$, $o \in O(G)$ is an admissible orientation assignment mapping adjacent interfaces and role-typed participants. Orientation is a necessary constraint to prevent semantic or topological collapse prior to resolving downstream bridge properties.
+
+### Org_a: Admissible Organization Axioms
+
+The Admissible Organization Operator ($\text{Org}_a$) organizes admissible distinction participation over structured fields; it does not collect objects, semantic classes, or static entities. It is constrained by the following candidate axioms:
+
+- **Inventory Preservation ($\text{ORG\_A\_AX\_001}$):** Legal transformations under $\text{Org}_a$ must preserve the admissible distinction inventory of the participation graph $G$.
+  $$ \text{Inv}_D(G) = \text{Inv}_D(G') \quad \text{under} \quad G \iff_R G' $$
+  The organization may deform or couple only if the participating difference trace remains traceable.
+- **Admissibility Conservation ($\text{ORG\_A\_AX\_002}$):** Every legal transformation under $\text{Org}_a$ must conserve the admissibility of the organized participation field.
+  $$ \text{Org}_a(G) \land [G \iff_R G'] \implies \text{Adm}_a(G') $$
+  No organization remains valid if transformation causes its distinction evaluation to violate admissibility constraints.
+- **Topological Consistency ($\text{ORG\_A\_AX\_003}$):** Legal transformations under $\text{Org}_a$ must preserve the orientation-consistent topological structure.
+  $$ \text{Org}_a(G) \land [G \iff_R G'] \implies G \simeq_O G' $$
+  The relational crossings and roles of the participation graph must be preserved.
+
+**Formal Block B.0.4: Admissible Organization Closure**
+$$ \text{Adm}_{\text{Org}}(G) := \text{Adm}_{|}^G(G) \land [\exists o \in O(G), \text{Adm}_O(G, o)] \land \text{Eval}_D^G(G) \land D_G(G) > \epsilon_a \land \text{InvPres}_D(G) \land \text{AdmCons}_a(G) \land \text{TopCons}_O(G) $$
+
+**Commentary:**
+Within these models, these axioms are definition candidates only. They are not fully proven theorems until qualified or derived directly from $D(A|B) > \epsilon_a$ and $\iff_R$.
+Furthermore, the construction of the signature structure $\Sigma_D$ depends directly on $\text{Org}_a$ closure:
+$$ \Sigma_D := [G]_{\text{Org}_a, \iff_R, \simeq_O} $$
+No $\Sigma_D$ equivalence class should be closed before the $\text{Org}_a$ axioms are formally derived.
+
+### Sigma_D: Admissible Distinction Organization Signature
+
+The Admissible Distinction Organization Signature ($\Sigma_D$) represents the equivalence class or signature of $\text{Org}_a$-closed distinction organizations. It is governed by the following core criteria:
+
+- **Organizational Signature:** $\Sigma_D$ is a preserved organization-signature, not an object label, state identity, or static substance representation.
+- **Org_a Closure Requirement:** Evaluating $\Sigma_D$ equivalence requires that both structures satisfy the organizational admissibility closure ($\text{Adm}_{\text{Org}}$). No equivalence is defined for structures that fail $\text{Org}_a$ closure.
+- **Equivalence Preservation:** Equivalence $\Sigma_D(G) = \Sigma_D(G')$ requires the preservation of difference inventory, organization admissibility, orientation-consistent topology, trace updates under $\iff_R$, and recovery capacity:
+  $$ G \sim_{\Sigma_D} G' := \text{Adm}_{\text{Org}}(G) \land \text{Adm}_{\text{Org}}(G') \land \text{Inv}_D(G) = \text{Inv}_D(G') \land [G \iff_R G'] \land G \simeq_O G' \land \text{Rec}_D(G, G') $$
+- **Observability Constraints:** Perturbation metrics and simulation observables (such as `recovery_score`, `coupling_score`, `fragility_score`, and `deformation_score`) may provide candidate evidence for equivalence testing but do not constitute final algebraic proof.
+
+**Formal Block B.0.5: Sigma_D Signature Class**
+$$ \Sigma_D(G) := \{ G' \mid G \sim_{\Sigma_D} G' \} $$
+$$ \text{Rec}_D(G, G') := \text{preservation of admissible recovery behavior under registered perturbation classes} $$
+
+**Commentary:**
+Within these models, $\Sigma_D$ remains a definition candidate. The recovery condition $\text{Rec}_D$ serves as a candidate bridge to simulation evidence and must remain qualified until the relevant perturbation classes are formally registered.
+`ECON_DEBT_0002` must not be marked closed until the qualification and derivation passes succeed.
+
+---
+
 ### Core Operators
 | Symbol | Name | Status | Function |
 | :--- | :--- | :--- | :--- |
+| O | Orientation Space | GAP_DEFINITION_CANDIDATE | The space of admissible participation directions available to distinction organizations. |
+| \| | Vertical Bar Operator | MUST_DEFINE_BEFORE_ORG_A_CLOSURE | Separator for co-participation inside distinction expressions. |
+| Org_a | Admissible Organization | GAP_AXIOM_DEFINITION_CANDIDATE | Organizes admissible distinction participation over a typed participation graph. |
+| \Sigma_D | Distinction Organization Signature | GAP_EQUIVALENCE_DEFINITION_CANDIDATE | The equivalence class of Org_a-closed distinction organizations under iff_R and orientation equivalence. |
 | $U_{\Omega}$ | Universal Law Schema | Core | The master process chain: $\chi_D \xrightarrow{E} \delta_a \xrightarrow{\text{Arb}_A} \Delta \xrightarrow{} \chi_D'$. All other operators are constrained elaborations of segments of this chain. |
 | $P_{adm}$ | Admissibility Predicate | Active | Conjunctive boolean check for legality ($\Gamma_{\mathcal{E}} \land \Gamma_R \land \Gamma_T \land \Gamma_{\mathcal{O}}$). |
 | $\iff_R$ | Recursive Closure | Core | Axiomatic biconditional necessity between constraint and realization. |

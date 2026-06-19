@@ -1061,27 +1061,41 @@
     {
       "object_id": "ECON_APP_ORG_A_001",
       "object_class": "operator",
-      "title": "Org_a Axioms",
-      "status": "PROVISIONAL_INDUCTION_TARGET",
+      "title": "Org_a",
+      "status": "definition_candidate",
       "source_bindings": [
-        "registry/economics/theorem_status_registry.json"
+        "registry/lexicon_gap_queue.json"
       ],
       "dependency_links": [
-        "ECONOMICS_APP_INDUCTION_001"
+        "OBJ-vertical-bar",
+        "OBJ-grouped-bar-closure",
+        "OBJ-orientation-space"
       ],
       "claim_scope": "theoretical",
       "governance_bindings": [
         "charter_v2.3"
       ],
-      "runtime_visibility": true
+      "runtime_visibility": true,
+      "symbol": "Org_a",
+      "canonical_form": "Org_a(G)",
+      "definition": "Define Org_a as admissible organization over distinction-generating participation fields, using vertical-bar closure, grouped-bar closure, and orientation preservation as explicit prerequisites.",
+      "axiom_ids": [
+        "ORG_A_AX_001",
+        "ORG_A_AX_002",
+        "ORG_A_AX_003"
+      ],
+      "relationship_to_D": "Org_a does not create distinction from nothing; it organizes already evaluable admissible distinction participation.",
+      "relationship_to_iff_R": "iff_R supplies the admissible preservation relation under which Org_a transformations are judged.",
+      "relationship_to_orientation": "Org_a must preserve admissible orientation structure across legal transformations.",
+      "relationship_to_Sigma_D": "Sigma_D can now be drafted as an equivalence class or signature of Org_a-closed distinction organizations."
     },
     {
       "object_id": "ECON_APP_SIGMA_D_001",
       "object_class": "constraint",
-      "title": "Sigma_D Structures",
-      "status": "PROVISIONAL_INDUCTION_TARGET",
+      "title": "Sigma_D",
+      "status": "definition_candidate",
       "source_bindings": [
-        "registry/economics/theorem_status_registry.json"
+        "registry/lexicon_gap_queue.json"
       ],
       "dependency_links": [
         "ECON_APP_ORG_A_001"
@@ -1090,7 +1104,21 @@
       "governance_bindings": [
         "charter_v2.3"
       ],
-      "runtime_visibility": true
+      "runtime_visibility": true,
+      "symbol": "Sigma_D",
+      "canonical_form": "\u03a3_D(G) = \u03a3_D(G')",
+      "definition": "Define Sigma_D admissible equivalence criteria using Org_a closure, iff_R preservation, and orientation equivalence.",
+      "equivalence_rules": {
+        "Sigma_D_equivalence": "\u03a3_D(G) = \u03a3_D(G') iff G and G' preserve the same Org_a-closed distinction organization under iff_R and orientation equivalence \u2243_O.",
+        "requires": [
+          "Adm_Org(G)",
+          "Inv_D(G) = Inv_D(G')",
+          "G iff_R G'",
+          "G \u2243_O G'",
+          "Preserve_D_recovery_behavior(G,G')"
+        ]
+      },
+      "relationship_to_Org_a": "Org_a defines admissible organization closure; Sigma_D defines equivalence of such closed organizations."
     },
     {
       "object_id": "ECON_APP_DEFORMATION_001",
@@ -1125,6 +1153,121 @@
         "charter_v2.3"
       ],
       "runtime_visibility": true
+    },
+    {
+      "object_id": "OBJ-vertical-bar",
+      "object_class": "operator",
+      "title": "vertical_bar_operator",
+      "status": "definition_candidate",
+      "source_bindings": [
+        "registry/lexicon_gap_queue.json"
+      ],
+      "dependency_links": [],
+      "claim_scope": "universal",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "|",
+      "canonical_form": "A | B",
+      "definition": "Define the vertical bar operator as the primitive admissible participation separator used inside distinction-generating expressions.",
+      "operand_rules": {
+        "valid_operands": [
+          "primitive distinction candidates",
+          "already-admissible distinction expressions",
+          "grouped participation expressions",
+          "domain-specific projections explicitly typed as admissible operands"
+        ],
+        "invalid_operands": [
+          "untyped raw objects",
+          "unverified state labels",
+          "pure scalar quantities without participation type",
+          "projection-only analogies",
+          "semantic placeholders with no admissibility trace"
+        ]
+      },
+      "orientation_rules": {
+        "order_sensitive": true,
+        "orientation_statement": "A | B is not generally equivalent to B | A."
+      },
+      "closure_rules": {
+        "local_closure": "A bar expression is locally closed when both operands are admissibly typed and the interface relation is legally evaluable under D.",
+        "grouped_closure": "Grouped bar expressions require a separate group-closure rule."
+      },
+      "dependencies": [],
+      "blocked_downstream_objects": [
+        "Org_a_axioms",
+        "Sigma_D_equivalence_criteria"
+      ]
+    },
+    {
+      "object_id": "OBJ-orientation-space",
+      "object_class": "primitive",
+      "title": "orientation_space_O",
+      "status": "definition_candidate",
+      "source_bindings": [
+        "registry/lexicon_gap_queue.json"
+      ],
+      "dependency_links": [],
+      "claim_scope": "universal",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "O",
+      "canonical_form": "O(G)",
+      "definition": "Define Orientation Space O as the admissible space of participation directions governing bar expressions, Org_a preservation, and knot-class selection.",
+      "participation_graph_model": "G := (V, E_|, \u03c4, \u03c1)",
+      "orientation_assignment": "o \u2208 O(G)",
+      "orientation_equivalence": "G \u2243_O G' iff there exist o \u2208 O(G), o' \u2208 O(G') such that participation directions, roles, and closure are preserved under iff_R.",
+      "relationship_to_bar_operator": "A|B carries orientation by default. Binary case O(A|B) and group case O(G) record the legal participation direction.",
+      "relationship_to_Org_a": "Org_a must preserve admissible orientation structure across legal transformations.",
+      "relationship_to_OPEN_BRIDGE_001": "Orientation functions as a topological selector constraint on admissible knot-class selection."
+    },
+    {
+      "object_id": "OBJ-grouped-bar-closure",
+      "object_class": "operator",
+      "title": "grouped_bar_closure",
+      "status": "definition_candidate",
+      "source_bindings": [
+        "registry/lexicon_gap_queue.json"
+      ],
+      "dependency_links": [
+        "OBJ-vertical-bar"
+      ],
+      "claim_scope": "universal",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "canonical_forms": [
+        "A | B | C",
+        "(A | B) | C",
+        "A | (B | C)",
+        "A_1 | A_2 | ... | A_n"
+      ],
+      "group_operand_rules": {
+        "minimum_arity": 2,
+        "n_ary_extension": true,
+        "operand_requirement": "Every participant A_i must satisfy Typed_a(A_i) or be explicitly marked as pending admissibility qualification.",
+        "interface_requirement": "Every adjacent or declared interface A_i | A_j must be legally evaluable under D or a registered successor evaluator."
+      },
+      "group_closure_candidate": {
+        "symbol": "Adm_|^G",
+        "form": "Adm_|^G(A_1,...,A_n; G)"
+      },
+      "associativity_rules": {
+        "default": "NON_ASSOCIATIVE_UNTIL_PROVEN",
+        "statement": "(A|B)|C is not automatically equivalent to A|(B|C)."
+      },
+      "permutation_rules": {
+        "default": "NON_PERMUTABLE_UNTIL_PROVEN",
+        "statement": "A|B|C is not automatically equivalent to B|A|C, A|C|B, or any other permutation."
+      },
+      "triadic_closure_rules": {
+        "status": "FIRST_CLASS_SPECIAL_CASE",
+        "canonical_triad": "A | B | C"
+      }
     }
   ],
   "registry_bindings": [

@@ -1,0 +1,110 @@
+{
+  "patch_id": "SIGMA_D_EQUIVALENCE_DEFINITION_PASS_001",
+  "status": "ACTIVE",
+  "target": "Sigma_D",
+  "stage": "1_ORGANIZATIONAL_CLOSURE",
+  "purpose": "Define Sigma_D admissible equivalence criteria using Org_a closure, iff_R preservation, and orientation equivalence.",
+  "depends_on": [
+    "ORG_A_AXIOM_DEFINITION_PASS_001"
+  ],
+  "definition": {
+    "name": "Sigma_D Equivalence Criteria",
+    "symbol": "Sigma_D",
+    "canonical_form": "Σ_D(G) = Σ_D(G')",
+    "reading": "Sigma_D equivalence represents the statement that G and G' are in the same organizational equivalence class under iff_R and orientation equivalence ≃_O.",
+    "not_equal_to": [
+      "object identity",
+      "state identity",
+      "scalar equality",
+      "visual shape",
+      "domain analogy",
+      "projection-only sameness"
+    ]
+  },
+  "equivalence_criteria": {
+    "Sigma_D_equivalence": "Σ_D(G) = Σ_D(G') iff G and G' preserve the same Org_a-closed distinction organization under iff_R and orientation equivalence ≃_O.",
+    "requires": [
+      "Adm_Org(G)",
+      "Inv_D(G) = Inv_D(G')",
+      "G iff_R G'",
+      "G ≃_O G'",
+      "Preserve_D_recovery_behavior(G,G')"
+    ],
+    "excludes": [
+      "same labels only",
+      "same number of operands only",
+      "same measured score only",
+      "same projected geometry only",
+      "same semantic interpretation only"
+    ]
+  },
+  "formal_candidate": {
+    "signature_relation": "G ~_{Σ_D} G' := Adm_Org(G) ∧ Adm_Org(G') ∧ Inv_D(G)=Inv_D(G') ∧ G iff_R G' ∧ G ≃_O G' ∧ Rec_D(G,G')",
+    "signature_class": "Σ_D(G) := {G' | G ~_{Σ_D} G'}",
+    "recovery_condition": "Rec_D(G,G') := preservation of admissible recovery behavior under registered perturbation classes",
+    "note": "Rec_D is a candidate observable bridge to simulation evidence and must remain qualified until perturbation classes are formally registered."
+  },
+  "relationship_to_Org_a": {
+    "statement": "Org_a defines admissible organization closure; Sigma_D defines equivalence of such closed organizations.",
+    "dependency": "Σ_D cannot be evaluated on structures that fail Adm_Org."
+  },
+  "relationship_to_economics_debt": {
+    "ECON_DEBT_0002": {
+      "status_after_patch": "DEFINITION_CANDIDATE_NOT_CLOSED",
+      "reason": "Equivalence criteria are now explicit, but recovery behavior and perturbation classes still require qualification."
+    },
+    "ECON_DEBT_0001": {
+      "status_after_patch": "UNCHANGED_PARTIALLY_RESOLVED_PENDING_DERIVATION_PASS",
+      "reason": "Sigma_D depends on Org_a and does not prove Org_a axioms."
+    }
+  },
+  "simulation_alignment": {
+    "use": "candidate evidence only",
+    "relevant_observables": [
+      "recovery_score",
+      "coupling_score",
+      "fragility_score",
+      "deformation_score"
+    ],
+    "interpretation": "Simulation outputs may test whether two organizations preserve recovery behavior, but cannot alone establish Sigma_D equivalence."
+  },
+  "registry_updates_required": [
+    {
+      "file": "formal_object_registry.json",
+      "action": "Update Sigma_D from open/undefined to equivalence_definition_candidate"
+    },
+    {
+      "file": "lexicon_gap_queue.json",
+      "action": "Move Sigma_D from GAP_OPEN to GAP_EQUIVALENCE_DEFINITION_CANDIDATE"
+    },
+    {
+      "file": "debt_registry.json",
+      "action": "Annotate ECON_DEBT_0002 with Sigma_D candidate criteria; do not close yet"
+    }
+  ],
+  "textbook_patch_required": {
+    "insert_title": "Sigma_D: Admissible Distinction Organization Signature",
+    "must_state": [
+      "Sigma_D is a preserved organization-signature, not an object label.",
+      "Sigma_D equivalence requires Org_a closure.",
+      "Equivalence must preserve inventory, admissibility, orientation, iff_R relation, and recovery behavior.",
+      "Simulation observables may support equivalence testing but are not final proof."
+    ]
+  },
+  "validation_requirements": [
+    "Global validation must pass.",
+    "Sigma_D must remain definition candidate.",
+    "No projection-domain sameness may be used as equivalence proof.",
+    "ECON_DEBT_0002 must not be marked closed until qualification/derivation pass."
+  ],
+  "expected_status_after_patch": {
+    "Sigma_D": "GAP_EQUIVALENCE_DEFINITION_CANDIDATE",
+    "ECON_DEBT_0002": "PARTIALLY_RESOLVED_PENDING_QUALIFICATION_PASS",
+    "Org_a": "UNCHANGED_GAP_AXIOM_DEFINITION_CANDIDATE",
+    "Stage_1": "DRAFT_CLOSED_PENDING_DERIVATION_AND_QUALIFICATION"
+  },
+  "recommended_next_patch": {
+    "patch_id": "ORG_A_SIGMA_D_QUALIFICATION_PASS_001",
+    "goal": "Qualify Org_a axioms and Sigma_D equivalence criteria against D(A|B)>epsilon_a and iff_R to determine whether ECON_DEBT_0001 and ECON_DEBT_0002 can move toward closure."
+  }
+}

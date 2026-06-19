@@ -1,0 +1,164 @@
+{
+  "patch_id": "VERTICAL_BAR_OPERATOR_GROUP_CLOSURE_PASS_001",
+  "status": "ACTIVE",
+  "target": "grouped_bar_closure",
+  "stage": "0_PRIMITIVE_PARTICIPATION_CLOSURE",
+  "purpose": "Define grouped vertical-bar participation rules for expressions with more than two participants.",
+  "depends_on": [
+    "VERTICAL_BAR_OPERATOR_DEFINITION_PASS_001"
+  ],
+  "core_problem": "Binary closure of A|B does not automatically define closure for A|B|C or nested expressions such as (A|B)|C and A|(B|C).",
+  "definition": {
+    "name": "Grouped Admissible Participation Closure",
+    "canonical_forms": [
+      "A | B | C",
+      "(A | B) | C",
+      "A | (B | C)",
+      "A_1 | A_2 | ... | A_n"
+    ],
+    "reading": "A grouped bar expression denotes a structured participation field in which multiple admissible operands co-participate through ordered interfaces.",
+    "not_equal_to": [
+      "a simple list",
+      "ordinary conjunction",
+      "ordinary disjunction",
+      "unordered set membership",
+      "automatic associativity",
+      "automatic symmetry"
+    ]
+  },
+  "group_operand_rules": {
+    "minimum_arity": 2,
+    "n_ary_extension": true,
+    "operand_requirement": "Every participant A_i must satisfy Typed_a(A_i) or be explicitly marked as pending admissibility qualification.",
+    "interface_requirement": "Every adjacent or declared interface A_i | A_j must be legally evaluable under D or a registered successor evaluator.",
+    "invalid_group_conditions": [
+      "any participant lacks admissibility trace",
+      "any required interface is unevaluable",
+      "grouping is changed without proving admissible regrouping",
+      "order is ignored without proving admissible permutation",
+      "projection-only analogy is used as group equivalence"
+    ]
+  },
+  "group_closure_candidate": {
+    "symbol": "Adm_|^G",
+    "form": "Adm_|^G(A_1,...,A_n; G)",
+    "definition": "A grouped bar expression is admissibly closed when all typed participants and declared interfaces satisfy local bar admissibility and the whole grouping preserves orientation-consistent participation structure.",
+    "candidate_formula": "Adm_|^G(A_1,...,A_n; G) := [∀A_i Typed_a(A_i)] ∧ [∀e_ij ∈ E(G), Adm_|(A_i,A_j)] ∧ Preserve_O(G) ∧ Eval_D^G(G) ∧ D_G(G) > epsilon_a",
+    "notes": [
+      "G denotes the declared participation graph or grouping structure.",
+      "E(G) denotes the required bar interfaces inside the group.",
+      "Preserve_O(G) is a placeholder until Orientation Space O is formally closed.",
+      "D_G is a grouped distinction evaluator, not assumed identical to binary D."
+    ]
+  },
+  "associativity_rules": {
+    "default": "NON_ASSOCIATIVE_UNTIL_PROVEN",
+    "statement": "(A|B)|C is not automatically equivalent to A|(B|C).",
+    "allowed_equivalence": "Associative regrouping is legal only under an explicit admissible regrouping proof.",
+    "regrouping_placeholder": "Assoc_|(A,B,C) := condition under which (A|B)|C iff_R A|(B|C)",
+    "forbidden_assumption": "Do not flatten grouped bar expressions into unordered lists."
+  },
+  "permutation_rules": {
+    "default": "NON_PERMUTABLE_UNTIL_PROVEN",
+    "statement": "A|B|C is not automatically equivalent to B|A|C, A|C|B, or any other permutation.",
+    "allowed_equivalence": "Permutation is legal only under explicit admissible orientation-preserving equivalence.",
+    "permutation_placeholder": "Perm_|(G,G') := condition under which G iff_R G'",
+    "forbidden_assumption": "Do not treat participant order as cosmetic."
+  },
+  "triadic_closure_rules": {
+    "status": "FIRST_CLASS_SPECIAL_CASE",
+    "reason": "The framework repeatedly uses triadic structures, including Law|Operator|Truth and RT/QM_app/GR_app patterns.",
+    "canonical_triad": "A | B | C",
+    "triadic_reading": "A triadic bar expression is a three-part participation field where the middle term may function as mediator, operator, comparison interface, or co-generator depending on typed role.",
+    "role_requirement": "Triadic expressions must declare whether the middle participant is ordinary participant, mediator, operator, or core condition.",
+    "examples_requiring_later_typing": [
+      "Law | Operator | Truth",
+      "RT | QM_app | GR_app",
+      "Affect | Core | Effect"
+    ]
+  },
+  "relationship_to_orientation": {
+    "status": "PARTIAL_PLACEHOLDER",
+    "statement": "Grouped closure requires orientation preservation, but Orientation Space O is not yet formally closed.",
+    "required_future_patch": "ORIENTATION_SPACE_DEFINITION_PASS_001",
+    "interim_rule": "Do not mark grouped closure final until Preserve_O(G) is formally defined."
+  },
+  "relationship_to_Org_a": {
+    "status": "UNBLOCKS_DRAFTING_NOT_CLOSURE",
+    "statement": "Org_a axioms may now cite grouped bar closure as a prerequisite, but Org_a remains open until Orientation Space O is defined.",
+    "candidate_dependency": "Org_a({D(A_i|B_i)>epsilon_a}) requires Adm_|^G over the organized participation field."
+  },
+  "relationship_to_Sigma_D": {
+    "status": "DOWNSTREAM_DEPENDENCY",
+    "statement": "Sigma_D equivalence must preserve grouped participation structure, not merely pairwise binary admissibility."
+  },
+  "registry_updates_required": [
+    {
+      "file": "operator_registry.json",
+      "action": "Update vertical_bar_operator group_closure_status from OPEN to DEFINITION_CANDIDATE",
+      "required_fields": [
+        "group_closure_symbol",
+        "associativity_default",
+        "permutation_default",
+        "triadic_special_case",
+        "orientation_dependency"
+      ]
+    },
+    {
+      "file": "formal_object_registry.json",
+      "action": "Register grouped_bar_closure as formal definition candidate or nested property of vertical_bar_operator",
+      "required_fields": [
+        "canonical_forms",
+        "group_operand_rules",
+        "group_closure_candidate",
+        "associativity_rules",
+        "permutation_rules",
+        "triadic_closure_rules"
+      ]
+    },
+    {
+      "file": "lexicon_gap_queue.json",
+      "action": "Move grouped_bar_closure from implicit/open to GAP_DEFINITION_CANDIDATE",
+      "condition": "Only after schema validation passes."
+    }
+  ],
+  "textbook_patch_required": {
+    "target_section": "Chapter 14 Stage 0 subsection or primitive operator appendix",
+    "insert_title": "Grouped Bar Closure and Triadic Participation",
+    "must_state": [
+      "Binary bar closure does not automatically imply grouped closure.",
+      "Grouped expressions are not automatically associative.",
+      "Grouped expressions are not automatically permutable.",
+      "Triadic expressions are first-class participation fields.",
+      "Orientation preservation remains an explicit dependency."
+    ]
+  },
+  "validation_requirements": [
+    "Global validation must pass.",
+    "No downstream bridge may be marked closed by this patch alone.",
+    "vertical_bar_operator may advance to GROUP_CLOSURE_DEFINITION_CANDIDATE.",
+    "orientation_space_O remains open.",
+    "Org_a remains blocked pending orientation definition.",
+    "Sigma_D remains blocked pending Org_a."
+  ],
+  "forbidden_claims": [
+    "A|B|C is merely shorthand for pairwise A|B and B|C",
+    "bar grouping is associative by default",
+    "bar grouping is commutative by default",
+    "triads are reducible to binary pairs without loss",
+    "grouped bar closure fully defines Org_a",
+    "grouped closure closes OPEN_BRIDGE_001"
+  ],
+  "expected_status_after_patch": {
+    "vertical_bar_operator": "GROUP_CLOSURE_DEFINITION_CANDIDATE",
+    "grouped_bar_closure": "GAP_DEFINITION_CANDIDATE",
+    "orientation_space_O": "OPEN_REQUIRED_NEXT",
+    "Org_a": "DRAFTABLE_BUT_NOT_CLOSABLE",
+    "Sigma_D": "STILL_BLOCKED_PENDING_ORG_A",
+    "OPEN_BRIDGE_001": "STILL_OPEN"
+  },
+  "recommended_next_patch": {
+    "patch_id": "ORIENTATION_SPACE_DEFINITION_PASS_001",
+    "goal": "Define Orientation Space O as the admissible space of participation directions governing bar expressions, Org_a preservation, and knot-class selection."
+  }
+}

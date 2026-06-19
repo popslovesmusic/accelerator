@@ -33,12 +33,12 @@
         "Projection signatures are legal only when explicitly marked with _app or another declared projection suffix."
       ],
       "instantiates": [
-        "↔_R",
+        "\u2194_R",
         "->a",
         "<-a",
         "->r",
         "<-r",
-        "<≠>_X"
+        "<\u2260>_X"
       ]
     }
   ],
@@ -67,7 +67,7 @@
       "closure_condition": "Maintains connectivity and closure class invariants",
       "collapse_mode": "Topological Rupture",
       "composition_rules": [
-        "Updated by residue relation operand (R_↔ -> T)",
+        "Updated by residue relation operand (R_\u2194 -> T)",
         "Input to admissibility (T -> A_adm)"
       ],
       "status": "PROVISIONAL_v0.1"
@@ -204,7 +204,7 @@
       }
     },
     {
-      "symbol": "R_↔",
+      "symbol": "R_\u2194",
       "latex": "R_{\\leftrightarrow}",
       "name": "Residue Relation Operand",
       "domain": "Residue conditions produced by lawful continuation",
@@ -212,8 +212,8 @@
       "closure_condition": "Trace-relation remains legible enough to condition topology without becoming a direct update operator",
       "collapse_mode": "Trace break / residue relation incompatibility",
       "composition_rules": [
-        "Inscribed by lawful continuation (Delta -> R_↔)",
-        "Conditions topology (R_↔ -> T)",
+        "Inscribed by lawful continuation (Delta -> R_\u2194)",
+        "Conditions topology (R_\u2194 -> T)",
         "Not itself the closure operator",
         "Not a direct causal updater"
       ],
@@ -268,7 +268,7 @@
       "status": "CANDIDATE"
     },
     {
-      "symbol": "->a ⊗ <-r",
+      "symbol": "->a \u2297 <-r",
       "latex": "\\rightarrow_a \\otimes \\leftarrow_r",
       "name": "Admissibility-Residue Coupling Operator",
       "domain": "Relational basins A, B",
@@ -363,7 +363,7 @@
       ]
     },
     {
-      "symbol": "↔_R",
+      "symbol": "\u2194_R",
       "latex": "\\Leftrightarrow_R",
       "aliases": [
         "iff_R"
@@ -371,12 +371,12 @@
       "name": "Residue-Conditioned Closure",
       "domain": "Typed operands A, B under admissibility support",
       "codomain": "Truth-valued closure relation between operands",
-      "closure_condition": "A ↔_R B is true only while admissible residue-conditioned topology preserves closure support between the operands",
+      "closure_condition": "A \u2194_R B is true only while admissible residue-conditioned topology preserves closure support between the operands",
       "collapse_mode": "Decoupling (truth transition True -> False) when distinction, admissibility support, trace relation, operand typing, or closure topology fails",
       "composition_rules": [
         "Not the residue state itself",
         "Not a proof operator",
-        "Depends on admissibility support generated through Delta -> R_↔ -> T -> A_adm",
+        "Depends on admissibility support generated through Delta -> R_\u2194 -> T -> A_adm",
         "Operates over typed operands such as RT expressions, aRT expressions, distinction-nodes, triadic closure candidates, admissible topology signatures, and explicitly marked projection signatures"
       ],
       "status": "C1_DEFINED_PROVISIONAL"
@@ -406,7 +406,7 @@
       ]
     },
     {
-      "symbol": "⇔_m",
+      "symbol": "\u21d4_m",
       "latex": "\\Leftrightarrow_m",
       "name": "Metric Projection Operator",
       "domain": "Asymmetry domain ((asym_app)nDOF)",
@@ -415,7 +415,7 @@
       "status": "CANDIDATE"
     },
     {
-      "symbol": "⇔_s",
+      "symbol": "\u21d4_s",
       "latex": "\\Leftrightarrow_s",
       "name": "Statistical Projection Operator",
       "class": "typed_statistical_projection_operator",
@@ -469,7 +469,7 @@
       "status": "C1_DEFINED_PROVISIONAL"
     },
     {
-      "symbol": "<≠>",
+      "symbol": "<\u2260>",
       "latex": "<\\neq>",
       "name": "Preserved Distinction",
       "operator_family": "preserved_distinction_relation",
@@ -480,13 +480,13 @@
       "composition_rules": [
         "Acts as the bare preserved-distinction baseline",
         "Subscripts are candidate conditioning qualifiers and must outperform the bare baseline before retention",
-        "Does not replace residue-conditioned closure ↔_R",
+        "Does not replace residue-conditioned closure \u2194_R",
         "Remains provisional until truth conditions and counterexamples are formally settled"
       ],
       "status": "CANDIDATE_BASELINE_RELATION"
     },
     {
-      "symbol": "<≠>_X",
+      "symbol": "<\u2260>_X",
       "latex": "<\\neq>_X",
       "name": "Preserved Non-Identity Relation",
       "operator_family": "preserved_distinction_relation",
@@ -505,11 +505,102 @@
         "context X is undefined"
       ],
       "composition_rules": [
-        "Does not replace ↔_R",
+        "Does not replace \u2194_R",
         "Adds a non-collapse constraint to an already typed relation context",
         "Remains provisional until directional and counterexample behavior is formally settled"
       ],
       "status": "C1_DEFINED_PROVISIONAL"
+    },
+    {
+      "symbol": "|",
+      "latex": "|",
+      "name": "vertical_bar_operator",
+      "domain": "Admissible distinction-participation separator inside grouped expressions",
+      "codomain": "Interface for co-participation in distinction-generating expressions",
+      "closure_condition": "A | B marks the oriented comparison interface through which A and B participate in a distinction-generating expression.",
+      "collapse_mode": "Legality Failure",
+      "composition_rules": [
+        "Used within TC_asym to mark co-participation in grouped expressions",
+        "Must be defined before Org_a closure is attempted"
+      ],
+      "status": "MUST_DEFINE_BEFORE_ORG_A_CLOSURE",
+      "arity": 2,
+      "order_sensitive": true,
+      "admissibility_gate": "D(A|B) > epsilon_a",
+      "noncommutative_by_default": true,
+      "group_closure_status": "DEFINITION_CANDIDATE",
+      "group_closure_symbol": "Adm_|^G",
+      "associativity_default": "NON_ASSOCIATIVE_UNTIL_PROVEN",
+      "permutation_default": "NON_PERMUTABLE_UNTIL_PROVEN",
+      "triadic_special_case": true,
+      "orientation_dependency": "Preserve_O(G)",
+      "orientation_space": "O",
+      "reversal_rule": "Reversal is legal only if Rev_|(A,B) or higher grouped orientation equivalence is proven.",
+      "group_preservation_rule": "Preserve_O(G -> G') := \u2203o \u2208 O(G), \u2203o' \u2208 O(G') such that G iff_R G' while preserving admissible orientation."
+    },
+    {
+      "symbol": "Org_a",
+      "name": "Admissible Organization Operator",
+      "class": "admissible_organization",
+      "canonical_form": "Org_a(G)",
+      "status": "axiom_definition_candidate",
+      "arity": 1,
+      "domain": "Typed grouped participation graph G satisfying Adm_|^G(G) and O(G)",
+      "codomain": "Legally preserved organization of admissible distinction participation",
+      "input_requirements": {
+        "G": "typed grouped participation graph",
+        "requires": [
+          "Adm_|^G(G)",
+          "exists o in O(G) such that Adm_O(G,o)",
+          "Eval_D^G(G)",
+          "D_G(G) > epsilon_a"
+        ],
+        "invalid_inputs": [
+          "untyped operand lists",
+          "binary pairs without declared grouping",
+          "orientation-free structures",
+          "projection-only analogies",
+          "scalar equality classes"
+        ]
+      },
+      "axioms": [
+        {
+          "axiom_id": "ORG_A_AX_001",
+          "name": "Inventory Preservation",
+          "statement": "Legal transformations under Org_a must preserve the admissible distinction inventory of G.",
+          "candidate_form": "Inv_D(G) = Inv_D(G') under G iff_R G'",
+          "meaning": "The organization may deform, regroup, or transform only if the participating distinction inventory remains traceable."
+        },
+        {
+          "axiom_id": "ORG_A_AX_002",
+          "name": "Admissibility Conservation",
+          "statement": "Every legal transformation under Org_a must preserve admissibility of the organized participation field.",
+          "candidate_form": "Org_a(G) and G iff_R G' implies Adm_a(G')",
+          "meaning": "No organization remains legal if transformation causes its distinction participation to fall below epsilon_a or violate typed participation."
+        },
+        {
+          "axiom_id": "ORG_A_AX_003",
+          "name": "Topological Consistency",
+          "statement": "Legal transformations under Org_a must preserve orientation-consistent participation structure.",
+          "candidate_form": "Org_a(G) and G iff_R G' implies G \u2243_O G'",
+          "meaning": "The organization is preserved through admissible relational structure, not by visual shape or object identity."
+        }
+      ],
+      "derived_closure_candidate": {
+        "symbol": "Adm_Org",
+        "candidate_formula": "Adm_Org(G) := Adm_|^G(G) \u2227 \u2203o\u2208O(G) Adm_O(G,o) \u2227 Eval_D^G(G) \u2227 D_G(G)>epsilon_a \u2227 InvPres_D(G) \u2227 AdmCons_a(G) \u2227 TopCons_O(G)",
+        "interpretation": "An Org_a expression is admissibly closed only when grouped participation, orientation, distinction evaluation, inventory preservation, admissibility conservation, and topological consistency all hold."
+      },
+      "dependencies": [
+        "VERTICAL_BAR_OPERATOR_DEFINITION_PASS_001",
+        "VERTICAL_BAR_OPERATOR_GROUP_CLOSURE_PASS_001",
+        "ORIENTATION_SPACE_DEFINITION_PASS_001"
+      ],
+      "downstream_unblocks": [
+        "Sigma_D_equivalence_criteria",
+        "ECON_DEBT_0001",
+        "ECON_DEBT_0002"
+      ]
     }
   ]
 }
