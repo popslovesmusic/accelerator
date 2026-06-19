@@ -2598,8 +2598,15 @@ Formal measurement rules for bridge falsification campaigns.
 - **Closure Stability ($S_{\text{closure}}$):** $\text{survival\_cycles} / \text{total\_cycles}$.
 - **Minimum Effect Threshold ($\tau$):** 0.05 (Target for $\beta_1$).
 
+### F.8 Lexicon Debt
+This section tracks newly introduced lexicon terms that remain as open mathematical/procedural gaps (`GAP_OPEN`) under active induction proposals:
+- **`meta_core_scale_hypothesis`**: Propose a recursive scale interpretation of RT where deviation and admissible continuation form a biconditional ladder. [Source: `MPF_RT_BICONDITIONAL_LADDER_001`]
+- **`biconditional_ladder`**: Provide structural connectivity between nested scales of process expressions. [Source: `MPF_RT_BICONDITIONAL_LADDER_001`]
+- **`Affect-Effect_primitive`** (`[A|E]`): Specify a pre-distinction organizational condition at the scale floor. [Source: `MPF_RT_BICONDITIONAL_LADDER_001`]
+- **`distinction_floor_interpretation`**: Resolve local scale constraints and pre-distinction origins. [Source: `MPF_RT_BICONDITIONAL_LADDER_001`]
+
 ---
-**Status:** Items in Section F.1 are active research targets. Resolved bridges are archived in F.4. Failed bridges are archived in F.5. Section F.7 tracks the measurement rules for active attacks.
+**Status:** Items in Section F.1 are active research targets. Resolved bridges are archived in F.4. Failed bridges are archived in F.5. Section F.7 tracks the measurement rules for active attacks. Section F.8 tracks open lexicon debt.
 
 \pagebreak
 

@@ -10,7 +10,11 @@ import hashlib
 import math
 import statistics
 from pathlib import Path
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import ThreadPoolExecutor, wait, FIRST_COMPLETED
+
+
+DEFAULT_SAFE_MAX_WORKERS = 2
+STDERR_TAIL_LINES = 20
 
 def log(msg, level="INFO"):
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -42,6 +46,15 @@ def load_json_if_exists(path):
             return json.load(f)
     except:
         return None
+
+
+def read_log_tail(path, max_lines=STDERR_TAIL_LINES):
+    try:
+        with open(path, "r", encoding="utf-8", errors="replace") as f:
+            lines = f.readlines()
+        return "".join(lines[-max_lines:]).strip()
+    except:
+        return ""
 
 class MultiSimRunner:
     def __init__(self, config_path, dry_run=False, max_workers=None, stop_on_failure=None):
@@ -78,6 +91,7 @@ class MultiSimRunner:
 
         if self.max_workers is None:
             self.max_workers = self.config.get("execution", {}).get("max_workers", 4)
+        self.max_workers = self._resolve_safe_worker_count(self.max_workers)
         
         if self.stop_on_failure is None:
             self.stop_on_failure = self.config.get("governance", {}).get("stop_on_failure", True)
@@ -108,6 +122,21 @@ class MultiSimRunner:
 
         if self.config.get("governance", {}).get("dry_run_first", True) and not self.dry_run:
             self.generate_dry_run_plan()
+
+    def _resolve_safe_worker_count(self, requested_workers):
+        execution_cfg = self.config.get("execution", {})
+        unsafe_parallelism = execution_cfg.get("allow_unsafe_parallelism", False)
+        if unsafe_parallelism:
+            return max(1, int(requested_workers))
+
+        worker_cap = int(execution_cfg.get("memory_safe_max_workers", DEFAULT_SAFE_MAX_WORKERS))
+        safe_workers = max(1, min(int(requested_workers), worker_cap))
+        if safe_workers != requested_workers:
+            log(
+                f"Clamping parallel workers from {requested_workers} to {safe_workers} for memory-safe execution.",
+                "WARNING",
+            )
+        return safe_workers
 
     def validate_jobs(self):
         log("Validating jobs...")
@@ -333,27 +362,25 @@ class MultiSimRunner:
             cmd_list = shlex.split(cmd)
 
         try:
-            res = subprocess.run(
-                cmd_list,
-                capture_output=True,
-                text=True,
-                env=env,
-                timeout=self.config.get("execution", {}).get("timeout_seconds", 3600),
-                cwd=cwd
-            )
+            with open(stdout_log, 'w', encoding='utf-8', errors='replace') as stdout_handle, open(stderr_log, 'w', encoding='utf-8', errors='replace') as stderr_handle:
+                res = subprocess.run(
+                    cmd_list,
+                    stdout=stdout_handle,
+                    stderr=stderr_handle,
+                    text=True,
+                    env=env,
+                    timeout=self.config.get("execution", {}).get("timeout_seconds", 3600),
+                    cwd=cwd
+                )
             exit_code = res.returncode
-            stdout = res.stdout
-            stderr = res.stderr
         except Exception as e:
             exit_code = -1
-            stdout = ""
-            stderr = str(e)
+            with open(stderr_log, 'w', encoding='utf-8', errors='replace') as stderr_handle:
+                stderr_handle.write(str(e))
             log(f"Job {job_full_id} failed with error: {e}", "ERROR")
 
         end_time = time.time()
-        
-        with open(stdout_log, 'w') as f: f.write(stdout)
-        with open(stderr_log, 'w') as f: f.write(stderr)
+        stderr_tail = read_log_tail(stderr_log)
         
         result = {
             "job_id": job["job_id"],
@@ -367,7 +394,8 @@ class MultiSimRunner:
             "tool": job["tool"],
             "claim_role": job.get("claim_role", "exploratory"),
             "config_path": job_config,
-            "falsification_vector": job.get("falsification_vector") or job.get("args", {}).get("falsification_vector")
+            "falsification_vector": job.get("falsification_vector") or job.get("args", {}).get("falsification_vector"),
+            "stderr_tail": stderr_tail
         }
         return result
 
@@ -381,14 +409,33 @@ class MultiSimRunner:
 
     def run_parallel(self):
         with ThreadPoolExecutor(max_workers=self.max_workers) as executor:
-            future_to_job = {executor.submit(self.execute_job, job): job for job in self.expanded_jobs}
-            for future in as_completed(future_to_job):
-                res = future.result()
-                self.results.append(res)
-                if res["exit_code"] != 0 and self.stop_on_failure:
-                    log(f"Job {res['job_id']} failed. stop_on_failure is True, but parallel execution continues for already started jobs.", "WARNING")
-                    # Note: We can't easily cancel already running threads with ThreadPoolExecutor without more complexity
-                    # But we can avoid starting new ones if we had a queue.
+            pending_jobs = iter(self.expanded_jobs)
+            in_flight = {}
+            stop_submitting = False
+
+            while True:
+                while not stop_submitting and len(in_flight) < self.max_workers:
+                    try:
+                        job = next(pending_jobs)
+                    except StopIteration:
+                        break
+                    future = executor.submit(self.execute_job, job)
+                    in_flight[future] = job
+
+                if not in_flight:
+                    break
+
+                done, _ = wait(in_flight.keys(), return_when=FIRST_COMPLETED)
+                for future in done:
+                    res = future.result()
+                    del in_flight[future]
+                    self.results.append(res)
+                    if res["exit_code"] != 0 and self.stop_on_failure:
+                        stop_submitting = True
+                        log(
+                            f"Job {res['job_id']} failed. Halting submission of new parallel jobs; waiting for in-flight jobs to finish.",
+                            "WARNING",
+                        )
 
     def run_dependency_graph(self):
         log("Running dependency graph mode (simple implementation)...")

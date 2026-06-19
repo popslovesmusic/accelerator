@@ -760,8 +760,8 @@
       "object_id": "OBJ-OP-RA-DELTA",
       "object_class": "operator",
       "title": "Residue-Admissible Actualization",
-      "symbol": "\u03b4_ra",
-      "formal_definition": "\u03b4 restricted to the residue-admissible domain",
+      "symbol": "δ_ra",
+      "formal_definition": "δ restricted to the residue-admissible domain",
       "source_bindings": [
         "registry/lexicon_gap_queue.json"
       ],
@@ -774,7 +774,7 @@
       "object_id": "OBJ-OP-RA-ARROW",
       "object_class": "operator",
       "title": "Residue-Admissible Transition",
-      "symbol": "\u2192_ra",
+      "symbol": "→_ra",
       "formal_definition": "Relational transition preserving residue signature",
       "source_bindings": [
         "registry/lexicon_gap_queue.json"
@@ -788,7 +788,7 @@
       "object_id": "OBJ-OP-RA-IFF",
       "object_class": "operator",
       "title": "Residue-Admissible Correspondence",
-      "symbol": "\u21d4_ra",
+      "symbol": "⇔_ra",
       "formal_definition": "Recursive residue-preserving correspondence",
       "source_bindings": [
         "registry/lexicon_gap_queue.json"
@@ -802,7 +802,7 @@
       "object_id": "OBJ-OP-RA-NON-COLLAPSE",
       "object_class": "operator",
       "title": "Non-Collapse Distinction Relation",
-      "symbol": "<\u2260>_ra",
+      "symbol": "<≠>_ra",
       "formal_definition": "Relational operator asserting non-zero distinguishability across transition",
       "source_bindings": [
         "registry/lexicon_gap_queue.json"
@@ -816,7 +816,7 @@
       "object_id": "OBJ-IND-001",
       "object_class": "claim",
       "title": "Residue-Admissible Identity Continuation",
-      "formal_statement": "B \u2192_ra [B_a \u21d4_ra B], B_a \u2260 B, B_a <\u2260>_ra B",
+      "formal_statement": "B →_ra [B_a ⇔_ra B], B_a ≠ B, B_a <≠>_ra B",
       "source_bindings": [
         "registry/lexicon_gap_queue.json"
       ],
@@ -1106,15 +1106,15 @@
       ],
       "runtime_visibility": true,
       "symbol": "Sigma_D",
-      "canonical_form": "\u03a3_D(G) = \u03a3_D(G')",
+      "canonical_form": "Σ_D(G) = Σ_D(G')",
       "definition": "Define Sigma_D admissible equivalence criteria using Org_a closure, iff_R preservation, and orientation equivalence.",
       "equivalence_rules": {
-        "Sigma_D_equivalence": "\u03a3_D(G) = \u03a3_D(G') iff G and G' preserve the same Org_a-closed distinction organization under iff_R and orientation equivalence \u2243_O.",
+        "Sigma_D_equivalence": "Σ_D(G) = Σ_D(G') iff G and G' preserve the same Org_a-closed distinction organization under iff_R and orientation equivalence ≃_O.",
         "requires": [
           "Adm_Org(G)",
           "Inv_D(G) = Inv_D(G')",
           "G iff_R G'",
-          "G \u2243_O G'",
+          "G ≃_O G'",
           "Preserve_D_recovery_behavior(G,G')"
         ]
       },
@@ -1217,9 +1217,9 @@
       "symbol": "O",
       "canonical_form": "O(G)",
       "definition": "Define Orientation Space O as the admissible space of participation directions governing bar expressions, Org_a preservation, and knot-class selection.",
-      "participation_graph_model": "G := (V, E_|, \u03c4, \u03c1)",
-      "orientation_assignment": "o \u2208 O(G)",
-      "orientation_equivalence": "G \u2243_O G' iff there exist o \u2208 O(G), o' \u2208 O(G') such that participation directions, roles, and closure are preserved under iff_R.",
+      "participation_graph_model": "G := (V, E_|, τ, ρ)",
+      "orientation_assignment": "o ∈ O(G)",
+      "orientation_equivalence": "G ≃_O G' iff there exist o ∈ O(G), o' ∈ O(G') such that participation directions, roles, and closure are preserved under iff_R.",
       "relationship_to_bar_operator": "A|B carries orientation by default. Binary case O(A|B) and group case O(G) record the legal participation direction.",
       "relationship_to_Org_a": "Org_a must preserve admissible orientation structure across legal transformations.",
       "relationship_to_OPEN_BRIDGE_001": "Orientation functions as a topological selector constraint on admissible knot-class selection."
@@ -1268,6 +1268,21 @@
         "status": "FIRST_CLASS_SPECIAL_CASE",
         "canonical_triad": "A | B | C"
       }
+    },
+    {
+      "object_id": "OBJ-T_sig",
+      "object_class": "projection",
+      "title": "Topological Organization Signature",
+      "status": "DEFINITION_CANDIDATE",
+      "source_bindings": [
+        "registry/math/t_class_tool_design_spec.json"
+      ],
+      "dependency_links": [],
+      "claim_scope": "topological_organization_formalization",
+      "governance_bindings": [
+        "T_SIG_PROJECTION_DISCIPLINE_001"
+      ],
+      "runtime_visibility": "public"
     }
   ],
   "registry_bindings": [

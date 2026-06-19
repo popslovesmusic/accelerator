@@ -1,0 +1,48 @@
+{
+  "patch_id": "MPF_T_CLASS_TOOL_BUILD_READINESS_GATE_001",
+  "status": "PROPOSED",
+  "scope": "pre_implementation_governance_gate",
+  "claim_effect": "NO_THEOREM_PROMOTION",
+  "purpose": "Confirm that the Python and C++ T_class_metric implementations may be built only against the approved theory, signature, fixture, and execution contracts.",
+  "required_prior_artifacts": [
+    "MPF_T_CLASS_METRIC_DEFINITION_PATCH_001",
+    "MPF_T_CLASS_TOOL_DESIGN_SPEC_001",
+    "MPF_T_CLASS_FIXTURE_EQUIVALENCE_SPEC_001",
+    "MPF_T_CLASS_EXECUTION_CONTRACT_001",
+    "MPF_T_SIGNATURE_DEFINITION_PATCH_001",
+    "MPF_T_SIGNATURE_INTEGRATION_PATCH_001"
+  ],
+  "authorized_files_to_build": [
+    "tools/t_class_classifier/python/t_class_classifier.py",
+    "tools/t_class_classifier/cpp/t_class_classifier.cpp",
+    "tools/t_class_classifier/README.md",
+    "tools/t_class_classifier/tests/run_t_class_equivalence_tests.py"
+  ],
+  "hard_constraints": [
+    "Python and C++ must share the same class rules.",
+    "Both must build T_sig before assigning T₀–Tₓ.",
+    "Both must reject or strip forbidden orientation fields according to the negative fixture policy.",
+    "Neither may consume C_orient, -(i), 𝒪, S_closure, or campaign labels.",
+    "No bridge or theorem promotion may occur from tool existence alone."
+  ],
+  "build_sequence": [
+    "Build Python reference implementation first.",
+    "Run fixtures against Python.",
+    "Build C++ implementation from the same execution contract.",
+    "Run fixtures against C++.",
+    "Run Python/C++ equivalence test.",
+    "Emit implementation audit."
+  ],
+  "required_outputs_after_build": [
+    "cpp_t_class_test_results.json",
+    "python_cpp_equivalence_results.json",
+    "t_class_implementation_audit.md"
+  ],
+  "non_authoritative_sidecar_outputs": [
+    {
+      "file": "python_t_class_test_results.json",
+      "status": "optional_sidecar",
+      "reason": "older Python-only artifact; not authoritative for full PO_002 fixture-contract closure"
+    }
+  ]
+}

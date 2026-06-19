@@ -1,7 +1,21 @@
 import json
 import os
 import subprocess
+import tempfile
 from datetime import datetime
+
+
+def _run_json_validator(python_exe, script_path):
+    with tempfile.NamedTemporaryFile(mode="w+", encoding="utf-8", suffix=".json", delete=False) as stdout_tmp:
+        stdout_path = stdout_tmp.name
+    try:
+        with open(stdout_path, "w", encoding="utf-8") as stdout_handle:
+            subprocess.run([python_exe, script_path], stdout=stdout_handle, stderr=subprocess.PIPE, text=True, check=True)
+        with open(stdout_path, "r", encoding="utf-8") as stdout_handle:
+            return json.load(stdout_handle)
+    finally:
+        if os.path.exists(stdout_path):
+            os.remove(stdout_path)
 
 def validate_law_family_consolidation():
     result_path = "validation/results/law_family_consolidation_result.json"
@@ -28,8 +42,7 @@ def validate_law_family_consolidation():
     for script in report["sub_validators"]:
         script_path = os.path.join("scripts", "math", script)
         try:
-            res = subprocess.run([python_exe, script_path], capture_output=True, text=True, check=True)
-            script_report = json.loads(res.stdout)
+            script_report = _run_json_validator(python_exe, script_path)
             report["results"][script] = script_report["status"]
             if script_report["status"] != "pass":
                 report["status"] = "fail"

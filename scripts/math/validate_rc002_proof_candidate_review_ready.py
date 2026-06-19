@@ -3,6 +3,22 @@ import os
 import argparse
 import subprocess
 import sys
+import tempfile
+
+
+def _run_json_command(cmd):
+    with tempfile.NamedTemporaryFile(mode="w+", encoding="utf-8", suffix=".json", delete=False) as stdout_tmp:
+        stdout_path = stdout_tmp.name
+    try:
+        with open(stdout_path, "w", encoding="utf-8") as stdout_handle:
+            result = subprocess.run(cmd, stdout=stdout_handle, stderr=subprocess.PIPE, text=True)
+        if result.returncode != 0:
+            return {"status": "fail", "errors": [f"Script crashed: {result.stderr}"]}
+        with open(stdout_path, "r", encoding="utf-8") as stdout_handle:
+            return json.load(stdout_handle)
+    finally:
+        if os.path.exists(stdout_path):
+            os.remove(stdout_path)
 
 def run_validator(script_name):
     script_path = os.path.join("scripts/math", script_name)
@@ -11,10 +27,7 @@ def run_validator(script_name):
     
     try:
         cmd = [sys.executable, script_path]
-        result = subprocess.run(cmd, capture_output=True, text=True)
-        if result.returncode != 0:
-            return {"status": "fail", "errors": [f"Script crashed: {result.stderr}"]}
-        return json.loads(result.stdout)
+        return _run_json_command(cmd)
     except Exception as e:
         return {"status": "fail", "errors": [str(e)]}
 

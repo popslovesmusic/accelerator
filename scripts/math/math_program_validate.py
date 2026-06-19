@@ -3,7 +3,72 @@ import os
 import argparse
 import subprocess
 import sys
+import tempfile
 from datetime import datetime
+
+
+SUMMARY_LIST_LIMIT = 5
+SUMMARY_TEXT_LIMIT = 400
+
+
+def _truncate_text(value, limit=SUMMARY_TEXT_LIMIT):
+    if not isinstance(value, str):
+        return value
+    if len(value) <= limit:
+        return value
+    return value[: limit - 3] + "..."
+
+
+def _summarize_list(value, limit=SUMMARY_LIST_LIMIT):
+    if not isinstance(value, list):
+        return value
+    items = [_truncate_text(item) if isinstance(item, str) else item for item in value[:limit]]
+    summary = {
+        "count": len(value),
+        "items": items,
+    }
+    if len(value) > limit:
+        summary["truncated"] = True
+    return summary
+
+
+def _summarize_domain_result(domain_res):
+    if not isinstance(domain_res, dict):
+        return {"status": "fail", "warnings": [f"Unexpected validator payload type: {type(domain_res).__name__}"]}
+
+    summary = {"status": domain_res.get("status", "unknown")}
+    for key in ("validation_id", "gate_id", "timestamp", "overall_status"):
+        if key in domain_res:
+            summary[key] = domain_res[key]
+
+    for key in ("closure_gaps", "open_questions", "warnings", "errors", "governance_violations", "failed_checks", "required_corrections"):
+        if key in domain_res:
+            summary[key] = _summarize_list(domain_res.get(key, []))
+
+    scalar_allowlist = (
+        "categories_verified",
+        "classes_verified",
+        "levels_verified",
+        "states_verified",
+        "modes_verified",
+        "operators_verified",
+        "findings_verified",
+        "total_edges",
+        "checks_passed",
+        "validators_run",
+        "sub_validators",
+    )
+    for key in scalar_allowlist:
+        if key not in domain_res:
+            continue
+        value = domain_res[key]
+        if isinstance(value, list):
+            summary[key] = _summarize_list(value)
+        else:
+            summary[key] = value
+
+    return summary
+
 
 def run_math_validator(script_spec):
     try:
@@ -22,14 +87,23 @@ def run_math_validator(script_spec):
             # Simple split for space-separated args; may need more robustness for complex args
             cmd.extend(args.split(' '))
             
-        result = subprocess.run(cmd, capture_output=True, text=True)
-        if result.returncode != 0:
-             return {"status": "fail", "warnings": [f"Script crashed: {result.stderr}"]}
-        return json.loads(result.stdout)
+        with tempfile.NamedTemporaryFile(mode="w+", encoding="utf-8", suffix=".json", delete=False) as stdout_tmp:
+            stdout_path = stdout_tmp.name
+
+        try:
+            with open(stdout_path, "w", encoding="utf-8") as stdout_handle:
+                result = subprocess.run(cmd, stdout=stdout_handle, stderr=subprocess.PIPE, text=True)
+            if result.returncode != 0:
+                return {"status": "fail", "warnings": [f"Script crashed: {_truncate_text(result.stderr)}"]}
+            with open(stdout_path, "r", encoding="utf-8") as stdout_handle:
+                return json.load(stdout_handle)
+        finally:
+            if os.path.exists(stdout_path):
+                os.remove(stdout_path)
     except Exception as e:
         return {"status": "fail", "warnings": [str(e)]}
 
-def validate_math_program():
+def validate_math_program(full_report=False):
     validators = {
         "core_expression_presence": "../validation/validate_core_expression_presence.py",
         "formal_objects": "validate_formal_objects.py",
@@ -330,8 +404,9 @@ def validate_math_program():
                 break
         
         domain_res = res[sub_key] if sub_key else res
-        report["math_program_validation"]["domain_status"][domain] = domain_res
-        
+        stored_res = domain_res if full_report else _summarize_domain_result(domain_res)
+        report["math_program_validation"]["domain_status"][domain] = stored_res
+
         if domain_res.get("status") == "fail":
             all_pass = False
             report["math_program_validation"]["status"] = "fail"
@@ -355,9 +430,10 @@ def validate_math_program():
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Consolidated Math Program Validation.")
     parser.add_argument("--out", help="Path to save validation report.")
+    parser.add_argument("--full-report", action="store_true", help="Store full validator payloads instead of compact summaries.")
     args = parser.parse_args()
     
-    report = validate_math_program()
+    report = validate_math_program(full_report=args.full_report)
     if args.out:
         os.makedirs(os.path.dirname(args.out), exist_ok=True)
         with open(args.out, 'w') as f:

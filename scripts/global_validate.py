@@ -333,8 +333,9 @@ class DBValidator:
         return results
 
 class MathProgramValidator:
-    def __init__(self, root_dir):
+    def __init__(self, root_dir, full_report=False):
         self.root = Path(root_dir)
+        self.full_report = full_report
 
     def run(self):
         try:
@@ -347,7 +348,7 @@ class MathProgramValidator:
             except ImportError:
                 return {"status": "failed", "errors": ["Could not import math_program_validate script."]}
 
-        res = validate_math_program()
+        res = validate_math_program(full_report=self.full_report)
         return res["math_program_validation"]
 
 class ImplementationValidator:
@@ -537,6 +538,7 @@ def main():
     parser = argparse.ArgumentParser(description="Global Ecosystem Validation Harness")
     parser.add_argument("--root", default=".", help="Project root directory")
     parser.add_argument("--out", default="outputs/audits/global_health_report.json", help="Report output path")
+    parser.add_argument("--full-math-program", action="store_true", help="Embed full math-program validator payloads in the output report.")
     args = parser.parse_args()
 
     root = Path(args.root)
@@ -548,7 +550,7 @@ def main():
         "hygiene_validation": HygieneValidator(root).run(),
         "math_validation": MathValidator(root).run(),
         "db_validation": DBValidator(root).run(),
-        "math_program_validation": MathProgramValidator(root).run(),
+        "math_program_validation": MathProgramValidator(root, full_report=args.full_math_program).run(),
         "implementation_validation": ImplementationValidator(root).run(),
         "evidence_validation": EvidenceValidator(root).run(),
         "campaign_validation": CampaignValidator(root).run()
