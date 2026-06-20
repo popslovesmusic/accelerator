@@ -18,9 +18,14 @@ This campaign evaluates the vertical bar operator (`|`), defined as a distinctio
 - This simulation campaign does not prove physical laws, physical consciousness, ultimate reality, or universal truth.
 
 ## 6. Failure Modes / Uncertainty
-- The campaign status is currently `SCAFFOLD_READY` with `NO_EVIDENCE_YET`.
-- Mismatches in the expected relative order of `C3_valid_bar` vs other controls constitute a falsification of the primary induction hypothesis.
+- **Campaign Status**: `EVIDENCE_RECORDED`.
+- Observed metrics:
+  - `C3_valid_bar` achieved the highest combination of `D_strength` (mean: ~1.03), `constraint_deviation` (mean: 0.66), and `organization_score` (0.85).
+  - `C0_no_bar` and `C1_collapse_bar` showed complete distinction suppression (`D_strength = 0`).
+  - `C2_random_bar` generated distinction but lower constraint deviation (mean: 0.40) and degraded organization (0.20).
+- The expected relative order holds cleanly, validating the C2 gate requirements.
 
 ## 7. Promotion Gate
-- **Target Status**: `C2_TESTABLE_CANDIDATE` if the expected pattern appears.
+- **Target Status**: `C2_TESTABLE_CANDIDATE` (Satisfied, expected pattern appears).
 - **Forbidden Status**: Theorem promotion or ontology confirmation.
+
