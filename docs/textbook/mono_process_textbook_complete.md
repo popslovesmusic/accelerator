@@ -2584,7 +2584,7 @@ These items remain unsettled and are the primary targets for future induction an
 - **PD_CG_V3_AFFIX_POSITION_TEST:** Bare-vs-subscripted-vs-prefixed reciprocal relation comparison; affix position is treated as semantically binding until tested.
 - **MPF_BAR_OPERATOR_VALIDATION_001:** Test | as a distinction-preserving comparison operator under 4 controls and 5 metrics; campaign completed and validated under executable model. [Patch: MPF_VERTICAL_BAR_CAMPAIGN_SCAFFOLD_PATCH_001, MPF_VERTICAL_BAR_EXECUTABLE_MODEL_PATCH_001]
 - **MPF_VORTEX_ADMISSIBILITY_CAMPAIGN_001:** Investigate whether admissibility updates systematically condition subsequent distinction events (D -> δα feedback loops); campaign designed. [Patch: MPF_VORTEX_ADMISSIBILITY_CAMPAIGN_001]
-- **MPF_NON_MARKOV_ORGANIZATION_TEST_001:** Probe if future admissibility dynamics depend on cumulative history integration rather than prior state alone. [Patch: MPF_DEVIATED_CONSTRAINT_DYNAMICS_PATCH_001]
+- **MPF_NON_MARKOV_ORGANIZATION_TEST_001:** Probe if future admissibility dynamics depend on cumulative history integration rather than prior state alone; campaign designed. [Patch: MPF_NON_MARKOV_ORGANIZATION_TEST_001]
 
 ### F.6 Bridge Resolution History
 - **OPEN_BRIDGE_001:** Earlier direct-support formulation falsified 2026-05-30 via Campaign LFCR_001 (Stress ablation Model B).

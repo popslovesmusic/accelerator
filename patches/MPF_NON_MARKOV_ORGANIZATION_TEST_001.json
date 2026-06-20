@@ -1,0 +1,31 @@
+{
+  "patch_id": "MPF_NON_MARKOV_ORGANIZATION_TEST_001",
+  "status": "ACTIVE",
+  "parent_claim": "MPF_DEVIATED_CONSTRAINT_DYNAMICS_001",
+  "target_subclaim": "H2_non_markov_organization",
+  "purpose": "Test whether future admissibility organization depends on accumulated prior deviations rather than only the immediately previous state.",
+  "core_form": "V_n = F(D_n, δα_n, history[δα_1...δα_{n-1}])",
+  "null_model": "V_n = F(D_n, δα_n)",
+  "hypothesis": "If deviated constraint dynamics are non-Markov, then history-preserving runs should diverge from last-state-only controls under matched current conditions.",
+  "controls": [
+    "last_state_only_control",
+    "history_shuffle_control",
+    "history_truncation_control",
+    "full_history_accumulative_run"
+  ],
+  "metrics": [
+    "history_dependence_score",
+    "matched_state_divergence",
+    "long_range_constraint_bias",
+    "organization_memory_without_memory_object",
+    "predictive_gain_from_history"
+  ],
+  "success_condition": "Full-history runs show measurable predictive or organizational divergence from matched last-state-only controls.",
+  "failure_condition": "Current state fully predicts future organization with no added value from accumulated admissibility history.",
+  "governance": {
+    "claim_level": "C2_TESTABLE_CANDIDATE_PENDING_EXECUTION",
+    "theorem_status": "TS0",
+    "evidence_status": "CAMPAIGN_DESIGNED_PENDING_RUN"
+  },
+  "applied_timestamp": "2026-06-20T12:41:18-04:00"
+}
