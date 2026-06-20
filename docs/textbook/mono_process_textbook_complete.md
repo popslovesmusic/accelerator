@@ -2547,8 +2547,8 @@ These items remain unsettled and are the primary targets for future induction an
 
 - **Re-orientation Trigger Condition:** Formal condition for $\text{Arb}_A$ to escalate to orientation-selection [Source: MPF-IND-ARB-DELTA-DUAL-PHASE GAP-REORIENTATION-TRIGGER].
 - **$S$ Arbitration Rule:** Formal rule for the pruning stage inside the $\delta_a$ composition [Source: MPF-IND-ARB-DELTA-DUAL-PHASE GAP-S-RULE].
-- **Formal definition of Residue Relation ($R_{\leftrightarrow}$):** Defining the signature and interaction rules for residue as operand.
-- **Formal difference between $R_{\leftrightarrow}$ and $\leftrightarrow_R$:** Rigorous distinction between memory state and closure support.
+- **Formal definition of Residue Relation ($R_{\leftrightarrow}$):** [ **DEFINITION_CANDIDATE_PENDING_FORMAL_PROMOTION** ] Defined in `operator_registry.json` and principle `PRIN-2-X` (refined).
+- **Formal difference between $R_{\leftrightarrow}$ and $\leftrightarrow_R$:** [ **RESOLVED_PENDING_CANONICAL_TEXTBOOK_SYNC** ] Rigorous separation between residue-as-operand ($R_{\leftrightarrow}$) and closure-support-through-residue ($\leftrightarrow_R$) is explicitly defined in governance patches and integrated into Chapter 2.
 - **Formal rules for Decoupling:** Defining the conditions under which a truth-condition becomes False.
 - **Zero-state Condition:** Formal algebraic definition of the collapse resulting from core decoupling.
 - **Projection-signature:** Defining how domain-specific signatures (QM vs GR) are extracted from $\leftrightarrow_R$.
