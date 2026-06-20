@@ -80,6 +80,48 @@
       "promotion_gate": "All four controls must show differential D_count and measurable constraint_deviation in C3 vs C0, C1, C2.",
       "campaign_id": "MPF_BAR_OPERATOR_VALIDATION_001",
       "governance_status": "CAMPAIGN_COMPLETED"
+    },
+    {
+      "template_id": "TPL-VORTEX-ADMISSIBILITY-001",
+      "campaign_source": "MPF_DEVIATED_CONSTRAINT_DYNAMICS_PATCH_001",
+      "claim_id": "MPF_DEVIATED_CONSTRAINT_DYNAMICS_001",
+      "hypotheses": ["H1_vortex_admissibility"],
+      "controls": {
+        "C0_no_vortex": {
+          "description": "Admissibility updates are memoryless and do not feedback into future updates.",
+          "role": "null_control"
+        },
+        "C1_valid_vortex": {
+          "description": "Admissibility organization systematically conditions subsequent distinction events.",
+          "role": "positive_condition"
+        }
+      },
+      "primary_proxy_metrics": ["constraint_deviation", "affect_renewal_score"],
+      "null_model": "no_vortex_baseline",
+      "claim_scope": "STRICTLY_LOCAL_RESTRICTED_ANALOG",
+      "promotion_gate": "Positive vortex control must show cumulative shift in constraint_deviation over successive cycles.",
+      "governance_status": "CAMPAIGN_DESIGN_REQUIRED"
+    },
+    {
+      "template_id": "TPL-NON-MARKOV-ORGANIZATION-001",
+      "campaign_source": "MPF_DEVIATED_CONSTRAINT_DYNAMICS_PATCH_001",
+      "claim_id": "MPF_DEVIATED_CONSTRAINT_DYNAMICS_001",
+      "hypotheses": ["H2_non_markov_organization"],
+      "controls": {
+        "C0_markov_baseline": {
+          "description": "State transition depends strictly on prior state.",
+          "role": "null_control"
+        },
+        "C1_non_markov_history": {
+          "description": "State transition conditions depend on multi-step history integration.",
+          "role": "positive_condition"
+        }
+      },
+      "primary_proxy_metrics": ["organization_score", "constraint_deviation"],
+      "null_model": "markov_baseline",
+      "claim_scope": "STRICTLY_LOCAL_RESTRICTED_ANALOG",
+      "promotion_gate": "Non-Markov runs must demonstrate organizational persistence variations correlated with cumulative history.",
+      "governance_status": "CAMPAIGN_DESIGN_REQUIRED"
     }
   ],
   "governance_rules": [
