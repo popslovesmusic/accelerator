@@ -252,6 +252,14 @@ $$ (\mathcal{E} \neq 0) \iff \text{distinction\_app} \iff_R \text{constraint\_ap
 The condition where a constraint successfully realizes through admissible continuation. Aliases: *constraint realized*, *admissible continuation exists*, *realized distinction*.
 $$ (\mathcal{E} > 0) \iff \text{continuation\_app} \iff_R \text{realization\_app} $$
 
+**Definition 1.4.3: Existence Scalar ($E_{\alpha}$ or $\mathcal{E}_{\alpha}$)**
+The scalar marking non-null participation for an indexed process in the core residue-conditioned update expression. A process has $E_{\alpha} > 0$ when it has a nonzero distinguishable participation under the current residue evaluation context [Source: A_ALPHA_FORMALIZATION_REVIEW_001].
+
+**Definition 1.4.4: Residue-Conditioned Biconditional ($\Leftrightarrow_R$ or $\iff_R$)**
+A residue-mediated admissible transformation relation between distinguishable configurations; it is not identity and not logical equivalence. The relation asserts that a nonzero distinction passes or fails continuation through an admissibility operator evaluated against residue and local orientation context. Formally:
+$$ A \Leftrightarrow_R B \iff \delta(A,B) > 0 \wedge \Pi_A(R, \omega_A, \omega_B) = \text{admissible} $$
+where $\delta(A,B)$ is the distinguishability, $R$ is the accumulated residue context, $\omega$ represents local orientation frames, and $\Pi_A$ is the admissibility operator. Under this definition, equivalent local configurations may produce different admissibility outcomes if their history-gated residue states differ [Source: MPF_LEX_RESIDUE_CONDITIONED_BICONDITIONAL_RESOLUTION_001].
+
 **Commentary:**
 The relational reading (distinction) and the selection reading (constraint) are symmetric inverse descriptions of the same process transition. A distinction is simultaneously a constraint: the moment $D(S_1|S_2) > 0$ exists, the distinction excludes certain possibilities, making not all continuations admissible. Conversely, an admissible continuation is a realized constraint [Source: MPF-IND-ARB-DELTA-DUAL-PHASE IND-001].
 
@@ -485,6 +493,33 @@ $$ B_a <\neq>_{ra} B $$
 - **$<\neq>_{ra}$:** Non-collapse relation preserving distinction across continuation.
 
 This induction rejects identity as exact equality ($B=B_a$). Instead, it treats persistence as a dynamic process of residue-conditioned admissible reconstruction. The "knot" is not the "rope"; it is a temporary stable closure within the continuing field that maintains its relational signature even as its local state updates.
+
+**Definition 2.7.2: Stability-Achieved ($S_{achieved}$)**
+The observed persistence and structural coherence of an admissible continuation channel or structure over a sequence of updates. It is quantified through the active fraction of the local domain participating in the stable channel and the duration for which that channel remains active:
+- **Persistence Duration ($D_{pers}$):** The number of consecutive updates an admissible channel remains active.
+- **Active Fraction ($F_{act}$):** The normalized ratio of the local domain participating in the stable channel.
+Under stable conditions, stability-achieved is conditioned by stabilization-pressure and bounded by the cost-to-destabilize [Source: MPF_LEX_STABILITY_ACHIEVED_RESOLUTION_001].
+
+**Definition 2.7.3: Stabilization-Pressure ($P_{stab}$)**
+The magnitude of epsilon-forcing or selection pressure actively applied to maintain an admissible channel against local perturbations or decay. It represents the update-side pressure ($\Delta$) required to sustain the existence scalar ($E_\alpha > 0$) within a specific admissibility window ($A_\alpha$) [Source: MPF_LEX_STABILIZATION_PRESSURE_RESOLUTION_001].
+
+**Definition 2.7.4: Cost-to-Destabilize ($C_{destab}$ / $S_C$)**
+The minimum perturbation or cost ($B_A$) required to force an admissible channel into fracture, collapse, or transition. It represents the work or mismatch-injection required to shift a process configuration outside its currently stable admissibility basin [Source: MPF_LEX_COST_TO_DESTABILIZE_RESOLUTION_001].
+
+**Definition 2.7.5: Mismatch-Minimizing Selection ($O^*$)**
+Selection of an admissible continuation or operator that minimizes a local relational mismatch objective. It represents an argmin selector over admissible candidates under local mismatch pressure [Source: MPF_LEX_MISMATCH_MINIMIZING_SELECTION_RESOLUTION_001].
+
+**Definition 2.7.6: Transport Residual Observable ($\delta_T$)**
+A discrepancy measure for the failure of transport composition along an admissible chain. It is computed as a residual between direct transport and composed transport through an intermediate index [Source: MPF_LEX_TRANSPORT_RESIDUAL_OBSERVABLE_RESOLUTION_001].
+
+**Definition 2.7.7: Admissibility Outcome**
+The categorical result of evaluating the residue-conditioned relation for a state pair under residue and orientation context, classifying the proposed relation as permitted, unstable, or forbidden [Source: MPF_LEX_ADMISSIBILITY_OUTCOME_RESOLUTION_001].
+
+**Definition 2.7.8: Residue Update Operator ($\Psi$)**
+An update operator that maps the current residue and continuation difference into the next residue state. It accumulates the structural consequence of continuation into residue so future evaluations are history-sensitive: $R_{t+1} = \Psi(R_t, x_t, x_{t+1}, \Pi_A)$ [Source: MPF_LEX_RESIDUE_UPDATE_OPERATOR_RESOLUTION_001].
+
+**Definition 2.7.9: Residue Space ($\mathcal{R}$)**
+A constraint-memory space that stores accumulated admissible orientation-transform contributions, serving as the target typed space and codomain for the residue update operator $\Psi$ [Source: MPF_LEX_RESIDUE_SPACE_RESOLUTION_001].
 
 ---
 
@@ -826,6 +861,21 @@ $$ 0\_state \iff \text{Symmetry} \iff D(*|*)=0 \iff 0\_DOF \iff \text{Complete\_
 
 ---
 
+## 4.3B Symmetric Collapse
+
+The annihilation of process continuation occurs when local distinction vanishes, leading to the zero-state.
+
+**Formal Block 4.3B.1: Symmetric Collapse**
+$$ \text{Collapse}_{\text{symm}}(\mathcal{E}) \iff_R \Big( D(S_1 | S_2) < \epsilon \Big) \implies \delta \to 0 $$
+where $D$ represents the local distinction, $\epsilon$ is the distinction floor, and $\delta \to 0$ represents the halting of the process update rule [Source: PO_OPEN_BRIDGE_001_SATISFACTION_REPORT].
+
+**Commentary:**
+1. **Vanishing Signal:** When the distinction between states collapses below the floor threshold $\epsilon$, the local mismatch pressure is eliminated.
+2. **Halting Event:** The summation of transport terms reaches zero due to perfect spatial or phase symmetry, resulting in an abrupt cessation of update activity.
+3. **Annihilation Mode:** Without asymmetry, the process cannot select an orientation, leading directly to the zero-state domain.
+
+---
+
 ## 4.4 Asymmetry as Generator
 
 Within this framework, asymmetry is not a "defect" or "broken symmetry." It is the **primary generator** of structure. By *excluding* symmetry, the process is forced to select an orientation. Asymmetry is the source of admissible preference: Asymmetry $\implies$ Orientation $\implies$ Admissibility $\implies$ Continuation [Source: TECH-NOTE-ASYM Sec 5].
@@ -1117,6 +1167,52 @@ $$ \text{Mismatch} \to \text{Recoupling} \to \text{Reorientation} \to \text{Admi
 
 ---
 
+## 5.Y Aligned Asymmetry
+
+Sustained shared continuation of coupled processes without collapse into symmetry (identity merge) is governed by Aligned Asymmetry.
+
+**Formal Block 5.Y.1: Aligned Asymmetry**
+$$ \text{Asym}_{\text{align}}(\mathcal{E}_1, \mathcal{E}_2) \iff_R \Big( D(\mathcal{E}_1 | \mathcal{E}_2) > \epsilon \Big) \land \Big( \delta_1 \langle * \rangle_x \delta_2 \Big) $$
+where $D$ represents the distinction value, $\epsilon$ is the preserved distinction floor, and $\langle * \rangle_x$ is the relational alignment of process orientations along a shared geodesic [Source: PO_OPEN_BRIDGE_001_SATISFACTION_REPORT].
+
+**Commentary:**
+1. **Preserved Distinction:** Processes $\mathcal{E}_1$ and $\mathcal{E}_2$ maintain non-zero distinction ($D > \epsilon$), preventing collapse into symmetry ($E = 0$).
+2. **Mutual Re-orientation:** Both processes align their orientation updates ($\delta_1, \delta_2$) along a shared geodesic, enabling a stable joint continuation.
+3. **Stabilization Mechanism:** The alignment prevents damping in coupled non-local systems by maintaining phase-shifted coherence rather than exact phase fusion.
+
+---
+
+## 5.Z Relational Cluster
+
+Mutually stabilized coupled processes under Aligned Asymmetry organize into persistent topological structures called Relational Clusters.
+
+**Formal Block 5.Z.1: Relational Cluster**
+$$ \text{Cluster}_{\text{rel}}(\mathcal{C}) \iff_R \Big( \beta_0(\mathcal{C}_{\phi}) = 1 \Big) \land \forall \mathcal{E}_i, \mathcal{E}_j \in \mathcal{C}, \text{Asym}_{\text{align}}(\mathcal{E}_i, \mathcal{E}_j) $$
+where $\beta_0(\mathcal{C}_{\phi})$ is the zeroth Betti number (representing a single connected component in the phase-coherence field $\mathcal{C}_{\phi}$) that persists over a history-conditioned scale interval [Source: PO_OPEN_BRIDGE_001_SATISFACTION_REPORT].
+
+**Commentary:**
+1. **Betti-0 Persistence:** A relational cluster appears as a persistent connected component in the process phase field, rather than as a set of isolated points.
+2. **Emergent Identity:** The stability of the cluster is sustained by the mutual alignment and shared residue of its constituents, presenting a bounded emergent structure.
+3. **Falsification Limits:** If phase-locking drops below coherence thresholds, the Betti-0 persistence collapses ($\beta_0 \to 0$), and the cluster dissipates.
+
+---
+
+## 5.ZZ Coupling Neighborhood ($CSI(\alpha)$ or $\text{csi}(\alpha)$)
+
+Relational Clusters are constructed by process loci that fall within each other's Coupling Neighborhood, also referred to as the Causal Sphere of Influence (CSI).
+
+**Definition 5.ZZ.1: Coupling Neighborhood ($CSI(\alpha)$)**
+The set of all process loci $\beta$ that are admissibly reachable from a given locus $\alpha$ under the orientation-array topology and contribute finite transport terms to the target process update. Formally:
+$$ CSI(\alpha) := \{ \beta : \alpha \sim_A \beta \text{ and } \|NavT(\omega_\alpha, \omega_\beta)\| < \infty \} $$
+where $\alpha \sim_A \beta$ denotes the accessibility relation defined by the local admissibility gating and orientation-array topology [Source: MPF_LEX_COUPLING_NEIGHBORHOOD_RESOLUTION_001].
+
+**Commentary:**
+1. **Relational Locality:** The neighborhood is not determined by absolute background spatial coordinates, but by state-dependent admissibility and orientation compatibility.
+2. **Finite Flux:** The summation of transport contributions over the neighborhood must converge to prevent unphysical divergence.
+3. **Causal Gating:** A process is excluded from the coupling neighborhood if its residue constraints are mutually exclusive with the target, or if the admissibility window collapses.
+
+---
+
 ## 5.5 Missing and Provisional Formalisms
 
 To achieve formal closure for the orientation program, the following items have candidate definitions and require promotion:
@@ -1167,6 +1263,13 @@ $$ \delta_a(x;c) := \Pi_A \left( S(\text{Cand}(x;c);c) ; c \right) $$
 1. **$\text{Cand}$ (Candidate Generation):** Proposes the full possibility space based on current **position** (where you are) [Source: MS-SCRATCH-V1 Sec 5.1].
 2. **$S$ (Selection/Pruning):** A rough-cut plausibility filter based on **arbitration** (what is worth pursuing). This operates upstream of the law-governed check.
 3. **$\Pi_A$ (Admissibility Projection):** The enforcer of **residue** (what history permits). It maps surviving candidates onto the admissible window $A(c)$ [Source: MS-SCRATCH-V1 Sec 3.2].
+
+**Definition 6.1.3: Admissibility Projection ($\Pi_A$ or $\Pi_{A_\alpha}$)**
+An operator that filters a candidate increment (such as an aggregate transport contribution $y_\alpha$) into the local admissibility window $A_\alpha$ before a state update is applied. Formally defined as mapping the candidate input to the closest admissible configuration:
+$$ \Pi_{A_\alpha}(y_\alpha) := \{ z_\alpha \in A_\alpha : d_A(z_\alpha, y_\alpha) = \inf_{u \in A_\alpha} d_A(u, y_\alpha) \} $$
+where $d_A$ is the metric on the candidate space. Under stable conditions, the projection is boundedly idempotent:
+$$ \Pi_{A_\alpha}(\Pi_{A_\alpha}(y_\alpha)) = \Pi_{A_\alpha}(y_\alpha) $$
+and preserves boundary cases (where the admissibility margin is zero) as structural features rather than failures [Source: MPF_LEX_ADMISSIBILITY_PROJECTION_RESOLUTION_001].
 
 **Commentary:**
 This composition rule is the mechanism of realization. It defines how the abstract necessity of the Primary Axiom is procedurally manifested. The funnel narrows from raw potentiality ($\text{Cand}$) through intentional bias ($S$) to historical legality ($\Pi_A$), resulting in the admissible set from which a single event will be realized [Source: MPF-IND-ARB-DELTA-DUAL-PHASE IND-002].
@@ -1644,6 +1747,13 @@ $$ -(i)_{k+1} := \text{NavT}( -(i)_k, T^*, R, A ) $$
 
 **Commentary:**
 NavT is the operator that "steers" the process without assuming external time or pre-existing geometry. It maps the current orientation, the realized transition, the residue, and the admissibility window into the **next local orientation reference** ($-(i)_{k+1}$). By evaluating the transition against residue gradients, NavT ensures that the process maintains a coherent relational "trajectory."
+
+**Definition 10.3.2: Transport Operator ($NavT(\omega_\alpha, \omega_\beta)$ or $\text{NavT}$)**
+A per-neighbor contribution operator that maps a pair of reference-bearing states into a candidate update increment, converting reference or phase relations between process indices into admissibility-filtered update contributions. Formally:
+$$ NavT(\omega_\alpha, \omega_\beta) := W_{CSI}(\alpha, \beta) \cdot K_{orient}(\omega_\alpha, \omega_\beta) \cdot \tau(\omega_\beta \rightarrow \omega_\alpha) $$
+where $\omega_\alpha, \omega_\beta$ are orientation states, $W_{CSI}$ is the coupling neighborhood weight kernel, $K_{orient}$ is the orientation compatibility metric, and $\tau$ is the propagation delay/phase lag. Under finite flux conditions, the summation over the coupling neighborhood remains bounded:
+$$ \sum_{\beta \in CSI(\alpha)} \|NavT(\omega_\alpha, \omega_\beta)\| < \infty $$
+and the operator preserves non-invertibility, meaning the aggregate transport sum does not uniquely identify its individual neighbor configurations [Source: MPF_LEX_TRANSPORT_OPERATOR_RESOLUTION_001].
 
 ---
 
@@ -2727,6 +2837,21 @@ These items have candidate formalisms in the "Scratch Schema" (MS-SCRATCH-V1) or
 - **Knot-Class Selection:** [ **C1_DEFINED_PROVISIONAL** ] The process by which orientation and residue condition the set of admissible topological organizations (knots/braids). [Source: PO_OPEN_BRIDGE_001_SATISFACTION_REPORT].
 - **Directional Compatibility Constraint:** [ **C1_DEFINED_PROVISIONAL** ] The role of orientation in defining which transitions are topologically compatible with existing process basins. [Source: PO_OPEN_BRIDGE_001_SATISFACTION_REPORT].
 - **Admissibility Window ($\mathcal{A}$):** [ **C1_DEFINED_PROVISIONAL** ] The local domain of candidate continuation increments allowed for a process index under mismatch, capacity, and residue conditions. [Source: A_ALPHA_FORMALIZATION_REVIEW_001].
+- **Aligned Asymmetry:** [ **C1_DEFINED_PROVISIONAL** ] The relational coupling of distinct process orientations that enables sustained shared continuation while preserving individual process distinction ($E \neq 0$). [Source: PO_OPEN_BRIDGE_001_SATISFACTION_REPORT].
+- **Relational Cluster:** [ **C1_DEFINED_PROVISIONAL** ] A persistent topological grouping of processes that exhibit mutually stabilized continuation through shared residue and aligned orientations. [Source: PO_OPEN_BRIDGE_001_SATISFACTION_REPORT].
+- **Symmetric Collapse:** [ **C1_DEFINED_PROVISIONAL** ] The annihilation of process continuation that occurs when local distinction (vanishing gradient) drops below threshold bounds. [Source: PO_OPEN_BRIDGE_001_SATISFACTION_REPORT].
+- **Residue-Conditioned Biconditional ($\Leftrightarrow_R$):** [ **C1_DEFINED_PROVISIONAL** ] A residue-mediated admissible transformation relation between distinguishable configurations; it is not identity and not logical equivalence. [Source: MPF_LEX_RESIDUE_CONDITIONED_BICONDITIONAL_RESOLUTION_001].
+- **Admissibility Projection ($\Pi_A$):** [ **C1_DEFINED_PROVISIONAL** ] An operator that filters a candidate increment (such as an aggregate transport contribution $y_\alpha$) into the local admissibility window $A_\alpha$ before a state update is applied. [Source: MPF_LEX_ADMISSIBILITY_PROJECTION_RESOLUTION_001].
+- **Coupling Neighborhood ($CSI(\alpha)$):** [ **C1_DEFINED_PROVISIONAL** ] The set of all process loci $\beta$ that are admissibly reachable from a given locus $\alpha$ under the orientation-array topology and contribute finite transport terms to the target process update. [Source: MPF_LEX_COUPLING_NEIGHBORHOOD_RESOLUTION_001].
+- **Transport Operator ($NavT$):** [ **C1_DEFINED_PROVISIONAL** ] A per-neighbor contribution operator that maps a pair of reference-bearing states into a candidate update increment, converting reference or phase relations between process indices into admissibility-filtered update contributions. [Source: MPF_LEX_TRANSPORT_OPERATOR_RESOLUTION_001].
+- **stability-achieved:** [ **C1_DEFINED_PROVISIONAL** ] A measure of the observed persistence and structural coherence of an admissible continuation channel under local process conditions. [Source: MPF_LEX_STABILITY_ACHIEVED_RESOLUTION_001].
+- **stabilization-pressure:** [ **C1_DEFINED_PROVISIONAL** ] The magnitude of epsilon-forcing or selection pressure actively applied to maintain an admissible channel against local perturbations or decay. [Source: MPF_LEX_STABILIZATION_PRESSURE_RESOLUTION_001].
+- **cost-to-destabilize:** [ **C1_DEFINED_PROVISIONAL** ] The minimum perturbation or cost ($B_A$) required to force an admissible channel into fracture, collapse, or transition. [Source: MPF_LEX_COST_TO_DESTABILIZE_RESOLUTION_001].
+- **Mismatch-Minimizing Selection:** [ **C1_DEFINED_PROVISIONAL** ] Selection of an admissible continuation or operator that minimizes a local relational mismatch objective. [Source: MPF_LEX_MISMATCH_MINIMIZING_SELECTION_RESOLUTION_001].
+- **Transport Residual Observable:** [ **C1_DEFINED_PROVISIONAL** ] A discrepancy measure for the failure of transport composition along an admissible chain. [Source: MPF_LEX_TRANSPORT_RESIDUAL_OBSERVABLE_RESOLUTION_001].
+- **Admissibility Outcome:** [ **C1_DEFINED_PROVISIONAL** ] The categorical result of evaluating the residue-conditioned relation for a state pair under residue and orientation context. [Source: MPF_LEX_ADMISSIBILITY_OUTCOME_RESOLUTION_001].
+- **Residue Update Operator:** [ **C1_DEFINED_PROVISIONAL** ] An update operator that maps the current residue and continuation difference into the next residue state. [Source: MPF_LEX_RESIDUE_UPDATE_OPERATOR_RESOLUTION_001].
+- **Residue Space:** [ **C1_DEFINED_PROVISIONAL** ] A constraint-memory space that stores accumulated admissible orientation-transform contributions. [Source: MPF_LEX_RESIDUE_SPACE_RESOLUTION_001].
 
 ### 2. High-Priority Gaps (GAP_OPEN)
 These items remain unsettled and are the primary targets for future induction and research runs.
