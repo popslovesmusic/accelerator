@@ -1,0 +1,41 @@
+{
+  "patch_id": "MPF_S_ARBITRATION_DEFINITION_PATCH_001",
+  "status": "DEFINITION_CANDIDATE_PENDING_VALIDATION",
+  "scope": "formal_definition",
+  "claim_effect": "NO_THEOREM_PROMOTION",
+  "target": "S_arbitration_rule",
+  "canonical_definition": {
+    "symbol": "S",
+    "name": "Sequential Pruning Operator",
+    "form": "S_R,A(C_t) -> C_t^S",
+    "reading": "Given a candidate continuation set C_t produced under delta_a, S removes candidates that fail sequential admissibility constraints before Arb_A selects a realized continuation.",
+    "position": "delta_a internal stage before Arb_A",
+    "input": "C_t = candidate continuation set",
+    "output": "C_t^S = pruned candidate continuation set"
+  },
+  "formal_candidate": {
+    "candidate_set": "C_t := {q_i | q_i is admissible under initial delta_a constraints}",
+    "pruned_set": "C_t^S := {q_i in C_t | S_R,A(q_i, chi_D, R_<->, A_adm) = PASS}",
+    "failure_condition": "C_t^S = emptyset -> admissibility branch collapse or re-orientation trigger review"
+  },
+  "pipeline_position": [
+    "E(chi_D) > 0",
+    "delta_a generates candidate continuation set C_t",
+    "S_R,A prunes C_t into C_t^S",
+    "Arb_A selects q* from C_t^S",
+    "Delta realizes q*"
+  ],
+  "negative_constraints": [
+    "S is not Arb_A.",
+    "S does not select the realized continuation.",
+    "S does not compute T_class.",
+    "S does not define residue.",
+    "S does not promote topology, geometry, or physics-app claims.",
+    "S must not depend on post-realization outcomes."
+  ],
+  "status_if_successful": {
+    "S_arbitration_rule": "DEFINITION_CANDIDATE_PENDING_VALIDATION",
+    "delta_a_pipeline": "S_STAGE_EXPLICIT",
+    "Arb_A": "DOWNSTREAM_OF_S_CONFIRMED"
+  }
+}

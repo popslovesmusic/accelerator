@@ -27,6 +27,7 @@ This document reviews the simulation evidence generated in the campaign `MPF_VOR
 - **No.** The evolution of the admissibility filter depends on the cumulative history of distinction-induced deviations, showing that the system's constraint dynamics are self-conditioning over time.
 
 ## 4. Outcome and Claim Classification
-- **Verdict**: **SUPPORTED** (restricted local analog structure).
-- **Claim Level**: Retained at **C2_TESTABLE_CANDIDATE**.
-- **Forbidden Action**: This evidence is based on restricted local analog models only and **MUST NOT** be used to promote `H1_vortex_admissibility` to theorem status or ontological fact.
+- **Verdict**: **INVALIDATED / EXPLORATORY ONLY** (governance hold applied due to unregistered tool execution).
+- **Evidence Status**: **EXPLORATORY_EVIDENCE_UNDER_AUDIT** (reclassified from GOVERNED_EVIDENCE under REMEDIATE_VORTEX_EXECUTION_PROVENANCE_001).
+- **Claim Level**: Retained at **C2_TESTABLE_CANDIDATE** (under governance claim hold).
+- **Forbidden Action**: This evidence is based on restricted local analog models only and **MUST NOT** be used to promote `H1_vortex_admissibility` to theorem status or ontological fact, nor can it support any downstream dependencies.

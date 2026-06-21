@@ -222,6 +222,63 @@
         "form": "[C_count, L_depth, R_conn, B_cross, A_branch]"
       },
       "requires_T_sig_intermediate": true
+    },
+    {
+      "metric_id": "delta_alpha",
+      "symbol": "delta_alpha",
+      "name": "Admissibility Deviation",
+      "status": "VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT",
+      "definition_source": "vortex admissibility campaign (configs/vortex_admissibility_campaign.json)",
+      "patch_id": "MPF_VORTEX_REMEDIATION_EXECUTION_001",
+      "basis": [
+        "MPF_DEVIATED_CONSTRAINT_DYNAMICS_PATCH_001"
+      ],
+      "range": [
+        0.1,
+        5.0
+      ],
+      "reading": "Systematic shift of the active admissibility filter from the baseline constraint configuration.",
+      "candidate_form": "delta_alpha := mean(abs(alpha_next - alpha_base))",
+      "interpretations": {
+        "approx_0": "Active admissibility filter matches the baseline constraint exactly.",
+        "greater_than_0": "Admissibility filter has deviated from the baseline state, recording historical process residue."
+      },
+      "canonical_inputs": {
+        "active_filter": "alpha_next",
+        "baseline_filter": "alpha_base"
+      },
+      "forbidden_inputs": [
+        "D",
+        "organization_score"
+      ]
+    },
+    {
+      "metric_id": "organization_score",
+      "symbol": "organization_score",
+      "name": "Admissibility Organization Score",
+      "status": "VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT",
+      "definition_source": "vortex admissibility campaign (configs/vortex_admissibility_campaign.json)",
+      "patch_id": "MPF_VORTEX_REMEDIATION_EXECUTION_001",
+      "basis": [
+        "MPF_DEVIATED_CONSTRAINT_DYNAMICS_PATCH_001"
+      ],
+      "range": [
+        0.0,
+        1.0
+      ],
+      "reading": "Degree of alignment between the direction of future aspect distinction changes and the direction of prior admissibility deviation.",
+      "candidate_form": "organization_score := abs(dot(bias_direction, A - B)) / (norm(bias_direction) * norm(A - B) + 1e-8)",
+      "interpretations": {
+        "approx_0": "Future distinction events are uncorrelated with prior admissibility filter deviations.",
+        "approx_1": "Future distinction events align perfectly with prior admissibility filter deviations, indicating self-conditioning organization."
+      },
+      "canonical_inputs": {
+        "bias_direction": "alpha - alpha_base",
+        "aspect_comparison_vectors": "A, B"
+      },
+      "forbidden_inputs": [
+        "D"
+      ]
     }
   ]
 }

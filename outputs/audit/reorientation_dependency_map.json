@@ -1,0 +1,140 @@
+{
+  "audit_id": "MPF_REORIENTATION_TRIGGER_AUDIT_001",
+  "target": "Re_orientation_Trigger_Condition",
+  "primary_ruling": "PARTIALLY_DEFINED",
+  "supporting_rulings": [
+    "CONTROL_PATH_IDENTIFIED",
+    "SYMBOL_CONFLATION_PRESENT"
+  ],
+  "control_path": {
+    "pipeline": [
+      "E(chi_D) > 0",
+      "delta_a generates candidate continuation set C_t",
+      "S prunes C_t into C_t^S",
+      "Arb_A realizes q* from C_t^S when admissible",
+      "Trigger_Reorient review diverts control when ordinary realization cannot preserve admissibility or closure",
+      "NavT or equivalent orientation transport updates orientation reference if recovery is possible",
+      "delta_a is re-entered under the new orientation reference",
+      "0-state collapse remains the terminal branch when recovery fails"
+    ],
+    "reentry_point": "delta_a candidate generation under a changed orientation reference",
+    "reorientation_without_candidate_exhaustion": true
+  },
+  "nodes": [
+    {
+      "id": "delta_a",
+      "type": "operator",
+      "status": "existing"
+    },
+    {
+      "id": "C_t",
+      "type": "candidate_pool",
+      "status": "existing"
+    },
+    {
+      "id": "S",
+      "type": "operator",
+      "status": "existing"
+    },
+    {
+      "id": "C_t^S",
+      "type": "candidate_pool",
+      "status": "existing"
+    },
+    {
+      "id": "Arb_A",
+      "type": "operator",
+      "status": "existing"
+    },
+    {
+      "id": "Trigger_Reorient",
+      "type": "control_rule",
+      "status": "implicit_candidate"
+    },
+    {
+      "id": "NavT",
+      "type": "transport_operator",
+      "status": "existing"
+    },
+    {
+      "id": "0-state",
+      "type": "terminal_collapse_state",
+      "status": "existing"
+    }
+  ],
+  "edges": [
+    {
+      "from": "delta_a",
+      "to": "C_t",
+      "relation": "generates"
+    },
+    {
+      "from": "C_t",
+      "to": "S",
+      "relation": "input_to"
+    },
+    {
+      "from": "S",
+      "to": "C_t^S",
+      "relation": "prunes_to"
+    },
+    {
+      "from": "C_t^S",
+      "to": "Arb_A",
+      "relation": "input_to"
+    },
+    {
+      "from": "delta_a",
+      "to": "Trigger_Reorient",
+      "relation": "invokes_when_empty_image",
+      "status": "textbook_and_registry_supported"
+    },
+    {
+      "from": "S",
+      "to": "Trigger_Reorient",
+      "relation": "invokes_review_when_empty_pruned_pool",
+      "status": "registry_supported"
+    },
+    {
+      "from": "Arb_A",
+      "to": "Trigger_Reorient",
+      "relation": "escalates_when_realization_cannot_preserve_closure",
+      "status": "registry_supported"
+    },
+    {
+      "from": "Trigger_Reorient",
+      "to": "NavT",
+      "relation": "hands_off_to_orientation_retransport",
+      "status": "inferred_from_textbook_role_split"
+    },
+    {
+      "from": "Trigger_Reorient",
+      "to": "0-state",
+      "relation": "falls_through_when_reorientation_exhausted",
+      "status": "textbook_supported"
+    }
+  ],
+  "trigger_inputs": [
+    {
+      "condition": "delta_a = emptyset",
+      "status": "explicit"
+    },
+    {
+      "condition": "C_t^S = emptyset",
+      "status": "explicit"
+    },
+    {
+      "condition": "closure support drops below admissible threshold",
+      "status": "explicit"
+    },
+    {
+      "condition": "admissible deformation requires a new orientation reference",
+      "status": "explicit"
+    }
+  ],
+  "unresolved_ownership_split": {
+    "Arb_A_role": "escalation / higher-level arbitration language is explicit",
+    "NavT_role": "reorientation transport language is explicit",
+    "gap": "handoff boundary between trigger invocation and orientation transport is not formally isolated"
+  }
+}

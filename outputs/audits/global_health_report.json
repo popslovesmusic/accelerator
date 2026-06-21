@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-06-19T21:26:55.744536",
+  "timestamp": "2026-06-21T02:06:37.739251",
   "unified_manifest_validation": {
     "status": "success",
     "errors": [],
@@ -126,6 +126,7 @@
       "Results Naming Unrecognized: '2026-06-19_t_class_fixture_contract' does not match required run id formats.",
       "Results Naming Unrecognized: '2026-06-19_t_signature_definition' does not match required run id formats.",
       "Results Naming Unrecognized: 'accelerator_math_program' does not match required run id formats.",
+      "Results Naming Unrecognized: 'bar_operator_validation' does not match required run id formats.",
       "Results Naming Unrecognized: 'cls_004R_relational_analysis' does not match required run id formats.",
       "Results Naming Unrecognized: 'cls_004_basin_analysis' does not match required run id formats.",
       "Results Naming Unrecognized: 'GEO_PROJECTION_VALIDATION_001' does not match required run id formats.",
@@ -137,9 +138,12 @@
       "Results Naming Unrecognized: 'LFCR_001_M3_shuffling' does not match required run id formats.",
       "Results Naming Unrecognized: 'LFCR_001_stress_ensemble' does not match required run id formats.",
       "Results Naming Unrecognized: 'LFCR_001_v2_analysis' does not match required run id formats.",
+      "Results Naming Unrecognized: 'non_markov_organization_validation' does not match required run id formats.",
       "Results Naming Unrecognized: 'pd_cg_v2r_relational_conditioning_retest' does not match required run id formats.",
       "Results Naming Unrecognized: 'pd_cg_v2_reaudit' does not match required run id formats.",
       "Results Naming Unrecognized: 'pd_cg_v3_affix_position_test' does not match required run id formats.",
+      "Results Naming Unrecognized: 'vortex_admissibility_validation' does not match required run id formats.",
+      "Results Naming Unrecognized: 'vortex_cpp_equivalence' does not match required run id formats.",
       "Results Naming Unrecognized: '_legacy_bad_filenames' does not match required run id formats.",
       "Results Naming Unrecognized: '_legacy_root_pollution_2026-05-25' does not match required run id formats."
     ]
@@ -155,8 +159,8 @@
     "warnings": [],
     "db_health": {
       "status": "pass",
-      "db_path": "registry\\db\\acellorator_index.sqlite",
-      "schema_path": "registry\\db\\schema.sql",
+      "db_path": "D:\\projects\\acellorator\\registry\\db\\acellorator_index.sqlite",
+      "schema_path": "D:\\projects\\acellorator\\registry\\db\\schema.sql",
       "integrity_check": "ok",
       "table_status": {
         "artifacts": "present",
@@ -217,8 +221,8 @@
     }
   },
   "math_program_validation": {
-    "status": "pass",
-    "timestamp": "2026-06-19T21:26:55.930604",
+    "status": "warning",
+    "timestamp": "2026-06-21T02:06:37.894785",
     "validators_run": [
       "../validation/validate_core_expression_presence.py",
       "validate_formal_objects.py",
@@ -235,6 +239,7 @@
       "validate_residue_conservation.py",
       "validate_orientation_minimization.py",
       "validate_branch_pruning.py",
+      "validate_s_arbitration.py",
       "validate_nonlocal_transport.py",
       "validate_theory_induction_template.py",
       "validate_quantifier_explicitness.py",
@@ -500,7 +505,7 @@
         }
       },
       "formal_objects": {
-        "status": "pass",
+        "status": "warning",
         "closure_gaps": {
           "count": 0,
           "items": []
@@ -510,8 +515,12 @@
           "items": []
         },
         "warnings": {
-          "count": 0,
-          "items": []
+          "count": 3,
+          "items": [
+            "Operator | references unknown domain object: typed_process_aspect",
+            "Operator | references unknown domain object: typed_process_aspect",
+            "Operator | references unknown codomain object: comparison_interface"
+          ]
         }
       },
       "participation_laws": {
@@ -618,8 +627,10 @@
           "items": []
         },
         "open_questions": {
-          "count": 0,
-          "items": []
+          "count": 1,
+          "items": [
+            "Tie-break semantics remain implementation-specific once multiple pruned candidates share the same mismatch cost."
+          ]
         },
         "warnings": {
           "count": 0,
@@ -689,8 +700,29 @@
           "items": []
         },
         "open_questions": {
+          "count": 1,
+          "items": [
+            "Validation here is structural and fixture-based; mechanism-specific pruning implementations remain local validation targets."
+          ]
+        },
+        "warnings": {
           "count": 0,
           "items": []
+        }
+      },
+      "s_arbitration": {
+        "status": "pass",
+        "validation_id": "VAL-S-ARB-001",
+        "timestamp": "2026-06-21T02:06:38.816069",
+        "closure_gaps": {
+          "count": 0,
+          "items": []
+        },
+        "open_questions": {
+          "count": 1,
+          "items": [
+            "Validation is fixture-based and structural; engine-specific pruning implementations still require local runtime corroboration."
+          ]
         },
         "warnings": {
           "count": 0,
@@ -756,7 +788,7 @@
       "equivalence_relations": {
         "status": "pass",
         "validation_id": "VAL-EQ-VALID-001",
-        "timestamp": "2026-06-19T21:26:57.098403",
+        "timestamp": "2026-06-21T02:06:39.049755",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2115,7 +2147,7 @@
       },
       "mt_law_a_foundations_audit": {
         "status": "unknown",
-        "timestamp": "2026-06-19T21:27:03.311752",
+        "timestamp": "2026-06-21T02:06:44.960709",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2124,7 +2156,7 @@
       "operator_discipline": {
         "status": "pass",
         "validation_id": "VAL-OP-DISC-001",
-        "timestamp": "2026-06-19T21:27:03.846405",
+        "timestamp": "2026-06-21T02:06:45.500376",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2133,7 +2165,7 @@
       "ltc_selection_gate": {
         "status": "pass",
         "validation_id": "VAL-LTC-GATE-001",
-        "timestamp": "2026-06-19T21:27:03.889461",
+        "timestamp": "2026-06-21T02:06:45.544641",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2142,7 +2174,7 @@
       "pi_a_persistence_scaffold": {
         "status": "pass",
         "validation_id": "VAL-LTC-SCAFFOLD-001",
-        "timestamp": "2026-06-19T21:27:03.938729",
+        "timestamp": "2026-06-21T02:06:45.585662",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2151,7 +2183,7 @@
       "pi_a_boundary_mapping": {
         "status": "pass",
         "validation_id": "VAL-PO-BOUNDARY-MAP-001",
-        "timestamp": "2026-06-19T21:27:03.984735",
+        "timestamp": "2026-06-21T02:06:45.625977",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2159,7 +2191,7 @@
       },
       "mt_law_a_foundations_resolution": {
         "status": "pass",
-        "timestamp": "2026-06-19T21:27:04.028978",
+        "timestamp": "2026-06-21T02:06:45.664186",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2168,7 +2200,7 @@
       "pi_a_proof_attempt": {
         "status": "pass",
         "validation_id": "VAL-LTC-ATTEMPT-001",
-        "timestamp": "2026-06-19T21:27:04.080102",
+        "timestamp": "2026-06-21T02:06:45.706900",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2177,7 +2209,7 @@
       "pi_a_counterexample_campaign": {
         "status": "pass",
         "validation_id": "VAL-LTC-CAMPAIGN-001",
-        "timestamp": "2026-06-19T21:27:04.131516",
+        "timestamp": "2026-06-21T02:06:45.745820",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2186,7 +2218,7 @@
       "pi_a_reconciliation_atlas": {
         "status": "pass",
         "validation_id": "VAL-LTC-ATLAS-001",
-        "timestamp": "2026-06-19T21:27:04.175044",
+        "timestamp": "2026-06-21T02:06:45.789521",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2195,7 +2227,7 @@
       "recursive_basin_classification": {
         "status": "pass",
         "validation_id": "VAL-LTC-BASIN-001",
-        "timestamp": "2026-06-19T21:27:04.228043",
+        "timestamp": "2026-06-21T02:06:45.828186",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2204,7 +2236,7 @@
       "stable_basin_eligibility": {
         "status": "pass",
         "validation_id": "VAL-LTC-ELIG-001",
-        "timestamp": "2026-06-19T21:27:04.268224",
+        "timestamp": "2026-06-21T02:06:45.874409",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2213,7 +2245,7 @@
       "restricted_proof_segment": {
         "status": "pass",
         "validation_id": "VAL-RLP-DRAFT-001",
-        "timestamp": "2026-06-19T21:27:04.321066",
+        "timestamp": "2026-06-21T02:06:45.916138",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2222,7 +2254,7 @@
       "restricted_proof_consistency": {
         "status": "pass",
         "validation_id": "VAL-RLP-CONS-VALID-001",
-        "timestamp": "2026-06-19T21:27:04.367925",
+        "timestamp": "2026-06-21T02:06:45.959231",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2231,7 +2263,7 @@
       "restricted_stability_consolidation": {
         "status": "pass",
         "validation_id": "VAL-RLSC-VALID-001",
-        "timestamp": "2026-06-19T21:27:04.415304",
+        "timestamp": "2026-06-21T02:06:45.996960",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2240,7 +2272,7 @@
       "local_theorem_readiness": {
         "status": "pass",
         "validation_id": "VAL-LTRA-VALID-001",
-        "timestamp": "2026-06-19T21:27:04.460560",
+        "timestamp": "2026-06-21T02:06:46.044510",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2249,7 +2281,7 @@
       "ts4_review_gate": {
         "status": "pass",
         "validation_id": "VAL-TS4-RG-VALID-001",
-        "timestamp": "2026-06-19T21:27:04.508776",
+        "timestamp": "2026-06-21T02:06:46.085127",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2258,7 +2290,7 @@
       "ts4_restricted_review": {
         "status": "pass",
         "validation_id": "VAL-TS4-RLR-VALID-001",
-        "timestamp": "2026-06-19T21:27:04.547437",
+        "timestamp": "2026-06-21T02:06:46.125648",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2267,7 +2299,7 @@
       "ts4_stability_reconciliation": {
         "status": "pass",
         "validation_id": "VAL-TS4-SR-VALID-001",
-        "timestamp": "2026-06-19T21:27:04.593898",
+        "timestamp": "2026-06-21T02:06:46.169438",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2276,7 +2308,7 @@
       "ts4_boundary_hardening": {
         "status": "pass",
         "validation_id": "VAL-TS4-BH-VALID-001",
-        "timestamp": "2026-06-19T21:27:04.644191",
+        "timestamp": "2026-06-21T02:06:46.209973",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2285,7 +2317,7 @@
       "mpf_sim_001_stability": {
         "status": "pass",
         "validation_id": "VAL-SIM-001-VALID",
-        "timestamp": "2026-06-19T21:27:04.689292",
+        "timestamp": "2026-06-21T02:06:46.258114",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2294,7 +2326,7 @@
       "mpf_sim_002_boundary_inflation": {
         "status": "pass",
         "validation_id": "VAL-SIM-002-VALID",
-        "timestamp": "2026-06-19T21:27:04.736990",
+        "timestamp": "2026-06-21T02:06:46.295784",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2303,7 +2335,7 @@
       "mpf_sim_003_metastability": {
         "status": "pass",
         "validation_id": "VAL-SIM-003-VALID",
-        "timestamp": "2026-06-19T21:27:04.780060",
+        "timestamp": "2026-06-21T02:06:46.339980",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2312,7 +2344,7 @@
       "mpf_sim_004_lambda": {
         "status": "pass",
         "validation_id": "VAL-SIM-004-VALID",
-        "timestamp": "2026-06-19T21:27:04.827644",
+        "timestamp": "2026-06-21T02:06:46.385811",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2321,7 +2353,7 @@
       "mpf_sim_005_phase_transition": {
         "status": "pass",
         "validation_id": "VAL-SIM-005-VALID",
-        "timestamp": "2026-06-19T21:27:04.872779",
+        "timestamp": "2026-06-21T02:06:46.427049",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2330,7 +2362,7 @@
       "mpf_sim_006_atlas": {
         "status": "pass",
         "validation_id": "VAL-SIM-006-VALID",
-        "timestamp": "2026-06-19T21:27:04.920787",
+        "timestamp": "2026-06-21T02:06:46.471023",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2339,7 +2371,7 @@
       "mpf_sim_007_repair_queue": {
         "status": "pass",
         "validation_id": "VAL-SIM-007-VALID",
-        "timestamp": "2026-06-19T21:27:04.965834",
+        "timestamp": "2026-06-21T02:06:46.510229",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2348,7 +2380,7 @@
       "mpf_sim_008_recovery": {
         "status": "pass",
         "validation_id": "VAL-SIM-008-VALID",
-        "timestamp": "2026-06-19T21:27:05.010877",
+        "timestamp": "2026-06-21T02:06:46.557357",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2357,7 +2389,7 @@
       "mpf_sim_009_memory": {
         "status": "pass",
         "validation_id": "VAL-SIM-009-VALID",
-        "timestamp": "2026-06-19T21:27:05.059636",
+        "timestamp": "2026-06-21T02:06:46.594256",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2366,7 +2398,7 @@
       "mpf_sim_011_hysteresis": {
         "status": "pass",
         "validation_id": "VAL-SIM-011-VALID",
-        "timestamp": "2026-06-19T21:27:05.107377",
+        "timestamp": "2026-06-21T02:06:46.640800",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2375,7 +2407,7 @@
       "mpf_sim_012_geology": {
         "status": "pass",
         "validation_id": "VAL-SIM-012-VALID",
-        "timestamp": "2026-06-19T21:27:05.155092",
+        "timestamp": "2026-06-21T02:06:46.679949",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2384,7 +2416,7 @@
       "mpf_sim_013_impact_audit": {
         "status": "pass",
         "validation_id": "VAL-SIM-013-VALID",
-        "timestamp": "2026-06-19T21:27:05.203780",
+        "timestamp": "2026-06-21T02:06:46.726019",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2393,7 +2425,7 @@
       "mpf_dep_001_reconciliation": {
         "status": "pass",
         "validation_id": "VAL-DEP-VALID-001",
-        "timestamp": "2026-06-19T21:27:05.249680",
+        "timestamp": "2026-06-21T02:06:46.767590",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2402,7 +2434,7 @@
       "mpf_dep_002_rc_map": {
         "status": "pass",
         "validation_id": "VAL-RC-MAP-VALID",
-        "timestamp": "2026-06-19T21:27:05.297840",
+        "timestamp": "2026-06-21T02:06:46.810855",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2411,7 +2443,7 @@
       "mpf_dep_003_rc_repair": {
         "status": "pass",
         "validation_id": "VAL-RC-EXEC-VALID",
-        "timestamp": "2026-06-19T21:27:05.344827",
+        "timestamp": "2026-06-21T02:06:46.852732",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2420,7 +2452,7 @@
       "mpf_dep_004_firewall": {
         "status": "pass",
         "validation_id": "VAL-RIF-VALID",
-        "timestamp": "2026-06-19T21:27:05.386159",
+        "timestamp": "2026-06-21T02:06:46.893637",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2429,7 +2461,7 @@
       "mpf_dep_005_admission": {
         "status": "pass",
         "validation_id": "VAL-RDAG-VALID",
-        "timestamp": "2026-06-19T21:27:05.434191",
+        "timestamp": "2026-06-21T02:06:46.935295",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2438,7 +2470,7 @@
       "mpf_dep_006_closure_audit": {
         "status": "pass",
         "validation_id": "VAL-DRCA-VALID-001",
-        "timestamp": "2026-06-19T21:27:05.484374",
+        "timestamp": "2026-06-21T02:06:46.976677",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2447,7 +2479,7 @@
       "mpf_res_001_taxonomy": {
         "status": "pass",
         "validation_id": "VAL-URS-VALID-001",
-        "timestamp": "2026-06-19T21:27:05.545990",
+        "timestamp": "2026-06-21T02:06:47.018876",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2456,7 +2488,7 @@
       "mpf_res_002_queue": {
         "status": "pass",
         "validation_id": "VAL-URS-RES-VALID-001",
-        "timestamp": "2026-06-19T21:27:05.614480",
+        "timestamp": "2026-06-21T02:06:47.068604",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2465,7 +2497,7 @@
       "mpf_res_003_lifecycle": {
         "status": "pass",
         "validation_id": "VAL-URS-LC-VALID-001",
-        "timestamp": "2026-06-19T21:27:05.677620",
+        "timestamp": "2026-06-21T02:06:47.108988",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2475,7 +2507,7 @@
       "mpf_res_005_drift_audit": {
         "status": "pass",
         "validation_id": "VAL-RGD-FRAME-VALID-001",
-        "timestamp": "2026-06-19T21:27:05.752742",
+        "timestamp": "2026-06-21T02:06:47.150926",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2484,7 +2516,7 @@
       "mpf_res_006_containment_stress": {
         "status": "pass",
         "validation_id": "VAL-RCS-FRAME-VALID-001",
-        "timestamp": "2026-06-19T21:27:05.812660",
+        "timestamp": "2026-06-21T02:06:47.192247",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2493,7 +2525,7 @@
       "mpf_res_006_failure_geometry": {
         "status": "pass",
         "validation_id": "VAL-CFG-REG-VALID-001",
-        "timestamp": "2026-06-19T21:27:05.863447",
+        "timestamp": "2026-06-21T02:06:47.232942",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2502,7 +2534,7 @@
       "mpf_res_006_boundary_isolation": {
         "status": "pass",
         "validation_id": "VAL-RGD-ISO-VALID-001",
-        "timestamp": "2026-06-19T21:27:05.910395",
+        "timestamp": "2026-06-21T02:06:47.275562",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2511,7 +2543,7 @@
       "mpf_res_006_quarantine_integrity": {
         "status": "pass",
         "validation_id": "VAL-RCS-QUAR-VALID-001",
-        "timestamp": "2026-06-19T21:27:05.959421",
+        "timestamp": "2026-06-21T02:06:47.317595",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2520,7 +2552,7 @@
       "mpf_res_006_cross_lane_containment": {
         "status": "pass",
         "validation_id": "VAL-RCS-LANE-VALID-001",
-        "timestamp": "2026-06-19T21:27:06.004386",
+        "timestamp": "2026-06-21T02:06:47.359034",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2529,7 +2561,7 @@
       "mpf_res_007_adaptive_incompleteness": {
         "status": "pass",
         "validation_id": "VAL-AIS-REG-VALID-001",
-        "timestamp": "2026-06-19T21:27:06.051695",
+        "timestamp": "2026-06-21T02:06:47.398610",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2539,7 +2571,7 @@
       "mpf_res_007_irreducible_preservation": {
         "status": "pass",
         "validation_id": "VAL-IPP-REG-VALID-001",
-        "timestamp": "2026-06-19T21:27:06.102798",
+        "timestamp": "2026-06-21T02:06:47.445062",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2549,7 +2581,7 @@
       "mpf_res_008_ecology_registry": {
         "status": "pass",
         "validation_id": "VAL-RBE-REG-VALID-001",
-        "timestamp": "2026-06-19T21:27:06.150016",
+        "timestamp": "2026-06-21T02:06:47.486997",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2559,7 +2591,7 @@
       "mpf_res_008_topology": {
         "status": "pass",
         "validation_id": "VAL-BIT-REG-VALID-001",
-        "timestamp": "2026-06-19T21:27:06.196947",
+        "timestamp": "2026-06-21T02:06:47.529336",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2568,7 +2600,7 @@
       "mpf_res_008_pressure_fields": {
         "status": "pass",
         "validation_id": "VAL-EPF-REG-VALID-001",
-        "timestamp": "2026-06-19T21:27:06.242112",
+        "timestamp": "2026-06-21T02:06:47.571272",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2577,7 +2609,7 @@
       "mpf_res_009_climate_registry": {
         "status": "pass",
         "validation_id": "VAL-ECR-REG-VALID-001",
-        "timestamp": "2026-06-19T21:27:06.290283",
+        "timestamp": "2026-06-21T02:06:47.611937",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2586,7 +2618,7 @@
       "mpf_res_009_climate_thresholds": {
         "status": "pass",
         "validation_id": "VAL-ECT-REG-VALID-001",
-        "timestamp": "2026-06-19T21:27:06.346088",
+        "timestamp": "2026-06-21T02:06:47.650139",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2595,7 +2627,7 @@
       "mpf_res_010_resumption_gate": {
         "status": "pass",
         "validation_id": "VAL-GRR-REG-VALID-001",
-        "timestamp": "2026-06-19T21:27:06.388980",
+        "timestamp": "2026-06-21T02:06:47.692783",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2604,7 +2636,7 @@
       "mpf_res_010_topology_constraints": {
         "status": "pass",
         "validation_id": "VAL-TER-REG-VALID-001",
-        "timestamp": "2026-06-19T21:27:06.435934",
+        "timestamp": "2026-06-21T02:06:47.732124",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2613,7 +2645,7 @@
       "mpf_topo_001_restart": {
         "status": "pass",
         "validation_id": "VAL-RLT-REG-VALID-001",
-        "timestamp": "2026-06-19T21:27:06.480884",
+        "timestamp": "2026-06-21T02:06:47.775611",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2622,7 +2654,7 @@
       "mpf_topo_001_constraints": {
         "status": "pass",
         "validation_id": "VAL-LTEC-REG-VALID-001",
-        "timestamp": "2026-06-19T21:27:06.529401",
+        "timestamp": "2026-06-21T02:06:47.810347",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2631,7 +2663,7 @@
       "mpf_topo_002_bounded_transition": {
         "status": "pass",
         "validation_id": "VAL-BLT-REG-VALID-001",
-        "timestamp": "2026-06-19T21:27:06.575783",
+        "timestamp": "2026-06-21T02:06:47.859075",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2641,7 +2673,7 @@
       "mpf_topo_002_transition_constraints": {
         "status": "pass",
         "validation_id": "VAL-LTC-REG-VALID-001",
-        "timestamp": "2026-06-19T21:27:06.620204",
+        "timestamp": "2026-06-21T02:06:47.900253",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2650,7 +2682,7 @@
       "mpf_topo_003_reconfiguration": {
         "status": "pass",
         "validation_id": "VAL-LCR-REG-VALID-001",
-        "timestamp": "2026-06-19T21:27:06.671266",
+        "timestamp": "2026-06-21T02:06:47.941006",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2660,7 +2692,7 @@
       "mpf_topo_003_reconfig_constraints": {
         "status": "pass",
         "validation_id": "VAL-RCR-REG-VALID-001",
-        "timestamp": "2026-06-19T21:27:06.718341",
+        "timestamp": "2026-06-21T02:06:47.982739",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2669,7 +2701,7 @@
       "mpf_topo_003_topology_maps": {
         "status": "pass",
         "validation_id": "VAL-LCTM-REG-VALID-001",
-        "timestamp": "2026-06-19T21:27:06.762518",
+        "timestamp": "2026-06-21T02:06:48.017885",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2679,7 +2711,7 @@
       "mpf_topo_004_orientation_field": {
         "status": "pass",
         "validation_id": "VAL-BOFD-REG-VALID-001",
-        "timestamp": "2026-06-19T21:27:06.808892",
+        "timestamp": "2026-06-21T02:06:48.069719",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2689,7 +2721,7 @@
       "mpf_topo_004_orientation_constraints": {
         "status": "pass",
         "validation_id": "VAL-OFC-REG-VALID-001",
-        "timestamp": "2026-06-19T21:27:06.854401",
+        "timestamp": "2026-06-21T02:06:48.111461",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2698,7 +2730,7 @@
       "mpf_topo_004_gradient_maps": {
         "status": "pass",
         "validation_id": "VAL-OGM-REG-VALID-001",
-        "timestamp": "2026-06-19T21:27:06.898509",
+        "timestamp": "2026-06-21T02:06:48.154540",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2708,7 +2740,7 @@
       "mpf_topo_005_corridor_analysis": {
         "status": "pass",
         "validation_id": "VAL-FACA-REG-VALID-001",
-        "timestamp": "2026-06-19T21:27:06.942193",
+        "timestamp": "2026-06-21T02:06:48.195969",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2718,7 +2750,7 @@
       "mpf_topo_005_corridor_constraints": {
         "status": "pass",
         "validation_id": "VAL-CC-REG-VALID-001",
-        "timestamp": "2026-06-19T21:27:06.983861",
+        "timestamp": "2026-06-21T02:06:48.238123",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2727,7 +2759,7 @@
       "mpf_topo_005_pathway_maps": {
         "status": "pass",
         "validation_id": "VAL-APM-REG-VALID-001",
-        "timestamp": "2026-06-19T21:27:07.032322",
+        "timestamp": "2026-06-21T02:06:48.285165",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2737,7 +2769,7 @@
       "mpf_topo_006_basin_formation": {
         "status": "pass",
         "validation_id": "VAL-LCB-REG-VALID-001",
-        "timestamp": "2026-06-19T21:27:07.076625",
+        "timestamp": "2026-06-21T02:06:48.325886",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2747,7 +2779,7 @@
       "mpf_topo_006_basin_constraints": {
         "status": "pass",
         "validation_id": "VAL-BC-REG-VALID-001",
-        "timestamp": "2026-06-19T21:27:07.127230",
+        "timestamp": "2026-06-21T02:06:48.368255",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2756,7 +2788,7 @@
       "mpf_topo_006_basin_maps": {
         "status": "pass",
         "validation_id": "VAL-CBM-REG-VALID-001",
-        "timestamp": "2026-06-19T21:27:07.174868",
+        "timestamp": "2026-06-21T02:06:48.409056",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2766,7 +2798,7 @@
       "mpf_topo_core_001_primitives": {
         "status": "pass",
         "validation_id": "VAL-TOPO-PRIM-001",
-        "timestamp": "2026-06-19T21:27:07.220588",
+        "timestamp": "2026-06-21T02:06:48.453707",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2775,7 +2807,7 @@
       "mpf_topo_bound_001_boundaries": {
         "status": "pass",
         "validation_id": "VAL-TOPO-BOUND-001",
-        "timestamp": "2026-06-19T21:27:07.270908",
+        "timestamp": "2026-06-21T02:06:48.494114",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2784,7 +2816,7 @@
       "mpf_topo_trans_001_transitions": {
         "status": "pass",
         "validation_id": "VAL-TOPO-TRANS-001",
-        "timestamp": "2026-06-19T21:27:07.317321",
+        "timestamp": "2026-06-21T02:06:48.537915",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2793,7 +2825,7 @@
       "mpf_topo_reconfig_001_audit": {
         "status": "pass",
         "validation_id": "VAL-TOPO-RECONFIG-001",
-        "timestamp": "2026-06-19T21:27:07.364447",
+        "timestamp": "2026-06-21T02:06:48.580480",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2803,7 +2835,7 @@
       "mpf_topo_dist_001_distinctions": {
         "status": "pass",
         "validation_id": "VAL-TOPO-DIST-001",
-        "timestamp": "2026-06-19T21:27:07.411246",
+        "timestamp": "2026-06-21T02:06:48.621620",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2812,7 +2844,7 @@
       "mpf_topo_007_flow": {
         "status": "pass",
         "validation_id": "VAL-BCF-REG-VALID-001",
-        "timestamp": "2026-06-19T21:27:07.460647",
+        "timestamp": "2026-06-21T02:06:48.662025",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2822,7 +2854,7 @@
       "mpf_topo_007_flow_constraints": {
         "status": "pass",
         "validation_id": "VAL-FC-REG-VALID-001",
-        "timestamp": "2026-06-19T21:27:07.508875",
+        "timestamp": "2026-06-21T02:06:48.704083",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2831,7 +2863,7 @@
       "mpf_topo_007_flow_mapping": {
         "status": "pass",
         "validation_id": "VAL-CFM-REG-VALID-001",
-        "timestamp": "2026-06-19T21:27:07.555956",
+        "timestamp": "2026-06-21T02:06:48.746014",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2841,7 +2873,7 @@
       "mpf_palg_001_phase": {
         "status": "pass",
         "validation_id": "VAL-PALG-PHASE-001",
-        "timestamp": "2026-06-19T21:27:07.602911",
+        "timestamp": "2026-06-21T02:06:48.787860",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2850,7 +2882,7 @@
       "mpf_palg_002_bc_equivalence": {
         "status": "pass",
         "validation_id": "VAL-OP-BCR-VALID-001",
-        "timestamp": "2026-06-19T21:27:07.649042",
+        "timestamp": "2026-06-21T02:06:48.829859",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2859,7 +2891,7 @@
       "mpf_palg_003_exclusion": {
         "status": "pass",
         "validation_id": "VAL-OP-EAA-VALID-001",
-        "timestamp": "2026-06-19T21:27:07.695186",
+        "timestamp": "2026-06-21T02:06:48.871344",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2868,7 +2900,7 @@
       "mpf_palg_004_polarity_preservation": {
         "status": "pass",
         "validation_id": "VAL-LAW-RPP-VALID-001",
-        "timestamp": "2026-06-19T21:27:07.744043",
+        "timestamp": "2026-06-21T02:06:48.913230",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2877,7 +2909,7 @@
       "mpf_palg_005_non_separability": {
         "status": "pass",
         "validation_id": "VAL-PRIN-ANSP-VALID-001",
-        "timestamp": "2026-06-19T21:27:07.790596",
+        "timestamp": "2026-06-21T02:06:48.956337",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2886,7 +2918,7 @@
       "mpf_palg_006_projection_governance": {
         "status": "pass",
         "validation_id": "VAL-PBG-VALID-001",
-        "timestamp": "2026-06-19T21:27:07.836858",
+        "timestamp": "2026-06-21T02:06:48.999029",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2895,7 +2927,7 @@
       "mpf_palg_007_aspect_trace": {
         "status": "pass",
         "validation_id": "VAL-PALG-TRACE-VALID-001",
-        "timestamp": "2026-06-19T21:27:07.877722",
+        "timestamp": "2026-06-21T02:06:49.037912",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2904,13 +2936,13 @@
       "mpf_palg_008_whole_relation_gate": {
         "status": "pass",
         "validation_id": "VAL-PALG-GATE-AUDIT-001",
-        "timestamp": "2026-06-19T21:27:07.939119",
+        "timestamp": "2026-06-21T02:06:49.085154",
         "failed_checks": 0
       },
       "mpf_palg_009_minimal_expressions": {
         "status": "pass",
         "validation_id": "VAL-PALG-EXPR-VALID-001",
-        "timestamp": "2026-06-19T21:27:08.001433",
+        "timestamp": "2026-06-21T02:06:49.148961",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2919,7 +2951,7 @@
       "mpf_palg_010_expansion_queue": {
         "status": "pass",
         "validation_id": "VAL-PALG-QUEUE-VALID-001",
-        "timestamp": "2026-06-19T21:27:08.049381",
+        "timestamp": "2026-06-21T02:06:49.192258",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2928,7 +2960,7 @@
       "mpf_palg_011_nested_review": {
         "status": "pass",
         "validation_id": "VAL-PALG-NWR-VALID-001",
-        "timestamp": "2026-06-19T21:27:08.096791",
+        "timestamp": "2026-06-21T02:06:49.235873",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2937,7 +2969,7 @@
       "mpf_palg_012_semantics_governance": {
         "status": "pass",
         "validation_id": "VAL-NRSG-VALID-001",
-        "timestamp": "2026-06-19T21:27:08.144525",
+        "timestamp": "2026-06-21T02:06:49.284203",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2946,7 +2978,7 @@
       "mpf_palg_013_projected_equality": {
         "status": "pass",
         "validation_id": "VAL-PDE-VALID-001",
-        "timestamp": "2026-06-19T21:27:08.185888",
+        "timestamp": "2026-06-21T02:06:49.325788",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2955,7 +2987,7 @@
       "mpf_palg_014_projected_implication": {
         "status": "pass",
         "validation_id": "VAL-PDI-VALID-001",
-        "timestamp": "2026-06-19T21:27:08.240119",
+        "timestamp": "2026-06-21T02:06:49.368861",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2964,7 +2996,7 @@
       "mpf_palg_015_projected_composition": {
         "status": "pass",
         "validation_id": "VAL-PDC-VALID-001",
-        "timestamp": "2026-06-19T21:27:08.285076",
+        "timestamp": "2026-06-21T02:06:49.409760",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2973,7 +3005,7 @@
       "mpf_palg_016_projected_biconditional": {
         "status": "pass",
         "validation_id": "VAL-PDB-VALID-001",
-        "timestamp": "2026-06-19T21:27:08.327411",
+        "timestamp": "2026-06-21T02:06:49.455840",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2982,7 +3014,7 @@
       "mpf_palg_017_loss_matrix": {
         "status": "pass",
         "validation_id": "VAL-PLAM-VALID-001",
-        "timestamp": "2026-06-19T21:27:08.369371",
+        "timestamp": "2026-06-21T02:06:49.496268",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2990,7 +3022,7 @@
       },
       "mpf_palg_018_simultaneity": {
         "status": "unknown",
-        "timestamp": "2026-06-19T21:27:08.419147",
+        "timestamp": "2026-06-21T02:06:49.540710",
         "overall_status": "PASS",
         "failed_checks": {
           "count": 0,
@@ -3004,7 +3036,7 @@
       "mpf_palg_019_flattening_risk": {
         "status": "pass",
         "validation_id": "VAL-WRF-VAL-001",
-        "timestamp": "2026-06-19T21:27:08.485733",
+        "timestamp": "2026-06-21T02:06:49.601112",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3014,7 +3046,7 @@
       "mpf_palg_021_projection_operators": {
         "status": "pass",
         "validation_id": "VAL-POF-VALID-001",
-        "timestamp": "2026-06-19T21:27:08.527363",
+        "timestamp": "2026-06-21T02:06:49.645734",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3024,7 +3056,7 @@
       "mpf_palg_022_projection_depth": {
         "status": "pass",
         "validation_id": "VAL-PDT-VALID-001",
-        "timestamp": "2026-06-19T21:27:08.573815",
+        "timestamp": "2026-06-21T02:06:49.685618",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3034,7 +3066,7 @@
       "mpf_palg_023_recoverability_limits": {
         "status": "pass",
         "validation_id": "VAL-PRL-VALID-001",
-        "timestamp": "2026-06-19T21:27:08.618448",
+        "timestamp": "2026-06-21T02:06:49.726826",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3044,7 +3076,7 @@
       "mpf_palg_024_multi_projection_coherence": {
         "status": "pass",
         "validation_id": "VAL-MPC-VALID-001",
-        "timestamp": "2026-06-19T21:27:08.660702",
+        "timestamp": "2026-06-21T02:06:49.769458",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3054,7 +3086,7 @@
       "mpf_palg_025_projection_geometry": {
         "status": "pass",
         "validation_id": "VAL-PIGG-VALID-001",
-        "timestamp": "2026-06-19T21:27:08.701726",
+        "timestamp": "2026-06-21T02:06:49.810532",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3064,7 +3096,7 @@
       "mpf_palg_026_persistence_dynamics": {
         "status": "pass",
         "validation_id": "VAL-PPD-VALID-001",
-        "timestamp": "2026-06-19T21:27:08.752952",
+        "timestamp": "2026-06-21T02:06:49.852705",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3074,7 +3106,7 @@
       "mpf_palg_027_orientation_dynamics": {
         "status": "pass",
         "validation_id": "VAL-POD-VALID-001",
-        "timestamp": "2026-06-19T21:27:08.795632",
+        "timestamp": "2026-06-21T02:06:49.897195",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3084,7 +3116,7 @@
       "mpf_palg_028_failure_atlas": {
         "status": "pass",
         "validation_id": "VAL-PFM-VALID-001",
-        "timestamp": "2026-06-19T21:27:08.846044",
+        "timestamp": "2026-06-21T02:06:49.933858",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3094,7 +3126,7 @@
       "mpf_palg_029_stress_scaffold": {
         "status": "pass",
         "validation_id": "VAL-PCST-VALID-001",
-        "timestamp": "2026-06-19T21:27:08.891512",
+        "timestamp": "2026-06-21T02:06:49.982405",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3104,7 +3136,7 @@
       "mpf_palg_030_consolidation_review": {
         "status": "pass",
         "validation_id": "VAL-PMCR-VALID-001",
-        "timestamp": "2026-06-19T21:27:08.936319",
+        "timestamp": "2026-06-21T02:06:50.022511",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3114,7 +3146,7 @@
       "mpf_palg_031_bridge_phase": {
         "status": "pass",
         "validation_id": "VAL-RPBP-VALID-001",
-        "timestamp": "2026-06-19T21:27:08.981029",
+        "timestamp": "2026-06-21T02:06:50.062942",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3134,7 +3166,7 @@
       "mpf_palg_032_qm_domain": {
         "status": "pass",
         "validation_id": "VAL-QMPD-VALID-001",
-        "timestamp": "2026-06-19T21:27:09.027636",
+        "timestamp": "2026-06-21T02:06:50.104859",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3154,7 +3186,7 @@
       "mpf_palg_033_gr_domain": {
         "status": "pass",
         "validation_id": "VAL-GRPD-VALID-001",
-        "timestamp": "2026-06-19T21:27:09.064064",
+        "timestamp": "2026-06-21T02:06:50.146932",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3174,7 +3206,7 @@
       "mpf_palg_034_bridge_schema": {
         "status": "pass",
         "validation_id": "VAL-BCS-VALID-001",
-        "timestamp": "2026-06-19T21:27:09.120078",
+        "timestamp": "2026-06-21T02:06:50.182134",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3194,7 +3226,7 @@
       "mpf_palg_035_bridge_gate": {
         "status": "pass",
         "gate_id": "PBNU-AUDIT-001",
-        "timestamp": "2026-06-19T21:27:09.170729",
+        "timestamp": "2026-06-21T02:06:50.232533",
         "failed_checks": {
           "count": 0,
           "items": []
@@ -3203,7 +3235,7 @@
       "mpf_palg_bridge_metrics": {
         "status": "pass",
         "validation_id": "VAL-BMCR-VALID-001",
-        "timestamp": "2026-06-19T21:27:09.222691",
+        "timestamp": "2026-06-21T02:06:50.275581",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3222,7 +3254,7 @@
       "mpf_rtop_reconstruction_topology": {
         "status": "pass",
         "validation_id": "VAL-RTC-VALID-001",
-        "timestamp": "2026-06-19T21:27:09.263861",
+        "timestamp": "2026-06-21T02:06:50.316424",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3241,7 +3273,7 @@
       "mpf_rdyn_reconstruction_dynamics": {
         "status": "pass",
         "validation_id": "VAL-RDC-VALID-001",
-        "timestamp": "2026-06-19T21:27:09.317692",
+        "timestamp": "2026-06-21T02:06:50.364254",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3261,7 +3293,7 @@
       "mpf_rsem_reconstruction_semantics": {
         "status": "pass",
         "validation_id": "VAL-RSC-VALID-001",
-        "timestamp": "2026-06-19T21:27:09.364382",
+        "timestamp": "2026-06-21T02:06:50.407788",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3281,7 +3313,7 @@
       "mpf_fsub_formal_substrate": {
         "status": "pass",
         "validation_id": "VAL-FSC-VALID-001",
-        "timestamp": "2026-06-19T21:27:09.418865",
+        "timestamp": "2026-06-21T02:06:50.452224",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3301,7 +3333,7 @@
       "mpf_rpcr_proof_candidate_review": {
         "status": "pass",
         "validation_id": "VAL-RPC-CON-VALID-001",
-        "timestamp": "2026-06-19T21:27:09.462563",
+        "timestamp": "2026-06-21T02:06:50.493907",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3321,7 +3353,7 @@
       "mpf_frpr_formal_proof_review": {
         "status": "pass",
         "validation_id": "VAL-FPC-CON-VALID-001",
-        "timestamp": "2026-06-19T21:27:09.510633",
+        "timestamp": "2026-06-21T02:06:50.535154",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3341,7 +3373,7 @@
       "mpf_palg_conv_repair": {
         "status": "pass",
         "validation_id": "VAL-CONV-REPAIR-001",
-        "timestamp": "2026-06-19T21:27:09.554124",
+        "timestamp": "2026-06-21T02:06:50.576464",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3359,7 +3391,7 @@
       "mpf_law_cons_consolidation": {
         "status": "pass",
         "validation_id": "VAL-LAW-CONS-AGGREGATE-001",
-        "timestamp": "2026-06-19T21:27:09.610857",
+        "timestamp": "2026-06-21T02:06:50.628936",
         "sub_validators": {
           "count": 8,
           "items": [
@@ -3375,7 +3407,7 @@
       "mpf_rfpr_peer_review_prep": {
         "status": "pass",
         "validation_id": "VAL-RFPR-AGGREGATE-001",
-        "timestamp": "2026-06-19T21:27:10.132794",
+        "timestamp": "2026-06-21T02:06:51.073419",
         "sub_validators": {
           "count": 9,
           "items": [
@@ -3391,7 +3423,7 @@
       "mpf_pfs_participatory_scrutiny": {
         "status": "pass",
         "validation_id": "VAL-PSC-REG-VALID-001",
-        "timestamp": "2026-06-19T21:27:10.672441",
+        "timestamp": "2026-06-21T02:06:51.544719",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3410,7 +3442,7 @@
       "mpf_par_participatory_refinement": {
         "status": "pass",
         "validation_id": "VAL-PAR-AGGREGATE-001",
-        "timestamp": "2026-06-19T21:27:10.727569",
+        "timestamp": "2026-06-21T02:06:51.609178",
         "sub_validators": {
           "count": 9,
           "items": [
@@ -3426,7 +3458,7 @@
       "mpf_pstab_formal_stabilization": {
         "status": "pass",
         "validation_id": "VAL-PSTAB-AGGREGATE-001",
-        "timestamp": "2026-06-19T21:27:11.301862",
+        "timestamp": "2026-06-21T02:06:52.097189",
         "sub_validators": {
           "count": 9,
           "items": [
@@ -3446,8 +3478,16 @@
       "ready_for_physics_claims": false
     },
     "closure_gaps": [],
-    "open_questions": [],
-    "warnings": []
+    "open_questions": [
+      "Tie-break semantics remain implementation-specific once multiple pruned candidates share the same mismatch cost.",
+      "Validation here is structural and fixture-based; mechanism-specific pruning implementations remain local validation targets.",
+      "Validation is fixture-based and structural; engine-specific pruning implementations still require local runtime corroboration."
+    ],
+    "warnings": [
+      "Operator | references unknown domain object: typed_process_aspect",
+      "Operator | references unknown domain object: typed_process_aspect",
+      "Operator | references unknown codomain object: comparison_interface"
+    ]
   },
   "implementation_validation": {
     "status": "success",
@@ -3463,6 +3503,12 @@
     "status": "success",
     "errors": [],
     "warnings": []
+  },
+  "governance_integrity_validation": {
+    "status": "success",
+    "errors": [],
+    "warnings": [],
+    "verified_count": 48
   },
   "overall_status": "pass"
 }

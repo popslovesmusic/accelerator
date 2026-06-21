@@ -1,0 +1,159 @@
+{
+  "s_arbitration_validation": {
+    "status": "pass",
+    "validation_id": "VAL-S-ARB-001",
+    "timestamp": "2026-06-21T02:06:38.816069",
+    "claim_effect": "NO_THEOREM_PROMOTION",
+    "target": "S_arbitration_rule",
+    "tests_run": [
+      "SVT-001",
+      "SVT-002",
+      "SVT-003",
+      "SVT-004",
+      "SVT-005",
+      "SVT-006"
+    ],
+    "test_results": [
+      {
+        "id": "SVT-001",
+        "name": "S reduces candidate set cardinality",
+        "status": "PASS",
+        "evidence": {
+          "raw_count": 3,
+          "pruned_count": 1,
+          "raw_ids": [
+            "q_valid_mid",
+            "q_illegal_low_mismatch",
+            "q_invalid_orientation"
+          ],
+          "pruned_ids": [
+            "q_valid_mid"
+          ],
+          "removed_ids": [
+            "q_illegal_low_mismatch",
+            "q_invalid_orientation"
+          ],
+          "selected_from_raw": "q_illegal_low_mismatch",
+          "selected_from_pruned": "q_valid_mid"
+        }
+      },
+      {
+        "id": "SVT-002",
+        "name": "S may leave candidate set unchanged",
+        "status": "PASS",
+        "evidence": {
+          "raw_count": 2,
+          "pruned_count": 2,
+          "raw_ids": [
+            "q_valid_a",
+            "q_valid_b"
+          ],
+          "pruned_ids": [
+            "q_valid_a",
+            "q_valid_b"
+          ],
+          "removed_ids": [],
+          "selected_from_raw": null,
+          "selected_from_pruned": "q_valid_a"
+        }
+      },
+      {
+        "id": "SVT-003",
+        "name": "S never increases candidate set cardinality",
+        "status": "PASS",
+        "evidence": {
+          "reduce_case": {
+            "raw_count": 3,
+            "pruned_count": 1
+          },
+          "unchanged_case": {
+            "raw_count": 2,
+            "pruned_count": 2
+          },
+          "multi_survivor_case": {
+            "raw_count": 3,
+            "pruned_count": 2
+          }
+        }
+      },
+      {
+        "id": "SVT-004",
+        "name": "Arb_A operates only on C_t^S",
+        "status": "PASS",
+        "evidence": {
+          "selected_from_pruned": "q_valid_mid",
+          "pruned_ids": [
+            "q_valid_mid"
+          ],
+          "root_operator_rule": [
+            "Precedes interaction and projection",
+            "Ordinary Arb_A realization proceeds over C_t^S only when Trigger_Reorient = FALSE. Arb_A does not own reorientation trigger semantics.",
+            "Consumes the S-stage pruned candidate set before realization"
+          ],
+          "math_operator_definition": "Selection stage operating only on the S-pruned candidate set C_t^S to realize one continuation event."
+        }
+      },
+      {
+        "id": "SVT-005",
+        "name": "Removing S changes candidate pool but does not collapse Arb_A semantics",
+        "status": "PASS",
+        "evidence": {
+          "raw_selection": "q_illegal_low_mismatch",
+          "pruned_selection": "q_valid_mid",
+          "raw_count": 3,
+          "pruned_count": 1
+        }
+      },
+      {
+        "id": "SVT-006",
+        "name": "S does not perform realization selection",
+        "status": "PASS",
+        "evidence": {
+          "pruned_ids": [
+            "q_survivor_a",
+            "q_survivor_b"
+          ],
+          "selected_from_pruned": "q_survivor_a",
+          "root_negative_constraints": [
+            "S is not Arb_A",
+            "S does not select the realized continuation",
+            "S does not compute T_class",
+            "S does not define residue",
+            "S must not depend on post-realization outcomes",
+            "S does not promote topology, geometry, or physics-app claims"
+          ],
+          "math_negative_constraints": [
+            "does_not_select_realized_continuation",
+            "does_not_increase_candidate_set_cardinality",
+            "does_not_depend_on_post_realization_outcomes"
+          ]
+        }
+      }
+    ],
+    "registry_alignment": {
+      "root_operator_registry_has_S": true,
+      "root_operator_registry_has_Arb_A": true,
+      "math_operator_registry_has_S": true,
+      "math_operator_registry_has_Arb_A": true,
+      "branch_pruning_registry_targets_S": true,
+      "delta_selection_registry_targets_Arb_A": true
+    },
+    "separation_checks": {
+      "S_has_pruning_codomain": true,
+      "Arb_A_has_realization_codomain": true,
+      "S_precedes_Arb_A": true
+    },
+    "success_condition": {
+      "S": "validated as pruning stage",
+      "Arb_A": "validated as arbitration stage"
+    },
+    "status_if_passed": {
+      "S_arbitration_rule": "VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT"
+    },
+    "closure_gaps": [],
+    "open_questions": [
+      "Validation is fixture-based and structural; engine-specific pruning implementations still require local runtime corroboration."
+    ],
+    "warnings": []
+  }
+}

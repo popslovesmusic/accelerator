@@ -109,6 +109,28 @@ The June 17, 2026 ad hoc campaigns `MPF_SIM_ARRAY_GRAPH_001` and `MPF_SIM_ART_00
 
 [Source: MPF_PATCH_RT_WHOLE_EXPRESSION_PRIMACY_001]
 
+---
+
+## 1.2B Meta-Relation Family
+
+The primitive schema governing lawful relations between relational organizations and their projections is the Typed Meta-Relation Family.
+
+**Formal Block 1.2B.1: Typed Meta-Relation Operator ($\langle*\rangle_x$)**
+$$ A \langle*\rangle_x B $$
+$$ \text{Reading: A is meta-related to B under context } x $$
+
+**Family Members:**
+The meta-relation schema $\langle*\rangle_x$ licenses a family of specialized relational projection operators:
+- $\otimes$ (Coupling Projection)
+- $\iff_R$ (Residue Projection)
+- $\iff_m$ (Metric Projection)
+- $\iff_s$ (Statistical Projection)
+
+**Governance Rule (GOV-MRF-001):**
+No member of the $\langle*\rangle_x$ family (including $\otimes$, $\iff_R$, $\iff_m$, and $\iff_s$) shall be treated as an isolated primitive unless explicitly promoted through governance. Family members inherit constraints from $\langle*\rangle_x$ unless overridden by formal promotion.
+
+---
+
 **Formal Principle 1.2.3: Relation as Primitive (Option C)**
 Within this framework, **Relation ($D$) is the fundamental primitive**. A distinction array $\chi_D$ is not a state container but a **structural organization of relations**.
 $$ D(x,y) \xrightarrow{\text{organize}} \chi_D \xrightarrow{\text{eval}} E $$
@@ -185,7 +207,7 @@ Failure: $\mathcal{E}=0$ (Complete distinction collapse).
 Affect ($A$) functions as the foundational legality gate, representing the universal rule that *there is no continuation without distinction*:
 $$ A(\chi_D) := \begin{cases} \text{PASS} & E(\chi_D) \neq 0 \\ \text{FAIL} & E(\chi_D) = 0 \end{cases} $$
 $$ \Delta(\chi_D) \text{ exists } \iff E(\chi_D) \neq 0 $$
-If $A$ fails, the process collapses into the $0\text{-state}$.
+If $A$ fails, the process enters the Zero-State ($0\_state$), a fully decoupled symmetry condition possessing zero distinction. The Zero-State is outside the admissible distinction domain but is not interpreted as nonexistence.
 
 **C3: Admissibility Evaluation**
 Once $E(\chi_D) > 0$ is validated, the Admissibility Filter ($\delta_a$) evaluates the candidate continuation set $Q$.
@@ -245,7 +267,8 @@ The operator $\delta_a$ acts as a filter, determining which next states are "all
 
 **Formal Block 1.5.1: Admissibility Filter**
 $$ \delta_a(\mathcal{E}) \to \{ \mathcal{E}' \mid \mathcal{E}' \in \mathcal{A} \} $$
-$$ \mathcal{A} := [ \text{MISSING DEFINITION: Formal definition of Admissibility Window } \mathcal{A} ] $$
+$$ \mathcal{A}(\chi_D) := \{ \delta \in \Delta \mid f_{\text{adm}}(\delta, \chi_D, R) > \epsilon \} $$
+where $f_{\text{adm}}$ is the admissibility evaluation function, $\chi_D$ is the distinction array, $R$ is the residue, and $\epsilon$ is the scale distinction floor [Source: A_ALPHA_FORMALIZATION_REVIEW_001].
 
 **Commentary:**
 The process does not transition to any arbitrary state. The $\delta_a$ operator selects from a set of candidate continuations based on an admissibility window $\mathcal{A}$. This window is where the "laws" of the system reside. A continuation is admissible if it satisfies the relational constraints preserved in the residue.
@@ -366,8 +389,10 @@ $$ (A \leftrightarrow_R B) = \text{True} $$
 The relation between $A$ and $B$ is valid ("True") while residue-conditioned closure is maintained. If decoupling breaks the closure, the condition becomes False. 
 
 **The Zero-State Rule:**
-If the primary core closure decouples, the framework collapses into the **0-state** (non-existence).
+If the primary core closure decouples, the framework collapses into the **0-state** (complete symmetry / complete decoupling).
 $$ \neg [ ((\mathcal{E} \neq 0) \leftrightarrow_R \delta_a(\mathcal{E} > 0)) ] \to 0\text{-state} $$
+
+The Zero-State is not interpreted as process annihilation. It represents the complete loss of distinction and admissible orientation. Process may persist at a meta-domain level while remaining inadmissible to the distinction domain.
 
 **Truth Revision: Generative Exclusion (IND_RT_CORE_AFFECT_EFFECT_001)**
 Classical logic equates "invalid" with "failure." The process reading states that an **excluded state** is a meaningful boundary-generation event. It is a first-class process outcome because it contributes to admissibility constraint geometry. Therefore, we distinguish between:
@@ -784,11 +809,20 @@ The stability of $TC_{asym}$ is being tested under orientation-removal and rando
 When the distinction between states is symmetric, the process lacks a preferred direction for continuation. This state is characterized by relational balance.
 
 **Formal Block 4.3.1: Induction of Symmetry Domain**
-$$ D(S_1|S_2) = D(S_2|S_1) \implies (symm\_app)nDOF $$
-$$ (symm\_app)nDOF \implies \text{Orientation Degeneracy} $$
+$$ D(*|*) = 0 $$
+
+**Reading:**
+The Symmetry Domain corresponds to complete distinction collapse.
 
 **Commentary:**
 In the **symmetry application domain** ($symm\_app$), the lack of a directed gradient means there is no "preferred" orientation. This results in **orientation degeneracy**, where multiple or all directions are equally admissible. While symmetry is often prized in classical physics, in the Mono-Process Framework, pure symmetry represents a "dead end" for directional continuation. Symmetric interaction produces no gradient, no pressure, no direction—it is one of the collapse modes [Source: MPF-NARRATIVE].
+
+---
+
+## 4.3A Zero-State Equivalence
+
+Within the current induction program, complete symmetry, zero distinction, zero degrees of freedom, and complete decoupling are treated as equivalent readings of the Zero-State.
+$$ 0\_state \iff \text{Symmetry} \iff D(*|*)=0 \iff 0\_DOF \iff \text{Complete\_Decoupling} $$
 
 ---
 
@@ -1067,6 +1101,22 @@ This represents an **admissible orientation chain** rather than a temporal succe
 
 ---
 
+## 5.X Recoupling and Reorientation
+
+A process event in which relational mismatch produces a coupling reorganization that results in an orientation update is defined as a Recoupling-Reorientation Event (RRE).
+
+**Formal Block 5.X.1: Recoupling-Reorientation Event (RRE)**
+$$ \Delta C \to \Delta O \to \Delta A_{\text{adm}} $$
+$$ \text{Mismatch} \to \text{Recoupling} \to \text{Reorientation} \to \text{Admissibility Update} $$
+
+**Commentary:**
+1. **Recoupling** is a change in admissible coupling organization.
+2. **Reorientation** is the resulting update of active orientation structure.
+3. **Observable Consequence:** Reorientation is treated as the observable consequence of recoupling.
+4. **Asymmetry is Implicit:** Asymmetry is implicit in recoupling (because coupling changes require nonzero mismatch), and therefore it is not separately required.
+
+---
+
 ## 5.5 Missing and Provisional Formalisms
 
 To achieve formal closure for the orientation program, the following items have candidate definitions and require promotion:
@@ -1226,10 +1276,28 @@ By utilizing the **floor $\epsilon$** (see Chapter 8), we ensure $\Omega_a$ rema
 
 When the process realizations are observed over many cycles or across many local instances, the resulting distribution can be projected into a **Statistical Space**.
 
-**Formal Block 7.3.1: Probability as Projection**
+**Formal Block 7.3.1: Statistical Projection Relation ($\iff_s$)**
 $$ D \iff_s P $$
-$$ P(S_1|S_2) = [ \text{PROVISIONAL MAPPING: Relational Distinctions to Probability} ] $$
-$$ \iff_s := [ \text{MISSING DEFINITION: Formal definition of the Statistical Extractor } \iff_s ] $$
+$$ P(S_a|S_b) := F_s(D(S_a|S_b), A_{\text{adm}}, R, \text{observation\_window}) $$
+
+**Reading:**
+The observed probability of a transition is a projection of directed distinction, admissibility structure, residue support, and the chosen observation window. Probability is treated as an observer-facing projection rather than primitive causation.
+
+**Truth Conditions (TRUTH-IFF-S-001):**
+An expression $D \iff_s P$ is valid only when:
+1. The source expression contains a non-zero distinction or an admissible realization trace.
+2. An observation window or ensemble is declared.
+3. The projection preserves trace-priority: equal probability does not imply equal process history (equal probabilities do not imply identical process lineage).
+4. Probability is treated as an observer-facing projection, not primitive causation.
+5. The mapping does not erase admissibility ($A_{\text{adm}}$) or residue ($R$) dependence.
+
+**Negative Constraints:**
+- $\iff_s$ is not randomness as primitive.
+- $\iff_s$ is not proof that probability causes realization.
+- $\iff_s$ is not identity between $D$ and $P$.
+
+**Family Membership:**
+The statistical projection relation $\iff_s$ is a statistical projection member of the parent meta-relation family schema $\langle*\rangle_x$ (the symbolic representation of the admissible relational-operator class).
 
 **Commentary:**
 In this framework, **probability is a projection**, not a primitive. The appearance of "chance" or "uncertainty" (P) arises from the observer's limited access to the full recursive state of $\mathcal{E}$ and $R$. What we perceive as a high probability transition ($P \approx 1$) is actually a state of high admissibility and strong residue support.
@@ -1275,6 +1343,41 @@ The operator $\iff_m[I_k]$ acts as a precision bridge. It does **not** imply equ
 Application projections and nDOF representations are projectionally equivalent because they preserve common admissibility invariants.
 $$ (\mathcal{E} \neq 0_{app}) \iff_m[I_{admissibility}] (\mathcal{E} \neq 0)nDOF $$
 $$ (\mathcal{E} > 0_{app}) \iff_m[I_{admissibility}] (\mathcal{E} > 0)nDOF $$
+
+---
+
+## 7.4B Projection Signatures
+
+A recognizable pattern of constraints, outputs, and preserved relations showing that a process expression has lawfully projected into an application-facing domain is defined as a Projection Signature ($Sig_{app}$).
+
+**Formal Block 7.4.4: Projection Signature ($Sig_{app}$)**
+$$ Sig_{app}(X) := \{ \text{source\_trace}, \text{preserved\_distinctions}, \text{projection\_operator}, \text{observable\_pattern}, \text{admissibility\_conditions} \} $$
+
+**Reading:**
+A projection is identifiable when its source trace, preserved distinctions, operator family, observable pattern, and admissibility conditions are declared. It acts as the fingerprint showing that an output belongs to a specific projection family.
+
+**Required Fields:**
+A valid projection signature must declare:
+- **Source process expression:** The underlying mono-process dynamics.
+- **Projection family:** The family relationship (under $\langle*\rangle_x$).
+- **Preserved distinction structure:** The relational distinctions maintained.
+- **Admissibility conditions:** The filters determining validity.
+- **Observable output pattern:** The observer-facing presentation.
+- **Forbidden identity collapse:** The explicit non-identity boundary.
+
+**Truth Conditions (TRUTH-SIG-001):**
+A projection signature $Sig_{app}(X)$ is valid only when:
+1. The projection traces back to a lawful process expression.
+2. The projection preserves enough distinction to remain recognizable.
+3. The projection declares its operator family, such as $\iff_m$, $\iff_s$, $\iff_R$, or $\otimes$.
+4. The projection does not claim identity with its source ($Sig_{app}(X) \neq X$).
+5. The projection specifies the domain in which it is valid.
+
+**Negative Constraints:**
+- Projection signature is not proof of physical reality.
+- Projection signature is not identity between source and output.
+- Projection signature is not arbitrary resemblance.
+- Projection signature does not bypass the Empirical Mapping Standards (EMS).
 
 ---
 
@@ -1714,6 +1817,41 @@ By separating the underlying process from these application domains, we can desc
 
 ---
 
+## 11.4A Topology-to-Geometry Legality Transform
+
+A projection condition under which a stabilized topological organization may be represented as geometry_app without treating geometry as primitive is defined as a Topology-to-Geometry Legality Transform.
+
+**Formal Block 11.4A.1: Topology-to-Geometry Transform ($\Pi_{\text{geo}}$)**
+$$ T_{\text{stable}} \iff_m \text{geometry\_app} $$
+$$ \text{Geo\_app} := P_{\text{geo}}(T, K, R, A_{\text{adm}}, \epsilon) $$
+
+**Reading:**
+Application-facing geometry is a projection of stabilized topology, knot/closure structure, residue support, admissibility, and the distinction floor. Geometry appears only when topology stabilizes enough to support metric projection.
+
+**Minimum Legality Conditions:**
+A topology-to-geometry projection is licensed only when:
+1. A stabilized topology $T$ exists.
+2. The topology preserves non-zero distinction above $\epsilon$.
+3. Residue support is sufficient to preserve recognizable continuity.
+4. Admissibility conditions constrain allowable metric projection.
+5. The projection uses a declared projection signature.
+6. Geometry is treated as an application-facing projection, not a primitive substrate.
+
+**Truth Conditions (TRUTH-GEO-001):**
+A projection $\Pi_{\text{geo}}$ is valid only when:
+- Topology may project as geometry only when its relational organization remains stable across an observation window.
+- Metric outputs must be derived through $\iff_m$ or a declared projection-family member.
+- Projected distance, direction, curvature, or locality must trace back to preserved relational topology.
+- Equivalent geometry_app outputs do not imply identical topology histories.
+
+**Negative Constraints:**
+- Do not assume pre-existing space.
+- Do not treat geometry_app as primitive.
+- Do not infer physical geometry without Empirical Mapping Standards (EMS).
+- Do not promote topology-to-geometry claims to theorem status without validation.
+
+---
+
 ## 11.5 Missing and Provisional Formalisms
 
 To complete the formalization of the topological program, the following must be induced:
@@ -1721,9 +1859,7 @@ To complete the formalization of the topological program, the following must be 
 1.  **Rigorous Definition of $K$:** [ **MISSING DEFINITION** ] Is $K$ a knot in the sense of knot theory ($S^1$ into $\mathbb{R}^3$), or is it an abstract graph-cycle invariant or a periodic orbit in orientation space?
 2.  **Braid Formation Rule:** [ **MISSING DEFINITION** ] What are the formal mechanics of triadic closure? How do the individual strands of $\mathcal{E}$ "knot" together under the $\iff_R$ operator?
 3.  **Topology-Class Metric:** [ **DEFINITION_CANDIDATE_PENDING_VALIDATION** ] A candidate metric $T_{\text{class\_metric}}$ is now defined — see Formal Statement 11.X below and `registry/math/metric_registry.json`.
-4.  **Topology-to-Geometry Transform:** [ **PROVISIONAL OPERATOR / LEGALITY GATE** ] The candidate operator is
-    $$ \Pi_{\mathrm{geo}} : \mathrm{Topology\_app} \to \mathrm{Geometry\_app}. $$
-    Its admissibility is currently governed by the projection-legality conditions in `L099`, the hardening gate in `L100`, and the pending validation campaign `GEO_PROJECTION_VALIDATION_001`. No physical metric theory is promoted from this placeholder.
+4.  **Topology-to-Geometry Transform:** [ **C1_DEFINED_PROVISIONAL** ] Defined under $\Pi_{\text{geo}}$ legality conditions in Section 11.4A. Remaining proof obligations, metric extraction validation, and signature enforcement are tracked under active hardening targets.
 
 ---
 
@@ -1898,11 +2034,47 @@ This is an internal structural hypothesis, not a physical unification claim. It 
 
 ---
 
+## 12.4B Empirical Mapping Standards (EMS)
+
+The governance framework that regulates how process-domain expressions may be associated with external observations, measurements, simulations, or physical claims is defined as the Empirical Mapping Standards (EMS).
+
+**Formal Block 12.4B.1: EMS Core Rule**
+$$ \text{Projection} \neq \text{Observation} \neq \text{Ontology} $$
+
+**Reading:**
+A projection may resemble an observation without proving the underlying ontology. EMS prevents projections from being mistaken for reality.
+
+**Required Mapping Chain:**
+Every empirical claim must trace through this mandatory sequence:
+$$ \text{Process Expression} \to \text{Projection Family} \to \text{Projection Signature} \to \text{Observable} \to \text{Empirical Comparison} $$
+
+**Truth Conditions (TRUTH-EMS-001):**
+An empirical mapping is valid only when:
+1. All empirical claims declare their projection path.
+2. All empirical claims declare their projection signature.
+3. Observable agreement alone does not prove ontology.
+4. Multiple process histories may project to identical observations.
+5. Observation comparison occurs after projection, not before.
+
+**Claim Classification Levels:**
+- **EMS0:** Unmapped speculation
+- **EMS1:** Projection identified
+- **EMS2:** Observable correspondence demonstrated
+- **EMS3:** Independent replication
+- **EMS4:** Rigor-endorsed mapping
+
+**Forbidden Claims:**
+- Projection similarity proves ontology.
+- Observation agreement proves primitive identity.
+- Single simulation proves reality.
+
+---
+
 ## 12.5 Missing and Provisional Formalisms
 
 The applications presented in this chapter are provisional projections and require rigorous induction to become formal physical claims:
 
-1.  **Empirical Mapping Standards:** [ **MISSING DEFINITION** ] What specific metrics in the framework (e.g., $\Omega_a$, $B_K$ invariants) map to physical constants (e.g., $G$, $h$, $c$)?
+1.  **Empirical Mapping Standards:** [ **C1_DEFINED_PROVISIONAL** ] Defined under EMS conditions in Section 12.4B. Remaining audit procedures, evidence thresholds, and replication standards are tracked under active hardening targets.
 2.  **Separation of Claim Levels:** [ **REQUIRES GOVERNANCE** ] Simulation results showing gravity-like behavior must not be conflated with a proof of physical gravity. All physical-like results must be marked as analogies or structural comparisons until externally validated. Downstream applications remain under REVIEW_LOCK because selector-form bridge support does not authorize projection-level promotion.
 3.  **Conservation Laws:** [ **REQUIRES PROOF** ] How do the internal invariants of the $\Psi$ and $\delta_a$ operators project into the physical conservation laws of mass, energy, and momentum?
 
@@ -2216,7 +2388,7 @@ By enforcing these governance and induction rules, we ensure that the Mono-Proce
 | $R_{\leftrightarrow}$ | Residue Relation | Residue as operand; studies coupling/recoupling among residue states. | 2.X |
 | $\leftrightarrow_R$ | Residue-Conditioned Closure | Residue as conditioning structure; supports valid process relations. | 2.X |
 | $(A \leftrightarrow_R B) = \text{True}$ | R-Truth Condition | Condition denoting that a relation is valid while closure is maintained. | 2.X |
-| $0\text{-state}$ | Zero State | The state of non-existence resulting from core closure decoupling. | 2.X |
+| $0\text{-state}$ | Zero State | The fully decoupled symmetry condition possessing zero distinction and zero degrees of freedom. | 2.X |
 | $N$ | Distinction-Node | The ordered distinction itself, intrinsically containing ordering. | 3.1A |
 | $TC_{asym}$ | Asymmetric Triadic Closure | Higher-order closure relation involving three or more distinction-nodes. | 4.X, 11.2 |
 | $\mid$ | Closure Participation | Marker for grouped participation in a closure relation (e.g., $N_2 \mid N_3$). | 4.X |
@@ -2365,7 +2537,7 @@ Within these models, $\Sigma_D$ remains a definition candidate. The recovery con
 | $R_{\leftrightarrow}$ | Residue Relation | Core Candidate | Residue as relational operand (studies coupling/recoupling). |
 | $\leftrightarrow_R$ | Residue Closure | Core Candidate | Residue as conditioning structure for process validity. |
 | $(A \leftrightarrow_R B)=\text{True}$ | R-Truth Condition | Candidate | Denotes that a relation is valid while closure is maintained. |
-| $0\text{-state}$ | Zero State | Core | The state of non-existence resulting from closure decoupling. |
+| $0\text{-state}$ | Zero State | Core | The fully decoupled symmetry condition possessing zero distinction and zero degrees of freedom. |
 | $D(S_1\|S_2)$ | Directed Distinction | Core Primitive | Fundamental measure of relational mismatch; Relation is the primary computable object. |
 | $-(i)$ | Orientation Ref | Core Candidate | Provides the reference frame for resolving asymmetry. |
 | $\Psi$ | Inscription | Active | Updates the residue from process realizations. |
@@ -2540,31 +2712,45 @@ This appendix tracks the formal status of critical gaps identified during the dr
 ### 1. Provisional / Scratch Defined
 These items have candidate formalisms in the "Scratch Schema" (MS-SCRATCH-V1) or "Ordered Account" (Unity Math) but require canonical promotion.
 
-(All items previously listed here have been canonically promoted into the textbook text and are no longer provisional).
+- **Typed Meta-Relation Operator ($\langle*\rangle_x$):** [ **C1_DEFINED_PROVISIONAL** ] A lawful typed relation schema that couples two process expressions across a declared context $x$ without collapsing them into identity. General form: $A \langle*\rangle_x B$, preserving non-identity ($A \langle\neq\rangle_x B$). [Source: MPF_META_RELATION_X_DEFINITION_001].
+- **Zero-State Domain Membership:** [ **C1_DEFINED_PROVISIONAL** ] A fully decoupled symmetry condition possessing zero distinction and zero degrees of freedom. Governed by the rule $zero\_state \notin D\_domain$. Entry into the distinction domain occurs only via asymmetric recoupling ($0\_DOF \to D > 0$). [Source: MPF_ZERO_STATE_DOMAIN_MEMBERSHIP_001].
+- **Recoupling-Reorientation Event (RRE):** [ **C1_DEFINED_PROVISIONAL** ] A process event in which relational mismatch produces a coupling reorganization that results in an orientation update. Expressed as $\Delta C \to \Delta O \to \Delta A_{\text{adm}}$. Occurs when mismatch exceeds coupling tolerance ($Trigger_{RRE} := \Delta C_{\text{mismatch}} > \tau_C$). [Source: MPF_RECOUPLING_REORIENTATION_EVENT_001].
+- **Statistical Projection Relation ($\iff_s$):** [ **C1_DEFINED_PROVISIONAL** ] A projection relation mapping recurring admissible realization patterns into probability-like descriptions. Relies on parent meta-relation family $\langle*\rangle_x$. [Source: MPF_IFF_S_C1_PROVISIONAL_DEFINITION_001].
+- **Projection Signature:** [ **C1_DEFINED_PROVISIONAL** ] A recognizable pattern of constraints, outputs, and preserved relations showing that a process expression has lawfully projected into an application-facing domain ($Sig_{app}$). [Source: MPF_PROJECTION_SIGNATURE_C1_DEFINITION_001].
+- **Topology-to-Geometry Legality Transform ($\Pi_{\text{geo}}$):** [ **C1_DEFINED_PROVISIONAL** ] A projection condition under which a stabilized topological organization may be represented as geometry_app without treating geometry as primitive. [Source: MPF_TOPOLOGY_GEOMETRY_LEGALITY_C1_DEFINITION_001].
+- **Empirical Mapping Standards (EMS):** [ **C1_DEFINED_PROVISIONAL** ] The governance framework regulating how process-domain expressions may be associated with external observations, measurements, simulations, or physical claims. [Source: MPF_EMS_C1_DEFINITION_001].
+- **Topological Organization ($T$):** [ **C1_DEFINED_PROVISIONAL** ] The admissibility-relevant organization of connectivity, boundary, orientation compatibility, and closure class generated by process history. [Source: TOPOLOGICAL_ORGANIZATION_TYPEDEF_001].
+- **Admissibility Structure ($A_{\text{adm}}$):** [ **C1_DEFINED_PROVISIONAL** ] The evolving legality landscape conditioned by topology and residue that filters and constrains candidate continuations. [Source: PRIN_2X_ADMISS_EVOL_001].
+- **Conditioning Trace:** [ **C1_DEFINED_PROVISIONAL** ] Process-generated trace (residue) that conditions future topology and admissibility. It is not an operator or substance. [Source: PRIN_2X_ADMISS_EVOL_001].
+- **Trace Priority:** [ **C1_DEFINED_PROVISIONAL** ] The principle that process identity is defined by the lawful continuation trace (history), not by its observable projections. [Source: RT-CORE-ATTACKS-001].
+- **Affect ($A$):** [ **C1_DEFINED_PROVISIONAL** ] The necessity condition for non-null distinction organization. It establishes the relational requirement for distinction before selection. [Source: AFFECT_FORMALIZATION_REVIEW_001].
+- **Knot-Class Selection:** [ **C1_DEFINED_PROVISIONAL** ] The process by which orientation and residue condition the set of admissible topological organizations (knots/braids). [Source: PO_OPEN_BRIDGE_001_SATISFACTION_REPORT].
+- **Directional Compatibility Constraint:** [ **C1_DEFINED_PROVISIONAL** ] The role of orientation in defining which transitions are topologically compatible with existing process basins. [Source: PO_OPEN_BRIDGE_001_SATISFACTION_REPORT].
+- **Admissibility Window ($\mathcal{A}$):** [ **C1_DEFINED_PROVISIONAL** ] The local domain of candidate continuation increments allowed for a process index under mismatch, capacity, and residue conditions. [Source: A_ALPHA_FORMALIZATION_REVIEW_001].
 
 ### 2. High-Priority Gaps (GAP_OPEN)
 These items remain unsettled and are the primary targets for future induction and research runs.
 
-- **Re-orientation Trigger Condition:** Formal condition for $\text{Arb}_A$ to escalate to orientation-selection [Source: MPF-IND-ARB-DELTA-DUAL-PHASE GAP-REORIENTATION-TRIGGER].
+- **Recoupling-Reorientation Event (RRE) Hardening:** [ **HARDENING_REQUIRED** ] Formulate the coupling mismatch metric $\Delta C_{\text{mismatch}}$ and tolerance threshold $\tau_C$; determine scale relativity of $\tau_C$ and verify residue lineage preservation under reorientation [Source: MPF_RECOUPLING_REORIENTATION_EVENT_001].
 - **$S$ Arbitration Rule:** [ **DEFINITION_TARGET_IDENTIFIED** ] Formal rule for the pruning stage inside the $\delta_a$ composition [Source: MPF-IND-ARB-DELTA-DUAL-PHASE GAP-S-RULE].
 - **Formal definition of Residue Relation ($R_{\leftrightarrow}$):** [ **DEFINITION_CANDIDATE_PENDING_FORMAL_PROMOTION** ] Defined in `operator_registry.json` and principle `PRIN-2-X` (refined).
 - **Formal difference between $R_{\leftrightarrow}$ and $\leftrightarrow_R$:** [ **RESOLVED_PENDING_CANONICAL_TEXTBOOK_SYNC** ] Rigorous separation between residue-as-operand ($R_{\leftrightarrow}$) and closure-support-through-residue ($\leftrightarrow_R$) is explicitly defined in governance patches and integrated into Chapter 2.
 - **Formal rules for Decoupling:** Defining the conditions under which a truth-condition becomes False.
-- **Zero-state Condition:** Formal algebraic definition of the collapse resulting from core decoupling.
-- **Projection-signature:** Defining how domain-specific signatures (QM vs GR) are extracted from $\leftrightarrow_R$.
+- **Asymmetric Recoupling and Distinction Emergence:** [ **HARDENING_REQUIRED** ] Define asymmetric recoupling mechanics and the distinction emergence law; determine whether RT exists below the distinction floor [Source: MPF_ZERO_STATE_DOMAIN_MEMBERSHIP_001].
+- **Projection Signature Hardening:** [ **HARDENING_REQUIRED** ] Define signature validation rules, signature comparison rules, projection-family-specific signatures, and false-positive signature exclusion [Source: MPF_PROJECTION_SIGNATURE_C1_DEFINITION_001].
 - **Formal operand of $\leftrightarrow_R$:** Defining the types allowed to participate in residue-conditioned closure.
 - **Vertical Bar Operator ($\mid$):** [ **C2_test_designed / CAMPAIGN_COMPLETED** ] Formally fixing the meaning of "grouped closure participation" in triadic closure. A candidate formal definition exists in `formal_object_registry [OBJ-grouped-bar-closure]` and `operator_registry.json` (status: `MUST_DEFINE_BEFORE_ORG_A_CLOSURE`). Group closure candidate symbol: $\text{Adm}_{|}^{G}$. Associativity and permutability default to NON-PROVEN until tested. Executable model verified under 4 controls and 5 metrics. [Patch: MPF_VERTICAL_BAR_INDUCTION_001, MPF_VERTICAL_BAR_CAMPAIGN_SCAFFOLD_PATCH_001, MPF_VERTICAL_BAR_EXECUTABLE_MODEL_PATCH_001; Campaign: MPF_BAR_OPERATOR_VALIDATION_001]
-- **Deviated Constraint Dynamics ($D \to \delta \alpha$):** [ **C2_test_designed / RECORDED_UNDER_AUDIT** ] Formalizing the principle that distinction reorganizes admissibility within the same process. Vortex feedback loop campaign executed, validated under 4 controls and currently under governance audit; non-Markov template designed. [Patch: MPF_DEVIATED_CONSTRAINT_DYNAMICS_PATCH_001, MPF_VORTEX_ADMISSIBILITY_EXECUTION_PATCH_001; Campaigns: MPF_VORTEX_ADMISSIBILITY_CAMPAIGN_001, MPF_NON_MARKOV_ORGANIZATION_TEST_001]
+- **Deviated Constraint Dynamics ($D \to \delta \alpha$):** [ **C2_test_designed / RECORDED_UNDER_AUDIT** ] Formalizing the principle that distinction reorganizes admissibility within the same process. Vortex feedback loop campaign executed and validated under 4 controls, with C++ equivalence established under oneAPI AVX2; currently under governance hold pending final verification. [Patch: MPF_DEVIATED_CONSTRAINT_DYNAMICS_PATCH_001, MPF_VORTEX_ADMISSIBILITY_EXECUTION_PATCH_001, [REMEDIATE_VORTEX_EXECUTION_PROVENANCE_001](file:///D:/projects/acellorator/patches/REMEDIATE_VORTEX_EXECUTION_PROVENANCE_001.json), [MPF_VORTEX_REMEDIATION_EXECUTION_001](file:///D:/projects/acellorator/patches/MPF_VORTEX_REMEDIATION_EXECUTION_001.json); Campaigns: MPF_VORTEX_ADMISSIBILITY_CAMPAIGN_001, MPF_NON_MARKOV_ORGANIZATION_TEST_001; Audits: AUDIT_VORTEX_GOVERNANCE_001, [AUDIT_TOOL_RIGOR_ENDORSEMENT_TRACE_001](file:///D:/projects/acellorator/audits/AUDIT_TOOL_RIGOR_ENDORSEMENT_TRACE_001/tool_authorization_audit.md)]
 - **Orientation Space $\mathcal{O}$:** [ **DEFINITION_CANDIDATE_PENDING_FORMAL_PROMOTION** ] Working informal definition active in §5.1.2 and §5.1.4. Candidate formal definition in `formal_object_registry [OBJ-orientation-space]`. Open requirement for OPEN_BRIDGE_001 is the **measurable metric** $C_{\text{orient}}$ and topological class measure $T_{\text{class metric}}$, not the space definition itself. Space definition is no longer classified as GAP_OPEN. [Audit: MPF_ORIENTATION_STALENESS_AUDIT_001 P4]
 - **Orientation Coherence Metric ($C_{\text{orient}}$):** [ **VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT** ] Candidate definition active in textbook §5.1.5 (Formal Statement 5.1.5): $C_{\text{orient}}(\chi_D) := 1 - \text{Var}_{\text{norm}}(\{-(i)_k \mid -(i)_k \in \mathcal{O}_{\text{adm}}(\chi_D)\})$. Non-circularity constraint active (C_ORIENT_NONCIRCULARITY_001): metric must be computable before topology class or closure stability is evaluated. Canonical registry entry: `registry/math/metric_registry.json`. Binds to OPEN_BRIDGE_001 PO_001. [Patch: [MPF_PO001_C_ORIENT_VALIDATION_EXECUTION_PATCH_001](file:///D:/projects/acellorator/patches/MPF_PO001_C_ORIENT_VALIDATION_EXECUTION_PATCH_001.json)]
 - **Topological Class Variance Measure ($T_{\text{class\_metric}}$):** [ **VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT** ] Candidate definition active in textbook §11.X (Formal Statement 11.X): $T_{\text{class\_metric}}(G_K) := [T_k, b(T_k), \text{inv}(G_K)]$ with minimal class family $T_0$–$T_4$, $T_x$. Non-circularity constraint active (T_CLASS_NONCIRCULARITY_001): must classify topology blind to orientation regime. Canonical registry entry: `registry/math/metric_registry.json`. Binds to OPEN_BRIDGE_001 PO_002 and PO_003. [Patch: [MPF_PO002_VALIDATION_CLOSURE_PATCH_001](file:///D:/projects/acellorator/patches/MPF_PO002_VALIDATION_CLOSURE_PATCH_001.json)]
 
-- **Topology-to-Geometry Transform:** Provisional `Pi_geo : Topology_app -> Geometry_app` legality gate. Promotion requires distinction, admissibility, orientation, and closure preservation plus campaign evidence. (Ref: 11.3, 11.5)
-- **Empirical Mapping Standards:** Mapping framework metrics ($\Omega_a$, $B_K$) to physical constants ($G, h, c$). (Ref: 12.5)
-- **Formal definition of $\otimes$:** The composition and interference rules for composite directional coupling. (Ref: 9.1, 9.4)
-- **Formal definition of $\iff_s$:** The exact mapping between mismatch intensity and statistical realization. (Ref: 7.3)
+- **Topology-to-Geometry Hardening:** [ **HARDENING_REQUIRED** ] Prove topology-to-geometry proof obligations, validate metric extraction, validate projection-signatures, exclude false geometry projections, and obtain replication and rigor endorsement [Source: MPF_TOPOLOGY_GEOMETRY_LEGALITY_C1_DEFINITION_001].
+- **Empirical Mapping Standards Hardening:** [ **HARDENING_REQUIRED** ] Define EMS audit procedures, EMS evidence thresholds, and EMS replication standards [Source: MPF_EMS_C1_DEFINITION_001].
+- **Formal definition of $\otimes$ (Coupling Projection):** [ **CHILD_HARDENING_MEMBER_OF_<*>_x** ] The composition and interference rules for composite directional coupling. Relies on parent meta-relation family [Source: MPF_META_RELATION_FAMILY_RESTRUCTURE_001].
+- **Statistical Projection Hardening:** [ **HARDENING_REQUIRED** ] Define $F_s$ explicitly, define observation-window rules, and define ensemble/trace equivalence restrictions [Source: MPF_IFF_S_C1_PROVISIONAL_DEFINITION_001].
 - **Truth conditions for $<\neq>_X$:** Formal criteria for when preserved non-identity holds, fails, becomes directional, or reduces to already existing coupling language. (Ref: 3.X)
-- **Meta Relation Schema ($<*>_x$):** Formal family-level language for legal binary relation operators without granting the schema proof-operator status. (Ref: Appendix B)
+- **Meta-Relation Family Hardening:** [ **HARDENING_REQUIRED** ] Define context typing rules for $x$, define promotion rules for family members, define when a $\langle*\rangle_x$ relation becomes metric, statistical, coupling, or residue-conditioned, and audit all existing uses of $\langle*\rangle_x$, $\otimes$, $\iff_s$, $\iff_m$, and $\iff_R$ for family alignment [Source: MPF_META_RELATION_X_DEFINITION_001].
 
 ### F.3 Open Bridge Registry
 | Bridge ID | Name | Current Status | Claim Cap |
@@ -2574,7 +2760,7 @@ These items remain unsettled and are the primary targets for future induction an
 ### F.4 Bridge Dependency Tables
 - **OPEN_BRIDGE_001 Requires Rewrite/Reroute Review For:** TC_asym, K, B_K.
 - **OPEN_BRIDGE_001 Does Not Auto-Promote:** topology_app, geometry_app, gravity_app, matter_app, field_app, QM_app_GR_app_bridge.
-- **Topology_to_Geometry_Hardening:** `Topology_app -> Geometry_app` remains `PROJECTION_LEGALITY_REQUIRED` pending `L099`, `L100`, and `GEO_PROJECTION_VALIDATION_001`; no downstream auto-promotion follows from geometric expressiveness alone.
+
 
 ### F.5 Active Attack Campaigns
 - **LFCR_001:** Attacking OPEN_BRIDGE_001. Surfaces: AS_001 through AS_008.
@@ -2583,7 +2769,7 @@ These items remain unsettled and are the primary targets for future induction an
 - **PD_CG_V3_SUBSCRIPT_DISCOVERY:** Baseline-vs-qualified preserved-distinction campaign after the `_R` route failed as tested.
 - **PD_CG_V3_AFFIX_POSITION_TEST:** Bare-vs-subscripted-vs-prefixed reciprocal relation comparison; affix position is treated as semantically binding until tested.
 - **MPF_BAR_OPERATOR_VALIDATION_001:** Test | as a distinction-preserving comparison operator under 4 controls and 5 metrics; campaign completed and validated under executable model. [Patch: MPF_VERTICAL_BAR_CAMPAIGN_SCAFFOLD_PATCH_001, MPF_VERTICAL_BAR_EXECUTABLE_MODEL_PATCH_001]
-- **MPF_VORTEX_ADMISSIBILITY_CAMPAIGN_001:** Investigate whether admissibility updates systematically condition subsequent distinction events (D -> δα feedback loops); campaign executed, validated and currently under governance audit. [Patch: MPF_VORTEX_ADMISSIBILITY_CAMPAIGN_001, MPF_VORTEX_ADMISSIBILITY_EXECUTION_PATCH_001]
+- **MPF_VORTEX_ADMISSIBILITY_CAMPAIGN_001:** Investigate whether admissibility updates systematically condition subsequent distinction events (D -> δα feedback loops); campaign executed in C++ with verified Python equivalence, currently under governance hold pending final verification. [Patch: MPF_VORTEX_ADMISSIBILITY_CAMPAIGN_001, MPF_VORTEX_ADMISSIBILITY_EXECUTION_PATCH_001, [REMEDIATE_VORTEX_EXECUTION_PROVENANCE_001](file:///D:/projects/acellorator/patches/REMEDIATE_VORTEX_EXECUTION_PROVENANCE_001.json), [MPF_VORTEX_REMEDIATION_EXECUTION_001](file:///D:/projects/acellorator/patches/MPF_VORTEX_REMEDIATION_EXECUTION_001.json); Audits: AUDIT_VORTEX_GOVERNANCE_001, [AUDIT_TOOL_RIGOR_ENDORSEMENT_TRACE_001](file:///D:/projects/acellorator/audits/AUDIT_TOOL_RIGOR_ENDORSEMENT_TRACE_001/tool_authorization_audit.md)]
 - **MPF_NON_MARKOV_ORGANIZATION_TEST_001:** Probe if future admissibility dynamics depend on cumulative history integration rather than prior state alone; campaign designed. [Patch: MPF_NON_MARKOV_ORGANIZATION_TEST_001]
 
 ### F.6 Bridge Resolution History
@@ -2635,6 +2821,8 @@ This textbook draft is derived from and cross-referenced with the following foun
 | **IND-STATE-S-001** | [Induction: State Primitive Grounding](D:/projects/acellorator/docs/textbook/mono_process_textbook_complete.md) | 2026-05-29 | Non-spatial, monistic definition of the state aspect S. |
 | **MPF-P1-003** | [Patch: Invariant Registry Implementation](D:/projects/acellorator/registry/math/invariant_registry.json) | 2026-05-29 | Implementation of the initial invariant family for projectional equivalence. |
 | **MPF-P1-004** | [Patch: Projectional Equivalence Template](D:/projects/acellorator/docs/theory/foundational/5_03_26%20unity/math/proofs/PROJECTIONAL_EQUIVALENCE_TEMPLATE.md) | 2026-05-29 | Formal proof structure for verifying invariant preservation across domains. |
+| **L101–L105** | [Lemmas L101–L105](D:/projects/acellorator/docs/theory/foundational/5_03_26%20unity/math/lemmas/) | 2026-06-21 | Formulations of Whole Expression Primacy, Zero-State domain membership, Recoupling-Reorientation Event, Meta-Relation Family, and Typed Meta-Relation Operator ($\langle*\rangle_x$). |
+| **P101–P105** | [Proofs P101–P105](D:/projects/acellorator/docs/theory/foundational/5_03_26%20unity/math/proofs/) | 2026-06-21 | Formal proof sketches and validation structures for Lemmas L101–L105. |
 
 ### Secondary References and Registries
 - **Compliance Charter v2.3:** [compliance_charter_v2_3.json](D:/projects/acellorator/docs/registry/compliance_charter_v2_3.json) - Governance authority.

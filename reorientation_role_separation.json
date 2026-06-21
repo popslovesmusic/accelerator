@@ -1,0 +1,49 @@
+{
+  "document_type": "role_separation_specification",
+  "context": "Mono-Process Continuation Pipeline",
+  "roles": {
+    "Trigger_Reorient": {
+      "type": "control_rule",
+      "responsibility": "invokes orientation reassessment",
+      "constraints": [
+        "does not perform orientation transport",
+        "does not define or select new orientation reference -(i)",
+        "does not select realized continuation q*",
+        "does not perform realization"
+      ]
+    },
+    "NavT": {
+      "type": "orientation_transport_operator",
+      "responsibility": "performs reorientation transport and orientation-reference update",
+      "constraints": [
+        "does not invoke reorientation on its own",
+        "does not prune candidates",
+        "does not realize state transitions"
+      ]
+    },
+    "Arb_A": {
+      "type": "realization_arbitration_operator",
+      "responsibility": "selects realized continuation q* from admissible candidate pool",
+      "constraints": [
+        "remains strictly downstream of restored admissible candidate pool",
+        "does not own trigger semantics",
+        "does not perform transport updates"
+      ]
+    },
+    "S": {
+      "type": "sequential_pruner",
+      "responsibility": "prunes candidate pool before Arb_A",
+      "constraints": [
+        "does not select realized continuation q*",
+        "does not trigger reorientation"
+      ]
+    }
+  },
+  "negative_constraints": [
+    "Trigger_Reorient is not Arb_A.",
+    "Trigger_Reorient is not NavT.",
+    "Trigger_Reorient is not realization.",
+    "Trigger_Reorient does not select q*.",
+    "Trigger_Reorient does not promote topology, geometry, or physics-app claims."
+  ]
+}

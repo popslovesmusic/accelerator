@@ -1,0 +1,47 @@
+{
+  "audit_id": "MPF_REORIENTATION_TRIGGER_AUDIT_001",
+  "target": "Re_orientation_Trigger_Condition",
+  "recommendation": {
+    "primary_ruling": "PARTIALLY_DEFINED",
+    "supporting_rulings": [
+      "CONTROL_PATH_IDENTIFIED",
+      "SYMBOL_CONFLATION_PRESENT"
+    ],
+    "recommended_status_if_adopted": "DEFINITION_TARGET_IDENTIFIED",
+    "recommended_next_patch": "MPF_REORIENTATION_TRIGGER_DEFINITION_PATCH_001",
+    "recommended_classification": "pre_realization_control_rule",
+    "recommended_operator_position": "delta_a downstream failure and closure-review gate, upstream of orientation transport and downstream of candidate pruning"
+  },
+  "recommended_definition_boundaries": [
+    "Do not define the trigger as Arb_A realization selection.",
+    "Do not define the trigger as NavT itself.",
+    "Keep orientation generation distinct from orientation reassessment.",
+    "Allow invocation from delta_a empty-image, S empty-pruned-pool, closure-threshold loss, or admissible deformation requiring new orientation reference.",
+    "Do not bind the trigger to post-realization outcomes."
+  ],
+  "recommended_follow_on_objects": [
+    {
+      "object_name": "Re_orientation_Trigger_Condition",
+      "suggested_registry_home": "formal_object_registry.json",
+      "suggested_status": "DEFINITION_CANDIDATE"
+    },
+    {
+      "object_name": "Trigger_Reorient_control_rule",
+      "suggested_registry_home": "operator_registry.json",
+      "suggested_status": "DEFINITION_CANDIDATE_PENDING_VALIDATION"
+    }
+  ],
+  "non_promotion_limits": [
+    "No theorem promotion.",
+    "No topology, geometry, or physics-app promotion.",
+    "Do not infer external physical behavior from the control-path audit.",
+    "Do not collapse Arb_A, Trigger_Reorient, and NavT into one operator."
+  ],
+  "basis": [
+    "registry/governance/patches/MPF_PATCH_R_DUAL_PHASE_FIXES_002.json",
+    "registry/operator_registry.json",
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/lexicon_canonical.json",
+    "registry/lexicon_gap_queue.json"
+  ]
+}

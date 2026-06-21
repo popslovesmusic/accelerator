@@ -1,0 +1,38 @@
+{
+  "patch_id": "MPF_S_ARBITRATION_VALIDATION_CLOSURE_001",
+  "status": "PASSED_PENDING_RIGOR_ENDORSEMENT",
+  "scope": "validation_status_update",
+  "claim_effect": "NO_THEOREM_PROMOTION",
+  "target": "S_arbitration_rule",
+  "basis": [
+    "VAL-S-ARB-001",
+    "outputs/s_validation/s_validation_report.md"
+  ],
+  "ruling": {
+    "validation_status": "PASS",
+    "S_prunes_candidate_pool": true,
+    "S_distinct_from_Arb_A": true,
+    "Arb_A_operates_on_C_t_S": true,
+    "S_does_not_select_realization": true
+  },
+  "status_transition": {
+    "S_arbitration_rule": {
+      "from": "DEFINITION_CANDIDATE_PENDING_VALIDATION",
+      "to": "VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT"
+    }
+  },
+  "required_actions": [
+    "Update operator_registry.json S_arbitration_rule status.",
+    "Update Appendix F S Arbitration Rule entry.",
+    "Add validation closure note to Chapter 6 delta_a / S section.",
+    "Record VAL-S-ARB-001 as validation basis.",
+    "Run global validation."
+  ],
+  "explicit_limits": [
+    "No theorem promotion.",
+    "No topology, geometry, or physics-app promotion.",
+    "Tie-break behavior inside Arb_A remains open.",
+    "Future engines must not conflate S pruning with Arb_A arbitration."
+  ],
+  "next_after_closure": "MPF_REORIENTATION_TRIGGER_AUDIT_001"
+}

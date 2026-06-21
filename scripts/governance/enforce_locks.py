@@ -1,7 +1,13 @@
+import sys
+from pathlib import Path
+
+# Add project root to sys.path
+root_dir = str(Path(__file__).resolve().parent.parent.parent)
+if root_dir not in sys.path:
+    sys.path.insert(0, root_dir)
+
 import json
 import hashlib
-from pathlib import Path
-import sys
 
 def calculate_hash(path):
     try:
@@ -45,6 +51,19 @@ def enforce_locks():
         return False
 
     print("[SUCCESS] Foundational core integrity verified.")
+    
+    # Run Governance Integrity Locks
+    print("[GOVERNANCE] Enforcing Governance Integrity Locks...")
+    from scripts.governance.enforce_governance_integrity import check_integrity
+    gov_res = check_integrity(root)
+    if gov_res["status"] != "success":
+        print("\n[CRITICAL ERROR] Governance Integrity Violation Detected!")
+        for err in gov_res["errors"]:
+            print(f"  - {err}")
+        print("\n[ACTION REQUIRED] Modifications to governance assets require approval ledger entries and differential reports.")
+        return False
+        
+    print(f"[SUCCESS] Governance integrity verified. {gov_res['verified_count']} assets verified.")
     return True
 
 if __name__ == "__main__":

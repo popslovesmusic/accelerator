@@ -1,0 +1,74 @@
+{
+  "patch_id": "MPF_RECOUPLING_REORIENTATION_EVENT_001",
+  "target": "Appendix F",
+  "status_change": {
+    "from": "GAP_OPEN",
+    "to": "C1_DEFINED_PROVISIONAL"
+  },
+  "object": "Recoupling_Reorientation_Event",
+  "definition": "A process event in which relational mismatch produces a coupling reorganization that results in an orientation update.",
+  "core_chain": [
+    "relational_mismatch",
+    "recoupling",
+    "reorientation",
+    "admissibility_update"
+  ],
+  "formal_candidate": {
+    "expression": "ΔC -> ΔO -> ΔA_adm",
+    "reading": "A change in coupling organization produces a change in orientation organization, which updates admissibility."
+  },
+  "components": {
+    "recoupling": {
+      "definition": "A change in admissible relational coupling organization.",
+      "implicit_condition": "asymmetry is implicit because coupling change requires nonzero mismatch"
+    },
+    "reorientation": {
+      "definition": "The resulting update from one active orientation organization to another.",
+      "formal_candidate": "O_1 -> O_2 where O_1 != O_2"
+    }
+  },
+  "trigger": {
+    "definition": "Recoupling-reorientation occurs when relational mismatch exceeds the current admissible coupling tolerance.",
+    "formal_candidate": "Trigger_RRE := ΔC_mismatch > τ_C"
+  },
+  "preservation_rule": {
+    "preserved": [
+      "process_continuity",
+      "residue_lineage"
+    ],
+    "updated": [
+      "coupling_structure",
+      "orientation_structure",
+      "admissibility_pathway"
+    ]
+  },
+  "zero_state_relation": {
+    "statement": "Zero-State is not admissible to the distinction domain unless it undergoes asymmetric recoupling.",
+    "formal_candidate": "Zero_State --asymmetric_recoupling--> D > 0",
+    "note": "This establishes recoupling as the entry mechanism from fully decoupled zero-DOF condition into the distinction domain."
+  },
+  "implicit_primitives": [
+    "distinction",
+    "asymmetry",
+    "mismatch"
+  ],
+  "non_equivalences": [
+    "recoupling is not arbitrary relabeling",
+    "reorientation is not random direction change",
+    "zero-state recoupling is not creation from nonexistence"
+  ],
+  "remaining_hardening": [
+    "Define coupling mismatch metric ΔC_mismatch.",
+    "Define admissible tolerance threshold τ_C.",
+    "Define whether τ_C is local, global, or domain-relative.",
+    "Test whether RRE preserves residue lineage under orientation update."
+  ],
+  "appendix_f_effect": {
+    "remove_or_downgrade": [
+      "Reorientation Trigger",
+      "Recoupling Definition"
+    ],
+    "new_entry": "Recoupling-Reorientation Event hardening",
+    "classification": "HARDENING_REQUIRED after C1 provisional definition"
+  }
+}

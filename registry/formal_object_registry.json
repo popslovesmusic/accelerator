@@ -1170,7 +1170,9 @@
       "runtime_visibility": true,
       "symbol": "|",
       "canonical_form": "A | B",
-      "definition": "Define the vertical bar operator as the primitive admissible participation separator used inside distinction-generating expressions.",
+      "canonical_name": "distinction-preserving comparison operator",
+      "definition": "The vertical bar operator compares one process-aspect to another while preserving non-collapse sufficient for distinction generation.",
+      "reading": "A compared to B under preserved distinction.",
       "operand_rules": {
         "valid_operands": [
           "primitive distinction candidates",
@@ -1191,9 +1193,42 @@
         "orientation_statement": "A | B is not generally equivalent to B | A."
       },
       "closure_rules": {
-        "local_closure": "A bar expression is locally closed when both operands are admissibly typed and the interface relation is legally evaluable under D.",
+        "local_closure": "A bar expression is locally closed when both operands are admissibly typed and the comparison relation is legally evaluable under D.",
         "grouped_closure": "Grouped bar expressions require a separate group-closure rule."
       },
+      "negative_constraints": [
+        "not logical OR",
+        "not division",
+        "not mere separator",
+        "not equality",
+        "not additive combination",
+        "not multiplicative combination",
+        "not a memory object",
+        "not a stored residue container"
+      ],
+      "primitive_role": {
+        "bar": "comparison condition",
+        "D": "realized distinction generated from comparison",
+        "delta_alpha": "deviated admissibility produced after distinction",
+        "Affect_prime": "renewed Affect under deviated constraint"
+      },
+      "same_process_constraint_note": "Distinction generated through | is governed as deviated constraint within the same process, not as a separate residue object.",
+      "formal_candidate": {
+        "form": "A | B := Compare_C(A,B) ∧ D_C(A|B) > ε_a",
+        "reading": "A compared to B without collapse under declared context C.",
+        "output_type": "comparison condition, not distinction itself",
+        "Compare_C_note": "Compare_C is the minimal declared comparison context licensing D_C to evaluate. It is not a state container or memory object.",
+        "TS0_status": "formal_candidate — no evidence yet; campaign design required before promotion",
+        "patch_source": "MPF_VERTICAL_BAR_OPERATOR_DEFINITION_PATCH_001"
+      },
+      "governance_status": {
+        "claim_level": "C1_DEFINED_TO_C2_TESTABLE_CANDIDATE",
+        "theorem_status": "not_theorem",
+        "evidence_status": "campaign_design_required"
+      },
+      "patch_bindings": [
+        "patches/MPF_VERTICAL_BAR_INDUCTION_001.json"
+      ],
       "dependencies": [],
       "blocked_downstream_objects": [
         "Org_a_axioms",
@@ -1283,6 +1318,29 @@
         "T_SIG_PROJECTION_DISCIPLINE_001"
       ],
       "runtime_visibility": "public"
+    },
+    {
+      "object_id": "OBJ-REORIENTATION-TRIGGER-CONDITION",
+      "object_class": "operator",
+      "title": "Re_orientation_Trigger_Condition",
+      "status": "DEFINITION_CANDIDATE",
+      "source_bindings": [
+        "registry/operator_registry.json",
+        "patches/MPF_REORIENTATION_TRIGGER_DEFINITION_PATCH_001/reorientation_trigger_operator_spec.json"
+      ],
+      "dependency_links": [
+        "OBJ-Delta",
+        "OBJ-S-PRUNED-CANDIDATE-SET"
+      ],
+      "claim_scope": "formal_procedural_only",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "Trigger_Reorient",
+      "canonical_form": "Trigger_Reorient(x,c,R_↔,C_t,C_t^S) = TRUE iff [δ_a(x;c)=∅] OR [C_t^S=∅] OR [S_closure < τ_R] OR [Def_a(x,c) requires new -(i)]",
+      "formal_definition": "A control rule that diverts the continuation pipeline into orientation reassessment when the current orientation regime cannot sustain admissible continuation.",
+      "non_promotion_note": "This control rule manages pre-realization orientation triggers only. It does not select realized continuation q* and does not promote topology, geometry, or physics-app claims."
     }
   ],
   "registry_bindings": [

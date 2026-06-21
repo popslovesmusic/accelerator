@@ -1,0 +1,24 @@
+{
+  "operator_id": "Trigger_Reorient",
+  "symbol": "Trigger_Reorient",
+  "name": "Re-orientation Trigger Condition",
+  "class": "control_rule",
+  "domain": [
+    "state x",
+    "context c",
+    "residue relation R_↔",
+    "candidate set C_t",
+    "pruned set C_t^S"
+  ],
+  "codomain": "boolean",
+  "trigger_logic": {
+    "formula": "Trigger_Reorient(x,c,R_↔,C_t,C_t^S) = TRUE iff [δ_a(x;c)=∅] OR [C_t^S=∅] OR [S_closure < τ_R] OR [Def_a(x,c) requires new -(i)]"
+  },
+  "branches": {
+    "false_case": "If FALSE, ordinary Arb_A realization proceeds over C_t^S.",
+    "success_branch": "If TRUE and NavT produces admissible -(i)', re-enter δ_a under -(i)'.",
+    "failure_branch": "If TRUE and no admissible orientation exists, enter 0-state collapse review."
+  },
+  "pipeline_position": "after δ_a/S failure or closure-support degradation, before ordinary Arb_A realization",
+  "status": "DEFINITION_CANDIDATE_PENDING_VALIDATION"
+}

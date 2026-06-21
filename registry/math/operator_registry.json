@@ -208,10 +208,91 @@
       "provisional_status": true
     },
     {
+      "symbol": "|",
+      "name": "Distinction-Preserving Comparison Operator",
+      "definition": "Compares one typed process-aspect to another while preserving non-collapse sufficient for distinction generation.",
+      "domain": [
+        "typed_process_aspect",
+        "typed_process_aspect"
+      ],
+      "codomain": [
+        "comparison_interface"
+      ],
+      "arity": "binary",
+      "closure_status": "conditional",
+      "closure_condition": "A|B becomes mathematically active only when evaluated by D or a registered successor comparison context.",
+      "known_failure_modes": [
+        "identity_collapse",
+        "untyped_operand",
+        "admissibility_failure",
+        "memory_object_reification"
+      ],
+      "negative_constraints": [
+        "not_logical_or",
+        "not_division",
+        "not_mere_separator",
+        "not_memory_object"
+      ],
+      "governance_status": "C1_DEFINED_TO_C2_TESTABLE_CANDIDATE",
+      "provisional_status": true
+    },
+    {
       "symbol": "delta_a",
       "name": "Admissibility Filter Operator",
       "definition": "Filters a comparison block, yielding only the subset accepted as a lawful comparison object.",
       "arity": "unary",
+      "provisional_status": true
+    },
+    {
+      "symbol": "S",
+      "name": "Sequential Pruning Operator",
+      "definition": "Internal delta_a stage that prunes a candidate continuation set before realization arbitration.",
+      "domain": [
+        "continuation_space",
+        "residue_state",
+        "orientation_frame",
+        "admissibility_window"
+      ],
+      "codomain": [
+        "continuation_space"
+      ],
+      "arity": "n-ary",
+      "closure_status": "conditional",
+      "governance_status": "VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT",
+      "branch_pruning_rules": "registry/math/branch_pruning_registry.json",
+      "known_failure_modes": [
+        "BFM-003",
+        "BFM-004",
+        "BFM-009"
+      ],
+      "negative_constraints": [
+        "does_not_select_realized_continuation",
+        "does_not_increase_candidate_set_cardinality",
+        "does_not_depend_on_post_realization_outcomes"
+      ],
+      "provisional_status": true
+    },
+    {
+      "symbol": "Arb_A",
+      "name": "Admissibility-Governed Arbitration",
+      "definition": "Selection stage operating only on the S-pruned candidate set C_t^S to realize one continuation event.",
+      "domain": [
+        "continuation_space",
+        "residue_state",
+        "orientation_frame"
+      ],
+      "codomain": [
+        "continuation_event"
+      ],
+      "arity": "n-ary",
+      "closure_status": "conditional",
+      "selection_rules": "registry/math/delta_selection_registry.json",
+      "known_failure_modes": [
+        "DSFM-001",
+        "DSFM-002",
+        "DSFM-005",
+        "DSFM-006"
+      ],
       "provisional_status": true
     },
     {

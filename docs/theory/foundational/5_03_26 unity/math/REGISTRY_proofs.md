@@ -30,3 +30,13 @@ P032 | MT-003 Restricted Local Proof (Non-Empty Admissible Image) | MT-003 | res
 P033 | MT-002 Restricted Local Proof (Null-Path Transport Identity) | MT-002 | restricted_local_argument_only | additive bounded proof artifact; no theorem promotion
 P034 | MT-001 Restricted Local Proof (Projection Idempotence Under Stable Admissibility) | MT-001 | restricted_local_argument_only | additive bounded proof artifact; no theorem promotion
 P_GEO_001 | Projection Legality Lemma Scaffold | L099,L100,OPEN_BRIDGE_001 | restricted_local_argument_only | bounded proof path for PO-GEO-001; no geometry or physics promotion
+P101 | Universal Meta-Relation Proof | L101, L045 | restricted_local_argument_only | Bounded inseparability proof for RT := [Affect|Effect <*>_x QM|GR]
+P102 | Zero-State Domain Membership Proof | L102, T001 | restricted_local_argument_only | Bounded justification of zero-state exclusion and recoupling emergence
+P103 | Recoupling-Reorientation Event Proof | L103, L043 | restricted_local_argument_only | Bounded justification of recoupling-reorientation trigger sequence
+P104 | Meta-Relation Family Restructure Proof | L104, L101 | restricted_local_argument_only | Bounded justification of projection operators dependency on <*>_x
+P105 | Typed Meta-Relation Operator Proof | L105, L102 | restricted_local_argument_only | Bounded justification of non-identity constraints and truth conditions
+
+
+
+
+

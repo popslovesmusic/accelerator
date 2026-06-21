@@ -174,9 +174,42 @@
       ],
       "composition_rules": [
         "Transitivity across admissibility chains",
-        "Maps among admissible orientation conditions in O rather than through primitive space"
+        "Maps among admissible orientation conditions in O rather than through primitive space",
+        "Acts as confirmed reorientation transport mechanism invoked by Trigger_Reorient"
       ],
-      "status": "C1_DEFINED_PROVISIONAL"
+      "status": "REORIENTATION_TRANSPORT_ROLE_CONFIRMED"
+    },
+    {
+      "symbol": "Trigger_Reorient",
+      "latex": "\\text{Trigger}_{Reorient}",
+      "name": "Re-orientation Trigger Condition",
+      "class": "control_rule",
+      "domain": "State x, context c, residue relation R_↔, candidate set C_t, pruned set C_t^S",
+      "codomain": "boolean",
+      "closure_condition": "Evaluates to TRUE to divert pipeline to reassessment when admissible continuation is unsustainable, else FALSE.",
+      "collapse_mode": "No admissible orientation reference exists under NavT -> 0-state collapse review",
+      "pipeline_position": "after δ_a/S failure or closure-support degradation, before ordinary Arb_A realization",
+      "trigger_logic": "Trigger_Reorient(x,c,R_↔,C_t,C_t^S) = TRUE iff [δ_a(x;c)=∅] OR [C_t^S=∅] OR [S_closure < τ_R] OR [Def_a(x,c) requires new -(i)]",
+      "branches": {
+        "false_case": "If FALSE, ordinary Arb_A realization proceeds over C_t^S.",
+        "success_branch": "If TRUE and NavT can produce admissible -(i)', re-enter δ_a under -(i)'.",
+        "failure_branch": "If TRUE and no admissible orientation exists, enter 0-state collapse review."
+      },
+      "role_separation": {
+        "Trigger_Reorient": "invokes orientation reassessment",
+        "NavT": "performs reorientation transport / orientation-reference update",
+        "Arb_A": "selects realized continuation only after admissible candidate pool exists",
+        "S": "prunes candidate pool before Arb_A"
+      },
+      "negative_constraints": [
+        "Trigger_Reorient is not Arb_A.",
+        "Trigger_Reorient is not NavT.",
+        "Trigger_Reorient is not realization.",
+        "Trigger_Reorient is not orientation generation itself.",
+        "Trigger_Reorient does not select q*.",
+        "Trigger_Reorient does not promote topology, geometry, or physics-app claims."
+      ],
+      "status": "DEFINITION_CANDIDATE_PENDING_VALIDATION"
     },
     {
       "symbol": "Arb_A",
@@ -188,7 +221,7 @@
       "collapse_mode": "Admissibility collapse (empty candidate intersection)",
       "composition_rules": [
         "Precedes interaction and projection",
-        "Escalates to orientation-selection when current admissible continuation cannot preserve closure support under the existing orientation pattern",
+        "Ordinary Arb_A realization proceeds over C_t^S only when Trigger_Reorient = FALSE. Arb_A does not own reorientation trigger semantics.",
         "Consumes the S-stage pruned candidate set before realization"
       ],
       "candidate_rules": {
@@ -201,7 +234,62 @@
           "orientation compatibility",
           "arbitration ranking"
         ]
-      }
+      },
+      "status": "TRIGGER_OWNERSHIP_REMOVED"
+    },
+    {
+      "symbol": "S",
+      "latex": "S_{R,A}",
+      "name": "Sequential Pruning Operator",
+      "class": "sequential_pruning_operator",
+      "canonical_object_id": "S_arbitration_rule",
+      "canonical_form": "S_{R,A}(C_t) -> C_t^S",
+      "domain": "Candidate continuation set C_t under delta_a, distinction organization chi_D, residue relation R_<->, admissibility structure A_adm",
+      "codomain": "Pruned candidate continuation set C_t^S",
+      "closure_condition": "Removes candidates that fail sequential admissibility constraints before Arb_A ranks and selects a realized continuation.",
+      "collapse_mode": "Admissibility branch collapse or re-orientation trigger review when C_t^S = emptyset",
+      "composition_rules": [
+        "Positioned as an internal delta_a stage after candidate generation and before Arb_A realization arbitration",
+        "Prunes candidates sequentially by type admissibility, nonzero distinction, residue compatibility, topology preservation, and orientation compatibility",
+        "Does not select the realized continuation and does not use post-realization outcomes"
+      ],
+      "formal_candidate": {
+        "candidate_set": "C_t := {q_i | q_i is admissible under initial delta_a constraints}",
+        "pruned_set": "C_t^S := {q_i in C_t | S_R,A(q_i, chi_D, R_<->, A_adm) = PASS}",
+        "failure_condition": "C_t^S = emptyset -> admissibility branch collapse or re-orientation trigger review"
+      },
+      "pipeline_position": [
+        "E(chi_D) > 0",
+        "delta_a generates candidate continuation set C_t",
+        "S_R,A prunes C_t into C_t^S",
+        "Arb_A selects q* from C_t^S",
+        "Delta realizes q*"
+      ],
+      "negative_constraints": [
+        "S is not Arb_A",
+        "S does not select the realized continuation",
+        "S does not compute T_class",
+        "S does not define residue",
+        "S must not depend on post-realization outcomes",
+        "S does not promote topology, geometry, or physics-app claims"
+      ],
+      "validation_basis": [
+        "VAL-S-ARB-001",
+        "outputs/s_validation/s_validation_report.md"
+      ],
+      "validation_closure_note": "Validated as a pruning stage distinct from Arb_A. Tie-break behavior remains open inside Arb_A, and future engines must not conflate S pruning with Arb_A arbitration.",
+      "explicit_limits": [
+        "No theorem promotion",
+        "No topology, geometry, or physics-app promotion",
+        "Tie-break behavior inside Arb_A remains open",
+        "Future engines must not conflate S pruning with Arb_A arbitration"
+      ],
+      "dependency_links": [
+        "delta_a",
+        "Arb_A",
+        "R_<->"
+      ],
+      "status": "VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT"
     },
     {
       "symbol": "R_\u2194",
@@ -515,13 +603,15 @@
       "symbol": "|",
       "latex": "|",
       "name": "vertical_bar_operator",
-      "domain": "Admissible distinction-participation separator inside grouped expressions",
-      "codomain": "Interface for co-participation in distinction-generating expressions",
-      "closure_condition": "A | B marks the oriented comparison interface through which A and B participate in a distinction-generating expression.",
+      "canonical_name": "distinction-preserving comparison operator",
+      "domain": "Two typed process-aspects compared under preserved distinction",
+      "codomain": "A comparison interface eligible for distinction generation when evaluated by D",
+      "closure_condition": "A | B marks the oriented comparison interface through which A and B are compared while preserving non-collapse sufficient for distinction generation.",
       "collapse_mode": "Legality Failure",
       "composition_rules": [
         "Used within TC_asym to mark co-participation in grouped expressions",
-        "Must be defined before Org_a closure is attempted"
+        "Must be defined before Org_a closure is attempted",
+        "Does not itself assert realized distinction until evaluated by D or a registered successor comparison context"
       ],
       "status": "MUST_DEFINE_BEFORE_ORG_A_CLOSURE",
       "arity": 2,
@@ -536,7 +626,65 @@
       "orientation_dependency": "Preserve_O(G)",
       "orientation_space": "O",
       "reversal_rule": "Reversal is legal only if Rev_|(A,B) or higher grouped orientation equivalence is proven.",
-      "group_preservation_rule": "Preserve_O(G -> G') := \u2203o \u2208 O(G), \u2203o' \u2208 O(G') such that G iff_R G' while preserving admissible orientation."
+      "group_preservation_rule": "Preserve_O(G -> G') := \u2203o \u2208 O(G), \u2203o' \u2208 O(G') such that G iff_R G' while preserving admissible orientation.",
+      "reading": "A compared to B under preserved distinction.",
+      "negative_constraints": [
+        "not logical OR",
+        "not division",
+        "not mere separator",
+        "not equality",
+        "not additive combination",
+        "not multiplicative combination",
+        "not a memory object",
+        "not a stored residue container"
+      ],
+      "primitive_role": {
+        "bar": "comparison condition",
+        "D": "realized distinction generated from comparison",
+        "delta_alpha": "deviated admissibility produced after distinction",
+        "Affect_prime": "renewed Affect under deviated constraint"
+      },
+      "same_process_constraint_note": "D(A|B) is governed as deviated constraint within the same process, not as creation of a separate process or stored residue object.",
+      "formal_candidate_expression": {
+        "form": "A | B := Compare_C(A,B) ∧ D_C(A|B) > ε_a",
+        "reading": "A compared to B without collapse under declared context C.",
+        "output_type": "comparison condition, not distinction itself",
+        "Compare_C_note": "Compare_C denotes the declared comparison context under which A and B are placed in a distinction-eligible relation. It is not a stored state or memory object; it is the minimal contextual license for D_C to evaluate.",
+        "D_C_note": "D_C(A|B) is the distinction evaluator scoped to context C. It does not assert realized distinction on its own; it gates the bar expression as admissibly active.",
+        "patch_source": "MPF_VERTICAL_BAR_OPERATOR_DEFINITION_PATCH_001"
+      },
+      "TS0_definition_record": {
+        "claim_level": "C1_DEFINED",
+        "theorem_status": "TS0",
+        "evidence_status": "NO_EVIDENCE_YET",
+        "definition_layer": "formal_candidate",
+        "allowed_use": "campaign design and hypothesis generation",
+        "forbidden_use": "theorem promotion or framework confirmation",
+        "note": "TS0 applies to the formal Compare_C candidate expression. The broader induction package remains at C1_DEFINED_TO_C2_TESTABLE_CANDIDATE per MPF_VERTICAL_BAR_INDUCTION_001."
+      },
+      "campaign_hypotheses": [
+        "H1_bar_necessity: removing | collapses or sharply degrades D generation",
+        "H2_bar_complexity: higher-order bar structures increase admissible organization opportunities when preservation holds",
+        "H3_deviated_admissibility: D(A|B) leaves admissibility different than before",
+        "H4_no_memory_object: observed persistence remains explainable as same-process deviated constraint"
+      ],
+      "governance_status": {
+        "claim_level": "C1_DEFINED_TO_C2_TESTABLE_CANDIDATE",
+        "theorem_status": "not_theorem",
+        "evidence_status": "campaign_design_required",
+        "allowed_use": [
+          "simulation design",
+          "operator registry candidate",
+          "textbook induction target",
+          "hypothesis generation"
+        ],
+        "forbidden_use": [
+          "theorem promotion",
+          "framework confirmation",
+          "ontology confirmation",
+          "rigor endorsement"
+        ]
+      }
     },
     {
       "symbol": "Org_a",

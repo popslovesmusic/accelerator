@@ -58,6 +58,9 @@ Every action must be grounded in the four foundational laws:
 
 ## 5. Permissions & Prohibitions
 
+
+### You must use only approved tools for simulations of any sort. approved tools are in tool registry. if no approved tool available flag and document in textbook appendix F.
+
 ### You MAY:
 - Execute any approved tool in the `tools/` directory.
 - Create experimental configs and result directories.

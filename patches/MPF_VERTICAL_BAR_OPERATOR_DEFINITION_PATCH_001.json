@@ -1,0 +1,35 @@
+{
+  "patch_id": "MPF_VERTICAL_BAR_OPERATOR_DEFINITION_PATCH_001",
+  "status": "ACTIVE",
+  "purpose": "Define | as a testable distinction-preserving comparison operator without promoting it to theorem status.",
+  "operator": {
+    "symbol": "|",
+    "name": "vertical_bar_operator",
+    "canonical_definition": "A | B is a distinction-preserving comparison between process-aspects A and B under a declared context.",
+    "minimal_reading": "A compared to B without collapse.",
+    "formal_candidate": "A | B := Compare_C(A,B) ∧ D_C(A|B) > ε_a",
+    "output": "comparison condition, not distinction itself"
+  },
+  "dependency_chain": [
+    "|",
+    "D(A|B)",
+    "δα",
+    "Affect'"
+  ],
+  "core_claim": "The bar does not create a new process; it enables distinction that deviates constraint within the same process.",
+  "registry_targets": [
+    "operator_registry.json",
+    "formal_object_registry.json",
+    "lexicon_gap_queue.json",
+    "mono_process_textbook_complete.md"
+  ],
+  "governance": {
+    "claim_level": "C1_DEFINED",
+    "theorem_status": "TS0",
+    "evidence_status": "NO_EVIDENCE_YET",
+    "allowed_use": "campaign design and hypothesis generation",
+    "forbidden_use": "theorem promotion or framework confirmation"
+  },
+  "governance_note": "Claim level C1_DEFINED / TS0 applies to the formal Compare_C candidate expression introduced by this patch. Prior induction patch MPF_VERTICAL_BAR_INDUCTION_001 holds C1_DEFINED_TO_C2_TESTABLE_CANDIDATE for the broader induction package. These are non-contradictory: this patch registers the formal candidate at TS0; the induction patch registers the testable hypothesis set.",
+  "applied_timestamp": "2026-06-20T12:03:53-04:00"
+}

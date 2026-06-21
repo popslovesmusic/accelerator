@@ -120,6 +120,7 @@ def validate_math_program(full_report=False):
         "residue_conservation": "validate_residue_conservation.py",
         "orientation_minimization": "validate_orientation_minimization.py",
         "branch_pruning": "validate_branch_pruning.py",
+        "s_arbitration": "validate_s_arbitration.py",
         "nonlocal_transport": "validate_nonlocal_transport.py",
         "theory_induction_template": "validate_theory_induction_template.py",
         "quantifier_explicitness": "validate_quantifier_explicitness.py",

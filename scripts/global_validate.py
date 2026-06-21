@@ -493,6 +493,20 @@ class CampaignValidator:
             results["status"] = "warning"
         return results
 
+class GovernanceIntegrityValidator:
+    def __init__(self, root_dir):
+        self.root = Path(root_dir)
+
+    def run(self):
+        from scripts.governance.enforce_governance_integrity import check_integrity
+        res = check_integrity(self.root)
+        return {
+            "status": "success" if res["status"] == "success" else "failed",
+            "errors": res["errors"],
+            "warnings": res["warnings"],
+            "verified_count": res["verified_count"]
+        }
+
 class UnifiedManifestValidator:
     def __init__(self, root_dir):
         self.root = Path(root_dir)
@@ -553,7 +567,8 @@ def main():
         "math_program_validation": MathProgramValidator(root, full_report=args.full_math_program).run(),
         "implementation_validation": ImplementationValidator(root).run(),
         "evidence_validation": EvidenceValidator(root).run(),
-        "campaign_validation": CampaignValidator(root).run()
+        "campaign_validation": CampaignValidator(root).run(),
+        "governance_integrity_validation": GovernanceIntegrityValidator(root).run()
     }
 
     report["overall_status"] = "pass" if all(v["status"] in ["success", "warning", "pass"] for k, v in report.items() if isinstance(v, dict)) else "fail"

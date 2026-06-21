@@ -1,0 +1,79 @@
+{
+  "patch_id": "MPF_META_RELATION_FAMILY_RESTRUCTURE_001",
+  "target": "Appendix_F",
+  "intent": "Prevent operator-family fragmentation and remove isolated treatment of ⊗.",
+  "status_change": {
+    "before": {
+      "<*>_x": "GAP_OPEN",
+      "⊗": "GAP_OPEN"
+    },
+    "after": {
+      "<*>_x": "PRIMARY_FAMILY_GAP",
+      "⊗": "FAMILY_MEMBER_DEPENDENT_ON_<*>_x"
+    }
+  },
+  "family_definition": {
+    "operator": "<*>_x",
+    "name": "Meta-Relation / Projection Family",
+    "definition": "The primitive schema governing lawful relations between relational organizations and their projections.",
+    "role": "Parent operator family from which specialized relational projections are derived."
+  },
+  "family_members": [
+    {
+      "symbol": "⊗",
+      "name": "Coupling Projection",
+      "definition": "Projection of <*>_x describing admissible coupling/composition relations."
+    },
+    {
+      "symbol": "⇔s",
+      "name": "Statistical Projection",
+      "definition": "Projection of <*>_x describing statistical relational correspondence."
+    },
+    {
+      "symbol": "⇔m",
+      "name": "Metric Projection",
+      "definition": "Projection of <*>_x describing metric correspondence relations.",
+      "status": "candidate"
+    },
+    {
+      "symbol": "⇔R",
+      "name": "Residue Projection",
+      "definition": "Projection of <*>_x describing residue-conditioned relational closure.",
+      "status": "candidate"
+    }
+  ],
+  "governance_rules": [
+    "No member of the <*>_x family shall be treated as an isolated primitive unless explicitly promoted through governance.",
+    "All future projection operators must declare parent-family membership.",
+    "Family members inherit constraints from <*>_x unless overridden by formal promotion."
+  ],
+  "appendix_f_effect": {
+    "remove_as_independent_gap": [
+      "Formal ⊗ Definition"
+    ],
+    "retain_as_primary_gap": [
+      "Formal <*>_x Meta-Relation Family"
+    ],
+    "downgrade_to_child_hardening": [
+      "⊗"
+    ]
+  },
+  "dependency_graph": {
+    "<*>_x": [
+      "⊗",
+      "⇔s",
+      "⇔m",
+      "⇔R"
+    ]
+  },
+  "expected_outcome": {
+    "benefit": "Reduces operator proliferation and establishes a coherent projection-family architecture.",
+    "critical_path_reduction": "Formalizing <*>_x partially formalizes all dependent family members."
+  },
+  "promotion_recommendation": {
+    "<*>_x": "Remain active target.",
+    "⊗": "Merge into <*>_x hardening queue.",
+    "⇔s": "Remain active target but as family-member hardening.",
+    "future_members": "Register under <*>_x before independent promotion."
+  }
+}
