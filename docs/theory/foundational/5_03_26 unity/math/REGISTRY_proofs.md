@@ -35,8 +35,7 @@ P102 | Zero-State Domain Membership Proof | L102, T001 | restricted_local_argume
 P103 | Recoupling-Reorientation Event Proof | L103, L043 | restricted_local_argument_only | Bounded justification of recoupling-reorientation trigger sequence
 P104 | Meta-Relation Family Restructure Proof | L104, L101 | restricted_local_argument_only | Bounded justification of projection operators dependency on <*>_x
 P105 | Typed Meta-Relation Operator Proof | L105, L102 | restricted_local_argument_only | Bounded justification of non-identity constraints and truth conditions
-
-
-
-
-
+P106 | Dual Inscription Proof | L106, L005 | restricted_local_argument_only | Bounded justification of residue inscription partitioning
+P107 | Meta-Level Stack Proof | L107, L101 | restricted_local_argument_only | Bounded justification of process meta-relation level segregation
+P108 | Ontological Classification of Arrays Proof | L108, L027 | restricted_local_argument_only | Bounded justification of array classification enforcement
+P109 | Closure Neighborhoods Proof | L109, L045, L108 | restricted_local_argument_only | Bounded justification of relational derivation of coupling neighborhoods

@@ -76,8 +76,7 @@ L102 | Zero-State Domain Membership | D5, L101 | provisional | Formally defines 
 L103 | Recoupling-Reorientation Event | D5, L102 | provisional | Formally defines RRE transition driven by relational mismatch trigger
 L104 | Meta-Relation Family Restructure | D5, L101, L103 | provisional | Organizes dependent projection operators under parent operator <*>_x
 L105 | Typed Meta-Relation Operator <*>_x | D5, L101, L104 | provisional | Formally defines <*>_x non-identity and validation truth conditions
-
-
-
-
-
+L106 | Dual Inscription of Residue | D5, L043, L045 | provisional | Partitions residue into realised continuation (Psi_plus) and excluded boundary (Psi_minus)
+L107 | Abstraction Meta-Level Stack | D5, L043, L045, L080 | provisional | Stratifies formal process arguments into eight distinct meta-levels
+L108 | Ontological Classification of Arrays | L027, L043 | provisional | Restricts arrays in simulation to conditional, projection, residue, participation
+L109 | Closure Neighborhoods | L043, L045, L108 | provisional | Derives process coupling neighborhoods relational metric rather than spatial grid

@@ -1,4 +1,4 @@
-# Proof P101: Universal Meta-Relation Proof
+# Proof P101 — Universal Meta-Relation Proof
 
 ## 1. Goal
 Provide a structural justification for the inseparability of the universal meta-relation $RT := [Affect\|Effect \langle*\rangle_x QM\|GR]$ under the Mono-Process Framework constraints.

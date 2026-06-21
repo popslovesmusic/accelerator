@@ -1,4 +1,4 @@
-# Lemma L101: Universal Meta-Relation inside RT
+# Lemma L101 — Universal Meta-Relation inside RT
 
 ## 1. Statement
 The universal meta-relation inside the Reciprocal Relation ($RT$) substrate is defined as the inseparable candidate expression:
