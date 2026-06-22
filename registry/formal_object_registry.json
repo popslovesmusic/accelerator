@@ -760,8 +760,8 @@
       "object_id": "OBJ-OP-RA-DELTA",
       "object_class": "operator",
       "title": "Residue-Admissible Actualization",
-      "symbol": "δ_ra",
-      "formal_definition": "δ restricted to the residue-admissible domain",
+      "symbol": "\u03b4_ra",
+      "formal_definition": "\u03b4 restricted to the residue-admissible domain",
       "source_bindings": [
         "registry/lexicon_gap_queue.json"
       ],
@@ -774,7 +774,7 @@
       "object_id": "OBJ-OP-RA-ARROW",
       "object_class": "operator",
       "title": "Residue-Admissible Transition",
-      "symbol": "→_ra",
+      "symbol": "\u2192_ra",
       "formal_definition": "Relational transition preserving residue signature",
       "source_bindings": [
         "registry/lexicon_gap_queue.json"
@@ -788,7 +788,7 @@
       "object_id": "OBJ-OP-RA-IFF",
       "object_class": "operator",
       "title": "Residue-Admissible Correspondence",
-      "symbol": "⇔_ra",
+      "symbol": "\u21d4_ra",
       "formal_definition": "Recursive residue-preserving correspondence",
       "source_bindings": [
         "registry/lexicon_gap_queue.json"
@@ -802,7 +802,7 @@
       "object_id": "OBJ-OP-RA-NON-COLLAPSE",
       "object_class": "operator",
       "title": "Non-Collapse Distinction Relation",
-      "symbol": "<≠>_ra",
+      "symbol": "<\u2260>_ra",
       "formal_definition": "Relational operator asserting non-zero distinguishability across transition",
       "source_bindings": [
         "registry/lexicon_gap_queue.json"
@@ -816,7 +816,7 @@
       "object_id": "OBJ-IND-001",
       "object_class": "claim",
       "title": "Residue-Admissible Identity Continuation",
-      "formal_statement": "B →_ra [B_a ⇔_ra B], B_a ≠ B, B_a <≠>_ra B",
+      "formal_statement": "B \u2192_ra [B_a \u21d4_ra B], B_a \u2260 B, B_a <\u2260>_ra B",
       "source_bindings": [
         "registry/lexicon_gap_queue.json"
       ],
@@ -1062,7 +1062,7 @@
       "object_id": "ECON_APP_ORG_A_001",
       "object_class": "operator",
       "title": "Org_a",
-      "status": "definition_candidate",
+      "status": "qualified_definition_candidate",
       "source_bindings": [
         "registry/lexicon_gap_queue.json"
       ],
@@ -1087,13 +1087,17 @@
       "relationship_to_D": "Org_a does not create distinction from nothing; it organizes already evaluable admissible distinction participation.",
       "relationship_to_iff_R": "iff_R supplies the admissible preservation relation under which Org_a transformations are judged.",
       "relationship_to_orientation": "Org_a must preserve admissible orientation structure across legal transformations.",
-      "relationship_to_Sigma_D": "Sigma_D can now be drafted as an equivalence class or signature of Org_a-closed distinction organizations."
+      "relationship_to_Sigma_D": "Sigma_D can now be drafted as an equivalence class or signature of Org_a-closed distinction organizations.",
+      "qualification_test_references": [
+        "QUAL_ORG_A_001",
+        "QUAL_ORG_A_002"
+      ]
     },
     {
       "object_id": "ECON_APP_SIGMA_D_001",
       "object_class": "constraint",
       "title": "Sigma_D",
-      "status": "definition_candidate",
+      "status": "qualified_equivalence_candidate",
       "source_bindings": [
         "registry/lexicon_gap_queue.json"
       ],
@@ -1106,19 +1110,23 @@
       ],
       "runtime_visibility": true,
       "symbol": "Sigma_D",
-      "canonical_form": "Σ_D(G) = Σ_D(G')",
+      "canonical_form": "\u03a3_D(G) = \u03a3_D(G')",
       "definition": "Define Sigma_D admissible equivalence criteria using Org_a closure, iff_R preservation, and orientation equivalence.",
       "equivalence_rules": {
-        "Sigma_D_equivalence": "Σ_D(G) = Σ_D(G') iff G and G' preserve the same Org_a-closed distinction organization under iff_R and orientation equivalence ≃_O.",
+        "Sigma_D_equivalence": "\u03a3_D(G) = \u03a3_D(G') iff G and G' preserve the same Org_a-closed distinction organization under iff_R and orientation equivalence \u2243_O.",
         "requires": [
           "Adm_Org(G)",
           "Inv_D(G) = Inv_D(G')",
           "G iff_R G'",
-          "G ≃_O G'",
+          "G \u2243_O G'",
           "Preserve_D_recovery_behavior(G,G')"
         ]
       },
-      "relationship_to_Org_a": "Org_a defines admissible organization closure; Sigma_D defines equivalence of such closed organizations."
+      "relationship_to_Org_a": "Org_a defines admissible organization closure; Sigma_D defines equivalence of such closed organizations.",
+      "qualification_test_references": [
+        "QUAL_SIGMA_D_001",
+        "QUAL_SIGMA_D_002"
+      ]
     },
     {
       "object_id": "ECON_APP_DEFORMATION_001",
@@ -1214,11 +1222,11 @@
       },
       "same_process_constraint_note": "Distinction generated through | is governed as deviated constraint within the same process, not as a separate residue object.",
       "formal_candidate": {
-        "form": "A | B := Compare_C(A,B) ∧ D_C(A|B) > ε_a",
+        "form": "A | B := Compare_C(A,B) \u2227 D_C(A|B) > \u03b5_a",
         "reading": "A compared to B without collapse under declared context C.",
         "output_type": "comparison condition, not distinction itself",
         "Compare_C_note": "Compare_C is the minimal declared comparison context licensing D_C to evaluate. It is not a state container or memory object.",
-        "TS0_status": "formal_candidate — no evidence yet; campaign design required before promotion",
+        "TS0_status": "formal_candidate \u2014 no evidence yet; campaign design required before promotion",
         "patch_source": "MPF_VERTICAL_BAR_OPERATOR_DEFINITION_PATCH_001"
       },
       "governance_status": {
@@ -1252,9 +1260,9 @@
       "symbol": "O",
       "canonical_form": "O(G)",
       "definition": "Define Orientation Space O as the admissible space of participation directions governing bar expressions, Org_a preservation, and knot-class selection.",
-      "participation_graph_model": "G := (V, E_|, τ, ρ)",
-      "orientation_assignment": "o ∈ O(G)",
-      "orientation_equivalence": "G ≃_O G' iff there exist o ∈ O(G), o' ∈ O(G') such that participation directions, roles, and closure are preserved under iff_R.",
+      "participation_graph_model": "G := (V, E_|, \u03c4, \u03c1)",
+      "orientation_assignment": "o \u2208 O(G)",
+      "orientation_equivalence": "G \u2243_O G' iff there exist o \u2208 O(G), o' \u2208 O(G') such that participation directions, roles, and closure are preserved under iff_R.",
       "relationship_to_bar_operator": "A|B carries orientation by default. Binary case O(A|B) and group case O(G) record the legal participation direction.",
       "relationship_to_Org_a": "Org_a must preserve admissible orientation structure across legal transformations.",
       "relationship_to_OPEN_BRIDGE_001": "Orientation functions as a topological selector constraint on admissible knot-class selection."
@@ -1338,7 +1346,7 @@
       ],
       "runtime_visibility": true,
       "symbol": "Trigger_Reorient",
-      "canonical_form": "Trigger_Reorient(x,c,R_↔,C_t,C_t^S) = TRUE iff [δ_a(x;c)=∅] OR [C_t^S=∅] OR [S_closure < τ_R] OR [Def_a(x,c) requires new -(i)]",
+      "canonical_form": "Trigger_Reorient(x,c,R_\u2194,C_t,C_t^S) = TRUE iff [\u03b4_a(x;c)=\u2205] OR [C_t^S=\u2205] OR [S_closure < \u03c4_R] OR [Def_a(x,c) requires new -(i)]",
       "formal_definition": "A control rule that diverts the continuation pipeline into orientation reassessment when the current orientation regime cannot sustain admissible continuation.",
       "non_promotion_note": "This control rule manages pre-realization orientation triggers only. It does not select realized continuation q* and does not promote topology, geometry, or physics-app claims."
     }

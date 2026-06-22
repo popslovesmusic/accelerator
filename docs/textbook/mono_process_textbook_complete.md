@@ -2632,6 +2632,20 @@ Within these models, $\Sigma_D$ remains a definition candidate. The recovery con
 
 ---
 
+### Qualification Status of Org_a and Sigma_D
+
+The operators and signatures defined in this stage are structurally qualified but remain mathematically open. They are subject to the following constraints:
+
+- **Org_a Axioms Status:** The axioms of $\text{Org}_a$ (Inventory Preservation, Admissibility Conservation, Topological Consistency) are structurally qualified as consistent definition candidates, but they are not theorem-closed. Formal derivation from the primitive mismatch evaluation $D(A|B) > \epsilon_a$ and the recursive closure relation $\iff_R$ is still required.
+- **Sigma_D Equivalence Status:** $\Sigma_D$ equivalence is structurally qualified as a candidate relation, but its completeness remains dependent on the formalization of $\text{Rec}_D$ under registered perturbation classes.
+- **Simulation Limits:** Existing multi-model simulation campaigns (such as `SIM_TOPOLOGY_001_EXECUTABLE`) provide supporting evidence for candidate recovery behavior criteria under perturbation, but they do not close the formal math program debts.
+- **Status of Debts:** In alignment with procedural governance, the foundational debt items `ECON_DEBT_0001` and `ECON_DEBT_0002` remain **OPEN** in qualified-candidate status.
+
+**Formal Block B.0.6: Stage 1 Qualification Status**
+$$ \text{Stage\_1\_Status} := \text{STRUCTURALLY\_QUALIFIED\_NOT\_FORMALLY\_CLOSED} $$
+
+---
+
 ### Core Operators
 | Symbol | Name | Status | Function |
 | :--- | :--- | :--- | :--- |

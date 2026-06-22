@@ -74,8 +74,8 @@ The foundational debt item `ECON_DEBT_0001` (Axiomatization of the organization 
 
 | Debt ID | Category | Status | Severity | Description | Blocking | Owner |
 |---|---|---|---|---|---|---|
-| ECON_DEBT_0001 | FOUNDATIONAL | PARTIALLY_RESOLVED_PENDING_DERIVATION_PASS | CRITICAL | Org_a axioms defined as definition candidates; awaiting derivation. | formal Sigma_D construction, continuity derivation, recovery derivation | economics_app |
-| ECON_DEBT_0002 | FOUNDATIONAL | PARTIALLY_RESOLVED_PENDING_QUALIFICATION_PASS | CRITICAL | Sigma_D admissible equivalence criteria candidate defined; awaiting qualification. | identity_app, recovery_app, deformation validation | economics_app |
+| ECON_DEBT_0001 | FOUNDATIONAL | QUALIFIED_CANDIDATE_PENDING_FORMAL_DERIVATION | CRITICAL | Org_a axioms structurally qualified; awaiting formal derivation. | formal Sigma_D construction, continuity derivation, recovery derivation | economics_app |
+| ECON_DEBT_0002 | FOUNDATIONAL | QUALIFIED_CANDIDATE_PENDING_REC_D_FORMALIZATION | CRITICAL | Sigma_D criteria structurally qualified; awaiting Rec_D registration. | identity_app, recovery_app, deformation validation | economics_app |
 | ECON_DEBT_0003 | VALIDATION | OPEN | HIGH | E3 Sigma_D Distinguishability Gate not completed. | | economics_app |
 | ECON_DEBT_0004 | VALIDATION | OPEN | HIGH | E4 Deformation Stability Gate not completed. | | economics_app |
 | ECON_DEBT_0005 | VALIDATION | OPEN | HIGH | E5 Recovery Validity Gate not completed. | | economics_app |
