@@ -40,7 +40,7 @@ def main():
                 data = json.load(f)
                 
             updated = False
-            for term in data.get("queue", []):
+            for term in data.get("candidate_new_terms", []) + data.get("queue", []):
                 if term["term"] == "Org_a":
                     term["status"] = "GAP_QUALIFIED_DEFINITION_CANDIDATE"
                     updated = True
@@ -56,7 +56,7 @@ def main():
                 print("Terms not found in lexicon_gap_queue.json queue")
         except Exception as e:
             print(f"Error updating lexicon_gap_queue.json: {e}")
-
+ 
     # 3. Update docs/economics/ssot/procedural_economics_ssot.md
     ssot_file = root / "docs/economics/ssot/procedural_economics_ssot.md"
     if ssot_file.exists():
@@ -64,7 +64,7 @@ def main():
             content = ssot_file.read_text(encoding="utf-8")
             
             # Target line for ECON_DEBT_0001
-            target_line_1 = "| ECON_DEBT_0001 | FOUNDATIONAL | PARTIALLY_RESOLVED_PENDING_DERIVATION_PASS | CRITICAL | Org_a axioms defined as definition candidates; awaiting derivation. | formal Sigma_D construction, continuity derivation, recovery derivation | economics_app |"
+            target_line_1 = "| ECON_DEBT_0001 | FOUNDATIONAL | PARTIALLY_RESOLVED_PENDING_DERIVATION_PASS | CRITICAL | Org_a axioms defined in L115 (ORG_A_AX_001, ORG_A_AX_002, ORG_A_AX_003); awaiting formal derivation from core primitives. | formal Sigma_D construction, continuity derivation, recovery derivation | economics_app |"
             replacement_1 = "| ECON_DEBT_0001 | FOUNDATIONAL | QUALIFIED_CANDIDATE_PENDING_FORMAL_DERIVATION | CRITICAL | Org_a axioms structurally qualified; awaiting formal derivation. | formal Sigma_D construction, continuity derivation, recovery derivation | economics_app |"
             
             # Target line for ECON_DEBT_0002

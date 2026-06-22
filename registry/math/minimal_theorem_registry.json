@@ -219,6 +219,138 @@
         "L4_closure_unity"
       ],
       "provisional_status": true
+    },
+    {
+      "theorem_id": "MT-SIG-001",
+      "name": "Projection Signature Hardening Rules",
+      "statement": "Within these models, a Projection Signature (Sig_app) is represented as a recognizable pattern of constraints, outputs, and preserved relations showing that a process expression has lawfully projected into an application-facing domain.",
+      "entry_type": "proposition",
+      "scope": "local",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "dependencies": {
+        "lemmas": [
+          "L110"
+        ],
+        "operators": [
+          "Pi_geo",
+          "iff_s",
+          "otimes"
+        ]
+      },
+      "rules": [
+        "validation_rule",
+        "comparison_rule",
+        "exclusion_rule"
+      ],
+      "provisional_status": true
+    },
+    {
+      "theorem_id": "MT-TZR-001",
+      "name": "Typed Zero-Condition Recoupling Principle",
+      "statement": "Within these models, a locally collapsed same-direction expression may participate in higher-order RT only if its zero-condition remains typed and is compared against an oppositely typed zero-condition.",
+      "entry_type": "proposition",
+      "scope": "local",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "dependencies": {
+        "lemmas": [
+          "L111"
+        ],
+        "operators": [
+          "otimes",
+          "recoupling"
+        ]
+      },
+      "formula": "[0_minus <g>_y 0_plus] -> RT_admissible_candidate",
+      "rules": [
+        "GOV-RT-ZERO-RECOUPLING-001"
+      ],
+      "provisional_status": true
+    },
+    {
+      "theorem_id": "MT-RTN-001",
+      "name": "RT Nesting, Condition Primacy, and Family Constitution Principle",
+      "statement": "Within these models, X is RT iff X constructively traces its dependency lineage to RT_core without breaking core constraints; distinction participants are process conditions, not states; and the minimum coupled nesting form is mutually constituted with the <*>_x family space.",
+      "entry_type": "proposition",
+      "scope": "local",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "dependencies": {
+        "lemmas": [
+          "L112"
+        ],
+        "operators": [
+          "otimes",
+          "recoupling"
+        ]
+      },
+      "formula": "[D(A|-B) <f>_x D(C|+D)] -> RT_out",
+      "rules": [
+        "GOV-RT-ZERO-RECOUPLING-001",
+        "GOV-MRF-001"
+      ],
+      "provisional_status": true
+    },
+    {
+      "theorem_id": "MT-VBAR-001",
+      "name": "Vertical Bar Operator Admissibility Principle",
+      "statement": "Within these models, the vertical bar operator | is the primitive admissible participation separator, which is order-sensitive, requires type-checked operands, and gates co-participation as D(A|B) > epsilon_a.",
+      "entry_type": "proposition",
+      "scope": "local",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "dependencies": {
+        "lemmas": [
+          "L113"
+        ],
+        "operators": [
+          "|"
+        ]
+      },
+      "formula": "Adm_|(A,B) := [Typed_a(A) ∧ Typed_a(B) ∧ Eval_D(A|B) ∧ D(A|B) > epsilon_a]",
+      "rules": [
+        "GOV-VBAR-001"
+      ],
+      "provisional_status": true
+    },
+    {
+      "theorem_id": "MT-GBC-001",
+      "name": "Grouped Bar Closure Principle",
+      "statement": "Within these models, grouped bar expressions require explicit graph co-participation closure Adm_|^G preserving consistent orientation, default to non-associative and non-permutable, and require mandatory middle term role typing in triadic structures.",
+      "entry_type": "proposition",
+      "scope": "local",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "dependencies": {
+        "lemmas": [
+          "L114"
+        ],
+        "operators": [
+          "|"
+        ]
+      },
+      "formula": "Adm_|^G(A_1,...,A_n; G) := [∀A_i Typed_a(A_i)] ∧ [∀e_ij ∈ E(G), Adm_|(A_i,A_j)] ∧ Preserve_O(G) ∧ Eval_D^G(G) ∧ D_G(G) > epsilon_a",
+      "rules": [
+        "GOV-GBC-001"
+      ],
+      "provisional_status": true
+    },
+    {
+      "theorem_id": "MT-ORG-001",
+      "name": "Admissible Organization Axioms",
+      "statement": "Within these models, the organization of co-participation graphs G under Org_a is governed by three axioms: Inventory Preservation (traceable distinction), Admissibility Conservation (no updates below epsilon_a), and Topological Consistency (orientation preservation).",
+      "entry_type": "proposition",
+      "scope": "local",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "dependencies": {
+        "lemmas": [
+          "L115"
+        ],
+        "operators": [
+          "Org_a"
+        ]
+      },
+      "formula": "Adm_Org(G) := Adm_|^G(G) ∧ ∃o∈O(G) Adm_O(G,o) ∧ D_G(G)>epsilon_a ∧ InvPres_D(G) ∧ AdmCons_a(G) ∧ TopCons_O(G)",
+      "rules": [
+        "GOV-ORG-001"
+      ],
+      "provisional_status": true
     }
   ]
 }

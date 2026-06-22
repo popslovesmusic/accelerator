@@ -98,6 +98,12 @@ A lawful set of RT expressions is itself an aspectual RT expression (`aRT`). The
 $$ aRT := RT(\{RT_1, RT_2, \dots, RT_n\}) $$
 When these members preserve lawful distinction, ordering, and admissibility, they form a higher-order process expression.
 
+**Nesting Coupling Rule (PRIN_003):**
+Any usage of $RT(RT|RT)$ or $D(*|*)$ as shorthand for a nested expression requires an explicit declaration that it abbreviates the full coupled form $[D(*|-*) \langle f \rangle_x D(*|+*)]$. A bare distinction $D(*|*)$ alone is not RT-complete, as it represents the constraint condition component only and lacks the joint admissibility context $x$ and the coupling projection operator.
+
+**Nesting Admissibility Rule (GOV-RT-ZERO-RECOUPLING-001):**
+Nesting does not rehabilitate an illegal RT form unless the collapsed term retains a typed residue and is recoupled with an oppositely typed residue under a declared higher-order relation. Illegal same-sign inner forms (e.g., same-direction collapse) cannot be nested into legality unless their typed zero residues are preserved and oppositely recoupled at the outer layer.
+
 **Governing Effect (GOV_ART_001):**
 1. **No Modular Ablation:** Testing an isolated aspect by randomizing it while keeping others fixed is methodologically inconsistent with the framework ontology. Component ablation results are hypothesis-generating only unless an admissible whole-expression substitute is defined.
 2. **Deformation over Removal:** Instead of removing orientation or residue, one must ask: "Does the modified run still instantiate a lawful $aRT$?"
@@ -115,9 +121,11 @@ The June 17, 2026 ad hoc campaigns `MPF_SIM_ARRAY_GRAPH_001` and `MPF_SIM_ART_00
 
 The primitive schema governing lawful relations between relational organizations and their projections is the Typed Meta-Relation Family.
 
-**Formal Block 1.2B.1: Typed Meta-Relation Operator ($\langle*\rangle_x$)**
-$$ A \langle*\rangle_x B $$
-$$ \text{Reading: A is meta-related to B under context } x $$
+**Formal Block 1.2B.1: Meta-Relation Family Name ($\langle*\rangle_x$)**
+The notation $\langle*\rangle_x$ names the family of typed meta-relations. It is not itself an operator and may not be applied directly. Every use of a coupling relation must declare which member is instantiated (e.g., $A \langle f \rangle_x B$ where $f$ is a declared member of the family) and what context $x$ specifies.
+
+$$ A \langle f \rangle_x B $$
+$$ \text{Reading: A is meta-related to B under context } x \text{ via family member } f $$
 
 **Family Members:**
 The meta-relation schema $\langle*\rangle_x$ licenses a family of specialized relational projection operators:
@@ -127,7 +135,12 @@ The meta-relation schema $\langle*\rangle_x$ licenses a family of specialized re
 - $\iff_s$ (Statistical Projection)
 
 **Governance Rule (GOV-MRF-001):**
-No member of the $\langle*\rangle_x$ family (including $\otimes$, $\iff_R$, $\iff_m$, and $\iff_s$) shall be treated as an isolated primitive unless explicitly promoted through governance. Family members inherit constraints from $\langle*\rangle_x$ unless overridden by formal promotion.
+No member of the $\langle*\rangle_x$ family (including $\otimes$, $\iff_R$, $\iff_m$, and $\iff_s$) shall be treated as an isolated primitive unless explicitly promoted through governance. Family members inherit constraints from $\langle*\rangle_x$ unless overridden by formal promotion. The family name notation $\langle*\rangle_x$ itself may not be treated as a primitive operator.
+
+**Mutual Constitution of Family and Primaries (PRIN_007):**
+The $\langle*\rangle_x$ family and its primary distinction conditions are mutually constitutive. The left primary (exclusion, $-$) defines the suppression character, and the right primary (addition, $+$) defines the accumulation character. These directional characters constitute the family's admissible membership space. Conversely, the family member types and bounds the primaries' relational structure. Neither carries independent ontological priority.
+
+When relations are nested, the operator at each layer is declared independently from the Meta-Relation Family. For example, in the nested form $[[D_1 \langle f \rangle_x D_2] \langle g \rangle_y D_3]$, the inner relation $\langle f \rangle_x$ and outer relation $\langle g \rangle_y$ may be different declared members or different contextualizations of the family.
 
 ---
 
@@ -157,6 +170,31 @@ Affect does not generate distinction organization as an external cause acting on
 3.  **Residue Support:** Affect is stabilized through recursive residue-conditioned closure.
 
 Affect is not an "entity" but a **procedural requirement**. It is the "Affecting" phase of the process cycle where the need for distinction is established before admissibility filtering occurs [Source: PD_CG_NOTE_001].
+
+---
+
+## 1.2D RT Trace-Admissibility
+
+Within the evaluation of process histories, a trace containing locally collapsed nested terms may still achieve overall admissibility through higher-order recoupling. This is formalized as a special admissibility case where the directional provenance of collapsed residues is preserved as distinct typed zero-conditions ($0_{minus} \neq 0_{plus}$) and subsequently recoupled under a declared higher-order relation.
+
+**Formal Principle 1.2D.1: RT Trace-Admissibility (PRIN_001)**
+An expression $X$ is considered RT if and only if $X$ can constructively trace its dependency lineage to the axiomatic core:
+$$ \text{RT}_{\text{core}} := [(\mathcal{E} \neq 0) \iff_R \delta_a(\mathcal{E} > 0)] $$
+without breaking distinction, admissibility, residue closure, or non-collapse. 
+- **Trace Requirement:** Trace-admissibility must be constructively produced rather than abstractly asserted. 
+- **Adversarial Audit Constraint:** Any dependency trace that breaks under component ablation or adversarial perturbation does not satisfy this principle. For example, `OPEN_BRIDGE_001` serves as a worked instance of trace failure, where orientation ablation disrupted the coupling trace required to support higher-order closure.
+
+**Formal Statement 1.2D.2: Typed Zero-Condition Recoupling Admissibility**
+If local collapse occurs:
+$$ RT_{minus} := [D(-|-) \langle f \rangle_x D(-|-)] \to 0_{minus} $$
+$$ RT_{plus} := [D(+|+) \langle f \rangle_x D(+|+)] \to 0_{plus} $$
+Then the outer nested trace is admissible only if:
+$$ [0_{minus} \langle g \rangle_y 0_{plus}] \to RT_{admissible\_candidate} $$
+Where:
+1. $0_{minus} \neq 0_{plus}$ (Directional provenance is preserved).
+2. The outer relation $\langle g \rangle_y$ is asymmetric.
+3. If $0_{minus}$ and $0_{plus}$ are reduced to undifferentiated $0$ (a fully erased null condition lacking directional provenance), the trace fails admissibility evaluation:
+$$ [0_{minus} \langle g \rangle_y 0_{minus}] \to 0_{condition} $$
 
 ---
 
@@ -565,6 +603,9 @@ To maintain strict monism, the framework requires a non-circular definition of t
 
 **Definition 3.1.3: Process-State Aspect ($S$)**
 $S$ is a **locally addressable aspect-condition** of the mono-process, sufficient to participate in directed distinction, admissibility, residue inscription, and closure.
+
+**Governance Rule (GOV-STATE-CONDITION-001):**
+State $S$ as a process condition is load-bearing. Any appearance of the state primitive $S$ within the distinction formalism represents an active process condition already in process, carrying residue and admissibility context. Any interpretation that reifies $S$ into a static, independently existing object prior to the distinction relation is a governed error (PRIN_002).
 
 **Negative Constraints (What $S$ is NOT):**
 *   **Not a particle:** $S$ has no inherent mass or substance.
@@ -1377,7 +1418,7 @@ By utilizing the **floor $\epsilon$** (see Chapter 8), we ensure $\Omega_a$ rema
 
 ## 7.3 Statistical Projections: $\iff_s$
 
-When the process realizations are observed over many cycles or across many local instances, the resulting distribution can be projected into a **Statistical Space**.
+When the process realizations are observed over many cycles or across many local instances, the resulting distribution can be projected into a **Statistical Space**. This statistical projection $\iff_s$ is the natural result of RT operating on arrays under statistical coupling (PRIN_005). Rather than being an independent mathematical formalism, it projects the emergent joint probability distribution $P(R_{excl}, R_{add} \mid x)$ where exclusion limits the tails and addition accumulates toward the center, yielding a bell-curve central tendency.
 
 **Formal Block 7.3.1: Statistical Projection Relation ($\iff_s$)**
 $$ D \iff_s P $$
@@ -2839,9 +2880,12 @@ These items have candidate formalisms in the "Scratch Schema" (MS-SCRATCH-V1) or
 - **Whole Expression Primacy:** [ **C1_DEFINED_PROVISIONAL_MAINTAINED** ] The governing principle that the complete RT/Core process expression is the minimum indivisible unit of analysis, preventing component-first ontology leakage or modular ablation. [Source: MPF_ADV_HARDENING_SERIES_002_WHOLE_EXPRESSION_BACKFILL].
 - **Typed Meta-Relation Operator ($\langle*\rangle_x$):** [ **C1_DEFINED_PROVISIONAL** ] A lawful typed relation schema that couples two process expressions across a declared context $x$ without collapsing them into identity. General form: $A \langle*\rangle_x B$, preserving non-identity ($A \langle\neq\rangle_x B$). [Source: MPF_META_RELATION_X_DEFINITION_001].
 - **Zero-State Domain Membership:** [ **C1_DEFINED_PROVISIONAL** ] A fully decoupled symmetry condition possessing zero distinction and zero degrees of freedom. Governed by the rule $zero\_state \notin D\_domain$. Entry into the distinction domain occurs only via asymmetric recoupling ($0\_DOF \to D > 0$). [Source: MPF_ZERO_STATE_DOMAIN_MEMBERSHIP_001].
+- **Typed Zero-Condition Recoupling (Lemma L111):** [ **C1_DEFINED_PROVISIONAL** ] Within these models, a locally collapsed same-direction expression may participate in higher-order RT only if its zero-condition remains typed and is compared against an oppositely typed zero-condition. [Source: MPF_IND_TYPED_ZERO_RECOUPLING_001].
+- **RT Nesting, Condition Primacy, and Family Constitution (Lemma L112):** [ **C1_DEFINED_PROVISIONAL** ] Within these models, X is RT iff X constructively traces its dependency lineage to the axiomatic core without breaking core constraints. Process states represent active configurations rather than static substrates. The minimum complete nesting form is mutually constituted with the meta-relation family space. [Source: MPF_IND_RT_NESTING_CONDITIONS_FAMILY_001].
 - **Recoupling-Reorientation Event (RRE):** [ **C1_DEFINED_PROVISIONAL** ] A process event in which relational mismatch produces a coupling reorganization that results in an orientation update. Expressed as $\Delta C \to \Delta O \to \Delta A_{\text{adm}}$. Occurs when mismatch exceeds coupling tolerance ($Trigger_{RRE} := \Delta C_{\text{mismatch}} > \tau_C$). [Source: MPF_RECOUPLING_REORIENTATION_EVENT_001].
 - **Statistical Projection Relation ($\iff_s$):** [ **C1_DEFINED_PROVISIONAL** ] A projection relation mapping recurring admissible realization patterns into probability-like descriptions. Relies on parent meta-relation family $\langle*\rangle_x$. [Source: MPF_IFF_S_C1_PROVISIONAL_DEFINITION_001].
-- **Projection Signature:** [ **C1_DEFINED_PROVISIONAL** ] A recognizable pattern of constraints, outputs, and preserved relations showing that a process expression has lawfully projected into an application-facing domain ($Sig_{app}$). [Source: MPF_PROJECTION_SIGNATURE_C1_DEFINITION_001].
+- **Projection Signature:** [ **C1_DEFINED_PROVISIONAL_MAINTAINED** ] A recognizable pattern of constraints, outputs, and preserved relations showing that a process expression has lawfully projected into an application-facing domain ($Sig_{app}$). [Source: MPF_PROJECTION_SIGNATURE_C1_DEFINITION_001].
+- **Projection Signature Hardening:** [ **C1_DEFINED_PROVISIONAL_MAINTAINED** ] Validation rules, comparison rules, and false-positive signature exclusions defined under Lemma L110 [Source: MPF_PROJECTION_SIGNATURE_C1_DEFINITION_001].
 - **Topology-to-Geometry Legality Transform ($\Pi_{\text{geo}}$):** [ **C1_DEFINED_PROVISIONAL** ] A projection condition under which a stabilized topological organization may be represented as geometry_app without treating geometry as primitive. [Source: MPF_TOPOLOGY_GEOMETRY_LEGALITY_C1_DEFINITION_001].
 - **Empirical Mapping Standards (EMS):** [ **C1_DEFINED_PROVISIONAL** ] The governance framework regulating how process-domain expressions may be associated with external observations, measurements, simulations, or physical claims. [Source: MPF_EMS_C1_DEFINITION_001].
 - **Topological Organization ($T$):** [ **C1_DEFINED_PROVISIONAL** ] The admissibility-relevant organization of connectivity, boundary, orientation compatibility, and closure class generated by process history. [Source: TOPOLOGICAL_ORGANIZATION_TYPEDEF_001].
@@ -2878,12 +2922,18 @@ These items have candidate formalisms in the "Scratch Schema" (MS-SCRATCH-V1) or
 These items remain unsettled and are the primary targets for future induction and research runs.
 
 - **Recoupling-Reorientation Event (RRE) Hardening:** [ **HARDENING_REQUIRED** ] Formulate the coupling mismatch metric $\Delta C_{\text{mismatch}}$ and tolerance threshold $\tau_C$; determine scale relativity of $\tau_C$ and verify residue lineage preservation under reorientation [Source: MPF_RECOUPLING_REORIENTATION_EVENT_001].
+- **OQ_TZR_001 (Preservation of Provenance):** [ **GAP_OPEN** ] What exact structure preserves directional provenance in $0_{minus}$ and $0_{plus}$? [Source: MPF_IND_TYPED_ZERO_RECOUPLING_001].
+- **OQ_TZR_002 (Governing Outer Relation):** [ **GAP_OPEN** ] Which member of the $\langle*\rangle_x$ family governs the outer recoupling relation? [Source: MPF_IND_TYPED_ZERO_RECOUPLING_001].
+- **OQ_TZR_003 (Collapse Conditions):** [ **GAP_OPEN** ] When does typed zero collapse into undifferentiated zero? [Source: MPF_IND_TYPED_ZERO_RECOUPLING_001].
+- **OQ_001 (Scalar Admissibility Context):** [ **GAP_OPEN** ] What is the full formal definition of $x$ in the scalar example $[D(2|-1)\to1 \langle f \rangle_x D(3|+3)\to6]\to5$? The context $x$ must be made explicit to complete the RT trace. [Source: MPF_IND_RT_NESTING_CONDITIONS_FAMILY_001].
+- **OQ_002 (Bell Curve Derivability):** [ **GAP_OPEN** ] Is the bell curve emergence from exclusion/addition asymmetry formally derivable from $\text{RT}_{\text{core}}$, or does it require an independent statistical postulate? [Source: MPF_IND_RT_NESTING_CONDITIONS_FAMILY_001].
+- **OQ_003 (Skew Conditions):** [ **GAP_OPEN** ] What governs the skew of $\text{RT}_{\text{out}}$ distributions — i.e., the formal condition under which the exclusion primary dominates over the additive primary or vice versa? [Source: MPF_IND_RT_NESTING_CONDITIONS_FAMILY_001].
+- **OQ_004 (Biconditional Ladder Resolution):** [ **GAP_OPEN** ] Does the mutual constitution of family and primaries (PRIN_007) provide the recursive scale structure needed to close the gap of the biconditional ladder / `meta_core_scale_hypothesis` in Appendix F.8? [Source: MPF_IND_RT_NESTING_CONDITIONS_FAMILY_001].
 - **$S$ Arbitration Rule:** [ **DEFINITION_TARGET_IDENTIFIED** ] Formal rule for the pruning stage inside the $\delta_a$ composition [Source: MPF-IND-ARB-DELTA-DUAL-PHASE GAP-S-RULE].
 - **Formal definition of Residue Relation ($R_{\leftrightarrow}$):** [ **DEFINITION_CANDIDATE_PENDING_FORMAL_PROMOTION** ] Defined in `operator_registry.json` and principle `PRIN-2-X` (refined).
 - **Formal difference between $R_{\leftrightarrow}$ and $\leftrightarrow_R$:** [ **RESOLVED_PENDING_CANONICAL_TEXTBOOK_SYNC** ] Rigorous separation between residue-as-operand ($R_{\leftrightarrow}$) and closure-support-through-residue ($\leftrightarrow_R$) is explicitly defined in governance patches and integrated into Chapter 2.
 - **Formal rules for Decoupling:** Defining the conditions under which a truth-condition becomes False.
 - **Asymmetric Recoupling and Distinction Emergence:** [ **HARDENING_REQUIRED** ] Define asymmetric recoupling mechanics and the distinction emergence law; determine whether RT exists below the distinction floor [Source: MPF_ZERO_STATE_DOMAIN_MEMBERSHIP_001].
-- **Projection Signature Hardening:** [ **HARDENING_REQUIRED** ] Define signature validation rules, signature comparison rules, projection-family-specific signatures, and false-positive signature exclusion [Source: MPF_PROJECTION_SIGNATURE_C1_DEFINITION_001].
 - **Formal operand of $\leftrightarrow_R$:** Defining the types allowed to participate in residue-conditioned closure.
 - **Vertical Bar Operator ($\mid$):** [ **C2_test_designed / CAMPAIGN_COMPLETED** ] Formally fixing the meaning of "grouped closure participation" in triadic closure. A candidate formal definition exists in `formal_object_registry [OBJ-grouped-bar-closure]` and `operator_registry.json` (status: `MUST_DEFINE_BEFORE_ORG_A_CLOSURE`). Group closure candidate symbol: $\text{Adm}_{|}^{G}$. Associativity and permutability default to NON-PROVEN until tested. Executable model verified under 4 controls and 5 metrics. [Patch: MPF_VERTICAL_BAR_INDUCTION_001, MPF_VERTICAL_BAR_CAMPAIGN_SCAFFOLD_PATCH_001, MPF_VERTICAL_BAR_EXECUTABLE_MODEL_PATCH_001; Campaign: MPF_BAR_OPERATOR_VALIDATION_001]
 - **Deviated Constraint Dynamics ($D \to \delta \alpha$):** [ **C2_test_designed / RECORDED_UNDER_AUDIT** ] Formalizing the principle that distinction reorganizes admissibility within the same process. Vortex feedback loop campaign executed and validated under 4 controls, with C++ equivalence established under oneAPI AVX2; currently under governance hold pending final verification. [Patch: MPF_DEVIATED_CONSTRAINT_DYNAMICS_PATCH_001, MPF_VORTEX_ADMISSIBILITY_EXECUTION_PATCH_001, [REMEDIATE_VORTEX_EXECUTION_PROVENANCE_001](file:///D:/projects/acellorator/patches/REMEDIATE_VORTEX_EXECUTION_PROVENANCE_001.json), [MPF_VORTEX_REMEDIATION_EXECUTION_001](file:///D:/projects/acellorator/patches/MPF_VORTEX_REMEDIATION_EXECUTION_001.json); Campaigns: MPF_VORTEX_ADMISSIBILITY_CAMPAIGN_001, MPF_NON_MARKOV_ORGANIZATION_TEST_001; Audits: AUDIT_VORTEX_GOVERNANCE_001, [AUDIT_TOOL_RIGOR_ENDORSEMENT_TRACE_001](file:///D:/projects/acellorator/audits/AUDIT_TOOL_RIGOR_ENDORSEMENT_TRACE_001/tool_authorization_audit.md)]
@@ -2902,6 +2952,9 @@ These items remain unsettled and are the primary targets for future induction an
 | Bridge ID | Name | Current Status | Claim Cap |
 | :--- | :--- | :--- | :--- |
 | **OPEN_BRIDGE_001** | Orientation-Closure | **C4_CANDIDATE_PENDING_RIGOR** | **STRUCTURAL_ONLY** |
+| **OPEN_BRIDGE_002** | Typed-Zero Provenance | **GAP_OPEN** | **THEORETICAL_ONLY** |
+
+- **OPEN_BRIDGE_002 (Typed-Zero Provenance):** Requires formal proof that $0_{minus}$ and $0_{plus}$ retain enough directional provenance to support higher-order RT.
 
 ### F.4 Bridge Dependency Tables
 - **OPEN_BRIDGE_001 Requires Rewrite/Reroute Review For:** TC_asym, K, B_K.

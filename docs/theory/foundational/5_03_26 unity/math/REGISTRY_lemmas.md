@@ -80,3 +80,9 @@ L106 | Dual Inscription of Residue | D5, L043, L045 | provisional | Partitions r
 L107 | Abstraction Meta-Level Stack | D5, L043, L045, L080 | provisional | Stratifies formal process arguments into eight distinct meta-levels
 L108 | Ontological Classification of Arrays | L027, L043 | provisional | Restricts arrays in simulation to conditional, projection, residue, participation
 L109 | Closure Neighborhoods | L043, L045, L108 | provisional | Derives process coupling neighborhoods relational metric rather than spatial grid
+L110 | Projection Signatures | L045, L099, L107 | provisional | defines validation, comparison, and false-positive exclusion rules for signatures
+L111 | Typed Zero-Condition Recoupling | L101, L102, L107 | provisional | defines same-direction local collapse and opposite typed residue recoupling
+L112 | RT Nesting, Condition Primacy, and Family Constitution | L104, L105, L107, L111 | provisional | defines trace-admissibility, conditions not states, minimum nesting form, and mutual constitution
+L113 | Vertical Bar Operator: Admissible Participation Separator | L043, L044, L107 | provisional | defines primitive role, operands, orientation sensitivity, local closure, and relation to D
+L114 | Grouped Bar Closure and Triadic Participation | L113 | provisional | defines binary non-reduction, associativity and permutation defaults, triadic closure special case, grouped admissibility gate
+L115 | Org_a: Admissible Organization Axioms | L113, L114 | provisional | defines organizational operator, inputs, inventory preservation, admissibility conservation, topological consistency
