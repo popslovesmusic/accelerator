@@ -55,6 +55,28 @@ This establishes that all observable properties (marked with the $_app$ suffix) 
 
 ---
 
+## 1.1A Continuation-First Reduction
+
+Within the current continuation-first reduction, process is treated as ontologically prior to distinction. "Prior" here denotes dependency, not temporal ordering. Distinction is read as tension internal to a continuing process undergoing lawful resolution rather than as an isolated primitive detached from continuation.
+
+**Formal Reduction 1.1A.1: Process-First Dependency**
+$$ \text{Process} \succ_{\text{ont}} \text{Distinction} $$
+$$ \text{Distinction} := \text{tension internal to continuing process under admissible resolution} $$
+
+**Primary Aspects (Conceptual Reduction Only):**
+1. **Left Primary - Exclusion:** Generates admissible non-zero distinction and yields realized difference.
+2. **Right Primary - Continuation:** Maintains realized distinction through ongoing coupling and yields persistence.
+
+**Process Reading:**
+The current conceptual sequence is:
+$$ \text{Realization} \to \text{Coupling} \to \text{Actualized continuation condition} \to \text{Persistence} $$
+This sequence is not a claim about external time-ordering. It is a reduction of dependency roles inside the continuing process.
+
+**Governance Note:**
+This is an exploratory ontology reduction only. It sharpens the process-first reading of the textbook but does not by itself promote any proof, bridge, or external physical claim.
+
+---
+
 ## 1.2 The Primary Axiom: The Statement
 
 All derivations within this mathematical program must trace their lineage back to a single foundational "floor." This is the **Primary Axiom of Distinction and Continuation**, referred to throughout the program simply as **"The Statement"** [Source: FM-3 / Unity Math].
@@ -97,6 +119,21 @@ $$ \text{Process} = [\mathcal{E}, \mathcal{R}, \rho, \mathcal{K}, \delta, -(i)]_
 A lawful set of RT expressions is itself an aspectual RT expression (`aRT`). The set of operational aspects (distinction, asymmetry, orientation, admissibility, residue, closure) are not independent modules but are themselves RT-bearing expressions.
 $$ aRT := RT(\{RT_1, RT_2, \dots, RT_n\}) $$
 When these members preserve lawful distinction, ordering, and admissibility, they form a higher-order process expression.
+
+**Formal Principle 1.2.2D: RT Mechanics as Recursive Relational Completion (MPF_IND_RT_MECHANICS_RECURSIVE_COMPLETION_001)**
+Within these models, RT mechanics is provisionally defined by resolving an unresolved distinction through lawful closure of its surrounding relational field rather than isolated local assignment.
+$$ D(*|r) \to D(x|r) \iff F' \text{ containing } D(x|r) \text{ satisfies PRIN\_001 closure} $$
+Here RT is not treated as a pre-given target. The admissibility of $x$ and the constitution of RT are mutually co-produced through residue-conditioned closure traceable to the Core Expression. The recursive engine is then expressed as $RT_n \to D(RT_n \mid continuation)$, with soundness still gated by the open Trace Inheritance, Continuation Admissibility, and Base Case Constructive Trace obligations.
+
+**Formal Principle 1.2.2E: Conditioning as Primitive Relational Process (RT-IND-Conditioning-001)**
+Within these models, conditioning is provisionally treated as the primitive interpretation of distinction juxtaposition, while arithmetic remains a derived projection.
+$$ D(a) \to <a>_b $$
+The conditioned distinction $<a>_b$ denotes distinction $a$ under admissibility context $b$. This reading is directional, non-commutative, and context dependent. Legacy notation such as $a(b)$ may still project into arithmetic interpretation, but within this scaffold it is not taken as primitive multiplication. The current induction therefore treats multiplicity as generated through conditioning, relational structure, and admissible continuation rather than through primitive arithmetic combination.
+
+**Formal Principle 1.2.2F: Primitive Conditioning Principle (MPF_PRIMITIVE_CONDITIONING_REDUCTION_001)**
+Within this provisional ontology reduction, the smallest admissible RT-mechanics object is taken to be the conditioned distinction itself rather than the isolated notation for distinction.
+$$ <a>_b $$
+Here $D(a)$ is retained only as a context-suppressed abstraction whose omitted conditioning must be recoverable whenever it participates in governed RT reasoning. The meta-relation family therefore defaults to conditioned operands, so expressions of the form $<a>_b \langle * \rangle_x <c>_d$ are treated as the primitive compositional layer, while arithmetic juxtaposition remains a lawful projection and not the primitive ontology.
 
 **Nesting Coupling Rule (PRIN_003):**
 Any usage of $RT(RT|RT)$ or $D(*|*)$ as shorthand for a nested expression requires an explicit declaration that it abbreviates the full coupled form $[D(*|-*) \langle f \rangle_x D(*|+*)]$. A bare distinction $D(*|*)$ alone is not RT-complete, as it represents the constraint condition component only and lacks the joint admissibility context $x$ and the coupling projection operator.
@@ -145,7 +182,7 @@ When relations are nested, the operator at each layer is declared independently 
 ---
 
 **Formal Principle 1.2.3: Relation as Primitive (Option C)**
-Within this framework, **Relation ($D$) is the fundamental primitive**. A distinction array $\chi_D$ is not a state container but a **structural organization of relations**.
+Within this framework, **Relation ($D$) remains fundamental at the process level**, but the smallest admissible RT-mechanics object is the conditioned distinction $<a>_b$. A bare $D(a)$ is shorthand, projection notation, or suppressed-context notation rather than an ontologically isolated primitive.
 $$ D(x,y) \xrightarrow{\text{organize}} \chi_D \xrightarrow{\text{eval}} E $$
 
 **Commentary:**
@@ -367,7 +404,7 @@ The operator $\Psi$ represents the action of the process upon its own residue sp
 $$ R_{t+1} = \Psi(R_t, x_t, x_{t+1}, \omega_t, \Pi_A) $$
 
 **Commentary:**
-The $\Psi$ operator (Psi) inscribes the current state transition into the existing residue ($R$). It is formally defined as a non-Markovian residue update rule that depends on history, admissibility ($\Pi_A$), orientation ($\omega_t$), and nonzero-deviation sensitivity [Source: Unity Math Sec 2.2]. A candidate instantiation is $R_{t+1} = \lambda R_t + \eta \Pi_{A_t}( \text{NavT}(\omega_t, \omega_{t+1}) )$, where $\lambda$ controls decay and $\eta$ controls inscription strength.
+The $\Psi$ operator (Psi) is the residue inscription map: it carries a lawful continuation event into residue space so future admissibility remains history-conditioned. The exact update law is a separate candidate instantiation and may depend on history, admissibility ($\Pi_A$), orientation ($\omega_t$), and nonzero-deviation sensitivity [Source: Unity Math Sec 2.2]. A candidate instantiation is $R_{t+1} = \lambda R_t + \eta \Pi_{A_t}( \text{NavT}(\omega_t, \omega_{t+1}) )$, where $\lambda$ controls decay and $\eta$ controls inscription strength.
 
 ---
 
@@ -588,12 +625,12 @@ Without the formalization of $R$, the process would have no "gravity" or "habit,
 In classical geometry, distance is typically defined as a symmetric scalar value. Within the Mono-Process Framework, the fundamental measure of "mismatch" or "intensity" ($\mathcal{E}$) is derived from a **directed distinction relation**, denoted as $D(S_1|S_2)$. It is defined as the asymmetric interaction metric between states [Source: MPF-CORE-V1 Sec 1.6].
 
 **Formal Statement 3.1.1: Directed Distinction**
-$$ D: \mathcal{S} \times \mathcal{S} \to \mathcal{V}_{\text{rel}} $$
-$$ S \in \mathcal{S} $$
-$$ \mathcal{S} := \text{The set of addressable process-aspects under context } \mathcal{C} $$
+$$ D_C : \mathcal{S} \times \mathcal{S} \to \mathcal{V}_{\text{rel}} $$
+$$ D_C(S_a \mid S_b) \text{ is the ordered relational value expressing the non-null distinction of } S_a \text{ relative to } S_b \text{ under context } C $$
+$$ D_C(S_a \mid S_b) > 0 \iff \text{ordered distinction is admissibly present} $$
 
 **Commentary:**
-$D(S_1|S_2)$ represents the distinction of state $S_1$ relative to $S_2$. Unlike a standard metric, $D$ is inherently directed. It measures the "pressure" or "gradient" required to reconcile $S_1$ within the context of $S_2$. Within this framework, distinction is the primitive from which all secondary properties, including spatial extension, are projected.
+$D(S_1|S_2)$ represents the distinction of state $S_1$ relative to $S_2$. $D$ is a directed relational distinction value. Metric, divergence, and scalar distance readings are projections, not primitive meanings. Within this framework, distinction is the primitive from which all secondary properties, including spatial extension, are projected.
 
 ---
 
@@ -614,6 +651,7 @@ State $S$ as a process condition is load-bearing. Any appearance of the state pr
 
 **Commentary:**
 By defining $S$ as an "aspect-condition," we ensure that the framework derives geometry rather than assuming it. $S$ represents a specific "vantage point" or "configuration" of the process activity. The state space $\mathcal{S}$ is the collection of all such addressable configurations available under a given governance context $\mathcal{C}$.
+Within this reading, a "state" is a snapshot of conditional process rather than a primitive substrate. Observation captures a projection of ongoing continuation, not an independently existing static object.
 
 ---
 
@@ -710,7 +748,8 @@ $D(S_a|S_b)>0$ and $D(S_b|S_a)>0$ define distinct ordered nodes because the orde
 Distinction in this framework is a **relational value**, not a simple scalar distance. While it can be projected into a scalar metric for measurement, its internal nature is process-dependent.
 
 **Formal Block 3.3.1: Relational Nature**
-$$ D(S_1|S_2) \implies [ \text{MISSING DEFINITION: Is } D \text{ a metric, divergence, or operator family?} ] $$
+$$ D_C(S_a \mid S_b) \text{ is the ordered relational value expressing the non-null distinction of } S_a \text{ relative to } S_b \text{ under context } C $$
+$$ D_C(S_a \mid S_b) > 0 \iff \text{ordered distinction is admissibly present} $$
 
 **Commentary:**
 A scalar value (like "5 meters") is a static result. A relational value is an operational necessity. $D(S_1|S_2)$ represents the *work* or *continuation necessity* imposed by the distinction. In later chapters, we will see how this relational value is extracted into metric observables ($ \iff_m $).
@@ -726,7 +765,25 @@ $$ D(S_1|S_2) \geq \epsilon $$
 $$ \epsilon > 0 $$
 
 **Commentary:**
-Within the framework, absolute zero distinction ($D = 0$) is an excluded state. The **floor $\epsilon$** (epsilon) represents the minimum possible distinguishability. This floor prevents the singular ratios that would occur if the process were to collapse into a state of total identity. If $D$ were to reach zero, orientation would become degenerate, and the recursive chain would terminate.
+Within the framework, absolute zero distinction ($D = 0$) is an excluded state. The **floor $\epsilon$** (epsilon) represents the minimum locally admissible distinction in the active context. This floor prevents the singular ratios that would occur if the process were to collapse into a state of total identity. If $D$ were to reach zero, orientation would become degenerate, and the recursive chain would terminate.
+
+---
+
+## 3.4A Observation, Deviation, and Below-Floor Projection
+
+Within this reduction, observation is treated as the smallest detectable mismatch above the local admissibility floor. Deviation is more primitive than any specific observational projection of it.
+
+**Formal Reduction 3.4A.1: Observation Chain**
+$$ \text{Underlying RT} \to \text{Deviation} \to \text{Mismatch} \to \epsilon_{\text{local}} \to \text{Observation} \to \text{Realized Distinction} $$
+
+**Process Reading:**
+1. **Deviation** is the primitive process-side departure from perfect symmetry or null comparison.
+2. **Difference, distinction, distance, and noise** are projected readings of deviation under different observational and admissibility contexts.
+3. **Distance** is not initially geometric. It is a projection of deviation. Geometry emerges only when distance-like projections become organized under lawful orientation and topology constraints.
+4. **Noise floor** is the projection of an unresolved deviation class. Below-floor deviations are unresolved within the active domain, not nonexistent.
+
+**Governance Note:**
+This section records a conceptual reduction only. It does not yet supply the formal evolution law for deviation classes, the exact observation operator, or a proof of geometry recovery from deviation.
 
 ---
 
@@ -734,7 +791,7 @@ Within the framework, absolute zero distinction ($D = 0$) is an excluded state. 
 
 To complete the formal program for directed distinction, the following must be induced:
 
-1.  **Nature of $D$:** [ **MISSING DEFINITION** ] Is $D$ a Kullback-Leibler like divergence, a non-symmetric Finsler metric, or a primitive operator family?
+1.  **Nature of $D$:** [ **C1_DEFINED** ] $D$ is a directed relational distinction value. Metric, divergence, and scalar distance readings are projections, not primitive meanings.
 2.  **Composition Rules:** [ **REQUIRES PROOF** ] How do multiple directed distinctions combine? Is there a relational equivalent to the triangle inequality for non-symmetric $D$?
 
 ---
@@ -1557,10 +1614,10 @@ $$ D(S_1|S_2) \geq \epsilon $$
 $$ \epsilon > 0 $$
 
 **Commentary:**
-The floor $\epsilon$ is the minimum possible distinguishability between any two states or aspect-frames. It represents an inherent "granularity" or "resolution limit" of the process. By enforcing $\epsilon > 0$, we ensure that the root condition $\mathcal{E} \neq 0$ is maintained, allowing the recursive chain of continuation to persist.
+The floor $\epsilon$ is the minimum locally admissible distinction required for a process relation to remain inside the distinction domain under the current residue, topology, and admissibility context. It is a local dynamic admissibility floor, not a universal constant. By enforcing $\epsilon > 0$ in the active context, we ensure that the root condition $\mathcal{E} \neq 0$ is maintained, allowing the recursive chain of continuation to persist.
 
 **The Epsilon Revision (IND_RT_CORE_AFFECT_EFFECT_001):**
-It is crucial to note that $\epsilon$ is **not the absolute primitive**. $\epsilon$ is the smallest mismatch with meaning *above the distinction floor*. Because distinction itself is downstream of the pre-distinction Affect-Effect relation ($A <\neq> E$), $\epsilon$ is downstream of projected distinction. It bounds the observable resolution limit, not the underlying process capacity.
+It is crucial to note that $\epsilon$ is **not the absolute primitive**. $\epsilon := \epsilon(R, T, A_{\text{adm}}, C)$ is the locally conditioned admissibility floor, and $D(S_a|S_b) \geq \epsilon$ is required for distinction-domain participation in the current context. Because distinction itself is downstream of the pre-distinction Affect-Effect relation ($A <\neq> E$), $\epsilon$ bounds the observable resolution limit, not the underlying process capacity.
 
 ---
 
@@ -1597,7 +1654,7 @@ The floor $\epsilon$ also acts as a stabilizer for the **Admissibility Filter ($
 $$ \delta_a(\mathcal{E}) \text{ is well-posed } \iff \nabla \mathcal{E} \geq f(\epsilon) $$
 
 **Commentary:**
-Admissibility relies on gradients and distinctions. If the mismatch across the orientation space were to become perfectly flat and infinitesimal, the selection of a "realized" state would become unstable. The floor $\epsilon$ ensures there is always a minimum "relational friction" or "distinction signal" that the process can use to anchor its orientation.
+Admissibility relies on gradients and distinctions. If the mismatch across the orientation space were to become perfectly flat and infinitesimal, the selection of a "realized" state would become unstable. The floor $\epsilon$ ensures there is always a minimum locally admissible distinction signal that the process can use to anchor its orientation.
 
 ---
 
@@ -1609,16 +1666,16 @@ Because all perceived geometry is a projection of orientation histories, the flo
 $$ \epsilon \to \text{bounds } D \to \text{bounds } \Omega_a \to \text{bounds orientation geometry} $$
 
 **Commentary:**
-The value of $\epsilon$ determines the "tightness" of the projected geometry [Source: TECH-NOTE-ASYM Sec 7]. If $\epsilon$ were larger, the distinctions would be coarser, and the resulting geometry would be more "pixelated" or discrete. If $\epsilon$ were smaller, the geometry would appear more continuous. Thus, $\epsilon$ functions as the primitive regularizer that prevents the "vanishing" of spatial extension.
+The value of $\epsilon$ determines the local "tightness" of the projected geometry [Source: TECH-NOTE-ASYM Sec 7]. If $\epsilon$ were larger, the distinctions would be coarser, and the resulting geometry would be more "pixelated" or discrete. If $\epsilon$ were smaller, the geometry would appear more continuous. Thus, $\epsilon$ functions as a local admissibility regularizer rather than a universal constant.
 
 ---
 
-## 8.5 Missing and Provisional Formalisms
+## 8.5 Remaining Proof Obligations
 
-To complete the formalization of the floor condition, the following must be resolved:
+To complete the formalization of the floor condition, the remaining open item must be resolved:
 
-1.  **Axiomatic vs. Numerical Value:** [ **MISSING DEFINITION** ] Is $\epsilon$ a fundamental constant (like $\hbar$ or $c$), or is it an axiomatic requirement that can take different values in different process models?
-2.  **Universal vs. Local Scope:** [ **MISSING DEFINITION** ] Is the value of $\epsilon$ universal across the entire framework, or is it domain-local (e.g., varying between $QM\_app$ and $GR\_app$)?
+1.  **Axiomatic vs. Numerical Value:** [ **C1_DEFINED** ] $\epsilon$ is a locally conditioned admissibility floor rather than a universal constant.
+2.  **Universal vs. Local Scope:** [ **C1_DEFINED** ] The value of $\epsilon$ is domain-local and may vary with residue, topology, admissibility context, and comparison class.
 3.  **Relation to Planck Threshold:** [ **REQUIRES INDUCTION** ] What is the formal relationship between the $\epsilon$ floor and external physical thresholds like the Planck length or Planck time? Is $\epsilon$ the primitive ancestor of these constants?
 
 ---
@@ -2518,8 +2575,8 @@ By enforcing these governance and induction rules, we ensure that the Mono-Proce
 | $\delta_a$ | Admissibility Filter | Composite operator ($\Pi_A \circ S \circ \text{Cand}$) that transforms constraint into realization. | 1.5, 6.1, 6.1A |
 | $A(c)$ | Admissibility Window | The structural constraint filtering raw difference into persistence. | 6.1 |
 | $\Pi_A$ | Admissibility Projection | Operator ensuring final selections map onto the admissible window. | 6.1A |
-| $D(S_1\|S_2)$ | Directed Distinction | The non-symmetric relational primitive measuring mismatch between states. | 3.1 |
-| $\epsilon$ | The Floor | The minimum possible distinguishability regularizer. | 3.4, 8.1 |
+| $D(S_1\|S_2)$ | Directed Distinction | The ordered relational value measuring non-null distinction between states under context. | 3.1 |
+| $\epsilon$ | The Floor | The local admissibility floor that bounds distinction inside the active context. | 3.4, 8.1 |
 | $-(i)$ | Orientation Operator | The relational reference frame selected to resolve asymmetry. | 5.1 |
 | $\to_a$ | Forward Admissibility | The proactive directional component of the admissibility filter. | 6.2 |
 | $\gets_r$ | Reverse Residue Support | The reactive directional component of residue constraint. | 2.3, 9.2 |
@@ -2574,6 +2631,7 @@ The schema `<*>_x` is a meta-language construct only. It names the space of lega
 - **Meta family:** `<*>_x`
 
 The `x` in `<*>_x` is a reserved discussion placeholder in this induction packet. It is not itself a proof rule, a domain label, or a type identifier.
+Under MPF_PRIMITIVE_CONDITIONING_REDUCTION_001, the default operands discussed under this meta family are conditioned distinctions such as `<a>_b`, unless a context-suppressed abstraction is explicitly declared and justified.
 
 **Typed Grammar Freeze**
 - Legal suffixes are limited to reserved typed families such as `R`, `a`, `r`, `m`, `s`, `ra`, `app`, `obs`, `bio`, `fld`, `eco`, and `top`.
@@ -2878,10 +2936,18 @@ This appendix tracks the formal status of critical gaps identified during the dr
 These items have candidate formalisms in the "Scratch Schema" (MS-SCRATCH-V1) or "Ordered Account" (Unity Math) but require canonical promotion.
 
 - **Whole Expression Primacy:** [ **C1_DEFINED_PROVISIONAL_MAINTAINED** ] The governing principle that the complete RT/Core process expression is the minimum indivisible unit of analysis, preventing component-first ontology leakage or modular ablation. [Source: MPF_ADV_HARDENING_SERIES_002_WHOLE_EXPRESSION_BACKFILL].
+- **Continuation-First Reduction:** [ **C1_DEFINED_PROVISIONAL** ] Process is treated as ontologically prior to distinction, where "priority" denotes dependency rather than temporal ordering, and distinction is treated as tension internal to a continuing process undergoing lawful resolution. [Source: session_summary 2026-06-26 continuation-first ontology reduction].
+- **Directed Relational Distinction ($D$):** [ **C1_DEFINED** ] The ordered relational value expressing the non-null distinction of one process-aspect relative to another under a declared context $C$. Metric, divergence, and scalar-distance readings are projections, not primitive meanings. [Source: MPF_PATCH_F_T0_D_RELATIONAL_VALUE_001].
+- **Local Admissibility Floor ($\epsilon$):** [ **C1_DEFINED** ] The minimum locally admissible distinction required for a process relation to remain inside the distinction domain under the current residue, topology, and admissibility context. It is local to the governing context and may vary across domains. [Source: MPF_PATCH_F_T0_EPSILON_LOCAL_FLOOR_001].
+- **Observation as Floor-Bounded Mismatch:** [ **C1_DEFINED_PROVISIONAL** ] Observation is the smallest detectable mismatch above the active local admissibility floor. Below-floor deviations are unresolved within the domain rather than nonexistent. [Source: session_summary 2026-06-26 continuation-first ontology reduction].
 - **Typed Meta-Relation Operator ($\langle*\rangle_x$):** [ **C1_DEFINED_PROVISIONAL** ] A lawful typed relation schema that couples two process expressions across a declared context $x$ without collapsing them into identity. General form: $A \langle*\rangle_x B$, preserving non-identity ($A \langle\neq\rangle_x B$). [Source: MPF_META_RELATION_X_DEFINITION_001].
 - **Zero-State Domain Membership:** [ **C1_DEFINED_PROVISIONAL** ] A fully decoupled symmetry condition possessing zero distinction and zero degrees of freedom. Governed by the rule $zero\_state \notin D\_domain$. Entry into the distinction domain occurs only via asymmetric recoupling ($0\_DOF \to D > 0$). [Source: MPF_ZERO_STATE_DOMAIN_MEMBERSHIP_001].
+- **Residue Inscription ($\Psi$):** [ **C1_DEFINED** ] The residue inscription map that carries a lawful continuation event into residue space so future admissibility remains history-conditioned. The exact update law remains a separate candidate instantiation. [Source: MPF_PATCH_F_T0_RESIDUE_UPDATE_SCOPE_001].
 - **Typed Zero-Condition Recoupling (Lemma L111):** [ **C1_DEFINED_PROVISIONAL** ] Within these models, a locally collapsed same-direction expression may participate in higher-order RT only if its zero-condition remains typed and is compared against an oppositely typed zero-condition. [Source: MPF_IND_TYPED_ZERO_RECOUPLING_001].
 - **RT Nesting, Condition Primacy, and Family Constitution (Lemma L112):** [ **C1_DEFINED_PROVISIONAL** ] Within these models, X is RT iff X constructively traces its dependency lineage to the axiomatic core without breaking core constraints. Process states represent active configurations rather than static substrates. The minimum complete nesting form is mutually constituted with the meta-relation family space. [Source: MPF_IND_RT_NESTING_CONDITIONS_FAMILY_001].
+- **RT Mechanics Recursive Completion (Lemma L_RTM):** [ **C1_DEFINED_PROVISIONAL** ] Within these models, D(*|r) is reduced to D(x|r) when the containing field achieves PRIN_001 closure traceable to RT_core, with x-admissibility and RT constitution mutually co-produced rather than independently specified. [Source: MPF_IND_RT_MECHANICS_RECURSIVE_COMPLETION_001].
+- **Conditioning as Primitive Relational Process:** [ **C1_DEFINED_PROVISIONAL** ] Within these models, conditioning is treated as the primitive relation by which one distinction supplies admissibility context for another, while arithmetic operations remain admissible projections rather than primitive mechanics. [Source: RT-IND-Conditioning-001].
+- **Primitive Conditioning Principle:** [ **C1_DEFINED_PROVISIONAL** ] Within this ontology reduction, the conditioned distinction `<a>_b` is treated as the smallest admissible RT-mechanics object, while `D(a)` is retained only as a context-suppressed abstraction and arithmetic juxtaposition remains a derived projection. [Source: MPF_PRIMITIVE_CONDITIONING_REDUCTION_001].
 - **Recoupling-Reorientation Event (RRE):** [ **C1_DEFINED_PROVISIONAL** ] A process event in which relational mismatch produces a coupling reorganization that results in an orientation update. Expressed as $\Delta C \to \Delta O \to \Delta A_{\text{adm}}$. Occurs when mismatch exceeds coupling tolerance ($Trigger_{RRE} := \Delta C_{\text{mismatch}} > \tau_C$). [Source: MPF_RECOUPLING_REORIENTATION_EVENT_001].
 - **Statistical Projection Relation ($\iff_s$):** [ **C1_DEFINED_PROVISIONAL** ] A projection relation mapping recurring admissible realization patterns into probability-like descriptions. Relies on parent meta-relation family $\langle*\rangle_x$. [Source: MPF_IFF_S_C1_PROVISIONAL_DEFINITION_001].
 - **Projection Signature:** [ **C1_DEFINED_PROVISIONAL_MAINTAINED** ] A recognizable pattern of constraints, outputs, and preserved relations showing that a process expression has lawfully projected into an application-facing domain ($Sig_{app}$). [Source: MPF_PROJECTION_SIGNATURE_C1_DEFINITION_001].
@@ -2916,6 +2982,8 @@ These items have candidate formalisms in the "Scratch Schema" (MS-SCRATCH-V1) or
 - **Abstraction Meta-Level Stack:** [ **C1_DEFINED_PROVISIONAL_MAINTAINED** ] The stratification of formal process arguments, critiques, and updates into eight distinct meta-levels to prevent layer slippage. [Source: MPF_ADV_HARDENING_SERIES_005_META_LEVEL_STACK_BACKFILL].
 - **Ontological Classification of Arrays:** [ **C1_DEFINED_PROVISIONAL_MAINTAINED** ] The requirement that all arrays in formalisms and simulations declare their type (conditional, projection, residue, or participation) and ban generic state arrays. [Source: MPF_ADV_HARDENING_SERIES_006_CONDITIONAL_ARRAY_BACKFILL].
 - **Closure Neighborhoods:** [ **C1_DEFINED_PROVISIONAL_MAINTAINED** ] The requirement that all process coupling neighborhoods (or closure neighborhoods) be defined and computed strictly via local process-connectivity relations rather than assuming a primitive spatial coordinate metric or persistent node objects. [Source: MPF_ADV_HARDENING_SERIES_007_CLOSURE_NEIGHBORHOOD_BACKFILL].
+- **Admissible Organization Operator ($Org_a$):** [ **C1_DEFINED_PROVISIONAL / GAP_QUALIFIED_DEFINITION_CANDIDATE** ] The operator organizing admissible distinction participation over a typed participation graph, governed by candidate axioms under Lemma L115 and Minimal Theorem MT-ORG-001. [Patch: ORG_A_AXIOM_DEFINITION_PASS_001].
+- **Admissible Distinction Organization Signature ($\Sigma_D$):** [ **C1_DEFINED_PROVISIONAL / GAP_QUALIFIED_EQUIVALENCE_CANDIDATE** ] The equivalence class of Org_a-closed distinction organizations under iff_R and orientation equivalence ≃_O. [Patch: ECONOMICS_SIGMA_D_EQUIVALENCE_PASS_001].
 
 
 ### 2. High-Priority Gaps (GAP_OPEN)
@@ -2929,13 +2997,27 @@ These items remain unsettled and are the primary targets for future induction an
 - **OQ_002 (Bell Curve Derivability):** [ **GAP_OPEN** ] Is the bell curve emergence from exclusion/addition asymmetry formally derivable from $\text{RT}_{\text{core}}$, or does it require an independent statistical postulate? [Source: MPF_IND_RT_NESTING_CONDITIONS_FAMILY_001].
 - **OQ_003 (Skew Conditions):** [ **GAP_OPEN** ] What governs the skew of $\text{RT}_{\text{out}}$ distributions — i.e., the formal condition under which the exclusion primary dominates over the additive primary or vice versa? [Source: MPF_IND_RT_NESTING_CONDITIONS_FAMILY_001].
 - **OQ_004 (Biconditional Ladder Resolution):** [ **GAP_OPEN** ] Does the mutual constitution of family and primaries (PRIN_007) provide the recursive scale structure needed to close the gap of the biconditional ladder / `meta_core_scale_hypothesis` in Appendix F.8? [Source: MPF_IND_RT_NESTING_CONDITIONS_FAMILY_001].
+- **OQ_RTM_001 (Trace Inheritance Lemma):** [ **GAP_OPEN** ] Under lawful nesting, does trace-admissible $RT_n$ pass trace-admissibility into $RT_{n+1}$ without exhaustive re-derivation from $\text{RT}_{\text{core}}$? [Source: MPF_IND_RT_MECHANICS_RECURSIVE_COMPLETION_001].
+- **OQ_RTM_002 (Continuation Admissibility Condition):** [ **GAP_OPEN** ] What formal condition constrains the admissible continuation term in $D(RT_n \mid continuation)$ so the recursive engine remains inside the lawful distinction domain? [Source: MPF_IND_RT_MECHANICS_RECURSIVE_COMPLETION_001].
+- **OQ_RTM_003 (Base Case Constructive Trace):** [ **GAP_OPEN** ] Provide a constructive PRIN_001 trace from the base-case reduction $D(*|1) \to D(0|1)$ to $\text{RT}_{\text{core}}$, explicitly preserving distinction, admissibility, residue closure, and non-collapse. [Source: MPF_IND_RT_MECHANICS_RECURSIVE_COMPLETION_001].
+- **OQ_COND_001 (Conditioning Composition):** [ **GAP_OPEN** ] Can conditioning be formally composed without collapsing directional order or admissibility context? [Source: RT-IND-Conditioning-001].
+- **OQ_COND_002 (Conditioning Invariants):** [ **GAP_OPEN** ] What invariants are preserved under conditioning? [Source: RT-IND-Conditioning-001].
+- **OQ_COND_003 (Conditioned Equivalence):** [ **GAP_OPEN** ] When do two conditioned distinctions become equivalent? [Source: RT-IND-Conditioning-001].
+- **OQ_COND_004 (Non-Arithmetic Admissibility Measure):** [ **GAP_OPEN** ] Can admissibility be measured independently of arithmetic projection? [Source: RT-IND-Conditioning-001].
+- **OQ_COND_005 (Conditioning Propagation):** [ **GAP_OPEN** ] How does conditioning induce relational propagation? [Source: RT-IND-Conditioning-001].
+- **Conditioning Theory Family Note:** [ **C1_DEFINED_PROVISIONAL** ] OQ_COND_001 through OQ_COND_005 are jointly tracked as a Conditioning Theory dependency family after MPF_PRIMITIVE_CONDITIONING_REDUCTION_001. This patch only reconciles ontology and registry authority; it does not resolve these gaps or promote any conditioning claim beyond the current provisional level. [Source: MPF_PRIMITIVE_CONDITIONING_REDUCTION_001].
 - **$S$ Arbitration Rule:** [ **DEFINITION_TARGET_IDENTIFIED** ] Formal rule for the pruning stage inside the $\delta_a$ composition [Source: MPF-IND-ARB-DELTA-DUAL-PHASE GAP-S-RULE].
 - **Formal definition of Residue Relation ($R_{\leftrightarrow}$):** [ **DEFINITION_CANDIDATE_PENDING_FORMAL_PROMOTION** ] Defined in `operator_registry.json` and principle `PRIN-2-X` (refined).
 - **Formal difference between $R_{\leftrightarrow}$ and $\leftrightarrow_R$:** [ **RESOLVED_PENDING_CANONICAL_TEXTBOOK_SYNC** ] Rigorous separation between residue-as-operand ($R_{\leftrightarrow}$) and closure-support-through-residue ($\leftrightarrow_R$) is explicitly defined in governance patches and integrated into Chapter 2.
 - **Formal rules for Decoupling:** Defining the conditions under which a truth-condition becomes False.
 - **Asymmetric Recoupling and Distinction Emergence:** [ **HARDENING_REQUIRED** ] Define asymmetric recoupling mechanics and the distinction emergence law; determine whether RT exists below the distinction floor [Source: MPF_ZERO_STATE_DOMAIN_MEMBERSHIP_001].
+- **Formal RT Chain Algebra:** [ **GAP_OPEN** ] Define the algebra of progressive conditioned continuation for chains such as $D(1|2), D(2|3), D(3|4)$, including lawful ordering, coupling inheritance, and chain-composition constraints. [Source: session_summary 2026-06-26 continuation-first ontology reduction].
+- **Deviation-to-Geometry Recovery:** [ **GAP_OPEN** ] Derive distance as a projection of deviation and geometry as a projection of organized distance without reintroducing geometry as a primitive. [Source: session_summary 2026-06-26 continuation-first ontology reduction].
+- **Observer-Floor Mismatch:** [ **GAP_OPEN** ] Define the observer-floor mismatch quantity and determine whether embedded observers and local admissibility floors co-evolve so relative mismatch remains approximately invariant. [Source: session_summary 2026-06-26 continuation-first ontology reduction].
+- **Orientation Transformations Across Domains:** [ **GAP_OPEN** ] Define lawful orientation transformations across domains without collapsing orientation into spatial direction or primitive time. [Source: session_summary 2026-06-26 continuation-first ontology reduction].
+- **Relational Control Surfaces:** [ **GAP_OPEN** ] Determine whether constants or coupling factors may be treated as control-surface projections inside the relational process rather than fixed external background parameters. [Source: session_summary 2026-06-26 continuation-first ontology reduction].
 - **Formal operand of $\leftrightarrow_R$:** Defining the types allowed to participate in residue-conditioned closure.
-- **Vertical Bar Operator ($\mid$):** [ **C2_test_designed / CAMPAIGN_COMPLETED** ] Formally fixing the meaning of "grouped closure participation" in triadic closure. A candidate formal definition exists in `formal_object_registry [OBJ-grouped-bar-closure]` and `operator_registry.json` (status: `MUST_DEFINE_BEFORE_ORG_A_CLOSURE`). Group closure candidate symbol: $\text{Adm}_{|}^{G}$. Associativity and permutability default to NON-PROVEN until tested. Executable model verified under 4 controls and 5 metrics. [Patch: MPF_VERTICAL_BAR_INDUCTION_001, MPF_VERTICAL_BAR_CAMPAIGN_SCAFFOLD_PATCH_001, MPF_VERTICAL_BAR_EXECUTABLE_MODEL_PATCH_001; Campaign: MPF_BAR_OPERATOR_VALIDATION_001]
+- **Vertical Bar Operator and Grouped Closure ($\mid$):** [ **C1_DEFINED_PROVISIONAL / CAMPAIGN_COMPLETED** ] Primitive admissible participation separator defining the structured comparison interface for distinction evaluation under Lemma L113 and Minimal Theorem MT-VBAR-001. Grouped bar closure ($Adm_{|}^{G}$) is defined under Lemma L114 and Minimal Theorem MT-GBC-001. Executable model verified under 4 controls and 5 metrics. [Patches: VERTICAL_BAR_OPERATOR_DEFINITION_PASS_001, VERTICAL_BAR_OPERATOR_GROUP_CLOSURE_PASS_001, MPF_VERTICAL_BAR_INDUCTION_001, MPF_VERTICAL_BAR_CAMPAIGN_SCAFFOLD_PATCH_001, MPF_VERTICAL_BAR_EXECUTABLE_MODEL_PATCH_001; Campaign: MPF_BAR_OPERATOR_VALIDATION_001]
 - **Deviated Constraint Dynamics ($D \to \delta \alpha$):** [ **C2_test_designed / RECORDED_UNDER_AUDIT** ] Formalizing the principle that distinction reorganizes admissibility within the same process. Vortex feedback loop campaign executed and validated under 4 controls, with C++ equivalence established under oneAPI AVX2; currently under governance hold pending final verification. [Patch: MPF_DEVIATED_CONSTRAINT_DYNAMICS_PATCH_001, MPF_VORTEX_ADMISSIBILITY_EXECUTION_PATCH_001, [REMEDIATE_VORTEX_EXECUTION_PROVENANCE_001](file:///D:/projects/acellorator/patches/REMEDIATE_VORTEX_EXECUTION_PROVENANCE_001.json), [MPF_VORTEX_REMEDIATION_EXECUTION_001](file:///D:/projects/acellorator/patches/MPF_VORTEX_REMEDIATION_EXECUTION_001.json); Campaigns: MPF_VORTEX_ADMISSIBILITY_CAMPAIGN_001, MPF_NON_MARKOV_ORGANIZATION_TEST_001; Audits: AUDIT_VORTEX_GOVERNANCE_001, [AUDIT_TOOL_RIGOR_ENDORSEMENT_TRACE_001](file:///D:/projects/acellorator/audits/AUDIT_TOOL_RIGOR_ENDORSEMENT_TRACE_001/tool_authorization_audit.md)]
 - **Orientation Space $\mathcal{O}$:** [ **DEFINITION_CANDIDATE_PENDING_FORMAL_PROMOTION** ] Working informal definition active in §5.1.2 and §5.1.4. Candidate formal definition in `formal_object_registry [OBJ-orientation-space]`. Open requirement for OPEN_BRIDGE_001 is the **measurable metric** $C_{\text{orient}}$ and topological class measure $T_{\text{class metric}}$, not the space definition itself. Space definition is no longer classified as GAP_OPEN. [Audit: MPF_ORIENTATION_STALENESS_AUDIT_001 P4]
 - **Orientation Coherence Metric ($C_{\text{orient}}$):** [ **VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT** ] Candidate definition active in textbook §5.1.5 (Formal Statement 5.1.5): $C_{\text{orient}}(\chi_D) := 1 - \text{Var}_{\text{norm}}(\{-(i)_k \mid -(i)_k \in \mathcal{O}_{\text{adm}}(\chi_D)\})$. Non-circularity constraint active (C_ORIENT_NONCIRCULARITY_001): metric must be computable before topology class or closure stability is evaluated. Canonical registry entry: `registry/math/metric_registry.json`. Binds to OPEN_BRIDGE_001 PO_001. [Patch: [MPF_PO001_C_ORIENT_VALIDATION_EXECUTION_PATCH_001](file:///D:/projects/acellorator/patches/MPF_PO001_C_ORIENT_VALIDATION_EXECUTION_PATCH_001.json)]
@@ -2993,6 +3075,10 @@ This section tracks newly introduced lexicon terms that remain as open mathemati
 - **`biconditional_ladder`**: Provide structural connectivity between nested scales of process expressions. [Source: `MPF_RT_BICONDITIONAL_LADDER_001`]
 - **`Affect-Effect_primitive`** (`[A|E]`): Specify a pre-distinction organizational condition at the scale floor. [Source: `MPF_RT_BICONDITIONAL_LADDER_001`]
 - **`distinction_floor_interpretation`**: Resolve local scale constraints and pre-distinction origins. [Source: `MPF_RT_BICONDITIONAL_LADDER_001`]
+- **`continuation_first_ontology`**: Record the dependency-first claim that process precedes distinction and that "precedence" is ontological rather than temporal. [Source: session_summary 2026-06-26 continuation-first ontology reduction]
+- **`observer_floor_mismatch`**: Define the relative mismatch between an embedded observer and the active local admissibility floor. [Source: session_summary 2026-06-26 continuation-first ontology reduction]
+- **`noise_floor`**: Specify the projected observational reading of unresolved deviation classes rather than treating noise as a primitive object. [Source: session_summary 2026-06-26 continuation-first ontology reduction]
+- **`relational_control_surface`**: Define a projected control-surface reading for constants or couplings under continuation-first governance. [Source: session_summary 2026-06-26 continuation-first ontology reduction]
 
 ---
 **Status:** Items in Section F.1 are active research targets. Resolved bridges are archived in F.4. Failed bridges are archived in F.5. Section F.7 tracks the measurement rules for active attacks. Section F.8 tracks open lexicon debt.
@@ -3020,8 +3106,8 @@ This textbook draft is derived from and cross-referenced with the following foun
 | **IND-STATE-S-001** | [Induction: State Primitive Grounding](D:/projects/acellorator/docs/textbook/mono_process_textbook_complete.md) | 2026-05-29 | Non-spatial, monistic definition of the state aspect S. |
 | **MPF-P1-003** | [Patch: Invariant Registry Implementation](D:/projects/acellorator/registry/math/invariant_registry.json) | 2026-05-29 | Implementation of the initial invariant family for projectional equivalence. |
 | **MPF-P1-004** | [Patch: Projectional Equivalence Template](D:/projects/acellorator/docs/theory/foundational/5_03_26%20unity/math/proofs/PROJECTIONAL_EQUIVALENCE_TEMPLATE.md) | 2026-05-29 | Formal proof structure for verifying invariant preservation across domains. |
-| **L101–L105** | [Lemmas L101–L105](D:/projects/acellorator/docs/theory/foundational/5_03_26%20unity/math/lemmas/) | 2026-06-21 | Formulations of Whole Expression Primacy, Zero-State domain membership, Recoupling-Reorientation Event, Meta-Relation Family, and Typed Meta-Relation Operator ($\langle*\rangle_x$). |
-| **P101–P105** | [Proofs P101–P105](D:/projects/acellorator/docs/theory/foundational/5_03_26%20unity/math/proofs/) | 2026-06-21 | Formal proof sketches and validation structures for Lemmas L101–L105. |
+| **L101–L115** | [Lemmas L101–L115](D:/projects/acellorator/docs/theory/foundational/5_03_26%20unity/math/lemmas/) | 2026-06-22 | Formulations of Whole Expression Primacy, Zero-State domain membership, Recoupling-Reorientation Event, Meta-Relation Family, Typed Meta-Relation Operator ($\langle*\rangle_x$), vertical bar operator |, and Admissible Organization Operator ($Org_a$) axioms. |
+| **P101–P109** | [Proofs P101–P109](D:/projects/acellorator/docs/theory/foundational/5_03_26%20unity/math/proofs/) | 2026-06-22 | Formal proof sketches and validation structures for Lemmas L101–L109. |
 
 ### Secondary References and Registries
 - **Compliance Charter v2.3:** [compliance_charter_v2_3.json](D:/projects/acellorator/docs/registry/compliance_charter_v2_3.json) - Governance authority.

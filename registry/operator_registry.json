@@ -92,18 +92,24 @@
       "latex": "\\langle * \\rangle_x",
       "name": "Typed Relational Comparison Operator",
       "class": "typed_relational_comparison_operator",
-      "domain": "Two admissible blocks A_L, A_R",
-      "codomain": "RT_candidate (a lawful typed relation)",
-      "closure_condition": "A lawful RT candidate forms when two admissible blocks enter typed whole-expression comparison without identity collapse.",
+      "domain": "Two conditioned distinctions <a>_b and <c>_d, or explicitly declared context-suppressed abstractions thereof",
+      "codomain": "conditioned_relational_composition_candidate",
+      "closure_condition": "A lawful conditioned relational composition candidate forms when two conditioned distinctions enter typed whole-expression comparison without identity collapse and with declared conditioning lineage preserved.",
       "operand_types": [
-        "admissible_block",
-        "admissible_block"
+        "conditioned_distinction",
+        "conditioned_distinction"
+      ],
+      "composition_rules": [
+        "Default signature: <a>_b <*>_x <c>_d",
+        "Context-suppressed abstractions such as D(a) are legal only when their suppressed conditioning context is explicitly declared",
+        "Ordering is semantically binding unless a symmetric conditioning promotion is separately declared"
       ],
       "failure_conditions": [
         "FAIL_RT_001: coupling_context_undefined",
         "FAIL_RT_002: typed_identity_collapse",
         "FAIL_RT_003: no_new_relation_generated",
-        "FAIL_RT_004: whole_expression_violation"
+        "FAIL_RT_004: whole_expression_violation",
+        "FAIL_RT_005: conditioning_lineage_undefined"
       ],
       "status": "C1_DEFINED_PROVISIONAL"
     },
@@ -613,7 +619,7 @@
         "Must be defined before Org_a closure is attempted",
         "Does not itself assert realized distinction until evaluated by D or a registered successor comparison context"
       ],
-      "status": "MUST_DEFINE_BEFORE_ORG_A_CLOSURE",
+      "status": "C1_DEFINED_PROVISIONAL",
       "arity": 2,
       "order_sensitive": true,
       "admissibility_gate": "D(A|B) > epsilon_a",
