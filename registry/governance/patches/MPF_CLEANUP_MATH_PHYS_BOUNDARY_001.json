@@ -1,0 +1,119 @@
+{
+  "patch_id": "MPF_CLEANUP_MATH_PHYS_BOUNDARY_001",
+  "status": "proposed_personal_cleanup",
+  "modifies_ssot_structure": false,
+  "intent": "Clarify routing and claim boundaries between mathematics and physics without restructuring the SSOT.",
+  "note_for_user": "This is a cleanup/governance note, not a structural rewrite.",
+  "problem_observed": {
+    "summary": "Mathematics and physics are currently partially conflated.",
+    "risk": [
+      "formal derivations may be read as physical claims",
+      "physical interpretations may be mistaken for mathematical theorems",
+      "failed physics mappings could appear to weaken the formal calculus",
+      "vector retrieval may blend formal and empirical material"
+    ]
+  },
+  "cleanup_rule": {
+    "mathematics_department": {
+      "role": "Define and derive formal structure.",
+      "may_claim": [
+        "formal syntax",
+        "definitions",
+        "axioms",
+        "operators",
+        "lemmas",
+        "theorems",
+        "proofs",
+        "internal consistency",
+        "formal admissibility",
+        "formal closure"
+      ],
+      "may_not_claim_without_physics_routing": [
+        "physical reality",
+        "empirical validation",
+        "experimental prediction",
+        "particle identity",
+        "field identity",
+        "cosmological interpretation",
+        "energy interpretation"
+      ]
+    },
+    "physics_department": {
+      "role": "Interpret formal structure as possible physical model.",
+      "depends_on": [
+        "global_core",
+        "mathematics_department",
+        "claim_governance"
+      ],
+      "may_claim": [
+        "physical interpretation",
+        "model correspondence",
+        "observable mapping",
+        "prediction",
+        "comparison to known physics",
+        "experimental proposal",
+        "validation status"
+      ],
+      "must_not": [
+        "change core ontology",
+        "introduce new primitives by physical terminology",
+        "promote analogy to empirical proof",
+        "treat formal consistency as physical confirmation"
+      ]
+    }
+  },
+  "routing_policy": {
+    "formal_question": "route_to_mathematics",
+    "physical_meaning_question": "route_to_physics",
+    "cross_domain_question": "retrieve_global_core_then_local_department",
+    "ambiguous_question": "answer_with_claim_class_and_department_scope"
+  },
+  "vector_db_policy": {
+    "required_metadata": [
+      "department",
+      "layer",
+      "claim_class",
+      "source_document",
+      "ssot_location",
+      "interpretation_status",
+      "cross_reference_permissions"
+    ],
+    "math_chunks": {
+      "department": "mathematics",
+      "exclude_from": [
+        "empirical_validation_answers"
+      ]
+    },
+    "physics_chunks": {
+      "department": "physics",
+      "requires_math_dependency": true,
+      "must_include": [
+        "correspondence_rule",
+        "claim_class"
+      ]
+    }
+  },
+  "answer_policy": {
+    "when_formal": "State what the calculus defines or derives.",
+    "when_physical": "State that the item is a physics interpretation of the formal structure.",
+    "when_uncertain": "Mark as provisional and prevent promotion.",
+    "required_phrase": "Within the Physics Department interpretation..."
+  },
+  "promotion_guard": {
+    "formal_derivation_to_physics_claim": "blocked_without_correspondence_rule",
+    "physics_interpretation_to_empirical_result": "blocked_without_evidence",
+    "analogy_to_identity": "blocked",
+    "successful_model_to_universal_truth": "blocked"
+  },
+  "implementation_style": {
+    "no_file_moves": true,
+    "no_heading_changes_required": true,
+    "no_ssot_reorganization_required": true,
+    "use_as": [
+      "annotation rule",
+      "retrieval filter",
+      "claim review checklist",
+      "future department cleanup guide"
+    ]
+  }
+}

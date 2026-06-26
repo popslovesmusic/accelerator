@@ -2462,6 +2462,79 @@ The purpose of governance is not to protect claims from falsification. The purpo
 
 ---
 
+## 14.3A Department Instantiation Architecture
+
+Within the governed research program, departments are not separate ontologies. They are local semantic instantiations of the same process ontology under shared global governance.
+
+```text
+Global Governance
+        |
+     RT/Core
+        |
+  Core Ontology
+(Process, Relation, Continuation)
+        |
+  Department Instantiations
+  Math | Physics | Economics | Theology | ...
+        |
+ Local Mandates, Evidence Rules, Semantic Interpretation
+```
+
+**Department Rule (DEPT_001):**
+Every department inherits the same RT/Core, process-first ontology, and claim-humility requirements. A department may add local vocabulary, local review rules, and local evidence thresholds, but it may not override the global charter or introduce a new primitive ontology by relabeling projections.
+
+**Department Root Rule (MPF_GOV_DEPARTMENT_INDUCTION_001):**
+Departments are treated as first-class governed entities and shall exist as peer directories beneath the common `departments/` root. Each department must provide a local SSOT file and an `AGENTS.md` file before it enters the claim lifecycle.
+
+**Operational Consequence:**
+Economics, theology, information theory, and similar domains are treated as semantic windows into one continuing process rather than as independent foundations.
+
+---
+
+## 14.3B Theology Department Governance
+
+The Theology Department (`procedural_theology_app`) is governed as a semantic projection domain rather than as a foundation of the mathematics.
+
+**Local Governance Rule (DEPT_THEO_001):**
+Theology-domain usage may express structural analogies, department-local interpretations, and bounded cross-domain `proof_app` comparisons. It may not claim doctrinal proof, metaphysical proof, or identity between RT and any theological doctrine from structure alone.
+
+**Required Reading:**
+- `docs/theology/procedural_theology_ssot.md`
+- `docs/theology/GEMINI.md`
+
+**Governance Note:**
+Cross-domain portability of the formal system may increase confidence in framework invariance as a research program, but it does not function as deductive proof of theology, physics, or a Theory of Everything.
+
+---
+
+## 14.3C Mathematics-Physics Boundary Cleanup
+
+The mathematics-facing and physics-facing layers of the program must remain distinct even when they share the same RT/Core.
+
+**Cleanup Rule (MPF_CLEANUP_MATH_PHYS_BOUNDARY_001):**
+The Mathematics Department defines and derives formal structure. The Physics Department interprets that structure as a possible physical model under separate claim governance. A formal derivation is not by itself a physics claim, and a failed physics correspondence does not by itself weaken the formal calculus.
+
+**Routing Rule:**
+- Formal questions route to mathematics.
+- Physical-meaning questions route to physics.
+- Ambiguous questions must be answered with explicit claim class and department scope.
+
+**Required Physics Phrase:**
+`Within the Physics Department interpretation...`
+
+**Governance Note:**
+This cleanup is an annotation rule and retrieval filter only. It does not reorganize headings, move files, or alter the SSOT structure.
+
+**Reference:**
+- `registry/governance/patches/MPF_GOV_DEPARTMENT_INDUCTION_001.json`
+- `departments/README.md`
+- `registry/governance/patches/MPF_CLEANUP_MATH_PHYS_BOUNDARY_001.json`
+- `docs/governance/math_physics_boundary_cleanup.md`
+- `departments/physics/physics_ssot.md`
+- `departments/physics/AGENTS.md`
+
+---
+
 ## 14.4 Live Formal Status Dashboard (LIVE_LINKED)
 
 The dashboard provides the current operational state of the formal program. It is generated from registry data rather than narrative text. All claim-level decisions, campaigns, evidence reports, and review locks are reflected here. 
