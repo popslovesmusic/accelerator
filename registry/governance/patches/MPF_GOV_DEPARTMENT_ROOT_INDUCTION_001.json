@@ -1,0 +1,99 @@
+{
+  "patch_id": "MPF_GOV_DEPARTMENT_ROOT_INDUCTION_001",
+  "status": "proposed",
+  "evidence_class": "C1_DEFINED_PROVISIONAL",
+  "modifies_ssot_structure": false,
+  "title": "Department Root and Induction Method",
+  "purpose": "Establish all departments as peer governed entities under a shared department root and define the minimum induction process for new departments.",
+  "depends_on": [
+    "MPF_GOV_CANONICAL_OWNERSHIP_001"
+  ],
+  "constitutional_rules": [
+    {
+      "id": "DRI-001",
+      "rule": "All departments SHALL be represented as peer directories under a common department root."
+    },
+    {
+      "id": "DRI-002",
+      "rule": "No department SHALL be structurally privileged by directory location."
+    },
+    {
+      "id": "DRI-003",
+      "rule": "A department is not governed until it has a local SSOT and local AGENTS.md."
+    },
+    {
+      "id": "DRI-004",
+      "rule": "Department induction SHALL NOT imply claim maturity, validation, or proof_app contribution."
+    },
+    {
+      "id": "DRI-005",
+      "rule": "Each department SHALL declare its scope, dependencies, interpretation boundaries, and prohibited promotions."
+    },
+    {
+      "id": "DRI-006",
+      "rule": "Departments MAY define local interpretation frameworks but MAY NOT redefine global primitives."
+    }
+  ],
+  "department_root": {
+    "path": "departments/",
+    "required_peer_layout": [
+      "departments/mathematics/",
+      "departments/physics/",
+      "departments/economics/",
+      "departments/theology/"
+    ]
+  },
+  "minimum_department_files": {
+    "required": [
+      "department_ssot.md",
+      "AGENTS.md"
+    ],
+    "recommended": [
+      "registry/",
+      "tasks/",
+      "debt/",
+      "bridges/",
+      "validation/",
+      "references/"
+    ]
+  },
+  "induction_steps": [
+    "Create department directory under departments/.",
+    "Create department_ssot.md.",
+    "Create AGENTS.md.",
+    "Declare canonical owner for local artifacts.",
+    "Declare dependencies on Global Core and other departments.",
+    "Declare department scope.",
+    "Declare interpretation boundaries.",
+    "Declare prohibited promotions.",
+    "Register initial research debt.",
+    "Register initial program tasks."
+  ],
+  "induction_statuses": [
+    "planned",
+    "inducted",
+    "active",
+    "mature",
+    "archived"
+  ],
+  "department_record_schema": {
+    "department_id": "",
+    "display_name": "",
+    "status": "planned",
+    "canonical_owner_scope": [],
+    "depends_on": [],
+    "local_ssot": "",
+    "local_agents": "",
+    "interpretation_framework": "",
+    "evidence_standard": "",
+    "prohibited_promotions": [],
+    "initial_debt": [],
+    "initial_tasks": []
+  },
+  "implementation": {
+    "requires_file_moves": false,
+    "requires_directory_changes": false,
+    "backfill_only": true,
+    "note": "This patch authorizes cleanup and future restructuring but does not itself modify existing SSOT layout."
+  }
+}

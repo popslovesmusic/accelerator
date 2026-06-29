@@ -97,6 +97,13 @@ Interpretive boilerplate:
 - **Claim Class:** `C3_structural_comparison`
 - **Status:** provisional interpretation
 
+#### PHYS_INT_MOTION_001
+- **Title:** Motion as Organizational Projection
+- **Formal Source:** transition-event note, LED-chaser analogy, unresolved continuation sequencing
+- **Interpretation:** apparent motion is interpreted as a projection of changing organization and coupling rather than primitive transport of a persisting object through pre-existing space.
+- **Claim Class:** `C3_structural_comparison`
+- **Status:** provisional interpretation
+
 #### PHYS_INT_DISTANCE_001
 - **Title:** Distance as Projected Deviation
 - **Formal Source:** deviation and distinction projection notes
@@ -143,6 +150,13 @@ Models remain provisional unless validated.
 - **Source Status:** extracted from LED-chaser and polarity notes
 - **Summary:** observable motion may appear as a projection of changing orientation/coupling while underlying elements remain fixed.
 - **Claim Class:** `C3_structural_comparison`
+- **Validation Status:** provisional model
+
+#### PHYS_MODEL_AFFECT_TRACE_001
+- **Title:** Affect-Trace Persistence Model
+- **Source Status:** extracted from rock/vortex and residue-conditioning notes
+- **Summary:** transient local organization may dissolve while its affect remains inscribed in later admissibility conditions, allowing history to persist without requiring persistence of the original local closure.
+- **Claim Class:** `C1_model_relative`
 - **Validation Status:** provisional model
 
 #### PHYS_MODEL_EMERGENT_TIME_001
@@ -204,11 +218,13 @@ Current department status:
 | ID | Type | Claim Class | Status |
 |---|---|---|---|
 | PHYS_INT_TIME_001 | interpretation | C3_structural_comparison | provisional |
+| PHYS_INT_MOTION_001 | interpretation | C3_structural_comparison | provisional |
 | PHYS_INT_DISTANCE_001 | interpretation | C3_structural_comparison | provisional |
 | PHYS_CORR_EPSILON_001 | correspondence | C3_structural_comparison | provisional |
 | PHYS_CORR_MISMATCH_001 | correspondence | C1_model_relative | scaffold |
 | PHYS_CORR_RESIDUE_001 | correspondence | C1_model_relative | scaffold |
 | PHYS_MODEL_ORIENTATION_PROPAGATION_001 | model | C3_structural_comparison | provisional |
+| PHYS_MODEL_AFFECT_TRACE_001 | model | C1_model_relative | provisional |
 | PHYS_MODEL_EMERGENT_TIME_001 | model | C3_structural_comparison | provisional |
 | PHYS_MODEL_VACUUM_FLOOR_001 | model | C3_structural_comparison | provisional |
 | PHYS_MODEL_RELATIONAL_GEOMETRY_001 | model | C3_structural_comparison | provisional |

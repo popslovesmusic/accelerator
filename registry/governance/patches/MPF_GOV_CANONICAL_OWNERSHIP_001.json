@@ -1,0 +1,97 @@
+{
+  "patch_id": "MPF_GOV_CANONICAL_OWNERSHIP_001",
+  "status": "proposed",
+  "evidence_class": "C1_DEFINED_PROVISIONAL",
+  "modifies_ssot_structure": false,
+  "title": "Canonical Artifact Ownership",
+  "purpose": "Establish a single constitutional owner for every governed artifact while permitting cross-department references without duplicating authority.",
+  "rationale": [
+    "Prevents conflicting definitions.",
+    "Supports department induction.",
+    "Supports vector retrieval routing.",
+    "Supports claim governance.",
+    "Allows departments to reference rather than redefine shared artifacts.",
+    "Enables future extraction without breaking provenance."
+  ],
+  "definitions": {
+    "canonical_owner": "The single constitutional authority responsible for maintaining an artifact.",
+    "consumer": "A department that references an artifact without assuming ownership.",
+    "shared_artifact": "An artifact referenced by multiple departments but owned by exactly one authority."
+  },
+  "constitutional_rules": [
+    {
+      "id": "CO-001",
+      "rule": "Every governed artifact SHALL have exactly one canonical owner."
+    },
+    {
+      "id": "CO-002",
+      "rule": "Departments MAY reference artifacts owned elsewhere."
+    },
+    {
+      "id": "CO-003",
+      "rule": "Referencing an artifact SHALL NOT transfer ownership."
+    },
+    {
+      "id": "CO-004",
+      "rule": "Interpretation SHALL remain local to the consuming department."
+    },
+    {
+      "id": "CO-005",
+      "rule": "Only the canonical owner MAY modify the authoritative definition of an artifact."
+    },
+    {
+      "id": "CO-006",
+      "rule": "Cross-department references SHOULD preserve provenance back to the canonical owner."
+    }
+  ],
+  "ownership_examples": [
+    {
+      "artifact": "RT/Core",
+      "owner": "Global Core",
+      "consumers": [
+        "Mathematics",
+        "Physics",
+        "Economics",
+        "Theology"
+      ]
+    },
+    {
+      "artifact": "Conditioning Reduction",
+      "owner": "Mathematics",
+      "consumers": [
+        "Physics",
+        "Economics"
+      ]
+    },
+    {
+      "artifact": "Orientation-Driven Propagation Model",
+      "owner": "Physics",
+      "consumers": [
+        "Mathematics"
+      ]
+    },
+    {
+      "artifact": "Theological Correspondence Framework",
+      "owner": "Theology",
+      "consumers": []
+    }
+  ],
+  "vector_policy": {
+    "primary_retrieval": "Prefer canonical owner.",
+    "secondary_retrieval": "Retrieve consuming department only after canonical definition.",
+    "conflict_resolution": "Canonical owner takes precedence."
+  },
+  "future_compatibility": [
+    "Department Registry",
+    "Bridge Registry",
+    "Research Asset Registry",
+    "Research Debt Registry",
+    "Program Task Registry"
+  ],
+  "implementation": {
+    "requires_file_moves": false,
+    "requires_directory_changes": false,
+    "requires_document_rewrites": false,
+    "backfill_only": true
+  }
+}

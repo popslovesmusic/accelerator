@@ -43,5 +43,14 @@ The math core does not elevate theorems, close ontology, or justify physics\_phy
 
 All contributions must adhere to the **Requirement of Equivalence** and the **Unified Claim Gate** protocol. No research claim may be finalized until its behavioral correctness is verified in the `registry/validation_index.json`.
 
+Operational governance state resolves through the live-ledger layer:
+
+- `governance/live/authority_manifest.json`
+- `governance/live/department_registry.json`
+- `governance/live/program_task_registry.json`
+- `governance/live/research_debt_registry.json`
+
+Historical proposal-shaped governance artifacts remain preserved for reference under `governance/specifications/` and legacy locations, but they are not the operational source of current governance state once a live ledger exists.
+
 ---
 *Stay rigorous. Stay humble.*

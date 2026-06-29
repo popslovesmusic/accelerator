@@ -115,6 +115,12 @@ Law, Operator, and Truth are not separate components but three process-aspects o
 An RT expression is the minimum admissible unit of analysis. Internal aspect positions (e.g., orientation, residue, admissibility) are not granted ontological priority over the complete expression. 
 $$ \text{Process} = [\mathcal{E}, \mathcal{R}, \rho, \mathcal{K}, \delta, -(i)]_{\text{whole}} $$
 
+**Governed Clarification 1.2.2B.1: Primitive Form and Dominant-Domain Realization (MPF_IND_PRIMITIVE_FORM_DOMINANT_DOMAIN_001)**
+Within the current induction layer, the notation $(*|*)$ is introduced as the **primitive distinction form** and $A|E$ as its **canonical dominant-domain realization**. Neither $A$ nor $E$ nor the distinction marker $|$ is granted ontological priority over the complete expression. Accordingly, $A|E$ may be treated as primitive only as a whole expression within its dominant organizational domain, not as an assembly of independently primitive components.
+
+**Governance Limit:**
+This clarification is provisional only. It does not license theorem promotion, proof dependency closure, or any reading in which $(*|*)$ temporally generates $A|E$ or reduces $A|E$ to a merely derivative non-primitive remainder.
+
 **Formal Principle 1.2.2C: Aspectual RT Set as Higher-Order RT (aRT) (MPF_IND_ART_SET_OF_RTS_001)**
 A lawful set of RT expressions is itself an aspectual RT expression (`aRT`). The set of operational aspects (distinction, asymmetry, orientation, admissibility, residue, closure) are not independent modules but are themselves RT-bearing expressions.
 $$ aRT := RT(\{RT_1, RT_2, \dots, RT_n\}) $$
@@ -670,6 +676,8 @@ $T$ is the operationalization of the distinction $D(S_a|S_b)$. While $D$ measure
 
 **Motion Projection Note (IND_RT_CORE_AFFECT_EFFECT_001):**
 Discrete state updates ($T$) may be reconstructed by an observer as smooth continuation or "motion." This follows the **"LED chaser analogy"**: nothing physical actually moves from $S_a$ to $S_b$. Rather, local state changes project as apparent motion across the sequence. It is a critical error to reify this apparent motion as the continuous transport of a substrate through pre-existing space.
+
+Within this bounded reading, the placeholder `*` in expressions such as $D(*|*) \to D(1|*) \to D(1|2) \to D(2|*)$ is treated as an **unresolved continuation**, not as an unknown object or missing quantity. Local closure at $D(1|2)$ yields only a temporary organizational invariant; the resulting endpoint immediately re-enters the continuation chain as a new open condition. The persistence of the past is therefore not modeled as the persistence of a state-object, but as the persistence of its affect on later admissibility conditions.
 
 ---
 
@@ -2460,9 +2468,65 @@ The purpose of governance is not to protect claims from falsification. The purpo
 
 **Governance Note:** The purpose of the governance layer is not to establish truth. Its purpose is to preserve the relationship between claims, evidence, dependencies, and revision history.
 
+**Operational Ledger Rule (GOV-LIVE-001):**
+Governance specifications describe intended structure, while live operational ledgers record current canonical state. Once a live ledger exists, proposal-shaped specifications and historical patch records no longer serve as operational authority. Operational governance state is read from:
+- `governance/live/authority_manifest.json`
+- `governance/live/department_registry.json`
+- `governance/live/program_task_registry.json`
+- `governance/live/research_debt_registry.json`
+
 ---
 
-## 14.3A Department Instantiation Architecture
+## 14.3A Explicit Falsification Path
+
+Within the Mono-Process Framework, falsification is not treated as the simple assignment of `False` to a proposition. Successful falsification is interpreted as the loss of the relational conditions required to maintain lawful closure. The condition therefore undergoes decoupling.
+
+**Governed Path (MPF_EXPLICIT_FALSIFICATION_PATH_001):**
+
+```text
+Induction
+    ↓
+Candidate Condition
+    ↓
+Admissibility Evaluation
+    ↓
+Coupling
+    ↓
+Local Closure
+    ↓
+RT (stable local condition)
+    ↓
+Continuous Adversarial Attack
+    ↓
+Boundary Evaluation
+    ↓
+Admissibility Re-evaluation
+    │
+    ├── survives → RT Maintained
+    └── fails → Partial Decoupling
+                 ↓
+          Loss of Boundary Support
+                 ↓
+           Increasing Symmetry
+                 ↓
+        Complete Local Decoupling
+                 ↓
+        Return to Symmetric Condition
+                 ↓
+         Reopened Research Debt
+                 ↓
+           New Induction Cycle
+```
+
+**Interpretation:**
+A lawful condition exists only while sufficient relational support is maintained. A successful falsification attack does not destroy the condition; it removes the boundary conditions required to sustain local closure. As support fails, the condition progressively decouples. Increasing decoupling corresponds to increasing symmetry. Complete local decoupling returns the condition to a symmetric state and reopens research debt.
+
+**Governance Consequence:**
+Promotion within the program is never permanent. A promoted condition is read as "currently maintaining admissible local closure" rather than as permanently true. If future evidence removes sufficient support, the condition decouples and re-enters induction through research debt.
+
+---
+
+## 14.3B Department Instantiation Architecture
 
 Within the governed research program, departments are not separate ontologies. They are local semantic instantiations of the same process ontology under shared global governance.
 
@@ -2491,7 +2555,7 @@ Economics, theology, information theory, and similar domains are treated as sema
 
 ---
 
-## 14.3B Theology Department Governance
+## 14.3C Theology Department Governance
 
 The Theology Department (`procedural_theology_app`) is governed as a semantic projection domain rather than as a foundation of the mathematics.
 
@@ -2507,7 +2571,7 @@ Cross-domain portability of the formal system may increase confidence in framewo
 
 ---
 
-## 14.3C Mathematics-Physics Boundary Cleanup
+## 14.3D Mathematics-Physics Boundary Cleanup
 
 The mathematics-facing and physics-facing layers of the program must remain distinct even when they share the same RT/Core.
 
@@ -3108,12 +3172,16 @@ These items remain unsettled and are the primary targets for future induction an
 | :--- | :--- | :--- | :--- |
 | **OPEN_BRIDGE_001** | Orientation-Closure | **C4_CANDIDATE_PENDING_RIGOR** | **STRUCTURAL_ONLY** |
 | **OPEN_BRIDGE_002** | Typed-Zero Provenance | **GAP_OPEN** | **THEORETICAL_ONLY** |
+| **OPEN_BRIDGE_003** | Cross-Domain Continuation Trace | **GAP_OPEN** | **THEORETICAL_ONLY** |
 
 - **OPEN_BRIDGE_002 (Typed-Zero Provenance):** Requires formal proof that $0_{minus}$ and $0_{plus}$ retain enough directional provenance to support higher-order RT.
+- **OPEN_BRIDGE_003 (Cross-Domain Continuation Trace):** Tracks the open bridge question of whether an unresolved admissible meta-relation between domains can preserve lawful continuation trace across projection boundaries without collapsing into primitive time, primitive observer, or consciousness-survival claims. At current status this bridge licenses only bounded formalization work on continuation trace, domain transition conditions, and admissibility-preserving handoff criteria. It does not support any claim that subjective continuity, consciousness persistence, or trans-domain identity has been established.
 
 ### F.4 Bridge Dependency Tables
 - **OPEN_BRIDGE_001 Requires Rewrite/Reroute Review For:** TC_asym, K, B_K.
 - **OPEN_BRIDGE_001 Does Not Auto-Promote:** topology_app, geometry_app, gravity_app, matter_app, field_app, QM_app_GR_app_bridge.
+- **OPEN_BRIDGE_003 Requires Definition Work For:** unresolved continuation, admissible meta-relation handoff, domain-transition trace preservation, and orientation-reference continuity under projection change.
+- **OPEN_BRIDGE_003 Does Not Auto-Promote:** consciousness_app, observer persistence, identity survival, theology correspondence, or any empirical continuity claim.
 
 
 ### F.5 Active Attack Campaigns
@@ -3152,6 +3220,19 @@ This section tracks newly introduced lexicon terms that remain as open mathemati
 - **`observer_floor_mismatch`**: Define the relative mismatch between an embedded observer and the active local admissibility floor. [Source: session_summary 2026-06-26 continuation-first ontology reduction]
 - **`noise_floor`**: Specify the projected observational reading of unresolved deviation classes rather than treating noise as a primitive object. [Source: session_summary 2026-06-26 continuation-first ontology reduction]
 - **`relational_control_surface`**: Define a projected control-surface reading for constants or couplings under continuation-first governance. [Source: session_summary 2026-06-26 continuation-first ontology reduction]
+- **`Affect-Effect_pre_distinction_primitive_conjecture`**: Test whether A|E is a candidate pre-distinction primitive rather than merely a domain projection, and whether it can derive the distinction floor without circularity. [Source: MPF_AE_INDUCTION_CANDIDATES_2026_06_28]
+- **`distinction_floor_emergence`**: Separate the current framework-above-floor from the foundational target of deriving the floor itself. [Source: MPF_AE_INDUCTION_CANDIDATES_2026_06_28]
+- **`observation_as_orientation_affect`**: Define observation as the affect of basin boundary interactions on the orientation reference rather than as perception or consciousness. [Source: MPF_AE_INDUCTION_CANDIDATES_2026_06_28]
+- **`subjective_as_experience_of_observation`**: Treat subjective as the experience of observation, where experience is realized orientation rather than a psychological primitive. [Source: MPF_AE_INDUCTION_CANDIDATES_2026_06_28]
+- **`observer_as_projection`**: Reduce observer to a derived projection of boundary interactions, affect, observation, and orientation reference. [Source: MPF_AE_INDUCTION_CANDIDATES_2026_06_28]
+- **`counterfactual_definiteness_subjectivation`**: Determine whether counterfactual definiteness becomes subjective or orientation-relative within A|E. [Source: MPF_AE_INDUCTION_CANDIDATES_2026_06_28]
+- **`orientation_reference_definition`**: Resolve whether the orientation reference is an array snapshot, basin property, local phase signature, or a more primitive structure. [Source: MPF_AE_INDUCTION_CANDIDATES_2026_06_28]
+- **`triadicity_emergence_question`**: Determine whether triadic closure emerges from A|E or whether triadicity remains primitive. [Source: MPF_AE_INDUCTION_CANDIDATES_2026_06_28]
+- **`grammatical_metric_binding_candidate`**: Test backslash notation as a grammatical metric-binding construct rather than an ontological operator. [Source: MPF_AE_INDUCTION_CANDIDATES_2026_06_28]
+- **`grammatical_metric_inversion_candidate`**: Test slash notation as a grammatical metric-inversion construct rather than an ontological operator. [Source: MPF_AE_INDUCTION_CANDIDATES_2026_06_28]
+- **`primitive_distinction_form`**: Clarify $(*|*)$ as the primitive distinction form without reifying it as an object or treating it as a temporal generator. [Source: MPF_IND_PRIMITIVE_FORM_DOMINANT_DOMAIN_001]
+- **`dominant_domain_realization`**: Define how $A|E$ functions as the canonical dominant-domain realization of the primitive form while remaining whole-expression-bound. [Source: MPF_IND_PRIMITIVE_FORM_DOMINANT_DOMAIN_001]
+- **`realization_derivation_boundary`**: Specify whether the relation between $(*|*)$ and $A|E$ is realization, typing, contextualization, or projection rather than temporal derivation. [Source: MPF_IND_PRIMITIVE_FORM_DOMINANT_DOMAIN_001]
 
 ---
 **Status:** Items in Section F.1 are active research targets. Resolved bridges are archived in F.4. Failed bridges are archived in F.5. Section F.7 tracks the measurement rules for active attacks. Section F.8 tracks open lexicon debt.

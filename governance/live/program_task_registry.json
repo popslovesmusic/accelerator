@@ -1,0 +1,196 @@
+{
+  "registry_id": "MPF_PROGRAM_TASK_REGISTRY_LIVE_V1",
+  "schema_version": "1.0.0",
+  "authority": "Global Governance",
+  "last_updated": "2026-06-28",
+  "entries": [
+    {
+      "task_id": "PTR_BACKFILL_DEPT_LAYOUT_001",
+      "title": "Normalize Department Peer Directory Layout",
+      "owner": "Global Governance",
+      "department": "governance",
+      "affected_departments": [
+        "mathematics",
+        "physics",
+        "economics",
+        "theology"
+      ],
+      "tier": 0,
+      "category": "governance",
+      "priority": "foundation",
+      "status": "planned",
+      "claim_class": "C1_DEFINED_PROVISIONAL",
+      "summary": "Ensure all departments exist as peers under departments/ without structurally privileging any department.",
+      "depends_on": [
+        "MPF_GOV_DEPARTMENT_ROOT_INDUCTION_001"
+      ],
+      "blocks": [],
+      "linked_debt": [
+        "DEBT_GOV_DEPARTMENT_LAYOUT_001",
+        "DEBT_GOV_THEOLOGY_INDUCTION_001",
+        "DEBT_GOV_ECONOMICS_INDUCTION_001"
+      ],
+      "linked_assets": [
+        "governance/live/department_registry.json"
+      ],
+      "linked_bridges": [],
+      "deliverables": [
+        "Peer directory records for all inducted and planned departments",
+        "Normalized department root usage"
+      ],
+      "completion_criteria": [
+        "All active and planned departments have peer directory records.",
+        "Department Registry reflects directory paths.",
+        "No department is treated as structurally global by folder location."
+      ],
+      "references": [
+        "docs/textbook/mono_process_textbook_complete.md",
+        "governance/live/department_registry.json"
+      ],
+      "notes": "Imported from proposal backfill task and retained as live backlog work."
+    },
+    {
+      "task_id": "PTR_BACKFILL_PHYSICS_SSOT_001",
+      "title": "Normalize Physics Department SSOT Naming",
+      "owner": "Physics Department",
+      "department": "physics",
+      "affected_departments": [
+        "physics",
+        "mathematics"
+      ],
+      "tier": 2,
+      "category": "gap",
+      "priority": "foundation",
+      "status": "planned",
+      "claim_class": "C1_DEFINED_PROVISIONAL",
+      "summary": "Normalize the Physics Department local SSOT filename to the common department_ssot.md convention or explicitly ratify the exception.",
+      "depends_on": [
+        "MPF_GOV_DEPARTMENT_REGISTRY_001"
+      ],
+      "blocks": [],
+      "linked_debt": [
+        "DEBT_GOV_PHYSICS_SSOT_NORMALIZATION_001"
+      ],
+      "linked_assets": [
+        "departments/physics/physics_ssot.md",
+        "governance/live/department_registry.json"
+      ],
+      "linked_bridges": [],
+      "deliverables": [
+        "Normalized local SSOT filename or explicit exception record"
+      ],
+      "completion_criteria": [
+        "departments/physics/department_ssot.md exists or an explicit naming exception is recorded.",
+        "Physics scope and prohibited promotions remain declared.",
+        "Physics dependence on mathematics remains declared."
+      ],
+      "references": [
+        "departments/physics/physics_ssot.md",
+        "governance/live/department_registry.json"
+      ],
+      "notes": "Reduced from the proposal backfill task to match current repo state."
+    },
+    {
+      "task_id": "PTR_BACKFILL_MATH_PHYS_BOUNDARY_001",
+      "title": "Separate Mathematics and Physics Claim Routing",
+      "owner": "Global Governance",
+      "department": "governance",
+      "affected_departments": [
+        "mathematics",
+        "physics"
+      ],
+      "tier": 3,
+      "category": "bridge",
+      "priority": "blocker",
+      "status": "planned",
+      "claim_class": "C1_DEFINED_PROVISIONAL",
+      "summary": "Prevent formal mathematical derivations from being treated as physical claims and prevent physical interpretations from being treated as mathematical theorems.",
+      "depends_on": [
+        "MPF_GOV_CANONICAL_OWNERSHIP_001",
+        "MPF_GOV_DEPARTMENT_REGISTRY_001"
+      ],
+      "blocks": [],
+      "linked_debt": [
+        "DEBT_GOV_MATH_PHYS_BOUNDARY_001"
+      ],
+      "linked_assets": [
+        "registry/governance/patches/MPF_CLEANUP_MATH_PHYS_BOUNDARY_001.json"
+      ],
+      "linked_bridges": [],
+      "deliverables": [
+        "Declared mathematics allowed claims",
+        "Declared physics allowed claims",
+        "Correspondence rule requirement",
+        "Vector routing split"
+      ],
+      "completion_criteria": [
+        "Mathematics allowed claims are declared.",
+        "Physics allowed claims are declared.",
+        "Correspondence rule requirement is declared.",
+        "Vector routing policy distinguishes math from physics."
+      ],
+      "references": [
+        "registry/governance/patches/MPF_CLEANUP_MATH_PHYS_BOUNDARY_001.json"
+      ],
+      "notes": "Task retained as live blocker until boundary cleanup is operationalized beyond patch prose."
+    },
+    {
+      "task_id": "PTR_GOV_LIVE_LEDGER_TRANSITION_001",
+      "title": "Transition Governance from Proposal Specs to Live Ledgers",
+      "owner": "Global Governance",
+      "department": "governance",
+      "affected_departments": [
+        "governance",
+        "physics",
+        "ethics",
+        "theology",
+        "economics",
+        "mathematics"
+      ],
+      "tier": 0,
+      "category": "governance",
+      "priority": "blocker",
+      "status": "active",
+      "claim_class": "C1_DEFINED_PROVISIONAL",
+      "summary": "Separate governance specifications from live canonical ledgers and require operational consumers to read live ledgers only.",
+      "depends_on": [],
+      "blocks": [],
+      "linked_debt": [
+        "DEBT_GOV_LIVE_LEDGER_AMBIGUITY_001"
+      ],
+      "linked_assets": [
+        "governance/live/governance_constitution.json",
+        "governance/live/authority_manifest.json",
+        "governance/live/department_registry.json",
+        "governance/live/program_task_registry.json",
+        "governance/live/research_debt_registry.json"
+      ],
+      "linked_bridges": [],
+      "deliverables": [
+        "Live ledger layer",
+        "Specification layer",
+        "Authority manifest"
+      ],
+      "completion_criteria": [
+        "Operational governance artifacts are distinguishable from proposal specifications.",
+        "Live ledgers contain no proposal metadata.",
+        "Operational routing can resolve live ledgers deterministically."
+      ],
+      "references": [
+        "docs/external_program_audit_2026_06_28.md"
+      ],
+      "notes": "This task begins active at the time of live-ledger bootstrapping."
+    }
+  ],
+  "metrics": {
+    "total_tasks": 4,
+    "planned_tasks": 3,
+    "active_tasks": 1,
+    "blocked_tasks": 0,
+    "tasks_by_tier": {
+      "0": 2,
+      "2": 1,
+      "3": 1
+    }
+  }
+}
