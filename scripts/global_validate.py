@@ -7,6 +7,13 @@ from datetime import datetime
 from pathlib import Path
 import re
 
+# Allow direct script invocation to resolve package-style imports the same way
+# as `python -m scripts.global_validate`.
+SCRIPT_DIR = Path(__file__).resolve().parent
+PROJECT_ROOT = SCRIPT_DIR.parent
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
 class RegistryValidator:
     def __init__(self, root_dir):
         self.root = Path(root_dir)

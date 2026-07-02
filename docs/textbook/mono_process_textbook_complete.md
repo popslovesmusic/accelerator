@@ -118,6 +118,15 @@ $$ \text{Process} = [\mathcal{E}, \mathcal{R}, \rho, \mathcal{K}, \delta, -(i)]_
 **Governed Clarification 1.2.2B.1: Primitive Form and Dominant-Domain Realization (MPF_IND_PRIMITIVE_FORM_DOMINANT_DOMAIN_001)**
 Within the current induction layer, the notation $(*|*)$ is introduced as the **primitive distinction form** and $A|E$ as its **canonical dominant-domain realization**. Neither $A$ nor $E$ nor the distinction marker $|$ is granted ontological priority over the complete expression. Accordingly, $A|E$ may be treated as primitive only as a whole expression within its dominant organizational domain, not as an assembly of independently primitive components.
 
+**Live Resolution Note (GOV_PRIMITIVE_FORM_RESOLUTION_001):**
+For current governance, $(*|*)$ is treated as a **whole-expression primitive relation-schema**. It is not a primitive object, not a detached component inventory, not a temporal generator of $A|E$, and not a free-standing operator-family ancestor outside whole-expression governance.
+
+**Live Resolution Note (GOV_DOMINANT_DOMAIN_RESOLUTION_001):**
+For current governance, a **dominant domain** is the currently privileged interpretive domain that preserves whole-expression reading while giving the most direct organizational governance of admissibility, continuation, and residue. Under this rule, $A|E$ is canonical rather than optional at the current induction layer, but this domain privilege is interpretive rather than ontological.
+
+**Live Resolution Note (GOV_REALIZATION_RELATION_001):**
+For current governance, the relation between $(*|*)$ and $A|E$ is a **whole-expression realization** relation. It is not temporal derivation, not component assembly, and not a replacement for the already governed distinction between primitive-form schema and dominant-domain realization.
+
 **Governance Limit:**
 This clarification is provisional only. It does not license theorem promotion, proof dependency closure, or any reading in which $(*|*)$ temporally generates $A|E$ or reduces $A|E$ to a merely derivative non-primitive remainder.
 
@@ -142,7 +151,7 @@ $$ <a>_b $$
 Here $D(a)$ is retained only as a context-suppressed abstraction whose omitted conditioning must be recoverable whenever it participates in governed RT reasoning. The meta-relation family therefore defaults to conditioned operands, so expressions of the form $<a>_b \langle * \rangle_x <c>_d$ are treated as the primitive compositional layer, while arithmetic juxtaposition remains a lawful projection and not the primitive ontology.
 
 **Nesting Coupling Rule (PRIN_003):**
-Any usage of $RT(RT|RT)$ or $D(*|*)$ as shorthand for a nested expression requires an explicit declaration that it abbreviates the full coupled form $[D(*|-*) \langle f \rangle_x D(*|+*)]$. A bare distinction $D(*|*)$ alone is not RT-complete, as it represents the constraint condition component only and lacks the joint admissibility context $x$ and the coupling projection operator.
+Any usage of $RT(RT|RT)$ or $D(*|*)$ as shorthand for a nested expression requires an explicit declaration that it abbreviates the full coupled form $[D(*|-*) \langle f \rangle_x D(*|+*)]$. A bare distinction $D(*|*)$ alone is not RT-complete, as it represents the constraint condition component only and lacks the joint admissibility context $x$ and the coupling projection operator. In this textbook, the zero-state symmetry block below uses $D(*|*)$ only as a declared shorthand marker.
 
 **Nesting Admissibility Rule (GOV-RT-ZERO-RECOUPLING-001):**
 Nesting does not rehabilitate an illegal RT form unless the collapsed term retains a typed residue and is recoupled with an oppositely typed residue under a declared higher-order relation. Illegal same-sign inner forms (e.g., same-direction collapse) cannot be nested into legality unless their typed zero residues are preserved and oppositely recoupled at the outer layer.
@@ -963,6 +972,7 @@ In the **symmetry application domain** ($symm\_app$), the lack of a directed gra
 ## 4.3A Zero-State Equivalence
 
 Within the current induction program, complete symmetry, zero distinction, zero degrees of freedom, and complete decoupling are treated as equivalent readings of the Zero-State.
+In this subsection, $D(*|*)$ is a declared zero-state shorthand, not the general RT-complete nesting form.
 $$ 0\_state \iff \text{Symmetry} \iff D(*|*)=0 \iff 0\_DOF \iff \text{Complete\_Decoupling} $$
 
 ---
@@ -1153,6 +1163,7 @@ The later retest respected the correction that `_R` must be handled as a relatio
 - **Candidate forms under test:** `<=>`, `<=>_r`, and `r_<=>`.
 - **Current limitation:** no affixed reciprocal form may be treated as interchangeable with another without a direct bounded comparison.
 - **Latest bounded result (2026-06-17):** affix position changed behavior within the tested model, but neither `<=>_r` nor `r_<=>` outperformed bare `<=>` because both failed the boundary-front criterion and neither improved basin reformation.
+- **Genealogy note:** the bounded comparison above is about bridge-line variants of bare `<=>`; it does not make the affix-position forms primitive-form ancestors or closure-family members.
 
 ### MT-003 Local Proof Packaging Note
 - **Governed note:** `MT-003` now has an additive restricted-domain proof artifact for the implication from `existence(continuation_event)` to non-empty admissible image.
@@ -2320,6 +2331,14 @@ $$ \text{economics\_app} \iff_{\text{proj}} \text{Projection}(\Sigma_D \text{ po
 **Commentary:**
 Economic behavior is treated as a projection of organized admissible distinction structure. The framework models economic systems using primitive variables of distinction ($D(A|B) > \epsilon_a$), organization operators ($Org_a$), distinction networks ($\Sigma_D$), and Distinction Wealth indicators rather than external resources or physical currencies.
 
+**Governed Clarification 13.1.2: A|E Traceability Without Cross-Domain Equivalence**
+Within the current induction layer, economics\_app remains traceable to the primitive lineage
+$$ (*|*) \to (A|E) \to <*>_x \to \to_x $$
+but this traceability does not collapse economics\_app into semantic equivalence with other application domains. The notation $A|E$ is treated here as a whole-expression dominant-domain realization. Economics\_app therefore studies how relational affects become effects through admissible progression, and how those effects accumulate into organized constraints on future progression.
+
+**Governance Limit:**
+This is a provisional domain-reading only. It does not promote a theorem, establish cross-domain equivalence, or authorize direct import of economics\_app semantics into physics\_app, biology\_app, or other application registries.
+
 ---
 
 ## 13.2 The Derivation Stack of Procedural Economics
@@ -2364,6 +2383,14 @@ The framework redefines classical economic concepts as process-oriented structur
 
 **Commentary:**
 Within the Mono-Process framework, wealth is not fundamentally a quantity of resources. Wealth is a quantity of preserved, recoverable, and productively coupled organizational distinction. Under this reading, poverty is a topological restriction that prevents the continuation or recovery of mismatch basins, and capital is a persistent template that guides the routing of active continuation.
+
+**Governed Reading 13.4.2: Structural Economic Terms under A|E Traceability**
+- **Expenditure:** A progression has occurred.
+- **Scarcity:** Future admissible progression has contracted.
+- **Cost:** The effective consequence of that contraction.
+- **Value:** Preservation, expansion, or stabilization of admissible progression.
+- **Wealth:** Durable organizational capacity rather than static inventory.
+- **Economic structure:** Accumulated residue of whole-expression $A|E$ comparison through progression.
 
 ---
 
@@ -2472,8 +2499,70 @@ The purpose of governance is not to protect claims from falsification. The purpo
 Governance specifications describe intended structure, while live operational ledgers record current canonical state. Once a live ledger exists, proposal-shaped specifications and historical patch records no longer serve as operational authority. Operational governance state is read from:
 - `governance/live/authority_manifest.json`
 - `governance/live/department_registry.json`
+- `governance/live/induction_queue.json`
 - `governance/live/program_task_registry.json`
 - `governance/live/research_debt_registry.json`
+
+The live-ledger authority split is now operationally established. Historical specifications remain as schema and design-intent references only; they are not current authority.
+
+**Governance-First Execution Gate (GOV-EXEC-002):**
+Until the live governance sections and blocker tasks are explicitly satisfied, governance is the only admissible program lane. New department expansion, theorem expansion, bridge expansion, simulation expansion, and application expansion work remain frozen while the live Program Task Registry retains an active governance-only closure task.
+
+**Induction Intake Gate (GOV-IND-002):**
+Every new induction must satisfy both of the following before it is treated as active governed work:
+- a canonical induction record exists in `registry/induction_registry.json`
+- a live intake record exists in `governance/live/induction_queue.json`
+
+If either record is missing, the induction is ungoverned for program purposes and may not be used for promotion, dependency closure, or downstream planning.
+
+The induction routing layer is now operationally established. Active provisional inductions have been backfilled into both the canonical induction registry and the live induction queue, and future induction work must enter through that same path.
+
+**Debt Discharge Command (GOV_DEBT_DISCHARGE_COMMAND_001):**
+While the governance-first execution gate remains active, agents shall reduce debt in the live command order declared in:
+- `governance/live/debt_discharge_command.json`
+
+The current ordered sequence is:
+1. `DEBT_GOV_LIVE_LEDGER_AMBIGUITY_001`
+2. `DEBT_GOV_INDUCTION_ROUTING_001`
+3. `DEBT_VALIDATOR_IMPORT_PATH_001`
+4. `DEBT_GOV_TOOL_ROUTING_METADATA_001`
+5. `DEBT_GOV_LEXICON_UNDERCLASSIFICATION_001`
+6. `DEBT_GOV_DEPARTMENT_LAYOUT_001`
+7. `DEBT_GOV_ECONOMICS_INDUCTION_001`
+8. `DEBT_GOV_THEOLOGY_INDUCTION_001`
+9. `DEBT_GOV_PHYSICS_SSOT_NORMALIZATION_001`
+
+Each discharge step must report: command invoked, debt targeted, artifacts changed, validation command used, validation result, textbook synchronization status, remaining blockers, and next debt in sequence.
+
+**Program Debt Extension Rule (GOV-PROG-DEBT-001):**
+Debt outside governance must be treated by the same mechanism: explicit live command order, governed validation, and the same discharge report structure. The current non-governance command surface is `governance/live/program_debt_discharge_command.json`.
+
+**Tool Routing Rule (GOV-TOOLS-ROUTE-001):**
+Deterministic tool routing is governed by:
+- `governance/live/tool_routing_manifest.json`
+
+**Lexicon Reduction Rule (GOV-LEX-001):**
+`DEBT_GOV_LEXICON_UNDERCLASSIFICATION_001` is reduced through `governance/live/lexicon_classification_manifest.json`. Governance closure requires classification of active authority-facing and induction-facing terms first; it does not by itself certify that the entire historical lexicon backlog is semantically complete.
+
+**Department Layout Rule (GOV-DEPT-LAYOUT-001):**
+Peer-directory normalization is governed by `governance/live/department_layout_manifest.json`. A peer root under `departments/` satisfies layout parity, but it does not by itself imply inducted department status or close later local-SSOT and local-AGENTS induction debt.
+
+**Economics Induction Rule (GOV-ECON-IND-001):**
+The Economics Department is inducted only when `departments/economics/department_ssot.md` and `departments/economics/AGENTS.md` both exist and the local department surface is bound into live authority. Detailed economics evidence and debt tracking may remain in `docs/economics/ssot/procedural_economics_ssot.md`.
+
+**Theology Induction Rule (GOV-THEO-IND-001):**
+The Theology Department is inducted only when `departments/theology/department_ssot.md` and `departments/theology/AGENTS.md` both exist and the local department surface is bound into live authority. Detailed theology governance and debt tracking may remain in `docs/theology/procedural_theology_ssot.md`.
+
+Rigor level alone does not authorize tool use. Agents must resolve tool path, entry point, allowed-use class, invocation contract, and active/archive status through the live tool-routing manifest and its declared routing sources.
+
+**Validation Invocation Rule (GOV-VALIDATE-001):**
+Governed validation uses the module-path command:
+- `python -m scripts.global_validate`
+
+Direct file invocation via `python scripts/global_validate.py` has been restored to consistent behavior, but the module-path command remains the canonical governed invocation for documentation and agent routing.
+
+**Active Tooling Debt Note (DEBT_VALIDATOR_IMPORT_PATH_001):**
+The validator import-path issue is now resolved in `governance/live/research_debt_registry.json`. The canonical governed command remains `python -m scripts.global_validate`, direct invocation is behaviorally aligned, and the latest governed success artifact is `outputs/audits/global_health_report.json`. Historical records that mention the old failing direct invocation are retained as non-authoritative history.
 
 ---
 
@@ -2577,6 +2666,7 @@ The mathematics-facing and physics-facing layers of the program must remain dist
 
 **Cleanup Rule (MPF_CLEANUP_MATH_PHYS_BOUNDARY_001):**
 The Mathematics Department defines and derives formal structure. The Physics Department interprets that structure as a possible physical model under separate claim governance. A formal derivation is not by itself a physics claim, and a failed physics correspondence does not by itself weaken the formal calculus.
+This cleanup rule is now governed live by `governance/live/math_physics_boundary_manifest.json`.
 
 **Routing Rule:**
 - Formal questions route to mathematics.
@@ -2594,7 +2684,8 @@ This cleanup is an annotation rule and retrieval filter only. It does not reorga
 - `departments/README.md`
 - `registry/governance/patches/MPF_CLEANUP_MATH_PHYS_BOUNDARY_001.json`
 - `docs/governance/math_physics_boundary_cleanup.md`
-- `departments/physics/physics_ssot.md`
+- `governance/live/math_physics_boundary_manifest.json`
+- `departments/physics/department_ssot.md`
 - `departments/physics/AGENTS.md`
 
 ---
@@ -2769,6 +2860,7 @@ The schema `<*>_x` is a meta-language construct only. It names the space of lega
 
 The `x` in `<*>_x` is a reserved discussion placeholder in this induction packet. It is not itself a proof rule, a domain label, or a type identifier.
 Under MPF_PRIMITIVE_CONDITIONING_REDUCTION_001, the default operands discussed under this meta family are conditioned distinctions such as `<a>_b`, unless a context-suppressed abstraction is explicitly declared and justified.
+The reciprocal comparison line is rooted at bare `<=>`. The affix-position forms `<=>_r` and `r_<=>` are projection descendants of that comparison scaffold, while `<=>_R` and `<=>_{ra}` remain closure-family members. Family membership records operator-lineage class; projection descent records a scaffolded variant inside that class.
 
 **Typed Grammar Freeze**
 - Legal suffixes are limited to reserved typed families such as `R`, `a`, `r`, `m`, `s`, `ra`, `app`, `obs`, `bio`, `fld`, `eco`, and `top`.
@@ -3230,9 +3322,24 @@ This section tracks newly introduced lexicon terms that remain as open mathemati
 - **`triadicity_emergence_question`**: Determine whether triadic closure emerges from A|E or whether triadicity remains primitive. [Source: MPF_AE_INDUCTION_CANDIDATES_2026_06_28]
 - **`grammatical_metric_binding_candidate`**: Test backslash notation as a grammatical metric-binding construct rather than an ontological operator. [Source: MPF_AE_INDUCTION_CANDIDATES_2026_06_28]
 - **`grammatical_metric_inversion_candidate`**: Test slash notation as a grammatical metric-inversion construct rather than an ontological operator. [Source: MPF_AE_INDUCTION_CANDIDATES_2026_06_28]
+- **Lexicon gap closure cluster:** The continuation-first, A|E-candidate, observer, grammar, continuation, motion, and affect-trace queue items above are now governed by `governance/live/lexicon_gap_closure_manifest.json` and are no longer treated as open gaps.
 - **`primitive_distinction_form`**: Clarify $(*|*)$ as the primitive distinction form without reifying it as an object or treating it as a temporal generator. [Source: MPF_IND_PRIMITIVE_FORM_DOMINANT_DOMAIN_001]
+- **`DEBT_PRIMITIVE_FORM_001`**: Resolved. The live primitive-form resolution manifest now fixes $(*|*)$ as a whole-expression primitive relation-schema and forbids object-reification, component-splitting, and temporal-generator readings. [Source: governance/live/primitive_form_resolution_manifest.json]
+- **`DEBT_DOMINANT_DOMAIN_001`**: Resolved. The live dominant-domain resolution manifest now defines the criteria for dominance, explains why $A|E$ is canonical rather than optional at the current induction layer, and separates domain privilege from ontology privilege. [Source: governance/live/dominant_domain_resolution_manifest.json]
+- **`DEBT_REALIZATION_RELATION_001`**: Resolved. The live realization relation manifest now governs the relation between $(*|*)$ and $A|E$ as a whole-expression realization relation and rejects temporal derivation, component assembly, and replacement readings. [Source: governance/live/realization_relation_manifest.json]
 - **`dominant_domain_realization`**: Define how $A|E$ functions as the canonical dominant-domain realization of the primitive form while remaining whole-expression-bound. [Source: MPF_IND_PRIMITIVE_FORM_DOMINANT_DOMAIN_001]
 - **`realization_derivation_boundary`**: Specify whether the relation between $(*|*)$ and $A|E$ is realization, typing, contextualization, or projection rather than temporal derivation. [Source: MPF_IND_PRIMITIVE_FORM_DOMINANT_DOMAIN_001]
+- **`traceability_non_equivalence_boundary`**: Resolved. Constructive traceability to the primitive lineage does not by itself imply semantic equivalence across projected application domains, and the live economics traceability manifest now governs the boundary. [Source: governance/live/economics_traceability_manifest.json]
+- **`DEBT_GOV_LEXICON_UNDERCLASSIFICATION_001`**: Reduced for the governance-first lane through `governance/live/lexicon_classification_manifest.json`. Active authority-facing terms now carry normalized ontology/definition metadata, while the remaining historical backlog stays explicitly staged rather than implicitly canonicalized. [Source: governance/live/lexicon_classification_manifest.json]
+- **`DEBT_GOV_DEPARTMENT_LAYOUT_001`**: Resolved. Mathematics, economics, and theology now exist as peer roots under `departments/`, and the live department layout manifest explicitly separates peer-root parity from later induction completion. [Source: governance/live/department_layout_manifest.json]
+- **`DEBT_GOV_ECONOMICS_INDUCTION_001`**: Resolved. The Economics Department now has a peer local SSOT and local AGENTS surface under `departments/economics/`, while the detailed economics SSOT remains the active evidence-and-debt registry for economics_app. [Source: departments/economics/department_ssot.md]
+- **`DEBT_GOV_THEOLOGY_INDUCTION_001`**: Resolved. The Theology Department now has a peer local SSOT and local AGENTS surface under `departments/theology/`, while the detailed theology SSOT remains the active governance-and-debt registry for theology_app. [Source: departments/theology/department_ssot.md]
+- **`DEBT_GOV_PHYSICS_SSOT_NORMALIZATION_001`**: Resolved. The Physics Department local SSOT now uses the common peer filename `departments/physics/department_ssot.md`, and live routing references have been updated accordingly. [Source: departments/physics/department_ssot.md]
+- **`PROGRAM_DEBT_DISCHARGE_COMMAND_001`**: Active. Debt outside governance is now required to use the same explicit ordered discharge-and-report mechanism through `governance/live/program_debt_discharge_command.json`. [Source: governance/live/program_debt_discharge_command.json]
+
+### F.9 Active Tooling Debt
+- **`DEBT_VALIDATOR_IMPORT_PATH_001`**: Resolved. Direct invocation and module invocation are now behaviorally aligned, while `python -m scripts.global_validate` remains the canonical governed command. Latest governed success artifact: `outputs/audits/global_health_report.json`. Theory impact: none detected. [Source: DEBT_VALIDATOR_IMPORT_PATH_001]
+- **`DEBT_GOV_TOOL_ROUTING_METADATA_001`**: Resolved. Tool routing is now governed by `governance/live/tool_routing_manifest.json`, which separates allowed-use class from rigor level and declares invocation contracts and routing resolution order. [Source: governance/live/tool_routing_manifest.json]
 
 ---
 **Status:** Items in Section F.1 are active research targets. Resolved bridges are archived in F.4. Failed bridges are archived in F.5. Section F.7 tracks the measurement rules for active attacks. Section F.8 tracks open lexicon debt.

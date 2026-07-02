@@ -2,8 +2,179 @@
   "registry_id": "MPF_PROGRAM_TASK_REGISTRY_LIVE_V1",
   "schema_version": "1.0.0",
   "authority": "Global Governance",
-  "last_updated": "2026-06-28",
+  "last_updated": "2026-07-02",
   "entries": [
+    {
+      "task_id": "PTR_GOV_SECTION_CLOSURE_001",
+      "title": "Governance-Only Closure Until Live Sections Are Satisfied",
+      "owner": "Global Governance",
+      "department": "governance",
+      "affected_departments": [
+        "governance",
+        "mathematics",
+        "physics",
+        "economics",
+        "theology",
+        "ethics"
+      ],
+      "tier": 0,
+      "category": "governance",
+      "priority": "blocker",
+      "status": "resolved",
+      "claim_class": "C1_DEFINED_PROVISIONAL",
+      "summary": "Freeze non-governance program work until live governance sections, routing rules, and authority layers are explicitly satisfied.",
+      "depends_on": [],
+      "blocks": [
+        "new_non_governance_program_tasks",
+        "new_department_expansion_work",
+        "new_bridge_expansion_work",
+        "new_theory_expansion_work",
+        "new_application_expansion_work"
+      ],
+      "linked_debt": [
+        "DEBT_GOV_LIVE_LEDGER_AMBIGUITY_001",
+        "DEBT_GOV_TOOL_ROUTING_METADATA_001",
+        "DEBT_GOV_LEXICON_UNDERCLASSIFICATION_001",
+        "DEBT_VALIDATOR_IMPORT_PATH_001",
+        "DEBT_GOV_INDUCTION_ROUTING_001"
+      ],
+      "linked_assets": [
+        "governance/live/governance_constitution.json",
+        "governance/live/authority_manifest.json",
+        "governance/live/program_task_registry.json",
+        "governance/live/research_debt_registry.json",
+        "governance/live/induction_queue.json",
+        "registry/induction_registry.json"
+      ],
+      "linked_bridges": [],
+      "deliverables": [
+        "Governance-first execution gate",
+        "Live governance section closure plan",
+        "Freeze rule for non-governance work"
+      ],
+      "completion_criteria": [
+        "All active governance blocker tasks are resolved or explicitly demoted by governance authority.",
+        "Live governance routing is complete enough to support deterministic agent execution.",
+        "The execution gate is explicitly lifted in the live Program Task Registry."
+      ],
+      "references": [
+        "governance/live/governance_constitution.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "notes": "Resolved on 2026-07-02 after the ordered governance debt list was fully discharged, live routing surfaces were normalized, and the governance-only closure condition was satisfied."
+    },
+    {
+      "task_id": "PTR_GOV_INDUCTION_ROUTING_001",
+      "title": "Require Registry and Queue for All New Inductions",
+      "owner": "Global Governance",
+      "department": "governance",
+      "affected_departments": [
+        "governance",
+        "mathematics",
+        "physics",
+        "economics",
+        "theology",
+        "ethics"
+      ],
+      "tier": 0,
+      "category": "governance",
+      "priority": "blocker",
+      "status": "resolved",
+      "claim_class": "C1_DEFINED_PROVISIONAL",
+      "summary": "Establish a governed induction intake system in which every new induction must be both canonically registered and live-queued before use.",
+      "depends_on": [
+        "PTR_GOV_SECTION_CLOSURE_001"
+      ],
+      "blocks": [
+        "unqueued_induction_use",
+        "unregistered_induction_use"
+      ],
+      "linked_debt": [
+        "DEBT_GOV_INDUCTION_ROUTING_001"
+      ],
+      "linked_assets": [
+        "governance/live/induction_queue.json",
+        "registry/induction_registry.json",
+        "registry/lexicon_gap_queue.json"
+      ],
+      "linked_bridges": [],
+      "deliverables": [
+        "Canonical induction registry",
+        "Live induction intake queue",
+        "Queue-to-registry routing rule"
+      ],
+      "completion_criteria": [
+        "Every new induction has both a registry entry and a queue entry.",
+        "Lexicon gap routing is linked from induction intake.",
+        "Ungoverned inductions are blocked from downstream program use."
+      ],
+      "references": [
+        "registry/lexicon_gap_queue.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "notes": "Resolved on 2026-07-01 after creating the live induction queue, canonical induction registry, textbook routing rule, and backfilling active inductions into both surfaces."
+    },
+    {
+      "task_id": "PTR_GOV_DEBT_DISCHARGE_ORDER_001",
+      "title": "Execute Governance Debt Discharge Command in Declared Order",
+      "owner": "Global Governance",
+      "department": "governance",
+      "affected_departments": [
+        "governance",
+        "mathematics",
+        "physics",
+        "economics",
+        "theology",
+        "ethics"
+      ],
+      "tier": 0,
+      "category": "governance",
+      "priority": "blocker",
+      "status": "resolved",
+      "claim_class": "C1_DEFINED_PROVISIONAL",
+      "summary": "Reduce governance debt in the explicit live-command order and report each discharge step under governed validation.",
+      "depends_on": [
+        "PTR_GOV_SECTION_CLOSURE_001",
+        "PTR_GOV_INDUCTION_ROUTING_001"
+      ],
+      "blocks": [
+        "out_of_order_governance_repair",
+        "ungoverned_debt_discharge_reporting"
+      ],
+      "linked_debt": [
+        "DEBT_GOV_LIVE_LEDGER_AMBIGUITY_001",
+        "DEBT_GOV_INDUCTION_ROUTING_001",
+        "DEBT_VALIDATOR_IMPORT_PATH_001",
+        "DEBT_GOV_TOOL_ROUTING_METADATA_001",
+        "DEBT_GOV_LEXICON_UNDERCLASSIFICATION_001",
+        "DEBT_GOV_DEPARTMENT_LAYOUT_001",
+        "DEBT_GOV_ECONOMICS_INDUCTION_001",
+        "DEBT_GOV_THEOLOGY_INDUCTION_001",
+        "DEBT_GOV_PHYSICS_SSOT_NORMALIZATION_001"
+      ],
+      "linked_assets": [
+        "governance/live/debt_discharge_command.json",
+        "governance/live/program_task_registry.json",
+        "governance/live/research_debt_registry.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "linked_bridges": [],
+      "deliverables": [
+        "Explicit live governance debt command",
+        "Ordered debt discharge execution",
+        "Per-step governed report trail"
+      ],
+      "completion_criteria": [
+        "Debts listed in governance/live/debt_discharge_command.json are reduced in the declared order or explicitly justified if blocked.",
+        "Each discharge step produces a governed report aligned to the required report structure.",
+        "The active governance-first execution gate can be reevaluated after the ordered list is complete."
+      ],
+      "references": [
+        "governance/live/debt_discharge_command.json",
+        "governance/live/research_debt_registry.json"
+      ],
+      "notes": "Resolved on 2026-07-02 after all debts listed in governance/live/debt_discharge_command.json were discharged in order with governed validation."
+    },
     {
       "task_id": "PTR_BACKFILL_DEPT_LAYOUT_001",
       "title": "Normalize Department Peer Directory Layout",
@@ -18,7 +189,7 @@
       "tier": 0,
       "category": "governance",
       "priority": "foundation",
-      "status": "planned",
+      "status": "resolved",
       "claim_class": "C1_DEFINED_PROVISIONAL",
       "summary": "Ensure all departments exist as peers under departments/ without structurally privileging any department.",
       "depends_on": [
@@ -47,7 +218,7 @@
         "docs/textbook/mono_process_textbook_complete.md",
         "governance/live/department_registry.json"
       ],
-      "notes": "Imported from proposal backfill task and retained as live backlog work."
+      "notes": "Resolved on 2026-07-02 by creating placeholder peer roots for mathematics, economics, and theology, and by recording the peer-root versus induction boundary in the live department layout manifest."
     },
     {
       "task_id": "PTR_BACKFILL_PHYSICS_SSOT_001",
@@ -61,7 +232,7 @@
       "tier": 2,
       "category": "gap",
       "priority": "foundation",
-      "status": "planned",
+      "status": "resolved",
       "claim_class": "C1_DEFINED_PROVISIONAL",
       "summary": "Normalize the Physics Department local SSOT filename to the common department_ssot.md convention or explicitly ratify the exception.",
       "depends_on": [
@@ -72,7 +243,7 @@
         "DEBT_GOV_PHYSICS_SSOT_NORMALIZATION_001"
       ],
       "linked_assets": [
-        "departments/physics/physics_ssot.md",
+        "departments/physics/department_ssot.md",
         "governance/live/department_registry.json"
       ],
       "linked_bridges": [],
@@ -85,10 +256,10 @@
         "Physics dependence on mathematics remains declared."
       ],
       "references": [
-        "departments/physics/physics_ssot.md",
+        "departments/physics/department_ssot.md",
         "governance/live/department_registry.json"
       ],
-      "notes": "Reduced from the proposal backfill task to match current repo state."
+      "notes": "Resolved on 2026-07-02 by renaming the local physics SSOT to departments/physics/department_ssot.md and updating live routing references."
     },
     {
       "task_id": "PTR_BACKFILL_MATH_PHYS_BOUNDARY_001",
@@ -102,7 +273,7 @@
       "tier": 3,
       "category": "bridge",
       "priority": "blocker",
-      "status": "planned",
+      "status": "resolved",
       "claim_class": "C1_DEFINED_PROVISIONAL",
       "summary": "Prevent formal mathematical derivations from being treated as physical claims and prevent physical interpretations from being treated as mathematical theorems.",
       "depends_on": [
@@ -132,7 +303,62 @@
       "references": [
         "registry/governance/patches/MPF_CLEANUP_MATH_PHYS_BOUNDARY_001.json"
       ],
-      "notes": "Task retained as live blocker until boundary cleanup is operationalized beyond patch prose."
+      "notes": "Resolved on 2026-07-02 by translating the existing cleanup patch into a live math/physics boundary manifest, binding the routing and claim-class rules into the authority layer, and aligning the textbook and physics SSOT with the same boundary."
+    },
+    {
+      "task_id": "PTR_PROGRAM_DEBT_DISCHARGE_ORDER_001",
+      "title": "Execute Non-Governance Program Debt Discharge Command in Declared Order",
+      "owner": "Global Governance",
+      "department": "governance",
+      "affected_departments": [
+        "mathematics",
+        "physics",
+        "economics",
+        "theology",
+        "ethics"
+      ],
+      "tier": 1,
+      "category": "governance",
+      "priority": "blocker",
+      "status": "resolved",
+      "claim_class": "C1_DEFINED_PROVISIONAL",
+      "summary": "Reduce remaining non-governance program debt in one explicit live-command order and report each discharge step under governed validation.",
+      "depends_on": [
+        "PTR_GOV_DEBT_DISCHARGE_ORDER_001"
+      ],
+      "blocks": [
+        "unordered_non_governance_debt_repair",
+        "ungoverned_non_governance_discharge_reporting"
+      ],
+      "linked_debt": [
+        "DEBT_PRIMITIVE_FORM_001",
+        "DEBT_DOMINANT_DOMAIN_001",
+        "DEBT_REALIZATION_RELATION_001",
+        "DEBT_D_NOTATION_ALIGNMENT_001",
+        "DEBT_OPERATOR_GENEALOGY_001"
+      ],
+      "linked_assets": [
+        "governance/live/program_debt_discharge_command.json",
+        "governance/live/program_task_registry.json",
+        "governance/live/research_debt_registry.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "linked_bridges": [],
+      "deliverables": [
+        "Explicit live non-governance debt command",
+        "Ordered non-governance debt discharge execution",
+        "Per-step governed report trail"
+      ],
+      "completion_criteria": [
+        "Debts listed in governance/live/program_debt_discharge_command.json are reduced in the declared order or explicitly justified if blocked.",
+        "Each discharge step produces a governed report aligned to the required report structure.",
+        "The remaining non-governance debt lane becomes explicitly auditable."
+      ],
+      "references": [
+        "governance/live/program_debt_discharge_command.json",
+        "governance/live/research_debt_registry.json"
+      ],
+      "notes": "Resolved on 2026-07-02 after the ordered non-governance debt list was fully discharged in sequence and the final operator-genealogy debt was closed under governed validation."
     },
     {
       "task_id": "PTR_GOV_LIVE_LEDGER_TRANSITION_001",
@@ -150,7 +376,7 @@
       "tier": 0,
       "category": "governance",
       "priority": "blocker",
-      "status": "active",
+      "status": "resolved",
       "claim_class": "C1_DEFINED_PROVISIONAL",
       "summary": "Separate governance specifications from live canonical ledgers and require operational consumers to read live ledgers only.",
       "depends_on": [],
@@ -179,16 +405,16 @@
       "references": [
         "docs/external_program_audit_2026_06_28.md"
       ],
-      "notes": "This task begins active at the time of live-ledger bootstrapping."
+      "notes": "Live-ledger separation and authority routing are now established in the operational governance layer."
     }
   ],
   "metrics": {
-    "total_tasks": 4,
+    "total_tasks": 7,
     "planned_tasks": 3,
-    "active_tasks": 1,
+    "active_tasks": 2,
     "blocked_tasks": 0,
     "tasks_by_tier": {
-      "0": 2,
+      "0": 5,
       "2": 1,
       "3": 1
     }

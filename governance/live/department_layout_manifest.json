@@ -1,0 +1,51 @@
+{
+  "manifest_id": "GOV_DEPARTMENT_LAYOUT_MANIFEST_001",
+  "authority": "Global Governance",
+  "last_updated": "2026-07-02",
+  "status": "active",
+  "purpose": "Define the live peer-directory layout state for departments/ while keeping department induction separate from bare root normalization.",
+  "governing_debt": "DEBT_GOV_DEPARTMENT_LAYOUT_001",
+  "governing_task": "PTR_BACKFILL_DEPT_LAYOUT_001",
+  "layout_rule": {
+    "statement": "All governed departments shall exist as peer directories beneath departments/. Peer-directory presence does not by itself imply inducted department status.",
+    "induction_boundary": "A peer root may exist in placeholder form until its local SSOT, local AGENTS.md, and induction-specific routing artifacts are completed.",
+    "temporary_exemption_rule": "For planned departments only, a placeholder README.md satisfies the peer-root requirement until the later induction debt is discharged."
+  },
+  "peer_roots": [
+    {
+      "department_id": "mathematics",
+      "directory": "departments/mathematics/",
+      "layout_status": "present_placeholder",
+      "induction_status": "planned"
+    },
+    {
+      "department_id": "physics",
+      "directory": "departments/physics/",
+      "layout_status": "present_inducted",
+      "induction_status": "inducted"
+    },
+    {
+      "department_id": "economics",
+      "directory": "departments/economics/",
+      "layout_status": "present_placeholder",
+      "induction_status": "planned"
+    },
+    {
+      "department_id": "theology",
+      "directory": "departments/theology/",
+      "layout_status": "present_placeholder",
+      "induction_status": "planned"
+    },
+    {
+      "department_id": "ethics",
+      "directory": "departments/ethics/",
+      "layout_status": "present_inducted",
+      "induction_status": "inducted"
+    }
+  ],
+  "completion_rule": [
+    "Every department in the live department registry must have a peer directory beneath departments/.",
+    "Placeholder roots must explicitly declare that induction remains pending where applicable.",
+    "Later induction debts must not be auto-closed by peer-root creation alone."
+  ]
+}

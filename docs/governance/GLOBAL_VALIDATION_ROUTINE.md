@@ -1,7 +1,14 @@
 # Global Validation Routine (Agentic Remediation)
 
 ## Purpose
-This document defines the governed procedure for an AI agent to remediate failures identified by the Tier 1 Global Validation Harness (`scripts/global_validate.py`).
+This document defines the governed procedure for an AI agent to remediate failures identified by the Tier 1 Global Validation Harness (`scripts/global_validate.py` / `python -m scripts.global_validate`).
+
+## Canonical Invocation
+Until `DEBT_VALIDATOR_IMPORT_PATH_001` is resolved, the canonical governed invocation is:
+
+`python -m scripts.global_validate`
+
+Direct file invocation via `python scripts/global_validate.py` is currently non-canonical because package-style imports fail in that execution mode.
 
 ## Procedure
 
@@ -30,5 +37,5 @@ The agent must categorize failures into three tiers:
 *   **Action:** For missing papers/data, the agent must search for orphaned artifacts and co-locate them or flag the run as `unrecoverable`.
 
 ### 4. Finalization
-After remediation, the agent MUST rerun `scripts/global_validate.py` to confirm a "pass" status.
+After remediation, the agent MUST rerun `python -m scripts.global_validate` to confirm a "pass" status.
 Any remaining gaps must be added to `lexicon_gap_queue.json` or documented in the project's `MEMORY.md`.

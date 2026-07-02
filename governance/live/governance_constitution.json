@@ -2,7 +2,7 @@
   "constitution_id": "MPF_GOVERNANCE_CONSTITUTION_V1",
   "schema_version": "1.0.0",
   "authority": "Global Governance",
-  "last_updated": "2026-06-28",
+  "last_updated": "2026-07-01",
   "rules": [
     {
       "id": "GOV-LIVE-001",
@@ -14,10 +14,29 @@
         "Operational ledgers SHALL NOT contain proposal metadata.",
         "Proposal history SHALL remain in governance history archives."
       ]
+    },
+    {
+      "id": "GOV-EXEC-002",
+      "title": "Governance-First Execution Gate",
+      "statement": [
+        "While any tier-0 or blocker governance task in the live Program Task Registry remains active, planned, or blocked, no new non-governance program work SHALL be initiated.",
+        "During this gate, admissible work is limited to governance closure, governance debt reduction, governance routing repair, and textbook synchronization required by those governance changes.",
+        "Department, theorem, bridge, simulation, and application expansion work SHALL remain frozen until the governance gate is explicitly lifted in the live Program Task Registry."
+      ]
+    },
+    {
+      "id": "GOV-IND-002",
+      "title": "Induction Registry and Queue Requirement",
+      "statement": [
+        "Every new induction SHALL create or update a canonical induction record in registry/induction_registry.json.",
+        "Every new induction SHALL also be entered into governance/live/induction_queue.json before it may be cited as active program work.",
+        "An induction lacking both a registry record and a queue entry SHALL be treated as ungoverned and may not be used for promotion, dependency closure, or downstream planning."
+      ]
     }
   ],
   "notes": [
     "This constitution file defines the live-ledger separation rule introduced by MPF_GOV_LIVE_LEDGER_TRANSITION_001.",
-    "Historical proposal artifacts remain preserved under governance/specifications/ and their original locations until repository-wide reference cleanup is complete."
+    "Historical proposal artifacts remain preserved under governance/specifications/ and their original locations until repository-wide reference cleanup is complete.",
+    "The governance-first execution gate introduced on 2026-07-01 temporarily makes governance closure the only admissible program lane until live governance sections are satisfied."
   ]
 }

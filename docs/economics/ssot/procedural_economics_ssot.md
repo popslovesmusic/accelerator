@@ -12,6 +12,14 @@ The Economics Department (`procedural_economics_app`) is established to study th
 - **Organization**: $Org_a$ (admissible crossing of difference paths).
 - **Distinction Networks**: $\Sigma_D$ (basins of stabilized mismatch).
 
+### Governed Domain-Dominant Reading
+Within the current induction layer, `economics_app` remains constructively traceable to the MPF primitive lineage
+$$ (*|*) \to (A|E) \to <*>_x \to \to_x $$
+while retaining a domain-dominant semantic reading. Here `A|E` is treated as a whole expression within the dominant organizational domain rather than as separable independently primitive parts. Traceability does not imply equivalence: economics_app concepts must trace back to the MPF lineage, but they are not thereby semantically identical to primitive behavior in non-economic domains.
+
+Under this governed reading, economics_app studies how relational affects become effects through admissible progression and how those effects accumulate into organized constraints on future progression.
+Governed note: the live boundary manifest `governance/live/economics_traceability_manifest.json` now states that constructive traceability to the primitive lineage does not imply semantic equivalence across projected domains.
+
 ### Definition of Done: ECON_DEBT_0001 (Critical Foundational Debt)
 The foundational debt item `ECON_DEBT_0001` (Axiomatization of the organization operator $Org_a$) shall be marked **CLOSED** only when the following criteria are met:
 1. **Axiomatic Specification**: A set of formal algebraic axioms for $Org_a$ is defined in the theory registry, establishing:
@@ -24,6 +32,21 @@ The foundational debt item `ECON_DEBT_0001` (Axiomatization of the organization 
 ---
 
 ## 1. Verified Results & Claims
+
+### Provisional Induction Note: ECON_IND_AE_TRACE_001
+- **Status:** `PROVISIONAL`
+- **Evidence Class:** `C1_DEFINED_PROVISIONAL`
+- **Statement:** Economic observables are dominant-domain projections of cumulative Effects produced by relational Affects between whole-expression `A|E` forms as they propagate through admissible progression.
+- **Traceability Rule:** These observables must remain constructively traceable to the primitive MPF lineage `(*|*) -> (A|E) -> <*>_x -> ->_x`.
+- **Boundary Rule:** Traceability does not imply equivalence; economics_app semantics remain domain-dominant and must not be read as direct semantic equivalence to non-economic domains.
+
+### Structural Economic Reading
+- **Expenditure:** A progression has occurred.
+- **Scarcity:** Future admissible progression has contracted.
+- **Cost:** The effective consequence of that contraction.
+- **Value:** Preservation, expansion, or stabilization of admissible progression.
+- **Wealth:** Durable organizational capacity rather than static inventory.
+- **Economic Structure:** Accumulated residue of `A|E` comparison through progression.
 
 ### Result: ECON_RESULT_001
 - **Statement:** Organization carries independent economic information, meaning wealth is not reducible to static inventory accounting.

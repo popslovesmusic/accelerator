@@ -6,7 +6,7 @@ Within these models:
 2. **Valid and Invalid Operands:** Valid operands include primitive distinction candidates, already-admissible distinction expressions, grouped participation expressions, or typed projections. Invalid operands include untyped raw objects, unverified state labels, pure scalars without participation type, and semantic placeholders. Operand requirement: Each operand must either carry an admissibility trace or be explicitly marked as awaiting admissibility qualification.
 3. **Orientation Sensitivity:** The expression $A | B$ is order-sensitive ($A | B \not\equiv B | A$) because the participation interface carries orientation. Symmetrical equivalence ($A | B \equiv B | A$) holds only under an explicitly proven admissible reversal condition. Symmetry is not assumed by default.
 4. **Local Closure and Admissibility Gate:** A bar expression is locally closed when both operands are admissibly typed and the interface relation is legally evaluable under $D$. The inequality $D(A | B) > \epsilon_a$ is the minimal positive admissibility gate. Grouped bar expressions (e.g., $A|B|C$) require separate group-closure rules and are not automatically reducible to binary closure.
-5. **Relationship to D:** The expression $A|B$ alone is a participation expression, not yet a realized distinction unless placed inside $D(*|*)$ or another registered distinction-evaluating context.
+5. **Relationship to D:** The expression $A|B$ alone is a participation expression, not yet a realized distinction unless placed inside $D(*|*)$ or another registered distinction-evaluating context. Here $D(*|*)$ names the registered distinction-evaluating context rather than a primitive-form ancestor.
 
 ## 2. Dependencies
 - Definitions: `vertical_bar_operator`
