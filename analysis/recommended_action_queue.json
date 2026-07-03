@@ -1,0 +1,93 @@
+{
+  "queue_id": "ANALYSIS_RECOMMENDED_ACTION_QUEUE_001",
+  "department": "analysis",
+  "purpose": "Ordered recommendations derived from governed program state without modifying authoritative artifacts.",
+  "generated_from": [
+    "governance/live/master_work_index.json",
+    "governance/live/department_registry.json",
+    "governance/live/department_layout_manifest.json",
+    "governance/live/authority_manifest.json",
+    "outputs/audits/global_health_report.json"
+  ],
+  "ordering_rule": "direct unlock value, then normalization gap reduction, then downstream impact breadth",
+  "items": [
+    {
+      "recommendation_id": "ANL_REC_001",
+      "priority_rank": 1,
+      "recommended_action": "Continue MT-PROOF-ELEVATION-001 by resolving theorem-strengthening blockers.",
+      "supporting_evidence": [
+        "governance/live/master_work_index.json: MT-PROOF-ELEVATION-001 is active with blocked_by minimal_theorems, formal_proof_artifacts, formal_verification_artifacts, and theorem_proof_strengthening",
+        "governance/live/master_work_index.json: PROOF-ELEVATION-CAMPAIGN-001 is active and unblocked"
+      ],
+      "affected_domains": [
+        "mathematics"
+      ],
+      "dependencies": [],
+      "expected_benefit": "Advances theorem-readiness work and removes the only explicit blocker set in the live math campaign layer.",
+      "confidence": 0.95,
+      "rationale": "This is the only live mathematics campaign with an explicit blocker set in the master work index."
+    },
+    {
+      "recommendation_id": "ANL_REC_002",
+      "priority_rank": 2,
+      "recommended_action": "Continue PROOF-ELEVATION-CAMPAIGN-001.",
+      "supporting_evidence": [
+        "governance/live/master_work_index.json: PROOF-ELEVATION-CAMPAIGN-001 is active",
+        "governance/live/master_work_index.json: MT-COUNTEREXAMPLE-001 is active and unblocked"
+      ],
+      "affected_domains": [
+        "mathematics"
+      ],
+      "dependencies": [
+        "minimal_theorems",
+        "formal_proof_artifacts",
+        "formal_verification_artifacts",
+        "theorem_proof_strengthening"
+      ],
+      "expected_benefit": "Keeps theorem-readiness work moving in parallel without waiting on the broader proof-elevation blocker set.",
+      "confidence": 0.92,
+      "rationale": "It is active, high priority, and currently free of recorded blockers."
+    },
+    {
+      "recommendation_id": "ANL_REC_003",
+      "priority_rank": 3,
+      "recommended_action": "Continue the active repair and unresolved-structure queues.",
+      "supporting_evidence": [
+        "governance/live/master_work_index.json: SIM-REPAIR-QUEUE-001 is active with next_action execute repair track",
+        "governance/live/master_work_index.json: VAL-RC-EXEC-001 is active with next_action execute repair track",
+        "governance/live/master_work_index.json: VAL-URS-RES-001 is active with next_action resolve queued structure item"
+      ],
+      "affected_domains": [
+        "mathematics"
+      ],
+      "dependencies": [],
+      "expected_benefit": "Keeps active repair work from accumulating latent delay and preserves downstream resolution capacity.",
+      "confidence": 0.92,
+      "rationale": "These items are already active and have explicit next actions with no recorded blockers."
+    },
+    {
+      "recommendation_id": "ANL_REC_004",
+      "priority_rank": 4,
+      "recommended_action": "Preserve research-campaign momentum while the mathematical backlog is reduced.",
+      "supporting_evidence": [
+        "governance/live/master_work_index.json: BOOK_CAMPAIGN_PHASE_01_MASTER is active",
+        "governance/live/master_work_index.json: P0-C4-CA-001 is active with six recorded blockers",
+        "governance/live/master_work_index.json: P0-C4-GRAPH-001 is active with six recorded blockers"
+      ],
+      "affected_domains": [
+        "research"
+      ],
+      "dependencies": [
+        "numerical_stability_verified",
+        "model_validation_passed",
+        "cross_model_validated",
+        "falsification_verified",
+        "uncertainty_quantified",
+        "provenance_verified"
+      ],
+      "expected_benefit": "Maintains progress on the research campaigns without displacing the higher-leverage mathematics normalization work.",
+      "confidence": 0.88,
+      "rationale": "These campaigns remain active, but their blocker count is already explicit and their immediate leverage is lower than the normalization gap."
+    }
+  ]
+}
