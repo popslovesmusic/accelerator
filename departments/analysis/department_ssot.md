@@ -119,16 +119,16 @@ Each recommendation should carry:
 ## Initial Recommendation Entries
 
 #### ANL_REC_001
-- **Title:** Reduce lexicon debt first
-- **Source Evidence:** `governance/live/master_work_index.json`, `registry/lexicon_gap_queue.json`
-- **Recommendation:** continue `lexicon debt reduction` because the live lexicon gap queue is the largest remaining queue surface and it directly reduces downstream mapping ambiguity.
-- **Claim Class:** `C1_model_relative`
+- **Title:** Resolve the shared mathematics prerequisite cluster
+- **Source Evidence:** `governance/live/master_work_index.json`, `outputs/analysis/unlock_priority_report.json`, `analysis/program_state_report.json`
+- **Recommendation:** continue `math debt reduction` against `MT-001`, `MT-002`, `MT-003`, `recursive_convergence`, `operator_composition`, and `selection_uniqueness` because this cluster is the highest-value unlock surface in the current live dependency projection.
+- **Claim Class:** `C3_structural_comparison`
 - **Status:** deterministic recommendation
 
 #### ANL_REC_002
-  - **Title:** Maintain mathematics post-promotion cleanup
-  - **Source Evidence:** `governance/live/master_work_index.json`, `registry/math/mt_proof_elevation_campaign_registry.json`, `registry/math/proof_elevation_campaign_registry.json`, `registry/math/formal_candidate_readiness_registry.json`, `registry/math/formal_proof_artifact_registry.json`, `registry/math/proof_obligation_registry.json`
-  - **Recommendation:** mathematics proof promotion is now closed at the registry level; keep only residual campaign cleanup and counterexample follow-through active, because the theorem-readiness gate has already been discharged.
+  - **Title:** Maintain theorem-readiness follow-through
+  - **Source Evidence:** `governance/live/master_work_index.json`, `outputs/analysis/unlock_priority_report.json`, `registry/math/proof_elevation_campaign_registry.json`
+  - **Recommendation:** continue `PROOF-ELEVATION-CAMPAIGN-001` after the shared prerequisite cluster is cleared, because that campaign remains the direct theorem-readiness follow-through path in the live index.
 - **Claim Class:** `C3_structural_comparison`
 - **Status:** deterministic recommendation
 
@@ -140,10 +140,10 @@ Each recommendation should carry:
 - **Status:** deterministic recommendation
 
 #### ANL_REC_004
-- **Title:** Validate inducted neuroscience work
-- **Source Evidence:** `governance/live/master_work_index.json`, `departments/neuroscience/department_ssot.md`, `departments/neuroscience/AGENTS.md`
-- **Recommendation:** keep neuroscience induction validation active until the linked queue artifacts are confirmed and the induction is fully settled in the live routing surfaces.
-- **Claim Class:** `C3_structural_comparison`
+- **Title:** Continue lexicon hardening as residual cleanup
+- **Source Evidence:** `governance/live/master_work_index.json`, `outputs/audits/global_health_report.json`, `registry/lexicon_validation_registry.json`
+- **Recommendation:** continue `lexicon debt reduction` as residual cleanup because the validation registry now has zero `gap_open` entries, but provisional lexicon entries still require hardening where recoverable outputs exist.
+- **Claim Class:** `C1_model_relative`
 - **Status:** deterministic recommendation
 
 ---
@@ -152,16 +152,16 @@ Each recommendation should carry:
 
   This is the current single ordered recommendation sequence under the Work Reduction Framework. It is a recommendation only and does not authorize execution by itself.
   
-  1. `lexicon debt reduction`
+  1. `math debt reduction` for the shared prerequisite cluster
   1. `documentation debt reduction`
   1. `neuroscience induction validation`
-  1. `math debt reduction` for residual campaign cleanup only
+  1. `lexicon debt reduction` for residual hardening only
 
   Ordering basis:
-  - `lexicon debt reduction` is first because the live lexicon gap queue remains the largest unresolved queue surface.
-  - `documentation debt reduction` is second because documentation drift remains live governed work and affects discoverability across departments.
-  - `neuroscience induction validation` is third because the department is inducted but still in review, so its queue confirmation is downstream of the higher-volume backlog surfaces.
-  - `math debt reduction` is now residual cleanup only because the proof package and theorem promotion state have already been discharged.
+  - `math debt reduction` is first because the shared prerequisite cluster has the highest unlock score in the current live dependency projection and clears both `MT-COUNTEREXAMPLE-001` and `MT-PROOF-ELEVATION-001`.
+  - `documentation debt reduction` is second because documentation drift still affects discoverability and onboarding across the governed surfaces.
+  - `neuroscience induction validation` is third because the department is inducted but still requires queue confirmation and routing settlement.
+  - `lexicon debt reduction` is fourth because the validation registry now has no `gap_open` entries, so the remaining lexicon work is residual hardening rather than leading backlog pressure.
 
 ---
 

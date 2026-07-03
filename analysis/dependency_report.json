@@ -3,86 +3,88 @@
   "department": "analysis",
   "generated_from": [
     "governance/live/master_work_index.json",
-    "governance/live/work_reduction_framework.json"
+    "governance/live/work_reduction_framework.json",
+    "outputs/analysis/unlock_priority_report.json",
+    "analysis/program_state_report.json"
   ],
   "highest_priority_blockers": [],
   "largest_unlock_opportunities": [
     {
-      "node": "MT-PROOF-ELEVATION-001",
+      "node": "MT-001",
       "estimated_unlock_count": 3,
-      "unlock_effect": "Advances cross-theorem proof elevation work for MT-001, MT-002, and MT-003."
+      "unlock_effect": "Clears the shared mathematics prerequisite cluster and unlocks both MT-COUNTEREXAMPLE-001 and MT-PROOF-ELEVATION-001."
     },
     {
-      "node": "PROOF-ELEVATION-CAMPAIGN-001",
+      "node": "MT-002",
       "estimated_unlock_count": 3,
-      "unlock_effect": "Advances theorem-readiness work for MT-001, MT-002, and MT-003."
+      "unlock_effect": "Clears the shared mathematics prerequisite cluster and unlocks both MT-COUNTEREXAMPLE-001 and MT-PROOF-ELEVATION-001."
     },
     {
-      "node": "MT-PROOF-ELEVATION-001",
+      "node": "MT-003",
       "estimated_unlock_count": 3,
-      "unlock_effect": "Advances cross-theorem proof elevation work for MT-001, MT-002, and MT-003."
+      "unlock_effect": "Clears the shared mathematics prerequisite cluster and unlocks both MT-COUNTEREXAMPLE-001 and MT-PROOF-ELEVATION-001."
     },
     {
-      "node": "MT-COUNTEREXAMPLE-001",
+      "node": "recursive_convergence",
       "estimated_unlock_count": 3,
-      "unlock_effect": "Advances adversarial testing across MT-001, MT-002, and MT-003."
+      "unlock_effect": "Clears the shared mathematics prerequisite cluster and unlocks both MT-COUNTEREXAMPLE-001 and MT-PROOF-ELEVATION-001."
     }
   ],
   "critical_path": [
     {
       "rank": 1,
-      "node": "MT-PROOF-ELEVATION-001",
+      "node": "MT-001",
       "domain": "mathematics",
-      "work_type": "campaign",
-      "status": "active_local_proof_elevation",
+      "work_type": "debt",
+      "status": "unresolved_shared_prerequisite",
       "execution_state": "active",
-      "next_action": "continue campaign execution and track blockers",
-      "reason": "This campaign carries the broadest explicit blocker set in the live mathematics work index."
+      "next_action": "resolve shared prerequisite cluster",
+      "reason": "This node is part of the highest-value shared unlock cluster in the current dependency projection."
     },
     {
       "rank": 2,
-      "node": "PROOF-ELEVATION-CAMPAIGN-001",
+      "node": "MT-002",
       "domain": "mathematics",
-      "work_type": "campaign",
-      "status": "in_progress",
+      "work_type": "debt",
+      "status": "unresolved_shared_prerequisite",
       "execution_state": "active",
-      "next_action": "continue campaign execution and track blockers",
-      "reason": "This is the most direct theorem-readiness campaign with a compact blocker set."
+      "next_action": "resolve shared prerequisite cluster",
+      "reason": "This node is part of the highest-value shared unlock cluster in the current dependency projection."
     },
     {
       "rank": 3,
-      "node": "MT-PROOF-ELEVATION-001",
+      "node": "MT-003",
       "domain": "mathematics",
-      "work_type": "campaign",
-      "status": "active_local_proof_elevation",
+      "work_type": "debt",
+      "status": "unresolved_shared_prerequisite",
       "execution_state": "active",
-      "next_action": "continue campaign execution and track blockers",
-      "reason": "This campaign carries the broadest proof-elevation blocker set."
+      "next_action": "resolve shared prerequisite cluster",
+      "reason": "This node is part of the highest-value shared unlock cluster in the current dependency projection."
     },
     {
       "rank": 4,
+      "node": "recursive_convergence",
+      "domain": "mathematics",
+      "work_type": "debt",
+      "status": "unresolved_shared_prerequisite",
+      "execution_state": "active",
+      "next_action": "resolve shared prerequisite cluster",
+      "reason": "This node is part of the highest-value shared unlock cluster in the current dependency projection."
+    },
+    {
+      "rank": 5,
       "node": "MT-COUNTEREXAMPLE-001",
       "domain": "mathematics",
       "work_type": "campaign",
       "status": "active_adversarial_testing",
       "execution_state": "active",
-      "next_action": "continue campaign execution and track blockers",
-      "reason": "This campaign keeps adversarial evidence in sync with theorem-readiness work."
-    },
-    {
-      "rank": 5,
-      "node": "SIM-REPAIR-QUEUE-001",
-      "domain": "mathematics",
-      "work_type": "queue",
-      "status": "active",
-      "execution_state": "active",
-      "next_action": "execute repair track",
-      "reason": "This queue has no blockers and can be advanced in parallel with the campaign work."
+      "next_action": "continue adversarial testing after prerequisite cluster resolution",
+      "reason": "This campaign is downstream of the shared prerequisite cluster and remains part of the current critical path."
     }
   ],
   "dependency_notes": [
-    "No item in the current master work index is recorded as blocked.",
-    "The recorded work pressure is concentrated in mathematics campaign and repair items.",
+    "The current dependency projection is centered on the shared mathematics prerequisite cluster.",
+    "Lexicon debt is no longer the leading constraint because the validation registry has zero gap-open entries.",
     "Research campaigns remain active but are not the first-order normalization issue."
   ]
 }
