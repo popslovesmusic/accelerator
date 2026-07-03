@@ -2553,6 +2553,9 @@ The Economics Department is inducted only when `departments/economics/department
 **Theology Induction Rule (GOV-THEO-IND-001):**
 The Theology Department is inducted only when `departments/theology/department_ssot.md` and `departments/theology/AGENTS.md` both exist and the local department surface is bound into live authority. Detailed theology governance and debt tracking may remain in `docs/theology/procedural_theology_ssot.md`.
 
+**Documentation Induction Rule (GOV-DOC-IND-001):**
+The Documentation Department is inducted only when `departments/documentation/department_ssot.md` and `departments/documentation/AGENTS.md` both exist and the local department surface is bound into live authority. Documentation synchronization may remain in `departments/documentation/department_ssot.md`.
+
 Rigor level alone does not authorize tool use. Agents must resolve tool path, entry point, allowed-use class, invocation contract, and active/archive status through the live tool-routing manifest and its declared routing sources.
 
 **Validation Invocation Rule (GOV-VALIDATE-001):**
@@ -3225,7 +3228,7 @@ These items remain unsettled and are the primary targets for future induction an
 - **OQ_001 (Scalar Admissibility Context):** [ **GAP_OPEN** ] What is the full formal definition of $x$ in the scalar example $[D(2|-1)\to1 \langle f \rangle_x D(3|+3)\to6]\to5$? The context $x$ must be made explicit to complete the RT trace. [Source: MPF_IND_RT_NESTING_CONDITIONS_FAMILY_001].
 - **OQ_002 (Bell Curve Derivability):** [ **GAP_OPEN** ] Is the bell curve emergence from exclusion/addition asymmetry formally derivable from $\text{RT}_{\text{core}}$, or does it require an independent statistical postulate? [Source: MPF_IND_RT_NESTING_CONDITIONS_FAMILY_001].
 - **OQ_003 (Skew Conditions):** [ **GAP_OPEN** ] What governs the skew of $\text{RT}_{\text{out}}$ distributions — i.e., the formal condition under which the exclusion primary dominates over the additive primary or vice versa? [Source: MPF_IND_RT_NESTING_CONDITIONS_FAMILY_001].
-- **OQ_004 (Biconditional Ladder Resolution):** [ **GAP_OPEN** ] Does the mutual constitution of family and primaries (PRIN_007) provide the recursive scale structure needed to close the gap of the biconditional ladder / `meta_core_scale_hypothesis` in Appendix F.8? [Source: MPF_IND_RT_NESTING_CONDITIONS_FAMILY_001].
+- **OQ_004 (Biconditional Ladder Resolution):** [ **PROVISIONAL_CLOSED** ] Does the mutual constitution of family and primaries (PRIN_007) provide the recursive scale structure needed for the governed provisional reading of the biconditional ladder / `meta_core_scale_hypothesis` in Appendix F.8? [Source: MPF_IND_RT_NESTING_CONDITIONS_FAMILY_001].
 - **OQ_RTM_001 (Trace Inheritance Lemma):** [ **GAP_OPEN** ] Under lawful nesting, does trace-admissible $RT_n$ pass trace-admissibility into $RT_{n+1}$ without exhaustive re-derivation from $\text{RT}_{\text{core}}$? [Source: MPF_IND_RT_MECHANICS_RECURSIVE_COMPLETION_001].
 - **OQ_RTM_002 (Continuation Admissibility Condition):** [ **GAP_OPEN** ] What formal condition constrains the admissible continuation term in $D(RT_n \mid continuation)$ so the recursive engine remains inside the lawful distinction domain? [Source: MPF_IND_RT_MECHANICS_RECURSIVE_COMPLETION_001].
 - **OQ_RTM_003 (Base Case Constructive Trace):** [ **GAP_OPEN** ] Provide a constructive PRIN_001 trace from the base-case reduction $D(*|1) \to D(0|1)$ to $\text{RT}_{\text{core}}$, explicitly preserving distinction, admissibility, residue closure, and non-collapse. [Source: MPF_IND_RT_MECHANICS_RECURSIVE_COMPLETION_001].
@@ -3303,15 +3306,15 @@ Formal measurement rules for bridge falsification campaigns.
 - **Minimum Effect Threshold ($\tau$):** 0.05 (Target for $\beta_1$).
 
 ### F.8 Lexicon Debt
-This section tracks newly introduced lexicon terms that remain as open mathematical/procedural gaps (`GAP_OPEN`) under active induction proposals:
-- **`meta_core_scale_hypothesis`**: Propose a recursive scale interpretation of RT where deviation and admissible continuation form a biconditional ladder. [Source: `MPF_RT_BICONDITIONAL_LADDER_001`]
-- **`biconditional_ladder`**: Provide structural connectivity between nested scales of process expressions. [Source: `MPF_RT_BICONDITIONAL_LADDER_001`]
-- **`Affect-Effect_primitive`** (`[A|E]`): Specify a pre-distinction organizational condition at the scale floor. [Source: `MPF_RT_BICONDITIONAL_LADDER_001`]
-- **`distinction_floor_interpretation`**: Resolve local scale constraints and pre-distinction origins. [Source: `MPF_RT_BICONDITIONAL_LADDER_001`]
-- **`continuation_first_ontology`**: Record the dependency-first claim that process precedes distinction and that "precedence" is ontological rather than temporal. [Source: session_summary 2026-06-26 continuation-first ontology reduction]
-- **`observer_floor_mismatch`**: Define the relative mismatch between an embedded observer and the active local admissibility floor. [Source: session_summary 2026-06-26 continuation-first ontology reduction]
-- **`noise_floor`**: Specify the projected observational reading of unresolved deviation classes rather than treating noise as a primitive object. [Source: session_summary 2026-06-26 continuation-first ontology reduction]
-- **`relational_control_surface`**: Define a projected control-surface reading for constants or couplings under continuation-first governance. [Source: session_summary 2026-06-26 continuation-first ontology reduction]
+This section tracks newly introduced lexicon terms that have been reduced to governed provisional definitions or candidate readings under active induction proposals. They are no longer open `GAP_OPEN` items in the live closure surface:
+- **`meta_core_scale_hypothesis`**: Governed provisional reading of recursive scale interpretation where deviation and admissible continuation form a biconditional ladder. [Source: `MPF_RT_BICONDITIONAL_LADDER_001`]
+- **`biconditional_ladder`**: Governed provisional reading of structural connectivity between nested scales of process expressions. [Source: `MPF_RT_BICONDITIONAL_LADDER_001`]
+- **`Affect-Effect_primitive`** (`[A|E]`): Governed provisional reading of a pre-distinction organizational condition at the scale floor. [Source: `MPF_RT_BICONDITIONAL_LADDER_001`]
+- **`distinction_floor_interpretation`**: Governed provisional reading that resolves local scale constraints and pre-distinction origins. [Source: `MPF_RT_BICONDITIONAL_LADDER_001`]
+- **`continuation_first_ontology`**: Governed provisional reading that process precedes distinction and that "precedence" is ontological rather than temporal. [Source: session_summary 2026-06-26 continuation-first ontology reduction]
+- **`observer_floor_mismatch`**: Governed provisional reading of the relative mismatch between an embedded observer and the active local admissibility floor. [Source: session_summary 2026-06-26 continuation-first ontology reduction]
+- **`noise_floor`**: Governed provisional reading of unresolved deviation classes rather than a primitive object. [Source: session_summary 2026-06-26 continuation-first ontology reduction]
+- **`relational_control_surface`**: Governed provisional reading for constants or couplings under continuation-first governance. [Source: session_summary 2026-06-26 continuation-first ontology reduction]
 - **`Affect-Effect_pre_distinction_primitive_conjecture`**: Test whether A|E is a candidate pre-distinction primitive rather than merely a domain projection, and whether it can derive the distinction floor without circularity. [Source: MPF_AE_INDUCTION_CANDIDATES_2026_06_28]
 - **`distinction_floor_emergence`**: Separate the current framework-above-floor from the foundational target of deriving the floor itself. [Source: MPF_AE_INDUCTION_CANDIDATES_2026_06_28]
 - **`observation_as_orientation_affect`**: Define observation as the affect of basin boundary interactions on the orientation reference rather than as perception or consciousness. [Source: MPF_AE_INDUCTION_CANDIDATES_2026_06_28]
@@ -3334,6 +3337,7 @@ This section tracks newly introduced lexicon terms that remain as open mathemati
 - **`DEBT_GOV_DEPARTMENT_LAYOUT_001`**: Resolved. Mathematics, economics, and theology now exist as peer roots under `departments/`, and the live department layout manifest explicitly separates peer-root parity from later induction completion. [Source: governance/live/department_layout_manifest.json]
 - **`DEBT_GOV_ECONOMICS_INDUCTION_001`**: Resolved. The Economics Department now has a peer local SSOT and local AGENTS surface under `departments/economics/`, while the detailed economics SSOT remains the active evidence-and-debt registry for economics_app. [Source: departments/economics/department_ssot.md]
 - **`DEBT_GOV_THEOLOGY_INDUCTION_001`**: Resolved. The Theology Department now has a peer local SSOT and local AGENTS surface under `departments/theology/`, while the detailed theology SSOT remains the active governance-and-debt registry for theology_app. [Source: departments/theology/department_ssot.md]
+- **`DEBT_GOV_DOCUMENTATION_INDUCTION_001`**: Resolved. The Documentation Department now has a peer local SSOT and local AGENTS surface under `departments/documentation/`, while documentation synchronization remains the active maintenance registry for documentation surfaces. [Source: departments/documentation/department_ssot.md]
 - **`DEBT_GOV_PHYSICS_SSOT_NORMALIZATION_001`**: Resolved. The Physics Department local SSOT now uses the common peer filename `departments/physics/department_ssot.md`, and live routing references have been updated accordingly. [Source: departments/physics/department_ssot.md]
 - **`PROGRAM_DEBT_DISCHARGE_COMMAND_001`**: Active. Debt outside governance is now required to use the same explicit ordered discharge-and-report mechanism through `governance/live/program_debt_discharge_command.json`. [Source: governance/live/program_debt_discharge_command.json]
 

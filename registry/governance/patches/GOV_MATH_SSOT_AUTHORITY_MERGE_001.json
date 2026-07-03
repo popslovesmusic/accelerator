@@ -1,0 +1,87 @@
+{
+  "patch_id": "GOV_MATH_SSOT_AUTHORITY_MERGE_001",
+  "title": "Merge Existing Mathematics Textbook SSOT Authority into Governance",
+  "status": "proposed",
+  "department": "mathematics",
+  "purpose": "Recognize and register the existing Mono-Process Mathematical Program textbook as the live Mathematics Department SSOT while preserving all current SSOT content unchanged.",
+  "principle": "Authority is merged into governance; content is preserved.",
+  "ssot_recognition": {
+    "artifact": "docs/textbook/mono_process_textbook_complete.md",
+    "current_role": "existing_live_mathematics_ssot",
+    "recognized_role": "LIVE_DEPARTMENT_SSOT",
+    "authority_type": "DESIGN_AND_UPDATE_AUTHORITY",
+    "content_preservation_required": true,
+    "replacement_allowed": false,
+    "rewrite_allowed": false,
+    "registration_only": true
+  },
+  "authority_merge": {
+    "merge_type": "recognition_without_replacement",
+    "preserve_existing_work": true,
+    "preserve_existing_chapters": true,
+    "preserve_existing_governance_notes": true,
+    "preserve_existing_induction_history": true,
+    "preserve_existing_theorem_lineage": true,
+    "preserve_existing_appendices": true
+  },
+  "governance_rules": [
+    {
+      "id": "MATH_SSOT_MERGE_001",
+      "text": "The existing Mono-Process Mathematical Program textbook SHALL be recognized as the live SSOT for the Mathematics Department."
+    },
+    {
+      "id": "MATH_SSOT_MERGE_002",
+      "text": "This recognition SHALL NOT replace, rewrite, compress, supersede, or discard existing SSOT content."
+    },
+    {
+      "id": "MATH_SSOT_MERGE_003",
+      "text": "The current textbook content SHALL be preserved as inherited live authority."
+    },
+    {
+      "id": "MATH_SSOT_MERGE_004",
+      "text": "Future Mathematics Department updates SHALL parse the current textbook SSOT before modifying mathematics-owned artifacts."
+    },
+    {
+      "id": "MATH_SSOT_MERGE_005",
+      "text": "New governance metadata MAY be added around the SSOT, but SHALL NOT erase prior mathematical, conceptual, theorem, induction, or governance content."
+    },
+    {
+      "id": "MATH_SSOT_MERGE_006",
+      "text": "Executable state remains governed by registries, validators, and audit artifacts; the textbook SSOT governs design intent and update authority."
+    }
+  ],
+  "implementation_steps": [
+    {
+      "step": 1,
+      "action": "Register docs/textbook/mono_process_textbook_complete.md as the Mathematics Department live SSOT in authority_manifest.json."
+    },
+    {
+      "step": 2,
+      "action": "Update departments/mathematics/README.md to state that the textbook is the existing live SSOT."
+    },
+    {
+      "step": 3,
+      "action": "Create departments/mathematics/AGENTS.md requiring update agents to parse the textbook SSOT before changes."
+    },
+    {
+      "step": 4,
+      "action": "Add ownership mapping for math registries pointing to the Mathematics Department."
+    },
+    {
+      "step": 5,
+      "action": "Run the department induction audit again."
+    }
+  ],
+  "audit_reclassification": {
+    "DEPT_003": {
+      "old_result": "FAIL",
+      "new_result": "PASS_PENDING_REGISTRATION",
+      "reason": "The SSOT exists as the textbook; the gap is governance recognition, not missing content."
+    }
+  },
+  "protected_artifact": {
+    "path": "docs/textbook/mono_process_textbook_complete.md",
+    "role": "Mathematics Department live SSOT",
+    "protection": "preserve_existing_content"
+  }
+}

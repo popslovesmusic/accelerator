@@ -1,13 +1,13 @@
 # Mathematics Department Root
 
-This peer directory exists to satisfy the governed department layout requirement.
+This peer directory is the governed Mathematics Department workspace.
 
 Current status:
 - peer root: present
-- department induction: pending
-- local SSOT: not yet created
-- local AGENTS.md: not yet created
+- department induction: complete
+- live SSOT: `docs/textbook/mono_process_textbook_complete.md`
+- local AGENTS.md: present
 
 Boundary:
 
-This placeholder root does not grant inducted department status. Mathematics induction, local SSOT creation, and local agent rules remain separate governed work.
+The Mono-Process textbook is the live Mathematics Department SSOT. Its content is preserved unchanged; governance is merged by registration, not rewrite.

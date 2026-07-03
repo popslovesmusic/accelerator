@@ -1,0 +1,197 @@
+# Analysis Intake Department Single Source of Truth (SSOT)
+
+This document is the local SSOT for the Analysis Intake Department.
+
+It governs ingestion, parsing, claim extraction, classification, deduplication, routing, and proposal generation for structured packets and raw human notes.
+
+The Analysis Intake Department is subordinate to the global core, global governance, the Analysis Department, and the Mathematics Department. It does not define RT/Core, primitive operators, formal admissibility, formal residue, theorem status, or executable authority. It converts provisional input into proposed governed artifacts only.
+
+---
+
+## Department Charter
+
+The Analysis Intake Department exists to turn human-supplied material into governed work proposals without collapsing provenance or authority boundaries.
+
+Boundary rule:
+
+Raw input is provisional. Structured input is routable. Neither becomes authority until approved by the appropriate governed ledger.
+
+Methodological rule:
+
+Every extracted item must preserve source provenance, including the source excerpt when available.
+
+---
+
+## Scope and Boundaries
+
+### In Scope
+- ingest,
+- parse,
+- extract claims and terms,
+- classify,
+- deduplicate,
+- route,
+- propose artifacts,
+- queue for approval,
+- preserve provenance and source context.
+
+### Out of Scope
+- modifying authoritative registries,
+- executing work,
+- promoting claims directly from raw text,
+- closing queues or campaigns,
+- discarding ambiguity,
+- inventing source evidence.
+
+### Claim Ceiling
+Unless separately validated, Analysis Intake outputs are capped at:
+- `C0_definition` for intake rules and packet normalization,
+- `C1_model_relative` for routing proposals and candidate work items.
+
+No intake output may be treated as authority.
+
+---
+
+## Accepted Inputs
+
+### Structured Inputs
+- `json`,
+- `json5`,
+- `audit_packet`,
+- `patch_packet`.
+
+### Unstructured Inputs
+- `raw_text`,
+- `conversation_notes`,
+- `research_notes`,
+- `brainstorming`,
+- `uploaded_text_files`.
+
+Structured JSON must be schema-validated before routing.
+
+Raw text must be treated as provisional and routed through extraction and review.
+
+---
+
+## Classification Targets
+
+The intake layer may route candidates toward:
+- `induction_queue`,
+- `lexicon_gap_queue`,
+- `campaign_registry`,
+- `research_debt_registry`,
+- `theorem_candidate_registry`,
+- `proof_registry`,
+- `validator_backlog`,
+- `documentation_backlog`,
+- `work_reduction_framework`,
+- `master_work_index`.
+
+---
+
+## Intake Pipeline
+
+All Analysis Intake outputs should follow this pipeline:
+1. ingest,
+2. parse,
+3. extract_claims,
+4. classify,
+5. deduplicate,
+6. route,
+7. propose_artifacts,
+8. queue_for_approval.
+
+Ambiguous items must be routed to review rather than forced into a registry.
+
+---
+
+## Output Contract
+
+All intake products must distinguish:
+1. input class,
+2. extracted candidates,
+3. provenance,
+4. routing target,
+5. approval status.
+
+Required outputs:
+- `intake_summary`,
+- `candidate_work_items`,
+- `candidate_lexicon_entries`,
+- `candidate_inductions`,
+- `candidate_campaigns`,
+- `warnings`,
+- `unrouted_items`.
+
+Artifact paths:
+- `outputs/analysis_intake/intake_report_<id>.json`
+- `outputs/analysis_intake/intake_report_<id>.md`
+- `outputs/analysis_intake/candidate_patch_<id>.json`
+
+---
+
+## Dependencies on Global Core
+
+The Analysis Intake Department depends on:
+- `AGENTS.md`
+- repository-root `GEMINI.md`
+- `registry/compliance_charter_v2_3.json`
+- `governance/claim_policy.json`
+- `registry/claim_scope_binding_registry.json`
+- `registry/governance/semantic_projection_policy.json`
+
+---
+
+## Dependencies on Governed State
+
+The Analysis Intake Department depends on:
+- `departments/analysis/department_ssot.md`
+- `governance/live/authority_manifest.json`
+- `governance/live/department_registry.json`
+- `governance/live/department_layout_manifest.json`
+- `governance/live/department_relationship_registry.json`
+- `governance/live/work_reduction_framework.json`
+- `governance/live/master_work_index.json`
+- `outputs/audits/global_health_report.json`
+
+---
+
+## Governance Rules
+
+### ANALYSIS_INTAKE_001
+Analysis Intake SHALL accept both structured JSON and raw human notes.
+
+### ANALYSIS_INTAKE_002
+Raw input SHALL be classified into proposed governed work but SHALL NOT itself become authority.
+
+### ANALYSIS_INTAKE_003
+Every routed item SHALL retain source provenance.
+
+### ANALYSIS_INTAKE_004
+The intake department SHALL recommend routing but SHALL NOT execute, promote, or close work.
+
+---
+
+## Validation / Falsification Status
+
+- No intake recommendation in this SSOT is a registry mutation.
+- No raw-text extraction in this SSOT is an authority claim.
+- No candidate patch in this SSOT becomes authoritative without approval.
+- This department remains an intake and proposal layer over provisional input.
+
+Current department status:
+- intake parsing: active
+- routing proposals: active
+- execution authority: none
+- promotion authority: none
+
+---
+
+## Prohibited Promotions
+
+The following are blocked:
+- raw text to authority,
+- provisional notes to registry mutation,
+- candidate work item to executed work,
+- intake summary to promotion claim,
+- extraction heuristic to canonical truth.

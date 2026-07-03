@@ -76,6 +76,8 @@ The Ethics Department depends on mathematics for:
 - claim ceilings on formal objects,
 - source-term traceability.
 
+The live department relationship registry at `governance/live/department_relationship_registry.json` is the canonical cross-department routing surface for ethics-facing coordination.
+
 Every ethics interpretation must cite the originating formal term before interpreting it ethically.
 
 ---

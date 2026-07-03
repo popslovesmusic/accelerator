@@ -1,0 +1,182 @@
+{
+  "audit_id": "MATH_DEPARTMENT_INDUCTION_AUDIT_001",
+  "title": "Mathematics Department Readiness Audit",
+  "version": "1.0.0",
+  "mode": "read_only_verify",
+  "governance_level": "department",
+  "purpose": "Determine whether the Mathematics Department is structurally ready for formal induction before additional theorem promotion.",
+  "authority": {
+    "decision_source": "SSOT",
+    "execution_source": "Agent",
+    "human_role": "Review and approval only"
+  },
+  "root": "D:/projects/acellorator",
+  "overall_result": "FAIL",
+  "success_condition": "Every mandatory governance requirement is satisfied or an explicit induction backlog is produced.",
+  "claims": [
+    {
+      "id": "DEPT_001",
+      "title": "Department Root Exists",
+      "severity": "critical",
+      "result": "PASS",
+      "evidence": {
+        "path_exists": "departments/mathematics",
+        "path": "departments/mathematics"
+      }
+    },
+    {
+      "id": "DEPT_002",
+      "title": "Department README Present",
+      "severity": "critical",
+      "result": "PASS",
+      "evidence": {
+        "file_exists": "departments/mathematics/README.md",
+        "path": "departments/mathematics/README.md",
+        "line_numbers": [7, 8, 9],
+        "matches": [
+          "department induction: pending",
+          "local SSOT: not yet created",
+          "local AGENTS.md: not yet created"
+        ]
+      }
+    },
+    {
+      "id": "DEPT_003",
+      "title": "Department SSOT Exists",
+      "severity": "critical",
+      "result": "FAIL",
+      "evidence": {
+        "file_exists": false,
+        "path": "departments/mathematics/ssot/mathematics_department_ssot.json"
+      }
+    },
+    {
+      "id": "DEPT_004",
+      "title": "Department AGENTS Exists",
+      "severity": "critical",
+      "result": "FAIL",
+      "evidence": {
+        "file_exists": false,
+        "path": "departments/mathematics/AGENTS.md"
+      }
+    },
+    {
+      "id": "DEPT_005",
+      "title": "Authority Registration",
+      "severity": "critical",
+      "result": "FAIL",
+      "evidence": {
+        "registry_path": "governance/live/authority_manifest.json",
+        "registry_contains_object": "departments/mathematics",
+        "result": "not found"
+      }
+    },
+    {
+      "id": "DEPT_006",
+      "title": "Department Ownership",
+      "severity": "critical",
+      "result": "FAIL",
+      "evidence": {
+        "scope": "registry/math/*.json",
+        "checked_file_count": 587,
+        "missing_owner_metadata_count": 587,
+        "owner_fields_checked": [
+          "owner",
+          "owners",
+          "department_owner",
+          "governance_owner"
+        ]
+      }
+    },
+    {
+      "id": "DEPT_007",
+      "title": "Validator Ownership",
+      "severity": "high",
+      "result": "FAIL",
+      "evidence": {
+        "validator_files": [
+          "continuation_validator_registry.json",
+          "mt_law_a_validator_depth_registry.json",
+          "participation_validator_registry.json",
+          "recursive_aspect_simultaneity_validator_registry.json",
+          "residue_coupling_validator_registry.json"
+        ],
+        "assignment_status": "no explicit owner/assignment metadata found"
+      }
+    },
+    {
+      "id": "DEPT_008",
+      "title": "Theorem Lifecycle Defined",
+      "severity": "high",
+      "result": "FAIL",
+      "evidence": {
+        "lifecycle_complete_requested": [
+          "candidate",
+          "proof_plan",
+          "proof_candidate",
+          "review",
+          "formal_symbolic_closure",
+          "promoted"
+        ],
+        "observed_lifecycle_support": {
+          "theorem_evidence_ladder_registry.json": [
+            "scaffolded",
+            "symbolic_supported",
+            "formal_candidate",
+            "formal"
+          ],
+          "theorem_proof_strengthening_registry.json": [
+            "scaffolded_to_symbolic_supported",
+            "symbolic_supported_to_formal_candidate",
+            "formal_candidate_to_formal"
+          ],
+          "proof_registry.json": [
+            "PROOF_PLAN_REGISTERED",
+            "FORMAL_SYMBOLIC_CLOSURE"
+          ]
+        },
+        "issue": "The requested lifecycle is not represented end-to-end as written."
+      }
+    },
+    {
+      "id": "DEPT_009",
+      "title": "Registry Consistency",
+      "severity": "high",
+      "result": "FAIL",
+      "evidence": {
+        "expected_registry": "lemma_registry.json",
+        "status": "missing",
+        "checked_paths": [
+          "registry/lemma_registry.json",
+          "registry/math/lemma_registry.json",
+          "registry/lemma_status_registry.json",
+          "registry/math/lemma_status_registry.json"
+        ]
+      }
+    },
+    {
+      "id": "DEPT_010",
+      "title": "Induction Readiness",
+      "severity": "critical",
+      "result": "FAIL",
+      "evidence": {
+        "department_ready_for_induction": false,
+        "minimum_closure_set_required": [
+          "Create the local math department SSOT",
+          "Add departments/mathematics/AGENTS.md",
+          "Register departments/mathematics in governance/live/authority_manifest.json",
+          "Add explicit ownership metadata to registry/math/*.json",
+          "Assign validator ownership metadata",
+          "Normalize the theorem lifecycle or map the requested lifecycle explicitly",
+          "Add the missing lemma registry or revise the cross-registry consistency requirement"
+        ]
+      }
+    }
+  ],
+  "final_decision": "FAIL",
+  "recommendation": "Produce ordered induction backlog before theorem promotion.",
+  "notes": [
+    "The department root exists, but the local SSOT and AGENTS files do not.",
+    "The current registry set supports theorem promotion metadata only partially and does not satisfy the department induction gate as written."
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "patch_id": "ANALYSIS_INTAKE_DEPARTMENT_001",
+  "title": "Analysis Intake Department",
+  "status": "APPLIED",
+  "applied_on": "2026-07-02",
+  "purpose": "Create a governed intake layer that converts structured JSON or raw human notes into classified governed work items.",
+  "department": "analysis_intake",
+  "mission": "Transform human-supplied ideas, notes, audits, transcripts, and JSON packets into routed governance artifacts.",
+  "accepted_inputs": {
+    "structured": [
+      "json",
+      "json5",
+      "audit_packet",
+      "patch_packet"
+    ],
+    "unstructured": [
+      "raw_text",
+      "conversation_notes",
+      "research_notes",
+      "brainstorming",
+      "uploaded_text_files"
+    ]
+  },
+  "pipeline": [
+    "ingest",
+    "parse",
+    "extract_claims",
+    "classify",
+    "deduplicate",
+    "route",
+    "propose_artifacts",
+    "queue_for_approval"
+  ],
+  "classification_targets": [
+    "induction_queue",
+    "lexicon_gap_queue",
+    "campaign_registry",
+    "research_debt_registry",
+    "theorem_candidate_registry",
+    "proof_registry",
+    "validator_backlog",
+    "documentation_backlog",
+    "work_reduction_framework",
+    "master_work_index"
+  ],
+  "raw_text_rules": [
+    "Raw text SHALL be treated as provisional input, not authority.",
+    "The intake agent SHALL extract candidate claims, terms, operators, risks, and work items.",
+    "The intake agent SHALL not promote claims directly from raw text.",
+    "Every extracted item SHALL preserve source excerpt and source path.",
+    "Ambiguous items SHALL be routed to review rather than forced into a registry."
+  ],
+  "json_rules": [
+    "Structured JSON SHALL be schema-validated before routing.",
+    "Valid JSON packets MAY produce direct proposed registry patches.",
+    "Invalid or partial JSON SHALL be routed as raw intake with parse warnings."
+  ],
+  "output_contract": {
+    "required_outputs": [
+      "intake_summary",
+      "candidate_work_items",
+      "candidate_lexicon_entries",
+      "candidate_inductions",
+      "candidate_campaigns",
+      "warnings",
+      "unrouted_items"
+    ],
+    "artifact_paths": {
+      "intake_report_json": "outputs/analysis_intake/intake_report_<id>.json",
+      "intake_report_md": "outputs/analysis_intake/intake_report_<id>.md",
+      "candidate_patch_json": "outputs/analysis_intake/candidate_patch_<id>.json"
+    }
+  },
+  "governance_rules": [
+    {
+      "id": "ANALYSIS_INTAKE_001",
+      "text": "Analysis Intake SHALL accept both structured JSON and raw human notes."
+    },
+    {
+      "id": "ANALYSIS_INTAKE_002",
+      "text": "Raw input SHALL be classified into proposed governed work but SHALL NOT itself become authority."
+    },
+    {
+      "id": "ANALYSIS_INTAKE_003",
+      "text": "Every routed item SHALL retain source provenance."
+    },
+    {
+      "id": "ANALYSIS_INTAKE_004",
+      "text": "The intake department SHALL recommend routing but SHALL NOT execute, promote, or close work."
+    }
+  ]
+}

@@ -18,6 +18,7 @@ The department inherits the same RT/Core and process-first ontology as every oth
 - History is carried through residue rather than imported as an external timeline.
 
 The department therefore treats theological nouns as candidate semantic projections, interpretive labels, or analogical mappings unless and until a narrower governed role is explicitly defined.
+Governed routing note: cross-department coordination also consults `governance/live/department_relationship_registry.json`, and documentation synchronization is maintained by `departments/documentation/department_ssot.md`.
 
 ### Core Governance Position
 The department does **not** claim:

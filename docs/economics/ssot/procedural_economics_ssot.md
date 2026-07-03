@@ -19,6 +19,7 @@ while retaining a domain-dominant semantic reading. Here `A|E` is treated as a w
 
 Under this governed reading, economics_app studies how relational affects become effects through admissible progression and how those effects accumulate into organized constraints on future progression.
 Governed note: the live boundary manifest `governance/live/economics_traceability_manifest.json` now states that constructive traceability to the primitive lineage does not imply semantic equivalence across projected domains.
+Governed routing note: cross-department coordination also consults `governance/live/department_relationship_registry.json`, and documentation synchronization is maintained by `departments/documentation/department_ssot.md`.
 
 ### Definition of Done: ECON_DEBT_0001 (Critical Foundational Debt)
 The foundational debt item `ECON_DEBT_0001` (Axiomatization of the organization operator $Org_a$) shall be marked **CLOSED** only when the following criteria are met:
