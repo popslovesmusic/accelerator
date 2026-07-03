@@ -32,7 +32,7 @@ The math core does not elevate theorems, close ontology, or justify physics\_phy
 
 ## 🚀 Quick Start
 
-1. **Onboarding:** Read [ONBOARDING.md](ONBOARDING.md), then [docs/governance/NARRATIVE.md](docs/governance/NARRATIVE.md) and [docs/governance/AGENTS.md](docs/governance/AGENTS.md).
+1. **Onboarding:** Read [ONBOARDING.md](ONBOARDING.md), then [docs/governance/NARRATIVE.md](docs/governance/NARRATIVE.md) and [docs/AGENTS.md](docs/AGENTS.md).
 2. **Status Check:** Review the latest [Scientific Rigor Report](docs/reports/TOOL_SCIENTIFIC_RIGOR_REPORT_2026-04-30.md).
 3. **Execute:** Run the governed multi-sim runner:
    ```bash
