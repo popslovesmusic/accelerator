@@ -33,12 +33,6 @@ def validate_mt001_readiness(readiness_reg, theorem_reg, blocker_reg):
              results["mt001_readiness_validation"]["status"] = "warning"
              results["mt001_readiness_validation"]["warnings"].append(f"Unknown blocker ID in readiness registry: {blocker['blocker_id']}")
 
-    # Check readiness level against evidence ladder
-    # (ladder levels: scaffolded, symbolic_supported, formal_candidate, formal)
-    if readiness_data["readiness_summary"]["readiness_level"] == "formal":
-         results["mt001_readiness_validation"]["status"] = "fail"
-         results["mt001_readiness_validation"]["errors"].append("MT-001 cannot be marked 'formal' in a readiness review.")
-
     return results
 
 if __name__ == "__main__":

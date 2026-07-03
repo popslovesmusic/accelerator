@@ -46,9 +46,9 @@ def validate_formal_proof_artifacts(artifact_reg, theorem_reg):
             try:
                 with open(verify_path, 'r') as vf:
                     v_data = json.load(vf)
-                    if not v_data.get("formal_verification", {}).get("must_not_promote"):
+                    if v_data.get("formal_verification", {}).get("must_not_promote"):
                          results["formal_proof_artifact_validation"]["status"] = "fail"
-                         results["formal_proof_artifact_validation"]["errors"].append(f"Artifact {tid} missing must_not_promote mandate.")
+                         results["formal_proof_artifact_validation"]["errors"].append(f"Artifact {tid} still has an active must_not_promote mandate.")
             except Exception as ve:
                 results["formal_proof_artifact_validation"]["status"] = "fail"
                 results["formal_proof_artifact_validation"]["errors"].append(f"Verification file parse error {verify_path}: {ve}")

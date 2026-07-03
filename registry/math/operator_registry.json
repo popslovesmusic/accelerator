@@ -301,6 +301,74 @@
       "definition": "Composes conditioned distinctions: <a>_b <*>_x <c>_d.",
       "arity": "binary",
       "provisional_status": true
+    },
+    {
+      "symbol": "Pi_geo",
+      "name": "Topology-Geometry Projection Operator",
+      "definition": "Candidate projection operator for scope-bound topology-to-geometry reduction under the registered projection-legality gate.",
+      "domain": [
+        "process_state",
+        "orientation_frame"
+      ],
+      "codomain": [
+        "process_state"
+      ],
+      "arity": "unary",
+      "closure_status": "conditional",
+      "known_failure_modes": [
+        "distinction_alias",
+        "admissibility_violation",
+        "orientation_trace_loss",
+        "closure_trace_loss_or_alias"
+      ],
+      "source_registry": "registry/math/geo_projection_legality_definitions.json",
+      "provisional_status": true
+    },
+    {
+      "symbol": "recoupling",
+      "name": "Residue-Mediated Recoupling Operator",
+      "definition": "Restores admissible coupling after decoupling when residue context and admissibility windows permit a governed transition.",
+      "domain": [
+        "process_state",
+        "residue_state",
+        "orientation_frame"
+      ],
+      "codomain": [
+        "continuation_event"
+      ],
+      "arity": "binary",
+      "closure_status": "conditional",
+      "known_failure_modes": [
+        "memoryless_reopening",
+        "residue_as_independent_agent",
+        "unscoped_orientation_conflict",
+        "missing_admissibility_window_change"
+      ],
+      "source_registry": "registry/residue_mediated_recoupling_registry.json",
+      "provisional_status": true
+    },
+    {
+      "symbol": "Org_a",
+      "name": "Admissible Organization Operator",
+      "definition": "Organizes admissible distinction participation over a typed process graph while preserving inventory, admissibility, and orientation consistency.",
+      "domain": [
+        "process_state",
+        "orientation_frame",
+        "admissibility_window"
+      ],
+      "codomain": [
+        "process_state"
+      ],
+      "arity": "n-ary",
+      "closure_status": "conditional",
+      "known_failure_modes": [
+        "inventory_loss",
+        "admissibility_violation",
+        "orientation_drift",
+        "scope_overextension"
+      ],
+      "source_registry": "registry/math/topological_organization_registry.json",
+      "provisional_status": true
     }
   ]
 }

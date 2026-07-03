@@ -4,7 +4,7 @@ This document is the local SSOT for the Analysis Department.
 
 It governs program-state assessment, dependency analysis, priority ranking, and recommendation synthesis from governed evidence.
 
-The Analysis Department is subordinate to the global core, global governance, and the Mathematics Department. It does not define RT/Core, primitive operators, formal admissibility, formal residue, theorem status, or executable authority. It consumes live ledgers and audit artifacts and outputs recommendations only.
+The Analysis Department is subordinate to the global core, global governance, and the Mathematics Department. It does not define RT/Core, primitive operators, formal admissibility, formal residue, theorem status, or executable authority. It consumes live ledgers, the Work Reduction Framework, the Master Work Index, and the department relationship registry, then outputs recommendations only.
 
 ---
 
@@ -70,6 +70,9 @@ The Analysis Department depends on:
 - `governance/live/department_registry.json`
 - `governance/live/department_layout_manifest.json`
 - `governance/live/department_relationship_registry.json`
+- `governance/live/debt_discharge_command.json`
+- `governance/live/program_debt_discharge_command.json`
+- `governance/live/induction_queue.json`
 - `outputs/audits/global_health_report.json`
 - the governed registries and audit artifacts referenced by those ledgers
 
@@ -116,32 +119,49 @@ Each recommendation should carry:
 ## Initial Recommendation Entries
 
 #### ANL_REC_001
-- **Title:** Resolve the sole master-work-index mapping gap
-- **Source Evidence:** `governance/live/master_work_index.json`
-- **Recommendation:** classify and map `MST001_RESOLUTION_FRONTIER_CAMPAIGN_V1` so the master work index no longer contains a `needs_mapping` item.
+- **Title:** Reduce lexicon debt first
+- **Source Evidence:** `governance/live/master_work_index.json`, `registry/lexicon_gap_queue.json`
+- **Recommendation:** continue `lexicon debt reduction` because the live lexicon gap queue is the largest remaining queue surface and it directly reduces downstream mapping ambiguity.
 - **Claim Class:** `C1_model_relative`
 - **Status:** deterministic recommendation
 
 #### ANL_REC_002
-- **Title:** Continue theorem-readiness campaigns
-- **Source Evidence:** `governance/live/master_work_index.json`
-- **Recommendation:** continue `PROOF-ELEVATION-CAMPAIGN-001`, `MT-PROOF-ELEVATION-001`, and `MT-COUNTEREXAMPLE-001` in priority order because they are the active mathematics campaigns with the highest downstream theorem-readiness impact.
+  - **Title:** Maintain mathematics post-promotion cleanup
+  - **Source Evidence:** `governance/live/master_work_index.json`, `registry/math/mt_proof_elevation_campaign_registry.json`, `registry/math/proof_elevation_campaign_registry.json`, `registry/math/formal_candidate_readiness_registry.json`, `registry/math/formal_proof_artifact_registry.json`, `registry/math/proof_obligation_registry.json`
+  - **Recommendation:** mathematics proof promotion is now closed at the registry level; keep only residual campaign cleanup and counterexample follow-through active, because the theorem-readiness gate has already been discharged.
 - **Claim Class:** `C3_structural_comparison`
 - **Status:** deterministic recommendation
 
 #### ANL_REC_003
-- **Title:** Continue active repair and resolution queues
-- **Source Evidence:** `governance/live/master_work_index.json`
-- **Recommendation:** continue `SIM-REPAIR-QUEUE-001`, `VAL-RC-EXEC-001`, and `VAL-URS-RES-001` because they are active queue items with immediate next actions and no recorded blockers.
+- **Title:** Continue documentation debt reduction
+- **Source Evidence:** `governance/live/master_work_index.json`, `departments/documentation/department_ssot.md`
+- **Recommendation:** continue documentation synchronization and documentation debt reduction because documentation drift remains governed work and the documentation department is live.
 - **Claim Class:** `C1_model_relative`
 - **Status:** deterministic recommendation
 
 #### ANL_REC_004
-- **Title:** Preserve research-campaign momentum
-- **Source Evidence:** `governance/live/master_work_index.json`
-- **Recommendation:** keep `BOOK_CAMPAIGN_PHASE_01_MASTER`, `P0-C4-CA-001`, and `P0-C4-GRAPH-001` active because they are live research campaigns with explicit execution states and blocker sets.
+- **Title:** Validate inducted neuroscience work
+- **Source Evidence:** `governance/live/master_work_index.json`, `departments/neuroscience/department_ssot.md`, `departments/neuroscience/AGENTS.md`
+- **Recommendation:** keep neuroscience induction validation active until the linked queue artifacts are confirmed and the induction is fully settled in the live routing surfaces.
 - **Claim Class:** `C3_structural_comparison`
 - **Status:** deterministic recommendation
+
+---
+
+## Live Execution Order
+
+  This is the current single ordered recommendation sequence under the Work Reduction Framework. It is a recommendation only and does not authorize execution by itself.
+  
+  1. `lexicon debt reduction`
+  1. `documentation debt reduction`
+  1. `neuroscience induction validation`
+  1. `math debt reduction` for residual campaign cleanup only
+
+  Ordering basis:
+  - `lexicon debt reduction` is first because the live lexicon gap queue remains the largest unresolved queue surface.
+  - `documentation debt reduction` is second because documentation drift remains live governed work and affects discoverability across departments.
+  - `neuroscience induction validation` is third because the department is inducted but still in review, so its queue confirmation is downstream of the higher-volume backlog surfaces.
+  - `math debt reduction` is now residual cleanup only because the proof package and theorem promotion state have already been discharged.
 
 ---
 
@@ -155,6 +175,7 @@ Each recommendation should carry:
 Current department status:
 - recommendation synthesis: active
 - dependency analysis: active
+- work-reduction routing: active
 - execution authority: none
 - promotion authority: none
 

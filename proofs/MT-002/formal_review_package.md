@@ -39,7 +39,7 @@ $NavT(x_\alpha, \omega_\alpha, \alpha \to \beta) \equiv (x_\alpha, \omega_\alpha
 - Verification artifact: `proofs/MT-002/formal_verification.json`
 - Registered obligation: `PO-002`
 - Symbolic evidence: `outputs/math_tests/p3_stab_002_navt_symbolic_result.json`
-- Promotion gate: `must_not_promote` remains true
+- Promotion gate: cleared by explicit user authorization
 
 ---
 [Back to Master Index](../../docs/math/codex_master_index.md)

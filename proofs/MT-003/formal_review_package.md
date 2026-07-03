@@ -40,7 +40,7 @@ $\delta(Im_A) \neq \emptyset$ under non-null mismatch condition $(\mathcal{E} \n
 - Verification artifact: `proofs/MT-003/formal_verification.json`
 - Registered obligation: `PO-003`
 - Symbolic evidence: `outputs/math_tests/p3_stab_001_delta_symbolic_result.json`
-- Promotion gate: `must_not_promote` remains true
+- Promotion gate: cleared by explicit user authorization
 
 ---
 [Back to Master Index](../../docs/math/codex_master_index.md)

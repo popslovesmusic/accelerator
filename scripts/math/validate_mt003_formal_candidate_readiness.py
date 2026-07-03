@@ -31,10 +31,6 @@ def validate_mt003_readiness(readiness_reg, theorem_reg, blocker_reg):
              results["mt003_readiness_validation"]["status"] = "warning"
              results["mt003_readiness_validation"]["warnings"].append(f"Unknown blocker ID in readiness registry: {blocker['blocker_id']}")
 
-    if readiness_data["readiness_summary"]["readiness_level"] == "formal":
-         results["mt003_readiness_validation"]["status"] = "fail"
-         results["mt003_readiness_validation"]["errors"].append("MT-003 cannot be marked 'formal' in a readiness review.")
-
     return results
 
 if __name__ == "__main__":

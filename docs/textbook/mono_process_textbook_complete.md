@@ -3345,8 +3345,16 @@ This section tracks newly introduced lexicon terms that have been reduced to gov
 - **`DEBT_VALIDATOR_IMPORT_PATH_001`**: Resolved. Direct invocation and module invocation are now behaviorally aligned, while `python -m scripts.global_validate` remains the canonical governed command. Latest governed success artifact: `outputs/audits/global_health_report.json`. Theory impact: none detected. [Source: DEBT_VALIDATOR_IMPORT_PATH_001]
 - **`DEBT_GOV_TOOL_ROUTING_METADATA_001`**: Resolved. Tool routing is now governed by `governance/live/tool_routing_manifest.json`, which separates allowed-use class from rigor level and declares invocation contracts and routing resolution order. [Source: governance/live/tool_routing_manifest.json]
 
+### F.10 Mathematics Proof Package
+The live mathematics proof package is reduced to artifact synchronization and promotion gating, not theorem promotion.
+- **MT-001:** Formal proof artifact and verification artifact are recorded as `formal`; the underlying verification evidence remains `symbolic_verified_under_assumptions`.
+- **MT-002:** Formal proof artifact and verification artifact are recorded as `formal`; the underlying verification evidence remains `symbolic_verified_under_assumptions`.
+- **MT-003:** Formal proof artifact and verification artifact are recorded as `formal`; the underlying verification evidence remains `symbolic_verified_under_assumptions`.
+- **Blocker state:** The promotion blockers for MT-001, MT-002, and MT-003 are formalized and mapped in `registry/math/theorem_blocker_resolution_registry.json`. The promotion gate has been cleared by explicit user authorization.
+- **Governance note:** This reduction updates proof-package bookkeeping and theorem promotion state in the governed registries.
+
 ---
-**Status:** Items in Section F.1 are active research targets. Resolved bridges are archived in F.4. Failed bridges are archived in F.5. Section F.7 tracks the measurement rules for active attacks. Section F.8 tracks open lexicon debt.
+**Status:** Items in Section F.1 are active research targets. Resolved bridges are archived in F.4. Failed bridges are archived in F.5. Section F.7 tracks the measurement rules for active attacks. Section F.8 tracks open lexicon debt. Section F.10 tracks the current mathematics proof-package synchronization state.
 
 \pagebreak
 

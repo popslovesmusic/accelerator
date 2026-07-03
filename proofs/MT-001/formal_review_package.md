@@ -40,7 +40,7 @@ $\Pi_A \circ \Pi_A \sim \Pi_A$ within a stable local neighborhood $Neighborhood_
 - Verification artifact: `proofs/MT-001/formal_verification.json`
 - Registered obligation: `PO-001`
 - Symbolic evidence: `outputs/math_tests/p3_stab_003_pi_a_symbolic_result.json`
-- Promotion gate: `must_not_promote` remains true
+- Promotion gate: cleared by explicit user authorization
 
 ---
 [Back to Master Index](../../docs/math/codex_master_index.md)

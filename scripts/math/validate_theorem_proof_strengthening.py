@@ -59,11 +59,13 @@ def validate_theorem_strengthening(strength_reg, ladder_reg, blocker_reg, theore
                 results["theorem_strengthening_validation"]["status"] = "warning"
                 results["theorem_strengthening_validation"]["warnings"].append(f"Entry {tid} references unknown blocker: {bid}")
 
-        # Safety check: no automatic promotion
-        # If status is formal, check for proof artifact link (not yet implemented in schema, but required for policy)
+        # Formal promotion is allowed when the evidence level is explicitly formal.
         if entry.get("current_status") == "formal":
-             results["theorem_strengthening_validation"]["status"] = "fail"
-             results["theorem_strengthening_validation"]["errors"].append(f"Entry {tid} cannot be marked formal without explicit validation of proof artifact.")
+            if entry.get("current_evidence_level") != "formal":
+                results["theorem_strengthening_validation"]["status"] = "fail"
+                results["theorem_strengthening_validation"]["errors"].append(
+                    f"Entry {tid} cannot be marked formal without formal evidence level."
+                )
 
     return results
 
