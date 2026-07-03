@@ -31,5 +31,15 @@ $$ \exists e \in ContinuationEvent \iff Im(\Pi_A \circ S(C)) \neq \emptyset $$
 - **Total Branch Pruning (BFM-003):** All valid paths removed by over-pruning.
 - **Branch Explosion (BFM-001):** Unbounded candidates prevent unique selection.
 
+## Proof Obligation Traceability
+- Registered obligation: `PO-003` in `registry/math/proof_obligation_registry.json`.
+- Supporting symbolic evidence: `outputs/math_tests/p3_stab_001_delta_symbolic_result.json`.
+- Dependency relation: `EQ-001 (admissibility_equivalence)`.
+- Verified boundaries: `BCFM-010`, `BFM-003`, and `BFM-001`.
+- Promotion gate remains closed: this proof is symbolic under assumptions only.
+
 ## Conclusion
 Within the formal procedural boundary, continuation existence is strictly bound to the non-emptiness of the admissible candidate image. This proof establishes the logical dependency for actualization without claiming global existence.
+
+## Verification Summary
+This proof is stronger than a scaffold because each inference step is tied to a registered obligation, a symbolic evidence artifact, and an explicit selection boundary set. The result remains local and provisional.

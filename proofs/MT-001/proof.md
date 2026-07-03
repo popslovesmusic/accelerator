@@ -31,5 +31,15 @@ $$\Pi_A(\Pi_A(x)) \sim_A \Pi_A(x)$$
 - **Residue Drift (RBFM-009):** If residue changes $A$ between steps, $\Pi_A \circ \Pi_A$ is not equivalent to $\Pi_A$.
 - **Orientation Conflict (OFM-001):** If minimization is not strict, selection may oscillate between applications.
 
+## Proof Obligation Traceability
+- Registered obligation: `PO-001` in `registry/math/proof_obligation_registry.json`.
+- Supporting symbolic evidence: `outputs/math_tests/p3_stab_003_pi_a_symbolic_result.json`.
+- Dependency relation: `EQ-001 (admissibility_equivalence)`.
+- Verified boundaries: `EQFM-008`, `RBFM-009`, and `OFM-001`.
+- Promotion gate remains closed: this proof is symbolic under assumptions only.
+
 ## Conclusion
 Within the formal procedural boundary of the Mono-Process Framework, $\Pi_A$ is idempotent under the declared stable admissibility constraints. This proof does not assert physical truth or global idempotence for dynamic windows.
+
+## Verification Summary
+This proof is stronger than a scaffold because each inference step is tied to a registered obligation, a symbolic evidence artifact, and an explicit boundary set. The result remains local and provisional.

@@ -35,5 +35,12 @@ $\delta(Im_A) \neq \emptyset$ under non-null mismatch condition $(\mathcal{E} \n
 - **Source Relation**: (E≠0) ⇔R δ(E>0)
 - **Non-Separability Acknowledged**: true (left/right readings are incomplete without <->_R)
 
+## 9. Traceability and Verification
+- Proof artifact: `proofs/MT-003/proof.md`
+- Verification artifact: `proofs/MT-003/formal_verification.json`
+- Registered obligation: `PO-003`
+- Symbolic evidence: `outputs/math_tests/p3_stab_001_delta_symbolic_result.json`
+- Promotion gate: `must_not_promote` remains true
+
 ---
 [Back to Master Index](../../docs/math/codex_master_index.md)

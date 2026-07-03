@@ -34,5 +34,12 @@ $NavT(x_\alpha, \omega_\alpha, \alpha \to \beta) \equiv (x_\alpha, \omega_\alpha
 - **Source Relation**: (E≠0) ⇔R δ(E>0)
 - **Non-Separability Acknowledged**: true (left/right readings are incomplete without <->_R)
 
+## 9. Traceability and Verification
+- Proof artifact: `proofs/MT-002/proof.md`
+- Verification artifact: `proofs/MT-002/formal_verification.json`
+- Registered obligation: `PO-002`
+- Symbolic evidence: `outputs/math_tests/p3_stab_002_navt_symbolic_result.json`
+- Promotion gate: `must_not_promote` remains true
+
 ---
 [Back to Master Index](../../docs/math/codex_master_index.md)

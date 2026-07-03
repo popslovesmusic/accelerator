@@ -31,5 +31,15 @@ $$NavT(x, P_{null}) \sim_L x$$
 - **Residue Transport Instability (TIFM-005):** If transport triggers residue update, $x'$ is not equivalent to $x$.
 - **Orientation Decoherence (NTFM-003):** Frame shift destroys local equivalence.
 
+## Proof Obligation Traceability
+- Registered obligation: `PO-002` in `registry/math/proof_obligation_registry.json`.
+- Supporting symbolic evidence: `outputs/math_tests/p3_stab_002_navt_symbolic_result.json`.
+- Dependency relation: `EQ-002 (local_process_state_equivalence)`.
+- Verified boundaries: `NTFM-003` and `TIFM-005`.
+- Promotion gate remains closed: this proof is symbolic under assumptions only.
+
 ## Conclusion
 Within the formal procedural boundary, $NavT$ is an identity mapping on null paths under closed local contexts. This proof does not claim global identity for arbitrary transport paths.
+
+## Verification Summary
+This proof is stronger than a scaffold because each inference step is tied to a registered obligation, a symbolic evidence artifact, and an explicit transport boundary set. The result remains local and provisional.
