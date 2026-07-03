@@ -1,0 +1,43 @@
+{
+  "translation_id": "DOMAIN_TRANSLATION_CORE_TO_TENSOR_DISPLACEMENT_001",
+  "patch_id": "PATCH_PI_MEMORY_TENSOR_RT_006",
+  "campaign_id": "CAMPAIGN_MEMORY_TENSOR_RT_IMPLEMENTATION_001",
+  "status": "provisional",
+  "title": "Core Action to Tensor Displacement Translation",
+  "purpose": "Represent core-domain symmetry-breaking action in tensor mechanics as displacement without collapsing the two domains.",
+  "source_domain": "core_rt",
+  "target_domain": "tensor_mechanics",
+  "source_expression": "δα(A|<S>)",
+  "target_expression": "ΔA",
+  "translation_rule": "δα(A|<S>) -> ΔA",
+  "rule_meaning": "A core symmetry-breaking action is represented in tensor mechanics as a displacement trace.",
+  "preserved_distinctions": [
+    "action is not identical to displacement",
+    "displacement is not discarded",
+    "observable identity is downstream of action and displacement",
+    "RT remains the whole expression"
+  ],
+  "inverse_warning": "ΔA may imply a core action trace, but the tensor displacement alone does not exhaust the full RT action context.",
+  "forbidden_collapses": [
+    "Do not reduce action to mere geometric displacement.",
+    "Do not reduce displacement to an inert stored object.",
+    "Do not reverse the direction so that observation becomes prior to action.",
+    "Do not treat the translation as identity equivalence."
+  ],
+  "traceability": {
+    "parent_refinement": "REF_MEMORY_TENSOR_CORE_DISPLACEMENT_001",
+    "parent_semantics": "COMP_MEMORY_TENSOR_RT_001",
+    "parent_axiom_set": "AX_MEMORY_TENSOR_RT_001",
+    "governance_contract": "SEM_MEMORY_TENSOR_RT_001"
+  },
+  "validation": {
+    "required": [
+      "translation_id_unique",
+      "source_and_target_present",
+      "translation_rule_present",
+      "forbidden_collapses_present",
+      "traceability_complete"
+    ],
+    "result": "pass"
+  }
+}

@@ -119,16 +119,16 @@ Each recommendation should carry:
 ## Initial Recommendation Entries
 
 #### ANL_REC_001
-- **Title:** Resolve the shared mathematics prerequisite cluster
-- **Source Evidence:** `governance/live/master_work_index.json`, `outputs/analysis/unlock_priority_report.json`, `analysis/program_state_report.json`
-- **Recommendation:** continue `math debt reduction` against `MT-001`, `MT-002`, `MT-003`, `recursive_convergence`, `operator_composition`, and `selection_uniqueness` because this cluster is the highest-value unlock surface in the current live dependency projection.
+- **Title:** Continue formal follow-through on the live math path
+- **Source Evidence:** `registry/math/math_campaign_execution_order.json`, `registry/math/proof_elevation_campaign_registry.json`, `registry/math/mt_proof_elevation_campaign_registry.json`
+- **Recommendation:** continue `PROOF-ELEVATION-CAMPAIGN-001` and `MT-PROOF-ELEVATION-001`, because the live math execution order places formal follow-through first and the old shared prerequisite blocker model is no longer authoritative.
 - **Claim Class:** `C3_structural_comparison`
 - **Status:** deterministic recommendation
 
 #### ANL_REC_002
   - **Title:** Maintain theorem-readiness follow-through
-  - **Source Evidence:** `governance/live/master_work_index.json`, `outputs/analysis/unlock_priority_report.json`, `registry/math/proof_elevation_campaign_registry.json`
-  - **Recommendation:** continue `PROOF-ELEVATION-CAMPAIGN-001` after the shared prerequisite cluster is cleared, because that campaign remains the direct theorem-readiness follow-through path in the live index.
+  - **Source Evidence:** `outputs/audits/math_counterexample_orientation_locking_execution_002.json`, `outputs/audits/math_counterexample_continuation_002.json`, `outputs/math_tests/mt_counterexample_orientation_locking_result.json`
+  - **Recommendation:** continue `MT-COUNTEREXAMPLE-001` with bounded `nonlocal_transport_fragmentation`, because the dedicated `orientation_locking` harness now exists as a direct-run artifact and the campaign should advance to the next undeployed declared vector.
 - **Claim Class:** `C3_structural_comparison`
 - **Status:** deterministic recommendation
 
@@ -152,15 +152,15 @@ Each recommendation should carry:
 
   This is the current single ordered recommendation sequence under the Work Reduction Framework. It is a recommendation only and does not authorize execution by itself.
   
-  1. `math debt reduction` for the shared prerequisite cluster
+  1. `PROOF-ELEVATION-CAMPAIGN-001` and `MT-PROOF-ELEVATION-001` formal follow-through
+  1. `math debt reduction` for bounded `nonlocal_transport_fragmentation` continuation of `MT-COUNTEREXAMPLE-001`
   1. `documentation debt reduction`
-  1. `neuroscience induction validation`
   1. `lexicon debt reduction` for residual hardening only
 
   Ordering basis:
-  - `math debt reduction` is first because the shared prerequisite cluster has the highest unlock score in the current live dependency projection and clears both `MT-COUNTEREXAMPLE-001` and `MT-PROOF-ELEVATION-001`.
-  - `documentation debt reduction` is second because documentation drift still affects discoverability and onboarding across the governed surfaces.
-  - `neuroscience induction validation` is third because the department is inducted but still requires queue confirmation and routing settlement.
+  - `PROOF-ELEVATION-CAMPAIGN-001` and `MT-PROOF-ELEVATION-001` are first because the canonical math execution order places formal follow-through in phase one.
+  - `math debt reduction` remains second for the counterexample campaign because the orientation-locking direct run is complete and the next declared bounded vector is `nonlocal_transport_fragmentation`.
+  - `documentation debt reduction` is third because documentation drift still affects discoverability and onboarding across the governed surfaces.
   - `lexicon debt reduction` is fourth because the validation registry now has no `gap_open` entries, so the remaining lexicon work is residual hardening rather than leading backlog pressure.
 
 ---

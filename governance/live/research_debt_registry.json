@@ -2,7 +2,7 @@
   "registry_id": "MPF_RESEARCH_DEBT_REGISTRY_LIVE_V1",
   "schema_version": "1.0.0",
   "authority": "Global Governance",
-  "last_updated": "2026-07-02",
+  "last_updated": "2026-07-03",
   "entries": [
     {
       "id": "DEBT_GOV_LIVE_LEDGER_AMBIGUITY_001",
@@ -388,25 +388,51 @@
       ],
       "planned_owner": "Global Governance",
       "notes": "Resolved on 2026-07-01 after creating the canonical induction registry, the live induction queue, binding textbook and governance rules to both, and backfilling currently active inductions into the governed intake path."
+    },
+    {
+      "id": "DEBT_GOV_PROVENANCE_EXECUTION_GATE_001",
+      "title": "Prevent inferred evidence from being promoted as executed empirical result",
+      "department": "governance",
+      "type": "governance_gap",
+      "severity": "high",
+      "resolution_priority": "before_validation",
+      "status": "resolved",
+      "introduced_by": "PATCH_GOV_PROVENANCE_EXECUTION_GATE_001",
+      "reason_accepted": "A review-only orientation-locking artifact was previously framed as execution and needed provenance-aware gating.",
+      "affects": [
+        "math_test_result_schema",
+        "global_validate",
+        "orientation_locking_counterexample_promotion"
+      ],
+      "blocks": [],
+      "depends_on": [],
+      "claim_class_limit": "C1_DEFINED_PROVISIONAL",
+      "required_resolution": [
+        "Implement provenance-aware validator",
+        "Require direct harness/run artifacts for executed empirical claims",
+        "Retag inferred evidence as review_only or provisional_inference"
+      ],
+      "planned_owner": "Global Governance",
+      "notes": "Resolved on 2026-07-03 by adding provenance-gated schema fields, enforcing direct-run requirements in global validation, and retagging the orientation-locking artifact as review_only. Dedicated orientation-locking harness construction remains campaign work under MT-COUNTEREXAMPLE-001 rather than open provenance-governance debt."
     }
   ],
   "metrics": {
-    "total_debt": 14,
+    "total_debt": 15,
     "critical_items": 0,
-    "high_items": 2,
+    "high_items": 3,
     "moderate_items": 8,
     "low_items": 0,
     "informational_items": 0,
     "research_debt_by_department": {
-      "governance": 6,
+      "governance": 7,
       "mathematics": 5,
       "physics": 1,
       "economics": 1,
       "theology": 1
     },
     "average_age": 0,
-    "resolved_this_cycle": 4,
-    "new_this_cycle": 14,
+    "resolved_this_cycle": 5,
+    "new_this_cycle": 15,
     "debt_trend": "rising_from_zero_to_visible"
   }
 }

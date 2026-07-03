@@ -1,0 +1,156 @@
+{
+  "artifact_type": "orientation_locking_direct_run",
+  "claim_basis": "direct_run",
+  "dedicated_harness_executed": true,
+  "harness_id": "HARNESS_MT_COUNTEREXAMPLE_ORIENTATION_LOCKING_001",
+  "run_id": "RUN_MT_COUNTEREXAMPLE_ORIENTATION_LOCKING_20260703T133803",
+  "execution_log": "outputs/math_tests/mt_counterexample_orientation_locking_execution.log",
+  "instrumentation_map": {
+    "mean_phase_mismatch": "mt_counterexample_orientation_locking_result.scenarios[].metrics.mean_phase_mismatch",
+    "phase_variance": "mt_counterexample_orientation_locking_result.scenarios[].metrics.phase_variance",
+    "drift_span": "mt_counterexample_orientation_locking_result.scenarios[].metrics.drift_span",
+    "lock_ratio": "mt_counterexample_orientation_locking_result.scenarios[].metrics.lock_ratio",
+    "finite_transport_measure": "mt_counterexample_orientation_locking_result.scenarios[].metrics.finite_transport_measure",
+    "admissibility_margin": "mt_counterexample_orientation_locking_result.scenarios[].metrics.admissibility_margin"
+  },
+  "observed_behavior": "direct_run_complete",
+  "promotion_status": "direct_run_complete_nonfinal",
+  "notes": [
+    "Dedicated bounded orientation-locking harness executed directly against the MT counterexample campaign.",
+    "This run remains nonfinal and preserves counterexample space rather than discharging the failure family."
+  ],
+  "mt_counterexample_orientation_locking_result": {
+    "timestamp": "2026-07-03T13:38:03.323749-04:00",
+    "campaign_id": "MT-COUNTEREXAMPLE-001",
+    "target_attack_vector": "orientation_locking_attack",
+    "objective": "execute bounded orientation-locking adversarial continuation harness",
+    "observed_behavior": "direct_run_complete",
+    "harness_scope": "strictly_local_restricted_domain",
+    "source_inputs": [
+      "registry/math/mt_counterexample_campaign_registry.json",
+      "outputs/math_tests/rc005_selection_stability_under_recursion_result.json",
+      "outputs/math_tests/rc008_orientation_sensitivity_representation_result.json",
+      "scripts/math/run_mt_counterexample_orientation_locking.py"
+    ],
+    "parameters": {
+      "branch_floor": 2,
+      "drift_guard": 0.15,
+      "lock_threshold": 0.96,
+      "scenario_count": 3,
+      "results_marked_nonfinal": true
+    },
+    "scenarios": [
+      {
+        "scenario_id": "local_reference_competition",
+        "orientation_phases_deg": [
+          0.0,
+          12.0,
+          26.0,
+          39.0,
+          18.0
+        ],
+        "branch_count": 3,
+        "steps": 8,
+        "metrics": {
+          "mean_phase_mismatch": 0.083333,
+          "phase_variance": 0.000386,
+          "drift_span": 0.05,
+          "lock_ratio": 0.916667,
+          "finite_transport_measure": 2.686667,
+          "admissibility_margin": 0.916281
+        },
+        "directional_locking_detected": false,
+        "frame_collapse_detected": false,
+        "transport_coupling": "finite",
+        "selection_bias": "multiple_directions_retained"
+      },
+      {
+        "scenario_id": "transport_loaded_rotation",
+        "orientation_phases_deg": [
+          5.0,
+          21.0,
+          34.0,
+          47.0,
+          29.0
+        ],
+        "branch_count": 2,
+        "steps": 10,
+        "metrics": {
+          "mean_phase_mismatch": 0.083333,
+          "phase_variance": 0.000139,
+          "drift_span": 0.027778,
+          "lock_ratio": 0.916667,
+          "finite_transport_measure": 4.116667,
+          "admissibility_margin": 0.916528
+        },
+        "directional_locking_detected": false,
+        "frame_collapse_detected": false,
+        "transport_coupling": "finite",
+        "selection_bias": "multiple_directions_retained"
+      },
+      {
+        "scenario_id": "boundary_reentry_stress",
+        "orientation_phases_deg": [
+          11.0,
+          27.0,
+          41.0,
+          54.0,
+          33.0
+        ],
+        "branch_count": 2,
+        "steps": 9,
+        "metrics": {
+          "mean_phase_mismatch": 0.088889,
+          "phase_variance": 0.000293,
+          "drift_span": 0.044444,
+          "lock_ratio": 0.911111,
+          "finite_transport_measure": 3.43,
+          "admissibility_margin": 0.910818
+        },
+        "directional_locking_detected": false,
+        "frame_collapse_detected": false,
+        "transport_coupling": "finite",
+        "selection_bias": "multiple_directions_retained"
+      }
+    ],
+    "orientation_audit": {
+      "local_reference": "retained",
+      "directional_locking": "not_observed_under_bounded_direct_run",
+      "frame_collapse": "not_observed_under_bounded_direct_run",
+      "drift_stability": "bounded_direct_run (max drift 0.05)",
+      "selection_bias": "multiple_directions_retained",
+      "transport_coupling": "finite (max measure 4.116667)",
+      "admissibility": "legal (minimum margin 0.910818)"
+    },
+    "stability_status": {
+      "is_stable": true,
+      "regime": "counterexample_preservation_basin",
+      "evidence": "Dedicated bounded direct-run harness preserved multi-branch orientation variation without directional locking or frame collapse in the executed scenarios."
+    },
+    "failure_modes_tracked": [
+      "orientation_locking",
+      "orientation_frame_collapse",
+      "recursive_drift_accumulation",
+      "transport_orientation_divergence",
+      "forced_global_alignment",
+      "orientation_induced_branch_explosion",
+      "basin_escape_via_orientation_shift",
+      "orientation_resolution_instability"
+    ],
+    "governance_adherence": {
+      "no_global_claims": true,
+      "no_physics_claims": true,
+      "results_marked_nonfinal": true,
+      "counterexample_space_preserved": true
+    },
+    "derived_support": {
+      "rc005_reference": "Selection rules successfully maintain bounded branch retention under repeated application.",
+      "rc008_reference": "Simulated orientation-coupled continuation with bounded frame drift and preserved multi-branching."
+    },
+    "next_vector_recommendation": "nonlocal_transport_fragmentation",
+    "notes": [
+      "This is a bounded direct-run harness, not a theorem promotion artifact.",
+      "A clean direct-run result replaces the earlier review-only placeholder for this vector."
+    ]
+  }
+}

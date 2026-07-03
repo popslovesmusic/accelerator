@@ -1,0 +1,105 @@
+{
+  "semantics_id": "COMP_MEMORY_TENSOR_RT_001",
+  "patch_id": "PATCH_PI_MEMORY_TENSOR_RT_006",
+  "campaign_id": "CAMPAIGN_MEMORY_TENSOR_RT_IMPLEMENTATION_001",
+  "status": "provisional",
+  "title": "Memory Tensor RT Core Action and Tensor Displacement Semantics",
+  "purpose": "Refine Memory Tensor RT by distinguishing core-domain symmetry-breaking action from tensor-domain displacement representation, preserving both without collapsing one into the other.",
+  "parent_induction": "PI_MEMORY_TENSOR_RT_001",
+  "parent_operator_scaffold": "OP_SCAFFOLD_MEMORY_TENSOR_RT_001",
+  "governance_contract": "SEM_MEMORY_TENSOR_RT_001",
+  "refinement_id": "REF_MEMORY_TENSOR_CORE_DISPLACEMENT_001",
+  "core_insight": {
+    "statement": "At the core RT domain, δα(A|<S>) is symmetry-breaking action. In the tensor domain, that action is represented as displacement. Displacement is therefore not ignored or demoted; it is the adjacent-domain representation of the core action.",
+    "short_form": "Core action projects into tensor mechanics as displacement."
+  },
+  "semantic_distinctions": {
+    "core_domain": {
+      "dominant_primitive": "action",
+      "expression": "δα(A|<S>)",
+      "meaning": "A symmetry condition breaking into distinguishable orientation."
+    },
+    "tensor_domain": {
+      "dominant_primitive": "displacement",
+      "expression": "ΔA",
+      "meaning": "The tensor-domain representation of the core symmetry-breaking action."
+    },
+    "observable_domain": {
+      "dominant_primitive": "identity",
+      "expression": "I",
+      "meaning": "The stabilized result available to observation after local resolution."
+    }
+  },
+  "axiom_alignment": {
+    "AX-RT-002": "The tensor array is composed of tensor-domain displacement representations of core-domain symmetry-breaking actions, not discrete stored memory objects.",
+    "AX-RT-003": "Memory recall is generated through traversal of displacement representations corresponding to prior and present symmetry-breaking actions, rather than retrieval of fixed records.",
+    "AX-RT-010": "Core-domain symmetry-breaking action projects into adjacent tensor mechanics as displacement. The displacement representation preserves the action trace without replacing the core action.",
+    "AX-RT-011": "Each domain may express the same underlying RT process through its own dominant primitive. Core RT uses action, tensor mechanics uses displacement, and observation uses identity."
+  },
+  "minimal_tensor_cell_revision": {
+    "previous_cell_type": "gradient_vector",
+    "new_cell_type": "displacement_trace",
+    "required_fields": [
+      "displacement_vector",
+      "source_symmetry_condition",
+      "orientation_signature",
+      "stability",
+      "history_weight",
+      "action_trace_id"
+    ]
+  },
+  "operator_revision": {
+    "orient": {
+      "clarification": "Orientation is derived from coupling and may select displacement traces that represent prior symmetry-breaking actions."
+    },
+    "resolve": {
+      "clarification": "Resolution operates over displacement traces and produces observable identity outputs such as memory and confidence."
+    },
+    "compare": {
+      "clarification": "Comparison operates on conditioned displacement traces or their resolved recall outputs, while RT remains the whole expression."
+    }
+  },
+  "domain_translation": {
+    "translation_id": "DOMAIN_TRANSLATION_CORE_TO_TENSOR_DISPLACEMENT_001",
+    "source_domain": "core_rt",
+    "target_domain": "tensor_mechanics",
+    "source_expression": "δα(A|<S>)",
+    "target_expression": "ΔA",
+    "translation_rule": "A core symmetry-breaking action is represented in tensor mechanics as a displacement trace.",
+    "rule_meaning": "A core symmetry-breaking action is represented in tensor mechanics as a displacement trace.",
+    "inverse_warning": "ΔA may imply a core action trace, but the tensor displacement alone does not exhaust the full RT action context."
+  },
+  "forbidden_collapses": [
+    "Do not reduce δα(A|<S>) to mere geometric displacement.",
+    "Do not ignore displacement as mathematically irrelevant.",
+    "Do not treat displacement as an already-settled object independent of action trace.",
+    "Do not treat observable identity as prior to symmetry-breaking action."
+  ],
+  "approved_claims": [
+    "Displacement exists and is important in the tensor domain.",
+    "Core RT expresses the same process as symmetry-breaking action.",
+    "Tensor mechanics represents that action as displacement.",
+    "Observable identity is a stabilized downstream result."
+  ],
+  "traceability": {
+    "parent_axiom_set": "AX_MEMORY_TENSOR_RT_001",
+    "parent_semantics": "SEM_MEMORY_TENSOR_RT_001",
+    "operator_scaffold": "OP_SCAFFOLD_MEMORY_TENSOR_RT_001",
+    "source_artifacts": [
+      "registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_004.json",
+      "registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_006.json",
+      "registry/axioms/memory_tensor_rt_axioms.json",
+      "governance/live/semantic_contracts/memory_tensor_rt_semantic_contract.json"
+    ]
+  },
+  "validation": {
+    "required": [
+      "refinement_id_unique",
+      "domain_translation_present",
+      "minimal_tensor_cell_revision_present",
+      "forbidden_collapses_present",
+      "traceability_complete"
+    ],
+    "result": "pass"
+  }
+}

@@ -500,6 +500,116 @@ class CampaignValidator:
             results["status"] = "warning"
         return results
 
+class MathTestProvenanceValidator:
+    def __init__(self, root_dir):
+        self.root = Path(root_dir)
+        self.schema_path = self.root / "schemas/math_test_result.schema.json"
+        self.review_artifacts = [
+            self.root / "outputs/math_tests/mt_counterexample_orientation_locking_result.json"
+        ]
+
+    def validate_json_load(self, path):
+        try:
+            with open(path, "r", encoding="utf-8-sig") as f:
+                return json.load(f), None
+        except Exception as e:
+            return None, str(e)
+
+    def run(self):
+        results = {"status": "pass", "errors": [], "warnings": [], "checked_files": []}
+
+        schema, err = self.validate_json_load(self.schema_path)
+        if err:
+            results["status"] = "fail"
+            results["errors"].append(f"Schema Load Error: {err}")
+            return results
+
+        required_fields = schema.get("required", [])
+        for artifact_path in self.review_artifacts:
+            if not artifact_path.exists():
+                results["status"] = "fail"
+                results["errors"].append(f"Missing provenance artifact: {artifact_path.as_posix()}")
+                continue
+
+            data, err = self.validate_json_load(artifact_path)
+            if err:
+                results["status"] = "fail"
+                results["errors"].append(f"Artifact Load Error ({artifact_path.as_posix()}): {err}")
+                continue
+
+            results["checked_files"].append(artifact_path.as_posix())
+
+            for field in required_fields:
+                if field not in data:
+                    results["status"] = "fail"
+                    results["errors"].append(f"{artifact_path.name} missing required provenance field '{field}'")
+
+            claim_basis = data.get("claim_basis")
+            dedicated = data.get("dedicated_harness_executed")
+            harness_id = data.get("harness_id")
+            run_id = data.get("run_id")
+            execution_log = data.get("execution_log")
+            instrumentation_map = data.get("instrumentation_map")
+            observed_behavior = str(data.get("observed_behavior", "")).strip().lower()
+            blob = json.dumps(data, ensure_ascii=False).lower()
+
+            if claim_basis != "direct_run":
+                forbidden_execution_phrases = [
+                    "attack was executed",
+                    "was run",
+                    "observed_behavior: pass",
+                    "observed_behavior: fail",
+                ]
+                if any(phrase in blob for phrase in forbidden_execution_phrases):
+                    results["status"] = "fail"
+                    results["errors"].append(
+                        f"{artifact_path.name} contains execution language without direct_run provenance"
+                    )
+
+            if claim_basis == "direct_run":
+                if dedicated is not True:
+                    results["status"] = "fail"
+                    results["errors"].append(f"{artifact_path.name} direct_run requires dedicated_harness_executed=true")
+                for field_name, field_value in {
+                    "harness_id": harness_id,
+                    "run_id": run_id,
+                    "execution_log": execution_log,
+                    "instrumentation_map": instrumentation_map,
+                }.items():
+                    if field_value in [None, ""]:
+                        results["status"] = "fail"
+                        results["errors"].append(f"{artifact_path.name} direct_run requires non-null {field_name}")
+            else:
+                if dedicated is not False:
+                    results["status"] = "fail"
+                    results["errors"].append(f"{artifact_path.name} review/provisional artifact must set dedicated_harness_executed=false")
+                for field_name, field_value in {
+                    "harness_id": harness_id,
+                    "run_id": run_id,
+                    "execution_log": execution_log,
+                    "instrumentation_map": instrumentation_map,
+                }.items():
+                    if field_value not in [None, ""]:
+                        results["status"] = "fail"
+                        results["errors"].append(f"{artifact_path.name} review/provisional artifact must leave {field_name} null")
+
+                if claim_basis == "review_only":
+                    if observed_behavior in {"pass", "fail"}:
+                        results["status"] = "fail"
+                        results["errors"].append(f"{artifact_path.name} review_only artifact may not claim pass/fail observed_behavior")
+                elif claim_basis == "derived":
+                    if not data.get("inferred_from"):
+                        results["status"] = "fail"
+                        results["errors"].append(f"{artifact_path.name} derived artifact must cite inferred_from evidence")
+                elif claim_basis == "provisional_inference":
+                    if not data.get("inferred_from"):
+                        results["status"] = "fail"
+                        results["errors"].append(f"{artifact_path.name} provisional_inference artifact must cite inferred_from evidence")
+
+        if results["errors"]:
+            results["status"] = "fail"
+        return results
+
 class GovernanceIntegrityValidator:
     def __init__(self, root_dir):
         self.root = Path(root_dir)
@@ -571,6 +681,7 @@ def main():
         "hygiene_validation": HygieneValidator(root).run(),
         "math_validation": MathValidator(root).run(),
         "db_validation": DBValidator(root).run(),
+        "math_test_provenance_validation": MathTestProvenanceValidator(root).run(),
         "math_program_validation": MathProgramValidator(root, full_report=args.full_math_program).run(),
         "implementation_validation": ImplementationValidator(root).run(),
         "evidence_validation": EvidenceValidator(root).run(),

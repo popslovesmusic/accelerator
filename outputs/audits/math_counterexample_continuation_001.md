@@ -19,7 +19,13 @@ Initial findings currently recorded:
 - `operator_chain_nonclosure`
 
 ## Next Move
-Continue bounded adversarial testing for `MT-COUNTEREXAMPLE-001` under the live execution order.
+Build the dedicated `orientation_locking` harness before any further empirical claim is made for that vector.
+
+## Supporting Evidence
+- `schemas/math_test_result.schema.json`
+- `outputs/math_tests/mt_counterexample_orientation_locking_result.json`
+- `outputs/math_tests/rc008_orientation_sensitivity_representation_result.json`
+- `outputs/math_tests/rc005_selection_stability_under_recursion_result.json`
 
 ## Constraints
 - Preserve failure modes.
@@ -27,9 +33,10 @@ Continue bounded adversarial testing for `MT-COUNTEREXAMPLE-001` under the live 
 - Do not claim global closure.
 - Do not claim physics validation.
 - Keep results nonfinal.
+- Require direct harness provenance before any pass/fail result.
 
 ## Validation State
-`python scripts/global_validate.py` -> pass
+`python -m scripts.global_validate` -> pass
 
 ## Scope
-This report is a continuation projection only. It does not modify any authoritative registry.
+This report is a continuation projection only. It does not modify any authoritative registry and does not claim the attack was empirically run.
