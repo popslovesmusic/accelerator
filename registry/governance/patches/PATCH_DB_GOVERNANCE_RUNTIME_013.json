@@ -1,0 +1,151 @@
+{
+  "patch_id": "PATCH_DB_GOVERNANCE_RUNTIME_013",
+  "campaign_id": "CAMPAIGN_DB_GOVERNANCE_RUNTIME_001",
+  "campaign": "CAMPAIGN_DB_GOVERNANCE_RUNTIME_001",
+  "type": "governance_runtime_extension",
+  "status": "APPLIED",
+  "applied_on": "2026-07-04",
+  "title": "Semantic Authority Expansion",
+  "goal": "Extend authority resolution from file/target-level lookup into semantic claim and domain authority mapping.",
+  "problem": {
+    "current_state": "Authority resolution can identify governing sources for explicit targets, but it does not yet resolve which authority governs a semantic claim, concept, operator, theorem, domain rule, or runtime decision.",
+    "gap": "Agents still need to infer semantic authority from documents manually instead of querying the DB runtime.",
+    "risk": "Patches can appear structurally valid while relying on the wrong semantic authority."
+  },
+  "objectives": [
+    "Add semantic authority records to the governance runtime DB.",
+    "Map concepts, claims, operators, domains, and patch types to governing authority sources.",
+    "Extend the authority command to accept semantic queries.",
+    "Allow patch-gate to consult semantic authority when a patch declares affected concepts or claims.",
+    "Return allow/block/defer decisions with explicit semantic authority rationale."
+  ],
+  "schema_additions": [
+    {
+      "table": "semantic_authority_map",
+      "purpose": "Maps semantic targets to authoritative governance sources.",
+      "columns": {
+        "semantic_key": "stable identifier for concept/claim/operator/domain",
+        "semantic_type": "claim | concept | operator | theorem | domain | patch_type | runtime_rule",
+        "authority_source": "registry/document/db record that governs the target",
+        "authority_rank": "canonical | primary | supporting | deprecated",
+        "supersedes": "optional prior semantic authority key",
+        "status": "active | superseded | deprecated | provisional",
+        "notes": "human-readable rationale"
+      }
+    },
+    {
+      "table": "semantic_authority_events",
+      "purpose": "Append-only history of semantic authority changes.",
+      "columns": {
+        "event_id": "stable event identifier",
+        "semantic_key": "target semantic key",
+        "event_type": "registered | updated | superseded | deprecated",
+        "authority_source": "governing authority source",
+        "created_at": "timestamp",
+        "details": "JSON payload"
+      }
+    }
+  ],
+  "command_changes": {
+    "authority": {
+      "new_flags": [
+        "--semantic <key>",
+        "--semantic-type <type>",
+        "--json"
+      ],
+      "example": "python scripts/query_governance.py authority --semantic RT_CORE --semantic-type theorem --json"
+    },
+    "patch_gate": {
+      "new_behavior": "If patch metadata declares semantic_targets, patch-gate resolves semantic authorities and reports mismatches, missing authorities, or superseded authorities."
+    },
+    "context_capsule": {
+      "new_behavior": "Include a compact semantic authority summary for the requested target when available."
+    }
+  },
+  "initial_semantic_targets": [
+    {
+      "semantic_key": "RT_CORE",
+      "semantic_type": "theorem",
+      "authority_source": "registry/theorem_registry.json",
+      "authority_rank": "canonical",
+      "status": "active",
+      "canonical_expression": "RT := [(ℰ≠0) ⇔R δα(ℰ>0)]"
+    },
+    {
+      "semantic_key": "META_A_BINDING",
+      "semantic_type": "operator_binding",
+      "authority_source": "registry/theorem_registry.json",
+      "authority_rank": "canonical",
+      "status": "active",
+      "canonical_expression": "A_meta := δα(ℰ>0)"
+    },
+    {
+      "semantic_key": "META_B_BINDING",
+      "semantic_type": "operator_binding",
+      "authority_source": "registry/theorem_registry.json",
+      "authority_rank": "canonical",
+      "status": "active",
+      "canonical_expression": "B_meta := (ℰ≠0)"
+    },
+    {
+      "semantic_key": "REGISTRY_AUTHORITY_PRINCIPLE",
+      "semantic_type": "runtime_rule",
+      "authority_source": "registry/governance_change_ledger.json",
+      "authority_rank": "canonical",
+      "status": "active",
+      "canonical_expression": "Registry remains canonical authority; DB runtime is operational projection."
+    },
+    {
+      "semantic_key": "DB_RUNTIME_ROLE",
+      "semantic_type": "runtime_rule",
+      "authority_source": "registry/db/README.md",
+      "authority_rank": "primary",
+      "status": "active",
+      "canonical_expression": "Database provides executable governance and runtime decision support."
+    }
+  ],
+  "acceptance_criteria": [
+    "python scripts/global_validate.py passes.",
+    "authority command can resolve both target/file authority and semantic authority.",
+    "patch-gate reports semantic authority status for patches with semantic_targets.",
+    "context-capsule can include compact semantic authority entries.",
+    "Missing semantic authority produces defer, not silent allow.",
+    "Superseded semantic authority produces warning or block according to rank.",
+    "Registry remains canonical; DB semantic authority map is projection/runtime support."
+  ],
+  "non_goals": [
+    "Do not replace registry authority.",
+    "Do not make the DB canonical.",
+    "Do not require every historical patch to declare semantic targets immediately.",
+    "Do not implement full claim-evidence graph yet."
+  ],
+  "expected_result": {
+    "authority_resolution": "file_target + semantic_target",
+    "patch_gate": "structural + semantic authority aware",
+    "runtime_maturity": "moves from target governance toward meaning-aware governance"
+  },
+  "updated_artifacts": [
+    "scripts/query_governance.py",
+    "registry/db/migrations/20260703_governance_runtime_semantic_authority_013.sql",
+    "registry/theorem_registry.json",
+    "registry/db/README.md",
+    "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/research_debt_registry.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_DB_GOVERNANCE_RUNTIME_013.json"
+  ],
+  "summary": {
+    "status": "pass",
+    "runtime": {
+      "db_first_gate": "active",
+      "authority_boundary": "mixed"
+    },
+    "warnings": [
+      "Semantic authority is now queryable through the runtime gate and the context capsule."
+    ]
+  },
+  "validation": {
+    "result": "pass"
+  }
+}

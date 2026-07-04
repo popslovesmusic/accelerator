@@ -1,0 +1,58 @@
+{
+  "patch_id": "PATCH_DB_GOVERNANCE_RUNTIME_003",
+  "campaign_id": "CAMPAIGN_DB_GOVERNANCE_RUNTIME_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-03",
+  "type": "governance_runtime_patch",
+  "patch_type": "governance_runtime_projection",
+  "title": "Authority Resolution View",
+  "mode": "additive",
+  "depends_on": [
+    "PATCH_DB_GOVERNANCE_RUNTIME_001",
+    "PATCH_DB_GOVERNANCE_RUNTIME_002"
+  ],
+  "purpose": "Resolve live authority, supersession, canonical ownership, and mixed authority boundaries before governed actions.",
+  "updated_artifacts": [
+    "registry/db/migrations/20260703_governance_runtime_authority_resolution_003.sql",
+    "scripts/query_governance.py",
+    "registry/research_debt_registry.json",
+    "registry/governance_change_ledger.json",
+    "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+    "registry/db/README.md",
+    "docs/textbook/mono_process_textbook_complete.md"
+  ],
+  "summary": {
+    "status": "pass",
+    "health_source": "outputs/audits/global_health_report.json",
+    "runtime": {
+      "db_first_gate": "active",
+      "authority_boundary": "mixed"
+    },
+    "blockers": [],
+    "open_debt": [
+      "DEBT_DB_GOVERNANCE_RUNTIME_VIEWS_001",
+      "DEBT_DB_GOVERNANCE_RUNTIME_STATE_002"
+    ],
+    "latest_decisions": [],
+    "warnings": [
+      "Target-specific authority resolution is now available, but the aggregate current-state boundary remains mixed because deeper semantic conflict arbitration is still open."
+    ],
+    "evidence_paths": [
+      "registry/db/migrations/20260703_governance_runtime_authority_resolution_003.sql",
+      "scripts/query_governance.py",
+      "registry/research_debt_registry.json",
+      "registry/governance_change_ledger.json",
+      "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+      "registry/db/README.md"
+    ]
+  },
+  "validation": {
+    "required": [
+      "authority_resolution_view_present",
+      "authority_command_present",
+      "patch_gate_target_authority_resolution_present",
+      "global_validate_pass"
+    ],
+    "result": "pass"
+  }
+}

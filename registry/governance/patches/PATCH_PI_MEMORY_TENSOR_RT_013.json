@@ -1,0 +1,60 @@
+{
+  "patch_id": "PATCH_PI_MEMORY_TENSOR_RT_013",
+  "campaign_id": "CAMPAIGN_MEMORY_TENSOR_RT_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-03",
+  "type": "governance_patch",
+  "title": "Specify Minimal Memory Tensor RT Simulation Harness",
+  "depends_on": [
+    "PATCH_PI_MEMORY_TENSOR_RT_012"
+  ],
+  "purpose": "Define the repository-level harness requirements for executing the minimal Memory Tensor RT simulation protocol and producing auditable outputs.",
+  "created_artifacts": [
+    "registry/simulation_harnesses/memory_tensor_rt_minimal_harness.json"
+  ],
+  "updated_artifacts": [
+    "registry/governance/campaign_ledgers/memory_tensor_rt_campaign_ledger.json",
+    "docs/textbook/mono_process_textbook_complete.md"
+  ],
+  "source_artifacts": [
+    "registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_012.json",
+    "registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_011.json",
+    "registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_008.json",
+    "registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_009.json",
+    "registry/simulation_protocols/memory_tensor_rt_minimal_simulation.json",
+    "registry/governance/campaign_ledgers/memory_tensor_rt_campaign_ledger.json",
+    "registry/formal_math/memory_tensor_rt_formal_operators.json",
+    "registry/domain_mappings/memory_tensor_rt_neuroscience_mapping.json"
+  ],
+  "summary": {
+    "harness_id": "HARNESS_MEMORY_TENSOR_RT_MINIMAL_001",
+    "protocol": "SIM_MEMORY_TENSOR_RT_MINIMAL_001",
+    "entrypoint": "scripts/simulations/run_memory_tensor_rt_minimal.py",
+    "required_output_files": [
+      "run_result.json",
+      "trace_log.jsonl",
+      "summary_report.json"
+    ],
+    "required_runtime_checks": [
+      "input_schema_valid",
+      "tensor_rank_at_least_2",
+      "all_cells_have_action_trace_id",
+      "all_displacements_trace_to_source_symmetry_condition",
+      "confidence_derived_from_resolution_stability",
+      "orientation_derived_after_coupling",
+      "output_schema_valid"
+    ]
+  },
+  "validation": {
+    "required": [
+      "harness_id_unique",
+      "entrypoint_declared",
+      "input_schema_present",
+      "output_schema_present",
+      "runtime_checks_present",
+      "required_output_files_present",
+      "global_validate_pass"
+    ],
+    "result": "pass"
+  }
+}

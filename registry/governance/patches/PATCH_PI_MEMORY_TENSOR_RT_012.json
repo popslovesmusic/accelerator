@@ -1,0 +1,58 @@
+{
+  "patch_id": "PATCH_PI_MEMORY_TENSOR_RT_012",
+  "campaign_id": "CAMPAIGN_MEMORY_TENSOR_RT_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-03",
+  "type": "governance_patch",
+  "title": "Define Minimal Memory Tensor RT Simulation Protocol",
+  "depends_on": [
+    "PATCH_PI_MEMORY_TENSOR_RT_011"
+  ],
+  "purpose": "Specify the first executable simulation protocol for Memory Tensor RT using tensor-domain displacement traces, prompt conditioning, recall output, and confidence emergence.",
+  "created_artifacts": [
+    "registry/simulation_protocols/memory_tensor_rt_minimal_simulation.json"
+  ],
+  "updated_artifacts": [
+    "registry/governance/campaign_ledgers/memory_tensor_rt_campaign_ledger.json"
+  ],
+  "source_artifacts": [
+    "registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_011.json",
+    "registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_008.json",
+    "registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_009.json",
+    "registry/formal_math/memory_tensor_rt_formal_operators.json",
+    "registry/domain_mappings/memory_tensor_rt_neuroscience_mapping.json",
+    "registry/governance/campaign_ledgers/memory_tensor_rt_campaign_ledger.json"
+  ],
+  "summary": {
+    "simulation_protocol_id": "SIM_MEMORY_TENSOR_RT_MINIMAL_001",
+    "model_scope": "minimal_executable_formal_test",
+    "required_experiments": [
+      "SIM-EXP-001",
+      "SIM-EXP-002",
+      "SIM-EXP-003",
+      "SIM-EXP-004"
+    ],
+    "forbidden_shortcuts": [
+      "direct lookup recall",
+      "confidence independent of resolution stability",
+      "omit coupling before orientation",
+      "tensor displacement detached from action_trace_id"
+    ],
+    "traceability": [
+      "FORMAL_MEMORY_TENSOR_RT_OPERATORS_001",
+      "MAP_MEMORY_TENSOR_RT_NEUROSCIENCE_001",
+      "LEDGER_MEMORY_TENSOR_RT_CAMPAIGN_001"
+    ]
+  },
+  "validation": {
+    "required": [
+      "simulation_protocol_id_unique",
+      "minimal_cell_schema_present",
+      "required_experiments_present",
+      "forbidden_shortcuts_present",
+      "traceability_complete",
+      "global_validate_pass"
+    ],
+    "result": "pass"
+  }
+}

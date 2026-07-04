@@ -1,0 +1,62 @@
+{
+  "patch_id": "PATCH_DB_GOVERNANCE_RUNTIME_008",
+  "campaign_id": "CAMPAIGN_DB_GOVERNANCE_RUNTIME_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-04",
+  "type": "governance_runtime_patch",
+  "patch_type": "governance_runtime_replay_layer",
+  "title": "Runtime Event Replay Scaffold",
+  "mode": "additive",
+  "depends_on": [
+    "PATCH_DB_GOVERNANCE_RUNTIME_007"
+  ],
+  "purpose": "Add a bounded replay scaffold that reconstructs limited governance state from append-only runtime events without replacing registry authority.",
+  "updated_artifacts": [
+    "scripts/query_governance.py",
+    "registry/db/migrations/20260703_governance_runtime_event_replay_008.sql",
+    "registry/research_debt_registry.json",
+    "registry/governance_change_ledger.json",
+    "registry/db/README.md",
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/governance/patches/PATCH_DB_GOVERNANCE_RUNTIME_008.json"
+  ],
+  "summary": {
+    "status": "pass",
+    "health_source": "outputs/audits/global_health_report.json",
+    "runtime": {
+      "db_first_gate": "active",
+      "authority_boundary": "mixed"
+    },
+    "blockers": [],
+    "open_debt": [
+      "DEBT_DB_GOVERNANCE_RUNTIME_VIEWS_001",
+      "DEBT_DB_GOVERNANCE_RUNTIME_STATE_002",
+      "DEBT_DB_GOVERNANCE_RUNTIME_CHAIN_003",
+      "DEBT_DB_GOVERNANCE_RUNTIME_DEBT_004",
+      "DEBT_DB_GOVERNANCE_RUNTIME_CONTEXT_005",
+      "DEBT_DB_GOVERNANCE_RUNTIME_EVENT_REPLAY_006"
+    ],
+    "latest_decisions": [],
+    "warnings": [
+      "Replay-events is available as a bounded diagnostic reconstruction only; replay/authority reconciliation remains open."
+    ],
+    "evidence_paths": [
+      "scripts/query_governance.py",
+      "registry/db/migrations/20260703_governance_runtime_event_replay_008.sql",
+      "registry/research_debt_registry.json",
+      "registry/governance_change_ledger.json",
+      "registry/db/README.md",
+      "docs/textbook/mono_process_textbook_complete.md"
+    ]
+  },
+  "validation": {
+    "required": [
+      "event_replay_views_present",
+      "replay_events_command_present",
+      "replay_is_diagnostic_only",
+      "safe_replay_event_types_enforced",
+      "global_validate_pass"
+    ],
+    "result": "pass"
+  }
+}

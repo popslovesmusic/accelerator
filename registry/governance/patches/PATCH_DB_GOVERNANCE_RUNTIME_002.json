@@ -1,0 +1,53 @@
+{
+  "patch_id": "PATCH_DB_GOVERNANCE_RUNTIME_002",
+  "campaign_id": "CAMPAIGN_DB_GOVERNANCE_RUNTIME_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-03",
+  "type": "governance_runtime_patch",
+  "patch_type": "governance_runtime_projection",
+  "title": "Current State Runtime View",
+  "mode": "additive",
+  "depends_on": [
+    "PATCH_DB_GOVERNANCE_RUNTIME_001"
+  ],
+  "purpose": "Add the first DB-backed current-state projection so agents can ask the governance runtime for live operational state before opening docs or registries.",
+  "updated_artifacts": [
+    "registry/db/migrations/20260703_governance_runtime_current_state_002.sql",
+    "scripts/query_governance.py",
+    "registry/research_debt_registry.json",
+    "registry/governance_change_ledger.json",
+    "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+    "registry/db/README.md"
+  ],
+  "summary": {
+    "status": "pass",
+    "health_source": "outputs/audits/global_health_report.json",
+    "runtime": {
+      "db_first_gate": "active",
+      "authority_boundary": "mixed"
+    },
+    "blockers": [],
+    "open_debt": [
+      "DEBT_DB_GOVERNANCE_RUNTIME_VIEWS_001",
+      "DEBT_DB_GOVERNANCE_RUNTIME_STATE_002"
+    ],
+    "latest_decisions": [],
+    "warnings": [
+      "Current-state projection is DB-backed, but deeper semantic RT/authority/debt projections remain open."
+    ],
+    "evidence_paths": [
+      "registry/db/migrations/20260703_governance_runtime_current_state_002.sql",
+      "scripts/query_governance.py",
+      "registry/research_debt_registry.json",
+      "outputs/audits/global_health_report.json"
+    ]
+  },
+  "validation": {
+    "required": [
+      "current_state_view_present",
+      "current_state_command_present",
+      "global_validate_pass"
+    ],
+    "result": "pass"
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "patch_id": "PATCH_PI_MEMORY_TENSOR_RT_008",
+  "campaign_id": "CAMPAIGN_MEMORY_TENSOR_RT_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-03",
+  "type": "governance_patch",
+  "title": "Formalize Conditional Displacement Tensor Operators",
+  "depends_on": [
+    "PATCH_PI_MEMORY_TENSOR_RT_006",
+    "PATCH_PI_MEMORY_TENSOR_RT_007"
+  ],
+  "purpose": "Define the mathematical operator layer for Memory Tensor RT after the core-action/displacement refinement, so future simulations and neuroscience mappings use the same formal structure.",
+  "created_artifacts": [
+    "registry/formal_math/memory_tensor_rt_formal_operators.json"
+  ],
+  "source_artifacts": [
+    "registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_006.json",
+    "registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_007.json",
+    "registry/formal_math/memory_tensor_rt_formal_operators.json",
+    "registry/axioms/memory_tensor_rt_axioms.json",
+    "registry/computational_semantics/memory_tensor_rt_semantics.json",
+    "registry/domain_translations/core_tensor_displacement_translation.json"
+  ],
+  "summary": {
+    "formalization_id": "FORMAL_MEMORY_TENSOR_RT_OPERATORS_001",
+    "core_primitives": [
+      "<S>",
+      "δα(A|<S>)",
+      "ΔA",
+      "<*>_x",
+      "ρ",
+      "R_M"
+    ],
+    "operator_ids": [
+      "OP-SYM-BREAK-001",
+      "OP-PROJECT-001",
+      "OP-COMPARE-001",
+      "OP-RESOLVE-001",
+      "OP-RECALL-001"
+    ],
+    "admissibility_rules": [
+      "ADM-001",
+      "ADM-002",
+      "ADM-003",
+      "ADM-004"
+    ],
+    "canonical_forms": [
+      "core_action",
+      "tensor_projection",
+      "triadic_tension",
+      "resolution_to_identity",
+      "conditioned_memory"
+    ]
+  },
+  "validation": {
+    "required": [
+      "formalization_id_unique",
+      "operator_ids_unique",
+      "admissibility_rules_present",
+      "canonical_forms_present",
+      "all_tensor_displacements_trace_to_core_actions",
+      "global_validate_pass"
+    ],
+    "result": "pass"
+  },
+  "resolution": {
+    "resolution_id": "RESOLVE_PATCH_PI_MEMORY_TENSOR_RT_008_001",
+    "verified_by_patch": "PATCH_PI_MEMORY_TENSOR_RT_011",
+    "resolution_status": "resolved_applied_archive"
+  }
+}

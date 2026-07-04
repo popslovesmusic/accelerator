@@ -107,13 +107,15 @@
     "low_debt": "Recorded for future resolution."
   },
   "metrics": {
-    "total_debt": 0,
+    "total_debt": 6,
     "critical_items": 0,
-    "research_debt_by_department": {},
+    "research_debt_by_department": {
+      "governance": 6
+    },
     "average_age": 0,
     "resolved_this_cycle": 0,
-    "new_this_cycle": 0,
-    "debt_trend": "stable"
+    "new_this_cycle": 6,
+    "debt_trend": "rising"
   },
   "examples": [
     {
@@ -131,6 +133,231 @@
     {
       "title": "Theology correspondence relies on analogy",
       "type": "analogy_dependency"
+    }
+  ],
+  "debt_items": [
+    {
+      "id": "DEBT_DB_GOVERNANCE_RUNTIME_VIEWS_001",
+      "title": "Incomplete DB governance runtime views and routing",
+      "department": "governance",
+      "type": "governance_gap",
+      "severity": "high",
+      "resolution_priority": "before_validation",
+      "status": "partially_resolved",
+      "introduced_by": "PATCH_DB_GOVERNANCE_RUNTIME_001",
+      "reason_accepted": "The DB now exposes runtime decision logging, patch gating, current-state querying, and authority resolution for known surfaces. Deeper semantic projections and residue compression remain open.",
+      "affects": [
+        "scripts/query_governance.py",
+        "registry/db/README.md",
+        "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+        "AGENTS.md",
+        "registry/db/migrations/20260703_governance_runtime_bootstrap_001.sql"
+      ],
+      "blocks": [
+        "DB-first patch gating as a complete runtime",
+        "current_state_view completeness",
+        "authority_resolution_view completeness"
+      ],
+      "depends_on": [],
+      "claim_class_limit": "C1_DEFINED_PROVISIONAL",
+      "required_resolution": [
+        "Extend current-state routing into deeper semantic RT projection",
+        "Add structured debt-to-blocker projection",
+        "Add historical residue compression view"
+      ],
+      "planned_owner": "governance/runtime",
+      "notes": "This debt is partially resolved by the current-state capsule and authority-resolution surface; the remaining work is the deeper semantic projection layer."
+    },
+    {
+      "id": "DEBT_DB_GOVERNANCE_RUNTIME_STATE_002",
+      "title": "Deeper semantic RT, authority, and debt projections for the DB current-state capsule",
+      "department": "governance",
+      "type": "governance_gap",
+      "severity": "moderate",
+      "resolution_priority": "future",
+      "status": "partially_resolved",
+      "introduced_by": "PATCH_DB_GOVERNANCE_RUNTIME_002",
+      "reason_accepted": "The runtime now returns a current-state capsule and a target-aware authority resolution surface, and freshness separates source-affecting changes from runtime-only DB churn using distinct markers, but the DB still does not project the full semantic authority graph, full claim-to-evidence reasoning, or residue compression deeply enough to replace broader registry inspection.",
+      "affects": [
+        "scripts/query_governance.py",
+        "registry/db/migrations/20260703_governance_runtime_current_state_002.sql",
+        "registry/db/migrations/20260703_governance_runtime_snapshot_refresh_011.sql",
+        "registry/db/migrations/20260703_governance_runtime_refresh_stability_012.sql",
+        "registry/db/migrations/20260703_governance_runtime_semantic_authority_013.sql",
+        "registry/theorem_registry.json",
+        "registry/db/README.md",
+        "docs/governance/GLOBAL_VALIDATION_ROUTINE.md"
+      ],
+      "blocks": [
+        "full semantic current RT resolution",
+        "complete authority conflict resolution",
+        "complete claim-to-evidence reasoning",
+        "complete historical residue compression"
+      ],
+      "depends_on": [
+        "DEBT_DB_GOVERNANCE_RUNTIME_VIEWS_001"
+      ],
+      "claim_class_limit": "C1_DEFINED_PROVISIONAL",
+      "required_resolution": [
+        "Add deeper semantic RT projection",
+        "Add structured debt-to-blocker projection",
+        "Add historical residue compression view"
+      ],
+      "planned_owner": "governance/runtime",
+      "notes": "This follow-on debt remains partially resolved after the current-state capsule, snapshot-refresh metadata, refresh-stability marker split, and semantic authority mapping landed. Runtime-only DB churn is no longer treated as source drift for freshness, but the deeper semantic claim-evidence and residue projections remain open."
+    },
+    {
+      "id": "DEBT_DB_GOVERNANCE_RUNTIME_CHAIN_003",
+      "title": "Runtime patch-chain resolution and dependency-bound patch classification",
+      "department": "governance",
+      "type": "governance_gap",
+      "severity": "moderate",
+      "resolution_priority": "before_validation",
+      "status": "partially_resolved",
+      "introduced_by": "PATCH_DB_GOVERNANCE_RUNTIME_004",
+      "reason_accepted": "The runtime now needs target-aware patch-chain resolution so patch application can be classified as active, blocked, missing, superseded, late-registered, or dependency-bound before execution. The chain surface is present, but deeper provenance coverage and registry fallback handling remain open.",
+      "affects": [
+        "scripts/query_governance.py",
+        "registry/db/migrations/20260703_governance_runtime_patch_chain_004.sql",
+        "registry/db/README.md",
+        "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "blocks": [
+        "patch-gate preflight completeness",
+        "dependency-bound patch classification",
+        "late-registration reconciliation"
+      ],
+      "depends_on": [
+        "DEBT_DB_GOVERNANCE_RUNTIME_VIEWS_001",
+        "DEBT_DB_GOVERNANCE_RUNTIME_STATE_002"
+      ],
+      "claim_class_limit": "C1_DEFINED_PROVISIONAL",
+      "required_resolution": [
+        "Add patch-chain runtime surface",
+        "Integrate patch-chain into patch gate",
+        "Expose dependency-bound status and reason",
+        "Add registry fallback for missing patches"
+      ],
+      "planned_owner": "governance/runtime",
+      "notes": "Patch-chain routing is now available as a live command and SQL surface, but still needs fuller integration coverage and provenance handling."
+    },
+    {
+      "id": "DEBT_DB_GOVERNANCE_RUNTIME_DEBT_004",
+      "title": "Runtime debt projection and debt-aware patch gating",
+      "department": "governance",
+      "type": "governance_gap",
+      "severity": "moderate",
+      "resolution_priority": "before_validation",
+      "status": "partially_resolved",
+      "introduced_by": "PATCH_DB_GOVERNANCE_RUNTIME_005",
+      "reason_accepted": "The runtime now exposes a debt command, debt-aware patch-gate consulting, and an explicit snapshot refresh procedure with precise stale-state diagnosis, but deeper semantic debt projection and claim-evidence compression remain open.",
+      "affects": [
+        "scripts/query_governance.py",
+        "registry/db/migrations/20260703_governance_runtime_debt_view_005.sql",
+        "registry/db/README.md",
+        "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+        "docs/textbook/mono_process_textbook_complete.md",
+        "registry/governance_change_ledger.json"
+      ],
+      "blocks": [
+        "debt-runtime command completeness",
+        "debt-aware patch-gate preflight",
+        "target-filtered debt summaries"
+      ],
+      "depends_on": [
+        "DEBT_DB_GOVERNANCE_RUNTIME_VIEWS_001",
+        "DEBT_DB_GOVERNANCE_RUNTIME_STATE_002",
+        "DEBT_DB_GOVERNANCE_RUNTIME_CHAIN_003"
+      ],
+      "claim_class_limit": "C1_DEFINED_PROVISIONAL",
+      "required_resolution": [
+        "Add debt_runtime_view",
+        "Integrate debt into patch gate",
+        "Expose status-filtered debt summaries",
+        "Persist debt projection refresh in the runtime"
+      ],
+      "planned_owner": "governance/runtime",
+      "notes": "The stale snapshot refresh path is now verified and explained by explicit refresh metadata. The remaining work in this debt is the deeper semantic projection layer and any follow-on compression requirements."
+    },
+    {
+      "id": "DEBT_DB_GOVERNANCE_RUNTIME_CONTEXT_005",
+      "title": "Runtime context capsule projection and agent-facing compression",
+      "department": "governance",
+      "type": "governance_gap",
+      "severity": "moderate",
+      "resolution_priority": "before_validation",
+      "status": "partially_resolved",
+      "introduced_by": "PATCH_DB_GOVERNANCE_RUNTIME_006",
+      "reason_accepted": "The runtime now composes a compact context capsule and exposes a dedicated query command, but deeper target-specific compression and semantic projection remain open.",
+      "affects": [
+        "scripts/query_governance.py",
+        "registry/db/migrations/20260703_governance_runtime_context_capsule_006.sql",
+        "registry/db/README.md",
+        "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+        "docs/textbook/mono_process_textbook_complete.md",
+        "registry/governance/patches/PATCH_DB_GOVERNANCE_RUNTIME_006.json"
+      ],
+      "blocks": [
+        "document-first retrieval as the default agent path",
+        "target-specific context specialization",
+        "full runtime compression"
+      ],
+      "depends_on": [
+        "DEBT_DB_GOVERNANCE_RUNTIME_VIEWS_001",
+        "DEBT_DB_GOVERNANCE_RUNTIME_STATE_002",
+        "DEBT_DB_GOVERNANCE_RUNTIME_CHAIN_003",
+        "DEBT_DB_GOVERNANCE_RUNTIME_DEBT_004"
+      ],
+      "claim_class_limit": "C1_DEFINED_PROVISIONAL",
+      "required_resolution": [
+        "Expose context_capsule_view",
+        "Add context-capsule command",
+        "Document the capsule as the preferred runtime entrypoint",
+        "Keep the capsule derived at request time"
+      ],
+      "planned_owner": "governance/runtime",
+      "notes": "The capsule is available, but the runtime still relies on broader surfaces for deeper target-specific evidence."
+    },
+    {
+      "id": "DEBT_DB_GOVERNANCE_RUNTIME_EVENT_REPLAY_006",
+      "title": "Governance event replay scaffold, diagnostic reconciliation, and event-sourced state reconstruction",
+      "department": "governance",
+      "type": "governance_gap",
+      "severity": "moderate",
+      "resolution_priority": "before_validation",
+      "status": "partially_resolved",
+      "introduced_by": "PATCH_DB_GOVERNANCE_RUNTIME_007",
+      "reason_accepted": "The runtime now captures, queries, bounded-replays, and reconciles append-only governance events against registry authority, but deeper event-sourced reconstruction remains incomplete.",
+      "affects": [
+        "scripts/query_governance.py",
+        "registry/db/migrations/20260703_governance_runtime_event_bus_007.sql",
+        "registry/db/README.md",
+        "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+        "docs/textbook/mono_process_textbook_complete.md",
+        "registry/governance/patches/PATCH_DB_GOVERNANCE_RUNTIME_007.json"
+      ],
+      "blocks": [
+        "event-sourced reconstruction",
+        "replay scaffold",
+        "event-derived current-state rebuilding"
+      ],
+      "depends_on": [
+        "DEBT_DB_GOVERNANCE_RUNTIME_VIEWS_001",
+        "DEBT_DB_GOVERNANCE_RUNTIME_STATE_002",
+        "DEBT_DB_GOVERNANCE_RUNTIME_CHAIN_003",
+        "DEBT_DB_GOVERNANCE_RUNTIME_DEBT_004",
+        "DEBT_DB_GOVERNANCE_RUNTIME_CONTEXT_005"
+      ],
+      "claim_class_limit": "C1_DEFINED_PROVISIONAL",
+      "required_resolution": [
+        "Preserve diagnostic-only replay and reconciliation boundaries",
+        "Surface divergence without mutation",
+        "Keep full semantic replay reconstruction open",
+        "Keep registry authority primary"
+      ],
+      "planned_owner": "governance/runtime",
+      "notes": "Event capture, query, bounded replay, and diagnostic reconciliation are live; full semantic replay reconstruction remains unresolved."
     }
   ],
   "design_principles": [

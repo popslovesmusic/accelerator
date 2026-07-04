@@ -1,0 +1,63 @@
+{
+  "patch_id": "PATCH_DB_GOVERNANCE_RUNTIME_006",
+  "campaign_id": "CAMPAIGN_DB_GOVERNANCE_RUNTIME_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-03",
+  "type": "governance_runtime_patch",
+  "patch_type": "runtime_context_projection",
+  "title": "Agent Context Capsule Runtime",
+  "mode": "additive",
+  "depends_on": [
+    "PATCH_DB_GOVERNANCE_RUNTIME_001",
+    "PATCH_DB_GOVERNANCE_RUNTIME_002",
+    "PATCH_DB_GOVERNANCE_RUNTIME_003",
+    "PATCH_DB_GOVERNANCE_RUNTIME_004",
+    "PATCH_DB_GOVERNANCE_RUNTIME_005"
+  ],
+  "purpose": "Produce the minimum authoritative runtime context required for an agent to perform a governed action without loading broad documentation.",
+  "updated_artifacts": [
+    "scripts/query_governance.py",
+    "registry/db/migrations/20260703_governance_runtime_context_capsule_006.sql",
+    "registry/research_debt_registry.json",
+    "registry/governance_change_ledger.json",
+    "registry/db/README.md",
+    "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+    "docs/textbook/mono_process_textbook_complete.md"
+  ],
+  "summary": {
+    "status": "pass",
+    "health_source": "outputs/audits/global_health_report.json",
+    "runtime": {
+      "db_first_gate": "active",
+      "authority_boundary": "mixed"
+    },
+    "blockers": [],
+    "open_debt": [
+      "DEBT_DB_GOVERNANCE_RUNTIME_VIEWS_001",
+      "DEBT_DB_GOVERNANCE_RUNTIME_STATE_002",
+      "DEBT_DB_GOVERNANCE_RUNTIME_CHAIN_003",
+      "DEBT_DB_GOVERNANCE_RUNTIME_DEBT_004",
+      "DEBT_DB_GOVERNANCE_RUNTIME_CONTEXT_005"
+    ],
+    "latest_decisions": [],
+    "warnings": [
+      "The context capsule is now the preferred agent entrypoint, but deeper semantic compression and target-specific capsule specialization remain open."
+    ],
+    "evidence_paths": [
+      "scripts/query_governance.py",
+      "registry/db/migrations/20260703_governance_runtime_context_capsule_006.sql",
+      "registry/research_debt_registry.json",
+      "registry/governance_change_ledger.json",
+      "registry/db/README.md",
+      "docs/governance/GLOBAL_VALIDATION_ROUTINE.md"
+    ]
+  },
+  "validation": {
+    "required": [
+      "context_capsule_view_present",
+      "context_capsule_command_present",
+      "global_validate_pass"
+    ],
+    "result": "pass"
+  }
+}

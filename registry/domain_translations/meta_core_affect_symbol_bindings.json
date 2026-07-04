@@ -1,0 +1,89 @@
+{
+  "translation_id": "DOMAIN_TRANSLATION_META_CORE_A_B_BINDING_001",
+  "patch_id": "PATCH_PI_MEMORY_TENSOR_RT_016",
+  "campaign_id": "CAMPAIGN_MEMORY_TENSOR_RT_IMPLEMENTATION_001",
+  "status": "provisional",
+  "title": "Meta-Core A/B Symbol Binding",
+  "purpose": "Bind meta-domain A and B to the core effective action pair while preserving higher-domain rebinding discipline.",
+  "source_domain": "meta_core",
+  "target_domain": "core_effect_domain",
+  "source_expression": "A_meta, B_meta",
+  "target_expression": "δα(ℰ>0), (ℰ≠0)",
+  "binding_rule": "A_meta -> δα(ℰ>0); B_meta -> (ℰ≠0)",
+  "binding_meaning": "A and B are meta-domain placeholders for the core effective pair and may only be rebound in higher domains with explicit labeling.",
+  "preserved_distinctions": [
+    "meta-domain A/B are not affect-domain participants by default",
+    "δα(ℰ>0) remains an action trace and is not collapsed into the effective condition",
+    "(ℰ≠0) remains the continuing effective condition and is not collapsed into action",
+    "RT remains the relational whole"
+  ],
+  "inverse_warning": "Higher-domain A/B usages may imply the meta-domain pair, but the higher-domain symbols do not exhaust the core effective binding without explicit traceability.",
+  "forbidden_collapses": [
+    "Do not confuse meta-domain A/B with affect-domain A/B.",
+    "Do not treat A_meta and B_meta as settled objects independent of the core effective pair.",
+    "Do not define RT from rebinding alone without the core effective pair.",
+    "Do not treat the binding as identity equivalence."
+  ],
+  "rebinding_rules": [
+    {
+      "rule_id": "REBIND-001",
+      "statement": "Affect-domain A/B shall only be introduced after explicit domain declaration and traceable rebinding."
+    },
+    {
+      "rule_id": "REBIND-002",
+      "statement": "Meta-domain A_meta and B_meta remain reserved for the Memory Tensor RT core binding."
+    },
+    {
+      "rule_id": "REBIND-003",
+      "statement": "Any affect-domain use of A or B must cite the originating domain definition and may not be inferred from the meta-domain binding alone."
+    },
+    {
+      "rule_id": "REBIND-004",
+      "statement": "Affect-domain A_affect and B_affect are explicit rebinding targets and may participate in local coupling without altering the canonical meta-core binding."
+    }
+  ],
+  "affect_domain_rebinding_layer": {
+    "rebinding_id": "REBIND_AFFECT_DOMAIN_AB_001",
+    "status": "provisional",
+    "parent_meta_core_binding": "BIND_META_CORE_AB_001",
+    "A_affect": {
+      "definition": "A distinguishable affect-domain participant, orientation, or basin after explicit rebinding.",
+      "not_equal_to": "A_meta"
+    },
+    "B_affect": {
+      "definition": "A second distinguishable affect-domain participant, orientation, or basin after explicit rebinding.",
+      "not_equal_to": "B_meta"
+    },
+    "relation": {
+      "form": "A_affect <*>_x B_affect",
+      "meaning": "Domain-local coupling or comparison between explicitly rebound affect participants."
+    },
+    "governance_constraints": [
+      "Do not reuse A_affect or B_affect as aliases of A_meta or B_meta.",
+      "Do not infer affect-domain coupling from meta-domain binding alone.",
+      "Do not alter the canonical RT expression."
+    ]
+  },
+  "traceability": {
+    "parent_formalization": "FORMAL_MEMORY_TENSOR_RT_OPERATORS_001",
+    "parent_axiom_set": "AX_MEMORY_TENSOR_RT_001",
+    "governance_contract": "SEM_MEMORY_TENSOR_RT_001",
+    "source_artifacts": [
+      "registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_016.json",
+      "registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_017.json",
+      "registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_018.json",
+      "registry/formal_math/memory_tensor_rt_formal_operators.json",
+      "registry/axioms/memory_tensor_rt_axioms.json"
+    ]
+  },
+  "validation": {
+    "required": [
+      "translation_id_unique",
+      "source_and_target_present",
+      "binding_rule_present",
+      "forbidden_collapses_present",
+      "traceability_complete"
+    ],
+    "result": "pass"
+  }
+}

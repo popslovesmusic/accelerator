@@ -1,0 +1,88 @@
+{
+  "patch_id": "PATCH_DB_GOVERNANCE_RUNTIME_001",
+  "campaign_id": "CAMPAIGN_DB_GOVERNANCE_RUNTIME_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-03",
+  "type": "governance_runtime_bootstrap",
+  "mode": "additive",
+  "purpose": "Begin converting the live DB from a retrieval projection layer into an active governance application gate.",
+  "basis": {
+    "audit": "AI_DB_RETRIEVAL_PATH_AUDIT_2026_07_03",
+    "finding": "DB is real and partially state-aware, but not DB-first and not a complete knowledge-state layer.",
+    "classification": "projection_layer_with_state_annotations_not_yet_governance_runtime"
+  },
+  "core_rule": {
+    "id": "GOV-DB-RUNTIME-001",
+    "statement": "Governed agents must query the DB governance runtime before applying patches, changing authority-bearing files, or resolving blocked dependencies.",
+    "effect": "DB becomes the operational gate for application decisions; docs remain long-form narrative authority."
+  },
+  "new_required_surfaces": [
+    {
+      "name": "governance_runtime_decision_view",
+      "purpose": "Return apply/block/defer decisions for proposed agent actions."
+    },
+    {
+      "name": "patch_application_gate_view",
+      "purpose": "Check patch dependencies, missing provenance, authority conflicts, and required validators."
+    },
+    {
+      "name": "authority_resolution_view",
+      "purpose": "Resolve which authority wins when files, registries, or claims conflict."
+    },
+    {
+      "name": "current_state_view",
+      "purpose": "Expose current RT, active authority, open debt, and live blockers."
+    },
+    {
+      "name": "governance_decision_log",
+      "purpose": "Record every DB governance decision and its evidence basis."
+    }
+  ],
+  "agent_flow": [
+    "agent_receives_patch_or_action",
+    "agent_queries_governance_runtime",
+    "db_checks_authority_dependencies_debt_evidence_validation",
+    "db_returns_apply_block_or_defer",
+    "agent_applies_only_if_allowed",
+    "validation_result_written_back_to_db",
+    "decision_logged"
+  ],
+  "initial_block_conditions": [
+    "missing_required_dependency",
+    "missing_provenance",
+    "stale_db_snapshot",
+    "authority_conflict",
+    "unresolved_research_debt_touching_target",
+    "required_validator_not_declared",
+    "patch_attempts_to_bypass_governance_runtime"
+  ],
+  "required_repo_changes": [
+    "Add DB-first governance runtime rule to agent instructions.",
+    "Add schema stub or migration for governance decision logging.",
+    "Add scaffold query command for patch gate decisions.",
+    "Mark existing document-first routing as fallback only.",
+    "Register debt for incomplete runtime views."
+  ],
+  "non_goals": [
+    "Do not replace docs or textbook as narrative authority.",
+    "Do not require full semantic DB completion in this patch.",
+    "Do not remove existing validators.",
+    "Do not rewrite the full retrieval system yet."
+  ],
+  "updated_artifacts": [
+    "AGENTS.md",
+    "docs/governance/GLOBAL_VALIDATION_ROUTINE.md"
+  ],
+  "success_criteria": [
+    "A proposed patch can be classified by DB gate as apply/block/defer.",
+    "A blocked patch returns a structured reason.",
+    "The decision is logged.",
+    "Agents are instructed not to apply governed changes without this check."
+  ],
+  "next_patches": [
+    "PATCH_DB_GOVERNANCE_RUNTIME_002_schema_decision_log",
+    "PATCH_DB_GOVERNANCE_RUNTIME_003_patch_gate_query",
+    "PATCH_DB_GOVERNANCE_RUNTIME_004_current_state_view",
+    "PATCH_DB_GOVERNANCE_RUNTIME_005_agent_routing_update"
+  ]
+}

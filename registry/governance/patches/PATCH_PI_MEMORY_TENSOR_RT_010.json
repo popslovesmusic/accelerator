@@ -1,0 +1,44 @@
+{
+  "patch_id": "PATCH_PI_MEMORY_TENSOR_RT_010",
+  "campaign_id": "CAMPAIGN_MEMORY_TENSOR_RT_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-03",
+  "type": "governance_patch",
+  "title": "Reconcile Memory Tensor RT Patch Ledger",
+  "depends_on": [
+    "PATCH_PI_MEMORY_TENSOR_RT_007",
+    "PATCH_PI_MEMORY_TENSOR_RT_009"
+  ],
+  "purpose": "Verify applied, missing, late-registered, and skipped patches in the Memory Tensor RT implementation campaign before advancing to experimental protocol design.",
+  "created_artifacts": [
+    "registry/governance/campaign_ledgers/memory_tensor_rt_campaign_ledger.json"
+  ],
+  "source_artifacts": [
+    "registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_007.json",
+    "registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_009.json",
+    "registry/governance/campaign_ledgers/memory_tensor_rt_campaign_ledger.json",
+    "registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_008.json"
+  ],
+  "summary": {
+    "ledger_id": "LEDGER_MEMORY_TENSOR_RT_CAMPAIGN_001",
+    "patch_008_resolution": "found_applied_archive",
+    "counts": {
+      "verify_present": 1,
+      "applied": 7,
+      "registered_late": 1,
+      "skipped_with_rationale": 0,
+      "unresolved": 0
+    },
+    "ready_for_experimental_protocol_design": true
+  },
+  "validation": {
+    "required": [
+      "ledger_id_unique",
+      "patch_008_status_not_silent",
+      "all_known_patch_statuses_declared",
+      "integrity_policy_present",
+      "global_validate_pass"
+    ],
+    "result": "pass"
+  }
+}

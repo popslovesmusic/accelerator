@@ -7,6 +7,7 @@ This directory contains the SQLite database and schema used to index the acellor
 - **Role:** Artifact index, audit report index, tool health snapshot index, registry snapshot metadata, provenance map, orientation status map, and retrieval accelerator.
 - **SSOT Constraint:** This database is **NOT** a source of truth for semantics, lexicon definitions, or claim status. Canonical authority remains in the JSON registries (e.g., `registry/lexicon_canonical.json`, `registry/claim_registry.json`).
 - **Orientation:** All indexed artifacts must be assigned an `orientation_status` to distinguish between active truth and historical residue.
+- **Governance Runtime Bootstrap:** The DB is now also the first-pass governance gate for patch/application decisions. When it cannot classify an action, fall back to registries and long-form docs rather than treating document-first routing as the default.
 
 ## Schema
 
@@ -19,6 +20,15 @@ See `schema.sql` for table definitions.
 - `claim_evidence_links`: Mapping between claims and their supporting evidence artifacts.
 - `supersession_edges`: Explicit tracking of which artifacts supersede others.
 - `compressed_residue`: Metadata for governed semantic summaries.
+- `governance_decision_log`: Patch/application decisions, reasons, and evidence basis for the runtime gate.
+- `governance_events`: Append-only governance-significant facts captured by the runtime event bus.
+- `governance_event_latest_by_subject_view`: Latest append-only event per subject for bounded diagnostic replay.
+- `governance_event_count_by_subject_view`: Event count per subject for replay and coverage diagnostics.
+- `governance_replay_reconciliation_view`: Subject-level replay coverage metadata used for diagnostic comparison.
+- `semantic_authority_map`: Semantic claims, concepts, operators, theorem bindings, and runtime-rule authority records.
+- `semantic_authority_events`: Append-only semantic authority change history.
+
+The initial semantic authority seed is mirrored in `registry/theorem_registry.json` and projected into the DB runtime from there.
 
 ## Orientation Status Values
 
@@ -43,6 +53,10 @@ Metadata about canonical registries (hash, key counts) is captured via:
 ```bash
 python scripts/db/snapshot_registries.py
 ```
+
+The refresh command now writes a single `db_snapshot_refresh_metadata` record consumed by the freshness gate. It emits a structured result that includes `status`, `last_refresh_attempt`, `last_refresh_result`, `indexed_at`, `source_worktree_marker`, `runtime_worktree_marker`, `indexed_registry_count`, `missing_registries`, and `error_reason`.
+
+Freshness reads the latest verified refresh marker first. Source-affecting registry, doc, and script changes still stale the snapshot, but runtime-only DB churn such as decision logs, event writes, and other append-only runtime surfaces is compared against the stored runtime marker and reported separately as `runtime_churn` when it is newer. A fresh snapshot can therefore remain `fresh` or `allow_with_note` after routine runtime writes, while genuine source drift still reports `source_change` and refresh failures remain `unknown`.
 
 ### Report Ingestion
 
@@ -247,6 +261,85 @@ python scripts/db/db_maintenance.py --mutate
 - Supersession edges are advisory; they do not move or delete files.
 - Memory and compression are contextual aids; they do not redefine lexicon meaning or claim status.
 - If the database conflicts with a canonical registry, the registry wins.
+- Document-first retrieval is fallback only when the DB runtime cannot classify the action or when a long-form narrative is explicitly needed.
+
+## Governance Runtime Gate
+
+Patch/application decisions should be queried through the bootstrap runtime first.
+
+To inspect the live state capsule before opening broad documentation surfaces:
+
+```bash
+python scripts/query_governance.py current-state
+```
+
+To inspect snapshot freshness before DB-dependent operations:
+
+```bash
+python scripts/query_governance.py freshness [--target <path-or-surface>] [--pretty]
+```
+
+To resolve live authority for a specific governed surface before editing it:
+
+```bash
+python scripts/query_governance.py authority --target <path-or-surface>
+```
+
+To resolve semantic authority for a theorem, operator binding, concept, claim, domain, or runtime rule:
+
+```bash
+python scripts/query_governance.py authority --semantic <key> --semantic-type <type>
+```
+
+To resolve patch dependency state before attempting application:
+
+```bash
+python scripts/query_governance.py patch-chain --patch-id <PATCH_ID>
+```
+
+To inspect governed debt before attempting application:
+
+```bash
+python scripts/query_governance.py debt --status <open|partial|resolved|blocking|all>
+```
+
+To generate the minimal agent-facing runtime capsule before broad document traversal:
+
+```bash
+python scripts/query_governance.py context-capsule [--target <path-or-surface>] [--task <label>]
+```
+
+To append a governance-significant event fact:
+
+```bash
+python scripts/query_governance.py emit-event --event-type <type> --subject-id <id> --subject-type <patch|debt|authority|validation|capsule|db_snapshot|runtime|unknown> --source-patch-id <PATCH_ID> --source-path <path> --payload-json '{"key":"value"}' [--evidence-path <path>]
+```
+
+To query recorded governance events:
+
+```bash
+python scripts/query_governance.py events [--event-type <type>] [--subject-id <id>] [--source-patch-id <PATCH_ID>] [--limit <n>]
+```
+
+To reconstruct a bounded diagnostic state from safe governance events:
+
+```bash
+python scripts/query_governance.py replay-events [--event-type <type>] [--subject-id <id>] [--limit <n>] [--pretty]
+```
+
+To compare replayed state against registry authority:
+
+```bash
+python scripts/query_governance.py reconcile-events [--subject-id <id>] [--patch-id <PATCH_ID>] [--event-type <type>] [--pretty]
+```
+
+To request an apply/block/defer decision for a specific patch:
+
+```bash
+python scripts/query_governance.py patch-gate --patch-id <PATCH_ID> --target <path-or-surface>
+```
+
+The runtime logs decisions to `governance_decision_log` when the migration has been applied or bootstrapped by the query command. The current-state projection is DB-backed; freshness is a separate DB-backed snapshot-age gate that ignores runtime-only DB churn and only treats source-affecting changes as freshness invalidators. Authority resolution is target-aware but still a gate, not a semantic SSOT, and the same runtime now also resolves semantic authority for declared concepts, claims, operators, theorem bindings, domains, and runtime rules. Patch-chain resolution is DB-backed through the decision log and registry patch records, but it is still a gate rather than a replacement for registry provenance. Debt runtime projections are now available through the `debt` command and are consulted by the patch gate after patch-chain and authority resolution. When a patch declares semantic targets, patch-gate consults the semantic authority map and records missing, superseded, or deprecated semantic authority as a governed decision condition instead of silently allowing it. The event bus is append-only and records governance-significant facts; it does not replace registry authority. `replay-events` reconstructs only a bounded diagnostic state from safe event types and remains non-authoritative. `reconcile-events` compares replayed state against registry authority and reports divergence only. The preferred runtime order is `context-capsule -> current-state -> freshness -> authority -> patch-chain -> debt -> patch-gate`, and `context-capsule` is the preferred runtime entrypoint for agents because it composes the minimal operational summary from current-state, freshness, authority, patch-chain, debt, recent events, and any available semantic authority summary at request time. Open governance/runtime debt is still governed by the debt registry as the authoritative source of debt records. If `freshness` remains stale after `python scripts/db/snapshot_registries.py`, the cause is recorded explicitly in the command output and usually means source-affecting worktree files changed after the last verified refresh marker, not merely runtime logging.
 
 ## Orientation-Aware Retrieval
 
