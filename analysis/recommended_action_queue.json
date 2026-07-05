@@ -89,6 +89,25 @@
       "expected_benefit": "Maintains progress on the research campaigns without displacing the higher-leverage mathematics follow-through work.",
       "confidence": 0.88,
       "rationale": "These campaigns remain active, but their blocker count is already explicit and their immediate leverage is lower than the current mathematics sequence."
+    },
+    {
+      "recommendation_id": "ANL_REC_005",
+      "priority_rank": 5,
+      "recommended_action": "Keep the two remaining governance/runtime debt items explicitly open and prioritize DEBT_DB_GOVERNANCE_RUNTIME_EVENT_REPLAY_006 before any further validation-sensitive repository changes; PATCH_PI_RT_CALCULUS_022 now governs continuation failure semantics separately and does not reduce the DB debt count.",
+      "supporting_evidence": [
+        "scripts/query_governance.py current-state --pretty: open_debt lists DEBT_DB_GOVERNANCE_RUNTIME_STATE_002 and DEBT_DB_GOVERNANCE_RUNTIME_EVENT_REPLAY_006 as the only remaining open items",
+        "registry/research_debt_registry.json: DEBT_DB_GOVERNANCE_RUNTIME_EVENT_REPLAY_006 remains partially_resolved with resolution_priority before_validation",
+        "registry/research_debt_registry.json: DEBT_DB_GOVERNANCE_RUNTIME_STATE_002 remains partially_resolved with resolution_priority future",
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_022.json: continuation failure semantics are now governed separately from the DB runtime debt items"
+      ],
+      "affected_domains": [
+        "governance",
+        "registry"
+      ],
+      "dependencies": [],
+      "expected_benefit": "Surfaces the current priority debt directly so analysis work does not misroute validation-sensitive changes around the unresolved DB governance runtime replay and state projection gaps.",
+      "confidence": 0.97,
+      "rationale": "The live governance runtime still reports two open debt items after the continuation-failure patch is recorded, and event replay remains the only remaining before-validation debt."
     }
   ]
 }

@@ -22,6 +22,8 @@ CREATE TABLE IF NOT EXISTS debt_runtime_projection (
     blocks TEXT,
     depends_on TEXT,
     required_resolution TEXT,
+    blocker_projection TEXT,
+    residue_projection TEXT,
     raw_status TEXT,
     raw_severity TEXT,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -47,6 +49,8 @@ SELECT
     blocks,
     depends_on,
     required_resolution,
+    blocker_projection,
+    residue_projection,
     raw_status,
     raw_severity,
     updated_at,

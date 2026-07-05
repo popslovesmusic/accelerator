@@ -1,0 +1,129 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_016",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-05",
+  "type": "governance_patch",
+  "artifact_type": "governance_patch",
+  "title": "Continuation Reduction Semantics",
+  "priority": "HIGH",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_012",
+    "PATCH_PI_RT_CALCULUS_013",
+    "PATCH_PI_RT_CALCULUS_014",
+    "PATCH_PI_RT_CALCULUS_015"
+  ],
+  "purpose": "Define the meaning, objective, and constraints of continuation reduction before introducing concrete reduction rules.",
+  "canonical_claims": [
+    {
+      "id": "CLAIM_016_001",
+      "statement": "Reduction is the process of transforming a well-formed continuation expression toward its canonical continuation form NF(C).",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_016_002",
+      "statement": "Reduction preserves process equivalence.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_016_003",
+      "statement": "Reduction must never alter RT_core.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_016_004",
+      "statement": "Reduction simplifies representation, not behavior.",
+      "status": "canonical"
+    }
+  ],
+  "formal_objects": [
+    {
+      "symbol": "->red",
+      "name": "Continuation Reduction Semantics",
+      "definition": "A governed reduction relation that transforms a well-formed continuation expression toward its canonical continuation form NF(C) while preserving process equivalence and leaving RT_core unchanged; it is not a symbolic rewrite operator.",
+      "primitive": false,
+      "domain": "continuation_algebra"
+    }
+  ],
+  "laws": [
+    {
+      "id": "LAW_016_001",
+      "name": "Reduction Preservation",
+      "formal": "C ->red C' ⇒ C ≡P C'",
+      "meaning": "A lawful reduction step preserves process equivalence."
+    },
+    {
+      "id": "LAW_016_002",
+      "name": "Normalization Objective",
+      "formal": "Repeated lawful reduction seeks NF(C).",
+      "meaning": "Lawful reduction aims at canonical continuation form when admissibility allows."
+    },
+    {
+      "id": "LAW_016_003",
+      "name": "Termination Neutrality",
+      "formal": "This patch does not assert that every continuation necessarily reaches NF(C).",
+      "meaning": "Reduction is defined without claiming universal termination."
+    },
+    {
+      "id": "LAW_016_004",
+      "name": "Semantic Preservation",
+      "formal": "Reduction preserves lawful continuation behavior and does not alter RT_core.",
+      "meaning": "Reduction changes representation, not the canonical core or governing behavior."
+    }
+  ],
+  "architecture_update": {
+    "old": [
+      "Condition",
+      "Continuation",
+      "Composition",
+      "Admissibility",
+      "Projection",
+      "Process Equivalence",
+      "Canonical Form"
+    ],
+    "new": [
+      "Condition",
+      "Continuation",
+      "Composition",
+      "Admissibility",
+      "Projection",
+      "Process Equivalence",
+      "Canonical Form",
+      "Reduction Semantics"
+    ]
+  },
+  "deferred": [
+    "Specific reduction rewrite rules",
+    "Termination proof",
+    "Confluence proof",
+    "Executable parser",
+    "sigma_RT",
+    "Arrow-family expansion"
+  ],
+  "required_file_updates": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/formal_object_registry.json",
+    "registry/math_source_registry.json",
+    "registry/lexicon_gap_queue.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_016.json"
+  ],
+  "validation_requirements": [
+    "Reduction semantics referenced consistently.",
+    "NF(C) referenced consistently.",
+    "Reduction distinguished from symbolic rewriting.",
+    "Process equivalence preserved.",
+    "RT_core unchanged."
+  ],
+  "success_criteria": {
+    "reduction_semantics_defined": true,
+    "canonical_target_preserved": true,
+    "process_equivalence_preserved": true,
+    "rt_core_unchanged": true
+  },
+  "next_recommended_patch": {
+    "patch_id": "PATCH_PI_RT_CALCULUS_017",
+    "title": "Primitive Continuation Reduction Rules",
+    "purpose": "Introduce the first lawful reduction transformations that move continuation expressions toward NF(C)."
+  }
+}

@@ -1,0 +1,135 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_019",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-05",
+  "type": "governance_patch",
+  "artifact_type": "governance_patch",
+  "title": "Typed Continuation Domains",
+  "priority": "HIGH",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_018"
+  ],
+  "purpose": "Refine WF(C) by defining explicit domain typing for continuation expressions across meta, affect/effect, projection, continuation, observation, and operational-regime layers.",
+  "core_claim": "A continuation expression is well-formed only when its endpoints and operators are domain-compatible.",
+  "canonical_claims": [
+    {
+      "id": "CLAIM_019_001",
+      "statement": "A continuation expression is well-formed only when its endpoints and operators are domain-compatible.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_019_002",
+      "statement": "A_meta retains TYPE_META and must not be rebound implicitly.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_019_003",
+      "statement": "A|E retains TYPE_AFFECT_EFFECT and must not be substituted into meta-domain bindings.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_019_004",
+      "statement": "Projection outputs and D(*|*) are TYPE_PROJECTION and remain domain-local to the projection layer.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_019_005",
+      "statement": "Continuation expressions and NF(C) are TYPE_CONTINUATION and compose only when typed endpoints match.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_019_006",
+      "statement": "Cross-domain substitution without explicit projection, binding, or transition rule fails WF(C).",
+      "status": "canonical"
+    }
+  ],
+  "formal_objects": [
+    {
+      "symbol": "TYPE_019",
+      "name": "Typed Continuation Domains",
+      "definition": "Explicit domain typing constraints for continuation expressions across meta, affect/effect, projection, continuation, observation, and operational-regime layers.",
+      "primitive": false,
+      "domain": "continuation_algebra"
+    }
+  ],
+  "domain_types": [
+    "TYPE_META",
+    "TYPE_AFFECT_EFFECT",
+    "TYPE_PROJECTION",
+    "TYPE_CONTINUATION",
+    "TYPE_OBSERVATION",
+    "TYPE_OPERATIONAL_REGIME"
+  ],
+  "typing_rules": [
+    {
+      "id": "TYPE_019_001",
+      "formal": "type(A_meta) = TYPE_META"
+    },
+    {
+      "id": "TYPE_019_002",
+      "formal": "type(A|E) = TYPE_AFFECT_EFFECT"
+    },
+    {
+      "id": "TYPE_019_003",
+      "formal": "type(\u03a0_D(A|E)) = TYPE_PROJECTION"
+    },
+    {
+      "id": "TYPE_019_004",
+      "formal": "type(D(*|*)) = TYPE_PROJECTION"
+    },
+    {
+      "id": "TYPE_019_005",
+      "formal": "type(C(A,B)) = TYPE_CONTINUATION"
+    },
+    {
+      "id": "TYPE_019_006",
+      "formal": "type(NF(C)) = TYPE_CONTINUATION"
+    },
+    {
+      "id": "TYPE_019_007",
+      "formal": "type(Obs(A_affect,B_affect)) = TYPE_OBSERVATION"
+    },
+    {
+      "id": "TYPE_019_008",
+      "formal": "type(RT_operational_regime) = TYPE_OPERATIONAL_REGIME"
+    }
+  ],
+  "composition_guard": "C(A,B) \u2218 C(B,C) is lawful only when codomain/domain matching and type compatibility both hold.",
+  "domain_error_rule": "If a continuation crosses domains without an explicit projection, binding, or transition rule, WF(C) fails.",
+  "explicitly_out_of_scope": [
+    "Full parser implementation",
+    "DB runtime debt",
+    "sigma_RT selector",
+    "Arrow-family expansion",
+    "Operational-regime execution"
+  ],
+  "required_file_updates": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_019.json",
+    "registry/formal_object_registry.json",
+    "registry/math_source_registry.json",
+    "registry/lexicon_gap_queue.json",
+    "registry/registry/lexicon_gap_queue.json"
+  ],
+  "validation_requirements": [
+    "WF(C) now has explicit type guards.",
+    "Cross-domain substitution is forbidden without explicit transition.",
+    "RT_core remains unchanged.",
+    "A_meta/B_meta cannot be confused with affect/effect A/E.",
+    "Reduction and composition now require both well-formedness and type compatibility."
+  ],
+  "success_criteria": {
+    "wf_type_guards_added": true,
+    "cross_domain_substitution_forbidden": true,
+    "rt_core_unchanged": true,
+    "meta_affect_separated": true,
+    "reduction_requires_wf_and_type": true
+  },
+  "next_recommended_patch": {
+    "patch_id": "PATCH_PI_RT_CALCULUS_020",
+    "title": "Typed Projection Transition Rules",
+    "purpose": "Define the lawful transitions between typed continuation and projection domains."
+  }
+}

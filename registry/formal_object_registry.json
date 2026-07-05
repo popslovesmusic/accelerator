@@ -1622,6 +1622,234 @@
       "symbol": "NF(C)",
       "canonical_form": "NF(C)",
       "formal_definition": "The canonical representative of a continuation expression when admissibility holds; it supports auditability and comparison without specifying the reduction algorithm."
+    },
+    {
+      "object_id": "OBJ-CTN-RED-016",
+      "object_class": "operator",
+      "title": "Continuation Reduction Semantics",
+      "status": "active",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_016.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-012",
+        "OBJ-CTN-COMP-013",
+        "OBJ-CTN-ID-014",
+        "OBJ-CTN-EQ-015",
+        "OBJ-CTN-NF-015"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "RED_017",
+      "canonical_form": "C ->red C'",
+      "formal_definition": "A governed reduction relation that transforms a well-formed continuation expression toward its canonical continuation form NF(C) while preserving process equivalence and leaving RT_core unchanged; it is not a symbolic rewrite operator."
+    },
+    {
+      "object_id": "OBJ-CTN-REDRULE-017",
+      "object_class": "operator",
+      "title": "Primitive Continuation Reduction Rules",
+      "status": "active",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_017.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-RED-016",
+        "OBJ-CTN-012",
+        "OBJ-CTN-COMP-013",
+        "OBJ-CTN-ID-014",
+        "OBJ-CTN-EQ-015",
+        "OBJ-CTN-NF-015"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "->red",
+      "canonical_form": "I(A) ∘ C(A,B) ->red C(A,B); C(A,B) ∘ I(B) ->red C(A,B); C(A,B) ∘ C(B,C) ->red C(A,C)",
+      "formal_definition": "The first concrete lawful reduction rules under continuation reduction semantics. The rules remove identity redundancy and contract lawful composition toward NF(C) only when endpoint compatibility, admissibility, residue propagation, and governing constraints hold."
+    },
+    {
+      "object_id": "OBJ-CTN-WF-018",
+      "object_class": "constraint",
+      "title": "Well-Formed Continuation Expression",
+      "status": "active",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_018.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-012",
+        "OBJ-CTN-COMP-013",
+        "OBJ-CTN-ID-014",
+        "OBJ-CTN-EQ-015",
+        "OBJ-CTN-NF-015",
+        "OBJ-CTN-RED-016",
+        "OBJ-CTN-REDRULE-017"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "WF(C)",
+      "canonical_form": "WF(C)",
+      "formal_definition": "A continuation expression whose endpoints, composition structure, domain bindings, and governing constraints are valid; reduction and composition are lawful only when the expression is well-formed."
+    },
+    {
+      "object_id": "OBJ-CTN-TYPE-019",
+      "object_class": "constraint",
+      "title": "Typed Continuation Domains",
+      "status": "active",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_019.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-WF-018",
+        "OBJ-CTN-012",
+        "OBJ-CTN-COMP-013",
+        "OBJ-CTN-NF-015",
+        "OBJ-CTN-REDRULE-017"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "TYPE_019",
+      "canonical_form": "type(A_meta) = TYPE_META; type(A|E) = TYPE_AFFECT_EFFECT; type(\u03a0_D(A|E)) = TYPE_PROJECTION; type(D(*|*)) = TYPE_PROJECTION; type(C(A,B)) = TYPE_CONTINUATION; type(NF(C)) = TYPE_CONTINUATION; type(Obs(A_affect,B_affect)) = TYPE_OBSERVATION; type(RT_operational_regime) = TYPE_OPERATIONAL_REGIME",
+      "formal_definition": "Explicit domain typing constraints for continuation expressions across meta, affect/effect, projection, continuation, observation, and operational-regime layers. Domain compatibility is required for lawful continuation composition and reduction; cross-domain substitution requires explicit projection, binding, or transition rule."
+    },
+    {
+      "object_id": "OBJ-PRJ-TPT-020",
+      "object_class": "operator",
+      "title": "Typed Projection Transition Rules",
+      "status": "active",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_020.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-AE-010",
+        "OBJ-PID-010",
+        "OBJ-DSTAR-010",
+        "OBJ-CTN-TYPE-019"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "->p",
+      "canonical_form": "A|E ->p Π_D(A|E); Π_D(A|E) := D(*|*)",
+      "formal_definition": "A typed transition relation from the primitive affect/effect condition into the projection layer, licensed only by explicit invocation of Π_D. Direct collapse from A|E to D(*|*) is forbidden, and the projection preserves representable distinction without exhausting the primitive condition."
+    },
+    {
+      "object_id": "OBJ-CTN-COMP-GUARD-021",
+      "object_class": "constraint",
+      "title": "Typed Continuation Composition Guards",
+      "status": "active",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_021.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-COMP-013",
+        "OBJ-CTN-WF-018",
+        "OBJ-CTN-TYPE-019",
+        "OBJ-PRJ-TPT-020",
+        "OBJ-CTN-REDRULE-017"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "TCG_021",
+      "canonical_form": "cod(C(A,B)) = dom(C(B,C)); type(cod(C1)) = type(dom(C2)) or explicit typed transition rule exists; admissible(C1,C2); residue propagation preserved; C(A,B) \u2218 C(B,C) ->red C(A,C) only after typed composition guards pass",
+      "formal_definition": "Typed continuation composition guards require endpoint matching, typed-domain compatibility, admissibility, and residue propagation before composition or any composed reduction is lawful. Projection-domain mismatches require an explicit typed transition rule such as \u03a0_D; failed composition produces no continuation object."
+    },
+    {
+      "object_id": "OBJ-CTN-FAIL-022",
+      "object_class": "constraint",
+      "title": "Continuation Failure",
+      "status": "active",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_022.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-COMP-GUARD-021",
+        "OBJ-CTN-WF-018",
+        "OBJ-CTN-TYPE-019",
+        "OBJ-PRJ-TPT-020",
+        "OBJ-CTN-REDRULE-017"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "\u22a5C",
+      "canonical_form": "Compose(C1,C2) = \u22a5C on endpoint, type, admissibility, or residue failure; Reduce(C) = \u22a5C on guard failure; NF(\u22a5C) undefined",
+      "formal_definition": "Marked diagnostic failure state produced when a proposed continuation cannot be admitted as a lawful continuation object. Continuation failure records inadmissibility without modifying RT_core and must not be reduced into NF(C)."
+    },
+    {
+      "object_id": "OBJ-CTN-FAIL-CLASS-023",
+      "object_class": "constraint",
+      "title": "Continuation Failure Classification",
+      "status": "active",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_023.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-FAIL-022",
+        "OBJ-CTN-COMP-GUARD-021",
+        "OBJ-CTN-WF-018",
+        "OBJ-CTN-TYPE-019",
+        "OBJ-PRJ-TPT-020"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "FC_023",
+      "canonical_form": "\u22a5C_endpoint, \u22a5C_type, \u22a5C_adm, and \u22a5C_res refine \u22a5C diagnostically; Recover(\u22a5C_x) and NF(\u22a5C_x) remain undefined in this patch",
+      "formal_definition": "Diagnostic classification of continuation failure into endpoint, type, admissibility, and residue subclasses. Classification records why continuation failed but does not create a lawful continuation object or any recovery semantics."
+    },
+    {
+      "object_id": "OBJ-CTN-EVAL-024",
+      "object_class": "constraint",
+      "title": "Continuation Expression Evaluation Order",
+      "status": "active",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_024.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-WF-018",
+        "OBJ-CTN-TYPE-019",
+        "OBJ-PRJ-TPT-020",
+        "OBJ-CTN-COMP-GUARD-021",
+        "OBJ-CTN-FAIL-022",
+        "OBJ-CTN-FAIL-CLASS-023"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "EVAL_024",
+      "canonical_form": "parse expression; check WF(C); check domain types; apply explicit typed transitions; check endpoint compatibility; check admissibility; check residue propagation; classify failure if checks fail; permit composition if checks pass; permit reduction toward NF(C)",
+      "formal_definition": "Ordered evaluation pipeline for continuation expressions. Evaluation is gated by well-formedness, typing, typed transitions, endpoint compatibility, admissibility, and residue propagation before composition or reduction is admitted."
     }
   ],
   "registry_bindings": [

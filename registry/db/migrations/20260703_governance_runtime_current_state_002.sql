@@ -23,6 +23,26 @@ SELECT
     (SELECT decision FROM governance_decision_log ORDER BY COALESCE(created_at, db_snapshot_at) DESC, id DESC LIMIT 1) AS latest_decision_decision,
     (SELECT reason FROM governance_decision_log ORDER BY COALESCE(created_at, db_snapshot_at) DESC, id DESC LIMIT 1) AS latest_decision_reason,
     (SELECT created_at FROM governance_decision_log ORDER BY COALESCE(created_at, db_snapshot_at) DESC, id DESC LIMIT 1) AS latest_decision_at,
+    'RT := [(ℰ≠0) ⇔R δα(ℰ>0)]' AS current_rt,
+    CASE
+        WHEN (
+            SELECT COUNT(*)
+            FROM semantic_authority_view
+            WHERE semantic_key IN ('RT_CORE', 'META_A_BINDING', 'META_B_BINDING')
+              AND status = 'active'
+        ) = 3 THEN 'semantic_projection_ready'
+        ELSE 'semantic_projection_partial'
+    END AS semantic_projection_state,
+    CASE
+        WHEN (SELECT COUNT(*) FROM artifacts WHERE orientation_status IN (
+            'historical_residue',
+            'archived',
+            'superseded',
+            'invalidated',
+            'unverified_residue'
+        )) > 0 THEN 'historical_residue_compressed'
+        ELSE 'historical_residue_clear'
+    END AS historical_residue_state,
     'active' AS db_first_gate_state,
     'registry' AS active_authority,
     'mixed' AS authority_boundary,

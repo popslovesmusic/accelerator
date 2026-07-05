@@ -169,6 +169,58 @@ $$ D(*|*) := \Pi_D(A|E) $$
 $$ Primitive(D(*|*)) = \text{false} $$
 $$ \Pi_D(A|E) \subset_{\text{repr}} A|E $$
 
+**Governed Clarification 1.2.2B.10: Well-Formed Continuation Expressions (PATCH_PI_RT_CALCULUS_018)**
+A continuation expression is lawful only when its endpoints, composition structure, domain bindings, and governing constraints are valid. The well-formedness gate is written as $WF(C)$ and is structural and semantic rather than merely syntactic. Reduction and composition are lawful only over well-formed continuation expressions: $WF(C(A,B))$ requires lawful RT conditions at both endpoints, $WF(C(A,B) \circ C(B,C))$ requires endpoint compatibility, $WF(I(A))$ requires a lawful RT condition, and $C \to_{red} C'$ requires both $WF(C)$ and $WF(C')$. Meta-domain, affect/effect-domain, projection-domain, and continuation-domain symbols must not be substituted across domains without an explicit projection or binding rule.
+
+**Governed Clarification 1.2.2B.11: Typed Continuation Domains (PATCH_PI_RT_CALCULUS_019)**
+Typed continuation domains assign each continuation-layer expression to an explicit type so that well-formedness can enforce cross-domain discipline. The meta-domain binding $A_{meta}$ has type $\text{TYPE\_META}$; the affect/effect primitive $A|E$ has type $\text{TYPE\_AFFECT\_EFFECT}$; the projection forms $\Pi_D(A|E)$ and $D(*|*)$ have type $\text{TYPE\_PROJECTION}$; continuation expressions $C(A,B)$ and $NF(C)$ have type $\text{TYPE\_CONTINUATION}$; observation expressions introduced into continuation reasoning require $\text{TYPE\_OBSERVATION}$; and operational-regime expressions require $\text{TYPE\_OPERATIONAL\_REGIME}$. The composition guard is that $C(A,B) \circ C(B,C)$ is lawful only when codomain/domain matching and type compatibility both hold. If a continuation crosses domains without an explicit projection, binding, or transition rule, $WF(C)$ fails. Meta-domain $A_{meta}/B_{meta}$ remain exclusive to the meta layer and must not be conflated with affect/effect $A/E$.
+
+$$ type(A_{meta}) = \text{TYPE\_META} $$
+$$ type(A|E) = \text{TYPE\_AFFECT\_EFFECT} $$
+$$ type(\Pi_D(A|E)) = \text{TYPE\_PROJECTION} $$
+$$ type(D(*|*)) = \text{TYPE\_PROJECTION} $$
+$$ type(C(A,B)) = \text{TYPE\_CONTINUATION} $$
+$$ type(NF(C)) = \text{TYPE\_CONTINUATION} $$
+$$ type(Obs(A_{\text{affect}}, B_{\text{affect}})) = \text{TYPE\_OBSERVATION} $$
+$$ type(RT_{\text{operational\_regime}}) = \text{TYPE\_OPERATIONAL\_REGIME} $$
+
+**Governed Clarification 1.2.2B.12: Typed Projection Transition Rules (PATCH_PI_RT_CALCULUS_020)**
+Typed projection transition rules govern the lawful passage from the affect/effect domain into the projection domain. The primitive affect/effect condition may reach the projection layer only by explicit invocation of $\Pi_D$: $A|E \to_p \Pi_D(A|E)$. Within the projection layer, the representational binding $\Pi_D(A|E) := D(*|*)$ records the projected distinction, but it does not collapse the primitive condition into the projection. Direct substitution from $A|E$ to $D(*|*)$ is forbidden; the only lawful route is through the typed projection transition. The source type remains $\text{TYPE\_AFFECT\_EFFECT}$ and the target type remains $\text{TYPE\_PROJECTION}$, so projection preserves representable distinction without exhausting the primitive affect/effect condition.
+
+$$ A|E \to_p \Pi_D(A|E) $$
+$$ \Pi_D(A|E) := D(*|*) $$
+$$ A|E \not:= D(*|*) $$
+
+**Governed Clarification 1.2.2B.13: Typed Continuation Composition Guards (PATCH_PI_RT_CALCULUS_021)**
+Typed continuation composition guards require endpoint matching, typed-domain compatibility, admissibility, and residue propagation before continuation composition is lawful. If typed-domain mismatch occurs, composition is blocked unless an explicit typed transition rule already exists; for projection-domain transitions, that rule must be $\Pi_D$ or an equivalent canonical projection rule. When the guards fail, no continuation object is produced, and reduction of a composed continuation is deferred until the guards pass.
+
+$$ \operatorname{cod}(C(A,B)) = \operatorname{dom}(C(B,C)) $$
+$$ type(\operatorname{cod}(C(A,B))) = type(\operatorname{dom}(C(B,C))) \lor \text{an explicit typed transition rule exists} $$
+$$ admissible(C(A,B), C(B,C)) $$
+$$ C(A,B) \circ C(B,C) \to_{red} C(A,C) \text{ only after typed composition guards pass} $$
+
+**Governed Clarification 1.2.2B.14: Continuation Failure Object and Undefined Composition (PATCH_PI_RT_CALCULUS_022)**
+When a proposed continuation fails endpoint matching, typed-domain compatibility, admissibility, residue propagation, or reduction well-formedness, the governed outcome is the diagnostic failure marker $\bot_C$. $\bot_C$ is not a lawful continuation object and is not an RT condition; it records inadmissibility without modifying the canonical RT core. Composition, typed transition, or reduction failure may each yield $\bot_C$. The failure marker is terminal for the continuation calculation: $\mathrm{NF}(\bot_C)$ is undefined and no lawful continuation can be reduced out of $\bot_C$.
+
+$$ \operatorname{Compose}(C_1,C_2) = \bot_C \quad \text{on endpoint, type, admissibility, or residue failure} $$
+$$ \operatorname{Transition}(X) = \bot_C \quad \text{when a typed transition guard fails} $$
+$$ \operatorname{Reduce}(C) = \bot_C \quad \text{when a reduction guard fails} $$
+$$ \mathrm{NF}(\bot_C) \text{ is undefined} $$
+
+**Governed Clarification 1.2.2B.15: Continuation Failure Classification and Recovery Boundaries (PATCH_PI_RT_CALCULUS_023)**
+Continuation failure may be classified into diagnostic subclasses that refine why the continuation failed: endpoint failure ($\bot_C^{\mathrm{endpoint}}$), type failure ($\bot_C^{\mathrm{type}}$), admissibility failure ($\bot_C^{\mathrm{adm}}$), and residue failure ($\bot_C^{\mathrm{res}}$). These subclasses remain diagnostic only: they do not create lawful continuation objects, do not normalize into continuation normal forms, and do not recover continuation automatically. Recovery remains deferred to a future governed rule, so $\mathrm{Recover}(\bot_C_x)$ is undefined in this patch.
+
+$$ \bot_C_x \not\Rightarrow C(A,B) $$
+$$ \mathrm{Recover}(\bot_C_x) \text{ is undefined in this patch} $$
+$$ \mathrm{NF}(\bot_C_x) \text{ is undefined} $$
+
+**Governed Clarification 1.2.2B.16: Continuation Expression Evaluation Order (PATCH_PI_RT_CALCULUS_024)**
+Continuation expression evaluation is ordered as a governed pipeline: parse the expression, check `WF(C)`, check domain types, apply explicit typed transitions, check endpoint compatibility, check admissibility, and check residue propagation. If any check fails, failure classification occurs before composition is admitted; if all checks pass, composition may be admitted and reduction toward `NF(C)` may proceed. This order does not modify the canonical RT core, and recovery remains deferred.
+
+$$ \text{parse} \to \text{WF}(C) \to \text{types} \to \text{typed transition} \to \text{endpoint} \to \text{admissibility} \to \text{residue} \to \text{failure classification or composition} \to \text{reduction toward } NF(C) $$
+$$ \text{evaluation order does not modify } RT_{\text{core}} $$
+$$ \text{recovery remains deferred} $$
+
 **Formal Principle 1.2.2C: Aspectual RT Set as Higher-Order RT (aRT) (MPF_IND_ART_SET_OF_RTS_001)**
 A lawful set of RT expressions is itself an aspectual RT expression (`aRT`). The set of operational aspects (distinction, asymmetry, orientation, admissibility, residue, closure) are not independent modules but are themselves RT-bearing expressions.
 $$ aRT := RT(\{RT_1, RT_2, \dots, RT_n\}) $$
@@ -484,7 +536,16 @@ $$ (A \to_r B) ; (B \to_r C) \Rightarrow A \to_r C $$
 $$ \operatorname{cod}(C(A,B)) = \operatorname{dom}(C(B,C)) $$
 
 **Commentary:**
-The composition law is process composition, not symbolic concatenation. A composite continuation is admitted only when the shared endpoint matches and residue-admissibility is preserved across the join. Residue remains part of the composite semantics, so the lawful composite carries forward historical constraint from the left continuation into the new stabilized endpoint. If endpoint compatibility fails or admissibility breaks, no lawful composite continuation is produced. Associativity is deferred to later patches, and the reduction algorithm for canonical forms remains deferred.
+The composition law is process composition, not symbolic concatenation. A composite continuation is admitted only when the shared endpoint matches, residue-admissibility is preserved across the join, and the endpoint types are compatible. If the endpoint types differ, composition is blocked unless an explicit typed transition rule already exists; for projection-domain transitions, that rule must be $\Pi_D$ or an equivalent canonical projection rule. Residue remains part of the composite semantics, so the lawful composite carries forward historical constraint from the left continuation into the new stabilized endpoint. If endpoint compatibility fails or admissibility breaks, no lawful composite continuation is produced. Associativity is deferred to later patches, and the concrete reduction rules remain deferred.
+
+**Formal Block 2.3.2A: Typed Continuation Composition Guards**
+$$ \operatorname{cod}(C(A,B)) = \operatorname{dom}(C(B,C)) $$
+$$ type(\operatorname{cod}(C(A,B))) = type(\operatorname{dom}(C(B,C))) \lor \text{an explicit typed transition rule exists} $$
+$$ admissible(C(A,B), C(B,C)) $$
+$$ C(A,B) \circ C(B,C) \to_{red} C(A,C) \text{ only after typed composition guards pass} $$
+
+**Commentary:**
+Typed continuation composition is lawful only when endpoint matching, type compatibility, admissibility, and residue propagation are all preserved. If typed-domain mismatch occurs, composition is blocked unless an explicit typed transition rule already exists; for projection-domain transitions, that rule must be $\Pi_D$ or an equivalent canonical projection rule. When these guards fail, no continuation object is produced. Reduction of composed continuations is therefore deferred until the typed composition guards pass.
 
 **Formal Block 2.3.3: Identity Continuation and Admissibility**
 $$ I(A) \equiv C(A,A) : \text{Identity continuation preserving } A \text{ under lawful continuation composition} $$
@@ -504,6 +565,23 @@ $$ C_1 \equiv_P C_2 \not\Rightarrow C_1 = C_2 $$
 
 **Commentary:**
 The process-equivalence relation compares lawful continuation behavior, not just surface syntax. Two continuation expressions may differ syntactically while still being process-equivalent if they produce the same admissible continuation behavior under the same governing conditions. $NF(C)$ names the canonical representative of a continuation expression when admissibility holds. Canonical forms support auditability and comparison, but the reduction algorithm that computes them remains deferred.
+
+**Formal Block 2.3.5: Continuation Reduction Semantics**
+$$ C \to_{red} C' : \text{Governed reduction of a well-formed continuation expression toward } NF(C) $$
+$$ C \to_{red} C' \Rightarrow C \equiv_P C' $$
+$$ \text{Repeated lawful reduction seeks } NF(C) $$
+$$ C \to_{red} C' \text{ does not alter } RT_{core} $$
+
+**Commentary:**
+Reduction is the lawful transformation of a continuation expression toward canonical continuation form. It simplifies representation, not behavior, and it remains distinct from symbolic rewriting. The reduction relation preserves process equivalence under admissibility, residue, orientation, and context constraints. Reduction of a composed continuation is only permitted after the typed composition guards above have passed. The concrete primitive rules appear below, while termination, confluence, and any full reduction algorithm remain deferred.
+
+**Formal Block 2.3.6: Primitive Continuation Reduction Rules**
+$$ I(A) \circ C(A,B) \to_{red} C(A,B) $$
+$$ C(A,B) \circ I(B) \to_{red} C(A,B) $$
+$$ C(A,B) \circ C(B,C) \to_{red} C(A,C) \quad \text{when endpoint compatibility, admissibility, residue propagation, and governing constraints hold} $$
+
+**Commentary:**
+The first two rules remove identity continuation redundancies under lawful composition. The third rule contracts a lawful composite continuation into a direct continuation when all governing constraints are preserved. These rules operate on continuation expressions, not on `RT_core`, and each lawful reduction step preserves process equivalence. If the typed composition guards fail, no lawful composite reduction step is produced.
 
 ---
 
@@ -3096,6 +3174,7 @@ $$ \text{Stage\_1\_Status} := \text{STRUCTURALLY\_QUALIFIED\_NOT\_FORMALLY\_CLOS
 | $\gets_r$ | Reverse Residue Support | Candidate | Anchors the current state in history. |
 | $C(A,B) \circ C(B,C)$ | Continuation Composition | Candidate | Process composition of continuation objects; lawful only when the shared endpoint matches and residue/admissibility are preserved. |
 | $I(A)$ | Identity Continuation | Candidate | Neutral continuation preserving condition $A$ and acting as the identity element of continuation composition. |
+| $\to_{red}$ | Continuation Reduction Semantics | Candidate | Governed reduction toward $NF(C)$ that preserves process equivalence and does not alter $RT_{core}$. |
 | $\to_a \otimes \gets_r$ | Composite Coupling | Experimental | Couples potential and history for realization. |
 | $<\neq>_r$ | Relational Non-Identity | Core | Derived structural compression of the root expression $(A \iff_R a \text{ where } A \neq a)$. |
 | $\sim_A$ | Admissibility Equivalence | Candidate | Relation asserting that two RT expressions belong to the same admissibility organization. |
@@ -3355,7 +3434,7 @@ These items remain unsettled and are the primary targets for future induction an
 - **Formal difference between $R_{\leftrightarrow}$ and $\leftrightarrow_R$:** [ **RESOLVED_PENDING_CANONICAL_TEXTBOOK_SYNC** ] Rigorous separation between residue-as-operand ($R_{\leftrightarrow}$) and closure-support-through-residue ($\leftrightarrow_R$) is explicitly defined in governance patches and integrated into Chapter 2.
 - **Formal rules for Decoupling:** Defining the conditions under which a truth-condition becomes False.
 - **Asymmetric Recoupling and Distinction Emergence:** [ **HARDENING_REQUIRED** ] Define asymmetric recoupling mechanics and the distinction emergence law; determine whether RT exists below the distinction floor [Source: MPF_ZERO_STATE_DOMAIN_MEMBERSHIP_001].
-- **Formal RT Chain Algebra:** [ **C1_DEFINED_PROVISIONAL** ] Define the algebra of progressive conditioned continuation for chains such as $D(1|2), D(2|3), D(3|4)$, including lawful ordering, coupling inheritance, and chain-composition constraints. Continuation composition is now governed by `PATCH_PI_RT_CALCULUS_013`, continuation identity is governed by `PATCH_PI_RT_CALCULUS_014`, and process equivalence plus canonical continuation forms are governed by `PATCH_PI_RT_CALCULUS_015`; together they require endpoint compatibility, residue/admissibility preservation, and behavior-preserving canonical representatives. Associativity remains deferred, and the reduction algorithm remains deferred. [Source: PATCH_PI_RT_CALCULUS_013; PATCH_PI_RT_CALCULUS_014; PATCH_PI_RT_CALCULUS_015].
+- **Formal RT Chain Algebra:** [ **C1_DEFINED_PROVISIONAL** ] Define the algebra of progressive conditioned continuation for chains such as $D(1|2), D(2|3), D(3|4)$, including lawful ordering, coupling inheritance, and chain-composition constraints. Continuation composition is now governed by `PATCH_PI_RT_CALCULUS_013`, continuation identity is governed by `PATCH_PI_RT_CALCULUS_014`, process equivalence plus canonical continuation forms are governed by `PATCH_PI_RT_CALCULUS_015`, reduction semantics are governed by `PATCH_PI_RT_CALCULUS_016`, primitive reduction rules are governed by `PATCH_PI_RT_CALCULUS_017`, well-formed continuation expressions are governed by `PATCH_PI_RT_CALCULUS_018`, typed continuation domains are governed by `PATCH_PI_RT_CALCULUS_019`, typed projection transition rules are governed by `PATCH_PI_RT_CALCULUS_020`, typed continuation composition guards are governed by `PATCH_PI_RT_CALCULUS_021`, continuation failure / undefined composition are governed by `PATCH_PI_RT_CALCULUS_022`, failure-classification / recovery-boundary handling is governed by `PATCH_PI_RT_CALCULUS_023`, and continuation evaluation order is governed by `PATCH_PI_RT_CALCULUS_024`; together they require endpoint compatibility, explicit domain binding, type compatibility, explicit projection invocation, residue/admissibility preservation, lawful reduction toward $NF(C)$ after typed composition guards pass, and ordered evaluation before reduction is admitted. Associativity remains deferred, and the full reduction algorithm remains deferred. [Source: PATCH_PI_RT_CALCULUS_013; PATCH_PI_RT_CALCULUS_014; PATCH_PI_RT_CALCULUS_015; PATCH_PI_RT_CALCULUS_016; PATCH_PI_RT_CALCULUS_017; PATCH_PI_RT_CALCULUS_018; PATCH_PI_RT_CALCULUS_019; PATCH_PI_RT_CALCULUS_020; PATCH_PI_RT_CALCULUS_021; PATCH_PI_RT_CALCULUS_022; PATCH_PI_RT_CALCULUS_023; PATCH_PI_RT_CALCULUS_024].
 - **Deviation-to-Geometry Recovery:** [ **OPEN** ] Derive distance as a projection of deviation and geometry as a projection of organized distance without reintroducing geometry as a primitive. [Source: session_summary 2026-06-26 continuation-first ontology reduction].
 - **Observer-Floor Mismatch:** [ **REGISTERED_LATE** ] Define the observer-floor mismatch quantity and determine whether embedded observers and local admissibility floors co-evolve so relative mismatch remains approximately invariant. [Source: session_summary 2026-06-26 continuation-first ontology reduction].
 - **Orientation Transformations Across Domains:** [ **OPEN** ] Define lawful orientation transformations across domains without collapsing orientation into spatial direction or primitive time. [Source: session_summary 2026-06-26 continuation-first ontology reduction].
@@ -3429,6 +3508,16 @@ This section tracks newly introduced lexicon terms that have been reduced to gov
 - **`Continuation_Identity`** (`I(A)`): Neutral lawful continuation that preserves condition $A$ and acts as the identity element of continuation composition. `I(A)=C(A,A)`. [Source: `PATCH_PI_RT_CALCULUS_014`].
 - **`Process_Equivalence`** (`C_1 \equiv_P C_2`): Behavioral equivalence between continuation expressions under shared admissibility, residue, orientation, and context constraints. Symbolic equality is not sufficient; two expressions may differ syntactically while remaining process-equivalent. [Source: `PATCH_PI_RT_CALCULUS_015`].
 - **`Canonical_Continuation_Form`** (`NF(C)`): Canonical representative of a continuation expression when admissibility holds. `NF(C)` supports auditability and comparison, while the reduction algorithm that computes it remains deferred. [Source: `PATCH_PI_RT_CALCULUS_015`].
+- **`Continuation_Reduction_Semantics`** (`C \to_{red} C'`): Governed reduction relation from a well-formed continuation expression toward `NF(C)`. The relation preserves process equivalence and simplifies representation rather than behavior; `PATCH_PI_RT_CALCULUS_017` instantiates this semantics with primitive reduction rules. [Source: `PATCH_PI_RT_CALCULUS_016`; `PATCH_PI_RT_CALCULUS_017`].
+- **`Primitive_Continuation_Reduction_Rules`** (`I(A) ∘ C(A,B) \to_{red} C(A,B)`, `C(A,B) ∘ I(B) \to_{red} C(A,B)`, `C(A,B) ∘ C(B,C) \to_{red} C(A,C)`): The first concrete lawful reduction rules under `->red`. They remove identity redundancy and contract lawful composition only when endpoint compatibility, admissibility, residue propagation, and governing constraints hold. [Source: `PATCH_PI_RT_CALCULUS_017`].
+- **`Primitive_Continuation_Reduction_Rules`** (`I(A) ∘ C(A,B) \to_{red} C(A,B)`, `C(A,B) ∘ I(B) \to_{red} C(A,B)`, `C(A,B) ∘ C(B,C) \to_{red} C(A,C)`): The first concrete lawful reduction rules under `->red`. They remove identity redundancy and contract lawful composition only when endpoint compatibility, admissibility, residue propagation, and governing constraints hold. [Source: `PATCH_PI_RT_CALCULUS_017`].
+- **`Well-Formed_Continuation_Expression`** (`WF(C)`): Continuation expressions are lawful only when endpoints, composition structure, domain bindings, and governing constraints are valid. `WF(C)` is the structural and semantic gate for lawful continuation composition and reduction, and it blocks cross-domain substitution unless an explicit projection or binding rule is declared. [Source: `PATCH_PI_RT_CALCULUS_018`].
+- **`Typed_Continuation_Domains`** (`TYPE_META`, `TYPE_AFFECT_EFFECT`, `TYPE_PROJECTION`, `TYPE_CONTINUATION`, `TYPE_OBSERVATION`, `TYPE_OPERATIONAL_REGIME`): Explicit typing for continuation-layer expressions across meta, affect/effect, projection, continuation, observation, and operational-regime layers. Cross-domain substitution is forbidden unless an explicit projection, binding, or transition rule is declared. [Source: `PATCH_PI_RT_CALCULUS_019`].
+- **`Typed_Projection_Transition_Rules`** (`A|E ->p Π_D(A|E)`, `Π_D(A|E) := D(*|*)`): Governed typed transition rules that move the primitive affect/effect condition into the projection layer only through explicit invocation of `Π_D`. Direct collapse from `A|E` to `D(*|*)` is forbidden, and projection preserves representable distinction without exhausting the primitive condition. [Source: `PATCH_PI_RT_CALCULUS_020`].
+- **`Typed_Continuation_Composition_Guards`** (`C(A,B) \circ C(B,C)`, `type(cod(C_1)) = type(dom(C_2))`, `admissible(C_1,C_2)`): Governed typed composition guards that require endpoint matching, typed-domain compatibility, admissibility, and residue propagation before continuation composition or any reduction of the composed continuation is lawful. Projection-domain mismatches require an explicit typed transition rule such as `\Pi_D`; failed composition produces no continuation object. [Source: `PATCH_PI_RT_CALCULUS_021`].
+- **`Continuation_Failure`** (`$\bot_C$`): Marked diagnostic failure state produced when a proposed continuation cannot be admitted as a lawful continuation object. Composition, typed transition, or reduction failure records inadmissibility without modifying the canonical RT core, and `NF(\bot_C)` is undefined. [Source: `PATCH_PI_RT_CALCULUS_022`].
+- **`Continuation_Failure_Classification`** (`$\bot_C^{\mathrm{endpoint}}$, $\bot_C^{\mathrm{type}}$, $\bot_C^{\mathrm{adm}}$, $\bot_C^{\mathrm{res}}$`): Diagnostic subclasses of `$\bot_C$` that identify endpoint, type, admissibility, and residue failures. Classification remains diagnostic only: it does not create lawful continuation objects, does not normalize into continuation normal forms, and defers recovery to a future governed rule. [Source: `PATCH_PI_RT_CALCULUS_023`].
+- **`Continuation_Expression_Evaluation_Order`** (`parse`, `WF(C)`, typed checks, explicit transition, endpoint, admissibility, residue, failure classification, composition, reduction): Ordered pipeline for continuation expressions. Failure classification occurs before composition is admitted, and reduction remains gated by the full sequence of checks. [Source: `PATCH_PI_RT_CALCULUS_024`].
 - **`distinction_floor_interpretation`**: Governed provisional reading that resolves local scale constraints and pre-distinction origins. [Source: `MPF_RT_BICONDITIONAL_LADDER_001`]
 - **`continuation_first_ontology`**: Governed provisional reading that process precedes distinction and that "precedence" is ontological rather than temporal. [Source: session_summary 2026-06-26 continuation-first ontology reduction]
 - **`observer_floor_mismatch`**: Governed provisional reading of the relative mismatch between an embedded observer and the active local admissibility floor. [Source: session_summary 2026-06-26 continuation-first ontology reduction]

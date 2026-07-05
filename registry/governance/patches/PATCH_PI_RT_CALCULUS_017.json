@@ -1,0 +1,83 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_017",
+  "title": "Primitive Continuation Reduction Rules",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-05",
+  "priority": "HIGH",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_013",
+    "PATCH_PI_RT_CALCULUS_014",
+    "PATCH_PI_RT_CALCULUS_015",
+    "PATCH_PI_RT_CALCULUS_016"
+  ],
+  "purpose": "Introduce the first concrete reduction rules for simplifying continuation expressions toward NF(C) while preserving process equivalence.",
+  "canonical_claims": [
+    {
+      "id": "CLAIM_017_001",
+      "statement": "Reduction rules operate on continuation expressions, not RT_core.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_017_002",
+      "statement": "Reduction removes representational redundancy while preserving process behavior.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_017_003",
+      "statement": "Identity continuations reduce away under valid composition.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_017_004",
+      "statement": "Composed continuations may reduce to a direct continuation when lawful constraints are preserved.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_017_005",
+      "statement": "Failed admissibility blocks reduction.",
+      "status": "canonical"
+    }
+  ],
+  "rules": [
+    {
+      "id": "RED_017_001",
+      "name": "Left Identity Reduction",
+      "formal": "I(A) \u2218 C(A,B) ->red C(A,B)",
+      "preserves": "process_equivalence"
+    },
+    {
+      "id": "RED_017_002",
+      "name": "Right Identity Reduction",
+      "formal": "C(A,B) \u2218 I(B) ->red C(A,B)",
+      "preserves": "process_equivalence"
+    },
+    {
+      "id": "RED_017_003",
+      "name": "Composed Continuation Reduction",
+      "formal": "C(A,B) \u2218 C(B,C) ->red C(A,C)",
+      "condition": "Only when endpoint compatibility, admissibility, residue propagation, and governing constraints are preserved.",
+      "preserves": "process_equivalence"
+    }
+  ],
+  "explicitly_out_of_scope": [
+    "Termination proof",
+    "Confluence proof",
+    "Full normal-form algorithm",
+    "Parser grammar",
+    "sigma_RT",
+    "Arrow-family expansion"
+  ],
+  "validation_requirements": [
+    "Register primitive reduction rules.",
+    "Do not modify RT_core.",
+    "Every reduction rule must preserve ≡P.",
+    "Every reduction rule must reference ->red.",
+    "Reduction must remain distinct from symbolic rewrite."
+  ],
+  "next_recommended_patch": {
+    "patch_id": "PATCH_PI_RT_CALCULUS_018",
+    "title": "Well-Formed Continuation Expressions",
+    "purpose": "Define the grammar and type/domain constraints for valid RT continuation expressions."
+  }
+}

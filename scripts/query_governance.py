@@ -156,9 +156,28 @@ SELECT
         'invalidated',
         'unverified_residue'
     )) AS residue_count,
+    'RT := [(ℰ≠0) ⇔R δα(ℰ>0)]' AS current_rt,
+    CASE
+        WHEN (
+            SELECT COUNT(*)
+            FROM semantic_authority_map
+            WHERE semantic_key IN ('RT_CORE', 'META_A_BINDING', 'META_B_BINDING')
+              AND status = 'active'
+        ) = 3 THEN 'semantic_projection_ready'
+        ELSE 'semantic_projection_partial'
+    END AS semantic_projection_state,
+    CASE
+        WHEN (SELECT COUNT(*) FROM artifacts WHERE orientation_status IN (
+            'historical_residue',
+            'archived',
+            'superseded',
+            'invalidated',
+            'unverified_residue'
+        )) > 0 THEN 'historical_residue_compressed'
+        ELSE 'historical_residue_clear'
+    END AS historical_residue_state,
     'registry' AS active_authority,
-    NULL AS current_rt,
-    NULL AS open_debt_count,
+    NULL AS open_runtime_debt_count,
     NULL AS live_blocker_count,
     'partial_bootstrap' AS coverage_state;
 """
@@ -285,10 +304,185 @@ def collect_governance_runtime_debt():
                 "resolution_priority": item.get("resolution_priority"),
                 "blocks": item.get("blocks", []),
                 "required_resolution": item.get("required_resolution", []),
+                "depends_on": item.get("depends_on", []),
+                "introduced_by": item.get("introduced_by"),
                 "source_path": str(RESEARCH_DEBT_REGISTRY.relative_to(ROOT)).replace("\\", "/"),
             }
         )
     return items
+
+
+def build_semantic_rt_projection(db_path, current_state=None, catalog_rows=None):
+    semantic_targets = [
+        {"semantic_key": "RT_CORE", "semantic_type": "theorem"},
+        {"semantic_key": "META_A_BINDING", "semantic_type": "operator_binding"},
+        {"semantic_key": "META_B_BINDING", "semantic_type": "operator_binding"},
+        {"semantic_key": "REGISTRY_AUTHORITY_PRINCIPLE", "semantic_type": "runtime_rule"},
+        {"semantic_key": "DB_RUNTIME_ROLE", "semantic_type": "runtime_rule"},
+    ]
+    if catalog_rows is None:
+        summary = build_semantic_authority_summary(db_path, semantic_targets, current_state=current_state)
+        target_decisions = summary.get("target_decisions", [])
+        decision = summary.get("decision", "defer")
+        reason = summary.get("reason", "Semantic RT projection is unavailable.")
+        warnings = [warning for warning in dict.fromkeys(summary.get("warnings", [])) if warning]
+        evidence_paths = [path for path in dict.fromkeys(path for path in summary.get("evidence_paths", []) if path)]
+    else:
+        target_decisions = [
+            build_semantic_authority_record(
+                target["semantic_key"],
+                semantic_type=target["semantic_type"],
+                current_state=current_state,
+                catalog_rows=catalog_rows,
+            )
+            for target in semantic_targets
+        ]
+        warnings = []
+        evidence_paths = []
+        decision = "allow"
+        reason = "Semantic authority checks passed."
+        for record in target_decisions:
+            warnings.extend(record.get("warnings", []))
+            evidence_paths.extend(record.get("evidence_paths", []))
+            record_decision = str(record.get("decision", "defer")).lower()
+            if record_decision == "block":
+                decision = "block"
+                reason = f"Semantic authority blocked for {record.get('semantic_key')}"
+            elif record_decision == "defer" and decision != "block":
+                decision = "defer"
+                reason = f"Semantic authority deferred for {record.get('semantic_key')}"
+    indexed = {
+        str(record.get("semantic_key") or "").strip(): record
+        for record in target_decisions
+        if isinstance(record, dict)
+    }
+
+    canonical_rt = "RT := [(ℰ≠0) ⇔R δα(ℰ>0)]"
+    meta_a = "A_meta := δα(ℰ>0)"
+    meta_b = "B_meta := (ℰ≠0)"
+    authority_context = {
+        "registry_principle": indexed.get("REGISTRY_AUTHORITY_PRINCIPLE", {}),
+        "runtime_role": indexed.get("DB_RUNTIME_ROLE", {}),
+    }
+    return {
+        "projection_state": "projected" if decision == "allow" else "deferred",
+        "current_rt": canonical_rt,
+        "meta_bindings": {
+            "A_meta": meta_a,
+            "B_meta": meta_b,
+        },
+        "domain_separation": {
+            "meta_domain": "exclusive",
+            "affect_effect_domain": "exclusive",
+            "affect_effect_guard": "A|E remains outside RT_core",
+        },
+        "authority_context": authority_context,
+        "target_decisions": target_decisions,
+        "decision": decision,
+        "reason": reason,
+        "warnings": warnings,
+        "evidence_paths": evidence_paths,
+    }
+
+
+def build_debt_blocker_projection(debt_records, current_state=None):
+    records = [record for record in debt_records or [] if isinstance(record, dict)]
+    blocker_records = []
+    blocker_targets = []
+    required_resolution = []
+    dependency_edges = []
+    status_counts = {}
+    severity_counts = {}
+
+    for record in records:
+        status = normalize_debt_runtime_status(record.get("status"))
+        severity = normalize_debt_runtime_severity(record.get("severity"))
+        decision_effect = str(record.get("decision_effect") or "").strip().lower()
+        if not decision_effect:
+            decision_effect = "warn" if status in {"open", "partial"} else "defer" if status == "stale" else "allow"
+        blocks = [str(entry).strip() for entry in parse_json_collection(record.get("blocks")) if str(entry).strip()]
+        required = [str(entry).strip() for entry in parse_json_collection(record.get("required_resolution")) if str(entry).strip()]
+        depends_on = [str(entry).strip() for entry in parse_json_collection(record.get("depends_on")) if str(entry).strip()]
+        blocker_record = {
+            "debt_id": record.get("debt_id") or record.get("id"),
+            "title": record.get("title"),
+            "status": status,
+            "severity": severity,
+            "decision_effect": decision_effect,
+            "blocking_scope": record.get("blocking_scope", "none"),
+            "blocks": blocks,
+            "required_resolution": required,
+            "depends_on": depends_on,
+        }
+        blocker_records.append(blocker_record)
+        blocker_targets.extend(blocks)
+        required_resolution.extend(required)
+        if depends_on:
+            dependency_edges.append(
+                {
+                    "debt_id": blocker_record["debt_id"],
+                    "depends_on": depends_on,
+                }
+            )
+        status_counts[status] = status_counts.get(status, 0) + 1
+        severity_counts[severity] = severity_counts.get(severity, 0) + 1
+
+    open_debt_count = sum(1 for record in blocker_records if record["status"] in {"open", "partial", "stale"})
+    blocking_debt_count = sum(
+        1
+        for record in blocker_records
+        if record["decision_effect"] == "block" or record["severity"] == "blocking"
+    )
+    return {
+        "projection_state": "projected" if blocker_records else "empty",
+        "debt_count": len(blocker_records),
+        "open_debt_count": open_debt_count,
+        "blocking_debt_count": blocking_debt_count,
+        "status_counts": status_counts,
+        "severity_counts": severity_counts,
+        "blockers": [blocker for blocker in dict.fromkeys(blocker_targets) if blocker],
+        "required_resolution": [item for item in dict.fromkeys(required_resolution) if item],
+        "dependency_edges": dependency_edges,
+        "debt_records": blocker_records,
+        "coverage_state": current_state.get("coverage_state", "unknown") if current_state else "unknown",
+    }
+
+
+def build_historical_residue_projection(current_state=None, debt_records=None):
+    state = current_state or {}
+    runtime_state = state.get("runtime", {}) if isinstance(state.get("runtime"), dict) else {}
+    records = [record for record in debt_records or [] if isinstance(record, dict)]
+    residue_debt_count = sum(
+        1
+        for record in records
+        if normalize_debt_runtime_status(record.get("status")) in {"open", "partial", "stale"}
+    )
+    residue_sources = []
+    for record in records:
+        if normalize_debt_runtime_status(record.get("status")) not in {"open", "partial", "stale"}:
+            continue
+        source = record.get("introduced_by") or record.get("source_path")
+        if source:
+            residue_sources.append(source)
+    return {
+        "projection_state": "compressed" if state.get("residue_count") or residue_debt_count else "clear",
+        "artifact_count": state.get("artifact_count", runtime_state.get("artifact_count", 0)),
+        "residue_count": state.get("residue_count", runtime_state.get("residue_count", 0)),
+        "invalidated_count": state.get("invalidated_count", runtime_state.get("invalidated_count", 0)),
+        "decision_count": state.get("decision_count", runtime_state.get("decision_count", 0)),
+        "latest_decision_id": state.get("latest_decision_id") or runtime_state.get("latest_decision_id"),
+        "snapshot_freshness": state.get("snapshot_freshness", runtime_state.get("snapshot_freshness", "unknown")),
+        "coverage_state": state.get("coverage_state", runtime_state.get("coverage_state", "unknown")),
+        "residual_debt_count": residue_debt_count,
+        "residue_sources": [source for source in dict.fromkeys(residue_sources) if source],
+        "compressed_statuses": [
+            "historical_residue",
+            "archived",
+            "superseded",
+            "invalidated",
+            "unverified_residue",
+        ],
+    }
 
 
 def collect_recent_governance_decisions(conn, limit=5):
@@ -475,6 +669,26 @@ def normalize_debt_runtime_record(item, target=None):
         decision_effect = "warn"
 
     blocking_scope = "global" if severity == "blocking" else "target" if target and debt_runtime_matches_target(item, target) else "none"
+    blocker_projection = {
+        "debt_id": item.get("id"),
+        "title": item.get("title"),
+        "status": status,
+        "severity": severity,
+        "decision_effect": decision_effect,
+        "blocking_scope": blocking_scope,
+        "blocks": blocks,
+        "required_resolution": required_resolution,
+        "depends_on": depends_on,
+    }
+    residue_projection = {
+        "debt_id": item.get("id"),
+        "status": status,
+        "severity": severity,
+        "resolution_priority": item.get("resolution_priority"),
+        "introduced_by": item.get("introduced_by"),
+        "residue_class": "historical_residue" if status in {"open", "partial", "stale"} else "resolved",
+        "provenance_state": "retained",
+    }
     warnings = []
     if raw_status and status == "unknown":
         warnings.append(f"Debt status '{raw_status}' is not normalized.")
@@ -501,6 +715,8 @@ def normalize_debt_runtime_record(item, target=None):
         "blocks": blocks,
         "depends_on": depends_on,
         "required_resolution": required_resolution,
+        "blocker_projection": blocker_projection,
+        "residue_projection": residue_projection,
         "raw_status": raw_status,
         "raw_severity": raw_severity,
     }
@@ -532,6 +748,8 @@ def refresh_debt_runtime_projection(conn, target=None):
                 blocks TEXT,
                 depends_on TEXT,
                 required_resolution TEXT,
+                blocker_projection TEXT,
+                residue_projection TEXT,
                 raw_status TEXT,
                 raw_severity TEXT,
                 updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -562,9 +780,11 @@ def refresh_debt_runtime_projection(conn, target=None):
                     blocks,
                     depends_on,
                     required_resolution,
+                    blocker_projection,
+                    residue_projection,
                     raw_status,
                     raw_severity
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """,
                 (
                     normalized.get("debt_id"),
@@ -585,6 +805,8 @@ def refresh_debt_runtime_projection(conn, target=None):
                     json.dumps(normalized.get("blocks", []), ensure_ascii=False),
                     json.dumps(normalized.get("depends_on", []), ensure_ascii=False),
                     json.dumps(normalized.get("required_resolution", []), ensure_ascii=False),
+                    json.dumps(normalized.get("blocker_projection", {}), ensure_ascii=False),
+                    json.dumps(normalized.get("residue_projection", {}), ensure_ascii=False),
                     normalized.get("raw_status"),
                     normalized.get("raw_severity"),
                 ),
@@ -617,6 +839,8 @@ def load_debt_runtime_catalog(conn):
                 blocks,
                 depends_on,
                 required_resolution,
+                blocker_projection,
+                residue_projection,
                 raw_status,
                 raw_severity,
                 updated_at,
@@ -642,6 +866,17 @@ def load_debt_runtime_catalog(conn):
             record = dict(row)
             for field in ("evidence_paths", "warnings", "affects", "blocks", "depends_on", "required_resolution"):
                 record[field] = parse_json_collection(record.get(field))
+            for field in ("blocker_projection", "residue_projection"):
+                raw_value = record.get(field)
+                if isinstance(raw_value, dict):
+                    continue
+                if isinstance(raw_value, str) and raw_value.strip():
+                    try:
+                        record[field] = json.loads(raw_value)
+                    except json.JSONDecodeError:
+                        record[field] = {}
+                else:
+                    record[field] = {}
             normalized_rows.append(record)
         return normalized_rows
 
@@ -730,6 +965,16 @@ def build_debt_runtime_result(db_path, target=None, status_filter="all", current
         result["warnings"].extend(record.get("warnings", []))
 
     result["debts"] = filtered
+    debt_projection = build_debt_blocker_projection(filtered, current_state=current_state)
+    residue_projection = build_historical_residue_projection(current_state=current_state, debt_records=filtered)
+    result["blocker_projection"] = debt_projection
+    result["historical_residue_projection"] = residue_projection
+    result["projection"] = {
+        "blocker_projection": debt_projection,
+        "historical_residue_projection": residue_projection,
+    }
+    result["summary"]["projected_blockers"] = debt_projection.get("blocking_debt_count", 0)
+    result["summary"]["projected_open_debts"] = debt_projection.get("open_debt_count", 0)
     result["summary"]["warnings"] = len([warning for warning in dict.fromkeys(result["warnings"]) if warning])
 
     if any(record.get("decision_effect") == "block" for record in filtered):
@@ -3109,6 +3354,7 @@ def build_current_state_capsule(db_path):
         row = conn.execute("SELECT * FROM current_state_view LIMIT 1").fetchone()
         state = dict(row) if row else {}
         snapshot = db_snapshot(conn)
+        semantic_catalog = load_semantic_authority_catalog(conn)
         freshness = build_db_snapshot_freshness_result(
             db_path,
             current_state=state,
@@ -3116,6 +3362,13 @@ def build_current_state_capsule(db_path):
         )
         capsule["runtime"]["db_first_gate"] = "active" if state else "inactive"
         capsule["runtime"]["authority_boundary"] = state.get("authority_boundary") or "unknown"
+        capsule["runtime"]["latest_artifact_indexed_at"] = state.get("latest_artifact_indexed_at")
+        capsule["runtime"]["artifact_count"] = state.get("artifact_count", 0)
+        capsule["runtime"]["canonical_active_count"] = state.get("canonical_active_count", 0)
+        capsule["runtime"]["active_runtime_count"] = state.get("active_runtime_count", 0)
+        capsule["runtime"]["residue_count"] = state.get("residue_count", 0)
+        capsule["runtime"]["invalidated_count"] = state.get("invalidated_count", 0)
+        capsule["runtime"]["decision_count"] = state.get("decision_count", 0)
         capsule["freshness"] = {
             "db_snapshot_status": freshness["db_snapshot_status"],
             "decision": freshness["decision"],
@@ -3155,6 +3408,40 @@ def build_current_state_capsule(db_path):
         capsule["open_debt"] = open_debt
         if open_debt:
             capsule["warnings"].append(f"{len(open_debt)} governance/runtime debt item(s) remain open.")
+
+        debt_catalog = load_debt_runtime_catalog(conn)
+        semantic_projection = build_semantic_rt_projection(
+            str(db_file),
+            current_state=state,
+            catalog_rows=semantic_catalog,
+        )
+        debt_projection = build_debt_blocker_projection(open_debt, current_state=state)
+        residue_projection = build_historical_residue_projection(current_state=state, debt_records=debt_catalog)
+
+        capsule["projection"] = {
+            "semantic_rt": semantic_projection,
+            "debt_blocker": debt_projection,
+            "historical_residue": residue_projection,
+        }
+        capsule["runtime"]["current_rt"] = semantic_projection.get("current_rt") or state.get("current_rt") or "RT := [(ℰ≠0) ⇔R δα(ℰ>0)]"
+        capsule["runtime"]["semantic_projection_state"] = (
+            semantic_projection.get("projection_state")
+            or state.get("semantic_projection_state")
+            or "unknown"
+        )
+        capsule["runtime"]["historical_residue_state"] = (
+            residue_projection.get("projection_state")
+            or state.get("historical_residue_state")
+            or "unknown"
+        )
+        capsule["runtime"]["open_runtime_debt_count"] = debt_projection.get("open_debt_count", len(open_debt))
+        capsule["runtime"]["open_debt_count"] = capsule["runtime"]["open_runtime_debt_count"]
+        capsule["runtime"]["live_blocker_count"] = debt_projection.get("blocking_debt_count", 0)
+        capsule["runtime"]["debt_projection_state"] = debt_projection.get("projection_state", "unknown")
+        if semantic_projection.get("warnings"):
+            capsule["warnings"].extend(semantic_projection.get("warnings", []))
+        if residue_projection.get("residual_debt_count", 0) > 0 and "Historical residue remains projected." not in capsule["warnings"]:
+            capsule["warnings"].append("Historical residue remains projected.")
 
         if capsule["health"]["global_validation"] == "fail":
             capsule["blockers"].append("global_validation_failed")

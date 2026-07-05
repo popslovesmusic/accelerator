@@ -1,0 +1,105 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_020",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-05",
+  "type": "governance_patch",
+  "artifact_type": "governance_patch",
+  "title": "Typed Projection Transition Rules",
+  "priority": "HIGH",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_010",
+    "PATCH_PI_RT_CALCULUS_018",
+    "PATCH_PI_RT_CALCULUS_019"
+  ],
+  "purpose": "Define the lawful transitions from the affect/effect domain into the projection domain, especially A|E -> Π_D(A|E) -> D(*|*).",
+  "core_claim": "Projection is a typed domain transition, not an unguarded substitution.",
+  "canonical_claims": [
+    {
+      "id": "CLAIM_020_001",
+      "statement": "Projection is a typed domain transition, not an unguarded substitution.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_020_002",
+      "statement": "A|E belongs to TYPE_AFFECT_EFFECT.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_020_003",
+      "statement": "Π_D(A|E) and D(*|*) belong to TYPE_PROJECTION.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_020_004",
+      "statement": "A transition from A|E to D(*|*) is lawful only through Π_D.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_020_005",
+      "statement": "Projection preserves representable distinction while not exhausting the primitive affect/effect condition.",
+      "status": "canonical"
+    }
+  ],
+  "formal_objects": [
+    {
+      "symbol": "TPT_020",
+      "name": "Typed Projection Transition Rules",
+      "definition": "Lawful typed transitions from the affect/effect domain into the projection domain, especially A|E -> Π_D(A|E) -> D(*|*).",
+      "primitive": false,
+      "domain": "projection_transition_layer"
+    }
+  ],
+  "typed_transition_rules": [
+    {
+      "id": "TPT_020_001",
+      "name": "Affect/Effect to Projection Transition",
+      "formal": "A|E ->p Π_D(A|E)",
+      "source_type": "TYPE_AFFECT_EFFECT",
+      "target_type": "TYPE_PROJECTION",
+      "condition": "Only if Π_D is explicitly invoked."
+    },
+    {
+      "id": "TPT_020_002",
+      "name": "Projection Representation Binding",
+      "formal": "Π_D(A|E) := D(*|*)",
+      "source_type": "TYPE_PROJECTION",
+      "target_type": "TYPE_PROJECTION",
+      "condition": "Binding is representational, not primitive."
+    },
+    {
+      "id": "TPT_020_003",
+      "name": "No Direct Collapse",
+      "formal": "A|E !:= D(*|*)",
+      "meaning": "The primitive condition must not be collapsed into its projection."
+    }
+  ],
+  "validation_requirements": [
+    "RT_core unchanged.",
+    "A|E remains TYPE_AFFECT_EFFECT.",
+    "D(*|*) remains TYPE_PROJECTION.",
+    "Π_D required for projection transition.",
+    "No direct substitution of A|E for D(*|*) allowed."
+  ],
+  "required_file_updates": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_020.json",
+    "registry/formal_object_registry.json",
+    "registry/math_source_registry.json",
+    "registry/lexicon_gap_queue.json",
+    "registry/registry/lexicon_gap_queue.json"
+  ],
+  "success_criteria": {
+    "rt_core_unchanged": true,
+    "typed_affect_effect_preserved": true,
+    "typed_projection_preserved": true,
+    "projection_requires_pi_d": true,
+    "no_direct_ae_to_dstar_collapse": true
+  },
+  "next_recommended_patch": {
+    "patch_id": "PATCH_PI_RT_CALCULUS_021",
+    "title": "Typed Continuation Composition Guards",
+    "purpose": "Define typed composition guards for continuation objects and projection-aware transitions."
+  }
+}
