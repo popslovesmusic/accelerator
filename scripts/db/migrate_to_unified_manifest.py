@@ -10,7 +10,7 @@ def migrate():
     # 1. Load Sources
     registries = {
         "tool": root / "registry/tool_manifest.json",
-        "math": root / "registry/math_registry.json",
+        "math_source": root / "registry/math_source_registry.json",
         "claim": root / "registry/claim_registry.json",
         "evidence": root / "registry/evidence_index.json"
     }
@@ -46,24 +46,21 @@ def migrate():
             "data": tool
         }
 
-    # 4. Migrate Math (Theorems, Lemmas, Proofs)
-    math = data["math"]
-    for cat in ["theorems", "lemmas", "proofs"]:
-        for item in math.get(cat, []):
-            iid = item["item_id"]
-            nodes[iid] = {
-                "type": cat[:-1], # theorem, lemma, proof
-                "status": item.get("status", "draft"),
-                "data": item
+    # 4. Migrate Math Sources from the canonical source registry.
+    math_source = data["math_source"]
+    documents = math_source.get("documents", []) if isinstance(math_source, dict) else []
+    if documents:
+        for doc in documents:
+            doc_id = doc.get("doc_id") or Path(doc.get("path", "")).stem
+            if not doc_id:
+                continue
+            nodes[doc_id] = {
+                "type": "math_source_document",
+                "status": "active",
+                "data": doc
             }
-            # Extract internal math links
-            # (Note: math_registry uses dependencies_raw string, harder to parse perfectly here)
-            # But we can look at evidence_paths
-            for ep in item.get("evidence_paths", []):
-                # Check if EP matches a run_id in evidence_index
-                # Heuristic: results/YYYY-MM-DD_runNN_name
-                run_name = Path(ep).name
-                edges.append({"source": iid, "target": run_name, "relation": "verified_by"})
+            if doc.get("path"):
+                edges.append({"source": doc_id, "target": doc["path"], "relation": "described_by"})
 
     # 5. Migrate Evidence (Runs)
     for run in data["evidence"]:

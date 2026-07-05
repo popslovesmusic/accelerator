@@ -1,0 +1,121 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_007",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-05",
+  "type": "governance_patch",
+  "artifact_type": "governance_patch",
+  "title": "Mixed L/NL Operational Regime",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_001",
+    "PATCH_PI_RT_CALCULUS_002",
+    "PATCH_PI_RT_CALCULUS_003",
+    "PATCH_PI_RT_CALCULUS_004",
+    "PATCH_PI_RT_CALCULUS_005",
+    "PATCH_PI_RT_CALCULUS_006"
+  ],
+  "purpose": "Define a mixed L/NL operational regime in which L-classified and NL-classified continuation components coexist under explicit separation without introducing a third primitive foundation.",
+  "motivation": {
+    "problem": "The framework already governs L, NL, and their boundary, but mixed continuation cases still lack a dedicated derived regime classification.",
+    "resolution": "Mixed L/NL behavior is classified as a derived RT operational regime with explicit component separation and RT_core traceability."
+  },
+  "core_definition": {
+    "mixed_lnl_regime": "An RT operational regime in which L-classified and NL-classified continuation components coexist under explicitly separated domain, scale, context, or orientation partitions.",
+    "not_third_foundation": true,
+    "not_rt_core_change": true,
+    "trace_requirement": "Every mixed-regime classification must constructively trace to RT_core."
+  },
+  "governance_rules": [
+    {
+      "id": "RTCALC_MIXED_001",
+      "name": "No Third Foundation",
+      "statement": "Mixed L/NL regimes do not constitute a third primitive regime."
+    },
+    {
+      "id": "RTCALC_MIXED_002",
+      "name": "Explicit Component Declaration",
+      "statement": "Every mixed regime must declare which components are L-classified and which are NL-classified."
+    },
+    {
+      "id": "RTCALC_MIXED_003",
+      "name": "Explicit Separation Basis",
+      "statement": "The separation basis must be explicit: domain, scale, context, orientation partition, or admissibility layer."
+    },
+    {
+      "id": "RTCALC_MIXED_004",
+      "name": "Default To NL When Unseparated",
+      "statement": "If the L/NL components cannot be separated, the regime defaults to NL-classification until proven otherwise."
+    },
+    {
+      "id": "RTCALC_MIXED_005",
+      "name": "RT Trace Bound",
+      "statement": "Mixed-regime classification remains trace-bound to RT_core."
+    }
+  ],
+  "examples": {
+    "local_linear_global_nonlinear": "A regime may be locally L-classified while globally NL-classified due to residue or feedback deformation.",
+    "scale_split": "A regime may be L-classified at one scale and NL-classified at another.",
+    "context_split": "A regime may preserve L-composition under one admissibility context while becoming NL under another."
+  },
+  "deferred_items": [
+    "Formal mixed-regime composition rule",
+    "Representation rules for linear algebra",
+    "Representation rules for nonlinear algebra",
+    "Transition metric"
+  ],
+  "effects": [
+    "Registers mixed L/NL behavior as a derived RT operational regime.",
+    "Requires explicit separation of L-classified and NL-classified components.",
+    "Preserves RT_core as the trace source and keeps NL as the fallback when separation fails."
+  ],
+  "backward_compatibility": {
+    "breaking": false,
+    "notes": [
+      "Existing RT, L, NL, and boundary definitions remain canonical.",
+      "Mixed L/NL regimes do not alter RT_core or introduce a third primitive regime.",
+      "Future representation rules can attach to this mixed regime without revising the core calculus."
+    ]
+  },
+  "created_artifacts": [],
+  "updated_artifacts": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/lexicon_gap_queue.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_007.json"
+  ],
+  "source_artifacts": [
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_001.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_002.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_003.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_004.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_005.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_006.json",
+    "docs/textbook/mono_process_textbook_complete.md"
+  ],
+  "governance": {
+    "execution_claim": "not_claimed",
+    "registry_claim": "proposed_only",
+    "fabricated_history": false,
+    "notes": [
+      "Mixed L/NL regimes remain derived classifications and do not supersede RT_core.",
+      "Unseparated mixed cases default to NL-classification until the separation basis is declared."
+    ]
+  },
+  "validation": {
+    "required": [
+      "mixed_lnl_regime_present",
+      "explicit_component_declaration_present",
+      "explicit_separation_basis_present",
+      "not_third_foundation",
+      "not_rt_core_change",
+      "trace_requirement_present",
+      "default_to_nl_when_unseparated",
+      "global_validate_pass"
+    ],
+    "result": "pass"
+  },
+  "notes": [
+    "This patch is governance and architecture only.",
+    "Mixed L/NL continuation is derived under explicit separation and remains trace-bound to the canonical root expression."
+  ]
+}

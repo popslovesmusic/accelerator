@@ -37,7 +37,7 @@ Graph-structured navigation artifacts (cartography only; no theorem elevation).
 - [Atlas: Derivation Path (Process Generative Chain)](atlas_derivation_graph.md)
 
 ## Governance Statement
-This codex is a human-readable reconstruction of the mathematical system. Formal authority resides in the [Mathematical Registry](../../registry/math_registry.json) and the [Math Program Narrative](../../MATH_PROGRAM_NARRATIVE.md). No global closure or physics validation is implied.
+This codex is a human-readable reconstruction of the mathematical system. Formal authority resides in the [Math Source Registry](../../registry/math_source_registry.json) and the [Math Program Narrative](../../MATH_PROGRAM_NARRATIVE.md). No global closure or physics validation is implied.
 
 ## Status: Level C5 Validated
 The framework has achieved mathematical readiness across 64 lemmas and 4 Master Theorems, supported by high-rigor (50-seed) cross-model C++ evidence.

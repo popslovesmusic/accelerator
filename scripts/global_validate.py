@@ -216,8 +216,8 @@ class HygieneValidator:
 class MathValidator:
     def __init__(self, root_dir):
         self.root = Path(root_dir)
-        # Legacy math registry (kept for backward compatibility if present)
-        self.math_registry_path = self.root / "registry/math_registry.json"
+        # Canonical source math registry.
+        self.math_source_registry_path = self.root / "registry/math_source_registry.json"
         self.math_hashes_path = self.root / "registry/math_hashes.json"
         # Stabilized math-core lock (registry + codex)
         self.math_core_dir = self.root / "registry/math"
@@ -235,13 +235,13 @@ class MathValidator:
     def run(self):
         results = {"status": "success", "errors": [], "warnings": []}
         
-        # If neither legacy nor stabilized math core exists, treat as no-op.
-        if (not self.math_registry_path.exists()) and (not self.math_core_dir.exists()) and (not self.math_codex_dir.exists()):
+        # If neither the source registry nor stabilized math core exists, treat as no-op.
+        if (not self.math_source_registry_path.exists()) and (not self.math_core_dir.exists()) and (not self.math_codex_dir.exists()):
             return results
 
-        # Legacy check (if present)
-        if self.math_registry_path.exists():
-            with open(self.math_registry_path, 'r', encoding='utf-8') as f:
+        # Registry check (source registry only).
+        if self.math_source_registry_path.exists():
+            with open(self.math_source_registry_path, 'r', encoding='utf-8') as f:
                 registry = json.load(f)
 
             hashes = {}
@@ -250,21 +250,43 @@ class MathValidator:
                     hashes = json.load(f)
 
             new_hashes = {}
-            items = registry.get('theorems', []) + registry.get('lemmas', []) + registry.get('proofs', [])
-            for item in items:
-                item_id = item['item_id']
-                path = self.root / item['path']
-                if not path.exists():
-                    results["errors"].append(f"Math Registry Sync Error: File for '{item_id}' not found at {item['path']}")
-                    continue
-
-                current_hash = self.calculate_hash(path)
-                new_hashes[item_id] = current_hash
-
-                if item_id in hashes and hashes[item_id] != current_hash:
-                    if "TEMPLATE" in path.name:
+            if isinstance(registry, dict) and registry.get("documents"):
+                items = registry.get("documents", [])
+                for item in items:
+                    item_id = item.get("doc_id") or item.get("path")
+                    path_value = item.get("path")
+                    if not item_id or not path_value:
+                        results["errors"].append(f"Math Source Registry Sync Error: malformed source entry {item}.")
                         continue
-                    results["errors"].append(f"Governance Violation: Math file '{item['path']}' was modified (Additive-Only Rule Violation).")
+
+                    path = self.root / path_value
+                    if not path.exists():
+                        results["errors"].append(f"Math Source Registry Sync Error: File for '{item_id}' not found at {path_value}")
+                        continue
+
+                    current_hash = self.calculate_hash(path)
+                    new_hashes[item_id] = current_hash
+
+                    if item_id in hashes and hashes[item_id] != current_hash:
+                        if "TEMPLATE" in path.name:
+                            continue
+                        results["errors"].append(f"Governance Violation: Math file '{path_value}' was modified (Additive-Only Rule Violation).")
+            else:
+                items = registry.get('theorems', []) + registry.get('lemmas', []) + registry.get('proofs', [])
+                for item in items:
+                    item_id = item['item_id']
+                    path = self.root / item['path']
+                    if not path.exists():
+                        results["errors"].append(f"Math Registry Sync Error: File for '{item_id}' not found at {item['path']}")
+                        continue
+
+                    current_hash = self.calculate_hash(path)
+                    new_hashes[item_id] = current_hash
+
+                    if item_id in hashes and hashes[item_id] != current_hash:
+                        if "TEMPLATE" in path.name:
+                            continue
+                        results["errors"].append(f"Governance Violation: Math file '{item['path']}' was modified (Additive-Only Rule Violation).")
 
             if not results["errors"]:
                 with open(self.math_hashes_path, 'w', encoding='utf-8') as f:

@@ -77,6 +77,30 @@ SELECT
     '[]' AS warnings
 UNION ALL
 SELECT
+    'registry/math_source_registry.json' AS target_pattern,
+    'registry' AS authority_owner,
+    'registry/math_source_registry.json' AS authority_source,
+    'current' AS supersession_status,
+    '[]' AS superseded_by,
+    'clear' AS conflict_state,
+    'allow' AS decision,
+    'The math source registry is the canonical registry source for foundational mathematical documents and provenance.' AS reason,
+    '["registry/math_source_registry.json","docs/math/codex_master_index.md"]' AS evidence_paths,
+    '[]' AS warnings
+UNION ALL
+SELECT
+    'registry/math_registry.json' AS target_pattern,
+    'registry' AS authority_owner,
+    'registry/math_source_registry.json' AS authority_source,
+    'superseded' AS supersession_status,
+    '["registry/math_source_registry.json"]' AS superseded_by,
+    'deprecated' AS conflict_state,
+    'defer' AS decision,
+    'The legacy math registry name is deprecated in favor of registry/math_source_registry.json.' AS reason,
+    '["registry/math_source_registry.json","docs/math/codex_master_index.md","docs/math/open_questions_map.md"]' AS evidence_paths,
+    '["Use registry/math_source_registry.json instead."]' AS warnings
+UNION ALL
+SELECT
     'scripts/query_governance.py' AS target_pattern,
     'db_runtime' AS authority_owner,
     'scripts/query_governance.py' AS authority_source,

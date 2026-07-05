@@ -442,8 +442,20 @@ class CppPreferenceValidator:
 
 class MathValidator:
     def __init__(self, mandates: Dict[str, Any] = None, registry_dir: str = "registry"):
-        self.registry_path = os.path.join(registry_dir, "math_registry.json")
-        self.registry = self._load_json(self.registry_path)
+        self.registry_dir = registry_dir
+        self.source_registry_path = os.path.join(registry_dir, "math_source_registry.json")
+        self.lemma_registry_path = os.path.join(
+            "docs",
+            "theory",
+            "foundational",
+            "5_03_26 unity",
+            "math",
+            "REGISTRY_lemmas.md",
+        )
+        self.proof_registry_path = os.path.join(registry_dir, "proof_registry.json")
+        self.source_registry = self._load_json(self.source_registry_path)
+        self.lemma_registry = self._load_lemma_registry()
+        self.proof_registry = self._load_json(self.proof_registry_path)
         self.mandates = mandates.get("math_mandates", {}) if mandates else {}
 
     def _load_json(self, path: str) -> Dict[str, Any]:
@@ -452,27 +464,71 @@ class MathValidator:
                 return json.load(f)
         return {}
 
+    def _proof_type_from_status(self, status: str) -> str:
+        normalized = (status or "").strip().lower()
+        if normalized in {"simulated", "formally_proven", "formal_symbolic_closure"}:
+            return "symbolic"
+        if normalized in {"restricted_local_argument_only", "proof_plan_registered", "conditional", "conditional_discharge"}:
+            return "constructive"
+        return "heuristic"
+
+    def _load_lemma_registry(self) -> Dict[str, Dict[str, Any]]:
+        lemma_map: Dict[str, Dict[str, Any]] = {}
+        if not os.path.exists(self.lemma_registry_path):
+            return lemma_map
+
+        with open(self.lemma_registry_path, "r", encoding="utf-8-sig") as handle:
+            for raw_line in handle:
+                line = raw_line.strip()
+                if not line or line.startswith("#") or line.startswith("---") or line.startswith("Format:"):
+                    continue
+                parts = [part.strip() for part in line.split("|")]
+                if len(parts) < 5:
+                    continue
+                lemma_id, title, depends_on, status, notes = parts[:5]
+                if not re.fullmatch(r"L\d{3}", lemma_id):
+                    continue
+                lemma_map[lemma_id] = {
+                    "lemma_id": lemma_id,
+                    "title": title,
+                    "depends_on": depends_on,
+                    "status": status.lower(),
+                    "proof_type": self._proof_type_from_status(status),
+                    "notes": notes,
+                }
+        return lemma_map
+
     def validate(self, lemma_ids: List[str], target_level: str) -> Dict[str, Any]:
         """
-        Ensure lemmas have required validation status and proof type for the target claim level.
-        C5/C6 require 'simulated' or 'formally_proven'.
-        Heuristic proof type caps level at C2.
-        Constructive proof type caps level at C4.
+        Ensure lemmas/proofs have required validation status and proof type for the target claim level.
+        Source registry provenance is resolved from registry/math_source_registry.json, while lemma/proof
+        lookup is derived from the append-only lemma/proof registries.
         """
         results = {"pass": True, "errors": [], "details": []}
         if not lemma_ids:
             return results
 
-        # Index the registry for fast lookup (support both item_id and lemma_id)
-        lemma_map = {}
-        for l in self.registry.get("lemmas", []):
-            lid = l.get("lemma_id") or l.get("item_id")
-            if lid: lemma_map[lid] = l
-            
+        source_documents = []
+        if isinstance(self.source_registry, dict):
+            source_documents = self.source_registry.get("documents", []) or []
+            for doc in source_documents:
+                path = doc.get("path")
+                if path and not os.path.exists(path):
+                    results["errors"].append(
+                        f"Math Source Error: referenced document '{doc.get('doc_id') or path}' not found at {path}"
+                    )
+
         proof_map = {}
-        for p in self.registry.get("proofs", []):
-            pid = p.get("proof_id") or p.get("item_id")
-            if pid: proof_map[pid] = p
+        if isinstance(self.proof_registry, dict):
+            for p in self.proof_registry.get("proofs", []):
+                pid = p.get("proof_id") or p.get("item_id")
+                if pid:
+                    proof_map[pid] = {
+                        "status": str(p.get("proof_status", p.get("status", "unverified"))).lower(),
+                        "proof_type": self._proof_type_from_status(str(p.get("proof_status", p.get("status", "")))),
+                        "source_document": p.get("source_document"),
+                        "title": p.get("title"),
+                    }
 
         level_order = ["C0", "C1", "C2", "C3", "C4", "C5", "C6"]
         target_idx = level_order.index(target_level) if target_level in level_order else 0
@@ -482,15 +538,17 @@ class MathValidator:
         status_reqs = self.mandates.get("status_requirements", {"C5": ["simulated", "formally_proven"], "C6": ["simulated", "formally_proven"]})
 
         for lid in lemma_ids:
-            item = lemma_map.get(lid) or proof_map.get(lid)
+            item = self.lemma_registry.get(lid) or proof_map.get(lid)
             if not item:
-                results["errors"].append(f"Math Error: referenced ID '{lid}' not found in math_registry.json")
+                results["errors"].append(f"Math Error: referenced ID '{lid}' not found in source-backed registries")
                 continue
-            
-            status = item.get("status", "unverified").lower()
-            proof_type = item.get("proof_type", "heuristic").lower()
-            
+
+            status = str(item.get("status", "unverified")).lower()
+            proof_type = str(item.get("proof_type", "heuristic")).lower()
+
             item_details = {"id": lid, "status": status, "proof_type": proof_type}
+            if item.get("title"):
+                item_details["title"] = item.get("title")
             results["details"].append(item_details)
 
             # Check status vs level (e.g. C5/C6)

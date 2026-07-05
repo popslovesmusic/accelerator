@@ -56,6 +56,11 @@ Every action must be grounded in the four foundational laws:
 - **Zenodo Standards:** Publications must include a complete archival bundle (Metadata, Manifest, Falsification, Configs, Data).
 - **Textbook Synchronization Rule:** At the end of every governed task, audit `docs/textbook/mono_process_textbook_complete.md` against the task outputs, active registries, and current claim gates. If any linked textbook section is stale, patch it before finalizing the task or explicitly report the remaining mismatch.
 
+### 4.4 Governance Runtime Gate
+- Before applying patches, changing authority-bearing files, or resolving blocked dependencies, query the DB governance runtime first.
+- If the runtime cannot classify the action, fall back to the canonical registries and long-form docs.
+- Document-first routing is fallback only; it is not the default when the DB runtime can answer the decision.
+
 ## 5. Permissions & Prohibitions
 
 ### You MAY:

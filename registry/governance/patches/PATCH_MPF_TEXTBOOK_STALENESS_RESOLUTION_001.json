@@ -1,0 +1,103 @@
+{
+  "patch_id": "PATCH_MPF_TEXTBOOK_STALENESS_RESOLUTION_001",
+  "title": "Math Process Framework Textbook Staleness Resolution",
+  "artifact_type": "textbook_staleness_resolution_patch",
+  "created_at": "2026-07-04T00:00:00Z",
+  "created_by": "Codex",
+  "status": "APPLIED",
+  "applied_on": "2026-07-04",
+  "depends_on": [
+    "PATCH_DB_GOVERNANCE_RUNTIME_012"
+  ],
+  "target_artifact": "docs/textbook/mono_process_textbook_complete.md",
+  "staleness_class": "PARTIAL_STRUCTURAL_STALENESS",
+  "ruling": {
+    "textbook_status": "STALE_BUT_RECOVERABLE",
+    "not_obsolete": true,
+    "requires_major_refactor": true,
+    "requires_full_rewrite": false
+  },
+  "core_update": {
+    "canonical_rt_expression": "RT := [(E != 0) <=>R delta_a(E > 0)]",
+    "meta_domain_bindings": {
+      "A_meta": "delta_a(E > 0)",
+      "B_meta": "(E != 0)",
+      "RT": "[B_meta <=>R A_meta]"
+    },
+    "binding_rule": "Meta-domain A/B are not affect-domain A/B. Affect-domain A/B require explicit rebinding before use."
+  },
+  "stale_sections": [
+    {
+      "section": "Core Root Condition / Chapter 1.2",
+      "issue": "The textbook now canonically identifies RT itself with fixed meta-domain bindings instead of leaving the root expression implicit.",
+      "resolution": "Insert the canonical RT binding block immediately after the Primary Axiom."
+    },
+    {
+      "section": "Chapter 1.2D RT Trace-Admissibility",
+      "issue": "The base-case trace was still described as open or insufficiently bottomed out.",
+      "resolution": "Reclassify the RT base case as DEFINITION_FIXED_PROOF_PENDING."
+    },
+    {
+      "section": "Meta-Relation Family",
+      "issue": "The family could still be read as if coupling projection were an isolated primitive.",
+      "resolution": "Clarify that coupling projection is a family member induced through governed family instantiation rather than an independent primitive."
+    },
+    {
+      "section": "Orientation Space",
+      "issue": "Orientation was sometimes treated as upstream of RT rather than downstream of RT organization.",
+      "resolution": "Reframe orientation as organization over admissible RT conditions."
+    },
+    {
+      "section": "Appendix F / Open Bridges",
+      "issue": "Several entries overstated unresolved status after recent RT campaign patches.",
+      "resolution": "Audit the Appendix F status labels and split stale GAP_OPEN language into OPEN, REGISTERED_LATE, DOWNSTREAM_FORMALIZATION_PENDING, DEFINITION_FIXED_PROOF_PENDING, or PARENT_FAMILY_HARDENING_REQUIRED where appropriate."
+    }
+  ],
+  "implementation": [
+    "Add a canonical RT/meta-domain binding block to Chapter 1.2.",
+    "Mark the RT base-case trace as DEFINITION_FIXED_PROOF_PENDING.",
+    "Reframe orientation as downstream of RT organization.",
+    "Treat tensor/coupling as a governed member of the typed meta-relation family.",
+    "Normalize Appendix F status labels so stale GAP_OPEN language is replaced with the narrower governed statuses."
+  ],
+  "acceptance_criteria": [
+    "The textbook presents RT as the canonical root expression with fixed meta-domain bindings.",
+    "The RT trace base case is no longer labeled GAP_OPEN.",
+    "Orientation is presented as downstream of RT organization.",
+    "The coupling operator is not presented as an independent primitive.",
+    "Appendix F no longer uses stale GAP_OPEN status language for the affected entries.",
+    "global_validate.py reports no new validation failures caused by this patch."
+  ],
+  "expected_result": {
+    "warning_removed": true,
+    "duplicate_registry_created": false,
+    "provenance_preserved": true,
+    "runtime_behavior": "unchanged",
+    "governance_consistency": "improved"
+  },
+  "updated_artifacts": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/governance/patches/PATCH_MPF_TEXTBOOK_STALENESS_RESOLUTION_001.json"
+  ],
+  "source_artifacts": [
+    "registry/governance/patches/PATCH_DB_GOVERNANCE_RUNTIME_012.json",
+    "docs/textbook/mono_process_textbook_complete.md"
+  ],
+  "validation": {
+    "required": [
+      "canonical_rt_expression_present",
+      "meta_domain_bindings_present",
+      "base_case_reclassified_proof_pending",
+      "orientation_marked_downstream",
+      "tensor_marked_family_member",
+      "appendix_f_statuses_split",
+      "global_validate_pass"
+    ],
+    "result": "pass"
+  },
+  "notes": [
+    "The patch preserves the canonical root expression while making the fixed meta-domain bindings explicit.",
+    "No duplicate mathematical registry is introduced.",
+    "The affected Appendix F entries are reclassified conservatively rather than closed wholesale."
+  ]
+}

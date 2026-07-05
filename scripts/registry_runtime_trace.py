@@ -37,7 +37,7 @@ def run_registry_runtime_trace(db_path, query=None, limit=20):
     registries = {
         "tool_manifest": "registry/tool_manifest.json",
         "lexicon": "registry/lexicon_canonical.json",
-        "math": "registry/math_registry.json",
+        "math": "registry/math_source_registry.json",
         "compliance": "registry/compliance_charter_v2_3.json"
     }
 
@@ -71,6 +71,21 @@ def run_registry_runtime_trace(db_path, query=None, limit=20):
                                     "type": "lexicon_term",
                                     "source": path
                                 })
+                    elif key == "math":
+                        for doc in data.get("documents", []):
+                            doc_id = doc.get("doc_id") or doc.get("path")
+                            doc_path = doc.get("path")
+                            if not doc_id or not doc_path:
+                                continue
+                            report["trace_report"]["trace_entities"].append({
+                                "id": f"reg:math_source:{doc_id}",
+                                "type": "math_source_document",
+                                "source": path,
+                                "data": {
+                                    "path": doc_path,
+                                    "classification": doc.get("classification"),
+                                },
+                            })
             except Exception as e:
                 report["trace_report"]["warnings"].append(f"Error reading registry {path}: {e}")
 

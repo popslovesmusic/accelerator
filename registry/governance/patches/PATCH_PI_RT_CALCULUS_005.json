@@ -1,0 +1,108 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_005",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-04",
+  "type": "governance_patch",
+  "artifact_type": "governance_patch",
+  "title": "Nonlinear Operational Regime Derivation",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_001",
+    "PATCH_PI_RT_CALCULUS_002",
+    "PATCH_PI_RT_CALCULUS_003",
+    "PATCH_PI_RT_CALCULUS_004"
+  ],
+  "purpose": "Define the nonlinear operational regime as a derived RT classification selected when orientation-governed continuation becomes residue-conditioned, history-dependent, threshold-sensitive, feedback-coupled, or context-deforming so local composition is not preserved.",
+  "core_definition": {
+    "NL": "The nonlinear operational regime derived from RT_core when orientation-governed continuation is residue-conditioned, history-dependent, threshold-sensitive, feedback-coupled, or context-deforming such that local composition is not preserved.",
+    "not_primitive": true,
+    "not_axiomatic_floor": true,
+    "trace_requirement": "Every NL-classified regime must constructively trace to RT_core."
+  },
+  "derivation_rule": {
+    "from": "RT_core → Orientation → RT_operational_regime",
+    "to": "NL",
+    "condition": "A regime is NL-classified iff its oriented continuation fails L-classification because residue, history, admissibility, feedback, threshold, or context changes the composition rule."
+  },
+  "governance_rules": [
+    {
+      "id": "RTCALC_NONLINEAR_001",
+      "name": "Derived Nonlinear Classification",
+      "statement": "NL is a derived regime classification, not a primitive mathematics."
+    },
+    {
+      "id": "RTCALC_NONLINEAR_002",
+      "name": "Representation Downstream",
+      "statement": "NL may support nonlinear-algebraic representation only after its RT derivation is declared."
+    },
+    {
+      "id": "RTCALC_NONLINEAR_003",
+      "name": "RT Trace Bound",
+      "statement": "NL remains trace-bound to RT_core."
+    },
+    {
+      "id": "RTCALC_NONLINEAR_004",
+      "name": "Positive Deformation Source",
+      "statement": "NL is not merely the negation of L; it requires a positive deformation source such as residue, history, threshold, feedback, or context."
+    }
+  ],
+  "deferred_items": [
+    "Formal proof of NL closure",
+    "Formal boundary between L and NL",
+    "Regime transition operators",
+    "Criteria for mixed L/NL regimes"
+  ],
+  "effects": [
+    "Registers the nonlinear regime as a governed derived classification.",
+    "Keeps nonlinear-algebraic representation downstream of RT derivation.",
+    "Preserves RT_core as the trace source for NL."
+  ],
+  "backward_compatibility": {
+    "breaking": false,
+    "notes": [
+      "Existing RT definitions remain canonical.",
+      "Orientation classification remains the governing classifier.",
+      "Future mixed or transitional regimes attach after this nonlinear regime derivation."
+    ]
+  },
+  "created_artifacts": [],
+  "updated_artifacts": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/lexicon_gap_queue.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_005.json"
+  ],
+  "source_artifacts": [
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_001.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_002.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_003.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_004.json",
+    "docs/textbook/mono_process_textbook_complete.md"
+  ],
+  "governance": {
+    "execution_claim": "not_claimed",
+    "registry_claim": "proposed_only",
+    "fabricated_history": false,
+    "notes": [
+      "The nonlinear regime is derived from RT_core through orientation-governed classification.",
+      "Nonlinear-algebraic representation is permitted only after RT derivation is declared."
+    ]
+  },
+  "validation": {
+    "required": [
+      "derived_nonlinear_regime_present",
+      "orientation_governed_derivation_present",
+      "not_primitive",
+      "not_axiomatic_floor",
+      "trace_requirement_present",
+      "nonlinear_representation_downstream",
+      "lexicon_gap_registered",
+      "global_validate_pass"
+    ],
+    "result": "pass"
+  },
+  "notes": [
+    "This patch is governance and architecture only.",
+    "The nonlinear regime is derived from RT_core through orientation-governed classification and does not supersede the canonical root expression."
+  ]
+}

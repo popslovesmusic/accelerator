@@ -245,7 +245,7 @@ Recommended insertion after Section 19.4.
 
 # PATCH GROUP F — Mathematical Registry Expansion
 
-## F1. Recommended `math_registry.json` Expansion
+## F1. Recommended `math_source_registry.json` Expansion
 
 ```json
 {

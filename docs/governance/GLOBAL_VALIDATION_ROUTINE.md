@@ -10,10 +10,51 @@ Until `DEBT_VALIDATOR_IMPORT_PATH_001` is resolved, the canonical governed invoc
 
 Direct file invocation via `python scripts/global_validate.py` is currently non-canonical because package-style imports fail in that execution mode.
 
+## Governance Runtime Gate
+Before patch application, authority-bearing edits, or blocked-dependency resolution, query the DB governance runtime first.
+
+Use the current-state capsule to inspect live state:
+
+`python scripts/query_governance.py current-state`
+
+Use freshness to inspect snapshot recency before DB-dependent operations:
+
+`python scripts/query_governance.py freshness [--target <path-or-surface>]`
+
+Freshness compares source-affecting changes against the stored source marker and runtime-only DB churn against the stored runtime marker. Routine decision logs, event emission, and refresh metadata do not stale the source projection unless they move beyond the runtime marker; if freshness remains stale, the command output must name the source drift or refresh failure directly.
+
+Use authority resolution for the target surface before modifying any authority-bearing file:
+
+`python scripts/query_governance.py authority --target <path-or-surface>`
+
+Use semantic authority resolution when a patch declares semantic targets or when a theorem, operator binding, claim, domain rule, or runtime rule needs direct semantic ownership:
+
+`python scripts/query_governance.py authority --semantic <key> --semantic-type <type>`
+
+Use patch-chain resolution for the patch ID before attempting application:
+
+`python scripts/query_governance.py patch-chain --patch-id <PATCH_ID>`
+
+Use debt runtime resolution for governed debt before attempting application:
+
+`python scripts/query_governance.py debt --status <open|partial|resolved|blocking|all>`
+
+Use the minimal runtime capsule as the preferred preflight summary before opening broad docs:
+
+`python scripts/query_governance.py context-capsule [--target <path-or-surface>] [--task <label>]`
+
+Use the patch gate for an apply/block/defer decision. When a patch declares semantic targets, the patch gate also consults semantic authority before allowing application:
+
+`python scripts/query_governance.py patch-gate --patch-id <PATCH_ID> --target <path-or-surface>`
+
+Governance-significant runtime changes may also be recorded as append-only facts with `python scripts/query_governance.py emit-event` and inspected with `python scripts/query_governance.py events`.
+
+If the runtime cannot classify the action, use `outputs/audits/global_health_report.json` and the canonical docs as fallback evidence. Document-first routing is fallback only.
+
 ## Procedure
 
 ### 1. Ingestion
-The agent must read the latest `outputs/audits/global_health_report.json`.
+The agent must read the latest `outputs/audits/global_health_report.json` after the runtime gate has been queried or when the runtime does not provide a decision surface. The governed runtime order is context-capsule -> current-state -> freshness -> authority -> patch-chain -> debt -> patch-gate.
 
 ### 2. Analysis & Priority
 The agent must categorize failures into three tiers:

@@ -1,0 +1,57 @@
+{
+  "patch_id": "PATCH_PI_MEMORY_TENSOR_RT_019",
+  "campaign_id": "CAMPAIGN_MEMORY_TENSOR_RT_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-04",
+  "type": "governance_patch",
+  "patch_type": "formal_semantics",
+  "title": "Introduce Primitive Observation Relation",
+  "depends_on": [
+    "PATCH_PI_MEMORY_TENSOR_RT_018"
+  ],
+  "purpose": "Introduce observation as the first primitive relation within the affect domain, define observation as a relational process rather than an object or measurement, and establish observation as the mechanism through which distinguishable participants couple.",
+  "created_artifacts": [],
+  "updated_artifacts": [
+    "registry/axioms/memory_tensor_rt_axioms.json",
+    "registry/formal_math/memory_tensor_rt_formal_operators.json",
+    "registry/domain_translations/meta_core_affect_symbol_bindings.json",
+    "registry/governance/campaign_ledgers/memory_tensor_rt_campaign_ledger.json",
+    "docs/textbook/mono_process_textbook_complete.md"
+  ],
+  "source_artifacts": [
+    "registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_018.json",
+    "registry/axioms/memory_tensor_rt_axioms.json",
+    "registry/formal_math/memory_tensor_rt_formal_operators.json",
+    "registry/domain_translations/meta_core_affect_symbol_bindings.json",
+    "registry/governance/campaign_ledgers/memory_tensor_rt_campaign_ledger.json",
+    "docs/textbook/mono_process_textbook_complete.md"
+  ],
+  "summary": {
+    "canonical_core": "RT := [(E!=0) <=>R delta_alpha(E>0)]",
+    "A_meta": "delta_alpha(E>0)",
+    "B_meta": "(E!=0)",
+    "observation_relation": "Obs(A_affect, B_affect)",
+    "scope": "affect_domain_only"
+  },
+  "governance": {
+    "execution_claim": "not_claimed",
+    "registry_claim": "proposed_only",
+    "fabricated_history": false,
+    "notes": [
+      "Observation is introduced without altering the canonical RT.",
+      "Memory, identity, and recursive continuation remain the subject of subsequent patches."
+    ]
+  },
+  "validation": {
+    "required": [
+      "canonical_core_expression_present",
+      "observation_relation_present",
+      "observation_is_procedural",
+      "affect_domain_only",
+      "new_axiom_ids_unique",
+      "binding_ids_unique",
+      "global_validate_pass"
+    ],
+    "result": "pass"
+  }
+}

@@ -13,20 +13,25 @@ def calculate_hash(path):
 def relock_math():
     root = Path(".")
     
-    # 1. Legacy math_hashes.json (registry-based)
-    math_registry_path = root / "registry/math_registry.json"
+    # 1. Math source hashes (source-registry based)
+    math_source_registry_path = root / "registry/math_source_registry.json"
     math_hashes_path = root / "registry/math_hashes.json"
     
-    if math_registry_path.exists():
-        print("Relocking legacy math registry...")
-        with open(math_registry_path, 'r', encoding='utf-8') as f:
+    if math_source_registry_path.exists():
+        print("Relocking math source registry...")
+        with open(math_source_registry_path, 'r', encoding='utf-8') as f:
             registry = json.load(f)
         
         new_hashes = {}
-        items = registry.get('theorems', []) + registry.get('lemmas', []) + registry.get('proofs', [])
+        items = registry.get('documents', [])
         for item in items:
-            item_id = item['item_id']
-            path = root / item['path']
+            item_id = item.get('doc_id') or item.get('path')
+            path_value = item.get('path')
+            if not item_id or not path_value:
+                print(f"Warning: Malformed math source registry entry: {item}")
+                continue
+
+            path = root / path_value
             if path.exists():
                 new_hashes[item_id] = calculate_hash(path)
             else:

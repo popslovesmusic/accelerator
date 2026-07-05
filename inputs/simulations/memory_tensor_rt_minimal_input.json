@@ -1,0 +1,192 @@
+{
+  "fixture_id": "FIXTURE_MEMORY_TENSOR_RT_MINIMAL_001",
+  "status": "provisional",
+  "patch_id": "PATCH_PI_MEMORY_TENSOR_RT_014",
+  "campaign_id": "CAMPAIGN_MEMORY_TENSOR_RT_IMPLEMENTATION_001",
+  "simulation_seed": 1729,
+  "run_label": "minimal_prompt_conditioning_fixture",
+  "tensor_rank": 2,
+  "tensor_shape": [
+    3,
+    3
+  ],
+  "cells": [
+    {
+      "cell_id": "cell_0_0",
+      "displacement_vector": [
+        0.12,
+        0.81
+      ],
+      "source_symmetry_condition": "<S_memory_visual_label>",
+      "orientation_signature": [
+        0.1,
+        0.9
+      ],
+      "stability": 0.74,
+      "history_weight": 0.62,
+      "action_trace_id": "act_visual_label_001"
+    },
+    {
+      "cell_id": "cell_0_1",
+      "displacement_vector": [
+        0.21,
+        0.68
+      ],
+      "source_symmetry_condition": "<S_memory_phonetic_label>",
+      "orientation_signature": [
+        0.2,
+        0.8
+      ],
+      "stability": 0.69,
+      "history_weight": 0.58,
+      "action_trace_id": "act_phonetic_label_001"
+    },
+    {
+      "cell_id": "cell_0_2",
+      "displacement_vector": [
+        0.33,
+        0.47
+      ],
+      "source_symmetry_condition": "<S_memory_social_label>",
+      "orientation_signature": [
+        0.4,
+        0.6
+      ],
+      "stability": 0.51,
+      "history_weight": 0.44,
+      "action_trace_id": "act_social_label_001"
+    },
+    {
+      "cell_id": "cell_1_0",
+      "displacement_vector": [
+        0.76,
+        0.18
+      ],
+      "source_symmetry_condition": "<S_memory_schema_label>",
+      "orientation_signature": [
+        0.8,
+        0.2
+      ],
+      "stability": 0.82,
+      "history_weight": 0.71,
+      "action_trace_id": "act_schema_label_001"
+    },
+    {
+      "cell_id": "cell_1_1",
+      "displacement_vector": [
+        0.55,
+        0.55
+      ],
+      "source_symmetry_condition": "<S_memory_common_reference>",
+      "orientation_signature": [
+        0.5,
+        0.5
+      ],
+      "stability": 0.64,
+      "history_weight": 0.64,
+      "action_trace_id": "act_common_reference_001"
+    },
+    {
+      "cell_id": "cell_1_2",
+      "displacement_vector": [
+        0.69,
+        0.24
+      ],
+      "source_symmetry_condition": "<S_memory_authority_label>",
+      "orientation_signature": [
+        0.7,
+        0.3
+      ],
+      "stability": 0.77,
+      "history_weight": 0.68,
+      "action_trace_id": "act_authority_label_001"
+    },
+    {
+      "cell_id": "cell_2_0",
+      "displacement_vector": [
+        0.18,
+        0.72
+      ],
+      "source_symmetry_condition": "<S_memory_emotional_label>",
+      "orientation_signature": [
+        0.2,
+        0.8
+      ],
+      "stability": 0.73,
+      "history_weight": 0.79,
+      "action_trace_id": "act_emotional_label_001"
+    },
+    {
+      "cell_id": "cell_2_1",
+      "displacement_vector": [
+        0.44,
+        0.49
+      ],
+      "source_symmetry_condition": "<S_memory_context_label>",
+      "orientation_signature": [
+        0.45,
+        0.55
+      ],
+      "stability": 0.59,
+      "history_weight": 0.53,
+      "action_trace_id": "act_context_label_001"
+    },
+    {
+      "cell_id": "cell_2_2",
+      "displacement_vector": [
+        0.88,
+        0.11
+      ],
+      "source_symmetry_condition": "<S_memory_canonical_label>",
+      "orientation_signature": [
+        0.9,
+        0.1
+      ],
+      "stability": 0.86,
+      "history_weight": 0.74,
+      "action_trace_id": "act_canonical_label_001"
+    }
+  ],
+  "prompts": [
+    {
+      "prompt_id": "prompt_mandela_frame_001",
+      "prompt": "Did Mandela die in prison?",
+      "implied_memory_m": "mandela_died_in_prison_frame",
+      "expected_behavior": "Prompt should bias orientation toward social, schema, and emotional displacement traces while allowing resolution to differ from historical ground truth."
+    },
+    {
+      "prompt_id": "prompt_neutral_frame_001",
+      "prompt": "What do you remember about Nelson Mandela?",
+      "implied_memory_m": "neutral_mandela_recall_frame",
+      "expected_behavior": "Prompt should produce a less constrained orientation and broader trajectory through the tensor."
+    }
+  ],
+  "ground_truth_reference": {
+    "mandela_death_location": "not_prison",
+    "use_policy": "Ground truth is used only for comparing output accuracy; confidence must be derived from resolution stability, not from historical correctness."
+  },
+  "traceability": {
+    "simulation_protocol": "SIM_MEMORY_TENSOR_RT_MINIMAL_001",
+    "harness": "HARNESS_MEMORY_TENSOR_RT_MINIMAL_001",
+    "source_artifacts": [
+      "registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_013.json",
+      "registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_012.json",
+      "registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_011.json",
+      "registry/simulation_protocols/memory_tensor_rt_minimal_simulation.json",
+      "registry/simulation_harnesses/memory_tensor_rt_minimal_harness.json",
+      "registry/governance/campaign_ledgers/memory_tensor_rt_campaign_ledger.json"
+    ]
+  },
+  "validation": {
+    "required": [
+      "fixture_id_unique",
+      "tensor_rank_matches_shape",
+      "all_cells_have_action_trace_id",
+      "all_cells_have_source_symmetry_condition",
+      "at_least_two_prompts_present",
+      "ground_truth_not_used_for_confidence",
+      "global_validate_pass"
+    ],
+    "result": "pass"
+  }
+}

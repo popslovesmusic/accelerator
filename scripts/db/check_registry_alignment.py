@@ -27,21 +27,25 @@ def check_alignment():
                 report["status"] = "fail"
                 report["mismatches"].append(f"Claim {cid}: Paper path {path} missing from DB.")
 
-    # 2. Check Math Registry Alignment
-    with open("registry/math_registry.json", 'r') as f:
+    # 2. Check Math Source Registry Alignment
+    with open("registry/math_source_registry.json", 'r', encoding='utf-8') as f:
         math = json.load(f)
-        items = math.get("theorems", []) + math.get("lemmas", []) + math.get("proofs", [])
+        items = math.get("documents", [])
     
     for item in items:
-        iid = item["item_id"]
-        path = item["path"].replace("\\", "/")
+        iid = item.get("doc_id") or item.get("path") or "unknown"
+        path = item.get("path", "").replace("\\", "/")
+        if not path:
+            report["status"] = "fail"
+            report["mismatches"].append(f"Math Source Item {iid}: Missing source path in registry.")
+            continue
         cursor.execute("SELECT id FROM artifacts WHERE path = ?", (path,))
         if not cursor.fetchone():
             # DB uses backslashes for some reason? Let's check both
             cursor.execute("SELECT id FROM artifacts WHERE path = ?", (path.replace("/", "\\"),))
             if not cursor.fetchone():
                 report["status"] = "fail"
-                report["mismatches"].append(f"Math Item {iid}: Path {path} missing from DB.")
+                report["mismatches"].append(f"Math Source Item {iid}: Path {path} missing from DB.")
 
     conn.close()
     print(json.dumps(report, indent=2))
