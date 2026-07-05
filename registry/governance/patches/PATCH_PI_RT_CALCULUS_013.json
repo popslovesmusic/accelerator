@@ -1,0 +1,132 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_013",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-05",
+  "type": "governance_patch",
+  "artifact_type": "governance_patch",
+  "title": "Continuation Composition Algebra",
+  "priority": "HIGH",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_011",
+    "PATCH_PI_RT_CALCULUS_012"
+  ],
+  "purpose": "Define how continuation objects compose without treating composition as simple symbolic rewriting.",
+  "canonical_claims": [
+    {
+      "id": "CLAIM_013_001",
+      "statement": "Continuations may compose when their endpoint conditions are compatible.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_013_002",
+      "statement": "Composition is process composition, not symbolic concatenation.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_013_003",
+      "statement": "Residue must propagate through composed continuation.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_013_004",
+      "statement": "Composition may fail if admissibility is broken.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_013_005",
+      "statement": "Successful composition produces a new continuation object.",
+      "status": "canonical"
+    }
+  ],
+  "formal_objects": [
+    {
+      "symbol": "C(A,B) \u2218 C(B,C)",
+      "name": "Continuation Composition",
+      "definition": "A lawful process composition of continuation objects that yields C(A,C) only when the shared endpoint matches and residue/admissibility are preserved.",
+      "primitive": false,
+      "domain": "continuation_algebra"
+    },
+    {
+      "symbol": "(A ->r B) ; (B ->r C)",
+      "equivalent_object": "C(A,B) \u2218 C(B,C)",
+      "meaning": "ASCII chain notation for process composition of continuations."
+    }
+  ],
+  "laws": [
+    {
+      "id": "LAW_013_001",
+      "name": "Endpoint Compatibility",
+      "formal": "C(A,B) \u2218 C(B,C) => C(A,C)",
+      "meaning": "Composition is lawful only when the codomain of the first continuation matches the domain of the second."
+    },
+    {
+      "id": "LAW_013_002",
+      "name": "Process Composition Notation",
+      "formal": "(A ->r B) ; (B ->r C) => A ->r C",
+      "meaning": "The ASCII chain denotes process composition, not symbolic concatenation or rewrite."
+    },
+    {
+      "id": "LAW_013_003",
+      "name": "Residue Propagation",
+      "formal": "r participates in composed continuation semantics",
+      "meaning": "Residue remains part of the composite continuation's admissibility and history."
+    },
+    {
+      "id": "LAW_013_004",
+      "name": "Admissibility Failure",
+      "formal": "Composition fails if admissibility is broken at the shared endpoint",
+      "meaning": "Shared-endpoint mismatch or admissibility failure rejects the composite continuation."
+    }
+  ],
+  "architecture_update": {
+    "old": [
+      "Continuation object",
+      "Continuation chain",
+      "Continuation semantics"
+    ],
+    "new": [
+      "Continuation object",
+      "Continuation composition",
+      "Continuation semantics",
+      "Residue propagation"
+    ]
+  },
+  "deferred": [
+    "Identity continuations",
+    "Associativity",
+    "Failure taxonomy",
+    "Normal forms",
+    "Reduction algorithm",
+    "sigma_RT",
+    "Operational regime execution"
+  ],
+  "required_file_updates": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/formal_object_registry.json",
+    "registry/math_source_registry.json",
+    "registry/lexicon_gap_queue.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_013.json"
+  ],
+  "validation_requirements": [
+    "JSON parses cleanly.",
+    "Patch ledger includes PATCH_PI_RT_CALCULUS_013.",
+    "Continuation composition is a process composition, not symbolic concatenation.",
+    "Endpoint compatibility is required.",
+    "Residue/admissibility preservation is required.",
+    "RT_core remains unchanged.",
+    "global_validate.py passes aside from existing unrelated warnings."
+  ],
+  "success_criteria": {
+    "composition_law_added": true,
+    "endpoint_guard_added": true,
+    "residue_propagation_recorded": true,
+    "rt_core_unchanged": true
+  },
+  "next_recommended_patch": {
+    "patch_id": "PATCH_PI_RT_CALCULUS_014",
+    "title": "Continuation Identity and Failure Conditions",
+    "purpose": "Define identity continuations, failure modes, and rejection rules for continuation composition."
+  }
+}

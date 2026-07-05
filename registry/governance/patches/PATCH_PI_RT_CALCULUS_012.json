@@ -1,0 +1,123 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_012",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-05",
+  "type": "governance_patch",
+  "artifact_type": "governance_patch",
+  "title": "Continuation Algebra Foundations",
+  "priority": "HIGH",
+  "depends_on": [],
+  "purpose": "Elevate continuation from notation to a first-class mathematical object and establish the foundational algebra governing lawful RT continuation.",
+  "canonical_claims": [
+    {
+      "id": "CLAIM_012_001",
+      "statement": "A continuation is the primitive executable transformation relating two lawful RT conditions.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_012_002",
+      "statement": "The continuation, not the state, is the primitive executable element of RT Calculus.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_012_003",
+      "statement": "States denote stabilized conditions; continuations denote lawful process.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_012_004",
+      "statement": "A ->r B represents a continuation object whose endpoints are A and B.",
+      "status": "canonical"
+    }
+  ],
+  "formal_objects": [
+    {
+      "symbol": "C(A,B)",
+      "name": "Continuation",
+      "definition": "A lawful process object relating condition A to condition B under residue-governed admissibility.",
+      "primitive": false,
+      "domain": "continuation_algebra"
+    },
+    {
+      "symbol": "A ->r B",
+      "equivalent_object": "C(A,B)",
+      "meaning": "Residue-governed continuation object."
+    }
+  ],
+  "laws": [
+    {
+      "id": "LAW_012_001",
+      "name": "Continuation Existence",
+      "formal": "A ->r B ⇒ C(A,B)",
+      "meaning": "Every lawful residue continuation defines a continuation object."
+    },
+    {
+      "id": "LAW_012_002",
+      "name": "Endpoint Law",
+      "formal": "dom(C)=A, cod(C)=B",
+      "meaning": "Every continuation possesses an origin and a continuation condition."
+    },
+    {
+      "id": "LAW_012_003",
+      "name": "Condition Preservation",
+      "formal": "Continuation operates between lawful RT conditions.",
+      "meaning": "Continuation does not create arbitrary states."
+    },
+    {
+      "id": "LAW_012_004",
+      "name": "History Preservation",
+      "formal": "r participates in every ->r continuation.",
+      "meaning": "Residue remains part of continuation semantics."
+    }
+  ],
+  "architecture_update": {
+    "old": [
+      "Condition",
+      "Arrow",
+      "Condition"
+    ],
+    "new": [
+      "Condition",
+      "Continuation",
+      "Condition"
+    ]
+  },
+  "deferred": [
+    "Continuation composition",
+    "Associativity",
+    "Continuation identities",
+    "Arrow family",
+    "Expression grammar",
+    "Reduction algorithm",
+    "sigma_RT",
+    "Operational regime execution"
+  ],
+  "required_file_updates": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/formal_object_registry.json",
+    "registry/math_source_registry.json",
+    "registry/lexicon_gap_queue.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_012.json"
+  ],
+  "validation_requirements": [
+    "Continuation defined as a formal object.",
+    "A ->r B explicitly references the continuation object.",
+    "RT_core remains unchanged.",
+    "No composition rules introduced.",
+    "No new primitive operators introduced.",
+    "global_validate.py passes aside from existing hygiene warnings."
+  ],
+  "success_criteria": {
+    "continuation_object_defined": true,
+    "arrow_semantics_formalized": true,
+    "condition_process_condition_architecture_established": true,
+    "rt_core_unchanged": true
+  },
+  "next_recommended_patch": {
+    "patch_id": "PATCH_PI_RT_CALCULUS_013",
+    "title": "Continuation Composition Algebra",
+    "purpose": "Define lawful composition, identity, and admissibility of continuation objects."
+  }
+}

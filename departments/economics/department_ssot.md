@@ -99,7 +99,7 @@ Interpretive boilerplate:
 
 Within this department, `economics_app` remains constructively traceable to the MPF primitive lineage
 
-`(*|*) -> (A|E) -> <*>_x -> ->_x`
+`(*|*) -> (A|E) -> <*>_x -> <->_x`
 
 while retaining a domain-dominant semantic reading. `A|E` is treated as a whole expression within the dominant organizational domain rather than as separable primitive parts. Traceability does not imply equivalence.
 
@@ -130,7 +130,7 @@ These remain derived terms or projected nouns of underlying process structures.
 
 #### ECON_INT_001
 - **Title:** Economics as Domain-Dominant Projection
-- **Formal Source:** `(*|*) -> (A|E) -> <*>_x -> ->_x`
+- **Formal Source:** `(*|*) -> (A|E) -> <*>_x -> <->_x`
 - **Interpretation:** economics is treated as a domain-dominant application layer whose observables remain traceable to the core lineage without being semantically equivalent to non-economic domains.
 - **Claim Class:** `C3_structural_comparison`
 - **Status:** provisional interpretation

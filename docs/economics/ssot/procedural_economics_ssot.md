@@ -14,7 +14,7 @@ The Economics Department (`procedural_economics_app`) is established to study th
 
 ### Governed Domain-Dominant Reading
 Within the current induction layer, `economics_app` remains constructively traceable to the MPF primitive lineage
-$$ (*|*) \to (A|E) \to <*>_x \to \to_x $$
+$$ (*|*) \to (A|E) \to <*>_x \to <->_x $$
 while retaining a domain-dominant semantic reading. Here `A|E` is treated as a whole expression within the dominant organizational domain rather than as separable independently primitive parts. Traceability does not imply equivalence: economics_app concepts must trace back to the MPF lineage, but they are not thereby semantically identical to primitive behavior in non-economic domains.
 
 Under this governed reading, economics_app studies how relational affects become effects through admissible progression and how those effects accumulate into organized constraints on future progression.
@@ -38,7 +38,7 @@ The foundational debt item `ECON_DEBT_0001` (Axiomatization of the organization 
 - **Status:** `PROVISIONAL`
 - **Evidence Class:** `C1_DEFINED_PROVISIONAL`
 - **Statement:** Economic observables are dominant-domain projections of cumulative Effects produced by relational Affects between whole-expression `A|E` forms as they propagate through admissible progression.
-- **Traceability Rule:** These observables must remain constructively traceable to the primitive MPF lineage `(*|*) -> (A|E) -> <*>_x -> ->_x`.
+- **Traceability Rule:** These observables must remain constructively traceable to the primitive MPF lineage `(*|*) -> (A|E) -> <*>_x -> <->_x`.
 - **Boundary Rule:** Traceability does not imply equivalence; economics_app semantics remain domain-dominant and must not be read as direct semantic equivalence to non-economic domains.
 
 ### Structural Economic Reading

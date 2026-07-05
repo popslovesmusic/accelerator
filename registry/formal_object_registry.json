@@ -1406,6 +1406,222 @@
       "canonical_form": "Trigger_Reorient(x,c,R_\u2194,C_t,C_t^S) = TRUE iff [\u03b4_a(x;c)=\u2205] OR [C_t^S=\u2205] OR [S_closure < \u03c4_R] OR [Def_a(x,c) requires new -(i)]",
       "formal_definition": "A control rule that diverts the continuation pipeline into orientation reassessment when the current orientation regime cannot sustain admissible continuation.",
       "non_promotion_note": "This control rule manages pre-realization orientation triggers only. It does not select realized continuation q* and does not promote topology, geometry, or physics-app claims."
+    },
+    {
+      "object_id": "OBJ-AE-010",
+      "object_class": "primitive",
+      "title": "Primitive Affect/Effect Distinction Condition",
+      "status": "active",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_009.json",
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_010.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "A|E",
+      "formal_definition": "The primitive affect/effect distinction condition within the affect/effect domain. It is distinct from A_meta/B_meta and must not be substituted into RT_core bindings."
+    },
+    {
+      "object_id": "OBJ-PID-010",
+      "object_class": "operator",
+      "title": "Distinction Projection Operator",
+      "status": "active",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_010.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-AE-010"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "Π_D",
+      "canonical_form": "D(*|*) := Π_D(A|E)",
+      "formal_definition": "A projection operator that maps the primitive affect/effect distinction condition into the representational distinction schema D(*|*)."
+    },
+    {
+      "object_id": "OBJ-DSTAR-010",
+      "object_class": "projection",
+      "title": "Formal Distinction Projection",
+      "status": "active",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_009.json",
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_010.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-AE-010",
+        "OBJ-PID-010"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "D(*|*)",
+      "canonical_form": "D(*|*) := Π_D(A|E)",
+      "formal_definition": "The representational distinction projection of A|E. It is not primitive and remains domain-local to the affect/effect projection layer."
+    },
+    {
+      "object_id": "OBJ-OP-RG-ARROW-011",
+      "object_class": "operator",
+      "title": "Residue-Governed Continuation Arrow",
+      "status": "active",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_011.json",
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_012.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-RG-RESIDUE-CONSTRAINT-011",
+        "OBJ-CTN-012"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "->r",
+      "canonical_form": "A ->r B",
+      "formal_definition": "A ->r B denotes the continuation object C(A,B), the lawful process relating condition A to condition B under residue-governed admissibility; it is not a syntactic rewrite operator."
+    },
+    {
+      "object_id": "OBJ-RG-RESIDUE-CONSTRAINT-011",
+      "object_class": "constraint",
+      "title": "Residue Continuation Constraint",
+      "status": "active",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_011.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "r",
+      "formal_definition": "The historical residue condition that constrains admissible continuation from A into B."
+    },
+    {
+      "object_id": "OBJ-CTN-012",
+      "object_class": "operator",
+      "title": "Continuation Object",
+      "status": "active",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_012.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-RG-RESIDUE-CONSTRAINT-011"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "C(A,B)",
+      "canonical_form": "C(A,B)",
+      "formal_definition": "A first-class lawful process object relating condition A to condition B under residue-governed admissibility; A ->r B denotes this continuation object, and A and B are its stabilized endpoints."
+    },
+    {
+      "object_id": "OBJ-CTN-COMP-013",
+      "object_class": "operator",
+      "title": "Continuation Composition",
+      "status": "active",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_013.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-012",
+        "OBJ-RG-RESIDUE-CONSTRAINT-011"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "C(A,B) \u2218 C(B,C)",
+      "canonical_form": "C(A,B) \u2218 C(B,C) => C(A,C)",
+      "formal_definition": "Lawful process composition of continuation objects that yields C(A,C) only when the shared endpoint matches and residue/admissibility are preserved; the operation is process composition, not symbolic concatenation or rewrite."
+    },
+    {
+      "object_id": "OBJ-CTN-ID-014",
+      "object_class": "operator",
+      "title": "Identity Continuation",
+      "status": "active",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_014.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-012",
+        "OBJ-CTN-COMP-013"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "I(A)",
+      "canonical_form": "I(A) = C(A,A)",
+      "formal_definition": "The lawful continuation that preserves condition A without changing its semantic state; it is the neutral element of continuation composition and is not a static state."
+    },
+    {
+      "object_id": "OBJ-CTN-EQ-015",
+      "object_class": "operator",
+      "title": "Process Equivalence",
+      "status": "active",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_015.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-012",
+        "OBJ-CTN-COMP-013",
+        "OBJ-CTN-ID-014",
+        "OBJ-CTN-NF-015"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "≡P",
+      "canonical_form": "C_1 ≡P C_2",
+      "formal_definition": "A binary process-equivalence relation on continuation expressions that holds when they produce the same admissible continuation behavior under the same governing conditions; it is not mere symbolic equality."
+    },
+    {
+      "object_id": "OBJ-CTN-NF-015",
+      "object_class": "projection",
+      "title": "Canonical Continuation Form",
+      "status": "active",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_015.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-012",
+        "OBJ-CTN-COMP-013",
+        "OBJ-CTN-ID-014"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "NF(C)",
+      "canonical_form": "NF(C)",
+      "formal_definition": "The canonical representative of a continuation expression when admissibility holds; it supports auditability and comparison without specifying the reduction algorithm."
     }
   ],
   "registry_bindings": [

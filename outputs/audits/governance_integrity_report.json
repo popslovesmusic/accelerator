@@ -1,0 +1,97 @@
+{
+  "report_id": "GOVERNANCE_INTEGRITY_REPORT_001",
+  "phase": "Phase 1",
+  "verdict": "PATCH GAP",
+  "scope": {
+    "active_campaigns_checked": [
+      "CAMPAIGN_DB_GOVERNANCE_RUNTIME_001",
+      "CAMPAIGN_MEMORY_TENSOR_RT_IMPLEMENTATION_001",
+      "RT_CALCULUS_IMPLEMENTATION_001"
+    ],
+    "sources": [
+      "registry/governance_change_ledger.json",
+      "registry/governance/campaign_ledgers/memory_tensor_rt_campaign_ledger.json",
+      "registry/governance/patches/",
+      "scripts/query_governance.py patch-chain"
+    ]
+  },
+  "summary": {
+    "campaigns_checked": 3,
+    "campaigns_passing": 2,
+    "campaigns_with_gap": 1,
+    "duplicate_patch_ids": 0,
+    "numeric_patch_gaps": 0,
+    "record_naming_gaps": 1,
+    "orphan_patches_in_active_campaigns": 0,
+    "superseded_patches_still_marked_active": 0
+  },
+  "campaign_results": [
+    {
+      "campaign_id": "CAMPAIGN_DB_GOVERNANCE_RUNTIME_001",
+      "verdict": "PASS",
+      "status": "active",
+      "patch_count": 14,
+      "patch_range": "001-013 plus 012A",
+      "findings": [
+        "No skipped numeric patch numbers.",
+        "No duplicate patch IDs.",
+        "PATCH_DB_GOVERNANCE_RUNTIME_012A is an intentional reconciliation suffix, not a skipped number.",
+        "Patch-chain runtime accepted PATCH_DB_GOVERNANCE_RUNTIME_012A as current."
+      ],
+      "evidence": [
+        "registry/governance/patches/PATCH_DB_GOVERNANCE_RUNTIME_012A.json",
+        "registry/governance_change_ledger.json",
+        "scripts/query_governance.py patch-chain --patch-id PATCH_DB_GOVERNANCE_RUNTIME_012A --pretty"
+      ]
+    },
+    {
+      "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+      "verdict": "PASS",
+      "status": "active",
+      "patch_count": 9,
+      "patch_range": "001-009",
+      "findings": [
+        "All patch numbers are contiguous.",
+        "All patch records are present and ledgered.",
+        "Patch-chain runtime reports PATCH_PI_RT_CALCULUS_009 as applied with PATCH_PI_RT_CALCULUS_001 as its only dependency."
+      ],
+      "evidence": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_001.json",
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_009.json",
+        "registry/governance_change_ledger.json",
+        "scripts/query_governance.py patch-chain --patch-id PATCH_PI_RT_CALCULUS_009 --pretty"
+      ]
+    },
+    {
+      "campaign_id": "CAMPAIGN_MEMORY_TENSOR_RT_IMPLEMENTATION_001",
+      "verdict": "PATCH GAP",
+      "status": "reconciled",
+      "patch_count": 19,
+      "patch_range": "001-019",
+      "findings": [
+        "The campaign ledger treats PATCH_PI_MEMORY_TENSOR_RT_001 as a present provisional seed, but the repository stores it as registry/governance/patches/PI_MEMORY_TENSOR_RT_001.json rather than a PATCH_-prefixed patch record.",
+        "The runtime patch-chain lookup therefore reports PATCH_PI_MEMORY_TENSOR_RT_001 as a missing patch record.",
+        "Dependent patches inherit missing-patch/blocker warnings in runtime chain evaluation even though the seed content exists.",
+        "PATCH_PI_MEMORY_TENSOR_RT_005 and PATCH_PI_MEMORY_TENSOR_RT_015 are intentional registered_late states, not skipped numbers."
+      ],
+      "evidence": [
+        "registry/governance/patches/PI_MEMORY_TENSOR_RT_001.json",
+        "registry/governance/campaign_ledgers/memory_tensor_rt_campaign_ledger.json",
+        "registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_005.json",
+        "registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_015.json",
+        "scripts/query_governance.py patch-chain --patch-id PATCH_PI_MEMORY_TENSOR_RT_019 --pretty"
+      ]
+    }
+  ],
+  "overall_notes": [
+    "No numeric gaps were found in the active campaign series.",
+    "The only integrity break is a patch-record naming divergence in the memory-tensor seed stage.",
+    "This is a provenance/chain issue, not a content-loss issue."
+  ],
+  "related_reports": [
+    "outputs/audits/textbook_structural_audit.json",
+    "outputs/audits/textbook_staleness_report.json",
+    "outputs/audits/textbook_reference_report.json",
+    "outputs/audits/textbook_completion_report.json"
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_008",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-05",
+  "type": "governance_patch",
+  "artifact_type": "governance_patch",
+  "title": "Operational Regime Selection",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_001",
+    "PATCH_PI_RT_CALCULUS_007"
+  ],
+  "purpose": "Define operational regime selection as a deterministic RT classification process rather than a static property.",
+  "motivation": {
+    "problem": "The framework now has derived L, NL, boundary, and mixed regime classifications, but the selection step that chooses among them is still implicit.",
+    "resolution": "Operational regime selection is governed as a deterministic RT classification process driven by orientation, admissibility, residue, and declared context under RT_core."
+  },
+  "core_definition": {
+    "regime_selection": "Operational regime classification is produced by evaluating orientation together with admissibility and residue under RT_core.",
+    "selection_is_dynamic": true,
+    "selection_is_repeatable": true,
+    "trace_requirement": "Every selected regime must constructively trace to RT_core."
+  },
+  "selection_inputs": [
+    "orientation",
+    "admissibility",
+    "residue",
+    "declared context"
+  ],
+  "selection_outputs": [
+    "Linear",
+    "Nonlinear",
+    "Mixed"
+  ],
+  "governance_rules": [
+    {
+      "id": "RTCALC_SELECT_001",
+      "name": "Selection Not Assumption",
+      "statement": "Operational regimes are selected, not assumed."
+    },
+    {
+      "id": "RTCALC_SELECT_002",
+      "name": "RT Core Invariance",
+      "statement": "Selection never alters RT_core."
+    },
+    {
+      "id": "RTCALC_SELECT_003",
+      "name": "Reproducible Selection",
+      "statement": "Selection must be reproducible from the declared inputs."
+    },
+    {
+      "id": "RTCALC_SELECT_004",
+      "name": "Traceable Classification",
+      "statement": "Every regime classification must be traceable."
+    }
+  ],
+  "deferred": [
+    "Formal selection functional",
+    "Selection metric",
+    "Computational implementation"
+  ],
+  "effects": [
+    "Registers operational regime selection as a governed RT classification process.",
+    "Keeps the selection step dynamic and repeatable without altering RT_core.",
+    "Allows Linear, Nonlinear, and Mixed outputs to be selected from declared inputs."
+  ],
+  "backward_compatibility": {
+    "breaking": false,
+    "notes": [
+      "Existing RT, L, NL, boundary, and mixed definitions remain canonical.",
+      "Selection only determines which classification applies from the declared inputs.",
+      "Mixed output remains governed by the explicit separation conditions already defined in PATCH_PI_RT_CALCULUS_007."
+    ]
+  },
+  "created_artifacts": [],
+  "updated_artifacts": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/lexicon_gap_queue.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_008.json"
+  ],
+  "source_artifacts": [
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_001.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_007.json",
+    "docs/textbook/mono_process_textbook_complete.md"
+  ],
+  "governance": {
+    "execution_claim": "not_claimed",
+    "registry_claim": "proposed_only",
+    "fabricated_history": false,
+    "notes": [
+      "Operational regime selection is a deterministic classification process, not a static property.",
+      "Mixed output remains contingent on the explicit separation basis already introduced for mixed L/NL regimes."
+    ]
+  },
+  "validation": {
+    "required": [
+      "regime_selection_present",
+      "selection_inputs_present",
+      "selection_outputs_present",
+      "selection_is_dynamic",
+      "selection_is_repeatable",
+      "trace_requirement_present",
+      "global_validate_pass"
+    ],
+    "result": "pass"
+  },
+  "notes": [
+    "This patch is governance and architecture only.",
+    "Selection classifies regimes under RT_core and does not modify the canonical root expression."
+  ]
+}

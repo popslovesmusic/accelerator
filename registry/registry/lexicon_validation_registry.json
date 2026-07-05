@@ -1,0 +1,1812 @@
+{
+  "registry_version": "1.0.0",
+  "created_for": "SPM lexicon operational validation",
+  "compliance_charter": {
+    "path": "theory/lexicon/compliance_charter_v2_3.json",
+    "version": "2.3",
+    "notes": [
+      "This registry tracks lexicon evidence levels (L0\u00e2\u20ac\u201cL3) and also records charter-aware claim classifications and provenance.",
+      "If an entry is marked L3 here but does not meet the charter's v2.3 metric schema requirements, it must be treated as PROVISIONAL for charter purposes until rerun outputs are produced.",
+      "Lexicon In Check is mandatory before THEORIST finalizes hypothesis.",
+      "Lexicon Out Check is mandatory after RESEARCH_WRITER and before final claim gate."
+    ]
+  },
+  "canonical_promotion_gate_v2_3": {
+    "required_checks": [
+      "verb_test",
+      "procedural_fft",
+      "ontology_residue_check",
+      "claim_classification",
+      "data_provenance_check"
+    ],
+    "pass_condition": "Term passes charter reduction checks or is explicitly marked as derived shorthand/provisional with limits.",
+    "fail_behavior": [
+      "retain_in_gap_queue",
+      "demote_to_provisional",
+      "block_canonical_promotion"
+    ]
+  },
+  "evidence_levels": {
+    "L0": "listed term, no operational validation",
+    "L1": "single model or single-run operational support",
+    "L2": "multi-model agreement, incomplete robustness or falsification",
+    "L3": "multi-model + multi-seed + falsification passed"
+  },
+  "classification_rules": {
+    "verified": "only role-specific L3",
+    "partially_verified": "L1 or L2 for one or more roles",
+    "gap_open": "definition unclear, role untested, or evidence contradictory",
+    "deprecated": "term should not be used without user approval"
+  },
+  "terms": {
+    "asymmetry_ratio": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "provisional",
+      "roles": {
+        "orientation_regulator": {
+          "status": "L0",
+          "metrics": [
+            "asymmetry_metric",
+            "floor_interaction"
+          ],
+          "falsification": "symmetry_condition_dominance",
+          "evidence": []
+        }
+      }
+    },
+    "asymmetry_bridge_operator": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "provisional",
+      "roles": {
+        "generative_induction": {
+          "status": "L0",
+          "metrics": [
+            "orientation_selection_rate"
+          ],
+          "falsification": "selection_failure",
+          "evidence": []
+        }
+      }
+    },
+    "distinguishability_threshold": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "aliases": [
+        "theta",
+        "\u03b8"
+      ],
+      "global_status": "partially_verified",
+      "roles": {
+        "operational_selection_barrier": {
+          "status": "L2",
+          "operational_definition": "Boundary between continuous-like coherence and discrete event selection.",
+          "mechanism_classes": [
+            "ensemble_sampling",
+            "cellular_automata",
+            "graph_dynamics"
+          ],
+          "metrics": [
+            "crossing_fraction",
+            "active_fraction"
+          ],
+          "evidence_id": "THRESHOLD-002",
+          "recoverable_output_paths": [
+            "results/2026-05-21_run02_Operator_Symmetry_Sweep/artifacts/symmetry_metrics.csv",
+            "results/2026-05-21_run02_Operator_Symmetry_Sweep/artifacts/symmetry_report.json"
+          ],
+          "claim_id": "THRESHOLD-004",
+          "observables": [],
+          "output_paths": [
+            "results/2026-05-21_run02_Operator_Symmetry_Sweep/artifacts/symmetry_metrics.csv",
+            "results/2026-05-21_run02_Operator_Symmetry_Sweep/artifacts/symmetry_report.json",
+            "results/2026-05-21_run06_Global_Persistence_Scaling/artifacts/scaling_metrics.csv"
+          ],
+          "downgrade_reasons": [
+            "lexicon_term_below_L2_caps_classification"
+          ]
+        },
+        "unbound_role_in_paper": {
+          "status": "L0",
+          "claim_id": "THRESHOLD-001",
+          "evidence_id": "gate:paper.md",
+          "mechanism_classes": [
+            "ensemble_sampling",
+            "cellular_automata"
+          ],
+          "observables": [],
+          "output_paths": [
+            "results/2026-05-21_run01_Threshold_Emergence_Validation/data/stochastic_results/summary.json",
+            "results/2026-05-21_run01_Threshold_Emergence_Validation/data/ca_results/summary.json",
+            "results/2026-05-21_run02_Operator_Symmetry_Sweep/artifacts/symmetry_metrics.csv",
+            "results/2026-05-21_run02_Operator_Symmetry_Sweep/artifacts/symmetry_report.json"
+          ],
+          "downgrade_reasons": [
+            "lexicon_term_below_L2_caps_classification"
+          ]
+        }
+      }
+    },
+    "asymmetry_domain": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "partially_verified",
+      "roles": {
+        "orientation_generator": {
+          "status": "L0",
+          "operational_definition": "Relational domain condition inducing admissible orientation preference.",
+          "falsification": "orientation_degeneracy"
+        }
+      }
+    },
+    "metric_projection": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "partially_verified",
+      "roles": {
+        "observation_transform": {
+          "status": "L0",
+          "operational_definition": "Mapping of relational domain structure into measurable scalar quantities.",
+          "falsification": "non_mappable_structure"
+        }
+      }
+    },
+    "statistical_projection": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "partially_verified",
+      "roles": {
+        "statistical_mapping": {
+          "status": "L0",
+          "operational_definition": "Mapping of metric quantities to statistical realizations.",
+          "falsification": "invalid_statistical_inference"
+        }
+      }
+    },
+    "non_identity_relation_operator": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "partially_verified",
+      "roles": {
+        "distinction_preserving_relation": {
+          "status": "L0",
+          "operational_definition": "A typed relation operator stating that coupling holds while distinction remains nonzero under context X.",
+          "falsification": "identity_collapse_under_declared_relation",
+          "evidence": []
+        }
+      }
+    },
+    "preserved_distinction_operator_family": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "partially_verified",
+      "roles": {
+        "operator_family": {
+          "status": "L0",
+          "operational_definition": "Family of bracketed relational operators intended to preserve distinction across typed contexts.",
+          "falsification": "family_redundant_or_context_untyped",
+          "evidence": []
+        }
+      }
+    },
+    "preserved_non_identity_relation": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "provisional",
+      "roles": {
+        "relation_predicate": {
+          "status": "L0",
+          "operational_definition": "A scoped predicate asserting relation without identity collapse.",
+          "falsification": "relation_implies_strict_identity",
+          "evidence": []
+        }
+      }
+    },
+    "distinguishability_compression": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "partially_verified",
+      "roles": {
+        "singularity_mechanism": {
+          "status": "L2",
+          "operational_definition": "Drives the system toward the operational distinguishability floor.",
+          "mechanism_classes": [
+            "graph_dynamics"
+          ],
+          "metrics": [
+            "distinguishability_index",
+            "compression_rate"
+          ],
+          "evidence_id": "SINGULARITY-REBOUND-001",
+          "recoverable_output_paths": [
+            "results/2026-05-22_run02_Singularity_Rebound/artifacts/rebound_report.json"
+          ]
+        }
+      }
+    },
+    "operational_distinguishability_floor": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "partially_verified",
+      "roles": {
+        "rebound_boundary": {
+          "status": "L2",
+          "operational_definition": "Defines the limit of sustainable distinguishability compression.",
+          "mechanism_classes": [
+            "graph_dynamics"
+          ],
+          "metrics": [
+            "epsilon_floor",
+            "rebound_probability"
+          ],
+          "evidence_id": "SINGULARITY-REBOUND-001",
+          "recoverable_output_paths": [
+            "results/2026-05-22_run02_Singularity_Rebound/artifacts/rebound_report.json"
+          ]
+        }
+      }
+    },
+    "singularity_rebound": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "partially_verified",
+      "roles": {
+        "recursive_continuation_trigger": {
+          "status": "L2",
+          "operational_definition": "Acts as the recovery mechanism post-compression.",
+          "mechanism_classes": [
+            "graph_dynamics"
+          ],
+          "metrics": [
+            "rebound_magnitude",
+            "restoration_rate"
+          ],
+          "evidence_id": "SINGULARITY-REBOUND-001",
+          "recoverable_output_paths": [
+            "results/2026-05-22_run02_Singularity_Rebound/artifacts/rebound_report.json"
+          ]
+        }
+      }
+    },
+    "phase_signature": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "partially_verified",
+      "roles": {
+        "parametric_observable": {
+          "status": "L1",
+          "operational_definition": "The relative phase state (phi) of a directed distinction relation.",
+          "mechanism_classes": [
+            "phase_oscillator"
+          ],
+          "evidence_id": "LFCR_004_PHASE_LAG_CLOSURE_KILL",
+          "recoverable_output_paths": [
+            "results/2026-06-10_run03_LFCR_004_PILOT/paper.md"
+          ],
+          "notes": "Falsified as a foundational requirement in pilot; retained as a descriptive observable only."
+        }
+      }
+    },
+    "phase_lag_residue": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "partially_verified",
+      "roles": {
+        "parametric_observable": {
+          "status": "L1",
+          "operational_definition": "The non-zero residue produced by finite propagation.",
+          "mechanism_classes": [
+            "phase_oscillator"
+          ],
+          "evidence_id": "LFCR_004_PHASE_LAG_CLOSURE_KILL",
+          "recoverable_output_paths": [
+            "results/2026-06-10_run03_LFCR_004_PILOT/paper.md"
+          ],
+          "notes": "Falsified as a foundational requirement in pilot; retained as a descriptive observable only."
+        }
+      }
+    },
+    "non_canceling_phase": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "partially_verified",
+      "roles": {
+        "parametric_condition": {
+          "status": "L1",
+          "operational_definition": "Condition where phase-lag residue is maintained above zero-sum cancellation.",
+          "mechanism_classes": [
+            "phase_oscillator"
+          ],
+          "evidence_id": "LFCR_004_PHASE_LAG_CLOSURE_KILL",
+          "recoverable_output_paths": [
+            "results/2026-06-10_run03_LFCR_004_PILOT/paper.md"
+          ],
+          "notes": "Falsified as a foundational requirement in pilot; retained as a descriptive observable only."
+        }
+      }
+    },
+    "gravity_app": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "partially_verified",
+      "roles": {
+        "projected_observable": {
+          "status": "L1",
+          "operational_definition": "The measurable bending of relational probes toward regions of high residue density.",
+          "mechanism_classes": [
+            "structural_box"
+          ],
+          "metrics": [
+            "mean_trajectory_deflection"
+          ],
+          "evidence_id": "GRAVITY-APP-001",
+          "recoverable_output_paths": [
+            "results/2026-05-25_232611_GRAVITY_APP_RELATIONAL_CURVATURE_CAMPAIGN_V1/paper.md"
+          ]
+        }
+      }
+    },
+    "Omega_R": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "gap_open",
+      "roles": {
+        "orientation_pressure_functional": {
+          "status": "L0",
+          "operational_definition": "A functional mapping accumulated process residue (R) and orientation state (omega) to a local orientation pressure.",
+          "primitive_mapping": {
+            "residue": "R",
+            "orientation_minus_i": "omega"
+          }
+        }
+      }
+    },
+    "Pi_zeta": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "partially_verified",
+      "roles": {
+        "mathematical_projection_map": {
+          "status": "L2",
+          "operational_definition": "A projection map from the orientation equilibrium manifold to the complex s-plane.",
+          "mechanism_classes": [
+            "structural_box",
+            "graph_dynamics"
+          ],
+          "metrics": [
+            "zeta_projection_residual",
+            "u_v_coupling_residual"
+          ],
+          "evidence_id": "CLS_003_RUN_001",
+          "recoverable_output_paths": [
+            "results/2026-06-16_run03_CLS_003_StructuralBox_Extreme/artifacts/shadow_report.json"
+          ],
+          "primitive_mapping": {
+            "orientation_minus_i": "omega",
+            "delta": "projection_step"
+          }
+        }
+      }
+    },
+    "CSI_functional": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "partially_verified",
+      "roles": {
+        "residue_coupling_functional": {
+          "status": "L2",
+          "operational_definition": "A functional formalizing information transfer between residue regions.",
+          "mechanism_classes": [
+            "structural_box",
+            "graph_dynamics"
+          ],
+          "metrics": [
+            "residue_max",
+            "avg_degree"
+          ],
+          "evidence_id": "CLS_003_RUN_001",
+          "recoverable_output_paths": [
+            "results/2026-06-16_run03_CLS_003_StructuralBox_Extreme/artifacts/shadow_report.json"
+          ],
+          "primitive_mapping": {
+            "residue": "R",
+            "coupling_or_CSI": "K"
+          }
+        }
+      }
+    },
+    "orientation_equilibrium": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "partially_verified",
+      "roles": {
+        "symmetry_closure_condition": {
+          "status": "L2",
+          "operational_definition": "The condition where opposing orientation pressures from residue-conditioned continuation reach a stable equilibrium.",
+          "mechanism_classes": [
+            "structural_box",
+            "graph_dynamics"
+          ],
+          "metrics": [
+            "alignment_success_rate",
+            "order_parameter"
+          ],
+          "evidence_id": "CLS_003_RUN_001",
+          "recoverable_output_paths": [
+            "results/2026-06-16_run03_CLS_003_StructuralBox_Extreme/artifacts/shadow_report.json"
+          ],
+          "primitive_mapping": {
+            "orientation_minus_i": "balanced_selection",
+            "residue": "persistent_memory"
+          }
+        }
+      }
+    },
+    "Center_Control_Functional": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "partially_verified",
+      "roles": {
+        "midpoint_selection_operator": {
+          "status": "L2",
+          "operational_definition": "A functional used to determine a unique center-control point within an orientation equilibrium manifold.",
+          "mechanism_classes": [
+            "structural_box",
+            "graph_dynamics"
+          ],
+          "metrics": [
+            "epsilon_max",
+            "edge_count"
+          ],
+          "evidence_id": "CLS_003_RUN_001",
+          "recoverable_output_paths": [
+            "results/2026-06-16_run03_CLS_003_StructuralBox_Extreme/artifacts/shadow_report.json"
+          ],
+          "primitive_mapping": {
+            "residue": "intrinsic_midpoint",
+            "orientation_minus_i": "unbiased_center"
+          }
+        }
+      }
+    },
+    "relational_basin_signature": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "partially_verified",
+      "roles": {
+        "coupled_process_expression": {
+          "status": "L2",
+          "operational_definition": "A coupled expression Sigma_R describing basin identity through window structure, density, rotation, and events.",
+          "mechanism_classes": [
+            "procedural_topology"
+          ],
+          "metrics": [
+            "rotation_stability",
+            "window_width_stability",
+            "collision_rate"
+          ],
+          "evidence_id": "CLS_004R_RUN_001",
+          "recoverable_output_paths": [
+            "results/cls_004R_relational_analysis/relational_validation_results.json"
+          ],
+          "notes": "Full expression is the evaluative unit."
+        }
+      }
+    },
+    "admissibility_window_basin": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "verified",
+      "roles": {
+        "phase_admissibility_class": {
+          "status": "L3",
+          "operational_definition": "A basin interpreted as an admissibility window Wa defining structural phase limits.",
+          "mechanism_classes": [
+            "procedural_topology"
+          ],
+          "metrics": [
+            "wa_stability"
+          ],
+          "evidence_id": "CLS_004R_RUN_001",
+          "recoverable_output_paths": [
+            "results/cls_004R_relational_analysis/relational_validation_results.json"
+          ],
+          "hierarchy_level": "C5_CORE_INVARIANT"
+        }
+      }
+    },
+    "distinction_density": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "partially_verified",
+      "roles": {
+        "dominance_weighting_metric": {
+          "status": "L2",
+          "operational_definition": "Density of distinguishing activity rho_D used for dominance selection within a window.",
+          "mechanism_classes": [
+            "procedural_topology"
+          ],
+          "evidence_id": "CLS_004R_RUN_001",
+          "hierarchy_level": "C4_SELECTION_DYNAMIC"
+        }
+      }
+    },
+    "rotational_character": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "verified",
+      "roles": {
+        "rotational_invariant": {
+          "status": "L3",
+          "operational_definition": "The CW/CCW directional character chi of an orientation-event organization.",
+          "mechanism_classes": [
+            "procedural_topology"
+          ],
+          "metrics": [
+            "chi_stability"
+          ],
+          "evidence_id": "CLS_004R_RUN_001",
+          "recoverable_output_paths": [
+            "results/cls_004R_relational_analysis/relational_validation_results.json"
+          ],
+          "hierarchy_level": "C5_CORE_INVARIANT"
+        }
+      }
+    },
+    "orientation_event_chain": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "partially_verified",
+      "roles": {
+        "dynamic_orientation_process": {
+          "status": "L1",
+          "operational_definition": "A residue-coupled chain R_minus_i of orientation events representing an evolving process.",
+          "mechanism_classes": [
+            "procedural_topology"
+          ],
+          "evidence_id": "CLS_004R_RUN_001",
+          "hierarchy_level": "C2_INTERACTION_OBSERVABLE"
+        }
+      }
+    },
+    "boundary_front": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "partially_verified",
+      "roles": {
+        "interaction_region": {
+          "status": "L1",
+          "operational_definition": "Active interaction region partial_Wa between admissibility windows.",
+          "mechanism_classes": [
+            "procedural_topology"
+          ],
+          "evidence_id": "CLS_004R_RUN_001",
+          "notes": "Reclassifies quadrant volatility as boundary interaction.",
+          "hierarchy_level": "C2_INTERACTION_OBSERVABLE"
+        }
+      }
+    },
+    "epsilon": {
+      "roles": {
+        "unbound_role_in_paper": {
+          "status": "L0",
+          "claim_id": "UOMEGA_RIGHT_PRIMARY_001",
+          "evidence_id": "gate:paper.md",
+          "mechanism_classes": [
+            "pde"
+          ],
+          "observables": [],
+          "output_paths": [
+            "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/data/BASELINE",
+            "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/data/ADD-FA-002",
+            "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/data/ADD-FA-005",
+            "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/data/ADD-FA-007",
+            "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/data/ADD-FA-009"
+          ],
+          "downgrade_reasons": [
+            "lexicon_term_below_L2_caps_classification"
+          ]
+        },
+        "source_pressure": {
+          "status": "L0",
+          "claim_id": "UOMEGA_RIGHT_PRIMARY_001",
+          "evidence_id": "gate:paper.md",
+          "mechanism_classes": [
+            "pde"
+          ],
+          "observables": [],
+          "output_paths": [
+            "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/data/BASELINE",
+            "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/data/ADD-FA-002",
+            "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/data/ADD-FA-005",
+            "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/data/ADD-FA-007",
+            "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/data/ADD-FA-009",
+            "results/2026-06-16_run06_RT_CORE_ATTACKS/data/RT-FA-001",
+            "results/2026-06-16_run06_RT_CORE_ATTACKS/data/RT-FA-002",
+            "results/2026-06-16_run06_RT_CORE_ATTACKS/data/RT-FA-007",
+            "results/2026-06-16_run06_RT_CORE_ATTACKS/data/RT-FA-008_A",
+            "results/2026-06-16_run06_RT_CORE_ATTACKS/data/RT-FA-008_B"
+          ],
+          "downgrade_reasons": [
+            "lexicon_term_below_L2_caps_classification"
+          ]
+        }
+      }
+    },
+    "residue": {
+      "roles": {
+        "unbound_role_in_paper": {
+          "status": "L0",
+          "claim_id": "UOMEGA_RIGHT_PRIMARY_001",
+          "evidence_id": "gate:paper.md",
+          "mechanism_classes": [
+            "pde"
+          ],
+          "observables": [],
+          "output_paths": [
+            "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/data/BASELINE",
+            "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/data/ADD-FA-002",
+            "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/data/ADD-FA-005",
+            "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/data/ADD-FA-007",
+            "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/data/ADD-FA-009"
+          ],
+          "downgrade_reasons": [
+            "lexicon_term_below_L2_caps_classification"
+          ]
+        },
+        "stabilized_necessity": {
+          "status": "L0",
+          "claim_id": "UOMEGA_RIGHT_PRIMARY_001",
+          "evidence_id": "gate:paper.md",
+          "mechanism_classes": [
+            "pde"
+          ],
+          "observables": [],
+          "output_paths": [
+            "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/data/BASELINE",
+            "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/data/ADD-FA-002",
+            "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/data/ADD-FA-005",
+            "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/data/ADD-FA-007",
+            "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/data/ADD-FA-009",
+            "results/2026-06-16_run06_RT_CORE_ATTACKS/data/RT-FA-001",
+            "results/2026-06-16_run06_RT_CORE_ATTACKS/data/RT-FA-002",
+            "results/2026-06-16_run06_RT_CORE_ATTACKS/data/RT-FA-007",
+            "results/2026-06-16_run06_RT_CORE_ATTACKS/data/RT-FA-008_A",
+            "results/2026-06-16_run06_RT_CORE_ATTACKS/data/RT-FA-008_B"
+          ],
+          "downgrade_reasons": [
+            "lexicon_term_below_L2_caps_classification"
+          ]
+        }
+      }
+    },
+    "rho": {
+      "roles": {
+        "unbound_role_in_paper": {
+          "status": "L0",
+          "claim_id": "UOMEGA_RIGHT_PRIMARY_001",
+          "evidence_id": "gate:paper.md",
+          "mechanism_classes": [
+            "pde"
+          ],
+          "observables": [],
+          "output_paths": [
+            "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/data/BASELINE",
+            "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/data/ADD-FA-002",
+            "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/data/ADD-FA-005",
+            "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/data/ADD-FA-007",
+            "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/data/ADD-FA-009"
+          ],
+          "downgrade_reasons": [
+            "lexicon_term_below_L2_caps_classification"
+          ]
+        }
+      }
+    },
+    "coupling": {
+      "roles": {
+        "unbound_role_in_paper": {
+          "status": "L0",
+          "claim_id": "UOMEGA_RIGHT_PRIMARY_001",
+          "evidence_id": "gate:paper.md",
+          "mechanism_classes": [
+            "pde"
+          ],
+          "observables": [],
+          "output_paths": [
+            "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/data/BASELINE",
+            "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/data/ADD-FA-002",
+            "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/data/ADD-FA-005",
+            "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/data/ADD-FA-007",
+            "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/data/ADD-FA-009"
+          ],
+          "downgrade_reasons": [
+            "lexicon_term_below_L2_caps_classification"
+          ]
+        }
+      }
+    },
+    "Delta": {
+      "roles": {
+        "unbound_role_in_paper": {
+          "status": "L0",
+          "claim_id": "UOMEGA_RIGHT_PRIMARY_001",
+          "evidence_id": "gate:paper.md",
+          "mechanism_classes": [
+            "pde"
+          ],
+          "observables": [],
+          "output_paths": [
+            "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/data/BASELINE",
+            "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/data/ADD-FA-002",
+            "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/data/ADD-FA-005",
+            "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/data/ADD-FA-007",
+            "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/data/ADD-FA-009"
+          ],
+          "downgrade_reasons": [
+            "lexicon_term_below_L2_caps_classification"
+          ]
+        },
+        "admissibility_operator": {
+          "status": "L0",
+          "claim_id": "RT_CORE_ATTACKS_001",
+          "evidence_id": "gate:paper.md",
+          "mechanism_classes": [
+            "pde"
+          ],
+          "observables": [],
+          "output_paths": [
+            "results/2026-06-16_run06_RT_CORE_ATTACKS/data/RT-FA-001",
+            "results/2026-06-16_run06_RT_CORE_ATTACKS/data/RT-FA-002",
+            "results/2026-06-16_run06_RT_CORE_ATTACKS/data/RT-FA-007",
+            "results/2026-06-16_run06_RT_CORE_ATTACKS/data/RT-FA-008_A",
+            "results/2026-06-16_run06_RT_CORE_ATTACKS/data/RT-FA-008_B"
+          ],
+          "downgrade_reasons": [
+            "lexicon_term_below_L2_caps_classification"
+          ]
+        }
+      }
+    },
+    "orientation_minus_i": {
+      "roles": {
+        "unbound_role_in_paper": {
+          "status": "L0",
+          "claim_id": "UOMEGA_RIGHT_PRIMARY_001",
+          "evidence_id": "gate:paper.md",
+          "mechanism_classes": [
+            "pde"
+          ],
+          "observables": [],
+          "output_paths": [
+            "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/data/BASELINE",
+            "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/data/ADD-FA-002",
+            "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/data/ADD-FA-005",
+            "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/data/ADD-FA-007",
+            "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/data/ADD-FA-009"
+          ],
+          "downgrade_reasons": [
+            "lexicon_term_below_L2_caps_classification"
+          ]
+        }
+      }
+    },
+    "topological_organization": {
+      "canonical_source": "registry/lexicon/lexicon_gap_queue.json",
+      "global_status": "provisional",
+      "roles": {
+        "constraint_structure": {
+          "status": "L0",
+          "operational_definition": "The mathematical object T containing connectivity, boundary, and closure information used for admissibility filtering.",
+          "mechanism_classes": [
+            "typed_formalism"
+          ],
+          "evidence_id": "TOPOLOGICAL_ORGANIZATION_TYPEDEF_001"
+        }
+      }
+    },
+    "admissibility_structure": {
+      "canonical_source": "registry/lexicon/lexicon_gap_queue.json",
+      "global_status": "partially_verified",
+      "roles": {
+        "selection_constraint_set": {
+          "status": "L1",
+          "operational_definition": "The set of constraints derived from topological organization that filters candidate continuations.",
+          "mechanism_classes": [
+            "pde"
+          ],
+          "metrics": [
+            "epsilon_active_fraction"
+          ],
+          "evidence_id": "PRIN_2X_ADMISS_EVOL_001",
+          "recoverable_output_paths": [
+            "results/2026-06-16_run07_PRIN_2X_ADMISS_EVOL/data/summary.json"
+          ]
+        }
+      }
+    },
+    "conditioning_trace": {
+      "canonical_source": "registry/lexicon/lexicon_gap_queue.json",
+      "global_status": "partially_verified",
+      "roles": {
+        "recursive_feedback_mechanism": {
+          "status": "L1",
+          "operational_definition": "The residue-driven feedback mechanism where prior activity modifies the conditions of future legality.",
+          "mechanism_classes": [
+            "pde"
+          ],
+          "metrics": [
+            "residue_max"
+          ],
+          "evidence_id": "PRIN_2X_ADMISS_EVOL_001",
+          "recoverable_output_paths": [
+            "results/2026-06-16_run07_PRIN_2X_ADMISS_EVOL/data/summary.json"
+          ]
+        }
+      }
+    },
+    "trace_priority": {
+      "canonical_source": "registry/lexicon/lexicon_gap_queue.json",
+      "global_status": "partially_verified",
+      "roles": {
+        "identity_governor": {
+          "status": "L1",
+          "operational_definition": "Governs that truth and identity are coupled to the process trace, not the final projection.",
+          "mechanism_classes": [
+            "pde"
+          ],
+          "evidence_id": "RT-CORE-ATTACKS-001",
+          "recoverable_output_paths": [
+            "results/2026-06-16_run06_RT_CORE_ATTACKS/data/RT-FA-008_A",
+            "results/2026-06-16_run06_RT_CORE_ATTACKS/data/RT-FA-008_B"
+          ]
+        }
+      }
+    },
+    "projection_equivalence": {
+      "canonical_source": "registry/math/equivalence_relation_registry.json",
+      "global_status": "partially_verified",
+      "roles": {
+        "observable_aliasing": {
+          "status": "L1",
+          "operational_definition": "The state where distinct histories produce identical observable outcomes, which must not be conflated with identity.",
+          "mechanism_classes": [
+            "pde"
+          ],
+          "evidence_id": "RT-CORE-ATTACKS-001",
+          "recoverable_output_paths": [
+            "results/2026-06-16_run06_RT_CORE_ATTACKS/data/RT-FA-008_A",
+            "results/2026-06-16_run06_RT_CORE_ATTACKS/data/RT-FA-008_B"
+          ]
+        }
+      }
+    },
+    "knot-class selection": {
+      "canonical_source": "registry/lexicon/lexicon_gap_queue.json",
+      "global_status": "partially_verified",
+      "roles": {
+        "topological_narrowing": {
+          "status": "L1",
+          "operational_definition": "The narrowing of admissible knot-classes (measured by Betti-1 variance) conditioned by coherent orientation.",
+          "mechanism_classes": [
+            "pde",
+            "topological_analysis"
+          ],
+          "metrics": [
+            "betti_1_variance"
+          ],
+          "claim_id": "PO_OPEN_BRIDGE_001_SATISFACTION_REPORT",
+          "evidence_id": "PO_OPEN_BRIDGE_001_SATISFACTION_REPORT",
+          "recoverable_output_paths": [
+            "results/2026-06-16_run08_OPEN_BRIDGE_001_SATISFACTION/data"
+          ],
+          "downgrade_reasons": [
+            "RIGOR_TOOL_001",
+            "evidence_claim_demoted_to_PROVISIONAL_PENDING_RIGOR"
+          ],
+          "notes": "Retained for hypothesis generation only until supporting toolchain receives rigor endorsement and the result is independently replicated."
+        }
+      }
+    },
+    "orientation coherence": {
+      "canonical_source": "registry/lexicon/lexicon_gap_queue.json",
+      "global_status": "partially_verified",
+      "roles": {
+        "selection_governor": {
+          "status": "L1",
+          "operational_definition": "The degree to which orientation references remain mutually consistent, governing topological possibility space.",
+          "mechanism_classes": [
+            "pde"
+          ],
+          "metrics": [
+            "C_orient"
+          ],
+          "claim_id": "PO_OPEN_BRIDGE_001_SATISFACTION_REPORT",
+          "evidence_id": "PO_OPEN_BRIDGE_001_SATISFACTION_REPORT",
+          "recoverable_output_paths": [
+            "results/2026-06-16_run08_OPEN_BRIDGE_001_SATISFACTION/data"
+          ],
+          "downgrade_reasons": [
+            "RIGOR_TOOL_001",
+            "evidence_claim_demoted_to_PROVISIONAL_PENDING_RIGOR"
+          ],
+          "notes": "Retained for hypothesis generation only until supporting toolchain receives rigor endorsement and the result is independently replicated."
+        }
+      }
+    },
+    "Admissibility Weight": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "provisional",
+      "roles": {
+        "legality_metric": {
+          "status": "L0",
+          "operational_definition": "Measures robustness of admissibility [0,1].",
+          "metrics": [
+            "W_a"
+          ]
+        }
+      }
+    },
+    "Closure Stability (Metric)": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "provisional",
+      "roles": {
+        "legality_metric": {
+          "status": "L0",
+          "operational_definition": "Measures persistence of recursive closure [0,1].",
+          "metrics": [
+            "C_s"
+          ]
+        }
+      }
+    },
+    "RT Yield": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "provisional",
+      "roles": {
+        "formation_metric": {
+          "status": "L0",
+          "operational_definition": "Measures RT formation efficiency.",
+          "metrics": [
+            "Y_RT"
+          ]
+        }
+      }
+    },
+    "Triangle Closure Stability": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "provisional",
+      "roles": {
+        "cg_metric": {
+          "status": "L0",
+          "operational_definition": "Measures persistence of the full triadic closure [0,1].",
+          "metrics": [
+            "C_triangle"
+          ]
+        }
+      }
+    },
+    "procedural_economics_app": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "provisional",
+      "roles": {
+        "generative_induction": {
+          "status": "L0",
+          "metrics": [],
+          "falsification": "admissibility_collapse",
+          "evidence": []
+        }
+      }
+    },
+    "Distinction Wealth": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "provisional",
+      "roles": {
+        "generative_induction": {
+          "status": "L0",
+          "metrics": [],
+          "falsification": "admissibility_collapse",
+          "evidence": []
+        }
+      }
+    },
+    "money_app": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "provisional",
+      "roles": {
+        "generative_induction": {
+          "status": "L0",
+          "metrics": [],
+          "falsification": "admissibility_collapse",
+          "evidence": []
+        }
+      }
+    },
+    "firm_app": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "provisional",
+      "roles": {
+        "generative_induction": {
+          "status": "L0",
+          "metrics": [],
+          "falsification": "admissibility_collapse",
+          "evidence": []
+        }
+      }
+    },
+    "market_app": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "provisional",
+      "roles": {
+        "generative_induction": {
+          "status": "L0",
+          "metrics": [],
+          "falsification": "admissibility_collapse",
+          "evidence": []
+        }
+      }
+    },
+    "capital_app": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "provisional",
+      "roles": {
+        "generative_induction": {
+          "status": "L0",
+          "metrics": [],
+          "falsification": "admissibility_collapse",
+          "evidence": []
+        }
+      }
+    },
+    "labor_app": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "provisional",
+      "roles": {
+        "generative_induction": {
+          "status": "L0",
+          "metrics": [],
+          "falsification": "admissibility_collapse",
+          "evidence": []
+        }
+      }
+    },
+    "trade_app": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "provisional",
+      "roles": {
+        "generative_induction": {
+          "status": "L0",
+          "metrics": [],
+          "falsification": "admissibility_collapse",
+          "evidence": []
+        }
+      }
+    },
+    "innovation_app": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "provisional",
+      "roles": {
+        "generative_induction": {
+          "status": "L0",
+          "metrics": [],
+          "falsification": "admissibility_collapse",
+          "evidence": []
+        }
+      }
+    },
+    "recession_app": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "provisional",
+      "roles": {
+        "generative_induction": {
+          "status": "L0",
+          "metrics": [],
+          "falsification": "admissibility_collapse",
+          "evidence": []
+        }
+      }
+    },
+    "DI": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "provisional",
+      "roles": {
+        "generative_induction": {
+          "status": "L0",
+          "metrics": [],
+          "falsification": "admissibility_collapse",
+          "evidence": []
+        }
+      }
+    },
+    "ADW": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "provisional",
+      "roles": {
+        "generative_induction": {
+          "status": "L0",
+          "metrics": [],
+          "falsification": "admissibility_collapse",
+          "evidence": []
+        }
+      }
+    },
+    "RDW": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "provisional",
+      "roles": {
+        "generative_induction": {
+          "status": "L0",
+          "metrics": [],
+          "falsification": "admissibility_collapse",
+          "evidence": []
+        }
+      }
+    },
+    "DL": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "provisional",
+      "roles": {
+        "generative_induction": {
+          "status": "L0",
+          "metrics": [],
+          "falsification": "admissibility_collapse",
+          "evidence": []
+        }
+      }
+    },
+    "DR": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "provisional",
+      "roles": {
+        "generative_induction": {
+          "status": "L0",
+          "metrics": [],
+          "falsification": "admissibility_collapse",
+          "evidence": []
+        }
+      }
+    },
+    "DE": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "provisional",
+      "roles": {
+        "generative_induction": {
+          "status": "L0",
+          "metrics": [],
+          "falsification": "admissibility_collapse",
+          "evidence": []
+        }
+      }
+    },
+    "DC": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "provisional",
+      "roles": {
+        "generative_induction": {
+          "status": "L0",
+          "metrics": [],
+          "falsification": "admissibility_collapse",
+          "evidence": []
+        }
+      }
+    },
+    "DWI": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "provisional",
+      "roles": {
+        "generative_induction": {
+          "status": "L0",
+          "metrics": [],
+          "falsification": "admissibility_collapse",
+          "evidence": []
+        }
+      }
+    },
+    "Org_a": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "gap_open",
+      "roles": {
+        "generative_induction": {
+          "status": "L0",
+          "metrics": [],
+          "falsification": "admissibility_collapse",
+          "evidence": []
+        }
+      }
+    },
+    "Sigma_D": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "gap_open",
+      "roles": {
+        "generative_induction": {
+          "status": "L0",
+          "metrics": [],
+          "falsification": "admissibility_collapse",
+          "evidence": []
+        }
+      }
+    },
+    "Psi": {
+      "canonical_source": "registry/lexicon_canonical.json",
+      "global_status": "provisional",
+      "roles": {
+        "residue_update_operator": {
+          "status": "L0",
+          "operational_definition": "The formal operator responsible for updating residue from admissible selection outcomes.",
+          "mechanism_classes": [
+            "typed_formalism"
+          ],
+          "metrics": [],
+          "falsification": "residue_update_chain_missing_or_illegal",
+          "evidence": []
+        }
+      }
+    },
+    "projection": {
+      "canonical_source": "registry/lexicon_canonical.json",
+      "global_status": "provisional",
+      "roles": {
+        "projection_operator": {
+          "status": "L0",
+          "operational_definition": "The resolution-dependent projection operator mapping constrained continuation into observable projection space.",
+          "mechanism_classes": [
+            "typed_formalism"
+          ],
+          "metrics": [],
+          "falsification": "illegal_observable_generation",
+          "evidence": []
+        }
+      }
+    },
+    "observable": {
+      "canonical_source": "registry/lexicon_canonical.json",
+      "global_status": "provisional",
+      "roles": {
+        "projected_observable_class": {
+          "status": "L0",
+          "operational_definition": "A resolution-dependent projected observable produced only through a valid projection chain from admissible continuation.",
+          "mechanism_classes": [
+            "typed_formalism"
+          ],
+          "metrics": [],
+          "falsification": "memoryless_or_direct_observable_generation",
+          "evidence": []
+        }
+      }
+    },
+    "Affect": {
+      "canonical_source": "registry/lexicon/AFFECT_induction.json",
+      "global_status": "provisional",
+      "roles": {
+        "source_aspect": {
+          "status": "L0",
+          "operational_definition": "Functions as the 'Why' or 'Pressure' side of the primary axiom, establishing the requirement for distinction before selection.",
+          "mechanism_classes": [
+            "typed_formalism"
+          ],
+          "evidence_id": "AFFECT_FORMALIZATION_REVIEW_001"
+        }
+      }
+    },
+    "Effect": {
+      "canonical_source": "registry/lexicon/EFFECT_induction.json",
+      "global_status": "provisional",
+      "roles": {
+        "realization_aspect": {
+          "status": "L0",
+          "operational_definition": "Functions as the 'Discrete Realization' or 'Actualization' side of the primary axiom, establishing the selection result within the admissibility window.",
+          "mechanism_classes": [
+            "typed_formalism"
+          ],
+          "evidence_id": "EFFECT_FORMALIZATION_REVIEW_001"
+        }
+      }
+    },
+    "directional compatibility constraint": {
+      "canonical_source": "registry/lexicon/lexicon_gap_queue.json",
+      "global_status": "provisional",
+      "roles": {
+        "transition_selector": {
+          "status": "L0",
+          "operational_definition": "The role of orientation in defining which transitions are topologically compatible with existing process basins.",
+          "mechanism_classes": [
+            "typed_formalism"
+          ],
+          "evidence_id": "PO_OPEN_BRIDGE_001_SATISFACTION_REPORT"
+        }
+      }
+    },
+    "Admissibility Window": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "provisional",
+      "roles": {
+        "constraint_domain": {
+          "status": "L0",
+          "operational_definition": "Defines which candidate continuation increments may pass to projection or selection.",
+          "mechanism_classes": [
+            "typed_formalism"
+          ],
+          "evidence_id": "A_ALPHA_FORMALIZATION_REVIEW_001"
+        }
+      }
+    },
+    "Aligned Asymmetry": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "provisional",
+      "roles": {
+        "relational_stabilizer": {
+          "status": "L0",
+          "operational_definition": "The mechanism that prevents damping/collapse in coupled non-local systems by maintaining phase-shifted coherence.",
+          "mechanism_classes": [
+            "typed_formalism"
+          ],
+          "evidence_id": "PO_OPEN_BRIDGE_001_SATISFACTION_REPORT"
+        }
+      }
+    },
+    "Relational Cluster": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "provisional",
+      "roles": {
+        "emergent_identity": {
+          "status": "L0",
+          "operational_definition": "Measurable connected components in a phase-coherence field.",
+          "mechanism_classes": [
+            "typed_formalism"
+          ],
+          "evidence_id": "PO_OPEN_BRIDGE_001_SATISFACTION_REPORT"
+        }
+      }
+    },
+    "Symmetric Collapse": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "provisional",
+      "roles": {
+        "failure_mode": {
+          "status": "L0",
+          "operational_definition": "The abrupt cessation of activity when process gradients are eliminated.",
+          "mechanism_classes": [
+            "typed_formalism"
+          ],
+          "evidence_id": "PO_OPEN_BRIDGE_001_SATISFACTION_REPORT"
+        }
+      }
+    },
+    "Existence Scalar": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "provisional",
+      "roles": {
+        "participation_condition": {
+          "status": "L0",
+          "operational_definition": "Marks whether the left side of the core biconditional is active for a process index.",
+          "mechanism_classes": [
+            "typed_formalism"
+          ],
+          "evidence_id": "A_ALPHA_FORMALIZATION_REVIEW_001"
+        }
+      }
+    },
+    "Residue-Conditioned Biconditional": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "aliases": [
+        "residue_conditioned_two_way_constraint",
+        "residue-indexed biconditional",
+        "\u21d4_R"
+      ],
+      "global_status": "provisional",
+      "roles": {
+        "closure_connective": {
+          "status": "L0",
+          "operational_definition": "Maps distinguishable state pairs plus residue and orientation context to an admissibility outcome while preserving residue-context coherence across the core expression.",
+          "mechanism_classes": [
+            "typed_formalism"
+          ],
+          "evidence_id": "MPF_LEX_RESIDUE_CONDITIONED_BICONDITIONAL_RESOLUTION_001"
+        }
+      }
+    },
+    "Admissibility Projection": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "aliases": [
+        "admissibility_projection",
+        "Pi_A",
+        "\u03a0_A"
+      ],
+      "global_status": "provisional",
+      "roles": {
+        "pre_update_filter": {
+          "status": "L0",
+          "operational_definition": "Removes inadmissible components before the state update is applied.",
+          "mechanism_classes": [
+            "typed_formalism"
+          ],
+          "evidence_id": "MPF_LEX_ADMISSIBILITY_PROJECTION_RESOLUTION_001"
+        }
+      }
+    },
+    "Coupling Neighborhood": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "aliases": [
+        "coupling_neighborhood",
+        "csi(alpha)",
+        "CSI(alpha)"
+      ],
+      "global_status": "provisional",
+      "roles": {
+        "interaction_index_set": {
+          "status": "L0",
+          "operational_definition": "Determines which neighbor contributions enter the update-side summation.",
+          "mechanism_classes": [
+            "typed_formalism"
+          ],
+          "evidence_id": "MPF_LEX_COUPLING_NEIGHBORHOOD_RESOLUTION_001"
+        }
+      }
+    },
+    "Transport Operator": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "aliases": [
+        "transport_operator",
+        "NavT",
+        "Nav_T"
+      ],
+      "global_status": "provisional",
+      "roles": {
+        "deviation_contribution_operator": {
+          "status": "L0",
+          "operational_definition": "Maps a pair of reference-bearing states into a candidate increment contribution.",
+          "mechanism_classes": [
+            "typed_formalism"
+          ],
+          "evidence_id": "MPF_LEX_TRANSPORT_OPERATOR_RESOLUTION_001"
+        }
+      }
+    },
+    "stability-achieved": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "provisional",
+      "roles": {
+        "observable_state": {
+          "status": "L0",
+          "operational_definition": "Quantified through active_fraction and persistence_duration of a channel.",
+          "mechanism_classes": [
+            "typed_formalism"
+          ],
+          "evidence_id": "MPF_LEX_STABILITY_ACHIEVED_RESOLUTION_001"
+        }
+      }
+    },
+    "stabilization-pressure": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "global_status": "provisional",
+      "roles": {
+        "maintenance_condition": {
+          "status": "L0",
+          "operational_definition": "The external or internal signal magnitude (mismatch) coupled to the channel's update rule.",
+          "mechanism_classes": [
+            "typed_formalism"
+          ],
+          "evidence_id": "MPF_LEX_STABILIZATION_PRESSURE_RESOLUTION_001"
+        }
+      }
+    },
+    "cost-to-destabilize": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "aliases": [
+        "S_C"
+      ],
+      "global_status": "provisional",
+      "roles": {
+        "resilience_metric": {
+          "status": "L0",
+          "operational_definition": "The threshold of injected mismatch at which persistence (stability-achieved) drops to zero or transforms.",
+          "mechanism_classes": [
+            "typed_formalism"
+          ],
+          "evidence_id": "MPF_LEX_COST_TO_DESTABILIZE_RESOLUTION_001"
+        }
+      }
+    },
+    "Mismatch-Minimizing Selection": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "aliases": [
+        "mismatch_minimizing_selection",
+        "O_star",
+        "O*"
+      ],
+      "global_status": "provisional",
+      "roles": {
+        "orientation_inducing_selector": {
+          "status": "L0",
+          "operational_definition": "Chooses among admissible candidates and induces a local reference from the selected result.",
+          "mechanism_classes": [
+            "typed_formalism"
+          ],
+          "evidence_id": "MPF_LEX_MISMATCH_MINIMIZING_SELECTION_RESOLUTION_001"
+        }
+      }
+    },
+    "Transport Residual Observable": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "aliases": [
+        "transport_residual_observable",
+        "delta_T",
+        "δ_T"
+      ],
+      "global_status": "provisional",
+      "roles": {
+        "propagation_consistency_metric": {
+          "status": "L0",
+          "operational_definition": "Measures whether direct and composed transport agree under the declared transport law.",
+          "mechanism_classes": [
+            "typed_formalism"
+          ],
+          "evidence_id": "MPF_LEX_TRANSPORT_RESIDUAL_OBSERVABLE_RESOLUTION_001"
+        }
+      }
+    },
+    "Admissibility Outcome": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "aliases": [
+        "admissibility_outcome",
+        "admissible",
+        "unstable",
+        "forbidden"
+      ],
+      "global_status": "provisional",
+      "roles": {
+        "relation_codomain": {
+          "status": "L0",
+          "operational_definition": "The output category of the residue-conditioned admissibility relation.",
+          "mechanism_classes": [
+            "typed_formalism"
+          ],
+          "evidence_id": "MPF_LEX_ADMISSIBILITY_OUTCOME_RESOLUTION_001"
+        }
+      }
+    },
+    "Residue Update Operator": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "aliases": [
+        "residue_update_operator",
+        "Psi",
+        "Ψ"
+      ],
+      "global_status": "provisional",
+      "roles": {
+        "residue_accumulation_rule": {
+          "status": "L0",
+          "operational_definition": "Computes R_{t+1} from R_t and continuation data, minimally (R_t, x_t, x_{t+1}) and, when required, (ω_t, Π_A).",
+          "mechanism_classes": [
+            "typed_formalism"
+          ],
+          "evidence_id": "MPF_LEX_RESIDUE_UPDATE_OPERATOR_RESOLUTION_001"
+        }
+      }
+    },
+    "Residue Space": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "aliases": [
+        "residue_space",
+        "ℛ",
+        "R_space"
+      ],
+      "global_status": "provisional",
+      "roles": {
+        "residue_codomain": {
+          "status": "L0",
+          "operational_definition": "Defines where residue lives and what types of objects Ψ can accumulate (scalar, field, tensor, graph weights, etc.).",
+          "mechanism_classes": [
+            "typed_formalism"
+          ],
+          "evidence_id": "MPF_LEX_RESIDUE_SPACE_RESOLUTION_001"
+        }
+      }
+    },
+    "relational_array": {
+      "canonical_source": "registry/lexicon_canonical.json",
+      "aliases": [
+        "array_of_AE_conditions",
+        "neural_relational_array"
+      ],
+      "global_status": "provisional",
+      "roles": {
+        "ordered_relational_collection": {
+          "status": "L0",
+          "operational_definition": "An ordered collection of distinguishable A|E conditions treated as a process array rather than a scalar list.",
+          "mechanism_classes": [
+            "typed_formalism"
+          ],
+          "falsification": "unordered_bag_or_object_inventory",
+          "evidence": []
+        }
+      }
+    },
+    "orientation_field": {
+      "canonical_source": "registry/lexicon_canonical.json",
+      "aliases": [
+        "orientation array"
+      ],
+      "global_status": "provisional",
+      "roles": {
+        "distributed_orientation_signature": {
+          "status": "L0",
+          "operational_definition": "A field of local orientations whose pattern encodes a relational snapshot.",
+          "mechanism_classes": [
+            "typed_formalism"
+          ],
+          "falsification": "orientation_cannot_be_compared_across_neighbors",
+          "evidence": []
+        }
+      }
+    },
+    "RT_snapshot": {
+      "canonical_source": "registry/lexicon_canonical.json",
+      "aliases": [
+        "snapshot_of_relational_array",
+        "orientation_snapshot"
+      ],
+      "global_status": "provisional",
+      "roles": {
+        "whole_pattern_projection": {
+          "status": "L0",
+          "operational_definition": "A whole-field snapshot of relational orientation pattern at a chosen observation order.",
+          "mechanism_classes": [
+            "typed_formalism"
+          ],
+          "falsification": "snapshot_requires_hidden_temporal_state",
+          "evidence": []
+        }
+      }
+    },
+    "phase_mismatch": {
+      "canonical_source": "registry/lexicon_canonical.json",
+      "aliases": [
+        "phase_mismatch_packet"
+      ],
+      "global_status": "provisional",
+      "roles": {
+        "comparison_delta": {
+          "status": "L0",
+          "operational_definition": "The difference between two relational phase orientations treated as a comparison output rather than a scalar fact.",
+          "mechanism_classes": [
+            "typed_formalism"
+          ],
+          "falsification": "phase_difference_cannot_be_operationalized",
+          "evidence": []
+        }
+      }
+    },
+    "pattern_to_pattern_comparison": {
+      "canonical_source": "registry/lexicon_canonical.json",
+      "aliases": [
+        "RT_comparison",
+        "pattern comparison"
+      ],
+      "global_status": "provisional",
+      "roles": {
+        "mismatch_comparator": {
+          "status": "L0",
+          "operational_definition": "A comparison operation that returns the relational mismatch between two RT snapshots or orientation fields.",
+          "mechanism_classes": [
+            "typed_formalism"
+          ],
+          "falsification": "comparison_returns_no_distinguishable_mismatch",
+          "evidence": []
+        }
+      }
+    },
+    "cognitive_basin": {
+      "canonical_source": "registry/lexicon_canonical.json",
+      "aliases": [
+        "neural basin",
+        "functional basin"
+      ],
+      "global_status": "provisional",
+      "roles": {
+        "stabilized_relational_basin": {
+          "status": "L0",
+          "operational_definition": "A stabilized relational basin representing a cognitive subsystem with persistent orientation organization.",
+          "mechanism_classes": [
+            "typed_formalism"
+          ],
+          "falsification": "no_persistent_recurring_orientation_pattern",
+          "evidence": []
+        }
+      }
+    },
+    "neural_relational_array": {
+      "canonical_source": "registry/lexicon_canonical.json",
+      "aliases": [
+        "neural array",
+        "relational neural array"
+      ],
+      "global_status": "provisional",
+      "roles": {
+        "subsystem_relational_field": {
+          "status": "L0",
+          "operational_definition": "A subsystem-level relational array used to model grouped neural interactions as a pattern field.",
+          "mechanism_classes": [
+            "typed_formalism"
+          ],
+          "falsification": "array_collapses_to_unstructured_node_list",
+          "evidence": []
+        }
+      }
+    },
+    "array_of_AE_conditions": {
+      "canonical_source": "registry/lexicon_canonical.json",
+      "aliases": [
+        "relational_array",
+        "AE_array"
+      ],
+      "global_status": "provisional",
+      "roles": {
+        "condition_array_projection": {
+          "status": "L0",
+          "operational_definition": "A relational array interpreted as a collection of A|E conditions rather than a numeric table.",
+          "mechanism_classes": [
+            "typed_formalism"
+          ],
+          "falsification": "conditions_do_not_remain_distinguishable",
+          "evidence": []
+        }
+      }
+    },
+    "Omega_R": {
+      "canonical_source": "registry/lexicon_canonical.json",
+      "aliases": [
+        "Residue Orientation Functional"
+      ],
+      "global_status": "provisional",
+      "roles": {
+        "orientation_pressure_functional": {
+          "status": "L0",
+          "operational_definition": "Computes the orientation force induced by prior continuation residues.",
+          "mechanism_classes": [
+            "typed_formalism"
+          ],
+          "falsification": "functional_returns_zero_or_constant_value_regardless_of_residue_accumulation",
+          "evidence": []
+        }
+      }
+    },
+    "Org_a": {
+      "canonical_source": "registry/lexicon_canonical.json",
+      "aliases": [
+        "Admissible Organization Operator"
+      ],
+      "global_status": "provisional",
+      "roles": {
+        "admissible_organization_operator": {
+          "status": "L0",
+          "operational_definition": "Orders, couples, bounds, and deforms distinction-generating mismatches into recognizable signatures.",
+          "mechanism_classes": [
+            "typed_formalism"
+          ],
+          "falsification": "does_not_preserve_admissibility_or_collapse_to_static_label",
+          "evidence": []
+        }
+      }
+    },
+    "Sigma_D": {
+      "canonical_source": "registry/lexicon_canonical.json",
+      "aliases": [
+        "distinction-generating conditional mismatches"
+      ],
+      "global_status": "provisional",
+      "roles": {
+        "distinction_signature_layer": {
+          "status": "L0",
+          "operational_definition": "An admissible organization of distinction-generating conditional mismatches.",
+          "mechanism_classes": [
+            "typed_formalism"
+          ],
+          "falsification": "signatures_do_not_remain_conditionally_distinct",
+          "evidence": []
+        }
+      }
+    }
+  },
+  "meta": {
+    "core_validation_set": [
+      "process",
+      "continuation",
+      "mismatch",
+      "epsilon",
+      "rho",
+      "residue",
+      "R",
+      "Delta",
+      "Psi",
+      "Pi_A",
+      "gate",
+      "admissibility",
+      "projection",
+      "observable",
+      "NavT",
+      "-(i)",
+      "Xi",
+      "causal_sphere_of_influence",
+      "Constraint Geometry",
+      "procedural_economics_app",
+      "Distinction Wealth",
+      "Org_a",
+      "Sigma_D"
+    ]
+  }
+}

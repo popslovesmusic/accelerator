@@ -1,0 +1,164 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_011",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-05",
+  "type": "governance_patch",
+  "artifact_type": "governance_patch",
+  "title": "Residue-Governed Continuation Arrow",
+  "priority": "HIGH",
+  "depends_on": [],
+  "purpose": "Introduce A ->r B as the first explicit RT continuation-rule notation, defining residue-governed continuation as a process transformation rather than a symbolic rewrite.",
+  "canonical_claims": [
+    {
+      "id": "CLAIM_011_001",
+      "statement": "A ->r B means B is the residue-conditioned continuation of A.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_011_002",
+      "statement": "The ->r arrow is not a syntactic rewrite operator; it is a governed continuation relation.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_011_003",
+      "statement": "Residue r carries irreversible continuation history into the transition from A to B.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_011_004",
+      "statement": "A ->r B is admissible only when B preserves lawful continuation from A under residue constraints.",
+      "status": "canonical"
+    }
+  ],
+  "formal_additions": {
+    "objects": [
+      {
+        "symbol": "->r",
+        "name": "Residue-Governed Continuation Arrow",
+        "domain": "continuation_rule_layer",
+        "primitive": false,
+        "definition": "A ->r B denotes that B is a residue-conditioned lawful continuation of A."
+      },
+      {
+        "symbol": "r",
+        "name": "Residue Continuation Constraint",
+        "domain": "residue_domain",
+        "primitive": false,
+        "definition": "The historical residue condition constraining admissible continuation."
+      }
+    ],
+    "rules": [
+      {
+        "id": "RULE_011_001",
+        "name": "Residue Continuation Rule",
+        "formal": "A ->r B",
+        "reading": "A continues into B under residue-governed continuation."
+      },
+      {
+        "id": "RULE_011_002",
+        "name": "Non-Rewrite Constraint",
+        "formal": "A ->r B != Rewrite(A, B)",
+        "reading": "The continuation arrow is process-governed and must not be interpreted as mere symbolic substitution."
+      },
+      {
+        "id": "RULE_011_003",
+        "name": "Residue Preservation Constraint",
+        "formal": "A ->r B only if r(A) participates in the admissibility of B",
+        "reading": "The output condition B must remain constrained by the residue inherited from A."
+      }
+    ]
+  },
+  "domain_separation": {
+    "rule": "The symbols A and B in A ->r B are generic process states unless explicitly rebound to a specific domain.",
+    "meta_domain_guard": "A and B in this rule must not be confused with A_meta := δα(ℰ>0) and B_meta := (ℰ≠0).",
+    "affect_effect_guard": "When applied to A|E, the rule must preserve the affect/effect domain unless a projection operator explicitly changes domain."
+  },
+  "architecture_update": [
+    "RT_core",
+    "Primitive condition",
+    "Governed continuation rule",
+    "Residue-conditioned transformation",
+    "Projection",
+    "Observation"
+  ],
+  "explicitly_out_of_scope": [
+    "Full rewrite calculus",
+    "Generic continuation arrow family",
+    "Orientation-governed arrow",
+    "Projection-governed arrow",
+    "Composition algebra",
+    "Normal forms",
+    "Process equivalence",
+    "Reduction algorithm",
+    "sigma_RT formalization"
+  ],
+  "required_file_updates": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_011.json",
+    "registry/formal_object_registry.json",
+    "registry/math_source_registry.json",
+    "registry/lexicon_gap_queue.json"
+  ],
+  "validation_requirements": [
+    "JSON parses cleanly.",
+    "Patch ledger includes PATCH_PI_RT_CALCULUS_011.",
+    "RT_core remains unchanged.",
+    "->r is not described as a syntactic rewrite.",
+    "A and B are domain-guarded.",
+    "No new primitive object is introduced.",
+    "global_validate.py passes or reports only pre-existing hygiene warnings."
+  ],
+  "success_criteria": {
+    "rt_core_modified": false,
+    "residue_arrow_defined": true,
+    "non_rewrite_constraint_added": true,
+    "domain_guard_added": true,
+    "residue_preservation_constraint_added": true
+  },
+  "next_recommended_patch": {
+    "patch_id": "PATCH_PI_RT_CALCULUS_012",
+    "title": "Governed Continuation Arrow Family",
+    "purpose": "Generalize ->r into a family of governed continuation arrows such as ->o, ->a, and ->p without collapsing them into syntactic rewrite."
+  },
+  "updated_artifacts": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/formal_object_registry.json",
+    "registry/math_source_registry.json",
+    "registry/lexicon_gap_queue.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_011.json"
+  ],
+  "source_artifacts": [
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_010.json",
+    "docs/textbook/mono_process_textbook_complete.md"
+  ],
+  "governance": {
+    "execution_claim": "not_claimed",
+    "registry_claim": "proposed_only",
+    "fabricated_history": false,
+    "notes": [
+      "A and B remain generic process states unless explicitly rebound.",
+      "The arrow is a process transformation, not a symbolic rewrite.",
+      "The residue subscript r carries continuation history into admissible continuation."
+    ]
+  },
+  "validation": {
+    "required": [
+      "canonical_claims_present",
+      "projection_operator_present",
+      "distinction_projection_present",
+      "nonprimitive_projection_preserved",
+      "affect_domain_only",
+      "rt_core_unchanged",
+      "global_validate_pass"
+    ],
+    "result": "pass"
+  },
+  "notes": [
+    "This patch is governance and architecture only.",
+    "The continuation rule is domain-local and does not alter the canonical RT core.",
+    "Sigma_RT remains deferred and is not formalized here."
+  ]
+}

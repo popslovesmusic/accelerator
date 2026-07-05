@@ -36,8 +36,9 @@
 - [Appendix G: Sources and References](#appendix-g-sources-and-references)
 
 ---
-**Core Root Condition:**
+**Historical Root Condition (legacy residue):**
 $$ RT := [(\mathcal{E} \neq 0) \iff_R \delta_a(\mathcal{E} > 0)] $$
+This legacy notation is retained as historical residue. The canonical RT binding block in Section 1.2 governs the current RT_core form.
 
 \pagebreak
 
@@ -123,7 +124,7 @@ An RT expression is the minimum admissible unit of analysis. Internal aspect pos
 $$ \text{Process} = [\mathcal{E}, \mathcal{R}, \rho, \mathcal{K}, \delta, -(i)]_{\text{whole}} $$
 
 **Governed Clarification 1.2.2B.1: Primitive Form and Dominant-Domain Realization (MPF_IND_PRIMITIVE_FORM_DOMINANT_DOMAIN_001)**
-Within the current induction layer, the notation $(*|*)$ is introduced as the **primitive distinction form** and $A|E$ as its **canonical dominant-domain realization**. Neither $A$ nor $E$ nor the distinction marker $|$ is granted ontological priority over the complete expression. Accordingly, $A|E$ may be treated as primitive only as a whole expression within its dominant organizational domain, not as an assembly of independently primitive components.
+Within the current induction layer, the notation $(*|*)$ is introduced as the **primitive distinction form** and $A|E$ as its **canonical dominant-domain realization**. Within the affect/effect domain, $A|E$ is also read as the primitive affect/effect distinction condition, distinct from the meta-domain $A_{meta}/B_{meta}$ binding, and $D(*|*) := \Pi_D(A|E)$ is its formal distinction-schema projection. Neither $A$ nor $E$ nor the distinction marker $|$ is granted ontological priority over the complete expression. Accordingly, $A|E$ may be treated as primitive only as a whole expression within its dominant organizational domain, not as an assembly of independently primitive components.
 
 **Live Resolution Note (GOV_PRIMITIVE_FORM_RESOLUTION_001):**
 For current governance, $(*|*)$ is treated as a **whole-expression primitive relation-schema**. It is not a primitive object, not a detached component inventory, not a temporal generator of $A|E$, and not a free-standing operator-family ancestor outside whole-expression governance.
@@ -144,7 +145,7 @@ The framework treats $RT_{core} := [(\mathcal{E}\neq 0) \Leftrightarrow_R \delta
 An RT operational regime is a repeatable derived mode of $RT_{core}$ continuation under declared admissibility, residue, orientation, and context conditions. It is not a primitive floor, cannot supersede $RT_{core}$, and is not yet assigned to any named regime family. Every regime must constructively trace to $RT_{core} := [(\mathcal{E}\neq 0) \Leftrightarrow_R \delta\alpha(\mathcal{E}>0)]$.
 
 **Governed Clarification 1.2.2B.3: Dominant-Domain Linear/Nonlinear Binding (MPF_DOMINANT_DOMAIN_LINEAR_NONLINEAR_001)**
-Within any declared dominant domain $x$, the aspect labels $L$ and $NL$ may be treated as domain-local operational primitives only for that domain. $L$ reads as the linearizable continuation aspect and $NL$ reads as the nonlinear residue/history-conditioned continuation aspect. The relation $RT := [L \langle*\rangle_x NL]$ is admissible only as a domain-specific whole-expression reading inside the declared context, and it does not supersede the canonical core expression, here denoted $RT_{core} := [(\mathcal{E}\neq 0) \Leftrightarrow_R \delta\alpha(\mathcal{E}>0)]$. This is a procedural binding rule, not an ontological claim.
+Within any declared dominant domain $x$, the aspect labels $L$ and $NL$ may be treated as domain-local operational primitives only for that domain. $L$ reads as the linearizable continuation aspect and $NL$ reads as the nonlinear residue/history-conditioned continuation aspect. The relation $RT := [L \langle*\rangle_x NL]$ is admissible only as a domain-specific whole-expression reading inside the declared context, and it does not supersede the canonical core expression, here denoted $RT_{core} := [(\mathcal{E}\neq 0) \Leftrightarrow_R \delta\alpha(\mathcal{E}>0)]$. This is a procedural binding rule, not an ontological claim. Earlier Chapter 1 RT formula strings are retained as historical residue and should be read as pre-canonical notation, not as replacements for $RT_{core}$.
 
 **Governed Clarification 1.2.2B.4: Linear Operational Regime Derivation (PATCH_PI_RT_CALCULUS_004)**
 The linear operational regime is the orientation-classified regime of the $L$ aspect when the continuation is locally composable, role-preserving, and stable under bounded residue influence. In this derivation, $L$ is a derived regime classification selected from $RT_{core}$ through the chain $RT_{core} \to Orientation \to RT_{operational\_regime} \to L$; it is not primitive mathematics and is not an axiomatic floor. Linear-algebraic representation may be used only after the RT derivation is declared, and it remains representational shorthand rather than foundational authority. If residue, orientation shift, or admissibility deformation changes the composition rule, the $L$-classification fails.
@@ -157,6 +158,16 @@ The governed boundary between the linear and nonlinear RT operational regimes is
 
 **Governed Clarification 1.2.2B.7: Mixed L/NL Operational Regime (PATCH_PI_RT_CALCULUS_007)**
 Mixed L/NL continuation is a derived RT operational regime in which $L$-classified and $NL$-classified components coexist only under an explicit separation basis such as domain, scale, context, orientation partition, or admissibility layer. It is not a third primitive foundation and does not change $RT_{core}$. Every mixed regime must state which parts are $L$-classified and which parts are $NL$-classified; if the components cannot be separated, the regime defaults to $NL$-classification until the separation basis is declared.
+
+**Governed Clarification 1.2.2B.8: Operational Regime Selection (PATCH_PI_RT_CALCULUS_008)**
+Operational regime selection is the deterministic RT classification step that evaluates orientation, admissibility, residue, and declared context under $RT_{core}$ to produce a regime classification. It is dynamic and repeatable rather than static, does not alter $RT_{core}$, and selects among $L$, $NL$, and mixed outputs from the declared inputs. Mixed output remains valid only when the explicit separation basis introduced for mixed L/NL regimes is present; otherwise the selection remains aligned with the non-mixed derived classification.
+
+**Governed Clarification 1.2.2B.9: Primitive Distinction Projection Algebra (PATCH_PI_RT_CALCULUS_010)**
+Within the affect/effect domain, $A|E$ remains the primitive distinction condition and must not be substituted into $RT_{core}$. The formal projection operator $\Pi_D$ maps $A|E$ into the representational distinction schema $D(*|*)$ by the law $D(*|*) := \Pi_D(A|E)$. $\Pi_D$ is a projection operator, not a generative primitive; projection preserves representable distinction while not exhausting the full affect/effect condition. Accordingly, $D(*|*)$ is non-primitive and remains domain-local to the affect/effect projection layer.
+
+$$ D(*|*) := \Pi_D(A|E) $$
+$$ Primitive(D(*|*)) = \text{false} $$
+$$ \Pi_D(A|E) \subset_{\text{repr}} A|E $$
 
 **Formal Principle 1.2.2C: Aspectual RT Set as Higher-Order RT (aRT) (MPF_IND_ART_SET_OF_RTS_001)**
 A lawful set of RT expressions is itself an aspectual RT expression (`aRT`). The set of operational aspects (distinction, asymmetry, orientation, admissibility, residue, closure) are not independent modules but are themselves RT-bearing expressions.
@@ -179,7 +190,7 @@ $$ <a>_b $$
 Here $D(a)$ is retained only as a context-suppressed abstraction whose omitted conditioning must be recoverable whenever it participates in governed RT reasoning. The meta-relation family therefore defaults to conditioned operands, so expressions of the form $<a>_b \langle * \rangle_x <c>_d$ are treated as the primitive compositional layer, while arithmetic juxtaposition remains a lawful projection and not the primitive ontology.
 
 **Nesting Coupling Rule (PRIN_003):**
-Any usage of $RT(RT|RT)$ or $D(*|*)$ as shorthand for a nested expression requires an explicit declaration that it abbreviates the full coupled form $[D(*|-*) \langle f \rangle_x D(*|+*)]$. A bare distinction $D(*|*)$ alone is not RT-complete, as it represents the constraint condition component only and lacks the joint admissibility context $x$ and the coupling projection operator. In this textbook, the zero-state symmetry block below uses $D(*|*)$ only as a declared shorthand marker.
+Any usage of $RT(RT|RT)$ or $D(*|*)$ as shorthand for a nested expression requires an explicit declaration that it abbreviates the full coupled form $[D(*|-*) \langle f \rangle_x D(*|+*)]$. A bare distinction $D(*|*)$ alone is not RT-complete, as it represents the constraint condition component only and lacks the joint admissibility context $x$ and the coupling projection operator. In this textbook, the zero-state symmetry block below uses $D(*|*)$ only as a declared shorthand marker, and that local usage is separate from the affect/effect projection reading introduced above.
 
 **Nesting Admissibility Rule (GOV-RT-ZERO-RECOUPLING-001):**
 Nesting does not rehabilitate an illegal RT form unless the collapsed term retains a typed residue and is recoupled with an oppositely typed residue under a declared higher-order relation. Illegal same-sign inner forms (e.g., same-direction collapse) cannot be nested into legality unless their typed zero residues are preserved and oppositely recoupled at the outer layer.
@@ -458,12 +469,41 @@ The $\Psi$ operator (Psi) is the residue inscription map: it carries a lawful co
 
 As introduced in Chapter 1, the $\iff_R$ operator signifies that the process is closed over its residue. This closure is what allows for stability in an otherwise fluid process.
 
-**Formal Block 2.3.1: Directional Residue Operators**
-$$ \to_r : \text{Forward residue continuation} $$
+**Formal Block 2.3.1: Governed Continuation Object**
+$$ C(A,B) \equiv A \to_r B : \text{Continuation object relating } A \text{ to } B \text{ under residue-governed admissibility} $$
+$$ \operatorname{dom}(C)=A,\quad \operatorname{cod}(C)=B $$
+$$ r : \text{Residue continuation constraint} $$
 $$ \gets_r : \text{Reverse residue support} $$
 
 **Commentary:**
-The relation $\iff_R$ can be decomposed into forward and reverse components. $\to_r$ describes how the current residue biases the next state, while $\gets_r$ describes how the new state is supported by the historical residue. This dual-directionality is the core of recursive stabilization.
+The notation $A \to_r B$ designates the continuation object $C(A,B)$. Continuation is treated here as the lawful process object relating stabilized condition $A$ to stabilized condition $B$ under residue-governed admissibility. The notation is not a syntactic rewrite operator, and the subscript $r$ denotes the residue continuation constraint that participates in admissibility. $A$ and $B$ are generic process states unless explicitly rebound to a domain, and they name the endpoints of the continuation rather than an independent primitive floor. When the notation is applied to a rebound domain such as $A|E$, the domain remains intact unless an explicit projection operator changes domain. The relation $\iff_R$ can be decomposed into forward and reverse components. $\to_r$ describes how the current residue biases the next state, while $\gets_r$ describes how the new state is supported by the historical residue. This dual-directionality is the core of recursive stabilization.
+
+**Formal Block 2.3.2: Continuation Composition**
+$$ C(A,B) \circ C(B,C) \Rightarrow C(A,C) $$
+$$ (A \to_r B) ; (B \to_r C) \Rightarrow A \to_r C $$
+$$ \operatorname{cod}(C(A,B)) = \operatorname{dom}(C(B,C)) $$
+
+**Commentary:**
+The composition law is process composition, not symbolic concatenation. A composite continuation is admitted only when the shared endpoint matches and residue-admissibility is preserved across the join. Residue remains part of the composite semantics, so the lawful composite carries forward historical constraint from the left continuation into the new stabilized endpoint. If endpoint compatibility fails or admissibility breaks, no lawful composite continuation is produced. Associativity is deferred to later patches, and the reduction algorithm for canonical forms remains deferred.
+
+**Formal Block 2.3.3: Identity Continuation and Admissibility**
+$$ I(A) \equiv C(A,A) : \text{Identity continuation preserving } A \text{ under lawful continuation composition} $$
+$$ I(A) \circ C(A,B) = C(A,B) $$
+$$ C(A,B) \circ I(B) = C(A,B) $$
+$$ C(A,B) \text{ exists only if } admissible(A,B) $$
+$$ \neg admissible(A,B) \Rightarrow \text{composition is undefined} $$
+
+**Commentary:**
+The identity continuation is the neutral element of continuation composition. It is not a static state; it is the lawful continuation that preserves condition $A$ while leaving semantic state unchanged. Admissibility governs the existence of the continuation object, and if admissibility fails no continuation object is produced. This separates lawful continuation from inadmissible transition without altering $RT_{core}$.
+
+**Formal Block 2.3.4: Process Equivalence and Canonical Continuation Forms**
+$$ C_1 \equiv_P C_2 : \text{Process-equivalent continuations under shared admissibility, residue, orientation, and context} $$
+$$ NF(C) : \text{Canonical continuation form of } C $$
+$$ NF(C_1) = NF(C_2) \Rightarrow C_1 \equiv_P C_2 $$
+$$ C_1 \equiv_P C_2 \not\Rightarrow C_1 = C_2 $$
+
+**Commentary:**
+The process-equivalence relation compares lawful continuation behavior, not just surface syntax. Two continuation expressions may differ syntactically while still being process-equivalent if they produce the same admissible continuation behavior under the same governing conditions. $NF(C)$ names the canonical representative of a continuation expression when admissibility holds. Canonical forms support auditability and comparison, but the reduction algorithm that computes them remains deferred.
 
 ---
 
@@ -1473,6 +1513,9 @@ When $\delta_a(x;c) = \emptyset$, the process faces a structured fork resolved b
 **Commentary:**
 The 0-state is not just process termination; it is the collapse of the conditions under which existence was possible. Process existence is not a static given; it is continuously earned by the availability of admissible continuation.
 
+**Deferred Expansion Note:**
+The extended crisis branch, empty-admissibility recovery, recursive continuation, state-transition equations, convergence proof, failure branch, recovery branch, and return-to-stable-regime material are intentionally deferred to a later revision of this textbook.
+
 ---
 
 ## 6.5 Formal Closure of the Admissibility Kernel
@@ -2046,7 +2089,7 @@ Individual knots rarely exist in isolation. They interact through the shared ori
 
 **Formal Block 11.2.1: Braid Formation**
 $$ K_1, K_2, \dots, K_n \xrightarrow{\text{Arb}_A} B_K $$
-$$ B_K := [ \text{MISSING DEFINITION: Formal braid formation rule} ] $$
+$$ B_K := [ \text{DEFERRED: Formal braid formation rule pending later braid-calculus revision} ] $$
 
 **Commentary:**
 Braids ($B_K$) are formed when multiple process strands (knots) become entangled through **triadic closure** or recursive arbitration. This grouping represents a higher order of stabilization. Within this framework, a "particle" is projected from the invariant properties of a specific braid structure.
@@ -2371,7 +2414,7 @@ Economic behavior is treated as a projection of organized admissible distinction
 
 **Governed Clarification 13.1.2: A|E Traceability Without Cross-Domain Equivalence**
 Within the current induction layer, economics\_app remains traceable to the primitive lineage
-$$ (*|*) \to (A|E) \to <*>_x \to \to_x $$
+$$ (*|*) \to (A|E) \to <*>_x \to <->_x $$
 but this traceability does not collapse economics\_app into semantic equivalence with other application domains. The notation $A|E$ is treated here as a whole-expression dominant-domain realization. Economics\_app therefore studies how relational affects become effects through admissible progression, and how those effects accumulate into organized constraints on future progression.
 
 **Governance Limit:**
@@ -3048,8 +3091,11 @@ $$ \text{Stage\_1\_Status} := \text{STRUCTURALLY\_QUALIFIED\_NOT\_FORMALLY\_CLOS
 | $\gets_a$ | Reverse Admissibility | Candidate | Validates backward support. |
 | $\to_{ra}$ | Residue-Admissible Transition | Candidate | Transition preserving identity signature. |
 | $\iff_{ra}$ | Residue-Admissible Correspondence | Candidate | Correspondence across identity continuation. |
-| $\to_r$ | Forward Residue | Candidate | Biases the next state based on history. |
-| $\gets_r$ | Reverse Residue | Candidate | Anchors the current state in history. |
+| $\to_r$ | Residue-Governed Continuation | Candidate | Governs lawful continuation under residue constraints. |
+| $r$ | Residue Continuation Constraint | Candidate | Constrains continuation by inherited residue history. |
+| $\gets_r$ | Reverse Residue Support | Candidate | Anchors the current state in history. |
+| $C(A,B) \circ C(B,C)$ | Continuation Composition | Candidate | Process composition of continuation objects; lawful only when the shared endpoint matches and residue/admissibility are preserved. |
+| $I(A)$ | Identity Continuation | Candidate | Neutral continuation preserving condition $A$ and acting as the identity element of continuation composition. |
 | $\to_a \otimes \gets_r$ | Composite Coupling | Experimental | Couples potential and history for realization. |
 | $<\neq>_r$ | Relational Non-Identity | Core | Derived structural compression of the root expression $(A \iff_R a \text{ where } A \neq a)$. |
 | $\sim_A$ | Admissibility Equivalence | Candidate | Relation asserting that two RT expressions belong to the same admissibility organization. |
@@ -3163,14 +3209,14 @@ This index points to the primary evidence pools supporting the claims made in th
 | Target Claim | Supporting Run(s) | Mechanism Classes | Status |
 | :--- | :--- | :--- | :--- |
 | **Pi-A Stability** | `results/LFCR_001_M0_baseline/` | Agent, CA | Supported (C4) |
-| **Metastability Basins** | `results/2026-06-16_run03_CLS_003_EXTREME/` | ODE, PDE | Supported (C5) |
+| **Metastability Basins** | `results/2026-06-16_run03_CLS_003_StructuralBox_Extreme/` | ODE, PDE | Supported (C5) |
 | **Braid Formation** | `results/LFCR_001_M2_randomization/` | Graph, Agent | Provisional (C1) |
 | **Orientation Bias** | `results/LFCR_001_v2_analysis/` | CA, Graph | Supported (C4) |
 | **[PROVISIONAL_PENDING_RIGOR] MPF_SIM_ARRAY_GRAPH_001** | `results/2026-06-17_run01_MPF_SIM_ARRAY_GRAPH_001/` | Python ad hoc graph simulation | Provisional pending rigor (C1 defined provisional) |
 | **[PROVISIONAL_PENDING_RIGOR] MPF_SIM_ART_001** | `results/2026-06-17_run01_MPF_SIM_ART_001/` | Python ad hoc whole-expression perturbation simulation | Provisional pending rigor (C1 defined provisional) |
 | **OPEN_BRIDGE_001 Topological Selector** | `results/2026-06-16_run08_OPEN_BRIDGE_001_SATISFACTION/` | PDE, Topological Analysis | Provisional pending rigor (C1 structural only) |
 | **Gravity-like Gradient** | `results/2026-05-25_232611_GRAVITY_APP_V1/` | PDE | Supported (C5) |
-| **Zeta Mapping** | `results/2026-06-16_run03_CLS_003_EXTREME/` | Graph, Box | Supported (L2) |
+| **Zeta Mapping** | `results/2026-06-16_run03_CLS_003_StructuralBox_Extreme/` | Graph, Box | Supported (L2) |
 | **Singularity Rebound** | `results/2026-05-22_run02_Singularity_Rebound/` | Graph | Supported (L3) |
 
 **Governance Containment Note (2026-06-17):**
@@ -3242,6 +3288,9 @@ These items have candidate formalisms in the "Scratch Schema" (MS-SCRATCH-V1) or
 - **Nonlinear Operational Regime Derivation (PATCH_PI_RT_CALCULUS_005):** [ **C1_DEFINED_PROVISIONAL** ] The nonlinear operational regime is the orientation-classified NL aspect when continuation becomes residue-conditioned, history-dependent, threshold-sensitive, feedback-coupled, or context-deforming such that local composition is not preserved. It is trace-bound to RT_core, not primitive mathematics, and may support nonlinear-algebraic representation only after the RT derivation is declared. NL is not merely the negation of L. [Source: PATCH_PI_RT_CALCULUS_005].
 - **L/NL Regime Boundary and Transition (PATCH_PI_RT_CALCULUS_006):** [ **C1_DEFINED_PROVISIONAL** ] The governed boundary between the linear and nonlinear RT operational regimes is declared by orientation, residue, admissibility, and context. L-to-NL transition occurs when local composition is deformed; NL-to-L transition occurs when the deformation stabilizes into locally composable orientation. Mixed regimes are permitted only when L and NL components are explicitly separated by domain, scale, or context. [Source: PATCH_PI_RT_CALCULUS_006].
 - **Mixed L/NL Operational Regime (PATCH_PI_RT_CALCULUS_007):** [ **C1_DEFINED_PROVISIONAL** ] Mixed L/NL continuation is a derived RT operational regime in which L-classified and NL-classified components coexist only under an explicit separation basis such as domain, scale, context, orientation partition, or admissibility layer. It is not a third primitive foundation, does not change RT_core, and defaults to NL-classification until the separation basis is declared if the components cannot be separated. [Source: PATCH_PI_RT_CALCULUS_007].
+- **Operational Regime Selection (PATCH_PI_RT_CALCULUS_008):** [ **C1_DEFINED_PROVISIONAL** ] Operational regime selection is the deterministic RT classification step that evaluates orientation, admissibility, residue, and declared context under RT_core to produce a regime classification. It is dynamic and repeatable rather than static, does not alter RT_core, and selects among L, NL, and mixed outputs from the declared inputs. Mixed output remains valid only when the explicit separation basis introduced for mixed L/NL regimes is present. [Source: PATCH_PI_RT_CALCULUS_008].
+- **Residue-Governed Continuation Arrow (PATCH_PI_RT_CALCULUS_011):** [ **C1_DEFINED_PROVISIONAL** ] The relation $A \to_r B$ is the residue-governed continuation of $A$ into $B$. The arrow is a process transformation, not a syntactic rewrite operator, and $A$ and $B$ remain generic process states unless explicitly rebound. The residue subscript $r$ denotes the continuation constraint that participates in admissibility. [Source: PATCH_PI_RT_CALCULUS_011].
+- **Continuation Algebra Foundations (PATCH_PI_RT_CALCULUS_012):** [ **C1_DEFINED_PROVISIONAL** ] Continuation is formalized as the first-class executable object $C(A,B)$ underlying $A \to_r B$. States denote stabilized endpoints, continuations denote lawful process, and the residue-governed arrow denotes the continuation object rather than a rewrite rule. [Source: PATCH_PI_RT_CALCULUS_012].
 - **Dominant-Domain Linear/Nonlinear Binding (MPF_DOMINANT_DOMAIN_LINEAR_NONLINEAR_001):** [ **C1_DEFINED_PROVISIONAL** ] Within a declared dominant domain $x$, $L$ names the linearizable continuation aspect and $NL$ names the nonlinear residue/history-conditioned continuation aspect. The coupling $RT := [L \langle*\rangle_x NL]$ is admissible only inside that declared context and remains subordinate to $RT_{core} := [(\mathcal{E}\neq 0) \Leftrightarrow_R \delta\alpha(\mathcal{E}>0)]$. [Source: MPF_DOMINANT_DOMAIN_LINEAR_NONLINEAR_001].
 - **Recoupling-Reorientation Event (RRE):** [ **C1_DEFINED_PROVISIONAL** ] A process event in which relational mismatch produces a coupling reorganization that results in an orientation update. Expressed as $\Delta C \to \Delta O \to \Delta A_{\text{adm}}$. Occurs when mismatch exceeds coupling tolerance ($Trigger_{RRE} := \Delta C_{\text{mismatch}} > \tau_C$). [Source: MPF_RECOUPLING_REORIENTATION_EVENT_001].
 - **Statistical Projection Relation ($\iff_s$):** [ **C1_DEFINED_PROVISIONAL** ] A projection relation mapping recurring admissible realization patterns into probability-like descriptions. Relies on parent meta-relation family $\langle*\rangle_x$. [Source: MPF_IFF_S_C1_PROVISIONAL_DEFINITION_001].
@@ -3306,7 +3355,7 @@ These items remain unsettled and are the primary targets for future induction an
 - **Formal difference between $R_{\leftrightarrow}$ and $\leftrightarrow_R$:** [ **RESOLVED_PENDING_CANONICAL_TEXTBOOK_SYNC** ] Rigorous separation between residue-as-operand ($R_{\leftrightarrow}$) and closure-support-through-residue ($\leftrightarrow_R$) is explicitly defined in governance patches and integrated into Chapter 2.
 - **Formal rules for Decoupling:** Defining the conditions under which a truth-condition becomes False.
 - **Asymmetric Recoupling and Distinction Emergence:** [ **HARDENING_REQUIRED** ] Define asymmetric recoupling mechanics and the distinction emergence law; determine whether RT exists below the distinction floor [Source: MPF_ZERO_STATE_DOMAIN_MEMBERSHIP_001].
-- **Formal RT Chain Algebra:** [ **OPEN** ] Define the algebra of progressive conditioned continuation for chains such as $D(1|2), D(2|3), D(3|4)$, including lawful ordering, coupling inheritance, and chain-composition constraints. [Source: session_summary 2026-06-26 continuation-first ontology reduction].
+- **Formal RT Chain Algebra:** [ **C1_DEFINED_PROVISIONAL** ] Define the algebra of progressive conditioned continuation for chains such as $D(1|2), D(2|3), D(3|4)$, including lawful ordering, coupling inheritance, and chain-composition constraints. Continuation composition is now governed by `PATCH_PI_RT_CALCULUS_013`, continuation identity is governed by `PATCH_PI_RT_CALCULUS_014`, and process equivalence plus canonical continuation forms are governed by `PATCH_PI_RT_CALCULUS_015`; together they require endpoint compatibility, residue/admissibility preservation, and behavior-preserving canonical representatives. Associativity remains deferred, and the reduction algorithm remains deferred. [Source: PATCH_PI_RT_CALCULUS_013; PATCH_PI_RT_CALCULUS_014; PATCH_PI_RT_CALCULUS_015].
 - **Deviation-to-Geometry Recovery:** [ **OPEN** ] Derive distance as a projection of deviation and geometry as a projection of organized distance without reintroducing geometry as a primitive. [Source: session_summary 2026-06-26 continuation-first ontology reduction].
 - **Observer-Floor Mismatch:** [ **REGISTERED_LATE** ] Define the observer-floor mismatch quantity and determine whether embedded observers and local admissibility floors co-evolve so relative mismatch remains approximately invariant. [Source: session_summary 2026-06-26 continuation-first ontology reduction].
 - **Orientation Transformations Across Domains:** [ **OPEN** ] Define lawful orientation transformations across domains without collapsing orientation into spatial direction or primitive time. [Source: session_summary 2026-06-26 continuation-first ontology reduction].
@@ -3373,6 +3422,13 @@ This section tracks newly introduced lexicon terms that have been reduced to gov
 - **`meta_core_scale_hypothesis`**: Governed provisional reading of recursive scale interpretation where deviation and admissible continuation form a biconditional ladder. [Source: `MPF_RT_BICONDITIONAL_LADDER_001`]
 - **`biconditional_ladder`**: Governed provisional reading of structural connectivity between nested scales of process expressions. [Source: `MPF_RT_BICONDITIONAL_LADDER_001`]
 - **`Affect-Effect_primitive`** (`[A|E]`): Governed provisional reading of a pre-distinction organizational condition at the scale floor. [Source: `MPF_RT_BICONDITIONAL_LADDER_001`]
+- **`Affect-Effect_distinction_projection`** (`D(*|*)`): Governed projection reading in which $D(*|*) := \Pi_D(A|E)$ is the formal distinction-schema projection of the affect/effect primitive distinction condition. $\Pi_D$ is a projection operator, not a generative primitive, and $D(*|*)$ remains a whole-expression schema that is not independently primitive as a detached object. [Source: `PATCH_PI_RT_CALCULUS_010`].
+- **`Residue-Governed_Continuation_Arrow`** (`A ->r B`): Governed continuation reading in which $B$ is the residue-conditioned lawful continuation of $A$. `->r` is a process transformation, not a rewrite operator, and `r` denotes the residue continuation constraint. [Source: `PATCH_PI_RT_CALCULUS_011`].
+- **`Continuation_Object`** (`C(A,B)`): First-class lawful process object relating condition $A$ to condition $B$ under residue-governed admissibility. `A ->r B` denotes this object, and `A`/`B` are its stabilized endpoints rather than a primitive state floor. [Source: `PATCH_PI_RT_CALCULUS_012`].
+- **`Continuation_Composition`** (`C(A,B) \circ C(B,C)`): Lawful composition of continuation objects when the shared endpoint matches and residue/admissibility are preserved. Composition is process composition, not symbolic concatenation or rewrite. [Source: `PATCH_PI_RT_CALCULUS_013`].
+- **`Continuation_Identity`** (`I(A)`): Neutral lawful continuation that preserves condition $A$ and acts as the identity element of continuation composition. `I(A)=C(A,A)`. [Source: `PATCH_PI_RT_CALCULUS_014`].
+- **`Process_Equivalence`** (`C_1 \equiv_P C_2`): Behavioral equivalence between continuation expressions under shared admissibility, residue, orientation, and context constraints. Symbolic equality is not sufficient; two expressions may differ syntactically while remaining process-equivalent. [Source: `PATCH_PI_RT_CALCULUS_015`].
+- **`Canonical_Continuation_Form`** (`NF(C)`): Canonical representative of a continuation expression when admissibility holds. `NF(C)` supports auditability and comparison, while the reduction algorithm that computes it remains deferred. [Source: `PATCH_PI_RT_CALCULUS_015`].
 - **`distinction_floor_interpretation`**: Governed provisional reading that resolves local scale constraints and pre-distinction origins. [Source: `MPF_RT_BICONDITIONAL_LADDER_001`]
 - **`continuation_first_ontology`**: Governed provisional reading that process precedes distinction and that "precedence" is ontological rather than temporal. [Source: session_summary 2026-06-26 continuation-first ontology reduction]
 - **`observer_floor_mismatch`**: Governed provisional reading of the relative mismatch between an embedded observer and the active local admissibility floor. [Source: session_summary 2026-06-26 continuation-first ontology reduction]
@@ -3432,7 +3488,7 @@ This textbook draft is derived from and cross-referenced with the following foun
 | **MPF-CORE-V1** | [MPF-CORE: MINIMAL WORKING FORMALISM](D:/projects/acellorator/docs/MPF_Core_Formalism_v1.md) | v1.0 | The authorized SSOT for primitive terms, generative conditions, and core operator algebra. |
 | **SINGULARITY-REBOUND-001** | [The Singularity Rebound Mechanism](results/2026-05-22_run02_Singularity_Rebound/paper.md) | C5/L3 | Validation of the operational distinguishability floor and recursive trigger state. |
 | **LFCR_004_PILOT** | [Phase-Lag Pilot Falsification](results/2026-06-10_run03_LFCR_004_PILOT/paper.md) | C2/L1 | Falsification of phase-lag residue as a foundational requirement for closure. |
-| **CLS_003_REPORT** | [Collapse and Reformation Basin Validation](results/2026-06-16_run03_CLS_003_EXTREME/paper.md) | C5/L2 | Multi-mechanism validation of basin stability and Zeta-mapping survivors. |
+| **CLS_003_REPORT** | [Collapse and Reformation Basin Validation](results/2026-06-16_run03_CLS_003_StructuralBox_Extreme/paper.md) | C5/L2 | Multi-mechanism validation of basin stability and Zeta-mapping survivors. |
 | **MPF-MATH-SCHEMA-V1.9** | [MONO-PROCESS MATHEMATICAL SCHEMA](D:/projects/acellorator/docs/MONO_PROCESS_MATHEMATICAL_SCHEMA_V1_9.md) | v1.9 | Unified formalism for recursive coupling, identity dynamics, and interaction hierarchies. |
 | **TECH-NOTE-ASYM** | [Technical Note: Asymmetry Ratio and Orientation Selection](D:/projects/acellorator/docs/asym.txt) | Exploratory | Deep dive into the $\Omega_a$ metric and the bridge from asymmetry to orientation. |
 | **MPF-NARRATIVE** | [The Law of the One Process: Narrative Synthesis](D:/projects/acellorator/docs/narrative.txt) | Synthesis | Detailed conceptual derivation of the four organizational resolutions (forces) and the nature of process. |
@@ -3446,9 +3502,9 @@ This textbook draft is derived from and cross-referenced with the following foun
 | **P101–P109** | [Proofs P101–P109](D:/projects/acellorator/docs/theory/foundational/5_03_26%20unity/math/proofs/) | 2026-06-22 | Formal proof sketches and validation structures for Lemmas L101–L109. |
 
 ### Secondary References and Registries
-- **Compliance Charter v2.3:** [compliance_charter_v2_3.json](D:/projects/acellorator/docs/registry/compliance_charter_v2_3.json) - Governance authority.
-- **Operator Registry:** [operator_registry.json](D:/projects/acellorator/docs/registry/operator_registry.json) - Formal grammar for recursive coupling.
-- **Lexicon Canonical:** [lexicon_canonical.json](D:/projects/acellorator/docs/registry/lexicon_canonical.json) - Semantic authority for primitives and derived terms.
+- **Compliance Charter v2.3:** [compliance_charter_v2_3.json](D:/projects/acellorator/registry/compliance_charter_v2_3.json) - Governance authority.
+- **Operator Registry:** [operator_registry.json](D:/projects/acellorator/registry/operator_registry.json) - Formal grammar for recursive coupling.
+- **Lexicon Canonical:** [lexicon_canonical.json](D:/projects/acellorator/registry/lexicon_canonical.json) - Semantic authority for primitives and derived terms.
 
 ### How to Use Citations
 Throughout this textbook, citations appear in the format `[Source: ID Section]`. For example, `[Source: MPF-CORE-V1 Sec 2]` refers to Section 2 of the Minimal Working Formalism. These citations ensure that every textbook definition and formal block can be traced back to the original research and governance artifacts.

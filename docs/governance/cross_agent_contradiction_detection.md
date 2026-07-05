@@ -9,7 +9,7 @@ Detect and govern instances where multiple autonomous agents produce materially 
 - **governance_conflict**: Differing interpretations of scope boundaries or disclaimer requirements.
 
 ## 3. Mandatory Action
-Upon detection, the conflicting findings must be logged in the `cross_agent_contradiction_registry.json` and a `HIGH` priority escalation must be sent to the `human_arbitration_queue.json`.
+Upon detection, the conflicting findings must be logged in the `registry/cross_agent_contradiction_registry.json` and a `HIGH` priority escalation must be sent to the `human_arbitration_queue.json`.
 
 ## 4. Governance Boilerplate
 - **Source Relation**: (E≠0) ⇔R δ(E>0)

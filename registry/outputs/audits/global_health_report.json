@@ -1,30 +1,23 @@
 {
-  "timestamp": "2026-07-04T19:08:52.691798",
+  "timestamp": "2026-07-05T05:00:14.712293",
   "unified_manifest_validation": {
-    "status": "skipped",
+    "status": "success",
     "errors": [],
-    "warnings": [
-      "Unified manifest missing."
-    ]
+    "warnings": []
   },
   "registry_validation": {
-    "status": "failed",
-    "errors": [
-      "Unified Manifest Load Error: [Errno 2] No such file or directory: 'registry\\\\governance_manifest.json'"
-    ]
+    "status": "success",
+    "errors": []
   },
   "engine_validation": {
-    "status": "skipped",
-    "errors": [],
-    "warnings": [
-      "Manifest missing"
-    ]
+    "status": "success",
+    "tools_tested": [],
+    "failures": [],
+    "skipped": []
   },
   "hygiene_validation": {
-    "status": "failed",
-    "violations": [
-      "Root Pollution Detected: cross_agent_contradiction_registry.json, cross_dataset_pairing_registry.json, cross_mechanism_signature_registry.json, cross_verification_protocol.json"
-    ],
+    "status": "success",
+    "violations": [],
     "warnings": []
   },
   "math_validation": {
@@ -33,22 +26,67 @@
     "warnings": []
   },
   "db_validation": {
-    "status": "failed",
-    "errors": [
-      "Database file missing: registry\\db\\acellorator_index.sqlite",
-      "Schema file missing: registry\\db\\schema.sql"
-    ],
+    "status": "success",
+    "errors": [],
     "warnings": [],
     "db_health": {
-      "status": "fail",
+      "status": "pass",
       "db_path": "registry\\db\\acellorator_index.sqlite",
       "schema_path": "registry\\db\\schema.sql",
-      "integrity_check": "unknown",
-      "table_status": {},
-      "row_counts": {},
-      "orientation_status_values": {},
-      "retrieval_smoke": {},
-      "supersession_edge_quality": {},
+      "integrity_check": "ok",
+      "table_status": {
+        "artifacts": "present",
+        "audit_reports": "present",
+        "tool_health": "present",
+        "registry_snapshots": "present",
+        "claim_evidence_links": "present",
+        "supersession_edges": "present",
+        "orientation_status_types": "present"
+      },
+      "row_counts": {
+        "artifacts": 21242,
+        "audit_reports": 22,
+        "tool_health": 39,
+        "registry_snapshots": 43,
+        "claim_evidence_links": 0,
+        "supersession_edges": 73,
+        "orientation_status_types": 9,
+        "last_artifact_index": "2026-06-17 19:11:32"
+      },
+      "orientation_status_values": {
+        "current_command_evidence": "present",
+        "canonical_active": "present",
+        "active_runtime": "present",
+        "historical_residue": "present",
+        "archived": "present",
+        "deprecated": "present",
+        "superseded": "present",
+        "invalidated": "present",
+        "unverified_residue": "present"
+      },
+      "retrieval_smoke": {
+        "status": "pass"
+      },
+      "supersession_edge_quality": {
+        "status": "pass",
+        "total_edges": 73,
+        "by_relation": {
+          "supersedes": 73
+        },
+        "by_confidence": {
+          "verified": 73
+        },
+        "reference_integrity": {
+          "missing_from_artifact": 0,
+          "missing_to_artifact": 0,
+          "self_edges": 0,
+          "weak_confidence_ratio": 0.0,
+          "probable_confidence_ratio": 0.0,
+          "verified_confidence_ratio": 1.0
+        },
+        "risk_summary": [],
+        "recommendations": []
+      },
       "stale_index_warnings": [],
       "ssot_boundary": "pass",
       "maintenance_recommendations": []
@@ -64,7 +102,7 @@
   },
   "math_program_validation": {
     "status": "fail",
-    "timestamp": "2026-07-04T19:08:52.706428",
+    "timestamp": "2026-07-05T05:00:14.767614",
     "validators_run": [
       "../validation/validate_core_expression_presence.py",
       "validate_formal_objects.py",
@@ -3017,10 +3055,10 @@
     ]
   },
   "implementation_validation": {
-    "status": "skipped",
+    "status": "warning",
     "errors": [],
     "warnings": [
-      "Manifest missing"
+      "Rigor Endorsement Registry missing or unreadable: [Errno 2] No such file or directory: 'registry\\\\tool_certification_registry.json'"
     ]
   },
   "evidence_validation": {
@@ -3034,18 +3072,15 @@
   "campaign_validation": {
     "status": "failed",
     "errors": [
-      "Campaign Template Registry Load: [Errno 2] No such file or directory: 'registry\\\\evidence_campaign_template_registry.json'",
-      "Cross-Dataset Pairing Registry Load: [Errno 2] No such file or directory: 'registry\\\\cross_dataset_pairing_registry.json'"
+      "Campaign Template Registry Load: [Errno 2] No such file or directory: 'registry\\\\evidence_campaign_template_registry.json'"
     ],
     "warnings": []
   },
   "governance_integrity_validation": {
-    "status": "failed",
-    "errors": [
-      "Governance hash registry missing at registry\\governance_hash_registry.json. Run with --initialize to create."
-    ],
+    "status": "success",
+    "errors": [],
     "warnings": [],
-    "verified_count": 0
+    "verified_count": 1
   },
   "overall_status": "fail"
 }
