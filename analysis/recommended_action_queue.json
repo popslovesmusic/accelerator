@@ -32,23 +32,22 @@
     {
       "recommendation_id": "ANL_REC_002",
       "priority_rank": 2,
-      "recommended_action": "Continue MT-COUNTEREXAMPLE-001 with the bounded window_boundary_fragmentation vector after the completed selection reconstruction branch.",
+      "recommended_action": "Continue MT-COUNTEREXAMPLE-001 with the bounded operator_chain_nonclosure vector after the completed window-boundary branch.",
       "supporting_evidence": [
-        "outputs/audits/math_counterexample_continuation_004.json: selection reconstruction is the latest completed branch and window_boundary_fragmentation remains undeployed",
-        "outputs/audits/math_counterexample_continuation_004.md: continuation projection records selection reconstruction as the current campaign state",
-        "outputs/audits/math_window_boundary_fragmentation_validation_001.json: RC-024 validator confirms bounded window perturbation support",
-        "outputs/math_tests/rc024_window_perturbation_flux_bounds_result.json: window perturbation flux bounds remain symbolically supported",
-        "registry/math/rc024_window_perturbation_flux_bounds_registry.json: RC-024 governs bounded window perturbation behavior"
+        "outputs/audits/math_counterexample_continuation_006.json: operator_chain_nonclosure is the current bounded branch and no declared vectors remain",
+        "outputs/audits/math_counterexample_continuation_006.md: continuation projection records operator_chain_nonclosure as the current declared vector",
+        "outputs/math_tests/rc031_delta_multi_branch_composition_result.json: recursive operator chaining remains symbolically supported",
+        "registry/math/rc031_delta_multi_branch_composition_registry.json: RC-031 governs bounded multi-branch operator chaining behavior"
       ],
       "affected_domains": [
         "mathematics"
       ],
       "dependencies": [
-        "selection_reconstruction_branch_complete"
+        "window_boundary_branch_complete"
       ],
       "expected_benefit": "Keeps the counterexample campaign moving on the next undeployed vector while preserving the repaired provenance boundary.",
       "confidence": 0.92,
-      "rationale": "The live continuation state leaves window_boundary_fragmentation undeployed after selection reconstruction, and RC-024 provides a bounded support surface for the window-perturbation branch."
+      "rationale": "The live continuation state leaves operator_chain_nonclosure as the final undeployed declared vector after the window-boundary branch, and RC-031 provides a bounded support surface for recursive operator chaining."
     },
     {
       "recommendation_id": "ANL_REC_003",
