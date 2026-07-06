@@ -24,6 +24,10 @@ Collect counterexamples and failure cases from MT-001/002/003 candidate review a
 - **Orientation Locking**: No admissible minimization found.
 - **Branch Explosion**: Non-unique selection divergence.
 
+### 2.5 Live Campaign Context
+- **Current Vector**: `window_boundary_fragmentation`.
+- **Campaign Note**: The orientation-locking, nonlocal-transport, and selection-reconstruction artifacts remain preserved as boundary cases; current follow-through now shifts to bounded window-boundary fragmentation and stays non-final.
+
 ## 3. Governance Status
 - **Theorem Status**: PROOF_CANDIDATE_REVIEW_ONLY
 - **Series Status**: RESTRICTED_LOCAL_THEOREM_REVIEW

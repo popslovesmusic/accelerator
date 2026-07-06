@@ -1,0 +1,83 @@
+{
+  "report_id": "MATH_COUNTEREXAMPLE_CONTINUATION_003",
+  "timestamp": "2026-07-06T03:10:16.8107463-04:00",
+  "campaign_id": "MT-COUNTEREXAMPLE-001",
+  "source_basis": [
+    "registry/math/mt_counterexample_campaign_registry.json",
+    "registry/math/nonlocal_transport_registry.json",
+    "registry/math/rc007_nonlocal_transport_closure_registry.json",
+    "registry/math/rc022_nonlocal_transport_closure_limits_registry.json",
+    "outputs/audits/math_counterexample_nonlocal_transport_trace_001.json",
+    "outputs/math_tests/rc007_nonlocal_transport_closure_result.json",
+    "outputs/math_tests/rc022_nonlocal_transport_closure_limits_result.json",
+    "analysis/recommended_action_queue.json",
+    "outputs/audits/global_health_report.json"
+  ],
+  "current_state": {
+    "status": "active_adversarial_testing",
+    "deployed_vectors": [
+      "degenerate_minima_instability",
+      "recursive_divergence_attack",
+      "branch_explosion_attack",
+      "orientation_locking_attack"
+    ],
+    "remaining_declared_attack_vectors": [
+      "nonlocal_transport_fragmentation",
+      "selection_reconstruction_failure",
+      "window_boundary_fragmentation",
+      "operator_chain_nonclosure"
+    ],
+    "trace_focus": {
+      "query_id": "NTC-001",
+      "transport_class": "bounded_nonlocal_transport",
+      "closure_class": "conditional_closure",
+      "proof_status": "scaffolded",
+      "implications": {
+        "reconstruction": "ambiguous",
+        "stability": "conditional",
+        "convergence": "requires_bound"
+      }
+    }
+  },
+  "bounded_transport_evidence": {
+    "rc007": {
+      "observed_behavior": "pass",
+      "is_closed_bounded": true,
+      "summary": "Bounded nonlocal transport across CSI-linked structure remained finite and non-invertible."
+    },
+    "rc022": {
+      "observed_behavior": "pass",
+      "is_closure_bounded": true,
+      "summary": "Fragmented nonlocal transport limits remained classifiable with bounded flux and detectable instability."
+    }
+  },
+  "recommended_next_action": {
+    "action": "execute bounded nonlocal transport fragmentation",
+    "target": "MT-COUNTEREXAMPLE-001",
+    "focus_vector": "nonlocal_transport_fragmentation",
+    "scope": "bounded",
+    "supporting_evidence": [
+      "outputs/audits/math_counterexample_nonlocal_transport_trace_001.json",
+      "outputs/math_tests/rc007_nonlocal_transport_closure_result.json",
+      "outputs/math_tests/rc022_nonlocal_transport_closure_limits_result.json",
+      "registry/math/nonlocal_transport_registry.json",
+      "registry/math/rc022_nonlocal_transport_closure_limits_registry.json"
+    ],
+    "constraints": [
+      "preserve_failure_modes",
+      "preserve_counterexample_space",
+      "no_global_closure_claims",
+      "no_physics_claims",
+      "results_remain_nonfinal"
+    ]
+  },
+  "validation_state": {
+    "latest_global_validation": "pass",
+    "reference": "outputs/audits/global_health_report.json"
+  },
+  "notes": [
+    "The orientation-locking direct run remains preserved as a boundary case.",
+    "The nonlocal transport trace remains scaffolded and conditional.",
+    "The campaign remains active and nonfinal."
+  ]
+}

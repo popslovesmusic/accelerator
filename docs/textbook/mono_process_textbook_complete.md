@@ -1950,7 +1950,26 @@ When $\delta_a(x;c) = \emptyset$, the process faces a structured fork resolved b
 The 0-state is not just process termination; it is the collapse of the conditions under which existence was possible. Process existence is not a static given; it is continuously earned by the availability of admissible continuation.
 
 **Deferred Expansion Note:**
-The extended crisis branch, empty-admissibility recovery, recursive continuation, state-transition equations, convergence proof, failure branch, recovery branch, and return-to-stable-regime material are intentionally deferred to a later revision of this textbook.
+This section is a provenance-explicit partial section: it was found structurally incomplete during repository audit and was deferred while the RT Calculus v1.0 campaign established the governed continuation, evaluation, failure-classification, recursion, and fixed-point surfaces. The deferral records repository state and campaign scope; it does not mean the incompleteness was an original design objective.
+
+**Governed RT Calculus Support**
+- Continuation failure is represented by diagnostic failure objects rather than lawful continuation objects. See `PATCH_PI_RT_CALCULUS_022` and `PATCH_PI_RT_CALCULUS_023`.
+- Failure classification and evaluation order are governed by the RT Calculus v1.0 surfaces. See `PATCH_PI_RT_CALCULUS_024` and `PATCH_PI_RT_CALCULUS_025`.
+- Recursive continuation and fixed-point interaction are available as bounded comparison/evaluation machinery. See `PATCH_PI_RT_CALCULUS_037` through `PATCH_PI_RT_CALCULUS_045`.
+- These surfaces clarify the operational handling of $\delta_a = \emptyset$ but do not by themselves introduce recovery semantics.
+
+**Coverage Matrix**
+| Topic | Status | Action |
+| --- | --- | --- |
+| empty admissibility trigger | retained_in_6_4 | keep |
+| two-level fork between reorientation and collapse | retained_in_6_4 | keep |
+| failure classification | covered_by_rt_calculus_v1_0 | cross_reference |
+| evaluation order | covered_by_rt_calculus_v1_0 | cross_reference |
+| recursive continuation | covered_by_rt_calculus_v1_0 | cross_reference |
+| fixed-point interaction | covered_by_rt_calculus_v1_0 | cross_reference |
+| recovery branch | not_covered | defer_explicitly |
+| return-to-stable-regime | not_covered | defer_explicitly |
+| 0-state collapse proof | not_proven_here | preserve_as_claim_level_limited |
 
 ---
 
@@ -1960,7 +1979,7 @@ With the release of **MPF-Core-Minimal v0.1**, the primary logical gaps in the a
 
 1.  **The Admissibility Predicate $P_{\text{adm}}$:** Formally defined as a conjunctive boolean kernel: $P_{adm} = \Gamma_{\mathcal{E}} \land \Gamma_R \land \Gamma_T \land \Gamma_{\mathcal{O}}$ [Source: PADM_GAMMA_SEPARATION_001].
 2.  **Composition and Image Existence:** Formally proven as **THM_PADM_001**. A nonempty admissible image guarantees continuation existence within the Universal Law Schema.
-3.  **Crisis Fork Trigger:** Formally proven as **THM_PADM_002**. Admissibility failure ($\delta_a = \emptyset$) triggers an exhaustive fork between NavT reorientation and 0-state collapse.
+3.  **Crisis Fork Trigger:** Formally proven as **THM_PADM_002**. Admissibility failure ($\delta_a = \emptyset$) triggers an exhaustive fork between NavT reorientation and 0-state collapse; the repaired Chapter 6.4 provenance note records this fork as a partial section and keeps recovery semantics deferred.
 4.  **Non-Transitivity:** Formally proven as **THM_PADM_003**. Admissibility is strictly non-transitive due to state-dependent residue evolution ($R \to T \to A_{adm}$).
 
 These foundational rules now govern all higher-level topological and physical projections.
@@ -2359,7 +2378,7 @@ $\text{Sel}_A$ is the algorithmic realization of the arbitration principle. It h
 The arbitration process faces several critical **Failure Modes** that necessitate higher-order intervention [Source: IND-ARBITRATION-O-001].
 
 1. **Empty Candidate Set ($C_A(S) = \emptyset$):**
-   Triggers the **Empty Set Fork** (see Chapter 6.4), leading to either radical re-orientation or core collapse ($0\text{-state}$).
+   Triggers the **Empty Set Fork** (see Chapter 6.4 provenance-explicit admissibility failure note), leading to either radical re-orientation or core collapse ($0\text{-state}$).
 
 2. **Degenerate Selection:**
    Occurs when multiple transition candidates satisfy $O^*$ equally. This leads to **selection degeneracy**, requiring higher-order arbitration rules, stochastic branching, or local oscillation until the tie is broken by residue accumulation.
@@ -3833,6 +3852,7 @@ These items remain unsettled and are the primary targets for future induction an
 - **Formal rules for Decoupling:** Defining the conditions under which a truth-condition becomes False.
 - **Asymmetric Recoupling and Distinction Emergence:** [ **HARDENING_REQUIRED** ] Define asymmetric recoupling mechanics and the distinction emergence law; determine whether RT exists below the distinction floor [Source: MPF_ZERO_STATE_DOMAIN_MEMBERSHIP_001].
 - **Formal RT Chain Algebra:** [ **C1_DEFINED_PROVISIONAL** ] Define the algebra of progressive conditioned continuation for chains such as $D(1|2), D(2|3), D(3|4)$, including lawful ordering, coupling inheritance, and chain-composition constraints. Continuation composition is now governed by `PATCH_PI_RT_CALCULUS_013`, continuation identity is governed by `PATCH_PI_RT_CALCULUS_014`, process equivalence plus canonical continuation forms are governed by `PATCH_PI_RT_CALCULUS_015`, reduction semantics are governed by `PATCH_PI_RT_CALCULUS_016`, primitive reduction rules are governed by `PATCH_PI_RT_CALCULUS_017`, well-formed continuation expressions are governed by `PATCH_PI_RT_CALCULUS_018`, typed continuation domains are governed by `PATCH_PI_RT_CALCULUS_019`, typed projection transition rules are governed by `PATCH_PI_RT_CALCULUS_020`, typed continuation composition guards are governed by `PATCH_PI_RT_CALCULUS_021`, continuation failure / undefined composition are governed by `PATCH_PI_RT_CALCULUS_022`, failure-classification / recovery-boundary handling are governed by `PATCH_PI_RT_CALCULUS_023`, continuation evaluation order is governed by `PATCH_PI_RT_CALCULUS_024`, the minimal reduction algorithm and partial-NF fallback are governed by `PATCH_PI_RT_CALCULUS_025`, partial normal form semantics are governed by `PATCH_PI_RT_CALCULUS_026`, reduction trace semantics are governed by `PATCH_PI_RT_CALCULUS_027`, reduction trace equivalence / canonical trace normalization are governed by `PATCH_PI_RT_CALCULUS_028`, local confluence conditions are governed by `PATCH_PI_RT_CALCULUS_029`, reduction determinism conditions are governed by `PATCH_PI_RT_CALCULUS_030`, termination conditions are governed by `PATCH_PI_RT_CALCULUS_031`, canonical form uniqueness conditions are governed by `PATCH_PI_RT_CALCULUS_032`, reduction complexity measure is governed by `PATCH_PI_RT_CALCULUS_033`, bounded confluence theorem is governed by `PATCH_PI_RT_CALCULUS_034`, canonical reduction strategy is governed by `PATCH_PI_RT_CALCULUS_035`, and canonical reduction strategy correctness is governed by `PATCH_PI_RT_CALCULUS_036`; together they require endpoint compatibility, explicit domain binding, type compatibility, explicit projection invocation, residue/admissibility preservation, lawful reduction toward $NF(C)$ after typed composition guards pass, ordered evaluation before reduction is admitted, outcome-preserving trace comparison, bounded branch joinability under common-origin divergence, canonical reduction priority with deterministic choice among admissible candidates, strict measure descent under a well-founded termination measure, bounded canonical-form uniqueness modulo process equivalence, bounded confluence over admissible bounded continuation classes, candidate-set construction after $EVAL_{024}$, admissibility filtering, canonical ordering of lawful candidates, deterministic selection within bounded classes, and bounded correctness preservation for canonical strategy selection. Associativity remains deferred, and global confluence, Church-Rosser, universal determinism, universal termination, and universal uniqueness remain deferred. [Source: PATCH_PI_RT_CALCULUS_013; PATCH_PI_RT_CALCULUS_014; PATCH_PI_RT_CALCULUS_015; PATCH_PI_RT_CALCULUS_016; PATCH_PI_RT_CALCULUS_017; PATCH_PI_RT_CALCULUS_018; PATCH_PI_RT_CALCULUS_019; PATCH_PI_RT_CALCULUS_020; PATCH_PI_RT_CALCULUS_021; PATCH_PI_RT_CALCULUS_022; PATCH_PI_RT_CALCULUS_023; PATCH_PI_RT_CALCULUS_024; PATCH_PI_RT_CALCULUS_025; PATCH_PI_RT_CALCULUS_026; PATCH_PI_RT_CALCULUS_027; PATCH_PI_RT_CALCULUS_028; PATCH_PI_RT_CALCULUS_029; PATCH_PI_RT_CALCULUS_030; PATCH_PI_RT_CALCULUS_031; PATCH_PI_RT_CALCULUS_032; PATCH_PI_RT_CALCULUS_033; PATCH_PI_RT_CALCULUS_034; PATCH_PI_RT_CALCULUS_035; PATCH_PI_RT_CALCULUS_036].
+- **Chapter 6.4 Provenance-Explicit Admissibility Failure:** [ **OPEN** ] Chapter 6.4 retains the empty-admissibility fork, cross-references RT Calculus v1.0 for failure classification, evaluation order, recursive continuation, and fixed-point interaction, and leaves recovery and return-to-stable-regime semantics deferred. [Source: PATCH_MPF_TEXTBOOK_CH6_4_PROVENANCE_REPAIR_001].
 - **Deviation-to-Geometry Recovery:** [ **OPEN** ] Derive distance as a projection of deviation and geometry as a projection of organized distance without reintroducing geometry as a primitive. [Source: session_summary 2026-06-26 continuation-first ontology reduction].
 - **Observer-Floor Mismatch:** [ **REGISTERED_LATE** ] Define the observer-floor mismatch quantity and determine whether embedded observers and local admissibility floors co-evolve so relative mismatch remains approximately invariant. [Source: session_summary 2026-06-26 continuation-first ontology reduction].
 - **Orientation Transformations Across Domains:** [ **OPEN** ] Define lawful orientation transformations across domains without collapsing orientation into spatial direction or primitive time. [Source: session_summary 2026-06-26 continuation-first ontology reduction].

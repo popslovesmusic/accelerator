@@ -2,6 +2,7 @@
 
 ## 1. Purpose
 Create explicit proof obligations for MT-001, MT-002, and MT-003 from FSUB dependencies to prepare for restricted local theorem-candidate work.
+- **Live Campaign Context**: This obligation set is the formal artifact currently followed through under `PROOF-ELEVATION-CAMPAIGN-001` and `MT-PROOF-ELEVATION-001`; adversarial continuation remains a separate track.
 
 ## 2. MT-001: Π_A Restricted Projection Idempotence
 - **Target**: Derive $\Pi_A \circ \Pi_A \sim \Pi_A$.

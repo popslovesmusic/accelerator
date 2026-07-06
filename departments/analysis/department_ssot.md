@@ -130,10 +130,10 @@ Each recommendation should carry:
 
 #### ANL_REC_002
   - **Title:** Maintain theorem-readiness follow-through
-  - **Source Evidence:** `outputs/audits/math_counterexample_orientation_locking_execution_002.json`, `outputs/audits/math_counterexample_continuation_002.json`, `outputs/math_tests/mt_counterexample_orientation_locking_result.json`
-  - **Recommendation:** continue `MT-COUNTEREXAMPLE-001` with bounded `nonlocal_transport_fragmentation`, because the dedicated `orientation_locking` harness now exists as a direct-run artifact and the campaign should advance to the next undeployed declared vector.
-- **Claim Class:** `C3_structural_comparison`
-- **Status:** deterministic recommendation
+  - **Source Evidence:** `outputs/audits/math_counterexample_continuation_004.json`, `outputs/audits/math_counterexample_continuation_004.md`, `outputs/audits/math_window_boundary_fragmentation_validation_001.json`, `outputs/math_tests/rc024_window_perturbation_flux_bounds_result.json`, `registry/math/rc024_window_perturbation_flux_bounds_registry.json`, `registry/math/mt_counterexample_campaign_registry.json`
+  - **Recommendation:** continue `MT-COUNTEREXAMPLE-001` with bounded `window_boundary_fragmentation`, because the completed selection reconstruction branch leaves window-boundary fragmentation as the next undeployed declared vector and RC-024 keeps the window-perturbation surface symbolically supported.
+  - **Claim Class:** `C3_structural_comparison`
+  - **Status:** deterministic recommendation
 
 #### ANL_REC_003
 - **Title:** Continue documentation debt reduction
@@ -156,13 +156,13 @@ Each recommendation should carry:
   This is the current single ordered recommendation sequence under the Work Reduction Framework. It is a recommendation only and does not authorize execution by itself.
   
   1. `PROOF-ELEVATION-CAMPAIGN-001` and `MT-PROOF-ELEVATION-001` formal follow-through
-  1. `math debt reduction` for bounded `nonlocal_transport_fragmentation` continuation of `MT-COUNTEREXAMPLE-001`
+  1. `math debt reduction` for bounded `window_boundary_fragmentation` continuation of `MT-COUNTEREXAMPLE-001`
   1. `documentation debt reduction`, including RT Calculus v1.0 consolidation sync
   1. `lexicon debt reduction` for residual hardening only
 
   Ordering basis:
   - `PROOF-ELEVATION-CAMPAIGN-001` and `MT-PROOF-ELEVATION-001` are first because the canonical math execution order places formal follow-through in phase one.
-  - `math debt reduction` remains second for the counterexample campaign because the orientation-locking direct run is complete and the next declared bounded vector is `nonlocal_transport_fragmentation`.
+  - `math debt reduction` remains second for the counterexample campaign because the selection reconstruction branch is complete and the next declared bounded vector is `window_boundary_fragmentation`.
   - `documentation debt reduction`, including RT Calculus v1.0 consolidation sync, is third because documentation drift still affects discoverability and onboarding across the governed surfaces, and the new release-level specification index should be reflected in downstream analysis artifacts.
   - `lexicon debt reduction` is fourth because the validation registry now has no `gap_open` entries, so the remaining lexicon work is residual hardening rather than leading backlog pressure.
 
