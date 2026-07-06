@@ -1,0 +1,204 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_038",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-05",
+  "type": "governance_patch",
+  "artifact_type": "governance_patch",
+  "title": "Higher-Order Continuation Semantics",
+  "priority": "HIGH",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_037"
+  ],
+  "mode": "additive",
+  "basis": {
+    "source_patches": [
+      "PATCH_PI_RT_CALCULUS_037"
+    ],
+    "source_surfaces": [
+      "docs/textbook/mono_process_textbook_complete.md",
+      "registry/formal_object_registry.json",
+      "registry/math_source_registry.json",
+      "registry/lexicon_gap_queue.json",
+      "registry/registry/lexicon_gap_queue.json",
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_037.json"
+    ],
+    "scope": "Introduce higher-order continuation structure in which continuations themselves become admissible operands for lawful construction, transformation, and composition while preserving the bounded semantics of the RT Calculus."
+  },
+  "core_rule": {
+    "statement": "Higher-order continuation semantics apply only after EVAL_024 and only to explicit continuation operands that satisfy higher-order admissibility; Lift(C) may embed a first-order continuation into the higher-order domain; lawful continuation transformations preserve typing and process equivalence where defined; higher-order continuations remain bounded, preserve the existing reduction kernel, and RT_core remains unchanged."
+  },
+  "purpose": "Introduce higher-order continuations in which continuations themselves become admissible operands for lawful construction, transformation, and composition while preserving the bounded semantics of the RT Calculus.",
+  "canonical_claims": [
+    {
+      "id": "CLAIM_038_001",
+      "statement": "Higher-order continuations are explicit only; continuation operands must be declared.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_038_002",
+      "statement": "Continuation lifting embeds a first-order continuation into the higher-order domain without changing RT_core.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_038_003",
+      "statement": "Higher-order transformations preserve typing and process equivalence where defined.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_038_004",
+      "statement": "Higher-order continuations remain subject to REDUCE_025 and bounded admissibility.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_038_005",
+      "statement": "RT_core remains unchanged.",
+      "status": "canonical"
+    }
+  ],
+  "scope": {
+    "adds": [
+      "Higher-order continuation object",
+      "Continuation transformation operator",
+      "Continuation lifting",
+      "Higher-order continuation classes",
+      "Higher-order admissibility semantics"
+    ],
+    "does_not_add": [
+      "Universal higher-order theorem",
+      "General fixed-point semantics",
+      "Recovery operator",
+      "sigma_RT selector",
+      "Operational regime execution",
+      "Self-modifying calculus"
+    ]
+  },
+  "formal_objects": [
+    {
+      "id": "HIGHER_ORDER_CONTINUATION_038",
+      "symbol": "HC(C)",
+      "name": "Higher-Order Continuation",
+      "definition": "A continuation whose operands may themselves be continuation objects."
+    },
+    {
+      "id": "CONTINUATION_TRANSFORM_038",
+      "symbol": "T(C)",
+      "name": "Continuation Transformation",
+      "definition": "A lawful transformation operating on continuation objects while preserving admissibility."
+    },
+    {
+      "id": "CONTINUATION_LIFT_038",
+      "symbol": "Lift(C)",
+      "name": "Continuation Lift",
+      "definition": "The operation that embeds a first-order continuation into the higher-order continuation domain."
+    },
+    {
+      "id": "HIGHER_ORDER_CLASS_038",
+      "symbol": "ClassHC",
+      "name": "Higher-Order Continuation Class",
+      "definition": "Classification of continuation expressions according to higher-order admissibility."
+    }
+  ],
+  "definitions": {
+    "higher_order_continuation": {
+      "symbol": "HC(C)",
+      "requirements": [
+        "WF(C)",
+        "Typed(C)",
+        "Continuation operands explicitly declared",
+        "Higher-order admissibility satisfied",
+        "Transformation preserves process equivalence where defined"
+      ]
+    }
+  },
+  "relationships": {
+    "recursive_continuation": "Rec(C) may participate as an operand within HC(C).",
+    "strategy": "S(C) governs higher-order reduction selection.",
+    "reduction": "Higher-order continuations reduce using existing reduction semantics.",
+    "equivalence": "Higher-order transformations preserve ≡P where defined."
+  },
+  "admissibility_rules": [
+    "Continuation operands must remain well formed.",
+    "Higher-order transformations shall preserve typing.",
+    "Higher-order transformations shall preserve process equivalence where defined.",
+    "Higher-order continuations remain subject to REDUCE_025.",
+    "Recursive continuations remain governed by GuardRec(C)."
+  ],
+  "invariants": [
+    "RT_core remains unchanged.",
+    "Higher-order semantics introduce no new primitive.",
+    "First-order continuations remain valid.",
+    "Lift(C) preserves continuation identity.",
+    "Higher-order continuations remain bounded.",
+    "Recovery remains deferred."
+  ],
+  "future_dependencies": [
+    "PATCH_PI_RT_CALCULUS_039 (Higher-Order Continuation Correctness)",
+    "PATCH_PI_RT_CALCULUS_040 (Continuation Fixed-Point Semantics)"
+  ],
+  "textbook_changes": {
+    "chapter": "2.3.20",
+    "title": "Higher-Order Continuation Semantics",
+    "summary": [
+      "Introduce HC(C).",
+      "Define continuation lifting.",
+      "Define lawful continuation transformations.",
+      "Extend the calculus from first-order to higher-order continuations.",
+      "Preserve the existing reduction kernel."
+    ]
+  },
+  "registry_updates": {
+    "formal_object_registry": [
+      "HIGHER_ORDER_CONTINUATION_038",
+      "CONTINUATION_TRANSFORM_038",
+      "CONTINUATION_LIFT_038",
+      "HIGHER_ORDER_CLASS_038"
+    ],
+    "math_source_registry": [
+      "PATCH_PI_RT_CALCULUS_038"
+    ],
+    "lexicon_gap_queue": [
+      "higher_order_continuation",
+      "continuation_transformation",
+      "continuation_lift",
+      "higher_order_class"
+    ]
+  },
+  "rt_core_impact": {
+    "modified": false,
+    "statement": "RT := [(ℰ≠0) ⇔R δα(ℰ>0)] remains unchanged."
+  },
+  "validation_requirements": [
+    "Patch record parses cleanly.",
+    "Patch depends on PATCH_PI_RT_CALCULUS_037.",
+    "Higher-order semantics are gated by EVAL_024 and admissibility.",
+    "Lift(C) and lawful transformations preserve typing and process equivalence where defined.",
+    "RT_core remains unchanged."
+  ],
+  "required_repo_changes": [
+    "Update docs/textbook/mono_process_textbook_complete.md with the higher-order continuation section and appendix entries.",
+    "Update registry/formal_object_registry.json with the higher-order continuation formal objects.",
+    "Update registry/math_source_registry.json with the patch source entry.",
+    "Update registry/math_hashes.json after the source registry update.",
+    "Update registry/lexicon_gap_queue.json with the higher-order continuation, continuation transformation, continuation lift, and higher-order class terms.",
+    "Update registry/registry/lexicon_gap_queue.json with the mirrored higher-order continuation, continuation transformation, continuation lift, and higher-order class terms.",
+    "Update registry/governance_change_ledger.json with the corresponding governance ledger entry."
+  ],
+  "target_files": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/formal_object_registry.json",
+    "registry/math_source_registry.json",
+    "registry/math_hashes.json",
+    "registry/lexicon_gap_queue.json",
+    "registry/registry/lexicon_gap_queue.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_038.json"
+  ],
+  "success_criteria": {
+    "higher_order_semantics_documented": true,
+    "higher_order_prereqs_registered": true,
+    "higher_order_class_registered": true,
+    "boundedness_preserved": true,
+    "rt_core_unchanged": true
+  }
+}

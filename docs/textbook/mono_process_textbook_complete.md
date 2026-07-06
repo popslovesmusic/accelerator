@@ -1,4 +1,4 @@
-﻿# Mono-Process Mathematical Program: End-to-End Textbook Draft
+# Mono-Process Mathematical Program: End-to-End Textbook Draft
 
 ## Table of Contents
 
@@ -230,6 +230,21 @@ $$ C(A,B) \circ I(B) \to_{red} C(A,B) $$
 $$ C(A,B) \circ C(B,C) \to_{red} C(A,C) \quad \text{when } \equiv_P \text{ is preserved} $$
 $$ \text{no further lawful reductions} \Rightarrow NF(C) $$
 $$ \text{unresolved normalization} \Rightarrow \text{partial\_NF}(C) $$
+
+**Governed Clarification 1.2.2B.18: Fixed-Point Admissibility Conditions (PATCH_PI_RT_CALCULUS_041)**
+The admissibility of a bounded fixed-point candidate is governed separately from the candidate semantics introduced in `PATCH_PI_RT_CALCULUS_040`. `AdmFix(C)` is available only when `C` is typed in `ClassFix`, `\Phi(C)` is declared, `Eval\Phi(C)` stays within `Bound\Phi(C)`, `Eval\Phi(C)` yields `Fix(C)`, and `Fix(C)` satisfies `Inv\Phi(C)`. `FailAdmFix(C)` records the classified failure case whenever any required condition is absent or broken. This is an admissibility gate, not a correctness theorem, and it leaves `RT_core` unchanged.
+
+$$ AdmFix(C) := \text{admissible fixed-point semantics for } CandFix(C) \text{ under the declared bounded regime} $$
+$$ Bound\Phi(C) := \text{declared finite evaluation boundary for } Eval\Phi(C) $$
+$$ Inv\Phi(C) := \text{condition that further declared applications of } \Phi \text{ do not change the resulting continuation condition within } Bound\Phi(C) $$
+$$ FailAdmFix(C) := \text{classified failure state when } CandFix(C) \text{ does not satisfy the admissibility conditions} $$
+$$ CandFix(C) \text{ is admissible as } AdmFix(C) \text{ only when } C \in ClassFix, \Phi(C) \text{ is declared, } Eval\Phi(C) \text{ is bounded by } Bound\Phi(C), \text{ and } Eval\Phi(C) \text{ yields } Fix(C), \text{ and } Fix(C) \text{ satisfies } Inv\Phi(C) $$
+$$ FailAdmFix(C) \not\Rightarrow \text{fixed-point correctness} $$
+$$ FailAdmFix(C) \not\Rightarrow \text{fixed-point uniqueness} $$
+$$ FailAdmFix(C) \not\Rightarrow \text{universal fixed-point existence} $$
+$$ FailAdmFix(C) \not\Rightarrow \text{recovery} $$
+$$ FailAdmFix(C) \not\Rightarrow \sigma_{RT} $$
+$$ FailAdmFix(C) \not\Rightarrow RT_{core} \text{ change} $$
 
 **Formal Principle 1.2.2C: Aspectual RT Set as Higher-Order RT (aRT) (MPF_IND_ART_SET_OF_RTS_001)**
 A lawful set of RT expressions is itself an aspectual RT expression (`aRT`). The set of operational aspects (distinction, asymmetry, orientation, admissibility, residue, closure) are not independent modules but are themselves RT-bearing expressions.
@@ -748,6 +763,183 @@ $$ Correct(S) \not\Rightarrow \text{global correctness} $$
 
 **Commentary:**
 Canonical reduction strategy correctness is bounded to admissible continuation classes that already satisfy the established operational prerequisites. The theorem preserves process equivalence, canonical reduction outcomes, bounded determinism, and bounded confluence assumptions, while keeping universal correctness and optimality out of scope.
+
+**Formal Block 2.3.19: Recursive Continuation Semantics**
+$$ Rec(C) := \text{explicit recursive continuation with guarded self-reference} $$
+$$ Unfold(Rec(C)) := \text{bounded expansion of an admissible recursive continuation into a continuation sequence} $$
+$$ GuardRec(C) := \text{admissibility guard determining whether recursion may lawfully unfold} $$
+$$ depthRec(C) := \text{bounded recursive depth available under the current calculus boundary} $$
+$$ ClassRec := \{ C \mid Rec(C) \text{ is explicit, guarded, and bounded or deferred as } pNF(C) \} $$
+$$ \text{If } EVAL_{024} \text{ succeeds and } GuardRec(C) \text{ holds, then } Unfold(Rec(C)) \text{ may be applied} $$
+$$ \text{If recursion is lawful but exceeds the current calculus boundary, return } pNF(C) $$
+$$ \text{If recursive admissibility fails, return classified } \bot_C_x $$
+$$ Rec(C) \not\Rightarrow \text{recovery operator} $$
+$$ Rec(C) \not\Rightarrow \sigma_{RT} \text{ selector} $$
+$$ Rec(C) \not\Rightarrow \text{operational-regime execution} $$
+$$ Rec(C) \not\Rightarrow \text{universal recursive termination proof} $$
+
+**Commentary:**
+Recursive continuation semantics introduces explicit recursive self-reference under a guard and a bounded depth boundary. Bounded unfolding is only admitted after `EVAL_024`; lawful recursion that cannot presently unfold is classified as `pNF(C)`, and recursive guard failure is classified as `\bot_C_x`. This extension does not add a recovery operator, a `sigma_RT` selector, or operational-regime execution.
+
+**Formal Block 2.3.20: Higher-Order Continuation Semantics**
+$$ HC(C) := \text{higher-order continuation whose operands may themselves be continuation objects} $$
+$$ T(C) := \text{lawful transformation on continuation objects preserving admissibility} $$
+$$ Lift(C) := \text{embedding of a first-order continuation into the higher-order continuation domain} $$
+$$ ClassHC := \{ C \mid HC(C) \text{ is explicit, typed, and higher-order admissible} \} $$
+$$ \text{If } EVAL_{024} \text{ succeeds and continuation operands are explicit continuation objects, then } Lift(C) \text{ may be applied} $$
+$$ \text{Higher-order transformations preserve } \equiv_P \text{ where defined} $$
+$$ HC(C) \not\Rightarrow \text{universal higher-order theorem} $$
+$$ HC(C) \not\Rightarrow \text{general fixed-point semantics} $$
+$$ HC(C) \not\Rightarrow \text{recovery operator} $$
+$$ HC(C) \not\Rightarrow \sigma_{RT} \text{ selector} $$
+$$ HC(C) \not\Rightarrow \text{operational-regime execution} $$
+$$ HC(C) \not\Rightarrow \text{self-modifying calculus} $$
+
+**Commentary:**
+Higher-order continuation semantics treats continuations as admissible operands only when they are explicitly declared and typed. `Lift(C)` embeds a first-order continuation into the higher-order domain, while lawful continuation transformations preserve admissibility and process equivalence where defined. This extension remains bounded, continues to use `REDUCE_025`, and does not add a self-modifying calculus, a general fixed-point semantics, a recovery operator, a `sigma_RT` selector, or operational-regime execution.
+
+**Formal Block 2.3.21: Higher-Order Continuation Correctness**
+$$ Correct(HC) := \text{bounded correctness of higher-order continuation operations} $$
+$$ Correct(Lift) := \text{Lift(C) preserves continuation identity and process-equivalence class} $$
+$$ Correct(T) := \text{lawful continuation transformation preserves typing, admissibility, and process equivalence where defined} $$
+$$ ClassCorrectHC := \{ C \mid Correct(HC) \text{ holds within the bounded higher-order class} \} $$
+$$ \text{If } WF(C), Typed(C), HC(C), \text{higher-order admissibility holds, } Correct(Lift), Correct(T), \text{ and } S(C) \text{ is applicable, then higher-order correctness holds} $$
+$$ \text{Higher-order reduction preserves typing, admissibility, and canonical outcomes} $$
+$$ Correct(HC) \not\Rightarrow \text{universal higher-order correctness} $$
+$$ Correct(HC) \not\Rightarrow \text{general fixed-point semantics} $$
+$$ Correct(HC) \not\Rightarrow \text{recovery operator} $$
+$$ Correct(HC) \not\Rightarrow \sigma_{RT} \text{ selector} $$
+$$ Correct(HC) \not\Rightarrow \text{operational-regime execution} $$
+$$ Correct(HC) \not\Rightarrow \text{self-modifying calculus} $$
+
+**Commentary:**
+Higher-order continuation correctness is bounded to explicit higher-order classes that already satisfy the governing admissibility, typing, and strategy prerequisites. `Lift(C)` preserves the continuation identity class, `T(C)` preserves typing and admissibility where defined, and the canonical outcomes remain within `NF(C)`, `pNF(C)`, or classified `\bot_C_x`. This theorem does not assert universal higher-order correctness, fixed-point semantics, or self-modifying calculus rules.
+
+**Formal Block 2.3.22: Continuation Fixed-Point Semantics**
+$$ \Phi(C) := \text{declared operator over continuation expressions used to evaluate whether repeated application reaches an invariant continuation condition} $$
+$$ Eval\Phi(C) := \text{bounded evaluation process of continuation expression } C \text{ under the declared fixed-point operator } \Phi $$
+$$ CandFix(C) := \text{continuation expression } C \text{ for which } \Phi(C) \text{ is well-formed and boundedly evaluable as a possible fixed-point witness} $$
+$$ Fix(C) := \text{continuation expression whose fixed-point evaluation under } \Phi \text{ reaches a continuation condition invariant under further applications of } \Phi \text{ within the declared bounded evaluation regime} $$
+$$ ClassFix := \{ C \mid C \text{ is typed and eligible for bounded fixed-point semantic interpretation} \} $$
+$$ \text{If } C \in ClassFix, \Phi(C) \text{ is declared, and } Eval\Phi(C) \text{ is bounded, then } Eval\Phi(C) \text{ may yield } Fix(C) $$
+$$ \text{Semantic rule: } C \text{ may receive fixed-point semantics only when } C \in ClassFix, \Phi(C) \text{ is declared, } Eval\Phi(C) \text{ is bounded, and } Eval\Phi(C) \text{ yields } Fix(C) $$
+$$ \text{Fixed-point evaluation remains bounded and does not assert a universal theorem} $$
+$$ Fix(C) \not\Rightarrow \text{every continuation has a fixed point} $$
+$$ Fix(C) \not\Rightarrow \text{fixed-point admissibility} $$
+$$ Fix(C) \not\Rightarrow \text{fixed-point correctness} $$
+$$ Fix(C) \not\Rightarrow \text{fixed-point uniqueness} $$
+$$ Fix(C) \not\Rightarrow \text{recovery} $$
+$$ Fix(C) \not\Rightarrow \sigma_{RT} $$
+$$ Fix(C) \not\Rightarrow \text{RT_core change} $$
+
+**Commentary:**
+Continuation fixed-point semantics define a bounded evaluation layer for candidate fixed points without asserting universal existence, uniqueness, admissibility, or correctness. `ClassFix` marks the typed subclass eligible for interpretation, `Phi(C)` is the declared operator, and `EvalPhi(C)` is the bounded evaluation process that may witness `Fix(C)` under the declared regime. `Rec(C)` and `HC(C)` may generate candidates where admissible, and unresolved fixed-point evaluation may still terminate as `pNF(C)` or classified `\bot_C_x`. Fixed-point admissibility is separated into `PATCH_PI_RT_CALCULUS_041` so the candidate semantics and the admissibility gate remain distinct. This block remains diagnostic and bounded; it does not add recovery, a `sigma_RT` selector, operational-regime execution, or admissibility promotion by itself.
+
+**Governed Clarification 1.2.2B.19: Fixed-Point Correctness Theorem (PATCH_PI_RT_CALCULUS_042)**
+The correctness classification for an admissible fixed point is separated from admissibility itself. `CorrectFix(C)` is available only when `AdmFix(C)` holds and repeated bounded applications of `Phi` preserve the continuation semantics of `Fix(C)`. `FailCorrectFix(C)` records the classified failure case whenever preservation fails or the evaluation regime is exited. This block is bounded and diagnostic; it does not assert uniqueness, universal existence, recovery, or `RT_core` change.
+
+$$ CorrectFix(C) := \text{correctness classification for an admissible fixed point under bounded continuation-semantics preservation} $$
+$$ ThmCorrectFix := \text{bounded correctness theorem for admissible continuation fixed points} $$
+$$ FailCorrectFix(C) := \text{classified failure state when correctness verification fails} $$
+$$ AdmFix(C) \text{ is classified as } CorrectFix(C) \text{ only when repeated bounded applications of } \Phi \text{ preserve the continuation semantics of } Fix(C) $$
+$$ ThmCorrectFix \text{ remains subordinate to } AdmFix(C) $$
+$$ FailCorrectFix(C) \not\Rightarrow \text{fixed-point uniqueness} $$
+$$ FailCorrectFix(C) \not\Rightarrow \text{universal fixed-point existence} $$
+$$ FailCorrectFix(C) \not\Rightarrow \text{recovery} $$
+$$ FailCorrectFix(C) \not\Rightarrow \sigma_{RT} $$
+$$ FailCorrectFix(C) \not\Rightarrow \text{RT_core change} $$
+
+**Governed Clarification 1.2.2B.20: Fixed-Point Uniqueness Conditions (PATCH_PI_RT_CALCULUS_043)**
+The bounded uniqueness classification for a correct fixed point is separated from correctness itself. `UniqueFix(C)` is available only when `CorrectFix(C)` holds and every other correct fixed point in the same declared `ClassFix` and bounded evaluation regime belongs to `EqClassFix(C)`. `FailUniqueFix(C)` records the classified failure case whenever more than one non-equivalent correct fixed point exists in the declared bounded fixed-point class. This block is bounded and diagnostic; it does not assert universal uniqueness, universal existence, recovery, or `RT_core` change.
+
+$$ UniqueFix(C) := \text{uniqueness classification for a correct fixed point within its declared bounded equivalence class} $$
+$$ EqClassFix(C) := \text{equivalence class of fixed-point candidates under declared continuation, trace, and fixed-point evaluation semantics} $$
+$$ FailUniqueFix(C) := \text{classified failure state when more than one non-equivalent correct fixed point exists in the declared bounded class} $$
+$$ CorrectFix(C) \text{ is classified as } UniqueFix(C) \text{ only when every other correct fixed point in the same } ClassFix \text{ regime belongs to } EqClassFix(C) $$
+$$ UniqueFix(C) \not\Rightarrow \text{universal fixed-point uniqueness} $$
+$$ UniqueFix(C) \not\Rightarrow \text{universal fixed-point existence} $$
+$$ UniqueFix(C) \not\Rightarrow \text{recovery} $$
+$$ UniqueFix(C) \not\Rightarrow \sigma_{RT} $$
+$$ UniqueFix(C) \not\Rightarrow \text{RT_core change} $$
+
+**Governed Clarification 1.2.2B.21: Recursive / Fixed-Point Interaction (PATCH_PI_RT_CALCULUS_044)**
+The bounded interaction layer between recursive continuation semantics and fixed-point semantics is separate from correctness and uniqueness. `RecFix(C)` is available only when `Rec(C)`, `EvalPhi(C)`, and `Fix(C)` are declared in compatible continuation domains and bounded by the same evaluation regime. `AlignRecFix(C)` and `DivRecFix(C)` classify bounded alignment and divergence outcomes, while `FailRecFix(C)` records the bounded failure case whenever the interaction cannot be typed, bounded, or compared. This block is bounded and diagnostic; it does not assert universal convergence, universal reachability, recovery, or `RT_core` change.
+
+$$ RecFix(C) := \text{bounded semantic relation between recursive continuation evaluation } Rec(C) \text{ and fixed-point evaluation } Eval\Phi(C) $$
+$$ AlignRecFix(C) := \text{bounded condition where recursive unfolding and fixed-point evaluation preserve equivalent continuation semantics} $$
+$$ DivRecFix(C) := \text{bounded condition where recursive unfolding does not align with fixed-point evaluation} $$
+$$ FailRecFix(C) := \text{classified failure state when the recursive/fixed-point interaction cannot be typed, bounded, or compared under the declared regime} $$
+$$ RecFix(C) \text{ is admitted only when } Rec(C), Eval\Phi(C), \text{ and } Fix(C) \text{ are declared in compatible continuation domains and bounded by the same evaluation regime} $$
+$$ AlignRecFix(C) \not\Rightarrow \text{universal recursive convergence} $$
+$$ AlignRecFix(C) \not\Rightarrow \text{universal recursive reachability of fixed points} $$
+$$ DivRecFix(C) \not\Rightarrow \text{universal recursive convergence} $$
+$$ FailRecFix(C) \not\Rightarrow \text{recovery} $$
+$$ FailRecFix(C) \not\Rightarrow \sigma_{RT} $$
+$$ FailRecFix(C) \not\Rightarrow \text{RT_core change} $$
+
+**Formal Block 2.3.23: Fixed-Point Admissibility Conditions**
+$$ AdmFix(C) := \text{admissible fixed-point semantics for } CandFix(C) \text{ under the declared bounded regime} $$
+$$ Bound\Phi(C) := \text{declared finite evaluation boundary for } Eval\Phi(C) $$
+$$ Inv\Phi(C) := \text{condition that further declared applications of } \Phi \text{ do not change the resulting continuation condition within } Bound\Phi(C) $$
+$$ FailAdmFix(C) := \text{classified failure state when } CandFix(C) \text{ does not satisfy the admissibility conditions} $$
+$$ CandFix(C) \text{ is admissible as } AdmFix(C) \text{ only when } C \in ClassFix, \Phi(C) \text{ is declared, } Eval\Phi(C) \text{ is bounded by } Bound\Phi(C), \text{ and } Eval\Phi(C) \text{ yields } Fix(C), \text{ and } Fix(C) \text{ satisfies } Inv\Phi(C) $$
+$$ FailAdmFix(C) \not\Rightarrow \text{fixed-point correctness} $$
+$$ FailAdmFix(C) \not\Rightarrow \text{fixed-point uniqueness} $$
+$$ FailAdmFix(C) \not\Rightarrow \text{universal fixed-point existence} $$
+$$ FailAdmFix(C) \not\Rightarrow \text{recovery} $$
+$$ FailAdmFix(C) \not\Rightarrow \sigma_{RT} $$
+$$ FailAdmFix(C) \not\Rightarrow \text{RT_core change} $$
+
+**Commentary:**
+ Fixed-point admissibility is a bounded acceptance layer on top of the candidate semantics in `PATCH_PI_RT_CALCULUS_040`. It separates candidate fixed-point evaluation from admissible fixed-point semantics and keeps the gate local to the typed class, declared operator, finite evaluation boundary, and invariance condition. `FailAdmFix(C)` is diagnostic and local; it does not promote universal existence, correctness, uniqueness, recovery, or operational-regime execution.
+
+**Formal Block 2.3.24: Fixed-Point Correctness Theorem**
+$$ CorrectFix(C) := \text{correctness classification for an admissible fixed point under bounded continuation-semantics preservation} $$
+$$ ThmCorrectFix := \text{bounded correctness theorem for admissible continuation fixed points} $$
+$$ FailCorrectFix(C) := \text{classified failure state when correctness verification fails} $$
+$$ AdmFix(C) \text{ is classified as } CorrectFix(C) \text{ only when repeated bounded applications of } \Phi \text{ preserve the continuation semantics of } Fix(C) $$
+$$ ThmCorrectFix \text{ remains subordinate to } AdmFix(C) $$
+$$ FailCorrectFix(C) \not\Rightarrow \text{fixed-point uniqueness} $$
+$$ FailCorrectFix(C) \not\Rightarrow \text{universal fixed-point existence} $$
+$$ FailCorrectFix(C) \not\Rightarrow \text{recovery} $$
+$$ FailCorrectFix(C) \not\Rightarrow \sigma_{RT} $$
+$$ FailCorrectFix(C) \not\Rightarrow \text{RT_core change} $$
+
+**Commentary:**
+Fixed-point correctness is layered above admissibility in `PATCH_PI_RT_CALCULUS_041`. It preserves the separation between bounded evaluation, admissibility, and correctness, and it remains diagnostic rather than universal. `FailCorrectFix(C)` marks the bounded failure path when semantic preservation is not maintained.
+
+**Formal Block 2.3.25: Fixed-Point Uniqueness Conditions**
+$$ UniqueFix(C) := \text{uniqueness classification for a correct fixed point within its declared bounded equivalence class} $$
+$$ EqClassFix(C) := \text{equivalence class of fixed-point candidates under declared continuation, trace, and fixed-point evaluation semantics} $$
+$$ FailUniqueFix(C) := \text{classified failure state when more than one non-equivalent correct fixed point exists in the declared bounded class} $$
+$$ CorrectFix(C) \text{ is classified as } UniqueFix(C) \text{ only when every other correct fixed point in the same } ClassFix \text{ and bounded evaluation regime belongs to } EqClassFix(C) $$
+$$ FailUniqueFix(C) \not\Rightarrow \text{universal fixed-point uniqueness} $$
+$$ FailUniqueFix(C) \not\Rightarrow \text{universal fixed-point existence} $$
+$$ FailUniqueFix(C) \not\Rightarrow \text{recovery} $$
+$$ FailUniqueFix(C) \not\Rightarrow \sigma_{RT} $$
+$$ FailUniqueFix(C) \not\Rightarrow \text{RT_core change} $$
+
+**Commentary:**
+Fixed-point uniqueness is layered above correctness in `PATCH_PI_RT_CALCULUS_042`. It preserves the separation between bounded evaluation, correctness, and uniqueness, and it remains diagnostic rather than universal. `FailUniqueFix(C)` marks the bounded failure path when more than one non-equivalent correct fixed point persists.
+
+**Formal Block 2.3.26: Recursive / Fixed-Point Interaction**
+$$ RecFix(C) := \text{bounded semantic relation between recursive continuation evaluation } Rec(C) \text{ and fixed-point evaluation } Eval\Phi(C) $$
+$$ AlignRecFix(C) := \text{bounded condition where recursive unfolding and fixed-point evaluation preserve equivalent continuation semantics} $$
+$$ DivRecFix(C) := \text{bounded condition where recursive unfolding does not align with fixed-point evaluation} $$
+$$ FailRecFix(C) := \text{classified failure state when the recursive/fixed-point interaction cannot be typed, bounded, or compared under the declared regime} $$
+$$ RecFix(C) \text{ is admitted only when } Rec(C), Eval\Phi(C), \text{ and } Fix(C) \text{ are declared in compatible continuation domains and bounded by the same evaluation regime} $$
+$$ AlignRecFix(C) \not\Rightarrow \text{universal recursive convergence} $$
+$$ AlignRecFix(C) \not\Rightarrow \text{universal recursive reachability of fixed points} $$
+$$ DivRecFix(C) \not\Rightarrow \text{universal recursive convergence} $$
+$$ FailRecFix(C) \not\Rightarrow \text{recovery} $$
+$$ FailRecFix(C) \not\Rightarrow \sigma_{RT} $$
+$$ FailRecFix(C) \not\Rightarrow \text{RT_core change} $$
+
+**Commentary:**
+ Recursive / fixed-point interaction is a bounded comparison layer on top of recursive continuation semantics and fixed-point evaluation in `PATCH_PI_RT_CALCULUS_044`. It separates comparison from recursion or fixed-point definitions and keeps alignment, divergence, and failure local to the declared domains. `FailRecFix(C)` is diagnostic and local; it does not promote universal convergence, recursive reachability, recovery, or operational-regime execution.
+
+**Governed Clarification 1.2.2B.22: RT Calculus Specification v1.0 Consolidation (PATCH_PI_RT_CALCULUS_045)**
+RT Calculus v1.0 is a release-level consolidation of the governed surfaces already established by patches `001-044`. It collects the existing canonical primitive, type system, evaluation pipeline, reduction semantics, continuation semantics, fixed-point semantics, and governance into one specification label without adding new operators, theorems, or semantic domains. The consolidation note lives at `docs/theory/foundational/5_03_26 unity/math/notes/0007_rt_calculus_specification_v1_0_consolidation.md`, and `RT_core` remains unchanged.
 
 ---
 
@@ -3376,6 +3568,11 @@ $$ \text{Stage\_1\_Status} := \text{STRUCTURALLY\_QUALIFIED\_NOT\_FORMALLY\_CLOS
 | $ClassS$ | Strategy Class | Candidate | Class of continuation expressions for which canonical strategy selection is applicable. |
 | $Correct(S)$ | Canonical Strategy Correctness | Candidate | Bounded correctness of the canonical reduction strategy for admissible continuation classes. |
 | $ClassCorrect$ | Correctness Class | Candidate | Class of continuation expressions satisfying all bounded correctness prerequisites. |
+| $Rec(C)$ | Recursive Continuation | Candidate | Explicit recursive continuation expression with guarded self-reference; implicit self-reference remains inadmissible. |
+| $\mathrm{Unfold}(\mathrm{Rec}(C))$ | Recursive Unfolding | Candidate | Bounded expansion of an admissible recursive continuation into a continuation sequence. |
+| $\mathrm{Guard}_{\mathrm{Rec}}(C)$ | Recursive Admissibility Guard | Candidate | Guard determining whether recursive continuation may lawfully unfold. |
+| $\mathrm{depth}_{\mathrm{Rec}}(C)$ | Recursive Depth Boundary | Candidate | Bounded recursive depth available under the current calculus boundary. |
+| $ClassRec$ | Recursive Continuation Class | Candidate | Class of continuation expressions according to recursive admissibility and bounded unfolding behavior. |
 | $\to_a \otimes \gets_r$ | Composite Coupling | Experimental | Couples potential and history for realization. |
 | $<\neq>_r$ | Relational Non-Identity | Core | Derived structural compression of the root expression $(A \iff_R a \text{ where } A \neq a)$. |
 | $\sim_A$ | Admissibility Equivalence | Candidate | Relation asserting that two RT expressions belong to the same admissibility organization. |
@@ -3754,6 +3951,38 @@ This section tracks newly introduced lexicon terms that have been reduced to gov
 - **`correctness_class`** (`ClassCorrect`): Governed provisional reading of the continuation class satisfying all bounded correctness prerequisites. [Source: `PATCH_PI_RT_CALCULUS_036`].
 - **`correctness_obligation`** (`Correct(S)`, `WF(C)`, `Typed(C)`, `Det(C)`, `Term(C)`, `Unique(C)`, `Conf_B(C)`): Governed provisional reading of the bounded correctness prerequisite bundle for canonical strategy selection. [Source: `PATCH_PI_RT_CALCULUS_036`].
 - **`strategy_preservation`** (`S(C)`): Governed provisional reading of the preservation conditions satisfied by the canonical reduction strategy. [Source: `PATCH_PI_RT_CALCULUS_036`].
+- **`recursive_continuation`** (`Rec(C)`): Governed provisional reading of a continuation expression whose lawful evaluation may refer back to a prior continuation state under an explicit recursive admissibility guard. [Source: `PATCH_PI_RT_CALCULUS_037`].
+- **`recursive_unfolding`** (`Unfold(Rec(C))`): Governed provisional reading of the bounded expansion of a recursive continuation into an admissible continuation sequence. [Source: `PATCH_PI_RT_CALCULUS_037`].
+- **`recursive_admissibility_guard`** (`GuardRec(C)`): Governed provisional reading of the condition that determines whether a recursive continuation may lawfully unfold. [Source: `PATCH_PI_RT_CALCULUS_037`].
+- **`recursive_depth_boundary`** (`depthRec(C)`): Governed provisional reading of the bounded recursive depth available to a recursive continuation under the current calculus boundary. [Source: `PATCH_PI_RT_CALCULUS_037`].
+- **`recursive_class`** (`ClassRec`): Governed provisional reading of the continuation class according to recursive admissibility and bounded unfolding behavior. [Source: `PATCH_PI_RT_CALCULUS_037`].
+- **`higher_order_continuation`** (`HC(C)`): Governed provisional reading of a continuation whose operands may themselves be continuation objects. [Source: `PATCH_PI_RT_CALCULUS_038`].
+- **`continuation_transformation`** (`T(C)`): Governed provisional reading of a lawful transformation operating on continuation objects while preserving admissibility. [Source: `PATCH_PI_RT_CALCULUS_038`].
+- **`continuation_lift`** (`Lift(C)`): Governed provisional reading of the operation that embeds a first-order continuation into the higher-order continuation domain. [Source: `PATCH_PI_RT_CALCULUS_038`].
+- **`higher_order_class`** (`ClassHC`): Governed provisional reading of the continuation class according to higher-order admissibility. [Source: `PATCH_PI_RT_CALCULUS_038`].
+- **`higher_order_correctness`** (`Correct(HC)`): Governed provisional reading of the bounded correctness of higher-order continuation operations. [Source: `PATCH_PI_RT_CALCULUS_039`].
+- **`lift_correctness`** (`Correct(Lift)`): Governed provisional reading of the property that `Lift(C)` preserves continuation identity and process-equivalence class. [Source: `PATCH_PI_RT_CALCULUS_039`].
+- **`transformation_correctness`** (`Correct(T)`): Governed provisional reading of the property that lawful continuation transformation preserves typing, admissibility, and process equivalence where defined. [Source: `PATCH_PI_RT_CALCULUS_039`].
+- **`higher_order_correctness_class`** (`ClassCorrectHC`): Governed provisional reading of the class of higher-order continuations satisfying all bounded higher-order correctness prerequisites. [Source: `PATCH_PI_RT_CALCULUS_039`].
+- **`continuation_fixed_point`** (`Fix(C)`): Governed provisional reading of a continuation state invariant under bounded fixed-point evaluation. [Source: `PATCH_PI_RT_CALCULUS_040`].
+- **`fixed_point_operator`** (`\Phi(C)`): Governed provisional reading of a declared operator over continuation expressions used to evaluate whether repeated application reaches an invariant continuation condition. [Source: `PATCH_PI_RT_CALCULUS_040`].
+- **`fixed_point_evaluation`** (`Eval\Phi(C)`): Governed provisional reading of the bounded evaluation process of a continuation expression under the declared fixed-point operator. [Source: `PATCH_PI_RT_CALCULUS_040`].
+- **`fixed_point_candidate`** (`CandFix(C)`): Governed provisional reading of a continuation expression that is well-formed and boundedly evaluable as a possible fixed-point witness. [Source: `PATCH_PI_RT_CALCULUS_040`].
+- **`fixed_point_class`** (`ClassFix`): Governed provisional reading of the typed class of continuation expressions eligible for bounded fixed-point semantic interpretation. [Source: `PATCH_PI_RT_CALCULUS_040`].
+- **`fixed_point_admissibility`** (`AdmFix(C)`): Governed provisional reading of the admissibility status assigned to a fixed-point candidate when typing, declaration, bounded evaluation, and invariance conditions all hold. [Source: `PATCH_PI_RT_CALCULUS_041`].
+- **`fixed_point_bound`** (`Bound\Phi(C)`): Governed provisional reading of the declared finite evaluation boundary within which `Eval\Phi(C)` must produce or fail to produce a fixed-point candidate. [Source: `PATCH_PI_RT_CALCULUS_041`].
+- **`fixed_point_invariance_condition`** (`Inv\Phi(C)`): Governed provisional reading of the condition that further declared applications of `\Phi` do not change the resulting continuation condition within the bounded evaluation regime. [Source: `PATCH_PI_RT_CALCULUS_041`].
+- **`fixed_point_admission_failure`** (`FailAdmFix(C)`): Governed provisional reading of the classified failure state produced when `CandFix(C)` does not satisfy fixed-point admissibility conditions. [Source: `PATCH_PI_RT_CALCULUS_041`].
+- **`fixed_point_correctness`** (`CorrectFix(C)`): Governed provisional reading of the correctness classification assigned to an admissible fixed point under bounded continuation-semantics preservation. [Source: `PATCH_PI_RT_CALCULUS_042`].
+- **`fixed_point_correctness_theorem`** (`ThmCorrectFix`): Governed provisional reading of the bounded correctness theorem for admissible continuation fixed points. [Source: `PATCH_PI_RT_CALCULUS_042`].
+- **`fixed_point_correctness_failure`** (`FailCorrectFix(C)`): Governed provisional reading of the classified failure state produced when correctness verification fails. [Source: `PATCH_PI_RT_CALCULUS_042`].
+- **`fixed_point_uniqueness`** (`UniqueFix(C)`): Governed provisional reading of the bounded uniqueness classification assigned to a correct fixed point within its equivalence class and evaluation regime. [Source: `PATCH_PI_RT_CALCULUS_043`].
+- **`fixed_point_equivalence_class`** (`EqClassFix(C)`): Governed provisional reading of the equivalence class of fixed-point candidates under declared continuation, trace, and fixed-point evaluation semantics. [Source: `PATCH_PI_RT_CALCULUS_043`].
+- **`fixed_point_uniqueness_failure`** (`FailUniqueFix(C)`): Governed provisional reading of the classified failure state produced when more than one non-equivalent correct fixed point exists in the bounded class. [Source: `PATCH_PI_RT_CALCULUS_043`].
+- **`recursive_fixed_point_interaction`** (`RecFix(C)`): Governed provisional reading of the bounded semantic relation between recursive continuation evaluation and fixed-point evaluation. [Source: `PATCH_PI_RT_CALCULUS_044`].
+- **`recursive_fixed_point_alignment`** (`AlignRecFix(C)`): Governed provisional reading of the bounded condition where recursive unfolding and fixed-point evaluation preserve equivalent continuation semantics. [Source: `PATCH_PI_RT_CALCULUS_044`].
+- **`recursive_fixed_point_divergence`** (`DivRecFix(C)`): Governed provisional reading of the bounded condition where recursive unfolding does not align with fixed-point evaluation. [Source: `PATCH_PI_RT_CALCULUS_044`].
+- **`recursive_fixed_point_failure`** (`FailRecFix(C)`): Governed provisional reading of the classified failure state produced when recursive/fixed-point interaction cannot be typed, bounded, or evaluated under the declared regime. [Source: `PATCH_PI_RT_CALCULUS_044`].
 - **`Continuation_Expression_Evaluation_Order`** (`parse`, `WF(C)`, typed checks, explicit transition, endpoint, admissibility, residue, failure classification, composition, reduction): Ordered pipeline for continuation expressions. Failure classification occurs before composition is admitted, and reduction remains gated by the full sequence of checks. [Source: `PATCH_PI_RT_CALCULUS_024`].
 - **`distinction_floor_interpretation`**: Governed provisional reading that resolves local scale constraints and pre-distinction origins. [Source: `MPF_RT_BICONDITIONAL_LADDER_001`]
 - **`continuation_first_ontology`**: Governed provisional reading that process precedes distinction and that "precedence" is ontological rather than temporal. [Source: session_summary 2026-06-26 continuation-first ontology reduction]

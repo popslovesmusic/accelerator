@@ -1,0 +1,269 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_040",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-05",
+  "type": "governance_patch",
+  "artifact_type": "governance_patch",
+  "title": "Continuation Fixed-Point Semantics",
+  "priority": "HIGH",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_039"
+  ],
+  "mode": "additive",
+  "basis": {
+    "source_patches": [
+      "PATCH_PI_RT_CALCULUS_039"
+    ],
+    "source_surfaces": [
+      "docs/textbook/mono_process_textbook_complete.md",
+      "registry/formal_object_registry.json",
+      "registry/math_source_registry.json",
+      "registry/lexicon_gap_queue.json",
+      "registry/registry/lexicon_gap_queue.json",
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_039.json"
+    ],
+    "scope": "Introduce bounded fixed-point semantics for continuation expressions. This patch defines the mathematical meaning of fixed points within the RT Calculus without asserting existence, uniqueness, admissibility, or correctness for all continuation classes."
+  },
+  "core_rule": {
+    "statement": "Continuation fixed-point semantics apply only after EVAL_024 and only to continuation expressions typed in ClassFix with a declared Φ(C); bounded EvalΦ(C) may yield Fix(C) within the declared evaluation regime; recursive and higher-order continuations may generate candidates where admissible; REDUCE_025 remains governing; RT_core remains unchanged."
+  },
+  "purpose": "Introduce bounded fixed-point semantics for continuation expressions. This patch defines the mathematical meaning of fixed points within the RT Calculus without asserting existence, uniqueness, admissibility, or correctness for all continuation classes.",
+  "canonical_claims": [
+    {
+      "id": "CLAIM_040_001",
+      "statement": "Fixed-point semantics are bounded and apply only to typed continuation expressions in ClassFix.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_040_002",
+      "statement": "Φ(C) is declared and EvalΦ(C) is bounded without asserting universal existence or uniqueness.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_040_003",
+      "statement": "Recursive and higher-order continuations may generate fixed-point candidates where admissible.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_040_004",
+      "statement": "Deferred fixed-point evaluation remains governed by REDUCE_025 and the existing outcome taxonomy.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_040_005",
+      "statement": "RT_core remains unchanged.",
+      "status": "canonical"
+    }
+  ],
+  "scope": {
+    "adds": [
+      "Continuation fixed-point object",
+      "Fixed-point operator",
+      "Fixed-point candidate semantics",
+      "Fixed-point classification",
+      "Bounded fixed-point semantics"
+    ],
+    "does_not_add": [
+      "Fixed-point correctness theorem",
+      "Fixed-point admissibility theorem",
+      "Universal fixed-point existence",
+      "Universal fixed-point uniqueness",
+      "Recovery operator",
+      "sigma_RT selector",
+      "Operational regime execution"
+    ]
+  },
+  "formal_objects": [
+    {
+      "id": "FIXED_POINT_040",
+      "symbol": "Fix(C)",
+      "name": "Continuation Fixed Point",
+      "definition": "A continuation expression whose fixed-point evaluation under Φ reaches a continuation condition invariant under further applications of Φ within the declared bounded evaluation regime."
+    },
+    {
+      "id": "FIX_OPERATOR_040",
+      "symbol": "Φ(C)",
+      "name": "Fixed-Point Operator",
+      "definition": "A declared operator over continuation expressions used to evaluate whether repeated application reaches an invariant continuation condition."
+    },
+    {
+      "id": "FIX_EVAL_040",
+      "symbol": "EvalΦ(C)",
+      "name": "Fixed-Point Evaluation",
+      "definition": "The bounded evaluation process of a continuation expression C under the declared fixed-point operator Φ."
+    },
+    {
+      "id": "FIX_CANDIDATE_040",
+      "symbol": "CandFix(C)",
+      "name": "Fixed-Point Candidate",
+      "definition": "A continuation expression C for which Φ(C) is well-formed and boundedly evaluable as a possible fixed-point witness."
+    },
+    {
+      "id": "FIX_CLASS_040",
+      "symbol": "ClassFix",
+      "name": "Fixed-Point Class",
+      "definition": "The typed class of continuation expressions eligible for bounded fixed-point semantic interpretation."
+    }
+  ],
+  "definitions": {
+    "fixed_point": {
+      "symbol": "Fix(C)",
+      "requirements": [
+        "WF(C)",
+        "Typed(C)",
+        "C is typed in ClassFix",
+        "Φ(C) is declared",
+        "EvalΦ(C) is bounded",
+        "EvalΦ(C) yields Fix(C)"
+      ]
+    }
+  },
+  "fixed_point_pipeline": [
+    {
+      "step": 1,
+      "operation": "Evaluate continuation using EVAL_024."
+    },
+    {
+      "step": 2,
+      "operation": "Construct CandFix(C)."
+    },
+    {
+      "step": 3,
+      "operation": "Verify well-formedness, typing, and ClassFix eligibility."
+    },
+    {
+      "step": 4,
+      "operation": "Apply EvalΦ(C)."
+    },
+    {
+      "step": 5,
+      "operation": "Determine bounded fixed-point classification."
+    },
+    {
+      "step": 6,
+      "operation": "Continue reduction using REDUCE_025 where appropriate."
+    }
+  ],
+  "fixed_point_classes": [
+    {
+      "class": "Stable",
+      "description": "Continuation satisfies bounded fixed-point semantics and yields Fix(C) under EvalΦ(C)."
+    },
+    {
+      "class": "Candidate",
+      "description": "Continuation remains under evaluation as a fixed-point candidate."
+    },
+    {
+      "class": "Deferred",
+      "description": "Fixed-point semantics cannot yet be established within the current calculus boundary."
+    },
+    {
+      "class": "Failure",
+      "description": "Evaluation terminates in classified continuation failure."
+    }
+  ],
+  "semantic_rule": {
+    "id": "FIX_SEMANTICS_RULE_040",
+    "statement": "C may receive fixed-point semantics only when C is typed in ClassFix, Φ(C) is declared, EvalΦ(C) is bounded, and EvalΦ(C) yields an invariant continuation condition Fix(C)."
+  },
+  "non_claims": [
+    "Does not assert that every continuation has a fixed point.",
+    "Does not assert fixed-point admissibility.",
+    "Does not assert fixed-point correctness.",
+    "Does not assert fixed-point uniqueness.",
+    "Does not introduce recovery.",
+    "Does not introduce σRT.",
+    "Does not alter RT_core."
+  ],
+  "relationships": {
+    "recursive_continuation": "Rec(C) may generate fixed-point candidates.",
+    "higher_order_continuation": "HC(C) may operate on fixed-point candidates.",
+    "fixed_point_evaluation": "EvalΦ(C) is the bounded evaluation process for candidate fixed points.",
+    "strategy": "S(C) governs lawful evaluation order.",
+    "reduction": "REDUCE_025 remains the governing reduction procedure.",
+    "partial_normal_form": "Deferred fixed-point evaluation may terminate as pNF(C)."
+  },
+  "invariants": [
+    "RT_core remains unchanged.",
+    "Fix(C) introduces no new primitive.",
+    "EvalΦ(C) is bounded and diagnostic only.",
+    "Fixed-point semantics do not imply existence.",
+    "Fixed-point semantics do not imply uniqueness.",
+    "Fixed-point semantics do not imply admissibility.",
+    "Recovery remains deferred."
+  ],
+  "future_dependencies": [
+    "PATCH_PI_RT_CALCULUS_041 (Fixed-Point Admissibility Conditions)",
+    "PATCH_PI_RT_CALCULUS_042 (Fixed-Point Correctness Theorem)",
+    "PATCH_PI_RT_CALCULUS_043 (Fixed-Point Uniqueness Conditions)",
+    "PATCH_PI_RT_CALCULUS_044 (Recursive / Fixed-Point Interaction)",
+    "PATCH_PI_RT_CALCULUS_045 (RT Calculus Specification v1.0 Consolidation)"
+  ],
+  "textbook_changes": {
+    "chapter": "2.3.22",
+    "title": "Continuation Fixed-Point Semantics",
+    "summary": [
+      "Introduce Fix(C).",
+      "Define the bounded fixed-point operator Φ(C).",
+      "Define the bounded fixed-point evaluation EvalΦ(C).",
+      "Define CandFix(C).",
+      "Classify bounded fixed-point states.",
+      "State the fixed-point semantic rule and separate semantics from admissibility and correctness."
+    ]
+  },
+  "registry_updates": {
+    "formal_object_registry": [
+      "FIXED_POINT_040",
+      "FIX_OPERATOR_040",
+      "FIX_EVAL_040",
+      "FIX_CANDIDATE_040",
+      "FIX_CLASS_040"
+    ],
+    "math_source_registry": [
+      "PATCH_PI_RT_CALCULUS_040"
+    ],
+    "lexicon_gap_queue": [
+      "continuation_fixed_point",
+      "fixed_point_operator",
+      "fixed_point_evaluation",
+      "fixed_point_candidate",
+      "fixed_point_class"
+    ]
+  },
+  "validation_requirements": [
+    "Patch record parses cleanly.",
+    "Patch depends on PATCH_PI_RT_CALCULUS_039.",
+    "Fixed-point semantics remain bounded after EVAL_024.",
+    "ClassFix eligibility and EvalΦ(C) boundedness are explicitly required.",
+    "No universal existence, uniqueness, admissibility, or correctness theorem is claimed.",
+    "RT_core remains unchanged."
+  ],
+  "required_repo_changes": [
+    "Update docs/textbook/mono_process_textbook_complete.md with the continuation fixed-point semantics section and appendix entries.",
+    "Update registry/formal_object_registry.json with the fixed-point formal objects.",
+    "Update registry/math_source_registry.json with the patch source entry.",
+    "Relock registry/math_hashes.json after the source registry update.",
+    "Update registry/lexicon_gap_queue.json with the fixed-point terms.",
+    "Update registry/registry/lexicon_gap_queue.json with the mirrored fixed-point terms.",
+    "Update registry/governance_change_ledger.json with the corresponding governance ledger entry."
+  ],
+  "target_files": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/formal_object_registry.json",
+    "registry/math_source_registry.json",
+    "registry/math_hashes.json",
+    "registry/lexicon_gap_queue.json",
+    "registry/registry/lexicon_gap_queue.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_040.json"
+  ],
+  "success_criteria": {
+    "fixed_point_semantics_documented": true,
+    "fixed_point_prereqs_registered": true,
+    "fixed_point_evaluation_registered": true,
+    "fixed_point_class_registered": true,
+    "boundedness_preserved": true,
+    "rt_core_unchanged": true
+  }
+}

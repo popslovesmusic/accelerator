@@ -74,6 +74,9 @@ The Analysis Department depends on:
 - `governance/live/program_debt_discharge_command.json`
 - `governance/live/induction_queue.json`
 - `outputs/audits/global_health_report.json`
+- `docs/textbook/mono_process_textbook_complete.md`
+- `docs/theory/foundational/5_03_26 unity/math/notes/0007_rt_calculus_specification_v1_0_consolidation.md`
+- `registry/governance/patches/PATCH_PI_RT_CALCULUS_045.json`
 - the governed registries and audit artifacts referenced by those ledgers
 
 Every recommendation must cite the live artifact or artifacts it was derived from.
@@ -134,8 +137,8 @@ Each recommendation should carry:
 
 #### ANL_REC_003
 - **Title:** Continue documentation debt reduction
-- **Source Evidence:** `governance/live/master_work_index.json`, `departments/documentation/department_ssot.md`
-- **Recommendation:** continue documentation synchronization and documentation debt reduction because documentation drift remains governed work and the documentation department is live.
+- **Source Evidence:** `governance/live/master_work_index.json`, `departments/documentation/department_ssot.md`, `docs/textbook/mono_process_textbook_complete.md`, `docs/theory/foundational/5_03_26 unity/math/notes/0007_rt_calculus_specification_v1_0_consolidation.md`, `registry/governance/patches/PATCH_PI_RT_CALCULUS_045.json`
+- **Recommendation:** continue documentation synchronization and documentation debt reduction because documentation drift remains governed work, and the RT Calculus v1.0 consolidation now adds a release-level specification surface that should be reflected in downstream analysis artifacts.
 - **Claim Class:** `C1_model_relative`
 - **Status:** deterministic recommendation
 
@@ -154,13 +157,13 @@ Each recommendation should carry:
   
   1. `PROOF-ELEVATION-CAMPAIGN-001` and `MT-PROOF-ELEVATION-001` formal follow-through
   1. `math debt reduction` for bounded `nonlocal_transport_fragmentation` continuation of `MT-COUNTEREXAMPLE-001`
-  1. `documentation debt reduction`
+  1. `documentation debt reduction`, including RT Calculus v1.0 consolidation sync
   1. `lexicon debt reduction` for residual hardening only
 
   Ordering basis:
   - `PROOF-ELEVATION-CAMPAIGN-001` and `MT-PROOF-ELEVATION-001` are first because the canonical math execution order places formal follow-through in phase one.
   - `math debt reduction` remains second for the counterexample campaign because the orientation-locking direct run is complete and the next declared bounded vector is `nonlocal_transport_fragmentation`.
-  - `documentation debt reduction` is third because documentation drift still affects discoverability and onboarding across the governed surfaces.
+  - `documentation debt reduction`, including RT Calculus v1.0 consolidation sync, is third because documentation drift still affects discoverability and onboarding across the governed surfaces, and the new release-level specification index should be reflected in downstream analysis artifacts.
   - `lexicon debt reduction` is fourth because the validation registry now has no `gap_open` entries, so the remaining lexicon work is residual hardening rather than leading backlog pressure.
 
 ---

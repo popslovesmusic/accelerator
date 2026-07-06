@@ -1,0 +1,245 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_039",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-05",
+  "type": "governance_patch",
+  "artifact_type": "governance_patch",
+  "title": "Higher-Order Continuation Correctness",
+  "priority": "HIGH",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_038"
+  ],
+  "mode": "additive",
+  "basis": {
+    "source_patches": [
+      "PATCH_PI_RT_CALCULUS_038"
+    ],
+    "source_surfaces": [
+      "docs/textbook/mono_process_textbook_complete.md",
+      "registry/formal_object_registry.json",
+      "registry/math_source_registry.json",
+      "registry/lexicon_gap_queue.json",
+      "registry/registry/lexicon_gap_queue.json",
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_038.json"
+    ],
+    "scope": "Establish bounded correctness conditions for higher-order continuation semantics, including HC(C), T(C), and Lift(C), without asserting universal higher-order correctness."
+  },
+  "core_rule": {
+    "statement": "Higher-order continuation correctness applies only after EVAL_024 and only to explicit higher-order continuations that satisfy higher-order admissibility; Lift(C) preserves continuation identity and process-equivalence class where defined; T(C) preserves typing, admissibility, and process equivalence where defined; bounded strategy correctness remains governing; RT_core remains unchanged."
+  },
+  "purpose": "Establish bounded correctness conditions for higher-order continuation semantics, including HC(C), T(C), and Lift(C), without asserting universal higher-order correctness.",
+  "canonical_claims": [
+    {
+      "id": "CLAIM_039_001",
+      "statement": "Higher-order correctness is bounded and applies only to explicit higher-order continuation classes.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_039_002",
+      "statement": "Lift(C) preserves continuation identity and process-equivalence class where defined.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_039_003",
+      "statement": "T(C) preserves typing, admissibility, and process equivalence where defined.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_039_004",
+      "statement": "Higher-order reduction remains subject to EVAL_024, REDUCE_025, and bounded strategy correctness.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_039_005",
+      "statement": "RT_core remains unchanged.",
+      "status": "canonical"
+    }
+  ],
+  "scope": {
+    "adds": [
+      "Higher-order correctness theorem",
+      "Higher-order preservation obligations",
+      "Lift correctness conditions",
+      "Transformation correctness conditions",
+      "Higher-order correctness class"
+    ],
+    "does_not_add": [
+      "Universal higher-order correctness proof",
+      "General fixed-point semantics",
+      "Recovery operator",
+      "sigma_RT selector",
+      "Operational regime execution",
+      "Self-modifying calculus"
+    ]
+  },
+  "formal_objects": [
+    {
+      "id": "HIGHER_ORDER_CORRECTNESS_039",
+      "symbol": "Correct(HC)",
+      "name": "Higher-Order Continuation Correctness",
+      "definition": "The bounded property that higher-order continuation operations preserve typing, process equivalence, admissibility, strategy correctness, and canonical outcomes."
+    },
+    {
+      "id": "LIFT_CORRECTNESS_039",
+      "symbol": "Correct(Lift)",
+      "name": "Lift Correctness",
+      "definition": "The property that Lift(C) embeds a first-order continuation into the higher-order domain without changing its continuation identity or process equivalence class."
+    },
+    {
+      "id": "TRANSFORM_CORRECTNESS_039",
+      "symbol": "Correct(T)",
+      "name": "Transformation Correctness",
+      "definition": "The property that a lawful continuation transformation T(C) preserves typing, admissibility, and process equivalence where defined."
+    },
+    {
+      "id": "HIGHER_ORDER_CORRECTNESS_CLASS_039",
+      "symbol": "ClassCorrectHC",
+      "name": "Higher-Order Correctness Class",
+      "definition": "The class of higher-order continuations satisfying all bounded higher-order correctness prerequisites."
+    }
+  ],
+  "definitions": {
+    "higher_order_correctness": {
+      "symbol": "Correct(HC)",
+      "requirements": [
+        "WF(C)",
+        "Typed(C)",
+        "HC(C)",
+        "Higher-order admissibility holds",
+        "Correct(Lift)",
+        "Correct(T)",
+        "S(C) is applicable"
+      ]
+    }
+  },
+  "theorem": {
+    "name": "Higher-Order Continuation Correctness",
+    "statement": {
+      "if": [
+        "WF(C)",
+        "Typed(C)",
+        "HC(C)",
+        "Higher-order admissibility holds",
+        "Correct(Lift)",
+        "Correct(T)",
+        "S(C) is applicable"
+      ],
+      "then": [
+        "Higher-order reduction preserves typing.",
+        "Higher-order reduction preserves admissibility.",
+        "Higher-order transformation preserves process equivalence where defined.",
+        "Lift(C) preserves continuation identity.",
+        "Bounded strategy correctness is preserved.",
+        "Canonical outcomes remain NF(C), pNF(C), or ⊥C_x."
+      ]
+    }
+  },
+  "correctness_obligations": [
+    {
+      "requirement": "Lift Preservation",
+      "description": "Lift(C) embeds first-order continuations without altering identity, type, or process-equivalence class."
+    },
+    {
+      "requirement": "Transformation Preservation",
+      "description": "T(C) preserves typing, admissibility, and process equivalence where defined."
+    },
+    {
+      "requirement": "Admissibility Preservation",
+      "description": "Higher-order continuation operands remain lawful continuation objects."
+    },
+    {
+      "requirement": "Strategy Preservation",
+      "description": "S(C) remains applicable to higher-order reduction candidates."
+    },
+    {
+      "requirement": "Outcome Preservation",
+      "description": "Higher-order reduction outcomes remain within NF(C), pNF(C), or classified ⊥C_x."
+    }
+  ],
+  "limitations": [
+    "Applies only to bounded higher-order continuation classes.",
+    "Does not prove universal higher-order correctness.",
+    "Does not introduce fixed-point semantics.",
+    "Does not permit self-modifying calculus rules.",
+    "Does not execute operational regimes."
+  ],
+  "invariants": [
+    "RT_core remains unchanged.",
+    "Higher-order correctness does not introduce new primitives.",
+    "Lift(C) preserves continuation identity.",
+    "T(C) preserves ≡P where defined.",
+    "Higher-order operations remain subject to EVAL_024 and REDUCE_025.",
+    "Strategy correctness from PATCH_PI_RT_CALCULUS_036 remains governing.",
+    "Recovery remains deferred."
+  ],
+  "future_dependencies": [
+    "PATCH_PI_RT_CALCULUS_040 (Continuation Fixed-Point Semantics)",
+    "PATCH_PI_RT_CALCULUS_041 (Fixed-Point Admissibility Conditions)"
+  ],
+  "textbook_changes": {
+    "chapter": "2.3.21",
+    "title": "Higher-Order Continuation Correctness",
+    "summary": [
+      "State the bounded correctness theorem for HC(C).",
+      "Define Correct(Lift).",
+      "Define Correct(T).",
+      "Specify higher-order preservation obligations.",
+      "Distinguish bounded higher-order correctness from universal higher-order correctness."
+    ]
+  },
+  "registry_updates": {
+    "formal_object_registry": [
+      "HIGHER_ORDER_CORRECTNESS_039",
+      "LIFT_CORRECTNESS_039",
+      "TRANSFORM_CORRECTNESS_039",
+      "HIGHER_ORDER_CORRECTNESS_CLASS_039"
+    ],
+    "math_source_registry": [
+      "PATCH_PI_RT_CALCULUS_039"
+    ],
+    "lexicon_gap_queue": [
+      "higher_order_correctness",
+      "lift_correctness",
+      "transformation_correctness",
+      "higher_order_correctness_class"
+    ]
+  },
+  "rt_core_impact": {
+    "modified": false,
+    "statement": "RT := [(ℰ≠0) ⇔R δα(ℰ>0)] remains unchanged."
+  },
+  "validation_requirements": [
+    "Patch record parses cleanly.",
+    "Patch depends on PATCH_PI_RT_CALCULUS_038.",
+    "Higher-order correctness is gated by EVAL_024 and higher-order admissibility.",
+    "Lift(C) and lawful transformations preserve typing and process equivalence where defined.",
+    "RT_core remains unchanged."
+  ],
+  "required_repo_changes": [
+    "Update docs/textbook/mono_process_textbook_complete.md with the higher-order continuation correctness section and appendix entries.",
+    "Update registry/formal_object_registry.json with the higher-order correctness formal objects.",
+    "Update registry/math_source_registry.json with the patch source entry.",
+    "Relock registry/math_hashes.json after the source registry update.",
+    "Update registry/lexicon_gap_queue.json with the higher-order correctness terms.",
+    "Update registry/registry/lexicon_gap_queue.json with the mirrored higher-order correctness terms.",
+    "Update registry/governance_change_ledger.json with the corresponding governance ledger entry."
+  ],
+  "target_files": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/formal_object_registry.json",
+    "registry/math_source_registry.json",
+    "registry/math_hashes.json",
+    "registry/lexicon_gap_queue.json",
+    "registry/registry/lexicon_gap_queue.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_039.json"
+  ],
+  "success_criteria": {
+    "higher_order_correctness_documented": true,
+    "higher_order_prereqs_registered": true,
+    "higher_order_class_registered": true,
+    "boundedness_preserved": true,
+    "rt_core_unchanged": true
+  }
+}
