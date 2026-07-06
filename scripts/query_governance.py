@@ -30,6 +30,8 @@ GOVERNANCE_CHANGE_LEDGER = ROOT / "registry/governance_change_ledger.json"
 RESEARCH_DEBT_REGISTRY = ROOT / "registry/research_debt_registry.json"
 PATCH_REGISTRY_DIR = ROOT / "registry/governance/patches"
 SEMANTIC_AUTHORITY_REGISTRY = ROOT / "registry/theorem_registry.json"
+CLAIM_REGISTRY = ROOT / "registry/claim_registry.json"
+CLAIM_SUPPORT_MATRIX = ROOT / "registry/claim_support_matrix.json"
 
 
 BOOTSTRAP_SQL = """\
@@ -483,6 +485,72 @@ def build_historical_residue_projection(current_state=None, debt_records=None):
             "unverified_residue",
         ],
     }
+
+
+def build_replay_reconciliation_projection(conn):
+    projection = {
+        "projection_state": "unavailable",
+        "boundary_state": "unavailable",
+        "coverage_state": "unknown",
+        "subject_count": 0,
+        "event_count": 0,
+        "latest_subject_id": None,
+        "latest_subject_type": None,
+        "latest_event_id": None,
+        "latest_event_type": None,
+        "latest_source_patch_id": None,
+        "latest_source_path": None,
+        "latest_created_at": None,
+        "evidence_paths": [
+            str(GLOBAL_HEALTH_REPORT.relative_to(ROOT)).replace("\\", "/"),
+            str(EVENT_BUS_MIGRATION.relative_to(ROOT)).replace("\\", "/"),
+            str(EVENT_REPLAY_MIGRATION.relative_to(ROOT)).replace("\\", "/"),
+            str(EVENT_RECONCILIATION_MIGRATION.relative_to(ROOT)).replace("\\", "/"),
+        ],
+        "warnings": [],
+    }
+
+    try:
+        rows = conn.execute(
+            """
+            SELECT
+                subject_id,
+                subject_type,
+                latest_event_id,
+                latest_event_type,
+                latest_source_patch_id,
+                latest_source_path,
+                event_count,
+                latest_created_at
+            FROM governance_replay_reconciliation_view
+            ORDER BY latest_created_at DESC, subject_id DESC
+            """
+        ).fetchall()
+    except sqlite3.Error:
+        projection["warnings"].append("Replay reconciliation view is unavailable.")
+        return projection
+
+    records = [dict(row) for row in rows]
+    if not records:
+        projection["projection_state"] = "empty"
+        projection["boundary_state"] = "unavailable"
+        projection["coverage_state"] = "empty"
+        return projection
+
+    latest = records[0]
+    projection["projection_state"] = "projected"
+    projection["boundary_state"] = "diagnostic_only"
+    projection["coverage_state"] = "stateful_projection"
+    projection["subject_count"] = len(records)
+    projection["event_count"] = sum(int(record.get("event_count") or 0) for record in records)
+    projection["latest_subject_id"] = latest.get("subject_id")
+    projection["latest_subject_type"] = latest.get("subject_type")
+    projection["latest_event_id"] = latest.get("latest_event_id")
+    projection["latest_event_type"] = latest.get("latest_event_type")
+    projection["latest_source_patch_id"] = latest.get("latest_source_patch_id")
+    projection["latest_source_path"] = latest.get("latest_source_path")
+    projection["latest_created_at"] = latest.get("latest_created_at")
+    return projection
 
 
 def collect_recent_governance_decisions(conn, limit=5):
@@ -1783,6 +1851,22 @@ def build_context_capsule_result(db_path, target=None, task=None):
         "decision": debt_result.get("decision", "allow"),
     }
 
+    replay_projection = current_state.get("projection", {}).get("replay_reconciliation", {}) if isinstance(current_state.get("projection"), dict) else {}
+    replay_summary = {
+        "state": replay_projection.get("projection_state", current_state.get("runtime", {}).get("replay_reconciliation_state", "unknown")),
+        "boundary": replay_projection.get("boundary_state", current_state.get("runtime", {}).get("replay_reconciliation_boundary_state", "unknown")),
+        "coverage_state": replay_projection.get("coverage_state", current_state.get("runtime", {}).get("replay_reconciliation_coverage_state", "unknown")),
+        "subject_count": replay_projection.get("subject_count", current_state.get("runtime", {}).get("replay_reconciliation_subject_count", 0)),
+        "event_count": replay_projection.get("event_count", current_state.get("runtime", {}).get("replay_reconciliation_event_count", 0)),
+        "latest_subject_id": replay_projection.get("latest_subject_id", current_state.get("runtime", {}).get("replay_reconciliation_latest_subject_id")),
+        "latest_subject_type": replay_projection.get("latest_subject_type", current_state.get("runtime", {}).get("replay_reconciliation_latest_subject_type")),
+        "latest_event_id": replay_projection.get("latest_event_id", current_state.get("runtime", {}).get("replay_reconciliation_latest_event_id")),
+        "latest_event_type": replay_projection.get("latest_event_type", current_state.get("runtime", {}).get("replay_reconciliation_latest_event_type")),
+        "latest_source_patch_id": replay_projection.get("latest_source_patch_id", current_state.get("runtime", {}).get("replay_reconciliation_latest_source_patch_id")),
+        "latest_source_path": replay_projection.get("latest_source_path", current_state.get("runtime", {}).get("replay_reconciliation_latest_source_path")),
+        "latest_created_at": replay_projection.get("latest_created_at", current_state.get("runtime", {}).get("replay_reconciliation_latest_created_at")),
+    }
+
     semantic_targets = collect_patch_semantic_targets(patch_record or {}) if isinstance(patch_record, dict) else []
     semantic_summary = None
     semantic_evidence_paths = []
@@ -1810,6 +1894,8 @@ def build_context_capsule_result(db_path, target=None, task=None):
         str(PATCH_CHAIN_MIGRATION.relative_to(ROOT)).replace("\\", "/"),
         str(DEBT_RUNTIME_MIGRATION.relative_to(ROOT)).replace("\\", "/"),
         str(EVENT_BUS_MIGRATION.relative_to(ROOT)).replace("\\", "/"),
+        str(EVENT_REPLAY_MIGRATION.relative_to(ROOT)).replace("\\", "/"),
+        str(EVENT_RECONCILIATION_MIGRATION.relative_to(ROOT)).replace("\\", "/"),
         str(CONTEXT_CAPSULE_MIGRATION.relative_to(ROOT)).replace("\\", "/"),
         str(FRESHNESS_MIGRATION.relative_to(ROOT)).replace("\\", "/"),
         str(SNAPSHOT_REFRESH_MIGRATION.relative_to(ROOT)).replace("\\", "/"),
@@ -1820,9 +1906,11 @@ def build_context_capsule_result(db_path, target=None, task=None):
         evidence_paths.insert(0, str(patch_path.relative_to(ROOT)).replace("\\", "/"))
     if normalized_target:
         evidence_paths.append(normalized_target)
+    evidence_paths.extend(debt_result.get("evidence_paths", []))
+    evidence_paths.extend(replay_projection.get("evidence_paths", []))
     if semantic_evidence_paths:
         evidence_paths.extend(semantic_evidence_paths)
-    evidence_paths = _dedupe_trim(evidence_paths, limit=7)
+    evidence_paths = _dedupe_trim(evidence_paths, limit=15)
 
     result = {
         "target": normalized_target,
@@ -1837,6 +1925,7 @@ def build_context_capsule_result(db_path, target=None, task=None):
             "defer": defer_items,
         },
         "debt_summary": debt_summary,
+        "replay_summary": replay_summary,
         "warnings": warnings,
         "required_validators": [
             "current-state",
@@ -1919,6 +2008,270 @@ def load_semantic_authority_catalog(conn):
     if rows:
         return [dict(row) for row in rows]
     return load_semantic_authority_registry_records()
+
+
+def load_claim_registry_records():
+    registry = load_optional_json(CLAIM_REGISTRY)
+    if not isinstance(registry, dict):
+        return []
+
+    entries = registry.get("claims")
+    if not isinstance(entries, list):
+        return []
+
+    records = []
+    for entry in entries:
+        if not isinstance(entry, dict):
+            continue
+        evidence_paths = [
+            normalize_repo_path(path)
+            for path in parse_json_collection(entry.get("evidence_paths"))
+            if normalize_repo_path(path)
+        ]
+        records.append(
+            {
+                "claim_id": str(entry.get("claim_id") or entry.get("source_claim_id") or "").strip() or None,
+                "source_claim_id": str(entry.get("source_claim_id") or "").strip() or None,
+                "title": entry.get("title"),
+                "claim_statement": entry.get("claim_statement"),
+                "status": entry.get("status"),
+                "claim_type": entry.get("claim_type"),
+                "classification": entry.get("classification"),
+                "model_class": entry.get("model_class"),
+                "models_used": parse_json_collection(entry.get("models_used")),
+                "model_classes": parse_json_collection(entry.get("model_classes")),
+                "seeds_used": entry.get("seeds_used"),
+                "falsification_run": bool(entry.get("falsification_run")),
+                "evidence_paths": evidence_paths,
+                "paper_path": normalize_repo_path(entry.get("paper_path")),
+                "last_updated": entry.get("last_updated"),
+            }
+        )
+    return records
+
+
+def load_claim_support_matrix_records():
+    registry = load_optional_json(CLAIM_SUPPORT_MATRIX)
+    if not isinstance(registry, dict):
+        return []
+
+    entries = registry.get("claims")
+    if not isinstance(entries, list):
+        return []
+
+    records = []
+    for entry in entries:
+        if not isinstance(entry, dict):
+            continue
+        records.append(
+            {
+                "claim_id": str(entry.get("claim_id") or "").strip() or None,
+                "claim_text": entry.get("claim_text"),
+                "claim_class": entry.get("claim_class"),
+                "claim_status": entry.get("claim_status"),
+                "required_lemmas": parse_json_collection(entry.get("required_lemmas")),
+                "required_proofs": parse_json_collection(entry.get("required_proofs")),
+                "required_operators": parse_json_collection(entry.get("required_operators")),
+                "required_law_chains": parse_json_collection(entry.get("required_law_chains")),
+                "required_simulation_bindings": parse_json_collection(entry.get("required_simulation_bindings")),
+                "minimum_tool_rigor_endorsement": entry.get("minimum_tool_rigor endorsement")
+                or entry.get("minimum_tool_rigor_endorsement"),
+                "provenance_requirement": entry.get("provenance_requirement"),
+                "publication_allowed": bool(entry.get("publication_allowed")),
+            }
+        )
+    return records
+
+
+def build_semantic_authority_graph_projection(catalog_rows, current_state=None):
+    records = [dict(row) for row in catalog_rows or [] if isinstance(row, (dict, sqlite3.Row))]
+    nodes = []
+    edges = []
+    status_counts = {}
+    rank_counts = {}
+    evidence_paths = [
+        str(SEMANTIC_AUTHORITY_REGISTRY.relative_to(ROOT)).replace("\\", "/"),
+        str(GLOBAL_HEALTH_REPORT.relative_to(ROOT)).replace("\\", "/"),
+    ]
+    if SEMANTIC_AUTHORITY_MIGRATION.exists():
+        evidence_paths.append(str(SEMANTIC_AUTHORITY_MIGRATION.relative_to(ROOT)).replace("\\", "/"))
+
+    for record in records:
+        semantic_key = str(record.get("semantic_key") or record.get("key") or "").strip()
+        semantic_type = str(record.get("semantic_type") or record.get("type") or "").strip() or None
+        status = normalize_semantic_authority_status(record.get("status"))
+        authority_rank = normalize_semantic_authority_rank(record.get("authority_rank"))
+        node = {
+            "semantic_key": semantic_key,
+            "semantic_type": semantic_type,
+            "authority_source": normalize_repo_path(record.get("authority_source"))
+            or str(SEMANTIC_AUTHORITY_REGISTRY.relative_to(ROOT)).replace("\\", "/"),
+            "authority_rank": authority_rank,
+            "status": status,
+            "canonical_expression": record.get("canonical_expression"),
+        }
+        nodes.append(node)
+        status_counts[status] = status_counts.get(status, 0) + 1
+        rank_counts[authority_rank] = rank_counts.get(authority_rank, 0) + 1
+
+        supersedes = normalize_repo_path(record.get("supersedes"))
+        if supersedes:
+            edges.append(
+                {
+                    "from": supersedes,
+                    "to": semantic_key,
+                    "type": "supersedes",
+                    "status": status,
+                }
+            )
+
+    authority_sources = [
+        source
+        for source in dict.fromkeys(node.get("authority_source") for node in nodes if node.get("authority_source"))
+    ]
+    return {
+        "projection_state": "projected" if nodes else "empty",
+        "semantic_authority_count": len(nodes),
+        "active_count": status_counts.get("active", 0),
+        "canonical_count": rank_counts.get("canonical", 0),
+        "primary_count": rank_counts.get("primary", 0),
+        "status_counts": status_counts,
+        "rank_counts": rank_counts,
+        "authority_sources": authority_sources,
+        "nodes": nodes,
+        "edges": edges,
+        "evidence_paths": [path for path in dict.fromkeys(path for path in evidence_paths if path)],
+        "coverage_state": current_state.get("coverage_state", "unknown") if current_state else "unknown",
+    }
+
+
+def build_claim_reasoning_projection(conn, current_state=None, claim_registry_records=None, claim_support_records=None):
+    claim_records = [record for record in (claim_registry_records or load_claim_registry_records()) if isinstance(record, dict)]
+    support_records = [record for record in (claim_support_records or load_claim_support_matrix_records()) if isinstance(record, dict)]
+
+    db_claim_count = 0
+    db_link_count = 0
+    db_link_rows = []
+    db_state = "unavailable"
+    try:
+        db_claim_count = int(
+            conn.execute("SELECT COUNT(DISTINCT claim_id) FROM claim_evidence_links").fetchone()[0] or 0
+        )
+        db_link_count = int(conn.execute("SELECT COUNT(*) FROM claim_evidence_links").fetchone()[0] or 0)
+        link_rows = conn.execute(
+            """
+            SELECT claim_id, source_path, orientation_status
+            FROM claim_evidence_links
+            ORDER BY claim_id, source_path
+            LIMIT 10
+            """
+        ).fetchall()
+        db_link_rows = [dict(row) for row in link_rows]
+        db_state = "projected" if db_link_count > 0 else "empty"
+    except sqlite3.Error:
+        db_state = "unavailable"
+
+    claim_status_counts = {}
+    claim_classification_counts = {}
+    claim_type_counts = {}
+    claims_with_evidence = 0
+    claims_with_paper = 0
+    sample_claims = []
+    for record in claim_records:
+        status = str(record.get("status") or "unknown").strip() or "unknown"
+        classification = str(record.get("classification") or "unknown").strip() or "unknown"
+        claim_type = str(record.get("claim_type") or "unknown").strip() or "unknown"
+        claim_status_counts[status] = claim_status_counts.get(status, 0) + 1
+        claim_classification_counts[classification] = claim_classification_counts.get(classification, 0) + 1
+        claim_type_counts[claim_type] = claim_type_counts.get(claim_type, 0) + 1
+        if record.get("evidence_paths"):
+            claims_with_evidence += 1
+        if record.get("paper_path"):
+            claims_with_paper += 1
+        if len(sample_claims) < 5:
+            sample_claims.append(
+                {
+                    "claim_id": record.get("claim_id"),
+                    "title": record.get("title"),
+                    "status": status,
+                    "classification": classification,
+                    "evidence_paths": record.get("evidence_paths", []),
+                }
+            )
+
+    support_status_counts = {}
+    support_class_counts = {}
+    publication_allowed_count = 0
+    required_lemma_total = 0
+    required_proof_total = 0
+    required_operator_total = 0
+    required_law_chain_total = 0
+    required_simulation_binding_total = 0
+    for record in support_records:
+        support_status = str(record.get("claim_status") or "unknown").strip() or "unknown"
+        support_class = str(record.get("claim_class") or "unknown").strip() or "unknown"
+        support_status_counts[support_status] = support_status_counts.get(support_status, 0) + 1
+        support_class_counts[support_class] = support_class_counts.get(support_class, 0) + 1
+        if record.get("publication_allowed"):
+            publication_allowed_count += 1
+        required_lemma_total += len(record.get("required_lemmas", []))
+        required_proof_total += len(record.get("required_proofs", []))
+        required_operator_total += len(record.get("required_operators", []))
+        required_law_chain_total += len(record.get("required_law_chains", []))
+        required_simulation_binding_total += len(record.get("required_simulation_bindings", []))
+
+    return {
+        "projection_state": "projected" if claim_records or support_records else "empty",
+        "registry": {
+            "claim_count": len(claim_records),
+            "status_counts": claim_status_counts,
+            "classification_counts": claim_classification_counts,
+            "claim_type_counts": claim_type_counts,
+            "claims_with_evidence_paths": claims_with_evidence,
+            "claims_with_paper_paths": claims_with_paper,
+            "sample_claims": sample_claims,
+            "registry_path": str(CLAIM_REGISTRY.relative_to(ROOT)).replace("\\", "/"),
+        },
+        "support_matrix": {
+            "claim_count": len(support_records),
+            "claim_status_counts": support_status_counts,
+            "claim_class_counts": support_class_counts,
+            "publication_allowed_count": publication_allowed_count,
+            "required_lemma_total": required_lemma_total,
+            "required_proof_total": required_proof_total,
+            "required_operator_total": required_operator_total,
+            "required_law_chain_total": required_law_chain_total,
+            "required_simulation_binding_total": required_simulation_binding_total,
+            "matrix_path": str(CLAIM_SUPPORT_MATRIX.relative_to(ROOT)).replace("\\", "/"),
+        },
+        "db_links": {
+            "claim_count": db_claim_count,
+            "link_count": db_link_count,
+            "state": db_state,
+            "sample_links": db_link_rows,
+        },
+        "reason": (
+            "Claim registry and support matrix provide the governed claim summary; "
+            "DB claim-evidence links are empty."
+            if db_state == "empty"
+            else "Claim registry and support matrix provide the governed claim summary; DB claim-evidence links are projected."
+            if db_state == "projected"
+            else "Claim registry and support matrix provide the governed claim summary; DB claim-evidence links are unavailable."
+        ),
+        "evidence_paths": [
+            path
+            for path in dict.fromkeys(
+                path
+                for path in [
+                    str(CLAIM_REGISTRY.relative_to(ROOT)).replace("\\", "/"),
+                    str(CLAIM_SUPPORT_MATRIX.relative_to(ROOT)).replace("\\", "/"),
+                    str(GLOBAL_HEALTH_REPORT.relative_to(ROOT)).replace("\\", "/"),
+                ]
+                if path
+            )
+        ],
+        "coverage_state": current_state.get("coverage_state", "unknown") if current_state else "unknown",
+    }
 
 
 def load_governance_change_ledger_index():
@@ -3331,10 +3684,15 @@ def build_current_state_capsule(db_path):
             str(db_file.relative_to(ROOT)).replace("\\", "/") if db_file.is_relative_to(ROOT) else str(db_file),
             str(GLOBAL_HEALTH_REPORT.relative_to(ROOT)).replace("\\", "/"),
             str(RESEARCH_DEBT_REGISTRY.relative_to(ROOT)).replace("\\", "/"),
+            str(CLAIM_REGISTRY.relative_to(ROOT)).replace("\\", "/"),
+            str(CLAIM_SUPPORT_MATRIX.relative_to(ROOT)).replace("\\", "/"),
             str(CURRENT_STATE_MIGRATION.relative_to(ROOT)).replace("\\", "/"),
             str(AUTHORITY_RESOLUTION_MIGRATION.relative_to(ROOT)).replace("\\", "/"),
             str(PATCH_CHAIN_MIGRATION.relative_to(ROOT)).replace("\\", "/"),
             str(DEBT_RUNTIME_MIGRATION.relative_to(ROOT)).replace("\\", "/"),
+            str(EVENT_BUS_MIGRATION.relative_to(ROOT)).replace("\\", "/"),
+            str(EVENT_REPLAY_MIGRATION.relative_to(ROOT)).replace("\\", "/"),
+            str(EVENT_RECONCILIATION_MIGRATION.relative_to(ROOT)).replace("\\", "/"),
             str(REFRESH_STABILITY_MIGRATION.relative_to(ROOT)).replace("\\", "/"),
             str(SEMANTIC_AUTHORITY_MIGRATION.relative_to(ROOT)).replace("\\", "/"),
         ],
@@ -3355,6 +3713,8 @@ def build_current_state_capsule(db_path):
         state = dict(row) if row else {}
         snapshot = db_snapshot(conn)
         semantic_catalog = load_semantic_authority_catalog(conn)
+        claim_registry_records = load_claim_registry_records()
+        claim_support_records = load_claim_support_matrix_records()
         freshness = build_db_snapshot_freshness_result(
             db_path,
             current_state=state,
@@ -3415,11 +3775,25 @@ def build_current_state_capsule(db_path):
             current_state=state,
             catalog_rows=semantic_catalog,
         )
+        semantic_authority_graph = build_semantic_authority_graph_projection(
+            semantic_catalog,
+            current_state=state,
+        )
+        claim_reasoning = build_claim_reasoning_projection(
+            conn,
+            current_state=state,
+            claim_registry_records=claim_registry_records,
+            claim_support_records=claim_support_records,
+        )
+        replay_projection = build_replay_reconciliation_projection(conn)
         debt_projection = build_debt_blocker_projection(open_debt, current_state=state)
         residue_projection = build_historical_residue_projection(current_state=state, debt_records=debt_catalog)
 
         capsule["projection"] = {
             "semantic_rt": semantic_projection,
+            "semantic_authority_graph": semantic_authority_graph,
+            "claim_reasoning": claim_reasoning,
+            "replay_reconciliation": replay_projection,
             "debt_blocker": debt_projection,
             "historical_residue": residue_projection,
         }
@@ -3429,6 +3803,25 @@ def build_current_state_capsule(db_path):
             or state.get("semantic_projection_state")
             or "unknown"
         )
+        capsule["runtime"]["semantic_authority_graph_state"] = semantic_authority_graph.get("projection_state", "unknown")
+        capsule["runtime"]["semantic_authority_count"] = semantic_authority_graph.get("semantic_authority_count", 0)
+        capsule["runtime"]["claim_reasoning_state"] = claim_reasoning.get("projection_state", "unknown")
+        capsule["runtime"]["claim_registry_count"] = claim_reasoning.get("registry", {}).get("claim_count", 0)
+        capsule["runtime"]["claim_support_count"] = claim_reasoning.get("support_matrix", {}).get("claim_count", 0)
+        capsule["runtime"]["claim_evidence_link_count"] = claim_reasoning.get("db_links", {}).get("link_count", 0)
+        capsule["runtime"]["claim_evidence_state"] = claim_reasoning.get("db_links", {}).get("state", "unknown")
+        capsule["runtime"]["replay_reconciliation_state"] = replay_projection.get("projection_state", "unknown")
+        capsule["runtime"]["replay_reconciliation_boundary_state"] = replay_projection.get("boundary_state", "unknown")
+        capsule["runtime"]["replay_reconciliation_coverage_state"] = replay_projection.get("coverage_state", "unknown")
+        capsule["runtime"]["replay_reconciliation_subject_count"] = replay_projection.get("subject_count", 0)
+        capsule["runtime"]["replay_reconciliation_event_count"] = replay_projection.get("event_count", 0)
+        capsule["runtime"]["replay_reconciliation_latest_subject_id"] = replay_projection.get("latest_subject_id")
+        capsule["runtime"]["replay_reconciliation_latest_subject_type"] = replay_projection.get("latest_subject_type")
+        capsule["runtime"]["replay_reconciliation_latest_event_id"] = replay_projection.get("latest_event_id")
+        capsule["runtime"]["replay_reconciliation_latest_event_type"] = replay_projection.get("latest_event_type")
+        capsule["runtime"]["replay_reconciliation_latest_source_patch_id"] = replay_projection.get("latest_source_patch_id")
+        capsule["runtime"]["replay_reconciliation_latest_source_path"] = replay_projection.get("latest_source_path")
+        capsule["runtime"]["replay_reconciliation_latest_created_at"] = replay_projection.get("latest_created_at")
         capsule["runtime"]["historical_residue_state"] = (
             residue_projection.get("projection_state")
             or state.get("historical_residue_state")
@@ -3440,6 +3833,12 @@ def build_current_state_capsule(db_path):
         capsule["runtime"]["debt_projection_state"] = debt_projection.get("projection_state", "unknown")
         if semantic_projection.get("warnings"):
             capsule["warnings"].extend(semantic_projection.get("warnings", []))
+        if semantic_authority_graph.get("warnings"):
+            capsule["warnings"].extend(semantic_authority_graph.get("warnings", []))
+        if claim_reasoning.get("warnings"):
+            capsule["warnings"].extend(claim_reasoning.get("warnings", []))
+        if replay_projection.get("warnings"):
+            capsule["warnings"].extend(replay_projection.get("warnings", []))
         if residue_projection.get("residual_debt_count", 0) > 0 and "Historical residue remains projected." not in capsule["warnings"]:
             capsule["warnings"].append("Historical residue remains projected.")
 
@@ -3875,7 +4274,7 @@ def legacy_lookup(args):
             "claim": args.claim,
             "open_gaps": args.open_gaps,
         },
-        "note": "Use context-capsule for the minimal runtime summary, current-state for live state, freshness for snapshot age, authority --target for surface ownership, authority --semantic for semantic authority, patch-chain --patch-id for dependency resolution, debt --status for debt projections, emit-event to append governance facts, events to query recorded facts, replay-events to reconstruct limited diagnostic state, reconcile-events to compare replay against registry authority, or patch-gate/--patch-file to invoke the governance runtime gate.",
+        "note": "Use context-capsule for the minimal runtime summary and bounded replay reconciliation coverage, current-state for live state, freshness for snapshot age, authority --target for surface ownership, authority --semantic for semantic authority, patch-chain --patch-id for dependency resolution, debt --status for debt projections, emit-event to append governance facts, events to query recorded facts, replay-events to reconstruct limited diagnostic state, reconcile-events to compare replay against registry authority, or patch-gate/--patch-file to invoke the governance runtime gate.",
         "results": [],
     }
 

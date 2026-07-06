@@ -1,0 +1,214 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_036",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-05",
+  "type": "governance_patch",
+  "artifact_type": "governance_patch",
+  "title": "Canonical Reduction Strategy Correctness",
+  "priority": "HIGH",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_035"
+  ],
+  "mode": "additive",
+  "basis": {
+    "source_patches": [
+      "PATCH_PI_RT_CALCULUS_035"
+    ],
+    "source_surfaces": [
+      "docs/textbook/mono_process_textbook_complete.md",
+      "registry/formal_object_registry.json",
+      "registry/math_source_registry.json",
+      "registry/lexicon_gap_queue.json",
+      "registry/registry/lexicon_gap_queue.json",
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_035.json"
+    ],
+    "scope": "Bounded correctness of canonical reduction strategy S(C) for admissible continuation classes satisfying the previously established operational properties; process equivalence, canonical outcomes, bounded determinism, and bounded confluence assumptions are preserved, and no universal correctness or optimality claim is made."
+  },
+  "core_rule": {
+    "statement": "Canonical reduction strategy correctness applies only after EVAL_024 and only to bounded continuation classes satisfying WF(C), Typed(C), Det(C), Term(C), Unique(C), and Conf_B(C); S(C) preserves process equivalence, canonical reduction outcomes, bounded determinism, bounded confluence assumptions, and canonical representative selection modulo ≡P; RT_core remains unchanged."
+  },
+  "purpose": "Establish the bounded correctness of the canonical reduction strategy S(C). This theorem shows that the strategy preserves the established operational properties of the RT Calculus for admissible continuation classes without asserting universal correctness.",
+  "canonical_claims": [
+    {
+      "id": "CLAIM_036_001",
+      "statement": "Canonical strategy correctness is only evaluated after EVAL_024 has succeeded.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_036_002",
+      "statement": "Only admissible candidates participate in canonical strategy selection.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_036_003",
+      "statement": "Canonical strategy correctness preserves process equivalence and canonical reduction outcomes.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_036_004",
+      "statement": "Canonical strategy correctness preserves bounded determinism and bounded confluence assumptions.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_036_005",
+      "statement": "RT_core remains unchanged.",
+      "status": "canonical"
+    }
+  ],
+  "scope": {
+    "adds": [
+      "Canonical strategy correctness theorem",
+      "Strategy preservation conditions",
+      "Correctness obligations",
+      "Bounded correctness class"
+    ],
+    "does_not_add": [
+      "Universal correctness proof",
+      "Optimality proof",
+      "Complexity optimality",
+      "Recovery semantics",
+      "Operational regime execution",
+      "sigma_RT selector"
+    ]
+  },
+  "formal_objects": [
+    {
+      "id": "STRATEGY_CORRECTNESS_036",
+      "symbol": "Correct(S)",
+      "name": "Canonical Strategy Correctness",
+      "definition": "The property that the canonical reduction strategy preserves lawful reduction semantics for bounded continuation classes."
+    },
+    {
+      "id": "CORRECTNESS_CLASS_036",
+      "symbol": "ClassCorrect",
+      "name": "Correctness Class",
+      "definition": "Continuation classes satisfying all bounded correctness prerequisites."
+    }
+  ],
+  "theorem": {
+    "name": "Canonical Reduction Strategy Correctness",
+    "statement": {
+      "if": [
+        "WF(C)",
+        "Typed(C)",
+        "Det(C)",
+        "Term(C)",
+        "Unique(C)",
+        "Conf_B(C)"
+      ],
+      "then": [
+        "S(C) preserves process equivalence.",
+        "S(C) preserves canonical reduction outcomes.",
+        "S(C) preserves bounded determinism.",
+        "S(C) preserves bounded confluence assumptions.",
+        "S(C) produces the same canonical representative modulo ≡P."
+      ]
+    }
+  },
+  "correctness_obligations": [
+    {
+      "requirement": "Evaluation Preservation",
+      "description": "S(C) operates only after successful EVAL_024."
+    },
+    {
+      "requirement": "Admissibility Preservation",
+      "description": "Only admissible candidates are selected."
+    },
+    {
+      "requirement": "Equivalence Preservation",
+      "description": "Process equivalence is maintained throughout reduction."
+    },
+    {
+      "requirement": "Outcome Preservation",
+      "description": "Canonical outcomes remain NF(C), pNF(C), or ⊥C_x."
+    },
+    {
+      "requirement": "Representative Preservation",
+      "description": "Canonical representatives remain unique modulo ≡P."
+    }
+  ],
+  "limitations": [
+    "Applies only to bounded continuation classes.",
+    "Does not prove universal optimality.",
+    "Does not establish global correctness.",
+    "Does not claim minimal runtime complexity."
+  ],
+  "invariants": [
+    "RT_core remains unchanged.",
+    "Correctness preserves process equivalence.",
+    "Correctness preserves bounded determinism.",
+    "Correctness preserves bounded confluence.",
+    "Trace recording remains observational.",
+    "Recovery remains deferred."
+  ],
+  "future_dependencies": [
+    "PATCH_PI_RT_CALCULUS_037 (Recursive Continuation Semantics)",
+    "PATCH_PI_RT_CALCULUS_038 (Higher-Order Continuations)"
+  ],
+  "textbook_changes": {
+    "chapter": "2.3.18",
+    "title": "Canonical Reduction Strategy Correctness",
+    "summary": [
+      "State the bounded correctness theorem for S(C).",
+      "Define correctness obligations.",
+      "Specify preservation properties.",
+      "Distinguish bounded correctness from universal correctness."
+    ]
+  },
+  "registry_updates": {
+    "formal_object_registry": [
+      "STRATEGY_CORRECTNESS_036",
+      "CORRECTNESS_CLASS_036"
+    ],
+    "math_source_registry": [
+      "PATCH_PI_RT_CALCULUS_036"
+    ],
+    "lexicon_gap_queue": [
+      "strategy_correctness",
+      "correctness_class",
+      "correctness_obligation",
+      "strategy_preservation"
+    ]
+  },
+  "rt_core_impact": {
+    "modified": false,
+    "statement": "RT := [(ℰ≠0) ⇔R δα(ℰ>0)] remains unchanged."
+  },
+  "validation_requirements": [
+    "Patch record parses cleanly.",
+    "Patch depends on PATCH_PI_RT_CALCULUS_035.",
+    "The theorem is bounded by EVAL_024 and the lawful candidate set.",
+    "Strategy correctness preserves process equivalence and canonical outcomes.",
+    "RT_core remains unchanged."
+  ],
+  "required_repo_changes": [
+    "Update docs/textbook/mono_process_textbook_complete.md with the canonical reduction strategy correctness section and correctness-class documentation.",
+    "Update registry/formal_object_registry.json with the canonical strategy correctness formal objects.",
+    "Update registry/math_source_registry.json with the patch source entry.",
+    "Relock registry/math_hashes.json and registry/math_core_hashes.json after the source registry update.",
+    "Update registry/lexicon_gap_queue.json with the strategy correctness, correctness class, correctness obligation, and strategy preservation terms.",
+    "Update registry/registry/lexicon_gap_queue.json with the mirrored strategy correctness, correctness class, correctness obligation, and strategy preservation terms.",
+    "Update registry/governance_change_ledger.json with the corresponding governance ledger entry.",
+    "Update registry/governance/patches/PATCH_PI_RT_CALCULUS_035.json with the forward chain reference to PATCH_PI_RT_CALCULUS_036."
+  ],
+  "target_files": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/formal_object_registry.json",
+    "registry/math_source_registry.json",
+    "registry/math_hashes.json",
+    "registry/math_core_hashes.json",
+    "registry/lexicon_gap_queue.json",
+    "registry/registry/lexicon_gap_queue.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_035.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_036.json"
+  ],
+  "success_criteria": {
+    "theorem_documented": true,
+    "correctness_prereqs_registered": true,
+    "correctness_class_registered": true,
+    "boundedness_preserved": true,
+    "rt_core_unchanged": true
+  }
+}

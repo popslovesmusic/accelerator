@@ -1,0 +1,208 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_028",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-05",
+  "type": "governance_patch",
+  "artifact_type": "governance_patch",
+  "title": "Reduction Trace Equivalence",
+  "priority": "HIGH",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_027"
+  ],
+  "mode": "additive",
+  "basis": {
+    "source_patches": [
+      "PATCH_PI_RT_CALCULUS_027"
+    ],
+    "source_surfaces": [
+      "docs/textbook/mono_process_textbook_complete.md",
+      "registry/formal_object_registry.json",
+      "registry/math_source_registry.json",
+      "registry/lexicon_gap_queue.json",
+      "registry/registry/lexicon_gap_queue.json",
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_027.json"
+    ],
+    "scope": "Canonical reduction trace equivalence and canonical trace normalization for REDUCE_025 outputs, including outcome-preserving comparison, trace identity distinction, and comparison-class invariants."
+  },
+  "core_rule": {
+    "statement": "Trace equivalence is diagnostic only; equivalent traces preserve lawful reduction semantics, identical canonical outcomes, and halt classification; trace identity is stronger than equivalence; canonical trace normalization produces TNF(Trace); RT_core remains unchanged."
+  },
+  "purpose": "Define when two reduction traces are considered equivalent despite differing reduction paths, provided they preserve lawful continuation semantics and identical reduction outcomes.",
+  "canonical_claims": [
+    {
+      "id": "CLAIM_028_001",
+      "statement": "Equivalent traces preserve lawful reduction semantics and identical canonical outcomes.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_028_002",
+      "statement": "Canonical trace normalization produces TNF(Trace) without modifying reduction semantics.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_028_003",
+      "statement": "Trace identity implies trace equivalence.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_028_004",
+      "statement": "Trace comparison is diagnostic only.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_028_005",
+      "statement": "RT_core remains unchanged.",
+      "status": "canonical"
+    }
+  ],
+  "formal_objects": [
+    {
+      "id": "TRACE_EQUIV_028",
+      "symbol": "≡T",
+      "name": "Reduction Trace Equivalence",
+      "definition": "An equivalence relation over reduction traces that identifies traces which originate from the same input continuation, preserve lawful reduction semantics, preserve equivalent continuation behavior, terminate in the same canonical outcome, and preserve halt classification."
+    },
+    {
+      "id": "TRACE_NF_028",
+      "symbol": "TNF(Trace)",
+      "name": "Canonical Trace Form",
+      "definition": "A normalized representative of a reduction trace used for outcome-preserving comparison. It preserves evaluation order, removes implementation-specific metadata, retains canonical reduction events, and normalizes step numbering and halt classification without altering reduction semantics."
+    }
+  ],
+  "definitions": {
+    "trace_equivalence": {
+      "symbol": "Trace_1(C) ≡T Trace_2(C)",
+      "requirements": [
+        "Identical input continuation",
+        "Each reduction step is lawful",
+        "Equivalent continuation semantics preserved",
+        "Identical reduction outcome",
+        "Equivalent halt classification"
+      ]
+    }
+  },
+  "equivalence_classes": [
+    {
+      "class": "NF",
+      "description": "Equivalent traces terminating in the same canonical normal form."
+    },
+    {
+      "class": "pNF",
+      "description": "Equivalent traces terminating in the same partial normal form."
+    },
+    {
+      "class": "Failure",
+      "description": "Equivalent traces terminating in the same classified continuation failure."
+    }
+  ],
+  "canonical_trace_normalization": {
+    "algorithm": [
+      "Preserve evaluation order",
+      "Remove implementation-specific metadata",
+      "Retain only canonical reduction events",
+      "Normalize step numbering",
+      "Normalize halt classification",
+      "Produce TNF(Trace)"
+    ]
+  },
+  "comparison_rules": [
+    "Equivalent traces must originate from the same continuation expression.",
+    "Equivalent traces must preserve process equivalence.",
+    "Equivalent traces may differ in intermediate reduction ordering where lawful.",
+    "Equivalent traces must terminate in the same reduction outcome.",
+    "Equivalent traces must preserve failure taxonomy."
+  ],
+  "invariants": [
+    "RT_core remains unchanged.",
+    "Trace equivalence does not imply trace identity.",
+    "Trace identity implies trace equivalence.",
+    "Equivalent traces preserve process equivalence.",
+    "Equivalent traces preserve reduction outcome.",
+    "Equivalent traces preserve halt classification.",
+    "Trace comparison is diagnostic only.",
+    "Recovery remains deferred."
+  ],
+  "future_dependencies": [
+    "PATCH_PI_RT_CALCULUS_029 (Local Confluence)",
+    "PATCH_PI_RT_CALCULUS_030 (Reduction Determinism)"
+  ],
+  "textbook_changes": {
+    "chapter": "2.3.10",
+    "title": "Reduction Trace Equivalence",
+    "summary": [
+      "Introduce the trace equivalence relation (≡T).",
+      "Define canonical trace normalization TNF(Trace).",
+      "Differentiate trace identity from trace equivalence.",
+      "Prepare the calculus for formal confluence proofs."
+    ]
+  },
+  "registry_updates": {
+    "formal_object_registry": [
+      "TRACE_EQUIV_028",
+      "TRACE_NF_028"
+    ],
+    "math_source_registry": [
+      "PATCH_PI_RT_CALCULUS_028"
+    ],
+    "lexicon_gap_queue": [
+      "trace_equivalence",
+      "canonical_trace_form",
+      "trace_identity",
+      "trace_normalization"
+    ]
+  },
+  "rt_core_impact": {
+    "modified": false,
+    "statement": "RT := [(ℰ≠0) ⇔R δα(ℰ>0)] remains unchanged."
+  },
+  "scope": {
+    "adds": [
+      "Trace equivalence relation",
+      "Canonical trace normalization",
+      "Trace equivalence invariants",
+      "Outcome-preserving trace comparison"
+    ],
+    "does_not_add": [
+      "Recovery operator",
+      "Parser implementation",
+      "Operational regime execution",
+      "sigma_RT selector",
+      "Confluence proof",
+      "Termination proof"
+    ]
+  },
+  "validation_requirements": [
+    "Patch record parses cleanly.",
+    "Patch depends on PATCH_PI_RT_CALCULUS_027.",
+    "Equivalent traces preserve lawful continuation semantics.",
+    "Canonical trace normalization produces TNF(Trace) without changing reduction semantics.",
+    "RT_core remains unchanged."
+  ],
+  "required_repo_changes": [
+    "Update docs/textbook/mono_process_textbook_complete.md with the reduction trace equivalence section and trace comparison documentation.",
+    "Update registry/formal_object_registry.json with the trace equivalence formal objects.",
+    "Update registry/math_source_registry.json with the patch source entry.",
+    "Update registry/lexicon_gap_queue.json with the trace equivalence and normalization terms.",
+    "Update registry/registry/lexicon_gap_queue.json with the mirrored trace equivalence and normalization terms.",
+    "Update registry/governance_change_ledger.json with the corresponding governance ledger entry.",
+    "Update registry/governance/patches/PATCH_PI_RT_CALCULUS_027.json with the forward chain reference to PATCH_PI_RT_CALCULUS_028."
+  ],
+  "target_files": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/formal_object_registry.json",
+    "registry/math_source_registry.json",
+    "registry/lexicon_gap_queue.json",
+    "registry/registry/lexicon_gap_queue.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_027.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_028.json"
+  ],
+  "success_criteria": {
+    "trace_equivalence_documented": true,
+    "canonical_trace_form_registered": true,
+    "trace_identity_distinguished": true,
+    "outcome_preserving_comparison_registered": true,
+    "rt_core_unchanged": true
+  }
+}

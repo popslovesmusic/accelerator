@@ -54,7 +54,7 @@ If the runtime cannot classify the action, use `outputs/audits/global_health_rep
 ## Procedure
 
 ### 1. Ingestion
-The agent must read the latest `outputs/audits/global_health_report.json` after the runtime gate has been queried or when the runtime does not provide a decision surface. The governed runtime order is context-capsule -> current-state -> freshness -> authority -> patch-chain -> debt -> patch-gate.
+The agent must read the latest `outputs/audits/global_health_report.json` after the runtime gate has been queried or when the runtime does not provide a decision surface. The governed runtime order is context-capsule -> current-state -> freshness -> authority -> patch-chain -> debt -> patch-gate. The context capsule now also surfaces bounded replay reconciliation coverage alongside the other minimal runtime summary fields.
 
 ### 2. Analysis & Priority
 The agent must categorize failures into three tiers:

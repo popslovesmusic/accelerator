@@ -1,0 +1,246 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_030",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-05",
+  "type": "governance_patch",
+  "artifact_type": "governance_patch",
+  "title": "Reduction Determinism Conditions",
+  "priority": "HIGH",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_029"
+  ],
+  "mode": "additive",
+  "basis": {
+    "source_patches": [
+      "PATCH_PI_RT_CALCULUS_029"
+    ],
+    "source_surfaces": [
+      "docs/textbook/mono_process_textbook_complete.md",
+      "registry/formal_object_registry.json",
+      "registry/math_source_registry.json",
+      "registry/lexicon_gap_queue.json",
+      "registry/registry/lexicon_gap_queue.json",
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_029.json"
+    ],
+    "scope": "Canonical reduction determinism conditions for REDUCE_025 outputs after local confluence is defined, including reduction priority semantics, deterministic choice, and bounded outcome stability without asserting universal determinism."
+  },
+  "core_rule": {
+    "statement": "Determinism is bounded by canonical evaluation order and reduction priority; Choose(C) selects a unique lawful reduction among admissible candidates; repeated evaluation yields equivalent outcomes within the admissible subclass; RT_core remains unchanged."
+  },
+  "purpose": "Define the bounded conditions under which REDUCE_025 is deterministic. This patch specifies deterministic execution for admissible continuation subclasses without asserting universal determinism.",
+  "canonical_claims": [
+    {
+      "id": "CLAIM_030_001",
+      "statement": "Determinism is bounded by canonical evaluation order and reduction priority.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_030_002",
+      "statement": "Choose(C) selects a unique lawful reduction among admissible candidates.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_030_003",
+      "statement": "Bounded determinism does not imply termination.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_030_004",
+      "statement": "Bounded determinism does not imply global confluence.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_030_005",
+      "statement": "RT_core remains unchanged.",
+      "status": "canonical"
+    }
+  ],
+  "scope": {
+    "adds": [
+      "Reduction determinism relation",
+      "Deterministic reduction class",
+      "Reduction priority semantics",
+      "Reduction choice function",
+      "Deterministic execution conditions"
+    ],
+    "does_not_add": [
+      "Global determinism proof",
+      "Termination proof",
+      "Confluence proof",
+      "Parser implementation",
+      "Recovery operator",
+      "Operational regime execution",
+      "sigma_RT selector"
+    ]
+  },
+  "formal_objects": [
+    {
+      "id": "DETERMINISM_030",
+      "symbol": "Det(C)",
+      "name": "Reduction Determinism",
+      "definition": "A property indicating that a continuation expression has a unique lawful reduction outcome under the canonical evaluation order and reduction priority."
+    },
+    {
+      "id": "REDUCTION_PRIORITY_030",
+      "symbol": "Priority(R)",
+      "name": "Reduction Priority",
+      "definition": "The canonical ordering used when multiple lawful reductions are simultaneously admissible."
+    },
+    {
+      "id": "CHOICE_FUNCTION_030",
+      "symbol": "Choose(C)",
+      "name": "Reduction Choice Function",
+      "definition": "The deterministic selection function that chooses the next lawful reduction according to canonical reduction priority."
+    },
+    {
+      "id": "DETERMINISTIC_CLASS_030",
+      "symbol": "ClassDet",
+      "name": "Deterministic Continuation Class",
+      "definition": "The class of continuation expressions satisfying the bounded determinism conditions."
+    }
+  ],
+  "definitions": {
+    "deterministic_reduction": {
+      "symbol": "Det(C)",
+      "requirements": [
+        "WF(C)",
+        "Typed(C)",
+        "Canonical evaluation order satisfied",
+        "Canonical reduction priority satisfied",
+        "Unique reduction selected by Choose(C)",
+        "Identical reduction outcome for repeated evaluation"
+      ]
+    }
+  },
+  "canonical_conditions": [
+    {
+      "condition": "Well-Formedness",
+      "description": "Continuation satisfies WF(C)."
+    },
+    {
+      "condition": "Type Correctness",
+      "description": "All typed transition rules are satisfied."
+    },
+    {
+      "condition": "Evaluation Stability",
+      "description": "EVAL_024 produces the same admissibility state for repeated evaluations."
+    },
+    {
+      "condition": "Priority Stability",
+      "description": "Priority(R) selects the same lawful reduction whenever identical reduction candidates exist."
+    },
+    {
+      "condition": "Choice Stability",
+      "description": "Choose(C) is deterministic for identical continuation states."
+    },
+    {
+      "condition": "Outcome Stability",
+      "description": "Repeated execution produces equivalent NF(C), pNF(C), or classified ⊥C_x outcomes."
+    }
+  ],
+  "determinism_classes": [
+    {
+      "class": "Deterministic",
+      "condition": "All bounded determinism conditions satisfied."
+    },
+    {
+      "class": "Undetermined",
+      "condition": "Canonical priority or choice function not established."
+    },
+    {
+      "class": "Non-deterministic",
+      "condition": "Multiple lawful reductions remain unresolved under current calculus."
+    }
+  ],
+  "choice_function_rules": [
+    "Choose(C) operates only on lawful reduction candidates.",
+    "Reduction priority is evaluated after EVAL_024.",
+    "Failure classification precedes reduction selection.",
+    "Reduction traces remain diagnostic and do not influence selection.",
+    "Equivalent traces remain independent of deterministic selection."
+  ],
+  "invariants": [
+    "RT_core remains unchanged.",
+    "Determinism is evaluated only after successful evaluation.",
+    "Determinism does not imply termination.",
+    "Determinism does not imply global confluence.",
+    "Equivalent outcomes preserve process equivalence.",
+    "Reduction traces remain diagnostic.",
+    "Failure taxonomy remains unchanged.",
+    "Recovery remains deferred."
+  ],
+  "future_dependencies": [
+    "PATCH_PI_RT_CALCULUS_031 (Termination Conditions)",
+    "PATCH_PI_RT_CALCULUS_032 (Canonical Form Uniqueness)"
+  ],
+  "textbook_changes": {
+    "chapter": "2.3.12",
+    "title": "Reduction Determinism Conditions",
+    "summary": [
+      "Introduce Det(C).",
+      "Define Priority(R).",
+      "Define Choose(C).",
+      "Specify bounded deterministic reduction classes.",
+      "Distinguish bounded determinism from universal determinism."
+    ]
+  },
+  "registry_updates": {
+    "formal_object_registry": [
+      "DETERMINISM_030",
+      "REDUCTION_PRIORITY_030",
+      "CHOICE_FUNCTION_030",
+      "DETERMINISTIC_CLASS_030"
+    ],
+    "math_source_registry": [
+      "PATCH_PI_RT_CALCULUS_030"
+    ],
+    "lexicon_gap_queue": [
+      "reduction_determinism",
+      "reduction_priority",
+      "choice_function",
+      "deterministic_class"
+    ]
+  },
+  "rt_core_impact": {
+    "modified": false,
+    "statement": "RT := [(ℰ≠0) ⇔R δα(ℰ>0)] remains unchanged."
+  },
+  "validation_requirements": [
+    "Patch record parses cleanly.",
+    "Patch depends on PATCH_PI_RT_CALCULUS_029.",
+    "Deterministic reduction remains bounded by evaluation order and reduction priority.",
+    "Repeated evaluation yields equivalent outcomes within the admissible subclass.",
+    "RT_core remains unchanged."
+  ],
+  "required_repo_changes": [
+    "Update docs/textbook/mono_process_textbook_complete.md with the reduction determinism section and deterministic-selection documentation.",
+    "Update registry/formal_object_registry.json with the reduction determinism formal objects.",
+    "Update registry/math_source_registry.json with the patch source entry.",
+    "Update registry/lexicon_gap_queue.json with the reduction determinism, priority, choice, and deterministic-class terms.",
+    "Update registry/registry/lexicon_gap_queue.json with the mirrored reduction determinism, priority, choice, and deterministic-class terms.",
+    "Update registry/governance_change_ledger.json with the corresponding governance ledger entry.",
+    "Update registry/governance/patches/PATCH_PI_RT_CALCULUS_029.json with the forward chain reference to PATCH_PI_RT_CALCULUS_030."
+  ],
+  "target_files": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/formal_object_registry.json",
+    "registry/math_source_registry.json",
+    "registry/lexicon_gap_queue.json",
+    "registry/registry/lexicon_gap_queue.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_029.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_030.json"
+  ],
+  "success_criteria": {
+    "determinism_documented": true,
+    "priority_and_choice_registered": true,
+    "deterministic_class_registered": true,
+    "rt_core_unchanged": true
+  },
+  "next_recommended_patch": {
+    "patch_id": "PATCH_PI_RT_CALCULUS_031",
+    "title": "Termination Conditions",
+    "purpose": "Define the bounded conditions under which REDUCE_025 is guaranteed to terminate. This patch establishes termination classes without asserting universal termination."
+  }
+}

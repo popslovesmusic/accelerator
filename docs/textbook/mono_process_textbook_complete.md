@@ -1,4 +1,4 @@
-# Mono-Process Mathematical Program: End-to-End Textbook Draft
+﻿# Mono-Process Mathematical Program: End-to-End Textbook Draft
 
 ## Table of Contents
 
@@ -220,6 +220,16 @@ Continuation expression evaluation is ordered as a governed pipeline: parse the 
 $$ \text{parse} \to \text{WF}(C) \to \text{types} \to \text{typed transition} \to \text{endpoint} \to \text{admissibility} \to \text{residue} \to \text{failure classification or composition} \to \text{reduction toward } NF(C) $$
 $$ \text{evaluation order does not modify } RT_{\text{core}} $$
 $$ \text{recovery remains deferred} $$
+
+**Governed Clarification 1.2.2B.17: Minimal Continuation Reduction Algorithm (PATCH_PI_RT_CALCULUS_025)**
+A minimal governed reduction algorithm is now documented for well-formed continuation expressions after evaluation admits composition and reduction. The procedure runs `EVAL_024` first, blocks on any classified failure, applies identity reduction when identity composition is present, contracts lawful composed continuations `C(A,B) \circ C(B,C)` to `C(A,C)` when process equivalence is preserved, repeats lawful reductions while `â‰¡P` is preserved, and returns `NF(C)` when no further lawful reductions are available. If normalization cannot be completed, the procedure returns `partial_NF(C)` with unresolved status. Termination, confluence, and the full normalization-status taxonomy remain deferred.
+
+$$ \text{EVAL}_{024} \text{ precedes minimal reduction} $$
+$$ \bot_C_x \Rightarrow \text{no lawful reduction step} $$
+$$ C(A,B) \circ I(B) \to_{red} C(A,B) $$
+$$ C(A,B) \circ C(B,C) \to_{red} C(A,C) \quad \text{when } \equiv_P \text{ is preserved} $$
+$$ \text{no further lawful reductions} \Rightarrow NF(C) $$
+$$ \text{unresolved normalization} \Rightarrow \text{partial\_NF}(C) $$
 
 **Formal Principle 1.2.2C: Aspectual RT Set as Higher-Order RT (aRT) (MPF_IND_ART_SET_OF_RTS_001)**
 A lawful set of RT expressions is itself an aspectual RT expression (`aRT`). The set of operational aspects (distinction, asymmetry, orientation, admissibility, residue, closure) are not independent modules but are themselves RT-bearing expressions.
@@ -475,7 +485,7 @@ The symbol $\iff_R$ represents the "knotting" of the process. It is the mechanis
 $$ \iff_R \implies [ \text{PROVISIONAL OPERATOR: Formal definition of residue-conditioned closure} ] $$
 
 **Commentary:**
-$R$ is the **residue**—the memory or trace of the process history. The $\iff_R$ operator signifies that the "existence" of the process ($\mathcal{E} \neq 0$) and its "continuation" ($\delta_a$) are recursively bound by this residue. It is this feedback loop that allows for the emergence of stable projections over many cycles.
+$R$ is the **residue**â€”the memory or trace of the process history. The $\iff_R$ operator signifies that the "existence" of the process ($\mathcal{E} \neq 0$) and its "continuation" ($\delta_a$) are recursively bound by this residue. It is this feedback loop that allows for the emergence of stable projections over many cycles.
 
 ---
 
@@ -501,7 +511,7 @@ $$ R \in \mathcal{R} $$
 $$ \mathcal{R} := \text{The Residue Carrier Space} $$
 
 **Commentary:**
-Within this framework, residue is the mechanism by which "laws" emerge. As the process cycles, it leaves a trace. The system remembers, and that memory shapes what can happen. Each cycle is not a reset—it is an accumulation [Source: MPF-NARRATIVE]. If the process is a path, $R$ is the groove worn into the landscape by previous traversals. The Residue Carrier $\mathcal{R}$ is the formal topological structure that maintains this history [Source: MS-SCRATCH-V1 Sec 4.1].
+Within this framework, residue is the mechanism by which "laws" emerge. As the process cycles, it leaves a trace. The system remembers, and that memory shapes what can happen. Each cycle is not a resetâ€”it is an accumulation [Source: MPF-NARRATIVE]. If the process is a path, $R$ is the groove worn into the landscape by previous traversals. The Residue Carrier $\mathcal{R}$ is the formal topological structure that maintains this history [Source: MS-SCRATCH-V1 Sec 4.1].
 
 ---
 
@@ -573,7 +583,7 @@ $$ \text{Repeated lawful reduction seeks } NF(C) $$
 $$ C \to_{red} C' \text{ does not alter } RT_{core} $$
 
 **Commentary:**
-Reduction is the lawful transformation of a continuation expression toward canonical continuation form. It simplifies representation, not behavior, and it remains distinct from symbolic rewriting. The reduction relation preserves process equivalence under admissibility, residue, orientation, and context constraints. Reduction of a composed continuation is only permitted after the typed composition guards above have passed. The concrete primitive rules appear below, while termination, confluence, and any full reduction algorithm remain deferred.
+Reduction is the lawful transformation of a continuation expression toward canonical continuation form. It simplifies representation, not behavior, and it remains distinct from symbolic rewriting. The reduction relation preserves process equivalence under admissibility, residue, orientation, and context constraints. Reduction of a composed continuation is only permitted after the typed composition guards above have passed. The concrete primitive rules and the minimal governed reduction algorithm appear below, while termination, confluence, recovery, and the full normalization-status taxonomy remain deferred.
 
 **Formal Block 2.3.6: Primitive Continuation Reduction Rules**
 $$ I(A) \circ C(A,B) \to_{red} C(A,B) $$
@@ -582,6 +592,162 @@ $$ C(A,B) \circ C(B,C) \to_{red} C(A,C) \quad \text{when endpoint compatibility,
 
 **Commentary:**
 The first two rules remove identity continuation redundancies under lawful composition. The third rule contracts a lawful composite continuation into a direct continuation when all governing constraints are preserved. These rules operate on continuation expressions, not on `RT_core`, and each lawful reduction step preserves process equivalence. If the typed composition guards fail, no lawful composite reduction step is produced.
+
+**Formal Block 2.3.7: Minimal Continuation Reduction Algorithm**
+$$ \mathrm{REDALG}_{025}(C_{\mathrm{expr}}) : C_{\mathrm{expr}} \mapsto \{\mathrm{NF}(C), \text{partial\_NF}(C), \bot_C_x\} $$
+$$ \mathrm{REDALG}_{025}(C_{\mathrm{expr}}) = \bot_C_x \quad \text{if any guard fails after } EVAL_{024} $$
+$$ \mathrm{REDALG}_{025}(I(A) \circ C(A,B)) = C(A,B) $$
+$$ \mathrm{REDALG}_{025}(C(A,B) \circ C(B,C)) = C(A,C) \quad \text{when } \equiv_P \text{ is preserved} $$
+$$ \mathrm{REDALG}_{025}(C) = \mathrm{NF}(C) \quad \text{if no further lawful reductions are available} $$
+$$ \mathrm{REDALG}_{025}(C) = \text{partial\_NF}(C) \quad \text{if normalization cannot be completed} $$
+
+**Commentary:**
+The minimal governed reduction algorithm is intentionally bounded. It runs after `EVAL_024`, blocks on any classified failure, applies identity reduction before lawful composition contraction, repeats only while process equivalence is preserved, and returns `partial_NF(C)` when normalization is unresolved. Each reduction result is trace-recorded in `Trace(C)`. Termination and confluence remain deferred; the admissible partial-normal-form outcome, its classification, and the diagnostic trace semantics are defined below.
+
+**Formal Block 2.3.8: Partial Normal Form**
+$$ pNF(C) : \text{Admissible, type-correct continuation expression whose lawful reductions are incomplete at the current calculus boundary} $$
+$$ pNF(C) \Rightarrow WF(C) \land Typed(C) \land \neg \bot_C_x $$
+$$ pNF(C) \neq NF(C) $$
+$$ pNF(C) \neq \bot_C_x $$
+$$ NF(C) \neq \bot_C_x $$
+$$ Outcome(C) : \text{Canonical reduction outcome classification for } REDUCE_{025} \text{ outputs} $$
+$$ Outcome(C) \in \{ NF(C), pNF(C), \bot_C_x \} $$
+$$ Outcome(C) = NF(C) \quad \text{when no lawful reductions remain} $$
+$$ Outcome(C) = pNF(C) \quad \text{when lawful reductions remain outside the current executable calculus boundary} $$
+$$ Outcome(C) = \bot_C_x \quad \text{when continuation failure is detected} $$
+
+**Commentary:**
+`pNF(C)` names the admissible but incomplete reduction state. The 025 reduction surface writes that state as `partial_NF(C)`; this section canonically classifies that same state as `pNF(C)`. `Outcome(C)` is the governed classifier for the reduction result channel and separates successful completion, admissible incompleteness, and failure without asserting termination or confluence. Each classified outcome is recorded in `Trace(C)`, defined below.
+
+**Formal Block 2.3.9: Reduction Trace Semantics**
+$$ Trace(C) : \text{Canonical diagnostic record of the evaluation, validation, lawful reduction, halt, and failure-classification steps applied by } REDUCE_{025} $$
+$$ Trace(C) \Rightarrow \{ input\_expression, evaluation\_result, steps, halt\_reason, outcome \} $$
+$$ Trace(C) \text{ is diagnostic, not a continuation} $$
+$$ Trace(C) \text{ does not modify reduction semantics} $$
+$$ Every\ REDUCE_{025}\ result \text{ has a trace} $$
+$$ Trace(C).outcome \in \{ NF(C), pNF(C), \bot_C_x \} $$
+$$ Trace(C).halt\_reason = \texttt{no\_lawful\_reductions\_remain} \quad \text{when } Trace(C).outcome = NF(C) $$
+$$ Trace(C).halt\_reason = \texttt{lawful\_reductions\_deferred\_by\_current\_calculus\_boundary} \quad \text{when } Trace(C).outcome = pNF(C) $$
+$$ Trace(C).halt\_reason = \texttt{classified\_continuation\_failure} \quad \text{when } Trace(C).outcome = \bot_C_x $$
+$$ \tau_i : \text{Single evaluation, validation, reduction, halt, or failure-classification event within } Trace(C) $$
+
+**Commentary:**
+`Trace(C)` is the canonical diagnostic record for `REDUCE_025`. It records the input expression, evaluation result, ordered steps, halt reason, and outcome, but it does not alter reduction semantics or serve as a continuation. The step sequence `\tau_i` captures the ordered events that lead to `NF(C)`, `pNF(C)`, or classified continuation failure.
+
+**Formal Block 2.3.10: Reduction Trace Equivalence**
+$$ \mathrm{Trace}_1(C) \equiv_T \mathrm{Trace}_2(C) \iff \text{same input continuation, lawful steps, preserved continuation semantics, identical reduction outcome, and equivalent halt classification} $$
+$$ \mathrm{Trace}_1(C) = \mathrm{Trace}_2(C) \Rightarrow \mathrm{Trace}_1(C) \equiv_T \mathrm{Trace}_2(C) $$
+$$ \mathrm{Trace}_1(C) \equiv_T \mathrm{Trace}_2(C) \not\Rightarrow \mathrm{Trace}_1(C) = \mathrm{Trace}_2(C) $$
+$$ \mathrm{TNF}(\mathrm{Trace}) : \text{Canonical Trace Form} $$
+$$ \mathrm{TNF}(\mathrm{Trace}) := \text{normalized representative of a reduction trace for outcome-preserving comparison} $$
+$$ \mathrm{TNF}(\mathrm{Trace}_1(C)) = \mathrm{TNF}(\mathrm{Trace}_2(C)) \quad \text{for equivalent traces within the same outcome class} $$
+$$ \text{trace normalization preserves evaluation order, removes implementation-specific metadata, and normalizes step numbering and halt classification} $$
+$$ \text{equivalence classes} \in \{ NF, pNF, \text{Failure} \} $$
+
+**Commentary:**
+Reduction trace equivalence is diagnostic only. It compares traces that arise from the same input continuation and retains only outcome-preserving structure: lawful reduction semantics, canonical halt classification, and the same final reduction class. The canonical trace form `TNF(Trace)` is the normalized comparison representative; it does not modify reduction semantics, and it does not collapse trace identity into trace equivalence.
+
+**Formal Block 2.3.11: Local Confluence Conditions**
+$$ C \Downarrow_L \iff \text{Common Origin} \land \text{Lawful Divergence} \land \text{Independent Validity} \land \text{Joinability} \land \text{Outcome Preservation} $$
+$$ Branch(C) := \text{lawful reduction path originating from a common continuation expression} $$
+$$ Branch_1(C) \Downarrow_J Branch_2(C) \iff \text{the branches can be reduced to process-equivalent continuation outcomes} $$
+$$ CP(C) := \{ Branch_1(C), Branch_2(C) \} $$
+$$ \text{critical pair evaluation is local to the divergent branches} $$
+$$ C \Downarrow_L \not\Rightarrow \text{global confluence} $$
+$$ C \Downarrow_L \not\Rightarrow \text{termination} $$
+
+**Commentary:**
+Local confluence is a bounded reduction property. It requires a common origin, lawful divergence, independent branch validity, joinability, and outcome preservation, but it does not assert global confluence or termination. Critical pairs are the immediate divergent branch pairs used to evaluate whether the local join condition is satisfied under the current reduction system. Reduction traces remain diagnostic, and trace equivalence remains independent of branch identity.
+
+**Formal Block 2.3.12: Reduction Determinism Conditions**
+$$ Det(C) \iff WF(C) \land Typed(C) \land \text{Canonical evaluation order satisfied} \land \text{Canonical reduction priority satisfied} \land \text{Unique reduction selected by } Choose(C) \land \text{Identical reduction outcome for repeated evaluation} $$
+$$ Priority(R) := \text{canonical ordering used when multiple lawful reductions are simultaneously admissible} $$
+$$ Choose(C) := \text{deterministic selection function that chooses the next lawful reduction according to canonical reduction priority} $$
+$$ ClassDet := \{ C \mid Det(C) \} $$
+$$ Det(C) \not\Rightarrow \text{termination} $$
+$$ Det(C) \not\Rightarrow \text{global confluence} $$
+
+**Commentary:**
+Reduction determinism is bounded by the current calculus boundary. It is evaluated only after evaluation and admissibility have stabilized, and it selects among lawful candidates by canonical reduction priority. Repeated execution must produce an equivalent outcome class, but bounded determinism does not assert termination, global confluence, or universal determinism across all future calculus extensions.
+
+**Formal Block 2.3.13: Termination Conditions**
+$$ Term(C) \iff WF(C) \land Typed(C) \land \text{Lawful reduction sequence} \land \text{Strict reduction progress} \land \text{Finite reduction sequence} \land \mathrm{Outcome}(C) \in \{ NF(C), pNF(C), \bot_C_x \} $$
+$$ \mu(C) := \text{well-founded reduction measure} $$
+$$ \mu(C_i) > \mu(C_{i+1}) \quad \text{for each lawful reduction} $$
+$$ ClassTerm := \{ C \mid Term(C) \} $$
+$$ Term(C) \not\Rightarrow \text{determinism} $$
+$$ Term(C) \not\Rightarrow \text{global confluence} $$
+
+**Commentary:**
+Termination is bounded by a well-founded reduction measure and strict progress after `EVAL_024`. Failure is terminal, and any finite lawful reduction sequence that reaches `NF(C)`, `pNF(C)`, or classified `\bot_C_x` is counted as terminated within the governed calculus. Bounded termination does not assert universal termination, global confluence, or determinism across all admissible subclasses.
+
+**Formal Block 2.3.14: Canonical Form Uniqueness Conditions**
+$$ Unique(C) := Det(C) \land Term(C) \land \text{Reduction terminates in } NF(C) \land \text{All lawful reductions produce process-equivalent canonical forms} \land \text{Canonical representative is uniquely determined modulo } \equiv_P $$
+$$ Rep(C) := \text{canonical representative selected after lawful reduction} $$
+$$ [NF(C)]_{\equiv_P} := \{ N \mid N \equiv_P NF(C) \} $$
+$$ ClassUnique := \{ C \mid Unique(C) \} $$
+$$ Rep(C) \text{ is defined only for } NF(C) $$
+$$ pNF(C) \not\Rightarrow Rep(C) $$
+$$ \bot_C_x \not\Rightarrow Rep(C) $$
+$$ Unique(C) \not\Rightarrow \text{global confluence} $$
+
+**Commentary:**
+Canonical form uniqueness is bounded by the coexistence of deterministic lawful reduction and finite termination. Under that bounded condition, a continuation that reaches `NF(C)` has a selected representative modulo process equivalence, but the selection is only defined for successful normal-form outcomes. Partial normal forms and classified failures remain outside the representative class, and bounded uniqueness does not assert global confluence or any universal uniqueness proof.
+
+**Formal Block 2.3.15: Reduction Complexity Measure**
+$$ \kappa(C) := \text{abstract reduction complexity independent of implementation, runtime, and syntax size} $$
+$$ \Delta \kappa(C_i \to C_{i+1}) := \kappa(C_i) - \kappa(C_{i+1}) $$
+$$ Cost(C) := \sum_i \Delta \kappa(C_i \to C_{i+1}) $$
+$$ Class\kappa := \{ C \mid \kappa(C) \text{ is classified as Minimal, Reducible, Undetermined, or Failure} \} $$
+$$ \kappa(C) \ge 0 $$
+$$ \kappa(C_i) \ge \kappa(C_{i+1}) \text{ for each lawful reduction} $$
+$$ NF(C) \text{ minimizes } \kappa \text{ within } [NF(C)]_{\equiv_P} $$
+$$ \bot_C_x \text{ terminates complexity evaluation} $$
+$$ C_1 \equiv_P C_2 \Rightarrow \kappa(C_1) = \kappa(C_2) $$
+
+**Commentary:**
+Reduction complexity is an abstract characterization of intrinsic reduction effort. It is distinct from runtime, syntax size, and the termination measure `\mu(C)`. The complexity delta `\Delta \kappa` records change across a lawful reduction step, `Cost(C)` accumulates those deltas over a reduction trace, and `NF(C)` is the canonical minimum within the process-equivalence class. No machine-dependent performance claim is introduced.
+
+**Formal Block 2.3.16: Bounded Confluence Theorem**
+$$ Conf_B(C) := \text{bounded confluence over an admissible bounded continuation class} $$
+$$ ClassConf := \{ C \mid Conf_B(C) \} $$
+$$ \text{If } WF(C) \land Typed(C) \land C \Downarrow_L \land Det(C) \land Term(C) \land Unique(C), \text{ then every lawful reduction branch from } C \text{ terminates} $$
+$$ \text{If } WF(C) \land Typed(C) \land C \Downarrow_L \land Det(C) \land Term(C) \land Unique(C), \text{ then all terminating branches are process-equivalent modulo } \equiv_P $$
+$$ \text{If } WF(C) \land Typed(C) \land C \Downarrow_L \land Det(C) \land Term(C) \land Unique(C), \text{ then representative canonical forms belong to the same equivalence class } [NF(C)]_{\equiv_P} $$
+$$ Conf_B(C) \not\Rightarrow \text{global confluence} $$
+$$ Conf_B(C) \not\Rightarrow \text{Church-Rosser} $$
+$$ Conf_B(C) \not\Rightarrow \text{universal reduction uniqueness outside bounded classes} $$
+
+**Commentary:**
+Bounded confluence is established only for continuation classes already satisfying well-formedness, typing, local confluence, determinism, termination, and canonical uniqueness. The theorem compares terminating branches by process equivalence and keeps trace identity separate from the confluence claim. No universal confluence or Church-Rosser theorem is asserted.
+
+**Formal Block 2.3.17: Canonical Reduction Strategy**
+$$ S(C) := \text{canonical reduction strategy governing lawful selection among admissible reduction candidates} $$
+$$ Cand(C) := \{ r \mid r \text{ is a lawful reduction candidate after } EVAL_{024} \} $$
+$$ \prec_S := \text{canonical ordering relation over lawful reduction candidates} $$
+$$ ClassS := \{ C \mid S(C) \text{ is applicable within the bounded deterministic class} \} $$
+$$ \text{If } EVAL_{024} \text{ succeeds, construct } Cand(C), \text{ filter inadmissible candidates, order them by } \prec_S, \text{ and select the highest-priority lawful reduction} $$
+$$ \text{Repeat the canonical selection pipeline until } NF(C), \ pNF(C), \text{ or } \bot_C_x \text{ is reached} $$
+$$ S(C) \not\Rightarrow \text{strategy correctness proof} $$
+$$ S(C) \not\Rightarrow \text{universal reduction optimality} $$
+
+**Commentary:**
+Canonical reduction strategy is the governed selection layer after `EVAL_024`. It constructs the candidate set, removes inadmissible reductions, orders the remaining lawful candidates, and selects the highest-priority lawful reduction within bounded deterministic classes. The strategy preserves process equivalence and bounded confluence assumptions, but no correctness or universal-optimality theorem is asserted here.
+
+**Formal Block 2.3.18: Canonical Reduction Strategy Correctness**
+$$ Correct(S) := \text{bounded correctness of the canonical reduction strategy} $$
+$$ ClassCorrect := \{ C \mid Correct(S) \} $$
+$$ \text{If } WF(C) \land Typed(C) \land Det(C) \land Term(C) \land Unique(C) \land Conf_B(C), \text{ then } S(C) \text{ preserves process equivalence} $$
+$$ \text{If } WF(C) \land Typed(C) \land Det(C) \land Term(C) \land Unique(C) \land Conf_B(C), \text{ then } S(C) \text{ preserves canonical reduction outcomes} $$
+$$ \text{If } WF(C) \land Typed(C) \land Det(C) \land Term(C) \land Unique(C) \land Conf_B(C), \text{ then } S(C) \text{ preserves bounded determinism} $$
+$$ \text{If } WF(C) \land Typed(C) \land Det(C) \land Term(C) \land Unique(C) \land Conf_B(C), \text{ then } S(C) \text{ preserves bounded confluence assumptions} $$
+$$ \text{If } WF(C) \land Typed(C) \land Det(C) \land Term(C) \land Unique(C) \land Conf_B(C), \text{ then } S(C) \text{ produces the same canonical representative modulo } \equiv_P $$
+$$ Correct(S) \not\Rightarrow \text{universal correctness} $$
+$$ Correct(S) \not\Rightarrow \text{optimality} $$
+$$ Correct(S) \not\Rightarrow \text{global correctness} $$
+
+**Commentary:**
+Canonical reduction strategy correctness is bounded to admissible continuation classes that already satisfy the established operational prerequisites. The theorem preserves process equivalence, canonical reduction outcomes, bounded determinism, and bounded confluence assumptions, while keeping universal correctness and optimality out of scope.
 
 ---
 
@@ -1023,28 +1189,28 @@ The directed distinction relation $D(S_1|S_2)$ introduced in Chapter 3 acts as t
 We identify two primary relational domains based on the symmetry or asymmetry of the distinction relation: the **Asymmetry Domain** and the **Symmetry Domain**.
 
 The induction of these domains follows the **Refined Induction Hierarchy (v6)**:
-1. **Layer 0:** 0-state Exclusion — Foundation
-2. **Layer 1:** $(\mathcal{E} \neq 0)$ — Constraint/Distinction Present
-3. **Layer 2:** $\delta_a$ — Admissibility Filter
-4. **Layer 3:** $(\mathcal{E} > 0)$ — Constraint Realized / Admissible Continuation
-5. **Layer 4:** $T(S_a \to S_b)$ — Transition Primitive
-6. **Layer 5:** $N_{ab} := D(S_a|S_b)>0$ — Distinction-Node
-7. **Layer 6:** Ordered Node Relation — Structural Coupling
-8. **Layer 7:** Asymmetric Triadic Closure — Structural Stabilization
-9. **Layer 8:** $R_{\leftrightarrow}$ — Residue Relation (Operand)
-10. **Layer 9:** $\leftrightarrow_R$ — Residue-Conditioned Closure (Condition)
+1. **Layer 0:** 0-state Exclusion â€” Foundation
+2. **Layer 1:** $(\mathcal{E} \neq 0)$ â€” Constraint/Distinction Present
+3. **Layer 2:** $\delta_a$ â€” Admissibility Filter
+4. **Layer 3:** $(\mathcal{E} > 0)$ â€” Constraint Realized / Admissible Continuation
+5. **Layer 4:** $T(S_a \to S_b)$ â€” Transition Primitive
+6. **Layer 5:** $N_{ab} := D(S_a|S_b)>0$ â€” Distinction-Node
+7. **Layer 6:** Ordered Node Relation â€” Structural Coupling
+8. **Layer 7:** Asymmetric Triadic Closure â€” Structural Stabilization
+9. **Layer 8:** $R_{\leftrightarrow}$ â€” Residue Relation (Operand)
+10. **Layer 9:** $\leftrightarrow_R$ â€” Residue-Conditioned Closure (Condition)
 11. **Layer 10:** Truth Condition: $(A \leftrightarrow_R B) = \text{True}$
-12. **Layer 11:** $\to_a \otimes \gets_r$ — Admissibility-Residue Coupling
-13. **Layer 12:** $\text{NavT}$ — Orientation Reconciliation / Update Rule
-14. **Layer 13:** $\text{Arb}_A$ — Realization Arbitration / Selection ($O^*$)
-15. **Layer 14:** $\Psi$ — Residue Inscription
-16. **Layer 15:** $K$ — Knot Stabilization (Closure)
-17. **Layer 16:** $B_K$ — Braid Closure
-18. **Layer 17:** $\_app$ — Application Projection
-19. **Layer 18:** $\iff_m$ — Metric Extraction
-20. **Layer 19:** $\Omega_a$ — Asymmetry Ratio
-21. **Layer 20:** $\iff_s$ — Statistical Projection
-22. **Layer 21:** $P$ — Probability
+12. **Layer 11:** $\to_a \otimes \gets_r$ â€” Admissibility-Residue Coupling
+13. **Layer 12:** $\text{NavT}$ â€” Orientation Reconciliation / Update Rule
+14. **Layer 13:** $\text{Arb}_A$ â€” Realization Arbitration / Selection ($O^*$)
+15. **Layer 14:** $\Psi$ â€” Residue Inscription
+16. **Layer 15:** $K$ â€” Knot Stabilization (Closure)
+17. **Layer 16:** $B_K$ â€” Braid Closure
+18. **Layer 17:** $\_app$ â€” Application Projection
+19. **Layer 18:** $\iff_m$ â€” Metric Extraction
+20. **Layer 19:** $\Omega_a$ â€” Asymmetry Ratio
+21. **Layer 20:** $\iff_s$ â€” Statistical Projection
+22. **Layer 21:** $P$ â€” Probability
 
 ---
 
@@ -1053,7 +1219,7 @@ The induction of these domains follows the **Refined Induction Hierarchy (v6)**:
 A recurring pattern in the Mono-Process Framework is the use of **symmetric descriptions for asymmetric realizations** [Source: IND-CORE-ASYM-REALIZATION-001].
 
 **Meta-Observation 4.1.2: Symmetric-Asymmetric Duality (META-001)**
-Symmetric representations (like ⇔_R or ⇔_m) require orientation, ordering, residue, or admissibility to be realized.
+Symmetric representations (like â‡”_R or â‡”_m) require orientation, ordering, residue, or admissibility to be realized.
 
 Examples include:
 *   Axiom 1.2.1: $(\mathcal{E} \neq 0) \iff_R \delta_a(\mathcal{E} > 0)$
@@ -1118,7 +1284,7 @@ $$ D(*|*) = 0 $$
 The Symmetry Domain corresponds to complete distinction collapse.
 
 **Commentary:**
-In the **symmetry application domain** ($symm\_app$), the lack of a directed gradient means there is no "preferred" orientation. This results in **orientation degeneracy**, where multiple or all directions are equally admissible. While symmetry is often prized in classical physics, in the Mono-Process Framework, pure symmetry represents a "dead end" for directional continuation. Symmetric interaction produces no gradient, no pressure, no direction—it is one of the collapse modes [Source: MPF-NARRATIVE].
+In the **symmetry application domain** ($symm\_app$), the lack of a directed gradient means there is no "preferred" orientation. This results in **orientation degeneracy**, where multiple or all directions are equally admissible. While symmetry is often prized in classical physics, in the Mono-Process Framework, pure symmetry represents a "dead end" for directional continuation. Symmetric interaction produces no gradient, no pressure, no directionâ€”it is one of the collapse modes [Source: MPF-NARRATIVE].
 
 ---
 
@@ -1184,7 +1350,7 @@ By classifying these pre-scalar domains, we provide a rigorous way to distinguis
 In the Mono-Process Framework, **Orientation** is the relational reference frame selected by the process to resolve an asymmetric distinction. It is denoted by the operator $-(i)$.
 
 **Formal Principle 5.1.1: Orientation Pattern Principle (PATCH_ORIENTATION_PATTERN_PRINCIPLE_001)**
-In a distinction array, orientation is not a primitive direction through pre-existing space. It is a tuning condition over the array’s RT-expression field. Changing the orientation pattern does not move objects inside the array; it changes which distinction-pattern relations become admissible, coupled, selected, or projected.
+In a distinction array, orientation is not a primitive direction through pre-existing space. It is a tuning condition over the arrayâ€™s RT-expression field. Changing the orientation pattern does not move objects inside the array; it changes which distinction-pattern relations become admissible, coupled, selected, or projected.
 
 **Formal Statement 5.1.2: Orientation Induction**
 $$ (asym\_app)nDOF \downarrow -(i) $$
@@ -1234,7 +1400,7 @@ $C_{\text{orient}}$ must be computable from $\chi_D$ and admissible orientation 
 *Governance Note:* $C_{\text{orient}}$ is not bridge evidence until PO001 validation demonstrates non-circular computability.
 
 **Commentary:**
-This candidate metric operationalizes PO_001: "Orientation coherence is measurable without presupposing closure topology." The candidate computes normalized variance across the admissible orientation-pattern family and inverts it to a coherence score. High $C_{\text{orient}}$ means the process selects a narrow, consistent region of $\mathcal{O}$; low $C_{\text{orient}}$ means orientation is underdetermined or randomized. This statement does **not** assert that high $C_{\text{orient}}$ causes stable closure — that causal claim remains in OPEN_BRIDGE_001 at PROVISIONAL_PENDING_RIGOR. This statement only defines the metric candidate.
+This candidate metric operationalizes PO_001: "Orientation coherence is measurable without presupposing closure topology." The candidate computes normalized variance across the admissible orientation-pattern family and inverts it to a coherence score. High $C_{\text{orient}}$ means the process selects a narrow, consistent region of $\mathcal{O}$; low $C_{\text{orient}}$ means orientation is underdetermined or randomized. This statement does **not** assert that high $C_{\text{orient}}$ causes stable closure â€” that causal claim remains in OPEN_BRIDGE_001 at PROVISIONAL_PENDING_RIGOR. This statement only defines the metric candidate.
 
 **Validation Requirements (before PO_001 is testable):**
 1. Show $C_{\text{orient}}$ computable from $\chi_D$ and admissible orientation assignments only.
@@ -1310,9 +1476,9 @@ The later retest respected the correction that `_R` must be handled as a relatio
 
 ### PD_CG_PATCH_003 Baseline Reset
 - **Directly observed within the tested model context:** `PD_CG_V2R` falsified the specific `_R`-conditioned improvement route on preserved distinction.
-- **Active governed baseline:** bare `<≠>` is now the preserved-distinction comparison baseline.
-- **Qualification rule:** any subscript on `<≠>` is a candidate conditioning qualifier that must outperform bare `<≠>` before retention.
-- **Current prohibition:** `<≠>_R` / `<≠>_r` must not be used for promotion by habit or decorative carryover.
+- **Active governed baseline:** bare `<â‰ >` is now the preserved-distinction comparison baseline.
+- **Qualification rule:** any subscript on `<â‰ >` is a candidate conditioning qualifier that must outperform bare `<â‰ >` before retention.
+- **Current prohibition:** `<â‰ >_R` / `<â‰ >_r` must not be used for promotion by habit or decorative carryover.
 
 ### PD_CG_V3 Affix Position Test Note
 - **Governed note:** affix position is under test and not assumed equivalent.
@@ -1490,7 +1656,7 @@ where $\alpha \sim_A \beta$ denotes the accessibility relation defined by the lo
 
 To achieve formal closure for the orientation program, the following items have candidate definitions and require promotion:
 
-1.  **Definition of Orientation Space $\mathcal{O}$:** [ **DEFINITION_CANDIDATE_PENDING_FORMAL_CANONICALIZATION** ] A working informal definition is active in §5.1.2 and §5.1.4: $\mathcal{O} := \{-(i)_k \mid -(i)_k \text{ is an admissible tuning condition over the RT-expression field}\}$. A candidate formal definition exists in `formal_object_registry [OBJ-orientation-space]`: $O(G) := \text{admissible space of participation directions governing bar expressions, } \text{Org}_a \text{ preservation, and knot-class selection}$. Open question: what is the full topological or algebraic type of $\mathcal{O}$? Is it a quotient space $\mathcal{O} / \sim_{\text{Ref}}$, a discrete label set, or a relational frame manifold? This must be resolved before $\text{Org}_a$ axioms can be formally closed. [Audit: MPF_ORIENTATION_STALENESS_AUDIT_001 P2]
+1.  **Definition of Orientation Space $\mathcal{O}$:** [ **DEFINITION_CANDIDATE_PENDING_FORMAL_CANONICALIZATION** ] A working informal definition is active in Â§5.1.2 and Â§5.1.4: $\mathcal{O} := \{-(i)_k \mid -(i)_k \text{ is an admissible tuning condition over the RT-expression field}\}$. A candidate formal definition exists in `formal_object_registry [OBJ-orientation-space]`: $O(G) := \text{admissible space of participation directions governing bar expressions, } \text{Org}_a \text{ preservation, and knot-class selection}$. Open question: what is the full topological or algebraic type of $\mathcal{O}$? Is it a quotient space $\mathcal{O} / \sim_{\text{Ref}}$, a discrete label set, or a relational frame manifold? This must be resolved before $\text{Org}_a$ axioms can be formally closed. [Audit: MPF_ORIENTATION_STALENESS_AUDIT_001 P2]
 2.  **Orientation Equivalence:** [ **DEFINITION_CANDIDATE_PENDING_FORMAL_CANONICALIZATION** ] A candidate exists in `formal_object_registry [OBJ-orientation-space, L1222]`: Two orientation configurations $G$ and $G'$ are equivalent under $\simeq_O$ if there exist $o \in \mathcal{O}(G)$, $o' \in \mathcal{O}(G')$ such that participation directions, roles, and closure are preserved under $\iff_R$. Formally: $G \simeq_O G' :\iff \exists o \in \mathcal{O}(G),\, \exists o' \in \mathcal{O}(G') : G \iff_R G' \text{ with participation directions, roles, and closure preserved}$. Open question: does $\simeq_O$ satisfy full equivalence axioms (reflexivity, symmetry, transitivity) under all admissibility regimes? Full metric proof on $\mathcal{O} / \sim_{\text{Ref}}$ is a registered open obligation [Source: `registry/operator_algebra_closure_registry.json`]. [Audit: MPF_ORIENTATION_STALENESS_AUDIT_001 P3]
 
 ---
@@ -2244,7 +2410,7 @@ To complete the formalization of the topological program, the following must be 
 
 1.  **Rigorous Definition of $K$:** [ **MISSING DEFINITION** ] Is $K$ a knot in the sense of knot theory ($S^1$ into $\mathbb{R}^3$), or is it an abstract graph-cycle invariant or a periodic orbit in orientation space?
 2.  **Braid Formation Rule:** [ **MISSING DEFINITION** ] What are the formal mechanics of triadic closure? How do the individual strands of $\mathcal{E}$ "knot" together under the $\iff_R$ operator?
-3.  **Topology-Class Metric:** [ **DEFINITION_CANDIDATE_PENDING_VALIDATION** ] A candidate metric $T_{\text{class\_metric}}$ is now defined — see Formal Statement 11.X below and `registry/math/metric_registry.json`.
+3.  **Topology-Class Metric:** [ **DEFINITION_CANDIDATE_PENDING_VALIDATION** ] A candidate metric $T_{\text{class\_metric}}$ is now defined â€” see Formal Statement 11.X below and `registry/math/metric_registry.json`.
 4.  **Topology-to-Geometry Transform:** [ **C1_DEFINED_PROVISIONAL** ] Defined under $\Pi_{\text{geo}}$ legality conditions in Section 11.4A. Remaining proof obligations, metric extraction validation, and signature enforcement are tracked under active hardening targets.
 
 ---
@@ -2259,21 +2425,21 @@ To complete the formalization of the topological program, the following must be 
 
 **Candidate Definitions:**
 
-**Step 1 — Closure Trace:**
+**Step 1 â€” Closure Trace:**
 $$ K_{\text{obs}} := \text{trace}(\Delta \to R \to T \to A_{\text{adm}} \to \delta_a \to \Delta') $$
 
-**Step 2 — Topology Graph:**
+**Step 2 â€” Topology Graph:**
 $$ G_K := \text{graph}(K_{\text{obs}}) $$
 
-**Step 3 — Class Assignment:**
+**Step 3 â€” Class Assignment:**
 $$ T_{\text{class\_metric}}(G_K) := [T_k,\; b(T_k),\; \text{inv}(G_K)] $$
 
 where $T_k$ is the topology-class label, $b(T_k)$ is the optional braid index, and $\text{inv}(G_K)$ is the structural invariant signature of the closure graph.
 
-**Step 4 — Class Distribution:**
+**Step 4 â€” Class Distribution:**
 $$ P(T_k) := \frac{\text{count}(T_k)}{N} $$
 
-**Step 5 — Variance Target (for PO\_003):**
+**Step 5 â€” Variance Target (for PO\_003):**
 $$ \text{Var}(T) := \text{dispersion}(\{T_k\}) \text{ over matched runs} $$
 
 **Minimal Class Family (Operational Candidate):**
@@ -2285,18 +2451,18 @@ $$ \text{Var}(T) := \text{dispersion}(\{T_k\}) \text{ over matched runs} $$
 | $T_2$ | `linked_closure_organization` | Two coupled loops; minimal braid interaction |
 | $T_3$ | `low_index_braided_organization` | Low braid-index closure ($b \leq 3$) |
 | $T_4$ | `high_index_braided_organization` | Higher braid-index closure ($b > 3$) |
-| $T_x$ | `valid_but_unclassified_topological_organization` | Valid closure not fitting $T_1$–$T_4$; requires further analysis |
+| $T_x$ | `valid_but_unclassified_topological_organization` | Valid closure not fitting $T_1$â€“$T_4$; requires further analysis |
 
-**Note:** This class family is intentionally operational. It may be replaced by stricter knot/braid invariants (e.g., Alexander polynomial, Jones polynomial, writhe) in later formalization without requiring this statement to be superseded — only updated.
+**Note:** This class family is intentionally operational. It may be replaced by stricter knot/braid invariants (e.g., Alexander polynomial, Jones polynomial, writhe) in later formalization without requiring this statement to be superseded â€” only updated.
 
 **Non-Circularity Constraint (T_CLASS_NONCIRCULARITY_001):**
-$T_{\text{class\_metric}}$ must classify topology after closure observation but **before** orientation-conditioned variance claims are evaluated. Forbidden inputs: $C_{\text{orient}}$, $-(i)$, $\mathcal{O}$, orientation regime labels, $S_{\text{closure}}$ scores, campaign outcome labels. Required because PO\_003 compares $\text{Var}(T \mid C_{\text{orient}} \text{ high})$ against $\text{Var}(T \mid C_{\text{orient}} \text{ low})$ — $T$ must be evaluated blind to the orientation bin.
+$T_{\text{class\_metric}}$ must classify topology after closure observation but **before** orientation-conditioned variance claims are evaluated. Forbidden inputs: $C_{\text{orient}}$, $-(i)$, $\mathcal{O}$, orientation regime labels, $S_{\text{closure}}$ scores, campaign outcome labels. Required because PO\_003 compares $\text{Var}(T \mid C_{\text{orient}} \text{ high})$ against $\text{Var}(T \mid C_{\text{orient}} \text{ low})$ â€” $T$ must be evaluated blind to the orientation bin.
 *Governance Note:* T_class_metric remains a candidate until an executable classifier demonstrates trace-only classification and orientation blindness.
 
 **Allowed Inputs:** realized closure trace, closure graph adjacency, braid/loop/crossing structure, connectivity preservation record, residue-conditioned closure output.
 
 **Commentary:**
-This candidate metric operationalizes PO\_002 ("knot-class distribution is measurable") and provides the distributional object needed for PO\_003 ("orientation coherence narrows admissible knot-classes"). The class family is a minimal operational scaffold — it separates null-closure from valid closure, and distinguishes low from high topological complexity, without introducing external mathematical primitives that are not already present in the framework's closure-trace language. Braid index $b(T_k)$ is included as an optional output to allow later comparison with formal knot theory; its inclusion does not constitute a claim that realized closure structures are literal knots in the mathematical sense.
+This candidate metric operationalizes PO\_002 ("knot-class distribution is measurable") and provides the distributional object needed for PO\_003 ("orientation coherence narrows admissible knot-classes"). The class family is a minimal operational scaffold â€” it separates null-closure from valid closure, and distinguishes low from high topological complexity, without introducing external mathematical primitives that are not already present in the framework's closure-trace language. Braid index $b(T_k)$ is included as an optional output to allow later comparison with formal knot theory; its inclusion does not constitute a claim that realized closure structures are literal knots in the mathematical sense.
 
 This statement does **not** assert that topology class determines closure stability (that is PO\_004's domain) or that orientation selects topology class (that is OPEN\_BRIDGE\_001's claim). This statement only defines the measurement procedure.
 
@@ -2586,7 +2752,7 @@ The textbook provides the overview and projection pathway. All active economics 
 
 ## 14.0 The Critical Path Roadmap
 
-To move the Mono-Process Framework from broad debt listing toward staged, rigorous resolution, the program defines two parallel critical paths: the **Operator Closure Path** and the **Structural Closure Path**. These paths enforce a strict order of buildability—downstream structures or application projections cannot be closed before their primitive mathematical operators are formally defined.
+To move the Mono-Process Framework from broad debt listing toward staged, rigorous resolution, the program defines two parallel critical paths: the **Operator Closure Path** and the **Structural Closure Path**. These paths enforce a strict order of buildabilityâ€”downstream structures or application projections cannot be closed before their primitive mathematical operators are formally defined.
 
 ```mermaid
 graph TD
@@ -2640,7 +2806,7 @@ The promotion of a term or claim from provisional to verified is a governed proc
 $$ \text{Promotion}(L_n \to L_{n+1}) \iff \text{Evidence Pack} \in \text{Registry} $$
 
 **Mandates:**
-- **Trace-to-Core:** A term cannot reach L2 without an explicit process-rewrite using ε, R, and δ primitives.
+- **Trace-to-Core:** A term cannot reach L2 without an explicit process-rewrite using Îµ, R, and Î´ primitives.
 - **Adversarial Tests:** Promotion to L3 or C4 requires an explicitly documented "red team" analysis of potential artifacts.
 - **Contradiction Resolution:** If a simulation run contradicts a mathematical lemma, the lemma is downgraded to **contested** pending a formal derivation audit.
 
@@ -2678,7 +2844,7 @@ If either record is missing, the induction is ungoverned for program purposes an
 The induction routing layer is now operationally established. Active provisional inductions have been backfilled into both the canonical induction registry and the live induction queue, and future induction work must enter through that same path.
 
 **DB Governance Runtime Gate (PATCH_DB_GOVERNANCE_RUNTIME_001):**
-Before applying patches, changing authority-bearing files, or resolving blocked dependencies, the agent must query the DB governance runtime first via `python scripts/query_governance.py context-capsule [--target <path-or-surface>] [--task <label>]`, then `python scripts/query_governance.py current-state`, `python scripts/query_governance.py freshness [--target <path-or-surface>]`, `python scripts/query_governance.py authority --target <path-or-surface>`, `python scripts/query_governance.py authority --semantic <key> --semantic-type <type>` when semantic ownership is the relevant question, `python scripts/query_governance.py patch-chain --patch-id <PATCH_ID>`, and `python scripts/query_governance.py debt --status <open|partial|resolved|blocking|all>` before requesting a patch decision with `python scripts/query_governance.py patch-gate --patch-id <PATCH_ID> --target <path-or-surface>` when needed. The runtime emits current-state capsules and apply/block/defer decisions, and logs decisions in `governance_decision_log` when bootstrapped. The context capsule is the preferred runtime entrypoint because it composes the minimum operative summary from current-state, freshness, authority, patch-chain, debt, recent governance events, and any available semantic authority summary at request time. The refresh procedure is the governed `python scripts/db/snapshot_registries.py` command, which writes the explicit snapshot-refresh metadata that freshness reads. Freshness compares source-affecting changes against the stored source marker and runtime-only DB churn against the stored runtime marker; routine decision logs, event emission, and refresh metadata do not stale the source projection unless they move beyond the runtime marker. When a patch declares semantic targets, patch-gate consults semantic authority and records missing, superseded, or deprecated semantic authorities explicitly instead of silently allowing them. If freshness stays stale after refresh, the runtime output names the newer source change or refresh failure directly instead of pretending the refresh cleared it. The runtime now also records governance-significant changes as append-only event facts that can be queried without treating them as a replacement for registry authority, `python scripts/query_governance.py replay-events [--subject-id <id>] [--event-type <type>] [--limit <n>]` can reconstruct a bounded diagnostic state from safe event types only, and `python scripts/query_governance.py reconcile-events [--subject-id <id>] [--patch-id <PATCH_ID>] [--event-type <type>]` can compare that replayed state against registry authority without mutating it. If the runtime cannot classify the action, canonical registries and long-form docs remain the fallback authority surfaces.
+Before applying patches, changing authority-bearing files, or resolving blocked dependencies, the agent must query the DB governance runtime first via `python scripts/query_governance.py context-capsule [--target <path-or-surface>] [--task <label>]`, then `python scripts/query_governance.py current-state`, `python scripts/query_governance.py freshness [--target <path-or-surface>]`, `python scripts/query_governance.py authority --target <path-or-surface>`, `python scripts/query_governance.py authority --semantic <key> --semantic-type <type>` when semantic ownership is the relevant question, `python scripts/query_governance.py patch-chain --patch-id <PATCH_ID>`, and `python scripts/query_governance.py debt --status <open|partial|resolved|blocking|all>` before requesting a patch decision with `python scripts/query_governance.py patch-gate --patch-id <PATCH_ID> --target <path-or-surface>` when needed. The runtime emits current-state capsules and apply/block/defer decisions, and logs decisions in `governance_decision_log` when bootstrapped. The context capsule is the preferred runtime entrypoint because it composes the minimum operative summary from current-state, freshness, authority, patch-chain, debt, recent governance events, bounded replay reconciliation coverage, and any available semantic authority summary at request time. The refresh procedure is the governed `python scripts/db/snapshot_registries.py` command, which writes the explicit snapshot-refresh metadata that freshness reads. Freshness compares source-affecting changes against the stored source marker and runtime-only DB churn against the stored runtime marker; routine decision logs, event emission, and refresh metadata do not stale the source projection unless they move beyond the runtime marker. When a patch declares semantic targets, patch-gate consults semantic authority and records missing, superseded, or deprecated semantic authorities explicitly instead of silently allowing them. If freshness stays stale after refresh, the runtime output names the newer source change or refresh failure directly instead of pretending the refresh cleared it. The runtime now also records governance-significant changes as append-only event facts that can be queried without treating them as a replacement for registry authority, `python scripts/query_governance.py replay-events [--subject-id <id>] [--event-type <type>] [--limit <n>]` can reconstruct a bounded diagnostic state from safe event types only, and `python scripts/query_governance.py reconcile-events [--subject-id <id>] [--patch-id <PATCH_ID>] [--event-type <type>]` can compare that replayed state against registry authority without mutating it. If the runtime cannot classify the action, canonical registries and long-form docs remain the fallback authority surfaces.
 
 **Debt Discharge Command (GOV_DEBT_DISCHARGE_COMMAND_001):**
 While the governance-first execution gate remains active, agents shall reduce debt in the live command order declared in:
@@ -2740,36 +2906,36 @@ Within the Mono-Process Framework, falsification is not treated as the simple as
 
 ```text
 Induction
-    ↓
+    â†“
 Candidate Condition
-    ↓
+    â†“
 Admissibility Evaluation
-    ↓
+    â†“
 Coupling
-    ↓
+    â†“
 Local Closure
-    ↓
+    â†“
 RT (stable local condition)
-    ↓
+    â†“
 Continuous Adversarial Attack
-    ↓
+    â†“
 Boundary Evaluation
-    ↓
+    â†“
 Admissibility Re-evaluation
-    │
-    ├── survives → RT Maintained
-    └── fails → Partial Decoupling
-                 ↓
+    â”‚
+    â”œâ”€â”€ survives â†’ RT Maintained
+    â””â”€â”€ fails â†’ Partial Decoupling
+                 â†“
           Loss of Boundary Support
-                 ↓
+                 â†“
            Increasing Symmetry
-                 ↓
+                 â†“
         Complete Local Decoupling
-                 ↓
+                 â†“
         Return to Symmetric Condition
-                 ↓
+                 â†“
          Reopened Research Debt
-                 ↓
+                 â†“
            New Induction Cycle
 ```
 
@@ -3021,7 +3187,7 @@ The schema `<*>_x` is a meta-language construct only. It names the space of lega
 - **Closure family:** `<=>_R`, `<=>_{ra}`
 - **Admissibility family:** `-> _a`, `<- _a`, `->_{ra}`
 - **Residue family:** `-> _r`, `<- _r`
-- **Preservation family:** `<≠>_P`, `<≠>_{ra}`
+- **Preservation family:** `<â‰ >_P`, `<â‰ >_{ra}`
 - **Meta family:** `<*>_x`
 
 The `x` in `<*>_x` is a reserved discussion placeholder in this induction packet. It is not itself a proof rule, a domain label, or a type identifier.
@@ -3175,6 +3341,41 @@ $$ \text{Stage\_1\_Status} := \text{STRUCTURALLY\_QUALIFIED\_NOT\_FORMALLY\_CLOS
 | $C(A,B) \circ C(B,C)$ | Continuation Composition | Candidate | Process composition of continuation objects; lawful only when the shared endpoint matches and residue/admissibility are preserved. |
 | $I(A)$ | Identity Continuation | Candidate | Neutral continuation preserving condition $A$ and acting as the identity element of continuation composition. |
 | $\to_{red}$ | Continuation Reduction Semantics | Candidate | Governed reduction toward $NF(C)$ that preserves process equivalence and does not alter $RT_{core}$. |
+| $\mathrm{REDALG}_{025}$ | Minimal Continuation Reduction Algorithm | Candidate | Minimal governed reduction procedure after `EVAL_024` that preserves process equivalence and may return `NF(C)` or `pNF(C)`; the 025 surface writes the latter as `partial_NF(C)`. Each result is recorded in `Trace(C)`. |
+| $pNF(C)$ | Partial Normal Form | Candidate | Admissible but incomplete continuation reduction state; the 025 surface writes this state as `partial_NF(C)`. |
+| $Outcome(C)$ | Reduction Outcome Classification | Candidate | Canonical classifier of `REDUCE_{025}` outputs into `NF(C)`, `pNF(C)`, or $\bot_C_x$; each classified outcome is trace-linked. |
+| $Trace(C)$ | Reduction Trace | Candidate | Canonical diagnostic record of the ordered evaluation, validation, lawful reduction, halt, and failure-classification steps produced by `REDUCE_{025}`. |
+| $\tau_i$ | Trace Step | Candidate | Single event within `Trace(C)`: evaluation, validation, reduction, halt, or failure-classification step with pre/post state and rule/admissibility/residue metadata. |
+| $\equiv_T$ | Reduction Trace Equivalence | Candidate | Diagnostic equivalence relation over `Trace(C)` records; equivalent traces preserve lawful semantics, identical outcomes, and the same halt classification while allowing different lawful intermediate paths. |
+| $\mathrm{TNF}(\mathrm{Trace})$ | Canonical Trace Form | Candidate | Normalized representative of a reduction trace used for equivalence comparison; it preserves evaluation order, removes implementation-specific metadata, and normalizes step numbering and halt classification. |
+| $\Downarrow_L$ | Local Confluence | Candidate | Bounded reduction property requiring common origin, lawful divergence, independent validity, joinability, and outcome preservation without asserting global confluence. |
+| $Branch(C)$ | Reduction Branch | Candidate | Lawful reduction path originating from a common continuation expression. |
+| $\Downarrow_J$ | Joinability | Candidate | Relation indicating that two lawful reduction branches can be reduced to process-equivalent continuation outcomes. |
+| $CP(C)$ | Critical Reduction Pair | Candidate | Immediate pair of divergent lawful reductions from the same continuation used to evaluate local confluence conditions. |
+| $Det(C)$ | Reduction Determinism | Candidate | Bounded property indicating a unique lawful reduction outcome under canonical evaluation order and reduction priority. |
+| $Priority(R)$ | Reduction Priority | Candidate | Canonical ordering used when multiple lawful reductions are simultaneously admissible. |
+| $Choose(C)$ | Reduction Choice Function | Candidate | Deterministic selection function choosing the next lawful reduction according to canonical reduction priority. |
+| $ClassDet$ | Deterministic Continuation Class | Candidate | Class of continuation expressions satisfying the bounded determinism conditions. |
+| $Term(C)$ | Termination | Candidate | Bounded property indicating that `REDUCE_025` reaches a reduction outcome after a finite number of lawful reduction steps. |
+| $\mu(C)$ | Reduction Measure | Candidate | Well-founded measure used to evaluate reduction progress. |
+| $\mu(C_i) > \mu(C_{i+1})$ | Reduction Progress | Candidate | Strict decrease of the reduction measure across lawful reductions. |
+| $ClassTerm$ | Termination Class | Candidate | Class of continuation expressions satisfying the bounded termination conditions. |
+| $Unique(C)$ | Canonical Form Uniqueness | Candidate | Bounded uniqueness of the canonical normal form modulo process equivalence; requires determinism and termination. |
+| $Rep(C)$ | Canonical Representative | Candidate | Selected representative of a process-equivalence class after lawful reduction. |
+| $[NF(C)]_{\equiv_P}$ | Normal Form Equivalence Class | Candidate | Equivalence class of canonical normal forms modulo process equivalence. |
+| $ClassUnique$ | Uniqueness Class | Candidate | Class of continuation expressions satisfying bounded canonical-form uniqueness. |
+| $\kappa(C)$ | Reduction Complexity | Candidate | Abstract measure of intrinsic reduction complexity; distinct from runtime, syntax size, and termination measure. |
+| $\Delta \kappa$ | Complexity Delta | Candidate | Change in abstract reduction complexity produced by a lawful reduction step. |
+| $Cost(C)$ | Reduction Cost | Candidate | Accumulated abstract reduction complexity required to reach a terminal reduction outcome. |
+| $Class\kappa$ | Reduction Complexity Class | Candidate | Class of continuation expressions according to abstract reduction complexity. |
+| $Conf_B(C)$ | Bounded Confluence Theorem | Candidate | Theorem of bounded confluence for admissible bounded continuation classes; requires local confluence, determinism, termination, and uniqueness. |
+| $ClassConf$ | Confluence Class | Candidate | Class of continuation expressions satisfying all bounded confluence prerequisites. |
+| $S(C)$ | Canonical Reduction Strategy | Candidate | Canonical strategy governing lawful selection among admissible reduction candidates after evaluation. |
+| $Cand(C)$ | Reduction Candidate Set | Candidate | Complete set of lawful reduction candidates available after evaluation. |
+| $\prec_S$ | Strategy Ordering | Candidate | Canonical ordering relation over lawful reduction candidates. |
+| $ClassS$ | Strategy Class | Candidate | Class of continuation expressions for which canonical strategy selection is applicable. |
+| $Correct(S)$ | Canonical Strategy Correctness | Candidate | Bounded correctness of the canonical reduction strategy for admissible continuation classes. |
+| $ClassCorrect$ | Correctness Class | Candidate | Class of continuation expressions satisfying all bounded correctness prerequisites. |
 | $\to_a \otimes \gets_r$ | Composite Coupling | Experimental | Couples potential and history for realization. |
 | $<\neq>_r$ | Relational Non-Identity | Core | Derived structural compression of the root expression $(A \iff_R a \text{ where } A \neq a)$. |
 | $\sim_A$ | Admissibility Equivalence | Candidate | Relation asserting that two RT expressions belong to the same admissibility organization. |
@@ -3406,7 +3607,7 @@ These items have candidate formalisms in the "Scratch Schema" (MS-SCRATCH-V1) or
 - **Ontological Classification of Arrays:** [ **C1_DEFINED_PROVISIONAL_MAINTAINED** ] The requirement that all arrays in formalisms and simulations declare their type (conditional, projection, residue, or participation) and ban generic state arrays. [Source: MPF_ADV_HARDENING_SERIES_006_CONDITIONAL_ARRAY_BACKFILL].
 - **Closure Neighborhoods:** [ **C1_DEFINED_PROVISIONAL_MAINTAINED** ] The requirement that all process coupling neighborhoods (or closure neighborhoods) be defined and computed strictly via local process-connectivity relations rather than assuming a primitive spatial coordinate metric or persistent node objects. [Source: MPF_ADV_HARDENING_SERIES_007_CLOSURE_NEIGHBORHOOD_BACKFILL].
 - **Admissible Organization Operator ($Org_a$):** [ **C1_DEFINED_PROVISIONAL / GAP_QUALIFIED_DEFINITION_CANDIDATE** ] The operator organizing admissible distinction participation over a typed participation graph, governed by candidate axioms under Lemma L115 and Minimal Theorem MT-ORG-001. [Patch: ORG_A_AXIOM_DEFINITION_PASS_001].
-- **Admissible Distinction Organization Signature ($\Sigma_D$):** [ **C1_DEFINED_PROVISIONAL / GAP_QUALIFIED_EQUIVALENCE_CANDIDATE** ] The equivalence class of Org_a-closed distinction organizations under iff_R and orientation equivalence ≃_O. [Patch: ECONOMICS_SIGMA_D_EQUIVALENCE_PASS_001].
+- **Admissible Distinction Organization Signature ($\Sigma_D$):** [ **C1_DEFINED_PROVISIONAL / GAP_QUALIFIED_EQUIVALENCE_CANDIDATE** ] The equivalence class of Org_a-closed distinction organizations under iff_R and orientation equivalence â‰ƒ_O. [Patch: ECONOMICS_SIGMA_D_EQUIVALENCE_PASS_001].
 
 
 ### 2. High-Priority Gaps (OPEN / REGISTERED_LATE / PROOF-PENDING)
@@ -3418,7 +3619,7 @@ These items remain unsettled and are the primary targets for future induction an
 - **OQ_TZR_003 (Collapse Conditions):** [ **OPEN** ] When does typed zero collapse into undifferentiated zero? [Source: MPF_IND_TYPED_ZERO_RECOUPLING_001].
 - **OQ_001 (Scalar Admissibility Context):** [ **OPEN** ] What is the full formal definition of $x$ in the scalar example $[D(2|-1)\to1 \langle f \rangle_x D(3|+3)\to6]\to5$? The context $x$ must be made explicit to complete the RT trace. [Source: MPF_IND_RT_NESTING_CONDITIONS_FAMILY_001].
 - **OQ_002 (Bell Curve Derivability):** [ **OPEN** ] Is the bell curve emergence from exclusion/addition asymmetry formally derivable from $\text{RT}_{\text{core}}$, or does it require an independent statistical postulate? [Source: MPF_IND_RT_NESTING_CONDITIONS_FAMILY_001].
-- **OQ_003 (Skew Conditions):** [ **OPEN** ] What governs the skew of $\text{RT}_{\text{out}}$ distributions — i.e., the formal condition under which the exclusion primary dominates over the additive primary or vice versa? [Source: MPF_IND_RT_NESTING_CONDITIONS_FAMILY_001].
+- **OQ_003 (Skew Conditions):** [ **OPEN** ] What governs the skew of $\text{RT}_{\text{out}}$ distributions â€” i.e., the formal condition under which the exclusion primary dominates over the additive primary or vice versa? [Source: MPF_IND_RT_NESTING_CONDITIONS_FAMILY_001].
 - **OQ_004 (Biconditional Ladder Resolution):** [ **PROVISIONAL_CLOSED** ] Does the mutual constitution of family and primaries (PRIN_007) provide the recursive scale structure needed for the governed provisional reading of the biconditional ladder / `meta_core_scale_hypothesis` in Appendix F.8? [Source: MPF_IND_RT_NESTING_CONDITIONS_FAMILY_001].
 - **OQ_RTM_001 (Trace Inheritance Lemma):** [ **REGISTERED_LATE** ] Under lawful nesting, does trace-admissible $RT_n$ pass trace-admissibility into $RT_{n+1}$ without exhaustive re-derivation from $\text{RT}_{\text{core}}$? [Source: MPF_IND_RT_MECHANICS_RECURSIVE_COMPLETION_001].
 - **OQ_RTM_002 (Continuation Admissibility Condition):** [ **REGISTERED_LATE** ] What formal condition constrains the admissible continuation term in $D(RT_n \mid continuation)$ so the recursive engine remains inside the lawful distinction domain? [Source: MPF_IND_RT_MECHANICS_RECURSIVE_COMPLETION_001].
@@ -3434,7 +3635,7 @@ These items remain unsettled and are the primary targets for future induction an
 - **Formal difference between $R_{\leftrightarrow}$ and $\leftrightarrow_R$:** [ **RESOLVED_PENDING_CANONICAL_TEXTBOOK_SYNC** ] Rigorous separation between residue-as-operand ($R_{\leftrightarrow}$) and closure-support-through-residue ($\leftrightarrow_R$) is explicitly defined in governance patches and integrated into Chapter 2.
 - **Formal rules for Decoupling:** Defining the conditions under which a truth-condition becomes False.
 - **Asymmetric Recoupling and Distinction Emergence:** [ **HARDENING_REQUIRED** ] Define asymmetric recoupling mechanics and the distinction emergence law; determine whether RT exists below the distinction floor [Source: MPF_ZERO_STATE_DOMAIN_MEMBERSHIP_001].
-- **Formal RT Chain Algebra:** [ **C1_DEFINED_PROVISIONAL** ] Define the algebra of progressive conditioned continuation for chains such as $D(1|2), D(2|3), D(3|4)$, including lawful ordering, coupling inheritance, and chain-composition constraints. Continuation composition is now governed by `PATCH_PI_RT_CALCULUS_013`, continuation identity is governed by `PATCH_PI_RT_CALCULUS_014`, process equivalence plus canonical continuation forms are governed by `PATCH_PI_RT_CALCULUS_015`, reduction semantics are governed by `PATCH_PI_RT_CALCULUS_016`, primitive reduction rules are governed by `PATCH_PI_RT_CALCULUS_017`, well-formed continuation expressions are governed by `PATCH_PI_RT_CALCULUS_018`, typed continuation domains are governed by `PATCH_PI_RT_CALCULUS_019`, typed projection transition rules are governed by `PATCH_PI_RT_CALCULUS_020`, typed continuation composition guards are governed by `PATCH_PI_RT_CALCULUS_021`, continuation failure / undefined composition are governed by `PATCH_PI_RT_CALCULUS_022`, failure-classification / recovery-boundary handling is governed by `PATCH_PI_RT_CALCULUS_023`, and continuation evaluation order is governed by `PATCH_PI_RT_CALCULUS_024`; together they require endpoint compatibility, explicit domain binding, type compatibility, explicit projection invocation, residue/admissibility preservation, lawful reduction toward $NF(C)$ after typed composition guards pass, and ordered evaluation before reduction is admitted. Associativity remains deferred, and the full reduction algorithm remains deferred. [Source: PATCH_PI_RT_CALCULUS_013; PATCH_PI_RT_CALCULUS_014; PATCH_PI_RT_CALCULUS_015; PATCH_PI_RT_CALCULUS_016; PATCH_PI_RT_CALCULUS_017; PATCH_PI_RT_CALCULUS_018; PATCH_PI_RT_CALCULUS_019; PATCH_PI_RT_CALCULUS_020; PATCH_PI_RT_CALCULUS_021; PATCH_PI_RT_CALCULUS_022; PATCH_PI_RT_CALCULUS_023; PATCH_PI_RT_CALCULUS_024].
+- **Formal RT Chain Algebra:** [ **C1_DEFINED_PROVISIONAL** ] Define the algebra of progressive conditioned continuation for chains such as $D(1|2), D(2|3), D(3|4)$, including lawful ordering, coupling inheritance, and chain-composition constraints. Continuation composition is now governed by `PATCH_PI_RT_CALCULUS_013`, continuation identity is governed by `PATCH_PI_RT_CALCULUS_014`, process equivalence plus canonical continuation forms are governed by `PATCH_PI_RT_CALCULUS_015`, reduction semantics are governed by `PATCH_PI_RT_CALCULUS_016`, primitive reduction rules are governed by `PATCH_PI_RT_CALCULUS_017`, well-formed continuation expressions are governed by `PATCH_PI_RT_CALCULUS_018`, typed continuation domains are governed by `PATCH_PI_RT_CALCULUS_019`, typed projection transition rules are governed by `PATCH_PI_RT_CALCULUS_020`, typed continuation composition guards are governed by `PATCH_PI_RT_CALCULUS_021`, continuation failure / undefined composition are governed by `PATCH_PI_RT_CALCULUS_022`, failure-classification / recovery-boundary handling are governed by `PATCH_PI_RT_CALCULUS_023`, continuation evaluation order is governed by `PATCH_PI_RT_CALCULUS_024`, the minimal reduction algorithm and partial-NF fallback are governed by `PATCH_PI_RT_CALCULUS_025`, partial normal form semantics are governed by `PATCH_PI_RT_CALCULUS_026`, reduction trace semantics are governed by `PATCH_PI_RT_CALCULUS_027`, reduction trace equivalence / canonical trace normalization are governed by `PATCH_PI_RT_CALCULUS_028`, local confluence conditions are governed by `PATCH_PI_RT_CALCULUS_029`, reduction determinism conditions are governed by `PATCH_PI_RT_CALCULUS_030`, termination conditions are governed by `PATCH_PI_RT_CALCULUS_031`, canonical form uniqueness conditions are governed by `PATCH_PI_RT_CALCULUS_032`, reduction complexity measure is governed by `PATCH_PI_RT_CALCULUS_033`, bounded confluence theorem is governed by `PATCH_PI_RT_CALCULUS_034`, canonical reduction strategy is governed by `PATCH_PI_RT_CALCULUS_035`, and canonical reduction strategy correctness is governed by `PATCH_PI_RT_CALCULUS_036`; together they require endpoint compatibility, explicit domain binding, type compatibility, explicit projection invocation, residue/admissibility preservation, lawful reduction toward $NF(C)$ after typed composition guards pass, ordered evaluation before reduction is admitted, outcome-preserving trace comparison, bounded branch joinability under common-origin divergence, canonical reduction priority with deterministic choice among admissible candidates, strict measure descent under a well-founded termination measure, bounded canonical-form uniqueness modulo process equivalence, bounded confluence over admissible bounded continuation classes, candidate-set construction after $EVAL_{024}$, admissibility filtering, canonical ordering of lawful candidates, deterministic selection within bounded classes, and bounded correctness preservation for canonical strategy selection. Associativity remains deferred, and global confluence, Church-Rosser, universal determinism, universal termination, and universal uniqueness remain deferred. [Source: PATCH_PI_RT_CALCULUS_013; PATCH_PI_RT_CALCULUS_014; PATCH_PI_RT_CALCULUS_015; PATCH_PI_RT_CALCULUS_016; PATCH_PI_RT_CALCULUS_017; PATCH_PI_RT_CALCULUS_018; PATCH_PI_RT_CALCULUS_019; PATCH_PI_RT_CALCULUS_020; PATCH_PI_RT_CALCULUS_021; PATCH_PI_RT_CALCULUS_022; PATCH_PI_RT_CALCULUS_023; PATCH_PI_RT_CALCULUS_024; PATCH_PI_RT_CALCULUS_025; PATCH_PI_RT_CALCULUS_026; PATCH_PI_RT_CALCULUS_027; PATCH_PI_RT_CALCULUS_028; PATCH_PI_RT_CALCULUS_029; PATCH_PI_RT_CALCULUS_030; PATCH_PI_RT_CALCULUS_031; PATCH_PI_RT_CALCULUS_032; PATCH_PI_RT_CALCULUS_033; PATCH_PI_RT_CALCULUS_034; PATCH_PI_RT_CALCULUS_035; PATCH_PI_RT_CALCULUS_036].
 - **Deviation-to-Geometry Recovery:** [ **OPEN** ] Derive distance as a projection of deviation and geometry as a projection of organized distance without reintroducing geometry as a primitive. [Source: session_summary 2026-06-26 continuation-first ontology reduction].
 - **Observer-Floor Mismatch:** [ **REGISTERED_LATE** ] Define the observer-floor mismatch quantity and determine whether embedded observers and local admissibility floors co-evolve so relative mismatch remains approximately invariant. [Source: session_summary 2026-06-26 continuation-first ontology reduction].
 - **Orientation Transformations Across Domains:** [ **OPEN** ] Define lawful orientation transformations across domains without collapsing orientation into spatial direction or primitive time. [Source: session_summary 2026-06-26 continuation-first ontology reduction].
@@ -3442,9 +3643,9 @@ These items remain unsettled and are the primary targets for future induction an
 - **Formal operand of $\leftrightarrow_R$:** Defining the types allowed to participate in residue-conditioned closure.
 - **Vertical Bar Operator and Grouped Closure ($\mid$):** [ **C1_DEFINED_PROVISIONAL / CAMPAIGN_COMPLETED** ] Primitive admissible participation separator defining the structured comparison interface for distinction evaluation under Lemma L113 and Minimal Theorem MT-VBAR-001. Grouped bar closure ($Adm_{|}^{G}$) is defined under Lemma L114 and Minimal Theorem MT-GBC-001. Executable model verified under 4 controls and 5 metrics. [Patches: VERTICAL_BAR_OPERATOR_DEFINITION_PASS_001, VERTICAL_BAR_OPERATOR_GROUP_CLOSURE_PASS_001, MPF_VERTICAL_BAR_INDUCTION_001, MPF_VERTICAL_BAR_CAMPAIGN_SCAFFOLD_PATCH_001, MPF_VERTICAL_BAR_EXECUTABLE_MODEL_PATCH_001; Campaign: MPF_BAR_OPERATOR_VALIDATION_001]
 - **Deviated Constraint Dynamics ($D \to \delta \alpha$):** [ **C2_test_designed / RECORDED_UNDER_AUDIT** ] Formalizing the principle that distinction reorganizes admissibility within the same process. Vortex feedback loop campaign executed and validated under 4 controls, with C++ equivalence established under oneAPI AVX2; currently under governance hold pending final verification. [Patch: MPF_DEVIATED_CONSTRAINT_DYNAMICS_PATCH_001, MPF_VORTEX_ADMISSIBILITY_EXECUTION_PATCH_001, [REMEDIATE_VORTEX_EXECUTION_PROVENANCE_001](file:///D:/projects/acellorator/patches/REMEDIATE_VORTEX_EXECUTION_PROVENANCE_001.json), [MPF_VORTEX_REMEDIATION_EXECUTION_001](file:///D:/projects/acellorator/patches/MPF_VORTEX_REMEDIATION_EXECUTION_001.json); Campaigns: MPF_VORTEX_ADMISSIBILITY_CAMPAIGN_001, MPF_NON_MARKOV_ORGANIZATION_TEST_001; Audits: AUDIT_VORTEX_GOVERNANCE_001, [AUDIT_TOOL_RIGOR_ENDORSEMENT_TRACE_001](file:///D:/projects/acellorator/audits/AUDIT_TOOL_RIGOR_ENDORSEMENT_TRACE_001/tool_authorization_audit.md)]
-- **Orientation Space $\mathcal{O}$:** [ **DOWNSTREAM_FORMALIZATION_PENDING** ] Orientation is treated as a downstream organization over admissible RT conditions. Working informal definition active in §5.1.2 and §5.1.4. Candidate formal definition in `formal_object_registry [OBJ-orientation-space]`. Open requirement for OPEN_BRIDGE_001 is the **measurable metric** $C_{\text{orient}}$ and topological class measure $T_{\text{class metric}}$, not the downstream organization itself. [Audit: MPF_ORIENTATION_STALENESS_AUDIT_001 P4]
-- **Orientation Coherence Metric ($C_{\text{orient}}$):** [ **VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT** ] Candidate definition active in textbook §5.1.5 (Formal Statement 5.1.5): $C_{\text{orient}}(\chi_D) := 1 - \text{Var}_{\text{norm}}(\{-(i)_k \mid -(i)_k \in \mathcal{O}_{\text{adm}}(\chi_D)\})$. Non-circularity constraint active (C_ORIENT_NONCIRCULARITY_001): metric must be computable before topology class or closure stability is evaluated. Canonical registry entry: `registry/math/metric_registry.json`. Binds to OPEN_BRIDGE_001 PO_001. [Patch: [MPF_PO001_C_ORIENT_VALIDATION_EXECUTION_PATCH_001](file:///D:/projects/acellorator/patches/MPF_PO001_C_ORIENT_VALIDATION_EXECUTION_PATCH_001.json)]
-- **Topological Class Variance Measure ($T_{\text{class\_metric}}$):** [ **VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT** ] Candidate definition active in textbook §11.X (Formal Statement 11.X): $T_{\text{class\_metric}}(G_K) := [T_k, b(T_k), \text{inv}(G_K)]$ with minimal class family $T_0$–$T_4$, $T_x$. Non-circularity constraint active (T_CLASS_NONCIRCULARITY_001): must classify topology blind to orientation regime. Canonical registry entry: `registry/math/metric_registry.json`. Binds to OPEN_BRIDGE_001 PO_002 and PO_003. [Patch: [MPF_PO002_VALIDATION_CLOSURE_PATCH_001](file:///D:/projects/acellorator/patches/MPF_PO002_VALIDATION_CLOSURE_PATCH_001.json)]
+- **Orientation Space $\mathcal{O}$:** [ **DOWNSTREAM_FORMALIZATION_PENDING** ] Orientation is treated as a downstream organization over admissible RT conditions. Working informal definition active in Â§5.1.2 and Â§5.1.4. Candidate formal definition in `formal_object_registry [OBJ-orientation-space]`. Open requirement for OPEN_BRIDGE_001 is the **measurable metric** $C_{\text{orient}}$ and topological class measure $T_{\text{class metric}}$, not the downstream organization itself. [Audit: MPF_ORIENTATION_STALENESS_AUDIT_001 P4]
+- **Orientation Coherence Metric ($C_{\text{orient}}$):** [ **VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT** ] Candidate definition active in textbook Â§5.1.5 (Formal Statement 5.1.5): $C_{\text{orient}}(\chi_D) := 1 - \text{Var}_{\text{norm}}(\{-(i)_k \mid -(i)_k \in \mathcal{O}_{\text{adm}}(\chi_D)\})$. Non-circularity constraint active (C_ORIENT_NONCIRCULARITY_001): metric must be computable before topology class or closure stability is evaluated. Canonical registry entry: `registry/math/metric_registry.json`. Binds to OPEN_BRIDGE_001 PO_001. [Patch: [MPF_PO001_C_ORIENT_VALIDATION_EXECUTION_PATCH_001](file:///D:/projects/acellorator/patches/MPF_PO001_C_ORIENT_VALIDATION_EXECUTION_PATCH_001.json)]
+- **Topological Class Variance Measure ($T_{\text{class\_metric}}$):** [ **VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT** ] Candidate definition active in textbook Â§11.X (Formal Statement 11.X): $T_{\text{class\_metric}}(G_K) := [T_k, b(T_k), \text{inv}(G_K)]$ with minimal class family $T_0$â€“$T_4$, $T_x$. Non-circularity constraint active (T_CLASS_NONCIRCULARITY_001): must classify topology blind to orientation regime. Canonical registry entry: `registry/math/metric_registry.json`. Binds to OPEN_BRIDGE_001 PO_002 and PO_003. [Patch: [MPF_PO002_VALIDATION_CLOSURE_PATCH_001](file:///D:/projects/acellorator/patches/MPF_PO002_VALIDATION_CLOSURE_PATCH_001.json)]
 
 - **Topology-to-Geometry Hardening:** [ **HARDENING_REQUIRED** ] Prove topology-to-geometry proof obligations, validate metric extraction, validate projection-signatures, exclude false geometry projections, and obtain replication and rigor endorsement [Source: MPF_TOPOLOGY_GEOMETRY_LEGALITY_C1_DEFINITION_001].
 - **Empirical Mapping Standards Hardening:** [ **HARDENING_REQUIRED** ] Define EMS audit procedures, EMS evidence thresholds, and EMS replication standards [Source: MPF_EMS_C1_DEFINITION_001].
@@ -3477,7 +3678,7 @@ These items remain unsettled and are the primary targets for future induction an
 - **PD_CG_V3_SUBSCRIPT_DISCOVERY:** Baseline-vs-qualified preserved-distinction campaign after the `_R` route failed as tested.
 - **PD_CG_V3_AFFIX_POSITION_TEST:** Bare-vs-subscripted-vs-prefixed reciprocal relation comparison; affix position is treated as semantically binding until tested.
 - **MPF_BAR_OPERATOR_VALIDATION_001:** Test | as a distinction-preserving comparison operator under 4 controls and 5 metrics; campaign completed and validated under executable model. [Patch: MPF_VERTICAL_BAR_CAMPAIGN_SCAFFOLD_PATCH_001, MPF_VERTICAL_BAR_EXECUTABLE_MODEL_PATCH_001]
-- **MPF_VORTEX_ADMISSIBILITY_CAMPAIGN_001:** Investigate whether admissibility updates systematically condition subsequent distinction events (D -> δα feedback loops); campaign executed in C++ with verified Python equivalence, currently under governance hold pending final verification. [Patch: MPF_VORTEX_ADMISSIBILITY_CAMPAIGN_001, MPF_VORTEX_ADMISSIBILITY_EXECUTION_PATCH_001, [REMEDIATE_VORTEX_EXECUTION_PROVENANCE_001](file:///D:/projects/acellorator/patches/REMEDIATE_VORTEX_EXECUTION_PROVENANCE_001.json), [MPF_VORTEX_REMEDIATION_EXECUTION_001](file:///D:/projects/acellorator/patches/MPF_VORTEX_REMEDIATION_EXECUTION_001.json); Audits: AUDIT_VORTEX_GOVERNANCE_001, [AUDIT_TOOL_RIGOR_ENDORSEMENT_TRACE_001](file:///D:/projects/acellorator/audits/AUDIT_TOOL_RIGOR_ENDORSEMENT_TRACE_001/tool_authorization_audit.md)]
+- **MPF_VORTEX_ADMISSIBILITY_CAMPAIGN_001:** Investigate whether admissibility updates systematically condition subsequent distinction events (D -> Î´Î± feedback loops); campaign executed in C++ with verified Python equivalence, currently under governance hold pending final verification. [Patch: MPF_VORTEX_ADMISSIBILITY_CAMPAIGN_001, MPF_VORTEX_ADMISSIBILITY_EXECUTION_PATCH_001, [REMEDIATE_VORTEX_EXECUTION_PROVENANCE_001](file:///D:/projects/acellorator/patches/REMEDIATE_VORTEX_EXECUTION_PROVENANCE_001.json), [MPF_VORTEX_REMEDIATION_EXECUTION_001](file:///D:/projects/acellorator/patches/MPF_VORTEX_REMEDIATION_EXECUTION_001.json); Audits: AUDIT_VORTEX_GOVERNANCE_001, [AUDIT_TOOL_RIGOR_ENDORSEMENT_TRACE_001](file:///D:/projects/acellorator/audits/AUDIT_TOOL_RIGOR_ENDORSEMENT_TRACE_001/tool_authorization_audit.md)]
 - **MPF_NON_MARKOV_ORGANIZATION_TEST_001:** Probe if future admissibility dynamics depend on cumulative history integration rather than prior state alone; campaign designed. [Patch: MPF_NON_MARKOV_ORGANIZATION_TEST_001]
 
 ### F.6 Bridge Resolution History
@@ -3486,13 +3687,13 @@ These items remain unsettled and are the primary targets for future induction an
 - **OPEN_BRIDGE_001:** Later relational-conditioning retest dated 2026-06-17 respected `_R` as relation conditioning rather than residue removal, but still did not support promotion because basin reformation did not improve and boundary-front mediation worsened on average.
 - **OPEN_BRIDGE_001:** Reformulated 2026-06-17 as a **Topological Selector** bridge. The new claim identifies orientation as a constraint on admissible knot-class selection ($T$) rather than a direct driver of stability. Its current governed state is **PROVISIONAL_PENDING_RIGOR** with a **C1_DEFINED_PROVISIONAL** ceiling under `RIGOR_TOOL_001`.
 - **OPEN_BRIDGE_001:** Run 08 dated 2026-06-16, reviewed 2026-06-17, showed coherent orientation narrowing admissible knot-class variance under the tested PDE + TDA stack. Under `RIGOR_TOOL_001`, that observation is retained as **PROVISIONAL_PENDING_RIGOR** pending tool qualification and independent replication rather than advanced to supported status.
-- **OPEN_BRIDGE_001:** Governance reset `PD_CG_PATCH_003` dated 2026-06-17 retained bare `<≠>` as the active preserved-distinction baseline, treated subscripts as tested qualifiers only, and blocked promotional reuse of `<≠>_R` / `<≠>_r` without a new direct baseline win.
+- **OPEN_BRIDGE_001:** Governance reset `PD_CG_PATCH_003` dated 2026-06-17 retained bare `<â‰ >` as the active preserved-distinction baseline, treated subscripts as tested qualifiers only, and blocked promotional reuse of `<â‰ >_R` / `<â‰ >_r` without a new direct baseline win.
 - **OPEN_BRIDGE_001:** Later affix-position test dated 2026-06-17 found that reciprocal affix position changed bounded model behavior, but neither `<=>_r` nor `r_<=>` beat bare `<=>`; no bridge promotion followed.
 
 ### F.7 Bridge Measurement Definitions (MPF_PATCH_002E)
 Formal measurement rules for bridge falsification campaigns.
-- **Orientation Coherence ($C_{\text{orient}}$):** [ **VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT** ] Candidate form: $1 - \text{Var}_{\text{norm}}(\{-(i)_k \mid -(i)_k \in \mathcal{O}_{\text{adm}}(\chi_D)\})$. Canonical inputs: $-(i)$, $\mathcal{O}$, $\chi_D$, $\delta_a$-context. Forbidden inputs: $K$, $T_{\text{class}}$, $S_{\text{closure}}$. Non-circularity constraint C_ORIENT_NONCIRCULARITY_001 active. Full definition: textbook §5.1.5; registry: `registry/math/metric_registry.json`. [Patch: [MPF_PO001_C_ORIENT_VALIDATION_EXECUTION_PATCH_001](file:///D:/projects/acellorator/patches/MPF_PO001_C_ORIENT_VALIDATION_EXECUTION_PATCH_001.json)]
-- **Topology-Class Metric ($T_{\text{class\_metric}}$):** [ **VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT** ] Candidate form: $T_{\text{class\_metric}}(G_K) := [T_k, b(T_k), \text{inv}(G_K)]$ with class family $T_0$–$T_4$, $T_x$. Allowed inputs: realized closure trace, graph adjacency, braid/loop structure. Forbidden inputs: $C_{\text{orient}}$, $-(i)$, $\mathcal{O}$, orientation regime labels. Non-circularity constraint T_CLASS_NONCIRCULARITY_001 active. Full definition: textbook §11.X; registry: `registry/math/metric_registry.json`. [Patch: [MPF_PO002_VALIDATION_CLOSURE_PATCH_001](file:///D:/projects/acellorator/patches/MPF_PO002_VALIDATION_CLOSURE_PATCH_001.json)]
+- **Orientation Coherence ($C_{\text{orient}}$):** [ **VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT** ] Candidate form: $1 - \text{Var}_{\text{norm}}(\{-(i)_k \mid -(i)_k \in \mathcal{O}_{\text{adm}}(\chi_D)\})$. Canonical inputs: $-(i)$, $\mathcal{O}$, $\chi_D$, $\delta_a$-context. Forbidden inputs: $K$, $T_{\text{class}}$, $S_{\text{closure}}$. Non-circularity constraint C_ORIENT_NONCIRCULARITY_001 active. Full definition: textbook Â§5.1.5; registry: `registry/math/metric_registry.json`. [Patch: [MPF_PO001_C_ORIENT_VALIDATION_EXECUTION_PATCH_001](file:///D:/projects/acellorator/patches/MPF_PO001_C_ORIENT_VALIDATION_EXECUTION_PATCH_001.json)]
+- **Topology-Class Metric ($T_{\text{class\_metric}}$):** [ **VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT** ] Candidate form: $T_{\text{class\_metric}}(G_K) := [T_k, b(T_k), \text{inv}(G_K)]$ with class family $T_0$â€“$T_4$, $T_x$. Allowed inputs: realized closure trace, graph adjacency, braid/loop structure. Forbidden inputs: $C_{\text{orient}}$, $-(i)$, $\mathcal{O}$, orientation regime labels. Non-circularity constraint T_CLASS_NONCIRCULARITY_001 active. Full definition: textbook Â§11.X; registry: `registry/math/metric_registry.json`. [Patch: [MPF_PO002_VALIDATION_CLOSURE_PATCH_001](file:///D:/projects/acellorator/patches/MPF_PO002_VALIDATION_CLOSURE_PATCH_001.json)]
 - **Closure Stability ($S_{\text{closure}}$):** $\text{survival\_cycles} / \text{total\_cycles}$.
 - **Minimum Effect Threshold ($\tau$):** 0.05 (Target for $\beta_1$).
 
@@ -3507,16 +3708,52 @@ This section tracks newly introduced lexicon terms that have been reduced to gov
 - **`Continuation_Composition`** (`C(A,B) \circ C(B,C)`): Lawful composition of continuation objects when the shared endpoint matches and residue/admissibility are preserved. Composition is process composition, not symbolic concatenation or rewrite. [Source: `PATCH_PI_RT_CALCULUS_013`].
 - **`Continuation_Identity`** (`I(A)`): Neutral lawful continuation that preserves condition $A$ and acts as the identity element of continuation composition. `I(A)=C(A,A)`. [Source: `PATCH_PI_RT_CALCULUS_014`].
 - **`Process_Equivalence`** (`C_1 \equiv_P C_2`): Behavioral equivalence between continuation expressions under shared admissibility, residue, orientation, and context constraints. Symbolic equality is not sufficient; two expressions may differ syntactically while remaining process-equivalent. [Source: `PATCH_PI_RT_CALCULUS_015`].
-- **`Canonical_Continuation_Form`** (`NF(C)`): Canonical representative of a continuation expression when admissibility holds. `NF(C)` supports auditability and comparison, while the reduction algorithm that computes it remains deferred. [Source: `PATCH_PI_RT_CALCULUS_015`].
+- **`Canonical_Continuation_Form`** (`NF(C)`): Canonical representative of a continuation expression when admissibility holds. `NF(C)` supports auditability and comparison, while the minimal governed reduction algorithm is documented in `PATCH_PI_RT_CALCULUS_025`, partial normal form semantics are documented in `PATCH_PI_RT_CALCULUS_026`, and reduction trace semantics are documented in `PATCH_PI_RT_CALCULUS_027`; termination and confluence remain deferred. [Source: `PATCH_PI_RT_CALCULUS_015`; `PATCH_PI_RT_CALCULUS_025`; `PATCH_PI_RT_CALCULUS_026`; `PATCH_PI_RT_CALCULUS_027`].
 - **`Continuation_Reduction_Semantics`** (`C \to_{red} C'`): Governed reduction relation from a well-formed continuation expression toward `NF(C)`. The relation preserves process equivalence and simplifies representation rather than behavior; `PATCH_PI_RT_CALCULUS_017` instantiates this semantics with primitive reduction rules. [Source: `PATCH_PI_RT_CALCULUS_016`; `PATCH_PI_RT_CALCULUS_017`].
-- **`Primitive_Continuation_Reduction_Rules`** (`I(A) ∘ C(A,B) \to_{red} C(A,B)`, `C(A,B) ∘ I(B) \to_{red} C(A,B)`, `C(A,B) ∘ C(B,C) \to_{red} C(A,C)`): The first concrete lawful reduction rules under `->red`. They remove identity redundancy and contract lawful composition only when endpoint compatibility, admissibility, residue propagation, and governing constraints hold. [Source: `PATCH_PI_RT_CALCULUS_017`].
-- **`Primitive_Continuation_Reduction_Rules`** (`I(A) ∘ C(A,B) \to_{red} C(A,B)`, `C(A,B) ∘ I(B) \to_{red} C(A,B)`, `C(A,B) ∘ C(B,C) \to_{red} C(A,C)`): The first concrete lawful reduction rules under `->red`. They remove identity redundancy and contract lawful composition only when endpoint compatibility, admissibility, residue propagation, and governing constraints hold. [Source: `PATCH_PI_RT_CALCULUS_017`].
+- **`Primitive_Continuation_Reduction_Rules`** (`I(A) âˆ˜ C(A,B) \to_{red} C(A,B)`, `C(A,B) âˆ˜ I(B) \to_{red} C(A,B)`, `C(A,B) âˆ˜ C(B,C) \to_{red} C(A,C)`): The first concrete lawful reduction rules under `->red`. They remove identity redundancy and contract lawful composition only when endpoint compatibility, admissibility, residue propagation, and governing constraints hold. [Source: `PATCH_PI_RT_CALCULUS_017`].
+- **`Primitive_Continuation_Reduction_Rules`** (`I(A) âˆ˜ C(A,B) \to_{red} C(A,B)`, `C(A,B) âˆ˜ I(B) \to_{red} C(A,B)`, `C(A,B) âˆ˜ C(B,C) \to_{red} C(A,C)`): The first concrete lawful reduction rules under `->red`. They remove identity redundancy and contract lawful composition only when endpoint compatibility, admissibility, residue propagation, and governing constraints hold. [Source: `PATCH_PI_RT_CALCULUS_017`].
 - **`Well-Formed_Continuation_Expression`** (`WF(C)`): Continuation expressions are lawful only when endpoints, composition structure, domain bindings, and governing constraints are valid. `WF(C)` is the structural and semantic gate for lawful continuation composition and reduction, and it blocks cross-domain substitution unless an explicit projection or binding rule is declared. [Source: `PATCH_PI_RT_CALCULUS_018`].
 - **`Typed_Continuation_Domains`** (`TYPE_META`, `TYPE_AFFECT_EFFECT`, `TYPE_PROJECTION`, `TYPE_CONTINUATION`, `TYPE_OBSERVATION`, `TYPE_OPERATIONAL_REGIME`): Explicit typing for continuation-layer expressions across meta, affect/effect, projection, continuation, observation, and operational-regime layers. Cross-domain substitution is forbidden unless an explicit projection, binding, or transition rule is declared. [Source: `PATCH_PI_RT_CALCULUS_019`].
-- **`Typed_Projection_Transition_Rules`** (`A|E ->p Π_D(A|E)`, `Π_D(A|E) := D(*|*)`): Governed typed transition rules that move the primitive affect/effect condition into the projection layer only through explicit invocation of `Π_D`. Direct collapse from `A|E` to `D(*|*)` is forbidden, and projection preserves representable distinction without exhausting the primitive condition. [Source: `PATCH_PI_RT_CALCULUS_020`].
+- **`Typed_Projection_Transition_Rules`** (`A|E ->p Î _D(A|E)`, `Î _D(A|E) := D(*|*)`): Governed typed transition rules that move the primitive affect/effect condition into the projection layer only through explicit invocation of `Î _D`. Direct collapse from `A|E` to `D(*|*)` is forbidden, and projection preserves representable distinction without exhausting the primitive condition. [Source: `PATCH_PI_RT_CALCULUS_020`].
 - **`Typed_Continuation_Composition_Guards`** (`C(A,B) \circ C(B,C)`, `type(cod(C_1)) = type(dom(C_2))`, `admissible(C_1,C_2)`): Governed typed composition guards that require endpoint matching, typed-domain compatibility, admissibility, and residue propagation before continuation composition or any reduction of the composed continuation is lawful. Projection-domain mismatches require an explicit typed transition rule such as `\Pi_D`; failed composition produces no continuation object. [Source: `PATCH_PI_RT_CALCULUS_021`].
 - **`Continuation_Failure`** (`$\bot_C$`): Marked diagnostic failure state produced when a proposed continuation cannot be admitted as a lawful continuation object. Composition, typed transition, or reduction failure records inadmissibility without modifying the canonical RT core, and `NF(\bot_C)` is undefined. [Source: `PATCH_PI_RT_CALCULUS_022`].
 - **`Continuation_Failure_Classification`** (`$\bot_C^{\mathrm{endpoint}}$, $\bot_C^{\mathrm{type}}$, $\bot_C^{\mathrm{adm}}$, $\bot_C^{\mathrm{res}}$`): Diagnostic subclasses of `$\bot_C$` that identify endpoint, type, admissibility, and residue failures. Classification remains diagnostic only: it does not create lawful continuation objects, does not normalize into continuation normal forms, and defers recovery to a future governed rule. [Source: `PATCH_PI_RT_CALCULUS_023`].
+- **`Reduction_Trace_Equivalence`** (`$\equiv_T$`): Diagnostic equivalence relation over `Trace(C)` records. Equivalent traces preserve lawful reduction semantics, identical canonical outcomes, and the same halt classification while allowing different lawful intermediate paths. [Source: `PATCH_PI_RT_CALCULUS_028`].
+- **`Canonical_Trace_Form`** (`TNF(Trace)`): Normalized representative of a reduction trace used for outcome-preserving comparison. `TNF(Trace)` preserves evaluation order, removes implementation-specific metadata, and normalizes step numbering and halt classification. [Source: `PATCH_PI_RT_CALCULUS_028`].
+- **`Trace_Identity`**: Exact trace-record identity relation. Trace identity is stronger than `\equiv_T` and implies trace equivalence, but trace equivalence does not imply identity. [Source: `PATCH_PI_RT_CALCULUS_028`].
+- **`Trace_Normalization`**: Governed comparison procedure that maps a trace to `TNF(Trace)` by retaining canonical reduction events, preserving evaluation order, and stripping implementation-specific metadata. [Source: `PATCH_PI_RT_CALCULUS_028`].
+- **`Local_Confluence`** (`$\Downarrow_L$`): Bounded reduction property requiring common origin, lawful divergence, independent validity, joinability, and outcome preservation without asserting global confluence. [Source: `PATCH_PI_RT_CALCULUS_029`].
+- **`Reduction_Branch`** (`Branch(C)`): Lawful reduction path originating from a common continuation expression. [Source: `PATCH_PI_RT_CALCULUS_029`].
+- **`Joinability`** (`$\Downarrow_J$`): Relation indicating that two lawful reduction branches can be reduced to process-equivalent continuation outcomes. [Source: `PATCH_PI_RT_CALCULUS_029`].
+- **`Critical_Reduction_Pair`** (`CP(C)`): Immediate pair of divergent lawful reductions from the same continuation used to evaluate local confluence conditions. [Source: `PATCH_PI_RT_CALCULUS_029`].
+- **`Reduction_Determinism`** (`Det(C)`): Bounded property indicating a unique lawful reduction outcome under canonical evaluation order and reduction priority. [Source: `PATCH_PI_RT_CALCULUS_030`].
+- **`Reduction_Priority`** (`Priority(R)`): Canonical ordering used when multiple lawful reductions are simultaneously admissible. [Source: `PATCH_PI_RT_CALCULUS_030`].
+- **`Reduction_Choice_Function`** (`Choose(C)`): Deterministic selection function choosing the next lawful reduction according to canonical reduction priority. [Source: `PATCH_PI_RT_CALCULUS_030`].
+- **`Deterministic_Continuation_Class`** (`ClassDet`): Class of continuation expressions satisfying the bounded determinism conditions. [Source: `PATCH_PI_RT_CALCULUS_030`].
+- **`Termination`** (`Term(C)`): Bounded property indicating that `REDUCE_025` reaches a reduction outcome after a finite number of lawful reduction steps. [Source: `PATCH_PI_RT_CALCULUS_031`].
+- **`Reduction_Measure`** (`μ(C)`): Well-founded measure used to evaluate reduction progress. [Source: `PATCH_PI_RT_CALCULUS_031`].
+- **`Reduction_Progress`** (`μ(C_i) > μ(C_{i+1})`): Strict decrease of the reduction measure across lawful reductions. [Source: `PATCH_PI_RT_CALCULUS_031`].
+- **`Termination_Class`** (`ClassTerm`): Class of continuation expressions satisfying the bounded termination conditions. [Source: `PATCH_PI_RT_CALCULUS_031`].
+- **`canonical_form_uniqueness`** (`Unique(C)`): Governed provisional reading of unique canonical normal-form selection modulo process equivalence. [Source: `PATCH_PI_RT_CALCULUS_032`].
+- **`canonical_representative`** (`Rep(C)`): Governed provisional reading of the selected representative for a successful normal form. [Source: `PATCH_PI_RT_CALCULUS_032`].
+- **`normal_form_equivalence_class`** (`[NF(C)]_{\equiv_P}`): Governed provisional reading of the equivalence class of canonical normal forms modulo process equivalence. [Source: `PATCH_PI_RT_CALCULUS_032`].
+- **`uniqueness_class`** (`ClassUnique`): Governed provisional reading of the continuation subclass satisfying bounded canonical-form uniqueness. [Source: `PATCH_PI_RT_CALCULUS_032`].
+- **`reduction_complexity`** (`\kappa(C)`): Governed provisional reading of the abstract intrinsic reduction-complexity measure. [Source: `PATCH_PI_RT_CALCULUS_033`].
+- **`complexity_delta`** (`\Delta \kappa`): Governed provisional reading of the complexity change induced by a lawful reduction step. [Source: `PATCH_PI_RT_CALCULUS_033`].
+- **`reduction_cost`** (`Cost(C)`): Governed provisional reading of the accumulated abstract complexity required to reach a terminal outcome. [Source: `PATCH_PI_RT_CALCULUS_033`].
+- **`complexity_class`** (`Class\kappa`): Governed provisional reading of the continuation subclass classified by abstract reduction complexity. [Source: `PATCH_PI_RT_CALCULUS_033`].
+- **`bounded_confluence`** (`Conf_B(C)`): Governed provisional reading of bounded confluence for admissible bounded continuation classes. [Source: `PATCH_PI_RT_CALCULUS_034`].
+- **`bounded_confluence_theorem`** (`Conf_B(C)`): Governed provisional reading of the first bounded confluence theorem, restricted to classes satisfying well-formedness, typing, local confluence, determinism, termination, and canonical uniqueness. [Source: `PATCH_PI_RT_CALCULUS_034`].
+- **`confluence_class`** (`ClassConf`): Governed provisional reading of the continuation class satisfying all bounded confluence prerequisites. [Source: `PATCH_PI_RT_CALCULUS_034`].
+- **`proof_obligation`** (`WF(C)`, `Typed(C)`, `C \Downarrow_L`, `Det(C)`, `Term(C)`, `Unique(C)`): Governed provisional reading of the prerequisite bundle required to apply the bounded confluence theorem. [Source: `PATCH_PI_RT_CALCULUS_034`].
+- **`canonical_reduction_strategy`** (`S(C)`): Governed provisional reading of the canonical strategy governing lawful reduction selection among admissible candidates after evaluation. [Source: `PATCH_PI_RT_CALCULUS_035`].
+- **`reduction_candidate_set`** (`Cand(C)`): Governed provisional reading of the complete lawful candidate set available after evaluation. [Source: `PATCH_PI_RT_CALCULUS_035`].
+- **`strategy_ordering`** (`\prec_S`): Governed provisional reading of the canonical ordering relation over lawful reduction candidates. [Source: `PATCH_PI_RT_CALCULUS_035`].
+- **`strategy_class`** (`ClassS`): Governed provisional reading of the continuation class for which canonical strategy selection is applicable. [Source: `PATCH_PI_RT_CALCULUS_035`].
+- **`strategy_correctness`** (`Correct(S)`): Governed provisional reading of the bounded correctness of the canonical reduction strategy for admissible continuation classes. [Source: `PATCH_PI_RT_CALCULUS_036`].
+- **`correctness_class`** (`ClassCorrect`): Governed provisional reading of the continuation class satisfying all bounded correctness prerequisites. [Source: `PATCH_PI_RT_CALCULUS_036`].
+- **`correctness_obligation`** (`Correct(S)`, `WF(C)`, `Typed(C)`, `Det(C)`, `Term(C)`, `Unique(C)`, `Conf_B(C)`): Governed provisional reading of the bounded correctness prerequisite bundle for canonical strategy selection. [Source: `PATCH_PI_RT_CALCULUS_036`].
+- **`strategy_preservation`** (`S(C)`): Governed provisional reading of the preservation conditions satisfied by the canonical reduction strategy. [Source: `PATCH_PI_RT_CALCULUS_036`].
 - **`Continuation_Expression_Evaluation_Order`** (`parse`, `WF(C)`, typed checks, explicit transition, endpoint, admissibility, residue, failure classification, composition, reduction): Ordered pipeline for continuation expressions. Failure classification occurs before composition is admitted, and reduction remains gated by the full sequence of checks. [Source: `PATCH_PI_RT_CALCULUS_024`].
 - **`distinction_floor_interpretation`**: Governed provisional reading that resolves local scale constraints and pre-distinction origins. [Source: `MPF_RT_BICONDITIONAL_LADDER_001`]
 - **`continuation_first_ontology`**: Governed provisional reading that process precedes distinction and that "precedence" is ontological rather than temporal. [Source: session_summary 2026-06-26 continuation-first ontology reduction]
@@ -3587,8 +3824,8 @@ This textbook draft is derived from and cross-referenced with the following foun
 | **IND-STATE-S-001** | [Induction: State Primitive Grounding](D:/projects/acellorator/docs/textbook/mono_process_textbook_complete.md) | 2026-05-29 | Non-spatial, monistic definition of the state aspect S. |
 | **MPF-P1-003** | [Patch: Invariant Registry Implementation](D:/projects/acellorator/registry/math/invariant_registry.json) | 2026-05-29 | Implementation of the initial invariant family for projectional equivalence. |
 | **MPF-P1-004** | [Patch: Projectional Equivalence Template](D:/projects/acellorator/docs/theory/foundational/5_03_26%20unity/math/proofs/PROJECTIONAL_EQUIVALENCE_TEMPLATE.md) | 2026-05-29 | Formal proof structure for verifying invariant preservation across domains. |
-| **L101–L115** | [Lemmas L101–L115](D:/projects/acellorator/docs/theory/foundational/5_03_26%20unity/math/lemmas/) | 2026-06-22 | Formulations of Whole Expression Primacy, Zero-State domain membership, Recoupling-Reorientation Event, Meta-Relation Family, Typed Meta-Relation Operator ($\langle*\rangle_x$), vertical bar operator |, and Admissible Organization Operator ($Org_a$) axioms. |
-| **P101–P109** | [Proofs P101–P109](D:/projects/acellorator/docs/theory/foundational/5_03_26%20unity/math/proofs/) | 2026-06-22 | Formal proof sketches and validation structures for Lemmas L101–L109. |
+| **L101â€“L115** | [Lemmas L101â€“L115](D:/projects/acellorator/docs/theory/foundational/5_03_26%20unity/math/lemmas/) | 2026-06-22 | Formulations of Whole Expression Primacy, Zero-State domain membership, Recoupling-Reorientation Event, Meta-Relation Family, Typed Meta-Relation Operator ($\langle*\rangle_x$), vertical bar operator |, and Admissible Organization Operator ($Org_a$) axioms. |
+| **P101â€“P109** | [Proofs P101â€“P109](D:/projects/acellorator/docs/theory/foundational/5_03_26%20unity/math/proofs/) | 2026-06-22 | Formal proof sketches and validation structures for Lemmas L101â€“L109. |
 
 ### Secondary References and Registries
 - **Compliance Charter v2.3:** [compliance_charter_v2_3.json](D:/projects/acellorator/registry/compliance_charter_v2_3.json) - Governance authority.

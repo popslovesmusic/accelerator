@@ -175,9 +175,10 @@
       "type": "governance_gap",
       "severity": "moderate",
       "resolution_priority": "future",
-      "status": "partially_resolved",
+      "status": "resolved",
       "introduced_by": "PATCH_DB_GOVERNANCE_RUNTIME_002",
-      "reason_accepted": "The runtime now returns a current-state capsule, target-aware authority resolution, semantic RT projection, structured debt-to-blocker projection, and historical residue compression markers, but the DB still does not project the full semantic authority graph or complete claim-to-evidence reasoning deeply enough to replace broader registry inspection.",
+      "resolution_patch": "PATCH_DB_GOVERNANCE_RUNTIME_015",
+      "reason_accepted": "The runtime now returns a current-state capsule, target-aware authority resolution, semantic RT projection, structured debt-to-blocker projection, historical residue compression markers, a semantic authority graph summary, and a claim-registry/support-matrix claim-to-evidence summary, so the DB current-state capsule no longer requires broad registry inspection for the governed surfaces it covers.",
       "affects": [
         "scripts/query_governance.py",
         "registry/db/migrations/20260703_governance_runtime_current_state_002.sql",
@@ -185,6 +186,8 @@
         "registry/db/migrations/20260703_governance_runtime_refresh_stability_012.sql",
         "registry/db/migrations/20260703_governance_runtime_semantic_authority_013.sql",
         "registry/theorem_registry.json",
+        "registry/claim_registry.json",
+        "registry/claim_support_matrix.json",
         "registry/db/README.md",
         "docs/governance/GLOBAL_VALIDATION_ROUTINE.md"
       ],
@@ -204,7 +207,7 @@
         "Add historical residue compression view"
       ],
       "planned_owner": "governance/runtime",
-      "notes": "This follow-on debt remains partially resolved after the current-state capsule, snapshot-refresh metadata, refresh-stability marker split, semantic RT projection, and debt/residue projection bundle landed. The broader semantic authority graph and claim-evidence synthesis remain open."
+      "notes": "Resolved on 2026-07-05 by the current-state semantic authority graph projection and the claim-registry/support-matrix claim-to-evidence summary."
     },
     {
       "id": "DEBT_DB_GOVERNANCE_RUNTIME_CHAIN_003",
@@ -314,16 +317,18 @@
       "type": "governance_gap",
       "severity": "moderate",
       "resolution_priority": "before_validation",
-      "status": "partially_resolved",
+      "status": "resolved",
       "introduced_by": "PATCH_DB_GOVERNANCE_RUNTIME_007",
-      "reason_accepted": "The runtime now captures, queries, bounded-replays, and reconciles append-only governance events against registry authority, but deeper event-sourced reconstruction remains incomplete.",
+      "resolution_patch": "PATCH_DB_GOVERNANCE_RUNTIME_016",
+      "reason_accepted": "The runtime now surfaces bounded replay reconciliation coverage in current-state and context-capsule summaries, while replay-events remains diagnostic-only and reconcile-events continues to report divergence without mutation.",
       "affects": [
         "scripts/query_governance.py",
-        "registry/db/migrations/20260703_governance_runtime_event_bus_007.sql",
+        "registry/db/migrations/20260703_governance_runtime_context_capsule_006.sql",
         "registry/db/README.md",
         "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
         "docs/textbook/mono_process_textbook_complete.md",
-        "registry/governance/patches/PATCH_DB_GOVERNANCE_RUNTIME_007.json"
+        "registry/governance_change_ledger.json",
+        "registry/governance/patches/PATCH_DB_GOVERNANCE_RUNTIME_016.json"
       ],
       "blocks": [
         "event-sourced reconstruction",
@@ -345,7 +350,7 @@
         "Keep registry authority primary"
       ],
       "planned_owner": "governance/runtime",
-      "notes": "Event capture, query, bounded replay, and diagnostic reconciliation are live; full semantic replay reconstruction remains unresolved."
+      "notes": "Resolved on 2026-07-05 by the replay reconciliation coverage surface in current-state and context-capsule; the replay scaffold remains diagnostic-only and full semantic replay reconstruction remains open."
     }
   ],
   "design_principles": [

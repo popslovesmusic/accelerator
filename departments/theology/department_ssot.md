@@ -148,6 +148,22 @@ These remain department-local projections, comparisons, or analogical readings u
 - **Claim Class:** `C3_structural_comparison`
 - **Status:** provisional interpretation
 
+#### THEO_INT_004
+- **Title:** Locally Closed Basin, Globally Open Strand
+- **Formal Source:** RT/Core, admissibility window, triadic closure
+- **Interpretation:** Within the Theology Department interpretation, the rope/knot/basin model can be read as a provisional structural comparison in which a domain is a locally closed causal basin inside one globally open process, with the causal admissibility window governing persistence and the irreducible jitter naming the non-static baseline of manifestation.
+- **Claim Class:** `C3_structural_comparison`
+- **Status:** provisional interpretation
+- **What this does not prove:** It does not prove doctrinal identity, Trinity, or external theological truth.
+
+#### THEO_CORR_003
+- **Title:** Triadic Closure as Trinitarian-Style Analogy
+- **Formal Source:** triadic closure, relational coupling, process-first ontology
+- **Theology Reading:** Within the Theology Department interpretation, triadic closure may be read as a trinitarian-style analogy of unity, relation, and manifestation, but not as doctrinal identity.
+- **Claim Class:** `C3_structural_comparison`
+- **Validation Status:** provisional correspondence scaffold
+- **What this does not prove:** It does not prove God, Trinity, or Incarnation from the formal source alone.
+
 ---
 
 ## Correspondence and Analogy Rules

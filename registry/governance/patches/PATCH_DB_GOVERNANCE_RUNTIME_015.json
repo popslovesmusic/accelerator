@@ -1,0 +1,69 @@
+{
+  "patch_id": "PATCH_DB_GOVERNANCE_RUNTIME_015",
+  "campaign_id": "CAMPAIGN_DB_GOVERNANCE_RUNTIME_001",
+  "campaign": "CAMPAIGN_DB_GOVERNANCE_RUNTIME_001",
+  "type": "governance_runtime_extension",
+  "status": "APPLIED",
+  "applied_on": "2026-07-05",
+  "title": "Semantic Authority Graph and Claim Reasoning Projection",
+  "goal": "Extend the DB current-state capsule with a governed semantic authority graph summary and a claim-registry / claim-support reasoning projection so the runtime can answer claim and authority questions without broad registry inspection.",
+  "problem": {
+    "current_state": "The runtime already projects semantic RT, debt blockers, and historical residue, but the current-state capsule still leaves the semantic authority graph and claim reasoning split across separate registry lookups.",
+    "gap": "Agents still need to consult the claim registry and support matrix directly to understand how governed claims are structured and supported."
+  },
+  "objectives": [
+    "Surface the full semantic authority graph summary in current-state.",
+    "Surface claim-registry and claim-support summaries in current-state.",
+    "Expose DB claim-evidence link coverage explicitly, including when the table is empty.",
+    "Resolve DEBT_DB_GOVERNANCE_RUNTIME_STATE_002 in the governed debt registry."
+  ],
+  "runtime_changes": {
+    "current_state_view": [
+      "semantic_authority_count",
+      "semantic_authority_graph_state",
+      "claim_evidence_link_count",
+      "claim_evidence_claim_count",
+      "claim_evidence_state"
+    ],
+    "python_capsule": [
+      "semantic_authority_graph_projection",
+      "claim_reasoning_projection"
+    ]
+  },
+  "registry_updates": [
+    "scripts/query_governance.py",
+    "registry/db/migrations/20260703_governance_runtime_current_state_002.sql",
+    "registry/research_debt_registry.json",
+    "registry/db/README.md",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_DB_GOVERNANCE_RUNTIME_015.json"
+  ],
+  "acceptance_criteria": [
+    "current-state output includes semantic authority graph summary.",
+    "current-state output includes claim-registry and claim-support summary.",
+    "current-state output reports claim-evidence link coverage explicitly.",
+    "DEBT_DB_GOVERNANCE_RUNTIME_STATE_002 is marked resolved.",
+    "global_validate.py passes without introducing new governance regressions."
+  ],
+  "updated_artifacts": [
+    "scripts/query_governance.py",
+    "registry/db/migrations/20260703_governance_runtime_current_state_002.sql",
+    "registry/research_debt_registry.json",
+    "registry/db/README.md",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_DB_GOVERNANCE_RUNTIME_015.json"
+  ],
+  "summary": {
+    "status": "pass",
+    "runtime": {
+      "db_first_gate": "active",
+      "authority_boundary": "mixed"
+    },
+    "warnings": [
+      "Follow-on governance/runtime debt remains open in DEBT_DB_GOVERNANCE_RUNTIME_EVENT_REPLAY_006."
+    ]
+  },
+  "validation": {
+    "result": "pending"
+  }
+}

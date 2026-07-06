@@ -1,0 +1,138 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_025",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-05",
+  "type": "governance_patch",
+  "artifact_type": "governance_patch",
+  "title": "Minimal Continuation Reduction Algorithm",
+  "priority": "HIGH",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_015",
+    "PATCH_PI_RT_CALCULUS_016",
+    "PATCH_PI_RT_CALCULUS_017",
+    "PATCH_PI_RT_CALCULUS_018",
+    "PATCH_PI_RT_CALCULUS_024"
+  ],
+  "mode": "additive",
+  "basis": {
+    "source_patches": [
+      "PATCH_PI_RT_CALCULUS_015",
+      "PATCH_PI_RT_CALCULUS_016",
+      "PATCH_PI_RT_CALCULUS_017",
+      "PATCH_PI_RT_CALCULUS_018",
+      "PATCH_PI_RT_CALCULUS_024"
+    ],
+    "source_surfaces": [
+      "docs/textbook/mono_process_textbook_complete.md",
+      "registry/formal_object_registry.json",
+      "registry/math_source_registry.json",
+      "registry/lexicon_gap_queue.json",
+      "registry/registry/lexicon_gap_queue.json"
+    ],
+    "scope": "Minimal reduction procedure for well-formed continuation expressions after evaluation admits composition and reduction."
+  },
+  "core_rule": {
+    "statement": "Reduction is algorithmically ordered after EVAL_024; every lawful step preserves ≡P; guard failure returns classified ⊥C_x; termination, confluence, and the normalization-status taxonomy remain deferred."
+  },
+  "purpose": "Define the first minimal algorithm for reducing well-formed continuation expressions toward NF(C) after the evaluation pipeline admits composition and reduction.",
+  "canonical_claims": [
+    {
+      "id": "CLAIM_025_001",
+      "statement": "Reduction is algorithmically ordered after evaluation.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_025_002",
+      "statement": "Failure blocks reduction.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_025_003",
+      "statement": "Every reduction step must preserve ≡P.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_025_004",
+      "statement": "The algorithm may return a partial normal-form candidate when full normalization is not yet proven.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_025_005",
+      "statement": "No termination or confluence proof is asserted by this patch.",
+      "status": "canonical"
+    }
+  ],
+  "formal_objects": [
+    {
+      "symbol": "REDALG_025",
+      "name": "Minimal Continuation Reduction Algorithm",
+      "definition": "A minimal governed iterative procedure for reducing well-formed continuation expressions toward NF(C) after EVAL_024 admits composition and reduction.",
+      "primitive": false,
+      "domain": "continuation_reduction_layer"
+    }
+  ],
+  "algorithm": [
+    "Input continuation expression C_expr.",
+    "Run evaluation order EVAL_024.",
+    "If any guard fails, return classified ⊥C_x.",
+    "If expression contains identity composition, apply identity reduction.",
+    "If expression contains lawful composed continuation C(A,B) ∘ C(B,C), reduce to C(A,C).",
+    "Repeat lawful reductions while process equivalence is preserved.",
+    "Return NF(C) if no further lawful reductions are available.",
+    "If normalization cannot be completed, return partial_NF(C) with unresolved status."
+  ],
+  "outputs": [
+    "NF(C)",
+    "partial_NF(C)",
+    "⊥C_endpoint",
+    "⊥C_type",
+    "⊥C_adm",
+    "⊥C_res"
+  ],
+  "explicitly_out_of_scope": [
+    "Termination proof",
+    "Confluence proof",
+    "Executable parser",
+    "Recovery operator",
+    "sigma_RT",
+    "Operational-regime execution",
+    "DB/runtime debt"
+  ],
+  "validation_requirements": [
+    "Patch record parses cleanly.",
+    "Patch chain depends on PATCH_PI_RT_CALCULUS_024.",
+    "Failure outputs are classified.",
+    "Reduction preserves process equivalence.",
+    "RT_core remains unchanged."
+  ],
+  "required_repo_changes": [
+    "Update docs/textbook/mono_process_textbook_complete.md with the minimal reduction algorithm clarification.",
+    "Update registry/formal_object_registry.json with the algorithm formal object.",
+    "Update registry/math_source_registry.json with the patch source entry.",
+    "Update registry/lexicon_gap_queue.json with the new algorithm and partial-normal-form candidate gaps.",
+    "Update registry/registry/lexicon_gap_queue.json with the mirrored gap entries.",
+    "Update registry/governance_change_ledger.json with the corresponding governance ledger entry."
+  ],
+  "target_files": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/formal_object_registry.json",
+    "registry/math_source_registry.json",
+    "registry/lexicon_gap_queue.json",
+    "registry/registry/lexicon_gap_queue.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_025.json"
+  ],
+  "success_criteria": {
+    "minimal_algorithm_documented": true,
+    "depends_on_eval_024": true,
+    "failure_outputs_classified": true,
+    "process_equivalence_preserved": true,
+    "rt_core_unchanged": true
+  },
+  "next_recommended_patch": {
+    "patch_id": "PATCH_PI_RT_CALCULUS_026",
+    "title": "Partial Normal Form Semantics",
+    "purpose": "Formally define the semantics of Partial Normal Form, distinguish it from complete Normal Form and continuation failure, and establish the canonical reduction outcome classification."
+  }
+}

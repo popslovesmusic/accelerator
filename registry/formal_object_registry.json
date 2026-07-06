@@ -1850,6 +1850,1052 @@
       "symbol": "EVAL_024",
       "canonical_form": "parse expression; check WF(C); check domain types; apply explicit typed transitions; check endpoint compatibility; check admissibility; check residue propagation; classify failure if checks fail; permit composition if checks pass; permit reduction toward NF(C)",
       "formal_definition": "Ordered evaluation pipeline for continuation expressions. Evaluation is gated by well-formedness, typing, typed transitions, endpoint compatibility, admissibility, and residue propagation before composition or reduction is admitted."
+    },
+    {
+      "object_id": "OBJ-CTN-REDALG-025",
+      "object_class": "operator",
+      "title": "Minimal Continuation Reduction Algorithm",
+      "status": "provisional",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_025.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-EVAL-024",
+        "OBJ-CTN-RED-016",
+        "OBJ-CTN-REDRULE-017",
+        "OBJ-CTN-WF-018",
+        "OBJ-CTN-TYPE-019",
+        "OBJ-PRJ-TPT-020",
+        "OBJ-CTN-COMP-GUARD-021",
+        "OBJ-CTN-FAIL-022",
+        "OBJ-CTN-FAIL-CLASS-023",
+        "OBJ-CTN-NF-015"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "REDALG_025",
+      "canonical_form": "EVAL_024; if guard failure -> ⊥C_x; apply identity reduction; contract lawful composition to C(A,C); repeat while ≡P is preserved; return NF(C) or partial_NF(C)",
+      "algorithm_steps": [
+        "Input continuation expression C_expr.",
+        "Run evaluation order EVAL_024.",
+        "If any guard fails, return classified ⊥C_x.",
+        "If expression contains identity composition, apply identity reduction.",
+        "If expression contains lawful composed continuation C(A,B) ∘ C(B,C), reduce to C(A,C).",
+        "Repeat lawful reductions while process equivalence is preserved.",
+        "Return NF(C) if no further lawful reductions are available.",
+        "If normalization cannot be completed, return partial_NF(C) with unresolved status."
+      ],
+      "outputs": [
+        "NF(C)",
+        "partial_NF(C)",
+        "⊥C_endpoint",
+        "⊥C_type",
+        "⊥C_adm",
+        "⊥C_res"
+      ],
+      "deferred": [
+        "Termination proof",
+        "Confluence proof",
+        "Normalization-status taxonomy"
+      ],
+      "formal_definition": "Minimal governed reduction procedure for well-formed continuation expressions after EVAL_024 admits composition and reduction. It returns classified ⊥C_x on guard failure, preserves process equivalence on every lawful step, and may return partial_NF(C) when full normalization is unresolved. Termination and confluence are not asserted."
+    },
+    {
+      "object_id": "OBJ-CTN-PNF-026",
+      "object_class": "state",
+      "title": "Partial Normal Form",
+      "status": "provisional",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_026.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-REDALG-025",
+        "OBJ-CTN-EVAL-024",
+        "OBJ-CTN-RED-016",
+        "OBJ-CTN-REDRULE-017",
+        "OBJ-CTN-WF-018",
+        "OBJ-CTN-TYPE-019",
+        "OBJ-PRJ-TPT-020",
+        "OBJ-CTN-COMP-GUARD-021",
+        "OBJ-CTN-FAIL-022",
+        "OBJ-CTN-FAIL-CLASS-023",
+        "OBJ-CTN-NF-015"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "pNF(C)",
+      "canonical_form": "WF(C) and Typed(C) and no continuation failure; reduction has halted at the current calculus boundary while additional lawful reductions remain outside the executable boundary",
+      "formal_definition": "Admissible, type-correct continuation expression whose lawful reductions are incomplete because the current calculus boundary does not yet admit the remaining lawful reductions. The 025 surface label partial_NF(C) denotes this state."
+    },
+    {
+      "object_id": "OBJ-CTN-OUTCOME-026",
+      "object_class": "operator",
+      "title": "Reduction Outcome Classification",
+      "status": "provisional",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_026.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-PNF-026",
+        "OBJ-CTN-REDALG-025",
+        "OBJ-CTN-EVAL-024",
+        "OBJ-CTN-FAIL-022",
+        "OBJ-CTN-FAIL-CLASS-023",
+        "OBJ-CTN-NF-015"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "Outcome(C)",
+      "canonical_form": "Outcome(C) := {NF(C), pNF(C), \\u22a5C_x}",
+      "formal_definition": "Canonical classifier that maps REDUCE_025 outputs into NF(C), pNF(C), or continuation failure. The legacy partial_NF(C) surface is classified as pNF(C)."
+    },
+    {
+      "object_id": "OBJ-CTN-TRACE-027",
+      "object_class": "projection",
+      "title": "Reduction Trace",
+      "status": "provisional",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_027.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-OUTCOME-026",
+        "OBJ-CTN-REDALG-025",
+        "OBJ-CTN-EVAL-024",
+        "OBJ-CTN-RED-016",
+        "OBJ-CTN-REDRULE-017",
+        "OBJ-CTN-WF-018",
+        "OBJ-CTN-TYPE-019",
+        "OBJ-PRJ-TPT-020",
+        "OBJ-CTN-COMP-GUARD-021",
+        "OBJ-CTN-FAIL-022",
+        "OBJ-CTN-FAIL-CLASS-023",
+        "OBJ-CTN-NF-015",
+        "OBJ-CTN-PNF-026"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "Trace(C)",
+      "canonical_form": "Trace(C) := {input_expression, evaluation_result, steps, halt_reason, outcome}",
+      "trace_schema": {
+        "fields": [
+          "input_expression",
+          "evaluation_result",
+          "steps",
+          "halt_reason",
+          "outcome"
+        ],
+        "step_fields": [
+          "index",
+          "operation",
+          "pre_state",
+          "post_state",
+          "rule_applied",
+          "admissibility_status",
+          "residue_status",
+          "failure_class"
+        ]
+      },
+      "formal_definition": "Canonical diagnostic record of the evaluation, validation, lawful reduction, halt, and failure-classification sequence applied to a continuation expression by REDUCE_025. Trace(C) records the realized sequence for NF(C), pNF(C), or classified continuation failure and does not modify reduction semantics."
+    },
+    {
+      "object_id": "OBJ-CTN-TRACE-STEP-027",
+      "object_class": "primitive",
+      "title": "Trace Step",
+      "status": "provisional",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_027.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-TRACE-027",
+        "OBJ-CTN-OUTCOME-026",
+        "OBJ-CTN-REDALG-025",
+        "OBJ-CTN-EVAL-024",
+        "OBJ-CTN-FAIL-022",
+        "OBJ-CTN-FAIL-CLASS-023",
+        "OBJ-CTN-NF-015",
+        "OBJ-CTN-PNF-026"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "τ_i",
+      "canonical_form": "τ_i := single ordered trace event with pre_state, post_state, rule_applied, admissibility_status, residue_status, and failure_class",
+      "formal_definition": "Single evaluation, validation, reduction, halt, or failure-classification event within Trace(C). Trace steps are the atomic members of the ordered reduction trace and do not alter reduction semantics."
+    },
+    {
+      "object_id": "OBJ-CTN-TRACE-EQUIV-028",
+      "object_class": "operator",
+      "title": "Reduction Trace Equivalence",
+      "status": "provisional",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_028.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-TRACE-027",
+        "OBJ-CTN-TRACE-STEP-027",
+        "OBJ-CTN-OUTCOME-026",
+        "OBJ-CTN-REDALG-025",
+        "OBJ-CTN-FAIL-022",
+        "OBJ-CTN-FAIL-CLASS-023",
+        "OBJ-CTN-NF-015",
+        "OBJ-CTN-PNF-026"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "≡T",
+      "canonical_form": "Trace_1(C) ≡T Trace_2(C)",
+      "formal_definition": "An equivalence relation over reduction traces that holds when two traces originate from the same input continuation, preserve lawful reduction semantics, preserve process-equivalent continuation behavior, terminate in the same canonical outcome, and preserve halt classification. It is diagnostic only and does not modify reduction semantics."
+    },
+    {
+      "object_id": "OBJ-CTN-TRACE-NF-028",
+      "object_class": "projection",
+      "title": "Canonical Trace Form",
+      "status": "provisional",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_028.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-TRACE-EQUIV-028",
+        "OBJ-CTN-TRACE-027",
+        "OBJ-CTN-TRACE-STEP-027",
+        "OBJ-CTN-OUTCOME-026",
+        "OBJ-CTN-REDALG-025",
+        "OBJ-CTN-FAIL-022",
+        "OBJ-CTN-FAIL-CLASS-023",
+        "OBJ-CTN-NF-015",
+        "OBJ-CTN-PNF-026"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "TNF(Trace)",
+      "canonical_form": "TNF(Trace) := normalized trace representative with canonical reduction events, normalized step numbering, and normalized halt classification",
+      "formal_definition": "Normalized representative of a reduction trace used for equivalence comparison. TNF(Trace) preserves evaluation order, removes implementation-specific metadata, retains canonical reduction events, and normalizes step numbering and halt classification without altering reduction semantics."
+    },
+    {
+      "object_id": "OBJ-CTN-CONFL-029",
+      "object_class": "constraint",
+      "title": "Local Confluence",
+      "status": "provisional",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_029.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-REDALG-025",
+        "OBJ-CTN-RED-016",
+        "OBJ-CTN-REDRULE-017",
+        "OBJ-CTN-WF-018",
+        "OBJ-CTN-TYPE-019",
+        "OBJ-PRJ-TPT-020",
+        "OBJ-CTN-COMP-GUARD-021",
+        "OBJ-CTN-TRACE-EQUIV-028",
+        "OBJ-CTN-TRACE-NF-028",
+        "OBJ-CTN-OUTCOME-026",
+        "OBJ-CTN-FAIL-022",
+        "OBJ-CTN-FAIL-CLASS-023",
+        "OBJ-CTN-NF-015",
+        "OBJ-CTN-PNF-026"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "⇓L",
+      "canonical_form": "C ⇓L",
+      "formal_definition": "A bounded reduction property stating that two lawful reductions diverging from the same continuation may be reduced to process-equivalent continuation outcomes under the current reduction system. It is local only and does not assert global confluence."
+    },
+    {
+      "object_id": "OBJ-CTN-BRANCH-029",
+      "object_class": "projection",
+      "title": "Reduction Branch",
+      "status": "provisional",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_029.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-REDALG-025",
+        "OBJ-CTN-RED-016",
+        "OBJ-CTN-REDRULE-017",
+        "OBJ-CTN-WF-018",
+        "OBJ-CTN-TYPE-019",
+        "OBJ-PRJ-TPT-020",
+        "OBJ-CTN-COMP-GUARD-021",
+        "OBJ-CTN-FAIL-022",
+        "OBJ-CTN-FAIL-CLASS-023"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "Branch(C)",
+      "canonical_form": "Branch(C) := lawful reduction path from a common continuation expression",
+      "formal_definition": "A lawful reduction path originating from a common continuation expression."
+    },
+    {
+      "object_id": "OBJ-CTN-JOIN-029",
+      "object_class": "operator",
+      "title": "Joinability",
+      "status": "provisional",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_029.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-CONFL-029",
+        "OBJ-CTN-BRANCH-029",
+        "OBJ-CTN-TRACE-EQUIV-028",
+        "OBJ-CTN-TRACE-NF-028",
+        "OBJ-CTN-OUTCOME-026",
+        "OBJ-CTN-NF-015",
+        "OBJ-CTN-PNF-026",
+        "OBJ-CTN-FAIL-CLASS-023"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "⇓J",
+      "canonical_form": "Branch_1(C) ⇓J Branch_2(C)",
+      "formal_definition": "A relation indicating that two lawful reduction branches can be reduced to process-equivalent continuation outcomes."
+    },
+    {
+      "object_id": "OBJ-CTN-CPAIR-029",
+      "object_class": "projection",
+      "title": "Critical Reduction Pair",
+      "status": "provisional",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_029.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-BRANCH-029",
+        "OBJ-CTN-JOIN-029",
+        "OBJ-CTN-CONFL-029",
+        "OBJ-CTN-REDALG-025",
+        "OBJ-CTN-FAIL-022",
+        "OBJ-CTN-FAIL-CLASS-023"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "CP(C)",
+      "canonical_form": "CP(C) := {Branch_1(C), Branch_2(C)}",
+      "formal_definition": "A pair of immediately divergent lawful reductions originating from the same continuation requiring local confluence evaluation."
+    },
+    {
+      "object_id": "OBJ-CTN-DET-030",
+      "object_class": "constraint",
+      "title": "Reduction Determinism",
+      "status": "provisional",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_030.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-EVAL-024",
+        "OBJ-CTN-REDALG-025",
+        "OBJ-CTN-RED-016",
+        "OBJ-CTN-REDRULE-017",
+        "OBJ-CTN-WF-018",
+        "OBJ-CTN-TYPE-019",
+        "OBJ-PRJ-TPT-020",
+        "OBJ-CTN-COMP-GUARD-021",
+        "OBJ-CTN-FAIL-022",
+        "OBJ-CTN-FAIL-CLASS-023",
+        "OBJ-CTN-OUTCOME-026",
+        "OBJ-CTN-PNF-026",
+        "OBJ-CTN-TRACE-EQUIV-028",
+        "OBJ-CTN-CONFL-029",
+        "OBJ-CTN-NF-015"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "Det(C)",
+      "canonical_form": "Det(C) := unique lawful reduction outcome under canonical evaluation order and reduction priority",
+      "formal_definition": "A property indicating that a continuation expression has a unique lawful reduction outcome under the canonical evaluation order and reduction priority."
+    },
+    {
+      "object_id": "OBJ-CTN-PRIORITY-030",
+      "object_class": "principle",
+      "title": "Reduction Priority",
+      "status": "provisional",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_030.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-EVAL-024",
+        "OBJ-CTN-REDALG-025",
+        "OBJ-CTN-RED-016",
+        "OBJ-CTN-REDRULE-017",
+        "OBJ-CTN-WF-018",
+        "OBJ-CTN-TYPE-019",
+        "OBJ-PRJ-TPT-020",
+        "OBJ-CTN-COMP-GUARD-021",
+        "OBJ-CTN-FAIL-022",
+        "OBJ-CTN-FAIL-CLASS-023",
+        "OBJ-CTN-CONFL-029",
+        "OBJ-CTN-DET-030"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "Priority(R)",
+      "canonical_form": "Priority(R) := canonical ordering for simultaneously admissible lawful reductions",
+      "formal_definition": "The canonical ordering used when multiple lawful reductions are simultaneously admissible."
+    },
+    {
+      "object_id": "OBJ-CTN-CHOICE-030",
+      "object_class": "operator",
+      "title": "Reduction Choice Function",
+      "status": "provisional",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_030.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-DET-030",
+        "OBJ-CTN-PRIORITY-030",
+        "OBJ-CTN-EVAL-024",
+        "OBJ-CTN-REDALG-025",
+        "OBJ-CTN-OUTCOME-026",
+        "OBJ-CTN-TRACE-EQUIV-028",
+        "OBJ-CTN-FAIL-022",
+        "OBJ-CTN-FAIL-CLASS-023",
+        "OBJ-CTN-CONFL-029",
+        "OBJ-CTN-PNF-026"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "Choose(C)",
+      "canonical_form": "Choose(C) := deterministic selection of the next lawful reduction by canonical reduction priority",
+      "formal_definition": "The deterministic selection function that chooses the next lawful reduction according to canonical reduction priority."
+    },
+    {
+      "object_id": "OBJ-CTN-DETCLASS-030",
+      "object_class": "state",
+      "title": "Deterministic Continuation Class",
+      "status": "provisional",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_030.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-DET-030",
+        "OBJ-CTN-PRIORITY-030",
+        "OBJ-CTN-CHOICE-030",
+        "OBJ-CTN-OUTCOME-026",
+        "OBJ-CTN-PNF-026",
+        "OBJ-CTN-NF-015",
+        "OBJ-CTN-FAIL-CLASS-023",
+        "OBJ-CTN-TRACE-EQUIV-028",
+        "OBJ-CTN-CONFL-029"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "ClassDet",
+      "canonical_form": "ClassDet := {C | Det(C)}",
+      "formal_definition": "The class of continuation expressions satisfying the bounded determinism conditions."
+    },
+    {
+      "object_id": "OBJ-CTN-TERM-031",
+      "object_class": "constraint",
+      "title": "Termination",
+      "status": "provisional",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_031.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-EVAL-024",
+        "OBJ-CTN-REDALG-025",
+        "OBJ-CTN-OUTCOME-026",
+        "OBJ-CTN-DET-030",
+        "OBJ-CTN-CHOICE-030",
+        "OBJ-CTN-PRIORITY-030",
+        "OBJ-CTN-FAIL-022",
+        "OBJ-CTN-FAIL-CLASS-023",
+        "OBJ-CTN-NF-015",
+        "OBJ-CTN-PNF-026",
+        "OBJ-CTN-TRACE-027",
+        "OBJ-CTN-TRACE-EQUIV-028"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "Term(C)",
+      "canonical_form": "Term(C) := finite lawful reduction sequence to a reduction outcome",
+      "formal_definition": "A property indicating that REDUCE_025 reaches a reduction outcome after a finite number of lawful reduction steps."
+    },
+    {
+      "object_id": "OBJ-CTN-MEASURE-031",
+      "object_class": "principle",
+      "title": "Reduction Measure",
+      "status": "provisional",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_031.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-EVAL-024",
+        "OBJ-CTN-REDALG-025",
+        "OBJ-CTN-TRACE-027",
+        "OBJ-CTN-TRACE-EQUIV-028",
+        "OBJ-CTN-FAIL-022",
+        "OBJ-CTN-FAIL-CLASS-023",
+        "OBJ-CTN-OUTCOME-026"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "μ(C)",
+      "canonical_form": "μ(C) := well-founded reduction measure used to evaluate reduction progress",
+      "formal_definition": "A well-founded measure used to evaluate reduction progress."
+    },
+    {
+      "object_id": "OBJ-CTN-PROGRESS-031",
+      "object_class": "constraint",
+      "title": "Reduction Progress",
+      "status": "provisional",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_031.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-MEASURE-031",
+        "OBJ-CTN-EVAL-024",
+        "OBJ-CTN-REDALG-025",
+        "OBJ-CTN-TRACE-027",
+        "OBJ-CTN-FAIL-022",
+        "OBJ-CTN-FAIL-CLASS-023",
+        "OBJ-CTN-OUTCOME-026"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "μ(C_i) > μ(C_{i+1})",
+      "canonical_form": "μ(C_i) > μ(C_{i+1})",
+      "formal_definition": "Each lawful reduction strictly decreases the reduction measure."
+    },
+    {
+      "object_id": "OBJ-CTN-TERMCLASS-031",
+      "object_class": "state",
+      "title": "Termination Class",
+      "status": "provisional",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_031.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-TERM-031",
+        "OBJ-CTN-MEASURE-031",
+        "OBJ-CTN-PROGRESS-031",
+        "OBJ-CTN-OUTCOME-026",
+        "OBJ-CTN-NF-015",
+        "OBJ-CTN-PNF-026",
+        "OBJ-CTN-FAIL-CLASS-023",
+        "OBJ-CTN-TRACE-EQUIV-028"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "ClassTerm",
+      "canonical_form": "ClassTerm := {C | Term(C)}",
+      "formal_definition": "Classification of continuation expressions according to bounded termination behavior."
+    },
+    {
+      "object_id": "OBJ-CTN-UNIQ-032",
+      "object_class": "constraint",
+      "title": "Canonical Form Uniqueness",
+      "status": "provisional",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_032.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-DET-030",
+        "OBJ-CTN-TERM-031",
+        "OBJ-CTN-EQ-015",
+        "OBJ-CTN-NF-015",
+        "OBJ-CTN-OUTCOME-026",
+        "OBJ-CTN-TRACE-EQUIV-028"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "Unique(C)",
+      "canonical_form": "Unique(C) := unique canonical normal form modulo process equivalence",
+      "formal_definition": "A property indicating that a continuation possesses a unique canonical normal form modulo process equivalence."
+    },
+    {
+      "object_id": "OBJ-CTN-REP-032",
+      "object_class": "projection",
+      "title": "Canonical Representative",
+      "status": "provisional",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_032.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-UNIQ-032",
+        "OBJ-CTN-NF-015",
+        "OBJ-CTN-EQ-015",
+        "OBJ-CTN-OUTCOME-026"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "Rep(C)",
+      "canonical_form": "Rep(C) := canonical representative selected after lawful reduction",
+      "formal_definition": "The selected representative of a process-equivalence class after lawful reduction."
+    },
+    {
+      "object_id": "OBJ-CTN-NFCLASS-032",
+      "object_class": "state",
+      "title": "Normal Form Equivalence Class",
+      "status": "provisional",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_032.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-UNIQ-032",
+        "OBJ-CTN-NF-015",
+        "OBJ-CTN-EQ-015",
+        "OBJ-CTN-OUTCOME-026"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "[NF(C)]≡P",
+      "canonical_form": "[NF(C)]≡P := {N | N ≡P NF(C)}",
+      "formal_definition": "The equivalence class of all canonical normal forms related by process equivalence."
+    },
+    {
+      "object_id": "OBJ-CTN-UNIQCLASS-032",
+      "object_class": "state",
+      "title": "Uniqueness Class",
+      "status": "provisional",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_032.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-UNIQ-032",
+        "OBJ-CTN-DET-030",
+        "OBJ-CTN-TERM-031",
+        "OBJ-CTN-OUTCOME-026",
+        "OBJ-CTN-TRACE-EQUIV-028"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "ClassUnique",
+      "canonical_form": "ClassUnique := {C | Unique(C)}",
+      "formal_definition": "Classification of continuation expressions according to bounded canonical-form uniqueness."
+    },
+    {
+      "object_id": "OBJ-CTN-COMPLEXITY-033",
+      "object_class": "principle",
+      "title": "Reduction Complexity",
+      "status": "provisional",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_033.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-TERM-031",
+        "OBJ-CTN-MEASURE-031",
+        "OBJ-CTN-TRACE-027",
+        "OBJ-CTN-TRACE-EQUIV-028",
+        "OBJ-CTN-OUTCOME-026",
+        "OBJ-CTN-NF-015",
+        "OBJ-CTN-UNIQ-032"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "κ(C)",
+      "canonical_form": "κ(C) := abstract reduction complexity independent of implementation, runtime, and syntax size",
+      "formal_definition": "An abstract measure of the intrinsic reduction complexity of a continuation expression under the RT Calculus."
+    },
+    {
+      "object_id": "OBJ-CTN-CDELTA-033",
+      "object_class": "constraint",
+      "title": "Complexity Delta",
+      "status": "provisional",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_033.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-COMPLEXITY-033",
+        "OBJ-CTN-REDALG-025",
+        "OBJ-CTN-TRACE-027",
+        "OBJ-CTN-OUTCOME-026",
+        "OBJ-CTN-FAIL-022",
+        "OBJ-CTN-FAIL-CLASS-023"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "Δκ",
+      "canonical_form": "Δκ := κ(C_i) - κ(C_{i+1})",
+      "formal_definition": "The change in reduction complexity produced by a lawful reduction step."
+    },
+    {
+      "object_id": "OBJ-CTN-COST-033",
+      "object_class": "principle",
+      "title": "Reduction Cost",
+      "status": "provisional",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_033.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-COMPLEXITY-033",
+        "OBJ-CTN-CDELTA-033",
+        "OBJ-CTN-TERM-031",
+        "OBJ-CTN-OUTCOME-026",
+        "OBJ-CTN-TRACE-027",
+        "OBJ-CTN-NF-015"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "Cost(C)",
+      "canonical_form": "Cost(C) := accumulated abstract reduction complexity required to reach a terminal outcome",
+      "formal_definition": "The accumulated reduction complexity required to reach a terminal reduction outcome."
+    },
+    {
+      "object_id": "OBJ-CTN-COMPCLASS-033",
+      "object_class": "state",
+      "title": "Reduction Complexity Class",
+      "status": "provisional",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_033.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-COMPLEXITY-033",
+        "OBJ-CTN-UNIQ-032",
+        "OBJ-CTN-TERM-031",
+        "OBJ-CTN-OUTCOME-026",
+        "OBJ-CTN-NFCLASS-032"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "Classκ",
+      "canonical_form": "Classκ := {C | κ(C) is classified as Minimal, Reducible, Undetermined, or Failure}",
+      "formal_definition": "Classification of continuation expressions according to abstract reduction complexity."
+    },
+    {
+      "object_id": "OBJ-CTN-BOUNDED-CONFL-034",
+      "object_class": "theorem",
+      "title": "Bounded Confluence Theorem",
+      "status": "provisional",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_034.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-WF-018",
+        "OBJ-CTN-TYPE-019",
+        "OBJ-CTN-CONFL-029",
+        "OBJ-CTN-JOIN-029",
+        "OBJ-CTN-DET-030",
+        "OBJ-CTN-TERM-031",
+        "OBJ-CTN-UNIQ-032",
+        "OBJ-CTN-NFCLASS-032",
+        "OBJ-CTN-OUTCOME-026"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "Conf_B(C)",
+      "canonical_form": "Conf_B(C) := bounded confluence over an admissible bounded continuation class",
+      "formal_definition": "The property that all lawful reduction branches belonging to an admissible bounded continuation class converge to process-equivalent canonical outcomes."
+    },
+    {
+      "object_id": "OBJ-CTN-CONFCLASS-034",
+      "object_class": "state",
+      "title": "Confluence Class",
+      "status": "provisional",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_034.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-BOUNDED-CONFL-034",
+        "OBJ-CTN-CONFL-029",
+        "OBJ-CTN-DET-030",
+        "OBJ-CTN-TERM-031",
+        "OBJ-CTN-UNIQ-032",
+        "OBJ-CTN-NFCLASS-032",
+        "OBJ-CTN-OUTCOME-026"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "ClassConf",
+      "canonical_form": "ClassConf := {C | Conf_B(C)}",
+      "formal_definition": "A continuation class satisfying all bounded confluence prerequisites."
+    },
+    {
+      "object_id": "OBJ-CTN-STRAT-035",
+      "object_class": "operator",
+      "title": "Canonical Reduction Strategy",
+      "status": "provisional",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_035.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-EVAL-024",
+        "OBJ-CTN-REDALG-025",
+        "OBJ-CTN-OUTCOME-026",
+        "OBJ-CTN-PNF-026",
+        "OBJ-CTN-DET-030",
+        "OBJ-CTN-PRIORITY-030",
+        "OBJ-CTN-CHOICE-030",
+        "OBJ-CTN-CONFL-029",
+        "OBJ-CTN-COMPCLASS-033",
+        "OBJ-CTN-BOUNDED-CONFL-034"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "S(C)",
+      "canonical_form": "S(C) := canonical reduction strategy governing lawful selection among admissible reduction candidates",
+      "formal_definition": "The canonical strategy governing lawful reduction selection whenever multiple admissible reduction candidates exist."
+    },
+    {
+      "object_id": "OBJ-CTN-CANDSET-035",
+      "object_class": "state",
+      "title": "Reduction Candidate Set",
+      "status": "provisional",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_035.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-EVAL-024",
+        "OBJ-CTN-REDALG-025",
+        "OBJ-CTN-OUTCOME-026",
+        "OBJ-CTN-PNF-026",
+        "OBJ-CTN-FAIL-022",
+        "OBJ-CTN-FAIL-CLASS-023",
+        "OBJ-CTN-DET-030",
+        "OBJ-CTN-PRIORITY-030",
+        "OBJ-CTN-CHOICE-030"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "Cand(C)",
+      "canonical_form": "Cand(C) := {r | r is a lawful reduction candidate after EVAL_024}",
+      "formal_definition": "The complete set of lawful reduction candidates available after EVAL_024."
+    },
+    {
+      "object_id": "OBJ-CTN-STRATORDER-035",
+      "object_class": "principle",
+      "title": "Strategy Ordering",
+      "status": "provisional",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_035.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-PRIORITY-030",
+        "OBJ-CTN-CHOICE-030",
+        "OBJ-CTN-DET-030",
+        "OBJ-CTN-CONFL-029",
+        "OBJ-CTN-COMPCLASS-033",
+        "OBJ-CTN-BOUNDED-CONFL-034",
+        "OBJ-CTN-OUTCOME-026"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "≺S",
+      "canonical_form": "≺S := canonical ordering relation over lawful reduction candidates",
+      "formal_definition": "The canonical ordering relation used to rank lawful reduction candidates."
+    },
+    {
+      "object_id": "OBJ-CTN-STRATCLASS-035",
+      "object_class": "state",
+      "title": "Strategy Class",
+      "status": "provisional",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_035.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-STRAT-035",
+        "OBJ-CTN-DET-030",
+        "OBJ-CTN-OUTCOME-026",
+        "OBJ-CTN-NFCLASS-032",
+        "OBJ-CTN-PNF-026",
+        "OBJ-CTN-BOUNDED-CONFL-034"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "ClassS",
+      "canonical_form": "ClassS := {C | S(C) is applicable within the bounded deterministic class}",
+      "formal_definition": "Classification of continuation expressions according to canonical strategy applicability."
+    },
+    {
+      "object_id": "OBJ-CTN-STRATCORR-036",
+      "object_class": "theorem",
+      "title": "Canonical Reduction Strategy Correctness",
+      "status": "provisional",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_036.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-STRAT-035",
+        "OBJ-CTN-CANDSET-035",
+        "OBJ-CTN-STRATORDER-035",
+        "OBJ-CTN-STRATCLASS-035",
+        "OBJ-CTN-EVAL-024",
+        "OBJ-CTN-REDALG-025",
+        "OBJ-CTN-WF-018",
+        "OBJ-CTN-TYPE-019",
+        "OBJ-CTN-DET-030",
+        "OBJ-CTN-PRIORITY-030",
+        "OBJ-CTN-CHOICE-030",
+        "OBJ-CTN-TERM-031",
+        "OBJ-CTN-UNIQ-032",
+        "OBJ-CTN-NFCLASS-032",
+        "OBJ-CTN-CONFL-029",
+        "OBJ-CTN-BOUNDED-CONFL-034",
+        "OBJ-CTN-OUTCOME-026",
+        "OBJ-CTN-PNF-026"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "Correct(S)",
+      "canonical_form": "Correct(S) := bounded correctness of the canonical reduction strategy",
+      "formal_definition": "The property that the canonical reduction strategy preserves lawful reduction semantics for bounded continuation classes."
+    },
+    {
+      "object_id": "OBJ-CTN-CORRECTCLASS-036",
+      "object_class": "state",
+      "title": "Correctness Class",
+      "status": "provisional",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_036.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-STRATCORR-036",
+        "OBJ-CTN-STRAT-035",
+        "OBJ-CTN-CANDSET-035",
+        "OBJ-CTN-STRATORDER-035",
+        "OBJ-CTN-STRATCLASS-035",
+        "OBJ-CTN-EVAL-024",
+        "OBJ-CTN-DET-030",
+        "OBJ-CTN-TERM-031",
+        "OBJ-CTN-UNIQ-032",
+        "OBJ-CTN-NFCLASS-032",
+        "OBJ-CTN-BOUNDED-CONFL-034",
+        "OBJ-CTN-OUTCOME-026",
+        "OBJ-CTN-PNF-026"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "ClassCorrect",
+      "canonical_form": "ClassCorrect := {C | Correct(S)}",
+      "formal_definition": "Continuation classes satisfying all bounded correctness prerequisites."
     }
   ],
   "registry_bindings": [

@@ -1,0 +1,219 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_032",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-05",
+  "type": "governance_patch",
+  "artifact_type": "governance_patch",
+  "title": "Canonical Form Uniqueness Conditions",
+  "priority": "HIGH",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_031"
+  ],
+  "mode": "additive",
+  "basis": {
+    "source_patches": [
+      "PATCH_PI_RT_CALCULUS_031"
+    ],
+    "source_surfaces": [
+      "docs/textbook/mono_process_textbook_complete.md",
+      "registry/formal_object_registry.json",
+      "registry/math_source_registry.json",
+      "registry/lexicon_gap_queue.json",
+      "registry/registry/lexicon_gap_queue.json",
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_031.json"
+    ],
+    "scope": "Canonical bounded uniqueness semantics for REDUCE_025 outcomes after deterministic termination is established, including canonical representatives, normal-form equivalence classes, and bounded uniqueness modulo process equivalence without asserting a universal uniqueness proof."
+  },
+  "core_rule": {
+    "statement": "Uniqueness is bounded by deterministic reduction and finite termination; canonical representatives are selected only from NF(C); process equivalence governs canonical-form comparison; RT_core remains unchanged."
+  },
+  "purpose": "Define the bounded conditions under which the canonical normal form of a continuation is unique modulo process equivalence. This patch establishes uniqueness semantics without asserting a universal uniqueness proof.",
+  "canonical_claims": [
+    {
+      "id": "CLAIM_032_001",
+      "statement": "Canonical form uniqueness is bounded by deterministic reduction and finite termination.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_032_002",
+      "statement": "Canonical representatives are selected only after successful termination into NF(C).",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_032_003",
+      "statement": "Bounded uniqueness does not imply global confluence.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_032_004",
+      "statement": "Equivalent traces do not affect representative selection.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_032_005",
+      "statement": "RT_core remains unchanged.",
+      "status": "canonical"
+    }
+  ],
+  "scope": {
+    "adds": [
+      "Canonical normal form uniqueness relation",
+      "Canonical representative semantics",
+      "Normal form equivalence class",
+      "Bounded uniqueness conditions"
+    ],
+    "does_not_add": [
+      "Universal uniqueness proof",
+      "Global confluence proof",
+      "Recovery operator",
+      "Parser implementation",
+      "Operational regime execution",
+      "sigma_RT selector"
+    ]
+  },
+  "formal_objects": [
+    {
+      "id": "UNIQUENESS_032",
+      "symbol": "Unique(C)",
+      "name": "Canonical Form Uniqueness",
+      "definition": "A property indicating that a continuation possesses a unique canonical normal form modulo process equivalence."
+    },
+    {
+      "id": "CANONICAL_REPRESENTATIVE_032",
+      "symbol": "Rep(C)",
+      "name": "Canonical Representative",
+      "definition": "The selected representative of a process-equivalence class after lawful reduction."
+    },
+    {
+      "id": "NORMAL_FORM_CLASS_032",
+      "symbol": "[NF(C)]≡P",
+      "name": "Normal Form Equivalence Class",
+      "definition": "The equivalence class of all canonical normal forms related by process equivalence."
+    },
+    {
+      "id": "UNIQUENESS_CLASS_032",
+      "symbol": "ClassUnique",
+      "name": "Uniqueness Class",
+      "definition": "Classification of continuation expressions according to bounded canonical-form uniqueness."
+    }
+  ],
+  "definitions": {
+    "canonical_uniqueness": {
+      "symbol": "Unique(C)",
+      "requirements": [
+        "Det(C)",
+        "Term(C)",
+        "Reduction terminates in NF(C)",
+        "All lawful reductions produce process-equivalent canonical forms",
+        "Canonical representative is uniquely determined modulo ≡P"
+      ]
+    }
+  },
+  "canonical_statement": {
+    "rule": "If Det(C) ∧ Term(C), then NF(C) is unique modulo ≡P for the bounded continuation class."
+  },
+  "uniqueness_classes": [
+    {
+      "class": "Unique",
+      "description": "Canonical normal form is unique modulo process equivalence."
+    },
+    {
+      "class": "Undetermined",
+      "description": "Uniqueness has not yet been established."
+    },
+    {
+      "class": "Non-unique",
+      "description": "Multiple inequivalent canonical forms remain possible under the current calculus."
+    }
+  ],
+  "canonical_representative_rules": [
+    "Rep(C) is selected only after successful termination.",
+    "Rep(C) is defined only for NF(C).",
+    "pNF(C) has no canonical representative.",
+    "⊥C_x has no canonical representative.",
+    "Representative selection preserves process equivalence."
+  ],
+  "invariants": [
+    "RT_core remains unchanged.",
+    "Uniqueness does not imply global confluence.",
+    "Uniqueness depends on bounded determinism and bounded termination.",
+    "Process equivalence remains the governing equivalence relation.",
+    "Equivalent traces do not affect canonical representative selection.",
+    "Recovery remains deferred."
+  ],
+  "future_dependencies": [
+    "PATCH_PI_RT_CALCULUS_033 (Reduction Complexity Measure)",
+    "PATCH_PI_RT_CALCULUS_034 (Bounded Confluence Theorem)"
+  ],
+  "textbook_changes": {
+    "chapter": "2.3.14",
+    "title": "Canonical Form Uniqueness Conditions",
+    "summary": [
+      "Introduce Unique(C).",
+      "Define canonical representatives Rep(C).",
+      "Define the normal-form equivalence class [NF(C)]≡P.",
+      "Establish bounded uniqueness conditions.",
+      "Distinguish bounded uniqueness from universal uniqueness."
+    ]
+  },
+  "registry_updates": {
+    "formal_object_registry": [
+      "UNIQUENESS_032",
+      "CANONICAL_REPRESENTATIVE_032",
+      "NORMAL_FORM_CLASS_032",
+      "UNIQUENESS_CLASS_032"
+    ],
+    "math_source_registry": [
+      "PATCH_PI_RT_CALCULUS_032"
+    ],
+    "lexicon_gap_queue": [
+      "canonical_form_uniqueness",
+      "canonical_representative",
+      "normal_form_equivalence_class",
+      "uniqueness_class"
+    ]
+  },
+  "rt_core_impact": {
+    "modified": false,
+    "statement": "RT := [(ℰ≠0) ⇔R δα(ℰ>0)] remains unchanged."
+  },
+  "validation_requirements": [
+    "Patch record parses cleanly.",
+    "Patch depends on PATCH_PI_RT_CALCULUS_031.",
+    "Canonical uniqueness is bounded by deterministic termination and process equivalence.",
+    "Representative selection is only defined for NF(C).",
+    "RT_core remains unchanged."
+  ],
+  "required_repo_changes": [
+    "Update docs/textbook/mono_process_textbook_complete.md with the canonical form uniqueness section and uniqueness-class documentation.",
+    "Update registry/formal_object_registry.json with the uniqueness formal objects.",
+    "Update registry/math_source_registry.json with the patch source entry.",
+    "Update registry/lexicon_gap_queue.json with the canonical form uniqueness, canonical representative, normal-form equivalence class, and uniqueness-class terms.",
+    "Update registry/registry/lexicon_gap_queue.json with the mirrored canonical form uniqueness, canonical representative, normal-form equivalence class, and uniqueness-class terms.",
+    "Update registry/governance_change_ledger.json with the corresponding governance ledger entry.",
+    "Update registry/governance/patches/PATCH_PI_RT_CALCULUS_031.json with the forward chain reference to PATCH_PI_RT_CALCULUS_032."
+  ],
+  "target_files": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/formal_object_registry.json",
+    "registry/math_source_registry.json",
+    "registry/lexicon_gap_queue.json",
+    "registry/registry/lexicon_gap_queue.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_031.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_032.json"
+  ],
+  "success_criteria": {
+    "uniqueness_documented": true,
+    "canonical_representative_registered": true,
+    "normal_form_equivalence_class_registered": true,
+    "uniqueness_class_registered": true,
+    "rt_core_unchanged": true
+  },
+  "next_recommended_patch": {
+    "patch_id": "PATCH_PI_RT_CALCULUS_033",
+    "title": "Reduction Complexity Measure",
+    "purpose": "Introduce an abstract reduction complexity measure that characterizes the intrinsic complexity of continuation reduction independently of implementation, execution time, or syntax size."
+  }
+}

@@ -1,0 +1,251 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_033",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-05",
+  "type": "governance_patch",
+  "artifact_type": "governance_patch",
+  "title": "Reduction Complexity Measure",
+  "priority": "HIGH",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_032"
+  ],
+  "mode": "additive",
+  "basis": {
+    "source_patches": [
+      "PATCH_PI_RT_CALCULUS_032"
+    ],
+    "source_surfaces": [
+      "docs/textbook/mono_process_textbook_complete.md",
+      "registry/formal_object_registry.json",
+      "registry/math_source_registry.json",
+      "registry/lexicon_gap_queue.json",
+      "registry/registry/lexicon_gap_queue.json",
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_032.json"
+    ],
+    "scope": "Canonical abstract reduction complexity semantics for continuation reduction, including complexity deltas, accumulated reduction cost, and bounded complexity classes, while keeping complexity distinct from runtime, execution time, syntax size, and the termination measure."
+  },
+  "core_rule": {
+    "statement": "Reduction complexity is an abstract intrinsic characterization of continuation-reduction effort; lawful reductions do not increase κ; Δκ records the stepwise change in κ; Cost(C) accumulates κ across a reduction trace; NF(C) minimizes κ within its process-equivalence class; RT_core remains unchanged."
+  },
+  "purpose": "Introduce an abstract reduction complexity measure that characterizes the intrinsic complexity of continuation reduction independently of implementation, execution time, or syntax size.",
+  "canonical_claims": [
+    {
+      "id": "CLAIM_033_001",
+      "statement": "Reduction complexity is abstract and implementation independent.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_033_002",
+      "statement": "Lawful reductions do not increase κ, and Δκ records the change induced by a lawful reduction step.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_033_003",
+      "statement": "NF(C) minimizes κ within its process-equivalence class.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_033_004",
+      "statement": "Reduction complexity is distinct from the termination measure μ(C), runtime, and syntax size.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_033_005",
+      "statement": "RT_core remains unchanged.",
+      "status": "canonical"
+    }
+  ],
+  "scope": {
+    "adds": [
+      "Abstract reduction complexity measure",
+      "Complexity delta semantics",
+      "Complexity classes",
+      "Reduction cost relation",
+      "Complexity invariants"
+    ],
+    "does_not_add": [
+      "Runtime complexity analysis",
+      "Machine-dependent performance metrics",
+      "Parser implementation",
+      "Recovery operator",
+      "Operational regime execution",
+      "sigma_RT selector"
+    ]
+  },
+  "formal_objects": [
+    {
+      "id": "REDUCTION_COMPLEXITY_033",
+      "symbol": "κ(C)",
+      "name": "Reduction Complexity",
+      "definition": "An abstract measure of the intrinsic reduction complexity of a continuation expression under the RT Calculus."
+    },
+    {
+      "id": "COMPLEXITY_DELTA_033",
+      "symbol": "Δκ",
+      "name": "Complexity Delta",
+      "definition": "The change in reduction complexity produced by a lawful reduction step."
+    },
+    {
+      "id": "REDUCTION_COST_033",
+      "symbol": "Cost(C)",
+      "name": "Reduction Cost",
+      "definition": "The accumulated reduction complexity required to reach a terminal reduction outcome."
+    },
+    {
+      "id": "COMPLEXITY_CLASS_033",
+      "symbol": "Classκ",
+      "name": "Reduction Complexity Class",
+      "definition": "Classification of continuation expressions according to abstract reduction complexity."
+    }
+  ],
+  "definitions": {
+    "complexity_measure": {
+      "symbol": "κ(C)",
+      "requirements": [
+        "κ(C) is abstract.",
+        "κ(C) is implementation independent.",
+        "κ(C) is distinct from runtime.",
+        "κ(C) is distinct from syntax size.",
+        "κ(C) characterizes reduction effort within the calculus."
+      ]
+    }
+  },
+  "canonical_properties": [
+    {
+      "property": "Non-negativity",
+      "statement": "κ(C) ≥ 0"
+    },
+    {
+      "property": "Canonical Minimum",
+      "statement": "NF(C) minimizes κ within its process-equivalence class."
+    },
+    {
+      "property": "Lawful Progress",
+      "statement": "Lawful reductions shall not increase κ."
+    },
+    {
+      "property": "Failure",
+      "statement": "⊥C_x terminates complexity evaluation."
+    },
+    {
+      "property": "Equivalence Preservation",
+      "statement": "Process-equivalent continuations preserve κ modulo ≡P."
+    }
+  ],
+  "complexity_classes": [
+    {
+      "class": "Minimal",
+      "description": "Canonical normal forms with minimal reduction complexity."
+    },
+    {
+      "class": "Reducible",
+      "description": "Continuation expressions admitting further lawful reduction."
+    },
+    {
+      "class": "Undetermined",
+      "description": "Complexity not yet established."
+    },
+    {
+      "class": "Failure",
+      "description": "Complexity evaluation terminates due to classified continuation failure."
+    }
+  ],
+  "relationship_to_existing_objects": {
+    "termination_measure": {
+      "object": "μ(C)",
+      "relationship": "μ(C) is a well-founded ordering used to establish termination; κ(C) is an abstract characterization of reduction complexity."
+    },
+    "reduction_trace": {
+      "object": "Trace(C)",
+      "relationship": "Trace(C) records the reduction history; κ(C) characterizes the intrinsic complexity of that reduction."
+    },
+    "canonical_form": {
+      "object": "NF(C)",
+      "relationship": "Canonical normal forms minimize κ within bounded uniqueness classes."
+    }
+  },
+  "invariants": [
+    "RT_core remains unchanged.",
+    "κ(C) is abstract and implementation independent.",
+    "κ(C) does not represent runtime.",
+    "κ(C) does not represent syntax size.",
+    "κ(C) is distinct from μ(C).",
+    "Process equivalence preserves κ modulo ≡P.",
+    "Recovery remains deferred."
+  ],
+  "future_dependencies": [
+    "PATCH_PI_RT_CALCULUS_034 (Bounded Confluence Theorem)",
+    "PATCH_PI_RT_CALCULUS_035 (Canonical Reduction Strategy)"
+  ],
+  "textbook_changes": {
+    "chapter": "2.3.15",
+    "title": "Reduction Complexity Measure",
+    "summary": [
+      "Introduce κ(C) as the abstract reduction complexity measure.",
+      "Differentiate κ(C) from the termination measure μ(C).",
+      "Define Δκ and Cost(C).",
+      "Introduce bounded reduction complexity classes.",
+      "Establish complexity invariants independent of implementation."
+    ]
+  },
+  "registry_updates": {
+    "formal_object_registry": [
+      "REDUCTION_COMPLEXITY_033",
+      "COMPLEXITY_DELTA_033",
+      "REDUCTION_COST_033",
+      "COMPLEXITY_CLASS_033"
+    ],
+    "math_source_registry": [
+      "PATCH_PI_RT_CALCULUS_033"
+    ],
+    "lexicon_gap_queue": [
+      "reduction_complexity",
+      "complexity_delta",
+      "reduction_cost",
+      "complexity_class"
+    ]
+  },
+  "rt_core_impact": {
+    "modified": false,
+    "statement": "RT := [(ℰ≠0) ⇔R δα(ℰ>0)] remains unchanged."
+  },
+  "validation_requirements": [
+    "Patch record parses cleanly.",
+    "Patch depends on PATCH_PI_RT_CALCULUS_032.",
+    "Reduction complexity is abstract and implementation independent.",
+    "Lawful reductions do not increase κ(C) in the bounded calculus.",
+    "RT_core remains unchanged."
+  ],
+  "required_repo_changes": [
+    "Update docs/textbook/mono_process_textbook_complete.md with the reduction complexity section and complexity-class documentation.",
+    "Update registry/formal_object_registry.json with the complexity formal objects.",
+    "Update registry/math_source_registry.json with the patch source entry.",
+    "Update registry/lexicon_gap_queue.json with the reduction complexity, complexity delta, reduction cost, and complexity-class terms.",
+    "Update registry/registry/lexicon_gap_queue.json with the mirrored reduction complexity, complexity delta, reduction cost, and complexity-class terms.",
+    "Update registry/governance_change_ledger.json with the corresponding governance ledger entry.",
+    "Update registry/governance/patches/PATCH_PI_RT_CALCULUS_032.json with the forward chain reference to PATCH_PI_RT_CALCULUS_033."
+  ],
+  "target_files": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/formal_object_registry.json",
+    "registry/math_source_registry.json",
+    "registry/lexicon_gap_queue.json",
+    "registry/registry/lexicon_gap_queue.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_032.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_033.json"
+  ],
+  "success_criteria": {
+    "complexity_documented": true,
+    "complexity_delta_registered": true,
+    "reduction_cost_registered": true,
+    "complexity_class_registered": true,
+    "rt_core_unchanged": true
+  },
+  "next_recommended_patch": {
+    "patch_id": "PATCH_PI_RT_CALCULUS_034",
+    "title": "Bounded Confluence Theorem",
+    "purpose": "Establish the first bounded confluence theorem for the RT Calculus. The theorem applies only to continuation classes satisfying the previously established local confluence, determinism, termination, and uniqueness conditions. No claim of universal confluence is made."
+  }
+}

@@ -33,6 +33,17 @@ SELECT
         ) = 3 THEN 'semantic_projection_ready'
         ELSE 'semantic_projection_partial'
     END AS semantic_projection_state,
+    (SELECT COUNT(*) FROM semantic_authority_view) AS semantic_authority_count,
+    CASE
+        WHEN (SELECT COUNT(*) FROM semantic_authority_view) > 0 THEN 'projected'
+        ELSE 'empty'
+    END AS semantic_authority_graph_state,
+    (SELECT COUNT(*) FROM claim_evidence_links) AS claim_evidence_link_count,
+    (SELECT COUNT(DISTINCT claim_id) FROM claim_evidence_links) AS claim_evidence_claim_count,
+    CASE
+        WHEN (SELECT COUNT(*) FROM claim_evidence_links) > 0 THEN 'projected'
+        ELSE 'empty'
+    END AS claim_evidence_state,
     CASE
         WHEN (SELECT COUNT(*) FROM artifacts WHERE orientation_status IN (
             'historical_residue',

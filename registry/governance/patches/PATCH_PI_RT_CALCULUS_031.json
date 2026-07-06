@@ -1,0 +1,201 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_031",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-05",
+  "type": "governance_patch",
+  "artifact_type": "governance_patch",
+  "title": "Termination Conditions",
+  "priority": "HIGH",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_030"
+  ],
+  "mode": "additive",
+  "basis": {
+    "source_patches": [
+      "PATCH_PI_RT_CALCULUS_030"
+    ],
+    "source_surfaces": [
+      "docs/textbook/mono_process_textbook_complete.md",
+      "registry/formal_object_registry.json",
+      "registry/math_source_registry.json",
+      "registry/lexicon_gap_queue.json",
+      "registry/registry/lexicon_gap_queue.json",
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_030.json"
+    ],
+    "scope": "Canonical bounded termination conditions for REDUCE_025 outputs after deterministic selection is defined, including termination measure semantics, strict progress, and termination classes without asserting universal termination."
+  },
+  "core_rule": {
+    "statement": "Termination is bounded by a well-founded reduction measure and strict progress across lawful reductions; failure is terminal; NF(C), pNF(C), and classified ⊥C_x are terminal outcomes; RT_core remains unchanged."
+  },
+  "purpose": "Define the bounded conditions under which REDUCE_025 is guaranteed to terminate. This patch establishes termination classes without asserting universal termination.",
+  "canonical_claims": [
+    {
+      "id": "CLAIM_031_001",
+      "statement": "Termination is bounded by a well-founded reduction measure and strict lawful progress.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_031_002",
+      "statement": "The reduction measure μ(C) is evaluated after EVAL_024.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_031_003",
+      "statement": "Failure immediately terminates reduction.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_031_004",
+      "statement": "Bounded termination does not imply universal termination.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_031_005",
+      "statement": "RT_core remains unchanged.",
+      "status": "canonical"
+    }
+  ],
+  "formal_objects": [
+    {
+      "id": "TERMINATION_031",
+      "symbol": "Term(C)",
+      "name": "Termination",
+      "definition": "A property indicating that REDUCE_025 reaches a reduction outcome after a finite number of lawful reduction steps."
+    },
+    {
+      "id": "REDUCTION_MEASURE_031",
+      "symbol": "μ(C)",
+      "name": "Reduction Measure",
+      "definition": "A well-founded measure used to evaluate reduction progress."
+    },
+    {
+      "id": "PROGRESS_031",
+      "symbol": "μ(C_i) > μ(C_{i+1})",
+      "name": "Reduction Progress",
+      "definition": "Each lawful reduction strictly decreases the reduction measure."
+    },
+    {
+      "id": "TERMINATION_CLASS_031",
+      "symbol": "ClassTerm",
+      "name": "Termination Class",
+      "definition": "Classification of continuation expressions according to bounded termination behavior."
+    }
+  ],
+  "definitions": {
+    "termination": {
+      "symbol": "Term(C)",
+      "requirements": [
+        "WF(C)",
+        "Typed(C)",
+        "Lawful reduction sequence",
+        "Strict reduction progress",
+        "Finite reduction sequence",
+        "Outcome in NF(C), pNF(C), or ⊥C_x"
+      ]
+    }
+  },
+  "termination_classes": [
+    {
+      "class": "Guaranteed",
+      "description": "Termination proven for the bounded continuation subclass."
+    },
+    {
+      "class": "Undetermined",
+      "description": "Termination not yet established."
+    },
+    {
+      "class": "Non-terminating",
+      "description": "Infinite lawful reduction cannot presently be excluded."
+    }
+  ],
+  "progress_rules": [
+    "Reduction measure is evaluated after EVAL_024.",
+    "Every lawful reduction must strictly decrease μ(C).",
+    "Equivalent traces do not alter μ(C).",
+    "Trace recording is observational only.",
+    "Failure immediately terminates reduction."
+  ],
+  "invariants": [
+    "RT_core remains unchanged.",
+    "Termination does not imply determinism.",
+    "Termination does not imply confluence.",
+    "Reduction measure is monotonic.",
+    "NF(C), pNF(C), and ⊥C_x are terminal outcomes.",
+    "Recovery remains deferred."
+  ],
+  "future_dependencies": [
+    "PATCH_PI_RT_CALCULUS_032 (Canonical Form Uniqueness)",
+    "PATCH_PI_RT_CALCULUS_033 (Reduction Complexity)"
+  ],
+  "textbook_changes": {
+    "chapter": "2.3.13",
+    "title": "Termination Conditions",
+    "summary": [
+      "Introduce Term(C).",
+      "Define the reduction measure μ(C).",
+      "Define strict reduction progress.",
+      "Classify bounded termination behavior.",
+      "Distinguish bounded termination from universal termination."
+    ]
+  },
+  "registry_updates": {
+    "formal_object_registry": [
+      "TERMINATION_031",
+      "REDUCTION_MEASURE_031",
+      "PROGRESS_031",
+      "TERMINATION_CLASS_031"
+    ],
+    "math_source_registry": [
+      "PATCH_PI_RT_CALCULUS_031"
+    ],
+    "lexicon_gap_queue": [
+      "termination",
+      "reduction_measure",
+      "reduction_progress",
+      "termination_class"
+    ]
+  },
+  "rt_core_impact": {
+    "modified": false,
+    "statement": "RT := [(ℰ≠0) ⇔R δα(ℰ>0)] remains unchanged."
+  },
+  "validation_requirements": [
+    "Patch record parses cleanly.",
+    "Patch depends on PATCH_PI_RT_CALCULUS_030.",
+    "The reduction measure is well-founded and decreases across lawful reductions.",
+    "Failure is terminal, and finite lawful reduction sequences satisfy bounded termination.",
+    "RT_core remains unchanged."
+  ],
+  "required_repo_changes": [
+    "Update docs/textbook/mono_process_textbook_complete.md with the termination section and measure/progress documentation.",
+    "Update registry/formal_object_registry.json with the termination formal objects.",
+    "Update registry/math_source_registry.json with the patch source entry.",
+    "Update registry/lexicon_gap_queue.json with the termination, measure, progress, and termination-class terms.",
+    "Update registry/registry/lexicon_gap_queue.json with the mirrored termination, measure, progress, and termination-class terms.",
+    "Update registry/governance_change_ledger.json with the corresponding governance ledger entry.",
+    "Update registry/governance/patches/PATCH_PI_RT_CALCULUS_030.json with the forward chain reference to PATCH_PI_RT_CALCULUS_031."
+  ],
+  "target_files": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/formal_object_registry.json",
+    "registry/math_source_registry.json",
+    "registry/lexicon_gap_queue.json",
+    "registry/registry/lexicon_gap_queue.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_030.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_031.json"
+  ],
+  "success_criteria": {
+    "termination_documented": true,
+    "measure_registered": true,
+    "progress_registered": true,
+    "termination_class_registered": true,
+    "rt_core_unchanged": true
+  },
+  "next_recommended_patch": {
+    "patch_id": "PATCH_PI_RT_CALCULUS_032",
+    "title": "Canonical Form Uniqueness Conditions",
+    "purpose": "Define the bounded conditions under which the canonical normal form of a continuation is unique modulo process equivalence. This patch establishes uniqueness semantics without asserting a universal uniqueness proof."
+  }
+}
