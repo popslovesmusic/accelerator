@@ -1,0 +1,54 @@
+{
+  "artifact_id": "ordinal_mismatch_trace_054",
+  "artifact_type": "ordinal_trace",
+  "status": "DRAFT_PROVISIONAL",
+  "scope": "documentation_only",
+  "source_patch_id": "PATCH_PI_RT_CALCULUS_054",
+  "revision_target": "PATCH_PI_RT_CALCULUS_054",
+  "purpose": "Show the ordered pipeline from declared A|E inputs to an ordinal Delta class without introducing numeric metric values.",
+  "pipeline": [
+    "typed A",
+    "typed E",
+    "declared <S>",
+    "declared r_a",
+    "Delta evaluation under <S>",
+    "ordinal class assignment",
+    "no numeric output"
+  ],
+  "witnesses": [
+    {
+      "witness_id": "WITNESS_054_01",
+      "input_expression": "A|E := Delta(A <S>_ra E)",
+      "observed_class": "MODERATE_MISMATCH",
+      "note": "The comparison is classed ordinally; no distance, norm, or unit is assigned."
+    },
+    {
+      "witness_id": "WITNESS_054_02",
+      "input_expression": "A|E := Delta(A <S>_ra E)",
+      "observed_class": "ADMISSIBILITY_BREAK",
+      "note": "The declared coupling does not admit a stable comparison outcome under the current regime."
+    }
+  ],
+  "admissibility_rule": {
+    "rule_id": "ORDINAL_MISMATCH_TRACE_RULE_001",
+    "statement": "Delta may emit an ordinal mismatch class under a declared <S> before any scalar magnitude, norm, unit, or topology is defined."
+  },
+  "forbidden_inference": [
+    "Ordinal class does not imply numeric distance.",
+    "Ordinal class does not imply a Euclidean metric.",
+    "Ordinal class does not imply units.",
+    "Ordinal class does not imply topology.",
+    "Ordinal class does not erase residue-asymmetry r_a."
+  ],
+  "claim_humility": {
+    "current_status": "candidate_witness_only",
+    "non_claims": [
+      "Does not define a numeric distance.",
+      "Does not define a Euclidean metric.",
+      "Does not define a norm.",
+      "Does not define units.",
+      "Does not define a topology.",
+      "Does not modify RT_core."
+    ]
+  }
+}

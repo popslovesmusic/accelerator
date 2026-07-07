@@ -1,0 +1,118 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_050",
+  "status": "APPLIED",
+  "applied_on": "2026-07-06T23:13:29-04:00",
+  "type": "textbook_integration_gate",
+  "campaign": "RT_CALCULUS",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "title": "Controlled Textbook Integration for Projection and A|E Nesting",
+  "mode": "additive",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_046",
+    "PATCH_PI_RT_CALCULUS_047",
+    "PATCH_PI_RT_CALCULUS_048",
+    "PATCH_PI_RT_CALCULUS_049"
+  ],
+  "basis": {
+    "source_patches": [
+      "PATCH_PI_RT_CALCULUS_046",
+      "PATCH_PI_RT_CALCULUS_047",
+      "PATCH_PI_RT_CALCULUS_048",
+      "PATCH_PI_RT_CALCULUS_049"
+    ],
+    "source_surfaces": [
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_046.json",
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_047.json",
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_048.json",
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_049.json",
+      "docs/governance/worked_example_operational_046.json",
+      "docs/governance/admissibility_trace_046.json",
+      "docs/governance/swap_test_046.json",
+      "docs/governance/projection_example_048.json",
+      "docs/governance/projection_trace_048.json",
+      "docs/governance/projection_invariants_048.json",
+      "docs/governance/projection_invariant_trace_049.json",
+      "docs/governance/projection_variant_table_049.json",
+      "docs/governance/projection_counterexample_049.json"
+    ],
+    "scope": "Prepare controlled textbook integration of the applied 046-049 sequence as a plan-only surface. The basis is documentary and governed, not a request for direct textbook mutation; it preserves RT_core, A/E asymmetry, projection provenance, and the invariant/variant boundary."
+  },
+  "core_rule": {
+    "statement": "Textbook integration may add controlled provenance notes and section-targeted cross-references for the applied 046-049 sequence only when each note remains humble, provisional, and RT_core-invariant."
+  },
+  "integration_scope": {
+    "allowed": [
+      "Add documentation notes for explicit RT rebinding into A/E slots.",
+      "Record that A|E distinction preserves asymmetry, not slot symmetry.",
+      "Record projection-from-Core as governed provisional induction.",
+      "Record projection invariant/variant handling."
+    ],
+    "forbidden": [
+      "Modify RT_core.",
+      "Claim all RTs are identical to the Core Expression.",
+      "Promote projection-from-Core to theorem status.",
+      "Assert universal A/E slot occupancy.",
+      "Assert A/E role symmetry."
+    ]
+  },
+  "required_source_surfaces": [
+    "PATCH_PI_RT_CALCULUS_046.json",
+    "PATCH_PI_RT_CALCULUS_047.json",
+    "PATCH_PI_RT_CALCULUS_048.json",
+    "PATCH_PI_RT_CALCULUS_049.json",
+    "worked_example_operational_046.json",
+    "admissibility_trace_046.json",
+    "swap_test_046.json",
+    "projection_example_048.json",
+    "projection_trace_048.json",
+    "projection_invariants_048.json",
+    "projection_invariant_trace_049.json",
+    "projection_variant_table_049.json",
+    "projection_counterexample_049.json"
+  ],
+  "execution_surface_required": [
+    "textbook_integration_plan_050.json",
+    "textbook_claim_discipline_050.json",
+    "textbook_section_targets_050.json"
+  ],
+  "required_repo_changes": [
+    {
+      "path": "docs/governance/textbook_integration_plan_050.json",
+      "description": "Add the section-targeted integration plan and edit order."
+    },
+    {
+      "path": "docs/governance/textbook_claim_discipline_050.json",
+      "description": "Add the claim-discipline rules and prohibited escalations for the textbook update."
+    },
+    {
+      "path": "docs/governance/textbook_section_targets_050.json",
+      "description": "Add the exact textbook sections that would be edited under controlled integration."
+    }
+  ],
+  "success_criteria": [
+    "Textbook update plan names exact sections to be edited.",
+    "Each proposed edit traces to applied governance sources.",
+    "All provisional claims remain labeled provisional.",
+    "RT_core remains unchanged.",
+    "Patch-gate accepts the integration plan before any textbook edit is made."
+  ],
+  "non_claims": [
+    "Does not edit the textbook yet.",
+    "Does not modify RT_core.",
+    "Does not claim projection-from-Core is universally true.",
+    "Does not claim A/E role symmetry.",
+    "Does not claim universal A/E slot occupancy.",
+    "Does not promote any governed note to theorem status."
+  ],
+  "agent_instruction": "Create PATCH_PI_RT_CALCULUS_050 as PROPOSED only. Build the execution surface as a plan, not as direct textbook edits. Do not apply until patch-gate returns apply. Do not edit textbook surfaces yet.",
+  "rt_core_impact": {
+    "modified": false,
+    "statement": "RT := [(ℰ≠0) ⇔R δα(ℰ>0)] remains unchanged."
+  },
+  "validation_expectation": {
+    "json_parse": "required",
+    "registry_record_only": "required",
+    "rt_core_unchanged": "required",
+    "textbook_update": "deferred"
+  }
+}

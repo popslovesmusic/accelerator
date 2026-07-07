@@ -1,0 +1,77 @@
+{
+  "artifact_id": "projection_trace_048",
+  "source_patch_id": "PATCH_PI_RT_CALCULUS_048",
+  "status": "DRAFT_PROVISIONAL",
+  "scope": "governance_execution_surface",
+  "purpose": "Record the ordered projection pipeline from the Core Expression to a candidate RT witness and its comparison to an already-governed RT expression.",
+  "source_artifacts": [
+    "docs/governance/projection_example_048.json",
+    "docs/governance/worked_example_operational_046.json",
+    "docs/governance/admissibility_trace_046.json",
+    "docs/governance/swap_test_046.json"
+  ],
+  "claim_humility": {
+    "current_status": "candidate_witness_only",
+    "non_claims": [
+      "Does not assert theorem status.",
+      "Does not modify RT_core.",
+      "Does not assert all RTs arise from the same projection.",
+      "Does not assert projection invertibility.",
+      "Does not assert identity between the Core Expression and the governed RT witness."
+    ]
+  },
+  "ordered_pipeline": [
+    {
+      "step": 1,
+      "operation": "declare_core_expression",
+      "input": "Core Expression",
+      "reading": "A provisional generative label is introduced for the purpose of projection typing only."
+    },
+    {
+      "step": 2,
+      "operation": "declare_domain",
+      "input": "projection_regime_xb",
+      "reading": "The simplest governed basin/projection domain from the existing witness family is reused."
+    },
+    {
+      "step": 3,
+      "operation": "type_projection",
+      "input": "pi(projection_regime_xb, tau, Adm_projection_048)",
+      "reading": "The projection is typed by domain, scale, and admissibility before any candidate output is formed."
+    },
+    {
+      "step": 4,
+      "operation": "apply_projection",
+      "input": "pi(projection_regime_xb, tau, Adm_projection_048)(Core Expression)",
+      "reading": "The projection yields a candidate projected expression only, not a universal identification."
+    },
+    {
+      "step": 5,
+      "operation": "verify_rt_closure",
+      "input": "candidate projected expression",
+      "reading": "Closure is checked against the governing RT condition without changing RT_core."
+    },
+    {
+      "step": 6,
+      "operation": "compare_with_governed_rt",
+      "input": "A_x(BasinClosureRT_B0)",
+      "reading": "The candidate projection is compared to the already-governed RT witness from the operational Patch 046 example."
+    }
+  ],
+  "comparison_target": {
+    "expression": "A_x(BasinClosureRT_B0)",
+    "source_artifact": "docs/governance/worked_example_operational_046.json",
+    "status": "already_governed_witness"
+  },
+  "trace_result": {
+    "status": "candidate_projection_witness",
+    "reading": "The ordered pipeline demonstrates a bounded projection surface from the Core Expression into an existing RT witness, but it does not promote the projection to theorem status."
+  },
+  "forbidden_inferences": [
+    "The projection trace does not prove that all RTs are projections.",
+    "The projection trace does not prove projection uniqueness.",
+    "The projection trace does not prove projection invertibility.",
+    "The projection trace does not modify RT_core.",
+    "The projection trace does not collapse the Core Expression into the governed RT witness."
+  ]
+}

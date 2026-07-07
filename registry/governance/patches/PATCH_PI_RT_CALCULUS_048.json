@@ -1,0 +1,113 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_048",
+  "status": "APPLIED",
+  "applied_on": "2026-07-06T22:35:00-04:00",
+  "type": "provisional_induction",
+  "campaign": "RT_CALCULUS",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "title": "RT as Projection of Core Expression",
+  "mode": "additive",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_046",
+    "PATCH_PI_RT_CALCULUS_047"
+  ],
+  "basis": {
+    "source_patches": [
+      "PATCH_PI_RT_CALCULUS_046",
+      "PATCH_PI_RT_CALCULUS_047"
+    ],
+    "source_surfaces": [
+      "docs/governance/worked_example.json",
+      "docs/governance/worked_example.md",
+      "docs/governance/worked_example_operational_046.json",
+      "docs/governance/admissibility_trace_046.json",
+      "docs/governance/swap_test_046.json",
+      "docs/governance/projection_example_048.json",
+      "docs/governance/projection_trace_048.json",
+      "docs/governance/projection_invariants_048.json",
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_046.json",
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_047.json",
+      "registry/governance_change_ledger.json"
+    ],
+    "scope": "Record the hypothesis that completed RT expressions may be domain-specific projections of a Core Expression. The basis is documentary and governed, not theorem-level; it inherits explicit rebinding from 046 and asymmetry support from 047 while keeping RT_core distinct from the proposed Core Expression hypothesis."
+  },
+  "core_rule": {
+    "statement": "Completed RT expressions may be modeled as projections of a Core Expression only when the projection is typed by domain, scale, and admissibility; the projection remains provisional, non-unique, and not invertible by default, and RT_core remains unchanged."
+  },
+  "core_hypothesis": {
+    "statement": "Every completed RT may be representable as a projection of the Core Expression under a domain, scale, and admissibility structure.",
+    "status": "PROVISIONAL_INDUCTION",
+    "stronger_forbidden_form": "Every RT is identical to the Core Expression."
+  },
+  "projection_schema": {
+    "source": "Core Expression",
+    "projection": "π(domain, scale, admissibility)",
+    "target": "CompletedRT_domain",
+    "short_form": "π_x(Core Expression) -> RT_x"
+  },
+  "relationship_to_prior_patches": {
+    "PATCH_PI_RT_CALCULUS_046": "Provides governed slot occupancy through explicit rebinding.",
+    "PATCH_PI_RT_CALCULUS_047": "Establishes that A|E distinction conserves asymmetry, not slot symmetry.",
+    "048_extension": "Asks whether all such completed RTs are projections from a common generative core."
+  },
+  "non_claims": [
+    "Does not modify RT_core.",
+    "Does not assert theorem status.",
+    "Does not claim all RTs are identical.",
+    "Does not assert projection uniqueness.",
+    "Does not assert projection invertibility.",
+    "Does not identify the Core Expression with RT_core.",
+    "Does not update textbook surfaces."
+  ],
+  "open_questions": [
+    "Is the projection unique?",
+    "Can different projections yield the same RT?",
+    "Is information lost during projection?",
+    "Does residue arise from non-invertible projection?",
+    "Is A|E a projection operation or a projected structure?",
+    "What quantities are invariant under projection?"
+  ],
+  "required_followup": [
+    {
+      "id": "CHECK_048_A",
+      "task": "Define admissible projection typing for π_x(Core Expression) -> RT_x."
+    },
+    {
+      "id": "CHECK_048_B",
+      "task": "Determine whether projection preserves closure, identity, residue, orientation, and basin signature."
+    },
+    {
+      "id": "CHECK_048_C",
+      "task": "Produce one worked projection example using an already governed RT expression."
+    },
+    {
+      "id": "CHECK_048_D",
+      "task": "Keep projection-from-core separate from RT_core modification until all checks pass."
+    }
+  ],
+  "agent_instruction": "Record this as a proposed provisional induction only. Use additive mode, tie provenance to applied patches 046 and 047, preserve RT_core unchanged, and do not update textbook surfaces.",
+  "rt_core_impact": {
+    "modified": false,
+    "statement": "RT := [(ℰ≠0) ⇔R δα(ℰ>0)] remains unchanged."
+  },
+  "required_repo_changes": [
+    {
+      "path": "docs/governance/projection_example_048.json",
+      "description": "Add a single governed example projecting the Core Expression into an existing RT witness."
+    },
+    {
+      "path": "docs/governance/projection_trace_048.json",
+      "description": "Add the ordered projection trace covering domain typing, admissibility, projection, RT closure, and comparison."
+    },
+    {
+      "path": "docs/governance/projection_invariants_048.json",
+      "description": "Add the invariant audit showing which quantities are preserved and transformed under projection."
+    }
+  ],
+  "validation_expectation": {
+    "json_parse": "required",
+    "registry_record_only": "required",
+    "rt_core_unchanged": "required",
+    "textbook_update": "deferred"
+  }
+}

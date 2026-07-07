@@ -1,0 +1,83 @@
+{
+  "artifact_id": "projection_variant_table_049",
+  "source_patch_id": "PATCH_PI_RT_CALCULUS_049",
+  "status": "DRAFT_PROVISIONAL",
+  "scope": "governance_execution_surface",
+  "purpose": "Summarize which quantities are preserved and which are transformed when the Core Expression projects into a domain-specific completed RT.",
+  "source_artifacts": [
+    "docs/governance/projection_invariant_trace_049.json",
+    "docs/governance/projection_example_048.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_048.json"
+  ],
+  "claim_humility": {
+    "current_status": "candidate_witness_only",
+    "non_claims": [
+      "Does not assert universal invariance.",
+      "Does not assert theorem status.",
+      "Does not assert projection invertibility.",
+      "Does not modify RT_core."
+    ]
+  },
+  "variant_table": [
+    {
+      "carrier": "closure eligibility",
+      "classification": "preserved_if_verified",
+      "witness_reading": "The projected RT may be counted as complete only after closure verification."
+    },
+    {
+      "carrier": "identity continuity",
+      "classification": "preserved_in_witness",
+      "witness_reading": "The projected RT remains the same governed RT identity after explicit projection typing and closure verification."
+    },
+    {
+      "carrier": "domain-typed RT completeness",
+      "classification": "preserved_if_verified",
+      "witness_reading": "A completed RT is preserved only after the projection is typed and closed in the receiving domain."
+    },
+    {
+      "carrier": "residue",
+      "classification": "transformed",
+      "witness_reading": "Residue records projection history and may differ by receiving domain."
+    },
+    {
+      "carrier": "orientation",
+      "classification": "transformed",
+      "witness_reading": "Orientation changes when the Core Expression is rebound into the receiving witness context."
+    },
+    {
+      "carrier": "state",
+      "classification": "transformed",
+      "witness_reading": "State is domain-specific and may vary across projections."
+    },
+    {
+      "carrier": "scale-expression",
+      "classification": "transformed",
+      "witness_reading": "Scale-expression follows the receiving domain rather than the source label."
+    },
+    {
+      "carrier": "metric value",
+      "classification": "transformed",
+      "witness_reading": "Metric equivalence is not assumed across projections."
+    },
+    {
+      "carrier": "slot role",
+      "classification": "transformed",
+      "witness_reading": "Slot role depends on explicit rebinding and does not carry automatic symmetry."
+    }
+  ],
+  "summary": {
+    "preserved": [
+      "closure eligibility when verified",
+      "identity continuity in the governed witness",
+      "domain-typed RT completeness after closure verification"
+    ],
+    "transformed": [
+      "residue",
+      "orientation",
+      "state",
+      "scale-expression",
+      "metric value",
+      "slot role"
+    ]
+  }
+}

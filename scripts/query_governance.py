@@ -2767,6 +2767,21 @@ def classify_authority_target(target):
             "warnings": [],
         },
         {
+            "patterns": ["docs/governance/*.json"],
+            "authority_owner": "docs",
+            "authority_source": normalized_target,
+            "supersession_status": "current",
+            "superseded_by": [],
+            "conflict_state": "clear",
+            "decision": "allow",
+            "reason": "Governance JSON surfaces remain narrative authority for governed execution artifacts.",
+            "evidence_paths": [
+                "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+                "outputs/audits/global_health_report.json",
+            ],
+            "warnings": [],
+        },
+        {
             "patterns": ["docs/textbook/mono_process_textbook_complete.md"],
             "authority_owner": "textbook",
             "authority_source": "docs/textbook/mono_process_textbook_complete.md",

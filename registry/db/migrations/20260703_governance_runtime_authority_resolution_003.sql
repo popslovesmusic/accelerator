@@ -137,6 +137,18 @@ SELECT
     '[]' AS warnings
 UNION ALL
 SELECT
+    'docs/governance/*.json' AS target_pattern,
+    'docs' AS authority_owner,
+    'docs/governance/GLOBAL_VALIDATION_ROUTINE.md' AS authority_source,
+    'current' AS supersession_status,
+    '[]' AS superseded_by,
+    'clear' AS conflict_state,
+    'allow' AS decision,
+    'Governance JSON surfaces remain narrative authority for governed execution artifacts.' AS reason,
+    '["docs/governance/GLOBAL_VALIDATION_ROUTINE.md","outputs/audits/global_health_report.json"]' AS evidence_paths,
+    '[]' AS warnings
+UNION ALL
+SELECT
     'docs/textbook/mono_process_textbook_complete.md' AS target_pattern,
     'textbook' AS authority_owner,
     'docs/textbook/mono_process_textbook_complete.md' AS authority_source,

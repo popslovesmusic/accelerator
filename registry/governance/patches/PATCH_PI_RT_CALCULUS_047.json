@@ -1,12 +1,33 @@
 {
   "patch_id": "PATCH_PI_RT_CALCULUS_047",
-  "status": "PROPOSED",
+  "status": "APPLIED",
+  "applied_on": "2026-07-06T21:54:58.2417585-04:00",
   "type": "principle_candidate",
   "campaign": "RT_CALCULUS",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
   "title": "Asymmetry Conservation Under A|E Distinction",
   "depends_on": [
     "PATCH_PI_RT_CALCULUS_046"
   ],
+  "mode": "additive",
+  "basis": {
+    "source_patches": [
+      "PATCH_PI_RT_CALCULUS_046"
+    ],
+    "source_surfaces": [
+      "docs/governance/worked_example.json",
+      "docs/governance/worked_example.md",
+      "docs/governance/worked_example_operational_046.json",
+      "docs/governance/admissibility_trace_046.json",
+      "docs/governance/swap_test_046.json",
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_046.json",
+      "registry/governance_change_ledger.json"
+    ],
+    "scope": "Normalize the applied 046 slot-occupancy witness into an additive audit candidate for asymmetry under A|E distinction. The basis is documentary and operational, not theorem-level: it records role-asymmetric admissibility, residue, and orientation checks without altering RT_core or asserting universal symmetry, universal occupancy, or recovery."
+  },
+  "core_rule": {
+    "statement": "A|E distinction does not conserve slot symmetry; it preserves distinguishability through role-asymmetric admissibility, residue, or orientation. Completed RT occupants may be compared only after explicit role typing and domain rebinding in the receiving window, and RT_core remains unchanged."
+  },
   "core_claim": {
     "statement": "A|E distinction does not conserve symmetry. It conserves distinguishability through asymmetry.",
     "status": "PROVISIONAL"
@@ -39,6 +60,16 @@
     "046_result": "Completed RTs may be candidate occupants only after explicit domain rebinding.",
     "047_extension": "Once rebound into A/E roles, their occupancy is distinction-bearing and therefore not symmetry-conserving by default."
   },
+  "required_repo_changes": [
+    {
+      "path": "docs/governance/worked_example.md",
+      "change": "Add a provenance note identifying PATCH_PI_RT_CALCULUS_046 and its operational witness as the source basis for the asymmetry audit, without promoting the candidate to theorem status."
+    },
+    {
+      "path": "registry/governance_change_ledger.json",
+      "change": "Record the eventual governed application of PATCH_PI_RT_CALCULUS_047 only if the patch gate returns apply and promotion is authorized."
+    }
+  ],
   "non_claims": [
     "Does not deny that symmetric substrates may exist.",
     "Does not deny that local symmetries may occur inside a completed RT.",
@@ -59,5 +90,9 @@
       "id": "CHECK_047_C",
       "task": "Clarify whether asymmetry is carried by residue r, role typing, orientation, or all three."
     }
-  ]
+  ],
+  "rt_core_impact": {
+    "modified": false,
+    "statement": "RT := [(ℰ≠0) ⇔R δα(ℰ>0)] remains unchanged."
+  }
 }

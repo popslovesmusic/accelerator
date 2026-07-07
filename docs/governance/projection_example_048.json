@@ -1,0 +1,87 @@
+{
+  "artifact_id": "projection_example_048",
+  "source_patch_id": "PATCH_PI_RT_CALCULUS_048",
+  "status": "DRAFT_PROVISIONAL",
+  "scope": "governance_execution_surface",
+  "purpose": "Instantiate one candidate projection from the Core Expression into an already-governed RT expression without modifying RT_core.",
+  "source_artifacts": [
+    {
+      "path": "registry/governance/patches/PATCH_PI_RT_CALCULUS_046.json",
+      "status": "applied_patch_registry",
+      "used_for": "explicit rebinding and RT closure witness"
+    },
+    {
+      "path": "registry/governance/patches/PATCH_PI_RT_CALCULUS_047.json",
+      "status": "applied_patch_registry",
+      "used_for": "role-asymmetric A|E distinction support"
+    },
+    {
+      "path": "docs/governance/worked_example_operational_046.json",
+      "status": "current_governance_witness",
+      "used_for": "existing governed RT comparison target"
+    },
+    {
+      "path": "docs/governance/admissibility_trace_046.json",
+      "status": "current_governance_witness",
+      "used_for": "ordered witness pipeline"
+    },
+    {
+      "path": "docs/governance/swap_test_046.json",
+      "status": "current_governance_witness",
+      "used_for": "role asymmetry and swap limits"
+    }
+  ],
+  "claim_humility": {
+    "current_status": "candidate_witness_only",
+    "non_claims": [
+      "Does not assert all RTs are projections.",
+      "Does not assert projection uniqueness.",
+      "Does not assert projection invertibility.",
+      "Does not assert theorem status.",
+      "Does not modify RT_core.",
+      "Does not identify the Core Expression with RT_core."
+    ]
+  },
+  "projection_context": {
+    "domain": "projection_regime_xb",
+    "scale": "tau",
+    "admissibility": "Adm_projection_048",
+    "projection_typing": "pi(projection_regime_xb, tau, Adm_projection_048)"
+  },
+  "ordered_projection": {
+    "step_1": "Declare the Core Expression as a provisional generative label distinct from RT_core.",
+    "step_2": "Declare the receiving domain as projection_regime_xb.",
+    "step_3": "Type the projection as pi(projection_regime_xb, tau, Adm_projection_048).",
+    "step_4": "Apply the projection to the Core Expression to obtain a candidate projected expression.",
+    "step_5": "Verify RT closure for the projected expression under the governing RT condition.",
+    "step_6": "Compare the projected expression against the existing governed RT witness A_x(BasinClosureRT_B0)."
+  },
+  "candidate_projection": {
+    "expression": "pi(projection_regime_xb, tau, Adm_projection_048)(Core Expression)",
+    "comparison_target": "A_x(BasinClosureRT_B0)",
+    "comparison_source": "docs/governance/worked_example_operational_046.json",
+    "reading": "The projection is a witness candidate only after explicit domain typing and RT closure verification. The comparison target remains an already-governed RT expression."
+  },
+  "rt_closure_verification": {
+    "status": "candidate_only",
+    "condition": "The projected expression is treated as a projected RT candidate only if it closes under the governing RT condition.",
+    "result_reading": "Closure in this witness supports representability, not universal projection or identity."
+  },
+  "comparison": {
+    "existing_governed_rt": "A_x(BasinClosureRT_B0)",
+    "relation": "candidate_projection_to_governed_rt",
+    "status": "not_identity_by_default",
+    "reading": "The example compares a Core Expression projection to a previously governed RT witness without collapsing the two objects."
+  },
+  "supported_reading": {
+    "status": "candidate_projection_witness",
+    "statement": "This example supports one governed projection witness from the Core Expression into an existing RT expression while leaving RT_core unchanged."
+  },
+  "non_claims": [
+    "Does not promote the Core Expression into RT_core.",
+    "Does not update textbook surfaces.",
+    "Does not assert that all RTs are projections.",
+    "Does not assert uniqueness or invertibility.",
+    "Does not erase the distinction between the Core Expression and the governed RT witness."
+  ]
+}

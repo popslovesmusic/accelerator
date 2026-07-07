@@ -139,7 +139,7 @@ For current governance, the relation between $(*|*)$ and $A|E$ is a **whole-expr
 This clarification is provisional only. It does not license theorem promotion, proof dependency closure, or any reading in which $(*|*)$ temporally generates $A|E$ or reduces $A|E$ to a merely derivative non-primitive remainder.
 
 **Governed Clarification 1.2.2B.1: RT Calculus Foundation (PATCH_PI_RT_CALCULUS_001)**
-The framework treats $RT_{core} := [(\mathcal{E}\neq 0) \Leftrightarrow_R \delta\alpha(\mathcal{E}>0)]$ as the unique primitive calculus. In governed usage, every primitive is RT-governed and traces to $RT_{core}$, but not every RT-governed expression is primitive; derived continuations, projections, operational regimes, and other governed RT surfaces remain RT without being primitive. The fixed meta-domain bindings $A_{meta} := \delta\alpha(\mathcal{E}>0)$ and $B_{meta} := (\mathcal{E}\neq 0)$ remain in place, while linear and nonlinear operational behavior are derived regimes of $RT_{core}$ rather than independent axiomatic floors. Any local use of linear or nonlinear language inside a declared dominant domain is regime-level shorthand downstream of $RT_{core}$, not an imported foundation.
+The framework treats $RT_{core} := [(\mathcal{E}\neq 0) \Leftrightarrow_R \delta\alpha(\mathcal{E}>0)]$ as the unique primitive calculus. In governed usage, every primitive is RT-governed and traces to $RT_{core}$, but not every RT-governed expression is primitive; all primitives are RT, but not all RT are primitives. Derived continuations, projections, operational regimes, and other governed RT surfaces remain RT without being primitive. The fixed meta-domain bindings $A_{meta} := \delta\alpha(\mathcal{E}>0)$ and $B_{meta} := (\mathcal{E}\neq 0)$ remain in place, while linear and nonlinear operational behavior are derived regimes of $RT_{core}$ rather than independent axiomatic floors. Any local use of linear or nonlinear language inside a declared dominant domain is regime-level shorthand downstream of $RT_{core}$, not an imported foundation.
 
 **Governed Clarification 1.2.2B.2: RT Operational Regime Definition (PATCH_PI_RT_CALCULUS_002)**
 An RT operational regime is a repeatable derived mode of $RT_{core}$ continuation under declared admissibility, residue, orientation, and context conditions. It is not a primitive floor, cannot supersede $RT_{core}$, and is not yet assigned to any named regime family. Every regime must constructively trace to $RT_{core} := [(\mathcal{E}\neq 0) \Leftrightarrow_R \delta\alpha(\mathcal{E}>0)]$.
@@ -163,7 +163,7 @@ Mixed L/NL continuation is a derived RT operational regime in which $L$-classifi
 Operational regime selection is the deterministic RT classification step that evaluates orientation, admissibility, residue, and declared context under $RT_{core}$ to produce a regime classification. It is dynamic and repeatable rather than static, does not alter $RT_{core}$, and selects among $L$, $NL$, and mixed outputs from the declared inputs. Mixed output remains valid only when the explicit separation basis introduced for mixed L/NL regimes is present; otherwise the selection remains aligned with the non-mixed derived classification.
 
 **Governed Clarification 1.2.2B.9: Primitive Distinction Projection Algebra (PATCH_PI_RT_CALCULUS_010)**
-Within the affect/effect domain, $A|E$ remains the primitive distinction condition and must not be substituted into $RT_{core}$. The formal projection operator $\Pi_D$ maps $A|E$ into the representational distinction schema $D(*|*)$ by the law $D(*|*) := \Pi_D(A|E)$. $\Pi_D$ is a projection operator, not a generative primitive; projection preserves representable distinction while not exhausting the full affect/effect condition. Accordingly, $D(*|*)$ is non-primitive and remains domain-local to the affect/effect projection layer.
+Within the affect/effect domain, $A|E$ remains the primitive distinction condition and must not be substituted into $RT_{core}$. The formal projection operator $\Pi_D$ maps $A|E$ into the representational distinction schema $D(*|*)$ by the law $D(*|*) := \Pi_D(A|E)$. $\Pi_D$ is a projection operator, not a generative primitive; projection preserves representable distinction while not exhausting the full affect/effect condition. Accordingly, $D(*|*)$ is non-primitive and remains domain-local to the affect/effect projection layer; the projection layer is RT-governed without itself being primitive.
 
 $$ D(*|*) := \Pi_D(A|E) $$
 $$ Primitive(D(*|*)) = \text{false} $$
@@ -1950,13 +1950,16 @@ When $\delta_a(x;c) = \emptyset$, the process faces a structured fork resolved b
 The 0-state is not just process termination; it is the collapse of the conditions under which existence was possible. Process existence is not a static given; it is continuously earned by the availability of admissible continuation.
 
 **Deferred Expansion Note:**
-This section is a provenance-explicit partial section: it was found structurally incomplete during repository audit and was deferred while the RT Calculus v1.0 campaign established the governed continuation, evaluation, failure-classification, recursion, and fixed-point surfaces. The deferral records repository state and campaign scope; it does not mean the incompleteness was an original design objective.
+This section is a provenance-explicit partial section: it was found structurally incomplete during repository audit and was deferred while the RT Calculus v1.0 campaign established the governed continuation, evaluation, failure-classification, recursion, fixed-point, and projection surfaces. The deferral records repository state and campaign scope; it does not mean the incompleteness was an original design objective.
 
 **Governed RT Calculus Support**
 - Continuation failure is represented by diagnostic failure objects rather than lawful continuation objects. See `PATCH_PI_RT_CALCULUS_022` and `PATCH_PI_RT_CALCULUS_023`.
 - Failure classification and evaluation order are governed by the RT Calculus v1.0 surfaces. See `PATCH_PI_RT_CALCULUS_024` and `PATCH_PI_RT_CALCULUS_025`.
 - Recursive continuation and fixed-point interaction are available as bounded comparison/evaluation machinery. See `PATCH_PI_RT_CALCULUS_037` through `PATCH_PI_RT_CALCULUS_045`.
 - These surfaces clarify the operational handling of $\delta_a = \emptyset$ but do not by themselves introduce recovery semantics.
+
+**Provenance Cross-Reference (PATCH_PI_RT_CALCULUS_051):**
+The empty-admissibility fork above is the local failure boundary for this chapter. Applied patches 046-049 supply the governed support for explicit RT rebinding, A/E asymmetry, projection provenance, and invariant handling; recovery and return-to-stable-regime semantics remain deferred.
 
 **Coverage Matrix**
 | Topic | Status | Action |
@@ -2011,6 +2014,8 @@ $$ \text{Meas} : \mathcal{X} \times \mathcal{C} \to \mathbb{R}^d $$
 **Commentary:**
 The extractor $\text{Meas}$ (alternatively $\iff_m$) converts the abstract process states $\mathcal{X}$ under context $\mathcal{C}$ into a shared measurement space (typically $\mathbb{R}^d$). This map allows for the comparison of different mechanism classes and the generation of comparable traces $y_t$ [Source: MS-SCRATCH-V1 Sec 8.1].
 
+In the applied 048-049 witness sequence, this conversion is read as a projection-layer readout rather than a primitive identity claim: it preserves comparability while remaining distinct from the source relation and from $RT_{core}$.
+
 ---
 
 ## 7.2 The Asymmetry Ratio: $\Omega_a$
@@ -2024,6 +2029,8 @@ $$ \Omega_a := \frac{D(S_1|S_2)}{D(S_2|S_1)} $$
 $\Omega_a$ (Omega_a) measures the **projected asymmetry** of the domain. It is critical to note that **$\Omega_a$ is not asymmetry itself**, nor does it define the asymmetry domain. Rather, it quantifies the relational imbalance after metric extraction from a pre-existing structural asymmetry [Source: MPF-REFINE-V2 RI-004]. 
 - If $\Omega_a = 1$, the domain is symmetric ($symm\_app$).
 - If $\Omega_a \neq 1$, the domain is asymmetric ($asym\_app$).
+
+Within the governed 047-049 witness family, this remains a metric readout of asymmetry rather than a symmetry law. The ratio records projected imbalance, but it does not itself define symmetry or erase role asymmetry.
 By utilizing the **floor $\epsilon$** (see Chapter 8), we ensure $\Omega_a$ remains finite and well-defined. Statistical projection ($ \iff_s $) may estimate $\Omega_a$ through observed probabilities, but the underlying relational asymmetry remains structural.
 
 ---
@@ -2031,6 +2038,8 @@ By utilizing the **floor $\epsilon$** (see Chapter 8), we ensure $\Omega_a$ rema
 ## 7.3 Statistical Projections: $\iff_s$
 
 When the process realizations are observed over many cycles or across many local instances, the resulting distribution can be projected into a **Statistical Space**. This statistical projection $\iff_s$ is the natural result of RT operating on arrays under statistical coupling (PRIN_005). Rather than being an independent mathematical formalism, it projects the emergent joint probability distribution $P(R_{excl}, R_{add} \mid x)$ where exclusion limits the tails and addition accumulates toward the center, yielding a bell-curve central tendency.
+
+The 049 carrier audit keeps the projection carrier distinct from the probability readout, so residue, orientation, closure, and other carrier data may vary by domain even when the statistical projection remains lawful.
 
 **Formal Block 7.3.1: Statistical Projection Relation ($\iff_s$)**
 $$ D \iff_s P $$
@@ -2100,6 +2109,8 @@ Application projections and nDOF representations are projectionally equivalent b
 $$ (\mathcal{E} \neq 0_{app}) \iff_m[I_{admissibility}] (\mathcal{E} \neq 0)nDOF $$
 $$ (\mathcal{E} > 0_{app}) \iff_m[I_{admissibility}] (\mathcal{E} > 0)nDOF $$
 
+For the applied 048-049 witness family, the indexed invariants above are witness-bounded rather than universal. Closure verification and explicit projection typing are required before identity continuity may be read as preserved, and domain-sensitive carriers such as residue, orientation, scale-expression, and slot role remain outside the invariant guarantee.
+
 ---
 
 ## 7.4B Projection Signatures
@@ -2134,6 +2145,8 @@ A projection signature $Sig_{app}(X)$ is valid only when:
 - Projection signature is not identity between source and output.
 - Projection signature is not arbitrary resemblance.
 - Projection signature does not bypass the Empirical Mapping Standards (EMS).
+
+The 049 counterexample boundary shows that a lawful projection signature can preserve trace, admissibility, and recognizable distinctions while still allowing residue, orientation, scale-expression, or slot-role variation across domains. A valid signature therefore certifies lawful projection, not universal carrier invariance.
 
 ---
 
@@ -2517,6 +2530,8 @@ Distinction density $\rho_D$ participates in dominance selection, rotational cha
 
 Module **CLS_004R** supports this reinterpretation within tested synthetic models: rotation and window-width invariants remained stable (100%) under perturbation, while 85% of distinct trajectories collapsed into shared admissibility classes. This reclassifies the "quadrant volatility" observed in geometric models as a boundary-front interaction observable rather than identity instability [Source: CLS_004R_REPORT].
 
+**Provenance Note (PATCH_PI_RT_CALCULUS_051):** The applied 046-047 witness family provides a bounded example of completed RT occupancy inside a shared-substrate window after explicit rebinding. It is cited here as a candidate witness for basin-style admissibility only; it does not establish a universal nesting theorem, role symmetry, or universal slot occupancy.
+
 ### 11.1A.1 The Relational Hierarchy of Identity
 
 Based on the success of the **PD_CG_V1** root-trace falsification attack, process identity is formally governed by a hierarchy of stability:
@@ -2553,7 +2568,7 @@ Braids ($B_K$) are formed when multiple process strands (knots) become entangled
 
 ## 11.3 Topology $\iff$ Geometry
 
-In the Mono-Process Framework, `topology_app` and `geometry_app` are treated as co-conditioned projections of one recursive process rather than separate primitive ontologies. Any operational map from `topology_app` into `geometry_app` is therefore governed as a projection step with explicit legality requirements before interpretation or downstream reuse.
+In the Mono-Process Framework, `topology_app` and `geometry_app` are treated as co-conditioned projections of one recursive process rather than separate primitive ontologies. Any operational map from `topology_app` into `geometry_app` is therefore governed as a projection step with explicit legality requirements before interpretation or downstream reuse. The applied 048-049 witness sequence keeps this relation projectional rather than primitive, so `geometry_app` remains a governed output rather than an ontological floor.
 
 **Formal Statement 11.3.1: The Geometric Projection**
 $$ \text{Topology} \iff \text{Geometry} $$
@@ -2583,6 +2598,8 @@ By separating the underlying process from these application domains, we can desc
 ## 11.4A Topology-to-Geometry Legality Transform
 
 A projection condition under which a stabilized topological organization may be represented as geometry_app without treating geometry as primitive is defined as a Topology-to-Geometry Legality Transform.
+
+The applied 048-049 witness family supplies the controlled example for this legality transform: the map is licensed as projection only, and the represented `geometry_app` does not become primitive by being legally admissible.
 
 **Formal Block 11.4A.1: Topology-to-Geometry Transform ($\Pi_{\text{geo}}$)**
 $$ T_{\text{stable}} \iff_m \text{geometry\_app} $$
@@ -3305,6 +3322,8 @@ A campaign is a living governance object responsible for attacking, verifying, o
 
 Evidence enters the program through mathematical review, simulation results, replication studies, or governance audits. Evidence alone does not modify theorem status; it must pass validation, produce an evidence report, and generate a governance review. Status changes propagate through the dependency graph according to claim-cap and review-lock rules. All updates shall be reflected in the textbook, registry system, and audit trail.
 
+For the applied 046-049 sequence, the evidence inputs are the registered patch surfaces and witness artifacts already recorded in governance. The order remains plan, gate, then edit: the textbook is not changed until the integration gate authorizes it.
+
 **Workflow Steps:**
 1. **Launch:** Reproduced using the **Run Manifest Template**.
 2. **Execution:** Matched models M0-M7 evaluated across 64+ seeds.
@@ -3852,7 +3871,7 @@ These items remain unsettled and are the primary targets for future induction an
 - **Formal rules for Decoupling:** Defining the conditions under which a truth-condition becomes False.
 - **Asymmetric Recoupling and Distinction Emergence:** [ **HARDENING_REQUIRED** ] Define asymmetric recoupling mechanics and the distinction emergence law; determine whether RT exists below the distinction floor [Source: MPF_ZERO_STATE_DOMAIN_MEMBERSHIP_001].
 - **Formal RT Chain Algebra:** [ **C1_DEFINED_PROVISIONAL** ] Define the algebra of progressive conditioned continuation for chains such as $D(1|2), D(2|3), D(3|4)$, including lawful ordering, coupling inheritance, and chain-composition constraints. Continuation composition is now governed by `PATCH_PI_RT_CALCULUS_013`, continuation identity is governed by `PATCH_PI_RT_CALCULUS_014`, process equivalence plus canonical continuation forms are governed by `PATCH_PI_RT_CALCULUS_015`, reduction semantics are governed by `PATCH_PI_RT_CALCULUS_016`, primitive reduction rules are governed by `PATCH_PI_RT_CALCULUS_017`, well-formed continuation expressions are governed by `PATCH_PI_RT_CALCULUS_018`, typed continuation domains are governed by `PATCH_PI_RT_CALCULUS_019`, typed projection transition rules are governed by `PATCH_PI_RT_CALCULUS_020`, typed continuation composition guards are governed by `PATCH_PI_RT_CALCULUS_021`, continuation failure / undefined composition are governed by `PATCH_PI_RT_CALCULUS_022`, failure-classification / recovery-boundary handling are governed by `PATCH_PI_RT_CALCULUS_023`, continuation evaluation order is governed by `PATCH_PI_RT_CALCULUS_024`, the minimal reduction algorithm and partial-NF fallback are governed by `PATCH_PI_RT_CALCULUS_025`, partial normal form semantics are governed by `PATCH_PI_RT_CALCULUS_026`, reduction trace semantics are governed by `PATCH_PI_RT_CALCULUS_027`, reduction trace equivalence / canonical trace normalization are governed by `PATCH_PI_RT_CALCULUS_028`, local confluence conditions are governed by `PATCH_PI_RT_CALCULUS_029`, reduction determinism conditions are governed by `PATCH_PI_RT_CALCULUS_030`, termination conditions are governed by `PATCH_PI_RT_CALCULUS_031`, canonical form uniqueness conditions are governed by `PATCH_PI_RT_CALCULUS_032`, reduction complexity measure is governed by `PATCH_PI_RT_CALCULUS_033`, bounded confluence theorem is governed by `PATCH_PI_RT_CALCULUS_034`, canonical reduction strategy is governed by `PATCH_PI_RT_CALCULUS_035`, and canonical reduction strategy correctness is governed by `PATCH_PI_RT_CALCULUS_036`; together they require endpoint compatibility, explicit domain binding, type compatibility, explicit projection invocation, residue/admissibility preservation, lawful reduction toward $NF(C)$ after typed composition guards pass, ordered evaluation before reduction is admitted, outcome-preserving trace comparison, bounded branch joinability under common-origin divergence, canonical reduction priority with deterministic choice among admissible candidates, strict measure descent under a well-founded termination measure, bounded canonical-form uniqueness modulo process equivalence, bounded confluence over admissible bounded continuation classes, candidate-set construction after $EVAL_{024}$, admissibility filtering, canonical ordering of lawful candidates, deterministic selection within bounded classes, and bounded correctness preservation for canonical strategy selection. Associativity remains deferred, and global confluence, Church-Rosser, universal determinism, universal termination, and universal uniqueness remain deferred. [Source: PATCH_PI_RT_CALCULUS_013; PATCH_PI_RT_CALCULUS_014; PATCH_PI_RT_CALCULUS_015; PATCH_PI_RT_CALCULUS_016; PATCH_PI_RT_CALCULUS_017; PATCH_PI_RT_CALCULUS_018; PATCH_PI_RT_CALCULUS_019; PATCH_PI_RT_CALCULUS_020; PATCH_PI_RT_CALCULUS_021; PATCH_PI_RT_CALCULUS_022; PATCH_PI_RT_CALCULUS_023; PATCH_PI_RT_CALCULUS_024; PATCH_PI_RT_CALCULUS_025; PATCH_PI_RT_CALCULUS_026; PATCH_PI_RT_CALCULUS_027; PATCH_PI_RT_CALCULUS_028; PATCH_PI_RT_CALCULUS_029; PATCH_PI_RT_CALCULUS_030; PATCH_PI_RT_CALCULUS_031; PATCH_PI_RT_CALCULUS_032; PATCH_PI_RT_CALCULUS_033; PATCH_PI_RT_CALCULUS_034; PATCH_PI_RT_CALCULUS_035; PATCH_PI_RT_CALCULUS_036].
-- **Chapter 6.4 Provenance-Explicit Admissibility Failure:** [ **OPEN** ] Chapter 6.4 retains the empty-admissibility fork, cross-references RT Calculus v1.0 for failure classification, evaluation order, recursive continuation, and fixed-point interaction, and leaves recovery and return-to-stable-regime semantics deferred. [Source: PATCH_MPF_TEXTBOOK_CH6_4_PROVENANCE_REPAIR_001].
+- **Chapter 6.4 Provenance-Explicit Admissibility Failure:** [ **OPEN** ] Chapter 6.4 retains the empty-admissibility fork and cross-references the applied 046-049 RT Calculus witnesses for failure classification, evaluation order, recursive continuation, fixed-point interaction, projection provenance, and invariant handling, while leaving recovery and return-to-stable-regime semantics deferred. [Source: PATCH_MPF_TEXTBOOK_CH6_4_PROVENANCE_REPAIR_001; PATCH_PI_RT_CALCULUS_046; PATCH_PI_RT_CALCULUS_047; PATCH_PI_RT_CALCULUS_048; PATCH_PI_RT_CALCULUS_049; PATCH_PI_RT_CALCULUS_050].
 - **Deviation-to-Geometry Recovery:** [ **OPEN** ] Derive distance as a projection of deviation and geometry as a projection of organized distance without reintroducing geometry as a primitive. [Source: session_summary 2026-06-26 continuation-first ontology reduction].
 - **Observer-Floor Mismatch:** [ **REGISTERED_LATE** ] Define the observer-floor mismatch quantity and determine whether embedded observers and local admissibility floors co-evolve so relative mismatch remains approximately invariant. [Source: session_summary 2026-06-26 continuation-first ontology reduction].
 - **Orientation Transformations Across Domains:** [ **OPEN** ] Define lawful orientation transformations across domains without collapsing orientation into spatial direction or primitive time. [Source: session_summary 2026-06-26 continuation-first ontology reduction].

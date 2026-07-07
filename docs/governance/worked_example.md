@@ -3,7 +3,7 @@
 ## 1. Status
 Provisional documentation note for the revised worked example in [`worked_example.json`](./worked_example.json).
 
-This note is documentation-only. It does not modify `RT_core`, does not promote `PATCH_PI_RT_CALCULUS_046` to applied status, and does not claim theorem status. It is aligned to the proposed registry candidate and remains candidate-only unless the registry gate accepts it.
+This note is documentation-only. It does not modify `RT_core`, does not promote `PATCH_PI_RT_CALCULUS_046` to theorem status, and remains theorem-humble while tracking the applied registry candidate.
 
 ## 2. Purpose
 The worked example records RT nesting as an ordered continuation process:

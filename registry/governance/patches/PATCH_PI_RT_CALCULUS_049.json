@@ -1,0 +1,109 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_049",
+  "status": "APPLIED",
+  "applied_on": "2026-07-06T22:40:00-04:00",
+  "type": "governance_definition_patch",
+  "campaign": "RT_CALCULUS",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "title": "Projection Invariants and Variant Carriers",
+  "mode": "additive",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_048"
+  ],
+  "basis": {
+    "source_patches": [
+      "PATCH_PI_RT_CALCULUS_048"
+    ],
+    "source_surfaces": [
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_048.json",
+      "docs/governance/projection_example_048.json",
+      "docs/governance/projection_trace_048.json",
+      "docs/governance/projection_invariants_048.json",
+      "docs/governance/worked_example_operational_046.json",
+      "docs/governance/admissibility_trace_046.json",
+      "docs/governance/swap_test_046.json"
+    ],
+    "scope": "Define invariant and variant carriers for projection from the Core Expression into a domain-specific completed RT. The basis is additive and documentary, reusing the applied Patch 048 projection witnesses and the earlier rebinding witness family without modifying RT_core or asserting universal projection semantics."
+  },
+  "core_rule": {
+    "id": "PROJECTION_INVARIANTS_001",
+    "statement": "Projection from the Core Expression into a domain-specific RT preserves closure eligibility and identity continuity only under explicit projection typing, while residue, orientation, state, and scale-expression may vary by receiving domain."
+  },
+  "invariant_candidates": {
+    "preserved_under_projection": [
+      "closure eligibility",
+      "identity continuity",
+      "domain-typed RT completeness after closure verification"
+    ],
+    "not_automatically_preserved": [
+      "residue",
+      "orientation",
+      "state",
+      "scale-expression",
+      "metric value",
+      "slot role"
+    ]
+  },
+  "formal_schema": {
+    "source": "Core Expression",
+    "projection": "pi_x(Core Expression)",
+    "target": "RT_x",
+    "required_condition": "projection_typing(x) + closure_verification(RT_x)",
+    "forbidden_inference": [
+      "pi_x(Core Expression) -> RT_x does not imply pi_y(Core Expression) -> RT_y preserves the same residue.",
+      "Projection does not imply metric equivalence across domains.",
+      "Projection does not imply slot-role symmetry.",
+      "Projection does not imply identity with the Core Expression."
+    ]
+  },
+  "relationship_to_prior_patches": {
+    "046": "Slot occupancy requires explicit rebinding.",
+    "047": "A|E distinction preserves asymmetry rather than symmetry.",
+    "048": "RT may be represented as a domain-specific projection of the Core Expression.",
+    "049": "Defines candidate invariants and variant carriers under projection."
+  },
+  "required_execution_surface": [
+    "projection_invariant_trace_049.json",
+    "projection_variant_table_049.json",
+    "projection_counterexample_049.json"
+  ],
+  "required_repo_changes": [
+    {
+      "path": "docs/governance/projection_invariant_trace_049.json",
+      "description": "Add the projection trace that identifies preserved and transformed carriers under one witness."
+    },
+    {
+      "path": "docs/governance/projection_variant_table_049.json",
+      "description": "Add the variant table that classifies preserved and transformed quantities."
+    },
+    {
+      "path": "docs/governance/projection_counterexample_049.json",
+      "description": "Add the counterexample that prevents overbroad preservation claims."
+    }
+  ],
+  "success_criteria": [
+    "Shows at least one projected RT where identity continuity is preserved.",
+    "Shows at least one variant carrier changing under domain projection.",
+    "Includes one counterexample preventing overbroad preservation claims.",
+    "Leaves RT_core unchanged.",
+    "Does not update textbook surfaces until gate accepts."
+  ],
+  "non_claims": [
+    "Does not prove all RTs derive from the Core Expression.",
+    "Does not assert projection uniqueness.",
+    "Does not assert invertibility.",
+    "Does not assert metric equivalence.",
+    "Does not modify RT_core."
+  ],
+  "agent_instruction": "Create PATCH_PI_RT_CALCULUS_049 as PROPOSED only. Add provenance to applied PATCH_PI_RT_CALCULUS_048 and its projection execution artifacts. Use additive mode. Do not apply until the execution surface exists and patch-gate returns apply.",
+  "rt_core_impact": {
+    "modified": false,
+    "statement": "RT := [(ℰ≠0) ⇔R δα(ℰ>0)] remains unchanged."
+  },
+  "validation_expectation": {
+    "json_parse": "required",
+    "registry_record_only": "required",
+    "rt_core_unchanged": "required",
+    "textbook_update": "deferred"
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "artifact_id": "projection_invariant_trace_049",
+  "source_patch_id": "PATCH_PI_RT_CALCULUS_049",
+  "status": "DRAFT_PROVISIONAL",
+  "scope": "governance_execution_surface",
+  "purpose": "Trace a single projection witness and identify which carriers are preserved or transformed under projection from the Core Expression into a domain-specific RT.",
+  "source_artifacts": [
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_048.json",
+    "docs/governance/projection_example_048.json",
+    "docs/governance/projection_trace_048.json",
+    "docs/governance/projection_invariants_048.json",
+    "docs/governance/worked_example_operational_046.json"
+  ],
+  "claim_humility": {
+    "current_status": "candidate_witness_only",
+    "non_claims": [
+      "Does not assert theorem status.",
+      "Does not modify RT_core.",
+      "Does not assert universal invariance.",
+      "Does not assert projection uniqueness.",
+      "Does not assert projection invertibility."
+    ]
+  },
+  "trace": [
+    {
+      "step": 1,
+      "operation": "declare_source",
+      "input": "Core Expression",
+      "reading": "A provisional generative label is used for projection typing only and remains distinct from RT_core."
+    },
+    {
+      "step": 2,
+      "operation": "declare_domain",
+      "input": "projection_regime_xb",
+      "reading": "The receiving domain is declared before projection is formed."
+    },
+    {
+      "step": 3,
+      "operation": "type_projection",
+      "input": "pi(projection_regime_xb, tau, Adm_projection_049)",
+      "reading": "The projection is typed by domain, scale, and admissibility."
+    },
+    {
+      "step": 4,
+      "operation": "project",
+      "input": "pi(projection_regime_xb, tau, Adm_projection_049)(Core Expression)",
+      "output": "RT_x049",
+      "reading": "The projection yields a candidate RT witness rather than an identity claim."
+    },
+    {
+      "step": 5,
+      "operation": "verify_closure",
+      "input": "RT_x049",
+      "reading": "Closure eligibility is checked after projection and before any completion claim."
+    },
+    {
+      "step": 6,
+      "operation": "check_identity_continuity",
+      "input": "RT_x049",
+      "reading": "Identity continuity is preserved in this witness because the completed RT remains the same governed identity after closure verification."
+    },
+    {
+      "step": 7,
+      "operation": "record_variant_carriers",
+      "input": "RT_x049",
+      "reading": "Residue, orientation, state, scale-expression, metric value, and slot role may vary by receiving domain."
+    }
+  ],
+  "witness": {
+    "projected_rt": "RT_x049",
+    "identity_continuity": "preserved_in_witness",
+    "closure_eligibility": "preserved_if_verified",
+    "variant_carriers": [
+      "residue",
+      "orientation",
+      "state",
+      "scale_expression",
+      "metric value",
+      "slot role"
+    ]
+  },
+  "counterexample_link": "docs/governance/projection_counterexample_049.json",
+  "forbidden_inferences": [
+    "Projection does not imply residue preservation across all domains.",
+    "Projection does not imply orientation preservation across all domains.",
+    "Projection does not imply slot-role symmetry.",
+    "Projection does not identify the Core Expression with RT_core."
+  ]
+}
