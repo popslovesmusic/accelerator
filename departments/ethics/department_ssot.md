@@ -4,7 +4,7 @@ This document is the local SSOT for the Ethics Department (`ethics_app`).
 
 It governs ethical-domain interpretation, derived vocabulary, provisional models, evaluation proposals, and validation status for ethics-facing work derived from the Mono-Process Framework.
 
-The Ethics Department is subordinate to the global core and the Mathematics Department. It does not define RT/Core, primitive operators, formal admissibility, formal residue, or theorem status. It interprets selected formal structures as possible ethical-domain projections through explicit derivation and correspondence rules.
+The Ethics Department is subordinate to the global core and the Mathematics Department. It does not define RT/Core, primitive operators, formal admissibility, formal residue, or theorem status. In this SSOT, every primitive is treated as RT-governed and traced to `RT_core`, but not every RT-governed expression is primitive; RT-derived continuations, projections, and operational regimes remain RT without being primitive. It interprets selected formal structures as possible ethical-domain projections through explicit derivation and correspondence rules.
 
 ---
 

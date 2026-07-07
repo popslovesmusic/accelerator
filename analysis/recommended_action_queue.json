@@ -8,67 +8,34 @@
     "governance/live/department_registry.json",
     "governance/live/department_layout_manifest.json",
     "governance/live/authority_manifest.json",
-    "outputs/audits/global_health_report.json"
+    "outputs/audits/global_health_report.json",
+    "outputs/audits/proof_elevation_follow_through_001.json",
+    "outputs/audits/math_counterexample_continuation_006.json",
+    "outputs/audits/math_campaign_phase_3_repair_priority_001.json"
   ],
-  "ordering_rule": "canonical execution order first, then bounded empirical preparation, then downstream maintenance breadth",
+  "ordering_rule": "phase-3 repair first after formal follow-through and declared-vector exhaustion, then downstream maintenance breadth",
   "items": [
     {
       "recommendation_id": "ANL_REC_001",
       "priority_rank": 1,
-      "recommended_action": "Continue PHASE_1 formal follow-through for PROOF-ELEVATION-CAMPAIGN-001 and MT-PROOF-ELEVATION-001.",
-      "supporting_evidence": [
-        "registry/math/math_campaign_execution_order.json: PHASE_1_FORMAL_FOLLOW_THROUGH is the canonical next phase",
-        "registry/math/proof_elevation_campaign_registry.json: target_blockers is empty and status remains in_progress",
-        "registry/math/mt_proof_elevation_campaign_registry.json: theorem-strengthening blockers are cleared and the campaign remains active for formal artifact follow-through"
-      ],
-      "affected_domains": [
-        "mathematics"
-      ],
-      "dependencies": [],
-      "expected_benefit": "Keeps theorem-readiness moving on the live canonical path without reintroducing stale blocker assumptions.",
-      "confidence": 0.96,
-      "rationale": "The live execution order places formal follow-through first, and the proof-elevation registries no longer record the old shared prerequisite cluster as an active blocker."
-    },
-    {
-      "recommendation_id": "ANL_REC_002",
-      "priority_rank": 2,
-      "recommended_action": "Continue MT-COUNTEREXAMPLE-001 with the bounded operator_chain_nonclosure vector after the completed window-boundary branch.",
-      "supporting_evidence": [
-        "outputs/audits/math_counterexample_continuation_006.json: operator_chain_nonclosure is the current bounded branch and no declared vectors remain",
-        "outputs/audits/math_counterexample_continuation_006.md: continuation projection records operator_chain_nonclosure as the current declared vector",
-        "outputs/math_tests/rc031_delta_multi_branch_composition_result.json: recursive operator chaining remains symbolically supported",
-        "registry/math/rc031_delta_multi_branch_composition_registry.json: RC-031 governs bounded multi-branch operator chaining behavior"
-      ],
-      "affected_domains": [
-        "mathematics"
-      ],
-      "dependencies": [
-        "window_boundary_branch_complete"
-      ],
-      "expected_benefit": "Keeps the counterexample campaign moving on the next undeployed vector while preserving the repaired provenance boundary.",
-      "confidence": 0.92,
-      "rationale": "The live continuation state leaves operator_chain_nonclosure as the final undeployed declared vector after the window-boundary branch, and RC-031 provides a bounded support surface for recursive operator chaining."
-    },
-    {
-      "recommendation_id": "ANL_REC_003",
-      "priority_rank": 3,
       "recommended_action": "Continue the active repair and unresolved-structure queues.",
       "supporting_evidence": [
         "governance/live/master_work_index.json: SIM-REPAIR-QUEUE-001 is active with next_action execute repair track",
         "governance/live/master_work_index.json: VAL-RC-EXEC-001 is active with next_action execute repair track",
-        "governance/live/master_work_index.json: VAL-URS-RES-001 is active with next_action resolve queued structure item"
+        "governance/live/master_work_index.json: VAL-URS-RES-001 is active with next_action resolve queued structure item",
+        "outputs/audits/math_campaign_phase_3_repair_priority_001.json: the current live reduction focus shifts to phase 3 repair and unresolved-structure queues"
       ],
       "affected_domains": [
         "mathematics"
       ],
       "dependencies": [],
-      "expected_benefit": "Keeps active repair work from accumulating latent delay and preserves downstream resolution capacity after the current campaign follow-through steps.",
-      "confidence": 0.92,
-      "rationale": "These items are already active and have explicit next actions with no recorded blockers."
+      "expected_benefit": "Keeps the remaining live reduction queues moving after formal follow-through and declared-vector exhaustion.",
+      "confidence": 0.97,
+      "rationale": "The proof follow-through sync passed, the counterexample declared-vector chain is exhausted, and the runtime debt projection is empty."
     },
     {
-      "recommendation_id": "ANL_REC_004",
-      "priority_rank": 4,
+      "recommendation_id": "ANL_REC_002",
+      "priority_rank": 2,
       "recommended_action": "Preserve research-campaign momentum while the mathematical backlog is reduced.",
       "supporting_evidence": [
         "governance/live/master_work_index.json: BOOK_CAMPAIGN_PHASE_01_MASTER is active",
@@ -91,23 +58,39 @@
       "rationale": "These campaigns remain active, but their blocker count is already explicit and their immediate leverage is lower than the current mathematics sequence."
     },
     {
-      "recommendation_id": "ANL_REC_005",
-      "priority_rank": 5,
-      "recommended_action": "Keep the two remaining governance/runtime debt items explicitly open and prioritize DEBT_DB_GOVERNANCE_RUNTIME_EVENT_REPLAY_006 before any further validation-sensitive repository changes; PATCH_PI_RT_CALCULUS_022 now governs continuation failure semantics separately and does not reduce the DB debt count.",
+      "recommendation_id": "ANL_REC_003",
+      "priority_rank": 3,
+      "recommended_action": "Keep the proof-elevation and counterexample artifacts on watchlist only.",
       "supporting_evidence": [
-        "scripts/query_governance.py current-state --pretty: open_debt lists DEBT_DB_GOVERNANCE_RUNTIME_STATE_002 and DEBT_DB_GOVERNANCE_RUNTIME_EVENT_REPLAY_006 as the only remaining open items",
-        "registry/research_debt_registry.json: DEBT_DB_GOVERNANCE_RUNTIME_EVENT_REPLAY_006 remains partially_resolved with resolution_priority before_validation",
-        "registry/research_debt_registry.json: DEBT_DB_GOVERNANCE_RUNTIME_STATE_002 remains partially_resolved with resolution_priority future",
-        "registry/governance/patches/PATCH_PI_RT_CALCULUS_022.json: continuation failure semantics are now governed separately from the DB runtime debt items"
+        "outputs/audits/proof_elevation_follow_through_001.json: follow-through sync passed without promotion",
+        "outputs/audits/math_counterexample_continuation_006.json: declared_vectors_remaining is empty",
+        "registry/math/formal_candidate_readiness_registry.json: MT-001, MT-002, and MT-003 readiness entries are formal"
+      ],
+      "affected_domains": [
+        "mathematics"
+      ],
+      "dependencies": [],
+      "expected_benefit": "Keeps already-synchronized proof and counterexample artifacts from being mistaken for current reduction work.",
+      "confidence": 0.89,
+      "rationale": "Formal follow-through and declared-vector exhaustion are watchlist context, not the current live reduction path."
+    },
+    {
+      "recommendation_id": "ANL_REC_004",
+      "priority_rank": 4,
+      "recommended_action": "Keep governance/runtime debt watchlisted only; the runtime currently reports no open debt.",
+      "supporting_evidence": [
+        "scripts/query_governance.py current-state --pretty: open_debt_count = 0",
+        "scripts/query_governance.py current-state --pretty: live_blocker_count = 0",
+        "outputs/audits/global_health_report.json: db_validation status pass"
       ],
       "affected_domains": [
         "governance",
         "registry"
       ],
       "dependencies": [],
-      "expected_benefit": "Surfaces the current priority debt directly so analysis work does not misroute validation-sensitive changes around the unresolved DB governance runtime replay and state projection gaps.",
-      "confidence": 0.97,
-      "rationale": "The live governance runtime still reports two open debt items after the continuation-failure patch is recorded, and event replay remains the only remaining before-validation debt."
+      "expected_benefit": "Prevents closed runtime debt from being mistaken for current live priority.",
+      "confidence": 0.98,
+      "rationale": "The governance runtime now reports no open debt or live blockers, so this lane is historical residue rather than an active reduction item."
     }
   ]
 }

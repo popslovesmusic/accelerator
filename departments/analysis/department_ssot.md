@@ -4,7 +4,7 @@ This document is the local SSOT for the Analysis Department.
 
 It governs program-state assessment, dependency analysis, priority ranking, and recommendation synthesis from governed evidence.
 
-The Analysis Department is subordinate to the global core, global governance, and the Mathematics Department. It does not define RT/Core, primitive operators, formal admissibility, formal residue, theorem status, or executable authority. It consumes live ledgers, the Work Reduction Framework, the Master Work Index, and the department relationship registry, then outputs recommendations only.
+The Analysis Department is subordinate to the global core, global governance, and the Mathematics Department. It does not define RT/Core, primitive operators, formal admissibility, formal residue, theorem status, or executable authority. In this SSOT, every primitive is treated as RT-governed and traced to `RT_core`, but not every RT-governed expression is primitive; RT-derived continuations, projections, and operational regimes remain RT without being primitive. It consumes live ledgers, the Work Reduction Framework, the Master Work Index, and the department relationship registry, then outputs recommendations only.
 
 ---
 
@@ -122,32 +122,32 @@ Each recommendation should carry:
 ## Initial Recommendation Entries
 
 #### ANL_REC_001
-- **Title:** Continue formal follow-through on the live math path
-- **Source Evidence:** `registry/math/math_campaign_execution_order.json`, `registry/math/proof_elevation_campaign_registry.json`, `registry/math/mt_proof_elevation_campaign_registry.json`
-- **Recommendation:** continue `PROOF-ELEVATION-CAMPAIGN-001` and `MT-PROOF-ELEVATION-001`, because the live math execution order places formal follow-through first and the old shared prerequisite blocker model is no longer authoritative.
-- **Claim Class:** `C3_structural_comparison`
+- **Title:** Continue active repair and unresolved-structure queues
+- **Source Evidence:** `governance/live/master_work_index.json`, `outputs/audits/math_campaign_phase_3_repair_priority_001.json`
+- **Recommendation:** continue the active repair queue items and unresolved structure queue items because the live reduction focus has shifted to phase 3 repair after formal follow-through and declared-vector exhaustion.
+- **Claim Class:** `C1_model_relative`
 - **Status:** deterministic recommendation
 
 #### ANL_REC_002
-  - **Title:** Maintain theorem-readiness follow-through
-  - **Source Evidence:** `outputs/audits/math_counterexample_continuation_006.json`, `outputs/audits/math_counterexample_continuation_006.md`, `outputs/math_tests/rc031_delta_multi_branch_composition_result.json`, `registry/math/rc031_delta_multi_branch_composition_registry.json`, `registry/math/mt_counterexample_campaign_registry.json`
-  - **Recommendation:** continue `MT-COUNTEREXAMPLE-001` with bounded `operator_chain_nonclosure`, because the completed window-boundary branch leaves operator_chain_nonclosure as the final undeployed declared vector and RC-031 keeps recursive operator chaining symbolically supported.
-  - **Claim Class:** `C3_structural_comparison`
+  - **Title:** Preserve research-campaign momentum
+  - **Source Evidence:** `governance/live/master_work_index.json`
+  - **Recommendation:** preserve research-campaign momentum while the mathematical backlog is reduced because the active research campaigns remain underway and their blocker count is already explicit.
+  - **Claim Class:** `C1_model_relative`
   - **Status:** deterministic recommendation
 
 #### ANL_REC_003
-- **Title:** Continue documentation debt reduction
-- **Source Evidence:** `governance/live/master_work_index.json`, `departments/documentation/department_ssot.md`, `docs/textbook/mono_process_textbook_complete.md`, `docs/theory/foundational/5_03_26 unity/math/notes/0007_rt_calculus_specification_v1_0_consolidation.md`, `registry/governance/patches/PATCH_PI_RT_CALCULUS_045.json`
-- **Recommendation:** continue documentation synchronization and documentation debt reduction because documentation drift remains governed work, and the RT Calculus v1.0 consolidation now adds a release-level specification surface that should be reflected in downstream analysis artifacts.
+- **Title:** Keep proof-elevation and counterexample artifacts on watchlist
+- **Source Evidence:** `outputs/audits/proof_elevation_follow_through_001.json`, `outputs/audits/math_counterexample_continuation_006.json`, `registry/math/formal_candidate_readiness_registry.json`
+- **Recommendation:** keep the proof-elevation and counterexample artifacts on watchlist only because the follow-through sync passed, the counterexample declared-vector chain is exhausted, and the formal candidate readiness registry is already settled.
 - **Claim Class:** `C1_model_relative`
-- **Status:** deterministic recommendation
+  - **Status:** deterministic recommendation
 
 #### ANL_REC_004
-- **Title:** Continue lexicon hardening as residual cleanup
-- **Source Evidence:** `governance/live/master_work_index.json`, `outputs/audits/global_health_report.json`, `registry/lexicon_validation_registry.json`
-- **Recommendation:** continue `lexicon debt reduction` as residual cleanup because the validation registry now has zero `gap_open` entries, but provisional lexicon entries still require hardening where recoverable outputs exist.
+- **Title:** Keep governance/runtime debt watchlisted only
+- **Source Evidence:** `scripts/query_governance.py current-state --pretty`, `outputs/audits/global_health_report.json`
+- **Recommendation:** keep governance/runtime debt watchlisted only because the runtime currently reports no open debt and no live blockers.
 - **Claim Class:** `C1_model_relative`
-- **Status:** deterministic recommendation
+  - **Status:** deterministic recommendation
 
 ---
 
@@ -155,16 +155,16 @@ Each recommendation should carry:
 
   This is the current single ordered recommendation sequence under the Work Reduction Framework. It is a recommendation only and does not authorize execution by itself.
   
-  1. `PROOF-ELEVATION-CAMPAIGN-001` and `MT-PROOF-ELEVATION-001` formal follow-through
-  1. `math debt reduction` for bounded `operator_chain_nonclosure` continuation of `MT-COUNTEREXAMPLE-001`
-  1. `documentation debt reduction`, including RT Calculus v1.0 consolidation sync
-  1. `lexicon debt reduction` for residual hardening only
-
+  1. `active repair` and `unresolved-structure` queues
+  1. `research-campaign momentum` while the mathematical backlog is reduced
+  1. `proof-elevation` and `counterexample` artifacts remain watchlist-only context
+  1. `governance/runtime debt` remains watchlisted only
+  
   Ordering basis:
-  - `PROOF-ELEVATION-CAMPAIGN-001` and `MT-PROOF-ELEVATION-001` are first because the canonical math execution order places formal follow-through in phase one.
-  - `math debt reduction` remains second for the counterexample campaign because the window-boundary branch is complete and the next declared bounded vector is `operator_chain_nonclosure`.
-  - `documentation debt reduction`, including RT Calculus v1.0 consolidation sync, is third because documentation drift still affects discoverability and onboarding across the governed surfaces, and the new release-level specification index should be reflected in downstream analysis artifacts.
-  - `lexicon debt reduction` is fourth because the validation registry now has no `gap_open` entries, so the remaining lexicon work is residual hardening rather than leading backlog pressure.
+  - `active repair` and `unresolved-structure` queues are first because the live master index still reports them active with explicit next actions after the follow-through handoff.
+  - `research-campaign momentum` is second because the research campaigns remain active but are lower leverage than the immediate repair work.
+  - `proof-elevation` and `counterexample` artifacts are third because the follow-through sync passed and the counterexample declared-vector chain is exhausted, so they are watchlist context rather than the current live reduction path.
+  - `governance/runtime debt` is fourth because the live governance runtime reports no open debt and no live blockers.
 
 ---
 

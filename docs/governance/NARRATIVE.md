@@ -79,6 +79,15 @@ This order is governance infrastructure first, theory backfill second. No downst
 
 ---
 
+### 5.2 Historical Specification Handling
+Historical specification artifacts remain useful for lineage, but they are not current authority.
+
+When a proposal-shaped specification, superseded note, or archived narrative differs from the live ledgers, the live ledgers define current governance state and the older material is read as historical residue only.
+
+Use this boundary to keep archived specifications from being mistaken for executable governance, and to keep current routing anchored in the live authority surfaces.
+
+---
+
 ### Where to Start?
 1.  **Read `registry/tool_manifest.json`:** See the 38 tools available to you.
 2.  **Check `docs/reports/TOOL_SCIENTIFIC_RIGOR_REPORT_2026-04-30.md`:** See which tools are C4-ready and which are blocked.

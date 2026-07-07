@@ -17,6 +17,7 @@ The math core does not elevate theorems, close ontology, or justify physics\_phy
   - **`reports/`**: Tool scientific rigor reports and ecosystem audits.
   - **`theory/`**: Mathematical grounding and research findings.
   - **`math/`**: Mathematical codex + math program validation (restricted, non-physics).
+- **`departments/`**: Peer department roots, each with a local `README.md`, `AGENTS.md`, and SSOT.
 - **`tools/`**: Simulation engines (C++ and Python comparison suite).
   - Each tool contains its own `validation/` directory with C4 evidence artifacts.
 - **`configs/`**: Standardized experiment configurations.
@@ -32,7 +33,7 @@ The math core does not elevate theorems, close ontology, or justify physics\_phy
 
 ## 🚀 Quick Start
 
-1. **Onboarding:** Read [ONBOARDING.md](ONBOARDING.md), then [docs/governance/NARRATIVE.md](docs/governance/NARRATIVE.md) and [docs/AGENTS.md](docs/AGENTS.md).
+1. **Onboarding:** Read [ONBOARDING.md](ONBOARDING.md), then [departments/README.md](departments/README.md), [docs/governance/NARRATIVE.md](docs/governance/NARRATIVE.md), and [docs/AGENTS.md](docs/AGENTS.md).
 2. **Status Check:** Review the latest [Scientific Rigor Report](docs/reports/TOOL_SCIENTIFIC_RIGOR_REPORT_2026-04-30.md).
 3. **Execute:** Run the governed multi-sim runner:
    ```bash

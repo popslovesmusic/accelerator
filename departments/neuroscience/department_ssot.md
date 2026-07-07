@@ -4,7 +4,7 @@ This document is the local SSOT for the Neuroscience Department (`neuroscience_a
 
 It governs neuroscience-domain interpretation, derived vocabulary, provisional models, validation status, and department-local claim boundaries for neuroscience-facing work derived from the Mono-Process Framework.
 
-The Neuroscience Department is subordinate to the global core and the Mathematics Department. It does not define RT/Core, primitive operators, formal admissibility, formal residue, or theorem status. It interprets selected formal structures as neuroscience-domain projections through explicit derivation and correspondence rules.
+The Neuroscience Department is subordinate to the global core and the Mathematics Department. It does not define RT/Core, primitive operators, formal admissibility, formal residue, or theorem status. In this SSOT, every primitive is treated as RT-governed and traced to `RT_core`, but not every RT-governed expression is primitive; RT-derived continuations, projections, and operational regimes remain RT without being primitive. It interprets selected formal structures as neuroscience-domain projections through explicit derivation and correspondence rules.
 
 ---
 

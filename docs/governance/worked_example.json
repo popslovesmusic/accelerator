@@ -1,0 +1,109 @@
+{
+  "document_id": "DOC_WORKED_EXAMPLE_046_REVISION_001",
+  "artifact_type": "worked_example_revision",
+  "status": "DRAFT_PROVISIONAL",
+  "scope": "documentation_only",
+  "source_patch_id": "PATCH_PI_RT_CALCULUS_046",
+  "revision_target": "DOC_WORKED_EXAMPLE_046",
+  "purpose": "Revise the worked example so that RT nesting is shown as an ordered continuation process: continuation, normalization, RT closure, domain rebinding, role occupancy, and candidate nested RT formation.",
+  "provenance_alignment": {
+    "source_patch_id": "PATCH_PI_RT_CALCULUS_046",
+    "source_basis_patch": "PATCH_PI_RT_CALCULUS_045",
+    "source_surfaces": [
+      "docs/governance/worked_example.md",
+      "docs/governance/worked_example_operational_046.json",
+      "docs/governance/admissibility_trace_046.json",
+      "docs/governance/swap_test_046.json",
+      "docs/textbook/mono_process_textbook_complete.md"
+    ],
+    "status": "candidate_only",
+    "note": "This revision is aligned to the proposed registry candidate and remains documentation-only until the registry gate accepts PATCH_PI_RT_CALCULUS_046."
+  },
+  "claim_humility": {
+    "current_status": "candidate_witness_only",
+    "non_claims": [
+      "Does not assert A-slot/E-slot symmetry.",
+      "Does not assert universal RT occupancy.",
+      "Does not assert theorem status.",
+      "Does not modify RT_core.",
+      "Does not identify OPEN_BRIDGE_001 closure with basin closure.",
+      "Does not promote <*>_x from meta-language construct to proof operator."
+    ]
+  },
+  "canonical_pipeline": [
+    "Continuation C",
+    "Normalization NF(C)",
+    "RT closure",
+    "Explicit domain rebinding into receiving domain x",
+    "Role occupancy as A-slot or E-slot",
+    "Candidate nested RT expression"
+  ],
+  "example": {
+    "example_name": "Shared-substrate A/E occupant pair",
+    "premises": [
+      "C_A denotes a candidate continuation intended for possible A-slot occupancy.",
+      "C_E denotes a candidate continuation intended for possible E-slot occupancy.",
+      "NF(C_A) yields CompletedRT_A only if C_A closes under the governing RT condition.",
+      "NF(C_E) yields CompletedRT_E only if C_E closes under the governing RT condition.",
+      "x declares the shared receiving nesting domain.",
+      "S denotes the shared substrate/scale of the receiving A|E window.",
+      "r records residue/history for the enclosing window."
+    ],
+    "ordered_construction": {
+      "A_path": [
+        "C_A",
+        "NF(C_A)",
+        "CompletedRT_A := RT(NF(C_A))",
+        "Rebind_x(CompletedRT_A)",
+        "A_x(CompletedRT_A)"
+      ],
+      "E_path": [
+        "C_E",
+        "NF(C_E)",
+        "CompletedRT_E := RT(NF(C_E))",
+        "Rebind_x(CompletedRT_E)",
+        "E_x(CompletedRT_E)"
+      ],
+      "candidate_nesting": "<A_x(CompletedRT_A) | E_x(CompletedRT_E)>_r"
+    },
+    "admissibility_rule": {
+      "rule_id": "AE_SLOT_OCCUPANCY_WITNESS_RULE_001",
+      "statement": "A completed RT may appear in an A-slot or E-slot only after it is explicitly rebound into the receiving domain x and typed according to the slot it occupies.",
+      "forbidden_inference": "RT(X) alone does not imply automatic admissibility into A or E."
+    },
+    "swap_test": {
+      "test": "<A_x(CompletedRT_E) | E_x(CompletedRT_A)>_r",
+      "interpretation": "The swapped construction must be checked independently. If admissibility changes under swap, A/E occupancy is role-asymmetric or domain-dependent."
+    }
+  },
+  "audit_results_supported_by_this_revision": [
+    "The example supports candidate slot occupancy only under explicit rebinding.",
+    "The example supports the ordering: closure precedes rebinding; rebinding precedes occupancy.",
+    "The example does not prove role symmetry.",
+    "The example does not prove universal nesting.",
+    "The example preserves the distinction between R as relation and r as residue/history."
+  ],
+  "required_followup": [
+    {
+      "id": "CHECK_046_A",
+      "status": "PARTIALLY_SATISFIED",
+      "note": "A structural worked witness now exists, but a content-filled operational example is still needed."
+    },
+    {
+      "id": "CHECK_046_B",
+      "status": "OPEN",
+      "task": "Cross-check basin closure against OPEN_BRIDGE_001 closure."
+    },
+    {
+      "id": "CHECK_046_C",
+      "status": "OPEN",
+      "task": "Determine whether A-slot and E-slot admissibility are symmetric, asymmetric, or domain-dependent."
+    },
+    {
+      "id": "CHECK_046_D",
+      "status": "DEFERRED",
+      "task": "Delay textbook correction until a content-filled example validates."
+    }
+  ],
+  "agent_instruction": "Replace DOC_WORKED_EXAMPLE_046 with this revision only as a provisional documentation artifact. Do not promote Patch 046 to applied status, do not update RT_core, and do not modify textbook surfaces until CHECK_046_A is fully satisfied by a content-filled operational example."
+}

@@ -7,12 +7,12 @@ Analysis-only ranking for mathematics work in `governance/live/master_work_index
 - Mathematics campaign items in the live index: 5.
 - Campaign items with explicit blockers: 0.
 - Independent math work items found: 6.
-- The canonical next phase is `PHASE_1_FORMAL_FOLLOW_THROUGH`.
+- The proof follow-through sync passed, the counterexample declared-vector chain is exhausted, and the runtime debt projection is empty.
 
 ## Ranked Reduction Plan
-1. Continue `PROOF-ELEVATION-CAMPAIGN-001` and `MT-PROOF-ELEVATION-001`.
-2. Continue `MT-COUNTEREXAMPLE-001` with bounded `nonlocal_transport_fragmentation` after the completed `orientation_locking` direct run.
-3. Continue `SIM-REPAIR-QUEUE-001`, `VAL-RC-EXEC-001`, and `VAL-URS-RES-001`.
+1. Continue `SIM-REPAIR-QUEUE-001`, `VAL-RC-EXEC-001`, and `VAL-URS-RES-001`.
+2. Preserve `research-campaign` momentum while the mathematical backlog is reduced.
+3. Keep `PROOF-ELEVATION-CAMPAIGN-001` and `MT-COUNTEREXAMPLE-001` on watchlist only.
 
 ## Independent Work
 - `PD_CG_ROOT_TRACE_FALSIFICATION_CAMPAIGN_V1` can proceed independently.
@@ -23,10 +23,11 @@ Analysis-only ranking for mathematics work in `governance/live/master_work_index
 - `VAL-URS-RES-001` can proceed independently.
 
 ## Critical Path
-The current critical path is campaign follow-through rather than prerequisite discharge:
-- `PROOF-ELEVATION-CAMPAIGN-001`
-- `MT-PROOF-ELEVATION-001`
-- `MT-COUNTEREXAMPLE-001`
+The current critical path is phase-3 repair and confirmation:
+- `SIM-REPAIR-QUEUE-001`
+- `VAL-RC-EXEC-001`
+- `VAL-URS-RES-001`
+- `PROOF-ELEVATION-CAMPAIGN-001` and `MT-COUNTEREXAMPLE-001` remain watchlist context only.
 
 ## What This Does Not Prove
 - It does not execute or close any governed work.

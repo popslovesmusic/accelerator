@@ -4,7 +4,7 @@ This document is the local SSOT for the Analysis Intake Department.
 
 It governs ingestion, parsing, claim extraction, classification, deduplication, routing, and proposal generation for structured packets and raw human notes.
 
-The Analysis Intake Department is subordinate to the global core, global governance, the Analysis Department, and the Mathematics Department. It does not define RT/Core, primitive operators, formal admissibility, formal residue, theorem status, or executable authority. It converts provisional input into proposed governed artifacts only.
+The Analysis Intake Department is subordinate to the global core, global governance, the Analysis Department, and the Mathematics Department. It does not define RT/Core, primitive operators, formal admissibility, formal residue, theorem status, or executable authority. In this SSOT, every primitive is treated as RT-governed and traced to `RT_core`, but not every RT-governed expression is primitive; RT-derived continuations, projections, and operational regimes remain RT without being primitive. It converts provisional input into proposed governed artifacts only.
 
 ---
 

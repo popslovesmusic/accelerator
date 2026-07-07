@@ -1,0 +1,108 @@
+{
+  "artifact_id": "worked_example_operational_046",
+  "source_patch_id": "PATCH_PI_RT_CALCULUS_046",
+  "status": "DRAFT_PROVISIONAL",
+  "scope": "governance_execution_surface",
+  "claim_class": "C0_TEXTBOOK_PROVENANCE_REPAIR",
+  "purpose": "Instantiate the PATCH_PI_RT_CALCULUS_046 worked witness with existing basin/projection content rather than a structural placeholder.",
+  "source_artifacts": [
+    {
+      "path": "outputs/compression/dependency_graph_v1.json",
+      "status": "current_artifact",
+      "used_for": "basin and geometry_proj object content"
+    },
+    {
+      "path": "outputs/compression/MONO_PROCESS_COMPRESSED_SCHEMA_V1.md",
+      "status": "draft_proposed_compression",
+      "used_for": "projection-layer and basin-formation language only"
+    },
+    {
+      "path": "docs/governance/worked_example.json",
+      "status": "provisional_documentation",
+      "used_for": "canonical ordered pipeline"
+    }
+  ],
+  "receiving_window": {
+    "id": "W_BASIN_PROJECTION_046",
+    "expression": "<A_x(BasinClosureRT_B0) | E_x(GeometryProjectionRT_tau)>_r_bp046",
+    "x": "projection_regime_xb",
+    "shared_substrate_or_scale": "stabilized continuation paths expressed as procedural update density over a scale boundary",
+    "residue": "r_bp046 records the basin-to-projection construction history for this witness only"
+  },
+  "continuations": {
+    "C_A": {
+      "label": "basin continuation",
+      "source_object": "basin",
+      "content": {
+        "generated_by": "recursive fixed-point attraction under <=>_R",
+        "constrained_by": "finite flux and local density",
+        "preserved_by": "monotonic admissibility narrowing",
+        "falsified_by": "admissibility collapse where D_rel > W_adm",
+        "reduces_to": "stabilized continuation paths"
+      },
+      "intended_slot": "A-slot",
+      "role_reason": "The basin object supplies the admissibility-window side of the receiving A|E distinction."
+    },
+    "C_E": {
+      "label": "projection continuation",
+      "source_object": "geometry_proj",
+      "content": {
+        "generated_by": "cross-basin projection (<=>_xb) of micro-update density",
+        "constrained_by": "scale threshold tau",
+        "preserved_by": "distinguishability conservation_app",
+        "falsified_by": "projection failure where density < tau",
+        "reduces_to": "procedural update density over scale boundary"
+      },
+      "intended_slot": "E-slot",
+      "role_reason": "The projection object supplies the expressed projection side of the receiving A|E distinction."
+    }
+  },
+  "normalization": {
+    "NF(C_A)": {
+      "result": "BasinClosureRT_B0",
+      "completed_rt_condition": "All required content fields are present: generator, constraint, preservation, falsifier, and reduction target.",
+      "closure_reading": "C_A is treated as completed only as a basin-closure witness internal to the cited dependency graph."
+    },
+    "NF(C_E)": {
+      "result": "GeometryProjectionRT_tau",
+      "completed_rt_condition": "All required content fields are present: generator, constraint, preservation, falsifier, and reduction target.",
+      "closure_reading": "C_E is treated as completed only as a projection witness internal to the cited dependency graph."
+    }
+  },
+  "rt_closure": {
+    "BasinClosureRT_B0": {
+      "distinguishability_source": "finite flux and local density distinguish basin continuity from collapse",
+      "admissibility_source": "monotonic admissibility narrowing",
+      "continuation_source": "stabilized continuation paths",
+      "residue_source": "preservation by recursive fixed-point attraction under <=>_R",
+      "failure_boundary": "D_rel > W_adm"
+    },
+    "GeometryProjectionRT_tau": {
+      "distinguishability_source": "micro-update density across a scale boundary",
+      "admissibility_source": "scale threshold tau",
+      "continuation_source": "procedural update density over scale boundary",
+      "residue_source": "cross-basin projection history under <=>_xb",
+      "failure_boundary": "density < tau"
+    }
+  },
+  "domain_rebinding": {
+    "Rebind_x(BasinClosureRT_B0)": {
+      "target_domain": "projection_regime_xb",
+      "slot_type": "A_x",
+      "rebound_expression": "A_x(BasinClosureRT_B0)",
+      "admissibility_after_rebinding": "admissible as A-slot candidate only because the basin object is explicitly typed as the admissibility-window occupant for W_BASIN_PROJECTION_046"
+    },
+    "Rebind_x(GeometryProjectionRT_tau)": {
+      "target_domain": "projection_regime_xb",
+      "slot_type": "E_x",
+      "rebound_expression": "E_x(GeometryProjectionRT_tau)",
+      "admissibility_after_rebinding": "admissible as E-slot candidate only because the projection object is explicitly typed as the expressed projection occupant for W_BASIN_PROJECTION_046"
+    }
+  },
+  "candidate_nested_rt": {
+    "expression": "<A_x(BasinClosureRT_B0) | E_x(GeometryProjectionRT_tau)>_r_bp046",
+    "status": "candidate_witness_only",
+    "supported_reading": "The witness shows candidate slot occupancy after normalization, RT closure, and explicit rebinding.",
+    "unsupported_reading": "The witness does not prove universal A/E nesting, role symmetry, projection-from-core, or theorem status."
+  }
+}

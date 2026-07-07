@@ -4,7 +4,7 @@ This document is the local SSOT for the Theology Department (`theology_app` / `p
 
 It governs theology-domain interpretation, derived vocabulary, provisional comparison rules, validation status, and department-local claim boundaries for theology-facing work derived from the Mono-Process Framework.
 
-The Theology Department is subordinate to the global core and the Mathematics Department. It does not define RT/Core, primitive operators, formal admissibility, formal residue, or theorem status. It interprets selected formal structures as theology-domain projections through explicit derivation, correspondence, and analogy rules.
+The Theology Department is subordinate to the global core and the Mathematics Department. It does not define RT/Core, primitive operators, formal admissibility, formal residue, or theorem status. In this SSOT, every primitive is treated as RT-governed and traced to `RT_core`, but not every RT-governed expression is primitive; RT-derived continuations, projections, and operational regimes remain RT without being primitive. It interprets selected formal structures as theology-domain projections through explicit derivation, correspondence, and analogy rules.
 
 The detailed theology domain registry remains in `docs/theology/procedural_theology_ssot.md`. This department SSOT is the peer-department governance surface for work under `departments/theology/`.
 

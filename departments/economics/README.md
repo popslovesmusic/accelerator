@@ -1,13 +1,17 @@
-# Economics Department Root
+# Economics Department
 
-This peer directory exists to satisfy the governed department layout requirement.
+This directory is the peer root for the Economics Department.
+
+The live local SSOT is `departments/economics/department_ssot.md`, and the local agent rules are in `departments/economics/AGENTS.md`.
+
+The department is inducted as a governed interpretation layer. It interprets selected formal structures as possible economics-domain projections through explicit derivation and correspondence rules, and it does not modify mathematical authority.
 
 Current status:
 - peer root: present
 - department induction: complete
-- local SSOT: present under `departments/economics/department_ssot.md`
-- local AGENTS.md: present under `departments/economics/AGENTS.md`
+- live SSOT: `departments/economics/department_ssot.md`
+- local AGENTS.md: present
 
 Boundary:
 
-Economics content already exists elsewhere in the repository, and this peer root is now bound to the live department SSOT and agent rules.
+Economics reflects governed formal structures as possible economics-domain projections. It does not define them.
