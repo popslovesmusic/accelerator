@@ -1,0 +1,81 @@
+{
+  "artifact_id": "propagation_position_counterexample_005",
+  "artifact_type": "propagation_position_counterexamples",
+  "status": "DRAFT_PROVISIONAL",
+  "scope": "documentation_only",
+  "source_patch_id": "PATCH_RT_METRIC_BRIDGE_PROPAGATION_POSITION_MINIMAL_DEFINITION_005",
+  "revision_target": "PATCH_RT_METRIC_BRIDGE_PROPAGATION_POSITION_MINIMAL_DEFINITION_005",
+  "purpose": "Show the failure cases that prevent propagation position from being misread as speed, a physical propagation constant, or a primitive metric position.",
+  "source_artifacts": [
+    {
+      "path": "docs/governance/propagation_position_minimal_definition_005.json",
+      "status": "current_governance_witness",
+      "used_for": "positional bridge definition and governance bounds"
+    },
+    {
+      "path": "registry/governance/patches/PATCH_RT_METRIC_BRIDGE_PROPAGATION_POSITION_MINIMAL_DEFINITION_005.json",
+      "status": "current_governance_patch",
+      "used_for": "patch provenance and required condition set"
+    },
+    {
+      "path": "registry/governance/patches/PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_RESULTS_003.json",
+      "status": "current_governance_patch",
+      "used_for": "eligibility results and diagnostic boundary"
+    },
+    {
+      "path": "registry/governance/patches/PATCH_RT_METRIC_BRIDGE_DENSITY_MINIMAL_DEFINITION_004.json",
+      "status": "current_governance_patch",
+      "used_for": "distinction-density bridge quantity and organizational definition"
+    },
+    {
+      "path": "docs/governance/propagation_rate_density_endpoint_candidate_003.json",
+      "status": "current_governance_witness",
+      "used_for": "propagation-position bridge context and endpoint non-realizability reading"
+    },
+    {
+      "path": "docs/textbook/mono_process_textbook_complete.md",
+      "status": "current_textbook_surface",
+      "used_for": "governed bridge-quantity context"
+    }
+  ],
+  "counterexamples": [
+    {
+      "failure_code": "SPEED_EQUIVALENCE",
+      "counterexample": "A coupled interior continuation is treated as if it were already speed.",
+      "why_blocked": "Speed is downstream projection, not identity, and the definition does not import speed as primitive.",
+      "governance_effect": "Reject the speed-equivalence reading."
+    },
+    {
+      "failure_code": "PROPAGATION_CONSTANT_IMPORT",
+      "counterexample": "Propagation position is read as a physical propagation constant.",
+      "why_blocked": "The bridge quantity remains RT-native and does not import propagation constants as foundational terms.",
+      "governance_effect": "Reject the propagation-constant reading."
+    },
+    {
+      "failure_code": "DECOUPLED_ENDPOINT_POSITION",
+      "counterexample": "Propagation position is assumed to exist at a true 0 DOF decoupled endpoint.",
+      "why_blocked": "The positional reading is defined only for coupled interior continuations and not for true decoupled endpoints.",
+      "governance_effect": "Reject the endpoint-realizability reading."
+    }
+  ],
+  "blocked_readings": [
+    "Propagation position is not speed by identity.",
+    "Propagation position is not a physical propagation constant.",
+    "Propagation position is not defined at true 0 DOF decoupled endpoints."
+  ],
+  "claim_humility": {
+    "current_status": "candidate_witness_only",
+    "non_claims": [
+      "Does not prove speed downstreamness outside the framework.",
+      "Does not prove propagation constants are absent from external models.",
+      "Does not modify RT_core.",
+      "Does not assert external physical truth."
+    ]
+  },
+  "non_claims": [
+    "Does not prove speed downstreamness outside the framework.",
+    "Does not prove propagation constants are absent from external models.",
+    "Does not modify RT_core.",
+    "Does not assert external physical truth."
+  ]
+}

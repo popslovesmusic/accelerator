@@ -1,0 +1,82 @@
+{
+  "patch_id": "PATCH_GOVERNANCE_RUNTIME_EVIDENCE_LEVELS_008",
+  "title": "Governance Runtime Evidence Levels",
+  "type": "governance_runtime_extension",
+  "patch_type": "governance_runtime_evidence_levels",
+  "mode": "additive",
+  "status": "APPLIED",
+  "applied_on": "2026-07-09T10:01:43.2502630-04:00",
+  "depends_on": [
+    "PATCH_GOVERNANCE_RUNTIME_LIGHT_GATE_SUMMARY_007"
+  ],
+  "purpose": "Introduce standardized evidence levels for governance runtime queries so callers can request summary, diagnostic, governance, or forensic payloads without changing decision semantics.",
+  "updated_artifacts": [
+    "scripts/query_governance.py",
+    "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/governance_change_ledger.json",
+    "registry/governance_hash_registry.json",
+    "registry/governance/patches/PATCH_GOVERNANCE_RUNTIME_EVIDENCE_LEVELS_008.json"
+  ],
+  "evidence_levels": {
+    "level_0": {
+      "name": "SUMMARY",
+      "purpose": "Human-readable verdict only.",
+      "runtime_path": "light_summary"
+    },
+    "level_1": {
+      "name": "DIAGNOSTIC",
+      "purpose": "Developer troubleshooting.",
+      "runtime_path": "diagnostic"
+    },
+    "level_2": {
+      "name": "GOVERNANCE",
+      "purpose": "Normal governance review.",
+      "runtime_path": "governance"
+    },
+    "level_3": {
+      "name": "FORENSIC",
+      "purpose": "Complete audit reconstruction.",
+      "runtime_path": "forensic"
+    }
+  },
+  "default_behavior": {
+    "interactive_queries": "LEVEL_0",
+    "governance_validation": "LEVEL_2",
+    "promotion_review": "LEVEL_2",
+    "forensic_audit": "LEVEL_3",
+    "summary_alias": "--summary => --level summary"
+  },
+  "fallback_rules": [
+    {
+      "id": "EVL001",
+      "rule": "If the requested level cannot be produced before timeout, automatically fall back one evidence level and report the fallback."
+    },
+    {
+      "id": "EVL002",
+      "rule": "Evidence level changes presentation only; governance decisions must remain identical."
+    },
+    {
+      "id": "EVL003",
+      "rule": "Promotion decisions require LEVEL_2 or higher."
+    }
+  ],
+  "summary": {
+    "status": "pass",
+    "decision_semantics": "unchanged",
+    "summary_mode": "active",
+    "warnings": [
+      "Summary mode is additive and does not alter gate or chain logic.",
+      "Full report generation remains available when --level is omitted."
+    ]
+  },
+  "validation": {
+    "required": [
+      "summary_chain_command_pass",
+      "summary_gate_command_pass",
+      "py_compile_pass",
+      "governance_validation_pass"
+    ],
+    "result": "pass"
+  }
+}

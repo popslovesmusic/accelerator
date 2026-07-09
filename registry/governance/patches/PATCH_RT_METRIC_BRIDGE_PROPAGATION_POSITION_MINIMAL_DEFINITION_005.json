@@ -1,0 +1,282 @@
+{
+  "patch_id": "PATCH_RT_METRIC_BRIDGE_PROPAGATION_POSITION_MINIMAL_DEFINITION_005",
+  "title": "Minimal Propagation Position Definition",
+  "status": "PROPOSED",
+  "type": "provisional_governance_definition",
+  "campaign": "RT Calculus Metric Bridge",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "depends_on": [
+    "PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_001",
+    "PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_TESTS_002",
+    "PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_RESULTS_003",
+    "PATCH_RT_METRIC_BRIDGE_DENSITY_MINIMAL_DEFINITION_004"
+  ],
+  "rt_core_modified": false,
+  "claim_level": "PROVISIONAL_INDUCTION",
+  "mode": "additive",
+  "purpose": "Introduce propagation position as an RT-native bridge quantity that situates a continuation within the bounded symmetry gradient relative to declared reference phi and distinction density rho_D.",
+  "summary": "This patch introduces propagation position as a provisional positional bridge quantity defined organizationally as the location of an admissible continuation within the bounded symmetry gradient relative to declared phi and distinction density. Any later representational equation is downstream and does not serve as the ontological definition.",
+  "basis": {
+    "source_patches": [
+      "PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_001",
+      "PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_TESTS_002",
+      "PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_RESULTS_003",
+      "PATCH_RT_METRIC_BRIDGE_DENSITY_MINIMAL_DEFINITION_004"
+    ],
+    "source_surfaces": [
+      "registry/governance/patches/PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_001.json",
+      "registry/governance/patches/PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_TESTS_002.json",
+      "registry/governance/patches/PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_RESULTS_003.json",
+      "registry/governance/patches/PATCH_RT_METRIC_BRIDGE_DENSITY_MINIMAL_DEFINITION_004.json",
+      "docs/governance/rate_type_eligibility_results_003.json",
+      "docs/governance/distinction_density_minimal_definition_004.json",
+      "docs/governance/propagation_rate_density_endpoint_candidate_003.json",
+      "docs/textbook/mono_process_textbook_complete.md"
+    ],
+    "scope": "Provisional propagation-position witness that defines an RT-native positional bridge quantity downstream of the governed eligibility and distinction-density results while leaving RT_core unchanged and keeping bridge promotion deferred."
+  },
+  "core_rule": {
+    "id": "PP_005_001",
+    "statement": "PROPAGATION_POSITION(x, phi) may be introduced only as an RT-native bridge quantity after phi is declared and after RATE_TYPE_ELIGIBLE(x, phi) and rho_D(x, phi) are defined. Bridge quantities are defined by organizational behavior before representational mathematics, and any later mathematical form is downstream of that definition."
+  },
+  "new_quantity": {
+    "name": "PROPAGATION_POSITION(x, phi)",
+    "symbol": "pi_P(x, phi)",
+    "status": "PROVISIONAL_BRIDGE_QUANTITY",
+    "reading": "The organizational position of an admissible continuation within the bounded symmetry gradient relative to declared reference phi.",
+    "definition": "The RT-native organizational condition describing where a coupled continuation is situated between decoupled endpoint limits, as governed by admissibility, ordered A|E resolution, and distinction density.",
+    "projection_note": "Speed, probability, entropy, statistical likelihood, and physical propagation ceilings are downstream projections of propagation position and are not part of its definition."
+  },
+  "required_conditions": [
+    {
+      "id": "PP001",
+      "condition": "Declared(phi)",
+      "failure": "PROPAGATION_POSITION_UNDECLARED_REFERENCE"
+    },
+    {
+      "id": "PP002",
+      "condition": "RATE_TYPE_ELIGIBLE(x, phi)",
+      "failure": "PROPAGATION_POSITION_RATE_TYPE_INELIGIBLE"
+    },
+    {
+      "id": "PP003",
+      "condition": "rho_D(x, phi) is defined",
+      "failure": "PROPAGATION_POSITION_UNDEFINED_DISTINCTION_DENSITY"
+    },
+    {
+      "id": "PP004",
+      "condition": "CoupledInterior(x, phi)",
+      "failure": "PROPAGATION_POSITION_DECOUPLED_ENDPOINT"
+    },
+    {
+      "id": "PP005",
+      "condition": "Ordered_AE_Resolution(x, phi)",
+      "failure": "PROPAGATION_POSITION_UNORDERED_AE_RESOLUTION"
+    },
+    {
+      "id": "PP006",
+      "condition": "BoundedSymmetryGradient(phi)",
+      "failure": "PROPAGATION_POSITION_NO_BOUNDED_GRADIENT"
+    }
+  ],
+  "bounded_symmetry_gradient_binding": {
+    "lower_endpoint": {
+      "description": "Decoupled 0 DOF lower symmetry limit",
+      "realizability": "Not directly realizable by admissibly coupled continuation"
+    },
+    "upper_endpoint": {
+      "description": "Decoupled 0 DOF upper symmetry limit",
+      "realizability": "Not directly realizable by admissibly coupled continuation"
+    },
+    "interior": {
+      "description": "Coupled admissible continuation regime",
+      "realizability": "Observable and rate-type eligible when required conditions pass"
+    },
+    "position_rule": "pi_P(x, phi) is defined only for coupled interior continuations, not for true decoupled endpoints."
+  },
+  "governing_properties": [
+    {
+      "id": "PPP001",
+      "property": "pi_P is reference-dependent through declared phi."
+    },
+    {
+      "id": "PPP002",
+      "property": "pi_P is undefined at true 0 DOF decoupled endpoints."
+    },
+    {
+      "id": "PPP003",
+      "property": "pi_P requires defined distinction density rho_D but is not identical to rho_D."
+    },
+    {
+      "id": "PPP004",
+      "property": "pi_P changes when ordered A|E resolution changes relative to phi."
+    },
+    {
+      "id": "PPP005",
+      "property": "pi_P does not require metric space."
+    },
+    {
+      "id": "PPP006",
+      "property": "pi_P may later project into speed, probability, entropy, statistics, or propagation-ceiling quantities only through explicit projection rules."
+    }
+  ],
+  "bridge_hierarchy_update": {
+    "status": "PROVISIONAL_ARCHITECTURE",
+    "layers": [
+      {
+        "level": 0,
+        "name": "RT Primitive",
+        "examples": [
+          "Distinction"
+        ]
+      },
+      {
+        "level": 1,
+        "name": "RT Derived Bridge Quantity",
+        "examples": [
+          "Distinction Density"
+        ]
+      },
+      {
+        "level": 2,
+        "name": "RT Positional Bridge Quantity",
+        "examples": [
+          "Propagation Position"
+        ]
+      },
+      {
+        "level": 3,
+        "name": "Projection Quantity",
+        "examples": [
+          "Probability",
+          "Statistics",
+          "Entropy",
+          "Propagation Ceiling",
+          "Speed"
+        ]
+      },
+      {
+        "level": 4,
+        "name": "Measured Quantity",
+        "examples": [
+          "Observed probability",
+          "Measured entropy",
+          "Measured speed",
+          "Measured propagation limit"
+        ]
+      }
+    ]
+  },
+  "claim_humility": {
+    "current_status": "candidate_witness_only",
+    "non_claims": [
+      "Does not assert external physical truth.",
+      "Does not assert theorem status.",
+      "Does not assert a completed metric.",
+      "Does not modify RT_core.",
+      "Does not assert bridge uniqueness.",
+      "Does not assert empirical validation."
+    ]
+  },
+  "report_frame": {
+    "scope": "This definition is scoped to the internal relation between admissible continuation, declared reference phi, distinction density rho_D, and the bounded symmetry gradient.",
+    "directly_observed_or_defined": [
+      "The candidate bridge path already distinguishes between eligibility, testing, and results.",
+      "The concrete results patch records that eligibility is not validation.",
+      "The distinction-density definition is already registered as an RT-native bridge quantity.",
+      "The new positional bridge quantity is introduced only after phi is declared and only after rho_D is defined.",
+      "The decoupled endpoints are not directly realizable in the coupled interior reading."
+    ],
+    "inferred_inside_framework": [
+      "Propagation position is a bridge quantity rather than a primitive.",
+      "Propagation position is interior-only and depends on the bounded symmetry gradient.",
+      "Speed, probability, statistics, entropy, and propagation constants remain downstream projections rather than foundations.",
+      "RATE_TYPE_ELIGIBLE(x, phi) and defined rho_D(x, phi) are prerequisites for the positional reading."
+    ],
+    "external_resemblance": [
+      "The definition resembles rate, position, and ceiling language in other constrained-dynamical settings.",
+      "The resemblance is analogical only and does not claim identity with external theory."
+    ],
+    "what_it_does_not_prove": [
+      "Does not validate DENSITY_BRIDGE_001.",
+      "Does not promote RATE_UNIFICATION_001.",
+      "Does not modify RT_core.",
+      "Does not establish external physical truth.",
+      "Does not establish a completed metric.",
+      "Does not identify propagation position with speed or a propagation constant."
+    ],
+    "failure_modes_uncertainty": [
+      "The definition collapses to narrative if phi, rho_D, or the bounded symmetry gradient are omitted.",
+      "The positional reading fails if the continuation is not inside the coupled interior.",
+      "The quantity remains provisional until later adversarial testing and projection checks."
+    ]
+  },
+  "counterexample_record": {
+    "id": "PP_COUNTEREXAMPLE_005",
+    "target": "Any claim that propagation position is identical to speed or a physical propagation constant",
+    "counterexample": "A coupled interior continuation can have a defined propagation position before any physical metric, speed coordinate, or domain constant is declared.",
+    "ruling": "Speed and propagation constants are downstream projections, not identity conditions."
+  },
+  "textbook_insertion_candidate": {
+    "section": "Metric Bridge Governance / Propagation Position",
+    "text": "Propagation position pi_P(x, phi) is provisionally introduced as the organizational position of an admissible continuation within the bounded symmetry gradient relative to declared reference phi. It requires RATE_TYPE_ELIGIBLE(x, phi), defined distinction density rho_D(x, phi), coupled interior status, ordered A|E resolution, and a declared bounded symmetry gradient. It is not a primitive and is not identical to speed, probability, entropy, statistics, or any physical propagation constant. These are downstream projections requiring explicit projection rules."
+  },
+  "ledger_entry_candidate": {
+    "event": "Introduced provisional minimal definition of propagation position as an RT-native positional bridge quantity.",
+    "promotion_state": "No bridge claim promoted.",
+    "rt_core_changed": false
+  },
+  "required_execution_surface": [
+    "docs/governance/propagation_position_minimal_definition_005.json",
+    "docs/governance/propagation_position_counterexample_005.json"
+  ],
+  "target_files": [
+    "docs/governance/propagation_position_minimal_definition_005.json",
+    "docs/governance/propagation_position_counterexample_005.json"
+  ],
+  "required_repo_changes": [
+    {
+      "path": "docs/governance/propagation_position_minimal_definition_005.json",
+      "description": "Add the minimal-definition witness that introduces propagation position as an RT-native positional bridge quantity."
+    },
+    {
+      "path": "docs/governance/propagation_position_counterexample_005.json",
+      "description": "Add the counterexample witness that blocks speed-equivalence and primitive-propagation readings."
+    },
+    {
+      "path": "docs/textbook/mono_process_textbook_complete.md",
+      "description": "Add the governed propagation-position clarification and glossary entry for the new positional bridge quantity."
+    },
+    {
+      "path": "registry/governance_change_ledger.json",
+      "description": "Register the proposed propagation-position execution-surface update in the governance ledger."
+    },
+    {
+      "path": "registry/governance_hash_registry.json",
+      "description": "Register the new documentation surfaces, the patch record, and the updated textbook and ledger hashes."
+    }
+  ],
+  "validation_expectations": {
+    "json_parse": "PASS_REQUIRED",
+    "registry_validation": "PASS_REQUIRED",
+    "patch_chain": "PASS_REQUIRED",
+    "patch_gate": "PASS_REQUIRED",
+    "global_validate": "PASS_REQUIRED"
+  },
+  "textbook_integration": {
+    "section_title": "Minimal Propagation Position Definition",
+    "recommended_location": "Section 2.8, immediately after the distinction-density clarification.",
+    "integration_note": "Introduce propagation position as a bridge quantity, not a primitive, and keep speed, probability, entropy, statistics, and propagation constants downstream of the organizational definition rather than inside it."
+  },
+  "expected_outcome": {
+    "PROPAGATION_POSITION(x, phi)": "defined_provisionally",
+    "DENSITY_BRIDGE_001": "still_candidate",
+    "RATE_UNIFICATION_001": "still_candidate",
+    "RT_core": "unchanged"
+  },
+  "next_after_success": {
+    "patch_id": "PATCH_RT_METRIC_BRIDGE_PROPAGATION_POSITION_TESTS_006",
+    "purpose": "Define adversarial tests for propagation position across coupled interior, decoupled endpoint, and near-floor unresolved cases."
+  },
+  "agent_instruction": "Create PATCH_RT_METRIC_BRIDGE_PROPAGATION_POSITION_MINIMAL_DEFINITION_005 as PROPOSED only. Use additive mode, cite the applied rate-type eligibility patches, the concrete results patch, and the distinction-density definition as provenance, build the execution surface, and do not apply until patch-gate returns apply."
+}

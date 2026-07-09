@@ -1964,6 +1964,618 @@ def _dedupe_trim(items, limit=None):
     return values
 
 
+def _normalize_light_summary_verdict(verdict):
+    normalized = str(verdict or "").strip().lower()
+    if normalized in {"apply", "allow", "defer", "block"}:
+        return normalized
+    if normalized == "applied":
+        return "apply"
+    if normalized == "allowed":
+        return "allow"
+    if normalized == "deferred":
+        return "defer"
+    if normalized == "blocked":
+        return "block"
+    return "unknown"
+
+
+def _normalize_light_summary_status(raw_status, verdict=None):
+    normalized = str(raw_status or "").strip().lower()
+    if normalized == "applied":
+        return "applied"
+    if normalized == "active":
+        return "active"
+    if normalized in {"blocked", "late_registered", "superseded", "missing"}:
+        return "blocked"
+    if normalized == "error":
+        return "error"
+
+    verdict_normalized = _normalize_light_summary_verdict(verdict)
+    if verdict_normalized in {"apply", "allow"}:
+        return "active"
+    if verdict_normalized == "block":
+        return "blocked"
+    return "unknown"
+
+
+def build_patch_chain_light_summary(chain_result, serialization_warning=None):
+    if not isinstance(chain_result, dict):
+        chain_result = {}
+
+    result = {
+        "patch_id": chain_result.get("patch_id"),
+        "query": "patch_chain",
+        "status": _normalize_light_summary_status(chain_result.get("status"), chain_result.get("decision")),
+        "verdict": _normalize_light_summary_verdict(chain_result.get("decision")),
+        "reason": chain_result.get("reason") or "Patch chain resolution is unavailable.",
+        "blockers": _dedupe_trim(chain_result.get("blockers", []), limit=3),
+        "runtime_path": "light_summary",
+        "full_report_available": True,
+    }
+    if serialization_warning:
+        result["serialization_warning"] = serialization_warning
+    return result
+
+
+def build_patch_gate_light_summary(gate_result, serialization_warning=None):
+    if not isinstance(gate_result, dict):
+        gate_result = {}
+
+    patch_chain = gate_result.get("patch_chain", {})
+    if not isinstance(patch_chain, dict):
+        patch_chain = {}
+
+    result = {
+        "patch_id": gate_result.get("patch_id"),
+        "query": "patch_gate",
+        "status": _normalize_light_summary_status(patch_chain.get("status"), gate_result.get("decision")),
+        "verdict": _normalize_light_summary_verdict(gate_result.get("decision")),
+        "reason": gate_result.get("reason") or patch_chain.get("reason") or "Patch gate resolution is unavailable.",
+        "blockers": _dedupe_trim(
+            list(gate_result.get("blocking_conditions", [])) + list(patch_chain.get("blockers", [])),
+            limit=3,
+        ),
+        "runtime_path": "light_summary",
+        "full_report_available": True,
+    }
+    if serialization_warning:
+        result["serialization_warning"] = serialization_warning
+    return result
+
+
+EVIDENCE_LEVEL_NAMES = {
+    0: "summary",
+    1: "diagnostic",
+    2: "governance",
+    3: "forensic",
+}
+
+EVIDENCE_LEVEL_ALIASES = {
+    "summary": 0,
+    "level_0": 0,
+    "0": 0,
+    "diagnostic": 1,
+    "level_1": 1,
+    "1": 1,
+    "governance": 2,
+    "level_2": 2,
+    "2": 2,
+    "forensic": 3,
+    "level_3": 3,
+    "3": 3,
+}
+
+
+def _normalize_evidence_level(value):
+    if value is None:
+        return None
+    if isinstance(value, int):
+        return value if value in EVIDENCE_LEVEL_NAMES else None
+
+    text = str(value).strip().lower()
+    if not text:
+        return None
+    if text.isdigit():
+        numeric = int(text)
+        return numeric if numeric in EVIDENCE_LEVEL_NAMES else None
+    return EVIDENCE_LEVEL_ALIASES.get(text)
+
+
+def _evidence_level_name(level):
+    return EVIDENCE_LEVEL_NAMES.get(level, "unknown")
+
+
+def _resolve_requested_evidence_level(args):
+    explicit_level = _normalize_evidence_level(getattr(args, "level", None))
+    if explicit_level is not None:
+        return explicit_level
+    if getattr(args, "summary", False):
+        return 0
+    return None
+
+
+def _attach_evidence_level_metadata(payload, requested_level, emitted_level, fallback_from=None, serialization_warning=None):
+    if not isinstance(payload, dict):
+        return payload
+
+    result = dict(payload)
+    if requested_level is not None:
+        result["requested_evidence_level"] = _evidence_level_name(requested_level)
+    if emitted_level is not None:
+        result["evidence_level"] = _evidence_level_name(emitted_level)
+    if fallback_from is not None and fallback_from != emitted_level:
+        result["evidence_level_fallback_from"] = _evidence_level_name(fallback_from)
+    if serialization_warning:
+        result["serialization_warning"] = serialization_warning
+    return result
+
+
+def _trim_nested_lists(payload, limit=5):
+    if not isinstance(payload, dict):
+        return payload
+
+    result = dict(payload)
+    for key, value in list(result.items()):
+        if isinstance(value, list):
+            result[key] = value[:limit]
+            continue
+        if isinstance(value, dict):
+            nested = dict(value)
+            for nested_key, nested_value in list(nested.items()):
+                if isinstance(nested_value, list):
+                    nested[nested_key] = nested_value[:limit]
+            result[key] = nested
+    return result
+
+
+def _summarize_target_decisions(target_decisions, limit=3):
+    summary = []
+    for record in parse_json_collection(target_decisions)[:limit]:
+        if not isinstance(record, dict):
+            continue
+        summary.append(
+            {
+                "target": record.get("target") or record.get("semantic_key"),
+                "decision": record.get("decision"),
+                "reason": record.get("reason"),
+                "status": record.get("status"),
+                "conflict_state": record.get("conflict_state"),
+            }
+        )
+    return summary
+
+
+def _summarize_dependency_results(dependency_results, limit=5):
+    summary = []
+    for record in parse_json_collection(dependency_results)[:limit]:
+        if not isinstance(record, dict):
+            continue
+        summary.append(
+            {
+                "patch_id": record.get("patch_id"),
+                "status": record.get("status"),
+                "decision": record.get("decision"),
+                "reason": record.get("reason"),
+            }
+        )
+    return summary
+
+
+def _summarize_current_state_capsule(capsule):
+    if not isinstance(capsule, dict):
+        return capsule
+    runtime = capsule.get("runtime", {}) if isinstance(capsule.get("runtime"), dict) else {}
+    health = capsule.get("health", {}) if isinstance(capsule.get("health"), dict) else {}
+    return {
+        "status": capsule.get("status"),
+        "health": {
+            "global_validation": health.get("global_validation"),
+        },
+        "runtime": {
+            "db_first_gate": runtime.get("db_first_gate"),
+            "authority_boundary": runtime.get("authority_boundary"),
+        },
+        "blocker_count": len(parse_json_collection(capsule.get("blockers", []))),
+        "open_debt_count": len(parse_json_collection(capsule.get("open_debt", []))),
+        "latest_decision_count": len(parse_json_collection(capsule.get("latest_decisions", []))),
+        "warning_count": len(parse_json_collection(capsule.get("warnings", []))),
+        "warnings": _dedupe_trim(parse_json_collection(capsule.get("warnings", [])), limit=3),
+        "evidence_paths": _dedupe_trim(parse_json_collection(capsule.get("evidence_paths", [])), limit=5),
+    }
+
+
+def _summarize_authority_result(result):
+    if not isinstance(result, dict):
+        return result
+    summary = {
+        "target": result.get("target"),
+        "authority_owner": result.get("authority_owner"),
+        "decision": result.get("decision"),
+        "reason": result.get("reason"),
+        "conflict_state": result.get("conflict_state"),
+        "warning_count": len(parse_json_collection(result.get("warnings", []))),
+        "warnings": _dedupe_trim(parse_json_collection(result.get("warnings", [])), limit=3),
+        "evidence_paths": _dedupe_trim(parse_json_collection(result.get("evidence_paths", [])), limit=5),
+    }
+    if "semantic_key" in result or result.get("mode") == "semantic_authority_resolution":
+        summary.update(
+            {
+                "semantic_key": result.get("semantic_key"),
+                "semantic_type": result.get("semantic_type"),
+                "authority_rank": result.get("authority_rank"),
+                "supersession": result.get("supersession", {}),
+            }
+        )
+        if result.get("target_authority"):
+            summary["target_authority"] = _summarize_authority_result(result.get("target_authority"))
+    else:
+        summary.update(
+            {
+                "authority_source": result.get("authority_source"),
+                "supersession": result.get("supersession", {}),
+            }
+        )
+    return summary
+
+
+def _summarize_freshness_result(result):
+    if not isinstance(result, dict):
+        return result
+    return {
+        "db_snapshot_status": result.get("db_snapshot_status"),
+        "decision": result.get("decision"),
+        "reason": result.get("reason"),
+        "change_basis": result.get("change_basis"),
+        "staleness_cause": result.get("staleness_cause"),
+        "source_change_count": result.get("source_change_count", 0),
+        "runtime_only_change_count": result.get("runtime_only_change_count", 0),
+        "latest_known_worktree_change": result.get("latest_known_worktree_change"),
+        "latest_runtime_only_worktree_change": result.get("latest_runtime_only_worktree_change"),
+        "warning_count": len(parse_json_collection(result.get("warnings", []))),
+        "warnings": _dedupe_trim(parse_json_collection(result.get("warnings", [])), limit=3),
+    }
+
+
+def _summarize_debt_result(result):
+    if not isinstance(result, dict):
+        return result
+    debts = []
+    for record in parse_json_collection(result.get("debts", []))[:5]:
+        if not isinstance(record, dict):
+            continue
+        debts.append(
+            {
+                "debt_id": record.get("debt_id"),
+                "status": record.get("status"),
+                "severity": record.get("severity"),
+                "decision_effect": record.get("decision_effect"),
+            }
+        )
+    return {
+        "mode": result.get("mode"),
+        "target": result.get("target"),
+        "status_filter": result.get("status_filter"),
+        "decision": result.get("decision"),
+        "reason": result.get("reason"),
+        "summary": result.get("summary", {}),
+        "debts": debts,
+        "warning_count": len(parse_json_collection(result.get("warnings", []))),
+        "warnings": _dedupe_trim(parse_json_collection(result.get("warnings", [])), limit=3),
+        "evidence_paths": _dedupe_trim(parse_json_collection(result.get("evidence_paths", [])), limit=5),
+    }
+
+
+def _summarize_events_result(result):
+    if not isinstance(result, dict):
+        return result
+    events = []
+    for event in parse_json_collection(result.get("events", []))[:5]:
+        if not isinstance(event, dict):
+            continue
+        events.append(
+            {
+                "event_id": event.get("event_id"),
+                "event_type": event.get("event_type"),
+                "subject_id": event.get("subject_id"),
+                "source_patch_id": event.get("source_patch_id"),
+            }
+        )
+    return {
+        "mode": result.get("mode"),
+        "status": result.get("status"),
+        "filters": result.get("filters", {}),
+        "summary": result.get("summary", {}),
+        "events": events,
+        "warning_count": len(parse_json_collection(result.get("warnings", []))),
+        "warnings": _dedupe_trim(parse_json_collection(result.get("warnings", [])), limit=3),
+        "evidence_paths": _dedupe_trim(parse_json_collection(result.get("evidence_paths", [])), limit=5),
+    }
+
+
+def _summarize_replay_result(result):
+    if not isinstance(result, dict):
+        return result
+    reconstructed_state = result.get("reconstructed_state", {})
+    latest_event = reconstructed_state.get("latest_event") if isinstance(reconstructed_state, dict) else None
+    latest_summary = None
+    if isinstance(latest_event, dict):
+        latest_summary = {
+            "event_id": latest_event.get("event_id"),
+            "event_type": latest_event.get("event_type"),
+            "subject_id": latest_event.get("subject_id"),
+            "source_patch_id": latest_event.get("source_patch_id"),
+        }
+    return {
+        "mode": result.get("mode"),
+        "subject_id": result.get("subject_id"),
+        "status": result.get("status"),
+        "reconstructed_status": reconstructed_state.get("status") if isinstance(reconstructed_state, dict) else None,
+        "applied_events_count": len(parse_json_collection(result.get("applied_events", []))),
+        "ignored_events_count": len(parse_json_collection(result.get("ignored_events", []))),
+        "latest_event": latest_summary,
+        "warning_count": len(parse_json_collection(result.get("warnings", []))),
+        "warnings": _dedupe_trim(parse_json_collection(result.get("warnings", [])), limit=3),
+        "evidence_paths": _dedupe_trim(parse_json_collection(result.get("evidence_paths", [])), limit=5),
+    }
+
+
+def _summarize_reconcile_result(result):
+    if not isinstance(result, dict):
+        return result
+    return {
+        "mode": result.get("mode"),
+        "subject_id": result.get("subject_id"),
+        "reconciliation": result.get("reconciliation"),
+        "difference_count": len(parse_json_collection(result.get("differences", []))),
+        "warning_count": len(parse_json_collection(result.get("warnings", []))),
+        "warnings": _dedupe_trim(parse_json_collection(result.get("warnings", [])), limit=3),
+        "evidence_paths": _dedupe_trim(parse_json_collection(result.get("evidence_paths", [])), limit=5),
+        "authority_note": result.get("authority_note"),
+    }
+
+
+def _summarize_context_capsule_result(result):
+    if not isinstance(result, dict):
+        return result
+    return {
+        "target": result.get("target"),
+        "task": result.get("task"),
+        "global_runtime_status": {
+            "status": result.get("global_runtime_status", {}).get("status") if isinstance(result.get("global_runtime_status"), dict) else None,
+            "health": result.get("global_runtime_status", {}).get("health") if isinstance(result.get("global_runtime_status"), dict) else None,
+            "authority_boundary": result.get("global_runtime_status", {}).get("authority_boundary") if isinstance(result.get("global_runtime_status"), dict) else None,
+            "snapshot": result.get("global_runtime_status", {}).get("snapshot") if isinstance(result.get("global_runtime_status"), dict) else None,
+        },
+        "freshness_summary": _summarize_freshness_result(result.get("freshness_summary", {})),
+        "authority_summary": _summarize_authority_result(result.get("authority_summary", {})),
+        "patch_summary": result.get("patch_summary", {}),
+        "blocking_summary": result.get("blocking_summary", {}),
+        "debt_summary": result.get("debt_summary", {}),
+        "warning_count": len(parse_json_collection(result.get("warnings", []))),
+        "warnings": _dedupe_trim(parse_json_collection(result.get("warnings", [])), limit=3),
+        "evidence_paths": _dedupe_trim(parse_json_collection(result.get("evidence_paths", [])), limit=5),
+    }
+
+
+def _summarize_gate_authority_resolution(result):
+    if not isinstance(result, dict):
+        return result
+    target_decisions = _summarize_target_decisions(result.get("target_decisions", []), limit=5)
+    return {
+        "winning_authority": result.get("winning_authority"),
+        "rule": result.get("rule"),
+        "runtime_boundary": result.get("runtime_boundary"),
+        "decision": result.get("decision"),
+        "reason": result.get("reason"),
+        "target_decision_count": len(parse_json_collection(result.get("target_decisions", []))),
+        "target_decisions": target_decisions,
+    }
+
+
+def _summarize_gate_semantic_resolution(result):
+    if not isinstance(result, dict):
+        return result
+    target_decisions = _summarize_target_decisions(result.get("target_decisions", []), limit=5)
+    return {
+        "winning_authority": result.get("winning_authority"),
+        "rule": result.get("rule"),
+        "declared": _dedupe_trim(parse_json_collection(result.get("declared", [])), limit=10),
+        "decision": result.get("decision"),
+        "reason": result.get("reason"),
+        "target_decision_count": len(parse_json_collection(result.get("target_decisions", []))),
+        "target_decisions": target_decisions,
+        "warning_count": len(parse_json_collection(result.get("warnings", []))),
+        "warnings": _dedupe_trim(parse_json_collection(result.get("warnings", [])), limit=3),
+    }
+
+
+def _summarize_patch_chain_result(chain_result, requested_level, emitted_level):
+    if not isinstance(chain_result, dict):
+        return chain_result
+
+    if emitted_level == 0:
+        payload = build_patch_chain_light_summary(chain_result)
+    elif emitted_level == 1:
+        payload = build_patch_chain_light_summary(chain_result)
+        payload.update(
+            {
+                "dependencies": _dedupe_trim(parse_json_collection(chain_result.get("dependencies", [])), limit=10),
+                "missing_dependencies": _dedupe_trim(parse_json_collection(chain_result.get("missing_dependencies", [])), limit=10),
+                "late_registration": chain_result.get("late_registration"),
+                "supersession": chain_result.get("supersession", {}),
+                "dependency_graph": _summarize_dependency_results(chain_result.get("dependency_results", []), limit=10),
+                "warnings": _dedupe_trim(parse_json_collection(chain_result.get("warnings", [])), limit=5),
+                "evidence_paths": _dedupe_trim(parse_json_collection(chain_result.get("evidence_paths", [])), limit=5),
+                "runtime_path": "diagnostic",
+            }
+        )
+    elif emitted_level == 2:
+        payload = dict(chain_result)
+        payload.pop("dependency_results", None)
+        payload["dependency_graph"] = _summarize_dependency_results(chain_result.get("dependency_results", []), limit=10)
+        payload["dependencies"] = _dedupe_trim(parse_json_collection(chain_result.get("dependencies", [])), limit=15)
+        payload["missing_dependencies"] = _dedupe_trim(parse_json_collection(chain_result.get("missing_dependencies", [])), limit=10)
+        payload["blockers"] = _dedupe_trim(parse_json_collection(chain_result.get("blockers", [])), limit=10)
+        payload["warnings"] = _dedupe_trim(parse_json_collection(chain_result.get("warnings", [])), limit=10)
+        payload["evidence_paths"] = _dedupe_trim(parse_json_collection(chain_result.get("evidence_paths", [])), limit=10)
+        payload["runtime_path"] = "governance"
+        payload["full_report_available"] = True
+    else:
+        payload = dict(chain_result)
+        payload["runtime_path"] = "forensic"
+        payload["full_report_available"] = True
+
+    return _attach_evidence_level_metadata(payload, requested_level, emitted_level)
+
+
+def _summarize_patch_gate_result(gate_result, requested_level, emitted_level):
+    if not isinstance(gate_result, dict):
+        return gate_result
+
+    if emitted_level == 0:
+        payload = build_patch_gate_light_summary(gate_result)
+    elif emitted_level == 1:
+        payload = {
+            "patch_id": gate_result.get("patch_id"),
+            "campaign_id": gate_result.get("campaign_id"),
+            "requested_action": gate_result.get("requested_action"),
+            "decision": gate_result.get("decision"),
+            "reason": gate_result.get("reason"),
+            "blocking_conditions": _dedupe_trim(parse_json_collection(gate_result.get("blocking_conditions", [])), limit=5),
+            "defer_conditions": _dedupe_trim(parse_json_collection(gate_result.get("defer_conditions", [])), limit=5),
+            "dependency_resolution": {
+                "declared": _dedupe_trim(parse_json_collection(gate_result.get("dependency_resolution", {}).get("declared", [])), limit=10)
+                if isinstance(gate_result.get("dependency_resolution"), dict)
+                else [],
+                "missing": _dedupe_trim(parse_json_collection(gate_result.get("dependency_resolution", {}).get("missing", [])), limit=10)
+                if isinstance(gate_result.get("dependency_resolution"), dict)
+                else [],
+            },
+            "authority_resolution": _summarize_gate_authority_resolution(gate_result.get("authority_resolution", {})),
+            "semantic_authority_resolution": _summarize_gate_semantic_resolution(gate_result.get("semantic_authority_resolution", {})),
+            "patch_chain": _summarize_patch_chain_result(gate_result.get("patch_chain", {}), requested_level, 1),
+            "provenance_resolution": gate_result.get("provenance_resolution", {}),
+            "validator_resolution": gate_result.get("validator_resolution", {}),
+            "warnings": _dedupe_trim(parse_json_collection(gate_result.get("warnings", [])), limit=5),
+            "evidence_paths": _dedupe_trim(parse_json_collection(gate_result.get("evidence_paths", [])), limit=5),
+            "runtime_path": "diagnostic",
+            "full_report_available": True,
+        }
+    elif emitted_level == 2:
+        payload = dict(gate_result)
+        payload.pop("evidence_json", None)
+        payload.pop("metadata_json", None)
+        payload.pop("db_snapshot", None)
+        payload["current_state"] = _summarize_current_state_capsule(gate_result.get("current_state", {}))
+        payload["authority_resolution"] = _summarize_gate_authority_resolution(gate_result.get("authority_resolution", {}))
+        payload["semantic_authority_resolution"] = _summarize_gate_semantic_resolution(gate_result.get("semantic_authority_resolution", {}))
+        payload["patch_chain"] = _summarize_patch_chain_result(gate_result.get("patch_chain", {}), requested_level, 2)
+        payload["debt_resolution"] = _summarize_debt_result(gate_result.get("debt_resolution", {}))
+        payload["freshness"] = _summarize_freshness_result(gate_result.get("freshness", {}))
+        payload["blocking_conditions"] = _dedupe_trim(parse_json_collection(gate_result.get("blocking_conditions", [])), limit=10)
+        payload["defer_conditions"] = _dedupe_trim(parse_json_collection(gate_result.get("defer_conditions", [])), limit=10)
+        payload["warnings"] = _dedupe_trim(parse_json_collection(gate_result.get("warnings", [])), limit=10)
+        payload["runtime_path"] = "governance"
+        payload["full_report_available"] = True
+    else:
+        payload = dict(gate_result)
+        payload["runtime_path"] = "forensic"
+        payload["full_report_available"] = True
+
+    return _attach_evidence_level_metadata(payload, requested_level, emitted_level)
+
+
+def build_evidence_level_result(command, result, requested_level):
+    if requested_level is None:
+        return result
+
+    emitted_level = requested_level
+    if command == "patch-chain":
+        return _summarize_patch_chain_result(result, requested_level, emitted_level)
+    if command in {"patch-gate", "patch-file"}:
+        return _summarize_patch_gate_result(result, requested_level, emitted_level)
+    if command == "current-state":
+        if emitted_level == 0:
+            payload = _summarize_current_state_capsule(result)
+        elif emitted_level == 1:
+            payload = _trim_nested_lists(result, limit=5)
+        else:
+            payload = dict(result)
+        return _attach_evidence_level_metadata(payload, requested_level, emitted_level)
+    if command == "authority":
+        if emitted_level == 0:
+            payload = _summarize_authority_result(result)
+        elif emitted_level == 1:
+            payload = _trim_nested_lists(result, limit=5)
+        else:
+            payload = dict(result)
+        return _attach_evidence_level_metadata(payload, requested_level, emitted_level)
+    if command == "freshness":
+        if emitted_level == 0:
+            payload = _summarize_freshness_result(result)
+        elif emitted_level == 1:
+            payload = _trim_nested_lists(result, limit=5)
+        else:
+            payload = dict(result)
+        return _attach_evidence_level_metadata(payload, requested_level, emitted_level)
+    if command == "debt":
+        if emitted_level == 0:
+            payload = _summarize_debt_result(result)
+        elif emitted_level == 1:
+            payload = _trim_nested_lists(result, limit=5)
+        else:
+            payload = dict(result)
+        return _attach_evidence_level_metadata(payload, requested_level, emitted_level)
+    if command == "context-capsule":
+        if emitted_level == 0:
+            payload = _summarize_context_capsule_result(result)
+        elif emitted_level == 1:
+            payload = _trim_nested_lists(result, limit=5)
+        else:
+            payload = dict(result)
+        return _attach_evidence_level_metadata(payload, requested_level, emitted_level)
+    if command == "events":
+        if emitted_level == 0:
+            payload = _summarize_events_result(result)
+        elif emitted_level == 1:
+            payload = _trim_nested_lists(result, limit=5)
+        else:
+            payload = dict(result)
+        return _attach_evidence_level_metadata(payload, requested_level, emitted_level)
+    if command == "replay-events":
+        if emitted_level == 0:
+            payload = _summarize_replay_result(result)
+        elif emitted_level == 1:
+            payload = _trim_nested_lists(result, limit=5)
+        else:
+            payload = dict(result)
+        return _attach_evidence_level_metadata(payload, requested_level, emitted_level)
+    if command == "reconcile-events":
+        if emitted_level == 0:
+            payload = _summarize_reconcile_result(result)
+        elif emitted_level == 1:
+            payload = _trim_nested_lists(result, limit=5)
+        else:
+            payload = dict(result)
+        return _attach_evidence_level_metadata(payload, requested_level, emitted_level)
+    if command == "emit-event":
+        if emitted_level == 0:
+            payload = {
+                "mode": result.get("mode"),
+                "status": result.get("status"),
+                "reason": result.get("reason"),
+                "event": _summarize_events_result({"events": [result.get("event")]})["events"][0] if result.get("event") else None,
+            }
+        elif emitted_level == 1:
+            payload = _trim_nested_lists(result, limit=5)
+        else:
+            payload = dict(result)
+        return _attach_evidence_level_metadata(payload, requested_level, emitted_level)
+
+    payload = _trim_nested_lists(result, limit=5) if emitted_level == 1 else dict(result)
+    return _attach_evidence_level_metadata(payload, requested_level, emitted_level)
+
+
 def build_context_capsule_result(db_path, target=None, task=None):
     current_state = build_current_state_capsule(db_path)
     db_file = Path(db_path)
@@ -4598,7 +5210,7 @@ def legacy_lookup(args):
             "claim": args.claim,
             "open_gaps": args.open_gaps,
         },
-        "note": "Use context-capsule for the minimal runtime summary and bounded replay reconciliation coverage, current-state for live state, freshness for snapshot age, authority --target for surface ownership, authority --semantic for semantic authority, patch-chain --patch-id for dependency resolution, debt --status for debt projections, emit-event to append governance facts, events to query recorded facts, replay-events to reconstruct limited diagnostic state, reconcile-events to compare replay against registry authority, or patch-gate/--patch-file to invoke the governance runtime gate.",
+        "note": "Use context-capsule for the minimal runtime summary and bounded replay reconciliation coverage, current-state for live state, freshness for snapshot age, authority --target for surface ownership, authority --semantic for semantic authority, patch-chain --patch-id <PATCH_ID> --level <summary|diagnostic|governance|forensic> [--summary] for dependency resolution, debt --status for debt projections, emit-event to append governance facts, events to query recorded facts, replay-events to reconstruct limited diagnostic state, reconcile-events to compare replay against registry authority, or patch-gate --patch-id <PATCH_ID> --target <path-or-surface> --level <summary|diagnostic|governance|forensic> [--summary] to invoke the governance runtime gate.",
         "results": [],
     }
 
@@ -4630,11 +5242,21 @@ def legacy_lookup(args):
     return response
 
 
-def emit_json(payload, pretty=False):
-    if pretty:
-        text = json.dumps(payload, indent=2, ensure_ascii=False)
-    else:
-        text = json.dumps(payload, ensure_ascii=False)
+def emit_json(payload, pretty=False, fallback_payload=None, serialization_warning=None):
+    try:
+        if pretty:
+            text = json.dumps(payload, indent=2, ensure_ascii=False)
+        else:
+            text = json.dumps(payload, ensure_ascii=False)
+    except (MemoryError, RecursionError) as exc:
+        if fallback_payload is None:
+            raise
+        payload = dict(fallback_payload)
+        payload["serialization_warning"] = serialization_warning or f"serialization_failed:{type(exc).__name__}"
+        if pretty:
+            text = json.dumps(payload, indent=2, ensure_ascii=False)
+        else:
+            text = json.dumps(payload, ensure_ascii=False)
     if hasattr(sys.stdout, "buffer"):
         sys.stdout.buffer.write((text + "\n").encode("utf-8"))
         sys.stdout.flush()
@@ -5253,63 +5875,92 @@ def main():
     parser.add_argument("--tool", help="Lookup tool by ID.")
     parser.add_argument("--claim", help="Lookup claim by ID.")
     parser.add_argument("--open-gaps", action="store_true", help="List all open gaps.")
+    parser.add_argument("--level", help="Evidence level: summary, diagnostic, governance, or forensic. Use --summary as a shortcut for summary.")
     parser.add_argument("--pretty", action="store_true", help="Pretty-print JSON output.")
+    parser.add_argument("--summary", action="store_true", help="Alias for --level summary.")
 
     args = parser.parse_args()
+    requested_level = _resolve_requested_evidence_level(args)
+
+    def emit_result(command_name, result):
+        if requested_level is None:
+            emit_json(result, pretty=args.pretty)
+            return
+
+        payload = build_evidence_level_result(command_name, result, requested_level)
+        fallback_level = requested_level - 1 if requested_level > 0 else None
+        fallback_payload = (
+            build_evidence_level_result(command_name, result, fallback_level)
+            if fallback_level is not None
+            else None
+        )
+        if fallback_payload is not None:
+            fallback_payload = _attach_evidence_level_metadata(
+                fallback_payload,
+                requested_level,
+                fallback_level,
+                fallback_from=requested_level,
+            )
+        emit_json(
+            payload,
+            pretty=args.pretty,
+            fallback_payload=fallback_payload,
+            serialization_warning=f"{command_name}_evidence_level_{_evidence_level_name(requested_level)}_serialization_failed",
+        )
 
     if args.command == "current-state":
         result = build_current_state_result(args)
-        emit_json(result, pretty=args.pretty)
+        emit_result("current-state", result)
         return
 
     if args.command == "authority":
         result = build_authority_resolution_result(args)
-        emit_json(result, pretty=args.pretty)
+        emit_result("authority", result)
         return
 
     if args.command == "patch-chain":
         result = build_patch_chain_result_for_args(args)
-        emit_json(result, pretty=args.pretty)
+        emit_result("patch-chain", result)
         return
 
     if args.command == "patch-gate":
         result = build_patch_gate_result(args)
-        emit_json(result, pretty=args.pretty)
+        emit_result("patch-gate", result)
         return
 
     if args.command == "debt":
         result = build_debt_runtime_result_for_args(args)
-        emit_json(result, pretty=args.pretty)
+        emit_result("debt", result)
         return
 
     if args.command == "freshness":
         result = build_freshness_result_for_args(args)
-        emit_json(result, pretty=args.pretty)
+        emit_result("freshness", result)
         return
 
     if args.command == "context-capsule":
         result = build_context_capsule_result_for_args(args)
-        emit_json(result, pretty=args.pretty)
+        emit_result("context-capsule", result)
         return
 
     if args.command == "emit-event":
         result = build_emit_event_result_for_args(args)
-        emit_json(result, pretty=args.pretty)
+        emit_result("emit-event", result)
         return
 
     if args.command == "events":
         result = build_governance_events_result_for_args(args)
-        emit_json(result, pretty=args.pretty)
+        emit_result("events", result)
         return
 
     if args.command == "replay-events":
         result = build_replay_events_result_for_args(args)
-        emit_json(result, pretty=args.pretty)
+        emit_result("replay-events", result)
         return
 
     if args.command == "reconcile-events":
         result = build_reconcile_events_result_for_args(args)
-        emit_json(result, pretty=args.pretty)
+        emit_result("reconcile-events", result)
         return
 
     if args.patch_file:
@@ -5322,11 +5973,11 @@ def main():
             log_to_db=not args.no_log,
             target_override=args.target,
         )
-        emit_json(result, pretty=args.pretty)
+        emit_result("patch-file", result)
         return
 
     result = legacy_lookup(args)
-    emit_json(result, pretty=args.pretty)
+    emit_result("legacy-lookup", result)
 
 
 if __name__ == "__main__":

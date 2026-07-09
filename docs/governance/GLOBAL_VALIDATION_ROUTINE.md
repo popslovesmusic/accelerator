@@ -47,6 +47,8 @@ Use the patch gate for an apply/block/defer decision. When a patch declares sema
 
 `python scripts/query_governance.py patch-gate --patch-id <PATCH_ID> --target <path-or-surface>`
 
+Governance runtime queries now accept standardized evidence levels. Use `--level summary`, `--level diagnostic`, `--level governance`, or `--level forensic` on `current-state`, `authority`, `patch-chain`, `patch-gate`, `debt`, `freshness`, `context-capsule`, `events`, `replay-events`, and `reconcile-events` when you want to bound the payload. `--summary` remains a compatibility alias for `--level summary`. Summary mode returns a bounded report-grade payload with `patch_id`, `query`, `status`, `verdict`, `reason`, `blockers`, `runtime_path`, and `full_report_available`; higher levels return progressively richer evidence surfaces, and forensic mode preserves the full runtime object.
+
 Governance-significant runtime changes may also be recorded as append-only facts with `python scripts/query_governance.py emit-event` and inspected with `python scripts/query_governance.py events`.
 
 If the runtime cannot classify the action, use `outputs/audits/global_health_report.json` and the canonical docs as fallback evidence. Document-first routing is fallback only.
