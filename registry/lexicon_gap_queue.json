@@ -6615,6 +6615,135 @@
                                                 "epsilon":  "recursive fixed-point failure"
                                             },
                       "governance_status":  "not_verified"
+                  },
+                  {
+                      "term":  "rate_type_eligible",
+                      "aliases":  [
+                                      "RATE_TYPE_ELIGIBLE",
+                                      "RATE_TYPE_ELIGIBLE(x, phi)",
+                                      "rate-type eligibility predicate"
+                                  ],
+                      "status":  "GAP_OPEN",
+                      "default_claim_status":  "PROVISIONAL",
+                      "reason_for_induction":  "Governed admissibility predicate for rate-typed metric-bridge evaluation.",
+                      "source_context":  {
+                                             "source_type":  "user_theory",
+                                             "source_path_or_note":  "PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_001"
+                                         },
+                      "proposed_definition":  "A predicate stating that system x is eligible for rate-typed metric-bridge evaluation only relative to declared reference phi.",
+                      "process_rewrite":  "Check nonzero DOF, coupled A|E, declared reference, ordered intermediate relation, endpoint compatibility, and generative exclusion before closure.",
+                      "procedural_components":  [
+                                                    "DOF",
+                                                    "Coupled_AE",
+                                                    "Declared",
+                                                    "OrderedIntermediate",
+                                                    "EndpointCompatible",
+                                                    "GenExclusionBeforeClosure"
+                                                ],
+                      "primitive_mapping":  {
+                                                "x":  "system_under_test",
+                                                "phi":  "declared_reference"
+                                            },
+                      "proposed_roles":  [
+                                             {
+                                                 "role_name":  "bridge_admissibility_screen",
+                                                 "operational_definition":  "Screens candidate systems before any rate-based metric-bridge testing is admitted.",
+                                                 "metrics":  [
+                                                                 "pass_class",
+                                                                 "failure_class"
+                                                             ],
+                                                 "candidate_tools":  [
+                                                                         "manual_governance_review"
+                                                                     ],
+                                                 "falsification_condition":  "A system passes without a declared reference or coupled A|E relation.",
+                                                 "evidence_level":  "L0",
+                                                 "charter_classification":  "provisional"
+                                             }
+                                         ],
+                      "governance_status":  "not_verified"
+                  },
+                  {
+                      "term":  "propagation_position",
+                      "aliases":  [
+                                      "bridge position",
+                                      "position_determining_quantity"
+                                  ],
+                      "status":  "GAP_OPEN",
+                      "default_claim_status":  "PROVISIONAL",
+                      "reason_for_induction":  "Derived bridge position quantity governed by the rate of A|E resolution.",
+                      "source_context":  {
+                                             "source_type":  "user_theory",
+                                             "source_path_or_note":  "PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_001"
+                                         },
+                      "proposed_definition":  "A derived positional quantity for the bridge that records where a system sits inside the coupled interior relative to the declared reference phi.",
+                      "process_rewrite":  "Treat propagation position as an ordered interior quantity governed by the resolution rate of A|E tension.",
+                      "procedural_components":  [
+                                                    "ordered_relation",
+                                                    "interior_position",
+                                                    "rate_of_resolution"
+                                                ],
+                      "primitive_mapping":  {
+                                                "bridge_position":  "propagation_position"
+                                            },
+                      "proposed_roles":  [
+                                             {
+                                                 "role_name":  "bridge_position_quantity",
+                                                 "operational_definition":  "Records ordered position inside the coupled interior before any bridge testing is admitted.",
+                                                 "metrics":  [
+                                                                 "ordering_index",
+                                                                 "interior_stability"
+                                                             ],
+                                                 "candidate_tools":  [
+                                                                         "manual_governance_review"
+                                                                     ],
+                                                 "falsification_condition":  "Position is assigned at a true 0 DOF decoupled endpoint without admissible continuation.",
+                                                 "evidence_level":  "L0",
+                                                 "charter_classification":  "provisional"
+                                             }
+                                         ],
+                      "governance_status":  "not_verified"
+                  },
+                  {
+                      "term":  "non_realizability_of_decoupled_endpoints",
+                      "aliases":  [
+                                      "Non-Realizability of Decoupled Endpoints",
+                                      "endpoint non-realizability",
+                                      "RP001"
+                                  ],
+                      "status":  "GAP_OPEN",
+                      "default_claim_status":  "PROVISIONAL",
+                      "reason_for_induction":  "Candidate principle stating that a true 0 DOF decoupled endpoint is not realized under admissibly coupled continuation.",
+                      "source_context":  {
+                                             "source_type":  "user_theory",
+                                             "source_path_or_note":  "PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_001"
+                                         },
+                      "proposed_definition":  "A candidate principle asserting that true decoupled endpoints are non-realizable in admissibly coupled continuation and are approached only asymptotically.",
+                      "process_rewrite":  "Treat decoupled endpoints as non-realizable limits under admissible coupling.",
+                      "procedural_components":  [
+                                                    "endpoint_limit",
+                                                    "admissible_coupling",
+                                                    "asymptotic_approach"
+                                                ],
+                      "primitive_mapping":  {
+                                                "endpoint_non_realizability":  "non_realizability_of_decoupled_endpoints"
+                                            },
+                      "proposed_roles":  [
+                                             {
+                                                 "role_name":  "endpoint_non_realizability_principle",
+                                                 "operational_definition":  "Declares the true 0 DOF decoupled endpoint non-realizable under admissibly coupled continuation.",
+                                                 "metrics":  [
+                                                                 "endpoint_admissibility",
+                                                                 "asymptotic_approach"
+                                                             ],
+                                                 "candidate_tools":  [
+                                                                         "manual_governance_review"
+                                                                     ],
+                                                 "falsification_condition":  "A true 0 DOF decoupled endpoint is realized without violating coupling or continuation constraints.",
+                                                 "evidence_level":  "L0",
+                                                 "charter_classification":  "provisional"
+                                             }
+                                         ],
+                      "governance_status":  "not_verified"
                   }
               ]
 }

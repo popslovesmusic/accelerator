@@ -51,6 +51,90 @@ Governance-significant runtime changes may also be recorded as append-only facts
 
 If the runtime cannot classify the action, use `outputs/audits/global_health_report.json` and the canonical docs as fallback evidence. Document-first routing is fallback only.
 
+## Bounded Validation Modes
+The default governed invocation remains the full harness:
+
+`python -m scripts.global_validate`
+
+Additive bounded modes are now available when a smaller surface is needed:
+
+`python -m scripts.global_validate --quick`
+
+`python -m scripts.global_validate --registries-only`
+
+`python -m scripts.global_validate --governance-only`
+
+`python -m scripts.global_validate --patch-chain-only`
+
+`python -m scripts.global_validate --db-only`
+
+`python -m scripts.global_validate --math-only`
+
+`python -m scripts.global_validate --stage-timeout-seconds <seconds>`
+
+`python -m scripts.global_validate --profile`
+
+`python -m scripts.global_validate --no-db-log`
+
+`python -m scripts.global_validate --history`
+
+`python -m scripts.global_validate --trend`
+
+`python -m scripts.global_validate --trend --trend-baseline <run_id>`
+
+`python -m scripts.global_validate --trend --no-history`
+
+The harness now records per-stage durations and can classify a stall as semantic, runtime, or tooling-related in the generated report.
+The report now also includes `stage_results`, `slowest_stages`, `runtime_failures`, `tooling_failures`, `semantic_failures`, and a `stale_report_warning` flag so stage-localization is preserved even when the run is bounded.
+
+When `--history` is enabled, the harness appends a compact JSONL summary to `outputs/audits/validation_history.jsonl`. The summary is intentionally compact and excludes recursive evidence trees, so it can be used as longitudinal telemetry without becoming an authority surface.
+
+When `--trend` is enabled, the harness writes `outputs/audits/validation_trend_report.json` comparing the current run to the most recent passing full validation run by default. A specific baseline may be selected with `--trend-baseline <run_id>`. If no usable baseline exists, the trend report records `TREND_HISTORY_UNAVAILABLE` or `TREND_HISTORY_CORRUPT` and the semantic validation outcome remains unchanged.
+
+History and trend telemetry are audit artifacts only. They do not alter validator semantics, patch promotion semantics, or RT_core governance.
+
+The current stage model is:
+
+`manifest_validation`
+
+`json_parse_validation`
+
+`registry_validation`
+
+`hash_registry_validation`
+
+`governance_ledger_validation`
+
+`patch_record_validation`
+
+`patch_chain_validation`
+
+`patch_gate_validation`
+
+`db_authority_validation`
+
+`math_validation`
+
+`math_test_provenance_validation`
+
+`math_program_validation`
+
+`hygiene_validation`
+
+`report_write`
+
+Partial modes select a governed subset of those stages:
+
+`--quick` favors manifest, registry, database authority, patch-chain, and patch-gate smoke checks.
+
+`--registries-only` favors manifest, JSON parse, registry, hash registry, governance ledger, and patch record checks.
+
+`--governance-only` favors registry, ledger, patch record, patch-chain, patch-gate, and database authority checks.
+
+`--db-only` isolates the database authority/runtime probe.
+
+`--math-only` isolates the math validation surfaces.
+
 ## Procedure
 
 ### 1. Ingestion

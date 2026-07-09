@@ -1,0 +1,196 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_061",
+  "title": "Bridge Admissibility Protocol",
+  "status": "APPLIED",
+  "applied_on": "2026-07-08T03:47:32.0000000-04:00",
+  "type": "provisional_induction",
+  "campaign": "RT Calculus Empirical Bridge",
+  "campaign_id": "RT_CALCULUS_EMPIRICAL_BRIDGE_001",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_060"
+  ],
+  "rt_core_modified": false,
+  "claim_level": "PROVISIONAL_INDUCTION",
+  "mode": "additive",
+  "purpose": "Define the admissibility requirements for empirical bridge hypotheses before experimental evaluation. This patch governs whether a proposed bridge is sufficiently well-formed to enter empirical testing.",
+  "summary": "PATCH_PI_RT_CALCULUS_060 established the concept of an empirical bridge. PATCH_PI_RT_CALCULUS_061 establishes the admission protocol for those bridges. Only well-formed bridge hypotheses may proceed to empirical evaluation.",
+  "basis": {
+    "source_patches": [
+      "PATCH_PI_RT_CALCULUS_060"
+    ],
+    "source_surfaces": [
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_060.json",
+      "docs/governance/empirical_bridge_framework_060.json",
+      "docs/governance/empirical_bridge_examples_060.json",
+      "docs/governance/empirical_bridge_counterexamples_060.json"
+    ],
+    "scope": "Provisional bridge-admissibility witness that constrains entry into empirical testing while leaving RT_core unchanged and keeping empirical evaluation deferred."
+  },
+  "core_rule": {
+    "id": "BRIDGE_ADMISSIBILITY_061_001",
+    "statement": "A bridge hypothesis may enter empirical testing only after its formal RT object is governed, its observable is independently defined, its mapping is explicit, its domain of validity is declared, its falsification conditions are declared, and its category is declared; admissibility does not imply truth, correctness, or modification of RT_core."
+  },
+  "canonical_objects": {
+    "BridgeAdmissibility": {
+      "symbol": "Adm_B",
+      "definition": "The governed admission condition for an empirical bridge hypothesis."
+    },
+    "BridgeContext": {
+      "symbol": "Ctx_B",
+      "definition": "The declared formal object, observable, domain, assumptions, and intended interpretation for a bridge hypothesis."
+    },
+    "BridgeFailure": {
+      "symbol": "Fail_B",
+      "definition": "A governance failure preventing admission of a bridge hypothesis prior to empirical testing."
+    }
+  },
+  "admissibility_requirements": [
+    {
+      "id": "BA001",
+      "requirement": "The formal RT object must already exist as a governed object."
+    },
+    {
+      "id": "BA002",
+      "requirement": "The empirical observable must be independently defined without RT terminology."
+    },
+    {
+      "id": "BA003",
+      "requirement": "The mapping between formal object and observable must be explicitly declared."
+    },
+    {
+      "id": "BA004",
+      "requirement": "The bridge must identify its intended domain of validity."
+    },
+    {
+      "id": "BA005",
+      "requirement": "The bridge must include explicit falsification conditions."
+    },
+    {
+      "id": "BA006",
+      "requirement": "The bridge must state whether it is explanatory, predictive, descriptive, or interpretive."
+    }
+  ],
+  "bridge_categories": [
+    "INTERPRETIVE",
+    "DESCRIPTIVE",
+    "PREDICTIVE",
+    "EXPLANATORY"
+  ],
+  "failure_modes": [
+    {
+      "code": "FAIL_B_UNDECLARED_OBJECT",
+      "meaning": "Referenced RT object is not governed."
+    },
+    {
+      "code": "FAIL_B_UNDEFINED_OBSERVABLE",
+      "meaning": "Observable is not independently defined."
+    },
+    {
+      "code": "FAIL_B_NO_MAPPING",
+      "meaning": "Formal-to-empirical correspondence is unspecified."
+    },
+    {
+      "code": "FAIL_B_NO_DOMAIN",
+      "meaning": "Domain of validity is absent."
+    },
+    {
+      "code": "FAIL_B_NOT_FALSIFIABLE",
+      "meaning": "No possible observation could contradict the bridge."
+    },
+    {
+      "code": "FAIL_B_CATEGORY_CONFLICT",
+      "meaning": "Bridge claims incompatible purposes simultaneously."
+    }
+  ],
+  "governance_rules": [
+    {
+      "rule_id": "BAP061_001",
+      "rule": "Bridge admissibility is evaluated before empirical evidence."
+    },
+    {
+      "rule_id": "BAP061_002",
+      "rule": "Admission does not imply correctness."
+    },
+    {
+      "rule_id": "BAP061_003",
+      "rule": "Rejected admissibility does not invalidate RT Calculus."
+    },
+    {
+      "rule_id": "BAP061_004",
+      "rule": "Empirical evidence cannot compensate for an ill-formed bridge."
+    },
+    {
+      "rule_id": "BAP061_005",
+      "rule": "Bridge admissibility affects only the bridge hypothesis, never RT_core."
+    }
+  ],
+  "bridge_lifecycle": [
+    "PROPOSED",
+    "ADMISSIBLE",
+    "UNDER_TEST",
+    "SUPPORTED",
+    "CONTRADICTED",
+    "RETIRED"
+  ],
+  "forbidden_inferences": [
+    "Admissible does not mean true.",
+    "Rejected admissibility does not falsify RT Calculus.",
+    "Bridge category is not evidence.",
+    "Prediction is not explanation.",
+    "Interpretation is not proof."
+  ],
+  "required_execution_surface": [
+    "docs/governance/bridge_admissibility_protocol_061.json",
+    "docs/governance/bridge_admissibility_examples_061.json",
+    "docs/governance/bridge_admissibility_counterexamples_061.json"
+  ],
+  "target_files": [
+    "docs/governance/bridge_admissibility_protocol_061.json",
+    "docs/governance/bridge_admissibility_examples_061.json",
+    "docs/governance/bridge_admissibility_counterexamples_061.json"
+  ],
+  "required_repo_changes": [
+    {
+      "path": "docs/governance/bridge_admissibility_protocol_061.json",
+      "description": "Add the bridge-admissibility protocol witness that defines the governance screen for empirical bridge hypotheses."
+    },
+    {
+      "path": "docs/governance/bridge_admissibility_examples_061.json",
+      "description": "Add examples that show admissible and inadmissible bridge hypotheses under the governed screen."
+    },
+    {
+      "path": "docs/governance/bridge_admissibility_counterexamples_061.json",
+      "description": "Add counterexamples that block ill-formed bridge hypotheses from empirical testing."
+    },
+    {
+      "path": "registry/governance_hash_registry.json",
+      "description": "Register the new documentation surfaces and patch record by hash for governance visibility."
+    },
+    {
+      "path": "registry/governance_change_ledger.json",
+      "description": "Register the proposed 061 execution-surface update in the governance ledger."
+    }
+  ],
+  "validation_expectations": {
+    "json_parse": "PASS_REQUIRED",
+    "patch_chain": "PASS_REQUIRED",
+    "patch_gate": "PASS_REQUIRED",
+    "global_validate": "PASS_REQUIRED"
+  },
+  "textbook_integration": {
+    "recommended_location": "Immediately after the Empirical Bridge Framework chapter.",
+    "section_title": "Bridge Admissibility Protocol",
+    "integration_note": "Bridge hypotheses are first tested for governance admissibility before any empirical evaluation is performed."
+  },
+  "next_expected_patch": {
+    "patch_id": "PATCH_PI_RT_CALCULUS_062",
+    "title": "Bridge Evaluation Protocol",
+    "purpose": "Define how admissible bridge hypotheses are evaluated against empirical evidence while preserving the separation between formal calculus and experimental interpretation."
+  },
+  "governance_notes": [
+    "This patch governs empirical bridge quality, not empirical truth.",
+    "It preserves the independence of RT Calculus from experimental outcomes.",
+    "RT_core remains unchanged."
+  ],
+  "agent_instruction": "Create PATCH_PI_RT_CALCULUS_061 as PROPOSED only. Use additive mode, cite applied PATCH_PI_RT_CALCULUS_060 and its operational artifacts as provenance, build the execution surface, and do not apply until patch-gate returns apply."
+}

@@ -1,0 +1,75 @@
+{
+  "artifact_id": "rate_type_eligibility_counterexample_001",
+  "artifact_type": "rate_type_eligibility_counterexamples",
+  "status": "DRAFT_PROVISIONAL",
+  "scope": "documentation_only",
+  "source_patch_id": "PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_001",
+  "revision_target": "PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_001",
+  "purpose": "Show the failure cases that prevent a rate-typed bridge candidate from entering testing when the declared eligibility conditions are not met.",
+  "counterexamples": [
+    {
+      "failure_code": "RATE_TYPE_INELIGIBLE_ZERO_DOF",
+      "counterexample": "A system with zero degrees of freedom is presented as bridge-ready.",
+      "why_blocked": "The screen requires DOF(x) > 0 before any bridge testing is admitted.",
+      "governance_effect": "Reject prior to testing."
+    },
+    {
+      "failure_code": "RATE_TYPE_INELIGIBLE_DECOUPLED_AE",
+      "counterexample": "A decoupled A|E relation is evaluated as if it were coupled.",
+      "why_blocked": "The screen requires a coupled A|E relation, not a decoupled one.",
+      "governance_effect": "Reject prior to testing."
+    },
+    {
+      "failure_code": "RATE_TYPE_INELIGIBLE_UNDECLARED_REFERENCE",
+      "counterexample": "The reference phi is omitted or left implicit.",
+      "why_blocked": "The screen is reference-relative and must be declared before evaluation.",
+      "governance_effect": "Require revision before admission."
+    },
+    {
+      "failure_code": "RATE_TYPE_INELIGIBLE_ENDPOINT_ONLY_EVALUATION",
+      "counterexample": "The candidate is checked only at the endpoints and not in the ordered interior.",
+      "why_blocked": "The screen requires an ordered intermediate relation, not endpoint-only checking.",
+      "governance_effect": "Reject until the ordered relation is supplied."
+    },
+    {
+      "failure_code": "RATE_TYPE_INELIGIBLE_ENDPOINT_MISMATCH",
+      "counterexample": "The endpoint relation conflicts with the declared reference.",
+      "why_blocked": "Endpoint compatibility is required before bridge testing begins.",
+      "governance_effect": "Reject until the endpoint relation is repaired."
+    },
+    {
+      "failure_code": "RATE_TYPE_INELIGIBLE_NO_GENERATIVE_EXCLUSION",
+      "counterexample": "The candidate declares closure without any generative exclusion step.",
+      "why_blocked": "The screen requires exclusion before closure so the candidate does not collapse into narrative.",
+      "governance_effect": "Reject prior to testing."
+    }
+  ],
+  "blocked_readings": [
+    "A rate-typed screen pass is not proof.",
+    "A rate-typed screen pass is not promotion.",
+    "A rate-typed screen failure does not invalidate RT_core.",
+    "A rate-typed screen failure does not establish external truth."
+  ],
+  "forbidden_inference": [
+    "The counterexamples do not prove the bridge is impossible.",
+    "The counterexamples do not define a completed metric.",
+    "The counterexamples do not modify RT_core."
+  ],
+  "claim_humility": {
+    "current_status": "candidate_witness_only",
+    "non_claims": [
+      "Does not prove bridge failure in general.",
+      "Does not prove a completed metric is impossible.",
+      "Does not define a norm.",
+      "Does not modify RT_core.",
+      "Does not assert external physical truth."
+    ]
+  },
+  "non_claims": [
+    "Does not prove bridge failure in general.",
+    "Does not prove a completed metric is impossible.",
+    "Does not define a norm.",
+    "Does not modify RT_core.",
+    "Does not assert external physical truth."
+  ]
+}

@@ -2,7 +2,9 @@ import argparse
 import json
 import os
 import subprocess
+import sqlite3
 import sys
+import time
 from datetime import datetime
 from pathlib import Path
 import re
@@ -15,11 +17,12 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 class RegistryValidator:
-    def __init__(self, root_dir):
+    def __init__(self, root_dir, read_only=False):
         self.root = Path(root_dir)
         self.manifest_path = self.root / "registry/governance_manifest.json"
         self.lexicon_val_path = self.root / "registry/lexicon_validation_registry.json"
         self.gap_queue_path = self.root / "registry/lexicon_gap_queue.json"
+        self.read_only = read_only
 
     def validate_json_load(self, path):
         try:
@@ -214,8 +217,9 @@ class HygieneValidator:
         return results
 
 class MathValidator:
-    def __init__(self, root_dir):
+    def __init__(self, root_dir, read_only=False):
         self.root = Path(root_dir)
+        self.read_only = read_only
         # Canonical source math registry.
         self.math_source_registry_path = self.root / "registry/math_source_registry.json"
         self.math_hashes_path = self.root / "registry/math_hashes.json"
@@ -234,6 +238,8 @@ class MathValidator:
 
     def run(self):
         results = {"status": "success", "errors": [], "warnings": []}
+        new_hashes = {}
+        core_paths = []
         
         # If neither the source registry nor stabilized math core exists, treat as no-op.
         if (not self.math_source_registry_path.exists()) and (not self.math_core_dir.exists()) and (not self.math_codex_dir.exists()):
@@ -249,7 +255,6 @@ class MathValidator:
                 with open(self.math_hashes_path, 'r', encoding='utf-8') as f:
                     hashes = json.load(f)
 
-            new_hashes = {}
             if isinstance(registry, dict) and registry.get("documents"):
                 items = registry.get("documents", [])
                 for item in items:
@@ -288,12 +293,11 @@ class MathValidator:
                             continue
                         results["errors"].append(f"Governance Violation: Math file '{item['path']}' was modified (Additive-Only Rule Violation).")
 
-            if not results["errors"]:
+            if not results["errors"] and not self.read_only:
                 with open(self.math_hashes_path, 'w', encoding='utf-8') as f:
                     json.dump(new_hashes, f, indent=2)
 
         # Stabilized math-core lock (hash registry/math/*.json and docs/math/*.md)
-        core_paths = []
         if self.math_core_dir.is_dir():
             core_paths.extend(sorted(self.math_core_dir.glob("*.json")))
         if self.math_codex_dir.is_dir():
@@ -320,7 +324,7 @@ class MathValidator:
             else:
                 results["warnings"].append("Math Core Lock: baseline missing; writing initial math_core_hashes.json.")
 
-            if not results["errors"]:
+            if not results["errors"] and not self.read_only:
                 with open(self.math_core_hashes_path, "w", encoding="utf-8") as f:
                     json.dump(current, f, indent=2)
 
@@ -359,6 +363,164 @@ class DBValidator:
         if health["status"] == "warning":
             results["status"] = "warning"
             
+        return results
+
+
+class DatabaseRuntimeValidator:
+    def __init__(self, root_dir):
+        self.root = Path(root_dir)
+        self.db_path = self.root / "registry/db/acellorator_index.sqlite"
+
+    def run(self):
+        results = {
+            "status": "success",
+            "errors": [],
+            "warnings": [],
+            "db_path": str(self.db_path),
+            "checks": [],
+        }
+
+        if not self.db_path.exists():
+            return {"status": "failed", "errors": ["Governance DB file is missing."], "warnings": []}
+
+        try:
+            conn = sqlite3.connect(str(self.db_path))
+        except Exception as exc:
+            return {"status": "failed", "errors": [f"Governance DB connection failed: {exc}"], "warnings": []}
+
+        try:
+            has_decision_log = conn.execute(
+                "SELECT 1 FROM sqlite_master WHERE type='table' AND name='governance_decision_log'"
+            ).fetchone() is not None
+            has_events = conn.execute(
+                "SELECT 1 FROM sqlite_master WHERE type='table' AND name='governance_events'"
+            ).fetchone() is not None
+            has_patch_chain_view = conn.execute(
+                "SELECT 1 FROM sqlite_master WHERE type='view' AND name='patch_chain_view'"
+            ).fetchone() is not None
+
+            results["checks"].append("sqlite_connectivity")
+            results["checks"].append("governance_decision_log_present" if has_decision_log else "governance_decision_log_missing")
+            results["checks"].append("governance_events_present" if has_events else "governance_events_missing")
+            results["checks"].append("patch_chain_view_present" if has_patch_chain_view else "patch_chain_view_missing")
+
+            if not has_decision_log:
+                results["errors"].append("Governance decision log table is missing.")
+            if not has_patch_chain_view:
+                results["warnings"].append("Patch-chain view is unavailable in the current DB snapshot.")
+            if not has_events:
+                results["warnings"].append("Governance events table is unavailable in the current DB snapshot.")
+        except sqlite3.Error as exc:
+            results["status"] = "failed"
+            results["errors"].append(f"Governance DB runtime probe failed: {exc}")
+        finally:
+            conn.close()
+
+        if results["errors"]:
+            results["status"] = "failed"
+        elif results["warnings"]:
+            results["status"] = "warning"
+        results["items_checked"] = len(results["checks"])
+        return results
+
+
+class PatchChainValidator:
+    def __init__(self, root_dir, no_db_log=False, current_state=None, ledger_index=None, cache=None):
+        self.root = Path(root_dir)
+        self.patch_registry_dir = self.root / "registry/governance/patches"
+        self.db_path = self.root / "registry/db/acellorator_index.sqlite"
+        self.no_db_log = no_db_log
+        self.current_state = current_state
+        self.ledger_index = ledger_index
+        self.cache = cache
+
+    def run(self):
+        results = {
+            "status": "success",
+            "errors": [],
+            "warnings": [],
+            "checked_patches": 0,
+            "summary": {
+                "status_counts": {},
+                "decision_counts": {},
+                "sample": [],
+            },
+            "governance_status": "unknown",
+            "logging_mode": "suppressed" if self.no_db_log else "default",
+        }
+
+        if not self.patch_registry_dir.exists():
+            return {"status": "skipped", "errors": [], "warnings": ["Patch registry missing."], "checked_patches": 0}
+
+        try:
+            from scripts.query_governance import (
+                build_current_state_capsule,
+                build_patch_chain_result,
+                load_governance_change_ledger_index,
+                load_patch_record_by_path,
+            )
+        except ImportError as exc:
+            return {"status": "failed", "errors": [f"Could not import governance runtime helpers: {exc}"], "warnings": []}
+
+        current_state = self.current_state
+        if current_state is None:
+            if self.db_path.exists():
+                try:
+                    current_state = build_current_state_capsule(str(self.db_path))
+                except Exception as exc:
+                    results["warnings"].append(f"Current-state capsule unavailable for patch-chain summary: {exc}")
+            else:
+                results["warnings"].append("Governance DB file is missing; patch-chain summary uses registry-only context.")
+
+        ledger_index = self.ledger_index if self.ledger_index is not None else load_governance_change_ledger_index()
+        cache = self.cache if self.cache is not None else {}
+        status_counts = {}
+        decision_counts = {}
+        sample = []
+        checked = 0
+
+        for patch_path in sorted(self.patch_registry_dir.glob("PATCH_*.json")):
+            patch, _ = load_patch_record_by_path(patch_path)
+            if not isinstance(patch, dict):
+                results["warnings"].append(f"Unreadable patch record: {patch_path.as_posix()}")
+                continue
+            patch_id = patch.get("patch_id") or patch_path.stem
+            try:
+                chain = build_patch_chain_result(
+                    patch_id,
+                    current_state=current_state,
+                    ledger_index=ledger_index,
+                    cache=cache,
+                )
+            except Exception as exc:
+                results["warnings"].append(f"Patch-chain summary failed for {patch_id}: {exc}")
+                continue
+
+            checked += 1
+            status = str(chain.get("status") or "unknown").lower()
+            decision = str(chain.get("decision") or "unknown").lower()
+            status_counts[status] = status_counts.get(status, 0) + 1
+            decision_counts[decision] = decision_counts.get(decision, 0) + 1
+            if len(sample) < 10 and status not in {"applied", "late_registered"}:
+                sample.append(
+                    {
+                        "patch_id": patch_id,
+                        "status": status,
+                        "decision": decision,
+                        "reason": chain.get("reason"),
+                    }
+                )
+
+        results["checked_patches"] = checked
+        results["summary"] = {
+            "status_counts": status_counts,
+            "decision_counts": decision_counts,
+            "sample": sample,
+        }
+        results["governance_status"] = "mixed" if any(status not in {"applied", "late_registered"} for status in status_counts) else "aligned"
+        if results["warnings"]:
+            results["status"] = "warning"
+        results["items_checked"] = checked
         return results
 
 class MathProgramValidator:
@@ -653,6 +815,8 @@ class UnifiedManifestValidator:
 
     def run(self):
         results = {"status": "success", "errors": [], "warnings": []}
+        nodes = {}
+        edges = []
         if not self.manifest_path.exists():
             return {"status": "skipped", "errors": [], "warnings": ["Unified manifest missing."]}
 
@@ -685,37 +849,1111 @@ class UnifiedManifestValidator:
 
         if results["errors"]:
             results["status"] = "failed"
+        results["items_checked"] = len(nodes) + len(edges)
         return results
+
+
+def _normalize_validation_status(value):
+    status = str(value or "").strip().lower()
+    if status in {"failed", "fail"}:
+        return "failed"
+    if status in {"success", "warning", "pass", "skipped", "timeout"}:
+        return status
+    return status or "unknown"
+
+
+def _classify_validation_failure(stage_name, result, exception=None, timed_out=False):
+    if exception is not None:
+        return "tooling_failure"
+    if timed_out:
+        return "runtime_failure"
+
+    status = _normalize_validation_status(result.get("status"))
+    if status not in {"failed", "timeout"}:
+        return None
+
+    error_text = " ".join(str(error) for error in result.get("errors", []) if error)
+    lowered = error_text.lower()
+    if any(token in lowered for token in ("could not import", "load error", "parse error", "sqlite", "database", "permission denied", "missing db file", "os error")):
+        return "tooling_failure"
+    if any(token in lowered for token in ("timeout", "stale", "lock", "unavailable")):
+        return "runtime_failure"
+    if stage_name in {"db_validation", "governance_integrity_validation", "patch_chain_validation"}:
+        return "semantic_failure"
+    return "semantic_failure"
+
+
+def _run_validation_stage(stage_name, runner, timeout_seconds=None):
+    started = time.perf_counter()
+    exception = None
+    try:
+        result = runner()
+    except Exception as exc:
+        exception = exc
+        result = {"status": "failed", "errors": [f"{stage_name} exception: {exc}"], "warnings": []}
+    duration = time.perf_counter() - started
+    normalized_status = _normalize_validation_status(result.get("status"))
+    timed_out = bool(timeout_seconds is not None and duration > timeout_seconds)
+    if timed_out and normalized_status not in {"failed"}:
+        result["status"] = "timeout"
+        normalized_status = "timeout"
+    failure_class = _classify_validation_failure(stage_name, result, exception=exception, timed_out=timed_out)
+    stage_trace = {
+        "stage": stage_name,
+        "status": normalized_status,
+        "failure_class": failure_class or "none",
+        "duration_seconds": round(duration, 6),
+        "timed_out": timed_out,
+        "error_count": len(result.get("errors", [])),
+        "warning_count": len(result.get("warnings", [])),
+    }
+    stage_trace["result_snapshot"] = {
+        "status": normalized_status,
+        "errors": [str(error) for error in result.get("errors", [])[:3] if error],
+        "warnings": [str(warning) for warning in result.get("warnings", [])[:3] if warning],
+        "items_checked": result.get("items_checked"),
+        "checked_patches": result.get("checked_patches"),
+        "checked_files": result.get("checked_files"),
+        "checked_entries": result.get("checked_entries"),
+        "tools_tested": result.get("tools_tested"),
+        "db_path": result.get("db_path"),
+        "patch_file": result.get("patch_file"),
+        "sample_patch_path": result.get("sample_patch_path"),
+        "sample_patch_id": result.get("sample_patch_id"),
+        "sample_patch_status": result.get("sample_patch_status"),
+        "sample_patch_decision": result.get("sample_patch_decision"),
+        "reason": result.get("reason"),
+        "decision": result.get("decision"),
+        "evidence_paths": (result.get("evidence_paths") or [])[:10] if isinstance(result.get("evidence_paths"), list) else [],
+        "summary": result.get("summary"),
+    }
+    if exception is not None:
+        stage_trace["exception"] = str(exception)
+    result["duration_seconds"] = duration
+    result["timed_out"] = timed_out
+    result["failure_class"] = failure_class
+    result["stage_name"] = stage_name
+    result["normalized_status"] = normalized_status
+    return result, stage_trace
+
+
+def _build_validation_stage_plan(root, args):
+    return [
+        ("unified_manifest_validation", UnifiedManifestValidator(root).run),
+        ("registry_validation", RegistryValidator(root).run),
+        ("engine_validation", EngineValidator(root).run),
+        ("hygiene_validation", HygieneValidator(root).run),
+        ("math_validation", MathValidator(root).run),
+        ("db_validation", DBValidator(root).run),
+        ("math_test_provenance_validation", MathTestProvenanceValidator(root).run),
+        ("math_program_validation", lambda: MathProgramValidator(root, full_report=args.full_math_program).run()),
+        ("implementation_validation", ImplementationValidator(root).run),
+        ("evidence_validation", EvidenceValidator(root).run),
+        ("campaign_validation", CampaignValidator(root).run),
+        ("governance_integrity_validation", GovernanceIntegrityValidator(root).run),
+        ("db_runtime_validation", DatabaseRuntimeValidator(root).run),
+        ("patch_chain_validation", lambda: PatchChainValidator(root, no_db_log=args.no_db_log).run()),
+    ]
+
+
+def _select_validation_mode(args):
+    if getattr(args, "patch_chain_only", False):
+        return "patch_chain_only"
+    if getattr(args, "governance_only", False):
+        return "governance_only"
+    if getattr(args, "registries_only", False):
+        return "registries_only"
+    if getattr(args, "db_only", False):
+        return "db_only"
+    if getattr(args, "math_only", False):
+        return "math_only"
+    if getattr(args, "quick", False):
+        return "quick"
+    return "full"
+
+
+def _selected_stage_names(mode):
+    if mode == "quick":
+        return {
+            "unified_manifest_validation",
+        }
+    if mode == "registries_only":
+        return {
+            "unified_manifest_validation",
+            "registry_validation",
+            "math_validation",
+            "implementation_validation",
+            "evidence_validation",
+            "campaign_validation",
+            "math_test_provenance_validation",
+        }
+    if mode == "governance_only":
+        return {
+            "registry_validation",
+            "db_runtime_validation",
+            "patch_chain_validation",
+        }
+    if mode == "patch_chain_only":
+        return {"patch_chain_validation"}
+    if mode == "db_only":
+        return {"db_validation", "db_runtime_validation"}
+    if mode == "math_only":
+        return {
+            "math_validation",
+            "math_test_provenance_validation",
+            "math_program_validation",
+        }
+    return {
+        "unified_manifest_validation",
+        "registry_validation",
+        "engine_validation",
+        "hygiene_validation",
+        "math_validation",
+        "db_validation",
+        "math_test_provenance_validation",
+        "math_program_validation",
+        "implementation_validation",
+        "evidence_validation",
+        "campaign_validation",
+        "governance_integrity_validation",
+    }
+
+def _load_json_document(path):
+    last_error = None
+    for encoding in ("utf-8-sig", "utf-8", "cp1252", "latin-1"):
+        try:
+            with open(path, "r", encoding=encoding) as f:
+                return json.load(f), None
+        except Exception as exc:
+            last_error = exc
+    return None, str(last_error) if last_error else "Unknown JSON load error"
+
+
+def _dedupe_paths(paths):
+    return [path for path in dict.fromkeys(path for path in paths if path)]
+
+
+def _hash_file(path):
+    import hashlib
+
+    try:
+        return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+    except Exception:
+        return None
+
+
+def _collect_patch_catalog(root):
+    patch_dir = Path(root) / "registry/governance/patches"
+    catalog = []
+    if not patch_dir.exists():
+        return catalog
+
+    for patch_path in sorted(patch_dir.glob("PATCH_*.json")):
+        patch, err = _load_json_document(patch_path)
+        catalog.append({
+            "path": patch_path,
+            "patch": patch if isinstance(patch, dict) else None,
+            "error": err,
+        })
+    return catalog
+
+
+def _select_patch_gate_sample(catalog):
+    if not catalog:
+        return None
+
+    applied = []
+    for item in catalog:
+        patch = item.get("patch") or {}
+        if str(patch.get("status", "")).upper() == "APPLIED":
+            applied.append(item)
+
+    def _sample_sort_key(item):
+        patch = item.get("patch") or {}
+        return (
+            str(patch.get("applied_on") or ""),
+            str(patch.get("patch_id") or item["path"].stem),
+        )
+
+    if applied:
+        return sorted(applied, key=_sample_sort_key)[-1]
+
+    return catalog[-1]
+
+
+def _build_partial_validation_context(root, mode):
+    root = Path(root)
+    db_path = root / "registry/db/acellorator_index.sqlite"
+    context = {
+        "root": root,
+        "db_path": db_path,
+        "current_state": None,
+        "ledger_index": None,
+        "patch_chain_cache": {},
+        "patch_catalog": [],
+        "sample_patch": None,
+        "sample_patch_path": None,
+    }
+
+    needs_db = mode in {"quick", "governance_only", "patch_chain_only", "db_only"}
+    if needs_db:
+        try:
+            from scripts.query_governance import build_current_state_capsule, load_governance_change_ledger_index
+
+            if db_path.exists():
+                context["current_state"] = build_current_state_capsule(str(db_path))
+            context["ledger_index"] = load_governance_change_ledger_index()
+        except Exception as exc:
+            context["warnings"] = [f"Governance runtime context unavailable: {exc}"]
+
+    if mode in {"quick", "governance_only", "patch_chain_only", "registries_only"}:
+        context["patch_catalog"] = _collect_patch_catalog(root)
+        sample = _select_patch_gate_sample(context["patch_catalog"])
+        if sample:
+            context["sample_patch"] = sample.get("patch")
+            context["sample_patch_path"] = sample.get("path")
+
+    return context
+
+
+def _run_json_parse_validation(root, context=None):
+    root = Path(root)
+    results = {"status": "success", "errors": [], "warnings": [], "checked_files": []}
+    candidates = [
+        root / "registry/governance_manifest.json",
+        root / "registry/governance_change_ledger.json",
+        root / "registry/governance_hash_registry.json",
+        root / "registry/lexicon_validation_registry.json",
+        root / "registry/lexicon_gap_queue.json",
+        root / "registry/evidence_campaign_template_registry.json",
+        root / "registry/cross_dataset_pairing_registry.json",
+        root / "registry/prediction_binding_registry.json",
+        root / "registry/public_dataset_registry.json",
+    ]
+
+    docs_dir = root / "docs/governance"
+    if docs_dir.exists():
+        candidates.extend(sorted(docs_dir.glob("*.json")))
+
+    patch_dir = root / "registry/governance/patches"
+    if patch_dir.exists():
+        candidates.extend(sorted(patch_dir.glob("PATCH_*.json")))
+
+    for path in candidates:
+        if not path.exists():
+            continue
+        _, err = _load_json_document(path)
+        rel = str(path).replace("\\", "/")
+        results["checked_files"].append(rel)
+        if err:
+            results["errors"].append(f"JSON Parse Error ({rel}): {err}")
+
+    if results["errors"]:
+        results["status"] = "failed"
+    results["items_checked"] = len(results["checked_files"])
+    results["evidence_paths"] = results["checked_files"][:10]
+    return results
+
+
+def _run_hash_registry_validation(root, context=None):
+    root = Path(root)
+    results = {"status": "success", "errors": [], "warnings": [], "checked_files": []}
+    registry_path = root / "registry/governance_hash_registry.json"
+    registry, err = _load_json_document(registry_path)
+    if err:
+        return {"status": "failed", "errors": [f"Governance hash registry load error: {err}"], "warnings": []}
+
+    hashes = registry.get("hashes", {}) if isinstance(registry, dict) else {}
+    if not isinstance(hashes, dict):
+        return {"status": "failed", "errors": ["Governance hash registry missing 'hashes' mapping."], "warnings": []}
+
+    for rel_path, expected_hash in hashes.items():
+        target = root / rel_path
+        if not target.exists():
+            results["errors"].append(f"Governance hash registry target missing: {rel_path}")
+            continue
+        actual_hash = _hash_file(target)
+        results["checked_files"].append(rel_path)
+        if str(actual_hash or "").lower() != str(expected_hash or "").lower():
+            results["errors"].append(f"Hash mismatch for {rel_path}")
+
+    if results["errors"]:
+        results["status"] = "failed"
+    results["items_checked"] = len(results["checked_files"])
+    results["evidence_paths"] = [str(registry_path).replace("\\", "/")]
+    return results
+
+
+def _run_governance_ledger_validation(root, context=None):
+    root = Path(root)
+    ledger_path = root / "registry/governance_change_ledger.json"
+    results = {"status": "success", "errors": [], "warnings": [], "checked_entries": 0}
+    ledger, err = _load_json_document(ledger_path)
+    if err:
+        return {"status": "failed", "errors": [f"Governance ledger load error: {err}"], "warnings": []}
+
+    entries = ledger.get("entries", []) if isinstance(ledger, dict) else []
+    if not isinstance(entries, list):
+        return {"status": "failed", "errors": ["Governance ledger missing 'entries' list."], "warnings": []}
+
+    seen_change_ids = set()
+    for entry in entries:
+        if not isinstance(entry, dict):
+            results["errors"].append(f"Malformed governance ledger entry: {entry}")
+            continue
+        results["checked_entries"] += 1
+        for field in ("change_id", "patch_id", "timestamp", "description", "affected_assets"):
+            if field not in entry:
+                results["errors"].append(f"Governance ledger entry missing '{field}': {entry.get('change_id', '<unknown>')}")
+        change_id = entry.get("change_id")
+        if change_id in seen_change_ids:
+            results["errors"].append(f"Duplicate governance change_id: {change_id}")
+        seen_change_ids.add(change_id)
+
+    if results["errors"]:
+        results["status"] = "failed"
+    results["items_checked"] = results["checked_entries"]
+    results["evidence_paths"] = [str(ledger_path).replace("\\", "/")]
+    return results
+
+
+def _run_patch_record_validation(root, context=None):
+    root = Path(root)
+    results = {"status": "success", "errors": [], "warnings": [], "checked_patches": 0}
+    catalog = context.get("patch_catalog") if context else None
+    if not catalog:
+        catalog = _collect_patch_catalog(root)
+
+    if not catalog:
+        return {"status": "skipped", "errors": [], "warnings": ["Patch registry missing."], "checked_patches": 0}
+
+    seen_patch_ids = set()
+    evidence_paths = []
+    for item in catalog:
+        patch = item.get("patch")
+        patch_path = item.get("path")
+        rel = str(patch_path).replace("\\", "/") if patch_path else "<unknown>"
+        evidence_paths.append(rel)
+        if item.get("error"):
+            results["errors"].append(f"Patch record parse error ({rel}): {item['error']}")
+            continue
+        if not isinstance(patch, dict):
+            results["errors"].append(f"Unreadable patch record: {rel}")
+            continue
+
+        results["checked_patches"] += 1
+        patch_id = patch.get("patch_id")
+        if not patch_id:
+            results["errors"].append(f"Patch record missing patch_id: {rel}")
+        elif patch_id in seen_patch_ids:
+            results["errors"].append(f"Duplicate patch_id in registry: {patch_id}")
+        seen_patch_ids.add(patch_id)
+
+        if not patch.get("status"):
+            results["errors"].append(f"Patch record missing status: {patch_id or rel}")
+        if not patch.get("title"):
+            results["errors"].append(f"Patch record missing title: {patch_id or rel}")
+        depends_on = patch.get("depends_on", [])
+        if depends_on is not None and not isinstance(depends_on, list):
+            results["errors"].append(f"Patch record has non-list depends_on: {patch_id or rel}")
+        if str(patch.get("status", "")).upper() == "APPLIED" and not patch.get("applied_on"):
+            results["errors"].append(f"Applied patch missing applied_on: {patch_id or rel}")
+
+    if results["errors"]:
+        results["status"] = "failed"
+    results["items_checked"] = results["checked_patches"]
+    results["evidence_paths"] = evidence_paths[:10]
+    return results
+
+
+def _run_patch_gate_validation(root, context=None, sample_limit=1):
+    root = Path(root)
+    db_path = root / "registry/db/acellorator_index.sqlite"
+    results = {
+        "status": "success",
+        "errors": [],
+        "warnings": [],
+        "checked_patches": 0,
+        "sample_patch_id": None,
+        "sample_patch_status": None,
+        "sample_patch_decision": None,
+        "sample_patch_reason": None,
+    }
+
+    sample = context.get("sample_patch") if context else None
+    sample_path = context.get("sample_patch_path") if context else None
+    if not sample:
+        catalog = context.get("patch_catalog") if context else None
+        if not catalog:
+            catalog = _collect_patch_catalog(root)
+        sample_item = _select_patch_gate_sample(catalog)
+        if sample_item:
+            sample = sample_item.get("patch")
+            sample_path = sample_item.get("path")
+
+    if not sample or not isinstance(sample, dict):
+        return {"status": "skipped", "errors": [], "warnings": ["No patch record available for patch-gate smoke check."], "checked_patches": 0}
+
+    try:
+        from scripts.query_governance import build_patch_chain_result, evaluate_patch_gate
+    except ImportError as exc:
+        return {"status": "failed", "errors": [f"Could not import governance runtime helpers: {exc}"], "warnings": []}
+
+    current_state = context.get("current_state") if context else None
+    ledger_index = context.get("ledger_index") if context else None
+    patch_chain_cache = context.get("patch_chain_cache") if context else {}
+    patch_chain_result = None
+    patch_id = sample.get("patch_id")
+    if patch_id:
+        try:
+            patch_chain_result = build_patch_chain_result(
+                patch_id,
+                current_state=current_state,
+                ledger_index=ledger_index,
+                cache=patch_chain_cache,
+            )
+        except Exception as exc:
+            results["errors"].append(f"Patch-chain preflight failed for {patch_id}: {exc}")
+
+    try:
+        gate_result = evaluate_patch_gate(
+            str(db_path),
+            sample,
+            patch_source_path=str(sample_path) if sample_path else None,
+            requested_action="apply",
+            log_to_db=False,
+            current_state=current_state,
+            ledger_index=ledger_index,
+            patch_chain_result=patch_chain_result,
+        )
+    except Exception as exc:
+        return {"status": "failed", "errors": [f"Patch-gate smoke check failed: {exc}"], "warnings": []}
+
+    results["checked_patches"] = 1
+    results["sample_patch_id"] = gate_result.get("patch_id") or patch_id
+    results["sample_patch_status"] = str(sample.get("status") or "").upper() or None
+    results["sample_patch_decision"] = gate_result.get("decision")
+    results["sample_patch_reason"] = gate_result.get("reason")
+    results["evidence_paths"] = _dedupe_paths([
+        str(sample_path).replace("\\", "/") if sample_path else None,
+        str(db_path).replace("\\", "/"),
+    ] + (patch_chain_result.get("evidence_paths", []) if isinstance(patch_chain_result, dict) else []))
+
+    decision = str(gate_result.get("decision") or "").lower()
+    if decision == "block":
+        results["errors"].append(gate_result.get("reason") or "Patch gate smoke check blocked the sample patch.")
+        results["status"] = "failed"
+    elif decision in {"defer", "allow_with_note"}:
+        results["warnings"].append(gate_result.get("reason") or "Patch gate returned a deferred/annotated result.")
+        results["status"] = "warning"
+    elif decision not in {"allow"}:
+        results["warnings"].append(f"Patch gate returned unexpected decision '{decision}'.")
+        results["status"] = "warning"
+
+    if results["errors"]:
+        results["status"] = "failed"
+    results["items_checked"] = results["checked_patches"]
+    return results
+
+
+def _build_partial_validation_stage_plan(root, args, mode, context):
+    root = Path(root)
+    current_state = context.get("current_state")
+    ledger_index = context.get("ledger_index")
+    patch_chain_cache = context.get("patch_chain_cache") if context.get("patch_chain_cache") is not None else {}
+
+    def _patch_chain_runner():
+        return PatchChainValidator(
+            root,
+            no_db_log=args.no_db_log,
+            current_state=current_state,
+            ledger_index=ledger_index,
+            cache=patch_chain_cache,
+        ).run()
+
+    def _patch_gate_runner():
+        return _run_patch_gate_validation(root, context=context)
+
+    plan = [
+        ("manifest_validation", lambda: UnifiedManifestValidator(root).run()),
+        ("json_parse_validation", lambda: _run_json_parse_validation(root, context=context)),
+        ("registry_validation", lambda: RegistryValidator(root).run()),
+        ("hash_registry_validation", lambda: _run_hash_registry_validation(root, context=context)),
+        ("governance_ledger_validation", lambda: _run_governance_ledger_validation(root, context=context)),
+        ("patch_record_validation", lambda: _run_patch_record_validation(root, context=context)),
+        ("patch_chain_validation", _patch_chain_runner),
+        ("patch_gate_validation", _patch_gate_runner),
+        ("db_authority_validation", lambda: DatabaseRuntimeValidator(root).run()),
+        ("math_validation", lambda: MathValidator(root, read_only=True).run()),
+        ("math_test_provenance_validation", lambda: MathTestProvenanceValidator(root).run()),
+        ("math_program_validation", lambda: MathProgramValidator(root, full_report=args.full_math_program).run()),
+        ("hygiene_validation", lambda: HygieneValidator(root).run()),
+    ]
+
+    if mode == "quick":
+        selected = {
+            "manifest_validation",
+            "registry_validation",
+            "patch_chain_validation",
+            "patch_gate_validation",
+            "db_authority_validation",
+        }
+    elif mode == "registries_only":
+        selected = {
+            "manifest_validation",
+            "json_parse_validation",
+            "registry_validation",
+            "hash_registry_validation",
+            "governance_ledger_validation",
+            "patch_record_validation",
+        }
+    elif mode == "governance_only":
+        selected = {
+            "registry_validation",
+            "governance_ledger_validation",
+            "patch_record_validation",
+            "patch_chain_validation",
+            "patch_gate_validation",
+            "db_authority_validation",
+        }
+    elif mode == "patch_chain_only":
+        selected = {"patch_chain_validation"}
+    elif mode == "db_only":
+        selected = {"db_authority_validation"}
+    elif mode == "math_only":
+        selected = {
+            "math_validation",
+            "math_test_provenance_validation",
+            "math_program_validation",
+        }
+    else:
+        selected = {stage_name for stage_name, _ in plan}
+
+    return plan, selected
+
+
+def _collect_stage_items_checked(stage_name, result):
+    for key in (
+        "items_checked",
+        "checked_patches",
+        "checked_files",
+        "tools_tested",
+        "checked_entries",
+    ):
+        value = result.get(key)
+        if isinstance(value, int):
+            return value
+        if isinstance(value, list):
+            return len(value)
+
+    summary = result.get("summary")
+    if isinstance(summary, dict):
+        if isinstance(summary.get("status_counts"), dict):
+            return sum(summary["status_counts"].values())
+        if isinstance(summary.get("sample"), list):
+            return len(summary["sample"])
+
+    if stage_name == "report_write":
+        return 1
+
+    return 0
+
+
+def _collect_stage_evidence_paths(result):
+    paths = []
+    for key in ("evidence_paths", "checked_files"):
+        value = result.get(key)
+        if isinstance(value, list):
+            paths.extend(str(item) for item in value if item)
+
+    db_path = result.get("db_path")
+    if db_path:
+        paths.append(str(db_path))
+
+    patch_file = result.get("patch_file")
+    if patch_file:
+        paths.append(str(patch_file))
+
+    if result.get("sample_patch_path"):
+        paths.append(str(result["sample_patch_path"]))
+
+    return _dedupe_paths(paths)[:10]
+
+
+def _summarize_stage_failure(stage_name, result, trace_entry, report_stale=False):
+    if trace_entry.get("status") == "skipped":
+        return "SKIPPED_BY_MODE", None
+    if trace_entry.get("timed_out"):
+        summary = None
+        if result.get("errors"):
+            summary = result["errors"][0]
+        elif result.get("warnings"):
+            summary = result["warnings"][0]
+        return "TIMEOUT", summary
+
+    failure_class = trace_entry.get("failure_class")
+    if failure_class == "tooling_failure":
+        summary = result.get("errors", [None])[0] if result.get("errors") else None
+        return "FAIL_TOOLING", summary
+    if failure_class == "runtime_failure":
+        summary = result.get("errors", [None])[0] if result.get("errors") else None
+        return "FAIL_RUNTIME", summary
+    if failure_class == "semantic_failure":
+        summary = result.get("errors", [None])[0] if result.get("errors") else None
+        return "FAIL_SEMANTIC", summary
+
+    if stage_name == "report_write" and report_stale:
+        return "STALE_REPORT_WARNING", "Existing global health report was stale before this run."
+
+    return "PASS", None
+
+
+def _build_stage_results(stage_trace, report_stale=False, include_report_write=False, report_path=None):
+    stage_results = []
+    for trace_entry in stage_trace:
+        stage_name = trace_entry.get("stage") or trace_entry.get("stage_name") or "unknown"
+        result = trace_entry.get("result_snapshot") or {}
+        status, failure_summary = _summarize_stage_failure(stage_name, result, trace_entry, report_stale=report_stale)
+        stage_result = {
+            "stage_name": stage_name,
+            "status": status,
+            "duration_seconds": round(float(trace_entry.get("duration_seconds") or 0.0), 6),
+            "items_checked": _collect_stage_items_checked(stage_name, result),
+            "failure_code": None if status in {"PASS", "SKIPPED_BY_MODE"} else status,
+            "failure_summary": failure_summary,
+            "evidence_paths": _collect_stage_evidence_paths(result),
+        }
+        stage_results.append(stage_result)
+
+    if include_report_write:
+        report_result = {
+            "stage_name": "report_write",
+            "status": "STALE_REPORT_WARNING" if report_stale else "PASS",
+            "duration_seconds": 0.0,
+            "items_checked": 1,
+            "failure_code": "STALE_REPORT_WARNING" if report_stale else None,
+            "failure_summary": "Existing global health report was stale before this run." if report_stale else None,
+            "evidence_paths": [report_path] if report_path else [],
+        }
+        stage_results.append(report_result)
+
+    return stage_results
+
+
+def _detect_report_staleness(root, report_path):
+    root = Path(root)
+    report_path = Path(report_path)
+    if not report_path.exists():
+        return False
+
+    try:
+        report_mtime = report_path.stat().st_mtime
+    except Exception:
+        return False
+
+    candidates = [
+        root / "registry/governance_change_ledger.json",
+        root / "registry/governance_hash_registry.json",
+        root / "registry/governance_manifest.json",
+        root / "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+        root / "scripts/global_validate.py",
+        root / "scripts/query_governance.py",
+    ]
+    patch_dir = root / "registry/governance/patches"
+    if patch_dir.exists():
+        candidates.extend(sorted(patch_dir.glob("PATCH_*.json")))
+
+    newest = report_mtime
+    for path in candidates:
+        try:
+            if path.exists():
+                newest = max(newest, path.stat().st_mtime)
+        except Exception:
+            continue
+    return newest > report_mtime
+
+
+def _count_regular_files(path):
+    path = Path(path)
+    if not path.exists():
+        return 0
+    return sum(1 for item in path.rglob("*") if item.is_file())
+
+
+def _load_jsonl_records(path):
+    path = Path(path)
+    if not path.exists():
+        return [], None
+
+    records = []
+    line_number = 0
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            for line_number, raw_line in enumerate(f, 1):
+                line = raw_line.strip()
+                if not line:
+                    continue
+                records.append(json.loads(line))
+    except Exception as exc:
+        return None, f"{path.as_posix()} line {line_number}: {exc}"
+
+    return records, None
+
+
+def _write_jsonl_record(path, record):
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with open(path, "a", encoding="utf-8") as f:
+        f.write(json.dumps(record, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n")
+
+
+def _build_validation_history_record(report, stage_trace, root, run_id):
+    stage_durations = {}
+    stage_statuses = {}
+    warning_count = 0
+
+    for trace_entry in stage_trace:
+        stage_name = trace_entry.get("stage") or trace_entry.get("stage_name") or "unknown"
+        stage_durations[stage_name] = round(float(trace_entry.get("duration_seconds") or 0.0), 6)
+        stage_statuses[stage_name] = trace_entry.get("status") or "unknown"
+        warning_count += int(trace_entry.get("warning_count") or 0)
+
+    if report.get("stale_report_warning"):
+        warning_count += 1
+
+    patch_catalog = _collect_patch_catalog(root)
+    ledger_data, _ = _load_json_document(Path(root) / "registry/governance_change_ledger.json")
+    hash_data, _ = _load_json_document(Path(root) / "registry/governance_hash_registry.json")
+
+    ledger_entries = ledger_data.get("entries", []) if isinstance(ledger_data, dict) else []
+    hash_entries = hash_data.get("hashes", {}) if isinstance(hash_data, dict) else {}
+    slowest_stages = report.get("slowest_stages", [])
+
+    history_record = {
+        "run_id": run_id,
+        "timestamp": report.get("completed_at") or report.get("started_at"),
+        "validation_mode": report.get("validation_mode"),
+        "overall_status": report.get("overall_status"),
+        "duration_seconds": round(float(report.get("duration_seconds") or 0.0), 6),
+        "stage_durations": stage_durations,
+        "stage_statuses": stage_statuses,
+        "warning_count": warning_count,
+        "semantic_failure_count": len(report.get("semantic_failures", [])),
+        "runtime_failure_count": len(report.get("runtime_failures", [])),
+        "tooling_failure_count": len(report.get("tooling_failures", [])),
+        "registry_file_count": _count_regular_files(Path(root) / "registry"),
+        "patch_record_count": len(patch_catalog),
+        "ledger_entry_count": len(ledger_entries),
+        "hash_registry_entry_count": len(hash_entries),
+        "slowest_stage": slowest_stages[0] if slowest_stages else None,
+    }
+    return history_record
+
+
+def _select_trend_baseline(records, baseline_selector=None):
+    if not records:
+        return None, "TREND_HISTORY_UNAVAILABLE"
+
+    if baseline_selector:
+        for record in reversed(records):
+            if str(record.get("run_id")) == str(baseline_selector):
+                return record, "ready"
+        return None, "TREND_HISTORY_UNAVAILABLE"
+
+    for record in reversed(records):
+        if str(record.get("validation_mode")) == "full" and str(record.get("overall_status")) == "pass":
+            return record, "ready"
+
+    return None, "TREND_HISTORY_UNAVAILABLE"
+
+
+def _build_trend_report(current_record, baseline_record, trend_status):
+    trend_report = {
+        "current_run_id": current_record.get("run_id"),
+        "baseline_run_id": baseline_record.get("run_id") if baseline_record else None,
+        "duration_delta_seconds": None,
+        "duration_delta_percent": None,
+        "stage_duration_deltas": {},
+        "warning_count_delta": None,
+        "failure_count_delta": None,
+        "registry_growth_delta": None,
+        "patch_count_delta": None,
+        "ledger_growth_delta": None,
+        "hash_registry_growth_delta": None,
+        "regression_flags": [],
+        "improvement_flags": [],
+        "trend_status": trend_status,
+    }
+
+    if not baseline_record:
+        return trend_report
+
+    current_duration = float(current_record.get("duration_seconds") or 0.0)
+    baseline_duration = float(baseline_record.get("duration_seconds") or 0.0)
+    trend_report["duration_delta_seconds"] = round(current_duration - baseline_duration, 6)
+    if baseline_duration:
+        trend_report["duration_delta_percent"] = round(((current_duration - baseline_duration) / baseline_duration) * 100.0, 3)
+
+    current_stage_durations = current_record.get("stage_durations") or {}
+    baseline_stage_durations = baseline_record.get("stage_durations") or {}
+    for stage_name, current_stage_duration in current_stage_durations.items():
+        baseline_stage_duration = baseline_stage_durations.get(stage_name)
+        if baseline_stage_duration is None:
+            continue
+        trend_report["stage_duration_deltas"][stage_name] = round(float(current_stage_duration or 0.0) - float(baseline_stage_duration or 0.0), 6)
+
+        if float(baseline_stage_duration or 0.0) > 0:
+            stage_delta_percent = ((float(current_stage_duration or 0.0) - float(baseline_stage_duration or 0.0)) / float(baseline_stage_duration or 0.0)) * 100.0
+            if stage_delta_percent > 75:
+                trend_report["regression_flags"].append(f"TREND_WARNING_STAGE_REGRESSION:{stage_name}")
+            elif stage_delta_percent < -25:
+                trend_report["improvement_flags"].append(f"TREND_IMPROVEMENT_STAGE:{stage_name}")
+
+    current_warning_count = int(current_record.get("warning_count") or 0)
+    baseline_warning_count = int(baseline_record.get("warning_count") or 0)
+    current_failure_count = int(current_record.get("semantic_failure_count") or 0) + int(current_record.get("runtime_failure_count") or 0) + int(current_record.get("tooling_failure_count") or 0)
+    baseline_failure_count = int(baseline_record.get("semantic_failure_count") or 0) + int(baseline_record.get("runtime_failure_count") or 0) + int(baseline_record.get("tooling_failure_count") or 0)
+
+    trend_report["warning_count_delta"] = current_warning_count - baseline_warning_count
+    trend_report["failure_count_delta"] = current_failure_count - baseline_failure_count
+    trend_report["registry_growth_delta"] = int(current_record.get("registry_file_count") or 0) - int(baseline_record.get("registry_file_count") or 0)
+    trend_report["patch_count_delta"] = int(current_record.get("patch_record_count") or 0) - int(baseline_record.get("patch_record_count") or 0)
+    trend_report["ledger_growth_delta"] = int(current_record.get("ledger_entry_count") or 0) - int(baseline_record.get("ledger_entry_count") or 0)
+    trend_report["hash_registry_growth_delta"] = int(current_record.get("hash_registry_entry_count") or 0) - int(baseline_record.get("hash_registry_entry_count") or 0)
+
+    total_duration_delta_percent = trend_report["duration_delta_percent"]
+    if total_duration_delta_percent is not None and total_duration_delta_percent > 50:
+        trend_report["regression_flags"].append("TREND_WARNING_DURATION_REGRESSION")
+    if trend_report["warning_count_delta"] > 5:
+        trend_report["regression_flags"].append("TREND_WARNING_WARNING_GROWTH")
+    if int(current_record.get("runtime_failure_count") or 0) > int(baseline_record.get("runtime_failure_count") or 0):
+        trend_report["regression_flags"].append("TREND_WARNING_FAILURE_GROWTH_RUNTIME")
+    if int(current_record.get("tooling_failure_count") or 0) > int(baseline_record.get("tooling_failure_count") or 0):
+        trend_report["regression_flags"].append("TREND_WARNING_FAILURE_GROWTH_TOOLING")
+    if int(current_record.get("semantic_failure_count") or 0) > int(baseline_record.get("semantic_failure_count") or 0):
+        trend_report["regression_flags"].append("TREND_WARNING_FAILURE_GROWTH_SEMANTIC")
+
+    if trend_report["duration_delta_seconds"] is not None and trend_report["duration_delta_seconds"] < 0:
+        trend_report["improvement_flags"].append("TOTAL_DURATION_IMPROVED")
+    if trend_report["warning_count_delta"] < 0:
+        trend_report["improvement_flags"].append("WARNING_COUNT_IMPROVED")
+    if trend_report["failure_count_delta"] < 0:
+        trend_report["improvement_flags"].append("FAILURE_COUNT_IMPROVED")
+
+    return trend_report
+
 
 def main():
     parser = argparse.ArgumentParser(description="Global Ecosystem Validation Harness")
     parser.add_argument("--root", default=".", help="Project root directory")
     parser.add_argument("--out", default="outputs/audits/global_health_report.json", help="Report output path")
     parser.add_argument("--full-math-program", action="store_true", help="Embed full math-program validator payloads in the output report.")
+    mode_group = parser.add_mutually_exclusive_group()
+    mode_group.add_argument("--quick", action="store_true", help="Run the smallest governed validation set.")
+    mode_group.add_argument("--registries-only", action="store_true", help="Run registry-focused validation stages only.")
+    mode_group.add_argument("--governance-only", action="store_true", help="Run governance/runtime-focused validation stages only.")
+    mode_group.add_argument("--patch-chain-only", action="store_true", help="Run only the governed patch-chain summary stage.")
+    mode_group.add_argument("--db-only", action="store_true", help="Run only database authority/runtime checks.")
+    mode_group.add_argument("--math-only", action="store_true", help="Run only math-program validation checks.")
+    parser.add_argument("--no-db-log", action="store_true", help="Suppress DB-backed logging in auxiliary governance diagnostics.")
+    parser.add_argument("--stage-timeout-seconds", type=float, help="Mark any stage exceeding this budget as timed out in the report.")
+    parser.add_argument("--profile", action="store_true", help="Emit a detailed stage timing profile in the report.")
+    parser.add_argument("--history", action="store_true", help="Append a compact run summary to outputs/audits/validation_history.jsonl.")
+    parser.add_argument("--trend", action="store_true", help="Generate outputs/audits/validation_trend_report.json from prior validation history.")
+    parser.add_argument("--trend-baseline", help="Select a baseline run_id for trend comparison; defaults to the most recent passing full run.")
+    parser.add_argument("--no-history", action="store_true", help="Disable history writing even when trend mode is enabled.")
     args = parser.parse_args()
 
     root = Path(args.root)
+    mode = _select_validation_mode(args)
+    out_path = Path(args.out)
+    history_path = root / "outputs/audits/validation_history.jsonl"
+    trend_path = root / "outputs/audits/validation_trend_report.json"
+    history_requested = bool(args.history or args.trend)
+    history_enabled = bool(history_requested and not args.no_history)
+    trend_enabled = bool(args.trend)
+    history_records = []
+    history_load_error = None
+    if trend_enabled:
+        history_records, history_load_error = _load_jsonl_records(history_path)
+    report_stale = _detect_report_staleness(root, out_path)
+    report_started_at = datetime.now().isoformat()
+    run_id = f"GV-{datetime.now().strftime('%Y%m%dT%H%M%S.%f')}-{os.getpid()}"
+    total_started = time.perf_counter()
+
+    partial_mode = mode != "full"
+    if partial_mode:
+        context = _build_partial_validation_context(root, mode)
+        stage_plan, selected_stage_names = _build_partial_validation_stage_plan(root, args, mode, context)
+    else:
+        context = None
+        selected_stage_names = _selected_stage_names(mode)
+        stage_plan = _build_validation_stage_plan(root, args)
+
     report = {
-        "timestamp": datetime.now().isoformat(),
-        "unified_manifest_validation": UnifiedManifestValidator(root).run(),
-        "registry_validation": RegistryValidator(root).run(),
-        "engine_validation": EngineValidator(root).run(),
-        "hygiene_validation": HygieneValidator(root).run(),
-        "math_validation": MathValidator(root).run(),
-        "db_validation": DBValidator(root).run(),
-        "math_test_provenance_validation": MathTestProvenanceValidator(root).run(),
-        "math_program_validation": MathProgramValidator(root, full_report=args.full_math_program).run(),
-        "implementation_validation": ImplementationValidator(root).run(),
-        "evidence_validation": EvidenceValidator(root).run(),
-        "campaign_validation": CampaignValidator(root).run(),
-        "governance_integrity_validation": GovernanceIntegrityValidator(root).run()
+        "run_id": run_id,
+        "validation_mode": mode,
+        "started_at": report_started_at,
+        "completed_at": None,
+        "duration_seconds": None,
+        "validation_options": {
+            "quick": args.quick,
+            "registries_only": args.registries_only,
+            "governance_only": args.governance_only,
+            "patch_chain_only": args.patch_chain_only,
+            "db_only": args.db_only,
+            "math_only": args.math_only,
+            "no_db_log": args.no_db_log,
+            "stage_timeout_seconds": args.stage_timeout_seconds,
+            "profile": args.profile,
+            "history": args.history,
+            "trend": args.trend,
+            "trend_baseline": args.trend_baseline,
+            "no_history": args.no_history,
+        },
     }
 
-    report["overall_status"] = "pass" if all(v["status"] in ["success", "warning", "pass"] for k, v in report.items() if isinstance(v, dict)) else "fail"
+    stage_trace = []
+    for stage_name, runner in stage_plan:
+        if stage_name not in selected_stage_names:
+            result = {"status": "skipped", "warnings": [], "errors": [], "reason": "Excluded by validation mode."}
+            trace_entry = {
+                "stage": stage_name,
+                "status": "skipped",
+                "failure_class": "none",
+                "duration_seconds": 0.0,
+                "timed_out": False,
+                "error_count": 0,
+                "warning_count": 0,
+                "result_snapshot": {},
+            }
+            report[stage_name] = result
+            stage_trace.append(trace_entry)
+            continue
 
-    out_path = Path(args.out)
+        result, trace_entry = _run_validation_stage(stage_name, runner, timeout_seconds=args.stage_timeout_seconds)
+        report[stage_name] = result
+        stage_trace.append(trace_entry)
+
+    total_duration = time.perf_counter() - total_started
+    report["completed_at"] = datetime.now().isoformat()
+    report["duration_seconds"] = round(total_duration, 6)
+    report["stage_trace"] = stage_trace
+
+    report_path_rel = str(out_path).replace("\\", "/")
+    stage_results = _build_stage_results(
+        stage_trace,
+        report_stale=report_stale,
+        include_report_write=True,
+        report_path=report_path_rel,
+    )
+    report["stage_results"] = stage_results
+    report["slowest_stages"] = [
+        {
+            "stage_name": item["stage_name"],
+            "status": item["status"],
+            "duration_seconds": item["duration_seconds"],
+            "items_checked": item["items_checked"],
+        }
+        for item in sorted(
+            [entry for entry in stage_results if entry["status"] not in {"SKIPPED_BY_MODE"}],
+            key=lambda entry: entry["duration_seconds"],
+            reverse=True,
+        )[:3]
+    ]
+    report["runtime_failures"] = [
+        {
+            "stage_name": item["stage_name"],
+            "status": item["status"],
+            "failure_summary": item["failure_summary"],
+            "duration_seconds": item["duration_seconds"],
+        }
+        for item in stage_results
+        if item["status"] in {"FAIL_RUNTIME", "TIMEOUT"}
+    ]
+    report["tooling_failures"] = [
+        {
+            "stage_name": item["stage_name"],
+            "status": item["status"],
+            "failure_summary": item["failure_summary"],
+            "duration_seconds": item["duration_seconds"],
+        }
+        for item in stage_results
+        if item["status"] == "FAIL_TOOLING"
+    ]
+    report["semantic_failures"] = [
+        {
+            "stage_name": item["stage_name"],
+            "status": item["status"],
+            "failure_summary": item["failure_summary"],
+            "duration_seconds": item["duration_seconds"],
+        }
+        for item in stage_results
+        if item["status"] == "FAIL_SEMANTIC"
+    ]
+    report["stale_report_warning"] = report_stale
+
+    if args.profile:
+        report["profile"] = {
+            "total_duration_seconds": round(total_duration, 6),
+            "selected_stage_count": len(selected_stage_names),
+            "completed_stage_count": sum(1 for entry in stage_trace if entry["status"] != "skipped"),
+            "timed_out_stage_count": sum(1 for entry in stage_trace if entry.get("timed_out")),
+            "failure_class_counts": {
+                failure_class: sum(1 for entry in stage_trace if entry.get("failure_class") == failure_class)
+                for failure_class in sorted({entry.get("failure_class") for entry in stage_trace if entry.get("failure_class")})
+            },
+            "slowest_stages": report["slowest_stages"],
+        }
+
+    terminal_statuses = {"success", "warning", "pass", "skipped"}
+    report["overall_status"] = "pass" if all(
+        _normalize_validation_status(entry.get("status")) in terminal_statuses
+        for entry in report.values()
+        if isinstance(entry, dict) and "status" in entry
+    ) else "fail"
+
+    current_history_record = _build_validation_history_record(report, stage_trace, root, run_id)
+    history_write_status = "disabled"
+    history_write_error = None
+    trend_write_status = "disabled"
+    trend_write_error = None
+    trend_status = "disabled"
+
+    if trend_enabled:
+        if history_load_error:
+            trend_report = _build_trend_report(current_history_record, None, "TREND_HISTORY_CORRUPT")
+            trend_status = "TREND_HISTORY_CORRUPT"
+        else:
+            baseline_record, trend_status = _select_trend_baseline(history_records, args.trend_baseline)
+            trend_report = _build_trend_report(current_history_record, baseline_record, trend_status)
+        trend_path.parent.mkdir(parents=True, exist_ok=True)
+        try:
+            with open(trend_path, "w", encoding="utf-8") as f:
+                json.dump(trend_report, f, indent=2)
+            trend_write_status = "written"
+        except Exception as exc:
+            trend_write_status = "failed"
+            trend_write_error = str(exc)
+
+    if history_enabled:
+        try:
+            _write_jsonl_record(history_path, current_history_record)
+            history_write_status = "written"
+        except Exception as exc:
+            history_write_status = "failed"
+            history_write_error = str(exc)
+
+    report["history_write_status"] = history_write_status
+    if history_write_error:
+        report["history_write_error"] = history_write_error
+    report["trend_status"] = trend_status
+    report["trend_write_status"] = trend_write_status
+    if trend_write_error:
+        report["trend_write_error"] = trend_write_error
+
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    with open(out_path, 'w') as f:
+    with open(out_path, "w", encoding="utf-8") as f:
         json.dump(report, f, indent=2)
 
     print(f"Global health report saved to {out_path}")

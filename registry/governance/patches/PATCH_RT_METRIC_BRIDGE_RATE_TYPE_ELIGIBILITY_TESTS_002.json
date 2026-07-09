@@ -1,0 +1,162 @@
+{
+  "patch_id": "PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_TESTS_002",
+  "title": "Rate-Type Eligibility Adversarial Tests",
+  "status": "APPLIED",
+  "applied_on": "2026-07-09T02:20:44.0709705-04:00",
+  "type": "provisional_governance_tests",
+  "campaign": "RT Calculus Metric Bridge",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "depends_on": [
+    "PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_001"
+  ],
+  "rt_core_modified": false,
+  "claim_level": "PROVISIONAL_INDUCTION",
+  "mode": "additive",
+  "purpose": "Define pass, fail, and edge-case adversarial tests for RATE_TYPE_ELIGIBLE(x, phi) while keeping bridge promotion, theorem status, and RT_core unchanged.",
+  "summary": "This patch registers the governed adversarial test suite for the rate-type eligibility predicate. The suite is diagnostic only: it records whether a candidate passes, fails, or remains edge-case ambiguous under a declared reference phi, and it does not promote any bridge claim.",
+  "basis": {
+    "source_patches": [
+      "PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_001"
+    ],
+    "source_surfaces": [
+      "registry/governance/patches/PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_001.json",
+      "docs/governance/rate_type_eligibility_candidate_001.json",
+      "docs/governance/rate_type_eligibility_trace_001.json",
+      "docs/governance/rate_type_eligibility_counterexample_001.json",
+      "docs/governance/propagation_rate_density_endpoint_candidate_003.json",
+      "docs/governance/bridge_admissibility_protocol_061.json",
+      "docs/textbook/mono_process_textbook_complete.md"
+    ],
+    "scope": "Provisional adversarial-test witness that exercises the rate-type eligibility predicate while leaving RT_core unchanged and keeping bridge promotion deferred."
+  },
+  "core_rule": {
+    "id": "RTE_TESTS_001",
+    "statement": "RATE_TYPE_ELIGIBLE(x, phi) may be exercised only through an adversarial test suite that records declared phi before condition evaluation, preserves the distinction between pass, fail, and edge outcomes, and keeps test admission separate from bridge promotion."
+  },
+  "canonical_objects": {
+    "RateTypeEligibilityTestSuite": {
+      "symbol": "RTE_TS",
+      "definition": "A governed test suite that exercises RATE_TYPE_ELIGIBLE(x, phi) across pass, fail, and edge-case domains.",
+      "canonical_form": "RTE_TS := AdversarialSuite({RTE_TEST_PASS_001, RTE_TEST_FAIL_001, RTE_TEST_EDGE_001})",
+      "status": "PROVISIONAL_TEST_SUITE"
+    },
+    "AdversarialTestClass": {
+      "symbol": "RTE_TC",
+      "definition": "A single governed test class inside the test suite, carrying the expected result, required properties, and failure class where applicable."
+    },
+    "TraceFieldSchema": {
+      "symbol": "RTE_TRACE",
+      "definition": "The mandatory trace schema used to record each test execution before any bridge development continues."
+    }
+  },
+  "formal_reading": {
+    "suite": "RTE_TS := {PASS, FAIL, EDGE}",
+    "interpretation": "The suite is diagnostic, not validation. Passing a test admits further bridge development only; failing a test blocks the specific candidate; an edge case records admissibility ambiguity instead of promotion."
+  },
+  "test_classes": [
+    {
+      "id": "RTE_TEST_PASS_001",
+      "name": "Coupled Interior Propagation Candidate",
+      "expected_result": "PASS",
+      "required_properties": [
+        "DOF(x) > 0",
+        "Coupled_AE(x)",
+        "Declared(phi)",
+        "OrderedIntermediate(x, phi)",
+        "EndpointCompatible(x, phi)",
+        "GenExclusionBeforeClosure(x, phi)"
+      ]
+    },
+    {
+      "id": "RTE_TEST_FAIL_001",
+      "name": "True Decoupled Endpoint Candidate",
+      "expected_result": "FAIL",
+      "expected_failure_class": "RATE_TYPE_INELIGIBLE_ZERO_DOF",
+      "reason": "A true 0 DOF endpoint cannot support rate-typed bridge evaluation."
+    },
+    {
+      "id": "RTE_TEST_EDGE_001",
+      "name": "Near-Tie Below Floor Candidate",
+      "expected_result": "EDGE",
+      "expected_issue": "May satisfy coupled interior structure while failing declared admissibility under phi."
+    }
+  ],
+  "mandatory_trace_fields": [
+    "test_id",
+    "domain",
+    "candidate_x",
+    "reference_phi",
+    "condition_checks",
+    "failure_class",
+    "result",
+    "notes"
+  ],
+  "governance_rule": {
+    "id": "GOV_RTE_TESTS_001",
+    "rule": "Every RATE_TYPE_ELIGIBLE(x, phi) test must record the declared phi before condition evaluation."
+  },
+  "anti_promotion_rule": {
+    "id": "GOV_RTE_TESTS_002",
+    "rule": "Passing the adversarial test suite admits further bridge development but does not promote DENSITY_BRIDGE_001 or RATE_UNIFICATION_001."
+  },
+  "forbidden_inferences": [
+    "A passing test is not bridge promotion.",
+    "A failing test does not invalidate RT_core.",
+    "An edge-case test does not collapse into pass/fail without recorded ambiguity.",
+    "The suite does not define a completed metric."
+  ],
+  "required_execution_surface": [
+    "docs/governance/rate_type_eligibility_tests_002.json",
+    "docs/governance/rate_type_eligibility_tests_trace_002.json",
+    "docs/governance/rate_type_eligibility_tests_counterexample_002.json"
+  ],
+  "target_files": [
+    "docs/governance/rate_type_eligibility_tests_002.json",
+    "docs/governance/rate_type_eligibility_tests_trace_002.json",
+    "docs/governance/rate_type_eligibility_tests_counterexample_002.json"
+  ],
+  "required_repo_changes": [
+    {
+      "path": "docs/governance/rate_type_eligibility_tests_002.json",
+      "description": "Add the adversarial test-suite witness that defines PASS, FAIL, and EDGE classes for RATE_TYPE_ELIGIBLE(x, phi)."
+    },
+    {
+      "path": "docs/governance/rate_type_eligibility_tests_trace_002.json",
+      "description": "Add the ordered trace that records declared phi, condition checks, result, and failure class for the three test classes."
+    },
+    {
+      "path": "docs/governance/rate_type_eligibility_tests_counterexample_002.json",
+      "description": "Add the counterexample witness that blocks false pass, false fail, and edge-case conflation readings."
+    },
+    {
+      "path": "docs/textbook/mono_process_textbook_complete.md",
+      "description": "Add the governed clarification that records the adversarial test suite and its trace discipline."
+    },
+    {
+      "path": "registry/governance_change_ledger.json",
+      "description": "Register the proposed tests execution-surface update in the governance ledger."
+    },
+    {
+      "path": "registry/governance_hash_registry.json",
+      "description": "Register the new documentation surfaces and the updated textbook and ledger hashes."
+    }
+  ],
+  "validation_expectations": {
+    "json_parse": "PASS_REQUIRED",
+    "registry_validation": "PASS_REQUIRED",
+    "patch_chain": "PASS_REQUIRED",
+    "patch_gate": "PASS_REQUIRED",
+    "global_validate": "PASS_REQUIRED"
+  },
+  "textbook_integration": {
+    "recommended_location": "Section 2.8, immediately after the rate-type eligibility predicate clarification.",
+    "section_title": "Rate-Type Eligibility Adversarial Tests",
+    "integration_note": "Introduce the pass/fail/edge test suite as the diagnostic screen for RATE_TYPE_ELIGIBLE(x, phi). A declared phi must precede evaluation, and suite outcomes must not be conflated with bridge promotion."
+  },
+  "governance_notes": [
+    "This patch records diagnostic tests, not bridge truth.",
+    "The suite preserves the distinction between admission, testing, and promotion.",
+    "RT_core remains unchanged."
+  ],
+  "agent_instruction": "Create PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_TESTS_002 as PROPOSED only. Use additive mode, cite the applied rate-type eligibility patch and its source surfaces as provenance, build the execution surface, and do not apply until patch-gate returns apply."
+}

@@ -1,0 +1,77 @@
+{
+  "artifact_id": "delta_transition_trace_schema_055",
+  "artifact_type": "ordinal_transition_trace_schema",
+  "status": "DRAFT_PROVISIONAL",
+  "scope": "documentation_only",
+  "source_patch_id": "PATCH_PI_RT_CALCULUS_055",
+  "revision_target": "PATCH_PI_RT_CALCULUS_055",
+  "purpose": "Define the trace fields required to justify movement between ordinal mismatch classes under a declared <S>.",
+  "trace_fields": [
+    "prior_class",
+    "next_class",
+    "declared_reference_coupling_<S>",
+    "declared_r_a",
+    "changed_component",
+    "admissibility_status",
+    "transition_type",
+    "non_numeric_rationale"
+  ],
+  "transition_types": [
+    "LOCAL_ESCALATION",
+    "LOCAL_RELIEF",
+    "JUMP_ESCALATION",
+    "JUMP_RELIEF",
+    "ADMISSIBILITY_BREAK",
+    "REFERENCE_REBINDING"
+  ],
+  "witnesses": [
+    {
+      "witness_id": "WITNESS_055_01",
+      "prior_class": "LOW_MISMATCH",
+      "next_class": "MODERATE_MISMATCH",
+      "declared_reference_coupling_<S>": "S_window_01",
+      "declared_r_a": "r_a_02",
+      "changed_component": "A",
+      "admissibility_status": "admitted",
+      "transition_type": "LOCAL_ESCALATION",
+      "non_numeric_rationale": "The mismatch class rises because the affect-side condition changed under the same declared coupling. No numeric interval is asserted."
+    },
+    {
+      "witness_id": "WITNESS_055_02",
+      "prior_class": "HIGH_MISMATCH",
+      "next_class": "LOW_MISMATCH",
+      "declared_reference_coupling_<S>": "S_window_02",
+      "declared_r_a": "r_a_07",
+      "changed_component": "REFERENCE_REBINDING",
+      "admissibility_status": "admitted",
+      "transition_type": "REFERENCE_REBINDING",
+      "non_numeric_rationale": "The comparison is rebound to a different declared reference, so the ordinal class relief is recorded without a metric interpretation."
+    }
+  ],
+  "forbidden_inference": [
+    "Ordinal class does not imply numeric distance.",
+    "Ordinal class does not imply a Euclidean metric.",
+    "Ordinal class does not imply units.",
+    "Ordinal class does not imply topology.",
+    "Ordinal class does not erase residue-asymmetry r_a."
+  ],
+  "claim_humility": {
+    "current_status": "candidate_witness_only",
+    "non_claims": [
+      "Does not define a numeric distance.",
+      "Does not define a Euclidean metric.",
+      "Does not define a norm.",
+      "Does not define units.",
+      "Does not define a topology.",
+      "Does not modify RT_core."
+    ]
+  },
+  "non_claims": [
+    "Does not define a numeric distance.",
+    "Does not define a Euclidean metric.",
+    "Does not define a norm.",
+    "Does not define units.",
+    "Does not define a topology.",
+    "Does not modify RT_core."
+  ]
+}

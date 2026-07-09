@@ -1,0 +1,127 @@
+{
+  "patch_id": "PATCH_DB_GOVERNANCE_RUNTIME_018",
+  "campaign_id": "CAMPAIGN_DB_GOVERNANCE_RUNTIME_001",
+  "campaign": "CAMPAIGN_DB_GOVERNANCE_RUNTIME_001",
+  "type": "governance_runtime_extension",
+  "status": "APPLIED",
+  "applied_on": "2026-07-07T15:02:48.7575927-04:00",
+  "mode": "additive",
+  "title": "Validator and Gate Logging Scalability Upgrade",
+  "goal": "Upgrade governance validation and gate logging so large patch chains and recursive evidence trees remain auditable without causing SQLite payload failures, database lock contention, or validator timeouts.",
+  "problem_statement": {
+    "observed_failures": [
+      "patch-gate logged path can fail with sqlite3.DataError: string or blob too big",
+      "global_validate.py can exceed the normal execution window after large recursive governance evidence expansion",
+      "aborted validation may leave lingering Python processes and temporary SQLite lock contention"
+    ],
+    "known_root_cause": "scripts/query_governance.py serialized oversized recursive evidence_json payloads into SQLite decision logs, especially patch_chain.dependency_results and evidence_paths.",
+    "not_root_cause": [
+      "PATCH_PI_RT_CALCULUS_059 semantic content",
+      "artifact size",
+      "ledger growth",
+      "hash registry growth",
+      "RT_core"
+    ]
+  },
+  "basis": {
+    "source_patches": [
+      "PATCH_DB_GOVERNANCE_RUNTIME_017",
+      "PATCH_PI_RT_CALCULUS_059"
+    ],
+    "source_surfaces": [
+      "scripts/query_governance.py",
+      "scripts/global_validate.py",
+      "docs/governance/GLOBAL_VALIDATION_ROUTINE.md"
+    ],
+    "scope": "Compact governance decision logging and introduce bounded validation modes without changing semantic patch content or RT_core."
+  },
+  "target_files": [
+    "scripts/query_governance.py",
+    "scripts/global_validate.py",
+    "docs/governance/GLOBAL_VALIDATION_ROUTINE.md"
+  ],
+  "required_repo_changes": [
+    {
+      "path": "scripts/query_governance.py",
+      "description": "Write compact SQLite decision logs, externalize bounded evidence bundles, and preserve gate decisions when logging fails."
+    },
+    {
+      "path": "scripts/global_validate.py",
+      "description": "Add bounded validation modes, stage timing, stage trace classification, and a lightweight DB runtime probe."
+    },
+    {
+      "path": "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+      "description": "Document the new bounded validator modes and stage-trace behavior."
+    }
+  ],
+  "runtime_changes": {
+    "decision_log_compaction": [
+      "compact evidence_json in SQLite",
+      "externalized evidence bundle under outputs/governance/evidence/<patch_id>/",
+      "full recursive evidence tree replaced with bounded audit metadata"
+    ],
+    "validator_modes": [
+      "--quick",
+      "--registries-only",
+      "--governance-only",
+      "--patch-chain-only",
+      "--no-db-log",
+      "--stage-timeout-seconds",
+      "--profile"
+    ],
+    "stage_trace": [
+      "per-stage duration recording",
+      "timed-out classification",
+      "semantic/runtime/tooling failure classification"
+    ]
+  },
+  "registry_updates": [
+    "scripts/query_governance.py",
+    "scripts/global_validate.py",
+    "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+    "registry/governance_hash_registry.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_DB_GOVERNANCE_RUNTIME_018.json"
+  ],
+  "acceptance_criteria": [
+    "Logged patch-gate for PATCH_PI_RT_CALCULUS_059 completes without sqlite3.DataError.",
+    "patch-gate --no-log behavior remains unchanged.",
+    "patch-chain for PATCH_PI_RT_CALCULUS_059 still returns allow or applied-style status.",
+    "global_validate.py --quick completes successfully.",
+    "global_validate.py --governance-only completes successfully.",
+    "global_validate.py --patch-chain-only completes successfully.",
+    "Decision log contains compact evidence with full_evidence_hash and full_evidence_path.",
+    "Externalized full evidence file exists and hash matches the decision-log reference.",
+    "No RT Calculus patch content is modified."
+  ],
+  "updated_artifacts": [
+    "scripts/query_governance.py",
+    "scripts/global_validate.py",
+    "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+    "registry/governance_hash_registry.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_DB_GOVERNANCE_RUNTIME_018.json"
+  ],
+  "summary": {
+    "status": "pass",
+    "runtime": {
+      "db_first_gate": "active",
+      "authority_boundary": "mixed",
+      "validator_modes": "active"
+    },
+    "warnings": [
+      "Compact decision-log evidence is persisted in SQLite and bounded external evidence bundles are written under outputs/governance/evidence/."
+    ]
+  },
+  "validation": {
+    "required": [
+      "logged_gate_no_sqlite_data_error",
+      "no_log_mode_unchanged",
+      "quick_validation_pass",
+      "governance_validation_pass",
+      "patch_chain_validation_pass",
+      "global_validate_report_saved"
+    ],
+    "result": "pass"
+  }
+}

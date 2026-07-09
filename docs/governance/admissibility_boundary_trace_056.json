@@ -1,0 +1,90 @@
+{
+  "artifact_id": "admissibility_boundary_trace_056",
+  "artifact_type": "ordinal_boundary_trace_schema",
+  "status": "DRAFT_PROVISIONAL",
+  "scope": "documentation_only",
+  "source_patch_id": "PATCH_PI_RT_CALCULUS_056",
+  "revision_target": "PATCH_PI_RT_CALCULUS_056",
+  "purpose": "Define the trace fields required to justify movement toward, across, away from, or near a declared admissibility boundary under ordinal mismatch governance.",
+  "trace_fields": [
+    "prior_class",
+    "next_class",
+    "declared_reference_coupling_<S>",
+    "declared_r_a",
+    "declared_boundary",
+    "boundary_state",
+    "transition_type",
+    "admissibility_status",
+    "non_numeric_rationale"
+  ],
+  "transition_types": [
+    "BOUNDARY_APPROACH",
+    "BOUNDARY_CONTACT",
+    "BOUNDARY_CROSSING",
+    "BOUNDARY_RETREAT",
+    "BOUNDARY_PERSISTENCE",
+    "ADMISSIBILITY_BREAK"
+  ],
+  "witnesses": [
+    {
+      "witness_id": "WITNESS_056_01",
+      "prior_class": "LOW_MISMATCH",
+      "next_class": "MODERATE_MISMATCH",
+      "declared_reference_coupling_<S>": "S_boundary_01",
+      "declared_r_a": "r_a_03",
+      "declared_boundary": "BDRY_01",
+      "boundary_state": "BOUNDARY_APPROACH",
+      "transition_type": "BOUNDARY_APPROACH",
+      "admissibility_status": "admitted",
+      "non_numeric_rationale": "The comparison moves closer to the declared boundary because the coupling remains fixed while the mismatch class strengthens. No distance or threshold size is asserted."
+    },
+    {
+      "witness_id": "WITNESS_056_02",
+      "prior_class": "MODERATE_MISMATCH",
+      "next_class": "ADMISSIBILITY_BREAK",
+      "declared_reference_coupling_<S>": "S_boundary_01",
+      "declared_r_a": "r_a_03",
+      "declared_boundary": "BDRY_01",
+      "boundary_state": "BOUNDARY_CROSSING",
+      "transition_type": "ADMISSIBILITY_BREAK",
+      "admissibility_status": "failed",
+      "non_numeric_rationale": "The trace records explicit admissibility failure after boundary contact. The result is classified as a governed break, not a numeric crossing length."
+    },
+    {
+      "witness_id": "WITNESS_056_03",
+      "prior_class": "HIGH_MISMATCH",
+      "next_class": "HIGH_MISMATCH",
+      "declared_reference_coupling_<S>": "S_boundary_02",
+      "declared_r_a": "r_a_11",
+      "declared_boundary": "BDRY_02",
+      "boundary_state": "BOUNDARY_PERSISTENCE",
+      "transition_type": "BOUNDARY_PERSISTENCE",
+      "admissibility_status": "admitted",
+      "non_numeric_rationale": "Repeated evaluation remains near the boundary without a break. Persistence is a governed ordinal outcome and does not imply topological stability or equal spacing."
+    }
+  ],
+  "forbidden_inference": [
+    "Boundary trace does not imply numeric distance.",
+    "Boundary trace does not imply equal boundary thickness.",
+    "Boundary trace does not imply units.",
+    "Boundary trace does not imply a topology.",
+    "Boundary trace does not modify RT_core."
+  ],
+  "claim_humility": {
+    "current_status": "candidate_witness_only",
+    "non_claims": [
+      "Does not define a numeric metric.",
+      "Does not define a norm.",
+      "Does not define scalar thresholds.",
+      "Does not define a topology.",
+      "Does not modify RT_core."
+    ]
+  },
+  "non_claims": [
+    "Does not define a numeric metric.",
+    "Does not define a norm.",
+    "Does not define scalar thresholds.",
+    "Does not define a topology.",
+    "Does not modify RT_core."
+  ]
+}

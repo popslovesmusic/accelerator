@@ -1,0 +1,158 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_055",
+  "status": "APPLIED",
+  "applied_on": "2026-07-07T01:06:43.0094826-04:00",
+  "type": "transition_discipline_patch",
+  "campaign": "RT_CALCULUS",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "title": "Delta Ordinal Mismatch Transition Discipline",
+  "mode": "additive",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_052",
+    "PATCH_PI_RT_CALCULUS_053",
+    "PATCH_PI_RT_CALCULUS_054"
+  ],
+  "basis": {
+    "source_patches": [
+      "PATCH_PI_RT_CALCULUS_052",
+      "PATCH_PI_RT_CALCULUS_053",
+      "PATCH_PI_RT_CALCULUS_054"
+    ],
+    "source_surfaces": [
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_052.json",
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_053.json",
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_054.json",
+      "docs/governance/ae_metric_candidate_052.json",
+      "docs/governance/symmetry_reference_trace_052.json",
+      "docs/governance/ra_symbol_discipline_052.json",
+      "docs/governance/delta_operator_discipline_053.json",
+      "docs/governance/delta_allowed_forbidden_readings_053.json",
+      "docs/governance/delta_non_metric_counterexample_053.json",
+      "docs/governance/ordinal_mismatch_classes_054.json",
+      "docs/governance/ordinal_mismatch_trace_054.json",
+      "docs/governance/ordinal_non_metric_counterexample_054.json"
+    ],
+    "scope": "Define disciplined ordinal movement between Delta mismatch classes under declared changes in A, E, <S>, or r_a. The basis is additive and documentary, extending the governed ordinal mismatch layer while leaving RT_core unchanged."
+  },
+  "core_rule": {
+    "id": "DELTA_ORDINAL_TRANSITION_DISCIPLINE_001",
+    "statement": "Delta may transition between ordinal mismatch classes only under declared changes in A, E, <S>, or r_a; class movement is ordinal and admissibility-sensitive, not numerical distance."
+  },
+  "ordinal_classes_inherited_from_054": [
+    "NO_EXPRESSED_MISMATCH",
+    "LOW_MISMATCH",
+    "MODERATE_MISMATCH",
+    "HIGH_MISMATCH",
+    "ADMISSIBILITY_BREAK"
+  ],
+  "allowed_transitions": {
+    "local_step": [
+      "NO_EXPRESSED_MISMATCH -> LOW_MISMATCH",
+      "LOW_MISMATCH -> MODERATE_MISMATCH",
+      "MODERATE_MISMATCH -> HIGH_MISMATCH",
+      "HIGH_MISMATCH -> ADMISSIBILITY_BREAK"
+    ],
+    "reverse_local_step": [
+      "LOW_MISMATCH -> NO_EXPRESSED_MISMATCH",
+      "MODERATE_MISMATCH -> LOW_MISMATCH",
+      "HIGH_MISMATCH -> MODERATE_MISMATCH"
+    ],
+    "jump_transition": {
+      "allowed": true,
+      "condition": "Only when the trace records an explicit discontinuity, substrate or reference change, residue-asymmetry shock, or admissibility failure."
+    }
+  },
+  "forbidden_inferences": [
+    "Ordinal class transition does not imply equal interval spacing.",
+    "LOW_MISMATCH -> MODERATE_MISMATCH is not assumed to be the same size as MODERATE_MISMATCH -> HIGH_MISMATCH.",
+    "Class movement does not imply scalar magnitude.",
+    "Class movement does not imply Euclidean distance.",
+    "Class movement does not imply physical measurement.",
+    "Transition rules do not modify RT_core."
+  ],
+  "required_transition_trace_fields": [
+    "prior_class",
+    "next_class",
+    "declared_reference_coupling_<S>",
+    "declared_r_a",
+    "changed_component",
+    "admissibility_status",
+    "transition_type",
+    "non_numeric_rationale"
+  ],
+  "transition_types": [
+    "LOCAL_ESCALATION",
+    "LOCAL_RELIEF",
+    "JUMP_ESCALATION",
+    "JUMP_RELIEF",
+    "ADMISSIBILITY_BREAK",
+    "REFERENCE_REBINDING"
+  ],
+  "relationship_to_prior_patches": {
+    "052": "Defines A|E as Delta(A <S>_ra E).",
+    "053": "Constrains Delta as mismatch/asymmetry evaluation rather than numeric distance.",
+    "054": "Defines ordinal mismatch classes.",
+    "055": "Defines disciplined movement between ordinal classes."
+  },
+  "target_files": [
+    "docs/governance/delta_ordinal_transition_rules_055.json",
+    "docs/governance/delta_transition_trace_schema_055.json",
+    "docs/governance/delta_transition_counterexample_055.json"
+  ],
+  "required_repo_changes": [
+    {
+      "path": "docs/governance/delta_ordinal_transition_rules_055.json",
+      "description": "Add the transition-rule witness that constrains Delta class movement under a declared <S>."
+    },
+    {
+      "path": "docs/governance/delta_transition_trace_schema_055.json",
+      "description": "Add the trace schema that records prior and next ordinal classes, changed component, and non-numeric rationale."
+    },
+    {
+      "path": "docs/governance/delta_transition_counterexample_055.json",
+      "description": "Add the counterexample that prevents numeric spacing or distance interpretations of ordinal movement."
+    }
+  ],
+  "required_execution_surface": [
+    "delta_ordinal_transition_rules_055.json",
+    "delta_transition_trace_schema_055.json",
+    "delta_transition_counterexample_055.json"
+  ],
+  "success_criteria": [
+    "Transitions are ordinal only.",
+    "Transition rationale is trace-explicit.",
+    "Jump transitions require explicit discontinuity or rebinding rationale.",
+    "No numerical metric is introduced.",
+    "RT_core remains unchanged.",
+    "global_validate.py remains exit code 0."
+  ],
+  "non_claims": [
+    "Does not define numeric metric values.",
+    "Does not define a norm.",
+    "Does not define equal ordinal spacing.",
+    "Does not define topology.",
+    "Does not assert physical measurability.",
+    "Does not update textbook surfaces.",
+    "Does not modify RT_core."
+  ],
+  "claim_humility": {
+    "current_status": "proposed_only",
+    "non_claims": [
+      "Does not define numeric metric values.",
+      "Does not define a norm.",
+      "Does not define equal ordinal spacing.",
+      "Does not define topology.",
+      "Does not assert physical measurability.",
+      "Does not update textbook surfaces.",
+      "Does not modify RT_core."
+    ]
+  },
+  "validation_expectation": {
+    "json_parse": "required",
+    "registry_record_only": "required",
+    "execution_surface": "required",
+    "textbook_update": "deferred",
+    "rt_core_unchanged": "required"
+  },
+  "agent_instruction": "Create PATCH_PI_RT_CALCULUS_055 as PROPOSED only. Use additive mode, cite applied PATCH_PI_RT_CALCULUS_052, PATCH_PI_RT_CALCULUS_053, and PATCH_PI_RT_CALCULUS_054 as provenance, build the execution surface, and do not apply until patch-gate returns apply."
+}

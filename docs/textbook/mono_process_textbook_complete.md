@@ -1124,6 +1124,50 @@ A constraint-memory space that stores accumulated admissible orientation-transfo
 
 ---
 
+## 2.8 RT Calculus Metric Bridge and Ordinal Transition Discipline
+
+**Governed Clarification 2.8.1: A|E Metric Bridge (PATCH_PI_RT_CALCULUS_052)**
+The canonical bridge reading is
+$$ A|E := \Delta(A \langle S \rangle_{r_a} E) $$
+where $\Delta$ evaluates mismatch under a declared symmetry-reference coupling. This is not a distance between $A$ and $E$, not a norm, not a scalar magnitude, and not a Euclidean or physical metric. The bridge is qualitative and provisional: the comparison is evaluated relative to a declared coupling, and $r_a$ is a residue-asymmetry parameter distinct from $R$ and generic $r$. [Source: PATCH_PI_RT_CALCULUS_052]
+
+**Governed Clarification 2.8.2: Delta Evaluation Discipline (PATCH_PI_RT_CALCULUS_053)**
+$\Delta$ evaluates expressed mismatch or asymmetry under a declared symmetry-reference coupling. It may classify mismatch, compare asymmetry, and expose admissibility under the reference coupling, but it does not by itself define ordinary distance, magnitude, measurement units, or numerical metric space. [Source: PATCH_PI_RT_CALCULUS_053]
+
+**Governed Clarification 2.8.3: Ordinal Mismatch Classes (PATCH_PI_RT_CALCULUS_054)**
+The current ordinal classes are:
+- `NO_EXPRESSED_MISMATCH`
+- `LOW_MISMATCH`
+- `MODERATE_MISMATCH`
+- `HIGH_MISMATCH`
+- `ADMISSIBILITY_BREAK`
+
+These classes are ordinal only. No equal spacing is implied, no numerical values are introduced, and no topology or units are introduced. [Source: PATCH_PI_RT_CALCULUS_054]
+
+**Governed Clarification 2.8.4: Delta Ordinal Transition Discipline (PATCH_PI_RT_CALCULUS_055)**
+Ordinal mismatch classes may transition only through governed transition rules. Adjacent transitions may be admitted when declared admissibility conditions are preserved. Jump transitions require explicit admissibility reasoning and may not be inferred from class ordering alone. Transition does not imply scalar distance or metric magnitude, and $\Delta$ evaluation, ordinal classification, and ordinal transition remain distinct governed layers. [Source: PATCH_PI_RT_CALCULUS_055]
+
+**Governed Clarification 2.8.5: Delta Ordinal Boundary Dynamics (PATCH_PI_RT_CALCULUS_056)**
+Boundary dynamics classify approach, contact, crossing, retreat, and persistence as ordinal governed states under a declared admissibility boundary. The layer is qualitative and trace-explicit: it does not introduce numeric thresholds, units, topology, or metric magnitude. Boundary contact does not by itself imply admissibility break, boundary crossing requires explicit admissibility reasoning, and boundary persistence remains a repeated near-boundary classification rather than a quantitative distance reading. [Source: PATCH_PI_RT_CALCULUS_056]
+
+**Governed Clarification 2.8.6: Provisional Mismatch Field Candidate (PATCH_PI_RT_CALCULUS_057)**
+The field-candidate reading is a provisional organization of repeated $\Delta$ evaluations over declared evaluation contexts. It is field-like only in the governed provisional sense established by PATCH_PI_RT_CALCULUS_057: a trace-linked organization of repeated $\Delta$ evaluations, not a scalar field, vector field, topology, manifold, analytic continuity claim, differentiability claim, or physical field. The diagnostic trace preserves evaluation order and context identity, but the reading remains candidate only and does not promote the bridge to metric status. [Source: PATCH_PI_RT_CALCULUS_057]
+
+**Governed Clarification 2.8.7: Rate-Type Eligibility Predicate (PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_001)**
+`RATE_TYPE_ELIGIBLE(x, phi)` is the governed admissibility predicate that must be checked before any rate-based metric-bridge evaluation. The predicate passes only when `DOF(x) > 0`, `Coupled_AE(x)`, `Declared(phi)`, `OrderedIntermediate(x, phi)`, `EndpointCompatible(x, phi)`, and `GenExclusionBeforeClosure(x, phi)` all hold. Passing the predicate admits bridge testing only; it does not promote a bridge claim, does not validate the candidate bridge, and does not modify `RT_core`. [Source: PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_001]
+
+**Governed Clarification 2.8.8: Rate-Type Eligibility Adversarial Tests (PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_TESTS_002)**
+The adversarial test suite records pass, fail, and edge outcomes for `RATE_TYPE_ELIGIBLE(x, phi)` under a declared `phi`. The suite is diagnostic only: `PASS` admits further bridge development, `FAIL` records the blocking failure class, and `EDGE` preserves admissibility ambiguity rather than collapsing it into promotion or theorem status. `phi` must be declared before condition evaluation, and the mandatory trace fields are `test_id`, `domain`, `candidate_x`, `reference_phi`, `condition_checks`, `failure_class`, `result`, and `notes`. [Source: PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_TESTS_002]
+
+**Governed Clarification 2.8.9: Rate-Type Eligibility Chain Repair (PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_CHAIN_REPAIR_003)**
+The rate-type eligibility predicate inherits its admissibility chain from the upstream bridge-admissibility witness. When that witness is recorded as `PROPOSED` in the registry, patch-chain resolution treats it as active but not yet applied, and downstream bridge admission remains blocked even if the witness content already exists. Synchronizing the witness to `APPLIED` repairs the dependency chain for `PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_001`; the repair changes registry state only and does not promote any bridge claim or modify `RT_core`. [Source: PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_CHAIN_REPAIR_003]
+
+**Governed Clarification 2.8.10: Rate-Type Eligibility Concrete Test Results (PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_RESULTS_003)**
+Concrete adversarial traces record one pass, one fail, and one edge case for `RATE_TYPE_ELIGIBLE(x, phi)` under declared references `phi_phys`, `phi_endpoint`, and `phi_stat`. The pass case remains inside the coupled interior and is eligible for bridge testing only. The fail case records `RATE_TYPE_INELIGIBLE_ZERO_DOF` together with the other blocked conditions that arise at a true `0 DOF` decoupled endpoint. The edge case preserves admissibility ambiguity below the declared floor rather than collapsing into promotion or theorem status. These results are diagnostic only: they establish that eligibility is not validation, do not promote `RATE_UNIFICATION_001` or `DENSITY_BRIDGE_001`, and do not modify `RT_core`. [Source: PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_RESULTS_003]
+
+**Governed Clarification 2.8.11: Minimal Distinction Density Definition (PATCH_RT_METRIC_BRIDGE_DENSITY_MINIMAL_DEFINITION_004)**
+`DISTINCTION_DENSITY(x, phi)` is provisionally introduced as the ordered concentration of admissible non-null distinction relative to a declared `phi`. The quantity is defined organizationally as the condition describing how admissible distinction is distributed within the continuation structure determined by `phi`; any later equation is representational only and does not serve as the ontological definition. Probability, statistics, entropy, spatial density, metric density, and propagation quantities remain downstream projections rather than foundations. The quantity is bridge-native and provisional only: it does not validate `DENSITY_BRIDGE_001`, does not promote `RATE_UNIFICATION_001`, and does not modify `RT_core`. [Source: PATCH_RT_METRIC_BRIDGE_DENSITY_MINIMAL_DEFINITION_004]
+
 ## 2.6 Missing and Provisional Formalisms
 
 To achieve formal closure, the following induction targets must be resolved:
@@ -2517,7 +2561,7 @@ $$ \text{RT}(\Sigma_R) := (W_a \to_r \rho_D \to_r \chi \to_r R_{-(i)} \to_r M_{d
 
 **Components:**
 - **$W_a$ (Admissibility Window):** The phase relationship admissibility class defining the structural limits of the basin.
-- **$\rho_D$ (Distinction Density):** The density of distinguishing activity used to determine dominance weighting.
+- **$\rho_D$ (Distinction Density):** The bridge quantity reading of admissible non-null distinction used to determine dominance weighting.
 - **$\chi$ (Rotational Character):** The CW/CCW directional character of the orientation-event organization.
 - **$R_{-(i)}$ (Orientation-Event Chain):** The residue-coupled dynamic sequence of orientation events.
 - **$M_{dom}$ (Dominant Mismatch):** The largest effective magnitude within the window.
@@ -2526,7 +2570,7 @@ $$ \text{RT}(\Sigma_R) := (W_a \to_r \rho_D \to_r \chi \to_r R_{-(i)} \to_r M_{d
 The full coupled expression is the **evaluative unit**. No single component (e.g., $W_a$ or $\chi$) may be promoted as the independent primary for identity or classification claims.
 
 **Commentary:**
-Distinction density $\rho_D$ participates in dominance selection, rotational character $\chi$ captures stable directional organization, and **boundary-front behavior** ($\partial W_a$) records interactions between adjacent windows rather than failure of the basin identity. 
+Distinction density $\rho_D$ participates in dominance selection as a bridge quantity, rotational character $\chi$ captures stable directional organization, and **boundary-front behavior** ($\partial W_a$) records interactions between adjacent windows rather than failure of the basin identity. 
 
 Module **CLS_004R** supports this reinterpretation within tested synthetic models: rotation and window-width invariants remained stable (100%) under perturbation, while 85% of distinct trajectories collapsed into shared admissibility classes. This reclassifies the "quadrant volatility" observed in geometric models as a boundary-front interaction observable rather than identity instability [Source: CLS_004R_REPORT].
 
@@ -2542,7 +2586,7 @@ Based on the success of the **PD_CG_V1** root-trace falsification attack, proces
     - *Status:* 100% stable under perturbation; verified as root-traceable invariants.
 
 2.  **Selection Dynamics (Level C4):**
-    - **Distinction Density ($\rho_D$):** Weighted persistence of mismatch states.
+    - **Distinction Density ($\rho_D$):** Bridge-quantity weighting of mismatch states.
     - **Dominant Mismatch ($M_{dom}$):** The largest effective magnitude.
     - *Status:* ~70% stable; sensitive to noise amplitudes but structurally consistent.
 
@@ -3683,7 +3727,7 @@ This appendix summarizes the standards for classifying and promoting research cl
 Identity claims within the framework must adhere to the **Relational Hierarchy** established in Module CLS_004R:
 
 1.  **Core Invariants (C5):** Admissibility Window ($W_a$), Rotational Character ($\chi$).
-2.  **Selection Dynamics (C4):** Distinction Density ($\rho_D$), Dominant Mismatch ($M_{dom}$).
+2.  **Selection Dynamics (C4):** Distinction Density ($\rho_D$) as bridge-quantity weighting of mismatch states, Dominant Mismatch ($M_{dom}$).
 3.  **Interaction Observables (C2):** Boundary Fronts ($\partial W_a$), Orientation Events ($R_{-(i)}$).
 
 **Governance Rule (R-SIG-001):**
@@ -3939,6 +3983,18 @@ This section tracks newly introduced lexicon terms that have been reduced to gov
 - **`biconditional_ladder`**: Governed provisional reading of structural connectivity between nested scales of process expressions. [Source: `MPF_RT_BICONDITIONAL_LADDER_001`]
 - **`Affect-Effect_primitive`** (`[A|E]`): Governed provisional reading of a pre-distinction organizational condition at the scale floor. [Source: `MPF_RT_BICONDITIONAL_LADDER_001`]
 - **`Affect-Effect_distinction_projection`** (`D(*|*)`): Governed projection reading in which $D(*|*) := \Pi_D(A|E)$ is the formal distinction-schema projection of the affect/effect primitive distinction condition. $\Pi_D$ is a projection operator, not a generative primitive, and $D(*|*)$ remains a whole-expression schema that is not independently primitive as a detached object. [Source: `PATCH_PI_RT_CALCULUS_010`].
+- **`Affect-Effect_mismatch_bridge`** (`A|E := \Delta(A \langle S \rangle_{r_a} E)`): Governed provisional reading of the symmetry-referenced mismatch bridge. The bridge is qualitative and does not by itself define distance, norm, units, or topology. [Source: `PATCH_PI_RT_CALCULUS_052`].
+- **`Delta_Evaluation_Discipline`** (`\Delta`): Governed reading of mismatch evaluation under a declared symmetry-reference coupling. It remains non-metric, non-numeric, and distinct from ordinary distance or scalar magnitude. [Source: `PATCH_PI_RT_CALCULUS_053`].
+- **`Ordinal_Mismatch_Classes`** (`NO_EXPRESSED_MISMATCH`, `LOW_MISMATCH`, `MODERATE_MISMATCH`, `HIGH_MISMATCH`, `ADMISSIBILITY_BREAK`): Governed ordinal outputs of `Delta` under a declared coupling. The classes are ordinal only and do not imply equal spacing, numeric values, topology, or units. [Source: `PATCH_PI_RT_CALCULUS_054`].
+- **`Delta_Ordinal_Transition_Discipline`**: Governed reading of ordinal transitions between mismatch classes. Adjacent transitions may be admitted when admissibility is preserved; jump transitions require explicit admissibility reasoning. [Source: `PATCH_PI_RT_CALCULUS_055`].
+- **`Admissibility_Boundary_Dynamics`** (`BoundaryApproach`, `BoundaryContact`, `BoundaryCrossing`, `BoundaryRetreat`, `BoundaryPersistence`): Governed ordinal boundary states for `Delta` mismatch transitions. Boundary contact, crossing, retreat, and persistence are trace-explicit and do not imply numeric thresholds, topology, or metric magnitude. [Source: `PATCH_PI_RT_CALCULUS_056`].
+- **`Continuous_Mismatch_Field_Candidate`** (`MF_\Delta`): Governed provisional organization of repeated `Delta` evaluations across declared evaluation contexts. The candidate reading is trace-linked and context-typed, but it is not a metric space, topology, manifold, vector field, scalar field, or physical field, and it does not imply analytic continuity or differentiability. [Source: `PATCH_PI_RT_CALCULUS_057`].
+- **`Rate-Type_Eligibility_Predicate`** (`RATE_TYPE_ELIGIBLE(x, phi)`): Governed admissibility screen for rate-typed metric-bridge evaluation. The predicate requires nonzero degrees of freedom, coupled `A|E`, a declared reference `phi`, an ordered intermediate relation, endpoint compatibility, and generative exclusion before closure. Passing the screen admits bridge testing only and does not promote any bridge claim. [Source: `PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_001`].
+- **`Rate-Type_Eligibility_Chain_Repair`** (`PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_CHAIN_REPAIR_003`): Governed status-reconciliation note that marks the upstream bridge-admissibility witness as `APPLIED` so the rate-type eligibility chain is treated as satisfied. The repair changes registry state only and does not promote any bridge claim. [Source: `PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_CHAIN_REPAIR_003`].
+- **`Rate-Type_Eligibility_Concrete_Test_Results`** (`PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_RESULTS_003`): Governed record of one pass, one fail, and one edge-case trace for `RATE_TYPE_ELIGIBLE(x, phi)` under declared references. Eligibility remains diagnostic only and does not promote `RATE_UNIFICATION_001` or `DENSITY_BRIDGE_001`. [Source: `PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_RESULTS_003`].
+- **`Distinction_Density`** (`DISTINCTION_DENSITY(x, phi)` / `rho_D(x, phi)`): Provisional RT-native bridge quantity defined as the ordered concentration of admissible non-null distinction relative to declared `phi`. The bridge quantity is organizational rather than quotient-defined, and probability, statistics, entropy, spatial density, metric density, and propagation quantities remain downstream projections rather than foundations. A defined distinction density does not validate `DENSITY_BRIDGE_001`. [Source: `PATCH_RT_METRIC_BRIDGE_DENSITY_MINIMAL_DEFINITION_004`].
+- **`Propagation_Position`** (`propagation_position`): Governed derived quantity for the bridge position determined by the resolution rate of `A|E` tension inside the coupled interior. The reading remains provisional and does not by itself define a completed metric or physical propagation law. [Source: `PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_001`].
+- **`Non-Realizability_of_Decoupled_Endpoints`** (`RP001`): Governed candidate principle stating that a true `0 DOF` decoupled endpoint is not realized by any admissibly coupled continuation and is approached only asymptotically in the candidate reading. [Source: `PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_001`].
 - **`Residue-Governed_Continuation_Arrow`** (`A ->r B`): Governed continuation reading in which $B$ is the residue-conditioned lawful continuation of $A$. `->r` is a process transformation, not a rewrite operator, and `r` denotes the residue continuation constraint. [Source: `PATCH_PI_RT_CALCULUS_011`].
 - **`Continuation_Object`** (`C(A,B)`): First-class lawful process object relating condition $A$ to condition $B$ under residue-governed admissibility. `A ->r B` denotes this object, and `A`/`B` are its stabilized endpoints rather than a primitive state floor. [Source: `PATCH_PI_RT_CALCULUS_012`].
 - **`Continuation_Composition`** (`C(A,B) \circ C(B,C)`): Lawful composition of continuation objects when the shared endpoint matches and residue/admissibility are preserved. Composition is process composition, not symbolic concatenation or rewrite. [Source: `PATCH_PI_RT_CALCULUS_013`].

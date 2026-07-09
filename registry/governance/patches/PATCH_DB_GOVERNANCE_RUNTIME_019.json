@@ -1,0 +1,115 @@
+{
+  "patch_id": "PATCH_DB_GOVERNANCE_RUNTIME_019",
+  "campaign_id": "CAMPAIGN_DB_GOVERNANCE_RUNTIME_001",
+  "campaign": "CAMPAIGN_DB_GOVERNANCE_RUNTIME_001",
+  "type": "governance_runtime_extension",
+  "status": "APPLIED",
+  "applied_on": "2026-07-07T19:20:36.0894539-04:00",
+  "mode": "additive",
+  "title": "Validator Stage Profiling and Partial Validation Modes",
+  "goal": "Add staged validator execution, profiling, and partial validation modes so governance failures can be localized without requiring every run to execute the full global validator.",
+  "problem_statement": {
+    "current_issue": "global_validate.py behaves as a monolithic validator with limited execution modes, making timeout diagnosis difficult when runtime-scale or database contention occurs.",
+    "risk": "A tooling/runtime stall may be mistaken for semantic invalidity or may block otherwise sound governance patches.",
+    "needed_capability": "The validator must identify which validation stage is slow, failed, skipped, stale, or semantically invalid."
+  },
+  "basis": {
+    "source_patches": [
+      "PATCH_DB_GOVERNANCE_RUNTIME_018"
+    ],
+    "source_surfaces": [
+      "scripts/global_validate.py",
+      "docs/governance/GLOBAL_VALIDATION_ROUTINE.md"
+    ],
+    "scope": "Add bounded validation modes, stage profiling, and richer validation reports without changing semantic patch content or RT_core."
+  },
+  "target_files": [
+    "scripts/global_validate.py",
+    "docs/governance/GLOBAL_VALIDATION_ROUTINE.md"
+  ],
+  "required_repo_changes": [
+    {
+      "path": "scripts/global_validate.py",
+      "description": "Add bounded validation modes, staged execution planning, stage-result reporting, and stage-level profiling without changing default semantics."
+    },
+    {
+      "path": "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+      "description": "Document the new validator modes, staged report structure, and mode-specific troubleshooting guidance."
+    }
+  ],
+  "runtime_changes": {
+    "validator_modes": [
+      "--quick",
+      "--registries-only",
+      "--governance-only",
+      "--patch-chain-only",
+      "--db-only",
+      "--math-only",
+      "--no-db-log",
+      "--stage-timeout-seconds",
+      "--profile"
+    ],
+    "stage_results": [
+      "validation_mode",
+      "started_at",
+      "completed_at",
+      "duration_seconds",
+      "stage_results",
+      "slowest_stages",
+      "runtime_failures",
+      "tooling_failures",
+      "semantic_failures",
+      "stale_report_warning"
+    ],
+    "stage_trace": [
+      "per-stage duration recording",
+      "timed-out classification",
+      "semantic/runtime/tooling failure classification",
+      "skipped-by-mode tracking"
+    ]
+  },
+  "registry_updates": [
+    "scripts/global_validate.py",
+    "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+    "registry/governance_hash_registry.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_DB_GOVERNANCE_RUNTIME_019.json"
+  ],
+  "acceptance_criteria": [
+    "python scripts/global_validate.py --quick completes and writes a report with validation_mode=quick.",
+    "python scripts/global_validate.py --governance-only --profile reports stage durations.",
+    "python scripts/global_validate.py --registries-only completes without invoking full patch-gate replay.",
+    "A forced stage timeout is classified as TIMEOUT or FAIL_RUNTIME, not semantic failure.",
+    "Default global_validate.py behavior remains backward compatible.",
+    "Report includes slowest_stages and stage_results."
+  ],
+  "updated_artifacts": [
+    "scripts/global_validate.py",
+    "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+    "registry/governance_hash_registry.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_DB_GOVERNANCE_RUNTIME_019.json"
+  ],
+  "summary": {
+    "status": "pass",
+    "runtime": {
+      "validator_modes": "active",
+      "stage_profiles": "active",
+      "authority_boundary": "mixed"
+    },
+    "warnings": [
+      "Bounded validation modes remain additive and do not alter RT_core."
+    ]
+  },
+  "validation": {
+    "required": [
+      "quick_validation_pass",
+      "governance_validation_pass",
+      "registries_only_validation_pass",
+      "db_only_validation_pass",
+      "math_only_validation_pass",
+      "global_validate_report_saved"
+    ],
+    "result": "pass"
+  }
+}

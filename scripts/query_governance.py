@@ -1,4 +1,5 @@
 import argparse
+import hashlib
 import json
 import sqlite3
 import sys
@@ -26,6 +27,7 @@ SNAPSHOT_REFRESH_MIGRATION = ROOT / "registry/db/migrations/20260703_governance_
 REFRESH_STABILITY_MIGRATION = ROOT / "registry/db/migrations/20260703_governance_runtime_refresh_stability_012.sql"
 SEMANTIC_AUTHORITY_MIGRATION = ROOT / "registry/db/migrations/20260703_governance_runtime_semantic_authority_013.sql"
 GLOBAL_HEALTH_REPORT = ROOT / "outputs/audits/global_health_report.json"
+GOVERNANCE_EVIDENCE_DIR = ROOT / "outputs/governance/evidence"
 GOVERNANCE_CHANGE_LEDGER = ROOT / "registry/governance_change_ledger.json"
 RESEARCH_DEBT_REGISTRY = ROOT / "registry/research_debt_registry.json"
 PATCH_REGISTRY_DIR = ROOT / "registry/governance/patches"
@@ -571,6 +573,242 @@ def collect_recent_governance_decisions(conn, limit=5):
         (limit,),
     ).fetchall()
     return [dict(row) for row in rows]
+
+
+def _hash_json_value(value):
+    digest = hashlib.sha256()
+    encoder = json.JSONEncoder(ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+    for chunk in encoder.iterencode(value):
+        digest.update(chunk.encode("utf-8"))
+    return digest.hexdigest()
+
+
+def _hash_file(path):
+    file_path = Path(path)
+    if not file_path.exists() or not file_path.is_file():
+        return None
+
+    digest = hashlib.sha256()
+    try:
+        with file_path.open("rb") as handle:
+            for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+                if not chunk:
+                    break
+        digest.update(chunk)
+    except OSError:
+        return None
+    return digest.hexdigest()
+
+
+def _sanitize_path_component(value, fallback="unknown"):
+    text = re.sub(r"[^A-Za-z0-9._-]+", "_", str(value or "").strip())
+    text = text.strip("._-")
+    return text or fallback
+
+
+def _governance_timestamp_slug(moment=None):
+    moment = moment or datetime.now(timezone.utc)
+    return moment.strftime("%Y%m%dT%H%M%S.%fZ")
+
+
+def _collect_compact_governance_artifact_paths(full_evidence):
+    if not isinstance(full_evidence, dict):
+        return []
+
+    candidate_paths = []
+    basis = full_evidence.get("basis")
+    if isinstance(basis, dict):
+        candidate_paths.extend(parse_json_collection(basis.get("source_surfaces")))
+
+    candidate_paths.extend(parse_json_collection(full_evidence.get("authority_targets")))
+
+    for key in ("patch_chain", "semantic_resolution", "debt_resolution", "freshness_resolution"):
+        section = full_evidence.get(key)
+        if isinstance(section, dict):
+            candidate_paths.extend(parse_json_collection(section.get("evidence_paths")))
+
+    for change in parse_json_collection(full_evidence.get("required_repo_changes")):
+        path = None
+        if isinstance(change, dict):
+            path = change.get("path") or change.get("source_path") or change.get("file")
+        elif isinstance(change, str):
+            path = change
+        normalized = normalize_repo_path(path)
+        if normalized:
+            candidate_paths.append(normalized)
+
+    return [path for path in dict.fromkeys(path for path in candidate_paths if path)]
+
+
+def _build_governance_failure_codes(record, patch_chain):
+    failure_codes = []
+    for label in ("blocking_conditions", "defer_conditions"):
+        for condition in parse_json_collection(record.get(label)):
+            text = str(condition).strip()
+            if text:
+                failure_codes.append(f"{label}:{text}")
+
+    for blocker in parse_json_collection(patch_chain.get("blockers")):
+        text = str(blocker).strip()
+        if text:
+            failure_codes.append(f"patch_chain_blocker:{text}")
+
+    for missing_dep in parse_json_collection(patch_chain.get("missing_dependencies")):
+        text = str(missing_dep).strip()
+        if text:
+            failure_codes.append(f"missing_dependency:{text}")
+
+    return [code for code in dict.fromkeys(code for code in failure_codes if code)]
+
+
+def _build_governance_summary_counts(record, full_evidence, artifact_paths, artifact_hashes, dependency_patch_ids, patch_chain):
+    return {
+        "blocking_conditions": len(parse_json_collection(record.get("blocking_conditions"))),
+        "defer_conditions": len(parse_json_collection(record.get("defer_conditions"))),
+        "warnings": len(parse_json_collection(record.get("warnings"))),
+        "dependency_patch_ids": len(dependency_patch_ids),
+        "artifact_paths": len(artifact_paths),
+        "artifact_hashes": len(artifact_hashes),
+        "patch_chain_blockers": len(parse_json_collection(patch_chain.get("blockers"))),
+        "patch_chain_missing_dependencies": len(parse_json_collection(patch_chain.get("missing_dependencies"))),
+        "patch_chain_evidence_paths": len(parse_json_collection(patch_chain.get("evidence_paths"))),
+        "authority_targets": len(parse_json_collection(full_evidence.get("authority_targets"))),
+        "semantic_targets": len(parse_json_collection(full_evidence.get("semantic_targets"))),
+        "required_repo_changes": len(parse_json_collection(full_evidence.get("required_repo_changes"))),
+        "full_evidence_keys": len(full_evidence) if isinstance(full_evidence, dict) else 0,
+    }
+
+
+def _externalize_governance_decision_evidence(record, full_evidence, decision_timestamp_slug, compact_metadata=None):
+    patch_id = _sanitize_path_component(record.get("patch_id"), "unknown_patch")
+    evidence_dir = GOVERNANCE_EVIDENCE_DIR / patch_id
+    evidence_dir.mkdir(parents=True, exist_ok=True)
+
+    external_path = evidence_dir / f"{decision_timestamp_slug}_evidence.json"
+    patch_chain = full_evidence.get("patch_chain", {})
+    if not isinstance(patch_chain, dict):
+        patch_chain = {}
+    payload = {
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "decision_record": {
+            "decision_id": record.get("decision_id"),
+            "patch_id": record.get("patch_id"),
+            "campaign_id": record.get("campaign_id"),
+            "requested_action": record.get("requested_action"),
+            "decision": record.get("decision"),
+            "reason": record.get("reason"),
+            "blocking_conditions": parse_json_collection(record.get("blocking_conditions")),
+            "defer_conditions": parse_json_collection(record.get("defer_conditions")),
+            "warnings": parse_json_collection(record.get("warnings")),
+            "authority_resolution": record.get("authority_resolution", {}),
+            "dependency_resolution": record.get("dependency_resolution", {}),
+            "provenance_resolution": record.get("provenance_resolution", {}),
+            "validator_resolution": record.get("validator_resolution", {}),
+            "db_snapshot_at": record.get("db_snapshot_at"),
+            "operator": record.get("operator"),
+            "metadata_json": record.get("metadata_json", {}),
+        },
+        "evidence_summary": {
+            "patch_chain_status": patch_chain.get("status"),
+            "patch_chain_decision": patch_chain.get("decision"),
+            "patch_gate_decision": record.get("decision"),
+            "dependency_patch_ids": [
+                str(dep).strip()
+                for dep in parse_json_collection(patch_chain.get("dependencies"))
+                if str(dep).strip()
+            ],
+            "failure_codes": _build_governance_failure_codes(record, patch_chain),
+            "summary_counts": _build_governance_summary_counts(
+                record,
+                full_evidence,
+                _collect_compact_governance_artifact_paths(full_evidence),
+                {
+                    path: file_hash
+                    for path in _collect_compact_governance_artifact_paths(full_evidence)
+                    if (file_hash := _hash_file(ROOT / path))
+                },
+                [
+                    str(dep).strip()
+                    for dep in parse_json_collection(patch_chain.get("dependencies"))
+                    if str(dep).strip()
+                ],
+                patch_chain,
+            ),
+        },
+    }
+    if compact_metadata:
+        payload["compact_metadata"] = compact_metadata
+
+    temp_path = external_path.with_suffix(".json.tmp")
+    with temp_path.open("w", encoding="utf-8") as handle:
+        json.dump(payload, handle, ensure_ascii=False, indent=2)
+    temp_path.replace(external_path)
+
+    relative_path = str(external_path.relative_to(ROOT)).replace("\\", "/")
+    return relative_path, _hash_file(external_path)
+
+
+def _build_compact_governance_decision_evidence(record, *, external_evidence_path=None, external_evidence_hash=None, decision_timestamp=None):
+    full_evidence = record.get("evidence_json", {})
+    if not isinstance(full_evidence, dict):
+        full_evidence = {}
+
+    patch_chain = full_evidence.get("patch_chain", {})
+    if not isinstance(patch_chain, dict):
+        patch_chain = {}
+
+    dependency_patch_ids = [
+        str(dep).strip()
+        for dep in parse_json_collection(patch_chain.get("dependencies"))
+        if str(dep).strip()
+    ]
+    artifact_paths = _collect_compact_governance_artifact_paths(full_evidence)
+    artifact_hashes = {
+        path: file_hash
+        for path in artifact_paths
+        if (file_hash := _hash_file(ROOT / path))
+    }
+    summary_counts = _build_governance_summary_counts(record, full_evidence, artifact_paths, artifact_hashes, dependency_patch_ids, patch_chain)
+    failure_codes = _build_governance_failure_codes(record, patch_chain)
+
+    evidence_summary = {
+        "patch_chain_status": patch_chain.get("status"),
+        "patch_chain_decision": patch_chain.get("decision"),
+        "patch_gate_decision": record.get("decision"),
+        "patch_chain_reason": patch_chain.get("reason"),
+        "patch_gate_reason": record.get("reason"),
+        "dependency_count": len(dependency_patch_ids),
+        "missing_dependency_count": len(parse_json_collection(patch_chain.get("missing_dependencies"))),
+        "blocker_count": len(parse_json_collection(patch_chain.get("blockers"))),
+        "warning_count": len(parse_json_collection(patch_chain.get("warnings"))),
+        "authority_target_count": len(parse_json_collection(full_evidence.get("authority_targets"))),
+        "semantic_target_count": len(parse_json_collection(full_evidence.get("semantic_targets"))),
+        "artifact_path_count": len(artifact_paths),
+        "patch_chain_evidence_path_count": len(parse_json_collection(patch_chain.get("evidence_paths"))),
+        "provenance_has_basis": bool(full_evidence.get("basis")),
+        "provenance_has_core_rule": bool(full_evidence.get("core_rule")),
+    }
+
+    if decision_timestamp is None:
+        decision_timestamp = datetime.now(timezone.utc).isoformat()
+
+    return {
+        "decision": record.get("decision"),
+        "patch_id": record.get("patch_id"),
+        "timestamp": decision_timestamp,
+        "status": patch_chain.get("status"),
+        "patch_chain_decision": patch_chain.get("decision"),
+        "patch_gate_decision": record.get("decision"),
+        "patch_chain_status": patch_chain.get("status"),
+        "artifact_paths": artifact_paths,
+        "artifact_hashes": artifact_hashes,
+        "dependency_patch_ids": dependency_patch_ids,
+        "failure_codes": failure_codes,
+        "summary_counts": summary_counts,
+        "evidence_summary": evidence_summary,
+        "full_evidence_hash": external_evidence_hash or _hash_json_value(full_evidence),
+        "full_evidence_path": external_evidence_path,
+    }
 
 
 def normalize_repo_path(value):
@@ -3877,6 +4115,40 @@ def build_current_state_capsule(db_path):
 
 
 def log_decision(conn, record):
+    decision_timestamp = datetime.now(timezone.utc)
+    decision_timestamp_slug = _governance_timestamp_slug(decision_timestamp)
+    full_evidence = record.get("evidence_json", {})
+    if not isinstance(full_evidence, dict):
+        full_evidence = {}
+
+    external_evidence_path = None
+    external_evidence_hash = None
+    try:
+        external_evidence_path, external_evidence_hash = _externalize_governance_decision_evidence(
+            record,
+            full_evidence,
+            decision_timestamp_slug,
+        )
+    except OSError:
+        external_evidence_path = None
+        external_evidence_hash = None
+
+    compact_evidence = _build_compact_governance_decision_evidence(
+        record,
+        external_evidence_path=external_evidence_path,
+        external_evidence_hash=external_evidence_hash,
+        decision_timestamp=decision_timestamp.isoformat(),
+    )
+    compact_evidence["failure_codes"] = _build_governance_failure_codes(record, full_evidence.get("patch_chain", {}))
+    compact_evidence["summary_counts"] = _build_governance_summary_counts(
+        record,
+        full_evidence,
+        compact_evidence.get("artifact_paths", []),
+        compact_evidence.get("artifact_hashes", {}),
+        compact_evidence.get("dependency_patch_ids", []),
+        full_evidence.get("patch_chain", {}) if isinstance(full_evidence.get("patch_chain", {}), dict) else {},
+    )
+
     conn.execute(
         """
         INSERT INTO governance_decision_log (
@@ -3911,7 +4183,7 @@ def log_decision(conn, record):
             json.dumps(record.get("validator_resolution", {}), ensure_ascii=False),
             record.get("db_snapshot_at"),
             record.get("operator"),
-            json.dumps(record.get("evidence_json", {}), ensure_ascii=False),
+            json.dumps(compact_evidence, ensure_ascii=False),
             json.dumps(record.get("metadata_json", {}), ensure_ascii=False),
         ),
     )
@@ -3937,10 +4209,18 @@ def log_decision(conn, record):
                     "provenance_resolution": record.get("provenance_resolution", {}),
                     "validator_resolution": record.get("validator_resolution", {}),
                     "db_snapshot_at": record.get("db_snapshot_at"),
+                    "patch_chain_status": compact_evidence.get("status"),
+                    "patch_chain_decision": compact_evidence.get("patch_chain_decision"),
+                    "patch_gate_decision": compact_evidence.get("patch_gate_decision"),
+                    "full_evidence_path": compact_evidence.get("full_evidence_path"),
+                    "full_evidence_hash": compact_evidence.get("full_evidence_hash"),
+                    "failure_codes": compact_evidence.get("failure_codes", []),
+                    "summary_counts": compact_evidence.get("summary_counts", {}),
                 },
                 "evidence_paths": [
                     str(GLOBAL_HEALTH_REPORT.relative_to(ROOT)).replace("\\", "/"),
                     str(EVENT_BUS_MIGRATION.relative_to(ROOT)).replace("\\", "/"),
+                    compact_evidence.get("full_evidence_path"),
                     "scripts/query_governance.py",
                 ],
             },
@@ -3949,13 +4229,30 @@ def log_decision(conn, record):
     except sqlite3.Error:
         pass
     conn.commit()
-    return event_written
+    return {
+        "event_written": event_written,
+        "full_evidence_path": compact_evidence.get("full_evidence_path"),
+        "full_evidence_hash": compact_evidence.get("full_evidence_hash"),
+        "compact_evidence": compact_evidence,
+    }
 
 
-def evaluate_patch_gate(db_path, patch, patch_source_path=None, requested_action="propose", log_to_db=True, target_override=None):
-    current_state = build_current_state_capsule(db_path)
-    ledger_index = load_governance_change_ledger_index()
-    patch_chain = build_patch_chain_result(patch.get("patch_id"), current_state=current_state, ledger_index=ledger_index)
+def evaluate_patch_gate(
+    db_path,
+    patch,
+    patch_source_path=None,
+    requested_action="propose",
+    log_to_db=True,
+    target_override=None,
+    current_state=None,
+    ledger_index=None,
+    patch_chain_result=None,
+):
+    if current_state is None:
+        current_state = build_current_state_capsule(db_path)
+    if ledger_index is None:
+        ledger_index = load_governance_change_ledger_index()
+    patch_chain = patch_chain_result or build_patch_chain_result(patch.get("patch_id"), current_state=current_state, ledger_index=ledger_index)
     patch_already_resolved = patch_chain.get("status") in {"applied", "late_registered"}
     target_paths = collect_patch_target_paths(patch)
     if target_override:
@@ -4246,28 +4543,40 @@ def evaluate_patch_gate(db_path, patch, patch_source_path=None, requested_action
         }
 
         if log_to_db:
-            event_written = log_decision(
-                conn,
-                {
-                    "decision_id": f"DEC-{uuid.uuid4().hex[:12].upper()}",
-                    "patch_id": result["patch_id"] or "UNKNOWN",
-                    "campaign_id": result.get("campaign_id"),
-                    "requested_action": requested_action,
-                    "decision": result["decision"],
-                    "reason": result["reason"],
-                    "blocking_conditions": result["blocking_conditions"],
-                    "authority_resolution": result["authority_resolution"],
-                    "dependency_resolution": result["dependency_resolution"],
-                    "provenance_resolution": result["provenance_resolution"],
-                    "validator_resolution": result["validator_resolution"],
-                    "db_snapshot_at": result["db_snapshot"].get("latest_artifact_indexed_at"),
-                    "operator": "scripts/query_governance.py",
-                    "evidence_json": result["evidence_json"],
-                    "metadata_json": result["metadata_json"],
-                },
-            )
-            result["log_written"] = True
-            result["event_written"] = bool(event_written)
+            try:
+                log_result = log_decision(
+                    conn,
+                    {
+                        "decision_id": f"DEC-{uuid.uuid4().hex[:12].upper()}",
+                        "patch_id": result["patch_id"] or "UNKNOWN",
+                        "campaign_id": result.get("campaign_id"),
+                        "requested_action": requested_action,
+                        "decision": result["decision"],
+                        "reason": result["reason"],
+                        "blocking_conditions": result["blocking_conditions"],
+                        "defer_conditions": result["defer_conditions"],
+                        "warnings": result["warnings"],
+                        "authority_resolution": result["authority_resolution"],
+                        "dependency_resolution": result["dependency_resolution"],
+                        "provenance_resolution": result["provenance_resolution"],
+                        "validator_resolution": result["validator_resolution"],
+                        "db_snapshot_at": result["db_snapshot"].get("latest_artifact_indexed_at"),
+                        "operator": "scripts/query_governance.py",
+                        "evidence_json": result["evidence_json"],
+                        "metadata_json": result["metadata_json"],
+                    },
+                )
+                result["log_written"] = True
+                result["event_written"] = bool(log_result.get("event_written"))
+                if log_result.get("full_evidence_path"):
+                    result["external_evidence_path"] = log_result.get("full_evidence_path")
+                if log_result.get("full_evidence_hash"):
+                    result["external_evidence_hash"] = log_result.get("full_evidence_hash")
+            except Exception as exc:
+                result["log_written"] = False
+                result["event_written"] = False
+                result["log_error"] = str(exc)
+                result["warnings"].append(f"Decision logging failed: {exc}")
     finally:
         conn.close()
 
