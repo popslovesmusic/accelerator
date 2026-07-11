@@ -79,6 +79,7 @@ The Documentation Department depends on:
 - `governance/live/induction_queue.json`
 - `registry/induction_registry.json`
 - `outputs/audits/global_health_report.json`
+- `scripts/query_governance.py` when live governance state is inspected for documentation sync; use explicit evidence levels (`--level summary|diagnostic|governance|forensic`) and keep `--summary` as the compatibility alias for `--level summary`
 
 Every documentation recommendation must cite the live artifact or artifacts it was derived from.
 

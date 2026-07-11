@@ -1,7 +1,14 @@
 {
   "queue_id": "ANALYSIS_RECOMMENDED_ACTION_QUEUE_001",
   "department": "analysis",
-  "purpose": "Ordered recommendations derived from governed program state without modifying authoritative artifacts.",
+  "purpose": "Ordered recommendations derived from governed program state and runtime verification without modifying authoritative artifacts.",
+  "verification": {
+    "source": "scripts/query_governance.py current-state --pretty",
+    "status": "warn",
+    "db_snapshot_status": "stale",
+    "open_debt_count": 0,
+    "live_blocker_count": 0
+  },
   "generated_from": [
     "governance/live/master_work_index.json",
     "registry/math/math_campaign_execution_order.json",
@@ -9,9 +16,15 @@
     "governance/live/department_layout_manifest.json",
     "governance/live/authority_manifest.json",
     "outputs/audits/global_health_report.json",
+    "analysis/program_state_report.json",
+    "analysis/dependency_report.json",
     "outputs/audits/proof_elevation_follow_through_001.json",
     "outputs/audits/math_counterexample_continuation_006.json",
-    "outputs/audits/math_campaign_phase_3_repair_priority_001.json"
+    "outputs/audits/math_counterexample_orientation_locking_execution_002.json",
+    "outputs/audits/math_campaign_execution_follow_through_001.json",
+    "outputs/audits/math_campaign_phase_3_repair_priority_001.json",
+    "outputs/analysis/critical_path_graph.json",
+    "outputs/analysis/unlock_priority_report.json"
   ],
   "ordering_rule": "phase-3 repair first after formal follow-through and declared-vector exhaustion, then downstream maintenance breadth",
   "items": [
@@ -21,6 +34,8 @@
       "recommended_action": "Continue the active repair and unresolved-structure queues.",
       "supporting_evidence": [
         "governance/live/master_work_index.json: SIM-REPAIR-QUEUE-001 is active with next_action execute repair track",
+        "analysis/dependency_report.json: critical_path still begins with SIM-REPAIR-QUEUE-001, VAL-RC-EXEC-001, and VAL-URS-RES-001",
+        "outputs/analysis/critical_path_graph.json: recommended_execution_order begins with the repair queues",
         "governance/live/master_work_index.json: VAL-RC-EXEC-001 is active with next_action execute repair track",
         "governance/live/master_work_index.json: VAL-URS-RES-001 is active with next_action resolve queued structure item",
         "outputs/audits/math_campaign_phase_3_repair_priority_001.json: the current live reduction focus shifts to phase 3 repair and unresolved-structure queues"
@@ -31,7 +46,7 @@
       "dependencies": [],
       "expected_benefit": "Keeps the remaining live reduction queues moving after formal follow-through and declared-vector exhaustion.",
       "confidence": 0.97,
-      "rationale": "The proof follow-through sync passed, the counterexample declared-vector chain is exhausted, and the runtime debt projection is empty."
+      "rationale": "The live master index and downstream analysis projections still point to the repair and unresolved-structure queues first; the runtime snapshot is stale but still reports no open debt or live blockers."
     },
     {
       "recommendation_id": "ANL_REC_002",
@@ -40,7 +55,8 @@
       "supporting_evidence": [
         "governance/live/master_work_index.json: BOOK_CAMPAIGN_PHASE_01_MASTER is active",
         "governance/live/master_work_index.json: P0-C4-CA-001 is active with six recorded blockers",
-        "governance/live/master_work_index.json: P0-C4-GRAPH-001 is active with six recorded blockers"
+        "governance/live/master_work_index.json: P0-C4-GRAPH-001 is active with six recorded blockers",
+        "analysis/program_state_report.json: research_readiness is active_with_blockers"
       ],
       "affected_domains": [
         "research"
@@ -55,7 +71,7 @@
       ],
       "expected_benefit": "Maintains progress on the research campaigns without displacing the higher-leverage mathematics follow-through work.",
       "confidence": 0.88,
-      "rationale": "These campaigns remain active, but their blocker count is already explicit and their immediate leverage is lower than the current mathematics sequence."
+      "rationale": "These campaigns remain active, but their blocker count is explicit and their immediate leverage is lower than the current mathematics sequence."
     },
     {
       "recommendation_id": "ANL_REC_003",
@@ -63,7 +79,8 @@
       "recommended_action": "Keep the proof-elevation and counterexample artifacts on watchlist only.",
       "supporting_evidence": [
         "outputs/audits/proof_elevation_follow_through_001.json: follow-through sync passed without promotion",
-        "outputs/audits/math_counterexample_continuation_006.json: declared_vectors_remaining is empty",
+        "outputs/audits/math_counterexample_continuation_006.json: declared_vectors_remaining is empty and the current follow-through vector is operator_chain_nonclosure",
+        "outputs/audits/math_counterexample_orientation_locking_execution_002.json: direct-run harness executed, but the artifact remains nonfinal",
         "registry/math/formal_candidate_readiness_registry.json: MT-001, MT-002, and MT-003 readiness entries are formal"
       ],
       "affected_domains": [
@@ -72,15 +89,15 @@
       "dependencies": [],
       "expected_benefit": "Keeps already-synchronized proof and counterexample artifacts from being mistaken for current reduction work.",
       "confidence": 0.89,
-      "rationale": "Formal follow-through and declared-vector exhaustion are watchlist context, not the current live reduction path."
+      "rationale": "Formal follow-through and declared-vector exhaustion are watchlist context, not the current live reduction path; the bounded counterexample follow-through remains documented separately."
     },
     {
       "recommendation_id": "ANL_REC_004",
       "priority_rank": 4,
       "recommended_action": "Keep governance/runtime debt watchlisted only; the runtime currently reports no open debt.",
       "supporting_evidence": [
-        "scripts/query_governance.py current-state --pretty: open_debt_count = 0",
-        "scripts/query_governance.py current-state --pretty: live_blocker_count = 0",
+        "scripts/query_governance.py current-state --pretty: db_snapshot_status = stale; open_debt_count = 0; live_blocker_count = 0",
+        "outputs/analysis/unlock_priority_report.json: runtime_snapshot records the same stale-but-clean runtime state",
         "outputs/audits/global_health_report.json: db_validation status pass"
       ],
       "affected_domains": [
@@ -90,7 +107,7 @@
       "dependencies": [],
       "expected_benefit": "Prevents closed runtime debt from being mistaken for current live priority.",
       "confidence": 0.98,
-      "rationale": "The governance runtime now reports no open debt or live blockers, so this lane is historical residue rather than an active reduction item."
+      "rationale": "The governance runtime still reports no open debt or live blockers even though the DB snapshot is stale, so this lane is historical residue rather than an active reduction item."
     }
   ]
 }

@@ -222,7 +222,7 @@ $$ \text{evaluation order does not modify } RT_{\text{core}} $$
 $$ \text{recovery remains deferred} $$
 
 **Governed Clarification 1.2.2B.17: Minimal Continuation Reduction Algorithm (PATCH_PI_RT_CALCULUS_025)**
-A minimal governed reduction algorithm is now documented for well-formed continuation expressions after evaluation admits composition and reduction. The procedure runs `EVAL_024` first, blocks on any classified failure, applies identity reduction when identity composition is present, contracts lawful composed continuations `C(A,B) \circ C(B,C)` to `C(A,C)` when process equivalence is preserved, repeats lawful reductions while `â‰¡P` is preserved, and returns `NF(C)` when no further lawful reductions are available. If normalization cannot be completed, the procedure returns `partial_NF(C)` with unresolved status. Termination, confluence, and the full normalization-status taxonomy remain deferred.
+ A minimal governed reduction algorithm is now documented for well-formed continuation expressions after evaluation admits composition and reduction. The procedure runs `EVAL_024` first, blocks on any classified failure, applies identity reduction when identity composition is present, contracts lawful composed continuations `C(A,B) \circ C(B,C)` to `C(A,C)` when process equivalence is preserved, repeats lawful reductions while `≡P` is preserved, and returns `NF(C)` when no further lawful reductions are available. If normalization cannot be completed, the procedure returns `partial_NF(C)` with unresolved status. Termination, confluence, and the full normalization-status taxonomy remain deferred.
 
 $$ \text{EVAL}_{024} \text{ precedes minimal reduction} $$
 $$ \bot_C_x \Rightarrow \text{no lawful reduction step} $$
@@ -500,7 +500,7 @@ The symbol $\iff_R$ represents the "knotting" of the process. It is the mechanis
 $$ \iff_R \implies [ \text{PROVISIONAL OPERATOR: Formal definition of residue-conditioned closure} ] $$
 
 **Commentary:**
-$R$ is the **residue**â€”the memory or trace of the process history. The $\iff_R$ operator signifies that the "existence" of the process ($\mathcal{E} \neq 0$) and its "continuation" ($\delta_a$) are recursively bound by this residue. It is this feedback loop that allows for the emergence of stable projections over many cycles.
+$R$ is the **residue**—the memory or trace of the process history. The $\iff_R$ operator signifies that the "existence" of the process ($\mathcal{E} \neq 0$) and its "continuation" ($\delta_a$) are recursively bound by this residue. It is this feedback loop that allows for the emergence of stable projections over many cycles.
 
 ---
 
@@ -526,7 +526,7 @@ $$ R \in \mathcal{R} $$
 $$ \mathcal{R} := \text{The Residue Carrier Space} $$
 
 **Commentary:**
-Within this framework, residue is the mechanism by which "laws" emerge. As the process cycles, it leaves a trace. The system remembers, and that memory shapes what can happen. Each cycle is not a resetâ€”it is an accumulation [Source: MPF-NARRATIVE]. If the process is a path, $R$ is the groove worn into the landscape by previous traversals. The Residue Carrier $\mathcal{R}$ is the formal topological structure that maintains this history [Source: MS-SCRATCH-V1 Sec 4.1].
+Within this framework, residue is the mechanism by which "laws" emerge. As the process cycles, it leaves a trace. The system remembers, and that memory shapes what can happen. Each cycle is not a reset—it is an accumulation [Source: MPF-NARRATIVE]. If the process is a path, $R$ is the groove worn into the landscape by previous traversals. The Residue Carrier $\mathcal{R}$ is the formal topological structure that maintains this history [Source: MS-SCRATCH-V1 Sec 4.1].
 
 ---
 
@@ -1428,28 +1428,28 @@ The directed distinction relation $D(S_1|S_2)$ introduced in Chapter 3 acts as t
 We identify two primary relational domains based on the symmetry or asymmetry of the distinction relation: the **Asymmetry Domain** and the **Symmetry Domain**.
 
 The induction of these domains follows the **Refined Induction Hierarchy (v6)**:
-1. **Layer 0:** 0-state Exclusion â€” Foundation
-2. **Layer 1:** $(\mathcal{E} \neq 0)$ â€” Constraint/Distinction Present
-3. **Layer 2:** $\delta_a$ â€” Admissibility Filter
-4. **Layer 3:** $(\mathcal{E} > 0)$ â€” Constraint Realized / Admissible Continuation
-5. **Layer 4:** $T(S_a \to S_b)$ â€” Transition Primitive
-6. **Layer 5:** $N_{ab} := D(S_a|S_b)>0$ â€” Distinction-Node
-7. **Layer 6:** Ordered Node Relation â€” Structural Coupling
-8. **Layer 7:** Asymmetric Triadic Closure â€” Structural Stabilization
-9. **Layer 8:** $R_{\leftrightarrow}$ â€” Residue Relation (Operand)
-10. **Layer 9:** $\leftrightarrow_R$ â€” Residue-Conditioned Closure (Condition)
+1. **Layer 0:** 0-state Exclusion — Foundation
+2. **Layer 1:** $(\mathcal{E} \neq 0)$ — Constraint/Distinction Present
+3. **Layer 2:** $\delta_a$ — Admissibility Filter
+4. **Layer 3:** $(\mathcal{E} > 0)$ — Constraint Realized / Admissible Continuation
+5. **Layer 4:** $T(S_a \to S_b)$ — Transition Primitive
+6. **Layer 5:** $N_{ab} := D(S_a|S_b)>0$ — Distinction-Node
+7. **Layer 6:** Ordered Node Relation — Structural Coupling
+8. **Layer 7:** Asymmetric Triadic Closure — Structural Stabilization
+9. **Layer 8:** $R_{\leftrightarrow}$ — Residue Relation (Operand)
+10. **Layer 9:** $\leftrightarrow_R$ — Residue-Conditioned Closure (Condition)
 11. **Layer 10:** Truth Condition: $(A \leftrightarrow_R B) = \text{True}$
-12. **Layer 11:** $\to_a \otimes \gets_r$ â€” Admissibility-Residue Coupling
-13. **Layer 12:** $\text{NavT}$ â€” Orientation Reconciliation / Update Rule
-14. **Layer 13:** $\text{Arb}_A$ â€” Realization Arbitration / Selection ($O^*$)
-15. **Layer 14:** $\Psi$ â€” Residue Inscription
-16. **Layer 15:** $K$ â€” Knot Stabilization (Closure)
-17. **Layer 16:** $B_K$ â€” Braid Closure
-18. **Layer 17:** $\_app$ â€” Application Projection
-19. **Layer 18:** $\iff_m$ â€” Metric Extraction
-20. **Layer 19:** $\Omega_a$ â€” Asymmetry Ratio
-21. **Layer 20:** $\iff_s$ â€” Statistical Projection
-22. **Layer 21:** $P$ â€” Probability
+12. **Layer 11:** $\to_a \otimes \gets_r$ — Admissibility-Residue Coupling
+13. **Layer 12:** $\text{NavT}$ — Orientation Reconciliation / Update Rule
+14. **Layer 13:** $\text{Arb}_A$ — Realization Arbitration / Selection ($O^*$)
+15. **Layer 14:** $\Psi$ — Residue Inscription
+16. **Layer 15:** $K$ — Knot Stabilization (Closure)
+17. **Layer 16:** $B_K$ — Braid Closure
+18. **Layer 17:** $\_app$ — Application Projection
+19. **Layer 18:** $\iff_m$ — Metric Extraction
+20. **Layer 19:** $\Omega_a$ — Asymmetry Ratio
+21. **Layer 20:** $\iff_s$ — Statistical Projection
+22. **Layer 21:** $P$ — Probability
 
 ---
 
@@ -1458,7 +1458,7 @@ The induction of these domains follows the **Refined Induction Hierarchy (v6)**:
 A recurring pattern in the Mono-Process Framework is the use of **symmetric descriptions for asymmetric realizations** [Source: IND-CORE-ASYM-REALIZATION-001].
 
 **Meta-Observation 4.1.2: Symmetric-Asymmetric Duality (META-001)**
-Symmetric representations (like â‡”_R or â‡”_m) require orientation, ordering, residue, or admissibility to be realized.
+Symmetric representations (like ⇔_R or ⇔_m) require orientation, ordering, residue, or admissibility to be realized.
 
 Examples include:
 *   Axiom 1.2.1: $(\mathcal{E} \neq 0) \iff_R \delta_a(\mathcal{E} > 0)$
@@ -1523,7 +1523,7 @@ $$ D(*|*) = 0 $$
 The Symmetry Domain corresponds to complete distinction collapse.
 
 **Commentary:**
-In the **symmetry application domain** ($symm\_app$), the lack of a directed gradient means there is no "preferred" orientation. This results in **orientation degeneracy**, where multiple or all directions are equally admissible. While symmetry is often prized in classical physics, in the Mono-Process Framework, pure symmetry represents a "dead end" for directional continuation. Symmetric interaction produces no gradient, no pressure, no directionâ€”it is one of the collapse modes [Source: MPF-NARRATIVE].
+In the **symmetry application domain** ($symm\_app$), the lack of a directed gradient means there is no "preferred" orientation. This results in **orientation degeneracy**, where multiple or all directions are equally admissible. While symmetry is often prized in classical physics, in the Mono-Process Framework, pure symmetry represents a "dead end" for directional continuation. Symmetric interaction produces no gradient, no pressure, no direction—it is one of the collapse modes [Source: MPF-NARRATIVE].
 
 ---
 
@@ -1589,7 +1589,7 @@ By classifying these pre-scalar domains, we provide a rigorous way to distinguis
 In the Mono-Process Framework, **Orientation** is the relational reference frame selected by the process to resolve an asymmetric distinction. It is denoted by the operator $-(i)$.
 
 **Formal Principle 5.1.1: Orientation Pattern Principle (PATCH_ORIENTATION_PATTERN_PRINCIPLE_001)**
-In a distinction array, orientation is not a primitive direction through pre-existing space. It is a tuning condition over the arrayâ€™s RT-expression field. Changing the orientation pattern does not move objects inside the array; it changes which distinction-pattern relations become admissible, coupled, selected, or projected.
+In a distinction array, orientation is not a primitive direction through pre-existing space. It is a tuning condition over the array’s RT-expression field. Changing the orientation pattern does not move objects inside the array; it changes which distinction-pattern relations become admissible, coupled, selected, or projected.
 
 **Formal Statement 5.1.2: Orientation Induction**
 $$ (asym\_app)nDOF \downarrow -(i) $$
@@ -1639,7 +1639,7 @@ $C_{\text{orient}}$ must be computable from $\chi_D$ and admissible orientation 
 *Governance Note:* $C_{\text{orient}}$ is not bridge evidence until PO001 validation demonstrates non-circular computability.
 
 **Commentary:**
-This candidate metric operationalizes PO_001: "Orientation coherence is measurable without presupposing closure topology." The candidate computes normalized variance across the admissible orientation-pattern family and inverts it to a coherence score. High $C_{\text{orient}}$ means the process selects a narrow, consistent region of $\mathcal{O}$; low $C_{\text{orient}}$ means orientation is underdetermined or randomized. This statement does **not** assert that high $C_{\text{orient}}$ causes stable closure â€” that causal claim remains in OPEN_BRIDGE_001 at PROVISIONAL_PENDING_RIGOR. This statement only defines the metric candidate.
+This candidate metric operationalizes PO_001: "Orientation coherence is measurable without presupposing closure topology." The candidate computes normalized variance across the admissible orientation-pattern family and inverts it to a coherence score. High $C_{\text{orient}}$ means the process selects a narrow, consistent region of $\mathcal{O}$; low $C_{\text{orient}}$ means orientation is underdetermined or randomized. This statement does **not** assert that high $C_{\text{orient}}$ causes stable closure — that causal claim remains in OPEN_BRIDGE_001 at PROVISIONAL_PENDING_RIGOR. This statement only defines the metric candidate.
 
 **Validation Requirements (before PO_001 is testable):**
 1. Show $C_{\text{orient}}$ computable from $\chi_D$ and admissible orientation assignments only.
@@ -1715,9 +1715,9 @@ The later retest respected the correction that `_R` must be handled as a relatio
 
 ### PD_CG_PATCH_003 Baseline Reset
 - **Directly observed within the tested model context:** `PD_CG_V2R` falsified the specific `_R`-conditioned improvement route on preserved distinction.
-- **Active governed baseline:** bare `<â‰ >` is now the preserved-distinction comparison baseline.
-- **Qualification rule:** any subscript on `<â‰ >` is a candidate conditioning qualifier that must outperform bare `<â‰ >` before retention.
-- **Current prohibition:** `<â‰ >_R` / `<â‰ >_r` must not be used for promotion by habit or decorative carryover.
+- **Active governed baseline:** bare `<≠>` is now the preserved-distinction comparison baseline.
+- **Qualification rule:** any subscript on `<≠>` is a candidate conditioning qualifier that must outperform bare `<≠>` before retention.
+- **Current prohibition:** `<≠>_R` / `<≠>_r` must not be used for promotion by habit or decorative carryover.
 
 ### PD_CG_V3 Affix Position Test Note
 - **Governed note:** affix position is under test and not assumed equivalent.
@@ -1895,7 +1895,7 @@ where $\alpha \sim_A \beta$ denotes the accessibility relation defined by the lo
 
 To achieve formal closure for the orientation program, the following items have candidate definitions and require promotion:
 
-1.  **Definition of Orientation Space $\mathcal{O}$:** [ **DEFINITION_CANDIDATE_PENDING_FORMAL_CANONICALIZATION** ] A working informal definition is active in Â§5.1.2 and Â§5.1.4: $\mathcal{O} := \{-(i)_k \mid -(i)_k \text{ is an admissible tuning condition over the RT-expression field}\}$. A candidate formal definition exists in `formal_object_registry [OBJ-orientation-space]`: $O(G) := \text{admissible space of participation directions governing bar expressions, } \text{Org}_a \text{ preservation, and knot-class selection}$. Open question: what is the full topological or algebraic type of $\mathcal{O}$? Is it a quotient space $\mathcal{O} / \sim_{\text{Ref}}$, a discrete label set, or a relational frame manifold? This must be resolved before $\text{Org}_a$ axioms can be formally closed. [Audit: MPF_ORIENTATION_STALENESS_AUDIT_001 P2]
+1.  **Definition of Orientation Space $\mathcal{O}$:** [ **DEFINITION_CANDIDATE_PENDING_FORMAL_CANONICALIZATION** ] A working informal definition is active in §5.1.2 and §5.1.4: $\mathcal{O} := \{-(i)_k \mid -(i)_k \text{ is an admissible tuning condition over the RT-expression field}\}$. A candidate formal definition exists in `formal_object_registry [OBJ-orientation-space]`: $O(G) := \text{admissible space of participation directions governing bar expressions, } \text{Org}_a \text{ preservation, and knot-class selection}$. Open question: what is the full topological or algebraic type of $\mathcal{O}$? Is it a quotient space $\mathcal{O} / \sim_{\text{Ref}}$, a discrete label set, or a relational frame manifold? This must be resolved before $\text{Org}_a$ axioms can be formally closed. [Audit: MPF_ORIENTATION_STALENESS_AUDIT_001 P2]
 2.  **Orientation Equivalence:** [ **DEFINITION_CANDIDATE_PENDING_FORMAL_CANONICALIZATION** ] A candidate exists in `formal_object_registry [OBJ-orientation-space, L1222]`: Two orientation configurations $G$ and $G'$ are equivalent under $\simeq_O$ if there exist $o \in \mathcal{O}(G)$, $o' \in \mathcal{O}(G')$ such that participation directions, roles, and closure are preserved under $\iff_R$. Formally: $G \simeq_O G' :\iff \exists o \in \mathcal{O}(G),\, \exists o' \in \mathcal{O}(G') : G \iff_R G' \text{ with participation directions, roles, and closure preserved}$. Open question: does $\simeq_O$ satisfy full equivalence axioms (reflexivity, symmetry, transitivity) under all admissibility regimes? Full metric proof on $\mathcal{O} / \sim_{\text{Ref}}$ is a registered open obligation [Source: `registry/operator_algebra_closure_registry.json`]. [Audit: MPF_ORIENTATION_STALENESS_AUDIT_001 P3]
 
 ---
@@ -2685,7 +2685,7 @@ To complete the formalization of the topological program, the following must be 
 
 1.  **Rigorous Definition of $K$:** [ **MISSING DEFINITION** ] Is $K$ a knot in the sense of knot theory ($S^1$ into $\mathbb{R}^3$), or is it an abstract graph-cycle invariant or a periodic orbit in orientation space?
 2.  **Braid Formation Rule:** [ **MISSING DEFINITION** ] What are the formal mechanics of triadic closure? How do the individual strands of $\mathcal{E}$ "knot" together under the $\iff_R$ operator?
-3.  **Topology-Class Metric:** [ **DEFINITION_CANDIDATE_PENDING_VALIDATION** ] A candidate metric $T_{\text{class\_metric}}$ is now defined â€” see Formal Statement 11.X below and `registry/math/metric_registry.json`.
+3.  **Topology-Class Metric:** [ **DEFINITION_CANDIDATE_PENDING_VALIDATION** ] A candidate metric $T_{\text{class\_metric}}$ is now defined — see Formal Statement 11.X below and `registry/math/metric_registry.json`.
 4.  **Topology-to-Geometry Transform:** [ **C1_DEFINED_PROVISIONAL** ] Defined under $\Pi_{\text{geo}}$ legality conditions in Section 11.4A. Remaining proof obligations, metric extraction validation, and signature enforcement are tracked under active hardening targets.
 
 ---
@@ -2700,21 +2700,21 @@ To complete the formalization of the topological program, the following must be 
 
 **Candidate Definitions:**
 
-**Step 1 â€” Closure Trace:**
+**Step 1 — Closure Trace:**
 $$ K_{\text{obs}} := \text{trace}(\Delta \to R \to T \to A_{\text{adm}} \to \delta_a \to \Delta') $$
 
-**Step 2 â€” Topology Graph:**
+**Step 2 — Topology Graph:**
 $$ G_K := \text{graph}(K_{\text{obs}}) $$
 
-**Step 3 â€” Class Assignment:**
+**Step 3 — Class Assignment:**
 $$ T_{\text{class\_metric}}(G_K) := [T_k,\; b(T_k),\; \text{inv}(G_K)] $$
 
 where $T_k$ is the topology-class label, $b(T_k)$ is the optional braid index, and $\text{inv}(G_K)$ is the structural invariant signature of the closure graph.
 
-**Step 4 â€” Class Distribution:**
+**Step 4 — Class Distribution:**
 $$ P(T_k) := \frac{\text{count}(T_k)}{N} $$
 
-**Step 5 â€” Variance Target (for PO\_003):**
+**Step 5 — Variance Target (for PO\_003):**
 $$ \text{Var}(T) := \text{dispersion}(\{T_k\}) \text{ over matched runs} $$
 
 **Minimal Class Family (Operational Candidate):**
@@ -2726,18 +2726,18 @@ $$ \text{Var}(T) := \text{dispersion}(\{T_k\}) \text{ over matched runs} $$
 | $T_2$ | `linked_closure_organization` | Two coupled loops; minimal braid interaction |
 | $T_3$ | `low_index_braided_organization` | Low braid-index closure ($b \leq 3$) |
 | $T_4$ | `high_index_braided_organization` | Higher braid-index closure ($b > 3$) |
-| $T_x$ | `valid_but_unclassified_topological_organization` | Valid closure not fitting $T_1$â€“$T_4$; requires further analysis |
+| $T_x$ | `valid_but_unclassified_topological_organization` | Valid closure not fitting $T_1$–$T_4$; requires further analysis |
 
-**Note:** This class family is intentionally operational. It may be replaced by stricter knot/braid invariants (e.g., Alexander polynomial, Jones polynomial, writhe) in later formalization without requiring this statement to be superseded â€” only updated.
+**Note:** This class family is intentionally operational. It may be replaced by stricter knot/braid invariants (e.g., Alexander polynomial, Jones polynomial, writhe) in later formalization without requiring this statement to be superseded — only updated.
 
 **Non-Circularity Constraint (T_CLASS_NONCIRCULARITY_001):**
-$T_{\text{class\_metric}}$ must classify topology after closure observation but **before** orientation-conditioned variance claims are evaluated. Forbidden inputs: $C_{\text{orient}}$, $-(i)$, $\mathcal{O}$, orientation regime labels, $S_{\text{closure}}$ scores, campaign outcome labels. Required because PO\_003 compares $\text{Var}(T \mid C_{\text{orient}} \text{ high})$ against $\text{Var}(T \mid C_{\text{orient}} \text{ low})$ â€” $T$ must be evaluated blind to the orientation bin.
+$T_{\text{class\_metric}}$ must classify topology after closure observation but **before** orientation-conditioned variance claims are evaluated. Forbidden inputs: $C_{\text{orient}}$, $-(i)$, $\mathcal{O}$, orientation regime labels, $S_{\text{closure}}$ scores, campaign outcome labels. Required because PO\_003 compares $\text{Var}(T \mid C_{\text{orient}} \text{ high})$ against $\text{Var}(T \mid C_{\text{orient}} \text{ low})$ — $T$ must be evaluated blind to the orientation bin.
 *Governance Note:* T_class_metric remains a candidate until an executable classifier demonstrates trace-only classification and orientation blindness.
 
 **Allowed Inputs:** realized closure trace, closure graph adjacency, braid/loop/crossing structure, connectivity preservation record, residue-conditioned closure output.
 
 **Commentary:**
-This candidate metric operationalizes PO\_002 ("knot-class distribution is measurable") and provides the distributional object needed for PO\_003 ("orientation coherence narrows admissible knot-classes"). The class family is a minimal operational scaffold â€” it separates null-closure from valid closure, and distinguishes low from high topological complexity, without introducing external mathematical primitives that are not already present in the framework's closure-trace language. Braid index $b(T_k)$ is included as an optional output to allow later comparison with formal knot theory; its inclusion does not constitute a claim that realized closure structures are literal knots in the mathematical sense.
+This candidate metric operationalizes PO\_002 ("knot-class distribution is measurable") and provides the distributional object needed for PO\_003 ("orientation coherence narrows admissible knot-classes"). The class family is a minimal operational scaffold — it separates null-closure from valid closure, and distinguishes low from high topological complexity, without introducing external mathematical primitives that are not already present in the framework's closure-trace language. Braid index $b(T_k)$ is included as an optional output to allow later comparison with formal knot theory; its inclusion does not constitute a claim that realized closure structures are literal knots in the mathematical sense.
 
 This statement does **not** assert that topology class determines closure stability (that is PO\_004's domain) or that orientation selects topology class (that is OPEN\_BRIDGE\_001's claim). This statement only defines the measurement procedure.
 
@@ -3027,7 +3027,7 @@ The textbook provides the overview and projection pathway. All active economics 
 
 ## 14.0 The Critical Path Roadmap
 
-To move the Mono-Process Framework from broad debt listing toward staged, rigorous resolution, the program defines two parallel critical paths: the **Operator Closure Path** and the **Structural Closure Path**. These paths enforce a strict order of buildabilityâ€”downstream structures or application projections cannot be closed before their primitive mathematical operators are formally defined.
+To move the Mono-Process Framework from broad debt listing toward staged, rigorous resolution, the program defines two parallel critical paths: the **Operator Closure Path** and the **Structural Closure Path**. These paths enforce a strict order of buildability—downstream structures or application projections cannot be closed before their primitive mathematical operators are formally defined.
 
 ```mermaid
 graph TD
@@ -3081,7 +3081,7 @@ The promotion of a term or claim from provisional to verified is a governed proc
 $$ \text{Promotion}(L_n \to L_{n+1}) \iff \text{Evidence Pack} \in \text{Registry} $$
 
 **Mandates:**
-- **Trace-to-Core:** A term cannot reach L2 without an explicit process-rewrite using Îµ, R, and Î´ primitives.
+- **Trace-to-Core:** A term cannot reach L2 without an explicit process-rewrite using ε, R, and δ primitives.
 - **Adversarial Tests:** Promotion to L3 or C4 requires an explicitly documented "red team" analysis of potential artifacts.
 - **Contradiction Resolution:** If a simulation run contradicts a mathematical lemma, the lemma is downgraded to **contested** pending a formal derivation audit.
 
@@ -3181,36 +3181,36 @@ Within the Mono-Process Framework, falsification is not treated as the simple as
 
 ```text
 Induction
-    â†“
+     ↓
 Candidate Condition
-    â†“
+    ↓
 Admissibility Evaluation
-    â†“
+    ↓
 Coupling
-    â†“
+    ↓
 Local Closure
-    â†“
+    ↓
 RT (stable local condition)
-    â†“
+    ↓
 Continuous Adversarial Attack
-    â†“
+    ↓
 Boundary Evaluation
-    â†“
+    ↓
 Admissibility Re-evaluation
-    â”‚
-    â”œâ”€â”€ survives â†’ RT Maintained
-    â””â”€â”€ fails â†’ Partial Decoupling
-                 â†“
+     │
+     ├── survives → RT Maintained
+     └── fails → Partial Decoupling
+                  ↓
           Loss of Boundary Support
-                 â†“
+                 ↓
            Increasing Symmetry
-                 â†“
+                 ↓
         Complete Local Decoupling
-                 â†“
+                 ↓
         Return to Symmetric Condition
-                 â†“
+                 ↓
          Reopened Research Debt
-                 â†“
+                 ↓
            New Induction Cycle
 ```
 
@@ -3464,7 +3464,7 @@ The schema `<*>_x` is a meta-language construct only. It names the space of lega
 - **Closure family:** `<=>_R`, `<=>_{ra}`
 - **Admissibility family:** `-> _a`, `<- _a`, `->_{ra}`
 - **Residue family:** `-> _r`, `<- _r`
-- **Preservation family:** `<â‰ >_P`, `<â‰ >_{ra}`
+- **Preservation family:** `<≠>_P`, `<≠>_{ra}`
 - **Meta family:** `<*>_x`
 
 The `x` in `<*>_x` is a reserved discussion placeholder in this induction packet. It is not itself a proof rule, a domain label, or a type identifier.
@@ -3889,7 +3889,7 @@ These items have candidate formalisms in the "Scratch Schema" (MS-SCRATCH-V1) or
 - **Ontological Classification of Arrays:** [ **C1_DEFINED_PROVISIONAL_MAINTAINED** ] The requirement that all arrays in formalisms and simulations declare their type (conditional, projection, residue, or participation) and ban generic state arrays. [Source: MPF_ADV_HARDENING_SERIES_006_CONDITIONAL_ARRAY_BACKFILL].
 - **Closure Neighborhoods:** [ **C1_DEFINED_PROVISIONAL_MAINTAINED** ] The requirement that all process coupling neighborhoods (or closure neighborhoods) be defined and computed strictly via local process-connectivity relations rather than assuming a primitive spatial coordinate metric or persistent node objects. [Source: MPF_ADV_HARDENING_SERIES_007_CLOSURE_NEIGHBORHOOD_BACKFILL].
 - **Admissible Organization Operator ($Org_a$):** [ **C1_DEFINED_PROVISIONAL / GAP_QUALIFIED_DEFINITION_CANDIDATE** ] The operator organizing admissible distinction participation over a typed participation graph, governed by candidate axioms under Lemma L115 and Minimal Theorem MT-ORG-001. [Patch: ORG_A_AXIOM_DEFINITION_PASS_001].
-- **Admissible Distinction Organization Signature ($\Sigma_D$):** [ **C1_DEFINED_PROVISIONAL / GAP_QUALIFIED_EQUIVALENCE_CANDIDATE** ] The equivalence class of Org_a-closed distinction organizations under iff_R and orientation equivalence â‰ƒ_O. [Patch: ECONOMICS_SIGMA_D_EQUIVALENCE_PASS_001].
+- **Admissible Distinction Organization Signature ($\Sigma_D$):** [ **C1_DEFINED_PROVISIONAL / GAP_QUALIFIED_EQUIVALENCE_CANDIDATE** ] The equivalence class of Org_a-closed distinction organizations under iff_R and orientation equivalence ≃_O. [Patch: ECONOMICS_SIGMA_D_EQUIVALENCE_PASS_001].
 
 
 ### 2. High-Priority Gaps (OPEN / REGISTERED_LATE / PROOF-PENDING)
@@ -3901,7 +3901,7 @@ These items remain unsettled and are the primary targets for future induction an
 - **OQ_TZR_003 (Collapse Conditions):** [ **OPEN** ] When does typed zero collapse into undifferentiated zero? [Source: MPF_IND_TYPED_ZERO_RECOUPLING_001].
 - **OQ_001 (Scalar Admissibility Context):** [ **OPEN** ] What is the full formal definition of $x$ in the scalar example $[D(2|-1)\to1 \langle f \rangle_x D(3|+3)\to6]\to5$? The context $x$ must be made explicit to complete the RT trace. [Source: MPF_IND_RT_NESTING_CONDITIONS_FAMILY_001].
 - **OQ_002 (Bell Curve Derivability):** [ **OPEN** ] Is the bell curve emergence from exclusion/addition asymmetry formally derivable from $\text{RT}_{\text{core}}$, or does it require an independent statistical postulate? [Source: MPF_IND_RT_NESTING_CONDITIONS_FAMILY_001].
-- **OQ_003 (Skew Conditions):** [ **OPEN** ] What governs the skew of $\text{RT}_{\text{out}}$ distributions â€” i.e., the formal condition under which the exclusion primary dominates over the additive primary or vice versa? [Source: MPF_IND_RT_NESTING_CONDITIONS_FAMILY_001].
+- **OQ_003 (Skew Conditions):** [ **OPEN** ] What governs the skew of $\text{RT}_{\text{out}}$ distributions — i.e., the formal condition under which the exclusion primary dominates over the additive primary or vice versa? [Source: MPF_IND_RT_NESTING_CONDITIONS_FAMILY_001].
 - **OQ_004 (Biconditional Ladder Resolution):** [ **PROVISIONAL_CLOSED** ] Does the mutual constitution of family and primaries (PRIN_007) provide the recursive scale structure needed for the governed provisional reading of the biconditional ladder / `meta_core_scale_hypothesis` in Appendix F.8? [Source: MPF_IND_RT_NESTING_CONDITIONS_FAMILY_001].
 - **OQ_RTM_001 (Trace Inheritance Lemma):** [ **REGISTERED_LATE** ] Under lawful nesting, does trace-admissible $RT_n$ pass trace-admissibility into $RT_{n+1}$ without exhaustive re-derivation from $\text{RT}_{\text{core}}$? [Source: MPF_IND_RT_MECHANICS_RECURSIVE_COMPLETION_001].
 - **OQ_RTM_002 (Continuation Admissibility Condition):** [ **REGISTERED_LATE** ] What formal condition constrains the admissible continuation term in $D(RT_n \mid continuation)$ so the recursive engine remains inside the lawful distinction domain? [Source: MPF_IND_RT_MECHANICS_RECURSIVE_COMPLETION_001].
@@ -3926,9 +3926,9 @@ These items remain unsettled and are the primary targets for future induction an
 - **Formal operand of $\leftrightarrow_R$:** Defining the types allowed to participate in residue-conditioned closure.
 - **Vertical Bar Operator and Grouped Closure ($\mid$):** [ **C1_DEFINED_PROVISIONAL / CAMPAIGN_COMPLETED** ] Primitive admissible participation separator defining the structured comparison interface for distinction evaluation under Lemma L113 and Minimal Theorem MT-VBAR-001. Grouped bar closure ($Adm_{|}^{G}$) is defined under Lemma L114 and Minimal Theorem MT-GBC-001. Executable model verified under 4 controls and 5 metrics. [Patches: VERTICAL_BAR_OPERATOR_DEFINITION_PASS_001, VERTICAL_BAR_OPERATOR_GROUP_CLOSURE_PASS_001, MPF_VERTICAL_BAR_INDUCTION_001, MPF_VERTICAL_BAR_CAMPAIGN_SCAFFOLD_PATCH_001, MPF_VERTICAL_BAR_EXECUTABLE_MODEL_PATCH_001; Campaign: MPF_BAR_OPERATOR_VALIDATION_001]
 - **Deviated Constraint Dynamics ($D \to \delta \alpha$):** [ **C2_test_designed / RECORDED_UNDER_AUDIT** ] Formalizing the principle that distinction reorganizes admissibility within the same process. Vortex feedback loop campaign executed and validated under 4 controls, with C++ equivalence established under oneAPI AVX2; currently under governance hold pending final verification. [Patch: MPF_DEVIATED_CONSTRAINT_DYNAMICS_PATCH_001, MPF_VORTEX_ADMISSIBILITY_EXECUTION_PATCH_001, [REMEDIATE_VORTEX_EXECUTION_PROVENANCE_001](file:///D:/projects/acellorator/patches/REMEDIATE_VORTEX_EXECUTION_PROVENANCE_001.json), [MPF_VORTEX_REMEDIATION_EXECUTION_001](file:///D:/projects/acellorator/patches/MPF_VORTEX_REMEDIATION_EXECUTION_001.json); Campaigns: MPF_VORTEX_ADMISSIBILITY_CAMPAIGN_001, MPF_NON_MARKOV_ORGANIZATION_TEST_001; Audits: AUDIT_VORTEX_GOVERNANCE_001, [AUDIT_TOOL_RIGOR_ENDORSEMENT_TRACE_001](file:///D:/projects/acellorator/audits/AUDIT_TOOL_RIGOR_ENDORSEMENT_TRACE_001/tool_authorization_audit.md)]
-- **Orientation Space $\mathcal{O}$:** [ **DOWNSTREAM_FORMALIZATION_PENDING** ] Orientation is treated as a downstream organization over admissible RT conditions. Working informal definition active in Â§5.1.2 and Â§5.1.4. Candidate formal definition in `formal_object_registry [OBJ-orientation-space]`. Open requirement for OPEN_BRIDGE_001 is the **measurable metric** $C_{\text{orient}}$ and topological class measure $T_{\text{class metric}}$, not the downstream organization itself. [Audit: MPF_ORIENTATION_STALENESS_AUDIT_001 P4]
-- **Orientation Coherence Metric ($C_{\text{orient}}$):** [ **VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT** ] Candidate definition active in textbook Â§5.1.5 (Formal Statement 5.1.5): $C_{\text{orient}}(\chi_D) := 1 - \text{Var}_{\text{norm}}(\{-(i)_k \mid -(i)_k \in \mathcal{O}_{\text{adm}}(\chi_D)\})$. Non-circularity constraint active (C_ORIENT_NONCIRCULARITY_001): metric must be computable before topology class or closure stability is evaluated. Canonical registry entry: `registry/math/metric_registry.json`. Binds to OPEN_BRIDGE_001 PO_001. [Patch: [MPF_PO001_C_ORIENT_VALIDATION_EXECUTION_PATCH_001](file:///D:/projects/acellorator/patches/MPF_PO001_C_ORIENT_VALIDATION_EXECUTION_PATCH_001.json)]
-- **Topological Class Variance Measure ($T_{\text{class\_metric}}$):** [ **VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT** ] Candidate definition active in textbook Â§11.X (Formal Statement 11.X): $T_{\text{class\_metric}}(G_K) := [T_k, b(T_k), \text{inv}(G_K)]$ with minimal class family $T_0$â€“$T_4$, $T_x$. Non-circularity constraint active (T_CLASS_NONCIRCULARITY_001): must classify topology blind to orientation regime. Canonical registry entry: `registry/math/metric_registry.json`. Binds to OPEN_BRIDGE_001 PO_002 and PO_003. [Patch: [MPF_PO002_VALIDATION_CLOSURE_PATCH_001](file:///D:/projects/acellorator/patches/MPF_PO002_VALIDATION_CLOSURE_PATCH_001.json)]
+- **Orientation Space $\mathcal{O}$:** [ **DOWNSTREAM_FORMALIZATION_PENDING** ] Orientation is treated as a downstream organization over admissible RT conditions. Working informal definition active in §5.1.2 and §5.1.4. Candidate formal definition in `formal_object_registry [OBJ-orientation-space]`. Open requirement for OPEN_BRIDGE_001 is the **measurable metric** $C_{\text{orient}}$ and topological class measure $T_{\text{class metric}}$, not the downstream organization itself. [Audit: MPF_ORIENTATION_STALENESS_AUDIT_001 P4]
+- **Orientation Coherence Metric ($C_{\text{orient}}$):** [ **VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT** ] Candidate definition active in textbook §5.1.5 (Formal Statement 5.1.5): $C_{\text{orient}}(\chi_D) := 1 - \text{Var}_{\text{norm}}(\{-(i)_k \mid -(i)_k \in \mathcal{O}_{\text{adm}}(\chi_D)\})$. Non-circularity constraint active (C_ORIENT_NONCIRCULARITY_001): metric must be computable before topology class or closure stability is evaluated. Canonical registry entry: `registry/math/metric_registry.json`. Binds to OPEN_BRIDGE_001 PO_001. [Patch: [MPF_PO001_C_ORIENT_VALIDATION_EXECUTION_PATCH_001](file:///D:/projects/acellorator/patches/MPF_PO001_C_ORIENT_VALIDATION_EXECUTION_PATCH_001.json)]
+- **Topological Class Variance Measure ($T_{\text{class\_metric}}$):** [ **VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT** ] Candidate definition active in textbook §11.X (Formal Statement 11.X): $T_{\text{class\_metric}}(G_K) := [T_k, b(T_k), \text{inv}(G_K)]$ with minimal class family $T_0$–$T_4$, $T_x$. Non-circularity constraint active (T_CLASS_NONCIRCULARITY_001): must classify topology blind to orientation regime. Canonical registry entry: `registry/math/metric_registry.json`. Binds to OPEN_BRIDGE_001 PO_002 and PO_003. [Patch: [MPF_PO002_VALIDATION_CLOSURE_PATCH_001](file:///D:/projects/acellorator/patches/MPF_PO002_VALIDATION_CLOSURE_PATCH_001.json)]
 
 - **Topology-to-Geometry Hardening:** [ **HARDENING_REQUIRED** ] Prove topology-to-geometry proof obligations, validate metric extraction, validate projection-signatures, exclude false geometry projections, and obtain replication and rigor endorsement [Source: MPF_TOPOLOGY_GEOMETRY_LEGALITY_C1_DEFINITION_001].
 - **Empirical Mapping Standards Hardening:** [ **HARDENING_REQUIRED** ] Define EMS audit procedures, EMS evidence thresholds, and EMS replication standards [Source: MPF_EMS_C1_DEFINITION_001].
@@ -3961,7 +3961,7 @@ These items remain unsettled and are the primary targets for future induction an
 - **PD_CG_V3_SUBSCRIPT_DISCOVERY:** Baseline-vs-qualified preserved-distinction campaign after the `_R` route failed as tested.
 - **PD_CG_V3_AFFIX_POSITION_TEST:** Bare-vs-subscripted-vs-prefixed reciprocal relation comparison; affix position is treated as semantically binding until tested.
 - **MPF_BAR_OPERATOR_VALIDATION_001:** Test | as a distinction-preserving comparison operator under 4 controls and 5 metrics; campaign completed and validated under executable model. [Patch: MPF_VERTICAL_BAR_CAMPAIGN_SCAFFOLD_PATCH_001, MPF_VERTICAL_BAR_EXECUTABLE_MODEL_PATCH_001]
-- **MPF_VORTEX_ADMISSIBILITY_CAMPAIGN_001:** Investigate whether admissibility updates systematically condition subsequent distinction events (D -> Î´Î± feedback loops); campaign executed in C++ with verified Python equivalence, currently under governance hold pending final verification. [Patch: MPF_VORTEX_ADMISSIBILITY_CAMPAIGN_001, MPF_VORTEX_ADMISSIBILITY_EXECUTION_PATCH_001, [REMEDIATE_VORTEX_EXECUTION_PROVENANCE_001](file:///D:/projects/acellorator/patches/REMEDIATE_VORTEX_EXECUTION_PROVENANCE_001.json), [MPF_VORTEX_REMEDIATION_EXECUTION_001](file:///D:/projects/acellorator/patches/MPF_VORTEX_REMEDIATION_EXECUTION_001.json); Audits: AUDIT_VORTEX_GOVERNANCE_001, [AUDIT_TOOL_RIGOR_ENDORSEMENT_TRACE_001](file:///D:/projects/acellorator/audits/AUDIT_TOOL_RIGOR_ENDORSEMENT_TRACE_001/tool_authorization_audit.md)]
+- **MPF_VORTEX_ADMISSIBILITY_CAMPAIGN_001:** Investigate whether admissibility updates systematically condition subsequent distinction events (D -> δα feedback loops); campaign executed in C++ with verified Python equivalence, currently under governance hold pending final verification. [Patch: MPF_VORTEX_ADMISSIBILITY_CAMPAIGN_001, MPF_VORTEX_ADMISSIBILITY_EXECUTION_PATCH_001, [REMEDIATE_VORTEX_EXECUTION_PROVENANCE_001](file:///D:/projects/acellorator/patches/REMEDIATE_VORTEX_EXECUTION_PROVENANCE_001.json), [MPF_VORTEX_REMEDIATION_EXECUTION_001](file:///D:/projects/acellorator/patches/MPF_VORTEX_REMEDIATION_EXECUTION_001.json); Audits: AUDIT_VORTEX_GOVERNANCE_001, [AUDIT_TOOL_RIGOR_ENDORSEMENT_TRACE_001](file:///D:/projects/acellorator/audits/AUDIT_TOOL_RIGOR_ENDORSEMENT_TRACE_001/tool_authorization_audit.md)]
 - **MPF_NON_MARKOV_ORGANIZATION_TEST_001:** Probe if future admissibility dynamics depend on cumulative history integration rather than prior state alone; campaign designed. [Patch: MPF_NON_MARKOV_ORGANIZATION_TEST_001]
 
 ### F.6 Bridge Resolution History
@@ -3970,13 +3970,13 @@ These items remain unsettled and are the primary targets for future induction an
 - **OPEN_BRIDGE_001:** Later relational-conditioning retest dated 2026-06-17 respected `_R` as relation conditioning rather than residue removal, but still did not support promotion because basin reformation did not improve and boundary-front mediation worsened on average.
 - **OPEN_BRIDGE_001:** Reformulated 2026-06-17 as a **Topological Selector** bridge. The new claim identifies orientation as a constraint on admissible knot-class selection ($T$) rather than a direct driver of stability. Its current governed state is **PROVISIONAL_PENDING_RIGOR** with a **C1_DEFINED_PROVISIONAL** ceiling under `RIGOR_TOOL_001`.
 - **OPEN_BRIDGE_001:** Run 08 dated 2026-06-16, reviewed 2026-06-17, showed coherent orientation narrowing admissible knot-class variance under the tested PDE + TDA stack. Under `RIGOR_TOOL_001`, that observation is retained as **PROVISIONAL_PENDING_RIGOR** pending tool qualification and independent replication rather than advanced to supported status.
-- **OPEN_BRIDGE_001:** Governance reset `PD_CG_PATCH_003` dated 2026-06-17 retained bare `<â‰ >` as the active preserved-distinction baseline, treated subscripts as tested qualifiers only, and blocked promotional reuse of `<â‰ >_R` / `<â‰ >_r` without a new direct baseline win.
+- **OPEN_BRIDGE_001:** Governance reset `PD_CG_PATCH_003` dated 2026-06-17 retained bare `<≠>` as the active preserved-distinction baseline, treated subscripts as tested qualifiers only, and blocked promotional reuse of `<≠>_R` / `<≠>_r` without a new direct baseline win.
 - **OPEN_BRIDGE_001:** Later affix-position test dated 2026-06-17 found that reciprocal affix position changed bounded model behavior, but neither `<=>_r` nor `r_<=>` beat bare `<=>`; no bridge promotion followed.
 
 ### F.7 Bridge Measurement Definitions (MPF_PATCH_002E)
 Formal measurement rules for bridge falsification campaigns.
-- **Orientation Coherence ($C_{\text{orient}}$):** [ **VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT** ] Candidate form: $1 - \text{Var}_{\text{norm}}(\{-(i)_k \mid -(i)_k \in \mathcal{O}_{\text{adm}}(\chi_D)\})$. Canonical inputs: $-(i)$, $\mathcal{O}$, $\chi_D$, $\delta_a$-context. Forbidden inputs: $K$, $T_{\text{class}}$, $S_{\text{closure}}$. Non-circularity constraint C_ORIENT_NONCIRCULARITY_001 active. Full definition: textbook Â§5.1.5; registry: `registry/math/metric_registry.json`. [Patch: [MPF_PO001_C_ORIENT_VALIDATION_EXECUTION_PATCH_001](file:///D:/projects/acellorator/patches/MPF_PO001_C_ORIENT_VALIDATION_EXECUTION_PATCH_001.json)]
-- **Topology-Class Metric ($T_{\text{class\_metric}}$):** [ **VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT** ] Candidate form: $T_{\text{class\_metric}}(G_K) := [T_k, b(T_k), \text{inv}(G_K)]$ with class family $T_0$â€“$T_4$, $T_x$. Allowed inputs: realized closure trace, graph adjacency, braid/loop structure. Forbidden inputs: $C_{\text{orient}}$, $-(i)$, $\mathcal{O}$, orientation regime labels. Non-circularity constraint T_CLASS_NONCIRCULARITY_001 active. Full definition: textbook Â§11.X; registry: `registry/math/metric_registry.json`. [Patch: [MPF_PO002_VALIDATION_CLOSURE_PATCH_001](file:///D:/projects/acellorator/patches/MPF_PO002_VALIDATION_CLOSURE_PATCH_001.json)]
+- **Orientation Coherence ($C_{\text{orient}}$):** [ **VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT** ] Candidate form: $1 - \text{Var}_{\text{norm}}(\{-(i)_k \mid -(i)_k \in \mathcal{O}_{\text{adm}}(\chi_D)\})$. Canonical inputs: $-(i)$, $\mathcal{O}$, $\chi_D$, $\delta_a$-context. Forbidden inputs: $K$, $T_{\text{class}}$, $S_{\text{closure}}$. Non-circularity constraint C_ORIENT_NONCIRCULARITY_001 active. Full definition: textbook §5.1.5; registry: `registry/math/metric_registry.json`. [Patch: [MPF_PO001_C_ORIENT_VALIDATION_EXECUTION_PATCH_001](file:///D:/projects/acellorator/patches/MPF_PO001_C_ORIENT_VALIDATION_EXECUTION_PATCH_001.json)]
+- **Topology-Class Metric ($T_{\text{class\_metric}}$):** [ **VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT** ] Candidate form: $T_{\text{class\_metric}}(G_K) := [T_k, b(T_k), \text{inv}(G_K)]$ with class family $T_0$–$T_4$, $T_x$. Allowed inputs: realized closure trace, graph adjacency, braid/loop structure. Forbidden inputs: $C_{\text{orient}}$, $-(i)$, $\mathcal{O}$, orientation regime labels. Non-circularity constraint T_CLASS_NONCIRCULARITY_001 active. Full definition: textbook §11.X; registry: `registry/math/metric_registry.json`. [Patch: [MPF_PO002_VALIDATION_CLOSURE_PATCH_001](file:///D:/projects/acellorator/patches/MPF_PO002_VALIDATION_CLOSURE_PATCH_001.json)]
 - **Closure Stability ($S_{\text{closure}}$):** $\text{survival\_cycles} / \text{total\_cycles}$.
 - **Minimum Effect Threshold ($\tau$):** 0.05 (Target for $\beta_1$).
 
@@ -4005,11 +4005,11 @@ This section tracks newly introduced lexicon terms that have been reduced to gov
 - **`Process_Equivalence`** (`C_1 \equiv_P C_2`): Behavioral equivalence between continuation expressions under shared admissibility, residue, orientation, and context constraints. Symbolic equality is not sufficient; two expressions may differ syntactically while remaining process-equivalent. [Source: `PATCH_PI_RT_CALCULUS_015`].
 - **`Canonical_Continuation_Form`** (`NF(C)`): Canonical representative of a continuation expression when admissibility holds. `NF(C)` supports auditability and comparison, while the minimal governed reduction algorithm is documented in `PATCH_PI_RT_CALCULUS_025`, partial normal form semantics are documented in `PATCH_PI_RT_CALCULUS_026`, and reduction trace semantics are documented in `PATCH_PI_RT_CALCULUS_027`; termination and confluence remain deferred. [Source: `PATCH_PI_RT_CALCULUS_015`; `PATCH_PI_RT_CALCULUS_025`; `PATCH_PI_RT_CALCULUS_026`; `PATCH_PI_RT_CALCULUS_027`].
 - **`Continuation_Reduction_Semantics`** (`C \to_{red} C'`): Governed reduction relation from a well-formed continuation expression toward `NF(C)`. The relation preserves process equivalence and simplifies representation rather than behavior; `PATCH_PI_RT_CALCULUS_017` instantiates this semantics with primitive reduction rules. [Source: `PATCH_PI_RT_CALCULUS_016`; `PATCH_PI_RT_CALCULUS_017`].
-- **`Primitive_Continuation_Reduction_Rules`** (`I(A) âˆ˜ C(A,B) \to_{red} C(A,B)`, `C(A,B) âˆ˜ I(B) \to_{red} C(A,B)`, `C(A,B) âˆ˜ C(B,C) \to_{red} C(A,C)`): The first concrete lawful reduction rules under `->red`. They remove identity redundancy and contract lawful composition only when endpoint compatibility, admissibility, residue propagation, and governing constraints hold. [Source: `PATCH_PI_RT_CALCULUS_017`].
-- **`Primitive_Continuation_Reduction_Rules`** (`I(A) âˆ˜ C(A,B) \to_{red} C(A,B)`, `C(A,B) âˆ˜ I(B) \to_{red} C(A,B)`, `C(A,B) âˆ˜ C(B,C) \to_{red} C(A,C)`): The first concrete lawful reduction rules under `->red`. They remove identity redundancy and contract lawful composition only when endpoint compatibility, admissibility, residue propagation, and governing constraints hold. [Source: `PATCH_PI_RT_CALCULUS_017`].
+- **`Primitive_Continuation_Reduction_Rules`** (`I(A) ∘ C(A,B) \to_{red} C(A,B)`, `C(A,B) ∘ I(B) \to_{red} C(A,B)`, `C(A,B) ∘ C(B,C) \to_{red} C(A,C)`): The first concrete lawful reduction rules under `->red`. They remove identity redundancy and contract lawful composition only when endpoint compatibility, admissibility, residue propagation, and governing constraints hold. [Source: `PATCH_PI_RT_CALCULUS_017`].
+- **`Primitive_Continuation_Reduction_Rules`** (`I(A) ∘ C(A,B) \to_{red} C(A,B)`, `C(A,B) ∘ I(B) \to_{red} C(A,B)`, `C(A,B) ∘ C(B,C) \to_{red} C(A,C)`): The first concrete lawful reduction rules under `->red`. They remove identity redundancy and contract lawful composition only when endpoint compatibility, admissibility, residue propagation, and governing constraints hold. [Source: `PATCH_PI_RT_CALCULUS_017`].
 - **`Well-Formed_Continuation_Expression`** (`WF(C)`): Continuation expressions are lawful only when endpoints, composition structure, domain bindings, and governing constraints are valid. `WF(C)` is the structural and semantic gate for lawful continuation composition and reduction, and it blocks cross-domain substitution unless an explicit projection or binding rule is declared. [Source: `PATCH_PI_RT_CALCULUS_018`].
 - **`Typed_Continuation_Domains`** (`TYPE_META`, `TYPE_AFFECT_EFFECT`, `TYPE_PROJECTION`, `TYPE_CONTINUATION`, `TYPE_OBSERVATION`, `TYPE_OPERATIONAL_REGIME`): Explicit typing for continuation-layer expressions across meta, affect/effect, projection, continuation, observation, and operational-regime layers. Cross-domain substitution is forbidden unless an explicit projection, binding, or transition rule is declared. [Source: `PATCH_PI_RT_CALCULUS_019`].
-- **`Typed_Projection_Transition_Rules`** (`A|E ->p Î _D(A|E)`, `Î _D(A|E) := D(*|*)`): Governed typed transition rules that move the primitive affect/effect condition into the projection layer only through explicit invocation of `Î _D`. Direct collapse from `A|E` to `D(*|*)` is forbidden, and projection preserves representable distinction without exhausting the primitive condition. [Source: `PATCH_PI_RT_CALCULUS_020`].
+- **`Typed_Projection_Transition_Rules`** (`A|E ->p Π_D(A|E)`, `Π_D(A|E) := D(*|*)`): Governed typed transition rules that move the primitive affect/effect condition into the projection layer only through explicit invocation of `Π_D`. Direct collapse from `A|E` to `D(*|*)` is forbidden, and projection preserves representable distinction without exhausting the primitive condition. [Source: `PATCH_PI_RT_CALCULUS_020`].
 - **`Typed_Continuation_Composition_Guards`** (`C(A,B) \circ C(B,C)`, `type(cod(C_1)) = type(dom(C_2))`, `admissible(C_1,C_2)`): Governed typed composition guards that require endpoint matching, typed-domain compatibility, admissibility, and residue propagation before continuation composition or any reduction of the composed continuation is lawful. Projection-domain mismatches require an explicit typed transition rule such as `\Pi_D`; failed composition produces no continuation object. [Source: `PATCH_PI_RT_CALCULUS_021`].
 - **`Continuation_Failure`** (`$\bot_C$`): Marked diagnostic failure state produced when a proposed continuation cannot be admitted as a lawful continuation object. Composition, typed transition, or reduction failure records inadmissibility without modifying the canonical RT core, and `NF(\bot_C)` is undefined. [Source: `PATCH_PI_RT_CALCULUS_022`].
 - **`Continuation_Failure_Classification`** (`$\bot_C^{\mathrm{endpoint}}$, $\bot_C^{\mathrm{type}}$, $\bot_C^{\mathrm{adm}}$, $\bot_C^{\mathrm{res}}$`): Diagnostic subclasses of `$\bot_C$` that identify endpoint, type, admissibility, and residue failures. Classification remains diagnostic only: it does not create lawful continuation objects, does not normalize into continuation normal forms, and defers recovery to a future governed rule. [Source: `PATCH_PI_RT_CALCULUS_023`].
@@ -4123,6 +4123,7 @@ The live mathematics proof package is reduced to artifact synchronization and pr
 - **MT-002:** Formal proof artifact and verification artifact are recorded as `formal`; the underlying verification evidence remains `symbolic_verified_under_assumptions`.
 - **MT-003:** Formal proof artifact and verification artifact are recorded as `formal`; the underlying verification evidence remains `symbolic_verified_under_assumptions`.
 - **Blocker state:** The promotion blockers for MT-001, MT-002, and MT-003 are formalized and mapped in `registry/math/theorem_blocker_resolution_registry.json`. The promotion gate has been cleared by explicit user authorization.
+- **RC-001 closure state:** The derivation closure registry records `derivation_supported` with both steps supported and `ready_for_closure: true`; the remaining blocker registry retains only scoped residual `GAP-001` for non-local CSI sum convergence under RC-017 CMC-002/CMC-006. [Source: `registry/math/rc001_derivation_closure_registry.json`; `registry/math/rc001_remaining_blocker_registry.json`]
 - **Governance note:** This reduction updates proof-package bookkeeping and theorem promotion state in the governed registries.
 
 ---
@@ -4151,8 +4152,8 @@ This textbook draft is derived from and cross-referenced with the following foun
 | **IND-STATE-S-001** | [Induction: State Primitive Grounding](D:/projects/acellorator/docs/textbook/mono_process_textbook_complete.md) | 2026-05-29 | Non-spatial, monistic definition of the state aspect S. |
 | **MPF-P1-003** | [Patch: Invariant Registry Implementation](D:/projects/acellorator/registry/math/invariant_registry.json) | 2026-05-29 | Implementation of the initial invariant family for projectional equivalence. |
 | **MPF-P1-004** | [Patch: Projectional Equivalence Template](D:/projects/acellorator/docs/theory/foundational/5_03_26%20unity/math/proofs/PROJECTIONAL_EQUIVALENCE_TEMPLATE.md) | 2026-05-29 | Formal proof structure for verifying invariant preservation across domains. |
-| **L101â€“L115** | [Lemmas L101â€“L115](D:/projects/acellorator/docs/theory/foundational/5_03_26%20unity/math/lemmas/) | 2026-06-22 | Formulations of Whole Expression Primacy, Zero-State domain membership, Recoupling-Reorientation Event, Meta-Relation Family, Typed Meta-Relation Operator ($\langle*\rangle_x$), vertical bar operator |, and Admissible Organization Operator ($Org_a$) axioms. |
-| **P101â€“P109** | [Proofs P101â€“P109](D:/projects/acellorator/docs/theory/foundational/5_03_26%20unity/math/proofs/) | 2026-06-22 | Formal proof sketches and validation structures for Lemmas L101â€“L109. |
+| **L101–L115** | [Lemmas L101–L115](D:/projects/acellorator/docs/theory/foundational/5_03_26%20unity/math/lemmas/) | 2026-06-22 | Formulations of Whole Expression Primacy, Zero-State domain membership, Recoupling-Reorientation Event, Meta-Relation Family, Typed Meta-Relation Operator ($\langle*\rangle_x$), vertical bar operator |, and Admissible Organization Operator ($Org_a$) axioms. |
+| **P101–P109** | [Proofs P101–P109](D:/projects/acellorator/docs/theory/foundational/5_03_26%20unity/math/proofs/) | 2026-06-22 | Formal proof sketches and validation structures for Lemmas L101–L109. |
 
 ### Secondary References and Registries
 - **Compliance Charter v2.3:** [compliance_charter_v2_3.json](D:/projects/acellorator/registry/compliance_charter_v2_3.json) - Governance authority.

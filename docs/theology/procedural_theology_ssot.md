@@ -19,6 +19,7 @@ The department inherits the same RT/Core and process-first ontology as every oth
 
 The department therefore treats theological nouns as candidate semantic projections, interpretive labels, or analogical mappings unless and until a narrower governed role is explicitly defined.
 Governed routing note: cross-department coordination also consults `governance/live/department_relationship_registry.json`, and documentation synchronization is maintained by `departments/documentation/department_ssot.md`.
+Governance/runtime note: live checks against patch, debt, or boundary state should request an explicit evidence level from `scripts/query_governance.py`; `--summary` remains the alias for summary mode, and higher levels are only needed when reconstructing governing evidence.
 
 ### Core Governance Position
 The department does **not** claim:

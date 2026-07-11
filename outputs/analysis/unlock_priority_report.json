@@ -1,102 +1,77 @@
 {
+  "report_id": "ANALYSIS_UNLOCK_PRIORITY_REPORT_001",
   "analysis_id": "ANALYSIS_UNLOCK_PRIORITY_ENGINE_001",
-  "report_type": "unlock_priority_analysis",
-  "scope": {
-    "department": "mathematics",
-    "mode": "analysis_only"
+  "title": "Unlock Priority Analysis Report",
+  "scope": "Analysis-only ranking for mathematics work in governance/live/master_work_index.json",
+  "runtime_snapshot": {
+    "source": "scripts/query_governance.py current-state --pretty",
+    "status": "warn",
+    "db_snapshot_status": "stale",
+    "open_debt_count": 0,
+    "live_blocker_count": 0
   },
   "source_artifacts": [
     "governance/live/master_work_index.json",
-    "governance/live/work_reduction_framework.json",
-    "outputs/audits/global_health_report.json",
     "registry/math/math_campaign_execution_order.json",
-    "registry/math/proof_elevation_campaign_registry.json",
-    "registry/math/mt_proof_elevation_campaign_registry.json",
-    "registry/math/mt_counterexample_campaign_registry.json",
-    "outputs/audits/math_counterexample_orientation_locking_execution_002.json",
-    "outputs/audits/proof_elevation_follow_through_001.json",
-    "outputs/audits/math_counterexample_continuation_006.json",
-    "outputs/audits/math_campaign_phase_3_repair_priority_001.json",
-    "campaigns/PD_CG_ROOT_TRACE_FALSIFICATION_CAMPAIGN_V1.json"
+    "analysis/program_state_report.json",
+    "analysis/dependency_report.json",
+    "outputs/audits/global_health_report.json",
+    "outputs/audits/math_campaign_phase_3_repair_priority_001.json"
   ],
-  "summary": {
-    "math_campaign_items_total": 5,
-    "math_campaign_items_blocked": 0,
-    "math_campaign_items_unblocked": 5,
-    "math_independent_work_items": 6,
-    "blocker_nodes": 0,
-    "critical_blockers": 0,
-    "direct_blocker_edges": 0,
-    "top_unlock_score": 0,
-    "analysis_status": "recommendations_only"
-  },
-  "critical_blockers": [],
-  "independent_work": [
+  "directly_observed": [
+    "Mathematics campaign items in the live index: 5.",
+    "Campaign items with explicit blockers: 0.",
+    "Independent math work items found: 6.",
+    "The proof follow-through sync passed, the counterexample declared-vector chain is exhausted, and the runtime debt projection is empty."
+  ],
+  "ranked_reduction_plan": [
     {
-      "id": "PD_CG_ROOT_TRACE_FALSIFICATION_CAMPAIGN_V1",
-      "title": "Root-Traceable Procedural Dynamics / Constraint Geometry Falsification Attack",
-      "work_type": "campaign",
-      "status": "INDUCTED_PROVISIONAL",
-      "execution_state": "review",
-      "priority": "medium",
-      "recommendation": "Proceed independently.",
-      "reason": "No explicit blockers are listed in the live index."
+      "rank": 1,
+      "action": "Continue SIM-REPAIR-QUEUE-001, VAL-RC-EXEC-001, and VAL-URS-RES-001.",
+      "scope": "bounded"
     },
     {
-      "id": "MPF_IND_PRIMITIVE_FORM_DOMINANT_DOMAIN_001",
-      "title": "Primitive Form and Dominant-Domain Realization",
-      "work_type": "induction",
-      "status": "C1_DEFINED_PROVISIONAL",
-      "execution_state": "review",
-      "priority": "medium",
-      "recommendation": "Proceed independently.",
-      "reason": "No explicit blockers are listed in the live index."
+      "rank": 2,
+      "action": "Preserve research-campaign momentum while the mathematical backlog is reduced.",
+      "scope": "bounded"
     },
     {
-      "id": "PALG-QUEUE-001",
-      "title": "PALG-QUEUE-001",
-      "work_type": "review",
-      "status": "UNDER_REVIEW",
-      "execution_state": "review",
-      "priority": "medium",
-      "recommendation": "Proceed independently.",
-      "reason": "No explicit blockers are listed in the live index."
-    },
-    {
-      "id": "SIM-REPAIR-QUEUE-001",
-      "title": "Evidence-Reconciliation Repair Queue Registry",
-      "work_type": "queue",
-      "status": "active",
-      "execution_state": "active",
-      "priority": "high",
-      "recommendation": "Proceed independently.",
-      "reason": "No explicit blockers are listed in the live index."
-    },
-    {
-      "id": "VAL-RC-EXEC-001",
-      "title": "RC Repair Queue Execution Registry",
-      "work_type": "queue",
-      "status": "active",
-      "execution_state": "active",
-      "priority": "high",
-      "recommendation": "Proceed independently.",
-      "reason": "No explicit blockers are listed in the live index."
-    },
-    {
-      "id": "VAL-URS-RES-001",
-      "title": "Unresolved Structure Resolution Queue Registry",
-      "work_type": "queue",
-      "status": "active",
-      "execution_state": "active",
-      "priority": "high",
-      "recommendation": "Proceed independently.",
-      "reason": "No explicit blockers are listed in the live index."
+      "rank": 3,
+      "action": "Keep PROOF-ELEVATION-CAMPAIGN-001 and MT-COUNTEREXAMPLE-001 on watchlist only.",
+      "scope": "bounded"
     }
   ],
+  "independent_work": [
+    "PD_CG_ROOT_TRACE_FALSIFICATION_CAMPAIGN_V1 can proceed independently.",
+    "MPF_IND_PRIMITIVE_FORM_DOMINANT_DOMAIN_001 can proceed independently.",
+    "PALG-QUEUE-001 can proceed independently.",
+    "SIM-REPAIR-QUEUE-001 can proceed independently.",
+    "VAL-RC-EXEC-001 can proceed independently.",
+    "VAL-URS-RES-001 can proceed independently."
+  ],
+  "critical_path": [
+    "SIM-REPAIR-QUEUE-001",
+    "VAL-RC-EXEC-001",
+    "VAL-URS-RES-001",
+    "PROOF-ELEVATION-CAMPAIGN-001",
+    "MT-COUNTEREXAMPLE-001"
+  ],
+  "what_this_does_not_prove": [
+    "It does not execute or close any governed work.",
+    "It does not modify any authoritative registry.",
+    "It does not claim that theorem or campaign work is mathematically final; it only restates the current reduction order from governed artifacts."
+  ],
+  "supporting_evidence": [
+    "governance/live/master_work_index.json",
+    "registry/math/math_campaign_execution_order.json",
+    "analysis/program_state_report.json",
+    "analysis/dependency_report.json",
+    "outputs/analysis/critical_path_graph.json",
+    "outputs/audits/global_health_report.json",
+    "outputs/audits/math_campaign_phase_3_repair_priority_001.json"
+  ],
   "notes": [
-    "The prior shared-prerequisite unlock model was stale relative to the authoritative master work index and live math execution order.",
-    "Current recommendations are based on the phase-3 repair handoff after proof follow-through and declared-vector exhaustion.",
-    "The proof follow-through sync passed, the counterexample chain has no remaining declared vectors, and the active repair queues are now the current live reduction path.",
-    "The report is analysis-only and does not modify governed artifacts."
+    "This JSON mirror is provided so downstream analysis artifacts can resolve the reported unlock-priority source path.",
+    "The runtime snapshot is stale at the DB layer but still shows no open debt or live blockers."
   ]
 }
