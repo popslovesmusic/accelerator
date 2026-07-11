@@ -1,0 +1,45 @@
+{
+  "campaign_id": "BOOK_CAMPAIGN_PHASE_01_MASTER",
+  "module_id": "CLS_003",
+  "status": "pass",
+  "tests": [
+    {
+      "name": "collapse_snapshot",
+      "expected": "active_fraction 0.0 and count 0",
+      "observed": {
+        "active_fraction": 0.0,
+        "count": 0
+      },
+      "passed": true
+    },
+    {
+      "name": "fragmented_seed",
+      "expected": "two disconnected components",
+      "observed": {
+        "active_fraction": 0.125,
+        "count": 2,
+        "max_size": 4,
+        "mean_size": 4.0
+      },
+      "passed": true
+    },
+    {
+      "name": "reformation_snapshot",
+      "expected": "single connected component restored",
+      "observed": {
+        "active_fraction": 0.25,
+        "count": 1,
+        "max_size": 16,
+        "mean_size": 16.0
+      },
+      "passed": true
+    },
+    {
+      "name": "control_report",
+      "expected": "built-in empty/single/two-component controls",
+      "observed": "passed",
+      "passed": true
+    }
+  ],
+  "known_limit": "Betti-0 only; no persistent homology."
+}
