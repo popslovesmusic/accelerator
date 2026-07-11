@@ -4,7 +4,7 @@ This document is the local SSOT for the Analysis Department.
 
 It governs program-state assessment, dependency analysis, priority ranking, and recommendation synthesis from governed evidence.
 
-The Analysis Department is subordinate to the global core, global governance, and the Mathematics Department. It does not define RT/Core, primitive operators, formal admissibility, formal residue, theorem status, or executable authority. In this SSOT, every primitive is treated as RT-governed and traced to `RT_core`, but not every RT-governed expression is primitive; RT-derived continuations, projections, and operational regimes remain RT without being primitive. It consumes live ledgers, the Work Reduction Framework, the Master Work Index, and the department relationship registry, then outputs recommendations only.
+The Analysis Department is subordinate to the global core, global governance, and the Mathematics Department. It does not define RT/Core, primitive operators, formal admissibility, formal residue, theorem status, or executable authority. In this SSOT, every primitive is treated as RT-governed and traced to `RT_core`, but not every RT-governed expression is primitive; RT-derived continuations, projections, and operational regimes remain RT without being primitive. It consumes live ledgers, the Work Reduction Framework, the Master Work Index, the analysis recommendation queue, and the department relationship registry, then outputs recommendations only.
 
 ---
 
@@ -66,6 +66,9 @@ The Analysis Department depends on:
 The Analysis Department depends on:
 - `governance/live/work_reduction_framework.json`
 - `governance/live/master_work_index.json`
+- `analysis/recommended_action_queue.json`
+- `analysis/program_state_report.json`
+- `analysis/dependency_report.json`
 - `governance/live/authority_manifest.json`
 - `governance/live/department_registry.json`
 - `governance/live/department_layout_manifest.json`
@@ -74,6 +77,8 @@ The Analysis Department depends on:
 - `governance/live/program_debt_discharge_command.json`
 - `governance/live/induction_queue.json`
 - `outputs/audits/global_health_report.json`
+- `outputs/analysis/critical_path_graph.json`
+- `outputs/analysis/unlock_priority_report.json`
 - `docs/textbook/mono_process_textbook_complete.md`
 - `docs/theory/foundational/5_03_26 unity/math/notes/0007_rt_calculus_specification_v1_0_consolidation.md`
 - `registry/governance/patches/PATCH_PI_RT_CALCULUS_045.json`
@@ -122,30 +127,30 @@ Each recommendation should carry:
 ## Initial Recommendation Entries
 
 #### ANL_REC_001
-- **Title:** Continue active repair and unresolved-structure queues
-- **Source Evidence:** `governance/live/master_work_index.json`, `outputs/audits/math_campaign_phase_3_repair_priority_001.json`
-- **Recommendation:** continue the active repair queue items and unresolved structure queue items because the live reduction focus has shifted to phase 3 repair after formal follow-through and declared-vector exhaustion.
+- **Title:** Continue SIM-REPAIR-QUEUE-001, VAL-RC-EXEC-001, and VAL-URS-RES-001
+- **Source Evidence:** `governance/live/master_work_index.json`, `analysis/dependency_report.json`, `analysis/program_state_report.json`, `analysis/recommended_action_queue.json`, `outputs/analysis/critical_path_graph.json`, `outputs/analysis/unlock_priority_report.json`, `outputs/audits/global_health_report.json`
+- **Recommendation:** continue the active repair and unresolved-structure queues because the live master index and downstream analysis projections still place them first in the current reduction path.
 - **Claim Class:** `C1_model_relative`
 - **Status:** deterministic recommendation
 
 #### ANL_REC_002
-  - **Title:** Preserve research-campaign momentum
-  - **Source Evidence:** `governance/live/master_work_index.json`
-  - **Recommendation:** preserve research-campaign momentum while the mathematical backlog is reduced because the active research campaigns remain underway and their blocker count is already explicit.
+  - **Title:** Preserve research-campaign momentum while backlog is reduced
+  - **Source Evidence:** `governance/live/master_work_index.json`, `analysis/program_state_report.json`, `analysis/recommended_action_queue.json`, `outputs/analysis/unlock_priority_report.json`
+  - **Recommendation:** preserve research-campaign momentum while the mathematical backlog is reduced because the active research campaigns remain underway and the blocker count is already explicit.
   - **Claim Class:** `C1_model_relative`
   - **Status:** deterministic recommendation
 
 #### ANL_REC_003
-- **Title:** Keep proof-elevation and counterexample artifacts on watchlist
-- **Source Evidence:** `outputs/audits/proof_elevation_follow_through_001.json`, `outputs/audits/math_counterexample_continuation_006.json`, `registry/math/formal_candidate_readiness_registry.json`
-- **Recommendation:** keep the proof-elevation and counterexample artifacts on watchlist only because the follow-through sync passed, the counterexample declared-vector chain is exhausted, and the formal candidate readiness registry is already settled.
+- **Title:** Keep PROOF-ELEVATION-CAMPAIGN-001 and MT-COUNTEREXAMPLE-001 on watchlist only
+- **Source Evidence:** `analysis/dependency_report.json`, `analysis/program_state_report.json`, `analysis/recommended_action_queue.json`, `outputs/analysis/unlock_priority_report.json`, `outputs/audits/proof_elevation_follow_through_001.json`, `outputs/audits/math_counterexample_continuation_006.json`, `registry/math/formal_candidate_readiness_registry.json`
+- **Recommendation:** keep the proof-elevation and counterexample artifacts on watchlist only because the follow-through sync passed, the counterexample declared-vector chain is exhausted, and the current unlock analysis keeps them downstream of the repair path.
 - **Claim Class:** `C1_model_relative`
   - **Status:** deterministic recommendation
 
 #### ANL_REC_004
 - **Title:** Keep governance/runtime debt watchlisted only
-- **Source Evidence:** `scripts/query_governance.py current-state --pretty`, `outputs/audits/global_health_report.json`
-- **Recommendation:** keep governance/runtime debt watchlisted only because the runtime currently reports no open debt and no live blockers.
+- **Source Evidence:** `scripts/query_governance.py current-state --pretty`, `analysis/program_state_report.json`, `outputs/audits/global_health_report.json`
+- **Recommendation:** keep governance/runtime debt watchlisted only because the runtime projection is empty and no live blockers are recorded.
 - **Claim Class:** `C1_model_relative`
   - **Status:** deterministic recommendation
 
@@ -155,16 +160,16 @@ Each recommendation should carry:
 
   This is the current single ordered recommendation sequence under the Work Reduction Framework. It is a recommendation only and does not authorize execution by itself.
   
-  1. `active repair` and `unresolved-structure` queues
+  1. `SIM-REPAIR-QUEUE-001`, `VAL-RC-EXEC-001`, and `VAL-URS-RES-001`
   1. `research-campaign momentum` while the mathematical backlog is reduced
-  1. `proof-elevation` and `counterexample` artifacts remain watchlist-only context
+  1. `PROOF-ELEVATION-CAMPAIGN-001` and `MT-COUNTEREXAMPLE-001` remain watchlist-only context
   1. `governance/runtime debt` remains watchlisted only
   
   Ordering basis:
-  - `active repair` and `unresolved-structure` queues are first because the live master index still reports them active with explicit next actions after the follow-through handoff.
-  - `research-campaign momentum` is second because the research campaigns remain active but are lower leverage than the immediate repair work.
-  - `proof-elevation` and `counterexample` artifacts are third because the follow-through sync passed and the counterexample declared-vector chain is exhausted, so they are watchlist context rather than the current live reduction path.
-  - `governance/runtime debt` is fourth because the live governance runtime reports no open debt and no live blockers.
+  - `SIM-REPAIR-QUEUE-001`, `VAL-RC-EXEC-001`, and `VAL-URS-RES-001` are first because `analysis/dependency_report.json`, `analysis/recommended_action_queue.json`, and `outputs/analysis/critical_path_graph.json` all keep them first in the current reduction path.
+  - `research-campaign momentum` is second because `analysis/program_state_report.json` keeps research readiness active with blockers while the unlock analysis preserves momentum during backlog reduction.
+  - `PROOF-ELEVATION-CAMPAIGN-001` and `MT-COUNTEREXAMPLE-001` are third because the follow-through sync passed and the counterexample declared-vector chain is exhausted, so they are watchlist context rather than the current live reduction path.
+  - `governance/runtime debt` is fourth because the runtime projection is empty even though the DB snapshot is stale.
 
 ---
 
