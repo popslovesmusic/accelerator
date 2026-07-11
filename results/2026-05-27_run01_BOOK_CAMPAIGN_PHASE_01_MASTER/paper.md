@@ -11,19 +11,26 @@
   "models_used": [
     "signal_scope_phase_continuation_engine",
     "structural_box_sim_cpp",
-    "tda_module_v1_cpp"
+    "tda_module_v1_cpp",
+    "agent_based_sim_v1_cpp"
   ],
   "model_classes": [
     "agent_based_phase_continuation_sim",
     "pde",
-    "topology_analyzer"
+    "topology_analyzer",
+    "agent"
   ],
-  "seeds_used": 1,
+  "seeds_used": 5,
   "falsification_run": true,
   "recoverable_outputs": [
     "results/2026-05-27_run01_BOOK_CAMPAIGN_PHASE_01_MASTER/data/signal_scope/",
     "results/2026-05-27_run01_BOOK_CAMPAIGN_PHASE_01_MASTER/data/structural_box/",
     "results/2026-05-27_run01_BOOK_CAMPAIGN_PHASE_01_MASTER/data/cls_003/",
+    "results/2026-05-27_run01_BOOK_CAMPAIGN_PHASE_01_MASTER/data/cls_004/agent_based/",
+    "results/2026-05-27_run01_BOOK_CAMPAIGN_PHASE_01_MASTER/data/cls_004/agent_based_campaign.json",
+    "results/2026-05-27_run01_BOOK_CAMPAIGN_PHASE_01_MASTER/data/cls_004/agent_based/summary.json",
+    "results/2026-05-27_run01_BOOK_CAMPAIGN_PHASE_01_MASTER/data/cls_004/agent_based/provenance_report.json",
+    "results/2026-05-27_run01_BOOK_CAMPAIGN_PHASE_01_MASTER/artifacts/cls_004_results.json",
     "results/2026-05-27_run01_BOOK_CAMPAIGN_PHASE_01_MASTER/data/campaign_report.json",
     "results/2026-05-27_run01_BOOK_CAMPAIGN_PHASE_01_MASTER/data/falsification_summary.json",
     "results/2026-05-27_run01_BOOK_CAMPAIGN_PHASE_01_MASTER/data/cross_layer_invariant_results.json",
@@ -60,6 +67,7 @@ Tools used:
 - **structural_box_sim_cpp**: For distributed organization and transport.
 - **kuramoto_sim_v1_cpp**: For coherence and synchronization analysis.
 - **tda_module_v1_cpp**: For topological persistence and fragmentation.
+- **agent_based_sim_v1_cpp**: For cooperative admissibility, distributed persistence, and recovery probability.
 
 ## 4. Observables
 
@@ -71,7 +79,7 @@ Tools used:
 | CLS_004 | cooperative gain, distributed persistence, recovery probability |
 | CLS_005 | scope persistence, routing accessibility, fragmentation thresholds |
 
-## 5. Results (Modules CLS_001 to CLS_003)
+## 5. Results (Modules CLS_001 to CLS_004)
 
 ### CLS_001: Recursive Stability Validation
 | Run | PLV | Mismatch (Mean) | Survival Rate | Alignment |
@@ -101,6 +109,18 @@ Tools used:
 
 The built-in control report in `results/2026-05-27_run01_BOOK_CAMPAIGN_PHASE_01_MASTER/data/cls_003/control/topology_report.json` passed the empty, single-component, two-component, and network-two-component checks. This module is bounded to thresholded connected-component projection and does not compute persistent homology.
 
+### CLS_004: Cooperative Admissibility Validation (Agent-Based Projection)
+| Variation | Order Parameter | Residue Mean | Recovery Probability | Observation |
+| :--- | :--- | :--- | :--- | :--- |
+| **Baseline** | 0.313 +/- 0.143 | 146.466 +/- 22.457 | 0.0 | Cooperative order is present but does not cross the recovery threshold in any seed. |
+| **High Gain** | 0.814 +/- 0.064 | 51.843 +/- 15.775 | 1.0 | Strong cooperative gain with bounded residue accumulation and full recovery across seeds. |
+| **Coherence Erosion** | 0.071 +/- 0.051 | 354.222 +/- 4.527 | 0.0 | Suppressing phase coupling collapses cooperative order and inflates residue. |
+| **Zero Residue Collapse** | 0.627 +/- 0.172 | 40.837 +/- 10.135 | 0.8 | Residue suppression preserves partial recovery while reducing accumulated memory. |
+| **Mismatch Injection** | 0.102 +/- 0.046 | 605.253 +/- 33.843 | 0.0 | Hostile mismatch sharply degrades cooperative order and raises residue. |
+| **Fragmentation** | 0.077 +/- 0.017 | 347.638 +/- 5.797 | 0.0 | Shrinking the interaction radius suppresses cooperation and increases residue load. |
+
+The recovery probability here is thresholded at `order_parameter >= 0.5` across five fixed seeds. This module remains agent-based and does not by itself establish a synchronization ontology; it only reports the bounded cooperative projection observed in the current simulation.
+
 ## 6. Cross-Model Comparison
 
 - **Agreement:** Both `signal_scope` (Agent) and `structural_box` (PDE) mechanisms demonstrate the emergence of stable, admissibility-constrained basins (Corridors). 
@@ -108,6 +128,7 @@ The built-in control report in `results/2026-05-27_run01_BOOK_CAMPAIGN_PHASE_01_
 - **Correlation:** Qualitative match observed in alignment stability (~0.51 in SignalScope vs ~0.34 in StructuralBox, reflecting scale differences but shared stability).
 - **Geometric Ratcheting:** The PDE model confirms that operational history ($R$) spatially deforms the admissibility manifold, preventing reversible collapse ($A_{cycle} \neq A^{-1}_{cycle}$).
 - **TDA Projection:** The Betti-0 projection preserves the distinction between a collapsed basin, a fragmented seed, and a reformed connected basin, but only within the declared thresholded grid model.
+- **Cooperative Projection:** `agent_based_sim_v1_cpp` provides an independent cooperative-admissibility projection. High-gain control raises the order-parameter mean from 0.313 to 0.814 and lowers residue_mean from 146.466 to 51.843, while coherence erosion, mismatch injection, and fragmentation suppress cooperative order and inflate residue.
 
 ## 7. Falsification
 
@@ -115,6 +136,9 @@ The built-in control report in `results/2026-05-27_run01_BOOK_CAMPAIGN_PHASE_01_
 - **Vector FV-2 (Induction Removal - CLS_001):** Removing the inductive transformer layer resulted in total phase-locking collapse (PLV -> 0), validating the critical role of inductive continuation in identity persistence.
 - **Vector FV-3 (Geometry Deformation - CLS_002):** Increasing spatial diffusion ($D_\epsilon$) smeared the geometric corridor, preventing sharp boundary formation and lowering peak identity intensity.
 - **Vector FV-4 (Lag Amplification - CLS_002):** Accelerating residue decay ($\lambda_R \rightarrow 5.0$) erased the hysteresis memory, confirming that the ratchet effect depends strictly on temporal residue lag.
+- **Vector FV-5 (Coherence Erosion - CLS_004):** Setting `K_phi = 0.0` lowered the order-parameter mean to 0.071 and raised residue_mean to 354.222.
+- **Vector FV-6 (Mismatch Injection - CLS_004):** Raising `mismatch_rate` to `1.0` lowered the order-parameter mean to 0.102 and raised residue_mean to 605.253.
+- **Vector FV-7 (Fragmentation - CLS_004):** Shrinking `R_c` to `0.5` lowered the order-parameter mean to 0.077 and raised residue_mean to 347.638.
 
 ## 8. Artifact Analysis
 
@@ -122,19 +146,20 @@ The built-in control report in `results/2026-05-27_run01_BOOK_CAMPAIGN_PHASE_01_
 - **Back-end Drift:** FP32/FP64 drift in StructuralBox was negligible (~1e-6), confirming numerical stability.
 - **Boundary Effects:** 1D PDE boundary padding might artificially anchor topological structures; future campaigns should test 2D/3D domains.
 - **Projection Limit:** `tda_module_v1_cpp` is C4 and its built-in controls passed, but the module only measures connected components. It does not provide persistent homology, so CLS_003 stays projection-bounded.
+- **Agent Projection Limit:** `agent_based_sim_v1_cpp` is a bounded cooperative projection. The recovery metric is thresholded at `order_parameter >= 0.5` and does not substitute for an external synchronization proof.
 
 ## 9. Classification
 
-**PARTIALLY SUPPORTED (L2)** - Multi-model agreement for recursive stability invariants, geometric ratcheting, and bounded collapse/reformation projections.
+**PARTIALLY SUPPORTED (L2)** - Multi-model agreement for recursive stability invariants, geometric ratcheting, bounded collapse/reformation projections, and cooperative admissibility projections.
 
 ## 10. Conclusion
 
-**Within these models,** the results from Module CLS_001 through CLS_003 support the derivational continuity from residue-conditioned continuation to stable organizational basins (Identity). The inductive transformation layer was identified as a necessary condition for phase-locked alignment, while groove-based routing provides additional structural refinement. The TDA projection further shows that a connected basin can collapse to null support, fragment into multiple components, and return to a connected signature within the declared synthetic sequence. The geometric projection of this process still exhibits a clear "ratchet effect," wherein the accumulation of operational residue deforms the active corridor, rendering the stabilization cycle non-reversible in the structural-box projection.
+**Within these models,** the results from Module CLS_001 through CLS_004 support the derivational continuity from residue-conditioned continuation to stable organizational basins (Identity) and bounded cooperative admissibility projections. The inductive transformation layer was identified as a necessary condition for phase-locked alignment, while groove-based routing provides additional structural refinement. The TDA projection further shows that a connected basin can collapse to null support, fragment into multiple components, and return to a connected signature within the declared synthetic sequence. The geometric projection of this process still exhibits a clear "ratchet effect," wherein the accumulation of operational residue deforms the active corridor, rendering the stabilization cycle non-reversible in the structural-box projection. The agent-based projection adds a bounded cooperative layer: high-gain control restores recovery above the threshold across all five seeds, while coherence erosion, mismatch injection, and fragmentation suppress cooperative order and inflate residue.
 
 ## 11. Next Steps
 
-1. Execute **Module CLS_004** after upgrading `kuramoto_sim_v1_cpp` to at least C3 or identifying a suitable C3+ synchronization tool.
-2. Validate **Module CLS_005** scope boundary behavior after CLS_004 is resolved.
-3. Extend the topology lane beyond Betti-0 only if a certified persistent-homology tool is introduced.
+1. Validate **Module CLS_005** scope boundary behavior against the current bounded campaign stack.
+2. Extend the topology lane beyond Betti-0 only if a certified persistent-homology tool is introduced.
+3. If a stronger synchronization proof is needed, pair the agent-based cooperative battery with a certified external synchronization engine rather than the C1/C0 Kuramoto scaffolds.
 
 
