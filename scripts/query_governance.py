@@ -6,12 +6,14 @@ import sys
 import re
 import subprocess
 import uuid
+import time
 from fnmatch import fnmatch
 from datetime import datetime, timezone
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parent.parent
+SCRIPT_DIR = Path(__file__).resolve().parent
 DEFAULT_DB = ROOT / "registry/db/acellorator_index.sqlite"
 DEFAULT_MIGRATION = ROOT / "registry/db/migrations/20260703_governance_runtime_bootstrap_001.sql"
 CURRENT_STATE_MIGRATION = ROOT / "registry/db/migrations/20260703_governance_runtime_current_state_002.sql"
@@ -34,6 +36,36 @@ PATCH_REGISTRY_DIR = ROOT / "registry/governance/patches"
 SEMANTIC_AUTHORITY_REGISTRY = ROOT / "registry/theorem_registry.json"
 CLAIM_REGISTRY = ROOT / "registry/claim_registry.json"
 CLAIM_SUPPORT_MATRIX = ROOT / "registry/claim_support_matrix.json"
+GOVERNED_CONTEXT_CAPSULE_SCHEMA_VERSION = "governed_context_capsule_v1"
+GOVERNED_CONTEXT_CAPSULE_CACHE_DIR = ROOT / "outputs/governance/context_capsules" / GOVERNED_CONTEXT_CAPSULE_SCHEMA_VERSION
+
+try:
+    from scripts.orientation_retrieval import retrieve_artifacts
+except ImportError:
+    if str(SCRIPT_DIR) not in sys.path:
+        sys.path.append(str(SCRIPT_DIR))
+    from orientation_retrieval import retrieve_artifacts
+
+try:
+    from scripts.registry_runtime_trace import run_registry_runtime_trace
+except ImportError:
+    if str(SCRIPT_DIR) not in sys.path:
+        sys.path.append(str(SCRIPT_DIR))
+    from registry_runtime_trace import run_registry_runtime_trace
+
+try:
+    from scripts.claim_evidence_graph import build_claim_evidence_graph
+except ImportError:
+    if str(SCRIPT_DIR) not in sys.path:
+        sys.path.append(str(SCRIPT_DIR))
+    from claim_evidence_graph import build_claim_evidence_graph
+
+try:
+    from scripts.db.db_health_check import run_db_health_check
+except ImportError:
+    if str(SCRIPT_DIR) not in sys.path:
+        sys.path.append(str(SCRIPT_DIR))
+    from db.db_health_check import run_db_health_check
 
 
 BOOTSTRAP_SQL = """\
@@ -575,11 +607,14 @@ def collect_recent_governance_decisions(conn, limit=5):
     return [dict(row) for row in rows]
 
 
+def _canonical_json_text(value):
+    encoder = json.JSONEncoder(ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+    return "".join(encoder.iterencode(value))
+
+
 def _hash_json_value(value):
     digest = hashlib.sha256()
-    encoder = json.JSONEncoder(ensure_ascii=False, sort_keys=True, separators=(",", ":"))
-    for chunk in encoder.iterencode(value):
-        digest.update(chunk.encode("utf-8"))
+    digest.update(_canonical_json_text(value).encode("utf-8"))
     return digest.hexdigest()
 
 
@@ -594,7 +629,7 @@ def _hash_file(path):
             for chunk in iter(lambda: handle.read(1024 * 1024), b""):
                 if not chunk:
                     break
-        digest.update(chunk)
+                digest.update(chunk)
     except OSError:
         return None
     return digest.hexdigest()
@@ -1245,7 +1280,7 @@ def build_debt_runtime_result(db_path, target=None, status_filter="all", current
     if current_state and current_state.get("warnings"):
         result["warnings"].extend(current_state["warnings"])
 
-    conn = sqlite3.connect(str(db_file))
+    conn = sqlite3.connect(str(db_file), timeout=1.0)
     conn.row_factory = sqlite3.Row
     try:
         ensure_runtime_schema(conn)
@@ -1502,7 +1537,7 @@ def load_governance_event_records(db_path, event_type=None, subject_id=None, sou
         result["warnings"].append("The governance runtime database is unavailable.")
         return result
 
-    conn = sqlite3.connect(str(db_file))
+    conn = sqlite3.connect(str(db_file), timeout=1.0)
     conn.row_factory = sqlite3.Row
     try:
         ensure_runtime_schema(conn)
@@ -2340,6 +2375,10 @@ def _summarize_context_capsule_result(result):
     return {
         "target": result.get("target"),
         "task": result.get("task"),
+        "capsule_schema_version": result.get("capsule_schema_version"),
+        "capsule_id": result.get("capsule_id"),
+        "capsule_hash": result.get("capsule_hash"),
+        "cache_status": result.get("cache_status"),
         "global_runtime_status": {
             "status": result.get("global_runtime_status", {}).get("status") if isinstance(result.get("global_runtime_status"), dict) else None,
             "health": result.get("global_runtime_status", {}).get("health") if isinstance(result.get("global_runtime_status"), dict) else None,
@@ -2355,6 +2394,251 @@ def _summarize_context_capsule_result(result):
         "warnings": _dedupe_trim(parse_json_collection(result.get("warnings", [])), limit=3),
         "evidence_paths": _dedupe_trim(parse_json_collection(result.get("evidence_paths", [])), limit=5),
     }
+
+
+def _stable_unique_strings(items):
+    values = []
+    for item in items or []:
+        text = str(item).strip()
+        if text and text not in values:
+            values.append(text)
+    return values
+
+
+def _stable_sorted_unique_strings(items):
+    return sorted(_stable_unique_strings(items))
+
+
+def _sorted_json_records(records, limit=None):
+    cleaned = [record for record in records or [] if record not in (None, "", [], {}, ())]
+    cleaned.sort(key=_canonical_json_text)
+    if limit is not None:
+        return cleaned[:limit]
+    return cleaned
+
+
+def _source_path_exists(path):
+    normalized = normalize_repo_path(path)
+    if not normalized:
+        return False
+    candidate = Path(normalized)
+    if not candidate.is_absolute():
+        candidate = ROOT / candidate
+    return candidate.exists()
+
+
+def _source_path_hash(path):
+    normalized = normalize_repo_path(path)
+    if not normalized:
+        return None
+    candidate = Path(normalized)
+    if not candidate.is_absolute():
+        candidate = ROOT / candidate
+    if not candidate.exists() or not candidate.is_file():
+        return None
+    try:
+        stat = candidate.stat()
+    except OSError:
+        return None
+    return _hash_json_value(
+        {
+            "path": normalize_repo_path(candidate),
+            "size": stat.st_size,
+            "mtime_ns": stat.st_mtime_ns,
+            "mode": "metadata",
+        }
+    )
+
+
+def _normalize_retrieved_artifacts(results):
+    normalized_results = []
+    for result in results or []:
+        if not isinstance(result, dict):
+            continue
+        entry = dict(result)
+        path = normalize_repo_path(entry.get("path"))
+        entry["path"] = path
+        entry["is_residue"] = str(entry.get("orientation_status") or "").strip().lower() in {
+            "historical_residue",
+            "superseded",
+            "deprecated",
+            "archived",
+        }
+        entry["source_exists"] = _source_path_exists(path)
+        entry["source_hash"] = _source_path_hash(path)
+        normalized_results.append(entry)
+
+    def _artifact_sort_key(item):
+        try:
+            score = float(item.get("score", 0.0) or 0.0)
+        except (TypeError, ValueError):
+            score = 0.0
+        return (-score, str(item.get("path") or ""), str(item.get("orientation_status") or ""))
+
+    normalized_results.sort(key=_artifact_sort_key)
+    return normalized_results
+
+
+def _build_governed_context_source_inventory(raw_sources):
+    source_index = {}
+    exclusions = []
+    for raw in raw_sources or []:
+        if not isinstance(raw, dict):
+            continue
+        path = normalize_repo_path(raw.get("path"))
+        role = str(raw.get("role") or "unspecified").strip() or "unspecified"
+        section = str(raw.get("section") or role).strip() or role
+        if not path:
+            exclusions.append(
+                {
+                    "source": None,
+                    "role": role,
+                    "section": section,
+                    "reason": "missing_path",
+                }
+            )
+            continue
+
+        entry = source_index.get(path)
+        if entry is None:
+            entry = {
+                "path": path,
+                "roles": [role],
+                "sections": [section],
+                "exists": _source_path_exists(path),
+                "source_hash": _source_path_hash(path),
+            }
+            source_index[path] = entry
+        else:
+            entry["roles"].append(role)
+            entry["sections"].append(section)
+            exclusions.append(
+                {
+                    "source": path,
+                    "role": role,
+                    "section": section,
+                    "reason": "duplicate_source",
+                }
+            )
+
+    sources = []
+    for path in sorted(source_index):
+        entry = dict(source_index[path])
+        entry["roles"] = _stable_sorted_unique_strings(entry.get("roles", []))
+        entry["sections"] = _stable_sorted_unique_strings(entry.get("sections", []))
+        sources.append(entry)
+
+    return sources, exclusions
+
+
+def _stable_unique_source_records(raw_sources):
+    seen = set()
+    records = []
+    for raw in raw_sources or []:
+        if not isinstance(raw, dict):
+            continue
+        path = normalize_repo_path(raw.get("path"))
+        if not path:
+            continue
+        role = str(raw.get("role") or "unspecified").strip() or "unspecified"
+        section = str(raw.get("section") or role).strip() or role
+        key = (path, role, section)
+        if key in seen:
+            continue
+        seen.add(key)
+        records.append({"path": path, "role": role, "section": section})
+    return records
+
+
+def _build_governed_context_candidate_actions(current_state, freshness, authority, patch_chain, open_debt, runtime_trace, database_health):
+    actions = []
+    freshness_status = str(freshness.get("db_snapshot_status") or "unknown").strip().lower()
+    authority_decision = str(authority.get("decision") or "unknown").strip().lower()
+    patch_decision = str(patch_chain.get("decision") or "unknown").strip().lower()
+    patch_status = str(patch_chain.get("status") or "unknown").strip().lower()
+    debt_summary = open_debt.get("summary", {}) if isinstance(open_debt.get("summary"), dict) else {}
+    blocking_debt = int(debt_summary.get("blocking", 0) or 0)
+    open_debt_count = int(debt_summary.get("open", 0) or 0)
+    trace_report = runtime_trace.get("trace_report", {}) if isinstance(runtime_trace.get("trace_report"), dict) else {}
+    trace_summary = trace_report.get("trace_summary", {}) if isinstance(trace_report.get("trace_summary"), dict) else {}
+    missing_link_count = int(trace_summary.get("missing_links_count", 0) or 0)
+    db_status = str(database_health.get("status") or "unknown").strip().lower()
+
+    def add(action_id, reason, priority="medium", trigger=None):
+        actions.append(
+            {
+                "action_id": action_id,
+                "priority": priority,
+                "trigger": trigger,
+                "reason": reason,
+            }
+        )
+
+    if db_status not in {"pass", "warning"}:
+        add(
+            "review_database_health",
+            f"Database health is {database_health.get('status', 'unknown')}.",
+            priority="high",
+            trigger="database_health.status != pass",
+        )
+
+    if str(current_state.get("status") or "unknown").strip().lower() == "unavailable":
+        add(
+            "open_governance_runtime",
+            "Current governance state is unavailable.",
+            priority="high",
+            trigger="current_state.status == unavailable",
+        )
+
+    if freshness_status != "fresh":
+        add(
+            "refresh_snapshot",
+            f"Snapshot freshness is {freshness_status}.",
+            priority="high",
+            trigger="freshness.db_snapshot_status != fresh",
+        )
+
+    if authority_decision in {"defer", "block"}:
+        add(
+            "resolve_authority_boundary",
+            f"Authority decision is {authority_decision}.",
+            priority="high",
+            trigger="authority.decision in {defer, block}",
+        )
+
+    if patch_decision in {"defer", "block"} or patch_status in {"blocked", "missing"}:
+        add(
+            "resolve_patch_chain",
+            f"Patch chain is {patch_status} with decision {patch_decision}.",
+            priority="high",
+            trigger="patch_chain requires attention",
+        )
+
+    if blocking_debt > 0 or open_debt_count > 0:
+        add(
+            "resolve_open_debt",
+            f"{blocking_debt} blocking and {open_debt_count} open debt item(s) remain.",
+            priority="high",
+            trigger="open_debt.summary contains unresolved items",
+        )
+
+    if missing_link_count > 0:
+        add(
+            "review_trace_gaps",
+            f"{missing_link_count} trace gap(s) remain unresolved.",
+            priority="medium",
+            trigger="runtime_trace.trace_summary.missing_links_count > 0",
+        )
+
+    if not actions:
+        add(
+            "proceed_governed_action",
+            "No obvious governed blockers remain in the capsule.",
+            priority="low",
+            trigger="all governed checks are within tolerance",
+        )
+
+    return actions
 
 
 def _summarize_gate_authority_resolution(result):
@@ -2574,6 +2858,322 @@ def build_evidence_level_result(command, result, requested_level):
 
     payload = _trim_nested_lists(result, limit=5) if emitted_level == 1 else dict(result)
     return _attach_evidence_level_metadata(payload, requested_level, emitted_level)
+
+
+def build_governed_context_capsule_v1(db_path, target=None, task=None, query=None, limit=20, use_cache=True):
+    started_at = time.perf_counter()
+    db_file = Path(db_path)
+    normalized_target = normalize_repo_path(target)
+    task_text = str(task).strip() if task else None
+    query_text = str(query).strip() if query else None
+    focus_query = query_text or normalized_target or task_text
+    request_identity = {
+        "schema_version": GOVERNED_CONTEXT_CAPSULE_SCHEMA_VERSION,
+        "command": "governed-context-capsule",
+        "db_path": str(db_file),
+        "target": normalized_target,
+        "task": task_text,
+        "query": query_text,
+        "focus_query": focus_query,
+        "limit": int(limit) if limit is not None else None,
+    }
+
+    current_state = build_current_state_capsule(db_path)
+    current_state_projection = current_state.get("projection", {}) if isinstance(current_state.get("projection"), dict) else {}
+    database_health = {
+        "status": current_state.get("status", "warn") if current_state.get("status") in {"pass", "warn", "fail"} else "warn",
+        "db_path": db_path,
+        "schema_path": str(ROOT / "registry/db/schema.sql"),
+        "integrity_check": "skipped",
+        "table_status": {},
+        "row_counts": {},
+        "orientation_status_values": {},
+        "retrieval_smoke": {"status": "skipped"},
+        "supersession_edge_quality": {"status": "skipped"},
+        "stale_index_warnings": ["Capsule fast path skipped the deep DB health audit."],
+        "ssot_boundary": "fast_path",
+        "maintenance_recommendations": [],
+    }
+    database_errors = []
+    freshness = current_state.get("freshness", {}) if isinstance(current_state.get("freshness"), dict) else {}
+
+    if normalized_target:
+        authority_result = build_authority_resolution_result(argparse.Namespace(db=db_path, target=normalized_target))
+        debt_result = build_debt_runtime_result(db_path, target=normalized_target, status_filter="all", current_state=current_state)
+    else:
+        authority_result = {
+            "target": None,
+            "authority_owner": current_state.get("runtime", {}).get("authority_boundary", "unknown") if isinstance(current_state.get("runtime"), dict) else "unknown",
+            "authority_source": None,
+            "supersession": {"status": "unknown", "superseded_by": []},
+            "conflict_state": current_state.get("runtime", {}).get("authority_boundary", "unknown") if isinstance(current_state.get("runtime"), dict) else "unknown",
+            "decision": "defer" if (current_state.get("runtime", {}) or {}).get("authority_boundary") == "mixed" else "allow",
+            "reason": "Authority boundary summarized from current-state.",
+            "evidence_paths": current_state.get("evidence_paths", []),
+            "warnings": current_state.get("warnings", []),
+        }
+        debt_result = build_debt_runtime_result(db_path, status_filter="all", current_state=current_state)
+
+    patch_candidates = find_patch_candidates_for_target(normalized_target) if normalized_target else [find_latest_applied_patch_candidate()]
+    patch_candidates = [candidate for candidate in patch_candidates if candidate and candidate[0]]
+    patch_record = patch_candidates[0][0] if patch_candidates else None
+    patch_path = patch_candidates[0][1] if patch_candidates else None
+    if patch_record is None and current_state.get("latest_decisions"):
+        latest_patch_id = current_state["latest_decisions"][0].get("patch_id")
+        if latest_patch_id:
+            patch_record, patch_path = load_patch_record_by_id(latest_patch_id)
+
+    ledger_index = load_governance_change_ledger_index()
+    if isinstance(patch_record, dict) and patch_record.get("patch_id"):
+        patch_chain = build_patch_chain_result(
+            patch_record["patch_id"],
+            current_state=current_state,
+            ledger_index=ledger_index,
+        )
+    else:
+        patch_chain = {
+            "patch_id": None,
+            "status": "unknown",
+            "dependencies": [],
+            "missing_dependencies": [],
+            "supersession": {"status": "unknown", "superseded_by": []},
+            "late_registration": "unknown",
+            "blockers": [],
+            "decision": "defer",
+            "reason": "No patch context is available.",
+            "evidence_paths": [],
+            "warnings": [],
+        }
+
+    retrieval = retrieve_artifacts(db_path, focus_query, limit=limit, explain=True)
+    if not isinstance(retrieval, dict):
+        retrieval = {"results": [], "warnings": []}
+    relevant_artifacts = _normalize_retrieved_artifacts(retrieval.get("results", []))
+
+    trace = run_registry_runtime_trace(db_path, focus_query, limit=limit)
+    if not isinstance(trace, dict):
+        trace = {"trace_report": {"resolved_links": [], "missing_links": [], "conflicts": [], "supersession_cautions": [], "warnings": []}}
+    trace_report = trace.get("trace_report", {}) if isinstance(trace.get("trace_report"), dict) else {}
+    normalized_trace_report = {
+        "query": trace_report.get("query", focus_query),
+        "mode": trace_report.get("mode", "read_only_traceability"),
+        "registry_sources_read": _stable_sorted_unique_strings(trace_report.get("registry_sources_read", [])),
+        "runtime_sources_read": _stable_sorted_unique_strings(trace_report.get("runtime_sources_read", [])),
+        "db_sources_read": _stable_sorted_unique_strings(trace_report.get("db_sources_read", [])),
+        "trace_summary": {
+            "entities_count": len(trace_report.get("trace_entities", [])) if isinstance(trace_report.get("trace_entities"), list) else 0,
+            "edges_count": len(trace_report.get("trace_edges", [])) if isinstance(trace_report.get("trace_edges"), list) else 0,
+            "resolved_links_count": len(trace_report.get("resolved_links", [])) if isinstance(trace_report.get("resolved_links"), list) else 0,
+            "missing_links_count": len(trace_report.get("missing_links", [])) if isinstance(trace_report.get("missing_links"), list) else 0,
+        },
+        "resolved_links": _dedupe_trim(trace_report.get("resolved_links", []), limit=10),
+        "missing_links": _sorted_json_records(trace_report.get("missing_links", []), limit=10),
+        "conflicts": _sorted_json_records(trace_report.get("conflicts", []), limit=10),
+        "residue_only_sources": _dedupe_trim(trace_report.get("residue_only_sources", []), limit=10),
+        "supersession_cautions": _dedupe_trim(trace_report.get("supersession_cautions", []) + retrieval.get("warnings", []), limit=10),
+        "recommended_next_actions": _dedupe_trim(trace_report.get("recommended_next_actions", []), limit=10),
+        "warnings": _dedupe_trim(trace_report.get("warnings", []) + retrieval.get("warnings", []), limit=10),
+    }
+
+    claim_graph = build_claim_evidence_graph(db_path)
+    if not isinstance(claim_graph, dict):
+        claim_graph = {"nodes": [], "edges": []}
+    claim_graph_summary = {
+        "nodes_count": len(claim_graph.get("nodes", [])) if isinstance(claim_graph.get("nodes"), list) else 0,
+        "edges_count": len(claim_graph.get("edges", [])) if isinstance(claim_graph.get("edges"), list) else 0,
+    }
+
+    recent_governance_events = load_recent_governance_events(db_path, limit=1)
+
+    raw_sources = []
+
+    def add_sources(values, role, section):
+        for value in parse_json_collection(values):
+            raw_sources.append({"path": value, "role": role, "section": section})
+
+    add_sources(current_state.get("evidence_paths", []), "current_state", "current_state")
+    add_sources(freshness.get("evidence_paths", []), "freshness", "freshness")
+    add_sources(authority_result.get("evidence_paths", []), "authority", "authority")
+    add_sources(patch_chain.get("evidence_paths", []), "patch_chain", "patch_chain")
+    add_sources(debt_result.get("evidence_paths", []), "open_debt", "open_debt")
+    if isinstance(current_state_projection, dict):
+        for projection_name, projection in current_state_projection.items():
+            if isinstance(projection, dict):
+                add_sources(projection.get("evidence_paths", []), f"projection:{projection_name}", f"projection:{projection_name}")
+    add_sources(normalized_trace_report.get("registry_sources_read", []), "trace_registry_source", "runtime_trace")
+    add_sources(normalized_trace_report.get("runtime_sources_read", []), "trace_runtime_source", "runtime_trace")
+    add_sources(normalized_trace_report.get("db_sources_read", []), "trace_db_source", "runtime_trace")
+    add_sources([artifact.get("path") for artifact in relevant_artifacts], "retrieved_artifact", "retrieval")
+    add_sources([database_health.get("db_path")], "database_health", "db_health")
+    add_sources([database_health.get("schema_path")], "database_health_schema", "db_health")
+    if patch_path:
+        raw_sources.append({"path": patch_path, "role": "patch_file", "section": "patch_chain"})
+    unique_raw_sources = _stable_unique_source_records(raw_sources)
+    source_inventory_limit = 128
+    source_limit_exceeded = len(unique_raw_sources) > source_inventory_limit
+    source_limit_omitted = max(0, len(unique_raw_sources) - source_inventory_limit)
+    source_inventory_input = unique_raw_sources[:source_inventory_limit]
+    source_inventory, exclusions = _build_governed_context_source_inventory(source_inventory_input)
+    source_paths = [entry.get("path") for entry in source_inventory if entry.get("path")]
+    source_hashes = {
+        entry.get("path"): entry.get("source_hash")
+        for entry in source_inventory
+        if entry.get("path")
+    }
+
+    warnings = _dedupe_trim(
+        list(current_state.get("warnings", []))
+        + list(authority_result.get("warnings", []))
+        + list(patch_chain.get("warnings", []))
+        + list(debt_result.get("warnings", []))
+        + list(retrieval.get("warnings", []))
+        + list(normalized_trace_report.get("warnings", []))
+        + list(database_health.get("stale_index_warnings", []))
+        + list(database_errors),
+        limit=15,
+    )
+    if not current_state.get("status") or current_state.get("status") == "unavailable":
+        warnings.append("Current-state capsule is unavailable.")
+    if database_health.get("status") == "fail":
+        warnings.append("Database health check failed.")
+    if source_limit_exceeded:
+        warnings.append(
+            f"Source inventory capped at {source_inventory_limit} records; {source_limit_omitted} additional sources were omitted."
+        )
+    warnings = _dedupe_trim(warnings, limit=20)
+
+    candidate_actions = _build_governed_context_candidate_actions(
+        current_state,
+        freshness,
+        authority_result,
+        patch_chain,
+        debt_result,
+        normalized_trace_report,
+        database_health,
+    )
+
+    provenance_section_hashes = {
+        "current_state": _hash_json_value(current_state),
+        "freshness": _hash_json_value(freshness),
+        "authority": _hash_json_value(authority_result),
+        "patch_chain": _hash_json_value(patch_chain),
+        "open_debt": _hash_json_value(debt_result),
+        "relevant_artifacts": _hash_json_value(relevant_artifacts),
+        "runtime_trace": _hash_json_value(normalized_trace_report),
+        "database_health": _hash_json_value(database_health),
+        "candidate_actions": _hash_json_value(candidate_actions),
+        "exclusions": _hash_json_value(exclusions),
+        "recent_governance_events": _hash_json_value(recent_governance_events),
+    }
+
+    provenance = {
+        "db_path": str(db_file),
+        "target": normalized_target,
+        "task": task_text,
+        "query": query_text,
+        "focus_query": focus_query,
+        "schema_version": GOVERNED_CONTEXT_CAPSULE_SCHEMA_VERSION,
+        "built_at": datetime.now(timezone.utc).isoformat(),
+        "source_paths": source_paths,
+        "source_hashes": source_hashes,
+        "source_count": len(source_paths),
+        "excluded_source_count": len(exclusions),
+        "section_hashes": provenance_section_hashes,
+    }
+
+    hash_basis = {
+        "capsule_schema_version": GOVERNED_CONTEXT_CAPSULE_SCHEMA_VERSION,
+        "request_identity": request_identity,
+        "section_hashes": provenance_section_hashes,
+        "source_fingerprint": {
+            "db_path": provenance["db_path"],
+            "target": provenance["target"],
+            "task": provenance["task"],
+            "query": provenance["query"],
+            "focus_query": provenance["focus_query"],
+            "schema_version": provenance["schema_version"],
+            "source_paths": provenance["source_paths"],
+            "source_hashes": provenance["source_hashes"],
+            "source_count": provenance["source_count"],
+            "excluded_source_count": provenance["excluded_source_count"],
+        },
+        "summary": {
+            "current_state_status": current_state.get("status", "unavailable"),
+            "freshness_state": freshness.get("db_snapshot_status", "unknown"),
+            "authority_state": authority_result.get("decision", "unknown"),
+            "patch_chain_state": patch_chain.get("status", "unknown"),
+            "open_debt_open": debt_result.get("summary", {}).get("open", 0) if isinstance(debt_result.get("summary"), dict) else 0,
+            "open_debt_blocking": debt_result.get("summary", {}).get("blocking", 0) if isinstance(debt_result.get("summary"), dict) else 0,
+            "retrieval_count": len(relevant_artifacts),
+            "trace_summary": normalized_trace_report.get("trace_summary", {}),
+            "claim_graph_summary": claim_graph_summary,
+            "database_health_status": database_health.get("status", "unknown") if isinstance(database_health, dict) else "unknown",
+            "recent_governance_event_count": len(recent_governance_events),
+            "candidate_action_count": len(candidate_actions),
+            "warning_count": len(warnings),
+            "exclusion_count": len(exclusions),
+        },
+    }
+
+    capsule_hash = _hash_json_value(hash_basis)
+    capsule_id = f"{GOVERNED_CONTEXT_CAPSULE_SCHEMA_VERSION}:{capsule_hash[:16]}"
+    serialized_core = _canonical_json_text(hash_basis)
+    serialized_bytes = len(serialized_core.encode("utf-8"))
+    estimated_token_count = max(1, (serialized_bytes + 3) // 4)
+    cache_path = GOVERNED_CONTEXT_CAPSULE_CACHE_DIR / f"{capsule_hash}.json"
+    cache_status = "MISS"
+    cached_core = None
+    if use_cache and cache_path.exists():
+        cached_core = load_optional_json(cache_path)
+        if isinstance(cached_core, dict):
+            cache_status = "HIT"
+
+    if not isinstance(cached_core, dict):
+        cached_core = dict(hash_basis)
+        cached_core["capsule_id"] = capsule_id
+        cached_core["capsule_hash"] = capsule_hash
+        cached_core["provenance"] = dict(provenance)
+        if use_cache:
+            GOVERNED_CONTEXT_CAPSULE_CACHE_DIR.mkdir(parents=True, exist_ok=True)
+            try:
+                with cache_path.open("w", encoding="utf-8") as handle:
+                    json.dump(cached_core, handle, ensure_ascii=False, sort_keys=True, indent=2)
+            except OSError:
+                cache_status = "MISS"
+
+    capsule = dict(cached_core)
+    capsule["capsule_schema_version"] = GOVERNED_CONTEXT_CAPSULE_SCHEMA_VERSION
+    capsule["capsule_id"] = capsule_id
+    capsule["capsule_hash"] = capsule_hash
+    capsule["cache_status"] = cache_status
+    capsule["build_time_ms"] = round((time.perf_counter() - started_at) * 1000, 3)
+    capsule["serialized_bytes"] = serialized_bytes
+    capsule["estimated_token_count"] = estimated_token_count
+    capsule["artifact_count"] = len(relevant_artifacts)
+    capsule["source_count"] = len(source_paths)
+    capsule["excluded_source_count"] = len(exclusions)
+    capsule["freshness_state"] = freshness.get("db_snapshot_status", "unknown")
+    capsule["authority_state"] = authority_result.get("decision", "unknown")
+    capsule["request_identity"] = request_identity
+    capsule["current_state"] = current_state
+    capsule["freshness"] = freshness
+    capsule["authority"] = authority_result
+    capsule["patch_chain"] = patch_chain
+    capsule["open_debt"] = debt_result
+    capsule["relevant_artifacts"] = relevant_artifacts
+    capsule["runtime_trace"] = {
+        "trace_report": normalized_trace_report,
+        "claim_graph_summary": claim_graph_summary,
+        "database_health": database_health,
+    }
+    capsule["database_health"] = database_health
+    capsule["recent_governance_events"] = recent_governance_events
+    capsule["candidate_actions"] = candidate_actions
+    capsule["exclusions"] = exclusions
+    capsule["provenance"] = provenance
+    capsule["warnings"] = warnings
+
+    return capsule
 
 
 def build_context_capsule_result(db_path, target=None, task=None):
@@ -4018,7 +4618,7 @@ def build_semantic_authority_summary(db_path, semantic_targets, current_state=No
             "evidence_paths": [str(GLOBAL_HEALTH_REPORT.relative_to(ROOT)).replace("\\", "/")],
         }
 
-    conn = sqlite3.connect(str(db_file))
+    conn = sqlite3.connect(str(db_file), timeout=1.0)
     conn.row_factory = sqlite3.Row
     try:
         ensure_runtime_schema(conn)
@@ -4304,7 +4904,7 @@ def build_db_snapshot_freshness_result(db_path, current_state=None, db_snapshot_
         result["warnings"].append("The governance runtime database is unavailable.")
         return result
 
-    conn = sqlite3.connect(str(db_file))
+    conn = sqlite3.connect(str(db_file), timeout=1.0)
     conn.row_factory = sqlite3.Row
     try:
         ensure_runtime_schema(conn)
@@ -4570,7 +5170,7 @@ def build_current_state_capsule(db_path):
     report = load_optional_json(GLOBAL_HEALTH_REPORT)
     capsule["health"]["global_validation"] = extract_global_validation_status(report)
 
-    conn = sqlite3.connect(str(db_file))
+    conn = sqlite3.connect(str(db_file), timeout=1.0)
     conn.row_factory = sqlite3.Row
     try:
         ensure_runtime_schema(conn)
@@ -4953,7 +5553,7 @@ def evaluate_patch_gate(
         result["decision"] = "block"
         return result
 
-    conn = sqlite3.connect(str(db_file))
+    conn = sqlite3.connect(str(db_file), timeout=1.0)
     conn.row_factory = sqlite3.Row
     try:
         result["schema_bootstrapped"] = ensure_runtime_schema(conn)
@@ -5222,7 +5822,7 @@ def legacy_lookup(args):
         response["note"] = "Database file missing."
         return response
 
-    conn = sqlite3.connect(str(db_file))
+    conn = sqlite3.connect(str(db_file), timeout=1.0)
     conn.row_factory = sqlite3.Row
     try:
         rows = conn.execute(
@@ -5310,7 +5910,7 @@ def build_authority_resolution_result(args):
     if current_state.get("status") == "warn":
         result["warnings"].append("Current-state capsule reports warnings.")
 
-    conn = sqlite3.connect(str(db_file))
+    conn = sqlite3.connect(str(db_file), timeout=1.0)
     conn.row_factory = sqlite3.Row
     try:
         ensure_runtime_schema(conn)
@@ -5396,7 +5996,7 @@ def build_semantic_authority_resolution_result(args):
         if target_authority.get("evidence_paths"):
             result["evidence_paths"].extend(target_authority.get("evidence_paths", []))
 
-    conn = sqlite3.connect(str(db_file))
+    conn = sqlite3.connect(str(db_file), timeout=1.0)
     conn.row_factory = sqlite3.Row
     try:
         ensure_runtime_schema(conn)
@@ -5437,6 +6037,125 @@ def build_debt_runtime_result_for_args(args):
     )
 
 
+def build_context_capsule_result(db_path, target=None, task=None):
+    capsule = build_governed_context_capsule_v1(db_path, target=target, task=task, query=None, limit=20, use_cache=True)
+    current_state = capsule.get("current_state", {}) if isinstance(capsule, dict) else {}
+    current_projection = current_state.get("projection", {}) if isinstance(current_state.get("projection"), dict) else {}
+    freshness = capsule.get("freshness", {}) if isinstance(capsule, dict) else {}
+    authority = capsule.get("authority", {}) if isinstance(capsule, dict) else {}
+    patch_chain = capsule.get("patch_chain", {}) if isinstance(capsule, dict) else {}
+    open_debt = capsule.get("open_debt", {}) if isinstance(capsule, dict) else {}
+    candidate_actions = capsule.get("candidate_actions", []) if isinstance(capsule, dict) else []
+    recent_events = capsule.get("recent_governance_events", []) if isinstance(capsule, dict) else []
+    semantic_summary = current_projection.get("semantic_rt", {}) if isinstance(current_projection, dict) else {}
+    replay_projection = current_projection.get("replay_reconciliation", {}) if isinstance(current_projection, dict) else {}
+    debt_summary = open_debt.get("summary", {}) if isinstance(open_debt.get("summary"), dict) else {}
+    blocking_actions = [action for action in candidate_actions if action.get("priority") in {"high", "medium"}]
+    warnings = _dedupe_trim(parse_json_collection(capsule.get("warnings", [])), limit=10)
+
+    result = {
+        "target": capsule.get("request_identity", {}).get("target"),
+        "task": capsule.get("request_identity", {}).get("task"),
+        "global_runtime_status": {
+            "status": current_state.get("status", "unknown"),
+            "health": current_state.get("health", {}).get("global_validation", capsule.get("database_health", {}).get("status", "unknown")) if isinstance(current_state.get("health"), dict) else capsule.get("database_health", {}).get("status", "unknown"),
+            "db_first_gate": current_state.get("runtime", {}).get("db_first_gate", "unknown") if isinstance(current_state.get("runtime"), dict) else "unknown",
+            "authority_boundary": current_state.get("runtime", {}).get("authority_boundary", "unknown") if isinstance(current_state.get("runtime"), dict) else "unknown",
+            "snapshot": freshness.get("db_snapshot_status", "unknown"),
+        },
+        "freshness_summary": {
+            "db_snapshot_status": freshness.get("db_snapshot_status", "unknown"),
+            "decision": freshness.get("decision", "block"),
+            "indexed_at": freshness.get("indexed_at"),
+            "latest_known_worktree_change": freshness.get("latest_known_worktree_change"),
+            "latest_runtime_only_worktree_change": freshness.get("latest_runtime_only_worktree_change"),
+            "source_worktree_marker": freshness.get("source_worktree_marker"),
+            "runtime_worktree_marker": freshness.get("runtime_worktree_marker"),
+            "change_basis": freshness.get("change_basis", "unknown"),
+            "staleness_cause": freshness.get("staleness_cause", "unknown"),
+            "source_change_count": freshness.get("source_change_count", 0),
+            "runtime_only_change_count": freshness.get("runtime_only_change_count", 0),
+        },
+        "authority_summary": {
+            "target": authority.get("target"),
+            "owner": authority.get("authority_owner", "unknown"),
+            "source": authority.get("authority_source"),
+            "decision": authority.get("decision", "defer"),
+            "conflict": authority.get("conflict_state", "unknown"),
+        },
+        "patch_summary": {
+            "patch_id": patch_chain.get("patch_id"),
+            "status": patch_chain.get("status", "unknown"),
+            "decision": patch_chain.get("decision", "defer"),
+            "dependencies": len(patch_chain.get("dependencies", [])),
+            "missing_dependencies": len(patch_chain.get("missing_dependencies", [])),
+            "blockers": _dedupe_trim(patch_chain.get("blockers", []), limit=2),
+        },
+        "blocking_summary": {
+            "count": len(blocking_actions),
+            "items": [action.get("action_id") for action in blocking_actions[:3]],
+            "defer": _dedupe_trim([action.get("reason") for action in blocking_actions], limit=3),
+        },
+        "debt_summary": {
+            "open": debt_summary.get("open", 0),
+            "partial": debt_summary.get("partial", 0),
+            "resolved": debt_summary.get("resolved", 0),
+            "blocking": debt_summary.get("blocking", 0),
+            "items": [record.get("debt_id") for record in open_debt.get("debts", []) if isinstance(record, dict) and record.get("debt_id")][:3],
+            "decision": open_debt.get("decision", "allow"),
+        },
+        "replay_summary": {
+            "state": replay_projection.get("projection_state", "unknown"),
+            "boundary": replay_projection.get("boundary_state", "unknown"),
+            "coverage_state": replay_projection.get("coverage_state", "unknown"),
+            "subject_count": replay_projection.get("subject_count", 0),
+            "event_count": replay_projection.get("event_count", 0),
+            "latest_subject_id": replay_projection.get("latest_subject_id"),
+            "latest_subject_type": replay_projection.get("latest_subject_type"),
+            "latest_event_id": replay_projection.get("latest_event_id"),
+            "latest_event_type": replay_projection.get("latest_event_type"),
+            "latest_source_patch_id": replay_projection.get("latest_source_patch_id"),
+            "latest_source_path": replay_projection.get("latest_source_path"),
+            "latest_created_at": replay_projection.get("latest_created_at"),
+        },
+        "warnings": warnings,
+        "required_validators": [
+            "current-state",
+            "freshness",
+            "authority",
+            "patch-chain",
+            "debt",
+            "patch-gate",
+        ],
+        "recommended_next_action": (
+            f"{candidate_actions[0]['action_id']}: {candidate_actions[0]['reason']}"
+            if candidate_actions
+            else "Use the capsule to choose the next governed action."
+        ),
+        "minimal_evidence_paths": capsule.get("provenance", {}).get("source_paths", [])[:15],
+        "capsule_schema_version": capsule.get("capsule_schema_version"),
+        "capsule_id": capsule.get("capsule_id"),
+        "capsule_hash": capsule.get("capsule_hash"),
+        "cache_status": capsule.get("cache_status"),
+        "recent_governance_events": recent_events,
+        "governed_context_capsule_v1": capsule,
+    }
+
+    if not result["target"]:
+        result.pop("target")
+    if not result["task"]:
+        result.pop("task")
+
+    if semantic_summary:
+        result["semantic_authority_summary"] = semantic_summary
+
+    if current_state.get("status") == "unavailable":
+        result["global_runtime_status"]["status"] = "unavailable"
+        result["recommended_next_action"] = "Open the DB runtime first."
+
+    return result
+
+
 def build_context_capsule_result_for_args(args):
     return build_context_capsule_result(
         args.db,
@@ -5450,7 +6169,7 @@ def build_freshness_result_for_args(args):
     db_snapshot_result = None
     db_file = Path(args.db)
     if db_file.exists():
-        conn = sqlite3.connect(str(db_file))
+        conn = sqlite3.connect(str(db_file), timeout=1.0)
         conn.row_factory = sqlite3.Row
         try:
             ensure_runtime_schema(conn)
@@ -5496,7 +6215,7 @@ def build_emit_event_result_for_args(args):
         result["warnings"].append("The governance runtime database is unavailable.")
         return result
 
-    conn = sqlite3.connect(str(db_file))
+    conn = sqlite3.connect(str(db_file), timeout=1.0)
     conn.row_factory = sqlite3.Row
     try:
         ensure_runtime_schema(conn)

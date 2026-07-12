@@ -4,7 +4,7 @@ import json
 import argparse
 from datetime import datetime
 
-def run_db_health_check(db_path, schema_path):
+def run_db_health_check(db_path, schema_path, include_supersession_edge_quality=True):
     health = {
         "status": "pass",
         "db_path": db_path,
@@ -34,7 +34,7 @@ def run_db_health_check(db_path, schema_path):
         return health, errors
 
     try:
-        conn = sqlite3.connect(db_path)
+        conn = sqlite3.connect(db_path, timeout=1.0)
         conn.row_factory = sqlite3.Row
         cursor = conn.cursor()
 
@@ -118,7 +118,7 @@ def run_db_health_check(db_path, schema_path):
             except ImportError:
                 audit_supersession_edges = None
 
-        if audit_supersession_edges is not None and "supersession_edges" in found_tables:
+        if include_supersession_edge_quality and audit_supersession_edges is not None and "supersession_edges" in found_tables:
             edge_report = audit_supersession_edges(db_path, sample=0)
             edge_audit = edge_report.get("supersession_edge_audit", {})
             health["supersession_edge_quality"] = {
