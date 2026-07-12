@@ -1,0 +1,65 @@
+{
+  "patch_id": "PATCH_ACCELERATOR_CANONICAL_CONTEXT_CAPSULE_050",
+  "phase": "baseline",
+  "observed_at": "2026-07-12T06:15:00Z",
+  "status": "pre_fix_probe_retrospective",
+  "summary": {
+    "canonical_producer": {
+      "path": "scripts/query_governance.py",
+      "function": "build_governed_context_capsule_v1",
+      "line": 3164
+    },
+    "compatibility_wrappers": [
+      {
+        "path": "scripts/agent_memory/memory_retrieval.py",
+        "line": 15
+      },
+      {
+        "path": "scripts/agent_memory/memory_packet_builder.py",
+        "line": 15
+      },
+      {
+        "path": "scripts/gemini_claim_context.py",
+        "line": 15
+      },
+      {
+        "path": "scripts/gemini_trace_context.py",
+        "line": 15
+      },
+      {
+        "path": "scripts/gemini_memory_context.py",
+        "line": 15
+      },
+      {
+        "path": "scripts/gemini_execution_context.py",
+        "line": 15
+      }
+    ],
+    "observed_failure": {
+      "temp_cache_probe": {
+        "first_hash": "3f93464a08ebd8fd532d20c2827d50f06821759b983c5e8266ba1831eb7fb3c5",
+        "second_hash": "013b310fc9092b58bd19eeb9da1cc253a52a42f129990ce8df91142df40307d3",
+        "same_hash": false,
+        "first_cache_status": "MISS",
+        "second_cache_status": "MISS"
+      },
+      "cli_probe": {
+        "first_hash": "6baa1f0b409f9ef67ce57bf944bdd0c5b2f7971e17d055077af90cbd45ff0d7a",
+        "second_hash": "47def92442fda687b2759492889caf793186978410eac450b9f138db45587550",
+        "same_hash": false,
+        "first_cache_status": "MISS",
+        "second_cache_status": "MISS"
+      }
+    },
+    "call_graph": {
+      "direct_canonical_path_count": 1,
+      "compatibility_wrapper_count": 6,
+      "independent_retrieval_count": 0,
+      "duplicate_state_assembly_count": 0
+    }
+  },
+  "notes": [
+    "The repository already routed wrappers through the canonical producer.",
+    "The remaining issue was hash stability, not wrapper behavior."
+  ]
+}

@@ -37,6 +37,7 @@ SEMANTIC_AUTHORITY_REGISTRY = ROOT / "registry/theorem_registry.json"
 CLAIM_REGISTRY = ROOT / "registry/claim_registry.json"
 CLAIM_SUPPORT_MATRIX = ROOT / "registry/claim_support_matrix.json"
 GOVERNED_CONTEXT_CAPSULE_SCHEMA_VERSION = "governed_context_capsule_v1"
+GOVERNED_CONTEXT_CAPSULE_SCHEMA_RELEASE = "1.0.0"
 GOVERNED_CONTEXT_CAPSULE_CACHE_DIR = ROOT / "outputs/governance/context_capsules" / GOVERNED_CONTEXT_CAPSULE_SCHEMA_VERSION
 
 try:
@@ -2373,12 +2374,15 @@ def _summarize_context_capsule_result(result):
     if not isinstance(result, dict):
         return result
     return {
+        "schema_id": result.get("schema_id"),
+        "schema_version": result.get("schema_version"),
         "target": result.get("target"),
         "task": result.get("task"),
         "capsule_schema_version": result.get("capsule_schema_version"),
         "capsule_id": result.get("capsule_id"),
         "capsule_hash": result.get("capsule_hash"),
         "cache_status": result.get("cache_status"),
+        "metrics": result.get("metrics", {}),
         "global_runtime_status": {
             "status": result.get("global_runtime_status", {}).get("status") if isinstance(result.get("global_runtime_status"), dict) else None,
             "health": result.get("global_runtime_status", {}).get("health") if isinstance(result.get("global_runtime_status"), dict) else None,
@@ -2415,6 +2419,303 @@ def _sorted_json_records(records, limit=None):
     if limit is not None:
         return cleaned[:limit]
     return cleaned
+
+
+def _build_governed_context_request_identity(db_path, normalized_target, task_text, query_text, limit):
+    request_scope = {
+        "db_path": str(Path(db_path)),
+        "target": normalized_target,
+        "task": task_text,
+        "query": query_text,
+        "focus_query": query_text or normalized_target or task_text,
+        "limit": int(limit) if limit is not None else None,
+    }
+    request_id = f"{GOVERNED_CONTEXT_CAPSULE_SCHEMA_VERSION}:{_hash_json_value(request_scope)[:16]}"
+    request_identity = {
+        "request_id": request_id,
+        "request_type": "governed_context_capsule",
+        "request_scope": request_scope,
+        "schema_id": GOVERNED_CONTEXT_CAPSULE_SCHEMA_VERSION,
+        "schema_version": GOVERNED_CONTEXT_CAPSULE_SCHEMA_RELEASE,
+        "command": "governed-context-capsule",
+    }
+    request_identity.update(request_scope)
+    return request_identity
+
+
+def _build_governed_context_source_records(source_inventory, freshness, authority):
+    freshness_snapshot = freshness.get("db_snapshot_status", "unknown") if isinstance(freshness, dict) else "unknown"
+    authority_status = authority.get("authority_status") if isinstance(authority, dict) else None
+    if not authority_status and isinstance(authority, dict):
+        authority_status = authority.get("decision", "unknown")
+    authority_status = authority_status or "unknown"
+    authority_owner = authority.get("authority_owner", "unknown") if isinstance(authority, dict) else "unknown"
+    authority_source = authority.get("authority_source") if isinstance(authority, dict) else None
+    authority_decision = authority.get("decision", "defer") if isinstance(authority, dict) else "defer"
+    freshness_decision = freshness.get("decision", "unknown") if isinstance(freshness, dict) else "unknown"
+    freshness_indexed_at = freshness.get("indexed_at") if isinstance(freshness, dict) else None
+    records = []
+    for entry in source_inventory or []:
+        if not isinstance(entry, dict):
+            continue
+        path = normalize_repo_path(entry.get("path"))
+        if not path:
+            continue
+        records.append(
+            {
+                "source_id": path,
+                "path": path,
+                "content_hash": entry.get("source_hash"),
+                "authority": {
+                    "status": authority_status,
+                    "decision": authority_decision,
+                    "owner": authority_owner,
+                    "source": authority_source,
+                },
+                "freshness": {
+                    "status": freshness_snapshot,
+                    "decision": freshness_decision,
+                    "indexed_at": freshness_indexed_at,
+                },
+                "roles": _stable_sorted_unique_strings(entry.get("roles", [])),
+                "sections": _stable_sorted_unique_strings(entry.get("sections", [])),
+                "exists": bool(entry.get("exists")),
+            }
+        )
+    records.sort(key=lambda record: str(record.get("source_id") or record.get("path") or ""))
+    return records
+
+
+def _normalize_governed_context_freshness(freshness, source_change_paths=None, runtime_only_change_paths=None):
+    freshness = dict(freshness or {})
+    checked_sources = parse_json_collection(freshness.get("checked_sources", []))
+    if not checked_sources:
+        checked_sources = []
+        checked_sources.extend(parse_json_collection(freshness.get("evidence_paths", [])))
+        checked_sources.extend(parse_json_collection(source_change_paths or []))
+        checked_sources.extend(parse_json_collection(runtime_only_change_paths or []))
+    stale_sources = parse_json_collection(freshness.get("stale_sources", []))
+    if not stale_sources and str(freshness.get("db_snapshot_status") or "").strip().lower() == "stale":
+        stale_sources.extend(parse_json_collection(source_change_paths or []))
+        if not stale_sources:
+            stale_sources.extend(parse_json_collection(runtime_only_change_paths or []))
+    freshness["status"] = freshness.get("db_snapshot_status", "unknown")
+    freshness["checked_sources"] = _stable_sorted_unique_strings(checked_sources)
+    freshness["stale_sources"] = _stable_sorted_unique_strings(stale_sources)
+    return freshness
+
+
+def _normalize_governed_context_authority(authority, normalized_target=None):
+    authority = dict(authority or {})
+    decision = str(authority.get("decision") or "defer").strip().lower() or "defer"
+    authority_status = authority.get("authority_status") or decision
+    if decision in {"allow", "allow_with_note"}:
+        allowed_actions = ["read_context", "project_context", "reuse_capsule"]
+        forbidden_actions = ["mutate_governed_state", "bypass_authority", "ignore_freshness"]
+    elif decision == "warn":
+        allowed_actions = ["read_context", "project_context"]
+        forbidden_actions = ["mutate_governed_state", "apply_patch", "bypass_authority"]
+    else:
+        allowed_actions = ["read_context"]
+        forbidden_actions = ["mutate_governed_state", "apply_patch", "bypass_authority", "ignore_freshness"]
+    if normalized_target:
+        allowed_actions.append(f"project_target:{normalized_target}")
+    authority["authority_status"] = authority_status
+    authority["allowed_actions"] = _stable_sorted_unique_strings(allowed_actions)
+    authority["forbidden_actions"] = _stable_sorted_unique_strings(forbidden_actions)
+    return authority
+
+
+def _normalize_governed_context_patch_chain(patch_chain):
+    patch_chain = dict(patch_chain or {})
+    supersession = patch_chain.get("supersession", {}) if isinstance(patch_chain.get("supersession"), dict) else {}
+    patch_chain["active_patch"] = patch_chain.get("patch_id")
+    patch_chain["predecessors"] = _stable_sorted_unique_strings(parse_json_collection(patch_chain.get("dependencies", [])))
+    patch_chain["successors"] = _stable_sorted_unique_strings(parse_json_collection(supersession.get("superseded_by", [])))
+    patch_chain["chain_status"] = patch_chain.get("status", "unknown")
+    return patch_chain
+
+
+def _normalize_governed_context_relevant_artifacts(artifacts, freshness, authority, focus_query):
+    normalized = []
+    freshness_snapshot = freshness.get("db_snapshot_status", "unknown") if isinstance(freshness, dict) else "unknown"
+    freshness_decision = freshness.get("decision", "unknown") if isinstance(freshness, dict) else "unknown"
+    freshness_indexed_at = freshness.get("indexed_at") if isinstance(freshness, dict) else None
+    authority_status = authority.get("authority_status") if isinstance(authority, dict) else None
+    if not authority_status and isinstance(authority, dict):
+        authority_status = authority.get("decision", "unknown")
+    authority_status = authority_status or "unknown"
+    authority_owner = authority.get("authority_owner", "unknown") if isinstance(authority, dict) else "unknown"
+    authority_source = authority.get("authority_source") if isinstance(authority, dict) else None
+    authority_decision = authority.get("decision", "defer") if isinstance(authority, dict) else "defer"
+    for artifact in artifacts or []:
+        if not isinstance(artifact, dict):
+            continue
+        entry = dict(artifact)
+        path = normalize_repo_path(entry.get("path"))
+        entry["path"] = path
+        content_hash = entry.get("content_hash") or entry.get("source_hash") or _source_path_hash(path)
+        relevance_reason = (
+            entry.get("relevance_reason")
+            or entry.get("reason")
+            or entry.get("match_reason")
+            or entry.get("orientation_status")
+            or f"retrieved_for:{focus_query or 'context'}"
+        )
+        entry["artifact_id"] = str(entry.get("artifact_id") or path or content_hash or relevance_reason)
+        entry["content_hash"] = content_hash
+        entry["authority"] = {
+            "status": authority_status,
+            "decision": authority_decision,
+            "owner": authority_owner,
+            "source": authority_source,
+        }
+        entry["freshness"] = {
+            "status": freshness_snapshot,
+            "decision": freshness_decision,
+            "indexed_at": freshness_indexed_at,
+        }
+        entry["relevance_reason"] = relevance_reason
+        normalized.append(entry)
+
+    def _artifact_sort_key(item):
+        try:
+            score = float(item.get("score", 0.0) or 0.0)
+        except (TypeError, ValueError):
+            score = 0.0
+        return (-score, str(item.get("path") or ""), str(item.get("orientation_status") or ""))
+
+    normalized.sort(key=_artifact_sort_key)
+    return normalized
+
+
+def _normalize_governed_context_open_debt(debt_result):
+    debt_result = dict(debt_result or {})
+    debts = []
+    for record in parse_json_collection(debt_result.get("debts", [])):
+        if isinstance(record, dict):
+            debts.append(dict(record))
+    debts.sort(key=lambda record: str(record.get("debt_id") or ""))
+    return debts, debt_result
+
+
+def _build_governed_context_metrics(cache_status, build_time_ms, serialized_bytes, estimated_tokens, artifact_count, source_count, excluded_source_count):
+    return {
+        "build_time_ms": build_time_ms,
+        "serialized_bytes": serialized_bytes,
+        "estimated_tokens": estimated_tokens,
+        "artifact_count": artifact_count,
+        "source_count": source_count,
+        "excluded_source_count": excluded_source_count,
+        "cache_status": cache_status,
+    }
+
+
+def validate_governed_context_capsule_payload(capsule, expected_hash=None, expected_id=None):
+    errors = []
+    if not isinstance(capsule, dict):
+        return ["capsule is not an object"]
+
+    required_top_level = [
+        "schema_id",
+        "schema_version",
+        "capsule_id",
+        "capsule_hash",
+        "request_identity",
+        "current_state",
+        "freshness",
+        "authority",
+        "patch_chain",
+        "open_debt",
+        "relevant_artifacts",
+        "runtime_trace",
+        "candidate_actions",
+        "exclusions",
+        "provenance",
+        "metrics",
+    ]
+    for field in required_top_level:
+        if field not in capsule:
+            errors.append(f"missing_top_level_field:{field}")
+
+    if capsule.get("schema_id") != GOVERNED_CONTEXT_CAPSULE_SCHEMA_VERSION:
+        errors.append("schema_id_mismatch")
+    if capsule.get("schema_version") != GOVERNED_CONTEXT_CAPSULE_SCHEMA_RELEASE:
+        errors.append("schema_version_mismatch")
+    if expected_hash is not None and capsule.get("capsule_hash") != expected_hash:
+        errors.append("capsule_hash_mismatch")
+    if expected_id is not None and capsule.get("capsule_id") != expected_id:
+        errors.append("capsule_id_mismatch")
+
+    request_identity = capsule.get("request_identity", {})
+    if not isinstance(request_identity, dict):
+        errors.append("request_identity_not_object")
+        request_identity = {}
+    for field in ("request_id", "request_type", "request_scope"):
+        if field not in request_identity:
+            errors.append(f"missing_request_identity_field:{field}")
+    request_scope = request_identity.get("request_scope", {})
+    if not isinstance(request_scope, dict):
+        errors.append("request_scope_not_object")
+
+    freshness = capsule.get("freshness", {})
+    if not isinstance(freshness, dict):
+        errors.append("freshness_not_object")
+        freshness = {}
+    for field in ("status", "checked_sources", "stale_sources"):
+        if field not in freshness:
+            errors.append(f"missing_freshness_field:{field}")
+
+    authority = capsule.get("authority", {})
+    if not isinstance(authority, dict):
+        errors.append("authority_not_object")
+        authority = {}
+    for field in ("authority_status", "allowed_actions", "forbidden_actions"):
+        if field not in authority:
+            errors.append(f"missing_authority_field:{field}")
+
+    patch_chain = capsule.get("patch_chain", {})
+    if not isinstance(patch_chain, dict):
+        errors.append("patch_chain_not_object")
+        patch_chain = {}
+    for field in ("active_patch", "predecessors", "successors", "chain_status"):
+        if field not in patch_chain:
+            errors.append(f"missing_patch_chain_field:{field}")
+
+    if not isinstance(capsule.get("open_debt"), list):
+        errors.append("open_debt_not_array")
+
+    relevant_artifacts = capsule.get("relevant_artifacts", [])
+    if not isinstance(relevant_artifacts, list):
+        errors.append("relevant_artifacts_not_array")
+        relevant_artifacts = []
+    for index, artifact in enumerate(relevant_artifacts):
+        if not isinstance(artifact, dict):
+            errors.append(f"artifact_not_object:{index}")
+            continue
+        for field in ("artifact_id", "path", "content_hash", "authority", "freshness", "relevance_reason"):
+            if field not in artifact:
+                errors.append(f"artifact_missing_field:{index}:{field}")
+
+    provenance = capsule.get("provenance", {})
+    if not isinstance(provenance, dict):
+        errors.append("provenance_not_object")
+        provenance = {}
+    for field in ("source_records", "producer", "producer_version"):
+        if field not in provenance:
+            errors.append(f"missing_provenance_field:{field}")
+    source_records = provenance.get("source_records", [])
+    if not isinstance(source_records, list):
+        errors.append("source_records_not_array")
+    metrics = capsule.get("metrics", {})
+    if not isinstance(metrics, dict):
+        errors.append("metrics_not_object")
+        metrics = {}
+    for field in ("build_time_ms", "serialized_bytes", "estimated_tokens", "artifact_count", "source_count", "excluded_source_count", "cache_status"):
+        if field not in metrics:
+            errors.append(f"missing_metrics_field:{field}")
+
+    return errors
 
 
 def _source_path_exists(path):
@@ -2556,7 +2857,7 @@ def _build_governed_context_candidate_actions(current_state, freshness, authorit
     authority_decision = str(authority.get("decision") or "unknown").strip().lower()
     patch_decision = str(patch_chain.get("decision") or "unknown").strip().lower()
     patch_status = str(patch_chain.get("status") or "unknown").strip().lower()
-    debt_summary = open_debt.get("summary", {}) if isinstance(open_debt.get("summary"), dict) else {}
+    debt_summary = open_debt.get("summary", {}) if isinstance(open_debt, dict) and isinstance(open_debt.get("summary"), dict) else {}
     blocking_debt = int(debt_summary.get("blocking", 0) or 0)
     open_debt_count = int(debt_summary.get("open", 0) or 0)
     trace_report = runtime_trace.get("trace_report", {}) if isinstance(runtime_trace.get("trace_report"), dict) else {}
@@ -2867,16 +3168,7 @@ def build_governed_context_capsule_v1(db_path, target=None, task=None, query=Non
     task_text = str(task).strip() if task else None
     query_text = str(query).strip() if query else None
     focus_query = query_text or normalized_target or task_text
-    request_identity = {
-        "schema_version": GOVERNED_CONTEXT_CAPSULE_SCHEMA_VERSION,
-        "command": "governed-context-capsule",
-        "db_path": str(db_file),
-        "target": normalized_target,
-        "task": task_text,
-        "query": query_text,
-        "focus_query": focus_query,
-        "limit": int(limit) if limit is not None else None,
-    }
+    request_identity = _build_governed_context_request_identity(db_file, normalized_target, task_text, query_text, limit)
 
     current_state = build_current_state_capsule(db_path)
     current_state_projection = current_state.get("projection", {}) if isinstance(current_state.get("projection"), dict) else {}
@@ -3020,12 +3312,82 @@ def build_governed_context_capsule_v1(db_path, target=None, task=None, query=Non
         for entry in source_inventory
         if entry.get("path")
     }
+    normalized_freshness = _normalize_governed_context_freshness(
+        freshness,
+        source_change_paths=freshness.get("source_change_paths", []),
+        runtime_only_change_paths=freshness.get("runtime_only_change_paths", []),
+    )
+    normalized_authority = _normalize_governed_context_authority(authority_result, normalized_target=normalized_target)
+    normalized_patch_chain = _normalize_governed_context_patch_chain(patch_chain)
+    open_debt_items, open_debt_detail = _normalize_governed_context_open_debt(debt_result)
+    source_records = _build_governed_context_source_records(source_inventory, normalized_freshness, normalized_authority)
+    relevant_artifacts = _normalize_governed_context_relevant_artifacts(
+        relevant_artifacts,
+        normalized_freshness,
+        normalized_authority,
+        focus_query,
+    )
+
+    current_state_for_hash = {
+        "status": current_state.get("status", "unavailable"),
+        "health": {
+            "global_validation": current_state.get("health", {}).get("global_validation")
+            if isinstance(current_state.get("health"), dict)
+            else None,
+        },
+        "runtime": {
+            "db_first_gate": current_state.get("runtime", {}).get("db_first_gate")
+            if isinstance(current_state.get("runtime"), dict)
+            else None,
+            "authority_boundary": current_state.get("runtime", {}).get("authority_boundary")
+            if isinstance(current_state.get("runtime"), dict)
+            else None,
+        },
+        "blocker_count": len(parse_json_collection(current_state.get("blockers", []))),
+        "open_debt_count": len(parse_json_collection(current_state.get("open_debt", []))),
+        "latest_decision_count": len(parse_json_collection(current_state.get("latest_decisions", []))),
+    }
+    freshness_for_hash = {
+        "db_snapshot_status": normalized_freshness.get("db_snapshot_status", "unknown"),
+        "decision": normalized_freshness.get("decision", "block"),
+        "indexed_at": normalized_freshness.get("indexed_at"),
+        "artifact_indexed_at": normalized_freshness.get("artifact_indexed_at"),
+        "last_refresh_attempt": normalized_freshness.get("last_refresh_attempt"),
+        "last_refresh_result": normalized_freshness.get("last_refresh_result"),
+        "source_worktree_marker": normalized_freshness.get("source_worktree_marker"),
+        "refresh_source": normalized_freshness.get("refresh_source"),
+        "latest_known_worktree_change": normalized_freshness.get("latest_known_worktree_change"),
+        "source_change_count": normalized_freshness.get("source_change_count", 0),
+        "source_change_paths": _stable_sorted_unique_strings(normalized_freshness.get("source_change_paths", [])),
+    }
+
+    normalized_db_path = normalize_repo_path(db_file) or str(db_file)
+    stable_db_source_hash = _hash_json_value(
+        {
+            "current_state": current_state_for_hash,
+            "freshness": freshness_for_hash,
+            "authority": normalized_authority,
+            "patch_chain": normalized_patch_chain,
+            "open_debt": open_debt_items,
+            "relevant_artifacts": relevant_artifacts,
+            "runtime_trace": normalized_trace_report,
+            "database_health": database_health,
+        }
+    )
+    if stable_db_source_hash:
+        for record in source_records:
+            if normalize_repo_path(record.get("path")) == normalized_db_path:
+                record["content_hash"] = stable_db_source_hash
+        for entry in source_inventory:
+            if normalize_repo_path(entry.get("path")) == normalized_db_path:
+                entry["source_hash"] = stable_db_source_hash
+        source_hashes[normalized_db_path] = stable_db_source_hash
 
     warnings = _dedupe_trim(
         list(current_state.get("warnings", []))
-        + list(authority_result.get("warnings", []))
-        + list(patch_chain.get("warnings", []))
-        + list(debt_result.get("warnings", []))
+        + list(normalized_authority.get("warnings", []))
+        + list(normalized_patch_chain.get("warnings", []))
+        + list(open_debt_detail.get("warnings", []))
         + list(retrieval.get("warnings", []))
         + list(normalized_trace_report.get("warnings", []))
         + list(database_health.get("stale_index_warnings", []))
@@ -3044,26 +3406,28 @@ def build_governed_context_capsule_v1(db_path, target=None, task=None, query=Non
 
     candidate_actions = _build_governed_context_candidate_actions(
         current_state,
-        freshness,
-        authority_result,
-        patch_chain,
-        debt_result,
+        normalized_freshness,
+        normalized_authority,
+        normalized_patch_chain,
+        open_debt_detail,
         normalized_trace_report,
         database_health,
     )
 
     provenance_section_hashes = {
-        "current_state": _hash_json_value(current_state),
-        "freshness": _hash_json_value(freshness),
-        "authority": _hash_json_value(authority_result),
-        "patch_chain": _hash_json_value(patch_chain),
-        "open_debt": _hash_json_value(debt_result),
+        "current_state": _hash_json_value(current_state_for_hash),
+        "freshness": _hash_json_value(freshness_for_hash),
+        "authority": _hash_json_value(normalized_authority),
+        "patch_chain": _hash_json_value(normalized_patch_chain),
+        "open_debt": _hash_json_value(open_debt_detail),
+        "open_debt_items": _hash_json_value(open_debt_items),
         "relevant_artifacts": _hash_json_value(relevant_artifacts),
         "runtime_trace": _hash_json_value(normalized_trace_report),
         "database_health": _hash_json_value(database_health),
         "candidate_actions": _hash_json_value(candidate_actions),
         "exclusions": _hash_json_value(exclusions),
         "recent_governance_events": _hash_json_value(recent_governance_events),
+        "source_records": _hash_json_value(source_records),
     }
 
     provenance = {
@@ -3072,16 +3436,21 @@ def build_governed_context_capsule_v1(db_path, target=None, task=None, query=Non
         "task": task_text,
         "query": query_text,
         "focus_query": focus_query,
-        "schema_version": GOVERNED_CONTEXT_CAPSULE_SCHEMA_VERSION,
+        "schema_version": GOVERNED_CONTEXT_CAPSULE_SCHEMA_RELEASE,
         "built_at": datetime.now(timezone.utc).isoformat(),
         "source_paths": source_paths,
         "source_hashes": source_hashes,
+        "source_records": source_records,
         "source_count": len(source_paths),
         "excluded_source_count": len(exclusions),
+        "producer": "scripts.query_governance.build_governed_context_capsule_v1",
+        "producer_version": GOVERNED_CONTEXT_CAPSULE_SCHEMA_RELEASE,
         "section_hashes": provenance_section_hashes,
     }
 
     hash_basis = {
+        "schema_id": GOVERNED_CONTEXT_CAPSULE_SCHEMA_VERSION,
+        "schema_version": GOVERNED_CONTEXT_CAPSULE_SCHEMA_RELEASE,
         "capsule_schema_version": GOVERNED_CONTEXT_CAPSULE_SCHEMA_VERSION,
         "request_identity": request_identity,
         "section_hashes": provenance_section_hashes,
@@ -3092,18 +3461,20 @@ def build_governed_context_capsule_v1(db_path, target=None, task=None, query=Non
             "query": provenance["query"],
             "focus_query": provenance["focus_query"],
             "schema_version": provenance["schema_version"],
+            "producer": provenance["producer"],
+            "producer_version": provenance["producer_version"],
             "source_paths": provenance["source_paths"],
             "source_hashes": provenance["source_hashes"],
             "source_count": provenance["source_count"],
             "excluded_source_count": provenance["excluded_source_count"],
         },
         "summary": {
-            "current_state_status": current_state.get("status", "unavailable"),
-            "freshness_state": freshness.get("db_snapshot_status", "unknown"),
-            "authority_state": authority_result.get("decision", "unknown"),
-            "patch_chain_state": patch_chain.get("status", "unknown"),
-            "open_debt_open": debt_result.get("summary", {}).get("open", 0) if isinstance(debt_result.get("summary"), dict) else 0,
-            "open_debt_blocking": debt_result.get("summary", {}).get("blocking", 0) if isinstance(debt_result.get("summary"), dict) else 0,
+        "current_state_status": current_state.get("status", "unavailable"),
+            "freshness_state": normalized_freshness.get("db_snapshot_status", "unknown"),
+            "authority_state": normalized_authority.get("decision", "unknown"),
+            "patch_chain_state": normalized_patch_chain.get("status", "unknown"),
+            "open_debt_open": open_debt_detail.get("summary", {}).get("open", 0) if isinstance(open_debt_detail.get("summary"), dict) else 0,
+            "open_debt_blocking": open_debt_detail.get("summary", {}).get("blocking", 0) if isinstance(open_debt_detail.get("summary"), dict) else 0,
             "retrieval_count": len(relevant_artifacts),
             "trace_summary": normalized_trace_report.get("trace_summary", {}),
             "claim_graph_summary": claim_graph_summary,
@@ -3124,42 +3495,25 @@ def build_governed_context_capsule_v1(db_path, target=None, task=None, query=Non
     cache_status = "MISS"
     cached_core = None
     if use_cache and cache_path.exists():
-        cached_core = load_optional_json(cache_path)
-        if isinstance(cached_core, dict):
+        loaded_cache = load_optional_json(cache_path)
+        validation_errors = validate_governed_context_capsule_payload(loaded_cache, expected_hash=capsule_hash, expected_id=capsule_id)
+        if not validation_errors and isinstance(loaded_cache, dict):
+            cached_core = dict(loaded_cache)
             cache_status = "HIT"
 
-    if not isinstance(cached_core, dict):
-        cached_core = dict(hash_basis)
-        cached_core["capsule_id"] = capsule_id
-        cached_core["capsule_hash"] = capsule_hash
-        cached_core["provenance"] = dict(provenance)
-        if use_cache:
-            GOVERNED_CONTEXT_CAPSULE_CACHE_DIR.mkdir(parents=True, exist_ok=True)
-            try:
-                with cache_path.open("w", encoding="utf-8") as handle:
-                    json.dump(cached_core, handle, ensure_ascii=False, sort_keys=True, indent=2)
-            except OSError:
-                cache_status = "MISS"
-
-    capsule = dict(cached_core)
+    capsule = dict(cached_core) if isinstance(cached_core, dict) else {}
+    capsule["schema_id"] = GOVERNED_CONTEXT_CAPSULE_SCHEMA_VERSION
+    capsule["schema_version"] = GOVERNED_CONTEXT_CAPSULE_SCHEMA_RELEASE
     capsule["capsule_schema_version"] = GOVERNED_CONTEXT_CAPSULE_SCHEMA_VERSION
     capsule["capsule_id"] = capsule_id
     capsule["capsule_hash"] = capsule_hash
-    capsule["cache_status"] = cache_status
-    capsule["build_time_ms"] = round((time.perf_counter() - started_at) * 1000, 3)
-    capsule["serialized_bytes"] = serialized_bytes
-    capsule["estimated_token_count"] = estimated_token_count
-    capsule["artifact_count"] = len(relevant_artifacts)
-    capsule["source_count"] = len(source_paths)
-    capsule["excluded_source_count"] = len(exclusions)
-    capsule["freshness_state"] = freshness.get("db_snapshot_status", "unknown")
-    capsule["authority_state"] = authority_result.get("decision", "unknown")
     capsule["request_identity"] = request_identity
     capsule["current_state"] = current_state
-    capsule["freshness"] = freshness
-    capsule["authority"] = authority_result
-    capsule["patch_chain"] = patch_chain
-    capsule["open_debt"] = debt_result
+    capsule["freshness"] = normalized_freshness
+    capsule["authority"] = normalized_authority
+    capsule["patch_chain"] = normalized_patch_chain
+    capsule["open_debt"] = open_debt_items
+    capsule["open_debt_detail"] = open_debt_detail
     capsule["relevant_artifacts"] = relevant_artifacts
     capsule["runtime_trace"] = {
         "trace_report": normalized_trace_report,
@@ -3172,8 +3526,48 @@ def build_governed_context_capsule_v1(db_path, target=None, task=None, query=Non
     capsule["exclusions"] = exclusions
     capsule["provenance"] = provenance
     capsule["warnings"] = warnings
+    capsule["summary"] = hash_basis["summary"]
+    capsule["capsule_schema_version"] = GOVERNED_CONTEXT_CAPSULE_SCHEMA_VERSION
+    capsule["cache_status"] = cache_status
+    capsule["build_time_ms"] = round((time.perf_counter() - started_at) * 1000, 3)
+    capsule["serialized_bytes"] = serialized_bytes
+    capsule["estimated_token_count"] = estimated_token_count
+    capsule["artifact_count"] = len(relevant_artifacts)
+    capsule["source_count"] = len(source_paths)
+    capsule["excluded_source_count"] = len(exclusions)
+    capsule["freshness_state"] = normalized_freshness.get("db_snapshot_status", "unknown")
+    capsule["authority_state"] = normalized_authority.get("decision", "unknown")
+    capsule["metrics"] = _build_governed_context_metrics(
+        cache_status,
+        capsule["build_time_ms"],
+        serialized_bytes,
+        estimated_token_count,
+        len(relevant_artifacts),
+        len(source_paths),
+        len(exclusions),
+    )
+
+    if use_cache and not isinstance(cached_core, dict):
+        GOVERNED_CONTEXT_CAPSULE_CACHE_DIR.mkdir(parents=True, exist_ok=True)
+        try:
+            with cache_path.open("w", encoding="utf-8") as handle:
+                json.dump(capsule, handle, ensure_ascii=False, sort_keys=True, indent=2)
+        except OSError:
+            capsule["cache_status"] = "MISS"
+            capsule["metrics"]["cache_status"] = "MISS"
 
     return capsule
+
+
+def build_governed_context_capsule(db_path, target=None, task=None, query=None, limit=20, use_cache=True):
+    return build_governed_context_capsule_v1(
+        db_path,
+        target=target,
+        task=task,
+        query=query,
+        limit=limit,
+        use_cache=use_cache,
+    )
 
 
 def build_context_capsule_result(db_path, target=None, task=None):
@@ -6044,12 +6438,18 @@ def build_context_capsule_result(db_path, target=None, task=None):
     freshness = capsule.get("freshness", {}) if isinstance(capsule, dict) else {}
     authority = capsule.get("authority", {}) if isinstance(capsule, dict) else {}
     patch_chain = capsule.get("patch_chain", {}) if isinstance(capsule, dict) else {}
-    open_debt = capsule.get("open_debt", {}) if isinstance(capsule, dict) else {}
+    open_debt = capsule.get("open_debt", []) if isinstance(capsule, dict) else []
+    open_debt_detail = capsule.get("open_debt_detail", {}) if isinstance(capsule, dict) else {}
+    if not isinstance(open_debt_detail, dict):
+        open_debt_detail = {}
     candidate_actions = capsule.get("candidate_actions", []) if isinstance(capsule, dict) else []
     recent_events = capsule.get("recent_governance_events", []) if isinstance(capsule, dict) else []
     semantic_summary = current_projection.get("semantic_rt", {}) if isinstance(current_projection, dict) else {}
     replay_projection = current_projection.get("replay_reconciliation", {}) if isinstance(current_projection, dict) else {}
-    debt_summary = open_debt.get("summary", {}) if isinstance(open_debt.get("summary"), dict) else {}
+    debt_summary = open_debt_detail.get("summary", {}) if isinstance(open_debt_detail.get("summary"), dict) else {}
+    debt_items = open_debt if isinstance(open_debt, list) else []
+    if not debt_items and isinstance(open_debt_detail.get("debts"), list):
+        debt_items = open_debt_detail.get("debts", [])
     blocking_actions = [action for action in candidate_actions if action.get("priority") in {"high", "medium"}]
     warnings = _dedupe_trim(parse_json_collection(capsule.get("warnings", [])), limit=10)
 
@@ -6101,8 +6501,8 @@ def build_context_capsule_result(db_path, target=None, task=None):
             "partial": debt_summary.get("partial", 0),
             "resolved": debt_summary.get("resolved", 0),
             "blocking": debt_summary.get("blocking", 0),
-            "items": [record.get("debt_id") for record in open_debt.get("debts", []) if isinstance(record, dict) and record.get("debt_id")][:3],
-            "decision": open_debt.get("decision", "allow"),
+            "items": [record.get("debt_id") for record in debt_items if isinstance(record, dict) and record.get("debt_id")][:3],
+            "decision": open_debt_detail.get("decision", "allow"),
         },
         "replay_summary": {
             "state": replay_projection.get("projection_state", "unknown"),
@@ -6133,10 +6533,13 @@ def build_context_capsule_result(db_path, target=None, task=None):
             else "Use the capsule to choose the next governed action."
         ),
         "minimal_evidence_paths": capsule.get("provenance", {}).get("source_paths", [])[:15],
+        "schema_id": capsule.get("schema_id"),
+        "schema_version": capsule.get("schema_version"),
         "capsule_schema_version": capsule.get("capsule_schema_version"),
         "capsule_id": capsule.get("capsule_id"),
         "capsule_hash": capsule.get("capsule_hash"),
         "cache_status": capsule.get("cache_status"),
+        "metrics": capsule.get("metrics", {}),
         "recent_governance_events": recent_events,
         "governed_context_capsule_v1": capsule,
     }

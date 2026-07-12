@@ -1,0 +1,239 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Governed Context Capsule Schema",
+  "description": "Canonical schema for governed_context_capsule_v1 emitted by scripts/query_governance.py.",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "capsule_id",
+    "capsule_hash",
+    "request_identity",
+    "current_state",
+    "freshness",
+    "authority",
+    "patch_chain",
+    "open_debt",
+    "relevant_artifacts",
+    "runtime_trace",
+    "candidate_actions",
+    "exclusions",
+    "provenance",
+    "metrics"
+  ],
+  "properties": {
+    "schema_id": {
+      "type": "string",
+      "const": "governed_context_capsule_v1"
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "capsule_id": {
+      "type": "string"
+    },
+    "capsule_hash": {
+      "type": "string"
+    },
+    "capsule_schema_version": {
+      "type": "string",
+      "const": "governed_context_capsule_v1"
+    },
+    "request_identity": {
+      "type": "object",
+      "required": [
+        "request_id",
+        "request_type",
+        "request_scope"
+      ],
+      "properties": {
+        "request_id": {
+          "type": "string"
+        },
+        "request_type": {
+          "type": "string"
+        },
+        "request_scope": {
+          "type": "object",
+          "required": [
+            "db_path",
+            "target",
+            "task",
+            "query",
+            "focus_query",
+            "limit"
+          ],
+          "properties": {
+            "db_path": { "type": "string" },
+            "target": { "type": ["string", "null"] },
+            "task": { "type": ["string", "null"] },
+            "query": { "type": ["string", "null"] },
+            "focus_query": { "type": ["string", "null"] },
+            "limit": { "type": ["integer", "null"] }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "current_state": {
+      "type": "object"
+    },
+    "freshness": {
+      "type": "object",
+      "required": [
+        "status",
+        "checked_sources",
+        "stale_sources"
+      ],
+      "properties": {
+        "status": { "type": "string" },
+        "checked_sources": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "stale_sources": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": true
+    },
+    "authority": {
+      "type": "object",
+      "required": [
+        "authority_status",
+        "allowed_actions",
+        "forbidden_actions"
+      ],
+      "properties": {
+        "authority_status": { "type": "string" },
+        "allowed_actions": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "forbidden_actions": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": true
+    },
+    "patch_chain": {
+      "type": "object",
+      "required": [
+        "active_patch",
+        "predecessors",
+        "successors",
+        "chain_status"
+      ],
+      "properties": {
+        "active_patch": { "type": ["string", "null"] },
+        "predecessors": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "successors": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "chain_status": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "open_debt": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "open_debt_detail": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "relevant_artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "artifact_id",
+          "path",
+          "content_hash",
+          "authority",
+          "freshness",
+          "relevance_reason"
+        ],
+        "additionalProperties": true
+      }
+    },
+    "runtime_trace": {
+      "type": "object"
+    },
+    "candidate_actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "exclusions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "required": [
+        "source_records",
+        "producer",
+        "producer_version"
+      ],
+      "properties": {
+        "source_records": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "source_id",
+              "path",
+              "content_hash",
+              "authority",
+              "freshness"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "producer": { "type": "string" },
+        "producer_version": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "metrics": {
+      "type": "object",
+      "required": [
+        "build_time_ms",
+        "serialized_bytes",
+        "estimated_tokens",
+        "artifact_count",
+        "source_count",
+        "excluded_source_count",
+        "cache_status"
+      ],
+      "properties": {
+        "build_time_ms": { "type": "number" },
+        "serialized_bytes": { "type": "integer" },
+        "estimated_tokens": { "type": "integer" },
+        "artifact_count": { "type": "integer" },
+        "source_count": { "type": "integer" },
+        "excluded_source_count": { "type": "integer" },
+        "cache_status": { "type": "string" }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}
