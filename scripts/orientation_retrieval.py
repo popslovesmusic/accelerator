@@ -7,16 +7,26 @@ try:
     from db.orientation_scoring import calculate_orientation_score
 except ImportError:
     from scripts.db.orientation_scoring import calculate_orientation_score
+try:
+    from tools.inference_governance.candidate_builder import build_bounded_candidate_set_v1
+    from tools.inference_governance.candidate_policy import get_candidate_policy, hash_candidate_universe
+    from tools.inference_governance.request_normalization import hash_json_value, normalize_text
+except ImportError:
+    import sys
+    sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+    from tools.inference_governance.candidate_builder import build_bounded_candidate_set_v1
+    from tools.inference_governance.candidate_policy import get_candidate_policy, hash_candidate_universe
+    from tools.inference_governance.request_normalization import hash_json_value, normalize_text
 
 def get_text_match_score(path, query):
-    if not query:
+    normalized_query = normalize_text(query, lowercase=True)
+    if not normalized_query:
         return 0.5 # Neutral if no query
-    path_lower = path.lower()
-    query_lower = query.lower()
-    if query_lower in path_lower:
+    path_lower = normalize_text(path, lowercase=True)
+    if normalized_query in path_lower:
         # Simple match: better match if it's in the filename vs directory
         filename = os.path.basename(path_lower)
-        if query_lower in filename:
+        if normalized_query in filename:
             return 1.0
         return 0.8
     return 0.0
@@ -26,7 +36,7 @@ def get_freshness_score(timestamp_str):
         return 0.5
     try:
         # Assuming ISO format from SQLite CURRENT_TIMESTAMP or similar
-        ts = datetime.fromisoformat(timestamp_str.replace('Z', '+00:00'))
+        ts = datetime.datetime.fromisoformat(timestamp_str.replace('Z', '+00:00'))
         now = datetime.datetime.now(datetime.timezone.utc)
         delta = now - ts
         # Score 1.0 for < 1 day, 0.5 for 1 week, 0.1 for > 1 month
@@ -131,6 +141,7 @@ def retrieve_artifacts(db_path, query=None, status_filter=None, limit=20, explai
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
 
+    normalized_query = normalize_text(query)
     sql = "SELECT * FROM artifacts"
     params = []
     if status_filter:
@@ -148,6 +159,9 @@ def retrieve_artifacts(db_path, query=None, status_filter=None, limit=20, explai
         supersession_table_present = False
     
     results = []
+    candidate_universe = []
+    authority_scope_values = []
+    freshness_markers = []
     for row in rows:
         artifact_id = row["id"]
         path = row['path']
@@ -156,23 +170,53 @@ def retrieve_artifacts(db_path, query=None, status_filter=None, limit=20, explai
         e_conf = row['evidence_confidence']
         indexed_at = row['indexed_at']
         
-        text_score = get_text_match_score(path, query)
+        text_score = get_text_match_score(path, normalized_query)
         fresh_score = get_freshness_score(indexed_at)
         
         score_data = calculate_orientation_score(o_status, a_scope, e_conf, fresh_score, text_score)
         
         # Filter out 0 matches if a query was provided
-        if query and text_score == 0:
+        if normalized_query and text_score == 0:
             continue
             
         result = {
+            "artifact_id": artifact_id,
             "path": path,
             "artifact_type": row['artifact_type'],
             "orientation_status": o_status,
             "authority_scope": a_scope,
             "evidence_confidence": e_conf,
-            "score": score_data["score"]
+            "score": score_data["score"],
+            "normalized_query": normalized_query,
         }
+        candidate_universe.append(
+            {
+                "candidate_id": path,
+                "canonical_name": path,
+                "eligibility_status": "ELIGIBLE",
+                "authority_status": str(a_scope or "").strip().upper() or "UNKNOWN",
+                "freshness_status": "FRESH" if fresh_score >= 0.7 else ("STALE" if fresh_score <= 0.3 else "UNKNOWN"),
+                "compatibility_status": str(o_status or "").strip().upper() or "UNKNOWN",
+                "rank_score": score_data["score"],
+                "rank_components": score_data["breakdown"],
+                "provenance": {
+                    "artifact_id": artifact_id,
+                    "path": path,
+                    "query": normalized_query,
+                    "indexed_at": indexed_at,
+                    "orientation_status": o_status,
+                    "authority_scope": a_scope,
+                },
+                "policy_rule_id": "artifact_text_match",
+            }
+        )
+        authority_scope_values.append(str(a_scope or "").strip())
+        freshness_markers.append(
+            {
+                "indexed_at": indexed_at,
+                "freshness_score": fresh_score,
+            }
+        )
         
         if explain:
             result["score_breakdown"] = score_data["breakdown"]
@@ -181,7 +225,7 @@ def retrieve_artifacts(db_path, query=None, status_filter=None, limit=20, explai
                 f"Scope: {a_scope} (weighted)",
                 f"Confidence: {e_conf} (weighted)",
                 f"Freshness: {fresh_score} (calculated from {indexed_at})",
-                f"Text Match: {text_score} (query: {query})"
+                f"Text Match: {text_score} (query: {normalized_query})"
             ]
             result["cautions"] = []
             if o_status in ["historical_residue", "superseded", "deprecated"]:
@@ -217,17 +261,51 @@ def retrieve_artifacts(db_path, query=None, status_filter=None, limit=20, explai
 
         results.append(result)
 
-    # Sort by score descending
-    results.sort(key=lambda x: x['score'], reverse=True)
-    results = results[:limit]
+    # Sort by score descending with deterministic tie-breakers.
+    results.sort(key=lambda x: (-float(x.get("score", 0.0) or 0.0), str(x.get("path") or ""), str(x.get("artifact_id") or "")))
+
+    candidate_policy = dict(get_candidate_policy("governed_context_artifact_candidates_v1"))
+    try:
+        request_limit = max(0, int(limit if limit is not None else candidate_policy.get("maximum_candidates", 20)))
+    except Exception:
+        request_limit = int(candidate_policy.get("maximum_candidates", 20) or 20)
+    candidate_policy["maximum_candidates"] = min(
+        request_limit,
+        int(candidate_policy.get("maximum_candidates", request_limit) or request_limit),
+    )
+    authority_hash = hash_json_value(sorted(set(authority_scope_values))) if authority_scope_values else hash_json_value([])
+    freshness_hash = hash_json_value(freshness_markers)
+    universe_hash = hash_candidate_universe(
+        candidate_universe,
+        candidate_type="ARTIFACT",
+        candidate_policy_id="governed_context_artifact_candidates_v1",
+        policy_version=str(candidate_policy.get("policy_version") or "1.0.0"),
+    )
+    candidate_set = build_bounded_candidate_set_v1(
+        candidate_type="ARTIFACT",
+        candidate_policy=candidate_policy,
+        universe_candidates=candidate_universe,
+        authority_hash=authority_hash,
+        freshness_hash=freshness_hash,
+        universe_hash=universe_hash,
+        operation_code="artifact_retrieval",
+        candidate_policy_id="governed_context_artifact_candidates_v1",
+        candidate_policy_version=str(candidate_policy.get("policy_version") or "1.0.0"),
+    )
+    results = results[: candidate_policy["maximum_candidates"]]
 
     conn.close()
-    
+
     output = {
         "query": query,
+        "normalized_query": normalized_query,
         "db_path": db_path,
         "results": results,
-        "warnings": []
+        "warnings": [],
+        "candidate_policy_id": candidate_set.get("candidate_policy_id"),
+        "candidate_policy_version": candidate_set.get("candidate_policy_version"),
+        "candidate_set_hash": candidate_set.get("candidate_set_hash"),
+        "candidate_set": candidate_set,
     }
 
     if explain:
@@ -235,6 +313,8 @@ def retrieve_artifacts(db_path, query=None, status_filter=None, limit=20, explai
         output["warnings"].append("Pattern-detected lineage must not be treated as source of truth.")
         if not supersession_table_present:
             output["warnings"].append("No supersession_edges table detected; lineage analysis skipped.")
+        output["candidate_provenance"] = candidate_set.get("eligible_candidates", [])
+        output["candidate_exclusions"] = candidate_set.get("excluded_candidates", [])
 
     return output
 

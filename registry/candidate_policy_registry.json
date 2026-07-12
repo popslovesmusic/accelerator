@@ -1,0 +1,288 @@
+{
+  "schema_id": "candidate_policy_registry_v1",
+  "schema_version": "1.0.0",
+  "policies": [
+    {
+      "candidate_policy_id": "governed_context_artifact_candidates_v1",
+      "candidate_type": "ARTIFACT",
+      "universe_source": "registry/db/acellorator_index.sqlite:artifacts",
+      "eligibility_filters": [
+        "query_match",
+        "authority",
+        "freshness",
+        "scope",
+        "compatibility"
+      ],
+      "authority_filters": [
+        "authority_scope"
+      ],
+      "freshness_filters": [
+        "indexed_at",
+        "db_snapshot_status"
+      ],
+      "scope_filters": [
+        "target",
+        "focus_query"
+      ],
+      "compatibility_filters": [
+        "orientation_status"
+      ],
+      "ranking_method": "score_then_path",
+      "maximum_candidates": 20,
+      "empty_set_behavior": "EMPTY_RESULT",
+      "tie_behavior": "candidate_id",
+      "policy_version": "1.0.0",
+      "status": "ACTIVE"
+    },
+    {
+      "candidate_policy_id": "registry_runtime_trace_candidates_v1",
+      "candidate_type": "ARTIFACT",
+      "universe_source": "registry/db/acellorator_index.sqlite:artifacts+tool_health",
+      "eligibility_filters": [
+        "query_match",
+        "authority",
+        "freshness",
+        "scope",
+        "compatibility"
+      ],
+      "authority_filters": [
+        "authority_scope"
+      ],
+      "freshness_filters": [
+        "indexed_at",
+        "evidence_source_path"
+      ],
+      "scope_filters": [
+        "query",
+        "tool_name"
+      ],
+      "compatibility_filters": [
+        "orientation_status",
+        "tool_health_status"
+      ],
+      "ranking_method": "score_then_path",
+      "maximum_candidates": 20,
+      "empty_set_behavior": "EMPTY_RESULT",
+      "tie_behavior": "candidate_id",
+      "policy_version": "1.0.0",
+      "status": "ACTIVE"
+    },
+    {
+      "candidate_policy_id": "governed_context_action_candidates_v1",
+      "candidate_type": "ACTION",
+      "universe_source": "scripts.query_governance._build_governed_context_candidate_actions",
+      "eligibility_filters": [
+        "governed_state"
+      ],
+      "authority_filters": [
+        "authority.decision"
+      ],
+      "freshness_filters": [
+        "freshness.db_snapshot_status"
+      ],
+      "scope_filters": [
+        "current_state.status",
+        "patch_chain.status"
+      ],
+      "compatibility_filters": [
+        "priority",
+        "trigger"
+      ],
+      "ranking_method": "priority_then_action_id",
+      "maximum_candidates": 8,
+      "empty_set_behavior": "EMPTY_RESULT",
+      "tie_behavior": "action_id",
+      "policy_version": "1.0.0",
+      "status": "ACTIVE"
+    },
+    {
+      "candidate_policy_id": "execution_plan_action_candidates_v1",
+      "candidate_type": "ACTION",
+      "universe_source": "scripts.orientation_execution_plan.generate_execution_plan",
+      "eligibility_filters": [
+        "query_substring",
+        "retrieval_result"
+      ],
+      "authority_filters": [
+        "db_health.status"
+      ],
+      "freshness_filters": [
+        "retrieval.warnings"
+      ],
+      "scope_filters": [
+        "query"
+      ],
+      "compatibility_filters": [
+        "action_type"
+      ],
+      "ranking_method": "priority_then_action_id",
+      "maximum_candidates": 4,
+      "empty_set_behavior": "EMPTY_RESULT",
+      "tie_behavior": "action_id",
+      "policy_version": "1.0.0",
+      "status": "ACTIVE"
+    },
+    {
+      "candidate_policy_id": "residue_packet_artifact_candidates_v1",
+      "candidate_type": "ARTIFACT",
+      "universe_source": "scripts.residue.residue_packet_builder.build_residue_packet",
+      "eligibility_filters": [
+        "query_match",
+        "authority",
+        "freshness"
+      ],
+      "authority_filters": [
+        "authority_scope"
+      ],
+      "freshness_filters": [
+        "indexed_at"
+      ],
+      "scope_filters": [
+        "query"
+      ],
+      "compatibility_filters": [
+        "orientation_status"
+      ],
+      "ranking_method": "score_then_path",
+      "maximum_candidates": 20,
+      "empty_set_behavior": "EMPTY_RESULT",
+      "tie_behavior": "candidate_id",
+      "policy_version": "1.0.0",
+      "status": "ACTIVE"
+    },
+    {
+      "candidate_policy_id": "tool_candidates_v1",
+      "candidate_type": "TOOL",
+      "universe_source": "registry/tool_manifest.json",
+      "eligibility_filters": [
+        "registry_present"
+      ],
+      "authority_filters": [
+        "certification_level"
+      ],
+      "freshness_filters": [
+        "last_seen"
+      ],
+      "scope_filters": [
+        "name"
+      ],
+      "compatibility_filters": [
+        "status"
+      ],
+      "ranking_method": "rank_score_then_candidate_id",
+      "maximum_candidates": 256,
+      "empty_set_behavior": "EMPTY_RESULT",
+      "tie_behavior": "candidate_id",
+      "policy_version": "1.0.0",
+      "status": "ACTIVE"
+    },
+    {
+      "candidate_policy_id": "handler_candidates_v1",
+      "candidate_type": "HANDLER",
+      "universe_source": "registry/deterministic_operation_registry.json",
+      "eligibility_filters": [
+        "registry_present"
+      ],
+      "authority_filters": [
+        "authority_class"
+      ],
+      "freshness_filters": [
+        "policy_version"
+      ],
+      "scope_filters": [
+        "operation_code"
+      ],
+      "compatibility_filters": [
+        "status"
+      ],
+      "ranking_method": "rank_score_then_candidate_id",
+      "maximum_candidates": 64,
+      "empty_set_behavior": "EMPTY_RESULT",
+      "tie_behavior": "candidate_id",
+      "policy_version": "1.0.0",
+      "status": "ACTIVE"
+    },
+    {
+      "candidate_policy_id": "file_candidates_v1",
+      "candidate_type": "FILE",
+      "universe_source": "repository_file_index",
+      "eligibility_filters": [
+        "path_match",
+        "authority",
+        "freshness"
+      ],
+      "authority_filters": [
+        "authority_scope"
+      ],
+      "freshness_filters": [
+        "indexed_at",
+        "last_modified"
+      ],
+      "scope_filters": [
+        "path",
+        "target"
+      ],
+      "compatibility_filters": [
+        "status"
+      ],
+      "ranking_method": "path_then_candidate_id",
+      "maximum_candidates": 512,
+      "empty_set_behavior": "EMPTY_RESULT",
+      "tie_behavior": "candidate_id",
+      "policy_version": "1.0.0",
+      "status": "ACTIVE"
+    },
+    {
+      "candidate_policy_id": "validator_candidates_v1",
+      "candidate_type": "VALIDATOR",
+      "universe_source": "registry/governance/schemas",
+      "eligibility_filters": [
+        "schema_present"
+      ],
+      "authority_filters": [
+        "schema_version"
+      ],
+      "freshness_filters": [
+        "last_modified"
+      ],
+      "scope_filters": [
+        "schema_id"
+      ],
+      "compatibility_filters": [
+        "status"
+      ],
+      "ranking_method": "rank_score_then_candidate_id",
+      "maximum_candidates": 64,
+      "empty_set_behavior": "EMPTY_RESULT",
+      "tie_behavior": "candidate_id",
+      "policy_version": "1.0.0",
+      "status": "ACTIVE"
+    },
+    {
+      "candidate_policy_id": "output_template_candidates_v1",
+      "candidate_type": "OUTPUT_TEMPLATE",
+      "universe_source": "registry/governance/schemas",
+      "eligibility_filters": [
+        "schema_present"
+      ],
+      "authority_filters": [
+        "schema_version"
+      ],
+      "freshness_filters": [
+        "last_modified"
+      ],
+      "scope_filters": [
+        "schema_id"
+      ],
+      "compatibility_filters": [
+        "status"
+      ],
+      "ranking_method": "rank_score_then_candidate_id",
+      "maximum_candidates": 64,
+      "empty_set_behavior": "EMPTY_RESULT",
+      "tie_behavior": "candidate_id",
+      "policy_version": "1.0.0",
+      "status": "ACTIVE"
+    }
+  ]
+}

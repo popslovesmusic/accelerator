@@ -53,6 +53,17 @@ _GOVERNED_CAPSULE_REQUIRED_SECTIONS: Tuple[str, ...] = (
     "exclusions",
     "provenance",
 )
+_GOVERNED_CAPSULE_REQUEST_IDENTITY_HASH_FIELDS: Tuple[str, ...] = (
+    "request_type",
+    "request_scope",
+    "schema_id",
+    "schema_version",
+    "command",
+    "operation_code",
+    "candidate_policy_id",
+    "candidate_policy_version",
+    "candidate_set_hash",
+)
 
 
 def _as_dict(value: Any) -> Dict[str, Any]:
@@ -177,17 +188,21 @@ def _capsule_hash(capsule: Dict[str, Any]) -> str:
 def _governed_context_capsule_hash_basis(capsule: Dict[str, Any]) -> Dict[str, Any]:
     capsule_dict = _as_dict(capsule)
     provenance = _as_dict(_first(capsule_dict, "provenance", default={}))
+    request_identity = _as_dict(_first(capsule_dict, "request_identity", default={}))
+    request_identity_basis = {
+        field: request_identity.get(field)
+        for field in _GOVERNED_CAPSULE_REQUEST_IDENTITY_HASH_FIELDS
+        if field in request_identity
+    }
     return {
         "schema_id": str(_first(capsule_dict, "schema_id", default="")),
         "schema_version": str(_first(capsule_dict, "schema_version", default="")),
         "capsule_schema_version": str(_first(capsule_dict, "capsule_schema_version", default="")),
-        "request_identity": _as_dict(_first(capsule_dict, "request_identity", default={})),
+        "request_identity": request_identity_basis,
         "section_hashes": _as_dict(_first(provenance, "section_hashes", default={})),
         "source_fingerprint": {
             "db_path": provenance.get("db_path"),
             "target": provenance.get("target"),
-            "task": provenance.get("task"),
-            "query": provenance.get("query"),
             "focus_query": provenance.get("focus_query"),
             "schema_version": provenance.get("schema_version"),
             "producer": provenance.get("producer"),

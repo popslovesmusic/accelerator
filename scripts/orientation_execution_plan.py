@@ -6,15 +6,22 @@ import datetime
 try:
     from scripts.orientation_retrieval import retrieve_artifacts
     from scripts.db.db_health_check import run_db_health_check
+    from tools.inference_governance.candidate_builder import build_bounded_candidate_set_v1
+    from tools.inference_governance.candidate_policy import get_candidate_policy, hash_candidate_universe
+    from tools.inference_governance.request_normalization import hash_json_value, normalize_text
 except ImportError:
     import sys
-    sys.path.append(os.path.dirname(__file__))
-    from orientation_retrieval import retrieve_artifacts
-    from db.db_health_check import run_db_health_check
+    sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+    from scripts.orientation_retrieval import retrieve_artifacts
+    from scripts.db.db_health_check import run_db_health_check
+    from tools.inference_governance.candidate_builder import build_bounded_candidate_set_v1
+    from tools.inference_governance.candidate_policy import get_candidate_policy, hash_candidate_universe
+    from tools.inference_governance.request_normalization import hash_json_value, normalize_text
 
 def generate_execution_plan(query, db_path, limit=10):
     # 1. Gather Orientation Context
-    retrieval = retrieve_artifacts(db_path, query, limit=limit, explain=True)
+    normalized_query = normalize_text(query, lowercase=True)
+    retrieval = retrieve_artifacts(db_path, normalized_query, limit=limit, explain=True)
     db_health, _ = run_db_health_check(db_path, "registry/db/schema.sql")
     
     plan = {
@@ -58,31 +65,91 @@ def generate_execution_plan(query, db_path, limit=10):
             plan["execution_plan"]["orientation_context"]["supersession_cautions"].extend(res["cautions"])
 
     # 2. Generate Candidate Actions (Advisory)
-    # Action: Audit
-    plan["execution_plan"]["candidate_actions"].append({
-        "action_id": "ACT-001",
-        "action_type": "audit",
-        "description": f"Perform a structural audit for query: {query}",
-        "recommended_agent": "Codex",
-        "risk_level": "low",
-        "claim_impact": "none"
-    })
-
-    # Action: Validation (if tool matches)
-    if "dynamics" in query or "sim" in query:
-        plan["execution_plan"]["candidate_actions"].append({
-            "action_id": "ACT-002",
-            "action_type": "validation",
-            "description": "Run tool health and rigor endorsement check for associated engines.",
+    candidate_universe = [
+        {
+            "candidate_id": "ACT-001",
+            "canonical_name": "audit",
+            "eligibility_status": "ELIGIBLE",
+            "authority_status": str(db_health.get("status", "unknown")).strip().upper() or "UNKNOWN",
+            "freshness_status": "FRESH",
+            "compatibility_status": "AVAILABLE",
+            "rank_score": 1.0,
+            "rank_components": {
+                "query": normalized_query,
+                "reason": "always_available",
+            },
+            "provenance": {
+                "query": normalized_query,
+                "retrieval_count": len(retrieval.get("results", [])),
+            },
+            "policy_rule_id": "execution_plan_always_audit",
+        },
+        {
+            "candidate_id": "ACT-002",
+            "canonical_name": "validation",
+            "eligibility_status": "ELIGIBLE" if ("dynamics" in normalized_query or "sim" in normalized_query) else "OUT_OF_SCOPE",
+            "authority_status": str(db_health.get("status", "unknown")).strip().upper() or "UNKNOWN",
+            "freshness_status": "FRESH" if db_health.get("status") == "pass" else "UNKNOWN",
+            "compatibility_status": "AVAILABLE" if ("dynamics" in normalized_query or "sim" in normalized_query) else "OUT_OF_SCOPE",
+            "rank_score": 0.9,
+            "rank_components": {
+                "query": normalized_query,
+                "reason": "keyword_validation_trigger",
+            },
+            "provenance": {
+                "query": normalized_query,
+                "retrieval_count": len(retrieval.get("results", [])),
+            },
+            "policy_rule_id": "execution_plan_validation_trigger",
+        },
+    ]
+    candidate_policy = get_candidate_policy("execution_plan_action_candidates_v1")
+    candidate_set = build_bounded_candidate_set_v1(
+        candidate_type="ACTION",
+        candidate_policy=candidate_policy,
+        universe_candidates=candidate_universe,
+        authority_hash=hash_json_value({
+            "db_health_status": db_health.get("status"),
+            "artifact_count": db_health.get("row_counts", {}).get("artifacts", 0),
+        }),
+        freshness_hash=hash_json_value({
+            "retrieval_query": normalized_query,
+            "retrieval_count": len(retrieval.get("results", [])),
+        }),
+        universe_hash=hash_candidate_universe(
+            candidate_universe,
+            candidate_type="ACTION",
+            candidate_policy_id="execution_plan_action_candidates_v1",
+            policy_version=str(candidate_policy.get("policy_version") or "1.0.0"),
+        ),
+        operation_code="execution_plan",
+        candidate_policy_id="execution_plan_action_candidates_v1",
+        candidate_policy_version=str(candidate_policy.get("policy_version") or "1.0.0"),
+    )
+    plan["execution_plan"]["candidate_actions"] = [
+        {
+            "action_id": candidate["candidate_id"],
+            "action_type": candidate["canonical_name"],
+            "description": (
+                f"Perform a structural audit for query: {normalized_query}"
+                if candidate["candidate_id"] == "ACT-001"
+                else "Run tool health and rigor endorsement check for associated engines."
+            ),
             "recommended_agent": "Codex",
-            "risk_level": "medium",
-            "claim_impact": "provisional_context"
-        })
+            "risk_level": "low" if candidate["candidate_id"] == "ACT-001" else "medium",
+            "claim_impact": "none" if candidate["candidate_id"] == "ACT-001" else "provisional_context",
+            "candidate_provenance": candidate.get("provenance", {}),
+        }
+        for candidate in candidate_set.get("eligible_candidates", [])
+    ]
+    plan["execution_plan"]["candidate_set"] = candidate_set
+    plan["execution_plan"]["candidate_set_hash"] = candidate_set.get("candidate_set_hash")
+    plan["execution_plan"]["candidate_policy_id"] = candidate_set.get("candidate_policy_id")
+    plan["execution_plan"]["candidate_exclusions"] = candidate_set.get("excluded_candidates", [])
 
     # Recommended sequence
-    plan["execution_plan"]["recommended_sequence"] = ["ACT-001"]
-    if len(plan["execution_plan"]["candidate_actions"]) > 1:
-        plan["execution_plan"]["recommended_sequence"].append("ACT-002")
+    plan["execution_plan"]["recommended_sequence"] = [action["action_id"] for action in plan["execution_plan"]["candidate_actions"]]
+    plan["execution_plan"]["normalized_query"] = normalized_query
 
     print(json.dumps(plan, indent=2))
     return plan

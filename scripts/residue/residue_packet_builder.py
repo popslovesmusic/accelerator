@@ -6,21 +6,25 @@ from datetime import datetime
 try:
     from scripts.orientation_retrieval import retrieve_artifacts
     from scripts.provenance.build_causal_provenance import build_causal_provenance
+    from tools.inference_governance.request_normalization import normalize_text
 except ImportError:
     import sys
-    sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-    from orientation_retrieval import retrieve_artifacts
-    from provenance.build_causal_provenance import build_causal_provenance
+    sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+    from scripts.orientation_retrieval import retrieve_artifacts
+    from scripts.provenance.build_causal_provenance import build_causal_provenance
+    from tools.inference_governance.request_normalization import normalize_text
 
 def build_residue_packet(query, db_path, mode="lossy_summary", limit=20):
     # 1. Retrieve artifacts and provenance for context
-    retrieval = retrieve_artifacts(db_path, query, limit=limit)
+    normalized_query = normalize_text(query, lowercase=True)
+    retrieval = retrieve_artifacts(db_path, normalized_query, limit=limit)
     prov = build_causal_provenance(db_path)
     
     packet = {
         "residue_packet": {
-            "packet_id": f"RES-{hashlib.md5(f'{query}{datetime.now()}'.encode()).hexdigest()[:8]}",
+            "packet_id": f"RES-{hashlib.md5(f'{normalized_query}{datetime.now()}'.encode()).hexdigest()[:8]}",
             "query": query,
+            "normalized_query": normalized_query,
             "generated_at": datetime.now().isoformat(),
             "compression_mode": mode,
             "source_artifacts": [a["path"] for a in retrieval.get("results", [])],
@@ -33,13 +37,16 @@ def build_residue_packet(query, db_path, mode="lossy_summary", limit=20):
                 "supersession_cautions": [],
                 "traceability_conflicts": []
             },
-            "compressed_summary": f"Governance summary for '{query}' based on {len(retrieval.get('results', []))} artifacts.",
+            "compressed_summary": f"Governance summary for '{normalized_query}' based on {len(retrieval.get('results', []))} artifacts.",
             "structured_facts": [],
             "open_uncertainties": ["Provenance edges are advisory.", "Historical residue requires verification."],
             "conflicts_preserved": [],
             "excluded_or_unread_sources": [],
             "evidence_links": [a["path"] for a in retrieval.get("results", [])],
             "confidence": "partial_summary",
+            "candidate_policy_id": retrieval.get("candidate_policy_id"),
+            "candidate_set_hash": retrieval.get("candidate_set_hash"),
+            "candidate_exclusions": retrieval.get("candidate_exclusions", []),
             "warnings": [
                 "Compressed residue is not source of truth.",
                 "Original evidence must be consulted for claim promotion."

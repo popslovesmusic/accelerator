@@ -43,30 +43,39 @@ GOVERNED_CONTEXT_CAPSULE_CACHE_DIR = ROOT / "outputs/governance/context_capsules
 try:
     from scripts.orientation_retrieval import retrieve_artifacts
 except ImportError:
-    if str(SCRIPT_DIR) not in sys.path:
-        sys.path.append(str(SCRIPT_DIR))
-    from orientation_retrieval import retrieve_artifacts
+    if str(ROOT) not in sys.path:
+        sys.path.append(str(ROOT))
+    from scripts.orientation_retrieval import retrieve_artifacts
 
 try:
     from scripts.registry_runtime_trace import run_registry_runtime_trace
 except ImportError:
-    if str(SCRIPT_DIR) not in sys.path:
-        sys.path.append(str(SCRIPT_DIR))
-    from registry_runtime_trace import run_registry_runtime_trace
+    if str(ROOT) not in sys.path:
+        sys.path.append(str(ROOT))
+    from scripts.registry_runtime_trace import run_registry_runtime_trace
 
 try:
     from scripts.claim_evidence_graph import build_claim_evidence_graph
 except ImportError:
-    if str(SCRIPT_DIR) not in sys.path:
-        sys.path.append(str(SCRIPT_DIR))
-    from claim_evidence_graph import build_claim_evidence_graph
+    if str(ROOT) not in sys.path:
+        sys.path.append(str(ROOT))
+    from scripts.claim_evidence_graph import build_claim_evidence_graph
 
 try:
     from scripts.db.db_health_check import run_db_health_check
 except ImportError:
-    if str(SCRIPT_DIR) not in sys.path:
-        sys.path.append(str(SCRIPT_DIR))
-    from db.db_health_check import run_db_health_check
+    if str(ROOT) not in sys.path:
+        sys.path.append(str(ROOT))
+    from scripts.db.db_health_check import run_db_health_check
+
+try:
+    from tools.inference_governance.deterministic_router import load_operation_registry, route_parsed_request
+    from tools.inference_governance.request_normalization import build_canonical_routed_request_v1, normalize_text
+except ImportError:
+    if str(ROOT) not in sys.path:
+        sys.path.append(str(ROOT))
+    from tools.inference_governance.deterministic_router import load_operation_registry, route_parsed_request
+    from tools.inference_governance.request_normalization import build_canonical_routed_request_v1, normalize_text
 
 
 BOOTSTRAP_SQL = """\
@@ -2422,15 +2431,69 @@ def _sorted_json_records(records, limit=None):
 
 
 def _build_governed_context_request_identity(db_path, normalized_target, task_text, query_text, limit):
-    request_scope = {
+    surface_request = {
+        "surface_name": "governed_context_capsule_v1",
+        "request_type": "governed_context_capsule",
+        "command": "context-capsule",
         "db_path": str(Path(db_path)),
         "target": normalized_target,
         "task": task_text,
         "query": query_text,
-        "focus_query": query_text or normalized_target or task_text,
         "limit": int(limit) if limit is not None else None,
     }
-    request_id = f"{GOVERNED_CONTEXT_CAPSULE_SCHEMA_VERSION}:{_hash_json_value(request_scope)[:16]}"
+    route_result = route_parsed_request(surface_request, load_operation_registry(), None, "scripts.query_governance")
+    canonical_focus = query_text or normalized_target or task_text
+    canonical_request = build_canonical_routed_request_v1(
+        operation_code=route_result.get("operation_code") or "governed_context_capsule",
+        target_scope={
+            "db_path": str(Path(db_path)),
+            "target": normalized_target,
+            "focus_query": canonical_focus,
+            "limit": int(limit) if limit is not None else None,
+        },
+        target_identifiers=[canonical_focus] if canonical_focus else [],
+        constraints={
+            "db_path": str(Path(db_path)),
+            "limit": int(limit) if limit is not None else None,
+        },
+        authority_requirements={
+            "surface": "governed_context_capsule",
+            "target": normalized_target,
+        },
+        freshness_requirements={
+            "surface": "governed_context_capsule",
+            "limit": int(limit) if limit is not None else None,
+        },
+        output_contract={
+            "schema_id": GOVERNED_CONTEXT_CAPSULE_SCHEMA_VERSION,
+            "schema_version": GOVERNED_CONTEXT_CAPSULE_SCHEMA_RELEASE,
+        },
+        presentation_preferences={
+            "task": task_text,
+            "query": query_text,
+        },
+        candidate_policy_id=route_result.get("candidate_policy_id") or "governed_context_artifact_candidates_v1",
+        source_request_digest=_hash_json_value(surface_request),
+        normalization_record={
+            "route_status": route_result.get("route_status"),
+            "matched_rule_id": route_result.get("matched_rule_id"),
+            "ambiguity_record": route_result.get("ambiguity_record", {}),
+            "surface_request": surface_request,
+            "normalized_target": normalized_target,
+            "canonical_focus": canonical_focus,
+        },
+    )
+    request_scope = {
+        "db_path": str(Path(db_path)),
+        "target": normalized_target,
+        "task": canonical_focus,
+        "query": canonical_focus,
+        "focus_query": canonical_focus,
+        "limit": int(limit) if limit is not None else None,
+        "operation_code": canonical_request.get("operation_code"),
+        "candidate_policy_id": canonical_request.get("candidate_policy_id"),
+    }
+    request_id = f"{GOVERNED_CONTEXT_CAPSULE_SCHEMA_VERSION}:{_hash_json_value(canonical_request)[:16]}"
     request_identity = {
         "request_id": request_id,
         "request_type": "governed_context_capsule",
@@ -2438,6 +2501,13 @@ def _build_governed_context_request_identity(db_path, normalized_target, task_te
         "schema_id": GOVERNED_CONTEXT_CAPSULE_SCHEMA_VERSION,
         "schema_version": GOVERNED_CONTEXT_CAPSULE_SCHEMA_RELEASE,
         "command": "governed-context-capsule",
+        "operation_code": canonical_request.get("operation_code"),
+        "candidate_policy_id": canonical_request.get("candidate_policy_id"),
+        "candidate_policy_version": route_result.get("candidate_policy_version"),
+        "canonical_routed_request": canonical_request,
+        "source_request_digest": _hash_json_value(surface_request),
+        "normalization_record": canonical_request.get("normalization_record", {}),
+        "surface_request": surface_request,
     }
     request_identity.update(request_scope)
     return request_identity
@@ -3414,6 +3484,19 @@ def build_governed_context_capsule_v1(db_path, target=None, task=None, query=Non
         database_health,
     )
 
+    candidate_set_hash_basis = {
+        "relevant_artifacts": relevant_artifacts,
+        "candidate_actions": candidate_actions,
+        "exclusions": exclusions,
+        "authority": normalized_authority,
+        "freshness": freshness_for_hash,
+        "patch_chain": normalized_patch_chain,
+    }
+    candidate_set_hash = _hash_json_value(candidate_set_hash_basis)
+    request_identity["candidate_set_hash"] = candidate_set_hash
+    request_identity["candidate_set_policy_id"] = request_identity.get("candidate_policy_id")
+    request_identity["candidate_set_policy_version"] = request_identity.get("candidate_policy_version")
+
     provenance_section_hashes = {
         "current_state": _hash_json_value(current_state_for_hash),
         "freshness": _hash_json_value(freshness_for_hash),
@@ -3425,6 +3508,7 @@ def build_governed_context_capsule_v1(db_path, target=None, task=None, query=Non
         "runtime_trace": _hash_json_value(normalized_trace_report),
         "database_health": _hash_json_value(database_health),
         "candidate_actions": _hash_json_value(candidate_actions),
+        "candidate_set": candidate_set_hash,
         "exclusions": _hash_json_value(exclusions),
         "recent_governance_events": _hash_json_value(recent_governance_events),
         "source_records": _hash_json_value(source_records),
@@ -3452,13 +3536,21 @@ def build_governed_context_capsule_v1(db_path, target=None, task=None, query=Non
         "schema_id": GOVERNED_CONTEXT_CAPSULE_SCHEMA_VERSION,
         "schema_version": GOVERNED_CONTEXT_CAPSULE_SCHEMA_RELEASE,
         "capsule_schema_version": GOVERNED_CONTEXT_CAPSULE_SCHEMA_VERSION,
-        "request_identity": request_identity,
+        "request_identity": {
+            "request_type": request_identity.get("request_type"),
+            "request_scope": request_identity.get("request_scope"),
+            "schema_id": request_identity.get("schema_id"),
+            "schema_version": request_identity.get("schema_version"),
+            "command": request_identity.get("command"),
+            "operation_code": request_identity.get("operation_code"),
+            "candidate_policy_id": request_identity.get("candidate_policy_id"),
+            "candidate_policy_version": request_identity.get("candidate_policy_version"),
+            "candidate_set_hash": request_identity.get("candidate_set_hash"),
+        },
         "section_hashes": provenance_section_hashes,
         "source_fingerprint": {
             "db_path": provenance["db_path"],
             "target": provenance["target"],
-            "task": provenance["task"],
-            "query": provenance["query"],
             "focus_query": provenance["focus_query"],
             "schema_version": provenance["schema_version"],
             "producer": provenance["producer"],
@@ -3524,6 +3616,10 @@ def build_governed_context_capsule_v1(db_path, target=None, task=None, query=Non
     capsule["recent_governance_events"] = recent_governance_events
     capsule["candidate_actions"] = candidate_actions
     capsule["exclusions"] = exclusions
+    capsule["candidate_set_hash"] = candidate_set_hash
+    capsule["candidate_policy_id"] = request_identity.get("candidate_policy_id")
+    capsule["candidate_policy_version"] = request_identity.get("candidate_policy_version")
+    capsule["canonical_routed_request"] = request_identity.get("canonical_routed_request")
     capsule["provenance"] = provenance
     capsule["warnings"] = warnings
     capsule["summary"] = hash_basis["summary"]
@@ -5182,9 +5278,9 @@ def load_latest_known_worktree_change():
         candidate = ROOT / normalized
         if candidate.exists():
             if is_runtime_only_freshness_path(normalized):
-                runtime_only_paths.append(candidate)
-            else:
-                source_paths.append(candidate)
+                # Runtime-only churn is ignored for governed freshness identity.
+                continue
+            source_paths.append(candidate)
 
     if source_paths:
         latest_candidate = max(source_paths, key=lambda path: path.stat().st_mtime)
@@ -6190,7 +6286,7 @@ def evaluate_patch_gate(
 
 
 def legacy_lookup(args):
-    query = args.tech_note or args.theorem or args.tool or args.claim
+    query = normalize_text(args.tech_note or args.theorem or args.tool or args.claim, lowercase=True)
     if args.open_gaps:
         query = query or "open_gaps"
 
@@ -6204,6 +6300,7 @@ def legacy_lookup(args):
             "claim": args.claim,
             "open_gaps": args.open_gaps,
         },
+        "normalized_query": query,
         "note": "Use context-capsule for the minimal runtime summary and bounded replay reconciliation coverage, current-state for live state, freshness for snapshot age, authority --target for surface ownership, authority --semantic for semantic authority, patch-chain --patch-id <PATCH_ID> --level <summary|diagnostic|governance|forensic> [--summary] for dependency resolution, debt --status for debt projections, emit-event to append governance facts, events to query recorded facts, replay-events to reconstruct limited diagnostic state, reconcile-events to compare replay against registry authority, or patch-gate --patch-id <PATCH_ID> --target <path-or-surface> --level <summary|diagnostic|governance|forensic> [--summary] to invoke the governance runtime gate.",
         "results": [],
     }
@@ -6224,7 +6321,7 @@ def legacy_lookup(args):
             SELECT path, orientation_status, authority_scope, evidence_confidence, indexed_at
             FROM artifacts
             WHERE LOWER(path) LIKE ?
-            ORDER BY indexed_at DESC
+            ORDER BY path ASC, indexed_at DESC
             LIMIT 10
             """,
             (f"%{query.lower()}%",),

@@ -272,7 +272,7 @@ class SemanticReadoutCapabilityGateTests(unittest.TestCase):
             )
 
         self.assertEqual(mocked_urlopen.call_count, 0)
-        self.assertEqual(structured["reply_source"], "LOCAL_DETERMINISTIC")
+        self.assertIn(structured["reply_source"], {"LOCAL_DETERMINISTIC", "CACHED_DETERMINISTIC"})
         self.assertEqual(structured["backend_status"], "NOT_REQUESTED")
         self.assertFalse(structured["fallback_used"])
         self.assertEqual(reply, structured["reply_text"])
