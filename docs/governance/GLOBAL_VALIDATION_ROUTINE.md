@@ -89,6 +89,22 @@ Additive bounded modes are now available when a smaller surface is needed:
 The harness now records per-stage durations and can classify a stall as semantic, runtime, or tooling-related in the generated report.
 The report now also includes `stage_results`, `slowest_stages`, `runtime_failures`, `tooling_failures`, `semantic_failures`, and a `stale_report_warning` flag so stage-localization is preserved even when the run is bounded.
 
+For narrower subtask runs, use `--stages` to trim the selected validation plan to one or more named stages, and `--list-stages` to print the available stage names for the chosen mode before running anything. Stage names accept space-separated or comma-separated input, so a focused invocation can be as small as:
+
+`python -m scripts.global_validate --registries-only --stages manifest_validation,json_parse_validation,registry_validation`
+
+Dedicated wrapper entrypoints are also available when a named surface is easier to remember than a stage list:
+
+`python scripts/validate_registry_surface.py`
+
+`python scripts/validate_governance_surface.py`
+
+`python scripts/validate_db_surface.py`
+
+`python scripts/validate_math_surface.py`
+
+`python scripts/validate_operational_surface.py`
+
 When `--history` is enabled, the harness appends a compact JSONL summary to `outputs/audits/validation_history.jsonl`. The summary is intentionally compact and excludes recursive evidence trees, so it can be used as longitudinal telemetry without becoming an authority surface.
 
 When `--trend` is enabled, the harness writes `outputs/audits/validation_trend_report.json` comparing the current run to the most recent passing full validation run by default. A specific baseline may be selected with `--trend-baseline <run_id>`. If no usable baseline exists, the trend report records `TREND_HISTORY_UNAVAILABLE` or `TREND_HISTORY_CORRUPT` and the semantic validation outcome remains unchanged.

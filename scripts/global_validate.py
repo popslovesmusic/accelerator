@@ -1018,6 +1018,41 @@ def _selected_stage_names(mode):
         "governance_integrity_validation",
     }
 
+
+def _normalize_requested_stages(raw_stages):
+    if not raw_stages:
+        return None
+
+    if isinstance(raw_stages, str):
+        raw_stages = [raw_stages]
+
+    requested = []
+    seen = set()
+    for chunk in raw_stages:
+        for stage_name in str(chunk).split(","):
+            stage_name = stage_name.strip()
+            if not stage_name or stage_name in seen:
+                continue
+            requested.append(stage_name)
+            seen.add(stage_name)
+    return requested
+
+
+def _restrict_stage_selection(stage_plan, requested_stages, parser=None):
+    if not requested_stages:
+        return None
+
+    available = {name for name, _ in stage_plan}
+    unknown = [stage_name for stage_name in requested_stages if stage_name not in available]
+    if unknown:
+        message = "Unknown validation stage(s): " + ", ".join(sorted(unknown))
+        if parser is not None:
+            parser.error(message)
+        raise ValueError(message)
+
+    return set(requested_stages)
+
+
 def _load_json_document(path):
     last_error = None
     for encoding in ("utf-8-sig", "utf-8", "cp1252", "latin-1"):
@@ -1762,11 +1797,29 @@ def main():
     parser.add_argument("--trend", action="store_true", help="Generate outputs/audits/validation_trend_report.json from prior validation history.")
     parser.add_argument("--trend-baseline", help="Select a baseline run_id for trend comparison; defaults to the most recent passing full run.")
     parser.add_argument("--no-history", action="store_true", help="Disable history writing even when trend mode is enabled.")
+    parser.add_argument("--stages", nargs="+", help="Run only the named validation stages from the selected plan. Accepts space- or comma-separated names.")
+    parser.add_argument("--list-stages", action="store_true", help="Print the available validation stages for the selected plan and exit.")
     args = parser.parse_args()
 
     root = Path(args.root)
     mode = _select_validation_mode(args)
     out_path = Path(args.out)
+
+    partial_mode = mode != "full"
+    if args.list_stages:
+        if partial_mode:
+            stage_plan, _ = _build_partial_validation_stage_plan(
+                root,
+                args,
+                mode,
+                {"current_state": None, "ledger_index": None, "patch_chain_cache": {}},
+            )
+        else:
+            stage_plan = _build_validation_stage_plan(root, args)
+        for stage_name, _ in stage_plan:
+            print(stage_name)
+        return
+
     history_path = root / "outputs/audits/validation_history.jsonl"
     trend_path = root / "outputs/audits/validation_trend_report.json"
     history_requested = bool(args.history or args.trend)
@@ -1781,7 +1834,6 @@ def main():
     run_id = f"GV-{datetime.now().strftime('%Y%m%dT%H%M%S.%f')}-{os.getpid()}"
     total_started = time.perf_counter()
 
-    partial_mode = mode != "full"
     if partial_mode:
         context = _build_partial_validation_context(root, mode)
         stage_plan, selected_stage_names = _build_partial_validation_stage_plan(root, args, mode, context)
@@ -1789,6 +1841,14 @@ def main():
         context = None
         selected_stage_names = _selected_stage_names(mode)
         stage_plan = _build_validation_stage_plan(root, args)
+
+    requested_stages = _normalize_requested_stages(args.stages)
+    if args.list_stages:
+        for stage_name, _ in stage_plan:
+            print(stage_name)
+        return
+    if requested_stages:
+        selected_stage_names = _restrict_stage_selection(stage_plan, requested_stages, parser=parser)
 
     report = {
         "run_id": run_id,
@@ -1810,6 +1870,8 @@ def main():
             "trend": args.trend,
             "trend_baseline": args.trend_baseline,
             "no_history": args.no_history,
+            "stages": requested_stages,
+            "list_stages": args.list_stages,
         },
     }
 

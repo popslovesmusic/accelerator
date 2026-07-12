@@ -1,0 +1,43 @@
+{
+  "patch_id": "ANALYSIS_DEPARTMENT_SSOT_SYNC_001",
+  "title": "Analysis Department SSOT Sync",
+  "type": "documentation_governance_sync",
+  "mode": "additive",
+  "status": "APPLIED",
+  "applied_on": "2026-07-11T22:33:39.5226291-04:00",
+  "depends_on": [
+    "PATCH_SSOT_RUNTIME_EVIDENCE_LEVELS_SYNC_009",
+    "PATCH_ACCELERATOR_CANONICAL_CONTEXT_CAPSULE_050"
+  ],
+  "department": "analysis",
+  "purpose": "Synchronize the Analysis Department SSOT with the live recommendation queue and program-state report so the recommendation evidence set and execution order remain aligned with governed state.",
+  "does_not_modify": [
+    "RT_core",
+    "governance decisions",
+    "analysis execution authority",
+    "work reduction framework",
+    "master work index"
+  ],
+  "updated_artifacts": [
+    "departments/analysis/department_ssot.md",
+    "registry/governance/patches/ANALYSIS_DEPARTMENT_SSOT_SYNC_001.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance_hash_registry.json"
+  ],
+  "summary": {
+    "status": "pass",
+    "decision_semantics": "unchanged",
+    "runtime_path": "analysis_ssot_sync",
+    "warnings": [
+      "The update refreshes evidence references and ordering narrative only.",
+      "Governed analysis recommendations remain non-authoritative."
+    ]
+  },
+  "validation": {
+    "required": [
+      "governance_validation_pass",
+      "hash_registry_refresh_pass"
+    ],
+    "result": "pass"
+  }
+}

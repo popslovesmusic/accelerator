@@ -3168,6 +3168,13 @@ Governed validation uses the module-path command:
 
 Direct file invocation via `python scripts/global_validate.py` has been restored to consistent behavior, but the module-path command remains the canonical governed invocation for documentation and agent routing.
 
+When a narrower deterministic subtask is sufficient, the validator can be sliced by stage through `--stages`, and the common surfaces are exposed as thin wrappers:
+- `python scripts/validate_registry_surface.py`
+- `python scripts/validate_governance_surface.py`
+- `python scripts/validate_db_surface.py`
+- `python scripts/validate_math_surface.py`
+- `python scripts/validate_operational_surface.py`
+
 **Active Tooling Debt Note (DEBT_VALIDATOR_IMPORT_PATH_001):**
 The validator import-path issue is now resolved in `governance/live/research_debt_registry.json`. The canonical governed command remains `python -m scripts.global_validate`, direct invocation is behaviorally aligned, and the latest governed success artifact is `outputs/audits/global_health_report.json`. Historical records that mention the old failing direct invocation are retained as non-authoritative history.
 

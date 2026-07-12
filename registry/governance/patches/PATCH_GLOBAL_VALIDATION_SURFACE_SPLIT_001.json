@@ -1,0 +1,130 @@
+{
+  "patch_id": "PATCH_GLOBAL_VALIDATION_SURFACE_SPLIT_001",
+  "title": "Global Validation Surface Split",
+  "type": "governance_validation_refactor",
+  "mode": "additive",
+  "status": "APPLIED",
+  "execution_date": "2026-07-11",
+  "applied_on": "2026-07-11T23:06:47.7238077-04:00",
+  "goal": "Break the monolithic validation invocation into deterministic stage surfaces and thin wrapper entrypoints so narrower subtask runs finish faster without changing validation semantics.",
+  "problem_statement": {
+    "current_state": "scripts/global_validate.py can execute multiple validation stages, but callers still have to invoke the broad surface and reconstruct stage subsets themselves.",
+    "gap": "There is no canonical surface helper or named wrapper entrypoints for the common validation subsets.",
+    "risk": "Wide invocations keep the context surface large, make focused validation harder to remember, and encourage redundant stage selection logic."
+  },
+  "basis": {
+    "source_patches": [
+      "PATCH_GOVERNANCE_RUNTIME_EVIDENCE_LEVELS_008",
+      "PATCH_ACCELERATOR_CANONICAL_CONTEXT_CAPSULE_050",
+      "ANALYSIS_DEPARTMENT_SSOT_SYNC_001"
+    ],
+    "source_surfaces": [
+      "scripts/global_validate.py",
+      "scripts/validation_surface_wrapper.py",
+      "scripts/validate_registry_surface.py",
+      "scripts/validate_governance_surface.py",
+      "scripts/validate_db_surface.py",
+      "scripts/validate_math_surface.py",
+      "scripts/validate_operational_surface.py",
+      "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+      "docs/textbook/mono_process_textbook_complete.md"
+    ],
+    "scope": "Add deterministic stage slicing and thin surface wrappers without changing validation semantics or governance authority."
+  },
+  "target_files": [
+    "scripts/global_validate.py",
+    "scripts/validation_surface_wrapper.py",
+    "scripts/validate_registry_surface.py",
+    "scripts/validate_governance_surface.py",
+    "scripts/validate_db_surface.py",
+    "scripts/validate_math_surface.py",
+    "scripts/validate_operational_surface.py",
+    "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+    "docs/textbook/mono_process_textbook_complete.md"
+  ],
+  "required_repo_changes": [
+    {
+      "path": "scripts/global_validate.py",
+      "description": "Add stage selection flags and named stage listing so the validator can run a bounded subset of its plan."
+    },
+    {
+      "path": "scripts/validation_surface_wrapper.py",
+      "description": "Add a thin helper that forwards fixed stage subsets and optional mode flags to the canonical validator."
+    },
+    {
+      "path": "scripts/validate_registry_surface.py",
+      "description": "Expose the registry-oriented validation surface as a thin wrapper."
+    },
+    {
+      "path": "scripts/validate_governance_surface.py",
+      "description": "Expose the governance-oriented validation surface as a thin wrapper."
+    },
+    {
+      "path": "scripts/validate_db_surface.py",
+      "description": "Expose the database-oriented validation surface as a thin wrapper."
+    },
+    {
+      "path": "scripts/validate_math_surface.py",
+      "description": "Expose the math-oriented validation surface as a thin wrapper."
+    },
+    {
+      "path": "scripts/validate_operational_surface.py",
+      "description": "Expose the operational validation surface as a thin wrapper."
+    },
+    {
+      "path": "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+      "description": "Document the stage slicing and wrapper entrypoints for governed validation."
+    },
+    {
+      "path": "docs/textbook/mono_process_textbook_complete.md",
+      "description": "Synchronize the textbook governance note with the validation surface split."
+    }
+  ],
+  "runtime_changes": {
+    "stage_slicing": true,
+    "stage_listing": true,
+    "decision_semantics": "unchanged",
+    "wrapper_entrypoints": [
+      "python scripts/validate_registry_surface.py",
+      "python scripts/validate_governance_surface.py",
+      "python scripts/validate_db_surface.py",
+      "python scripts/validate_math_surface.py",
+      "python scripts/validate_operational_surface.py"
+    ],
+    "wrapper_mode_flags": {
+      "registry": "--registries-only",
+      "governance": "--governance-only",
+      "db": "--db-only",
+      "math": "--math-only",
+      "operational": null
+    }
+  },
+  "acceptance_criteria": [
+    "python -m scripts.global_validate --list-stages prints the selected stage names for the active mode.",
+    "Each surface wrapper runs only its fixed stage subset under the correct mode flag.",
+    "Registry, governance, db, math, and operational surfaces run without independent state reconstruction.",
+    "Documentation and textbook references note the surface split.",
+    "Hash registry and ledger records are updated."
+  ],
+  "summary": {
+    "status": "pass",
+    "runtime": {
+      "stage_slicing": "active",
+      "decision_semantics": "unchanged"
+    },
+    "warnings": [
+      "Stage slicing is additive and does not change validation semantics.",
+      "The wrapper scripts are compatibility surfaces, not new governance authorities."
+    ]
+  },
+  "validation": {
+    "required": [
+      "py_compile_pass",
+      "stage_list_pass",
+      "wrapper_smoke_pass",
+      "governance_validation_pass",
+      "hash_registry_refresh_pass"
+    ],
+    "result": "pass"
+  }
+}
