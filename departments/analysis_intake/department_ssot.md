@@ -130,6 +130,18 @@ Artifact paths:
 
 ---
 
+## Induction Routing
+
+The Analysis Intake Department is the local place for induction-class packet intake and pre-analysis normalization when a packet or study needs governed clarification before downstream review.
+
+- Induction packets are handled as intake-layer inputs.
+- Analysis Intake may extract definitions, dependency gaps, open questions, and support levels.
+- Analysis Intake does not promote or authorize the induced claims.
+- When an induction packet is relevant to current program state, it is routed toward `candidate_inductions` or the appropriate downstream review surface as a provisional item, not as authority.
+- RT-calculus induction packets such as `RT_CALCULUS_AI_INDUCTION_PACKET_003` belong here as provisional intake material while their definitions remain under review.
+
+---
+
 ## Dependencies on Global Core
 
 The Analysis Intake Department depends on:

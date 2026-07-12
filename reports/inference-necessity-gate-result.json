@@ -1,0 +1,75 @@
+{
+  "report_id": "inference_necessity_gate_result_v1",
+  "captured_at": "2026-07-12T04:41:27.2319140-04:00",
+  "shared_gate": {
+    "path": "tools/inference_governance/inference_necessity_gate.py",
+    "function": "evaluate_inference_necessity_gate",
+    "line_range": "478-636",
+    "schema_version": "1.0.0",
+    "default_decision": "DENY"
+  },
+  "boundary_registry": {
+    "path": "registry/inference_boundary_registry.json",
+    "schema_id": "inference_boundary_registry_v1",
+    "schema_version": "1.0.0",
+    "boundaries_discovered": 1,
+    "boundaries_registered": 1,
+    "active": 0,
+    "latent": 1,
+    "test_only": 0,
+    "deprecated": 0,
+    "false_positives": [
+      "gpt_folder_bridge/bridge.py"
+    ]
+  },
+  "direct_provider_scan": {
+    "matches": [
+      {
+        "path": "tools/signal_scope_phase_continuation_engine/core/semantic_readout.py",
+        "pattern": "urllib.request.urlopen("
+      }
+    ],
+    "allowlisted_paths": [
+      "tools/signal_scope_phase_continuation_engine/core/semantic_readout.py"
+    ]
+  },
+  "semantic_readout": {
+    "registered": true,
+    "routed_through_shared_gate": true,
+    "default_budget_zero": true,
+    "open_mode_disabled": true,
+    "local_fallback_preserved": true,
+    "single_request_proof": "pass",
+    "deny_by_default": "pass"
+  },
+  "shared_gate_cases": [
+    {
+      "case_id": "UNKNOWN_BOUNDARY_DENIAL",
+      "decision": "DENY_BOUNDARY_NOT_REGISTERED",
+      "authorized": false
+    },
+    {
+      "case_id": "REGISTERED_BOUNDARY_AUTHORIZE",
+      "decision": "AUTHORIZE_CONSTRAINED_INFERENCE",
+      "authorized": true,
+      "authorized_mode": "CONSTRAINED"
+    }
+  ],
+  "validation": {
+    "python_compilation": "pass",
+    "semantic_readout_unittest": "pass",
+    "inference_governance_unittest": "pass",
+    "git_diff_check": "pending"
+  },
+  "metrics": {
+    "gate_evaluations": 2,
+    "gate_denials": 1,
+    "gate_authorizations": 1,
+    "actual_inference_calls": 1,
+    "local_fallback_count": 1
+  },
+  "notes": [
+    "The shared gate authorizes a constrained mock network path only when the boundary registry, caller/purpose allowlists, capsule validation, deterministic-attempt record, material uncertainty, and bounded budget all satisfy the gate.",
+    "The semantic readout adapter still returns the deterministic local reply when the gate denies or when the network boundary fails."
+  ]
+}

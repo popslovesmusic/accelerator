@@ -1,0 +1,76 @@
+{
+  "patch_id": "PATCH_ACCELERATOR_SEMANTIC_READOUT_CAPABILITY_GATE_051",
+  "status": "pass",
+  "captured_at": "2026-07-12T03:30:17.3872606-04:00",
+  "validation": {
+    "py_compile_pass": true,
+    "targeted_semantic_readout_tests_passed": 7,
+    "governed_context_capsule_regression_tests_passed": 4
+  },
+  "network_proof": {
+    "default_request_count": 0,
+    "gate_denials_observed": 4,
+    "denied_request_count": 0,
+    "authorized_mock_request_count": 1,
+    "failure_request_count": 1,
+    "retry_count": 0
+  },
+  "boundary_outcomes": {
+    "default_local": {
+      "backend_status": "NOT_REQUESTED",
+      "reply_source": "LOCAL_DETERMINISTIC"
+    },
+    "capability_disabled": {
+      "authorization_reason": "CAPABILITY_DISABLED",
+      "network_attempted": false
+    },
+    "missing_caller": {
+      "authorization_reason": "CALLER_MISSING",
+      "network_attempted": false
+    },
+    "invalid_capsule_hash": {
+      "authorization_reason": "CAPSULE_HASH_INVALID",
+      "network_attempted": false
+    },
+    "missing_capsule": {
+      "authorization_reason": "CAPSULE_MISSING",
+      "network_attempted": false
+    },
+    "authorized_success": {
+      "authorization_reason": "AUTHORIZED",
+      "network_attempted": true,
+      "reply_source": "NETWORK_MODEL"
+    },
+    "network_failure": {
+      "authorization_reason": "AUTHORIZED",
+      "network_attempted": true,
+      "reply_source": "LOCAL_DETERMINISTIC",
+      "backend_status": "FAILED"
+    }
+  },
+  "telemetry_events_observed": [
+    "BOUNDARY_EVALUATED",
+    "BOUNDARY_DENIED",
+    "NETWORK_REQUEST_STARTED",
+    "NETWORK_REQUEST_SUCCEEDED",
+    "NETWORK_REQUEST_FAILED",
+    "LOCAL_REPLY_RETURNED"
+  ],
+  "redaction_checks": {
+    "prompt_logged_by_default": false,
+    "credential_logged_by_default": false
+  },
+  "caller_state": {
+    "repo_local_callers_found": 0,
+    "callers": []
+  },
+  "conclusion": [
+    "Network inference is disabled by default.",
+    "Environment variables alone do not authorize the network boundary.",
+    "A valid caller, purpose, capsule, endpoint, credential, model, and budget are required.",
+    "Every denied invocation returns the deterministic local reply.",
+    "Every authorized invocation performs at most one network request.",
+    "Automatic retries remain disabled.",
+    "Boundary telemetry is emitted for every decision path."
+  ]
+}

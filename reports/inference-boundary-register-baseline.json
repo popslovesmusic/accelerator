@@ -1,0 +1,76 @@
+{
+  "report_id": "inference_boundary_register_baseline_v1",
+  "captured_at": "2026-07-12T04:41:27.2319140-04:00",
+  "capture_method": "reconstructed_from_pre_patch_discovery_notes",
+  "scope": {
+    "repository_root": "D:/projects/acellorator",
+    "scan_roots": [
+      "scripts",
+      "tools",
+      "tests",
+      "gpt_folder_bridge",
+      "departments"
+    ]
+  },
+  "summary": {
+    "boundaries_found": 1,
+    "test_only_surfaces": 1,
+    "activation_surfaces": 1,
+    "false_positives": 1,
+    "direct_provider_matches": 1
+  },
+  "discovered_boundaries": [
+    {
+      "boundary_id": "SEMANTIC_READOUT_OPTIONAL_OPENAI_001",
+      "path": "tools/signal_scope_phase_continuation_engine/core/semantic_readout.py",
+      "symbol": "_openai_compatible_reply",
+      "status": "LATENT",
+      "authority_class": "PRESENTATION_ONLY",
+      "line_range": "1105-1271",
+      "caller_state": "analysis_intake.worker",
+      "activation_conditions": [
+        "enable_network_semantic_readout=true",
+        "backend=openai_compatible",
+        "model_id present",
+        "endpoint permitted",
+        "credential present",
+        "caller allowed",
+        "purpose allowed",
+        "governed capsule valid",
+        "positive bounded budget"
+      ],
+      "fallback_state": "local deterministic reply",
+      "retry_state": "zero retry by default",
+      "gate_state": "implicit local-only necessity logic before patch 052"
+    }
+  ],
+  "test_only_surfaces": [
+    {
+      "path": "tests/test_semantic_readout_capability_gate.py",
+      "symbol": "SemanticReadoutCapabilityGateTests",
+      "classification": "TEST_ONLY",
+      "line_range": "128-128"
+    }
+  ],
+  "activation_surfaces": [
+    {
+      "path": "tools/signal_scope_phase_continuation_engine/config/config_v14_terminal.json",
+      "symbol": "semantic_readout",
+      "classification": "LATENT_CONFIGURATION",
+      "line_range": "119-119"
+    }
+  ],
+  "false_positives": [
+    {
+      "path": "gpt_folder_bridge/bridge.py",
+      "symbol": "API_KEY",
+      "classification": "FALSE_POSITIVE",
+      "reason": "Local authenticated file bridge stub; no model/provider invocation.",
+      "line_range": "5-11"
+    }
+  ],
+  "notes": [
+    "The baseline was reconstructed from the pre-patch discovery pass because patch 052 was applied after the initial search results were gathered.",
+    "Only one executable boundary was found in repository source; the rest of the surfaces were test-only, latent configuration, or false positives."
+  ]
+}

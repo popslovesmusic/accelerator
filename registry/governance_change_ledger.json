@@ -1872,6 +1872,27 @@
                         "diff_report":  "registry/governance/patches/PATCH_ACCELERATOR_CANONICAL_CONTEXT_CAPSULE_050.json"
                     },
                     {
+                        "change_id":  "CHG_ACCELERATOR_SEMANTIC_READOUT_CAPABILITY_GATE_051",
+                        "patch_id":  "PATCH_ACCELERATOR_SEMANTIC_READOUT_CAPABILITY_GATE_051",
+                        "timestamp":  "2026-07-12T03:32:56.9320875-04:00",
+                        "authorizer":  "USER",
+                        "applied_on":  "2026-07-12T03:32:56.9320875-04:00",
+                        "description":  "Harden the optional semantic readout boundary with an explicit capability gate, governed capsule validation, zero-retry default, structured telemetry, and preserved deterministic local fallback.",
+                        "affected_assets":  [
+                                                "tools/signal_scope_phase_continuation_engine/core/semantic_readout.py",
+                                                "tools/signal_scope_phase_continuation_engine/config/config_v14_terminal.json",
+                                                "tests/test_semantic_readout_capability_gate.py",
+                                                "reports/semantic-readout-boundary-baseline.json",
+                                                "reports/semantic-readout-capability-gate-result.json",
+                                                "reports/semantic-readout-state-diagram.md",
+                                                "registry/governance/patches/PATCH_ACCELERATOR_SEMANTIC_READOUT_CAPABILITY_GATE_051.json",
+                                                "registry/governance_change_ledger.json",
+                                                "registry/governance_hash_registry.json"
+                                            ],
+                        "approval_reference":  "PATCH_ACCELERATOR_SEMANTIC_READOUT_CAPABILITY_GATE_051",
+                        "diff_report":  "registry/governance/patches/PATCH_ACCELERATOR_SEMANTIC_READOUT_CAPABILITY_GATE_051.json"
+                    },
+                    {
                         "change_id":  "CHG_ANALYSIS_DEPARTMENT_SSOT_SYNC_001",
                         "patch_id":  "ANALYSIS_DEPARTMENT_SSOT_SYNC_001",
                         "timestamp":  "2026-07-11T22:33:39.5226291-04:00",
@@ -1910,6 +1931,32 @@
                                             ],
                         "approval_reference":  "PATCH_GLOBAL_VALIDATION_SURFACE_SPLIT_001",
                         "diff_report":  "registry/governance/patches/PATCH_GLOBAL_VALIDATION_SURFACE_SPLIT_001.json"
+                    },
+                    {
+                        "change_id":  "CHG_ACCELERATOR_INFERENCE_NECESSITY_GATE_052",
+                        "patch_id":  "PATCH_ACCELERATOR_INFERENCE_NECESSITY_GATE_052",
+                        "timestamp":  "2026-07-12T04:48:17.7812995-04:00",
+                        "authorizer":  "USER",
+                        "applied_on":  "2026-07-12T04:48:17.7812995-04:00",
+                        "description":  "Establish a repository-wide inference necessity gate, register the optional semantic-readout boundary, and route semantic readout through the shared gate so direct inference requests are denied unless deterministic methods are exhausted, uncertainty is material, capsule validation succeeds, and budget is available.",
+                        "affected_assets":  [
+                                                "tools/inference_governance/__init__.py",
+                                                "tools/inference_governance/inference_necessity_gate.py",
+                                                "tools/signal_scope_phase_continuation_engine/core/semantic_readout.py",
+                                                "registry/inference_boundary_registry.json",
+                                                "schemas/inference_boundary_registry_v1.schema.json",
+                                                "schemas/inference_gate_event_v1.schema.json",
+                                                "tests/inference_governance/__init__.py",
+                                                "tests/inference_governance/test_no_ungated_inference_boundaries.py",
+                                                "reports/inference-boundary-register-baseline.json",
+                                                "reports/inference-necessity-gate-result.json",
+                                                "reports/inference-boundary-call-graph.md",
+                                                "registry/governance/patches/PATCH_ACCELERATOR_INFERENCE_NECESSITY_GATE_052.json",
+                                                "registry/governance_change_ledger.json",
+                                                "registry/governance_hash_registry.json"
+                                            ],
+                        "approval_reference":  "PATCH_ACCELERATOR_INFERENCE_NECESSITY_GATE_052",
+                        "diff_report":  "registry/governance/patches/PATCH_ACCELERATOR_INFERENCE_NECESSITY_GATE_052.json"
                     }
                 ]
 }
