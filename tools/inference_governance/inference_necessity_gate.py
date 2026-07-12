@@ -487,6 +487,8 @@ def evaluate_inference_necessity_gate(
     candidate_set: Optional[Iterable[Any]],
     inference_budget: Optional[Dict[str, Any]],
     boundary_policy: Optional[Dict[str, Any]] = None,
+    decision_cache_store: Optional[Any] = None,
+    cache_request: Optional[Dict[str, Any]] = None,
     telemetry_sink: Optional[Callable[[Dict[str, Any]], None]] = None,
     registry_path: Optional[str | Path] = None,
 ) -> Dict[str, Any]:
@@ -511,6 +513,104 @@ def evaluate_inference_necessity_gate(
     remaining_uncertainty = dict(uncertainty)
     candidate_count = len(candidate_values)
     effective_budget = _merge_budget(budget_ceiling, request_budget)
+    cache_lookup_result = None
+    cache_lookup_payload = None
+    cached_result = None
+
+    if decision_cache_store is not None and cache_request is not None:
+        try:
+            cache_lookup_result = decision_cache_store.lookup(cache_request)
+        except Exception:
+            cache_lookup_result = None
+        if cache_lookup_result is not None:
+            cache_lookup_payload = cache_lookup_result.as_dict()
+            if cache_lookup_result.hit:
+                attempt["cache_answer_available"] = True
+                attempt_results = dict(attempt.get("results") or {})
+                cache_attempt_result = dict(attempt_results.get("CACHE") or {})
+                cache_attempt_result["cache_answer_available"] = True
+                cache_attempt_result["cache_scope"] = "decision_cache"
+                attempt_results["CACHE"] = cache_attempt_result
+                attempt["results"] = attempt_results
+                cached_result = dict(cache_lookup_result.result or {})
+                decision = "DENY_CACHE_RESULT_AVAILABLE"
+                reason_code = "CACHE_RESULT_AVAILABLE"
+                authorized = False
+                authorized_mode = "NONE"
+
+                evaluation_event = _build_gate_event(
+                    event_type="GATE_EVALUATED",
+                    decision=decision,
+                    reason_code=reason_code,
+                    boundary_id=boundary_text,
+                    caller_id=caller_text,
+                    purpose_code=purpose_text,
+                    request_id=request_text,
+                    capsule_hash=capsule_hash,
+                    deterministic_methods_considered=deterministic_methods_attempted,
+                    deterministic_methods_executed=deterministic_methods_executed,
+                    remaining_uncertainty=remaining_uncertainty,
+                    candidate_count=candidate_count,
+                    effective_budget=effective_budget,
+                    actual_calls=0,
+                    actual_input_tokens=None,
+                    actual_output_tokens=None,
+                    latency_ms=(time.perf_counter() - started_at) * 1000.0,
+                    fallback_used=False,
+                    error_class=None,
+                )
+                evaluation_event_id = _emit_gate_event(evaluation_event, telemetry_sink=telemetry_sink)
+
+                decision_event = _build_gate_event(
+                    event_type="GATE_DENIED",
+                    decision=decision,
+                    reason_code=reason_code,
+                    boundary_id=boundary_text,
+                    caller_id=caller_text,
+                    purpose_code=purpose_text,
+                    request_id=request_text,
+                    capsule_hash=capsule_hash,
+                    deterministic_methods_considered=deterministic_methods_attempted,
+                    deterministic_methods_executed=deterministic_methods_executed,
+                    remaining_uncertainty=remaining_uncertainty,
+                    candidate_count=candidate_count,
+                    effective_budget=effective_budget,
+                    actual_calls=0,
+                    actual_input_tokens=None,
+                    actual_output_tokens=None,
+                    latency_ms=(time.perf_counter() - started_at) * 1000.0,
+                    fallback_used=False,
+                    error_class=None,
+                )
+                telemetry_event_id = _emit_gate_event(decision_event, telemetry_sink=telemetry_sink)
+                return {
+                    "decision": decision,
+                    "authorized": False,
+                    "reason_code": reason_code,
+                    "boundary_id": boundary_text,
+                    "caller_id": caller_text,
+                    "purpose_code": purpose_text,
+                    "request_id": request_text,
+                    "capsule_hash": capsule_hash,
+                    "capsule_valid": capsule_valid,
+                    "capsule_errors": capsule_errors,
+                    "deterministic_methods_attempted": deterministic_methods_attempted,
+                    "remaining_uncertainty": remaining_uncertainty,
+                    "candidate_count": candidate_count,
+                    "authorized_mode": authorized_mode,
+                    "effective_budget": effective_budget,
+                    "telemetry_event_id": telemetry_event_id,
+                    "evaluation_event_id": evaluation_event_id,
+                    "boundary_registry": registry,
+                    "boundary_entry": boundary_entry,
+                    "boundary_policy": merged_policy,
+                    "deterministic_attempt_record": attempt,
+                    "uncertainty_record": uncertainty,
+                    "candidate_set": candidate_values,
+                    "cache_lookup": cache_lookup_payload,
+                    "cached_result": cached_result,
+                    "cache_hit": True,
+                }
 
     decision = "DENY_BOUNDARY_NOT_REGISTERED"
     reason_code = decision
@@ -639,6 +739,9 @@ def evaluate_inference_necessity_gate(
         "deterministic_attempt_record": attempt,
         "uncertainty_record": uncertainty,
         "candidate_set": candidate_values,
+        "cache_lookup": cache_lookup_payload,
+        "cached_result": cached_result,
+        "cache_hit": False if cache_lookup_result is None else bool(getattr(cache_lookup_result, "hit", False)),
     }
 
 

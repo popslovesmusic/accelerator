@@ -11,6 +11,7 @@ import urllib.error
 import urllib.request
 from dataclasses import dataclass
 from datetime import datetime, timezone
+from pathlib import Path
 from typing import Any, Callable, Dict, Optional, Tuple
 
 try:
@@ -19,9 +20,22 @@ except Exception:  # pragma: no cover - fallback only for constrained import env
     qg = None
 
 try:
-    from tools.inference_governance import evaluate_inference_necessity_gate
+    from tools.inference_governance import DecisionCacheStore, DEFAULT_DECISION_CACHE_DB_PATH, evaluate_inference_necessity_gate
+    from tools.inference_governance.cache_keys import build_semantic_readout_cache_context
 except Exception:  # pragma: no cover - fallback only for constrained import environments
+    DecisionCacheStore = None
+    DEFAULT_DECISION_CACHE_DB_PATH = None
+    build_semantic_readout_cache_context = None
     evaluate_inference_necessity_gate = None
+
+try:
+    from tools.inference_governance.cache_policy import (
+        REPLY_SOURCE_CACHED_ACCEPTED_OUTPUT,
+        REPLY_SOURCE_CACHED_DETERMINISTIC,
+    )
+except Exception:  # pragma: no cover - fallback only for constrained import environments
+    REPLY_SOURCE_CACHED_ACCEPTED_OUTPUT = "CACHED_ACCEPTED_OUTPUT"
+    REPLY_SOURCE_CACHED_DETERMINISTIC = "CACHED_DETERMINISTIC"
 
 
 LOGGER = logging.getLogger(__name__)
@@ -670,6 +684,17 @@ def _semantic_readout_capability_gate(
     authorized = False
     authorization_reason = subordinate_reason if subordinate_reason != "AUTHORIZED" else "NOT_REQUESTED"
     if network_requested and subordinate_reason == "AUTHORIZED" and evaluate_inference_necessity_gate is not None:
+        cache_request = _semantic_readout_cache_context(
+            prompt=prompt,
+            runtime_output=runtime_output,
+            cfg=cfg,
+            caller_id=caller_text,
+            purpose_code=purpose_text,
+            governed_context_capsule=capsule_dict,
+            candidate_ids=(model_id or backend,),
+            decision_type="semantic_readout.network_reply",
+        )
+        cache_store = _semantic_readout_cache_store(cfg)
         shared_gate = evaluate_inference_necessity_gate(
             boundary_id="SEMANTIC_READOUT_OPTIONAL_OPENAI_001",
             caller_id=caller_text,
@@ -680,6 +705,8 @@ def _semantic_readout_capability_gate(
             uncertainty_record=uncertainty_record,
             candidate_set=candidate_set,
             inference_budget=inference_budget,
+            decision_cache_store=cache_store,
+            cache_request=cache_request,
             telemetry_sink=None,
         )
         authorized = bool(_first(shared_gate, "authorized", default=False))
@@ -696,6 +723,9 @@ def _semantic_readout_capability_gate(
     authorization_result = "AUTHORIZED" if authorized else ("DENIED" if network_requested else "NOT_REQUESTED")
     remaining_budget = max(0, int(cfg.network_retry_budget) - (1 if authorized else 0))
     shared_reason_code = str(_first(shared_gate, "reason_code", default="DENY_BOUNDARY_NOT_REGISTERED" if network_requested else "NOT_REQUESTED")).strip()
+    shared_cache_hit = bool(_first(shared_gate, "cache_hit", default=False))
+    shared_cache_lookup = _first(shared_gate, "cache_lookup", default=None)
+    shared_cached_result = _as_dict(_first(shared_gate, "cached_result", default={})) if shared_cache_hit else {}
 
     return {
         "authorized": bool(authorized),
@@ -719,6 +749,9 @@ def _semantic_readout_capability_gate(
         "shared_gate_telemetry_event_id": _first(shared_gate, "telemetry_event_id", default=""),
         "shared_gate_evaluation_event_id": _first(shared_gate, "evaluation_event_id", default=""),
         "shared_gate_effective_budget": dict(_first(shared_gate, "effective_budget", default=inference_budget) or inference_budget),
+        "cache_hit": shared_cache_hit,
+        "cache_lookup": shared_cache_lookup,
+        "cached_result": shared_cached_result,
         "deterministic_attempt_record": attempt_record,
         "uncertainty_record": uncertainty_record,
         "candidate_set": list(candidate_set),
@@ -772,6 +805,7 @@ class SemanticReadoutConfig:
     allowed_purposes: Tuple[str, ...] = ()
     telemetry_enabled: bool = True
     log_prompt_content: bool = False
+    decision_cache_path: str = ""
 
 
 def _load_cfg(config: Optional[Dict[str, Any]]) -> SemanticReadoutConfig:
@@ -798,7 +832,105 @@ def _load_cfg(config: Optional[Dict[str, Any]]) -> SemanticReadoutConfig:
         allowed_purposes=_normalize_string_list(_first(sr, "allowed_purposes", "permitted_purposes", default=())),
         telemetry_enabled=bool(_first(sr, "telemetry_enabled", default=True)),
         log_prompt_content=bool(_first(sr, "log_prompt_content", default=False)),
+        decision_cache_path=str(_first(sr, "decision_cache_path", "cache_path", default="")).strip(),
     )
+
+
+def _semantic_readout_config_mapping(cfg: SemanticReadoutConfig) -> Dict[str, Any]:
+    return {
+        "semantic_readout": {
+            "enabled": bool(cfg.enabled),
+            "backend": str(cfg.backend),
+            "style": str(cfg.style),
+            "max_sentences": int(cfg.max_sentences),
+            "include_followup_question": bool(cfg.include_followup_question),
+            "caution_hedge_threshold": float(cfg.caution_hedge_threshold),
+            "hold_explain": bool(cfg.hold_explain),
+            "openai_compatible": {
+                "base_url": str(cfg.openai_base_url),
+                "model": str(cfg.openai_model),
+                "timeout_s": float(cfg.openai_timeout_s),
+            },
+            "enable_network_semantic_readout": bool(cfg.enable_network_semantic_readout),
+            "allowed_network_endpoints": list(cfg.allowed_network_endpoints),
+            "network_retry_budget": int(cfg.network_retry_budget),
+            "allowed_callers": list(cfg.allowed_callers),
+            "allowed_purposes": list(cfg.allowed_purposes),
+            "telemetry_enabled": bool(cfg.telemetry_enabled),
+            "log_prompt_content": bool(cfg.log_prompt_content),
+        }
+    }
+
+
+def _semantic_readout_cache_store(cfg: SemanticReadoutConfig) -> Optional[Any]:
+    if DecisionCacheStore is None:
+        return None
+    cache_path = str(cfg.decision_cache_path or "").strip()
+    if cache_path:
+        return DecisionCacheStore(Path(cache_path))
+    if DEFAULT_DECISION_CACHE_DB_PATH is not None:
+        return DecisionCacheStore(DEFAULT_DECISION_CACHE_DB_PATH)
+    return None
+
+
+def _semantic_readout_cache_context(
+    *,
+    prompt: str,
+    runtime_output: Dict[str, Any],
+    cfg: SemanticReadoutConfig,
+    caller_id: Optional[str],
+    purpose_code: Optional[str],
+    governed_context_capsule: Optional[Dict[str, Any]],
+    candidate_ids: Tuple[str, ...],
+    decision_type: str,
+) -> Dict[str, Any]:
+    if build_semantic_readout_cache_context is None:
+        return {}
+    return build_semantic_readout_cache_context(
+        prompt=prompt,
+        runtime_output=runtime_output,
+        config=_semantic_readout_config_mapping(cfg),
+        caller_id=str(caller_id or ""),
+        purpose_code=str(purpose_code or ""),
+        governed_context_capsule=dict(governed_context_capsule or {}),
+        candidate_ids=candidate_ids,
+        decision_type=decision_type,
+    )
+
+
+def _semantic_readout_cache_hit_result(
+    *,
+    cached_result: Dict[str, Any],
+    cfg: SemanticReadoutConfig,
+    gate: Dict[str, Any],
+    telemetry_sink: Optional[Callable[[Dict[str, Any]], None]],
+    start: float,
+    network_attempted: bool,
+) -> Dict[str, Any]:
+    fallback_used = bool(_first(cached_result, "fallback_used", default=False))
+    _emit_semantic_readout_event(
+        cfg=cfg,
+        gate=gate,
+        event_type="BOUNDARY_EVALUATED",
+        outcome="CACHE_HIT",
+        fallback_used=fallback_used,
+        error_class="NONE",
+        telemetry_sink=telemetry_sink,
+        start=start,
+        network_attempted=network_attempted,
+    )
+    _emit_semantic_readout_event(
+        cfg=cfg,
+        gate=gate,
+        event_type="LOCAL_REPLY_RETURNED",
+        outcome="CACHE_HIT",
+        fallback_used=fallback_used,
+        error_class="NONE",
+        telemetry_sink=telemetry_sink,
+        start=start,
+        network_attempted=network_attempted,
+    )
+    return dict(cached_result)
 
 
 def _extract_runtime_summary(runtime_output: Dict[str, Any]) -> Dict[str, Any]:
@@ -1008,7 +1140,7 @@ def _emit_semantic_readout_event(
 
 def _semantic_readout_authorization_error_class(reason_code: str) -> str:
     reason = str(reason_code or "").strip()
-    if reason in {"NOT_REQUESTED", "CAPABILITY_DISABLED", "BACKEND_LOCAL", "BACKEND_NOT_EXPLICIT", "AUTHORIZED"}:
+    if reason in {"NOT_REQUESTED", "CAPABILITY_DISABLED", "BACKEND_LOCAL", "BACKEND_NOT_EXPLICIT", "AUTHORIZED", "CACHE_RESULT_AVAILABLE"}:
         return "NONE"
     if reason == "CONFIG_INVALID":
         return "CONFIGURATION_ERROR"
@@ -1121,9 +1253,54 @@ def _openai_compatible_reply(
         purpose_code=purpose_code,
         governed_context_capsule=governed_context_capsule,
     )
+    cache_store = _semantic_readout_cache_store(cfg)
+    local_cache_context = _semantic_readout_cache_context(
+        prompt=prompt,
+        runtime_output=runtime_output,
+        cfg=cfg,
+        caller_id=caller_id,
+        purpose_code=purpose_code,
+        governed_context_capsule=governed_context_capsule,
+        candidate_ids=(),
+        decision_type="semantic_readout.local_reply",
+    )
+    network_cache_context = _semantic_readout_cache_context(
+        prompt=prompt,
+        runtime_output=runtime_output,
+        cfg=cfg,
+        caller_id=caller_id,
+        purpose_code=purpose_code,
+        governed_context_capsule=governed_context_capsule,
+        candidate_ids=(str(cfg.openai_model or "").strip() or (cfg.backend or "openai_compatible").strip().lower(),),
+        decision_type="semantic_readout.network_reply",
+    )
+    cached_result = _as_dict(_first(gate, "cached_result", default={}))
+    if bool(_first(gate, "cache_hit", default=False)) and cached_result:
+        return _semantic_readout_cache_hit_result(
+            cached_result=cached_result,
+            cfg=cfg,
+            gate=gate,
+            telemetry_sink=telemetry_sink,
+            start=start,
+            network_attempted=False,
+        )
 
     if not bool(_first(gate, "authorized", default=False)):
-        return _semantic_readout_local_result(
+        if cfg.enabled and cache_store is not None and local_cache_context:
+            try:
+                local_cache_lookup = cache_store.lookup(local_cache_context)
+            except Exception:
+                local_cache_lookup = None
+            if local_cache_lookup is not None and local_cache_lookup.hit:
+                return _semantic_readout_cache_hit_result(
+                    cached_result=dict(local_cache_lookup.result or {}),
+                    cfg=cfg,
+                    gate=gate,
+                    telemetry_sink=telemetry_sink,
+                    start=start,
+                    network_attempted=False,
+                )
+        result = _semantic_readout_local_result(
             prompt=prompt,
             runtime_output=runtime_output,
             cfg=cfg,
@@ -1136,6 +1313,12 @@ def _openai_compatible_reply(
             emit_boundary_denied=bool(_first(gate, "network_requested", default=False)),
             local_error_class=_semantic_readout_authorization_error_class(str(_first(gate, "authorization_reason", default="NOT_REQUESTED"))),
         )
+        if cache_store is not None and local_cache_context and bool(cfg.enabled):
+            try:
+                cache_store.store_result(local_cache_context, result)
+            except Exception:
+                pass
+        return result
 
     _emit_semantic_readout_event(
         cfg=cfg,
@@ -1199,7 +1382,7 @@ def _openai_compatible_reply(
                 actual_input_tokens_if_reported=actual_input_tokens,
                 actual_output_tokens_if_reported=actual_output_tokens,
             )
-            return _semantic_readout_reply_record(
+            result = _semantic_readout_reply_record(
                 reply_text=reply_text,
                 reply_source="NETWORK_MODEL",
                 backend_status="SUCCESS",
@@ -1211,7 +1394,12 @@ def _openai_compatible_reply(
                 telemetry_event_id=success_event_id,
                 summary_id=data.get("id") if isinstance(data, dict) and isinstance(data.get("id"), str) else None,
             )
-
+            if cache_store is not None and network_cache_context:
+                try:
+                    cache_store.store_result(network_cache_context, result)
+                except Exception:
+                    pass
+            return result
         failure_class = _classify_semantic_readout_failure(RuntimeError("empty network reply"), content=content, data=data)
         _emit_semantic_readout_event(
             cfg=cfg,
@@ -1288,6 +1476,31 @@ def _local_readout_result(
         purpose_code=purpose_code,
         governed_context_capsule=governed_context_capsule,
     )
+    cache_store = _semantic_readout_cache_store(cfg)
+    cache_context = _semantic_readout_cache_context(
+        prompt=prompt,
+        runtime_output=runtime_output,
+        cfg=cfg,
+        caller_id=caller_id,
+        purpose_code=purpose_code,
+        governed_context_capsule=governed_context_capsule,
+        candidate_ids=(),
+        decision_type="semantic_readout.local_reply",
+    )
+    if cfg.enabled and cache_store is not None and cache_context:
+        try:
+            cache_lookup = cache_store.lookup(cache_context)
+        except Exception:
+            cache_lookup = None
+        if cache_lookup is not None and cache_lookup.hit:
+            return _semantic_readout_cache_hit_result(
+                cached_result=dict(cache_lookup.result or {}),
+                cfg=cfg,
+                gate=gate,
+                telemetry_sink=telemetry_sink,
+                start=start,
+                network_attempted=False,
+            )
     if not cfg.enabled:
         return _semantic_readout_local_result(
             prompt=prompt,
@@ -1303,7 +1516,7 @@ def _local_readout_result(
             local_error_class=None,
             reply_text_override="",
         )
-    return _semantic_readout_local_result(
+    result = _semantic_readout_local_result(
         prompt=prompt,
         runtime_output=runtime_output,
         cfg=cfg,
@@ -1316,6 +1529,12 @@ def _local_readout_result(
         emit_boundary_denied=False,
         local_error_class=None,
     )
+    if cfg.enabled and cache_store is not None and cache_context:
+        try:
+            cache_store.store_result(cache_context, result)
+        except Exception:
+            pass
+    return result
 
 
 def generate_structured_reply(

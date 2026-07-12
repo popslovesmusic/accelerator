@@ -7,4 +7,8 @@ from .inference_necessity_gate import (
     scan_repository_inference_boundaries,
     validate_inference_boundary_registry_payload,
 )
-
+from .decision_cache import (
+    CacheLookupResult,
+    DecisionCacheStore,
+    DEFAULT_DECISION_CACHE_DB_PATH,
+)

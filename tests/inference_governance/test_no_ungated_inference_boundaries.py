@@ -1,6 +1,7 @@
 import json
 import os
 import re
+import tempfile
 import unittest
 from pathlib import Path
 from unittest import mock
@@ -68,6 +69,7 @@ GATE_EVENT_SCHEMA = {
 class InferenceNecessityGateTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        cls._cache_dir = tempfile.TemporaryDirectory()
         cls.registry = json.loads(REGISTRY_PATH.read_text(encoding="utf-8"))
         cls.capsule = qg.build_governed_context_capsule_v1(
             str(DB_PATH),
@@ -109,6 +111,7 @@ class InferenceNecessityGateTests(unittest.TestCase):
                 "allowed_network_endpoints": ["https://api.openai.com"],
                 "retry_budget": 1,
                 "network_retry_budget": 1,
+                "decision_cache_path": str(Path(cls._cache_dir.name) / "decision_cache.sqlite3"),
                 "openai_compatible": {
                     "base_url": "https://api.openai.com",
                     "model": "gpt-test",
@@ -174,6 +177,13 @@ class InferenceNecessityGateTests(unittest.TestCase):
             "maximum_output_tokens": 200,
             "maximum_latency_ms": 3000,
         }
+
+    @classmethod
+    def tearDownClass(cls):
+        try:
+            cls._cache_dir.cleanup()
+        except Exception:
+            pass
 
     def _assert_schema(self, instance, schema, path="root"):
         if "const" in schema:

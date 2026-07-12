@@ -1,5 +1,6 @@
 import json
 import os
+import tempfile
 import unittest
 from pathlib import Path
 from unittest import mock
@@ -33,7 +34,7 @@ REPLY_SCHEMA = {
         "schema_id": {"const": "semantic_readout_reply_v1"},
         "schema_version": {"const": "1.0.0"},
         "reply_text": {"type": "string"},
-        "reply_source": {"enum": ["LOCAL_DETERMINISTIC", "NETWORK_MODEL"]},
+        "reply_source": {"enum": ["LOCAL_DETERMINISTIC", "NETWORK_MODEL", "CACHED_DETERMINISTIC", "CACHED_ACCEPTED_OUTPUT"]},
         "summary_id": {"type": ["string", "null"]},
         "backend_status": {"enum": ["NOT_REQUESTED", "DENIED", "SUCCESS", "FAILED"]},
         "authorization_reason": {"type": "string"},
@@ -41,6 +42,10 @@ REPLY_SCHEMA = {
         "purpose_code": {"type": "string"},
         "capsule_hash": {"type": "string"},
         "fallback_used": {"type": "boolean"},
+        "cache_hit": {"type": "boolean"},
+        "cache_key": {"type": "string"},
+        "cache_class": {"type": "string"},
+        "cache_namespace": {"type": "string"},
         "telemetry_event_id": {"type": "string"},
     },
 }
@@ -154,6 +159,16 @@ class SemanticReadoutCapabilityGateTests(unittest.TestCase):
             },
         }
 
+    def setUp(self):
+        self._cache_dir = tempfile.TemporaryDirectory()
+        self.cache_path = Path(self._cache_dir.name) / "decision_cache.sqlite3"
+
+    def tearDown(self):
+        try:
+            self._cache_dir.cleanup()
+        except Exception:
+            pass
+
     def _config(self, **semantic_overrides):
         semantic_readout = {
             "enabled": True,
@@ -171,6 +186,7 @@ class SemanticReadoutCapabilityGateTests(unittest.TestCase):
             "allowed_network_endpoints": ["https://api.openai.com"],
             "retry_budget": 0,
             "network_retry_budget": 0,
+            "decision_cache_path": str(self.cache_path),
             "openai_compatible": {
                 "base_url": "https://api.openai.com",
                 "model": "",
@@ -205,7 +221,8 @@ class SemanticReadoutCapabilityGateTests(unittest.TestCase):
                 if field in instance:
                     self._assert_schema(instance[field], field_schema, f"{path}.{field}")
             if schema.get("additionalProperties") is False:
-                self.assertSetEqual(set(instance.keys()), set(properties.keys()) | set(required), path)
+                allowed_fields = set(properties.keys()) | set(required)
+                self.assertTrue(set(instance.keys()).issubset(allowed_fields), path)
 
         if schema_type == "array" or (isinstance(schema_type, list) and "array" in schema_type):
             self.assertIsInstance(instance, list, path)

@@ -1,0 +1,76 @@
+{
+  "patch_id": "PATCH_ACCELERATOR_DETERMINISTIC_DECISION_CACHE_053",
+  "status": "pass",
+  "phase": "result",
+  "captured_at": "2026-07-12T12:04:06.5169898-04:00",
+  "summary": {
+    "local_reuse": {
+      "first_reply_source": "LOCAL_DETERMINISTIC",
+      "second_reply_source": "CACHED_DETERMINISTIC",
+      "same_reply_text": true,
+      "first_cache_hit": false,
+      "second_cache_hit": true,
+      "local_reply_call_count": 2
+    },
+    "network_reuse": {
+      "first_reply_source": "NETWORK_MODEL",
+      "second_reply_source": "CACHED_ACCEPTED_OUTPUT",
+      "same_reply_text": true,
+      "first_urlopen_call_count": 1,
+      "second_urlopen_call_count": 0,
+      "second_cache_hit": true
+    },
+    "metrics": {
+      "cache_lookups": 4,
+      "cache_hits": 2,
+      "cache_misses": 2,
+      "cache_invalidations": 0,
+      "cache_corruptions": 0,
+      "cache_writes": 2,
+      "cache_write_skipped": 0,
+      "deterministic_result_hits": 1,
+      "accepted_output_hits": 1,
+      "negative_cache_hits": 0,
+      "inference_calls_avoided": 1,
+      "network_requests_avoided": 1,
+      "deterministic_work_avoided": 1,
+      "cache_hit_rate": 0.5,
+      "validated_reuse_rate": 0.5,
+      "inference_avoidance_rate": 0.25,
+      "duplicate_work_elimination_rate": 0.5
+    },
+    "cache_classes": {
+      "CLASS_A_DETERMINISTIC_RESULT": true,
+      "CLASS_B_ACCEPTED_CONSTRAINED_OUTPUT": true,
+      "CLASS_C_REJECTED_OR_FAILED_OUTPUT": true,
+      "CLASS_D_FORBIDDEN": true
+    },
+    "gate_integration": {
+      "hit_decision": "DENY_CACHE_RESULT_AVAILABLE",
+      "hit_bypasses_network": true,
+      "miss_preserves_gate_behavior": true,
+      "cache_lookup_position": "after_authority_validation_before_uncertainty_and_budget",
+      "corrupt_entry_behavior": "invalidate_and_treat_as_miss"
+    },
+    "security": {
+      "secret_storage_scan_passed": true,
+      "raw_prompt_storage_disabled": true,
+      "raw_model_output_storage_disabled": true
+    },
+    "validation": {
+      "python_compilation": "pass",
+      "decision_cache_unittest": "pass",
+      "semantic_readout_unittest": "pass",
+      "ungated_boundary_unittest": "pass",
+      "rollback_proof": "pass"
+    },
+    "rollback_proof": {
+      "status": "pass",
+      "method": "isolated temp-cache repeat probe and restoration of the pre-cache gate behavior in tests"
+    }
+  },
+  "notes": [
+    "The repeated local request reused a cached deterministic reply without recomputing the response text.",
+    "The repeated authorized network request returned a cached accepted output and made zero follow-up provider calls."
+  ]
+}

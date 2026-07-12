@@ -1,0 +1,243 @@
+{
+  "patch_id": "PATCH_ACCELERATOR_DETERMINISTIC_DECISION_CACHE_053",
+  "status": "PASS",
+  "predecessor_patches": [
+    "PATCH_ACCELERATOR_CANONICAL_CONTEXT_CAPSULE_050",
+    "PATCH_ACCELERATOR_SEMANTIC_READOUT_CAPABILITY_GATE_051",
+    "PATCH_ACCELERATOR_INFERENCE_NECESSITY_GATE_052"
+  ],
+  "objective": "Prevent repeated equivalent requests from reaching inference by reusing previously validated deterministic results and previously accepted bounded outputs under identical governed state.",
+  "files_changed": [
+    ".gitignore",
+    "docs/textbook/mono_process_textbook_complete.md",
+    "reports/deterministic-decision-cache-baseline.json",
+    "reports/deterministic-decision-cache-result.json",
+    "reports/decision-cache-policy.md",
+    "registry/governance/patches/PATCH_ACCELERATOR_DETERMINISTIC_DECISION_CACHE_053.json",
+    "tests/inference_governance/test_decision_cache.py",
+    "tests/inference_governance/test_no_ungated_inference_boundaries.py",
+    "tests/test_semantic_readout_capability_gate.py",
+    "tools/inference_governance/__init__.py",
+    "tools/inference_governance/cache_keys.py",
+    "tools/inference_governance/cache_policy.py",
+    "tools/inference_governance/decision_cache.py",
+    "tools/inference_governance/inference_necessity_gate.py",
+    "tools/signal_scope_phase_continuation_engine/core/semantic_readout.py"
+  ],
+  "storage_backend": "Repository-local governed SQLite store",
+  "storage_path": "state/inference_governance/decision_cache.sqlite3",
+  "cache_classes_enabled": {
+    "CLASS_A_DETERMINISTIC_RESULT": true,
+    "CLASS_B_ACCEPTED_CONSTRAINED_OUTPUT": true,
+    "CLASS_C_REJECTED_OR_FAILED_OUTPUT": true,
+    "CLASS_D_FORBIDDEN": true,
+    "forbidden_cache_content_enforced": true
+  },
+  "cache_key_contract": {
+    "schema_id": "decision_cache_key_v1",
+    "required_components": [
+      "cache_namespace",
+      "decision_type",
+      "request_semantics_hash",
+      "capsule_hash",
+      "authority_hash",
+      "freshness_hash",
+      "boundary_id",
+      "boundary_policy_version",
+      "purpose_code",
+      "caller_policy_class",
+      "candidate_set_hash",
+      "deterministic_method_version",
+      "validator_version",
+      "output_schema_version"
+    ],
+    "optional_components": [
+      "tool_registry_hash",
+      "repository_snapshot_hash",
+      "runtime_signature_hash",
+      "configuration_hash"
+    ],
+    "canonicalization": {
+      "format": "canonical JSON",
+      "sort_keys": true,
+      "encoding": "UTF-8",
+      "null_policy": "Represent absent optional fields explicitly and consistently."
+    },
+    "hash_algorithm": "Repository governed content hash helper with SHA-256 fallback",
+    "equivalence_rule": "Cache equivalence requires equality of all required components, not mere semantic resemblance."
+  },
+  "request_semantics_contract": {
+    "schema_id": "request_semantics_v1",
+    "required_fields": [
+      "operation",
+      "target_scope",
+      "requested_output_type",
+      "constraints",
+      "candidate_ids",
+      "exclusions"
+    ],
+    "normalization_rules": [
+      "sort unordered identifiers",
+      "remove non-semantic whitespace",
+      "normalize path separators",
+      "normalize enum casing",
+      "exclude observational timestamps",
+      "exclude random request identifiers",
+      "retain all authority-relevant constraints",
+      "retain all negative constraints"
+    ],
+    "raw_prompt_policy": "Raw prompt text may be retained only as non-key diagnostic metadata when security policy permits."
+  },
+  "invalidation_contract": {
+    "required_invalidation_triggers": [
+      "capsule hash change",
+      "authority hash change",
+      "freshness hash change",
+      "relevant artifact content change",
+      "patch-chain change",
+      "open-debt change when included in request semantics",
+      "boundary policy version change",
+      "deterministic method version change",
+      "validator version change",
+      "output schema version change",
+      "candidate set change",
+      "tool registry change when relevant",
+      "configuration change when relevant",
+      "explicit operator invalidation",
+      "cache corruption"
+    ],
+    "invalidation_modes": [
+      "KEY_MISS_BY_CHANGED_DEPENDENCY",
+      "EXPLICIT_ROW_INVALIDATION",
+      "NAMESPACE_INVALIDATION",
+      "POLICY_VERSION_ROLLOVER"
+    ],
+    "time_to_live_policy": {
+      "default": "NO_TIME_BASED_EXPIRY_FOR_CONTENT_ADDRESSED_STABLE_RESULTS",
+      "negative_cache": "May use bounded TTL only when state-version invalidation is unavailable."
+    },
+    "forbidden_reuse": [
+      "reuse after authority downgrade",
+      "reuse after stale-state detection",
+      "reuse across differing candidate sets",
+      "reuse across schema or validator version changes",
+      "reuse after explicit invalidation"
+    ]
+  },
+  "gate_integration": {
+    "evaluation_position": "After context, caller, purpose, and authority validation; before material uncertainty and budget authorization.",
+    "required_flow": [
+      "validate boundary registration",
+      "validate caller and purpose",
+      "validate canonical capsule",
+      "validate authority",
+      "derive normalized request semantics",
+      "derive cache key",
+      "attempt validated cache read",
+      "if valid hit exists, deny inference and return cached result",
+      "if miss, continue deterministic checks",
+      "only then consider uncertainty and budget"
+    ],
+    "hit_decision": "DENY_CACHE_RESULT_AVAILABLE",
+    "miss_behavior_preserved": true,
+    "corrupt_entry_behavior": "Emit CACHE_CORRUPT, invalidate entry, continue as cache miss"
+  },
+  "semantic_readout_integration": {
+    "boundary_id": "SEMANTIC_READOUT_OPTIONAL_OPENAI_001",
+    "cacheability": {
+      "local_deterministic_reply": "CLASS_A_DETERMINISTIC_RESULT",
+      "network_semantic_reply": "CLASS_B_ACCEPTED_CONSTRAINED_OUTPUT only when strict structured reply validation passes",
+      "raw_network_prose": "CLASS_D_FORBIDDEN"
+    },
+    "required_changes": [
+      "Derive semantic-readout request semantics from purpose, bounded capsule projection, and output contract.",
+      "Check the decision cache before network authorization.",
+      "Return a valid cached structured reply on hit.",
+      "Record reply_source as CACHED_DETERMINISTIC or CACHED_ACCEPTED_OUTPUT.",
+      "Do not perform a network request on a valid hit."
+    ],
+    "default_behavior": "The local deterministic reply remains available and may itself be cached."
+  },
+  "schemas_added_or_changed": [],
+  "tests_added_or_changed": [
+    "tests/inference_governance/test_decision_cache.py",
+    "tests/inference_governance/test_no_ungated_inference_boundaries.py",
+    "tests/test_semantic_readout_capability_gate.py"
+  ],
+  "baseline_metrics": {
+    "cache_lookups": 0,
+    "cache_hits": 0,
+    "cache_misses": 0,
+    "cache_invalidations": 0,
+    "cache_corruptions": 0,
+    "cache_writes": 0,
+    "cache_write_skipped": 0,
+    "deterministic_result_hits": 0,
+    "accepted_output_hits": 0,
+    "negative_cache_hits": 0,
+    "inference_calls_avoided": 0,
+    "network_requests_avoided": 0,
+    "deterministic_work_avoided": 0,
+    "cache_hit_rate": 0.0,
+    "validated_reuse_rate": 0.0,
+    "inference_avoidance_rate": 0.0,
+    "duplicate_work_elimination_rate": 0.0,
+    "local_repeat_call_count": 2,
+    "network_repeat_urlopen_call_count": 2
+  },
+  "post_change_metrics": {
+    "cache_lookups": 4,
+    "cache_hits": 2,
+    "cache_misses": 2,
+    "cache_invalidations": 0,
+    "cache_corruptions": 0,
+    "cache_writes": 2,
+    "cache_write_skipped": 0,
+    "deterministic_result_hits": 1,
+    "accepted_output_hits": 1,
+    "negative_cache_hits": 0,
+    "inference_calls_avoided": 1,
+    "network_requests_avoided": 1,
+    "deterministic_work_avoided": 1,
+    "cache_hit_rate": 0.5,
+    "validated_reuse_rate": 0.5,
+    "inference_avoidance_rate": 0.25,
+    "duplicate_work_elimination_rate": 0.5
+  },
+  "validation_commands": [
+    "python -m py_compile tools\\inference_governance\\cache_policy.py tools\\inference_governance\\cache_keys.py tools\\inference_governance\\decision_cache.py tools\\inference_governance\\inference_necessity_gate.py tools\\inference_governance\\__init__.py tools\\signal_scope_phase_continuation_engine\\core\\semantic_readout.py tests\\test_semantic_readout_capability_gate.py tests\\inference_governance\\test_no_ungated_inference_boundaries.py tests\\inference_governance\\test_decision_cache.py",
+    "python -m unittest tests.inference_governance.test_decision_cache",
+    "python -m unittest tests.test_semantic_readout_capability_gate",
+    "python -m unittest tests.inference_governance.test_no_ungated_inference_boundaries",
+    "python scripts/global_validate.py",
+    "python scripts/global_validate.py --quick",
+    "git diff --check"
+  ],
+  "validation_results": {
+    "python_compilation": "pass",
+    "decision_cache_unittest": "pass",
+    "semantic_readout_unittest": "pass",
+    "ungated_boundary_unittest": "pass",
+    "global_validate_full": "timeout",
+    "global_validate_quick": "pass",
+    "git_diff_check": "pass"
+  },
+  "rollback_procedure": [
+    "Record a pre-patch repository snapshot or file hashes.",
+    "Back up or isolate the new cache database.",
+    "Apply patch 053.",
+    "Run validation.",
+    "Restore patch 052 code state.",
+    "Remove or archive the patch 053 cache database without affecting other governed state.",
+    "Verify exact restoration.",
+    "Reapply only after rollback proof passes."
+  ],
+  "rollback_result": "pass",
+  "known_limitations": [
+    "This patch uses a repository-local SQLite cache instead of extending the existing registry database.",
+    "Negative caching remains opt-in for selected stable reason codes only.",
+    "The post-change measurement is based on the isolated validation harness rather than a live provider deployment.",
+    "The full repository validator exceeded the available command window; the quick governance mode completed successfully after clearing stale validator processes."
+  ],
+  "next_patch": "PATCH_ACCELERATOR_DETERMINISTIC_ROUTING_AND_CANDIDATE_BOUNDING_054"
+}
