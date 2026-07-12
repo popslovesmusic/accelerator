@@ -1,0 +1,182 @@
+{
+  "patch_id": "PATCH_ACCELERATOR_CANONICAL_CONTEXT_CAPSULE_050",
+  "title": "Canonical Governed Context Capsule",
+  "type": "governance_runtime_patch",
+  "artifact_type": "governance_patch",
+  "mode": "additive",
+  "status": "APPLIED",
+  "execution_date": "2026-07-11",
+  "applied_on": "2026-07-11T21:03:55-04:00",
+  "goal": "Establish one governed deterministic source for all agent-facing and future model-facing context so duplicate state reconstruction is replaced by a single canonical capsule and thin compatibility wrappers.",
+  "core_rule": {
+    "id": "GOV-CTXCAP-050",
+    "statement": "All agent-facing and future model-facing context must originate from governed_context_capsule_v1; compatibility wrappers may only project fields from that capsule and may not independently reconstruct governed state.",
+    "effect": "Deterministic context assembly becomes canonical, duplicate retrieval is eliminated where possible, and the capsule remains the sole governed pre-inference surface."
+  },
+  "problem_statement": {
+    "current_state": "Multiple agent-facing scripts independently assemble or shape context surfaces around the same runtime state, increasing duplication and stale-context risk even when no inference occurs.",
+    "gap": "The repository lacks a single named canonical context capsule surface with explicit required sections, stable serialization, and content-addressed reuse that every consumer must use.",
+    "risk": "Independent reconstruction of governed state can diverge, inflate prompt surfaces, and complicate future inference accounting."
+  },
+  "basis": {
+    "source_patches": [
+      "PATCH_DB_GOVERNANCE_RUNTIME_006",
+      "PATCH_GOVERNANCE_RUNTIME_LIGHT_GATE_SUMMARY_007",
+      "PATCH_GOVERNANCE_RUNTIME_EVIDENCE_LEVELS_008",
+      "PATCH_SSOT_RUNTIME_EVIDENCE_LEVELS_SYNC_009"
+    ],
+    "source_surfaces": [
+      "scripts/query_governance.py",
+      "scripts/agent_memory/memory_retrieval.py",
+      "scripts/agent_memory/memory_packet_builder.py",
+      "scripts/gemini_claim_context.py",
+      "scripts/gemini_trace_context.py",
+      "scripts/gemini_memory_context.py",
+      "scripts/gemini_execution_context.py",
+      "docs/textbook/mono_process_textbook_complete.md"
+    ],
+    "scope": "Consolidate deterministic context assembly and capsule reuse without introducing model calls or altering semantic readout gating."
+  },
+  "target_files": [
+    "scripts/query_governance.py",
+    "scripts/agent_memory/memory_retrieval.py",
+    "scripts/agent_memory/memory_packet_builder.py",
+    "scripts/gemini_claim_context.py",
+    "scripts/gemini_trace_context.py",
+    "scripts/gemini_memory_context.py",
+    "scripts/gemini_execution_context.py",
+    "docs/textbook/mono_process_textbook_complete.md"
+  ],
+  "required_repo_changes": [
+    {
+      "path": "scripts/query_governance.py",
+      "description": "Formalize build_governed_context_capsule_v1 as the canonical governed context producer with deterministic ordering, stable serialization, explicit provenance, and content-addressed reuse."
+    },
+    {
+      "path": "scripts/agent_memory/memory_retrieval.py",
+      "description": "Convert retrieval to a thin consumer of governed_context_capsule_v1 instead of independently reconstructing governed state."
+    },
+    {
+      "path": "scripts/agent_memory/memory_packet_builder.py",
+      "description": "Convert packet building into a view over governed_context_capsule_v1 rather than a second state-assembly path."
+    },
+    {
+      "path": "scripts/gemini_claim_context.py",
+      "description": "Convert claim context generation into a compatibility adapter that selects fields from the canonical capsule."
+    },
+    {
+      "path": "scripts/gemini_trace_context.py",
+      "description": "Convert trace context generation into a compatibility adapter that selects fields from the canonical capsule."
+    },
+    {
+      "path": "scripts/gemini_memory_context.py",
+      "description": "Convert memory context generation into a compatibility adapter that selects fields from the canonical capsule."
+    },
+    {
+      "path": "scripts/gemini_execution_context.py",
+      "description": "Convert execution context generation into a compatibility adapter that selects fields from the canonical capsule."
+    },
+    {
+      "path": "docs/textbook/mono_process_textbook_complete.md",
+      "description": "Synchronize the governed runtime note so the textbook references the canonical capsule without weakening claim discipline."
+    }
+  ],
+  "runtime_changes": {
+    "canonical_surface": "governed_context_capsule_v1",
+    "required_sections": [
+      "request_identity",
+      "current_state",
+      "freshness",
+      "authority",
+      "patch_chain",
+      "open_debt",
+      "relevant_artifacts",
+      "runtime_trace",
+      "candidate_actions",
+      "exclusions",
+      "provenance"
+    ],
+    "output_requirements": [
+      "deterministic ordering",
+      "stable serialization",
+      "explicit schema version",
+      "content hash",
+      "source hashes",
+      "creation timestamp",
+      "freshness classification",
+      "authority classification"
+    ],
+    "compatibility_policy": {
+      "initial_mode": "WRAPPER",
+      "existing_entry_points_remain_callable": true,
+      "independent_state_reconstruction_forbidden": true,
+      "deprecation_warnings_required": true,
+      "removal_not_authorized_in_this_patch": true
+    },
+    "cache_policy": {
+      "content_addressed_reuse": true,
+      "reuse_key_basis": [
+        "request_identity",
+        "current_state",
+        "freshness",
+        "authority",
+        "patch_chain",
+        "open_debt",
+        "relevant_artifacts"
+      ],
+      "invalidation_triggers": [
+        "authority change",
+        "freshness change",
+        "patch chain change",
+        "relevant artifact change",
+        "open debt change"
+      ],
+      "no_network_dependency": true
+    },
+    "metrics": {
+      "required_fields": [
+        "capsule_id",
+        "capsule_schema_version",
+        "capsule_hash",
+        "cache_status",
+        "build_time_ms",
+        "serialized_bytes",
+        "estimated_token_count",
+        "artifact_count",
+        "source_count",
+        "excluded_source_count",
+        "freshness_state",
+        "authority_state"
+      ],
+      "token_estimation_policy": "Token estimation may use a deterministic approximation and must be labeled estimated unless a specific tokenizer is invoked."
+    }
+  },
+  "acceptance_criteria": [
+    "All agent-facing context scripts use the canonical capsule.",
+    "No compatibility wrapper independently reconstructs governed state.",
+    "Stable serialization and cache invalidation tests pass.",
+    "Context provenance is complete.",
+    "No network or inference dependency is introduced.",
+    "Before-and-after build time and context size are recorded.",
+    "Rollback restores the previous independent paths."
+  ],
+  "success_criteria": [
+    "The canonical capsule is the sole governed pre-inference context surface.",
+    "Wrapper outputs are derived only from the canonical capsule.",
+    "Capsule reuse is content-addressed and invalidates on governed state change.",
+    "The textbook note remains humble and RT_core-invariant.",
+    "No model call is introduced by capsule construction or wrapper execution."
+  ],
+  "validation": {
+    "required": [
+      "TEST_050_CANONICAL_EQUIVALENCE",
+      "TEST_050_STABLE_SERIALIZATION",
+      "TEST_050_CACHE_HIT",
+      "TEST_050_CACHE_INVALIDATION",
+      "TEST_050_NO_MODEL_BOUNDARY",
+      "TEST_050_PROVENANCE",
+      "TEST_050_NO_DUPLICATE_RETRIEVAL"
+    ],
+    "result": "pending"
+  }
+}
