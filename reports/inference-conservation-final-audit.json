@@ -1,0 +1,104 @@
+{
+  "report_id": "inference_conservation_final_audit_v1",
+  "patch_id": "PATCH_ACCELERATOR_INFERENCE_CONSERVATION_CLOSEOUT_055",
+  "captured_at": "2026-07-12T16:42:09.7754460-04:00",
+  "status": "PARTIAL",
+  "patches_verified": {
+    "050": "PASS",
+    "051": "PASS",
+    "052": "APPLIED",
+    "053": "PASS",
+    "054": "PASS"
+  },
+  "inference_boundaries": {
+    "active": 0,
+    "latent": 1,
+    "registered": 1,
+    "ungated": 0
+  },
+  "default_runtime": {
+    "inference_calls": 0,
+    "network_requests": 0,
+    "retries": 0
+  },
+  "deterministic_pipeline": {
+    "canonical_context": true,
+    "deterministic_routing": true,
+    "bounded_candidates": true,
+    "decision_cache": true,
+    "necessity_gate": true
+  },
+  "measurements": {
+    "boundary_scan": {
+      "registered": 1,
+      "active": 0,
+      "latent": 1,
+      "ungated": 0,
+      "false_positives": 1
+    },
+    "routing_and_candidate_bounding": {
+      "equivalent_requests_converged": 3,
+      "aliases_collapsed": 1,
+      "unbounded_candidate_paths_remaining": 0,
+      "actual_inference_calls": 0
+    },
+    "decision_cache": {
+      "cache_lookups": 4,
+      "cache_hits": 2,
+      "cache_hit_rate": 0.5,
+      "deterministic_result_hits": 1,
+      "accepted_output_hits": 1,
+      "inference_calls_avoided": 1,
+      "network_requests_avoided": 1
+    },
+    "semantic_readout": {
+      "default_request_count": 0,
+      "gate_denials_observed": 4,
+      "authorized_mock_request_count": 1,
+      "retry_count": 0
+    }
+  },
+  "validation": {
+    "tests_passed": [
+      "python -m unittest tests.test_deterministic_routing_and_candidate_bounding tests.test_governed_context_capsule_v1 tests.test_semantic_readout_capability_gate tests.inference_governance.test_decision_cache tests.inference_governance.test_no_ungated_inference_boundaries",
+      "python scripts/global_validate.py --quick",
+      "python -m json.tool reports/inference-boundary-final-register.json",
+      "python -m json.tool reports/inference-conservation-metrics-before-after.json",
+      "python -m json.tool reports/inference-conservation-final-audit.json",
+      "python -m json.tool registry/governance/patches/PATCH_ACCELERATOR_INFERENCE_CONSERVATION_CLOSEOUT_055.json",
+      "python -m json.tool patches/PATCH_ACCELERATOR_INFERENCE_CONSERVATION_CLOSEOUT_055.json",
+      "git diff --check"
+    ],
+    "tests_failed": [],
+    "schemas_valid": true,
+    "registries_valid": true,
+    "static_scans_passed": true,
+    "governance_validation_passed": true,
+    "git_diff_check_passed": true,
+    "rollback_proof_passed": true
+  },
+  "rollback_proof": {
+    "status": "PASS",
+    "method": "Removed the seven closeout files, verified the worktree returned to the pre-closeout state apart from the pre-existing validator output, and restored every file with matching SHA-256 hashes.",
+    "evidence": [
+      "MATCH reports/inference-boundary-final-register.json",
+      "MATCH reports/deterministic-pipeline-final-call-graph.md",
+      "MATCH reports/inference-conservation-metrics-before-after.json",
+      "MATCH reports/inference-conservation-final-audit.json",
+      "MATCH reports/inference-conservation-final-summary.md",
+      "MATCH registry/governance/patches/PATCH_ACCELERATOR_INFERENCE_CONSERVATION_CLOSEOUT_055.json",
+      "MATCH patches/PATCH_ACCELERATOR_INFERENCE_CONSERVATION_CLOSEOUT_055.json"
+    ]
+  },
+  "remaining_debt": [
+    "SEMANTIC_READOUT_OPTIONAL_OPENAI_001 remains a registered latent boundary.",
+    "The repository still contains a constrained mock authorization path for the semantic readout boundary tests."
+  ],
+  "further_patch_required": false,
+  "closeout_recommendation": "PARTIAL",
+  "source_artifacts": [
+    "reports/inference-boundary-final-register.json",
+    "reports/deterministic-pipeline-final-call-graph.md",
+    "reports/inference-conservation-metrics-before-after.json"
+  ]
+}
