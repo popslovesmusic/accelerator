@@ -1,0 +1,89 @@
+{
+  "write_owner_assignments": [
+    {
+      "scope_id": "CORE_RULE_STATE",
+      "registry_path": "governance/core_rules/GOVERNANCE_AUTHORITY_SCOPE_PARTITION_001.json",
+      "authorized_writer_id": "scripts/governance/register_q0_authority_scope_partition.py",
+      "authorized_entry_point": "python -m scripts.governance.register_q0_authority_scope_partition",
+      "allowed_operations": [
+        "STORE_LIVE_RULE",
+        "STORE_PATCH_STATUS"
+      ],
+      "denied_operations": [
+        "DELETE",
+        "REPLACE",
+        "MERGE"
+      ],
+      "validation_before_write": [
+        "schema validation",
+        "hash verification"
+      ],
+      "atomicity_or_rollback_behavior": "Atomic file write; fail closed on validation mismatch.",
+      "hash_synchronization_behavior": "The writer computes exact-byte SHA-256 before ledger registration.",
+      "audit_behavior": "Record the governing rule path and patch id in the change ledger."
+    },
+    {
+      "scope_id": "CHANGE_HISTORY",
+      "registry_path": "registry/governance_change_ledger.json",
+      "authorized_writer_id": "scripts/governance/register_q0_authority_scope_partition.py",
+      "authorized_entry_point": "python -m scripts.governance.register_q0_authority_scope_partition",
+      "allowed_operations": [
+        "APPEND",
+        "UPDATE"
+      ],
+      "denied_operations": [
+        "DELETE",
+        "MERGE"
+      ],
+      "validation_before_write": [
+        "entry schema validation",
+        "approval-reference validation"
+      ],
+      "atomicity_or_rollback_behavior": "Append the ledger entry only after all governed artifacts are written successfully.",
+      "hash_synchronization_behavior": "Maintain the change ledger as an append-only record of the partition registration.",
+      "audit_behavior": "Store the diff report path and patch id in the appended ledger entry."
+    },
+    {
+      "scope_id": "TOOL_ROUTING_METADATA",
+      "registry_path": "governance/live/tool_routing_manifest.json",
+      "authorized_writer_id": "scripts/governance/register_q0_authority_scope_partition.py",
+      "authorized_entry_point": "python -m scripts.governance.register_q0_authority_scope_partition",
+      "allowed_operations": [
+        "APPEND",
+        "UPDATE"
+      ],
+      "denied_operations": [
+        "DELETE",
+        "MERGE"
+      ],
+      "validation_before_write": [
+        "schema validation",
+        "hash verification"
+      ],
+      "atomicity_or_rollback_behavior": "No mutation is required by this patch; the writer exists only as the exclusive declared mechanism.",
+      "hash_synchronization_behavior": "Any future manifest update must synchronize through the same writer boundary.",
+      "audit_behavior": "Keep routing metadata separate from live validation and registry-state authority."
+    },
+    {
+      "scope_id": "PARTITION_REGISTRY",
+      "registry_path": "governance/authority_partitions/Q0_AUTHORITY_SCOPE_PARTITION_001.json",
+      "authorized_writer_id": "scripts/governance/register_q0_authority_scope_partition.py",
+      "authorized_entry_point": "python -m scripts.governance.register_q0_authority_scope_partition",
+      "allowed_operations": [
+        "STORE_PARTITION_RECORD",
+        "UPDATE"
+      ],
+      "denied_operations": [
+        "DELETE",
+        "MERGE"
+      ],
+      "validation_before_write": [
+        "partition schema validation",
+        "role-overlap validation"
+      ],
+      "atomicity_or_rollback_behavior": "Write the partition record atomically after the supporting evidence files are present.",
+      "hash_synchronization_behavior": "The partition record hashes all governed evidence it references.",
+      "audit_behavior": "Store the partition identifier and governing rule identifiers in the registry record."
+    }
+  ]
+}

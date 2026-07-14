@@ -1,0 +1,130 @@
+{
+  "patch_id": "PATCH_GOVERNANCE_MISSING_DEPENDENCY_003_CHAIN_REPAIR_008",
+  "title": "Governance Missing Dependency 003 Chain Repair",
+  "status": "PARTIAL",
+  "timestamp": "2026-07-14T17:05:00-04:00",
+  "mode": "additive",
+  "depends_on": [
+    "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002",
+    "PATCH_GOVERNANCE_INVENTORY_PROVENANCE_AND_ADDITIVE_AUTHORITY_004",
+    "PATCH_GOVERNANCE_AMBIGUITY_RISK_CLASSIFICATION_AND_REMEDIATION_QUEUE_005",
+    "PATCH_GOVERNANCE_Q0_CLUSTER_SELECTION_AND_RESOLUTION_PACKET_006",
+    "PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007"
+  ],
+  "classification": [
+    "GOVERNANCE_REMEDIATION",
+    "DEPENDENCY_CHAIN_REPAIR",
+    "HISTORICAL_GAP_PRESERVATION",
+    "FAIL_CLOSED_SEMANTIC_REBIND"
+  ],
+  "repair_outcome": "HISTORICAL_REFERENCE_UNMATERIALIZED_LIVE_DEPENDENCY_REPAIRED",
+  "classification_result": "SEMANTICS_SURVIVE_ELSEWHERE",
+  "historical_reference": {
+    "patch_id": "PATCH_GOVERNANCE_STATUS_SEMANTICS_AND_BLOCKING_REDUCTION_003",
+    "git_history_status": "NO_MATCHING_COMMITTED_HISTORY_FOUND",
+    "canonical_artifact_found": false,
+    "recreated": false,
+    "live_dependency_allowed": false
+  },
+  "purpose": "Repair the live governance patch chain so Q0 governance artifacts no longer require the absent patch 003 artifact while preserving the historical note and binding to surviving fail-closed semantic authorities.",
+  "updated_artifacts": [
+    "outputs/governance_inventory/fail_closed_semantic_authority_inventory.json",
+    "patches/PATCH_GOVERNANCE_INVENTORY_PROVENANCE_AND_ADDITIVE_AUTHORITY_004.json",
+    "patches/PATCH_GOVERNANCE_AMBIGUITY_RISK_CLASSIFICATION_AND_REMEDIATION_QUEUE_005.json",
+    "patches/PATCH_GOVERNANCE_Q0_CLUSTER_SELECTION_AND_RESOLUTION_PACKET_006.json",
+    "patches/PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007.json",
+    "patches/PATCH_GOVERNANCE_MISSING_DEPENDENCY_003_CHAIN_REPAIR_008.json",
+    "registry/governance/patches/PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007.json",
+    "registry/governance/patches/PATCH_GOVERNANCE_MISSING_DEPENDENCY_003_CHAIN_REPAIR_008.json",
+    "tests/governance_validation/test_patch_005_completion_record.py",
+    "tests/governance_validation/test_q0_resolution_completion_record.py",
+    "tests/governance_validation/test_q0_authority_scope_partition_completion_record.py",
+    "tests/governance_validation/test_patch_008_missing_dependency_chain_repair.py",
+    "registry/governance_change_ledger.json",
+    "registry/governance_hash_registry.json"
+  ],
+  "surviving_semantic_authorities": [
+    {
+      "semantic_rule_id": "GOVERNANCE_VALIDATION_FAIL_CLOSED_001",
+      "authority_role": "VALIDATION_REDUCTION_AUTHORITY",
+      "artifact_path": "governance/authority_partitions/Q0_AUTHORITY_SCOPE_PARTITION_001.json",
+      "artifact_field": "validation_partition.terminal_reducer_rule_id"
+    },
+    {
+      "semantic_rule_id": "GOVERNANCE_VALIDATION_FAIL_CLOSED_001",
+      "authority_role": "VALIDATION_REDUCTION_AUTHORITY",
+      "artifact_path": "outputs/governance_inventory/q0_validator_authority_partition.json",
+      "artifact_field": "terminal_reducer_rule_id"
+    },
+    {
+      "semantic_rule_id": "GOVERNANCE_VALIDATION_FAIL_CLOSED_001",
+      "authority_role": "VALIDATION_INVOCATION_AUTHORITY",
+      "artifact_path": "scripts/global_validate.py",
+      "artifact_field": "ValidationReducerAuthorityValidator and overall_status reduction"
+    }
+  ],
+  "chain_repairs": [
+    {
+      "patch_id": "PATCH_GOVERNANCE_INVENTORY_PROVENANCE_AND_ADDITIVE_AUTHORITY_004",
+      "removed_dependency": "PATCH_GOVERNANCE_STATUS_SEMANTICS_AND_BLOCKING_REDUCTION_003",
+      "replacement_mode": "LIVE_SEMANTIC_DEPENDENCIES"
+    },
+    {
+      "patch_id": "PATCH_GOVERNANCE_AMBIGUITY_RISK_CLASSIFICATION_AND_REMEDIATION_QUEUE_005",
+      "removed_dependency": "PATCH_GOVERNANCE_STATUS_SEMANTICS_AND_BLOCKING_REDUCTION_003",
+      "replacement_mode": "LIVE_SEMANTIC_DEPENDENCIES"
+    },
+    {
+      "patch_id": "PATCH_GOVERNANCE_Q0_CLUSTER_SELECTION_AND_RESOLUTION_PACKET_006",
+      "removed_dependency": "PATCH_GOVERNANCE_STATUS_SEMANTICS_AND_BLOCKING_REDUCTION_003",
+      "replacement_mode": "LIVE_SEMANTIC_DEPENDENCIES"
+    },
+    {
+      "patch_id": "PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007",
+      "removed_dependency": "PATCH_GOVERNANCE_STATUS_SEMANTICS_AND_BLOCKING_REDUCTION_003",
+      "replacement_mode": "LIVE_SEMANTIC_DEPENDENCIES"
+    }
+  ],
+  "validation_policy": {
+    "full_project_validation": "SUSPENDED_PENDING_VALIDATOR_DEPARTMENT_COMPLETION",
+    "allowed_checks": [
+      "targeted_patch_chain_resolution",
+      "targeted_governance_query",
+      "registry_consistency",
+      "hash_consistency",
+      "schema_validation",
+      "compile",
+      "git_diff_check",
+      "git_status"
+    ]
+  },
+  "validation_results": {
+    "targeted_patch_chain_resolution": {
+      "status": "pass",
+      "checked_patch_ids": [
+        "PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007",
+        "PATCH_GOVERNANCE_MISSING_DEPENDENCY_003_CHAIN_REPAIR_008"
+      ],
+      "historical_missing_dependency_removed": true,
+      "missing_dependency_count": 0,
+      "remaining_runtime_blocker": "dependency_chain_not_satisfied",
+      "remaining_root_cause": "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002 remains runtime-deferred and therefore downstream partial patches stay unsatisfied."
+    },
+    "focused_governance_validation": {
+      "status": "pass",
+      "test_count": 4,
+      "passed": 4,
+      "failed": 0
+    },
+    "compileall": {
+      "status": "pass"
+    },
+    "git_diff_check": {
+      "status": "pass",
+      "warnings": [
+        "CRLF normalization warnings were reported in unrelated existing worktree files only."
+      ]
+    }
+  },
+  "unrelated_changes_preserved": true
+}

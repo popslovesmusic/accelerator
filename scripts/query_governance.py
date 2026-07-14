@@ -69,6 +69,30 @@ except ImportError:
     from scripts.db.db_health_check import run_db_health_check
 
 try:
+    from tools.governance_inventory import build_q0_authority_scope_partition_bundle
+except ImportError:
+    if str(ROOT) not in sys.path:
+        sys.path.append(str(ROOT))
+    from tools.governance_inventory import build_q0_authority_scope_partition_bundle
+
+try:
+    from tools.runtime_authority import (
+        ROLE_IDS as Q0_ROLE_IDS,
+        classify_target_role,
+        get_authority_by_role,
+        resolve_role_aware_authority,
+    )
+except ImportError:
+    if str(ROOT) not in sys.path:
+        sys.path.append(str(ROOT))
+    from tools.runtime_authority import (
+        ROLE_IDS as Q0_ROLE_IDS,
+        classify_target_role,
+        get_authority_by_role,
+        resolve_role_aware_authority,
+    )
+
+try:
     from tools.inference_governance.deterministic_router import load_operation_registry, route_parsed_request
     from tools.inference_governance.request_normalization import build_canonical_routed_request_v1, normalize_text
 except ImportError:
@@ -4232,7 +4256,10 @@ def load_governance_change_ledger_index():
 def load_patch_record_by_id(patch_id):
     patch_path = PATCH_REGISTRY_DIR / f"{patch_id}.json"
     if not patch_path.exists():
-        return None, patch_path
+        fallback_path = ROOT / "patches" / f"{patch_id}.json"
+        if not fallback_path.exists():
+            return None, patch_path
+        patch_path = fallback_path
     try:
         return load_json(patch_path), patch_path
     except (OSError, json.JSONDecodeError):
@@ -6369,10 +6396,12 @@ def build_authority_resolution_result(args):
 
     db_file = Path(args.db)
     target = normalize_repo_path(args.target)
+    requested_role = str(getattr(args, "authority_role", "") or "").strip().upper()
     result = {
         "mode": "authority_resolution",
         "db_path": str(db_file),
         "target": target,
+        "authority_role": requested_role or None,
         "authority_owner": "unknown",
         "authority_source": None,
         "supersession": {
@@ -6393,6 +6422,40 @@ def build_authority_resolution_result(args):
     if not db_file.exists():
         result["reason"] = "Governance DB file is missing."
         result["warnings"].append("The governance runtime database is unavailable.")
+        return result
+
+    if requested_role:
+        if requested_role not in Q0_ROLE_IDS:
+            result["decision"] = "block"
+            result["reason"] = "Unknown authority role."
+            result["warnings"].append("Use one of the governed Q0 authority roles.")
+            return result
+        role_result = resolve_role_aware_authority(requested_role, target=target)
+        result.update(
+            {
+                "authority_source": role_result.get("authority_source"),
+                "decision": role_result.get("decision", "defer"),
+                "reason": role_result.get("reason", result["reason"]),
+                "evidence_paths": role_result.get("evidence_paths", result["evidence_paths"]),
+                "warnings": [warning for warning in dict.fromkeys(result["warnings"] + role_result.get("warnings", [])) if warning],
+            }
+        )
+        result["authority_owner"] = infer_authority_owner_from_source(role_result.get("authority_source"))
+        result["supersession"] = {"status": "current", "superseded_by": []}
+        result["conflict_state"] = "clear" if result["decision"] == "allow" else "blocked"
+        return result
+
+    target_role = classify_target_role(target)
+    if target_role:
+        role_result = get_authority_by_role(target_role)
+        result["decision"] = "block"
+        result["reason"] = "Generic mixed-role authority lookup is prohibited for the Q0 partition."
+        result["warnings"] = [
+            f"Declare --authority-role {target_role} when querying governed Q0 authority surfaces.",
+        ]
+        result["authority_source"] = role_result.get("authority_source")
+        result["conflict_state"] = "mixed"
+        result["evidence_paths"] = role_result.get("evidence_paths", result["evidence_paths"])
         return result
 
     current_state = build_current_state_capsule(args.db)
@@ -7021,6 +7084,20 @@ def build_reconcile_events_result_for_args(args):
     return result
 
 
+def build_authority_scope_partition_result_for_args(args):
+    bundle = build_q0_authority_scope_partition_bundle()
+    bundle["mode"] = "authority_scope_partition"
+    bundle["db_path"] = str(Path(args.db))
+    bundle["selection_summary"] = {
+        "cluster_id": bundle["partition"]["cluster_id"],
+        "partition_id": bundle["partition"]["partition_id"],
+        "resolved_record_count": bundle["partition"]["resolved_ambiguity_count"],
+        "resolved_question_count": bundle["partition"]["resolved_question_count"],
+        "remaining_blocking_ambiguities": bundle["partition"]["remaining_blocking_ambiguities"],
+    }
+    return bundle
+
+
 def load_patch_input(args):
     if getattr(args, "patch_file", None):
         return load_patch_record_by_path(args.patch_file)
@@ -7068,6 +7145,7 @@ def main():
     parser.add_argument("command", nargs="?", help="Optional command. Use current-state or authority for live runtime capsules.")
     parser.add_argument("--db", default=str(DEFAULT_DB), help="Path to the SQLite governance index.")
     parser.add_argument("--target", help="Path or governed surface to resolve with the authority command.")
+    parser.add_argument("--authority-role", choices=list(Q0_ROLE_IDS), help="Required Q0 authority role for role-aware authority access.")
     parser.add_argument("--patch-id", help="Patch identifier for patch-chain, reconcile-events, or patch-gate commands.")
     parser.add_argument("--patch-file", help="Path to a JSON patch to evaluate through the governance runtime gate.")
     parser.add_argument("--status", default="all", choices=["open", "partial", "resolved", "blocking", "all"], help="Debt status filter for the debt command.")
@@ -7180,6 +7258,11 @@ def main():
     if args.command == "reconcile-events":
         result = build_reconcile_events_result_for_args(args)
         emit_result("reconcile-events", result)
+        return
+
+    if args.command == "authority-scope-partition":
+        result = build_authority_scope_partition_result_for_args(args)
+        emit_result("authority-scope-partition", result)
         return
 
     if args.patch_file:

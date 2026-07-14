@@ -16,6 +16,9 @@ STAGES = [
     "patch_chain_validation",
     "patch_gate_validation",
     "db_authority_validation",
+    "role_aware_authority_validation",
+    "write_boundary_validation",
+    "validation_reducer_authority_validation",
 ]
 
 

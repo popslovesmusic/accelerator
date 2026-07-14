@@ -4,7 +4,7 @@ import os
 import json
 import sys
 
-def run_maintenance(db_path, mode="report_only", mutate=False):
+def run_maintenance(db_path, mode="report_only", mutate=False, full_integrity_check=False):
     if not os.path.exists(db_path):
         print(f"Error: Database not found at {db_path}")
         return
@@ -13,6 +13,7 @@ def run_maintenance(db_path, mode="report_only", mutate=False):
         "timestamp": os.popen('date /t').read().strip() + " " + os.popen('time /t').read().strip(),
         "db_path": db_path,
         "mode": mode,
+        "integrity_check_mode": "full" if full_integrity_check else "quick",
         "diagnostics": {},
         "actions_taken": []
     }
@@ -20,9 +21,13 @@ def run_maintenance(db_path, mode="report_only", mutate=False):
     try:
         conn = sqlite3.connect(db_path)
         cursor = conn.cursor()
+        integrity_mode = "full" if full_integrity_check else "quick"
 
         # Safe Diagnostics
-        cursor.execute("PRAGMA integrity_check")
+        # `quick_check` keeps routine maintenance responsive on large DBs.
+        # Use `--full-integrity-check` for the exhaustive scan when needed.
+        pragma = "PRAGMA integrity_check" if full_integrity_check else "PRAGMA quick_check"
+        cursor.execute(pragma)
         report["diagnostics"]["integrity"] = cursor.fetchone()[0]
         
         cursor.execute("SELECT COUNT(*) FROM artifacts")
@@ -62,7 +67,7 @@ def run_maintenance(db_path, mode="report_only", mutate=False):
             }
 
         if mutate:
-            print(f"Running mutating maintenance on {db_path}...")
+            print(f"Running mutating maintenance ({integrity_mode} integrity check) on {db_path}...")
             cursor.execute("VACUUM")
             report["actions_taken"].append("VACUUM")
             cursor.execute("ANALYZE")
@@ -70,7 +75,7 @@ def run_maintenance(db_path, mode="report_only", mutate=False):
             conn.commit()
             print("Maintenance complete.")
         else:
-            print(f"Running report-only diagnostics on {db_path}...")
+            print(f"Running report-only diagnostics ({integrity_mode} integrity check) on {db_path}...")
 
         conn.close()
         print(json.dumps(report, indent=2))
@@ -83,9 +88,14 @@ if __name__ == "__main__":
     parser.add_argument("--db", default="registry/db/acellorator_index.sqlite", help="Path to SQLite database.")
     parser.add_argument("--report-only", action="store_true", default=True, help="Run diagnostics without mutating (default).")
     parser.add_argument("--mutate", action="store_true", help="Run VACUUM/ANALYZE (requires explicit flag).")
+    parser.add_argument(
+        "--full-integrity-check",
+        action="store_true",
+        help="Run the slower exhaustive SQLite integrity check instead of the default quick check.",
+    )
     
     args = parser.parse_args()
     
     # Enforce safe default
     mode = "mutate" if args.mutate else "report_only"
-    run_maintenance(args.db, mode, args.mutate)
+    run_maintenance(args.db, mode, args.mutate, args.full_integrity_check)

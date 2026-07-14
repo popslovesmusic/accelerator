@@ -1,0 +1,485 @@
+{
+  "amendment_id": "VALIDATION_DEPARTMENT_MINI_AGENT_ARCHITECTURE_001",
+  "title": "Codex Mini-Compatible Validation Department Architecture",
+  "status": "FOUNDATIONAL_CONSTRAINT",
+  "agent_profile": {
+    "agent": "Codex Mini",
+    "reasoning_mode": "extra_high",
+    "role": "repository validation worker",
+    "assumption": "The agent has useful but limited reasoning capacity and must not be treated as a reliable global repository reasoner.",
+    "design_consequence": "Tasks, evidence, decisions, and output schemas must be narrowly bounded."
+  },
+  "core_design_rule": {
+    "statement": "No agent invocation may be responsible for understanding or validating the repository as a whole.",
+    "implementation": "Repository-wide validation is produced by deterministic composition of many small regime results.",
+    "complexity_owner": "department architecture and deterministic tooling",
+    "inspection_owner": "Codex Mini regime workers",
+    "authority_owner": "explicit departmental policy and operator-approved governance"
+  },
+  "agent_capability_limits": [
+    {
+      "id": "LIMIT_001",
+      "limit": "Limited long-context reliability",
+      "response": "Provide only the files, excerpts, schemas, rules, and dependency summaries required for the current task."
+    },
+    {
+      "id": "LIMIT_002",
+      "limit": "Weak global reconciliation across many documents",
+      "response": "Use separate extraction, comparison, and disposition tasks rather than one combined reasoning task."
+    },
+    {
+      "id": "LIMIT_003",
+      "limit": "Susceptibility to confident inference from incomplete evidence",
+      "response": "Require evidence references for every finding and provide an explicit INSUFFICIENT_EVIDENCE result."
+    },
+    {
+      "id": "LIMIT_004",
+      "limit": "Potential inconsistency across long or repeated workflows",
+      "response": "Use immutable task packets, stable identifiers, enums, and deterministic result validation."
+    },
+    {
+      "id": "LIMIT_005",
+      "limit": "Difficulty distinguishing current authority from historical material",
+      "response": "Resolve authority and supersession before presenting evidence to the worker."
+    },
+    {
+      "id": "LIMIT_006",
+      "limit": "Difficulty applying many interacting policies simultaneously",
+      "response": "Each regime task may apply only a small declared rule set."
+    },
+    {
+      "id": "LIMIT_007",
+      "limit": "Possible omission of negative findings",
+      "response": "Provide an explicit checklist of required checks and require a result for every checklist item."
+    },
+    {
+      "id": "LIMIT_008",
+      "limit": "Unreliable self-assessment of task completeness",
+      "response": "Completeness must be calculated mechanically from required check identifiers."
+    }
+  ],
+  "department_architecture": {
+    "principle": "Hierarchical decomposition without hierarchical free-form reasoning",
+    "layers": [
+      {
+        "layer": "L0_DETERMINISTIC_DISCOVERY",
+        "owner": "scripts and repository index",
+        "responsibilities": [
+          "enumerate files",
+          "calculate hashes",
+          "identify changed files",
+          "resolve configured authoritative paths",
+          "collect timestamps",
+          "build dependency lists",
+          "select candidate evidence",
+          "prepare bounded task packets"
+        ],
+        "agent_reasoning": "NONE"
+      },
+      {
+        "layer": "L1_ATOMIC_CHECK",
+        "owner": "Codex Mini worker",
+        "responsibilities": [
+          "inspect one bounded condition",
+          "apply one explicit rule group",
+          "cite supplied evidence",
+          "return one constrained result"
+        ],
+        "agent_reasoning": "NARROW"
+      },
+      {
+        "layer": "L2_REGIME_REDUCTION",
+        "owner": "deterministic reducer",
+        "responsibilities": [
+          "verify result schema",
+          "verify required checks completed",
+          "reject unsupported findings",
+          "reduce atomic results into regime status"
+        ],
+        "agent_reasoning": "NONE"
+      },
+      {
+        "layer": "L3_CROSS_REGIME_COMPARISON",
+        "owner": "bounded comparison workers plus deterministic conflict detection",
+        "responsibilities": [
+          "compare two or three regime facts",
+          "classify known conflict types",
+          "open unresolved conflict records"
+        ],
+        "agent_reasoning": "BOUNDED_COMPARISON"
+      },
+      {
+        "layer": "L4_DEPARTMENT_DISPOSITION",
+        "owner": "department policy engine",
+        "responsibilities": [
+          "compose regime statuses",
+          "apply certification rules",
+          "apply staleness effects",
+          "publish departmental ledger"
+        ],
+        "agent_reasoning": "NONE"
+      },
+      {
+        "layer": "L5_OPERATOR_REVIEW",
+        "owner": "human operator",
+        "responsibilities": [
+          "resolve ambiguous authority",
+          "approve policy changes",
+          "approve exceptions",
+          "accept closure of recurrent defect classes"
+        ],
+        "agent_reasoning": "ADVISORY_ONLY"
+      }
+    ]
+  },
+  "task_size_constraints": {
+    "maximum_primary_objective_count": 1,
+    "maximum_secondary_check_count": 7,
+    "maximum_policy_documents_per_task": 2,
+    "maximum_authoritative_inputs_per_task": 8,
+    "maximum_cross_regime_sources_per_comparison": 3,
+    "maximum_required_output_findings": 10,
+    "task_packet_rule": "If a task exceeds any limit, it must be divided before agent execution.",
+    "exception_rule": "Exceptions require an explicit operator-approved task profile and may not become the default."
+  },
+  "task_packet_requirements": {
+    "required_fields": [
+      "task_id",
+      "regime_id",
+      "task_type",
+      "single_objective",
+      "scope_inclusions",
+      "scope_exclusions",
+      "authoritative_inputs",
+      "supporting_inputs",
+      "rules",
+      "required_checks",
+      "allowed_findings",
+      "allowed_statuses",
+      "evidence_format",
+      "stop_conditions",
+      "output_schema",
+      "completion_test"
+    ],
+    "forbidden_task_language": [
+      "review the entire repository",
+      "find anything wrong",
+      "determine overall health",
+      "use your best judgment",
+      "fix all related issues",
+      "infer the current source of truth",
+      "check everything relevant",
+      "make the repository valid"
+    ],
+    "required_task_language_pattern": "Inspect the listed inputs for the listed conditions and return only the allowed result types."
+  },
+  "atomic_worker_contract": {
+    "worker_must": [
+      "stay inside declared scope",
+      "evaluate every required check",
+      "cite an exact evidence location for every non-pass result",
+      "distinguish observation from inference",
+      "use only allowed statuses",
+      "return INSUFFICIENT_EVIDENCE when the supplied packet cannot support a decision",
+      "stop rather than expanding scope"
+    ],
+    "worker_must_not": [
+      "change departmental policy",
+      "select its own authoritative source",
+      "declare repository-wide health",
+      "close a historical finding",
+      "silently skip required checks",
+      "invent missing evidence",
+      "convert uncertainty into PASS",
+      "interpret absent evidence as evidence of absence",
+      "edit files unless assigned a separate repair task"
+    ]
+  },
+  "standard_atomic_result": {
+    "schema_id": "validation_atomic_result_v1",
+    "required_shape": {
+      "task_id": "string",
+      "regime_id": "string",
+      "status": "PASS | FAIL | WARNING | NOT_APPLICABLE | INSUFFICIENT_EVIDENCE | EXECUTION_ERROR",
+      "checks": [
+        {
+          "check_id": "string",
+          "result": "PASS | FAIL | WARNING | NOT_APPLICABLE | INSUFFICIENT_EVIDENCE",
+          "observation": "short factual statement",
+          "evidence": [
+            {
+              "path": "repository-relative path",
+              "location": "line, object key, symbol, command output, or hash",
+              "evidence_type": "DIRECT | DERIVED"
+            }
+          ],
+          "inference": "optional bounded inference",
+          "confidence": "HIGH | MEDIUM | LOW"
+        }
+      ],
+      "scope_expansion_requested": false,
+      "unresolved_questions": [],
+      "agent_notes": "optional short note"
+    },
+    "mechanical_acceptance_rules": [
+      "Every required check_id must appear exactly once.",
+      "No unknown check_id may appear.",
+      "Every FAIL or WARNING must contain evidence.",
+      "A PASS may not contain unresolved questions affecting that check.",
+      "The result is rejected if scope_expansion_requested is true.",
+      "The result is rejected if an unknown status is used.",
+      "The agent's overall status is advisory until deterministically reduced."
+    ]
+  },
+  "regime_design_standard": {
+    "each_regime_requires": [
+      "one defined subject",
+      "one authoritative scope manifest",
+      "one finite check catalog",
+      "one result schema",
+      "one deterministic reducer",
+      "one freshness policy",
+      "one dependency declaration",
+      "one escalation policy",
+      "one regression fixture set"
+    ],
+    "regime_must_not": [
+      "own unrelated validation subjects",
+      "interpret another regime's evidence without a comparison task",
+      "issue department-wide certification",
+      "use free-form prose as its authoritative result",
+      "depend on undocumented repository discovery"
+    ]
+  },
+  "initial_regime_catalog": [
+    {
+      "regime_id": "VR_TEST_COLLECTION",
+      "subject": "Test discovery and collection",
+      "bounded_question": "Does the canonical test command collect the declared test surface without error?",
+      "reasoning_level": "LOW"
+    },
+    {
+      "regime_id": "VR_TEST_EXECUTION",
+      "subject": "Test execution results",
+      "bounded_question": "Did every collected test complete with an allowed outcome?",
+      "reasoning_level": "LOW"
+    },
+    {
+      "regime_id": "VR_DEPENDENCY_ENVIRONMENT",
+      "subject": "Environment reproducibility",
+      "bounded_question": "Does the active environment match the declared dependency and runtime manifest?",
+      "reasoning_level": "LOW"
+    },
+    {
+      "regime_id": "VR_REPOSITORY_HYGIENE",
+      "subject": "Tracked repository composition",
+      "bounded_question": "Do tracked files comply with the declared repository retention and hygiene rules?",
+      "reasoning_level": "LOW_TO_MEDIUM"
+    },
+    {
+      "regime_id": "VR_DOCUMENT_AUTHORITY",
+      "subject": "Document authority and supersession",
+      "bounded_question": "Does each governed document class have one declared current authority?",
+      "reasoning_level": "MEDIUM"
+    },
+    {
+      "regime_id": "VR_DOCUMENT_SYNCHRONIZATION",
+      "subject": "Cross-document factual synchronization",
+      "bounded_question": "Do selected paired documents agree on the listed facts?",
+      "reasoning_level": "MEDIUM"
+    },
+    {
+      "regime_id": "VR_EVIDENCE_SCHEMA",
+      "subject": "Evidence structure",
+      "bounded_question": "Does each evidence artifact satisfy its declared schema and required fields?",
+      "reasoning_level": "LOW"
+    },
+    {
+      "regime_id": "VR_EVIDENCE_PROVENANCE",
+      "subject": "Evidence origin and traceability",
+      "bounded_question": "Can each evidence artifact be traced to declared inputs, execution, and producing version?",
+      "reasoning_level": "MEDIUM"
+    },
+    {
+      "regime_id": "VR_MOCK_SYNTHETIC_BOUNDARY",
+      "subject": "Synthetic and mock evidence isolation",
+      "bounded_question": "Can synthetic outputs be mechanically distinguished from admissible evidence?",
+      "reasoning_level": "LOW_TO_MEDIUM"
+    },
+    {
+      "regime_id": "VR_GOVERNANCE_INTEGRITY",
+      "subject": "Governance record integrity",
+      "bounded_question": "Do governance records satisfy required identifiers, transitions, references, and authority rules?",
+      "reasoning_level": "MEDIUM"
+    },
+    {
+      "regime_id": "VR_FORMAL_SYSTEM_COMPLETENESS",
+      "subject": "Declared formal-system components",
+      "bounded_question": "Are the specifically required formal components present and explicitly defined?",
+      "reasoning_level": "MEDIUM"
+    },
+    {
+      "regime_id": "VR_CLAIM_EVIDENCE_ALIGNMENT",
+      "subject": "Claim language versus registered evidence",
+      "bounded_question": "Does each selected claim remain within its registered evidence classification?",
+      "reasoning_level": "MEDIUM"
+    },
+    {
+      "regime_id": "VR_STALENESS_INPUT_CHANGE",
+      "subject": "Input change after validation",
+      "bounded_question": "Have authoritative inputs changed since the regime result was produced?",
+      "reasoning_level": "LOW"
+    },
+    {
+      "regime_id": "VR_STALENESS_SUPERSESSION",
+      "subject": "Historical supersession",
+      "bounded_question": "Has a newer authoritative artifact explicitly superseded the selected artifact?",
+      "reasoning_level": "LOW_TO_MEDIUM"
+    },
+    {
+      "regime_id": "VR_FINDING_RECURRENCE",
+      "subject": "Finding recurrence",
+      "bounded_question": "Does the current defect match the identity or failure class of a previously closed finding?",
+      "reasoning_level": "MEDIUM"
+    }
+  ],
+  "staleness_department_design": {
+    "principle": "Staleness is not one model judgment.",
+    "staleness_dimensions": [
+      {
+        "dimension": "INPUT_STALENESS",
+        "determination": "hash or version changed after validation",
+        "method": "deterministic"
+      },
+      {
+        "dimension": "TIME_STALENESS",
+        "determination": "policy-defined validation interval expired",
+        "method": "deterministic"
+      },
+      {
+        "dimension": "AUTHORITY_STALENESS",
+        "determination": "artifact was explicitly superseded",
+        "method": "registry plus bounded inspection"
+      },
+      {
+        "dimension": "DEPENDENCY_STALENESS",
+        "determination": "upstream regime or evidence was invalidated",
+        "method": "deterministic dependency graph"
+      },
+      {
+        "dimension": "SEMANTIC_STALENESS",
+        "determination": "artifact remains present but its statements conflict with current authority",
+        "method": "bounded pairwise comparison"
+      },
+      {
+        "dimension": "FINDING_STALENESS",
+        "determination": "historical finding no longer reproduces and its failure path is protected",
+        "method": "reproduction task plus regression evidence"
+      },
+      {
+        "dimension": "CLOSURE_STALENESS",
+        "determination": "a previously closed failure class has recurred",
+        "method": "finding identity and recurrence comparison"
+      }
+    ],
+    "mini_agent_rule": "A single task may evaluate only one staleness dimension for one artifact or one small artifact group.",
+    "final_staleness_statuses": [
+      "CURRENT",
+      "STALE_INPUT_CHANGED",
+      "STALE_TIME_EXPIRED",
+      "STALE_SUPERSEDED",
+      "STALE_DEPENDENCY_INVALIDATED",
+      "STALE_SEMANTIC_CONFLICT",
+      "RECURRENT_AFTER_CLOSURE",
+      "UNRESOLVED"
+    ]
+  },
+  "finding_memory": {
+    "purpose": "Prevent Codex Mini from reconstructing issue history from scattered prose.",
+    "record_schema": {
+      "finding_id": "stable identifier",
+      "failure_class_id": "stable recurring-class identifier",
+      "title": "short title",
+      "first_observed": "timestamp",
+      "last_observed": "timestamp",
+      "observation_count": "integer",
+      "recurrence_count": "integer",
+      "affected_regimes": [],
+      "evidence_refs": [],
+      "claimed_fix_records": [],
+      "verification_records": [],
+      "current_disposition": "OPEN | FIX_PENDING | FIXED_UNVERIFIED | FIXED_VERIFIED | STALE_SUPERSEDED | RECURRENT | ACCEPTED_DEBT | INVALID_FINDING",
+      "superseded_by": "optional identifier",
+      "next_required_action": "single bounded action"
+    },
+    "agent_use": "Workers receive the relevant finding record directly and must not search historical reports unless assigned a separate history-extraction task."
+  },
+  "repair_workflow": {
+    "separation_rule": "Validation tasks detect and classify. Repair tasks modify. Verification tasks test the repair. No single invocation performs all three.",
+    "stages": [
+      "ATOMIC_DETECTION",
+      "FINDING_REGISTRATION",
+      "BOUNDED_ROOT_CAUSE_ANALYSIS",
+      "REPAIR_SPECIFICATION",
+      "REPAIR_EXECUTION",
+      "TARGETED_VERIFICATION",
+      "REGIME_REVALIDATION",
+      "RECURRENCE_CHECK",
+      "CLOSURE_REVIEW"
+    ],
+    "closure_rule": "Codex Mini may recommend closure but may not independently close a recurrent failure class."
+  },
+  "prompting_standard": {
+    "preferred_structure": [
+      "ROLE",
+      "ONE OBJECTIVE",
+      "IN SCOPE",
+      "OUT OF SCOPE",
+      "AUTHORITATIVE INPUTS",
+      "RULES",
+      "REQUIRED CHECKS",
+      "ALLOWED RESULTS",
+      "STOP CONDITIONS",
+      "OUTPUT SCHEMA"
+    ],
+    "prompt_style": [
+      "short declarative instructions",
+      "one rule per line",
+      "explicit enums",
+      "explicit negative constraints",
+      "exact paths",
+      "exact identifiers",
+      "no rhetorical language",
+      "no implied authority hierarchy",
+      "no requirement to remember earlier conversations"
+    ]
+  },
+  "departmental_output_rule": {
+    "statement": "The departmental report is assembled from validated regime records, not written by a model from raw repository evidence.",
+    "allowed_model_contribution": [
+      "bounded summaries of already validated regime facts",
+      "pairwise conflict explanations",
+      "repair recommendations tied to registered findings"
+    ],
+    "forbidden_model_contribution": [
+      "inventing overall status",
+      "silently resolving regime conflicts",
+      "changing regime criticality",
+      "declaring evidence authoritative",
+      "closing unresolved staleness"
+    ]
+  },
+  "success_condition": {
+    "statement": "The Validation Department succeeds when a weaker model can reliably execute every assigned task because the architecture has removed the need for broad implicit reasoning.",
+    "measures": [
+      "schema-valid result rate",
+      "required-check completion rate",
+      "unsupported finding rejection rate",
+      "cross-run consistency",
+      "false closure rate",
+      "recurrence detection rate",
+      "operator escalation rate",
+      "average evidence set size per task"
+    ]
+  }
+}

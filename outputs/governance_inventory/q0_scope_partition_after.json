@@ -1,0 +1,726 @@
+{
+  "schema_id": "governance_q0_scope_partition_state_v1",
+  "schema_version": "1.0.0",
+  "patch_id": "PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007",
+  "phase": "after",
+  "cluster_id": "Q0-CLUSTER-D3129CA0B3C98DED",
+  "partition_id": "Q0-SCOPE-PARTITION-B3ABF318B77EEC0D",
+  "queue_group": "Q0_COMPETING_AUTHORITY_AND_WRITE_PATHS",
+  "resolved_record_count": 10,
+  "resolved_question_count": 12,
+  "remaining_record_count": 504,
+  "remaining_blocking_ambiguities": 504,
+  "role_assignments": [
+    {
+      "surface_id": "GOV-SURF-0881",
+      "surface_path": "registry/governance_change_ledger.json",
+      "surface_type": "LEDGER",
+      "authority_state": "EXPLICIT_LIVE_AUTHORITY",
+      "assigned_roles": [
+        "REGISTRY_STATE_AUTHORITY"
+      ],
+      "explicitly_denied_roles": [
+        "VALIDATION_INVOCATION_AUTHORITY",
+        "VALIDATION_REDUCTION_AUTHORITY",
+        "INSTRUCTION_AUTHORITY",
+        "GENERATED_EVIDENCE"
+      ],
+      "scope": {
+        "scope_id": "CHANGE_HISTORY",
+        "title": "Change-history registry state",
+        "description": "The append-only governance change ledger stores approval and history records for governed patches."
+      },
+      "governing_evidence": [
+        {
+          "path": "registry/governance_change_ledger.json",
+          "location": "json content",
+          "evidence_type": "DIRECT"
+        },
+        {
+          "path": "AGENTS.md",
+          "location": "cluster coherence evidence",
+          "evidence_type": "DIRECT"
+        },
+        {
+          "path": "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+          "location": "cluster coherence evidence",
+          "evidence_type": "DIRECT"
+        },
+        {
+          "path": "docs/governance/validation_department_mini_agent_architecture_001.json",
+          "location": "cluster coherence evidence",
+          "evidence_type": "DIRECT"
+        },
+        {
+          "path": "scripts/global_validate.py",
+          "location": "cluster coherence evidence",
+          "evidence_type": "DIRECT"
+        },
+        {
+          "path": "scripts/query_governance.py",
+          "location": "cluster coherence evidence",
+          "evidence_type": "DIRECT"
+        },
+        {
+          "path": "registry/governance_change_ledger.json",
+          "location": "cluster coherence evidence",
+          "evidence_type": "DIRECT"
+        }
+      ],
+      "read_reachable": false,
+      "write_reachable": false,
+      "validation_reachable": false,
+      "instruction_reachable": false
+    },
+    {
+      "surface_id": "GOV-SURF-0132",
+      "surface_path": "governance/live/tool_routing_manifest.json",
+      "surface_type": "REGISTRY",
+      "authority_state": "EXPLICIT_LIVE_AUTHORITY",
+      "assigned_roles": [
+        "REGISTRY_STATE_AUTHORITY"
+      ],
+      "explicitly_denied_roles": [
+        "VALIDATION_INVOCATION_AUTHORITY",
+        "VALIDATION_REDUCTION_AUTHORITY",
+        "INSTRUCTION_AUTHORITY",
+        "GENERATED_EVIDENCE"
+      ],
+      "scope": {
+        "scope_id": "TOOL_ROUTING_METADATA",
+        "title": "Tool-routing registry state",
+        "description": "The live tool-routing manifest stores deterministic routing metadata separate from raw rigor declarations."
+      },
+      "governing_evidence": [
+        {
+          "path": "governance/live/tool_routing_manifest.json",
+          "location": "json content",
+          "evidence_type": "DIRECT"
+        },
+        {
+          "path": "scripts/global_validate.py",
+          "location": "cluster coherence evidence",
+          "evidence_type": "DIRECT"
+        }
+      ],
+      "read_reachable": false,
+      "write_reachable": false,
+      "validation_reachable": false,
+      "instruction_reachable": false
+    },
+    {
+      "surface_id": "GOV-SURF-0882",
+      "surface_path": "registry/governance_hash_registry.json",
+      "surface_type": "REGISTRY",
+      "authority_state": "EXPLICIT_NON_AUTHORITATIVE",
+      "assigned_roles": [
+        "GENERATED_EVIDENCE"
+      ],
+      "explicitly_denied_roles": [
+        "REGISTRY_STATE_AUTHORITY",
+        "REGISTRY_WRITE_AUTHORITY",
+        "VALIDATION_INVOCATION_AUTHORITY",
+        "VALIDATION_REDUCTION_AUTHORITY",
+        "INSTRUCTION_AUTHORITY"
+      ],
+      "scope": {
+        "scope_id": "HASH_INTEGRITY_EVIDENCE",
+        "title": "Integrity-hash evidence",
+        "description": "The hash registry is a derived integrity surface that records hashes but does not create semantic authority."
+      },
+      "governing_evidence": [
+        {
+          "path": "registry/governance_hash_registry.json",
+          "location": "json content",
+          "evidence_type": "DIRECT"
+        },
+        {
+          "path": "registry/governance_hash_registry.json",
+          "location": "hash registry content",
+          "evidence_type": "DIRECT"
+        }
+      ],
+      "read_reachable": false,
+      "write_reachable": false,
+      "validation_reachable": false,
+      "instruction_reachable": false
+    },
+    {
+      "surface_id": "GOV-SURF-0972",
+      "surface_path": "scripts/global_validate.py",
+      "surface_type": "ENFORCEMENT_CODE",
+      "authority_state": "EXPLICIT_LIVE_AUTHORITY",
+      "assigned_roles": [
+        "VALIDATION_INVOCATION_AUTHORITY",
+        "VALIDATION_REDUCTION_AUTHORITY"
+      ],
+      "explicitly_denied_roles": [
+        "REGISTRY_STATE_AUTHORITY",
+        "REGISTRY_WRITE_AUTHORITY",
+        "INSTRUCTION_AUTHORITY",
+        "GENERATED_EVIDENCE"
+      ],
+      "scope": {
+        "scope_id": "VALIDATION_BOUNDARY",
+        "title": "Canonical validation boundary",
+        "description": "Module-style validation invocation and fail-closed terminal reduction for governed repository checks."
+      },
+      "governing_evidence": [
+        {
+          "path": "scripts/global_validate.py",
+          "location": "line 56: # 2. Integrity Checks: All tools in lexicon registry must exist in manifest",
+          "evidence_type": "DIRECT"
+        },
+        {
+          "path": "scripts/global_validate.py",
+          "location": "cluster coherence evidence",
+          "evidence_type": "DIRECT"
+        },
+        {
+          "path": "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+          "location": "cluster coherence evidence",
+          "evidence_type": "DIRECT"
+        },
+        {
+          "path": "registry/governance_change_ledger.json",
+          "location": "cluster coherence evidence",
+          "evidence_type": "DIRECT"
+        },
+        {
+          "path": "scripts/query_governance.py",
+          "location": "cluster coherence evidence",
+          "evidence_type": "DIRECT"
+        }
+      ],
+      "read_reachable": false,
+      "write_reachable": false,
+      "validation_reachable": false,
+      "instruction_reachable": false
+    },
+    {
+      "surface_id": "GOV-SURF-0994",
+      "surface_path": "scripts/query_governance.py",
+      "surface_type": "ENFORCEMENT_CODE",
+      "authority_state": "EXPLICIT_LIVE_AUTHORITY",
+      "assigned_roles": [
+        "GENERATED_EVIDENCE"
+      ],
+      "explicitly_denied_roles": [
+        "REGISTRY_STATE_AUTHORITY",
+        "REGISTRY_WRITE_AUTHORITY",
+        "VALIDATION_INVOCATION_AUTHORITY",
+        "VALIDATION_REDUCTION_AUTHORITY",
+        "INSTRUCTION_AUTHORITY"
+      ],
+      "scope": {
+        "scope_id": "GOVERNANCE_QUERY_EVIDENCE",
+        "title": "Governance query evidence",
+        "description": "The query helper emits diagnostic authority snapshots and should not be mistaken for a live registry."
+      },
+      "governing_evidence": [
+        {
+          "path": "scripts/query_governance.py",
+          "location": "line 144: 'Registry remains authoritative; DB runtime is an operational gate only.' AS rule_text,",
+          "evidence_type": "DIRECT"
+        },
+        {
+          "path": "scripts/query_governance.py",
+          "location": "cluster coherence evidence",
+          "evidence_type": "DIRECT"
+        },
+        {
+          "path": "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+          "location": "cluster coherence evidence",
+          "evidence_type": "DIRECT"
+        },
+        {
+          "path": "registry/governance_change_ledger.json",
+          "location": "cluster coherence evidence",
+          "evidence_type": "DIRECT"
+        }
+      ],
+      "read_reachable": false,
+      "write_reachable": false,
+      "validation_reachable": false,
+      "instruction_reachable": false
+    },
+    {
+      "surface_id": "GOV-SURF-0123",
+      "surface_path": "governance/live/master_work_index.json",
+      "surface_type": "SSOT",
+      "authority_state": "EXPLICIT_LIVE_AUTHORITY",
+      "assigned_roles": [
+        "GENERATED_EVIDENCE"
+      ],
+      "explicitly_denied_roles": [
+        "REGISTRY_STATE_AUTHORITY",
+        "REGISTRY_WRITE_AUTHORITY",
+        "VALIDATION_INVOCATION_AUTHORITY",
+        "VALIDATION_REDUCTION_AUTHORITY",
+        "INSTRUCTION_AUTHORITY"
+      ],
+      "scope": {
+        "scope_id": "MASTER_WORK_INDEX_PROJECTION",
+        "title": "Work-index projection",
+        "description": "The live work index is a projection and index surface, not a source of live authority."
+      },
+      "governing_evidence": [
+        {
+          "path": "governance/live/master_work_index.json",
+          "location": "$.status",
+          "evidence_type": "DIRECT"
+        },
+        {
+          "path": "AGENTS.md",
+          "location": "cluster coherence evidence",
+          "evidence_type": "DIRECT"
+        },
+        {
+          "path": "scripts/global_validate.py",
+          "location": "cluster coherence evidence",
+          "evidence_type": "DIRECT"
+        }
+      ],
+      "read_reachable": false,
+      "write_reachable": false,
+      "validation_reachable": false,
+      "instruction_reachable": false
+    },
+    {
+      "surface_id": "GOV-SURF-0005",
+      "surface_path": "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+      "surface_type": "POLICY",
+      "authority_state": "EXPLICIT_LIVE_AUTHORITY",
+      "assigned_roles": [
+        "INSTRUCTION_AUTHORITY"
+      ],
+      "explicitly_denied_roles": [
+        "REGISTRY_STATE_AUTHORITY",
+        "REGISTRY_WRITE_AUTHORITY",
+        "VALIDATION_INVOCATION_AUTHORITY",
+        "VALIDATION_REDUCTION_AUTHORITY",
+        "GENERATED_EVIDENCE"
+      ],
+      "scope": {
+        "scope_id": "VALIDATION_ROUTINE_GUIDANCE",
+        "title": "Validation routine guidance",
+        "description": "The global validation routine document is prescriptive guidance for operating the validator boundary."
+      },
+      "governing_evidence": [
+        {
+          "path": "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+          "location": "line 24: Freshness compares source-affecting changes against the stored source marker and runtime-only DB churn against the stored runtime marker. Routine decision logs,",
+          "evidence_type": "DIRECT"
+        },
+        {
+          "path": "scripts/global_validate.py",
+          "location": "cluster coherence evidence",
+          "evidence_type": "DIRECT"
+        },
+        {
+          "path": "scripts/query_governance.py",
+          "location": "cluster coherence evidence",
+          "evidence_type": "DIRECT"
+        },
+        {
+          "path": "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+          "location": "cluster coherence evidence",
+          "evidence_type": "DIRECT"
+        }
+      ],
+      "read_reachable": false,
+      "write_reachable": false,
+      "validation_reachable": false,
+      "instruction_reachable": true
+    },
+    {
+      "surface_id": "GOV-SURF-0001",
+      "surface_path": "AGENTS.md",
+      "surface_type": "INSTRUCTION_FILE",
+      "authority_state": "EXPLICIT_LIVE_AUTHORITY",
+      "assigned_roles": [
+        "INSTRUCTION_AUTHORITY"
+      ],
+      "explicitly_denied_roles": [
+        "REGISTRY_STATE_AUTHORITY",
+        "REGISTRY_WRITE_AUTHORITY",
+        "VALIDATION_INVOCATION_AUTHORITY",
+        "VALIDATION_REDUCTION_AUTHORITY",
+        "GENERATED_EVIDENCE"
+      ],
+      "scope": {
+        "scope_id": "AGENT_INSTRUCTIONS",
+        "title": "Agent instructions",
+        "description": "AGENTS.md is operator-facing guidance and cannot directly create live governance state."
+      },
+      "governing_evidence": [
+        {
+          "path": "AGENTS.md",
+          "location": "line 19: Every action must be grounded in the four foundational laws:",
+          "evidence_type": "DIRECT"
+        },
+        {
+          "path": "GEMINI.md",
+          "location": "cluster coherence evidence",
+          "evidence_type": "DIRECT"
+        },
+        {
+          "path": "scripts/global_validate.py",
+          "location": "cluster coherence evidence",
+          "evidence_type": "DIRECT"
+        },
+        {
+          "path": "AGENTS.md",
+          "location": "cluster coherence evidence",
+          "evidence_type": "DIRECT"
+        }
+      ],
+      "read_reachable": false,
+      "write_reachable": false,
+      "validation_reachable": false,
+      "instruction_reachable": true
+    },
+    {
+      "surface_id": "GOV-SURF-0002",
+      "surface_path": "GEMINI.md",
+      "surface_type": "INSTRUCTION_FILE",
+      "authority_state": "EXPLICIT_LIVE_AUTHORITY",
+      "assigned_roles": [
+        "INSTRUCTION_AUTHORITY"
+      ],
+      "explicitly_denied_roles": [
+        "REGISTRY_STATE_AUTHORITY",
+        "REGISTRY_WRITE_AUTHORITY",
+        "VALIDATION_INVOCATION_AUTHORITY",
+        "VALIDATION_REDUCTION_AUTHORITY",
+        "GENERATED_EVIDENCE"
+      ],
+      "scope": {
+        "scope_id": "GEMINI_INSTRUCTIONS",
+        "title": "Gemini instructions",
+        "description": "GEMINI.md is operator-facing guidance and cannot directly create live governance state."
+      },
+      "governing_evidence": [
+        {
+          "path": "GEMINI.md",
+          "location": "line 19: Every action must be grounded in the four foundational laws:",
+          "evidence_type": "DIRECT"
+        },
+        {
+          "path": "GEMINI.md",
+          "location": "cluster coherence evidence",
+          "evidence_type": "DIRECT"
+        },
+        {
+          "path": "scripts/global_validate.py",
+          "location": "cluster coherence evidence",
+          "evidence_type": "DIRECT"
+        }
+      ],
+      "read_reachable": false,
+      "write_reachable": false,
+      "validation_reachable": false,
+      "instruction_reachable": true
+    },
+    {
+      "surface_id": "GOV-SURF-0134",
+      "surface_path": "governance/program_task_registry.json",
+      "surface_type": "REGISTRY",
+      "authority_state": "EXPLICIT_LIVE_AUTHORITY",
+      "assigned_roles": [
+        "INSTRUCTION_AUTHORITY"
+      ],
+      "explicitly_denied_roles": [
+        "REGISTRY_STATE_AUTHORITY",
+        "REGISTRY_WRITE_AUTHORITY",
+        "VALIDATION_INVOCATION_AUTHORITY",
+        "VALIDATION_REDUCTION_AUTHORITY",
+        "GENERATED_EVIDENCE"
+      ],
+      "scope": {
+        "scope_id": "PROGRAM_TASK_GUIDANCE",
+        "title": "Program task registry guidance",
+        "description": "The program task registry is prescriptive guidance for governed work assignment, not live authority creation."
+      },
+      "governing_evidence": [
+        {
+          "path": "governance/program_task_registry.json",
+          "location": "$.status",
+          "evidence_type": "DIRECT"
+        },
+        {
+          "path": "AGENTS.md",
+          "location": "cluster coherence evidence",
+          "evidence_type": "DIRECT"
+        }
+      ],
+      "read_reachable": false,
+      "write_reachable": false,
+      "validation_reachable": false,
+      "instruction_reachable": true
+    },
+    {
+      "surface_id": "GOV-SURF-0103",
+      "surface_path": "docs/governance/validation_department_mini_agent_architecture_001.json",
+      "surface_type": "STANDARD",
+      "authority_state": "EXPLICIT_LIVE_AUTHORITY",
+      "assigned_roles": [
+        "INSTRUCTION_AUTHORITY"
+      ],
+      "explicitly_denied_roles": [
+        "REGISTRY_STATE_AUTHORITY",
+        "REGISTRY_WRITE_AUTHORITY",
+        "VALIDATION_INVOCATION_AUTHORITY",
+        "VALIDATION_REDUCTION_AUTHORITY",
+        "GENERATED_EVIDENCE"
+      ],
+      "scope": {
+        "scope_id": "VALIDATION_DEPARTMENT_ARCHITECTURE",
+        "title": "Validation department architecture guidance",
+        "description": "The mini-agent architecture record is foundational guidance and not a live proposal or registry authority."
+      },
+      "governing_evidence": [
+        {
+          "path": "docs/governance/validation_department_mini_agent_architecture_001.json",
+          "location": "$.status",
+          "evidence_type": "DIRECT"
+        },
+        {
+          "path": "docs/governance/validation_department_mini_agent_architecture_001.json",
+          "location": "cluster coherence evidence",
+          "evidence_type": "DIRECT"
+        }
+      ],
+      "read_reachable": false,
+      "write_reachable": false,
+      "validation_reachable": false,
+      "instruction_reachable": true
+    }
+  ],
+  "write_owner_assignments": [
+    {
+      "scope_id": "CORE_RULE_STATE",
+      "registry_path": "governance/core_rules/GOVERNANCE_AUTHORITY_SCOPE_PARTITION_001.json",
+      "authorized_writer_id": "scripts/governance/register_q0_authority_scope_partition.py",
+      "authorized_entry_point": "python -m scripts.governance.register_q0_authority_scope_partition",
+      "allowed_operations": [
+        "STORE_LIVE_RULE",
+        "STORE_PATCH_STATUS"
+      ],
+      "denied_operations": [
+        "DELETE",
+        "REPLACE",
+        "MERGE"
+      ],
+      "validation_before_write": [
+        "schema validation",
+        "hash verification"
+      ],
+      "atomicity_or_rollback_behavior": "Atomic file write; fail closed on validation mismatch.",
+      "hash_synchronization_behavior": "The writer computes exact-byte SHA-256 before ledger registration.",
+      "audit_behavior": "Record the governing rule path and patch id in the change ledger."
+    },
+    {
+      "scope_id": "CHANGE_HISTORY",
+      "registry_path": "registry/governance_change_ledger.json",
+      "authorized_writer_id": "scripts/governance/register_q0_authority_scope_partition.py",
+      "authorized_entry_point": "python -m scripts.governance.register_q0_authority_scope_partition",
+      "allowed_operations": [
+        "APPEND",
+        "UPDATE"
+      ],
+      "denied_operations": [
+        "DELETE",
+        "MERGE"
+      ],
+      "validation_before_write": [
+        "entry schema validation",
+        "approval-reference validation"
+      ],
+      "atomicity_or_rollback_behavior": "Append the ledger entry only after all governed artifacts are written successfully.",
+      "hash_synchronization_behavior": "Maintain the change ledger as an append-only record of the partition registration.",
+      "audit_behavior": "Store the diff report path and patch id in the appended ledger entry."
+    },
+    {
+      "scope_id": "TOOL_ROUTING_METADATA",
+      "registry_path": "governance/live/tool_routing_manifest.json",
+      "authorized_writer_id": "scripts/governance/register_q0_authority_scope_partition.py",
+      "authorized_entry_point": "python -m scripts.governance.register_q0_authority_scope_partition",
+      "allowed_operations": [
+        "APPEND",
+        "UPDATE"
+      ],
+      "denied_operations": [
+        "DELETE",
+        "MERGE"
+      ],
+      "validation_before_write": [
+        "schema validation",
+        "hash verification"
+      ],
+      "atomicity_or_rollback_behavior": "No mutation is required by this patch; the writer exists only as the exclusive declared mechanism.",
+      "hash_synchronization_behavior": "Any future manifest update must synchronize through the same writer boundary.",
+      "audit_behavior": "Keep routing metadata separate from live validation and registry-state authority."
+    },
+    {
+      "scope_id": "PARTITION_REGISTRY",
+      "registry_path": "governance/authority_partitions/Q0_AUTHORITY_SCOPE_PARTITION_001.json",
+      "authorized_writer_id": "scripts/governance/register_q0_authority_scope_partition.py",
+      "authorized_entry_point": "python -m scripts.governance.register_q0_authority_scope_partition",
+      "allowed_operations": [
+        "STORE_PARTITION_RECORD",
+        "UPDATE"
+      ],
+      "denied_operations": [
+        "DELETE",
+        "MERGE"
+      ],
+      "validation_before_write": [
+        "partition schema validation",
+        "role-overlap validation"
+      ],
+      "atomicity_or_rollback_behavior": "Write the partition record atomically after the supporting evidence files are present.",
+      "hash_synchronization_behavior": "The partition record hashes all governed evidence it references.",
+      "audit_behavior": "Store the partition identifier and governing rule identifiers in the registry record."
+    }
+  ],
+  "validation_reducer_assignment": {
+    "canonical_invocation": "python -m scripts.global_validate",
+    "canonical_reducer_rule_id": "GOVERNANCE_VALIDATION_FAIL_CLOSED_001",
+    "canonical_reducer_surface_id": "GOV-SURF-0972",
+    "canonical_reducer_surface_path": "scripts/global_validate.py",
+    "validated_target": "governance-validation-control-plane",
+    "governing_rule_ids": [
+      "GOVERNANCE_AUTHORITY_SCOPE_PARTITION_001",
+      "GOVERNANCE_VALIDATION_FAIL_CLOSED_001"
+    ],
+    "supporting_validator_ids": [
+      "GOV-SURF-0881",
+      "GOV-SURF-0994",
+      "GOV-SURF-0005",
+      "GOV-SURF-0123",
+      "GOV-SURF-0001",
+      "GOV-SURF-0002",
+      "GOV-SURF-0132",
+      "GOV-SURF-0134"
+    ],
+    "supporting_validator_paths": [
+      "registry/governance_change_ledger.json",
+      "scripts/query_governance.py",
+      "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+      "governance/live/master_work_index.json",
+      "AGENTS.md",
+      "GEMINI.md",
+      "governance/live/tool_routing_manifest.json",
+      "governance/program_task_registry.json"
+    ],
+    "terminal_status_effect": {
+      "scope_partition_gate": "PASS",
+      "inventory_completion_gate": "BLOCKED",
+      "reason": "The selected cluster is partitioned into explicit non-overlapping authority roles, but the broader inventory remains incomplete."
+    },
+    "active_status": "ACTIVE"
+  },
+  "instruction_surface_assignments": [
+    {
+      "surface_id": "GOV-SURF-0001",
+      "surface_path": "AGENTS.md",
+      "surface_type": "INSTRUCTION_FILE",
+      "assigned_roles": [
+        "INSTRUCTION_AUTHORITY"
+      ],
+      "explicitly_denied_roles": [
+        "REGISTRY_STATE_AUTHORITY",
+        "REGISTRY_WRITE_AUTHORITY",
+        "VALIDATION_INVOCATION_AUTHORITY",
+        "VALIDATION_REDUCTION_AUTHORITY"
+      ],
+      "scope": "unknown"
+    },
+    {
+      "surface_id": "GOV-SURF-0002",
+      "surface_path": "GEMINI.md",
+      "surface_type": "INSTRUCTION_FILE",
+      "assigned_roles": [
+        "INSTRUCTION_AUTHORITY"
+      ],
+      "explicitly_denied_roles": [
+        "REGISTRY_STATE_AUTHORITY",
+        "REGISTRY_WRITE_AUTHORITY",
+        "VALIDATION_INVOCATION_AUTHORITY",
+        "VALIDATION_REDUCTION_AUTHORITY"
+      ],
+      "scope": "unknown"
+    },
+    {
+      "surface_id": "GOV-SURF-0005",
+      "surface_path": "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+      "surface_type": "POLICY",
+      "assigned_roles": [
+        "INSTRUCTION_AUTHORITY"
+      ],
+      "explicitly_denied_roles": [
+        "REGISTRY_STATE_AUTHORITY",
+        "REGISTRY_WRITE_AUTHORITY",
+        "VALIDATION_INVOCATION_AUTHORITY",
+        "VALIDATION_REDUCTION_AUTHORITY"
+      ],
+      "scope": "governance documentation, evidence, and proposal surfaces"
+    },
+    {
+      "surface_id": "GOV-SURF-0134",
+      "surface_path": "governance/program_task_registry.json",
+      "surface_type": "REGISTRY",
+      "assigned_roles": [
+        "INSTRUCTION_AUTHORITY"
+      ],
+      "explicitly_denied_roles": [
+        "REGISTRY_STATE_AUTHORITY",
+        "REGISTRY_WRITE_AUTHORITY",
+        "VALIDATION_INVOCATION_AUTHORITY",
+        "VALIDATION_REDUCTION_AUTHORITY"
+      ],
+      "scope": "Establish a universal governed task registry for gaps, bridges, dependencies, validation work, infrastructure, documentation, research debt follow-ups, and promotion candidates across all MPF departments."
+    },
+    {
+      "surface_id": "GOV-SURF-0103",
+      "surface_path": "docs/governance/validation_department_mini_agent_architecture_001.json",
+      "surface_type": "STANDARD",
+      "assigned_roles": [
+        "INSTRUCTION_AUTHORITY"
+      ],
+      "explicitly_denied_roles": [
+        "REGISTRY_STATE_AUTHORITY",
+        "REGISTRY_WRITE_AUTHORITY",
+        "VALIDATION_INVOCATION_AUTHORITY",
+        "VALIDATION_REDUCTION_AUTHORITY"
+      ],
+      "scope": "Prevent Codex Mini from reconstructing issue history from scattered prose."
+    }
+  ],
+  "generated_evidence_assignments": [
+    {
+      "surface_id": "GOV-SURF-0882",
+      "surface_path": "registry/governance_hash_registry.json",
+      "surface_type": "REGISTRY",
+      "authority_effect": "NONE",
+      "generation_note": "Derived evidence surface; not a live authority source."
+    },
+    {
+      "surface_id": "GOV-SURF-0994",
+      "surface_path": "scripts/query_governance.py",
+      "surface_type": "ENFORCEMENT_CODE",
+      "authority_effect": "NONE",
+      "generation_note": "Derived evidence surface; not a live authority source."
+    },
+    {
+      "surface_id": "GOV-SURF-0123",
+      "surface_path": "governance/live/master_work_index.json",
+      "surface_type": "SSOT",
+      "authority_effect": "NONE",
+      "generation_note": "Derived evidence surface; not a live authority source."
+    }
+  ],
+  "status": "AFTER_PARTITION",
+  "logical_hash": "9a318f1a6fd657988943658b56cf5a3301f33c1220882c1789fe82c93c5f7957"
+}

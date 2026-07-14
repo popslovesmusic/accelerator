@@ -1,0 +1,24 @@
+{
+  "rule_id": "GOVERNANCE_AUTHORITY_SCOPE_PARTITION_001",
+  "title": "Non-Overlapping Governance Authority Roles",
+  "status": "LIVE",
+  "authority_type": "CORE_GOVERNANCE_RULE",
+  "scope": "Selected Q0 registry-state, validation, instruction, and generated-evidence surfaces only.",
+  "effect": "Separates live authority roles into non-overlapping scopes without conferring authority by implication.",
+  "statement": "A governed domain may contain multiple live authority surfaces only when each surface has an explicit, non-overlapping authority role. State authority, mutation authority, validation authority, and instruction authority must be separately declared. No surface may exercise another role by implication.",
+  "authority_effect": "LIVE_SCOPE_CONSTRAINT",
+  "role_constraints": [
+    "Registry authority determines the authoritative stored governance state.",
+    "Write authority determines which bounded mechanism may mutate that state.",
+    "Validation authority determines whether governed state satisfies applicable rules.",
+    "Instruction authority documents required procedures and interfaces but cannot itself mutate or validate live state.",
+    "Generated reports remain derived evidence and hold none of these authorities unless separately declared."
+  ],
+  "prohibited_interpretations": [
+    "listed means authorized",
+    "generated means live authority",
+    "documentation means mutation authority",
+    "validation invocation means registry ownership"
+  ],
+  "source_patch_id": "PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007"
+}

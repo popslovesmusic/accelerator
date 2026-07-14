@@ -1,0 +1,1 @@
+"""Governance inventory validation tests."""

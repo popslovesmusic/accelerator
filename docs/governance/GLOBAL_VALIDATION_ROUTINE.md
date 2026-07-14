@@ -27,6 +27,8 @@ Use authority resolution for the target surface before modifying any authority-b
 
 `python scripts/query_governance.py authority --target <path-or-surface>`
 
+For the governed Q0 authority partition surfaces, generic authority lookup is fail-closed. Operators must declare the requested Q0 role explicitly with `--authority-role <REGISTRY_STATE_AUTHORITY|REGISTRY_WRITE_AUTHORITY|VALIDATION_INVOCATION_AUTHORITY|VALIDATION_REDUCTION_AUTHORITY|INSTRUCTION_AUTHORITY|GENERATED_EVIDENCE>`.
+
 Use semantic authority resolution when a patch declares semantic targets or when a theorem, operator binding, claim, domain rule, or runtime rule needs direct semantic ownership:
 
 `python scripts/query_governance.py authority --semantic <key> --semantic-type <type>`

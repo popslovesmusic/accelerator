@@ -1,0 +1,24 @@
+{
+  "rule_id": "GOVERNANCE_Q0_CLUSTER_COHERENCE_001",
+  "title": "Q0 Resolution Cluster Coherence",
+  "status": "LIVE",
+  "authority_type": "CORE_GOVERNANCE_RULE",
+  "scope": "Governance cluster selection and resolution packet construction for Q0_COMPETING_AUTHORITY_AND_WRITE_PATHS only.",
+  "effect": "Constrains cluster selection and packet construction; does not authorize any inventoried surface.",
+  "statement": "A governance ambiguity cluster may be resolved as one unit only when its records concern the same governed state, decision domain, write boundary, validation outcome, or inseparable authority lineage. Queue proximity alone does not establish cluster coherence, and selection creates no authority or ambiguity resolution.",
+  "constraints": [
+    "Every included ambiguity must have a documented relationship to the same governed authority domain.",
+    "Every excluded neighboring ambiguity must remain unchanged.",
+    "A cluster must be small enough to validate and roll back independently.",
+    "Cross-domain ambiguity records must not be combined merely because they share a candidate file or registry.",
+    "Selection creates no authority and resolves no ambiguity."
+  ],
+  "prohibited_interpretations": [
+    "queue proximity means cluster membership",
+    "selection means authority",
+    "selection means resolution",
+    "a bounded cluster may ignore cross-domain evidence",
+    "packet construction may promote live authority"
+  ],
+  "source_patch_id": "PATCH_GOVERNANCE_Q0_CLUSTER_SELECTION_AND_RESOLUTION_PACKET_006"
+}

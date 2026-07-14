@@ -1,0 +1,157 @@
+{
+  "schema_id": "governance_q0_path_maps_v1",
+  "schema_version": "1.0.0",
+  "patch_id": "PATCH_GOVERNANCE_Q0_CLUSTER_SELECTION_AND_RESOLUTION_PACKET_006",
+  "kind": "read",
+  "cluster_id": "Q0-CLUSTER-D3129CA0B3C98DED",
+  "record_count": 10,
+  "records": [
+    {
+      "consumer_id": "GOV-SURF-0972",
+      "consumer_path": "scripts/global_validate.py",
+      "entry_point": "python -m scripts.global_validate",
+      "lookup_key": "governance-validation-control-plane",
+      "candidate_sources": [
+        "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+        "registry/governance_change_ledger.json",
+        "registry/governance_hash_registry.json",
+        "scripts/query_governance.py"
+      ],
+      "selection_rule": "prefer the shortest direct dependency path inside the selected cluster; fail closed when the path is ambiguous.",
+      "fallback_behavior": "block and preserve all existing authorities.",
+      "active_status": "ACTIVE",
+      "queue_position": 1
+    },
+    {
+      "consumer_id": "GOV-SURF-0881",
+      "consumer_path": "registry/governance_change_ledger.json",
+      "entry_point": "registry/governance_change_ledger.json",
+      "lookup_key": "governance-validation-control-plane",
+      "candidate_sources": [
+        "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+        "registry/governance_hash_registry.json",
+        "scripts/global_validate.py",
+        "scripts/query_governance.py"
+      ],
+      "selection_rule": "prefer the shortest direct dependency path inside the selected cluster; fail closed when the path is ambiguous.",
+      "fallback_behavior": "block and preserve all existing authorities.",
+      "active_status": "ACTIVE",
+      "queue_position": 2
+    },
+    {
+      "consumer_id": "GOV-SURF-0994",
+      "consumer_path": "scripts/query_governance.py",
+      "entry_point": "python -m scripts.query_governance",
+      "lookup_key": "governance-validation-control-plane",
+      "candidate_sources": [
+        "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+        "registry/governance_change_ledger.json",
+        "registry/governance_hash_registry.json",
+        "scripts/global_validate.py"
+      ],
+      "selection_rule": "prefer the shortest direct dependency path inside the selected cluster; fail closed when the path is ambiguous.",
+      "fallback_behavior": "block and preserve all existing authorities.",
+      "active_status": "ACTIVE",
+      "queue_position": 3
+    },
+    {
+      "consumer_id": "GOV-SURF-0005",
+      "consumer_path": "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+      "entry_point": "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+      "lookup_key": "governance-validation-control-plane",
+      "candidate_sources": [
+        "scripts/global_validate.py",
+        "scripts/query_governance.py"
+      ],
+      "selection_rule": "prefer the shortest direct dependency path inside the selected cluster; fail closed when the path is ambiguous.",
+      "fallback_behavior": "block and preserve all existing authorities.",
+      "active_status": "ACTIVE",
+      "queue_position": 4
+    },
+    {
+      "consumer_id": "GOV-SURF-0123",
+      "consumer_path": "governance/live/master_work_index.json",
+      "entry_point": "governance/live/master_work_index.json",
+      "lookup_key": "governance-validation-control-plane",
+      "candidate_sources": [
+        "AGENTS.md",
+        "GEMINI.md",
+        "scripts/global_validate.py"
+      ],
+      "selection_rule": "prefer the live instruction or registry surface already referenced by the selected cluster; fail closed on disagreement.",
+      "fallback_behavior": "block and preserve all existing authorities.",
+      "active_status": "ACTIVE",
+      "queue_position": 5
+    },
+    {
+      "consumer_id": "GOV-SURF-0001",
+      "consumer_path": "AGENTS.md",
+      "entry_point": "AGENTS.md",
+      "lookup_key": "governance-validation-control-plane",
+      "candidate_sources": [
+        "GEMINI.md",
+        "scripts/global_validate.py"
+      ],
+      "selection_rule": "prefer the live instruction or registry surface already referenced by the selected cluster; fail closed on disagreement.",
+      "fallback_behavior": "block and preserve all existing authorities.",
+      "active_status": "ACTIVE",
+      "queue_position": 6
+    },
+    {
+      "consumer_id": "GOV-SURF-0002",
+      "consumer_path": "GEMINI.md",
+      "entry_point": "GEMINI.md",
+      "lookup_key": "governance-validation-control-plane",
+      "candidate_sources": [
+        "AGENTS.md",
+        "scripts/global_validate.py"
+      ],
+      "selection_rule": "prefer the live instruction or registry surface already referenced by the selected cluster; fail closed on disagreement.",
+      "fallback_behavior": "block and preserve all existing authorities.",
+      "active_status": "ACTIVE",
+      "queue_position": 7
+    },
+    {
+      "consumer_id": "GOV-SURF-0132",
+      "consumer_path": "governance/live/tool_routing_manifest.json",
+      "entry_point": "governance/live/tool_routing_manifest.json",
+      "lookup_key": "governance-validation-control-plane",
+      "candidate_sources": [
+        "registry/tool_manifest.json",
+        "scripts/global_validate.py"
+      ],
+      "selection_rule": "prefer the live instruction or registry surface already referenced by the selected cluster; fail closed on disagreement.",
+      "fallback_behavior": "block and preserve all existing authorities.",
+      "active_status": "ACTIVE",
+      "queue_position": 8
+    },
+    {
+      "consumer_id": "GOV-SURF-0134",
+      "consumer_path": "governance/program_task_registry.json",
+      "entry_point": "governance/program_task_registry.json",
+      "lookup_key": "governance-validation-control-plane",
+      "candidate_sources": [
+        "AGENTS.md",
+        "registry/governance_change_ledger.json"
+      ],
+      "selection_rule": "prefer the live instruction or registry surface already referenced by the selected cluster; fail closed on disagreement.",
+      "fallback_behavior": "block and preserve all existing authorities.",
+      "active_status": "ACTIVE",
+      "queue_position": 9
+    },
+    {
+      "consumer_id": "GOV-SURF-0103",
+      "consumer_path": "docs/governance/validation_department_mini_agent_architecture_001.json",
+      "entry_point": "docs/governance/validation_department_mini_agent_architecture_001.json",
+      "lookup_key": "governance-validation-control-plane",
+      "candidate_sources": [
+        "registry/governance_change_ledger.json"
+      ],
+      "selection_rule": "fail closed and surface the ambiguity for the next resolution patch.",
+      "fallback_behavior": "block and preserve the architecture record as non-authoritative evidence.",
+      "active_status": "ACTIVE",
+      "queue_position": 14
+    }
+  ],
+  "logical_hash": "8ab4e18ae7a27f7fb9297e8cdca05364e82ac63a83e0e45a0aefb9587ec18e24"
+}

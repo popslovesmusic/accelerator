@@ -4,11 +4,17 @@ import json
 import argparse
 from datetime import datetime
 
-def run_db_health_check(db_path, schema_path, include_supersession_edge_quality=True):
+def run_db_health_check(
+    db_path,
+    schema_path,
+    include_supersession_edge_quality=True,
+    full_integrity_check=False,
+):
     health = {
         "status": "pass",
         "db_path": db_path,
         "schema_path": schema_path,
+        "integrity_check_mode": "full" if full_integrity_check else "quick",
         "integrity_check": "unknown",
         "table_status": {},
         "row_counts": {},
@@ -39,7 +45,10 @@ def run_db_health_check(db_path, schema_path, include_supersession_edge_quality=
         cursor = conn.cursor()
 
         # 2. SQLite Integrity Check
-        cursor.execute("PRAGMA integrity_check")
+        # `quick_check` is the default for routine validation because the DB can be large.
+        # Use `--full-integrity-check` for the slower exhaustive scan.
+        pragma = "PRAGMA integrity_check" if full_integrity_check else "PRAGMA quick_check"
+        cursor.execute(pragma)
         row = cursor.fetchone()
         health["integrity_check"] = row[0]
         if health["integrity_check"] != "ok":
@@ -151,9 +160,18 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run acellorator DB health check.")
     parser.add_argument("--db", default="registry/db/acellorator_index.sqlite", help="Path to SQLite database.")
     parser.add_argument("--schema", default="registry/db/schema.sql", help="Path to SQL schema file.")
+    parser.add_argument(
+        "--full-integrity-check",
+        action="store_true",
+        help="Run the slower exhaustive SQLite integrity check instead of the default quick check.",
+    )
     
     args = parser.parse_args()
-    health, errors = run_db_health_check(args.db, args.schema)
+    health, errors = run_db_health_check(
+        args.db,
+        args.schema,
+        full_integrity_check=args.full_integrity_check,
+    )
     
     output = {"db_health": health, "errors": errors}
     print(json.dumps(output, indent=2))

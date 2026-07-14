@@ -1,0 +1,94 @@
+{
+  "patch_id": "PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007",
+  "title": "Q0 Authority Scope Partition and Enforcement",
+  "type": "governance_runtime_extension",
+  "patch_type": "q0_authority_scope_partition",
+  "mode": "additive",
+  "status": "PARTIAL",
+  "depends_on": [
+    "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002",
+    "PATCH_GOVERNANCE_INVENTORY_PROVENANCE_AND_ADDITIVE_AUTHORITY_004",
+    "PATCH_GOVERNANCE_AMBIGUITY_RISK_CLASSIFICATION_AND_REMEDIATION_QUEUE_005",
+    "PATCH_GOVERNANCE_Q0_CLUSTER_SELECTION_AND_RESOLUTION_PACKET_006"
+  ],
+  "live_semantic_dependencies": {
+    "classification": "SEMANTICS_SURVIVE_ELSEWHERE",
+    "historical_reference": {
+      "patch_id": "PATCH_GOVERNANCE_STATUS_SEMANTICS_AND_BLOCKING_REDUCTION_003",
+      "status": "UNMATERIALIZED_HISTORICAL_REFERENCE",
+      "git_history_status": "NO_MATCHING_COMMITTED_HISTORY_FOUND",
+      "live_dependency_allowed": false
+    },
+    "surviving_authorities": [
+      {
+        "semantic_rule_id": "GOVERNANCE_VALIDATION_FAIL_CLOSED_001",
+        "authority_role": "VALIDATION_REDUCTION_AUTHORITY",
+        "artifact_path": "governance/authority_partitions/Q0_AUTHORITY_SCOPE_PARTITION_001.json",
+        "artifact_field": "validation_partition.terminal_reducer_rule_id",
+        "evidence_type": "REGISTERED_PARTITION_ARTIFACT"
+      },
+      {
+        "semantic_rule_id": "GOVERNANCE_VALIDATION_FAIL_CLOSED_001",
+        "authority_role": "VALIDATION_REDUCTION_AUTHORITY",
+        "artifact_path": "outputs/governance_inventory/q0_validator_authority_partition.json",
+        "artifact_field": "terminal_reducer_rule_id",
+        "evidence_type": "REGISTERED_GOVERNANCE_INVENTORY_OUTPUT"
+      },
+      {
+        "semantic_rule_id": "GOVERNANCE_VALIDATION_FAIL_CLOSED_001",
+        "authority_role": "VALIDATION_INVOCATION_AUTHORITY",
+        "artifact_path": "scripts/global_validate.py",
+        "artifact_field": "ValidationReducerAuthorityValidator and overall_status reduction",
+        "evidence_type": "LIVE_IMPLEMENTATION"
+      }
+    ]
+  },
+  "purpose": "Materialize the Q0 authority-scope partition, require role-aware governance access, constrain governed writes to declared writers, and separate validator invocation from terminal reduction authority.",
+  "updated_artifacts": [
+    "governance/core_rules/GOVERNANCE_AUTHORITY_SCOPE_PARTITION_001.json",
+    "governance/authority_partitions/Q0_AUTHORITY_SCOPE_PARTITION_001.json",
+    "outputs/governance_inventory/q0_scope_partition_before.json",
+    "outputs/governance_inventory/q0_scope_partition_after.json",
+    "outputs/governance_inventory/q0_scope_partition_diff.json",
+    "outputs/governance_inventory/q0_exclusive_write_owners.json",
+    "outputs/governance_inventory/q0_validator_authority_partition.json",
+    "outputs/governance_inventory/q0_instruction_authority_partition.json",
+    "outputs/governance_inventory/q0_scope_partition_queue.json",
+    "outputs/governance_inventory/q0_live_authority_access_inventory.json",
+    "docs/governance/q0_authority_scope_partition.md",
+    "scripts/query_governance.py",
+    "scripts/global_validate.py",
+    "scripts/validate_governance_surface.py",
+    "scripts/governance/register_q0_authority_scope_partition.py",
+    "tools/governance_inventory/authority_scope_partition.py",
+    "tools/runtime_authority/__init__.py",
+    "tests/governance_validation/test_q0_authority_scope_partition.py",
+    "tests/governance_validation/test_q0_authority_scope_partition_completion_record.py",
+    "tests/governance_validation/test_q0_role_aware_authority.py",
+    "registry/governance/patches/PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007.json"
+  ],
+  "authority_model": {
+    "required_roles": [
+      "REGISTRY_STATE_AUTHORITY",
+      "REGISTRY_WRITE_AUTHORITY",
+      "VALIDATION_INVOCATION_AUTHORITY",
+      "VALIDATION_REDUCTION_AUTHORITY",
+      "INSTRUCTION_AUTHORITY",
+      "GENERATED_EVIDENCE"
+    ],
+    "generic_mixed_role_lookup": "prohibited",
+    "fail_closed": true
+  },
+  "validation_policy": {
+    "full_project_validation": "SUSPENDED_PENDING_VALIDATOR_DEPARTMENT_COMPLETION",
+    "allowed_checks": [
+      "compile",
+      "patch_local_tests",
+      "role_aware_authority_validation",
+      "write_boundary_validation",
+      "validation_reducer_authority_validation",
+      "git_diff_check",
+      "git_status"
+    ]
+  }
+}

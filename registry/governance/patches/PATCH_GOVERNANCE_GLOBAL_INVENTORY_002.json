@@ -1,0 +1,547 @@
+{
+  "patch_id": "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002",
+  "title": "Global Governance Surface Inventory",
+  "status": "PARTIAL",
+  "priority": "P0",
+  "program": "VALIDATION_DEPARTMENT_FOUNDATION",
+  "agent_profile": {
+    "agent": "Codex Mini",
+    "reasoning_mode": "extra_high",
+    "task_design": "BOUNDED_MULTI_STEP",
+    "global_judgment_allowed": false
+  },
+  "objective": "Create a complete machine-readable inventory of every repository surface that currently defines, records, implies, mirrors, or modifies governance authority.",
+  "reason_for_patch": "The Validation Department cannot be designed against an assumed governance structure. Governance must first be located, classified, and checked for conflicting or stale authority.",
+  "authority_effect": {
+    "creates_new_governance": false,
+    "modifies_live_governance": false,
+    "supersedes_existing_governance": false,
+    "activates_validation_department": false,
+    "classification": "NONE"
+  },
+  "patch_mode": "ADDITIVE_ONLY",
+  "registration_gate": {
+    "status": "PASS",
+    "reason": "The inventory may be registered as transitional evidence after provenance and core-rule registration."
+  },
+  "inventory_completion_gate": {
+    "status": "BLOCKED",
+    "reason": "The inventory remains partial because 514 blocking ambiguities are unresolved.",
+    "blocking_ambiguities": 514
+  },
+  "patch_gate_transition": {
+    "before": {
+      "gate_status": "BLOCKED",
+      "failed_preconditions": [
+        "missing_provenance",
+        "missing_core_rule",
+        "non_additive_patch_mode"
+      ]
+    },
+    "required_after": {
+      "missing_provenance": "RESOLVED",
+      "missing_core_rule": "RESOLVED",
+      "non_additive_patch_mode": "RESOLVED",
+      "inventory_ambiguity_status": "STILL_BLOCKING",
+      "inventory_status": "PARTIAL",
+      "live_governance_created_by_inventory": false
+    },
+    "expected_gate_result": {
+      "patch_002_registration_gate": "PASS",
+      "inventory_completion_gate": "BLOCKED",
+      "reason": "The inventory may now be validly registered as transitional evidence, but it remains incomplete because 514 blocking ambiguities are unresolved."
+    }
+  },
+  "core_rule_reference": {
+    "rule_id": "GOVERNANCE_INVENTORY_TRANSITIONAL_EVIDENCE_001",
+    "path": "governance/core_rules/GOVERNANCE_INVENTORY_TRANSITIONAL_EVIDENCE_001.json",
+    "hash": "f1c448c7aeba076bd6b5a5734e432e897272e57219e17004d3ee1773741a2ec5"
+  },
+  "provenance_records": [
+    {
+      "provenance_id": "GOVINV-PROV-2E8B1A016EE51FB3",
+      "artifact_path": "docs/manual_repository_audit_2026_07_13.md",
+      "artifact_sha256": "a16f4997f1ba7b17b11f4e3f188ecf530a38b2d9730052d1eefcb9ca290e30c7",
+      "artifact_role": "MANUAL_AUDIT"
+    },
+    {
+      "provenance_id": "GOVINV-PROV-63CE0623B52B47C6",
+      "artifact_path": "outputs/governance_inventory/governance_surface_inventory.json",
+      "artifact_sha256": "f51033a89b407a81f414e66269f5833dff89c682b7f31761edd091ea6b1e72e2",
+      "artifact_role": "SURFACE_INVENTORY"
+    },
+    {
+      "provenance_id": "GOVINV-PROV-48E7B3841579FEB7",
+      "artifact_path": "outputs/governance_inventory/governance_authority_relationships.json",
+      "artifact_sha256": "a2b95d4fa15cfb7f967b294f27dcc99f7eb822623893789cddd087681aacad60",
+      "artifact_role": "AUTHORITY_RELATIONSHIPS"
+    },
+    {
+      "provenance_id": "GOVINV-PROV-57FA240021B4BACC",
+      "artifact_path": "outputs/governance_inventory/governance_ambiguity_register.json",
+      "artifact_sha256": "eaf761397f3e16e1035b99386ba9da5c047d792a7c0a90538a1b444cf3aea280",
+      "artifact_role": "AMBIGUITY_REGISTER"
+    },
+    {
+      "provenance_id": "GOVINV-PROV-1F6A84C25EF5E873",
+      "artifact_path": "outputs/governance_inventory/governance_inventory_summary.json",
+      "artifact_sha256": "4bd48ba74e6717613fb82c9b68d06617e6e1018fa7f6edd5c9337d4ceebfe94d",
+      "artifact_role": "INVENTORY_SUMMARY"
+    }
+  ],
+  "evidence_set_reference": {
+    "evidence_set_id": "GOVERNANCE_GLOBAL_INVENTORY_2026_07_13",
+    "path": "governance/evidence_sets/GOVERNANCE_GLOBAL_INVENTORY_2026_07_13.json",
+    "hash": "6c70dfd706da66dbcee459d1fb99e6ef548ed2827aab8fb2d58ac71f7b8766ec",
+    "authority_effect": "NONE"
+  },
+  "inventory_count_preservation": {
+    "required_values": {
+      "total_surfaces": 1083,
+      "explicit_live_authorities": 77,
+      "proposals": 52,
+      "historical_surfaces": 177,
+      "generated_views": 587,
+      "blocking_ambiguities": 514,
+      "conflicts": 0,
+      "unknowns": 0
+    },
+    "rule": "This patch must reproduce these counts from the registered inventory artifacts or fail closed. It must not manually alter counts to satisfy validation."
+  },
+  "source_snapshot_contract": {
+    "required": [
+      "workspace_root_identity",
+      "included_roots",
+      "excluded_roots",
+      "file_count_scanned",
+      "surface_count_detected",
+      "logical_snapshot_sha256",
+      "working_tree_dirty",
+      "unrelated_changes_preserved"
+    ],
+    "rules": [
+      "Absolute host paths must not participate in logical snapshot identity.",
+      "Included and excluded roots must be canonically sorted.",
+      "Dirty-state metadata must be recorded.",
+      "Unrelated dirty changes must not be included in patch modifications.",
+      "The snapshot must represent the evidence source, not claim repository cleanliness."
+    ]
+  },
+  "authority_registration": {
+    "new_live_rule": {
+      "rule_id": "GOVERNANCE_INVENTORY_TRANSITIONAL_EVIDENCE_001",
+      "authority_type": "CORE_GOVERNANCE_RULE",
+      "status": "LIVE",
+      "scope": "Governance inventory artifacts and inventory-derived reports only.",
+      "effect": "Constrains what inventories may do; does not authorize any inventoried surface."
+    },
+    "inventory_registration": {
+      "record_type": "TRANSITIONAL_GOVERNANCE_EVIDENCE_SET",
+      "status": "PARTIAL",
+      "authority_effect": "NONE",
+      "contains_live_authority": false,
+      "references_live_authority": true,
+      "ambiguities_blocking": true,
+      "eligible_for_governance_replacement": false
+    }
+  },
+  "architectural_constraints": [
+    "Code remains file-authoritative.",
+    "The future target is database authority for all non-code program state.",
+    "Current file-based governance must be inventoried before migration or removal.",
+    "No governance surface may be treated as authoritative based only on filename, directory, age, or registration.",
+    "Existing historical records must not be deleted.",
+    "Unrelated working-tree changes must remain untouched."
+  ],
+  "scope": {
+    "include": [
+      "governance/",
+      "registry/",
+      "docs/governance/",
+      "reports/",
+      "outputs/audits/",
+      "database governance tables or schema definitions",
+      "scripts that create or modify governance records",
+      "tests that encode governance behavior",
+      "root-level instruction or authority files",
+      "departmental SSOT declarations",
+      "schema registries",
+      "hash registries",
+      "change ledgers",
+      "patch registries",
+      "task registries",
+      "closure records",
+      "supersession records",
+      "operator authority rules",
+      "agent authority rules",
+      "validation authority rules",
+      "staleness rules",
+      "retention and recovery rules"
+    ],
+    "exclude": [
+      "scientific truth evaluation",
+      "mathematical claim promotion",
+      "repository cleanup",
+      "database migration",
+      "governance rewriting",
+      "schema redesign",
+      "Validation Department activation",
+      "fixing discovered conflicts"
+    ]
+  },
+  "required_preflight": [
+    {
+      "step_id": "PREFLIGHT_001",
+      "action": "Record git status and current commit.",
+      "purpose": "Distinguish existing changes from patch-authored outputs."
+    },
+    {
+      "step_id": "PREFLIGHT_002",
+      "action": "Identify repository-local agent instructions.",
+      "purpose": "Apply current repository execution constraints without treating them as automatically authoritative governance."
+    },
+    {
+      "step_id": "PREFLIGHT_003",
+      "action": "Locate existing database schema or tables related to governance.",
+      "purpose": "Determine whether database governance authority already exists."
+    }
+  ],
+  "discovery_method": {
+    "stage_1_path_discovery": {
+      "method": "Deterministic filename and directory enumeration.",
+      "search_terms": [
+        "governance",
+        "authority",
+        "constitution",
+        "policy",
+        "registry",
+        "ledger",
+        "patch",
+        "proposal",
+        "approval",
+        "closure",
+        "supersede",
+        "stale",
+        "validation",
+        "endorsement",
+        "SSOT",
+        "source of truth",
+        "operator",
+        "agent authority",
+        "retention",
+        "recovery"
+      ]
+    },
+    "stage_2_content_discovery": {
+      "method": "Bounded text search for explicit authority language.",
+      "search_patterns": [
+        "authoritative",
+        "source of truth",
+        "must",
+        "shall",
+        "required",
+        "forbidden",
+        "approved",
+        "active",
+        "superseded",
+        "archived",
+        "proposal",
+        "operator approval",
+        "agent may",
+        "agent must not"
+      ]
+    },
+    "stage_3_surface_classification": {
+      "method": "Classify each candidate using explicit content and references.",
+      "rule": "Do not infer authority from path or naming alone."
+    },
+    "stage_4_relationship_extraction": {
+      "method": "Extract references, dependencies, supersession links, hashes, and registry membership."
+    }
+  },
+  "surface_classification": {
+    "surface_types": [
+      "CONSTITUTION",
+      "POLICY",
+      "STANDARD",
+      "REGISTRY",
+      "LEDGER",
+      "SSOT",
+      "SCHEMA",
+      "PATCH_RECORD",
+      "PROPOSAL",
+      "CLOSURE_RECORD",
+      "AUDIT",
+      "GENERATED_REPORT",
+      "HISTORICAL_RECORD",
+      "INSTRUCTION_FILE",
+      "ENFORCEMENT_CODE",
+      "TEST",
+      "DATABASE_TABLE",
+      "DATABASE_SCHEMA",
+      "UNKNOWN"
+    ],
+    "authority_states": [
+      "EXPLICIT_LIVE_AUTHORITY",
+      "EXPLICIT_NON_AUTHORITATIVE",
+      "PROPOSAL",
+      "HISTORICAL",
+      "SUPERSEDED",
+      "ARCHIVED",
+      "GENERATED_VIEW",
+      "IMPLIED_AUTHORITY",
+      "CONFLICTING_AUTHORITY",
+      "AUTHORITY_UNKNOWN"
+    ],
+    "storage_states": [
+      "FILE_STATE",
+      "DATABASE_STATE",
+      "FILE_MIRROR_OF_DATABASE",
+      "DATABASE_MIRROR_OF_FILE",
+      "GENERATED_FILE_VIEW",
+      "UNKNOWN"
+    ]
+  },
+  "required_inventory_record_schema": {
+    "schema_id": "governance_surface_inventory_record_v1",
+    "required_fields": [
+      "surface_id",
+      "path_or_table",
+      "surface_type",
+      "title_or_name",
+      "authority_state",
+      "storage_state",
+      "declared_owner",
+      "declared_scope",
+      "declared_status",
+      "schema_reference",
+      "ssot_reference",
+      "registry_references",
+      "supersedes",
+      "superseded_by",
+      "dependencies",
+      "dependents",
+      "hash_or_version",
+      "last_known_change",
+      "evidence",
+      "ambiguities",
+      "provisional_disposition"
+    ],
+    "provisional_dispositions": [
+      "KEEP_FOR_REVIEW",
+      "CURRENT_AUTHORITY_CANDIDATE",
+      "DUPLICATE_AUTHORITY_CANDIDATE",
+      "STALE_CANDIDATE",
+      "SUPERSEDED_CANDIDATE",
+      "DATABASE_MIGRATION_CANDIDATE",
+      "GENERATED_VIEW_CANDIDATE",
+      "ARCHIVE_CANDIDATE",
+      "UNKNOWN_REQUIRES_REVIEW"
+    ]
+  },
+  "special_required_checks": [
+    {
+      "check_id": "CHECK_VALIDATION_DEPARTMENT_PROPOSAL",
+      "objective": "Classify docs/governance/validation_department_mini_agent_architecture_001.json.",
+      "required_questions": [
+        "Is it explicitly marked as a proposal?",
+        "Does its registry entry imply authority?",
+        "Does any current governance authorize its registration?",
+        "Is it duplicated elsewhere?"
+      ]
+    },
+    {
+      "check_id": "CHECK_GOVERNANCE_CHANGE_LEDGER",
+      "objective": "Determine the semantics of registry/governance_change_ledger.json.",
+      "required_questions": [
+        "Does registration imply approval?",
+        "Does it support proposal status?",
+        "Does it mix history and live authority?",
+        "What schema governs it?"
+      ]
+    },
+    {
+      "check_id": "CHECK_GOVERNANCE_HASH_REGISTRY",
+      "objective": "Determine the semantics of registry/governance_hash_registry.json.",
+      "required_questions": [
+        "Is it integrity-only?",
+        "Does inclusion imply authority?",
+        "Can non-authoritative proposals be registered safely?",
+        "What schema governs it?"
+      ]
+    },
+    {
+      "check_id": "CHECK_DATABASE_AUTHORITY",
+      "objective": "Determine whether a governance database or governance tables already exist.",
+      "required_questions": [
+        "What governance state is already stored in the database?",
+        "Is the database declared authoritative?",
+        "Are file registries mirrors or independent truths?",
+        "Can current governance be reconstructed from the database?"
+      ]
+    },
+    {
+      "check_id": "CHECK_STALENESS_AUTHORITY",
+      "objective": "Locate current definitions of staleness, supersession, invalidation, and recurrence.",
+      "required_questions": [
+        "Who may declare an artifact stale?",
+        "What evidence is required?",
+        "Does staleness block authority?",
+        "How are recurring findings reopened?"
+      ]
+    },
+    {
+      "check_id": "CHECK_DATA_PRESERVATION_AUTHORITY",
+      "objective": "Locate current protections for database and governance history.",
+      "required_questions": [
+        "Are hard deletes permitted?",
+        "Are records versioned?",
+        "Are migrations reversible?",
+        "Are backups and restore tests governed?",
+        "Is previous authoritative state reconstructable?"
+      ]
+    }
+  ],
+  "mini_agent_task_decomposition": {
+    "rule": "Do not ask Codex Mini to inventory and interpret all governance in one prompt.",
+    "task_sequence": [
+      {
+        "task_type": "PATH_ENUMERATION",
+        "reasoning_required": "NONE"
+      },
+      {
+        "task_type": "SINGLE_SURFACE_EXTRACTION",
+        "reasoning_required": "LOW"
+      },
+      {
+        "task_type": "SURFACE_CLASSIFICATION",
+        "reasoning_required": "LOW_TO_MEDIUM"
+      },
+      {
+        "task_type": "PAIRWISE_AUTHORITY_COMPARISON",
+        "reasoning_required": "MEDIUM"
+      },
+      {
+        "task_type": "REGISTRY_SEMANTICS_CHECK",
+        "reasoning_required": "MEDIUM"
+      },
+      {
+        "task_type": "INVENTORY_COMPLETENESS_CHECK",
+        "reasoning_required": "LOW"
+      }
+    ],
+    "maximum_files_per_agent_task": 6,
+    "maximum_primary_questions_per_task": 1,
+    "maximum_required_checks_per_task": 7
+  },
+  "required_outputs": [
+    {
+      "output_id": "OUTPUT_001",
+      "target": "database preferred; transitional JSON allowed only if database ingestion is not yet available",
+      "logical_name": "governance_surface_inventory",
+      "description": "Complete inventory of discovered governance-bearing surfaces."
+    },
+    {
+      "output_id": "OUTPUT_002",
+      "target": "database preferred; transitional JSON allowed only if database ingestion is not yet available",
+      "logical_name": "governance_authority_relationships",
+      "description": "References, supersession, dependencies, mirrors, and authority relationships."
+    },
+    {
+      "output_id": "OUTPUT_003",
+      "target": "database preferred; transitional JSON allowed only if database ingestion is not yet available",
+      "logical_name": "governance_ambiguity_register",
+      "description": "Surfaces whose authority or SSOT status cannot be determined."
+    },
+    {
+      "output_id": "OUTPUT_004",
+      "target": "database preferred; transitional JSON allowed only if database ingestion is not yet available",
+      "logical_name": "governance_inventory_summary",
+      "description": "Counts and bounded findings derived mechanically from the inventory."
+    }
+  ],
+  "transitional_storage_rule": {
+    "preferred_storage": "PROGRAM_DATABASE",
+    "fallback_storage": "outputs/governance_inventory/",
+    "fallback_authority": "NON_AUTHORITATIVE_TRANSITIONAL_ARTIFACT",
+    "requirements": [
+      "Record that the fallback files are temporary.",
+      "Record the intended database destination.",
+      "Do not register fallback outputs as live governance.",
+      "Do not create duplicate copies in docs and registry.",
+      "Do not add a new index merely for discovery."
+    ]
+  },
+  "required_summary_fields": [
+    "total_surfaces",
+    "explicit_live_authorities",
+    "proposals",
+    "historical_surfaces",
+    "superseded_surfaces",
+    "generated_views",
+    "implied_authorities",
+    "conflicting_authorities",
+    "authority_unknown",
+    "file_authoritative_candidates",
+    "database_authoritative_candidates",
+    "duplicate_truth_candidates",
+    "staleness_rule_surfaces",
+    "data_preservation_rule_surfaces",
+    "blocking_ambiguities"
+  ],
+  "validation_requirements": [
+    "Every discovered candidate must receive a surface_id.",
+    "Every inventory record must satisfy the inventory schema.",
+    "Every authority classification must cite explicit evidence.",
+    "No path may appear twice unless distinct logical surfaces are documented.",
+    "All required special checks must be completed.",
+    "The output must distinguish absence of evidence from evidence of absence.",
+    "The inventory must record the dirty working-tree state.",
+    "The legacy global validator result must not be used as proof of inventory correctness.",
+    "A stale_report_warning result must not be described as a trustworthy validation pass."
+  ],
+  "completion_criteria": [
+    "All in-scope governance-bearing paths and database surfaces have been searched.",
+    "Every discovered surface has a structured record.",
+    "Registry semantics are explicitly classified or marked unknown.",
+    "The Validation Department proposal authority status is classified.",
+    "Current staleness authority is located or recorded as missing.",
+    "Current data-preservation authority is located or recorded as missing.",
+    "No governance files or database records were modified except patch-authorized inventory outputs.",
+    "No new live authority was created."
+  ],
+  "stop_conditions": [
+    "Stop if a required registry cannot be parsed safely.",
+    "Stop classification of a surface when authority evidence is ambiguous.",
+    "Record AUTHORITY_UNKNOWN rather than infer authority.",
+    "Do not repair conflicts during this patch.",
+    "Do not activate or register the Validation Department.",
+    "Do not migrate governance into the database during this patch."
+  ],
+  "prohibited_actions": [
+    "Do not delete or archive governance surfaces.",
+    "Do not rewrite governance language.",
+    "Do not change registry entries.",
+    "Do not add the proposal to another registry.",
+    "Do not create a new SSOT.",
+    "Do not declare a current canonical governance hierarchy.",
+    "Do not claim governance is modernized.",
+    "Do not claim the Validation Department is ready.",
+    "Do not claim repository-wide validation success."
+  ],
+  "expected_agent_response": {
+    "patch_id": "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002",
+    "status": "COMPLETE | PARTIAL | BLOCKED",
+    "outputs_created": [],
+    "surfaces_discovered": 0,
+    "authority_summary": {},
+    "special_checks": [],
+    "blocking_ambiguities": [],
+    "unrelated_changes_preserved": true,
+    "next_patch_recommendation": "PATCH_GOVERNANCE_MODERN_NEEDS_MATRIX_003"
+  },
+  "expected_stop_point": {
+    "statement": "Stop after producing the inventory and ambiguity register.",
+    "next_work_not_included": "Do not begin governance gap analysis or modernization until Patch 2 has been reviewed."
+  }
+}

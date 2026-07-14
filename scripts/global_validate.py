@@ -424,6 +424,88 @@ class DatabaseRuntimeValidator:
         return results
 
 
+class RoleAwareAuthorityValidator:
+    def __init__(self, root_dir):
+        self.root = Path(root_dir)
+
+    def run(self):
+        from tools.runtime_authority import build_live_authority_access_inventory
+
+        inventory = build_live_authority_access_inventory()
+        records = inventory.get("records", [])
+        results = {
+            "status": "success",
+            "errors": [],
+            "warnings": [],
+            "checked_entries": len(records),
+            "inventory": inventory,
+        }
+        for record in records:
+            classification = str(record.get("classification") or "").strip().upper()
+            if classification == "MIXED_ROLE_LOOKUP":
+                results["warnings"].append(
+                    f"{record.get('path')} remains a mixed-role access surface and must enforce explicit role declaration."
+                )
+        results["items_checked"] = results["checked_entries"]
+        return results
+
+
+class WriteBoundaryValidator:
+    def __init__(self, root_dir):
+        self.root = Path(root_dir)
+
+    def run(self):
+        from tools.runtime_authority import load_q0_partition, validate_write_boundary
+
+        partition = load_q0_partition()
+        assignments = partition.get("write_owner_assignments", [])
+        results = {
+            "status": "success",
+            "errors": [],
+            "warnings": [],
+            "checked_entries": len(assignments),
+        }
+        for assignment in assignments:
+            validation = validate_write_boundary(
+                assignment.get("scope_id"),
+                (assignment.get("allowed_operations") or [None])[0],
+                assignment.get("authorized_writer_id"),
+                {"schema": "placeholder"},
+                "global_validate",
+            )
+            if validation["decision"] != "allow":
+                results["errors"].append(
+                    f"Write boundary failed for {assignment.get('scope_id')}: {', '.join(validation['blockers'])}"
+                )
+        if results["errors"]:
+            results["status"] = "failed"
+        results["items_checked"] = results["checked_entries"]
+        return results
+
+
+class ValidationReducerAuthorityValidator:
+    def __init__(self, root_dir):
+        self.root = Path(root_dir)
+
+    def run(self):
+        from tools.runtime_authority import validate_validator_partition
+
+        validation = validate_validator_partition()
+        results = {
+            "status": "success" if validation["decision"] == "allow" else "failed",
+            "errors": [],
+            "warnings": [],
+            "checked_entries": 1,
+            "validation_partition": validation.get("validation_partition"),
+        }
+        if validation["decision"] != "allow":
+            results["errors"].append(
+                "Validator reducer partition failed: " + ", ".join(validation.get("blockers", []))
+            )
+        results["items_checked"] = results["checked_entries"]
+        return results
+
+
 class PatchChainValidator:
     def __init__(self, root_dir, no_db_log=False, current_state=None, ledger_index=None, cache=None):
         self.root = Path(root_dir)
@@ -1419,6 +1501,9 @@ def _build_partial_validation_stage_plan(root, args, mode, context):
         ("patch_chain_validation", _patch_chain_runner),
         ("patch_gate_validation", _patch_gate_runner),
         ("db_authority_validation", lambda: DatabaseRuntimeValidator(root).run()),
+        ("role_aware_authority_validation", lambda: RoleAwareAuthorityValidator(root).run()),
+        ("write_boundary_validation", lambda: WriteBoundaryValidator(root).run()),
+        ("validation_reducer_authority_validation", lambda: ValidationReducerAuthorityValidator(root).run()),
         ("math_validation", lambda: MathValidator(root, read_only=True).run()),
         ("math_test_provenance_validation", lambda: MathTestProvenanceValidator(root).run()),
         ("math_program_validation", lambda: MathProgramValidator(root, full_report=args.full_math_program).run()),
@@ -1450,6 +1535,9 @@ def _build_partial_validation_stage_plan(root, args, mode, context):
             "patch_chain_validation",
             "patch_gate_validation",
             "db_authority_validation",
+            "role_aware_authority_validation",
+            "write_boundary_validation",
+            "validation_reducer_authority_validation",
         }
     elif mode == "patch_chain_only":
         selected = {"patch_chain_validation"}

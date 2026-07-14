@@ -1,0 +1,182 @@
+{
+  "schema_id": "governance_inventory_summary_v1",
+  "patch_id": "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002",
+  "status": "PARTIAL",
+  "generated_at": "2026-07-13T13:02:48.947987+00:00",
+  "current_commit": "6ebf84a1e",
+  "working_tree_dirty": true,
+  "unrelated_changes_preserved": true,
+  "runtime_gate": {
+    "patch_gate_status": "blocked",
+    "reason": "missing_provenance, missing_core_rule, non_additive_patch_mode",
+    "evidence_path": "outputs/governance/evidence/PATCH_GOVERNANCE_GLOBAL_INVENTORY_002/20260713T122456.786424Z_evidence.json"
+  },
+  "scope_summary": {
+    "included_roots": [
+      "governance/",
+      "docs/governance/",
+      "registry/governance/",
+      "registry/db/",
+      "outputs/governance/",
+      "outputs/audits/",
+      "reports/",
+      "scripts/db/",
+      "scripts/governance/",
+      "scripts/provenance/",
+      "scripts/agent_memory/",
+      "tests/"
+    ],
+    "explicit_root_files": [
+      "AGENTS.md",
+      "GEMINI.md",
+      "MATH_PROGRAM_NARRATIVE.md",
+      "TODO.md",
+      "docs/textbook/mono_process_textbook_complete.md",
+      "docs/manual_repository_audit_2026_07_13.md"
+    ],
+    "exclusions": [
+      "scientific truth evaluation",
+      "mathematical claim promotion",
+      "repository cleanup",
+      "database migration",
+      "governance rewriting",
+      "schema redesign",
+      "Validation Department activation",
+      "fixing discovered conflicts"
+    ]
+  },
+  "special_checks": [
+    {
+      "check_id": "CHECK_VALIDATION_DEPARTMENT_PROPOSAL",
+      "status": "PASS",
+      "observation": "The surface is not explicitly marked as a proposal; it reads as a foundational-constraint / architectural record.",
+      "evidence": [
+        {
+          "path": "docs/governance/validation_department_mini_agent_architecture_001.json",
+          "location": "$.status",
+          "evidence_type": "DIRECT"
+        }
+      ],
+      "inference": "It should not be treated as live governance merely because it appears in docs/governance."
+    },
+    {
+      "check_id": "CHECK_GOVERNANCE_CHANGE_LEDGER",
+      "status": "PASS",
+      "observation": "The change ledger records approvals and history; registration does not itself create approval.",
+      "evidence": [
+        {
+          "path": "registry/governance_change_ledger.json",
+          "location": "json content",
+          "evidence_type": "DIRECT"
+        }
+      ],
+      "inference": "The ledger is live history, not a proposal-approval oracle."
+    },
+    {
+      "check_id": "CHECK_GOVERNANCE_HASH_REGISTRY",
+      "status": "PASS",
+      "observation": "The hash registry is integrity-only; inclusion does not imply authority.",
+      "evidence": [
+        {
+          "path": "registry/governance_hash_registry.json",
+          "location": "json content",
+          "evidence_type": "DIRECT"
+        }
+      ],
+      "inference": "The registry is a checksum ledger, not an approval surface."
+    },
+    {
+      "check_id": "CHECK_DATABASE_AUTHORITY",
+      "status": "PASS",
+      "observation": "The database is a projection/runtime layer; canonical authority remains in JSON registries.",
+      "evidence": [
+        {
+          "path": "registry/db/README.md",
+          "location": "content match: NOT a source of truth",
+          "evidence_type": "DIRECT"
+        },
+        {
+          "path": "registry/db/README.md",
+          "location": "content match: DB runtime is a projection layer",
+          "evidence_type": "DIRECT"
+        }
+      ],
+      "inference": "DB objects are operationally important but not semantic SSOT surfaces."
+    },
+    {
+      "check_id": "CHECK_STALENESS_AUTHORITY",
+      "status": "PASS",
+      "observation": "Staleness, supersession, invalidation, and recurrence are distributed across runtime freshness, live governance docs, and audit outputs.",
+      "evidence": [
+        {
+          "path": "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+          "location": "content match: freshness",
+          "evidence_type": "DIRECT"
+        },
+        {
+          "path": "registry/db/migrations/20260703_governance_runtime_freshness_gate_010.sql",
+          "location": "content match: stale",
+          "evidence_type": "DIRECT"
+        },
+        {
+          "path": "docs/governance/validation_department_mini_agent_architecture_001.json",
+          "location": "content match: RECURRENT_AFTER_CLOSURE",
+          "evidence_type": "DIRECT"
+        }
+      ],
+      "inference": "The authority is distributed, not a single model judgment."
+    },
+    {
+      "check_id": "CHECK_DATA_PRESERVATION_AUTHORITY",
+      "status": "PASS",
+      "observation": "No hard-delete policy was found for governance history; preservation is handled by snapshots, append-only ledgers, and explicit historical retention language.",
+      "evidence": [
+        {
+          "path": "registry/db/README.md",
+          "location": "content match: advisory lineage metadata",
+          "evidence_type": "DIRECT"
+        },
+        {
+          "path": "registry/db/migrations/20260703_governance_runtime_snapshot_refresh_011.sql",
+          "location": "content match: snapshot",
+          "evidence_type": "DIRECT"
+        },
+        {
+          "path": "docs/governance/negative_result_preservation.md",
+          "location": "content match: preserve",
+          "evidence_type": "DIRECT"
+        },
+        {
+          "path": "docs/governance/frozen_artifacts.md",
+          "location": "content match: archived",
+          "evidence_type": "DIRECT"
+        }
+      ],
+      "inference": "Preservation is governed by history-preserving surfaces rather than destructive cleanup."
+    }
+  ],
+  "counts": {
+    "total_surfaces": 1083,
+    "explicit_live_authorities": 77,
+    "proposals": 52,
+    "historical_surfaces": 177,
+    "superseded_surfaces": 0,
+    "generated_views": 587,
+    "implied_authorities": 17,
+    "conflicting_authorities": 0,
+    "authority_unknown": 0,
+    "file_authoritative_candidates": 142,
+    "database_authoritative_candidates": 4,
+    "duplicate_truth_candidates": 0,
+    "staleness_rule_surfaces": 9,
+    "data_preservation_rule_surfaces": 13,
+    "blocking_ambiguities": 514
+  },
+  "outputs_created": [
+    "outputs/governance_inventory/governance_surface_inventory.json",
+    "outputs/governance_inventory/governance_authority_relationships.json",
+    "outputs/governance_inventory/governance_ambiguity_register.json",
+    "outputs/governance_inventory/governance_inventory_summary.json"
+  ],
+  "next_patch_recommendation": "PATCH_GOVERNANCE_MODERN_NEEDS_MATRIX_003"
+}

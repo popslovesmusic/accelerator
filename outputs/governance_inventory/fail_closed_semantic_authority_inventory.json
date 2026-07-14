@@ -1,0 +1,81 @@
+{
+  "schema_id": "governance_fail_closed_semantic_authority_inventory_v1",
+  "generated_at": "2026-07-14T17:05:00-04:00",
+  "classification": "SEMANTICS_SURVIVE_ELSEWHERE",
+  "historical_reference": {
+    "patch_id": "PATCH_GOVERNANCE_STATUS_SEMANTICS_AND_BLOCKING_REDUCTION_003",
+    "git_history_status": "NO_MATCHING_COMMITTED_HISTORY_FOUND",
+    "canonical_artifact_found": false,
+    "live_dependency_allowed": false,
+    "interpretation": "Absent historical dependency reference; not recoverable as canonical artifact."
+  },
+  "surviving_semantic_authorities": [
+    {
+      "semantic_rule_id": "GOVERNANCE_VALIDATION_FAIL_CLOSED_001",
+      "authority_role": "VALIDATION_REDUCTION_AUTHORITY",
+      "artifact_path": "governance/authority_partitions/Q0_AUTHORITY_SCOPE_PARTITION_001.json",
+      "artifact_field": "validation_partition.terminal_reducer_rule_id",
+      "surface_path": "scripts/global_validate.py",
+      "status": "ACTIVE",
+      "authority_effect": "LIVE_SCOPE_CONSTRAINT",
+      "evidence_type": "REGISTERED_PARTITION_ARTIFACT"
+    },
+    {
+      "semantic_rule_id": "GOVERNANCE_VALIDATION_FAIL_CLOSED_001",
+      "authority_role": "VALIDATION_REDUCTION_AUTHORITY",
+      "artifact_path": "outputs/governance_inventory/q0_validator_authority_partition.json",
+      "artifact_field": "terminal_reducer_rule_id",
+      "surface_path": "scripts/global_validate.py",
+      "status": "ACTIVE",
+      "authority_effect": "LIVE_SCOPE_CONSTRAINT",
+      "evidence_type": "REGISTERED_GOVERNANCE_INVENTORY_OUTPUT"
+    },
+    {
+      "semantic_rule_id": "GOVERNANCE_VALIDATION_FAIL_CLOSED_001",
+      "authority_role": "VALIDATION_INVOCATION_AUTHORITY",
+      "artifact_path": "scripts/global_validate.py",
+      "artifact_field": "ValidationReducerAuthorityValidator and overall_status reduction",
+      "surface_path": "scripts/global_validate.py",
+      "status": "ACTIVE",
+      "authority_effect": "LIVE_IMPLEMENTATION",
+      "evidence_type": "LIVE_IMPLEMENTATION"
+    },
+    {
+      "semantic_rule_id": "GOVERNANCE_VALIDATION_FAIL_CLOSED_001",
+      "authority_role": "VALIDATION_REDUCTION_AUTHORITY",
+      "artifact_path": "governance/provenance/governance_inventory_2026_07_13_provenance.json",
+      "artifact_field": "records[*].governing_rule_ids",
+      "surface_path": "outputs/governance_inventory/governance_surface_inventory.json",
+      "status": "PARTIAL",
+      "authority_effect": "NONE",
+      "evidence_type": "PROVENANCE_TRACE"
+    }
+  ],
+  "supporting_evidence": [
+    {
+      "artifact_path": "tests/governance_validation/test_q0_authority_scope_partition.py",
+      "assertion": "validation_partition.terminal_reducer_rule_id == GOVERNANCE_VALIDATION_FAIL_CLOSED_001",
+      "evidence_type": "TARGETED_TEST"
+    },
+    {
+      "artifact_path": "tests/governance_validation/test_q0_role_aware_authority.py",
+      "assertion": "validate_validator_partition() returns allow and write-boundary checks fail closed",
+      "evidence_type": "TARGETED_TEST"
+    }
+  ],
+  "runtime_semantic_map_status": {
+    "query": "python -m scripts.query_governance authority --semantic GOVERNANCE_VALIDATION_FAIL_CLOSED_001 --semantic-type runtime_rule --json",
+    "decision": "defer",
+    "reason": "The semantic authority map does not yet cover this key.",
+    "classification_effect": "Does not negate surviving live artifact authority."
+  },
+  "repair_recommendation": {
+    "status": "HISTORICAL_REFERENCE_UNMATERIALIZED_LIVE_DEPENDENCY_REPAIRED",
+    "remove_live_patch_dependency": "PATCH_GOVERNANCE_STATUS_SEMANTICS_AND_BLOCKING_REDUCTION_003",
+    "replace_with": [
+      "governance/authority_partitions/Q0_AUTHORITY_SCOPE_PARTITION_001.json",
+      "outputs/governance_inventory/q0_validator_authority_partition.json",
+      "scripts/global_validate.py"
+    ]
+  }
+}

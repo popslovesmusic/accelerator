@@ -230,10 +230,16 @@ The projection layer includes automated health and maintenance utilities.
 
 ### Health Check
 
-Integrity, schema, and retrieval readiness are verified via:
+Integrity, schema, and retrieval readiness are verified via a fast routine check:
 
 ```bash
 python scripts/db/db_health_check.py
+```
+
+Use the maintenance command when you explicitly need the slower exhaustive SQLite scan:
+
+```bash
+python scripts/db/db_maintenance.py --report-only --full-integrity-check
 ```
 
 DB health is also integrated into `scripts/global_validate.py`.
@@ -244,6 +250,12 @@ Routine diagnostics and non-mutating cleanup:
 
 ```bash
 python scripts/db/db_maintenance.py --report-only
+```
+
+Add `--full-integrity-check` when you need the exhaustive scan:
+
+```bash
+python scripts/db/db_maintenance.py --report-only --full-integrity-check
 ```
 
 Mutating operations (VACUUM, ANALYZE) require explicit flags:
