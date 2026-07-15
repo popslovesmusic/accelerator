@@ -1,0 +1,85 @@
+{
+  "schema_id": "q1_remaining_conflict_components_v1",
+  "generated_at": "2026-07-15T14:10:00-04:00",
+  "source_refresh_artifact": "outputs/governance_inventory/q1_remaining_validation_authority_state_refresh.json",
+  "remaining_item_count": 7,
+  "edge_types": [
+    "CLAIMS_SAME_AUTHORITY_ROLE",
+    "SUPPORTS_VALIDATION_STAGE",
+    "GENERATES_EVIDENCE_FOR",
+    "DOCUMENTS_OR_INSTRUCTS",
+    "TESTS_OR_PROJECTS_CONTEXT",
+    "NO_CURRENT_LIVE_RELATION"
+  ],
+  "component_count": 5,
+  "components": [
+    {
+      "component_id": "Q1-REM-COMP-001",
+      "item_ids": [
+        "Q1-VAL-001"
+      ],
+      "component_type": "OUTSIDE_Q1_SCOPE_RECLASSIFICATION",
+      "live_runtime_or_governance_effect": false,
+      "edges": [],
+      "component_rationale": "The governance hash registry is an integrity lock surface only and has no current live relation to validation invocation, terminal reduction, or supporting-validator scope."
+    },
+    {
+      "component_id": "Q1-REM-COMP-002",
+      "item_ids": [
+        "Q1-VAL-004"
+      ],
+      "component_type": "NEUTRALIZED_HISTORICAL_EVIDENCE",
+      "live_runtime_or_governance_effect": false,
+      "edges": [],
+      "component_rationale": "The manual repository audit is a historical record that the runtime does not map to any governed authority role."
+    },
+    {
+      "component_id": "Q1-REM-COMP-003",
+      "item_ids": [
+        "Q1-VAL-005"
+      ],
+      "component_type": "OUTSIDE_Q1_SCOPE_DB_RUNTIME_STORAGE",
+      "live_runtime_or_governance_effect": true,
+      "edges": [],
+      "component_rationale": "The SQLite database is live infrastructure, but its authority role is DB runtime gate storage rather than validation authority."
+    },
+    {
+      "component_id": "Q1-REM-COMP-004",
+      "item_ids": [
+        "Q1-VAL-006"
+      ],
+      "component_type": "OUTSIDE_Q1_SCOPE_SEMANTIC_AUTHORITY_RUNTIME",
+      "live_runtime_or_governance_effect": true,
+      "edges": [],
+      "component_rationale": "The semantic-authority migration projects theorem/runtime-rule ownership and does not share the validator-role question with any remaining item."
+    },
+    {
+      "component_id": "Q1-REM-COMP-005",
+      "item_ids": [
+        "Q1-VAL-007",
+        "Q1-VAL-008",
+        "Q1-VAL-009"
+      ],
+      "component_type": "SUPPORTING_VALIDATOR_WITH_GENERATED_RESIDUE",
+      "live_runtime_or_governance_effect": true,
+      "edges": [
+        {
+          "from": "Q1-VAL-008",
+          "to": "Q1-VAL-007",
+          "edge_type": "GENERATES_EVIDENCE_FOR"
+        },
+        {
+          "from": "Q1-VAL-008",
+          "to": "Q1-VAL-009",
+          "edge_type": "GENERATES_EVIDENCE_FOR"
+        },
+        {
+          "from": "Q1-VAL-007",
+          "to": "Q1-VAL-009",
+          "edge_type": "TESTS_OR_PROJECTS_CONTEXT"
+        }
+      ],
+      "component_rationale": "tests/test_governed_context_capsule_v1.py is the only remaining live executable validation surface. The paired pyc files are residue derived from that test and must not be collapsed into the live authority question."
+    }
+  ]
+}

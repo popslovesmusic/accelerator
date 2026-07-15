@@ -1,0 +1,101 @@
+{
+  "patch_id": "PATCH_GOVERNANCE_Q0_PARTIAL_STATUS_INTENT_CLASSIFICATION_011",
+  "title": "Q0 Partial Status Intent Classification",
+  "status": "PARTIAL",
+  "timestamp": "2026-07-14T20:00:00-04:00",
+  "mode": "additive",
+  "depends_on": [
+    "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002",
+    "PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007",
+    "PATCH_GOVERNANCE_MISSING_DEPENDENCY_003_CHAIN_REPAIR_008",
+    "PATCH_GOVERNANCE_PATCH_002_TYPED_DEPENDENCY_RUNTIME_009",
+    "PATCH_GOVERNANCE_Q0_TYPED_DEPENDENCY_RUNTIME_SNAPSHOT_010"
+  ],
+  "dependency_requirements": {
+    "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002": {
+      "type": "REQUIRES_EXISTING_EVIDENCE",
+      "reason": "Patch 011 classifies the intent of patch 002's remaining PARTIAL status without changing its transitional evidence role."
+    },
+    "PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007": {
+      "type": "REQUIRES_EXISTING_EVIDENCE",
+      "reason": "Patch 011 audits the patch-local completion contract of patch 007 rather than requiring broader Q0 program completion."
+    },
+    "PATCH_GOVERNANCE_MISSING_DEPENDENCY_003_CHAIN_REPAIR_008": {
+      "type": "REQUIRES_EXISTING_EVIDENCE",
+      "reason": "Patch 011 classifies whether patch 008 remains PARTIAL intentionally or only because its status metadata has not been corrected."
+    },
+    "PATCH_GOVERNANCE_PATCH_002_TYPED_DEPENDENCY_RUNTIME_009": {
+      "type": "REQUIRES_EXISTING_EVIDENCE",
+      "reason": "Patch 011 audits the local completion state of the typed dependency runtime repair."
+    },
+    "PATCH_GOVERNANCE_Q0_TYPED_DEPENDENCY_RUNTIME_SNAPSHOT_010": {
+      "type": "REQUIRES_EXISTING_EVIDENCE",
+      "reason": "Patch 011 uses the governed snapshot evidence from patch 010 to distinguish dependency health from patch-local completion."
+    }
+  },
+  "classification": [
+    "GOVERNANCE_STATUS_INTENT_AUDIT",
+    "PATCH_LOCAL_COMPLETION_REVIEW",
+    "NO_STATUS_MUTATION",
+    "FORWARD_CORRECTION_RECOMMENDATION"
+  ],
+  "purpose": "Classify the remaining Q0 PARTIAL patches as intentionally transitional, complete-but-missing-completion-record, status-metadata-stale, or otherwise, without mutating any patch status in this audit step.",
+  "updated_artifacts": [
+    "outputs/governance_inventory/q0_partial_status_intent_inventory.json",
+    "patches/PATCH_GOVERNANCE_Q0_PARTIAL_STATUS_INTENT_CLASSIFICATION_011.json",
+    "registry/governance/patches/PATCH_GOVERNANCE_Q0_PARTIAL_STATUS_INTENT_CLASSIFICATION_011.json",
+    "tests/governance_validation/test_patch_011_q0_partial_status_intent_inventory.py",
+    "registry/governance_change_ledger.json",
+    "registry/governance_hash_registry.json"
+  ],
+  "audit_findings": {
+    "intentionally_transitional": [
+      "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002"
+    ],
+    "implemented_but_completion_record_missing": [
+      "PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007",
+      "PATCH_GOVERNANCE_PATCH_002_TYPED_DEPENDENCY_RUNTIME_009",
+      "PATCH_GOVERNANCE_Q0_TYPED_DEPENDENCY_RUNTIME_SNAPSHOT_010"
+    ],
+    "status_metadata_stale": [
+      "PATCH_GOVERNANCE_MISSING_DEPENDENCY_003_CHAIN_REPAIR_008"
+    ],
+    "status_mutations_performed": 0
+  },
+  "validation_policy": {
+    "full_project_validation": "SUSPENDED_PENDING_VALIDATOR_DEPARTMENT_COMPLETION",
+    "allowed_checks": [
+      "targeted_status_intent_tests",
+      "json_parse_checks",
+      "compile",
+      "git_diff_check",
+      "git_status"
+    ]
+  },
+  "validation_results": {
+    "targeted_status_intent_tests": {
+      "status": "pass",
+      "test_files": [
+        "tests/governance_validation/test_patch_009_typed_dependency_runtime.py",
+        "tests/governance_validation/test_patch_010_q0_typed_dependency_runtime_snapshot.py",
+        "tests/governance_validation/test_patch_011_q0_partial_status_intent_inventory.py"
+      ],
+      "passed": 7,
+      "failed": 0
+    },
+    "compileall": {
+      "status": "pass"
+    },
+    "git_diff_check": {
+      "status": "pass",
+      "warnings": [
+        "CRLF normalization warnings were reported by Git without content-level diff errors."
+      ]
+    },
+    "git_status": {
+      "status": "pass",
+      "scope": "patch_local_q0_partial_status_intent_audit_only"
+    }
+  },
+  "unrelated_changes_preserved": true
+}

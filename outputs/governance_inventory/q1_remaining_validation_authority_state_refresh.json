@@ -1,0 +1,145 @@
+{
+  "schema_id": "q1_remaining_validation_authority_state_refresh_v1",
+  "generated_at": "2026-07-15T14:10:00-04:00",
+  "previous_q1_resolution_patch_verified": true,
+  "source_artifacts": [
+    "patches/PATCH_GOVERNANCE_Q1_VALIDATION_AUTHORITY_FIRST_BOUNDED_CLUSTER_SELECTION_064.json",
+    "patches/PATCH_GOVERNANCE_Q1_VALIDATION_INVOCATION_AUTHORITY_BOUNDARY_RESOLUTION_065.json",
+    "outputs/governance_inventory/q1_validation_authority_item_inventory.json",
+    "outputs/governance_inventory/q1_validation_authority_active_queue.json",
+    "outputs/governance_inventory/governance_surface_inventory.json",
+    "docs/manual_repository_audit_2026_07_13.md",
+    "tests/test_governed_context_capsule_v1.py",
+    "schemas/governed_context_capsule_v1.schema.json"
+  ],
+  "remaining_q1_item_ids": [
+    "Q1-VAL-001",
+    "Q1-VAL-004",
+    "Q1-VAL-005",
+    "Q1-VAL-006",
+    "Q1-VAL-007",
+    "Q1-VAL-008",
+    "Q1-VAL-009"
+  ],
+  "items": [
+    {
+      "stable_q1_item_id": "Q1-VAL-001",
+      "original_global_ambiguity_id": "AMB-GOV-SURF-0882",
+      "source_path": "registry/governance_hash_registry.json",
+      "original_ambiguity_statement": "Integrity registry inclusion can be mistaken for validator ownership or live validation authority even though the surface is integrity-only.",
+      "patch_064_classification": "INVOCATION_AUTHORITY_AMBIGUITY_OR_CURRENT_RECLASSIFICATION_REQUIRED",
+      "current_live_authority_role": "INTEGRITY_REGISTRY_ONLY",
+      "current_runtime_effect": "Integrity hash registration and tamper-detection only; no validation invocation or terminal reduction path is exposed.",
+      "later_governance_already_neutralizes_item": false,
+      "current_state": "OUTSIDE_Q1_SCOPE",
+      "remains_genuine_q1_validation_authority_ambiguity": false,
+      "refresh_rationale": [
+        "The prior Q1 queue still carries the item, but the live surface inventory marks registry/governance_hash_registry.json as EXPLICIT_NON_AUTHORITATIVE.",
+        "The item is now best treated as a Q1 reclassification candidate rather than a live validation-authority dispute."
+      ]
+    },
+    {
+      "stable_q1_item_id": "Q1-VAL-004",
+      "original_global_ambiguity_id": "AMB-GOV-SURF-0107",
+      "source_path": "docs/manual_repository_audit_2026_07_13.md",
+      "original_ambiguity_statement": "The manual repository audit discusses validation health and may be mistaken for live validation authority rather than historical audit evidence.",
+      "patch_064_classification": "SUPPORTING_VALIDATOR_SCOPE_AMBIGUITY",
+      "current_live_authority_role": "HISTORICAL_AUDIT_EVIDENCE",
+      "current_runtime_effect": "Historical repository-audit evidence only; the runtime does not resolve the document to any governed authority role.",
+      "later_governance_already_neutralizes_item": true,
+      "current_state": "NEUTRALIZED_BY_EXISTING_GOVERNANCE",
+      "remains_genuine_q1_validation_authority_ambiguity": false,
+      "refresh_rationale": [
+        "The current repository inventory marks the audit as EXPLICIT_NON_AUTHORITATIVE and HISTORICAL_RECORD.",
+        "The supporting-validator hypothesis is not supported by the live surface role, so the item is practically neutralized without needing a new authority ruling."
+      ]
+    },
+    {
+      "stable_q1_item_id": "Q1-VAL-005",
+      "original_global_ambiguity_id": "AMB-GOV-SURF-0664",
+      "source_path": "registry/db/acellorator_index.sqlite",
+      "original_ambiguity_statement": "The live DB runtime substrate can be confused with validation authority even though it is an operational projection surface rather than a validator role.",
+      "patch_064_classification": "INSTRUCTION_VS_EXECUTABLE_AUTHORITY_AMBIGUITY",
+      "current_live_authority_role": "DB_RUNTIME_GATE_STORAGE",
+      "current_runtime_effect": "Operational SQLite substrate for the DB runtime gate; it stores governed state but does not own validation invocation or terminal reduction authority.",
+      "later_governance_already_neutralizes_item": false,
+      "current_state": "OUTSIDE_Q1_SCOPE",
+      "remains_genuine_q1_validation_authority_ambiguity": false,
+      "refresh_rationale": [
+        "Runtime evidence allows the DB file as a DB runtime gate surface, not as a validator role.",
+        "The item is live infrastructure, but its authority question sits outside Q1 validation-authority scope."
+      ]
+    },
+    {
+      "stable_q1_item_id": "Q1-VAL-006",
+      "original_global_ambiguity_id": "AMB-GOV-SURF-0676",
+      "source_path": "registry/db/migrations/20260703_governance_runtime_semantic_authority_013.sql",
+      "original_ambiguity_statement": "The semantic-authority runtime migration may be mistaken for validation authority even though it governs semantic ownership rather than validator ownership.",
+      "patch_064_classification": "GENERATED_EVIDENCE_AUTHORITY_AMBIGUITY",
+      "current_live_authority_role": "SEMANTIC_AUTHORITY_RUNTIME_PROJECTION",
+      "current_runtime_effect": "Projects semantic theorem/runtime-rule ownership, not validation invocation or reduction roles.",
+      "later_governance_already_neutralizes_item": false,
+      "current_state": "OUTSIDE_Q1_SCOPE",
+      "remains_genuine_q1_validation_authority_ambiguity": false,
+      "refresh_rationale": [
+        "The migration seeds semantic_authority_map records and not validator ownership records.",
+        "This is a live runtime projection, but the live role is semantic-authority support rather than Q1 validation authority."
+      ]
+    },
+    {
+      "stable_q1_item_id": "Q1-VAL-007",
+      "original_global_ambiguity_id": "AMB-GOV-SURF-1007",
+      "source_path": "tests/__pycache__/test_governed_context_capsule_v1.cpython-312-pytest-9.1.1.pyc",
+      "original_ambiguity_statement": "Compiled test residue can be mistaken for a live validation surface even though it is generated bytecode with no governed authority role.",
+      "patch_064_classification": "GENERATED_EVIDENCE_AUTHORITY_AMBIGUITY_OR_TEST_RESIDUE",
+      "current_live_authority_role": "COMPILED_TEST_RESIDUE",
+      "current_runtime_effect": "Generated bytecode residue derived from a bounded test surface; no independent governance or validation effect.",
+      "later_governance_already_neutralizes_item": false,
+      "current_state": "OBSOLETE_TEST_OR_CONTEXT_RESIDUE",
+      "remains_genuine_q1_validation_authority_ambiguity": false,
+      "refresh_rationale": [
+        "The pyc surface is explicit test residue and the runtime does not map it to any governed authority surface.",
+        "It should be retired as residue only after the live supporting-validator question is separated from it."
+      ]
+    },
+    {
+      "stable_q1_item_id": "Q1-VAL-008",
+      "original_global_ambiguity_id": "AMB-GOV-SURF-1032",
+      "source_path": "tests/test_governed_context_capsule_v1.py",
+      "original_ambiguity_statement": "The governed-context-capsule test validates a bounded contract and may be mistaken for a validator with independent terminal authority.",
+      "patch_064_classification": "GENERATED_EVIDENCE_AUTHORITY_AMBIGUITY_OR_TEST_RESIDUE",
+      "current_live_authority_role": "BOUNDED_SUPPORTING_VALIDATOR_CANDIDATE",
+      "current_runtime_effect": "Executable test surface that imports scripts.query_governance and checks schema, capsule contract, and cache behavior for governed context capsules.",
+      "later_governance_already_neutralizes_item": false,
+      "current_state": "LIVE_UNRESOLVED_Q1_AUTHORITY_AMBIGUITY",
+      "remains_genuine_q1_validation_authority_ambiguity": true,
+      "refresh_rationale": [
+        "The test is explicit non-authoritative, but it remains a live executable validation surface with bounded runtime effect.",
+        "The unresolved question is whether that bounded effect is formally SUPPORTING_VALIDATOR scope rather than an unregistered independent validator or terminal reduction surface."
+      ]
+    },
+    {
+      "stable_q1_item_id": "Q1-VAL-009",
+      "original_global_ambiguity_id": "AMB-GOV-SURF-1008",
+      "source_path": "tests/__pycache__/test_governed_context_capsule_v1.cpython-312.pyc",
+      "original_ambiguity_statement": "Compiled test bytecode can be mistaken for live validation authority even though it is generated residue derived from a non-authoritative test surface.",
+      "patch_064_classification": "OUTSIDE_VALIDATION_AUTHORITY_SCOPE_OR_TEST_RESIDUE",
+      "current_live_authority_role": "COMPILED_TEST_RESIDUE",
+      "current_runtime_effect": "Generated bytecode residue derived from tests/test_governed_context_capsule_v1.py; no direct governed authority role.",
+      "later_governance_already_neutralizes_item": false,
+      "current_state": "OBSOLETE_TEST_OR_CONTEXT_RESIDUE",
+      "remains_genuine_q1_validation_authority_ambiguity": false,
+      "refresh_rationale": [
+        "The pyc file is derived output rather than a live validation surface.",
+        "Its only current authority relationship is as residue projected from Q1-VAL-008."
+      ]
+    }
+  ],
+  "state_counts": {
+    "LIVE_UNRESOLVED_Q1_AUTHORITY_AMBIGUITY": 1,
+    "NEUTRALIZED_BY_EXISTING_GOVERNANCE": 1,
+    "OBSOLETE_TEST_OR_CONTEXT_RESIDUE": 2,
+    "OUTSIDE_Q1_SCOPE": 3,
+    "UNPROVEN": 0
+  }
+}

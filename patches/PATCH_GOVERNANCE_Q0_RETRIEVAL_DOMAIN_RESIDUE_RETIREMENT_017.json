@@ -1,0 +1,67 @@
+{
+  "patch_id": "PATCH_GOVERNANCE_Q0_RETRIEVAL_DOMAIN_RESIDUE_RETIREMENT_017",
+  "title": "Q0 Retrieval Domain Residue Retirement",
+  "status": "APPLIED",
+  "applied_on": "2026-07-15T01:00:00-04:00",
+  "type": "analysis_audit",
+  "depends_on": [
+    "PATCH_GOVERNANCE_Q0_DOCUMENTATION_BOUNDARY_RESIDUE_RETIREMENT_016"
+  ],
+  "mode": "additive",
+  "purpose": "Retire only the Q0 obsolete-residue item whose remaining presence is uniquely retrieval-domain residue and which no longer represents live Q0 governance authority ambiguity.",
+  "summary": "This patch records that the remaining retrieval-domain Q0 residue item is retired because current Q0 governance treats the retrieval utility as candidate discovery and ranking only, outside the live Q0 authority catalog and unable to determine registry state, writer authority, canonical invocation, or terminal validation status.",
+  "selected_item_ids": [
+    "Q0-OPEN-010"
+  ],
+  "retired_item_ids": [
+    "Q0-OPEN-010"
+  ],
+  "items_excluded_as_out_of_scope": [],
+  "items_remaining_open": [
+    "Q0-OPEN-001"
+  ],
+  "current_role_per_retired_retrieval_source": {
+    "scripts/orientation_retrieval.py": "CANDIDATE_DISCOVERY_AND_RANKING_OUTSIDE_Q0_AUTHORITY_CATALOG"
+  },
+  "artifacts": {
+    "retirement_inventory": "outputs/governance_inventory/q0_retrieval_domain_residue_retirement_inventory.json",
+    "updated_active_queue": "outputs/governance_inventory/q0_next_bounded_work_queue_active.json"
+  },
+  "queue_counts": {
+    "before": 2,
+    "after": 1
+  },
+  "patch_002_state": {
+    "status": "PARTIAL",
+    "authority_effect": "NONE",
+    "changed": false
+  },
+  "full_project_validation_status": "SUSPENDED_PENDING_VALIDATOR_DEPARTMENT_COMPLETION",
+  "historical_record_policy": {
+    "historical_records_rewritten": false,
+    "retirement_is_prospective_not_retroactive": true
+  },
+  "validation_results": {
+    "targeted_retirement_test": {
+      "command": "python -m pytest tests/governance_validation/test_patch_017_q0_retrieval_domain_residue_retirement.py -q",
+      "status": "PASS"
+    },
+    "json_parse": {
+      "status": "PASS_REQUIRED"
+    },
+    "git_diff_check": {
+      "command": "git diff --check",
+      "status": "PASS_WITH_CRLF_WARNINGS_ONLY"
+    },
+    "git_status": {
+      "command": "git status --short",
+      "status": "PASS_REVIEWED"
+    }
+  },
+  "success_criteria": [
+    "Only retrieval-domain obsolete-residue items are selected.",
+    "The selected retrieval surface is proven unable to determine live Q0 governance authority.",
+    "The active bounded Q0 queue is updated only for the retrieval-domain residue item.",
+    "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002 remains unchanged."
+  ]
+}

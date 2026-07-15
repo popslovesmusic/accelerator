@@ -11,6 +11,24 @@
     "PATCH_GOVERNANCE_AMBIGUITY_RISK_CLASSIFICATION_AND_REMEDIATION_QUEUE_005",
     "PATCH_GOVERNANCE_Q0_CLUSTER_SELECTION_AND_RESOLUTION_PACKET_006"
   ],
+  "dependency_requirements": {
+    "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002": {
+      "type": "REQUIRES_EXISTING_EVIDENCE",
+      "reason": "Patch 007 partitions authority over the already-registered inventory surfaces and does not require the unresolved inventory ambiguities to be globally closed."
+    },
+    "PATCH_GOVERNANCE_INVENTORY_PROVENANCE_AND_ADDITIVE_AUTHORITY_004": {
+      "type": "REQUIRES_EXISTING_EVIDENCE",
+      "reason": "Patch 007 requires the additive provenance/core-rule registration from patch 004 as bounded evidence input."
+    },
+    "PATCH_GOVERNANCE_AMBIGUITY_RISK_CLASSIFICATION_AND_REMEDIATION_QUEUE_005": {
+      "type": "REQUIRES_EXISTING_EVIDENCE",
+      "reason": "Patch 007 consumes the remediation queue and risk classification outputs rather than requiring patch 005 to become a terminal authority."
+    },
+    "PATCH_GOVERNANCE_Q0_CLUSTER_SELECTION_AND_RESOLUTION_PACKET_006": {
+      "type": "REQUIRES_EXISTING_EVIDENCE",
+      "reason": "Patch 007 materializes the selected Q0 packet produced by patch 006 and therefore requires that packet to exist and verify."
+    }
+  },
   "live_semantic_dependencies": {
     "classification": "SEMANTICS_SURVIVE_ELSEWHERE",
     "historical_reference": {

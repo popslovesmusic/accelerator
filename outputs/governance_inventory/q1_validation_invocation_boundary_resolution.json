@@ -1,0 +1,236 @@
+{
+  "schema_id": "q1_validation_invocation_boundary_resolution_v1",
+  "generated_at": "2026-07-15T12:15:00-04:00",
+  "source_analysis_patch": "PATCH_GOVERNANCE_Q1_VALIDATION_AUTHORITY_FIRST_BOUNDED_CLUSTER_SELECTION_064",
+  "selected_q1_item_ids": [
+    "Q1-VAL-002",
+    "Q1-VAL-003"
+  ],
+  "selected_global_ambiguity_ids": [
+    "AMB-GOV-SURF-0665",
+    "AMB-GOV-SURF-0663"
+  ],
+  "selected_authority_boundary": "VALIDATION_INVOCATION_AUTHORITY with adjacent INSTRUCTION_AUTHORITY and DB runtime ownership projection",
+  "state_drift_review": {
+    "full_validation_suspension_still_active": true,
+    "newer_governed_patch_reassigns_validation_invocation_authority": false,
+    "candidate_surface_drift": [
+      {
+        "path": "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+        "drift_detected": true,
+        "material_to_selected_boundary": false,
+        "reason": "Current worktree diff adds typed dependency runtime guidance only and does not alter canonical invocation or instruction-authority procedure."
+      },
+      {
+        "path": "scripts/query_governance.py",
+        "drift_detected": true,
+        "material_to_selected_boundary": false,
+        "reason": "Current worktree diff adds typed dependency runtime handling only and does not alter authority-resolution ownership for the selected invocation boundary."
+      }
+    ]
+  },
+  "runtime_evidence": [
+    {
+      "command": "python -m scripts.query_governance current-state --level summary --json",
+      "status": "warn",
+      "decision_context": "usable_with_source_reconciliation",
+      "reason": "DB-first gate remains active and authority boundary remains mixed, but the runtime warns that the DB snapshot is older than the worktree."
+    },
+    {
+      "command": "python -m scripts.query_governance authority --target scripts/global_validate.py --authority-role VALIDATION_INVOCATION_AUTHORITY --level summary --json",
+      "decision": "allow",
+      "reason": "Canonical governed validation invocation boundary."
+    },
+    {
+      "command": "python -m scripts.query_governance authority --target scripts/global_validate.py --authority-role VALIDATION_REDUCTION_AUTHORITY --level summary --json",
+      "decision": "block",
+      "reason": "Requested authority role does not match the governed target role.",
+      "warning": "Target requires VALIDATION_INVOCATION_AUTHORITY, not VALIDATION_REDUCTION_AUTHORITY."
+    },
+    {
+      "command": "python -m scripts.query_governance authority --target docs/governance/GLOBAL_VALIDATION_ROUTINE.md --authority-role INSTRUCTION_AUTHORITY --level summary --json",
+      "decision": "allow",
+      "reason": "Prescriptive guidance for operators and agents. It may name procedures but cannot mutate live state by itself."
+    },
+    {
+      "command": "python -m scripts.query_governance authority --target registry/db/migrations/20260703_governance_runtime_authority_resolution_003.sql --level summary --json",
+      "decision": "allow",
+      "reason": "The authority-resolution migration is the live runtime projection for ownership and supersession queries."
+    },
+    {
+      "command": "python -m scripts.query_governance authority --target registry/db/README.md --level summary --json",
+      "decision": "allow",
+      "reason": "The DB README is a governed registry document that describes the live runtime surfaces."
+    },
+    {
+      "command": "python -m scripts.query_governance authority --target scripts/query_governance.py --level summary --json",
+      "decision": "block",
+      "reason": "Generic mixed-role authority lookup is prohibited for the Q0 partition.",
+      "warning": "Declare --authority-role GENERATED_EVIDENCE when querying governed Q0 authority surfaces."
+    }
+  ],
+  "validation_invocation_authority": {
+    "authority_surface": "scripts/global_validate.py",
+    "authority_count": 1,
+    "proof_basis": [
+      "Runtime authority lookup allows scripts/global_validate.py for VALIDATION_INVOCATION_AUTHORITY.",
+      "Runtime authority lookup blocks scripts/global_validate.py for VALIDATION_REDUCTION_AUTHORITY, preventing role collapse.",
+      "docs/governance/GLOBAL_VALIDATION_ROUTINE.md names python -m scripts.global_validate as the canonical governed invocation.",
+      "No newer governance patch in the repository reassigns validation invocation authority after patch 064."
+    ],
+    "excluded_candidate_surfaces": [
+      {
+        "path": "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+        "reason": "Instruction authority only."
+      },
+      {
+        "path": "registry/db/migrations/20260703_governance_runtime_authority_resolution_003.sql",
+        "reason": "DB runtime ownership projection only."
+      },
+      {
+        "path": "registry/db/README.md",
+        "reason": "Descriptive runtime guidance only."
+      },
+      {
+        "path": "scripts/query_governance.py",
+        "reason": "Role-aware authority query surface only."
+      }
+    ]
+  },
+  "role_per_candidate_surface": {
+    "scripts/global_validate.py": {
+      "resolved_role": "VALIDATION_INVOCATION_AUTHORITY",
+      "prohibited_equivalents": [
+        "VALIDATION_REDUCTION_AUTHORITY"
+      ],
+      "evidence": [
+        "Runtime allow decision for VALIDATION_INVOCATION_AUTHORITY.",
+        "Runtime block decision for VALIDATION_REDUCTION_AUTHORITY.",
+        "GLOBAL_VALIDATION_ROUTINE names python -m scripts.global_validate as canonical invocation."
+      ]
+    },
+    "docs/governance/GLOBAL_VALIDATION_ROUTINE.md": {
+      "resolved_role": "INSTRUCTION_AUTHORITY",
+      "prohibited_equivalents": [
+        "VALIDATION_INVOCATION_AUTHORITY",
+        "VALIDATION_REDUCTION_AUTHORITY",
+        "REGISTRY_WRITE_AUTHORITY"
+      ],
+      "evidence": [
+        "Runtime allow decision for INSTRUCTION_AUTHORITY.",
+        "Canonical invocation is documented, not executed by the document itself.",
+        "Q0 authority partition rule prohibits instruction authority from mutating or validating live state."
+      ]
+    },
+    "registry/db/migrations/20260703_governance_runtime_authority_resolution_003.sql": {
+      "resolved_role": "DB_RUNTIME_OWNERSHIP_PROJECTION",
+      "prohibited_equivalents": [
+        "VALIDATION_INVOCATION_AUTHORITY",
+        "VALIDATION_REDUCTION_AUTHORITY"
+      ],
+      "evidence": [
+        "Runtime allow decision identifies the migration as the live runtime projection for ownership and supersession queries.",
+        "The migration text names current-state and authority-resolution projections and separately names GLOBAL_VALIDATION_ROUTINE as procedural guidance."
+      ]
+    },
+    "registry/db/README.md": {
+      "resolved_role": "DESCRIPTIVE_RUNTIME_GUIDANCE",
+      "prohibited_equivalents": [
+        "VALIDATION_INVOCATION_AUTHORITY",
+        "VALIDATION_REDUCTION_AUTHORITY",
+        "REGISTRY_WRITE_AUTHORITY"
+      ],
+      "evidence": [
+        "Runtime allow decision identifies the README as a governed registry document describing runtime surfaces.",
+        "The README says the DB runtime is a gate and not a semantic SSOT."
+      ]
+    },
+    "scripts/query_governance.py": {
+      "resolved_role": "ROLE_AWARE_AUTHORITY_QUERY_SURFACE",
+      "prohibited_equivalents": [
+        "VALIDATION_INVOCATION_AUTHORITY",
+        "VALIDATION_REDUCTION_AUTHORITY"
+      ],
+      "evidence": [
+        "The script blocks generic mixed-role lookup and requires explicit --authority-role declarations on governed Q0 surfaces.",
+        "The script text states the authority-resolution migration is the live runtime projection for ownership and supersession queries.",
+        "The script text states registry authority remains authoritative and DB runtime is an operational gate only."
+      ]
+    }
+  },
+  "legacy_claim_review": {
+    "result": "ACTIVE_LEGACY_CLAIMS_FOUND",
+    "legacy_claims_found": [
+      {
+        "claim_id": "QUEUE-AMB-GOV-SURF-0665",
+        "source_path": "outputs/governance_inventory/governance_remediation_queue.json",
+        "claim": "The DB runtime authority-resolution projection may be mistaken for the canonical validation invoker."
+      },
+      {
+        "claim_id": "QUEUE-AMB-GOV-SURF-0663",
+        "source_path": "outputs/governance_inventory/governance_remediation_queue.json",
+        "claim": "The DB README can be confused with executable validation authority."
+      },
+      {
+        "claim_id": "RISK-AMB-GOV-SURF-0665",
+        "source_path": "outputs/governance_inventory/governance_ambiguity_risk_classification.json",
+        "claim": "The authority-resolution migration remains queued under VALIDATION_AUTHORITY_UNCLEAR."
+      },
+      {
+        "claim_id": "RISK-AMB-GOV-SURF-0663",
+        "source_path": "outputs/governance_inventory/governance_ambiguity_risk_classification.json",
+        "claim": "The DB README remains queued under VALIDATION_AUTHORITY_UNCLEAR."
+      }
+    ],
+    "legacy_claims_neutralized": [
+      "QUEUE-AMB-GOV-SURF-0665",
+      "QUEUE-AMB-GOV-SURF-0663",
+      "RISK-AMB-GOV-SURF-0665",
+      "RISK-AMB-GOV-SURF-0663"
+    ],
+    "historical_records_rewritten": false
+  },
+  "q1_item_resolution": {
+    "Q1-VAL-002": {
+      "ambiguity_id": "AMB-GOV-SURF-0665",
+      "resolution": "RESOLVED_BY_ROLE_PARTITION",
+      "resolution_statement": "The DB runtime authority-resolution migration is a live ownership projection for authority and supersession queries. It does not compete with the canonical validation invocation surface because it occupies a distinct governed role.",
+      "closure_decision": "PROSPECTIVELY_RESOLVED"
+    },
+    "Q1-VAL-003": {
+      "ambiguity_id": "AMB-GOV-SURF-0663",
+      "resolution": "RESOLVED_BY_SINGLE_EXISTING_AUTHORITY",
+      "resolution_statement": "scripts/global_validate.py is the single current VALIDATION_INVOCATION_AUTHORITY. The DB README remains descriptive runtime guidance and is explicitly non-equivalent to invocation authority.",
+      "closure_decision": "PROSPECTIVELY_RESOLVED"
+    }
+  },
+  "global_inventory_delta": {
+    "one_to_one_mapping_verified": true,
+    "resolved_item_count": 2,
+    "global_blocking_ambiguity_count_before": 493,
+    "global_blocking_ambiguity_count_after": 491,
+    "q1_item_count_before": 9,
+    "q1_item_count_after": 7
+  },
+  "completion_assertions": {
+    "q1_items_resolved": [
+      "Q1-VAL-002",
+      "Q1-VAL-003"
+    ],
+    "q1_items_resolved_count": 2,
+    "remaining_q1_items_count": 7,
+    "validation_invocation_authority_count": 1,
+    "validation_invocation_authority": "scripts/global_validate.py",
+    "instruction_authority_promoted": false,
+    "db_runtime_projection_promoted": false,
+    "query_surface_promoted": false,
+    "patch_002_authority_effect_changed": false,
+    "full_project_validation_run": false
+  },
+  "patch_002_state": {
+    "status": "PARTIAL",
+    "authority_effect": "NONE",
+    "changed": false
+  },
+  "full_project_validation_status": "SUSPENDED_PENDING_VALIDATOR_DEPARTMENT_COMPLETION"
+}

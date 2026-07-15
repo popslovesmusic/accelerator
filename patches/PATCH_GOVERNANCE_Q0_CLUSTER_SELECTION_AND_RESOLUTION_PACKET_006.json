@@ -9,6 +9,20 @@
     "PATCH_GOVERNANCE_INVENTORY_PROVENANCE_AND_ADDITIVE_AUTHORITY_004",
     "PATCH_GOVERNANCE_AMBIGUITY_RISK_CLASSIFICATION_AND_REMEDIATION_QUEUE_005"
   ],
+  "dependency_requirements": {
+    "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002": {
+      "type": "REQUIRES_EXISTING_EVIDENCE",
+      "reason": "Patch 006 selects the Q0 cluster from surviving inventory evidence; the transitional inventory must exist but need not be globally complete."
+    },
+    "PATCH_GOVERNANCE_INVENTORY_PROVENANCE_AND_ADDITIVE_AUTHORITY_004": {
+      "type": "REQUIRES_EXISTING_EVIDENCE",
+      "reason": "Patch 006 requires the additive inventory provenance registration artifacts as stable inputs."
+    },
+    "PATCH_GOVERNANCE_AMBIGUITY_RISK_CLASSIFICATION_AND_REMEDIATION_QUEUE_005": {
+      "type": "REQUIRES_EXISTING_EVIDENCE",
+      "reason": "Patch 006 consumes the deterministic queue and classification outputs produced by patch 005."
+    }
+  },
   "live_semantic_dependencies": {
     "classification": "SEMANTICS_SURVIVE_ELSEWHERE",
     "historical_reference": {

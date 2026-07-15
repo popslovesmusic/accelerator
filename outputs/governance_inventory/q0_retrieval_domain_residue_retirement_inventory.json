@@ -1,0 +1,67 @@
+{
+  "schema_id": "q0_retrieval_domain_residue_retirement_inventory_v1",
+  "generated_at": "2026-07-15T01:00:00-04:00",
+  "source_patch": "PATCH_GOVERNANCE_Q0_REMAINING_OPEN_WORK_CLASSIFICATION_013",
+  "source_inventory": "outputs/governance_inventory/q0_remaining_open_work_inventory.json",
+  "selection_rule": "Only items already classified as OBSOLETE_RESIDUE and uniquely proven to belong to the retrieval domain are in scope.",
+  "queue_state": {
+    "before_queue_artifact": "outputs/governance_inventory/q0_next_bounded_work_queue_active.json",
+    "before_count": 2,
+    "after_queue_artifact": "outputs/governance_inventory/q0_next_bounded_work_queue_active.json",
+    "after_count": 1
+  },
+  "selected_items": [
+    {
+      "item_id": "Q0-OPEN-010",
+      "ambiguity_id": "AMB-GOV-SURF-0986",
+      "source_path_or_subsystem": "scripts/orientation_retrieval.py",
+      "original_ambiguity_statement": "Orientation retrieval utility in a separate retrieval domain; the database reference is not enough to connect it to the seed component.",
+      "current_obsolete_residue_classification": "OBSOLETE_RESIDUE",
+      "current_retrieval_domain_role": "CANDIDATE_DISCOVERY_AND_RANKING_OUTSIDE_Q0_AUTHORITY_CATALOG",
+      "reason_residue_no_longer_affects_live_q0_authority": "The retrieval utility produces candidate sets and advisory ranking output, but current Q0 authority resolution does not catalog it as a governed authority surface and defers it for registry state, validation reduction, and other Q0 roles.",
+      "evidence": [
+        {
+          "path": "outputs/governance_inventory/q0_resolution_packet.json",
+          "note": "The selected Q0 cluster classifies scripts/orientation_retrieval.py as a different governed target family outside the selected validation control plane."
+        },
+        {
+          "path": "outputs/governance_inventory/q0_live_authority_access_inventory.json",
+          "note": "The live Q0 authority inventory does not classify scripts/orientation_retrieval.py as a Q0 role-bearing authority surface."
+        },
+        {
+          "path": "scripts/orientation_retrieval.py",
+          "note": "The retrieval script builds bounded candidate sets, returns ranked retrieval results, and explicitly warns that pattern-detected lineage must not be treated as source of truth."
+        },
+        {
+          "path": "python -m scripts.query_governance authority --target scripts/orientation_retrieval.py --json",
+          "note": "Returns defer: no governed authority surface matched the target and the target is not covered by the current authority catalog."
+        },
+        {
+          "path": "python -m scripts.query_governance authority --target scripts/orientation_retrieval.py --authority-role REGISTRY_STATE_AUTHORITY --json",
+          "note": "Returns defer: target is not part of the governed Q0 authority surface."
+        },
+        {
+          "path": "python -m scripts.query_governance authority --target scripts/orientation_retrieval.py --authority-role VALIDATION_REDUCTION_AUTHORITY --json",
+          "note": "Returns defer: target is not part of the governed Q0 authority surface."
+        },
+        {
+          "path": "scripts/query_governance.py",
+          "note": "Retrieval output is consumed as candidate input, while authority decisions are performed by separate role-aware resolution paths."
+        }
+      ],
+      "retirement_decision": "RETIRE_AS_OBSOLETE_RESIDUE",
+      "deterministic_reason": "scripts/orientation_retrieval.py remains a retrieval and candidate-ranking utility, but current Q0 governance requires separate role-aware authority resolution before any retrieved surface can affect live authority, so this retrieval-domain residue no longer represents a live Q0 ambiguity."
+    }
+  ],
+  "excluded_as_out_of_scope": [],
+  "remains_open": [],
+  "completion_assertions": {
+    "historical_records_rewritten": 0,
+    "patch_002_status_changed": false,
+    "live_authority_assignments_changed": 0,
+    "full_project_validation_run": false,
+    "selected_item_count": 1,
+    "retired_item_count": 1,
+    "remaining_active_queue_count": 1
+  }
+}

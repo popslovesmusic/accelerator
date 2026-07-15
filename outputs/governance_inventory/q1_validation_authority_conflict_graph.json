@@ -1,0 +1,231 @@
+{
+  "schema_id": "q1_validation_authority_conflict_graph_v1",
+  "generated_at": "2026-07-15T10:30:00-04:00",
+  "purpose": "Conflict graph for the nine Q1 validation-authority items and the live surfaces they reference.",
+  "nodes": [
+    {
+      "node_id": "Q1-VAL-001",
+      "node_type": "Q1_ITEM",
+      "label": "AMB-GOV-SURF-0882",
+      "path": "registry/governance_hash_registry.json",
+      "authority_question": "OUTSIDE_VALIDATION_AUTHORITY_SCOPE"
+    },
+    {
+      "node_id": "Q1-VAL-002",
+      "node_type": "Q1_ITEM",
+      "label": "AMB-GOV-SURF-0665",
+      "path": "registry/db/migrations/20260703_governance_runtime_authority_resolution_003.sql",
+      "authority_question": "INVOCATION_AUTHORITY_AMBIGUITY"
+    },
+    {
+      "node_id": "Q1-VAL-003",
+      "node_type": "Q1_ITEM",
+      "label": "AMB-GOV-SURF-0663",
+      "path": "registry/db/README.md",
+      "authority_question": "INSTRUCTION_VS_EXECUTABLE_AUTHORITY_AMBIGUITY"
+    },
+    {
+      "node_id": "Q1-VAL-004",
+      "node_type": "Q1_ITEM",
+      "label": "AMB-GOV-SURF-0107",
+      "path": "docs/manual_repository_audit_2026_07_13.md",
+      "authority_question": "GENERATED_EVIDENCE_AUTHORITY_AMBIGUITY"
+    },
+    {
+      "node_id": "Q1-VAL-005",
+      "node_type": "Q1_ITEM",
+      "label": "AMB-GOV-SURF-0664",
+      "path": "registry/db/acellorator_index.sqlite",
+      "authority_question": "OUTSIDE_VALIDATION_AUTHORITY_SCOPE"
+    },
+    {
+      "node_id": "Q1-VAL-006",
+      "node_type": "Q1_ITEM",
+      "label": "AMB-GOV-SURF-0676",
+      "path": "registry/db/migrations/20260703_governance_runtime_semantic_authority_013.sql",
+      "authority_question": "OUTSIDE_VALIDATION_AUTHORITY_SCOPE"
+    },
+    {
+      "node_id": "Q1-VAL-007",
+      "node_type": "Q1_ITEM",
+      "label": "AMB-GOV-SURF-1007",
+      "path": "tests/__pycache__/test_governed_context_capsule_v1.cpython-312-pytest-9.1.1.pyc",
+      "authority_question": "GENERATED_EVIDENCE_AUTHORITY_AMBIGUITY"
+    },
+    {
+      "node_id": "Q1-VAL-008",
+      "node_type": "Q1_ITEM",
+      "label": "AMB-GOV-SURF-1032",
+      "path": "tests/test_governed_context_capsule_v1.py",
+      "authority_question": "SUPPORTING_VALIDATOR_SCOPE_AMBIGUITY"
+    },
+    {
+      "node_id": "Q1-VAL-009",
+      "node_type": "Q1_ITEM",
+      "label": "AMB-GOV-SURF-1008",
+      "path": "tests/__pycache__/test_governed_context_capsule_v1.cpython-312.pyc",
+      "authority_question": "GENERATED_EVIDENCE_AUTHORITY_AMBIGUITY"
+    },
+    {
+      "node_id": "SURF-GV",
+      "node_type": "LIVE_SURFACE",
+      "label": "scripts/global_validate.py",
+      "runtime_role": "VALIDATION_INVOCATION_AUTHORITY"
+    },
+    {
+      "node_id": "SURF-GVR",
+      "node_type": "LIVE_SURFACE",
+      "label": "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+      "runtime_role": "INSTRUCTION_AUTHORITY"
+    },
+    {
+      "node_id": "SURF-DB-AR003",
+      "node_type": "LIVE_SURFACE",
+      "label": "registry/db/migrations/20260703_governance_runtime_authority_resolution_003.sql",
+      "runtime_role": "DB_RUNTIME_OWNERSHIP_PROJECTION"
+    },
+    {
+      "node_id": "SURF-DB-README",
+      "node_type": "LIVE_SURFACE",
+      "label": "registry/db/README.md",
+      "runtime_role": "INSTRUCTION_AUTHORITY_DESCRIPTOR"
+    },
+    {
+      "node_id": "SURF-QUERY",
+      "node_type": "LIVE_SURFACE",
+      "label": "scripts/query_governance.py",
+      "runtime_role": "RUNTIME_AUTHORITY_DISPATCH"
+    },
+    {
+      "node_id": "SURF-TEST-CAPSULE",
+      "node_type": "LIVE_SURFACE",
+      "label": "tests/test_governed_context_capsule_v1.py",
+      "runtime_role": "BOUNDED_TEST_EVIDENCE_PRODUCER"
+    }
+  ],
+  "edges": [
+    {
+      "from": "Q1-VAL-002",
+      "to": "SURF-DB-AR003",
+      "edge_type": "CLAIMS_SAME_AUTHORITY_ROLE",
+      "evidence": "The queue item is the runtime authority-resolution migration itself."
+    },
+    {
+      "from": "Q1-VAL-002",
+      "to": "SURF-GV",
+      "edge_type": "CLAIMS_SAME_AUTHORITY_ROLE",
+      "evidence": "The ambiguity is whether runtime ownership projection can be confused with canonical validation invocation."
+    },
+    {
+      "from": "Q1-VAL-002",
+      "to": "SURF-GVR",
+      "edge_type": "DOCUMENTS",
+      "evidence": "The migration cites GLOBAL_VALIDATION_ROUTINE.md in evidence_paths."
+    },
+    {
+      "from": "Q1-VAL-002",
+      "to": "SURF-DB-README",
+      "edge_type": "DOCUMENTS",
+      "evidence": "The migration cites registry/db/README.md in evidence_paths."
+    },
+    {
+      "from": "Q1-VAL-002",
+      "to": "SURF-QUERY",
+      "edge_type": "INVOKES",
+      "evidence": "scripts/query_governance.py loads and applies the authority-resolution migration."
+    },
+    {
+      "from": "Q1-VAL-003",
+      "to": "SURF-DB-README",
+      "edge_type": "CLAIMS_SAME_AUTHORITY_ROLE",
+      "evidence": "The queue item is the DB README itself."
+    },
+    {
+      "from": "Q1-VAL-003",
+      "to": "SURF-DB-AR003",
+      "edge_type": "DOCUMENTS",
+      "evidence": "The README describes the live runtime surfaces, including the authority-resolution projection."
+    },
+    {
+      "from": "Q1-VAL-003",
+      "to": "SURF-GV",
+      "edge_type": "NO_LIVE_RELATION",
+      "evidence": "No direct executable invocation from the README to scripts/global_validate.py is recorded; the relationship is descriptive."
+    },
+    {
+      "from": "Q1-VAL-003",
+      "to": "SURF-GVR",
+      "edge_type": "DOCUMENTS",
+      "evidence": "Runtime authority query cites GLOBAL_VALIDATION_ROUTINE.md as supporting evidence for the README."
+    },
+    {
+      "from": "Q1-VAL-004",
+      "to": "SURF-GV",
+      "edge_type": "GENERATES_EVIDENCE_FOR",
+      "evidence": "The manual audit reports validator behavior and cites global validation results, but does not control execution."
+    },
+    {
+      "from": "Q1-VAL-005",
+      "to": "SURF-DB-AR003",
+      "edge_type": "NO_LIVE_RELATION",
+      "evidence": "The database file is the runtime substrate for authority queries, not itself a validator role claimant."
+    },
+    {
+      "from": "Q1-VAL-006",
+      "to": "SURF-QUERY",
+      "edge_type": "GENERATES_EVIDENCE_FOR",
+      "evidence": "The semantic-authority migration feeds semantic authority queries rather than validation ownership queries."
+    },
+    {
+      "from": "Q1-VAL-007",
+      "to": "SURF-TEST-CAPSULE",
+      "edge_type": "GENERATES_EVIDENCE_FOR",
+      "evidence": "The pyc surface is generated from the governed-context-capsule test."
+    },
+    {
+      "from": "Q1-VAL-008",
+      "to": "SURF-QUERY",
+      "edge_type": "PRODUCES_STAGE_EVIDENCE_FOR",
+      "evidence": "The test imports scripts.query_governance and validates the bounded capsule contract."
+    },
+    {
+      "from": "Q1-VAL-009",
+      "to": "SURF-TEST-CAPSULE",
+      "edge_type": "GENERATES_EVIDENCE_FOR",
+      "evidence": "The pyc surface is generated from the governed-context-capsule test."
+    },
+    {
+      "from": "SURF-GVR",
+      "to": "SURF-GV",
+      "edge_type": "DOCUMENTS",
+      "evidence": "GLOBAL_VALIDATION_ROUTINE.md names python -m scripts.global_validate as canonical invocation."
+    },
+    {
+      "from": "SURF-QUERY",
+      "to": "SURF-DB-AR003",
+      "edge_type": "INVOKES",
+      "evidence": "scripts/query_governance.py reads the authority-resolution migration for runtime authority mapping."
+    }
+  ],
+  "bounded_clusters": [
+    {
+      "cluster_id": "Q1-CLUSTER-001",
+      "item_ids": [
+        "Q1-VAL-002",
+        "Q1-VAL-003"
+      ],
+      "coherence_basis": "Directly coupled validation invocation versus instruction/descriptor boundary around the DB runtime authority projection.",
+      "live_runtime_effect": true
+    },
+    {
+      "cluster_id": "Q1-CLUSTER-002",
+      "item_ids": [
+        "Q1-VAL-007",
+        "Q1-VAL-008",
+        "Q1-VAL-009"
+      ],
+      "coherence_basis": "Governed-context-capsule test source and compiled residue surfaces.",
+      "live_runtime_effect": false
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "patch_id": "PATCH_GOVERNANCE_Q0_LIVE_COMMAND_BOUNDARY_PROSPECTIVE_CLOSURE_015",
+  "title": "Q0 Live Command Boundary Prospective Closure",
+  "status": "APPLIED",
+  "applied_on": "2026-07-15T00:10:00-04:00",
+  "type": "analysis_audit",
+  "depends_on": [
+    "PATCH_GOVERNANCE_Q0_DB_RUNTIME_BOUNDARY_PROSPECTIVE_CLOSURE_014"
+  ],
+  "mode": "additive",
+  "purpose": "Prospectively close only the Q0 items classified as neutralized by later governance whose original ambiguity belonged uniquely to the live command or governed invocation boundary.",
+  "summary": "This patch records that three historical Q0 queue items tied to live governance command surfaces are now prospectively closed because current Q0 role separation and canonical invocation enforcement prevent those command surfaces from acting as live Q0 validation control-plane authority. Historical ambiguity records are preserved unchanged.",
+  "selected_item_ids": [
+    "Q0-OPEN-006",
+    "Q0-OPEN-007",
+    "Q0-OPEN-008"
+  ],
+  "prospectively_closed_item_ids": [
+    "Q0-OPEN-006",
+    "Q0-OPEN-007",
+    "Q0-OPEN-008"
+  ],
+  "items_excluded_as_out_of_scope": [],
+  "items_remaining_open": [
+    "Q0-OPEN-001",
+    "Q0-OPEN-009",
+    "Q0-OPEN-010",
+    "Q0-OPEN-011",
+    "Q0-OPEN-012"
+  ],
+  "neutralization_mechanisms": {
+    "Q0-OPEN-006": [
+      "canonical invocation authority enforced",
+      "instruction authority separated from mutation authority",
+      "generic mixed-role lookup blocked"
+    ],
+    "Q0-OPEN-007": [
+      "canonical invocation authority enforced",
+      "supporting command prevented from acquiring terminal authority",
+      "generated evidence prevented from becoming live authority"
+    ],
+    "Q0-OPEN-008": [
+      "instruction authority separated from mutation authority",
+      "canonical invocation authority enforced",
+      "fail-closed handling of missing or ambiguous role"
+    ]
+  },
+  "artifacts": {
+    "closure_inventory": "outputs/governance_inventory/q0_live_command_boundary_closure_inventory.json",
+    "updated_active_queue": "outputs/governance_inventory/q0_next_bounded_work_queue_active.json"
+  },
+  "queue_counts": {
+    "before": 4,
+    "after": 3
+  },
+  "patch_002_state": {
+    "status": "PARTIAL",
+    "authority_effect": "NONE",
+    "changed": false
+  },
+  "full_project_validation_status": "SUSPENDED_PENDING_VALIDATOR_DEPARTMENT_COMPLETION",
+  "historical_record_policy": {
+    "historical_ambiguity_records_rewritten": false,
+    "closure_is_prospective_not_retroactive": true
+  },
+  "validation_results": {
+    "targeted_closure_test": {
+      "command": "python -m pytest tests/governance_validation/test_patch_015_q0_live_command_boundary_prospective_closure.py -q",
+      "status": "PASS"
+    },
+    "json_parse": {
+      "status": "PASS_REQUIRED"
+    },
+    "git_diff_check": {
+      "command": "git diff --check",
+      "status": "PASS_WITH_CRLF_WARNINGS_ONLY"
+    },
+    "git_status": {
+      "command": "git status --short",
+      "status": "PASS_REVIEWED"
+    }
+  },
+  "success_criteria": [
+    "Only live-command-boundary items from patch 013 are selected.",
+    "Each selected item is proven prospectively closed by enforced executable behavior rather than documentation preference.",
+    "The active bounded Q0 queue is updated only for the live-command-boundary work item.",
+    "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002 remains unchanged."
+  ]
+}

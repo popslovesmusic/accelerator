@@ -31,6 +31,8 @@ For the governed Q0 authority partition surfaces, generic authority lookup is fa
 
 Use semantic authority resolution when a patch declares semantic targets or when a theorem, operator binding, claim, domain rule, or runtime rule needs direct semantic ownership:
 
+Patch-chain evaluation is no longer limited to one implicit dependency meaning. When a patch declares `dependency_requirements`, the runtime distinguishes `REQUIRES_COMPLETED_PREDECESSOR`, `REQUIRES_EXISTING_EVIDENCE`, `REQUIRES_SEMANTIC_RULE`, and `HISTORICAL_LINEAGE_ONLY` instead of collapsing every `depends_on` edge into a completed-predecessor gate.
+
 `python scripts/query_governance.py authority --semantic <key> --semantic-type <type>`
 
 Use patch-chain resolution for the patch ID before attempting application:

@@ -4280,6 +4280,8 @@ def normalize_patch_chain_status(raw_status):
     status = str(raw_status or "").strip().lower()
     if status in {"applied", "approved"}:
         return "applied"
+    if status in {"partial", "partially_applied", "implemented", "in_progress"}:
+        return "partial"
     if status in {"registered_late", "late_registered"}:
         return "late_registered"
     if status in {"superseded", "replaced"}:
@@ -4291,6 +4293,67 @@ def normalize_patch_chain_status(raw_status):
     if status in {"active", "ready", "scheduled", "proposed", "provisional", "registered"}:
         return "active"
     return "unknown"
+
+
+PATCH_DEPENDENCY_TYPES = {
+    "REQUIRES_COMPLETED_PREDECESSOR",
+    "REQUIRES_EXISTING_EVIDENCE",
+    "REQUIRES_SEMANTIC_RULE",
+    "HISTORICAL_LINEAGE_ONLY",
+}
+
+
+def normalize_patch_dependency_type(raw_value):
+    text = str(raw_value or "").strip().upper()
+    if text in PATCH_DEPENDENCY_TYPES:
+        return text
+    return "REQUIRES_COMPLETED_PREDECESSOR"
+
+
+def collect_patch_dependency_requirements(patch_record):
+    dependencies = [
+        str(dep).strip()
+        for dep in parse_json_collection(patch_record.get("depends_on", []))
+        if str(dep).strip()
+    ]
+    raw_requirements = patch_record.get("dependency_requirements") or patch_record.get("dependency_types") or {}
+    requirement_map = {}
+    if isinstance(raw_requirements, dict):
+        for dep_id in dependencies:
+            raw_entry = raw_requirements.get(dep_id)
+            if isinstance(raw_entry, str):
+                requirement_map[dep_id] = {"type": normalize_patch_dependency_type(raw_entry)}
+            elif isinstance(raw_entry, dict):
+                normalized = dict(raw_entry)
+                normalized["type"] = normalize_patch_dependency_type(raw_entry.get("type"))
+                requirement_map[dep_id] = normalized
+    for dep_id in dependencies:
+        requirement_map.setdefault(dep_id, {"type": "REQUIRES_COMPLETED_PREDECESSOR"})
+    return requirement_map
+
+
+def dependency_requirement_is_satisfied(dep_result, requirement):
+    requirement_type = normalize_patch_dependency_type(requirement.get("type"))
+    dep_status = str(dep_result.get("status") or "").strip().lower()
+    dep_decision = str(dep_result.get("decision") or "").strip().lower()
+
+    if requirement_type == "HISTORICAL_LINEAGE_ONLY":
+        return True
+    if requirement_type == "REQUIRES_COMPLETED_PREDECESSOR":
+        return dep_status == "applied"
+    if requirement_type == "REQUIRES_EXISTING_EVIDENCE":
+        return dep_status not in {"missing", "superseded"}
+    if requirement_type == "REQUIRES_SEMANTIC_RULE":
+        semantic_rule_id = str(requirement.get("semantic_rule_id") or "").strip()
+        semantic_authority = str(requirement.get("semantic_authority") or "").strip()
+        if not semantic_rule_id and not semantic_authority:
+            return False
+        if dep_status in {"missing", "superseded"}:
+            return False
+        if dep_decision == "block" and dep_status in {"missing", "superseded"}:
+            return False
+        return True
+    return dep_status == "applied"
 
 
 def build_patch_chain_result(patch_id, current_state=None, ledger_index=None, cache=None, trail=None):
@@ -4367,6 +4430,7 @@ def build_patch_chain_result(patch_id, current_state=None, ledger_index=None, ca
         for dep in patch_record.get("depends_on", [])
         if str(dep).strip()
     ]
+    dependency_requirements = collect_patch_dependency_requirements(patch_record)
     dependency_results = [
         build_patch_chain_result(
             dep_id,
@@ -4378,25 +4442,43 @@ def build_patch_chain_result(patch_id, current_state=None, ledger_index=None, ca
         for dep_id in dependencies
     ]
 
+    dependency_evaluation = []
+    for dep_id, dep_result in zip(dependencies, dependency_results):
+        requirement = dependency_requirements.get(dep_id, {"type": "REQUIRES_COMPLETED_PREDECESSOR"})
+        requirement_type = normalize_patch_dependency_type(requirement.get("type"))
+        satisfied = dependency_requirement_is_satisfied(dep_result, requirement)
+        dependency_evaluation.append(
+            {
+                "patch_id": dep_id,
+                "requirement_type": requirement_type,
+                "satisfied": satisfied,
+                "dependency_status": dep_result.get("status"),
+                "dependency_decision": dep_result.get("decision"),
+            }
+        )
+
     missing_dependencies = [
         dep_id
-        for dep_id, dep_result in zip(dependencies, dependency_results)
-        if dep_result.get("status") == "missing"
+        for dep_id, dep_result, evaluation in zip(dependencies, dependency_results, dependency_evaluation)
+        if evaluation.get("requirement_type") != "HISTORICAL_LINEAGE_ONLY"
+        and dep_result.get("status") == "missing"
     ]
     unresolved_dependencies = [
         dep_id
-        for dep_id, dep_result in zip(dependencies, dependency_results)
-        if dep_result.get("status") not in {"applied"}
+        for dep_id, evaluation in zip(dependencies, dependency_evaluation)
+        if not evaluation.get("satisfied")
     ]
     late_dependencies = [
         dep_id
-        for dep_id, dep_result in zip(dependencies, dependency_results)
-        if dep_result.get("status") == "late_registered"
+        for dep_id, dep_result, evaluation in zip(dependencies, dependency_results, dependency_evaluation)
+        if evaluation.get("requirement_type") == "REQUIRES_COMPLETED_PREDECESSOR"
+        and dep_result.get("status") == "late_registered"
     ]
     superseded_dependencies = [
         dep_id
-        for dep_id, dep_result in zip(dependencies, dependency_results)
-        if dep_result.get("status") == "superseded"
+        for dep_id, dep_result, evaluation in zip(dependencies, dependency_results, dependency_evaluation)
+        if evaluation.get("requirement_type") != "HISTORICAL_LINEAGE_ONLY"
+        and dep_result.get("status") == "superseded"
     ]
 
     blockers = []
@@ -4465,6 +4547,10 @@ def build_patch_chain_result(patch_id, current_state=None, ledger_index=None, ca
         decision = "block"
         reason = "Patch record is blocked."
         status = "blocked"
+    elif patch_status == "partial":
+        decision = "defer"
+        reason = "Patch is registered as partial or transitional evidence."
+        status = "partial"
     elif blockers:
         decision = "block"
         reason = "Dependency chain is not yet satisfied."
@@ -4486,6 +4572,7 @@ def build_patch_chain_result(patch_id, current_state=None, ledger_index=None, ca
         "patch_id": normalized_patch_id,
         "status": status,
         "dependencies": dependencies,
+        "dependency_evaluation": dependency_evaluation,
         "missing_dependencies": missing_dependencies,
         "supersession": {
             "status": supersession_status,

@@ -11,6 +11,28 @@
     "PATCH_GOVERNANCE_Q0_CLUSTER_SELECTION_AND_RESOLUTION_PACKET_006",
     "PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007"
   ],
+  "dependency_requirements": {
+    "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002": {
+      "type": "REQUIRES_EXISTING_EVIDENCE",
+      "reason": "Patch 008 diagnoses and repairs dependency metadata against the surviving transitional inventory evidence without requiring inventory completion."
+    },
+    "PATCH_GOVERNANCE_INVENTORY_PROVENANCE_AND_ADDITIVE_AUTHORITY_004": {
+      "type": "REQUIRES_EXISTING_EVIDENCE",
+      "reason": "Patch 008 uses the additive provenance registration from patch 004 as a bounded evidence predecessor."
+    },
+    "PATCH_GOVERNANCE_AMBIGUITY_RISK_CLASSIFICATION_AND_REMEDIATION_QUEUE_005": {
+      "type": "REQUIRES_EXISTING_EVIDENCE",
+      "reason": "Patch 008 uses the queue outputs from patch 005 as evidence inputs rather than waiting for a stronger terminal state."
+    },
+    "PATCH_GOVERNANCE_Q0_CLUSTER_SELECTION_AND_RESOLUTION_PACKET_006": {
+      "type": "REQUIRES_EXISTING_EVIDENCE",
+      "reason": "Patch 008 repairs the chain for the selected Q0 packet and therefore requires the packet artifact to exist and verify."
+    },
+    "PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007": {
+      "type": "REQUIRES_EXISTING_EVIDENCE",
+      "reason": "Patch 008 binds directly to the implemented Q0 authority partition artifact rather than requiring a stronger completion status."
+    }
+  },
   "classification": [
     "GOVERNANCE_REMEDIATION",
     "DEPENDENCY_CHAIN_REPAIR",
