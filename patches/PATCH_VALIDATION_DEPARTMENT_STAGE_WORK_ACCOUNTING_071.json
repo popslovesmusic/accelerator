@@ -1,0 +1,68 @@
+{
+  "patch_id": "PATCH_VALIDATION_DEPARTMENT_STAGE_WORK_ACCOUNTING_071",
+  "title": "Validation Department Stage Work Accounting",
+  "status": "APPLIED",
+  "applied_on": "2026-07-15T19:10:00-04:00",
+  "type": "bounded_implementation",
+  "depends_on": [
+    "PATCH_VALIDATION_DEPARTMENT_TRUTHFUL_REDUCTION_SEMANTICS_070"
+  ],
+  "mode": "additive",
+  "authority_effect": "NONE",
+  "purpose": "Add truthful substantive-work accounting to engine_validation and math_program_validation so zero-work conditions cannot masquerade as clean validation success.",
+  "summary": "This patch adds explicit work expectation and work-state accounting to engine_validation and math_program_validation, carries the new fields through the authoritative stage-report path, and lets the Patch 070 reducer block clean PASS when required substantive work does not occur. It preserves suspended full-project validation, validation authority scope, and global ambiguity accounting.",
+  "confirmed_input_findings": [
+    "SYS-AUDIT-002",
+    "SYS-AUDIT-003"
+  ],
+  "modified_surfaces": [
+    "scripts/global_validate.py",
+    "scripts/math/math_program_validate.py",
+    "outputs/governance_inventory/validation_department_stage_work_accounting_071.json",
+    "patches/PATCH_VALIDATION_DEPARTMENT_STAGE_WORK_ACCOUNTING_071.json",
+    "registry/governance/patches/PATCH_VALIDATION_DEPARTMENT_STAGE_WORK_ACCOUNTING_071.json",
+    "tests/governance_validation/test_patch_071_validation_department_stage_work_accounting.py",
+    "registry/governance_change_ledger.json",
+    "registry/governance_hash_registry.json",
+    "docs/textbook/mono_process_textbook_complete.md"
+  ],
+  "implemented_invariants": [
+    "WORK-INV-001",
+    "WORK-INV-002",
+    "WORK-INV-003",
+    "WORK-INV-004",
+    "WORK-INV-005",
+    "WORK-INV-006",
+    "WORK-INV-007"
+  ],
+  "counts": {
+    "q1_local_queue_before": 0,
+    "q1_local_queue_after": 0,
+    "global_blocking_ambiguity_count_before": 487,
+    "global_blocking_ambiguity_count_after": 487
+  },
+  "governed_state_preservation": {
+    "patch_002_status": "PARTIAL",
+    "patch_002_authority_effect": "NONE",
+    "full_project_validation": "SUSPENDED_PENDING_VALIDATOR_DEPARTMENT_COMPLETION",
+    "validation_authority_changed": false
+  },
+  "validation_results": {
+    "focused_patch_test": {
+      "command": "python -m pytest tests/governance_validation/test_patch_070_validation_department_truthful_reduction_semantics.py tests/governance_validation/test_patch_071_validation_department_stage_work_accounting.py -q",
+      "status": "PASS",
+      "summary": "18 passed in 0.15s"
+    },
+    "json_parse": {
+      "status": "PASS"
+    },
+    "git_diff_check": {
+      "command": "git diff --check",
+      "status": "PASS_WITH_CRLF_WARNINGS_ONLY"
+    },
+    "git_status": {
+      "command": "git status --short",
+      "status": "PASS_REVIEWED"
+    }
+  }
+}

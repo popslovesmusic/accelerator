@@ -78,6 +78,8 @@ except ImportError:
 try:
     from tools.runtime_authority import (
         ROLE_IDS as Q0_ROLE_IDS,
+        classify_patch_record_explicit_none_authority_effect,
+        classify_patch_record_lifecycle,
         classify_target_role,
         get_authority_by_role,
         resolve_role_aware_authority,
@@ -87,6 +89,8 @@ except ImportError:
         sys.path.append(str(ROOT))
     from tools.runtime_authority import (
         ROLE_IDS as Q0_ROLE_IDS,
+        classify_patch_record_explicit_none_authority_effect,
+        classify_patch_record_lifecycle,
         classify_target_role,
         get_authority_by_role,
         resolve_role_aware_authority,
@@ -4689,6 +4693,56 @@ def classify_authority_target(target):
             "reason": "Authority resolution requires a target surface.",
             "evidence_paths": [],
             "warnings": [],
+        }
+
+    proposal_candidate_patch = classify_patch_record_lifecycle(normalized_target)
+    if proposal_candidate_patch is not None:
+        lifecycle_class = proposal_candidate_patch["lifecycle_class"].lower()
+        status = proposal_candidate_patch["status"]
+        return {
+            "authority_owner": "registry",
+            "authority_source": normalized_target,
+            "supersession_status": "current",
+            "superseded_by": [],
+            "conflict_state": "mixed",
+            "decision": "defer",
+            "reason": (
+                f"Explicit {lifecycle_class} patch records are preserved and queryable but are not eligible for live authority lookup "
+                "without a governed lifecycle transition."
+            ),
+            "evidence_paths": [
+                normalized_target,
+                "registry/governance_change_ledger.json",
+                "registry/research_debt_registry.json",
+                "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+            ],
+            "warnings": [
+                f"Patch record status '{status}' is proposal/candidate state and cannot participate as live authority.",
+            ],
+        }
+
+    explicit_none_authority_effect_patch = classify_patch_record_explicit_none_authority_effect(normalized_target)
+    if explicit_none_authority_effect_patch is not None:
+        status = explicit_none_authority_effect_patch.get("status")
+        return {
+            "authority_owner": "registry",
+            "authority_source": normalized_target,
+            "supersession_status": "current",
+            "superseded_by": [],
+            "conflict_state": "mixed",
+            "decision": "defer",
+            "reason": (
+                "Patch record explicitly declares authority_effect=NONE and therefore cannot participate as live authority lookup. "
+                "Referenced or associated surfaces may remain independently governed under their own roles."
+            ),
+            "evidence_paths": [
+                normalized_target,
+                "registry/governance_change_ledger.json",
+                "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+            ],
+            "warnings": [
+                f"Patch record status '{status}' does not override explicit authority_effect=NONE.",
+            ],
         }
 
     fallback_rules = [

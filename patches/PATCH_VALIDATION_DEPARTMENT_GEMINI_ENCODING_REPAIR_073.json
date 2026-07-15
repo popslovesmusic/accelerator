@@ -1,0 +1,60 @@
+{
+  "patch_id": "PATCH_VALIDATION_DEPARTMENT_GEMINI_ENCODING_REPAIR_073",
+  "title": "Validation Department GEMINI Encoding Repair",
+  "status": "APPLIED",
+  "applied_on": "2026-07-15T20:45:00-04:00",
+  "type": "bounded_implementation",
+  "depends_on": [
+    "PATCH_VALIDATION_DEPARTMENT_TRUTHFUL_REDUCTION_SEMANTICS_070",
+    "PATCH_VALIDATION_DEPARTMENT_STAGE_WORK_ACCOUNTING_071",
+    "PATCH_VALIDATION_DEPARTMENT_SUPPORTED_TEST_ENVIRONMENT_CONTRACT_072"
+  ],
+  "mode": "additive",
+  "authority_effect": "NONE",
+  "purpose": "Repair the confirmed mojibake corruption in GEMINI.md without changing semantic content, authority role, governance meaning, or mathematical posture.",
+  "summary": "This patch restores the intended Unicode core expression and the evidence-class range in GEMINI.md, preserves GEMINI.md as an instruction-authority surface, and makes no semantic or governance changes beyond the encoding repair.",
+  "confirmed_input_finding": "SYS-AUDIT-011",
+  "modified_surfaces": [
+    "GEMINI.md",
+    "outputs/governance_inventory/validation_department_gemini_encoding_repair_073.json",
+    "patches/PATCH_VALIDATION_DEPARTMENT_GEMINI_ENCODING_REPAIR_073.json",
+    "registry/governance/patches/PATCH_VALIDATION_DEPARTMENT_GEMINI_ENCODING_REPAIR_073.json",
+    "tests/governance_validation/test_patch_073_validation_department_gemini_encoding_repair.py",
+    "registry/governance_change_ledger.json",
+    "registry/governance_hash_registry.json"
+  ],
+  "bounded_repair": {
+    "line_25_before": "(â„°â‰ 0) â‡”_R Î´(â„°>0)",
+    "line_25_after": "(ℰ≠0) ⇔_R δ(ℰ>0)",
+    "line_48_before": "C0Ã¢â‚¬â€œC5",
+    "line_48_after": "C0–C5"
+  },
+  "governed_state_preservation": {
+    "q1_local_queue_before": 0,
+    "q1_local_queue_after": 0,
+    "global_blocking_ambiguity_count_before": 487,
+    "global_blocking_ambiguity_count_after": 487,
+    "patch_002_status": "PARTIAL",
+    "patch_002_authority_effect": "NONE",
+    "full_project_validation": "SUSPENDED_PENDING_VALIDATOR_DEPARTMENT_COMPLETION"
+  },
+  "validation_results": {
+    "focused_patch_test": {
+      "command": "python -m pytest tests/governance_validation/test_patch_073_validation_department_gemini_encoding_repair.py -q",
+      "status": "PASS",
+      "summary": "5 passed in 0.07s"
+    },
+    "json_parse": {
+      "status": "PASS"
+    },
+    "git_diff_check": {
+      "command": "git diff --check",
+      "status": "PASS_WITH_CRLF_WARNINGS_ONLY"
+    },
+    "git_status": {
+      "command": "git status --short",
+      "status": "PASS_REVIEWED"
+    }
+  },
+  "unrelated_changes_preserved": true
+}

@@ -1,0 +1,122 @@
+{
+  "schema_id": "q1_remaining_item_disposition_v1",
+  "generated_at": "2026-07-15T16:05:00-04:00",
+  "source_refresh_artifact": "outputs/governance_inventory/q1_remaining_validation_authority_state_refresh.json",
+  "source_component_artifact": "outputs/governance_inventory/q1_remaining_conflict_components.json",
+  "source_resolution_artifact": "outputs/governance_inventory/q1_governed_context_capsule_supporting_validator_scope_resolution.json",
+  "source_patch_002_gate": "PATCH_GOVERNANCE_Q0_PATCH_002_COMPLETION_GATE_FOLLOW_ON_018",
+  "latest_verified_q1_resolution_patch": "PATCH_GOVERNANCE_Q1_GOVERNED_CONTEXT_CAPSULE_SUPPORTING_VALIDATOR_SCOPE_RESOLUTION_067",
+  "q1_count_before": 6,
+  "q1_count_after": 0,
+  "q1_family_state_after": "LOCAL_QUEUE_EXHAUSTED",
+  "global_blocking_ambiguity_count_before": 490,
+  "global_blocking_ambiguity_count_after": 487,
+  "one_to_one_global_mapping_verified": true,
+  "items": [
+    {
+      "q1_item_id": "Q1-VAL-001",
+      "global_ambiguity_id": "AMB-GOV-SURF-0882",
+      "prior_q1_state": "OUTSIDE_Q1_SCOPE",
+      "final_q1_disposition": "RECLASSIFIED_OUTSIDE_Q1",
+      "global_resolution_status": "UNRESOLVED_RECLASSIFIED_OUT_OF_Q1",
+      "destination_family_if_reclassified": "UNASSIGNED_PENDING_CLASSIFICATION",
+      "evidence": [
+        "outputs/governance_inventory/q1_remaining_validation_authority_state_refresh.json: marks the item OUTSIDE_Q1_SCOPE with live role INTEGRITY_REGISTRY_ONLY.",
+        "registry/governance_hash_registry.json generic runtime query blocks mixed-role lookup and warns that the surface belongs to a governed Q0 partition, not Q1 validation authority.",
+        "outputs/governance_inventory/governance_ambiguity_risk_classification.json retains mixed non-Q1 risk dimensions (AUTHORITY_LINEAGE_MISSING and DUPLICATE_IDENTITY_UNCLEAR), so no unique downstream family is currently provable."
+      ]
+    },
+    {
+      "q1_item_id": "Q1-VAL-004",
+      "global_ambiguity_id": "AMB-GOV-SURF-0107",
+      "prior_q1_state": "NEUTRALIZED_BY_EXISTING_GOVERNANCE",
+      "final_q1_disposition": "PROSPECTIVELY_CLOSED_NEUTRALIZED_BY_EXISTING_GOVERNANCE",
+      "global_resolution_status": "PROSPECTIVELY_CLOSED",
+      "destination_family_if_reclassified": null,
+      "evidence": [
+        "outputs/governance_inventory/q1_remaining_validation_authority_state_refresh.json marks docs/manual_repository_audit_2026_07_13.md as HISTORICAL_AUDIT_EVIDENCE and later_governance_already_neutralizes_item=true.",
+        "outputs/governance_inventory/governance_surface_inventory.json marks the audit surface EXPLICIT_NON_AUTHORITATIVE and HISTORICAL_RECORD.",
+        "python -m scripts.query_governance authority --target docs/manual_repository_audit_2026_07_13.md --level summary --json returns decision=defer with no governed authority surface matched."
+      ]
+    },
+    {
+      "q1_item_id": "Q1-VAL-005",
+      "global_ambiguity_id": "AMB-GOV-SURF-0664",
+      "prior_q1_state": "OUTSIDE_Q1_SCOPE",
+      "final_q1_disposition": "RECLASSIFIED_OUTSIDE_Q1",
+      "global_resolution_status": "UNRESOLVED_RECLASSIFIED_OUT_OF_Q1",
+      "destination_family_if_reclassified": "UNASSIGNED_PENDING_CLASSIFICATION",
+      "evidence": [
+        "outputs/governance_inventory/q1_remaining_validation_authority_state_refresh.json marks the item OUTSIDE_Q1_SCOPE with live role DB_RUNTIME_GATE_STORAGE.",
+        "python -m scripts.query_governance authority --target registry/db/acellorator_index.sqlite --level summary --json returns decision=allow under db_runtime, proving a live runtime substrate rather than a validator role.",
+        "outputs/governance_inventory/governance_ambiguity_risk_classification.json retains DUPLICATE_IDENTITY_UNCLEAR alongside VALIDATION_AUTHORITY_UNCLEAR, so no unique downstream non-Q1 family is currently provable."
+      ]
+    },
+    {
+      "q1_item_id": "Q1-VAL-006",
+      "global_ambiguity_id": "AMB-GOV-SURF-0676",
+      "prior_q1_state": "OUTSIDE_Q1_SCOPE",
+      "final_q1_disposition": "RECLASSIFIED_OUTSIDE_Q1",
+      "global_resolution_status": "UNRESOLVED_RECLASSIFIED_OUT_OF_Q1",
+      "destination_family_if_reclassified": "UNASSIGNED_PENDING_CLASSIFICATION",
+      "evidence": [
+        "outputs/governance_inventory/q1_remaining_validation_authority_state_refresh.json marks the item OUTSIDE_Q1_SCOPE with live role SEMANTIC_AUTHORITY_RUNTIME_PROJECTION.",
+        "python -m scripts.query_governance authority --target registry/db/migrations/20260703_governance_runtime_semantic_authority_013.sql --level summary --json returns decision=allow under db_runtime, confirming runtime semantic projection rather than validation invocation or reduction ownership.",
+        "The current governed taxonomy proves the item is outside Q1 but does not uniquely prove a single destination among non-Q1 family queues."
+      ]
+    },
+    {
+      "q1_item_id": "Q1-VAL-007",
+      "global_ambiguity_id": "AMB-GOV-SURF-1007",
+      "prior_q1_state": "OBSOLETE_TEST_OR_CONTEXT_RESIDUE",
+      "final_q1_disposition": "RETIRED_AS_OBSOLETE_RESIDUE",
+      "global_resolution_status": "RETIRED_AS_OBSOLETE_RESIDUE",
+      "destination_family_if_reclassified": null,
+      "evidence": [
+        "outputs/governance_inventory/q1_remaining_validation_authority_state_refresh.json marks the surface COMPILED_TEST_RESIDUE with no genuine remaining Q1 validation-authority ambiguity.",
+        "outputs/governance_inventory/q1_governed_context_capsule_supporting_validator_scope_resolution.json confirms neighbor residue items remain residue-only after Q1-VAL-008 resolution.",
+        "python -m scripts.query_governance authority --target tests/__pycache__/test_governed_context_capsule_v1.cpython-312-pytest-9.1.1.pyc --level summary --json returns decision=defer with no governed authority surface matched."
+      ]
+    },
+    {
+      "q1_item_id": "Q1-VAL-009",
+      "global_ambiguity_id": "AMB-GOV-SURF-1008",
+      "prior_q1_state": "OBSOLETE_TEST_OR_CONTEXT_RESIDUE",
+      "final_q1_disposition": "RETIRED_AS_OBSOLETE_RESIDUE",
+      "global_resolution_status": "RETIRED_AS_OBSOLETE_RESIDUE",
+      "destination_family_if_reclassified": null,
+      "evidence": [
+        "outputs/governance_inventory/q1_remaining_validation_authority_state_refresh.json marks the surface COMPILED_TEST_RESIDUE whose only current authority relationship is residue projected from Q1-VAL-008.",
+        "outputs/governance_inventory/q1_governed_context_capsule_supporting_validator_scope_resolution.json confirms no live authority leakage from the parent test surface.",
+        "outputs/governance_inventory/governance_ambiguity_risk_classification.json records execution_reachable=false and write_reachable=false for AMB-GOV-SURF-1008."
+      ]
+    }
+  ],
+  "summary": {
+    "prospectively_closed_item_ids": [
+      "Q1-VAL-004"
+    ],
+    "retired_residue_item_ids": [
+      "Q1-VAL-007",
+      "Q1-VAL-009"
+    ],
+    "reclassified_item_ids": [
+      "Q1-VAL-001",
+      "Q1-VAL-005",
+      "Q1-VAL-006"
+    ],
+    "destination_family_per_reclassified_item": {
+      "Q1-VAL-001": "UNASSIGNED_PENDING_CLASSIFICATION",
+      "Q1-VAL-005": "UNASSIGNED_PENDING_CLASSIFICATION",
+      "Q1-VAL-006": "UNASSIGNED_PENDING_CLASSIFICATION"
+    }
+  },
+  "patch_002_state": {
+    "status": "PARTIAL",
+    "authority_effect": "NONE",
+    "remaining_blocking_ambiguities_before": 490,
+    "remaining_blocking_ambiguities_after": 487,
+    "changed": false
+  },
+  "full_project_validation_status": "SUSPENDED_PENDING_VALIDATOR_DEPARTMENT_COMPLETION"
+}

@@ -1,0 +1,186 @@
+{
+  "patch_id": "PATCH_VALIDATION_DEPARTMENT_SUPPORTED_TEST_ENVIRONMENT_CONTRACT_072",
+  "generated_at": "2026-07-15T20:10:00-04:00",
+  "current_environment_surface_inventory": {
+    "dependency_surfaces_examined": [
+      "requirements.txt",
+      "requirements.lock.txt",
+      "docs/math/dependency_reproducibility_policy.md",
+      "registry/math/audit002_dependency_reproducibility_lock_registry.json"
+    ],
+    "launcher_surfaces_examined": [
+      "scripts/global_validate.py",
+      "run_global_validation.bat",
+      "scripts/activate_venv.ps1"
+    ],
+    "test_and_audit_surfaces_examined": [
+      "tests/test_lexicon_cli.py",
+      "tests/test_rd_boundary_scaling_policy.py",
+      "tests/test_tda_adjacency_threshold.py",
+      "outputs/governance_inventory/validation_department_systems_audit_reconciliation_069.json"
+    ]
+  },
+  "authority_role_classification": {
+    "scripts/global_validate.py": {
+      "classification": "EXPLICIT_LIVE_AUTHORITY",
+      "role": "VALIDATION_INVOCATION_AUTHORITY",
+      "evidence": "python -m scripts.query_governance authority --target scripts/global_validate.py --authority-role VALIDATION_INVOCATION_AUTHORITY --level summary --json => allow"
+    },
+    "requirements.txt": {
+      "classification": "DECLARATIVE_DEPENDENCY_SURFACE",
+      "runtime_authority_result": "defer",
+      "role": "Top-level governed dependency declaration."
+    },
+    "requirements.lock.txt": {
+      "classification": "DECLARATIVE_LOCK_SURFACE",
+      "runtime_authority_result": "defer",
+      "role": "Exact validated dependency baseline."
+    },
+    "docs/math/dependency_reproducibility_policy.md": {
+      "classification": "INSTRUCTIONAL_POLICY_SURFACE",
+      "runtime_authority_result": "defer",
+      "role": "Defines how the requirements and lockfile are interpreted."
+    },
+    "run_global_validation.bat": {
+      "classification": "INSTRUCTIONAL_LAUNCHER",
+      "role": "Historical Windows launcher not selected as the supported pytest environment authority surface."
+    },
+    "scripts/activate_venv.ps1": {
+      "classification": "BOOTSTRAP_HELPER",
+      "runtime_authority_result": "defer",
+      "role": "Repo-local .venv activation helper."
+    }
+  },
+  "python_version_contract": {
+    "supported_python_version_or_range": {
+      "baseline": "3.14.4",
+      "interpreted_contract": "Python 3.14 baseline family, with 3.14.4 as the only exact governed baseline currently recorded."
+    },
+    "governed_evidence": [
+      "docs/math/dependency_reproducibility_policy.md",
+      "registry/math/audit002_dependency_reproducibility_lock_registry.json"
+    ],
+    "active_workstation_observation": {
+      "python_version": "3.12.10",
+      "status": "NON_AUTHORITATIVE_EXECUTION_EVIDENCE_ONLY"
+    }
+  },
+  "validation_invocation_contract": {
+    "canonical_validation_invocation": {
+      "command": "python -m scripts.global_validate",
+      "role": "Canonical governed validation invocation."
+    },
+    "selected_minimal_supported_python_test_invocation": {
+      "surface_id": "governance_patch_pytest",
+      "command": "python -m pytest tests/governance_validation -q",
+      "reason": "This is the smallest reproducible pytest-based validation path already evidenced by the recent governed patch sequence."
+    },
+    "explicitly_unsupported_python_test_surface": {
+      "surface_id": "full_pytest_collection",
+      "command": "python -m pytest",
+      "reason": "Current governed evidence does not support full-tree pytest collection as a reproducible validation contract."
+    }
+  },
+  "dependency_role_determination": {
+    "pytest": {
+      "classification": "REQUIRED_VALIDATION_DEPENDENCY",
+      "expected_version": "9.0.3",
+      "basis": [
+        "requirements.lock.txt",
+        "docs/math/dependency_reproducibility_policy.md",
+        "registry/math/audit002_dependency_reproducibility_lock_registry.json",
+        "recent patch validation commands use python -m pytest tests/governance_validation/... -q"
+      ]
+    },
+    "jsonschema": {
+      "classification": "REQUIRED_VALIDATION_DEPENDENCY",
+      "expected_version": "4.26.0",
+      "basis": [
+        "docs/math/dependency_reproducibility_policy.md",
+        "registry/math/audit002_dependency_reproducibility_lock_registry.json"
+      ]
+    },
+    "typer": {
+      "classification": "LEGACY_DEPENDENCY",
+      "basis": [
+        "tests/test_lexicon_cli.py imports typer",
+        "No current live runtime or governed validator surface imports typer",
+        "tests/test_lexicon_cli.py also imports missing oneproc.lexicon_cli"
+      ]
+    },
+    "rd_moving_boundary_sim_v1": {
+      "classification": "UNRESOLVED_DEPENDENCY_ROLE",
+      "basis": "The failing tests reference tool-package import contracts that are outside the selected supported pytest validation surface."
+    },
+    "tda_module_v1": {
+      "classification": "UNRESOLVED_DEPENDENCY_ROLE",
+      "basis": "The failing tests reference tool-package import contracts that are outside the selected supported pytest validation surface."
+    }
+  },
+  "typer_dependency_disposition": {
+    "classification": "LEGACY_DEPENDENCY",
+    "effect_on_selected_contract": "NON_BLOCKING",
+    "reason": "Missing typer must not make unrelated governance patch validation look unsupported."
+  },
+  "existing_contract_gaps": [
+    "The dependency declaration surfaces are repository-governed but not yet classified by the runtime as exclusive authority owners.",
+    "The active workstation interpreter is Python 3.12.10 with pytest 9.1.1, which does not match the recorded baseline 3.14.4 / pytest 9.0.3.",
+    "Full-tree pytest collection remains blocked by legacy and unresolved import-contract surfaces.",
+    "run_global_validation.bat remains a historical launcher surface distinct from the canonical module-path invocation."
+  ],
+  "selected_minimal_contract": {
+    "surface_id": "governance_patch_pytest",
+    "command": "python -m pytest tests/governance_validation -q",
+    "supported_python_version_or_range": "3.14 baseline family; exact recorded baseline 3.14.4",
+    "dependency_authority_surface": [
+      "requirements.txt",
+      "requirements.lock.txt",
+      "docs/math/dependency_reproducibility_policy.md",
+      "registry/math/audit002_dependency_reproducibility_lock_registry.json"
+    ],
+    "environment_creation_or_bootstrap_path": [
+      "python -m venv .venv",
+      "scripts/activate_venv.ps1",
+      "python -m pip install -r requirements.lock.txt"
+    ],
+    "minimum_validation_dependency_set": {
+      "pytest": "9.0.3"
+    },
+    "optional_dependency_boundaries": {
+      "typer": "Legacy/non-blocking for the selected governance patch-validation path."
+    },
+    "failure_behavior_when_required_dependencies_are_absent": "Return ENVIRONMENT_NOT_READY explicitly instead of relying on pytest collection failure."
+  },
+  "implementation_if_any": {
+    "status": "IMPLEMENTED",
+    "modified_surfaces": [
+      "scripts/validation_environment_contract.py"
+    ],
+    "behavior": "Adds an explicit contract checker that reports READY, ENVIRONMENT_NOT_READY, or UNSUPPORTED_VALIDATION_SURFACE for selected validation paths without changing validation reduction semantics."
+  },
+  "focused_test_results": {
+    "pytest_status": "PASS",
+    "pytest_summary": "8 passed in 0.04s",
+    "json_parse_status": "PASS",
+    "git_diff_check_status": "PASS_WITH_CRLF_WARNINGS_ONLY",
+    "git_status_reviewed": true,
+    "environment_readiness_observation": {
+      "command": "python scripts/validation_environment_contract.py",
+      "status": "ENVIRONMENT_NOT_READY",
+      "active_python_version": "3.12.10",
+      "installed_pytest_version": "9.1.1"
+    }
+  },
+  "remaining_environment_gaps": [
+    "A governed contract for broad full-tree pytest collection has not been established.",
+    "Legacy tests that assume package-style tool imports remain outside the supported validation contract.",
+    "The active workstation environment still differs from the recorded reproducibility baseline."
+  ],
+  "governed_state_preservation": {
+    "q1_local_queue": 0,
+    "global_blocking_ambiguities": 487,
+    "patch_002_status": "PARTIAL",
+    "patch_002_authority_effect": "NONE",
+    "full_project_validation": "SUSPENDED_PENDING_VALIDATOR_DEPARTMENT_COMPLETION"
+  }
+}

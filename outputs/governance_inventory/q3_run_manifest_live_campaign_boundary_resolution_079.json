@@ -1,0 +1,117 @@
+{
+  "schema_id": "q3_run_manifest_live_campaign_boundary_resolution_079_v1",
+  "generated_at": "2026-07-15T23:59:30-04:00",
+  "patch_id": "PATCH_GOVERNANCE_Q3_RUN_MANIFEST_LIVE_CAMPAIGN_BOUNDARY_RESOLUTION_079",
+  "target_surface_identification": {
+    "global_ambiguity_id": "AMB-GOV-SURF-0875",
+    "component_id": "Q3-078-C05",
+    "schema_surface": "registry/governance/schemas/RUN_MANIFEST_V1.json",
+    "living_registry_surface": "registry/governance/living_falsification_campaign_registry.json"
+  },
+  "pre_resolution_role_state": {
+    "schema_query_before_patch": {
+      "command": "python -m scripts.query_governance authority --target registry/governance/schemas/RUN_MANIFEST_V1.json --level summary --json",
+      "decision": "defer",
+      "reason": "No governed authority surface matched the target."
+    },
+    "registry_query_before_patch": {
+      "command": "python -m scripts.query_governance authority --target registry/governance/living_falsification_campaign_registry.json --level summary --json",
+      "decision": "defer",
+      "reason": "No governed authority surface matched the target."
+    },
+    "source_analysis_basis": {
+      "component_id": "Q3-078-C05",
+      "member_global_ambiguity_ids": [
+        "AMB-GOV-SURF-0875"
+      ],
+      "shared_root_problem": "An active execution schema and a living campaign registry remain insufficiently separated as schema-versus-live-or-historical-campaign-state surfaces.",
+      "shared_surface_pattern": "Active schema plus living campaign-state registry.",
+      "current_live_authority_candidate": "registry/governance/living_falsification_campaign_registry.json",
+      "non_live_competing_surface_types": [
+        "active bounded schema",
+        "historical campaign records",
+        "live campaign-state registry"
+      ],
+      "whether_one_bounded_resolution_can_address_the_component": true,
+      "resolution_risk": "low",
+      "recommended_order": 1
+    }
+  },
+  "live_state_boundary_determination": {
+    "run_manifest_v1_schema_role": "SCHEMA_CONSTRAINT_SURFACE",
+    "living_falsification_campaign_registry_role": "REGISTRY_STATE_AUTHORITY",
+    "schema_role_statement": "RUN_MANIFEST_V1 constrains admissible falsification-run structure and audit requirements but is not current living campaign state.",
+    "registry_role_statement": "The living falsification campaign registry remains the governed registry-state surface tracking campaign status transitions and current campaign-state disposition.",
+    "historical_or_instantiated_manifest_statement": "Historical or instantiated run-manifest records remain traceable as artifacts or audit references distinct from the living registry state surface."
+  },
+  "implemented_boundary": {
+    "runtime_authority_changes": [
+      "Map registry/governance/schemas/RUN_MANIFEST_V1.json to SCHEMA_CONSTRAINT_SURFACE.",
+      "Map registry/governance/living_falsification_campaign_registry.json to REGISTRY_STATE_AUTHORITY.",
+      "Make matched role-aware authority lookup identify the exact target surface as authority_source.",
+      "Publish both surfaces in the live authority access inventory with explicit behavior descriptions."
+    ],
+    "new_global_authority_role_introduced": false,
+    "unrelated_q3_items_changed": false
+  },
+  "runtime_or_query_enforcement": {
+    "schema_as_registry_state": "blocked",
+    "registry_as_schema_constraint": "blocked",
+    "generic_mixed_role_lookup": "still prohibited for mapped Q0 surfaces; callers must declare the intended authority role explicitly."
+  },
+  "closure_proof": {
+    "ambiguity_resolved": true,
+    "schema_is_explicitly_structural_only": true,
+    "schema_is_live_campaign_state_authority": false,
+    "registry_is_only_live_campaign_state_candidate": true,
+    "co_equal_live_campaign_state_candidates_remaining": false,
+    "historical_or_instantiated_manifests_remain_distinguishable": true,
+    "limited_reasoning_agent_can_choose_live_state_without_recency_inference": true,
+    "proof_points": [
+      "RUN_MANIFEST_V1 is now classified directly as SCHEMA_CONSTRAINT_SURFACE under role-aware authority lookup.",
+      "The living falsification campaign registry is now classified directly as REGISTRY_STATE_AUTHORITY under role-aware authority lookup.",
+      "Cross-role lookups fail closed, preventing schema-to-live-state or registry-to-schema collapse.",
+      "The living registry already contains audit-trail references to the schema as a source artifact, preserving historical traceability without role collapse."
+    ]
+  },
+  "focused_test_results": {
+    "targeted_patch_test": {
+      "command": "python -m pytest tests/governance_validation/test_patch_079_q3_run_manifest_live_campaign_boundary_resolution.py -q",
+      "status": "PASS"
+    },
+    "json_parse": {
+      "status": "PASS"
+    },
+    "git_diff_check": {
+      "command": "git diff --check",
+      "status": "PASS_WITH_CRLF_WARNING_ONLY"
+    }
+  },
+  "q3_queue_update": {
+    "q3_nominal_queue_before": 76,
+    "q3_nominal_queue_after": 75,
+    "q3_live_unresolved_before": 74,
+    "q3_live_unresolved_after": 73,
+    "resolved_item_removed": [
+      "AMB-GOV-SURF-0875"
+    ],
+    "unchanged_outside_scope_q5_item_ids": [
+      "AMB-GOV-SURF-0776",
+      "AMB-GOV-SURF-0868"
+    ]
+  },
+  "global_accounting_update": {
+    "global_blocking_ambiguity_count_before": 484,
+    "resolved_in_this_patch": 1,
+    "global_blocking_ambiguity_count_after": 483,
+    "patch_002_status": "PARTIAL",
+    "patch_002_authority_effect": "NONE"
+  },
+  "governed_state_preservation": {
+    "q1_local_queue": 0,
+    "q2_local_queue": 0,
+    "full_project_validation_status": "SUSPENDED_PENDING_VALIDATOR_DEPARTMENT_COMPLETION",
+    "unrelated_q3_q4_q5_items_unchanged": true,
+    "new_global_authority_architecture_created": false
+  }
+}

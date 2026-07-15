@@ -1,0 +1,41 @@
+{
+  "patch_id": "PATCH_GOVERNANCE_Q3_RUN_MANIFEST_LIVE_CAMPAIGN_BOUNDARY_RESOLUTION_079",
+  "title": "Q3 Run Manifest Live Campaign Boundary Resolution",
+  "status": "APPLIED",
+  "applied_on": "2026-07-15T23:59:30-04:00",
+  "type": "boundary_resolution",
+  "depends_on": [
+    "PATCH_GOVERNANCE_Q3_LIVE_PROPOSAL_HISTORY_REFRESH_AND_CLASSIFICATION_078"
+  ],
+  "mode": "additive",
+  "authority_effect": "NONE",
+  "purpose": "Resolve AMB-GOV-SURF-0875 by making the boundary between RUN_MANIFEST_V1 structural constraints and living falsification campaign state explicit and enforceable.",
+  "summary": "This patch resolves AMB-GOV-SURF-0875 by classifying RUN_MANIFEST_V1 as SCHEMA_CONSTRAINT_SURFACE, classifying the living falsification campaign registry as REGISTRY_STATE_AUTHORITY, and enforcing fail-closed mismatch blocking so schema conformance cannot masquerade as live campaign-state authority.",
+  "resolved_global_ambiguity_ids": [
+    "AMB-GOV-SURF-0875"
+  ],
+  "role_per_surface": {
+    "registry/governance/schemas/RUN_MANIFEST_V1.json": "SCHEMA_CONSTRAINT_SURFACE",
+    "registry/governance/living_falsification_campaign_registry.json": "REGISTRY_STATE_AUTHORITY"
+  },
+  "enforcement_changes_applied": [
+    "Map registry/governance/schemas/RUN_MANIFEST_V1.json to SCHEMA_CONSTRAINT_SURFACE.",
+    "Map registry/governance/living_falsification_campaign_registry.json to REGISTRY_STATE_AUTHORITY.",
+    "Make matched role-aware authority lookup identify the exact target surface as authority_source.",
+    "Publish both surfaces in the live authority access inventory with explicit behavior descriptions."
+  ],
+  "counts": {
+    "global_blocking_ambiguity_count_before": 484,
+    "global_blocking_ambiguity_count_after": 483,
+    "q3_live_unresolved_count_before": 74,
+    "q3_live_unresolved_count_after": 73,
+    "q3_nominal_queue_before": 76,
+    "q3_nominal_queue_after": 75
+  },
+  "artifacts": {
+    "resolution_record": "outputs/governance_inventory/q3_run_manifest_live_campaign_boundary_resolution_079.json",
+    "active_queue_update": "outputs/governance_inventory/q3_run_manifest_live_campaign_boundary_active_queue_079.json",
+    "global_update": "outputs/governance_inventory/q3_run_manifest_live_campaign_boundary_global_update_079.json"
+  },
+  "full_project_validation_status": "SUSPENDED_PENDING_VALIDATOR_DEPARTMENT_COMPLETION"
+}

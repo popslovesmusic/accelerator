@@ -1,0 +1,214 @@
+{
+  "schema_id": "q3_pattern_priority_ranked_candidates_080_v1",
+  "candidate_count": 4,
+  "ranked_candidates": [
+    {
+      "candidate_component_id": "Q3-078-C01",
+      "member_global_ambiguity_ids": [
+        "AMB-GOV-SURF-0109",
+        "AMB-GOV-SURF-0692",
+        "AMB-GOV-SURF-0693",
+        "AMB-GOV-SURF-0696",
+        "AMB-GOV-SURF-0697",
+        "AMB-GOV-SURF-0698",
+        "AMB-GOV-SURF-0699",
+        "AMB-GOV-SURF-0711",
+        "AMB-GOV-SURF-0714",
+        "AMB-GOV-SURF-0715",
+        "AMB-GOV-SURF-0716",
+        "AMB-GOV-SURF-0718",
+        "AMB-GOV-SURF-0720",
+        "AMB-GOV-SURF-0721",
+        "AMB-GOV-SURF-0722",
+        "AMB-GOV-SURF-0724",
+        "AMB-GOV-SURF-0747",
+        "AMB-GOV-SURF-0760",
+        "AMB-GOV-SURF-0774",
+        "AMB-GOV-SURF-0780",
+        "AMB-GOV-SURF-0790",
+        "AMB-GOV-SURF-0861",
+        "AMB-GOV-SURF-0867"
+      ],
+      "root_problem": "Proposal or induction patch records remain present as registry authority candidates without a clean boundary distinguishing non-live proposal material from current live state.",
+      "pattern_category": "LIVE_STATE_VS_PROPOSAL_OR_CANDIDATE",
+      "current_live_surface_pattern": "The patch record path itself under registry/governance/patches or governance/.",
+      "competing_non_live_surface_pattern": [
+        "proposal patch records",
+        "induction candidates",
+        "late-registered proposal records"
+      ],
+      "existing_roles_available": [
+        "REGISTRY_STATE_AUTHORITY",
+        "SCHEMA_CONSTRAINT_SURFACE"
+      ],
+      "can_use_existing_roles": true,
+      "requires_runtime_enforcement": true,
+      "required_boundary_change": "Add explicit non-live proposal patch-record boundary so proposal/candidate records cannot be consumed as current registry state without an explicit promoting role.",
+      "implementation_surface_estimate": 2,
+      "authority_risk": "low",
+      "risk_of_creating_parallel_authority": "low",
+      "clarity_of_closure_proof": "high",
+      "limited_reasoning_agent_benefit": "high",
+      "downstream_reaudit_candidate_count": 23,
+      "reason_not_to_bulk_close": "Each member still needs item-level proof that the file status and surrounding consumers actually align with proposal-only treatment.",
+      "priority_rank": 1,
+      "priority_reason": "Largest reusable low-risk boundary using existing roles; it should establish a general proposal-versus-live lookup rule without forcing historical or partial semantics into the same patch.",
+      "sample_member_paths": [
+        "governance/artifact_hygiene_governance_patch_v1.json",
+        "registry/governance/patches/DEBT_VALIDATOR_IMPORT_PATH_001.json",
+        "registry/governance/patches/DOCUMENTATION_DEPARTMENT_INDUCTION_001.json",
+        "registry/governance/patches/ECON_IND_AE_TRACE_001.json",
+        "registry/governance/patches/GOV_DEPARTMENT_RELATIONSHIP_REGISTRY_001.json"
+      ]
+    },
+    {
+      "candidate_component_id": "Q3-078-C02",
+      "member_global_ambiguity_ids": [
+        "AMB-GOV-SURF-0744",
+        "AMB-GOV-SURF-0771"
+      ],
+      "root_problem": "Partial patch records can still be read as live authority surfaces without a bounded distinction between partial inventory or closeout records and settled live state.",
+      "pattern_category": "STATUS_FIELD_OR_LIFECYCLE_AMBIGUITY",
+      "current_live_surface_pattern": "The partial patch record itself.",
+      "competing_non_live_surface_pattern": [
+        "partial inventory record",
+        "partial closeout record"
+      ],
+      "existing_roles_available": [
+        "REGISTRY_STATE_AUTHORITY"
+      ],
+      "can_use_existing_roles": true,
+      "requires_runtime_enforcement": true,
+      "required_boundary_change": "Teach role-aware lookup to treat PARTIAL patch records as bounded in-progress state rather than clean current live policy.",
+      "implementation_surface_estimate": 2,
+      "authority_risk": "medium",
+      "risk_of_creating_parallel_authority": "medium",
+      "clarity_of_closure_proof": "high",
+      "limited_reasoning_agent_benefit": "high",
+      "downstream_reaudit_candidate_count": 2,
+      "reason_not_to_bulk_close": "The two partial records carry different substantive meanings; boundary success would support re-audit only, not automatic closure.",
+      "priority_rank": 2,
+      "priority_reason": "Very small and bounded, but its leverage is narrow and it depends on lifecycle-status semantics rather than a simple proposal/live split.",
+      "sample_member_paths": [
+        "registry/governance/patches/PATCH_ACCELERATOR_INFERENCE_CONSERVATION_CLOSEOUT_055.json",
+        "registry/governance/patches/PATCH_GOVERNANCE_GLOBAL_INVENTORY_002.json"
+      ]
+    },
+    {
+      "candidate_component_id": "Q3-078-C03",
+      "member_global_ambiguity_ids": [
+        "AMB-GOV-SURF-0695",
+        "AMB-GOV-SURF-0703",
+        "AMB-GOV-SURF-0704",
+        "AMB-GOV-SURF-0705",
+        "AMB-GOV-SURF-0706",
+        "AMB-GOV-SURF-0707",
+        "AMB-GOV-SURF-0708",
+        "AMB-GOV-SURF-0709",
+        "AMB-GOV-SURF-0710",
+        "AMB-GOV-SURF-0712",
+        "AMB-GOV-SURF-0725",
+        "AMB-GOV-SURF-0726",
+        "AMB-GOV-SURF-0727",
+        "AMB-GOV-SURF-0729",
+        "AMB-GOV-SURF-0733",
+        "AMB-GOV-SURF-0734",
+        "AMB-GOV-SURF-0735",
+        "AMB-GOV-SURF-0736",
+        "AMB-GOV-SURF-0737",
+        "AMB-GOV-SURF-0740",
+        "AMB-GOV-SURF-0742",
+        "AMB-GOV-SURF-0743",
+        "AMB-GOV-SURF-0869",
+        "AMB-GOV-SURF-0870",
+        "AMB-GOV-SURF-0871"
+      ],
+      "root_problem": "Executed or pass-status patch records are still typed as proposal surfaces, leaving an unresolved live-versus-proposal boundary.",
+      "pattern_category": "STATUS_FIELD_OR_LIFECYCLE_AMBIGUITY",
+      "current_live_surface_pattern": "The executed patch record path itself.",
+      "competing_non_live_surface_pattern": [
+        "executed proposal records",
+        "pass-status patch records"
+      ],
+      "existing_roles_available": [
+        "REGISTRY_STATE_AUTHORITY"
+      ],
+      "can_use_existing_roles": true,
+      "requires_runtime_enforcement": true,
+      "required_boundary_change": "Differentiate executed/pass completion from still-live proposal state in patch lookup and downstream consumption.",
+      "implementation_surface_estimate": 3,
+      "authority_risk": "medium_high",
+      "risk_of_creating_parallel_authority": "medium",
+      "clarity_of_closure_proof": "medium",
+      "limited_reasoning_agent_benefit": "high",
+      "downstream_reaudit_candidate_count": 25,
+      "reason_not_to_bulk_close": "Execution or pass status does not by itself prove whether each record should become live current state, historical record, or remain a bounded proposal artifact.",
+      "priority_rank": 3,
+      "priority_reason": "High leverage, but it is riskier than C01 because status completion alone is semantically weaker than an explicit proposal marker.",
+      "sample_member_paths": [
+        "registry/governance/patches/ECONOMICS_SIGMA_D_EQUIVALENCE_PASS_001.json",
+        "registry/governance/patches/MPF_ADV_HARDENING_SERIES_002_WHOLE_EXPRESSION_BACKFILL.json",
+        "registry/governance/patches/MPF_ADV_HARDENING_SERIES_003_AFFECT_EFFECT_BACKFILL.json",
+        "registry/governance/patches/MPF_ADV_HARDENING_SERIES_004_DUAL_INSCRIPTION_BACKFILL.json",
+        "registry/governance/patches/MPF_ADV_HARDENING_SERIES_005_META_LEVEL_STACK_BACKFILL.json"
+      ]
+    },
+    {
+      "candidate_component_id": "Q3-078-C04",
+      "member_global_ambiguity_ids": [
+        "AMB-GOV-SURF-0702",
+        "AMB-GOV-SURF-0717",
+        "AMB-GOV-SURF-0741",
+        "AMB-GOV-SURF-0748",
+        "AMB-GOV-SURF-0751",
+        "AMB-GOV-SURF-0752",
+        "AMB-GOV-SURF-0757",
+        "AMB-GOV-SURF-0758",
+        "AMB-GOV-SURF-0759",
+        "AMB-GOV-SURF-0761",
+        "AMB-GOV-SURF-0767",
+        "AMB-GOV-SURF-0775",
+        "AMB-GOV-SURF-0795",
+        "AMB-GOV-SURF-0796",
+        "AMB-GOV-SURF-0797",
+        "AMB-GOV-SURF-0798",
+        "AMB-GOV-SURF-0799",
+        "AMB-GOV-SURF-0800",
+        "AMB-GOV-SURF-0801",
+        "AMB-GOV-SURF-0839",
+        "AMB-GOV-SURF-0840",
+        "AMB-GOV-SURF-0851",
+        "AMB-GOV-SURF-0853"
+      ],
+      "root_problem": "Applied patch records remain typed as historical while role-aware patch lookup still allows the same surfaces as current registry authority candidates.",
+      "pattern_category": "LIVE_STATE_VS_HISTORICAL_OR_SUPERSEDED_RECORD",
+      "current_live_surface_pattern": "The applied historical patch record path itself.",
+      "competing_non_live_surface_pattern": [
+        "historical applied records",
+        "preserved patch history"
+      ],
+      "existing_roles_available": [
+        "REGISTRY_STATE_AUTHORITY"
+      ],
+      "can_use_existing_roles": true,
+      "requires_runtime_enforcement": true,
+      "required_boundary_change": "Bound historical/applied patch records away from current live lookup unless an explicit current-state role reselects them.",
+      "implementation_surface_estimate": 3,
+      "authority_risk": "high",
+      "risk_of_creating_parallel_authority": "high",
+      "clarity_of_closure_proof": "medium",
+      "limited_reasoning_agent_benefit": "high",
+      "downstream_reaudit_candidate_count": 23,
+      "reason_not_to_bulk_close": "Historical/applied records preserve authoritative trace, and some may still intentionally participate in current governance context even after lookup hardening.",
+      "priority_rank": 4,
+      "priority_reason": "Substantial leverage, but the chance of suppressing needed historical trace in current governance workflows makes it the highest-risk live Q3 family.",
+      "sample_member_paths": [
+        "registry/governance/patches/GOV_WORK_REDUCTION_FRAMEWORK_002.json",
+        "registry/governance/patches/MPF_FORMAL_DEBT_RECONCILIATION_PASS_001.json",
+        "registry/governance/patches/PATCH_ACCELERATOR_CANONICAL_CONTEXT_CAPSULE_050.json",
+        "registry/governance/patches/PATCH_DB_GOVERNANCE_RUNTIME_001.json",
+        "registry/governance/patches/PATCH_DB_GOVERNANCE_RUNTIME_004.json"
+      ]
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import json
 from pathlib import Path
 from typing import Any
 
@@ -14,6 +15,19 @@ ROLE_IDS = (
     "VALIDATION_REDUCTION_AUTHORITY",
     "INSTRUCTION_AUTHORITY",
     "GENERATED_EVIDENCE",
+    "SUPPORTING_VALIDATOR",
+    "SCHEMA_CONSTRAINT_SURFACE",
+    "ROLE_AWARE_AUTHORITY_QUERY_SURFACE",
+)
+
+PROPOSAL_CANDIDATE_PATCH_STATUSES = frozenset(
+    {
+        "proposed",
+        "proposed_for_induction",
+        "proposed_personal_cleanup",
+        "candidate",
+        "registered_late",
+    }
 )
 
 PRIMARY_TARGETS = (
@@ -27,16 +41,66 @@ PRIMARY_TARGETS = (
 ROLE_TARGET_MAP = {
     "registry/governance_change_ledger.json": "REGISTRY_STATE_AUTHORITY",
     "governance/live/tool_routing_manifest.json": "REGISTRY_STATE_AUTHORITY",
+    "registry/governance/living_falsification_campaign_registry.json": "REGISTRY_STATE_AUTHORITY",
     "governance/core_rules/GOVERNANCE_AUTHORITY_SCOPE_PARTITION_001.json": "REGISTRY_WRITE_AUTHORITY",
     "governance/authority_partitions/Q0_AUTHORITY_SCOPE_PARTITION_001.json": "REGISTRY_WRITE_AUTHORITY",
     "registry/governance_hash_registry.json": "GENERATED_EVIDENCE",
     "scripts/global_validate.py": "VALIDATION_INVOCATION_AUTHORITY",
-    "scripts/query_governance.py": "GENERATED_EVIDENCE",
+    "scripts/query_governance.py": "ROLE_AWARE_AUTHORITY_QUERY_SURFACE",
     "docs/governance/GLOBAL_VALIDATION_ROUTINE.md": "INSTRUCTION_AUTHORITY",
     "AGENTS.md": "INSTRUCTION_AUTHORITY",
     "GEMINI.md": "INSTRUCTION_AUTHORITY",
     "governance/program_task_registry.json": "INSTRUCTION_AUTHORITY",
     "governance/live/master_work_index.json": "GENERATED_EVIDENCE",
+    "tests/test_governed_context_capsule_v1.py": "SUPPORTING_VALIDATOR",
+    "schemas/governed_context_capsule_v1.schema.json": "SCHEMA_CONSTRAINT_SURFACE",
+    "registry/governance/schemas/RUN_MANIFEST_V1.json": "SCHEMA_CONSTRAINT_SURFACE",
+}
+
+SUPPLEMENTAL_ROLE_DEFINITIONS = {
+    "SUPPORTING_VALIDATOR": {
+        "authority_source": "tests/test_governed_context_capsule_v1.py",
+        "authority_effect": "NONE",
+        "reason": (
+            "Bounded supporting validator for governed-context-capsule schema conformance, cache contract, "
+            "and payload invariant checks. It may emit supporting test evidence only."
+        ),
+        "evidence_paths": [
+            "governance/core_rules/GOVERNANCE_AUTHORITY_SCOPE_PARTITION_001.json",
+            "governance/authority_partitions/Q0_AUTHORITY_SCOPE_PARTITION_001.json",
+            "tests/test_governed_context_capsule_v1.py",
+            "schemas/governed_context_capsule_v1.schema.json",
+            "scripts/query_governance.py",
+        ],
+    },
+    "SCHEMA_CONSTRAINT_SURFACE": {
+        "authority_source": "schemas/governed_context_capsule_v1.schema.json",
+        "authority_effect": "NONE",
+        "reason": (
+            "Schema constraint surface defining governed structural contracts. "
+            "It constrains admissible shape and content but does not invoke, reduce, or write live governance state."
+        ),
+        "evidence_paths": [
+            "schemas/governed_context_capsule_v1.schema.json",
+            "registry/governance/schemas/RUN_MANIFEST_V1.json",
+            "registry/governance/living_falsification_campaign_registry.json",
+            "tests/test_governed_context_capsule_v1.py",
+            "scripts/query_governance.py",
+        ],
+    },
+    "ROLE_AWARE_AUTHORITY_QUERY_SURFACE": {
+        "authority_source": "scripts/query_governance.py",
+        "authority_effect": "NONE",
+        "reason": (
+            "Role-aware authority query surface that resolves governed authority information but cannot "
+            "become validation invocation, terminal reduction, or registry write authority by itself."
+        ),
+        "evidence_paths": [
+            "scripts/query_governance.py",
+            "governance/core_rules/GOVERNANCE_AUTHORITY_SCOPE_PARTITION_001.json",
+            "governance/authority_partitions/Q0_AUTHORITY_SCOPE_PARTITION_001.json",
+        ],
+    },
 }
 
 
@@ -66,6 +130,90 @@ def _normalize_repo_path(path: str | None) -> str | None:
     if not path:
         return None
     return str(Path(path)).replace("\\", "/")
+
+
+def classify_patch_record_lifecycle(target: str | None) -> dict[str, Any] | None:
+    normalized_target = _normalize_repo_path(target)
+    if not normalized_target:
+        return None
+
+    patch_path = Path(normalized_target)
+    if not patch_path.suffix.lower() == ".json":
+        return None
+    if not (
+        normalized_target.startswith("registry/governance/patches/")
+        or normalized_target == "governance/artifact_hygiene_governance_patch_v1.json"
+    ):
+        return None
+
+    file_path = Path.cwd() / patch_path
+    if not file_path.exists():
+        return None
+
+    try:
+        payload = json.loads(file_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return None
+
+    status = payload.get("status")
+    patch_id = payload.get("patch_id")
+    lifecycle_scope = "patch_record"
+    if status is None and normalized_target == "governance/artifact_hygiene_governance_patch_v1.json":
+        governance_patch = payload.get("governance_patch", {})
+        status = governance_patch.get("status")
+        patch_id = governance_patch.get("id")
+        lifecycle_scope = "governance_patch"
+
+    normalized_status = str(status or "").strip().lower()
+    if normalized_status not in PROPOSAL_CANDIDATE_PATCH_STATUSES:
+        return None
+
+    lifecycle_class = "CANDIDATE" if normalized_status in {"candidate", "registered_late"} else "PROPOSAL"
+    return {
+        "target": normalized_target,
+        "patch_id": patch_id,
+        "status": status,
+        "normalized_status": normalized_status,
+        "lifecycle_scope": lifecycle_scope,
+        "lifecycle_class": lifecycle_class,
+        "live_lookup_eligible": False,
+    }
+
+
+def classify_patch_record_explicit_none_authority_effect(target: str | None) -> dict[str, Any] | None:
+    normalized_target = _normalize_repo_path(target)
+    if not normalized_target or not normalized_target.startswith("registry/governance/patches/"):
+        return None
+
+    patch_path = Path(normalized_target)
+    if patch_path.suffix.lower() != ".json":
+        return None
+
+    file_path = Path.cwd() / patch_path
+    if not file_path.exists():
+        return None
+
+    try:
+        payload = json.loads(file_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return None
+
+    authority_effect = payload.get("authority_effect")
+    if isinstance(authority_effect, dict):
+        classification = str(authority_effect.get("classification") or "").strip().upper()
+    else:
+        classification = str(authority_effect or "").strip().upper()
+    if classification != "NONE":
+        return None
+
+    return {
+        "target": normalized_target,
+        "patch_id": payload.get("patch_id"),
+        "status": payload.get("status"),
+        "authority_effect": authority_effect,
+        "authority_effect_classification": classification,
+        "live_lookup_eligible": False,
+    }
 
 
 def load_q0_partition() -> dict[str, Any]:
@@ -103,8 +251,26 @@ def _partition_paths(partition: dict[str, Any], role_id: str) -> list[str]:
     elif role_id == "GENERATED_EVIDENCE":
         paths.extend([
             "registry/governance_hash_registry.json",
-            "scripts/query_governance.py",
             "governance/live/master_work_index.json",
+        ])
+    elif role_id == "SUPPORTING_VALIDATOR":
+        paths.extend([
+            "tests/test_governed_context_capsule_v1.py",
+            "schemas/governed_context_capsule_v1.schema.json",
+            "scripts/query_governance.py",
+        ])
+    elif role_id == "SCHEMA_CONSTRAINT_SURFACE":
+        paths.extend([
+            "schemas/governed_context_capsule_v1.schema.json",
+            "registry/governance/schemas/RUN_MANIFEST_V1.json",
+            "registry/governance/living_falsification_campaign_registry.json",
+            "tests/test_governed_context_capsule_v1.py",
+            "scripts/query_governance.py",
+        ])
+    elif role_id == "ROLE_AWARE_AUTHORITY_QUERY_SURFACE":
+        paths.extend([
+            "scripts/query_governance.py",
+            "governance/core_rules/GOVERNANCE_AUTHORITY_SCOPE_PARTITION_001.json",
         ])
     return [path for path in dict.fromkeys(path for path in paths if path)]
 
@@ -123,6 +289,18 @@ def get_authority_by_role(role_id: str) -> dict[str, Any]:
             "evidence_paths": [],
             "warnings": ["Requested authority role is not part of the Q0 partition."],
         }
+
+    if normalized_role in SUPPLEMENTAL_ROLE_DEFINITIONS:
+        definition = SUPPLEMENTAL_ROLE_DEFINITIONS[normalized_role]
+        return RoleAccessResult(
+            role_id=normalized_role,
+            authority_source=definition["authority_source"],
+            authority_effect=definition["authority_effect"],
+            decision="allow",
+            reason=definition["reason"],
+            evidence_paths=list(definition["evidence_paths"]),
+            warnings=[],
+        ).as_dict()
 
     role = roles[normalized_role]
     paths = _partition_paths(partition, normalized_role)
@@ -196,6 +374,7 @@ def resolve_role_aware_authority(role_id: str, target: str | None = None) -> dic
         }
 
     result["target"] = normalized_target
+    result["authority_source"] = normalized_target
     if normalized_target not in result["evidence_paths"]:
         result["evidence_paths"].append(normalized_target)
     return result
@@ -259,8 +438,8 @@ def build_live_authority_access_inventory() -> dict[str, Any]:
     records = [
         {
             "path": "scripts/query_governance.py",
-            "classification": "MIXED_ROLE_LOOKUP",
-            "behavior": "Resolves and returns authority information across multiple Q0 roles; generic access is now blocked unless a role is declared.",
+            "classification": "ROLE_AWARE_AUTHORITY_QUERY_SURFACE",
+            "behavior": "Resolves governed authority information through explicit role-aware lookup and cannot become terminal validation authority by itself.",
         },
         {
             "path": "tools/governance_inventory/__init__.py",
@@ -281,6 +460,26 @@ def build_live_authority_access_inventory() -> dict[str, Any]:
             "path": "scripts/global_validate.py",
             "classification": "VALIDATION_INVOCATION_AUTHORITY",
             "behavior": "Canonical governed validation entry point with fail-closed terminal reduction.",
+        },
+        {
+            "path": "tests/test_governed_context_capsule_v1.py",
+            "classification": "SUPPORTING_VALIDATOR",
+            "behavior": "Bounded supporting validator for governed-context-capsule schema, cache, and contract checks only.",
+        },
+        {
+            "path": "schemas/governed_context_capsule_v1.schema.json",
+            "classification": "SCHEMA_CONSTRAINT_SURFACE",
+            "behavior": "Schema contract surface used by governed-context-capsule builders and supporting validators.",
+        },
+        {
+            "path": "registry/governance/schemas/RUN_MANIFEST_V1.json",
+            "classification": "SCHEMA_CONSTRAINT_SURFACE",
+            "behavior": "Canonical run-manifest schema that constrains falsification-run structure without becoming live campaign-state authority.",
+        },
+        {
+            "path": "registry/governance/living_falsification_campaign_registry.json",
+            "classification": "REGISTRY_STATE_AUTHORITY",
+            "behavior": "Living falsification campaign state registry preserving current governed campaign status independently of run-manifest schema conformance.",
         },
     ]
     return {

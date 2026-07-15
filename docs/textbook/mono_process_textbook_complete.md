@@ -3177,6 +3177,10 @@ Governed validation uses the module-path command:
 
 Direct file invocation via `python scripts/global_validate.py` has been restored to consistent behavior, but the module-path command remains the canonical governed invocation for documentation and agent routing.
 
+Clean validation success is fail-closed. A clean `PASS` now requires every currently applicable required governed stage to complete with a clean successful terminal state and, where the stage contract expects substantive work, to complete that work explicitly. Skipped required work, missing required results, degrading warnings, unknown terminal states, and unexpected zero-work conditions remain visible and must not be collapsed into clean `PASS`. A valid no-applicable-work condition may remain non-blocking only when the stage contract explicitly permits it.
+
+The supported Python test-environment contract is narrower than broad full-tree `pytest` collection. The minimal governed pytest path is `python -m pytest tests/governance_validation -q`, using the repo-local `.venv`, `requirements.lock.txt`, and the recorded Python 3.14.4 baseline from the dependency reproducibility policy. Broad `python -m pytest` remains outside the supported contract while legacy test-only imports such as `typer` and unresolved tool-package import assumptions remain ungoverned for that wider surface.
+
 When a narrower deterministic subtask is sufficient, the validator can be sliced by stage through `--stages`, and the common surfaces are exposed as thin wrappers:
 - `python scripts/validate_registry_surface.py`
 - `python scripts/validate_governance_surface.py`

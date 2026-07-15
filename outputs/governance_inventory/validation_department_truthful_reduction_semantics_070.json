@@ -1,0 +1,161 @@
+{
+  "patch_id": "PATCH_VALIDATION_DEPARTMENT_TRUTHFUL_REDUCTION_SEMANTICS_070",
+  "mode": "BOUNDED_IMPLEMENTATION",
+  "generated_at": "2026-07-15T18:05:00-04:00",
+  "authority_surface_determination": {
+    "validation_invocation_authority": {
+      "surface": "scripts/global_validate.py",
+      "canonical_command": "python -m scripts.global_validate",
+      "classification": "EXPLICIT_LIVE_AUTHORITY",
+      "evidence": [
+        "governance/authority_partitions/Q0_AUTHORITY_SCOPE_PARTITION_001.json",
+        "outputs/governance_inventory/validation_department_systems_audit_reconciliation_069.json"
+      ]
+    },
+    "validation_reduction_authority": {
+      "surface": "scripts/global_validate.py",
+      "rule_id": "GOVERNANCE_VALIDATION_FAIL_CLOSED_001",
+      "classification": "EXPLICIT_LIVE_AUTHORITY",
+      "evidence": [
+        "governance/authority_partitions/Q0_AUTHORITY_SCOPE_PARTITION_001.json",
+        "tests/governance_validation/test_q0_authority_scope_partition.py",
+        "outputs/governance_inventory/validation_department_systems_audit_reconciliation_069.json"
+      ]
+    },
+    "supporting_surfaces": [
+      "outputs/governance_inventory/validation_department_systems_audit_reconciliation_069.json",
+      "tests/governance_validation/test_patch_070_validation_department_truthful_reduction_semantics.py"
+    ]
+  },
+  "pre_patch_status_flow": {
+    "stage_status_normalization": "scripts/global_validate.py::_normalize_validation_status",
+    "stage_trace_capture": "scripts/global_validate.py::_run_validation_stage",
+    "report_stage_summary": "scripts/global_validate.py::_build_stage_results",
+    "terminal_reduction": "scripts/global_validate.py main() overall_status reduction",
+    "pre_patch_false_pass_rule": "overall_status reduced to pass when every stage dict status normalized into {success, warning, pass, skipped}",
+    "pre_patch_warning_collapse": "_summarize_stage_failure returned PASS for warning-bearing stage results"
+  },
+  "confirmed_false_pass_paths": [
+    {
+      "finding_id": "SYS-AUDIT-001",
+      "path": "Required governed stages db_runtime_validation and patch_chain_validation were excluded by full-mode selection, emitted skipped, and still permitted a clean overall pass."
+    },
+    {
+      "finding_id": "SYS-AUDIT-004",
+      "path": "Warning-bearing stages such as hygiene_validation were collapsed to PASS in stage_results, obscuring degraded state and preserving false clean-pass eligibility."
+    }
+  ],
+  "implemented_semantic_change": {
+    "modified_surfaces": [
+      "scripts/global_validate.py",
+      "tests/governance_validation/test_patch_070_validation_department_truthful_reduction_semantics.py"
+    ],
+    "changes": [
+      "Extended status normalization to preserve warning, not_applicable, and not_executed states.",
+      "Added governed stage policy construction so full-mode clean-pass eligibility evaluates every stage in the authoritative stage plan.",
+      "Changed stage-result summarization to emit WARNING, SKIPPED_REQUIRED, NOT_EXECUTED_REQUIRED, NOT_APPLICABLE, and UNKNOWN_STATUS instead of collapsing non-clean states to PASS.",
+      "Added fail-closed reduction that distinguishes pass, warning, incomplete, and fail outcomes and records missing, degraded, incomplete, failed, and unknown stage sets.",
+      "Changed process exit semantics so only a clean overall pass exits successfully."
+    ]
+  },
+  "post_patch_status_flow": {
+    "stage_policy": "scripts/global_validate.py::_build_governed_stage_policy",
+    "stage_status_summary": "scripts/global_validate.py::_build_stage_results",
+    "terminal_reduction": "scripts/global_validate.py::_reduce_validation_outcome",
+    "clean_pass_rule": "overall_status=pass only when every currently applicable required governed stage has a clean PASS stage_result and no degraded, incomplete, missing, failed, or unknown required stage remains",
+    "report_preservation": [
+      "required_stage_names",
+      "clean_pass_eligible",
+      "missing_required_stages",
+      "incomplete_stages",
+      "degraded_stages",
+      "failed_stages",
+      "unknown_status_stages"
+    ]
+  },
+  "status_compatibility_effects": {
+    "preserved": [
+      "PASS remains the only clean-success terminal status.",
+      "Report generation still writes outputs/audits/global_health_report.json."
+    ],
+    "changed": [
+      "overall_status may now be warning or incomplete rather than silently collapsing to pass.",
+      "Any overall_status other than pass now exits non-zero to keep process outcome aligned with validation outcome."
+    ],
+    "new_stage_result_statuses": [
+      "WARNING",
+      "SKIPPED_REQUIRED",
+      "NOT_EXECUTED_REQUIRED",
+      "NOT_APPLICABLE",
+      "UNKNOWN_STATUS"
+    ]
+  },
+  "focused_test_results": {
+    "test_file": "tests/governance_validation/test_patch_070_validation_department_truthful_reduction_semantics.py",
+    "command": "python -m pytest tests/governance_validation/test_patch_070_validation_department_truthful_reduction_semantics.py -q",
+    "cases": [
+      {
+        "id": "VAL-070-T01",
+        "status": "PASS"
+      },
+      {
+        "id": "VAL-070-T02",
+        "status": "PASS"
+      },
+      {
+        "id": "VAL-070-T03",
+        "status": "PASS"
+      },
+      {
+        "id": "VAL-070-T04",
+        "status": "PASS"
+      },
+      {
+        "id": "VAL-070-T05",
+        "status": "PASS"
+      },
+      {
+        "id": "VAL-070-T06",
+        "status": "PASS"
+      },
+      {
+        "id": "VAL-070-T07",
+        "status": "PASS"
+      },
+      {
+        "id": "VAL-070-T08",
+        "status": "PASS"
+      }
+    ],
+    "pytest_status": "PASS",
+    "pytest_summary": "10 passed in 0.03s",
+    "json_parse_status": "PASS",
+    "git_diff_check_status": "PASS_WITH_CRLF_WARNINGS_ONLY",
+    "git_status_status": "PASS_REVIEWED"
+  },
+  "remaining_stage_work_accounting_gap": {
+    "deferred_finding": "SYS-AUDIT-003",
+    "statement": "This patch does not redefine substantive work accounting for individual stages. items_checked undercounting and stage-local zero-work semantics remain deferred to a separate stage-work-accounting patch."
+  },
+  "deferred_findings": [
+    {
+      "finding_id": "SYS-AUDIT-003",
+      "defer_to": "STAGE_WORK_ACCOUNTING_PATCH"
+    },
+    {
+      "finding_id": "SYS-AUDIT-011",
+      "defer_to": "ENCODING_REPAIR_PATCH"
+    }
+  ],
+  "governed_state_preservation": {
+    "q1_local_queue": 0,
+    "global_blocking_ambiguities": 487,
+    "patch_002_status": "PARTIAL",
+    "patch_002_authority_effect": "NONE",
+    "full_project_validation": "SUSPENDED_PENDING_VALIDATOR_DEPARTMENT_COMPLETION",
+    "validation_authority_changed": false,
+    "validation_invocation_authority_changed": false,
+    "validation_reduction_authority_split_created": false
+  },
+  "stop_conditions": []
+}

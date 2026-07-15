@@ -1,0 +1,75 @@
+{
+  "patch_id": "PATCH_VALIDATION_DEPARTMENT_SUPPORTED_TEST_ENVIRONMENT_CONTRACT_072",
+  "title": "Validation Department Supported Test Environment Contract",
+  "status": "APPLIED",
+  "applied_on": "2026-07-15T20:10:00-04:00",
+  "type": "bounded_contract_determination_and_minimal_implementation",
+  "depends_on": [
+    "PATCH_VALIDATION_DEPARTMENT_TRUTHFUL_REDUCTION_SEMANTICS_070",
+    "PATCH_VALIDATION_DEPARTMENT_STAGE_WORK_ACCOUNTING_071"
+  ],
+  "mode": "additive",
+  "authority_effect": "NONE",
+  "purpose": "Determine the smallest governed supported Python test-environment contract, make missing required validation dependencies explicit, and keep workstation execution evidence separate from environment authority.",
+  "summary": "This patch selects one minimal supported pytest-based validation path, reuses the existing requirements and lockfile surfaces, classifies typer as a legacy dependency outside that path, and adds an explicit environment readiness checker without creating new packaging or configuration authority surfaces.",
+  "confirmed_input_finding": "SYS-AUDIT-008",
+  "modified_surfaces": [
+    "scripts/validation_environment_contract.py",
+    "outputs/governance_inventory/validation_department_supported_test_environment_contract_072.json",
+    "patches/PATCH_VALIDATION_DEPARTMENT_SUPPORTED_TEST_ENVIRONMENT_CONTRACT_072.json",
+    "registry/governance/patches/PATCH_VALIDATION_DEPARTMENT_SUPPORTED_TEST_ENVIRONMENT_CONTRACT_072.json",
+    "tests/governance_validation/test_patch_072_validation_department_supported_test_environment_contract.py",
+    "registry/governance_change_ledger.json",
+    "registry/governance_hash_registry.json",
+    "docs/textbook/mono_process_textbook_complete.md"
+  ],
+  "selected_contract": {
+    "surface_id": "governance_patch_pytest",
+    "command": "python -m pytest tests/governance_validation -q",
+    "supported_python_baseline": "3.14.4",
+    "dependency_authority_surface": [
+      "requirements.txt",
+      "requirements.lock.txt",
+      "docs/math/dependency_reproducibility_policy.md",
+      "registry/math/audit002_dependency_reproducibility_lock_registry.json"
+    ]
+  },
+  "dependency_roles": {
+    "pytest": "REQUIRED_VALIDATION_DEPENDENCY",
+    "jsonschema": "REQUIRED_VALIDATION_DEPENDENCY",
+    "typer": "LEGACY_DEPENDENCY"
+  },
+  "governed_state_preservation": {
+    "q1_local_queue_before": 0,
+    "q1_local_queue_after": 0,
+    "global_blocking_ambiguity_count_before": 487,
+    "global_blocking_ambiguity_count_after": 487,
+    "patch_002_status": "PARTIAL",
+    "patch_002_authority_effect": "NONE",
+    "full_project_validation": "SUSPENDED_PENDING_VALIDATOR_DEPARTMENT_COMPLETION"
+  },
+  "validation_results": {
+    "focused_patch_test": {
+      "command": "python -m pytest tests/governance_validation/test_patch_072_validation_department_supported_test_environment_contract.py -q",
+      "status": "PASS",
+      "summary": "8 passed in 0.04s"
+    },
+    "environment_readiness_check": {
+      "command": "python scripts/validation_environment_contract.py",
+      "status": "ENVIRONMENT_NOT_READY",
+      "summary": "The active interpreter is Python 3.12.10 with pytest 9.1.1, which does not match the governed 3.14.4 / pytest 9.0.3 baseline."
+    },
+    "json_parse": {
+      "status": "PASS"
+    },
+    "git_diff_check": {
+      "command": "git diff --check",
+      "status": "PASS_WITH_CRLF_WARNINGS_ONLY"
+    },
+    "git_status": {
+      "command": "git status --short",
+      "status": "PASS_REVIEWED"
+    }
+  },
+  "unrelated_changes_preserved": true
+}

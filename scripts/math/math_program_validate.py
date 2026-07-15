@@ -379,6 +379,22 @@ def validate_math_program(full_report=False):
             "status": "pass",
             "timestamp": datetime.now().isoformat(),
             "validators_run": [],
+            "validators_attempted": 0,
+            "validators_completed": 0,
+            "validators_passed": 0,
+            "validators_failed": 0,
+            "validators_errored": 0,
+            "items_checked": 0,
+            "work_expectation": "REQUIRED",
+            "work_state": "WORK_ACCOUNTING_UNKNOWN",
+            "targets_discovered": len(validators),
+            "targets_selected": len(validators),
+            "targets_attempted": 0,
+            "targets_completed": 0,
+            "passed_count": 0,
+            "failed_count": 0,
+            "error_count": 0,
+            "zero_work_reason": None,
             "domain_status": {},
             "readiness_summary": {
                 "ready_for_local_theorem_work": False,
@@ -394,6 +410,8 @@ def validate_math_program(full_report=False):
     all_pass = True
     for domain, script in validators.items():
         report["math_program_validation"]["validators_run"].append(script)
+        report["math_program_validation"]["validators_attempted"] += 1
+        report["math_program_validation"]["targets_attempted"] += 1
         res = run_math_validator(script)
         
         # Determine specific result key (scripts return nested dicts)
@@ -407,17 +425,41 @@ def validate_math_program(full_report=False):
         domain_res = res[sub_key] if sub_key else res
         stored_res = domain_res if full_report else _summarize_domain_result(domain_res)
         report["math_program_validation"]["domain_status"][domain] = stored_res
+        report["math_program_validation"]["validators_completed"] += 1
+        report["math_program_validation"]["targets_completed"] += 1
 
         if domain_res.get("status") == "fail":
             all_pass = False
             report["math_program_validation"]["status"] = "fail"
+            report["math_program_validation"]["validators_failed"] += 1
+            report["math_program_validation"]["failed_count"] += 1
+            report["math_program_validation"]["validators_errored"] += 1
+            report["math_program_validation"]["error_count"] += 1
         elif domain_res.get("status") == "warning" and report["math_program_validation"]["status"] == "pass":
             report["math_program_validation"]["status"] = "warning"
+            report["math_program_validation"]["validators_passed"] += 1
+            report["math_program_validation"]["passed_count"] += 1
+        else:
+            report["math_program_validation"]["validators_passed"] += 1
+            report["math_program_validation"]["passed_count"] += 1
 
         # Collect gaps/questions
         report["math_program_validation"]["closure_gaps"].extend(domain_res.get("closure_gaps", []))
         report["math_program_validation"]["open_questions"].extend(domain_res.get("open_questions", []))
         report["math_program_validation"]["warnings"].extend(domain_res.get("warnings", []))
+
+    report["math_program_validation"]["items_checked"] = report["math_program_validation"]["validators_completed"]
+    if report["math_program_validation"]["targets_discovered"] == 0:
+        report["math_program_validation"]["work_state"] = "DISCOVERY_EMPTY"
+        report["math_program_validation"]["zero_work_reason"] = "The governed math-program validator catalog is empty."
+    elif report["math_program_validation"]["targets_attempted"] == 0:
+        report["math_program_validation"]["work_state"] = "EVALUATION_EMPTY"
+        report["math_program_validation"]["zero_work_reason"] = "Math-program validators were discovered but none were attempted."
+    elif report["math_program_validation"]["targets_completed"] == 0:
+        report["math_program_validation"]["work_state"] = "EVALUATION_EMPTY"
+        report["math_program_validation"]["zero_work_reason"] = "Math-program validators were attempted but none completed."
+    else:
+        report["math_program_validation"]["work_state"] = "WORK_COMPLETED"
 
     # Calculate readiness
     # ready_for_local_theorem_work: True if status is pass or warning (no fails)

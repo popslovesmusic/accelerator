@@ -1,0 +1,187 @@
+{
+  "schema_id": "q3_c02_partial_patch_item_classification_084_v1",
+  "patch_id": "PATCH_GOVERNANCE_Q3_C02_PARTIAL_PATCH_AUTHORITY_SEMANTICS_ANALYSIS_084",
+  "count": 2,
+  "items": [
+    {
+      "global_ambiguity_id": "AMB-GOV-SURF-0744",
+      "patch_surface": "registry/governance/patches/PATCH_ACCELERATOR_INFERENCE_CONSERVATION_CLOSEOUT_055.json",
+      "status": "PARTIAL",
+      "authority_effect": null,
+      "implementation_evidence": [
+        "Patch 055 verifies predecessor patches 050-054 as PASS/APPLIED and records deterministic_pipeline booleans all true.",
+        "Patch 055 files_changed are predominantly reports plus the patch record itself; it does not describe a new live authority grant.",
+        "Patch 055 validation_results are all passing, while known_limitations and remaining_debt keep the closeout recommendation at PARTIAL."
+      ],
+      "affected_live_surfaces": [
+        "scripts/global_validate.py"
+      ],
+      "affected_surface_roles": [
+        {
+          "surface": "registry/governance/patches/PATCH_ACCELERATOR_INFERENCE_CONSERVATION_CLOSEOUT_055.json",
+          "role": null,
+          "lookup_decision_if_patch_surface": "allow"
+        },
+        {
+          "surface": "outputs/audits/global_health_report.json",
+          "role": null,
+          "lookup_decision_if_patch_surface": null
+        },
+        {
+          "surface": "reports/deterministic-pipeline-final-call-graph.md",
+          "role": null,
+          "lookup_decision_if_patch_surface": null
+        },
+        {
+          "surface": "reports/inference-boundary-final-register.json",
+          "role": null,
+          "lookup_decision_if_patch_surface": null
+        },
+        {
+          "surface": "reports/inference-conservation-final-audit.json",
+          "role": null,
+          "lookup_decision_if_patch_surface": null
+        },
+        {
+          "surface": "reports/inference-conservation-final-summary.md",
+          "role": null,
+          "lookup_decision_if_patch_surface": null
+        },
+        {
+          "surface": "reports/inference-conservation-metrics-before-after.json",
+          "role": null,
+          "lookup_decision_if_patch_surface": null
+        },
+        {
+          "surface": "scripts/global_validate.py",
+          "role": "VALIDATION_INVOCATION_AUTHORITY",
+          "lookup_decision_if_patch_surface": null
+        }
+      ],
+      "validation_state": {
+        "tests_passed": true,
+        "schemas_valid": true,
+        "registries_valid": true,
+        "governance_validation_passed": true,
+        "git_diff_check_passed": true,
+        "rollback_proof_passed": true,
+        "bounded_reading": "Validation is complete for the closeout bundle, so PARTIAL is not primarily a failed validation state."
+      },
+      "supersession_state": {
+        "patch_record": "current",
+        "predecessor_patches_verified": [
+          "050 PASS",
+          "051 PASS",
+          "052 APPLIED",
+          "053 PASS",
+          "054 PASS"
+        ],
+        "explicit_supersession": "not declared"
+      },
+      "current_lookup_behavior": {
+        "decision": "allow",
+        "reason": "Registry surfaces remain authoritative for governed ledger, debt, and patch records.",
+        "authority_source": "registry/governance/patches/PATCH_ACCELERATOR_INFERENCE_CONSERVATION_CLOSEOUT_055.json",
+        "warnings": []
+      },
+      "actual_partial_dimension": [
+        "PATCH_WORK_STATUS",
+        "ACCOUNTING_STATE"
+      ],
+      "ambiguity_mechanism": "Generic lookup returns the partial closeout patch record itself as a registry authority surface even though repository evidence points to a closeout/reporting bundle over predecessor effects and independently live implementation surfaces.",
+      "classification": "AUTHORITY_EFFECT_UNRESOLVED",
+      "recommended_next_action": "Handle as an item-specific partial-closeout semantics case. A future bounded patch should prove whether the closeout record itself is non-authoritative while preserving independent live resolution of scripts/global_validate.py and predecessor effects."
+    },
+    {
+      "global_ambiguity_id": "AMB-GOV-SURF-0771",
+      "patch_surface": "registry/governance/patches/PATCH_GOVERNANCE_GLOBAL_INVENTORY_002.json",
+      "status": "PARTIAL",
+      "authority_effect": {
+        "creates_new_governance": false,
+        "modifies_live_governance": false,
+        "supersedes_existing_governance": false,
+        "activates_validation_department": false,
+        "classification": "NONE"
+      },
+      "implementation_evidence": [
+        "Patch 002 explicitly sets authority_effect.classification to NONE and says inventory registration is descriptive, not constitutive.",
+        "registration_gate.status is PASS while inventory_completion_gate.status is BLOCKED, showing implemented registration plus incomplete accounting/completion.",
+        "authority_registration.new_live_rule records a separate LIVE core governance rule constraining inventories without making the inventory patch itself authoritative."
+      ],
+      "affected_live_surfaces": [
+        "governance/core_rules/GOVERNANCE_INVENTORY_TRANSITIONAL_EVIDENCE_001.json"
+      ],
+      "affected_surface_roles": [
+        {
+          "surface": "registry/governance/patches/PATCH_GOVERNANCE_GLOBAL_INVENTORY_002.json",
+          "role": null,
+          "lookup_decision_if_patch_surface": "allow"
+        },
+        {
+          "surface": "docs/governance/",
+          "role": null,
+          "lookup_decision_if_patch_surface": null
+        },
+        {
+          "surface": "docs/governance/validation_department_mini_agent_architecture_001.json.",
+          "role": null,
+          "lookup_decision_if_patch_surface": null
+        },
+        {
+          "surface": "outputs/audits/",
+          "role": null,
+          "lookup_decision_if_patch_surface": null
+        },
+        {
+          "surface": "outputs/governance_inventory/",
+          "role": null,
+          "lookup_decision_if_patch_surface": null
+        },
+        {
+          "surface": "registry/governance_change_ledger.json.",
+          "role": null,
+          "lookup_decision_if_patch_surface": null
+        },
+        {
+          "surface": "registry/governance_hash_registry.json.",
+          "role": null,
+          "lookup_decision_if_patch_surface": null
+        }
+      ],
+      "validation_state": {
+        "registration_gate": "PASS",
+        "inventory_completion_gate": "BLOCKED",
+        "bounded_reading": "PARTIAL is driven by unresolved blocking ambiguities and completion/accounting state, not by a claimed live authority effect of the patch record."
+      },
+      "supersession_state": {
+        "patch_record": "current",
+        "explicit_supersession": "not declared",
+        "evidence_set_authority_effect": "NONE"
+      },
+      "current_lookup_behavior": {
+        "decision": "allow",
+        "reason": "Registry surfaces remain authoritative for governed ledger, debt, and patch records.",
+        "authority_source": "registry/governance/patches/PATCH_GOVERNANCE_GLOBAL_INVENTORY_002.json",
+        "warnings": []
+      },
+      "actual_partial_dimension": [
+        "PATCH_WORK_STATUS",
+        "ACCOUNTING_STATE",
+        "PARTIAL_WORK_NO_AUTHORITY_EFFECT"
+      ],
+      "ambiguity_mechanism": "Generic lookup returns the partial inventory patch record itself as registry authority even though the record explicitly says its authority effect is NONE and any operative constraint lives in separate governed rules or existing observed surfaces.",
+      "classification": "PATCH_RECORD_NON_AUTHORITY_BUT_IMPLEMENTED_SURFACE_MAY_BE_LIVE",
+      "recommended_next_action": "Use this as the smallest next implementation target: a bounded rule for PARTIAL patch records with explicit authority_effect NONE, without generalizing to all PARTIAL records."
+    }
+  ],
+  "global_accounting_preservation": {
+    "global_blocking_ambiguities_before": 460,
+    "global_blocking_ambiguities_after": 460,
+    "q3_nominal_queue_before": 52,
+    "q3_nominal_queue_after": 52,
+    "q3_live_unresolved_before": 50,
+    "q3_live_unresolved_after": 50,
+    "status_changes_applied": 0,
+    "lookup_behavior_changed": false
+  }
+}

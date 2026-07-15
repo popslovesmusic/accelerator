@@ -1,0 +1,263 @@
+{
+  "schema_id": "q2_remaining_item_disposition_v1",
+  "generated_at": "2026-07-15T19:35:00-04:00",
+  "source_refresh_artifact": "outputs/governance_inventory/q2_authority_lineage_refresh_and_classification_076.json",
+  "source_active_queue_artifact": "outputs/governance_inventory/q2_authority_lineage_active_queue_076.json",
+  "source_component_artifact": "outputs/governance_inventory/q2_authority_lineage_conflict_components_076.json",
+  "q2_count_before": 9,
+  "q2_count_after": 0,
+  "q2_family_state_after": "LOCAL_QUEUE_EXHAUSTED",
+  "global_blocking_ambiguity_count_before": 487,
+  "global_blocking_ambiguity_count_after": 484,
+  "one_to_one_global_mapping_verified": true,
+  "executive_disposition": {
+    "prospectively_closed_item_ids": [
+      "AMB-GOV-SURF-0666"
+    ],
+    "retired_residue_item_ids": [
+      "AMB-GOV-SURF-0952",
+      "AMB-GOV-SURF-0953"
+    ],
+    "reclassified_to_q3_item_ids": [
+      "AMB-GOV-SURF-0875"
+    ],
+    "reclassified_to_q4_item_ids": [
+      "AMB-GOV-SURF-0667",
+      "AMB-GOV-SURF-0668",
+      "AMB-GOV-SURF-0672",
+      "AMB-GOV-SURF-0678",
+      "AMB-GOV-SURF-0967"
+    ]
+  },
+  "item_by_item_evidence": [
+    {
+      "global_ambiguity_id": "AMB-GOV-SURF-0666",
+      "prior_q2_state": "PROSPECTIVELY_CLOSABLE_WITH_PROOF",
+      "final_q2_disposition": "PROSPECTIVELY_CLOSED_SUPERSESSION_PROVEN",
+      "global_resolution_status": "PROSPECTIVELY_CLOSED",
+      "destination_family_if_reclassified": null,
+      "counts_toward_global_blocking_delta": true,
+      "evidence": [
+        "python -m scripts.query_governance authority --target registry/db/migrations/20260703_governance_runtime_bootstrap_001.sql --level summary --json returns decision=defer, supersession.status=superseded, superseded_by current_state_002 and authority_resolution_003.",
+        "registry/db/migrations/20260703_governance_runtime_authority_resolution_003.sql explicitly states the bootstrap migration is superseded by later runtime migrations and should not be treated as the live authority surface.",
+        "The runtime does not return the bootstrap migration as a co-equal live authority surface; it defers to later runtime migrations instead."
+      ]
+    },
+    {
+      "global_ambiguity_id": "AMB-GOV-SURF-0667",
+      "prior_q2_state": "OUTSIDE_Q2_SCOPE_Q4",
+      "final_q2_disposition": "RECLASSIFIED_OUTSIDE_Q2",
+      "global_resolution_status": "UNRESOLVED_RECLASSIFIED_OUT_OF_Q2",
+      "destination_family_if_reclassified": "Q4_GENERATED_VIEW_BOUNDARY",
+      "counts_toward_global_blocking_delta": false,
+      "evidence": [
+        "python -m scripts.query_governance authority --target registry/db/migrations/20260703_governance_runtime_context_capsule_006.sql --level summary --json returns allow under db_runtime.",
+        "registry/db/README.md identifies the context capsule as a DB runtime projection-layer surface rather than a primary authority source.",
+        "Patch 076 classifies the remaining problem as source-versus-projection handling, not lineage."
+      ]
+    },
+    {
+      "global_ambiguity_id": "AMB-GOV-SURF-0668",
+      "prior_q2_state": "OUTSIDE_Q2_SCOPE_Q4",
+      "final_q2_disposition": "RECLASSIFIED_OUTSIDE_Q2",
+      "global_resolution_status": "UNRESOLVED_RECLASSIFIED_OUT_OF_Q2",
+      "destination_family_if_reclassified": "Q4_GENERATED_VIEW_BOUNDARY",
+      "counts_toward_global_blocking_delta": false,
+      "evidence": [
+        "python -m scripts.query_governance authority --target registry/db/migrations/20260703_governance_runtime_current_state_002.sql --level summary --json returns allow with supersession.status=current.",
+        "registry/db/README.md defines current-state as a runtime projection and not a canonical source-of-truth surface.",
+        "Patch 076 classifies the surviving issue as Q4 boundary work."
+      ]
+    },
+    {
+      "global_ambiguity_id": "AMB-GOV-SURF-0672",
+      "prior_q2_state": "OUTSIDE_Q2_SCOPE_Q4",
+      "final_q2_disposition": "RECLASSIFIED_OUTSIDE_Q2",
+      "global_resolution_status": "UNRESOLVED_RECLASSIFIED_OUT_OF_Q2",
+      "destination_family_if_reclassified": "Q4_GENERATED_VIEW_BOUNDARY",
+      "counts_toward_global_blocking_delta": false,
+      "evidence": [
+        "python -m scripts.query_governance authority --target registry/db/migrations/20260703_governance_runtime_freshness_gate_010.sql --level summary --json returns allow under db_runtime.",
+        "registry/db/README.md defines freshness as a runtime projection over snapshot metadata and source-affecting drift.",
+        "Patch 076 classifies the surviving issue as Q4 boundary work."
+      ]
+    },
+    {
+      "global_ambiguity_id": "AMB-GOV-SURF-0678",
+      "prior_q2_state": "OUTSIDE_Q2_SCOPE_Q4",
+      "final_q2_disposition": "RECLASSIFIED_OUTSIDE_Q2",
+      "global_resolution_status": "UNRESOLVED_RECLASSIFIED_OUT_OF_Q2",
+      "destination_family_if_reclassified": "Q4_GENERATED_VIEW_BOUNDARY",
+      "counts_toward_global_blocking_delta": false,
+      "evidence": [
+        "python -m scripts.query_governance authority --target registry/db/schema.sql --level summary --json returns defer with no governed authority surface matched.",
+        "registry/db/README.md places schema.sql inside the DB projection layer whose canonical authority remains elsewhere.",
+        "Patch 076 classifies the surviving issue as Q4 boundary work."
+      ]
+    },
+    {
+      "global_ambiguity_id": "AMB-GOV-SURF-0967",
+      "prior_q2_state": "OUTSIDE_Q2_SCOPE_Q4",
+      "final_q2_disposition": "RECLASSIFIED_OUTSIDE_Q2",
+      "global_resolution_status": "UNRESOLVED_RECLASSIFIED_OUT_OF_Q2",
+      "destination_family_if_reclassified": "Q4_GENERATED_VIEW_BOUNDARY",
+      "counts_toward_global_blocking_delta": false,
+      "evidence": [
+        "scripts/db/orientation_scoring.py only defines advisory weighting logic consumed by scripts/orientation_retrieval.py.",
+        "python -m scripts.query_governance authority --target scripts/orientation_retrieval.py --level summary --json returns defer with no governed authority surface matched.",
+        "Patch 076 classifies the surviving issue as retrieval or generated-boundary handling, not lineage."
+      ]
+    },
+    {
+      "global_ambiguity_id": "AMB-GOV-SURF-0875",
+      "prior_q2_state": "OUTSIDE_Q2_SCOPE_Q3",
+      "final_q2_disposition": "RECLASSIFIED_OUTSIDE_Q2",
+      "global_resolution_status": "UNRESOLVED_RECLASSIFIED_OUT_OF_Q2",
+      "destination_family_if_reclassified": "Q3_LIVE_PROPOSAL_HISTORY_CLASSIFICATION",
+      "counts_toward_global_blocking_delta": false,
+      "evidence": [
+        "docs/audit.json classifies registry/governance/schemas/RUN_MANIFEST_V1.json as a canonical run manifest schema with simulation-campaign execution scope only.",
+        "registry/governance/living_falsification_campaign_registry.json uses RUN_MANIFEST_V1 as a source artifact while recording historical and live campaign status transitions separately.",
+        "python -m scripts.query_governance authority --target registry/governance/schemas/RUN_MANIFEST_V1.json --level summary --json returns defer with no governed authority surface matched."
+      ]
+    },
+    {
+      "global_ambiguity_id": "AMB-GOV-SURF-0952",
+      "prior_q2_state": "OBSOLETE_RESIDUE",
+      "final_q2_disposition": "RETIRED_AS_OBSOLETE_RESIDUE",
+      "global_resolution_status": "RETIRED_AS_OBSOLETE_RESIDUE",
+      "destination_family_if_reclassified": null,
+      "counts_toward_global_blocking_delta": true,
+      "evidence": [
+        "python -m scripts.query_governance authority --target scripts/db/__pycache__/orientation_scoring.cpython-312.pyc --level summary --json returns defer with no governed authority surface matched.",
+        "The file is compiled bytecode under __pycache__ with no governed dependents and no live authority role in the surface inventory.",
+        "Patch 076 classifies the item as compiled residue outside the live control plane."
+      ]
+    },
+    {
+      "global_ambiguity_id": "AMB-GOV-SURF-0953",
+      "prior_q2_state": "OBSOLETE_RESIDUE",
+      "final_q2_disposition": "RETIRED_AS_OBSOLETE_RESIDUE",
+      "global_resolution_status": "RETIRED_AS_OBSOLETE_RESIDUE",
+      "destination_family_if_reclassified": null,
+      "counts_toward_global_blocking_delta": true,
+      "evidence": [
+        "python -m scripts.query_governance authority --target scripts/db/__pycache__/orientation_scoring.cpython-314.pyc --level summary --json returns defer with no governed authority surface matched.",
+        "The file is compiled bytecode under __pycache__ with no governed dependents and no live authority role in the surface inventory.",
+        "Patch 076 classifies the item as compiled residue outside the live control plane."
+      ]
+    }
+  ],
+  "supersession_closure_proof": {
+    "global_ambiguity_id": "AMB-GOV-SURF-0666",
+    "original_competing_or_ambiguous_surfaces": [
+      "registry/db/migrations/20260703_governance_runtime_bootstrap_001.sql",
+      "registry/db/migrations/20260703_governance_runtime_current_state_002.sql",
+      "registry/db/migrations/20260703_governance_runtime_authority_resolution_003.sql"
+    ],
+    "governed_supersession_relation": {
+      "superseded_surface": "registry/db/migrations/20260703_governance_runtime_bootstrap_001.sql",
+      "superseded_by": [
+        "registry/db/migrations/20260703_governance_runtime_current_state_002.sql",
+        "registry/db/migrations/20260703_governance_runtime_authority_resolution_003.sql"
+      ],
+      "proof_source": "registry/db/migrations/20260703_governance_runtime_authority_resolution_003.sql"
+    },
+    "competing_live_authority_remaining": false,
+    "runtime_lookup_returns_superseded_surface_as_live": false,
+    "historical_record_preserved": true,
+    "closure_decision": "PROSPECTIVELY_CLOSE"
+  },
+  "obsolete_residue_retirement_proof": {
+    "items": [
+      {
+        "global_ambiguity_id": "AMB-GOV-SURF-0952",
+        "source_surface": "scripts/db/__pycache__/orientation_scoring.cpython-312.pyc",
+        "current_role": "COMPILED_SCRIPT_RESIDUE",
+        "participates_in_live_control_plane": false,
+        "role_aware_lookup_returns_current_authority": false,
+        "historical_traceability_preserved": true,
+        "retirement_decision": "RETIRE_AS_OBSOLETE_RESIDUE"
+      },
+      {
+        "global_ambiguity_id": "AMB-GOV-SURF-0953",
+        "source_surface": "scripts/db/__pycache__/orientation_scoring.cpython-314.pyc",
+        "current_role": "COMPILED_SCRIPT_RESIDUE",
+        "participates_in_live_control_plane": false,
+        "role_aware_lookup_returns_current_authority": false,
+        "historical_traceability_preserved": true,
+        "retirement_decision": "RETIRE_AS_OBSOLETE_RESIDUE"
+      }
+    ]
+  },
+  "q3_reclassification": {
+    "items": [
+      {
+        "global_ambiguity_id": "AMB-GOV-SURF-0875",
+        "destination_family": "Q3_LIVE_PROPOSAL_HISTORY_CLASSIFICATION",
+        "blocking_status_preserved": true,
+        "global_resolution_status": "UNRESOLVED_RECLASSIFIED_OUT_OF_Q2"
+      }
+    ]
+  },
+  "q4_reclassification": {
+    "items": [
+      {
+        "global_ambiguity_id": "AMB-GOV-SURF-0667",
+        "destination_family": "Q4_GENERATED_VIEW_BOUNDARY",
+        "blocking_status_preserved": true,
+        "global_resolution_status": "UNRESOLVED_RECLASSIFIED_OUT_OF_Q2"
+      },
+      {
+        "global_ambiguity_id": "AMB-GOV-SURF-0668",
+        "destination_family": "Q4_GENERATED_VIEW_BOUNDARY",
+        "blocking_status_preserved": true,
+        "global_resolution_status": "UNRESOLVED_RECLASSIFIED_OUT_OF_Q2"
+      },
+      {
+        "global_ambiguity_id": "AMB-GOV-SURF-0672",
+        "destination_family": "Q4_GENERATED_VIEW_BOUNDARY",
+        "blocking_status_preserved": true,
+        "global_resolution_status": "UNRESOLVED_RECLASSIFIED_OUT_OF_Q2"
+      },
+      {
+        "global_ambiguity_id": "AMB-GOV-SURF-0678",
+        "destination_family": "Q4_GENERATED_VIEW_BOUNDARY",
+        "blocking_status_preserved": true,
+        "global_resolution_status": "UNRESOLVED_RECLASSIFIED_OUT_OF_Q2"
+      },
+      {
+        "global_ambiguity_id": "AMB-GOV-SURF-0967",
+        "destination_family": "Q4_GENERATED_VIEW_BOUNDARY",
+        "blocking_status_preserved": true,
+        "global_resolution_status": "UNRESOLVED_RECLASSIFIED_OUT_OF_Q2"
+      }
+    ]
+  },
+  "q2_queue_exhaustion": {
+    "queue_count_before": 9,
+    "queue_count_after": 0,
+    "queue_state_after": "LOCAL_QUEUE_EXHAUSTED",
+    "all_nine_items_received_valid_dispositions": true
+  },
+  "global_accounting_update": {
+    "global_blocking_ambiguity_count_before": 487,
+    "resolved_or_retired_in_this_patch": 3,
+    "global_blocking_ambiguity_count_after": 484,
+    "q2_group_count_before": 9,
+    "q2_group_count_after": 0
+  },
+  "historical_traceability_preservation": {
+    "historical_records_rewritten": 0,
+    "superseded_surfaces_deleted": 0,
+    "residue_surfaces_deleted": 0,
+    "original_global_ambiguity_ids_preserved": true
+  },
+  "governed_state_preservation": {
+    "q1_local_queue": 0,
+    "patch_002_status": "PARTIAL",
+    "patch_002_authority_effect": "NONE",
+    "full_project_validation_status": "SUSPENDED_PENDING_VALIDATOR_DEPARTMENT_COMPLETION",
+    "full_project_validation_run": false
+  }
+}

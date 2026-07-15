@@ -120,7 +120,22 @@ class EngineValidator:
             return False, str(e)
 
     def run(self):
-        results = {"status": "success", "tools_tested": [], "failures": [], "skipped": []}
+        results = {
+            "status": "success",
+            "tools_tested": [],
+            "failures": [],
+            "skipped": [],
+            "work_expectation": "CONDITIONALLY_REQUIRED",
+            "work_state": "WORK_ACCOUNTING_UNKNOWN",
+            "targets_discovered": 0,
+            "targets_selected": 0,
+            "targets_attempted": 0,
+            "targets_completed": 0,
+            "passed_count": 0,
+            "failed_count": 0,
+            "error_count": 0,
+            "zero_work_reason": None,
+        }
         
         if not self.manifest_path.exists():
             return {"status": "skipped", "errors": [], "warnings": ["Manifest missing"]}
@@ -131,17 +146,42 @@ class EngineValidator:
         nodes = manifest.get("nodes", {})
         for nid, node in nodes.items():
             if node.get("type") == "tool" and node.get("status") == "C4":
+                results["targets_discovered"] += 1
                 tool = node.get("data", {})
                 if "sim_governed.py" in tool.get("entry_point", ""):
+                    results["targets_selected"] += 1
+                    results["targets_attempted"] += 1
                     success, err = self.smoke_test_tool(tool)
                     results["tools_tested"].append(nid)
+                    results["targets_completed"] += 1
                     if not success:
                         results["failures"].append({"tool": nid, "error": err})
+                        results["failed_count"] += 1
+                        results["error_count"] += 1
+                    else:
+                        results["passed_count"] += 1
                 else:
                     results["skipped"].append(nid)
 
         if results["failures"]:
             results["status"] = "failed"
+        if results["targets_completed"] > 0:
+            results["work_state"] = "WORK_COMPLETED"
+        elif results["targets_discovered"] == 0:
+            results["work_state"] = "VALID_NO_APPLICABLE_WORK"
+            results["zero_work_reason"] = "No C4 engine tool surfaces were discovered."
+        elif results["targets_selected"] == 0:
+            results["status"] = "warning"
+            results["work_state"] = "SELECTION_EMPTY"
+            results["zero_work_reason"] = "C4 tool surfaces exist, but none matched the governed smoke-test selection contract."
+        elif results["targets_attempted"] == 0:
+            results["status"] = "warning"
+            results["work_state"] = "EVALUATION_EMPTY"
+            results["zero_work_reason"] = "Eligible engine tool surfaces were selected, but none were attempted."
+        else:
+            results["status"] = "warning"
+            results["work_state"] = "ZERO_WORK_UNEXPECTED"
+            results["zero_work_reason"] = "Engine validation completed without substantive smoke-test work."
         return results
 
     def smoke_test_tool(self, tool):
@@ -622,7 +662,27 @@ class MathProgramValidator:
                 return {"status": "failed", "errors": ["Could not import math_program_validate script."]}
 
         res = validate_math_program(full_report=self.full_report)
-        return res["math_program_validation"]
+        result = dict(res["math_program_validation"])
+        result.setdefault("work_expectation", "REQUIRED")
+        result.setdefault("targets_discovered", len(result.get("validators_run", [])))
+        result.setdefault("targets_selected", result.get("targets_discovered", 0))
+        result.setdefault("targets_attempted", result.get("validators_attempted", result.get("targets_discovered", 0)))
+        result.setdefault("targets_completed", result.get("validators_completed", 0))
+        result.setdefault("passed_count", result.get("validators_passed", 0))
+        result.setdefault("failed_count", result.get("validators_failed", 0))
+        result.setdefault("error_count", result.get("validators_errored", 0))
+        result.setdefault("items_checked", result.get("targets_completed", 0))
+        if "work_state" not in result:
+            if result["targets_discovered"] == 0:
+                result["work_state"] = "DISCOVERY_EMPTY"
+                result["zero_work_reason"] = "The governed math-program validator catalog is empty."
+            elif result["targets_attempted"] == 0 or result["targets_completed"] == 0:
+                result["work_state"] = "EVALUATION_EMPTY"
+                result["zero_work_reason"] = "Math-program validators were cataloged but no substantive validator results completed."
+            else:
+                result["work_state"] = "WORK_COMPLETED"
+                result.setdefault("zero_work_reason", None)
+        return result
 
 class ImplementationValidator:
     def __init__(self, root_dir):
@@ -939,7 +999,13 @@ def _normalize_validation_status(value):
     status = str(value or "").strip().lower()
     if status in {"failed", "fail"}:
         return "failed"
-    if status in {"success", "warning", "pass", "skipped", "timeout"}:
+    if status in {"warning", "warn"}:
+        return "warning"
+    if status in {"not_applicable", "not-applicable", "not applicable", "n/a"}:
+        return "not_applicable"
+    if status in {"not_executed", "not-executed", "not executed"}:
+        return "not_executed"
+    if status in {"success", "pass", "skipped", "timeout"}:
         return status
     return status or "unknown"
 
@@ -994,6 +1060,16 @@ def _run_validation_stage(stage_name, runner, timeout_seconds=None):
         "errors": [str(error) for error in result.get("errors", [])[:3] if error],
         "warnings": [str(warning) for warning in result.get("warnings", [])[:3] if warning],
         "items_checked": result.get("items_checked"),
+        "work_expectation": result.get("work_expectation"),
+        "work_state": result.get("work_state"),
+        "targets_discovered": result.get("targets_discovered"),
+        "targets_selected": result.get("targets_selected"),
+        "targets_attempted": result.get("targets_attempted"),
+        "targets_completed": result.get("targets_completed"),
+        "passed_count": result.get("passed_count"),
+        "failed_count": result.get("failed_count"),
+        "error_count": result.get("error_count"),
+        "zero_work_reason": result.get("zero_work_reason"),
         "checked_patches": result.get("checked_patches"),
         "checked_files": result.get("checked_files"),
         "checked_entries": result.get("checked_entries"),
@@ -1099,6 +1175,28 @@ def _selected_stage_names(mode):
         "campaign_validation",
         "governance_integrity_validation",
     }
+
+
+def _build_governed_stage_policy(mode, stage_plan_names):
+    stage_plan_names = list(stage_plan_names)
+    if mode == "full":
+        required_stage_names = set(stage_plan_names)
+    else:
+        required_stage_names = set(_selected_stage_names(mode))
+
+    policy = {}
+    for stage_name in stage_plan_names:
+        policy[stage_name] = {
+            "required": stage_name in required_stage_names,
+            "conditionally_applicable": False,
+            "work_expectation": None,
+        }
+    if "engine_validation" in policy:
+        policy["engine_validation"]["work_expectation"] = "CONDITIONALLY_REQUIRED"
+        policy["engine_validation"]["conditionally_applicable"] = True
+    if "math_program_validation" in policy:
+        policy["math_program_validation"]["work_expectation"] = "REQUIRED"
+    return policy
 
 
 def _normalize_requested_stages(raw_stages):
@@ -1556,6 +1654,8 @@ def _build_partial_validation_stage_plan(root, args, mode, context):
 
 
 def _collect_stage_items_checked(stage_name, result):
+    if isinstance(result.get("targets_completed"), int):
+        return result["targets_completed"]
     for key in (
         "items_checked",
         "checked_patches",
@@ -1603,9 +1703,30 @@ def _collect_stage_evidence_paths(result):
     return _dedupe_paths(paths)[:10]
 
 
-def _summarize_stage_failure(stage_name, result, trace_entry, report_stale=False):
-    if trace_entry.get("status") == "skipped":
-        return "SKIPPED_BY_MODE", None
+def _collect_stage_work_accounting(stage_name, result, stage_policy=None):
+    stage_policy = stage_policy or {}
+    policy = stage_policy.get(stage_name, {})
+    return {
+        "work_expectation": result.get("work_expectation") or policy.get("work_expectation") or "UNKNOWN",
+        "work_state": result.get("work_state") or "WORK_ACCOUNTING_UNKNOWN",
+        "targets_discovered_or_equivalent": result.get("targets_discovered"),
+        "targets_attempted_or_equivalent": result.get("targets_attempted"),
+        "targets_completed_or_equivalent": result.get("targets_completed"),
+        "zero_work_reason": result.get("zero_work_reason"),
+    }
+
+
+def _summarize_stage_failure(stage_name, result, trace_entry, stage_policy=None, report_stale=False):
+    stage_policy = stage_policy or {}
+    policy = stage_policy.get(stage_name, {})
+    normalized_status = trace_entry.get("status") or _normalize_validation_status(result.get("status"))
+
+    if normalized_status == "skipped":
+        if policy.get("required"):
+            return "SKIPPED_REQUIRED", result.get("reason") or "Required governed stage did not execute."
+        return "SKIPPED_BY_MODE", result.get("reason")
+    if normalized_status == "not_executed":
+        return "NOT_EXECUTED_REQUIRED", result.get("reason") or "Required governed stage did not execute."
     if trace_entry.get("timed_out"):
         summary = None
         if result.get("errors"):
@@ -1625,27 +1746,55 @@ def _summarize_stage_failure(stage_name, result, trace_entry, report_stale=False
         summary = result.get("errors", [None])[0] if result.get("errors") else None
         return "FAIL_SEMANTIC", summary
 
+    work_state = result.get("work_state")
+    if work_state in {"ZERO_WORK_UNEXPECTED", "DISCOVERY_EMPTY", "SELECTION_EMPTY", "EVALUATION_EMPTY"}:
+        return work_state, result.get("zero_work_reason")
+    if work_state == "WORK_ACCOUNTING_UNKNOWN":
+        return "WORK_ACCOUNTING_UNKNOWN", result.get("zero_work_reason") or "Work accounting could not be determined."
+    if work_state == "VALID_NO_APPLICABLE_WORK":
+        return "VALID_NO_APPLICABLE_WORK", result.get("zero_work_reason")
+
+    if normalized_status == "warning":
+        summary = None
+        if result.get("warnings"):
+            summary = result["warnings"][0]
+        elif result.get("errors"):
+            summary = result["errors"][0]
+        return "WARNING", summary
+    if normalized_status == "not_applicable":
+        if policy.get("conditionally_applicable"):
+            return "NOT_APPLICABLE", result.get("reason")
+        return "UNKNOWN_STATUS", "Unexpected NOT_APPLICABLE state for non-conditional stage."
     if stage_name == "report_write" and report_stale:
         return "STALE_REPORT_WARNING", "Existing global health report was stale before this run."
+    if normalized_status in {"success", "pass"}:
+        return "PASS", None
 
-    return "PASS", None
+    return "UNKNOWN_STATUS", f"Unrecognized terminal status: {normalized_status}"
 
 
-def _build_stage_results(stage_trace, report_stale=False, include_report_write=False, report_path=None):
+def _build_stage_results(stage_trace, stage_policy=None, report_stale=False, include_report_write=False, report_path=None):
     stage_results = []
     for trace_entry in stage_trace:
         stage_name = trace_entry.get("stage") or trace_entry.get("stage_name") or "unknown"
         result = trace_entry.get("result_snapshot") or {}
-        status, failure_summary = _summarize_stage_failure(stage_name, result, trace_entry, report_stale=report_stale)
+        status, failure_summary = _summarize_stage_failure(
+            stage_name,
+            result,
+            trace_entry,
+            stage_policy=stage_policy,
+            report_stale=report_stale,
+        )
         stage_result = {
             "stage_name": stage_name,
             "status": status,
             "duration_seconds": round(float(trace_entry.get("duration_seconds") or 0.0), 6),
             "items_checked": _collect_stage_items_checked(stage_name, result),
-            "failure_code": None if status in {"PASS", "SKIPPED_BY_MODE"} else status,
+            "failure_code": None if status in {"PASS", "NOT_APPLICABLE"} else status,
             "failure_summary": failure_summary,
             "evidence_paths": _collect_stage_evidence_paths(result),
         }
+        stage_result.update(_collect_stage_work_accounting(stage_name, result, stage_policy=stage_policy))
         stage_results.append(stage_result)
 
     if include_report_write:
@@ -1657,10 +1806,88 @@ def _build_stage_results(stage_trace, report_stale=False, include_report_write=F
             "failure_code": "STALE_REPORT_WARNING" if report_stale else None,
             "failure_summary": "Existing global health report was stale before this run." if report_stale else None,
             "evidence_paths": [report_path] if report_path else [],
+            "work_expectation": "INFORMATIONAL",
+            "work_state": "WORK_COMPLETED",
+            "targets_discovered_or_equivalent": 1,
+            "targets_attempted_or_equivalent": 1,
+            "targets_completed_or_equivalent": 1,
+            "zero_work_reason": None,
         }
         stage_results.append(report_result)
 
     return stage_results
+
+
+def _reduce_validation_outcome(stage_results, stage_policy):
+    stage_results = list(stage_results or [])
+    stage_policy = stage_policy or {}
+    stage_index = {entry.get("stage_name"): entry for entry in stage_results if entry.get("stage_name")}
+
+    missing_required = []
+    incomplete_stages = []
+    degraded_stages = []
+    failed_stages = []
+    unknown_stages = []
+
+    for stage_name, policy in stage_policy.items():
+        if not policy.get("required"):
+            continue
+        entry = stage_index.get(stage_name)
+        if entry is None:
+            missing_required.append(stage_name)
+            continue
+
+        status = entry.get("status")
+        if status == "PASS":
+            continue
+        if status in {"NOT_APPLICABLE", "VALID_NO_APPLICABLE_WORK"} and policy.get("conditionally_applicable"):
+            continue
+        if status in {"WARNING", "STALE_REPORT_WARNING"}:
+            degraded_stages.append(stage_name)
+            continue
+        if status in {
+            "SKIPPED_REQUIRED",
+            "NOT_EXECUTED_REQUIRED",
+            "ZERO_WORK_UNEXPECTED",
+            "DISCOVERY_EMPTY",
+            "SELECTION_EMPTY",
+            "EVALUATION_EMPTY",
+        }:
+            incomplete_stages.append(stage_name)
+            continue
+        if status in {"UNKNOWN_STATUS", "WORK_ACCOUNTING_UNKNOWN"}:
+            unknown_stages.append(stage_name)
+            continue
+        failed_stages.append(stage_name)
+
+    report_write = stage_index.get("report_write")
+    if report_write and report_write.get("status") == "STALE_REPORT_WARNING":
+        degraded_stages.append("report_write")
+
+    clean_pass_eligible = not any(
+        (missing_required, incomplete_stages, degraded_stages, failed_stages, unknown_stages)
+    )
+    if failed_stages or unknown_stages:
+        overall_status = "fail"
+    elif missing_required or incomplete_stages:
+        overall_status = "incomplete"
+    elif degraded_stages:
+        overall_status = "warning"
+    else:
+        overall_status = "pass"
+
+    return {
+        "overall_status": overall_status,
+        "clean_pass_eligible": clean_pass_eligible,
+        "missing_required_stages": sorted(missing_required),
+        "incomplete_stages": sorted(dict.fromkeys(incomplete_stages)),
+        "degraded_stages": sorted(dict.fromkeys(degraded_stages)),
+        "failed_stages": sorted(dict.fromkeys(failed_stages)),
+        "unknown_status_stages": sorted(dict.fromkeys(unknown_stages)),
+        "required_stage_names": sorted(
+            stage_name for stage_name, policy in stage_policy.items() if policy.get("required")
+        ),
+    }
 
 
 def _detect_report_staleness(root, report_path):
@@ -1929,6 +2156,8 @@ def main():
         context = None
         selected_stage_names = _selected_stage_names(mode)
         stage_plan = _build_validation_stage_plan(root, args)
+    stage_plan_names = [stage_name for stage_name, _ in stage_plan]
+    stage_policy = _build_governed_stage_policy(mode, stage_plan_names)
 
     requested_stages = _normalize_requested_stages(args.stages)
     if args.list_stages:
@@ -1993,11 +2222,20 @@ def main():
     report_path_rel = str(out_path).replace("\\", "/")
     stage_results = _build_stage_results(
         stage_trace,
+        stage_policy=stage_policy,
         report_stale=report_stale,
         include_report_write=True,
         report_path=report_path_rel,
     )
     report["stage_results"] = stage_results
+    reduction = _reduce_validation_outcome(stage_results, stage_policy)
+    report["required_stage_names"] = reduction["required_stage_names"]
+    report["clean_pass_eligible"] = reduction["clean_pass_eligible"]
+    report["missing_required_stages"] = reduction["missing_required_stages"]
+    report["incomplete_stages"] = reduction["incomplete_stages"]
+    report["degraded_stages"] = reduction["degraded_stages"]
+    report["failed_stages"] = reduction["failed_stages"]
+    report["unknown_status_stages"] = reduction["unknown_status_stages"]
     report["slowest_stages"] = [
         {
             "stage_name": item["stage_name"],
@@ -2006,7 +2244,7 @@ def main():
             "items_checked": item["items_checked"],
         }
         for item in sorted(
-            [entry for entry in stage_results if entry["status"] not in {"SKIPPED_BY_MODE"}],
+            [entry for entry in stage_results if entry["status"] not in {"SKIPPED_BY_MODE", "SKIPPED_REQUIRED"}],
             key=lambda entry: entry["duration_seconds"],
             reverse=True,
         )[:3]
@@ -2056,12 +2294,7 @@ def main():
             "slowest_stages": report["slowest_stages"],
         }
 
-    terminal_statuses = {"success", "warning", "pass", "skipped"}
-    report["overall_status"] = "pass" if all(
-        _normalize_validation_status(entry.get("status")) in terminal_statuses
-        for entry in report.values()
-        if isinstance(entry, dict) and "status" in entry
-    ) else "fail"
+    report["overall_status"] = reduction["overall_status"]
 
     current_history_record = _build_validation_history_record(report, stage_trace, root, run_id)
     history_write_status = "disabled"
@@ -2107,7 +2340,7 @@ def main():
         json.dump(report, f, indent=2)
 
     print(f"Global health report saved to {out_path}")
-    if report["overall_status"] == "fail":
+    if report["overall_status"] != "pass":
         sys.exit(1)
 
 if __name__ == "__main__":

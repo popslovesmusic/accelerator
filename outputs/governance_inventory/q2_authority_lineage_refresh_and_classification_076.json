@@ -1,0 +1,413 @@
+{
+  "patch_id": "PATCH_GOVERNANCE_Q2_AUTHORITY_LINEAGE_REFRESH_AND_CLASSIFICATION_076",
+  "mode": "READ_ONLY_ANALYSIS",
+  "generated_at": "2026-07-15T19:10:00-04:00",
+  "executive_summary": {
+    "source_q2_count": 9,
+    "genuinely_live_q2_count": 0,
+    "prospectively_closable_with_proof_count": 1,
+    "neutralized_count": 0,
+    "obsolete_residue_count": 2,
+    "outside_q2_scope_q3_count": 1,
+    "outside_q2_scope_q4_count": 5,
+    "outside_q2_scope_q5_count": 0,
+    "insufficient_evidence_count": 0,
+    "summary": "The nominal nine-item Q2 queue does not survive intact under the post-075 governed state. No item remains a genuinely live unresolved authority-lineage ambiguity. One item is already superseded and prospectively closable with proof, five are better understood as projection or generated-boundary problems, one is a live-versus-record/schema classification problem, and two are obsolete compiled residue."
+  },
+  "source_inventory": {
+    "authoritative_sources": [
+      "outputs/governance_inventory/governance_ambiguity_risk_classification.json",
+      "outputs/governance_inventory/governance_remediation_queue.json",
+      "outputs/governance_inventory/unassigned_ambiguity_family_classification_075.json"
+    ],
+    "recovered_nominal_q2_items": [
+      "AMB-GOV-SURF-0666",
+      "AMB-GOV-SURF-0667",
+      "AMB-GOV-SURF-0668",
+      "AMB-GOV-SURF-0672",
+      "AMB-GOV-SURF-0678",
+      "AMB-GOV-SURF-0875",
+      "AMB-GOV-SURF-0952",
+      "AMB-GOV-SURF-0953",
+      "AMB-GOV-SURF-0967"
+    ],
+    "post_075_adjustment_note": "Patch 075 does not directly modify the Q2 source set, but it establishes the rule that current substantive unresolved problems control family assignment rather than historical queue labels."
+  },
+  "nine_item_reconciliation": [
+    {
+      "local_q2_id": "Q2-LIN-001",
+      "global_ambiguity_id": "AMB-GOV-SURF-0666",
+      "original_surfaces": [
+        "registry/db/migrations/20260703_governance_runtime_bootstrap_001.sql"
+      ],
+      "current_surfaces": [
+        "registry/db/migrations/20260703_governance_runtime_bootstrap_001.sql",
+        "registry/db/migrations/20260703_governance_runtime_current_state_002.sql",
+        "registry/db/migrations/20260703_governance_runtime_authority_resolution_003.sql"
+      ],
+      "original_problem": "Authority lineage for the DB governance runtime bootstrap migration was missing.",
+      "current_substantive_problem": "Whether the bootstrap migration still participates as a live authority-relevant surface after later runtime migrations explicitly superseded it.",
+      "current_authority_roles": [
+        "DB_RUNTIME",
+        "EXPLICIT_NON_AUTHORITATIVE",
+        "SUPERSEDED_BOOTSTRAP_SURFACE"
+      ],
+      "relevant_lineage_or_supersession_evidence": [
+        "python -m scripts.query_governance authority --target registry/db/migrations/20260703_governance_runtime_bootstrap_001.sql --level summary --json returns supersession.status=superseded and superseded_by current_state_002 plus authority_resolution_003.",
+        "registry/db/migrations/20260703_governance_runtime_authority_resolution_003.sql explicitly states the bootstrap migration is superseded and should not be treated as the live authority surface."
+      ],
+      "later_governance_effect": "Later role-aware governance and typed supersession semantics already isolate the bootstrap migration as non-live lineage residue within the DB runtime chain.",
+      "classification": "PROSPECTIVELY_CLOSABLE_WITH_PROOF",
+      "classification_reason": "The current governed state already proves the needed lineage relation: bootstrap is superseded by later runtime migrations, so no live unresolved descent question remains if a bounded closure patch records that proof.",
+      "global_blocking_status": "BLOCKING_UNCHANGED",
+      "recommended_next_action": "Prepare a bounded prospective-closure patch that records the proven supersession chain without changing any authority assignment."
+    },
+    {
+      "local_q2_id": "Q2-LIN-002",
+      "global_ambiguity_id": "AMB-GOV-SURF-0667",
+      "original_surfaces": [
+        "registry/db/migrations/20260703_governance_runtime_context_capsule_006.sql"
+      ],
+      "current_surfaces": [
+        "registry/db/migrations/20260703_governance_runtime_context_capsule_006.sql",
+        "scripts/query_governance.py",
+        "outputs/governance/context_capsules/governed_context_capsule_v1/"
+      ],
+      "original_problem": "Authority lineage for the context-capsule runtime migration was missing.",
+      "current_substantive_problem": "Whether a live DB runtime context-capsule projection is being mistaken for an authority-bearing source rather than a projection-layer surface.",
+      "current_authority_roles": [
+        "DB_RUNTIME",
+        "DB_PROJECTION_LAYER",
+        "EXPLICIT_NON_AUTHORITATIVE"
+      ],
+      "relevant_lineage_or_supersession_evidence": [
+        "python -m scripts.query_governance authority --target registry/db/migrations/20260703_governance_runtime_context_capsule_006.sql --level summary --json returns allow under db_runtime with no missing predecessor-successor relation.",
+        "registry/db/README.md defines the DB as a projection layer and states the context capsule is a runtime entrypoint, not a registry SSOT."
+      ],
+      "later_governance_effect": "Role-aware runtime governance now treats the surface as a live DB runtime projection, which removes the original lineage framing.",
+      "classification": "OUTSIDE_Q2_SCOPE_Q4",
+      "classification_reason": "The surviving unresolved issue is source-versus-projection boundary discipline, not authority inheritance or supersession uncertainty.",
+      "global_blocking_status": "BLOCKING_UNCHANGED",
+      "recommended_next_action": "Reclassify into Q4 generated or projection boundary work."
+    },
+    {
+      "local_q2_id": "Q2-LIN-003",
+      "global_ambiguity_id": "AMB-GOV-SURF-0668",
+      "original_surfaces": [
+        "registry/db/migrations/20260703_governance_runtime_current_state_002.sql"
+      ],
+      "current_surfaces": [
+        "registry/db/migrations/20260703_governance_runtime_current_state_002.sql",
+        "scripts/query_governance.py",
+        "outputs/governance/context_capsules/governed_context_capsule_v1/"
+      ],
+      "original_problem": "Authority lineage for the current-state runtime migration was missing.",
+      "current_substantive_problem": "Whether the live current-state runtime projection is being confused with primary governed source state.",
+      "current_authority_roles": [
+        "DB_RUNTIME",
+        "LIVE_CURRENT_STATE_PROJECTION",
+        "EXPLICIT_NON_AUTHORITATIVE"
+      ],
+      "relevant_lineage_or_supersession_evidence": [
+        "python -m scripts.query_governance authority --target registry/db/migrations/20260703_governance_runtime_current_state_002.sql --level summary --json returns allow with supersession.status=current.",
+        "registry/db/README.md states the DB runtime is a gate and projection layer, not a semantic or claim-status SSOT."
+      ],
+      "later_governance_effect": "Later governance positively classifies this migration as the current runtime projection for state queries, replacing the older unresolved-lineage framing.",
+      "classification": "OUTSIDE_Q2_SCOPE_Q4",
+      "classification_reason": "The current defect class is projection-boundary confusion, not missing lineage.",
+      "global_blocking_status": "BLOCKING_UNCHANGED",
+      "recommended_next_action": "Reclassify into Q4 generated or projection boundary work."
+    },
+    {
+      "local_q2_id": "Q2-LIN-004",
+      "global_ambiguity_id": "AMB-GOV-SURF-0672",
+      "original_surfaces": [
+        "registry/db/migrations/20260703_governance_runtime_freshness_gate_010.sql"
+      ],
+      "current_surfaces": [
+        "registry/db/migrations/20260703_governance_runtime_freshness_gate_010.sql",
+        "scripts/query_governance.py",
+        "registry/db/README.md"
+      ],
+      "original_problem": "Authority lineage for the freshness-gate runtime migration was missing.",
+      "current_substantive_problem": "Whether the live freshness gate projection is being mistaken for primary authority instead of a runtime view over source-affecting drift.",
+      "current_authority_roles": [
+        "DB_RUNTIME",
+        "LIVE_FRESHNESS_PROJECTION",
+        "EXPLICIT_NON_AUTHORITATIVE"
+      ],
+      "relevant_lineage_or_supersession_evidence": [
+        "python -m scripts.query_governance authority --target registry/db/migrations/20260703_governance_runtime_freshness_gate_010.sql --level summary --json returns allow under db_runtime with supersession.status=current.",
+        "registry/db/README.md explains freshness as a runtime projection over snapshot metadata and source-affecting changes."
+      ],
+      "later_governance_effect": "The surface is now explicitly typed as a live DB freshness projection rather than an unplaced lineage record.",
+      "classification": "OUTSIDE_Q2_SCOPE_Q4",
+      "classification_reason": "The surviving issue is projection-boundary handling for freshness state, not descent or provenance of authority.",
+      "global_blocking_status": "BLOCKING_UNCHANGED",
+      "recommended_next_action": "Reclassify into Q4 generated or projection boundary work."
+    },
+    {
+      "local_q2_id": "Q2-LIN-005",
+      "global_ambiguity_id": "AMB-GOV-SURF-0678",
+      "original_surfaces": [
+        "registry/db/schema.sql"
+      ],
+      "current_surfaces": [
+        "registry/db/schema.sql",
+        "registry/db/acellorator_index.sqlite",
+        "registry/db/migrations/"
+      ],
+      "original_problem": "Authority lineage for the DB schema surface was missing.",
+      "current_substantive_problem": "Whether the DB schema should be mistaken for an authority-bearing source when the runtime instead treats it as projection-layer substrate.",
+      "current_authority_roles": [
+        "DB_PROJECTION_LAYER",
+        "EXPLICIT_NON_AUTHORITATIVE",
+        "NO_MATCHED_RUNTIME_AUTHORITY_SURFACE"
+      ],
+      "relevant_lineage_or_supersession_evidence": [
+        "python -m scripts.query_governance authority --target registry/db/schema.sql --level summary --json returns defer with no governed authority surface matched.",
+        "registry/db/README.md defines schema.sql inside the projection layer whose canonical authority remains elsewhere."
+      ],
+      "later_governance_effect": "Later governance narrows the issue to projection-layer boundary rather than unresolved lineage between authorities.",
+      "classification": "OUTSIDE_Q2_SCOPE_Q4",
+      "classification_reason": "The substantive problem is still source-versus-projection confusion, not authority inheritance.",
+      "global_blocking_status": "BLOCKING_UNCHANGED",
+      "recommended_next_action": "Reclassify into Q4 generated or projection boundary work."
+    },
+    {
+      "local_q2_id": "Q2-LIN-006",
+      "global_ambiguity_id": "AMB-GOV-SURF-0875",
+      "original_surfaces": [
+        "registry/governance/schemas/RUN_MANIFEST_V1.json"
+      ],
+      "current_surfaces": [
+        "registry/governance/schemas/RUN_MANIFEST_V1.json",
+        "registry/governance/living_falsification_campaign_registry.json"
+      ],
+      "original_problem": "Authority lineage for the run-manifest schema was missing.",
+      "current_substantive_problem": "Whether the active run-manifest schema is being confused with live campaign-state or audit-trail authority rather than treated as a bounded execution schema.",
+      "current_authority_roles": [
+        "GOVERNANCE_REGISTRY_SCHEMA",
+        "EXPLICIT_NON_AUTHORITATIVE",
+        "NO_MATCHED_RUNTIME_AUTHORITY_SURFACE"
+      ],
+      "relevant_lineage_or_supersession_evidence": [
+        "docs/audit.json classifies RUN_MANIFEST_V1 as a canonical run manifest schema with scope simulation campaign execution only.",
+        "registry/governance/living_falsification_campaign_registry.json records historical campaign status transitions and cites RUN_MANIFEST_V1 as a source artifact for schema activation.",
+        "python -m scripts.query_governance authority --target registry/governance/schemas/RUN_MANIFEST_V1.json --level summary --json returns defer with no governed authority surface matched."
+      ],
+      "later_governance_effect": "Later governance preserves the schema as active and campaign-scoped, while campaign state and route decisions live in the falsification registry rather than in the schema itself.",
+      "classification": "OUTSIDE_Q2_SCOPE_Q3",
+      "classification_reason": "The surviving unresolved issue is distinguishing active schema constraints from live or historical campaign-state records, not proving predecessor-successor authority descent.",
+      "global_blocking_status": "BLOCKING_UNCHANGED",
+      "recommended_next_action": "Reclassify into Q3 live-versus-record or history classification work."
+    },
+    {
+      "local_q2_id": "Q2-LIN-007",
+      "global_ambiguity_id": "AMB-GOV-SURF-0952",
+      "original_surfaces": [
+        "scripts/db/__pycache__/orientation_scoring.cpython-312.pyc"
+      ],
+      "current_surfaces": [
+        "scripts/db/__pycache__/orientation_scoring.cpython-312.pyc",
+        "scripts/db/orientation_scoring.py"
+      ],
+      "original_problem": "Authority lineage for compiled orientation-scoring bytecode was missing.",
+      "current_substantive_problem": "Whether compiled bytecode residue can still participate in the live control plane as anything more than a generated byproduct of a non-authoritative helper script.",
+      "current_authority_roles": [
+        "COMPILED_SCRIPT_RESIDUE",
+        "EXPLICIT_NON_AUTHORITATIVE",
+        "NO_MATCHED_RUNTIME_AUTHORITY_SURFACE"
+      ],
+      "relevant_lineage_or_supersession_evidence": [
+        "python -m scripts.query_governance authority --target scripts/db/__pycache__/orientation_scoring.cpython-312.pyc --level summary --json returns defer with no governed authority surface matched.",
+        "The file is a cpython-versioned compiled artifact under __pycache__ and has no dependents in the governed surface inventory."
+      ],
+      "later_governance_effect": "Role-aware authority classification and the surrounding retrieval-domain work make the bytecode artifact non-participatory in live authority resolution.",
+      "classification": "OBSOLETE_RESIDUE",
+      "classification_reason": "The item is compiled residue with no live authority role and no remaining lineage question that affects the current control plane.",
+      "global_blocking_status": "BLOCKING_UNCHANGED",
+      "recommended_next_action": "Prepare a bounded obsolete-residue retirement patch if the family wants to drain residue before deeper reclassification work."
+    },
+    {
+      "local_q2_id": "Q2-LIN-008",
+      "global_ambiguity_id": "AMB-GOV-SURF-0953",
+      "original_surfaces": [
+        "scripts/db/__pycache__/orientation_scoring.cpython-314.pyc"
+      ],
+      "current_surfaces": [
+        "scripts/db/__pycache__/orientation_scoring.cpython-314.pyc",
+        "scripts/db/orientation_scoring.py"
+      ],
+      "original_problem": "Authority lineage for compiled orientation-scoring bytecode was missing.",
+      "current_substantive_problem": "Whether compiled bytecode residue for a different interpreter version can still participate in the live control plane as anything more than a generated byproduct of a non-authoritative helper script.",
+      "current_authority_roles": [
+        "COMPILED_SCRIPT_RESIDUE",
+        "EXPLICIT_NON_AUTHORITATIVE",
+        "NO_MATCHED_RUNTIME_AUTHORITY_SURFACE"
+      ],
+      "relevant_lineage_or_supersession_evidence": [
+        "python -m scripts.query_governance authority --target scripts/db/__pycache__/orientation_scoring.cpython-314.pyc --level summary --json returns defer with no governed authority surface matched.",
+        "The file is a cpython-versioned compiled artifact under __pycache__ and has no dependents in the governed surface inventory."
+      ],
+      "later_governance_effect": "Role-aware authority classification and the surrounding retrieval-domain work make the bytecode artifact non-participatory in live authority resolution.",
+      "classification": "OBSOLETE_RESIDUE",
+      "classification_reason": "The item is compiled residue with no live authority role and no remaining lineage question that affects the current control plane.",
+      "global_blocking_status": "BLOCKING_UNCHANGED",
+      "recommended_next_action": "Prepare a bounded obsolete-residue retirement patch paired with its sibling compiled artifact if desired."
+    },
+    {
+      "local_q2_id": "Q2-LIN-009",
+      "global_ambiguity_id": "AMB-GOV-SURF-0967",
+      "original_surfaces": [
+        "scripts/db/orientation_scoring.py"
+      ],
+      "current_surfaces": [
+        "scripts/db/orientation_scoring.py",
+        "scripts/orientation_retrieval.py"
+      ],
+      "original_problem": "Authority lineage for the orientation-scoring helper script was missing.",
+      "current_substantive_problem": "Whether an advisory retrieval-scoring helper is being confused with an authority-bearing source rather than treated as support logic for retrieval ranking.",
+      "current_authority_roles": [
+        "RETRIEVAL_SCORING_SUPPORT",
+        "EXPLICIT_NON_AUTHORITATIVE",
+        "NO_MATCHED_RUNTIME_AUTHORITY_SURFACE"
+      ],
+      "relevant_lineage_or_supersession_evidence": [
+        "scripts/db/orientation_scoring.py only defines weighting logic used by scripts/orientation_retrieval.py.",
+        "python -m scripts.query_governance authority --target scripts/orientation_retrieval.py --level summary --json returns defer with no governed authority surface matched.",
+        "outputs/governance_inventory/q0_retrieval_domain_residue_retirement_inventory.json already classifies the retrieval utility family as outside live Q0 authority resolution."
+      ],
+      "later_governance_effect": "Later governance isolates the retrieval family from role-bearing authority resolution, which removes the original lineage framing for this helper script.",
+      "classification": "OUTSIDE_Q2_SCOPE_Q4",
+      "classification_reason": "The surviving problem is retrieval or generated-boundary handling for advisory scoring output, not authority descent.",
+      "global_blocking_status": "BLOCKING_UNCHANGED",
+      "recommended_next_action": "Reclassify into Q4 generated-view or retrieval-boundary work."
+    }
+  ],
+  "current_q2_classification": {
+    "LIVE_UNRESOLVED_Q2_AUTHORITY_LINEAGE_AMBIGUITY": [],
+    "NEUTRALIZED_BY_EXISTING_GOVERNANCE": [],
+    "PROSPECTIVELY_CLOSABLE_WITH_PROOF": [
+      "AMB-GOV-SURF-0666"
+    ],
+    "OBSOLETE_RESIDUE": [
+      "AMB-GOV-SURF-0952",
+      "AMB-GOV-SURF-0953"
+    ],
+    "OUTSIDE_Q2_SCOPE_Q3": [
+      "AMB-GOV-SURF-0875"
+    ],
+    "OUTSIDE_Q2_SCOPE_Q4": [
+      "AMB-GOV-SURF-0667",
+      "AMB-GOV-SURF-0668",
+      "AMB-GOV-SURF-0672",
+      "AMB-GOV-SURF-0678",
+      "AMB-GOV-SURF-0967"
+    ],
+    "OUTSIDE_Q2_SCOPE_Q5": [],
+    "INSUFFICIENT_EVIDENCE": []
+  },
+  "neutralized_items": [],
+  "obsolete_residue": [
+    "AMB-GOV-SURF-0952",
+    "AMB-GOV-SURF-0953"
+  ],
+  "misclassified_items": [
+    {
+      "ambiguity_id": "AMB-GOV-SURF-0667",
+      "destination_family": "Q4_GENERATED_VIEW_BOUNDARY"
+    },
+    {
+      "ambiguity_id": "AMB-GOV-SURF-0668",
+      "destination_family": "Q4_GENERATED_VIEW_BOUNDARY"
+    },
+    {
+      "ambiguity_id": "AMB-GOV-SURF-0672",
+      "destination_family": "Q4_GENERATED_VIEW_BOUNDARY"
+    },
+    {
+      "ambiguity_id": "AMB-GOV-SURF-0678",
+      "destination_family": "Q4_GENERATED_VIEW_BOUNDARY"
+    },
+    {
+      "ambiguity_id": "AMB-GOV-SURF-0875",
+      "destination_family": "Q3_LIVE_PROPOSAL_HISTORY_CLASSIFICATION"
+    },
+    {
+      "ambiguity_id": "AMB-GOV-SURF-0967",
+      "destination_family": "Q4_GENERATED_VIEW_BOUNDARY"
+    }
+  ],
+  "live_q2_items": [],
+  "conflict_components": {
+    "component_count": 4,
+    "components": [
+      {
+        "component_id": "Q2-076-C01",
+        "member_ids": [
+          "AMB-GOV-SURF-0666"
+        ],
+        "component_type": "PROSPECTIVE_SUPERSESSION_CLOSURE",
+        "component_status": "NO_LONGER_LIVE_Q2",
+        "rationale": "The bootstrap migration is a singleton whose current issue is already-proven supersession by later runtime migrations."
+      },
+      {
+        "component_id": "Q2-076-C02",
+        "member_ids": [
+          "AMB-GOV-SURF-0667",
+          "AMB-GOV-SURF-0668",
+          "AMB-GOV-SURF-0672",
+          "AMB-GOV-SURF-0678"
+        ],
+        "component_type": "DB_RUNTIME_PROJECTION_BOUNDARY",
+        "component_status": "MISCLASSIFIED_OUT_OF_Q2",
+        "rationale": "These items all belong to the DB projection layer and their remaining ambiguity is source-versus-projection handling rather than authority lineage."
+      },
+      {
+        "component_id": "Q2-076-C03",
+        "member_ids": [
+          "AMB-GOV-SURF-0875"
+        ],
+        "component_type": "CAMPAIGN_SCHEMA_VERSUS_STATE_CLASSIFICATION",
+        "component_status": "MISCLASSIFIED_OUT_OF_Q2",
+        "rationale": "The run-manifest schema is active but non-authoritative; the current question is distinguishing execution schema from live or historical campaign-state records."
+      },
+      {
+        "component_id": "Q2-076-C04",
+        "member_ids": [
+          "AMB-GOV-SURF-0952",
+          "AMB-GOV-SURF-0953",
+          "AMB-GOV-SURF-0967"
+        ],
+        "component_type": "RETRIEVAL_SCORING_SUPPORT_AND_RESIDUE",
+        "component_status": "NOT_LIVE_Q2",
+        "rationale": "The compiled bytecode surfaces are obsolete residue and the source helper is advisory retrieval-support code outside the governed authority catalog."
+      }
+    ]
+  },
+  "recommended_first_resolution_component": {
+    "selection_result": "NO_LIVE_Q2_COMPONENT",
+    "selected_component_id": null,
+    "reason": "No item remains a genuinely live unresolved Q2 authority-lineage ambiguity after current-state refresh.",
+    "next_bounded_target_if_family_cleanup_continues": {
+      "component_id": "Q2-076-C01",
+      "member_ids": [
+        "AMB-GOV-SURF-0666"
+      ],
+      "mode": "PROSPECTIVE_CLOSURE_WITH_PROOF_ONLY",
+      "reason": "The bootstrap supersession claim is already proven by live runtime evidence and is the smallest safe next patch if the program wants to drain residual nominal-Q2 items before broader reclassification."
+    }
+  },
+  "global_accounting_preservation": {
+    "q1_local_queue": 0,
+    "global_blocking_ambiguities_before": 487,
+    "global_blocking_ambiguities_after": 487,
+    "ambiguities_resolved": 0,
+    "ambiguities_closed": 0,
+    "patch_002_status": "PARTIAL",
+    "patch_002_authority_effect": "NONE",
+    "full_project_validation_status": "SUSPENDED_PENDING_VALIDATOR_DEPARTMENT_COMPLETION",
+    "full_project_validation_run": false
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "schema_id": "q1_governed_context_capsule_supporting_validator_scope_resolution_v1",
+  "generated_at": "2026-07-15T15:20:00-04:00",
+  "source_analysis_patch": "PATCH_GOVERNANCE_Q1_REMAINING_VALIDATION_AUTHORITY_CLUSTER_SELECTION_066",
+  "resolved_q1_item_ids": [
+    "Q1-VAL-008"
+  ],
+  "resolved_global_ambiguity_ids": [
+    "AMB-GOV-SURF-1032"
+  ],
+  "state_verification": {
+    "q1_val_008_still_live_unresolved": true,
+    "q1_val_007_still_residue_only": true,
+    "q1_val_009_still_residue_only": true,
+    "candidate_surface_drift_detected": false,
+    "newer_patch_assigns_terminal_or_invocation_authority": false,
+    "full_validation_suspension_still_active": true
+  },
+  "role_per_candidate_surface": {
+    "tests/test_governed_context_capsule_v1.py": {
+      "resolved_role": "SUPPORTING_VALIDATOR",
+      "proof_basis": [
+        "The test imports scripts.query_governance and exercises only governed-context-capsule schema, cache, and payload invariants.",
+        "Explicit runtime lookup now allows SUPPORTING_VALIDATOR for this target and blocks VALIDATION_INVOCATION_AUTHORITY and VALIDATION_REDUCTION_AUTHORITY.",
+        "The test emits ordinary unit-test pass/fail evidence only and contains no registry write or terminal status reduction path."
+      ],
+      "allowed_authority_effects": [
+        "exercise schema-conformance behavior",
+        "assert bounded invariants",
+        "emit test pass or fail evidence",
+        "contribute supporting validation evidence"
+      ],
+      "prohibited_authority_effects": [
+        "become VALIDATION_INVOCATION_AUTHORITY",
+        "emit terminal project validation status",
+        "become VALIDATION_REDUCTION_AUTHORITY",
+        "write authoritative registry state",
+        "promote its own test output into live authority",
+        "override the full-validation suspension"
+      ]
+    },
+    "schemas/governed_context_capsule_v1.schema.json": {
+      "resolved_role": "SCHEMA_CONSTRAINT_SURFACE",
+      "proof_basis": [
+        "The schema defines the governed-context-capsule payload contract but contains no executable invocation, reduction, or write path.",
+        "Explicit runtime lookup now allows SCHEMA_CONSTRAINT_SURFACE and blocks generic authority collapse.",
+        "The schema is consumed by scripts.query_governance builders and the supporting-validator test as a constraint surface only."
+      ]
+    },
+    "scripts/query_governance.py": {
+      "resolved_role": "ROLE_AWARE_AUTHORITY_QUERY_SURFACE",
+      "proof_basis": [
+        "The script resolves governed authority information through explicit role-aware lookup and returns diagnostic/runtime capsules.",
+        "Explicit runtime lookup now classifies the surface as ROLE_AWARE_AUTHORITY_QUERY_SURFACE instead of collapsing it into GENERATED_EVIDENCE.",
+        "The script does not become validation invocation or terminal reduction authority by answering authority queries."
+      ]
+    }
+  },
+  "live_authority_leakage_review": {
+    "result": "NO_LIVE_AUTHORITY_LEAKAGE",
+    "checks": [
+      {
+        "check": "test result consumed directly as terminal governance status",
+        "result": false,
+        "reason": "scripts/global_validate.py remains the only canonical invocation and terminal reducer path."
+      },
+      {
+        "check": "schema validation result promoted directly to registry state authority",
+        "result": false,
+        "reason": "The schema constrains payload shape only and has no direct registry write path."
+      },
+      {
+        "check": "test module used as canonical validation invocation",
+        "result": false,
+        "reason": "Runtime lookup blocks VALIDATION_INVOCATION_AUTHORITY for the test target."
+      },
+      {
+        "check": "test module or schema assigned VALIDATION_REDUCTION_AUTHORITY",
+        "result": false,
+        "reason": "Runtime lookup blocks VALIDATION_REDUCTION_AUTHORITY for the test target and does not classify the schema as a reducer."
+      },
+      {
+        "check": "test-generated output used as live authority without role-aware resolution",
+        "result": false,
+        "reason": "The selected test emits supporting evidence only and no downstream registry authority path was found."
+      },
+      {
+        "check": "query_governance returning the test or schema as a live validation authority",
+        "result": false,
+        "reason": "Generic lookup blocks and explicit role-aware lookup returns SUPPORTING_VALIDATOR or SCHEMA_CONSTRAINT_SURFACE instead."
+      }
+    ]
+  },
+  "enforcement_changes_applied": [
+    {
+      "path": "tools/runtime_authority/__init__.py",
+      "change_type": "MINIMAL_BOUNDARY_EXPLICITNESS",
+      "effect": "Adds explicit SUPPORTING_VALIDATOR, SCHEMA_CONSTRAINT_SURFACE, and ROLE_AWARE_AUTHORITY_QUERY_SURFACE runtime classifications and mismatch blocking for the selected surfaces."
+    }
+  ],
+  "q1_item_resolution": {
+    "Q1-VAL-008": {
+      "ambiguity_id": "AMB-GOV-SURF-1032",
+      "resolution": "RESOLVED_BY_BOUNDED_SUPPORTING_VALIDATOR_SCOPE",
+      "resolution_statement": "tests/test_governed_context_capsule_v1.py is a bounded supporting validator for governed-context-capsule behavior. It may produce supporting test evidence but has no independent validation invocation authority, no terminal reduction authority, no registry write authority, and no authority to promote its outputs into live governance state.",
+      "closure_decision": "PROSPECTIVELY_RESOLVED"
+    }
+  },
+  "counts": {
+    "q1_count_before": 7,
+    "q1_count_after": 6,
+    "global_blocking_ambiguity_count_before": 491,
+    "global_blocking_ambiguity_count_after": 490
+  },
+  "patch_002_state": {
+    "status": "PARTIAL",
+    "authority_effect": "NONE",
+    "changed": false
+  },
+  "full_project_validation_status": "SUSPENDED_PENDING_VALIDATOR_DEPARTMENT_COMPLETION"
+}

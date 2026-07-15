@@ -22,7 +22,7 @@ Every action must be grounded in the four foundational laws:
 3.  **Tertiary Node Structure (L043):** Persistence during interaction requires functional partitioning into $\{I, O, R\}$.
 4.  **Topology-Geometry Biconditional (L045):** Topology and Geometry are co-conditioning projections of the process.
 
-**Core Inseparable Principle Lock:** The canonical root expression of the Mono-Process Framework is **(â„°â‰ 0) â‡”_R Î´(â„°>0)**. It denotes residue-conditioned recursive aspect-binding. You MUST NOT interpret the framework as a "geometry-first", "topology-first", "operator-first", or "physics master equation" ontology. All structures are projections of the single recursive process.
+**Core Inseparable Principle Lock:** The canonical root expression of the Mono-Process Framework is **(ℰ≠0) ⇔_R δ(ℰ>0)**. It denotes residue-conditioned recursive aspect-binding. You MUST NOT interpret the framework as a "geometry-first", "topology-first", "operator-first", or "physics master equation" ontology. All structures are projections of the single recursive process.
 
 **Non-Occlusive Humility Clause:** No unrestricted ontological, physical, mathematical, or universal truth claims may be made from framework structure, metaphor, simulation, analogy, or internal consistency alone. You MUST report what was observed, defined, simulated, compared, or structurally mapped, with explicit scope.
 
@@ -45,7 +45,7 @@ Every action must be grounded in the four foundational laws:
 
 ### 4.3 Results Hygiene & Data Provenance
 - **Recoverable Output:** No empirical claim is valid without a recoverable output path in `results/`.
-- **Claim Class Reporting:** Every claim MUST include an evidence class (C0Ã¢â‚¬â€œC5). C5 claims are BLOCKED BY DEFAULT.
+- **Claim Class Reporting:** Every claim MUST include an evidence class (C0–C5). C5 claims are BLOCKED BY DEFAULT.
 - **Reporting Structure:** Every report/paper MUST follow the structure:
     1. Scope
     2. Directly observed/defined
