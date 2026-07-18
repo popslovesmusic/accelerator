@@ -96,7 +96,7 @@ def check_integrity(root=Path(".")):
                 warnings.append(f"Governance asset addition approved via change ledger: {rel_path}")
             else:
                 errors.append(f"New governance asset unregistered in baseline hash registry and lacks approved change ledger entry: {rel_path}")
-        elif current_hash != baseline_hash:
+        elif current_hash.lower() != baseline_hash.lower():
             # Asset is modified
             approved = False
             for entry in ledger_entries:

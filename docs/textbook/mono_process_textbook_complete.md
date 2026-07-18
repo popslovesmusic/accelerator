@@ -4143,6 +4143,9 @@ The live mathematics proof package is reduced to artifact synchronization and pr
 - **MT-001:** Formal proof artifact and verification artifact are recorded as `formal`; the underlying verification evidence remains `symbolic_verified_under_assumptions`.
 - **MT-002:** Formal proof artifact and verification artifact are recorded as `formal`; the underlying verification evidence remains `symbolic_verified_under_assumptions`.
 - **MT-003:** Formal proof artifact and verification artifact are recorded as `formal`; the underlying verification evidence remains `symbolic_verified_under_assumptions`.
+- **MT-OP-001:** Operator Composition Stability Lemma is verified under campaign `MPF_OP_DYNAMICS_CAMPAIGN_RUN_001` and proof `P_OP_001`.
+- **MT-OP-002:** Selection Reconstruction Bounds Lemma is verified under campaign `MPF_OP_DYNAMICS_CAMPAIGN_RUN_001` and proof `P_OP_002`.
+- **MT-RT-001:** Red-Team Attack Campaign Wave 1 is verified as `PROVISIONALLY_SURVIVES` under campaign `RT-REDTEAM-001`.
 - **Blocker state:** The promotion blockers for MT-001, MT-002, and MT-003 are formalized and mapped in `registry/math/theorem_blocker_resolution_registry.json`. The promotion gate has been cleared by explicit user authorization.
 - **RC-001 closure state:** The derivation closure registry records `derivation_supported` with both steps supported and `ready_for_closure: true`; the remaining blocker registry retains only scoped residual `GAP-001` for non-local CSI sum convergence under RC-017 CMC-002/CMC-006. [Source: `registry/math/rc001_derivation_closure_registry.json`; `registry/math/rc001_remaining_blocker_registry.json`]
 - **Governance note:** This reduction updates proof-package bookkeeping and theorem promotion state in the governed registries.

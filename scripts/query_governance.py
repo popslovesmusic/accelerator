@@ -78,7 +78,13 @@ except ImportError:
 try:
     from tools.runtime_authority import (
         ROLE_IDS as Q0_ROLE_IDS,
+        classify_patch_record_closeout_work_package,
+        classify_patch_record_deterministic_routing_component,
+        classify_patch_record_executed_pass_boundary,
         classify_patch_record_explicit_none_authority_effect,
+        classify_patch_record_historical_applied,
+        classify_generated_view_component,
+        classify_duplicate_identity_component,
         classify_patch_record_lifecycle,
         classify_target_role,
         get_authority_by_role,
@@ -89,7 +95,13 @@ except ImportError:
         sys.path.append(str(ROOT))
     from tools.runtime_authority import (
         ROLE_IDS as Q0_ROLE_IDS,
+        classify_patch_record_closeout_work_package,
+        classify_patch_record_deterministic_routing_component,
+        classify_patch_record_executed_pass_boundary,
         classify_patch_record_explicit_none_authority_effect,
+        classify_patch_record_historical_applied,
+        classify_generated_view_component,
+        classify_duplicate_identity_component,
         classify_patch_record_lifecycle,
         classify_target_role,
         get_authority_by_role,
@@ -4721,6 +4733,31 @@ def classify_authority_target(target):
             ],
         }
 
+    executed_pass_boundary = classify_patch_record_executed_pass_boundary(normalized_target)
+    if executed_pass_boundary is not None:
+        status = executed_pass_boundary["status"]
+        return {
+            "authority_owner": "registry",
+            "authority_source": normalized_target,
+            "supersession_status": "current",
+            "superseded_by": [],
+            "conflict_state": "mixed",
+            "decision": "defer",
+            "reason": (
+                "Executed or PASS proposal patch records are preserved and queryable but are not eligible for live authority lookup "
+                "without an explicit governed lifecycle transition."
+            ),
+            "evidence_paths": [
+                normalized_target,
+                "registry/governance_change_ledger.json",
+                "registry/research_debt_registry.json",
+                "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+            ],
+            "warnings": [
+                f"Patch record status '{status}' represents process execution or validation state only and does not constitute a lifecycle transition or live authority grant.",
+            ],
+        }
+
     explicit_none_authority_effect_patch = classify_patch_record_explicit_none_authority_effect(normalized_target)
     if explicit_none_authority_effect_patch is not None:
         status = explicit_none_authority_effect_patch.get("status")
@@ -4743,6 +4780,116 @@ def classify_authority_target(target):
             "warnings": [
                 f"Patch record status '{status}' does not override explicit authority_effect=NONE.",
             ],
+        }
+
+    closeout_work_package_patch = classify_patch_record_closeout_work_package(normalized_target)
+    if closeout_work_package_patch is not None:
+        status = closeout_work_package_patch.get("status")
+        return {
+            "authority_owner": "registry",
+            "authority_source": normalized_target,
+            "supersession_status": "current",
+            "superseded_by": [],
+            "conflict_state": "mixed",
+            "decision": "defer",
+            "reason": (
+                "Closeout/work-package patch records that aggregate predecessor verification and accounting evidence are not eligible "
+                "for live authority lookup. Independently governed predecessor and implementation surfaces remain queryable under their own roles."
+            ),
+            "evidence_paths": [
+                normalized_target,
+                "reports/inference-conservation-final-audit.json",
+                "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+            ],
+            "warnings": [
+                f"Patch record status '{status}' is preserved for closeout, history, rollback, and accounting purposes only.",
+            ],
+        }
+
+    deterministic_routing_patch = classify_patch_record_deterministic_routing_component(normalized_target)
+    if deterministic_routing_patch is not None:
+        status = deterministic_routing_patch.get("status")
+        return {
+            "authority_owner": "registry",
+            "authority_source": normalized_target,
+            "supersession_status": "current",
+            "superseded_by": [],
+            "conflict_state": "mixed",
+            "decision": "defer",
+            "reason": (
+                "Deterministic routing component patch records that aggregate codebase-specific implementation and validation evidence "
+                "are not eligible for live authority lookup. Independently governed predecessor, implementation, and runtime surfaces "
+                "remain queryable under their own roles."
+            ),
+            "evidence_paths": [
+                normalized_target,
+                "registry/governance_change_ledger.json",
+                "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+            ],
+            "warnings": [
+                f"Patch record status '{status}' is preserved for implementation, verification, and trace purposes only.",
+            ],
+        }
+
+    historical_applied_patch = classify_patch_record_historical_applied(normalized_target)
+    if historical_applied_patch is not None:
+        status = historical_applied_patch.get("status")
+        return {
+            "authority_owner": "registry",
+            "authority_source": normalized_target,
+            "supersession_status": "current",
+            "superseded_by": [],
+            "conflict_state": "mixed",
+            "decision": "defer",
+            "reason": (
+                "Applied patch records are preserved historical records of change execution and are not eligible "
+                "for live authority lookup. Independently governed predecessor, implementation, and runtime surfaces "
+                "remain queryable under their own roles."
+            ),
+            "evidence_paths": [
+                normalized_target,
+                "registry/governance_change_ledger.json",
+                "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+            ],
+            "warnings": [
+                f"Patch record status '{status}' represents historical process execution and does not constitute a live authority lookup candidate.",
+            ],
+        }
+
+    gen_view = classify_generated_view_component(normalized_target)
+    if gen_view is not None:
+        return {
+            "authority_owner": gen_view.get("authority_owner"),
+            "authority_source": normalized_target,
+            "supersession_status": "current",
+            "superseded_by": [],
+            "conflict_state": "clear" if gen_view.get("decision") == "allow" else "blocked",
+            "decision": gen_view.get("decision"),
+            "reason": gen_view.get("reason"),
+            "evidence_paths": [
+                normalized_target,
+                "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+                "outputs/audits/global_health_report.json",
+            ],
+            "warnings": [],
+        }
+
+    dup_id = classify_duplicate_identity_component(normalized_target)
+    if dup_id is not None:
+        return {
+            "authority_owner": dup_id.get("authority_owner"),
+            "authority_source": normalized_target,
+            "supersession_status": "current",
+            "superseded_by": [],
+            "conflict_state": "blocked",
+            "decision": dup_id.get("decision"),
+            "reason": dup_id.get("reason"),
+            "evidence_paths": [
+                normalized_target,
+                "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+                "outputs/audits/global_health_report.json",
+            ],
+            "warnings": [],
         }
 
     fallback_rules = [

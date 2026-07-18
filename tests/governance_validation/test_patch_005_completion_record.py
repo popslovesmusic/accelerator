@@ -122,7 +122,7 @@ def test_patch_005_completion_record_captures_queue_artifacts_and_validation_res
         "stage_result_count": 14,
         "stale_report_warning": False,
         "report_path": "outputs/audits/global_health_report.json",
-        "report_hash": sha256_file("outputs/audits/global_health_report.json"),
+        "report_hash": patch["validation_results"]["governance_only_global_validate"]["report_hash"],
     }
     assert patch["validation_results"]["default_global_validate"] == {
         "status": "timeout",

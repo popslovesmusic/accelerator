@@ -38,8 +38,19 @@ def migrate():
     edges = unified["edges"]
 
     # 3. Migrate Tools
+    tool_index_path = root / "registry/tool_index.json"
+    entry_points = {}
+    if tool_index_path.exists():
+        with open(tool_index_path, 'r', encoding='utf-8') as f:
+            tool_index = json.load(f)
+            for t in tool_index:
+                if "tool_name" in t and "entry_point" in t:
+                    entry_points[t["tool_name"]] = t["entry_point"]
+
     for tool in data["tool"].get("tools", []):
         tid = tool["name"]
+        if tid in entry_points:
+            tool["entry_point"] = entry_points[tid]
         nodes[tid] = {
             "type": "tool",
             "status": tool.get("certification_level", "C0"),

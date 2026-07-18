@@ -5,7 +5,7 @@
     "path": "theory/lexicon/compliance_charter_v2_3.json",
     "version": "2.3",
     "notes": [
-      "This registry tracks lexicon evidence levels (L0\u00e2\u20ac\u201cL3) and also records charter-aware claim classifications and provenance.",
+      "This registry tracks lexicon evidence levels (L0â€“L3) and also records charter-aware claim classifications and provenance.",
       "If an entry is marked L3 here but does not meet the charter's v2.3 metric schema requirements, it must be treated as PROVISIONAL for charter purposes until rerun outputs are produced.",
       "Lexicon In Check is mandatory before THEORIST finalizes hypothesis.",
       "Lexicon Out Check is mandatory after RESEARCH_WRITER and before final claim gate."
@@ -72,7 +72,7 @@
       "canonical_source": "registry/lexicon_gap_queue.json",
       "aliases": [
         "theta",
-        "\u03b8"
+        "θ"
       ],
       "global_status": "partially_verified",
       "roles": {
@@ -332,16 +332,20 @@
       }
     },
     "Omega_R": {
-      "canonical_source": "registry/lexicon_gap_queue.json",
-      "global_status": "gap_open",
+      "canonical_source": "registry/lexicon_canonical.json",
+      "aliases": [
+        "Residue Orientation Functional"
+      ],
+      "global_status": "provisional",
       "roles": {
         "orientation_pressure_functional": {
           "status": "L0",
-          "operational_definition": "A functional mapping accumulated process residue (R) and orientation state (omega) to a local orientation pressure.",
-          "primitive_mapping": {
-            "residue": "R",
-            "orientation_minus_i": "omega"
-          }
+          "operational_definition": "Computes the orientation force induced by prior continuation residues.",
+          "mechanism_classes": [
+            "typed_formalism"
+          ],
+          "falsification": "functional_returns_zero_or_constant_value_regardless_of_residue_accumulation",
+          "evidence": []
         }
       }
     },
@@ -1177,25 +1181,37 @@
       }
     },
     "Org_a": {
-      "canonical_source": "registry/lexicon_gap_queue.json",
-      "global_status": "gap_open",
+      "canonical_source": "registry/lexicon_canonical.json",
+      "aliases": [
+        "Admissible Organization Operator"
+      ],
+      "global_status": "provisional",
       "roles": {
-        "generative_induction": {
+        "admissible_organization_operator": {
           "status": "L0",
-          "metrics": [],
-          "falsification": "admissibility_collapse",
+          "operational_definition": "Orders, couples, bounds, and deforms distinction-generating mismatches into recognizable signatures.",
+          "mechanism_classes": [
+            "typed_formalism"
+          ],
+          "falsification": "does_not_preserve_admissibility_or_collapse_to_static_label",
           "evidence": []
         }
       }
     },
     "Sigma_D": {
-      "canonical_source": "registry/lexicon_gap_queue.json",
-      "global_status": "gap_open",
+      "canonical_source": "registry/lexicon_canonical.json",
+      "aliases": [
+        "distinction-generating conditional mismatches"
+      ],
+      "global_status": "provisional",
       "roles": {
-        "generative_induction": {
+        "distinction_signature_layer": {
           "status": "L0",
-          "metrics": [],
-          "falsification": "admissibility_collapse",
+          "operational_definition": "An admissible organization of distinction-generating conditional mismatches.",
+          "mechanism_classes": [
+            "typed_formalism"
+          ],
+          "falsification": "signatures_do_not_remain_conditionally_distinct",
           "evidence": []
         }
       }
@@ -1365,7 +1381,7 @@
       "aliases": [
         "residue_conditioned_two_way_constraint",
         "residue-indexed biconditional",
-        "\u21d4_R"
+        "⇔_R"
       ],
       "global_status": "provisional",
       "roles": {
@@ -1384,7 +1400,7 @@
       "aliases": [
         "admissibility_projection",
         "Pi_A",
-        "\u03a0_A"
+        "Π_A"
       ],
       "global_status": "provisional",
       "roles": {
@@ -1727,60 +1743,6 @@
         }
       }
     },
-    "Omega_R": {
-      "canonical_source": "registry/lexicon_canonical.json",
-      "aliases": [
-        "Residue Orientation Functional"
-      ],
-      "global_status": "provisional",
-      "roles": {
-        "orientation_pressure_functional": {
-          "status": "L0",
-          "operational_definition": "Computes the orientation force induced by prior continuation residues.",
-          "mechanism_classes": [
-            "typed_formalism"
-          ],
-          "falsification": "functional_returns_zero_or_constant_value_regardless_of_residue_accumulation",
-          "evidence": []
-        }
-      }
-    },
-    "Org_a": {
-      "canonical_source": "registry/lexicon_canonical.json",
-      "aliases": [
-        "Admissible Organization Operator"
-      ],
-      "global_status": "provisional",
-      "roles": {
-        "admissible_organization_operator": {
-          "status": "L0",
-          "operational_definition": "Orders, couples, bounds, and deforms distinction-generating mismatches into recognizable signatures.",
-          "mechanism_classes": [
-            "typed_formalism"
-          ],
-          "falsification": "does_not_preserve_admissibility_or_collapse_to_static_label",
-          "evidence": []
-        }
-      }
-    },
-    "Sigma_D": {
-      "canonical_source": "registry/lexicon_canonical.json",
-      "aliases": [
-        "distinction-generating conditional mismatches"
-      ],
-      "global_status": "provisional",
-      "roles": {
-        "distinction_signature_layer": {
-          "status": "L0",
-          "operational_definition": "An admissible organization of distinction-generating conditional mismatches.",
-          "mechanism_classes": [
-            "typed_formalism"
-          ],
-          "falsification": "signatures_do_not_remain_conditionally_distinct",
-          "evidence": []
-        }
-      }
-    },
     "linearizable_continuation_aspect": {
       "canonical_source": "registry/governance/patches/MPF_DOMINANT_DOMAIN_LINEAR_NONLINEAR_001.json",
       "aliases": [
@@ -1924,673 +1886,784 @@
           "evidence": []
         }
       }
+    },
+    "-(i)": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "aliases": [
+        "orientation_minus_i",
+        "admissibility orientation"
+      ],
+      "global_status": "partially_verified",
+      "roles": {
+        "admissibility_orientation_selection": {
+          "status": "L2",
+          "operational_definition": "The mechanism by which forcing selects a path-dependent orientation.",
+          "mechanism_classes": [
+            "structural_box_sim_cpp",
+            "agent_based_sim_v1_cpp"
+          ],
+          "metrics": [
+            "alignment_success_rate",
+            "orientation_persistence"
+          ],
+          "evidence_id": "LEXICON-VAL-ORIENTATION-001",
+          "recoverable_output_paths": [
+            "results/2026-07-18_run080429_lexicon_l2_promotion/l2_promotion_report.json"
+          ],
+          "output_paths": [
+            "results/2026-07-18_run080429_lexicon_l2_promotion/l2_promotion_report.json"
+          ]
+        }
+      }
+    },
+    "corridor": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "aliases": [],
+      "global_status": "partially_verified",
+      "roles": {
+        "topological_process_constraint": {
+          "status": "L2",
+          "operational_definition": "A localized path of activity in a spatial grid.",
+          "mechanism_classes": [
+            "rd_moving_boundary_sim_v1",
+            "ca_admissibility_sim_v1_cpp"
+          ],
+          "metrics": [
+            "active_fraction",
+            "active_area"
+          ],
+          "evidence_id": "LEXICON-VAL-CORRIDOR-001",
+          "recoverable_output_paths": [
+            "results/2026-07-18_run080429_lexicon_l2_promotion/l2_promotion_report.json"
+          ],
+          "output_paths": [
+            "results/2026-07-18_run080429_lexicon_l2_promotion/l2_promotion_report.json"
+          ]
+        }
+      }
+    },
+    "Relational Superposition": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "aliases": [
+        "multi-continuation admissibility",
+        "pre-selection structure"
+      ],
+      "global_status": "partially_verified",
+      "roles": {
+        "computational_primitive": {
+          "status": "L2",
+          "operational_definition": "The maintenance of competing phase-coherent structures whose relative orientations determine interaction outcomes.",
+          "mechanism_classes": [
+            "structural_box_sim_cpp",
+            "igsoa_complex_1d_cpp"
+          ],
+          "metrics": [
+            "psi_squared_mean",
+            "alignment_success_rate"
+          ],
+          "evidence_id": "LEXICON-VAL-SUPERPOSITION-001",
+          "recoverable_output_paths": [
+            "results/2026-07-18_run080254_lexicon_l2_promotion_v2/l2_promotion_report.json",
+            "results/2026-07-18_run080429_lexicon_l2_promotion/l2_promotion_report.json"
+          ],
+          "output_paths": [
+            "results/2026-07-18_run080254_lexicon_l2_promotion_v2/l2_promotion_report.json",
+            "results/2026-07-18_run080429_lexicon_l2_promotion/l2_promotion_report.json"
+          ]
+        }
+      }
+    },
+    "Hysteretic Quantum-Like Computation (HQLC)": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "aliases": [
+        "HQLC",
+        "hysteretic computation",
+        "phase-coherent computation"
+      ],
+      "global_status": "partially_verified",
+      "roles": {
+        "computational_paradigm": {
+          "status": "L2",
+          "operational_definition": "The use of phase-sensitive interference and hysteretic threshold modification to perform state transitions.",
+          "mechanism_classes": [
+            "fsa_rule_engine_sim_v1_cpp",
+            "agent_based_sim_v1_cpp"
+          ],
+          "metrics": [
+            "active_count",
+            "order_parameter"
+          ],
+          "evidence_id": "LEXICON-VAL-HQLC-001",
+          "recoverable_output_paths": [
+            "results/2026-07-18_run080254_lexicon_l2_promotion_v2/l2_promotion_report.json"
+          ],
+          "output_paths": [
+            "results/2026-07-18_run080254_lexicon_l2_promotion_v2/l2_promotion_report.json"
+          ]
+        }
+      }
+    },
+    "Resolution Parameter (B)": {
+      "canonical_source": "registry/lexicon_gap_queue.json",
+      "aliases": [
+        "B",
+        "boundary radius",
+        "resolution scale"
+      ],
+      "global_status": "partially_verified",
+      "roles": {
+        "transition_index": {
+          "status": "L2",
+          "operational_definition": "The variable that shifts the system between QM-like (g >> r) and GR-like (r >> g) regimes.",
+          "mechanism_classes": [
+            "satp_higgs_1d_cpp"
+          ],
+          "metrics": [
+            "phi_rms"
+          ],
+          "evidence_id": "LEXICON-VAL-RESOLUTION-001",
+          "recoverable_output_paths": [
+            "results/2026-05-05_run09_lexicon_val_resolution_parameter/data/regime_results.json"
+          ],
+          "output_paths": [
+            "results/2026-05-05_run09_lexicon_val_resolution_parameter/data/regime_results.json"
+          ]
+        }
+      }
     }
   },
-
-"RT_operational_regime":  {
-                                  "canonical_source":  "registry/governance/patches/PATCH_PI_RT_CALCULUS_002.json",
-                                  "aliases":  [
-                                                  "RT operational regime"
-                                              ],
-                                  "global_status":  "provisional",
-                                  "roles":  {
-                                                "derived_rt_operational_regime":  {
-                                                                                      "status":  "L0",
-                                                                                      "operational_definition":  "A repeatable derived mode of RT_core continuation under declared admissibility, residue, orientation, and context conditions.",
-                                                                                      "mechanism_classes":  [
-                                                                                                                "typed_formalism"
-                                                                                                            ],
-                                                                                      "falsification":  "derived_regime_collapses_into_primitive",
-                                                                                      "evidence":  [
-
-                                                                                                   ]
-                                                                                  }
-                                            }
-                              },
-    "orientation_operational_regime_classification":  {
-                                                          "canonical_source":  "registry/governance/patches/PATCH_PI_RT_CALCULUS_003.json",
-                                                          "aliases":  [
-                                                                          "Orientation-Derived Operational Regime Classification",
-                                                                          "orientation-derived operational regimes"
-                                                                      ],
-                                                          "global_status":  "provisional",
-                                                          "roles":  {
-                                                                        "orientation_led_regime_classifier":  {
-                                                                                                                  "status":  "L0",
-                                                                                                                  "operational_definition":  "The orientation-led classification relation that assigns RT operational regimes under declared admissibility, residue, and context conditions without privileging any specific regime family or invoking temporal interpretation.",
-                                                                                                                  "mechanism_classes":  [
-                                                                                                                                            "typed_formalism"
-                                                                                                                                        ],
-                                                                                                                  "falsification":  "classification_depends_on_temporal_interpretation",
-                                                                                                                  "evidence":  [
-
-                                                                                                                               ]
-                                                                                                              }
-                                                                    }
-                                                      },
-    "linear_operational_regime":  {
-                                      "canonical_source":  "registry/governance/patches/PATCH_PI_RT_CALCULUS_004.json",
-                                      "aliases":  [
-                                                      "linear regime",
-                                                      "L-classified regime"
-                                                  ],
-                                      "global_status":  "provisional",
-                                      "roles":  {
-                                                    "orientation_classified_linear_regime":  {
-                                                                                                 "status":  "L0",
-                                                                                                 "operational_definition":  "The linear operational regime derived from RT_core when orientation-governed continuation is locally composable, role-preserving, and stable under bounded residue influence.",
-                                                                                                 "mechanism_classes":  [
-                                                                                                                           "typed_formalism"
-                                                                                                                       ],
-                                                                                                 "falsification":  "linear_regime_collapses_into_primitive_floor",
-                                                                                                 "evidence":  [
-
-                                                                                                              ]
-                                                                                             }
-                                                }
-                                  },
-    "nonlinear_operational_regime":  {
-                                         "canonical_source":  "registry/governance/patches/PATCH_PI_RT_CALCULUS_005.json",
-                                         "aliases":  [
-                                                         "nonlinear regime",
-                                                         "NL-classified regime"
-                                                     ],
-                                         "global_status":  "provisional",
-                                         "roles":  {
-                                                       "orientation_classified_nonlinear_regime":  {
-                                                                                                       "status":  "L0",
-                                                                                                       "operational_definition":  "The nonlinear operational regime derived from RT_core when orientation-governed continuation is residue-conditioned, history-dependent, threshold-sensitive, feedback-coupled, or context-deforming such that local composition is not preserved.",
-                                                                                                       "mechanism_classes":  [
-                                                                                                                                 "typed_formalism"
-                                                                                                                             ],
-                                                                                                       "falsification":  "nonlinear_regime_collapses_into_primitive_floor",
-                                                                                                       "evidence":  [
-
-                                                                                                                    ]
-                                                                                                   }
-                                                   }
-                                     },
-    "linear_nonlinear_regime_boundary":  {
-                                             "canonical_source":  "registry/governance/patches/PATCH_PI_RT_CALCULUS_006.json",
-                                             "aliases":  [
-                                                             "L/NL boundary",
-                                                             "L/NL transition boundary",
-                                                             "linear-nonlinear regime boundary"
-                                                         ],
-                                             "global_status":  "provisional",
-                                             "roles":  {
-                                                           "governed_linear_nonlinear_boundary":  {
-                                                                                                      "status":  "L0",
-                                                                                                      "operational_definition":  "The governed classification boundary between linear and nonlinear RT operational regimes, including the rule that a regime transitions from L to NL when residue, history, threshold, feedback, admissibility, or context deforms local composition, and transitions from NL to L when that deformation stabilizes into a locally composable orientation.",
-                                                                                                      "mechanism_classes":  [
-                                                                                                                                "typed_formalism"
-                                                                                                                            ],
-                                                                                                      "falsification":  "boundary_changes_rt_core",
-                                                                                                      "evidence":  [
-
-                                                                                                                   ]
-                                                                                                  }
-                                                       }
-                                         },
-    "mixed_lnl_operational_regime":  {
-                                         "canonical_source":  "registry/governance/patches/PATCH_PI_RT_CALCULUS_007.json",
-                                         "aliases":  [
-                                                         "mixed L/NL regime",
-                                                         "mixed linear/nonlinear regime",
-                                                         "mixed L-NL regime"
-                                                     ],
-                                         "global_status":  "provisional",
-                                         "roles":  {
-                                                       "derived_mixed_lnl_regime":  {
-                                                                                        "status":  "L0",
-                                                                                        "operational_definition":  "An RT operational regime in which L-classified and NL-classified continuation components coexist under explicitly separated domain, scale, context, orientation, or admissibility partitions.",
-                                                                                        "mechanism_classes":  [
-                                                                                                                  "typed_formalism"
-                                                                                                              ],
-                                                                                        "falsification":  "mixed_regime_introduces_third_foundation",
-                                                                                        "evidence":  [
-
-                                                                                                     ]
-                                                                                    }
-                                                   }
-                                     },
-    "reduction_outcome":  {
-                              "canonical_source":  "registry/governance/patches/PATCH_PI_RT_CALCULUS_026.json",
-                              "aliases":  [
-                                              "Outcome(C)",
-                                              "reduction outcome classification",
-                                              "REDUCE_025 outcome"
-                                          ],
-                              "global_status":  "provisional",
-                              "roles":  {
-                                            "reduction_outcome_classifier":  {
-                                                                                 "status":  "L0",
-                                                                                 "operational_definition":  "A canonical classifier of reduction results into NF(C), pNF(C), or continuation failure.",
-                                                                                 "mechanism_classes":  [
-                                                                                                           "typed_formalism"
-                                                                                                       ],
-                                                                                 "falsification":  "outcome_classification_loses_nf_pnf_failure_distinction",
-                                                                                 "evidence":  [
-
-                                                                                              ]
-                                                                             }
-                                        }
-                          },
-    "pnf":  {
-                "canonical_source":  "registry/governance/patches/PATCH_PI_RT_CALCULUS_026.json",
-                "aliases":  [
-                                "pNF(C)",
-                                "partial normal form",
-                                "partial_NF(C)"
-                            ],
-                "global_status":  "provisional",
-                "roles":  {
-                              "partial_normal_form_short_form":  {
-                                                                     "status":  "L0",
-                                                                     "operational_definition":  "Short form for the partial normal form state canonically named pNF(C).",
-                                                                     "mechanism_classes":  [
-                                                                                               "typed_formalism"
-                                                                                           ],
-                                                                     "falsification":  "partial_normal_form_alias_loses_canonical_state",
-                                                                     "evidence":  [
-
-                                                                                  ]
-                                                                 }
-                          }
-            },
-    "reduction_trace":  {
-                            "canonical_source":  "registry/governance/patches/PATCH_PI_RT_CALCULUS_027.json",
-                            "aliases":  [
-                                            "Trace(C)",
-                                            "reduction trace",
-                                            "trace record"
-                                        ],
-                            "global_status":  "provisional",
-                            "roles":  {
-                                          "reduction_trace_record":  {
-                                                                         "status":  "L0",
-                                                                         "operational_definition":  "The ordered diagnostic record of the evaluation, validation, lawful reduction, halt, and failure-classification sequence applied to a continuation expression during REDUCE_025.",
-                                                                         "mechanism_classes":  [
-                                                                                                   "typed_formalism"
-                                                                                               ],
-                                                                         "falsification":  "trace_record_becomes_semantics_change",
-                                                                         "evidence":  [
-
-                                                                                      ]
-                                                                     }
-                                      }
-                        },
-    "trace_step":  {
-                       "canonical_source":  "registry/governance/patches/PATCH_PI_RT_CALCULUS_027.json",
-                       "aliases":  [
-                                       "trace step",
-                                       "trace event"
-                                   ],
-                       "global_status":  "provisional",
-                       "roles":  {
-                                     "trace_step_event":  {
-                                                              "status":  "L0",
-                                                              "operational_definition":  "A single evaluation, validation, reduction, halt, or failure-classification event within Trace(C).",
-                                                              "mechanism_classes":  [
-                                                                                        "typed_formalism"
-                                                                                    ],
-                                                              "falsification":  "trace_step_loses_atomicity",
-                                                              "evidence":  [
-
-                                                                           ]
-                                                          }
-                                 }
-                   },
-    "trace_outcome":  {
-                          "canonical_source":  "registry/governance/patches/PATCH_PI_RT_CALCULUS_027.json",
-                          "aliases":  [
-                                          "Trace(C).outcome",
-                                          "outcome-linked trace record",
-                                          "trace outcome"
-                                      ],
-                          "global_status":  "provisional",
-                          "roles":  {
-                                        "trace_outcome_field":  {
-                                                                    "status":  "L0",
-                                                                    "operational_definition":  "The outcome field of Trace(C), canonically linked to NF(C), pNF(C), or continuation failure.",
-                                                                    "mechanism_classes":  [
-                                                                                              "typed_formalism"
-                                                                                          ],
-                                                                    "falsification":  "trace_outcome_detaches_from_canonical_result",
-                                                                    "evidence":  [
-
-                                                                                 ]
-                                                                }
-                                    }
-                      },
-    "halt_reason":  {
-                        "canonical_source":  "registry/governance/patches/PATCH_PI_RT_CALCULUS_027.json",
-                        "aliases":  [
-                                        "halt reason",
-                                        "trace halt reason",
-                                        "Trace(C).halt_reason"
-                                    ],
-                        "global_status":  "provisional",
-                        "roles":  {
-                                      "halt_reason_field":  {
-                                                                "status":  "L0",
-                                                                "operational_definition":  "The canonical reason field used by Trace(C) to record why REDUCE_025 terminated or halted.",
-                                                                "mechanism_classes":  [
-                                                                                          "typed_formalism"
-                                                                                      ],
-                                                                "falsification":  "halt_reason_fails_to_explain_termination",
-                                                                "evidence":  [
-
-                                                                             ]
-                                                            }
-                                  }
-                    },
-    "trace_equivalence":  {
-                              "canonical_source":  "registry/governance/patches/PATCH_PI_RT_CALCULUS_028.json",
-                              "aliases":  [
-                                              "Trace_1(C) ≡T Trace_2(C)",
-                                              "reduction trace equivalence",
-                                              "trace equivalence"
-                                          ],
-                              "global_status":  "provisional",
-                              "roles":  {
-                                            "trace_equivalence_relation":  {
-                                                                               "status":  "L0",
-                                                                               "operational_definition":  "An equivalence relation over reduction traces that hold when the traces originate from the same input continuation, preserve lawful reduction semantics, and terminate in the same canonical outcome with the same halt classification.",
-                                                                               "mechanism_classes":  [
-                                                                                                         "typed_formalism"
-                                                                                                     ],
-                                                                               "falsification":  "trace_equivalence_collapses_distinct_halt_classes",
-                                                                               "evidence":  [
-
-                                                                                            ]
-                                                                           }
-                                        }
-                          },
-    "canonical_trace_form":  {
-                                 "canonical_source":  "registry/governance/patches/PATCH_PI_RT_CALCULUS_028.json",
-                                 "aliases":  [
-                                                 "TNF(Trace)",
-                                                 "canonical trace form",
-                                                 "trace normal form"
-                                             ],
-                                 "global_status":  "provisional",
-                                 "roles":  {
-                                               "canonical_trace_form":  {
-                                                                            "status":  "L0",
-                                                                            "operational_definition":  "The normalized representative of a reduction trace used for outcome-preserving comparison, with evaluation order preserved and implementation-specific metadata removed.",
-                                                                            "mechanism_classes":  [
-                                                                                                      "typed_formalism"
-                                                                                                  ],
-                                                                            "falsification":  "canonical_trace_form_changes_reduction_semantics",
-                                                                            "evidence":  [
-
-                                                                                         ]
-                                                                        }
-                                           }
-                             },
-    "trace_identity":  {
-                           "canonical_source":  "registry/governance/patches/PATCH_PI_RT_CALCULUS_028.json",
-                           "aliases":  [
-                                           "trace identity",
-                                           "exact trace record",
-                                           "Trace_1(C) = Trace_2(C)"
-                                       ],
-                           "global_status":  "provisional",
-                           "roles":  {
-                                         "trace_identity_relation":  {
-                                                                         "status":  "L0",
-                                                                         "operational_definition":  "Exact identity of two trace records, stronger than reduction trace equivalence and implying it.",
-                                                                         "mechanism_classes":  [
-                                                                                                   "typed_formalism"
-                                                                                               ],
-                                                                         "falsification":  "trace_identity_fails_to_imply_equivalence",
-                                                                         "evidence":  [
-
-                                                                                      ]
-                                                                     }
-                                     }
-                       },
-    "trace_normalization":  {
-                                "canonical_source":  "registry/governance/patches/PATCH_PI_RT_CALCULUS_028.json",
-                                "aliases":  [
-                                                "trace normalization",
-                                                "normalize trace",
-                                                "TNF"
-                                            ],
-                                "global_status":  "provisional",
-                                "roles":  {
-                                              "trace_normalization_procedure":  {
-                                                                                    "status":  "L0",
-                                                                                    "operational_definition":  "The governed procedure that maps a trace to TNF(Trace) by retaining canonical reduction events, preserving evaluation order, removing implementation-specific metadata, and normalizing step numbering and halt classification.",
-                                                                                    "mechanism_classes":  [
-                                                                                                              "typed_formalism"
-                                                                                                          ],
-                                                                                    "falsification":  "trace_normalization_alters_outcome",
-                                                                                    "evidence":  [
-
-                                                                                                 ]
-                                                                                }
-                                          }
-                            },
-    "local_confluence":  {
-                              "canonical_source":  "registry/governance/patches/PATCH_PI_RT_CALCULUS_029.json",
-                              "aliases":  [
-                                              "local confluence",
-                                              "local confluence conditions"
-                                          ],
-                              "global_status":  "provisional",
-                              "roles":  {
-                                            "local_confluence_condition":  {
-                                                                              "status":  "L0",
-                                                                              "operational_definition":  "A bounded reduction property stating that two lawful reductions diverging from the same continuation may be reduced to process-equivalent continuation outcomes under the current reduction system.",
-                                                                              "mechanism_classes":  [
-                                                                                                        "typed_formalism"
-                                                                                                    ],
-                                                                              "falsification":  "local_confluence_collapses_into_global_confluence",
-                                                                              "evidence":  [ ]
-                                                                          }
-                                        }
-                          },
-    "reduction_branch":  {
-                            "canonical_source":  "registry/governance/patches/PATCH_PI_RT_CALCULUS_029.json",
-                            "aliases":  [
-                                            "Branch(C)",
-                                            "reduction branch",
-                                            "branch"
-                                        ],
-                            "global_status":  "provisional",
-                            "roles":  {
-                                          "reduction_branch_path":  {
-                                                                        "status":  "L0",
-                                                                        "operational_definition":  "A lawful reduction path originating from a common continuation expression.",
-                                                                        "mechanism_classes":  [
-                                                                                                  "typed_formalism"
-                                                                                              ],
-                                                                        "falsification":  "reduction_branch_lacks_common_origin",
-                                                                        "evidence":  [ ]
-                                                                    }
-                                      }
-                      },
-    "joinability":  {
-                      "canonical_source":  "registry/governance/patches/PATCH_PI_RT_CALCULUS_029.json",
-                      "aliases":  [
-                                      "joinability",
-                                      "joinable"
-                                  ],
-                      "global_status":  "provisional",
-                      "roles":  {
-                                    "joinability_relation":  {
-                                                                 "status":  "L0",
-                                                                 "operational_definition":  "A relation indicating that two lawful reduction branches can be reduced to process-equivalent continuation outcomes.",
-                                                                 "mechanism_classes":  [
-                                                                                           "typed_formalism"
-                                                                                       ],
-                                                                 "falsification":  "joinability_breaks_process_equivalence",
-                                                                 "evidence":  [ ]
-                                                             }
-                                }
-                  },
-    "critical_pair":  {
-                         "canonical_source":  "registry/governance/patches/PATCH_PI_RT_CALCULUS_029.json",
-                         "aliases":  [
-                                         "CP(C)",
-                                         "critical reduction pair",
-                                         "critical pair"
-                                     ],
-                         "global_status":  "provisional",
-                         "roles":  {
-                                       "critical_pair_object":  {
-                                                                    "status":  "L0",
-                                                                    "operational_definition":  "A pair of immediately divergent lawful reductions originating from the same continuation requiring local confluence evaluation.",
-                                                                    "mechanism_classes":  [
-                                                                                              "typed_formalism"
-                                                                                          ],
-                                                                    "falsification":  "critical_pair_not_immediately_divergent",
-                                                                    "evidence":  [ ]
-                                                                }
-                                   }
-                     },
-    "reduction_determinism":  {
-                                 "canonical_source":  "registry/governance/patches/PATCH_PI_RT_CALCULUS_030.json",
-                                 "aliases":  [
-                                                 "Det(C)",
-                                                 "reduction determinism",
-                                                 "determinism"
-                                             ],
-                                 "global_status":  "provisional",
-                                 "roles":  {
-                                               "reduction_determinism_property":  {
-                                                                                     "status":  "L0",
-                                                                                     "operational_definition":  "A bounded property stating that a lawful continuation evaluates to one canonical lawful reduction outcome under registered evaluation order and canonical reduction priority.",
-                                                                                     "mechanism_classes":  [
-                                                                                                               "typed_formalism"
-                                                                                                           ],
-                                                                                     "falsification":  "reduction_determinism_lacks_unique_lawful_outcome",
-                                                                                     "evidence":  [ ]
-                                                                                 }
-                                           }
-                             },
-    "reduction_priority":  {
-                            "canonical_source":  "registry/governance/patches/PATCH_PI_RT_CALCULUS_030.json",
-                            "aliases":  [
-                                            "Priority(R)",
-                                            "reduction priority",
-                                            "canonical reduction priority"
-                                        ],
-                            "global_status":  "provisional",
-                            "roles":  {
-                                          "reduction_priority_ordering":  {
-                                                                            "status":  "L0",
-                                                                            "operational_definition":  "Canonical ordering used when multiple lawful reductions are simultaneously admissible.",
-                                                                            "mechanism_classes":  [
-                                                                                                      "typed_formalism"
-                                                                                                  ],
-                                                                            "falsification":  "reduction_priority_is_not_canonical_ordering",
-                                                                            "evidence":  [ ]
-                                                                        }
-                                      }
-                      },
-    "choice_function":  {
-                         "canonical_source":  "registry/governance/patches/PATCH_PI_RT_CALCULUS_030.json",
-                         "aliases":  [
-                                         "Choose(C)",
-                                         "choice function",
-                                         "deterministic choice"
-                                     ],
-                         "global_status":  "provisional",
-                         "roles":  {
-                                       "choice_function_selector":  {
-                                                                     "status":  "L0",
-                                                                     "operational_definition":  "Deterministic selection function that chooses the next lawful reduction according to canonical reduction priority.",
-                                                                     "mechanism_classes":  [
-                                                                                               "typed_formalism"
-                                                                                           ],
-                                                                     "falsification":  "choice_function_is_not_deterministic",
-                                                                     "evidence":  [ ]
-                                                                 }
-                                   }
-                     },
-    "deterministic_class":  {
-                             "canonical_source":  "registry/governance/patches/PATCH_PI_RT_CALCULUS_030.json",
-                             "aliases":  [
-                                             "ClassDet",
-                                             "deterministic continuation class",
-                                             "deterministic class"
-                                         ],
-                             "global_status":  "provisional",
-                             "roles":  {
-                                           "deterministic_continuation_class":  {
-                                                                                   "status":  "L0",
-                                                                                   "operational_definition":  "Class of continuation expressions satisfying the bounded determinism conditions.",
-                                                                                   "mechanism_classes":  [
-                                                                                                             "typed_formalism"
-                                                                                                         ],
-                                                                                  "falsification":  "deterministic_class_includes_nondeterministic_continuations",
-                                                                                  "evidence":  [ ]
-                                                                              }
-                                       }
-                         },
-    "termination":  {
-                     "canonical_source":  "registry/governance/patches/PATCH_PI_RT_CALCULUS_031.json",
-                     "aliases":  [
-                                     "Term(C)",
-                                     "termination",
-                                     "bounded termination"
-                                 ],
-                     "global_status":  "provisional",
-                     "roles":  {
-                                   "termination_condition":  {
-                                                               "status":  "L0",
-                                                               "operational_definition":  "A bounded property indicating that REDUCE_025 reaches a reduction outcome after a finite number of lawful reduction steps.",
-                                                               "mechanism_classes":  [
-                                                                                         "typed_formalism"
-                                                                                     ],
-                                                               "falsification":  "termination_claim_requires_unbounded_or_nonfinite_steps",
-                                                               "evidence":  [ ]
-                                                           }
-                               }
-                   },
-    "reduction_measure":  {
-                           "canonical_source":  "registry/governance/patches/PATCH_PI_RT_CALCULUS_031.json",
-                           "aliases":  [
-                                           "μ(C)",
-                                           "reduction measure",
-                                           "measure"
-                                       ],
-                           "global_status":  "provisional",
-                           "roles":  {
-                                         "reduction_measure_ranking":  {
-                                                                        "status":  "L0",
-                                                                        "operational_definition":  "A well-founded measure used to evaluate reduction progress.",
-                                                                        "mechanism_classes":  [
-                                                                                                  "typed_formalism"
-                                                                                              ],
-                                                                        "falsification":  "reduction_measure_is_not_well_founded",
-                                                                        "evidence":  [ ]
-                                                                    }
-                                     }
-                         },
-    "reduction_progress":  {
-                            "canonical_source":  "registry/governance/patches/PATCH_PI_RT_CALCULUS_031.json",
-                            "aliases":  [
-                                            "progress",
-                                            "reduction progress",
-                                            "μ(C_i) > μ(C_{i+1})"
-                                        ],
-                            "global_status":  "provisional",
-                            "roles":  {
-                                          "reduction_progress_descent":  {
-                                                                           "status":  "L0",
-                                                                           "operational_definition":  "Strict decrease of the reduction measure across lawful reductions.",
-                                                                           "mechanism_classes":  [
-                                                                                                     "typed_formalism"
-                                                                                                 ],
-                                                                           "falsification":  "reduction_progress_is_not_strict_descent",
-                                                                           "evidence":  [ ]
-                                                                       }
-                                      }
-                        },
-    "termination_class":  {
-                           "canonical_source":  "registry/governance/patches/PATCH_PI_RT_CALCULUS_031.json",
-                           "aliases":  [
-                                           "ClassTerm",
-                                           "termination class",
-                                           "bounded termination class"
-                                       ],
-                           "global_status":  "provisional",
-                           "roles":  {
-                                         "termination_classification":  {
-                                                                           "status":  "L0",
-                                                                           "operational_definition":  "Class of continuation expressions satisfying the bounded termination conditions.",
-                                                                           "mechanism_classes":  [
-                                                                                                     "typed_formalism"
-                                                                                                 ],
-                                                                           "falsification":  "termination_class_contains_nonterminating_continuations",
-                                                                           "evidence":  [ ]
-                                                                       }
-                                     }
-                         },
-    "canonical_form_uniqueness":  {
-                                   "canonical_source":  "registry/governance/patches/PATCH_PI_RT_CALCULUS_032.json",
-                                   "aliases":  [
-                                                   "Unique(C)",
-                                                   "canonical form uniqueness",
-                                                   "bounded uniqueness"
-                                               ],
-                                   "global_status":  "provisional",
-                                   "roles":  {
-                                                 "canonical_form_uniqueness_property":  {
-                                                                                          "status":  "L0",
-                                                                                          "operational_definition":  "A bounded property indicating that a continuation possesses a unique canonical normal form modulo process equivalence.",
-                                                                                          "mechanism_classes":  [
-                                                                                                                    "typed_formalism"
-                                                                                                                ],
-                                                                                          "falsification":  "canonical_form_uniqueness_is_not_unique_modulo_process_equivalence",
-                                                                                          "evidence":  [ ]
-                                                                                      }
-                                             }
-                                 },
-    "canonical_representative":  {
-                                  "canonical_source":  "registry/governance/patches/PATCH_PI_RT_CALCULUS_032.json",
-                                  "aliases":  [
-                                                  "Rep(C)",
-                                                  "canonical representative",
-                                                  "selected representative"
-                                              ],
-                                  "global_status":  "provisional",
-                                  "roles":  {
-                                                "canonical_representative_selection":  {
-                                                                                         "status":  "L0",
-                                                                                         "operational_definition":  "The selected representative of a process-equivalence class after lawful reduction.",
-                                                                                         "mechanism_classes":  [
-                                                                                                                   "typed_formalism"
-                                                                                                               ],
-                                                                                         "falsification":  "canonical_representative_is_not_bound_to_nf",
-                                                                                         "evidence":  [ ]
-                                                                                     }
-                                            }
-                                },
-    "normal_form_equivalence_class":  {
-                                      "canonical_source":  "registry/governance/patches/PATCH_PI_RT_CALCULUS_032.json",
-                                      "aliases":  [
-                                                      "[NF(C)]≡P",
-                                                      "normal form equivalence class",
-                                                      "NF equivalence class"
-                                                  ],
-                                      "global_status":  "provisional",
-                                      "roles":  {
-                                                    "normal_form_equivalence_relation":  {
-                                                                                           "status":  "L0",
-                                                                                           "operational_definition":  "The equivalence class of all canonical normal forms related by process equivalence.",
-                                                                                           "mechanism_classes":  [
-                                                                                                                     "typed_formalism"
-                                                                                                                 ],
-                                                                                           "falsification":  "normal_form_equivalence_class_is_not_process_equivalence_closed",
-                                                                                           "evidence":  [ ]
-                                                                                       }
-                                                }
-                                  },
-    "uniqueness_class":  {
-                          "canonical_source":  "registry/governance/patches/PATCH_PI_RT_CALCULUS_032.json",
-                          "aliases":  [
-                                          "ClassUnique",
-                                          "uniqueness class",
-                                          "bounded uniqueness class"
-                                      ],
-                          "global_status":  "provisional",
-                          "roles":  {
-                                        "uniqueness_classification":  {
-                                                                       "status":  "L0",
-                                                                       "operational_definition":  "Classification of continuation expressions according to bounded canonical-form uniqueness.",
-                                                                       "mechanism_classes":  [
-                                                                                                 "typed_formalism"
-                                                                                             ],
-                                                                       "falsification":  "uniqueness_class_includes_non_unique_continuations",
-                                                                       "evidence":  [ ]
-                                                                   }
-                                    }
-                        },
+  "RT_operational_regime": {
+    "canonical_source": "registry/governance/patches/PATCH_PI_RT_CALCULUS_002.json",
+    "aliases": [
+      "RT operational regime"
+    ],
+    "global_status": "provisional",
+    "roles": {
+      "derived_rt_operational_regime": {
+        "status": "L0",
+        "operational_definition": "A repeatable derived mode of RT_core continuation under declared admissibility, residue, orientation, and context conditions.",
+        "mechanism_classes": [
+          "typed_formalism"
+        ],
+        "falsification": "derived_regime_collapses_into_primitive",
+        "evidence": []
+      }
+    }
+  },
+  "orientation_operational_regime_classification": {
+    "canonical_source": "registry/governance/patches/PATCH_PI_RT_CALCULUS_003.json",
+    "aliases": [
+      "Orientation-Derived Operational Regime Classification",
+      "orientation-derived operational regimes"
+    ],
+    "global_status": "provisional",
+    "roles": {
+      "orientation_led_regime_classifier": {
+        "status": "L0",
+        "operational_definition": "The orientation-led classification relation that assigns RT operational regimes under declared admissibility, residue, and context conditions without privileging any specific regime family or invoking temporal interpretation.",
+        "mechanism_classes": [
+          "typed_formalism"
+        ],
+        "falsification": "classification_depends_on_temporal_interpretation",
+        "evidence": []
+      }
+    }
+  },
+  "linear_operational_regime": {
+    "canonical_source": "registry/governance/patches/PATCH_PI_RT_CALCULUS_004.json",
+    "aliases": [
+      "linear regime",
+      "L-classified regime"
+    ],
+    "global_status": "provisional",
+    "roles": {
+      "orientation_classified_linear_regime": {
+        "status": "L0",
+        "operational_definition": "The linear operational regime derived from RT_core when orientation-governed continuation is locally composable, role-preserving, and stable under bounded residue influence.",
+        "mechanism_classes": [
+          "typed_formalism"
+        ],
+        "falsification": "linear_regime_collapses_into_primitive_floor",
+        "evidence": []
+      }
+    }
+  },
+  "nonlinear_operational_regime": {
+    "canonical_source": "registry/governance/patches/PATCH_PI_RT_CALCULUS_005.json",
+    "aliases": [
+      "nonlinear regime",
+      "NL-classified regime"
+    ],
+    "global_status": "provisional",
+    "roles": {
+      "orientation_classified_nonlinear_regime": {
+        "status": "L0",
+        "operational_definition": "The nonlinear operational regime derived from RT_core when orientation-governed continuation is residue-conditioned, history-dependent, threshold-sensitive, feedback-coupled, or context-deforming such that local composition is not preserved.",
+        "mechanism_classes": [
+          "typed_formalism"
+        ],
+        "falsification": "nonlinear_regime_collapses_into_primitive_floor",
+        "evidence": []
+      }
+    }
+  },
+  "linear_nonlinear_regime_boundary": {
+    "canonical_source": "registry/governance/patches/PATCH_PI_RT_CALCULUS_006.json",
+    "aliases": [
+      "L/NL boundary",
+      "L/NL transition boundary",
+      "linear-nonlinear regime boundary"
+    ],
+    "global_status": "provisional",
+    "roles": {
+      "governed_linear_nonlinear_boundary": {
+        "status": "L0",
+        "operational_definition": "The governed classification boundary between linear and nonlinear RT operational regimes, including the rule that a regime transitions from L to NL when residue, history, threshold, feedback, admissibility, or context deforms local composition, and transitions from NL to L when that deformation stabilizes into a locally composable orientation.",
+        "mechanism_classes": [
+          "typed_formalism"
+        ],
+        "falsification": "boundary_changes_rt_core",
+        "evidence": []
+      }
+    }
+  },
+  "mixed_lnl_operational_regime": {
+    "canonical_source": "registry/governance/patches/PATCH_PI_RT_CALCULUS_007.json",
+    "aliases": [
+      "mixed L/NL regime",
+      "mixed linear/nonlinear regime",
+      "mixed L-NL regime"
+    ],
+    "global_status": "provisional",
+    "roles": {
+      "derived_mixed_lnl_regime": {
+        "status": "L0",
+        "operational_definition": "An RT operational regime in which L-classified and NL-classified continuation components coexist under explicitly separated domain, scale, context, orientation, or admissibility partitions.",
+        "mechanism_classes": [
+          "typed_formalism"
+        ],
+        "falsification": "mixed_regime_introduces_third_foundation",
+        "evidence": []
+      }
+    }
+  },
+  "reduction_outcome": {
+    "canonical_source": "registry/governance/patches/PATCH_PI_RT_CALCULUS_026.json",
+    "aliases": [
+      "Outcome(C)",
+      "reduction outcome classification",
+      "REDUCE_025 outcome"
+    ],
+    "global_status": "provisional",
+    "roles": {
+      "reduction_outcome_classifier": {
+        "status": "L0",
+        "operational_definition": "A canonical classifier of reduction results into NF(C), pNF(C), or continuation failure.",
+        "mechanism_classes": [
+          "typed_formalism"
+        ],
+        "falsification": "outcome_classification_loses_nf_pnf_failure_distinction",
+        "evidence": []
+      }
+    }
+  },
+  "pnf": {
+    "canonical_source": "registry/governance/patches/PATCH_PI_RT_CALCULUS_026.json",
+    "aliases": [
+      "pNF(C)",
+      "partial normal form",
+      "partial_NF(C)"
+    ],
+    "global_status": "provisional",
+    "roles": {
+      "partial_normal_form_short_form": {
+        "status": "L0",
+        "operational_definition": "Short form for the partial normal form state canonically named pNF(C).",
+        "mechanism_classes": [
+          "typed_formalism"
+        ],
+        "falsification": "partial_normal_form_alias_loses_canonical_state",
+        "evidence": []
+      }
+    }
+  },
+  "reduction_trace": {
+    "canonical_source": "registry/governance/patches/PATCH_PI_RT_CALCULUS_027.json",
+    "aliases": [
+      "Trace(C)",
+      "reduction trace",
+      "trace record"
+    ],
+    "global_status": "provisional",
+    "roles": {
+      "reduction_trace_record": {
+        "status": "L0",
+        "operational_definition": "The ordered diagnostic record of the evaluation, validation, lawful reduction, halt, and failure-classification sequence applied to a continuation expression during REDUCE_025.",
+        "mechanism_classes": [
+          "typed_formalism"
+        ],
+        "falsification": "trace_record_becomes_semantics_change",
+        "evidence": []
+      }
+    }
+  },
+  "trace_step": {
+    "canonical_source": "registry/governance/patches/PATCH_PI_RT_CALCULUS_027.json",
+    "aliases": [
+      "trace step",
+      "trace event"
+    ],
+    "global_status": "provisional",
+    "roles": {
+      "trace_step_event": {
+        "status": "L0",
+        "operational_definition": "A single evaluation, validation, reduction, halt, or failure-classification event within Trace(C).",
+        "mechanism_classes": [
+          "typed_formalism"
+        ],
+        "falsification": "trace_step_loses_atomicity",
+        "evidence": []
+      }
+    }
+  },
+  "trace_outcome": {
+    "canonical_source": "registry/governance/patches/PATCH_PI_RT_CALCULUS_027.json",
+    "aliases": [
+      "Trace(C).outcome",
+      "outcome-linked trace record",
+      "trace outcome"
+    ],
+    "global_status": "provisional",
+    "roles": {
+      "trace_outcome_field": {
+        "status": "L0",
+        "operational_definition": "The outcome field of Trace(C), canonically linked to NF(C), pNF(C), or continuation failure.",
+        "mechanism_classes": [
+          "typed_formalism"
+        ],
+        "falsification": "trace_outcome_detaches_from_canonical_result",
+        "evidence": []
+      }
+    }
+  },
+  "halt_reason": {
+    "canonical_source": "registry/governance/patches/PATCH_PI_RT_CALCULUS_027.json",
+    "aliases": [
+      "halt reason",
+      "trace halt reason",
+      "Trace(C).halt_reason"
+    ],
+    "global_status": "provisional",
+    "roles": {
+      "halt_reason_field": {
+        "status": "L0",
+        "operational_definition": "The canonical reason field used by Trace(C) to record why REDUCE_025 terminated or halted.",
+        "mechanism_classes": [
+          "typed_formalism"
+        ],
+        "falsification": "halt_reason_fails_to_explain_termination",
+        "evidence": []
+      }
+    }
+  },
+  "trace_equivalence": {
+    "canonical_source": "registry/governance/patches/PATCH_PI_RT_CALCULUS_028.json",
+    "aliases": [
+      "Trace_1(C) ≡T Trace_2(C)",
+      "reduction trace equivalence",
+      "trace equivalence"
+    ],
+    "global_status": "provisional",
+    "roles": {
+      "trace_equivalence_relation": {
+        "status": "L0",
+        "operational_definition": "An equivalence relation over reduction traces that hold when the traces originate from the same input continuation, preserve lawful reduction semantics, and terminate in the same canonical outcome with the same halt classification.",
+        "mechanism_classes": [
+          "typed_formalism"
+        ],
+        "falsification": "trace_equivalence_collapses_distinct_halt_classes",
+        "evidence": []
+      }
+    }
+  },
+  "canonical_trace_form": {
+    "canonical_source": "registry/governance/patches/PATCH_PI_RT_CALCULUS_028.json",
+    "aliases": [
+      "TNF(Trace)",
+      "canonical trace form",
+      "trace normal form"
+    ],
+    "global_status": "provisional",
+    "roles": {
+      "canonical_trace_form": {
+        "status": "L0",
+        "operational_definition": "The normalized representative of a reduction trace used for outcome-preserving comparison, with evaluation order preserved and implementation-specific metadata removed.",
+        "mechanism_classes": [
+          "typed_formalism"
+        ],
+        "falsification": "canonical_trace_form_changes_reduction_semantics",
+        "evidence": []
+      }
+    }
+  },
+  "trace_identity": {
+    "canonical_source": "registry/governance/patches/PATCH_PI_RT_CALCULUS_028.json",
+    "aliases": [
+      "trace identity",
+      "exact trace record",
+      "Trace_1(C) = Trace_2(C)"
+    ],
+    "global_status": "provisional",
+    "roles": {
+      "trace_identity_relation": {
+        "status": "L0",
+        "operational_definition": "Exact identity of two trace records, stronger than reduction trace equivalence and implying it.",
+        "mechanism_classes": [
+          "typed_formalism"
+        ],
+        "falsification": "trace_identity_fails_to_imply_equivalence",
+        "evidence": []
+      }
+    }
+  },
+  "trace_normalization": {
+    "canonical_source": "registry/governance/patches/PATCH_PI_RT_CALCULUS_028.json",
+    "aliases": [
+      "trace normalization",
+      "normalize trace",
+      "TNF"
+    ],
+    "global_status": "provisional",
+    "roles": {
+      "trace_normalization_procedure": {
+        "status": "L0",
+        "operational_definition": "The governed procedure that maps a trace to TNF(Trace) by retaining canonical reduction events, preserving evaluation order, removing implementation-specific metadata, and normalizing step numbering and halt classification.",
+        "mechanism_classes": [
+          "typed_formalism"
+        ],
+        "falsification": "trace_normalization_alters_outcome",
+        "evidence": []
+      }
+    }
+  },
+  "local_confluence": {
+    "canonical_source": "registry/governance/patches/PATCH_PI_RT_CALCULUS_029.json",
+    "aliases": [
+      "local confluence",
+      "local confluence conditions"
+    ],
+    "global_status": "provisional",
+    "roles": {
+      "local_confluence_condition": {
+        "status": "L0",
+        "operational_definition": "A bounded reduction property stating that two lawful reductions diverging from the same continuation may be reduced to process-equivalent continuation outcomes under the current reduction system.",
+        "mechanism_classes": [
+          "typed_formalism"
+        ],
+        "falsification": "local_confluence_collapses_into_global_confluence",
+        "evidence": []
+      }
+    }
+  },
+  "reduction_branch": {
+    "canonical_source": "registry/governance/patches/PATCH_PI_RT_CALCULUS_029.json",
+    "aliases": [
+      "Branch(C)",
+      "reduction branch",
+      "branch"
+    ],
+    "global_status": "provisional",
+    "roles": {
+      "reduction_branch_path": {
+        "status": "L0",
+        "operational_definition": "A lawful reduction path originating from a common continuation expression.",
+        "mechanism_classes": [
+          "typed_formalism"
+        ],
+        "falsification": "reduction_branch_lacks_common_origin",
+        "evidence": []
+      }
+    }
+  },
+  "joinability": {
+    "canonical_source": "registry/governance/patches/PATCH_PI_RT_CALCULUS_029.json",
+    "aliases": [
+      "joinability",
+      "joinable"
+    ],
+    "global_status": "provisional",
+    "roles": {
+      "joinability_relation": {
+        "status": "L0",
+        "operational_definition": "A relation indicating that two lawful reduction branches can be reduced to process-equivalent continuation outcomes.",
+        "mechanism_classes": [
+          "typed_formalism"
+        ],
+        "falsification": "joinability_breaks_process_equivalence",
+        "evidence": []
+      }
+    }
+  },
+  "critical_pair": {
+    "canonical_source": "registry/governance/patches/PATCH_PI_RT_CALCULUS_029.json",
+    "aliases": [
+      "CP(C)",
+      "critical reduction pair",
+      "critical pair"
+    ],
+    "global_status": "provisional",
+    "roles": {
+      "critical_pair_object": {
+        "status": "L0",
+        "operational_definition": "A pair of immediately divergent lawful reductions originating from the same continuation requiring local confluence evaluation.",
+        "mechanism_classes": [
+          "typed_formalism"
+        ],
+        "falsification": "critical_pair_not_immediately_divergent",
+        "evidence": []
+      }
+    }
+  },
+  "reduction_determinism": {
+    "canonical_source": "registry/governance/patches/PATCH_PI_RT_CALCULUS_030.json",
+    "aliases": [
+      "Det(C)",
+      "reduction determinism",
+      "determinism"
+    ],
+    "global_status": "provisional",
+    "roles": {
+      "reduction_determinism_property": {
+        "status": "L0",
+        "operational_definition": "A bounded property stating that a lawful continuation evaluates to one canonical lawful reduction outcome under registered evaluation order and canonical reduction priority.",
+        "mechanism_classes": [
+          "typed_formalism"
+        ],
+        "falsification": "reduction_determinism_lacks_unique_lawful_outcome",
+        "evidence": []
+      }
+    }
+  },
+  "reduction_priority": {
+    "canonical_source": "registry/governance/patches/PATCH_PI_RT_CALCULUS_030.json",
+    "aliases": [
+      "Priority(R)",
+      "reduction priority",
+      "canonical reduction priority"
+    ],
+    "global_status": "provisional",
+    "roles": {
+      "reduction_priority_ordering": {
+        "status": "L0",
+        "operational_definition": "Canonical ordering used when multiple lawful reductions are simultaneously admissible.",
+        "mechanism_classes": [
+          "typed_formalism"
+        ],
+        "falsification": "reduction_priority_is_not_canonical_ordering",
+        "evidence": []
+      }
+    }
+  },
+  "choice_function": {
+    "canonical_source": "registry/governance/patches/PATCH_PI_RT_CALCULUS_030.json",
+    "aliases": [
+      "Choose(C)",
+      "choice function",
+      "deterministic choice"
+    ],
+    "global_status": "provisional",
+    "roles": {
+      "choice_function_selector": {
+        "status": "L0",
+        "operational_definition": "Deterministic selection function that chooses the next lawful reduction according to canonical reduction priority.",
+        "mechanism_classes": [
+          "typed_formalism"
+        ],
+        "falsification": "choice_function_is_not_deterministic",
+        "evidence": []
+      }
+    }
+  },
+  "deterministic_class": {
+    "canonical_source": "registry/governance/patches/PATCH_PI_RT_CALCULUS_030.json",
+    "aliases": [
+      "ClassDet",
+      "deterministic continuation class",
+      "deterministic class"
+    ],
+    "global_status": "provisional",
+    "roles": {
+      "deterministic_continuation_class": {
+        "status": "L0",
+        "operational_definition": "Class of continuation expressions satisfying the bounded determinism conditions.",
+        "mechanism_classes": [
+          "typed_formalism"
+        ],
+        "falsification": "deterministic_class_includes_nondeterministic_continuations",
+        "evidence": []
+      }
+    }
+  },
+  "termination": {
+    "canonical_source": "registry/governance/patches/PATCH_PI_RT_CALCULUS_031.json",
+    "aliases": [
+      "Term(C)",
+      "termination",
+      "bounded termination"
+    ],
+    "global_status": "provisional",
+    "roles": {
+      "termination_condition": {
+        "status": "L0",
+        "operational_definition": "A bounded property indicating that REDUCE_025 reaches a reduction outcome after a finite number of lawful reduction steps.",
+        "mechanism_classes": [
+          "typed_formalism"
+        ],
+        "falsification": "termination_claim_requires_unbounded_or_nonfinite_steps",
+        "evidence": []
+      }
+    }
+  },
+  "reduction_measure": {
+    "canonical_source": "registry/governance/patches/PATCH_PI_RT_CALCULUS_031.json",
+    "aliases": [
+      "μ(C)",
+      "reduction measure",
+      "measure"
+    ],
+    "global_status": "provisional",
+    "roles": {
+      "reduction_measure_ranking": {
+        "status": "L0",
+        "operational_definition": "A well-founded measure used to evaluate reduction progress.",
+        "mechanism_classes": [
+          "typed_formalism"
+        ],
+        "falsification": "reduction_measure_is_not_well_founded",
+        "evidence": []
+      }
+    }
+  },
+  "reduction_progress": {
+    "canonical_source": "registry/governance/patches/PATCH_PI_RT_CALCULUS_031.json",
+    "aliases": [
+      "progress",
+      "reduction progress",
+      "μ(C_i) > μ(C_{i+1})"
+    ],
+    "global_status": "provisional",
+    "roles": {
+      "reduction_progress_descent": {
+        "status": "L0",
+        "operational_definition": "Strict decrease of the reduction measure across lawful reductions.",
+        "mechanism_classes": [
+          "typed_formalism"
+        ],
+        "falsification": "reduction_progress_is_not_strict_descent",
+        "evidence": []
+      }
+    }
+  },
+  "termination_class": {
+    "canonical_source": "registry/governance/patches/PATCH_PI_RT_CALCULUS_031.json",
+    "aliases": [
+      "ClassTerm",
+      "termination class",
+      "bounded termination class"
+    ],
+    "global_status": "provisional",
+    "roles": {
+      "termination_classification": {
+        "status": "L0",
+        "operational_definition": "Class of continuation expressions satisfying the bounded termination conditions.",
+        "mechanism_classes": [
+          "typed_formalism"
+        ],
+        "falsification": "termination_class_contains_nonterminating_continuations",
+        "evidence": []
+      }
+    }
+  },
+  "canonical_form_uniqueness": {
+    "canonical_source": "registry/governance/patches/PATCH_PI_RT_CALCULUS_032.json",
+    "aliases": [
+      "Unique(C)",
+      "canonical form uniqueness",
+      "bounded uniqueness"
+    ],
+    "global_status": "provisional",
+    "roles": {
+      "canonical_form_uniqueness_property": {
+        "status": "L0",
+        "operational_definition": "A bounded property indicating that a continuation possesses a unique canonical normal form modulo process equivalence.",
+        "mechanism_classes": [
+          "typed_formalism"
+        ],
+        "falsification": "canonical_form_uniqueness_is_not_unique_modulo_process_equivalence",
+        "evidence": []
+      }
+    }
+  },
+  "canonical_representative": {
+    "canonical_source": "registry/governance/patches/PATCH_PI_RT_CALCULUS_032.json",
+    "aliases": [
+      "Rep(C)",
+      "canonical representative",
+      "selected representative"
+    ],
+    "global_status": "provisional",
+    "roles": {
+      "canonical_representative_selection": {
+        "status": "L0",
+        "operational_definition": "The selected representative of a process-equivalence class after lawful reduction.",
+        "mechanism_classes": [
+          "typed_formalism"
+        ],
+        "falsification": "canonical_representative_is_not_bound_to_nf",
+        "evidence": []
+      }
+    }
+  },
+  "normal_form_equivalence_class": {
+    "canonical_source": "registry/governance/patches/PATCH_PI_RT_CALCULUS_032.json",
+    "aliases": [
+      "[NF(C)]≡P",
+      "normal form equivalence class",
+      "NF equivalence class"
+    ],
+    "global_status": "provisional",
+    "roles": {
+      "normal_form_equivalence_relation": {
+        "status": "L0",
+        "operational_definition": "The equivalence class of all canonical normal forms related by process equivalence.",
+        "mechanism_classes": [
+          "typed_formalism"
+        ],
+        "falsification": "normal_form_equivalence_class_is_not_process_equivalence_closed",
+        "evidence": []
+      }
+    }
+  },
+  "uniqueness_class": {
+    "canonical_source": "registry/governance/patches/PATCH_PI_RT_CALCULUS_032.json",
+    "aliases": [
+      "ClassUnique",
+      "uniqueness class",
+      "bounded uniqueness class"
+    ],
+    "global_status": "provisional",
+    "roles": {
+      "uniqueness_classification": {
+        "status": "L0",
+        "operational_definition": "Classification of continuation expressions according to bounded canonical-form uniqueness.",
+        "mechanism_classes": [
+          "typed_formalism"
+        ],
+        "falsification": "uniqueness_class_includes_non_unique_continuations",
+        "evidence": []
+      }
+    }
+  },
   "meta": {
     "core_validation_set": [
       "process",

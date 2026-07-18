@@ -1,0 +1,91 @@
+{
+  "schema_id": "q3_c03_executed_pass_non_promotion_live_lookup_boundary_091_v1",
+  "generated_at": "2026-07-17T03:35:00-04:00",
+  "patch_id": "PATCH_GOVERNANCE_Q3_C03_EXECUTED_PASS_NON_PROMOTION_LIVE_LOOKUP_BOUNDARY_091",
+  "target_set_reconciliation": {
+    "expected_target_count": 23,
+    "actual_target_count": 23,
+    "missing_lifecycle_transition_targets": [
+      "AMB-GOV-SURF-0695",
+      "AMB-GOV-SURF-0703",
+      "AMB-GOV-SURF-0704",
+      "AMB-GOV-SURF-0705",
+      "AMB-GOV-SURF-0706",
+      "AMB-GOV-SURF-0707",
+      "AMB-GOV-SURF-0708",
+      "AMB-GOV-SURF-0709",
+      "AMB-GOV-SURF-0710",
+      "AMB-GOV-SURF-0712",
+      "AMB-GOV-SURF-0725",
+      "AMB-GOV-SURF-0726",
+      "AMB-GOV-SURF-0727",
+      "AMB-GOV-SURF-0729",
+      "AMB-GOV-SURF-0733",
+      "AMB-GOV-SURF-0734",
+      "AMB-GOV-SURF-0735",
+      "AMB-GOV-SURF-0736",
+      "AMB-GOV-SURF-0737",
+      "AMB-GOV-SURF-0740",
+      "AMB-GOV-SURF-0869",
+      "AMB-GOV-SURF-0870",
+      "AMB-GOV-SURF-0871"
+    ],
+    "reconciled": true
+  },
+  "pre_patch_lookup_behavior": {
+    "generic_lookup_result": "allow",
+    "reason": "Generic registry fallback matched registry/governance/patches/*.json patterns without checking execution status vs lifecycle promotion."
+  },
+  "execution_validation_lifecycle_separation": {
+    "status_field": "status=EXECUTED maps process execution state only",
+    "validation_field": "validation.result=pass maps script verification state only",
+    "authority_rule": "Neither process execution nor verification state constitutes a lifecycle transition to live authority."
+  },
+  "implemented_existing_path_boundary": {
+    "helper": "tools.runtime_authority.classify_patch_record_executed_pass_boundary",
+    "integration_point": "scripts/query_governance.py:classify_authority_target",
+    "action": "DEFER_OR_EXCLUDE"
+  },
+  "post_patch_lookup_behavior": {
+    "generic_lookup_result_for_executed_pass": "defer",
+    "reason": "Executed or PASS proposal patch records are preserved and queryable but are not eligible for live authority lookup without an explicit governed lifecycle transition."
+  },
+  "independent_surface_non_interference": {
+    "rule": "Affected implementation surfaces (e.g. scripts/global_validate.py, registry/formal_object_registry.json) retain their independent role assignments and resolve under existing role-aware query machinery."
+  },
+  "0742_0743_non_interference": {
+    "targets": [
+      "AMB-GOV-SURF-0742",
+      "AMB-GOV-SURF-0743"
+    ],
+    "disposition": "UNCHANGED_AND_DEFERRED_TO_SEPARATE_SUBCOMPONENT",
+    "lookup_result": "allow"
+  },
+  "focused_test_results": {
+    "test_suite_path": "tests/governance_validation/test_patch_091_q3_c03_executed_pass_non_promotion_live_lookup_boundary.py",
+    "tests_defined": [
+      "Q3-091-T01",
+      "Q3-091-T02",
+      "Q3-091-T03",
+      "Q3-091-T04",
+      "Q3-091-T05",
+      "Q3-091-T06",
+      "Q3-091-T07",
+      "Q3-091-T08",
+      "Q3-091-T09"
+    ]
+  },
+  "downstream_reaudit_candidate_set": {
+    "path": "outputs/governance_inventory/q3_c03_executed_pass_reaudit_candidate_set_091.json",
+    "candidate_count": 23
+  },
+  "global_accounting_preservation": {
+    "starting_global_blocking_ambiguities": 458,
+    "ending_global_blocking_ambiguities": 458,
+    "starting_q3_nominal_queue": 50,
+    "ending_q3_nominal_queue": 50,
+    "starting_q3_live_unresolved_items": 48,
+    "ending_q3_live_unresolved_items": 48,
+    "rule": "Patch 091 implements a reusable boundary only. All 23 target ambiguities remain individually blocking pending post-boundary item re-audit."
+  }
+}

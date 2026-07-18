@@ -1174,6 +1174,8 @@ def _selected_stage_names(mode):
         "evidence_validation",
         "campaign_validation",
         "governance_integrity_validation",
+        "db_runtime_validation",
+        "patch_chain_validation",
     }
 
 

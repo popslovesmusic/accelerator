@@ -75,7 +75,7 @@ def test_patch_085_preserves_patch_history_and_non_interference():
     )
     assert patch_chain["patch_id"] == "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002"
 
-    partial_without_explicit_none = _run_query(
+    closeout_without_explicit_none = _run_query(
         "authority",
         "--target",
         "registry/governance/patches/PATCH_ACCELERATOR_INFERENCE_CONSERVATION_CLOSEOUT_055.json",
@@ -83,7 +83,8 @@ def test_patch_085_preserves_patch_history_and_non_interference():
         "summary",
         "--json",
     )
-    assert partial_without_explicit_none["decision"] == "allow"
+    assert closeout_without_explicit_none["decision"] == "defer"
+    assert "authority_effect=NONE" not in closeout_without_explicit_none["reason"]
 
     live_surface_query = _run_query(
         "authority",
@@ -96,4 +97,3 @@ def test_patch_085_preserves_patch_history_and_non_interference():
         "--json",
     )
     assert live_surface_query["decision"] == "allow"
-

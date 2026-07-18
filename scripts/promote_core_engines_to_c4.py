@@ -2,6 +2,7 @@ import os
 import json
 import subprocess
 import time
+import sys
 import numpy as np
 from pathlib import Path
 
@@ -36,7 +37,7 @@ def promote_graph_dynamics():
         
         run_dir = out_base / f"seed_{seed}"
         success, stdout, stderr = run_cmd([
-            "python", "tools/graph_dynamics_sim_v1_cpp/sim_governed.py",
+            sys.executable, "tools/graph_dynamics_sim_v1_cpp/sim_governed.py",
             "--config", str(config_path),
             "--out", str(run_dir)
         ])
@@ -54,7 +55,7 @@ def promote_graph_dynamics():
     fv2_path = out_base / "config_fv2.json"
     with open(fv2_path, 'w') as f: json.dump(config_fv2, f)
     fv2_dir = out_base / "fv2"
-    success, _, _ = run_cmd(["python", "tools/graph_dynamics_sim_v1_cpp/sim_governed.py", "--config", str(fv2_path), "--out", str(fv2_dir)])
+    success, _, _ = run_cmd([sys.executable, "tools/graph_dynamics_sim_v1_cpp/sim_governed.py", "--config", str(fv2_path), "--out", str(fv2_dir)])
     if success:
         with open(fv2_dir / "summary.json") as f:
             metrics = json.load(f)["final_metrics"]
@@ -117,7 +118,7 @@ def promote_ca_admissibility():
         config_path = out_base / f"config_D_{d}.json"
         with open(config_path, 'w') as f: json.dump(config, f)
         run_dir = out_base / f"D_{d}"
-        success, _, _ = run_cmd(["python", "tools/ca_admissibility_sim_v1_cpp/sim_governed.py", "--config", str(config_path), "--out", str(run_dir)])
+        success, _, _ = run_cmd([sys.executable, "tools/ca_admissibility_sim_v1_cpp/sim_governed.py", "--config", str(config_path), "--out", str(run_dir)])
         if success:
             with open(run_dir / "summary.json") as f:
                 stability_results.append(json.load(f)["final_metrics"])
@@ -132,7 +133,7 @@ def promote_ca_admissibility():
     fv1_path = out_base / "config_fv1.json"
     with open(fv1_path, 'w') as f: json.dump(config_fv1, f)
     fv1_dir = out_base / "fv1"
-    success, _, _ = run_cmd(["python", "tools/ca_admissibility_sim_v1_cpp/sim_governed.py", "--config", str(fv1_path), "--out", str(fv1_dir)])
+    success, _, _ = run_cmd([sys.executable, "tools/ca_admissibility_sim_v1_cpp/sim_governed.py", "--config", str(fv1_path), "--out", str(fv1_dir)])
     if success:
         with open(fv1_dir / "summary.json") as f:
             metrics = json.load(f)["final_metrics"]
@@ -168,4 +169,4 @@ if __name__ == "__main__":
     promote_graph_dynamics()
     promote_ca_admissibility()
     # Final sync
-    subprocess.run(["python", "scripts/finalize_certification.py"])
+    subprocess.run([sys.executable, "scripts/finalize_certification.py"])

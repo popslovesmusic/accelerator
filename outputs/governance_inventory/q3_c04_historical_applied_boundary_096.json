@@ -1,0 +1,56 @@
+{
+  "schema_id": "q3_c04_historical_applied_boundary_096_v1",
+  "generated_at": "2026-07-17T11:40:00-04:00",
+  "patch_id": "PATCH_GOVERNANCE_Q3_C04_HISTORICAL_APPLIED_LIVE_LOOKUP_BOUNDARY_096",
+  "target_set_reconciliation": {
+    "expected_target_count": 23,
+    "actual_target_count": 23,
+    "targets": [
+      "AMB-GOV-SURF-0702",
+      "AMB-GOV-SURF-0717",
+      "AMB-GOV-SURF-0741",
+      "AMB-GOV-SURF-0748",
+      "AMB-GOV-SURF-0751",
+      "AMB-GOV-SURF-0752",
+      "AMB-GOV-SURF-0757",
+      "AMB-GOV-SURF-0758",
+      "AMB-GOV-SURF-0759",
+      "AMB-GOV-SURF-0761",
+      "AMB-GOV-SURF-0767",
+      "AMB-GOV-SURF-0775",
+      "AMB-GOV-SURF-0795",
+      "AMB-GOV-SURF-0796",
+      "AMB-GOV-SURF-0797",
+      "AMB-GOV-SURF-0798",
+      "AMB-GOV-SURF-0799",
+      "AMB-GOV-SURF-0800",
+      "AMB-GOV-SURF-0801",
+      "AMB-GOV-SURF-0839",
+      "AMB-GOV-SURF-0840",
+      "AMB-GOV-SURF-0851",
+      "AMB-GOV-SURF-0853"
+    ],
+    "reconciled": true
+  },
+  "pre_patch_lookup_behavior": {
+    "generic_lookup_result": "allow",
+    "reason": "Applied patch records without specific exclusions resolved to allow under registry/governance/patches/*.json pattern matching."
+  },
+  "implemented_existing_path_boundary": {
+    "helper": "tools.runtime_authority.classify_patch_record_historical_applied",
+    "integration_point": "scripts/query_governance.py:classify_authority_target",
+    "action": "DEFER_OR_EXCLUDE"
+  },
+  "post_patch_lookup_behavior": {
+    "generic_lookup_result_for_historical_applied": "defer",
+    "reason": "Applied patch records represent historical process execution and do not constitute a live authority lookup candidate."
+  },
+  "global_accounting_preservation": {
+    "starting_global_blocking_ambiguities": 433,
+    "ending_global_blocking_ambiguities": 433,
+    "starting_q3_nominal_queue": 25,
+    "ending_q3_nominal_queue": 25,
+    "starting_q3_live_unresolved_items": 23,
+    "ending_q3_live_unresolved_items": 23
+  }
+}

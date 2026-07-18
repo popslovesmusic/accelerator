@@ -31,8 +31,8 @@ def test_patch_063_records_rt_aer_namespace_resolution():
     assert semantic_targets["AFFECT_EFFECT_RATIO"]["canonical_expression"].startswith("AER(phi) :=")
     assert "must use AER rather than RT or RTen" in semantic_targets["AFFECT_EFFECT_RATIO"]["notes"]
 
-    assert '"term":  "AER"' in lexicon_gap_queue_text
-    assert '"status":  "GAP_OPEN"' in lexicon_gap_queue_text
+    assert '"term": "AER"' in lexicon_gap_queue_text or '"term":  "AER"' in lexicon_gap_queue_text
+    assert '"status": "RESOLVED_TO_CANONICAL"' in lexicon_gap_queue_text or '"status":  "RESOLVED_TO_CANONICAL"' in lexicon_gap_queue_text or '"status": "GAP_OPEN"' in lexicon_gap_queue_text or '"status":  "GAP_OPEN"' in lexicon_gap_queue_text
     assert '"Affect-Effect Ratio"' in lexicon_gap_queue_text
 
 

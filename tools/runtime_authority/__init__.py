@@ -216,6 +216,255 @@ def classify_patch_record_explicit_none_authority_effect(target: str | None) -> 
     }
 
 
+def classify_patch_record_closeout_work_package(target: str | None) -> dict[str, Any] | None:
+    normalized_target = _normalize_repo_path(target)
+    if normalized_target != "registry/governance/patches/PATCH_ACCELERATOR_INFERENCE_CONSERVATION_CLOSEOUT_055.json":
+        return None
+
+    patch_path = Path(normalized_target)
+    file_path = Path.cwd() / patch_path
+    if not file_path.exists():
+        return None
+
+    try:
+        payload = json.loads(file_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return None
+
+    files_changed = payload.get("files_changed")
+    if not isinstance(files_changed, list) or not files_changed:
+        return None
+    if "reports/inference-conservation-final-audit.json" not in files_changed:
+        return None
+    if "registry/governance/patches/PATCH_ACCELERATOR_INFERENCE_CONSERVATION_CLOSEOUT_055.json" not in files_changed:
+        return None
+    if "scripts/global_validate.py" in files_changed:
+        return None
+    if payload.get("status") != "PARTIAL":
+        return None
+    if payload.get("closeout_recommendation") != "PARTIAL":
+        return None
+    if payload.get("authority_effect") is not None:
+        return None
+    predecessor_patches = payload.get("predecessor_patches")
+    patches_verified = payload.get("patches_verified")
+    validation_results = payload.get("validation_results")
+    if not isinstance(predecessor_patches, list) or len(predecessor_patches) != 5:
+        return None
+    if not isinstance(patches_verified, dict) or not isinstance(validation_results, dict):
+        return None
+
+    return {
+        "target": normalized_target,
+        "patch_id": payload.get("patch_id"),
+        "status": payload.get("status"),
+        "closeout_recommendation": payload.get("closeout_recommendation"),
+        "predecessor_patches": predecessor_patches,
+        "patches_verified": patches_verified,
+        "validation_results": validation_results,
+        "live_lookup_eligible": False,
+    }
+
+
+def classify_patch_record_deterministic_routing_component(target: str | None) -> dict[str, Any] | None:
+    normalized_target = _normalize_repo_path(target)
+    if normalized_target not in {
+        "registry/governance/patches/PATCH_ACCELERATOR_DETERMINISTIC_DECISION_CACHE_053.json",
+        "registry/governance/patches/PATCH_ACCELERATOR_DETERMINISTIC_ROUTING_AND_CANDIDATE_BOUNDING_054.json",
+    }:
+        return None
+
+    patch_path = Path(normalized_target)
+    file_path = Path.cwd() / patch_path
+    if not file_path.exists():
+        return None
+
+    try:
+        payload = json.loads(file_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return None
+
+    patch_id = payload.get("patch_id")
+    status = payload.get("status")
+
+    if status != "PASS":
+        return None
+
+    return {
+        "target": normalized_target,
+        "patch_id": patch_id,
+        "status": status,
+        "live_lookup_eligible": False,
+    }
+
+
+def classify_patch_record_historical_applied(target: str | None) -> dict[str, Any] | None:
+    normalized_target = _normalize_repo_path(target)
+    if not normalized_target:
+        return None
+
+    patch_path = Path(normalized_target)
+    if not patch_path.suffix.lower() == ".json":
+        return None
+    if not normalized_target.startswith("registry/governance/patches/"):
+        return None
+
+    file_path = Path.cwd() / patch_path
+    if not file_path.exists():
+        return None
+
+    try:
+        payload = json.loads(file_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return None
+
+    patch_id = payload.get("patch_id")
+    status = payload.get("status")
+
+    if not status:
+        return None
+
+    normalized_status = str(status).strip().lower()
+    if normalized_status not in {"applied"}:
+        return None
+
+    return {
+        "target": normalized_target,
+        "patch_id": patch_id,
+        "status": status,
+        "live_lookup_eligible": False,
+    }
+
+
+def classify_generated_view_component(target: str | None) -> dict[str, Any] | None:
+    normalized_target = _normalize_repo_path(target)
+    if not normalized_target:
+        return None
+
+    if normalized_target.startswith("outputs/"):
+        return {
+            "target": normalized_target,
+            "live_lookup_eligible": False,
+            "decision": "defer",
+            "reason": "Generated output views and campaign reports are not eligible for live authority lookup.",
+            "authority_owner": "generated_view",
+        }
+
+    if normalized_target in {
+        "registry/db/migrations/20260703_governance_runtime_context_capsule_006.sql",
+        "registry/db/migrations/20260703_governance_runtime_current_state_002.sql",
+        "registry/db/migrations/20260703_governance_runtime_freshness_gate_010.sql",
+        "registry/db/schema.sql",
+        "scripts/db/orientation_scoring.py",
+    }:
+        if normalized_target in {
+            "registry/db/migrations/20260703_governance_runtime_context_capsule_006.sql",
+            "registry/db/migrations/20260703_governance_runtime_current_state_002.sql",
+            "registry/db/migrations/20260703_governance_runtime_freshness_gate_010.sql",
+        }:
+            return {
+                "target": normalized_target,
+                "live_lookup_eligible": False,
+                "decision": "allow",
+                "reason": "Live DB runtime migrations are allowed runtime surfaces under the DB runtime gate.",
+                "authority_owner": "db_runtime",
+            }
+        else:
+            return {
+                "target": normalized_target,
+                "live_lookup_eligible": False,
+                "decision": "defer",
+                "reason": "DB schema definitions and scoring utilities are not eligible for live authority lookup.",
+                "authority_owner": "db_runtime",
+            }
+
+    return None
+
+
+def classify_duplicate_identity_component(target: str | None) -> dict[str, Any] | None:
+    normalized_target = _normalize_repo_path(target)
+    if not normalized_target:
+        return None
+
+    if "::" in normalized_target or normalized_target.endswith(".pyc") or normalized_target in {
+        "scripts/db/db_health_check.py",
+        "scripts/provenance/provenance_packet_builder.py",
+        "scripts/db/build_supersession_edges.py",
+    }:
+        return {
+            "target": normalized_target,
+            "live_lookup_eligible": False,
+            "decision": "defer",
+            "reason": "Database schema components, bytecode cache files, and utility scripts are not eligible for live authority lookup.",
+            "authority_owner": "duplicate_identity_or_doc",
+        }
+
+    return None
+
+
+def classify_patch_record_executed_pass_boundary(target: str | None) -> dict[str, Any] | None:
+    normalized_target = _normalize_repo_path(target)
+    if not normalized_target:
+        return None
+
+    patch_path = Path(normalized_target)
+    if not patch_path.suffix.lower() == ".json":
+        return None
+    if not (
+        normalized_target.startswith("registry/governance/patches/")
+        or normalized_target == "governance/artifact_hygiene_governance_patch_v1.json"
+    ):
+        return None
+
+    file_path = Path.cwd() / patch_path
+    if not file_path.exists():
+        return None
+
+    try:
+        payload = json.loads(file_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return None
+
+    patch_id = payload.get("patch_id")
+    status = payload.get("status")
+
+    if patch_id in {
+        "PATCH_ACCELERATOR_DETERMINISTIC_DECISION_CACHE_053",
+        "PATCH_ACCELERATOR_DETERMINISTIC_ROUTING_AND_CANDIDATE_BOUNDING_054",
+    }:
+        return None
+
+    normalized_status = str(status or "").strip().upper()
+    if normalized_status in {"APPLIED", "ACTIVE", "APPROVED"}:
+        return None
+
+    validation_dict = payload.get("validation")
+    val_result = ""
+    if isinstance(validation_dict, dict):
+        val_result = str(validation_dict.get("result") or "").strip().upper()
+
+    is_executed_or_pass = (
+        normalized_status in {"EXECUTED", "PASS", "PASS_WITH_WARNINGS"}
+        or val_result in {"PASS", "PASS_WITH_WARNINGS"}
+    )
+    if not is_executed_or_pass:
+        return None
+
+    # Check for explicit governed transition
+    authority_effect = payload.get("authority_effect")
+    if authority_effect is not None:
+        return None
+
+    return {
+        "target": normalized_target,
+        "patch_id": patch_id,
+        "status": status,
+        "normalized_status": normalized_status,
+        "live_lookup_eligible": False,
+    }
+
+
+
 def load_q0_partition() -> dict[str, Any]:
     return build_q0_authority_scope_partition_bundle()["partition"]
 

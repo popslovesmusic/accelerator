@@ -100,26 +100,29 @@
     {
       "id": "OQ_RTM_001",
       "label": "Trace Inheritance Lemma",
-      "status": "GAP_OPEN",
+      "status": "RESOLVED_L2",
       "statement": "If RT_n is trace-admissible under PRIN_001 and D(RT_n | continuation) satisfies the Nesting Coupling Rule (PRIN_003) and GOV-RT-ZERO-RECOUPLING-001, then RT_{n+1} := Red_x(D(RT_n | continuation), ...) is trace-admissible without requiring exhaustive re-derivation of the full lineage from RT_core. This would establish that trace-admissibility is a hereditary property under lawful nesting, making the recursive engine formally sound at arbitrary depth.",
       "why_it_matters": "Without this lemma, each depth level of the RT engine requires an independent PRIN_001 check from RT_core. With it, the recursive engine is sound by structural induction on nesting depth.",
-      "candidate_approach": "Show that the PRIN_001 trace requirement is preserved under the Nesting Coupling Rule by demonstrating that the full coupled form [D(*|-*) <f>_x D(*|+*)] at depth n+1 inherits the typed residue structure and asymmetry required by RT_core, via the typed zero-condition structure of Lemma L111."
+      "candidate_approach": "Show that the PRIN_001 trace requirement is preserved under the Nesting Coupling Rule by demonstrating that the full coupled form [D(*|-*) <f>_x D(*|+*)] at depth n+1 inherits the typed residue structure and asymmetry required by RT_core, via the typed zero-condition structure of Lemma L111.",
+      "campaign_reference": "MPF_RTM_RECURSIVE_CAMPAIGN_RUN_001"
     },
     {
       "id": "OQ_RTM_002",
       "label": "Continuation Admissibility Condition",
-      "status": "GAP_OPEN",
+      "status": "RESOLVED_L2",
       "statement": "What constitutes a valid continuation in D(RT_n | continuation)? Without a formal condition on admissible continuations, the recursive engine is open-ended and may admit too much. The continuation term must itself satisfy distinction and admissibility requirements traceable to RT_core.",
       "why_it_matters": "An unconstrained continuation space means RT_{n+1} is underdetermined. The continuation condition is the governing constraint that keeps the recursion within the framework's lawful domain.",
-      "candidate_approach": "Continuation is admissible iff it is itself a member of the distinction domain (E!=0) and can be coupled to RT_n under an asymmetric outer relation from the <*>_x family (PRIN_003). The continuation must carry a typed residue distinguishable from RT_n's residue."
+      "candidate_approach": "Continuation is admissible iff it is itself a member of the distinction domain (E!=0) and can be coupled to RT_n under an asymmetric outer relation from the <*>_x family (PRIN_003). The continuation must carry a typed residue distinguishable from RT_n's residue.",
+      "campaign_reference": "MPF_RTM_RECURSIVE_CAMPAIGN_RUN_001"
     },
     {
       "id": "OQ_RTM_003",
       "label": "Base Case Constructive Trace",
-      "status": "GAP_OPEN",
+      "status": "RESOLVED_L2",
       "statement": "Provide a constructive PRIN_001 trace from the base case reduction D(*|1) -> D(0|1) within Red_x(D(0|0), D(0|1), D(1|1), D(0|1)) to RT_core := [(E!=0) iff_R delta_a(E>0)], explicitly showing that distinction, admissibility, residue closure, and non-collapse are preserved throughout.",
       "why_it_matters": "The base case is currently asserted rather than constructively traced. This is required before the induction step can be be applied soundly.",
-      "candidate_approach": "Map D(a|b) notation onto E-values, verify E!=0 at each node of the reduced field, show that delta_a selects x=0 as the unique admissible continuation under the local admissibility window, and confirm residue closure via iff_R."
+      "candidate_approach": "Map D(a|b) notation onto E-values, verify E!=0 at each node of the reduced field, show that delta_a selects x=0 as the unique admissible continuation under the local admissibility window, and confirm residue closure via iff_R.",
+      "campaign_reference": "MPF_RTM_RECURSIVE_CAMPAIGN_RUN_001"
     }
   ],
   "governance_notes": [

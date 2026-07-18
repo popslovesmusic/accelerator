@@ -72,7 +72,7 @@ def main():
     tbb_bin = r"C:\Program Files (x86)\Intel\oneAPI\tbb\latest\env\..\bin"
     env_override = {"PATH": f"{oneapi_bin};{tbb_bin};" + os.environ.get("PATH", "")}
 
-    fsa_config = {"num_agents": 500, "n_states": 4, "steps": 100, "res_req": 0.5, "mismatch_rate": 0.1}
+    fsa_config = {"num_agents": 500, "n_states": 4, "steps": 100, "res_req": 2, "mismatch_rate": 0.1}
     fsa_run_dir = data_dir / "hqlc_fsa"
     fsa_run_dir.mkdir(exist_ok=True)
     fsa_config_path = fsa_run_dir / "config.json"
