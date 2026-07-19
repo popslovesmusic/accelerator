@@ -3441,6 +3441,45 @@ To resolve the remaining active induction gaps (Tasks 7.1 and 7.2), the framewor
 
 These proofs and theorems are registered under minimal theorem MT-RT-001 and verified in proof obligation PO-RT-002, closing the key logical gaps of the Phase II roadmap.
 
+## 14.13 Asymmetry-to-Orientation Selection Operator
+
+To establish the mathematical bridge between relational asymmetry and orientation selection (Gap G1), the framework introduces:
+1. **Asymmetry Ratio:** The directed distinction asymmetry metric $\Omega_a(S_1, S_2)_c = \frac{D(S_1 \mid S_2)_c}{D(S_2 \mid S_1)_c}$ is bounded within $[\epsilon_a D_{\max}^{-1}, \epsilon_a^{-1} D_{\max}]$ under the context floor constraint $\min_i D(S_i \mid S_{j \neq i}) \ge \epsilon_a$. This prevents division-by-zero singularities and is formalized in Lemma L124 and Proof P118.
+2. **Selection Operator:** The selection operator $O^*(\Omega_a)_c$ uniquely resolves to an oriented local reference frame $-(i) \in \mathcal{O}_{\text{adm}}$ minimizing local relational friction/pressure $\mu_{\text{rel}}$ if and only if $\Omega_a \neq 1$. When perfect symmetry exists ($\Omega_a = 1$), the selector is undefined. This is formalized in Lemma L125 and Proof P119, showing that symmetry breaking is a prerequisite for local orientation emergence.
+
+These additions are registered under minimal theorem MT-ASYM-001 and verified in proof obligation PO-ASYM-001, providing the first explicit mathematical pathway from relational distinction to orientation selection without reifying a background spatial container.
+## 14.14 Sign Semantics and Generative Pathways
+
+To resolve the gap regarding sign representation (Task 7.3), the framework formalizes sign polarity ($+$, $-$) as active process dynamics along directed pathways:
+1. **Pathway Polarities:** Rather than numeric constants, $+$ denotes *additive accumulation* (growth of relational crossing layers) and $-$ denotes *exclusion truncation* (filtration or constriction of crossing layers). This is formalized in Lemma L126.
+2. **Dynamic Mapping & Isomorphism:** The mapping function $\text{Sign}(\Delta P)_c$ partitions transitions into $\{+, -, 0\}$ based on the net change in relational crossings. Proof P120 establishes that the algebraic sign product composition rules (such as $(-)(-) = +$) map isomorphically to the process-level dynamics of consecutive exclusions resulting in external recovery.
+
+These additions are registered under minimal theorem MT-SIGN-001 and verified in proof obligation PO-SIGN-001, providing a dynamic process foundation for sign semantics.
+
+## 14.15 Evaluation Architecture and Governance Homomorphism
+
+To resolve the gap regarding the evaluation architecture (Task 7.4), the framework formalizes the structural relationship between metadata governance checks and relational admissibility:
+1. **Governance Homomorphism:** The platform's metadata governance system $\mathcal{G}$ (composed of code locks, hashes, and validation checks) is defined as a formal category-theoretic homomorphism of the underlying relational admissibility process $\mathcal{E}$ under mapping $f$.
+2. **Category Functoriality:** Proof P121 verifies that $f$ behaves as a covariant functor preserving identity check morphisms and sequence compositions, guaranteeing that the platform validation rules represent a homomorphic projection of the core calculus itself rather than arbitrary external constraints.
+
+These mappings are registered under minimal theorem MT-GOV-001 and verified in proof obligation PO-GOV-001.
+
+## 14.16 Functorial Braid Projection and Confinement
+
+To resolve the gap regarding functorial mapping to topological braid spaces (Task 7.5), the framework formalizes the translation from relational updates to geometric confinement states:
+1. **Braid Projection Functor:** The projection mapping $F_{\text{proj}}: \mathcal{E} \to \mathcal{B}$ maps the category of relational graph transitions to the category of topological braids, acting as a covariant functor preserving identity transitions and sequential compositions. This is formalized in Lemma L128 and verified in Proof P122.
+2. **Confinement Basin Stability:** Braid closures (knots/links) map to persistent relational basins. Lemma L129 and Proof P123 establish that the topological invariants of the closed braid configuration correspond to conserved qualities protected by the admissibility filter, preventing basin decay to the symmetric ground state.
+
+These mappings are registered under minimal theorem MT-BRD-001 and verified in proof obligation PO-BRD-001.
+
+## 14.17 Polarity Closure and Nested Semantics
+
+To resolve the gap regarding nested whole-relation aspects connecting closure and polarity (Task 7.6 / PALG-QUEUE-001), the framework formalizes the binary polarity balance in process dynamics:
+1. **Nested Polarity Equivalence:** The primary constraint realization axiom is shown to be recursively equivalent to the polarity closure loop: $(\mathcal{E} \neq 0) \iff_R \delta_a(\mathcal{E} > 0) \iff_R [(-1) \iff_R (+1)]$. This is formalized in Lemma L130 and verified in Proof P124.
+2. **Aspect Non-Separability:** The aspects of exclusion ($-1$) and accumulation ($+1$) represent coordinates of a single indivisible feedback loop, meaning that ablated component studies distort the entire relational structure.
+
+These mappings are registered under minimal theorem MT-PALG-001 and verified in proof obligation PO-PALG-001.
+
 ---
 
 ## Summary of Chapter 14 Dependencies

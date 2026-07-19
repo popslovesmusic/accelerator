@@ -102,7 +102,7 @@ This document tracks the strategic objectives following the successful consolida
     - [x] Inducted `PD_CG_V2_PROCEDURAL_ORIENTATING_REAUDIT.json`.
     - [x] Performed sequence-level orientating analysis (Confirmed ablation impact 97%).
     - [x] Verified procedural mediation of boundary-front stabilization.
-    - [x] Re-promoted OPEN_BRIDGE_001 to RECOVERY_PENDING (Living SSOT updated).
+    - [x] Re-promoted OPEN_BRIDGE_001 to SUPPORTED (All obligations satisfied and endorsed).
 
 
 
@@ -129,10 +129,14 @@ This document tracks the strategic objectives following the successful consolida
     - [x] Define the precise admissibility condition ($ \mathcal{A} $) under which a precursor distinction becomes an RT.
 - [x] **Task 7.2: Formalize RT Core Equivalence (GAP_RT_CORE_EQUIVALENCE)**
     - [x] Investigate and prove whether $ RT := [D \neq 0 \langle * \rangle_x D = 0] $ is formally equivalent to the canonical core or structurally analogous.
-- [ ] **Task 7.3: Define Sign Semantics (GAP_SIGN_SEMANTICS)**
-    - [ ] Formalize the notation for additive-signature vs. exclusion-signature and map to generative process pathways.
-- [ ] **Task 7.4: Map Evaluation Architecture (GAP_EVALUATION_ARCHITECTURE)**
-    - [ ] Formally define the relationship between the framework's governance process and the underlying admissibility/evaluation process.
+- [x] **Task 7.3: Define Sign Semantics (GAP_SIGN_SEMANTICS)**
+    - [x] Formalize the notation for additive-signature vs. exclusion-signature and map to generative process pathways.
+- [x] **Task 7.4: Map Evaluation Architecture (GAP_EVALUATION_ARCHITECTURE)**
+    - [x] Formally define the relationship between the framework's governance process and the underlying admissibility/evaluation process.
+- [x] **Task 7.5: Functorial Braid Projection (GAP_BRAID_PROJECTION)**
+    - [x] Formally define the projection functors mapping relational graph models to topological braid spaces (confinement regimes).
+- [x] **Task 7.6: Polarity Closure and Nested Semantics (GAP_POLARITY_CLOSURE)**
+    - [x] Formally define the nested relation semantics binding constraint realization to directed sign polarities.
 
 ### 8. Repository Maintenance & Governance Debt
 - [/] **Task 8.1: Lexicon Gap Resolution (MNT-LEX-002)**

@@ -94,6 +94,18 @@ L120 | Model Class Satisfiability | L117, L119 | complete | defines relational g
 L121 | Distinction Emergence | None | provisional | defines primitive condition, admissibility coupling, and Affect-Effect gradient
 L122 | Relational Transition Stabilization Criterion | T001 | provisional | defines the admissibility condition for transition stabilization
 L123 | Relational Transition Core Equivalence | L122 | provisional | proves the equivalence between relational transition form and core expression
+L124 | Bounded Asymmetry Ratio | None | provisional | defines the asymmetry ratio and its bounds under the context floor
+L125 | Orientation Selection Operator | L124 | provisional | defines the selection operator mapping asymmetry to local orientation
+L126 | Sign as Generative Pathway | None | provisional | defines sign states as directed pathway accumulation and exclusion processes
+L127 | Evaluation-Governance Homomorphism | None | provisional | defines the homomorphism between relational admissibility and metadata governance
+L128 | Braid Projection Functor | None | provisional | defines the covariant functor mapping relational graphs to topological braids
+L129 | Braid Confinement Stability | L128 | provisional | proves that braid closures map to stable persistent relational basins
+L130 | Polarity Closure Binding | None | provisional | defines the nested equivalence between primary constraint realization and sign polarities
+
+
+
+
+
 
 
 

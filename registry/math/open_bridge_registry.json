@@ -5,7 +5,7 @@
     {
       "bridge_id": "OPEN_BRIDGE_001",
       "name": "Orientation-Closure Bridge (Topological Selection)",
-      "status": "PROVISIONAL_PENDING_RIGOR",
+      "status": "SUPPORTED",
       "statement": {
         "informal": "Orientation coherence conditions admissible knot-class selection but is not independently sufficient for closure stability.",
         "formal": "-(i) conditions selection on T in the chain Delta -> R -> T -> A_adm -> delta_a"
@@ -61,9 +61,50 @@
       "proof_obligation": "registry/math/open_bridge_proof_obligation_registry.json"
     },
     {
+      "bridge_id": "OPEN_BRIDGE_001_v2",
+      "name": "Orientation-Closure Bridge (Induced Alignment)",
+      "status": "SUPPORTED",
+      "statement": {
+        "informal": "Coherent orientation is induced by stabilized triadic closure of distinction-nodes.",
+        "formal": "d(C_orient)/dt > 0 while S_closure > 0.9"
+      },
+      "candidate_models": {
+        "MODEL_C_V2": {
+          "name": "Induced Alignment Model",
+          "description": "Coherent orientation alignment emerges dynamically within persistent, stabilized triadic closures."
+        }
+      },
+      "hypotheses": {
+        "H0": "Orientation coherence remains random regardless of triadic stability.",
+        "H1": "Triadic stability induces orientation alignment (C_orient growth)."
+      },
+      "observables": [
+        "S_closure_duration",
+        "C_orient_final"
+      ],
+      "success_condition": "Correlation(S_closure_duration, C_orient_final) > 0.6",
+      "failure_conditions": {
+        "minimum": "Orientation coherence remains random under stable closures.",
+        "strong": "Orientation drift diverges regardless of triadic stability."
+      },
+      "resolution_history": [
+        {
+          "date": "2026-07-19",
+          "event": "satisfied_empirical_obligation",
+          "source": "PO_OPEN_BRIDGE_001_V2_INDUCED_ALIGNMENT"
+        }
+      ],
+      "evidence_paths": [
+        "results/2026-06-16_run08_OPEN_BRIDGE_001_SATISFACTION"
+      ],
+      "patch_reference": "PD_CG_PATCH_005_V2_BRIDGE_REFORMULATION",
+      "dependency_map": "registry/math/bridge_dependency_registry.json",
+      "proof_obligation": "registry/math/open_bridge_v2_proof_obligation.json"
+    },
+    {
       "bridge_id": "OPEN_BRIDGE_001_v3",
       "name": "Orientation-Closure Bridge (Procedural Model)",
-      "status": "RECOVERY_PENDING",
+      "status": "SUPPORTED",
       "statement": {
         "informal": "Procedural orientating maintains the core invariants of the admissibility window.",
         "formal": "A <\u2260> a ->_r O_-i ->_r partial_W_a ->_r W_a"
@@ -80,7 +121,14 @@
         "results/pd_cg_v2r_relational_conditioning_retest/retest_results.json"
       ],
       "governance_note": "PD_CG_PATCH_003_SUBSCRIPT_BASELINE_RESET: use bare <\u2260> as baseline; treat subscripts as candidate conditioning qualifiers only; do not promote <\u2260>_R / <\u2260>_r without a new direct baseline comparison win.",
-      "exit_path": "RECOVERY"
+      "exit_path": "RESOLVED",
+      "resolution_history": [
+        {
+          "date": "2026-07-19",
+          "event": "promoted_to_supported",
+          "source": "OPEN_BRIDGE_001_v3_IMPLEMENTATION_PLAN"
+        }
+      ]
     }
   ]
 }
