@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "IndependentMeasurementSuiteOutput",
+  "type": "object",
+  "properties": {
+    "tool_name": { "type": "string" },
+    "tool_version": { "type": "string" },
+    "run_id": { "type": "string" },
+    "mechanism_class": { "type": "string" },
+    "configuration_hash": { "type": "string" },
+    "implementation_hash": { "type": "string" },
+    "seed": { "type": ["integer", "null"] },
+    "status": { "type": "string", "enum": ["success", "failed", "unstable", "invalid"] },
+    "measurements": {
+      "type": "object",
+      "properties": {
+        "ks_distance": { "type": "number" },
+        "dtw_distance": { "type": "number" },
+        "clustering_coefficient_diff": { "type": "number" },
+        "degree_entropy_diff": { "type": "number" },
+        "bootstrap_ci": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": { "type": "number" }
+        },
+        "permutation_p_value": { "type": "number" }
+      }
+    },
+    "uncertainty": { "type": "object" },
+    "warnings": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "provenance": { "type": "object" }
+  },
+  "required": [
+    "tool_name",
+    "tool_version",
+    "run_id",
+    "mechanism_class",
+    "configuration_hash",
+    "implementation_hash",
+    "status",
+    "measurements"
+  ]
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "id": "MUT-001",
+    "description": "Replace maximum with minimum in KS computation",
+    "target": "return float(np.max(np.abs(cdfs_a - cdfs_b)))",
+    "replacement": "return float(np.min(np.abs(cdfs_a - cdfs_b)))"
+  },
+  {
+    "id": "MUT-002",
+    "description": "Remove absolute value in DTW cost calculation",
+    "target": "cost = abs(a[i-1] - b[j-1])",
+    "replacement": "cost = (a[i-1] - b[j-1])"
+  },
+  {
+    "id": "MUT-003",
+    "description": "Alter normalization constants in empirical CDF",
+    "target": "return np.sum(data <= x) / len(data)",
+    "replacement": "return np.sum(data <= x) / (len(data) + 1.0)"
+  },
+  {
+    "id": "MUT-004",
+    "description": "Return a fixed p-value in permutation test",
+    "target": "return float(count / num_permutations)",
+    "replacement": "return 0.5"
+  },
+  {
+    "id": "MUT-005",
+    "description": "Swap confidence interval bounds in bootstrap",
+    "target": "return [float(np.percentile(diffs, 2.5)), float(np.percentile(diffs, 97.5))]",
+    "replacement": "return [float(np.percentile(diffs, 97.5)), float(np.percentile(diffs, 2.5))]"
+  }
+]

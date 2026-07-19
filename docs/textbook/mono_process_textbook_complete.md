@@ -3410,6 +3410,39 @@ To complete the governance program, the following must be induced:
 
 ---
 
+## 14.10 Syntactic and Semantic Closure of the Core Calculus
+
+To address the requirements identified in the formal system gap assessment, the core calculus of the Mono-Process Framework has been transitioned into a closed formal system ($\mathcal{L}_{COD}$):
+1. **Syntax Closure:** Formalized object classes (States $\mathcal{S}$, Residues $\mathcal{R}$, Contexts $\mathcal{C}$, Operators $\mathcal{O}$, Relations $\mathcal{T}$, and Projections $\mathcal{P}_{\text{proj}}$) under Lemma L116 and Proof P110.
+2. **Semantic Closure:** Defined valuation functions and boundary conditions under Lemma L117 and Proof P111, mapping failures to the $0$-state symmetry limit.
+3. **Operator Algebra:** Closed compositional properties for the projection operator ($\Pi_A \otimes \Pi_B = \Pi_{A \cap B}$) under Lemma L118 and Proof P112.
+4. **Inference Rules:** Sound natural deduction rules ($\delta_a$-Introduction and Elimination) under Lemma L119 and Proof P113.
+5. **Model Class Consistency:** Satisfiability verified against the class of residue-weighted relational graphs under Lemma L120 and Proof P114.
+
+These closures are canonically recorded in the math source registry and locked in the hash registry, resolving the primary formal system debt of the program.
+
+## 14.11 Refined Foundational Ontology
+
+Following the induction of the foundational ontology refinement packet, the root primitives of the Mono-Process Framework have been adjusted to shift the primitive from distinction itself to the relational condition permitting distinction:
+1. **Primitive Relational Condition (`(*|*)`):** The minimal relational condition permitting the possibility of operational distinction, prior to distinction or observation.
+2. **Symmetric Relational Biconditional (`<-S->`):** A domain-specific biconditional representing mutual necessity between the primitive condition and the admissibility of distinction, rather than classical logic equivalence. Formally:
+   \[
+   (*|*) \Leftrightarrow_S \delta_a(\mathcal{E} \neq 0)
+   \]
+3. **Emergent Gradient (`(A|E)`):** The Affect-Effect gradient emerging co-dependently once admissible distinction is established, where Affect ($A$) represents relational influence pressure and Effect ($E$) represents realized consequence.
+
+This refined ontology is formalized in Lemma L121 and verified in Proof P115, transitioning the framework from a "distinction-first" system to a "relation-prior" system that avoids unvalidated background substrates.
+
+## 14.12 Relational Transition Core Equivalence
+
+To resolve the remaining active induction gaps (Tasks 7.1 and 7.2), the framework defines the conditions under which precursor divisions stabilize and maps them to the core calculus:
+1. **Stabilization Criterion:** A precursor distinction $D(*\mid*)$ is prevented from decaying to the $0$-state symmetry limit if and only if it exceeds the context floor $\epsilon_a$ and forms a triadic closure cycle $K$, satisfying the 3-Peak Rule. This is formalized in Lemma L122 and Proof P116.
+2. **Core Equivalence:** The relational transition form $RT := [D \neq 0 \langle * \rangle_x D = 0]$ and the canonical core expression $(\mathcal{E} \neq 0) \Leftrightarrow_R \delta_a(\mathcal{E} > 0)$ are process-equivalent under the projection basis $\Pi_A$. This is formalized in Lemma L123 and Proof P117, proving that both represent co-dependent locks that map failure cases identically onto the $0$-state.
+
+These proofs and theorems are registered under minimal theorem MT-RT-001 and verified in proof obligation PO-RT-002, closing the key logical gaps of the Phase II roadmap.
+
+---
+
 ## Summary of Chapter 14 Dependencies
 
 - **Chapter 1** provided the core primitives that all claims must trace back to.
@@ -3463,6 +3496,9 @@ By enforcing these governance and induction rules, we ensure that the Mono-Proce
 | $\to_{ra}$ | Residue-Admissible Transition | Transition preserving residue signature and identity. | 2.7 |
 | $\iff_{ra}$ | Residue-Admissible Correspondence | Recursive residue-preserving correspondence across continuation. | 2.7 |
 | $<\neq>_{ra}$ | Identity Non-Collapse | Relation asserting non-zero distinguishability across identity continuation. | 2.7 |
+| $(*|*)$ | Primitive Relational Condition | The minimal relational condition permitting the possibility of operational distinction. | 14.11 |
+| $\Leftrightarrow_S$ | Symmetric Relational Biconditional | Domain-specific biconditional representing mutual necessity between pre-distinction and admissibility. | 14.11 |
+| $(A \mid E)$ | Affect-Effect Gradient | The primary emergent gradient representing tendency and consequence. | 14.11 |
 
 \pagebreak
 
@@ -4176,8 +4212,9 @@ This textbook draft is derived from and cross-referenced with the following foun
 | **IND-STATE-S-001** | [Induction: State Primitive Grounding](D:/projects/acellorator/docs/textbook/mono_process_textbook_complete.md) | 2026-05-29 | Non-spatial, monistic definition of the state aspect S. |
 | **MPF-P1-003** | [Patch: Invariant Registry Implementation](D:/projects/acellorator/registry/math/invariant_registry.json) | 2026-05-29 | Implementation of the initial invariant family for projectional equivalence. |
 | **MPF-P1-004** | [Patch: Projectional Equivalence Template](D:/projects/acellorator/docs/theory/foundational/5_03_26%20unity/math/proofs/PROJECTIONAL_EQUIVALENCE_TEMPLATE.md) | 2026-05-29 | Formal proof structure for verifying invariant preservation across domains. |
-| **L101–L115** | [Lemmas L101–L115](D:/projects/acellorator/docs/theory/foundational/5_03_26%20unity/math/lemmas/) | 2026-06-22 | Formulations of Whole Expression Primacy, Zero-State domain membership, Recoupling-Reorientation Event, Meta-Relation Family, Typed Meta-Relation Operator ($\langle*\rangle_x$), vertical bar operator |, and Admissible Organization Operator ($Org_a$) axioms. |
-| **P101–P109** | [Proofs P101–P109](D:/projects/acellorator/docs/theory/foundational/5_03_26%20unity/math/proofs/) | 2026-06-22 | Formal proof sketches and validation structures for Lemmas L101–L109. |
+| **L101–L120** | [Lemmas L101–L120](D:/projects/acellorator/docs/theory/foundational/5_03_26%20unity/math/lemmas/) | 2026-07-19 | Formulations of Whole Expression Primacy, Zero-State domain membership, Recoupling-Reorientation Event, Meta-Relation Family, Typed Meta-Relation Operator ($\langle*\rangle_x$), vertical bar operator |, Admissible Organization Operator ($Org_a$) axioms, and the L116–L120 closure package. |
+| **P101–P114** | [Proofs P101–P114](D:/projects/acellorator/docs/theory/foundational/5_03_26%20unity/math/proofs/) | 2026-07-19 | Formal proof sketches and validation structures for Lemmas L101–L120. |
+| **04_syntax_and_semantic_closure_of_core_calculus** | [Typed Grammar and Semantic Closure of the Core Calculus](D:/projects/acellorator/docs/theory/foundational/5_03_26%20unity/math/04_syntax_and_semantic_closure_of_core_calculus.md) | 2026-07-19 | Overview document for the L116–L120 syntax, semantic, algebraic, inference, and model-class closure package. |
 
 ### Secondary References and Registries
 - **Compliance Charter v2.3:** [compliance_charter_v2_3.json](D:/projects/acellorator/registry/compliance_charter_v2_3.json) - Governance authority.

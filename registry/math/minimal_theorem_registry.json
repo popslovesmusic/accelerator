@@ -200,7 +200,7 @@
       "entry_type": "induction",
       "scope": "provisional_bridge",
       "status": "C1_DEFINED_PROVISIONAL",
-      "formula": "CG := △(RT, QM_app, GR_app)",
+      "formula": "CG := \u25b3(RT, QM_app, GR_app)",
       "dependencies": {
         "vertices": [
           "RT",
@@ -395,7 +395,7 @@
           "|"
         ]
       },
-      "formula": "Adm_|(A,B) := [Typed_a(A) ∧ Typed_a(B) ∧ Eval_D(A|B) ∧ D(A|B) > epsilon_a]",
+      "formula": "Adm_|(A,B) := [Typed_a(A) \u2227 Typed_a(B) \u2227 Eval_D(A|B) \u2227 D(A|B) > epsilon_a]",
       "rules": [
         "GOV-VBAR-001"
       ],
@@ -416,7 +416,7 @@
           "|"
         ]
       },
-      "formula": "Adm_|^G(A_1,...,A_n; G) := [∀A_i Typed_a(A_i)] ∧ [∀e_ij ∈ E(G), Adm_|(A_i,A_j)] ∧ Preserve_O(G) ∧ Eval_D^G(G) ∧ D_G(G) > epsilon_a",
+      "formula": "Adm_|^G(A_1,...,A_n; G) := [\u2200A_i Typed_a(A_i)] \u2227 [\u2200e_ij \u2208 E(G), Adm_|(A_i,A_j)] \u2227 Preserve_O(G) \u2227 Eval_D^G(G) \u2227 D_G(G) > epsilon_a",
       "rules": [
         "GOV-GBC-001"
       ],
@@ -437,9 +437,85 @@
           "Org_a"
         ]
       },
-      "formula": "Adm_Org(G) := Adm_|^G(G) ∧ ∃o∈O(G) Adm_O(G,o) ∧ D_G(G)>epsilon_a ∧ InvPres_D(G) ∧ AdmCons_a(G) ∧ TopCons_O(G)",
+      "formula": "Adm_Org(G) := Adm_|^G(G) \u2227 \u2203o\u2208O(G) Adm_O(G,o) \u2227 D_G(G)>epsilon_a \u2227 InvPres_D(G) \u2227 AdmCons_a(G) \u2227 TopCons_O(G)",
       "rules": [
         "GOV-ORG-001"
+      ],
+      "provisional_status": true
+    },
+    {
+      "theorem_id": "MT-SYN-001",
+      "name": "Core Calculus Syntax and Semantic Closure",
+      "statement": "The core calculus of the Mono-Process Framework forms a syntactically and semantically closed language L_COD. All well-formed formulas map to distinct types, operators compose algebraically, natural deduction is sound, and satisfiability holds over graph-theoretic models.",
+      "entry_type": "proposition",
+      "scope": "local",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "dependencies": {
+        "lemmas": [
+          "L116",
+          "L117",
+          "L118",
+          "L119",
+          "L120"
+        ],
+        "operators": [
+          "D",
+          "<=>_R",
+          "delta_a",
+          "Pi_A",
+          "NavT",
+          "otimes"
+        ]
+      },
+      "formula": "Closed_L_COD(L) := Syntax_Closed(L116) \u2227 Semantic_Closed(L117) \u2227 Closed_Algebra(L118) \u2227 Sound_Deduction(L119) \u2227 Satisfiable_Model(L120)",
+      "rules": [
+        "GOV-SYN-001"
+      ],
+      "provisional_status": true
+    },
+    {
+      "theorem_id": "MT-ONT-001",
+      "name": "Ontological Distinction Emergence",
+      "statement": "The operational existence of distinction emerges co-dependently from a primitive relational condition (*|*) via a domain-specific symmetric relational biconditional, resolving into an Affect-Effect gradient without reifying background coordinate space.",
+      "entry_type": "proposition",
+      "scope": "local",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "dependencies": {
+        "lemmas": [
+          "L121"
+        ],
+        "operators": [
+          "(*|*)",
+          "<-S->",
+          "(A|E)"
+        ]
+      },
+      "formula": "(*|*) <=>_S delta_a(E!=0) -> (A|E)",
+      "rules": [
+        "GOV-ONT-001"
+      ],
+      "provisional_status": true
+    },
+    {
+      "theorem_id": "MT-RT-001",
+      "name": "Relational Transition Core Equivalence",
+      "statement": "A precursor distinction stabilizes into a Relational Transition if and only if it exceeds the context floor and forms a triadic closure cycle. The stabilized relational form is process-equivalent to the canonical core expression under local projection.",
+      "entry_type": "proposition",
+      "scope": "local",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "dependencies": {
+        "lemmas": [
+          "L122",
+          "L123"
+        ],
+        "operators": [
+          "D",
+          "<*>_x"
+        ]
+      },
+      "formula": "RT := [D != 0 <*>_x D = 0] <=> [ (E != 0) <=>_R delta_a(E > 0) ]",
+      "rules": [
+        "GOV-RT-001"
       ],
       "provisional_status": true
     }

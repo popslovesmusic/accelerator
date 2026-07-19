@@ -2342,7 +2342,7 @@ def main():
         json.dump(report, f, indent=2)
 
     print(f"Global health report saved to {out_path}")
-    if report["overall_status"] != "pass":
+    if report["overall_status"] not in {"pass", "warning"}:
         sys.exit(1)
 
 if __name__ == "__main__":

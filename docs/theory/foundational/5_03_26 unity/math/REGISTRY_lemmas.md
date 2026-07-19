@@ -86,3 +86,14 @@ L112 | RT Nesting, Condition Primacy, and Family Constitution | L104, L105, L107
 L113 | Vertical Bar Operator: Admissible Participation Separator | L043, L044, L107 | provisional | defines primitive role, operands, orientation sensitivity, local closure, and relation to D
 L114 | Grouped Bar Closure and Triadic Participation | L113 | provisional | defines binary non-reduction, associativity and permutation defaults, triadic closure special case, grouped admissibility gate
 L115 | Org_a: Admissible Organization Axioms | L113, L114 | provisional | defines organizational operator, inputs, inventory preservation, admissibility conservation, topological consistency
+L116 | Syntactic Closure of L_COD | D1, D2, D3 | complete | defines syntax, object classes, and WFF rules
+L117 | Semantic Closure of Core | D5, L116 | complete | defines valuation semantics and 0-state limit
+L118 | Closure of Operator Algebra | D2, D4, L117 | complete | defines composition, identity, and associativity of projection
+L119 | Inference Rules of L_COD | L116, L117 | complete | defines natural deduction rules for admissibility
+L120 | Model Class Satisfiability | L117, L119 | complete | defines relational graph model and proves consistency
+L121 | Distinction Emergence | None | provisional | defines primitive condition, admissibility coupling, and Affect-Effect gradient
+L122 | Relational Transition Stabilization Criterion | T001 | provisional | defines the admissibility condition for transition stabilization
+L123 | Relational Transition Core Equivalence | L122 | provisional | proves the equivalence between relational transition form and core expression
+
+
+

@@ -125,10 +125,10 @@ This document tracks the strategic objectives following the successful consolida
     - [x] Register 3 provisional claims in `claim_registry.json`.
     - [x] Update Chapter 1.2A and 1.7 of `mono_process_textbook_complete.md`.
     - [x] Induct core terms (RT, Generative Exclusion, Evaluation Process, Sign) into gap queue.
-- [ ] **Task 7.1: Resolve RT Formation Gap (GAP_RT_FORMAL_CRITERION)**
-    - [ ] Define the precise admissibility condition ($ \mathcal{A} $) under which a precursor distinction becomes an RT.
-- [ ] **Task 7.2: Formalize RT Core Equivalence (GAP_RT_CORE_EQUIVALENCE)**
-    - [ ] Investigate and prove whether $ RT := [D \neq 0 \langle * \rangle_x D = 0] $ is formally equivalent to the canonical core or structurally analogous.
+- [x] **Task 7.1: Resolve RT Formation Gap (GAP_RT_FORMAL_CRITERION)**
+    - [x] Define the precise admissibility condition ($ \mathcal{A} $) under which a precursor distinction becomes an RT.
+- [x] **Task 7.2: Formalize RT Core Equivalence (GAP_RT_CORE_EQUIVALENCE)**
+    - [x] Investigate and prove whether $ RT := [D \neq 0 \langle * \rangle_x D = 0] $ is formally equivalent to the canonical core or structurally analogous.
 - [ ] **Task 7.3: Define Sign Semantics (GAP_SIGN_SEMANTICS)**
     - [ ] Formalize the notation for additive-signature vs. exclusion-signature and map to generative process pathways.
 - [ ] **Task 7.4: Map Evaluation Architecture (GAP_EVALUATION_ARCHITECTURE)**

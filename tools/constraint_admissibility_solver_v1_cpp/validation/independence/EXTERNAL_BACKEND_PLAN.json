@@ -1,0 +1,22 @@
+{
+  "audit_id": "CAS-AUD-001-RESOLUTION-PLAN",
+  "tool_name": "constraint_admissibility_solver_v1_cpp",
+  "target_stage": "C3",
+  "chosen_backend": "PySAT",
+  "chosen_oracle": "pysat.solvers.Glucose3",
+  "independence_design": {
+    "module_path": "tools/constraint_admissibility_solver_v1_cpp/validation/independence/pysat_oracle.py",
+    "encoding": "CNF reduction (Tseitin transformation of variables and logic constraints)",
+    "no_shared_code": true,
+    "blind_fixtures": true,
+    "result_parser": "independent witness/conflict clause parser",
+    "third_path_validation": "A separate Python check_witness validation function verifying the returned SAT assignment satisfies the original raw JSON constraints"
+  },
+  "sat_reducibility_mapping": {
+    "domain_encoding": "One-hot boolean variables per domain value for each variable name, plus exactly-one constraint",
+    "triad_closure_encoding": "Clausified cycle constraint: for variables A, B, C, if A and B are active (not 0), C must not be 0",
+    "coupling_encoding": "Clausified equivalence or implication clauses representing allowed_pairs transition table",
+    "projection_encoding": "Unary unit clauses forcing the variable's value to belong to the allowed_values set",
+    "composition_encoding": "Implication clauses mapping pairs of input values to composition outputs"
+  }
+}
