@@ -1,0 +1,66 @@
+{
+  "patch_id": "APPENDIX_F_CH6_4_PROVENANCE_ADMISSIBILITY_FAILURE_REDUCTION_001",
+  "status": "APPLIED_VALIDATED",
+  "date": "2026-07-20",
+  "objective": "Reduce the Appendix F Chapter 6.4 provenance-explicit admissibility failure obligation by defining the scoped diagnostic failure boundary while preserving deferred recovery semantics.",
+  "governance_context": {
+    "task": "APPENDIX_F_CH6_4_PROVENANCE_ADMISSIBILITY_FAILURE_REDUCTION_001",
+    "db_runtime_queried": true,
+    "db_decision": "allow",
+    "db_health": "pass",
+    "authority_state": "allow",
+    "freshness_state": "fresh",
+    "remaining_advisory": "resolve_patch_chain"
+  },
+  "direct_reduction": {
+    "appendix_f_item": "Chapter 6.4 Provenance-Explicit Admissibility Failure",
+    "old_status": "OPEN",
+    "new_status": "SCOPED_RESOLVED_DIAGNOSTIC_FAILURE_BOUNDARY",
+    "failure_boundary": "delta_a(x;c)=emptyset -> bottom_C^{adm}",
+    "diagnostic_fork": "bottom_C^{adm} -> {Reorient(R,O,c), 0-state collapse}_{diagnostic}",
+    "recovery_status": "DEFERRED",
+    "return_to_stable_regime_status": "DEFERRED"
+  },
+  "source_basis": [
+    "PATCH_MPF_TEXTBOOK_CH6_4_PROVENANCE_REPAIR_001",
+    "PATCH_PI_RT_CALCULUS_022",
+    "PATCH_PI_RT_CALCULUS_023",
+    "PATCH_PI_RT_CALCULUS_024",
+    "PATCH_PI_RT_CALCULUS_046",
+    "PATCH_PI_RT_CALCULUS_047",
+    "PATCH_PI_RT_CALCULUS_048",
+    "PATCH_PI_RT_CALCULUS_049",
+    "PATCH_PI_RT_CALCULUS_050",
+    "PATCH_PI_RT_CALCULUS_051"
+  ],
+  "non_promotion_boundaries": [
+    "Does not modify RT_core.",
+    "Does not prove 0-state collapse.",
+    "Does not define recovery from bottom_C^{adm}.",
+    "Does not define return-to-stable-regime semantics.",
+    "Does not promote any failure branch to theorem status."
+  ],
+  "validation": {
+    "status": "passed_with_warning_global_health",
+    "commands": [
+      "python scripts/governance/authorize_lock_update.py",
+      "python scripts/sync_math_registry.py",
+      "python scripts/db/snapshot_registries.py",
+      "python scripts/global_validate.py"
+    ],
+    "results": {
+      "json_parse": "pass",
+      "authorize_lock_update": "pass",
+      "sync_math_registry": "pass_179_items",
+      "db_snapshot_refresh_id": "REFRESH-20260720T005052722255Z",
+      "db_snapshot_warnings": [],
+      "global_validate_exit_code": 0,
+      "global_health_overall_status": "warning",
+      "failed_stages": [],
+      "missing_required_stages": [],
+      "runtime_failures": [],
+      "tooling_failures": [],
+      "semantic_failures": []
+    }
+  }
+}

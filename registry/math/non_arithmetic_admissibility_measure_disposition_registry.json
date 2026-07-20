@@ -1,0 +1,84 @@
+{
+  "registry_id": "NON_ARITHMETIC_ADMISSIBILITY_MEASURE_DISPOSITION_REGISTRY",
+  "patch_id": "APPENDIX_F_SECTION_2_NON_ARITHMETIC_ADMISSIBILITY_MEASURE_001",
+  "status": "SCOPED_DISPOSITION_VALIDATED",
+  "authority_level": "L0_TO_L2_EVIDENCE_SYNCHRONIZATION",
+  "source_obligation": "OQ_COND_004",
+  "source_induction": "RT-IND-Conditioning-001",
+  "source_reduction": "MPF_PRIMITIVE_CONDITIONING_REDUCTION_001",
+  "campaign_reference": "MPF_COND_CAMPAIGN_RUN_001",
+  "question": "Can admissibility be measured independently of arithmetic projection?",
+  "disposition": {
+    "answer": "supported_as_conditioning_lineage_admissibility_proxy_outside_arithmetic_projection",
+    "summary": "A non-arithmetic admissibility measure is supported as a model-relative proxy when it is computed from conditioned structure, lineage, typed residue, directional order, and admissibility-context recoverability rather than arithmetic projection.",
+    "classification": "PASSED_PENDING_RIGOR_ENDORSEMENT"
+  },
+  "formal_scaffold": {
+    "candidate_measure": "Adm_cond(<a>_b, x)",
+    "candidate_condition": "Adm_cond is admissible only if it is defined over typed conditioned distinctions and reads order, lineage, admissibility context, typed residue, and non-collapse without using arithmetic projection as the primitive measure.",
+    "mapping_requirements": [
+      "Typed conditioned-distinction input is declared.",
+      "Conditioning lineage is recoverable.",
+      "Admissibility context is recoverable.",
+      "Directional order is recoverable.",
+      "Typed residue is recoverable and non-aliased.",
+      "Arithmetic projection is either absent from the measure or explicitly declared as downstream comparison only."
+    ],
+    "exclusion_rule": "The measure is inadmissible if it depends on arithmetic projection as primitive, erases conditioning lineage, collapses admissibility context, aliases residue, or is used as a universal admissibility metric.",
+    "scope": "model-relative conditioning theory only"
+  },
+  "campaign_evidence": {
+    "result_path": "outputs/conditioning_campaign/conditioning_results.json",
+    "report_path": "outputs/conditioning_campaign/conditioning_report.md",
+    "control_comparison_path": "outputs/conditioning_campaign/conditioning_control_comparison.json",
+    "num_seeds": 64,
+    "mean_correlation": 0.847475908817461,
+    "non_arithmetic_measure_verified": true,
+    "verdict": "SUPPORTED"
+  },
+  "failure_conditions": [
+    "The input conditioned distinction is untyped.",
+    "Conditioning lineage is unavailable.",
+    "Admissibility context is erased or collapsed.",
+    "Directional order is unavailable.",
+    "Typed residue is erased or aliased.",
+    "Arithmetic projection is treated as the primitive measure.",
+    "The proxy is treated as a universal admissibility metric or physical metric."
+  ],
+  "appendix_f_effect": {
+    "obligation": "OQ_COND_004",
+    "from": "REGISTERED_LATE",
+    "to": "PASSED_PENDING_RIGOR_ENDORSEMENT",
+    "remaining_work": [
+      "Convert the campaign-supported metric scaffold into a formal proof artifact if theorem promotion is requested.",
+      "Run independent rigor endorsement before raising the conditioning induction ceiling.",
+      "Audit uses for arithmetic-projection contamination.",
+      "Keep OQ_COND_005 separately tracked until synchronized."
+    ]
+  },
+  "claim_boundary": {
+    "evidence_class": "C2_CAMPAIGN_SUPPORTED_PENDING_RIGOR_ENDORSEMENT",
+    "promotion": "none",
+    "does_not_prove": [
+      "Unrestricted theorem status.",
+      "Universal admissibility measurement.",
+      "Replacement of all arithmetic projections.",
+      "Physical metric topology or physical admissibility."
+    ]
+  },
+  "validation": {
+    "json_parse": "pass",
+    "lock_update": "pass",
+    "math_registry_sync": "pass",
+    "db_snapshot": {
+      "status": "pass",
+      "refresh_id": "REFRESH-20260720T015003853841Z"
+    },
+    "global_validate": {
+      "status": "warning_baseline",
+      "runtime_failures": 0,
+      "tooling_failures": 0,
+      "semantic_failures": 0
+    }
+  }
+}

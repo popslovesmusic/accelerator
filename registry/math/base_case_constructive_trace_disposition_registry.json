@@ -1,0 +1,78 @@
+{
+  "registry_id": "BASE_CASE_CONSTRUCTIVE_TRACE_DISPOSITION_REGISTRY",
+  "patch_id": "APPENDIX_F_SECTION_2_BASE_CASE_CONSTRUCTIVE_TRACE_001",
+  "status": "SCOPED_DISPOSITION_VALIDATED",
+  "authority_level": "L0_TO_L2_EVIDENCE_SYNCHRONIZATION",
+  "source_obligation": "OQ_RTM_003",
+  "source_induction": "MPF_IND_RT_MECHANICS_RECURSIVE_COMPLETION_001",
+  "campaign_reference": "MPF_RTM_RECURSIVE_CAMPAIGN_RUN_001",
+  "question": "Can the base-case reduction D(*|1) -> D(0|1) be constructively traced to RT_core while preserving distinction, admissibility, residue closure, and non-collapse?",
+  "disposition": {
+    "answer": "supported_under_base_field_trace_controls",
+    "summary": "The base-case reduction is supported when the reduced field Red_x(D(0|0), D(0|1), D(1|1), D(0|1)) maps D(a|b) terms into RT_core-relevant distinction terms, selects x=0 as the unique admissible candidate under the declared local window, and preserves nonzero distinction, admissibility, residue closure, and non-collapse.",
+    "classification": "PASSED_PENDING_RIGOR_ENDORSEMENT"
+  },
+  "formal_scaffold": {
+    "base_field": [
+      "D(0|0)",
+      "D(0|1)",
+      "D(1|1)",
+      "D(*|1)"
+    ],
+    "reduction_step": "D(*|1) -> D(0|1)",
+    "reduced_field": "Red_x(D(0|0), D(0|1), D(1|1), D(0|1))",
+    "candidate_trace": [
+      "Declare D(a|b) as a typed distinction relation in the base field.",
+      "Map each reduced D(a|b) term to RT_core-relevant distinction labels.",
+      "Evaluate the local admissibility window for the unresolved D(*|1) slot.",
+      "Select x=0 as the unique admissible candidate under the base field controls.",
+      "Verify E!=0 for the reduced field under the declared distinction representation.",
+      "Verify delta_a(E>0) is satisfied by the reduced field.",
+      "Verify iff_R residue closure links nonzero distinction and admissible realization.",
+      "Reject any trace step that collapses distinction, erases residue, or treats RT_core as a pre-given target."
+    ],
+    "candidate_rule": "BaseTrace(D(*|1) -> D(0|1)) holds only if DistinctionPreserved, AdmSelected(x=0), ResidueClosed(iff_R), and NonCollapse all hold in the reduced field.",
+    "scope": "model-relative recursive mechanics base case only"
+  },
+  "campaign_evidence": {
+    "result_path": "outputs/rt_mechanics_campaign/rt_mechanics_results.json",
+    "report_path": "outputs/rt_mechanics_campaign/rt_mechanics_report.md",
+    "control_comparison_path": "outputs/rt_mechanics_campaign/rt_mechanics_control_comparison.json",
+    "num_seeds": 64,
+    "base_case_admissibility_rate": 1.0,
+    "base_case_residue_closure_rate": 1.0,
+    "base_case_traced_established": true,
+    "verdict": "SUPPORTED"
+  },
+  "failure_conditions": [
+    "The base-field D(a|b) terms are not typed as distinction relations.",
+    "The mapping from D(a|b) terms to RT_core-relevant distinction labels is missing.",
+    "x=0 is not uniquely admissible under the declared local admissibility window.",
+    "The reduced field fails E!=0 under the declared distinction representation.",
+    "delta_a(E>0) is not satisfied by the reduced field.",
+    "iff_R residue closure is broken.",
+    "A trace step collapses distinction, erases residue, or aliases closure labels.",
+    "RT_core is treated as an external target rather than as the closure condition constituted by the trace."
+  ],
+  "appendix_f_effect": {
+    "obligation": "OQ_RTM_003",
+    "from": "DEFINITION_FIXED_PROOF_PENDING",
+    "to": "PASSED_PENDING_RIGOR_ENDORSEMENT",
+    "remaining_work": [
+      "Convert the campaign-supported trace scaffold into a formal proof artifact if theorem promotion is requested.",
+      "Run independent rigor endorsement before raising the induction ceiling.",
+      "Audit base-case uses for attempts to treat RT_core as a pre-given target.",
+      "Keep all three RT mechanics obligations bound together before any theorem-level promotion."
+    ]
+  },
+  "claim_boundary": {
+    "evidence_class": "C2_CAMPAIGN_SUPPORTED_PENDING_RIGOR_ENDORSEMENT",
+    "promotion": "none",
+    "does_not_prove": [
+      "Unrestricted theorem status.",
+      "Universal recursive soundness outside declared base-field controls.",
+      "Physical recurrence, conservation, or ontological permanence.",
+      "That RT_core is an external target hit by the base-case reduction."
+    ]
+  }
+}

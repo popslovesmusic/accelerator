@@ -1,0 +1,68 @@
+{
+  "registry_id": "SKEW_CONDITION_DISPOSITION_REGISTRY",
+  "patch_id": "APPENDIX_F_SECTION_2_SKEW_CONDITIONS_001",
+  "status": "SCOPED_DISPOSITION_VALIDATED",
+  "authority_level": "L0_FORMALIZATION_CANDIDATE",
+  "source_obligation": "OQ_003",
+  "question": "What governs the skew of RT_out distributions, including the condition under which the exclusion primary dominates over the additive primary or vice versa?",
+  "disposition": {
+    "answer": "skew_is_projection_of_declared_directional_imbalance",
+    "summary": "Skew is governed by the declared statistical projection of imbalance between directed exclusion and addition channels. The bounded asymmetry ratio Omega_a supplies the provisional classifier, but skew appears only after iff_s projection metadata is declared.",
+    "classification": "projection_condition_required"
+  },
+  "provisional_classifier": {
+    "symbol": "Omega_a",
+    "balanced_case": "Omega_a = 1",
+    "exclusion_dominant_case": "Omega_a > 1 under the declared orientation/sign convention",
+    "addition_dominant_case": "Omega_a < 1 under the declared orientation/sign convention",
+    "undefined_case": "missing orientation convention, missing projection map F_s, missing observation window, missing normalization policy, or failed admissibility trace"
+  },
+  "skew_reading": {
+    "balanced": "No directional skew is licensed by the classifier alone; any observed skew must come from projection metadata or unresolved heterogeneity.",
+    "exclusion_dominant": "Tail suppression, truncation, or left/right bias may be projected depending on the declared orientation of the exclusion channel.",
+    "addition_dominant": "Accumulation, tail extension, or opposite bias may be projected depending on the declared orientation of the addition channel."
+  },
+  "required_metadata": [
+    "source directed distinction pair",
+    "orientation/sign convention for exclusion versus addition",
+    "bounded asymmetry ratio or equivalent imbalance metric",
+    "iff_s projection map F_s",
+    "observation window or ensemble",
+    "normalization policy",
+    "aggregation rule",
+    "failure class for mixed or non-equivalent regimes"
+  ],
+  "failure_conditions": [
+    "Omega_a is used without declared direction order.",
+    "Skew is inferred directly from RT_core.",
+    "A distribution shape is asserted before iff_s projection metadata is supplied.",
+    "Mixed regimes are aggregated without equivalence rules.",
+    "The sign of skew is treated as orientation-independent.",
+    "Observed skew is treated as proof of exclusion or addition dominance without an admissible trace."
+  ],
+  "relationship_to_oq_002": {
+    "dependency": "OQ_002 disposition",
+    "note": "Bell-curve derivability requires projection conditions. OQ_003 supplies the complementary non-symmetric shape classifier for cases where those conditions do not force an unskewed normal-like output."
+  },
+  "appendix_f_effect": {
+    "obligation": "OQ_003",
+    "from": "OPEN",
+    "to": "SCOPED_DISPOSITION_ASYMMETRY_RATIO_CLASSIFIER_PENDING_FORMAL_F_S",
+    "remaining_work": [
+      "Define the signed skew projection function under F_s.",
+      "Specify whether skew sign follows exclusion channel orientation or observation-axis orientation.",
+      "Construct positive and negative skew examples under declared metadata.",
+      "Define mixed-regime aggregation failure cases.",
+      "Harden compatibility with L124 and P118 bounded Omega_a rules."
+    ]
+  },
+  "claim_boundary": {
+    "evidence_class": "C1_DEFINED_PROVISIONAL",
+    "promotion": "none",
+    "does_not_prove": [
+      "A theorem deriving skew from RT_core.",
+      "A universal distribution-shape law.",
+      "An empirical or physical distribution claim."
+    ]
+  }
+}

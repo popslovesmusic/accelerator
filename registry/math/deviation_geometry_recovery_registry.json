@@ -1,0 +1,101 @@
+{
+  "registry_id": "DEVIATION_GEOMETRY_RECOVERY_REGISTRY",
+  "version": "1.0.0",
+  "status": "C1_DEFINED_PROVISIONAL",
+  "source_patch": "APPENDIX_F_DEVIATION_TO_GEOMETRY_RECOVERY_REDUCTION_001",
+  "purpose": "Define the provisional projection route from deviation to distance-like readings and from organized distance-like readings to geometry_app without reintroducing geometry, distance, or metric structure as primitive.",
+  "claim_cap": "THEORETICAL_ONLY",
+  "projection_route": {
+    "canonical_chain": "Dev_RT --Pi_dist[R,B,O]--> Dist_like --Org_a--> OrgDist --Pi_geo--> geometry_app",
+    "reading": "Deviation may be projected into a distance-like representation only under declared reference, boundary, orientation, and admissibility metadata. Geometry_app may be read only after distance-like projections are organized and pass the Pi_geo legality gate.",
+    "not_a_derivation_of": [
+      "physical_space",
+      "metric_manifold",
+      "spacetime",
+      "Euclidean_distance",
+      "continuous_geometry",
+      "field_content"
+    ]
+  },
+  "definitions": {
+    "Dev_RT": {
+      "name": "RT Deviation Class",
+      "definition": "A process-side departure from null comparison or perfect symmetry under declared RT context.",
+      "required_metadata": [
+        "rt_context",
+        "reference_condition",
+        "boundary_condition",
+        "orientation_condition",
+        "admissibility_context"
+      ],
+      "negative_constraints": [
+        "not_observed_distance",
+        "not_metric_magnitude",
+        "not_noise_by_default",
+        "not_geometry"
+      ]
+    },
+    "Pi_dist": {
+      "name": "Deviation-to-Distance-Like Projection",
+      "canonical_form": "Pi_dist(Dev_RT; R,B,O,A_adm) -> Dist_like | bottom_C^{trace}",
+      "definition": "Projection from declared deviation context to a distance-like representation when reference, boundary, orientation, and admissibility metadata remain recoverable.",
+      "codomain": "Dist_like",
+      "failure_output": "bottom_C^{trace}"
+    },
+    "Dist_like": {
+      "name": "Distance-Like Projection",
+      "definition": "A representation of deviation that may support ordering, separation, or locality-like comparison without becoming primitive distance or a metric space.",
+      "negative_constraints": [
+        "not_Euclidean_distance",
+        "not_scalar_magnitude_by_default",
+        "not_unit_bearing_by_default",
+        "not_symmetric_by_default",
+        "not_geometry_by_itself"
+      ]
+    },
+    "OrgDist": {
+      "name": "Organized Distance-Like Projection",
+      "definition": "A set or graph of distance-like projections organized under admissibility, orientation, residue, and trace constraints so it may be submitted to Pi_geo.",
+      "admission_requirements": [
+        "nonzero_distinction_preserved",
+        "admissibility_status_declared",
+        "orientation_trace_declared",
+        "closure_or_topology_trace_declared",
+        "projection_signature_declared"
+      ]
+    }
+  },
+  "geometry_gate": {
+    "operator": "Pi_geo",
+    "source_registry": "registry/math/geo_projection_legality_definitions.json",
+    "rule": "OrgDist may enter the geometry_app projection route only when it can supply the labels required by Dom(Pi_geo): distinction_class, admissibility_status, orientation_class, and closure_class.",
+    "failure_modes": [
+      "distinction_alias",
+      "admissibility_violation",
+      "orientation_trace_loss",
+      "closure_trace_loss_or_alias",
+      "metric_reification"
+    ]
+  },
+  "appendix_f_disposition": {
+    "item": "Deviation-to-Geometry Recovery",
+    "previous_status": "OPEN",
+    "new_status": "PROVISIONALLY_FORMALIZED_PENDING_VALIDATION",
+    "reason": "The projection route is now explicit, but validation examples and counterexamples remain required before stronger support."
+  },
+  "validation_obligations": [
+    "Construct a positive trace where Dev_RT projects to Dist_like, organizes as OrgDist, and passes Pi_geo legality.",
+    "Construct a counterexample where Pi_dist fails because reference, boundary, orientation, or admissibility metadata is missing.",
+    "Construct a counterexample where OrgDist fails Pi_geo because orientation or closure trace is lost.",
+    "Determine whether Dist_like admits scalar representation in any bounded subclass without becoming primitive distance.",
+    "Audit consistency with Delta evaluation discipline so Pi_dist does not collapse Delta into ordinary distance."
+  ],
+  "non_promotion_boundaries": [
+    "Does not prove geometry recovery.",
+    "Does not define physical geometry.",
+    "Does not define Euclidean distance.",
+    "Does not define a metric manifold.",
+    "Does not modify RT_core.",
+    "Does not promote geometry_app to primitive status."
+  ]
+}

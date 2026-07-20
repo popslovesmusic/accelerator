@@ -1,0 +1,83 @@
+{
+  "patch_id": "APPENDIX_F_CROSS_DOMAIN_CONTINUATION_TRACE_001",
+  "status": "APPLIED_VALIDATED",
+  "date": "2026-07-20",
+  "objective": "Reduce OPEN_BRIDGE_003 Appendix F obligations by defining a provisional unresolved-continuation carrier, admissibility-preserving handoff operator, trace preservation rule, and orientation-reference continuity condition.",
+  "governance_context": {
+    "task": "APPENDIX_F_CROSS_DOMAIN_CONTINUATION_TRACE_001",
+    "db_runtime_queried": true,
+    "db_decision": "allow",
+    "db_health": "pass",
+    "authority_state": "allow",
+    "freshness_state": "fresh",
+    "remaining_advisory": "resolve_patch_chain"
+  },
+  "formalization": {
+    "carrier": "UC(C_i; D_i, R_i, O_i, B_i)",
+    "handoff_operator": "H_adm",
+    "handoff_form": "H_adm(UC_i, tau_{i->j}) -> UC_j | bottom_C^{type} | bottom_C^{adm} | bottom_C^{trace}",
+    "trace_preservation": "TraceInv(C_i, C_j, tau_{i->j})",
+    "orientation_reference_continuity": "ORC(O_i, O_j; tau_{i->j})",
+    "bridge_id": "OPEN_BRIDGE_003",
+    "bridge_status_after_patch": "PROVISIONALLY_FORMALIZED_PENDING_VALIDATION",
+    "claim_cap": "THEORETICAL_ONLY"
+  },
+  "obligation_reduction": [
+    {
+      "id": "OPEN_BRIDGE_003_OBLIGATION_001",
+      "old_status": "OPEN",
+      "new_status": "PROVISIONALLY_FORMALIZED_PENDING_VALIDATION",
+      "resolution": "Unresolved continuation is defined as UC(C_i; D_i, R_i, O_i, B_i)."
+    },
+    {
+      "id": "OPEN_BRIDGE_003_OBLIGATION_002",
+      "old_status": "OPEN",
+      "new_status": "PROVISIONALLY_FORMALIZED_PENDING_VALIDATION",
+      "resolution": "Admissible meta-relation handoff is defined as H_adm over a declared domain transition tau_{i->j}."
+    },
+    {
+      "id": "OPEN_BRIDGE_003_OBLIGATION_003",
+      "old_status": "OPEN",
+      "new_status": "PROVISIONALLY_FORMALIZED_PENDING_VALIDATION",
+      "resolution": "Domain-transition trace preservation is defined by TraceInv with required recoverable invariants."
+    },
+    {
+      "id": "OPEN_BRIDGE_003_OBLIGATION_004",
+      "old_status": "OPEN",
+      "new_status": "PROVISIONALLY_FORMALIZED_PENDING_VALIDATION",
+      "resolution": "Orientation-reference continuity is defined by ORC under the declared transition type."
+    }
+  ],
+  "non_promotion_boundaries": [
+    "OPEN_BRIDGE_003 is not supported by this patch.",
+    "No subjective continuity claim is admitted.",
+    "No consciousness persistence claim is admitted.",
+    "No observer persistence claim is admitted.",
+    "No primitive time claim is admitted.",
+    "No trans-domain identity survival claim is admitted.",
+    "No empirical continuity claim is admitted."
+  ],
+  "validation": {
+    "status": "passed_with_warning_global_health",
+    "commands": [
+      "python scripts/governance/authorize_lock_update.py",
+      "python scripts/sync_math_registry.py",
+      "python scripts/db/snapshot_registries.py",
+      "python scripts/global_validate.py"
+    ],
+    "results": {
+      "json_parse": "pass",
+      "authorize_lock_update": "pass",
+      "sync_math_registry": "pass_179_items",
+      "db_snapshot_refresh_id": "REFRESH-20260720T004612145528Z",
+      "db_snapshot_warnings": [],
+      "global_validate_exit_code": 0,
+      "global_health_overall_status": "warning",
+      "failed_stages": [],
+      "missing_required_stages": [],
+      "runtime_failures": [],
+      "tooling_failures": [],
+      "semantic_failures": []
+    }
+  }
+}

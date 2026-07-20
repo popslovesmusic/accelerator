@@ -369,6 +369,43 @@
       "provisional_status": true
     },
     {
+      "symbol": "Pi_dist",
+      "name": "Deviation-to-Distance-Like Projection",
+      "definition": "Projection from declared RT deviation context to a distance-like representation when reference, boundary, orientation, and admissibility metadata remain recoverable.",
+      "domain": [
+        "rt_deviation_class",
+        "reference_condition",
+        "boundary_condition",
+        "orientation_condition",
+        "admissibility_context"
+      ],
+      "codomain": [
+        "distance_like_projection",
+        "continuation_failure"
+      ],
+      "arity": "n-ary",
+      "canonical_form": "Pi_dist(Dev_RT; R,B,O,A_adm) -> Dist_like | bottom_C^{trace}",
+      "closure_status": "provisional_formal_definition",
+      "known_failure_modes": [
+        "missing_reference_condition",
+        "missing_boundary_condition",
+        "missing_orientation_condition",
+        "missing_admissibility_context",
+        "metric_reification",
+        "geometry_reification"
+      ],
+      "negative_constraints": [
+        "not_Euclidean_distance_operator",
+        "not_metric_manifold_operator",
+        "not_physical_space_operator",
+        "not_scalar_magnitude_by_default",
+        "not_geometry_by_itself"
+      ],
+      "source_registry": "registry/math/deviation_geometry_recovery_registry.json",
+      "source_patch": "APPENDIX_F_DEVIATION_TO_GEOMETRY_RECOVERY_REDUCTION_001",
+      "provisional_status": true
+    },
+    {
       "symbol": "recoupling",
       "name": "Residue-Mediated Recoupling Operator",
       "definition": "Restores admissible coupling after decoupling when residue context and admissibility windows permit a governed transition.",
@@ -423,6 +460,40 @@
       ],
       "source_registry": "registry/math/typed_zero_provenance_registry.json",
       "source_patch": "APPENDIX_F_TYPED_ZERO_PROVENANCE_FORMALIZATION_001",
+      "provisional_status": true
+    },
+    {
+      "symbol": "H_adm",
+      "name": "Admissibility-Preserving Handoff",
+      "definition": "Typed cross-domain handoff operator that carries an unresolved continuation candidate across a declared projection boundary only when domain-transition typing, admissibility context, trace invariants, and orientation-reference continuity are preserved.",
+      "domain": [
+        "unresolved_continuation",
+        "domain_transition_type"
+      ],
+      "codomain": [
+        "unresolved_continuation",
+        "continuation_failure"
+      ],
+      "arity": "binary",
+      "canonical_form": "H_adm(UC_i, tau_{i->j}) -> UC_j | bottom_C^{type} | bottom_C^{adm} | bottom_C^{trace}",
+      "closure_status": "provisional_formal_definition",
+      "known_failure_modes": [
+        "missing_domain_transition_type",
+        "missing_projection_boundary",
+        "admissibility_context_mismatch",
+        "trace_invariant_loss",
+        "orientation_reference_discontinuity",
+        "identity_survival_claim"
+      ],
+      "negative_constraints": [
+        "not_time_evolution_operator",
+        "not_observer_persistence_operator",
+        "not_consciousness_persistence_operator",
+        "not_identity_survival_operator",
+        "not_empirical_continuity_claim"
+      ],
+      "source_registry": "registry/math/cross_domain_continuation_trace_registry.json",
+      "source_patch": "APPENDIX_F_CROSS_DOMAIN_CONTINUATION_TRACE_001",
       "provisional_status": true
     },
     {

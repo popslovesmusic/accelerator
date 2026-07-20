@@ -278,15 +278,19 @@
     {
       "bridge_id": "OPEN_BRIDGE_003",
       "name": "Cross-Domain Continuation Trace",
-      "status": "DEFERRED_PENDING_FORMALIZATION",
+      "status": "PROVISIONALLY_FORMALIZED_PENDING_VALIDATION",
       "statement": {
-        "informal": "Cross-domain continuation requires a typed handoff rule that preserves lawful trace across projection boundaries without primitive time, observer, or identity-survival claims.",
-        "formal": "C_domain_i --handoff_adm--> C_domain_j"
+        "informal": "Cross-domain continuation trace is provisionally formalized through an unresolved-continuation carrier and admissibility-preserving handoff rule that preserves declared trace invariants and orientation-reference continuity across projection boundaries.",
+        "formal": "H_adm(UC_i, tau_{i->j}) -> UC_j | bottom_C^{type} | bottom_C^{adm} | bottom_C^{trace}"
       },
       "candidate_models": {
         "MODEL_CROSS_DOMAIN_HANDOFF": {
           "name": "Admissibility-Preserving Domain Handoff",
           "description": "An unresolved admissible meta-relation may preserve continuation trace across declared projection boundaries only if domain-transition types, trace invariants, and orientation-reference continuity are explicit."
+        },
+        "MODEL_UNRESOLVED_CONTINUATION_TRACE": {
+          "name": "Unresolved Continuation Trace Carrier",
+          "description": "UC(C_i; D_i, R_i, O_i, B_i) carries a scoped continuation candidate, source domain, residue context, orientation reference, and projection boundary without implying time, observer persistence, consciousness, or identity survival."
         }
       },
       "hypotheses": {
@@ -310,16 +314,48 @@
           "date": "2026-07-19",
           "event": "registered_from_appendix_f_obligation",
           "source": "APPENDIX_F_OBLIGATION_REDUCTION_001"
+        },
+        {
+          "date": "2026-07-20",
+          "event": "cross_domain_continuation_trace_formalized_provisionally",
+          "source": "APPENDIX_F_CROSS_DOMAIN_CONTINUATION_TRACE_001"
         }
       ],
       "open_obligations": [
-        "Define unresolved continuation.",
-        "Define admissible meta-relation handoff.",
-        "Define domain-transition trace preservation.",
-        "Define orientation-reference continuity under projection change."
+        "Construct a positive typed handoff example across two declared projection domains.",
+        "Construct a type-failure counterexample where no tau_{i->j} is declared.",
+        "Construct a trace-failure counterexample where residue or orientation-reference invariants are lost.",
+        "Audit existing typed-continuation-domain rules for compatibility with H_adm.",
+        "Define whether H_adm composes associatively across more than one projection boundary."
       ],
-      "evidence_paths": [],
-      "patch_reference": "APPENDIX_F_OBLIGATION_REDUCTION_001",
+      "discharged_obligations": [
+        {
+          "obligation": "Define unresolved continuation.",
+          "status": "PROVISIONALLY_FORMALIZED_PENDING_VALIDATION",
+          "source": "registry/math/cross_domain_continuation_trace_registry.json"
+        },
+        {
+          "obligation": "Define admissible meta-relation handoff.",
+          "status": "PROVISIONALLY_FORMALIZED_PENDING_VALIDATION",
+          "source": "registry/math/cross_domain_continuation_trace_registry.json"
+        },
+        {
+          "obligation": "Define domain-transition trace preservation.",
+          "status": "PROVISIONALLY_FORMALIZED_PENDING_VALIDATION",
+          "source": "registry/math/cross_domain_continuation_trace_registry.json"
+        },
+        {
+          "obligation": "Define orientation-reference continuity under projection change.",
+          "status": "PROVISIONALLY_FORMALIZED_PENDING_VALIDATION",
+          "source": "registry/math/cross_domain_continuation_trace_registry.json"
+        }
+      ],
+      "evidence_paths": [
+        "registry/math/cross_domain_continuation_trace_registry.json",
+        "registry/math/operator_registry.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "patch_reference": "APPENDIX_F_CROSS_DOMAIN_CONTINUATION_TRACE_001",
       "dependency_map": "docs/textbook/mono_process_textbook_complete.md#appendix-f-known-missing-definitions-and-open-bridges",
       "proof_obligation": "CROSS_DOMAIN_CONTINUATION_TRACE_FORMALIZATION"
     }

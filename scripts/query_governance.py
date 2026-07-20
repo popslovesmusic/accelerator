@@ -14,6 +14,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 SCRIPT_DIR = Path(__file__).resolve().parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 DEFAULT_DB = ROOT / "registry/db/acellorator_index.sqlite"
 DEFAULT_MIGRATION = ROOT / "registry/db/migrations/20260703_governance_runtime_bootstrap_001.sql"
 CURRENT_STATE_MIGRATION = ROOT / "registry/db/migrations/20260703_governance_runtime_current_state_002.sql"
