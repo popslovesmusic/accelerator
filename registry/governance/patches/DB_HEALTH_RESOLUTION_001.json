@@ -1,0 +1,44 @@
+{
+  "patch_id": "DB_HEALTH_RESOLUTION_001",
+  "patch_type": "GOVERNANCE_RUNTIME_REPAIR",
+  "status": "EXECUTED",
+  "date": "2026-07-19",
+  "authority_level": "runtime_governance",
+  "claim_class": "C1_DEFINED_PROVISIONAL",
+  "objective": "Resolve the governed context capsule DB health warning caused by status interpretation and authority-boundary labeling rather than failed DB validation.",
+  "problem_statement": {
+    "observed_symptom": "Context capsules recommended review_database_health because database_health.status was derived from whole current-state warning status.",
+    "actual_db_validation": "outputs/audits/global_health_report.json reported db_validation.status success and db_health.status pass.",
+    "secondary_symptom": "current_state_view labeled the authority boundary as mixed, causing targetless maintenance capsules to defer authority despite registry-primary semantic authority passing."
+  },
+  "changes": [
+    {
+      "path": "scripts/query_governance.py",
+      "action": "Recognize global validation warning reports as warn instead of unknown."
+    },
+    {
+      "path": "scripts/query_governance.py",
+      "action": "Derive context-capsule database_health.status from db_validation rather than whole current-state advisory status."
+    },
+    {
+      "path": "scripts/query_governance.py",
+      "action": "Treat stateful_projection coverage as non-blocking current-state coverage."
+    },
+    {
+      "path": "registry/db/migrations/20260703_governance_runtime_current_state_002.sql",
+      "action": "Replace hardcoded mixed authority boundary with registry_primary_mixed_sources to distinguish registry-primary mixed-source projection from an authority conflict."
+    }
+  ],
+  "verification_observation": {
+    "context_capsule_task": "DB_HEALTH_RESOLUTION_001",
+    "database_health_status": "pass",
+    "authority_state": "allow",
+    "freshness_state": "fresh",
+    "remaining_non_db_recommendation": "resolve_patch_chain"
+  },
+  "non_claim_boundary": [
+    "This repair does not alter canonical registry authority.",
+    "This repair does not resolve historical patch-chain defer states.",
+    "This repair does not promote any theorem, bridge, or lexicon term."
+  ]
+}

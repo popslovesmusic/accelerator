@@ -1,0 +1,69 @@
+{
+  "patch_id": "APPENDIX_F_TYPED_ZERO_PROVENANCE_FORMALIZATION_001",
+  "patch_type": "APPENDIX_F_OBLIGATION_REDUCTION",
+  "status": "APPLIED_VALIDATED",
+  "date": "2026-07-19",
+  "authority_level": "L0_TO_C1_PROVISIONAL_FORMALIZATION",
+  "scope": [
+    "registry/math/typed_zero_provenance_registry.json",
+    "registry/math/operator_registry.json",
+    "registry/math/open_bridge_registry.json",
+    "docs/textbook/mono_process_textbook_complete.md"
+  ],
+  "objective": "Reduce OQ_TZR_001 through OQ_TZR_003 by defining a provisional typed-zero provenance carrier, scoped outer recoupling relation, and collapse conditions.",
+  "governance_query": {
+    "task": "APPENDIX_F_TYPED_ZERO_PROVENANCE_FORMALIZATION_001",
+    "runtime": "scripts/query_governance.py context-capsule",
+    "database_health_status": "pass",
+    "authority_state": "allow",
+    "freshness_state": "fresh"
+  },
+  "formalization": {
+    "carrier": "TZR(0_sigma) := {sigma, source_trace, collapse_context, admissibility_context, relation_slot}",
+    "outer_relation": "TZR(0_minus) <g>_y TZR(0_plus)",
+    "collapse_result": "0_untyped",
+    "bridge_id": "OPEN_BRIDGE_002",
+    "bridge_status_after_patch": "PROVISIONALLY_FORMALIZED_PENDING_VALIDATION",
+    "claim_cap": "THEORETICAL_ONLY"
+  },
+  "obligation_reduction": [
+    {
+      "id": "OQ_TZR_001",
+      "previous_status": "OPEN",
+      "new_status": "PROVISIONALLY_FORMALIZED_PENDING_VALIDATION",
+      "resolution": "Directional provenance is carried by complete TZR carrier fields."
+    },
+    {
+      "id": "OQ_TZR_002",
+      "previous_status": "OPEN",
+      "new_status": "PROVISIONALLY_FORMALIZED_PENDING_VALIDATION",
+      "resolution": "<g>_y is identified as the scoped <*>_x family member governing typed-zero recoupling."
+    },
+    {
+      "id": "OQ_TZR_003",
+      "previous_status": "OPEN",
+      "new_status": "PROVISIONALLY_FORMALIZED_PENDING_VALIDATION",
+      "resolution": "Typed zero collapses to 0_untyped when required provenance, polarity, admissibility, relation-slot, non-reification, or RT_core trace conditions fail."
+    }
+  ],
+  "claim_humility_review": {
+    "bridge_promotion": false,
+    "theorem_promotion": false,
+    "higher_order_RT_support_claim": false,
+    "zero_object_ontology_added": false,
+    "claim_class": "C1_DEFINED_PROVISIONAL"
+  },
+  "negative_constraints": [
+    "Typed zero is not an independent zero object.",
+    "Typed zero is not nonexistence or logical null.",
+    "<g>_y is not a new primitive.",
+    "OPEN_BRIDGE_002 is not supported by this patch.",
+    "The result is theoretical-only pending validation traces and counterexamples."
+  ],
+  "verification": {
+    "commands": [
+      "JSON parse checks",
+      "python scripts/governance/authorize_lock_update.py",
+      "python scripts/sync_math_registry.py",
+      "python scripts/db/snapshot_registries.py",
+      "python scripts/global_valid

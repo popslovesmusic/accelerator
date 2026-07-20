@@ -303,6 +303,50 @@
       "provisional_status": true
     },
     {
+      "symbol": "K_R",
+      "name": "Directional Relational Amplitude",
+      "definition": "Reference-relative pre-squared carrier for Affect-to-Effect directionality. K_R(A -> E) records represented directional compatibility before bounded projection by squared magnitude.",
+      "domain": [
+        "affect_condition_A",
+        "effect_condition_E",
+        "reference_condition_R",
+        "boundary_condition_B",
+        "orientation_condition_O",
+        "representation_map_M_R"
+      ],
+      "codomain": [
+        "directional_amplitude_value"
+      ],
+      "arity": "n-ary",
+      "canonical_form": "K_R(A -> E; B,O,M_R)",
+      "bounded_projection": "P_R(E <- A) = |K_R(A -> E; B,O,M_R)|^2",
+      "directionality_rule": "K_R(A -> E) and K_R(E -> A) are not interchangeable unless an explicit symmetry condition on reference, boundary, orientation, and representation is declared.",
+      "metadata_requirements": [
+        "reference_condition",
+        "boundary_condition",
+        "orientation_condition",
+        "representation_map",
+        "overlap_or_amplitude_rule"
+      ],
+      "closure_status": "provisional_formal_definition",
+      "known_failure_modes": [
+        "symmetric_overlap_used_as_full_realization_process",
+        "missing_representation_map",
+        "missing_reference_boundary_orientation_metadata",
+        "probability_language_without_normalization",
+        "raw_RT_condition_treated_as_quantum_state"
+      ],
+      "negative_constraints": [
+        "not_probability_by_default",
+        "not_quantum_state_identity",
+        "not_symmetric_unless_declared",
+        "not_identical_to_qualitative_AE_relation"
+      ],
+      "source_patch": "APPENDIX_F_AE_DIRECTIONALITY_FORMALIZATION_001",
+      "source_bridge": "OPEN_BRIDGE_AE_OVERLAP_001",
+      "provisional_status": true
+    },
+    {
       "symbol": "Pi_geo",
       "name": "Topology-Geometry Projection Operator",
       "definition": "Candidate projection operator for scope-bound topology-to-geometry reduction under the registered projection-legality gate.",
@@ -345,6 +389,40 @@
         "missing_admissibility_window_change"
       ],
       "source_registry": "registry/residue_mediated_recoupling_registry.json",
+      "provisional_status": true
+    },
+    {
+      "symbol": "<g>_y",
+      "name": "Typed-Zero Recoupling Relation",
+      "definition": "Typed meta-relation family instance governing recoupling between complete typed-zero provenance carriers TZR(0_minus) and TZR(0_plus) under declared context y.",
+      "domain": [
+        "typed_zero_provenance_carrier",
+        "typed_zero_provenance_carrier",
+        "recoupling_context_y"
+      ],
+      "codomain": [
+        "RT_admissible_candidate",
+        "0_untyped"
+      ],
+      "arity": "binary_with_context",
+      "canonical_form": "TZR(0_minus) <g>_y TZR(0_plus)",
+      "closure_status": "provisional_formal_definition",
+      "known_failure_modes": [
+        "missing_source_trace",
+        "missing_polarity",
+        "same_polarity_recoupling",
+        "missing_admissibility_context",
+        "identity_collapse",
+        "carrier_reified_as_zero_object"
+      ],
+      "negative_constraints": [
+        "not_new_primitive",
+        "not_identity_relation",
+        "not_support_without_PRIN_001_trace",
+        "not_bridge_promotion"
+      ],
+      "source_registry": "registry/math/typed_zero_provenance_registry.json",
+      "source_patch": "APPENDIX_F_TYPED_ZERO_PROVENANCE_FORMALIZATION_001",
       "provisional_status": true
     },
     {

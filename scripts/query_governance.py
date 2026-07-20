@@ -354,15 +354,49 @@ def extract_global_validation_status(report):
     status = str(report.get("overall_status", "")).strip().lower()
     if status in {"pass", "success"}:
         return "pass"
+    if status in {"warn", "warning", "pass_with_warnings", "degraded"}:
+        return "warn"
     if status in {"fail", "failure", "error"}:
         return "fail"
 
+    saw_warning = False
     for key in ("registry_validation", "db_validation", "implementation_validation", "campaign_validation"):
         section = report.get(key)
         if isinstance(section, dict):
             section_status = str(section.get("status", "")).strip().lower()
             if section_status in {"fail", "failure", "error"}:
                 return "fail"
+            if section_status in {"warn", "warning", "pass_with_warnings", "degraded"}:
+                saw_warning = True
+    if saw_warning:
+        return "warn"
+    return "unknown"
+
+
+def extract_db_validation_status(report):
+    if not isinstance(report, dict):
+        return "unknown"
+
+    db_section = report.get("db_validation")
+    if isinstance(db_section, dict):
+        section_status = str(db_section.get("status", "")).strip().lower()
+        if section_status in {"pass", "success"}:
+            return "pass"
+        if section_status in {"warn", "warning", "pass_with_warnings", "degraded"}:
+            return "warn"
+        if section_status in {"fail", "failure", "error"}:
+            return "fail"
+
+        db_health = db_section.get("db_health")
+        if isinstance(db_health, dict):
+            health_status = str(db_health.get("status", "")).strip().lower()
+            if health_status in {"pass", "success"}:
+                return "pass"
+            if health_status in {"warn", "warning", "pass_with_warnings", "degraded"}:
+                return "warn"
+            if health_status in {"fail", "failure", "error"}:
+                return "fail"
+
     return "unknown"
 
 
@@ -3281,19 +3315,21 @@ def build_governed_context_capsule_v1(db_path, target=None, task=None, query=Non
     request_identity = _build_governed_context_request_identity(db_file, normalized_target, task_text, query_text, limit)
 
     current_state = build_current_state_capsule(db_path)
+    report = load_optional_json(GLOBAL_HEALTH_REPORT)
+    db_health_status = extract_db_validation_status(report)
     current_state_projection = current_state.get("projection", {}) if isinstance(current_state.get("projection"), dict) else {}
     database_health = {
-        "status": current_state.get("status", "warn") if current_state.get("status") in {"pass", "warn", "fail"} else "warn",
+        "status": db_health_status if db_health_status in {"pass", "warn", "fail"} else "warn",
         "db_path": db_path,
         "schema_path": str(ROOT / "registry/db/schema.sql"),
-        "integrity_check": "skipped",
+        "integrity_check": "reported" if db_health_status != "unknown" else "skipped",
         "table_status": {},
         "row_counts": {},
         "orientation_status_values": {},
-        "retrieval_smoke": {"status": "skipped"},
-        "supersession_edge_quality": {"status": "skipped"},
-        "stale_index_warnings": ["Capsule fast path skipped the deep DB health audit."],
-        "ssot_boundary": "fast_path",
+        "retrieval_smoke": {"status": "reported" if db_health_status != "unknown" else "skipped"},
+        "supersession_edge_quality": {"status": "reported" if db_health_status != "unknown" else "skipped"},
+        "stale_index_warnings": [] if db_health_status != "unknown" else ["Capsule fast path skipped the deep DB health audit."],
+        "ssot_boundary": "global_report",
         "maintenance_recommendations": [],
     }
     database_errors = []
@@ -6021,7 +6057,7 @@ def build_current_state_capsule(db_path):
             capsule["warnings"].append("Database snapshot freshness is unavailable.")
 
         coverage_state = state.get("coverage_state")
-        if coverage_state and coverage_state not in {"active", "current"}:
+        if coverage_state and coverage_state not in {"active", "current", "stateful_projection"}:
             capsule["warnings"].append(f"Current-state coverage is {coverage_state}.")
 
         decision_count = state.get("decision_count")

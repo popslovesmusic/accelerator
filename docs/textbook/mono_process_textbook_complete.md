@@ -1645,7 +1645,7 @@ $C_{\text{orient}}$ must be computable from $\chi_D$ and admissible orientation 
 *Governance Note:* $C_{\text{orient}}$ is not bridge evidence until PO001 validation demonstrates non-circular computability.
 
 **Commentary:**
-This candidate metric operationalizes PO_001: "Orientation coherence is measurable without presupposing closure topology." The candidate computes normalized variance across the admissible orientation-pattern family and inverts it to a coherence score. High $C_{\text{orient}}$ means the process selects a narrow, consistent region of $\mathcal{O}$; low $C_{\text{orient}}$ means orientation is underdetermined or randomized. This statement does **not** assert that high $C_{\text{orient}}$ causes stable closure — that causal claim remains in OPEN_BRIDGE_001 at PROVISIONAL_PENDING_RIGOR. This statement only defines the metric candidate.
+This candidate metric operationalizes PO_001: "Orientation coherence is measurable without presupposing closure topology." The candidate computes normalized variance across the admissible orientation-pattern family and inverts it to a coherence score. High $C_{\text{orient}}$ means the process selects a narrow, consistent region of $\mathcal{O}$; low $C_{\text{orient}}$ means orientation is underdetermined or randomized. This statement does **not** assert that high $C_{\text{orient}}$ causes stable closure — that causal claim is tracked in the supported bridge record and is not implied by the metric candidate alone. This statement only defines the metric candidate.
 
 **Validation Requirements (before PO_001 is testable):**
 1. Show $C_{\text{orient}}$ computable from $\chi_D$ and admissible orientation assignments only.
@@ -1653,12 +1653,12 @@ This candidate metric operationalizes PO_001: "Orientation coherence is measurab
 3. Show shuffled/random orientation lowers or decorrelates $C_{\text{orient}}$ under matched input conditions.
 4. Show fixed coherent regimes increase $C_{\text{orient}}$ without using topology labels.
 
-**Expected Unblocks (conditional on validation):** PO_001 becomes testable. PO_003 can later compare knot-class variance conditional on $C_{\text{orient}}$ bins. OPEN_BRIDGE_001 remains STRUCTURAL_ONLY pending $T_{\text{class\_metric}}$ and campaign evidence.
+**Expected Unblocks (conditional on validation):** PO_001 becomes testable. PO_003 can later compare knot-class variance conditional on $C_{\text{orient}}$ bins. OPEN_BRIDGE_001 is recorded as `SUPPORTED`; the metric candidate remains `STRUCTURAL_ONLY` and still requires its own validation before it can be used for downstream analysis.
 
 **Governance Note (MPF_PO001_C_ORIENT_VALIDATION_PATCH_001):**
 [ **VALIDATION_DESIGNED_PENDING_EXECUTION** ]
 
-$C_{\text{orient}}$ is a **definition candidate only**. It is **not bridge evidence** and does not constitute support for OPEN_BRIDGE_001 until PO_001 validation is executed and all four validation tests pass:
+$C_{\text{orient}}$ is a **definition candidate only**. It is **not bridge evidence** and does not alter the supported bridge record. PO_001 validation is still required to qualify the metric candidate itself and the downstream analyses that use it:
 
 | Test | Name | Pass Condition |
 | :--- | :--- | :--- |
@@ -1667,7 +1667,7 @@ $C_{\text{orient}}$ is a **definition candidate only**. It is **not bridge evide
 | PO001_VT_003 | Closure Stability Blindness | $C_{\text{orient}}$ invariant under $S_{\text{closure}}$ withholding |
 | PO001_VT_004 | Shuffling Sensitivity | Shuffled orientation produces lower/decorrelated $C_{\text{orient}}$ than coherent orientation |
 
-PO_001 status is `PASSED_PENDING_RIGOR_ENDORSEMENT` (via [MPF_PO001_C_ORIENT_VALIDATION_EXECUTION_PATCH_001](file:///D:/projects/acellorator/patches/MPF_PO001_C_ORIENT_VALIDATION_EXECUTION_PATCH_001.json)). PO_002 status is `PASSED_PENDING_RIGOR_ENDORSEMENT` (via [MPF_PO002_VALIDATION_CLOSURE_PATCH_001](file:///D:/projects/acellorator/patches/MPF_PO002_VALIDATION_CLOSURE_PATCH_001.json)). PO_003 status is `PASSED_PENDING_RIGOR_ENDORSEMENT` (via [MPF_PO003_VARIANCE_CAMPAIGN_RUN_001](file:///D:/projects/acellorator/patches/MPF_PO003_VARIANCE_CAMPAIGN_RUN_001.json)). OPEN_BRIDGE_001 status is `C4_CANDIDATE_PENDING_RIGOR` (via [MPF_OPEN_BRIDGE_PROMOTION_REVIEW_001](file:///D:/projects/acellorator/patches/MPF_OPEN_BRIDGE_PROMOTION_REVIEW_001.json)) under selector-bridge rules.
+PO_001 status is `PASSED_PENDING_RIGOR_ENDORSEMENT` (via [MPF_PO001_C_ORIENT_VALIDATION_EXECUTION_PATCH_001](file:///D:/projects/acellorator/patches/MPF_PO001_C_ORIENT_VALIDATION_EXECUTION_PATCH_001.json)). PO_002 status is `PASSED_PENDING_RIGOR_ENDORSEMENT` (via [MPF_PO002_VALIDATION_CLOSURE_PATCH_001](file:///D:/projects/acellorator/patches/MPF_PO002_VALIDATION_CLOSURE_PATCH_001.json)). PO_003 status is `PASSED_PENDING_RIGOR_ENDORSEMENT` (via [MPF_PO003_VARIANCE_CAMPAIGN_RUN_001](file:///D:/projects/acellorator/patches/MPF_PO003_VARIANCE_CAMPAIGN_RUN_001.json)). OPEN_BRIDGE_001 family status is `SUPPORTED` (registry: `registry/math/open_bridge_registry.json`; `OPEN_BRIDGE_001_v3` carries `exit_path: RESOLVED`).
 
 Validation design registry: `registry/math/po001_validation_design.json`.
 
@@ -1690,14 +1690,16 @@ One can change orientation without advancing the process "forward" in time (e.g.
 
 ---
 
-## 5.2A OPEN_BRIDGE_001 : Orientation-Closure Bridge (LIVE_LINKED) ([PROVISIONAL_PENDING_RIGOR])
+## 5.2A OPEN_BRIDGE_001 : Orientation-Closure Bridge (LIVE_LINKED) ([SUPPORTED])
 
-The Orientation-Closure Bridge no longer stands in its earlier direct-support form. That earlier formulation was **FALSIFIED** on 2026-05-30 through adversarial stress testing [Source: LFCR_001_STRESS_REPORT_001], the later procedural re-audit did **not** restore direct closure support [Source: results/pd_cg_v2_reaudit/reaudit_report.md], and the subsequent relational-conditioning retest also failed to support promotion on that stronger route [Source: results/pd_cg_v2r_relational_conditioning_retest/retest_report.md]. The active bridge was then reformulated on 2026-06-17 as a **Topological Selector** claim and later entered governance containment because the supporting run remains pending tool-rigor qualification [Source: results/2026-06-16_run08_OPEN_BRIDGE_001_SATISFACTION/paper.md].
+The Orientation-Closure Bridge no longer stands in its earlier direct-support form. That earlier formulation was **FALSIFIED** on 2026-05-30 through adversarial stress testing [Source: LFCR_001_STRESS_REPORT_001], the later procedural re-audit did **not** restore direct closure support [Source: results/pd_cg_v2_reaudit/reaudit_report.md], and the subsequent relational-conditioning retest also failed to support promotion on that stronger route [Source: results/pd_cg_v2r_relational_conditioning_retest/retest_report.md]. The current bridge registry now records the bridge family as **SUPPORTED**, with `OPEN_BRIDGE_001_v3` carrying the procedural-model promotion and `exit_path: RESOLVED` [Source: registry/math/open_bridge_registry.json].
 
-**Current Status: [PROVISIONAL_PENDING_RIGOR] / STRUCTURAL_ONLY**
+**Current Status: [SUPPORTED] / RESOLVED**
 
 **Containment Rule (2026-06-17):**
-Within the current governance layer, the reformulated selector-form bridge is retained as a provisional research object only. It may guide hypothesis generation, campaign planning, metric exploration, candidate induction targets, and tool development guidance, but it may not be used for theorem promotion, framework confirmation, ontology confirmation, dependency promotion, or evidence-based endorsement until the supporting toolchain receives Rigor Endorsement and the result is independently replicated.
+Within the current governance layer, the bridge is a supported registry record. It may guide hypothesis generation, campaign planning, metric exploration, candidate induction targets, and tool development guidance, but it does not auto-promote downstream claims, which remain independently gated.
+
+Registry note: the bridge family now includes `OPEN_BRIDGE_001`, `OPEN_BRIDGE_001_v2`, and `OPEN_BRIDGE_001_v3` as supported entries [Source: registry/math/open_bridge_registry.json].
 
 ### v1/v2 Falsification Summary
 Adversarial ablation testing (`LFCR_001`) showed that orientation coherence had a negligible effect on stable triadic closure survival ($\Delta S < 0.01$). Randomizing orientation under stress did not significantly degrade structural persistence compared to the full mechanism. Within the tested regime of that campaign, orientation was not supported as a direct closure driver.
@@ -1756,7 +1758,7 @@ Immediate structural claims are now eligible for rewrite or reroute review again
 ---
 
 **Historical Context:**
-Earlier formulations treated orientation as a secondary consequence of asymmetry. Later drafts treated orientation as a local ordering anchor for distinction-node knotting. The current governed evidence rejects the strong participatory-closure reading and retains only a narrower provisional selector-form bridge under tool-rigor containment.
+Earlier formulations treated orientation as a secondary consequence of asymmetry. Later drafts treated orientation as a local ordering anchor for distinction-node knotting. The current governed evidence rejects the strong participatory-closure reading and records the bridge family as supported under registry governance, while downstream claims remain independently gated.
 
 ### Competing Models
 
@@ -1798,12 +1800,12 @@ To ensure auditable falsification, the following metrics are used to evaluate th
 | **Extended Downstream** | K_STABILIZATION, B_K, topology_app, geometry_app, field_app, gravity_app, QM_app_GR_app_bridge |
 
 **Claim Cap Notice:**
-No downstream dependency may exceed the current claim level implied by the provisional selector-form bridge and its structural-only propagation rule. This provisional result does not automatically discharge stronger participatory-closure claims or promote application projections.
+No downstream dependency may exceed the current claim level implied by the supported selector-form bridge family and its structural-only propagation rule. This bridge-family support does not automatically discharge stronger participatory-closure claims or promote application projections.
 
 ### Failure and Support Consequences
 
 *   **Historical Outcome (Direct-Support Formulation):** TC_asym, K_STABILIZATION, B_K, topology_app, geometry_app, field_app, gravity_app, and QM_app_GR_app_bridge entered capped or review-bound handling when the stronger bridge formulation failed.
-*   **Current Outcome (Selector Formulation):** Immediate structural claims become eligible for rewrite or promotion review only if recast against the narrower provisional selector bridge. No automatic support propagates to application projections.
+*   **Current Outcome (Selector Formulation):** Immediate structural claims become eligible for rewrite or promotion review only if recast against the supported selector bridge family. No automatic support propagates to application projections.
 
 **Future Update Rule:**
 Any evidence report affecting **OPEN_BRIDGE_001** automatically updates this section, Appendix E, Appendix F, and the **Theorem Status Registry**.
@@ -1981,7 +1983,7 @@ As established in Chapter 5, direction requires an orientation. The $\to_a$ oper
 $$ A \to_a(-(i_a)) B $$
 
 **Commentary:**
-This notation indicates that state $A$ permits a transition to state $B$ *given orientation* $-(i_a)$. If the orientation were to shift to $-(i_b)$, the admissibility of $B$ might change. This is the foundation for the derivation of field dynamics: the "motion" or "flow" of the process is governed by how $\to_a$ shifts across the orientation space $\mathcal{O}$.
+This notation indicates that state $A$ permits a transition to state $B$ *given orientation* $-(i_a)$. If the orientation were to shift to $-(i_b)$, the admissibility of $B$ might change. In the current induction layer, this is better read as relational progression: admissible organization is rewritten across the orientation space $\mathcal{O}$, and any field-dynamics wording remains a downstream projection rather than the primitive ontology. [Source: RT-IND-2026-07-19-RELATIONAL-PROGRESSION-001]
 
 ---
 
@@ -2751,7 +2753,7 @@ This statement does **not** assert that topology class determines closure stabil
 - $T_{\text{class\_metric}}$: TOOL_SPEC_DEFINED_PENDING_BUILD
 - PO\_002: IMPLEMENTATION_SPEC_DEFINED_PENDING_BUILD
 - PO\_003: BLOCKED_PENDING_PO001_AND_PO002_VALIDATION
-- OPEN\_BRIDGE\_001: STILL PROVISIONAL_PENDING_RIGOR
+- OPEN\_BRIDGE\_001: SUPPORTED
 
 **Validation Requirements:**
 1. Classify observed closure traces without $C_{\text{orient}}$ input.
@@ -2764,7 +2766,7 @@ This statement does **not** assert that topology class determines closure stabil
 **Expected Unblocks (conditional on validation):**
 - PO\_002 becomes testable.
 - PO\_003 becomes structurally testable once $C_{\text{orient}}$ validation also passes.
-- OPEN\_BRIDGE\_001 remains PROVISIONAL_PENDING_RIGOR pending evidence, attacks, and tool rigor.
+- OPEN\_BRIDGE\_001 is recorded as SUPPORTED in the bridge registry; this section now tracks the metric candidate and downstream evidence rather than bridge promotion.
 
 **Ontology Ruling (MPF_T_ONTOLOGY_CLARIFICATION_001):**
 - **$T$:** topological organization generated by continuation under constraint.
@@ -3327,7 +3329,7 @@ If the dashboard and chapter text disagree, the dashboard is authoritative until
 | Object ID | Type | Status | Claim Level | Dependencies | Active Campaigns | Evidence | Review Lock | Last Update |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **AXIOM_1_2_1** | AXIOM | **LOCKED** | AXIOMATIC | 0 | - | - | - | 2026-05-29 |
-| **OPEN_BRIDGE_001** | BRIDGE | **PROVISIONAL_PENDING_RIGOR** | **C1_DEFINED_PROVISIONAL / STRUCTURAL_ONLY** | 4 | LFCR_001, PD_CG_PATCH_004, Run 08 | 5 | - | 2026-06-17 |
+| **OPEN_BRIDGE_001** | BRIDGE | **SUPPORTED** | **C1_DEFINED_PROVISIONAL / STRUCTURAL_ONLY** | 4 | LFCR_001, PD_CG_PATCH_004, Run 08 | 5 | - | 2026-07-19 |
 | **TC_asym** | THEOREM | **REVIEW_LOCK** | REVIEW_LOCK | 1 | LFCR_001 | 0 | **LOCKED** | 2026-05-30 |
 | **gravity_app** | APPLICATION | **REVIEW_LOCK** | **REVIEW_LOCK** | 3 | - | GRAVITY-APP-001 | **LOCKED** | 2026-06-17 |
 | **L5_RIGOR_FORKED_ATTACK** | CLAIM | **SUPPORTED** | **C5** | 5 | CLS_003 | CLS_003_RUN_001 | - | 2026-06-16 |
@@ -3347,8 +3349,8 @@ The formal program is represented as a directed dependency graph. Nodes represen
 **Graph-Derived Claim Caps:**
 | Object | Root Blocker | Current Cap | Reason |
 | :--- | :--- | :--- | :--- |
-| **TC_asym** | OPEN_BRIDGE_001 | **REVIEW_LOCK** | Current theorem wording still depends on a stronger participatory-closure reading than the provisional selector bridge. |
-| **gravity_app** | OPEN_BRIDGE_001 | **REVIEW_LOCK** | Downstream of the bridge, but provisional selector-form observations do not authorize projection-level promotion. |
+| **TC_asym** | OPEN_BRIDGE_001 | **REVIEW_LOCK** | Current theorem wording still depends on a stronger participatory-closure reading than the supported bridge family currently authorizes. |
+| **gravity_app** | OPEN_BRIDGE_001 | **REVIEW_LOCK** | Downstream of the supported bridge family, but bridge support alone does not authorize projection-level promotion. |
 
 ---
 
@@ -3373,15 +3375,17 @@ A campaign is a living governance object responsible for attacking, verifying, o
 
 | Bridge ID | Bridge Name | Claim Under Attack | Linked Campaign | Status | Claim Level | Downstream Cap |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **OPEN_BRIDGE_001** | Orientation-Closure Bridge (Topological Selection) | Orientation coherence conditions admissible knot-class selection but is not independently sufficient for closure stability. | LFCR_001; PD_CG_V2R; PD_CG_PATCH_004; Run 08 | **PROVISIONAL_PENDING_RIGOR** | **C1** | **STRUCTURAL_ONLY** |
+| **OPEN_BRIDGE_001** | Orientation-Closure Bridge (Topological Selection) | Orientation coherence conditions admissible knot-class selection but is not independently sufficient for closure stability. | LFCR_001; PD_CG_V2R; PD_CG_PATCH_004; Run 08 | **SUPPORTED** | **C1** | **STRUCTURAL_ONLY** |
 
-**Current Campaign Details: OPEN_BRIDGE_001**
+**Current Bridge Details: OPEN_BRIDGE_001**
 - **LFCR_001:** Earlier bridge formulation falsified under stress ablation (direct support failed).
 - **PD_CG_V2R:** Re-audit confirmed orientation does not independently improve basin stability.
 - **PD_CG_PATCH_004:** Reformulated bridge as a **Topological Selector**. Orientation is now a constraint on admissible topology $T$ in the chain $\Delta \to R \to T \to A_{adm} \to \delta_a$.
 - **Run 08 (Satisfying Campaign):** Multi-seed TDA verification ($N=64$) established that orientation coherence narrows topological variance by $100\%$ ($Var(B_1)=0.000$ vs $0.085$). 
-- **Governed Interpretation:** Within these models, the bridge remains **PROVISIONAL_PENDING_RIGOR** as a topological selection mechanism candidate. Stability claims remain blocked from promotion pending tool-rigor qualification and independent replication.
-- **Next Required Action:** Complete tool-rigor qualification, then perform cross-mechanism verification in Graph Dynamics.
+- **Governed Interpretation:** Within these models, the bridge family is recorded as **SUPPORTED** in the registry. The campaign artifacts remain evidence for the support path, while downstream claims remain independently gated.
+- **Next Required Action:** Continue downstream claim-specific validation where needed; the bridge status itself is resolved.
+- **Registry Support:** `OPEN_BRIDGE_001`, `OPEN_BRIDGE_001_v2`, and `OPEN_BRIDGE_001_v3` are all recorded as `SUPPORTED` in `registry/math/open_bridge_registry.json`.
+- **Procedural Promotion:** `OPEN_BRIDGE_001_v3` carries `exit_path: RESOLVED` in the registry.
 
 ---
 
@@ -3991,9 +3995,9 @@ These items have candidate formalisms in the "Scratch Schema" (MS-SCRATCH-V1) or
 These items remain unsettled and are the primary targets for future induction and research runs. Some are genuinely OPEN, some are REGISTERED_LATE because the corresponding term already exists in the lexicon queue, and a few are now proof-pending rather than generically open.
 
 - **Recoupling-Reorientation Event (RRE) Hardening:** [ **HARDENING_REQUIRED** ] Formulate the coupling mismatch metric $\Delta C_{\text{mismatch}}$ and tolerance threshold $\tau_C$; determine scale relativity of $\tau_C$ and verify residue lineage preservation under reorientation [Source: MPF_RECOUPLING_REORIENTATION_EVENT_001].
-- **OQ_TZR_001 (Preservation of Provenance):** [ **OPEN** ] What exact structure preserves directional provenance in $0_{minus}$ and $0_{plus}$? [Source: MPF_IND_TYPED_ZERO_RECOUPLING_001].
-- **OQ_TZR_002 (Governing Outer Relation):** [ **OPEN** ] Which member of the $\langle*\rangle_x$ family governs the outer recoupling relation? [Source: MPF_IND_TYPED_ZERO_RECOUPLING_001].
-- **OQ_TZR_003 (Collapse Conditions):** [ **OPEN** ] When does typed zero collapse into undifferentiated zero? [Source: MPF_IND_TYPED_ZERO_RECOUPLING_001].
+- **OQ_TZR_001 (Preservation of Provenance):** [ **PROVISIONALLY_FORMALIZED_PENDING_VALIDATION** ] Directional provenance is provisionally carried by $TZR(0_\sigma) := \{\sigma, source\_trace, collapse\_context, admissibility\_context, relation\_slot\}$, with $\sigma \in \{minus, plus\}$. The carrier preserves role polarity without treating zero as an independent object. [Source: MPF_IND_TYPED_ZERO_RECOUPLING_001; APPENDIX_F_TYPED_ZERO_PROVENANCE_FORMALIZATION_001].
+- **OQ_TZR_002 (Governing Outer Relation):** [ **PROVISIONALLY_FORMALIZED_PENDING_VALIDATION** ] The governing outer recoupling relation is the typed meta-relation family instance $<g>_y$, with canonical form $TZR(0_{minus}) <g>_y TZR(0_{plus})$. It is a scoped member of $\langle*\rangle_x$, not a new primitive. [Source: MPF_IND_TYPED_ZERO_RECOUPLING_001; APPENDIX_F_TYPED_ZERO_PROVENANCE_FORMALIZATION_001].
+- **OQ_TZR_003 (Collapse Conditions):** [ **PROVISIONALLY_FORMALIZED_PENDING_VALIDATION** ] Typed zero collapses to $0_{untyped}$ when source trace, polarity, admissibility context, or relation slot is missing; when same-polarity recoupling is attempted; when the carrier is reified as an independent zero object; or when constructive trace to RT_core fails. [Source: MPF_IND_TYPED_ZERO_RECOUPLING_001; APPENDIX_F_TYPED_ZERO_PROVENANCE_FORMALIZATION_001].
 - **OQ_001 (Scalar Admissibility Context):** [ **OPEN** ] What is the full formal definition of $x$ in the scalar example $[D(2|-1)\to1 \langle f \rangle_x D(3|+3)\to6]\to5$? The context $x$ must be made explicit to complete the RT trace. [Source: MPF_IND_RT_NESTING_CONDITIONS_FAMILY_001].
 - **OQ_002 (Bell Curve Derivability):** [ **OPEN** ] Is the bell curve emergence from exclusion/addition asymmetry formally derivable from $\text{RT}_{\text{core}}$, or does it require an independent statistical postulate? [Source: MPF_IND_RT_NESTING_CONDITIONS_FAMILY_001].
 - **OQ_003 (Skew Conditions):** [ **OPEN** ] What governs the skew of $\text{RT}_{\text{out}}$ distributions — i.e., the formal condition under which the exclusion primary dominates over the additive primary or vice versa? [Source: MPF_IND_RT_NESTING_CONDITIONS_FAMILY_001].
@@ -4010,7 +4014,7 @@ These items remain unsettled and are the primary targets for future induction an
 - **Semantic Process Indexing (Canonical RT Index Assignment):** [ **C1_DEFINED_PROVISIONAL / REGISTERED_LATE** ] The induction packet `RT_INDUCTION_PACKET_PROCESS_SEMANTIC_INDEX_001` records semantic indices as governed identifiers for resolved RT organizations, with orientation-field and deviation-signature projections, but the canonical assignment procedure remains open. This item is tracked in the induction queue and lexicon gap queue and remains non-quantitative, non-spatial, and non-authoritative. [Source: RT_INDUCTION_PACKET_PROCESS_SEMANTIC_INDEX_001].
 - **$S$ Arbitration Rule:** [ **DEFINITION_TARGET_IDENTIFIED** ] Formal rule for the pruning stage inside the $\delta_a$ composition [Source: MPF-IND-ARB-DELTA-DUAL-PHASE GAP-S-RULE].
 - **Formal definition of Residue Relation ($R_{\leftrightarrow}$):** [ **DEFINITION_CANDIDATE_PENDING_FORMAL_PROMOTION** ] Defined in `operator_registry.json` and principle `PRIN-2-X` (refined).
-- **Formal difference between $R_{\leftrightarrow}$ and $\leftrightarrow_R$:** [ **RESOLVED_PENDING_CANONICAL_TEXTBOOK_SYNC** ] Rigorous separation between residue-as-operand ($R_{\leftrightarrow}$) and closure-support-through-residue ($\leftrightarrow_R$) is explicitly defined in governance patches and integrated into Chapter 2.
+- **Formal difference between $R_{\leftrightarrow}$ and $\leftrightarrow_R$:** [ **RESOLVED** ] Rigorous separation between residue-as-operand ($R_{\leftrightarrow}$) and closure-support-through-residue ($\leftrightarrow_R$) is integrated into Chapter 2 and no longer counted as an Appendix F todo. [Patch: APPENDIX_F_TODO_CLEARANCE_PASS_002]
 - **Formal rules for Decoupling:** Defining the conditions under which a truth-condition becomes False.
 - **Asymmetric Recoupling and Distinction Emergence:** [ **HARDENING_REQUIRED** ] Define asymmetric recoupling mechanics and the distinction emergence law; determine whether RT exists below the distinction floor [Source: MPF_ZERO_STATE_DOMAIN_MEMBERSHIP_001].
 - **Formal RT Chain Algebra:** [ **C1_DEFINED_PROVISIONAL** ] Define the algebra of progressive conditioned continuation for chains such as $D(1|2), D(2|3), D(3|4)$, including lawful ordering, coupling inheritance, and chain-composition constraints. Continuation composition is now governed by `PATCH_PI_RT_CALCULUS_013`, continuation identity is governed by `PATCH_PI_RT_CALCULUS_014`, process equivalence plus canonical continuation forms are governed by `PATCH_PI_RT_CALCULUS_015`, reduction semantics are governed by `PATCH_PI_RT_CALCULUS_016`, primitive reduction rules are governed by `PATCH_PI_RT_CALCULUS_017`, well-formed continuation expressions are governed by `PATCH_PI_RT_CALCULUS_018`, typed continuation domains are governed by `PATCH_PI_RT_CALCULUS_019`, typed projection transition rules are governed by `PATCH_PI_RT_CALCULUS_020`, typed continuation composition guards are governed by `PATCH_PI_RT_CALCULUS_021`, continuation failure / undefined composition are governed by `PATCH_PI_RT_CALCULUS_022`, failure-classification / recovery-boundary handling are governed by `PATCH_PI_RT_CALCULUS_023`, continuation evaluation order is governed by `PATCH_PI_RT_CALCULUS_024`, the minimal reduction algorithm and partial-NF fallback are governed by `PATCH_PI_RT_CALCULUS_025`, partial normal form semantics are governed by `PATCH_PI_RT_CALCULUS_026`, reduction trace semantics are governed by `PATCH_PI_RT_CALCULUS_027`, reduction trace equivalence / canonical trace normalization are governed by `PATCH_PI_RT_CALCULUS_028`, local confluence conditions are governed by `PATCH_PI_RT_CALCULUS_029`, reduction determinism conditions are governed by `PATCH_PI_RT_CALCULUS_030`, termination conditions are governed by `PATCH_PI_RT_CALCULUS_031`, canonical form uniqueness conditions are governed by `PATCH_PI_RT_CALCULUS_032`, reduction complexity measure is governed by `PATCH_PI_RT_CALCULUS_033`, bounded confluence theorem is governed by `PATCH_PI_RT_CALCULUS_034`, canonical reduction strategy is governed by `PATCH_PI_RT_CALCULUS_035`, and canonical reduction strategy correctness is governed by `PATCH_PI_RT_CALCULUS_036`; together they require endpoint compatibility, explicit domain binding, type compatibility, explicit projection invocation, residue/admissibility preservation, lawful reduction toward $NF(C)$ after typed composition guards pass, ordered evaluation before reduction is admitted, outcome-preserving trace comparison, bounded branch joinability under common-origin divergence, canonical reduction priority with deterministic choice among admissible candidates, strict measure descent under a well-founded termination measure, bounded canonical-form uniqueness modulo process equivalence, bounded confluence over admissible bounded continuation classes, candidate-set construction after $EVAL_{024}$, admissibility filtering, canonical ordering of lawful candidates, deterministic selection within bounded classes, and bounded correctness preservation for canonical strategy selection. Associativity remains deferred, and global confluence, Church-Rosser, universal determinism, universal termination, and universal uniqueness remain deferred. [Source: PATCH_PI_RT_CALCULUS_013; PATCH_PI_RT_CALCULUS_014; PATCH_PI_RT_CALCULUS_015; PATCH_PI_RT_CALCULUS_016; PATCH_PI_RT_CALCULUS_017; PATCH_PI_RT_CALCULUS_018; PATCH_PI_RT_CALCULUS_019; PATCH_PI_RT_CALCULUS_020; PATCH_PI_RT_CALCULUS_021; PATCH_PI_RT_CALCULUS_022; PATCH_PI_RT_CALCULUS_023; PATCH_PI_RT_CALCULUS_024; PATCH_PI_RT_CALCULUS_025; PATCH_PI_RT_CALCULUS_026; PATCH_PI_RT_CALCULUS_027; PATCH_PI_RT_CALCULUS_028; PATCH_PI_RT_CALCULUS_029; PATCH_PI_RT_CALCULUS_030; PATCH_PI_RT_CALCULUS_031; PATCH_PI_RT_CALCULUS_032; PATCH_PI_RT_CALCULUS_033; PATCH_PI_RT_CALCULUS_034; PATCH_PI_RT_CALCULUS_035; PATCH_PI_RT_CALCULUS_036].
@@ -4023,8 +4027,8 @@ These items remain unsettled and are the primary targets for future induction an
 - **Vertical Bar Operator and Grouped Closure ($\mid$):** [ **C1_DEFINED_PROVISIONAL / CAMPAIGN_COMPLETED** ] Primitive admissible participation separator defining the structured comparison interface for distinction evaluation under Lemma L113 and Minimal Theorem MT-VBAR-001. Grouped bar closure ($Adm_{|}^{G}$) is defined under Lemma L114 and Minimal Theorem MT-GBC-001. Executable model verified under 4 controls and 5 metrics. [Patches: VERTICAL_BAR_OPERATOR_DEFINITION_PASS_001, VERTICAL_BAR_OPERATOR_GROUP_CLOSURE_PASS_001, MPF_VERTICAL_BAR_INDUCTION_001, MPF_VERTICAL_BAR_CAMPAIGN_SCAFFOLD_PATCH_001, MPF_VERTICAL_BAR_EXECUTABLE_MODEL_PATCH_001; Campaign: MPF_BAR_OPERATOR_VALIDATION_001]
 - **Deviated Constraint Dynamics ($D \to \delta \alpha$):** [ **C2_test_designed / RECORDED_UNDER_AUDIT** ] Formalizing the principle that distinction reorganizes admissibility within the same process. Vortex feedback loop campaign executed and validated under 4 controls, with C++ equivalence established under oneAPI AVX2; currently under governance hold pending final verification. [Patch: MPF_DEVIATED_CONSTRAINT_DYNAMICS_PATCH_001, MPF_VORTEX_ADMISSIBILITY_EXECUTION_PATCH_001, [REMEDIATE_VORTEX_EXECUTION_PROVENANCE_001](file:///D:/projects/acellorator/patches/REMEDIATE_VORTEX_EXECUTION_PROVENANCE_001.json), [MPF_VORTEX_REMEDIATION_EXECUTION_001](file:///D:/projects/acellorator/patches/MPF_VORTEX_REMEDIATION_EXECUTION_001.json); Campaigns: MPF_VORTEX_ADMISSIBILITY_CAMPAIGN_001, MPF_NON_MARKOV_ORGANIZATION_TEST_001; Audits: AUDIT_VORTEX_GOVERNANCE_001, [AUDIT_TOOL_RIGOR_ENDORSEMENT_TRACE_001](file:///D:/projects/acellorator/audits/AUDIT_TOOL_RIGOR_ENDORSEMENT_TRACE_001/tool_authorization_audit.md)]
 - **Orientation Space $\mathcal{O}$:** [ **DOWNSTREAM_FORMALIZATION_PENDING** ] Orientation is treated as a downstream organization over admissible RT conditions. Working informal definition active in §5.1.2 and §5.1.4. Candidate formal definition in `formal_object_registry [OBJ-orientation-space]`. Open requirement for OPEN_BRIDGE_001 is the **measurable metric** $C_{\text{orient}}$ and topological class measure $T_{\text{class metric}}$, not the downstream organization itself. [Audit: MPF_ORIENTATION_STALENESS_AUDIT_001 P4]
-- **Orientation Coherence Metric ($C_{\text{orient}}$):** [ **VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT** ] Candidate definition active in textbook §5.1.5 (Formal Statement 5.1.5): $C_{\text{orient}}(\chi_D) := 1 - \text{Var}_{\text{norm}}(\{-(i)_k \mid -(i)_k \in \mathcal{O}_{\text{adm}}(\chi_D)\})$. Non-circularity constraint active (C_ORIENT_NONCIRCULARITY_001): metric must be computable before topology class or closure stability is evaluated. Canonical registry entry: `registry/math/metric_registry.json`. Binds to OPEN_BRIDGE_001 PO_001. [Patch: [MPF_PO001_C_ORIENT_VALIDATION_EXECUTION_PATCH_001](file:///D:/projects/acellorator/patches/MPF_PO001_C_ORIENT_VALIDATION_EXECUTION_PATCH_001.json)]
-- **Topological Class Variance Measure ($T_{\text{class\_metric}}$):** [ **VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT** ] Candidate definition active in textbook §11.X (Formal Statement 11.X): $T_{\text{class\_metric}}(G_K) := [T_k, b(T_k), \text{inv}(G_K)]$ with minimal class family $T_0$–$T_4$, $T_x$. Non-circularity constraint active (T_CLASS_NONCIRCULARITY_001): must classify topology blind to orientation regime. Canonical registry entry: `registry/math/metric_registry.json`. Binds to OPEN_BRIDGE_001 PO_002 and PO_003. [Patch: [MPF_PO002_VALIDATION_CLOSURE_PATCH_001](file:///D:/projects/acellorator/patches/MPF_PO002_VALIDATION_CLOSURE_PATCH_001.json)]
+- **Orientation Coherence Metric ($C_{\text{orient}}$):** [ **VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT** ] Candidate definition active in textbook §5.1.5 (Formal Statement 5.1.5): $C_{\text{orient}}(\chi_D) := 1 - \text{Var}_{\text{norm}}(\{-(i)_k \mid -(i)_k \in \mathcal{O}_{\text{adm}}(\chi_D)\})$. Non-circularity constraint active (C_ORIENT_NONCIRCULARITY_001): metric must be computable before topology class or closure stability is evaluated. Canonical registry entry: `registry/math/metric_registry.json`. Binds to OPEN_BRIDGE_001 PO_001. Status drift cleared: OPEN_BRIDGE_001 family support is resolved separately; the metric itself remains pending rigor endorsement before downstream reuse. [Patch: [MPF_PO001_C_ORIENT_VALIDATION_EXECUTION_PATCH_001](file:///D:/projects/acellorator/patches/MPF_PO001_C_ORIENT_VALIDATION_EXECUTION_PATCH_001.json); APPENDIX_F_TODO_CLEARANCE_PASS_002]
+- **Topological Class Variance Measure ($T_{\text{class\_metric}}$):** [ **VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT** ] Candidate definition active in textbook §11.X (Formal Statement 11.X): $T_{\text{class\_metric}}(G_K) := [T_k, b(T_k), \text{inv}(G_K)]$ with minimal class family $T_0$–$T_4$, $T_x$. Non-circularity constraint active (T_CLASS_NONCIRCULARITY_001): must classify topology blind to orientation regime. Canonical registry entry: `registry/math/metric_registry.json`. Binds to OPEN_BRIDGE_001 PO_002 and PO_003. Status drift cleared: OPEN_BRIDGE_001 family support is resolved separately; the metric itself remains pending rigor endorsement before downstream reuse. [Patch: [MPF_PO002_VALIDATION_CLOSURE_PATCH_001](file:///D:/projects/acellorator/patches/MPF_PO002_VALIDATION_CLOSURE_PATCH_001.json); APPENDIX_F_TODO_CLEARANCE_PASS_002]
 
 - **Topology-to-Geometry Hardening:** [ **HARDENING_REQUIRED** ] Prove topology-to-geometry proof obligations, validate metric extraction, validate projection-signatures, exclude false geometry projections, and obtain replication and rigor endorsement [Source: MPF_TOPOLOGY_GEOMETRY_LEGALITY_C1_DEFINITION_001].
 - **Empirical Mapping Standards Hardening:** [ **HARDENING_REQUIRED** ] Define EMS audit procedures, EMS evidence thresholds, and EMS replication standards [Source: MPF_EMS_C1_DEFINITION_001].
@@ -4036,38 +4040,46 @@ These items remain unsettled and are the primary targets for future induction an
 ### F.3 Open Bridge Registry
 | Bridge ID | Name | Current Status | Claim Cap |
 | :--- | :--- | :--- | :--- |
-| **OPEN_BRIDGE_001** | Orientation-Closure | **C4_CANDIDATE_PENDING_RIGOR** | **STRUCTURAL_ONLY** |
-| **OPEN_BRIDGE_002** | Typed-Zero Provenance | **OPEN** | **THEORETICAL_ONLY** |
-| **OPEN_BRIDGE_003** | Cross-Domain Continuation Trace | **OPEN** | **THEORETICAL_ONLY** |
+| **OPEN_BRIDGE_001** | Orientation-Closure Bridge (Topological Selection) | **SUPPORTED** | **STRUCTURAL_ONLY** |
+| **OPEN_BRIDGE_001_v2** | Orientation-Closure Bridge (Induced Alignment) | **SUPPORTED** | **STRUCTURAL_ONLY** |
+| **OPEN_BRIDGE_001_v3** | Orientation-Closure Bridge (Procedural Model) | **SUPPORTED** | **STRUCTURAL_ONLY** |
+| **OPEN_BRIDGE_AE_OVERLAP_001** | Affect-Effect Quantitative Projection Bridge | **PROVISIONAL_FORMAL_DEFINITION** | **C1_DEFINED_PROVISIONAL** |
+| **OPEN_BRIDGE_002** | Typed-Zero Provenance | **PROVISIONALLY_FORMALIZED_PENDING_VALIDATION** | **THEORETICAL_ONLY** |
+| **OPEN_BRIDGE_003** | Cross-Domain Continuation Trace | **DEFERRED_PENDING_FORMALIZATION** | **THEORETICAL_ONLY** |
 
-- **OPEN_BRIDGE_002 (Typed-Zero Provenance):** Requires formal proof that $0_{minus}$ and $0_{plus}$ retain enough directional provenance to support higher-order RT.
-- **OPEN_BRIDGE_003 (Cross-Domain Continuation Trace):** Tracks the open bridge question of whether an unresolved admissible meta-relation between domains can preserve lawful continuation trace across projection boundaries without collapsing into primitive time, primitive observer, or consciousness-survival claims. At current status this bridge licenses only bounded formalization work on continuation trace, domain transition conditions, and admissibility-preserving handoff criteria. It does not support any claim that subjective continuity, consciousness persistence, or trans-domain identity has been established.
+- **OPEN_BRIDGE_AE_OVERLAP_001 (Affect-Effect Quantitative Projection Bridge):** Registered as a provisional formal bridge from qualitative $(A|E)$ conditions to reference-relative overlap measures. Directionality is now provisionally carried by $K_R(A \to E; B,O,M_R)$ before squared projection. It licenses only bridge formalization work and does not identify raw RT conditions with Hilbert-space states or probability without declared normalization.
+- **OPEN_BRIDGE_002 (Typed-Zero Provenance):** Registry-synchronized as provisionally formalized pending validation. The provisional carrier is $TZR(0_\sigma)$, the scoped outer relation is $<g>_y$, and collapse to $0_{untyped}$ occurs when required provenance or admissibility fields are missing or when typed zero is reified as an independent zero object. This remains theoretical-only and does not support higher-order RT promotion.
+- **OPEN_BRIDGE_003 (Cross-Domain Continuation Trace):** Registry-synchronized as deferred pending formalization. It licenses only bounded formalization work on continuation trace, domain transition conditions, and admissibility-preserving handoff criteria. It does not support subjective continuity, consciousness persistence, or trans-domain identity claims.
 
 ### F.4 Bridge Dependency Tables
-- **OPEN_BRIDGE_001 Requires Rewrite/Reroute Review For:** TC_asym, K, B_K.
-- **OPEN_BRIDGE_001 Does Not Auto-Promote:** topology_app, geometry_app, gravity_app, matter_app, field_app, QM_app_GR_app_bridge.
+- **Supported OPEN_BRIDGE_001 Family Requires Rewrite/Reroute Review For:** TC_asym, K, B_K.
+- **Supported OPEN_BRIDGE_001 Family Does Not Auto-Promote:** topology_app, geometry_app, gravity_app, matter_app, field_app, QM_app_GR_app_bridge.
+- **OPEN_BRIDGE_AE_OVERLAP_001 Requires Formalization For:** representation map $M_R$, projection bridge $\Pi_R$, overlap measure $P_R(A,E)$, reference-boundary-orientation metadata, probability normalization, and validation of the provisional directionality carrier $K_R(A \to E; B,O,M_R)$ under concrete representation choices.
+- **OPEN_BRIDGE_AE_OVERLAP_001 Does Not Auto-Promote:** quantum-state identity, primitive probability, Hilbert-space ontology, symmetric affect-effect causation, or unqualified empirical probability claims.
 - **OPEN_BRIDGE_003 Requires Definition Work For:** unresolved continuation, admissible meta-relation handoff, domain-transition trace preservation, and orientation-reference continuity under projection change.
 - **OPEN_BRIDGE_003 Does Not Auto-Promote:** consciousness_app, observer persistence, identity survival, theology correspondence, or any empirical continuity claim.
 
 
-### F.5 Active Attack Campaigns
-- **LFCR_001:** Attacking OPEN_BRIDGE_001. Surfaces: AS_001 through AS_008.
-- **PD_CG_V2_PROCEDURAL_ORIENTATING_REAUDIT:** Procedure-level re-audit of orientating and boundary-front mediation for OPEN_BRIDGE_001.
-- **PD_CG_V2R_RELATIONAL_CONDITIONING_RETEST:** Whole-expression conditioned-vs-null retest for relational conditioning under `_R`.
-- **PD_CG_V3_SUBSCRIPT_DISCOVERY:** Baseline-vs-qualified preserved-distinction campaign after the `_R` route failed as tested.
-- **PD_CG_V3_AFFIX_POSITION_TEST:** Bare-vs-subscripted-vs-prefixed reciprocal relation comparison; affix position is treated as semantically binding until tested.
-- **MPF_BAR_OPERATOR_VALIDATION_001:** Test | as a distinction-preserving comparison operator under 4 controls and 5 metrics; campaign completed and validated under executable model. [Patch: MPF_VERTICAL_BAR_CAMPAIGN_SCAFFOLD_PATCH_001, MPF_VERTICAL_BAR_EXECUTABLE_MODEL_PATCH_001]
-- **MPF_VORTEX_ADMISSIBILITY_CAMPAIGN_001:** Investigate whether admissibility updates systematically condition subsequent distinction events (D -> δα feedback loops); campaign executed in C++ with verified Python equivalence, currently under governance hold pending final verification. [Patch: MPF_VORTEX_ADMISSIBILITY_CAMPAIGN_001, MPF_VORTEX_ADMISSIBILITY_EXECUTION_PATCH_001, [REMEDIATE_VORTEX_EXECUTION_PROVENANCE_001](file:///D:/projects/acellorator/patches/REMEDIATE_VORTEX_EXECUTION_PROVENANCE_001.json), [MPF_VORTEX_REMEDIATION_EXECUTION_001](file:///D:/projects/acellorator/patches/MPF_VORTEX_REMEDIATION_EXECUTION_001.json); Audits: AUDIT_VORTEX_GOVERNANCE_001, [AUDIT_TOOL_RIGOR_ENDORSEMENT_TRACE_001](file:///D:/projects/acellorator/audits/AUDIT_TOOL_RIGOR_ENDORSEMENT_TRACE_001/tool_authorization_audit.md)]
-- **MPF_NON_MARKOV_ORGANIZATION_TEST_001:** Probe if future admissibility dynamics depend on cumulative history integration rather than prior state alone; campaign designed. [Patch: MPF_NON_MARKOV_ORGANIZATION_TEST_001]
+### F.5 Attack Campaign Disposition
+- **LFCR_001:** Historical attack against the earlier direct-support form of OPEN_BRIDGE_001. Surfaces AS_001 through AS_008 remain archived as falsification evidence for that superseded formulation.
+- **PD_CG_V2_PROCEDURAL_ORIENTATING_REAUDIT:** Completed procedure-level re-audit of orientating and boundary-front mediation for OPEN_BRIDGE_001; retained as evidence for the procedural reroute, not as an active attack.
+- **PD_CG_V2R_RELATIONAL_CONDITIONING_RETEST:** Completed whole-expression conditioned-vs-null retest for relational conditioning under `_R`; retained as bridge-family history.
+- **PD_CG_V3_SUBSCRIPT_DISCOVERY:** Completed baseline-vs-qualified preserved-distinction campaign after the `_R` route failed as tested; retained as qualifier-governance history.
+- **PD_CG_V3_AFFIX_POSITION_TEST:** Completed bare-vs-subscripted-vs-prefixed reciprocal relation comparison; affix position remains semantically binding unless a later campaign changes that disposition.
+- **MPF_BAR_OPERATOR_VALIDATION_001:** Completed executable-model campaign for `|` as a distinction-preserving comparison operator under 4 controls and 5 metrics. [Patch: MPF_VERTICAL_BAR_CAMPAIGN_SCAFFOLD_PATCH_001, MPF_VERTICAL_BAR_EXECUTABLE_MODEL_PATCH_001]
+- **MPF_VORTEX_ADMISSIBILITY_CAMPAIGN_001:** Executed C++ campaign with verified Python equivalence for admissibility-feedback behavior; remains under governance hold pending final verification. [Patch: MPF_VORTEX_ADMISSIBILITY_CAMPAIGN_001, MPF_VORTEX_ADMISSIBILITY_EXECUTION_PATCH_001, [REMEDIATE_VORTEX_EXECUTION_PROVENANCE_001](file:///D:/projects/acellorator/patches/REMEDIATE_VORTEX_EXECUTION_PROVENANCE_001.json), [MPF_VORTEX_REMEDIATION_EXECUTION_001](file:///D:/projects/acellorator/patches/MPF_VORTEX_REMEDIATION_EXECUTION_001.json); Audits: AUDIT_VORTEX_GOVERNANCE_001, [AUDIT_TOOL_RIGOR_ENDORSEMENT_TRACE_001](file:///D:/projects/acellorator/audits/AUDIT_TOOL_RIGOR_ENDORSEMENT_TRACE_001/tool_authorization_audit.md)]
+- **MPF_NON_MARKOV_ORGANIZATION_TEST_001:** Designed campaign for cumulative-history dependence in admissibility dynamics; not yet promoted to validated evidence. [Patch: MPF_NON_MARKOV_ORGANIZATION_TEST_001]
 
 ### F.6 Bridge Resolution History
 - **OPEN_BRIDGE_001:** Earlier direct-support formulation falsified 2026-05-30 via Campaign LFCR_001 (Stress ablation Model B).
 - **OPEN_BRIDGE_001:** Later procedural re-audit dated 2026-06-17 did not restore the stronger direct-support bridge because residue-coupling did not separate in the tested model.
 - **OPEN_BRIDGE_001:** Later relational-conditioning retest dated 2026-06-17 respected `_R` as relation conditioning rather than residue removal, but still did not support promotion because basin reformation did not improve and boundary-front mediation worsened on average.
-- **OPEN_BRIDGE_001:** Reformulated 2026-06-17 as a **Topological Selector** bridge. The new claim identifies orientation as a constraint on admissible knot-class selection ($T$) rather than a direct driver of stability. Its current governed state is **PROVISIONAL_PENDING_RIGOR** with a **C1_DEFINED_PROVISIONAL** ceiling under `RIGOR_TOOL_001`.
-- **OPEN_BRIDGE_001:** Run 08 dated 2026-06-16, reviewed 2026-06-17, showed coherent orientation narrowing admissible knot-class variance under the tested PDE + TDA stack. Under `RIGOR_TOOL_001`, that observation is retained as **PROVISIONAL_PENDING_RIGOR** pending tool qualification and independent replication rather than advanced to supported status.
+- **OPEN_BRIDGE_001:** Reformulated 2026-06-17 as a **Topological Selector** bridge. At that point the claim remained **PROVISIONAL_PENDING_RIGOR** with a **C1_DEFINED_PROVISIONAL** ceiling under `RIGOR_TOOL_001`; the later registry record now lists the bridge family as **SUPPORTED**.
+- **OPEN_BRIDGE_001:** Run 08 dated 2026-06-16, reviewed 2026-06-17, showed coherent orientation narrowing admissible knot-class variance under the tested PDE + TDA stack. Under `RIGOR_TOOL_001`, that observation was retained as **PROVISIONAL_PENDING_RIGOR** pending tool qualification and independent replication; the later bridge-family support record superseded that provisional handling.
 - **OPEN_BRIDGE_001:** Governance reset `PD_CG_PATCH_003` dated 2026-06-17 retained bare `<≠>` as the active preserved-distinction baseline, treated subscripts as tested qualifiers only, and blocked promotional reuse of `<≠>_R` / `<≠>_r` without a new direct baseline win.
-- **OPEN_BRIDGE_001:** Later affix-position test dated 2026-06-17 found that reciprocal affix position changed bounded model behavior, but neither `<=>_r` nor `r_<=>` beat bare `<=>`; no bridge promotion followed.
+- **OPEN_BRIDGE_001:** Later affix-position test dated 2026-06-17 found that reciprocal affix position changed bounded model behavior, but neither `<=>_r` nor `r_<=>` beat bare `<=>`; no bridge promotion followed from that test, and later bridge-family support was recorded under `OPEN_BRIDGE_001_v2` and `OPEN_BRIDGE_001_v3` after separate obligations were satisfied.
+- **OPEN_BRIDGE_001_v2:** Supported on 2026-07-19 after the induced-alignment obligation was satisfied under `PO_OPEN_BRIDGE_001_V2_INDUCED_ALIGNMENT`.
+- **OPEN_BRIDGE_001_v3:** Supported on 2026-07-19 with `exit_path: RESOLVED` after the procedural-model resolution event recorded in the registry.
 
 ### F.7 Bridge Measurement Definitions (MPF_PATCH_002E)
 Formal measurement rules for bridge falsification campaigns.
@@ -4083,6 +4095,8 @@ This section tracks newly introduced lexicon terms that have been reduced to gov
 - **`Affect-Effect_primitive`** (`[A|E]`): Governed provisional reading of a pre-distinction organizational condition at the scale floor. [Source: `MPF_RT_BICONDITIONAL_LADDER_001`]
 - **`Affect-Effect_distinction_projection`** (`D(*|*)`): Governed projection reading in which $D(*|*) := \Pi_D(A|E)$ is the formal distinction-schema projection of the affect/effect primitive distinction condition. $\Pi_D$ is a projection operator, not a generative primitive, and $D(*|*)$ remains a whole-expression schema that is not independently primitive as a detached object. [Source: `PATCH_PI_RT_CALCULUS_010`].
 - **`Affect-Effect_mismatch_bridge`** (`A|E := \Delta(A \langle S \rangle_{r_a} E)`): Governed provisional reading of the symmetry-referenced mismatch bridge. The bridge is qualitative and does not by itself define distance, norm, units, or topology. [Source: `PATCH_PI_RT_CALCULUS_052`].
+- **`Affect-Effect_overlap_bridge`** (`(A|E) --Pi_R--> P_R(A,E)`): Governed provisional bridge reading in which the qualitative affect-effect relation may be projected into a bounded compatibility measure only after a declared representation map $M_R: C_{RT} \to V_R$ supplies a quantitative representation space and overlap rule. The compressed notation $|\langle A|E\rangle|^2$ is shorthand for $|\langle M_R(A)|M_R(E)\rangle|^2$ and must not be read as identifying raw Affect and Effect with Hilbert-space states. $P_R(A,E)$ is compatibility or realization strength by default; it becomes probability only after a normalized outcome set, event semantics, and observation boundary are supplied. [Source: `RT-BRIDGE-AE-OVERLAP-001`].
+- **`directional_relational_amplitude`** (`K_R(A -> E; B,O,M_R)`): Provisionally formalized directionality carrier introduced by the overlap bridge. $K_R$ records represented Affect-to-Effect directional compatibility before squared projection, with $P_R(E \leftarrow A) = |K_R(A \to E; B,O,M_R)|^2$. $K_R(A \to E)$ is not interchangeable with $K_R(E \to A)$ unless explicit symmetry metadata is declared. This does not make the value a probability, does not identify Affect or Effect with quantum states, and does not promote the bridge beyond provisional formal definition. [Source: `RT-BRIDGE-AE-OVERLAP-001`; `APPENDIX_F_AE_DIRECTIONALITY_FORMALIZATION_001`].
 - **`Delta_Evaluation_Discipline`** (`\Delta`): Governed reading of mismatch evaluation under a declared symmetry-reference coupling. It remains non-metric, non-numeric, and distinct from ordinary distance or scalar magnitude. [Source: `PATCH_PI_RT_CALCULUS_053`].
 - **`Ordinal_Mismatch_Classes`** (`NO_EXPRESSED_MISMATCH`, `LOW_MISMATCH`, `MODERATE_MISMATCH`, `HIGH_MISMATCH`, `ADMISSIBILITY_BREAK`): Governed ordinal outputs of `Delta` under a declared coupling. The classes are ordinal only and do not imply equal spacing, numeric values, topology, or units. [Source: `PATCH_PI_RT_CALCULUS_054`].
 - **`Delta_Ordinal_Transition_Discipline`**: Governed reading of ordinal transitions between mismatch classes. Adjacent transitions may be admitted when admissibility is preserved; jump transitions require explicit admissibility reasoning. [Source: `PATCH_PI_RT_CALCULUS_055`].
@@ -4189,7 +4203,9 @@ This section tracks newly introduced lexicon terms that have been reduced to gov
 - **`subjective_as_experience_of_observation`**: Treat subjective as the experience of observation, where experience is realized orientation rather than a psychological primitive. [Source: MPF_AE_INDUCTION_CANDIDATES_2026_06_28]
 - **`observer_as_projection`**: Reduce observer to a derived projection of boundary interactions, affect, observation, and orientation reference. [Source: MPF_AE_INDUCTION_CANDIDATES_2026_06_28]
 - **`counterfactual_definiteness_subjectivation`**: Determine whether counterfactual definiteness becomes subjective or orientation-relative within A|E. [Source: MPF_AE_INDUCTION_CANDIDATES_2026_06_28]
-- **`orientation_reference_definition`**: Resolve whether the orientation reference is an array snapshot, basin property, local phase signature, or a more primitive structure. [Source: MPF_AE_INDUCTION_CANDIDATES_2026_06_28]
+- **`orientation_reference_definition`**: Resolve whether the orientation reference is an array snapshot, basin property, local phase signature, or a more primitive structure. The audit-only packet `RT_INDUCTION_ORDINAL_ORIENTATION_001` refines this question by treating symmetry as a reference condition, asymmetry as unequal exclusion relative to declared symmetry references, and orientation as admissible exclusion-driven preference under ordinal re-evaluation. [Sources: MPF_AE_INDUCTION_CANDIDATES_2026_06_28; RT_INDUCTION_ORDINAL_ORIENTATION_001]
+- **`relational_progression`**: Exploratory packet reading RT as a dynamically rewritten relational array across ordinal stages rather than as primitive field dynamics. The packet `RT-IND-2026-07-19-RELATIONAL-PROGRESSION-001` and follow-on operator partition reduce `dynamic_relational_array`, `U_alpha`, `bridge_operator`, `Pi_QM`, and `Pi_GR` from open gap debt to `C1_DEFINED_PROVISIONAL` / L0 validation status only. The partition records `U_alpha: R_n -> R_(n+1)`, `delta_alpha: (R_n, R_(n+1)) -> {0,1}`, and `*: R_<=n -> (Pi_QM(R_<=n), Pi_GR(R_<=n))` as provisional signatures; no induction-registry or live-queue promotion is allowed until operator domains/codomains and the DB authority-path disposition are explicit. [Sources: RT-IND-2026-07-19-RELATIONAL-PROGRESSION-001; RT-IND-2026-07-19-RELATIONAL-PROGRESSION-001_OPERATOR_PARTITION_001]
+- **`inu_logic`**: Exploratory tri-state packet for procedural monism, now debt-reduced to `C1_DEFINED_PROVISIONAL` / L0 validation status. Before mathematical use, the mapping is recalibrated as `I/N/U -> closed/open/symmetry`: `Is` denotes realized closure, `Not` denotes openness relative to candidate closure, and `Undecided` denotes unresolved symmetry rather than propagation, causality, or time. `distinction_propagation` is separately debt-reduced as a provisional metric-qualitative bridge candidate and cannot support claims about information, light, mass, inertia, or time until a formal projection rule exists. [Source: RT-IND-2026-07-19-PROCEDURAL-MONISM-INU-001]
 - **`triadicity_emergence_question`**: Determine whether triadic closure emerges from A|E or whether triadicity remains primitive. [Source: MPF_AE_INDUCTION_CANDIDATES_2026_06_28]
 - **`grammatical_metric_binding_candidate`**: Test backslash notation as a grammatical metric-binding construct rather than an ontological operator. [Source: MPF_AE_INDUCTION_CANDIDATES_2026_06_28]
 - **`grammatical_metric_inversion_candidate`**: Test slash notation as a grammatical metric-inversion construct rather than an ontological operator. [Source: MPF_AE_INDUCTION_CANDIDATES_2026_06_28]
@@ -4212,6 +4228,7 @@ This section tracks newly introduced lexicon terms that have been reduced to gov
 ### F.9 Active Tooling Debt
 - **`DEBT_VALIDATOR_IMPORT_PATH_001`**: Resolved. Direct invocation and module invocation are now behaviorally aligned, while `python -m scripts.global_validate` remains the canonical governed command. Latest governed success artifact: `outputs/audits/global_health_report.json`. Theory impact: none detected. [Source: DEBT_VALIDATOR_IMPORT_PATH_001]
 - **`DEBT_GOV_TOOL_ROUTING_METADATA_001`**: Resolved. Tool routing is now governed by `governance/live/tool_routing_manifest.json`, which separates allowed-use class from rigor level and declares invocation contracts and routing resolution order. [Source: governance/live/tool_routing_manifest.json]
+- **`DB_HEALTH_RESOLUTION_001`**: Resolved. The governed context capsule now separates actual DB validation health from broader current-state advisory warnings, recognizes warning-level global validation reports as `warn` rather than `unknown`, and labels registry-primary mixed-source authority as `registry_primary_mixed_sources` rather than an authority conflict. Latest observed capsule state: `database_health_status=pass`, `authority_state=allow`, `freshness_state=fresh`; remaining `resolve_patch_chain` recommendations are non-DB patch-chain governance obligations. [Source: `registry/governance/patches/DB_HEALTH_RESOLUTION_001.json`]
 
 ### F.10 Mathematics Proof Package
 The live mathematics proof package is reduced to artifact synchronization and promotion gating, not theorem promotion.
@@ -4226,7 +4243,7 @@ The live mathematics proof package is reduced to artifact synchronization and pr
 - **Governance note:** This reduction updates proof-package bookkeeping and theorem promotion state in the governed registries.
 
 ---
-**Status:** Items in Section F.1 are active research targets. Resolved bridges are archived in F.4. Failed bridges are archived in F.5. Section F.7 tracks the measurement rules for active attacks. Section F.8 tracks open lexicon debt. Section F.10 tracks the current mathematics proof-package synchronization state.
+**Status:** Items in Section F.1 are active research targets. Resolved bridges are archived in F.4. Failed or superseded bridge formulations are dispositioned in F.5. Section F.7 tracks the measurement rules for active attacks. Section F.8 tracks debt-reduced lexicon obligations. Section F.10 tracks the current mathematics proof-package synchronization state.
 
 \pagebreak
 

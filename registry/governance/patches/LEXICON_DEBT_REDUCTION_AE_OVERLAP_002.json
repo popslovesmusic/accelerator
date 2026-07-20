@@ -1,0 +1,44 @@
+{
+  "patch_id": "LEXICON_DEBT_REDUCTION_AE_OVERLAP_002",
+  "patch_type": "LEXICON_DEBT_REDUCTION",
+  "status": "EXECUTED",
+  "date": "2026-07-19",
+  "authority_level": "L0_CONCEPTUAL",
+  "claim_class": "C1_DEFINED_PROVISIONAL",
+  "source_packet": "RT-BRIDGE-AE-OVERLAP-001",
+  "objective": "Reduce the remaining AE overlap lexicon gap for directional_relational_amplitude without resolving the mathematical directionality formalization obligation.",
+  "terms_reduced": [
+    "directional_relational_amplitude"
+  ],
+  "registry_actions": [
+    {
+      "path": "registry/lexicon_gap_queue.json",
+      "action": "Set directional_relational_amplitude from GAP_OPEN / PROVISIONAL to C1_DEFINED_PROVISIONAL."
+    },
+    {
+      "path": "registry/lexicon_validation_registry.json",
+      "action": "Set directional_relational_amplitude global_status from gap_open to provisional while preserving L0 status."
+    },
+    {
+      "path": "docs/textbook/mono_process_textbook_complete.md",
+      "action": "Replace open lexicon-obligation language with debt-reduced provisional-obligation language."
+    }
+  ],
+  "remaining_obligation": {
+    "status": "FORMALIZATION_REQUIRED",
+    "description": "K_R must still be typed as a directionality-preserving amplitude before symmetric squared overlap may be used as a full affect-effect realization-process model.",
+    "tracked_in": "registry/math/open_bridge_registry.json"
+  },
+  "non_promotion_boundary": [
+    "No canonical lexicon promotion.",
+    "No theorem promotion.",
+    "No probability interpretation without normalized alternatives and event semantics.",
+    "No claim that K_R is mathematically complete."
+  ],
+  "verification_plan": [
+    "python scripts/governance/authorize_lock_update.py",
+    "python scripts/sync_math_registry.py",
+    "python scripts/db/snapshot_registries.py",
+    "python scripts/global_validate.py"
+  ]
+}

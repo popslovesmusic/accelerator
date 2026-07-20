@@ -56,7 +56,7 @@ SELECT
     END AS historical_residue_state,
     'active' AS db_first_gate_state,
     'registry' AS active_authority,
-    'mixed' AS authority_boundary,
+    'registry_primary_mixed_sources' AS authority_boundary,
     NULL AS open_runtime_debt_count,
     NULL AS live_blocker_count,
     CASE
