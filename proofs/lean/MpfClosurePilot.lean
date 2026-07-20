@@ -5,14 +5,14 @@
   Option C: Concrete Model-Class Construction & Satisfiability Proof
 
   Status:
-  - L116 (Syntax Closure): CONSTRUCTIVELY DISCHARGED (concrete base structures & Term inductive syntax).
+  - L116 (Syntax Closure): CONSTRUCTIVELY DISCHARGED (concrete base structures & Term inductive syntax; constructor lemmas relabeled as regression guards).
   - L117 (Semantic Closure): CONSTRUCTIVELY PROVED (substantive theorem over independently defined `Fails` and `valuation`).
   - Option A Step Deduction & Invariants: CONSTRUCTIVELY PROVED (floor non-degeneration, residue trace monotonicity, and valuation soundness).
   - Option B Orientation Space: CONSTRUCTIVELY PROVED (discrete crossing structure N ≥ 3, orientation frame alignment, and alignment preservation).
   - Option C Model Class & Satisfiability: CONSTRUCTIVELY PROVED (canonical relational model satisfiability & unconditioned counter-model failure).
-  - L118 & P112 (Operator Algebra): CONSTRUCTIVELY PROVED (concrete `Projection` window structure, `proj_inter`, and `tensor` specialization).
+  - L118 & P112 (Operator Algebra): CONSTRUCTIVELY PROVED (Context-gated `tensor` operation with conditional theorem `L118_operator_algebra` and falsifiability demonstration `tensor_unclosed_boundary`).
   - P110 (Projection Signature): CONSTRUCTIVELY PROVED (substantive valuation bounds).
-  - P111 (Affect|Effect Inheritance): CONSTRUCTIVELY FORMALIZED (structural AE-pair model).
+  - P111 (Affect|Effect Inheritance): REBUILT (valuation-linked AE inheritance with failure boundary).
 
   See also: MPF_CLOSURE_PILOT_GAP_TAXONOMY.md
 -/
@@ -83,7 +83,9 @@ def classify : Term → TermClass
 theorem L116_syntax_closure (t : Term) : ∃ c : TermClass, classify t = c :=
   ⟨classify t, rfl⟩
 
--- Verification lemmas: constructor classification.
+-- The following are regression/sanity checks, NOT independent verification content.
+-- Each holds automatically by rfl for any total pattern match and carries no claim
+-- beyond confirming classify's definition matches itself.
 theorem L116_state_class (s : State) : classify (Term.state s) = TermClass.state := rfl
 theorem L116_residue_class (r : Residue) : classify (Term.residue r) = TermClass.residue := rfl
 theorem L116_context_class (c : ContextBase) : classify (Term.context c) = TermClass.context := rfl
@@ -302,9 +304,9 @@ theorem step_residue_accumulation (r1 r2 : Residue) (c1 c2 : Context)
     (h_non_fail : ¬ Fails (Term.residue r1) c1) :
     r2.trace ≥ r1.trace := by
   cases h_step with
-  | residue_inscription _ _ _ _ _ _ _ _ _ h_trace _ =>
+  | residue_inscription r1 r2 c1 c2 h_valid h_res_act h_c2_valid h_orient1 h_orient2 h_trace h_floor =>
     exact h_trace
-  | boundary_collapse _ _ _ h_fails _ =>
+  | boundary_collapse t _ _ h_fails _ =>
     exfalso
     exact h_non_fail h_fails
 
@@ -367,39 +369,82 @@ theorem P110_projection_signature (s : State) (c : Context)
   rw [h_valid, h_floor, h_orient]
   exact ⟨floor + 1, rfl⟩
 
--- P111: Affect|Effect Structural Inheritance Model (Hypothesis SPC_RT_CORE_INHERITANCE_001)
-structure AffectComponent (α : Type) where
-  necessity_floor : α
+-- P111: Affect|Effect Structural Inheritance
+-- Rebuilt as valuation-linked structure rather than a vacuous string lookup table.
+-- A non-failing term inherits the active admissibility floor (Affect side) and its
+-- realized valuation level (Effect side). Failed terms carry no inheritance record.
+structure AEInheritance where
+  affect_floor : Nat
+  effect_level : Nat
 deriving DecidableEq, Repr
 
-structure EffectComponent (β : Type) where
-  selection_state : β
-deriving DecidableEq, Repr
+def ae_inheritance (t : Term) (c : Context) : Option AEInheritance :=
+  match valuation t c with
+  | Value.zero_state => none
+  | Value.valid_distinction lvl => some ⟨c.adm_floor, lvl⟩
 
-structure AEPair (α β : Type) where
-  affect : AffectComponent α
-  effect : EffectComponent β
-deriving DecidableEq, Repr
+theorem P111_affect_effect_inheritance (t : Term) (c : Context) (h_non_fail : ¬ Fails t c) :
+    ∃ pair : AEInheritance, ae_inheritance t c = some pair ∧ pair.affect_floor = c.adm_floor := by
+  unfold ae_inheritance
+  cases h_valid : c.is_valid with
+  | false =>
+    exfalso
+    apply h_non_fail
+    dsimp [Fails]
+    exact Or.inl h_valid
+  | true =>
+    cases h_floor : c.adm_floor with
+    | zero =>
+      exfalso
+      apply h_non_fail
+      dsimp [Fails]
+      exact Or.inr (Or.inl h_floor)
+    | succ floor =>
+      cases h_orient : c.orientation.aligned with
+      | false =>
+        exfalso
+        apply h_non_fail
+        dsimp [Fails]
+        exact Or.inr (Or.inr (Or.inl h_orient))
+      | true =>
+        unfold valuation
+        rw [h_valid, h_floor, h_orient]
+        cases t with
+        | state s =>
+          exact ⟨⟨floor + 1, floor + 1⟩, rfl, rfl⟩
+        | residue r =>
+          cases h_res : c.residue_active with
+          | false =>
+            exfalso
+            apply h_non_fail
+            dsimp [Fails, Term.isResidueOrRelation]
+            exact Or.inr (Or.inr (Or.inr ⟨rfl, h_res⟩))
+          | true =>
+            exact ⟨⟨floor + 1, floor + 2⟩, rfl, rfl⟩
+        | context cbase =>
+          exact ⟨⟨floor + 1, floor + 3⟩, rfl, rfl⟩
+        | operator o =>
+          exact ⟨⟨floor + 1, floor + 4⟩, rfl, rfl⟩
+        | relation rel =>
+          cases h_res : c.residue_active with
+          | false =>
+            exfalso
+            apply h_non_fail
+            dsimp [Fails, Term.isResidueOrRelation]
+            exact Or.inr (Or.inr (Or.inr ⟨rfl, h_res⟩))
+          | true =>
+            exact ⟨⟨floor + 1, floor + 5⟩, rfl, rfl⟩
+        | projection p =>
+          exact ⟨⟨floor + 1, floor + 6⟩, rfl, rfl⟩
 
--- Structural AE-pair model over TermClass constructors:
-def term_ae_inheritance (c : TermClass) : AEPair String String :=
-  match c with
-  | TermClass.state      => ⟨⟨"continuous_necessity_state"⟩, ⟨"discrete_selection_state"⟩⟩
-  | TermClass.residue    => ⟨⟨"continuous_history_trace"⟩, ⟨"discrete_inscription_event"⟩⟩
-  | TermClass.context    => ⟨⟨"continuous_admissibility_field"⟩, ⟨"discrete_validity_bound"⟩⟩
-  | TermClass.operator   => ⟨⟨"continuous_transform_capacity"⟩, ⟨"discrete_mapping_action"⟩⟩
-  | TermClass.relation   => ⟨⟨"continuous_mismatch_pressure"⟩, ⟨"discrete_coupling_pair"⟩⟩
-  | TermClass.projection => ⟨⟨"continuous_window_scope"⟩, ⟨"discrete_filter_output"⟩⟩
-
-theorem P111_affect_effect_inheritance (t : Term) :
-    (term_ae_inheritance (classify t)).affect.necessity_floor ≠ "" ∧
-    (term_ae_inheritance (classify t)).effect.selection_state ≠ "" := by
-  cases t <;> (dsimp [classify, term_ae_inheritance]; exact ⟨by intro h; contradiction, by intro h; contradiction⟩)
+theorem P111_inheritance_boundary (t : Term) (c : Context) (h : Fails t c) :
+    ae_inheritance t c = none := by
+  unfold ae_inheritance
+  rw [L117_boundary_condition t c h]
 
 -- ============================================================
--- L118 & P112: OPERATOR ALGEBRA (CONSTRUCTIVELY DISCHARGED)
--- Π_A ⊗ Π_B = Π_(A ∩ B)
--- Reconciles ⊗ as projection-window intersection specialization ⊗_∩
+-- L118 & P112: OPERATOR ALGEBRA (CONTEXT-GATED SPECIFICATION)
+-- Reconciles ⊗ as Context-gated operation with degenerate fallback
 -- ============================================================
 
 -- Intersection of projection admissibility windows:
@@ -410,18 +455,43 @@ def proj_inter (A B : Projection) : Projection where
     have := B.dec_window x
     inferInstance
 
-notation:65 a " ⊓ " b => proj_inter a b
+-- Degenerate/empty projection (empty admissibility window):
+def empty_projection : Projection where
+  window := fun _ => False
+  dec_window := fun _ => inferInstanceAs (Decidable False)
 
--- Coupling projection operator ⊗ reconciled as window intersection specialization ⊗_∩
-def tensor (A B : Projection) : Projection :=
-  proj_inter A B
+-- Explicit closure condition for Context-gated projection operations:
+def ProjectionClosed (c : Context) : Prop :=
+  c.is_valid = true ∧ c.adm_floor ≥ 1 ∧ c.orientation.aligned = true
 
-notation:70 a " ⊗ " b => tensor a b
+instance (c : Context) : Decidable (ProjectionClosed c) :=
+  inferInstanceAs (Decidable (c.is_valid = true ∧ c.adm_floor ≥ 1 ∧ c.orientation.aligned = true))
 
--- L118 Operator Algebra Theorem:
-theorem L118_operator_algebra (A B : Projection) :
-    (A ⊗ B) = (A ⊓ B) := rfl
+-- Coupling projection operator (Context-gated with degenerate fallback):
+def tensor (c : Context) (A B : Projection) : Projection :=
+  if ProjectionClosed c then
+    proj_inter A B
+  else
+    empty_projection
 
--- P112 Projection Specialization Theorem:
-theorem P112_projection_intersection_specialization (A B : Projection) :
-    (A ⊗ B) = (A ⊓ B) := rfl
+-- L118 Operator Algebra Theorem (Conditional on Context closure):
+theorem L118_operator_algebra (c : Context) (A B : Projection) (h_closed : ProjectionClosed c) :
+    tensor c A B = proj_inter A B := by
+  dsimp [tensor]
+  rw [if_pos h_closed]
+
+-- P112 Projection Specialization Theorem (Conditional on Context closure):
+theorem P112_projection_intersection_specialization (c : Context) (A B : Projection) (h_closed : ProjectionClosed c) :
+    tensor c A B = proj_inter A B := by
+  exact L118_operator_algebra c A B h_closed
+
+-- Falsifiability Demonstration: Unclosed context fails to reduce to proj_inter
+theorem tensor_unclosed_boundary (c : Context) (A B : Projection) (h_unclosed : c.is_valid = false) :
+    tensor c A B = empty_projection := by
+  dsimp [tensor, ProjectionClosed]
+  have h_not : ¬ (c.is_valid = true ∧ c.adm_floor ≥ 1 ∧ c.orientation.aligned = true) := by
+    intro h_and
+    have h_v := h_and.1
+    rw [h_unclosed] at h_v
+    contradiction
+  rw [if_neg h_not]
