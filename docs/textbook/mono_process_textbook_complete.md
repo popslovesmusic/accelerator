@@ -1952,7 +1952,7 @@ $$ \delta_a(x;c) := \Pi_A \left( S(\text{Cand}(x;c);c) ; c \right) $$
 
 **Functional Components (The Operational Funnel):**
 1. **$\text{Cand}$ (Candidate Generation):** Proposes the full possibility space based on current **position** (where you are) [Source: MS-SCRATCH-V1 Sec 5.1].
-2. **$S$ (Selection/Pruning):** A rough-cut plausibility filter based on **arbitration** (what is worth pursuing). This operates upstream of the law-governed check.
+2. **$S$ (Selection/Pruning):** A sequential pruning stage internal to $\delta_a$ and upstream of $\text{Arb}_A$. In the current provisional registry form, $S_{R,A}(C_t) \to C_t^S$ removes candidate continuations that fail type admissibility, nonzero distinction, residue compatibility, topology preservation, or orientation compatibility before realization arbitration. $S$ does not select the realized continuation, does not increase candidate-set cardinality, and does not depend on post-realization outcomes [Source: VAL-S-ARB-001; registry/math/s_arbitration_validation_registry.json].
 3. **$\Pi_A$ (Admissibility Projection):** The enforcer of **residue** (what history permits). It maps surviving candidates onto the admissible window $A(c)$ [Source: MS-SCRATCH-V1 Sec 3.2].
 
 **Definition 6.1.3: Admissibility Projection ($\Pi_A$ or $\Pi_{A_\alpha}$)**
@@ -2387,8 +2387,8 @@ The recursive closure ($\iff_R$) of these two domains through the coupled operat
 
 To achieve formal closure for the coupling program, the following must be induced:
 
-1.  **Formal Definition of $\otimes$:** [ **MISSING DEFINITION** ] Does $\otimes$ denote a standard tensor product, a logical AND operation, a relational convolution, or a specific algebraic interference rule?
-2.  **Composition and Associativity:** [ **MISSING DEFINITION** ] How do multiple coupled operators combine? Is $(A \to_a \otimes \gets_r B) \otimes (B \to_a \otimes \gets_r C)$ a well-posed operation?
+1.  **Formal Definition of $\otimes$:** [ **C1_DEFINED_PROVISIONAL / SPECIALIZED_PROJECTION_CASE_RESOLVED** ] $\otimes$ is a typed partial relational composition operator over declared operands and a declared context, not a standard tensor product, logical AND, scalar product, or untyped interference rule. Its general form is $X \otimes_Y Z$, defined only when operand typing, context typing, distinction preservation, admissibility non-emptiness, and closure-class compatibility remain satisfied. L118/P112 instantiate this operator only in the projection-window subcase: $\Pi_A \otimes_{\cap} \Pi_B := \Pi_{A \cap B}$. That subcase does not promote unrestricted commutativity, associativity, or identity preservation for the general $\otimes$ family. [Source: OTIMES_TYPED_PARTIAL_COMPOSITION_DEFINITION_001; L118; P112; MT-OTIMES-001]
+2.  **Composition and Associativity:** [ **CONTEXT_BOUND_PARTIAL_COMPOSITION_DEFINED** ] Multiple coupled operators compose only under a declared context family and compatible closure class. Associativity is available in the L118/P112 projection-window subcase because admissibility-window intersection is associative; it remains unproven and unavailable for arbitrary $X \otimes_Y Z$ expressions unless a separate context-specific proof or validation record is supplied.
 3.  **Residue-Admissibility Interference:** [ **REQUIRES PROOF** ] What is the formal rule for how the "intensity" of residue support modifies the "width" of the admissibility window?
 
 ---
@@ -3996,71 +3996,262 @@ These items have candidate formalisms in the "Scratch Schema" (MS-SCRATCH-V1) or
 - **Aligned Asymmetry:** [ **C1_DEFINED_PROVISIONAL** ] The relational coupling of distinct process orientations that enables sustained shared continuation while preserving individual process distinction ($E \neq 0$). [Source: PO_OPEN_BRIDGE_001_SATISFACTION_REPORT].
 - **Relational Cluster:** [ **C1_DEFINED_PROVISIONAL** ] A persistent topological grouping of processes that exhibit mutually stabilized continuation through shared residue and aligned orientations. [Source: PO_OPEN_BRIDGE_001_SATISFACTION_REPORT].
 - **Symmetric Collapse:** [ **C1_DEFINED_PROVISIONAL** ] The annihilation of process continuation that occurs when local distinction (vanishing gradient) drops below threshold bounds. [Source: PO_OPEN_BRIDGE_001_SATISFACTION_REPORT].
-- **Residue-Conditioned Biconditional ($\Leftrightarrow_R$):** [ **C1_DEFINED_PROVISIONAL** ] A residue-mediated admissible transformation relation between distinguishable configurations; it is not identity and not logical equivalence. [Source: MPF_LEX_RESIDUE_CONDITIONED_BICONDITIONAL_RESOLUTION_001].
-- **Admissibility Projection ($\Pi_A$):** [ **C1_DEFINED_PROVISIONAL** ] An operator that filters a candidate increment (such as an aggregate transport contribution $y_\alpha$) into the local admissibility window $A_\alpha$ before a state update is applied. [Source: MPF_LEX_ADMISSIBILITY_PROJECTION_RESOLUTION_001].
-- **Coupling Neighborhood ($CSI(\alpha)$):** [ **C1_DEFINED_PROVISIONAL** ] The set of all process loci $\beta$ that are admissibly reachable from a given locus $\alpha$ under the orientation-array topology and contribute finite transport terms to the target process update. [Source: MPF_LEX_COUPLING_NEIGHBORHOOD_RESOLUTION_001].
-- **Transport Operator ($NavT$):** [ **C1_DEFINED_PROVISIONAL** ] A per-neighbor contribution operator that maps a pair of reference-bearing states into a candidate update increment, converting reference or phase relations between process indices into admissibility-filtered update contributions. [Source: MPF_LEX_TRANSPORT_OPERATOR_RESOLUTION_001].
-- **stability-achieved:** [ **C1_DEFINED_PROVISIONAL** ] A measure of the observed persistence and structural coherence of an admissible continuation channel under local process conditions. [Source: MPF_LEX_STABILITY_ACHIEVED_RESOLUTION_001].
-- **stabilization-pressure:** [ **C1_DEFINED_PROVISIONAL** ] The magnitude of epsilon-forcing or selection pressure actively applied to maintain an admissible channel against local perturbations or decay. [Source: MPF_LEX_STABILIZATION_PRESSURE_RESOLUTION_001].
-- **cost-to-destabilize:** [ **C1_DEFINED_PROVISIONAL** ] The minimum perturbation or cost ($B_A$) required to force an admissible channel into fracture, collapse, or transition. [Source: MPF_LEX_COST_TO_DESTABILIZE_RESOLUTION_001].
-- **Mismatch-Minimizing Selection:** [ **C1_DEFINED_PROVISIONAL** ] Selection of an admissible continuation or operator that minimizes a local relational mismatch objective. [Source: MPF_LEX_MISMATCH_MINIMIZING_SELECTION_RESOLUTION_001].
-- **Transport Residual Observable:** [ **C1_DEFINED_PROVISIONAL** ] A discrepancy measure for the failure of transport composition along an admissible chain. [Source: MPF_LEX_TRANSPORT_RESIDUAL_OBSERVABLE_RESOLUTION_001].
-- **Admissibility Outcome:** [ **C1_DEFINED_PROVISIONAL** ] The categorical result of evaluating the residue-conditioned relation for a state pair under residue and orientation context. [Source: MPF_LEX_ADMISSIBILITY_OUTCOME_RESOLUTION_001].
-- **Residue Update Operator:** [ **C1_DEFINED_PROVISIONAL** ] An update operator that maps the current residue and continuation difference into the next residue state. [Source: MPF_LEX_RESIDUE_UPDATE_OPERATOR_RESOLUTION_001].
-- **Residue Space:** [ **C1_DEFINED_PROVISIONAL** ] A constraint-memory space that stores accumulated admissible orientation-transform contributions. [Source: MPF_LEX_RESIDUE_SPACE_RESOLUTION_001].
-- **Dual Inscription of Residue:** [ **C1_DEFINED_PROVISIONAL_MAINTAINED** ] The partitioning of residue inscription into realized continuation ($\Psi_+$) and excluded boundary ($\Psi_-$) modes. [Source: MPF_ADV_HARDENING_SERIES_004_DUAL_INSCRIPTION_BACKFILL].
-- **Abstraction Meta-Level Stack:** [ **C1_DEFINED_PROVISIONAL_MAINTAINED** ] The stratification of formal process arguments, critiques, and updates into eight distinct meta-levels to prevent layer slippage. [Source: MPF_ADV_HARDENING_SERIES_005_META_LEVEL_STACK_BACKFILL].
-- **Ontological Classification of Arrays:** [ **C1_DEFINED_PROVISIONAL_MAINTAINED** ] The requirement that all arrays in formalisms and simulations declare their type (conditional, projection, residue, or participation) and ban generic state arrays. [Source: MPF_ADV_HARDENING_SERIES_006_CONDITIONAL_ARRAY_BACKFILL].
-- **Closure Neighborhoods:** [ **C1_DEFINED_PROVISIONAL_MAINTAINED** ] The requirement that all process coupling neighborhoods (or closure neighborhoods) be defined and computed strictly via local process-connectivity relations rather than assuming a primitive spatial coordinate metric or persistent node objects. [Source: MPF_ADV_HARDENING_SERIES_007_CLOSURE_NEIGHBORHOOD_BACKFILL].
-- **Admissible Organization Operator ($Org_a$):** [ **C1_DEFINED_PROVISIONAL / GAP_QUALIFIED_DEFINITION_CANDIDATE** ] The operator organizing admissible distinction participation over a typed participation graph, governed by candidate axioms under Lemma L115 and Minimal Theorem MT-ORG-001. [Patch: ORG_A_AXIOM_DEFINITION_PASS_001].
-- **Admissible Distinction Organization Signature ($\Sigma_D$):** [ **C1_DEFINED_PROVISIONAL / GAP_QUALIFIED_EQUIVALENCE_CANDIDATE** ] The equivalence class of Org_a-closed distinction organizations under iff_R and orientation equivalence ≃_O. [Patch: ECONOMICS_SIGMA_D_EQUIVALENCE_PASS_001].
+# Appendix C: Induction Checklist
+
+This checklist defines the rigorous steps required to promote a **Candidate Operator** or **Induced Domain** to **Verified/Core** status.
+
+### 1. Conceptual Rewriting
+- [ ] Can the target be rewritten as a **process activity** rather than a static object?
+- [ ] Does it decompose into $\epsilon, R, \rho, K/CSI, \Delta, \text{ or } -(i)$?
+- [ ] Does it avoid prohibited primitives (e.g., field-as-primitive, fixed location)?
+
+### 2. Trace-to-Core
+- [ ] Is there an explicit derivation tracing the target back to the **Primary Axiom 1.2.1** ($(\mathcal{E} \neq 0) \iff_R \delta_a(\mathcal{E} > 0)$)?
+- [ ] Are all intermediate assumptions marked and justified?
+
+### 3. Operational Binding
+- [ ] Are there defined **observables** that can be extracted via $\iff_m$ or $\iff_s$?
+- [ ] Is there a proposed **measurement protocol**?
+- [ ] Is there a clear **falsification condition**?
+
+### 4. Mechanism Independence
+- [ ] Does the behavior hold across at least two independent **mechanism classes** (e.g., Agent-based and PDE)?
+- [ ] Has the target been tested in at least three different parameter/seed regimes?
+
+### 5. Algebraic Stability
+- [ ] Does the target maintain invariant properties under recursive continuation?
+- [ ] Are the composition and associativity rules defined and tested?
+- [ ] Does the floor $\epsilon$ prevent singularities in the target's operation?
+
+### 6. Governance Approval
+- [ ] Has the target been registered in the `lexicon_validation_registry.json`?
+- [ ] Has the evidence pack been reviewed and assigned an L-level (L2 or higher required for non-provisional use)?
+
+\pagebreak
+
+# Appendix D: Claim Governance Framework
+
+This appendix summarizes the standards for classifying and promoting research claims within the framework.
+
+### D.1 Classification Table
+| Level | Name | Scope | Requirements |
+| :--- | :--- | :--- | :--- |
+| **C0** | Axiom / Definition | Internal foundation | Starting point (Axiom 1.2.1). |
+| **C1** | Model-Relative | Inside a scaffold | Logical consistency within a specific model. |
+| **C2** | Simulation-Observed | Result of a run | Recoverable output + documented config/seed. |
+| **C3** | Structural Comparison | Analogy/Resemblance | Comparison to external theory (e.g., "gravity-like"). |
+| **C4** | Supported Internal | Multi-Model support | 2+ Mechanism Classes, 3+ Seeds, Falsification passed. |
+| **C5** | Validate | External Alignment | Independent measurement, 4+ Falsification Vectors. |
+| **C6** | Theorem | Formal Closure | Universal mechanism independence, formal derivation from Axiomatic Floor. |
+
+### D.1A Relational Hierarchy and Whole-Expression Rule
+
+Identity claims within the framework must adhere to the **Relational Hierarchy** established in Module CLS_004R:
+
+1.  **Core Invariants (C5):** Admissibility Window ($W_a$), Rotational Character ($\chi$).
+2.  **Selection Dynamics (C4):** Distinction Density ($\rho_D$) as bridge-quantity weighting of mismatch states, Dominant Mismatch ($M_{dom}$).
+3.  **Interaction Observables (C2):** Boundary Fronts ($\partial W_a$), Orientation Events ($R_{-(i)}$).
+
+**Governance Rule (R-SIG-001):**
+The full coupled expression of a signature (e.g., $\Sigma_R$) is the mandatory **evaluative unit**. No claim of identity, equivalence, or classification may be based solely on isolated components from Layer 2 or Layer 3 of the hierarchy. Promotion of an identity claim to Level C4+ requires stability verification of all Core Invariants.
+
+### D.2 Claim Cap Propagation
+No formal object may hold a stronger claim level than its weakest unresolved **REQUIRED** dependency (**CLAIM_CAP_PRINCIPLE_001**). REQUIRED dependencies cap downstream objects at their current level. BLOCKING dependencies freeze downstream objects until resolved.
+
+### D.3 Promotion Requirements
+- All REQUIRED dependencies at or above requested level.
+- No active REVIEW_LOCK on the target or its upstream required nodes.
+- No active falsification campaign with unresolved or failed evidence.
+- At least one evidence report or formal proof obligation satisfying the requested level.
+
+### D.4 Review Lock Conditions
+Review Lock is triggered when a required dependency is falsified, an evidence report contradicts a claim, bridge failure occurs, or operator semantics change in a way that invalidates prior proof.
+
+### D.5 Exit Path Protocols
+Objects under REVIEW_LOCK may only exit via defined pathways:
+- **rewrite:** Remove failed dependency.
+- **reroute:** Replace with valid alternate path.
+- **downgrade:** Match available support level.
+- **retire:** Move to historical record (active theorem status removed).
+- **retest:** Initialize new campaign after repair.
+
+### D.6 Dependency Constraints
+Dependency edges determine promotion limits and evidence scope. Support propagates conservatively, typically only one level, while falsification propagates aggressively through required dependencies.
+
+---
+
+\pagebreak
+
+# Appendix E: Simulation Evidence Index
+
+This index points to the primary evidence pools supporting the claims made in this textbook. All paths refer to the `results/` directory of the project repository.
+
+### Key Evidence Packages
+| Target Claim | Supporting Run(s) | Mechanism Classes | Status |
+| :--- | :--- | :--- | :--- |
+| **Pi-A Stability** | `results/LFCR_001_M0_baseline/` | Agent, CA | Supported (C4) |
+| **Metastability Basins** | `results/2026-06-16_run03_CLS_003_StructuralBox_Extreme/` | ODE, PDE | Supported (C5) |
+| **Braid Formation** | `results/LFCR_001_M2_randomization/` | Graph, Agent | Provisional (C1) |
+| **Orientation Bias** | `results/LFCR_001_v2_analysis/` | CA, Graph | Supported (C4) |
+| **[PROVISIONAL_PENDING_RIGOR] MPF_SIM_ARRAY_GRAPH_001** | `results/2026-06-17_run01_MPF_SIM_ARRAY_GRAPH_001/` | Python ad hoc graph simulation | Provisional pending rigor (C1 defined provisional) |
+| **[PROVISIONAL_PENDING_RIGOR] MPF_SIM_ART_001** | `results/2026-06-17_run01_MPF_SIM_ART_001/` | Python ad hoc whole-expression perturbation simulation | Provisional pending rigor (C1 defined provisional) |
+| **OPEN_BRIDGE_001 Topological Selector** | `results/2026-06-16_run08_OPEN_BRIDGE_001_SATISFACTION/` | PDE, Topological Analysis | Provisional pending rigor (C1 structural only) |
+| **Gravity-like Gradient** | `results/2026-05-25_232611_GRAVITY_APP_V1/` | PDE | Supported (C5) |
+| **Zeta Mapping** | `results/2026-06-16_run03_CLS_003_StructuralBox_Extreme/` | Graph, Box | Supported (L2) |
+| **Singularity Rebound** | `results/2026-05-22_run02_Singularity_Rebound/` | Graph | Supported (L3) |
+
+**Governance Containment Note (2026-06-17):**
+The two June 17 ad hoc campaign outputs listed above are retained for reference with **low evidentiary weight**. They may be used for hypothesis generation, campaign planning, metric exploration, candidate induction targets, and tool development guidance only.
+
+### Historical Simulation Campaigns
+**Campaign ID: LFCR_001 (Orientation-Closure Attack)**
+- **Status:** ARCHIVED, FALSIFIED, REWRITE_PENDING
+- **Recorded Controls:** M0_full, M1_no_orientation, M2_random_orientation, M3_shuffled_orientation, residue-only and admissibility-only ablations, plus fixed-topology variants.
+- **Recorded Outputs:** closure_survival_rate, closure_duration_mean, collapse_rate, orientation_coherence, effect_size, confidence_interval, seed_variance.
+
+### Evidence Requirements
+To be listed in this index, a run must provide:
+1. **Raw Metrics:** Saved in `data/` subdirectory.
+2. **Analysis Artifacts:** Plots, spectral data, or TDA results in `artifacts/`.
+3. **Reproducibility Metadata:** Exact config hash, seed, and tool version.
+4. **Falsification Report:** Documenting at least one adversarial test result.
+
+### Accessing Evidence
+Raw data and simulation artifacts for the above runs are archived in the `results/` folder. For access to the specific codebase versions used for these runs, refer to the `source_commit` field in the run metadata JSON.
+
+### E.6 Metric Registry (MPF_PATCH_002E)
+Canonical definitions for metrics used in research campaigns. [Reference: registry/math/executable_metric_registry.json]
+- **C_orient:** Orientation Coherence.
+- **S_closure:** Closure Stability.
+- **R_support:** Residue Support.
+- **A_width:** Admissibility Width.
+- **T_preserve:** Topology Preservation.
+
+### E.7 Registered Provisional Execution Artifacts
+The following items are governance-registered simulation protocols, harnesses, fixtures, or campaign state artifacts. They are not listed as evidence because no execution result is being claimed in this index.
+
+| Program | Registry Artifact | Campaign Ledger | State | Note |
+| :--- | :--- | :--- | :--- | :--- |
+| Memory Tensor RT | `registry/simulation_protocols/memory_tensor_rt_minimal_simulation.json` | `registry/governance/campaign_ledgers/memory_tensor_rt_campaign_ledger.json` | Provisional / registered | Minimal executable protocol for displacement-trace recall under coupling, orientation, and resolution. Execution outputs are not yet archived in `results/`. |
+| Memory Tensor RT | `registry/simulation_harnesses/memory_tensor_rt_minimal_harness.json` | `registry/governance/campaign_ledgers/memory_tensor_rt_campaign_ledger.json` | Provisional / registered | Repository-level harness specification for executing the minimal protocol and writing auditable run outputs. |
+| Memory Tensor RT | `inputs/simulations/memory_tensor_rt_minimal_input.json` | `registry/governance/campaign_ledgers/memory_tensor_rt_campaign_ledger.json` | Provisional / registered | Deterministic seed fixture for the first executable run. |
+
+Additional campaign governance artifacts associated with this track are recorded in `registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_015.json` (late provenance entry for the runner stub), `registry/domain_translations/meta_core_affect_symbol_bindings.json` (meta-core and affect-domain symbol binding), `registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_018.json` (affect-domain rebinding layer), and `registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_019.json` (primitive observation relation). These are governance records, not execution outputs.
+
+The meta-domain symbols `A_meta` and `B_meta` remain reserved for the core Memory Tensor RT binding. Any affect-domain use of `A` or `B` requires explicit rebinding and domain labeling; the canonical RT expression itself remains unchanged. The affect-domain layer now uses `A_affect` and `B_affect` as explicit rebound participants, and records `Obs(A_affect, B_affect)` as the registered primitive observation relation within that domain, without altering the canonical meta-core pair.
+
+\pagebreak
+
+# Appendix F: Known Missing Definitions and Open Bridges
+
+This appendix tracks the formal status of critical gaps identified during the drafting of this textbook. Items are categorized by their current status in the project registries.
+
+### 1. Provisional / Scratch Defined
+- **Whole Expression Primacy:** [ **C1_DEFINED_PROVISIONAL_MAINTAINED** ]
+- **Continuation-First Reduction:** [ **C1_DEFINED_PROVISIONAL** ]
+- **Directed Relational Distinction ($D$):** [ **C1_DEFINED** ]
+- **Local Admissibility Floor ($\epsilon$):** [ **C1_DEFINED** ]
+- **Observation as Floor-Bounded Mismatch:** [ **C1_DEFINED_PROVISIONAL** ]
+- **Typed Meta-Relation Operator ($\langle*\rangle_x$):** [ **C1_DEFINED_PROVISIONAL** ]
+- **Zero-State Domain Membership:** [ **C1_DEFINED_PROVISIONAL** ]
+- **Residue Inscription ($\Psi$):** [ **C1_DEFINED** ]
+- **Typed Zero-Condition Recoupling (Lemma L111):** [ **C1_DEFINED_PROVISIONAL** ]
+- **RT Nesting, Condition Primacy, and Family Constitution (Lemma L112):** [ **C1_DEFINED_PROVISIONAL** ]
+- **RT Mechanics Recursive Completion (Lemma L_RTM):** [ **C1_DEFINED_PROVISIONAL** ]
+- **Conditioning as Primitive Relational Process:** [ **C1_DEFINED_PROVISIONAL** ]
+- **Primitive Conditioning Principle:** [ **C1_DEFINED_PROVISIONAL** ]
+- **RT Calculus Foundation (PATCH_PI_RT_CALCULUS_001):** [ **C1_DEFINED_PROVISIONAL** ]
+- **RT Operational Regime Definition (PATCH_PI_RT_CALCULUS_002):** [ **C1_DEFINED_PROVISIONAL** ]
+- **Orientation-Derived Operational Regime Classification (PATCH_PI_RT_CALCULUS_003):** [ **C1_DEFINED_PROVISIONAL** ]
+- **Linear Operational Regime Derivation (PATCH_PI_RT_CALCULUS_004):** [ **C1_DEFINED_PROVISIONAL** ]
+- **Nonlinear Operational Regime Derivation (PATCH_PI_RT_CALCULUS_005):** [ **C1_DEFINED_PROVISIONAL** ]
+- **L/NL Regime Boundary and Transition (PATCH_PI_RT_CALCULUS_006):** [ **C1_DEFINED_PROVISIONAL** ]
+- **Mixed L/NL Operational Regime (PATCH_PI_RT_CALCULUS_007):** [ **C1_DEFINED_PROVISIONAL** ]
+- **Operational Regime Selection (PATCH_PI_RT_CALCULUS_008):** [ **C1_DEFINED_PROVISIONAL** ]
+- **Residue-Governed Continuation Arrow (PATCH_PI_RT_CALCULUS_011):** [ **C1_DEFINED_PROVISIONAL** ]
+- **Continuation Algebra Foundations (PATCH_PI_RT_CALCULUS_012):** [ **C1_DEFINED_PROVISIONAL** ]
+- **Dominant-Domain Linear/Nonlinear Binding (MPF_DOMINANT_DOMAIN_LINEAR_NONLINEAR_001):** [ **C1_DEFINED_PROVISIONAL** ]
+- **Recoupling-Reorientation Event (RRE):** [ **C1_DEFINED_PROVISIONAL** ]
+- **Statistical Projection Relation ($\iff_s$):** [ **C1_DEFINED_PROVISIONAL** ]
+- **Projection Signature:** [ **C1_DEFINED_PROVISIONAL_MAINTAINED** ]
+- **Projection Signature Hardening:** [ **C1_DEFINED_PROVISIONAL_MAINTAINED** ]
+- **Topology-to-Geometry Legality Transform ($\Pi_{\text{geo}}$):** [ **C1_DEFINED_PROVISIONAL** ]
+- **Empirical Mapping Standards (EMS):** [ **C1_DEFINED_PROVISIONAL** ]
+- **Topological Organization ($T$):** [ **C1_DEFINED_PROVISIONAL** ]
+- **Admissibility Structure ($A_{\text{adm}}$):** [ **C1_DEFINED_PROVISIONAL** ]
+- **Conditioning Trace:** [ **C1_DEFINED_PROVISIONAL** ]
+- **Trace Priority:** [ **C1_DEFINED_PROVISIONAL** ]
+- **Affect ($A$):** [ **C1_DEFINED_PROVISIONAL_MAINTAINED** ]
+- **Effect ($E$):** [ **C1_DEFINED_PROVISIONAL_MAINTAINED** ]
+- **Knot-Class Selection:** [ **C1_DEFINED_PROVISIONAL** ]
+- **Directional Compatibility Constraint:** [ **C1_DEFINED_PROVISIONAL** ]
+- **Admissibility Window ($\mathcal{A}$):** [ **C1_DEFINED_PROVISIONAL** ]
+- **Aligned Asymmetry:** [ **C1_DEFINED_PROVISIONAL** ]
+- **Relational Cluster:** [ **C1_DEFINED_PROVISIONAL** ]
+- **Symmetric Collapse:** [ **C1_DEFINED_PROVISIONAL** ]
+- **Residue-Conditioned Biconditional ($\Leftrightarrow_R$):** [ **C1_DEFINED_PROVISIONAL** ]
+- **Admissibility Projection ($\Pi_A$):** [ **C1_DEFINED_PROVISIONAL** ]
+- **Coupling Neighborhood ($CSI(\alpha)$):** [ **C1_DEFINED_PROVISIONAL** ]
+- **Transport Operator ($NavT$):** [ **C1_DEFINED_PROVISIONAL** ]
+- **stability-achieved:** [ **C1_DEFINED_PROVISIONAL** ]
+- **stabilization-pressure:** [ **C1_DEFINED_PROVISIONAL** ]
+- **cost-to-destabilize:** [ **C1_DEFINED_PROVISIONAL** ]
+- **Mismatch-Minimizing Selection:** [ **C1_DEFINED_PROVISIONAL** ]
+- **Transport Residual Observable:** [ **C1_DEFINED_PROVISIONAL** ]
+- **Admissibility Outcome:** [ **C1_DEFINED_PROVISIONAL** ]
+- **Residue Update Operator:** [ **C1_DEFINED_PROVISIONAL** ]
+- **Residue Space:** [ **C1_DEFINED_PROVISIONAL** ]
+- **Dual Inscription of Residue:** [ **C1_DEFINED_PROVISIONAL_MAINTAINED** ]
+- **Abstraction Meta-Level Stack:** [ **C1_DEFINED_PROVISIONAL_MAINTAINED** ]
+- **Ontological Classification of Arrays:** [ **C1_DEFINED_PROVISIONAL_MAINTAINED** ]
+- **Closure Neighborhoods:** [ **C1_DEFINED_PROVISIONAL_MAINTAINED** ]
+- **Admissible Organization Operator ($Org_a$):** [ **C1_DEFINED_PROVISIONAL** ]
+- **Admissible Distinction Organization Signature ($\Sigma_D$):** [ **C1_DEFINED_PROVISIONAL** ]
+
+### 2. High-Priority Gaps (Categorized)
+
+#### Tier P0: Governor & Schema-Blocking Gaps (Machine-Readable Schema Closed)
+- **OQ_001 (Scalar Admissibility Context):** [ **PROVISIONAL_SCHEMA_CLOSED_P0** ] Discharged via patch `AFDG_PATCH_002_ADMISSIBILITY_CONTEXT_SCHEMA`. Formalizes the 7-tuple context carrier $Ctx_x := \{reference\_frame, evaluation\_boundary, orientation\_condition, admissibility\_rule, projection\_rule, arithmetic\_interpretation, trace\_id\}$. Scalar projection artifacts are licensed by $Ctx_x$, not raw RT core outputs.
+- **Formal RT Chain Algebra:** [ **PROVISIONAL_SCHEMA_CLOSED_P0** ] Discharged via patch `AFDG_PATCH_001_GOVERNOR_IO_SCHEMA_FROM_RT_CHAIN`. Provides machine-readable governor I/O schema for progressive RT chains $D(1|2) \to D(2|3) \to \dots$, enforcing lawful ordering and coupling inheritance.
+- **OQ_COND_001 (Conditioning Composition):** [ **PROVISIONAL_SCHEMA_CLOSED_P0** ] Discharged via patch `AFDG_PATCH_003_CONDITIONING_COMPOSITION_PROTOCOL`. Formalizes $<a>_b \langle*\rangle_x <c>_d$ composition schema enforcing typed operands, directional order, lineage tracking, and context preservation.
+- **OQ_RTM_002 (Continuation Admissibility Condition):** [ **PROVISIONAL_SCHEMA_CLOSED_P0** ] Discharged via patch `AFDG_PATCH_005_CONTINUATION_ADMISSIBILITY_GATE`. Formalizes continuation admissibility gate contract requiring nonzero distinction, typed residue, and PRIN_003 coupling compatibility.
+- **Recoupling-Reorientation Event (RRE) Hardening:** [ **PROVISIONAL_SCHEMA_CLOSED_P0** ] Discharged via patch `AFDG_PATCH_007_RRE_METRIC_DECLARATION`. Declares coupling mismatch metric $\Delta C_{\text{mismatch}}$ and tolerance threshold $\tau_C$ schema with residue lineage preservation.
+- **Observer-Floor Mismatch:** [ **PROVISIONAL_SCHEMA_CLOSED_P0** ] Discharged via patch `AFDG_PATCH_009_OBSERVER_FLOOR_MISMATCH_PLACEHOLDER`. Defines schema-closed contract for observer-floor mismatch quantity and co-evolution parameters with strict provisional ceiling.
+
+#### Tier P1: Lexicon & Registry Placeholders (Registry Synchronized)
+- **Relational Control Surfaces:** [ **PROVISIONAL_PLACEHOLDER_P1** ] Discharged via patch `AFDG_PATCH_010_RELATIONAL_CONTROL_SURFACE_PLACEHOLDER`. Concept placeholder record treating constants or coupling factors as control-surface projections inside relational process with explicit no-externalization guard.
+- **Asymmetric Recoupling and Distinction Emergence:** [ **PROVISIONAL_PLACEHOLDER_P1** ] Discharged via patch `AFDG_PATCH_008_RECOUPLING_BRIDGE_PLACEHOLDER`. Typed placeholder concept record for asymmetric recoupling ($0_{\text{DOF}} \to D > 0$) bound to formal object registry placeholder `OBJ-asymmetric-recoupling`.
+- **OQ_RTM_001 (Trace Inheritance Lemma):** [ **PROVISIONAL_METADATA_P1** ] Discharged via patch `AFDG_PATCH_006_TRACE_INHERITANCE_METADATA`. Metadata schema declaring trace-admissibility as a hereditary invariant under coherent nesting without physical permanence claims.
+- **OQ_COND_002/003 (Conditioning Invariants & Conditioned Equivalence):** [ **PROVISIONAL_METADATA_P1** ] Discharged via patch `AFDG_PATCH_004_CONDITIONED_EQUIVALENCE_ROUTING`. Metadata schema and routing for conditioned equivalence decisions requiring declared context, lineage, and equivalence subtypes.
+- **OQ_TZR_001/002/003 (Typed Zero Provenance):** [ **PROVISIONALLY_FORMALIZED_PENDING_VALIDATION** ] Formalized under `APPENDIX_F_TYPED_ZERO_PROVENANCE_FORMALIZATION_001` with $TZR(0_\sigma) := \{\sigma, source\_trace, collapse\_context, admissibility\_context, relation\_slot\}$.
+- **$S$ Arbitration Rule:** [ **VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT** ] Formalized as sequential pruning stage $S_{R,A}(C_t) \to C_t^S$ bound to fixture-backed validation `VAL-S-ARB-001`.
+
+#### Tier P2: Long-Horizon Theoretical & Foundation Debt (Explicitly Deferred)
+- **OQ_002 (Bell Curve Derivability):** [ **DEFERRED_LONG_TERM_THEORY_P2** ] Bell-curve emergence is not formally derived from $\text{RT}_{\text{core}}$ alone. Requires declared $\iff_s$ projection map $F_s$, observation window, normalization policy, and convergence assumptions. Non-blocking for local governor protocol or synthetic dataset build.
+- **OQ_003 (Skew Conditions):** [ **DEFERRED_LONG_TERM_THEORY_P2** ] Skew of $\text{RT}_{\text{out}}$ distributions is governed by declared $\iff_s$ projection of directional imbalance, not by $\text{RT}_{\text{core}}$ alone. Non-blocking for local governor protocol or synthetic dataset build.
+- **OQ_004 (Biconditional Ladder Resolution):** [ **DEFERRED_LONG_TERM_THEORY_P2** ] Recursive scale structure under mutual constitution of family and primaries (PRIN_007). Non-blocking for local governor protocol.
+- **Deviation-to-Geometry Recovery:** [ **DEFERRED_LONG_TERM_THEORY_P2** ] Staged recovery route $Dev_{RT} \xrightarrow{\Pi_{dist}} Dist_{like} \xrightarrow{Org_a} OrgDist \xrightarrow{\Pi_{geo}} geometry_{app}$. Distance-like readings remain projections of declared deviation context. Does not prove geometry recovery or physical geometry. Non-blocking for governor protocol.
+- **Orientation Transformations Across Domains:** [ **DEFERRED_LONG_TERM_THEORY_P2** ] Requires orientation-reference continuity condition $ORC(O_i,O_j;\tau_{i\to j})$. Blocks substitution of orientation into spatial direction or primitive time. Non-blocking for governor protocol.
+- **L116 Mechanized Syntax Closure:** [ **CONSTRUCTIVELY_DISCHARGED** ] Lean 4 proof pilot (`proofs/lean/MpfClosurePilot.lean`) constructs concrete `State`, `Residue`, `ContextBase`, `Operator`, `Relation`, and `Projection` (admissibility window) base structures, eliminating base-type opacity. `Term` is a closed 6-constructor inductive syntax tree and `def classify : Term → TermClass` is structural recursion. `theorem L116_syntax_closure` compiles and verifies by `rfl` without `sorry`. [Source: `proofs/lean/MpfClosurePilot.lean`].
+- **L117 Mechanized Failure Predicate & Valuation:** [ **CONSTRUCTIVELY_DISCHARGED_SUBSTANTIVE** ] Lean 4 proof pilot (`proofs/lean/MpfClosurePilot.lean`) defines `Context` (with `adm_floor`, `residue_active`, `is_valid`, `orientation`) and `Value` (with `zero_state` and `valid_distinction`). `Fails (t : Term) (c : Context) : Prop` is defined independently and resolved for invalid context, zero floor, frame misalignment (`c.orientation.aligned = false`), and inactive residue tracking (`t.isResidueOrRelation = true ∧ c.residue_active = false`). `valuation` is defined independently without referencing `Fails`. `theorem L117_boundary_condition` compiles and verifies without `sorry` as a substantive, non-tautological theorem. [Source: `proofs/lean/MpfClosurePilot.lean`].
+- **Option B Orientation Space & Frame Alignment:** [ **CONSTRUCTIVELY_DISCHARGED_SUBSTANTIVE** ] Lean 4 proof pilot (`proofs/lean/MpfClosurePilot.lean`) formalizes `DiscreteOrientation` ($N \ge 3$ relational crossings per 3-Peak Rule T001) and `Orientation` frame alignment. Proves two mechanized theorems without `sorry`: `orientation_failure_boundary` (proves misaligned frames trigger `Fails` and collapse `valuation` to `Value.zero_state`) and `step_orientation_alignment_preservation` (proves lawful step transitions preserve frame alignment `c2.orientation.aligned = true`). [Source: `proofs/lean/MpfClosurePilot.lean`].
+- **Option A Process Step Deduction & Invariant Conservation:** [ **CONSTRUCTIVELY_DISCHARGED_SUBSTANTIVE** ] Lean 4 proof pilot (`proofs/lean/MpfClosurePilot.lean`) constructs process transition relation `inductive Step : Term → Context → Term → Context → Prop`. Proves three mechanized invariant theorems without `sorry`: `step_admissibility_preservation` (proves valid continuation transitions preserve context validity and floor non-degeneration $c_2.\text{adm\_floor} \ge c_1.\text{adm\_floor}$), `step_residue_accumulation` (proves lawful residue inscription transitions preserve monotonic trace growth $r_2.\text{trace} \ge r_1.\text{trace}$), and `step_valuation_soundness` (proves admissible state steps evaluate to valid distinction levels `Value.valid_distinction lvl`). [Source: `proofs/lean/MpfClosurePilot.lean`].
+- **P110 Projection Signature Preservation:** [ **VERIFIED_SUBSTANTIVE** ] `theorem P110_projection_signature` proves that an admissible state term under a valid context evaluates to a non-zero distinguishability level `Value.valid_distinction lvl`. Verified without `sorry`. [Source: `proofs/lean/MpfClosurePilot.lean`].
+- **P111 Affect|Effect Structural Inheritance:** [ **FORMALIZED_PROVISIONAL_MODEL** ] `theorem P111_affect_effect_inheritance` formalizes structural Affect|Effect pairs (`term_ae_inheritance`) across all term constructors under `SPC_RT_CORE_INHERITANCE_001`. Verified as a structural model mapping without `sorry`. [Source: PROMOTION_RT_2026_07_20_LEAN_PILOT_OPTION_C_ADDENDUM; `proofs/lean/MpfClosurePilot.lean`].
+- **L118 & P112 Mechanized Operator Algebra Closure:** [ **CONSTRUCTIVELY_DISCHARGED_SUBSTANTIVE** ] Lean 4 proof pilot (`proofs/lean/MpfClosurePilot.lean`) constructs `Projection` as an admissibility window predicate (`window : Nat → Prop`), defines projection window intersection `proj_inter (A B : Projection) : Projection`, and reconciles coupling projection operator $\otimes$ as the window intersection specialization $\otimes_{\cap}$ (`def tensor (A B : Projection) : Projection := proj_inter A B`). `theorem L118_operator_algebra` and `theorem P112_projection_intersection_specialization` compile and verify by `rfl` without `sorry`. [Source: `proofs/lean/MpfClosurePilot.lean`].
 
 
-### 2. High-Priority Gaps (OPEN / REGISTERED_LATE / PROOF-PENDING / PROVISIONAL)
-These items remain unsettled and are the primary targets for future induction and research runs. Some are genuinely OPEN, some are REGISTERED_LATE because the corresponding term already exists in the lexicon queue, and a few are now proof-pending or provisionally formalized rather than generically open.
 
-- **Recoupling-Reorientation Event (RRE) Hardening:** [ **HARDENING_REQUIRED** ] Formulate the coupling mismatch metric $\Delta C_{\text{mismatch}}$ and tolerance threshold $\tau_C$; determine scale relativity of $\tau_C$ and verify residue lineage preservation under reorientation [Source: MPF_RECOUPLING_REORIENTATION_EVENT_001].
-- **OQ_TZR_001 (Preservation of Provenance):** [ **PROVISIONALLY_FORMALIZED_PENDING_VALIDATION** ] Directional provenance is provisionally carried by $TZR(0_\sigma) := \{\sigma, source\_trace, collapse\_context, admissibility\_context, relation\_slot\}$, with $\sigma \in \{minus, plus\}$. The carrier preserves role polarity without treating zero as an independent object. [Source: MPF_IND_TYPED_ZERO_RECOUPLING_001; APPENDIX_F_TYPED_ZERO_PROVENANCE_FORMALIZATION_001].
-- **OQ_TZR_002 (Governing Outer Relation):** [ **PROVISIONALLY_FORMALIZED_PENDING_VALIDATION** ] The governing outer recoupling relation is the typed meta-relation family instance $<g>_y$, with canonical form $TZR(0_{minus}) <g>_y TZR(0_{plus})$. It is a scoped member of $\langle*\rangle_x$, not a new primitive. [Source: MPF_IND_TYPED_ZERO_RECOUPLING_001; APPENDIX_F_TYPED_ZERO_PROVENANCE_FORMALIZATION_001].
-- **OQ_TZR_003 (Collapse Conditions):** [ **PROVISIONALLY_FORMALIZED_PENDING_VALIDATION** ] Typed zero collapses to $0_{untyped}$ when source trace, polarity, admissibility context, or relation slot is missing; when same-polarity recoupling is attempted; when the carrier is reified as an independent zero object; or when constructive trace to RT_core fails. [Source: MPF_IND_TYPED_ZERO_RECOUPLING_001; APPENDIX_F_TYPED_ZERO_PROVENANCE_FORMALIZATION_001].
-- **OQ_001 (Scalar Admissibility Context):** [ **PROVISIONALLY_FORMALIZED_PENDING_VALIDATION** ] In the scalar example $[D(2|-1)\to1 \langle f \rangle_x D(3|+3)\to6]\to5$, $x$ is provisionally defined as the context carrier $Ctx_x := \{reference\_frame, evaluation\_boundary, orientation\_condition, admissibility\_rule, projection\_rule, arithmetic\_interpretation, trace\_id\}$. The displayed result $5$ is therefore a scalar projection artifact licensed by $Ctx_x$, not a raw RT output or theorem result. [Source: MPF_IND_RT_NESTING_CONDITIONS_FAMILY_001; APPENDIX_F_SECTION_2_SCALAR_CONTEXT_REDUCTION_001].
-- **OQ_002 (Bell Curve Derivability):** [ **SCOPED_DISPOSITION_STATISTICAL_PROJECTION_REQUIRED** ] Bell-curve emergence is not formally derived from $\text{RT}_{\text{core}}$ alone. Exclusion/addition asymmetry may motivate a central-tendency statistical projection, but a bell curve or normal-like shape requires a declared $\iff_s$ projection map $F_s$, observation window or ensemble, normalization policy, aggregation rule, and convergence or symmetry assumptions. Skewed, heavy-tailed, multimodal, and non-convergent outputs remain valid alternatives until excluded by those conditions. [Source: MPF_IND_RT_NESTING_CONDITIONS_FAMILY_001; MPF_IFF_S_STATISTICAL_PROJECTION_001; APPENDIX_F_SECTION_2_BELL_CURVE_DERIVABILITY_001].
-- **OQ_003 (Skew Conditions):** [ **SCOPED_DISPOSITION_ASYMMETRY_RATIO_CLASSIFIER_PENDING_FORMAL_F_S** ] Skew of $\text{RT}_{\text{out}}$ distributions is governed by the declared $\iff_s$ projection of directional imbalance, not by $\text{RT}_{\text{core}}$ alone. Under a declared orientation/sign convention, $\Omega_a = 1$ marks balanced projection, $\Omega_a > 1$ marks exclusion-dominant imbalance, and $\Omega_a < 1$ marks addition-dominant imbalance. Projected skew sign and shape remain undefined until $F_s$, observation axis, ensemble/window, normalization policy, and aggregation rules are supplied. [Source: MPF_IND_RT_NESTING_CONDITIONS_FAMILY_001; L124; P118; APPENDIX_F_SECTION_2_SKEW_CONDITIONS_001].
-- **OQ_004 (Biconditional Ladder Resolution):** [ **PROVISIONAL_CLOSED** ] Does the mutual constitution of family and primaries (PRIN_007) provide the recursive scale structure needed for the governed provisional reading of the biconditional ladder / `meta_core_scale_hypothesis` in Appendix F.8? [Source: MPF_IND_RT_NESTING_CONDITIONS_FAMILY_001].
-- **OQ_RTM_001 (Trace Inheritance Lemma):** [ **PASSED_PENDING_RIGOR_ENDORSEMENT** ] Campaign `MPF_RTM_RECURSIVE_CAMPAIGN_RUN_001` supports trace-admissibility as a hereditary invariant under coherent nesting: $TraceAdm(RT_n)$ plus lawful PRIN_003 nesting, typed residue preservation, non-collapse, and lawful zero recoupling licenses $TraceAdm(RT_{n+1})$ without exhaustive re-derivation from $\text{RT}_{\text{core}}$ at every depth. This remains model-relative and does not promote unrestricted theorem status or any physical recurrence, conservation, or permanence claim. [Source: MPF_IND_RT_MECHANICS_RECURSIVE_COMPLETION_001; MPF_RTM_RECURSIVE_CAMPAIGN_RUN_001; APPENDIX_F_SECTION_2_TRACE_INHERITANCE_001].
-- **OQ_RTM_002 (Continuation Admissibility Condition):** [ **PASSED_PENDING_RIGOR_ENDORSEMENT** ] A continuation term $C$ in $D(RT_n \mid C)$ is admissible when $C$ is a typed distinction-domain member with nonzero distinction, declared admissibility context, PRIN_003-compatible coupling to $RT_n$, distinguishable typed residue, and preservation of distinction, admissibility, residue closure, and non-collapse. Campaign `MPF_RTM_RECURSIVE_CAMPAIGN_RUN_001` supports this boundary with admissible continuation mean stability 0.9781 versus inadmissible continuation mean stability 0.1193 across 64 seeds. This remains model-relative and does not promote unrestricted theorem status or license arbitrary continuation terms. [Source: MPF_IND_RT_MECHANICS_RECURSIVE_COMPLETION_001; MPF_RTM_RECURSIVE_CAMPAIGN_RUN_001; APPENDIX_F_SECTION_2_CONTINUATION_ADMISSIBILITY_001].
-- **OQ_RTM_003 (Base Case Constructive Trace):** [ **PASSED_PENDING_RIGOR_ENDORSEMENT** ] The base-case reduction $D(*|1) \to D(0|1)$ inside $\text{Red}_x(D(0|0), D(0|1), D(1|1), D(0|1))$ is campaign-supported as constructively traceable to $\text{RT}_{\text{core}}$ when the base-field $D(a|b)$ terms are typed as distinction relations, $x=0$ is uniquely admissible under the local window, $\mathcal{E}\neq0$ and $\delta_\alpha(\mathcal{E}>0)$ are satisfied, and $\Leftrightarrow_R$ residue closure plus non-collapse are preserved. Campaign `MPF_RTM_RECURSIVE_CAMPAIGN_RUN_001` reports base-case admissibility and residue-closure rates of 1.0000 across 64 seeds. This remains a model-relative trace scaffold, not unrestricted theorem promotion or an assertion that $\text{RT}_{\text{core}}$ is a pre-given target. [Source: MPF_IND_RT_MECHANICS_RECURSIVE_COMPLETION_001; MPF_RTM_RECURSIVE_CAMPAIGN_RUN_001; APPENDIX_F_SECTION_2_BASE_CASE_CONSTRUCTIVE_TRACE_001].
-- **OQ_COND_001 (Conditioning Composition):** [ **PASSED_PENDING_RIGOR_ENDORSEMENT** ] Conditioned distinctions compose lawfully in the scoped form $<a>_b \langle * \rangle_x <c>_d$ only when typed conditioned operands, the declared meta-relation, directional conditioning order, conditioning lineage, admissibility context, and non-collapse remain recoverable. Campaign `MPF_COND_CAMPAIGN_RUN_001` supports this boundary with order-preserved stability 0.9715 versus context-collapsed stability 0.1448 across 64 seeds. This remains model-relative and does not promote theorem status, commutativity, or arithmetic projection as primitive composition. [Source: RT-IND-Conditioning-001; MPF_PRIMITIVE_CONDITIONING_REDUCTION_001; MPF_COND_CAMPAIGN_RUN_001; APPENDIX_F_SECTION_2_CONDITIONING_COMPOSITION_001].
-- **OQ_COND_002 (Conditioning Invariants):** [ **PASSED_PENDING_RIGOR_ENDORSEMENT** ] Under lawful conditioning controls, directional asymmetry and typed residue are supported as stable candidate invariants when conditioned terms remain typed and conditioning order, lineage, admissibility context, and non-collapse remain recoverable. Campaign `MPF_COND_CAMPAIGN_RUN_001` reports mean invariant preservation rate 0.9905 across 64 seeds and identifies asymmetry plus typed residue as the preserved invariant boundary. This remains model-relative and does not promote theorem status, universal invariance, or physical conservation. [Source: RT-IND-Conditioning-001; MPF_PRIMITIVE_CONDITIONING_REDUCTION_001; MPF_COND_CAMPAIGN_RUN_001; APPENDIX_F_SECTION_2_CONDITIONING_INVARIANTS_001].
-- **OQ_COND_003 (Conditioned Equivalence):** [ **PASSED_PENDING_RIGOR_ENDORSEMENT** ] Two conditioned distinctions may be treated as equivalent only under a declared equivalence relation that preserves typed conditioned class, conditioning lineage, admissibility context, order compatibility, typed residue non-aliasing, and non-collapse. Campaign `MPF_COND_CAMPAIGN_RUN_001` reports equivalence non-collapse rate 1.0000 across 64 seeds. This remains model-relative equivalence, not process identity, physical identity, or license to alias distinct conditioned classes. [Source: RT-IND-Conditioning-001; MPF_PRIMITIVE_CONDITIONING_REDUCTION_001; MPF_COND_CAMPAIGN_RUN_001; APPENDIX_F_SECTION_2_CONDITIONED_EQUIVALENCE_001].
-- **OQ_COND_004 (Non-Arithmetic Admissibility Measure):** [ **PASSED_PENDING_RIGOR_ENDORSEMENT** ] A non-arithmetic admissibility measure is campaign-supported as a model-relative proxy for admissibility filtering outside arithmetic projection when computed from typed conditioned structure, recoverable conditioning lineage, admissibility context, directional order, typed residue, and non-collapse rather than arithmetic projection as primitive. Campaign `MPF_COND_CAMPAIGN_RUN_001` reports mean correlation `0.8475` across 64 seeds and the control comparison records `non_arithmetic_measure_verified=true`. This does not promote theorem status, universal admissibility measurement, or physical metric topology. [Source: RT-IND-Conditioning-001].
-- **OQ_COND_005 (Conditioning Propagation):** [ **PASSED_PENDING_RIGOR_ENDORSEMENT** ] Conditioning propagation is campaign-supported as a model-relative lineage-preserving relational update over typed conditioned distinctions when conditioning order, admissibility context, typed residue, and non-collapse remain recoverable across steps. Campaign `MPF_COND_CAMPAIGN_RUN_001` reports mean relational propagation rate `0.9609` across 64 seeds and the control comparison records `propagation_verified=true`. This does not promote theorem status, a universal propagation law, physical conditioning, causal spacetime propagation, or physical metric topology. [Source: RT-IND-Conditioning-001].
-- **Conditioning Theory Family Note:** [ **PASSED_PENDING_RIGOR_ENDORSEMENT_FAMILY_SYNCHRONIZED** ] OQ_COND_001 through OQ_COND_005 are jointly tracked as a Conditioning Theory dependency family after MPF_PRIMITIVE_CONDITIONING_REDUCTION_001. All five Appendix F.2 conditioning obligations are now synchronized to campaign-supported, rigor-pending status from `MPF_COND_CAMPAIGN_RUN_001`; this does not promote any conditioning claim beyond model-relative C2 campaign support pending independent rigor endorsement. [Source: MPF_PRIMITIVE_CONDITIONING_REDUCTION_001; MPF_COND_CAMPAIGN_RUN_001].
-- **Semantic Process Indexing (Canonical RT Index Assignment):** [ **C1_DEFINED_PROVISIONAL / REGISTERED_LATE** ] The induction packet `RT_INDUCTION_PACKET_PROCESS_SEMANTIC_INDEX_001` records semantic indices as governed identifiers for resolved RT organizations, with orientation-field and deviation-signature projections, but the canonical assignment procedure remains open. This item is tracked in the induction queue and lexicon gap queue and remains non-quantitative, non-spatial, and non-authoritative. [Source: RT_INDUCTION_PACKET_PROCESS_SEMANTIC_INDEX_001].
-- **$S$ Arbitration Rule:** [ **DEFINITION_TARGET_IDENTIFIED** ] Formal rule for the pruning stage inside the $\delta_a$ composition [Source: MPF-IND-ARB-DELTA-DUAL-PHASE GAP-S-RULE].
-- **Formal definition of Residue Relation ($R_{\leftrightarrow}$):** [ **DEFINITION_CANDIDATE_PENDING_FORMAL_PROMOTION** ] Defined in `operator_registry.json` and principle `PRIN-2-X` (refined).
-- **Formal difference between $R_{\leftrightarrow}$ and $\leftrightarrow_R$:** [ **RESOLVED** ] Rigorous separation between residue-as-operand ($R_{\leftrightarrow}$) and closure-support-through-residue ($\leftrightarrow_R$) is integrated into Chapter 2 and no longer counted as an Appendix F todo. [Patch: APPENDIX_F_TODO_CLEARANCE_PASS_002]
-- **Formal rules for Decoupling:** Defining the conditions under which a truth-condition becomes False.
-- **Asymmetric Recoupling and Distinction Emergence:** [ **HARDENING_REQUIRED** ] Define asymmetric recoupling mechanics and the distinction emergence law; determine whether RT exists below the distinction floor [Source: MPF_ZERO_STATE_DOMAIN_MEMBERSHIP_001].
-- **Formal RT Chain Algebra:** [ **C1_DEFINED_PROVISIONAL** ] Define the algebra of progressive conditioned continuation for chains such as $D(1|2), D(2|3), D(3|4)$, including lawful ordering, coupling inheritance, and chain-composition constraints. Continuation composition is now governed by `PATCH_PI_RT_CALCULUS_013`, continuation identity is governed by `PATCH_PI_RT_CALCULUS_014`, process equivalence plus canonical continuation forms are governed by `PATCH_PI_RT_CALCULUS_015`, reduction semantics are governed by `PATCH_PI_RT_CALCULUS_016`, primitive reduction rules are governed by `PATCH_PI_RT_CALCULUS_017`, well-formed continuation expressions are governed by `PATCH_PI_RT_CALCULUS_018`, typed continuation domains are governed by `PATCH_PI_RT_CALCULUS_019`, typed projection transition rules are governed by `PATCH_PI_RT_CALCULUS_020`, typed continuation composition guards are governed by `PATCH_PI_RT_CALCULUS_021`, continuation failure / undefined composition are governed by `PATCH_PI_RT_CALCULUS_022`, failure-classification / recovery-boundary handling are governed by `PATCH_PI_RT_CALCULUS_023`, continuation evaluation order is governed by `PATCH_PI_RT_CALCULUS_024`, the minimal reduction algorithm and partial-NF fallback are governed by `PATCH_PI_RT_CALCULUS_025`, partial normal form semantics are governed by `PATCH_PI_RT_CALCULUS_026`, reduction trace semantics are governed by `PATCH_PI_RT_CALCULUS_027`, reduction trace equivalence / canonical trace normalization are governed by `PATCH_PI_RT_CALCULUS_028`, local confluence conditions are governed by `PATCH_PI_RT_CALCULUS_029`, reduction determinism conditions are governed by `PATCH_PI_RT_CALCULUS_030`, termination conditions are governed by `PATCH_PI_RT_CALCULUS_031`, canonical form uniqueness conditions are governed by `PATCH_PI_RT_CALCULUS_032`, reduction complexity measure is governed by `PATCH_PI_RT_CALCULUS_033`, bounded confluence theorem is governed by `PATCH_PI_RT_CALCULUS_034`, canonical reduction strategy is governed by `PATCH_PI_RT_CALCULUS_035`, and canonical reduction strategy correctness is governed by `PATCH_PI_RT_CALCULUS_036`; together they require endpoint compatibility, explicit domain binding, type compatibility, explicit projection invocation, residue/admissibility preservation, lawful reduction toward $NF(C)$ after typed composition guards pass, ordered evaluation before reduction is admitted, outcome-preserving trace comparison, bounded branch joinability under common-origin divergence, canonical reduction priority with deterministic choice among admissible candidates, strict measure descent under a well-founded termination measure, bounded canonical-form uniqueness modulo process equivalence, bounded confluence over admissible bounded continuation classes, candidate-set construction after $EVAL_{024}$, admissibility filtering, canonical ordering of lawful candidates, deterministic selection within bounded classes, and bounded correctness preservation for canonical strategy selection. Associativity remains deferred, and global confluence, Church-Rosser, universal determinism, universal termination, and universal uniqueness remain deferred. [Source: PATCH_PI_RT_CALCULUS_013; PATCH_PI_RT_CALCULUS_014; PATCH_PI_RT_CALCULUS_015; PATCH_PI_RT_CALCULUS_016; PATCH_PI_RT_CALCULUS_017; PATCH_PI_RT_CALCULUS_018; PATCH_PI_RT_CALCULUS_019; PATCH_PI_RT_CALCULUS_020; PATCH_PI_RT_CALCULUS_021; PATCH_PI_RT_CALCULUS_022; PATCH_PI_RT_CALCULUS_023; PATCH_PI_RT_CALCULUS_024; PATCH_PI_RT_CALCULUS_025; PATCH_PI_RT_CALCULUS_026; PATCH_PI_RT_CALCULUS_027; PATCH_PI_RT_CALCULUS_028; PATCH_PI_RT_CALCULUS_029; PATCH_PI_RT_CALCULUS_030; PATCH_PI_RT_CALCULUS_031; PATCH_PI_RT_CALCULUS_032; PATCH_PI_RT_CALCULUS_033; PATCH_PI_RT_CALCULUS_034; PATCH_PI_RT_CALCULUS_035; PATCH_PI_RT_CALCULUS_036].
-- **Chapter 6.4 Provenance-Explicit Admissibility Failure:** [ **SCOPED_RESOLVED_DIAGNOSTIC_FAILURE_BOUNDARY** ] Chapter 6.4 now records the empty-admissibility condition as the diagnostic failure classification $\delta_a(x;c)=\emptyset \Rightarrow \bot_C^{\mathrm{adm}}$ and reads the reorientation/collapse fork as a classified boundary condition rather than a recovery operator. Recovery and return-to-stable-regime semantics remain deferred as separate future work. [Sources: PATCH_MPF_TEXTBOOK_CH6_4_PROVENANCE_REPAIR_001; PATCH_PI_RT_CALCULUS_046; PATCH_PI_RT_CALCULUS_047; PATCH_PI_RT_CALCULUS_048; PATCH_PI_RT_CALCULUS_049; PATCH_PI_RT_CALCULUS_050; APPENDIX_F_CH6_4_PROVENANCE_ADMISSIBILITY_FAILURE_REDUCTION_001].
-- **Deviation-to-Geometry Recovery:** [ **PROVISIONALLY_FORMALIZED_PENDING_VALIDATION** ] The recovery route is now explicitly staged as $Dev_{RT} \xrightarrow{\Pi_{dist}} Dist_{like} \xrightarrow{Org_a} OrgDist \xrightarrow{\Pi_{geo}} geometry_{app}$. Distance-like readings remain projections of declared deviation context, and geometry_app is admitted only through organized distance-like trace satisfying the $\Pi_{\text{geo}}$ legality gate. This does not prove geometry recovery, define physical geometry, or reintroduce distance or geometry as primitives. [Sources: session_summary 2026-06-26 continuation-first ontology reduction; APPENDIX_F_DEVIATION_TO_GEOMETRY_RECOVERY_REDUCTION_001].
-- **Observer-Floor Mismatch:** [ **REGISTERED_LATE** ] Define the observer-floor mismatch quantity and determine whether embedded observers and local admissibility floors co-evolve so relative mismatch remains approximately invariant. [Source: session_summary 2026-06-26 continuation-first ontology reduction].
-- **Orientation Transformations Across Domains:** [ **PROVISIONALLY_FORMALIZED_PENDING_VALIDATION** ] Lawful cross-domain continuation now requires the orientation-reference continuity condition $ORC(O_i,O_j;\tau_{i\to j})$, which demands declared source and target orientation references plus an explicit orientation-reference map. It blocks substitution of orientation into spatial direction or primitive time. [Sources: session_summary 2026-06-26 continuation-first ontology reduction; APPENDIX_F_CROSS_DOMAIN_CONTINUATION_TRACE_001].
-- **Relational Control Surfaces:** [ **REGISTERED_LATE** ] Determine whether constants or coupling factors may be treated as control-surface projections inside the relational process rather than fixed external background parameters. [Source: session_summary 2026-06-26 continuation-first ontology reduction].
-- **Formal operand of $\leftrightarrow_R$:** Defining the types allowed to participate in residue-conditioned closure.
-- **Vertical Bar Operator and Grouped Closure ($\mid$):** [ **C1_DEFINED_PROVISIONAL / CAMPAIGN_COMPLETED** ] Primitive admissible participation separator defining the structured comparison interface for distinction evaluation under Lemma L113 and Minimal Theorem MT-VBAR-001. Grouped bar closure ($Adm_{|}^{G}$) is defined under Lemma L114 and Minimal Theorem MT-GBC-001. Executable model verified under 4 controls and 5 metrics. [Patches: VERTICAL_BAR_OPERATOR_DEFINITION_PASS_001, VERTICAL_BAR_OPERATOR_GROUP_CLOSURE_PASS_001, MPF_VERTICAL_BAR_INDUCTION_001, MPF_VERTICAL_BAR_CAMPAIGN_SCAFFOLD_PATCH_001, MPF_VERTICAL_BAR_EXECUTABLE_MODEL_PATCH_001; Campaign: MPF_BAR_OPERATOR_VALIDATION_001]
-- **Deviated Constraint Dynamics ($D \to \delta \alpha$):** [ **C2_test_designed / RECORDED_UNDER_AUDIT** ] Formalizing the principle that distinction reorganizes admissibility within the same process. Vortex feedback loop campaign executed and validated under 4 controls, with C++ equivalence established under oneAPI AVX2; currently under governance hold pending final verification. [Patch: MPF_DEVIATED_CONSTRAINT_DYNAMICS_PATCH_001, MPF_VORTEX_ADMISSIBILITY_EXECUTION_PATCH_001, [REMEDIATE_VORTEX_EXECUTION_PROVENANCE_001](file:///D:/projects/acellorator/patches/REMEDIATE_VORTEX_EXECUTION_PROVENANCE_001.json), [MPF_VORTEX_REMEDIATION_EXECUTION_001](file:///D:/projects/acellorator/patches/MPF_VORTEX_REMEDIATION_EXECUTION_001.json); Campaigns: MPF_VORTEX_ADMISSIBILITY_CAMPAIGN_001, MPF_NON_MARKOV_ORGANIZATION_TEST_001; Audits: AUDIT_VORTEX_GOVERNANCE_001, [AUDIT_TOOL_RIGOR_ENDORSEMENT_TRACE_001](file:///D:/projects/acellorator/audits/AUDIT_TOOL_RIGOR_ENDORSEMENT_TRACE_001/tool_authorization_audit.md)]
-- **Orientation Space $\mathcal{O}$:** [ **DOWNSTREAM_FORMALIZATION_PENDING** ] Orientation is treated as a downstream organization over admissible RT conditions. Working informal definition active in §5.1.2 and §5.1.4. Candidate formal definition in `formal_object_registry [OBJ-orientation-space]`. Open requirement for OPEN_BRIDGE_001 is the **measurable metric** $C_{\text{orient}}$ and topological class measure $T_{\text{class metric}}$, not the downstream organization itself. [Audit: MPF_ORIENTATION_STALENESS_AUDIT_001 P4]
-- **Orientation Coherence Metric ($C_{\text{orient}}$):** [ **VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT** ] Candidate definition active in textbook §5.1.5 (Formal Statement 5.1.5): $C_{\text{orient}}(\chi_D) := 1 - \text{Var}_{\text{norm}}(\{-(i)_k \mid -(i)_k \in \mathcal{O}_{\text{adm}}(\chi_D)\})$. Non-circularity constraint active (C_ORIENT_NONCIRCULARITY_001): metric must be computable before topology class or closure stability is evaluated. Canonical registry entry: `registry/math/metric_registry.json`. Binds to OPEN_BRIDGE_001 PO_001. Status drift cleared: OPEN_BRIDGE_001 family support is resolved separately; the metric itself remains pending rigor endorsement before downstream reuse. [Patch: [MPF_PO001_C_ORIENT_VALIDATION_EXECUTION_PATCH_001](file:///D:/projects/acellorator/patches/MPF_PO001_C_ORIENT_VALIDATION_EXECUTION_PATCH_001.json); APPENDIX_F_TODO_CLEARANCE_PASS_002]
-- **Topological Class Variance Measure ($T_{\text{class\_metric}}$):** [ **VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT** ] Candidate definition active in textbook §11.X (Formal Statement 11.X): $T_{\text{class\_metric}}(G_K) := [T_k, b(T_k), \text{inv}(G_K)]$ with minimal class family $T_0$–$T_4$, $T_x$. Non-circularity constraint active (T_CLASS_NONCIRCULARITY_001): must classify topology blind to orientation regime. Canonical registry entry: `registry/math/metric_registry.json`. Binds to OPEN_BRIDGE_001 PO_002 and PO_003. Status drift cleared: OPEN_BRIDGE_001 family support is resolved separately; the metric itself remains pending rigor endorsement before downstream reuse. [Patch: [MPF_PO002_VALIDATION_CLOSURE_PATCH_001](file:///D:/projects/acellorator/patches/MPF_PO002_VALIDATION_CLOSURE_PATCH_001.json); APPENDIX_F_TODO_CLEARANCE_PASS_002]
 
-- **Topology-to-Geometry Hardening:** [ **HARDENING_REQUIRED** ] Prove topology-to-geometry proof obligations, validate metric extraction, validate projection-signatures, exclude false geometry projections, and obtain replication and rigor endorsement [Source: MPF_TOPOLOGY_GEOMETRY_LEGALITY_C1_DEFINITION_001].
-- **Empirical Mapping Standards Hardening:** [ **HARDENING_REQUIRED** ] Define EMS audit procedures, EMS evidence thresholds, and EMS replication standards [Source: MPF_EMS_C1_DEFINITION_001].
-- **Formal definition of $\otimes$ (Coupling Projection):** [ **PARENT_FAMILY_HARDENING_REQUIRED** ] The composition and interference rules for composite directional coupling remain governed by the parent meta-relation family and require family-level hardening of instantiation, composition, and interference semantics. [Source: MPF_META_RELATION_FAMILY_RESTRUCTURE_001].
-- **Statistical Projection Hardening:** [ **HARDENING_REQUIRED** ] Define $F_s$ explicitly, define observation-window rules, and define ensemble/trace equivalence restrictions [Source: MPF_IFF_S_C1_PROVISIONAL_DEFINITION_001].
-- **Truth conditions for $<\neq>_X$:** Formal criteria for when preserved non-identity holds, fails, becomes directional, or reduces to already existing coupling language. (Ref: 3.X)
-- **Meta-Relation Family Hardening:** [ **HARDENING_REQUIRED** ] Define context typing rules for $x$, define promotion rules for family members, define when a $\langle*\rangle_x$ relation becomes metric, statistical, coupling, or residue-conditioned, and audit all existing uses of $\langle*\rangle_x$, $\otimes$, $\iff_s$, $\iff_m$, and $\iff_R$ for family alignment [Source: MPF_META_RELATION_X_DEFINITION_001].
+
+
+
+
+
+
+
+
+
 
 ### F.3 Open Bridge Registry
 | Bridge ID | Name | Current Status | Claim Cap |

@@ -1,0 +1,32 @@
+{
+  "patch_id": "AFDG_PATCH_001_GOVERNOR_IO_SCHEMA_FROM_RT_CHAIN",
+  "status": "APPLIED",
+  "applied_date": "2026-07-20T09:36:00-04:00",
+  "scope": "C1_MODEL_RELATIVE_ONLY",
+  "target": "FORMAL_RT_CHAIN_ALGEBRA / AF-GOV-001 — progressive conditioned continuation chain I/O schema closure",
+  "purpose": "Provide machine-readable schema for progressive RT chains (e.g., D(1|2) -> D(2|3) -> D(3|4)) ensuring lawful ordering, trace inheritance, and context preservation.",
+  "governance_note": "Schema-closed. Non-overclaim lock active. Associativity and global confluence remain deferred.",
+  "schema": {
+    "type": "object",
+    "required": ["chain_id", "elements", "coupling_lineage", "admissibility_context", "orientation_condition"],
+    "properties": {
+      "chain_id": { "type": "string" },
+      "elements": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["source_distinction", "target_distinction", "conditioning_residue"],
+          "properties": {
+            "source_distinction": { "type": "string" },
+            "target_distinction": { "type": "string" },
+            "conditioning_residue": { "type": "string" }
+          }
+        }
+      },
+      "coupling_lineage": { "type": "array", "items": { "type": "string" } },
+      "admissibility_context": { "type": "string" },
+      "orientation_condition": { "type": "string" }
+    }
+  },
+  "claim_class": "C1"
+}

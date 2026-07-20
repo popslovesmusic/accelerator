@@ -1,0 +1,43 @@
+{
+  "patch_id": "APPENDIX_F_SECTION_2_S_ARBITRATION_RULE_001",
+  "date": "2026-07-20",
+  "status": "APPLIED_VALIDATED_WARNING_BASELINE",
+  "scope": "Appendix F.2 obligation reduction",
+  "target_obligation": "$S$ Arbitration Rule",
+  "previous_status": "DEFINITION_TARGET_IDENTIFIED",
+  "new_status": "VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT",
+  "authority_basis": [
+    "registry/operator_registry.json",
+    "registry/math/operator_registry.json",
+    "registry/math/s_arbitration_validation_registry.json",
+    "registry/math/branch_pruning_registry.json",
+    "outputs/audits/s_arbitration_audit.md",
+    "outputs/s_validation/s_validation_report.md"
+  ],
+  "changes": [
+    "Registered a scoped S arbitration rule disposition registry under registry/math.",
+    "Updated Chapter 6.1 textbook language from rough-cut plausibility wording to the registry-backed sequential pruning signature.",
+    "Updated Appendix F.2 status from DEFINITION_TARGET_IDENTIFIED to VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT."
+  ],
+  "claim_boundaries": [
+    "No theorem promotion.",
+    "No topology, geometry, or physics-app promotion.",
+    "No empirical claim beyond fixture-backed structural validation.",
+    "Arb_A tie-break behavior remains open."
+  ],
+  "validation_plan": [
+    "python scripts/governance/authorize_lock_update.py",
+    "python scripts/sync_math_registry.py",
+    "python scripts/db/snapshot_registries.py",
+    "python scripts/global_validate.py"
+  ],
+  "validation_result": {
+    "snapshot_refresh_id": "REFRESH-20260720T020914007695Z",
+    "global_validate_run_id": "GV-20260719T220819.843486-14548",
+    "overall_status": "warning",
+    "runtime_failures": 0,
+    "tooling_failures": 0,
+    "semantic_failures": 0,
+    "warning_boundary": "Existing baseline warnings remain in hygiene_validation, math_program_validation, and stale report accounting."
+  }
+}

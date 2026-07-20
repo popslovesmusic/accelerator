@@ -1,0 +1,53 @@
+{
+  "audit_id": "APPENDIX_F_SECTION_2_S_ARBITRATION_RULE_001",
+  "date": "2026-07-20",
+  "target": "$S$ Arbitration Rule",
+  "result": "OBLIGATION_REDUCED",
+  "from_status": "DEFINITION_TARGET_IDENTIFIED",
+  "to_status": "VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT",
+  "evidence_class": "C1_DEFINITION_WITH_FIXTURE_VALIDATION",
+  "directly_observed_or_defined": [
+    "Existing operator registries define S as a sequential pruning operator internal to delta_a.",
+    "Existing validation report VAL-S-ARB-001 records PASS for all six fixture-backed S/Arb_A separation tests.",
+    "Textbook Chapter 6.1 and Appendix F.2 now state the same scoped S-stage role and limits."
+  ],
+  "inferred_inside_framework": [
+    "The S-stage can be treated as a validated candidate definition for pre-arbitration pruning inside delta_a.",
+    "Arb_A remains downstream realization arbitration over C_t^S rather than the owner of pruning semantics."
+  ],
+  "does_not_prove": [
+    "Does not promote S to theorem status.",
+    "Does not prove empirical adequacy outside the declared fixtures.",
+    "Does not close Arb_A tie-break behavior.",
+    "Does not promote topology, geometry, or physics-app claims."
+  ],
+  "failure_modes_or_uncertainty": [
+    "Future engines can still conflate pruning and arbitration unless locally validated.",
+    "Mechanism-specific pruning internals remain implementation-level validation targets."
+  ],
+  "evidence_paths": [
+    "registry/math/s_arbitration_rule_registry.json",
+    "registry/math/s_arbitration_validation_registry.json",
+    "registry/math/branch_pruning_registry.json",
+    "registry/operator_registry.json",
+    "outputs/audits/s_arbitration_audit.md",
+    "outputs/s_validation/s_validation_report.md",
+    "docs/textbook/mono_process_textbook_complete.md"
+  ],
+  "validation": {
+    "status": "VALIDATED_WARNING_BASELINE",
+    "snapshot_refresh_id": "REFRESH-20260720T020914007695Z",
+    "global_validate_run_id": "GV-20260719T220819.843486-14548",
+    "overall_status": "warning",
+    "runtime_failures": 0,
+    "tooling_failures": 0,
+    "semantic_failures": 0,
+    "warning_boundary": "Existing baseline warnings remain in hygiene_validation, math_program_validation, and stale report accounting.",
+    "commands": [
+      "python scripts/governance/authorize_lock_update.py",
+      "python scripts/sync_math_registry.py",
+      "python scripts/db/snapshot_registries.py",
+      "python scripts/global_validate.py"
+    ]
+  }
+}

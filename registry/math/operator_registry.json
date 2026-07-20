@@ -196,8 +196,31 @@
     {
       "symbol": "otimes",
       "name": "Typed Partial Composition Operator",
-      "definition": "Couples RT/aRT expressions without identity collapse.",
+      "definition": "Typed partial relational composition operator X otimes_Y Z. It couples declared typed operands under a declared context without identity collapse; the projection-window specialization is Pi_A otimes_intersection Pi_B := Pi_(A intersection B).",
+      "domain": [
+        "typed_operand_X",
+        "typed_operand_Z",
+        "declared_composition_context_Y"
+      ],
+      "codomain": [
+        "lawful_RT_candidate",
+        "lawful_aRT_candidate",
+        "typed_closure_candidate",
+        "undefined_composition"
+      ],
       "arity": "binary",
+      "closure_status": "conditional",
+      "governance_status": "C1_DEFINED_PROVISIONAL",
+      "source_registry": "registry/math/otimes_typed_partial_composition_registry.json",
+      "negative_constraints": [
+        "not_standard_tensor_product",
+        "not_logical_and",
+        "not_scalar_product",
+        "not_untyped_interference_rule",
+        "does_not_imply_identity_preservation",
+        "commutativity_not_assumed",
+        "associativity_context_bound_only"
+      ],
       "provisional_status": true
     },
     {

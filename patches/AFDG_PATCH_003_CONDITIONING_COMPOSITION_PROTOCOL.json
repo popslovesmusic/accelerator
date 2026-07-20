@@ -1,0 +1,36 @@
+{
+  "patch_id": "AFDG_PATCH_003_CONDITIONING_COMPOSITION_PROTOCOL",
+  "status": "APPLIED",
+  "applied_date": "2026-07-20T09:36:00-04:00",
+  "scope": "C1_MODEL_RELATIVE_ONLY",
+  "target": "OQ_COND_001 — Conditioning Composition Protocol Schema Closure",
+  "purpose": "Define the schema and protocol for lawful conditioned composition <a>_b <* >_x <c>_d enforcing directionality, typed operands, non-collapse, and context preservation.",
+  "governance_note": "Schema-closed. Preserves model-relativity without promoting theorem status or arithmetic projection as primitive composition.",
+  "schema": {
+    "type": "object",
+    "required": ["left_operand", "right_operand", "meta_relation", "context_carrier", "directional_order", "conditioning_lineage"],
+    "properties": {
+      "left_operand": {
+        "type": "object",
+        "required": ["distinction", "conditioner"],
+        "properties": {
+          "distinction": { "type": "string" },
+          "conditioner": { "type": "string" }
+        }
+      },
+      "right_operand": {
+        "type": "object",
+        "required": ["distinction", "conditioner"],
+        "properties": {
+          "distinction": { "type": "string" },
+          "conditioner": { "type": "string" }
+        }
+      },
+      "meta_relation": { "type": "string" },
+      "context_carrier": { "type": "string" },
+      "directional_order": { "type": "string" },
+      "conditioning_lineage": { "type": "array", "items": { "type": "string" } }
+    }
+  },
+  "claim_class": "C1"
+}

@@ -1,0 +1,93 @@
+{
+  "registry_id": "OTIMES_TYPED_PARTIAL_COMPOSITION_REGISTRY",
+  "version": "1.0.0",
+  "status": "C1_DEFINED_PROVISIONAL",
+  "last_updated": "2026-07-20",
+  "target": "otimes",
+  "claim_effect": "NO_THEOREM_PROMOTION",
+  "evidence_class": "C1_FORMAL_PROCEDURAL_WITH_CAMPAIGN_SUPPORT",
+  "canonical_object": {
+    "symbol": "otimes",
+    "latex": "\\otimes",
+    "name": "Typed Partial Relational Composition Operator",
+    "general_form": "X otimes_Y Z",
+    "role": "Composes typed lawful process operands under a declared context without licensing identity collapse."
+  },
+  "definition": {
+    "statement": "X otimes_Y Z is defined only when operand types, composition context Y, distinction preservation, admissibility non-emptiness, and closure-class compatibility are all declared and satisfied.",
+    "undefined_condition": "If a required typing, context, distinction, admissibility, or closure-class condition is absent or fails, the composition is undefined rather than an unrestricted false statement.",
+    "default_properties": {
+      "partial": true,
+      "commutative": "not_assumed",
+      "associative": "context_bound_only",
+      "identity_preserving": "not_assumed"
+    }
+  },
+  "domain": [
+    "typed_operand_X",
+    "typed_operand_Z",
+    "declared_composition_context_Y"
+  ],
+  "codomain": [
+    "lawful_RT_candidate",
+    "lawful_aRT_candidate",
+    "typed_closure_candidate",
+    "undefined_composition"
+  ],
+  "lawfulness_conditions": [
+    "Type(X) is declared.",
+    "Type(Z) is declared.",
+    "Context(Y) is declared.",
+    "D(X|Z) remains above the declared distinction floor unless a collapse-boundary event is explicitly declared.",
+    "delta_a(X otimes_Y Z) remains non-empty.",
+    "The result remains inside a declared RT, aRT, or typed_closure_candidate class."
+  ],
+  "projection_window_specialization": {
+    "name": "otimes_intersection",
+    "source": "L118/P112",
+    "form": "Pi_A otimes_intersection Pi_B := Pi_(A intersection B)",
+    "scope": "projection_operator_algebra_only",
+    "associativity_basis": "Associativity follows from set intersection within the declared admissibility-window context.",
+    "non_generalization": "This subcase does not prove global associativity, commutativity, or identity preservation for arbitrary X otimes_Y Z."
+  },
+  "negative_constraints": [
+    "Not a standard tensor product by default.",
+    "Not logical AND.",
+    "Not scalar multiplication or scalar product.",
+    "Not an untyped interference rule.",
+    "Not physical fusion.",
+    "Does not imply X = Z.",
+    "Does not imply X = X otimes_Y Z.",
+    "Does not imply Z = X otimes_Y Z.",
+    "Does not promote topology, geometry, physics-app, or empirical claims."
+  ],
+  "failure_conditions": [
+    "FAIL_OTIMES_001: missing or invalid operand typing",
+    "FAIL_OTIMES_002: undefined composition context",
+    "FAIL_OTIMES_003: distinction collapse below the declared floor",
+    "FAIL_OTIMES_004: admissibility empty-set",
+    "FAIL_OTIMES_005: closure-class incompatibility",
+    "FAIL_OTIMES_006: ordering collapse",
+    "FAIL_OTIMES_007: projection equivalence mistaken for process identity",
+    "FAIL_OTIMES_008: unproven commutativity or associativity assumed"
+  ],
+  "open_limits": [
+    "General multi-step otimes composition still requires parent-family hardening.",
+    "Context-specific associativity must be proved or validated per context family.",
+    "Residue-admissibility interference semantics for directional coupling remain a separate proof obligation."
+  ],
+  "evidence_paths": [
+    "docs/theory/foundational/5_03_26 unity/math/notes/0002_otimes_typed_partial_composition_definition.md",
+    "docs/theory/foundational/5_03_26 unity/math/lemmas/L118_operator_algebra_closure.md",
+    "docs/theory/foundational/5_03_26 unity/math/proofs/P112_operator_algebra_proof.md",
+    "docs/theory/foundational/5_03_26 unity/math/proofs/P_OTIMES_001_non_identity_composition.md",
+    "outputs/firewalls_campaign/otimes_results.json",
+    "registry/operator_registry.json",
+    "registry/math/operator_registry.json"
+  ],
+  "textbook_sync": {
+    "surface": "docs/textbook/mono_process_textbook_complete.md",
+    "chapter_9_status": "C1_DEFINED_PROVISIONAL / SPECIALIZED_PROJECTION_CASE_RESOLVED",
+    "appendix_f_status": "C1_DEFINED_PROVISIONAL / SPECIALIZED_PROJECTION_CASE_RESOLVED / FAMILY_HARDENING_REMAINS"
+  }
+}

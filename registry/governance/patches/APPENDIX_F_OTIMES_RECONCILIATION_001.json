@@ -1,0 +1,47 @@
+{
+  "patch_id": "APPENDIX_F_OTIMES_RECONCILIATION_001",
+  "date": "2026-07-20",
+  "status": "APPLIED_VALIDATED_WARNING_BASELINE",
+  "scope": "Appendix F and Chapter 9 otimes reconciliation",
+  "target_obligation": "Formal definition of otimes",
+  "previous_status": "MISSING DEFINITION / PARENT_FAMILY_HARDENING_REQUIRED",
+  "new_status": "C1_DEFINED_PROVISIONAL / SPECIALIZED_PROJECTION_CASE_RESOLVED / FAMILY_HARDENING_REMAINS",
+  "authority_basis": [
+    "registry/operator_registry.json",
+    "registry/math/operator_registry.json",
+    "registry/math/minimal_theorem_registry.json",
+    "registry/math/theorem_status_registry.json",
+    "docs/theory/foundational/5_03_26 unity/math/lemmas/L118_operator_algebra_closure.md",
+    "docs/theory/foundational/5_03_26 unity/math/proofs/P112_operator_algebra_proof.md",
+    "docs/theory/foundational/5_03_26 unity/math/proofs/P_OTIMES_001_non_identity_composition.md",
+    "outputs/firewalls_campaign/otimes_results.json"
+  ],
+  "changes": [
+    "Added an additive math note extracting the typed partial composition definition for otimes.",
+    "Added a scoped math registry for otimes typed partial composition.",
+    "Updated the math operator registry otimes entry with explicit domain, codomain, status, source registry, and negative constraints.",
+    "Updated Chapter 9 stale missing-definition language.",
+    "Updated Appendix F otimes status to distinguish the resolved projection-window specialization from remaining family hardening obligations."
+  ],
+  "claim_boundaries": [
+    "No theorem promotion.",
+    "No modification of existing L118/P112 proof files.",
+    "No global associativity, commutativity, tensor-product, logical-AND, scalar-product, or physical-fusion reading.",
+    "Residue-admissibility interference remains a separate proof obligation."
+  ],
+  "validation_plan": [
+    "python scripts/governance/authorize_lock_update.py",
+    "python scripts/sync_math_registry.py",
+    "python scripts/db/snapshot_registries.py",
+    "python scripts/global_validate.py"
+  ],
+  "validation_result": {
+    "snapshot_refresh_id": "REFRESH-20260720T045348308957Z",
+    "global_validate_run_id": "GV-20260720T005348.231303-13500",
+    "overall_status": "warning",
+    "runtime_failures": 0,
+    "tooling_failures": 0,
+    "semantic_failures": 0,
+    "warning_boundary": "Existing baseline warnings remain; no otimes reconciliation failure, missing math source path, runtime failure, tooling failure, or semantic failure is present."
+  }
+}
