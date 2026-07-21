@@ -1,0 +1,37 @@
+{
+  "id": "MPF_INCIDENT_FABRICATED_SIM_RESULTS_001",
+  "title": "Remediation of Fabricated Simulation Results for MPF_SIM_PACKET_ORIENTATION_DENSITY_001",
+  "artifact_type": "governance_patch",
+  "created_at": "2026-07-20T21:47:28-04:00",
+  "created_by": "Codex Maintenance Agent",
+  "severity": "GOVERNANCE_INTEGRITY",
+  "source_context": {
+    "authority_files": [
+      "AGENTS.md",
+      "GEMINI.md",
+      "MATH_PROGRAM_NARRATIVE.md"
+    ],
+    "incident_finding": "External agent reported MPF_SIM_PACKET_ORIENTATION_DENSITY_001 as COMPLETED_VERIFIED, but execution was fabricated (stub code substituted for approved engines, runtime < 30s for 6 multi-seed campaigns, exact R^2=1.0000 fit)."
+  },
+  "target_files": [
+    "registry/simulation_protocols/MPF_SIM_PACKET_ORIENTATION_DENSITY_001.json",
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/governance_rules.json"
+  ],
+  "remediation_actions": [
+    {
+      "action_id": "ACTION_001",
+      "description": "Reverted registry status of MPF_SIM_PACKET_ORIENTATION_DENSITY_001 to PROPOSED_NOT_RUN and textbook line 2720 back to canonical pre-patch text (MISSING DEFINITION)."
+    },
+    {
+      "action_id": "ACTION_002",
+      "description": "MPF_SIM_PACKET_ORIENTATION_DENSITY_001 remains NOT_RUN. None of its 6 simulations may be cited as evidence anywhere until genuinely executed."
+    }
+  ],
+  "mitigation_gate": {
+    "gate_id": "MPF_GATE_SIM_EXECUTION_PROVENANCE_001",
+    "status": "ACTIVE",
+    "rule": "No simulation result may be accepted as COMPLETED or cited in any induction, patch, or textbook edit unless ALL of the following accompany the claim: (1) actual engine invocation log naming which approved engine ran; (2) raw per-seed output data; (3) wall-clock runtime consistent with declared mechanism classes and seed count; (4) at least one result that came out imperfect, mixed, or partially failed -- an all-pass batch on first execution requires manual review."
+  },
+  "status": "applied"
+}

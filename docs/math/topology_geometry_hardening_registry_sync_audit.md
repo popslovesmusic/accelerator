@@ -24,9 +24,7 @@ This audit maps the current `Topology_app -> Geometry_app` hardening work agains
 5. `theorem_status_registry.json` contains `OPEN_BRIDGE_001`, `TC_asym`, and `gravity_app`, but no explicit status record for `geometry_app`, `field_app`, `matter_app`, `L099`, `L100`, or `GEO_PROJECTION_VALIDATION_001`.
 6. `observable_projection_registry.json` is still minimal and does not yet encode a governed `Topology_app -> Geometry_app` projection record for `Pi_geo`.
 7. `dependency_graph_registry.json` does not currently include nodes or edges for `L099`, `L100`, `GEO_PROJECTION_VALIDATION_001`, `Topology_to_Geometry_Hardening`, `geometry_app`, `field_app`, or `matter_app` as explicit topology-geometry hardening dependencies.
-8. `dependency_graph_registry.json` and `theorem_status_registry.json` currently disagree on `OPEN_BRIDGE_001` status:
-   - `dependency_graph_registry.json`: `SUPPORTED_PENDING_REPLICATION` / `C4_PENDING_REPLICATION`
-   - `theorem_status_registry.json`: `PROVISIONAL_PENDING_RIGOR` / `C1_defined_provisional`
+8. Superseded status note: this audit originally recorded a disagreement between `dependency_graph_registry.json` and `theorem_status_registry.json` for `OPEN_BRIDGE_001`. That disagreement was reconciled on 2026-07-20 by `MPF_OPEN_BRIDGE_001_STATUS_RECONCILIATION_2026_07_20`: the theorem-status registry now records `OPEN_BRIDGE_001` as `SUPPORTED` with `C1_structural_supported` scope. Downstream application and theorem claims remain independently gated.
 9. The living textbook is now aligned to the stricter reading:
    - `Topology_app -> Geometry_app` remains `PROJECTION_LEGALITY_REQUIRED`
    - `matter_app` and `field_app` are not automatically promoted
@@ -42,7 +40,7 @@ This resembles a documentation-registry drift problem in conventional research s
 - It does not prove `Pi_geo` is lawful.
 - It does not prove `Topology_app -> Geometry_app` is solved.
 - It does not authorize `field_app`, `matter_app`, `gravity_app`, or any physical interpretation.
-- It does not resolve the `OPEN_BRIDGE_001` evidentiary status disagreement; it only records that the disagreement exists.
+- The original version of this audit did not resolve the `OPEN_BRIDGE_001` evidentiary status disagreement; the later reconciliation packet `docs/reports/open_bridge_001_status_reconciliation_2026_07_20.md` resolves that status surface as structural-only support.
 
 ## Failure Modes / Uncertainty
 - If `formal_object_registry.json` is not the true controlling registry for new lemma/campaign objects, the proposed object insertions below may need rerouting.
@@ -63,7 +61,7 @@ This resembles a documentation-registry drift problem in conventional research s
 3. `registry/math/theorem_status_registry.json`
    - Add explicit status entries for `geometry_app`, `field_app`, and `matter_app` if they are intended to be governed application projections
    - Add a status record for `L100` and, if desired by registry design, for `GEO_PROJECTION_VALIDATION_001`
-   - Resolve the active-status discrepancy for `OPEN_BRIDGE_001`
+   - `OPEN_BRIDGE_001` active-status discrepancy resolved by `MPF_OPEN_BRIDGE_001_STATUS_RECONCILIATION_2026_07_20`
 
 4. `registry/math/dependency_graph_registry.json`
    - Add node: `Topology_to_Geometry_Hardening`
@@ -76,7 +74,7 @@ This resembles a documentation-registry drift problem in conventional research s
    - Record retained information, loss accounting, and legality prerequisites
 
 ## Minimum Safe Resolution Order
-1. Normalize `OPEN_BRIDGE_001` status across `theorem_status_registry.json` and `dependency_graph_registry.json`
+1. Preserve the reconciled `OPEN_BRIDGE_001` status and do not propagate it automatically to downstream claims
 2. Register `L100` and `GEO_PROJECTION_VALIDATION_001` as formal objects
 3. Add the projection-legality proof obligation
 4. Bind `geometry_app`, `field_app`, and `matter_app` to the hardening gate through the dependency graph

@@ -40,35 +40,35 @@ A decisive move in the program was the **Elimination of Primitive Time** (L058).
 ## 6. The Anchored Scale Principle
 The program reframed scale not as a primitive magnitude, but as an **Anchored Relational Metric** (L059). 
 *   **Procedural Scale ($\sigma$):** Scale has no meaning except relative to the locally stabilized orientation basin. The anchored scale of any process event is its deviation from the local dominant orientation ($d(\varepsilon, \omega)$).
-*   **Scaling Invariance:** In high-rigor (50-seed) campaigns, we observed that $\sigma$ remains bounded and persistent (0.974 persistence ratio) across coarse-graining levels. This proves that structural stability is an invariant property of orientational alignment rather than geometric size (**magnitude_obs**).
+*   **Scaling Invariance:** In recorded 50-seed campaigns, $\sigma$ was observed as bounded and persistent (0.974 persistence ratio) across coarse-graining levels. Within those declared models, this supports the bounded interpretation that structural stability tracks orientational alignment more directly than geometric size (**magnitude_obs**).
 
 ## 7. The Four Master Theorems (The Master Set)
-The program culminated in the formal proof of the four foundational laws of reality:
+The program records four framework-internal master theorem targets. They organize the current calculus narrative and supporting evidence, but they are not unrestricted proofs about external reality:
 
 ### Theorem I: The Knot Theorem (Principle of Non-Substantive Identity)
 *   **The Insight:** Identity is "the rope organized knot-wise."
 *   **The 3-Peak Rule:** A knot topologically requires a minimum of **3 crossings**. Binary opposition ($N=2$) cannot lock; it simply "slides off" into symmetry.
-*   **The Math:** Proves that because the null state is forbidden and binary interaction is unstable, the process is **structurally compelled** toward 3rd-order recursion (The Triangle).
+*   **The Math:** Within the declared framework, records that when the null state is forbidden and binary interaction is unstable, the process is driven toward 3rd-order recursion (The Triangle).
 *   **The Verdict:** Identity is the minimum viable response to the avoidance of collapse. Reification is forbidden—there is only stabilized complexity (**identity_proc**).
 
 ### Theorem II: The Meta-Bridge Symmetry (Mechanism Independence)
-*   **The Insight:** The grammar is universal; the substrate is secondary.
-*   **The Math:** Establishes topological equivalence between discrete (Cellular Automata) and continuous (PDE) projections.
+*   **The Insight:** The grammar is treated as framework-general across the declared projections; substrate claims remain bounded by the active evidence gates.
+*   **The Math:** Records a bounded structural comparison between discrete (Cellular Automata) and continuous (PDE) projections where the declared bridge conditions are satisfied.
 *   **The Verdict:** The framework relates disparate process domains (from **quantum_analog** potential to macroscopic **events_app**) through a shared relational logic.
 
 ### Theorem III: The Web Theorem (Relational Reach)
 *   **The Insight:** Space is collective history.
-*   **The Math:** Derives global interaction reach ($K$) as a dynamic projection of localized historical residue ($R$).
+*   **The Math:** Defines global interaction reach ($K$) as a dynamic projection of localized historical residue ($R$) within the program grammar.
 *   **The Verdict:** The **CosmicWeb_analog** is not a container, but the stabilized accumulation of every prior orientational locking event. Apparent space (**space_app**) is the resulting projection.
 
 ### Theorem IV: The Law of Hierarchical Stabilization (Scaling Law)
 *   **The Insight:** "Webs become Ropes."
-*   **The Math:** Proves that multiscale complexity emerges through **Recursive Basin Nesting**, where the interaction web of a lower-order regime acts as the admissibility substrate (The Rope) for the stabilization of higher-order knots.
+*   **The Math:** Models multiscale complexity through **Recursive Basin Nesting**, where the interaction web of a lower-order regime acts as the admissibility substrate (The Rope) for the stabilization of higher-order knots.
 *   **The Verdict:** The laws of selection and identity are scale-invariant, providing the mathematical basis for the fractal-like organization of the **cosmos_app**.
 
 ## 8. Relational Field Theory: Algebraic and Topological Necessity
 The program has entered its most advanced stage of formalization, translating the relational grammar into a quantitative **Relational Field Theory_proj**.
-*   **Non-Commutative Algebra (L052):** We have formalized that distinguishability composition is path-dependent, resembling a groupoid structure. This provides the algebraic proof for "Structural Flavor."
+*   **Non-Commutative Algebra (L052):** The program formalizes path-dependent distinguishability composition, with a bounded resemblance to groupoid structure. This supports the internal "Structural Flavor" reading without promoting an unrestricted external proof.
 *   **The Imaginary Operator Family (L064):** The operator set was expanded beyond real actualization into four **Imaginary Quadrants** ({--, ++, -+, +-}). These operators function as phase-state regulators, allowing for stable relational negotiation between basins without total synchronization collapse.
 *   **The Phase Signature ($\Sigma_\phi$) (L061):** Identity is no longer an abstract concept but an observable **Phase Signature**. It is the relational structure maintained within the local admissibility window ($W_{adm}$).
 *   **Induced Local Reference Selection (L062):** The local orientation reference $-(i)$ is derived through an **mismatch-minimizing selection operator** ($O^*$). Orientation is the earned result of selecting the most stable admissible continuation path.
@@ -77,30 +77,30 @@ The program has entered its most advanced stage of formalization, translating th
     \kappa(s) = \frac{d}{ds} \Delta_{align}(s) + \lambda \delta_T(s)
     ]
     Curvature is the measurable rate of breakdown in multi-reference alignment and transport stability, providing the quantitative metric for interaction strength (**field_analog** strength).
-*   **Memory Kernels (L055):** Residue-conditioned continuation is now governed by Volterra integro-differential equations, allowing for the deterministic prediction of basin lifetimes.
+*   **Memory Kernels (L055):** Residue-conditioned continuation has candidate Volterra integro-differential formulations that support bounded basin-lifetime modeling where their assumptions are declared and validated.
 
 ## 9. Procedural Gravity: Persistence as Projection
 The program's most advanced projection is the reframing of **gravity_app** as a procedural consequence of orientation-constrained continuation (L060).
-*   **The Gravity Bias Factor:** High-rigor simulations measured a **30.9x bias factor** for directional alignment in triadic basins. 
-*   **Force-Free Persistence:** Gravity (**gravity_app**) is not an attractive "pull" or field, but the macroscopic persistence of process updates aligned with local orientation basins. What we register as "gravitational structure" is the historical residue-conditioned bias of process evolution itself.
+*   **The Gravity Bias Factor:** Recorded simulations measured a **30.9x bias factor** for directional alignment in triadic basins under their declared configurations.
+*   **Force-Free Persistence:** The current narrative treats **gravity_app** as a review-locked projection hypothesis: within the framework, it models gravity-like persistence as process updates aligned with local orientation basins. It does not assert a physical replacement for gravity, and current registry gates remain authoritative.
 
 ## 11. Adversarial Integrity: The Falsification Mandate
 The program has institutionalized **Adversarial Pressure** as a first-class citizen (Falsification Runtime Policy). No simulation result is considered meaningful unless it is paired with a corresponding "Attack Suite" designed to identify its fracture points.
 
 *   **BLOCK-CLOSURE-X:** Subjected MST-001 to extreme adversarial stress.
 *   **The Discovery:** Identified that while orientation selection is mathematically stable, it is **implementationaly contingent** at the critical resolution limit ($N < 10$).
-*   **The Result:** MST-001 has been moved to **Level C5 (Conditionally Proven)** status, providing a more robust, bounded foundation than a naive unrestricted claim.
+*   **The Result:** MST-001 is treated as a bounded, conditionally supported result under its recorded adversarial evidence and implementation limits. It does not license unrestricted claim promotion.
 
-## 12. The Current Standing: Level C6 Battle-Tested
-The foundational math program is now **Locked, Validated, and Battle-Tested**. 
-- **Lemmas:** 64 verified statements.
-- **Proofs:** 25 formal derivations (including symbolic traces).
-- **Theorems:** 5 Theorems (Identity, Symmetry, Reach, Scaling, Stability).
-- **Rigor:** Core formalisms are supported by **Adversarial Campaigns** and cross-model C++ evidence.
-- **Status:** **Green (Passing)** across all global mathematical gates.
+## 12. The Current Standing: Governed, Bounded, and Under Active Validation
+The foundational math program is maintained as a governed research stack with registry-backed formal objects, proof pilots, simulations, and adversarial checks. Current status must be read through the live registries and global validation output.
+- **Lemmas:** Current on-disk inventory observed during the 2026-07-20 audit contains 130 non-template lemma files; registry status remains authoritative for verification level.
+- **Proofs:** Current on-disk inventory observed during the 2026-07-20 audit contains 65 non-template proof artifacts; registry status remains authoritative for proof status.
+- **Theorems:** Current on-disk inventory observed during the 2026-07-20 audit contains 5 theorem files (Identity, Symmetry, Reach, Scaling, Stability); registry status remains authoritative for theorem status.
+- **Rigor:** Core formalisms are supported by recorded adversarial campaigns and cross-model evidence where recoverable outputs exist.
+- **Status:** Governed by current registry gates; no blanket C6, universal, or external-reality claim is made from this narrative alone.
 
 ---
 **Standard ID:** MPF-MATH-NARRATIVE-001
-**Status:** CONDITIONALLY_PROVEN (Adversarial Closure Complete)
+**Status:** GOVERNED_BOUNDED_NARRATIVE (registry status authoritative)
 **Compliance:** [Compliance Charter v2.3](registry/compliance_charter_v2_3.json)
 

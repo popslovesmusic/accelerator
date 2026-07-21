@@ -1,0 +1,116 @@
+{
+  "ledger_id": "SEA_CALC_REAUDIT_FINDING_LEDGER_2026_07_20",
+  "schema_version": "1.0.0",
+  "status": "ACTIVE_REAUDIT_LEDGER",
+  "source_packet": "SEA_CALC_AUTHORITY_ARCHITECTURE_REAUDIT_2026_07_20",
+  "audit_id": "SEA-CALC-2026-07-20-002",
+  "claim_boundary": {
+    "does_not_promote": [
+      "theorems",
+      "lemmas",
+      "laws",
+      "claims",
+      "lexicon terms",
+      "proof status",
+      "evidence class",
+      "external validity"
+    ]
+  },
+  "prior_artifacts": [
+    {
+      "id": "SEA-CALC-2026-07-20-001",
+      "path": "docs/reports/staged_external_calculus_registry_audit_2026_07_20.md",
+      "role": "historical_record"
+    },
+    {
+      "id": "SEA-CALC-REMED-2026-07-20-001",
+      "path": "docs/reports/staged_external_calculus_remediation_ledger_2026_07_20.md",
+      "role": "historical_record"
+    }
+  ],
+  "reclassification_summary": {
+    "architectural_correction": "Prior document-surface conflicts are reinterpreted through a directional authority pipeline. Projection drift is not evidence of competing operational SSOTs.",
+    "final_attestation": "CONDITIONAL_FAIL",
+    "primary_blockers": [
+      "database canonical-state coverage is not yet complete enough to prove every runtime-authoritative Calculus fact has admission provenance",
+      "runtime negative controls for unadmitted Markdown are specified but not implemented",
+      "projection metadata exists as schema and report convention but is not yet embedded across all primary Markdown projections",
+      "status namespace and canonical-expression validators remain required future controls"
+    ]
+  },
+  "findings": [
+    {
+      "finding": "SEA-CALC-F001",
+      "prior_interpretation": "competing canonical expressions across authority surfaces",
+      "revised_test": "Determine whether all permitted expression variants resolve to one typed canonical database object.",
+      "reclassification": "accepted_with_architectural_qualification",
+      "reaudit_result": "open",
+      "reason": "The architecture now forbids treating Markdown and database as co-equal authorities, but no implemented canonical-expression validator or canonical variant object was found."
+    },
+    {
+      "finding": "SEA-CALC-F002",
+      "prior_interpretation": "four laws lack compatible document-level status",
+      "revised_test": "Determine whether all four laws possess canonical database IDs, typed governance roles, and separate evidence statuses.",
+      "reclassification": "accepted_with_architectural_qualification",
+      "reaudit_result": "open",
+      "reason": "The architecture separates governance role from evidence status, but complete canonical law-role records were not created in this pass."
+    },
+    {
+      "finding": "SEA-CALC-F003",
+      "prior_interpretation": "status semantics collide",
+      "revised_test": "Canonical database status fields must use namespaced taxonomies.",
+      "reclassification": "accepted",
+      "reaudit_result": "open",
+      "reason": "The new architecture names the need for typed authority roles, but status namespace validation is still only specified as required future control."
+    },
+    {
+      "finding": "SEA-CALC-F004",
+      "prior_interpretation": "master theorem documents conflict as authorities",
+      "revised_test": "Compare generated theorem documentation to canonical database object status.",
+      "reclassification": "accepted_with_architectural_qualification",
+      "reaudit_result": "partially_remediated",
+      "reason": "Prior prose was qualified. Full closure requires generated projection metadata and database object-status traceability."
+    },
+    {
+      "finding": "SEA-CALC-F005",
+      "prior_interpretation": "math synchronization contract is stale",
+      "revised_test": "Determine whether extraction, database admission, registry projection, and Markdown generation are distinct governed operations with explicit outputs.",
+      "reclassification": "accepted",
+      "reaudit_result": "open",
+      "reason": "The architecture distinguishes the operations, but existing sync tooling was not redesigned."
+    },
+    {
+      "finding": "SEA-CALC-F006",
+      "prior_interpretation": "textbook and narrative contain authority conflicts",
+      "revised_test": "Treat mismatches as projection drift unless the documents are explicitly typed as human source submissions.",
+      "reclassification": "accepted_with_architectural_qualification",
+      "reaudit_result": "partially_remediated",
+      "reason": "Key prose drift was patched and reports now classify Markdown roles. Full projection metadata is not yet present across all Markdown."
+    },
+    {
+      "finding": "SEA-CALC-F010",
+      "prior_interpretation": "authority routing omits live calculus surfaces",
+      "revised_test": "Determine whether every artifact is assigned an authority role rather than requiring every artifact to be an authority.",
+      "reclassification": "accepted_with_architectural_qualification",
+      "reaudit_result": "partially_remediated",
+      "reason": "An artifact role registry was created for primary audit and architecture surfaces, but full repository role coverage remains future work."
+    },
+    {
+      "finding": "SEA-CALC-F013",
+      "prior_interpretation": "validators provide narrower assurance than implied",
+      "revised_test": "Validators must declare which pipeline transition or invariant they verify.",
+      "reclassification": "accepted",
+      "reaudit_result": "open",
+      "reason": "Required validators and negative controls are specified, but not implemented as executable controls in this pass."
+    }
+  ],
+  "required_validators": [
+    "VAL-AUTH-PIPELINE-001",
+    "VAL-RUNTIME-AUTH-001",
+    "VAL-PROJECTION-TRACE-001",
+    "VAL-PROJECTION-FRESHNESS-001",
+    "VAL-STATUS-NAMESPACE-001",
+    "VAL-CANONICAL-EXPRESSION-001",
+    "VAL-WORKTREE-EVIDENCE-001"
+  ]
+}

@@ -17,12 +17,12 @@ Concretely, the following hardening gate applies:
 - `L045` - Topology-Geometry Biconditional
 - `L080` - Cross-Basin Projection
 - `L099` - Projection Legality
-- `OPEN_BRIDGE_001` - downstream bridge remains provisional and does not authorize automatic projection promotion
+- `OPEN_BRIDGE_001` - supported structural/topological selector bridge; does not authorize automatic projection promotion
 
 ## Proof Sketch
 1. `L045` prevents reading topology and geometry as separate primitive ontologies; both are constrained projections of the same recursive process.
 2. `L099` states the minimum legality conditions for any `Pi_geo` candidate. If any one of those conditions fails, the projected geometry is not a lawful continuation of the input topology.
-3. Because `OPEN_BRIDGE_001` remains provisional, downstream application claims cannot inherit support from an unhardened topology-to-geometry step.
+3. Because `OPEN_BRIDGE_001` is supported only at the structural selector level, downstream application claims cannot inherit support from an unhardened topology-to-geometry step.
 4. Therefore a candidate topology-to-geometry transform is admissible only as a governed, provisional operator until its legality conditions are measured and retained under an explicit campaign.
 
 ## Status

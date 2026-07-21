@@ -1,0 +1,117 @@
+{
+  "architecture_id": "MPF_AUTHORITY_ARCHITECTURE_V1",
+  "schema_version": "1.0.0",
+  "status": "ACTIVE_ARCHITECTURE_CLARIFICATION",
+  "admitted_from_packet": "SEA_CALC_AUTHORITY_ARCHITECTURE_REAUDIT_2026_07_20",
+  "admitted_on": "2026-07-20",
+  "authority_effect": "repository_authority_architecture_only",
+  "claim_boundary": {
+    "scope": "repository authority architecture, projection integrity, and audit interpretation",
+    "does_not_promote": [
+      "theorems",
+      "lemmas",
+      "laws",
+      "claims",
+      "lexicon terms",
+      "proof status",
+      "evidence class",
+      "external validity"
+    ]
+  },
+  "formal_flow": "HUMAN -> GOVERNED_JSON -> GOVERNED_EXTRACTION -> DATABASE -> RUNTIME -> VALIDATION -> MARKDOWN",
+  "core_rule": "Human input proposes. Governed admission authorizes. The database governs agents. Validation tests admitted state. Markdown reports validated state.",
+  "non_circularity_rule": "Human-authored source material entering the pipeline and generated Markdown leaving the pipeline are distinct artifact roles even when both use Markdown syntax.",
+  "authority_rule": {
+    "agent_operational_ssot": "canonical_database",
+    "human_facing_ssot": "validated_markdown_projection",
+    "human_facing_ssot_qualification": "Markdown is authoritative for human consumption only to the extent that it is a current validated projection of canonical database state.",
+    "forbidden_interpretation": "Markdown and the database must not be treated as co-equal competing operational authorities."
+  },
+  "canonical_flow": [
+    {
+      "ordinal": 1,
+      "layer": "human",
+      "role": "originates mathematical intent, definitions, corrections, and governance decisions",
+      "authority_type": "authorship_authority",
+      "runtime_authority": false
+    },
+    {
+      "ordinal": 2,
+      "layer": "governed_json",
+      "role": "encodes human intent as a structured proposal or change packet",
+      "authority_type": "submission_authority",
+      "runtime_authority": false
+    },
+    {
+      "ordinal": 3,
+      "layer": "governed_extraction",
+      "role": "validates, normalizes, resolves identifiers, preserves provenance, and determines admissibility",
+      "authority_type": "admission_authority",
+      "runtime_authority": false
+    },
+    {
+      "ordinal": 4,
+      "layer": "database",
+      "role": "stores admitted canonical state for agent reasoning and governed execution",
+      "authority_type": "agent_operational_authority",
+      "runtime_authority": true
+    },
+    {
+      "ordinal": 5,
+      "layer": "runtime",
+      "role": "executes and reasons only from admitted database state",
+      "authority_type": "execution_surface",
+      "runtime_authority": false,
+      "authority_source": "database"
+    },
+    {
+      "ordinal": 6,
+      "layer": "validation",
+      "role": "tests canonical state, runtime behavior, evidence, invariants, and projection consistency",
+      "authority_type": "verification_surface",
+      "runtime_authority": false
+    },
+    {
+      "ordinal": 7,
+      "layer": "markdown",
+      "role": "renders validated canonical state for human inspection",
+      "authority_type": "human_facing_projection",
+      "runtime_authority": false
+    }
+  ],
+  "conservation_rules": [
+    {
+      "id": "AUTH-CONS-001",
+      "rule": "No human-authored source becomes agent authority without governed admission."
+    },
+    {
+      "id": "AUTH-CONS-002",
+      "rule": "No generated Markdown may independently modify canonical database state."
+    },
+    {
+      "id": "AUTH-CONS-003",
+      "rule": "Every admitted canonical object must preserve provenance to its governed submission and human source."
+    },
+    {
+      "id": "AUTH-CONS-004",
+      "rule": "Every generated Markdown claim must resolve to canonical database object identifiers and versions."
+    },
+    {
+      "id": "AUTH-CONS-005",
+      "rule": "Validation may approve, reject, qualify, or report canonical state but may not silently rewrite it."
+    },
+    {
+      "id": "AUTH-CONS-006",
+      "rule": "Runtime agents must not infer authority from file location, prose confidence, document title, or SSOT wording alone."
+    },
+    {
+      "id": "AUTH-CONS-007",
+      "rule": "Projection drift is a synchronization defect, not evidence that Markdown and the database are competing authorities."
+    },
+    {
+      "id": "AUTH-CONS-008",
+      "rule": "A human-facing SSOT must identify the canonical database snapshot from which it was generated."
+    }
+  ],
+  "implementation_note": "This architecture defines the intended authority pipeline. If current database coverage is partial, agents must report the gap and fall back under governed rules without treating Markdown as a competing operational SSOT."
+}

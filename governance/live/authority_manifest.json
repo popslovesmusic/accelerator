@@ -2,7 +2,7 @@
   "manifest_id": "MPF_GOVERNANCE_AUTHORITY_MANIFEST_V1",
   "schema_version": "1.0.0",
   "authority": "Global Governance",
-  "last_updated": "2026-07-03",
+  "last_updated": "2026-07-20",
   "authority_order": [
     {
       "rank": 1,
@@ -16,6 +16,7 @@
       "layer": "Governance Constitution",
       "artifacts": [
         "governance/live/governance_constitution.json",
+        "governance/live/authority_architecture.json",
         "AGENTS.md",
         "GEMINI.md",
         "governance/claim_policy.json"
@@ -55,6 +56,7 @@
         "registry/lexicon_canonical.json",
         "registry/induction_registry.json",
         "registry/claim_registry.json",
+        "registry/artifact_role_registry.json",
         "registry/theorem_status_registry.json",
         "registry/tool_manifest.json"
       ]
@@ -95,7 +97,16 @@
     }
   ],
   "routing_rule": {
-    "statement": "Operational governance tooling and AI agents SHALL resolve current state from live ledgers first and consult specifications only for intended schema or historical design intent."
+    "statement": "Operational governance tooling and AI agents SHALL resolve current state from admitted canonical database state when available, then live ledgers and canonical registries, and consult specifications only for intended schema or historical design intent.",
+    "authority_architecture": "governance/live/authority_architecture.json",
+    "operational_authority": "canonical_database",
+    "admission_authority": "governed_extraction",
+    "validation_surfaces": [
+      "scripts/global_validate.py",
+      "scripts/db/check_registry_alignment.py",
+      "scripts/governance/enforce_governance_integrity.py"
+    ],
+    "human_facing_projection_rule": "Markdown is human-facing authority only when typed as a current validated projection of admitted canonical state."
   },
   "live_ledgers": [
     "governance/live/debt_discharge_command.json",

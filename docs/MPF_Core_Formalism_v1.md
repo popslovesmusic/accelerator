@@ -124,12 +124,12 @@ Configurations trending toward zero-state annihilation:
 ---
 
 ## 9. VALIDATED FOUNDATIONAL CORE
-The following theorems have achieved Level C6 symbolic trace closure:
+The following theorem records are described in this source as symbolic trace closures. Current claim level, theorem status, and promotion eligibility are governed by the live registries and claim gates:
 - **MT-001 (Knot):** Identity is the minimum viable triadic lock.
 - **MT-002 (Bridge):** Relational invariants are representation-invariant across scales.
 - **MT-003 (Web):** Global interaction manifold is the necessary attractor for recursive process.
 - **MT-004 (Scaling):** Hierarchy is the necessary organizational resolution of $P_\Delta$.
-- **MT-005 (Switching):** Minimizer switching is stable and necessary for continuation.
+- **MT-005 (Switching):** Minimizer switching is treated in current theorem files as a conditional operational lemma rather than an unconditional closure claim.
 
 ---
 **Authority:** Mono-Process Math Program / Rigor Endorsed at Level C5. ∎

@@ -21,7 +21,7 @@ This artifact does **not** prove physical realism, metric completeness, spacetim
 * **Let** `Pi_geo(T) = G` be a declared `Geometry_app` projection candidate.
 * **Assume** `L099` defines the legality invariants for `Pi_geo`.
 * **Assume** `L100` blocks promotion unless those invariants are retained and paired with a recoverable validation path.
-* **Assume** `OPEN_BRIDGE_001` remains provisional and therefore cannot certify downstream interpretation from projection alone.
+* **Assume** `OPEN_BRIDGE_001` is supported only as a structural/topological selector and therefore cannot certify downstream interpretation from projection alone.
 * **Then** `Pi_geo` is lawful only when the declared invariant set remains preserved or traceably recoverable in `G`.
 
 ## 4. Structural Preservation Steps
