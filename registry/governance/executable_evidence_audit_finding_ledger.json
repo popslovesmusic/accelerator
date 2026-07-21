@@ -1,0 +1,171 @@
+{
+  "ledger_id": "SEA_CALC_EXECUTABLE_EVIDENCE_FINDING_LEDGER_2026_07_20",
+  "schema_version": "1.0.0",
+  "status": "ACTIVE_AUDIT_LEDGER",
+  "audit_packet_id": "SEA_CALC_EXECUTABLE_EVIDENCE_AUDIT_2026_07_20",
+  "machine_report": "outputs/audits/calculus_executable_evidence_audit_2026_07_20.json",
+  "test_manifest": "outputs/evidence/executable_authority_audit_2026_07_20/test_manifest.json",
+  "cleanup_report": "outputs/evidence/executable_authority_audit_2026_07_20/cleanup_report.json",
+  "claim_boundary": {
+    "does_not_establish": [
+      "mathematical truth",
+      "physical truth",
+      "theorem promotion",
+      "claim promotion",
+      "lexicon promotion",
+      "proof completeness",
+      "external scientific validation"
+    ]
+  },
+  "summary": {
+    "final_attestation": "FAIL",
+    "test_count": 33,
+    "result_counts": {
+      "FAIL": 2,
+      "INCONCLUSIVE": 2,
+      "NOT_IMPLEMENTED": 29
+    },
+    "canonical_math_state_changed_by_audit": false
+  },
+  "findings": [
+    {
+      "finding_id": "EEA-F001",
+      "severity": "critical",
+      "validator_id": "VAL-WORKTREE-EVIDENCE-001",
+      "classification": "executable_failure",
+      "affected_tests": [
+        "WTE-NEG-001",
+        "WTE-NEG-002"
+      ],
+      "evidence_paths": [
+        "outputs/evidence/executable_authority_audit_2026_07_20/bundles/WTE-NEG-001.json",
+        "outputs/evidence/executable_authority_audit_2026_07_20/bundles/WTE-NEG-002.json"
+      ],
+      "observed_result": "Git observed a dirty worktree, including untracked state, while the runtime freshness/context outputs reported no modified or untracked files and source/runtime change counts of zero.",
+      "required_remediation": "Implement VAL-WORKTREE-EVIDENCE-001 so DB freshness reports the same declared Git observation scope used by audit evidence."
+    },
+    {
+      "finding_id": "EEA-F002",
+      "severity": "high",
+      "validator_id": "VAL-WORKTREE-EVIDENCE-001",
+      "classification": "incomplete_control_coverage",
+      "affected_tests": [
+        "WTE-POS-001",
+        "WTE-BND-001"
+      ],
+      "evidence_paths": [
+        "outputs/evidence/executable_authority_audit_2026_07_20/bundles/WTE-POS-001.json",
+        "outputs/evidence/executable_authority_audit_2026_07_20/bundles/WTE-BND-001.json"
+      ],
+      "observed_result": "Clean disposable worktree and ignored-file boundary controls were not executed.",
+      "required_remediation": "Add an isolated disposable worktree or transaction-safe fixture mode for clean and ignored-file worktree controls."
+    },
+    {
+      "finding_id": "EEA-F003",
+      "severity": "critical",
+      "validator_id": "VAL-AUTH-PIPELINE-001",
+      "classification": "not_implemented",
+      "affected_tests": [
+        "ATP-POS-001",
+        "ATP-NEG-001",
+        "ATP-NEG-002",
+        "ATP-BND-001",
+        "ATP-BND-002"
+      ],
+      "evidence_paths": [
+        "outputs/evidence/executable_authority_audit_2026_07_20/test_manifest.json"
+      ],
+      "observed_result": "No executable production admission pipeline validator entry point was found.",
+      "required_remediation": "Implement a real admission validator that exercises canonical admission packet validation, governed extraction, and canonical provenance queries."
+    },
+    {
+      "finding_id": "EEA-F004",
+      "severity": "critical",
+      "validator_id": "VAL-RUNTIME-AUTH-001",
+      "classification": "not_implemented",
+      "affected_tests": [
+        "RTA-POS-001",
+        "RTA-NEG-001",
+        "RTA-NEG-002",
+        "RTA-NEG-003",
+        "RTA-NEG-004",
+        "RTA-BND-001",
+        "RTA-BND-002"
+      ],
+      "evidence_paths": [
+        "outputs/evidence/executable_authority_audit_2026_07_20/test_manifest.json"
+      ],
+      "observed_result": "No executable production runtime-authority exclusion validator entry point was found.",
+      "required_remediation": "Implement runtime authority tests proving unadmitted, proposed, rejected, superseded, deferred, and provenance-incomplete objects cannot enter authoritative runtime context."
+    },
+    {
+      "finding_id": "EEA-F005",
+      "severity": "high",
+      "validator_id": "VAL-PROJECTION-TRACE-001",
+      "classification": "not_implemented",
+      "affected_tests": [
+        "PTR-POS-001",
+        "PTR-NEG-001",
+        "PTR-NEG-002",
+        "PTR-BND-001"
+      ],
+      "evidence_paths": [
+        "outputs/evidence/executable_authority_audit_2026_07_20/test_manifest.json"
+      ],
+      "observed_result": "No executable Markdown assertion to canonical object/version resolver was found.",
+      "required_remediation": "Implement projection trace validation for governed Markdown assertions."
+    },
+    {
+      "finding_id": "EEA-F006",
+      "severity": "high",
+      "validator_id": "VAL-PROJECTION-FRESHNESS-001",
+      "classification": "not_implemented",
+      "affected_tests": [
+        "PFR-POS-001",
+        "PFR-NEG-001",
+        "PFR-NEG-002",
+        "PFR-BND-001"
+      ],
+      "evidence_paths": [
+        "outputs/evidence/executable_authority_audit_2026_07_20/test_manifest.json"
+      ],
+      "observed_result": "No executable projection snapshot freshness comparator was found.",
+      "required_remediation": "Implement projection freshness validation against canonical database snapshot identity and validator run status."
+    },
+    {
+      "finding_id": "EEA-F007",
+      "severity": "high",
+      "validator_id": "VAL-STATUS-NAMESPACE-001",
+      "classification": "not_implemented",
+      "affected_tests": [
+        "SNS-POS-001",
+        "SNS-NEG-001",
+        "SNS-NEG-002",
+        "SNS-BND-001"
+      ],
+      "evidence_paths": [
+        "outputs/evidence/executable_authority_audit_2026_07_20/test_manifest.json"
+      ],
+      "observed_result": "No executable validator was found that rejects untyped or overloaded status labels.",
+      "required_remediation": "Implement typed status namespace validation for claim, rigor, theorem, formalization, and validation statuses."
+    },
+    {
+      "finding_id": "EEA-F008",
+      "severity": "high",
+      "validator_id": "VAL-CANONICAL-EXPRESSION-001",
+      "classification": "not_implemented",
+      "affected_tests": [
+        "CEX-POS-001",
+        "CEX-POS-002",
+        "CEX-NEG-001",
+        "CEX-NEG-002",
+        "CEX-BND-001"
+      ],
+      "evidence_paths": [
+        "outputs/evidence/executable_authority_audit_2026_07_20/test_manifest.json"
+      ],
+      "observed_result": "No executable canonical-expression semantic resolver was found.",
+      "required_remediation": "Implement object-ID based expression resolution with typed permitted variants and quarantine for corrupted encodings."
+    }
+  ]
+}
