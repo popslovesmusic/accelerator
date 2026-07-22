@@ -406,16 +406,114 @@
         "docs/external_program_audit_2026_06_28.md"
       ],
       "notes": "Live-ledger separation and authority routing are now established in the operational governance layer."
+    },
+    {
+      "task_id": "PTR_COLAB_DEPARTMENT_INDUCTION_001",
+      "title": "Induct Colab Department for Notebook and Result Archive Intake",
+      "owner": "Global Governance",
+      "department": "governance",
+      "affected_departments": [
+        "governance",
+        "analysis_intake",
+        "analysis",
+        "mathematics",
+        "colab"
+      ],
+      "tier": 1,
+      "category": "governance",
+      "priority": "medium",
+      "status": "resolved",
+      "claim_class": "C1_DEFINED_PROVISIONAL",
+      "summary": "Create the Colab Department and define C1/C2 evidence classification for .ipynb notebooks, result zips, and external Colab-style simulation bundles.",
+      "depends_on": [
+        "PTR_GOV_INDUCTION_ROUTING_001"
+      ],
+      "blocks": [],
+      "linked_debt": [],
+      "linked_assets": [
+        "departments/colab/department_ssot.md",
+        "departments/colab/AGENTS.md",
+        "departments/colab/README.md",
+        "governance/live/department_registry.json",
+        "governance/live/department_layout_manifest.json",
+        "governance/live/department_relationship_registry.json",
+        "registry/governance/patches/COLAB_DEPARTMENT_INDUCTION_001.json"
+      ],
+      "linked_bridges": [],
+      "deliverables": [
+        "Colab Department peer root",
+        "Local SSOT and AGENTS.md",
+        "Department registry binding",
+        "Evidence class split for notebook/result-zip artifacts"
+      ],
+      "completion_criteria": [
+        "Colab Department exists under departments/ with SSOT and AGENTS.md.",
+        "Live department registry, layout manifest, and relationship registry include colab.",
+        "Notebook and result zip evidence classes distinguish C1 provenance from C2 bounded outputs."
+      ],
+      "references": [
+        "registry/governance/patches/COLAB_DEPARTMENT_INDUCTION_001.json",
+        "departments/colab/department_ssot.md"
+      ],
+      "notes": "Resolved on 2026-07-22. Department establishment is C1; manifest/hash-backed bounded notebook outputs may be C2 inside declared domains."
+    },
+    {
+      "task_id": "PTR_COLAB_EXPERIMENT_SPEC_OBJECT_001",
+      "title": "Add Immutable Experiment Specification Object to Colab Evidence Protocol",
+      "owner": "Global Governance",
+      "department": "governance",
+      "affected_departments": [
+        "governance",
+        "analysis_intake",
+        "analysis",
+        "mathematics",
+        "colab"
+      ],
+      "tier": 1,
+      "category": "governance",
+      "priority": "medium",
+      "status": "resolved",
+      "claim_class": "C1_EXPERIMENT_SPECIFICATION",
+      "summary": "Add experiment_spec.json as an immutable pre-execution design object for Colab notebook and result-archive evidence.",
+      "depends_on": [
+        "PTR_COLAB_DEPARTMENT_INDUCTION_001"
+      ],
+      "blocks": [],
+      "linked_debt": [],
+      "linked_assets": [
+        "departments/colab/department_ssot.md",
+        "departments/colab/AGENTS.md",
+        "departments/colab/schemas/experiment_spec.schema.json",
+        "departments/colab/templates/experiment_spec.json",
+        "registry/governance/patches/COLAB_EXPERIMENT_SPEC_OBJECT_001.json"
+      ],
+      "linked_bridges": [],
+      "deliverables": [
+        "Experiment specification schema",
+        "Experiment specification template",
+        "C1 specification evidence class",
+        "Future C2 gate rule"
+      ],
+      "completion_criteria": [
+        "Colab SSOT requires immutable pre-execution experiment_spec.json for future C2 notebook/result classifications.",
+        "Template and schema exist under departments/colab/.",
+        "Claim and lexicon registries record C1/GAP_OPEN status without promotion."
+      ],
+      "references": [
+        "registry/governance/patches/COLAB_EXPERIMENT_SPEC_OBJECT_001.json",
+        "departments/colab/department_ssot.md"
+      ],
+      "notes": "Resolved on 2026-07-22. The specification is C1 design/provenance evidence and does not validate results by itself."
     }
   ],
   "metrics": {
-    "total_tasks": 8,
+    "total_tasks": 10,
     "planned_tasks": 0,
     "active_tasks": 0,
     "blocked_tasks": 0,
     "tasks_by_tier": {
       "0": 5,
-      "1": 1,
+      "1": 3,
       "2": 1,
       "3": 1
     }

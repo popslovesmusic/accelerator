@@ -31,6 +31,19 @@ Departments may additionally define:
 - `applications/`
 - `references/`
 
+## Current Department Roots
+
+- `analysis/`
+- `analysis_intake/`
+- `colab/`
+- `documentation/`
+- `economics/`
+- `ethics/`
+- `mathematics/`
+- `neuroscience/`
+- `physics/`
+- `theology/`
+
 ## Inheritance Rule
 
 Every department inherits:

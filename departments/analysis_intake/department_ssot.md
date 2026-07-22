@@ -140,6 +140,16 @@ The Analysis Intake Department is the local place for induction-class packet int
 - When an induction packet is relevant to current program state, it is routed toward `candidate_inductions` or the appropriate downstream review surface as a provisional item, not as authority.
 - RT-calculus induction packets such as `RT_CALCULUS_AI_INDUCTION_PACKET_003` belong here as provisional intake material while their definitions remain under review.
 
+### Bound Induction Notes
+
+- `NEW_FOLDER_STAGED_INDUCTION_PACKET_2026_07_22` is admitted as bounded provisional research intake only.
+- The canonical intake artifacts are `outputs/analysis_intake/intake_report_NEW_FOLDER_STAGED_INDUCTION_PACKET_2026_07_22.json` and `.md`.
+- The live queue binding is `governance/live/induction_queue.json` entry `IQ_2026_07_22_011`.
+- The canonical induction registry binding is `registry/induction_registry.json` entry `NEW_FOLDER_STAGED_INDUCTION_PACKET_2026_07_22`.
+- Claim ceiling is `C2_EXTERNAL_BOUNDED_INDUCTION`.
+- The external scripts from `D:\projects\New folder` are recorded in the campaign tool ledger only as unapproved, non-claim-bearing candidate artifacts.
+- Active blockers against promotion: residue-causality outcome `INCONCLUSIVE`, phase-map no-stable-region result, Notebook 10 non-reproduction status, and Notebook 11 non-identifiability.
+
 ---
 
 ## Dependencies on Global Core
@@ -190,6 +200,7 @@ The intake department SHALL recommend routing but SHALL NOT execute, promote, or
 - No raw-text extraction in this SSOT is an authority claim.
 - No candidate patch in this SSOT becomes authoritative without approval.
 - This department remains an intake and proposal layer over provisional input.
+- The 2026-07-22 New Folder induction is an exception only in the narrow sense that the user authorized registry binding; the bound content remains provisional, C2-capped, and non-promotional.
 
 Current department status:
 - intake parsing: active

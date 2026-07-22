@@ -1,0 +1,33 @@
+{
+  "evidence_bundle_id": "EE-VAL-WORKTREE-EVIDENCE-001-WTE-BND-001-RERUN-001",
+  "audit_packet_id": "SEA_CALC_EXECUTABLE_EVIDENCE_AUDIT_RERUN_2026_07_21",
+  "validator_id": "VAL-WORKTREE-EVIDENCE-001",
+  "validator_version": "production query_governance current workspace",
+  "test_id": "WTE-BND-001",
+  "test_class": "boundary_control",
+  "expected_result": {
+    "fixture": "isolated control required"
+  },
+  "observed_result": {
+    "executed": false,
+    "reason": "No clean disposable worktree or ignored-file boundary fixture was created; production query path was exercised only against current workspace."
+  },
+  "result": "INCONCLUSIVE",
+  "entry_point": [
+    "git status --short",
+    "python scripts/query_governance.py freshness --level summary",
+    "python scripts/query_governance.py context-capsule --target outputs/evidence/executable_authority_audit_rerun_2026_07_21/test_manifest.json --level summary"
+  ],
+  "command": "see baseline command records",
+  "exit_code": 0,
+  "stdout_hash": "ad57b1b011fd596c1c9c5321740bd42918213a688f5683aae9f2bd3cd506ab2c",
+  "stderr_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "fixture_hash": "53d0c330d6d3f90a25ff1597b4e8fda465ba4ad3f8b6ef1e0d7c8881efe82afd",
+  "repository_commit": "b92cacacec503c5ba65e51ec3bb92e55ae9a1867",
+  "worktree_hash": "53d0c330d6d3f90a25ff1597b4e8fda465ba4ad3f8b6ef1e0d7c8881efe82afd",
+  "database_snapshot_id": "74640653ad357d36b8cfd6c6f0efbbc8c1717c529749a019e6c3bf4b01606475",
+  "started_at": "2026-07-21T03:32:39.750760+00:00",
+  "completed_at": "2026-07-21T03:32:46.783087+00:00",
+  "cleanup_status": "no_mutating_fixture_created",
+  "assurance_boundary": "worktree observation and freshness reporting only"
+}

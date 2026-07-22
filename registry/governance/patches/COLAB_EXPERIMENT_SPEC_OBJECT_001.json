@@ -1,0 +1,58 @@
+{
+  "patch_id": "COLAB_EXPERIMENT_SPEC_OBJECT_001",
+  "title": "Add Immutable Experiment Specification Object to Colab Evidence Protocol",
+  "status": "APPLIED_C1_GOVERNANCE_MAINTENANCE",
+  "created_at": "2026-07-22T00:00:00Z",
+  "authority": "Global Governance",
+  "department": "colab",
+  "trigger": "User requested insertion of an immutable Experiment Specification object containing research question, hypothesis, variables, controls, random seed, parameter space, termination conditions, expected outputs, and interpretation protocol.",
+  "scope": {
+    "included": [
+      "Colab Department SSOT update",
+      "Colab Department local AGENTS.md update",
+      "experiment_spec.json template creation",
+      "experiment_spec JSON Schema creation",
+      "claim registry synchronization",
+      "lexicon gap queue synchronization",
+      "textbook synchronization"
+    ],
+    "excluded": [
+      "engine code changes",
+      "claim promotion",
+      "tool approval",
+      "post-hoc validation of existing notebook results"
+    ]
+  },
+  "governance_decision": {
+    "experiment_specification_status": "C1_EXPERIMENT_SPECIFICATION",
+    "promotion_block": true,
+    "c2_gate_rule": "Future Colab Department C2 notebook/result classifications require an immutable pre-execution experiment_spec.json or an explicit governed legacy exception, plus recoverable outputs, manifest/hash integrity, and bounded interpretation.",
+    "legacy_note": "Previously admitted Notebook 10/11/12 artifacts keep their recorded pre-spec ceilings but require backfilled or superseding experiment specifications before further replication or promotion review."
+  },
+  "artifacts_created": [
+    "departments/colab/schemas/experiment_spec.schema.json",
+    "departments/colab/templates/experiment_spec.json",
+    "registry/governance/patches/COLAB_EXPERIMENT_SPEC_OBJECT_001.json"
+  ],
+  "artifacts_updated": [
+    "departments/colab/department_ssot.md",
+    "departments/colab/AGENTS.md",
+    "registry/claim_registry.json",
+    "registry/lexicon_gap_queue.json",
+    "registry/lexicon/lexicon_gap_queue.json",
+    "registry/induction_registry.json",
+    "governance/live/induction_queue.json",
+    "governance/live/master_work_index.json",
+    "governance/live/program_task_registry.json",
+    "docs/textbook/mono_process_textbook_complete.md"
+  ],
+  "claim_humility_review": {
+    "status": "passed",
+    "bounded_statement": "The specification records pre-execution design intent and interpretation limits. It does not validate outputs, approve tools, or establish external physical claims."
+  },
+  "validation_required": [
+    "JSON parse validation",
+    "scripts/global_validate.py",
+    "DB registry snapshot/freshness sync"
+  ]
+}

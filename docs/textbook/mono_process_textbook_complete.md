@@ -448,10 +448,10 @@ The $U_{\Omega}$ schema has been subjected to five classes of exclusionary falsi
 | **FA-002** | Random-continuation equivalence | Randomized selection diverges structurally from $\delta_a$-filtered continuation. | **Survived** |
 | **FA-003** | Mismatch-independence | Ablating $\mu_{\text{rel}}$ collapses the persistence of the continuation chain. | **Survived** |
 | **FA-004** | Projection-aliasing | Equivalent observables arise from distinct histories, but do not license process identity. | **Survived** |
-| **FA-005** | Memoryless-control | Memoryless dynamics fail to match the topology of residue-conditioned dynamics. | **Survived** |
+| **FA-005** | Memoryless-control | Historical schema attack retained for audit trace; current non-Markov campaign records no runs, the strict memoryless control remains C1, and LFCR-002 later falsified the broad residue-necessity claim in tested closure regimes. | **Not validated for promotion** |
 
 **Ruling:** **Provisionally Retained.**
-Survival under attack raises confidence only by exclusion, never by confirmation. The $U_{\Omega}$ schema is provisionally retained for continued use as the master operational rule [Source: U_OMEGA_FALSIFICATION_ATTACK_REPORT].
+Survival under attack raises confidence only by exclusion, never by confirmation. The $U_{\Omega}$ schema is provisionally retained for continued use as the master operational rule [Source: U_OMEGA_FALSIFICATION_ATTACK_REPORT]. The memoryless-control row is not current evidence for a strong non-Markov or residue-necessity claim; current report binding is `reports/residue_state_vs_memoryless_finite_history_report.md`.
 
 ---
 
@@ -4457,6 +4457,22 @@ The live mathematics proof package is reduced to artifact synchronization and pr
 - **Blocker state:** The promotion blockers for MT-001, MT-002, and MT-003 are formalized and mapped in `registry/math/theorem_blocker_resolution_registry.json`. The promotion gate has been cleared by explicit user authorization.
 - **RC-001 closure state:** The derivation closure registry records `derivation_supported` with both steps supported and `ready_for_closure: true`; the remaining blocker registry retains only scoped residual `GAP-001` for non-local CSI sum convergence under RC-017 CMC-002/CMC-006. [Source: `registry/math/rc001_derivation_closure_registry.json`; `registry/math/rc001_remaining_blocker_registry.json`]
 - **Governance note:** This reduction updates proof-package bookkeeping and theorem promotion state in the governed registries.
+
+### F.11 Bounded External Research Induction: New Folder Packet
+- **`NEW_FOLDER_STAGED_INDUCTION_PACKET_2026_07_22`**: Admitted as bounded provisional research intake from `D:\projects\New folder`, with canonical intake artifacts in `outputs/analysis_intake/` and live queue entry `IQ_2026_07_22_011`. The induction is capped at `C2_EXTERNAL_BOUNDED_INDUCTION` and does not promote C5/C6 claims, external physical claims, or lexicon terms beyond `GAP_OPEN`.
+- **Directly observed source classes:** operator-algebra reports, residue-causality and phase-map pilots, RT Notebook 10 continuation-domain geometry reconstruction, RT Notebook 11 overlap non-identifiability diagnosis, and RT Notebook 12 mechanism-isolation enumeration.
+- **Active blockers:** residue-causality Stage 1 remains `INCONCLUSIVE`; the phase-map pilot found no stable sampled region; Notebook 10 is an R1 reconstructed executable rather than historical reproduction; Notebook 11 blocks independent reachability-overlap mechanism claims on the supplied reconstruction.
+- **Bounded support:** Notebook 12 may be used only as external bounded enumerated computational evidence inside its declared factorial domain until approved-tool replication or tool admission occurs.
+- **Tool boundary:** `campaign_runner.py` and `phase_map_runner.py` from the external folder are recorded as unapproved, non-claim-bearing candidate tools in `registry/governance/campaign_tool_ledger.json`.
+- **Lexicon state:** candidate terms are opened in `registry/lexicon_gap_queue.json` with `GAP_OPEN` status and no promotion.
+- **Non-claim:** This induction does not prove the Mono-Process Framework, establish physical residue, establish external physical validity, or replace any live Acellorator canonical theorem.
+
+### F.12 Colab Department and Notebook Evidence Classification
+- **`COLAB_DEPARTMENT_INDUCTION_001`**: The Colab Department is inducted as a C1 governance structure for `.ipynb`, result zip, artifact manifest, and external Colab-style simulation intake. Its local SSOT is `departments/colab/department_ssot.md`.
+- **`COLAB_EXPERIMENT_SPEC_OBJECT_001`**: The Colab Department now requires immutable pre-execution `experiment_spec.json` records for future C2 notebook/result classifications unless an explicit governed legacy exception is recorded. The specification records research question, hypothesis, independent variables, dependent variables, controls, random seed, parameter space, termination conditions, expected outputs, and interpretation protocol.
+- **Evidence split:** Bare `.ipynb` files and bare result zips are C1 provenance/archive evidence. An `experiment_spec.json` is C1 design/provenance evidence by itself. Manifest/hash-backed notebook outputs may be C2 bounded computational evidence only inside their declared notebook domain when paired with immutable specification evidence. Non-identifiability, null-region, inconclusive, and counterexample outputs may be C2 limitation or negative evidence under the same specification and output-integrity constraints.
+- **Tool boundary:** External Colab scripts are not approved Acellorator tools unless admitted separately through the tool ledger or reimplemented under approved tooling.
+- **Non-claim:** The Colab Department does not promote notebook outputs above C2, does not establish external physical validity, and does not treat notebook execution as C5/C6 validation.
 
 ---
 **Status:** Items in Section F.1 are active research targets. Resolved bridges are archived in F.4. Failed or superseded bridge formulations are dispositioned in F.5. Section F.7 tracks the measurement rules for active attacks. Section F.8 tracks debt-reduced lexicon obligations. Section F.10 tracks the current mathematics proof-package synchronization state.
