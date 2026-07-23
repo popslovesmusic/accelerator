@@ -1,0 +1,105 @@
+{
+  "campaign_id": "CAMPAIGN_ANALYSIS_CRAWL_20260723_001",
+  "agent_role": "RT_AGENT_INFINITE_THEORY_ANALYST",
+  "mode": "crawl",
+  "scope": {
+    "object_ids": [
+      "governance/live/master_work_index.json",
+      "governance/live/research_debt_registry.json",
+      "registry/research_debt_registry.json",
+      "analysis/program_state_report.json",
+      "analysis/dependency_report.json",
+      "analysis/recommended_action_queue.json",
+      "outputs/analysis/critical_path_graph.json",
+      "outputs/analysis/unlock_priority_report.json"
+    ],
+    "domains": ["governance", "analysis", "mathematics", "research"],
+    "time_range": "current repository state",
+    "include_superseded": true
+  },
+  "budgets": {
+    "maximum_reasoning_depth": 8,
+    "maximum_candidate_count": 100,
+    "maximum_compute_units": null
+  },
+  "source_artifact_set": [
+    "departments/analysis/GEMINI.md",
+    "governance/live/master_work_index.json",
+    "governance/live/research_debt_registry.json",
+    "registry/research_debt_registry.json",
+    "analysis/program_state_report.json",
+    "analysis/dependency_report.json",
+    "analysis/recommended_action_queue.json",
+    "outputs/analysis/critical_path_graph.json",
+    "outputs/analysis/unlock_priority_report.json",
+    "registry/db/acellorator_index.sqlite"
+  ],
+  "normalization_rule": "The work index is treated as a task-disposition surface; source registries remain authoritative for campaign, queue, claim, and debt status.",
+  "findings": [
+    {
+      "discovery_id": "DISCOVERY_CRAWL_20260723_001",
+      "discovery_class": "INVARIANT_CANDIDATE",
+      "title": "Zero actionable work-index state",
+      "statement": "The current master work index contains 90 completed non-archived dispositions and one archived historical record, with no active, review, designed, or limitation-state execution entries.",
+      "epistemic_status": "OBSERVED",
+      "proof_status": "NOT_ATTEMPTED",
+      "supporting_evidence_ids": ["governance/live/master_work_index.json", "analysis/program_state_report.json"],
+      "canonical_promotion_allowed": false,
+      "human_review_required": false
+    },
+    {
+      "discovery_id": "DISCOVERY_CRAWL_20260723_002",
+      "discovery_class": "PROOF_OBLIGATION",
+      "title": "D semantics remains open",
+      "statement": "D evaluation and projection semantics remain an open moderate research debt with obligations OBL-D-001A through OBL-D-001E; theorem promotion remains blocked.",
+      "epistemic_status": "SOURCE_REPORTED",
+      "proof_status": "OBLIGATIONS_IDENTIFIED",
+      "supporting_evidence_ids": ["governance/live/research_debt_registry.json", "registry/research_debt_registry.json"],
+      "canonical_promotion_allowed": false,
+      "human_review_required": true
+    },
+    {
+      "discovery_id": "DISCOVERY_CRAWL_20260723_003",
+      "discovery_class": "MISSING_DISTINCTION",
+      "title": "Runtime debt projection versus live research debt",
+      "statement": "The runtime summary reports zero governance-runtime debt while the live research debt registry reports one open D-semantics debt; the distinction is documented as projection scope rather than treated as discharge.",
+      "epistemic_status": "OBSERVED",
+      "proof_status": "NOT_ATTEMPTED",
+      "supporting_evidence_ids": ["registry/research_debt_registry.json", "analysis/recommended_action_queue.json"],
+      "canonical_promotion_allowed": false,
+      "human_review_required": true
+    }
+  ],
+  "results": {
+    "objects_analyzed": 9,
+    "theorem_candidates": 0,
+    "lemma_candidates": 0,
+    "proof_gaps": 0,
+    "concept_candidates": 0,
+    "contradictions": 0,
+    "counterexamples": 0,
+    "research_campaigns": 0,
+    "duplicates_rejected": 0,
+    "proof_obligations": 1,
+    "governance_distinctions": 1
+  },
+  "confidence": {
+    "work_index_state": "high",
+    "debt_state": "high",
+    "runtime_projection_interpretation": "high"
+  },
+  "frontier": {
+    "open_branches": ["Discharge OBL-D-001A through OBL-D-001E before D-semantics theorem promotion."],
+    "blocked_branches": [],
+    "deferred_branches": ["Any new source-registry work must be inducted as a new governed work item when evidence changes."]
+  },
+  "termination_reason": "No additional non-duplicate findings were identified within the bounded current-state scope; unresolved D-semantics obligations require evidence rather than further crawl inference.",
+  "continuation_token": "CRAWL_FRONTIER_DEBT_D_SEMANTICS_001",
+  "what_this_does_not_authorize": [
+    "It does not promote D semantics to a theorem.",
+    "It does not convert source-level active campaigns into completed campaigns.",
+    "It does not treat the zero runtime debt projection as discharge of live research debt.",
+    "It does not modify canonical theory or authority registries."
+  ],
+  "created_at": "2026-07-23T19:35:00Z"
+}
