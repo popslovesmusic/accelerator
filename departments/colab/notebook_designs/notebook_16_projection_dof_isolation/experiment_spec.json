@@ -1,0 +1,228 @@
+{
+  "spec_id": "MPF_SIM_PROJECTION_DOF_ISOLATION_001",
+  "schema_version": "1.0.0",
+  "status": "IMMUTABLE_SPEC",
+  "created_at": "2026-07-23T00:00:00Z",
+  "source_notebook": "departments/colab/notebook_designs/notebook_16_projection_dof_isolation/RT_Notebook_16_Projection_DoF_Isolation.ipynb",
+  "research_question": "Does increasing admissible organizational degree of freedom produce new continuation organizations while preserving the primitive law inside a bounded symbolic continuation model?",
+  "hypothesis": "Increasing admissible organizational DoF expands the set of lawful continuation organizations, introduces structurally novel stable organization classes that cannot exist in lower-DoF domains, and leaves the primitive binding law unchanged. If no structurally novel classes appear after bounded projection analysis, additional organizational dimensions are representational only within this model.",
+  "independent_variables": [
+    {
+      "name": "organizational_dof",
+      "definition": "Maximum number of distinct aspect positions that a single continuation-binding event may organize while the primitive binding rule remains unchanged.",
+      "units_or_scale": "bounded organizational degree of freedom",
+      "allowed_values_or_range": "1..6 in the initial Colab sweep; DoF=1 primitive chain, DoF=2 paired organization, DoF=3 recursive triads, DoF>3 nested RT organizations under the same binder."
+    },
+    {
+      "name": "enumeration_depth_limit",
+      "definition": "Bound on recursive organization depth used to keep the symbolic search recoverable in Colab.",
+      "units_or_scale": "graph/tree depth",
+      "allowed_values_or_range": "2..4 with default 4"
+    }
+  ],
+  "dependent_variables": [
+    {
+      "name": "admissible_continuation_count",
+      "definition": "Number of lawful organizations reachable under the current DoF and bounded continuation rules.",
+      "units_or_scale": "count",
+      "allowed_values_or_range": "integer >= 0"
+    },
+    {
+      "name": "illegal_organization_count",
+      "definition": "Number of generated candidate organizations rejected by admissibility, closure, or primitive-preservation checks.",
+      "units_or_scale": "count",
+      "allowed_values_or_range": "integer >= 0"
+    },
+    {
+      "name": "closure_rate",
+      "definition": "Fraction of reachable lawful organizations classified as closed under the bounded closure definition.",
+      "units_or_scale": "proportion",
+      "allowed_values_or_range": "0 <= value <= 1"
+    },
+    {
+      "name": "organization_entropy",
+      "definition": "Shannon entropy over structural organization-class frequencies at a fixed DoF.",
+      "units_or_scale": "bits",
+      "allowed_values_or_range": "value >= 0"
+    },
+    {
+      "name": "projection_diversity",
+      "definition": "Number of distinct lower-DoF projection signatures induced by the current lawful organization set.",
+      "units_or_scale": "count",
+      "allowed_values_or_range": "integer >= 0"
+    },
+    {
+      "name": "primitive_preservation_rate",
+      "definition": "Share of lawful organizations whose derivation witness uses only the single primitive binder and fixed continuation rules.",
+      "units_or_scale": "proportion",
+      "allowed_values_or_range": "0 <= value <= 1"
+    },
+    {
+      "name": "new_stable_organization_count",
+      "definition": "Number of stable lawful organizations at the current DoF whose class is absent from all lower-DoF domains.",
+      "units_or_scale": "count",
+      "allowed_values_or_range": "integer >= 0"
+    },
+    {
+      "name": "organization_depth",
+      "definition": "Average and maximum recursive depth of lawful organizations in the current DoF domain.",
+      "units_or_scale": "depth",
+      "allowed_values_or_range": "integer >= 1"
+    },
+    {
+      "name": "continuation_branching",
+      "definition": "Average one-step successor count in the bounded continuation graph.",
+      "units_or_scale": "branching factor",
+      "allowed_values_or_range": "value >= 0"
+    },
+    {
+      "name": "novel_organization_rate",
+      "definition": "Fraction of lawful organization classes at the current DoF that cannot be represented losslessly in any lower-DoF domain.",
+      "units_or_scale": "proportion",
+      "allowed_values_or_range": "0 <= value <= 1"
+    },
+    {
+      "name": "symmetry_classification_counts",
+      "definition": "Counts of symmetric, asymmetric, and mixed lawful organizations at the current DoF.",
+      "units_or_scale": "class-count map",
+      "allowed_values_or_range": "nonnegative counts by class"
+    }
+  ],
+  "controls": [
+    {
+      "name": "primitive_law_lock",
+      "purpose": "Hold the primitive law fixed while organizational richness varies.",
+      "implementation": "Use a single primitive binding function for every organization regardless of DoF; changing DoF only changes admissible slot count, not the binder semantics."
+    },
+    {
+      "name": "rt_core_lock",
+      "purpose": "Prevent RT_core from drifting during the campaign.",
+      "implementation": "Keep RT_core assumptions, residue rules, arbitration policy, and continuation mechanics constant across all DoF sweeps."
+    },
+    {
+      "name": "checkpointed_outputs",
+      "purpose": "Avoid Colab crash data loss.",
+      "implementation": "Write per-DoF catalogs, metrics, and novelty tables immediately after each sweep stage."
+    },
+    {
+      "name": "bounded_model_disclosure",
+      "purpose": "Prevent the symbolic operationalization from being mistaken for the calculus itself.",
+      "implementation": "Interpret outputs only as bounded evidence about the declared symbolic organizational model, not as theorem proof or external validation."
+    },
+    {
+      "name": "novelty_requires_projection_test",
+      "purpose": "Avoid counting larger arity alone as novelty.",
+      "implementation": "A class counts as novel only if no lossless projection into any lower-DoF domain exists under the declared projection operator."
+    }
+  ],
+  "random_seed": {
+    "value": 160016,
+    "seed_scope": "Deterministic catalog ordering, example selection, and any bounded tie-breaking.",
+    "derivation_policy": "Fixed before execution; stochastic sampling is not the primary method."
+  },
+  "parameter_space": [
+    {
+      "name": "organizational_dof_sweep",
+      "values_or_range": "[1, 2, 3, 4, 5, 6]",
+      "units_or_scale": "organizational degree of freedom",
+      "default": "complete sweep",
+      "sampling_rule": "Evaluate all declared DoF values in order."
+    },
+    {
+      "name": "max_depth",
+      "values_or_range": "[2, 3, 4]",
+      "units_or_scale": "recursive organization depth",
+      "default": 4,
+      "sampling_rule": "Primary execution uses depth 4; reduced depths are available for crash recovery or debugging."
+    },
+    {
+      "name": "max_children_per_node",
+      "values_or_range": "equal to organizational_dof",
+      "units_or_scale": "node arity limit",
+      "default": "locked to DoF",
+      "sampling_rule": "Do not exceed the active DoF at any organization node."
+    },
+    {
+      "name": "projection_targets",
+      "values_or_range": "all lower DoF values below the active DoF",
+      "units_or_scale": "target domain",
+      "default": "complete lower-domain sweep",
+      "sampling_rule": "Every higher-DoF class must be tested against all lower-DoF targets for novelty classification."
+    }
+  ],
+  "termination_conditions": [
+    "All declared DoF values are evaluated or emit a recoverable skip record.",
+    "Per-DoF metrics, lawful catalogs, novelty tables, and projection summaries are written.",
+    "Primitive preservation is reported for every DoF.",
+    "Novel organization rate is computed using explicit lower-DoF projection tests.",
+    "A follow-on plan for MPF_SIM_PROJECTION_INDUCTION_001 is written, but no second-campaign result claim is made in this notebook."
+  ],
+  "expected_outputs": [
+    {
+      "name": "dof_metrics_table",
+      "path_pattern": "departments/colab/results/MPF_SIM_PROJECTION_DOF_ISOLATION_001/dof_metrics.csv",
+      "required": true,
+      "interpretation_role": "Primary per-DoF measurement table."
+    },
+    {
+      "name": "lawful_organization_catalog",
+      "path_pattern": "departments/colab/results/MPF_SIM_PROJECTION_DOF_ISOLATION_001/lawful_organization_catalog.jsonl",
+      "required": true,
+      "interpretation_role": "Recoverable catalog of lawful organization classes and metrics by DoF."
+    },
+    {
+      "name": "novel_organization_catalog",
+      "path_pattern": "departments/colab/results/MPF_SIM_PROJECTION_DOF_ISOLATION_001/novel_organization_catalog.json",
+      "required": true,
+      "interpretation_role": "Lists organization classes that have no lossless lower-DoF projection."
+    },
+    {
+      "name": "projection_loss_table",
+      "path_pattern": "departments/colab/results/MPF_SIM_PROJECTION_DOF_ISOLATION_001/projection_loss_table.csv",
+      "required": true,
+      "interpretation_role": "Prepares the follow-on induction campaign by quantifying loss and closure preservation under lower-DoF projection."
+    },
+    {
+      "name": "output_manifest",
+      "path_pattern": "departments/colab/results/MPF_SIM_PROJECTION_DOF_ISOLATION_001/manifest.json",
+      "required": true,
+      "interpretation_role": "Binds source design, parameters, outputs, claim ceiling, and follow-on non-claims."
+    }
+  ],
+  "interpretation_protocol": {
+    "claim_ceiling": "C1_SPECIFICATION_ONLY",
+    "decision_rules": [
+      "BOUNDED_SUPPORT_C2_CANDIDATE: higher DoF adds lawful classes with nonzero novel_organization_rate while primitive_preservation_rate remains 1.0 in the bounded model.",
+      "BOUNDED_NULL_C2_CANDIDATE: higher DoF changes representation counts but novel_organization_rate remains 0 across the bounded sweep.",
+      "MODEL_LIMITATION_C2: higher DoF expansion appears only because the symbolic operationalization changed in an uncontrolled way or primitive preservation fails.",
+      "FOLLOW_ON_REQUIRED: novelty is present but projection-loss structure requires the separate MPF_SIM_PROJECTION_INDUCTION_001 campaign before stronger interpretation."
+    ],
+    "allowed_interpretations": [
+      "Bounded evidence about whether the declared symbolic organizational model produces structurally novel continuation classes under higher organizational DoF.",
+      "Bounded null evidence if higher DoF is representational only within the declared model.",
+      "Motivation for the separate projection-back campaign MPF_SIM_PROJECTION_INDUCTION_001."
+    ],
+    "blocked_interpretations": [
+      "Proof that the calculus universally generates new ontology from higher DoF.",
+      "External physical validation.",
+      "Promotion above C2 without approved-tool replication and governed result induction.",
+      "Treating the symbolic operationalization as identical to RT_core or the full calculus."
+    ]
+  },
+  "provenance": {
+    "source_paths": [
+      "outputs/analysis_intake/candidate_patch_MPF_IND_PROJECTION_DOF_ARCHITECTURE_001.json",
+      "outputs/analysis_intake/intake_report_MPF_IND_PROJECTION_DOF_ARCHITECTURE_001.json",
+      "departments/colab/department_ssot.md"
+    ],
+    "artifact_hashes": {
+      "outputs/analysis_intake/candidate_patch_MPF_IND_PROJECTION_DOF_ARCHITECTURE_001.json": "BE759A8BF1846503F10D7DDC5447BA38B8706297B895E55F5401AC50DFAB9D54",
+      "outputs/analysis_intake/intake_report_MPF_IND_PROJECTION_DOF_ARCHITECTURE_001.json": "CBA11F00BD315711A2EE8DD794D5394767E046BA2CCEA50F1122752FC88AB1F8"
+    }
+  },
+  "immutability": {
+    "frozen_before_execution": true,
+    "content_sha256": "TO_BE_RECORDED_AFTER_NOTEBOOK_CREATION",
+    "supersession_policy": "Do not edit after execution starts; create a new spec_id and link the superseding specification."
+  }
+}
