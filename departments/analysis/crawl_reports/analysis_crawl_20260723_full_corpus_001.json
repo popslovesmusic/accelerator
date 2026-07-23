@@ -1,0 +1,113 @@
+{
+  "campaign_id": "CAMPAIGN_ANALYSIS_CRAWL_20260723_003",
+  "agent_role": "RT_AGENT_INFINITE_THEORY_ANALYST",
+  "mode": "crawl",
+  "scope": {
+    "artifact_set": [
+      "departments/analysis/department_ssot.md",
+      "departments/analysis/AGENTS.md",
+      "departments/analysis/GEMINI.md",
+      "governance/live/master_work_index.json",
+      "registry/research_debt_registry.json",
+      "registry/math/d_semantics_obligation_registry.json",
+      "departments/analysis/program_state_report.json",
+      "departments/analysis/recommended_action_queue.json",
+      "registry/colab_result_archive_registry.json",
+      "registry/induction_registry.json",
+      "registry/claim_registry.json",
+      "registry/lexicon_gap_queue.json",
+      "departments/analysis/campaigns"
+    ],
+    "include_historical_and_superseded": true,
+    "maximum_dependency_distance": 4
+  },
+  "budgets": {
+    "maximum_reasoning_depth": 8,
+    "maximum_candidate_count": 100,
+    "maximum_compute_units": "read_only_repository_scan"
+  },
+  "results": {
+    "objects_analyzed": 91,
+    "theorem_candidates": 0,
+    "lemma_candidates": 0,
+    "proof_gaps": 1,
+    "concept_candidates": 0,
+    "contradictions": 1,
+    "counterexamples": 0,
+    "research_campaigns": 1,
+    "governance_defects": 1,
+    "open_research_debts": 1,
+    "open_d_obligations": 5,
+    "registered_colab_archives": 9,
+    "lexicon_records": 223,
+    "duplicates_rejected": 0
+  },
+  "discoveries": [
+    {
+      "discovery_id": "DISCOVERY_CRAWL_20260723_008",
+      "discovery_class": "GOVERNANCE_DEFECT",
+      "title": "Master work index aggregate mismatch",
+      "statement": "The master work index contains 91 item records while its stored aggregate summary reports 82 total items and inconsistent execution-state totals.",
+      "epistemic_status": "OBSERVED",
+      "proof_status": "NOT_ATTEMPTED",
+      "supporting_evidence_ids": ["governance/live/master_work_index.json", "departments/analysis/program_state_report.json"],
+      "recommended_next_action": "Recompute and validate the work-index summary from item-level records.",
+      "canonical_promotion_allowed": false,
+      "human_review_required": true
+    },
+    {
+      "discovery_id": "DISCOVERY_CRAWL_20260723_009",
+      "discovery_class": "PROOF_OBLIGATION",
+      "title": "D semantics remains the mathematical critical path",
+      "statement": "Five D evaluation and projection obligations remain open and block theorem promotion for the D semantics package.",
+      "epistemic_status": "SOURCE_REPORTED",
+      "proof_status": "OBLIGATIONS_IDENTIFIED",
+      "supporting_evidence_ids": ["registry/research_debt_registry.json", "registry/math/d_semantics_obligation_registry.json"],
+      "recommended_next_action": "Execute the AOW v2 work package for OBL-D-001A, followed by OBL-D-001B.",
+      "canonical_promotion_allowed": false,
+      "human_review_required": true
+    },
+    {
+      "discovery_id": "DISCOVERY_CRAWL_20260723_010",
+      "discovery_class": "GENERALIZATION_CANDIDATE",
+      "title": "Typed preservation boundary for projection-generated organization",
+      "statement": "Apparent higher-degree organization should be treated as structurally new only when an explicit typed preservation relation rules out representational, operational, and finite-model explanations.",
+      "epistemic_status": "CONJECTURED",
+      "proof_status": "OBLIGATIONS_IDENTIFIED",
+      "supporting_evidence_ids": ["registry/colab_result_archive_registry.json", "registry/claim_registry.json"],
+      "falsification_conditions": ["All relevant higher-degree information is preserved by a lower-degree representation under independent encodings.", "The observed classes disappear under grouped evaluation and approved-tool replication."],
+      "recommended_next_action": "Formalize typed preservation after D domain and threshold obligations are resolved.",
+      "canonical_promotion_allowed": false,
+      "human_review_required": true
+    }
+  ],
+  "frontier": {
+    "open_branches": [
+      "Reconcile master work-index aggregate metadata.",
+      "Discharge OBL-D-001A through OBL-D-001E.",
+      "Replicate bounded notebook results with immutable specifications and approved tools."
+    ],
+    "blocked_branches": [
+      "Universal D-semantics theorem promotion.",
+      "Promotion of C2 notebook evidence above its recorded claim ceiling."
+    ],
+    "deferred_branches": [
+      "Formal theory of projection-generated organization until typed preservation is defined."
+    ]
+  },
+  "termination_reason": "Bounded current-state scan completed; further inference requires metadata reconciliation or new formal and empirical evidence.",
+  "continuation_token": "CRAWL_FRONTIER_MASTER_INDEX_D_SEMANTICS_002",
+  "executive_assessment": {
+    "status": "PARTIAL_SUCCESS",
+    "reason": "The crawl connected current debt, evidence, and mathematical obligations and found a concrete metadata inconsistency, but no obligation was discharged.",
+    "confidence": "HIGH",
+    "executive_recommendation": "FORMALIZE",
+    "next_campaign": "Reconcile work-index aggregates, validate the repaired projection, then execute OBL-D-001A domain/codomain formalization."
+  },
+  "non_authorizations": [
+    "No canonical registry mutation",
+    "No work-item closure",
+    "No theorem or lexicon promotion",
+    "No conversion of C2 evidence into formal proof"
+  ]
+}
