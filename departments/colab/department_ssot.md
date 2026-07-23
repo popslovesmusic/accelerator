@@ -158,6 +158,31 @@ Active blockers:
 - approved-tool replication pending,
 - promotion above C2 blocked.
 
+### NOTEBOOK_17_ORGANIZATION_RESOLUTION_CALCULUS_2026_07_23
+
+Source notebook: `departments/colab/notebook_designs/notebook_17_organization_resolution_calculus/RT_Notebook_17_Organization_Resolution_Calculus.ipynb`
+
+Result archive: `departments/colab/results/MPF_SIM_ORGANIZATION_RESOLUTION_CALCULUS_001_RESULTS.zip`
+
+Classification:
+- Source notebook: `C1_NOTEBOOK_PROVENANCE`.
+- Archive: `C2_BOUNDED_NOTEBOOK_OUTPUT_WITH_LIMITATIONS` after governed induction.
+- Internal manifest: present and executed; 527 organizations, 2,016 projection rows, and 15,810 perturbation rows.
+- Operational representation: organization candidates and reference-resolved distinction density over the bounded Notebook 16 symbolic domain.
+
+Canonical routing:
+- Review: `outputs/analysis_intake/review_MPF_SIM_ORGANIZATION_RESOLUTION_CALCULUS_001.md`
+- Queue entries: `IQ_2026_07_23_027` and `IQ_2026_07_23_028`
+- Induction records: `MPF_SIM_ORGANIZATION_RESOLUTION_CALCULUS_001` and `MPF_SIM_ORGANIZATION_RESOLUTION_CALCULUS_RESULTS_001`
+- Archive registry ID: `COLAB_ARCHIVE_MPF_SIM_ORGANIZATION_RESOLUTION_CALCULUS_RESULTS_20260723_001`
+
+Active blockers:
+- distinct immutable pre-execution specification is missing,
+- projection monotonicity has counterexamples for every candidate,
+- primitive preservation is not testable from supplied class coverage,
+- perturbation-level organization/density deltas are unavailable,
+- approved-tool replication pending and promotion above C2 blocked.
+
 ---
 
 ## Dependencies on Global Core
