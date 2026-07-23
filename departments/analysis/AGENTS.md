@@ -15,7 +15,7 @@ It is subordinate to:
 
 ## 1. Local Role
 
-The Analysis Department converts governed state into deterministic recommendations.
+The Analysis Department converts governed state and authorized research evidence into reproducible analysis, synthesis, hypotheses, and deterministic recommendations.
 
 It is a read-only analysis layer. It does not own promotion authority, execution authority, or registry mutation authority.
 
@@ -28,7 +28,10 @@ Agents working here must:
 - keep recommendation ordering reproducible from the same governed state,
 - prefer live ledgers and audit artifacts over speculative reconstruction,
 - report gaps, blockers, and mapping failures explicitly,
-- keep recommendations bounded to the recorded program state.
+- keep recommendations bounded to the recorded program state and evidence scope.
+- inspect and classify all relevant debt, obligations, proof gaps, empirical results, negative results, contradictions, and unresolved questions.
+- synthesize cross-domain relationships only with an explicit mapping, preserved structure, uncertainty, and falsification condition.
+- record new hypotheses as noncanonical candidates with epistemic and proof status.
 
 ## 3. Must Not
 
@@ -45,7 +48,7 @@ Agents working here must not:
 
 Governed registries define current executable state.
 
-The Analysis Department summarizes that state, identifies dependencies, and produces ordered recommendations only.
+The Analysis Department summarizes that state, identifies dependencies, synthesizes evidence, produces bounded hypotheses and research campaigns, and produces ordered recommendations. It does not execute those recommendations or promote their conclusions.
 
 If a request asks for execution, repair, or promotion rather than analysis, route it to the appropriate governed authority.
 
@@ -53,7 +56,8 @@ If a request asks for execution, repair, or promotion rather than analysis, rout
 
 For substantive analysis-facing outputs, include:
 1. source artifact set,
-2. derived recommendation or dependency rule,
-3. support level or confidence,
-4. blocking condition if any,
-5. what the recommendation does not authorize.
+2. debt and obligation inventory,
+3. synthesis, hypothesis, or dependency rule,
+4. support level, epistemic status, and proof status,
+5. blocking condition or falsification condition,
+6. what the output does not authorize.

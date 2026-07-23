@@ -14,6 +14,15 @@ This file is subordinate to the repository `AGENTS.md`, repository `GEMINI.md`, 
 
 Analyze authorized database knowledge to discover, construct, test, classify, and preserve theorem candidates, proofs, proof obligations, lemmas, corollaries, definitions, concepts, equivalences, invariants, conservation candidates, contradictions, hidden assumptions, missing distinctions, missing types and operators, unexplained results, counterexamples, falsification conditions, unresolved questions, and bounded research campaigns.
 
+The objective is organized, reviewable knowledge. Crawl is not limited to governance bookkeeping. It must analyze the full authorized corpus and synthesize:
+
+- all open, acknowledged, scheduled, active, and unresolved debt;
+- proof obligations, lemmas, theorem gaps, counterexamples, and missing assumptions;
+- simulation outputs, notebook archives, empirical anomalies, negative results, and reproducibility limits;
+- lexicon, notation, type, operator, domain, and dependency gaps;
+- cross-department relationships and structurally comparable results;
+- new definitions, concepts, invariants, equivalences, falsification targets, hypotheses, and bounded research campaigns.
+
 The objective is organized, reviewable knowledge. The agent does not attempt to finish the theory and does not promote discoveries by persuasion, repetition, elegance, or internal consistency.
 
 ## Governing Principle
@@ -37,6 +46,12 @@ The agent must preserve the repository's core inseparable principle and non-occl
 Read all authorized theory-relevant objects and their relationships, including canonical definitions, axioms, primitives, operators, propositions, theorem and proof registries, lemmas, counterexamples, simulation results, notebooks, experiment reports, falsification reports, concept and terminology registries, dependency graphs, contradiction ledgers, unresolved questions, superseded objects, historical versions, and governance decisions.
 
 Use live registries and recoverable evidence paths as authority. Include superseded material when the campaign scope requests historical or contradiction analysis, and preserve its status rather than silently treating it as current.
+
+## Crawl Coverage
+
+Every crawl must inspect more than current governance state. The scope must include, where present, the debt registries, proof and theorem artifacts, mathematical notes, experiment specifications, notebooks and result archives, manifests and hashes, empirical claim ledgers, falsification reports, unresolved-structure queues, lexicon records, textbook sections, department SSOTs, and historical or superseded objects relevant to the selected question. The crawl must connect evidence to obligations and obligations to candidate explanations.
+
+For each material debt or obligation, record its owner, source, dependency, evidence state, claim ceiling, blocking effect, and recommended discharge path. For each synthesis, state the mapping, preserved structure, uncertainty, competing explanation, and falsification condition. New hypotheses are required outputs when the corpus supports them, but they remain `CONJECTURED` or `SPECULATIVE` until governed evidence changes their status.
 
 ## Write Boundary
 
@@ -174,4 +189,4 @@ The minimum department answer structure remains authoritative: source artifact s
 
 ## Success Condition
 
-The crawl succeeds when it proves something, makes an obligation explicit, disproves something, exposes an assumption, identifies a necessary concept, connects previously isolated evidence, reduces uncertainty, defines a falsifiable experiment, improves dependency structure, prevents an invalid inference, or opens a well-formed research frontier. Candidate volume alone is not success.
+The crawl succeeds when it proves something, makes an obligation explicit, discharges or sharply bounds debt, disproves something, exposes an assumption, identifies a necessary concept, connects previously isolated evidence, synthesizes a defensible new hypothesis, reduces uncertainty, defines a falsifiable experiment, improves dependency structure, prevents an invalid inference, or opens a well-formed research frontier. Candidate volume alone is not success.

@@ -10,7 +10,7 @@ The Analysis Department is subordinate to the global core, global governance, an
 
 ## Department Charter
 
-The Analysis Department exists to transform governed state into governed recommendations.
+The Analysis Department exists to transform governed state and authorized research evidence into governed analysis, synthesis, hypotheses, and recommendations.
 
 Boundary rule:
 
@@ -30,6 +30,10 @@ No analysis recommendation may be issued without citing the live artifact set it
 - critical-path identification,
 - priority ranking,
 - governance-gap detection,
+- research-debt and proof-obligation inventory,
+- empirical, notebook, result-archive, and negative-result synthesis,
+- contradiction, anomaly, missing-structure, and cross-domain mapping analysis,
+- hypothesis and bounded research-campaign generation,
 - recommendation synthesis,
 - reproducible state summaries.
 
@@ -39,6 +43,8 @@ No analysis recommendation may be issued without citing the live artifact set it
 - promoting theorem, proof, lemma, or governance state,
 - inventing unmet dependencies,
 - replacing source ledgers with analytic projections.
+
+Analysis may discover and propose noncanonical objects. It may not promote them. Every hypothesis must carry an epistemic status, evidence set, assumptions, competing explanation, and falsification condition.
 
 ### Claim Ceiling
 Unless separately validated, Analysis Department outputs are capped at:
@@ -95,6 +101,8 @@ All Analysis Department outputs must distinguish:
 2. normalization or dependency rule,
 3. recommendation class,
 4. confidence or support level.
+
+For crawl campaigns, also distinguish debt and obligation inventory, empirical result versus interpretation, hypothesis versus derivation, proof status, unresolved frontier, and required next evidence.
 
 Interpretive boilerplate:
 
