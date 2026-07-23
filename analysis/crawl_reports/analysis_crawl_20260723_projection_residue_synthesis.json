@@ -1,0 +1,126 @@
+{
+  "campaign_id": "CAMPAIGN_ANALYSIS_CRAWL_20260723_002",
+  "agent_role": "RT_AGENT_INFINITE_THEORY_ANALYST",
+  "mode": "crawl",
+  "scope": {
+    "domains": ["mathematics", "colab", "research", "governance"],
+    "object_ids": [
+      "NB18_DOMAIN_PROJECTION_RESIDUE_RESULTS_001",
+      "NB19_EXCLUSION_GENERATES_RESIDUE_RESULTS_001",
+      "NB20_DISTINCTION_CONSERVATION_EXCLUSION_DYNAMICS_RESULTS_001",
+      "D_SEMANTICS_OBLIGATION_REGISTRY_001",
+      "SEA_CALC_EXECUTABLE_EVIDENCE_AUDIT_RERUN_2026_07_21",
+      "APPENDIX_F_OBLIGATION_REDUCTION_001",
+      "OPEN_BRIDGE_PROOF_OBLIGATION_REGISTRY"
+    ],
+    "include_superseded": true
+  },
+  "source_artifact_set": [
+    "departments/analysis/GEMINI.md",
+    "departments/colab/results/findings18.json",
+    "departments/colab/results/RT_Notebook_18_outputs.zip",
+    "departments/colab/results/RT_Notebook_19_outputs.zip",
+    "departments/colab/results/RT_Notebook_20_outputs.zip",
+    "registry/governance/patches/NB18_DOMAIN_PROJECTION_RESIDUE_RESULTS_001.json",
+    "registry/governance/patches/NB19_EXCLUSION_GENERATES_RESIDUE_RESULTS_001.json",
+    "registry/governance/patches/NB20_DISTINCTION_CONSERVATION_EXCLUSION_DYNAMICS_RESULTS_001.json",
+    "registry/math/d_semantics_obligation_registry.json",
+    "outputs/audits/calculus_executable_evidence_audit_rerun_2026_07_21.json",
+    "outputs/audits/appendix_f_obligation_reduction_001.json",
+    "registry/math/open_bridge_proof_obligation_registry.json"
+  ],
+  "normalization_rule": "Notebook results are C2 bounded model evidence; formal registries define proof obligations; failed executable-evidence audits remain failures and are not repaired by consistency with notebook outputs.",
+  "findings": [
+    {
+      "discovery_id": "DISCOVERY_CRAWL_20260723_004",
+      "discovery_class": "INVARIANT_CANDIDATE",
+      "title": "Projection preserves coarse signature while permitting residue",
+      "statement": "Across Notebook 18's bounded projection model, a primitive signature can be retained while the projection emits residue and multiple organizations can share a resolution; this supports a candidate separation between invariant preservation and full information preservation.",
+      "formal_statement": "I_D(x)=I_D(y) does not imply x=y or R_D(x)=R_D(y) for a projection Pi_D unless injectivity and residue-completeness are separately established.",
+      "epistemic_status": "PARTIALLY_SUPPORTED",
+      "proof_status": "OBLIGATIONS_IDENTIFIED",
+      "supporting_evidence_ids": ["NB18_DOMAIN_PROJECTION_RESIDUE_RESULTS_001", "OBL-D-001D", "OBL-D-001E"],
+      "counterexample_search": {"performed": true, "method": ["Notebook 18 resolution degeneracy and path comparison scaffold"], "result": "bounded degeneracy and path dependence reported"},
+      "falsification_conditions": ["A governed model shows projection image plus declared domain determines all admissible residue without history or additional context."],
+      "canonical_promotion_allowed": false,
+      "human_review_required": true
+    },
+    {
+      "discovery_id": "DISCOVERY_CRAWL_20260723_005",
+      "discovery_class": "THEOREM_CANDIDATE",
+      "title": "Distinction conservation is weaker than residue determinacy",
+      "statement": "Notebook 20 did not falsify distinction conservation in its tested model class, but strong residue determination was falsified by 478 matched-exclusion counterexamples; therefore conservation of a distinction measure should not be treated as sufficient to determine residue.",
+      "formal_statement": "Conservation_D(x_t)=Conservation_D(x_0) does not entail R(x_t)=f(Conservation_D(x_t)) for a single-valued f over the tested class.",
+      "epistemic_status": "EMPIRICALLY_SUPPORTED",
+      "proof_status": "COUNTEREXAMPLE_FOUND",
+      "supporting_evidence_ids": ["NB20_DISTINCTION_CONSERVATION_EXCLUSION_DYNAMICS_RESULTS_001"],
+      "conflicting_evidence_ids": [],
+      "counterexample_search": {"performed": true, "method": ["matched exclusion counterexample search"], "result": "478 counterexamples to strong residue-determination form"},
+      "falsification_conditions": ["Independent replication shows the 478 cases arise from a bookkeeping defect or that residue is uniquely determined after a correctly specified partition/history variable is included."],
+      "canonical_promotion_allowed": false,
+      "human_review_required": true
+    },
+    {
+      "discovery_id": "DISCOVERY_CRAWL_20260723_006",
+      "discovery_class": "GENERALIZATION_CANDIDATE",
+      "title": "History-augmented projection law",
+      "statement": "A more defensible continuation model may require residue to be parameterized by projection context and exclusion history rather than by the projected image alone.",
+      "formal_statement": "R_{D,t}=F(Pi_D(x_t), H_{exclusion,t}, C_t), where H_exclusion and C_t are explicit typed inputs and F is not assumed injective or universal.",
+      "epistemic_status": "CONJECTURED",
+      "proof_status": "OBLIGATIONS_IDENTIFIED",
+      "dependency_ids": ["OBL-D-001A", "OBL-D-001B", "OBL-D-001C", "OBL-D-001D", "OBL-D-001E"],
+      "falsification_conditions": ["Matched cases with identical projected image, context, and exclusion history but different residue remain after independent replication."],
+      "recommended_next_action": "Design a bounded Notebook 21 or formal fixture that varies projection image, context, and exclusion history independently, with immutable pre-execution specification and registered archive.",
+      "canonical_promotion_allowed": false,
+      "human_review_required": true
+    },
+    {
+      "discovery_id": "DISCOVERY_CRAWL_20260723_007",
+      "discovery_class": "EMPIRICAL_ANOMALY",
+      "title": "Executable calculus evidence remains incomplete",
+      "statement": "The executable-evidence rerun is marked FAIL with 29 not-implemented validators, two inconclusive results, and two critical worktree-evidence failures; notebook consistency does not discharge this implementation debt.",
+      "epistemic_status": "SOURCE_REPORTED",
+      "proof_status": "FAILED",
+      "supporting_evidence_ids": ["SEA_CALC_EXECUTABLE_EVIDENCE_AUDIT_RERUN_2026_07_21"],
+      "recommended_next_action": "Treat executable-evidence completeness as a separate repair campaign and do not use C2 notebook outputs to claim calculus implementation validation.",
+      "canonical_promotion_allowed": false,
+      "human_review_required": true
+    }
+  ],
+  "debt_and_obligations": [
+    {"id": "DEBT_D_SEMANTICS_PROOF_001", "status": "open", "impact": "blocks D-semantics theorem promotion"},
+    {"id": "OBL-D-001A", "status": "open", "requirement": "Eval_D domain and codomain"},
+    {"id": "OBL-D-001B", "status": "open", "requirement": "context threshold"},
+    {"id": "OBL-D-001C", "status": "open", "requirement": "typed transition preservation"},
+    {"id": "OBL-D-001D", "status": "open", "requirement": "representable distinction preservation"},
+    {"id": "OBL-D-001E", "status": "open", "requirement": "non-collapse boundary"},
+    {"id": "EXECUTABLE_EVIDENCE_AUDIT_20260721", "status": "failed", "impact": "implementation validation remains incomplete"}
+  ],
+  "results": {
+    "objects_analyzed": 13,
+    "theorem_candidates": 1,
+    "lemma_candidates": 0,
+    "proof_gaps": 1,
+    "concept_candidates": 0,
+    "contradictions": 0,
+    "counterexamples": 1,
+    "research_campaigns": 1,
+    "duplicates_rejected": 0,
+    "empirical_anomalies": 1,
+    "open_obligations": 7
+  },
+  "frontier": {
+    "open_branches": ["Formalize the history-augmented projection law.", "Discharge OBL-D-001A through OBL-D-001E.", "Repair executable-evidence validators and rerun failed gates."],
+    "blocked_branches": ["Promotion above C2 for Notebooks 18-20.", "D-semantics theorem promotion."],
+    "deferred_branches": ["External physical interpretation of projection or residue."]
+  },
+  "termination_reason": "Bounded corpus pass produced four non-duplicate discoveries and identified a focused frontier linking projection residue, exclusion history, D semantics, and executable-evidence debt.",
+  "continuation_token": "CRAWL_FRONTIER_PROJECTION_RESIDUE_HISTORY_001",
+  "what_this_does_not_authorize": [
+    "It does not promote the conservation candidate to a theorem.",
+    "It does not establish universal projection or residue semantics.",
+    "It does not treat C2 notebook outputs as formal proof or implementation validation.",
+    "It does not close any debt or proof obligation."
+  ],
+  "created_at": "2026-07-23T19:45:00Z"
+}
