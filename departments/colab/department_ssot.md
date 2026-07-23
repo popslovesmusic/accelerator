@@ -186,6 +186,33 @@ Active blockers:
 - perturbation-level organization/density deltas are unavailable,
 - approved-tool replication pending and promotion above C2 blocked.
 
+### NOTEBOOK_18_DOMAIN_PROJECTION_RESIDUE_2026_07_23
+
+Source bundle: `departments/colab/notebook_designs/notebook_18_domain_projection_primitive_hierarchy/`
+
+Result archive: `departments/colab/results/RT_Notebook_18_outputs.zip`
+
+Classification:
+- Source bundle: `C1_NOTEBOOK_PROVENANCE`.
+- Archive: `C2_BOUNDED_NOTEBOOK_OUTPUT_WITH_LIMITATIONS` after governed induction.
+- Internal manifest: present and executed; seed `180018`, 1,217,346 projection records, and 11,762 strong projections.
+- Result scope: bounded falsification of information, structural, reference, and typed residue criteria.
+
+Canonical routing:
+- Review: `outputs/analysis_intake/review_NB18_DOMAIN_PROJECTION_RESIDUE_001.md`
+- Reconstructed specification: `departments/colab/notebook_designs/notebook_18_domain_projection_primitive_hierarchy/experiment_spec.reconstructed.json`
+- Reconstruction manifest: `departments/colab/notebook_designs/notebook_18_domain_projection_primitive_hierarchy/experiment_spec.reconstruction_manifest.json`
+- Design narrative: `departments/colab/notebook_designs/notebook_18_domain_projection_primitive_hierarchy/notebook_18_design.md`
+- Queue entries: `IQ_2026_07_23_029` and `IQ_2026_07_23_030`
+- Induction records: `NB18_DOMAIN_PROJECTION_RESIDUE_001` and `NB18_DOMAIN_PROJECTION_RESIDUE_RESULTS_001`
+- Archive registry ID: `COLAB_ARCHIVE_NB18_DOMAIN_PROJECTION_RESIDUE_RESULTS_20260723_001`
+
+Active blockers:
+- specification is reconstructed after execution and does not satisfy the immutable pre-execution C2 gate,
+- information, structural, and reference criteria have bounded zero-residue counterexamples,
+- typed non-falsification is partly definition-dependent,
+- finite model class, deterministic stratification above the safety threshold, operational residue vector, approved-tool replication pending, and promotion above C2 blocked.
+
 ---
 
 ## Dependencies on Global Core
