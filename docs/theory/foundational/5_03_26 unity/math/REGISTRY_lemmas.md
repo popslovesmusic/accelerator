@@ -101,7 +101,7 @@ L127 | Evaluation-Governance Homomorphism | None | provisional | defines the hom
 L128 | Braid Projection Functor | None | provisional | defines the covariant functor mapping relational graphs to topological braids
 L129 | Braid Confinement Stability | L128 | provisional | proves that braid closures map to stable persistent relational basins
 L130 | Polarity Closure Binding | None | provisional | defines the nested equivalence between primary constraint realization and sign polarities
-
+L131 | Local D Evaluation and Projection Semantics | L112, L113, OBJ-AE-010, OBJ-PID-010, OBJ-DSTAR-010 | conditional | defines context-indexed Eval_D and the typed projection route to D(*|*)
 
 
 

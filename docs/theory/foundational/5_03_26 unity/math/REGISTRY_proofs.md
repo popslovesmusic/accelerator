@@ -54,7 +54,7 @@ P121 | Evaluation-Governance Homomorphism Proof | L127 | restricted_local_argume
 P122 | Braid Projection Proof | L128 | restricted_local_argument_only | Bounded justification of functorial braid projection under L128
 P123 | Braid Confinement Proof | L129 | restricted_local_argument_only | Bounded justification of braid closure stability under L129
 P124 | Polarity Closure Proof | L130 | restricted_local_argument_only | Bounded justification of nested polarity equivalence under L130
-
+P125 | D Typed Projection Transition Obligations | L131, L113, OBJ-PID-010, OBJ-DSTAR-010 | scaffold_pending_discharge | records the typed transition premises and falsification vectors for D projection
 
 
 

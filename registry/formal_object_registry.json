@@ -3900,6 +3900,48 @@
       "symbol": "FailRecFix(C)",
       "canonical_form": "FailRecFix(C) := classified failure state when the recursive/fixed-point interaction cannot be typed, bounded, or compared under the declared regime",
       "formal_definition": "The failure state produced when recursive/fixed-point interaction cannot be typed, bounded, or evaluated under the declared regime."
+    },
+    {
+      "object_id": "OBJ-EVAL-D-131",
+      "object_class": "operator",
+      "title": "Context-Indexed D Evaluation",
+      "status": "conditional",
+      "source_bindings": ["docs/theory/foundational/5_03_26 unity/math/lemmas/L131_d_evaluation_and_projection_semantics.md", "docs/theory/foundational/5_03_26 unity/math/notes/0010_d_semantics_proof_todo.md"],
+      "dependency_links": ["OBJ-vertical-bar", "OBJ-AE-010"],
+      "claim_scope": "local",
+      "governance_bindings": ["charter_v2.3"],
+      "runtime_visibility": true,
+      "symbol": "Eval_D,C",
+      "canonical_form": "Eval_D,C(A|B)",
+      "formal_definition": "A partial, context-indexed evaluation relation over a well-typed participation expression. Its domain, codomain, and threshold parameter remain open obligations."
+    },
+    {
+      "object_id": "OBJ-PROOF-D-125",
+      "object_class": "proof",
+      "title": "D Typed Projection Transition Obligations",
+      "status": "scaffold_pending_discharge",
+      "source_bindings": ["docs/theory/foundational/5_03_26 unity/math/proofs/P125_d_typed_projection_transition_obligations.md"],
+      "dependency_links": ["OBJ-PID-010", "OBJ-DSTAR-010", "OBJ-EVAL-D-131"],
+      "claim_scope": "local",
+      "governance_bindings": ["charter_v2.3"],
+      "runtime_visibility": true,
+      "symbol": "A|E ->p Pi_D(A|E) -> D(*|*)",
+      "canonical_form": "Typed_AE(A|E) and Defined(Pi_D,C) and Binding(Pi_D(A|E),D(*|*))",
+      "formal_definition": "A bounded proof scaffold recording premises and falsification vectors required before the typed D projection transition can be treated as discharged."
+    },
+    {
+      "object_id": "OBJ-OBL-D-001",
+      "object_class": "proof_obligation",
+      "title": "D Projection Semantic Obligations",
+      "status": "open",
+      "source_bindings": ["docs/theory/foundational/5_03_26 unity/math/lemmas/L131_d_evaluation_and_projection_semantics.md", "docs/theory/foundational/5_03_26 unity/math/proofs/P125_d_typed_projection_transition_obligations.md"],
+      "dependency_links": ["OBJ-EVAL-D-131", "OBJ-PID-010", "OBJ-DSTAR-010"],
+      "claim_scope": "local",
+      "governance_bindings": ["charter_v2.3"],
+      "runtime_visibility": true,
+      "symbol": "OBL-D-001",
+      "canonical_form": "TypeSafety + DomainCodomain + Preservation + NonCollapse",
+      "formal_definition": "Open obligations covering explicit Eval_D domain/codomain, context-dependent epsilon_a, typed transition preservation, representable-distinction preservation, and non-collapse counterexamples."
     }
   ],
   "registry_bindings": [
@@ -3918,6 +3960,10 @@
     {
       "registry": "registry/claim_support_matrix.json",
       "object_class": "claim"
+    },
+    {
+      "registry": "registry/math/d_semantics_obligation_registry.json",
+      "object_class": "proof_obligation"
     }
   ]
 }
