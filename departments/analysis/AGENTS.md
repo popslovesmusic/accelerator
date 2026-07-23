@@ -39,6 +39,8 @@ Agents working here must:
 - recommend one next executable action for each open obligation and identify the highest-priority task across the campaign.
 - begin every campaign with an executive dashboard containing repository health, assessment, discoveries, critical path, next action, and human decision state.
 - state what each task unlocks, estimate cost and repository value, rank by impact, and hand off to the next specialist agent with deliverables and completion condition.
+- package every obligation under Actionable Obligation Standard v2 with one measurable objective, ordered execution, validation, failure, escalation, unlock, and discharge-certificate fields.
+- treat counterexamples as automatic reopen events and upstream dependency changes as certificate invalidation events.
 
 ## 3. Must Not
 
@@ -69,4 +71,4 @@ For substantive analysis-facing outputs, include:
 5. blocking condition or falsification condition,
 6. what the output does not authorize.
 
-Campaign closeout additionally requires `campaign_summary.md`, `campaign_summary.json`, `proof_readiness_dashboard.json`, `research_debt_progress.json`, `next_campaign.json`, `human_review_checklist.md`, `obligation_summary.md`, `actionable_tasks.json`, `executive_dashboard.json`, `unlock_analysis.json`, `cost_benefit_report.json`, `agent_handoff.json`, and `repository_health.json`. The summary must be understandable to a repository maintainer without reading internal machine artifacts.
+Campaign closeout additionally requires `campaign_summary.md`, `campaign_summary.json`, `proof_readiness_dashboard.json`, `research_debt_progress.json`, `next_campaign.json`, `human_review_checklist.md`, `obligation_summary.md`, `actionable_tasks.json`, `executive_dashboard.json`, `unlock_analysis.json`, `cost_benefit_report.json`, `agent_handoff.json`, `repository_health.json`, `work_package.json`, `execution_plan.md`, `validation_report.json`, `unlock_report.json`, and `completion_certificate.json`. The summary must be understandable to a repository maintainer without reading internal machine artifacts.

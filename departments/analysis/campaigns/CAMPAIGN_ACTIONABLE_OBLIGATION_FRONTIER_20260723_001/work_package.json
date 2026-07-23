@@ -1,0 +1,15 @@
+{
+  "standard": "ACTIONABLE_OBLIGATION_STANDARD_V2",
+  "campaign_id": "CAMPAIGN_ACTIONABLE_OBLIGATION_FRONTIER_20260723_001",
+  "source_work_package": "../CAMPAIGN_D_SEMANTICS_THEORY_CRAWL_20260723_002/work_package.json",
+  "objective": "Verify and route the existing D obligation work packages without discharging them.",
+  "execution_steps": [{"step": 1, "description": "Check contract completeness."}, {"step": 2, "description": "Rank the D work packages by unlock value."}, {"step": 3, "description": "Hand off TASK-D-001A to the proof obligation manager."}],
+  "expected_deliverables": [{"artifact": "frontier compliance report", "required": true}, {"artifact": "agent handoff", "required": true}],
+  "validation": {"acceptance_tests": ["All D work packages are present", "Highest-value task is identified"], "required_reviews": ["human review"], "mechanized_checks": ["contract completeness check"], "simulation_checks": []},
+  "success_definition": "The frontier is classified and routed without claiming obligation discharge.",
+  "failure_conditions": ["Any D obligation lacks a complete work package", "ranking is not reproducible"],
+  "unlocks": {"proofs": [], "theorems": [], "definitions": [], "campaigns": ["CAMPAIGN_D_EVAL_TYPES_FORMALIZATION_001"], "repository_objects": ["TASK-D-001A-DEFINE-EVAL-TYPES"]},
+  "recommended_agent": "RT_AGENT_PROOF_OBLIGATION_MANAGER",
+  "escalation": {"if_blocked": "Human review", "if_contradiction_found": "Preserve contradiction and stop routing", "if_counterexample_found": "Reopen affected obligation"},
+  "completion_state": {"status": "OPEN", "completion_percent": 100}
+}
