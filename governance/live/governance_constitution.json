@@ -2,7 +2,7 @@
   "constitution_id": "MPF_GOVERNANCE_CONSTITUTION_V1",
   "schema_version": "1.0.0",
   "authority": "Global Governance",
-  "last_updated": "2026-07-02",
+  "last_updated": "2026-07-23",
   "rules": [
     {
       "id": "GOV-LIVE-001",
@@ -42,12 +42,24 @@
         "Department SSOTs are mandatory for department-owned modification activities.",
         "Department SSOTs define design intent, while governed registries, validators, and audit contracts define executable state."
       ]
+    },
+    {
+      "id": "GOV-CLOSEOUT-001",
+      "title": "Governed Task Commit Closeout Requirement",
+      "statement": [
+        "Every governed task that changes repository state SHALL end with an intentional Git commit before task closeout.",
+        "The commit SHALL be created only after required validation and textbook synchronization are complete.",
+        "The commit SHALL cover the task-scoped governed delta rather than unrelated worktree residue.",
+        "If unrelated dirty state prevents an isolated task-scoped commit, the task SHALL remain open and the blocker SHALL be recorded explicitly in the closeout report or governance ledger.",
+        "Read-only audit tasks are exempt because they do not modify governed state."
+      ]
     }
   ],
   "notes": [
     "This constitution file defines the live-ledger separation rule introduced by MPF_GOV_LIVE_LEDGER_TRANSITION_001.",
     "Historical proposal artifacts remain preserved under governance/specifications/ and their original locations until repository-wide reference cleanup is complete.",
     "The governance-first execution gate introduced on 2026-07-01 temporarily makes governance closure the only admissible program lane until live governance sections are satisfied.",
-    "Department SSOT authority is split from execution authority: design intent comes from Department SSOTs, while runtime truth comes from governed registries and validators."
+    "Department SSOT authority is split from execution authority: design intent comes from Department SSOTs, while runtime truth comes from governed registries and validators.",
+    "Governed change tasks now require a task-scoped Git commit after validation and textbook synchronization; if the commit cannot be isolated safely, the task stays open and the blocker must be recorded."
   ]
 }

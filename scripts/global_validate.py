@@ -16,6 +16,8 @@ PROJECT_ROOT = SCRIPT_DIR.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
+from scripts.validation.validate_textbook_projection_freshness import TextbookProjectionFreshnessValidator
+
 class RegistryValidator:
     def __init__(self, root_dir, read_only=False):
         self.root = Path(root_dir)
@@ -1105,6 +1107,7 @@ def _build_validation_stage_plan(root, args):
         ("db_validation", DBValidator(root).run),
         ("math_test_provenance_validation", MathTestProvenanceValidator(root).run),
         ("math_program_validation", lambda: MathProgramValidator(root, full_report=args.full_math_program).run()),
+        ("textbook_projection_freshness_validation", lambda: TextbookProjectionFreshnessValidator(root).run()),
         ("implementation_validation", ImplementationValidator(root).run),
         ("evidence_validation", EvidenceValidator(root).run),
         ("campaign_validation", CampaignValidator(root).run),
@@ -1144,12 +1147,14 @@ def _selected_stage_names(mode):
             "evidence_validation",
             "campaign_validation",
             "math_test_provenance_validation",
+            "textbook_projection_freshness_validation",
         }
     if mode == "governance_only":
         return {
             "registry_validation",
             "db_runtime_validation",
             "patch_chain_validation",
+            "textbook_projection_freshness_validation",
         }
     if mode == "patch_chain_only":
         return {"patch_chain_validation"}
@@ -1160,6 +1165,7 @@ def _selected_stage_names(mode):
             "math_validation",
             "math_test_provenance_validation",
             "math_program_validation",
+            "textbook_projection_freshness_validation",
         }
     return {
         "unified_manifest_validation",
@@ -1170,6 +1176,7 @@ def _selected_stage_names(mode):
         "db_validation",
         "math_test_provenance_validation",
         "math_program_validation",
+        "textbook_projection_freshness_validation",
         "implementation_validation",
         "evidence_validation",
         "campaign_validation",
@@ -1198,6 +1205,8 @@ def _build_governed_stage_policy(mode, stage_plan_names):
         policy["engine_validation"]["conditionally_applicable"] = True
     if "math_program_validation" in policy:
         policy["math_program_validation"]["work_expectation"] = "REQUIRED"
+    if "textbook_projection_freshness_validation" in policy:
+        policy["textbook_projection_freshness_validation"]["work_expectation"] = "REQUIRED"
     return policy
 
 
@@ -1607,6 +1616,7 @@ def _build_partial_validation_stage_plan(root, args, mode, context):
         ("math_validation", lambda: MathValidator(root, read_only=True).run()),
         ("math_test_provenance_validation", lambda: MathTestProvenanceValidator(root).run()),
         ("math_program_validation", lambda: MathProgramValidator(root, full_report=args.full_math_program).run()),
+        ("textbook_projection_freshness_validation", lambda: TextbookProjectionFreshnessValidator(root).run()),
         ("hygiene_validation", lambda: HygieneValidator(root).run()),
     ]
 
@@ -1626,6 +1636,7 @@ def _build_partial_validation_stage_plan(root, args, mode, context):
             "hash_registry_validation",
             "governance_ledger_validation",
             "patch_record_validation",
+            "textbook_projection_freshness_validation",
         }
     elif mode == "governance_only":
         selected = {
@@ -1638,6 +1649,7 @@ def _build_partial_validation_stage_plan(root, args, mode, context):
             "role_aware_authority_validation",
             "write_boundary_validation",
             "validation_reducer_authority_validation",
+            "textbook_projection_freshness_validation",
         }
     elif mode == "patch_chain_only":
         selected = {"patch_chain_validation"}
@@ -1648,6 +1660,7 @@ def _build_partial_validation_stage_plan(root, args, mode, context):
             "math_validation",
             "math_test_provenance_validation",
             "math_program_validation",
+            "textbook_projection_freshness_validation",
         }
     else:
         selected = {stage_name for stage_name, _ in plan}

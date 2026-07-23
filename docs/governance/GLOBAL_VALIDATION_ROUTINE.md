@@ -185,4 +185,7 @@ The agent must categorize failures into three tiers:
 
 ### 4. Finalization
 After remediation, the agent MUST rerun `python -m scripts.global_validate` to confirm a "pass" status.
+After required validation and textbook synchronization are complete, every governed state-changing task MUST end with an intentional Git commit covering the task-scoped delta before closeout.
+If unrelated dirty state prevents an isolated task-scoped commit, the task remains open and the blocker MUST be recorded explicitly in the closeout report or governance ledger.
+Read-only audit tasks are exempt because they do not modify governed state.
 Any remaining gaps must be added to `lexicon_gap_queue.json` or documented in the project's `MEMORY.md`.

@@ -1,0 +1,85 @@
+{
+  "patch_id": "PATCH_TEXTBOOK_PROJECTION_FRESHNESS_ENFORCEMENT_001",
+  "title": "Textbook Projection Freshness Enforcement",
+  "status": "APPLIED",
+  "applied_on": "2026-07-22T21:30:00-04:00",
+  "type": "governance_validation_and_projection_sync",
+  "mode": "surgical_additive",
+  "authority_effect": "PROJECTION_FRESHNESS_ENFORCEMENT_ONLY",
+  "user_authorization": "please sync textbook and place in governance it is never to be stale",
+  "db_runtime_gate": {
+    "queried_before_patch": true,
+    "initial_state": "stale",
+    "refresh_id": "REFRESH-20260723T011043636727Z",
+    "textbook_decision": "allow_after_refresh",
+    "governance_surface_decision": "defer_to_canonical_fallback",
+    "fallback_applied": true
+  },
+  "purpose": "Make textbook drift machine-detectable and fail closed in governed global validation while synchronizing the textbook's current calculus confidence boundaries.",
+  "modified_surfaces": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "governance/live/textbook_projection_freshness_contract.json",
+    "registry/artifact_role_registry.json",
+    "scripts/validation/validate_textbook_projection_freshness.py",
+    "scripts/global_validate.py",
+    "tests/governance_validation/test_textbook_projection_freshness_contract.py",
+    "registry/governance_change_ledger.json",
+    "registry/governance_hash_registry.json",
+    "registry/governance/patches/PATCH_TEXTBOOK_PROJECTION_FRESHNESS_ENFORCEMENT_001.json"
+  ],
+  "enforced_invariants": [
+    "The textbook is classified as a GENERATED_PROJECTION rather than canonical runtime authority.",
+    "The textbook projection hash must match its governed freshness contract.",
+    "Every declared source dependency hash must match its governed freshness contract.",
+    "The textbook freshness stage is required in full global validation and selected math, governance, and registry validation modes.",
+    "Validation detects drift and fails closed; it never silently rewrites canonical state or Markdown.",
+    "A passing freshness check does not promote theorem status, evidence class, or external validity."
+  ],
+  "textbook_sync": {
+    "status": "SYNCHRONIZED_AND_FRESHNESS_VALIDATED",
+    "qualified_objects": [
+      "THM_PADM_001",
+      "THM_PADM_002",
+      "THM_PADM_003"
+    ],
+    "claim_effect": "NO_PROMOTION",
+    "scope": "freshness, coherence, confidence, and proof-assumption qualification"
+  },
+  "validation_results": {
+    "focused_contract_tests": {
+      "command": "python -m pytest tests/governance_validation/test_textbook_projection_freshness_contract.py -q",
+      "status": "PASS",
+      "summary": "4 passed"
+    },
+    "direct_freshness_validation": {
+      "command": "python scripts/validation/validate_textbook_projection_freshness.py",
+      "status": "PASS",
+      "items_checked": 11
+    },
+    "global_validation": {
+      "command": "python scripts/global_validate.py",
+      "run_id": "GV-20260722T211849.215119-12880",
+      "status": "WARNING_NO_FAILED_STAGES",
+      "textbook_projection_freshness_validation": "PASS",
+      "residual_warning_stages": [
+        "hygiene_validation",
+        "math_program_validation",
+        "report_write"
+      ]
+    },
+    "final_db_snapshot_refresh": {
+      "command": "python scripts/db/snapshot_registries.py",
+      "status": "PASS",
+      "refresh_id": "REFRESH-20260723T012130493162Z",
+      "indexed_registry_count": 7,
+      "missing_registries": []
+    }
+  },
+  "local_governance": {
+    "root_agents_applied": true,
+    "local_gemini_found_and_applied": true,
+    "docs_agents_applied": true,
+    "registry_agents_applied": true,
+    "scripts_agents_applied": true
+  }
+}

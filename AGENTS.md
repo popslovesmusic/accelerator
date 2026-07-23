@@ -55,6 +55,7 @@ Every action must be grounded in the four foundational laws:
     6. Failure modes / uncertainty
 - **Zenodo Standards:** Publications must include a complete archival bundle (Metadata, Manifest, Falsification, Configs, Data).
 - **Textbook Synchronization Rule:** At the end of every governed task, audit `docs/textbook/mono_process_textbook_complete.md` against the task outputs, active registries, and current claim gates. If any linked textbook section is stale, patch it before finalizing the task or explicitly report the remaining mismatch.
+- **Task Commit Closeout Rule:** Every governed task that changes repository state MUST end with an intentional Git commit after required validation and textbook synchronization are complete. If unrelated dirty state prevents an isolated task-scoped commit, the task remains open and the blocker MUST be reported explicitly in the closeout.
 
 ### 4.4 Governance Runtime Gate
 - Before applying patches, changing authority-bearing files, or resolving blocked dependencies, query the DB governance runtime first.
@@ -87,7 +88,8 @@ For every Manual Patch or Maintenance task:
 2. Validate against current Governance (MATH_PROGRAM_NARRATIVE.md).
 3. Apply surgical edits to registries or documentation.
 4. Run `scripts/global_validate.py` to ensure ecosystem integrity.
-5. Report changes, hashes, and validation status.
+5. Create an intentional Git commit for the task-scoped governed delta, or explicitly report the blocker if the commit cannot be isolated safely.
+6. Report changes, hashes, validation status, and commit or blocker disposition.
 
 ## 7. Final Rule
 

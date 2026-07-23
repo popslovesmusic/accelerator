@@ -1,5 +1,17 @@
 # Mono-Process Mathematical Program: End-to-End Textbook Draft
 
+## Governance Projection Metadata
+
+- **Artifact ID:** `MPF-TEXTBOOK-COMPLETE`
+- **Artifact role:** `GENERATED_PROJECTION`
+- **Authority scope:** Human-facing synthesis of the declared governed source set; not agent-operational or theorem-promotion authority.
+- **Freshness contract:** `TEXTBOOK_PROJECTION_FRESHNESS_CONTRACT_001`
+- **Canonical snapshot:** `REFRESH-20260723T012130493162Z`
+- **Projection status:** `current` only while `textbook_projection_freshness_validation` passes.
+- **Claim boundary:** This projection does not independently promote a theorem, lemma, law, lexicon term, proof status, evidence class, or external-validity claim.
+
+Any textbook or declared-source hash mismatch is a synchronization defect. Global validation must fail closed until the textbook and its governance contract are updated together.
+
 ## Table of Contents
 
 ### Chapters
@@ -2047,16 +2059,16 @@ This reduction closes the Appendix F obligation to define the provenance-explici
 
 ---
 
-## 6.5 Formal Closure of the Admissibility Kernel
+## 6.5 Governed Status of the Admissibility Kernel
 
-With the release of **MPF-Core-Minimal v0.1**, the primary logical gaps in the admissibility program have been closed.
+The theorem-status registry currently labels the following three objects `FORMALLY_PROVEN` at `C6_formal_closure`. The synchronized audit does not treat those labels alone as sufficient proof authority because the cited proof note contains premises that are not discharged in the registered source surface. Until that conflict is reviewed, these objects remain registry claims under qualification and cannot transfer C6 status to downstream projections.
 
 1.  **The Admissibility Predicate $P_{\text{adm}}$:** Formally defined as a conjunctive boolean kernel: $P_{adm} = \Gamma_{\mathcal{E}} \land \Gamma_R \land \Gamma_T \land \Gamma_{\mathcal{O}}$ [Source: PADM_GAMMA_SEPARATION_001].
-2.  **Composition and Image Existence:** Formally proven as **THM_PADM_001**. A nonempty admissible image guarantees continuation existence within the Universal Law Schema.
-3.  **Crisis Fork Trigger:** Formally proven as **THM_PADM_002**. Admissibility failure ($\delta_a = \emptyset$) triggers an exhaustive fork between NavT reorientation and 0-state collapse; the repaired Chapter 6.4 provenance note records this fork as a partial section and keeps recovery semantics deferred.
-4.  **Non-Transitivity:** Formally proven as **THM_PADM_003**. Admissibility is strictly non-transitive due to state-dependent residue evolution ($R \to T \to A_{adm}$).
+2.  **Composition and Image Existence (`THM_PADM_001`):** The registered argument depends on an available minimum, which requires a finite admissible set or separately stated compactness/attainment conditions, plus a declared tie-break rule. Those premises are not yet discharged by the registered proof surface.
+3.  **Crisis Fork Trigger (`THM_PADM_002`):** The registered argument is exhaustive only if reorientation is the sole remaining admissible degree of freedom after failure. That premise is not yet discharged by the registered proof surface; recovery semantics remain deferred.
+4.  **Non-Transitivity (`THM_PADM_003`):** The registered counterexample requires distinct residue states and an orientation-sensitive admissibility change. Those witness conditions are not yet discharged by the registered proof surface.
 
-These foundational rules now govern all higher-level topological and physical projections.
+**Current evidence class:** `C1_REGISTRY_STATUS_CONFLICT_REVIEW_REQUIRED`. This qualification does not silently rewrite the theorem-status registry; it blocks unqualified textbook inheritance while proof-source admission, assumptions, and status-namespace semantics are reconciled.
 
 ---
 
@@ -4481,6 +4493,22 @@ The live mathematics proof package is reduced to artifact synchronization and pr
 - **`COLAB_RESULTS_DIRECTORY_ARCHIVE_REGISTRY_001`**: `departments/colab/results/` is the governed Colab output root. Every result zip must be inducted through `registry/induction_registry.json`, bound to `governance/live/induction_queue.json`, and registered in `registry/colab_result_archive_registry.json` before citation, interpretation, or claim review.
 - **Tool boundary:** External Colab scripts are not approved Acellorator tools unless admitted separately through the tool ledger or reimplemented under approved tooling.
 - **Non-claim:** The Colab Department does not promote notebook outputs above C2, does not establish external physical validity, does not treat notebook execution as C5/C6 validation, does not treat directory placement as validation, and does not treat the Notebook 13 design as evidence that topology governs reconvergence.
+
+### F.13 Calculus Freshness, Coherence, and Confidence Audit
+
+**Scope:** This audit evaluates the repository program as a governed calculus specification and its recoverable validation surfaces. It does not evaluate unrestricted mathematical universality or external physical truth.
+
+**Directly observed/defined:** The math-program validator completed 267 cataloged checks with no failed check and a warning-level aggregate. The Lean 4 pilot compiles with no `sorry`; the governed checker reports 13 target theorems, while the source contains 21 theorem declarations when six constructor/regression guards and two additional boundary declarations are included. Notebook 13-15 outputs remain C2 bounded computational or theorem-candidate evidence with recorded limitations.
+
+**Inferred inside the framework:** The repository currently supports local typed continuation, failure, valuation, projection, and bounded topology investigations. It is coherent enough for local theorem development when each result is scoped to its encoded definitions and assumptions.
+
+**External resemblance (analogy only):** The typed operators, partial composition, transition relation, graph invariants, and mechanized pilot resemble elements of formal calculi and transition systems. This resemblance is not identity with an established external calculus.
+
+**What it does not prove:** Current evidence does not establish global closure, confluence, normalization, completeness, universal reconvergence theory, external physics, or implementation-independent universality. `THM_PADM_001` through `THM_PADM_003` retain an explicit status conflict until their assumptions and proof-source registration are reconciled.
+
+**Failure modes / uncertainty:** Canonical root-expression variants remain unresolved across governed artifacts; math-source registry coverage is selective; several validators perform structural or fixture checks rather than independent semantic measurements; runtime/worktree freshness reporting has previously contradicted Git evidence; and missing authority/projection validators remain validation debt. Confidence is high for the recorded command outcomes, moderate for local encoded Lean results, and low for global or external interpretations.
+
+**Freshness enforcement:** This textbook is governed by `TEXTBOOK_PROJECTION_FRESHNESS_CONTRACT_001`. It is current only when its own hash and every declared source hash match the contract and the required `textbook_projection_freshness_validation` stage passes. Validation detects drift but does not silently rewrite either canonical state or this projection.
 
 ---
 **Status:** Items in Section F.1 are active research targets. Resolved bridges are archived in F.4. Failed or superseded bridge formulations are dispositioned in F.5. Section F.7 tracks the measurement rules for active attacks. Section F.8 tracks debt-reduced lexicon obligations. Section F.10 tracks the current mathematics proof-package synchronization state.
