@@ -1,0 +1,101 @@
+{
+  "spec_id": "MPF_SIM_ORGANIZATION_RESOLUTION_CALCULUS_001_RECONSTRUCTED_SPEC",
+  "campaign_id": "MPF_SIM_ORGANIZATION_RESOLUTION_CALCULUS_001",
+  "schema_version": "1.0.0",
+  "status": "POST_EXECUTION_RECONSTRUCTION",
+  "created_at": "2026-07-23T00:00:00Z",
+  "execution_manifest_created_at": "2026-07-23T03:21:34.103568+00:00",
+  "source_notebook": "departments/colab/notebook_designs/notebook_17_organization_resolution_calculus/RT_Notebook_17_Organization_Resolution_Calculus.ipynb",
+  "source_result_archive": "departments/colab/results/MPF_SIM_ORGANIZATION_RESOLUTION_CALCULUS_001_RESULTS.zip",
+  "provenance_warning": "This document reconstructs the declared design and operational settings from the executed notebook and archive. It is not a pre-execution immutable specification and does not cure the campaign's missing-specification blocker.",
+  "research_question": "Does organization remain a distinct, reference-independent operational construct when distinction density is resolved relative to explicit symmetry/reference conditions, and does projection preserve organization monotonically across bounded organizational DoF?",
+  "null_hypothesis": "Organization candidates are redundant with ordinary graph controls or collapse into the selected reference-resolved distinction density; projection is monotone within the bounded domain.",
+  "experimental_hypothesis": "At least one organization candidate retains nonredundant signal after graph controls, distinction density varies with the declared reference condition, and projection monotonicity is only partial or counterexample-bearing within the bounded domain.",
+  "independent_variables": [
+    {
+      "name": "organization_candidate",
+      "values": ["O_L1", "O_L2", "O_MAX", "O_PCA1"],
+      "definition": "Candidate organization score computed from matched-null standardized structural deviations before reference-specific distinction-density resolution."
+    },
+    {
+      "name": "reference_condition",
+      "values": ["S_uniform", "S_depth", "S_boundary", "S_closure"],
+      "definition": "Declared feature-family weighting used to resolve reference-dependent distinction density."
+    },
+    {
+      "name": "organizational_dof",
+      "values": [1, 2, 3, 4, 5, 6],
+      "definition": "Bounded DoF inherited from the Notebook 16 meaningful-result catalog."
+    }
+  ],
+  "dependent_variables": [
+    {
+      "name": "organization_independence",
+      "measurements": ["cross_validated_r2_delta", "balanced_accuracy_delta", "roc_auc_delta"]
+    },
+    {
+      "name": "reference_resolution_variation",
+      "measurements": ["reference_range", "reference_sd", "nonzero_reference_range_rate"]
+    },
+    {
+      "name": "projection_monotonicity",
+      "measurements": ["monotonic_rate", "violation_count", "organization_delta"]
+    },
+    {
+      "name": "robustness_relationship",
+      "measurements": ["spearman_with_retention", "spearman_with_dof"]
+    }
+  ],
+  "controls": [
+    "Use matched-null z-score features from the supplied Notebook 16 meaningful archive.",
+    "Include ordinary graph invariants as control predictors.",
+    "Use fixed seed 170017.",
+    "Use five-fold cross-validation for predictive independence tests.",
+    "Use 1,000 bootstrap repeats where the notebook declares bootstrap analysis.",
+    "Keep the symbolic organization encoding and source catalog fixed.",
+    "Do not interpret organization as a primitive or external physical quantity."
+  ],
+  "random_seed": 170017,
+  "parameter_space": {
+    "source_campaign": "MPF_SIM_PROJECTION_DOF_MEANINGFUL_001",
+    "organization_count": 527,
+    "projection_rows": 2016,
+    "perturbation_rows": 15810,
+    "candidate_metrics": ["O_L1", "O_L2", "O_MAX", "O_PCA1"],
+    "reference_families": {
+      "S_uniform": ["max_depth_graph", "mean_depth_graph", "leaf_fraction", "mean_branching", "max_branching", "degree_entropy", "label_entropy", "unique_label_ratio", "articulation_count", "articulation_fraction", "bridge_count", "bridge_fraction", "cycle_rank", "scc_count", "transitivity"],
+      "S_depth": ["max_depth_graph", "mean_depth_graph", "leaf_fraction", "mean_branching", "max_branching"],
+      "S_boundary": ["articulation_count", "articulation_fraction", "bridge_count", "bridge_fraction"],
+      "S_closure": ["cycle_rank", "scc_count", "transitivity"]
+    }
+  },
+  "termination_conditions": [
+    "Stop after all supplied organization, projection, and perturbation rows are processed.",
+    "Fail if required Notebook 16 input files are absent or the input manifest is not EXECUTED.",
+    "Mark an axiom test NOT_TESTABLE when required class coverage or source vectors are absent.",
+    "Export counterexamples and non-identifiability conditions rather than suppressing them."
+  ],
+  "expected_outputs": [
+    "organization_candidates.csv",
+    "organization_joined_data.csv",
+    "organization_independence_results.csv",
+    "organization_residual_independence.csv",
+    "reference_resolution_table.csv",
+    "projection_axiom_report.csv",
+    "projection_counterexamples.csv",
+    "organization_robustness_relationships.csv",
+    "organization_metric_rankings.csv",
+    "organization_dof_counterexamples.csv",
+    "organization_axiom_tests.json",
+    "decision_record.json",
+    "manifest.json"
+  ],
+  "interpretation_protocol": [
+    "Report organization candidates as operational constructions only.",
+    "Treat reference variation as evidence of reference-dependent resolution, not as proof of a universal reference law.",
+    "Treat positive incremental predictive deltas as bounded nonredundant signal, not causality.",
+    "Treat projection monotonicity violations as counterexamples to strong monotonicity within the tested domain.",
+    "Preserve NOT_TESTABLE, counterexample, and missing-data outcomes.",
+    "Cap the result at C2 bounded notebook output with limitations."
+  ]
+}

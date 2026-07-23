@@ -172,6 +172,9 @@ Classification:
 
 Canonical routing:
 - Review: `outputs/analysis_intake/review_MPF_SIM_ORGANIZATION_RESOLUTION_CALCULUS_001.md`
+- Reconstructed design specification: `departments/colab/notebook_designs/notebook_17_organization_resolution_calculus/experiment_spec.reconstructed.json`
+- Reconstruction manifest: `departments/colab/notebook_designs/notebook_17_organization_resolution_calculus/experiment_spec.reconstruction_manifest.json`
+- Design narrative: `departments/colab/notebook_designs/notebook_17_organization_resolution_calculus/notebook_17_design.md`
 - Queue entries: `IQ_2026_07_23_027` and `IQ_2026_07_23_028`
 - Induction records: `MPF_SIM_ORGANIZATION_RESOLUTION_CALCULUS_001` and `MPF_SIM_ORGANIZATION_RESOLUTION_CALCULUS_RESULTS_001`
 - Archive registry ID: `COLAB_ARCHIVE_MPF_SIM_ORGANIZATION_RESOLUTION_CALCULUS_RESULTS_20260723_001`
