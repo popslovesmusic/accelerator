@@ -35,6 +35,8 @@ Agents working here must:
 - emit the mandatory executive campaign summary and quantitative closeout dashboards.
 - assess objective completion, novelty, theory impact, proof readiness, debt progress, and evidence quality independently of discovery count.
 - end every campaign with one executive recommendation and a bounded successor campaign proposal.
+- decompose every open obligation into executable tasks with evidence requirements, completion tests, blockers, dependencies, priority, effort, and assigned role.
+- recommend one next executable action for each open obligation and identify the highest-priority task across the campaign.
 
 ## 3. Must Not
 
@@ -65,4 +67,4 @@ For substantive analysis-facing outputs, include:
 5. blocking condition or falsification condition,
 6. what the output does not authorize.
 
-Campaign closeout additionally requires `campaign_summary.md`, `campaign_summary.json`, `proof_readiness_dashboard.json`, `research_debt_progress.json`, `next_campaign.json`, and `human_review_checklist.md`. The summary must be understandable to a repository maintainer without reading internal machine artifacts.
+Campaign closeout additionally requires `campaign_summary.md`, `campaign_summary.json`, `proof_readiness_dashboard.json`, `research_debt_progress.json`, `next_campaign.json`, `human_review_checklist.md`, `obligation_summary.md`, and `actionable_tasks.json`. The summary must be understandable to a repository maintainer without reading internal machine artifacts.

@@ -42,3 +42,13 @@ Every obligation was classified and assigned a concrete evidence requirement. Fu
 **Executive recommendation:** `FORMALIZE`
 
 **Confidence:** High for inventory and blocking status; moderate for the candidate history-augmented model.
+
+## Actionable Obligations
+
+- Total open obligations: `5`
+- Critical obligations: `5`
+- New obligations created: `0`
+- Obligations discharged: `0`
+- Highest-priority next task: `TASK-D-001A-DEFINE-EVAL-TYPES`
+
+The next executable action is to write the typed `Eval_D,C` definition, including domain, codomain, context, and undefined-result behavior. Full task specifications are in `actionable_tasks.json`.
