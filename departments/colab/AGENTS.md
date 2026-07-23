@@ -22,6 +22,8 @@ It is an indexing, provenance, and reproducibility-preparation layer. It does no
 
 Agents working here must:
 - preserve notebook, zip, and manifest hashes,
+- register every Colab result zip in `registry/colab_result_archive_registry.json`,
+- bind every Colab result zip to an induction registry entry and induction queue entry before citation,
 - require immutable `experiment_spec.json` records for future C2 notebook/result classifications,
 - classify notebooks separately from result archives,
 - distinguish executed notebook evidence from unexecuted notebook source,
@@ -37,6 +39,8 @@ Agents working here must:
 Agents working here must not:
 - treat `.ipynb` presence alone as simulation evidence,
 - treat result zips without manifests or hashes as C2 evidence,
+- cite or interpret a Colab result zip before archive-registry and induction binding,
+- overwrite a registered result zip in place,
 - edit an `experiment_spec.json` after execution begins instead of creating a superseding specification,
 - approve external Colab scripts as claim-bearing Acellorator tools,
 - promote terms or claims from notebook text alone,
@@ -59,7 +63,9 @@ For substantive Colab-facing outputs, include:
 1. source notebook/archive paths,
 2. hash and manifest state,
 3. experiment specification path and hash, when C2 is requested,
-4. execution/reconstruction status,
-5. evidence class,
-6. claim ceiling,
-7. blockers and non-claims.
+4. result archive registry ID for zips,
+5. induction ID and queue entry ID,
+6. execution/reconstruction status,
+7. evidence class,
+8. claim ceiling,
+9. blockers and non-claims.

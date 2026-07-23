@@ -1,0 +1,154 @@
+{
+  "spec_id": "NB14_GENERIC_TOPOLOGY_FEATURE_ABLATION_001",
+  "schema_version": "1.0.0",
+  "status": "IMMUTABLE_SPEC",
+  "created_at": "2026-07-22T00:00:00Z",
+  "source_notebook": "departments/colab/notebook_designs/notebook_14_feature_ablation/RT_Notebook_14_Generic_Topology_Feature_Ablation.ipynb",
+  "research_question": "Can generic graph-topological invariants classify Notebook 12 reconvergence geometry after excluding near-definitional branch-pair and merge-depth features identified in the Notebook 13 v2 review?",
+  "hypothesis": "If generic graph invariants retain strong predictive performance after removing near-definitional features, then Notebook 14 provides bounded evidence that structural information beyond the label construction is present. If performance collapses, Notebook 14 provides bounded limitation evidence that Notebook 13 v2 success depended on near-definitional topology features.",
+  "independent_variables": [
+    {
+      "name": "generic_topology_feature_family",
+      "definition": "Feature families retained after removing root branch pair count, irreversible separated pair count, irreversible separation flags, and merge-depth quantities derived directly from labeled branch relationships.",
+      "units_or_scale": "feature-family set",
+      "allowed_values_or_range": "SCC structure, condensation DAG, articulation hierarchy, bridge structure, partial-order width, reachability lattice measures, basin decomposition, graph diameter, dominance-tree properties, graph-size controls."
+    },
+    {
+      "name": "feature_ablation_condition",
+      "definition": "A deterministic classifier run using all permitted generic features, one feature family removed, direct-proxy-only controls, or graph-size-only controls.",
+      "units_or_scale": "ablation condition",
+      "allowed_values_or_range": "all_generic | remove_family | graph_size_only | forbidden_proxy_only"
+    }
+  ],
+  "dependent_variables": [
+    {
+      "name": "geometry_class",
+      "definition": "Notebook 12 / Notebook 13 v2 reconvergence geometry label.",
+      "units_or_scale": "categorical",
+      "allowed_values_or_range": "universal_reconvergence | partial_reconvergence | obstruction | invalid_system"
+    },
+    {
+      "name": "balanced_accuracy_delta",
+      "definition": "Change in balanced accuracy relative to the all-generic-feature model when a feature family is removed.",
+      "units_or_scale": "accuracy difference",
+      "allowed_values_or_range": "-1 <= delta <= 1"
+    }
+  ],
+  "controls": [
+    {
+      "name": "forbidden_feature_exclusion",
+      "purpose": "Prevent near-definitional label features from driving the generic topology test.",
+      "implementation": "Exclude root_branch_pair_count, irreversible_separated_pair_count, has_irreversible_separation, merge_depth_min, merge_depth_mean, and merge_depth_max from all generic classifier feature sets."
+    },
+    {
+      "name": "graph_size_only_baseline",
+      "purpose": "Measure how much classification is explained by graph size and simple density.",
+      "implementation": "Run a baseline with node_count and edge_count only."
+    },
+    {
+      "name": "forbidden_proxy_only_baseline",
+      "purpose": "Quantify how much Notebook 13 v2 performance came from near-definitional features.",
+      "implementation": "Run a separate baseline using only the explicitly forbidden proxy features, reported as diagnostic and excluded from generic evidence."
+    },
+    {
+      "name": "feature_family_ablation",
+      "purpose": "Identify which generic topology families carry explanatory information.",
+      "implementation": "Remove one feature family at a time and record delta balanced accuracy."
+    },
+    {
+      "name": "checkpointed_execution",
+      "purpose": "Avoid Colab data loss.",
+      "implementation": "Write reports and intermediate tables immediately to the governed output directory."
+    }
+  ],
+  "random_seed": {
+    "value": 140014,
+    "seed_scope": "train/test split and classifier random state",
+    "derivation_policy": "Fixed before execution; derived seeds must be deterministic functions of 140014 and recorded in output manifests."
+  },
+  "parameter_space": [
+    {
+      "name": "notebook_13_v2_invariant_table",
+      "values_or_range": "All rows in topological_invariants.parquet from departments/colab/results/NB13_TOPOLOGICAL_INVARIANTS_CONTINUATION_GEOMETRY_002.zip",
+      "units_or_scale": "bounded Notebook 13 v2 output domain",
+      "default": "complete table",
+      "sampling_rule": "Use all rows; split only for classifier evaluation."
+    },
+    {
+      "name": "feature_family_set",
+      "values_or_range": "scc, condensation, articulation, bridge, partial_order, reachability, basin, diameter_or_depth, dominance, graph_size",
+      "units_or_scale": "declared feature groups",
+      "default": "all permitted generic families",
+      "sampling_rule": "Deterministic one-family ablation."
+    }
+  ],
+  "termination_conditions": [
+    "Notebook 13 v2 result zip is loaded and its manifest matches the registered archive expectation.",
+    "Forbidden features are absent from every generic classifier feature set.",
+    "All declared feature-family ablations run or report recoverable skip reasons.",
+    "Ablation table, classifier reports, feature manifest, and interpretation note are written.",
+    "No claim stronger than C2 candidate is made before governed result-zip induction."
+  ],
+  "expected_outputs": [
+    {
+      "name": "feature_manifest",
+      "path_pattern": "departments/colab/results/NB14_GENERIC_TOPOLOGY_FEATURE_ABLATION_001/feature_manifest.json",
+      "required": true,
+      "interpretation_role": "Records allowed, forbidden, and family-grouped feature sets."
+    },
+    {
+      "name": "ablation_table",
+      "path_pattern": "departments/colab/results/NB14_GENERIC_TOPOLOGY_FEATURE_ABLATION_001/feature_ablation_results.csv",
+      "required": true,
+      "interpretation_role": "Primary delta-accuracy table by feature family."
+    },
+    {
+      "name": "classification_report",
+      "path_pattern": "departments/colab/results/NB14_GENERIC_TOPOLOGY_FEATURE_ABLATION_001/generic_topology_classification_report.json",
+      "required": true,
+      "interpretation_role": "Reports generic topology performance, graph-size baseline, and forbidden-proxy diagnostic."
+    },
+    {
+      "name": "output_manifest",
+      "path_pattern": "departments/colab/results/NB14_GENERIC_TOPOLOGY_FEATURE_ABLATION_001/manifest.json",
+      "required": true,
+      "interpretation_role": "Binds source archive, seed, outputs, and claim ceiling."
+    }
+  ],
+  "interpretation_protocol": {
+    "claim_ceiling": "C1_SPECIFICATION_ONLY",
+    "decision_rules": [
+      "SUCCESS_C2_CANDIDATE: all-generic topology performance remains strong relative to graph-size-only baseline after forbidden features are excluded.",
+      "LIMITATION_C2_CANDIDATE: generic performance collapses while forbidden-proxy diagnostic remains strong.",
+      "MIXED_C2_CANDIDATE: some generic feature families carry signal, but full performance depends on a small subset or remains close to graph-size controls.",
+      "INCONCLUSIVE: feature mapping, dependency, or source archive issues prevent complete ablation."
+    ],
+    "allowed_interpretations": [
+      "Bounded Notebook 13 v2 follow-up evidence about generic topology-feature signal.",
+      "Bounded limitation evidence if Notebook 13 v2 performance depends on near-definitional features.",
+      "Feature-family prioritization for subsequent approved-tool replication."
+    ],
+    "blocked_interpretations": [
+      "Implementation-independent theory claim before approved-tool replication.",
+      "External physical validation.",
+      "Use of forbidden proxy features as generic topology evidence.",
+      "C5/C6 promotion."
+    ]
+  },
+  "provenance": {
+    "source_paths": [
+      "departments/colab/results/NB13_TOPOLOGICAL_INVARIANTS_CONTINUATION_GEOMETRY_002.zip",
+      "outputs/analysis_intake/review_NB13_TOPOLOGICAL_INVARIANTS_CONTINUATION_GEOMETRY_002.json",
+      "registry/colab_result_archive_registry.json"
+    ],
+    "artifact_hashes": {
+      "departments/colab/results/NB13_TOPOLOGICAL_INVARIANTS_CONTINUATION_GEOMETRY_002.zip": "EA3B19AB161CA77407CB017EC8BE54532802CDF51561064242982D076CF28A15",
+      "outputs/analysis_intake/review_NB13_TOPOLOGICAL_INVARIANTS_CONTINUATION_GEOMETRY_002.json": "EE419E394DC2330AEB01E398406AEF40FBA44B1630583F7F0425F0DD4B99C8C4"
+    }
+  },
+  "immutability": {
+    "frozen_before_execution": true,
+    "content_sha256": "TO_BE_RECORDED_AFTER_NOTEBOOK_CREATION",
+    "supersession_policy": "Do not edit after execution starts; create a new spec_id and link the superseding specification."
+  }
+}

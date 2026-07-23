@@ -1,0 +1,147 @@
+{
+  "spec_id": "NB13_TOPOLOGICAL_INVARIANTS_CONTINUATION_GEOMETRY_001",
+  "schema_version": "1.0.0",
+  "status": "IMMUTABLE_SPEC",
+  "created_at": "2026-07-22T00:00:00Z",
+  "source_notebook": "departments/colab/notebook_designs/notebook_13_topological_invariants/RT_Notebook_13_Topological_Invariants_of_Continuation_Geometry.ipynb",
+  "research_question": "Can topology alone classify universal reconvergence, partial reconvergence, and obstruction across the continuation graphs generated from the bounded Notebook 12 configuration domain?",
+  "hypothesis": "Within the bounded Notebook 12 domain, graph-topological invariants mediate the sequence local mechanisms -> continuation graph topology -> reconvergence geometry -> J. The null is that topology-only invariants fail to classify geometry better than label-frequency and previously recorded scalar-summary baselines.",
+  "independent_variables": [
+    {
+      "name": "continuation_graph_topology",
+      "definition": "Topology-only representation of each regenerated Notebook 12 continuation graph after removing mechanism labels from the classifier feature set.",
+      "units_or_scale": "graph invariant vector",
+      "allowed_values_or_range": "One invariant vector per Notebook 12 factorial configuration."
+    },
+    {
+      "name": "topological_invariant_family",
+      "definition": "Reachability lattice, SCC condensation DAG, basin decomposition, articulation hierarchy, irreversible separation depth, merge depth, partial-order width, dominance tree, and closure lattice.",
+      "units_or_scale": "discrete and numeric invariant families",
+      "allowed_values_or_range": "Declared invariant families only."
+    }
+  ],
+  "dependent_variables": [
+    {
+      "name": "geometry_class",
+      "definition": "Notebook 12 reconvergence geometry label: universal_reconvergence, partial_reconvergence, or obstruction.",
+      "units_or_scale": "categorical",
+      "allowed_values_or_range": "universal_reconvergence | partial_reconvergence | obstruction"
+    },
+    {
+      "name": "J",
+      "definition": "Notebook 12 branch-pair reconvergence fraction.",
+      "units_or_scale": "unit interval",
+      "allowed_values_or_range": "0 <= J <= 1"
+    }
+  ],
+  "controls": [
+    {
+      "name": "label_frequency_baseline",
+      "purpose": "Detect whether topology-only classification exceeds the majority-class or empirical-frequency baseline.",
+      "implementation": "Compare topology-only metrics to stratified dummy classifiers."
+    },
+    {
+      "name": "mechanism_label_exclusion",
+      "purpose": "Prevent mechanism identity from leaking into the topology-only test.",
+      "implementation": "Exclude mask_bits, mechanism booleans, and active_mechanism_count from classifier features."
+    },
+    {
+      "name": "graph_size_control",
+      "purpose": "Detect whether classification is only graph-size proxying rather than invariant structure.",
+      "implementation": "Compare full invariant model against node_count/edge_count/depth-only baselines."
+    },
+    {
+      "name": "config_group_split",
+      "purpose": "Reduce leakage from repeated parameter panels and seed variants.",
+      "implementation": "Evaluate grouped splits by mask_bits and parameter panel where feasible."
+    }
+  ],
+  "random_seed": {
+    "value": 130013,
+    "seed_scope": "train/test splits, randomized classifier baselines, and any randomized dimensionality checks",
+    "derivation_policy": "Fixed before execution; derived seeds must be deterministic functions of 130013 and recorded in output manifests."
+  },
+  "parameter_space": [
+    {
+      "name": "notebook_12_factorial_domain",
+      "values_or_range": "All 13,824 configurations recorded in rt_notebook_12_outputs_results.zip/factorial_results.parquet",
+      "units_or_scale": "bounded external notebook configuration domain",
+      "default": "complete domain",
+      "sampling_rule": "exhaustive enumeration, not subsampling"
+    },
+    {
+      "name": "topology_feature_sets",
+      "values_or_range": "individual invariant family, all families, all minus graph-size controls, and graph-size-only baseline",
+      "units_or_scale": "feature-set partition",
+      "default": "all declared invariant families",
+      "sampling_rule": "fixed comparison set"
+    }
+  ],
+  "termination_conditions": [
+    "All Notebook 12 configurations are processed or each skipped configuration has a recoverable skip reason.",
+    "Invariant tables, classifier reports, counterexample tables, and manifest are written.",
+    "No post-hoc invariant family is added without superseding this specification."
+  ],
+  "expected_outputs": [
+    {
+      "name": "topological_invariant_table",
+      "path_pattern": "results/NB13_TOPOLOGICAL_INVARIANTS_CONTINUATION_GEOMETRY_001/topological_invariants.parquet",
+      "required": true,
+      "interpretation_role": "Primary topology-only invariant table joined to Notebook 12 geometry/J labels."
+    },
+    {
+      "name": "classification_report",
+      "path_pattern": "results/NB13_TOPOLOGICAL_INVARIANTS_CONTINUATION_GEOMETRY_001/topology_classification_report.json",
+      "required": true,
+      "interpretation_role": "Reports whether topology-only features classify geometry above controls inside the bounded domain."
+    },
+    {
+      "name": "counterexample_catalog",
+      "path_pattern": "results/NB13_TOPOLOGICAL_INVARIANTS_CONTINUATION_GEOMETRY_001/topology_counterexamples.json",
+      "required": true,
+      "interpretation_role": "Preserves failures, ambiguous topology signatures, and topology-equivalent graphs with different labels or J values."
+    },
+    {
+      "name": "output_manifest",
+      "path_pattern": "results/NB13_TOPOLOGICAL_INVARIANTS_CONTINUATION_GEOMETRY_001/manifest.json",
+      "required": true,
+      "interpretation_role": "Binds inputs, outputs, hashes, seed, and claim ceiling."
+    }
+  ],
+  "interpretation_protocol": {
+    "claim_ceiling": "C1_SPECIFICATION_ONLY",
+    "decision_rules": [
+      "SUCCESS_C2_CANDIDATE: topology-only invariant families classify geometry with materially better performance than label-frequency and graph-size-only controls under held-out grouped evaluation, and counterexamples are bounded and cataloged.",
+      "PARTIAL_C2_CANDIDATE: topology separates obstruction from non-obstruction or predicts J strata but fails full three-class classification.",
+      "FAILURE_OR_LIMITATION_C2_CANDIDATE: topology-equivalent or near-equivalent signatures produce different geometry/J labels, or performance collapses under grouped controls.",
+      "INCONCLUSIVE: graph regeneration, feature extraction, or dependency constraints prevent complete evaluation."
+    ],
+    "allowed_interpretations": [
+      "Bounded Notebook 12 domain observation about topology-only classification.",
+      "Candidate evidence for or against an implementation-independent continuation-geometry object inside the enumerated domain.",
+      "Negative or limitation evidence if topology fails or admits counterexamples."
+    ],
+    "blocked_interpretations": [
+      "Claim that topology universally governs reconvergence outside the Notebook 12 domain.",
+      "Claim that Notebook 13 validates external physical systems.",
+      "Claim promotion above C2 without approved-tool replication and independent measurements.",
+      "Post-hoc mechanism identification using excluded mechanism labels."
+    ]
+  },
+  "provenance": {
+    "source_paths": [
+      "D:/projects/New folder/RT_Notebook_12_Mechanism_Isolation.ipynb",
+      "D:/projects/New folder/rt_notebook_12_outputs_results.zip",
+      "outputs/analysis_intake/intake_report_NEW_FOLDER_STAGED_INDUCTION_PACKET_2026_07_22.json"
+    ],
+    "artifact_hashes": {
+      "D:/projects/New folder/RT_Notebook_12_Mechanism_Isolation.ipynb": "A0A29F067FEDDDA93AFDA450A499BBB2CF6EF18C1950FE661261EFE4D3E0C20E",
+      "D:/projects/New folder/rt_notebook_12_outputs_results.zip": "7F7C6788C4BE1A77F571A5340D30E15112EC98E5F6877C11B061DA256CE8AF12"
+    }
+  },
+  "immutability": {
+    "frozen_before_execution": true,
+    "content_sha256": "RECORDED_IN_experiment_spec.freeze_manifest.json",
+    "supersession_policy": "Do not edit after execution starts; create a new spec_id and link the superseding specification."
+  }
+}

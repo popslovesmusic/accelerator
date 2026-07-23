@@ -1,0 +1,44 @@
+{
+  "patch_id": "NB13_TOPOLOGICAL_INVARIANTS_COLAB_V2_ORDERED_CHUNKED_001",
+  "title": "Supersede Notebook 13 Colab Scaffold with Ordered Chunked Version",
+  "status": "APPLIED_C1_SPECIFICATION_ONLY",
+  "created_at": "2026-07-22T00:00:00Z",
+  "authority": "Global Governance",
+  "department": "colab",
+  "trigger": "User reported that Notebook 13 would not run in Colab, was not in executable order, may be too large, crashed several times, and lost data.",
+  "supersedes": "NB13_TOPOLOGICAL_INVARIANTS_CONTINUATION_GEOMETRY_001",
+  "new_spec_id": "NB13_TOPOLOGICAL_INVARIANTS_CONTINUATION_GEOMETRY_002",
+  "observed_failure_modes": [
+    "Colab path mismatch for Notebook 12 zip",
+    "runtime reset cleared imports and variables",
+    "cell order sensitivity caused missing function and missing DataFrame names",
+    "incorrect SystemConfig mapping referenced absent Notebook 12 columns such as target_phase",
+    "all-at-once processing lost progress after crash"
+  ],
+  "corrective_design": [
+    "single bootstrap cell for imports, paths, graph reconstruction, and invariant functions",
+    "Colab-visible zip path discovery",
+    "Notebook 12 row mapping restricted to actual columns",
+    "chunked graph processing",
+    "checkpoint files for completed chunks",
+    "aggregation from persisted chunks instead of relying on live memory"
+  ],
+  "claim_ceiling": "C1_SPECIFICATION_ONLY",
+  "created_artifacts": [
+    "departments/colab/notebook_designs/notebook_13_topological_invariants/notebook_13_colab_error_explanation.md",
+    "departments/colab/notebook_designs/notebook_13_topological_invariants/experiment_spec_v2.json",
+    "departments/colab/notebook_designs/notebook_13_topological_invariants/experiment_spec_v2.freeze_manifest.json",
+    "departments/colab/notebook_designs/notebook_13_topological_invariants/RT_Notebook_13_v2_Ordered_Chunked.ipynb",
+    "registry/governance/patches/NB13_TOPOLOGICAL_INVARIANTS_COLAB_V2_ORDERED_CHUNKED_001.json"
+  ],
+  "claim_humility_review": {
+    "status": "passed",
+    "bounded_statement": "This patch explains and repairs a notebook execution scaffold. It does not report Notebook 13 scientific results or promote any topology-governance claim."
+  },
+  "validation_required": [
+    "JSON parse validation",
+    "notebook code-cell parse validation",
+    "scripts/global_validate.py",
+    "DB snapshot refresh"
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "spec_id": "NB15_ARTICULATION_CONTINUATION_GEOMETRY_THEORY_001",
+  "schema_version": "1.0.0",
+  "status": "IMMUTABLE_SPEC",
+  "created_at": "2026-07-22T00:00:00Z",
+  "source_notebook": "departments/colab/notebook_designs/notebook_15_articulation_theory/RT_Notebook_15_Articulation_and_Continuation_Geometry.ipynb",
+  "research_question": "Can articulation structure be mathematically linked to continuation geometry within the bounded Notebook 12/13/14 domain, rather than treated only as a predictive feature?",
+  "hypothesis": "Articulation hierarchy is not merely feature importance; within the bounded continuation-graph domain it marks structural separation constraints that may be expressible as theorem candidates, falsifiable implications, or counterexample classes relating obstruction, partial reconvergence, and universal reconvergence.",
+  "independent_variables": [
+    {
+      "name": "articulation_structure",
+      "definition": "Articulation point count, articulation depth range, hierarchy profile, and induced component splits in the continuation graph.",
+      "units_or_scale": "graph structural object",
+      "allowed_values_or_range": "Values recoverable from Notebook 13 v2 invariant table and, where graph reconstruction is available, induced articulation substructures."
+    },
+    {
+      "name": "theorem_candidate",
+      "definition": "A formally stated implication or equivalence candidate connecting articulation structure to continuation geometry.",
+      "units_or_scale": "logical proposition",
+      "allowed_values_or_range": "Necessary condition, sufficient condition, biconditional, limitation, or counterexample class."
+    }
+  ],
+  "dependent_variables": [
+    {
+      "name": "theorem_candidate_status",
+      "definition": "Observed status of each articulation theorem candidate inside the bounded domain.",
+      "units_or_scale": "categorical",
+      "allowed_values_or_range": "SUPPORTED_WITHIN_ENUMERATED_DOMAIN | REFUTED_BY_COUNTEREXAMPLE | INCONCLUSIVE_REQUIRES_GRAPH_RECONSTRUCTION"
+    },
+    {
+      "name": "counterexample_count",
+      "definition": "Number of rows or reconstructed graphs refuting the candidate condition.",
+      "units_or_scale": "count",
+      "allowed_values_or_range": "integer >= 0"
+    }
+  ],
+  "controls": [
+    {
+      "name": "no_ml_primary_method",
+      "purpose": "Stop treating the question as a predictive classification problem.",
+      "implementation": "Do not use classifier accuracy as the primary output; use implication tables, proof-obligation tables, and counterexample catalogs."
+    },
+    {
+      "name": "counterexample_first",
+      "purpose": "Prevent theorem escalation from pattern matching.",
+      "implementation": "Every candidate theorem must report explicit counterexample counts and example config IDs."
+    },
+    {
+      "name": "claim_ceiling_guard",
+      "purpose": "Prevent C2 observations from being promoted into formal theorem status.",
+      "implementation": "All theorem candidates remain C1/C2 candidate statements until formal proof work is added under the mathematics additive-only rule."
+    },
+    {
+      "name": "causal_language_guard",
+      "purpose": "Distinguish causal articulation claims from structural consequence claims.",
+      "implementation": "Each candidate must be classified as causal_candidate, consequence_candidate, equivalence_candidate, or unresolved_directionality."
+    }
+  ],
+  "random_seed": {
+    "value": 150015,
+    "seed_scope": "Only deterministic sampling for examples if a table is too large to display.",
+    "derivation_policy": "Fixed before execution; no stochastic classifier is part of the primary method."
+  },
+  "parameter_space": [
+    {
+      "name": "notebook_13_v2_invariant_domain",
+      "values_or_range": "All rows in topological_invariants.parquet from the registered Notebook 13 v2 result archive.",
+      "units_or_scale": "bounded continuation-graph invariant domain",
+      "default": "complete table",
+      "sampling_rule": "Use all rows for implication/counterexample tables."
+    },
+    {
+      "name": "notebook_14_ablation_context",
+      "values_or_range": "Notebook 14 result review showing articulation-hierarchy removal produced the largest single-family accuracy drop.",
+      "units_or_scale": "bounded prior result",
+      "default": "review summary",
+      "sampling_rule": "Use as motivation only, not as proof."
+    }
+  ],
+  "termination_conditions": [
+    "All declared theorem candidates are evaluated against the available invariant table.",
+    "Each candidate has a status, counterexample count, and example config IDs when refuted.",
+    "A proof-obligation table is written for candidates not refuted in the bounded domain.",
+    "No formal theorem status is assigned without additive mathematics registry work."
+  ],
+  "expected_outputs": [
+    {
+      "name": "articulation_theorem_candidate_table",
+      "path_pattern": "departments/colab/results/NB15_ARTICULATION_CONTINUATION_GEOMETRY_THEORY_001/articulation_theorem_candidates.csv",
+      "required": true,
+      "interpretation_role": "Primary table of articulation-geometry implications and counterexamples."
+    },
+    {
+      "name": "articulation_counterexample_catalog",
+      "path_pattern": "departments/colab/results/NB15_ARTICULATION_CONTINUATION_GEOMETRY_THEORY_001/articulation_counterexamples.json",
+      "required": true,
+      "interpretation_role": "Recoverable counterexample catalog for failed theorem candidates."
+    },
+    {
+      "name": "proof_obligation_table",
+      "path_pattern": "departments/colab/results/NB15_ARTICULATION_CONTINUATION_GEOMETRY_THEORY_001/proof_obligations.csv",
+      "required": true,
+      "interpretation_role": "Lists exact definitions and proof obligations required before theorem promotion."
+    },
+    {
+      "name": "output_manifest",
+      "path_pattern": "departments/colab/results/NB15_ARTICULATION_CONTINUATION_GEOMETRY_THEORY_001/manifest.json",
+      "required": true,
+      "interpretation_role": "Binds source archives, outputs, claim ceiling, and non-claim constraints."
+    }
+  ],
+  "interpretation_protocol": {
+    "claim_ceiling": "C1_SPECIFICATION_ONLY",
+    "decision_rules": [
+      "SUPPORTED_C2_CANDIDATE: a candidate implication has zero counterexamples in the bounded domain and clear proof obligations.",
+      "REFUTED_C2_LIMITATION: a candidate implication has one or more counterexamples and must be weakened or discarded.",
+      "DIRECTIONALITY_UNRESOLVED: articulation correlates structurally but causal/consequence direction cannot be assigned.",
+      "FORMALIZATION_READY: a zero-counterexample candidate has precise definitions and can be routed to mathematics as additive proof work, still without theorem status."
+    ],
+    "allowed_interpretations": [
+      "Bounded structural evidence about articulation and continuation geometry.",
+      "Theorem-candidate generation for later formal mathematics work.",
+      "Counterexample-driven refinement of articulation hypotheses."
+    ],
+    "blocked_interpretations": [
+      "Formal theorem claim from notebook evidence alone.",
+      "Causal articulation claim without independent intervention or proof.",
+      "Implementation-independent theory claim before formal proof and approved-tool replication.",
+      "External physical validation.",
+      "C5/C6 promotion."
+    ]
+  },
+  "provenance": {
+    "source_paths": [
+      "departments/colab/results/NB13_TOPOLOGICAL_INVARIANTS_CONTINUATION_GEOMETRY_002.zip",
+      "outputs/analysis_intake/review_NB14_GENERIC_TOPOLOGY_FEATURE_ABLATION_001.json",
+      "departments/colab/results/NB14_GENERIC_TOPOLOGY_FEATURE_ABLATION_001.zip"
+    ],
+    "artifact_hashes": {
+      "departments/colab/results/NB13_TOPOLOGICAL_INVARIANTS_CONTINUATION_GEOMETRY_002.zip": "EA3B19AB161CA77407CB017EC8BE54532802CDF51561064242982D076CF28A15",
+      "departments/colab/results/NB14_GENERIC_TOPOLOGY_FEATURE_ABLATION_001.zip": "929D137D0606FD9F31A09BED2821A2F62A58758786C33A2C3779A8D9634E5F91",
+      "outputs/analysis_intake/review_NB14_GENERIC_TOPOLOGY_FEATURE_ABLATION_001.json": "F81C1CFF392D62E1E6B57EDCE6924472A06F6A4D7FF79F484C27C613CBA10EE0"
+    }
+  },
+  "immutability": {
+    "frozen_before_execution": true,
+    "content_sha256": "TO_BE_RECORDED_AFTER_NOTEBOOK_CREATION",
+    "supersession_policy": "Do not edit after execution starts; create a new spec_id and link the superseding specification."
+  }
+}
