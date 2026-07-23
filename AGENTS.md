@@ -56,6 +56,7 @@ Every action must be grounded in the four foundational laws:
 - **Zenodo Standards:** Publications must include a complete archival bundle (Metadata, Manifest, Falsification, Configs, Data).
 - **Textbook Synchronization Rule:** At the end of every governed task, audit `docs/textbook/mono_process_textbook_complete.md` against the task outputs, active registries, and current claim gates. If any linked textbook section is stale, patch it before finalizing the task or explicitly report the remaining mismatch.
 - **Task Commit Closeout Rule:** Every governed task that changes repository state MUST end with an intentional Git commit after required validation and textbook synchronization are complete. If unrelated dirty state prevents an isolated task-scoped commit, the task remains open and the blocker MUST be reported explicitly in the closeout.
+- **DB Snapshot Closeout Rule:** Every governed task that reads or changes DB-indexed authority MUST verify freshness before closeout. `stale`, `unknown`, `unavailable`, or `failed` DB snapshot status blocks closeout. After the final source edit, run `python scripts/db/snapshot_registries.py`, then rerun freshness and required validation. A failed refresh remains an explicit open blocker; never leave stale DB state as the latest governed state.
 
 ### 4.4 Governance Runtime Gate
 - Before applying patches, changing authority-bearing files, or resolving blocked dependencies, query the DB governance runtime first.

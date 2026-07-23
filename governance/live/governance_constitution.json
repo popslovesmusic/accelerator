@@ -53,6 +53,16 @@
         "If unrelated dirty state prevents an isolated task-scoped commit, the task SHALL remain open and the blocker SHALL be recorded explicitly in the closeout report or governance ledger.",
         "Read-only audit tasks are exempt because they do not modify governed state."
       ]
+    },
+    {
+      "id": "GOV-DB-FRESH-001",
+      "title": "Governed DB Snapshot Freshness Closeout Gate",
+      "statement": [
+        "Every governed task that reads or changes DB-indexed authority SHALL verify DB snapshot freshness before closeout.",
+        "A DB snapshot status of stale, unknown, unavailable, or failed SHALL block task closeout and shall not be reported as clean governance state.",
+        "After the final task-scoped source edit, operators SHALL run python scripts/db/snapshot_registries.py and then re-run the freshness and required validation gates.",
+        "A failed refresh SHALL remain an explicit open blocker in the closeout record; no stale snapshot may be left as the latest governed state."
+      ]
     }
   ],
   "notes": [
@@ -60,6 +70,7 @@
     "Historical proposal artifacts remain preserved under governance/specifications/ and their original locations until repository-wide reference cleanup is complete.",
     "The governance-first execution gate introduced on 2026-07-01 temporarily makes governance closure the only admissible program lane until live governance sections are satisfied.",
     "Department SSOT authority is split from execution authority: design intent comes from Department SSOTs, while runtime truth comes from governed registries and validators.",
-    "Governed change tasks now require a task-scoped Git commit after validation and textbook synchronization; if the commit cannot be isolated safely, the task stays open and the blocker must be recorded."
+    "Governed change tasks now require a task-scoped Git commit after validation and textbook synchronization; if the commit cannot be isolated safely, the task stays open and the blocker must be recorded.",
+    "DB snapshot freshness is a mandatory closeout gate: stale, unknown, unavailable, or failed freshness leaves the governed task open until snapshot refresh and revalidation succeed."
   ]
 }

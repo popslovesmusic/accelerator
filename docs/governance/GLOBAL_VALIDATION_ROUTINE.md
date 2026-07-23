@@ -23,6 +23,8 @@ Use freshness to inspect snapshot recency before DB-dependent operations:
 
 Freshness compares source-affecting changes against the stored source marker and runtime-only DB churn against the stored runtime marker. Routine decision logs, event emission, and refresh metadata do not stale the source projection unless they move beyond the runtime marker; if freshness remains stale, the command output must name the source drift or refresh failure directly.
 
+**DB Snapshot Closeout Gate:** A governed task may not close while DB freshness is `stale`, `unknown`, `unavailable`, or `failed`. After the final task-scoped source edit, run `python scripts/db/snapshot_registries.py`, then rerun `python scripts/query_governance.py freshness` and the required validation stages. A refresh failure is an open blocker and must remain visible in the closeout record.
+
 Use authority resolution for the target surface before modifying any authority-bearing file:
 
 `python scripts/query_governance.py authority --target <path-or-surface>`

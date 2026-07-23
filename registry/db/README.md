@@ -56,6 +56,8 @@ python scripts/db/snapshot_registries.py
 
 The refresh command now writes a single `db_snapshot_refresh_metadata` record consumed by the freshness gate. It emits a structured result that includes `status`, `last_refresh_attempt`, `last_refresh_result`, `indexed_at`, `source_worktree_marker`, `runtime_worktree_marker`, `indexed_registry_count`, `missing_registries`, and `error_reason`.
 
+DB snapshot refresh is a mandatory governed-task closeout step. After the final source edit, run `python scripts/db/snapshot_registries.py` and verify `python scripts/query_governance.py freshness` reports a non-stale successful state. `stale`, `unknown`, `unavailable`, or failed freshness blocks closeout; a failed refresh must remain an explicit open blocker.
+
 Freshness reads the latest verified refresh marker first. Source-affecting registry, doc, and script changes still stale the snapshot, but runtime-only DB churn such as decision logs, event writes, and other append-only runtime surfaces is compared against the stored runtime marker and reported separately as `runtime_churn` when it is newer. A fresh snapshot can therefore remain `fresh` or `allow_with_note` after routine runtime writes, while genuine source drift still reports `source_change` and refresh failures remain `unknown`.
 
 ### Report Ingestion
