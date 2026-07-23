@@ -4,9 +4,9 @@
   "purpose": "Ordered recommendations derived from governed program state and runtime verification without modifying authoritative artifacts.",
   "verification": {
     "source": "scripts/query_governance.py current-state --pretty",
-    "status": "warn",
-    "db_snapshot_status": "stale",
-    "open_debt_count": 0,
+    "status": "pass",
+    "db_snapshot_status": "fresh",
+    "open_debt_count": 1,
     "live_blocker_count": 0
   },
   "generated_from": [
@@ -46,7 +46,7 @@
       "dependencies": [],
       "expected_benefit": "Keeps the remaining live reduction queues moving after formal follow-through and declared-vector exhaustion.",
       "confidence": 0.97,
-      "rationale": "The live master index and downstream analysis projections still point to the repair and unresolved-structure queues first; the runtime snapshot is stale but still reports no open debt or live blockers."
+      "rationale": "The live master index and current dependency projection still point to the repair and unresolved-structure queues first; DB freshness is now verified."
     },
     {
       "recommendation_id": "ANL_REC_002",
@@ -94,20 +94,27 @@
     {
       "recommendation_id": "ANL_REC_004",
       "priority_rank": 4,
-      "recommended_action": "Keep governance/runtime debt watchlisted only; the runtime currently reports no open debt.",
+      "recommended_action": "Discharge DEBT_D_SEMANTICS_PROOF_001 before D-semantics theorem promotion.",
       "supporting_evidence": [
-        "scripts/query_governance.py current-state --pretty: db_snapshot_status = stale; open_debt_count = 0; live_blocker_count = 0",
-        "outputs/analysis/unlock_priority_report.json: runtime_snapshot records the same stale-but-clean runtime state",
-        "outputs/audits/global_health_report.json: db_validation status pass"
+        "governance/live/research_debt_registry.json: DEBT_D_SEMANTICS_PROOF_001 is open",
+        "registry/math/d_semantics_obligation_registry.json: OBL-D-001A through OBL-D-001E remain open",
+        "docs/textbook/mono_process_textbook_complete.md: Appendix F records the bounded proof package"
       ],
       "affected_domains": [
-        "governance",
-        "registry"
+        "mathematics",
+        "governance"
       ],
-      "dependencies": [],
-      "expected_benefit": "Prevents closed runtime debt from being mistaken for current live priority.",
-      "confidence": 0.98,
-      "rationale": "The governance runtime still reports no open debt or live blockers even though the DB snapshot is stale, so this lane is historical residue rather than an active reduction item."
+      "dependencies": [
+        "OBL-D-001A",
+        "OBL-D-001B",
+        "OBL-D-001C",
+        "OBL-D-001D",
+        "OBL-D-001E"
+      ],
+      "expected_benefit": "Prevents D-semantics theorem promotion while its domain, threshold, preservation, and non-collapse obligations remain unresolved.",
+      "confidence": 0.99,
+      "rationale": "The debt is live in the canonical debt registry even though the DB snapshot is now fresh; it is a substantive proof blocker, not runtime residue."
     }
-  ]
+  ],
+  "generated_at": "2026-07-23T00:00:00Z"
 }
