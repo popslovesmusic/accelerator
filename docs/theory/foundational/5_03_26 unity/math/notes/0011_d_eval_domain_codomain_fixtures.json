@@ -1,0 +1,40 @@
+{
+  "fixture_set_id": "D_EVAL_DOMAIN_CODOMAIN_FIXTURES_001",
+  "obligation_id": "OBL-D-001A",
+  "status": "CANDIDATE_FIXTURES_PENDING_CHECKER",
+  "specification": "docs/theory/foundational/5_03_26 unity/math/notes/0011_d_eval_domain_codomain_contract_candidate.md",
+  "cases": [
+    {
+      "fixture_id": "D-A-VALID-001",
+      "input": "A|B",
+      "context": {"typing": "complete", "admissibility": "pass", "projection_binding": "defined"},
+      "expected": {"kind": "Defined", "result_type": "DefinedResult_D,C"}
+    },
+    {
+      "fixture_id": "D-A-INCOMPLETE-001",
+      "input": "A|B",
+      "context": {"typing": "missing", "admissibility": "unknown", "projection_binding": "defined"},
+      "expected": {"kind": "Undefined", "reason": "UNDEFINED_INCOMPLETE_CONTEXT"}
+    },
+    {
+      "fixture_id": "D-A-INADMISSIBLE-001",
+      "input": "A|B",
+      "context": {"typing": "complete", "admissibility": "fail", "projection_binding": "defined"},
+      "expected": {"kind": "Undefined", "reason": "UNDEFINED_INADMISSIBLE"}
+    },
+    {
+      "fixture_id": "D-A-PROJECTION-FAILURE-001",
+      "input": "A|E",
+      "context": {"typing": "complete", "admissibility": "pass", "projection_binding": "undefined"},
+      "expected": {"kind": "Undefined", "reason": "UNDEFINED_PROJECTION_FAILURE"}
+    },
+    {
+      "fixture_id": "D-A-UNTYPED-001",
+      "input": "untyped_expression",
+      "context": {"typing": "missing", "admissibility": "unknown", "projection_binding": "unknown"},
+      "expected": {"kind": "RejectedBeforeDomainAdmission", "reason": "INPUT_OUTSIDE_PARTICIPATION_C"}
+    }
+  ],
+  "negative_guarantees": ["injectivity_not_assumed", "reversibility_not_assumed", "complete_information_preservation_not_assumed"],
+  "human_review_required": true
+}
