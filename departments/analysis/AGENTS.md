@@ -32,6 +32,9 @@ Agents working here must:
 - inspect and classify all relevant debt, obligations, proof gaps, empirical results, negative results, contradictions, and unresolved questions.
 - synthesize cross-domain relationships only with an explicit mapping, preserved structure, uncertainty, and falsification condition.
 - record new hypotheses as noncanonical candidates with epistemic and proof status.
+- emit the mandatory executive campaign summary and quantitative closeout dashboards.
+- assess objective completion, novelty, theory impact, proof readiness, debt progress, and evidence quality independently of discovery count.
+- end every campaign with one executive recommendation and a bounded successor campaign proposal.
 
 ## 3. Must Not
 
@@ -61,3 +64,5 @@ For substantive analysis-facing outputs, include:
 4. support level, epistemic status, and proof status,
 5. blocking condition or falsification condition,
 6. what the output does not authorize.
+
+Campaign closeout additionally requires `campaign_summary.md`, `campaign_summary.json`, `proof_readiness_dashboard.json`, `research_debt_progress.json`, `next_campaign.json`, and `human_review_checklist.md`. The summary must be understandable to a repository maintainer without reading internal machine artifacts.

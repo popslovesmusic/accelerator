@@ -185,6 +185,27 @@ Substantive crawl reports must state:
 7. impact set and recommended next action;
 8. what the report does not authorize.
 
+## Campaign Executive Contract
+
+Every crawl campaign must also emit both machine-readable and human-facing closeout artifacts. The human-facing summary must answer, without requiring internal JSON inspection:
+
+1. Campaign Purpose
+2. Scope
+3. Objects Analyzed
+4. What Was Learned
+5. What Was Not Learned
+6. Major Discoveries
+7. Proof Progress
+8. New Contradictions
+9. Open Research Debt
+10. Campaign Assessment
+11. Recommended Next Campaign
+12. Reason Campaign Stopped
+
+Every campaign must explicitly classify its outcome as `SUCCESS`, `PARTIAL_SUCCESS`, `NO_NEW_INFORMATION`, `FAILED`, `BLOCKED`, or `INVALID_SCOPE`, with reason and confidence. It must report objective completion, discovery significance, measurable debt progress for every open obligation, proof readiness, novelty, theory impact, campaign quality metrics, one executive recommendation, and a fully specified successor campaign. The allowed executive recommendations are `PROMOTE`, `CONTINUE_RESEARCH`, `EXPAND_SCOPE`, `SEEK_COUNTEREXAMPLES`, `FORMALIZE`, `RUN_SIMULATIONS`, and `STOP_UNTIL_NEW_EVIDENCE`.
+
+Required closeout files are `campaign_summary.md`, `campaign_summary.json`, `proof_readiness_dashboard.json`, `research_debt_progress.json`, `next_campaign.json`, and `human_review_checklist.md`. These are analysis products, not promotion authority. A campaign may not report success merely because it generated discoveries; objective completion, evidence quality, termination quality, and unresolved debt must be assessed independently.
+
 The minimum department answer structure remains authoritative: source artifact set, derived recommendation or dependency rule, support level or confidence, blocking condition, and non-authorized consequence.
 
 ## Success Condition
