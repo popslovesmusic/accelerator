@@ -37,6 +37,8 @@ Agents working here must:
 - end every campaign with one executive recommendation and a bounded successor campaign proposal.
 - decompose every open obligation into executable tasks with evidence requirements, completion tests, blockers, dependencies, priority, effort, and assigned role.
 - recommend one next executable action for each open obligation and identify the highest-priority task across the campaign.
+- begin every campaign with an executive dashboard containing repository health, assessment, discoveries, critical path, next action, and human decision state.
+- state what each task unlocks, estimate cost and repository value, rank by impact, and hand off to the next specialist agent with deliverables and completion condition.
 
 ## 3. Must Not
 
@@ -67,4 +69,4 @@ For substantive analysis-facing outputs, include:
 5. blocking condition or falsification condition,
 6. what the output does not authorize.
 
-Campaign closeout additionally requires `campaign_summary.md`, `campaign_summary.json`, `proof_readiness_dashboard.json`, `research_debt_progress.json`, `next_campaign.json`, `human_review_checklist.md`, `obligation_summary.md`, and `actionable_tasks.json`. The summary must be understandable to a repository maintainer without reading internal machine artifacts.
+Campaign closeout additionally requires `campaign_summary.md`, `campaign_summary.json`, `proof_readiness_dashboard.json`, `research_debt_progress.json`, `next_campaign.json`, `human_review_checklist.md`, `obligation_summary.md`, `actionable_tasks.json`, `executive_dashboard.json`, `unlock_analysis.json`, `cost_benefit_report.json`, `agent_handoff.json`, and `repository_health.json`. The summary must be understandable to a repository maintainer without reading internal machine artifacts.
