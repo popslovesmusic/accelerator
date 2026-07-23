@@ -240,6 +240,33 @@ Active blockers:
 - association does not establish causation,
 - approved-tool replication pending and promotion above C2 blocked.
 
+### NOTEBOOK_20_DISTINCTION_CONSERVATION_EXCLUSION_DYNAMICS_2026_07_23
+
+Source bundle: `departments/colab/notebook_designs/notebook_20_distinction_conservation_exclusion_dynamics/`
+
+Result archive: `departments/colab/results/RT_Notebook_20_outputs.zip`
+
+Classification:
+- Source notebook: `C1_NOTEBOOK_PROVENANCE`.
+- Archive: `C2_BOUNDED_NOTEBOOK_OUTPUT_WITH_LIMITATIONS`.
+- Internal manifest: present and executed; seed `200020`, 4,813,425 projections, and 25,478,208 distinction instances.
+- Conservation verdict: `NOT_FALSIFIED_IN_TESTED_MODEL_CLASS` with zero observed failures.
+- Strong residue-determination form: `FALSIFIED_IN_TESTED_MODEL_CLASS` with 478 matched-exclusion counterexamples.
+
+Canonical routing:
+- Review: `outputs/analysis_intake/review_NB20_DISTINCTION_CONSERVATION_EXCLUSION_DYNAMICS_001.md`
+- Reconstructed specification: `departments/colab/notebook_designs/notebook_20_distinction_conservation_exclusion_dynamics/experiment_spec.reconstructed.json`
+- Reconstruction manifest: `departments/colab/notebook_designs/notebook_20_distinction_conservation_exclusion_dynamics/experiment_spec.reconstruction_manifest.json`
+- Queue entries: `IQ_2026_07_23_033` and `IQ_2026_07_23_034`
+- Induction records: `NB20_DISTINCTION_CONSERVATION_EXCLUSION_DYNAMICS_001` and `NB20_DISTINCTION_CONSERVATION_EXCLUSION_DYNAMICS_RESULTS_001`
+- Archive registry ID: `COLAB_ARCHIVE_NB20_DISTINCTION_CONSERVATION_EXCLUSION_DYNAMICS_RESULTS_20260723_001`
+
+Active blockers:
+- immutable pre-execution specification missing,
+- finite pairwise distinction model and possible deterministic stratification,
+- operational residue definition and partition-definition dependence,
+- approved-tool replication pending and promotion above C2 blocked.
+
 ---
 
 ## Dependencies on Global Core
