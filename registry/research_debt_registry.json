@@ -107,15 +107,16 @@
     "low_debt": "Recorded for future resolution."
   },
   "metrics": {
-    "total_debt": 6,
+    "total_debt": 7,
     "critical_items": 0,
     "research_debt_by_department": {
-      "governance": 6
+      "governance": 6,
+      "mathematics": 1
     },
     "average_age": 0,
     "resolved_this_cycle": 4,
-    "new_this_cycle": 6,
-    "debt_trend": "improving"
+    "new_this_cycle": 7,
+    "debt_trend": "visible_open_substantive_debt"
   },
   "examples": [
     {
@@ -351,6 +352,38 @@
       ],
       "planned_owner": "governance/runtime",
       "notes": "Resolved on 2026-07-05 by the replay reconciliation coverage surface in current-state and context-capsule; the replay scaffold remains diagnostic-only and full semantic replay reconstruction remains open."
+    },
+    {
+      "id": "DEBT_D_SEMANTICS_PROOF_001",
+      "title": "D evaluation and projection semantics require discharge",
+      "department": "mathematics",
+      "type": "missing_proof",
+      "severity": "moderate",
+      "resolution_priority": "before_promotion",
+      "status": "open",
+      "introduced_by": "MPF_D_SEMANTICS_PROOF_PACKAGE_001",
+      "reason_accepted": "The canonical live debt registry defines D(*|*) and the typed projection route, but Eval_D domain/codomain, context threshold behavior, preservation, and non-collapse semantics remain unresolved.",
+      "affects": [
+        "D_operator_semantics",
+        "projection_transition_soundness",
+        "theorem_promotion"
+      ],
+      "blocks": [
+        "D_semantics_theorem_promotion",
+        "Pi_D_preservation_claim"
+      ],
+      "depends_on": [
+        "DEBT_D_NOTATION_ALIGNMENT_001",
+        "DEBT_REALIZATION_RELATION_001"
+      ],
+      "claim_class_limit": "C1_DEFINED_PROVISIONAL",
+      "required_resolution": [
+        "Discharge OBL-D-001A through OBL-D-001E",
+        "Add formal or independently checked bounded support",
+        "Reaudit theorem eligibility"
+      ],
+      "planned_owner": "Mathematics Department",
+      "notes": "Synchronized from governance/live/research_debt_registry.json on 2026-07-23 so the DB runtime debt projection cannot undercount the live open debt."
     }
   ],
   "design_principles": [

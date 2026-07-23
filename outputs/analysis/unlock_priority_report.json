@@ -7,8 +7,11 @@
     "source": "scripts/query_governance.py current-state --pretty",
     "status": "pass",
     "db_snapshot_status": "fresh",
-    "open_debt_count": 1,
-    "live_blocker_count": 0
+    "open_debt_count": 0,
+    "live_blocker_count": 0,
+    "runtime_governance_debt_count": 0,
+    "live_research_debt_count": 1,
+    "debt_scope": "governance-runtime debt projection vs live research debt registry"
   },
   "source_artifacts": [
     "governance/live/master_work_index.json",
@@ -22,7 +25,7 @@
     "Current live master index contains 91 work items and 7 active items.",
     "The mathematics repair queues remain the first bounded reduction path.",
     "The DB snapshot is fresh and the closeout freshness gate reports allow.",
-    "DEBT_D_SEMANTICS_PROOF_001 remains open with five registered obligations."
+    "The runtime governance-debt projection is empty, while the live research-debt registry contains DEBT_D_SEMANTICS_PROOF_001 with five open obligations."
   ],
   "ranked_reduction_plan": [
     {
@@ -77,7 +80,7 @@
   ],
   "notes": [
     "This JSON mirror is provided so downstream analysis artifacts can resolve the reported unlock-priority source path.",
-    "Runtime freshness is current; the remaining debt is substantive D-semantics proof debt, not stale DB residue."
+    "Runtime governance debt is clear; substantive research debt remains explicitly tracked in the live debt registry."
   ],
   "generated_at": "2026-07-23T00:00:00Z"
 }

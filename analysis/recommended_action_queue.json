@@ -6,8 +6,11 @@
     "source": "scripts/query_governance.py current-state --pretty",
     "status": "pass",
     "db_snapshot_status": "fresh",
-    "open_debt_count": 1,
-    "live_blocker_count": 0
+    "open_debt_count": 0,
+    "live_blocker_count": 0,
+    "runtime_governance_debt_count": 0,
+    "live_research_debt_count": 1,
+    "debt_scope": "governance-runtime debt projection vs live research debt registry"
   },
   "generated_from": [
     "governance/live/master_work_index.json",
@@ -96,9 +99,9 @@
       "priority_rank": 4,
       "recommended_action": "Discharge DEBT_D_SEMANTICS_PROOF_001 before D-semantics theorem promotion.",
       "supporting_evidence": [
+        "scripts/query_governance.py current-state --summary: runtime_governance_debt_count/open_debt_count = 0",
         "governance/live/research_debt_registry.json: DEBT_D_SEMANTICS_PROOF_001 is open",
-        "registry/math/d_semantics_obligation_registry.json: OBL-D-001A through OBL-D-001E remain open",
-        "docs/textbook/mono_process_textbook_complete.md: Appendix F records the bounded proof package"
+        "registry/research_debt_registry.json: runtime debt source is reconciled with the live D-semantics record"
       ],
       "affected_domains": [
         "mathematics",
@@ -113,7 +116,7 @@
       ],
       "expected_benefit": "Prevents D-semantics theorem promotion while its domain, threshold, preservation, and non-collapse obligations remain unresolved.",
       "confidence": 0.99,
-      "rationale": "The debt is live in the canonical debt registry even though the DB snapshot is now fresh; it is a substantive proof blocker, not runtime residue."
+      "rationale": "The runtime projection has no open governance-runtime debt, while the live research-debt registry correctly retains one substantive mathematics debt; these scopes must not be conflated."
     }
   ],
   "generated_at": "2026-07-23T00:00:00Z"
