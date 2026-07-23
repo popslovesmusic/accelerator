@@ -134,6 +134,30 @@ Active blockers:
 - residue-causality `INCONCLUSIVE` outcome,
 - Notebook 10 historical reproduction mismatch.
 
+### NOTEBOOK_16_MEANINGFUL_FOLLOW_ON_2026_07_23
+
+Source notebook: `departments/colab/notebook_designs/notebook_16_projection_dof_isolation/RT_Notebook_16_Projection_DoF_Meaningful_Experiment.ipynb`
+
+Result archive: `departments/colab/results/MPF_SIM_PROJECTION_DOF_MEANINGFUL_001_RESULTS.zip`
+
+Classification:
+- Source notebook: `C1_NOTEBOOK_PROVENANCE`.
+- Archive: `C2_BOUNDED_NOTEBOOK_OUTPUT_WITH_LIMITATIONS` after governed induction.
+- Internal manifest: present, executed, 527 rows parsed, zero parse failures.
+- Operational representation: ordered rooted symbolic expression graph.
+
+Canonical routing:
+- Review: `outputs/analysis_intake/review_MPF_SIM_PROJECTION_DOF_MEANINGFUL_001.md`
+- Queue entries: `IQ_2026_07_23_025` and `IQ_2026_07_23_026`
+- Induction records: `MPF_SIM_PROJECTION_DOF_MEANINGFUL_001` and `MPF_SIM_PROJECTION_DOF_MEANINGFUL_RESULTS_001`
+- Archive registry ID: `COLAB_ARCHIVE_MPF_SIM_PROJECTION_DOF_MEANINGFUL_RESULTS_20260723_001`
+
+Active blockers:
+- distinct immutable pre-execution specification for the meaningful follow-on is missing; the earlier isolation specification is not substituted,
+- bounded DoF/depth domain and symbolic operationalization,
+- approved-tool replication pending,
+- promotion above C2 blocked.
+
 ---
 
 ## Dependencies on Global Core
