@@ -213,6 +213,33 @@ Active blockers:
 - typed non-falsification is partly definition-dependent,
 - finite model class, deterministic stratification above the safety threshold, operational residue vector, approved-tool replication pending, and promotion above C2 blocked.
 
+### NOTEBOOK_19_EXCLUSION_GENERATES_RESIDUE_2026_07_23
+
+Source bundle: `departments/colab/notebook_designs/notebook_19_exclusion_generates_residue/`
+
+Result archive: `departments/colab/results/RT_Notebook_19_outputs.zip`
+
+Classification:
+- Source notebook: `C1_NOTEBOOK_PROVENANCE`.
+- Archive: `C2_BOUNDED_NOTEBOOK_OUTPUT_WITH_LIMITATIONS`.
+- Internal manifest: present and executed; seed `190019`, 1,217,346 total records, and 11,762 strong records.
+- Strong information and structural criteria falsify sufficiency and necessity. Strong total residue does not falsify sufficiency, but necessity and the full biconditional are falsified.
+
+Canonical routing:
+- Review: `outputs/analysis_intake/review_NB19_EXCLUSION_GENERATES_RESIDUE_001.md`
+- Reconstructed specification: `departments/colab/notebook_designs/notebook_19_exclusion_generates_residue/experiment_spec.reconstructed.json`
+- Reconstruction manifest: `departments/colab/notebook_designs/notebook_19_exclusion_generates_residue/experiment_spec.reconstruction_manifest.json`
+- Queue entries: `IQ_2026_07_23_031` and `IQ_2026_07_23_032`
+- Induction records: `NB19_EXCLUSION_GENERATES_RESIDUE_001` and `NB19_EXCLUSION_GENERATES_RESIDUE_RESULTS_001`
+- Archive registry ID: `COLAB_ARCHIVE_NB19_EXCLUSION_GENERATES_RESIDUE_RESULTS_20260723_001`
+
+Active blockers:
+- immutable pre-execution specification missing,
+- finite bounded model and possible deterministic stratification,
+- exclusion and residue remain operational definitions,
+- association does not establish causation,
+- approved-tool replication pending and promotion above C2 blocked.
+
 ---
 
 ## Dependencies on Global Core
