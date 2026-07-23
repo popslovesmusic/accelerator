@@ -22,3 +22,5 @@ Notebook design packets:
   - v2: ordered chunked Colab scaffold after reported v1 runtime/order failures.
 - `notebook_designs/notebook_14_feature_ablation/`
 - `notebook_designs/notebook_15_articulation_theory/`
+- `notebook_designs/notebook_21_d_threshold_sensitivity/`
+  - First campaign for the remaining D-semantics obligations; tests bounded context-indexed `epsilon_a,C` sensitivity.
