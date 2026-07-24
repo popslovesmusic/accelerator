@@ -3159,6 +3159,11 @@ Every new induction must satisfy both of the following before it is treated as a
 - a canonical induction record exists in `registry/induction_registry.json`
 - a live intake record exists in `governance/live/induction_queue.json`
 
+**Governance and Math Audit Domain Isolation (GOV-ISO-003):**
+To ensure epistemic separation and prevent ontological confusion, repository governance audits and mathematical/theoretical audits are isolated as independent domains.
+- **Repository Governance Audits**: Certify repository health, SSOT ownership, registry consistency, DB freshness, validation pipeline success, git workflow compliance, and agent compliance. Governance audits never evaluate proofs, lemmas, theorems, mathematical correctness, or research conclusions.
+- **Mathematical Audits**: Verify mathematical correctness, proofs, lemmas, theorems, and simulation traces. They consume the repository health certificate (`repository_health_certificate.json`) to assume repository health, and must not repeat governance validation.
+
 If either record is missing, the induction is ungoverned for program purposes and may not be used for promotion, dependency closure, or downstream planning.
 
 The induction routing layer is now operationally established. Active provisional inductions have been backfilled into both the canonical induction registry and the live induction queue, and future induction work must enter through that same path.

@@ -19,9 +19,6 @@ Eighteen objects were analyzed, including the core repository governance contrac
 ## What Was Not Learned
 No new theorems or proofs were derived. No canonical registries were mutated.
 
-## Major Discoveries
-- The repository is in a blocked state for automated claims or promotions due to the failing governance integrity checks.
-- Modifying governance assets without matching updates in the hash registry or change ledger immediately triggers semantic failures in the global validation suite.
 
 ## Proof Progress
 The proof obligations `OBL-D-001A` (Eval_D domain and codomain), `OBL-D-001B` (Context threshold), and `OBL-D-001C` (Typed transition preservation) are discharged. Obligations `OBL-D-001D` (Representable distinction preservation) and `OBL-D-001E` (Non-collapse boundary) remain open.

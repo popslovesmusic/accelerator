@@ -2108,6 +2108,44 @@ def _build_trend_report(current_record, baseline_record, trend_status):
     return trend_report
 
 
+def _check_repository_health_certificate(root):
+    cert_path = root / "repository_health_certificate.json"
+    if not cert_path.exists():
+        return False, "Repository health certificate (repository_health_certificate.json) is missing. Run scripts/governance_audit.py first."
+    try:
+        with open(cert_path, "r", encoding="utf-8") as f:
+            cert = json.load(f)
+        status = cert.get("overall_status")
+        if status == "FAIL":
+            return False, f"Repository health certificate has overall status: FAIL. Commit: {cert.get('issued_commit')}"
+        return True, cert
+    except Exception as e:
+        return False, f"Failed to parse repository health certificate: {e}"
+
+
+def _enforce_repository_health_certificate_if_applicable(root, selected_stage_names):
+    non_gov_stages = {
+        "math_validation", "math_test_provenance_validation", 
+        "math_program_validation", "textbook_projection_freshness_validation",
+        "implementation_validation", "evidence_validation", "campaign_validation"
+    }
+    gov_stages = {
+        "unified_manifest_validation", "registry_validation", "engine_validation",
+        "hygiene_validation", "db_validation", "db_runtime_validation",
+        "governance_integrity_validation", "patch_chain_validation"
+    }
+    is_non_gov_run = any(s in selected_stage_names for s in non_gov_stages)
+    is_gov_run = any(s in selected_stage_names for s in gov_stages)
+    
+    if is_non_gov_run and not is_gov_run:
+        success, cert_or_err = _check_repository_health_certificate(root)
+        if not success:
+            print(f"Error: {cert_or_err}")
+            sys.exit(1)
+        else:
+            print(f"Repository health certificate consumed successfully (Status: {cert_or_err.get('overall_status')}, Commit: {cert_or_err.get('issued_commit')[:8]}). Skipping duplicate repository integrity/governance checks.")
+
+
 def main():
     parser = argparse.ArgumentParser(description="Global Ecosystem Validation Harness")
     parser.add_argument("--root", default=".", help="Project root directory")
@@ -2181,6 +2219,8 @@ def main():
         return
     if requested_stages:
         selected_stage_names = _restrict_stage_selection(stage_plan, requested_stages, parser=parser)
+
+    _enforce_repository_health_certificate_if_applicable(root, selected_stage_names)
 
     report = {
         "run_id": run_id,
