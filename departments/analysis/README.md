@@ -8,7 +8,9 @@ The department is inducted as a read-only recommendation layer. It transforms go
 
 ## Crawl Mode
 
-Issue `crawl` to activate the bounded recursive theory-analysis role defined in `GEMINI.md`.
+Issue the global command `crawl` to route to this department and activate the bounded recursive theory-analysis role defined in `GEMINI.md`.
+
+This command is distinct from DB artifact indexing. `python scripts/db/index_artifacts.py` walks filesystem paths and writes the SQLite artifact projection; it is not an Analysis crawl, does not produce crawl findings, and does not satisfy the Analysis crawl reporting contract.
 
 In crawl mode:
 

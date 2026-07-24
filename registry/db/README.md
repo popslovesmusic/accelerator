@@ -9,6 +9,10 @@ This directory contains the SQLite database and schema used to index the acellor
 - **Orientation:** All indexed artifacts must be assigned an `orientation_status` to distinguish between active truth and historical residue.
 - **Governance Runtime Bootstrap:** The DB is now also the first-pass governance gate for patch/application decisions. When it cannot classify an action, fall back to registries and long-form docs rather than treating document-first routing as the default.
 
+## Operation Boundary
+
+`python scripts/db/index_artifacts.py --db registry/db/acellorator_index.sqlite --root .` performs DB artifact indexing: a filesystem scan that updates the SQLite projection. It is separate from the global `crawl` command, which routes to the governed Analysis Department discovery protocol and has its own bounded campaign and reporting contract. A successful artifact index does not constitute an Analysis crawl.
+
 ## Schema
 
 See `schema.sql` for table definitions.

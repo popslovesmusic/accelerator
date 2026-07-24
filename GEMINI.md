@@ -32,6 +32,12 @@ Every action must be grounded in the four foundational laws:
 - **Manual Patch Mode:** Activated by `manual`, `patch`, `repair`, `maintain`, or JSON patch requests.
 - **Research Mode:** Activated by directives to run campaigns, perform derivations, or write technical papers.
 
+### Global Command Routing
+
+- `crawl` is a global routing command for the governed Analysis Department crawl defined in `departments/analysis/GEMINI.md`.
+- `crawl` means bounded database-wide analysis and evidence synthesis; it does not mean filesystem traversal or SQLite artifact indexing.
+- SQLite artifact indexing is a separate explicit operation: `python scripts/db/index_artifacts.py`.
+
 ## 4. Operational Mandates
 
 ### 4.1 Mathematical Foundation (C6 Closure)
