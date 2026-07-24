@@ -8,4 +8,4 @@ The approved bounded mutation is present in the three authorized target files.
 - Provenance, semantic-layer, dependency, partiality, and prohibited-strengthening metadata are recorded.
 - The candidate document hash is synchronized.
 - `OBL-D-001D` remains open; no proof discharge or Lean implementation was performed.
-- The full validator’s stale textbook freshness contract failure remains documented and was waived by the latest human instruction.
+- The textbook freshness contract was remediated to the current projection, formal-registry hash, and DB snapshot; freshness validation now passes.
