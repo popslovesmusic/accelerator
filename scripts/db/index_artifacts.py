@@ -13,14 +13,10 @@ def get_checksum(path):
     if os.path.isdir(path):
         return None
     sha256_hash = hashlib.sha256()
-    try:
-        with open(path, "rb") as f:
-            for byte_block in iter(lambda: f.read(4096), b""):
-                sha256_hash.update(byte_block)
-        return sha256_hash.hexdigest()
-    except (PermissionError, FileNotFoundError, OSError) as e:
-        print(f"Warning: Could not compute checksum for {path}: {e}")
-        return None
+    with open(path, "rb") as f:
+        for byte_block in iter(lambda: f.read(4096), b""):
+            sha256_hash.update(byte_block)
+    return sha256_hash.hexdigest()
 
 def index_artifacts(db_path, root_dir, dry_run=False):
     conn = sqlite3.connect(db_path)
