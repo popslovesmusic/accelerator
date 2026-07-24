@@ -1,0 +1,146 @@
+{
+  "highest_priority_next_task": "TASK-ANL-001-REFRESH-STALE-PROJECTIONS",
+  "task_impact_profiles": [
+    {
+      "task_id": "TASK-ANL-001-REFRESH-STALE-PROJECTIONS",
+      "unlocks": [
+        "trustworthy current-state analysis routing",
+        "current-state D campaign addendum",
+        "clear handoff to OBL-D-001C"
+      ],
+      "blocked_objects": [
+        "Analysis Department SSOT live snapshot",
+        "D campaign closeout routing",
+        "current-state summary trust"
+      ],
+      "future_campaigns_enabled": [
+        "CAMPAIGN_ANALYSIS_STALE_PROJECTION_REFRESH_20260724_001"
+      ],
+      "estimated_effort": "MEDIUM",
+      "estimated_compute_cost": "LOW",
+      "expected_repository_value": "HIGH",
+      "blocking_tasks_removed": 3,
+      "risk": "low",
+      "confidence": "high"
+    },
+    {
+      "task_id": "TASK-D-001C-TYPE-PRESERVATION",
+      "unlocks": [
+        "OBL-D-001D",
+        "OBL-D-001E",
+        "reduced D promotion gate"
+      ],
+      "blocked_objects": [
+        "typed projection preservation",
+        "representable distinction review",
+        "non-collapse boundary gate"
+      ],
+      "future_campaigns_enabled": [
+        "CAMPAIGN_D_MECHANIZED_PROJECTION_001"
+      ],
+      "estimated_effort": "HIGH",
+      "estimated_compute_cost": "MEDIUM",
+      "expected_repository_value": "VERY_HIGH",
+      "blocking_tasks_removed": 3,
+      "risk": "medium",
+      "confidence": "high"
+    }
+  ],
+  "tasks": [
+    {
+      "task_id": "TASK-ANL-001-REFRESH-STALE-PROJECTIONS",
+      "objective": "Refresh the stale analysis surfaces with explicit supersession or current-state links.",
+      "required_inputs": [
+        "stale_projection_matrix.json",
+        "governance/live/master_work_index.json",
+        "departments/analysis/program_state_report.json",
+        "registry/math/d_semantics_obligation_registry.json"
+      ],
+      "expected_outputs": [
+        "analysis refresh patch",
+        "current-state addendum for D campaign surfaces",
+        "updated routing summary"
+      ],
+      "completion_test": "Every active analysis surface that contradicted live A/B or work-index status is marked current, superseded, or historical.",
+      "estimated_effort": "MEDIUM",
+      "dependencies": [],
+      "priority": "CRITICAL",
+      "assigned_agent_role": "RT_AGENT_INFINITE_THEORY_ANALYST",
+      "recommended_next_action": "Apply an analysis-only supersession patch."
+    },
+    {
+      "task_id": "TASK-D-001C-TYPE-PRESERVATION",
+      "objective": "Show which type properties are preserved when A|E maps through Pi_D into TYPE_PROJECTION.",
+      "required_inputs": [
+        "OBL-D-001A certificate",
+        "TYPE_PROJECTION",
+        "P125 typed transition obligations"
+      ],
+      "expected_outputs": [
+        "typed preservation proof",
+        "mechanized fixture",
+        "negative-case report"
+      ],
+      "completion_test": "All valid transitions pass, all negative fixtures reject, and no hidden invertibility assumption remains.",
+      "estimated_effort": "HIGH",
+      "dependencies": [
+        "TYPE_PROJECTION"
+      ],
+      "priority": "HIGH",
+      "assigned_agent_role": "FORMAL_PROOF_ANALYST",
+      "recommended_next_action": "Execute the existing OBL-D-001C work package."
+    },
+    {
+      "task_id": "TASK-D-001D-REPRESENTABLE-DISTINCTION",
+      "objective": "Define representable distinction and test what Pi_D preserves after OBL-D-001C.",
+      "required_inputs": [
+        "OBL-D-001C certificate",
+        "Notebook 18-20 archives",
+        "immutable experiment specification"
+      ],
+      "expected_outputs": [
+        "representable distinction definition",
+        "matched-case evidence table",
+        "counterexample report"
+      ],
+      "completion_test": "The predicate is computable without outcome labels and independently reproduced across preservation and failure cases.",
+      "estimated_effort": "HIGH",
+      "dependencies": [
+        "OBL-D-001C"
+      ],
+      "priority": "HIGH",
+      "assigned_agent_role": "EMPIRICAL_EVIDENCE_ANALYST",
+      "recommended_next_action": "Keep routed behind OBL-D-001C."
+    },
+    {
+      "task_id": "TASK-D-001E-NONCOLLAPSE-BOUNDARY",
+      "objective": "Specify the non-collapse boundary once representable distinction is current.",
+      "required_inputs": [
+        "OBL-D-001D certificate",
+        "Notebook 18 degeneracy evidence",
+        "Notebook 20 counterexamples"
+      ],
+      "expected_outputs": [
+        "non-collapse boundary specification",
+        "minimal countermodel archive",
+        "negative-result report"
+      ],
+      "completion_test": "Positive, negative, and boundary fixtures classify consistently under one typed rule.",
+      "estimated_effort": "HIGH",
+      "dependencies": [
+        "OBL-D-001D"
+      ],
+      "priority": "HIGH",
+      "assigned_agent_role": "COUNTEREXAMPLE_SEARCHER",
+      "recommended_next_action": "Keep routed behind OBL-D-001D."
+    }
+  ],
+  "remaining_tasks": "D tasks for OBL-D-001C through OBL-D-001E remain sourced from the July 23, 2026 D work package; this crawl only reroutes them against current-state status.",
+  "evidence_requirements": {
+    "formal_proof_required": true,
+    "simulation_required": false,
+    "counterexample_search_required": true,
+    "mechanized_verification_required": true,
+    "human_review_required": true
+  }
+}
