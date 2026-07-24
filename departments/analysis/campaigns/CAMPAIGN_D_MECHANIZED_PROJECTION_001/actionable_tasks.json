@@ -1,10 +1,12 @@
 {
   "campaign_id": "CAMPAIGN_D_MECHANIZED_PROJECTION_001",
-  "current_live_highest_priority_task": "TASK-D-001C-TYPE-PRESERVATION",
+  "current_live_highest_priority_task": "TASK-D-001D-SEMANTIC-REVIEW",
   "tasks": [
     {
       "task_id": "TASK-D-001C-TYPE-PRESERVATION",
-      "description": "Finish the bounded type-level OBL-D-001C package and submit it for explicit human review.",
+      "status": "DISCHARGED_BOUNDED",
+      "completed_on": "2026-07-24",
+      "description": "The bounded type-level OBL-D-001C package is approved and discharged within scope.",
       "objective": "Keep the type-preservation result scope-corrected and reviewable.",
       "required_inputs": [
         "P126",
@@ -25,23 +27,24 @@
     },
     {
       "task_id": "TASK-D-001D-SEMANTIC-REVIEW",
+      "status": "CURRENT_LIVE_PRIORITY",
       "description": "Review semantic representable-distinction preservation independently of type preservation.",
       "objective": "Prevent OBL-D-001D from inheriting support that belongs only to C.",
       "required_inputs": [
         "OBL-D-001C certificate",
+        "human review approval record",
         "matched-image search artifacts",
         "scope-qualified textbook wording"
       ],
       "expected_outputs": [
         "semantic review packet",
-        "claim wording decision"
+        "claim wording decision",
+        "updated D scope note"
       ],
       "completion_test": "D support is either qualified or rejected without relying on C-only evidence.",
       "estimated_effort": "HIGH",
-      "dependencies": [
-        "OBL-D-001C"
-      ],
-      "priority": "HIGH",
+      "dependencies": [],
+      "priority": "CRITICAL",
       "assigned_agent_role": "FORMAL_PROOF_ANALYST"
     }
   ]
