@@ -1,5 +1,7 @@
 # Campaign D Semantics Theory Crawl
 
+Historical note, current as of Friday, July 24, 2026: this summary is preserved as a Thursday, July 23, 2026 snapshot. For live routing, use `current_state_addendum_20260724.json`; `OBL-D-001A` is discharged, `OBL-D-001B` is discharged within a bounded finite scope, and the live proof task is `TASK-D-001C-TYPE-PRESERVATION`.
+
 ## Campaign Purpose
 Reconstruct the semantic, formal, empirical, and governance dependency surface of D before theorem promotion.
 

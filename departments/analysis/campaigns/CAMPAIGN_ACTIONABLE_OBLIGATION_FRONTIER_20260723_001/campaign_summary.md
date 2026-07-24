@@ -1,5 +1,7 @@
 # Actionable Obligation Frontier Crawl
 
+Historical note, current as of Friday, July 24, 2026: this Thursday, July 23, 2026 frontier summary is preserved as a historical snapshot. For live routing, use `current_state_addendum_20260724.json`; `OBL-D-001A` and `OBL-D-001B` are no longer open, and the live proof task is `TASK-D-001C-TYPE-PRESERVATION`.
+
 ## Campaign Purpose
 Verify that open research debt is executable, measurable, and correctly ordered under Actionable Obligation System v1.
 

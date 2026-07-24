@@ -7,27 +7,24 @@ Analysis-only ranking for mathematics work in `governance/live/master_work_index
 - Mathematics campaign items in the live index: 5.
 - Campaign items with explicit blockers: 0.
 - Independent math work items found: 6.
-- The proof follow-through sync passed, the counterexample declared-vector chain is exhausted, and the runtime debt projection is empty.
+- The work-index critical path is empty, the proof follow-through sync passed, the counterexample declared-vector chain is exhausted, and the runtime debt projection is empty.
 
 ## Ranked Reduction Plan
-1. Continue `SIM-REPAIR-QUEUE-001`, `VAL-RC-EXEC-001`, and `VAL-URS-RES-001`.
+1. Preserve source-registry scopes and reopen only on new evidence.
 2. Preserve `research-campaign` momentum while the mathematical backlog is reduced.
 3. Keep `PROOF-ELEVATION-CAMPAIGN-001` and `MT-COUNTEREXAMPLE-001` on watchlist only.
+4. Discharge `DEBT_D_SEMANTICS_PROOF_001` before D-semantics theorem promotion.
 
 ## Independent Work
 - `PD_CG_ROOT_TRACE_FALSIFICATION_CAMPAIGN_V1` can proceed independently.
 - `MPF_IND_PRIMITIVE_FORM_DOMINANT_DOMAIN_001` can proceed independently.
 - `PALG-QUEUE-001` can proceed independently.
-- `SIM-REPAIR-QUEUE-001` can proceed independently.
-- `VAL-RC-EXEC-001` can proceed independently.
-- `VAL-URS-RES-001` can proceed independently.
+- `BOOK_CAMPAIGN_PHASE_01_MASTER` retains active source scope outside the closed work-index path.
+- `P0-C4-CA-001` retains source-scoped campaign context outside the closed work-index path.
+- `P0-C4-GRAPH-001` retains source-scoped campaign context outside the closed work-index path.
 
 ## Critical Path
-The current critical path is phase-3 repair and confirmation:
-- `SIM-REPAIR-QUEUE-001`
-- `VAL-RC-EXEC-001`
-- `VAL-URS-RES-001`
-- `PROOF-ELEVATION-CAMPAIGN-001` and `MT-COUNTEREXAMPLE-001` remain watchlist context only.
+The current work-index critical path is empty. The live source-level mathematics blocker is `DEBT_D_SEMANTICS_PROOF_001`, which remains open even though no unclassified work-index action remains.
 
 ## What This Does Not Prove
 - It does not execute or close any governed work.
@@ -37,6 +34,7 @@ The current critical path is phase-3 repair and confirmation:
 ## Supporting Evidence
 - `governance/live/master_work_index.json`
 - `registry/math/math_campaign_execution_order.json`
+- `registry/math/d_semantics_obligation_registry.json`
 - `outputs/audits/global_health_report.json`
 - `registry/math/proof_elevation_campaign_registry.json`
 - `registry/math/mt_proof_elevation_campaign_registry.json`
