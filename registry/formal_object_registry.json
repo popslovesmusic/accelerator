@@ -31,6 +31,163 @@
   },
   "objects": [
     {
+      "object_id": "OBJ-TYPE_WITNESS_C",
+      "object_class": "primitive",
+      "title": "Indexed relation witness type family",
+      "status": "proposed",
+      "source_bindings": [
+        "docs/theory/foundational/5_03_26 unity/math/notes/0014_d_representable_distinction_candidate.md",
+        "D_relation_witness_foundational_candidate.md"
+      ],
+      "dependency_links": [
+        "ContextUniverse",
+        "Rel_C",
+        "Dist_C",
+        "Expr_D"
+      ],
+      "claim_scope": "context-indexed",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "metadata": {
+        "signature": "TYPE_WITNESS_C(C: ContextUniverse, r: Rel_C(C), d: Dist_C(C)) : Type",
+        "semantic_layers": [
+          "L0_CONTEXT",
+          "L1_SEMANTIC_WITNESS",
+          "L3_VALIDATION_JUDGMENT"
+        ],
+        "provenance": {
+          "approval_packet": "D_TYPE_WITNESS_CANONICAL_MUTATION_APPROVAL_20260724_001",
+          "source_resolution": "D_RELATION_WITNESS_HUMAN_APPROVAL_RESOLUTION_20260724_001",
+          "source_path": "D_relation_witness_foundational_candidate.md"
+        },
+        "prohibited_strengthening": [
+          "No witness identity or equivalence",
+          "No category or groupoid structure",
+          "No transition-preservation theorem"
+        ]
+      }
+    },
+    {
+      "object_id": "OBJ-project_w",
+      "object_class": "operator",
+      "title": "Partial witness projection mapping",
+      "status": "proposed",
+      "source_bindings": [
+        "D_relation_witness_foundational_candidate.md"
+      ],
+      "dependency_links": [
+        "OBJ-TYPE_WITNESS_C",
+        "Realization_C",
+        "Expr_D"
+      ],
+      "claim_scope": "context-indexed",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "metadata": {
+        "signature": "project_w(C: ContextUniverse, r: Rel_C(C), d: Dist_C(C), x_r: Realization_C(C), x_d: Expr_D(C)) : Option (TYPE_WITNESS_C(C, r, d))",
+        "partiality": "required",
+        "semantic_layers": [
+          "L0_CONTEXT",
+          "L1_SEMANTIC_TARGET",
+          "L2_CONCRETE_REALIZATION",
+          "L3_SEMANTIC_WITNESS"
+        ],
+        "provenance": {
+          "approval_packet": "D_TYPE_WITNESS_CANONICAL_MUTATION_APPROVAL_20260724_001",
+          "source_resolution": "D_RELATION_WITNESS_HUMAN_APPROVAL_RESOLUTION_20260724_001",
+          "source_path": "D_relation_witness_foundational_candidate.md"
+        },
+        "prohibited_strengthening": [
+          "No total fallback",
+          "No identification of Realization_C(C) with Expr_D(C)",
+          "No implicit coercion between realization and semantic-target layers",
+          "No witness uniqueness or completeness claim"
+        ]
+      }
+    },
+    {
+      "object_id": "OBJ-AX-WITNESS-REPDIST",
+      "object_class": "epistemic_rule",
+      "title": "Witness to representability directionality formation axiom",
+      "status": "proposed",
+      "source_bindings": [
+        "D_relation_witness_foundational_candidate.md"
+      ],
+      "dependency_links": [
+        "OBJ-TYPE_WITNESS_C",
+        "TypedWitness_C",
+        "RepDist_C"
+      ],
+      "claim_scope": "context-indexed",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "metadata": {
+        "classification": "FORMATION_AND_DIRECTIONALITY_AXIOM",
+        "statement": "∀ (C : ContextUniverse) (r : Rel_C(C)) (d : Dist_C(C)) (w : TYPE_WITNESS_C(C,r,d)) (x_d : Expr_D(C)), TypedWitness_C(C, w, x_d) → RepDist_C(C, x_d)",
+        "scope": "FORMATION_ONLY",
+        "semantic_layers": [
+          "L1_SEMANTIC_WITNESS",
+          "L3_VALIDATION_JUDGMENT"
+        ],
+        "provenance": {
+          "approval_packet": "D_TYPE_WITNESS_CANONICAL_MUTATION_APPROVAL_20260724_001",
+          "source_resolution": "D_RELATION_WITNESS_HUMAN_APPROVAL_RESOLUTION_20260724_001",
+          "source_path": "D_relation_witness_foundational_candidate.md"
+        },
+        "prohibited_strengthening": [
+          "No converse RepDist_C(C, x_d) implies witness existence",
+          "No biconditional with TypedWitness_C",
+          "No transition preservation"
+        ]
+      }
+    },
+    {
+      "object_id": "OBJ-AX-REALIZATION-WITNESS",
+      "object_class": "epistemic_rule",
+      "title": "Realization soundness formation axiom",
+      "status": "proposed",
+      "source_bindings": [
+        "D_relation_witness_foundational_candidate.md"
+      ],
+      "dependency_links": [
+        "OBJ-project_w",
+        "OBJ-TYPE_WITNESS_C",
+        "TypedWitness_C"
+      ],
+      "claim_scope": "context-indexed",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "metadata": {
+        "classification": "FORMATION_AND_REALIZATION_SOUNDNESS_AXIOM",
+        "statement": "∀ (C : ContextUniverse) (r : Rel_C(C)) (d : Dist_C(C)) (x_r : Realization_C(C)) (x_d : Expr_D(C)) (w : TYPE_WITNESS_C(C,r,d)), project_w(C, r, d, x_r, x_d) = Some(w) → TypedWitness_C(C, w, x_d)",
+        "scope": "FORMATION_ONLY",
+        "semantic_layers": [
+          "L1_SEMANTIC_WITNESS",
+          "L2_CONCRETE_REALIZATION",
+          "L3_VALIDATION_JUDGMENT"
+        ],
+        "provenance": {
+          "approval_packet": "D_TYPE_WITNESS_CANONICAL_MUTATION_APPROVAL_20260724_001",
+          "source_resolution": "D_RELATION_WITNESS_HUMAN_APPROVAL_RESOLUTION_20260724_001",
+          "source_path": "D_relation_witness_foundational_candidate.md"
+        },
+        "prohibited_strengthening": [
+          "No every-realization success claim",
+          "No witness realization completeness claim",
+          "No TraceCompatible_C-only inference",
+          "No transition preservation"
+        ]
+      }
+    },
+    {
       "object_id": "OBJ-Delta",
       "object_class": "operator",
       "title": "Delta transition operator",
