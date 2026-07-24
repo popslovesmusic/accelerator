@@ -1,0 +1,118 @@
+{
+  "completed_refresh_task": "None",
+  "highest_priority_next_task": "TASK-MNT-001-GOVERNANCE-HASH-UPDATE",
+  "task_impact_profiles": [
+    {
+      "task_id": "TASK-MNT-001-GOVERNANCE-HASH-UPDATE",
+      "unlocks": [
+        "governance_integrity_validation PASS",
+        "global_validate.py PASS"
+      ],
+      "blocked_objects": [
+        "all promotions",
+        "all claim elevations"
+      ],
+      "future_campaigns_enabled": [
+        "CAMPAIGN_D_SEMANTIC_PRESERVATION_001"
+      ],
+      "estimated_effort": "LOW",
+      "estimated_compute_cost": "LOW",
+      "expected_repository_value": "VERY_HIGH",
+      "blocking_tasks_removed": 1,
+      "risk": "low",
+      "confidence": "high"
+    },
+    {
+      "task_id": "TASK-MNT-002-DB-SNAPSHOT-REFRESH",
+      "unlocks": [
+        "query_governance.py freshness PASS"
+      ],
+      "blocked_objects": [
+        "clean closeout validation"
+      ],
+      "future_campaigns_enabled": [],
+      "estimated_effort": "LOW",
+      "estimated_compute_cost": "LOW",
+      "expected_repository_value": "HIGH",
+      "blocking_tasks_removed": 1,
+      "risk": "low",
+      "confidence": "high"
+    },
+    {
+      "task_id": "TASK-D-001D-REPRESENTABLE-DISTINCTION",
+      "unlocks": [
+        "OBL-D-001E"
+      ],
+      "blocked_objects": [
+        "D theorem promotion"
+      ],
+      "future_campaigns_enabled": [
+        "CAMPAIGN_D_SEMANTIC_PRESERVATION_001"
+      ],
+      "estimated_effort": "HIGH",
+      "estimated_compute_cost": "MEDIUM",
+      "expected_repository_value": "VERY_HIGH",
+      "blocking_tasks_removed": 1,
+      "risk": "medium",
+      "confidence": "high"
+    }
+  ],
+  "tasks": [
+    {
+      "task_id": "TASK-MNT-001-GOVERNANCE-HASH-UPDATE",
+      "objective": "Update baseline hashes for modified governance files in registry/governance_hash_registry.json.",
+      "required_inputs": [
+        "scripts/governance/enforce_governance_integrity.py",
+        "AGENTS.md",
+        "GEMINI.md"
+      ],
+      "expected_outputs": [
+        "updated registry/governance_hash_registry.json"
+      ],
+      "completion_test": "enforce_governance_integrity.py passes without errors.",
+      "estimated_effort": "LOW",
+      "dependencies": [],
+      "priority": "CRITICAL",
+      "assigned_agent_role": "M MAINTENANCE_AGENT",
+      "recommended_next_action": "Run python scripts/governance/enforce_governance_integrity.py --initialize"
+    },
+    {
+      "task_id": "TASK-MNT-002-DB-SNAPSHOT-REFRESH",
+      "objective": "Synchronize the database snapshot index with current repository state.",
+      "required_inputs": [
+        "scripts/db/snapshot_registries.py"
+      ],
+      "expected_outputs": [
+        "refreshed SQLite index snapshot"
+      ],
+      "completion_test": "query_governance.py freshness reports snapshot is fresh.",
+      "estimated_effort": "LOW",
+      "dependencies": [
+        "TASK-MNT-001-GOVERNANCE-HASH-UPDATE"
+      ],
+      "priority": "HIGH",
+      "assigned_agent_role": "M MAINTENANCE_AGENT",
+      "recommended_next_action": "Run python scripts/db/snapshot_registries.py"
+    },
+    {
+      "task_id": "TASK-D-001D-REPRESENTABLE-DISTINCTION",
+      "objective": "Define representable distinction and verify what Pi_D preserves.",
+      "required_inputs": [
+        "OBL-D-001C completion certificate",
+        "registry/math/d_semantics_obligation_registry.json"
+      ],
+      "expected_outputs": [
+        "representable distinction definition",
+        "preservation verification evidence"
+      ],
+      "completion_test": "Representable distinction constraints are verified across all valid configurations.",
+      "estimated_effort": "HIGH",
+      "dependencies": [
+        "TASK-MNT-002-DB-SNAPSHOT-REFRESH"
+      ],
+      "priority": "HIGH",
+      "assigned_agent_role": "EMPIRICAL_EVIDENCE_ANALYST",
+      "recommended_next_action": "Begin drafting representable distinction criteria."
+    }
+  ]
+}

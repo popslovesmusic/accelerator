@@ -1,0 +1,70 @@
+{
+  "standard": "ACTIONABLE_OBLIGATION_STANDARD_V2",
+  "campaign_id": "CAMPAIGN_GOVERNANCE_INTEGRITY_CRAWL_20260724_002",
+  "objective": "Resolve repository validation failure caused by governance hash mismatches and stale database snapshot index.",
+  "why_it_exists": "Unregistered changes to governance documents break automated validation, preventing any promotional or execution actions.",
+  "execution_steps": [
+    {
+      "step": 1,
+      "description": "Initialize the governance integrity hash registry to capture current states of AGENTS.md and GEMINI.md."
+    },
+    {
+      "step": 2,
+      "description": "Snapshot the database registry registries to restore freshness alignment."
+    },
+    {
+      "step": 3,
+      "description": "Rerun scripts/global_validate.py to verify clean passing state."
+    }
+  ],
+  "expected_deliverables": [
+    {
+      "artifact": "updated registry/governance_hash_registry.json",
+      "required": true
+    },
+    {
+      "artifact": "refreshed database snapshot",
+      "required": true
+    },
+    {
+      "artifact": "passing validation report",
+      "required": true
+    }
+  ],
+  "validation": {
+    "acceptance_tests": [
+      "enforce_governance_integrity.py reports success.",
+      "query_governance.py freshness reports success.",
+      "global_validate.py returns exit code 0."
+    ],
+    "required_reviews": [
+      "human review"
+    ],
+    "mechanized_checks": [
+      "integrity validator",
+      "freshness validator"
+    ],
+    "simulation_checks": []
+  },
+  "success_definition": "Governance integrity is aligned with the active commit, database snapshot is fresh, and repository-wide validation passes without errors.",
+  "failure_conditions": [
+    "global_validate.py continues to exit with a non-zero code.",
+    "Hash registry update does not cover all modified assets."
+  ],
+  "unlocks": {
+    "proofs": [],
+    "theorems": [],
+    "definitions": [],
+    "campaigns": [
+      "CAMPAIGN_D_SEMANTIC_PRESERVATION_001"
+    ],
+    "repository_objects": [
+      "TASK-D-001D-REPRESENTABLE-DISTINCTION"
+    ]
+  },
+  "recommended_agent": "M MAINTENANCE_AGENT",
+  "completion_state": {
+    "status": "BLOCKED",
+    "completion_percent": 0
+  }
+}

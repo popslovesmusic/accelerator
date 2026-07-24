@@ -1,0 +1,30 @@
+{
+  "campaign_id": "CAMPAIGN_GOVERNANCE_HASH_REPAIR_20260724_001",
+  "objective": "Update the baseline governance hash registry and refresh the database snapshot index to resolve repository validation blocking conditions.",
+  "scope": [
+    "AGENTS.md",
+    "GEMINI.md",
+    "departments/analysis/AGENTS.md",
+    "departments/analysis/GEMINI.md",
+    "registry/governance_hash_registry.json",
+    "registry/db/acellorator_index.sqlite"
+  ],
+  "inputs": [
+    "scripts/governance/enforce_governance_integrity.py",
+    "scripts/db/snapshot_registries.py",
+    "registry/governance_hash_registry.json"
+  ],
+  "expected_outputs": [
+    "updated registry/governance_hash_registry.json",
+    "refreshed registry/db/acellorator_index.sqlite snapshot",
+    "passing global_validate.py status"
+  ],
+  "stopping_conditions": [
+    "enforce_governance_integrity.py passes without errors.",
+    "query_governance.py freshness reports database snapshot is fresh.",
+    "global_validate.py runs successfully to completion."
+  ],
+  "estimated_difficulty": "LOW",
+  "estimated_value": "CRITICAL",
+  "executive_recommendation": "FORMALIZE"
+}
