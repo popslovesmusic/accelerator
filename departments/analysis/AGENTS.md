@@ -40,7 +40,9 @@ Agents working here must:
 - begin every campaign with an executive dashboard containing repository health, assessment, discoveries, critical path, next action, and human decision state.
 - state what each task unlocks, estimate cost and repository value, rank by impact, and hand off to the next specialist agent with deliverables and completion condition.
 - package every obligation under Actionable Obligation Standard v2 with one measurable objective, ordered execution, validation, failure, escalation, unlock, and discharge-certificate fields.
-- treat counterexamples as automatic reopen events and upstream dependency changes as certificate invalidation events.
+- treat counterexamples as automatic reopen events and upstream dependency changes as certificate invalidation events,
+- store all historical closed campaign zip archives in the designated archives directory (departments/analysis/campaigns/archives/) to prevent visual clutter and name confusion with active uncompressed campaign reference folders.
+
 
 ## 3. Must Not
 
