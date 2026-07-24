@@ -60,6 +60,10 @@ For each material debt or obligation, record its owner, source, dependency, evid
 - Do not erase contradictions, rewrite historical records, repair source material silently, close queues, execute work items, approve tools, or promote terms or claims.
 - Every candidate requires human review unless an existing governance rule explicitly states otherwise.
 
+## Approval Gate
+
+`crawl` is read-only. Analysis outputs are observations, classifications, recommendations, or bounded candidates; they are not permission to change repository state. Before applying any proposed change to a source file, registry, script, configuration, report, campaign, queue, or canonical output, obtain explicit human approval and route the change through a separate authorized patch or maintenance action.
+
 ## Discovery Classes
 
 Assign exactly one primary class:

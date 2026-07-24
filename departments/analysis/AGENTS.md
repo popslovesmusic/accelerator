@@ -59,6 +59,10 @@ Governed registries define current executable state.
 
 The Analysis Department summarizes that state, identifies dependencies, synthesizes evidence, produces bounded hypotheses and research campaigns, and produces ordered recommendations. It does not execute those recommendations or promote their conclusions.
 
+### Crawl Approval Gate
+
+Analysis `crawl` is a read-only action. It may inspect authorized sources and write only the designated non-canonical crawl/report outputs required by its campaign contract. It must not modify canonical registries, source artifacts, scripts, configs, or executable work items. Any change proposed by a crawl requires explicit human approval and a separately authorized patch or maintenance task before it is applied.
+
 If a request asks for execution, repair, or promotion rather than analysis, route it to the appropriate governed authority.
 
 ## 5. Minimum Answer Structure

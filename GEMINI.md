@@ -36,6 +36,7 @@ Every action must be grounded in the four foundational laws:
 
 - `crawl` is a global routing command for the governed Analysis Department crawl defined in `departments/analysis/GEMINI.md`.
 - `crawl` means bounded database-wide analysis and evidence synthesis; it does not mean filesystem traversal or SQLite artifact indexing.
+- `crawl` is read-only by default. Findings may be recorded only in authorized analysis output surfaces; applying any repository, registry, report, or campaign change requires explicit human approval and a separate authorized patch action.
 - SQLite artifact indexing is a separate explicit operation: `python scripts/db/index_artifacts.py`.
 
 ## 4. Operational Mandates
