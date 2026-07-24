@@ -55,7 +55,7 @@ P122 | Braid Projection Proof | L128 | restricted_local_argument_only | Bounded 
 P123 | Braid Confinement Proof | L129 | restricted_local_argument_only | Bounded justification of braid closure stability under L129
 P124 | Polarity Closure Proof | L130 | restricted_local_argument_only | Bounded justification of nested polarity equivalence under L130
 P125 | D Typed Projection Transition Obligations | L131, L113, OBJ-PID-010, OBJ-DSTAR-010 | scaffold_pending_discharge | records the typed transition premises and falsification vectors for D projection
-
+P126 | D Typed Projection Type Preservation Scope Closure | L131, L113, P125 | restricted_local_argument_only | bounded type-level closure for OBL-D-001C; semantic preservation remains outside scope
 
 
 

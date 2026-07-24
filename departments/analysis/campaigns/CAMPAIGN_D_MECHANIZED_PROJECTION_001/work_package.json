@@ -1,0 +1,107 @@
+{
+  "standard": "ACTIONABLE_OBLIGATION_STANDARD_V2",
+  "campaign_id": "CAMPAIGN_D_MECHANIZED_PROJECTION_001",
+  "packages": [
+    {
+      "obligation_id": "OBL-D-001C",
+      "title": "Typed transition preservation",
+      "objective": "Package the supported type-level result, keep semantic claims out of scope, and present the packet for human review.",
+      "why_it_exists": "The live D frontier needs a clean C packet before D can be reviewed without inherited ambiguity.",
+      "priority": "CRITICAL",
+      "critical_path": true,
+      "estimated_effort": "MEDIUM",
+      "estimated_compute_cost": "LOW",
+      "repository_value": "VERY_HIGH",
+      "required_inputs": [
+        "OBL-D-001A certificate",
+        "P125",
+        "0013 candidate note",
+        "fixture checker",
+        "independent review"
+      ],
+      "assumptions": [
+        "A/B remain valid",
+        "human review is still required for discharge",
+        "semantic representability is downstream of OBL-D-001D"
+      ],
+      "blocking_dependencies": [],
+      "execution_steps": [
+        {
+          "step": 1,
+          "description": "Record the bounded type-level closure in an additive proof artifact."
+        },
+        {
+          "step": 2,
+          "description": "Qualify the downstream wording so no semantic claim leaks in."
+        },
+        {
+          "step": 3,
+          "description": "Assemble the negative-case and certificate packet for review."
+        },
+        {
+          "step": 4,
+          "description": "Submit for explicit human review without fabricating approval."
+        }
+      ],
+      "expected_deliverables": [
+        {
+          "artifact": "P126 additive proof",
+          "required": true
+        },
+        {
+          "artifact": "negative-case report",
+          "required": true
+        },
+        {
+          "artifact": "OBL-D-001C completion certificate",
+          "required": true
+        }
+      ],
+      "validation": {
+        "acceptance_tests": [
+          "Typed fixture evidence remains passing",
+          "Independent review remains scope-corrected",
+          "No semantic-preservation wording remains in the C packet"
+        ],
+        "required_reviews": [
+          "human review"
+        ],
+        "mechanized_checks": [
+          "typed fixture checker"
+        ],
+        "simulation_checks": []
+      },
+      "success_definition": "A reviewer can approve or reject OBL-D-001C without reopening type-level ambiguity.",
+      "failure_conditions": [
+        "semantic preservation is still attributed to C",
+        "human review is implied without evidence",
+        "negative cases are not preserved"
+      ],
+      "unlocks": {
+        "proofs": [
+          "clean review gate for P125/P126"
+        ],
+        "theorems": [],
+        "definitions": [
+          "typed projection preservation"
+        ],
+        "campaigns": [
+          "CAMPAIGN_D_C_HUMAN_REVIEW_AND_D_REPRESENTABILITY_001"
+        ],
+        "repository_objects": [
+          "OBL-D-001D review packet"
+        ]
+      },
+      "recommended_agent": "FORMAL_PROOF_ANALYST",
+      "escalation": {
+        "if_blocked": "Keep OBL-D-001C OPEN and state that only human review remains.",
+        "if_contradiction_found": "Preserve both readings and reopen the packet.",
+        "if_counterexample_found": "Invalidate the type-preservation packet and reopen OBL-D-001C."
+      },
+      "completion_state": {
+        "status": "OPEN",
+        "completion_percent": 90
+      }
+    }
+  ]
+}
