@@ -42,7 +42,9 @@ Agents working here must:
 - package every obligation under Actionable Obligation Standard v2 with one measurable objective, ordered execution, validation, failure, escalation, unlock, and discharge-certificate fields.
 - treat counterexamples as automatic reopen events and upstream dependency changes as certificate invalidation events,
 - store all historical closed campaign zip archives in the designated archives directory (departments/analysis/campaigns/archives/) to prevent visual clutter and name confusion with active uncompressed campaign reference folders,
-- treat the Analysis Department campaigns folder (departments/analysis/campaigns/) as the canonical directory for all active research and evaluation campaigns, with the legacy campaigns archived under the archives/ directory.
+- treat the Analysis Department campaigns folder (departments/analysis/campaigns/) as the canonical directory for all active research and evaluation campaigns, with the legacy campaigns archived under the archives/ directory,
+- execute the governance synchronization utility (scripts/governance/sync_governance.py) whenever modifying protected governance assets to prevent repository blocking and validation mismatches.
+
 
 
 
