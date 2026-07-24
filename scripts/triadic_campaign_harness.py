@@ -124,7 +124,7 @@ class TriadicCampaignOrchestrator:
             json.dump(self.report, f, indent=2)
 
 if __name__ == "__main__":
-    orchestrator = TriadicCampaignOrchestrator("campaigns/TRIADIC_CLOSURE_SUBSTRATE_CAMPAIGN_V1.json")
+    orchestrator = TriadicCampaignOrchestrator("departments/analysis/campaigns/archives/legacy_research_campaigns/TRIADIC_CLOSURE_SUBSTRATE_CAMPAIGN_V1.json")
     orchestrator.execute_phase_0()
     orchestrator.execute_phase_1()
     orchestrator.execute_phase_2()

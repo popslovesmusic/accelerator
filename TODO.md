@@ -41,7 +41,7 @@ This document tracks the strategic objectives following the successful consolida
 
 ### 4. Phase II Master Campaign: Cross-Layer Stability (INITIALIZED)
 - [x] **Task 4.1: Campaign Initialization**
-    - [x] Campaign definition created in `campaigns/BOOK_CAMPAIGN_PHASE_01_MASTER.json`.
+    - [x] Campaign definition created in `departments/analysis/campaigns/archives/legacy_research_campaigns/BOOK_CAMPAIGN_PHASE_01_MASTER.json`.
     - [x] Result directory established: `results/2026-05-27_run01_BOOK_CAMPAIGN_PHASE_01_MASTER/`.
     - [x] Lexicon terms induced (Adaptive Routing, Recursive Identity, etc.).
     - [x] Tool readiness verified (StructuralBox, SignalScope, TDA, Kuramoto).

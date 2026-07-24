@@ -143,7 +143,7 @@ Each recommendation should carry:
 
 #### ANL_REC_002
 - **Title:** Preserve source-scoped research-campaign momentum while backlog is reduced
-- **Source Evidence:** `governance/live/master_work_index.json`, `campaigns/BOOK_CAMPAIGN_PHASE_01_MASTER.json`, `registry/p0_engine_c4_elevation_campaign.json`, `departments/analysis/program_state_report.json`, `departments/analysis/recommended_action_queue.json`, `outputs/analysis/unlock_priority_report.json`
+- **Source Evidence:** `governance/live/master_work_index.json`, `departments/analysis/campaigns/archives/legacy_research_campaigns/BOOK_CAMPAIGN_PHASE_01_MASTER.json`, `registry/p0_engine_c4_elevation_campaign.json`, `departments/analysis/program_state_report.json`, `departments/analysis/recommended_action_queue.json`, `outputs/analysis/unlock_priority_report.json`
 - **Recommendation:** preserve research-campaign momentum while the mathematical backlog is reduced because source campaigns remain active or bounded in their authoritative artifacts even though the work-index routing layer has no open action.
 - **Claim Class:** `C1_model_relative`
 - **Status:** deterministic recommendation

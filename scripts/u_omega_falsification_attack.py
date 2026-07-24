@@ -42,7 +42,7 @@ def run_falsification_attack():
                 "name": "Projection-aliasing attack",
                 "evidence_sources": [
                     "outputs/audits/reconstruction_equivalence_geometry_report.json",
-                    "campaigns/PD_CG_ROOT_TRACE_FALSIFICATION_CAMPAIGN_V1.json"
+                    "departments/analysis/campaigns/archives/legacy_research_campaigns/PD_CG_ROOT_TRACE_FALSIFICATION_CAMPAIGN_V1.json"
                 ],
                 "finding": "Equivalent observables were generated from incompatible distinction histories. However, the U_Omega schema explicitly forbids treating projection equivalence as process identity. Thus, projection aliasing does not falsify the process law.",
                 "status": "claim survives this attack class",

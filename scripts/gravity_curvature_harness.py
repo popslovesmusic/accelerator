@@ -86,7 +86,7 @@ class GravityCurvatureOrchestrator:
             json.dump(self.report, f, indent=2)
 
 if __name__ == "__main__":
-    orchestrator = GravityCurvatureOrchestrator("campaigns/GRAVITY_APP_RELATIONAL_CURVATURE_CAMPAIGN_V1.json")
+    orchestrator = GravityCurvatureOrchestrator("departments/analysis/campaigns/archives/legacy_research_campaigns/GRAVITY_APP_RELATIONAL_CURVATURE_CAMPAIGN_V1.json")
     orchestrator.execute()
     orchestrator.save_report()
     print(f"Campaign results saved to {orchestrator.base_out_dir}")

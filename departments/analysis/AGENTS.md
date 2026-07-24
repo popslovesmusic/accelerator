@@ -41,7 +41,9 @@ Agents working here must:
 - state what each task unlocks, estimate cost and repository value, rank by impact, and hand off to the next specialist agent with deliverables and completion condition.
 - package every obligation under Actionable Obligation Standard v2 with one measurable objective, ordered execution, validation, failure, escalation, unlock, and discharge-certificate fields.
 - treat counterexamples as automatic reopen events and upstream dependency changes as certificate invalidation events,
-- store all historical closed campaign zip archives in the designated archives directory (departments/analysis/campaigns/archives/) to prevent visual clutter and name confusion with active uncompressed campaign reference folders.
+- store all historical closed campaign zip archives in the designated archives directory (departments/analysis/campaigns/archives/) to prevent visual clutter and name confusion with active uncompressed campaign reference folders,
+- treat the Analysis Department campaigns folder (departments/analysis/campaigns/) as the canonical directory for all active research and evaluation campaigns, with the legacy campaigns archived under the archives/ directory.
+
 
 
 ## 3. Must Not

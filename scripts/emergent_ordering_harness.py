@@ -88,7 +88,7 @@ class EmergentOrderingOrchestrator:
             json.dump(self.report, f, indent=2)
 
 if __name__ == "__main__":
-    orchestrator = EmergentOrderingOrchestrator("campaigns/EMERGENT_RELATIONAL_ORDERING_CAMPAIGN_V1.json")
+    orchestrator = EmergentOrderingOrchestrator("departments/analysis/campaigns/archives/legacy_research_campaigns/EMERGENT_RELATIONAL_ORDERING_CAMPAIGN_V1.json")
     orchestrator.execute()
     orchestrator.save_report()
     print(f"Campaign results saved to {orchestrator.base_out_dir}")
