@@ -1,18 +1,19 @@
-# Foundational Theory Draft: Context-Indexed Relation Witnesses
+# Foundational Theory: Context-Indexed Relation Witnesses
 
-**Status**: NON_CANONICAL_FOUNDATIONAL_CANDIDATE  
+**Status**: APPROVED_FOUNDATIONAL_CANDIDATE_WITH_REFINEMENT  
+**Resolution ID**: D_RELATION_WITNESS_HUMAN_APPROVAL_RESOLUTION_20260724_001  
 **Domain**: D_SEMANTICS  
 **Blocked Obligation**: OBL-D-001D  
 
 ---
 
 ## 1. Scope
-This document specifies the algebraic and semantic structure of context-indexed relation witnesses under context `C` for the Mono-Process Framework. It is a non-canonical candidate draft.
+This document specifies the approved algebraic and semantic structure of context-indexed relation witnesses under context `C` for the Mono-Process Framework. 
 
 ---
 
 ## 2. Semantic Layers
-To avoid ontological conflation, five distinct semantic layers are defined:
+To avoid ontological conflation, five distinct semantic layers are enforced:
 - **L0 (Context)**: Context parameter `C`.
 - **L1 (Relational objects)**: Relations, distinctions, and semantic relation witnesses.
 - **L2 (Witness realizations)**: Trace certificates, Lean proof terms, and executable artifacts.
@@ -25,7 +26,8 @@ To avoid ontological conflation, five distinct semantic layers are defined:
 - `C` (context): Universe `ContextUniverse`.
 - `Expr_D`: Domain of whole participation expressions.
 - `TYPE_PROJECTION_C`: Target projection type in context `C`.
-- `TYPE_WITNESS_C`: Set of relational witnesses in context `C`.
+- `TYPE_WITNESS_C`: Set of relational witnesses in context `C` (approved as `TYPE` for induction).
+- `project_w`: Witness transport mapping (approved as `PARTIAL_FUNCTION` for induction).
 
 ---
 
@@ -53,8 +55,8 @@ To avoid ontological conflation, five distinct semantic layers are defined:
 ---
 
 ## 7. Relation Witness Algebra
-- **Witness Identity**: Intensional and relational, independent of concrete realizations.
-- **Witness Equivalence**: Explicitly context-indexed `=_w,C`.
+- **Minimal Structure**: Classified as a **context-indexed transport system**. Identity, associativity, and invertibility laws are not assumed.
+- **Witness Identity**: Adopts successor witness existence without identity claim. No equation `w' = w` or witness equivalence class is required at this stage.
 - **Composition**: Partial and context-preserving composition `w1 ∘ w2` is defined only on matching relation boundaries.
 - **Transport**: Partial mapping across admissible transitions.
 - **Restriction**: Restricting a witness from `C` to subset context `C'` is monotone.
@@ -79,10 +81,11 @@ Completeness is not assumed.
 
 ---
 
-## 11. Candidate Axioms
-- `AX-WITNESS-REPDIST`: `Rel_C(p, q, w) ∧ TypedWitness_C(w) ∧ TraceCompatible_C(w) → RepDist_C(p, q, w)`
-- `AX-REALIZATION-WITNESS`: `Realizes_C(r, w) ∧ ValidRealization(r) → TypedWitness_C(w)`
-- `AX-TRANSPORT-PRESERVATION`: `RepDist_C(Pi_D,C(x), Pi_D,C(y), w) ∧ Transport_C(tau, w, w') → RepDist_C(Pi_D,C(x'), Pi_D,C(y'), w')`
+## 11. Approved Formation Axioms
+- **AX-WITNESS-REPDIST (Formation and Directionality)**: `Rel_C(p, q, w) ∧ TypedWitness_C(w) ∧ TraceCompatible_C(w) → RepDist_C(p, q, w)`
+  - *Constraint*: Does not imply the converse.
+- **AX-REALIZATION-WITNESS (Realization Soundness)**: `Realizes_C(r, w) ∧ ValidRealization(r) → TypedWitness_C(w)`
+  - *Constraint*: Does not imply completeness or identification of realization with witness.
 
 ---
 
@@ -100,6 +103,8 @@ The obligation can be stated as:
 ## 14. Rejected Alternatives
 - Context-free trace compatibility (rejected by DEC-SEM-002).
 - Equating `TypedWitness_C` with a single realization class such as trace certificates (rejected by DEC-SEM-001).
+- Category and Groupoid algebraic structures.
+- Total transport or total composition mapping.
 
 ---
 
@@ -112,11 +117,11 @@ The obligation can be stated as:
 ## 16. Source Traceability
 - `docs/theory/foundational/5_03_26 unity/math/notes/0014_d_representable_distinction_candidate.md`
 - Resolutions `DEC-SEM-001` and `DEC-SEM-002`.
+- Resolution `D_RELATION_WITNESS_HUMAN_APPROVAL_RESOLUTION_20260724_001`.
 
 ---
 
 ## 17. Canonicalization Requirements
 To elevate this draft to canonical status:
-1. Formally define `TYPE_WITNESS_C` in the math type registry.
-2. Formally define `project_w` signature and axioms in Lean.
-3. Rerun the validation gate.
+1. Prepare canonical definitions and signatures for C, Rel_C, Dist_C, TYPE_WITNESS_C, and project_w.
+2. Submit the authorized canonical induction packet.

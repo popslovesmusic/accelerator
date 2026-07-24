@@ -1,0 +1,68 @@
+{
+  "pre_mutation_validations": [
+    {
+      "check_id": "PRE-VAL-001",
+      "description": "Ensure no duplicate object IDs (OBJ-TYPE_WITNESS_C, OBJ-project_w) exist in registry/formal_object_registry.json.",
+      "type": "registry_integrity_check"
+    },
+    {
+      "check_id": "PRE-VAL-002",
+      "description": "Ensure math note file docs/theory/foundational/5_03_26 unity/math/notes/0014_d_representable_distinction_candidate.md exists and matches its recorded hash.",
+      "type": "file_hash_verification"
+    }
+  ],
+  "post_mutation_validations": [
+    {
+      "check_id": "POST-VAL-001",
+      "description": "Verify that new registry objects parse correctly and validate against registry JSON schema.",
+      "type": "json_schema_validation"
+    },
+    {
+      "check_id": "POST-VAL-002",
+      "description": "Run scripts/global_validate.py to ensure ecosystem consistency is preserved.",
+      "type": "global_integrity_validation"
+    }
+  ],
+  "negative_tests": [
+    {
+      "test_id": "NEG-WIT-001",
+      "assertion": "RepDist_C does not imply existence of TYPE_WITNESS_C.",
+      "expected_result": "NO_SUCH_RULE_REGISTERED"
+    },
+    {
+      "test_id": "NEG-WIT-002",
+      "assertion": "project_w is not total.",
+      "expected_result": "PARTIALITY_PRESERVED"
+    },
+    {
+      "test_id": "NEG-WIT-003",
+      "assertion": "TraceCompatible_C does not independently prove TypedWitness_C.",
+      "expected_result": "NO_DIRECT_INFERENCE"
+    },
+    {
+      "test_id": "NEG-WIT-004",
+      "assertion": "AX-WITNESS-REPDIST does not encode transition preservation.",
+      "expected_result": "FORMATION_ONLY"
+    },
+    {
+      "test_id": "NEG-WIT-005",
+      "assertion": "AX-REALIZATION-WITNESS does not require every realization to yield a witness.",
+      "expected_result": "PROJECTION_FAILURE_ALLOWED"
+    },
+    {
+      "test_id": "NEG-WIT-006",
+      "assertion": "No category, groupoid, associativity, identity, or invertibility law is introduced.",
+      "expected_result": "NO_UNAPPROVED_ALGEBRA"
+    },
+    {
+      "test_id": "NEG-WIT-007",
+      "assertion": "No witness equality w' = w is required by OBL-D-001D formation.",
+      "expected_result": "SUCCESSOR_EXISTENCE_ONLY"
+    },
+    {
+      "test_id": "NEG-WIT-008",
+      "assertion": "TypedWitness_C has exactly one final-argument type (Expr_D) in every axiom statement.",
+      "expected_result": "TYPE_CONSISTENCY_VERIFIED"
+    }
+  ]
+}

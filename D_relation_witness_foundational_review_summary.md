@@ -1,46 +1,36 @@
 # D-Semantics Relation Witness Foundational Candidate Review Summary
 
 ## Scope and Purpose
-This document provides a human-facing review of the complete non-canonical relation-witness candidate foundation (`D_relation_witness_foundational_candidate.md`) for necessity, consistency, traceability, and minimality.
+This document summarizes the approved foundational candidate specifying the semantic and algebraic structure of relation witnesses in context `C`.
 
 ---
 
 ## Established Facts
-- **Obligation Status**: `OBL-D-001D` remains `OPEN_BLOCKED`.
+- **Obligation Status**: `OBL-D-001D` remains `OPEN_FORMABLE_WITH_APPROVED_FORMATION_AXIOMS`.
 - **Preceding Obligations**: `OBL-D-001A`, `OBL-D-001B`, and `OBL-D-001C` (type-level scope only) are discharged.
 
 ---
 
-## Human-Approved Constraints
-- **Witness Abstraction (DEC-SEM-001)**: `TypedWitness_C` is a semantic witness abstraction; realizations (trace certificates, Lean proof terms) map to it but are not identical to it.
+## Human-Approved Commitments
+- **Witness Abstraction (DEC-SEM-001 / APP-WIT-001)**: `TypedWitness_C` is a semantic witness abstraction; realizations (trace certificates, Lean proof terms) map to it but are not identical to it.
 - **Context Indexation (DEC-SEM-002)**: `TraceCompatible_C` is explicitly indexed by context `C`.
+- **Minimal Structure (APP-WIT-002)**: Classified as a context-indexed transport system (no default category, semicategory, or groupoid structure assumed).
+- **Identity Model (APP-WIT-003)**: Successor witness existence without identity claim.
+- **Formation Axioms (APP-WIT-004)**: Refined AX-WITNESS-REPDIST and AX-REALIZATION-WITNESS are approved as language formation/directionality rules only.
+- **Associativity Deferral (APP-WIT-005)**: Multi-step composition closure deferred.
 
 ---
 
-## Proposals
-- **Definitions and Signatures**: Candidates for primitive types (`TYPE_WITNESS_C`, `project_w`), objects (`C`, `Rel_C`, `Dist_C`), and judgments (`RepDist_C`, `TypedWitness_C`, `TraceCompatible_C`, `Transport_C`).
-- **Foundational Axioms**: Proposed axioms `AX-WITNESS-REPDIST` and `AX-REALIZATION-WITNESS` to bridge realizations to representability.
-
----
-
-## Unresolved Questions
-- **Composition Associativity**: Deferred to future reachability theorems.
-- **Algebraic Identity**: Intensional witness identity mapped to successor witness existence.
-
----
-
-## Rejected Structures
-- **Category / Groupoid Classification**: Rejected. Category and groupoid classifications are rejected due to the lack of identity witness elements and composition associativity proofs.
-- **Context-Free Trace Compatibility**: Rejected.
+## Rejected Commitments
+- Default category or groupoid algebraic structures.
+- Strict witness preservation by identity or total transport mappings.
+- Equating trace compatibility or executable success with semantic truth.
 
 ---
 
 ## Sequence of Next Tasks
-### Pre-Approval Task (Smallest Next Step)
-Submit this foundational candidate review summary to the human authority for formal approval of the five items in the human approval surface.
+### Minimal Next Task
+Generate a canonical induction packet for the exact context-indexed signatures of `TYPE_WITNESS_C` and `project_w`, including the refined formation-only scope of `AX-WITNESS-REPDIST` and `AX-REALIZATION-WITNESS` under campaign ID `CANONICAL_INDUCTION_D_SEMANTICS_TYPE_WITNESS_PROJECT_W_20260724_001`.
 
-### Post-Approval Task
-Upon receiving human approval:
-1. Generate the canonical induction packet for the signatures.
-2. Formally register `TYPE_WITNESS_C` and `project_w` in the math type registry and `registry/math_hashes.json`.
-3. Initiate the formal Lean implementation and the bridge lemma campaign.
+### Post-Induction Task
+After approved registry induction and signature validation, construct the missing bridge-lemma campaign for `OBL-D-001D`.

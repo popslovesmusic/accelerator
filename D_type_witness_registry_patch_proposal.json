@@ -1,0 +1,87 @@
+{
+  "patch_target": "registry/formal_object_registry.json",
+  "insertion_anchor": "$.objects",
+  "proposed_entries": [
+    {
+      "object_id": "OBJ-TYPE_WITNESS_C",
+      "object_class": "primitive",
+      "title": "Indexed relation witness type family",
+      "status": "proposed",
+      "source_bindings": [
+        "docs/theory/foundational/5_03_26 unity/math/notes/0014_d_representable_distinction_candidate.md",
+        "D_relation_witness_foundational_candidate.md"
+      ],
+      "dependency_links": [],
+      "claim_scope": "context-indexed",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "metadata": {
+        "signature": "TYPE_WITNESS_C(C: ContextUniverse, r: Rel_C(C), d: Dist_C(C)) : Type"
+      }
+    },
+    {
+      "object_id": "OBJ-project_w",
+      "object_class": "operator",
+      "title": "Partial witness projection mapping",
+      "status": "proposed",
+      "source_bindings": [
+        "D_relation_witness_foundational_candidate.md"
+      ],
+      "dependency_links": [
+        "OBJ-TYPE_WITNESS_C"
+      ],
+      "claim_scope": "context-indexed",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "metadata": {
+        "signature": "project_w(C: ContextUniverse, r: Rel_C(C), d: Dist_C(C), x_r: Realization_C(C), x_d: Expr_D(C)) : Option (TYPE_WITNESS_C(C, r, d))"
+      }
+    },
+    {
+      "object_id": "OBJ-AX-WITNESS-REPDIST",
+      "object_class": "epistemic_rule",
+      "title": "Witness to representability directionality formation axiom",
+      "status": "proposed",
+      "source_bindings": [
+        "D_relation_witness_foundational_candidate.md"
+      ],
+      "dependency_links": [
+        "OBJ-TYPE_WITNESS_C"
+      ],
+      "claim_scope": "context-indexed",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "metadata": {
+        "statement": "∀ (C : ContextUniverse) (r : Rel_C(C)) (d : Dist_C(C)) (w : TYPE_WITNESS_C(C,r,d)) (x_d : Expr_D(C)), TypedWitness_C(C, w, x_d) -> RepDist_C(C, x_d)"
+      }
+    },
+    {
+      "object_id": "OBJ-AX-REALIZATION-WITNESS",
+      "object_class": "epistemic_rule",
+      "title": "Realization soundness formation axiom",
+      "status": "proposed",
+      "source_bindings": [
+        "D_relation_witness_foundational_candidate.md"
+      ],
+      "dependency_links": [
+        "OBJ-project_w"
+      ],
+      "claim_scope": "context-indexed",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "metadata": {
+        "statement": "∀ (C : ContextUniverse) (r : Rel_C(C)) (d : Dist_C(C)) (x_r : Realization_C(C)) (x_d : Expr_D(C)) (w : TYPE_WITNESS_C(C,r,d)), project_w(C, r, d, x_r, x_d) = Some(w) -> TypedWitness_C(C, w, x_d)"
+      }
+    }
+  ],
+  "duplicate_detection_result": "No duplicate or conflicting object identifiers detected.",
+  "conflict_detection_result": "No conflicts found; proposed objects reside in unallocated OBJ keys."
+}
