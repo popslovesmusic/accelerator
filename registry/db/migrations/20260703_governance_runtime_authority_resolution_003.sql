@@ -5,6 +5,66 @@ DROP VIEW IF EXISTS authority_resolution_view;
 
 CREATE VIEW authority_resolution_view AS
 SELECT
+    'registry/formal_object_registry.json' AS target_pattern,
+    'registry' AS authority_owner,
+    'registry/governance/patches/STAGED_DSEM_ENABLEMENT_008.json' AS authority_source,
+    'current' AS supersession_status,
+    '[]' AS superseded_by,
+    'clear' AS conflict_state,
+    'allow' AS decision,
+    'Manual-approved additive candidate and provisional formal-object registration.' AS reason,
+    '["registry/formal_object_registry.json","registry/governance/patches/STAGED_DSEM_ENABLEMENT_008.json"]' AS evidence_paths,
+    '[]' AS warnings
+UNION ALL
+SELECT
+    'registry/math_hashes.json' AS target_pattern,
+    'registry' AS authority_owner,
+    'registry/governance/patches/STAGED_DSEM_ENABLEMENT_008.json' AS authority_source,
+    'current' AS supersession_status,
+    '[]' AS superseded_by,
+    'clear' AS conflict_state,
+    'allow' AS decision,
+    'Manual-approved derived hash update.' AS reason,
+    '["registry/math_hashes.json","registry/governance/patches/STAGED_DSEM_ENABLEMENT_008.json"]' AS evidence_paths,
+    '[]' AS warnings
+UNION ALL
+SELECT
+    'registry/math/d_semantics_obligation_registry.json' AS target_pattern,
+    'registry' AS authority_owner,
+    'registry/governance/patches/STAGED_DSEM_ENABLEMENT_008.json' AS authority_source,
+    'current' AS supersession_status,
+    '[]' AS superseded_by,
+    'clear' AS conflict_state,
+    'allow' AS decision,
+    'Manual-approved metadata update retaining OBL-D-001D OPEN.' AS reason,
+    '["registry/math/d_semantics_obligation_registry.json","registry/governance/patches/STAGED_DSEM_ENABLEMENT_008.json"]' AS evidence_paths,
+    '[]' AS warnings
+UNION ALL
+SELECT
+    'registry/governance/d_semantics_enablement_registry.json' AS target_pattern,
+    'registry' AS authority_owner,
+    'registry/governance/patches/STAGED_DSEM_ENABLEMENT_008.json' AS authority_source,
+    'current' AS supersession_status,
+    '[]' AS superseded_by,
+    'clear' AS conflict_state,
+    'allow' AS decision,
+    'Manual-approved governed evidence registry surface.' AS reason,
+    '["registry/governance/d_semantics_enablement_registry.json","registry/governance/patches/STAGED_DSEM_ENABLEMENT_008.json"]' AS evidence_paths,
+    '[]' AS warnings
+UNION ALL
+SELECT
+    'registry/governance/patches/STAGED_DSEM_ENABLEMENT_008.json' AS target_pattern,
+    'registry' AS authority_owner,
+    'registry/governance/patches/STAGED_DSEM_ENABLEMENT_008.json' AS authority_source,
+    'current' AS supersession_status,
+    '[]' AS superseded_by,
+    'clear' AS conflict_state,
+    'allow' AS decision,
+    'Manual-approved composite patch registration.' AS reason,
+    '["registry/governance/patches/STAGED_DSEM_ENABLEMENT_008.json"]' AS evidence_paths,
+    '[]' AS warnings
+UNION ALL
+SELECT
     'registry/governance_change_ledger.json' AS target_pattern,
     'registry' AS authority_owner,
     'registry/governance_change_ledger.json' AS authority_source,
