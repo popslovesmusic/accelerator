@@ -1,0 +1,33 @@
+{
+  "patch_id": "D_TYPED_PROJECTION_TEXTBOOK_AUDIT_NORMALIZATION_20260724_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-24",
+  "type": "governance_patch",
+  "artifact_type": "governance_patch",
+  "title": "Normalize Textbook F.13 D Package Status After Scope Qualification",
+  "depends_on": [
+    "D_TYPED_PROJECTION_SCOPE_QUALIFICATION_20260724_001"
+  ],
+  "purpose": "Remove the stale duplicated F.13 D-package status line after the scoped OBL-D-001C sync so the textbook carries one current governed statement.",
+  "core_claim": "The F.13 D-package status paragraph is normalized to the current bounded A/B/C-E state without changing the substantive proof package.",
+  "required_file_updates": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "governance/live/textbook_projection_freshness_contract.json",
+    "registry/governance_change_ledger.json",
+    "registry/math_core_hashes.json"
+  ],
+  "success_criteria": {
+    "duplicate_stale_line_removed": true,
+    "single_current_d_status_line_retained": true,
+    "textbook_projection_contract_resynced": true
+  },
+  "claim_boundary": {
+    "claim_ceiling": "C0_BOOKKEEPING",
+    "does_not_promote": [
+      "theorem status",
+      "proof status",
+      "new semantic preservation claims",
+      "external validity"
+    ]
+  }
+}
