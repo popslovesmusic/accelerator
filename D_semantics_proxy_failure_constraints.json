@@ -1,0 +1,38 @@
+{
+  "falsified_proxies": [
+    {
+      "proxy_id": "PROXY-001",
+      "name": "projection-only representability",
+      "definition": "RepDist_C(p, q, w) iff type(p) = TYPE_PROJECTION_C and type(q) = TYPE_PROJECTION_C",
+      "falsification_evidence": "D_REPRESENTABLE_DISTINCTION_COUNTEREXAMPLE_SEARCH_20260723",
+      "reasons": "Falsified by case where identical projected image P7|P7 has different representability depending on whether the source witness is present or missing."
+    },
+    {
+      "proxy_id": "PROXY-002",
+      "name": "outcome-label representability",
+      "definition": "RepDist_C(p, q, w) iff outcome_label = 'reconvergence'",
+      "falsification_evidence": "D_REPRESENTABLE_DISTINCTION_BROADER_SEARCH_20260723",
+      "reasons": "Falsified by 594 counterexamples and 3 outcome label collisions where the same outcome label 'reconvergence' has different representability depending on source history."
+    },
+    {
+      "proxy_id": "PROXY-003",
+      "name": "residue-equivalence collapse",
+      "definition": "Collapse_D,C(x) iff Residue_D,C(x) is nonempty",
+      "falsification_evidence": "Notebook 20 claim falsification",
+      "reasons": "Non-empty residue is an expected byproduct of projection transition and does not equate to collapse of distinction."
+    }
+  ],
+  "failure_modes": [
+    "witness_erasure",
+    "history_omission_collision",
+    "residue_partition_drift"
+  ],
+  "negative_semantic_constraints": [
+    "RepDist_C must not be defined solely by target outcome labels.",
+    "RepDist_C must not be defined solely by projected image coordinate pairs.",
+    "Non-empty residue must not be equated with collapse of distinction representability."
+  ],
+  "unresolved_proxy_questions": [
+    "Does there exist a finite model size where outcome label collisions disappear?"
+  ]
+}

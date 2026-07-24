@@ -1,0 +1,20 @@
+{
+  "realization_classes": {
+    "trace_certificate": {
+      "definition": "Concrete metadata trace record containing execution steps and compatibility flags.",
+      "validation": "Validated by trace checker in simulator."
+    },
+    "formal_proof_term": {
+      "definition": "Formal Lean 4 proof term demonstrating derivation of the relation.",
+      "validation": "Validated by Lean 4 compiler."
+    },
+    "executable_witness_artifact": {
+      "definition": "Operational witness data generated during finite simulation run.",
+      "validation": "Validated by test runner."
+    }
+  },
+  "candidate_realization_relation": "Realizes_C : TYPE_REALIZATION x TYPE_WITNESS_C -> Prop",
+  "soundness_requirements": "Soundness: For all realizations r and semantic witnesses w, if Realizes_C(r, w) holds and r is valid within its respective class, then w is a valid semantic witness (TypedWitness_C(w) is true).",
+  "completeness_status": "Incomplete. Completeness (that every semantic witness has a concrete realization) is not assumed and remains generally false in infinite models.",
+  "cross_representation_equivalence_status": "Intensional equivalence only. A trace certificate is structurally distinct from a Lean proof term, and they cannot be substituted for each other directly. They are equivalent only through their mapping to the same abstract semantic witness w."
+}

@@ -1,0 +1,15 @@
+{
+  "transport_signature": "Transport_C : TYPE_TRANSITION x TYPE_WITNESS_C x TYPE_WITNESS_C -> Prop",
+  "transport_premises": [
+    "AdmissibleTransition(tau, x, y)",
+    "TypedWitness_C(w) holds for x",
+    "Pi_D,C(x) is defined"
+  ],
+  "transport_result": "Constructs target witness w' such that TypedWitness_C(w') holds for y.",
+  "transport_failure_conditions": [
+    "Transition tau is not admissible in context C",
+    "No target witness w' can be constructed satisfying relation validity",
+    "Target trace t' violates TraceCompatible_C"
+  ],
+  "relation_to_OBL_D_001C": "Type-level preservation (OBL-D-001C) only guarantees that target objects lie in TYPE_PROJECTION_C. It does not imply that Transport_C is defined, nor does it guarantee the existence or constructibility of the target relation witness w'. They are separated by a formal boundary (DIR-005)."
+}

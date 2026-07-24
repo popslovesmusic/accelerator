@@ -1,0 +1,46 @@
+{
+  "symbol": "TypedWitness_C",
+  "candidate_status": "NON_CANONICAL_CANDIDATE",
+  "witness_kind": "semantic_abstraction",
+  "signature": "TypedWitness_C : TYPE_WITNESS_C -> Prop",
+  "domain": "TYPE_WITNESS_C",
+  "codomain": "Prop",
+  "formation_rules": [
+    "w must be of type TYPE_WITNESS_C"
+  ],
+  "validity_conditions": [
+    "w carries trace compatibility flags",
+    "w carries relational indices required by C"
+  ],
+  "construction_rules": [
+    "Constructed from source transition witness via project_w(w)"
+  ],
+  "consumption_rules": [
+    "Consumed by RepDist_C to verify relational alignment"
+  ],
+  "relation_to_RepDist_C": "Necessary condition for RepDist_C. If w is missing or invalid, RepDist_C evaluates to false.",
+  "uniqueness_status": "unresolved",
+  "existence_status": "unresolved",
+  "representations": [
+    "Trace certificates",
+    "Lean proof terms",
+    "Executable artifacts"
+  ],
+  "representation_rule": "TypedWitness_C is a semantic witness abstraction; trace certificates, Lean proof terms, and executable artifacts are representations of that witness rather than the witness itself.",
+  "failure_conditions": [
+    "Incorrect type",
+    "Missing trace compatibility metadata",
+    "Failed project_w mapping"
+  ],
+  "source_traceability": [
+    "docs/theory/foundational/5_03_26 unity/math/notes/0014_d_representable_distinction_candidate.md",
+    "DEC-SEM-001 resolution (semantic witness abstraction)"
+  ],
+  "unsupported_gaps": [
+    "Definition of TYPE_WITNESS_C in formal system",
+    "Definition of witness mapping function project_w"
+  ],
+  "open_questions": [
+    "Does project_w preserve witness uniqueness?"
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "candidate_axioms": [
+    {
+      "axiom_id": "AX-WITNESS-REPDIST",
+      "statement": "For all p, q, w, Rel_C(p, q, w) ∧ TypedWitness_C(w) ∧ TraceCompatible_C(w) → RepDist_C(p, q, w)",
+      "authority": "PROPOSED",
+      "necessity": "HIGH",
+      "purpose": "Bridges relation witness validity and trace compatibility to representable distinction judgment.",
+      "forcing_risk": "None. States the constructive direction only; does not force the converse biconditional."
+    },
+    {
+      "axiom_id": "AX-REALIZATION-WITNESS",
+      "statement": "For all r, w, Realizes_C(r, w) ∧ ValidRealization(r) → TypedWitness_C(w)",
+      "authority": "HUMAN_APPROVED",
+      "necessity": "HIGH",
+      "purpose": "Bridges concrete realizations (Lean proof terms, trace certificates) to the semantic witness abstraction.",
+      "forcing_risk": "None. Satisfies DEC-SEM-001 resolution constraints."
+    },
+    {
+      "axiom_id": "AX-TRANSPORT-PRESERVATION",
+      "statement": "For all x, y, w, tau, w', RepDist_C(Pi_D,C(x), Pi_D,C(y), w) ∧ Transport_C(tau, w, w') → RepDist_C(Pi_D,C(x'), Pi_D,C(y'), w')",
+      "authority": "PROPOSED",
+      "necessity": "HIGH",
+      "purpose": "Axiomatises that witness transport preserves representability of distinction under transition.",
+      "forcing_risk": "Forcing risk exists if transport is assumed total. We maintain transport as a partial relation to avoid forcing OBL-D-001D."
+    },
+    {
+      "axiom_id": "AX-ADMISSIBILITY-WITNESS",
+      "statement": "For all w, TypedWitness_C(w) → TraceCompatible_C(w)",
+      "authority": "PROPOSED",
+      "necessity": "MEDIUM",
+      "purpose": "Declares that witness validity requires trace compatibility.",
+      "forcing_risk": "None."
+    }
+  ],
+  "independence_questions": [
+    "Is Transport_C independent of the specific transition path taken between states?"
+  ]
+}

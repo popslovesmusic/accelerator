@@ -1,0 +1,63 @@
+{
+  "approval_items": [
+    {
+      "item_id": "APP-WIT-001",
+      "category": "primitive definitions",
+      "wording": "Formally register C, Rel_C, Dist_C, TYPE_WITNESS_C, and project_w as foundational mathematical objects.",
+      "source_basis": "Candidate specifications and P125.",
+      "consequence_of_approval": "Provides the formal type parameters needed for all subsequent D-semantics proofs.",
+      "consequence_of_rejection": "Blocks signature check and Lean implementation.",
+      "recommended_status": "APPROVE"
+    },
+    {
+      "item_id": "APP-WIT-002",
+      "category": "minimal algebraic structure",
+      "wording": "Classify the algebraic structure of relation witnesses as a context-indexed transport system, omitting default category or groupoid structure.",
+      "source_basis": "Algebra minimality audit.",
+      "consequence_of_approval": "Prevents over-constrained algebraic assumptions (associativity, identity) that are not needed for OBL-D-001D.",
+      "consequence_of_rejection": "Forces unnecessary proof complexity for associativity.",
+      "recommended_status": "APPROVE"
+    },
+    {
+      "item_id": "APP-WIT-003",
+      "category": "witness identity model",
+      "wording": "Adopt successor witness existence without identity claim as the minimal witness identity model for OBL-D-001D.",
+      "source_basis": "Identity review analysis.",
+      "consequence_of_approval": "Simplifies the preservation statement to requiring target witness existence rather than strict identity w' = w.",
+      "consequence_of_rejection": "Requires proof of witness equivalence classes under transport.",
+      "recommended_status": "APPROVE"
+    },
+    {
+      "item_id": "APP-WIT-004",
+      "category": "required formation axioms",
+      "wording": "Adopt AX-WITNESS-REPDIST and AX-REALIZATION-WITNESS as the foundational axioms for candidate induction.",
+      "source_basis": "Candidate axioms review.",
+      "consequence_of_approval": "Establishes a sound and constructive mapping from concrete realization to representability.",
+      "consequence_of_rejection": "Blocks formability of the OBL-D-001D statement.",
+      "recommended_status": "APPROVE"
+    },
+    {
+      "item_id": "APP-WIT-005",
+      "category": "deferred associativity commitments",
+      "wording": "Defer all associativity and composition-closure commitments to future multi-step reachability theorems.",
+      "source_basis": "Associativity necessity analysis.",
+      "consequence_of_approval": "Allows immediate induction of the one-step preservation theory.",
+      "consequence_of_rejection": "Blocks OBL-D-001D progression indefinitely.",
+      "recommended_status": "APPROVE"
+    }
+  ],
+  "recommended_dispositions": {
+    "APP-WIT-001": "APPROVE",
+    "APP-WIT-002": "APPROVE",
+    "APP-WIT-003": "APPROVE",
+    "APP-WIT-004": "APPROVE",
+    "APP-WIT-005": "APPROVE"
+  },
+  "approval_dependencies": [
+    "Human approval of all five APP items is a strict precondition for registry mutation."
+  ],
+  "canonicalization_blockers": [
+    "Lack of formal signature registration in registry/math_hashes.json.",
+    "Lack of approved induction package."
+  ]
+}

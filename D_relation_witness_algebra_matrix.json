@@ -1,0 +1,67 @@
+{
+  "algebraic_property_matrix": {
+    "ALG-001": {
+      "property": "witness identity",
+      "status": "PROPOSED",
+      "description": "Witness identity is intensional and relational. Two semantic witnesses are identical if they represent the same relational mapping in context C.",
+      "multiplicity_allowed": "Yes, distinct concrete realizations (L2) can correspond to one semantic witness (L1)."
+    },
+    "ALG-002": {
+      "property": "witness equivalence",
+      "status": "REQUIRED",
+      "context_indexing": "Equivalence (=_w,C) is context-indexed.",
+      "preservation": "Equivalent witnesses must preserve RepDist_C."
+    },
+    "ALG-003": {
+      "property": "witness composition",
+      "status": "PROPOSED",
+      "compatibility_premise": "Composition w1 ∘ w2 requires matching relational domains in context C.",
+      "partiality": "Composition is partial and preserves context C."
+    },
+    "ALG-004": {
+      "property": "witness transport",
+      "status": "REQUIRED",
+      "partiality": "Partial. Transport can fail even when type preservation (OBL-D-001C) succeeds.",
+      "construction": "Transport constructs a new target witness w' from source witness w."
+    },
+    "ALG-005": {
+      "property": "context restriction",
+      "status": "PROPOSED",
+      "description": "Restricting a witness from context C to a subset context C' is monotone and valid if Relation_C restricts to Relation_C'."
+    },
+    "ALG-006": {
+      "property": "context extension",
+      "status": "REJECTED",
+      "description": "Unqualified context extension of witnesses is generally invalid because relation constraints can tighten in broader contexts."
+    },
+    "ALG-007": {
+      "property": "realization multiplicity",
+      "status": "SUPPORTED",
+      "description": "A single semantic witness can have multiple realizations (trace certificates, Lean proof terms). One realization can encode multiple witnesses if it spans multiple relations."
+    },
+    "ALG-008": {
+      "property": "trace compatibility",
+      "status": "PROPOSED",
+      "transitivity": "Not transitive.",
+      "symmetry": "Not symmetric.",
+      "description": "Compatibility is directional and trace-specific, representing directed execution records."
+    },
+    "ALG-009": {
+      "property": "collapse boundary",
+      "status": "REQUIRED",
+      "description": "Semantic collapse occurs when the required witness mapping has no valid realization. Absence of realization indicates collapse, not merely insufficient evidence, under closed-world assumptions."
+    }
+  },
+  "supported_laws": [
+    "Witness equivalence preserves representability",
+    "Realization multiplicity allows multiple representations"
+  ],
+  "rejected_laws": [
+    "Context extension is universally monotone",
+    "Trace compatibility is transitive"
+  ],
+  "unresolved_laws": [
+    "Witness composition associativity"
+  ],
+  "minimal_structure_classification": "Context-indexed partial category/groupoid candidate"
+}

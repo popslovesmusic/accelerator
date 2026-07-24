@@ -1,0 +1,20 @@
+{
+  "trace_compatibility_signature": "TraceCompatible_C : TYPE_TRACE x TYPE_WITNESS_C -> Prop",
+  "context_dependency": "Explicitly indexed by context C (DEC-SEM-002). Context-free variants are rejected.",
+  "trace_compatibility_truth_conditions": "TraceCompatible_C(t, w) evaluates to true iff execution trace t matches the relational step boundaries and transition invariants required by w in context C.",
+  "rejected_trace_models": [
+    {
+      "model_id": "REJ-TC-001",
+      "description": "Context-free trace compatibility. Rejected because admissibility thresholds and relation indexes vary across contexts.",
+      "basis": "DEC-SEM-002 resolution."
+    },
+    {
+      "model_id": "REJ-TC-002",
+      "description": "Equating trace compatibility with witness validity. Rejected because trace compatibility is a necessary but not sufficient condition for witness validity.",
+      "basis": "SD-006 (finite executable proxy vs. formal semantic object)."
+    }
+  ],
+  "remaining_ambiguities": [
+    "Should TraceCompatible_C evaluate to false or remain undefined when the trace t contains out-of-bounds evaluation steps?"
+  ]
+}

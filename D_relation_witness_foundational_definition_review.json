@@ -1,0 +1,48 @@
+{
+  "definition_review_matrix": {
+    "C": {
+      "classification": "REQUIRED_PRIMITIVE",
+      "reason": "Required as the primary indexing parameter for all admissibility and relation boundaries."
+    },
+    "Rel_C": {
+      "classification": "REQUIRED_PRIMITIVE",
+      "reason": "Required as the relation over projected values p and q in context C."
+    },
+    "Dist_C": {
+      "classification": "REQUIRED_PRIMITIVE",
+      "reason": "Required to define distinction pairings before projection."
+    },
+    "RepDist_C": {
+      "classification": "REQUIRED_DERIVED",
+      "reason": "Derived from Rel_C, TypedWitness_C, and TraceCompatible_C."
+    },
+    "TypedWitness_C": {
+      "classification": "REQUIRED_DERIVED",
+      "reason": "Derived as a relational validity predicate over relation witness type TYPE_WITNESS_C."
+    },
+    "Realizes_C": {
+      "classification": "REQUIRED_DERIVED",
+      "reason": "Derived to bridge concrete realizations (L2) to abstract semantic witness w (L1)."
+    },
+    "TraceCompatible_C": {
+      "classification": "REQUIRED_DERIVED",
+      "reason": "Derived as trace validation against relational indices in C."
+    },
+    "Transport_C": {
+      "classification": "REQUIRED_DERIVED",
+      "reason": "Derived to track witness preservation across transition tau."
+    },
+    "TYPE_WITNESS_C": {
+      "classification": "REQUIRED_PRIMITIVE",
+      "reason": "Required primitive type representing semantic witness elements."
+    },
+    "project_w": {
+      "classification": "REQUIRED_PRIMITIVE",
+      "reason": "Required primitive operator mapping source witnesses to target witnesses."
+    }
+  },
+  "required_primitives": ["C", "Rel_C", "Dist_C", "TYPE_WITNESS_C", "project_w"],
+  "derived_objects": ["RepDist_C", "TypedWitness_C", "Realizes_C", "TraceCompatible_C", "Transport_C"],
+  "objects_requiring_revision": [],
+  "objects_recommended_for_rejection": []
+}

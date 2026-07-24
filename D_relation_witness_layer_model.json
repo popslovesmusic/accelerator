@@ -1,0 +1,60 @@
+{
+  "layer_assignments": {
+    "L0": {
+      "name": "Context",
+      "objects": ["C"]
+    },
+    "L1": {
+      "name": "Relational semantic objects",
+      "objects": [
+        "Rel_C (context-indexed relation)",
+        "Dist_C (context-indexed distinction)",
+        "representable distinction (semantic property)",
+        "relation witness (semantic abstraction)"
+      ]
+    },
+    "L2": {
+      "name": "Witness realizations",
+      "objects": [
+        "trace certificate (L2 concrete representation)",
+        "formal proof term (L2 concrete representation)",
+        "executable witness artifact (L2 concrete representation)"
+      ]
+    },
+    "L3": {
+      "name": "Validation judgments",
+      "objects": [
+        "TypedWitness_C (judgment on witness validity)",
+        "RepDist_C (judgment on distinction representability)",
+        "TraceCompatible_C (judgment on trace compatibility)"
+      ]
+    },
+    "L4": {
+      "name": "Transition preservation",
+      "objects": [
+        "typed transition (L4 transition object)",
+        "witness transport (L4 transport object)",
+        "representation preservation (L4 property)",
+        "distinction preservation (L4 property)"
+      ]
+    }
+  },
+  "layer_conflations": [
+    {
+      "conflation_id": "CONF-001",
+      "description": "Conflating the abstract semantic witness TypedWitness_C (L3) with its concrete representation such as a trace certificate (L2).",
+      "status": "DETECTED_AND_RESOLVED",
+      "resolution": "DEC-SEM-001 establishes TypedWitness_C as a semantic witness abstraction, treating trace certificates and Lean proof terms as distinct L2 realizations."
+    },
+    {
+      "conflation_id": "CONF-002",
+      "description": "Conflating type-preservation under OBL-D-001C (L4) with representable distinction preservation under OBL-D-001D (L4).",
+      "status": "DETECTED_AND_RESOLVED",
+      "resolution": "P126 restricts OBL-D-001C to type-level preservation only, establishing that semantic representability is a distinct downstream property."
+    }
+  ],
+  "required_separations": [
+    "Abstract witness validity must not be equated with execution trace success without a Realizes_C relation.",
+    "A well-typed projection must not be assumed to preserve relational distinction without a proved transport bridge."
+  ]
+}
