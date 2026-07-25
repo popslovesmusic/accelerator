@@ -3159,6 +3159,8 @@ Every new induction must satisfy both of the following before it is treated as a
 - a canonical induction record exists in `registry/induction_registry.json`
 - a live intake record exists in `governance/live/induction_queue.json`
 
+The Analysis Intake discoverability binding is additionally recorded in `governance/live/research_debt_registry.json` as `DEBT_ANALYSIS_INTAKE_DISCOVERABILITY_001`. The Analysis Department crawl source set includes `departments/analysis_intake/induction_queue/queue_registry.json`; the queue remains preservation-first, with review and promotion tracked separately.
+
 **Governance and Math Audit Domain Isolation (GOV-ISO-003):**
 To ensure epistemic separation and prevent ontological confusion, repository governance audits and mathematical/theoretical audits are isolated as independent domains.
 - **Repository Governance Audits**: Certify repository health, SSOT ownership, registry consistency, DB freshness, validation pipeline success, git workflow compliance, and agent compliance. Governance audits never evaluate proofs, lemmas, theorems, mathematical correctness, or research conclusions.

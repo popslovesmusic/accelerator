@@ -82,6 +82,10 @@ The Analysis Department depends on:
 - `governance/live/debt_discharge_command.json`
 - `governance/live/program_debt_discharge_command.json`
 - `governance/live/induction_queue.json`
+- `governance/live/research_debt_registry.json`
+- `departments/analysis_intake/induction_queue/queue_registry.json`
+- `departments/analysis_intake/AGENTS.md`
+- `departments/analysis_intake/department_ssot.md`
 - `outputs/audits/global_health_report.json`
 - `outputs/analysis/critical_path_graph.json`
 - `outputs/analysis/unlock_priority_report.json`

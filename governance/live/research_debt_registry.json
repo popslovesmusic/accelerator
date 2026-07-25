@@ -432,25 +432,61 @@
       "required_resolution": ["Discharge OBL-D-001D and OBL-D-001E", "Retain bounded support records for OBL-D-001A through OBL-D-001C", "Add formal or independently checked bounded support", "Reaudit theorem eligibility"],
       "planned_owner": "Mathematics Department",
       "notes": "Appendix F synchronization audit completed on 2026-07-23. On Friday, July 24, 2026, OBL-D-001C was approved and discharged within bounded type-level scope after explicit human review. OBL-D-001D and OBL-D-001E remain open, so this debt is not resolved."
+    },
+    {
+      "id": "DEBT_ANALYSIS_INTAKE_DISCOVERABILITY_001",
+      "title": "Analysis Intake induction queue requires Analysis Department discovery binding",
+      "department": "analysis",
+      "type": "governance_gap",
+      "severity": "low",
+      "resolution_priority": "before_analysis_crawl",
+      "status": "open",
+      "introduced_by": "RT_INDUCTION_INTAKE_PRESERVATION_FIX_20260724_001",
+      "reason_accepted": "Two preservation-first RT proposal inductions are now queued under the canonical Analysis Intake home, but the Analysis Department must have an explicit debt-registry and source-set binding so crawl can discover them without treating them as reviewed or promoted work.",
+      "affects": [
+        "analysis_crawl_discovery",
+        "analysis_intake",
+        "induction_queue",
+        "provenance_capture"
+      ],
+      "blocks": [
+        "analysis_crawl_intake_discovery"
+      ],
+      "depends_on": [],
+      "claim_class_limit": "C1_DEFINED_PROVISIONAL",
+      "required_resolution": [
+        "Include governance/live/research_debt_registry.json in the Analysis Department crawl source set",
+        "Include departments/analysis_intake/induction_queue/queue_registry.json in the Analysis Department crawl source set",
+        "Retain the two queue entries as INDUCTED, NOT_REVIEWED, and UNQUEUED_FOR_PROMOTION"
+      ],
+      "planned_owner": "Analysis Department",
+      "source_artifacts": [
+        "departments/analysis_intake/induction_queue/queue_registry.json",
+        "governance/live/induction_queue.json",
+        "departments/analysis_intake/AGENTS.md",
+        "departments/analysis_intake/department_ssot.md"
+      ],
+      "notes": "Queue entries IQ_2026_07_24_037 and IQ_2026_07_24_038 are preserved exactly and remain outside review and promotion. This debt item exists for crawl discoverability and does not authorize analysis execution or claim promotion."
     }
   ],
   "metrics": {
-    "total_debt": 16,
+    "total_debt": 17,
     "critical_items": 0,
     "high_items": 3,
     "moderate_items": 8,
-    "low_items": 0,
+    "low_items": 1,
     "informational_items": 0,
     "research_debt_by_department": {
       "governance": 7,
       "mathematics": 6,
       "physics": 1,
       "economics": 1,
-      "theology": 1
+      "theology": 1,
+      "analysis": 1
     },
     "average_age": 0,
     "resolved_this_cycle": 5,
-    "new_this_cycle": 16,
+    "new_this_cycle": 17,
     "debt_trend": "rising_from_zero_to_visible"
   }
 }
