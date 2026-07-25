@@ -20,6 +20,8 @@ The Analysis Intake Department converts structured packets and raw human notes i
 
 **First-contact preservation:** Induction is completed only after the complete submitted artifact is preserved literally, hashed, and registered in the governed induction queue. Review summaries, classifications, or `HOLD_C1` dispositions do not substitute for preservation and must remain downstream references.
 
+**Chat submission persistence:** For proposals pasted into chat, save the complete received payload to a recoverable file in this directory before induction. Verify the saved copy's hash and register that path as the induction source; do not induct from a summary, reconstruction, or review artifact.
+
 It is a read-only intake layer. It can propose artifacts for approval, but it does not execute, close, or promote authority.
 
 ## 2. Must
