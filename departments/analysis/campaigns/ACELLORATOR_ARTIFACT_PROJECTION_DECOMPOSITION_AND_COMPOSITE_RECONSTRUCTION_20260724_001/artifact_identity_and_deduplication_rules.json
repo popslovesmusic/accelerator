@@ -1,0 +1,17 @@
+{
+  "normalization": {
+    "path": "replace backslash with slash, remove leading ./, preserve case for exact identity, casefold only for collision diagnostics"
+  },
+  "identity_rules": {
+    "governed_source_inventory": "normalized governed-relative path plus content hash when available; preserve raw path.",
+    "workspace_artifact_catalog": "normalized workspace-relative path plus artifact type; retain raw path and file/directory kind.",
+    "generated_artifact_catalog": "generator or build class plus normalized output path; add content hash and generation record when available.",
+    "runtime_transient_catalog": "normalized path plus transient/database class; sidecars retain parent database linkage when discoverable.",
+    "historical_artifact_register": "legacy row id plus raw path and provenance snapshot; normalized path is secondary."
+  },
+  "symlink_policy": "Do not follow symlinks during inventory; record symlink as observed path if encountered.",
+  "hard_link_policy": "Do not deduplicate solely by inode; retain path identities and optionally record shared content hash/inode diagnostics.",
+  "alias_policy": "Aliases remain separate rows unless a governed alias relation exists.",
+  "duplicate_resolution": "Within a subprojection, exact class-aware identity collision is resolved by deterministic source precedence; conflicting payloads produce a conflict record and block promotion.",
+  "transient_policy": "Transient/database records are not deleted; they are isolated in runtime_transient_catalog."
+}

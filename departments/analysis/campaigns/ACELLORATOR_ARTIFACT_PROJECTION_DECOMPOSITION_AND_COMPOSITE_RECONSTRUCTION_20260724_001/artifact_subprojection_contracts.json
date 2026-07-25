@@ -1,0 +1,108 @@
+{
+  "contracts": [
+    {
+      "authority": "AUTHORITATIVE",
+      "semantic_role": "Catalog governed Markdown, JSON, registry, governance, department, script, and program-narrative source records represented by the legacy classifier.",
+      "inclusion_rule": "Include records classified as GOVERNED_SOURCE_OR_DERIVED_RECORD.",
+      "exclusion_rule": "Exclude workspace-only, generated, transient, and unresolved records.",
+      "identity_rule": "normalized governed-relative path plus content hash when available; preserve raw path.",
+      "field_precedence": "governed source fields are authoritative; missing fields remain null/unknown.",
+      "retention_policy": "RETAIN_IN_PRODUCTION_PROJECTION",
+      "reconstructability": "REBUILDABLE",
+      "projection_id": "governed_source_inventory",
+      "legacy_row_count": 9,
+      "source_class_ids": [
+        "GOVERNED_SOURCE_OR_DERIVED_RECORD"
+      ],
+      "status": "SPECIFICATION_ONLY",
+      "dependencies": [],
+      "determinism_rule": "stable class-aware identity ordering and explicit null semantics"
+    },
+    {
+      "authority": "DERIVED",
+      "semantic_role": "Catalog observable workspace files and directories, including tooling/runtime corpus records.",
+      "inclusion_rule": "Include PHYSICAL_FILE, PHYSICAL_DIRECTORY, and TOOLING_OR_RUNTIME_CORPUS rows.",
+      "exclusion_rule": "Exclude governed-source classified rows, generated/history, transients, and unresolved legacy rows.",
+      "identity_rule": "normalized workspace-relative path plus artifact type; retain raw path and file/directory kind.",
+      "field_precedence": "current bounded workspace observation, then governed source metadata when the row is also source-linked.",
+      "retention_policy": "RETAIN_IN_PRODUCTION_PROJECTION",
+      "reconstructability": "REBUILDABLE",
+      "projection_id": "workspace_artifact_catalog",
+      "legacy_row_count": 110131,
+      "source_class_ids": [
+        "PHYSICAL_FILE",
+        "PHYSICAL_DIRECTORY",
+        "TOOLING_OR_RUNTIME_CORPUS"
+      ],
+      "status": "SPECIFICATION_ONLY",
+      "dependencies": [
+        "governed_source_inventory"
+      ],
+      "determinism_rule": "stable class-aware identity ordering and explicit null semantics"
+    },
+    {
+      "authority": "DERIVED",
+      "semantic_role": "Catalog generated reports, campaign outputs, historical outputs, and build products.",
+      "inclusion_rule": "Include HISTORICAL_OR_GENERATED_OUTPUT and BUILD_OR_BINARY_PRODUCT rows.",
+      "exclusion_rule": "Do not treat generated content as authoritative source; do not merge it into governed-source identity.",
+      "identity_rule": "generator or build class plus normalized output path; add content hash and generation record when available.",
+      "field_precedence": "generator manifest and content hash precede observed filesystem metadata.",
+      "retention_policy": "RETAIN_IN_SEPARATE_PROJECTION",
+      "reconstructability": "PARTIALLY_REBUILDABLE",
+      "projection_id": "generated_artifact_catalog",
+      "legacy_row_count": 164,
+      "source_class_ids": [
+        "HISTORICAL_OR_GENERATED_OUTPUT",
+        "BUILD_OR_BINARY_PRODUCT"
+      ],
+      "status": "SPECIFICATION_ONLY",
+      "dependencies": [
+        "governed_source_inventory"
+      ],
+      "determinism_rule": "stable class-aware identity ordering and explicit null semantics"
+    },
+    {
+      "authority": "TRANSIENT_OR_CACHE",
+      "semantic_role": "Catalog caches, temporary records, database files/sidecars, and runtime-only products for compatibility and diagnostics.",
+      "inclusion_rule": "Include TRANSIENT_OR_CACHE and DATABASE_ARTIFACT rows.",
+      "exclusion_rule": "Exclude from default authoritative production projection; expose through compatibility/diagnostic view.",
+      "identity_rule": "normalized path plus transient/database class; sidecars retain parent database linkage when discoverable.",
+      "field_precedence": "runtime observation only; never promotes authority.",
+      "retention_policy": "REGENERATE_ON_DEMAND",
+      "reconstructability": "TRANSIENT",
+      "projection_id": "runtime_transient_catalog",
+      "legacy_row_count": 262,
+      "source_class_ids": [
+        "TRANSIENT_OR_CACHE",
+        "DATABASE_ARTIFACT"
+      ],
+      "status": "SPECIFICATION_ONLY",
+      "dependencies": [
+        "governed_source_inventory"
+      ],
+      "determinism_rule": "stable class-aware identity ordering and explicit null semantics"
+    },
+    {
+      "authority": "LEGACY_DERIVED",
+      "semantic_role": "Retain traceability for missing historical directories and legacy-unresolved records.",
+      "inclusion_rule": "Include HISTORICAL_DIRECTORY_RECORD and LEGACY_ONLY_UNRESOLVED rows.",
+      "exclusion_rule": "Never silently delete or merge until human disposition.",
+      "identity_rule": "legacy row id plus raw path and provenance snapshot; normalized path is secondary.",
+      "field_precedence": "legacy record preserved as historical reference; no current source override.",
+      "retention_policy": "HUMAN_DECISION_REQUIRED",
+      "reconstructability": "LEGACY_ONLY",
+      "projection_id": "historical_artifact_register",
+      "legacy_row_count": 30,
+      "source_class_ids": [
+        "HISTORICAL_DIRECTORY_RECORD",
+        "LEGACY_ONLY_UNRESOLVED"
+      ],
+      "status": "SPECIFICATION_ONLY",
+      "dependencies": [
+        "governed_source_inventory"
+      ],
+      "determinism_rule": "stable class-aware identity ordering and explicit null semantics"
+    }
+  ],
+  "contract_status": "SPECIFICATION_ONLY_HUMAN_REVIEW_REQUIRED"
+}

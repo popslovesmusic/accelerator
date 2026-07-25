@@ -1,0 +1,29 @@
+{
+  "status": "DESIGN_ONLY",
+  "migration_steps": [
+    "freeze and hash legacy reference",
+    "build each subprojection in versioned candidate database",
+    "validate per-subprojection counts and identities",
+    "materialize composite default and compatibility views",
+    "run behavior/query equivalence suite",
+    "human review of retained/transient/historical policies",
+    "cutover only through separate authorization packet"
+  ],
+  "coexistence": "legacy database remains read-only reference while candidate composite is compared",
+  "rollback": [
+    "stop candidate use",
+    "restore prior artifacts projection pointer",
+    "retain candidate and manifests for audit",
+    "verify legacy hash and query behavior",
+    "do not delete or rewrite legacy records"
+  ],
+  "failure_triggers": [
+    "hash mismatch",
+    "unallocated row",
+    "identity collision",
+    "behavioral query mismatch",
+    "authority drift",
+    "transient leakage into default view"
+  ],
+  "production_cutover_authorized": false
+}

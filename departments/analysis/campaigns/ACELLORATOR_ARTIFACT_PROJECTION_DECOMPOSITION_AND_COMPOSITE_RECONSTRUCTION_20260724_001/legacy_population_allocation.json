@@ -1,0 +1,63 @@
+{
+  "legacy_row_count": 110596,
+  "allocated_row_count": 110596,
+  "unallocated_row_count": 0,
+  "allocation": [
+    {
+      "projection_id": "governed_source_inventory",
+      "source_class_ids": [
+        "GOVERNED_SOURCE_OR_DERIVED_RECORD"
+      ],
+      "legacy_row_count": 9,
+      "allocation_rule": "Each legacy classification is assigned to exactly one primary sub-projection; no row is duplicated in the primary allocation.",
+      "unresolved_rows_preserved": false
+    },
+    {
+      "projection_id": "workspace_artifact_catalog",
+      "source_class_ids": [
+        "PHYSICAL_FILE",
+        "PHYSICAL_DIRECTORY",
+        "TOOLING_OR_RUNTIME_CORPUS"
+      ],
+      "legacy_row_count": 110131,
+      "allocation_rule": "Each legacy classification is assigned to exactly one primary sub-projection; no row is duplicated in the primary allocation.",
+      "unresolved_rows_preserved": false
+    },
+    {
+      "projection_id": "generated_artifact_catalog",
+      "source_class_ids": [
+        "HISTORICAL_OR_GENERATED_OUTPUT",
+        "BUILD_OR_BINARY_PRODUCT"
+      ],
+      "legacy_row_count": 164,
+      "allocation_rule": "Each legacy classification is assigned to exactly one primary sub-projection; no row is duplicated in the primary allocation.",
+      "unresolved_rows_preserved": false
+    },
+    {
+      "projection_id": "runtime_transient_catalog",
+      "source_class_ids": [
+        "TRANSIENT_OR_CACHE",
+        "DATABASE_ARTIFACT"
+      ],
+      "legacy_row_count": 262,
+      "allocation_rule": "Each legacy classification is assigned to exactly one primary sub-projection; no row is duplicated in the primary allocation.",
+      "unresolved_rows_preserved": false
+    },
+    {
+      "projection_id": "historical_artifact_register",
+      "source_class_ids": [
+        "HISTORICAL_DIRECTORY_RECORD",
+        "LEGACY_ONLY_UNRESOLVED"
+      ],
+      "legacy_row_count": 30,
+      "allocation_rule": "Each legacy classification is assigned to exactly one primary sub-projection; no row is duplicated in the primary allocation.",
+      "unresolved_rows_preserved": true
+    }
+  ],
+  "exception_policy": {
+    "projection_id": "historical_artifact_register",
+    "rows": 30,
+    "rule": "Preserve historical/unresolved rows with legacy identity and provenance; do not infer current authority or discard."
+  },
+  "reconciliation_status": "PASS"
+}

@@ -1,0 +1,73 @@
+{
+  "campaign_id": "ACELLORATOR_ARTIFACT_PROJECTION_DECOMPOSITION_AND_COMPOSITE_RECONSTRUCTION_20260724_001",
+  "status": "PASS_ARTIFACT_PROJECTION_DECOMPOSITION_COMPLETE",
+  "legacy_rows": 110596,
+  "subprojection_count": 5,
+  "allocation": [
+    {
+      "projection_id": "governed_source_inventory",
+      "source_class_ids": [
+        "GOVERNED_SOURCE_OR_DERIVED_RECORD"
+      ],
+      "legacy_row_count": 9,
+      "allocation_rule": "Each legacy classification is assigned to exactly one primary sub-projection; no row is duplicated in the primary allocation.",
+      "unresolved_rows_preserved": false
+    },
+    {
+      "projection_id": "workspace_artifact_catalog",
+      "source_class_ids": [
+        "PHYSICAL_FILE",
+        "PHYSICAL_DIRECTORY",
+        "TOOLING_OR_RUNTIME_CORPUS"
+      ],
+      "legacy_row_count": 110131,
+      "allocation_rule": "Each legacy classification is assigned to exactly one primary sub-projection; no row is duplicated in the primary allocation.",
+      "unresolved_rows_preserved": false
+    },
+    {
+      "projection_id": "generated_artifact_catalog",
+      "source_class_ids": [
+        "HISTORICAL_OR_GENERATED_OUTPUT",
+        "BUILD_OR_BINARY_PRODUCT"
+      ],
+      "legacy_row_count": 164,
+      "allocation_rule": "Each legacy classification is assigned to exactly one primary sub-projection; no row is duplicated in the primary allocation.",
+      "unresolved_rows_preserved": false
+    },
+    {
+      "projection_id": "runtime_transient_catalog",
+      "source_class_ids": [
+        "TRANSIENT_OR_CACHE",
+        "DATABASE_ARTIFACT"
+      ],
+      "legacy_row_count": 262,
+      "allocation_rule": "Each legacy classification is assigned to exactly one primary sub-projection; no row is duplicated in the primary allocation.",
+      "unresolved_rows_preserved": false
+    },
+    {
+      "projection_id": "historical_artifact_register",
+      "source_class_ids": [
+        "HISTORICAL_DIRECTORY_RECORD",
+        "LEGACY_ONLY_UNRESOLVED"
+      ],
+      "legacy_row_count": 30,
+      "allocation_rule": "Each legacy classification is assigned to exactly one primary sub-projection; no row is duplicated in the primary allocation.",
+      "unresolved_rows_preserved": true
+    }
+  ],
+  "allocation_sum": 110596,
+  "class_to_primary_projection": {
+    "GOVERNED_SOURCE_OR_DERIVED_RECORD": "governed_source_inventory",
+    "PHYSICAL_FILE": "workspace_artifact_catalog",
+    "PHYSICAL_DIRECTORY": "workspace_artifact_catalog",
+    "TOOLING_OR_RUNTIME_CORPUS": "workspace_artifact_catalog",
+    "HISTORICAL_OR_GENERATED_OUTPUT": "generated_artifact_catalog",
+    "BUILD_OR_BINARY_PRODUCT": "generated_artifact_catalog",
+    "TRANSIENT_OR_CACHE": "runtime_transient_catalog",
+    "DATABASE_ARTIFACT": "runtime_transient_catalog",
+    "HISTORICAL_DIRECTORY_RECORD": "historical_artifact_register",
+    "LEGACY_ONLY_UNRESOLVED": "historical_artifact_register"
+  },
+  "architectural_finding": "The legacy artifacts table is a composite workspace artifact catalog, not a direct governed-source projection.",
+  "builder_implementation_performed": false
+}
