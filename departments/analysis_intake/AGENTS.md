@@ -18,9 +18,9 @@ The Analysis Intake Department converts structured packets and raw human notes i
 
 **Canonical intake home:** This directory is the required local-governance home for submitted proposals, induction preservation, intake classification, provenance capture, and queue-routing analysis. Every intake-facing packet must point to this directory and its local SSOT, `department_ssot.md`.
 
-**First-contact preservation:** Induction is completed only after the complete submitted artifact is preserved literally, hashed, and registered in the governed induction queue. Review summaries, classifications, or `HOLD_C1` dispositions do not substitute for preservation and must remain downstream references.
+**First-contact preservation:** Induction is completed only after the complete submitted artifact is preserved or captured through the approved source mode, hashed, and registered in the governed induction queue. Review summaries, classifications, or `HOLD_C1` dispositions do not substitute for preservation and must remain downstream references.
 
-**Chat submission persistence:** For proposals pasted into chat, save the complete received payload to a recoverable file in this directory before induction. Verify the saved copy's hash and register that path as the induction source; do not induct from a summary, reconstruction, or review artifact.
+**Chat submission persistence:** For proposals pasted into chat, create a complete `CHAT_SEMANTIC_CAPTURE` in this directory before induction. Record the conversation channel, packet ID, capture time, canonical capture hash, and any capture limitations. Byte-for-byte equality is required only when the proposal was supplied as a file.
 
 It is a read-only intake layer. It can propose artifacts for approval, but it does not execute, close, or promote authority.
 
