@@ -1,0 +1,35 @@
+{
+  "campaign_id": "ACELLORATOR_ARTIFACTS_PROJECTION_SEMANTIC_DISCOVERY_20260724_001",
+  "packet_id": "ACELLORATOR_ARTIFACTS_PROJECTION_SEMANTIC_DISCOVERY_20260724_001",
+  "generated_at": "2026-07-25T01:58:12.751562+00:00",
+  "source_database": "registry/db/acellorator_index.sqlite",
+  "source_access": "immutable read-only URI; PRAGMA query_only=ON",
+  "legacy_row_count": 110596,
+  "rows_accounted": 110596,
+  "source_database_sha256": "c50a4bc3716c4709fda14a2c61040798ed86e6a9269530ebbb3b474923a114fd",
+  "source_database_size_bytes": 11115610112,
+  "pragmas": {
+    "schema_version": 100061,
+    "user_version": 0,
+    "application_id": 0,
+    "page_size": 4096,
+    "page_count": 2713772,
+    "freelist_count": 1
+  },
+  "artifacts_table_sql": "CREATE TABLE artifacts (\n    id INTEGER PRIMARY KEY AUTOINCREMENT,\n    path TEXT UNIQUE NOT NULL,\n    artifact_type TEXT,\n    orientation_status TEXT NOT NULL,\n    authority_scope TEXT DEFAULT 'unknown',\n    evidence_confidence TEXT DEFAULT 'not_checked',\n    created_at TIMESTAMP,\n    modified_at TIMESTAMP,\n    indexed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n    checksum TEXT,\n    source_hash TEXT,\n    metadata JSON,\n    FOREIGN KEY (orientation_status) REFERENCES orientation_status_types(status)\n)",
+  "artifacts_indexes": [
+    [
+      "idx_artifacts_path",
+      "CREATE INDEX idx_artifacts_path ON artifacts(path)"
+    ],
+    [
+      "idx_artifacts_status",
+      "CREATE INDEX idx_artifacts_status ON artifacts(orientation_status)"
+    ],
+    [
+      "sqlite_autoindex_artifacts_1",
+      null
+    ]
+  ],
+  "foreign_keys": "orientation_status -> orientation_status_types(status)"
+}
