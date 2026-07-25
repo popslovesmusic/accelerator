@@ -14,7 +14,7 @@ The evidence supports rejecting projection-only and outcome-label-only proxies. 
 
 ## Review decision
 
-`CLAIM_020_005` requires qualification before it can be treated as supported. A bounded wording is proposed in the machine-readable report, but it was not applied. `OBL-D-001D` remains `OPEN`; no discharge or promotion is claimed.
+Human review approved the bounded qualification recorded in `human_review_decision.json`. This does not promote the original unrestricted wording. `OBL-D-001D` remains `OPEN`; no discharge or promotion is claimed.
 
 ## Blocking conditions
 
