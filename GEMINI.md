@@ -34,6 +34,10 @@ Every action must be grounded in the four foundational laws:
 
 ### Global Command Routing
 
+- **Canonical Analysis Intake Home:** `D:\projects\acellorator\departments\analysis_intake\` is the canonical local-governance home for all submitted intake packets, induction preservation, intake classification, provenance capture, and queue-routing analysis. Its local rules are `departments/analysis_intake/AGENTS.md` and its local SSOT is `departments/analysis_intake/department_ssot.md`.
+- **Intake Preservation Rule:** A submitted proposal is first preserved literally in the Analysis Intake surface before review, normalization, classification, promotion, or execution. Intake records must retain the original source path, byte-preserving copy, SHA-256, intake timestamp, channel, and downstream review references. Intake preservation is distinct from review status and promotion status.
+- **Intake Routing Rule:** All proposal, induction, and raw-note intake work must point to `departments/analysis_intake/`; `departments/analysis/` remains the home for bounded analysis/crawl work. Intake does not itself promote, execute, close, or mutate authoritative registries.
+
 - `crawl` is a global routing command for the governed Analysis Department crawl defined in `departments/analysis/GEMINI.md`.
 - `crawl` means bounded database-wide analysis and evidence synthesis; it does not mean filesystem traversal or SQLite artifact indexing.
 - `crawl` is read-only by default. Findings may be recorded only in authorized analysis output surfaces; applying any repository, registry, report, or campaign change requires explicit human approval and a separate authorized patch action.
