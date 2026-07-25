@@ -1,0 +1,35 @@
+{
+  "campaign_id": "CAMPAIGN_D_OBL_D_001D_TYPED_REPRESENTABILITY_20260725_001",
+  "obligation_id": "OBL-D-001D",
+  "status": "CANDIDATE_SPECIFICATION_ONLY",
+  "claim_ceiling": "C1_DEFINED_PROVISIONAL",
+  "predicate_id": "RepDist_C_CANDIDATE_002",
+  "predicate": "RepDist_C(p,q,w,t,h) iff Type_C(p)=TYPE_PROJECTION_C and Type_C(q)=TYPE_PROJECTION_C and TypedWitness_C(w) and Relation_C(p,q,w) and TraceCompatible_C(t,w) and HistoryPresent_C(h)",
+  "required_components": [
+    "typed projected values",
+    "typed relation witness",
+    "compatible trace",
+    "explicit history presence"
+  ],
+  "excluded_proxies": ["outcome_label", "reconvergence", "obstruction", "residue_present", "projection_image_alone"],
+  "preservation_candidate": "PresRep_D,C(x,y,w,t,h) iff RepDist_C(Pi_D,C(x),Pi_D,C(y),project_w(w),t,h)",
+  "boundary_rules": {
+    "missing_witness": "NOT_REPRESENTABLE",
+    "wrong_projected_type": "NOT_REPRESENTABLE",
+    "incompatible_trace": "NOT_REPRESENTABLE",
+    "omitted_required_history": "NOT_REPRESENTABLE",
+    "outcome_label": "IGNORED_BY_PREDICATE"
+  },
+  "non_claims": [
+    "No universal preservation theorem.",
+    "No injectivity or reversibility.",
+    "No definedness theorem for project_w.",
+    "No external physical validity."
+  ],
+  "open_requirements": [
+    "Formal acceptance of TypedWitness_C, Relation_C, TraceCompatible_C, and HistoryPresent_C.",
+    "Independent mechanized or independently checked implementation.",
+    "Human review of the candidate scope.",
+    "Dependent OBL-D-001E non-collapse review."
+  ]
+}
