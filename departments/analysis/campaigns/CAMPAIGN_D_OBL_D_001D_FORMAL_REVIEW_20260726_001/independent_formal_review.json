@@ -1,0 +1,29 @@
+{
+  "review_id": "D001D_INDEPENDENT_FORMAL_REVIEW_20260726_001",
+  "obligation_id": "OBL-D-001D",
+  "reviewer_role": "RT_AGENT_INFINITE_THEORY_ANALYST_INDEPENDENT_REVIEW",
+  "review_scope": "Typed component definitions and bounded Pi_D,C preservation route",
+  "source_artifacts": [
+    "docs/theory/foundational/5_03_26 unity/math/notes/0017_d_component_semantics_and_bounded_preservation.md",
+    "docs/theory/foundational/5_03_26 unity/math/notes/0017_d_component_semantics_and_bounded_preservation_fixtures.json",
+    "docs/theory/foundational/5_03_26 unity/math/notes/0017_d_component_semantics_and_bounded_preservation_check_report.json",
+    "registry/math/d_semantics_obligation_registry.json"
+  ],
+  "review_methods": ["typed dependency inspection", "circularity inspection", "negative-boundary review", "projection-definedness review", "history sufficiency review"],
+  "findings": [
+    {"id":"F1","finding":"The conjunction has an explicit typed route and separates type, witness, relation, trace, and history conditions.","status":"SUPPORTED_BOUNDED"},
+    {"id":"F2","finding":"The component definitions are not circular at the syntactic level, but Relation_C depends on the semantics of TypedWitness_C and the declared witness provenance.","status":"OPEN_SEMANTIC_DEPENDENCY"},
+    {"id":"F3","finding":"HistoryPresent_C tests presence and context, not sufficiency or causal content of history.","status":"OPEN_SEMANTIC_DEPENDENCY"},
+    {"id":"F4","finding":"project_w and Pi_D,C are represented as fixture booleans and labels; no executable projection mapping constructs projected witnesses.","status":"OPEN_IMPLEMENTATION_GAP"},
+    {"id":"F5","finding":"The finite checker supports classification consistency but does not prove preservation for arbitrary source values or contexts.","status":"SUPPORTED_LIMITATION"},
+    {"id":"F6","finding":"Nonempty residue is correctly excluded as a preservation input, avoiding collapse conflation.","status":"SUPPORTED_BOUNDED"}
+  ],
+  "review_result": "PARTIAL_BOUNDED_REVIEW_FORMAL_ACCEPTANCE_REQUIRED",
+  "epistemic_status": "PARTIALLY_SUPPORTED",
+  "proof_status": "INDEPENDENT_REVIEW_REQUIRED",
+  "obligation_status": "OPEN",
+  "claim_ceiling": "C1_DEFINED_PROVISIONAL",
+  "required_follow_up": ["Define witness provenance semantics", "Define history sufficiency or explicitly scope it to presence", "Implement or independently model Pi_D,C and project_w", "Repeat preservation test over constructed projections"],
+  "promotion_authorized": false,
+  "theorem_promotion_authorized": false
+}
