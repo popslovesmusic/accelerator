@@ -1,0 +1,47 @@
+{
+  "campaign_id": "CAMPAIGN_D_OBL_D_001D_CONSTRUCTED_MODEL_INDEPENDENT_REVIEW_20260726_001",
+  "generated_at": "2026-07-26",
+  "obligation_id": "OBL-D-001D",
+  "review_type": "INDEPENDENT_FORMAL_REVIEW",
+  "reviewed_artifacts": [
+    "docs/theory/foundational/5_03_26 unity/math/notes/0018_d_constructed_projection_model_and_history_sufficiency.md",
+    "docs/theory/foundational/5_03_26 unity/math/notes/0018_d_constructed_projection_model_fixtures.json",
+    "docs/theory/foundational/5_03_26 unity/math/notes/0018_d_constructed_projection_model_check.py",
+    "docs/theory/foundational/5_03_26 unity/math/notes/0018_d_constructed_projection_model_check_report.json"
+  ],
+  "findings": [
+    {
+      "finding_id": "F001",
+      "severity": "BOUNDED_SUPPORT",
+      "statement": "The note defines explicit finite contracts for typed/admissible source values, projection-route availability, witness binding, trace compatibility, and history sufficiency.",
+      "evidence": "The seven fixtures cover positive, residual, undefined-source, unbound-witness, insufficient-history, incompatible-trace, and undefined-route cases."
+    },
+    {
+      "finding_id": "F002",
+      "severity": "IMPLEMENTATION_LIMIT",
+      "statement": "The checker operationalizes projection and witness construction as boolean conditions; it does not instantiate structured projected values or a structured witness object with source, target, context, relation, and stable identifier fields.",
+      "evidence": "evaluate() computes source_defined, projection_defined, and witness_defined directly from fixture labels."
+    },
+    {
+      "finding_id": "F003",
+      "severity": "SEMANTIC_GAP",
+      "statement": "History sufficiency is tested as event-set inclusion, but event ordering, event payload linkage, and witness identity linkage are not checked.",
+      "evidence": "HistorySufficient_C is represented by subset membership only, and the checker does not validate event payloads."
+    },
+    {
+      "finding_id": "F004",
+      "severity": "SCOPE_LIMIT",
+      "statement": "The evidence remains finite, synthetic, and single-context; it cannot discharge universal Pi_D preservation or OBL-D-001E.",
+      "evidence": "The model and prior gate report explicitly retain the C1 claim ceiling and open obligations."
+    }
+  ],
+  "review_result": "PASS_BOUNDED_SUPPORT_WITH_IMPLEMENTATION_AND_HISTORY_GAPS",
+  "claim_ceiling": "C1_DEFINED_PROVISIONAL",
+  "obligation_discharge": false,
+  "promotion_authorized": false,
+  "required_follow_up": [
+    "Implement structured projected-value and witness construction or narrow the model claim to predicate classification.",
+    "Specify and test history ordering and payload/identity linkage.",
+    "Run multi-context preservation analysis before the OBL-D-001E dependent review."
+  ]
+}
