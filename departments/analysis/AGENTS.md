@@ -67,7 +67,7 @@ The Analysis Department summarizes that state, identifies dependencies, synthesi
 
 ### Crawl Approval Gate
 
-Analysis `crawl` is a read-only action. It may inspect authorized sources and write only the designated non-canonical crawl/report outputs required by its campaign contract. It must not modify canonical registries, source artifacts, scripts, configs, or executable work items. Any change proposed by a crawl requires explicit human approval and a separately authorized patch or maintenance task before it is applied.
+Analysis `crawl` is a read-only action against canonical and authority-bearing state. It MUST emit its designated non-canonical crawl/report deliverables, at minimum `departments/analysis/crawl_reports/analysis_crawl_<date>_<id>.json` and the matching `.md` report; these deliverable writes are explicitly permitted and are part of the crawl contract. It must not modify canonical registries, source artifacts, scripts, configs, executable work items, or authority-bearing reports. Any such proposed change requires explicit human approval and a separately authorized patch or maintenance task before it is applied.
 
 If a request asks for execution, repair, or promotion rather than analysis, route it to the appropriate governed authority.
 

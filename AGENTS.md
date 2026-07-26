@@ -41,7 +41,8 @@ Every action must be grounded in the four foundational laws:
 
 - The unqualified command **`crawl`** is globally reserved for the governed Analysis Department crawl protocol. Route it to `departments/analysis/` even when issued outside that directory.
 - Analysis `crawl` is a bounded, read-only discovery and synthesis operation. It is not a filesystem walk and does not itself refresh the SQLite artifact index.
-- `crawl` requires no write authorization to begin, but it is strictly read-only. Any proposed file, registry, report, or campaign change discovered during crawl requires explicit human approval and a separate authorized patch/maintenance action before application.
+- `crawl` requires no write authorization to begin. Read-only means no mutation of canonical registries, source artifacts, scripts, configs, executable work items, or authority-bearing state. Every crawl MUST nevertheless emit its required non-canonical deliverables (at minimum a machine-readable JSON report and human-readable Markdown report) under `departments/analysis/crawl_reports/`; writing those deliverables is part of the crawl protocol and is permitted by the read-only boundary.
+- Any proposed change to a canonical file, registry, source artifact, script, config, executable work item, or authority-bearing report requires explicit human approval and a separate authorized patch/maintenance action before application.
 - The DB operation is **artifact indexing**, invoked explicitly with `python scripts/db/index_artifacts.py`. Artifact indexing is a database projection/maintenance task and must never be reported as an Analysis crawl.
 
 ## 4. Operational Mandates
