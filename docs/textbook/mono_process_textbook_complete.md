@@ -4548,6 +4548,8 @@ The 32 fixture evaluations are **PROVISIONAL EVIDENCE** only: PASS=5, FAIL=16, U
 
 The canonical soundness boundary remains unchanged: successful `project_w` output may yield `TypedWitness_C` through `AX-REALIZATION-WITNESS`; that axiom does not establish project_w definedness. The relationship between the candidate predicate and `Dom(project_w)` remains unresolved. No theorem, axiom, totality claim, witness-preservation claim, or proof discharge is introduced. `OBL-D-001D` remains OPEN.
 
+The additive token-validity surface now defines `WellFormedRelToken_C`, `TokenSourceBinding_C`, `ValidRelToken_C(C,r,x_r,tau_candidate)`, and the diagnostic classifier `ValidateRelToken_C`. Validity is provisional and source-only: the candidate must be well formed under `RELATION_TOKEN_C_V1`, preserve the complete ordered six-field canonical source payload, bind field-by-field to `SourceRelationSem_C`/`CanonSourceRelationSem_C`, and be structurally equal to `deriveRel_C(C,r,x_r)`. An optional digest is non-authoritative, and the validator does not repair or construct tokens. This definition does not establish witness integration, `project_w` transport, target interpretation, semantic preservation, injectivity, non-collapse, or discharge of `OBL-D-001D`/`OBL-D-001E`.
+
 **Freshness enforcement:** This textbook is governed by `TEXTBOOK_PROJECTION_FRESHNESS_CONTRACT_001`. It is current only when its own hash and every declared source hash match the contract and the required `textbook_projection_freshness_validation` stage passes. Validation detects drift but does not silently rewrite either canonical state or this projection.
 
 ---

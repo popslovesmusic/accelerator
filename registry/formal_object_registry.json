@@ -4435,6 +4435,54 @@
         "no_target_leakage": true,
         "no_preservation_claim": true
       }
+    },
+    {
+      "object_id": "OBJ-WellFormedRelToken_C",
+      "object_class": "predicate",
+      "title": "WellFormedRelToken_C",
+      "status": "DEFINED_PROVISIONAL",
+      "source_bindings": ["docs/theory/foundational/5_03_26 unity/math/notes/d_valid_rel_token_c_definition_20260727_001.json", "PATCH_D_VALID_REL_TOKEN_C_20260727_001"],
+      "dependency_links": ["OBJ-RELATION_TOKEN_C", "OBJ-CANONICAL_SOURCE_RELATION_PAYLOAD_C"],
+      "claim_scope": "structural conformance predicate for source-derived relation tokens; C1-defined-provisional",
+      "governance_bindings": ["OBL-D-001D", "CORE-DSEM-008-GOVERNED-PROVISIONAL-INDUCTION"],
+      "runtime_visibility": true,
+      "metadata": {"signature": "WellFormedRelToken_C(tau_candidate) : Prop", "schema": "RELATION_TOKEN_C_V1", "digest_authoritative": false, "target_leakage_forbidden": true}
+    },
+    {
+      "object_id": "OBJ-TokenSourceBinding_C",
+      "object_class": "predicate",
+      "title": "TokenSourceBinding_C",
+      "status": "DEFINED_PROVISIONAL",
+      "source_bindings": ["docs/theory/foundational/5_03_26 unity/math/notes/d_valid_rel_token_c_definition_20260727_001.json", "PATCH_D_VALID_REL_TOKEN_C_20260727_001"],
+      "dependency_links": ["OBJ-SOURCE_RELATION_C", "OBJ-SourceRelationSem_C", "OBJ-CanonSourceRelationSem_C", "OBJ-CANONICAL_SOURCE_RELATION_PAYLOAD_C"],
+      "claim_scope": "exact field-by-field source payload binding predicate; C1-defined-provisional",
+      "governance_bindings": ["OBL-D-001D", "CORE-DSEM-008-GOVERNED-PROVISIONAL-INDUCTION"],
+      "runtime_visibility": true,
+      "metadata": {"signature": "TokenSourceBinding_C(C,r,x_r,tau_candidate) : Prop", "ordered_fields": ["context_identity", "whole_relation_identity", "relation_member", "ordered_role_signature", "conditioning_context", "source_lineage"], "pre_projection": true, "non_invertibility_claim": false}
+    },
+    {
+      "object_id": "OBJ-ValidRelToken_C",
+      "object_class": "predicate",
+      "title": "ValidRelToken_C",
+      "status": "DEFINED_PROVISIONAL",
+      "source_bindings": ["docs/theory/foundational/5_03_26 unity/math/notes/d_valid_rel_token_c_definition_20260727_001.json", "PATCH_D_VALID_REL_TOKEN_C_20260727_001"],
+      "dependency_links": ["OBJ-SOURCE_RELATION_C", "OBJ-WellFormedRelToken_C", "OBJ-TokenSourceBinding_C", "OBJ-deriveRel_C"],
+      "claim_scope": "exact source-bound structural token validity predicate; C1-defined-provisional",
+      "governance_bindings": ["OBL-D-001D", "CORE-DSEM-008-GOVERNED-PROVISIONAL-INDUCTION"],
+      "runtime_visibility": true,
+      "metadata": {"signature": "ValidRelToken_C(C,r,x_r,tau_candidate) : Prop", "arity_order": ["C", "r", "x_r", "tau_candidate"], "source_only": true, "pre_projection": true, "exact_derivation_equality": true, "no_transport_claim": true, "no_preservation_claim": true}
+    },
+    {
+      "object_id": "OBJ-ValidateRelToken_C",
+      "object_class": "diagnostic_classifier",
+      "title": "ValidateRelToken_C",
+      "status": "DEFINED_PROVISIONAL",
+      "source_bindings": ["docs/theory/foundational/5_03_26 unity/math/notes/d_valid_rel_token_c_definition_20260727_001.json", "PATCH_D_VALID_REL_TOKEN_C_20260727_001"],
+      "dependency_links": ["OBJ-ValidRelToken_C"],
+      "claim_scope": "definition-level diagnostic classification only; C1-defined-provisional",
+      "governance_bindings": ["OBL-D-001D", "CORE-DSEM-008-GOVERNED-PROVISIONAL-INDUCTION"],
+      "runtime_visibility": true,
+      "metadata": {"signature": "ValidateRelToken_C(C,r,x_r,tau_candidate) -> VALID_REL_TOKEN_C or BOTTOM_VALID_REL_TOKEN_C_x", "no_repair": true, "no_token_construction": true}
     }
   ],
   "registry_bindings": [

@@ -302,9 +302,68 @@
       "claim_level": "C0_UNFORMED",
       "textbook_locations": [],
       "last_updated": "2026-07-27T00:00:00Z"
+    },
+    {
+      "node_id": "PATCH_D_VALID_REL_TOKEN_C_20260727_001",
+      "node_type": "FORMAL_DEFINITION_PATCH",
+      "name": "ValidRelToken_C provisional definition placement",
+      "status": "DEFINED_PROVISIONAL",
+      "claim_level": "C1_DEFINED_PROVISIONAL",
+      "textbook_locations": [],
+      "last_updated": "2026-07-27T00:00:00Z"
+    },
+    {
+      "node_id": "WellFormedRelToken_C",
+      "node_type": "FORMAL_OBJECT_REFERENCE",
+      "name": "Well-formed relation-token predicate",
+      "status": "DEFINED_PROVISIONAL",
+      "claim_level": "C1_DEFINED_PROVISIONAL",
+      "textbook_locations": [],
+      "last_updated": "2026-07-27T00:00:00Z"
+    },
+    {
+      "node_id": "TokenSourceBinding_C",
+      "node_type": "FORMAL_OBJECT_REFERENCE",
+      "name": "Source payload token-binding predicate",
+      "status": "DEFINED_PROVISIONAL",
+      "claim_level": "C1_DEFINED_PROVISIONAL",
+      "textbook_locations": [],
+      "last_updated": "2026-07-27T00:00:00Z"
+    },
+    {
+      "node_id": "ValidRelToken_C",
+      "node_type": "FORMAL_OBJECT_REFERENCE",
+      "name": "Exact source-bound relation-token validity predicate",
+      "status": "DEFINED_PROVISIONAL",
+      "claim_level": "C1_DEFINED_PROVISIONAL",
+      "textbook_locations": [],
+      "last_updated": "2026-07-27T00:00:00Z"
+    },
+    {
+      "node_id": "ValidateRelToken_C",
+      "node_type": "FORMAL_OBJECT_REFERENCE",
+      "name": "Diagnostic relation-token validator",
+      "status": "DEFINED_PROVISIONAL",
+      "claim_level": "C1_DEFINED_PROVISIONAL",
+      "textbook_locations": [],
+      "last_updated": "2026-07-27T00:00:00Z"
     }
   ],
   "edges": [
+    {"edge_id":"EDGE_PATCH_D_SOURCE_RELATION_C_TO_PATCH_D_VALID_REL_TOKEN_C_001","from_node":"PATCH_D_SOURCE_RELATION_C_20260727_001","to_node":"PATCH_D_VALID_REL_TOKEN_C_20260727_001","edge_type":"PREREQUISITE_FOR","strength":"REQUIRED","reason":"Source semantics prerequisite for token validity definition.","last_verified":"2026-07-27T00:00:00Z"},
+    {"edge_id":"EDGE_PATCH_D_DERIVE_REL_C_TO_PATCH_D_VALID_REL_TOKEN_C_001","from_node":"PATCH_D_DERIVE_REL_C_20260727_001","to_node":"PATCH_D_VALID_REL_TOKEN_C_20260727_001","edge_type":"PREREQUISITE_FOR","strength":"REQUIRED","reason":"Deterministic token derivation prerequisite for token validity definition.","last_verified":"2026-07-27T00:00:00Z"},
+    {"edge_id":"EDGE_SOURCE_RELATION_C_TO_VALID_REL_TOKEN_C_001","from_node":"SourceRelation_C","to_node":"ValidRelToken_C","edge_type":"DEFINEDNESS_PRECONDITION","strength":"REQUIRED","reason":"Validity requires the declared source relation.","last_verified":"2026-07-27T00:00:00Z"},
+    {"edge_id":"EDGE_SOURCE_RELATION_SEM_TO_TOKEN_SOURCE_BINDING_C_001","from_node":"SourceRelationSem_C","to_node":"TokenSourceBinding_C","edge_type":"SOURCE_BINDING_INPUT","strength":"REQUIRED","reason":"Source semantic record supplies field bindings.","last_verified":"2026-07-27T00:00:00Z"},
+    {"edge_id":"EDGE_CANON_SOURCE_RELATION_SEM_TO_TOKEN_SOURCE_BINDING_C_001","from_node":"CanonSourceRelationSem_C","to_node":"TokenSourceBinding_C","edge_type":"CANONICAL_PAYLOAD_INPUT","strength":"REQUIRED","reason":"Canonical source payload supplies authoritative token payload.","last_verified":"2026-07-27T00:00:00Z"},
+    {"edge_id":"EDGE_RELATION_TOKEN_C_TO_WELL_FORMED_REL_TOKEN_C_001","from_node":"RELATION_TOKEN_C","to_node":"WellFormedRelToken_C","edge_type":"TOKEN_TYPE_INPUT","strength":"REQUIRED","reason":"Well-formedness consumes the existing token type.","last_verified":"2026-07-27T00:00:00Z"},
+    {"edge_id":"EDGE_WELL_FORMED_REL_TOKEN_C_TO_VALID_REL_TOKEN_C_001","from_node":"WellFormedRelToken_C","to_node":"ValidRelToken_C","edge_type":"STRUCTURAL_VALIDITY_COMPONENT","strength":"REQUIRED","reason":"Structural conformance is a validity component.","last_verified":"2026-07-27T00:00:00Z"},
+    {"edge_id":"EDGE_TOKEN_SOURCE_BINDING_C_TO_VALID_REL_TOKEN_C_001","from_node":"TokenSourceBinding_C","to_node":"ValidRelToken_C","edge_type":"SOURCE_BINDING_COMPONENT","strength":"REQUIRED","reason":"Exact source binding is a validity component.","last_verified":"2026-07-27T00:00:00Z"},
+    {"edge_id":"EDGE_DERIVE_REL_C_TO_VALID_REL_TOKEN_C_001","from_node":"deriveRel_C","to_node":"ValidRelToken_C","edge_type":"EXPECTED_TOKEN_EQUALITY_COMPONENT","strength":"REQUIRED","reason":"Validity requires structural equality to the deterministic derivation output.","last_verified":"2026-07-27T00:00:00Z"},
+    {"edge_id":"EDGE_VALID_REL_TOKEN_C_TO_VALIDATE_REL_TOKEN_C_001","from_node":"ValidRelToken_C","to_node":"ValidateRelToken_C","edge_type":"DIAGNOSTIC_CLASSIFICATION_BASIS","strength":"REQUIRED","reason":"The diagnostic classifier is based on the validity predicate.","last_verified":"2026-07-27T00:00:00Z"},
+    {"edge_id":"EDGE_PATCH_D_VALID_REL_TOKEN_C_TO_OBL_D_001D_001","from_node":"PATCH_D_VALID_REL_TOKEN_C_20260727_001","to_node":"OBL-D-001D","edge_type":"REQUIRED_FOR","strength":"REQUIRED","reason":"Token validity is required future definition work for OBL-D-001D and does not discharge it.","last_verified":"2026-07-27T00:00:00Z"},
+    {"edge_id":"EDGE_PATCH_D_VALID_REL_TOKEN_C_TO_FUTURE_EXTEND_TYPE_WITNESS_C_001","from_node":"PATCH_D_VALID_REL_TOKEN_C_20260727_001","to_node":"FUTURE_EXTEND_TYPE_WITNESS_C_WITH_REL_TOKEN","edge_type":"PREREQUISITE_FOR","strength":"REQUIRED","reason":"Future enriched witness work depends on token validity.","last_verified":"2026-07-27T00:00:00Z"},
+    {"edge_id":"EDGE_PATCH_D_VALID_REL_TOKEN_C_TO_FUTURE_DEFINE_TOKEN_TRANSPORT_C_001","from_node":"PATCH_D_VALID_REL_TOKEN_C_20260727_001","to_node":"FUTURE_DEFINE_TOKEN_TRANSPORT_C","edge_type":"PREREQUISITE_FOR","strength":"REQUIRED","reason":"Future token transport work depends on token validity.","last_verified":"2026-07-27T00:00:00Z"},
+    {"edge_id":"EDGE_PATCH_D_VALID_REL_TOKEN_C_TO_FUTURE_DEFINE_PRESERVES_RELATION_C_001","from_node":"PATCH_D_VALID_REL_TOKEN_C_20260727_001","to_node":"FUTURE_DEFINE_PRESERVES_RELATION_C","edge_type":"PREREQUISITE_FOR","strength":"REQUIRED","reason":"Future relation preservation work depends on token validity.","last_verified":"2026-07-27T00:00:00Z"},
     {
       "edge_id": "EDGE_OPEN_BRIDGE_001_TO_AXIOM",
       "from_node": "OPEN_BRIDGE_001",

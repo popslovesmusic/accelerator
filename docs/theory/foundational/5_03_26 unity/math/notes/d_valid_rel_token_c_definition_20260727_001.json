@@ -1,0 +1,76 @@
+{
+  "definition_id": "DEF-D-VALID-REL-TOKEN-C-001",
+  "name": "ValidRelToken_C",
+  "status": "DEFINED_PROVISIONAL",
+  "claim_level": "C1_DEFINED_PROVISIONAL",
+  "signature": "ValidRelToken_C(C,r,x_r,tau_candidate) : Prop",
+  "prerequisites": [
+    "SourceRelation_C(C,r,x_r)",
+    "SourceRelationSem_C(C,r,x_r)",
+    "CanonSourceRelationSem_C",
+    "deriveRel_C(C,r,x_r)",
+    "RELATION_TOKEN_C",
+    "RELATION_TOKEN_C_V1"
+  ],
+  "definition": "ValidRelToken_C(C,r,x_r,tau_candidate) holds exactly when the source relation and source semantic record are defined, canonicalization and deriveRel_C are defined, tau_candidate is a well-formed RELATION_TOKEN_C using RELATION_TOKEN_C_V1, tau_candidate is exactly bound field-by-field to the canonical source payload, and tau_candidate is structurally equal to deriveRel_C(C,r,x_r).",
+  "structural_equality": "Exact equality of token_schema and complete canonical_payload.",
+  "digest_rule": "An optional digest is non-authoritative and is neither necessary nor sufficient for validity.",
+  "well_formed_token_definition": {
+    "signature": "WellFormedRelToken_C(tau_candidate) : Prop",
+    "required_authoritative_fields": ["token_schema", "canonical_payload"],
+    "allowed_optional_non_authoritative_fields": ["payload_digest"],
+    "required_schema": "RELATION_TOKEN_C_V1",
+    "required_canonical_payload_fields_in_order": ["context_identity", "whole_relation_identity", "relation_member", "ordered_role_signature", "conditioning_context", "source_lineage"],
+    "strict_schema_rule": "An authoritative field outside token_schema and canonical_payload makes the token invalid. The existing optional payload_digest is permitted only when it is marked and treated as non-authoritative.",
+    "forbidden_authoritative_fields": ["target_distinction", "target_realization", "projected_endpoint", "projected_endpoints", "projected_witness", "project_w_result", "project_w_trace", "projection_outcome", "preservation_result", "noncollapse_result", "fixture_label", "notebook_case_label", "human_discriminator", "agent_discriminator", "timestamp", "commit_id", "filesystem_path", "runtime_object_id", "random_salt", "database_row_id"]
+  },
+  "source_binding_definition": {
+    "signature": "TokenSourceBinding_C(C,r,x_r,tau_candidate) : Prop",
+    "expected_source_record": "s_r := SourceRelationSem_C(C,r,x_r)",
+    "expected_canonical_payload": "p_r := CanonSourceRelationSem_C(s_r)",
+    "definition": "TokenSourceBinding_C(C,r,x_r,tau_candidate) holds iff SourceRelation_C(C,r,x_r) holds, s_r is defined, p_r is defined, tau_candidate.canonical_payload is structurally equal to p_r, and every canonical payload field is equal to the corresponding governed source-derived value.",
+    "field_bindings": [
+      {"token_field": "canonical_payload.context_identity", "required_value": "CanonicalContextIdentity_C(C)"},
+      {"token_field": "canonical_payload.whole_relation_identity", "required_value": "s_r.whole_relation_identity"},
+      {"token_field": "canonical_payload.relation_member", "required_value": "s_r.relation_member"},
+      {"token_field": "canonical_payload.ordered_role_signature", "required_value": "s_r.ordered_role_signature", "order_sensitive": true},
+      {"token_field": "canonical_payload.conditioning_context", "required_value": "s_r.conditioning_context"},
+      {"token_field": "canonical_payload.source_lineage", "required_value": "s_r.source_lineage"}
+    ],
+    "recovery_boundary": "TokenSourceBinding_C means that the token payload can be audited against and recovered from the declared source semantic record. It does not claim that the original source object can be uniquely reconstructed from the token.",
+    "non_invertibility_rule": "TokenSourceBinding_C does not imply global invertibility, injectivity, unique source reconstruction, or semantic identity across all possible contexts."
+  },
+  "formal_definition": {
+    "signature": "ValidRelToken_C : (C : TYPE_CONTEXT) -> (r : TYPE_SOURCE_RELATION_EXPRESSION) -> (x_r : TYPE_SOURCE_REALIZATION) -> (tau_candidate : RELATION_TOKEN_C) -> Prop",
+    "expected_token_binding": "tau_expected := deriveRel_C(C,r,x_r)",
+    "canonical_ascii_form": [
+      "ValidRelToken_C(C,r,x_r,tau_candidate) :<=>",
+      "  SourceRelation_C(C,r,x_r)",
+      "  AND Defined(SourceRelationSem_C(C,r,x_r))",
+      "  AND Defined(CanonSourceRelationSem_C(SourceRelationSem_C(C,r,x_r)))",
+      "  AND Defined(deriveRel_C(C,r,x_r))",
+      "  AND WellFormedRelToken_C(tau_candidate)",
+      "  AND TokenSourceBinding_C(C,r,x_r,tau_candidate)",
+      "  AND tau_candidate ==struct deriveRel_C(C,r,x_r)"
+    ],
+    "structural_equality_rule": "==struct means exact structural equality of token_schema and complete canonical_payload. Optional non-authoritative digest equality is neither required nor sufficient.",
+    "equivalent_expansion": [
+      "tau_candidate.token_schema = RELATION_TOKEN_C_V1",
+      "tau_candidate.canonical_payload = CanonSourceRelationSem_C(SourceRelationSem_C(C,r,x_r))",
+      "tau_candidate =struct deriveRel_C(C,r,x_r)"
+    ]
+  },
+  "diagnostic_classifier": {
+    "signature": "ValidateRelToken_C(C,r,x_r,tau_candidate) -> VALID_REL_TOKEN_C or BOTTOM_VALID_REL_TOKEN_C_x",
+    "success_result": {"result_id": "VALID_REL_TOKEN_C", "meaning": "The candidate token is structurally well formed, exactly source-bound, and structurally equal to deriveRel_C(C,r,x_r).", "authority": "DEFINITIONAL_VALIDITY_ONLY"},
+    "evaluation_order": ["Check prerequisite definitions and type bindings.", "Evaluate SourceRelation_C(C,r,x_r).", "Evaluate SourceRelationSem_C(C,r,x_r).", "Evaluate CanonSourceRelationSem_C(s_r).", "Evaluate deriveRel_C(C,r,x_r).", "Check candidate token type and schema.", "Check canonical payload completeness and field order.", "Check absence of forbidden authoritative fields.", "Check exact source field bindings.", "Check complete structural equality with the expected token.", "Return VALID_REL_TOKEN_C or the first applicable diagnostic failure."],
+    "classifier_nonclaim": "ValidateRelToken_C performs diagnostic classification only. It does not create a token, repair a token, transport a token, modify the witness, or prove preservation."
+  },
+  "source_only_guard": "Validity may not depend on d, x_d, target endpoints, target witnesses, project_w output, target traces, projection outcomes, Notebook 22 PASS labels, arbitrary discriminators, timestamps, commit IDs, filesystem paths, runtime IDs, database row IDs, or random salts.",
+  "validator_rule": "ValidateRelToken_C may classify a token but may not create, complete, repair, normalize, or transport it.",
+  "governing_invariants": ["EXACT_DERIVATION_EQUALITY", "SOURCE_RELATION_PRECONDITION", "SOURCE_ONLY_VALIDATION", "PRE_PROJECTION_VALIDATION", "NO_TARGET_LEAKAGE", "COMPLETE_PAYLOAD_REQUIRED", "SCHEMA_EXACTNESS", "ORDER_PRESERVATION", "RELATION_MEMBER_BINDING", "CONTEXT_BINDING", "LINEAGE_BINDING", "NO_ARBITRARY_DISCRIMINATOR", "DIGEST_NON_AUTHORITY", "NO_REPAIR_BY_VALIDATOR", "NO_NOTEBOOK_CIRCULARITY", "SOURCE_SPECIFIC_VALIDITY", "NO_GLOBAL_INJECTIVITY", "NO_TRANSPORT_CLAIM", "NO_SEMANTIC_PRESERVATION_CLAIM", "WHOLE_EXPRESSION_PRIMACY"],
+  "failure_classification": {"failure_root": "BOTTOM_VALID_REL_TOKEN_C", "failure_objects_are_diagnostic_only": true, "classes": ["PREREQUISITE", "SOURCE_RELATION", "SOURCE_SEMANTICS", "CANONICALIZATION", "DERIVATION", "TYPE", "SCHEMA", "PAYLOAD_MISSING", "FIELD_MISSING", "FIELD_ORDER", "CONTEXT_MISMATCH", "RELATION_IDENTITY_MISMATCH", "RELATION_MEMBER_MISMATCH", "ROLE_SIGNATURE_MISMATCH", "LINEAGE_MISMATCH", "TARGET_CONTAMINATION", "EXTERNAL_DISCRIMINATOR", "DIGEST_SUBSTITUTION", "UNEXPECTED_AUTHORITATIVE_FIELD", "EXPECTED_TOKEN_MISMATCH"], "failure_effect": "The candidate is not valid for the declared source triple. No corrected token is emitted, no witness is modified, no projection is attempted, and no obligation status changes."},
+  "normative_test_matrix": ["EXPECTED_TOKEN_ACCEPTANCE", "REPEAT_DERIVATION_ACCEPTANCE", "WRONG_SCHEMA_REJECTION", "PARTIAL_PAYLOAD_REJECTION", "ORDER_REVERSAL_REJECTION", "RELATION_MEMBER_SUBSTITUTION_REJECTION", "CONTEXT_SUBSTITUTION_REJECTION", "LINEAGE_SUBSTITUTION_REJECTION", "ARBITRARY_LABEL_REJECTION", "TARGET_CONTAMINATION_REJECTION", "DIGEST_ONLY_REJECTION", "DIGEST_MISMATCH_NON_AUTHORITY", "CROSS_SOURCE_REJECTION", "PROJECT_W_INDEPENDENCE", "VALIDATOR_NO_REPAIR"],
+  "blocked_implications": ["ValidRelToken_C does not imply project_w success.", "ValidRelToken_C does not imply token transport.", "ValidRelToken_C does not imply target interpretation.", "ValidRelToken_C does not imply semantic preservation.", "ValidRelToken_C does not imply representable-distinction preservation.", "ValidRelToken_C does not imply non-collapse.", "ValidRelToken_C does not discharge OBL-D-001D or OBL-D-001E."],
+  "explicit_nonclaims": ["This packet does not modify SourceRelation_C.", "This packet does not modify SourceRelationSem_C.", "This packet does not modify CANONICAL_SOURCE_RELATION_PAYLOAD_C.", "This packet does not modify RELATION_TOKEN_C.", "This packet does not modify CanonSourceRelationSem_C.", "This packet does not modify deriveRel_C.", "This packet does not modify TYPE_WITNESS_C.", "This packet does not modify project_w.", "This packet does not define token transport through project_w.", "This packet does not define target token interpretation.", "This packet does not define PreservesRelation_C.", "This packet does not prove semantic preservation.", "This packet does not define semantic collapse.", "This packet does not prove non-collapse.", "This packet does not prove injectivity or reversibility.", "This packet does not alter Notebook 22.", "This packet does not discharge OBL-D-001D.", "This packet does not discharge OBL-D-001E.", "This packet does not promote any theorem, lemma, law, axiom, lexicon term, external-validity claim, or physical claim.", "This packet does not alter RT_core or the typed projection route."]
+}
