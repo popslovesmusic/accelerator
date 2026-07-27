@@ -1,0 +1,116 @@
+{
+  "packet_id": "D_DERIVE_REL_C_DEFINITION_AND_PLACEMENT_20260727_001",
+  "patch_id": "PATCH_D_DERIVE_REL_C_20260727_001",
+  "execution_timestamp": "2026-07-27T20:23:31.4182974Z",
+  "repository_commit_before": "209148097",
+  "repository_commit_after": "e144df48e",
+  "prerequisite_artifact_path": "docs/theory/foundational/5_03_26 unity/math/notes/d_source_relation_c_definition_20260727_001.json",
+  "prerequisite_artifact_hash": "7560FDB4FED62DA3FC6096250C9412F777A6830FA3471C68F898B0BAB35860BF",
+  "created_files": [
+    "docs/theory/foundational/5_03_26 unity/math/notes/d_derive_rel_c_definition_20260727_001.json",
+    "registry/governance/patches/PATCH_D_DERIVE_REL_C_20260727_001.json",
+    "departments/analysis/campaigns/CAMPAIGN_D_DERIVE_REL_C_PLACEMENT_20260727_001/d_derive_rel_c_definition_placement_evidence_20260727_001.json"
+  ],
+  "modified_files": [
+    "registry/formal_object_registry.json",
+    "registry/math/d_semantics_obligation_registry.json",
+    "registry/math/dependency_graph_registry.json",
+    "registry/induction_registry.json",
+    "governance/live/induction_queue.json",
+    "registry/math_source_registry.json",
+    "registry/math_hashes.json",
+    "registry/math_core_hashes.json",
+    "governance/live/textbook_projection_freshness_contract.json",
+    "registry/governance_hash_registry.json",
+    "registry/governance_manifest.json"
+  ],
+  "file_hashes": {
+    "docs/theory/foundational/5_03_26 unity/math/notes/d_derive_rel_c_definition_20260727_001.json": "44D98661CB177CAF4BCE747A0BE4AA3E7831836AD0C1A1F928DFA2BC57992860",
+    "registry/governance/patches/PATCH_D_DERIVE_REL_C_20260727_001.json": "32E2B1393B794C6B6141FDE3DAD104F6A5BEC94E9288BF8E8398C37B4A783B51",
+    "registry/formal_object_registry.json": "098CE28A8092D23AA8A35604E1FE7E7270D9728F5A73930E5BF38C8CB0C07AB9",
+    "registry/math/dependency_graph_registry.json": "FA9F8A6285F1F06C72E0D71FDD7C55864530DD84DE593297D9246CFDE430ACEC",
+    "registry/math/d_semantics_obligation_registry.json": "FCA882B862DFE23A9F74CCA98F5218E8542BDB9A150DFE95715968DFC0FA9E7D",
+    "registry/induction_registry.json": "8359F902D1EFC51695BE6BC8BF614FA89A28A224B5CE591FA5D1238BB23D1CA9",
+    "governance/live/induction_queue.json": "FC7C332D1EB67C0C356CA52DEE249FDB5EFCB746DE94F115B1AFBB445158AEA0"
+  },
+  "registry_entries": [
+    "OBJ-SOURCE_RELATION_C",
+    "OBJ-CANONICAL_SOURCE_RELATION_PAYLOAD_C",
+    "OBJ-RELATION_TOKEN_C",
+    "OBJ-CanonSourceRelationSem_C",
+    "OBJ-deriveRel_C",
+    "D_DERIVE_REL_C_DEFINITION_20260727_001",
+    "IQ_2026_07_27_043",
+    "OBL-D-001D definition progress updated; status remains OPEN",
+    "OBL-D-001E unchanged; status remains OPEN"
+  ],
+  "dependency_edges": [
+    "EDGE_PATCH_D_SOURCE_RELATION_C_TO_PATCH_D_DERIVE_REL_C_001",
+    "EDGE_SOURCE_RELATION_C_TO_DERIVE_REL_C_001",
+    "EDGE_SOURCE_RELATION_SEM_TO_CANON_SOURCE_RELATION_SEM_001",
+    "EDGE_CANON_SOURCE_RELATION_SEM_TO_DERIVE_REL_C_001",
+    "EDGE_DERIVE_REL_C_TO_RELATION_TOKEN_C_001",
+    "EDGE_PATCH_D_DERIVE_REL_C_TO_OBL_D_001D",
+    "EDGE_PATCH_D_DERIVE_REL_C_TO_FUTURE_VALID_REL_TOKEN_C_001",
+    "EDGE_PATCH_D_DERIVE_REL_C_TO_FUTURE_TOKEN_TRANSPORT_C_001",
+    "EDGE_PATCH_D_DERIVE_REL_C_TO_FUTURE_PRESERVES_RELATION_C_001"
+  ],
+  "implementation_bindings": {
+    "existing_token_or_canonicalizer_reused": false,
+    "reason": "No existing canonical utility matched the required source-only, deterministic, whole-payload, order-sensitive semantics without weakening the packet.",
+    "new_bindings": [
+      "CANONICAL_SOURCE_RELATION_PAYLOAD_C is the six-field ordered source payload.",
+      "RELATION_TOKEN_C is immutable with token_schema RELATION_TOKEN_C_V1 and complete canonical_payload.",
+      "CanonSourceRelationSem_C is partial deterministic canonicalization.",
+      "deriveRel_C is partial deterministic source-only derivation from SourceRelationSem_C."
+    ]
+  },
+  "canonicalization_binding": "p_r := CanonSourceRelationSem_C(s_r), with exact field order context_identity, whole_relation_identity, relation_member, ordered_role_signature, conditioning_context, source_lineage.",
+  "token_identity_implementation": "Structural equality of token_schema and complete canonical_payload; endpoint labels, digests, IDs, and display strings are non-authoritative.",
+  "optional_digest_implementation": "No authoritative digest field added; any future payload digest is explicitly non-authoritative.",
+  "tests_or_validator_fixtures": {
+    "governed_definition_test_surface_found": false,
+    "action": "No existing governed definition-level test surface was found; no ungoverned fixture location was invented.",
+    "read_only_structural_validator": "Inline structural guard validated exact signature, six-field order, forbidden target fields, deterministic/no-target/no-circular invariants, unique canonical definition, and dependency resolution."
+  },
+  "test_results": {
+    "structural_guards": "PASS",
+    "dependency_resolution": "PASS; 29 nodes and 26 edges resolved",
+    "induction_binding": "PASS",
+    "implementation_conformance_tests": "NOT_RUN; no governed test surface exists"
+  },
+  "validator_commands": [
+    "python scripts/query_governance.py patch-gate --patch-id PATCH_D_DERIVE_REL_C_20260727_001 --patch-file registry/governance/patches/PATCH_D_DERIVE_REL_C_20260727_001.json --requested-action APPLY --no-log --json",
+    "python scripts/sync_math_registry.py",
+    "python scripts/governance/enforce_governance_integrity.py --initialize",
+    "python scripts/db/check_registry_alignment.py",
+    "python scripts/validation/validate_textbook_projection_freshness.py",
+    "python -m scripts.global_validate",
+    "python scripts/db/index_artifacts.py",
+    "targeted SQLite artifact insertion using scripts/db/index_artifacts.py existing artifacts schema",
+    "python scripts/db/snapshot_registries.py",
+    "python scripts/query_governance.py freshness --level summary"
+  ],
+  "validator_results": {
+    "runtime_gate": "BLOCKED/DEFERRED on non-normalized predecessor lifecycle and deferred authority catalog; canonical registry fallback used as permitted by AGENTS.md",
+    "math_registry_sync": "PASS; 179 mathematical items",
+    "governance_integrity": "PASS",
+    "registry_alignment": "PASS after targeted artifact insertion",
+    "textbook_freshness": "PASS",
+    "global_validate": "PASS",
+    "full_artifact_indexer": "TIMEOUT after 125 seconds; process terminated cleanly",
+    "targeted_artifact_index": "PASS; exact artifact row inserted with canonical_active/doc/verified and SHA256 44d98661cb177caf4bce747a0be4aa3e7831836ad0c1a1f928dfa2bc57992860",
+    "database_snapshot": "PENDING_POST_COMMIT_REFRESH",
+    "final_freshness": "PENDING_POST_COMMIT_REFRESH"
+  },
+  "artifact_indexer_result": "FULL_INDEX_TIMEOUT_RECORDED",
+  "artifact_index_fallback_used": true,
+  "database_snapshot_refresh_id": "PENDING_POST_COMMIT_REFRESH",
+  "claim_level_after": "C1_DEFINED_PROVISIONAL",
+  "OBL-D-001D_status_after": "OPEN",
+  "OBL-D-001E_status_after": "OPEN",
+  "Notebook_22_status_after": "C2_LIMITATION_OR_NEGATIVE_RESULT_UNCHANGED",
+  "protected_surface_diff_summary": "Only additive definition, registration, dependency, induction, synchronization, and evidence surfaces changed. SourceRelation_C and SourceRelationSem_C were read and hash-verified but not modified. TYPE_WITNESS_C, project_w, witness/projection axioms, Pi_D,C, RT_core, Notebook 22, A-C, E, and the frozen synchronized baseline were not semantically changed.",
+  "unexpected_mutations": "No packet-scoped unexpected canonical mutations. Pre-existing generated outputs and validation/result drift remain outside the task scope and unstaged.",
+  "final_result": "PASS_LITERAL_PLACEMENT_COMPLETE"
+}
