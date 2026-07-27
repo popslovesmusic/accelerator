@@ -18,4 +18,8 @@ Review `formal_model.md`, `fixtures.json`, and `model_check_report.json` against
 
 User approval was recorded on 2026-07-27. The approval preserves this finite candidate package for further review; it does not accept the package as a discharged proof.
 
+## Review outcome
+
+The independent assessment found bounded logical consistency but identified implementation gaps: provenance and payloads are boolean flags, history lacks structured linkage fields, `Pi_D,C` is not constructed by the checker, and no subthreshold E fixture is present. Result: `PARTIAL_REVIEW_NO_DISCHARGE`.
+
 This package does not authorize registry mutation, obligation discharge, theorem promotion, or external interpretation.
