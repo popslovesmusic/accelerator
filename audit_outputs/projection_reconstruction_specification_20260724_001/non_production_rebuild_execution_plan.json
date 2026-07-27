@@ -1,0 +1,29 @@
+{
+  "packet_id": "ACELLORATOR_PROJECTION_RECONSTRUCTION_SPECIFICATION_20260724_001",
+  "version": "NPR-20260724-001",
+  "output_path": "audit_outputs/non_production_projection_rebuild_20260724_001/",
+  "steps": [
+    "pin source manifest hash",
+    "create versioned candidate database",
+    "load bootstrap source tables",
+    "resolve mappings/conflicts",
+    "load projections in topological order",
+    "create indexes/views after validation",
+    "run semantic-equivalence suite",
+    "emit hashes and rollback/discard manifest"
+  ],
+  "resource_controls": [
+    "legacy immutable",
+    "source corpus immutable",
+    "no production path writes",
+    "automatic cutover disabled"
+  ],
+  "reproducibility_inputs": [
+    "source corpus manifest hash",
+    "schema version",
+    "rebuild tool version",
+    "projection spec version",
+    "normalization version"
+  ],
+  "completion_gate": "Human approval after all required tests pass."
+}

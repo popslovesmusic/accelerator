@@ -1,0 +1,2652 @@
+{
+  "packet_id": "ACELLORATOR_PROJECTION_RECONSTRUCTION_SPECIFICATION_20260724_001",
+  "specifications": [
+    {
+      "projection_id": "PROJ-ARTIFACTS",
+      "target_object_name": "artifacts",
+      "target_object_type": "TABLE",
+      "classification": "PROJECTION",
+      "source_document_types": [
+        "registry JSON/Markdown source manifests",
+        "docs Markdown/JSON"
+      ],
+      "source_paths_or_globs": [
+        "registry/**/*.json",
+        "registry/**/*.md",
+        "docs/**/*.json",
+        "docs/**/*.md"
+      ],
+      "source_authority_rule": "Governed source corpus wins; legacy database is comparison-only.",
+      "stable_primary_key_rule": "Use declared legacy primary key or deterministic stable identifier from source path/record ID; reject duplicates.",
+      "field_mappings": [
+        {
+          "table": "artifacts",
+          "field": "id",
+          "type": "INTEGER",
+          "primary_key": true,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry JSON/Markdown source manifests",
+            "docs Markdown/JSON"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "artifacts",
+          "field": "path",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": false,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry JSON/Markdown source manifests",
+            "docs Markdown/JSON"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "artifacts",
+          "field": "artifact_type",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry JSON/Markdown source manifests",
+            "docs Markdown/JSON"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "artifacts",
+          "field": "orientation_status",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": false,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry JSON/Markdown source manifests",
+            "docs Markdown/JSON"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "artifacts",
+          "field": "authority_scope",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry JSON/Markdown source manifests",
+            "docs Markdown/JSON"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "artifacts",
+          "field": "evidence_confidence",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry JSON/Markdown source manifests",
+            "docs Markdown/JSON"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "artifacts",
+          "field": "created_at",
+          "type": "TIMESTAMP",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "DERIVED",
+          "authoritative_source": [
+            "registry JSON/Markdown source manifests",
+            "docs Markdown/JSON"
+          ],
+          "rebuild_rule": "Deterministically recompute from source/hash/time or source field mapping.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "artifacts",
+          "field": "modified_at",
+          "type": "TIMESTAMP",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry JSON/Markdown source manifests",
+            "docs Markdown/JSON"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "artifacts",
+          "field": "indexed_at",
+          "type": "TIMESTAMP",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "DERIVED",
+          "authoritative_source": [
+            "registry JSON/Markdown source manifests",
+            "docs Markdown/JSON"
+          ],
+          "rebuild_rule": "Deterministically recompute from source/hash/time or source field mapping.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "artifacts",
+          "field": "checksum",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry JSON/Markdown source manifests",
+            "docs Markdown/JSON"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "artifacts",
+          "field": "source_hash",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "DERIVED",
+          "authoritative_source": [
+            "registry JSON/Markdown source manifests",
+            "docs Markdown/JSON"
+          ],
+          "rebuild_rule": "Deterministically recompute from source/hash/time or source field mapping.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "artifacts",
+          "field": "metadata",
+          "type": "JSON",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry JSON/Markdown source manifests",
+            "docs Markdown/JSON"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        }
+      ],
+      "transformation_rules": [
+        "Index each governed source file by path/hash and preserve stable artifact identifiers."
+      ],
+      "normalization_rules": [
+        "UTF-8",
+        "normalized slash paths",
+        "stable key ordering",
+        "explicit null semantics",
+        "UTC timestamps"
+      ],
+      "deduplication_rules": "Deduplicate by stable primary key and content hash; preserve conflict candidates for review.",
+      "conflict_resolution_rules": "Source authority and explicit precedence only; conflicting records block projection until resolved.",
+      "dependency_ids": [
+        "PROJ-ORIENTATION_STATUS_TYPES"
+      ],
+      "load_strategy": "Insert in dependency order, then validate references and build indexes.",
+      "idempotency_rule": "Replace/rebuild candidate projection from pinned source manifest; never append nondeterministically.",
+      "determinism_rule": "Pinned source manifest, parser/spec version, normalization, ordering, and timezone produce identical output.",
+      "validation_rules": [
+        "unique primary keys",
+        "source hash coverage",
+        "foreign/logical reference resolution",
+        "expected-difference allowlist"
+      ],
+      "failure_policy": "Fail projection on unresolved required fields or conflicting authorities; retain diagnostics.",
+      "legacy_compatibility_notes": "Semantic equivalence not established; candidate source metadata schema is not a drop-in legacy replacement."
+    },
+    {
+      "projection_id": "PROJ-AUDIT_REPORTS",
+      "target_object_name": "audit_reports",
+      "target_object_type": "TABLE",
+      "classification": "PROJECTION",
+      "source_document_types": [
+        "governed JSON reports",
+        "governed Markdown reports"
+      ],
+      "source_paths_or_globs": [
+        "registry/**/*.json",
+        "registry/**/*.md",
+        "docs/**/*.json",
+        "docs/**/*.md"
+      ],
+      "source_authority_rule": "Governed source corpus wins; legacy database is comparison-only.",
+      "stable_primary_key_rule": "Use declared legacy primary key or deterministic stable identifier from source path/record ID; reject duplicates.",
+      "field_mappings": [
+        {
+          "table": "audit_reports",
+          "field": "id",
+          "type": "INTEGER",
+          "primary_key": true,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "governed JSON reports",
+            "governed Markdown reports"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "audit_reports",
+          "field": "report_id",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": false,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "governed JSON reports",
+            "governed Markdown reports"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "audit_reports",
+          "field": "path",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": false,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "governed JSON reports",
+            "governed Markdown reports"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "audit_reports",
+          "field": "timestamp",
+          "type": "TIMESTAMP",
+          "primary_key": false,
+          "nullable": false,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "governed JSON reports",
+            "governed Markdown reports"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "audit_reports",
+          "field": "task_id",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "governed JSON reports",
+            "governed Markdown reports"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "audit_reports",
+          "field": "report_type",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "governed JSON reports",
+            "governed Markdown reports"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "audit_reports",
+          "field": "evidence_orientation",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": false,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "governed JSON reports",
+            "governed Markdown reports"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "audit_reports",
+          "field": "verification_status",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "governed JSON reports",
+            "governed Markdown reports"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "audit_reports",
+          "field": "indexed_at",
+          "type": "TIMESTAMP",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "DERIVED",
+          "authoritative_source": [
+            "governed JSON reports",
+            "governed Markdown reports"
+          ],
+          "rebuild_rule": "Deterministically recompute from source/hash/time or source field mapping.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "audit_reports",
+          "field": "source_hash",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "DERIVED",
+          "authoritative_source": [
+            "governed JSON reports",
+            "governed Markdown reports"
+          ],
+          "rebuild_rule": "Deterministically recompute from source/hash/time or source field mapping.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "audit_reports",
+          "field": "summary",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "governed JSON reports",
+            "governed Markdown reports"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "audit_reports",
+          "field": "metadata",
+          "type": "JSON",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "governed JSON reports",
+            "governed Markdown reports"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        }
+      ],
+      "transformation_rules": [
+        "Project report metadata from governed JSON/Markdown reports."
+      ],
+      "normalization_rules": [
+        "UTF-8",
+        "normalized slash paths",
+        "stable key ordering",
+        "explicit null semantics",
+        "UTC timestamps"
+      ],
+      "deduplication_rules": "Deduplicate by stable primary key and content hash; preserve conflict candidates for review.",
+      "conflict_resolution_rules": "Source authority and explicit precedence only; conflicting records block projection until resolved.",
+      "dependency_ids": [
+        "PROJ-ORIENTATION_STATUS_TYPES"
+      ],
+      "load_strategy": "Insert in dependency order, then validate references and build indexes.",
+      "idempotency_rule": "Replace/rebuild candidate projection from pinned source manifest; never append nondeterministically.",
+      "determinism_rule": "Pinned source manifest, parser/spec version, normalization, ordering, and timezone produce identical output.",
+      "validation_rules": [
+        "unique primary keys",
+        "source hash coverage",
+        "foreign/logical reference resolution",
+        "expected-difference allowlist"
+      ],
+      "failure_policy": "Fail projection on unresolved required fields or conflicting authorities; retain diagnostics.",
+      "legacy_compatibility_notes": "Semantic equivalence not established; candidate source metadata schema is not a drop-in legacy replacement."
+    },
+    {
+      "projection_id": "PROJ-CLAIM_EVIDENCE_LINKS",
+      "target_object_name": "claim_evidence_links",
+      "target_object_type": "TABLE",
+      "classification": "PROJECTION",
+      "source_document_types": [
+        "governed JSON reports",
+        "governed Markdown reports"
+      ],
+      "source_paths_or_globs": [
+        "registry/**/*.json",
+        "registry/**/*.md",
+        "docs/**/*.json",
+        "docs/**/*.md"
+      ],
+      "source_authority_rule": "Governed source corpus wins; legacy database is comparison-only.",
+      "stable_primary_key_rule": "Use declared legacy primary key or deterministic stable identifier from source path/record ID; reject duplicates.",
+      "field_mappings": [
+        {
+          "table": "claim_evidence_links",
+          "field": "id",
+          "type": "INTEGER",
+          "primary_key": true,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "governed JSON reports",
+            "governed Markdown reports"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "claim_evidence_links",
+          "field": "claim_id",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": false,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "governed JSON reports",
+            "governed Markdown reports"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "claim_evidence_links",
+          "field": "evidence_id",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": false,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "governed JSON reports",
+            "governed Markdown reports"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "claim_evidence_links",
+          "field": "source_path",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": false,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "governed JSON reports",
+            "governed Markdown reports"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "claim_evidence_links",
+          "field": "orientation_status",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": false,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "governed JSON reports",
+            "governed Markdown reports"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        }
+      ],
+      "transformation_rules": [
+        "Resolve claim and evidence references by stable IDs and hashes."
+      ],
+      "normalization_rules": [
+        "UTF-8",
+        "normalized slash paths",
+        "stable key ordering",
+        "explicit null semantics",
+        "UTC timestamps"
+      ],
+      "deduplication_rules": "Deduplicate by stable primary key and content hash; preserve conflict candidates for review.",
+      "conflict_resolution_rules": "Source authority and explicit precedence only; conflicting records block projection until resolved.",
+      "dependency_ids": [
+        "PROJ-ORIENTATION_STATUS_TYPES"
+      ],
+      "load_strategy": "Insert in dependency order, then validate references and build indexes.",
+      "idempotency_rule": "Replace/rebuild candidate projection from pinned source manifest; never append nondeterministically.",
+      "determinism_rule": "Pinned source manifest, parser/spec version, normalization, ordering, and timezone produce identical output.",
+      "validation_rules": [
+        "unique primary keys",
+        "source hash coverage",
+        "foreign/logical reference resolution",
+        "expected-difference allowlist"
+      ],
+      "failure_policy": "Fail projection on unresolved required fields or conflicting authorities; retain diagnostics.",
+      "legacy_compatibility_notes": "Semantic equivalence not established; candidate source metadata schema is not a drop-in legacy replacement."
+    },
+    {
+      "projection_id": "PROJ-COMPRESSED_RESIDUE",
+      "target_object_name": "compressed_residue",
+      "target_object_type": "TABLE",
+      "classification": "DERIVED",
+      "source_document_types": [
+        "deterministic runtime/index derivation from source inventory"
+      ],
+      "source_paths_or_globs": [
+        "registry/**/*.json",
+        "registry/**/*.md",
+        "docs/**/*.json",
+        "docs/**/*.md"
+      ],
+      "source_authority_rule": "Governed source corpus wins; legacy database is comparison-only.",
+      "stable_primary_key_rule": "Use declared legacy primary key or deterministic stable identifier from source path/record ID; reject duplicates.",
+      "field_mappings": [
+        {
+          "table": "compressed_residue",
+          "field": "id",
+          "type": "INTEGER",
+          "primary_key": true,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "compressed_residue",
+          "field": "packet_id",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": false,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "compressed_residue",
+          "field": "query",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "compressed_residue",
+          "field": "compression_mode",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "compressed_residue",
+          "field": "source_count",
+          "type": "INTEGER",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "DERIVED",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Deterministically recompute from source/hash/time or source field mapping.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "compressed_residue",
+          "field": "confidence",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "compressed_residue",
+          "field": "path",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": false,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "compressed_residue",
+          "field": "created_at",
+          "type": "TIMESTAMP",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "DERIVED",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Deterministically recompute from source/hash/time or source field mapping.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "compressed_residue",
+          "field": "source_hash",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "DERIVED",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Deterministically recompute from source/hash/time or source field mapping.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "compressed_residue",
+          "field": "orientation_status",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        }
+      ],
+      "transformation_rules": [
+        "Derived compression/materialization output; recomputable."
+      ],
+      "normalization_rules": [
+        "UTF-8",
+        "normalized slash paths",
+        "stable key ordering",
+        "explicit null semantics",
+        "UTC timestamps"
+      ],
+      "deduplication_rules": "Deduplicate by stable primary key and content hash; preserve conflict candidates for review.",
+      "conflict_resolution_rules": "Source authority and explicit precedence only; conflicting records block projection until resolved.",
+      "dependency_ids": [
+        "PROJ-ORIENTATION_STATUS_TYPES"
+      ],
+      "load_strategy": "Insert in dependency order, then validate references and build indexes.",
+      "idempotency_rule": "Replace/rebuild candidate projection from pinned source manifest; never append nondeterministically.",
+      "determinism_rule": "Pinned source manifest, parser/spec version, normalization, ordering, and timezone produce identical output.",
+      "validation_rules": [
+        "unique primary keys",
+        "source hash coverage",
+        "foreign/logical reference resolution",
+        "expected-difference allowlist"
+      ],
+      "failure_policy": "Fail projection on unresolved required fields or conflicting authorities; retain diagnostics.",
+      "legacy_compatibility_notes": "Semantic equivalence not established; candidate source metadata schema is not a drop-in legacy replacement."
+    },
+    {
+      "projection_id": "PROJ-DB_SNAPSHOT_REFRESH_METADATA",
+      "target_object_name": "db_snapshot_refresh_metadata",
+      "target_object_type": "TABLE",
+      "classification": "DERIVED",
+      "source_document_types": [
+        "deterministic runtime/index derivation from source inventory"
+      ],
+      "source_paths_or_globs": [
+        "registry/**/*.json",
+        "registry/**/*.md",
+        "docs/**/*.json",
+        "docs/**/*.md"
+      ],
+      "source_authority_rule": "Governed source corpus wins; legacy database is comparison-only.",
+      "stable_primary_key_rule": "Use declared legacy primary key or deterministic stable identifier from source path/record ID; reject duplicates.",
+      "field_mappings": [
+        {
+          "table": "db_snapshot_refresh_metadata",
+          "field": "scope",
+          "type": "TEXT",
+          "primary_key": true,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "db_snapshot_refresh_metadata",
+          "field": "refresh_id",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": false,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "db_snapshot_refresh_metadata",
+          "field": "last_refresh_attempt",
+          "type": "TIMESTAMP",
+          "primary_key": false,
+          "nullable": false,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "db_snapshot_refresh_metadata",
+          "field": "last_refresh_result",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": false,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "db_snapshot_refresh_metadata",
+          "field": "indexed_at",
+          "type": "TIMESTAMP",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "DERIVED",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Deterministically recompute from source/hash/time or source field mapping.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "db_snapshot_refresh_metadata",
+          "field": "source_worktree_marker",
+          "type": "TIMESTAMP",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "db_snapshot_refresh_metadata",
+          "field": "error_reason",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "db_snapshot_refresh_metadata",
+          "field": "registry_count",
+          "type": "INTEGER",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "DERIVED",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Deterministically recompute from source/hash/time or source field mapping.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "db_snapshot_refresh_metadata",
+          "field": "indexed_registry_count",
+          "type": "INTEGER",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "DERIVED",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Deterministically recompute from source/hash/time or source field mapping.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "db_snapshot_refresh_metadata",
+          "field": "updated_at",
+          "type": "TIMESTAMP",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "DERIVED",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Deterministically recompute from source/hash/time or source field mapping.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "db_snapshot_refresh_metadata",
+          "field": "runtime_worktree_marker",
+          "type": "TIMESTAMP",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        }
+      ],
+      "transformation_rules": [
+        "Derived snapshot freshness metadata."
+      ],
+      "normalization_rules": [
+        "UTF-8",
+        "normalized slash paths",
+        "stable key ordering",
+        "explicit null semantics",
+        "UTC timestamps"
+      ],
+      "deduplication_rules": "Deduplicate by stable primary key and content hash; preserve conflict candidates for review.",
+      "conflict_resolution_rules": "Source authority and explicit precedence only; conflicting records block projection until resolved.",
+      "dependency_ids": [],
+      "load_strategy": "Insert in dependency order, then validate references and build indexes.",
+      "idempotency_rule": "Replace/rebuild candidate projection from pinned source manifest; never append nondeterministically.",
+      "determinism_rule": "Pinned source manifest, parser/spec version, normalization, ordering, and timezone produce identical output.",
+      "validation_rules": [
+        "unique primary keys",
+        "source hash coverage",
+        "foreign/logical reference resolution",
+        "expected-difference allowlist"
+      ],
+      "failure_policy": "Fail projection on unresolved required fields or conflicting authorities; retain diagnostics.",
+      "legacy_compatibility_notes": "Semantic equivalence not established; candidate source metadata schema is not a drop-in legacy replacement."
+    },
+    {
+      "projection_id": "PROJ-DEBT_RUNTIME_PROJECTION",
+      "target_object_name": "debt_runtime_projection",
+      "target_object_type": "TABLE",
+      "classification": "DERIVED",
+      "source_document_types": [
+        "deterministic runtime/index derivation from source inventory"
+      ],
+      "source_paths_or_globs": [
+        "registry/**/*.json",
+        "registry/**/*.md",
+        "docs/**/*.json",
+        "docs/**/*.md"
+      ],
+      "source_authority_rule": "Governed source corpus wins; legacy database is comparison-only.",
+      "stable_primary_key_rule": "Use declared legacy primary key or deterministic stable identifier from source path/record ID; reject duplicates.",
+      "field_mappings": [
+        {
+          "table": "debt_runtime_projection",
+          "field": "debt_id",
+          "type": "TEXT",
+          "primary_key": true,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "debt_runtime_projection",
+          "field": "title",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "debt_runtime_projection",
+          "field": "department",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "debt_runtime_projection",
+          "field": "status",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "DERIVED",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Deterministically recompute from source/hash/time or source field mapping.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "debt_runtime_projection",
+          "field": "severity",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "debt_runtime_projection",
+          "field": "domain",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "debt_runtime_projection",
+          "field": "blocking_scope",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "debt_runtime_projection",
+          "field": "owner_surface",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "debt_runtime_projection",
+          "field": "resolution_patch",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "debt_runtime_projection",
+          "field": "decision_effect",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "debt_runtime_projection",
+          "field": "evidence_paths",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "debt_runtime_projection",
+          "field": "warnings",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "debt_runtime_projection",
+          "field": "source_path",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "debt_runtime_projection",
+          "field": "introduced_by",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "debt_runtime_projection",
+          "field": "affects",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "debt_runtime_projection",
+          "field": "blocks",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "debt_runtime_projection",
+          "field": "depends_on",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "debt_runtime_projection",
+          "field": "required_resolution",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "debt_runtime_projection",
+          "field": "raw_status",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "debt_runtime_projection",
+          "field": "raw_severity",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "debt_runtime_projection",
+          "field": "updated_at",
+          "type": "TIMESTAMP",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "DERIVED",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Deterministically recompute from source/hash/time or source field mapping.",
+          "status": "MAPPED"
+        }
+      ],
+      "transformation_rules": [
+        "Recompute from research debt and runtime inputs."
+      ],
+      "normalization_rules": [
+        "UTF-8",
+        "normalized slash paths",
+        "stable key ordering",
+        "explicit null semantics",
+        "UTC timestamps"
+      ],
+      "deduplication_rules": "Deduplicate by stable primary key and content hash; preserve conflict candidates for review.",
+      "conflict_resolution_rules": "Source authority and explicit precedence only; conflicting records block projection until resolved.",
+      "dependency_ids": [],
+      "load_strategy": "Insert in dependency order, then validate references and build indexes.",
+      "idempotency_rule": "Replace/rebuild candidate projection from pinned source manifest; never append nondeterministically.",
+      "determinism_rule": "Pinned source manifest, parser/spec version, normalization, ordering, and timezone produce identical output.",
+      "validation_rules": [
+        "unique primary keys",
+        "source hash coverage",
+        "foreign/logical reference resolution",
+        "expected-difference allowlist"
+      ],
+      "failure_policy": "Fail projection on unresolved required fields or conflicting authorities; retain diagnostics.",
+      "legacy_compatibility_notes": "Semantic equivalence not established; candidate source metadata schema is not a drop-in legacy replacement."
+    },
+    {
+      "projection_id": "PROJ-GOVERNANCE_DECISION_LOG",
+      "target_object_name": "governance_decision_log",
+      "target_object_type": "TABLE",
+      "classification": "PROJECTION",
+      "source_document_types": [
+        "registry JSON governance records",
+        "audit_outputs/* governance packets"
+      ],
+      "source_paths_or_globs": [
+        "registry/**/*.json",
+        "registry/**/*.md",
+        "docs/**/*.json",
+        "docs/**/*.md"
+      ],
+      "source_authority_rule": "Governed source corpus wins; legacy database is comparison-only.",
+      "stable_primary_key_rule": "Use declared legacy primary key or deterministic stable identifier from source path/record ID; reject duplicates.",
+      "field_mappings": [
+        {
+          "table": "governance_decision_log",
+          "field": "id",
+          "type": "INTEGER",
+          "primary_key": true,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry JSON governance records",
+            "audit_outputs/* governance packets"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "governance_decision_log",
+          "field": "decision_id",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": false,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry JSON governance records",
+            "audit_outputs/* governance packets"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "governance_decision_log",
+          "field": "patch_id",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": false,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry JSON governance records",
+            "audit_outputs/* governance packets"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "governance_decision_log",
+          "field": "campaign_id",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry JSON governance records",
+            "audit_outputs/* governance packets"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "governance_decision_log",
+          "field": "requested_action",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry JSON governance records",
+            "audit_outputs/* governance packets"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "governance_decision_log",
+          "field": "decision",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": false,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry JSON governance records",
+            "audit_outputs/* governance packets"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "governance_decision_log",
+          "field": "reason",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": false,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry JSON governance records",
+            "audit_outputs/* governance packets"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "governance_decision_log",
+          "field": "blocking_conditions",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry JSON governance records",
+            "audit_outputs/* governance packets"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "governance_decision_log",
+          "field": "authority_resolution",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry JSON governance records",
+            "audit_outputs/* governance packets"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "governance_decision_log",
+          "field": "dependency_resolution",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry JSON governance records",
+            "audit_outputs/* governance packets"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "governance_decision_log",
+          "field": "provenance_resolution",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry JSON governance records",
+            "audit_outputs/* governance packets"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "governance_decision_log",
+          "field": "validator_resolution",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry JSON governance records",
+            "audit_outputs/* governance packets"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "governance_decision_log",
+          "field": "db_snapshot_at",
+          "type": "TIMESTAMP",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry JSON governance records",
+            "audit_outputs/* governance packets"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "governance_decision_log",
+          "field": "created_at",
+          "type": "TIMESTAMP",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "DERIVED",
+          "authoritative_source": [
+            "registry JSON governance records",
+            "audit_outputs/* governance packets"
+          ],
+          "rebuild_rule": "Deterministically recompute from source/hash/time or source field mapping.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "governance_decision_log",
+          "field": "operator",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry JSON governance records",
+            "audit_outputs/* governance packets"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "governance_decision_log",
+          "field": "evidence_json",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry JSON governance records",
+            "audit_outputs/* governance packets"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "governance_decision_log",
+          "field": "metadata_json",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry JSON governance records",
+            "audit_outputs/* governance packets"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        }
+      ],
+      "transformation_rules": [
+        "Project governance JSON metadata; store evidence by content-addressed reference, not inline duplication."
+      ],
+      "normalization_rules": [
+        "UTF-8",
+        "normalized slash paths",
+        "stable key ordering",
+        "explicit null semantics",
+        "UTC timestamps"
+      ],
+      "deduplication_rules": "Deduplicate by stable primary key and content hash; preserve conflict candidates for review.",
+      "conflict_resolution_rules": "Source authority and explicit precedence only; conflicting records block projection until resolved.",
+      "dependency_ids": [],
+      "load_strategy": "Insert in dependency order, then validate references and build indexes.",
+      "idempotency_rule": "Replace/rebuild candidate projection from pinned source manifest; never append nondeterministically.",
+      "determinism_rule": "Pinned source manifest, parser/spec version, normalization, ordering, and timezone produce identical output.",
+      "validation_rules": [
+        "unique primary keys",
+        "source hash coverage",
+        "foreign/logical reference resolution",
+        "expected-difference allowlist"
+      ],
+      "failure_policy": "Fail projection on unresolved required fields or conflicting authorities; retain diagnostics.",
+      "legacy_compatibility_notes": "Semantic equivalence not established; candidate source metadata schema is not a drop-in legacy replacement."
+    },
+    {
+      "projection_id": "PROJ-GOVERNANCE_EVENTS",
+      "target_object_name": "governance_events",
+      "target_object_type": "TABLE",
+      "classification": "PROJECTION",
+      "source_document_types": [
+        "registry JSON governance records",
+        "audit_outputs/* governance packets"
+      ],
+      "source_paths_or_globs": [
+        "registry/**/*.json",
+        "registry/**/*.md",
+        "docs/**/*.json",
+        "docs/**/*.md"
+      ],
+      "source_authority_rule": "Governed source corpus wins; legacy database is comparison-only.",
+      "stable_primary_key_rule": "Use declared legacy primary key or deterministic stable identifier from source path/record ID; reject duplicates.",
+      "field_mappings": [
+        {
+          "table": "governance_events",
+          "field": "event_id",
+          "type": "TEXT",
+          "primary_key": true,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry JSON governance records",
+            "audit_outputs/* governance packets"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "governance_events",
+          "field": "event_type",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": false,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry JSON governance records",
+            "audit_outputs/* governance packets"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "governance_events",
+          "field": "subject_id",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": false,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry JSON governance records",
+            "audit_outputs/* governance packets"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "governance_events",
+          "field": "subject_type",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": false,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry JSON governance records",
+            "audit_outputs/* governance packets"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "governance_events",
+          "field": "source_patch_id",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry JSON governance records",
+            "audit_outputs/* governance packets"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "governance_events",
+          "field": "source_path",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry JSON governance records",
+            "audit_outputs/* governance packets"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "governance_events",
+          "field": "payload_json",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": false,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry JSON governance records",
+            "audit_outputs/* governance packets"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "governance_events",
+          "field": "evidence_paths_json",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": false,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry JSON governance records",
+            "audit_outputs/* governance packets"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "governance_events",
+          "field": "created_at",
+          "type": "TIMESTAMP",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "DERIVED",
+          "authoritative_source": [
+            "registry JSON governance records",
+            "audit_outputs/* governance packets"
+          ],
+          "rebuild_rule": "Deterministically recompute from source/hash/time or source field mapping.",
+          "status": "MAPPED"
+        }
+      ],
+      "transformation_rules": [
+        "Project decision events from governance records."
+      ],
+      "normalization_rules": [
+        "UTF-8",
+        "normalized slash paths",
+        "stable key ordering",
+        "explicit null semantics",
+        "UTC timestamps"
+      ],
+      "deduplication_rules": "Deduplicate by stable primary key and content hash; preserve conflict candidates for review.",
+      "conflict_resolution_rules": "Source authority and explicit precedence only; conflicting records block projection until resolved.",
+      "dependency_ids": [
+        "PROJ-SEMANTIC_AUTHORITY_EVENTS"
+      ],
+      "load_strategy": "Insert in dependency order, then validate references and build indexes.",
+      "idempotency_rule": "Replace/rebuild candidate projection from pinned source manifest; never append nondeterministically.",
+      "determinism_rule": "Pinned source manifest, parser/spec version, normalization, ordering, and timezone produce identical output.",
+      "validation_rules": [
+        "unique primary keys",
+        "source hash coverage",
+        "foreign/logical reference resolution",
+        "expected-difference allowlist"
+      ],
+      "failure_policy": "Fail projection on unresolved required fields or conflicting authorities; retain diagnostics.",
+      "legacy_compatibility_notes": "Semantic equivalence not established; candidate source metadata schema is not a drop-in legacy replacement."
+    },
+    {
+      "projection_id": "PROJ-ORIENTATION_STATUS_TYPES",
+      "target_object_name": "orientation_status_types",
+      "target_object_type": "TABLE",
+      "classification": "AUTHORITATIVE",
+      "source_document_types": [
+        "registry authority JSON",
+        "governance Markdown"
+      ],
+      "source_paths_or_globs": [
+        "registry/**/*.json",
+        "registry/**/*.md",
+        "docs/**/*.json",
+        "docs/**/*.md"
+      ],
+      "source_authority_rule": "Governed source corpus wins; legacy database is comparison-only.",
+      "stable_primary_key_rule": "Use declared legacy primary key or deterministic stable identifier from source path/record ID; reject duplicates.",
+      "field_mappings": [
+        {
+          "table": "orientation_status_types",
+          "field": "status",
+          "type": "TEXT",
+          "primary_key": true,
+          "nullable": true,
+          "classification": "DERIVED",
+          "authoritative_source": [
+            "registry authority JSON",
+            "governance Markdown"
+          ],
+          "rebuild_rule": "Deterministically recompute from source/hash/time or source field mapping.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "orientation_status_types",
+          "field": "weight",
+          "type": "REAL",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry authority JSON",
+            "governance Markdown"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "orientation_status_types",
+          "field": "description",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry authority JSON",
+            "governance Markdown"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        }
+      ],
+      "transformation_rules": [
+        "Load governed enumerated status definitions."
+      ],
+      "normalization_rules": [
+        "UTF-8",
+        "normalized slash paths",
+        "stable key ordering",
+        "explicit null semantics",
+        "UTC timestamps"
+      ],
+      "deduplication_rules": "Deduplicate by stable primary key and content hash; preserve conflict candidates for review.",
+      "conflict_resolution_rules": "Source authority and explicit precedence only; conflicting records block projection until resolved.",
+      "dependency_ids": [],
+      "load_strategy": "Insert in dependency order, then validate references and build indexes.",
+      "idempotency_rule": "Replace/rebuild candidate projection from pinned source manifest; never append nondeterministically.",
+      "determinism_rule": "Pinned source manifest, parser/spec version, normalization, ordering, and timezone produce identical output.",
+      "validation_rules": [
+        "unique primary keys",
+        "source hash coverage",
+        "foreign/logical reference resolution",
+        "expected-difference allowlist"
+      ],
+      "failure_policy": "Fail projection on unresolved required fields or conflicting authorities; retain diagnostics.",
+      "legacy_compatibility_notes": "Semantic equivalence not established; candidate source metadata schema is not a drop-in legacy replacement."
+    },
+    {
+      "projection_id": "PROJ-REGISTRY_SNAPSHOTS",
+      "target_object_name": "registry_snapshots",
+      "target_object_type": "TABLE",
+      "classification": "PROJECTION",
+      "source_document_types": [
+        "registry JSON/Markdown source manifests",
+        "docs Markdown/JSON"
+      ],
+      "source_paths_or_globs": [
+        "registry/**/*.json",
+        "registry/**/*.md",
+        "docs/**/*.json",
+        "docs/**/*.md"
+      ],
+      "source_authority_rule": "Governed source corpus wins; legacy database is comparison-only.",
+      "stable_primary_key_rule": "Use declared legacy primary key or deterministic stable identifier from source path/record ID; reject duplicates.",
+      "field_mappings": [
+        {
+          "table": "registry_snapshots",
+          "field": "id",
+          "type": "INTEGER",
+          "primary_key": true,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry JSON/Markdown source manifests",
+            "docs Markdown/JSON"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "registry_snapshots",
+          "field": "registry_path",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": false,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry JSON/Markdown source manifests",
+            "docs Markdown/JSON"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "registry_snapshots",
+          "field": "registry_type",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry JSON/Markdown source manifests",
+            "docs Markdown/JSON"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "registry_snapshots",
+          "field": "source_hash",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": false,
+          "classification": "DERIVED",
+          "authoritative_source": [
+            "registry JSON/Markdown source manifests",
+            "docs Markdown/JSON"
+          ],
+          "rebuild_rule": "Deterministically recompute from source/hash/time or source field mapping.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "registry_snapshots",
+          "field": "key_count",
+          "type": "INTEGER",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "DERIVED",
+          "authoritative_source": [
+            "registry JSON/Markdown source manifests",
+            "docs Markdown/JSON"
+          ],
+          "rebuild_rule": "Deterministically recompute from source/hash/time or source field mapping.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "registry_snapshots",
+          "field": "modified_at",
+          "type": "TIMESTAMP",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry JSON/Markdown source manifests",
+            "docs Markdown/JSON"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "registry_snapshots",
+          "field": "indexed_at",
+          "type": "TIMESTAMP",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "DERIVED",
+          "authoritative_source": [
+            "registry JSON/Markdown source manifests",
+            "docs Markdown/JSON"
+          ],
+          "rebuild_rule": "Deterministically recompute from source/hash/time or source field mapping.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "registry_snapshots",
+          "field": "orientation_status",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": false,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry JSON/Markdown source manifests",
+            "docs Markdown/JSON"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "registry_snapshots",
+          "field": "version",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry JSON/Markdown source manifests",
+            "docs Markdown/JSON"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "registry_snapshots",
+          "field": "timestamp",
+          "type": "TIMESTAMP",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry JSON/Markdown source manifests",
+            "docs Markdown/JSON"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "registry_snapshots",
+          "field": "snapshot_path",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry JSON/Markdown source manifests",
+            "docs Markdown/JSON"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        }
+      ],
+      "transformation_rules": [
+        "Materialize source inventory roots and deterministic deltas."
+      ],
+      "normalization_rules": [
+        "UTF-8",
+        "normalized slash paths",
+        "stable key ordering",
+        "explicit null semantics",
+        "UTC timestamps"
+      ],
+      "deduplication_rules": "Deduplicate by stable primary key and content hash; preserve conflict candidates for review.",
+      "conflict_resolution_rules": "Source authority and explicit precedence only; conflicting records block projection until resolved.",
+      "dependency_ids": [],
+      "load_strategy": "Insert in dependency order, then validate references and build indexes.",
+      "idempotency_rule": "Replace/rebuild candidate projection from pinned source manifest; never append nondeterministically.",
+      "determinism_rule": "Pinned source manifest, parser/spec version, normalization, ordering, and timezone produce identical output.",
+      "validation_rules": [
+        "unique primary keys",
+        "source hash coverage",
+        "foreign/logical reference resolution",
+        "expected-difference allowlist"
+      ],
+      "failure_policy": "Fail projection on unresolved required fields or conflicting authorities; retain diagnostics.",
+      "legacy_compatibility_notes": "Semantic equivalence not established; candidate source metadata schema is not a drop-in legacy replacement."
+    },
+    {
+      "projection_id": "PROJ-SEMANTIC_AUTHORITY_EVENTS",
+      "target_object_name": "semantic_authority_events",
+      "target_object_type": "TABLE",
+      "classification": "PROJECTION",
+      "source_document_types": [
+        "registry authority JSON",
+        "governance Markdown"
+      ],
+      "source_paths_or_globs": [
+        "registry/**/*.json",
+        "registry/**/*.md",
+        "docs/**/*.json",
+        "docs/**/*.md"
+      ],
+      "source_authority_rule": "Governed source corpus wins; legacy database is comparison-only.",
+      "stable_primary_key_rule": "Use declared legacy primary key or deterministic stable identifier from source path/record ID; reject duplicates.",
+      "field_mappings": [
+        {
+          "table": "semantic_authority_events",
+          "field": "event_id",
+          "type": "TEXT",
+          "primary_key": true,
+          "nullable": false,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry authority JSON",
+            "governance Markdown"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "semantic_authority_events",
+          "field": "semantic_key",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": false,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry authority JSON",
+            "governance Markdown"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "semantic_authority_events",
+          "field": "event_type",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": false,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry authority JSON",
+            "governance Markdown"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "semantic_authority_events",
+          "field": "authority_source",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": false,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry authority JSON",
+            "governance Markdown"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "semantic_authority_events",
+          "field": "created_at",
+          "type": "TIMESTAMP",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "DERIVED",
+          "authoritative_source": [
+            "registry authority JSON",
+            "governance Markdown"
+          ],
+          "rebuild_rule": "Deterministically recompute from source/hash/time or source field mapping.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "semantic_authority_events",
+          "field": "details",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry authority JSON",
+            "governance Markdown"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        }
+      ],
+      "transformation_rules": [
+        "Project authority events in sequence order."
+      ],
+      "normalization_rules": [
+        "UTF-8",
+        "normalized slash paths",
+        "stable key ordering",
+        "explicit null semantics",
+        "UTC timestamps"
+      ],
+      "deduplication_rules": "Deduplicate by stable primary key and content hash; preserve conflict candidates for review.",
+      "conflict_resolution_rules": "Source authority and explicit precedence only; conflicting records block projection until resolved.",
+      "dependency_ids": [
+        "PROJ-GOVERNANCE_EVENTS"
+      ],
+      "load_strategy": "Insert in dependency order, then validate references and build indexes.",
+      "idempotency_rule": "Replace/rebuild candidate projection from pinned source manifest; never append nondeterministically.",
+      "determinism_rule": "Pinned source manifest, parser/spec version, normalization, ordering, and timezone produce identical output.",
+      "validation_rules": [
+        "unique primary keys",
+        "source hash coverage",
+        "foreign/logical reference resolution",
+        "expected-difference allowlist"
+      ],
+      "failure_policy": "Fail projection on unresolved required fields or conflicting authorities; retain diagnostics.",
+      "legacy_compatibility_notes": "Semantic equivalence not established; candidate source metadata schema is not a drop-in legacy replacement."
+    },
+    {
+      "projection_id": "PROJ-SEMANTIC_AUTHORITY_MAP",
+      "target_object_name": "semantic_authority_map",
+      "target_object_type": "TABLE",
+      "classification": "PROJECTION",
+      "source_document_types": [
+        "registry authority JSON",
+        "governance Markdown"
+      ],
+      "source_paths_or_globs": [
+        "registry/**/*.json",
+        "registry/**/*.md",
+        "docs/**/*.json",
+        "docs/**/*.md"
+      ],
+      "source_authority_rule": "Governed source corpus wins; legacy database is comparison-only.",
+      "stable_primary_key_rule": "Use declared legacy primary key or deterministic stable identifier from source path/record ID; reject duplicates.",
+      "field_mappings": [
+        {
+          "table": "semantic_authority_map",
+          "field": "semantic_key",
+          "type": "TEXT",
+          "primary_key": true,
+          "nullable": false,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry authority JSON",
+            "governance Markdown"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "semantic_authority_map",
+          "field": "semantic_type",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": false,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry authority JSON",
+            "governance Markdown"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "semantic_authority_map",
+          "field": "authority_source",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": false,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry authority JSON",
+            "governance Markdown"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "semantic_authority_map",
+          "field": "authority_rank",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": false,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry authority JSON",
+            "governance Markdown"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "semantic_authority_map",
+          "field": "supersedes",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry authority JSON",
+            "governance Markdown"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "semantic_authority_map",
+          "field": "status",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": false,
+          "classification": "DERIVED",
+          "authoritative_source": [
+            "registry authority JSON",
+            "governance Markdown"
+          ],
+          "rebuild_rule": "Deterministically recompute from source/hash/time or source field mapping.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "semantic_authority_map",
+          "field": "canonical_expression",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry authority JSON",
+            "governance Markdown"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "semantic_authority_map",
+          "field": "notes",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "registry authority JSON",
+            "governance Markdown"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "semantic_authority_map",
+          "field": "created_at",
+          "type": "TIMESTAMP",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "DERIVED",
+          "authoritative_source": [
+            "registry authority JSON",
+            "governance Markdown"
+          ],
+          "rebuild_rule": "Deterministically recompute from source/hash/time or source field mapping.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "semantic_authority_map",
+          "field": "updated_at",
+          "type": "TIMESTAMP",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "DERIVED",
+          "authoritative_source": [
+            "registry authority JSON",
+            "governance Markdown"
+          ],
+          "rebuild_rule": "Deterministically recompute from source/hash/time or source field mapping.",
+          "status": "MAPPED"
+        }
+      ],
+      "transformation_rules": [
+        "Project authority declarations from registry records."
+      ],
+      "normalization_rules": [
+        "UTF-8",
+        "normalized slash paths",
+        "stable key ordering",
+        "explicit null semantics",
+        "UTC timestamps"
+      ],
+      "deduplication_rules": "Deduplicate by stable primary key and content hash; preserve conflict candidates for review.",
+      "conflict_resolution_rules": "Source authority and explicit precedence only; conflicting records block projection until resolved.",
+      "dependency_ids": [],
+      "load_strategy": "Insert in dependency order, then validate references and build indexes.",
+      "idempotency_rule": "Replace/rebuild candidate projection from pinned source manifest; never append nondeterministically.",
+      "determinism_rule": "Pinned source manifest, parser/spec version, normalization, ordering, and timezone produce identical output.",
+      "validation_rules": [
+        "unique primary keys",
+        "source hash coverage",
+        "foreign/logical reference resolution",
+        "expected-difference allowlist"
+      ],
+      "failure_policy": "Fail projection on unresolved required fields or conflicting authorities; retain diagnostics.",
+      "legacy_compatibility_notes": "Semantic equivalence not established; candidate source metadata schema is not a drop-in legacy replacement."
+    },
+    {
+      "projection_id": "PROJ-SUPERSESSION_EDGES",
+      "target_object_name": "supersession_edges",
+      "target_object_type": "TABLE",
+      "classification": "PROJECTION",
+      "source_document_types": [
+        "governed JSON reports",
+        "governed Markdown reports"
+      ],
+      "source_paths_or_globs": [
+        "registry/**/*.json",
+        "registry/**/*.md",
+        "docs/**/*.json",
+        "docs/**/*.md"
+      ],
+      "source_authority_rule": "Governed source corpus wins; legacy database is comparison-only.",
+      "stable_primary_key_rule": "Use declared legacy primary key or deterministic stable identifier from source path/record ID; reject duplicates.",
+      "field_mappings": [
+        {
+          "table": "supersession_edges",
+          "field": "id",
+          "type": "INTEGER",
+          "primary_key": true,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "governed JSON reports",
+            "governed Markdown reports"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "supersession_edges",
+          "field": "from_artifact_id",
+          "type": "INTEGER",
+          "primary_key": false,
+          "nullable": false,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "governed JSON reports",
+            "governed Markdown reports"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "supersession_edges",
+          "field": "to_artifact_id",
+          "type": "INTEGER",
+          "primary_key": false,
+          "nullable": false,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "governed JSON reports",
+            "governed Markdown reports"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "supersession_edges",
+          "field": "relation",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": false,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "governed JSON reports",
+            "governed Markdown reports"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "supersession_edges",
+          "field": "evidence_path",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "governed JSON reports",
+            "governed Markdown reports"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "supersession_edges",
+          "field": "confidence",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "governed JSON reports",
+            "governed Markdown reports"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "supersession_edges",
+          "field": "reason",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "governed JSON reports",
+            "governed Markdown reports"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "supersession_edges",
+          "field": "timestamp",
+          "type": "TIMESTAMP",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "governed JSON reports",
+            "governed Markdown reports"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "supersession_edges",
+          "field": "indexed_at",
+          "type": "TIMESTAMP",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "DERIVED",
+          "authoritative_source": [
+            "governed JSON reports",
+            "governed Markdown reports"
+          ],
+          "rebuild_rule": "Deterministically recompute from source/hash/time or source field mapping.",
+          "status": "MAPPED"
+        }
+      ],
+      "transformation_rules": [
+        "Build deterministic edges from supersession fields."
+      ],
+      "normalization_rules": [
+        "UTF-8",
+        "normalized slash paths",
+        "stable key ordering",
+        "explicit null semantics",
+        "UTC timestamps"
+      ],
+      "deduplication_rules": "Deduplicate by stable primary key and content hash; preserve conflict candidates for review.",
+      "conflict_resolution_rules": "Source authority and explicit precedence only; conflicting records block projection until resolved.",
+      "dependency_ids": [
+        "PROJ-ARTIFACTS",
+        "PROJ-ARTIFACTS"
+      ],
+      "load_strategy": "Insert in dependency order, then validate references and build indexes.",
+      "idempotency_rule": "Replace/rebuild candidate projection from pinned source manifest; never append nondeterministically.",
+      "determinism_rule": "Pinned source manifest, parser/spec version, normalization, ordering, and timezone produce identical output.",
+      "validation_rules": [
+        "unique primary keys",
+        "source hash coverage",
+        "foreign/logical reference resolution",
+        "expected-difference allowlist"
+      ],
+      "failure_policy": "Fail projection on unresolved required fields or conflicting authorities; retain diagnostics.",
+      "legacy_compatibility_notes": "Semantic equivalence not established; candidate source metadata schema is not a drop-in legacy replacement."
+    },
+    {
+      "projection_id": "PROJ-TOOL_HEALTH",
+      "target_object_name": "tool_health",
+      "target_object_type": "TABLE",
+      "classification": "DERIVED",
+      "source_document_types": [
+        "deterministic runtime/index derivation from source inventory"
+      ],
+      "source_paths_or_globs": [
+        "registry/**/*.json",
+        "registry/**/*.md",
+        "docs/**/*.json",
+        "docs/**/*.md"
+      ],
+      "source_authority_rule": "Governed source corpus wins; legacy database is comparison-only.",
+      "stable_primary_key_rule": "Use declared legacy primary key or deterministic stable identifier from source path/record ID; reject duplicates.",
+      "field_mappings": [
+        {
+          "table": "tool_health",
+          "field": "id",
+          "type": "INTEGER",
+          "primary_key": true,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "tool_health",
+          "field": "tool_name",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": false,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "tool_health",
+          "field": "tool_path",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "tool_health",
+          "field": "status",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": false,
+          "classification": "DERIVED",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Deterministically recompute from source/hash/time or source field mapping.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "tool_health",
+          "field": "evidence_source_path",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "tool_health",
+          "field": "command_used",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "tool_health",
+          "field": "raw_output_excerpt",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "tool_health",
+          "field": "certification_level",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "tool_health",
+          "field": "last_check",
+          "type": "TIMESTAMP",
+          "primary_key": false,
+          "nullable": false,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "tool_health",
+          "field": "indexed_at",
+          "type": "TIMESTAMP",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "DERIVED",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Deterministically recompute from source/hash/time or source field mapping.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "tool_health",
+          "field": "error_log",
+          "type": "TEXT",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        },
+        {
+          "table": "tool_health",
+          "field": "metadata",
+          "type": "JSON",
+          "primary_key": false,
+          "nullable": true,
+          "classification": "SOURCE_OR_PROJECTION",
+          "authoritative_source": [
+            "deterministic runtime/index derivation from source inventory"
+          ],
+          "rebuild_rule": "Map by stable source key and preserve exact source value.",
+          "status": "MAPPED"
+        }
+      ],
+      "transformation_rules": [
+        "Recompute from deterministic tool/runtime observations."
+      ],
+      "normalization_rules": [
+        "UTF-8",
+        "normalized slash paths",
+        "stable key ordering",
+        "explicit null semantics",
+        "UTC timestamps"
+      ],
+      "deduplication_rules": "Deduplicate by stable primary key and content hash; preserve conflict candidates for review.",
+      "conflict_resolution_rules": "Source authority and explicit precedence only; conflicting records block projection until resolved.",
+      "dependency_ids": [],
+      "load_strategy": "Insert in dependency order, then validate references and build indexes.",
+      "idempotency_rule": "Replace/rebuild candidate projection from pinned source manifest; never append nondeterministically.",
+      "determinism_rule": "Pinned source manifest, parser/spec version, normalization, ordering, and timezone produce identical output.",
+      "validation_rules": [
+        "unique primary keys",
+        "source hash coverage",
+        "foreign/logical reference resolution",
+        "expected-difference allowlist"
+      ],
+      "failure_policy": "Fail projection on unresolved required fields or conflicting authorities; retain diagnostics.",
+      "legacy_compatibility_notes": "Semantic equivalence not established; candidate source metadata schema is not a drop-in legacy replacement."
+    }
+  ],
+  "retained_object_count": 14,
+  "open_field_mappings": 2
+}

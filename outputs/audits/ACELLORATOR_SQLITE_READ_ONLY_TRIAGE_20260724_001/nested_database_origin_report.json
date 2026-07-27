@@ -1,0 +1,16 @@
+{
+  "packet_id": "ACELLORATOR_SQLITE_READ_ONLY_TRIAGE_20260724_001",
+  "hypotheses": [
+    {
+      "hypothesis": "Filesystem hard-link/alias created under a recursive registry path",
+      "confidence": "HIGH",
+      "support": "Both paths have identical size, SHA-256, filesystem file identifier, and fsutil hardlink-list membership; the nested path is registry/registry/db while runtime defaults point to registry/db."
+    },
+    {
+      "hypothesis": "Independent live runtime authority",
+      "confidence": "LOW",
+      "support": "No nested path reference was found in the bounded source search; process-level open-handle evidence was not available."
+    }
+  ],
+  "conclusion": "The nested path is a hard-link alias of the primary database, likely exposed by recursive registry path construction or indexing. It is not an independent database; runtime authority remains assigned to the primary path because that is the configured runtime default."
+}

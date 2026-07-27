@@ -1,0 +1,100 @@
+{
+  "packet_id": "ACELLORATOR_PROJECTION_RECONSTRUCTION_SPECIFICATION_20260724_001",
+  "nodes": [
+    "source_files",
+    "json_records",
+    "markdown_records",
+    "identifier_occurrences",
+    "artifacts",
+    "audit_reports",
+    "claim_evidence_links",
+    "compressed_residue",
+    "db_snapshot_refresh_metadata",
+    "debt_runtime_projection",
+    "governance_decision_log",
+    "governance_events",
+    "orientation_status_types",
+    "registry_snapshots",
+    "semantic_authority_events",
+    "semantic_authority_map",
+    "supersession_edges",
+    "tool_health"
+  ],
+  "edges": [
+    {
+      "from_table": "artifacts",
+      "from_field": "orientation_status",
+      "to_table": "orientation_status_types",
+      "to_field": "status",
+      "dependency_type": "FOREIGN_KEY"
+    },
+    {
+      "from_table": "audit_reports",
+      "from_field": "evidence_orientation",
+      "to_table": "orientation_status_types",
+      "to_field": "status",
+      "dependency_type": "FOREIGN_KEY"
+    },
+    {
+      "from_table": "claim_evidence_links",
+      "from_field": "orientation_status",
+      "to_table": "orientation_status_types",
+      "to_field": "status",
+      "dependency_type": "FOREIGN_KEY"
+    },
+    {
+      "from_table": "compressed_residue",
+      "from_field": "orientation_status",
+      "to_table": "orientation_status_types",
+      "to_field": "status",
+      "dependency_type": "FOREIGN_KEY"
+    },
+    {
+      "from_table": "supersession_edges",
+      "from_field": "to_artifact_id",
+      "to_table": "artifacts",
+      "to_field": "id",
+      "dependency_type": "FOREIGN_KEY"
+    },
+    {
+      "from_table": "supersession_edges",
+      "from_field": "from_artifact_id",
+      "to_table": "artifacts",
+      "to_field": "id",
+      "dependency_type": "FOREIGN_KEY"
+    },
+    {
+      "from_table": "governance_events",
+      "to_table": "semantic_authority_events",
+      "dependency_type": "HEURISTIC_IDENTIFIER_REFERENCE"
+    },
+    {
+      "from_table": "semantic_authority_events",
+      "to_table": "governance_events",
+      "dependency_type": "HEURISTIC_IDENTIFIER_REFERENCE"
+    }
+  ],
+  "topological_order": [
+    "source_files",
+    "json_records",
+    "markdown_records",
+    "identifier_occurrences",
+    "artifacts",
+    "governance_events",
+    "governance_decision_log",
+    "audit_reports",
+    "semantic_authority_map",
+    "derived_runtime_tables"
+  ],
+  "cycle_status": "NO_EXPLICIT_FK_CYCLE_DETECTED; HEURISTIC REFERENCES REQUIRE REVIEW",
+  "bootstrap_objects": [
+    "source_files",
+    "json_records",
+    "markdown_records"
+  ],
+  "deferred_objects": [
+    "derived runtime/cache projections",
+    "indexes",
+    "views"
+  ]
+}
