@@ -20,6 +20,6 @@ User approval was recorded on 2026-07-27. The approval preserves this finite can
 
 ## Review outcome
 
-The independent assessment found bounded logical consistency but identified implementation gaps: provenance and payloads are boolean flags, history lacks structured linkage fields, `Pi_D,C` is not constructed by the checker, and no subthreshold E fixture is present. Result: `PARTIAL_REVIEW_NO_DISCHARGE`.
+The revised assessment confirms bounded structured provenance, ordered payload-linked history, and explicit finite projected-record construction. It still finds that projected values and definedness are fixture-supplied, while the threshold remains stipulated. Result: `PARTIAL_REVIEW_NO_DISCHARGE`.
 
 This package does not authorize registry mutation, obligation discharge, theorem promotion, or external interpretation.

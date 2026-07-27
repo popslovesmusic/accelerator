@@ -1,21 +1,21 @@
 {
-  "review_id": "D_MODEL_INDEPENDENT_FORMAL_REVIEW_20260727_001",
+  "review_id": "D_MODEL_INDEPENDENT_FORMAL_REVIEW_20260727_002",
   "reviewer_role": "RT_AGENT_INFINITE_THEORY_ANALYST_INDEPENDENT_REVIEW",
   "review_scope": ["witness provenance", "history sufficiency", "Pi_D,C model adequacy", "epsilon threshold boundary"],
   "methods": ["typed dependency inspection", "adversarial fixture review", "implementation-to-specification comparison", "claim-boundary review"],
   "findings": [
     {"id":"F1","finding":"The acceptance conjunction is syntactically explicit and the negative cases are classified without universal information-loss inference.","status":"SUPPORTED_BOUNDED"},
-    {"id":"F2","finding":"witness_provenance and payload_aligned are boolean fixture flags; no structured witness record or provenance relation is constructed by the checker.","status":"OPEN_SEMANTIC_DEPENDENCY"},
-    {"id":"F3","finding":"History is represented as an ordered list of event names only; context, payload, witness identity, and source/target linkage are not checked by the implementation.","status":"OPEN_IMPLEMENTATION_GAP"},
-    {"id":"F4","finding":"projection_defined is a fixture boolean and the checker does not construct Pi_D,C outputs, so the current result does not establish that the projection route is modeled rather than labeled.","status":"OPEN_IMPLEMENTATION_GAP"},
-    {"id":"F5","finding":"The E fixtures test zero and minimum-positive epsilon but do not include a subthreshold positive case or derive epsilon_a,C.","status":"SUPPORTED_LIMITATION"}
+    {"id":"F2","finding":"The revised checker constructs projected value records and typed witness records with context, source, target, and relation provenance; this is supported within the finite fixture model.","status":"SUPPORTED_BOUNDED"},
+    {"id":"F3","finding":"The revised checker validates ordered history event payloads and witness identity linkage, but the event schema remains a finite model contract rather than an independently established semantics of history.","status":"SUPPORTED_LIMITATION"},
+    {"id":"F4","finding":"Pi_D,C construction maps fixture-supplied projected values into typed records; the projection function remains parameterized by fixture supplied definedness and values, so arbitrary projection semantics are not established.","status":"OPEN_SEMANTIC_DEPENDENCY"},
+    {"id":"F5","finding":"A positive subthreshold fixture is now rejected as expected, but the threshold remains the stipulated constant 1.0 and is not derived or independently validated.","status":"SUPPORTED_LIMITATION"}
   ],
   "review_result": "PARTIAL_REVIEW_NO_DISCHARGE",
   "epistemic_status": "PARTIALLY_SUPPORTED",
   "proof_status": "INDEPENDENT_REVIEW_REQUIRED",
   "obligation_status": {"OBL-D-001D":"OPEN","OBL-D-001E":"OPEN"},
   "claim_ceiling": "C1_DEFINED_PROVISIONAL",
-  "required_follow_up": ["construct structured witness/provenance records", "construct payload-linked history records", "implement Pi_D,C and witness projection rather than boolean flags", "add subthreshold E fixture", "rerun independent review"],
+  "required_follow_up": ["independently validate the projection mapping rather than fixture-supplied projected values", "independently justify or bound the threshold parameter", "rerun the combined D gate without changing the C1 ceiling"],
   "promotion_authorized": false,
   "theorem_promotion_authorized": false
 }
