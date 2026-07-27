@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0.0",
+  "claim_ceiling": "C1_DEFINED_PROVISIONAL",
+  "fixtures": [
+    {"id":"valid","projection_defined":true,"witness_provenance":true,"history":["projection_invoked","witness_bound"],"payload_aligned":true,"trace_compatible":true,"expected":true},
+    {"id":"missing_provenance","projection_defined":true,"witness_provenance":false,"history":["projection_invoked","witness_bound"],"payload_aligned":true,"trace_compatible":true,"expected":false},
+    {"id":"presence_without_linkage","projection_defined":true,"witness_provenance":true,"history":["projection_invoked"],"payload_aligned":true,"trace_compatible":true,"expected":false},
+    {"id":"unordered_history","projection_defined":true,"witness_provenance":true,"history":["witness_bound","projection_invoked"],"payload_aligned":true,"trace_compatible":true,"expected":false},
+    {"id":"payload_mismatch","projection_defined":true,"witness_provenance":true,"history":["projection_invoked","witness_bound"],"payload_aligned":false,"trace_compatible":true,"expected":false},
+    {"id":"undefined_projection","projection_defined":false,"witness_provenance":true,"history":["projection_invoked","witness_bound"],"payload_aligned":true,"trace_compatible":true,"expected":false},
+    {"id":"incompatible_trace","projection_defined":true,"witness_provenance":true,"history":["projection_invoked","witness_bound"],"payload_aligned":true,"trace_compatible":false,"expected":false},
+    {"id":"e_zero","projection_defined":true,"witness_provenance":true,"history":["projection_invoked","witness_bound"],"payload_aligned":true,"trace_compatible":true,"epsilon":0,"expected":false},
+    {"id":"e_min_positive","projection_defined":true,"witness_provenance":true,"history":["projection_invoked","witness_bound"],"payload_aligned":true,"trace_compatible":true,"epsilon":1,"expected":true}
+  ]
+}
