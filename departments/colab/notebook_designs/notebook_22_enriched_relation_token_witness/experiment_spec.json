@@ -1,0 +1,45 @@
+{
+  "spec_id": "MPF_SIM_ENRICHED_RELATION_TOKEN_WITNESS_001",
+  "schema_version": "1.0.0",
+  "status": "IMMUTABLE_SPEC",
+  "created_at": "2026-07-27T00:00:00Z",
+  "source_notebook": "departments/colab/notebook_designs/notebook_22_enriched_relation_token_witness/RT_Notebook_22_Enriched_Relation_Token_Witness.ipynb",
+  "research_question": "Within the declared finite cases, does adding a typed relation token to the witness distinguish source relations that collide under the bare context-indexed prefix projection?",
+  "hypothesis": "H1: an explicitly linked typed relation token allows the bounded preservation predicate to distinguish the two relation cases; H0: the enriched witness remains insufficient or the relation identity is not linked.",
+  "independent_variables": [
+    {"name":"witness_mode","definition":"Whether the witness carries a typed relation token linked to the source relation","units_or_scale":"categorical","allowed_values_or_range":"bare, enriched"},
+    {"name":"context_id","definition":"Declared projection context","units_or_scale":"categorical","allowed_values_or_range":"C1"},
+    {"name":"case_id","definition":"Finite source relation case","units_or_scale":"categorical","allowed_values_or_range":"R1, R2"}
+  ],
+  "dependent_variables": [
+    {"name":"relation_identity_match","definition":"Witness relation token equals the source relation identifier","units_or_scale":"boolean","allowed_values_or_range":"true or false"},
+    {"name":"preserve_relation_candidate","definition":"All bounded predicate components evaluate true","units_or_scale":"boolean","allowed_values_or_range":"true or false"},
+    {"name":"projection_collision","definition":"Projected endpoint pair is equal across R1 and R2","units_or_scale":"boolean","allowed_values_or_range":"true or false"}
+  ],
+  "controls": [
+    {"name":"fixed_source_cases","purpose":"Keep source relation content constant across witness modes","implementation":"Use the two registered counterexample cases R1 and R2."},
+    {"name":"fixed_projection_rule","purpose":"Prevent projection drift","implementation":"Use C1:: plus source or target value."},
+    {"name":"explicit_predicate_components","purpose":"Prevent post-hoc acceptance","implementation":"Evaluate typed relation, endpoint, identity, trace, and history fields separately."},
+    {"name":"bounded_interpretation","purpose":"Prevent universal escalation","implementation":"Report only finite candidate-predicate behavior."}
+  ],
+  "random_seed": {"value": null, "seed_scope":"deterministic finite cases; no random generation","derivation_policy":"No undeclared randomness."},
+  "parameter_space": [
+    {"name":"contexts","values_or_range":"C1","units_or_scale":"categorical","default":"C1","sampling_rule":"complete declared set"},
+    {"name":"source_cases","values_or_range":"R1, R2","units_or_scale":"count=2","default":"both","sampling_rule":"complete declared set"},
+    {"name":"witness_modes","values_or_range":"bare, enriched","units_or_scale":"categorical","default":"both","sampling_rule":"complete declared set"}
+  ],
+  "termination_conditions": ["All four case/mode combinations complete.", "Any source relation, endpoint, or witness token is missing.", "Any predicate component is evaluated using an undeclared rule.", "No post-hoc expansion of cases or witness fields."],
+  "expected_outputs": [
+    {"name":"bounded_rows","path_pattern":"departments/colab/results/MPF_SIM_ENRICHED_RELATION_TOKEN_WITNESS_001/bounded_rows.json","required":true,"interpretation_role":"Recoverable finite predicate-evaluation rows."},
+    {"name":"summary","path_pattern":"departments/colab/results/MPF_SIM_ENRICHED_RELATION_TOKEN_WITNESS_001/summary.json","required":true,"interpretation_role":"Bounded comparison and limitation summary."},
+    {"name":"manifest","path_pattern":"departments/colab/results/MPF_SIM_ENRICHED_RELATION_TOKEN_WITNESS_001/manifest.json","required":true,"interpretation_role":"Output provenance and hashes."}
+  ],
+  "interpretation_protocol": {
+    "claim_ceiling":"C2_LIMITATION_OR_NEGATIVE_RESULT",
+    "decision_rules":["Report whether the enriched witness passes the declared finite candidate predicate.","Preserve any bare/enriched mismatch as a limitation or bounded negative result.","Do not infer universal source-relation preservation from finite cases."],
+    "allowed_interpretations":["Bounded witness-field behavior for the declared C1 cases."],
+    "blocked_interpretations":["Universal injectivity or information preservation.","Theorem or proof promotion.","External physical validation.","C5/C6 elevation."]
+  },
+  "provenance":{"source_paths":["departments/colab/notebook_designs/notebook_22_enriched_relation_token_witness/RT_Notebook_22_Enriched_Relation_Token_Witness.ipynb"],"artifact_hashes":{}},
+  "immutability":{"frozen_before_execution":true,"content_sha256":"c97fafee807ad101574c7f47f90d2acfc811c92a06b0976525ebff46667825ed","hash_method":"SHA-256 of canonical JSON with content_sha256 blanked","supersession_policy":"Do not edit after execution starts; create a new spec_id for changes."}
+}
