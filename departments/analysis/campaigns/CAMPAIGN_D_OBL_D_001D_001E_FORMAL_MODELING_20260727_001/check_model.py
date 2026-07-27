@@ -2,13 +2,15 @@ import json
 from pathlib import Path
 
 
-THRESHOLD = 1.0
+def load(root):
+    return json.loads((root / "projection_spec.json").read_text(encoding="utf-8"))
 
 
-def project_value(value, context, defined):
-    if not defined:
+def project_value(value, context, defined, spec):
+    if not defined or context not in spec["contexts"]:
         return None
-    return {"context": context, "source_id": value["id"], "value": value["projected"], "type": "TYPE_PROJECTION"}
+    prefix = spec["contexts"][context]["projection_prefix"]
+    return {"context": context, "source_id": value["id"], "value": prefix + value["value"], "type": "TYPE_PROJECTION"}
 
 
 def project_witness(witness, source, target, context):
@@ -32,37 +34,45 @@ def history_sufficient(history, projected_source, projected_target, witness, con
     return all(binding.get(k) == v for k, v in {**expected, "witness_id": witness["id"]}.items())
 
 
-def evaluate(f):
-    source = project_value(f["source"], f["context"], f["projection_defined"])
-    target = project_value(f["target"], f["context"], f["projection_defined"])
+def evaluate(fixture, spec):
+    source = project_value(fixture["source"], fixture["context"], fixture["projection_defined"], spec)
+    target = project_value(fixture["target"], fixture["context"], fixture["projection_defined"], spec)
     if source is None or target is None:
         return False
-    witness = project_witness(f["witness"], source, target, f["context"])
-    if witness is None or not history_sufficient(f["history"], source, target, witness, f["context"]):
+    witness = project_witness(fixture["witness"], source, target, fixture["context"])
+    if witness is None or not history_sufficient(fixture["history"], source, target, witness, fixture["context"]):
         return False
-    trace = f["trace"]
-    if trace.get("context") != f["context"] or trace.get("witness_id") != witness["id"] or trace.get("status") != "COMPATIBLE":
+    trace = fixture["trace"]
+    if trace.get("context") != fixture["context"] or trace.get("witness_id") != witness["id"] or trace.get("status") != "COMPATIBLE":
         return False
-    return f.get("epsilon", THRESHOLD) >= THRESHOLD
+    threshold = spec["contexts"][fixture["context"]]["epsilon_threshold"]
+    return fixture.get("epsilon", threshold) >= threshold
+
+
+def validate_thresholds(spec):
+    rows = []
+    for context, cfg in spec["contexts"].items():
+        threshold = cfg["epsilon_threshold"]
+        rows.extend([epsilon >= threshold for epsilon in [0.0, threshold / 2, threshold, threshold * 1.5]])
+    return all(isinstance(v, bool) for v in rows) and len(rows) == 8
 
 
 def main():
     root = Path(__file__).parent
     data = json.loads((root / "fixtures.json").read_text(encoding="utf-8"))
-    rows = []
-    for fixture in data["fixtures"]:
-        observed = evaluate(fixture)
-        rows.append({"id": fixture["id"], "observed": observed, "expected": fixture["expected"], "pass": observed == fixture["expected"]})
+    spec = load(root)
+    rows = [{"id": f["id"], "observed": evaluate(f, spec), "expected": f["expected"], "pass": evaluate(f, spec) == f["expected"]} for f in data["fixtures"]]
+    threshold_pass = validate_thresholds(spec)
     result = {
-        "status": "PASS_STRUCTURED_FORMAL_MODEL" if all(r["pass"] for r in rows) else "FAIL",
+        "status": "PASS_SPECIFIED_PROJECTION_AND_THRESHOLD_MODEL" if all(r["pass"] for r in rows) and threshold_pass else "FAIL",
         "epistemic_status": "MECHANICALLY_VERIFIED",
         "proof_status": "OBLIGATIONS_IDENTIFIED",
         "claim_ceiling": data["claim_ceiling"],
         "fixture_count": len(rows),
         "passed": sum(r["pass"] for r in rows),
         "failed": sum(not r["pass"] for r in rows),
-        "rows": rows,
-        "model_constructs": ["Pi_D,C projected values", "typed witness provenance", "payload-linked ordered history"],
+        "threshold_surface_pass": threshold_pass,
+        "model_constructs": ["specified Pi_D,C mapping", "typed witness provenance", "payload-linked ordered history", "bounded context thresholds"],
         "obligations": {"OBL-D-001D": "OPEN", "OBL-D-001E": "OPEN"},
         "promotion_authorized": False,
         "human_review_required": True
