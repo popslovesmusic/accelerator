@@ -1,0 +1,107 @@
+{
+  "crawl_id": "analysis_crawl_20260726_runtime_lexicon_reconciliation_001",
+  "crawl_date": "2026-07-26",
+  "mode": "GOVERNED_ANALYSIS_CRAWL",
+  "read_only": true,
+  "scope": [
+    "runtime governance core-term validation state",
+    "lexicon gap queue and validation registry",
+    "latest D combined gate review",
+    "textbook freshness contract",
+    "latest prior crawl report",
+    "DB snapshot and worktree state"
+  ],
+  "source_artifacts": [
+    "registry/runtime_governance_manifest.json",
+    "registry/lexicon_validation_registry.json",
+    "registry/lexicon_gap_queue.json",
+    "departments/analysis/crawl_reports/analysis_crawl_20260726_ordered_orientation_d_gate_001.json",
+    "departments/analysis/campaigns/CAMPAIGN_D_COMBINED_GATE_REVIEW_20260726_017/gate_review_report.json",
+    "governance/live/textbook_projection_freshness_contract.json",
+    "outputs/audits/global_health_report.json",
+    "registry/db/acellorator_index.sqlite"
+  ],
+  "normalization_and_dependency_rule": "Exact registry keys and declared runtime core-validation names are compared without alias expansion; queue induction is distinguished from validation and promotion; D-gate status is read from the latest bounded gate artifact.",
+  "directly_observed": {
+    "runtime_status": "BLOCK",
+    "runtime_block_reason": "The runtime exact-key check still finds 11 core terms absent from registry/lexicon_validation_registry.json.",
+    "gap_queue_induction": {
+      "status": "PASS_INDUCED_GAP_OPEN",
+      "count": 11,
+      "terms": ["process", "continuation", "mismatch", "R", "Pi_A", "gate", "admissibility", "NavT", "Xi", "causal_sphere_of_influence", "Constraint Geometry"],
+      "claim_status": "C0_UNDEFINED",
+      "governance_status": "not_verified"
+    },
+    "textbook_freshness": "current",
+    "global_validation": {
+      "status": "warning",
+      "failed_stages": [],
+      "semantic_failures": []
+    },
+    "db_snapshot": {
+      "status": "success",
+      "snapshot_id": "REFRESH-20260727T013300668330Z"
+    },
+    "d_gate": {
+      "status": "BLOCKED_NOT_READY",
+      "claim_ceiling": "C1_DEFINED_PROVISIONAL"
+    },
+    "worktree": "clean; branch fork-without-oneproc matches origin"
+  },
+  "findings_by_discovery_class": [
+    {
+      "discovery_class": "GOVERNANCE_DEFECT",
+      "title": "Runtime validation set is not synchronized with lexicon validation entries",
+      "statement": "The runtime manifest requires exact validation keys that are absent from the validation registry.",
+      "epistemic_status": "OBSERVED",
+      "proof_status": "NOT_ATTEMPTED",
+      "support_level": "C1_GOVERNANCE_VALIDATION",
+      "blocking_effect": "Governance runtime remains BLOCK.",
+      "falsification_condition": "A current validation-registry read shows all 11 exact keys present and the runtime check returns PASS."
+    },
+    {
+      "discovery_class": "PROOF_GAP",
+      "title": "Core-term induction does not discharge validation debt",
+      "statement": "The 11 terms are now preserved as GAP_OPEN but remain undefined and unvalidated.",
+      "epistemic_status": "OBSERVED",
+      "proof_status": "OBLIGATIONS_IDENTIFIED",
+      "support_level": "C0_UNDEFINED",
+      "blocking_effect": "No lexicon validation or promotion is authorized by this crawl.",
+      "falsification_condition": "Role-specific definitions, required checks, and evidence are accepted into the validation registry under the governed pathway."
+    },
+    {
+      "discovery_class": "PROOF_OBLIGATION",
+      "title": "D-semantics gate remains bounded and blocked",
+      "statement": "The latest combined D review retains the C1 boundary and keeps OBL-D-001D and OBL-D-001E open.",
+      "epistemic_status": "SOURCE_REPORTED",
+      "proof_status": "BLOCKED",
+      "support_level": "C1_DEFINED_PROVISIONAL",
+      "blocking_effect": "Stronger D claims and promotion remain blocked.",
+      "falsification_condition": "A separately authorized obligation package produces accepted evidence and a non-blocked gate result."
+    }
+  ],
+  "open_research_debt": [
+    "11 runtime core terms require governed operational definitions and role validation.",
+    "OBL-D-001D remains open.",
+    "OBL-D-001E remains open.",
+    "The runtime governance block remains unresolved."
+  ],
+  "recommended_next_action": {
+    "priority": 1,
+    "action": "Create a bounded lexicon review package for the 11 GAP_OPEN terms, beginning with role-specific definitions and exact validation requirements; then rerun the runtime check without promoting any term.",
+    "deliverables": ["term-definition matrix", "role and operator classification", "required validation evidence map", "runtime recheck report"],
+    "unlock": "Determines whether the runtime exact-key block can be reduced without conflating induction with validation.",
+    "priority_2": "After the runtime issue is separately resolved, retain the bounded C1 D boundary and address OBL-D-001D/E through their authorized obligation packages."
+  },
+  "termination_reason": "Bounded reconciliation completed; further lexicon classification requires a separate authorized maintenance/research action.",
+  "assessment": "PARTIAL_SUCCESS_RUNTIME_LEXICON_DEBT_RECORDED",
+  "what_this_crawl_does_not_authorize": [
+    "lexicon validation",
+    "canonical lexicon promotion",
+    "claim promotion",
+    "D-obligation discharge",
+    "theorem or axiom closure",
+    "execution of candidate work items",
+    "external physical interpretation"
+  ]
+}
