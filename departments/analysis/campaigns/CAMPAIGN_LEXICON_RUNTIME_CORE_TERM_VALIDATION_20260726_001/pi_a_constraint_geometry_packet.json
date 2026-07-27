@@ -1,0 +1,39 @@
+{
+  "packet_id": "PI_A_CONSTRAINT_GEOMETRY_VALIDATION_PACKET_20260726_001",
+  "campaign_id": "CAMPAIGN_LEXICON_RUNTIME_CORE_TERM_VALIDATION_20260726_001",
+  "status": "COMPLETED_WITH_OPEN_OBLIGATIONS",
+  "claim_ceiling": "C1_DEFINED_PROVISIONAL",
+  "canonical_promotions": [],
+  "pi_a": {
+    "source_artifacts": [
+      "registry/pi_a_composition_table.json",
+      "registry/reports/pi_a_projection_algebra_v1_report.json",
+      "registry/math/pi_a_idempotence_proof_scaffold.json",
+      "registry/math/pi_a_proof_obligation_boundary_map.json",
+      "registry/math/pi_a_local_persistence_proof_scaffold_registry.json"
+    ],
+    "checks": [
+      {"id": "pi_a_idempotence_scaffold", "result": "PASS", "conditions": 5, "symbolic_steps": 4},
+      {"id": "pi_a_proof_obligation_boundary_mapping", "result": "PASS", "obligations_mapped": 4, "recoverable_result": "validation/results/pi_a_proof_obligation_boundary_mapping_result.json"},
+      {"id": "pi_a_local_persistence_scaffold", "result": "PASS", "proof_obligations_open": 4, "recoverable_result": "validation/results/pi_a_local_persistence_proof_scaffold_result.json"}
+    ],
+    "interpretation": "The checks establish bounded scaffold and governance consistency. They do not establish a completed theorem or a fully validated operator signature.",
+    "lexicon_result": "KEEP_L0_GAP_OPEN"
+  },
+  "constraint_geometry": {
+    "source_artifacts": [
+      "registry/reports/constraint_geometry_formalization_v1_report.json",
+      "registry/reports/constraint_geometry_dynamics_v1_report.json",
+      "registry/rt_cg_metric_registry.json"
+    ],
+    "checks": [
+      {"id": "formalization_report", "result": "PASS", "status": "COMPLETED"},
+      {"id": "dynamics_report", "result": "PASS", "status": "COMPLETED"},
+      {"id": "guardrail_inventory", "result": "PASS", "required_guardrails": 6, "missing_guardrails": 0},
+      {"id": "claim_gate", "result": "PASS_WITH_LIMITS", "claim_level": "C1_DEFINED_PROVISIONAL", "theorem_status": "DO_NOT_PROMOTE"}
+    ],
+    "interpretation": "The term has bounded dynamic, non-substrate definitions and guardrails. No empirical or theorem-level validation is supplied by these artifacts.",
+    "lexicon_result": "KEEP_L0_GAP_OPEN"
+  },
+  "next_action": "Close the four open Pi_A proof obligations with term-specific recoverable checks, then review whether the evidence supports L1 partial verification. Keep Constraint Geometry blocked at L0 until a bounded output demonstrates its declared metric or dynamic behavior under the required guardrails."
+}
