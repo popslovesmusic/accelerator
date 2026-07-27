@@ -1,0 +1,58 @@
+{
+  "fixture_set_id": "PI_A_DETERMINISTIC_LOCAL_FIXTURES_20260726_001",
+  "target": "LTC-001",
+  "scope": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+  "execution_mode": "DETERMINISTIC_SPECIFICATION_FIXTURES",
+  "theorem_status": "NOT_PROVEN",
+  "fixtures": [
+    {
+      "id": "PO-010-001-A",
+      "obligation": "PO-010-001",
+      "class": "admissible_image_membership",
+      "input": {"already_in_Im_Pi_A": true, "local_domain_declared": true, "admissibility_budget_non_exhausted": true},
+      "expected": "MEMBERSHIP_CONDITION_SATISFIED",
+      "failure_boundary": null
+    },
+    {
+      "id": "PO-010-001-B",
+      "obligation": "PO-010-001",
+      "class": "admissible_image_membership",
+      "input": {"already_in_Im_Pi_A": false, "local_domain_declared": true, "admissibility_budget_non_exhausted": true},
+      "expected": "MEMBERSHIP_NOT_ESTABLISHED",
+      "failure_boundary": "input_not_in_Im_Pi_A"
+    },
+    {
+      "id": "PO-010-002-A",
+      "obligation": "PO-010-002",
+      "class": "local_composition",
+      "input": {"MT_001_dependency_active": true, "Pi_A_signature_typed": true, "composition_scope_local_only": true},
+      "expected": "LOCAL_COMPOSITION_CONDITION_SATISFIED",
+      "failure_boundary": null
+    },
+    {
+      "id": "PO-010-002-B",
+      "obligation": "PO-010-002",
+      "class": "local_composition",
+      "input": {"MT_001_dependency_active": true, "Pi_A_signature_typed": false, "composition_scope_local_only": true},
+      "expected": "COMPOSITION_BLOCKED",
+      "failure_boundary": "untyped_operator_signature"
+    },
+    {
+      "id": "PO-010-003-A",
+      "obligation": "PO-010-003",
+      "class": "failure_boundary_exclusion",
+      "input": {"failure_geometry_links_present": true, "excluded_domains_declared": true, "counterexamples_not_discharged": true},
+      "expected": "FAILURE_BOUNDARY_RETAINED",
+      "failure_boundary": null
+    },
+    {
+      "id": "PO-010-003-B",
+      "obligation": "PO-010-003",
+      "class": "failure_boundary_exclusion",
+      "input": {"failure_geometry_links_present": false, "excluded_domains_declared": true, "counterexamples_not_discharged": true},
+      "expected": "EXCLUSION_BLOCKED",
+      "failure_boundary": "missing_failure_geometry_links"
+    }
+  ],
+  "promotion_rule": "Fixture outcomes may identify a boundary condition but cannot close a proof obligation or promote the lexicon term without an independent governed execution and recoverable output."
+}
