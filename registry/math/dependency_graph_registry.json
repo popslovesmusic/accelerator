@@ -212,6 +212,96 @@
       "claim_level": "C0_UNFORMED",
       "textbook_locations": [],
       "last_updated": "2026-07-27T00:00:00Z"
+    },
+    {
+      "node_id": "PATCH_D_DERIVE_REL_C_20260727_001",
+      "node_type": "FORMAL_DEFINITION_PATCH",
+      "name": "deriveRel_C and RELATION_TOKEN_C provisional definition placement",
+      "status": "DEFINED_PROVISIONAL",
+      "claim_level": "C1_DEFINED_PROVISIONAL",
+      "textbook_locations": [],
+      "last_updated": "2026-07-27T00:00:00Z"
+    },
+    {
+      "node_id": "SourceRelation_C",
+      "node_type": "FORMAL_OBJECT_REFERENCE",
+      "name": "Source-side relation predicate",
+      "status": "DEFINED_PROVISIONAL",
+      "claim_level": "C1_DEFINED_PROVISIONAL",
+      "textbook_locations": [],
+      "last_updated": "2026-07-27T00:00:00Z"
+    },
+    {
+      "node_id": "SourceRelationSem_C",
+      "node_type": "FORMAL_OBJECT_REFERENCE",
+      "name": "Source relation semantic record constructor",
+      "status": "DEFINED_PROVISIONAL",
+      "claim_level": "C1_DEFINED_PROVISIONAL",
+      "textbook_locations": [],
+      "last_updated": "2026-07-27T00:00:00Z"
+    },
+    {
+      "node_id": "CanonSourceRelationSem_C",
+      "node_type": "FORMAL_OBJECT_REFERENCE",
+      "name": "Canonical source relation semantic partial function",
+      "status": "DEFINED_PROVISIONAL",
+      "claim_level": "C1_DEFINED_PROVISIONAL",
+      "textbook_locations": [],
+      "last_updated": "2026-07-27T00:00:00Z"
+    },
+    {
+      "node_id": "CANONICAL_SOURCE_RELATION_PAYLOAD_C",
+      "node_type": "FORMAL_TYPE_REFERENCE",
+      "name": "Canonical source relation payload",
+      "status": "DEFINED_PROVISIONAL",
+      "claim_level": "C1_DEFINED_PROVISIONAL",
+      "textbook_locations": [],
+      "last_updated": "2026-07-27T00:00:00Z"
+    },
+    {
+      "node_id": "RELATION_TOKEN_C",
+      "node_type": "FORMAL_TYPE_REFERENCE",
+      "name": "Immutable source-derived relation token",
+      "status": "DEFINED_PROVISIONAL",
+      "claim_level": "C1_DEFINED_PROVISIONAL",
+      "textbook_locations": [],
+      "last_updated": "2026-07-27T00:00:00Z"
+    },
+    {
+      "node_id": "deriveRel_C",
+      "node_type": "FORMAL_FUNCTION_REFERENCE",
+      "name": "Deterministic partial source-only relation-token derivation",
+      "status": "DEFINED_PROVISIONAL",
+      "claim_level": "C1_DEFINED_PROVISIONAL",
+      "textbook_locations": [],
+      "last_updated": "2026-07-27T00:00:00Z"
+    },
+    {
+      "node_id": "FUTURE_DEFINE_VALID_REL_TOKEN_C",
+      "node_type": "FUTURE_PLACEHOLDER",
+      "name": "Future relation-token validity predicate",
+      "status": "FUTURE_PLACEHOLDER",
+      "claim_level": "C0_UNFORMED",
+      "textbook_locations": [],
+      "last_updated": "2026-07-27T00:00:00Z"
+    },
+    {
+      "node_id": "FUTURE_DEFINE_TOKEN_TRANSPORT_C",
+      "node_type": "FUTURE_PLACEHOLDER",
+      "name": "Future relation-token transport definition",
+      "status": "FUTURE_PLACEHOLDER",
+      "claim_level": "C0_UNFORMED",
+      "textbook_locations": [],
+      "last_updated": "2026-07-27T00:00:00Z"
+    },
+    {
+      "node_id": "FUTURE_DEFINE_PRESERVES_RELATION_C",
+      "node_type": "FUTURE_PLACEHOLDER",
+      "name": "Future relation preservation predicate",
+      "status": "FUTURE_PLACEHOLDER",
+      "claim_level": "C0_UNFORMED",
+      "textbook_locations": [],
+      "last_updated": "2026-07-27T00:00:00Z"
     }
   ],
   "edges": [
@@ -366,6 +456,87 @@
       "edge_type": "PREREQUISITE_FOR",
       "strength": "REQUIRED",
       "reason": "The provisional source relation definition is a prerequisite for any separately authorized future relation-token derivation.",
+      "last_verified": "2026-07-27T00:00:00Z"
+    },
+    {
+      "edge_id": "EDGE_PATCH_D_SOURCE_RELATION_C_TO_PATCH_D_DERIVE_REL_C_001",
+      "from_node": "PATCH_D_SOURCE_RELATION_C_20260727_001",
+      "to_node": "PATCH_D_DERIVE_REL_C_20260727_001",
+      "edge_type": "PREREQUISITE_FOR",
+      "strength": "REQUIRED",
+      "reason": "The SourceRelation_C definition and semantic constructor are required prerequisites for deriveRel_C placement.",
+      "last_verified": "2026-07-27T00:00:00Z"
+    },
+    {
+      "edge_id": "EDGE_SOURCE_RELATION_C_TO_DERIVE_REL_C_001",
+      "from_node": "SourceRelation_C",
+      "to_node": "deriveRel_C",
+      "edge_type": "DEFINEDNESS_PRECONDITION",
+      "strength": "REQUIRED",
+      "reason": "deriveRel_C is undefined unless SourceRelation_C holds.",
+      "last_verified": "2026-07-27T00:00:00Z"
+    },
+    {
+      "edge_id": "EDGE_SOURCE_RELATION_SEM_TO_CANON_SOURCE_RELATION_SEM_001",
+      "from_node": "SourceRelationSem_C",
+      "to_node": "CanonSourceRelationSem_C",
+      "edge_type": "CANONICALIZATION_INPUT",
+      "strength": "REQUIRED",
+      "reason": "Canonicalization consumes the complete source semantic record.",
+      "last_verified": "2026-07-27T00:00:00Z"
+    },
+    {
+      "edge_id": "EDGE_CANON_SOURCE_RELATION_SEM_TO_DERIVE_REL_C_001",
+      "from_node": "CanonSourceRelationSem_C",
+      "to_node": "deriveRel_C",
+      "edge_type": "CANONICAL_PAYLOAD_INPUT",
+      "strength": "REQUIRED",
+      "reason": "deriveRel_C consumes the canonical source payload produced by canonicalization.",
+      "last_verified": "2026-07-27T00:00:00Z"
+    },
+    {
+      "edge_id": "EDGE_DERIVE_REL_C_TO_RELATION_TOKEN_C_001",
+      "from_node": "deriveRel_C",
+      "to_node": "RELATION_TOKEN_C",
+      "edge_type": "OUTPUT_TYPE",
+      "strength": "REQUIRED",
+      "reason": "The partial derivation returns RELATION_TOKEN_C when defined.",
+      "last_verified": "2026-07-27T00:00:00Z"
+    },
+    {
+      "edge_id": "EDGE_PATCH_D_DERIVE_REL_C_TO_OBL_D_001D",
+      "from_node": "PATCH_D_DERIVE_REL_C_20260727_001",
+      "to_node": "OBL-D-001D",
+      "edge_type": "REQUIRED_FOR",
+      "strength": "REQUIRED",
+      "reason": "The provisional derivation is required future work for OBL-D-001D but does not discharge it.",
+      "last_verified": "2026-07-27T00:00:00Z"
+    },
+    {
+      "edge_id": "EDGE_PATCH_D_DERIVE_REL_C_TO_FUTURE_VALID_REL_TOKEN_C_001",
+      "from_node": "PATCH_D_DERIVE_REL_C_20260727_001",
+      "to_node": "FUTURE_DEFINE_VALID_REL_TOKEN_C",
+      "edge_type": "PREREQUISITE_FOR",
+      "strength": "REQUIRED",
+      "reason": "Token validity is a separately authorized downstream definition.",
+      "last_verified": "2026-07-27T00:00:00Z"
+    },
+    {
+      "edge_id": "EDGE_PATCH_D_DERIVE_REL_C_TO_FUTURE_TOKEN_TRANSPORT_C_001",
+      "from_node": "PATCH_D_DERIVE_REL_C_20260727_001",
+      "to_node": "FUTURE_DEFINE_TOKEN_TRANSPORT_C",
+      "edge_type": "PREREQUISITE_FOR",
+      "strength": "REQUIRED",
+      "reason": "Token transport is a separately authorized downstream definition.",
+      "last_verified": "2026-07-27T00:00:00Z"
+    },
+    {
+      "edge_id": "EDGE_PATCH_D_DERIVE_REL_C_TO_FUTURE_PRESERVES_RELATION_C_001",
+      "from_node": "PATCH_D_DERIVE_REL_C_20260727_001",
+      "to_node": "FUTURE_DEFINE_PRESERVES_RELATION_C",
+      "edge_type": "PREREQUISITE_FOR",
+      "strength": "REQUIRED",
+      "reason": "Relation preservation is a separately authorized downstream definition and remains open.",
       "last_verified": "2026-07-27T00:00:00Z"
     }
   ],

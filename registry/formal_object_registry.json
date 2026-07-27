@@ -4339,6 +4339,102 @@
         "sufficiency": "NOT_ESTABLISHED",
         "necessity": "NOT_ESTABLISHED"
       }
+    },
+    {
+      "object_id": "OBJ-SOURCE_RELATION_C",
+      "object_class": "constraint",
+      "title": "SourceRelation_C",
+      "status": "DEFINED_PROVISIONAL",
+      "source_bindings": [
+        "docs/theory/foundational/5_03_26 unity/math/notes/d_source_relation_c_definition_20260727_001.json",
+        "PATCH_D_SOURCE_RELATION_C_20260727_001"
+      ],
+      "dependency_links": ["OBJ-TYPE_WITNESS_C"],
+      "claim_scope": "source-side pre-projection relation predicate; C1-defined-provisional",
+      "governance_bindings": ["OBL-D-001D", "CORE-DSEM-008-GOVERNED-PROVISIONAL-INDUCTION"],
+      "runtime_visibility": true,
+      "metadata": {
+        "signature": "SourceRelation_C(C,r,x_r) : Prop",
+        "source_only": true,
+        "target_leakage_forbidden": true
+      }
+    },
+    {
+      "object_id": "OBJ-CANONICAL_SOURCE_RELATION_PAYLOAD_C",
+      "object_class": "constraint",
+      "title": "CANONICAL_SOURCE_RELATION_PAYLOAD_C",
+      "status": "DEFINED_PROVISIONAL",
+      "source_bindings": [
+        "docs/theory/foundational/5_03_26 unity/math/notes/d_derive_rel_c_definition_20260727_001.json",
+        "PATCH_D_DERIVE_REL_C_20260727_001"
+      ],
+      "dependency_links": ["OBJ-D-SOURCE_RELATION_C"],
+      "claim_scope": "source-only canonical semantic payload; C1-defined-provisional",
+      "governance_bindings": ["OBL-D-001D", "CORE-DSEM-008-GOVERNED-PROVISIONAL-INDUCTION"],
+      "runtime_visibility": true,
+      "metadata": {
+        "field_order": ["context_identity", "whole_relation_identity", "relation_member", "ordered_role_signature", "conditioning_context", "source_lineage"],
+        "whole_expression_primacy": true,
+        "target_side_fields_forbidden": true
+      }
+    },
+    {
+      "object_id": "OBJ-RELATION_TOKEN_C",
+      "object_class": "constraint",
+      "title": "RELATION_TOKEN_C",
+      "status": "DEFINED_PROVISIONAL",
+      "source_bindings": [
+        "docs/theory/foundational/5_03_26 unity/math/notes/d_derive_rel_c_definition_20260727_001.json",
+        "PATCH_D_DERIVE_REL_C_20260727_001"
+      ],
+      "dependency_links": ["OBJ-CANONICAL_SOURCE_RELATION_PAYLOAD_C"],
+      "claim_scope": "immutable source-derived typed token carrier; C1-defined-provisional",
+      "governance_bindings": ["OBL-D-001D", "CORE-DSEM-008-GOVERNED-PROVISIONAL-INDUCTION"],
+      "runtime_visibility": true,
+      "metadata": {
+        "token_schema": "RELATION_TOKEN_C_V1",
+        "identity_rule": "structural equality of token_schema and complete canonical_payload",
+        "optional_digest_authoritative": false
+      }
+    },
+    {
+      "object_id": "OBJ-CanonSourceRelationSem_C",
+      "object_class": "operator",
+      "title": "CanonSourceRelationSem_C",
+      "status": "DEFINED_PROVISIONAL",
+      "source_bindings": [
+        "docs/theory/foundational/5_03_26 unity/math/notes/d_derive_rel_c_definition_20260727_001.json",
+        "PATCH_D_DERIVE_REL_C_20260727_001"
+      ],
+      "dependency_links": ["OBJ-CANONICAL_SOURCE_RELATION_PAYLOAD_C"],
+      "claim_scope": "partial deterministic source-semantic canonicalization; C1-defined-provisional",
+      "governance_bindings": ["OBL-D-001D", "CORE-DSEM-008-GOVERNED-PROVISIONAL-INDUCTION"],
+      "runtime_visibility": true,
+      "metadata": {
+        "signature": "CanonSourceRelationSem_C(s_r) -> CANONICAL_SOURCE_RELATION_PAYLOAD_C or undefined",
+        "source_only": true,
+        "deterministic": true
+      }
+    },
+    {
+      "object_id": "OBJ-deriveRel_C",
+      "object_class": "operator",
+      "title": "deriveRel_C",
+      "status": "DEFINED_PROVISIONAL",
+      "source_bindings": [
+        "docs/theory/foundational/5_03_26 unity/math/notes/d_derive_rel_c_definition_20260727_001.json",
+        "PATCH_D_DERIVE_REL_C_20260727_001"
+      ],
+      "dependency_links": ["OBJ-SOURCE_RELATION_C", "OBJ-CanonSourceRelationSem_C", "OBJ-RELATION_TOKEN_C"],
+      "claim_scope": "partial deterministic source-only relation-token derivation; C1-defined-provisional",
+      "governance_bindings": ["OBL-D-001D", "CORE-DSEM-008-GOVERNED-PROVISIONAL-INDUCTION"],
+      "runtime_visibility": true,
+      "metadata": {
+        "signature": "deriveRel_C(C,r,x_r) -> RELATION_TOKEN_C or undefined",
+        "pre_projection": true,
+        "no_target_leakage": true,
+        "no_preservation_claim": true
+      }
     }
   ],
   "registry_bindings": [

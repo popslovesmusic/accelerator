@@ -1,0 +1,48 @@
+{
+  "definition_id": "DEF-D-DERIVE-REL-C-001",
+  "name": "deriveRel_C",
+  "status": "DEFINED_PROVISIONAL",
+  "claim_level": "C1_DEFINED_PROVISIONAL",
+  "prerequisite": "SourceRelation_C(C,r,x_r)",
+  "signature": "deriveRel_C(C,r,x_r) -> RELATION_TOKEN_C or undefined",
+  "source_record": "s_r := SourceRelationSem_C(C,r,x_r)",
+  "canonicalization": "p_r := CanonSourceRelationSem_C(s_r)",
+  "definition": "deriveRel_C(C,r,x_r) is defined exactly when SourceRelation_C(C,r,x_r), s_r, and p_r are defined. Its output is RELATION_TOKEN_C(token_schema = RELATION_TOKEN_C_V1, canonical_payload = p_r).",
+  "canonical_payload_fields": [
+    "context_identity",
+    "whole_relation_identity",
+    "relation_member",
+    "ordered_role_signature",
+    "conditioning_context",
+    "source_lineage"
+  ],
+  "authoritative_token_identity": "Structural equality of token_schema and complete canonical_payload.",
+  "optional_digest_rule": "A payload digest may be stored for audit or indexing but is non-authoritative and may not replace the complete canonical payload.",
+  "source_only_guard": "No target distinction, target realization, projected endpoint, projected witness, projection result, output label, arbitrary discriminator, timestamp, commit ID, filesystem path, runtime object ID, or random salt may participate in authoritative token construction.",
+  "invariants": [
+    "source_only_input",
+    "pre_projection_derivability",
+    "determinism",
+    "no_randomness",
+    "no_target_leakage",
+    "no_label_injection",
+    "order_sensitivity",
+    "relation_member_sensitivity",
+    "context_sensitivity",
+    "lineage_sensitivity",
+    "whole_payload_identity",
+    "digest_non_authority",
+    "no_circular_validation",
+    "no_preservation_claim",
+    "whole_expression_primacy"
+  ],
+  "blocked_implications": [
+    "deriveRel_C success does not imply project_w success.",
+    "deriveRel_C success does not imply token transport.",
+    "deriveRel_C success does not imply target interpretation.",
+    "deriveRel_C success does not imply semantic preservation.",
+    "deriveRel_C success does not imply representable-distinction preservation.",
+    "deriveRel_C success does not imply non-collapse.",
+    "deriveRel_C success does not discharge OBL-D-001D or OBL-D-001E."
+  ]
+}
