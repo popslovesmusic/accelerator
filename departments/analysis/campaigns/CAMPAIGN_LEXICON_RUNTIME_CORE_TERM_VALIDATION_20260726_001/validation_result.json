@@ -1,0 +1,54 @@
+{
+  "campaign_id": "CAMPAIGN_LEXICON_RUNTIME_CORE_TERM_VALIDATION_20260726_001",
+  "timestamp": "2026-07-27T02:30:00Z",
+  "scope": "Bounded validation of the 11 exact runtime-core lexicon keys added on 2026-07-26.",
+  "status": "COMPLETED_WITH_NO_PROMOTIONS",
+  "epistemic_status": "SOURCE_DEFINED_BUT_DIRECT_VALIDATION_INSUFFICIENT",
+  "source_review": {
+    "historical_source": "registry/reports/core_validation_backfill_v1_report.json",
+    "historical_source_status": "COMPLETED",
+    "historical_finding": "The report states that the 11 terms were previously audited, backfilled, or already validated.",
+    "coverage_conflict": "registry/reports/validation_coverage_backfill_v1_report.json reports remaining uncovered terms and requires direct validation coverage; its sample includes continuation and causal_sphere_of_influence.",
+    "decision_rule": "Historical completion reports are source references, not current direct validation evidence. No L1 assignment is made without term-specific recoverable validation output and required procedural checks."
+  },
+  "checks": [
+    {
+      "check": "source_localization",
+      "result": "PASS_WITH_CONFLICT",
+      "evidence": [
+        "registry/reports/core_validation_backfill_v1_report.json",
+        "registry/reports/pi_a_projection_algebra_v1_report.json",
+        "registry/reports/reconstruction_and_inversion_rules_v1_report.json",
+        "registry/reports/constraint_geometry_formalization_v1_report.json",
+        "registry/reports/constraint_geometry_dynamics_v1_report.json",
+        "registry/reports/ontology_type_system_v1_report.json"
+      ]
+    },
+    {
+      "check": "current_direct_validation_coverage",
+      "result": "NOT_ESTABLISHED",
+      "evidence": ["registry/reports/validation_coverage_backfill_v1_report.json"]
+    },
+    {
+      "check": "queue_resolution_requirements",
+      "result": "NOT_COMPLETE",
+      "required_checks": ["verb_test", "procedural_fft", "ontology_residue_check", "claim_classification", "data_provenance_check"],
+      "evidence": ["registry/lexicon_gap_queue.json"]
+    }
+  ],
+  "term_results": [
+    {"term": "process", "result": "KEEP_L0_GAP_OPEN", "reason": "Historical source definition found; current direct validation output not established."},
+    {"term": "continuation", "result": "KEEP_L0_GAP_OPEN", "reason": "Historical source definition found; current coverage report still samples the term as uncovered."},
+    {"term": "mismatch", "result": "KEEP_L0_GAP_OPEN", "reason": "Historical backfill reference found; required procedural validation output not established."},
+    {"term": "R", "result": "KEEP_L0_GAP_OPEN", "reason": "Symbolic role and guardrails are documented; accepted typed validation is not established."},
+    {"term": "Pi_A", "result": "KEEP_L0_GAP_OPEN", "reason": "Partial projection algebra is documented; complete signature and direct validation are not established."},
+    {"term": "gate", "result": "KEEP_L0_GAP_OPEN", "reason": "Operator/gap references are documented; direct acceptance-predicate validation is not established."},
+    {"term": "admissibility", "result": "KEEP_L0_GAP_OPEN", "reason": "Framework usage is documented; current term-specific procedural validation is not established."},
+    {"term": "NavT", "result": "KEEP_L0_GAP_OPEN", "reason": "Symbolic references and open dependency are documented; accepted signature and validation are not established."},
+    {"term": "Xi", "result": "KEEP_L0_GAP_OPEN", "reason": "Reconstruction rules are documented with explicit limits; direct operator validation is not established."},
+    {"term": "causal_sphere_of_influence", "result": "KEEP_L0_GAP_OPEN", "reason": "Bounded non-physical role is documented; current coverage report still samples the term as uncovered."},
+    {"term": "Constraint Geometry", "result": "KEEP_L0_GAP_OPEN", "reason": "Dynamic non-substrate rules are documented; direct validation and claim gate closure are not established."}
+  ],
+  "canonical_mutations": [],
+  "next_action": "Create term-specific validation packets with recoverable outputs for the five queue checks, beginning with Pi_A and Constraint Geometry where bounded formal artifacts already exist; retain all 11 at L0 until those packets pass review."
+}
