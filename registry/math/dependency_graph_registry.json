@@ -158,6 +158,60 @@
         "Chapter 12"
       ],
       "last_updated": "2026-06-18T17:00:00-04:00"
+    },
+    {
+      "node_id": "PATCH_PI_RT_CALCULUS_020",
+      "node_type": "PATCH_REFERENCE",
+      "name": "Typed projection context dependency reference",
+      "status": "REFERENCE_ONLY",
+      "claim_level": "C1_DEFINED_PROVISIONAL",
+      "textbook_locations": [],
+      "last_updated": "2026-07-27T00:00:00Z"
+    },
+    {
+      "node_id": "TYPE_WITNESS_C",
+      "node_type": "FORMAL_OBJECT_REFERENCE",
+      "name": "Context-indexed relation witness type family",
+      "status": "REFERENCE_ONLY",
+      "claim_level": "C1_DEFINED_PROVISIONAL",
+      "textbook_locations": [],
+      "last_updated": "2026-07-27T00:00:00Z"
+    },
+    {
+      "node_id": "project_w",
+      "node_type": "FORMAL_OBJECT_REFERENCE",
+      "name": "Partial witness projection mapping",
+      "status": "REFERENCE_ONLY",
+      "claim_level": "C1_DEFINED_PROVISIONAL",
+      "textbook_locations": [],
+      "last_updated": "2026-07-27T00:00:00Z"
+    },
+    {
+      "node_id": "PATCH_D_SOURCE_RELATION_C_20260727_001",
+      "node_type": "FORMAL_DEFINITION_PATCH",
+      "name": "SourceRelation_C provisional definition placement",
+      "status": "DEFINED_PROVISIONAL",
+      "claim_level": "C1_DEFINED_PROVISIONAL",
+      "textbook_locations": [],
+      "last_updated": "2026-07-27T00:00:00Z"
+    },
+    {
+      "node_id": "OBL-D-001D",
+      "node_type": "OPEN_OBLIGATION_REFERENCE",
+      "name": "Representable distinction preservation",
+      "status": "OPEN",
+      "claim_level": "C1_DEFINED_PROVISIONAL",
+      "textbook_locations": [],
+      "last_updated": "2026-07-27T00:00:00Z"
+    },
+    {
+      "node_id": "FUTURE_DEFINE_DERIVE_REL_C",
+      "node_type": "FUTURE_PLACEHOLDER",
+      "name": "Future source-only relation-token derivation",
+      "status": "FUTURE_PLACEHOLDER",
+      "claim_level": "C0_UNFORMED",
+      "textbook_locations": [],
+      "last_updated": "2026-07-27T00:00:00Z"
     }
   ],
   "edges": [
@@ -268,6 +322,51 @@
       "strength": "REQUIRED",
       "reason": "Campaign directly attacks the Orientation-Closure Bridge.",
       "last_verified": "2026-05-29T12:00:00Z"
+    },
+    {
+      "edge_id": "EDGE_PATCH_PI_RT_CALCULUS_020_TO_PATCH_D_SOURCE_RELATION_C_001",
+      "from_node": "PATCH_PI_RT_CALCULUS_020",
+      "to_node": "PATCH_D_SOURCE_RELATION_C_20260727_001",
+      "edge_type": "DEPENDS_ON",
+      "strength": "REQUIRED",
+      "reason": "Typed projection context dependency for the additive source-relation definition.",
+      "last_verified": "2026-07-27T00:00:00Z"
+    },
+    {
+      "edge_id": "EDGE_TYPE_WITNESS_C_TO_PATCH_D_SOURCE_RELATION_C_001",
+      "from_node": "TYPE_WITNESS_C",
+      "to_node": "PATCH_D_SOURCE_RELATION_C_20260727_001",
+      "edge_type": "DEPENDS_ON",
+      "strength": "REQUIRED",
+      "reason": "Signature compatibility dependency for the additive source-relation definition.",
+      "last_verified": "2026-07-27T00:00:00Z"
+    },
+    {
+      "edge_id": "EDGE_PROJECT_W_TO_PATCH_D_SOURCE_RELATION_C_001",
+      "from_node": "project_w",
+      "to_node": "PATCH_D_SOURCE_RELATION_C_20260727_001",
+      "edge_type": "DEPENDS_ON",
+      "strength": "REQUIRED",
+      "reason": "Existing source argument binding dependency; project_w remains unchanged.",
+      "last_verified": "2026-07-27T00:00:00Z"
+    },
+    {
+      "edge_id": "EDGE_PATCH_D_SOURCE_RELATION_C_TO_OBL_D_001D",
+      "from_node": "PATCH_D_SOURCE_RELATION_C_20260727_001",
+      "to_node": "OBL-D-001D",
+      "edge_type": "REQUIRED_FOR",
+      "strength": "REQUIRED",
+      "reason": "SourceRelation_C is a required definition for future OBL-D-001D discharge work; this edge does not discharge the obligation.",
+      "last_verified": "2026-07-27T00:00:00Z"
+    },
+    {
+      "edge_id": "EDGE_PATCH_D_SOURCE_RELATION_C_TO_FUTURE_DERIVE_REL_C",
+      "from_node": "PATCH_D_SOURCE_RELATION_C_20260727_001",
+      "to_node": "FUTURE_DEFINE_DERIVE_REL_C",
+      "edge_type": "PREREQUISITE_FOR",
+      "strength": "REQUIRED",
+      "reason": "The provisional source relation definition is a prerequisite for any separately authorized future relation-token derivation.",
+      "last_verified": "2026-07-27T00:00:00Z"
     }
   ],
   "propagation_rules": {
