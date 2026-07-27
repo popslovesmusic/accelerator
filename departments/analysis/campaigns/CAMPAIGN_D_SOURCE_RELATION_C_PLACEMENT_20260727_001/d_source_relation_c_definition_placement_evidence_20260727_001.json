@@ -1,0 +1,70 @@
+{
+  "packet_id": "D_SOURCE_RELATION_C_DEFINITION_AND_PLACEMENT_20260727_001",
+  "patch_id": "PATCH_D_SOURCE_RELATION_C_20260727_001",
+  "execution_timestamp": "2026-07-27T20:05:12.196993Z",
+  "repository_commit_before": "63d941bb9c0fa1869666b9255ca58eac1eb77803",
+  "repository_commit_after": "1eccbb7ef",
+  "created_files": [
+    "docs/theory/foundational/5_03_26 unity/math/notes/d_source_relation_c_definition_20260727_001.json",
+    "registry/governance/patches/PATCH_D_SOURCE_RELATION_C_20260727_001.json",
+    "departments/analysis/campaigns/CAMPAIGN_D_SOURCE_RELATION_C_PLACEMENT_20260727_001/d_source_relation_c_definition_placement_evidence_20260727_001.json"
+  ],
+  "modified_files": [
+    "governance/live/induction_queue.json",
+    "governance/live/textbook_projection_freshness_contract.json",
+    "registry/governance_hash_registry.json",
+    "registry/governance_manifest.json",
+    "registry/induction_registry.json",
+    "registry/math/d_semantics_obligation_registry.json",
+    "registry/math/dependency_graph_registry.json",
+    "registry/math_core_hashes.json",
+    "registry/math_hashes.json",
+    "registry/math_source_registry.json"
+  ],
+  "file_hashes": {
+    "docs/theory/foundational/5_03_26 unity/math/notes/d_source_relation_c_definition_20260727_001.json": "7560FDB4FED62DA3FC6096250C9412F777A6830FA3471C68F898B0BAB35860BF",
+    "registry/governance/patches/PATCH_D_SOURCE_RELATION_C_20260727_001.json": "38DEC265D790148E66C41B25470317661DC4DA38A6B20CE0A673B594418EA519"
+  },
+  "registry_entries": [
+    "D_SOURCE_RELATION_C_DEFINITION_20260727_001",
+    "IQ_2026_07_27_042",
+    "DEF-D-SOURCE-RELATION-C-001",
+    "OBL-D-001D definition_progress added; status remains OPEN",
+    "OBL-D-001E unchanged; status remains OPEN"
+  ],
+  "dependency_edges": [
+    "EDGE_PATCH_PI_RT_CALCULUS_020_TO_PATCH_D_SOURCE_RELATION_C_001",
+    "EDGE_TYPE_WITNESS_C_TO_PATCH_D_SOURCE_RELATION_C_001",
+    "EDGE_PROJECT_W_TO_PATCH_D_SOURCE_RELATION_C_001",
+    "EDGE_PATCH_D_SOURCE_RELATION_C_TO_OBL_D_001D",
+    "EDGE_PATCH_D_SOURCE_RELATION_C_TO_FUTURE_DERIVE_REL_C"
+  ],
+  "validator_commands": [
+    "python scripts/sync_math_registry.py",
+    "python scripts/governance/enforce_governance_integrity.py --initialize",
+    "python scripts/db/check_registry_alignment.py",
+    "python scripts/validation/validate_textbook_projection_freshness.py",
+    "python -m scripts.global_validate",
+    "python scripts/db/index_artifacts.py",
+    "targeted SQLite artifact-index insertion for the new canonical artifact",
+    "python scripts/db/snapshot_registries.py",
+    "python scripts/query_governance.py freshness --level summary"
+  ],
+  "validator_results": {
+    "sync_math_registry": "PASS; 179 mathematical items registered",
+    "governance_integrity": "PASS",
+    "registry_alignment": "PASS",
+    "textbook_projection_freshness": "PASS",
+    "global_validate": "PASS",
+    "full_artifact_indexer": "TIMEOUT after 124 seconds; process was terminated and the new artifact was indexed with the existing schema via a targeted insertion",
+    "targeted_artifact_index": "PASS",
+    "database_snapshot": "PASS; refresh_id REFRESH-20260727T200512180289Z; 7/7 registries indexed",
+    "freshness": "PASS; db_snapshot_status fresh; decision allow"
+  },
+  "claim_level_after": "C1_DEFINED_PROVISIONAL",
+  "OBL-D-001D_status_after": "OPEN",
+  "OBL-D-001E_status_after": "OPEN",
+  "protected_surface_diff_summary": "The new source-side definition is additive. TYPE_WITNESS_C, project_w, AX-WITNESS-REPDIST, AX-REALIZATION-WITNESS, ProjectWDomain_C, Pi_D,C, OBL-D-001A/B/C, the frozen synchronized baseline, and Notebook 22 evidence were not semantically changed. No theorem, proof, promotion, token derivation, or projection route was altered.",
+  "unexpected_mutations": "No packet-scoped unexpected canonical mutations. Pre-existing generated output and validation/result changes remain unstaged and outside this task commit.",
+  "final_result": "PASS_LITERAL_PLACEMENT_COMPLETE"
+}
