@@ -1,0 +1,25 @@
+{
+  "audit_id": "PI_A_IMPLEMENTATION_BINDING_AUDIT_20260726_001",
+  "status": "BLOCKED_NO_CALLABLE_PI_A_IMPLEMENTATION",
+  "fixture_set": "PI_A_DETERMINISTIC_LOCAL_FIXTURES_20260726_001",
+  "searched_surfaces": ["scripts", "tools", "tests", "docs/theory", "registry/math"],
+  "formal_artifacts_found": [
+    "registry/math/operator_registry.json",
+    "registry/math/pi_a_composition_table.json",
+    "registry/math/pi_a_idempotence_proof_scaffold.json",
+    "registry/math/pi_a_local_persistence_proof_scaffold_registry.json",
+    "registry/math/pi_a_counterexample_injection_registry.json"
+  ],
+  "candidate_runtime_rejected": {
+    "path": "tools/ca_admissibility_sim_v1/ca_engine.py",
+    "reason": "The cellular automaton implements a mismatch/residue grid update with an admissibility mask; it is not a declared Pi_A operator implementation and has no Pi_A fixture adapter or signature binding."
+  },
+  "fixture_execution": {
+    "specification_evaluator": "PASS_FIXTURE_EXECUTION_ONLY",
+    "actual_operator_engine": "NOT_EXECUTED"
+  },
+  "governance_boundary": "Adding or modifying an engine implementation requires explicit authorization; this audit makes no engine change.",
+  "canonical_mutations": [],
+  "lexicon_result": "KEEP_L0_GAP_OPEN",
+  "next_action": "Authorize or identify a governed Pi_A implementation/adapter with declared input, output, local-scope, and reproducibility contracts before rerunning the fixtures."
+}
