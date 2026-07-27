@@ -14,6 +14,8 @@ Review `formal_model.md`, `fixtures.json`, and `model_check_report.json` against
 
 ## Decision
 
-`PENDING_HUMAN_REVIEW`
+`APPROVED_BOUNDED_CANDIDATE_PACKAGE`
+
+User approval was recorded on 2026-07-27. The approval preserves this finite candidate package for further review; it does not accept the package as a discharged proof.
 
 This package does not authorize registry mutation, obligation discharge, theorem promotion, or external interpretation.
