@@ -18,12 +18,14 @@ No entry was added to `registry/lexicon_validation_registry.json`. No term was v
 
 ## Runtime recheck
 
-The governance runtime remains `BLOCK` because it checks for exact validation-registry keys. That result is expected: preparing a review package does not satisfy validation.
+Human approval authorized an L0 provisional registration for the 11 exact keys. The governance runtime now returns `PASS` for the exact-key presence check.
 
-## Required human decision
+This is presence synchronization only. The entries have no validation evidence, remain below L2, and do not authorize promotion.
 
-Review the candidate definitions and validation requirements. If accepted, authorize a separate maintenance action to add only evidence-supported validation entries, preserving `GAP_OPEN` or a lower-status disposition where evidence is insufficient.
+## Resulting boundary
+
+The approved maintenance action added only L0 provisional entries to `registry/lexicon_validation_registry.json`. The corresponding queue entries remain `GAP_OPEN` and `C0_UNDEFINED`.
 
 ## Assessment
 
-`PARTIAL_SUCCESS_REVIEW_PACKAGE_PREPARED`. The package makes the runtime debt actionable while preserving the C0 boundary and non-occlusive scope.
+`PARTIAL_SUCCESS_L0_RUNTIME_SYNCHRONIZATION`. The runtime exact-key debt is synchronized while the terms remain unvalidated and unpromoted.
