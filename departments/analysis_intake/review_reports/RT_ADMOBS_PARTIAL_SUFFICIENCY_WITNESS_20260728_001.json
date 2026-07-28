@@ -20,13 +20,14 @@
       "meaning": "A total completion of the partial AdmObs_x classification."
     },
     "PermittedResolution_x": {
-      "signature": "PermittedResolution_x(P_x, rho_x; B_x, D_rel, R) : Prop",
+      "signature": "PermittedResolution_x(P_x, rho_x; H_x, B_x, D_rel, R) : Prop",
       "conditions": [
         "rho_x(o)=TRUE for every o in Omega_x_pos.",
         "rho_x(o)=FALSE for every o in Omega_x_neg.",
         "rho_x assigns only TRUE or FALSE to every o in Omega_x_undef.",
         "Assignments to Omega_x_undef satisfy pointwise admissibility under the declared domain, boundary, and residue constraints.",
-        "The jointly assigned orientation family satisfies GlobalJointCoherence_x(rho_x; B_x, D_rel, R).",
+        "F_x := CompletedOrientationFamily_x(P_x, rho_x).",
+        "F_x satisfies JointlyCompatible_x(F_x; H_x, B_x, D_rel, R).",
         "rho_x does not revise an established positive or negative classification.",
         "rho_x is total over Omega_obs."
       ]
@@ -37,7 +38,7 @@
       "policy": "The strong form is required when downstream output is one reference orientation rather than a set of possible reference orientations."
     }
   },
-  "resolution_space": "Res_x(P_x; B_x, D_rel, R) := {rho_x | PermittedResolution_x(P_x, rho_x; B_x, D_rel, R)}",
+  "resolution_space": "Res_x(P_x; H_x, B_x, D_rel, R) := {rho_x | PermittedResolution_x(P_x, rho_x; H_x, B_x, D_rel, R)}",
   "resolution_requirements": {
     "pointwise": "Every unresolved orientation receives a binary value satisfying PointwiseResolutionCompatible_x.",
     "joint": "The completed family satisfies GlobalJointCoherence_x across all jointly assigned orientations.",
@@ -47,6 +48,38 @@
     "totality": "Every rho_x in Res_x is total over Omega_obs."
   },
   "compatibility_predicates": {
+    "CompletedOrientationFamily_x": {
+      "signature": "CompletedOrientationFamily_x(P_x, rho_x) := { (o, rho_x(o)) | o in P_x.Omega_obs }",
+      "meaning": "The total TRUE/FALSE orientation assignment produced by a proposed resolution.",
+      "totality_guard": "rho_x must be total over P_x.Omega_obs."
+    },
+    "FamilyConstraintSet_x": {
+      "signature": "H_x : FamilyConstraintSet_x",
+      "member_signature": "h : FiniteSubset(Orientation_x x Bool) -> Prop",
+      "scope_rule": "Each h declares its required arity or full-family scope.",
+      "empty_constraint_policy": "Only an explicitly declared empty H_x makes HigherOrderCompatible_x definitionally satisfied; an absent constraint definition remains unresolved."
+    },
+    "OrientationFamily_x": {
+      "signature": "OrientationFamily_x := (F, rho_x, provenance)",
+      "meaning": "A declared family F of observation orientations together with its binary classification and retained provenance.",
+      "structural_conditions": [
+        "F is a subfamily of Omega_obs.",
+        "rho_x is defined on every member of F.",
+        "Each member retains its AdmObs_x classification provenance."
+      ]
+    },
+    "AdmissibleOrientationFamily_x": {
+      "signature": "AdmissibleOrientationFamily_x(F, rho_x; P_x, B_x, D_rel, R) : Prop",
+      "definition": "F is an admissible orientation family when it is within Omega_obs, its classification is total on F, every member satisfies pointwise compatibility, and the family satisfies JointlyCompatible_x under B_x, D_rel, and R.",
+      "required_conditions": [
+        "F is a subfamily of Omega_obs.",
+        "rho_x is total on F.",
+        "Every member of F satisfies PointwiseResolutionCompatible_x.",
+        "JointlyCompatible_x(rho_x; P_x, B_x, D_rel, R) holds for F.",
+        "Boundary, domain, residue, and provenance constraints are retained."
+      ],
+      "empty_family_guard": "An empty admissible family is a failure of bounded realization under the declared scope, not symmetry annihilation."
+    },
     "PointwiseResolutionCompatible_x": {
       "signature": "PointwiseResolutionCompatible_x(o, rho_x; P_x, B_x, D_rel, R) : Prop",
       "definition": "For o in Omega_x_pos, rho_x(o)=TRUE; for o in Omega_x_neg, rho_x(o)=FALSE; for o in Omega_x_undef, rho_x(o) is binary and satisfies the declared boundary, domain, and residue compatibility conditions.",
@@ -57,27 +90,51 @@
       ]
     },
     "GlobalJointCoherence_x": {
-      "signature": "GlobalJointCoherence_x(rho_x; P_x, B_x, D_rel, R) : Prop",
+      "signature": "GlobalJointCoherence_x(F_x; H_x, B_x, D_rel, R) : Prop",
       "definition": "The complete binary assignment rho_x is jointly realizable under the declared boundary interaction, relational domain, residue, and family-level orientation compatibility constraint JointlyCompatible_x.",
       "required_conditions": [
-        "rho_x is total over Omega_obs.",
-        "Every pointwise assignment satisfies PointwiseResolutionCompatible_x.",
-        "JointlyCompatible_x(rho_x; P_x, B_x, D_rel, R) holds.",
+        "F_x is total over P_x.Omega_obs.",
+        "Every pointwise assignment in F_x satisfies PointwiseResolutionCompatible_x.",
+        "JointlyCompatible_x(F_x; H_x, B_x, D_rel, R) holds.",
         "The completed family remains compatible with B_x, D_rel, and R.",
         "No jointly impossible family is admitted merely because each member passes pointwise evaluation."
       ],
       "status": "PROVISIONAL_PREDICATE_PENDING_EXPLICIT_RELATION"
     },
     "JointlyCompatible_x": {
-      "signature": "JointlyCompatible_x(rho_x; P_x, B_x, D_rel, R) : Prop",
-      "definition": "A family-level constraint asserting that the complete orientation assignment rho_x can coexist as one admissible orientation family under B_x, D_rel, and R.",
+      "signature": "JointlyCompatible_x(F_x; H_x, B_x, D_rel, R) : Prop",
+      "definition": "PairwiseCompatible_x(F_x; B_x, D_rel, R) AND HigherOrderCompatible_x(F_x; H_x, B_x, D_rel, R).",
       "role": "Primary cross-orientation compatibility relation used by GlobalJointCoherence_x.",
       "pairwise_guard": "A pairwise relation may be a necessary subcondition, but pairwise compatibility alone is not assumed sufficient for joint compatibility.",
+      "higher_order_component": "JointConstraint_x(F_x; H_x, B_x, D_rel, R) may impose constraints on the family as a whole.",
       "status": "NEW_PROVISIONAL_RELATION"
+    },
+    "PairwiseCompatible_x": {
+      "signature": "PairwiseCompatible_x(F_x; B_x, D_rel, R) : Prop",
+      "definition": "For every distinct o_i and o_j represented in F_x, the joint assignment to {o_i,o_j} satisfies every declared binary orientation constraint applicable under B_x, D_rel, and R.",
+      "role": "Necessary component of the provisional joint constraint; not sufficient by itself."
+    },
+    "HigherOrderCompatible_x": {
+      "signature": "HigherOrderCompatible_x(F_x; H_x, B_x, D_rel, R) : Prop",
+      "definition": "The completed family F_x satisfies every declared constraint in H_x whose arity is greater than two or whose scope is the orientation family as a whole.",
+      "role": "Captures incompatibilities that are invisible in pairwise checks.",
+      "domain_conditions": [
+        "A higher-order constraint must be declared by D_rel or its governed compatibility specification.",
+        "The constraint applies only to the orientation family and assignment scope for which it is declared.",
+        "No higher-order constraint may be inferred solely from the existence of three orientations.",
+        "If no higher-order constraint is declared, HigherOrderCompatible_x remains unresolved rather than silently TRUE."
+      ],
+      "status": "PROVISIONAL_PREDICATE"
+    },
+    "JointConstraint_x": {
+      "signature": "JointConstraint_x(F_x; H_x, B_x, D_rel, R) : Prop",
+      "definition": "JointConstraint_x holds iff PairwiseCompatible_x(F_x; B_x, D_rel, R) AND HigherOrderCompatible_x(F_x; H_x, B_x, D_rel, R).",
+      "sufficiency_status": "Pairwise compatibility is not declared sufficient unless a separate PairwiseSufficiency_x result is established for the declared domain.",
+      "empty_family_guard": "The empty family does not establish bounded realization even if the constraint evaluates vacuously."
     }
   },
-  "revised_signature": "PartialSufficiencyWitness_x(P_x, B_x, D_rel, R, RefRule_x, o_x) : Prop",
-  "revised_definition": "PartialSufficiencyWitness_x holds iff P_x.Omega_x_undef is nonempty, o_x is in P_x.Omega_x_pos, admissibility provenance for o_x is present, Res_x(P_x; B_x, D_rel, R) is nonempty, and every rho_x in that resolution space satisfies RefDetermines_x(RefRule_x, rho_x, o_x; B_x, D_rel, R).",
+  "revised_signature": "PartialSufficiencyWitness_x(P_x, H_x, B_x, D_rel, R, RefRule_x, o_x) : Prop",
+  "revised_definition": "PartialSufficiencyWitness_x holds iff P_x.Omega_x_undef is nonempty, o_x is in P_x.Omega_x_pos, admissibility provenance for o_x is present, Res_x(P_x; H_x, B_x, D_rel, R) is nonempty, and every rho_x in that resolution space satisfies RefDetermines_x(RefRule_x, rho_x, o_x; B_x, D_rel, R).",
   "redundancy_correction": "Preservation of AdmObs_x(o_x)=TRUE is required by construction because permitted resolutions cannot revise Omega_x_pos; the nontrivial test is reference-determining invariance across resolutions.",
   "ref_orient_policy": {
     "default": "Total classification authorizes ordinary RefOrient.",
@@ -113,6 +170,29 @@
     "definition": "For every permitted resolution rho_x of P_x, q retains the same reference orientation and satisfies Gamma_E(q), Gamma_R(q), Gamma_T(q), and Gamma_O(q, rho_x).",
     "effect": "Permits conversion from PARTIAL_REFERENCE_CONDITIONAL to a realized positive delta_a admission without requiring explicit classification of every unresolved orientation."
   },
+  "existing_symbol_mappings": {
+    "O_adm": {
+      "mapping": "MapO_x(O_adm, P_x) : OrientationFamily_x",
+      "guards": ["Element type matches Omega_obs.", "Derivation context matches B_x, D_rel, and R.", "Membership does not prove JointlyCompatible_x."],
+      "rebound": false
+    },
+    "W_adm": {
+      "mapping": "RestrictByWindow_x(F_x, W_adm) : OrientationFamily_x",
+      "guards": ["Window context is aligned with B_x, D_rel, and R.", "Window membership does not classify undefined orientations.", "Restriction preserves unresolved-orientation provenance."],
+      "rebound": false
+    },
+    "C_orient": {
+      "use": ["Rank permitted resolutions.", "Compare coherence diagnostically."],
+      "prohibited": ["Replace PairwiseCompatible_x.", "Replace HigherOrderCompatible_x.", "Coerce undefined compatibility to TRUE or FALSE."],
+      "threshold_guard": "C_orient(F_x) >= tau implies JointlyCompatible_x only under a separate domain-scoped bridge theorem."
+    }
+  },
+  "pairwise_sufficiency": {
+    "signature": "PairwiseSufficiency_x(D_rel, B_x, R, H_x) : Prop",
+    "definition": "For every completed orientation family F_x admissible in the declared context, PairwiseCompatible_x(F_x; B_x, D_rel, R) implies HigherOrderCompatible_x(F_x; H_x, B_x, D_rel, R).",
+    "status": "OPEN_DOMAIN_SCOPED_PROOF_OBLIGATION",
+    "default": "NOT_ASSUMED"
+  },
   "failure_states": [
     "NO_POSITIVE_ORIENTATION",
     "PARTITION_PROVENANCE_MISSING",
@@ -131,7 +211,49 @@
     "The witness is evaluated before ProjectBounded.",
     "No empty or unresolved family is interpreted as symmetry annihilation."
   ],
-  "next_formalization": "Specify the admissible family structure and test whether JointlyCompatible_x requires higher-order constraints beyond pairwise compatibility.",
+  "bounded_compatibility_test": {
+    "test_id": "ASYM-JOINT-TEST-001",
+    "purpose": "Distinguish pairwise compatibility from family-level compatibility.",
+    "fixture": "F = {o_1, o_2, o_3} with rho_x(o_1)=rho_x(o_2)=rho_x(o_3)=TRUE.",
+    "declared_constraints": [
+      "Each pair {o_i,o_j} is compatible under PairwiseCompatible_x.",
+      "The declared family constraint permits at most two simultaneously TRUE orientations."
+    ],
+    "expected": {
+      "PairwiseCompatible_x": "TRUE",
+      "HigherOrderCompatible_x": "FALSE",
+      "JointConstraint_x": "FALSE",
+      "interpretation": "Pairwise compatibility does not imply joint compatibility."
+    },
+    "status": "DEFINITIONAL_TEST_SCHEMA_NOT_EMPIRICAL_EVIDENCE"
+  },
+  "repository_reconciliation": {
+    "inspection_status": "READ_ONLY_COMPLETE",
+    "related_existing_structures": [
+      {
+        "symbol": "O_adm",
+        "surface": "docs/theory/foundational/5_03_26 unity/math/07_asymmetry_to_orientation_selection_operator.md",
+        "relevance": "Existing admissible orientation family used by an orientation-selection expression.",
+        "binding_status": "RELATED_NOT_IDENTICAL"
+      },
+      {
+        "symbol": "W_adm",
+        "surface": "docs/theory/foundational/5_03_26 unity/math/MATHEMATICAL_SCHEMA_SCRATCH_V1.md",
+        "relevance": "Existing admissible orientation window over a declared context.",
+        "binding_status": "RELATED_NOT_IDENTICAL"
+      },
+      {
+        "symbol": "C_orient",
+        "surface": "registry/math/metric_registry.json",
+        "relevance": "Existing candidate metric for coherence among admissible orientation-pattern assignments.",
+        "binding_status": "POSSIBLE_SUPPORTING_MEASURE_NOT_A_COMPATIBILITY_PREDICATE"
+      }
+    ],
+    "direct_joint_predicate_found": false,
+    "reconciliation_rule": "Do not bind JointlyCompatible_x to O_adm, W_adm, or C_orient without a separate type and semantic compatibility review.",
+    "result": "HIGHER_ORDER_COMPATIBILITY_REMAINS_OPEN"
+  },
+  "next_formalization": "Inventory the actual RT family-level constraints that populate H_x, including scope, arity, provenance, and pairwise decomposability.",
   "not_changed": ["delta_a core definition", "delta_alpha", "Excl_obs_x partial classification semantics", "Gamma_E", "Gamma_R", "Gamma_T", "D-semantics obligations", "canonical textbook", "canonical registries"],
   "human_review_required": true
 }
