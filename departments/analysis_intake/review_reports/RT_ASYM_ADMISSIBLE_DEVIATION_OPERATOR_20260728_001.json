@@ -1,0 +1,69 @@
+{
+  "artifact_type": "PROVISIONAL_FORMAL_OPERATOR_SPECIFICATION",
+  "artifact_id": "RT_ASYM_ADMISSIBLE_DEVIATION_OPERATOR_20260728_001",
+  "packet_type": "RT_PROVISIONAL_ADMISSIBLE_DEVIATION_DEFINITION",
+  "status": "PROVISIONAL_READY_FOR_HUMAN_REVIEW",
+  "canonicality": "NON_CANONICAL_CANDIDATE",
+  "claim_ceiling": "C1_MODEL_RELATIVE",
+  "depends_on": ["RT_ASYM_ORIENTATION_FAMILY_ADMISSIBILITY_20260728_001", "RT_ASYM_EXCLUSION_OPERATOR_DEFINITION_20260728_001"],
+  "purpose": "Name and type the boundary-conditioned admissible-deviation evaluation without colliding with existing delta_a, delta_alpha, or epsilon_a meanings.",
+  "symbol_decision": {
+    "preferred_symbol": "DevAdm_x",
+    "display_form": "\\operatorname{DevAdm}_x",
+    "preferred_name": "admissible deviation at scope x",
+    "rejected_alternatives": ["delta_a", "delta_alpha", "epsilon_a", "delta_adm"],
+    "reason": "Existing delta and epsilon symbols already carry governed admissibility-filter, RT-core, deviation, or local-floor meanings. The named operator makes the new role explicit without silent rebinding."
+  },
+  "formal_signature": {
+    "operator": "DevAdm_x",
+    "signature": "DevAdm_x : BoundaryInteraction × ObservationOrientation × RelationalDomain -> AdmissibilityResult",
+    "result_values": ["ADMISSIBLE", "INADMISSIBLE", "UNDEFINED"],
+    "diagnostic_form": "DevAdm_x(B_x, omega, D_rel) = ADMISSIBLE iff omega remains admissible under the declared boundary and relational domain."
+  },
+  "definition": {
+    "candidate_rule": "DevAdm_x(B_x, omega, D_rel) := EvaluateOrientationDeviation(B_x, omega, D_rel)",
+    "admissible_condition": "DevAdm_x(B_x, omega, D_rel) = ADMISSIBLE iff the orientation-conditioned deviation satisfies the declared admissibility constraints of D_rel.",
+    "inadmissible_condition": "DevAdm_x(B_x, omega, D_rel) = INADMISSIBLE iff the declared constraints reject the orientation-conditioned deviation.",
+    "undefined_condition": "DevAdm_x returns UNDEFINED when B_x, omega, D_rel, or the admissibility constraints are untyped or unavailable.",
+    "no_repair_rule": "The evaluator classifies the supplied inputs and does not repair, replace, or construct a boundary, orientation, domain, or deviation."
+  },
+  "relationship_to_existing_symbols": {
+    "delta_a": "Unchanged. DevAdm_x may supply an orientation-specific admissibility result to a separately governed filter, but it does not replace delta_a.",
+    "delta_alpha": "Unchanged and unresolved. No compatibility or signature identity is asserted.",
+    "epsilon_a": "Unchanged. DevAdm_x does not redefine the context-indexed admissibility floor.",
+    "AdmObs_x": "AdmObs_x may be defined as a projection or wrapper over DevAdm_x only after an explicit mapping is approved; identity is not assumed.",
+    "Excl_obs_x": "Excl_obs_x may construct Omega_x_adm by retaining omega when DevAdm_x(B_x, omega, D_rel) = ADMISSIBLE.",
+    "[Asym]_x": "DevAdm_x does not itself create [Asym]_x; [Asym]_x remains a downstream symmetry-condition construction.",
+    "<S>_x": "DevAdm_x does not produce bounded symmetry directly."
+  },
+  "chain_binding": {
+    "formula": "B_x, omega, D_rel -> DevAdm_x(B_x, omega, D_rel) -> Omega_x_adm -> DomOrient_x -> o_x -> [Asym]_x -> <S>_x",
+    "family_rule": "omega in Omega_x_adm iff MemberOrient(omega, Omega_obs, >S<, D_rel) and DevAdm_x(B_x, omega, D_rel) = ADMISSIBLE",
+    "symmetry_guard": "DevAdm_x evaluates orientation-conditioned deviation; it never excludes or negates >S<.",
+    "delta_alpha_guard": "No delta_alpha input is required by this candidate signature."
+  },
+  "failure_semantics": {
+    "inadmissible_orientation": "The candidate orientation is excluded from Omega_x_adm for the declared interaction and domain.",
+    "undefined_evaluation": "The result is UNDEFINED when required typing or constraints are absent.",
+    "empty_family": "If every omega is INADMISSIBLE, Omega_x_adm is empty and bounded realization fails locally; symmetry remains present.",
+    "no_zero_inference": "No result implies symmetry absence, ontological nothingness, or universal impossibility."
+  },
+  "adversarial_tests": [
+    {"test_id": "DEVADM-T001", "name": "ADMISSIBLE_ORIENTATION", "expected": "A qualifying orientation returns ADMISSIBLE and remains in Omega_x_adm."},
+    {"test_id": "DEVADM-T002", "name": "INADMISSIBLE_ORIENTATION", "expected": "A rejected orientation returns INADMISSIBLE and is excluded from Omega_x_adm."},
+    {"test_id": "DEVADM-T003", "name": "UNDEFINED_INPUT", "expected": "Untyped B_x, omega, or D_rel returns UNDEFINED without repair."},
+    {"test_id": "DEVADM-T004", "name": "NO_SYMMETRY_EXCLUSION", "expected": "Changing the result for omega never removes >S<."},
+    {"test_id": "DEVADM-T005", "name": "MULTIPLE_ADMISSIBLE_ORIENTATIONS", "expected": "DevAdm_x classifies each orientation and does not select a dominant one."},
+    {"test_id": "DEVADM-T006", "name": "DELTA_ALPHA_NON_COLLISION", "expected": "DevAdm_x remains distinct when delta_alpha is supplied under another governed signature."},
+    {"test_id": "DEVADM-T007", "name": "EPSILON_FLOOR_NON_COLLISION", "expected": "DevAdm_x does not become identical to epsilon_a or any admissibility floor."}
+  ],
+  "open_questions": [
+    "What internal relation or metric, if any, evaluates orientation-conditioned deviation?",
+    "Is AdmissibilityResult Boolean, ordinal, or structured?",
+    "Is DevAdm_x a primitive evaluator, a domain-local predicate, or a wrapper around existing admissibility machinery?",
+    "Can AdmObs_x be formally derived from DevAdm_x without changing either signature?",
+    "How does residue enter DevAdm_x, if at all?"
+  ],
+  "authorization_limits": ["No canonical promotion", "No registry mutation", "No textbook mutation", "No delta_a or delta_alpha rebinding", "No epsilon_a change", "No theorem or physical-law claim", "No D-obligation discharge", "Human review required"],
+  "next_recommended_action": "Human-review whether DevAdm_x should remain a named provisional predicate or be mapped to an existing governed admissibility surface."
+}

@@ -1,0 +1,47 @@
+{
+  "packet_id": "D_VALID_REL_TOKEN_C_INDEXER_PERMISSION_DIAGNOSIS_20260727_001",
+  "diagnostic_id": "DIAG_D_VALID_REL_TOKEN_C_INDEXER_PERMISSION_20260727_001",
+  "execution_timestamp": "2026-07-27T23:46:04.000000+00:00",
+  "repository_head": "646065a84052c0e2956e5d249460ee01fd098421",
+  "repository_status_before": {
+    "status": "clean",
+    "git_status_short": [],
+    "git_diff_name_only": [],
+    "git_diff_stat": []
+  },
+  "canonical_artifact_hash_verification": {
+    "status": "PASS",
+    "artifacts": [
+      {"path": "docs/theory/foundational/5_03_26 unity/math/notes/d_valid_rel_token_c_definition_20260727_001.json", "sha256": "578D0F6DEDBD5DAA6B3B41A578A273E47F3264A80311C55292DA9C8FC733845F", "expected_sha256": "578D0F6DEDBD5DAA6B3B41A578A273E47F3264A80311C55292DA9C8FC733845F"},
+      {"path": "registry/governance/patches/PATCH_D_VALID_REL_TOKEN_C_20260727_001.json", "sha256": "259BD67F4644CE5CBC311B88F309BB47E8A0B18716606EDA9DF5FC48C6B5FDB3", "expected_sha256": "259BD67F4644CE5CBC311B88F309BB47E8A0B18716606EDA9DF5FC48C6B5FDB3"},
+      {"path": "departments/analysis_intake/chat_captures/D_VALID_REL_TOKEN_C_DEFINITION_AND_PLACEMENT_20260727_001.json", "sha256": "27313E9353442BA23A65543EF62595EFD2A849CA4375FBE47E3D87560664EB4C", "expected_sha256": "27313E9353442BA23A65543EF62595EFD2A849CA4375FBE47E3D87560664EB4C"}
+    ]
+  },
+  "canonical_indexer_path": "scripts/db/index_artifacts.py",
+  "canonical_indexer_sha256": "35A7D6BA78F065DAC389E01B3AAE529105AA8AABBD4F4B7641CDB246705C3D74",
+  "canonical_indexer_discovery_summary": {"root": "D:\\projects\\acellorator", "method": "os.walk(root_dir)", "candidate_order": "files + dirs", "excluded_directories": [".git", ".venv", "__pycache__"], "followlinks": false},
+  "canonical_indexer_checksum_summary": {"function": "get_checksum", "open_mode": "rb", "block_size": 4096, "directories_return_none": true, "hashing_before_database_mutation": true},
+  "diagnostic_script_path": "departments/analysis/campaigns/CAMPAIGN_D_VALID_REL_TOKEN_C_INDEXER_PERMISSION_DIAGNOSIS_20260727_001/diagnose_indexer_permission.py",
+  "diagnostic_script_sha256": "6C7CB3C55C09CB7A12419328495BAB3DD6F26B4F8DDAFD345F7A70FF5F2A5704",
+  "diagnostic_log_path": "departments/analysis/campaigns/CAMPAIGN_D_VALID_REL_TOKEN_C_INDEXER_PERMISSION_DIAGNOSIS_20260727_001/indexer_permission_diagnostic_log.jsonl",
+  "diagnostic_log_sha256": "001F3A1F9E584A2B6D1B1F643305031BD844A93D2F5DE1825F23FEE10FE134A3",
+  "canonical_rerun": {"command": "python scripts/db/index_artifacts.py", "elapsed_seconds": 660.088, "exit_code": 1, "exception": "PermissionError: [Errno 13] Permission denied", "path_emitted_by_unmodified_indexer": false},
+  "candidate_trace_rerun": {"wrapper": "External get_checksum tracing wrapper; scripts/db/index_artifacts.py unchanged", "elapsed_seconds": 600.515, "exit_code": 1, "trace_path": "C:\\Users\\james\\AppData\\Local\\Temp\\acellorator_index_candidate_trace_20260727_001.jsonl", "last_candidate_before_exception": "registry/db/acellorator_index.sqlite"},
+  "candidate_path_count": 51478,
+  "successfully_hashed_path_count": 51477,
+  "inaccessible_path_count": 1,
+  "inaccessible_paths": [{"absolute_path": "D:\\projects\\acellorator\\registry\\db\\acellorator_index.sqlite", "repository_relative_path": "registry/db/acellorator_index.sqlite", "exception_class": "PermissionError", "exception_errno": 13, "exception_text": "[Errno 13] Permission denied", "failure_stage": "f.read(4096)"}],
+  "first_permission_error_path": "registry/db/acellorator_index.sqlite",
+  "first_permission_error_exception": "PermissionError: [Errno 13] Permission denied during f.read(4096)",
+  "filesystem_metadata": [{"absolute_path": "D:\\projects\\acellorator\\registry\\db\\acellorator_index.sqlite", "exists": true, "is_file": true, "is_directory": false, "is_symlink": false, "is_special_file": false, "size_bytes": 11115802624, "stat_mode": "-a----", "attributes": ["Archive", "Compressed"], "link_type": "HardLink", "target_reported_by_powershell": "D:\\projects\\acellorator\\registry\\registry\\db\\acellorator_index.sqlite", "read_access_test_after_process_exit": "PASS_16_BYTES", "file_acl": "BUILTIN\\Users:(RX); NT AUTHORITY\\SYSTEM:(F); BUILTIN\\Administrators:(F); repository users include Modify", "parent_directory_acl": "BUILTIN\\Users:(RX); repository users include Modify"}],
+  "git_tracking_classification": {"status": "IGNORED_REPOSITORY_FILE", "path": "registry/db/acellorator_index.sqlite", "gitignore_match": "*.sqlite", "git_tracked": false},
+  "indexer_scope_classification": {"status": "INDEXER_SCOPE_OR_EXCLUSION_DEFECT", "reason": "The indexer opens this SQLite database before walking the repository, then includes the database itself as a candidate because only .git, .venv, and __pycache__ are excluded."},
+  "direct_read_test_results": [{"path": "registry/db/acellorator_index.sqlite", "open_mode": "rb", "small_read_after_indexer_exit": "PASS_16_BYTES", "complete_sequential_read": "NOT_RUN_11GB_FILE", "sha256_calculation": "NOT_RUN_AFTER_FAILURE_DIAGNOSIS"}],
+  "all_failure_classes_observed": ["DATABASE_OR_DATABASE_SIDECAR", "INDEXER_SCOPE_OR_EXCLUSION_DEFECT"],
+  "recommended_next_repair_class": "EXCLUDE_NONINDEXABLE_TRANSIENT_PATH_THROUGH_SEPARATE_INDEXER_PATCH",
+  "recommended_next_repair_reason": "The smallest lawful repair is a separately authorized indexer-scope change excluding its own governed SQLite database from filesystem artifact hashing, because the file is the indexer's active output, is Git-ignored, and is readable after the indexer exits. No permission or ownership change is indicated.",
+  "protected_surface_diff_summary": "Semantic artifacts, registries, and indexer source were not modified. The governed SQLite projection was necessarily opened and updated by the explicitly requested canonical indexer reruns; no manual row edits or database deletion/recreation was performed. Campaign trace/evidence files were written.",
+  "unexpected_mutations": [],
+  "repository_status_after": {"git_status_short": ["?? departments/analysis/campaigns/CAMPAIGN_D_VALID_REL_TOKEN_C_INDEXER_PERMISSION_DIAGNOSIS_20260727_001/"], "task_files_uncommitted": true, "commit_performed": false},
+  "final_result": "PASS_DENIED_PATH_IDENTIFIED"
+}

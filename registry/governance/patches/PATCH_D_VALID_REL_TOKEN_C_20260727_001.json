@@ -3,7 +3,9 @@
   "packet_id": "D_VALID_REL_TOKEN_C_DEFINITION_AND_PLACEMENT_20260727_001",
   "packet_type": "ADDITIVE_FORMAL_DEFINITION_AND_LITERAL_PLACEMENT_INSTRUCTION",
   "mode": "additive",
-  "status": "APPLIED_LITERAL_PLACEMENT",
+  "status": "APPLIED",
+  "validation_state": "VALIDATED",
+  "semantic_transition_label": "APPLIED_VALIDATED",
   "claim_level": "C1_DEFINED_PROVISIONAL",
   "target_obligation": "OBL-D-001D",
   "path_step": "D_PATH_STEP_004_DEFINE_VALID_REL_TOKEN_C",
@@ -17,11 +19,26 @@
     "authority_source": "DIRECT_HUMAN_INSTRUCTION",
     "instruction_mode": "LITERAL_EXECUTION",
     "source_channel": "chat",
-    "prerequisite_artifact_sha256": {"d_source_relation_c_definition_20260727_001.json": "7560FDB4FED62DA3FC6096250C9412F777A6830FA3471C68F898B0BAB35860BF", "d_derive_rel_c_definition_20260727_001.json": "44D98661CB177CAF4BCE747A0BE4AA3E7831836AD0C1A1F928DFA2BC57992860"}
+    "prerequisite_artifact_sha256": {"d_source_relation_c_definition_20260727_001.json": "7560FDB4FED62DA3FC6096250C9412F777A6830FA3471C68F898B0BAB35860BF", "d_derive_rel_c_definition_20260727_001.json": "44D98661CB177CAF4BCE747A0BE4AA3E7831836AD0C1A1F928DFA2BC57992860"},
+    "provenance_classification": "UNCOMMITTED_PENDING_CONSOLIDATED_CLOSEOUT",
+    "repository_head": "646065a84052c0e2956e5d249460ee01fd098421",
+    "definition_sha256": "578D0F6DEDBD5DAA6B3B41A578A273E47F3264A80311C55292DA9C8FC733845F",
+    "patch_sha256_before_normalization": "259BD67F4644CE5CBC311B88F309BB47E8A0B18716606EDA9DF5FC48C6B5FDB3"
   },
+  "placement_evidence_chain": [
+    {"path": "departments/analysis/campaigns/CAMPAIGN_D_VALID_REL_TOKEN_C_PLACEMENT_20260727_001/d_valid_rel_token_c_definition_placement_evidence_20260727_001.json", "sha256": "A6B8FCE7AD76894E8D742E8020A80D1573F4250BF973B13678E5F9C7633F40B4", "result": "FAIL_ARTIFACT_INDEX_WITHOUT_PERMITTED_FALLBACK"},
+    {"path": "departments/analysis/campaigns/CAMPAIGN_D_VALID_REL_TOKEN_C_PLACEMENT_20260727_001/d_valid_rel_token_c_closeout_repair_evidence_20260727_001.json", "sha256": "9BA0CF614B144E3F8A8117068EB4FCAA3F9FE5F4C10FFBBAE318CADA9BFCADBB", "result": "FAIL_FULL_ARTIFACT_INDEX"},
+    {"path": "departments/analysis/campaigns/CAMPAIGN_D_VALID_REL_TOKEN_C_INDEXER_PERMISSION_DIAGNOSIS_20260727_001/d_valid_rel_token_c_indexer_permission_diagnosis_evidence_20260727_001.json", "sha256": "3FE766B93B9DAC3A41B35295DA9E354065DB7BCC22A98BFC525A69F24E6DD3CB", "result": "PASS_DENIED_PATH_IDENTIFIED"},
+    {"path": "departments/analysis/campaigns/CAMPAIGN_D_VALID_REL_TOKEN_C_INDEXER_PERMISSION_DIAGNOSIS_20260727_001/artifact_indexer_self_database_exclusion_patch_evidence_20260727_001.json", "sha256": "813336D68A13F5B0378471F94C79189DE0E79E99D643473DA41BB1BB1B103EC1", "result": "FAIL_GLOBAL_VALIDATION", "full_indexer_result": "PASS", "artifact_index_verified": true},
+    {"path": "departments/analysis/campaigns/CAMPAIGN_D_VALID_REL_TOKEN_C_INDEXER_PERMISSION_DIAGNOSIS_20260727_001/supersession_edge_projection_rebuild_evidence_20260728_001.json", "sha256": "345E40496A7104F71DD0B1F844E985543E0AC437CCB2386C3AA1B2768EBFB521", "result": "PASS_SUPERSESSION_PROJECTION_REBUILD_COMPLETE"}
+  ],
+  "target_authority_bindings": [
+    {"path": "registry/governance/patches/PATCH_D_VALID_REL_TOKEN_C_20260727_001.json", "authority_owner": "registry", "decision": "defer", "classification": "APPLIED_HISTORICAL_PATCH_RECORD"}
+  ],
   "core_rule": {"id": "D-VALIDTOKEN-SOURCE-ONLY-001", "statement": "ValidRelToken_C is a definition-level predicate requiring exact structural equality to deriveRel_C together with complete source-payload binding; it does not establish transport, interpretation, preservation, injectivity, or non-collapse."},
   "depends_on": ["PATCH_D_SOURCE_RELATION_C_20260727_001", "PATCH_D_DERIVE_REL_C_20260727_001"],
   "required_repo_changes": ["Place and register WellFormedRelToken_C, TokenSourceBinding_C, ValidRelToken_C, and ValidateRelToken_C.", "Add dependency edges without discharging any obligation.", "Synchronize governed projections and emit placement evidence."],
+  "success_criteria": ["The canonical ValidRelToken_C definition remains present with the expected SHA256.", "The four provisional formal objects remain uniquely registered.", "The canonical artifact index contains the definition with verified confidence.", "Both predecessor patch statuses resolve to applied.", "The ValidRelToken_C patch status resolves to applied.", "No patch-chain blocking conditions remain.", "Registry alignment, global validation, textbook freshness, database freshness, and runtime governance pass.", "Claim level remains C1_DEFINED_PROVISIONAL and OBL-D-001D/OBL-D-001E remain OPEN.", "Notebook 22 and protected semantic surfaces remain unchanged."],
   "protected_surfaces_unchanged": ["SourceRelation_C", "SourceRelationSem_C", "CANONICAL_SOURCE_RELATION_PAYLOAD_C", "RELATION_TOKEN_C", "RELATION_TOKEN_C_V1", "CanonSourceRelationSem_C", "deriveRel_C", "TYPE_WITNESS_C", "project_w", "ProjectWDomain_C", "AX-WITNESS-REPDIST", "AX-REALIZATION-WITNESS", "Notebook 22", "OBL-D-001A", "OBL-D-001B", "OBL-D-001C", "OBL-D-001E", "RT_core"],
   "obligation_state": {"OBL-D-001D": "OPEN", "OBL-D-001E": "OPEN"},
   "required_progress_note": "ValidRelToken_C is now defined provisionally as exact structural equality to deriveRel_C together with complete source-payload binding. Witness integration, project_w token transport, target interpretation, semantic preservation, and D discharge remain open.",

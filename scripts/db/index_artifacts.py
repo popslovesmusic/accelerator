@@ -18,9 +18,38 @@ def get_checksum(path):
             sha256_hash.update(byte_block)
     return sha256_hash.hexdigest()
 
+def _normalized_absolute_path(path):
+    return os.path.normcase(os.path.abspath(os.path.normpath(path)))
+
+def _self_managed_database_paths(db_path):
+    db_abs = _normalized_absolute_path(db_path)
+    sidecars = {
+        db_abs + '-wal',
+        db_abs + '-shm',
+        db_abs + '-journal',
+    }
+    return db_abs, sidecars
+
+def _is_self_managed_database_candidate(candidate_path, db_abs, sidecars):
+    candidate_abs = _normalized_absolute_path(candidate_path)
+    if candidate_abs == db_abs or candidate_abs in sidecars:
+        return True
+
+    try:
+        if os.path.isfile(candidate_abs) and os.path.isfile(db_abs):
+            return os.path.samefile(candidate_abs, db_abs)
+    except (OSError, ValueError):
+        # An identity-check failure must not cause an unrelated candidate to
+        # be silently excluded; exact normalized-path matching remains active.
+        return False
+
+    return False
+
 def index_artifacts(db_path, root_dir, dry_run=False):
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
+    db_abs, sidecars = _self_managed_database_paths(db_path)
+    skipped_self_managed_paths = []
     
     for root, dirs, files in os.walk(root_dir):
         # Exclude some noisy dirs
@@ -30,12 +59,17 @@ def index_artifacts(db_path, root_dir, dry_run=False):
         
         for name in files + dirs:
             full_path = os.path.relpath(os.path.join(root, name), root_dir)
+            candidate_path = os.path.join(root, name)
+            if _is_self_managed_database_candidate(candidate_path, db_abs, sidecars):
+                skipped_self_managed_paths.append(full_path)
+                continue
+
             status, scope, confidence = classify_path(full_path)
-            checksum = get_checksum(os.path.join(root, name))
+            checksum = get_checksum(candidate_path)
             
             # Simple artifact type
             ext = os.path.splitext(name)[1].lower()
-            a_type = 'directory' if os.path.isdir(os.path.join(root, name)) else ext[1:] if ext else 'file'
+            a_type = 'directory' if os.path.isdir(candidate_path) else ext[1:] if ext else 'file'
             
             if dry_run:
                 print(f"[DRY-RUN] {full_path} -> {status} | {scope} | {confidence}")
@@ -52,6 +86,9 @@ def index_artifacts(db_path, root_dir, dry_run=False):
         conn.commit()
     conn.close()
     print(f"Artifact indexing complete for {root_dir}")
+    print(f"Skipped self-managed database paths: {len(skipped_self_managed_paths)}")
+    for skipped_path in skipped_self_managed_paths:
+        print(f"[SELF-MANAGED-SKIP] {skipped_path}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Index filesystem artifacts in the database.")

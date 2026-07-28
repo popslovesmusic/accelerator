@@ -1,0 +1,103 @@
+{
+  "crawl_id": "analysis_crawl_20260728_current_governed_state_001",
+  "crawl_date": "2026-07-28",
+  "mode": "GOVERNED_ANALYSIS_CRAWL",
+  "read_only": true,
+  "scope": {
+    "domains": ["governance current state", "D-semantics obligations", "artifact-indexer repair", "ValidRelToken_C closeout", "DB freshness"],
+    "include_superseded": true,
+    "maximum_reasoning_depth": 4,
+    "maximum_candidate_count": 100
+  },
+  "source_artifacts": [
+    "departments/analysis/AGENTS.md",
+    "departments/analysis/department_ssot.md",
+    "scripts/query_governance.py",
+    "registry/math/d_semantics_obligation_registry.json",
+    "departments/analysis/campaigns/CAMPAIGN_D_VALID_REL_TOKEN_C_INDEXER_PERMISSION_DIAGNOSIS_20260727_001/artifact_indexer_self_database_exclusion_patch_evidence_20260727_001.json",
+    "outputs/audits/global_health_report.json",
+    "registry/db/acellorator_index.sqlite",
+    "registry/governance/patches/PATCH_D_VALID_REL_TOKEN_C_20260727_001.json",
+    "scripts/db/index_artifacts.py",
+    "tests/test_index_artifacts_self_database_exclusion.py"
+  ],
+  "normalization_rule": "Authoritative registries and runtime decisions control governance status; campaign evidence and DB projections are diagnostic or operational evidence and cannot promote claims or discharge obligations.",
+  "directly_observed": {
+    "artifact_indexer_patch": "Applied in the working tree; active database, direct sidecars, and same-file hardlink aliases are excluded by normalized path and identity checks.",
+    "targeted_tests": "PASS: 4 tests",
+    "full_artifact_indexer": "PASS: exit 0 after 1109.778 seconds; three self-managed paths skipped.",
+    "valid_rel_token_index_record": "Present with checksum 578d0f6dedbd5daa6b3b41a578a273e47f3264a80311c55292da9c8fc733845f.",
+    "registry_alignment": "PASS",
+    "db_snapshot": "fresh; decision allow; REFRESH-20260728T001259863541Z",
+    "runtime_governance": "PASS",
+    "valid_rel_token_patch_gate": "BLOCKED by dependency_chain_not_satisfied; PATCH_D_SOURCE_RELATION_C is unknown/defer and PATCH_D_DERIVE_REL_C is blocked.",
+    "recorded_global_validation": "FAIL_SEMANTIC at db_validation due to supersession-edge audit integrity risks.",
+    "current_claim_ceiling": "C1_DEFINED_PROVISIONAL",
+    "d_obligations": {"OBL-D-001D": "OPEN", "OBL-D-001E": "OPEN"},
+    "notebook_22": "C2_LIMITATION_OR_NEGATIVE_RESULT_UNCHANGED",
+    "worktree": "Dirty with task patch/test/evidence files and an additional untracked semiclassical_gravity_test.ipynb; no crawl mutation was performed."
+  },
+  "discoveries": [
+    {
+      "discovery_id": "DISCOVERY_CRAWL_20260728_INDEXER_SCOPE_FIXED_001",
+      "discovery_class": "INFRASTRUCTURE_VALIDATION",
+      "title": "Self-database indexer failure is operationally repaired",
+      "statement": "The focused tests and full indexer run support that the active database, its direct runtime sidecars, and a same-file hardlink alias are skipped while unrelated candidates remain subject to ordinary checksum behavior.",
+      "epistemic_status": "OBSERVED",
+      "proof_status": "VALIDATED_AT_INFRASTRUCTURE_TEST_LEVEL",
+      "support_level": "C1_GOVERNANCE_VALIDATION",
+      "falsification_condition": "A future full indexer run hashes a self-managed database path or suppresses a non-database checksum failure."
+    },
+    {
+      "discovery_id": "DISCOVERY_CRAWL_20260728_D_GATE_STILL_OPEN_001",
+      "discovery_class": "D_SEMANTICS_FRONTIER",
+      "title": "ValidRelToken_C definition exists without D discharge",
+      "statement": "ValidRelToken_C is provisionally defined and indexed, but its patch gate remains blocked by predecessor lifecycle state and OBL-D-001D/OBL-D-001E remain open.",
+      "epistemic_status": "OBSERVED",
+      "proof_status": "OPEN",
+      "support_level": "C1_DEFINED_PROVISIONAL",
+      "falsification_condition": "Governed predecessor completion and a successful patch-gate decision change the recorded state."
+    },
+    {
+      "discovery_id": "DISCOVERY_CRAWL_20260728_VALIDATION_RESIDUAL_001",
+      "discovery_class": "VALIDATION_BLOCKER",
+      "title": "Closeout has a recorded supersession-edge validation failure",
+      "statement": "The patch evidence records a global-validation failure in db_validation for advisory supersession-edge integrity, while the checked-in global report is older and reports a different warning state; the discrepancy must not be normalized into a pass.",
+      "epistemic_status": "OBSERVED",
+      "proof_status": "OPEN",
+      "support_level": "C1_AUDIT",
+      "falsification_condition": "A fresh global validation report passes the db_validation stage and supersession-edge audit."
+    }
+  ],
+  "debt_and_obligation_inventory": {
+    "open_obligations": ["OBL-D-001D", "OBL-D-001E"],
+    "runtime_debt_count": 0,
+    "research_debt": ["D-semantics proof debt remains open", "predecessor lifecycle reconciliation", "supersession-edge integrity audit", "final patch closeout and commit"],
+    "blocked_promotion": ["D theorem promotion", "claim elevation", "witness extension", "token transport definition"]
+  },
+  "synthesis": {
+    "dependency_rule": "Infrastructure indexing success removes the self-database read failure, but it does not satisfy semantic predecessor lifecycle requirements or prove D-semantics preservation.",
+    "critical_path": ["reconcile PATCH_D_SOURCE_RELATION_C and PATCH_D_DERIVE_REL_C lifecycle evidence", "resolve or freshly validate supersession-edge integrity", "rerun global validation and patch gate", "human review before any next D path step"]
+  },
+  "recommended_next_action": {
+    "executive_recommendation": "STOP_UNTIL_NEW_EVIDENCE",
+    "action": "Obtain governed predecessor-lifecycle evidence and a fresh clean db_validation result before attempting ValidRelToken_C closeout or witness extension.",
+    "unlock": "A passing predecessor chain and clean global validation would permit human review of the ValidRelToken_C closeout state.",
+    "confidence": "high_for_current_gate_status"
+  },
+  "assessment": {
+    "outcome": "PARTIAL_SUCCESS",
+    "objective_completion": {"objectives_completed": 2, "objectives_total": 4, "completion_percent": 50},
+    "novelty": {"new_concepts": 0, "duplicate_findings": 0, "superseded_findings": 0, "novelty_score": 0.05},
+    "proof_readiness": {"proved": 0, "blocked": 2, "proof_obligations_remaining": 2},
+    "quality": {"scope_coverage": "bounded current-state and closeout crawl", "dependency_resolution": "blocked", "reasoning_depth_used": 4, "termination_quality": "scope_covered", "evidence_quality": "runtime, registry, test, and campaign evidence"}
+  },
+  "frontier": {
+    "open_branches": ["predecessor lifecycle reconciliation", "supersession-edge audit", "OBL-D-001D", "OBL-D-001E"],
+    "blocked_branches": ["D theorem promotion", "witness extension", "token transport", "semantic preservation claim"],
+    "deferred_branches": ["external validity", "universal injectivity", "global semantic preservation"]
+  },
+  "termination_reason": "Current governed state, repair evidence, open obligations, and closeout blockers were reconciled; crawl stopped at the declared bounded analysis scope.",
+  "continuation_token": "CONTINUE_ANALYSIS_CURRENT_GOVERNED_STATE_20260728_001",
+  "what_this_crawl_does_not_authorize": ["canonical registry mutation", "predecessor lifecycle repair", "obligation discharge", "theorem promotion", "claim elevation", "witness extension", "token transport", "commit", "unbounded execution"]
+}

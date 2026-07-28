@@ -1,0 +1,137 @@
+{
+  "artifact_type": "PROVISIONAL_PARTIAL_SUFFICIENCY_WITNESS_DEFINITION",
+  "artifact_id": "RT_ADMOBS_PARTIAL_SUFFICIENCY_WITNESS_20260728_001",
+  "status": "PROVISIONAL_ACTIVE",
+  "canonicality": "NON_CANONICAL_CANDIDATE",
+  "claim_ceiling": "C1_MODEL_RELATIVE",
+  "review_decision": "RT_ADMOBS_PARTIAL_SUFFICIENCY_WITNESS_REVIEW_20260728_001",
+  "purpose": "Permit a provisional reference orientation under explicit partial classification without coercing undefined orientations to FALSE.",
+  "formal_objects": {
+    "PartialPartition_x": {
+      "signature": "PartialPartition_x := (Omega_obs, Omega_x_pos, Omega_x_neg, Omega_x_undef, provenance)",
+      "constraints": [
+        "Omega_x_pos, Omega_x_neg, and Omega_x_undef are pairwise disjoint.",
+        "Their union equals Omega_obs.",
+        "Every membership classification retains its AdmObs_x provenance."
+      ]
+    },
+    "Resolution_x": {
+      "signature": "rho_x : Omega_obs -> {TRUE, FALSE}",
+      "meaning": "A total completion of the partial AdmObs_x classification."
+    },
+    "PermittedResolution_x": {
+      "signature": "PermittedResolution_x(P_x, rho_x; B_x, D_rel, R) : Prop",
+      "conditions": [
+        "rho_x(o)=TRUE for every o in Omega_x_pos.",
+        "rho_x(o)=FALSE for every o in Omega_x_neg.",
+        "rho_x assigns only TRUE or FALSE to every o in Omega_x_undef.",
+        "Assignments to Omega_x_undef satisfy pointwise admissibility under the declared domain, boundary, and residue constraints.",
+        "The jointly assigned orientation family satisfies GlobalJointCoherence_x(rho_x; B_x, D_rel, R).",
+        "rho_x does not revise an established positive or negative classification.",
+        "rho_x is total over Omega_obs."
+      ]
+    },
+    "RefDetermines_x": {
+      "signature": "RefDetermines_x(RefRule_x, rho_x, o_x; B_x, D_rel, R) : Prop",
+      "strong_form": "RefOrient_x(RefRule_x[B_x, D_rel, R], rho_x) = o_x",
+      "policy": "The strong form is required when downstream output is one reference orientation rather than a set of possible reference orientations."
+    }
+  },
+  "resolution_space": "Res_x(P_x; B_x, D_rel, R) := {rho_x | PermittedResolution_x(P_x, rho_x; B_x, D_rel, R)}",
+  "resolution_requirements": {
+    "pointwise": "Every unresolved orientation receives a binary value satisfying PointwiseResolutionCompatible_x.",
+    "joint": "The completed family satisfies GlobalJointCoherence_x across all jointly assigned orientations.",
+    "boundary": "The completion remains compatible with B_x.",
+    "domain": "The completion remains within D_rel.",
+    "residue": "The completion remains compatible with R.",
+    "totality": "Every rho_x in Res_x is total over Omega_obs."
+  },
+  "compatibility_predicates": {
+    "PointwiseResolutionCompatible_x": {
+      "signature": "PointwiseResolutionCompatible_x(o, rho_x; P_x, B_x, D_rel, R) : Prop",
+      "definition": "For o in Omega_x_pos, rho_x(o)=TRUE; for o in Omega_x_neg, rho_x(o)=FALSE; for o in Omega_x_undef, rho_x(o) is binary and satisfies the declared boundary, domain, and residue compatibility conditions.",
+      "guards": [
+        "It does not revise a defined TRUE or FALSE classification.",
+        "It does not treat UNDEFINED as FALSE.",
+        "It is evaluated before RefOrient and ProjectBounded."
+      ]
+    },
+    "GlobalJointCoherence_x": {
+      "signature": "GlobalJointCoherence_x(rho_x; P_x, B_x, D_rel, R) : Prop",
+      "definition": "The complete binary assignment rho_x is jointly realizable under the declared boundary interaction, relational domain, residue, and family-level orientation compatibility constraint JointlyCompatible_x.",
+      "required_conditions": [
+        "rho_x is total over Omega_obs.",
+        "Every pointwise assignment satisfies PointwiseResolutionCompatible_x.",
+        "JointlyCompatible_x(rho_x; P_x, B_x, D_rel, R) holds.",
+        "The completed family remains compatible with B_x, D_rel, and R.",
+        "No jointly impossible family is admitted merely because each member passes pointwise evaluation."
+      ],
+      "status": "PROVISIONAL_PREDICATE_PENDING_EXPLICIT_RELATION"
+    },
+    "JointlyCompatible_x": {
+      "signature": "JointlyCompatible_x(rho_x; P_x, B_x, D_rel, R) : Prop",
+      "definition": "A family-level constraint asserting that the complete orientation assignment rho_x can coexist as one admissible orientation family under B_x, D_rel, and R.",
+      "role": "Primary cross-orientation compatibility relation used by GlobalJointCoherence_x.",
+      "pairwise_guard": "A pairwise relation may be a necessary subcondition, but pairwise compatibility alone is not assumed sufficient for joint compatibility.",
+      "status": "NEW_PROVISIONAL_RELATION"
+    }
+  },
+  "revised_signature": "PartialSufficiencyWitness_x(P_x, B_x, D_rel, R, RefRule_x, o_x) : Prop",
+  "revised_definition": "PartialSufficiencyWitness_x holds iff P_x.Omega_x_undef is nonempty, o_x is in P_x.Omega_x_pos, admissibility provenance for o_x is present, Res_x(P_x; B_x, D_rel, R) is nonempty, and every rho_x in that resolution space satisfies RefDetermines_x(RefRule_x, rho_x, o_x; B_x, D_rel, R).",
+  "redundancy_correction": "Preservation of AdmObs_x(o_x)=TRUE is required by construction because permitted resolutions cannot revise Omega_x_pos; the nontrivial test is reference-determining invariance across resolutions.",
+  "ref_orient_policy": {
+    "default": "Total classification authorizes ordinary RefOrient.",
+    "partial_exception": "PartialSufficiencyWitness_x authorizes a provisional RefOrient.",
+    "output_status": "PROVISIONAL_NON_TOTAL_REFERENCE_ORIENTATION",
+    "uniqueness_guard": "No global uniqueness claim is established unless RefRule_x is deterministic and the strong invariance condition is proved."
+  },
+  "delta_a_policy": {
+    "conditional_evaluation": {
+      "decision": "PERMITTED_CONDITIONALLY",
+      "statement": "A provisional RefOrient output may enter delta_a evaluation as a tagged conditional candidate.",
+      "tag": "PARTIAL_REFERENCE_CONDITIONAL"
+    },
+    "positive_realized_admission": {
+      "decision": "PROHIBITED_WITHOUT_CLOSURE_BRIDGE",
+      "statement": "PartialSufficiencyWitness_x alone cannot produce a realized positive delta_a admission."
+    },
+    "closure_routes": [
+      {
+        "route": "TOTALITY_BRIDGE",
+        "condition": "Omega_x_undef becomes empty and total classification confirms the reference result."
+      },
+      {
+        "route": "REALIZATION_INVARIANCE_BRIDGE",
+        "condition": "A separate witness proves the same continuation satisfies Gamma_E, Gamma_R, Gamma_T, and Gamma_O and remains realization-admissible under every permitted resolution of Omega_x_undef."
+      }
+    ],
+    "future_entry_condition": "Total resolution is sufficient but not necessary; either totality or full-continuation realization invariance may close the conditional candidate."
+  },
+  "realization_invariance_candidate": {
+    "name": "ResolutionInvariantAdmission_x",
+    "signature": "ResolutionInvariantAdmission_x(q, P_x, B_x, D_rel, R, RefRule_x) : Prop",
+    "definition": "For every permitted resolution rho_x of P_x, q retains the same reference orientation and satisfies Gamma_E(q), Gamma_R(q), Gamma_T(q), and Gamma_O(q, rho_x).",
+    "effect": "Permits conversion from PARTIAL_REFERENCE_CONDITIONAL to a realized positive delta_a admission without requiring explicit classification of every unresolved orientation."
+  },
+  "failure_states": [
+    "NO_POSITIVE_ORIENTATION",
+    "PARTITION_PROVENANCE_MISSING",
+    "PERMITTED_RESOLUTION_SPACE_UNDEFINED",
+    "PERMITTED_RESOLUTION_SPACE_EMPTY",
+    "COMPLETION_REVISES_DEFINED_CLASSIFICATION",
+    "REFERENCE_RULE_UNDECLARED",
+    "REFERENCE_ROLE_NOT_INVARIANT",
+    "REALIZATION_CLOSURE_ABSENT"
+  ],
+  "preserved_guards": [
+    "Undefined is neither TRUE nor FALSE.",
+    "Undefined orientations are never silently discarded.",
+    "The witness does not establish total classification or total orientation exclusion.",
+    "The witness does not require completed [Asym]_x or <S>_x.",
+    "The witness is evaluated before ProjectBounded.",
+    "No empty or unresolved family is interpreted as symmetry annihilation."
+  ],
+  "next_formalization": "Specify the admissible family structure and test whether JointlyCompatible_x requires higher-order constraints beyond pairwise compatibility.",
+  "not_changed": ["delta_a core definition", "delta_alpha", "Excl_obs_x partial classification semantics", "Gamma_E", "Gamma_R", "Gamma_T", "D-semantics obligations", "canonical textbook", "canonical registries"],
+  "human_review_required": true
+}

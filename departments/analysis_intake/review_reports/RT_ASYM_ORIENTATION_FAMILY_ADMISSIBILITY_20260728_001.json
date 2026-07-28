@@ -1,0 +1,89 @@
+{
+  "artifact_type": "PROVISIONAL_FORMAL_TYPE_AND_PREDICATE_SPECIFICATION",
+  "artifact_id": "RT_ASYM_ORIENTATION_FAMILY_ADMISSIBILITY_20260728_001",
+  "packet_type": "RT_PROVISIONAL_ORIENTATION_FAMILY_DEFINITION",
+  "status": "PROVISIONAL_READY_FOR_HUMAN_REVIEW",
+  "canonicality": "NON_CANONICAL_CANDIDATE",
+  "claim_ceiling": "C1_MODEL_RELATIVE",
+  "depends_on": ["RT_ASYM_EXCLUSION_OPERATOR_DEFINITION_20260728_001", "RT_ASYM_SYMBOL_TYPE_RECONCILIATION_20260728_001"],
+  "purpose": "Define a non-circular relational representation for possible observation orientations and their boundary/domain-indexed admissibility without selecting a unique dominant orientation.",
+  "representation_choice": {
+    "orientation_family": "Relational family object with a governed membership relation, not necessarily a bare set or geometric space.",
+    "reason": "This permits finite, infinite, quotient, representative, or partially specified orientation families without silently assuming cardinality or topology.",
+    "uniqueness": "Not assumed.",
+    "delta_alpha": "Not used and not defined by this artifact."
+  },
+  "type_universe": {
+    "SymWhole": "Underlying relational symmetry whole.",
+    "RelationalDomain": "Typed domain governing interaction and orientation admissibility.",
+    "BoundaryInteraction": "Relational interaction condition within a declared domain.",
+    "ObservationOrientation": "A candidate reference-relative orientation evaluated within a declared symmetry scope.",
+    "OrientationFamily": "A typed family equipped with an orientation-membership relation.",
+    "AdmissibleOrientationFamily": "An OrientationFamily restricted by a declared admissibility predicate.",
+    "AdmissibilityResult": "A diagnostic Boolean or classified result returned by the provisional admissibility predicate."
+  },
+  "formal_objects": {
+    "Omega_obs": {
+      "type": "OrientationFamily",
+      "signature": "Omega_obs(>S<, D_rel) : OrientationFamily",
+      "membership_relation": "MemberOrient(omega, Omega_obs, >S<, D_rel)",
+      "meaning": "Possible observation orientations available for evaluation relative to >S< within D_rel.",
+      "guards": ["not a set of conscious observers", "not external substance", "not a unique selected orientation", "not automatically geometric or metric"]
+    },
+    "AdmObs_x": {
+      "type": "Typed admissibility predicate",
+      "signature": "AdmObs_x : BoundaryInteraction × ObservationOrientation × RelationalDomain -> AdmissibilityResult",
+      "success_value": "ADM_OBS_TRUE",
+      "failure_value": "ADM_OBS_FALSE",
+      "undefined_values": ["BOTTOM_ADM_OBS_INVALID_BOUNDARY", "BOTTOM_ADM_OBS_DOMAIN_MISMATCH", "BOTTOM_ADM_OBS_ORIENTATION_UNTYPED"],
+      "meaning": "Determines whether an observation orientation remains admissible under B_x and D_rel.",
+      "guards": ["does not test symmetry existence", "does not invoke delta_alpha", "does not require completed <S>_x", "does not select a dominant orientation"]
+    },
+    "Omega_x_adm": {
+      "type": "AdmissibleOrientationFamily",
+      "signature": "Omega_x_adm(B_x, Omega_obs, D_rel) : AdmissibleOrientationFamily",
+      "construction": "RestrictOrient(Omega_obs, AdmObs_x(B_x, omega, D_rel))",
+      "membership_rule": "MemberOrient(omega, Omega_x_adm, >S<, D_rel) iff MemberOrient(omega, Omega_obs, >S<, D_rel) and AdmObs_x(B_x, omega, D_rel) = ADM_OBS_TRUE",
+      "meaning": "The family of observation orientations remaining admissible after boundary conditioning."
+    }
+  },
+  "admissibility_contract": {
+    "preconditions": ["B_x is a valid BoundaryInteraction in D_rel.", "omega is a typed ObservationOrientation.", "MemberOrient(omega, Omega_obs, >S<, D_rel) holds."],
+    "evaluation": "AdmObs_x(B_x, omega, D_rel) evaluates only orientation admissibility relative to the declared interaction and domain.",
+    "postconditions_true": ["omega belongs to Omega_x_adm", "symmetry whole remains untouched", "no dominant orientation is selected"],
+    "postconditions_false": ["omega is excluded from Omega_x_adm", "the exclusion is local to B_x, omega, and D_rel", "no symmetry-negation conclusion follows"],
+    "undefined_behavior": "Return a diagnostic undefined result; do not coerce malformed inputs to false and do not repair them."
+  },
+  "family_cardinality_guards": {
+    "empty": "Omega_x_adm = empty means no observation orientation is admissible for bounded realization under the declared interaction and domain.",
+    "singleton": "A singleton Omega_x_adm permits a candidate reference orientation but does not itself prove selection semantics.",
+    "multiple": "A multiple-member Omega_x_adm requires a separate DomOrient_x, quotient, ranking, or equivalence rule.",
+    "infinite_or_unstructured": "An unspecified or non-finite family remains admissible as a provisional type if its membership and admissibility relations are defined.",
+    "non_annihilation": "None of these cases implies >S< is empty or symmetry is destroyed."
+  },
+  "downstream_contract": {
+    "next_chain": "B_x -> Omega_obs -> AdmObs_x -> Omega_x_adm -> DomOrient_x -> o_x -> [Asym]_x -> <S>_x",
+    "Excl_obs_binding": "Excl_obs_x(B_x, Omega_obs, D_rel) returns Omega_x_adm when its preconditions and admissibility evaluations are defined.",
+    "selection_separation": "DomOrient_x is not defined here and must not be inferred from Omega_x_adm.",
+    "residue": "Any excluded-orientation trace remains a future ExclusionResidue definition.",
+    "delta_alpha": "Unchanged open dependency."
+  },
+  "adversarial_tests": [
+    {"test_id": "ORIENT-FAMILY-T001", "name": "NO_OBSERVER_REQUIREMENT", "expected": "Omega_obs can be typed without conscious observers or measurement apparatus."},
+    {"test_id": "ORIENT-FAMILY-T002", "name": "NO_UNIQUE_SELECTION", "expected": "Multiple admissible orientations remain a family; no unique o_x is emitted."},
+    {"test_id": "ORIENT-FAMILY-T003", "name": "EMPTY_FAMILY_NON_ANNIHILATION", "expected": "Empty Omega_x_adm yields bounded-realization failure, not symmetry absence."},
+    {"test_id": "ORIENT-FAMILY-T004", "name": "DOMAIN_MISMATCH", "expected": "Incompatible B_x and D_rel return a typed failure, not a repaired family."},
+    {"test_id": "ORIENT-FAMILY-T005", "name": "SYMMETRY_NOT_FILTERED", "expected": "The membership rule filters omega only and never filters >S<."},
+    {"test_id": "ORIENT-FAMILY-T006", "name": "DELTA_ALPHA_INDEPENDENCE", "expected": "Changing delta_alpha does not change this artifact because it is not an input."}
+  ],
+  "open_questions": [
+    "Should MemberOrient be primitive, derived, or supplied by D_rel?",
+    "Should AdmissibilityResult be Boolean, ordinal, or structured diagnostic?",
+    "What conditions make a family quotientable or rankable?",
+    "How is DomOrient_x defined without circularity?",
+    "How are excluded orientations represented in residue?",
+    "How does this family model map, if at all, into existing D-semantics structures?"
+  ],
+  "authorization_limits": ["No canonical promotion", "No registry mutation", "No textbook mutation", "No delta_alpha rebinding", "No theorem or physical-law claim", "No D-obligation discharge", "Human review required"],
+  "next_recommended_action": "Define DomOrient_x or an explicit orientation-equivalence rule only after human review of this family/admissibility contract."
+}

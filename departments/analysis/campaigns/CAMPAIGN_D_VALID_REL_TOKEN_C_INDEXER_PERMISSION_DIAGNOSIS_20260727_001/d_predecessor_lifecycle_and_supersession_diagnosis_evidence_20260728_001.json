@@ -1,0 +1,153 @@
+{
+  "packet_id": "D_PREDECESSOR_LIFECYCLE_AND_SUPERSESSION_DIAGNOSIS_20260728_001",
+  "diagnostic_id": "DIAG_D_PREDECESSOR_LIFECYCLE_SUPERSESSION_20260728_001",
+  "execution_timestamp": "2026-07-28T05:40:00Z",
+  "repository_head": "646065a84052c0e2956e5d249460ee01fd098421",
+  "repository_status_before": {
+    "known_status": [
+      "M registry/governance_hash_registry.json",
+      "M scripts/db/index_artifacts.py",
+      "?? tests/test_index_artifacts_self_database_exclusion.py",
+      "?? departments/analysis/campaigns/CAMPAIGN_D_VALID_REL_TOKEN_C_INDEXER_PERMISSION_DIAGNOSIS_20260727_001/",
+      "?? departments/analysis/crawl_reports/analysis_crawl_20260728_current_governed_state_001.json",
+      "?? departments/analysis/crawl_reports/analysis_crawl_20260728_current_governed_state_001.md",
+      "?? departments/colab/notebook_designs/semiclassical_gravity_test.ipynb",
+      "?? outputs/governance/evidence/PATCH_D_VALID_REL_TOKEN_C_20260727_001/20260728T001312.198560Z_evidence.json"
+    ],
+    "protected_files_were_not_reset_or_staged": true
+  },
+  "protected_infrastructure_hash_verification": {
+    "status": "PASS",
+    "files": [
+      {"path": "scripts/db/index_artifacts.py", "sha256": "04B0E5793D83E2360B79DDA91A945B3B7B9FBAF1FC2D65BCF604CCD6D003DB3D", "expected_sha256": "04B0E5793D83E2360B79DDA91A945B3B7B9FBAF1FC2D65BCF604CCD6D003DB3D"},
+      {"path": "tests/test_index_artifacts_self_database_exclusion.py", "sha256": "B68CB0FBF0A7BE406ABF5D2EAB2FC8996B754AD193F612EB2FF1D27E9567413D", "expected_sha256": "B68CB0FBF0A7BE406ABF5D2EAB2FC8996B754AD193F612EB2FF1D27E9567413D"}
+    ]
+  },
+  "supersession_validator_path": "scripts/db/audit_supersession_edges.py",
+  "supersession_validator_sha256": "FE73412E43EE602DC96D5D16A1B827923A103DF81E300DEA68FE6E7332F8AC2F",
+  "supersession_validator_input_surfaces": {
+    "database": "registry/db/acellorator_index.sqlite",
+    "table": "supersession_edges",
+    "joined_table": "artifacts",
+    "schema": "registry/db/schema.sql",
+    "governance_description": "registry/db/README.md",
+    "global_consumer": "scripts/db/db_health_check.py"
+  },
+  "supersession_validator_schema_and_rules": {
+    "edge_columns": ["id", "from_artifact_id", "to_artifact_id", "relation", "evidence_path", "confidence", "reason", "timestamp", "indexed_at"],
+    "failure_rules": ["missing_artifact_refs", "self_edges"],
+    "warning_rules": ["duplicate_edges", "cycle_candidates", "weak_confidence_ratio_over_0_75", "verified_confidence_ratio_under_0_05", "retrieval_impact_warning"],
+    "reciprocal_metadata_constraint": "NOT_IMPLEMENTED_BY_VALIDATOR",
+    "lifecycle_constraint": "NOT_IMPLEMENTED_BY_VALIDATOR",
+    "advisory_specification": "README identifies supersession_edges as advisory lineage metadata, but db_health_check promotes missing reference integrity to a db_validation error."
+  },
+  "supersession_failure_count": 73,
+  "supersession_failures": {
+    "audit_command": "python scripts/db/audit_supersession_edges.py --db registry/db/acellorator_index.sqlite --sample 0",
+    "audit_status": "fail",
+    "total_edges": 73,
+    "relation_counts": {"supersedes": 73},
+    "confidence_counts": {"verified": 73},
+    "missing_from_artifact": 73,
+    "missing_to_artifact": 73,
+    "self_edges": 0,
+    "duplicate_edges": 0,
+    "cycle_candidates": 0,
+    "edge_ids": [12995,12996,12997,12998,12999,13000,13001,13002,13003,13004,13005,13006,13007,13008,13009,13010,13011,13012,13013,13014,13015,13016,13017,13018,13019,13020,13021,13022,13023,13024,13025,13026,13027,13028,13029,13030,13031,13032,13033,13034,13035,13036,13037,13038,13039,13040,13041,13042,13043,13044,13045,13046,13047,13048,13049,13050,13051,13052,13053,13054,13055,13056,13057,13058,13059,13060,13061,13062,13063,13064,13065,13066,13067],
+    "edge_id_range_is_contiguous": true,
+    "source_target_record": "Every listed edge has a non-null from_artifact_id and to_artifact_id, but both LEFT JOIN artifact paths are null. Exact numeric source/target pairs were read-only confirmed in the diagnostic transcript.",
+    "representative_records": [
+      {"edge_id":12995,"from_artifact_id":22061,"to_artifact_id":22060,"evidence_path":"docs\\MONO_PROCESS_MATHEMATICAL_SCHEMA_V2_2.md"},
+      {"edge_id":12996,"from_artifact_id":22695,"to_artifact_id":22713,"evidence_path":"docs\\theory\\foundational\\5_03_26 unity\\math\\REGISTRY_lemmas.md"},
+      {"edge_id":13020,"from_artifact_id":22705,"to_artifact_id":22718,"evidence_path":"docs\\theory\\foundational\\5_03_26 unity\\math\\WORKFLOW_ADDITIVE_ONLY.md"},
+      {"edge_id":13049,"from_artifact_id":22878,"to_artifact_id":22868,"evidence_path":"docs\\theory\\foundational\\5_03_26 unity\\math\\proofs\\P015_Closed_Core_Specification.md"},
+      {"edge_id":13067,"from_artifact_id":22936,"to_artifact_id":22762,"evidence_path":"docs\\theory\\foundational\\5_03_26 unity\\math\\theorems\\T004_hierarchical_stabilization.md"}
+    ],
+    "validator_message": "Edges reference artifact IDs that do not resolve to artifacts rows (LEFT JOIN missing).",
+    "failure_classifications": ["STALE_DATABASE_PROJECTION", "PRE_EXISTING_UNRELATED_DEFECT", "ADVISORY_EDGE_INCORRECTLY_BLOCKING"]
+  },
+  "task_relation_analysis": {
+    "relation_to_indexer_patch": "The current indexer patch skips the active database and sidecars; it does not create, delete, or rebuild supersession_edges. The orphaned edge rows are therefore unrelated to the indexer source change.",
+    "temporal_evidence": "All 73 edges have indexed_at 2026-07-24 07:03:56, while the current artifact index was rebuilt later and the joined artifact IDs no longer resolve.",
+    "root_cause": "The artifact projection was refreshed without rebuilding the supersession edge projection, leaving edge foreign-key-like references to obsolete artifact row IDs.",
+    "smallest_projection_repair_candidate": "Rebuild the supersession edge projection from explicit source declarations after confirming current artifact paths; this is separate from predecessor lifecycle repair."
+  },
+  "source_relation_patch_gate_result": {
+    "exact_command": "python scripts/query_governance.py patch-gate --patch-id PATCH_D_SOURCE_RELATION_C_20260727_001 --target registry/governance/patches/PATCH_D_SOURCE_RELATION_C_20260727_001.json --level governance",
+    "decision": "block",
+    "reason": "Blocked by: missing_provenance, missing_core_rule, non_additive_patch_mode",
+    "patch_chain_status": "unknown",
+    "patch_chain_decision": "defer",
+    "blocking_conditions": ["missing_provenance", "missing_core_rule", "non_additive_patch_mode"],
+    "canonical_lifecycle_state": "APPLIED_LITERAL_PLACEMENT",
+    "missing_runtime_fields": ["mode=additive", "basis", "core_rule", "required_repo_changes", "success_criteria"],
+    "missing_transition": "No normalized applied/closed lifecycle transition or governance_change_ledger entry was found for this patch.",
+    "authority_decision": "allow for registry target; gate remains block for lifecycle/provenance reasons",
+    "query_side_effect": "This diagnostic query wrote one governance_decision_log/governance_events record and external evidence despite the packet's read-only authority; recorded under unexpected_mutations."
+  },
+  "derive_rel_patch_gate_result": {
+    "exact_command": "NOT_EXECUTED: the canonical patch-gate command writes runtime decision/evidence records and database mutation authority was explicitly NONE",
+    "decision": "block",
+    "reason": "Dependency chain is not yet satisfied",
+    "basis": "Reconstructed from the canonical derive patch, its depends_on source patch, the recorded global patch-chain validation, and current source gate result.",
+    "canonical_lifecycle_state": "APPLIED_VALIDATED",
+    "database_runtime_lifecycle_state": "blocked in patch-chain projection",
+    "blocking_dependency": "PATCH_D_SOURCE_RELATION_C_20260727_001 is unknown/defer",
+    "missing_transition": "No normalized runtime completion transition for the prerequisite source patch; derive cannot satisfy its declared prerequisite."
+  },
+  "valid_rel_token_patch_gate_result": {
+    "exact_command": "Previously recorded: python scripts/query_governance.py patch-gate --patch-id PATCH_D_VALID_REL_TOKEN_C_20260727_001 --target registry/governance/patches/PATCH_D_VALID_REL_TOKEN_C_20260727_001.json --level governance",
+    "decision": "block",
+    "reason": "Blocked by: dependency_chain_not_satisfied",
+    "blocking_dependency_edges": ["PATCH_D_SOURCE_RELATION_C_20260727_001 -> PATCH_D_VALID_REL_TOKEN_C_20260727_001", "PATCH_D_DERIVE_REL_C_20260727_001 -> PATCH_D_VALID_REL_TOKEN_C_20260727_001"],
+    "database_runtime_lifecycle_state": "blocked",
+    "canonical_lifecycle_state": "PATCH_D_VALID_REL_TOKEN_C placement evidence recorded; no commit/close transition"
+  },
+  "predecessor_canonical_lifecycle_records": {
+    "PATCH_D_SOURCE_RELATION_C_20260727_001": {"status":"APPLIED_LITERAL_PLACEMENT","packet_type":"ADDITIVE_FORMAL_DEFINITION_AND_LITERAL_PLACEMENT_INSTRUCTION","has_mode":false,"has_basis":false,"has_core_rule":false,"has_required_repo_changes":false,"has_success_criteria":false,"governance_ledger_entry":false,"induction_queue_status":"bound_to_registry"},
+    "PATCH_D_DERIVE_REL_C_20260727_001": {"status":"APPLIED_VALIDATED","mode":"additive","has_basis":true,"has_core_rule":true,"depends_on":["PATCH_D_SOURCE_RELATION_C_20260727_001"],"governance_ledger_entry":false,"induction_queue_status":"bound_to_registry"}
+  },
+  "predecessor_database_lifecycle_records": {
+    "PATCH_D_SOURCE_RELATION_C_20260727_001": {"latest_direct_decision":"block","decision_id":"DEC-00548E39F6A4","patch_chain_status":"unknown","patch_chain_decision":"defer","reason":"missing_provenance, missing_core_rule, non_additive_patch_mode","created_at":"2026-07-28 05:38:52"},
+    "PATCH_D_DERIVE_REL_C_20260727_001": {"direct_gate_query":"not executed due mutation prohibition","projected_patch_chain_status":"blocked","projected_reason":"Dependency chain is not yet satisfied"},
+    "PATCH_D_VALID_REL_TOKEN_C_20260727_001": {"latest_decision_id":"DEC-5B81A20D6F53","decision":"block","reason":"dependency_chain_not_satisfied","created_at":"2026-07-28 00:13:12"}
+  },
+  "canonical_database_mismatches": [
+    {"patch_id":"PATCH_D_SOURCE_RELATION_C_20260727_001","canonical":"APPLIED_LITERAL_PLACEMENT","runtime":"unknown/defer","mismatch":"canonical placement status is not a normalized runtime lifecycle status and lacks provenance/core-rule fields"},
+    {"patch_id":"PATCH_D_DERIVE_REL_C_20260727_001","canonical":"APPLIED_VALIDATED","runtime":"blocked","mismatch":"declared prerequisite source patch remains unknown/defer"}
+  ],
+  "missing_lifecycle_transitions": [
+    "PATCH_D_SOURCE_RELATION_C_20260727_001: normalized applied/close transition and governance ledger provenance",
+    "PATCH_D_DERIVE_REL_C_20260727_001: prerequisite-satisfied transition after source lifecycle normalization",
+    "PATCH_D_VALID_REL_TOKEN_C_20260727_001: dependent closeout cannot transition while both predecessors are unresolved"
+  ],
+  "blocking_dependency_edges": [
+    {"from":"PATCH_D_SOURCE_RELATION_C_20260727_001","to":"PATCH_D_DERIVE_REL_C_20260727_001","relation":"REQUIRES_COMPLETED_PREDECESSOR","status":"unsatisfied"},
+    {"from":"PATCH_D_SOURCE_RELATION_C_20260727_001","to":"PATCH_D_VALID_REL_TOKEN_C_20260727_001","relation":"SOURCE_SEMANTICS_PREREQUISITE","status":"unsatisfied"},
+    {"from":"PATCH_D_DERIVE_REL_C_20260727_001","to":"PATCH_D_VALID_REL_TOKEN_C_20260727_001","relation":"TOKEN_DERIVATION_PREREQUISITE","status":"blocked"}
+  ],
+  "authority_catalog_findings": {
+    "target_authority": "registry",
+    "target_decision": "allow",
+    "semantic_targets": [],
+    "authority_conflict": false,
+    "finding": "The gate is blocked by lifecycle/provenance/dependency evaluation, not by an authority-catalog conflict."
+  },
+  "reprojection_candidate_command": "python scripts/db/build_supersession_edges.py --apply",
+  "reprojection_candidate_effect": "Would rebuild supersession_edges from explicit source declarations and may resolve the 73 orphan references; it would not repair predecessor lifecycle metadata or patch-gate provenance.",
+  "reprojection_executed": false,
+  "recommended_next_repair_class": "MULTIPLE_BLOCKERS_REQUIRE_ORDERED_REPAIR",
+  "recommended_repair_order": [
+    "1. In a separate authorized database-maintenance packet, reproject supersession_edges using the governed builder and verify all source/target artifact references resolve.",
+    "2. In a separate lifecycle-governance packet, normalize PATCH_D_SOURCE_RELATION_C with its required provenance, additive mode, core rule, execution surface, and explicit lifecycle transition/ledger record.",
+    "3. Re-evaluate PATCH_D_DERIVE_REL_C after the source predecessor is satisfied; then re-evaluate PATCH_D_VALID_REL_TOKEN_C.",
+    "4. Run fresh global validation and patch-gate checks only after the preceding repairs are authorized and complete."
+  ],
+  "recommended_next_repair_reason": "Two independent blockers are present: 73 stale orphaned supersession edges and an incomplete predecessor lifecycle record. A single edge cleanup cannot satisfy the lifecycle gate, and a lifecycle repair cannot repair the DB lineage projection.",
+  "protected_surface_diff_summary": "Protected indexer and test hashes remained exact. No semantic definitions, patch records, lifecycle records, supersession edges, database rows, permissions, or commits were intentionally changed.",
+  "unexpected_mutations": [
+    {"cause":"The mandated source patch-gate command was executed before its database-writing behavior was detected.","surfaces":["registry/db/acellorator_index.sqlite::governance_decision_log","registry/db/acellorator_index.sqlite::governance_events","outputs/governance/evidence/PATCH_D_SOURCE_RELATION_C_20260727_001/20260728T053852.174339Z_evidence.json"],"details":"One source-patch decision record/event and external evidence file were written. No lifecycle or supersession edge was edited; no manual DB row edit occurred."}
+  ],
+  "repository_status_after": "Campaign evidence added; protected infrastructure remains uncommitted and unchanged; no commit, reset, cleanup, or repair performed.",
+  "final_result": "FAIL_UNEXPECTED_MUTATION"
+}

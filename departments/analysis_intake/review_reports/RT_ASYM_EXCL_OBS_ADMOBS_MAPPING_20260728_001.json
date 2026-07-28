@@ -1,0 +1,40 @@
+{
+  "artifact_type": "PROVISIONAL_NARROW_MAPPING_PATCH",
+  "artifact_id": "RT_ASYM_EXCL_OBS_ADMOBS_MAPPING_20260728_001",
+  "status": "PROVISIONAL_READY_FOR_HUMAN_REVIEW",
+  "canonicality": "NON_CANONICAL_CANDIDATE",
+  "claim_ceiling": "C1_MODEL_RELATIVE",
+  "source_decision": "RT_DEVADM_ADMOBS_DELTA_A_HUMAN_REVIEW_20260728_001",
+  "target_specification": "RT_ASYM_EXCLUSION_OPERATOR_DEFINITION_20260728_001",
+  "purpose": "Replace the generic observation-admissibility predicate with an explicit DevAdm_x-to-AdmObs_x mapping while preserving delta_a as the whole-continuation filter.",
+  "identity_rule": "DevAdm_x != AdmObs_x != delta_a",
+  "formal_mapping": {
+    "candidate_deviation": "d_x(o) := DevRel_x(o, B_x, D_rel)",
+    "evaluation": "v := DevAdm_x(d_x(o); B_x, D_rel, R)",
+    "projection": "AdmObs_x(o; B_x, D_rel, R) := Map_obs(v)",
+    "map_admissible": "Map_obs(ADMISSIBLE(w)) = TRUE",
+    "map_inadmissible": "Map_obs(INADMISSIBLE(w)) = FALSE",
+    "map_undefined": "Map_obs(UNDEFINED(e)) = UNDEFINED"
+  },
+  "excl_obs_binding": {
+    "admissible_family": "Omega_x_adm := {o in Omega_obs | AdmObs_x(o; B_x, D_rel, R) = TRUE}",
+    "excluded_family": "Omega_x_exc := {o in Omega_obs | AdmObs_x(o; B_x, D_rel, R) = FALSE}",
+    "undefined_invocation": "If any required orientation mapping is UNDEFINED, Excl_obs_x returns UNDEFINED_INVOCATION unless partial-family semantics are explicitly declared.",
+    "non_annihilation": "The operator excludes orientations, never >S<."
+  },
+  "gamma_O_bridge": {
+    "definition": "Gamma_O(q, c, R, -(i)) := AdmObs_x(ObsOrient(q); B_x(c), D_rel(c), R)",
+    "full_delta_a_context": "delta_a(Q; c, R, -(i)) := {q in Q | Gamma_E(q) AND Gamma_R(q) AND Gamma_T(q) AND Gamma_O(q)}",
+    "restriction": "AdmObs_x supplies at most Gamma_O and cannot independently establish whole-continuation admissibility."
+  },
+  "tests": [
+    {"id": "ADMOBS-MAP-001", "expected": "ADMISSIBLE maps to TRUE and preserves provenance."},
+    {"id": "ADMOBS-MAP-002", "expected": "INADMISSIBLE maps to FALSE and records orientation exclusion."},
+    {"id": "ADMOBS-MAP-003", "expected": "UNDEFINED maps to UNDEFINED and blocks total exclusion classification."},
+    {"id": "ADMOBS-MAP-004", "expected": "AdmObs_x does not equal delta_a and does not bypass Gamma_E, Gamma_R, or Gamma_T."},
+    {"id": "ADMOBS-MAP-005", "expected": "Empty Omega_x_adm does not imply symmetry absence or zero-state."}
+  ],
+  "not_changed": ["delta_a", "P_adm", "Gamma_E", "Gamma_R", "Gamma_T", "delta_alpha", "D-semantics obligations", "canonical textbook", "canonical registries"],
+  "next_action": "Human review of the explicit mapping and the UNDEFINED partial-family policy.",
+  "human_review_required": true
+}

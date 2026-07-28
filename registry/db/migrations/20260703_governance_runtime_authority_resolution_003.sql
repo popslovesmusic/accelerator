@@ -218,4 +218,52 @@ SELECT
     'allow' AS decision,
     'The textbook remains the long-form narrative authority and is not replaced by runtime projections.' AS reason,
     '["docs/textbook/mono_process_textbook_complete.md","docs/governance/GLOBAL_VALIDATION_ROUTINE.md"]' AS evidence_paths,
+    '[]' AS warnings
+UNION ALL
+SELECT
+    'docs/theory/foundational/5_03_26 unity/math/notes/d_derive_rel_c_definition_20260727_001.json' AS target_pattern,
+    'docs' AS authority_owner,
+    'docs/theory/foundational/5_03_26 unity/math/notes/d_derive_rel_c_definition_20260727_001.json' AS authority_source,
+    'current' AS supersession_status,
+    '[]' AS superseded_by,
+    'clear' AS conflict_state,
+    'allow' AS decision,
+    'Canonical D-semantics definition artifact is governed as an exact docs definition surface.' AS reason,
+    '["docs/theory/foundational/5_03_26 unity/math/notes/d_derive_rel_c_definition_20260727_001.json","docs/governance/GLOBAL_VALIDATION_ROUTINE.md"]' AS evidence_paths,
+    '[]' AS warnings
+UNION ALL
+SELECT
+    'registry/math/dependency_graph_registry.json' AS target_pattern,
+    'registry' AS authority_owner,
+    'registry/math/dependency_graph_registry.json' AS authority_source,
+    'current' AS supersession_status,
+    '[]' AS superseded_by,
+    'clear' AS conflict_state,
+    'allow' AS decision,
+    'The dependency graph registry is a canonical registry synchronization target for additive D-semantics bindings.' AS reason,
+    '["registry/math/dependency_graph_registry.json","registry/governance_change_ledger.json"]' AS evidence_paths,
+    '[]' AS warnings
+UNION ALL
+SELECT
+    'registry/induction_registry.json' AS target_pattern,
+    'registry' AS authority_owner,
+    'registry/induction_registry.json' AS authority_source,
+    'current' AS supersession_status,
+    '[]' AS superseded_by,
+    'clear' AS conflict_state,
+    'allow' AS decision,
+    'The induction registry is the canonical registry synchronization target for governed induction records.' AS reason,
+    '["registry/induction_registry.json","registry/governance_change_ledger.json"]' AS evidence_paths,
+    '[]' AS warnings
+UNION ALL
+SELECT
+    'governance/live/induction_queue.json' AS target_pattern,
+    'governance' AS authority_owner,
+    'governance/live/induction_queue.json' AS authority_source,
+    'current' AS supersession_status,
+    '[]' AS superseded_by,
+    'clear' AS conflict_state,
+    'allow' AS decision,
+    'The live induction queue is the canonical governed queue for admitted induction records.' AS reason,
+    '["governance/live/induction_queue.json","governance/live/governance_constitution.json"]' AS evidence_paths,
     '[]' AS warnings;
