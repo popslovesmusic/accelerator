@@ -20,4 +20,6 @@ Required before execution:
 - Produce a manifest, per-row hashes, and an explicit falsification report.
 - Bind any result archive through the induction queue and Colab archive registry before interpretation.
 
+Post-run documentation is provided by `RT_Notebook_23_D_E_Held_Out_Stress_Analysis.ipynb`. With no archive, it records `BLOCKED_NO_EXECUTION_ARCHIVE`; with a complete archive, it emits bounded counts, replay agreement, and falsification findings for governed review.
+
 The test does not promote `OBL-D-001D`, `OBL-D-001E`, the D package, or any external claim above its governed ceiling.
