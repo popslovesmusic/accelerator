@@ -47,7 +47,7 @@ This derives non-collapse only for the stipulated profile and projected pair. It
 
 `restricted_local_argument_only`
 
-Human review status: pending. `OBL-D-001E` remains `OPEN`.
+Human review status: `APPROVED_BOUNDED` under `D_HUMAN_REVIEW_APPROVAL_P127_P128_20260730_001`. `OBL-D-001E` is `DISCHARGED_BOUNDED`; the C1 ceiling and theorem-promotion block remain active.
 
 ## Falsification vectors
 

@@ -50,7 +50,7 @@ This is a conditional instance derivation. It does not prove that the premises h
 
 `restricted_local_argument_only`
 
-Human review status: pending. `OBL-D-001D` remains `OPEN`.
+Human review status: `APPROVED_BOUNDED` under `D_HUMAN_REVIEW_APPROVAL_P127_P128_20260730_001`. `OBL-D-001D` is `DISCHARGED_BOUNDED`; the C1 ceiling and theorem-promotion block remain active.
 
 ## Falsification vectors
 
