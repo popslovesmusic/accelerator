@@ -1,0 +1,16 @@
+{
+  "fixture_set_id": "D_INDEPENDENT_ADVERSARIAL_REVIEW_FIXTURES_20260730",
+  "cases": [
+    {"id":"D-ADV-REP-POSITIVE","class":"representability","type_p":"TYPE_PROJECTION_C","type_q":"TYPE_PROJECTION_C","witness":true,"witness_context":"C","context":"C","trace":true,"history":true,"expected":"REPRESENTABLE"},
+    {"id":"D-ADV-REP-WRONG-TYPE","class":"representability","type_p":"TYPE_PROJECTION_C","type_q":"TYPE_CONTINUATION","witness":true,"witness_context":"C","context":"C","trace":true,"history":true,"expected":"REJECT_TYPE"},
+    {"id":"D-ADV-REP-CROSS-CONTEXT","class":"representability","type_p":"TYPE_PROJECTION_C","type_q":"TYPE_PROJECTION_C","witness":true,"witness_context":"C2","context":"C1","trace":true,"history":true,"expected":"REJECT_CONTEXT"},
+    {"id":"D-ADV-REP-MISSING-WITNESS","class":"representability","type_p":"TYPE_PROJECTION_C","type_q":"TYPE_PROJECTION_C","witness":false,"witness_context":"C","context":"C","trace":true,"history":true,"expected":"REJECT_WITNESS"},
+    {"id":"D-ADV-REP-MISSING-HISTORY","class":"representability","type_p":"TYPE_PROJECTION_C","type_q":"TYPE_PROJECTION_C","witness":true,"witness_context":"C","context":"C","trace":true,"history":false,"expected":"REJECT_HISTORY"},
+    {"id":"D-ADV-NC-EXACT","class":"noncollapse","epsilon":2,"distinction":2,"context_nonempty":true,"distinct":true,"expected":"ADMIT"},
+    {"id":"D-ADV-NC-ZERO","class":"noncollapse","epsilon":2,"distinction":0,"context_nonempty":true,"distinct":false,"expected":"REJECT_DISTINCTION"},
+    {"id":"D-ADV-NC-SUBTHRESHOLD","class":"noncollapse","epsilon":2,"distinction":1,"context_nonempty":true,"distinct":true,"expected":"REJECT_DISTINCTION"},
+    {"id":"D-ADV-NC-BAD-PROFILE","class":"noncollapse","epsilon":0,"distinction":2,"context_nonempty":true,"distinct":true,"expected":"REJECT_PROFILE"},
+    {"id":"D-ADV-NORM-CYCLE","class":"normalization","route":[3,2,3],"expected":"BLOCK_CYCLE"},
+    {"id":"D-ADV-NORM-DECREASING","class":"normalization","route":[3,2,1,0],"expected":"CONDITIONAL_TERMINATION"}
+  ]
+}
