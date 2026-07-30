@@ -1,0 +1,83 @@
+{
+  "artifact_type": "PROVISIONAL_BINARY_CONSTRAINT_OVERLAP_ANALYSIS",
+  "artifact_id": "RT_ADMOBS_FCI004_FCI005_OVERLAP_ANALYSIS_20260728_001",
+  "status": "PROVISIONAL_READY_FOR_HUMAN_REVIEW",
+  "canonicality": "NON_CANONICAL_CANDIDATE",
+  "claim_ceiling": "C1_MODEL_RELATIVE",
+  "source_artifacts": [
+    "docs/theory/foundational/5_03_26 unity/math/proofs/P_O_CALC_001_partial_composition.md",
+    "registry/operator_registry.json",
+    "departments/analysis_intake/review_reports/RT_ADMOBS_FAMILY_CONSTRAINT_SET_INVENTORY_20260728_001.json"
+  ],
+  "candidate_comparison": {
+    "FCI-004": {
+      "surface": "O_b composed with O_a",
+      "scope": "Two successive typed orientation transformations",
+      "guards": [
+        "Typed admissible continuation",
+        "Distinction preservation",
+        "Closure-class preservation",
+        "Output orientation class admissible as input for O_b"
+      ],
+      "source_status": "FORMAL_PROCEDURAL_ONLY"
+    },
+    "FCI-005": {
+      "surface": "otimes",
+      "scope": "Two typed operands X and Z under context Y",
+      "guards": [
+        "Operand and context typing",
+        "Distinction above epsilon",
+        "Nonempty delta_a continuation",
+        "Closure-class compatibility",
+        "Associativity context-bound only"
+      ],
+      "source_status": "C1_DEFINED_PROVISIONAL"
+    }
+  },
+  "overlap_result": {
+    "classification": "SPECIALIZATION_CANDIDATE",
+    "reason": "FCI-004 may be an orientation-specific instantiation of the broader typed partial-composition guards represented by FCI-005 when O_a, O_b, X, Z, and Y are typed over the observation-orientation domain.",
+    "shared_logical_effect": [
+      "Typed operand or orientation compatibility",
+      "Admissibility preservation",
+      "Closure-support preservation"
+    ],
+    "non_shared_or_extra_guards": [
+      "FCI-005 explicitly includes distinction-floor and delta_a nonempty conditions.",
+      "FCI-004 explicitly names orientation-class compatibility and orientation degeneracy failure."
+    ],
+    "deduplication_status": "NOT_YET_AUTHORIZED"
+  },
+  "required_bridge_tests": [
+    {
+      "test_id": "FCI-BRIDGE-001",
+      "condition": "O_a and O_b output and consume Orientation_x elements or typed transformations over Omega_obs.",
+      "status": "OPEN"
+    },
+    {
+      "test_id": "FCI-BRIDGE-002",
+      "condition": "The FCI-004 context maps explicitly to B_x, D_rel, and R without completed RefOrient or ProjectBounded output.",
+      "status": "OPEN"
+    },
+    {
+      "test_id": "FCI-BRIDGE-003",
+      "condition": "Every FCI-004 failure guard is preserved by the projected FCI-005 binary constraint.",
+      "status": "OPEN"
+    },
+    {
+      "test_id": "FCI-BRIDGE-004",
+      "condition": "The projection does not turn otimes into an orientation-family or higher-order predicate.",
+      "status": "OPEN"
+    }
+  ],
+  "binding_decision": {
+    "BCon_x": "REMAINS_UNBOUND",
+    "H_x": "UNCHANGED_UNDECLARED",
+    "FCI-004": "SPECIALIZATION_CANDIDATE_PENDING_TYPE_BRIDGE",
+    "FCI-005": "GENERAL_BINARY_SOURCE_CANDIDATE_PENDING_TYPE_BRIDGE",
+    "deduplicate_now": false
+  },
+  "next_action": "Resolve the FCI-BRIDGE-001 through FCI-BRIDGE-004 type tests before defining a projected BCon_x member.",
+  "not_changed": ["O_b", "O_a", "otimes", "O_adm", "W_adm", "C_orient", "H_x", "delta_a", "canonical registries", "canonical textbook"],
+  "human_review_required": true
+}

@@ -1,0 +1,101 @@
+{
+  "artifact_type": "PROVISIONAL_BRIDGE_SEMANTIC_COMPLETION_SCAFFOLD",
+  "artifact_id": "RT_ADMOBS_FCI005_BRIDGE_SEMANTIC_COMPLETION_20260728_001",
+  "status": "PROVISIONAL_READY_FOR_BRIDGE_SEMANTIC_COMPLETION",
+  "canonicality": "NON_CANONICAL_CANDIDATE",
+  "claim_ceiling": "C1_MODEL_RELATIVE",
+  "source_review": "RT_ADMOBS_FCI005_VERDICT_BRIDGE_REPAIR_REVIEW_20260728_001",
+  "carrier_bridge": {
+    "result_type": "CarrierBridgeResult_x",
+    "variants": ["REPRESENTED", "NOT_REPRESENTED", "UNDEFINED"],
+    "evaluator_signature": "EvalOrientCarrierBridge_x(X, o; D_rel, carrier_provenance) : CarrierBridgeResult_x",
+    "required_checks": [
+      "X has a declared source carrier type.",
+      "o belongs to the observation-orientation type of Omega_obs.",
+      "Provenance identifies source and mapping rule.",
+      "Mapping rule is applicable in D_rel.",
+      "No downstream object is required."
+    ],
+    "undefined_policy": "Missing type, provenance, applicability, or pre-RefOrient availability yields UNDEFINED."
+  },
+  "context_bridge": {
+    "result_type": "ContextBridgeResult_x",
+    "variants": ["CONTEXT_ALIGNED", "CONTEXT_MISMATCH", "UNDEFINED"],
+    "evaluator_signature": "EvalSourceContextBridge_x(Y; B_x, D_rel, R, context_provenance) : ContextBridgeResult_x",
+    "required_components": [
+      "Boundary component mapping.",
+      "Relational-domain component mapping.",
+      "Residue component mapping.",
+      "Context provenance.",
+      "Pre-RefOrient availability."
+    ],
+    "undefined_policy": "Missing component mapping, provenance, or pre-RefOrient availability yields UNDEFINED."
+  },
+  "dependency_stage_evidence": {
+    "signature": "DependencyStageEvidence_x(value_or_predicate, source_artifact, dependency_edges, maximal_stage)",
+    "required_stage": "PRE_REF_ORIENT",
+    "prohibited_ancestors": ["RefOrient_x", "[Asym]_x", "<S>_x", "ProjectBounded", "delta_a", "realized closure"],
+    "validation_rule": "Evidence is valid only when the transitive dependency graph has no prohibited ancestor and source artifacts are identified."
+  },
+  "revised_witness_record": {
+    "signature": "BridgeWitnessRecord_x := (X, Z, Y, source_ids, left_mapping_provenance, right_mapping_provenance, context_provenance, dependency_evidence)",
+    "immutability_rule": "Source identifiers and provenance references are immutable within one witness evaluation.",
+    "validation_rules": [
+      "EvalOrientCarrierBridge_x(X, o_i; D_rel, left_mapping_provenance) = REPRESENTED.",
+      "EvalOrientCarrierBridge_x(Z, o_j; D_rel, right_mapping_provenance) = REPRESENTED.",
+      "EvalSourceContextBridge_x(Y; B_x, D_rel, R, context_provenance) = CONTEXT_ALIGNED.",
+      "DependencyStageEvidence_x validates all witness dependencies as PRE_REF_ORIENT."
+    ]
+  },
+  "effective_threshold": {
+    "result_type": "EffectiveThresholdResult_x",
+    "variants": ["VALID", "INVALID", "UNDEFINED", "INCONSISTENT"],
+    "rules": {
+      "VALID": "Shared-scale and explicit-map evidence are compatible, or exactly one governed valid route applies and the other is absent.",
+      "INVALID": "A governed map is present and fails while no valid shared-scale route applies.",
+      "UNDEFINED": "Neither route is governed sufficiently to decide.",
+      "INCONSISTENT": "Shared-scale evidence and explicit threshold-map evidence conflict."
+    },
+    "binary_aggregation": "INCONSISTENT propagates as UNDEFINED at binary-constraint level while retaining a distinct diagnostic failure state."
+  },
+  "import_resolution": {
+    "imports": {
+      "RT_ADMOBS_FCI005_GUARD_STAGE_CORRECTED_20260728_001": [
+        "ThresholdBridgeResult_x",
+        "OrientCarrierBridge_x source declaration",
+        "SourceContextBridge_x source declaration"
+      ],
+      "RT_ADMOBS_FCI005_GUARD_STAGE_VERDICT_REPAIRED_20260728_001": [
+        "ThresholdDecision_x",
+        "ThresholdMapResult_x",
+        "BridgePairVerdict_x",
+        "BinaryConstraintResult_x",
+        "EvalThreshold_x",
+        "EvalThresholdMap_x",
+        "EvalFCI005BridgePairVerdict_x",
+        "EvalBCon_FCI005Distinction_x",
+        "EvalPairwiseCompatible_x"
+      ]
+    },
+    "supersession": "Definitions in RT_ADMOBS_FCI005_VERDICT_BRIDGE_REPAIRED_20260728_001 supersede earlier same-symbol definitions after current repairs.",
+    "collision_policy": "No symbol is imported without an explicit source artifact and precedence rule."
+  },
+  "test_state": {
+    "evaluator_subsuite": "PASS_DEFINITION_LEVEL",
+    "bridge_tests_001_002_004_005": "HELD_NO_WITNESS_FIXTURES",
+    "fixture_policy": "Do not construct arbitrary source records and treat them as governed witnesses.",
+    "required_before_testing": [
+      "Carrier bridge semantics.",
+      "Context bridge semantics.",
+      "Dependency-stage evidence.",
+      "Import precedence.",
+      "Threshold conflict semantics.",
+      "Separate provenance fields."
+    ]
+  },
+  "BCon_x": "UNBOUND",
+  "H_x": "UNDECLARED",
+  "delta_a": "UNCHANGED",
+  "next_action": "Construct no fixtures yet; obtain or identify governed source carrier and context records suitable for witness-backed testing.",
+  "human_review_required": true
+}

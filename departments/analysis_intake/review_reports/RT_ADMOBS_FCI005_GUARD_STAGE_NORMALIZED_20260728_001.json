@@ -1,0 +1,106 @@
+{
+  "artifact_type": "PROVISIONAL_NORMALIZED_GUARD_STAGE_DECOMPOSITION",
+  "artifact_id": "RT_ADMOBS_FCI005_GUARD_STAGE_NORMALIZED_20260728_001",
+  "status": "PROVISIONAL_READY_FOR_HUMAN_REVIEW",
+  "canonicality": "NON_CANONICAL_CANDIDATE",
+  "claim_ceiling": "C1_MODEL_RELATIVE",
+  "source_review": "RT_ADMOBS_FCI005_GUARD_STAGE_DECOMPOSITION_REVIEW_20260728_001",
+  "stage_taxonomy": [
+    "BRIDGE_PRECONDITION",
+    "PAIR_PRE_ADMISSIBILITY",
+    "POST_COMPOSITION_PRE_ADMISSIBILITY",
+    "DELTA_A_DEPENDENT",
+    "COMPOSITION_LAW",
+    "UNRESOLVED",
+    "MIXED"
+  ],
+  "guard_dispositions": [
+    {
+      "guard_id": "FCI005-G01",
+      "stage": "BRIDGE_PRECONDITION",
+      "BCon_eligibility": "NOT_A_BCON_MEMBER",
+      "use": "Prerequisite for OrientTransformObservationBridge_x or ProjectBinaryGuard_x."
+    },
+    {
+      "guard_id": "FCI005-G02",
+      "stage": "PAIR_PRE_ADMISSIBILITY",
+      "BCon_eligibility": "CONDITIONAL_CANDIDATE",
+      "candidate_symbol": "BCon_FCI005Distinction_x",
+      "requirements": [
+        "Source operands map to observation-orientation carriers.",
+        "D(X|Z) and epsilon are prebound and evaluable.",
+        "No dependency on RefOrient_x, [Asym]_x, <S>_x, or delta_a.",
+        "Distinction-collapse failure semantics are preserved."
+      ]
+    },
+    {
+      "guard_id": "FCI005-G03",
+      "stage": "DELTA_A_DEPENDENT",
+      "BCon_eligibility": "PROHIBITED"
+    },
+    {
+      "guard_id": "FCI005-G04A",
+      "stage": "POST_COMPOSITION_PRE_ADMISSIBILITY",
+      "BCon_eligibility": "NOT_DIRECT",
+      "name": "SourceResultCodomain_x"
+    },
+    {
+      "guard_id": "FCI005-G04B",
+      "stage": "DELTA_A_DEPENDENT_IF_REALIZATION_REQUIRED",
+      "BCon_eligibility": "PROHIBITED"
+    },
+    {
+      "guard_id": "FCI005-G05",
+      "stage": "COMPOSITION_LAW",
+      "BCon_eligibility": "NOT_A_BCON_MEMBER"
+    },
+    {
+      "guard_id": "FCI005-G06A",
+      "stage": "PAIR_PRE_ADMISSIBILITY",
+      "BCon_eligibility": "CONDITIONAL_CANDIDATE",
+      "name": "PreboundClosureClassCompatible_x"
+    },
+    {
+      "guard_id": "FCI005-G06B",
+      "stage": "DELTA_A_DEPENDENT",
+      "BCon_eligibility": "PROHIBITED",
+      "name": "RealizedClosureCompatible_x"
+    },
+    {
+      "guard_id": "FCI005-G07",
+      "stage": "MIXED",
+      "BCon_eligibility": "NO_AGGREGATE_PROJECTION",
+      "rule": "Decompose by failure branch before projection."
+    }
+  ],
+  "bridge_objects": {
+    "OrientCarrierBridge_x": {
+      "signature": "OrientCarrierBridge_x(X, o; D_rel) : Prop",
+      "purpose": "Relate a source operand or transformation carrier to an observation orientation without identifying them."
+    },
+    "SourceContextBridge_x": {
+      "signature": "SourceContextBridge_x(Y; B_x, D_rel, R) : Prop",
+      "purpose": "Relate source composition context to the observation admissibility context."
+    },
+    "DistinctionBridge_x": {
+      "signature": "DistinctionBridge_x(D(X|Z), d_obs(o_i,o_j); D_rel) : Prop",
+      "purpose": "Test preservation of the relevant distinction-floor failure condition."
+    }
+  },
+  "normalized_binary_candidate": {
+    "symbol": "BCon_FCI005Distinction_x",
+    "signature": "BCon_FCI005Distinction_x(o_i, o_j; X, Z, Y, epsilon, B_x, D_rel, R) : Prop",
+    "definition": "OrientCarrierBridge_x(X,o_i;D_rel) AND OrientCarrierBridge_x(Z,o_j;D_rel) AND SourceContextBridge_x(Y;B_x,D_rel,R) AND DistinctionBridge_x(D(X|Z),d_obs(o_i,o_j);D_rel) AND d_obs(o_i,o_j) > epsilon.",
+    "status": "PROVISIONAL_SIGNATURE_ONLY",
+    "BCon_x_binding": "NOT_PERFORMED"
+  },
+  "state": {
+    "BCon_x": "UNBOUND",
+    "H_x": "UNDECLARED",
+    "delta_a": "UNCHANGED",
+    "full_FCI005_projection": "PROHIBITED"
+  },
+  "next_action": "Define and test the three bridge predicates for FCI005-G02.",
+  "failure_condition": "Any bridge requiring RefOrient_x, [Asym]_x, <S>_x, or delta_a disqualifies FCI005-G02 from BCon_x eligibility.",
+  "human_review_required": true
+}

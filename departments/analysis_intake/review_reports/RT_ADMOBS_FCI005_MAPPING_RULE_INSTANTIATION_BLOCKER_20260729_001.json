@@ -1,0 +1,82 @@
+{
+  "artifact_type": "PROVISIONAL_MAPPING_RULE_INSTANTIATION_READINESS_REPORT",
+  "artifact_id": "RT_ADMOBS_FCI005_MAPPING_RULE_INSTANTIATION_BLOCKER_20260729_001",
+  "created_at": "2026-07-29T00:00:00-04:00",
+  "status": "ACTIVE_MAPPING_RULE_INSTANTIATION_BLOCKER",
+  "canonicality": "NON_CANONICAL",
+  "claim_ceiling": "C1_MODEL_RELATIVE",
+  "consumer_layer": "RT_ADMOBS_FCI005_PROVISIONAL_BRIDGE_SUPPORT",
+  "authority_overlay": "RT_ADMOBS_FCI005_IMPORT_AUTHORITY_OVERLAY_20260729_001",
+  "inspection_scope": [
+    "Existing provisional FCI-005 bridge support artifacts",
+    "Existing review reports and crawl reports",
+    "Repository mapping and authority surfaces"
+  ],
+  "required_instances": {
+    "carrier": "CarrierMappingRuleRecord_x",
+    "boundary": "ContextMappingRuleRecord_x boundary component",
+    "domain": "ContextMappingRuleRecord_x domain component",
+    "residue": "ContextMappingRuleRecord_x residue component",
+    "authority": "RuleAuthorityRecord_x for every applicable rule",
+    "provenance": "BridgeProvenanceRecord_x for every mapping record",
+    "dependency": "DependencyGraphCompletenessRecord_x independently extracted before RefOrient_x"
+  },
+  "findings": [
+    {
+      "required_surface": "CarrierMappingRuleRecord_x",
+      "result": "NOT_FOUND",
+      "evidence": "Only schema declarations were found in RT_ADMOBS_FCI005_BRIDGE_SEMANTICS_COMPLETED_SCAFFOLD_20260728_001.json; no governed carrier mapping instance exists."
+    },
+    {
+      "required_surface": "ContextMappingRuleRecord_x",
+      "result": "NOT_FOUND",
+      "evidence": "Only schema declarations and component evaluator names were found; no independently governed boundary, domain, or residue mapping instances exist."
+    },
+    {
+      "required_surface": "RuleAuthorityRecord_x",
+      "result": "NOT_FOUND",
+      "evidence": "The rule-authority schema exists, but no applicable carrier or context rule authority records are instantiated."
+    },
+    {
+      "required_surface": "BridgeProvenanceRecord_x",
+      "result": "NOT_FOUND",
+      "evidence": "The provenance schema exists, but no concrete mapping provenance records have been evaluated."
+    },
+    {
+      "required_surface": "DependencyGraphCompletenessRecord_x",
+      "result": "NOT_FOUND",
+      "evidence": "The completeness schema exists, but no independent dependency extraction record or graph is attached to an FCI-005 mapping."
+    }
+  ],
+  "non_binding_repository_material": [
+    "Existing unrelated domain-mapping registries do not establish the exact FCI-005 source-carrier or context mappings.",
+    "Provisional bridge schemas do not count as governed mapping instances.",
+    "Human authority overlay decisions authorize provisional symbol consumption only; they do not create mapping-rule facts."
+  ],
+  "gate_state": {
+    "import_authority": "IMPORT_AUTHORITY_VERIFIED_PROVISIONALLY",
+    "mapping_rule_instantiation": "BLOCKED",
+    "dependency_completeness": "BLOCKED",
+    "witness_fixtures": "BLOCKED",
+    "BCon_x": "UNBOUND",
+    "H_x": "UNDECLARED",
+    "delta_a": "UNCHANGED"
+  },
+  "next_required_evidence": [
+    "One independently governed carrier mapping record with exact source and target types.",
+    "Boundary, domain, and residue context mapping records with component-level provenance.",
+    "RuleAuthorityRecord_x instances resolving all applicable mapping rules.",
+    "BridgeProvenanceRecord_x instances validated independently.",
+    "An independently extracted dependency graph and completeness record proving PRE_REF_ORIENT availability."
+  ],
+  "final_result": "FAIL_MAPPING_RULE_SET_INSTANTIATION_AND_DEPENDENCY_EVIDENCE_ABSENT",
+  "refinement": "A single favorable mapping record would not be sufficient; no complete applicable carrier or context rule sets, authority records, provenance records, or independent dependency completeness evidence were found.",
+  "repository_recovery_status": "EXHAUSTED_WITH_NO_GOVERNED_MAPPING_INSTANCES_FOUND",
+  "next_human_decision": "AUTHOR_NEW_PROVISIONAL_MAPPING_SEMANTICS_OR_EXCLUDE_FCI005_G02_FROM_BCON",
+  "construction_campaign": "RT_ADMOBS_FCI005_MAPPING_SEMANTICS_CONSTRUCTION_20260729_001",
+  "construction_authorized": true,
+  "construction_authority_decision_id": "FCI005-MAP-CONSTRUCTION-AUTH-001",
+  "construction_authority_level": "HUMAN_PROVISIONAL_C1",
+  "construction_authority_effective_phase": "MAP_04",
+  "construction_authority_canonicality": "NON_CANONICAL"
+}

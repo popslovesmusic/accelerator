@@ -1,0 +1,100 @@
+{
+  "artifact_type": "PROVISIONAL_RULE_GOVERNANCE_COMPLETION",
+  "artifact_id": "RT_ADMOBS_FCI005_RULE_GOVERNANCE_COMPLETION_20260728_001",
+  "status": "PROVISIONAL_BRIDGE_SEMANTIC_SCAFFOLD_ACTIVE",
+  "canonicality": "NON_CANONICAL_CANDIDATE",
+  "claim_ceiling": "C1_MODEL_RELATIVE",
+  "source_review": "RT_ADMOBS_FCI005_BRIDGE_SEMANTICS_COMPLETED_SCAFFOLD_REVIEW_20260728_001",
+  "rule_evaluators": {
+    "CarrierRelationResult_x": {
+      "variants": ["RELATES", "DOES_NOT_RELATE", "UNDEFINED"],
+      "evaluator": "EvalCarrierMappingRule_x(rule, X, o; D_rel) : CarrierRelationResult_x",
+      "RELATES": "Governed rule applies to declared source/target types in D_rel and positively establishes the relation.",
+      "DOES_NOT_RELATE": "Governed applicable rule definitively rejects the relation.",
+      "UNDEFINED": "Applicability, typing, rule meaning, or required inputs are unresolved."
+    },
+    "ContextComponentResult_x": {
+      "variants": ["ALIGNED", "MISMATCH", "UNDEFINED"],
+      "evaluator": "EvalContextComponentRule_x(component_rule, source_component, target_component) : ContextComponentResult_x",
+      "ALIGNED": "Governed preserve, translate, or restrict rule accepts the component relation.",
+      "MISMATCH": "Governed applicable rule definitively rejects the component relation.",
+      "UNDEFINED": "Rule, applicability, source, target, or translation is unresolved."
+    },
+    "BridgeProvenanceValidationResult_x": {
+      "variants": ["PROVENANCE_VALID", "PROVENANCE_INVALID", "UNDEFINED"],
+      "evaluator": "EvalBridgeProvenance_x(record) : BridgeProvenanceValidationResult_x",
+      "PROVENANCE_VALID": "Artifact, digest/version, rule ID, source location, and authority status are governed and mutually consistent.",
+      "PROVENANCE_INVALID": "A governed identifier, digest, location, or authority assertion is definitively false or unauthorized.",
+      "UNDEFINED": "A required field or authority decision is absent or unresolved."
+    }
+  },
+  "rule_set_resolution": {
+    "CarrierRuleSet_x": {
+      "signature": "ApplicableCarrierRuleSet_x(X, o; D_rel)",
+      "states": ["EXPLICIT_NONEMPTY", "EXPLICIT_EMPTY", "ABSENT_OR_UNDECLARED"]
+    },
+    "carrier_aggregation": {
+      "REPRESENTED": "Nonempty applicable set, at least one authoritative RELATES, and no equally authoritative DOES_NOT_RELATE or UNDEFINED.",
+      "NOT_REPRESENTED": "Nonempty applicable set, every authoritative rule DOES_NOT_RELATE, and none UNDEFINED.",
+      "UNDEFINED": "Rule set absent, applicability unresolved, any authoritative rule unresolved, or authoritative rules conflict.",
+      "authority_exception": "Unique-authority precedence is allowed only when explicitly governed."
+    },
+    "context_aggregation": {
+      "CONTEXT_ALIGNED": "All required component rules ALIGNED.",
+      "CONTEXT_MISMATCH": "At least one required component MISMATCH.",
+      "UNDEFINED": "No component MISMATCH and at least one required component UNDEFINED.",
+      "rule_set_policy": "Apply complete applicable-rule-set or explicitly governed unique-authority semantics independently to boundary, domain, and residue components."
+    }
+  },
+  "threshold_matrix": {
+    "route_states": ["VALID", "INVALID", "ABSENT", "UNDEFINED"],
+    "effective_states": ["VALID", "INVALID", "UNDEFINED", "INCONSISTENT"],
+    "rows": [
+      {"shared":"VALID","explicit":"VALID","result":"VALID","condition":"ThresholdRoutesAgree_x"},
+      {"shared":"VALID","explicit":"INVALID","result":"INCONSISTENT"},
+      {"shared":"VALID","explicit":"ABSENT","result":"VALID"},
+      {"shared":"VALID","explicit":"UNDEFINED","result":"UNDEFINED"},
+      {"shared":"INVALID","explicit":"VALID","result":"INCONSISTENT"},
+      {"shared":"INVALID","explicit":"INVALID","result":"INVALID"},
+      {"shared":"INVALID","explicit":"ABSENT","result":"INVALID"},
+      {"shared":"INVALID","explicit":"UNDEFINED","result":"UNDEFINED"},
+      {"shared":"ABSENT","explicit":"VALID","result":"VALID"},
+      {"shared":"ABSENT","explicit":"INVALID","result":"INVALID"},
+      {"shared":"ABSENT","explicit":"ABSENT","result":"UNDEFINED"},
+      {"shared":"ABSENT","explicit":"UNDEFINED","result":"UNDEFINED"},
+      {"shared":"UNDEFINED","explicit":"VALID","result":"UNDEFINED"},
+      {"shared":"UNDEFINED","explicit":"INVALID","result":"UNDEFINED"},
+      {"shared":"UNDEFINED","explicit":"ABSENT","result":"UNDEFINED"},
+      {"shared":"UNDEFINED","explicit":"UNDEFINED","result":"UNDEFINED"}
+    ],
+    "overlap_policy": "Rows are exhaustive and non-overlapping; no ANY wildcard is used."
+  },
+  "dependency_completion": {
+    "Stage_x": {
+      "order": ["SOURCE_DECLARED", "PRE_ADMISSIBILITY", "PRE_REF_ORIENT", "REF_ORIENT", "POST_REF_ORIENT", "PROJECT_BOUNDED", "DELTA_A_REALIZATION", "REALIZED_CLOSURE"]
+    },
+    "DependencyGraphCompletenessRecord_x": {
+      "signature": "DependencyGraphCompletenessRecord_x := (root_nodes, extraction_rule, source_scope, extracted_edges_digest, extractor_provenance, authority_status)",
+      "purpose": "Independently establish that dependency edges were extracted completely from the declared source scope."
+    },
+    "validity": "EvalDependencyStage_x may return VALID_PRE_REF_ORIENT only when the graph and completeness record validate."
+  },
+  "exact_import_manifest": {
+    "artifact_id": "RT_ADMOBS_FCI005_BRIDGE_SYMBOL_IMPORT_MANIFEST_20260728_001",
+    "entries": [
+      {"symbol":"ThresholdBridgeResult_x","source_artifact_id":"RT_ADMOBS_FCI005_GUARD_STAGE_CORRECTED_20260728_001","source_digest":"DCCC2B99881757133EEED943956E6F8AD5387D78E435AD35346AC7F392543CA9","import_mode":"EXACT_SYMBOL","local_symbol":"ThresholdBridgeResult_x","supersedes_symbol_from":null,"authority_status":"PROVISIONAL"},
+      {"symbol":"OrientCarrierBridge_x","source_artifact_id":"RT_ADMOBS_FCI005_GUARD_STAGE_CORRECTED_20260728_001","source_digest":"DCCC2B99881757133EEED943956E6F8AD35346AC7F392543CA9","import_mode":"EXACT_SYMBOL","local_symbol":"OrientCarrierBridge_x","supersedes_symbol_from":null,"authority_status":"PROVISIONAL"},
+      {"symbol":"SourceContextBridge_x","source_artifact_id":"RT_ADMOBS_FCI005_GUARD_STAGE_CORRECTED_20260728_001","source_digest":"DCCC2B99881757133EEED943956E6F8AD5387D78E435AD35346AC7F392543CA9","import_mode":"EXACT_SYMBOL","local_symbol":"SourceContextBridge_x","supersedes_symbol_from":null,"authority_status":"PROVISIONAL"},
+      {"symbol":"EvalBCon_FCI005Distinction_x","source_artifact_id":"RT_ADMOBS_FCI005_GUARD_STAGE_VERDICT_REPAIRED_20260728_001","source_digest":"9B995C902ADA9CD26907F4256436D3687F9B24CFAB11AD960D1A969866D329A0","import_mode":"EXACT_SYMBOL","local_symbol":"EvalBCon_FCI005Distinction_x","supersedes_symbol_from":"RT_ADMOBS_FCI005_GUARD_STAGE_VERDICT_REPAIRED_20260728_001","authority_status":"PROVISIONAL"}
+    ],
+    "collision_policy": "No descriptive import labels are accepted; same-symbol repairs use explicit supersession."
+  },
+  "testing": {
+    "witness_fixtures": "NOT_AUTHORIZED",
+    "bridge_tests": "HELD",
+    "BCon_x": "UNBOUND",
+    "H_x": "UNDECLARED"
+  },
+  "next_action": "Obtain independently governed mapping-rule records and dependency extraction evidence before constructing witness fixtures.",
+  "human_review_required": true
+}

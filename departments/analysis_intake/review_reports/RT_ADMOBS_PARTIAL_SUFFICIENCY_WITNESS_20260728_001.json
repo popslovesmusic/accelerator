@@ -59,6 +59,13 @@
       "scope_rule": "Each h declares its required arity or full-family scope.",
       "empty_constraint_policy": "Only an explicitly declared empty H_x makes HigherOrderCompatible_x definitionally satisfied; an absent constraint definition remains unresolved."
     },
+    "BinaryOrientationConstraintSet_x": {
+      "signature": "BCon_x : BinaryOrientationConstraintSet_x",
+      "member_signature": "b : (Orientation_x x Bool) x (Orientation_x x Bool) -> Prop",
+      "consumer": "PairwiseCompatible_x",
+      "current_members": [],
+      "binding_status": "UNBOUND_PENDING_FCI_004_FCI_005_OVERLAP_ANALYSIS"
+    },
     "OrientationFamily_x": {
       "signature": "OrientationFamily_x := (F, rho_x, provenance)",
       "meaning": "A declared family F of observation orientations together with its binary classification and retained provenance.",
@@ -75,7 +82,7 @@
         "F is a subfamily of Omega_obs.",
         "rho_x is total on F.",
         "Every member of F satisfies PointwiseResolutionCompatible_x.",
-        "JointlyCompatible_x(rho_x; P_x, B_x, D_rel, R) holds for F.",
+        "JointlyCompatible_x(F; BCon_x, H_x, B_x, D_rel, R) holds.",
         "Boundary, domain, residue, and provenance constraints are retained."
       ],
       "empty_family_guard": "An empty admissible family is a failure of bounded realization under the declared scope, not symmetry annihilation."
@@ -102,16 +109,16 @@
       "status": "PROVISIONAL_PREDICATE_PENDING_EXPLICIT_RELATION"
     },
     "JointlyCompatible_x": {
-      "signature": "JointlyCompatible_x(F_x; H_x, B_x, D_rel, R) : Prop",
-      "definition": "PairwiseCompatible_x(F_x; B_x, D_rel, R) AND HigherOrderCompatible_x(F_x; H_x, B_x, D_rel, R).",
+      "signature": "JointlyCompatible_x(F_x; BCon_x, H_x, B_x, D_rel, R) : Prop",
+      "definition": "PairwiseCompatible_x(F_x; BCon_x, B_x, D_rel, R) AND HigherOrderCompatible_x(F_x; H_x, B_x, D_rel, R).",
       "role": "Primary cross-orientation compatibility relation used by GlobalJointCoherence_x.",
       "pairwise_guard": "A pairwise relation may be a necessary subcondition, but pairwise compatibility alone is not assumed sufficient for joint compatibility.",
-      "higher_order_component": "JointConstraint_x(F_x; H_x, B_x, D_rel, R) may impose constraints on the family as a whole.",
+      "higher_order_component": "JointConstraint_x(F_x; BCon_x, H_x, B_x, D_rel, R) may impose constraints on the family as a whole.",
       "status": "NEW_PROVISIONAL_RELATION"
     },
     "PairwiseCompatible_x": {
-      "signature": "PairwiseCompatible_x(F_x; B_x, D_rel, R) : Prop",
-      "definition": "For every distinct o_i and o_j represented in F_x, the joint assignment to {o_i,o_j} satisfies every declared binary orientation constraint applicable under B_x, D_rel, and R.",
+      "signature": "PairwiseCompatible_x(F_x; BCon_x, B_x, D_rel, R) : Prop",
+      "definition": "For every distinct assigned pair in F_x, the pair satisfies every applicable constraint in BCon_x under the declared boundary, domain, and residue context.",
       "role": "Necessary component of the provisional joint constraint; not sufficient by itself."
     },
     "HigherOrderCompatible_x": {
@@ -127,8 +134,8 @@
       "status": "PROVISIONAL_PREDICATE"
     },
     "JointConstraint_x": {
-      "signature": "JointConstraint_x(F_x; H_x, B_x, D_rel, R) : Prop",
-      "definition": "JointConstraint_x holds iff PairwiseCompatible_x(F_x; B_x, D_rel, R) AND HigherOrderCompatible_x(F_x; H_x, B_x, D_rel, R).",
+      "signature": "JointConstraint_x(F_x; BCon_x, H_x, B_x, D_rel, R) : Prop",
+      "definition": "JointConstraint_x holds iff PairwiseCompatible_x(F_x; BCon_x, B_x, D_rel, R) AND HigherOrderCompatible_x(F_x; H_x, B_x, D_rel, R).",
       "sufficiency_status": "Pairwise compatibility is not declared sufficient unless a separate PairwiseSufficiency_x result is established for the declared domain.",
       "empty_family_guard": "The empty family does not establish bounded realization even if the constraint evaluates vacuously."
     }
@@ -187,11 +194,24 @@
       "threshold_guard": "C_orient(F_x) >= tau implies JointlyCompatible_x only under a separate domain-scoped bridge theorem."
     }
   },
+  "h_x_state": {
+    "status": "UNDECLARED",
+    "not_equal_to": "EXPLICIT_EMPTY",
+    "consequence": "HigherOrderCompatible_x remains UNDEFINED; no positive PermittedResolution_x result may rely on completed higher-order compatibility.",
+    "empty_declaration_guard": "H_x may be declared explicitly empty only after a scoped completeness review finds no applicable irreducible higher-order or whole-family constraints."
+  },
   "pairwise_sufficiency": {
     "signature": "PairwiseSufficiency_x(D_rel, B_x, R, H_x) : Prop",
-    "definition": "For every completed orientation family F_x admissible in the declared context, PairwiseCompatible_x(F_x; B_x, D_rel, R) implies HigherOrderCompatible_x(F_x; H_x, B_x, D_rel, R).",
+    "definition": "For every completed orientation family F_x admissible in the declared context, PairwiseCompatible_x(F_x; BCon_x, B_x, D_rel, R) implies HigherOrderCompatible_x(F_x; H_x, B_x, D_rel, R).",
     "status": "OPEN_DOMAIN_SCOPED_PROOF_OBLIGATION",
-    "default": "NOT_ASSUMED"
+    "default": "NOT_ASSUMED",
+    "blocked_while": "H_x is undeclared and possible family-level sources remain unresolved."
+  },
+  "binary_candidate_reconciliation": {
+    "candidates": ["FCI-004", "FCI-005"],
+    "status": "OVERLAP_ANALYSIS_REQUIRED",
+    "allowed_classifications": ["IDENTICAL_PRESENTATIONS", "SPECIALIZATION", "GENERALIZATION", "INDEPENDENT_CONSTRAINTS"],
+    "rule": "Retain separate provenance records but deduplicate logical effect if both express the same admissibility condition."
   },
   "failure_states": [
     "NO_POSITIVE_ORIENTATION",
@@ -253,7 +273,7 @@
     "reconciliation_rule": "Do not bind JointlyCompatible_x to O_adm, W_adm, or C_orient without a separate type and semantic compatibility review.",
     "result": "HIGHER_ORDER_COMPATIBILITY_REMAINS_OPEN"
   },
-  "next_formalization": "Inventory the actual RT family-level constraints that populate H_x, including scope, arity, provenance, and pairwise decomposability.",
+  "next_formalization": "Perform bounded type-and-overlap analysis of FCI-004 and FCI-005 before binding any members into BCon_x.",
   "not_changed": ["delta_a core definition", "delta_alpha", "Excl_obs_x partial classification semantics", "Gamma_E", "Gamma_R", "Gamma_T", "D-semantics obligations", "canonical textbook", "canonical registries"],
   "human_review_required": true
 }

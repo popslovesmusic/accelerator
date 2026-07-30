@@ -32,6 +32,8 @@ For `F = {o_1, o_2, o_3}` with all three orientations assigned `TRUE`, suppose e
 
 This is a definitional test schema, not empirical evidence. It shows why pairwise compatibility cannot be promoted to sufficiency without a separate domain result.
 
+FCI-004 and FCI-005 remain separate provenance records pending classification as identical presentations, specialization, generalization, or independent constraints. No member is currently bound into `BCon_x`, and `H_x` remains undeclared rather than explicitly empty.
+
 ## Repository reconciliation
 
 Read-only inspection found related structures:

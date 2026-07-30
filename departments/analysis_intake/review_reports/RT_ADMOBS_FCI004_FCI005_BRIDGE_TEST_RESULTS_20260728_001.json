@@ -1,0 +1,54 @@
+{
+  "artifact_type": "PROVISIONAL_BINARY_CONSTRAINT_BRIDGE_TEST_RESULTS",
+  "artifact_id": "RT_ADMOBS_FCI004_FCI005_BRIDGE_TEST_RESULTS_20260728_001",
+  "status": "PROVISIONAL_READY_FOR_HUMAN_REVIEW",
+  "canonicality": "NON_CANONICAL_CANDIDATE",
+  "claim_ceiling": "C1_MODEL_RELATIVE",
+  "source_analysis": "RT_ADMOBS_FCI004_FCI005_OVERLAP_ANALYSIS_20260728_001",
+  "tests": [
+    {
+      "test_id": "FCI-BRIDGE-001",
+      "question": "Do O_a and O_b output and consume Orientation_x elements or typed transformations over Omega_obs?",
+      "observed": "The source defines O_a and O_b as typed orientation transformations over RT or aRT operands and compatible orientation classes, not as elements of the Omega_obs observation-orientation type.",
+      "result": "UNRESOLVED_TYPE_MAP",
+      "failure_class": "CONSTRAINT_SOURCE_TYPE_MISMATCH"
+    },
+    {
+      "test_id": "FCI-BRIDGE-002",
+      "question": "Does the FCI-004 context map explicitly to B_x, D_rel, and R before RefOrient and ProjectBounded?",
+      "observed": "The source uses operand and composition context, but no explicit map to boundary interaction, relational domain, and residue parameters is declared.",
+      "result": "UNRESOLVED_CONTEXT_MAP",
+      "failure_class": "CONSTRAINT_SOURCE_CONTEXT_UNRESOLVED"
+    },
+    {
+      "test_id": "FCI-BRIDGE-003",
+      "question": "Are all FCI-004 failure guards preserved by a projected FCI-005 binary constraint?",
+      "observed": "There is overlapping typing, admissibility, and closure support, but no formal projection proving preservation of every orientation degeneracy and incompatible-class failure guard.",
+      "result": "UNPROVED_GUARD_PRESERVATION",
+      "failure_class": "PROJECTED_GUARD_PRESERVATION_UNPROVED"
+    },
+    {
+      "test_id": "FCI-BRIDGE-004",
+      "question": "Does the projection avoid rebinding otimes as a family-level or higher-order predicate?",
+      "observed": "The proposed analysis keeps otimes as a source operator and does not rebind it.",
+      "result": "PASS_GUARD_PRESERVED",
+      "failure_class": null
+    }
+  ],
+  "classification": {
+    "FCI-004": "SPECIALIZATION_CANDIDATE_UNRESOLVED",
+    "FCI-005": "GENERAL_BINARY_SOURCE_CANDIDATE_UNRESOLVED",
+    "relationship": "SPECIALIZATION_NOT_ESTABLISHED",
+    "BCon_x": "REMAINS_UNBOUND",
+    "H_x": "REMAINS_UNDECLARED",
+    "deduplication": "NOT_PERFORMED"
+  },
+  "required_next_bridge": {
+    "candidate": "OrientTransformToObservation_x",
+    "purpose": "Provide an explicit, pre-RefOrient map from typed orientation transformations and their contexts to observation-orientation assignments and B_x, D_rel, R.",
+    "status": "PROPOSED_FOR_HUMAN_REVIEW_ONLY",
+    "nonclaim": "The candidate map is not defined or assumed by this report."
+  },
+  "not_changed": ["O_a", "O_b", "otimes", "BCon_x", "H_x", "O_adm", "W_adm", "C_orient", "delta_a", "canonical registries", "canonical textbook"],
+  "human_review_required": true
+}

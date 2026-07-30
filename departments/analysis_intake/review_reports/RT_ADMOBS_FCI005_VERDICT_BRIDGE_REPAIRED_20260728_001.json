@@ -1,0 +1,84 @@
+{
+  "artifact_type": "PROVISIONAL_VERDICT_AND_BRIDGE_SUPPORT_CLOSURE",
+  "artifact_id": "RT_ADMOBS_FCI005_VERDICT_BRIDGE_REPAIRED_20260728_001",
+  "status": "PROVISIONAL_READY_FOR_WITNESS_BACKED_TESTING",
+  "canonicality": "NON_CANONICAL_CANDIDATE",
+  "claim_ceiling": "C1_MODEL_RELATIVE",
+  "source_review": "RT_ADMOBS_FCI005_VERDICT_REPAIR_TEST_REVIEW_20260728_001",
+  "support_imports": [
+    "RT_ADMOBS_FCI005_GUARD_STAGE_VERDICT_REPAIRED_20260728_001",
+    "RT_ADMOBS_FCI005_GUARD_STAGE_CORRECTED_20260728_001"
+  ],
+  "support_closure": {
+    "ThresholdBridgeResult_x": "{PRESERVED, NOT_PRESERVED, UNDEFINED}",
+    "BridgeWitnessRecord_x": "(X, Z, Y, source_ids, mapping_provenance, context_provenance)",
+    "OrientCarrierBridge_x": "OrientCarrierBridge_x(X, o; D_rel, provenance) : Prop",
+    "SourceContextBridge_x": "SourceContextBridge_x(Y; B_x, D_rel, R, provenance) : Prop",
+    "SharedDistinctionScale_x": "SharedDistinctionScale_x(epsilon_src, epsilon_obs; D_rel) : Prop",
+    "PermittedFCI005BridgeWitness_x": "PermittedFCI005BridgeWitness_x(w, o_i, o_j; B_x, D_rel, R) : Prop"
+  },
+  "effective_threshold": {
+    "symbol": "EffectiveThresholdRelation_x",
+    "signature": "EvalEffectiveThresholdRelation_x(epsilon_src, epsilon_obs; D_rel) : ThresholdMapResult_x",
+    "rules": {
+      "VALID": "SharedDistinctionScale_x is proved, or EvalThresholdMap_x = VALID.",
+      "INVALID": "No shared-scale proof applies and EvalThresholdMap_x = INVALID.",
+      "UNDEFINED": "No shared-scale proof applies and EvalThresholdMap_x = UNDEFINED."
+    },
+    "consumer_rule": "Structural witness and per-witness evaluator consume this result; neither independently inspects the shared-scale exception."
+  },
+  "permitted_witness_definition": {
+    "signature": "PermittedFCI005BridgeWitness_x(w, o_i, o_j; B_x, D_rel, R) : Prop",
+    "definition": [
+      "w is a BridgeWitnessRecord_x with immutable source identifiers.",
+      "OrientCarrierBridge_x(w.X, o_i; D_rel, w.mapping_provenance).",
+      "OrientCarrierBridge_x(w.Z, o_j; D_rel, w.mapping_provenance).",
+      "SourceContextBridge_x(w.Y; B_x, D_rel, R, w.context_provenance).",
+      "Source carriers and context exist before RefOrient_x and ProjectBounded.",
+      "The mapping does not depend on delta_a or realized closure.",
+      "The witness applies to the declared ordered pair (o_i,o_j)."
+    ],
+    "status": "PROVISIONAL_COMPLETE_DEFINITION"
+  },
+  "structural_witness_update": {
+    "signature": "FCI005DistinctionBridgeWitness_x(w, o_i, o_j; epsilon_src, epsilon_obs, B_x, D_rel, R) : Prop",
+    "required_conditions": [
+      "PermittedFCI005BridgeWitness_x holds.",
+      "D(w.X|w.Z) and d_obs(o_i,o_j) are prebound and evaluable.",
+      "EvalEffectiveThresholdRelation_x(epsilon_src, epsilon_obs; D_rel) = VALID.",
+      "DistinctionThresholdBridge_x returns PRESERVED."
+    ],
+    "no_pass_fail_requirement": true
+  },
+  "invariant_verdict": {
+    "signature": "EvalInvariantBridgeVerdict_x(o_i, o_j; epsilon_src, epsilon_obs, B_x, D_rel, R) : BridgePairVerdict_x",
+    "PAIR_PASS": "At least one permitted witness exists and every permitted witness returns PAIR_PASS.",
+    "PAIR_FAIL": "At least one permitted witness exists and every permitted witness returns PAIR_FAIL.",
+    "UNDEFINED": "No witness exists, any witness is undefined, or permitted witnesses disagree."
+  },
+  "ordered_pair_policy": {
+    "default": "Evaluate (o_i,o_j) and (o_j,o_i) separately.",
+    "symmetry_exception": "Reversal may be identified only after a symmetry theorem establishes evaluator invariance."
+  },
+  "applicability_policy": {
+    "symbol": "ApplicableBinaryEvaluatorSet_x",
+    "signature": "ApplicableBinaryEvaluatorSet_x(F_x, BCon_x; B_x, D_rel, R)",
+    "EXPLICIT_NONEMPTY": "Apply COMPATIBLE, INCOMPATIBLE, and UNDEFINED aggregation.",
+    "EXPLICIT_EMPTY": "Return COMPATIBLE only when the active domain explicitly declares that no binary constraints apply.",
+    "ABSENT_OR_UNDECLARED": "Return UNDEFINED.",
+    "guard": "Unbound BCon_x cannot produce compatibility through vacuous universal quantification."
+  },
+  "test_status": {
+    "evaluator_subsuite": "PASS_DEFINITION_LEVEL",
+    "bridge_tests_001_002_004_005": "OPEN_NOT_WITNESS_BACKED",
+    "bridge_test_003": "PASS_DEFINITION_LEVEL",
+    "bridge_test_006": "PASS_DEFINITION_LEVEL",
+    "bridge_test_007": "PASS_DEFINITION_LEVEL",
+    "bridge_test_008": "PASS_WITH_EMPTY_APPLICABILITY_POLICY"
+  },
+  "BCon_x": "UNBOUND",
+  "H_x": "UNDECLARED",
+  "delta_a": "UNCHANGED",
+  "next_action": "Supply or construct governed source witness records and run witness-backed tests 001, 002, 004, and 005.",
+  "human_review_required": true
+}

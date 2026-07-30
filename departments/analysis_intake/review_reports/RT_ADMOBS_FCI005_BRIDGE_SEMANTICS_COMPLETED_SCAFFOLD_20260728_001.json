@@ -1,0 +1,101 @@
+{
+  "artifact_type": "PROVISIONAL_INDEPENDENT_BRIDGE_SEMANTICS_SCAFFOLD",
+  "artifact_id": "RT_ADMOBS_FCI005_BRIDGE_SEMANTICS_COMPLETED_SCAFFOLD_20260728_001",
+  "status": "PROVISIONAL_BRIDGE_SEMANTIC_SCAFFOLD_ACTIVE",
+  "canonicality": "NON_CANONICAL_CANDIDATE",
+  "claim_ceiling": "C1_MODEL_RELATIVE",
+  "source_review": "RT_ADMOBS_FCI005_BRIDGE_SEMANTIC_COMPLETION_REVIEW_20260728_001",
+  "mapping_records": {
+    "CarrierMappingRuleRecord_x": {
+      "signature": "CarrierMappingRuleRecord_x := (rule_id, source_type, target_orientation_type, domain_scope, relation_definition, dependency_evidence, provenance)",
+      "requirements": ["Declared source type", "Omega_obs target orientation type", "D_rel domain scope", "Testable relation definition", "Independent dependency evidence", "Governing artifact/version provenance"]
+    },
+    "ContextMappingRuleRecord_x": {
+      "signature": "ContextMappingRuleRecord_x := (rule_id, source_context_type, boundary_map, domain_map, residue_map, dependency_evidence, provenance)",
+      "requirements": ["Typed boundary/domain/residue maps", "Each map declares preserve, translate, restrict, or reject behavior", "Missing differs from mismatch", "No prohibited downstream dependency"]
+    },
+    "BridgeProvenanceRecord_x": {
+      "signature": "BridgeProvenanceRecord_x := (artifact_id, artifact_version, rule_id, source_location, content_digest, authority_status)",
+      "purpose": "Prevent a witness from validating itself by naming an ungoverned mapping rule."
+    }
+  },
+  "carrier_bridge": {
+    "result_type": "CarrierBridgeResult_x := {REPRESENTED, NOT_REPRESENTED, UNDEFINED}",
+    "evaluator": "EvalOrientCarrierBridge_x(X, o; D_rel, carrier_rule, carrier_provenance) : CarrierBridgeResult_x",
+    "REPRESENTED": ["Source type, target type, rule, provenance, applicability, and pre-RefOrient dependencies are valid", "Rule positively relates X to o"],
+    "NOT_REPRESENTED": ["All required inputs are defined", "Applicable rule definitively rejects the relation or declares source/target incompatibility"],
+    "UNDEFINED": ["Missing type, rule, provenance, applicability, dependency evidence, or undecidable relation"],
+    "precedence": "Definitive NOT_REPRESENTED is not downgraded because an unrelated alternative rule is unavailable."
+  },
+  "context_bridge": {
+    "component_result_type": "ContextComponentResult_x := {ALIGNED, MISMATCH, UNDEFINED}",
+    "component_evaluators": [
+      "EvalBoundaryContextMap_x(Y, B_x; boundary_rule, provenance)",
+      "EvalDomainContextMap_x(Y, D_rel; domain_rule, provenance)",
+      "EvalResidueContextMap_x(Y, R; residue_rule, provenance)"
+    ],
+    "aggregate": "EvalSourceContextBridge_x(Y; B_x, D_rel, R, context_rule, context_provenance) : ContextBridgeResult_x",
+    "aggregate_result_type": "ContextBridgeResult_x := {CONTEXT_ALIGNED, CONTEXT_MISMATCH, UNDEFINED}",
+    "rules": {
+      "CONTEXT_ALIGNED": "All required component evaluators return ALIGNED.",
+      "CONTEXT_MISMATCH": "At least one required component returns MISMATCH.",
+      "UNDEFINED": "No component mismatches and at least one required component is UNDEFINED."
+    }
+  },
+  "dependency_evidence": {
+    "result_type": "DependencyStageResult_x := {VALID_PRE_REF_ORIENT, INVALID_DOWNSTREAM_DEPENDENCY, UNDEFINED}",
+    "graph_type": "DependencyGraph_x := directed graph of governed value, predicate, rule, and artifact nodes",
+    "node_fields": ["node_id", "node_type", "source_artifact", "declared_stage", "dependency_edges", "provenance"],
+    "evaluator": "EvalDependencyStage_x(evidence, required_stage) : DependencyStageResult_x",
+    "VALID_PRE_REF_ORIENT": ["All nodes and edges present", "Transitive closure computable", "No prohibited ancestor", "Maximal stage at or before PRE_REF_ORIENT"],
+    "INVALID_DOWNSTREAM_DEPENDENCY": ["Prohibited downstream ancestor exists", "Declared maximal stage is later than PRE_REF_ORIENT"],
+    "UNDEFINED": ["Missing node/edge", "Unresolved provenance", "Cycle prevents stage evaluation", "Undeclared node stage"]
+  },
+  "threshold_routes": {
+    "route_result_type": "ThresholdRouteResult_x := {VALID, INVALID, ABSENT, UNDEFINED}",
+    "shared_scale": "EvalSharedScaleRoute_x(epsilon_src, epsilon_obs; D_rel) : ThresholdRouteResult_x",
+    "explicit_map": "EvalExplicitThresholdMapRoute_x(epsilon_src, epsilon_obs; D_rel) : ThresholdRouteResult_x",
+    "effective_result_type": "EffectiveThresholdResult_x := {VALID, INVALID, UNDEFINED, INCONSISTENT}",
+    "rules": [
+      {"shared": "VALID", "explicit": "VALID", "result": "VALID"},
+      {"shared": "VALID", "explicit": "INVALID", "result": "INCONSISTENT"},
+      {"shared": "INVALID", "explicit": "VALID", "result": "INCONSISTENT"},
+      {"shared": "VALID", "explicit": "ABSENT", "result": "VALID"},
+      {"shared": "ABSENT", "explicit": "VALID", "result": "VALID"},
+      {"shared": "INVALID", "explicit": "ABSENT", "result": "INVALID"},
+      {"shared": "ABSENT", "explicit": "INVALID", "result": "INVALID"},
+      {"shared": "ABSENT", "explicit": "ABSENT", "result": "UNDEFINED"},
+      {"shared": "UNDEFINED", "explicit": "ANY", "result": "UNDEFINED"},
+      {"shared": "ANY", "explicit": "UNDEFINED", "result": "UNDEFINED"}
+    ],
+    "binary_policy": "INCONSISTENT propagates as UNDEFINED at binary level with distinct diagnostic retention."
+  },
+  "witness_validation": {
+    "result_type": "BridgeWitnessValidationResult_x := {WITNESS_VALID, WITNESS_INVALID, UNDEFINED}",
+    "evaluator": "EvalPermittedFCI005BridgeWitness_x(w, o_i, o_j; B_x, D_rel, R) : BridgeWitnessValidationResult_x",
+    "WITNESS_VALID": ["Immutable source IDs", "Left and right carrier results REPRESENTED", "Context CONTEXT_ALIGNED", "Dependency VALID_PRE_REF_ORIENT", "All provenance valid"],
+    "WITNESS_INVALID": ["Carrier NOT_REPRESENTED", "Context MISMATCH", "Dependency INVALID_DOWNSTREAM_DEPENDENCY", "Definitively invalid provenance"],
+    "UNDEFINED": ["No invalid condition and at least one required evaluator UNDEFINED", "Missing mapping rule or provenance"],
+    "propositional_projection": "PermittedFCI005BridgeWitness_x(...) : Prop iff evaluator = WITNESS_VALID"
+  },
+  "import_resolution": {
+    "policy": "Exact symbol-level imports only.",
+    "required_fields": ["symbol", "source_artifact_id", "source_version_or_digest", "import_mode", "supersedes_symbol_from", "authority_status"],
+    "supersessions": [
+      {"new_symbol": "EvalOrientCarrierBridge_x", "supersedes": "OrientCarrierBridge_x proposition declaration"},
+      {"new_symbol": "EvalSourceContextBridge_x", "supersedes": "SourceContextBridge_x proposition declaration"},
+      {"new_symbol": "EvalPermittedFCI005BridgeWitness_x", "supersedes": "PermittedFCI005BridgeWitness_x proposition declaration"}
+    ]
+  },
+  "testing": {
+    "witness_fixtures": "NOT_AUTHORIZED",
+    "bridge_tests": "HELD",
+    "evaluator_subsuite": "PASS_DEFINITION_LEVEL",
+    "required_before_fixtures": ["Independent mapping records", "Independent provenance", "Dependency graph evidence", "Exact imports", "Threshold route semantics"]
+  },
+  "BCon_x": "UNBOUND",
+  "H_x": "UNDECLARED",
+  "delta_a": "UNCHANGED",
+  "next_action": "Obtain or identify governed mapping-rule records and dependency graph evidence; do not construct arbitrary witness fixtures.",
+  "human_review_required": true
+}
