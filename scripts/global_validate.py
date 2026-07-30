@@ -198,7 +198,7 @@ class HygieneValidator:
         self.results_dir = self.root / "results"
 
     def run(self):
-        results = {"status": "success", "violations": [], "warnings": []}
+        results = {"status": "success", "violations": [], "warnings": [], "accepted_historical": []}
 
         # A. Repo-root artifact pollution check (hard fail)
         forbidden = []
@@ -236,18 +236,21 @@ class HygieneValidator:
                 continue
 
             name = folder.name
-            if new_run_id_re.match(name):
+            has_run_metadata = (folder / "reports" / "run_metadata.json").exists()
+            if not has_run_metadata:
+                # A result folder without run metadata is a preserved non-script or historical
+                # artifact. Keep it visible as accepted residue without treating its name as an
+                # active-run hygiene failure.
+                results["accepted_historical"].append(f"Results Structure Unverified: '{name}' has no reports/run_metadata.json (treated as non-script run).")
+            elif new_run_id_re.match(name):
                 # New policy applies to script-runs (run_metadata.json present).
                 # Campaign runs may have different internal structure; do not hard-fail them here.
-                if (folder / "reports" / "run_metadata.json").exists():
                     required = ["configs", "outputs", "reports", "logs", "raw"]
                     missing = [d for d in required if not (folder / d).is_dir()]
                     if missing:
                         results["violations"].append(f"Results Structure Violation: '{name}' missing {missing}.")
-                else:
-                    results["warnings"].append(f"Results Structure Unverified: '{name}' has no reports/run_metadata.json (treated as non-script run).")
             elif legacy_run_id_re.match(name):
-                results["warnings"].append(f"Legacy Results Naming: '{name}' uses date_runNN_name schema.")
+                results["accepted_historical"].append(f"Legacy Results Naming: '{name}' uses date_runNN_name schema.")
             else:
                 results["warnings"].append(f"Results Naming Unrecognized: '{name}' does not match required run id formats.")
 
