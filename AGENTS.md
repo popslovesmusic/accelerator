@@ -49,7 +49,7 @@ Every action must be grounded in the four foundational laws:
 
 ### 4.1 Mathematical Foundation (C6 Closure)
 - **Additive-Only Rule:** New mathematical development must reside in `docs/theory/foundational/5_03_26 unity/math/`. Existing lemmas and proofs MUST NOT be modified; they must be `Superseded`.
-- **Registry Synchronization:** Every new mathematical object must be synced with `registry/math_registry.json` and `registry/math_hashes.json`.
+- **Registry Synchronization:** Every new mathematical object must be synced with the canonical source registry `registry/math_source_registry.json` and `registry/math_hashes.json`. The legacy name `registry/math_registry.json` is deprecated and must not be used as a synchronization target.
 - **C6 Status:** Only claims passing two independent measurements and four falsification vectors achieve C6 status.
 
 ### 4.2 Lexicon Induction & Promotion
