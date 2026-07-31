@@ -2,8 +2,8 @@
 
 ## Repository Snapshot
 
-Commit: `acbf6e3821382639b059db64a523bc91fc35dc89`
-Snapshot hash: `301A79BBD1C08AB5B5374CD317E215A21276497E09FF98D7381B0609E632AA89`
+Commit: `8b14eee7c00fe584026eaa2acd13de3498dde41d`
+Snapshot hash: `8A1EDDF39738642D48EBB9CB08B0F8B3B86AB03B58D53278CDF8F93BA4CA58E2`
 Dirty state: `True`
 
 ## Scope
@@ -38,15 +38,26 @@ Cycle count: 0
 
 ## Direct Blockers
 
-- `BLOCK-RELATION-AXIOMS` `MISSING_AXIOM` blocks `symmetry_condition_relation`
+- `AX-R01_OPERAND_ORDER` `MISSING_AXIOM` blocks `symmetry_condition_relation`
+- `AX-R02_TYPE_COMPATIBILITY` `MISSING_AXIOM` blocks `symmetry_condition_relation`
+- `AX-R03_IDENTITY` `MISSING_AXIOM` blocks `symmetry_condition_relation`
+- `AX-R04_SUBSTITUTION` `MISSING_AXIOM` blocks `symmetry_condition_relation`
+- `AX-R05_COMPOSITION` `MISSING_AXIOM` blocks `symmetry_condition_relation`
+- `AX-R06_CLOSURE` `MISSING_AXIOM` blocks `symmetry_condition_relation`
+- `AX-R07_MALFORMED_CONSTRUCTION` `MISSING_AXIOM` blocks `symmetry_condition_relation`
+- `AX-R08_DETERMINISM` `MISSING_AXIOM` blocks `symmetry_condition_relation`
+- `AX-R09_ASSOCIATIVITY` `MISSING_AXIOM` blocks `symmetry_condition_relation`
+- `AX-R10_COMMUTATIVITY` `MISSING_AXIOM` blocks `symmetry_condition_relation`
+- `AX-R11_DOMAIN_OF_DEFINITION` `MISSING_AXIOM` blocks `symmetry_condition_relation`
+- `AX-R12_PROJECTION_COMPATIBILITY` `MISSING_AXIOM` blocks `symmetry_condition_relation`
 
 ## Propagated Blockers
 
-- `BLOCK-PROJECTION-PROPAGATED` propagates to `dominant_domain_projection, executable_semantics` via `[['relation axioms', 'symmetry_condition_relation', 'dominant_domain_projection']]`
+- `BLOCK-PROJECTION-PROPAGATED` propagates to `dominant_domain_projection, executable_semantics` via `[['relation_axioms', 'symmetry_condition_relation', 'dominant_domain_projection']]`
 
 ## Proof State
 
-Open obligations: relation axioms, operand order, identity, substitution, composition, malformed construction rules
+Open obligations: AX-R01_OPERAND_ORDER, AX-R02_TYPE_COMPATIBILITY, AX-R03_IDENTITY, AX-R04_SUBSTITUTION, AX-R05_COMPOSITION, AX-R06_CLOSURE, AX-R07_MALFORMED_CONSTRUCTION, AX-R08_DETERMINISM, AX-R09_ASSOCIATIVITY, AX-R10_COMMUTATIVITY, AX-R11_DOMAIN_OF_DEFINITION, AX-R12_PROJECTION_COMPATIBILITY
 
 ## Not Established
 
@@ -64,14 +75,14 @@ Status changed: ['distinction_permitting_symmetry_condition']
 
 ## Validation Results
 
-{"determinism_validation": {"status": "ENGINE_TESTED"}, "graph_integrity_validation": {"passed": true}, "readonly_validation": {"after_hash": "301A79BBD1C08AB5B5374CD317E215A21276497E09FF98D7381B0609E632AA89", "before_hash": "301A79BBD1C08AB5B5374CD317E215A21276497E09FF98D7381B0609E632AA89", "changed_paths": [], "checked": true, "read_only": true}, "renderer_consistency_validation": {"status": "RENDERED_FROM_CANONICAL_JSON"}, "schema_validation": {"errors": [], "passed": true}, "source_precedence_validation": {"passed": true}}
+{"determinism_validation": {"status": "ENGINE_TESTED"}, "graph_integrity_validation": {"passed": true}, "readonly_validation": {"after_hash": "8A1EDDF39738642D48EBB9CB08B0F8B3B86AB03B58D53278CDF8F93BA4CA58E2", "before_hash": "8A1EDDF39738642D48EBB9CB08B0F8B3B86AB03B58D53278CDF8F93BA4CA58E2", "changed_paths": [], "checked": true, "read_only": true}, "renderer_consistency_validation": {"status": "RENDERED_FROM_CANONICAL_JSON"}, "schema_validation": {"errors": [], "passed": true}, "source_precedence_validation": {"passed": true}}
 
 ## Output Hashes
 
-Canonical JSON hash: `47204E7E1D31CC354C4841ED3A761355312F3516D400EB9B6E080BC2D718F56C`
-Markdown hash: `6D84EBC7EE686A1C4939E483DE4771996111875B073B96EC5D62AE51C1D9D1AE`
+Canonical JSON hash: `BD3F4BA9BBA30630C2B609CD23F1EE429E504AA5E46DEF79EADD97D3BA3C26CD`
+Markdown hash: `F425FA2A6825CC55C6335D5FB983C9ADE45C5A079BB1513B50BE07CDDAB39C7C`
 
 ## Campaign Assessment
 
 Outcome: `PARTIAL_SUCCESS`
-Reason: Open relation axioms and executable semantics
+Reason: Open relation axiom set and executable semantics
