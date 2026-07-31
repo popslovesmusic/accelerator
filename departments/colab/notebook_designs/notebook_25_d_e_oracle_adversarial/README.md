@@ -1,7 +1,7 @@
-# Notebook 25 — D/E Oracle Assumption Adversarial Campaign
+# Notebook 25 — D/E Oracle Adversarial Test
 
-Status: immutable pre-execution design. This is the next bounded action after the Notebook 24 crawl.
+Status: frozen pre-execution replacement design.
 
-Purpose: stress the formalized metamorphic relations and declarative-oracle assumptions with adversarial records that target hidden coupling, priority-order dependence, threshold representation, context leakage, and oracle/subject shared assumptions.
+The supplied notebook evaluates bounded representability and non-collapse predicates against an independently expressed declarative oracle across malformed, boundary, transport, history/witness, profile, trace, and combined-fault mutations. It performs two deterministic replay passes, preserves disagreements and invariant failures, hashes artifacts, and creates a ZIP deliverable.
 
-This campaign does not execute automatically and does not alter the frozen P127/P128 predicates. It uses Colab only, preserves all counterexamples, and has a maximum interpretation of C2 limitation/negative evidence.
+This is finite bounded evidence only. It does not authorize universal D/E claims, theorem promotion, injectivity, reversibility, or external physical interpretation.
