@@ -2,7 +2,7 @@
 
 ## Status
 
-COMPLETED as a governance decomposition with open proof obligations. The monolithic `relation_axioms` obligation is replaced by AX-R01 through AX-R12.
+AX-R01 is formalized provisionally and remains pending fixture validation. The remaining AX-R02 through AX-R12 obligations remain open. The monolithic `relation_axioms` obligation is replaced by AX-R01 through AX-R12.
 
 ## Observed and created
 
@@ -10,6 +10,7 @@ COMPLETED as a governance decomposition with open proof obligations. The monolit
 - A typed dependency graph connects `SymmetryConditionRelation` to each obligation.
 - Downstream projection and executable-semantics dependencies are recorded as blocked where applicable.
 - Cycle, typing, schema, and read-only checks passed for these campaign artifacts.
+- AX-R01 defines only directional typing; it does not establish commutativity, substitution, or composition.
 
 ## Not established
 
