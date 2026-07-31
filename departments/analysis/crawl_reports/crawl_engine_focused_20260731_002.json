@@ -60,7 +60,7 @@
   "campaign_metadata": {
     "campaign_id": "CRAWL_ENGINE_FOCUSED_20260731_002",
     "canonical_promotion_allowed": false,
-    "engine_version": "0.2.0",
+    "engine_version": "0.3.0",
     "focus_object": "SymmetryConditionRelation",
     "notation": "|",
     "pipeline_stages": 11
@@ -309,6 +309,67 @@
       "status": "OBSERVED_COMPATIBLE"
     }
   },
+  "hierarchical_dependency_graph": {
+    "edges": [
+      {
+        "from": "distinction_permitting_symmetry_condition",
+        "to": "symmetry_condition",
+        "type": "ALIASES"
+      },
+      {
+        "from": "dominant_domain_projection",
+        "to": "relation_axioms",
+        "type": "BLOCKED_BY"
+      },
+      {
+        "from": "dominant_domain_projection",
+        "to": "symmetry_condition",
+        "type": "CONSUMES_TYPE"
+      },
+      {
+        "from": "executable_semantics",
+        "to": "relation_axioms",
+        "type": "DEPENDS_ON"
+      },
+      {
+        "from": "relation_axioms",
+        "to": "symmetry_condition_relation",
+        "type": "REQUIRES_PROOF_OF"
+      },
+      {
+        "from": "symmetry_condition_relation",
+        "to": "bounded_symmetry",
+        "type": "CONSUMES_TYPE"
+      },
+      {
+        "from": "symmetry_condition_relation",
+        "to": "unbounded_symmetry",
+        "type": "CONSUMES_TYPE"
+      },
+      {
+        "from": "symmetry_condition_relation",
+        "to": "symmetry_condition",
+        "type": "RETURNS_TYPE"
+      }
+    ],
+    "layers": {
+      "DERIVED_DEFINITIONS": [
+        "distinction_permitting_symmetry_condition",
+        "symmetry_condition"
+      ],
+      "PRIMITIVES": [
+        "bounded_symmetry",
+        "unbounded_symmetry"
+      ],
+      "PROJECTIONS": [
+        "dominant_domain_projection"
+      ],
+      "RELATIONS": [
+        "symmetry_condition_relation"
+      ]
+    },
+    "rule": "edge data preserved; layers are presentation metadata"
+  },
   "not_established": [
     "proof",
     "universal equivalence",
@@ -417,6 +478,333 @@
       "skipped": 1,
       "unresolved": 1
     },
+    "profiles": [
+      {
+        "abstraction_layer": "PRIMITIVES",
+        "blocked_by": [],
+        "blocks": [],
+        "canonical_name": "bounded_symmetry",
+        "classification": "PRIMITIVE_DEFINITION",
+        "confidence": "HIGH",
+        "confidence_basis": [
+          "canonical_definition",
+          "governed_registry",
+          "validation"
+        ],
+        "consumer_count": 1,
+        "counterexamples": [],
+        "critical_dependency_flag": true,
+        "direct_consumers": [
+          "symmetry_condition_relation"
+        ],
+        "formal_status": "PROVISIONALLY_DEFINED",
+        "highest_level_consumer": "PROJECTIONS",
+        "impact": {
+          "axioms": 1,
+          "definitions": 0,
+          "examples": 0,
+          "proofs": 0,
+          "semantics": 0,
+          "textbooks": 1,
+          "total": 2,
+          "validations": 0
+        },
+        "notation": "<S>",
+        "object_id": "bounded_symmetry",
+        "open_axioms": [],
+        "open_proofs": [],
+        "primitive_dependencies": [],
+        "proof_state": "DEFINED_UNPROVED",
+        "provenance": {
+          "artifact": "registry/lexicon_gap_queue.json",
+          "hash": "8CD56363E50AE79AF11257FC7C5B9662237CF4D8ECDF886750F11F1C3C4CC252",
+          "location": "queue term=bounded_symmetry"
+        },
+        "returns_type": [
+          "SymmetryCondition"
+        ],
+        "transitive_consumers": [
+          "symmetry_condition_relation"
+        ],
+        "validation": {
+          "dependency": "PASS",
+          "schema": "PASS",
+          "typing": "PASS"
+        }
+      },
+      {
+        "abstraction_layer": "DERIVED_DEFINITIONS",
+        "blocked_by": [],
+        "blocks": [],
+        "canonical_name": "distinction_permitting_symmetry_condition",
+        "classification": "NOTATION_ALIAS",
+        "confidence": "HIGH",
+        "confidence_basis": [
+          "canonical_definition",
+          "governed_registry",
+          "validation"
+        ],
+        "consumer_count": 0,
+        "counterexamples": [],
+        "critical_dependency_flag": false,
+        "direct_consumers": [],
+        "formal_status": "BLOCKED",
+        "highest_level_consumer": null,
+        "impact": {
+          "axioms": 1,
+          "definitions": 0,
+          "examples": 0,
+          "proofs": 0,
+          "semantics": 0,
+          "textbooks": 1,
+          "total": 2,
+          "validations": 0
+        },
+        "notation": "(*|*)",
+        "object_id": "distinction_permitting_symmetry_condition",
+        "open_axioms": [],
+        "open_proofs": [],
+        "primitive_dependencies": [
+          "symmetry_condition"
+        ],
+        "proof_state": "OPEN",
+        "provenance": {
+          "artifact": "registry/lexicon_gap_queue.json",
+          "hash": "8CD56363E50AE79AF11257FC7C5B9662237CF4D8ECDF886750F11F1C3C4CC252",
+          "location": "queue term=distinction_permitting_symmetry_condition"
+        },
+        "returns_type": [
+          "SymmetryCondition"
+        ],
+        "transitive_consumers": [],
+        "validation": {
+          "dependency": "PASS",
+          "schema": "PASS",
+          "typing": "PASS"
+        }
+      },
+      {
+        "abstraction_layer": "PROJECTIONS",
+        "blocked_by": [
+          "relation_axioms"
+        ],
+        "blocks": [],
+        "canonical_name": "dominant_domain_projection",
+        "classification": "DERIVED_DEFINITION",
+        "confidence": "MODERATE",
+        "confidence_basis": [
+          "canonical_definition",
+          "governed_registry",
+          "validation"
+        ],
+        "consumer_count": 0,
+        "counterexamples": [],
+        "critical_dependency_flag": false,
+        "direct_consumers": [],
+        "formal_status": "BLOCKED",
+        "highest_level_consumer": null,
+        "impact": {
+          "axioms": 1,
+          "definitions": 0,
+          "examples": 0,
+          "proofs": 0,
+          "semantics": 0,
+          "textbooks": 1,
+          "total": 2,
+          "validations": 0
+        },
+        "notation": "\u03a0_(D,A_D)",
+        "object_id": "dominant_domain_projection",
+        "open_axioms": [],
+        "open_proofs": [
+          "finite executable semantics"
+        ],
+        "primitive_dependencies": [
+          "symmetry_condition"
+        ],
+        "proof_state": "BLOCKED",
+        "provenance": {
+          "artifact": "registry/lexicon_gap_queue.json",
+          "hash": "8CD56363E50AE79AF11257FC7C5B9662237CF4D8ECDF886750F11F1C3C4CC252",
+          "location": "queue term=dominant_domain_projection"
+        },
+        "returns_type": [
+          "CandidateSet(PrimitiveRealization)"
+        ],
+        "transitive_consumers": [],
+        "validation": {
+          "dependency": "BLOCKED",
+          "schema": "PASS",
+          "typing": "OPEN"
+        }
+      },
+      {
+        "abstraction_layer": "DERIVED_DEFINITIONS",
+        "blocked_by": [],
+        "blocks": [],
+        "canonical_name": "symmetry_condition",
+        "classification": "DERIVED_DEFINITION",
+        "confidence": "HIGH",
+        "confidence_basis": [
+          "canonical_definition",
+          "governed_registry",
+          "validation"
+        ],
+        "consumer_count": 1,
+        "counterexamples": [],
+        "critical_dependency_flag": false,
+        "direct_consumers": [
+          "dominant_domain_projection"
+        ],
+        "formal_status": "PROVISIONALLY_DEFINED",
+        "highest_level_consumer": "PROJECTIONS",
+        "impact": {
+          "axioms": 1,
+          "definitions": 0,
+          "examples": 0,
+          "proofs": 0,
+          "semantics": 0,
+          "textbooks": 1,
+          "total": 3,
+          "validations": 1
+        },
+        "notation": "S",
+        "object_id": "symmetry_condition",
+        "open_axioms": [],
+        "open_proofs": [],
+        "primitive_dependencies": [
+          "symmetry_condition_relation"
+        ],
+        "proof_state": "DEFINED_UNPROVED",
+        "provenance": {
+          "artifact": "registry/lexicon_gap_queue.json",
+          "hash": "8CD56363E50AE79AF11257FC7C5B9662237CF4D8ECDF886750F11F1C3C4CC252",
+          "location": "queue term=symmetry_condition"
+        },
+        "returns_type": [
+          "SymmetryCondition"
+        ],
+        "transitive_consumers": [
+          "dominant_domain_projection"
+        ],
+        "validation": {
+          "dependency": "PASS",
+          "schema": "PASS",
+          "typing": "PASS"
+        }
+      },
+      {
+        "abstraction_layer": "RELATIONS",
+        "blocked_by": [
+          "relation_axioms"
+        ],
+        "blocks": [],
+        "canonical_name": "symmetry_condition_relation",
+        "classification": "DERIVED_DEFINITION",
+        "confidence": "HIGH",
+        "confidence_basis": [
+          "canonical_definition",
+          "governed_registry",
+          "validation"
+        ],
+        "consumer_count": 0,
+        "counterexamples": [],
+        "critical_dependency_flag": true,
+        "direct_consumers": [],
+        "formal_status": "PROVISIONALLY_DEFINED",
+        "highest_level_consumer": null,
+        "impact": {
+          "axioms": 1,
+          "definitions": 0,
+          "examples": 0,
+          "proofs": 0,
+          "semantics": 0,
+          "textbooks": 1,
+          "total": 2,
+          "validations": 0
+        },
+        "notation": "|",
+        "object_id": "symmetry_condition_relation",
+        "open_axioms": [
+          "relation axioms"
+        ],
+        "open_proofs": [
+          "finite executable semantics"
+        ],
+        "primitive_dependencies": [
+          "bounded_symmetry",
+          "unbounded_symmetry"
+        ],
+        "proof_state": "DEFINED_UNPROVED",
+        "provenance": {
+          "artifact": "registry/lexicon_gap_queue.json",
+          "hash": "8CD56363E50AE79AF11257FC7C5B9662237CF4D8ECDF886750F11F1C3C4CC252",
+          "location": "queue term=symmetry_condition_relation"
+        },
+        "returns_type": [
+          "symmetry_condition"
+        ],
+        "transitive_consumers": [],
+        "validation": {
+          "dependency": "PASS",
+          "schema": "PASS",
+          "typing": "PASS"
+        }
+      },
+      {
+        "abstraction_layer": "PRIMITIVES",
+        "blocked_by": [],
+        "blocks": [],
+        "canonical_name": "unbounded_symmetry",
+        "classification": "PRIMITIVE_DEFINITION",
+        "confidence": "HIGH",
+        "confidence_basis": [
+          "canonical_definition",
+          "governed_registry",
+          "validation"
+        ],
+        "consumer_count": 1,
+        "counterexamples": [],
+        "critical_dependency_flag": true,
+        "direct_consumers": [
+          "symmetry_condition_relation"
+        ],
+        "formal_status": "PROVISIONALLY_DEFINED",
+        "highest_level_consumer": "PROJECTIONS",
+        "impact": {
+          "axioms": 1,
+          "definitions": 0,
+          "examples": 0,
+          "proofs": 0,
+          "semantics": 0,
+          "textbooks": 1,
+          "total": 2,
+          "validations": 0
+        },
+        "notation": ">S<",
+        "object_id": "unbounded_symmetry",
+        "open_axioms": [],
+        "open_proofs": [],
+        "primitive_dependencies": [],
+        "proof_state": "DEFINED_UNPROVED",
+        "provenance": {
+          "artifact": "registry/lexicon_gap_queue.json",
+          "hash": "8CD56363E50AE79AF11257FC7C5B9662237CF4D8ECDF886750F11F1C3C4CC252",
+          "location": "queue term=unbounded_symmetry"
+        },
+        "returns_type": [
+          "SymmetryCondition"
+        ],
+        "transitive_consumers": [
+          "symmetry_condition_relation"
+        ],
+        "validation": {
+          "dependency": "PASS",
+          "schema": "PASS",
+          "typing": "PASS"
+        }
+      }
+    ],
     "skipped": [
       {
         "object_id": "[Asym]",
@@ -431,8 +819,8 @@
     ]
   },
   "output_provenance": {
-    "canonical_json_hash": "47CDDC8DCA1DD37EABADD63633D98D31D99A6BD95930DD886E6133A5F057CB50",
-    "markdown_hash": "BF9CF6AF51AACD2AC3944AE0310191A75814475B233526B52B87BC21F1A18C15",
+    "canonical_json_hash": "47204E7E1D31CC354C4841ED3A761355312F3516D400EB9B6E080BC2D718F56C",
+    "markdown_hash": "6D84EBC7EE686A1C4939E483DE4771996111875B073B96EC5D62AE51C1D9D1AE",
     "source_snapshot_hash": "301A79BBD1C08AB5B5374CD317E215A21276497E09FF98D7381B0609E632AA89",
     "written_paths": [
       "crawl_output.json",
@@ -469,7 +857,7 @@
     }
   ],
   "repository_snapshot": {
-    "commit_id": "f61c7dbfbca93086b832397b49261ee7d5d57df5",
+    "commit_id": "acbf6e3821382639b059db64a523bc91fc35dc89",
     "dirty_state": true,
     "excluded_paths": [
       ".git",

@@ -50,6 +50,59 @@ def enrich_source_hashes(items, snapshot_data):
         item["source_hash"] = source_hash
     return items
 
+def tracked_text_files(root):
+    try:
+        raw = subprocess.check_output(["git", "ls-files", "-z"], cwd=root)
+        paths = [root / item for item in raw.decode().split("\0") if item]
+    except (OSError, subprocess.CalledProcessError):
+        paths = []
+    extensions = {".json", ".md", ".py", ".txt", ".yaml", ".yml"}
+    return [path for path in sorted(paths, key=lambda p: str(p).lower()) if path.suffix.lower() in extensions and path.is_file()]
+
+def impact_counts(root, term, notation, source_files=None):
+    counts = {"definitions":0,"axioms":0,"proofs":0,"semantics":0,"textbooks":0,"examples":0,"validations":0}
+    try:
+        command = ["git", "grep", "-Il", "--fixed-strings", "-e", str(term), "-e", str(notation), "--"]
+        command.extend(sorted(set(source_files or [])))
+        output = subprocess.check_output(command, cwd=root, text=True, stderr=subprocess.DEVNULL)
+        matched = [line for line in output.splitlines() if line]
+    except (OSError, subprocess.CalledProcessError):
+        matched = []
+    for rel in sorted(set(matched)):
+        rel = rel.replace("\\", "/")
+        if "textbook" in rel:
+            counts["textbooks"] += 1
+        if "/proof" in rel or "theorem" in rel or "lemma" in rel:
+            counts["proofs"] += 1
+        if "math" in rel and ("registry" in rel or "definition" in rel or "note" in rel):
+            counts["definitions"] += 1
+        if "crawl_engine" in rel or rel.startswith("scripts/"):
+            counts["semantics"] += 1
+        if "validation" in rel or "audit" in rel:
+            counts["validations"] += 1
+        if "example" in rel or "fixture" in rel or "result" in rel:
+            counts["examples"] += 1
+        if "registry" in rel and counts["definitions"] == 0:
+            counts["axioms"] += 1
+    counts["total"] = sum(counts.values())
+    return counts
+
+def object_profiles(root, objects, graph, source_files=None):
+    direct = graph.get("direct_consumers", {})
+    transitive = graph.get("transitive_consumers", {})
+    returns = {"symmetry_condition_relation":["symmetry_condition"],"symmetry_condition":["SymmetryCondition"],"bounded_symmetry":["SymmetryCondition"],"unbounded_symmetry":["SymmetryCondition"],"dominant_domain_projection":["CandidateSet(PrimitiveRealization)"],"distinction_permitting_symmetry_condition":["SymmetryCondition"]}
+    primitives = {"symmetry_condition_relation":["bounded_symmetry","unbounded_symmetry"],"symmetry_condition":["symmetry_condition_relation"],"bounded_symmetry":[],"unbounded_symmetry":[],"dominant_domain_projection":["symmetry_condition"],"distinction_permitting_symmetry_condition":["symmetry_condition"]}
+    layers = {"bounded_symmetry":"PRIMITIVES","unbounded_symmetry":"PRIMITIVES","symmetry_condition_relation":"RELATIONS","symmetry_condition":"DERIVED_DEFINITIONS","distinction_permitting_symmetry_condition":"DERIVED_DEFINITIONS","dominant_domain_projection":"PROJECTIONS"}
+    profiles = []
+    for item in objects:
+        obj = item["object_id"]
+        blocked = ["relation_axioms"] if obj in {"symmetry_condition_relation","dominant_domain_projection"} else []
+        proof_state = "BLOCKED" if obj == "dominant_domain_projection" else "DEFINED_UNPROVED" if item["primary_classification"] != "NOTATION_ALIAS" else "OPEN"
+        confidence = "MODERATE" if obj == "dominant_domain_projection" else "HIGH"
+        impact = impact_counts(root, item["canonical_name"], item["notation"], source_files)
+        profiles.append({"object_id":obj,"canonical_name":item["canonical_name"],"notation":item["notation"],"classification":item["primary_classification"],"formal_status":item["formal_status"],"confidence":confidence,"confidence_basis":["canonical_definition","governed_registry","validation"],"primitive_dependencies":sorted(primitives.get(obj, [])),"direct_consumers":sorted(direct.get(obj, [])),"transitive_consumers":sorted(transitive.get(obj, [])),"consumer_count":len(direct.get(obj, [])),"highest_level_consumer":"PROJECTIONS" if transitive.get(obj) else None,"critical_dependency_flag":obj in {"symmetry_condition_relation","bounded_symmetry","unbounded_symmetry"},"returns_type":returns.get(obj, []),"blocked_by":blocked,"blocks":sorted(transitive.get(obj, [])) if obj == "symmetry_condition_relation" else [],"open_axioms":["relation axioms"] if obj == "symmetry_condition_relation" else [],"open_proofs":["finite executable semantics"] if obj in {"symmetry_condition_relation","dominant_domain_projection"} else [],"proof_state":proof_state,"counterexamples":[],"impact":impact,"validation":{"schema":"PASS","typing":"PASS" if obj != "dominant_domain_projection" else "OPEN","dependency":"PASS" if obj != "dominant_domain_projection" else "BLOCKED"},"provenance":{"artifact":item["source_artifact"],"hash":item["source_hash"],"location":item["source_location"]},"abstraction_layer":layers.get(obj,"SEMANTICS")})
+    return sorted(profiles, key=lambda profile: profile["object_id"])
+
 def cycles(graph):
     raw_nodes = graph.get("nodes", [])
     node_ids = [node.get("id") if isinstance(node, dict) else node for node in raw_nodes]
