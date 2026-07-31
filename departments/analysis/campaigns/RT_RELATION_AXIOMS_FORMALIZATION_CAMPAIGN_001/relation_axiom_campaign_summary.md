@@ -2,7 +2,7 @@
 
 ## Status
 
-AX-R01 and AX-R02 are formalized provisionally. AX-R03 is `INAPPLICABLE` for `|`; whole-RT identity is separate. Typed operand-distinction semantics are provisionally formalized. The authorized `NO_NONTRIVIAL_EQUIVALENCE` path resolves typed equivalence and congruence to trivial reference identity only, and resolves AX-R04 as no nontrivial substitution.
+AX-R01 and AX-R02 are formalized provisionally. AX-R03 is `INAPPLICABLE` for `|`; whole-RT identity is separate. Typed operand-distinction semantics are provisionally formalized. The authorized `NO_NONTRIVIAL_EQUIVALENCE` path resolves AX-R04 to trivial reference identity only. AX-R05 is now `INAPPLICABLE` because the codomain is not an operand domain; whole-RT composition and operand projection remain separate open obligations.
 
 ## Observed and created
 
@@ -17,6 +17,7 @@ AX-R01 and AX-R02 are formalized provisionally. AX-R03 is `INAPPLICABLE` for `|`
 - No equivalence relation, substitution permission, or congruence permission was created.
 - The formalization records required properties and failure conditions only; it does not define `≈_B`, `≈_U`, or `≈_SC`.
 - Whole-RT identity remains a separate open obligation.
+- No self-composition, closure law, or implicit projection was introduced.
 - `Dist_B`, `Dist_U`, and `Dist_SC` require typed witnesses; absence of a witness does not establish equivalence.
 
 ## Not established

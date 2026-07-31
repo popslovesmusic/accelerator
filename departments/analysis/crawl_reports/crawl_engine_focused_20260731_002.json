@@ -4,30 +4,6 @@
       "blocked_objects": [
         "symmetry_condition_relation"
       ],
-      "blocker_id": "AX-R05_COMPOSITION",
-      "blocker_type": "MISSING_AXIOM",
-      "blocking_dependencies": [
-        "AX-R05_COMPOSITION"
-      ],
-      "dependency_paths": [
-        [
-          "AX-R05_COMPOSITION",
-          "symmetry_condition_relation"
-        ]
-      ],
-      "description": "Independently governable relation axiom remains open.",
-      "direct_or_propagated": "DIRECT",
-      "evidence": [
-        "RT_RELATION_AXIOMS_FORMALIZATION_CAMPAIGN_001"
-      ],
-      "priority": "CRITICAL",
-      "resolution_condition": "Close the named axiom through its own governed definition, validation, and proof disposition.",
-      "subject_object_id": "symmetry_condition_relation"
-    },
-    {
-      "blocked_objects": [
-        "symmetry_condition_relation"
-      ],
       "blocker_id": "AX-R06_CLOSURE",
       "blocker_type": "MISSING_AXIOM",
       "blocking_dependencies": [
@@ -200,7 +176,6 @@
       "blocker_id": "BLOCK-PROJECTION-PROPAGATED",
       "blocker_type": "MISSING_AXIOM",
       "blocking_dependencies": [
-        "AX-R05_COMPOSITION",
         "AX-R06_CLOSURE",
         "AX-R07_MALFORMED_CONSTRUCTION",
         "AX-R08_DETERMINISM",
@@ -293,14 +268,16 @@
     "modified_obligations": [],
     "new_blockers": [],
     "new_equivalence_relations": [],
-    "new_open_obligations": [],
+    "new_open_obligations": [
+      "OBL-RT-WHOLE-COMPOSITION",
+      "OBL-SC-OPERAND-PROJECTION"
+    ],
     "new_substitution_permissions": [],
     "newly_blocked": [
       "distinction_permitting_symmetry_condition"
     ],
     "newly_unblocked": [],
     "remaining_open_axioms": [
-      "AX-R05_COMPOSITION",
       "AX-R06_CLOSURE",
       "AX-R07_MALFORMED_CONSTRUCTION",
       "AX-R08_DETERMINISM",
@@ -315,16 +292,8 @@
     ],
     "resolved_obligations": [
       {
-        "obligation_id": "OBL-R04-TYPED-EQUIVALENCE",
-        "resolution": "NO_NONTRIVIAL_EQUIVALENCE"
-      },
-      {
-        "obligation_id": "OBL-R04-CONGRUENCE",
-        "resolution": "TRIVIAL_REFERENCE_CONGRUENCE_ONLY"
-      },
-      {
-        "axiom_id": "AX-R04_SUBSTITUTION",
-        "resolution": "NO_NONTRIVIAL_SUBSTITUTION"
+        "obligation_id": "composition",
+        "resolution": "INAPPLICABLE"
       }
     ],
     "status_changed": [
@@ -516,8 +485,8 @@
       "status": "FORMALIZED_PENDING_VALIDATION"
     },
     "composition": {
-      "detail": "transport remains undefined",
-      "status": "OPEN"
+      "detail": "AX-R05 codomain SymmetryCondition is not a legal operand domain",
+      "status": "INAPPLICABLE"
     },
     "direct_consumers": [],
     "identity_axiom": {
@@ -717,7 +686,7 @@
         "PROVISIONALLY_DEFINED": 4
       },
       "skipped": 1,
-      "unresolved": 9
+      "unresolved": 10
     },
     "profiles": [
       {
@@ -858,8 +827,8 @@
           "examples": 0,
           "proofs": 0,
           "semantics": 0,
-          "textbooks": 1,
-          "total": 2,
+          "textbooks": 0,
+          "total": 1,
           "validations": 0
         },
         "notation": "\u03a0_(D,A_D)",
@@ -1082,8 +1051,12 @@
         "reason": "open whole-RT identity obligation"
       },
       {
-        "object_id": "AX-R05_COMPOSITION",
-        "reason": "open axiom obligation"
+        "object_id": "OBL-RT-WHOLE-COMPOSITION",
+        "reason": "open whole-RT composition obligation"
+      },
+      {
+        "object_id": "OBL-SC-OPERAND-PROJECTION",
+        "reason": "open SymmetryCondition operand projection obligation"
       },
       {
         "object_id": "AX-R06_CLOSURE",
@@ -1116,9 +1089,9 @@
     ]
   },
   "output_provenance": {
-    "canonical_json_hash": "F685913405C861E8F67A8C6C889C403EA113763F4D1854A3434F9EA81D2D61F7",
-    "markdown_hash": "D954699CD496CC6CA04342E44DBCB22929F8845C86505D69BF1FC38BA513A713",
-    "source_snapshot_hash": "8A1EDDF39738642D48EBB9CB08B0F8B3B86AB03B58D53278CDF8F93BA4CA58E2",
+    "canonical_json_hash": "024A96E0F605FECFE9B0BB2935FB78375CC45756B19EDFDC7E82DE8B4859A6D1",
+    "markdown_hash": "1104B5EE73C56CED6B87B921F6BF3CF22F27C69F1DCC61C51DA7425235A63EC0",
+    "source_snapshot_hash": "1DEF526B899CDFA9F7A652D0BE5636680FEE067524A5A0317386094CC7067C80",
     "written_paths": [
       "crawl_output.json",
       "crawl_output.md"
@@ -1137,7 +1110,8 @@
     "failed_obligations": [],
     "open_obligations": [
       "OBL-RT-IDENTITY-WHOLE",
-      "AX-R05_COMPOSITION",
+      "OBL-RT-WHOLE-COMPOSITION",
+      "OBL-SC-OPERAND-PROJECTION",
       "AX-R06_CLOSURE",
       "AX-R07_MALFORMED_CONSTRUCTION",
       "AX-R08_DETERMINISM",
@@ -1157,7 +1131,7 @@
     }
   ],
   "repository_snapshot": {
-    "commit_id": "8479bd3407a8345bc18c84e0fb995404f367a87f",
+    "commit_id": "40beb2460416dbee6fec48c9a3be719993134ee0",
     "dirty_state": true,
     "excluded_paths": [
       ".git",
@@ -1169,12 +1143,12 @@
       "registry/lexicon_gap_queue.json"
     ],
     "repository_root": "D:\\projects\\acellorator",
-    "snapshot_hash": "8A1EDDF39738642D48EBB9CB08B0F8B3B86AB03B58D53278CDF8F93BA4CA58E2",
+    "snapshot_hash": "1DEF526B899CDFA9F7A652D0BE5636680FEE067524A5A0317386094CC7067C80",
     "source_files": [
       {
         "exists": true,
         "path": "docs/textbook/mono_process_textbook_complete.md",
-        "sha256": "C28660ABD5D58816797FF2974188A6D0FAE1A42D60E1611E5E2EE32EA9909407"
+        "sha256": "CDE5BE591B0D56F3E9E2657E6AF9CE7835B807EA54271D08B539FCF9E66922FE"
       },
       {
         "exists": true,
@@ -1218,7 +1192,7 @@
       {
         "exists": true,
         "path": "docs/textbook/mono_process_textbook_complete.md",
-        "sha256": "C28660ABD5D58816797FF2974188A6D0FAE1A42D60E1611E5E2EE32EA9909407"
+        "sha256": "CDE5BE591B0D56F3E9E2657E6AF9CE7835B807EA54271D08B539FCF9E66922FE"
       },
       {
         "exists": true,
@@ -1266,8 +1240,8 @@
       "passed": true
     },
     "readonly_validation": {
-      "after_hash": "8A1EDDF39738642D48EBB9CB08B0F8B3B86AB03B58D53278CDF8F93BA4CA58E2",
-      "before_hash": "8A1EDDF39738642D48EBB9CB08B0F8B3B86AB03B58D53278CDF8F93BA4CA58E2",
+      "after_hash": "1DEF526B899CDFA9F7A652D0BE5636680FEE067524A5A0317386094CC7067C80",
+      "before_hash": "1DEF526B899CDFA9F7A652D0BE5636680FEE067524A5A0317386094CC7067C80",
       "changed_paths": [],
       "checked": true,
       "read_only": true

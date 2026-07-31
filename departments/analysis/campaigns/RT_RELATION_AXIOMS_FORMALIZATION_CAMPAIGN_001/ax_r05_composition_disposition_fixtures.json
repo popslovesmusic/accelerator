@@ -1,0 +1,22 @@
+{
+  "fixture_set_id": "AX-R05-COMPOSITION-DISPOSITION-FIXTURES-001",
+  "axiom_id": "AX-R05_COMPOSITION",
+  "status": "INAPPLICABLE",
+  "positive": [
+    {"fixture_id":"AX-R05-POS-001","expression":"<S> | >S<","expected":"WELL_FORMED_SINGLE_APPLICATION","return_type":"SymmetryCondition"},
+    {"fixture_id":"AX-R05-POS-002","expression":"b | u","expected":"WELL_FORMED_SINGLE_APPLICATION","return_type":"SymmetryCondition"}
+  ],
+  "failure": [
+    {"fixture_id":"AX-R05-COMP-FAIL-001","expression":"(<S> | >S<) | >S<","expected":"MALFORMED_LEFT_OPERAND_TYPE"},
+    {"fixture_id":"AX-R05-COMP-FAIL-002","expression":"<S> | (<S> | >S<)","expected":"MALFORMED_RIGHT_OPERAND_TYPE"},
+    {"fixture_id":"AX-R05-COMP-FAIL-003","expression":"(b1 | u1) | (b2 | u2)","expected":"MALFORMED_BOTH_OPERAND_TYPES"},
+    {"fixture_id":"AX-R05-COMP-FAIL-004","expression":"(<S> | >S<) |","expected":"MALFORMED_INCOMPLETE_COMPOSITION"},
+    {"fixture_id":"AX-R05-COMP-FAIL-005","expression":"| (<S> | >S<)","expected":"MALFORMED_INCOMPLETE_COMPOSITION"},
+    {"fixture_id":"AX-R05-COMP-FAIL-006","expression":"(<S> | >S<) | >S<","expected":"IMPLICIT_COERCION_FORBIDDEN"},
+    {"fixture_id":"AX-R05-COMP-FAIL-007","expression":"<S> | (<S> | >S<)","expected":"IMPLICIT_COERCION_FORBIDDEN"},
+    {"fixture_id":"AX-R05-COMP-FAIL-008","expression":"infer associativity","expected":"ASSOCIATIVITY_INAPPLICABLE"}
+  ],
+  "new_composition_operator": false,
+  "new_closure_law": false,
+  "new_open_obligations": ["OBL-RT-WHOLE-COMPOSITION","OBL-SC-OPERAND-PROJECTION"]
+}
