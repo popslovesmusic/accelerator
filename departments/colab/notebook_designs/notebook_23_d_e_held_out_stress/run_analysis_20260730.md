@@ -21,7 +21,7 @@ Within the declared finite grid, the supplied outputs are consistent with exact 
 
 ## Integrity limitation
 
-The archive manifest reports `spec_hash_check.matches: false`: its standard-canonical recomputation is `2b499fd09f71f315c371c14798e66c4eb44b683f1e7ddefc38e45d892a05f258`, while the declared frozen specification hash is `c8b796265606d70fe14c78a8989898a591d77d8361376d64b4ad82fd326426bd`. This prevents automatic elevation beyond archive provenance until the hash-method discrepancy is reviewed. The archive also contains an embedded specification rather than a separately archived copy of the canonical source file.
+The archive manifest reports `spec_hash_check.matches: false` because that run used sorted-key compact JSON (`2b499fd09f71f315c371c14798e66c4eb44b683f1e7ddefc38e45d892a05f258`) while the frozen declaration was produced with insertion-order, two-space JSON (`c8b796265606d70fe14c78a8989898a591d77d8361376d64b4ad82fd326426bd`). The specification now explicitly records the freeze method, and the canonical notebook verifier has been aligned to it. The existing archive remains immutable and is not rewritten; a rerun is required for a new manifest to show the corrected check. The archive also contains an embedded specification rather than a separately archived copy of the canonical source file.
 
 The supplied notebook has 22 cells but no stored execution counts or cell outputs. Therefore the archive is treated as a separate recoverable output bundle, not as proof that the notebook file itself contains an executed transcript.
 
