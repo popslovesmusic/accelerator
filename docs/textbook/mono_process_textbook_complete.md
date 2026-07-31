@@ -4614,3 +4614,29 @@ It does not establish universal D/E semantics, theorem closure, injectivity, rev
 ### Failure modes / uncertainty
 
 The domain, seeds, transformations, and oracle are finite and internally specified. Shared unexamined assumptions may remain. Approved-tool replication and adversarial counterexample testing remain pending. Claim ceiling: `C2_LIMITATION_OR_NEGATIVE_RESULT`; publication and promotion remain blocked.
+
+## Notebook 25 — D/E Oracle Adversarial Test (bounded result)
+
+### Scope
+
+Notebook 25 extends the bounded D/E predicate check with eleven declared adversarial mutation families over 54 generated baselines, contexts C7-C9, profiles low/mid/high, and seeds 719, 811, and 907. The result is limited to the supplied recoverable archive and its frozen pre-execution design.
+
+### Directly observed/defined
+
+The archive contains 648 rows per pass, 1,296 total evaluations, 270 invariant checks, zero subject/oracle disagreements, zero invariant failures, zero falsification flags, and matching normalized replay digests. Artifact hashes pass. The generated archive specification preserves the embedded specification hash but omits the non-execution `source_notebook` metadata field; this is recorded as a provenance limitation.
+
+### Inferred inside the framework
+
+Within the finite adversarial domain, the bounded subject predicates and independently expressed declarative oracle agreed for the tested mutations, and the declared invariants held under the two replay passes. This is bounded consistency evidence.
+
+### External resemblance (analogy only)
+
+None asserted. The adversarial mutations, subject predicates, and oracle are internal computational testing constructs.
+
+### What it does NOT prove
+
+It does not establish universal D/E semantics, universal non-collapse, theorem closure, injectivity, reversibility, C5/C6 status, or external physical validity.
+
+### Failure modes / uncertainty
+
+The result is finite, generated, and dependent on the declared mutation families, thresholds, profiles, and oracle requirements. The generated archive metadata omission limits provenance completeness. Approved-tool replication and broader counterexample search remain pending. Claim ceiling: `C2_LIMITATION_OR_NEGATIVE_RESULT`; unrestricted promotion remains blocked.
