@@ -2,36 +2,6 @@
   "blockers": [
     {
       "blocked_objects": [
-        "symmetry_condition_relation",
-        "dominant_domain_projection",
-        "executable_semantics"
-      ],
-      "blocker_id": "BLOCK-SUBSTITUTION-EQUIVALENCE",
-      "blocker_type": "MISSING_DEFINITION",
-      "blocking_dependencies": [
-        "OBL-R04-CONGRUENCE"
-      ],
-      "dependency_paths": [
-        [
-          "OBL-R04-CONGRUENCE",
-          "AX-R04_SUBSTITUTION"
-        ],
-        [
-          "OBL-R04-TYPED-EQUIVALENCE",
-          "OBL-R04-CONGRUENCE"
-        ]
-      ],
-      "description": "General substitution is blocked because typed operand distinction semantics do not yet define an equivalence relation or relation congruence.",
-      "direct_or_propagated": "DIRECT",
-      "evidence": [
-        "TYPED_OPERAND_DISTINCTION_SEMANTICS_20260731_001"
-      ],
-      "priority": "HIGH",
-      "resolution_condition": "Define typed equivalence, then establish relation congruence before permitting nontrivial substitution.",
-      "subject_object_id": "symmetry_condition_relation"
-    },
-    {
-      "blocked_objects": [
         "symmetry_condition_relation"
       ],
       "blocker_id": "AX-R05_COMPOSITION",
@@ -230,7 +200,6 @@
       "blocker_id": "BLOCK-PROJECTION-PROPAGATED",
       "blocker_type": "MISSING_AXIOM",
       "blocking_dependencies": [
-        "AX-R04_SUBSTITUTION",
         "AX-R05_COMPOSITION",
         "AX-R06_CLOSURE",
         "AX-R07_MALFORMED_CONSTRUCTION",
@@ -290,9 +259,7 @@
     "added": [
       "symmetry_condition"
     ],
-    "added_axioms": [
-      "AX-R03_IDENTITY"
-    ],
+    "added_axioms": [],
     "added_objects": [
       "Dist_B",
       "Dist_U",
@@ -301,8 +268,16 @@
       "Witness_U",
       "Witness_SC"
     ],
+    "added_relations": [
+      "EQ-B-TRIVIAL",
+      "EQ-U-TRIVIAL"
+    ],
     "added_semantics": [
       "SEM-R04-TYPED-OPERAND-DISTINCTION"
+    ],
+    "allowed_normalizations": [
+      "canonical self-reference replacement",
+      "governed alias expansion"
     ],
     "baseline_report": "departments/analysis/crawl_reports/analysis_crawl_20260731_symmetry_relation_refined_001.json",
     "formalization_records": [
@@ -315,29 +290,16 @@
       "symmetry_condition_relation",
       "unbounded_symmetry"
     ],
-    "modified_obligations": [
-      {
-        "new_status": "OPEN_UNDEFINED",
-        "obligation_id": "OBL-R04-TYPED-EQUIVALENCE"
-      },
-      {
-        "new_status": "BLOCKED_BY_OBL-R04-TYPED-EQUIVALENCE",
-        "obligation_id": "OBL-R04-CONGRUENCE"
-      }
-    ],
+    "modified_obligations": [],
     "new_blockers": [],
     "new_equivalence_relations": [],
-    "new_open_obligations": [
-      "OBL-R04-TYPED-EQUIVALENCE",
-      "OBL-R04-CONGRUENCE"
-    ],
+    "new_open_obligations": [],
     "new_substitution_permissions": [],
     "newly_blocked": [
       "distinction_permitting_symmetry_condition"
     ],
     "newly_unblocked": [],
     "remaining_open_axioms": [
-      "AX-R04_SUBSTITUTION",
       "AX-R05_COMPOSITION",
       "AX-R06_CLOSURE",
       "AX-R07_MALFORMED_CONSTRUCTION",
@@ -353,8 +315,16 @@
     ],
     "resolved_obligations": [
       {
-        "obligation": "identity",
-        "resolution": "INAPPLICABLE"
+        "obligation_id": "OBL-R04-TYPED-EQUIVALENCE",
+        "resolution": "NO_NONTRIVIAL_EQUIVALENCE"
+      },
+      {
+        "obligation_id": "OBL-R04-CONGRUENCE",
+        "resolution": "TRIVIAL_REFERENCE_CONGRUENCE_ONLY"
+      },
+      {
+        "axiom_id": "AX-R04_SUBSTITUTION",
+        "resolution": "NO_NONTRIVIAL_SUBSTITUTION"
       }
     ],
     "status_changed": [
@@ -571,8 +541,8 @@
       "status": "OBSERVED_COMPATIBLE"
     },
     "substitution_axiom": {
-      "detail": "AX-R04 requires typed equivalence and congruence",
-      "status": "BLOCKED_PENDING_EQUIVALENCE"
+      "detail": "Only canonical self-reference and governed alias normalization are permitted",
+      "status": "RESOLVED_INAPPLICABLE_NONTRIVIALLY"
     },
     "transitive_consumers": [],
     "unbounded_symmetry_compatibility": {
@@ -747,7 +717,7 @@
         "PROVISIONALLY_DEFINED": 4
       },
       "skipped": 1,
-      "unresolved": 12
+      "unresolved": 9
     },
     "profiles": [
       {
@@ -1112,18 +1082,6 @@
         "reason": "open whole-RT identity obligation"
       },
       {
-        "object_id": "OBL-R04-TYPED-EQUIVALENCE",
-        "reason": "canonical equivalence remains undefined; requirements recorded"
-      },
-      {
-        "object_id": "OBL-R04-CONGRUENCE",
-        "reason": "blocked by unresolved typed equivalence"
-      },
-      {
-        "object_id": "AX-R04_SUBSTITUTION",
-        "reason": "open axiom obligation"
-      },
-      {
         "object_id": "AX-R05_COMPOSITION",
         "reason": "open axiom obligation"
       },
@@ -1158,8 +1116,8 @@
     ]
   },
   "output_provenance": {
-    "canonical_json_hash": "36132357DAE50B2F1B6D0722F96F6AC4DCFB4B4DCBCF8C1296075431CF56E947",
-    "markdown_hash": "E1AC7D0B2CC327D29AF3EE3DB4EF4BFEF4BE7B7E374E65BCFC24FA0A8C52EFA4",
+    "canonical_json_hash": "F685913405C861E8F67A8C6C889C403EA113763F4D1854A3434F9EA81D2D61F7",
+    "markdown_hash": "D954699CD496CC6CA04342E44DBCB22929F8845C86505D69BF1FC38BA513A713",
     "source_snapshot_hash": "8A1EDDF39738642D48EBB9CB08B0F8B3B86AB03B58D53278CDF8F93BA4CA58E2",
     "written_paths": [
       "crawl_output.json",
@@ -1179,9 +1137,6 @@
     "failed_obligations": [],
     "open_obligations": [
       "OBL-RT-IDENTITY-WHOLE",
-      "OBL-R04-TYPED-EQUIVALENCE",
-      "OBL-R04-CONGRUENCE",
-      "AX-R04_SUBSTITUTION",
       "AX-R05_COMPOSITION",
       "AX-R06_CLOSURE",
       "AX-R07_MALFORMED_CONSTRUCTION",
@@ -1202,7 +1157,7 @@
     }
   ],
   "repository_snapshot": {
-    "commit_id": "f35b2a74d95084fecc6cc954f0a7c41fa1aede93",
+    "commit_id": "8479bd3407a8345bc18c84e0fb995404f367a87f",
     "dirty_state": true,
     "excluded_paths": [
       ".git",
