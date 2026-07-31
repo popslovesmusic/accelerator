@@ -22,11 +22,14 @@ Scope: bounded follow-up actions extracted from Appendix F of the governed textb
 - Guardrail: `Omega_a` remains a provisional imbalance classifier, not a universal skew law.
 - Evidence: `registry/math/skew_condition_disposition_registry.json`; `registry/governance/patches/APPENDIX_F_SECTION_2_SKEW_CONDITIONS_001.json`; `docs/textbook/mono_process_textbook_complete.md` section `7.3` and Appendix F.
 
-### 4. Biconditional ladder resolution — OPEN
+### 4. Biconditional ladder resolution — RESOLVED AS SCOPED DISPOSITION
 
 - Obligation: `OQ_004`
-- Next action: define the recursive scale relation and its admissible transition conditions, then test whether the ladder is coherent under declared bounded cases.
-- Guardrail: no universal recursive-scale claim until assumptions and counterexamples are recorded.
+- Current disposition: `SCOPED_DISPOSITION_RECURSIVE_SCALE_REPRESENTATION`
+- Resolution: the ladder is a provisional representation of nested RT expressions mediated by deviation and residue-governed continuation under declared admissibility and trace conditions; `PRIN_007` does not establish a universal recursive-scale law.
+- Remaining work: construct bounded positive/failure transitions, specify cross-scale composition and trace inheritance, test finite-depth behavior, and reaudit theorem eligibility.
+- Guardrail: ordinary logical `iff` remains a local projection and is not identical to the full residue-conditioned relation.
+- Evidence: `registry/math/biconditional_ladder_disposition_registry.json`; `registry/governance/patches/APPENDIX_F_SECTION_2_BICONDITIONAL_LADDER_001.json`; `registry/claim_registry.json` entry `MPF_RT_BICONDITIONAL_LADDER_001`.
 
 ### 5. Deviation-to-geometry recovery — OPEN
 
