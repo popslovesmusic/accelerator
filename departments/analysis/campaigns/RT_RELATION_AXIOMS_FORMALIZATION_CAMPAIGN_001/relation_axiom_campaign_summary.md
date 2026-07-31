@@ -2,7 +2,7 @@
 
 ## Status
 
-AX-R01 and AX-R02 are formalized provisionally. AX-R03 is `INAPPLICABLE` for `|`; whole-RT identity is separate. Typed operand-distinction semantics are provisionally formalized as `SEM-R04-TYPED-OPERAND-DISTINCTION`. OBL-R04-TYPED-EQUIVALENCE is unblocked but unresolved; congruence and substitution remain blocked. AX-R05 through AX-R12 remain open.
+AX-R01 and AX-R02 are formalized provisionally. AX-R03 is `INAPPLICABLE` for `|`; whole-RT identity is separate. Typed operand-distinction semantics are provisionally formalized as `SEM-R04-TYPED-OPERAND-DISTINCTION`. The formal requirements for OBL-R04-TYPED-EQUIVALENCE are recorded, but no canonical equivalence predicate is defined; the obligation remains `OPEN_UNDEFINED`. Congruence and substitution remain blocked.
 
 ## Observed and created
 
@@ -15,6 +15,7 @@ AX-R01 and AX-R02 are formalized provisionally. AX-R03 is `INAPPLICABLE` for `|`
 - AX-R03 introduces no identity element and does not infer a monoid, group, semigroup, or closed operation.
 - AX-R04 permits only reference identity and governed alias normalization; general substitution remains blocked.
 - No equivalence relation, substitution permission, or congruence permission was created.
+- The formalization records required properties and failure conditions only; it does not define `≈_B`, `≈_U`, or `≈_SC`.
 - `Dist_B`, `Dist_U`, and `Dist_SC` require typed witnesses; absence of a witness does not establish equivalence.
 
 ## Not established

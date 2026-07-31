@@ -1,0 +1,27 @@
+{
+  "formalization_id": "OBL-R04-TYPED-EQUIVALENCE-FORMALIZATION-001",
+  "obligation_id": "OBL-R04-TYPED-EQUIVALENCE",
+  "status": "OPEN_UNDEFINED",
+  "parent_axiom": "AX-R04_SUBSTITUTION",
+  "purpose": "Record the minimum requirements for a future typed equivalence without defining one.",
+  "candidate_domains": [
+    {"id":"EQ-B","domain":"BoundedSymmetry","notation":"≈_B","status":"UNDEFINED"},
+    {"id":"EQ-U","domain":"UnboundedSymmetry","notation":"≈_U","status":"UNDEFINED"},
+    {"id":"EQ-SC","domain":"SymmetryCondition","notation":"≈_SC","status":"UNDEFINED"}
+  ],
+  "required_properties": ["REFLEXIVITY","SYMMETRY","TRANSITIVITY","TYPE_PRESERVATION","ROLE_PRESERVATION","ORIENTATION_PRESERVATION","BOUND_CONDITION_PRESERVATION","DISTINCTION_PRESERVATION","RESIDUE_OR_HISTORY_PRESERVATION"],
+  "required_congruence_rules": ["LEFT_CONGRUENCE","RIGHT_CONGRUENCE","BILATERAL_CONGRUENCE"],
+  "rejected_bases": ["SAME_DECLARED_TYPE","SAME_NOTATION","SAME_HASH","SAME_FINITE_OUTPUTS","SAME_RELATION_RESULT","WHOLE_RT_IDENTITY"],
+  "currently_allowed": ["canonical self-reference","governed alias expansion"],
+  "failure_semantics": [
+    {"case":"same type without equivalence definition","result":"EQUIVALENCE_UNDEFINED"},
+    {"case":"matching finite outputs","result":"BOUNDED_AGREEMENT_INSUFFICIENT"},
+    {"case":"cross-role comparison","result":"MALFORMED_CROSS_ROLE_EQUIVALENCE"},
+    {"case":"absence of distinction witness","result":"INVALID_ARGUMENT_FROM_ABSENCE_OF_WITNESS"}
+  ],
+  "new_equivalence_relations": [],
+  "new_substitution_permissions": [],
+  "new_congruence_permissions": [],
+  "blocking": {"AX-R04_SUBSTITUTION":"BLOCKED_BY_OBL-R04-CONGRUENCE","OBL-R04-CONGRUENCE":"BLOCKED_BY_OBL-R04-TYPED-EQUIVALENCE"},
+  "resolution_requirement": "A future authority packet must define the candidate relation, its domain, properties, witnesses, and congruence proof obligations before equivalence can be admitted."
+}
