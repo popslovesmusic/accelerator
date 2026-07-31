@@ -2,7 +2,7 @@
 
 ## Status
 
-AX-R01 and AX-R02 are formalized provisionally and remain bounded by fixture validation. The remaining AX-R03 through AX-R12 obligations remain open. The monolithic `relation_axioms` obligation is replaced by AX-R01 through AX-R12.
+AX-R01 and AX-R02 are formalized provisionally. AX-R03 is dispositioned `INAPPLICABLE` for `|`; whole-RT identity is a separate open obligation. The remaining AX-R04 through AX-R12 obligations remain open.
 
 ## Observed and created
 
@@ -12,6 +12,7 @@ AX-R01 and AX-R02 are formalized provisionally and remain bounded by fixture val
 - Cycle, typing, schema, and read-only checks passed for these campaign artifacts.
 - AX-R01 defines only directional typing; it does not establish commutativity, substitution, or composition.
 - AX-R02 rejects generic `SymmetryCondition` coercion and same-type operand pairs; it does not add substitution or composition.
+- AX-R03 introduces no identity element and does not infer a monoid, group, semigroup, or closed operation.
 
 ## Not established
 

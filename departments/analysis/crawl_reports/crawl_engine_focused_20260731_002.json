@@ -4,30 +4,6 @@
       "blocked_objects": [
         "symmetry_condition_relation"
       ],
-      "blocker_id": "AX-R03_IDENTITY",
-      "blocker_type": "MISSING_AXIOM",
-      "blocking_dependencies": [
-        "AX-R03_IDENTITY"
-      ],
-      "dependency_paths": [
-        [
-          "AX-R03_IDENTITY",
-          "symmetry_condition_relation"
-        ]
-      ],
-      "description": "Independently governable relation axiom remains open.",
-      "direct_or_propagated": "DIRECT",
-      "evidence": [
-        "RT_RELATION_AXIOMS_FORMALIZATION_CAMPAIGN_001"
-      ],
-      "priority": "CRITICAL",
-      "resolution_condition": "Close the named axiom through its own governed definition, validation, and proof disposition.",
-      "subject_object_id": "symmetry_condition_relation"
-    },
-    {
-      "blocked_objects": [
-        "symmetry_condition_relation"
-      ],
       "blocker_id": "AX-R04_SUBSTITUTION",
       "blocker_type": "MISSING_AXIOM",
       "blocking_dependencies": [
@@ -248,7 +224,6 @@
       "blocker_id": "BLOCK-PROJECTION-PROPAGATED",
       "blocker_type": "MISSING_AXIOM",
       "blocking_dependencies": [
-        "AX-R03_IDENTITY",
         "AX-R04_SUBSTITUTION",
         "AX-R05_COMPOSITION",
         "AX-R06_CLOSURE",
@@ -310,7 +285,7 @@
       "symmetry_condition"
     ],
     "added_axioms": [
-      "AX-R02_TYPE_COMPATIBILITY"
+      "AX-R03_IDENTITY"
     ],
     "baseline_report": "departments/analysis/crawl_reports/analysis_crawl_20260731_symmetry_relation_refined_001.json",
     "modified": [
@@ -320,12 +295,14 @@
       "symmetry_condition_relation",
       "unbounded_symmetry"
     ],
+    "new_open_obligations": [
+      "OBL-RT-IDENTITY-WHOLE"
+    ],
     "newly_blocked": [
       "distinction_permitting_symmetry_condition"
     ],
     "newly_unblocked": [],
     "remaining_open_axioms": [
-      "AX-R03_IDENTITY",
       "AX-R04_SUBSTITUTION",
       "AX-R05_COMPOSITION",
       "AX-R06_CLOSURE",
@@ -341,7 +318,10 @@
       "relation_axioms"
     ],
     "resolved_obligations": [
-      "AX-R02_TYPE_COMPATIBILITY"
+      {
+        "obligation": "identity",
+        "resolution": "INAPPLICABLE"
+      }
     ],
     "status_changed": [
       "distinction_permitting_symmetry_condition"
@@ -537,8 +517,8 @@
     },
     "direct_consumers": [],
     "identity_axiom": {
-      "detail": "not defined",
-      "status": "OPEN"
+      "detail": "AX-R03 is not an operator-local identity law; whole-RT identity remains separate",
+      "status": "INAPPLICABLE"
     },
     "malformed_construction_rules": {
       "detail": "AX-R07 remains open",
@@ -843,7 +823,6 @@
       {
         "abstraction_layer": "PROJECTIONS",
         "blocked_by": [
-          "AX-R03_IDENTITY",
           "AX-R04_SUBSTITUTION",
           "AX-R05_COMPOSITION",
           "AX-R06_CLOSURE",
@@ -962,7 +941,6 @@
       {
         "abstraction_layer": "RELATIONS",
         "blocked_by": [
-          "AX-R03_IDENTITY",
           "AX-R04_SUBSTITUTION",
           "AX-R05_COMPOSITION",
           "AX-R06_CLOSURE",
@@ -1001,7 +979,6 @@
         "notation": "|",
         "object_id": "symmetry_condition_relation",
         "open_axioms": [
-          "AX-R03_IDENTITY",
           "AX-R04_SUBSTITUTION",
           "AX-R05_COMPOSITION",
           "AX-R06_CLOSURE",
@@ -1097,8 +1074,8 @@
     ],
     "unresolved": [
       {
-        "object_id": "AX-R03_IDENTITY",
-        "reason": "open axiom obligation"
+        "object_id": "OBL-RT-IDENTITY-WHOLE",
+        "reason": "open whole-RT identity obligation"
       },
       {
         "object_id": "AX-R04_SUBSTITUTION",
@@ -1139,8 +1116,8 @@
     ]
   },
   "output_provenance": {
-    "canonical_json_hash": "3674BA59254469CED542EA11F1266B0E0D7185F739FCD43731A8F86F448D24EE",
-    "markdown_hash": "E97C3C19F96C3BCAE0A2CDC11C2A64C6A3D3806C506AF0DDC3EE734A4800F9FE",
+    "canonical_json_hash": "C6D1C49CD5C43160B63A59390FC601F2B5D71F59F57190063E833F62B5F6A7F0",
+    "markdown_hash": "572043E7EED1BA24F61116189B900CEF873211CE45649699F30112555D83AC18",
     "source_snapshot_hash": "8A1EDDF39738642D48EBB9CB08B0F8B3B86AB03B58D53278CDF8F93BA4CA58E2",
     "written_paths": [
       "crawl_output.json",
@@ -1159,7 +1136,7 @@
     ],
     "failed_obligations": [],
     "open_obligations": [
-      "AX-R03_IDENTITY",
+      "OBL-RT-IDENTITY-WHOLE",
       "AX-R04_SUBSTITUTION",
       "AX-R05_COMPOSITION",
       "AX-R06_CLOSURE",
@@ -1181,7 +1158,7 @@
     }
   ],
   "repository_snapshot": {
-    "commit_id": "028a3e3fdd0503d620053fba3ee8c193166d1625",
+    "commit_id": "88a5209f30208ef66a98916b6da4f4741017f96b",
     "dirty_state": true,
     "excluded_paths": [
       ".git",
