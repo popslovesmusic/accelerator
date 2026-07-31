@@ -192,6 +192,9 @@ Every routed item SHALL retain source provenance.
 ### ANALYSIS_INTAKE_004
 The intake department SHALL recommend routing but SHALL NOT execute, promote, or close work.
 
+### ANALYSIS_INTAKE_005
+Approved or explicitly user-authorized definitions introduced through intake SHALL be inducted into the canonical root lexicon gap queue before downstream use. Induction SHALL preserve source provenance and keep the term at `GAP_OPEN` or another explicitly authorized provisional status; lexicon induction does not constitute validation, promotion, theorem registration, or execution authority.
+
 ---
 
 ## Validation / Falsification Status

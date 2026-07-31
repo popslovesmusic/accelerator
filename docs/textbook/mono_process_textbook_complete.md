@@ -4226,6 +4226,7 @@ This appendix tracks the formal status of critical gaps identified during the dr
 - **Closure Neighborhoods:** [ **C1_DEFINED_PROVISIONAL_MAINTAINED** ]
 - **Admissible Organization Operator ($Org_a$):** [ **C1_DEFINED_PROVISIONAL** ]
 - **Admissible Distinction Organization Signature ($\Sigma_D$):** [ **C1_DEFINED_PROVISIONAL** ]
+- **Universal Distinction Condition and Dominant-Domain Projection:** [ **C1_DEFINED_PROVISIONAL** ] Appendix F packets `RT_UNIVERSAL_DISTINCTION_CONDITION_REFINED_002` and `RT_PROJECTION_OPERATOR_PI_D_REFINED_002` define `(*|*)` as a typed bounded/unbounded symmetry distinction constructor and `Π_(D,A_D)` as a domain/admissibility-context-indexed candidate-set projection. Minimality, deterministic selection, cross-domain composition, executable semantics, and external ontology remain unestablished. The associated terms are inducted in `registry/lexicon_gap_queue.json` at `GAP_OPEN`.
 
 ### 2. High-Priority Gaps (Categorized)
 
