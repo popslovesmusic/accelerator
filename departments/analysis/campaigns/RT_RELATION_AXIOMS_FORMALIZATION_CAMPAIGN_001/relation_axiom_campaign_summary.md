@@ -2,7 +2,7 @@
 
 ## Status
 
-AX-R01 and AX-R02 are formalized provisionally. AX-R03 is `INAPPLICABLE` for `|`; whole-RT identity is separate. Typed operand-distinction semantics are provisionally formalized. The authorized `NO_NONTRIVIAL_EQUIVALENCE` path resolves AX-R04 to trivial reference identity only. AX-R05 is `INAPPLICABLE`, AX-R06 is `RESOLVED_NOT_CLOSED`, AX-R07 is provisionally formalized as validation-only malformed-construction rejection, AX-R08 is `PARTIALLY_RESOLVED_BLOCKED`, and AX-R09 is `RESOLVED_INAPPLICABLE` because iterated relation application is not typable. Whole-RT composition/associativity, operand projection, canonical projection selection, executable semantics, and AX-R10–AX-R12 remain open.
+AX-R01 and AX-R02 are formalized provisionally. AX-R03 is `INAPPLICABLE` for `|`; whole-RT identity is separate. Typed operand-distinction semantics are provisionally formalized. The authorized `NO_NONTRIVIAL_EQUIVALENCE` path resolves AX-R04 to trivial reference identity only. AX-R05 is `INAPPLICABLE`, AX-R06 is `RESOLVED_NOT_CLOSED`, AX-R07 is provisionally formalized as validation-only malformed-construction rejection, AX-R08 is `PARTIALLY_RESOLVED_BLOCKED`, AX-R09 is `RESOLVED_INAPPLICABLE` because iterated relation application is not typable, and AX-R10 is `RESOLVED_INAPPLICABLE` because the reversed expression is malformed. Whole-RT composition/associativity/commutativity, operand projection, canonical projection selection, executable semantics, and AX-R11–AX-R12 remain open.
 
 ## Observed and created
 
@@ -23,6 +23,7 @@ AX-R01 and AX-R02 are formalized provisionally. AX-R03 is `INAPPLICABLE` for `|`
 - Runtime authority fallback is recorded separately: five Q0 inventory artifacts are missing; this has no mathematical effect.
 - AX-R08 does not use filesystem, database, traversal, or candidate order as a semantic selector.
 - AX-R09 does not assert nonassociativity; it only records operator-local inapplicability.
+- AX-R10 does not assert noncommutativity; order-sensitive typing makes the reversed expression inapplicable.
 - `Dist_B`, `Dist_U`, and `Dist_SC` require typed witnesses; absence of a witness does not establish equivalence.
 
 ## Not established
