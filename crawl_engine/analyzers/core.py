@@ -88,7 +88,7 @@ def impact_counts(root, term, notation, source_files=None):
     return counts
 
 def object_profiles(root, objects, graph, source_files=None):
-    relation_axioms = ["AX-R01_OPERAND_ORDER", "AX-R02_TYPE_COMPATIBILITY", "AX-R03_IDENTITY", "AX-R04_SUBSTITUTION", "AX-R05_COMPOSITION", "AX-R06_CLOSURE", "AX-R07_MALFORMED_CONSTRUCTION", "AX-R08_DETERMINISM", "AX-R09_ASSOCIATIVITY", "AX-R10_COMMUTATIVITY", "AX-R11_DOMAIN_OF_DEFINITION", "AX-R12_PROJECTION_COMPATIBILITY"]
+    relation_axioms = ["AX-R03_IDENTITY", "AX-R04_SUBSTITUTION", "AX-R05_COMPOSITION", "AX-R06_CLOSURE", "AX-R07_MALFORMED_CONSTRUCTION", "AX-R08_DETERMINISM", "AX-R09_ASSOCIATIVITY", "AX-R10_COMMUTATIVITY", "AX-R11_DOMAIN_OF_DEFINITION", "AX-R12_PROJECTION_COMPATIBILITY"]
     direct = graph.get("direct_consumers", {})
     transitive = graph.get("transitive_consumers", {})
     returns = {"symmetry_condition_relation":["symmetry_condition"],"symmetry_condition":["SymmetryCondition"],"bounded_symmetry":["SymmetryCondition"],"unbounded_symmetry":["SymmetryCondition"],"dominant_domain_projection":["CandidateSet(PrimitiveRealization)"],"distinction_permitting_symmetry_condition":["SymmetryCondition"]}
