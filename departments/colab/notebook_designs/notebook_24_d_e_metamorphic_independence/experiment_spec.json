@@ -1,0 +1,33 @@
+{
+  "spec_id": "MPF_SIM_D_E_METAMORPHIC_INDEPENDENCE_001",
+  "schema_version": "1.0.0",
+  "status": "IMMUTABLE_SPEC",
+  "created_at": "2026-07-30T20:32:00-04:00",
+  "research_question": "Do frozen bounded P127/P128 candidate predicates satisfy independently declared metamorphic invariants under novel record construction and single-field transformations?",
+  "independence_basis": [
+    "No reuse of Notebook 23 held-out fixture rows or its expected-control matrix.",
+    "Novel seeds 719, 823, 947 and independently constructed payloads.",
+    "Expected outcomes derived from metamorphic relations and a separate declarative oracle, not source-relation case labels.",
+    "Single-field mutations isolate causal dependencies.",
+    "Input order is independently shuffled before a second replay."
+  ],
+  "subject_under_test": "P127_P128_CANDIDATE_20260730_001",
+  "contexts": ["C4", "C5", "C6"],
+  "profiles": ["low", "mid", "high"],
+  "seeds": [719, 823, 947],
+  "metamorphic_relations": [
+    {"id": "MR01", "name": "valid_baseline_acceptance", "expectation": "A fully bound valid record is REPRESENTABLE and NON_COLLAPSED."},
+    {"id": "MR02", "name": "witness_removal_localization", "expectation": "Removing witness changes P127 to REJECT_WITNESS and leaves P128 unchanged."},
+    {"id": "MR03", "name": "history_removal_localization", "expectation": "Removing history changes P127 to REJECT_HISTORY and leaves P128 unchanged."},
+    {"id": "MR04", "name": "type_mutation_localization", "expectation": "Changing relation type changes P127 to REJECT_TYPE and leaves P128 unchanged."},
+    {"id": "MR05", "name": "context_nontransport", "expectation": "Changing source context changes P127 to REJECT_CONTEXT and P128 to REJECT_PROFILE."},
+    {"id": "MR06", "name": "threshold_boundary_strictness", "expectation": "Setting distinction equal to epsilon leaves P127 unchanged and changes P128 to REJECT_SUBTHRESHOLD."},
+    {"id": "MR07", "name": "threshold_monotonicity", "expectation": "For fixed valid bindings, distinction below/equal threshold rejects and above threshold admits."},
+    {"id": "MR08", "name": "witness_enrichment_invariance", "expectation": "Bare versus enriched complete witness does not alter classifications."},
+    {"id": "MR09", "name": "history_extension_invariance", "expectation": "Appending valid history entries does not alter classifications."},
+    {"id": "MR10", "name": "irrelevant_payload_permutation_invariance", "expectation": "Changing trace and payload tokens without changing required bindings does not alter classifications."}
+  ],
+  "claim_ceiling": "C2_LIMITATION_OR_NEGATIVE_RESULT",
+  "blocked_interpretations": ["Universal D/E semantics", "Theorem promotion", "Injectivity", "Reversibility", "Physical validation"],
+  "content_sha256": "a31217df001f218f8aefb3b204d18322a65333b82489abe7de4b53ddf26c1dae"
+}
