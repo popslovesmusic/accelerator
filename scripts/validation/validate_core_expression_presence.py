@@ -3,6 +3,32 @@ import glob
 import json
 import sys
 
+
+def _guardrail_text_removed(filepath, content):
+    """Remove explicitly negative JSON governance fields before phrase scanning."""
+    if not filepath.endswith('.json'):
+        return content
+    try:
+        document = json.loads(content)
+    except json.JSONDecodeError:
+        return content
+
+    guardrail_keys = {
+        "forbidden_statements", "minimum_conditions", "non_claims", "explicit_non_claims",
+        "does_not_prove", "firewall", "restriction", "failure_conditions", "forbidden_reading"
+    }
+
+    def scrub(value, key=None):
+        if key in guardrail_keys:
+            return ""
+        if isinstance(value, dict):
+            return {name: scrub(child, name) for name, child in value.items()}
+        if isinstance(value, list):
+            return [scrub(child, key) for child in value]
+        return value
+
+    return json.dumps(scrub(document), ensure_ascii=False)
+
 def validate_core_expression():
     results = {
         "core_expression_validation": {
@@ -52,6 +78,7 @@ def validate_core_expression():
             with open(filepath, 'r', encoding='utf-8') as f:
                 content = f.read()
                 content_lower = content.lower()
+                scan_content = _guardrail_text_removed(filepath, content).lower()
                 
             # Check for required strings (case-insensitive)
             for s in required_strings:
@@ -61,7 +88,7 @@ def validate_core_expression():
             # Check for blocked readings
             for blocked in blocked_readings:
                 # Exclude the string "forbidden_reading": "Logical equivalence or ordinary biconditional."
-                safe_content = content.replace('"forbidden_reading": "Logical equivalence or ordinary biconditional."', '')
+                safe_content = scan_content.replace('"forbidden_reading": "Logical equivalence or ordinary biconditional."', '')
                 
                 is_excluded = any(ex in filepath for ex in excluded_files)
                 
