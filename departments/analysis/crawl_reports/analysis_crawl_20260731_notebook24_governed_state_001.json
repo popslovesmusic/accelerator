@@ -1,0 +1,110 @@
+{
+  "crawl_id": "analysis_crawl_20260731_notebook24_governed_state_001",
+  "crawl_type": "BOUNDED_READ_ONLY_ANALYSIS_CRAWL",
+  "crawl_date": "2026-07-31",
+  "scope": {
+    "object_ids": [
+      "MPF_SIM_D_E_METAMORPHIC_INDEPENDENCE_001",
+      "MPF_SIM_D_E_METAMORPHIC_INDEPENDENCE_001_RESULTS_001",
+      "MPF_SIM_D_E_HELD_OUT_STRESS_001",
+      "MPF_SIM_D_E_HELD_OUT_STRESS_REHASH_002_RESULTS_001",
+      "OBL-D-001A",
+      "OBL-D-001B",
+      "OBL-D-001C",
+      "OBL-D-001D",
+      "OBL-D-001E",
+      "DEBT_D_SEMANTICS_PROOF_001"
+    ],
+    "domains": ["D-semantics", "Colab evidence", "metamorphic testing", "governance state", "claim boundaries"],
+    "time_range": "current repository state through 2026-07-31",
+    "include_superseded": true
+  },
+  "source_artifact_set": [
+    "departments/analysis/AGENTS.md",
+    "departments/analysis/GEMINI.md",
+    "departments/analysis/department_ssot.md",
+    "registry/math/d_semantics_obligation_registry.json",
+    "registry/research_debt_registry.json",
+    "registry/colab_result_archive_registry.json",
+    "registry/induction_registry.json",
+    "governance/live/induction_queue.json",
+    "registry/claim_registry.json",
+    "registry/lexicon_gap_queue.json",
+    "docs/textbook/mono_process_textbook_complete.md",
+    "departments/colab/notebook_designs/notebook_24_d_e_metamorphic_independence/experiment_spec.json",
+    "departments/colab/results/MPF_SIM_D_E_METAMORPHIC_INDEPENDENCE_001_RESULTS.zip",
+    "departments/colab/results/MPF_SIM_D_E_METAMORPHIC_INDEPENDENCE_001_processing_manifest.json",
+    "departments/colab/results/MPF_SIM_D_E_METAMORPHIC_INDEPENDENCE_001_analysis_20260731.md"
+  ],
+  "normalization_and_dependency_rule": "Live registries control status; archive manifests control recoverable result identity; analysis reports are noncanonical projections; excluded Notebook 23 artifacts are not evidence or inputs.",
+  "inventory": {
+    "d_obligations": {"total": 5, "A": "DISCHARGED", "B": "DISCHARGED_BOUNDED", "C": "DISCHARGED_BOUNDED", "D": "DISCHARGED_BOUNDED", "E": "DISCHARGED_BOUNDED"},
+    "d_registry_status": "ACTIVE_OPEN",
+    "d_claim_ceiling": "C1_DEFINED_PROVISIONAL",
+    "research_debt_d_semantics": {"id": "DEBT_D_SEMANTICS_PROOF_001", "status": "resolved", "blocks": ["D_semantics_theorem_promotion", "Pi_D_preservation_claim"]},
+    "colab_archive_count": 14,
+    "induction_entry_count": 50,
+    "live_queue_entry_count": 53,
+    "claim_registry_entry_count": 67,
+    "lexicon_gap_queue_entry_count": 234,
+    "notebook_23_status": "EXCLUDED_FROZEN_OR_REPLACED; not used as Notebook 24 input",
+    "notebook_24_status": "C2_LIMITATION_OR_NEGATIVE_RESULT candidate pending governed review"
+  },
+  "evidence_alignment": {
+    "notebook24": {
+      "epistemic_status": "PARTIALLY_SUPPORTED",
+      "proof_status": "NOT_ATTEMPTED",
+      "observations": {"baselines": 54, "checks": 648, "relations": 10, "oracle_disagreements": 0, "metamorphic_disagreements": 0, "replay_agreement": true, "falsification_flags": 0},
+      "support_level": "C2 bounded computational output candidate",
+      "mapping": "The independent declarative oracle and metamorphic transformations test local behavior of the frozen candidate predicates; they do not derive the predicates or establish external semantics.",
+      "uncertainty": ["finite seed/context/profile grid", "oracle remains an internal declarative model", "approved-tool replication pending"],
+      "falsification_condition": "Any oracle disagreement, metamorphic contradiction, order-dependent replay digest, specification/hash mismatch, or preserved counterexample reopens the bounded consistency candidate."
+    },
+    "notebook23_rehash": {
+      "epistemic_status": "PARTIALLY_SUPPORTED",
+      "proof_status": "NOT_ATTEMPTED",
+      "observation": "The corrected-hash repeat run reproduced 324 rows byte-identical to the excluded prior archive; it is repeatability evidence, not independent evidence."
+    }
+  },
+  "discoveries": [
+    {
+      "discovery_id": "DISCOVERY_ANALYSIS_20260731_NOTEBOOK24_METAMORPHIC_INVARIANCE_001",
+      "discovery_class": "INVARIANT_CANDIDATE",
+      "title": "Finite metamorphic consistency of frozen D/E candidate predicates",
+      "statement": "Within the declared Notebook 24 finite grid, the candidate predicates agree with an independently expressed oracle under ten declared transformations and order-shuffled replay.",
+      "formal_statement": null,
+      "domain": ["D-semantics", "bounded metamorphic testing"],
+      "source_object_ids": ["MPF_SIM_D_E_METAMORPHIC_INDEPENDENCE_001_RESULTS_001"],
+      "dependency_ids": ["OBL-D-001D", "OBL-D-001E"],
+      "premises": ["frozen predicate version", "independent oracle", "finite declared transformations", "replay digest equality"],
+      "implicit_assumptions": ["oracle requirements correctly represent the intended bounded test", "generated records remain within declared domains"],
+      "derivation_steps": ["compare subject output to oracle", "compare output transition to metamorphic expectation", "compare normalized replay digests"],
+      "proof_method": null,
+      "proof_status": "NOT_ATTEMPTED",
+      "proof_obligations": ["define the intended semantic relation independently of the candidate implementation", "test broader domains and adversarial countermodels"],
+      "counterexample_search": {"performed": true, "method": ["ten metamorphic relations", "separate declarative oracle", "order-shuffled replay"], "result": "no counterexample in declared finite run"},
+      "supporting_evidence_ids": ["MPF_SIM_D_E_METAMORPHIC_INDEPENDENCE_001_RESULTS_001"],
+      "conflicting_evidence_ids": [],
+      "epistemic_status": "CONJECTURED",
+      "novelty": {"duplicate_check_complete": true, "nearest_existing_objects": ["MPF_SIM_D_E_HELD_OUT_STRESS_REHASH_002_RESULTS_001"], "novel_contribution": "Independent metamorphic/oracle test rather than labeled fixture replay."},
+      "impact": {"upstream_objects": ["P127_P128_CANDIDATE_20260730_001"], "downstream_objects": ["D bounded evidence review"], "objects_requiring_reanalysis": []},
+      "falsification_conditions": ["oracle disagreement", "metamorphic contradiction", "replay order dependence", "out-of-domain counterexample"],
+      "recommended_next_action": "FORMALIZE the metamorphic relations and oracle assumptions, then seek adversarial counterexamples before any claim elevation.",
+      "canonical_promotion_allowed": false,
+      "human_review_required": true,
+      "created_at": "2026-07-31T00:45:00Z",
+      "content_hash": "NONCANONICAL_CRAWL_DISCOVERY"
+    }
+  ],
+  "open_frontier": [
+    {"id": "FRONTIER-01", "class": "PROOF_GAP", "statement": "Finite metamorphic agreement does not discharge universal D/E preservation or non-collapse.", "next_evidence": "Typed formal derivation plus independent adversarial domains."},
+    {"id": "FRONTIER-02", "class": "GOVERNANCE_DEFECT", "statement": "The D registry remains ACTIVE_OPEN with C1 ceiling despite bounded statuses for all five obligations.", "next_evidence": "Human disposition/reconciliation of the final D gate and promotion boundary."},
+    {"id": "FRONTIER-03", "class": "FALSIFICATION_TARGET", "statement": "The internal oracle may encode the same assumptions as the subject under test.", "next_evidence": "A separately specified oracle or formal semantics review with adversarial countermodels."}
+  ],
+  "recommended_next_action": "FORMALIZE",
+  "success_assessment": {"outcome": "PARTIAL_SUCCESS", "reason": "The crawl connected Notebook 24 independent bounded evidence to D obligations and exposed the remaining oracle-independence, finite-domain, and governance-disposition frontiers; no obligation or claim was promoted.", "confidence": "high"},
+  "termination_reason": "Bounded current-state and Notebook 24 evidence scope completed; further progress requires formal review, adversarial evidence, or an authorized governance disposition rather than additional inventory.",
+  "what_this_crawl_does_not_authorize": ["canonical registry mutation", "textbook edit", "claim promotion", "theorem promotion", "D-obligation discharge", "simulation execution", "DB artifact indexing", "external physical interpretation", "commit"],
+  "crawl_result": "PASS_BOUNDED_READ_ONLY_SYNTHESIS",
+  "continuation_token": "CONTINUE_WITH_FORMAL_ORACLE_REVIEW_20260731_001"
+}
