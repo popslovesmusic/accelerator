@@ -26,6 +26,6 @@ No universal D/E semantics, theorem closure, injectivity, reversibility, C5/C6 s
 
 ## Failure modes / uncertainty
 
-The generated archive `experiment_spec.json` omits the non-execution `source_notebook` metadata field present in the frozen design sheet. The embedded specification content hash and all execution-relevant fields match, so the result is retained with a provenance limitation. The domain is finite and approved-tool replication remains pending.
+The generated archive `experiment_spec.json` omits the non-execution `source_notebook` metadata field present in the frozen design sheet. The embedded specification content hash and all execution-relevant fields match, so the result is retained with a provenance limitation. The domain is finite and approved-tool computational replication is verified at environment level; formal semantics, oracle independence, and theorem obligations remain open.
 
 Evidence class: `C2_LIMITATION_OR_NEGATIVE_RESULT`. Promotion above C2 is blocked.

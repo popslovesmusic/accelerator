@@ -4639,4 +4639,4 @@ It does not establish universal D/E semantics, universal non-collapse, theorem c
 
 ### Failure modes / uncertainty
 
-The result is finite, generated, and dependent on the declared mutation families, thresholds, profiles, and oracle requirements. The generated archive metadata omission limits provenance completeness. Approved-tool replication and broader counterexample search remain pending. Claim ceiling: `C2_LIMITATION_OR_NEGATIVE_RESULT`; unrestricted promotion remains blocked.
+The result is finite, generated, and dependent on the declared mutation families, thresholds, profiles, and oracle requirements. The generated archive metadata omission limits provenance completeness. Approved-tool computational replication is verified at environment level; broader counterexample search, formal semantics, and theorem obligations remain open. Claim ceiling: `C2_LIMITATION_OR_NEGATIVE_RESULT`; unrestricted promotion remains blocked.
