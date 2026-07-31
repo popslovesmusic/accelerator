@@ -1,0 +1,19 @@
+{
+  "report_id": "RT_D_E_CLEAN_ROOM_ORACLE_SELF_TEST_20260731_001",
+  "implementation_id": "RT_D_E_CLEAN_ROOM_ORACLE_IMPL_20260731_001",
+  "spec_capture_id": "RT_D_E_INDEPENDENT_FORMAL_ORACLE_SPEC_20260731_001",
+  "status": "SELF_TEST_PASS_IMPLEMENTATION_NOT_COMPARISON",
+  "claim_ceiling": "C2_LIMITATION_OR_NEGATIVE_RESULT",
+  "proof_status": "NOT_ATTEMPTED",
+  "commands": [
+    {"command": "python -m pytest -q test_clean_room_oracle.py", "exit_code": 0, "result": "5 passed"},
+    {"command": "lean lean/DEOracle.lean", "exit_code": 0, "result": "compiled"}
+  ],
+  "tested_properties": ["baseline admission", "context rejection precedence", "strict threshold boundary", "unknown profile rejection", "strict history ordering and terminal state"],
+  "candidate_comparison_performed": false,
+  "candidate_code_imported": false,
+  "prior_notebook_code_imported": false,
+  "interpretation": "Specification-derived implementation health only; these self-tests do not establish equivalence to P127/P128 or any prior oracle.",
+  "limitations": ["Lean scaffold uses an exact Int bounded numeric instantiation; Python evaluator covers finite numeric inputs.", "Clean-room reviewer sign-off is pending.", "Adversarial corpus generation and candidate comparison are pending.", "No formal equivalence proof was attempted."],
+  "next_action": "Human review of clean-room boundary, then freeze an independent corpus and perform governed candidate comparison."
+}
