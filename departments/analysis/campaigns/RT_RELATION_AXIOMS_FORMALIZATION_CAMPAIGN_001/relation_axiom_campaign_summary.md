@@ -2,7 +2,7 @@
 
 ## Status
 
-AX-R01 and AX-R02 are formalized provisionally. AX-R03 is `INAPPLICABLE` for `|`; whole-RT identity is separate. Typed operand-distinction semantics are provisionally formalized. The authorized `NO_NONTRIVIAL_EQUIVALENCE` path resolves AX-R04 to trivial reference identity only. AX-R05 is `INAPPLICABLE` because the codomain is not an operand domain, and AX-R06 is `RESOLVED_NOT_CLOSED` for the same typed-codomain reason. Whole-RT composition, whole-RT closure, and operand projection remain separate open obligations.
+AX-R01 and AX-R02 are formalized provisionally. AX-R03 is `INAPPLICABLE` for `|`; whole-RT identity is separate. Typed operand-distinction semantics are provisionally formalized. The authorized `NO_NONTRIVIAL_EQUIVALENCE` path resolves AX-R04 to trivial reference identity only. AX-R05 is `INAPPLICABLE`, AX-R06 is `RESOLVED_NOT_CLOSED`, and AX-R07 is provisionally formalized as validation-only malformed-construction rejection. Whole-RT composition, whole-RT closure, operand projection, and AX-R08–AX-R12 remain open.
 
 ## Observed and created
 
@@ -19,6 +19,8 @@ AX-R01 and AX-R02 are formalized provisionally. AX-R03 is `INAPPLICABLE` for `|`
 - Whole-RT identity remains a separate open obligation.
 - No self-composition, closure law, or implicit projection was introduced.
 - AX-R06 does not establish operator invalidity or whole-RT nonclosure; it records only operator-local nonclosure.
+- AX-R07 rejects malformed expressions before evaluation and does not create a mathematical output value.
+- Runtime authority fallback is recorded separately: five Q0 inventory artifacts are missing; this has no mathematical effect.
 - `Dist_B`, `Dist_U`, and `Dist_SC` require typed witnesses; absence of a witness does not establish equivalence.
 
 ## Not established
