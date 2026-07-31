@@ -1,0 +1,32 @@
+{
+  "fixture_set_id": "AX-R06-CLOSURE-DISPOSITION-FIXTURES-001",
+  "axiom_id": "AX-R06_CLOSURE",
+  "status": "RESOLVED_NOT_CLOSED",
+  "signature": "| : BoundedSymmetry × UnboundedSymmetry -> SymmetryCondition",
+  "positive": [
+    {"fixture_id":"AX-R06-POS-001","expression":"b | u","premises":["b : BoundedSymmetry","u : UnboundedSymmetry"],"expected":"WELL_FORMED","expected_type":"SymmetryCondition"},
+    {"fixture_id":"AX-R06-POS-002","expression":"<S> | >S<","expected":"WELL_FORMED","expected_type":"SymmetryCondition"}
+  ],
+  "failure": [
+    {"fixture_id":"AX-R06-CLOSE-FAIL-001","attempt":"Infer b | u : BoundedSymmetry.","expected":"UNSUPPORTED_CODOMAIN_TO_LEFT_DOMAIN_COERCION"},
+    {"fixture_id":"AX-R06-CLOSE-FAIL-002","attempt":"Infer b | u : UnboundedSymmetry.","expected":"UNSUPPORTED_CODOMAIN_TO_RIGHT_DOMAIN_COERCION"},
+    {"fixture_id":"AX-R06-CLOSE-FAIL-003","attempt":"Infer b | u belongs to BoundedSymmetry union UnboundedSymmetry.","expected":"OPERAND_UNION_CLOSURE_NOT_ESTABLISHED"},
+    {"fixture_id":"AX-R06-CLOSE-FAIL-004","attempt":"Infer | : SymmetryCondition × SymmetryCondition -> SymmetryCondition.","expected":"INVALID_SIGNATURE_WIDENING"},
+    {"fixture_id":"AX-R06-CLOSE-FAIL-005","expression":"(b | u) | u2","expected":"MALFORMED_LEFT_OPERAND_TYPE"},
+    {"fixture_id":"AX-R06-CLOSE-FAIL-006","expression":"b2 | (b | u)","expected":"MALFORMED_RIGHT_OPERAND_TYPE"},
+    {"fixture_id":"AX-R06-CLOSE-FAIL-007","attempt":"Infer algebraic closure from successful evaluation of a single legal fixture.","expected":"SINGLE_APPLICATION_INSUFFICIENT_FOR_CLOSURE"},
+    {"fixture_id":"AX-R06-CLOSE-FAIL-008","attempt":"Treat generic SymmetryCondition as a legal operand because both operand types are symmetry conditions.","expected":"ROLE_SENSITIVE_SUBTYPE_REQUIREMENT_VIOLATED"}
+  ],
+  "closure_matrix": [
+    {"carrier":"BoundedSymmetry","status":"NOT_CLOSED"},
+    {"carrier":"UnboundedSymmetry","status":"NOT_CLOSED"},
+    {"carrier":"BoundedSymmetry union UnboundedSymmetry","status":"NOT_ESTABLISHED_AND_CURRENTLY_REJECTED"},
+    {"carrier":"SymmetryCondition","status":"INAPPLICABLE_TO_CURRENT_SIGNATURE"},
+    {"carrier":"CompleteRT","status":"OPEN_SEPARATE_OBLIGATION"}
+  ],
+  "new_closure_law": false,
+  "new_carrier": false,
+  "new_projection": false,
+  "implicit_coercion": false,
+  "nonclaims": ["Operator-local nonclosure is not whole-RT nonclosure.","No nonassociativity conclusion is inferred.","No recursion conclusion is inferred."]
+}

@@ -2,7 +2,7 @@
 
 ## Status
 
-AX-R01 and AX-R02 are formalized provisionally. AX-R03 is `INAPPLICABLE` for `|`; whole-RT identity is separate. Typed operand-distinction semantics are provisionally formalized. The authorized `NO_NONTRIVIAL_EQUIVALENCE` path resolves AX-R04 to trivial reference identity only. AX-R05 is now `INAPPLICABLE` because the codomain is not an operand domain; whole-RT composition and operand projection remain separate open obligations.
+AX-R01 and AX-R02 are formalized provisionally. AX-R03 is `INAPPLICABLE` for `|`; whole-RT identity is separate. Typed operand-distinction semantics are provisionally formalized. The authorized `NO_NONTRIVIAL_EQUIVALENCE` path resolves AX-R04 to trivial reference identity only. AX-R05 is `INAPPLICABLE` because the codomain is not an operand domain, and AX-R06 is `RESOLVED_NOT_CLOSED` for the same typed-codomain reason. Whole-RT composition, whole-RT closure, and operand projection remain separate open obligations.
 
 ## Observed and created
 
@@ -18,6 +18,7 @@ AX-R01 and AX-R02 are formalized provisionally. AX-R03 is `INAPPLICABLE` for `|`
 - The formalization records required properties and failure conditions only; it does not define `≈_B`, `≈_U`, or `≈_SC`.
 - Whole-RT identity remains a separate open obligation.
 - No self-composition, closure law, or implicit projection was introduced.
+- AX-R06 does not establish operator invalidity or whole-RT nonclosure; it records only operator-local nonclosure.
 - `Dist_B`, `Dist_U`, and `Dist_SC` require typed witnesses; absence of a witness does not establish equivalence.
 
 ## Not established

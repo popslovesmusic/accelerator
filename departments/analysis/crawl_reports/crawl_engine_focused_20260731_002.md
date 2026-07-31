@@ -2,8 +2,8 @@
 
 ## Repository Snapshot
 
-Commit: `40beb2460416dbee6fec48c9a3be719993134ee0`
-Snapshot hash: `1DEF526B899CDFA9F7A652D0BE5636680FEE067524A5A0317386094CC7067C80`
+Commit: `cbe6f7613ea15b5a1e7dab7c30d17fa0b5c582e8`
+Snapshot hash: `323C1B7AEE1CE1E81ECE8CF58A2F2294154DF9EC2C444D52F1E6BB1FD8453099`
 Dirty state: `True`
 
 ## Scope
@@ -38,7 +38,6 @@ Cycle count: 0
 
 ## Direct Blockers
 
-- `AX-R06_CLOSURE` `MISSING_AXIOM` blocks `symmetry_condition_relation`
 - `AX-R07_MALFORMED_CONSTRUCTION` `MISSING_AXIOM` blocks `symmetry_condition_relation`
 - `AX-R08_DETERMINISM` `MISSING_AXIOM` blocks `symmetry_condition_relation`
 - `AX-R09_ASSOCIATIVITY` `MISSING_AXIOM` blocks `symmetry_condition_relation`
@@ -52,7 +51,7 @@ Cycle count: 0
 
 ## Proof State
 
-Open obligations: OBL-RT-IDENTITY-WHOLE, OBL-RT-WHOLE-COMPOSITION, OBL-SC-OPERAND-PROJECTION, AX-R06_CLOSURE, AX-R07_MALFORMED_CONSTRUCTION, AX-R08_DETERMINISM, AX-R09_ASSOCIATIVITY, AX-R10_COMMUTATIVITY, AX-R11_DOMAIN_OF_DEFINITION, AX-R12_PROJECTION_COMPATIBILITY
+Open obligations: OBL-RT-IDENTITY-WHOLE, OBL-RT-WHOLE-COMPOSITION, OBL-SC-OPERAND-PROJECTION, AX-R07_MALFORMED_CONSTRUCTION, AX-R08_DETERMINISM, AX-R09_ASSOCIATIVITY, AX-R10_COMMUTATIVITY, AX-R11_DOMAIN_OF_DEFINITION, AX-R12_PROJECTION_COMPATIBILITY
 
 ## Not Established
 
@@ -70,12 +69,12 @@ Status changed: ['distinction_permitting_symmetry_condition']
 
 ## Validation Results
 
-{"determinism_validation": {"status": "ENGINE_TESTED"}, "graph_integrity_validation": {"passed": true}, "readonly_validation": {"after_hash": "1DEF526B899CDFA9F7A652D0BE5636680FEE067524A5A0317386094CC7067C80", "before_hash": "1DEF526B899CDFA9F7A652D0BE5636680FEE067524A5A0317386094CC7067C80", "changed_paths": [], "checked": true, "read_only": true}, "renderer_consistency_validation": {"status": "RENDERED_FROM_CANONICAL_JSON"}, "schema_validation": {"errors": [], "passed": true}, "source_precedence_validation": {"passed": true}}
+{"determinism_validation": {"status": "ENGINE_TESTED"}, "graph_integrity_validation": {"passed": true}, "readonly_validation": {"after_hash": "323C1B7AEE1CE1E81ECE8CF58A2F2294154DF9EC2C444D52F1E6BB1FD8453099", "before_hash": "323C1B7AEE1CE1E81ECE8CF58A2F2294154DF9EC2C444D52F1E6BB1FD8453099", "changed_paths": [], "checked": true, "read_only": true}, "renderer_consistency_validation": {"status": "RENDERED_FROM_CANONICAL_JSON"}, "schema_validation": {"errors": [], "passed": true}, "source_precedence_validation": {"passed": true}}
 
 ## Output Hashes
 
-Canonical JSON hash: `024A96E0F605FECFE9B0BB2935FB78375CC45756B19EDFDC7E82DE8B4859A6D1`
-Markdown hash: `1104B5EE73C56CED6B87B921F6BF3CF22F27C69F1DCC61C51DA7425235A63EC0`
+Canonical JSON hash: `BF6B35615A57C325E3CF3E564537D0C228071AA98BE4803A45A4FD1D44047C3A`
+Markdown hash: `56F7F2758A7F1C55FD6747666B5E06DE3E16697AEA00E39959CFE7D1484154A9`
 
 ## Campaign Assessment
 
