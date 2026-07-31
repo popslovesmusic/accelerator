@@ -15,8 +15,8 @@ class EngineTest(unittest.TestCase):
             second = run(root, second_path)
             self.assertEqual(first_path.with_suffix(".json").read_bytes(), second_path.with_suffix(".json").read_bytes())
         self.assertEqual(first, second)
-        self.assertTrue(first["validation_summary"]["schema_valid"])
-        self.assertTrue(first["validation_summary"]["read_only"]["read_only"])
+        self.assertTrue(first["validation"]["schema_validation"]["passed"])
+        self.assertTrue(first["validation"]["readonly_validation"]["read_only"])
 
 if __name__ == "__main__":
     unittest.main()

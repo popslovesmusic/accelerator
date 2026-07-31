@@ -1,0 +1,18 @@
+{
+  "graph_id": "CRAWL_ENGINE_DEPENDENCY_GRAPH_20260731_002",
+  "canonical_report": "departments/analysis/crawl_reports/crawl_engine_focused_20260731_002.json",
+  "nodes": ["bounded_symmetry","unbounded_symmetry","symmetry_condition","symmetry_condition_relation","distinction_permitting_symmetry_condition","dominant_domain_projection","relation_axioms","executable_semantics"],
+  "edges": [
+    {"from":"symmetry_condition_relation","type":"CONSUMES_TYPE","to":"bounded_symmetry"},
+    {"from":"symmetry_condition_relation","type":"CONSUMES_TYPE","to":"unbounded_symmetry"},
+    {"from":"symmetry_condition_relation","type":"RETURNS_TYPE","to":"symmetry_condition"},
+    {"from":"distinction_permitting_symmetry_condition","type":"ALIASES","to":"symmetry_condition"},
+    {"from":"dominant_domain_projection","type":"CONSUMES_TYPE","to":"symmetry_condition"},
+    {"from":"dominant_domain_projection","type":"BLOCKED_BY","to":"relation_axioms"},
+    {"from":"relation_axioms","type":"REQUIRES_PROOF_OF","to":"symmetry_condition_relation"},
+    {"from":"executable_semantics","type":"DEPENDS_ON","to":"relation_axioms"}
+  ],
+  "direct_blocked_objects": ["symmetry_condition_relation"],
+  "propagated_blocked_objects": ["dominant_domain_projection","executable_semantics"],
+  "cycle_count": 0
+}

@@ -3,7 +3,7 @@ def validate(report, schema):
     if missing:
         return False, ["missing sections: " + ", ".join(missing)]
     errors = []
-    for item in report["mathematical_inventory"]:
+    for item in report["object_inventory"]["analyzed"]:
         if item["primary_classification"] not in schema["allowed_classifications"]:
             errors.append("invalid classification: " + item["primary_classification"])
         if item["formal_status"] not in schema["allowed_formal_statuses"]:

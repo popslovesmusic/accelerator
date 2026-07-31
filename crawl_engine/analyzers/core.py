@@ -1,5 +1,6 @@
 import hashlib
 import json
+import subprocess
 from pathlib import Path
 
 def sha256(path):
@@ -19,7 +20,12 @@ def snapshot(root, relative_paths):
         path = root / rel
         entries.append({"path": rel, "exists": path.is_file(), "sha256": sha256(path) if path.is_file() else None})
     manifest = json.dumps(entries, sort_keys=True, separators=(",", ":")).encode()
-    return {"files": entries, "repository_hash": hashlib.sha256(manifest).hexdigest().upper()}
+    try:
+        commit = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=root, text=True, stderr=subprocess.DEVNULL).strip()
+        dirty = bool(subprocess.check_output(["git", "status", "--porcelain"], cwd=root, text=True, stderr=subprocess.DEVNULL).strip())
+    except (OSError, subprocess.CalledProcessError):
+        commit, dirty = None, None
+    return {"repository_root": str(root), "commit_id": commit, "snapshot_hash": hashlib.sha256(manifest).hexdigest().upper(), "dirty_state": dirty, "included_paths": sorted(relative_paths), "excluded_paths": [".git", "crawl_engine/cache"], "source_files": entries}
 
 def inventory(root, focus, config):
     lexicon = load(root / "registry/lexicon_gap_queue.json")
@@ -33,8 +39,16 @@ def inventory(root, focus, config):
         status = entry.get("status", "GAP_OPEN")
         formal = "PROVISIONALLY_DEFINED" if status == "C1_DEFINED_PROVISIONAL" else "BLOCKED" if status == "GAP_OPEN" else "SUPERSEDED" if status == "RESOLVED_TO_ALIAS" else "UNDEFINED"
         classification = "NOTATION_ALIAS" if term == "distinction_permitting_symmetry_condition" else "PRIMITIVE_DEFINITION" if term in {"bounded_symmetry", "unbounded_symmetry"} else "DERIVED_DEFINITION"
-        items.append({"object_id": aliases.get(term, term), "primary_classification": classification, "formal_status": formal, "epistemic_status": "SOURCE_REPORTED", "proof_status": "OBLIGATIONS_IDENTIFIED" if formal != "SUPERSEDED" else "NOT_ATTEMPTED", "confidence": "HIGH", "risk": "CRITICAL" if term in {"symmetry_condition_relation", "dominant_domain_projection"} else "HIGH"})
+        object_id = aliases.get(term, term)
+        notation = {"symmetry_condition_relation":"|","symmetry_condition":"S","bounded_symmetry":"<S>","unbounded_symmetry":">S<","dominant_domain_projection":"Π_(D,A_D)","distinction_permitting_symmetry_condition":"(*|*)"}.get(object_id)
+        items.append({"object_id": object_id, "canonical_name": term, "notation": notation, "primary_classification": classification, "formal_status": formal, "epistemic_status": "SOURCE_REPORTED", "proof_status": "OBLIGATIONS_IDENTIFIED" if formal != "SUPERSEDED" else "NOT_ATTEMPTED", "confidence": "HIGH", "risk": "CRITICAL" if term in {"symmetry_condition_relation", "dominant_domain_projection"} else "HIGH", "source_artifact":"registry/lexicon_gap_queue.json", "source_location":f"queue term={term}"})
     return sorted(items, key=lambda item: item["object_id"])
+
+def enrich_source_hashes(items, snapshot_data):
+    source_hash = next((x["sha256"] for x in snapshot_data["source_files"] if x["path"] == "registry/lexicon_gap_queue.json"), None)
+    for item in items:
+        item["source_hash"] = source_hash
+    return items
 
 def cycles(graph):
     raw_nodes = graph.get("nodes", [])
@@ -53,9 +67,15 @@ def cycles(graph):
             visit(child, path + [node], active | {node})
     for node in sorted(node_ids):
         visit(node, [], set())
-    return found
+    unique = {}
+    for path in found:
+        ring = path[:-1]
+        rotations = [tuple(ring[i:] + ring[:i]) for i in range(len(ring))]
+        key = min(rotations)
+        unique[key] = list(key) + [key[0]]
+    return [unique[key] for key in sorted(unique)]
 
 def delta(current, previous):
     now = {x["object_id"]: x for x in current}
     old = {x["object_id"]: x for x in previous.get("object_inventory", [])}
-    return {"added": sorted(set(now)-set(old)), "modified": sorted(k for k in set(now)&set(old) if now[k] != old[k]), "superseded": sorted(k for k in set(now)&set(old) if now[k].get("formal_status") == "SUPERSEDED" and old[k].get("formal_status") != "SUPERSEDED"), "removed": sorted(set(old)-set(now)), "status_changed": sorted(k for k in set(now)&set(old) if now[k].get("formal_status") != old[k].get("formal_status")), "newly_blocked": sorted(k for k in set(now)&set(old) if now[k].get("formal_status") == "BLOCKED" and old[k].get("formal_status") != "BLOCKED"), "newly_unblocked": [], "unchanged_critical_objects": sorted(k for k in set(now)&set(old) if now[k] == old[k])}
+    return {"baseline_report": "departments/analysis/crawl_reports/analysis_crawl_20260731_symmetry_relation_refined_001.json", "added": sorted(set(now)-set(old)), "modified": sorted(k for k in set(now)&set(old) if now[k] != old[k]), "superseded": sorted(k for k in set(now)&set(old) if now[k].get("formal_status") == "SUPERSEDED" and old[k].get("formal_status") != "SUPERSEDED"), "removed": sorted(set(old)-set(now)), "status_changed": sorted(k for k in set(now)&set(old) if now[k].get("formal_status") != old[k].get("formal_status")), "newly_blocked": sorted(k for k in set(now)&set(old) if now[k].get("formal_status") == "BLOCKED" and old[k].get("formal_status") != "BLOCKED"), "newly_unblocked": [], "unchanged_critical_objects": sorted(k for k in set(now)&set(old) if now[k] == old[k])}
