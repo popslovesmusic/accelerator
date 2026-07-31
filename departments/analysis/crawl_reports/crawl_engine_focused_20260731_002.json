@@ -174,6 +174,37 @@
       "priority": "HIGH",
       "resolution_condition": "Restore the five missing Q0 inventory artifacts and rerun runtime authority resolution.",
       "subject_object_id": "governance_runtime"
+    },
+    {
+      "blocked_objects": [
+        "symmetry_condition_relation",
+        "executable_semantics"
+      ],
+      "blocker_id": "BLOCK-R08-CANONICAL-PROJECTION-SELECTION",
+      "blocker_type": "MISSING_DEFINITION",
+      "blocking_dependencies": [
+        "OBL-R08-CANONICAL-PROJECTION-SELECTION",
+        "complete_executable_semantics"
+      ],
+      "dependency_paths": [
+        [
+          "OBL-R08-CANONICAL-PROJECTION-SELECTION",
+          "symmetry_condition_relation"
+        ],
+        [
+          "complete_executable_semantics",
+          "symmetry_condition_relation"
+        ]
+      ],
+      "description": "Semantic-result determinism is blocked because no canonical projection/result selector is defined.",
+      "direct_or_propagated": "DIRECT",
+      "evidence": [
+        "AX-R08_DETERMINISM",
+        "ax_r08_determinism_fixtures.json"
+      ],
+      "priority": "HIGH",
+      "resolution_condition": "Define and validate a canonical typed selector and complete executable relation semantics.",
+      "subject_object_id": "symmetry_condition_relation"
     }
   ],
   "campaign_assessment": {
@@ -209,6 +240,12 @@
     "added": [
       "symmetry_condition"
     ],
+    "added_axiom_dispositions": [
+      {
+        "axiom_id": "AX-R08_DETERMINISM",
+        "status": "PARTIALLY_RESOLVED_BLOCKED"
+      }
+    ],
     "added_axioms": [
       "AX-R07_MALFORMED_CONSTRUCTION"
     ],
@@ -235,9 +272,16 @@
       "governed alias expansion"
     ],
     "baseline_report": "departments/analysis/crawl_reports/analysis_crawl_20260731_symmetry_relation_refined_001.json",
+    "established_components": [
+      "syntax determinism",
+      "typing determinism",
+      "well-formedness determinism",
+      "failure-diagnostic determinism"
+    ],
     "formalization_records": [
       "obl_r04_typed_equivalence_formalization.json"
     ],
+    "full_determinism_claim": false,
     "modified": [
       "bounded_symmetry",
       "distinction_permitting_symmetry_condition",
@@ -250,7 +294,9 @@
     "new_carriers": [],
     "new_closure_laws": [],
     "new_equivalence_relations": [],
-    "new_open_obligations": [],
+    "new_open_obligations": [
+      "OBL-R08-CANONICAL-PROJECTION-SELECTION"
+    ],
     "new_projections": [],
     "new_substitution_permissions": [],
     "newly_blocked": [
@@ -260,6 +306,10 @@
     "operational_blockers_retained": [
       "missing Q0 inventory artifacts",
       "runtime authority query unavailable"
+    ],
+    "remaining_blockers": [
+      "canonical projection selection",
+      "complete executable semantics"
     ],
     "remaining_open_axioms": [
       "AX-R08_DETERMINISM",
@@ -274,8 +324,8 @@
     ],
     "resolved_obligations": [
       {
-        "obligation_id": "malformed_construction_rules",
-        "resolution": "FORMALIZED"
+        "obligation_id": "determinism_validation_layers",
+        "resolution": "PARTIALLY_ESTABLISHED"
       }
     ],
     "status_changed": [
@@ -473,6 +523,10 @@
     "composition": {
       "detail": "AX-R05 codomain SymmetryCondition is not a legal operand domain",
       "status": "INAPPLICABLE"
+    },
+    "determinism": {
+      "detail": "AX-R08 validation layers are deterministic; semantic result and executable determinism await canonical projection selection and complete executable semantics",
+      "status": "PARTIALLY_RESOLVED_BLOCKED"
     },
     "direct_consumers": [],
     "identity_axiom": {
@@ -672,7 +726,7 @@
         "PROVISIONALLY_DEFINED": 4
       },
       "skipped": 1,
-      "unresolved": 8
+      "unresolved": 9
     },
     "profiles": [
       {
@@ -1045,6 +1099,10 @@
         "reason": "open SymmetryCondition operand projection obligation"
       },
       {
+        "object_id": "OBL-R08-CANONICAL-PROJECTION-SELECTION",
+        "reason": "open canonical projection selection obligation"
+      },
+      {
         "object_id": "AX-R08_DETERMINISM",
         "reason": "open axiom obligation"
       },
@@ -1067,9 +1125,9 @@
     ]
   },
   "output_provenance": {
-    "canonical_json_hash": "FADC71FD0AB32D29FF0630E357DBE5D7CCA3872A7661D07A171E8AB6C4F2B4F9",
-    "markdown_hash": "03639A6E460A91F33EE2ABC171AC9937E197D7F60CC9B9CA5E2B9DC4E25C2AA0",
-    "source_snapshot_hash": "8047ACCFA1FC828269E4E82ED277940658400CCFC6BA3042D00270A4E664BE56",
+    "canonical_json_hash": "ACC5356AC5A8CA7AC21AA40DAE6EA98A99D610D2E0697ACCC62E33934FA938F8",
+    "markdown_hash": "A599C61DD3A892D1E553F56E06383EBAACC1B8BF7857021B848B68809F03A034",
+    "source_snapshot_hash": "357A7A0790E410F71153804A3C96FD1563E1A6A9B4FA1D31C941A174B39E186F",
     "written_paths": [
       "crawl_output.json",
       "crawl_output.md"
@@ -1090,6 +1148,7 @@
       "OBL-RT-IDENTITY-WHOLE",
       "OBL-RT-WHOLE-COMPOSITION",
       "OBL-SC-OPERAND-PROJECTION",
+      "OBL-R08-CANONICAL-PROJECTION-SELECTION",
       "AX-R08_DETERMINISM",
       "AX-R09_ASSOCIATIVITY",
       "AX-R10_COMMUTATIVITY",
@@ -1107,7 +1166,7 @@
     }
   ],
   "repository_snapshot": {
-    "commit_id": "d01a112c8fa8d32720379c873b2a927c37cbe2c5",
+    "commit_id": "7d38a1f76d6197f03ce370a0d8939452dfcf82f5",
     "dirty_state": true,
     "excluded_paths": [
       ".git",
@@ -1119,12 +1178,12 @@
       "registry/lexicon_gap_queue.json"
     ],
     "repository_root": "D:\\projects\\acellorator",
-    "snapshot_hash": "8047ACCFA1FC828269E4E82ED277940658400CCFC6BA3042D00270A4E664BE56",
+    "snapshot_hash": "357A7A0790E410F71153804A3C96FD1563E1A6A9B4FA1D31C941A174B39E186F",
     "source_files": [
       {
         "exists": true,
         "path": "docs/textbook/mono_process_textbook_complete.md",
-        "sha256": "9311A6F841B525D31E3D3C4C48906541D14E6D88EDE3DA0B06F8E1D2CE6C6C6B"
+        "sha256": "76A04F01E638FD17381BDC1A9C342F70C39FDA86C4E5A693DD723C5ACA0C58E3"
       },
       {
         "exists": true,
@@ -1168,7 +1227,7 @@
       {
         "exists": true,
         "path": "docs/textbook/mono_process_textbook_complete.md",
-        "sha256": "9311A6F841B525D31E3D3C4C48906541D14E6D88EDE3DA0B06F8E1D2CE6C6C6B"
+        "sha256": "76A04F01E638FD17381BDC1A9C342F70C39FDA86C4E5A693DD723C5ACA0C58E3"
       },
       {
         "exists": true,
@@ -1227,8 +1286,8 @@
       "passed": true
     },
     "readonly_validation": {
-      "after_hash": "8047ACCFA1FC828269E4E82ED277940658400CCFC6BA3042D00270A4E664BE56",
-      "before_hash": "8047ACCFA1FC828269E4E82ED277940658400CCFC6BA3042D00270A4E664BE56",
+      "after_hash": "357A7A0790E410F71153804A3C96FD1563E1A6A9B4FA1D31C941A174B39E186F",
+      "before_hash": "357A7A0790E410F71153804A3C96FD1563E1A6A9B4FA1D31C941A174B39E186F",
       "changed_paths": [],
       "checked": true,
       "read_only": true
