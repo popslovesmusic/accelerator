@@ -31,10 +31,13 @@ Scope: bounded follow-up actions extracted from Appendix F of the governed textb
 - Guardrail: ordinary logical `iff` remains a local projection and is not identical to the full residue-conditioned relation.
 - Evidence: `registry/math/biconditional_ladder_disposition_registry.json`; `registry/governance/patches/APPENDIX_F_SECTION_2_BICONDITIONAL_LADDER_001.json`; `registry/claim_registry.json` entry `MPF_RT_BICONDITIONAL_LADDER_001`.
 
-### 5. Deviation-to-geometry recovery — OPEN
+### 5. Deviation-to-geometry recovery — RESOLVED AS SCOPED DISPOSITION
 
-- Next action: specify and test the route `Dev_RT -> Pi_dist -> OrgDist -> Pi_geo` with reference, boundary, orientation, admissibility, and closure-trace metadata.
+- Current disposition: `SCOPED_DISPOSITION_PROJECTION_ROUTE_ONLY`
+- Resolution: the route `Dev_RT -> Pi_dist -> OrgDist -> Pi_geo` is admissible as a metadata-preserving bounded projection protocol. It does not establish geometry recovery or physical geometry.
+- Remaining work: construct positive and metadata-failure fixtures, define `Pi_geo` legality conditions, and test bounded reference/orientation sensitivity.
 - Guardrail: the result remains a distance-like and application-geometry projection; it does not establish physical geometry.
+- Evidence: `registry/math/deviation_to_geometry_disposition_registry.json`; `registry/governance/patches/APPENDIX_F_SECTION_2_DEVIATION_TO_GEOMETRY_001.json`; textbook provisional projection route.
 
 ### 6. Orientation transformations across domains — OPEN
 
