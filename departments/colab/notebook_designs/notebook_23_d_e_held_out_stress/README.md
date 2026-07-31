@@ -1,6 +1,6 @@
 # Notebook 23: Held-Out D/E Stress Test
 
-Status: executed archive attached; governed induction and integrity review remain pending.
+Status: EXCLUDED_FROZEN. Retained only as quarantined provenance; excluded from registries, textbook, downstream reports, and promotion.
 
 This Colab-only test evaluates whether the bounded P127/P128 behavior survives held-out contexts and source-relation cases that were not used in the existing finite fixtures. It is designed to find counterexamples, not to confirm a theorem.
 

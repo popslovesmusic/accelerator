@@ -40,4 +40,4 @@ It does not establish universal source-relation preservation, universal threshol
 - Hash-method disagreement requires review before C2 result induction.
 - Approved-tool replication remains outside this Colab archive.
 
-Current disposition: `C1_ARCHIVE_PROVENANCE_PENDING_GOVERNED_INDUCTION`.
+Current disposition: `EXCLUDED_FROZEN`. This report is retained only for provenance and must not be cited, interpreted, promoted, or copied into the textbook or any other claim-bearing surface.
