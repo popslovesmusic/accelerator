@@ -13,11 +13,14 @@ Scope: bounded follow-up actions extracted from Appendix F of the governed textb
 - Remaining work: define `F_s` explicitly, specify window/ensemble equivalence rules, define convergence criteria, classify skewed/heavy-tailed/multimodal/non-convergent alternatives, and coordinate with `OQ_003`.
 - Evidence: `registry/math/bell_curve_derivability_disposition_registry.json`; `registry/governance/patches/APPENDIX_F_SECTION_2_BELL_CURVE_DERIVABILITY_001.json`; `docs/textbook/mono_process_textbook_complete.md` section `7.3` and Appendix F.
 
-### 3. Skew conditions — OPEN
+### 3. Skew conditions — RESOLVED AS SCOPED DISPOSITION
 
 - Obligation: `OQ_003`
-- Next action: formalize the `F_s` projection metadata, orientation/sign convention, observation window, normalization, aggregation rule, and failure classes for skewed or mixed regimes.
+- Current disposition: `SCOPED_DISPOSITION_ASYMMETRY_RATIO_CLASSIFIER_PENDING_FORMAL_F_S`
+- Resolution: skew is treated as a declared `iff_s` projection of directional imbalance; `Omega_a = 1` is balanced, `Omega_a > 1` is exclusion-dominant, and `Omega_a < 1` is addition-dominant under declared orientation/sign metadata.
+- Remaining work: formalize the signed skew projection function under `F_s`, specify orientation versus observation-axis sign, construct positive and negative skew examples, define mixed-regime aggregation failures, and harden compatibility with L124/P118 bounded `Omega_a` rules.
 - Guardrail: `Omega_a` remains a provisional imbalance classifier, not a universal skew law.
+- Evidence: `registry/math/skew_condition_disposition_registry.json`; `registry/governance/patches/APPENDIX_F_SECTION_2_SKEW_CONDITIONS_001.json`; `docs/textbook/mono_process_textbook_complete.md` section `7.3` and Appendix F.
 
 ### 4. Biconditional ladder resolution — OPEN
 
