@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "acellorator://analysis/refined-crawl-report-schema/20260731/001",
+  "type": "object",
+  "required": ["campaign_metadata","repository_snapshot","scope","mathematical_delta","object_inventory","dependency_graph","findings","proof_state","blockers","contradictions","counterexamples","not_established","risk_register","conceptual_compression","recommended_next_actions","campaign_assessment"],
+  "properties": {
+    "campaign_metadata": {"type":"object"},
+    "repository_snapshot": {"type":"object","required":["source_precedence_policy","canonical_sources"]},
+    "scope": {"type":"array"},
+    "mathematical_delta": {"type":"object","required":["added","modified","superseded","removed","status_changed","newly_blocked","newly_unblocked","unchanged_critical_objects"]},
+    "object_inventory": {"type":"array","items":{"type":"object","required":["object_id","primary_classification","formal_status","epistemic_status","proof_status","confidence","risk"]}},
+    "dependency_graph": {"type":"object","required":["nodes","edges","roots","leaves","orphans","cycles"]},
+    "findings": {"type":"array","items":{"type":"object","required":["finding_id","classification","formal_status","confidence","evidence","statement","not_established"]}},
+    "proof_state": {"type":"object"},
+    "blockers": {"type":"array","items":{"type":"object","required":["blocker_id","blocker_type","blocked_objects","dependency","impact"]}},
+    "contradictions": {"type":"array"},
+    "counterexamples": {"type":"array"},
+    "not_established": {"type":"array"},
+    "risk_register": {"type":"array"},
+    "conceptual_compression": {"type":"object"},
+    "recommended_next_actions": {"type":"array"},
+    "campaign_assessment": {"type":"object","required":["outcome","claim_ceiling","reason_stopped"]}
+  }
+}

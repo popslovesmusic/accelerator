@@ -215,3 +215,7 @@ The minimum department answer structure remains authoritative: source artifact s
 ## Success Condition
 
 The crawl succeeds when it proves something, makes an obligation explicit, discharges or sharply bounds debt, disproves something, exposes an assumption, identifies a necessary concept, connects previously isolated evidence, synthesizes a defensible new hypothesis, reduces uncertainty, defines a falsifiable experiment, improves dependency structure, prevents an invalid inference, or opens a well-formed research frontier. Candidate volume alone is not success.
+
+## Refined Crawl Governance
+
+The deterministic refinement configuration is `departments/analysis/crawl_governance/refined_crawl_governance_configuration.json`. Refined reports MUST use `departments/analysis/crawl_governance/refined_crawl_report_schema.json`, apply `source_precedence_policy.json`, classify mathematical objects by formal role, separate formal status from epistemic/proof status, emit typed dependency and cycle analysis, and distinguish operational tool failures from mathematical blockers. The validator is `scripts/analysis/validate_crawl_governance.py`. These artifacts refine reporting only; they do not authorize mathematical registry, definition, proof, or executable-semantics changes.
