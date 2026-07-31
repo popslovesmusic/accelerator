@@ -2,7 +2,7 @@
 
 ## Status
 
-AX-R01 and AX-R02 are formalized provisionally. AX-R03 is dispositioned `INAPPLICABLE` for `|`; whole-RT identity is a separate open obligation. The remaining AX-R04 through AX-R12 obligations remain open.
+AX-R01 and AX-R02 are formalized provisionally. AX-R03 is `INAPPLICABLE` for `|`; whole-RT identity is separate. AX-R04 is `BLOCKED_PENDING_EQUIVALENCE`; typed equivalence and congruence are separate obligations. AX-R05 through AX-R12 remain open.
 
 ## Observed and created
 
@@ -13,6 +13,7 @@ AX-R01 and AX-R02 are formalized provisionally. AX-R03 is dispositioned `INAPPLI
 - AX-R01 defines only directional typing; it does not establish commutativity, substitution, or composition.
 - AX-R02 rejects generic `SymmetryCondition` coercion and same-type operand pairs; it does not add substitution or composition.
 - AX-R03 introduces no identity element and does not infer a monoid, group, semigroup, or closed operation.
+- AX-R04 permits only reference identity and governed alias normalization; general substitution remains blocked.
 
 ## Not established
 
