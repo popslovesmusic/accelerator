@@ -1,0 +1,363 @@
+{
+  "blockers": [
+    {
+      "blocked_objects": [
+        "symmetry_condition_relation",
+        "dominant_domain_projection"
+      ],
+      "blocker_id": "BLOCK-RELATION-AXIOMS",
+      "blocker_type": "MISSING_AXIOM",
+      "dependency": "relation axioms for |",
+      "impact": "CRITICAL"
+    },
+    {
+      "blocked_objects": [
+        "executable_semantics"
+      ],
+      "blocker_id": "BLOCK-EXECUTABLE",
+      "blocker_type": "MISSING_EXECUTABLE_SEMANTICS",
+      "dependency": "finite typed semantics",
+      "impact": "HIGH"
+    }
+  ],
+  "campaign_assessment": {
+    "claim_ceiling": "C1_MODEL_RELATIVE",
+    "human_review_required": true,
+    "outcome": "PARTIAL_SUCCESS",
+    "reason_stopped": "Open relation axioms and executable semantics"
+  },
+  "campaign_metadata": {
+    "campaign_id": "CRAWL_ENGINE_FOCUSED_20260731_001",
+    "canonical_promotion_allowed": false,
+    "engine_version": "0.1.0",
+    "focus": [
+      "symmetry_condition_relation",
+      "symmetry_condition",
+      "bounded_symmetry",
+      "unbounded_symmetry",
+      "dominant_domain_projection",
+      "distinction_permitting_symmetry_condition"
+    ],
+    "pipeline_stages": 11
+  },
+  "contradictions": [],
+  "counterexamples": [],
+  "cycle_analysis": {
+    "benign_recursion_distinguished": true,
+    "cycle_classes": [],
+    "cycles": []
+  },
+  "dependency_graph": {
+    "analysis_id": "CRAWL_DEPENDENCY_CYCLE_20260731_001",
+    "cycle_policy": "No cycles detected in the declared active graph; benign recursive boundedness language is not treated as a cycle without a dependency edge.",
+    "cycles": [],
+    "edges": [
+      {
+        "from": "symmetry_condition_relation",
+        "to": "bounded_symmetry",
+        "type": "CONSUMES_TYPE"
+      },
+      {
+        "from": "symmetry_condition_relation",
+        "to": "unbounded_symmetry",
+        "type": "CONSUMES_TYPE"
+      },
+      {
+        "from": "symmetry_condition_relation",
+        "to": "symmetry_condition",
+        "type": "RETURNS_TYPE"
+      },
+      {
+        "from": "distinction_permitting_symmetry_condition",
+        "to": "symmetry_condition",
+        "type": "ALIASES"
+      },
+      {
+        "from": "dominant_domain_projection",
+        "to": "symmetry_condition",
+        "type": "CONSUMES_TYPE"
+      },
+      {
+        "from": "dominant_domain_projection",
+        "to": "relation_axioms",
+        "type": "BLOCKED_BY"
+      },
+      {
+        "from": "relation_axioms",
+        "to": "symmetry_condition_relation",
+        "type": "REQUIRES_PROOF_OF"
+      },
+      {
+        "from": "executable_semantics",
+        "to": "relation_axioms",
+        "type": "DEPENDS_ON"
+      }
+    ],
+    "leaves": [
+      "relation_axioms",
+      "executable_semantics"
+    ],
+    "nodes": [
+      {
+        "classification": "PRIMITIVE_DEFINITION",
+        "id": "bounded_symmetry",
+        "status": "PROVISIONALLY_DEFINED"
+      },
+      {
+        "classification": "PRIMITIVE_DEFINITION",
+        "id": "unbounded_symmetry",
+        "status": "PROVISIONALLY_DEFINED"
+      },
+      {
+        "classification": "DERIVED_DEFINITION",
+        "id": "symmetry_condition",
+        "status": "PROVISIONALLY_DEFINED"
+      },
+      {
+        "classification": "DERIVED_DEFINITION",
+        "id": "symmetry_condition_relation",
+        "status": "PROVISIONALLY_DEFINED"
+      },
+      {
+        "classification": "NOTATION_ALIAS",
+        "id": "distinction_permitting_symmetry_condition",
+        "status": "PROVISIONALLY_DEFINED"
+      },
+      {
+        "classification": "DERIVED_DEFINITION",
+        "id": "dominant_domain_projection",
+        "status": "BLOCKED"
+      },
+      {
+        "classification": "PROOF_OBLIGATION",
+        "id": "relation_axioms",
+        "status": "BLOCKED"
+      },
+      {
+        "classification": "EXECUTABLE_SEMANTICS",
+        "id": "executable_semantics",
+        "status": "BLOCKED"
+      }
+    ],
+    "orphans": [],
+    "roots": [
+      "bounded_symmetry",
+      "unbounded_symmetry"
+    ],
+    "transitive_blocker_propagation": [
+      {
+        "blocked_downstream": [
+          "dominant_domain_projection",
+          "executable_semantics"
+        ],
+        "blocker": "relation_axioms"
+      }
+    ]
+  },
+  "focus_checks": {
+    "alias_relationship": {
+      "detail": "(*|*) is role-sensitive notation for S",
+      "status": "OBSERVED_COMPATIBLE"
+    },
+    "bounded_unbounded_compatibility": {
+      "detail": "both are admitted as symmetry subtypes",
+      "status": "OBSERVED_COMPATIBLE"
+    },
+    "composition_behavior": {
+      "detail": "cross-domain transport remains undefined",
+      "status": "OPEN"
+    },
+    "downstream_impact": {
+      "detail": "projection and executable semantics depend on relation axioms",
+      "status": "BLOCKED"
+    },
+    "identity_behavior": {
+      "detail": "not specified by current axioms",
+      "status": "OPEN"
+    },
+    "malformed_constructions": {
+      "detail": "failure rules remain to be formalized",
+      "status": "OPEN"
+    },
+    "operand_order": {
+      "detail": "orientation significance requires relation axioms",
+      "status": "OPEN"
+    },
+    "operand_type": {
+      "detail": "bounded_symmetry and unbounded_symmetry are distinct typed inputs",
+      "status": "OBSERVED_COMPATIBLE"
+    },
+    "return_type": {
+      "detail": "corrected relation returns SymmetryCondition",
+      "status": "OBSERVED_COMPATIBLE"
+    },
+    "substitution_behavior": {
+      "detail": "not specified by current axioms",
+      "status": "OPEN"
+    }
+  },
+  "mathematical_delta": {
+    "added": [
+      "symmetry_condition"
+    ],
+    "modified": [
+      "distinction_permitting_symmetry_condition",
+      "dominant_domain_projection"
+    ],
+    "newly_blocked": [
+      "distinction_permitting_symmetry_condition"
+    ],
+    "newly_unblocked": [],
+    "removed": [
+      "executable_semantics",
+      "relation_axioms"
+    ],
+    "status_changed": [
+      "distinction_permitting_symmetry_condition"
+    ],
+    "superseded": [],
+    "unchanged_critical_objects": [
+      "bounded_symmetry",
+      "symmetry_condition_relation",
+      "unbounded_symmetry"
+    ]
+  },
+  "mathematical_inventory": [
+    {
+      "confidence": "HIGH",
+      "epistemic_status": "SOURCE_REPORTED",
+      "formal_status": "PROVISIONALLY_DEFINED",
+      "object_id": "bounded_symmetry",
+      "primary_classification": "PRIMITIVE_DEFINITION",
+      "proof_status": "OBLIGATIONS_IDENTIFIED",
+      "risk": "HIGH"
+    },
+    {
+      "confidence": "HIGH",
+      "epistemic_status": "SOURCE_REPORTED",
+      "formal_status": "BLOCKED",
+      "object_id": "distinction_permitting_symmetry_condition",
+      "primary_classification": "NOTATION_ALIAS",
+      "proof_status": "OBLIGATIONS_IDENTIFIED",
+      "risk": "HIGH"
+    },
+    {
+      "confidence": "HIGH",
+      "epistemic_status": "SOURCE_REPORTED",
+      "formal_status": "BLOCKED",
+      "object_id": "dominant_domain_projection",
+      "primary_classification": "DERIVED_DEFINITION",
+      "proof_status": "OBLIGATIONS_IDENTIFIED",
+      "risk": "CRITICAL"
+    },
+    {
+      "confidence": "HIGH",
+      "epistemic_status": "SOURCE_REPORTED",
+      "formal_status": "PROVISIONALLY_DEFINED",
+      "object_id": "symmetry_condition",
+      "primary_classification": "DERIVED_DEFINITION",
+      "proof_status": "OBLIGATIONS_IDENTIFIED",
+      "risk": "HIGH"
+    },
+    {
+      "confidence": "HIGH",
+      "epistemic_status": "SOURCE_REPORTED",
+      "formal_status": "PROVISIONALLY_DEFINED",
+      "object_id": "symmetry_condition_relation",
+      "primary_classification": "DERIVED_DEFINITION",
+      "proof_status": "OBLIGATIONS_IDENTIFIED",
+      "risk": "CRITICAL"
+    },
+    {
+      "confidence": "HIGH",
+      "epistemic_status": "SOURCE_REPORTED",
+      "formal_status": "PROVISIONALLY_DEFINED",
+      "object_id": "unbounded_symmetry",
+      "primary_classification": "PRIMITIVE_DEFINITION",
+      "proof_status": "OBLIGATIONS_IDENTIFIED",
+      "risk": "HIGH"
+    }
+  ],
+  "not_established": [
+    "proof",
+    "universal equivalence",
+    "physical correspondence",
+    "complete executable semantics"
+  ],
+  "proof_state": {
+    "blocked": [
+      "dominant_domain_projection"
+    ],
+    "bounded_verified": [],
+    "failed": [],
+    "open": [
+      "relation axioms",
+      "executable semantics"
+    ],
+    "proved": []
+  },
+  "recommendations": [
+    {
+      "action": "FORMALIZE",
+      "objective": "Define relation axioms and finite fixtures",
+      "status": "PROPOSED"
+    }
+  ],
+  "repository_snapshot": {
+    "files": [
+      {
+        "exists": true,
+        "path": "docs/textbook/mono_process_textbook_complete.md",
+        "sha256": "C28660ABD5D58816797FF2974188A6D0FAE1A42D60E1611E5E2EE32EA9909407"
+      },
+      {
+        "exists": true,
+        "path": "outputs/audits/global_health_report.json",
+        "sha256": "2F87A826D617AED7E7D7773C210BF3FF87A8F13972023C6F5509292EA4C786D1"
+      },
+      {
+        "exists": true,
+        "path": "registry/lexicon_gap_queue.json",
+        "sha256": "8CD56363E50AE79AF11257FC7C5B9662237CF4D8ECDF886750F11F1C3C4CC252"
+      }
+    ],
+    "repository_hash": "301A79BBD1C08AB5B5374CD317E215A21276497E09FF98D7381B0609E632AA89",
+    "source_precedence": [
+      "active canonical mathematical registries",
+      "active governed definitions",
+      "current proof and obligation registries",
+      "current executable semantics artifacts",
+      "current validation outputs",
+      "current textbooks and generated summaries",
+      "superseded canonical artifacts",
+      "legacy reports",
+      "historical commentary"
+    ]
+  },
+  "risk_register": [
+    {
+      "object": "symmetry_condition_relation",
+      "reason": "root relation with unresolved axioms",
+      "risk": "CRITICAL"
+    }
+  ],
+  "scope": [
+    "symmetry_condition_relation",
+    "symmetry_condition",
+    "bounded_symmetry",
+    "unbounded_symmetry",
+    "dominant_domain_projection",
+    "distinction_permitting_symmetry_condition"
+  ],
+  "validation_summary": {
+    "errors": [],
+    "read_only": {
+      "baseline": "301A79BBD1C08AB5B5374CD317E215A21276497E09FF98D7381B0609E632AA89",
+      "changed_paths": [],
+      "checked": true,
+      "read_only": true
+    },
+    "schema_valid": true,
+    "source_precedence_applied": true
+  }
+}
