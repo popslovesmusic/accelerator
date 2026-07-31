@@ -2,7 +2,7 @@
 
 ## Status
 
-AX-R01 and AX-R02 are formalized provisionally. AX-R03 is `INAPPLICABLE` for `|`; whole-RT identity is separate. AX-R04 is `BLOCKED_PENDING_EQUIVALENCE`; typed equivalence and congruence are separate obligations. AX-R05 through AX-R12 remain open.
+AX-R01 and AX-R02 are formalized provisionally. AX-R03 is `INAPPLICABLE` for `|`; whole-RT identity is separate. AX-R04 remains `BLOCKED_PENDING_EQUIVALENCE`, and OBL-R04-TYPED-EQUIVALENCE is explicitly `OPEN_UNDEFINED`; congruence remains blocked. AX-R05 through AX-R12 remain open.
 
 ## Observed and created
 
@@ -14,6 +14,7 @@ AX-R01 and AX-R02 are formalized provisionally. AX-R03 is `INAPPLICABLE` for `|`
 - AX-R02 rejects generic `SymmetryCondition` coercion and same-type operand pairs; it does not add substitution or composition.
 - AX-R03 introduces no identity element and does not infer a monoid, group, semigroup, or closed operation.
 - AX-R04 permits only reference identity and governed alias normalization; general substitution remains blocked.
+- No equivalence relation, substitution permission, or congruence permission was created.
 
 ## Not established
 

@@ -53,6 +53,16 @@
     "congruence": "NOT_DEFINED",
     "blocker_id": "BLOCK-SUBSTITUTION-EQUIVALENCE"
   },
+  "typed_equivalence_disposition": {
+    "obligation_id": "OBL-R04-TYPED-EQUIVALENCE",
+    "status": "OPEN_UNDEFINED",
+    "fixture_file": "obl_r04_typed_equivalence_fixtures.json",
+    "fixture_execution": "PASS",
+    "equivalence_relation_created": false,
+    "substitution_permission_created": false,
+    "congruence_permission_created": false,
+    "blocked_dependents": ["AX-R04_SUBSTITUTION","OBL-R04-CONGRUENCE"]
+  },
   "repository_global_validation": {
     "status": "FAIL_SEMANTIC",
     "source": "scripts/global_validate.py",
@@ -62,6 +72,12 @@
   },
   "resolved_obligations": ["AX-R01_OPERAND_ORDER","AX-R02_TYPE_COMPATIBILITY","AX-R03_IDENTITY"],
   "new_open_obligations": ["OBL-RT-IDENTITY-WHOLE","OBL-R04-TYPED-EQUIVALENCE","OBL-R04-CONGRUENCE"],
+  "modified_obligations": [
+    {"obligation_id":"OBL-R04-TYPED-EQUIVALENCE","new_status":"OPEN_UNDEFINED"},
+    {"obligation_id":"OBL-R04-CONGRUENCE","new_status":"BLOCKED_BY_OBL-R04-TYPED-EQUIVALENCE"}
+  ],
+  "new_equivalence_relations": [],
+  "new_substitution_permissions": [],
   "open_axioms": ["AX-R04_SUBSTITUTION","AX-R05_COMPOSITION","AX-R06_CLOSURE","AX-R07_MALFORMED_CONSTRUCTION","AX-R08_DETERMINISM","AX-R09_ASSOCIATIVITY","AX-R10_COMMUTATIVITY","AX-R11_DOMAIN_OF_DEFINITION","AX-R12_PROJECTION_COMPATIBILITY"],
   "new_blockers": [],
   "not_established": ["No axiom proof", "No theorem promotion", "No canonical correctness", "No executable semantics promotion"],

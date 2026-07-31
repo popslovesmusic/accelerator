@@ -302,13 +302,23 @@
       "symmetry_condition_relation",
       "unbounded_symmetry"
     ],
-    "new_blockers": [
-      "BLOCK-SUBSTITUTION-EQUIVALENCE"
+    "modified_obligations": [
+      {
+        "new_status": "OPEN_UNDEFINED",
+        "obligation_id": "OBL-R04-TYPED-EQUIVALENCE"
+      },
+      {
+        "new_status": "BLOCKED_BY_OBL-R04-TYPED-EQUIVALENCE",
+        "obligation_id": "OBL-R04-CONGRUENCE"
+      }
     ],
+    "new_blockers": [],
+    "new_equivalence_relations": [],
     "new_open_obligations": [
       "OBL-R04-TYPED-EQUIVALENCE",
       "OBL-R04-CONGRUENCE"
     ],
+    "new_substitution_permissions": [],
     "newly_blocked": [
       "distinction_permitting_symmetry_condition"
     ],
@@ -724,7 +734,7 @@
         "PROVISIONALLY_DEFINED": 4
       },
       "skipped": 1,
-      "unresolved": 12
+      "unresolved": 13
     },
     "profiles": [
       {
@@ -1090,11 +1100,15 @@
       },
       {
         "object_id": "OBL-R04-TYPED-EQUIVALENCE",
-        "reason": "open typed equivalence obligation"
+        "reason": "typed equivalence is explicitly undefined"
       },
       {
         "object_id": "OBL-R04-CONGRUENCE",
-        "reason": "blocked congruence obligation"
+        "reason": "blocked by undefined typed equivalence"
+      },
+      {
+        "object_id": "typed_operand_distinction_semantics",
+        "reason": "open typed semantics dependency"
       },
       {
         "object_id": "AX-R04_SUBSTITUTION",
@@ -1135,8 +1149,8 @@
     ]
   },
   "output_provenance": {
-    "canonical_json_hash": "85C3AD59C3E2AB9CAF9BF2EDE0A0E6D3C6E202AE6714874A219DEA166C437435",
-    "markdown_hash": "3DF80558B71C2991377B6CFCF710196DCE01A475F71B8B58430A7142C50286B7",
+    "canonical_json_hash": "9DD76D3CA6042ECC41BA83C4A36A73164949BE3BF5980F18B5060E3BB3EA37E6",
+    "markdown_hash": "40DE2FDB38162C14188497BAA95BB1AF31183653BDB4D44D9F8BD7257FE45B41",
     "source_snapshot_hash": "8A1EDDF39738642D48EBB9CB08B0F8B3B86AB03B58D53278CDF8F93BA4CA58E2",
     "written_paths": [
       "crawl_output.json",
@@ -1158,6 +1172,7 @@
       "OBL-RT-IDENTITY-WHOLE",
       "OBL-R04-TYPED-EQUIVALENCE",
       "OBL-R04-CONGRUENCE",
+      "typed_operand_distinction_semantics",
       "AX-R04_SUBSTITUTION",
       "AX-R05_COMPOSITION",
       "AX-R06_CLOSURE",
@@ -1179,7 +1194,7 @@
     }
   ],
   "repository_snapshot": {
-    "commit_id": "13b57fd53e3a302bd0825d147dbc00feca4303a9",
+    "commit_id": "a16ac7272ff6b52a472a245dca83d306259f2fc6",
     "dirty_state": true,
     "excluded_paths": [
       ".git",
