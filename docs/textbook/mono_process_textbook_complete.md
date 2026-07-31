@@ -4589,3 +4589,28 @@ This textbook draft is derived from and cross-referenced with the following foun
 
 ### How to Use Citations
 Throughout this textbook, citations appear in the format `[Source: ID Section]`. For example, `[Source: MPF-CORE-V1 Sec 2]` refers to Section 2 of the Minimal Working Formalism. These citations ensure that every textbook definition and formal block can be traced back to the original research and governance artifacts.
+## Notebook 24 — D/E Metamorphic Independence (bounded result)
+
+### Scope
+
+Notebook 24 independently tests the frozen P127/P128 candidate predicates using novel generated records, a separate declarative oracle, ten metamorphic relations, and order-shuffled replay. It is bounded to contexts C4-C6, profiles low/mid/high, and seeds 719, 823, and 947.
+
+### Directly observed/defined
+
+The recoverable archive reports 54 baselines, 648 checks, zero subject/oracle disagreements, zero metamorphic contradictions, matching replay digests, zero falsification flags, and passing artifact/specification hashes. The test defines `metamorphic_relation` and `declarative_oracle` only as provisional method terms; both remain open lexicon gaps.
+
+### Inferred inside the framework
+
+Within the declared finite design, the frozen candidate predicates agree with the separate oracle under the tested transformations. This is bounded metamorphic consistency evidence.
+
+### External resemblance (analogy only)
+
+None asserted. The oracle and metamorphic transformations are internal testing constructs.
+
+### What it does NOT prove
+
+It does not establish universal D/E semantics, theorem closure, injectivity, reversibility, C5/C6 status, or external physical validity.
+
+### Failure modes / uncertainty
+
+The domain, seeds, transformations, and oracle are finite and internally specified. Shared unexamined assumptions may remain. Approved-tool replication and adversarial counterexample testing remain pending. Claim ceiling: `C2_LIMITATION_OR_NEGATIVE_RESULT`; publication and promotion remain blocked.
