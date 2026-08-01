@@ -1,0 +1,67 @@
+{
+  "report_id": "AX_R12_PROJECTION_COMPATIBILITY_REASSESSMENT_20260801_001",
+  "scope": "Governance and reporting reassessment only",
+  "subject": "SymmetryConditionRelation -> downstream projections",
+  "axiom_id": "AX-R12_PROJECTION_COMPATIBILITY",
+  "status": "OPEN",
+  "formal_status": "OPEN_PROOF_OBLIGATION",
+  "claim_ceiling": "C1_MODEL_RELATIVE",
+  "source_precedence": "ACTIVE_CANONICAL_ONLY",
+  "sources": [
+    {
+      "path": "departments/analysis/campaigns/RT_RELATION_AXIOMS_FORMALIZATION_CAMPAIGN_001/relation_axiom_registry.json",
+      "sha256": "E71FED4343D158C731F5120292DEE6478A098F3920BCB2D4D07B5A5E600CDF61"
+    },
+    {
+      "path": "departments/analysis/campaigns/RT_RELATION_AXIOMS_FORMALIZATION_CAMPAIGN_001/relation_axiom_dependency_graph.json",
+      "sha256": "6D3EDD13AECF19FD9CC44DBD127C34D0F161C159E95D795327F86136724810C2"
+    },
+    {
+      "path": "registry/lexicon_gap_queue.json",
+      "sha256": "8CD56363E50AE79AF11257FC7C5B9662237CF4D8ECDF886750F11F1C3C4CC252"
+    }
+  ],
+  "finding": {
+    "statement": "The active source set identifies projection compatibility as an open obligation. The downstream projection consumes SymmetryCondition and is blocked by AX-R12; no canonical projection map, admissibility-preservation rule, or result-preservation rule is established.",
+    "confidence": "HIGH",
+    "repository_state_claim": true
+  },
+  "downstream_impact": {
+    "direct_consumers": ["dominant_domain_projection"],
+    "transitive_consumers": ["executable_semantics"],
+    "dependency_edges": [
+      {"from": "symmetry_condition_relation", "type": "REQUIRES_PROOF_OF", "to": "AX-R12_PROJECTION_COMPATIBILITY"},
+      {"from": "dominant_domain_projection", "type": "BLOCKED_BY", "to": "AX-R12_PROJECTION_COMPATIBILITY"},
+      {"from": "dominant_domain_projection", "type": "DEPENDS_ON", "to": "symmetry_condition_relation"}
+    ],
+    "cycle_count": 0
+  },
+  "compatibility_questions": [
+    "Which projection operators may consume SymmetryCondition?",
+    "What typed input and output domains are required?",
+    "How is admissibility preserved or reported when projecting?",
+    "Does projection preserve role, orientation, bound condition, and relevant distinctions?",
+    "Is projection single-valued, candidate-set valued, or context-indexed?",
+    "What compatibility condition is required before executable semantics may consume a projection?"
+  ],
+  "not_established": [
+    "A canonical projection definition",
+    "Projection compatibility proof",
+    "Projection selection determinism",
+    "Executable semantics completeness",
+    "Physical or clinical correspondence"
+  ],
+  "required_nonclaims": [
+    "Do not invent a projection operator or selector.",
+    "Do not treat the lexicon candidate description as a proved definition.",
+    "Do not infer compatibility from type mention alone.",
+    "Do not promote AX-R12 or downstream projection status."
+  ],
+  "validation": {
+    "source_hashes_verified": true,
+    "dependency_paths_resolve": true,
+    "cycle_check": "PASS",
+    "mathematical_content_modified": false
+  },
+  "recommendation": "Keep AX-R12 OPEN and create a governed projection-compatibility fixture set before any projection semantics are formalized."
+}
