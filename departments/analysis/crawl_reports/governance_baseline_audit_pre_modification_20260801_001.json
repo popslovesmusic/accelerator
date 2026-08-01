@@ -1,0 +1,176 @@
+{
+  "audit_id": "GOVERNANCE_BASELINE_AUDIT_PRE_MODIFICATION_001",
+  "audit_mode": "READ_ONLY",
+  "audit_status": "COMPLETED_WITH_BASELINE_FINDINGS",
+  "claim_ceiling": "C1_MODEL_RELATIVE",
+  "modification_lock": {
+    "status": "ACTIVE",
+    "original_summary_induction": "NOT_PERFORMED",
+    "governance_modification": "NOT_PERFORMED",
+    "incident_patch_used_as_authority": false
+  },
+  "repository_snapshot": {
+    "commit_id": "0e3dadfa3",
+    "dirty_state": true,
+    "db_snapshot_status": "STALE",
+    "db_warning": "The governance query reports the DB snapshot older than the current worktree; this audit does not refresh or mutate DB state.",
+    "runtime_query_status": "WARN"
+  },
+  "incident_boundary": {
+    "artifact": "PATCH_MPF_GENERIC_RT_QM_GR_INDUCTION_AND_COVERAGE_GOVERNANCE_001",
+    "authority": "NON_AUTHORITATIVE_FOR_BASELINE",
+    "source_summary": "WITHHELD_UNTIL_GOVERNANCE_STABLE",
+    "induction_from_incident_source": false
+  },
+  "source_precedence": [
+    "canonical registries and live governance records",
+    "department SSOT and local governance rules",
+    "runtime query as operational projection",
+    "generated summaries and reports",
+    "incident patch only as context"
+  ],
+  "source_inventory": {
+    "files_read": [
+      "AGENTS.md",
+      "departments/analysis_intake/AGENTS.md",
+      "departments/analysis_intake/department_ssot.md",
+      "departments/analysis/department_ssot.md",
+      "departments/analysis/GEMINI.md",
+      "governance/live/induction_queue.json",
+      "registry/induction_registry.json",
+      "departments/analysis_intake/induction_queue/queue_registry.json",
+      "registry/lexicon_gap_queue.json",
+      "registry/lexicon_canonical.json",
+      "registry/lexicon_validation_registry.json",
+      "registry/lexicon_alias_map.json",
+      "scripts/query_governance.py current-state --pretty"
+    ],
+    "source_hashes": {
+      "governance/live/induction_queue.json": "ba35bd5e064c432447a48e20c3ece66b78c83adabcadb19dadf4344718138e3f",
+      "registry/induction_registry.json": "5128a7b6947623683e921b31bc6d4665dec520870b563c3881686dcd76e30d83",
+      "departments/analysis_intake/induction_queue/queue_registry.json": "f3447d4d12d8f0e35d4a31948bba4d69e9fc0210637ab7af83768024e0d0d501",
+      "registry/lexicon_gap_queue.json": "8cd56363e50ae79af11257fc7c5b9662237cf4d8ecdf886750f11f1c3c4cc252",
+      "registry/lexicon_canonical.json": "b271f599a428e6341e807d766d6e1cfa72b60407b1f18f8e60c76cd7b344e716",
+      "registry/lexicon_validation_registry.json": "c72ae65829bd87498f04cd73c4fa59b2137fbf804ddb94b071a74ae38b797548"
+    }
+  },
+  "current_governance_inventory": {
+    "analysis_intake": {
+      "authority": "Analysis Intake local governance",
+      "rule": "Preserve the complete submitted artifact literally before review, normalization, classification, promotion, or execution.",
+      "entries": 11,
+      "preservation_status_counts": {"INDUCTED": 5, "PRESERVED_PROVISIONAL": 4, "APPENDED_WITH_PARENT_IMMUTABLE": 1, "PRESERVED_LITERAL": 1},
+      "review_status_counts": {"NOT_REVIEWED": 9, "APPROVED_FOR_INDUCTION_SCOPE_ONLY": 1, "PARTIAL": 1},
+      "promotion_status_counts": {"HOLD_C1": 9, "UNQUEUED_FOR_PROMOTION": 2}
+    },
+    "global_induction_queue": {
+      "authority": "Global Governance",
+      "rule": "Every new induction must be queued here before it is treated as active governed program work.",
+      "entries": 56,
+      "status_counts": {"bound_to_registry": 45, "queued": 8, "excluded_frozen": 3},
+      "unreviewed_entries": 7,
+      "hold_c1_entries": 6
+    },
+    "induction_registry": {
+      "authority": "Global Governance",
+      "rule": "Every new induction must have a canonical entry here and a matching live queue record before it can be treated as governed active work.",
+      "entries": 53,
+      "status_counts": {"C1_DEFINED_PROVISIONAL": 20, "C2_BOUNDED_NOTEBOOK_OUTPUT_WITH_LIMITATIONS": 9, "C1_NOTEBOOK_PROVENANCE": 8, "C1_SPECIFICATION_ONLY": 5, "C2_LIMITATION_OR_NEGATIVE_RESULT": 4, "EXCLUDED_FROZEN": 3, "C1_EXECUTION_RECONSTRUCTION": 2, "C2_EXTERNAL_BOUNDED_INDUCTION": 1, "C2_THEOREM_CANDIDATE_EVIDENCE_WITH_LIMITATIONS": 1}
+    },
+    "lexicon_gap_queue": {
+      "authority": "active lexicon resolution pipeline",
+      "entries": 261,
+      "status_counts": {"C1_DEFINED_PROVISIONAL": 140, "RESOLVED_TO_CANONICAL": 98, "GAP_OPEN": 21, "RESOLVED_TO_ALIAS": 2},
+      "required_before_resolution": ["verb_test", "procedural_fft", "ontology_residue_check", "claim_classification", "data_provenance_check"],
+      "promotion_rule": "Noncompliant terms must not promote."
+    },
+    "lexicon_canonical": {"terms": 1085},
+    "lexicon_validation_registry": {"present": true}
+  },
+  "lifecycle_reconstruction": [
+    {"stage": 1, "name": "FIRST_CONTACT_PRESERVATION", "observed_rule": "Submission is captured or preserved in Analysis Intake before review or normalization.", "record": "source path, hash, size, capture mode, preservation status"},
+    {"stage": 2, "name": "INTAKE_CLASSIFICATION", "observed_rule": "Intake records review status, promotion status, provenance, and limitations separately from preservation.", "record": "intake queue entry and preserved capture"},
+    {"stage": 3, "name": "GLOBAL_QUEUE_REGISTRATION", "observed_rule": "A new induction must have a live global queue record before active governed work.", "record": "governance/live/induction_queue.json"},
+    {"stage": 4, "name": "CANONICAL_INDUCTION_RECORD", "observed_rule": "The induction registry must contain a matching canonical entry and linked queue entry.", "record": "registry/induction_registry.json"},
+    {"stage": 5, "name": "LEXICON_GAP_ROUTING", "observed_rule": "New terms enter the gap queue and move through resolution lanes with claim and provenance checks.", "record": "registry/lexicon_gap_queue.json"},
+    {"stage": 6, "name": "VALIDATION_OR_PROMOTION", "observed_rule": "Validation evidence and claim gates govern later canonical vocabulary or program use.", "record": "registry/lexicon_validation_registry.json and governed registries"},
+    {"stage": 7, "name": "ANALYSIS_PROJECTION", "observed_rule": "Analysis and generated projections are downstream read-only views and do not confer authority.", "record": "department SSOTs and analysis reports"}
+  ],
+  "authority_role_matrix": [
+    {"role": "submitter/source channel", "authority": "supplies source content", "can_preserve": true, "can_review": false, "can_promote": false},
+    {"role": "Analysis Intake", "authority": "preservation, provenance, classification, routing", "can_preserve": true, "can_review": true, "can_promote": false},
+    {"role": "Global Governance queue", "authority": "activation gate and lifecycle state", "can_preserve": false, "can_review": false, "can_promote": false},
+    {"role": "Canonical induction registry", "authority": "canonical induction record", "can_preserve": false, "can_review": false, "can_promote": "record governed status only"},
+    {"role": "Lexicon validation/promotion governance", "authority": "term resolution and evidence-gated promotion", "can_preserve": false, "can_review": true, "can_promote": "only under validation gate"},
+    {"role": "DB runtime", "authority": "operational projection and decision support; registry remains canonical", "can_preserve": false, "can_review": false, "can_promote": false}
+  ],
+  "status_and_classification_inventory": {
+    "induction_lifecycle": ["queued", "triaged", "authorized_for_governance_work", "bound_to_registry", "closed", "rejected"],
+    "observed_live_statuses": ["queued", "bound_to_registry", "excluded_frozen"],
+    "claim_ceiling_examples": ["C1_DEFINED_PROVISIONAL", "C1_SPECIFICATION_ONLY", "C2_BOUNDED_NOTEBOOK_OUTPUT_WITH_LIMITATIONS", "C2_EXTERNAL_BOUNDED_INDUCTION", "C2_THEOREM_CANDIDATE_EVIDENCE_WITH_LIMITATIONS"],
+    "review_and_promotion_are_separate": true,
+    "observed_unreviewed_hold_count": 7,
+    "observed_excluded_frozen_count": 3
+  },
+  "preservation_guarantee_analysis": {
+    "guarantee_as_written": "Strong: complete artifact preservation/capture, source hash, source path, capture mode, and immutable capture status are required before induction.",
+    "evidence": ["Analysis Intake AGENTS.md", "departments/analysis_intake/induction_queue/queue_registry.json", "governance/live/induction_queue.json"],
+    "observed_survival_states": ["PRESERVED_LITERAL", "PRESERVED_PROVISIONAL", "APPENDED_WITH_PARENT_IMMUTABLE", "INDUCTED", "EXCLUDED_FROZEN"],
+    "finding": "Preservation is explicitly separated from review and promotion; preserved records survive HOLD_C1 and NOT_REVIEWED states."
+  },
+  "induction_review_coupling_analysis": {
+    "observed_rule": "Review summaries, classifications, or HOLD_C1 dispositions do not substitute for preservation.",
+    "coupling": "Review is downstream of preservation, but induction activation also requires live queue and canonical registry linkage.",
+    "finding": "The policy prevents review from erasing first contact, but current records show a synchronization boundary between intake, global queue, and canonical registry."
+  },
+  "projection_completeness_analysis": {
+    "canonical_projection_count": 1085,
+    "lexicon_queue_count": 261,
+    "exact_name_crosscheck": "Not a valid completeness proof because aliases, derived terms, and resolution mappings are allowed.",
+    "observed_mismatch": "Many queue terms do not exact-match canonical term names or the alias map; a complete mapping manifest is not evident in the audited source set.",
+    "finding": "Generated/canonical projections cannot be certified complete from name matching alone; omission detection requires an explicit queue-to-canonical/alias mapping and reconciliation result."
+  },
+  "failure_path_analysis": {
+    "rejection": "Lifecycle enum includes rejected, but no rejected live queue records were observed in the current 56-entry queue; excluded_frozen is used for 3 records.",
+    "deferral": "HOLD_C1 and queued/not-reviewed records preserve source and prevent promotion; deferral is visible as status rather than deletion.",
+    "supersession": "Superseded/historical handling is governed elsewhere, but no complete induction-specific supersession ledger was identified in this audit scope.",
+    "failed_review": "PARTIAL and NOT_REVIEWED states are represented; explicit failed-review terminal behavior is not visible in the live queue schema.",
+    "missing_linkage": "Four queued global entries lack a linked registry entry; one induction registry entry has no matching queue ID.",
+    "db_staleness": "The DB runtime reports stale snapshot state, so DB-derived authority conclusions are bounded and registry evidence controls this audit."
+  },
+  "reconciliation_findings": {
+    "global_queue_entries": 56,
+    "induction_registry_entries": 53,
+    "queued_without_registry_link": 4,
+    "registry_entries_without_queue_match": 1,
+    "queued_without_registry_ids": ["RT_GR_BRIDGE_TRIANGLE_CLOSURE_RESIDUE_CAT_INDUCTION_20260730_001", "RT_ORIENTATION_ORDINAL_MTO_INDUCTION_20260730_002", "RT_INDUCTION_ATOMIC_VALUE_PROJECTION_001", "RT_INDUCTION_RELATIONAL_NECESSITY_ALIGNMENT_002"],
+    "registry_without_queue_id": ["MPF_IND_ORIENTATION_DENSITY_TRIAD_SESSION_001"]
+  },
+  "baseline_findings": [
+    {"id": "BASELINE-F-001", "severity": "HIGH", "statement": "First-contact preservation is explicitly governed and evidenced by hashes and immutable capture states."},
+    {"id": "BASELINE-F-002", "severity": "HIGH", "statement": "The intended lifecycle requires intake preservation, global queue registration, and canonical induction linkage before active governed work."},
+    {"id": "BASELINE-F-003", "severity": "CRITICAL", "statement": "Current queue/registry reconciliation is incomplete: four global queue entries lack registry linkage and one registry entry lacks a matching queue record."},
+    {"id": "BASELINE-F-004", "severity": "MEDIUM", "statement": "Review and promotion are recorded separately from preservation, but explicit failed-review and supersession survival semantics are not fully visible in the induction queue schema."},
+    {"id": "BASELINE-F-005", "severity": "HIGH", "statement": "Projection completeness is not demonstrable without an explicit mapping manifest; exact term-name comparison is insufficient because aliases and derived shorthand are allowed."},
+    {"id": "BASELINE-F-006", "severity": "HIGH", "statement": "The governance DB runtime is stale relative to the worktree, so DB output cannot be treated as a fresh baseline authority projection."}
+  ],
+  "not_established": [
+    "The withheld original summary's content or governance status.",
+    "That every preserved intake artifact has a matching canonical induction record.",
+    "That every canonical induction record has a matching live queue record.",
+    "That every queued term is represented in a downstream canonical projection.",
+    "That review can never fragment or omit material in every downstream projection.",
+    "That DB runtime state is current while freshness is stale.",
+    "Any proposed governance modification or scientific claim from the incident patch."
+  ],
+  "recommendations": [],
+  "validation": {
+    "read_only": true,
+    "canonical_files_modified": false,
+    "incident_patch_inducted": false,
+    "source_hashes_verified": true,
+    "runtime_query_executed": true,
+    "runtime_snapshot_fresh": false,
+    "report_schema": "JSON parsed successfully"
+  }
+}
