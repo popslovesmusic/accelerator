@@ -1,0 +1,18 @@
+{
+  "migration_id": "MIG_INDUCTION_AUTHORITY_AND_RESEARCH_CONTINUITY_001",
+  "migration_type": "AUTHORIZED_GOVERNANCE_TRANSITION_MIGRATION",
+  "patch_id": "GOV_INDUCTION_AUTHORITY_AND_VISIBILITY_001",
+  "eligibility_rules": [
+    "explicit_induction_instruction_exists AND queue_entry_id IS NULL => CREATE_OR_RESOLVE_QUEUE_IDENTITY",
+    "queue_entry_id EXISTS AND research_record_id IS NULL => CREATE_OR_RESOLVE_RESEARCH_IDENTITY",
+    "source_incomplete => REGISTER_RESEARCH_BLOCKED_VISIBLE"
+  ],
+  "mutation_constraints": [
+    "DO_NOT_MODIFY_PRESERVED_SOURCE",
+    "DO_NOT_DELETE_HISTORICAL_QUEUE_RECORDS",
+    "DO_NOT_OVERWRITE_MANUAL_NOTES",
+    "DO_NOT_PROMOTE_CANONICAL_STATUS",
+    "DO_NOT_MERGE_ON_SEMANTIC_SIMILARITY_ALONE"
+  ],
+  "status": "REGISTERED_PENDING_GATE"
+}

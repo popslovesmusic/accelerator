@@ -6427,7 +6427,14 @@ def evaluate_patch_gate(
             result["blocking_conditions"].append("missing_provenance")
         if not patch.get("core_rule"):
             result["blocking_conditions"].append("missing_core_rule")
-        if patch.get("mode") != "additive":
+        patch_mode = patch.get("mode")
+        governed_transition = (
+            patch_mode == "governed_transition"
+            and patch.get("transition_authorized") is True
+            and bool(patch.get("transition_record_id"))
+            and bool(patch.get("migration_plan_id"))
+        )
+        if patch_mode != "additive" and not governed_transition:
             result["blocking_conditions"].append("non_additive_patch_mode")
     if not patch.get("target_files") and not patch.get("required_repo_changes"):
         result["defer_conditions"].append("insufficient_execution_surface")
