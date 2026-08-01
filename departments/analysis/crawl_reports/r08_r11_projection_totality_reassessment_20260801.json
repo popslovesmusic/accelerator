@@ -1,0 +1,43 @@
+{
+  "report_id": "R08_R11_PROJECTION_TOTALITY_REASSESSMENT_20260801_001",
+  "scope": "Governance and reporting reassessment only",
+  "claim_ceiling": "C1_MODEL_RELATIVE",
+  "subjects": ["AX-R08_DETERMINISM", "AX-R11_DOMAIN_OF_DEFINITION"],
+  "runtime_snapshot": {
+    "status": "FRESH",
+    "decision": "ALLOW",
+    "staleness_cause": "NONE",
+    "source_change_count": 3
+  },
+  "sources": [
+    {"path":"departments/analysis/campaigns/RT_RELATION_AXIOMS_FORMALIZATION_CAMPAIGN_001/relation_axiom_registry.json","sha256":"E71FED4343D158C731F5120292DEE6478A098F3920BCB2D4D07B5A5E600CDF61"},
+    {"path":"departments/analysis/campaigns/RT_RELATION_AXIOMS_FORMALIZATION_CAMPAIGN_001/ax_r08_determinism_fixtures.json","sha256":"34BC4911DF5EF5C92CBE0FF342D15401F5C9C5A0617C1612A208AF2B599E51FA"},
+    {"path":"departments/analysis/campaigns/RT_RELATION_AXIOMS_FORMALIZATION_CAMPAIGN_001/ax_r11_domain_of_definition_fixtures.json","sha256":"12CEC1FA678C55F362BA8079CF124CD8D659D7A0743932AF26D1F0E7E5AC1831"},
+    {"path":"departments/analysis/campaigns/RT_RELATION_AXIOMS_FORMALIZATION_CAMPAIGN_001/relation_axiom_validation_report.json","sha256":"0F51394ED41D6C3ED28BD5F5A2B1B4FB367448791B6A9E70178B32B3F6952623"}
+  ],
+  "r08_determinism": {
+    "status": "PARTIALLY_RESOLVED_BLOCKED",
+    "established": ["source resolution", "syntax", "typing", "well-formedness", "malformed diagnostics"],
+    "blocked": ["semantic result uniqueness", "projection selection determinism", "complete executable determinism"],
+    "blockers": ["OBL-R08-CANONICAL-PROJECTION-SELECTION", "complete_executable_semantics"],
+    "evidence": ["AX-R08-BLOCK-002", "AX-R08-BLOCK-003", "AX-R08-BLOCK-005"]
+  },
+  "r11_totality": {
+    "status": "FORMALIZED_WITH_TOTALITY_BLOCKED",
+    "established": ["ordered typed input domain", "domain membership gate", "outside-domain rejection"],
+    "blocked": ["total executable result for every legal pair"],
+    "blockers": ["complete_executable_semantics", "OBL-R08-CANONICAL-PROJECTION-SELECTION"],
+    "evidence": ["AX-R11-BLOCK-001"]
+  },
+  "downstream_impact": ["dominant_domain_projection", "executable_semantics"],
+  "required_next_evidence": [
+    "A canonical result/projection selection rule",
+    "A typed executable semantic procedure over Dom(|)",
+    "Tie-breaking and canonical-normal-form behavior",
+    "Totality validation over the declared executable domain"
+  ],
+  "not_established": ["semantic determinism", "executable totality", "proof", "physical correspondence"],
+  "nonclaims": ["No selector was invented", "No executable semantics were added", "No mathematical source was modified"],
+  "validation": {"source_hashes_verified":true,"dependency_paths_resolve":true,"cycle_check":"PASS","mathematical_content_modified":false},
+  "recommendation": "Keep AX-R08 and AX-R11 blocked; formalize only the missing canonical selector and executable semantics under separate authorization."
+}

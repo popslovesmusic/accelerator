@@ -9,7 +9,7 @@
 ## Current priorities
 
 4. Reassess `AX-R12_PROJECTION_COMPATIBILITY` and its downstream impact. **Complete: `ax_r12_projection_compatibility_reassessment_20260801`.**
-5. Resolve canonical projection selection and executable-totality dependencies (`AX-R08`, `AX-R11`).
+5. Reassess canonical projection selection and executable-totality dependencies (`AX-R08`, `AX-R11`). **Complete: `r08_r11_projection_totality_reassessment_20260801`; both remain blocked.**
 6. Formalize `[Asym]` domain compatibility.
 7. Restore or classify missing Q0 inventory/runtime-authority artifacts; treat this as operational until runtime evidence confirms otherwise.
 8. Replace the remaining generic `relation_axioms` graph edge with explicit AX-Rxx dependency edges.
