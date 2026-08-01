@@ -4682,59 +4682,59 @@ This section is generated from canonical induction, queue, intake, and represent
 ## Queued Research Contributions
 
 - **MPF_IND_PROJECTION_DOF_ARCHITECTURE_001** (`MPF_IND_PROJECTION_DOF_ARCHITECTURE_001`): Structured JSON intake routed for review on 2026-07-23. Canonical registry binding remains pending while organizational degree-of-freedom formalization, aspect-taxonomy formalization, and projection-domain closure remain open.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `NOT_QUEUED`
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `queued`; Registry: `NOT_BOUND`
   - Source: `outputs/analysis_intake/candidate_patch_MPF_IND_PROJECTION_DOF_ARCHITECTURE_001.json`; receipt: `NOT_RECORDED`; SHA-256: `be759a8bf1846503f10d7ddc5447ba38b8706297b895e55f5401ac50dfab9d54`
 
 - **RT_INDUCTION_ATOMIC_VALUE_PROJECTION_001** (`RT_INDUCTION_ATOMIC_VALUE_PROJECTION_001`): Preservation-first induction from the corrective package. Exact payload is preserved under the Analysis Intake local governance home; review and promotion were not performed.
-  - Capture: `INDUCTED`; Review: `NOT_REVIEWED`; Promotion: `UNQUEUED_FOR_PROMOTION`; Induction: `NOT_QUEUED`
+  - Capture: `INDUCTED`; Review: `NOT_REVIEWED`; Promotion: `UNQUEUED_FOR_PROMOTION`; Induction: `INDUCTED`
   - Queue: `queued`; Registry: `NOT_BOUND`
   - Source: `departments/analysis_intake/induction_queue/payloads/RT_INDUCTION_ATOMIC_VALUE_PROJECTION_001.json`; receipt: `NOT_RECORDED`; SHA-256: `c5b992ef3b53e9dbb676f630079fc9bf9337f7a9f0722d58faab76ede8debbba`
 
 - **RT_INDUCTION_RELATIONAL_NECESSITY_ALIGNMENT_002** (`RT_INDUCTION_RELATIONAL_NECESSITY_ALIGNMENT_002`): Preservation-first induction from the corrective package. Exact payload is preserved under the Analysis Intake local governance home; review and promotion were not performed.
-  - Capture: `INDUCTED`; Review: `NOT_REVIEWED`; Promotion: `UNQUEUED_FOR_PROMOTION`; Induction: `NOT_QUEUED`
+  - Capture: `INDUCTED`; Review: `NOT_REVIEWED`; Promotion: `UNQUEUED_FOR_PROMOTION`; Induction: `INDUCTED`
   - Queue: `queued`; Registry: `NOT_BOUND`
   - Source: `departments/analysis_intake/induction_queue/payloads/RT_INDUCTION_RELATIONAL_NECESSITY_ALIGNMENT_002.json`; receipt: `NOT_RECORDED`; SHA-256: `ca53759a131ce6c3a64ea025843ca78d31a0f4ae0f9047207af0b3874be3d507`
 
 - **RT_PROCESS_SEMANTIC_INDEX_001** (`RT_PROCESS_SEMANTIC_INDEX_001`): Structured JSON intake routed for review; canonical registry binding remains pending while the semantic-index term family is opened in lexicon review.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `NOT_QUEUED`
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `queued`; Registry: `NOT_BOUND`
   - Source: `outputs/analysis_intake/candidate_patch_RT_INDUCTION_PACKET_PROCESS_SEMANTIC_INDEX_001.json`; receipt: `NOT_RECORDED`; SHA-256: `79d50871ae313b3669f302192f49c476f90fa45ca2d7021116a696af3ac7fa2a`
 
 ## Active Governed Research Notes
 
 - **Colab Department Induction** (`COLAB_DEPARTMENT_INDUCTION_001`): Inducted on 2026-07-22. Department establishment is C1 governance structure. Notebook/result-zip artifacts default to C1 provenance; C2 applies only to manifest/hash-backed bounded outputs or limitation/negative-result evidence.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `NOT_QUEUED`
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C1_DEFINED_PROVISIONAL`
   - Source: `registry/governance/patches/COLAB_DEPARTMENT_INDUCTION_001.json`; receipt: `NOT_RECORDED`; SHA-256: `ba190c3f84eb3df1a2208ccc3d2929a92f11b9e6f9abbc309f697f07890cd089`
 
 - **Colab Immutable Experiment Specification Object** (`COLAB_EXPERIMENT_SPEC_OBJECT_001`): Added on 2026-07-22 as C1 governance maintenance. Future C2 notebook/result status requires this immutable pre-execution spec unless an explicit governed legacy exception is recorded.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `NOT_QUEUED`
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C1_DEFINED_PROVISIONAL`
   - Source: `registry/governance/patches/COLAB_EXPERIMENT_SPEC_OBJECT_001.json`; receipt: `NOT_RECORDED`; SHA-256: `5d9721999068c029ed11cd4dab83b8981f7d3cca93d776e00dacac60c8437cfa`
 
 - **Colab Results Directory and Archive Registry** (`COLAB_RESULTS_DIRECTORY_ARCHIVE_REGISTRY_001`): Added on 2026-07-22 as governance maintenance. This creates routing and registration requirements only; it does not validate any result zip.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `NOT_QUEUED`
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C1_DEFINED_PROVISIONAL`
   - Source: `registry/governance/patches/COLAB_RESULTS_DIRECTORY_ARCHIVE_REGISTRY_001.json`; receipt: `NOT_RECORDED`; SHA-256: `d4cc9acb4fbad7763d60ed679b773a6473d214fa3a6409a5350d537d9434bff5`
 
 - **Documentation Department Induction** (`DOCUMENTATION_DEPARTMENT_INDUCTION_001`): Inducted as the core support documentation layer. The department is governed as a synchronization and maintenance surface that reflects live authorities without becoming one.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `NOT_QUEUED`
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C1_DEFINED_PROVISIONAL`
   - Source: `registry/governance/patches/DOCUMENTATION_DEPARTMENT_INDUCTION_001.json`; receipt: `NOT_RECORDED`; SHA-256: `298d68239f63aefe43feeac03d5f28dd194550040ed4253a1b9afbd62b66cb75`
 
 - **SourceRelation_C Provisional Source-Semantic Definition** (`D_SOURCE_RELATION_C_DEFINITION_20260727_001`): Literal placement only. OBL-D-001D remains OPEN_DEFINITION_ADDED; OBL-D-001E remains OPEN_UNCHANGED. No theorem, proof, promotion, token derivation, project_w change, or protected-surface mutation is authorized.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `NOT_QUEUED`
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C1_DEFINED_PROVISIONAL`
   - Source: `registry/governance/patches/PATCH_D_SOURCE_RELATION_C_20260727_001.json`; receipt: `NOT_RECORDED`; SHA-256: `844f321ef9dcb17fa3c06331a76f0a1ae275d9f409c75adcc37e52e8b8db26ec`
 
 - **Economics A|E Traceability Without Cross-Domain Equivalence** (`ECON_IND_AE_TRACE_001`): Backfilled into the canonical induction registry during governance debt discharge.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `NOT_QUEUED`
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C1_DEFINED_PROVISIONAL`
   - Source: `registry/governance/patches/ECON_IND_AE_TRACE_001.json`; receipt: `NOT_RECORDED`; SHA-256: `75ba06ac045b814f8f3ceee2f1ea366758426944a0d1a09a58d1c2eaeee63ca3`
 
 - **Dominant-Domain Linear/Nonlinear Binding** (`MPF_DOMINANT_DOMAIN_LINEAR_NONLINEAR_001`): Backfilled into the canonical induction registry during governance debt discharge. The dominant domain must be explicitly declared, and the RT_core expression remains the governing root condition.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `NOT_QUEUED`
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C1_DEFINED_PROVISIONAL`
   - Source: `registry/governance/patches/MPF_DOMINANT_DOMAIN_LINEAR_NONLINEAR_001.json`; receipt: `NOT_RECORDED`; SHA-256: `3b5086bc69049a03501cb52962e3b47335cac11fb7b3270319c470d5c4c8a472`
 
@@ -4744,182 +4744,182 @@ This section is generated from canonical induction, queue, intake, and represent
   - Source: `docs/textbook/mono_process_textbook_complete.md`; receipt: `NOT_RECORDED`; SHA-256: `17012b2095e704f4edb4d11d5049547d2103e5478557dec153025e39d71be6a7`
 
 - **Primitive Form and Dominant-Domain Realization** (`MPF_IND_PRIMITIVE_FORM_DOMINANT_DOMAIN_001`): Backfilled into the canonical induction registry during governance debt discharge. Primitive-form semantics class, dominant-domain criteria, and the whole-expression realization relation were resolved on 2026-07-02 through live resolution manifests.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `NOT_QUEUED`
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C1_DEFINED_PROVISIONAL`
   - Source: `registry/governance/patches/MPF_IND_PRIMITIVE_FORM_DOMINANT_DOMAIN_001.json`; receipt: `NOT_RECORDED`; SHA-256: `c82677c499f1abddde82c59700d6e7b7f8123a50e01d024a54ddca92c5f6de6c`
 
 - **RT Mechanics as Recursive Relational Completion** (`MPF_IND_RT_MECHANICS_RECURSIVE_COMPLETION_001`): Backfilled into the canonical induction registry during governance debt discharge.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `NOT_QUEUED`
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C1_DEFINED_PROVISIONAL`
   - Source: `registry/governance/patches/MPF_IND_RT_MECHANICS_RECURSIVE_COMPLETION_001.json`; receipt: `NOT_RECORDED`; SHA-256: `bcd36a91e4a0a883362f61e9e3cb7077f7ae150ff1980d9813ba701a16dbb862`
 
 - **Notebook 23 REHASH-002 Replacement Source** (`MPF_SIM_D_E_HELD_OUT_STRESS_REHASH_002_001`): Replacement source only. It preserves MPF_SIM_D_E_HELD_OUT_STRESS_001 and does not reuse the prior excluded result archive.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `NOT_QUEUED`
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C1_NOTEBOOK_PROVENANCE`
   - Source: `departments/colab/notebook_designs/RT_Notebook_23_D_E_Held_Out_Stress_REHASH_002.ipynb`; receipt: `NOT_RECORDED`; SHA-256: `6f4dae84e3bf0d03ef14c4ae218286ded94175cebaab2a564658c60af9acbdc1`
 
 - **Notebook 23 REHASH-002 Result Archive** (`MPF_SIM_D_E_HELD_OUT_STRESS_REHASH_002_RESULTS_001`): C2 candidate only. 324/324 controls and replays agree, zero flags, and the frozen spec hash passes. Rows are byte-identical to the prior excluded archive, so this is bounded deterministic repeatability rather than independent evidence. Not for textbook or claim-registry insertion pending review.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `NOT_QUEUED`
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C2_LIMITATION_OR_NEGATIVE_RESULT`
   - Source: `departments/colab/results/MPF_SIM_D_E_HELD_OUT_STRESS_REHASH_002_RESULTS.zip`; receipt: `NOT_RECORDED`; SHA-256: `a3e6b47abe6242bbf2019b8de26ac940b2337f132aaca7f6e970f49dfd62472e`
 
 - **Notebook 24 D/E Metamorphic Independence Source** (`MPF_SIM_D_E_METAMORPHIC_INDEPENDENCE_001`): Source provenance only. No theorem, universal D/E claim, textbook insertion, or promotion is authorized.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `NOT_QUEUED`
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C1_NOTEBOOK_PROVENANCE`
   - Source: `departments/colab/notebook_designs/RT_Notebook_24_D_E_Metamorphic_Independence.ipynb`; receipt: `NOT_RECORDED`; SHA-256: `3c1cc4039cbad575312a3d2dd9d42e481147e439e1abd53aafcea3992939cf67`
 
 - **Notebook 24 D/E Metamorphic Independence Result Archive** (`MPF_SIM_D_E_METAMORPHIC_INDEPENDENCE_001_RESULTS_001`): C2 candidate only. All oracle, metamorphic, replay, artifact, and spec checks pass in the finite run. Not for textbook or claim-registry insertion pending governed review.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `NOT_QUEUED`
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C2_LIMITATION_OR_NEGATIVE_RESULT`
   - Source: `departments/colab/results/MPF_SIM_D_E_METAMORPHIC_INDEPENDENCE_001_RESULTS.zip`; receipt: `NOT_RECORDED`; SHA-256: `ecc9213676770fd72b43bb2e81efe703af238023206dfab87141b5e9f023787f`
 
 - **Notebook 25 D/E Oracle Adversarial Result Archive** (`MPF_SIM_D_E_ORACLE_ADVERSARIAL_001_RESULTS_001`): C2 bounded result only. Approved-tool computational replication is verified at environment level: artifact hashes, replay checks, invariant checks, and zero-disagreement outcome persist. Generated archive spec omits the non-execution source_notebook metadata field; this remains a provenance limitation. Formal semantics, oracle independence, theorem obligations, and all promotion above C2 remain open.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `NOT_QUEUED`
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C2_LIMITATION_OR_NEGATIVE_RESULT`
   - Source: `departments/colab/results/MPF_SIM_D_E_ORACLE_ADVERSARIAL_001_RESULTS_001.zip`; receipt: `NOT_RECORDED`; SHA-256: `fbdc2c572f1200ba68be485633e70a1ba0cacfd12b9f32dce26600289d67d635`
 
 - **Notebook 21 D Threshold Sensitivity Source** (`MPF_SIM_D_THRESHOLD_SENSITIVITY_001`): Source provenance is separated from result evidence. The specification freezes the context grid, seeds, controls, output paths, and C2 interpretation boundary.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `NOT_QUEUED`
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C1_NOTEBOOK_PROVENANCE`
   - Source: `departments/colab/notebook_designs/notebook_21_d_threshold_sensitivity/RT_Notebook_21_D_Threshold_Sensitivity.ipynb`; receipt: `NOT_RECORDED`; SHA-256: `c7fddb6054d56dcde48d5cb84556eea39ed6c6c0d17a59deeb25f32818bfeb31`
 
 - **Notebook 21 D Threshold Sensitivity Result Review** (`MPF_SIM_D_THRESHOLD_SENSITIVITY_RESULTS_001`): Replay is deterministic and 21 threshold-sensitive cases are observed in the declared synthetic grid. Conditional manifest state, finite scope, synthetic value generation, and approved-tool replication remain blockers.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `NOT_QUEUED`
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C2_BOUNDED_NOTEBOOK_OUTPUT_WITH_LIMITATIONS`
   - Source: `departments/colab/results/MPF_SIM_D_THRESHOLD_SENSITIVITY_001.zip`; receipt: `NOT_RECORDED`; SHA-256: `2b366a7b22bf0ae85553d955931a871e64da29bc694463cb29a208426d957637`
 
 - **Notebook 22 Enriched Relation-Token Witness Source** (`MPF_SIM_ENRICHED_RELATION_TOKEN_WITNESS_001`): Source provenance is separated from result evidence. The immutable specification freezes two finite cases, bare/enriched witness modes, predicate components, and the C2 limitation interpretation boundary.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `NOT_QUEUED`
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C1_NOTEBOOK_PROVENANCE`
   - Source: `registry/governance/patches/MPF_SIM_ENRICHED_RELATION_TOKEN_WITNESS_RESULTS_001.json`; receipt: `NOT_RECORDED`; SHA-256: `7350e277cb39448f900a5a14c0164bca96cac3dbdb68b01470b2dcdb9074751e`
 
 - **Notebook 22 Enriched Relation-Token Witness Result Review** (`MPF_SIM_ENRICHED_RELATION_TOKEN_WITNESS_RESULTS_001`): Inducted as bounded C2 limitation/negative evidence. Finite two-case scope, incomplete internal per-file hash manifest, unestablished source semantics of relation tokens, approved-tool replication, and promotion above C2 remain blocked.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `NOT_QUEUED`
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C2_LIMITATION_OR_NEGATIVE_RESULT`
   - Source: `registry/governance/patches/MPF_SIM_ENRICHED_RELATION_TOKEN_WITNESS_RESULTS_001.json`; receipt: `NOT_RECORDED`; SHA-256: `7350e277cb39448f900a5a14c0164bca96cac3dbdb68b01470b2dcdb9074751e`
 
 - **Notebook 17 Organization Resolution Calculus Source** (`MPF_SIM_ORGANIZATION_RESOLUTION_CALCULUS_001`): Source notebook is classified separately from the executed archive. No distinct immutable pre-execution specification was supplied.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `NOT_QUEUED`
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C1_NOTEBOOK_PROVENANCE`
   - Source: `departments/colab/notebook_designs/notebook_17_organization_resolution_calculus/RT_Notebook_17_Organization_Resolution_Calculus.ipynb`; receipt: `NOT_RECORDED`; SHA-256: `dcb3b11e5763b020b7d917f11f7475ff90a88c2e7c5aa11ce22aa70bf7030d4b`
 
 - **Notebook 17 Organization Resolution Calculus Result Review** (`MPF_SIM_ORGANIZATION_RESOLUTION_CALCULUS_RESULTS_001`): Inducted as bounded C2 output with limitations. The archive contains counterexamples to projection monotonicity, primitive preservation is not testable, and approved-tool replication remains pending.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `NOT_QUEUED`
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C2_BOUNDED_NOTEBOOK_OUTPUT_WITH_LIMITATIONS`
   - Source: `departments/colab/results/MPF_SIM_ORGANIZATION_RESOLUTION_CALCULUS_001_RESULTS.zip`; receipt: `NOT_RECORDED`; SHA-256: `c96d1a3c71025b448f6208631fe524c2adc6463cb0988a365dc4552ab06ba6c6`
 
 - **Notebook 16 Projection-Driven Organizational DoF Isolation Design** (`MPF_SIM_PROJECTION_DOF_ISOLATION_001`): Backfilled on 2026-07-23 after the Notebook 16 design package was created without induction/claim binding. This is not an execution result.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `NOT_QUEUED`
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C1_SPECIFICATION_ONLY`
   - Source: `registry/governance/patches/MPF_SIM_PROJECTION_DOF_ISOLATION_001.json`; receipt: `NOT_RECORDED`; SHA-256: `e0b8c3b3894cb8fce17678687966350b5649f8e0426051c917b545c311982661`
 
 - **Notebook 16 Projection-Driven Organizational DoF Isolation Result Review** (`MPF_SIM_PROJECTION_DOF_ISOLATION_RESULTS_001`): Inducted on 2026-07-23 after archive review. This supports bounded symbolic Notebook 16 output-with-limitations only; the manifest execution state is stale and approved-tool replication remains pending.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `NOT_QUEUED`
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C2_BOUNDED_NOTEBOOK_OUTPUT_WITH_LIMITATIONS`
   - Source: `registry/governance/patches/MPF_SIM_PROJECTION_DOF_ISOLATION_RESULTS_001.json`; receipt: `NOT_RECORDED`; SHA-256: `a8a98788d9c6edaec9bafbea04a66974de705cf40a9ce2b2766b641d2cbf16fd`
 
 - **Notebook 16 Projection-Driven Organizational DoF Meaningful Follow-on Result Review** (`MPF_SIM_PROJECTION_DOF_MEANINGFUL_RESULTS_001`): Inducted as bounded C2 output with limitations. The archive has an internal executed manifest and zero parse failures, but lacks a distinct immutable pre-execution specification for this follow-on campaign.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `NOT_QUEUED`
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C2_BOUNDED_NOTEBOOK_OUTPUT_WITH_LIMITATIONS`
   - Source: `departments/colab/results/MPF_SIM_PROJECTION_DOF_MEANINGFUL_001_RESULTS.zip`; receipt: `NOT_RECORDED`; SHA-256: `d944faab1205733e85d462228d3bc38414591fe85dbd0eb3a6e36927f6e73caa`
 
 - **Notebook 13 Topological Invariants of Continuation Geometry Design** (`NB13_TOPOLOGICAL_INVARIANTS_CONTINUATION_GEOMETRY_001`): Designed on 2026-07-22. This is not an execution result. Success, partial success, limitation, or inconclusive status requires recoverable Notebook 13 outputs and governed review.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `NOT_QUEUED`
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C1_SPECIFICATION_ONLY`
   - Source: `registry/governance/patches/NB13_TOPOLOGICAL_INVARIANTS_CONTINUATION_GEOMETRY_001.json`; receipt: `NOT_RECORDED`; SHA-256: `13af922bc3fe0624801a6b6131e17e9988c055f3f00fca4e4d629301caa38cef`
 
 - **Notebook 13 v2 Ordered Chunked Colab Scaffold** (`NB13_TOPOLOGICAL_INVARIANTS_CONTINUATION_GEOMETRY_002`): Designed on 2026-07-22 after user-reported Colab failures. Supersedes the v1 execution scaffold for runtime robustness but does not supersede the research question.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `NOT_QUEUED`
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C1_SPECIFICATION_ONLY`
   - Source: `registry/governance/patches/NB13_TOPOLOGICAL_INVARIANTS_COLAB_V2_ORDERED_CHUNKED_001.json`; receipt: `NOT_RECORDED`; SHA-256: `ebfd9bb331f2d1945463cb5a0ed311733c735939f5d4d1a1b343d2757f48eb34`
 
 - **Notebook 13 v2 Topological Invariants Result Archive Review** (`NB13_TOPOLOGICAL_INVARIANTS_RESULTS_001`): Inducted on 2026-07-22 after archive review. This supports bounded C2 output-with-limitations only; no implementation-independent theory or external physical claim is licensed.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `NOT_QUEUED`
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C2_BOUNDED_NOTEBOOK_OUTPUT_WITH_LIMITATIONS`
   - Source: `registry/governance/patches/NB13_TOPOLOGICAL_INVARIANTS_RESULTS_001.json`; receipt: `NOT_RECORDED`; SHA-256: `daabdd1136340543e4505b9e9d667637669e25c97ccb17c186e515de402ea084`
 
 - **Notebook 14 Generic Topology Feature Ablation Design** (`NB14_GENERIC_TOPOLOGY_FEATURE_ABLATION_001`): Designed on 2026-07-22. This is not an execution result. Success, limitation, mixed, or inconclusive status requires recoverable Notebook 14 outputs and result-zip registration.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `NOT_QUEUED`
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C1_SPECIFICATION_ONLY`
   - Source: `registry/governance/patches/NB14_GENERIC_TOPOLOGY_FEATURE_ABLATION_001.json`; receipt: `NOT_RECORDED`; SHA-256: `428c75383ff86251d40f468b1a5988b7501b385857f888988459847053d5a806`
 
 - **Notebook 14 Generic Topology Feature Ablation Result Review** (`NB14_GENERIC_TOPOLOGY_FEATURE_ABLATION_RESULTS_001`): Inducted on 2026-07-22 after archive review. This supports bounded C2 output-with-limitations only; the manifest is present beside the archive but not inside the zip, and grouped evaluation remains pending.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `NOT_QUEUED`
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C2_BOUNDED_NOTEBOOK_OUTPUT_WITH_LIMITATIONS`
   - Source: `registry/governance/patches/NB14_GENERIC_TOPOLOGY_FEATURE_ABLATION_RESULTS_001.json`; receipt: `NOT_RECORDED`; SHA-256: `eedd05dc32442befb037389266c6a538a3264542a8af82e71bd5e8485db6a7f2`
 
 - **Notebook 15 Articulation and Continuation Geometry Theory Design** (`NB15_ARTICULATION_CONTINUATION_GEOMETRY_THEORY_001`): Designed on 2026-07-22. This is not an execution result or formal proof. The notebook is intended to generate bounded theorem candidates and counterexamples.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `NOT_QUEUED`
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C1_SPECIFICATION_ONLY`
   - Source: `registry/governance/patches/NB15_ARTICULATION_CONTINUATION_GEOMETRY_THEORY_001.json`; receipt: `NOT_RECORDED`; SHA-256: `8332628a95803adbf2331950f9c788010068f06e4c4f6cc7f050a779008e57f1`
 
 - **Notebook 15 Articulation and Continuation Geometry Theory Result Review** (`NB15_ARTICULATION_CONTINUATION_GEOMETRY_THEORY_RESULTS_001`): Inducted on 2026-07-22 after archive review. This supports bounded theorem-candidate evidence and one refutation only; no formal theorem or causal claim is licensed.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `NOT_QUEUED`
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C2_THEOREM_CANDIDATE_EVIDENCE_WITH_LIMITATIONS`
   - Source: `registry/governance/patches/NB15_ARTICULATION_CONTINUATION_GEOMETRY_THEORY_RESULTS_001.json`; receipt: `NOT_RECORDED`; SHA-256: `e7ba35719b836577452054ca6a213bfe5a271891f3c3f30427f0e5cde50e4fe8`
 
 - **Notebook 18 Domain Projection and Primitive Hierarchy Source** (`NB18_DOMAIN_PROJECTION_RESIDUE_001`): Source provenance is separated from result evidence. The accompanying specification is a post-execution reconstruction and is explicitly not an immutable pre-execution C2 gate.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `NOT_QUEUED`
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C1_NOTEBOOK_PROVENANCE`
   - Source: `registry/governance/patches/NB18_DOMAIN_PROJECTION_RESIDUE_RESULTS_001.json`; receipt: `NOT_RECORDED`; SHA-256: `5fef8488cc5008579fcc8147f48215bfdda0d937c03a25e8c0091e89d2c90f9a`
 
 - **Notebook 18 Domain Projection and Primitive Hierarchy Result Review** (`NB18_DOMAIN_PROJECTION_RESIDUE_RESULTS_001`): Inducted as bounded C2 output with limitations. Counterexamples, finite model scope, deterministic stratification above the safety threshold, operational residue definitions, missing immutable pre-execution specification, and pending approved-tool replication block promotion above C2.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `NOT_QUEUED`
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C2_BOUNDED_NOTEBOOK_OUTPUT_WITH_LIMITATIONS`
   - Source: `registry/governance/patches/NB18_DOMAIN_PROJECTION_RESIDUE_RESULTS_001.json`; receipt: `NOT_RECORDED`; SHA-256: `5fef8488cc5008579fcc8147f48215bfdda0d937c03a25e8c0091e89d2c90f9a`
 
 - **Notebook 19 Exclusion Generates Residue Source** (`NB19_EXCLUSION_GENERATES_RESIDUE_001`): Source provenance is separated from archive evidence. The specification and reconstruction manifest were created after execution and do not satisfy the immutable pre-execution C2 gate.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `NOT_QUEUED`
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C1_NOTEBOOK_PROVENANCE`
   - Source: `registry/governance/patches/NB19_EXCLUSION_GENERATES_RESIDUE_RESULTS_001.json`; receipt: `NOT_RECORDED`; SHA-256: `7de72ea89ebeefcacd3d0a2d88957e4033ce328db207d56865870dc0ba59897e`
 
 - **Notebook 19 Exclusion Generates Residue Result Review** (`NB19_EXCLUSION_GENERATES_RESIDUE_RESULTS_001`): Inducted as bounded C2 output with limitations. Finite model scope, possible deterministic stratification, operational definitions, missing immutable pre-execution specification, association/causation boundary, and approved-tool replication block promotion above C2.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `NOT_QUEUED`
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C2_BOUNDED_NOTEBOOK_OUTPUT_WITH_LIMITATIONS`
   - Source: `registry/governance/patches/NB19_EXCLUSION_GENERATES_RESIDUE_RESULTS_001.json`; receipt: `NOT_RECORDED`; SHA-256: `7de72ea89ebeefcacd3d0a2d88957e4033ce328db207d56865870dc0ba59897e`
 
 - **Notebook 20 Distinction Conservation and Exclusion Dynamics Source** (`NB20_DISTINCTION_CONSERVATION_EXCLUSION_DYNAMICS_001`): Source provenance is separated from archive evidence. Design specification was reconstructed after execution and does not satisfy the immutable pre-execution C2 gate.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `NOT_QUEUED`
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C1_NOTEBOOK_PROVENANCE`
   - Source: `registry/governance/patches/NB20_DISTINCTION_CONSERVATION_EXCLUSION_DYNAMICS_RESULTS_001.json`; receipt: `NOT_RECORDED`; SHA-256: `578227f1e51724537e54670d475075a4955932c54cf6b85d421e3e590ecef8a9`
 
 - **Notebook 20 Distinction Conservation and Exclusion Dynamics Result Review** (`NB20_DISTINCTION_CONSERVATION_EXCLUSION_DYNAMICS_RESULTS_001`): Inducted as bounded C2 output with limitations. Finite pairwise distinction model, operational residue definition, possible deterministic stratification, definition dependence, missing immutable pre-execution specification, and approved-tool replication block promotion above C2.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `NOT_QUEUED`
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C2_BOUNDED_NOTEBOOK_OUTPUT_WITH_LIMITATIONS`
   - Source: `registry/governance/patches/NB20_DISTINCTION_CONSERVATION_EXCLUSION_DYNAMICS_RESULTS_001.json`; receipt: `NOT_RECORDED`; SHA-256: `578227f1e51724537e54670d475075a4955932c54cf6b85d421e3e590ecef8a9`
 
 - **Neuroscience Department Induction** (`NEUROSCIENCE_DEPARTMENT_CANDIDATE_001`): Captured from a raw human research note, routed through analysis intake, and formalized into an inducted neuroscience department with a live peer root, SSOT, and AGENTS.md.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `NOT_QUEUED`
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C1_DEFINED_PROVISIONAL`
   - Source: `registry/governance/patches/NEUROSCIENCE_DEPARTMENT_INDUCTION_001.json`; receipt: `NOT_RECORDED`; SHA-256: `c7930feb057ee5bccfe961bc75ef963aacc26ddbf8f33c7e84cf6471f0815b24`
 
 - **New Folder Research Data, Methods, and Conclusions Staged Induction** (`NEW_FOLDER_STAGED_INDUCTION_PACKET_2026_07_22`): User-authorized sync on 2026-07-22. Notebook 11 non-identifiability, phase-map no-stable-region output, and residue-causality INCONCLUSIVE outcome are preserved as blockers against claim escalation. No C5/C6 status, external physical claim, or lexicon promotion is granted.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `NOT_QUEUED`
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C2_EXTERNAL_BOUNDED_INDUCTION`
   - Source: `registry/governance/patches/NEW_FOLDER_STAGED_INDUCTION_PACKET_2026_07_22.json`; receipt: `NOT_RECORDED`; SHA-256: `70dbd32d2cf6590b63e6cec6e62621dd754104e157aa68426ccceabe9faa0f44`
 
 - **Memory Tensor Array Mathematics Track** (`PI_MEMORY_TENSOR_RT_001_MATH`): Split from the shared provisional seed and wired as the mathematics track. RT semantics remain governed by the live RT/Core layer.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `NOT_QUEUED`
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C1_DEFINED_PROVISIONAL`
   - Source: `registry/governance/patches/PI_MEMORY_TENSOR_RT_001.json`; receipt: `NOT_RECORDED`; SHA-256: `e07283e61c7949516dc43ecd17fb1007243396a6f6f6bc162f973e36f3bb756d`
 
 - **Memory Tensor Array Neuroscience Track** (`PI_MEMORY_TENSOR_RT_001_NEUROSCIENCE`): Split from the shared provisional seed and wired as the neuroscience track. RT semantics remain governed by the live RT/Core layer.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `NOT_QUEUED`
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C1_DEFINED_PROVISIONAL`
   - Source: `registry/governance/patches/PI_MEMORY_TENSOR_RT_001.json`; receipt: `NOT_RECORDED`; SHA-256: `e07283e61c7949516dc43ecd17fb1007243396a6f6f6bc162f973e36f3bb756d`
 
 - **Conditioning as Primitive Relational Process** (`RT-IND-Conditioning-001`): Backfilled into the canonical induction registry during governance debt discharge.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `NOT_QUEUED`
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C1_DEFINED_PROVISIONAL`
   - Source: `registry/governance/patches/RT-IND-Conditioning-001.json`; receipt: `NOT_RECORDED`; SHA-256: `0e4b152f881baabf27f8fbace78a423f1c3d393b49de584aebeba06b2aa03ace`
 
 - **Notebook 26 D/E Clean-Room Candidate Comparison Harness Result** (`RT_NOTEBOOK_26_D_E_CLEANROOM_CANDIDATE_COMPARISON_001_RESULTS_001`): Harness validation only. The reference stand-in generated identical candidate and clean-room outputs, with zero preserved counterexamples and replay agreement. No candidate equivalence, theorem, or claim promotion is authorized.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `NOT_QUEUED`
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C1_EXECUTION_RECONSTRUCTION`
   - Source: `departments/colab/results/RT_NOTEBOOK_26_D_E_CLEANROOM_CANDIDATE_COMPARISON_001_RESULTS_001.zip`; receipt: `NOT_RECORDED`; SHA-256: `e6777751d83c1b69bea02ed72021b8dbdce1a17050d64c843434dcbc0b24b4f4`
 
 - **Notebook 26 Self-Contained D/E Harness Result** (`RT_NOTEBOOK_26_D_E_SELF_CONTAINED_001_RESULTS_001`): Harness validation only. The embedded reference stand-in produced identical candidate and clean-room outputs, with zero counterexamples and replay agreement. No governed candidate equivalence or promotion is authorized.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `NOT_QUEUED`
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C1_EXECUTION_RECONSTRUCTION`
   - Source: `departments/colab/results/RT_NOTEBOOK_26_D_E_SELF_CONTAINED_001_RESULTS_001.zip`; receipt: `NOT_RECORDED`; SHA-256: `3b7a3ac0cea153642d111b7086ee10b93abb8d08f5ab6481f01926736e45ccab`
 
@@ -4930,14 +4930,29 @@ _None recorded._
 ## Under Review
 
 - **deriveRel_C and RELATION_TOKEN_C Provisional Source-Only Definition** (`D_DERIVE_REL_C_DEFINITION_20260727_001`): Literal placement only. deriveRel_C and RELATION_TOKEN_C remain provisional; token validity, witness integration, project_w transport, target interpretation, preservation, and OBL-D-001D/E discharge remain open. Notebook 22 remains unchanged and C2-limited.
-  - Capture: `PRESERVED_AS_RECEIVED_IN_GOVERNED_CONVERSATION`; Review: `NOT_REVIEWED`; Promotion: `HOLD_C1`; Induction: `NOT_QUEUED`
+  - Capture: `PRESERVED_AS_RECEIVED_IN_GOVERNED_CONVERSATION`; Review: `NOT_REVIEWED`; Promotion: `HOLD_C1`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C1_DEFINED_PROVISIONAL`
   - Source: `registry/governance/patches/PATCH_D_DERIVE_REL_C_20260727_001.json`; receipt: `NOT_RECORDED`; SHA-256: `66c0b8ee1f5691e828c33ab2bb5fe91f22bba9d5745f89bddd763fa2cc9d66a8`
 
 - **ValidRelToken_C Provisional Source-Bound Validity Definition** (`D_VALID_REL_TOKEN_C_DEFINITION_20260727_001`): Literal placement only. Validity is source-only and pre-projection; digest equality is non-authoritative; validator repair is forbidden. Witness integration, token transport, target interpretation, semantic preservation, OBL-D-001D discharge, and OBL-D-001E remain open.
-  - Capture: `PRESERVED_PROVISIONAL`; Review: `NOT_REVIEWED`; Promotion: `HOLD_C1`; Induction: `NOT_QUEUED`
+  - Capture: `PRESERVED_PROVISIONAL`; Review: `NOT_REVIEWED`; Promotion: `HOLD_C1`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C1_DEFINED_PROVISIONAL`
   - Source: `departments/analysis_intake/chat_captures/D_VALID_REL_TOKEN_C_DEFINITION_AND_PLACEMENT_20260727_001.json`; receipt: `NOT_RECORDED`; SHA-256: `27313E9353442BA23A65543EF62595EFD2A849CA4375FBE47E3D87560664EB4C`
+
+- **RT Asym Observation Orientation Exclusion** (`RT_ASYM_OBSERVATION_ORIENTATION_EXCLUSION_INDUCTION_20260728_001`): Research registration only. Not reviewed, promoted, or treated as canonical mathematics.
+  - Capture: `PRESERVED_LITERAL_FIRST_CONTACT`; Review: `NOT_REVIEWED`; Promotion: `HOLD_C1`; Induction: `INDUCTED`
+  - Queue: `queued`; Registry: `C1_DEFINED_PROVISIONAL`
+  - Source: `departments/analysis_intake/chat_captures/RT_ASYM_OBSERVATION_ORIENTATION_EXCLUSION_INDUCTION_20260728_001.json`; receipt: `departments/analysis_intake/chat_captures/RT_ASYM_OBSERVATION_ORIENTATION_EXCLUSION_INDUCTION_20260728_001_induction_receipt.json`; SHA-256: `2914CE5209999B12A3483027225E7CB1BC82F0E3E7F44DED45D35EF12C7193BD`
+
+- **RT Asym Symbol Type Reconciliation** (`RT_ASYM_SYMBOL_TYPE_RECONCILIATION_20260728_001`): Visible research-blocked registration. The payload ended before its closing JSON structure; no missing content was inferred.
+  - Capture: `PRESERVED_PARTIAL_FIRST_CONTACT`; Review: `NOT_REVIEWED`; Promotion: `HOLD_C1`; Induction: `INDUCTED`
+  - Queue: `blocked_visible`; Registry: `RESEARCH_BLOCKED_VISIBLE`
+  - Source: `departments/analysis_intake/chat_captures/RT_ASYM_SYMBOL_TYPE_RECONCILIATION_20260728_001.json`; receipt: `departments/analysis_intake/chat_captures/RT_ASYM_SYMBOL_TYPE_RECONCILIATION_20260728_001_induction_receipt.json`; SHA-256: `0CBE75AE63BD6AD855103A2D7E1B190768BA9B76D88033AE3BB7D1BACDB10789`
+
+- **RT Boundary Orientation Asymmetry** (`RT_BOUNDARY_ORIENTATION_ASYM_INDUCTION_20260728_001`): Research registration only. Not reviewed, promoted, or treated as canonical mathematics.
+  - Capture: `PRESERVED_LITERAL_FIRST_CONTACT`; Review: `NOT_REVIEWED`; Promotion: `HOLD_C1`; Induction: `INDUCTED`
+  - Queue: `queued`; Registry: `C1_DEFINED_PROVISIONAL`
+  - Source: `departments/analysis_intake/chat_captures/RT_BOUNDARY_ORIENTATION_ASYM_INDUCTION_20260728_001.json`; receipt: `departments/analysis_intake/chat_captures/RT_BOUNDARY_ORIENTATION_ASYM_INDUCTION_20260728_001_induction_receipt.json`; SHA-256: `AB070028C0099229CF0583ECAE081A690E20F287AEEC51C015A3B84EBB2908A2`
 
 - **RT_CONTINUITY_DISCRETENESS_DOMAIN_HYPOTHESIS_INDUCTION_20260726_001** (`RT_CONTINUITY_DISCRETENESS_DOMAIN_HYPOTHESIS_INDUCTION_20260726_001`): Preserved Analysis Intake capture.
   - Capture: `INDUCTED`; Review: `NOT_REVIEWED`; Promotion: `HOLD_C1`; Induction: `NOT_QUEUED`
@@ -4945,22 +4960,22 @@ _None recorded._
   - Source: `departments/analysis_intake/chat_captures/RT_CONTINUITY_DISCRETENESS_DOMAIN_HYPOTHESIS_INDUCTION_20260726_001.json`; receipt: `NOT_RECORDED`; SHA-256: `0afd4d59df0fa83fe80db4e8b1e83fb0cffc8b1b067db745172d5f31d93161ca`
 
 - **Provisional RT-GR Triangle Closure-Residue Mapping** (`RT_GR_BRIDGE_TRIANGLE_CLOSURE_RESIDUE_CAT_INDUCTION_20260730_001`): Provisional intake only. No coordinate-independent curvature derivation, Einstein-equation derivation, theorem admission, external physical validity, or promotion is authorized.
-  - Capture: `PRESERVED_PROVISIONAL`; Review: `NOT_REVIEWED`; Promotion: `HOLD_C1`; Induction: `NOT_QUEUED`
+  - Capture: `PRESERVED_PROVISIONAL`; Review: `NOT_REVIEWED`; Promotion: `HOLD_C1`; Induction: `INDUCTED`
   - Queue: `queued`; Registry: `C1_DEFINED_PROVISIONAL`
   - Source: `departments/analysis_intake/chat_captures/RT_GR_BRIDGE_TRIANGLE_CLOSURE_RESIDUE_CAT_INDUCTION_20260730_001.md`; receipt: `NOT_RECORDED`; SHA-256: `7528D468305D6CD494FE317ACCD5F561D311E3BD9DAADDE8D01ABC6C24A1E40E`
 
 - **Recursive Symmetry Continuation** (`RT_INDUCTION_RECURSIVE_SYMMETRY_CONTINUATION_20260725_001`): Converted from a chat-submitted concept packet and preserved as a semantic capture. The physics interpretation is explicitly unestablished; formal definitions, models, falsification, and textbook alignment remain open.
-  - Capture: `INDUCTED`; Review: `NOT_REVIEWED`; Promotion: `HOLD_C1`; Induction: `NOT_QUEUED`
+  - Capture: `INDUCTED`; Review: `NOT_REVIEWED`; Promotion: `HOLD_C1`; Induction: `INDUCTED`
   - Queue: `queued`; Registry: `C1_DEFINED_PROVISIONAL`
   - Source: `departments/analysis_intake/chat_captures/RT_INDUCTION_RECURSIVE_SYMMETRY_CONTINUATION_20260725_001.json`; receipt: `NOT_RECORDED`; SHA-256: `a09fc7b8c292bd33d88a7766f6bc64d21ea675b2f452cf51bb55e456a7c7d732`
 
 - **Orientation, Ordinal Alternation, and MTO Closure Candidates** (`RT_ORIENTATION_ORDINAL_MTO_INDUCTION_20260730_002`): Provisional intake only. Wave, polarization, interference, particle, quantum, ontology, and universal-MTO language remains analogy or candidate language; no theorem, primitive, physical identity, or promotion is authorized.
-  - Capture: `PRESERVED_PROVISIONAL`; Review: `NOT_REVIEWED`; Promotion: `HOLD_C1`; Induction: `NOT_QUEUED`
+  - Capture: `PRESERVED_PROVISIONAL`; Review: `NOT_REVIEWED`; Promotion: `HOLD_C1`; Induction: `INDUCTED`
   - Queue: `queued`; Registry: `C1_DEFINED_PROVISIONAL`
   - Source: `departments/analysis_intake/chat_captures/RT_ORIENTATION_ORDINAL_MTO_INDUCTION_20260730_002.md`; receipt: `NOT_RECORDED`; SHA-256: `A9213ED21B32BB3D680FEC79F41519F43A7FBADDA030958AA52C0CCE5356D47E`
 
 - **Topological Conditioning by Continuation** (`RT_TOPOLOGICAL_CONDITIONING_BY_CONTINUATION_INDUCTION_20260724_001`): Inducted from an approved chat semantic capture. The mechanism is conceptually specified but formally incomplete and empirically untested. No textbook insertion, lexicon promotion, axiom, theorem, or physical-law claim is authorized.
-  - Capture: `INDUCTED`; Review: `PARTIAL`; Promotion: `HOLD_C1`; Induction: `NOT_QUEUED`
+  - Capture: `INDUCTED`; Review: `PARTIAL`; Promotion: `HOLD_C1`; Induction: `INDUCTED`
   - Queue: `queued`; Registry: `C1_DEFINED_PROVISIONAL`
   - Source: `departments/analysis_intake/chat_captures/RT_TOPOLOGICAL_CONDITIONING_BY_CONTINUATION_INDUCTION_20260724_001.json`; receipt: `NOT_RECORDED`; SHA-256: `27a80df79d2e70fe333f7b254c53d514130465f115db2adb89bad2153065d0d8`
 

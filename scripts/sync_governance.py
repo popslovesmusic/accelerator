@@ -87,7 +87,7 @@ def discover_preserved_captures() -> list[dict]:
         if not capture_path.is_file():
             continue
         capture_status = receipt.get("preservation_status") or receipt.get("capture_status")
-        if capture_status not in {"PRESERVED_LITERAL", "PRESERVED_PROVISIONAL", "APPENDED_WITH_PARENT_IMMUTABLE", "INDUCTED"}:
+        if capture_status not in {"PRESERVED_LITERAL", "PRESERVED_PROVISIONAL", "PRESERVED_LITERAL_FIRST_CONTACT", "PRESERVED_PARTIAL_FIRST_CONTACT", "APPENDED_WITH_PARENT_IMMUTABLE", "INDUCTED"}:
             continue
         capture_hash = sha256(capture_path)
         registered_hash = (receipt.get("preserved_sha256") or receipt.get("source_sha256") or "").lower()
@@ -145,7 +145,13 @@ def collect() -> tuple[list[dict], list[dict]]:
             "review_status": c.get("review_status", q.get("review_status", i.get("review_status", r.get("review_status", "NOT_RECORDED")))),
             "promotion_status": c.get("promotion_status", q.get("promotion_status", i.get("promotion_status", r.get("promotion_status", "NOT_RECORDED")))),
             "capture_status": c.get("capture_status", i.get("preservation_status", q.get("preservation_status", "NOT_RECORDED"))),
-            "induction_status": c.get("induction_status", q.get("induction_status", r.get("induction_status", "NOT_QUEUED"))),
+            "induction_status": (
+                q.get("induction_status")
+                or ("INDUCTED" if q.get("status") in {"queued", "triaged", "authorized_for_governance_work", "bound_to_registry", "blocked_visible"} else None)
+                or r.get("induction_status")
+                or c.get("induction_status")
+                or "NOT_QUEUED"
+            ),
         }
         if q and not r:
             section = "NOTES_QUEUED"

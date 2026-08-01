@@ -266,4 +266,40 @@ SELECT
     'allow' AS decision,
     'The live induction queue is the canonical governed queue for admitted induction records.' AS reason,
     '["governance/live/induction_queue.json","governance/live/governance_constitution.json"]' AS evidence_paths,
+    '[]' AS warnings
+UNION ALL
+SELECT
+    'departments/analysis_intake/induction_queue/queue_registry.json' AS target_pattern,
+    'analysis_intake' AS authority_owner,
+    'departments/analysis_intake/AGENTS.md' AS authority_source,
+    'current' AS supersession_status,
+    '[]' AS superseded_by,
+    'clear' AS conflict_state,
+    'allow' AS decision,
+    'The Analysis Intake local queue is governed by its department rules and explicit induction authority transition.' AS reason,
+    '["departments/analysis_intake/induction_queue/queue_registry.json","departments/analysis_intake/AGENTS.md","registry/governance/patches/GOV_INDUCTION_AUTHORITY_AND_VISIBILITY_001.json"]' AS evidence_paths,
+    '[]' AS warnings
+UNION ALL
+SELECT
+    'governance/live/representation_ledger.json' AS target_pattern,
+    'governance' AS authority_owner,
+    'registry/governance/patches/GOV_INDUCTION_AUTHORITY_AND_VISIBILITY_001.json' AS authority_source,
+    'current' AS supersession_status,
+    '[]' AS superseded_by,
+    'clear' AS conflict_state,
+    'allow' AS decision,
+    'The representation ledger is a governed projection synchronized from preserved sources and queue state.' AS reason,
+    '["governance/live/representation_ledger.json","registry/governance/patches/GOV_INDUCTION_AUTHORITY_AND_VISIBILITY_001.json"]' AS evidence_paths,
+    '[]' AS warnings
+UNION ALL
+SELECT
+    'scripts/sync_governance.py' AS target_pattern,
+    'db_runtime' AS authority_owner,
+    'scripts/sync_governance.py' AS authority_source,
+    'current' AS supersession_status,
+    '[]' AS superseded_by,
+    'clear' AS conflict_state,
+    'allow' AS decision,
+    'The governance synchronization script is an approved execution surface for validated projection updates.' AS reason,
+    '["scripts/sync_governance.py","registry/governance/patches/GOV_INDUCTION_AUTHORITY_AND_VISIBILITY_001.json"]' AS evidence_paths,
     '[]' AS warnings;
