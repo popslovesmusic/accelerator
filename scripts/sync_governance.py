@@ -34,6 +34,11 @@ def load(path: Path):
 
 
 def sha256(path: Path) -> str:
+    if path.resolve() == NOTES.resolve() and path.is_file():
+        text = path.read_text(encoding="utf-8")
+        if START in text and END in text:
+            text = text[:text.index(START)] + text[text.index(END) + len(END):]
+        return hashlib.sha256(text.encode("utf-8")).hexdigest()
     h = hashlib.sha256()
     with path.open("rb") as f:
         for block in iter(lambda: f.read(1024 * 1024), b""):
@@ -50,12 +55,19 @@ def canonical_id(record: dict) -> str | None:
     return record.get("induction_id") or record.get("proposal_id")
 
 
-def source_record(record: dict) -> dict:
-    path = record.get("source_path") or record.get("source_artifact") or record.get("linked_governance_patch")
-    if not path:
-        return {"path": None, "exists": False, "hash": None}
-    p = ROOT / path
-    return {"path": path.replace("\\", "/"), "exists": p.is_file(), "hash": sha256(p) if p.is_file() else None}
+def source_record(*records: dict) -> dict:
+    candidates = []
+    for record in records:
+        if not record:
+            continue
+        candidates += [record.get("source_path"), record.get("source_artifact"), record.get("linked_governance_patch")]
+        candidates += record.get("source_artifacts", []) or []
+    candidates = [x for x in candidates if x]
+    for path in candidates:
+        p = ROOT / path
+        if p.is_file():
+            return {"path": str(path).replace("\\", "/"), "exists": True, "hash": sha256(p)}
+    return {"path": str(candidates[0]).replace("\\", "/") if candidates else None, "exists": False, "hash": None}
 
 
 def collect() -> tuple[list[dict], list[dict]]:
@@ -79,9 +91,7 @@ def collect() -> tuple[list[dict], list[dict]]:
         q = item.get("queue") or {}
         r = item.get("registry") or {}
         i = item.get("intake") or {}
-        src = source_record(q or i or r)
-        if not src["path"] and i.get("source_path"):
-            src = source_record(i)
+        src = source_record(q, i, r)
         statuses = {
             "queue_status": q.get("status", "NOT_PRESENT"),
             "registry_status": r.get("status", "NOT_BOUND"),
@@ -107,6 +117,7 @@ def collect() -> tuple[list[dict], list[dict]]:
             "source_induction_id": cid,
             "capture_path": src["path"],
             "capture_hash": i.get("source_sha256") or q.get("source_sha256") or src["hash"],
+            "source_trace": {"path": src["path"], "verified_hash": src["hash"], "immutable_source_available": src["exists"]},
             "capture_status": statuses["capture_status"],
             "queue_status": statuses["queue_status"],
             "registry_status": statuses["registry_status"],
@@ -120,6 +131,9 @@ def collect() -> tuple[list[dict], list[dict]]:
             "last_synchronized_at": None,
             "synchronization_run_id": None,
         })
+        registered_hash = i.get("source_sha256") or q.get("source_sha256") or r.get("source_sha256")
+        if registered_hash and src["hash"] and registered_hash.lower() != src["hash"].lower():
+            conflicts.append({"type": "CAPTURE_HASH_CONFLICT", "induction_id": cid, "registered": registered_hash, "actual": src["hash"]})
         if not src["exists"] and src["path"]:
             conflicts.append({"type": "MISSING_IMMUTABLE_CAPTURE", "induction_id": cid, "path": src["path"]})
         if q and not r:
@@ -148,7 +162,7 @@ def render(entries: list[dict]) -> str:
             lines += [f"- **{e['title']}** (`{e['source_induction_id']}`): {e['source_summary']}", f"  - Queue: `{e['queue_status']}`; Registry: `{e['registry_status']}`; Review: `{e['review_status']}`; Promotion: `{e['promotion_status']}`", f"  - Source: `{e['capture_path']}`; hash: `{e['capture_hash'] or 'UNAVAILABLE'}`", ""]
         if not buckets.get(key):
             lines += ["_None recorded._", ""]
-    lines += [END, ""]
+    lines += [END]
     return "\n".join(lines)
 
 
@@ -176,16 +190,24 @@ def sync(args) -> int:
         "runtime_refresh_status": "NOT_REQUESTED",
         "overall_status": "FAIL_CLOSED" if any(c["type"] != "UNMAPPED_QUEUE_RECORD" for c in conflicts) else ("PASS_WITH_REPAIRS" if conflicts else "PASS"),
     }
-    if conflicts or args.check:
+    fatal_conflicts = any(c["type"] != "UNMAPPED_QUEUE_RECORD" for c in conflicts)
+    if fatal_conflicts or args.check or not args.apply:
         report["completed_at"] = datetime.now(timezone.utc).isoformat()
-        out = REPORT_DIR / f"sync_governance_{datetime.now(timezone.utc).strftime('%Y%m%d')}.json"
+        out_dir = ROOT / "audit_outputs/governance_sync"
+        out_dir.mkdir(parents=True, exist_ok=True)
+        out = out_dir / f"sync_governance_{datetime.now(timezone.utc).strftime('%Y%m%d')}.json"
         out.write_text(json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
         print(json.dumps({"status": report["overall_status"], "report": str(out), "conflicts": len(conflicts)}, indent=2))
-        return 2 if conflicts else 0
+        return 2 if fatal_conflicts else 0
     ledger = {"ledger_id": "REPRESENTATION_LEDGER_001", "schema_version": "1.0.0", "authority": "Governed projection; canonical sources remain authoritative.", "entries": entries}
     LEDGER.write_text(json.dumps(ledger, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     old = NOTES.read_text(encoding="utf-8")
     generated = render(entries)
+    existing_region = None
+    existing_text = NOTES.read_text(encoding="utf-8") if NOTES.is_file() else ""
+    if START in existing_text and END in existing_text:
+        existing_region = existing_text[existing_text.index(START):existing_text.index(END) + len(END)]
+    report["validation_results"]["idempotence"] = "PASS" if existing_region == generated else "NOT_YET_ESTABLISHED"
     if START in old or END in old:
         if START not in old or END not in old or old.index(START) > old.index(END):
             raise SystemExit("FAIL_CLOSED: invalid generated-region markers")
@@ -197,9 +219,17 @@ def sync(args) -> int:
         os.close(fd)
         Path(temp).write_text(new, encoding="utf-8")
         os.replace(temp, NOTES)
+    if args.refresh_db:
+        result = subprocess.run(["python", "scripts/db/snapshot_registries.py"], cwd=ROOT, capture_output=True, text=True)
+        report["runtime_refresh_status"] = "PASS" if result.returncode == 0 else "FAIL_CLOSED"
+        if result.returncode != 0:
+            report["overall_status"] = "FAIL_CLOSED"
+            report["conflicts"].append({"type": "RUNTIME_REFRESH_FAILURE", "detail": result.stderr[-2000:]})
     report["output_hashes"] = {"representation_ledger": sha256(LEDGER), "notes_projection": stable_hash(generated)}
     report["completed_at"] = datetime.now(timezone.utc).isoformat()
-    out = REPORT_DIR / f"sync_governance_{datetime.now(timezone.utc).strftime('%Y%m%d')}.json"
+    out_dir = ROOT / "audit_outputs/governance_sync"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    out = out_dir / f"sync_governance_{datetime.now(timezone.utc).strftime('%Y%m%d')}.json"
     out.write_text(json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(json.dumps({"status": report["overall_status"], "report": str(out), "entries": len(entries)}, indent=2))
     return 0
@@ -208,10 +238,19 @@ def sync(args) -> int:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--check", action="store_true")
+    parser.add_argument("--all", action="store_true")
+    parser.add_argument("--apply", action="store_true")
+    parser.add_argument("--fail-closed", action="store_true")
+    parser.add_argument("--repair-missing", action="store_true")
+    parser.add_argument("--induction-id")
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--notes", action="store_true")
-    parser.add_argument("--refresh-db", action="store_true", help="reserved; runtime refresh is not automatic in this implementation")
+    parser.add_argument("--refresh-db", action="store_true", help="refresh the runtime database after canonical validation")
     args = parser.parse_args()
+    if args.check:
+        args.apply = False
+    if args.dry_run:
+        args.apply = False
     return sync(args)
 
 
