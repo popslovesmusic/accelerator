@@ -2,7 +2,7 @@
 
 ## Status
 
-AX-R01 and AX-R02 are formalized provisionally. AX-R03 is `INAPPLICABLE` for `|`; whole-RT identity is separate. Typed operand-distinction semantics are provisionally formalized. The authorized `NO_NONTRIVIAL_EQUIVALENCE` path resolves AX-R04 to trivial reference identity only. AX-R05 is `INAPPLICABLE`, AX-R06 is `RESOLVED_NOT_CLOSED`, AX-R07 is provisionally formalized as validation-only malformed-construction rejection, AX-R08 is `PARTIALLY_RESOLVED_BLOCKED`, AX-R09 is `RESOLVED_INAPPLICABLE` because iterated relation application is not typable, and AX-R10 is `RESOLVED_INAPPLICABLE` because the reversed expression is malformed. Whole-RT composition/associativity/commutativity, operand projection, canonical projection selection, executable semantics, and AX-R11–AX-R12 remain open.
+AX-R01 and AX-R02 are formalized provisionally. AX-R03 is `INAPPLICABLE` for `|`; whole-RT identity is separate. Typed operand-distinction semantics are provisionally formalized. The authorized `NO_NONTRIVIAL_EQUIVALENCE` path resolves AX-R04 to trivial reference identity only. AX-R05 is `INAPPLICABLE`, AX-R06 is `RESOLVED_NOT_CLOSED`, AX-R07 is provisionally formalized as validation-only malformed-construction rejection, AX-R08 is `PARTIALLY_RESOLVED_BLOCKED`, AX-R09 is `RESOLVED_INAPPLICABLE`, AX-R10 is `RESOLVED_INAPPLICABLE`, and AX-R11 formalizes the ordered domain `BoundedSymmetry × UnboundedSymmetry` with executable totality blocked. Whole-RT composition/associativity/commutativity, operand projection, canonical projection selection, executable semantics, and AX-R12 remain unestablished; `[Asym]` domain compatibility remains separate.
 
 ## Observed and created
 
@@ -32,6 +32,6 @@ No axiom was proved, rejected, or promoted. Existing mathematical definitions, p
 
 ## Remaining open work
 
-AX-R01 through AX-R12 remain OPEN. Each requires its own governed treatment, evidence, and proof disposition before any downstream blocker can be considered resolved.
+AX-R01 through AX-R12 remain OPEN as a legacy summary line; current dispositions are governed by the campaign registry and crawl report.
 
 Claim ceiling: `C1_MODEL_RELATIVE`.

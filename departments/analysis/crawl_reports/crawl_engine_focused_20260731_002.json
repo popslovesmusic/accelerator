@@ -4,30 +4,6 @@
       "blocked_objects": [
         "symmetry_condition_relation"
       ],
-      "blocker_id": "AX-R11_DOMAIN_OF_DEFINITION",
-      "blocker_type": "MISSING_AXIOM",
-      "blocking_dependencies": [
-        "AX-R11_DOMAIN_OF_DEFINITION"
-      ],
-      "dependency_paths": [
-        [
-          "AX-R11_DOMAIN_OF_DEFINITION",
-          "symmetry_condition_relation"
-        ]
-      ],
-      "description": "Independently governable relation axiom remains open.",
-      "direct_or_propagated": "DIRECT",
-      "evidence": [
-        "RT_RELATION_AXIOMS_FORMALIZATION_CAMPAIGN_001"
-      ],
-      "priority": "CRITICAL",
-      "resolution_condition": "Close the named axiom through its own governed definition, validation, and proof disposition.",
-      "subject_object_id": "symmetry_condition_relation"
-    },
-    {
-      "blocked_objects": [
-        "symmetry_condition_relation"
-      ],
       "blocker_id": "AX-R12_PROJECTION_COMPATIBILITY",
       "blocker_type": "MISSING_AXIOM",
       "blocking_dependencies": [
@@ -56,7 +32,6 @@
       "blocker_id": "BLOCK-PROJECTION-PROPAGATED",
       "blocker_type": "MISSING_AXIOM",
       "blocking_dependencies": [
-        "AX-R11_DOMAIN_OF_DEFINITION",
         "AX-R12_PROJECTION_COMPATIBILITY"
       ],
       "dependency_paths": [
@@ -130,6 +105,62 @@
       "priority": "HIGH",
       "resolution_condition": "Define and validate a canonical typed selector and complete executable relation semantics.",
       "subject_object_id": "symmetry_condition_relation"
+    },
+    {
+      "blocked_objects": [
+        "symmetry_condition_relation",
+        "executable_semantics"
+      ],
+      "blocker_id": "BLOCK-R11-EXECUTABLE-TOTALITY",
+      "blocker_type": "MISSING_EXECUTABLE_SEMANTICS",
+      "blocking_dependencies": [
+        "complete_executable_semantics",
+        "OBL-R08-CANONICAL-PROJECTION-SELECTION"
+      ],
+      "dependency_paths": [
+        [
+          "complete_executable_semantics",
+          "OBL-R11-EXECUTABLE-TOTALITY"
+        ],
+        [
+          "OBL-R08-CANONICAL-PROJECTION-SELECTION",
+          "OBL-R11-EXECUTABLE-TOTALITY"
+        ]
+      ],
+      "description": "Domain membership is defined, but executable totality over Dom(|) is not established.",
+      "direct_or_propagated": "DIRECT",
+      "evidence": [
+        "AX-R11_DOMAIN_OF_DEFINITION",
+        "ax_r11_domain_of_definition_fixtures.json"
+      ],
+      "priority": "HIGH",
+      "resolution_condition": "Define complete executable semantics and establish totality over the declared typed domain.",
+      "subject_object_id": "symmetry_condition_relation"
+    },
+    {
+      "blocked_objects": [
+        "symmetry_condition_relation"
+      ],
+      "blocker_id": "BLOCK-R11-ASYM-DOMAIN-COMPATIBILITY",
+      "blocker_type": "MISSING_TYPE_RULE",
+      "blocking_dependencies": [
+        "OBL-R11-ASYM-DOMAIN-COMPATIBILITY",
+        "canonical typing of [Asym]"
+      ],
+      "dependency_paths": [
+        [
+          "canonical typing of [Asym]",
+          "OBL-R11-ASYM-DOMAIN-COMPATIBILITY"
+        ]
+      ],
+      "description": "The legal operand role of [Asym] is not canonically established.",
+      "direct_or_propagated": "DIRECT",
+      "evidence": [
+        "AX-R11_DOMAIN_OF_DEFINITION"
+      ],
+      "priority": "MEDIUM",
+      "resolution_condition": "Define whether and how [Asym] is typed as a legal bounded or unbounded operand.",
+      "subject_object_id": "symmetry_condition_relation"
     }
   ],
   "campaign_assessment": {
@@ -167,12 +198,15 @@
     ],
     "added_axiom_dispositions": [
       {
-        "axiom_id": "AX-R10_COMMUTATIVITY",
-        "status": "RESOLVED_INAPPLICABLE"
+        "axiom_id": "AX-R11_DOMAIN_OF_DEFINITION",
+        "status": "FORMALIZED_WITH_TOTALITY_BLOCKED"
       }
     ],
     "added_axioms": [
       "AX-R07_MALFORMED_CONSTRUCTION"
+    ],
+    "added_domains": [
+      "DOM-R11-SYMMETRY-CONDITION-RELATION"
     ],
     "added_objects": [
       "Dist_B",
@@ -181,6 +215,9 @@
       "Witness_B",
       "Witness_U",
       "Witness_SC"
+    ],
+    "added_predicates": [
+      "InDomain_R11"
     ],
     "added_relations": [
       "EQ-B-TRIVIAL",
@@ -220,9 +257,13 @@
     "new_carriers": [],
     "new_closure_laws": [],
     "new_commutativity_laws": [],
+    "new_domain_widening": false,
     "new_equivalence_relations": [],
     "new_noncommutativity_theorems": [],
-    "new_open_obligations": [],
+    "new_open_obligations": [
+      "OBL-R11-EXECUTABLE-TOTALITY",
+      "OBL-R11-ASYM-DOMAIN-COMPATIBILITY"
+    ],
     "new_projections": [],
     "new_reverse_relations": [],
     "new_substitution_permissions": [],
@@ -239,7 +280,6 @@
       "complete executable semantics"
     ],
     "remaining_open_axioms": [
-      "AX-R11_DOMAIN_OF_DEFINITION",
       "AX-R12_PROJECTION_COMPATIBILITY"
     ],
     "removed": [
@@ -248,15 +288,18 @@
     ],
     "resolved_obligations": [
       {
-        "obligation_id": "commutativity_or_noncommutativity",
-        "resolution": "INAPPLICABLE"
+        "obligation_id": "domain_of_definition",
+        "resolution": "FORMALIZED"
       }
     ],
+    "semantic_totality_claim": false,
     "separate_open_obligations": [
       "OBL-RT-IDENTITY-WHOLE",
       "OBL-RT-WHOLE-COMPOSITION",
       "OBL-SC-OPERAND-PROJECTION",
-      "OBL-R08-CANONICAL-PROJECTION-SELECTION"
+      "OBL-R08-CANONICAL-PROJECTION-SELECTION",
+      "OBL-R11-EXECUTABLE-TOTALITY",
+      "OBL-R11-ASYM-DOMAIN-COMPATIBILITY"
     ],
     "status_changed": [
       "distinction_permitting_symmetry_condition"
@@ -443,7 +486,7 @@
       "status": "RESOLVED_INAPPLICABLE"
     },
     "asymmetry_compatibility": {
-      "detail": "[Asym] is not in the focused active object set",
+      "detail": "[Asym] requires separate canonical subtype compatibility",
       "status": "UNRESOLVED"
     },
     "bounded_symmetry_compatibility": {
@@ -467,6 +510,10 @@
       "status": "PARTIALLY_RESOLVED_BLOCKED"
     },
     "direct_consumers": [],
+    "domain_of_definition": {
+      "detail": "AX-R11 defines Dom(|) exactly as ordered BoundedSymmetry \u00d7 UnboundedSymmetry; executable totality remains blocked",
+      "status": "FORMALIZED_WITH_TOTALITY_BLOCKED"
+    },
     "identity_axiom": {
       "detail": "AX-R03 is not an operator-local identity law; whole-RT identity remains separate",
       "status": "INAPPLICABLE"
@@ -664,7 +711,7 @@
         "PROVISIONALLY_DEFINED": 4
       },
       "skipped": 1,
-      "unresolved": 6
+      "unresolved": 7
     },
     "profiles": [
       {
@@ -1041,8 +1088,12 @@
         "reason": "open canonical projection selection obligation"
       },
       {
-        "object_id": "AX-R11_DOMAIN_OF_DEFINITION",
-        "reason": "open axiom obligation"
+        "object_id": "OBL-R11-EXECUTABLE-TOTALITY",
+        "reason": "blocked executable totality obligation"
+      },
+      {
+        "object_id": "OBL-R11-ASYM-DOMAIN-COMPATIBILITY",
+        "reason": "open Asym domain compatibility obligation"
       },
       {
         "object_id": "AX-R12_PROJECTION_COMPATIBILITY",
@@ -1051,9 +1102,9 @@
     ]
   },
   "output_provenance": {
-    "canonical_json_hash": "093ACAC59E1215B00559556B9B89A50773B7EC361F76BBFF1669CB8C0A8CEF45",
-    "markdown_hash": "7F43A5646F7E7339EC7F908C6F13030412513BF3C7265DC06AF266DC137AEA61",
-    "source_snapshot_hash": "4B117A6DB5E4556959234DF8C501232FF0F51C67C0AB91CBC35253041686F9E1",
+    "canonical_json_hash": "50AAD1449E8E04C52643845A5F4F8880C20920549157215B0B552ABB64404D12",
+    "markdown_hash": "69379B6EB7E96D2A22A76B039518617666C913E93F10525AAF09C46F499E6228",
+    "source_snapshot_hash": "F13FDADE9A8644A485BFFF682424A1CFA7893A5A3295275CCD070B1B1B06F392",
     "written_paths": [
       "crawl_output.json",
       "crawl_output.md"
@@ -1075,7 +1126,8 @@
       "OBL-RT-WHOLE-COMPOSITION",
       "OBL-SC-OPERAND-PROJECTION",
       "OBL-R08-CANONICAL-PROJECTION-SELECTION",
-      "AX-R11_DOMAIN_OF_DEFINITION",
+      "OBL-R11-EXECUTABLE-TOTALITY",
+      "OBL-R11-ASYM-DOMAIN-COMPATIBILITY",
       "AX-R12_PROJECTION_COMPATIBILITY"
     ],
     "proved": []
@@ -1089,7 +1141,7 @@
     }
   ],
   "repository_snapshot": {
-    "commit_id": "0f73a8c853517eadcef0fa2efced226bffe8e667",
+    "commit_id": "ed7af90f5be4bda170c37150aa4596a240db2567",
     "dirty_state": true,
     "excluded_paths": [
       ".git",
@@ -1101,17 +1153,17 @@
       "registry/lexicon_gap_queue.json"
     ],
     "repository_root": "D:\\projects\\acellorator",
-    "snapshot_hash": "4B117A6DB5E4556959234DF8C501232FF0F51C67C0AB91CBC35253041686F9E1",
+    "snapshot_hash": "F13FDADE9A8644A485BFFF682424A1CFA7893A5A3295275CCD070B1B1B06F392",
     "source_files": [
       {
         "exists": true,
         "path": "docs/textbook/mono_process_textbook_complete.md",
-        "sha256": "CB8D33B90409C6A1DF2E66ECE4AEADBB37114BFD426F698B31FCE8EBCBF73716"
+        "sha256": "12D1D397CC3E66BA02C2BAA55EFBA9A8169B908832215AA0EF589385E9686A62"
       },
       {
         "exists": true,
         "path": "outputs/audits/global_health_report.json",
-        "sha256": "55BF25DBFDC9ED405E4E07777B7D72D154DEED5D7565EC90D058D16ACFC64D98"
+        "sha256": "C20E7DBCDF5210987DB23E8198382C6A00B1966777B47A527F2F3419D0B2D933"
       },
       {
         "exists": true,
@@ -1150,12 +1202,12 @@
       {
         "exists": true,
         "path": "docs/textbook/mono_process_textbook_complete.md",
-        "sha256": "CB8D33B90409C6A1DF2E66ECE4AEADBB37114BFD426F698B31FCE8EBCBF73716"
+        "sha256": "12D1D397CC3E66BA02C2BAA55EFBA9A8169B908832215AA0EF589385E9686A62"
       },
       {
         "exists": true,
         "path": "outputs/audits/global_health_report.json",
-        "sha256": "55BF25DBFDC9ED405E4E07777B7D72D154DEED5D7565EC90D058D16ACFC64D98"
+        "sha256": "C20E7DBCDF5210987DB23E8198382C6A00B1966777B47A527F2F3419D0B2D933"
       },
       {
         "exists": true,
@@ -1209,8 +1261,8 @@
       "passed": true
     },
     "readonly_validation": {
-      "after_hash": "4B117A6DB5E4556959234DF8C501232FF0F51C67C0AB91CBC35253041686F9E1",
-      "before_hash": "4B117A6DB5E4556959234DF8C501232FF0F51C67C0AB91CBC35253041686F9E1",
+      "after_hash": "F13FDADE9A8644A485BFFF682424A1CFA7893A5A3295275CCD070B1B1B06F392",
+      "before_hash": "F13FDADE9A8644A485BFFF682424A1CFA7893A5A3295275CCD070B1B1B06F392",
       "changed_paths": [],
       "checked": true,
       "read_only": true
