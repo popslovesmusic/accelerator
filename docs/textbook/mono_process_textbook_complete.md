@@ -4649,6 +4649,11 @@ This section is generated from canonical induction, queue, intake, and represent
 
 ## Preserved Proposals — Not Yet Inducted
 
+- **CHAT_RT_ORGANISM_LEVEL_THERAPY_CONDITION_DECISION_ARCHITECTURE_20260801_001** (`CHAT_RT_ORGANISM_LEVEL_THERAPY_CONDITION_DECISION_ARCHITECTURE_20260801_001`): Preserved Analysis Intake capture.
+  - Capture: `PRESERVED_PROVISIONAL`; Review: `NOT_REVIEWED`; Promotion: `HOLD_C1`; Induction: `NOT_QUEUED`
+  - Queue: `NOT_PRESENT`; Registry: `NOT_BOUND`
+  - Source: `departments/analysis_intake/chat_captures/CHAT_RT_ORGANISM_LEVEL_THERAPY_CONDITION_DECISION_ARCHITECTURE_20260801_001.md`; receipt: `departments/analysis_intake/chat_captures/CHAT_RT_ORGANISM_LEVEL_THERAPY_CONDITION_DECISION_ARCHITECTURE_20260801_001_receipt.json`; SHA-256: `66CC6A96F9F128CE41E2521E8A348E0F33C383AA645D0B37516D1B009EAA7CC1`
+
 - **### Summary Generic RT and the QMGR** (`FILE_SUMMARY_GENERIC_RT_QMGR_20260801_001`): Preserved Analysis Intake capture.
   - Capture: `PRESERVED_LITERAL`; Review: `NOT_REVIEWED`; Promotion: `HOLD_C1`; Induction: `NOT_QUEUED`
   - Queue: `NOT_PRESENT`; Registry: `NOT_BOUND`
