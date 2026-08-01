@@ -11,7 +11,7 @@
 4. Reassess `AX-R12_PROJECTION_COMPATIBILITY` and its downstream impact. **Complete: `ax_r12_projection_compatibility_reassessment_20260801`.**
 5. Reassess canonical projection selection and executable-totality dependencies (`AX-R08`, `AX-R11`). **Complete: `r08_r11_projection_totality_reassessment_20260801`; both remain blocked.**
 6. Reassess `[Asym]` domain compatibility. **Complete: `asym_domain_compatibility_reassessment_20260801`; remains open and unresolved.**
-7. Restore or classify missing Q0 inventory/runtime-authority artifacts; treat this as operational until runtime evidence confirms otherwise.
+7. Correct Q0 inventory/runtime-authority classification. **Complete: the five expected Q0 artifacts are present and parseable; crawl engine `0.5.1` now records their hashes and emits no false Q0-missing blocker. Runtime freshness remains a separate governance check.**
 8. Replace the remaining generic `relation_axioms` graph edge with explicit AX-Rxx dependency edges.
 
 ## Validation requirements
