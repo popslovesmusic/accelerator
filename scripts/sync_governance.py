@@ -60,7 +60,7 @@ def source_record(*records: dict) -> dict:
     for record in records:
         if not record:
             continue
-        candidates += [record.get("source_path"), record.get("source_artifact"), record.get("linked_governance_patch")]
+        candidates += [record.get("source_path"), record.get("source_artifact"), record.get("capture_path"), record.get("linked_governance_patch")]
         candidates += record.get("source_artifacts", []) or []
     candidates = [x for x in candidates if x]
     for path in candidates:
@@ -70,19 +70,65 @@ def source_record(*records: dict) -> dict:
     return {"path": str(candidates[0]).replace("\\", "/") if candidates else None, "exists": False, "hash": None}
 
 
+def discover_preserved_captures() -> list[dict]:
+    """Discover receipt-backed immutable captures before queue induction."""
+    receipts = []
+    for path in sorted(CAPTURE_DIR.glob("*.json"), key=lambda item: item.name.lower()):
+        try:
+            record = load(path)
+        except (OSError, json.JSONDecodeError):
+            continue
+        preserved = record.get("preserved_path") or record.get("capture_path")
+        if preserved and (record.get("source_sha256") or record.get("preserved_sha256")):
+            receipts.append((path, record, str(preserved).replace("\\", "/")))
+    captures = []
+    for receipt_path, receipt, preserved in receipts:
+        capture_path = ROOT / preserved
+        if not capture_path.is_file():
+            continue
+        capture_status = receipt.get("preservation_status") or receipt.get("capture_status")
+        if capture_status not in {"PRESERVED_LITERAL", "PRESERVED_PROVISIONAL", "APPENDED_WITH_PARENT_IMMUTABLE", "INDUCTED"}:
+            continue
+        capture_hash = sha256(capture_path)
+        registered_hash = (receipt.get("preserved_sha256") or receipt.get("source_sha256") or "").lower()
+        if registered_hash and registered_hash != capture_hash.lower():
+            captures.append({"receipt_path": str(receipt_path.relative_to(ROOT)).replace("\\", "/"), "capture_path": preserved, "hash_conflict": {"registered": registered_hash, "actual": capture_hash}})
+            continue
+        capture_id = receipt.get("capture_id") or receipt.get("induction_id") or f"CAPTURE_{stable_hash({'path': preserved, 'sha256': capture_hash})[:20]}"
+        captures.append({
+            "capture_id": capture_id,
+            "capture_path": preserved,
+            "receipt_path": str(receipt_path.relative_to(ROOT)).replace("\\", "/"),
+            "source_sha256": capture_hash.upper(),
+            "capture_status": capture_status,
+            "review_status": receipt.get("review_status", "NOT_REVIEWED"),
+            "promotion_status": receipt.get("promotion_status", "HOLD_C1"),
+            "induction_status": receipt.get("induction_status", "NOT_QUEUED"),
+            "title": Path(preserved).stem,
+        })
+    return captures
+
+
 def collect() -> tuple[list[dict], list[dict]]:
     queue = load(QUEUE).get("queue", [])
     induction = load(INDUCTIONS).get("entries", [])
     intake = load(INTAKE).get("entries", [])
+    preserved = discover_preserved_captures()
     by_id: dict[str, dict] = {}
     conflicts: list[dict] = []
+    for capture in preserved:
+        cid = capture.get("capture_id")
+        item = by_id.setdefault(cid, {"induction_id": cid, "sources": {}, "queue": None, "registry": None, "intake": None, "capture": capture})
+        item["capture"] = capture
+        if capture.get("hash_conflict"):
+            conflicts.append({"type": "CAPTURE_HASH_CONFLICT", "induction_id": cid, **capture["hash_conflict"]})
     for origin, records in (("global_queue", queue), ("induction_registry", induction), ("intake", intake)):
         for record in records:
             cid = canonical_id(record)
             if not cid:
                 conflicts.append({"type": "MISSING_INDUCTION_ID", "origin": origin, "record": record})
                 continue
-            item = by_id.setdefault(cid, {"induction_id": cid, "sources": {}, "queue": None, "registry": None, "intake": None})
+            item = by_id.setdefault(cid, {"induction_id": cid, "sources": {}, "queue": None, "registry": None, "intake": None, "capture": None})
             target_key = {"global_queue": "queue", "induction_registry": "registry", "intake": "intake"}[origin]
             item[target_key] = record
     entries: list[dict] = []
@@ -91,13 +137,15 @@ def collect() -> tuple[list[dict], list[dict]]:
         q = item.get("queue") or {}
         r = item.get("registry") or {}
         i = item.get("intake") or {}
-        src = source_record(q, i, r)
+        c = item.get("capture") or {}
+        src = source_record(c, q, i, r)
         statuses = {
             "queue_status": q.get("status", "NOT_PRESENT"),
             "registry_status": r.get("status", "NOT_BOUND"),
-            "review_status": q.get("review_status", i.get("review_status", r.get("review_status", "NOT_RECORDED"))),
-            "promotion_status": q.get("promotion_status", i.get("promotion_status", r.get("promotion_status", "NOT_RECORDED"))),
-            "capture_status": i.get("preservation_status", q.get("preservation_status", "NOT_RECORDED")),
+            "review_status": c.get("review_status", q.get("review_status", i.get("review_status", r.get("review_status", "NOT_RECORDED")))),
+            "promotion_status": c.get("promotion_status", q.get("promotion_status", i.get("promotion_status", r.get("promotion_status", "NOT_RECORDED")))),
+            "capture_status": c.get("capture_status", i.get("preservation_status", q.get("preservation_status", "NOT_RECORDED"))),
+            "induction_status": c.get("induction_status", q.get("induction_status", r.get("induction_status", "NOT_QUEUED"))),
         }
         if q and not r:
             section = "NOTES_QUEUED"
@@ -109,29 +157,31 @@ def collect() -> tuple[list[dict], list[dict]]:
             section = "NOTES_OPEN_WORK"
         else:
             section = "NOTES_ACTIVE"
-        if statuses["capture_status"] in {"PRESERVED_PROVISIONAL", "PRESERVED_LITERAL"} and not q and not r:
+        if statuses["capture_status"] in {"PRESERVED_PROVISIONAL", "PRESERVED_LITERAL", "APPENDED_WITH_PARENT_IMMUTABLE"} and not q and not r:
             section = "NOTES_PENDING_PRESERVED"
         entries.append({
             "entry_id": f"NOTE_{cid}",
-            "title": r.get("title") or q.get("title") or i.get("proposal_id") or cid,
+            "title": r.get("title") or q.get("title") or i.get("proposal_id") or c.get("title") or cid,
             "source_induction_id": cid,
-            "capture_path": src["path"],
-            "capture_hash": i.get("source_sha256") or q.get("source_sha256") or src["hash"],
-            "source_trace": {"path": src["path"], "verified_hash": src["hash"], "immutable_source_available": src["exists"]},
+            "capture_path": c.get("capture_path") or src["path"],
+            "receipt_path": c.get("receipt_path"),
+            "capture_hash": c.get("source_sha256") or i.get("source_sha256") or q.get("source_sha256") or src["hash"],
+            "source_trace": {"path": c.get("capture_path") or src["path"], "receipt_path": c.get("receipt_path"), "verified_hash": src["hash"], "immutable_source_available": src["exists"]},
             "capture_status": statuses["capture_status"],
             "queue_status": statuses["queue_status"],
             "registry_status": statuses["registry_status"],
             "review_status": statuses["review_status"],
             "promotion_status": statuses["promotion_status"],
+            "induction_status": statuses["induction_status"],
             "representation_status": "ACTIVE",
             "current_notes_section": section,
-            "source_summary": r.get("notes") or q.get("notes") or i.get("notes") or "Governed induction record.",
+            "source_summary": r.get("notes") or q.get("notes") or i.get("notes") or "Preserved Analysis Intake capture.",
             "open_conditions": [],
             "target_locations": [section],
             "last_synchronized_at": None,
             "synchronization_run_id": None,
         })
-        registered_hash = i.get("source_sha256") or q.get("source_sha256") or r.get("source_sha256")
+        registered_hash = c.get("source_sha256") or i.get("source_sha256") or q.get("source_sha256") or r.get("source_sha256")
         if registered_hash and src["hash"] and registered_hash.lower() != src["hash"].lower():
             conflicts.append({"type": "CAPTURE_HASH_CONFLICT", "induction_id": cid, "registered": registered_hash, "actual": src["hash"]})
         if not src["exists"] and src["path"]:
@@ -159,7 +209,7 @@ def render(entries: list[dict]) -> str:
     for key in headings:
         lines += [f"## {headings[key]}", ""]
         for e in buckets.get(key, []):
-            lines += [f"- **{e['title']}** (`{e['source_induction_id']}`): {e['source_summary']}", f"  - Queue: `{e['queue_status']}`; Registry: `{e['registry_status']}`; Review: `{e['review_status']}`; Promotion: `{e['promotion_status']}`", f"  - Source: `{e['capture_path']}`; hash: `{e['capture_hash'] or 'UNAVAILABLE'}`", ""]
+            lines += [f"- **{e['title']}** (`{e['source_induction_id']}`): {e['source_summary']}", f"  - Capture: `{e['capture_status']}`; Review: `{e['review_status']}`; Promotion: `{e['promotion_status']}`; Induction: `{e.get('induction_status', 'NOT_RECORDED')}`", f"  - Queue: `{e['queue_status']}`; Registry: `{e['registry_status']}`", f"  - Source: `{e['capture_path']}`; receipt: `{e.get('receipt_path') or 'NOT_RECORDED'}`; SHA-256: `{e['capture_hash'] or 'UNAVAILABLE'}`", ""]
         if not buckets.get(key):
             lines += ["_None recorded._", ""]
     lines += [END]
@@ -176,6 +226,8 @@ def sync(args) -> int:
         "input_hashes": {str(p.relative_to(ROOT)).replace("\\", "/"): sha256(p) for p in (QUEUE, INDUCTIONS, INTAKE)},
         "output_hashes": {},
         "captures_examined": len(entries),
+        "preserved_captures_examined": len(discover_preserved_captures()),
+        "preserved_only_entries": [e["source_induction_id"] for e in entries if e["current_notes_section"] == "NOTES_PENDING_PRESERVED"],
         "queue_records_examined": len(load(QUEUE).get("queue", [])),
         "registry_records_examined": len(load(INDUCTIONS).get("entries", [])),
         "notes_entries_created": len(entries),
