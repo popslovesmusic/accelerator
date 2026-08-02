@@ -1,0 +1,45 @@
+{
+  "policy_id": "GOV_PROCESS_OUTCOME_PASS_FAIL_ONLY_001",
+  "status": "ACTIVE",
+  "scope": [
+    "governance synchronization",
+    "validation",
+    "diff validation",
+    "database refresh",
+    "crawl execution",
+    "required process gates"
+  ],
+  "terminal_outcomes": ["PASS", "FAIL"],
+  "rule": "A governed process has exactly one terminal outcome: PASS or FAIL.",
+  "failure_conditions": [
+    "timeout or exceeded execution budget",
+    "interruption or process termination",
+    "incomplete or unknown work accounting",
+    "missing required stage",
+    "skipped required stage",
+    "partial completion",
+    "conflict, stale input, or failed validation",
+    "missing required output"
+  ],
+  "prohibited_terminal_labels": [
+    "TIMEOUT",
+    "PARTIAL",
+    "PARTIAL_PASS",
+    "PARTIAL_SUCCESS",
+    "PASS_WITH_REPAIRS",
+    "PASS_WITH_WATCHLIST",
+    "WARNING",
+    "INCOMPLETE",
+    "UNKNOWN",
+    "SKIPPED"
+  ],
+  "diagnostic_rule": "Nonterminal diagnostic classifications may describe the failure cause, but they cannot be reported as a successful or partial terminal outcome.",
+  "historical_boundary": "Historical analytical taxonomy and archived reports retain their original classifications; active process gates must expose PASS or FAIL separately.",
+  "enforcement": {
+    "exit_code": {"PASS": 0, "FAIL": 1},
+    "fail_closed": true,
+    "timeout_is_failure": true,
+    "partial_output_is_failure": true,
+    "no_implicit_recovery": true
+  }
+}

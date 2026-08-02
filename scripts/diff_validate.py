@@ -174,6 +174,7 @@ def main() -> int:
     started = datetime.now(timezone.utc).isoformat()
     if not paths:
         payload = {
+            "process_outcome": "PASS",
             "status": "PASS_NO_CHANGES",
             "started_at": started,
             "base": args.base,
@@ -206,7 +207,10 @@ def main() -> int:
     stage_results.update(cached_results)
     skipped = [name for name, status in stage_results.items() if status.startswith("SKIPPED")]
     failed = [name for name in stages if stage_results.get(name) != "PASS"]
+    if result.returncode != 0:
+        failed = sorted(set(failed) | {"underlying_global_validation"})
     payload = {
+        "process_outcome": "FAIL" if failed else "PASS",
         "status": "FAIL_DIFF_VALIDATION" if failed else "PASS_DIFF_VALIDATION",
         "started_at": started,
         "base": args.base,
@@ -223,6 +227,7 @@ def main() -> int:
         "db_validation_required": db_validation_required(paths),
         "underlying_exit_code": result.returncode,
         "underlying_report_path": str(Path(args.out).resolve()),
+        "outcome_policy": "GOV_PROCESS_OUTCOME_PASS_FAIL_ONLY_001",
     }
     for stage in stages:
         if stage_results.get(stage) == "PASS":

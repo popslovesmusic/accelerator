@@ -1048,8 +1048,11 @@ def _run_validation_stage(stage_name, runner, timeout_seconds=None):
     normalized_status = _normalize_validation_status(result.get("status"))
     timed_out = bool(timeout_seconds is not None and duration > timeout_seconds)
     if timed_out and normalized_status not in {"failed"}:
-        result["status"] = "timeout"
-        normalized_status = "timeout"
+        result["status"] = "failed"
+        result.setdefault("errors", []).append(
+            f"Execution budget exceeded for {stage_name}: {duration:.3f}s > {timeout_seconds:.3f}s"
+        )
+        normalized_status = "failed"
     failure_class = _classify_validation_failure(stage_name, result, exception=exception, timed_out=timed_out)
     stage_trace = {
         "stage": stage_name,
@@ -1751,7 +1754,7 @@ def _summarize_stage_failure(stage_name, result, trace_entry, stage_policy=None,
             summary = result["errors"][0]
         elif result.get("warnings"):
             summary = result["warnings"][0]
-        return "TIMEOUT", summary
+        return "FAIL_TIMEOUT", summary
 
     failure_class = trace_entry.get("failure_class")
     if failure_class == "tooling_failure":
@@ -1818,11 +1821,15 @@ def _build_stage_results(stage_trace, stage_policy=None, report_stale=False, inc
     if include_report_write:
         report_result = {
             "stage_name": "report_write",
-            "status": "STALE_REPORT_WARNING" if report_stale else "PASS",
+            # The current report is written during this run. A stale prior
+            # report is retained as diagnostic metadata, not as a failure of
+            # the completed report-write stage.
+            "status": "PASS",
             "duration_seconds": 0.0,
             "items_checked": 1,
-            "failure_code": "STALE_REPORT_WARNING" if report_stale else None,
-            "failure_summary": "Existing global health report was stale before this run." if report_stale else None,
+            "failure_code": None,
+            "failure_summary": None,
+            "prior_report_stale": report_stale,
             "evidence_paths": [report_path] if report_path else [],
             "work_expectation": "INFORMATIONAL",
             "work_state": "WORK_COMPLETED",
@@ -1885,14 +1892,15 @@ def _reduce_validation_outcome(stage_results, stage_policy):
     clean_pass_eligible = not any(
         (missing_required, incomplete_stages, degraded_stages, failed_stages, unknown_stages)
     )
-    if failed_stages or unknown_stages:
-        overall_status = "fail"
-    elif missing_required or incomplete_stages:
-        overall_status = "incomplete"
-    elif degraded_stages:
-        overall_status = "warning"
-    else:
-        overall_status = "pass"
+    # Governed process outcomes are binary. Any degraded, incomplete, missing,
+    # unknown, or partial result is a failure; diagnostic arrays retain cause.
+    overall_status = "fail" if (
+        missing_required
+        or incomplete_stages
+        or degraded_stages
+        or failed_stages
+        or unknown_stages
+    ) else "pass"
 
     return {
         "overall_status": overall_status,
@@ -2223,6 +2231,14 @@ def main():
     if requested_stages:
         selected_stage_names = _restrict_stage_selection(stage_plan, requested_stages, parser=parser)
 
+    # A requested stage run is a bounded validation contract: only the
+    # requested stages are required. Unrequested stages are diagnostics and
+    # cannot turn a complete scoped PASS into a misleading partial result.
+    if requested_stages:
+        selected_set = set(selected_stage_names)
+        for stage_name, policy in stage_policy.items():
+            policy["required"] = stage_name in selected_set
+
     _enforce_repository_health_certificate_if_applicable(root, selected_stage_names)
 
     report = {
@@ -2315,7 +2331,7 @@ def main():
             "duration_seconds": item["duration_seconds"],
         }
         for item in stage_results
-        if item["status"] in {"FAIL_RUNTIME", "TIMEOUT"}
+        if item["status"] in {"FAIL_RUNTIME", "FAIL_TIMEOUT"}
     ]
     report["tooling_failures"] = [
         {
@@ -2353,6 +2369,10 @@ def main():
         }
 
     report["overall_status"] = reduction["overall_status"]
+    # Active governed execution exposes only the binary terminal outcome.
+    # Existing diagnostic fields retain the reason and stage classification.
+    report["process_outcome"] = "PASS" if reduction["overall_status"] == "pass" else "FAIL"
+    report["outcome_policy"] = "GOV_PROCESS_OUTCOME_PASS_FAIL_ONLY_001"
 
     current_history_record = _build_validation_history_record(report, stage_trace, root, run_id)
     history_write_status = "disabled"
@@ -2398,7 +2418,7 @@ def main():
         json.dump(report, f, indent=2)
 
     print(f"Global health report saved to {out_path}")
-    if report["overall_status"] not in {"pass", "warning"}:
+    if report["process_outcome"] != "PASS":
         sys.exit(1)
 
 if __name__ == "__main__":
