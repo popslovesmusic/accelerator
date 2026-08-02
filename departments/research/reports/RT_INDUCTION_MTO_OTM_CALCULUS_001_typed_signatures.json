@@ -1,0 +1,88 @@
+{
+  "report_id": "RT_INDUCTION_MTO_OTM_CALCULUS_001_TYPED_SIGNATURES_001",
+  "packet_id": "RT_INDUCTION_MTO_OTM_CALCULUS_001",
+  "research_record_id": "RR_RT_INDUCTION_MTO_OTM_CALCULUS_001",
+  "status": "PROVISIONAL_TYPED_SEMANTICS",
+  "authority": "NON_CANONICAL_RESEARCH_MEMORY",
+  "canonical_math_modified": false,
+  "purpose": "Define the minimum typed review surface for MTO and OTM without authorizing equivalence, substitution, promotion, or theorem status.",
+  "candidate_types": [
+    {
+      "type_id": "Primitive",
+      "status": "PROVISIONAL",
+      "meaning": "An irreducible computational element admitted by the proposal."
+    },
+    {
+      "type_id": "Aspect",
+      "status": "PROVISIONAL_PENDING_GOVERNANCE",
+      "meaning": "A transient organization of primitives. It has no persistent identity after a resolved closure."
+    },
+    {
+      "type_id": "LawfulAspectOrganization",
+      "status": "UNDEFINED",
+      "meaning": "A finite, ordered or otherwise structured collection of admissible aspects that satisfies a future admissibility predicate."
+    },
+    {
+      "type_id": "ResolvedRT",
+      "status": "PROVISIONAL_ALIAS_ONLY",
+      "meaning": "An RT object treated as the result domain of a candidate closure operation; this does not redefine existing RT authority."
+    },
+    {
+      "type_id": "PrimitiveCollection",
+      "status": "UNDEFINED",
+      "meaning": "The OTM result carrier. Set, multiset, sequence, and residue-bearing collection remain alternatives."
+    }
+  ],
+  "candidate_signatures": {
+    "admissibility": {
+      "form": "AdmissibleAspectOrganization : CandidateOrganization × Context -> Boolean",
+      "status": "UNDEFINED",
+      "note": "No lawful-organization predicate is adopted by this report."
+    },
+    "mto_candidate_relation": {
+      "form": "MTO_Candidates : LawfulAspectOrganization × Context -> Set(ResolvedRT)",
+      "status": "PROVISIONAL_REVIEW_SIGNATURE",
+      "reason": "A candidate-set form avoids assuming single-valued resolution before selection and tie-breaking are defined."
+    },
+    "mto_deterministic_function": {
+      "form": "MTO : LawfulAspectOrganization × Context -> ResolvedRT",
+      "status": "BLOCKED_NOT_ESTABLISHED",
+      "requirements": ["totality", "single-valued selection", "stable tie-breaking", "context declaration", "source/residue preservation"]
+    },
+    "otm_candidate_function": {
+      "form": "OTM : ResolvedRT -> PrimitiveCollection",
+      "status": "PROVISIONAL_REVIEW_SIGNATURE",
+      "constraints": ["must not reconstruct historical aspect organizations", "must preserve source trace", "collection carrier remains undefined"]
+    }
+  },
+  "typed_failure_semantics": [
+    {"code": "MTO-MALFORMED-001", "condition": "Input is not a lawful aspect organization.", "result": "MALFORMED_MTO_INPUT"},
+    {"code": "MTO-BLOCKED-002", "condition": "Multiple RT candidates exist without a canonical selector.", "result": "MTO_SELECTION_UNDEFINED"},
+    {"code": "MTO-MALFORMED-003", "condition": "A resolved RT is supplied where an aspect organization is required.", "result": "MALFORMED_MTO_REENTRY"},
+    {"code": "OTM-MALFORMED-001", "condition": "A non-resolved object is supplied to OTM.", "result": "MALFORMED_OTM_INPUT"},
+    {"code": "OTM-OPEN-002", "condition": "Primitive collection carrier is not determined.", "result": "OTM_OUTPUT_CARRIER_UNDEFINED"},
+    {"code": "OTM-GUARD-003", "condition": "An attempt is made to recover historical aspect organizations.", "result": "HISTORICAL_ASPECT_RECONSTRUCTION_FORBIDDEN"}
+  ],
+  "identity_boundaries": [
+    "Primitive reference identity is distinct from aspect organization identity.",
+    "Aspect identity may be transient, but this does not erase primitive source identity.",
+    "RT identity and residue/source identity must not be discarded by MTO without a separate preservation rule.",
+    "Equal MTO candidates or outputs do not authorize substitution in unrelated operators."
+  ],
+  "open_obligations": [
+    "Define the lawful aspect organization carrier.",
+    "Define the admissibility predicate and its context.",
+    "Choose set, multiset, sequence, or residue-bearing carrier for OTM output.",
+    "Define MTO candidate equality versus RT identity.",
+    "Define deterministic MTO selection or retain candidate-set semantics.",
+    "Specify provenance and residue preservation through both directions.",
+    "Test compatibility with existing RT higher-order aspect participation."
+  ],
+  "nonclaims": [
+    "No MTO or OTM operator has been added to canonical mathematics.",
+    "No equivalence relation has been authorized.",
+    "No deterministic executable calculus has been established.",
+    "No theorem, physical interpretation, or promotion decision follows."
+  ],
+  "next_action": "Resolve the lawful organization carrier and OTM output carrier before defining any deterministic MTO selector."
+}
