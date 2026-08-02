@@ -118,7 +118,7 @@ def test_patch_071_required_zero_work_blocks_clean_pass():
 
     assert stage_results[0]["status"] == "EVALUATION_EMPTY"
     assert stage_results[0]["work_state"] == "EVALUATION_EMPTY"
-    assert reduction["overall_status"] == "incomplete"
+    assert reduction["overall_status"] == "fail"
     assert reduction["clean_pass_eligible"] is False
 
 

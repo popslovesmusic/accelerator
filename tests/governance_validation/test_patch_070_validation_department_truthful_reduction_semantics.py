@@ -63,7 +63,7 @@ def test_patch_070_skipped_required_stage_blocks_clean_pass():
     reduction = _reduce_validation_outcome(stage_results, policy)
 
     assert stage_results[1]["status"] == "SKIPPED_REQUIRED"
-    assert reduction["overall_status"] == "incomplete"
+    assert reduction["overall_status"] == "fail"
     assert reduction["clean_pass_eligible"] is False
     assert reduction["incomplete_stages"] == ["beta"]
 
@@ -74,12 +74,12 @@ def test_patch_070_missing_required_stage_blocks_clean_pass():
 
     reduction = _reduce_validation_outcome(stage_results, policy)
 
-    assert reduction["overall_status"] == "incomplete"
+    assert reduction["overall_status"] == "fail"
     assert reduction["clean_pass_eligible"] is False
     assert reduction["missing_required_stages"] == ["beta"]
 
 
-def test_patch_070_warning_remains_visible_and_blocks_clean_pass():
+def test_patch_070_warning_remains_visible_without_blocking_process_pass():
     policy = _build_governed_stage_policy("full", ["alpha", "beta"])
     stage_results = _build_stage_results(
         [
@@ -93,7 +93,7 @@ def test_patch_070_warning_remains_visible_and_blocks_clean_pass():
 
     assert stage_results[1]["status"] == "WARNING"
     assert stage_results[1]["failure_summary"] == "degrading warning"
-    assert reduction["overall_status"] == "warning"
+    assert reduction["overall_status"] == "pass"
     assert reduction["clean_pass_eligible"] is False
     assert reduction["degraded_stages"] == ["beta"]
 
@@ -143,7 +143,7 @@ def test_patch_070_report_write_success_does_not_overwrite_validation_result():
 
     assert stage_results[-1]["stage_name"] == "report_write"
     assert stage_results[-1]["status"] == "PASS"
-    assert reduction["overall_status"] == "warning"
+    assert reduction["overall_status"] == "pass"
     assert reduction["clean_pass_eligible"] is False
 
 

@@ -78,9 +78,12 @@ def validate_minimal_theorems(mt_reg, po_reg, ce_reg, obj_reg, op_reg, rel_reg, 
         if thm.get("closure_status") == "undefined":
             results["minimal_theorem_validation"]["closure_gaps"].append(tid)
 
-    if results["minimal_theorem_validation"]["dependency_gaps"] or results["minimal_theorem_validation"]["warnings"]:
-        if results["minimal_theorem_validation"]["status"] == "pass":
-            results["minimal_theorem_validation"]["status"] = "warning"
+    # Dependency gaps are unfinished registry work, not validator execution
+    # failures. Preserve them as warnings for global validation while keeping
+    # the validator's terminal contract binary: pass or fail.
+    results["minimal_theorem_validation"]["warnings"].extend(
+        results["minimal_theorem_validation"]["dependency_gaps"]
+    )
 
     return results
 

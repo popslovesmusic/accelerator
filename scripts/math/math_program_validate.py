@@ -41,7 +41,7 @@ def _summarize_domain_result(domain_res):
         if key in domain_res:
             summary[key] = domain_res[key]
 
-    for key in ("closure_gaps", "open_questions", "warnings", "errors", "governance_violations", "failed_checks", "required_corrections"):
+    for key in ("closure_gaps", "open_questions", "warnings", "errors", "governance_violations", "failed_checks", "required_corrections", "dependency_gaps"):
         if key in domain_res:
             summary[key] = _summarize_list(domain_res.get(key, []))
 
@@ -447,6 +447,12 @@ def validate_math_program(full_report=False):
         report["math_program_validation"]["closure_gaps"].extend(domain_res.get("closure_gaps", []))
         report["math_program_validation"]["open_questions"].extend(domain_res.get("open_questions", []))
         report["math_program_validation"]["warnings"].extend(domain_res.get("warnings", []))
+
+    # A completed validator catalog with advisory findings is a global
+    # warning, not a validator failure. Keep the leaf validator contract
+    # binary while exposing the aggregate warning at global-validation level.
+    if report["math_program_validation"]["status"] == "pass" and report["math_program_validation"]["warnings"]:
+        report["math_program_validation"]["status"] = "warning"
 
     report["math_program_validation"]["items_checked"] = report["math_program_validation"]["validators_completed"]
     if report["math_program_validation"]["targets_discovered"] == 0:

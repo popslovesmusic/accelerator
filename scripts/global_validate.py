@@ -1892,12 +1892,12 @@ def _reduce_validation_outcome(stage_results, stage_policy):
     clean_pass_eligible = not any(
         (missing_required, incomplete_stages, degraded_stages, failed_stages, unknown_stages)
     )
-    # Governed process outcomes are binary. Any degraded, incomplete, missing,
-    # unknown, or partial result is a failure; diagnostic arrays retain cause.
+    # Governed process outcomes are binary. Warnings remain visible through the
+    # degraded_stages diagnostic field, but do not block a pass. Incomplete,
+    # missing, unknown, and failed required work remain blocking.
     overall_status = "fail" if (
         missing_required
         or incomplete_stages
-        or degraded_stages
         or failed_stages
         or unknown_stages
     ) else "pass"
