@@ -9,6 +9,7 @@ def validate_audit():
 
     report = {
         "audit_id": "AUDIT-MT-LAW-A-FOUNDATIONS-001",
+        "status": "pass",
         "validation_status": "pass",
         "law_dependencies_verified": 0,
         "meta_dependencies_verified": 0,
@@ -19,11 +20,13 @@ def validate_audit():
 
     if not os.path.exists(audit_registry_path):
         report["validation_status"] = "fail"
+        report["status"] = "fail"
         report["governance_violations"].append("missing foundations audit registry")
         return report
 
     if not os.path.exists(audit_document_path):
         report["validation_status"] = "fail"
+        report["status"] = "fail"
         report["governance_violations"].append("missing foundations audit document")
 
     with open(audit_registry_path, 'r') as f:
@@ -145,6 +148,7 @@ def validate_audit():
         report["validation_status"] = "fail"
     else:
         report["validation_status"] = "pass"
+    report["status"] = "fail" if report["validation_status"] == "fail" else "pass"
 
     with open(result_path, 'w') as f:
         json.dump(report, f, indent=2)

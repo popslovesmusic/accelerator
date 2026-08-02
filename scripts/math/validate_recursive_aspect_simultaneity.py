@@ -9,6 +9,9 @@ def validate_recursive_aspect_simultaneity():
     
     report = {
         "validator_id": "RASV",
+        # The math-program aggregator consumes the normalized `status` field;
+        # retain `overall_status` as the validator's domain-specific result.
+        "status": "pass",
         "checked_artifacts": [],
         "passed_checks": [],
         "failed_checks": [],
@@ -20,6 +23,7 @@ def validate_recursive_aspect_simultaneity():
     
     if not os.path.exists(registry_path):
         report["overall_status"] = "FAIL"
+        report["status"] = "fail"
         report["failed_checks"].append("registry_missing")
         return report
 
@@ -81,6 +85,7 @@ def validate_recursive_aspect_simultaneity():
             
             if found_sequential:
                 report["overall_status"] = "FAIL"
+                report["status"] = "fail"
                 report["failed_checks"].append(f"sequential_language_in_{artifact_name}")
                 report["required_corrections"].append(f"Remove sequential causal terms from analytical fields of {artifact_name}")
 
@@ -88,6 +93,7 @@ def validate_recursive_aspect_simultaneity():
             if "associative" in active_content or "transitive" in active_content:
                 if "block" not in active_content and "not" not in active_content and "forbidden" not in active_content:
                      report["overall_status"] = "FAIL"
+                     report["status"] = "fail"
                      report["failed_checks"].append(f"unlicensed_property_assumption_in_{artifact_name}")
                      report["required_corrections"].append(f"Explicitly block associativity/transitivity in {artifact_name}")
 
