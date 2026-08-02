@@ -1,0 +1,39 @@
+{
+  "report_id": "RT_INDUCTION_MTO_OTM_CALCULUS_001_ROLE_ORIENTATION_001",
+  "packet_id": "RT_INDUCTION_MTO_OTM_CALCULUS_001",
+  "status": "PROVISIONAL_PREDICATES_WITH_FIXTURE_RECHECK",
+  "authority": "NON_CANONICAL_RESEARCH_MEMORY",
+  "canonical_math_modified": false,
+  "predicates": {
+    "RoleCompatible": {
+      "signature": "RoleCompatible : Aspect × Context -> Boolean",
+      "candidate_rule": "RoleCompatible(a,C) holds only when a has computational Aspect typing, any analytical-condition view resolves to the same Aspect reference, the requested role is declared by C, and no implicit cross-role coercion is required.",
+      "explicit_rt_rule": "A ResolvedRT may participate as an Aspect only when C explicitly declares higher-order RT participation; otherwise RT-as-Aspect input is unresolved or rejected.",
+      "status": "PROVISIONAL"
+    },
+    "OrientationAdmissible": {
+      "signature": "OrientationAdmissible : LawfulAspectOrganization × Context -> Boolean",
+      "candidate_rule": "OrientationAdmissible(A,C) holds only when required orientation data are declared, each orientation is typed for C, pairwise conflicts are absent or resolved by an explicit rule, and the comparison relation preserves the orientation information required by C.",
+      "multiple_orientation_rule": "Multiple orientations remain unresolved unless C supplies a lawful comparison or selection rule.",
+      "status": "PROVISIONAL"
+    }
+  },
+  "fixture_recheck": [
+    {"fixture_id": "LAW-FIX-001", "role_compatible": "UNRESOLVED", "orientation_admissible": "UNRESOLVED", "result": "UNRESOLVED", "reason": "Context does not define role and orientation semantics."},
+    {"fixture_id": "LAW-FIX-002", "role_compatible": "UNRESOLVED", "orientation_admissible": "UNRESOLVED", "result": "UNRESOLVED", "reason": "Multiple orientations lack a canonical comparison/selection rule."},
+    {"fixture_id": "LAW-FIX-003", "role_compatible": "NOT_APPLICABLE", "orientation_admissible": "NOT_APPLICABLE", "result": "REJECTED", "failure_code": "LAWFULNESS_UNDEFINED_OR_REJECTED"},
+    {"fixture_id": "LAW-FIX-004", "role_compatible": "FAIL", "orientation_admissible": "NOT_REACHED", "result": "REJECTED", "failure_code": "MALFORMED_ASPECT_MEMBER"},
+    {"fixture_id": "LAW-FIX-005", "role_compatible": "UNRESOLVED", "orientation_admissible": "UNRESOLVED", "result": "UNRESOLVED", "failure_code": "ADMISSIBILITY_CONTEXT_UNDECLARED"},
+    {"fixture_id": "LAW-FIX-006", "role_compatible": "UNRESOLVED", "orientation_admissible": "FAIL_TO_EVALUATE", "result": "UNRESOLVED", "failure_code": "ORIENTATION_ADMISSIBILITY_UNRESOLVED"},
+    {"fixture_id": "LAW-FIX-007", "role_compatible": "UNRESOLVED", "orientation_admissible": "UNRESOLVED", "result": "UNRESOLVED", "failure_code": "COMPARISON_SEMANTICS_UNDEFINED"},
+    {"fixture_id": "LAW-FIX-008", "role_compatible": "UNRESOLVED", "orientation_admissible": "UNRESOLVED", "result": "REJECTED", "failure_code": "TRACEABILITY_FAILURE"}
+  ],
+  "summary": {"candidate_admissible": 0, "rejected": 3, "unresolved": 5, "lawful_established": false},
+  "open_obligations": [
+    "Define the context type used by RoleCompatible and OrientationAdmissible.",
+    "Define orientation equality/conflict and comparison preservation.",
+    "Define explicit higher-order RT-as-Aspect embedding.",
+    "Define whether analytical-condition views are total and reversible to Aspect references."
+  ],
+  "nonclaims": ["No fixture is lawful by this recheck.", "No MTO selector is defined.", "No canonical Aspect type is created."]
+}
