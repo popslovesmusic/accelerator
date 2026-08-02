@@ -302,4 +302,28 @@ SELECT
     'allow' AS decision,
     'The governance synchronization script is an approved execution surface for validated projection updates.' AS reason,
     '["scripts/sync_governance.py","registry/governance/patches/GOV_INDUCTION_AUTHORITY_AND_VISIBILITY_001.json"]' AS evidence_paths,
-    '[]' AS warnings;
+    '[]' AS warnings
+UNION ALL
+SELECT
+    'departments/research/*' AS target_pattern,
+    'research' AS authority_owner,
+    'registry/governance/patches/GOV_RESEARCH_INTAKE_COMPLETION_001.json' AS authority_source,
+    'current' AS supersession_status,
+    '[]' AS superseded_by,
+    'clear' AS conflict_state,
+    'allow' AS decision,
+    'Research records and their provisional structural projections are governed non-canonical research memory.' AS reason,
+    '["departments/research","governance/core_rules/CORE-GOV-RESEARCH-INTAKE-COMPLETION.json"]' AS evidence_paths,
+    '[]' AS warnings
+UNION ALL
+SELECT
+    'governance/core_rules/CORE-GOV-RESEARCH-INTAKE-COMPLETION.json' AS target_pattern,
+    'governance' AS authority_owner,
+    'departments/governance/core_rule_bindings/BIND_CORE_GOV_RESEARCH_INTAKE_COMPLETION_001.json' AS authority_source,
+    'current' AS supersession_status,
+    '[]' AS superseded_by,
+    'clear' AS conflict_state,
+    'allow' AS decision,
+    'The research-intake completion rule is a bounded workflow extension and does not promote scientific content.' AS reason,
+    '["governance/core_rules/CORE-GOV-RESEARCH-INTAKE-COMPLETION.json","departments/governance/transitions/GTR_RESEARCH_INTAKE_COMPLETION_001.json"]' AS evidence_paths,
+    '[]' AS warnings; 

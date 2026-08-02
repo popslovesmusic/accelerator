@@ -24,6 +24,7 @@ INTAKE = ROOT / "departments/analysis_intake/induction_queue/queue_registry.json
 CAPTURE_DIR = ROOT / "departments/analysis_intake/chat_captures"
 NOTES = ROOT / "docs/textbook/mono_process_textbook_complete.md"
 LEDGER = ROOT / "governance/live/representation_ledger.json"
+RESEARCH_RECORDS = ROOT / "departments/research/records"
 REPORT_DIR = ROOT / "departments/analysis/crawl_reports"
 START = "<!-- BEGIN AUTO-SYNCHRONIZED GOVERNED RESEARCH STATE -->"
 END = "<!-- END AUTO-SYNCHRONIZED GOVERNED RESEARCH STATE -->"
@@ -114,6 +115,15 @@ def collect() -> tuple[list[dict], list[dict]]:
     induction = load(INDUCTIONS).get("entries", [])
     intake = load(INTAKE).get("entries", [])
     preserved = discover_preserved_captures()
+    research_records = {}
+    if RESEARCH_RECORDS.is_dir():
+        for path in sorted(RESEARCH_RECORDS.glob("RR_*.json"), key=lambda item: item.name.lower()):
+            try:
+                record = load(path)
+            except (OSError, json.JSONDecodeError):
+                continue
+            if record.get("proposal_id"):
+                research_records[record["proposal_id"]] = record
     by_id: dict[str, dict] = {}
     conflicts: list[dict] = []
     for capture in preserved:
@@ -138,6 +148,7 @@ def collect() -> tuple[list[dict], list[dict]]:
         r = item.get("registry") or {}
         i = item.get("intake") or {}
         c = item.get("capture") or {}
+        research = research_records.get(cid, {})
         src = source_record(c, q, i, r)
         statuses = {
             "queue_status": q.get("status", "NOT_PRESENT"),
@@ -184,6 +195,9 @@ def collect() -> tuple[list[dict], list[dict]]:
             "source_summary": r.get("notes") or q.get("notes") or i.get("notes") or "Preserved Analysis Intake capture.",
             "open_conditions": [],
             "target_locations": [section],
+            "research_record_id": research.get("research_record_id"),
+            "research_status": research.get("research_status", "NOT_REGISTERED"),
+            "research_trace": research.get("source_trace"),
             "last_synchronized_at": None,
             "synchronization_run_id": None,
         })

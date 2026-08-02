@@ -6429,7 +6429,7 @@ def evaluate_patch_gate(
             result["blocking_conditions"].append("missing_core_rule")
         patch_mode = patch.get("mode")
         governed_transition = (
-            patch_mode == "governed_transition"
+            patch_mode in {"governed_transition", "governed_workflow_extension"}
             and patch.get("transition_authorized") is True
             and bool(patch.get("transition_record_id"))
             and bool(patch.get("migration_plan_id"))
