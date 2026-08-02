@@ -162,7 +162,7 @@ Each recommendation should carry:
 #### ANL_REC_004
 - **Title:** Discharge DEBT_D_SEMANTICS_PROOF_001 before D-semantics theorem promotion
 - **Source Evidence:** `scripts/query_governance.py current-state --pretty`, `registry/research_debt_registry.json`, `registry/math/d_semantics_obligation_registry.json`, `departments/analysis/program_state_report.json`, `departments/analysis/recommended_action_queue.json`
-- **Recommendation:** keep D-semantics proof debt as the live mathematical blocker because `OBL-D-001C`, `OBL-D-001D`, and `OBL-D-001E` remain open after the Friday, July 24, 2026 refresh of the A/B status surfaces.
+- **Recommendation:** keep the D-semantics theorem-promotion gate as the live mathematical blocker because `OBL-D-001A` is discharged and `OBL-D-001B` through `OBL-D-001E` have bounded dispositions; theorem eligibility and universal claim scope remain unresolved.
 - **Claim Class:** `C1_model_relative`
 - **Status:** deterministic recommendation
 
@@ -183,7 +183,7 @@ Each recommendation should carry:
   - `no unclassified work-index action remains` is first because `departments/analysis/dependency_report.json`, `departments/analysis/program_state_report.json`, `departments/analysis/recommended_action_queue.json`, and `outputs/analysis/critical_path_graph.json` all show a closed work-index path with no active routing item.
   - `source-scoped research-campaign momentum` is second because authoritative campaign artifacts remain active or bounded even though `departments/analysis/program_state_report.json` now reports `research_readiness = source_scoped_no_index_debt`.
   - `PROOF-ELEVATION-CAMPAIGN-001` and `MT-COUNTEREXAMPLE-001` are third because the follow-through sync passed, the counterexample declared-vector chain is exhausted, and `outputs/audits/math_counterexample_orientation_locking_execution_002.json` remains nonfinal, so they are watchlist context rather than a live critical path.
-  - `DEBT_D_SEMANTICS_PROOF_001` is fourth because the runtime governance debt projection is empty while the live D-semantics debt remains open at `OBL-D-001C` through `OBL-D-001E`.
+  - `DEBT_D_SEMANTICS_PROOF_001` is fourth because the runtime governance debt projection is empty while the D-semantics research debt remains bounded at C1 and the theorem-promotion gate remains unresolved.
 
 ---
 
