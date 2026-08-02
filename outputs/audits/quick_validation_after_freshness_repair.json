@@ -1,0 +1,970 @@
+{
+  "run_id": "GV-20260802T013003.096049-4696",
+  "validation_mode": "quick",
+  "started_at": "2026-08-02T01:30:03.096049",
+  "completed_at": "2026-08-02T01:30:12.262103",
+  "duration_seconds": 9.165662,
+  "validation_options": {
+    "quick": true,
+    "registries_only": false,
+    "governance_only": false,
+    "patch_chain_only": false,
+    "db_only": false,
+    "math_only": false,
+    "no_db_log": false,
+    "stage_timeout_seconds": 30.0,
+    "profile": false,
+    "history": false,
+    "trend": false,
+    "trend_baseline": null,
+    "no_history": false,
+    "stages": null,
+    "list_stages": false
+  },
+  "manifest_validation": {
+    "status": "success",
+    "errors": [],
+    "warnings": [],
+    "items_checked": 479,
+    "duration_seconds": 0.002022199972998351,
+    "timed_out": false,
+    "failure_class": null,
+    "stage_name": "manifest_validation",
+    "normalized_status": "success"
+  },
+  "json_parse_validation": {
+    "status": "skipped",
+    "warnings": [],
+    "errors": [],
+    "reason": "Excluded by validation mode."
+  },
+  "registry_validation": {
+    "status": "success",
+    "errors": [],
+    "duration_seconds": 0.0071789000066928566,
+    "timed_out": false,
+    "failure_class": null,
+    "stage_name": "registry_validation",
+    "normalized_status": "success"
+  },
+  "hash_registry_validation": {
+    "status": "skipped",
+    "warnings": [],
+    "errors": [],
+    "reason": "Excluded by validation mode."
+  },
+  "governance_ledger_validation": {
+    "status": "skipped",
+    "warnings": [],
+    "errors": [],
+    "reason": "Excluded by validation mode."
+  },
+  "patch_record_validation": {
+    "status": "skipped",
+    "warnings": [],
+    "errors": [],
+    "reason": "Excluded by validation mode."
+  },
+  "patch_chain_validation": {
+    "status": "success",
+    "errors": [],
+    "warnings": [],
+    "checked_patches": 178,
+    "summary": {
+      "status_counts": {
+        "applied": 160,
+        "unknown": 2,
+        "partial": 8,
+        "active": 6,
+        "late_registered": 2
+      },
+      "decision_counts": {
+        "defer": 172,
+        "allow": 6
+      },
+      "sample": [
+        {
+          "patch_id": "PATCH_ACCELERATOR_DETERMINISTIC_DECISION_CACHE_053",
+          "status": "unknown",
+          "decision": "defer",
+          "reason": "Patch chain state is deferred pending additional runtime evidence."
+        },
+        {
+          "patch_id": "PATCH_ACCELERATOR_DETERMINISTIC_ROUTING_AND_CANDIDATE_BOUNDING_054",
+          "status": "unknown",
+          "decision": "defer",
+          "reason": "Patch chain state is deferred pending additional runtime evidence."
+        },
+        {
+          "patch_id": "PATCH_ACCELERATOR_INFERENCE_CONSERVATION_CLOSEOUT_055",
+          "status": "partial",
+          "decision": "defer",
+          "reason": "Patch is registered as partial or transitional evidence."
+        },
+        {
+          "patch_id": "PATCH_CONCEPT_MAP_AND_LEXICON_IO_V1",
+          "status": "active",
+          "decision": "allow",
+          "reason": "Patch chain is satisfied."
+        },
+        {
+          "patch_id": "PATCH_DB_GOVERNANCE_RUNTIME_012A",
+          "status": "active",
+          "decision": "allow",
+          "reason": "Patch chain is satisfied."
+        },
+        {
+          "patch_id": "PATCH_GOV_INDEPENDENT_MEASUREMENT_ENFORCEMENT_V1",
+          "status": "active",
+          "decision": "allow",
+          "reason": "Patch chain is satisfied."
+        },
+        {
+          "patch_id": "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002",
+          "status": "partial",
+          "decision": "defer",
+          "reason": "Patch is registered as partial or transitional evidence."
+        },
+        {
+          "patch_id": "PATCH_GOVERNANCE_MISSING_DEPENDENCY_003_CHAIN_REPAIR_008",
+          "status": "partial",
+          "decision": "defer",
+          "reason": "Patch is registered as partial or transitional evidence."
+        },
+        {
+          "patch_id": "PATCH_GOVERNANCE_PATCH_002_TYPED_DEPENDENCY_RUNTIME_009",
+          "status": "partial",
+          "decision": "defer",
+          "reason": "Patch is registered as partial or transitional evidence."
+        },
+        {
+          "patch_id": "PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007",
+          "status": "partial",
+          "decision": "defer",
+          "reason": "Patch is registered as partial or transitional evidence."
+        }
+      ]
+    },
+    "governance_status": "mixed",
+    "logging_mode": "default",
+    "items_checked": 178,
+    "duration_seconds": 0.0711503999773413,
+    "timed_out": false,
+    "failure_class": null,
+    "stage_name": "patch_chain_validation",
+    "normalized_status": "success"
+  },
+  "patch_gate_validation": {
+    "status": "warning",
+    "errors": [],
+    "warnings": [
+      "Deferred pending: patch_chain_applied"
+    ],
+    "checked_patches": 1,
+    "sample_patch_id": "PATCH_D_VALID_REL_TOKEN_C_20260727_001",
+    "sample_patch_status": "APPLIED",
+    "sample_patch_decision": "defer",
+    "sample_patch_reason": "Deferred pending: patch_chain_applied",
+    "evidence_paths": [
+      "registry/governance/patches/PATCH_D_VALID_REL_TOKEN_C_20260727_001.json",
+      "registry/db/acellorator_index.sqlite",
+      "outputs/audits/global_health_report.json",
+      "registry/governance_change_ledger.json",
+      "registry/db/migrations/20260703_governance_runtime_patch_chain_004.sql",
+      "registry/governance/patches/PATCH_D_SOURCE_RELATION_C_20260727_001.json",
+      "registry/governance/patches/PATCH_D_DERIVE_REL_C_20260727_001.json"
+    ],
+    "items_checked": 1,
+    "duration_seconds": 1.7833825999987312,
+    "timed_out": false,
+    "failure_class": null,
+    "stage_name": "patch_gate_validation",
+    "normalized_status": "warning"
+  },
+  "db_authority_validation": {
+    "status": "success",
+    "errors": [],
+    "warnings": [],
+    "db_path": "registry\\db\\acellorator_index.sqlite",
+    "checks": [
+      "sqlite_connectivity",
+      "governance_decision_log_present",
+      "governance_events_present",
+      "patch_chain_view_present"
+    ],
+    "items_checked": 4,
+    "duration_seconds": 0.002132599998731166,
+    "timed_out": false,
+    "failure_class": null,
+    "stage_name": "db_authority_validation",
+    "normalized_status": "success"
+  },
+  "role_aware_authority_validation": {
+    "status": "skipped",
+    "warnings": [],
+    "errors": [],
+    "reason": "Excluded by validation mode."
+  },
+  "write_boundary_validation": {
+    "status": "skipped",
+    "warnings": [],
+    "errors": [],
+    "reason": "Excluded by validation mode."
+  },
+  "validation_reducer_authority_validation": {
+    "status": "skipped",
+    "warnings": [],
+    "errors": [],
+    "reason": "Excluded by validation mode."
+  },
+  "math_validation": {
+    "status": "skipped",
+    "warnings": [],
+    "errors": [],
+    "reason": "Excluded by validation mode."
+  },
+  "math_test_provenance_validation": {
+    "status": "skipped",
+    "warnings": [],
+    "errors": [],
+    "reason": "Excluded by validation mode."
+  },
+  "math_program_validation": {
+    "status": "skipped",
+    "warnings": [],
+    "errors": [],
+    "reason": "Excluded by validation mode."
+  },
+  "textbook_projection_freshness_validation": {
+    "status": "skipped",
+    "warnings": [],
+    "errors": [],
+    "reason": "Excluded by validation mode."
+  },
+  "hygiene_validation": {
+    "status": "skipped",
+    "warnings": [],
+    "errors": [],
+    "reason": "Excluded by validation mode."
+  },
+  "stage_trace": [
+    {
+      "stage": "manifest_validation",
+      "status": "success",
+      "failure_class": "none",
+      "duration_seconds": 0.002022,
+      "timed_out": false,
+      "error_count": 0,
+      "warning_count": 0,
+      "result_snapshot": {
+        "status": "success",
+        "errors": [],
+        "warnings": [],
+        "items_checked": 479,
+        "work_expectation": null,
+        "work_state": null,
+        "targets_discovered": null,
+        "targets_selected": null,
+        "targets_attempted": null,
+        "targets_completed": null,
+        "passed_count": null,
+        "failed_count": null,
+        "error_count": null,
+        "zero_work_reason": null,
+        "checked_patches": null,
+        "checked_files": null,
+        "checked_entries": null,
+        "tools_tested": null,
+        "db_path": null,
+        "patch_file": null,
+        "sample_patch_path": null,
+        "sample_patch_id": null,
+        "sample_patch_status": null,
+        "sample_patch_decision": null,
+        "reason": null,
+        "decision": null,
+        "evidence_paths": [],
+        "summary": null
+      }
+    },
+    {
+      "stage": "json_parse_validation",
+      "status": "skipped",
+      "failure_class": "none",
+      "duration_seconds": 0.0,
+      "timed_out": false,
+      "error_count": 0,
+      "warning_count": 0,
+      "result_snapshot": {}
+    },
+    {
+      "stage": "registry_validation",
+      "status": "success",
+      "failure_class": "none",
+      "duration_seconds": 0.007179,
+      "timed_out": false,
+      "error_count": 0,
+      "warning_count": 0,
+      "result_snapshot": {
+        "status": "success",
+        "errors": [],
+        "warnings": [],
+        "items_checked": null,
+        "work_expectation": null,
+        "work_state": null,
+        "targets_discovered": null,
+        "targets_selected": null,
+        "targets_attempted": null,
+        "targets_completed": null,
+        "passed_count": null,
+        "failed_count": null,
+        "error_count": null,
+        "zero_work_reason": null,
+        "checked_patches": null,
+        "checked_files": null,
+        "checked_entries": null,
+        "tools_tested": null,
+        "db_path": null,
+        "patch_file": null,
+        "sample_patch_path": null,
+        "sample_patch_id": null,
+        "sample_patch_status": null,
+        "sample_patch_decision": null,
+        "reason": null,
+        "decision": null,
+        "evidence_paths": [],
+        "summary": null
+      }
+    },
+    {
+      "stage": "hash_registry_validation",
+      "status": "skipped",
+      "failure_class": "none",
+      "duration_seconds": 0.0,
+      "timed_out": false,
+      "error_count": 0,
+      "warning_count": 0,
+      "result_snapshot": {}
+    },
+    {
+      "stage": "governance_ledger_validation",
+      "status": "skipped",
+      "failure_class": "none",
+      "duration_seconds": 0.0,
+      "timed_out": false,
+      "error_count": 0,
+      "warning_count": 0,
+      "result_snapshot": {}
+    },
+    {
+      "stage": "patch_record_validation",
+      "status": "skipped",
+      "failure_class": "none",
+      "duration_seconds": 0.0,
+      "timed_out": false,
+      "error_count": 0,
+      "warning_count": 0,
+      "result_snapshot": {}
+    },
+    {
+      "stage": "patch_chain_validation",
+      "status": "success",
+      "failure_class": "none",
+      "duration_seconds": 0.07115,
+      "timed_out": false,
+      "error_count": 0,
+      "warning_count": 0,
+      "result_snapshot": {
+        "status": "success",
+        "errors": [],
+        "warnings": [],
+        "items_checked": 178,
+        "work_expectation": null,
+        "work_state": null,
+        "targets_discovered": null,
+        "targets_selected": null,
+        "targets_attempted": null,
+        "targets_completed": null,
+        "passed_count": null,
+        "failed_count": null,
+        "error_count": null,
+        "zero_work_reason": null,
+        "checked_patches": 178,
+        "checked_files": null,
+        "checked_entries": null,
+        "tools_tested": null,
+        "db_path": null,
+        "patch_file": null,
+        "sample_patch_path": null,
+        "sample_patch_id": null,
+        "sample_patch_status": null,
+        "sample_patch_decision": null,
+        "reason": null,
+        "decision": null,
+        "evidence_paths": [],
+        "summary": {
+          "status_counts": {
+            "applied": 160,
+            "unknown": 2,
+            "partial": 8,
+            "active": 6,
+            "late_registered": 2
+          },
+          "decision_counts": {
+            "defer": 172,
+            "allow": 6
+          },
+          "sample": [
+            {
+              "patch_id": "PATCH_ACCELERATOR_DETERMINISTIC_DECISION_CACHE_053",
+              "status": "unknown",
+              "decision": "defer",
+              "reason": "Patch chain state is deferred pending additional runtime evidence."
+            },
+            {
+              "patch_id": "PATCH_ACCELERATOR_DETERMINISTIC_ROUTING_AND_CANDIDATE_BOUNDING_054",
+              "status": "unknown",
+              "decision": "defer",
+              "reason": "Patch chain state is deferred pending additional runtime evidence."
+            },
+            {
+              "patch_id": "PATCH_ACCELERATOR_INFERENCE_CONSERVATION_CLOSEOUT_055",
+              "status": "partial",
+              "decision": "defer",
+              "reason": "Patch is registered as partial or transitional evidence."
+            },
+            {
+              "patch_id": "PATCH_CONCEPT_MAP_AND_LEXICON_IO_V1",
+              "status": "active",
+              "decision": "allow",
+              "reason": "Patch chain is satisfied."
+            },
+            {
+              "patch_id": "PATCH_DB_GOVERNANCE_RUNTIME_012A",
+              "status": "active",
+              "decision": "allow",
+              "reason": "Patch chain is satisfied."
+            },
+            {
+              "patch_id": "PATCH_GOV_INDEPENDENT_MEASUREMENT_ENFORCEMENT_V1",
+              "status": "active",
+              "decision": "allow",
+              "reason": "Patch chain is satisfied."
+            },
+            {
+              "patch_id": "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002",
+              "status": "partial",
+              "decision": "defer",
+              "reason": "Patch is registered as partial or transitional evidence."
+            },
+            {
+              "patch_id": "PATCH_GOVERNANCE_MISSING_DEPENDENCY_003_CHAIN_REPAIR_008",
+              "status": "partial",
+              "decision": "defer",
+              "reason": "Patch is registered as partial or transitional evidence."
+            },
+            {
+              "patch_id": "PATCH_GOVERNANCE_PATCH_002_TYPED_DEPENDENCY_RUNTIME_009",
+              "status": "partial",
+              "decision": "defer",
+              "reason": "Patch is registered as partial or transitional evidence."
+            },
+            {
+              "patch_id": "PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007",
+              "status": "partial",
+              "decision": "defer",
+              "reason": "Patch is registered as partial or transitional evidence."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "stage": "patch_gate_validation",
+      "status": "warning",
+      "failure_class": "none",
+      "duration_seconds": 1.783383,
+      "timed_out": false,
+      "error_count": 0,
+      "warning_count": 1,
+      "result_snapshot": {
+        "status": "warning",
+        "errors": [],
+        "warnings": [
+          "Deferred pending: patch_chain_applied"
+        ],
+        "items_checked": 1,
+        "work_expectation": null,
+        "work_state": null,
+        "targets_discovered": null,
+        "targets_selected": null,
+        "targets_attempted": null,
+        "targets_completed": null,
+        "passed_count": null,
+        "failed_count": null,
+        "error_count": null,
+        "zero_work_reason": null,
+        "checked_patches": 1,
+        "checked_files": null,
+        "checked_entries": null,
+        "tools_tested": null,
+        "db_path": null,
+        "patch_file": null,
+        "sample_patch_path": null,
+        "sample_patch_id": "PATCH_D_VALID_REL_TOKEN_C_20260727_001",
+        "sample_patch_status": "APPLIED",
+        "sample_patch_decision": "defer",
+        "reason": null,
+        "decision": null,
+        "evidence_paths": [
+          "registry/governance/patches/PATCH_D_VALID_REL_TOKEN_C_20260727_001.json",
+          "registry/db/acellorator_index.sqlite",
+          "outputs/audits/global_health_report.json",
+          "registry/governance_change_ledger.json",
+          "registry/db/migrations/20260703_governance_runtime_patch_chain_004.sql",
+          "registry/governance/patches/PATCH_D_SOURCE_RELATION_C_20260727_001.json",
+          "registry/governance/patches/PATCH_D_DERIVE_REL_C_20260727_001.json"
+        ],
+        "summary": null
+      }
+    },
+    {
+      "stage": "db_authority_validation",
+      "status": "success",
+      "failure_class": "none",
+      "duration_seconds": 0.002133,
+      "timed_out": false,
+      "error_count": 0,
+      "warning_count": 0,
+      "result_snapshot": {
+        "status": "success",
+        "errors": [],
+        "warnings": [],
+        "items_checked": 4,
+        "work_expectation": null,
+        "work_state": null,
+        "targets_discovered": null,
+        "targets_selected": null,
+        "targets_attempted": null,
+        "targets_completed": null,
+        "passed_count": null,
+        "failed_count": null,
+        "error_count": null,
+        "zero_work_reason": null,
+        "checked_patches": null,
+        "checked_files": null,
+        "checked_entries": null,
+        "tools_tested": null,
+        "db_path": "registry\\db\\acellorator_index.sqlite",
+        "patch_file": null,
+        "sample_patch_path": null,
+        "sample_patch_id": null,
+        "sample_patch_status": null,
+        "sample_patch_decision": null,
+        "reason": null,
+        "decision": null,
+        "evidence_paths": [],
+        "summary": null
+      }
+    },
+    {
+      "stage": "role_aware_authority_validation",
+      "status": "skipped",
+      "failure_class": "none",
+      "duration_seconds": 0.0,
+      "timed_out": false,
+      "error_count": 0,
+      "warning_count": 0,
+      "result_snapshot": {}
+    },
+    {
+      "stage": "write_boundary_validation",
+      "status": "skipped",
+      "failure_class": "none",
+      "duration_seconds": 0.0,
+      "timed_out": false,
+      "error_count": 0,
+      "warning_count": 0,
+      "result_snapshot": {}
+    },
+    {
+      "stage": "validation_reducer_authority_validation",
+      "status": "skipped",
+      "failure_class": "none",
+      "duration_seconds": 0.0,
+      "timed_out": false,
+      "error_count": 0,
+      "warning_count": 0,
+      "result_snapshot": {}
+    },
+    {
+      "stage": "math_validation",
+      "status": "skipped",
+      "failure_class": "none",
+      "duration_seconds": 0.0,
+      "timed_out": false,
+      "error_count": 0,
+      "warning_count": 0,
+      "result_snapshot": {}
+    },
+    {
+      "stage": "math_test_provenance_validation",
+      "status": "skipped",
+      "failure_class": "none",
+      "duration_seconds": 0.0,
+      "timed_out": false,
+      "error_count": 0,
+      "warning_count": 0,
+      "result_snapshot": {}
+    },
+    {
+      "stage": "math_program_validation",
+      "status": "skipped",
+      "failure_class": "none",
+      "duration_seconds": 0.0,
+      "timed_out": false,
+      "error_count": 0,
+      "warning_count": 0,
+      "result_snapshot": {}
+    },
+    {
+      "stage": "textbook_projection_freshness_validation",
+      "status": "skipped",
+      "failure_class": "none",
+      "duration_seconds": 0.0,
+      "timed_out": false,
+      "error_count": 0,
+      "warning_count": 0,
+      "result_snapshot": {}
+    },
+    {
+      "stage": "hygiene_validation",
+      "status": "skipped",
+      "failure_class": "none",
+      "duration_seconds": 0.0,
+      "timed_out": false,
+      "error_count": 0,
+      "warning_count": 0,
+      "result_snapshot": {}
+    }
+  ],
+  "stage_results": [
+    {
+      "stage_name": "manifest_validation",
+      "status": "PASS",
+      "duration_seconds": 0.002022,
+      "items_checked": 479,
+      "failure_code": null,
+      "failure_summary": null,
+      "evidence_paths": [],
+      "work_expectation": "UNKNOWN",
+      "work_state": "WORK_ACCOUNTING_UNKNOWN",
+      "targets_discovered_or_equivalent": null,
+      "targets_attempted_or_equivalent": null,
+      "targets_completed_or_equivalent": null,
+      "zero_work_reason": null
+    },
+    {
+      "stage_name": "json_parse_validation",
+      "status": "SKIPPED_BY_MODE",
+      "duration_seconds": 0.0,
+      "items_checked": 0,
+      "failure_code": "SKIPPED_BY_MODE",
+      "failure_summary": null,
+      "evidence_paths": [],
+      "work_expectation": "UNKNOWN",
+      "work_state": "WORK_ACCOUNTING_UNKNOWN",
+      "targets_discovered_or_equivalent": null,
+      "targets_attempted_or_equivalent": null,
+      "targets_completed_or_equivalent": null,
+      "zero_work_reason": null
+    },
+    {
+      "stage_name": "registry_validation",
+      "status": "PASS",
+      "duration_seconds": 0.007179,
+      "items_checked": 0,
+      "failure_code": null,
+      "failure_summary": null,
+      "evidence_paths": [],
+      "work_expectation": "UNKNOWN",
+      "work_state": "WORK_ACCOUNTING_UNKNOWN",
+      "targets_discovered_or_equivalent": null,
+      "targets_attempted_or_equivalent": null,
+      "targets_completed_or_equivalent": null,
+      "zero_work_reason": null
+    },
+    {
+      "stage_name": "hash_registry_validation",
+      "status": "SKIPPED_BY_MODE",
+      "duration_seconds": 0.0,
+      "items_checked": 0,
+      "failure_code": "SKIPPED_BY_MODE",
+      "failure_summary": null,
+      "evidence_paths": [],
+      "work_expectation": "UNKNOWN",
+      "work_state": "WORK_ACCOUNTING_UNKNOWN",
+      "targets_discovered_or_equivalent": null,
+      "targets_attempted_or_equivalent": null,
+      "targets_completed_or_equivalent": null,
+      "zero_work_reason": null
+    },
+    {
+      "stage_name": "governance_ledger_validation",
+      "status": "SKIPPED_BY_MODE",
+      "duration_seconds": 0.0,
+      "items_checked": 0,
+      "failure_code": "SKIPPED_BY_MODE",
+      "failure_summary": null,
+      "evidence_paths": [],
+      "work_expectation": "UNKNOWN",
+      "work_state": "WORK_ACCOUNTING_UNKNOWN",
+      "targets_discovered_or_equivalent": null,
+      "targets_attempted_or_equivalent": null,
+      "targets_completed_or_equivalent": null,
+      "zero_work_reason": null
+    },
+    {
+      "stage_name": "patch_record_validation",
+      "status": "SKIPPED_BY_MODE",
+      "duration_seconds": 0.0,
+      "items_checked": 0,
+      "failure_code": "SKIPPED_BY_MODE",
+      "failure_summary": null,
+      "evidence_paths": [],
+      "work_expectation": "UNKNOWN",
+      "work_state": "WORK_ACCOUNTING_UNKNOWN",
+      "targets_discovered_or_equivalent": null,
+      "targets_attempted_or_equivalent": null,
+      "targets_completed_or_equivalent": null,
+      "zero_work_reason": null
+    },
+    {
+      "stage_name": "patch_chain_validation",
+      "status": "PASS",
+      "duration_seconds": 0.07115,
+      "items_checked": 178,
+      "failure_code": null,
+      "failure_summary": null,
+      "evidence_paths": [],
+      "work_expectation": "UNKNOWN",
+      "work_state": "WORK_ACCOUNTING_UNKNOWN",
+      "targets_discovered_or_equivalent": null,
+      "targets_attempted_or_equivalent": null,
+      "targets_completed_or_equivalent": null,
+      "zero_work_reason": null
+    },
+    {
+      "stage_name": "patch_gate_validation",
+      "status": "WARNING",
+      "duration_seconds": 1.783383,
+      "items_checked": 1,
+      "failure_code": "WARNING",
+      "failure_summary": "Deferred pending: patch_chain_applied",
+      "evidence_paths": [
+        "registry/governance/patches/PATCH_D_VALID_REL_TOKEN_C_20260727_001.json",
+        "registry/db/acellorator_index.sqlite",
+        "outputs/audits/global_health_report.json",
+        "registry/governance_change_ledger.json",
+        "registry/db/migrations/20260703_governance_runtime_patch_chain_004.sql",
+        "registry/governance/patches/PATCH_D_SOURCE_RELATION_C_20260727_001.json",
+        "registry/governance/patches/PATCH_D_DERIVE_REL_C_20260727_001.json"
+      ],
+      "work_expectation": "UNKNOWN",
+      "work_state": "WORK_ACCOUNTING_UNKNOWN",
+      "targets_discovered_or_equivalent": null,
+      "targets_attempted_or_equivalent": null,
+      "targets_completed_or_equivalent": null,
+      "zero_work_reason": null
+    },
+    {
+      "stage_name": "db_authority_validation",
+      "status": "PASS",
+      "duration_seconds": 0.002133,
+      "items_checked": 4,
+      "failure_code": null,
+      "failure_summary": null,
+      "evidence_paths": [
+        "registry\\db\\acellorator_index.sqlite"
+      ],
+      "work_expectation": "UNKNOWN",
+      "work_state": "WORK_ACCOUNTING_UNKNOWN",
+      "targets_discovered_or_equivalent": null,
+      "targets_attempted_or_equivalent": null,
+      "targets_completed_or_equivalent": null,
+      "zero_work_reason": null
+    },
+    {
+      "stage_name": "role_aware_authority_validation",
+      "status": "SKIPPED_BY_MODE",
+      "duration_seconds": 0.0,
+      "items_checked": 0,
+      "failure_code": "SKIPPED_BY_MODE",
+      "failure_summary": null,
+      "evidence_paths": [],
+      "work_expectation": "UNKNOWN",
+      "work_state": "WORK_ACCOUNTING_UNKNOWN",
+      "targets_discovered_or_equivalent": null,
+      "targets_attempted_or_equivalent": null,
+      "targets_completed_or_equivalent": null,
+      "zero_work_reason": null
+    },
+    {
+      "stage_name": "write_boundary_validation",
+      "status": "SKIPPED_BY_MODE",
+      "duration_seconds": 0.0,
+      "items_checked": 0,
+      "failure_code": "SKIPPED_BY_MODE",
+      "failure_summary": null,
+      "evidence_paths": [],
+      "work_expectation": "UNKNOWN",
+      "work_state": "WORK_ACCOUNTING_UNKNOWN",
+      "targets_discovered_or_equivalent": null,
+      "targets_attempted_or_equivalent": null,
+      "targets_completed_or_equivalent": null,
+      "zero_work_reason": null
+    },
+    {
+      "stage_name": "validation_reducer_authority_validation",
+      "status": "SKIPPED_BY_MODE",
+      "duration_seconds": 0.0,
+      "items_checked": 0,
+      "failure_code": "SKIPPED_BY_MODE",
+      "failure_summary": null,
+      "evidence_paths": [],
+      "work_expectation": "UNKNOWN",
+      "work_state": "WORK_ACCOUNTING_UNKNOWN",
+      "targets_discovered_or_equivalent": null,
+      "targets_attempted_or_equivalent": null,
+      "targets_completed_or_equivalent": null,
+      "zero_work_reason": null
+    },
+    {
+      "stage_name": "math_validation",
+      "status": "SKIPPED_BY_MODE",
+      "duration_seconds": 0.0,
+      "items_checked": 0,
+      "failure_code": "SKIPPED_BY_MODE",
+      "failure_summary": null,
+      "evidence_paths": [],
+      "work_expectation": "UNKNOWN",
+      "work_state": "WORK_ACCOUNTING_UNKNOWN",
+      "targets_discovered_or_equivalent": null,
+      "targets_attempted_or_equivalent": null,
+      "targets_completed_or_equivalent": null,
+      "zero_work_reason": null
+    },
+    {
+      "stage_name": "math_test_provenance_validation",
+      "status": "SKIPPED_BY_MODE",
+      "duration_seconds": 0.0,
+      "items_checked": 0,
+      "failure_code": "SKIPPED_BY_MODE",
+      "failure_summary": null,
+      "evidence_paths": [],
+      "work_expectation": "UNKNOWN",
+      "work_state": "WORK_ACCOUNTING_UNKNOWN",
+      "targets_discovered_or_equivalent": null,
+      "targets_attempted_or_equivalent": null,
+      "targets_completed_or_equivalent": null,
+      "zero_work_reason": null
+    },
+    {
+      "stage_name": "math_program_validation",
+      "status": "SKIPPED_BY_MODE",
+      "duration_seconds": 0.0,
+      "items_checked": 0,
+      "failure_code": "SKIPPED_BY_MODE",
+      "failure_summary": null,
+      "evidence_paths": [],
+      "work_expectation": "REQUIRED",
+      "work_state": "WORK_ACCOUNTING_UNKNOWN",
+      "targets_discovered_or_equivalent": null,
+      "targets_attempted_or_equivalent": null,
+      "targets_completed_or_equivalent": null,
+      "zero_work_reason": null
+    },
+    {
+      "stage_name": "textbook_projection_freshness_validation",
+      "status": "SKIPPED_BY_MODE",
+      "duration_seconds": 0.0,
+      "items_checked": 0,
+      "failure_code": "SKIPPED_BY_MODE",
+      "failure_summary": null,
+      "evidence_paths": [],
+      "work_expectation": "REQUIRED",
+      "work_state": "WORK_ACCOUNTING_UNKNOWN",
+      "targets_discovered_or_equivalent": null,
+      "targets_attempted_or_equivalent": null,
+      "targets_completed_or_equivalent": null,
+      "zero_work_reason": null
+    },
+    {
+      "stage_name": "hygiene_validation",
+      "status": "SKIPPED_BY_MODE",
+      "duration_seconds": 0.0,
+      "items_checked": 0,
+      "failure_code": "SKIPPED_BY_MODE",
+      "failure_summary": null,
+      "evidence_paths": [],
+      "work_expectation": "UNKNOWN",
+      "work_state": "WORK_ACCOUNTING_UNKNOWN",
+      "targets_discovered_or_equivalent": null,
+      "targets_attempted_or_equivalent": null,
+      "targets_completed_or_equivalent": null,
+      "zero_work_reason": null
+    },
+    {
+      "stage_name": "report_write",
+      "status": "PASS",
+      "duration_seconds": 0.0,
+      "items_checked": 1,
+      "failure_code": null,
+      "failure_summary": null,
+      "evidence_paths": [
+        "outputs/audits/quick_validation_after_freshness_repair.json"
+      ],
+      "work_expectation": "INFORMATIONAL",
+      "work_state": "WORK_COMPLETED",
+      "targets_discovered_or_equivalent": 1,
+      "targets_attempted_or_equivalent": 1,
+      "targets_completed_or_equivalent": 1,
+      "zero_work_reason": null
+    }
+  ],
+  "required_stage_names": [],
+  "clean_pass_eligible": true,
+  "missing_required_stages": [],
+  "incomplete_stages": [],
+  "degraded_stages": [],
+  "failed_stages": [],
+  "unknown_status_stages": [],
+  "slowest_stages": [
+    {
+      "stage_name": "patch_gate_validation",
+      "status": "WARNING",
+      "duration_seconds": 1.783383,
+      "items_checked": 1
+    },
+    {
+      "stage_name": "patch_chain_validation",
+      "status": "PASS",
+      "duration_seconds": 0.07115,
+      "items_checked": 178
+    },
+    {
+      "stage_name": "registry_validation",
+      "status": "PASS",
+      "duration_seconds": 0.007179,
+      "items_checked": 0
+    }
+  ],
+  "runtime_failures": [],
+  "tooling_failures": [],
+  "semantic_failures": [],
+  "stale_report_warning": false,
+  "overall_status": "pass",
+  "history_write_status": "disabled",
+  "trend_status": "disabled",
+  "trend_write_status": "disabled"
+}
