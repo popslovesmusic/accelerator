@@ -1,0 +1,58 @@
+{
+  "report_id": "RT_INDUCTION_MTO_OTM_CALCULUS_001_ORIENTATION_DOMAIN_001",
+  "packet_id": "RT_INDUCTION_MTO_OTM_CALCULUS_001",
+  "status": "PROVISIONAL_ORIENTATION_DOMAIN_AND_COMPARISON",
+  "authority": "NON_CANONICAL_RESEARCH_MEMORY",
+  "canonical_math_modified": false,
+  "orientation_element": {
+    "type_id": "ContextIndexedOrientation",
+    "candidate_form": "o := (orientation_id, source_ref, target_ref, context_id, ordinal_ref)",
+    "required_fields": ["orientation_id", "context_id", "source_ref", "target_ref"],
+    "optional_fields": ["ordinal_ref", "orientation_label", "provenance_hash"],
+    "status": "CANDIDATE_ONLY"
+  },
+  "candidate_orientation_domain": [
+    {"id": "O_EQ", "meaning": "same canonical orientation reference within a context"},
+    {"id": "O_COMPAT", "meaning": "distinct orientations jointly admissible under a declared context"},
+    {"id": "O_ORDERED", "meaning": "orientations with a declared ordinal relation"},
+    {"id": "O_CONFLICT", "meaning": "orientations requiring incompatible assignments under the context"},
+    {"id": "O_INCOMPARABLE", "meaning": "no complete comparison rule is available"}
+  ],
+  "comparison_relation": {
+    "signature": "CompareOrientation : Orientation × Orientation × Context -> ComparisonResult",
+    "results": ["EQUAL", "COMPATIBLE", "ORDERED", "CONFLICT", "INCOMPARABLE"],
+    "candidate_rules": [
+      "EQUAL requires canonical reference identity within the same context.",
+      "COMPATIBLE requires an explicit context rule admitting both orientations.",
+      "ORDERED requires an explicit ordinal or orientation ordering relation.",
+      "CONFLICT requires an explicit incompatible-constraint witness.",
+      "INCOMPARABLE is returned when no equality, compatibility, order, or conflict rule applies."
+    ],
+    "completeness": "NOT_ESTABLISHED",
+    "status": "PROVISIONAL"
+  },
+  "conflict_precedence": {
+    "status": "CANDIDATE_POLICY_ONLY",
+    "proposed_order": ["explicit_context_conflict", "source-bound_constraint_conflict", "derived_orientation_conflict", "unresolved_incomparability"],
+    "guard": "Precedence does not convert an unresolved case into conflict without a witness."
+  },
+  "preservation_rule": {
+    "statement": "A comparison preserves orientation only if its result retains every orientation distinction marked relevant by Context.",
+    "failure": "ORIENTATION_PRESERVATION_FAILURE"
+  },
+  "concrete_fixtures": [
+    {"fixture_id": "ORI-FIX-001", "left": "o_1", "right": "o_1", "context": "C_ORI_001", "witness": "same canonical reference", "result": "EQUAL"},
+    {"fixture_id": "ORI-FIX-002", "left": "o_1", "right": "o_2", "context": "C_ORI_002", "witness": "context declares joint admissibility", "result": "COMPATIBLE"},
+    {"fixture_id": "ORI-FIX-003", "left": "o_1", "right": "o_2", "context": "C_ORI_003", "witness": "context declares o_1 before o_2", "result": "ORDERED"},
+    {"fixture_id": "ORI-FIX-004", "left": "o_1", "right": "o_2", "context": "C_ORI_004", "witness": "explicit incompatible assignments", "result": "CONFLICT"},
+    {"fixture_id": "ORI-FIX-005", "left": "o_1", "right": "o_2", "context": "C_ORI_005", "witness": null, "result": "INCOMPARABLE"}
+  ],
+  "open_obligations": [
+    "Define the source and target domains of orientations.",
+    "Define whether COMPATIBLE and ORDERED can co-occur.",
+    "Define conflict witnesses and their provenance requirements.",
+    "Prove or test completeness of CompareOrientation over the executable context domain.",
+    "Define how orientation comparison feeds Lawful and MTO_Candidates."
+  ],
+  "nonclaims": ["No orientation fixture establishes universal admissibility.", "No comparison result authorizes deterministic MTO selection.", "No canonical orientation domain is created."]
+}
