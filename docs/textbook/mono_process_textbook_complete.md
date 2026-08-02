@@ -4654,6 +4654,11 @@ This section is generated from canonical induction, queue, intake, and represent
   - Queue: `NOT_PRESENT`; Registry: `NOT_BOUND`
   - Source: `departments/analysis_intake/semantic_captures/GOV_INDUCTION_AUTHORITY_TRANSITION_001.json`; receipt: `departments/analysis_intake/receipts/GOV_INDUCTION_AUTHORITY_TRANSITION_001.receipt.json`; SHA-256: `227A99ECA80801DF5ECC8BDF5D0B719837833EE18F1EF3F7146AC3375571271A`
 
+- **RT_INDUCTION_MTO_OTM_CALCULUS_001_APPEND_001** (`CAPTURE_5766e8be102ee16c214b`): Preserved Analysis Intake capture.
+  - Capture: `PRESERVED_LITERAL`; Review: `NOT_REVIEWED`; Promotion: `HOLD_C1`; Induction: `NOT_QUEUED`
+  - Queue: `NOT_PRESENT`; Registry: `NOT_BOUND`
+  - Source: `departments/analysis_intake/chat_captures/RT_INDUCTION_MTO_OTM_CALCULUS_001_APPEND_001.json`; receipt: `departments/analysis_intake/receipts/RT_INDUCTION_MTO_OTM_CALCULUS_001_APPEND_001.receipt.json`; SHA-256: `ECC1A49337352CA99CF871F710E268BEF0652E8D80DF8F2BB03FC80EC397C033`
+
 - **CHAT_RT_ORGANISM_LEVEL_THERAPY_CONDITION_DECISION_ARCHITECTURE_20260801_001** (`CHAT_RT_ORGANISM_LEVEL_THERAPY_CONDITION_DECISION_ARCHITECTURE_20260801_001`): Preserved Analysis Intake capture.
   - Capture: `PRESERVED_PROVISIONAL`; Review: `NOT_REVIEWED`; Promotion: `HOLD_C1`; Induction: `NOT_QUEUED`
   - Queue: `NOT_PRESENT`; Registry: `NOT_BOUND`
@@ -4684,27 +4689,14 @@ This section is generated from canonical induction, queue, intake, and represent
   - Queue: `NOT_PRESENT`; Registry: `NOT_BOUND`
   - Source: `departments/analysis_intake/chat_captures/RT_INDUCTION_DISCRETE_CONDITION_CONTINUOUS_PATH_20260726_002.json`; receipt: `NOT_RECORDED`; SHA-256: `31405e3bd7826da940c490cc43328da019c23b476505a6ba625d68f49e422f18`
 
+- **RT_MTO_CONTEXT_C_ORI_002_20260802_001** (`RT_MTO_CONTEXT_C_ORI_002_20260802_001`): Preserved Analysis Intake capture.
+  - Capture: `PRESERVED_LITERAL`; Review: `NOT_REVIEWED`; Promotion: `HOLD_C1`; Induction: `NOT_QUEUED`
+  - Queue: `NOT_PRESENT`; Registry: `NOT_BOUND`
+  - Source: `departments/analysis_intake/chat_captures/RT_MTO_CONTEXT_C_ORI_002_20260802_001.json`; receipt: `departments/analysis_intake/receipts/RT_MTO_CONTEXT_C_ORI_002_20260802_001.receipt.json`; SHA-256: `BCA66023BC99AF778D820F434A846B9824723135CBD9A0DB34091B40228804CD`
+
 ## Queued Research Contributions
 
-- **MPF_IND_PROJECTION_DOF_ARCHITECTURE_001** (`MPF_IND_PROJECTION_DOF_ARCHITECTURE_001`): Structured JSON intake routed for review on 2026-07-23. Canonical registry binding remains pending while organizational degree-of-freedom formalization, aspect-taxonomy formalization, and projection-domain closure remain open.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
-  - Queue: `queued`; Registry: `NOT_BOUND`
-  - Source: `outputs/analysis_intake/candidate_patch_MPF_IND_PROJECTION_DOF_ARCHITECTURE_001.json`; receipt: `NOT_RECORDED`; SHA-256: `be759a8bf1846503f10d7ddc5447ba38b8706297b895e55f5401ac50dfab9d54`
-
-- **RT_INDUCTION_ATOMIC_VALUE_PROJECTION_001** (`RT_INDUCTION_ATOMIC_VALUE_PROJECTION_001`): Preservation-first induction from the corrective package. Exact payload is preserved under the Analysis Intake local governance home; review and promotion were not performed.
-  - Capture: `INDUCTED`; Review: `NOT_REVIEWED`; Promotion: `UNQUEUED_FOR_PROMOTION`; Induction: `INDUCTED`
-  - Queue: `queued`; Registry: `NOT_BOUND`
-  - Source: `departments/analysis_intake/induction_queue/payloads/RT_INDUCTION_ATOMIC_VALUE_PROJECTION_001.json`; receipt: `NOT_RECORDED`; SHA-256: `c5b992ef3b53e9dbb676f630079fc9bf9337f7a9f0722d58faab76ede8debbba`
-
-- **RT_INDUCTION_RELATIONAL_NECESSITY_ALIGNMENT_002** (`RT_INDUCTION_RELATIONAL_NECESSITY_ALIGNMENT_002`): Preservation-first induction from the corrective package. Exact payload is preserved under the Analysis Intake local governance home; review and promotion were not performed.
-  - Capture: `INDUCTED`; Review: `NOT_REVIEWED`; Promotion: `UNQUEUED_FOR_PROMOTION`; Induction: `INDUCTED`
-  - Queue: `queued`; Registry: `NOT_BOUND`
-  - Source: `departments/analysis_intake/induction_queue/payloads/RT_INDUCTION_RELATIONAL_NECESSITY_ALIGNMENT_002.json`; receipt: `NOT_RECORDED`; SHA-256: `ca53759a131ce6c3a64ea025843ca78d31a0f4ae0f9047207af0b3874be3d507`
-
-- **RT_PROCESS_SEMANTIC_INDEX_001** (`RT_PROCESS_SEMANTIC_INDEX_001`): Structured JSON intake routed for review; canonical registry binding remains pending while the semantic-index term family is opened in lexicon review.
-  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
-  - Queue: `queued`; Registry: `NOT_BOUND`
-  - Source: `outputs/analysis_intake/candidate_patch_RT_INDUCTION_PACKET_PROCESS_SEMANTIC_INDEX_001.json`; receipt: `NOT_RECORDED`; SHA-256: `79d50871ae313b3669f302192f49c476f90fa45ca2d7021116a696af3ac7fa2a`
+_None recorded._
 
 ## Active Governed Research Notes
 
@@ -4752,6 +4744,11 @@ This section is generated from canonical induction, queue, intake, and represent
   - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
   - Queue: `bound_to_registry`; Registry: `C1_DEFINED_PROVISIONAL`
   - Source: `registry/governance/patches/MPF_IND_PRIMITIVE_FORM_DOMINANT_DOMAIN_001.json`; receipt: `NOT_RECORDED`; SHA-256: `c82677c499f1abddde82c59700d6e7b7f8123a50e01d024a54ddca92c5f6de6c`
+
+- **Projection-Driven Degrees-of-Freedom Architecture** (`MPF_IND_PROJECTION_DOF_ARCHITECTURE_001`): Canonical registry binding repaired from the existing queued intake and intake report. Formal degree-of-freedom definition, aspect taxonomy, and projection closure remain open; no promotion or canonical mathematics is asserted.
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
+  - Queue: `queued`; Registry: `C1_DEFINED_PROVISIONAL`
+  - Source: `outputs/analysis_intake/candidate_patch_MPF_IND_PROJECTION_DOF_ARCHITECTURE_001.json`; receipt: `NOT_RECORDED`; SHA-256: `be759a8bf1846503f10d7ddc5447ba38b8706297b895e55f5401ac50dfab9d54`
 
 - **RT Mechanics as Recursive Relational Completion** (`MPF_IND_RT_MECHANICS_RECURSIVE_COMPLETION_001`): Backfilled into the canonical induction registry during governance debt discharge.
   - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
@@ -4928,6 +4925,11 @@ This section is generated from canonical induction, queue, intake, and represent
   - Queue: `bound_to_registry`; Registry: `C1_EXECUTION_RECONSTRUCTION`
   - Source: `departments/colab/results/RT_NOTEBOOK_26_D_E_SELF_CONTAINED_001_RESULTS_001.zip`; receipt: `NOT_RECORDED`; SHA-256: `3b7a3ac0cea153642d111b7086ee10b93abb8d08f5ab6481f01926736e45ccab`
 
+- **RT Process Semantic Index** (`RT_PROCESS_SEMANTIC_INDEX_001`): Canonical registry binding repaired from the existing queued intake. Semantic-index terms remain under review and provisional; no theorem or canonical promotion is asserted.
+  - Capture: `NOT_RECORDED`; Review: `NOT_RECORDED`; Promotion: `NOT_RECORDED`; Induction: `INDUCTED`
+  - Queue: `queued`; Registry: `C1_DEFINED_PROVISIONAL`
+  - Source: `outputs/analysis_intake/candidate_patch_RT_INDUCTION_PACKET_PROCESS_SEMANTIC_INDEX_001.json`; receipt: `NOT_RECORDED`; SHA-256: `79d50871ae313b3669f302192f49c476f90fa45ca2d7021116a696af3ac7fa2a`
+
 ## Open Definitions, Obligations, and Unresolved Work
 
 _None recorded._
@@ -4969,6 +4971,11 @@ _None recorded._
   - Queue: `queued`; Registry: `C1_DEFINED_PROVISIONAL`
   - Source: `departments/analysis_intake/chat_captures/RT_GR_BRIDGE_TRIANGLE_CLOSURE_RESIDUE_CAT_INDUCTION_20260730_001.md`; receipt: `NOT_RECORDED`; SHA-256: `7528D468305D6CD494FE317ACCD5F561D311E3BD9DAADDE8D01ABC6C24A1E40E`
 
+- **Closed Asymmetry Atom to Domain-Specific Atomic Value** (`RT_INDUCTION_ATOMIC_VALUE_PROJECTION_001`): Canonical registry binding repaired from the preserved induction payload and envelope. Review remains not performed; projection maps, invariants, and uniqueness are unresolved.
+  - Capture: `INDUCTED`; Review: `NOT_REVIEWED`; Promotion: `UNQUEUED_FOR_PROMOTION`; Induction: `INDUCTED`
+  - Queue: `queued`; Registry: `C1_DEFINED_PROVISIONAL`
+  - Source: `departments/analysis_intake/induction_queue/payloads/RT_INDUCTION_ATOMIC_VALUE_PROJECTION_001.json`; receipt: `NOT_RECORDED`; SHA-256: `c5b992ef3b53e9dbb676f630079fc9bf9337f7a9f0722d58faab76ede8debbba`
+
 - **MTO/OTM Closure Calculus, Aspect Equivalence, and Orientation Resolution** (`RT_INDUCTION_MTO_OTM_CALCULUS_001`): Research registration only. Not reviewed, promoted, or treated as canonical mathematics. Proposed equivalences and closure rules remain open research objects.
   - Capture: `PRESERVED_LITERAL`; Review: `NOT_REVIEWED`; Promotion: `HOLD_C1`; Induction: `INDUCTED`
   - Queue: `queued`; Registry: `C1_DEFINED_PROVISIONAL`
@@ -4978,6 +4985,11 @@ _None recorded._
   - Capture: `INDUCTED`; Review: `NOT_REVIEWED`; Promotion: `HOLD_C1`; Induction: `INDUCTED`
   - Queue: `queued`; Registry: `C1_DEFINED_PROVISIONAL`
   - Source: `departments/analysis_intake/chat_captures/RT_INDUCTION_RECURSIVE_SYMMETRY_CONTINUATION_20260725_001.json`; receipt: `NOT_RECORDED`; SHA-256: `a09fc7b8c292bd33d88a7766f6bc64d21ea675b2f452cf51bb55e456a7c7d732`
+
+- **Relational Necessity, Admissibility Window, and Alignment** (`RT_INDUCTION_RELATIONAL_NECESSITY_ALIGNMENT_002`): Canonical registry binding repaired from the preserved induction payload and envelope. Alignment, orientation typing, admissibility, and counterexample obligations remain open.
+  - Capture: `INDUCTED`; Review: `NOT_REVIEWED`; Promotion: `UNQUEUED_FOR_PROMOTION`; Induction: `INDUCTED`
+  - Queue: `queued`; Registry: `C1_DEFINED_PROVISIONAL`
+  - Source: `departments/analysis_intake/induction_queue/payloads/RT_INDUCTION_RELATIONAL_NECESSITY_ALIGNMENT_002.json`; receipt: `NOT_RECORDED`; SHA-256: `ca53759a131ce6c3a64ea025843ca78d31a0f4ae0f9047207af0b3874be3d507`
 
 - **Orientation, Ordinal Alternation, and MTO Closure Candidates** (`RT_ORIENTATION_ORDINAL_MTO_INDUCTION_20260730_002`): Provisional intake only. Wave, polarization, interference, particle, quantum, ontology, and universal-MTO language remains analogy or candidate language; no theorem, primitive, physical identity, or promotion is authorized.
   - Capture: `PRESERVED_PROVISIONAL`; Review: `NOT_REVIEWED`; Promotion: `HOLD_C1`; Induction: `INDUCTED`

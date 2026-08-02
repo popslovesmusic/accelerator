@@ -1,9 +1,9 @@
 {
-  "run_id": "GV-20260802T012137.831208-18600",
+  "run_id": "GV-20260802T012413.238431-14192",
   "validation_mode": "governance_only",
-  "started_at": "2026-08-02T01:21:37.831208",
-  "completed_at": "2026-08-02T01:21:41.363000",
-  "duration_seconds": 3.53728,
+  "started_at": "2026-08-02T01:24:13.238431",
+  "completed_at": "2026-08-02T01:24:16.669868",
+  "duration_seconds": 3.431823,
   "validation_options": {
     "quick": false,
     "registries_only": false,
@@ -46,7 +46,7 @@
   "registry_validation": {
     "status": "success",
     "errors": [],
-    "duration_seconds": 0.006461000011768192,
+    "duration_seconds": 0.006722300022374839,
     "timed_out": false,
     "failure_class": null,
     "stage_name": "registry_validation",
@@ -67,7 +67,7 @@
     "evidence_paths": [
       "D:/projects/acellorator/registry/governance_change_ledger.json"
     ],
-    "duration_seconds": 0.000901699997484684,
+    "duration_seconds": 0.000867100025061518,
     "timed_out": false,
     "failure_class": null,
     "stage_name": "governance_ledger_validation",
@@ -91,7 +91,7 @@
       "D:/projects/acellorator/registry/governance/patches/PATCH_D_SOURCE_RELATION_C_20260727_001.json",
       "D:/projects/acellorator/registry/governance/patches/PATCH_D_VALID_REL_TOKEN_C_20260727_001.json"
     ],
-    "duration_seconds": 0.0001537000061944127,
+    "duration_seconds": 0.00015949999215081334,
     "timed_out": false,
     "failure_class": null,
     "stage_name": "patch_record_validation",
@@ -180,7 +180,7 @@
     "governance_status": "mixed",
     "logging_mode": "default",
     "items_checked": 178,
-    "duration_seconds": 0.06729719997383654,
+    "duration_seconds": 0.0652119000442326,
     "timed_out": false,
     "failure_class": null,
     "stage_name": "patch_chain_validation",
@@ -208,7 +208,7 @@
       "registry/governance/patches/PATCH_D_DERIVE_REL_C_20260727_001.json"
     ],
     "items_checked": 1,
-    "duration_seconds": 1.9342543999664485,
+    "duration_seconds": 1.623380900011398,
     "timed_out": false,
     "failure_class": null,
     "stage_name": "patch_gate_validation",
@@ -226,7 +226,7 @@
       "patch_chain_view_present"
     ],
     "items_checked": 4,
-    "duration_seconds": 0.0019611999741755426,
+    "duration_seconds": 0.001983199967071414,
     "timed_out": false,
     "failure_class": null,
     "stage_name": "db_authority_validation",
@@ -306,35 +306,66 @@
       ]
     },
     "items_checked": 9,
-    "duration_seconds": 1.98000343516469e-05,
+    "duration_seconds": 2.0200037397444248e-05,
     "timed_out": false,
     "failure_class": null,
     "stage_name": "role_aware_authority_validation",
     "normalized_status": "success"
   },
   "write_boundary_validation": {
-    "status": "failed",
-    "errors": [
-      "write_boundary_validation exception: Q0 source artifact verification failed: missing=outputs/governance_inventory/governance_ambiguity_register.json, missing=outputs/governance_inventory/governance_ambiguity_risk_classification.json, missing=outputs/governance_inventory/governance_authority_relationships.json, missing=outputs/governance_inventory/governance_remediation_queue.json, missing=outputs/governance_inventory/governance_surface_inventory.json"
-    ],
+    "status": "success",
+    "errors": [],
     "warnings": [],
-    "duration_seconds": 0.03594420000445098,
+    "checked_entries": 4,
+    "items_checked": 4,
+    "duration_seconds": 0.3510031999903731,
     "timed_out": false,
-    "failure_class": "tooling_failure",
+    "failure_class": null,
     "stage_name": "write_boundary_validation",
-    "normalized_status": "failed"
+    "normalized_status": "success"
   },
   "validation_reducer_authority_validation": {
-    "status": "failed",
-    "errors": [
-      "validation_reducer_authority_validation exception: Q0 source artifact verification failed: missing=outputs/governance_inventory/governance_ambiguity_register.json, missing=outputs/governance_inventory/governance_ambiguity_risk_classification.json, missing=outputs/governance_inventory/governance_authority_relationships.json, missing=outputs/governance_inventory/governance_remediation_queue.json, missing=outputs/governance_inventory/governance_surface_inventory.json"
-    ],
+    "status": "success",
+    "errors": [],
     "warnings": [],
-    "duration_seconds": 0.04066140000941232,
+    "checked_entries": 1,
+    "validation_partition": {
+      "canonical_invocation": "python -m scripts.global_validate",
+      "terminal_reducer_rule_id": "GOVERNANCE_VALIDATION_FAIL_CLOSED_001",
+      "terminal_reducer_surface_id": "GOV-SURF-0972",
+      "terminal_reducer_surface_path": "scripts/global_validate.py",
+      "supporting_validator_ids": [
+        "GOV-SURF-0881",
+        "GOV-SURF-0994",
+        "GOV-SURF-0005",
+        "GOV-SURF-0123",
+        "GOV-SURF-0001",
+        "GOV-SURF-0002",
+        "GOV-SURF-0132",
+        "GOV-SURF-0134"
+      ],
+      "supporting_validator_paths": [
+        "registry/governance_change_ledger.json",
+        "scripts/query_governance.py",
+        "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+        "governance/live/master_work_index.json",
+        "AGENTS.md",
+        "GEMINI.md",
+        "governance/live/tool_routing_manifest.json",
+        "governance/program_task_registry.json"
+      ],
+      "governing_rule_ids": [
+        "GOVERNANCE_AUTHORITY_SCOPE_PARTITION_001",
+        "GOVERNANCE_VALIDATION_FAIL_CLOSED_001"
+      ],
+      "active_status": "ACTIVE"
+    },
+    "items_checked": 1,
+    "duration_seconds": 0.07417390000773594,
     "timed_out": false,
-    "failure_class": "tooling_failure",
+    "failure_class": null,
     "stage_name": "validation_reducer_authority_validation",
-    "normalized_status": "failed"
+    "normalized_status": "success"
   },
   "math_validation": {
     "status": "skipped",
@@ -391,7 +422,7 @@
       "stage": "registry_validation",
       "status": "success",
       "failure_class": "none",
-      "duration_seconds": 0.006461,
+      "duration_seconds": 0.006722,
       "timed_out": false,
       "error_count": 0,
       "warning_count": 0,
@@ -440,7 +471,7 @@
       "stage": "governance_ledger_validation",
       "status": "success",
       "failure_class": "none",
-      "duration_seconds": 0.000902,
+      "duration_seconds": 0.000867,
       "timed_out": false,
       "error_count": 0,
       "warning_count": 0,
@@ -481,7 +512,7 @@
       "stage": "patch_record_validation",
       "status": "success",
       "failure_class": "none",
-      "duration_seconds": 0.000154,
+      "duration_seconds": 0.000159,
       "timed_out": false,
       "error_count": 0,
       "warning_count": 0,
@@ -531,7 +562,7 @@
       "stage": "patch_chain_validation",
       "status": "success",
       "failure_class": "none",
-      "duration_seconds": 0.067297,
+      "duration_seconds": 0.065212,
       "timed_out": false,
       "error_count": 0,
       "warning_count": 0,
@@ -644,7 +675,7 @@
       "stage": "patch_gate_validation",
       "status": "warning",
       "failure_class": "none",
-      "duration_seconds": 1.934254,
+      "duration_seconds": 1.623381,
       "timed_out": false,
       "error_count": 0,
       "warning_count": 1,
@@ -694,7 +725,7 @@
       "stage": "db_authority_validation",
       "status": "success",
       "failure_class": "none",
-      "duration_seconds": 0.001961,
+      "duration_seconds": 0.001983,
       "timed_out": false,
       "error_count": 0,
       "warning_count": 0,
@@ -770,19 +801,17 @@
     },
     {
       "stage": "write_boundary_validation",
-      "status": "failed",
-      "failure_class": "tooling_failure",
-      "duration_seconds": 0.035944,
+      "status": "success",
+      "failure_class": "none",
+      "duration_seconds": 0.351003,
       "timed_out": false,
-      "error_count": 1,
+      "error_count": 0,
       "warning_count": 0,
       "result_snapshot": {
-        "status": "failed",
-        "errors": [
-          "write_boundary_validation exception: Q0 source artifact verification failed: missing=outputs/governance_inventory/governance_ambiguity_register.json, missing=outputs/governance_inventory/governance_ambiguity_risk_classification.json, missing=outputs/governance_inventory/governance_authority_relationships.json, missing=outputs/governance_inventory/governance_remediation_queue.json, missing=outputs/governance_inventory/governance_surface_inventory.json"
-        ],
+        "status": "success",
+        "errors": [],
         "warnings": [],
-        "items_checked": null,
+        "items_checked": 4,
         "work_expectation": null,
         "work_state": null,
         "targets_discovered": null,
@@ -795,7 +824,7 @@
         "zero_work_reason": null,
         "checked_patches": null,
         "checked_files": null,
-        "checked_entries": null,
+        "checked_entries": 4,
         "tools_tested": null,
         "db_path": null,
         "patch_file": null,
@@ -807,24 +836,21 @@
         "decision": null,
         "evidence_paths": [],
         "summary": null
-      },
-      "exception": "Q0 source artifact verification failed: missing=outputs/governance_inventory/governance_ambiguity_register.json, missing=outputs/governance_inventory/governance_ambiguity_risk_classification.json, missing=outputs/governance_inventory/governance_authority_relationships.json, missing=outputs/governance_inventory/governance_remediation_queue.json, missing=outputs/governance_inventory/governance_surface_inventory.json"
+      }
     },
     {
       "stage": "validation_reducer_authority_validation",
-      "status": "failed",
-      "failure_class": "tooling_failure",
-      "duration_seconds": 0.040661,
+      "status": "success",
+      "failure_class": "none",
+      "duration_seconds": 0.074174,
       "timed_out": false,
-      "error_count": 1,
+      "error_count": 0,
       "warning_count": 0,
       "result_snapshot": {
-        "status": "failed",
-        "errors": [
-          "validation_reducer_authority_validation exception: Q0 source artifact verification failed: missing=outputs/governance_inventory/governance_ambiguity_register.json, missing=outputs/governance_inventory/governance_ambiguity_risk_classification.json, missing=outputs/governance_inventory/governance_authority_relationships.json, missing=outputs/governance_inventory/governance_remediation_queue.json, missing=outputs/governance_inventory/governance_surface_inventory.json"
-        ],
+        "status": "success",
+        "errors": [],
         "warnings": [],
-        "items_checked": null,
+        "items_checked": 1,
         "work_expectation": null,
         "work_state": null,
         "targets_discovered": null,
@@ -837,7 +863,7 @@
         "zero_work_reason": null,
         "checked_patches": null,
         "checked_files": null,
-        "checked_entries": null,
+        "checked_entries": 1,
         "tools_tested": null,
         "db_path": null,
         "patch_file": null,
@@ -849,8 +875,7 @@
         "decision": null,
         "evidence_paths": [],
         "summary": null
-      },
-      "exception": "Q0 source artifact verification failed: missing=outputs/governance_inventory/governance_ambiguity_register.json, missing=outputs/governance_inventory/governance_ambiguity_risk_classification.json, missing=outputs/governance_inventory/governance_authority_relationships.json, missing=outputs/governance_inventory/governance_remediation_queue.json, missing=outputs/governance_inventory/governance_surface_inventory.json"
+      }
     },
     {
       "stage": "math_validation",
@@ -937,7 +962,7 @@
     {
       "stage_name": "registry_validation",
       "status": "PASS",
-      "duration_seconds": 0.006461,
+      "duration_seconds": 0.006722,
       "items_checked": 0,
       "failure_code": null,
       "failure_summary": null,
@@ -967,7 +992,7 @@
     {
       "stage_name": "governance_ledger_validation",
       "status": "PASS",
-      "duration_seconds": 0.000902,
+      "duration_seconds": 0.000867,
       "items_checked": 134,
       "failure_code": null,
       "failure_summary": null,
@@ -984,7 +1009,7 @@
     {
       "stage_name": "patch_record_validation",
       "status": "PASS",
-      "duration_seconds": 0.000154,
+      "duration_seconds": 0.000159,
       "items_checked": 178,
       "failure_code": null,
       "failure_summary": null,
@@ -1010,7 +1035,7 @@
     {
       "stage_name": "patch_chain_validation",
       "status": "PASS",
-      "duration_seconds": 0.067297,
+      "duration_seconds": 0.065212,
       "items_checked": 178,
       "failure_code": null,
       "failure_summary": null,
@@ -1025,7 +1050,7 @@
     {
       "stage_name": "patch_gate_validation",
       "status": "WARNING",
-      "duration_seconds": 1.934254,
+      "duration_seconds": 1.623381,
       "items_checked": 1,
       "failure_code": "WARNING",
       "failure_summary": "Deferred pending: patch_chain_applied",
@@ -1049,7 +1074,7 @@
     {
       "stage_name": "db_authority_validation",
       "status": "PASS",
-      "duration_seconds": 0.001961,
+      "duration_seconds": 0.001983,
       "items_checked": 4,
       "failure_code": null,
       "failure_summary": null,
@@ -1080,11 +1105,11 @@
     },
     {
       "stage_name": "write_boundary_validation",
-      "status": "FAIL_TOOLING",
-      "duration_seconds": 0.035944,
-      "items_checked": 0,
-      "failure_code": "FAIL_TOOLING",
-      "failure_summary": "write_boundary_validation exception: Q0 source artifact verification failed: missing=outputs/governance_inventory/governance_ambiguity_register.json, missing=outputs/governance_inventory/governance_ambiguity_risk_classification.json, missing=outputs/governance_inventory/governance_authority_relationships.json, missing=outputs/governance_inventory/governance_remediation_queue.json, missing=outputs/governance_inventory/governance_surface_inventory.json",
+      "status": "PASS",
+      "duration_seconds": 0.351003,
+      "items_checked": 4,
+      "failure_code": null,
+      "failure_summary": null,
       "evidence_paths": [],
       "work_expectation": "UNKNOWN",
       "work_state": "WORK_ACCOUNTING_UNKNOWN",
@@ -1095,11 +1120,11 @@
     },
     {
       "stage_name": "validation_reducer_authority_validation",
-      "status": "FAIL_TOOLING",
-      "duration_seconds": 0.040661,
-      "items_checked": 0,
-      "failure_code": "FAIL_TOOLING",
-      "failure_summary": "validation_reducer_authority_validation exception: Q0 source artifact verification failed: missing=outputs/governance_inventory/governance_ambiguity_register.json, missing=outputs/governance_inventory/governance_ambiguity_risk_classification.json, missing=outputs/governance_inventory/governance_authority_relationships.json, missing=outputs/governance_inventory/governance_remediation_queue.json, missing=outputs/governance_inventory/governance_surface_inventory.json",
+      "status": "PASS",
+      "duration_seconds": 0.074174,
+      "items_checked": 1,
+      "failure_code": null,
+      "failure_summary": null,
       "evidence_paths": [],
       "work_expectation": "UNKNOWN",
       "work_state": "WORK_ACCOUNTING_UNKNOWN",
@@ -1185,11 +1210,11 @@
     },
     {
       "stage_name": "report_write",
-      "status": "STALE_REPORT_WARNING",
+      "status": "PASS",
       "duration_seconds": 0.0,
       "items_checked": 1,
-      "failure_code": "STALE_REPORT_WARNING",
-      "failure_summary": "Existing global health report was stale before this run.",
+      "failure_code": null,
+      "failure_summary": null,
       "evidence_paths": [
         "D:/projects/acellorator/outputs/audits/governance_surface_validation.json"
       ],
@@ -1211,48 +1236,33 @@
   "incomplete_stages": [
     "textbook_projection_freshness_validation"
   ],
-  "degraded_stages": [
-    "report_write"
-  ],
+  "degraded_stages": [],
   "failed_stages": [],
   "unknown_status_stages": [],
   "slowest_stages": [
     {
       "stage_name": "patch_gate_validation",
       "status": "WARNING",
-      "duration_seconds": 1.934254,
+      "duration_seconds": 1.623381,
       "items_checked": 1
     },
     {
-      "stage_name": "patch_chain_validation",
+      "stage_name": "write_boundary_validation",
       "status": "PASS",
-      "duration_seconds": 0.067297,
-      "items_checked": 178
+      "duration_seconds": 0.351003,
+      "items_checked": 4
     },
     {
       "stage_name": "validation_reducer_authority_validation",
-      "status": "FAIL_TOOLING",
-      "duration_seconds": 0.040661,
-      "items_checked": 0
+      "status": "PASS",
+      "duration_seconds": 0.074174,
+      "items_checked": 1
     }
   ],
   "runtime_failures": [],
-  "tooling_failures": [
-    {
-      "stage_name": "write_boundary_validation",
-      "status": "FAIL_TOOLING",
-      "failure_summary": "write_boundary_validation exception: Q0 source artifact verification failed: missing=outputs/governance_inventory/governance_ambiguity_register.json, missing=outputs/governance_inventory/governance_ambiguity_risk_classification.json, missing=outputs/governance_inventory/governance_authority_relationships.json, missing=outputs/governance_inventory/governance_remediation_queue.json, missing=outputs/governance_inventory/governance_surface_inventory.json",
-      "duration_seconds": 0.035944
-    },
-    {
-      "stage_name": "validation_reducer_authority_validation",
-      "status": "FAIL_TOOLING",
-      "failure_summary": "validation_reducer_authority_validation exception: Q0 source artifact verification failed: missing=outputs/governance_inventory/governance_ambiguity_register.json, missing=outputs/governance_inventory/governance_ambiguity_risk_classification.json, missing=outputs/governance_inventory/governance_authority_relationships.json, missing=outputs/governance_inventory/governance_remediation_queue.json, missing=outputs/governance_inventory/governance_surface_inventory.json",
-      "duration_seconds": 0.040661
-    }
-  ],
+  "tooling_failures": [],
   "semantic_failures": [],
-  "stale_report_warning": true,
+  "stale_report_warning": false,
   "overall_status": "incomplete",
   "history_write_status": "disabled",
   "trend_status": "disabled",
