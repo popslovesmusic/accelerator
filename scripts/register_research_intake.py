@@ -62,7 +62,7 @@ def register(ids: list[str], apply: bool) -> dict:
         research_id = f"RR_{packet_id}"
         status = "RESEARCH_BLOCKED_VISIBLE" if partial else "RESEARCH_REGISTERED"
         concepts = []
-        entities = capture.get("foundational_entities") or capture.get("provisional_formalization") or {}
+        entities = capture.get("foundational_entities") or capture.get("core_definitions") or capture.get("provisional_formalization") or {}
         if isinstance(entities, dict):
             for label in sorted(entities):
                 concept_id = f"CONCEPT_{packet_id}_{label.upper().replace('-', '_')}"
@@ -74,7 +74,7 @@ def register(ids: list[str], apply: bool) -> dict:
                     "definition_candidates": [first_text(entities[label], "")], "related_concepts": [], "open_questions": capture.get("formalization_obligations", [])
                 })
         derivation_id = f"DERIVATION_{packet_id}"
-        derivation_text = capture.get("primary_mechanism", {}).get("sequence") or capture.get("provisional_formalization", {}).get("expanded_chain") or capture.get("candidate_statement", {}).get("compact")
+        derivation_text = capture.get("primary_mechanism", {}).get("sequence") or capture.get("provisional_formalization", {}).get("expanded_chain") or capture.get("candidate_statement", {}).get("compact") or " -> ".join(capture.get("calculus_cycle", []))
         derivations = []
         if derivation_text:
             derivations = [derivation_id]
@@ -84,7 +84,7 @@ def register(ids: list[str], apply: bool) -> dict:
                 "dependencies": capture.get("formalization_obligations", []), "claim_ceiling": capture.get("claim_ceiling", "PROVISIONAL"),
                 "review_status": "NOT_REVIEWED", "status": "UNASSESSED_DERIVATION", "source_trace": {"path": str(source.relative_to(ROOT)).replace('\\', '/'), "sha256": source_hash}
             })
-        open_questions = capture.get("formalization_obligations") or capture.get("obligation_updates", {}).get("remaining_open", []) or capture.get("remaining_open", [])
+        open_questions = capture.get("formalization_obligations") or capture.get("obligation_updates", {}).get("remaining_open", []) or capture.get("remaining_open", []) or capture.get("open_research", [])
         dependencies = capture.get("dependency_effects") or capture.get("dependencies") or []
         record = {
             "record_type": "research_record", "research_record_id": research_id,
@@ -120,7 +120,7 @@ def main() -> int:
     parser.add_argument("--apply", action="store_true")
     parser.add_argument("--fail-closed", action="store_true")
     args = parser.parse_args()
-    ids = ["RT_ASYM_OBSERVATION_ORIENTATION_EXCLUSION_INDUCTION_20260728_001", "RT_BOUNDARY_ORIENTATION_ASYM_INDUCTION_20260728_001", "RT_ASYM_SYMBOL_TYPE_RECONCILIATION_20260728_001"]
+    ids = ["RT_ASYM_OBSERVATION_ORIENTATION_EXCLUSION_INDUCTION_20260728_001", "RT_BOUNDARY_ORIENTATION_ASYM_INDUCTION_20260728_001", "RT_ASYM_SYMBOL_TYPE_RECONCILIATION_20260728_001", "RT_INDUCTION_MTO_OTM_CALCULUS_001"]
     result = register(ids, args.apply)
     print(json.dumps(result, ensure_ascii=False, indent=2, sort_keys=True))
     return 2 if result["overall_status"] == "FAIL_CLOSED" and args.fail_closed else 0

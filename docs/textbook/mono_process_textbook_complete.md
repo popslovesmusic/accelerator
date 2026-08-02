@@ -4649,6 +4649,11 @@ This section is generated from canonical induction, queue, intake, and represent
 
 ## Preserved Proposals — Not Yet Inducted
 
+- **GOV_INDUCTION_AUTHORITY_TRANSITION_001** (`CAPTURE_35dff1f3ee7a08f7ae34`): Preserved Analysis Intake capture.
+  - Capture: `PRESERVED_LITERAL`; Review: `NOT_REVIEWED`; Promotion: `HOLD_C1`; Induction: `NOT_QUEUED`
+  - Queue: `NOT_PRESENT`; Registry: `NOT_BOUND`
+  - Source: `departments/analysis_intake/semantic_captures/GOV_INDUCTION_AUTHORITY_TRANSITION_001.json`; receipt: `departments/analysis_intake/receipts/GOV_INDUCTION_AUTHORITY_TRANSITION_001.receipt.json`; SHA-256: `227A99ECA80801DF5ECC8BDF5D0B719837833EE18F1EF3F7146AC3375571271A`
+
 - **CHAT_RT_ORGANISM_LEVEL_THERAPY_CONDITION_DECISION_ARCHITECTURE_20260801_001** (`CHAT_RT_ORGANISM_LEVEL_THERAPY_CONDITION_DECISION_ARCHITECTURE_20260801_001`): Preserved Analysis Intake capture.
   - Capture: `PRESERVED_PROVISIONAL`; Review: `NOT_REVIEWED`; Promotion: `HOLD_C1`; Induction: `NOT_QUEUED`
   - Queue: `NOT_PRESENT`; Registry: `NOT_BOUND`
@@ -4963,6 +4968,11 @@ _None recorded._
   - Capture: `PRESERVED_PROVISIONAL`; Review: `NOT_REVIEWED`; Promotion: `HOLD_C1`; Induction: `INDUCTED`
   - Queue: `queued`; Registry: `C1_DEFINED_PROVISIONAL`
   - Source: `departments/analysis_intake/chat_captures/RT_GR_BRIDGE_TRIANGLE_CLOSURE_RESIDUE_CAT_INDUCTION_20260730_001.md`; receipt: `NOT_RECORDED`; SHA-256: `7528D468305D6CD494FE317ACCD5F561D311E3BD9DAADDE8D01ABC6C24A1E40E`
+
+- **MTO/OTM Closure Calculus, Aspect Equivalence, and Orientation Resolution** (`RT_INDUCTION_MTO_OTM_CALCULUS_001`): Research registration only. Not reviewed, promoted, or treated as canonical mathematics. Proposed equivalences and closure rules remain open research objects.
+  - Capture: `PRESERVED_LITERAL`; Review: `NOT_REVIEWED`; Promotion: `HOLD_C1`; Induction: `INDUCTED`
+  - Queue: `queued`; Registry: `C1_DEFINED_PROVISIONAL`
+  - Source: `departments/analysis_intake/chat_captures/RT_INDUCTION_MTO_OTM_CALCULUS_001.json`; receipt: `departments/analysis_intake/receipts/RT_INDUCTION_MTO_OTM_CALCULUS_001.receipt.json`; SHA-256: `44C92D1B68E491C9E732DEFC4AEB75C12CFB3D69AE4FA3B054E9DCBC0D4BE252`
 
 - **Recursive Symmetry Continuation** (`RT_INDUCTION_RECURSIVE_SYMMETRY_CONTINUATION_20260725_001`): Converted from a chat-submitted concept packet and preserved as a semantic capture. The physics interpretation is explicitly unestablished; formal definitions, models, falsification, and textbook alignment remain open.
   - Capture: `INDUCTED`; Review: `NOT_REVIEWED`; Promotion: `HOLD_C1`; Induction: `INDUCTED`

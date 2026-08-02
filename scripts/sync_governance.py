@@ -22,6 +22,7 @@ QUEUE = ROOT / "governance/live/induction_queue.json"
 INDUCTIONS = ROOT / "registry/induction_registry.json"
 INTAKE = ROOT / "departments/analysis_intake/induction_queue/queue_registry.json"
 CAPTURE_DIR = ROOT / "departments/analysis_intake/chat_captures"
+RECEIPT_DIR = ROOT / "departments/analysis_intake/receipts"
 NOTES = ROOT / "docs/textbook/mono_process_textbook_complete.md"
 LEDGER = ROOT / "governance/live/representation_ledger.json"
 RESEARCH_RECORDS = ROOT / "departments/research/records"
@@ -74,7 +75,8 @@ def source_record(*records: dict) -> dict:
 def discover_preserved_captures() -> list[dict]:
     """Discover receipt-backed immutable captures before queue induction."""
     receipts = []
-    for path in sorted(CAPTURE_DIR.glob("*.json"), key=lambda item: item.name.lower()):
+    receipt_paths = list(CAPTURE_DIR.glob("*_receipt.json")) + list(RECEIPT_DIR.glob("*.receipt.json"))
+    for path in sorted(receipt_paths, key=lambda item: item.name.lower()):
         try:
             record = load(path)
         except (OSError, json.JSONDecodeError):
