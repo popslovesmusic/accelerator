@@ -1,0 +1,71 @@
+{
+  "report_id": "RT_INDUCTION_MTO_OTM_CALCULUS_001_CARRIER_REVIEW_001",
+  "packet_id": "RT_INDUCTION_MTO_OTM_CALCULUS_001",
+  "research_record_id": "RR_RT_INDUCTION_MTO_OTM_CALCULUS_001",
+  "status": "PROVISIONAL_CARRIER_SEMANTICS",
+  "authority": "NON_CANONICAL_RESEARCH_MEMORY",
+  "canonical_math_modified": false,
+  "purpose": "Provide typed candidate carriers for lawful MTO input and OTM output without authorizing deterministic closure or equivalence.",
+  "aspect_role_rule": {
+    "computational_role": "An Aspect is a transient computational organization of primitives.",
+    "analytical_role": "The same Aspect may be represented as a condition during analysis.",
+    "identity_rule": "The analytical representation does not create a second computational identity."
+  },
+  "mto_input_carrier": {
+    "type_id": "LawfulAspectOrganization",
+    "candidate_form": "LAO := (a_1, a_2, ..., a_n; C)",
+    "carrier_choice": "FINITE_ORDERED_SEQUENCE_WITH_CONTEXT",
+    "reason": "Ordering may carry orientation and comparison information; context is explicit rather than hidden.",
+    "constraints": [
+      "n >= 1",
+      "each a_i is an Aspect",
+      "C is an explicit admissibility/evaluation context",
+      "the sequence satisfies a future lawful-organization predicate",
+      "no Aspect is silently replaced by an RT"
+    ],
+    "status": "CANDIDATE_ONLY"
+  },
+  "otm_output_carrier": {
+    "type_id": "PrimitiveBundle",
+    "candidate_form": "PB := (M_P, R)",
+    "components": {
+      "M_P": "finite primitive multiset preserving multiplicity unless a later rule proves multiplicity irrelevant",
+      "R": "residue/provenance record preserving source RT, closure context, and decomposition trace"
+    },
+    "carrier_choice": "PROVENANCE_BEARING_PRIMITIVE_MULTISET",
+    "reason": "A plain set would erase multiplicity and a plain sequence would impose order not yet justified; residue preserves recoverability without reconstructing historical Aspects.",
+    "status": "CANDIDATE_ONLY"
+  },
+  "candidate_signatures": {
+    "lawfulness": "Lawful : LawfulAspectOrganization -> Boolean",
+    "mto_candidates": "MTO_Candidates : LawfulAspectOrganization -> Set(ResolvedRT)",
+    "otm": "OTM_Candidate : ResolvedRT -> PrimitiveBundle",
+    "deterministic_mto": "MTO : LawfulAspectOrganization -> ResolvedRT",
+    "deterministic_mto_status": "BLOCKED_UNTIL_SELECTION_RULE",
+    "note": "The candidate signatures do not create operators in canonical mathematics."
+  },
+  "failure_semantics": [
+    {"code": "LAO-001", "condition": "Empty organization supplied.", "result": "MALFORMED_EMPTY_ASPECT_ORGANIZATION"},
+    {"code": "LAO-002", "condition": "A member is not typed Aspect.", "result": "MALFORMED_ASPECT_MEMBER_TYPE"},
+    {"code": "LAO-003", "condition": "Context is absent where admissibility depends on context.", "result": "ADMISSIBILITY_CONTEXT_UNDECLARED"},
+    {"code": "LAO-004", "condition": "Organization fails the future lawful predicate.", "result": "ASPECT_ORGANIZATION_NOT_LAWFUL"},
+    {"code": "OTM-001", "condition": "OTM input is not ResolvedRT.", "result": "MALFORMED_OTM_INPUT"},
+    {"code": "OTM-002", "condition": "Decomposition loses source or residue trace.", "result": "OTM_TRACEABILITY_FAILURE"},
+    {"code": "OTM-003", "condition": "A historical Aspect organization is reconstructed as output.", "result": "HISTORICAL_ASPECT_RECONSTRUCTION_FORBIDDEN"}
+  ],
+  "unresolved_questions": [
+    "Is orientation order always semantically relevant, or only in selected contexts?",
+    "Does primitive multiplicity survive every OTM decomposition?",
+    "What fields are mandatory in residue R?",
+    "Can two lawful organizations with different order resolve to the same RT?",
+    "Is MTO total over all lawful organizations?",
+    "Does OTM preserve enough information for future lawful organization without historical reconstruction?"
+  ],
+  "nonclaims": [
+    "No canonical LawfulAspectOrganization type has been adopted.",
+    "No canonical PrimitiveBundle type has been adopted.",
+    "No deterministic MTO or OTM implementation has been established.",
+    "No equivalence, substitution, theorem, physical, or promotion claim follows."
+  ],
+  "next_action": "Define the admissibility predicate and minimum residue schema before evaluating MTO determinism."
+}
