@@ -6,6 +6,7 @@ validation and does not alter canonical files.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import subprocess
 import sys
@@ -14,6 +15,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 REPORT = ROOT / "outputs/audits/diff_validation_report.json"
+CACHE = ROOT / "outputs/audits/diff_validation_cache.json"
+CACHE_VERSION = "1"
 
 BASE_STAGE_SET = {"unified_manifest_validation", "hygiene_validation"}
 GENERATED_PREFIXES = (
@@ -50,6 +53,22 @@ FULL_VALIDATION_PREFIXES = (
     "docs/textbook/",
     "docs/theory/",
 )
+STAGE_SCOPE_PREFIXES = {
+    "registry_validation": ("registry/",),
+    "governance_integrity_validation": ("governance/", "registry/governance/"),
+    "patch_chain_validation": ("governance/", "registry/governance/"),
+    "db_validation": ("registry/db/", "scripts/db/"),
+    "db_runtime_validation": ("registry/db/", "scripts/db/", "governance/live/", "governance/runtime/"),
+    "textbook_projection_freshness_validation": ("docs/textbook/",),
+    "math_validation": ("docs/theory/", "registry/math/"),
+    "math_test_provenance_validation": ("docs/theory/", "registry/math/"),
+    "math_program_validation": ("docs/theory/", "registry/math/"),
+    "evidence_validation": ("results/", "validation/"),
+    "campaign_validation": ("results/", "validation/"),
+    "implementation_validation": ("scripts/", "tools/"),
+    "hygiene_validation": (),
+    "unified_manifest_validation": (),
+}
 
 
 def git_paths(base: str) -> list[str]:
@@ -95,6 +114,36 @@ def db_validation_required(paths: list[str]) -> bool:
     return any(path.startswith(DB_AFFECTING_PREFIXES) for path in paths)
 
 
+def load_cache() -> dict:
+    try:
+        payload = json.loads(CACHE.read_text(encoding="utf-8"))
+        return payload if payload.get("cache_version") == CACHE_VERSION else {}
+    except (OSError, json.JSONDecodeError):
+        return {}
+
+
+def save_cache(payload: dict) -> None:
+    CACHE.parent.mkdir(parents=True, exist_ok=True)
+    CACHE.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
+def source_fingerprint(stage: str, paths: list[str]) -> str:
+    prefixes = STAGE_SCOPE_PREFIXES.get(stage, ())
+    scoped = paths if not prefixes else [path for path in paths if path.startswith(prefixes)]
+    records = []
+    for path in sorted(scoped):
+        file_path = ROOT / path
+        try:
+            digest = hashlib.sha256(file_path.read_bytes()).hexdigest()
+        except OSError:
+            digest = "MISSING"
+        records.append((path, digest))
+    for validator_path in ("scripts/global_validate.py", "scripts/diff_validate.py"):
+        file_path = ROOT / validator_path
+        records.append((validator_path, hashlib.sha256(file_path.read_bytes()).hexdigest()))
+    return hashlib.sha256(json.dumps(records, separators=(",", ":")).encode("utf-8")).hexdigest()
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--base", default="HEAD", help="Git commit or ref used as the diff baseline")
@@ -112,6 +161,16 @@ def main() -> int:
         paths = all_paths
         generated_paths = []
     stages = sorted(affected_stages(paths))
+    cache = load_cache()
+    fingerprints = {stage: source_fingerprint(stage, paths) for stage in stages}
+    cached_results = {}
+    stages_to_run = []
+    for stage in stages:
+        entry = cache.get(stage, {})
+        if entry.get("fingerprint") == fingerprints[stage] and entry.get("status") == "PASS":
+            cached_results[stage] = "PASS"
+        else:
+            stages_to_run.append(stage)
     started = datetime.now(timezone.utc).isoformat()
     if not paths:
         payload = {
@@ -121,6 +180,7 @@ def main() -> int:
             "changed_paths": [],
             "ignored_generated_paths": generated_paths,
             "selected_stages": [],
+            "cached_stages": [],
             "skipped_stages": "intentional_no_diff",
             "full_validation_required": False,
             "db_validation_required": False,
@@ -129,13 +189,21 @@ def main() -> int:
         print(json.dumps(payload, indent=2, sort_keys=True))
         return 0
 
-    command = [sys.executable, "scripts/global_validate.py", "--stages", *stages, "--stage-timeout-seconds", str(args.stage_timeout_seconds), "--out", args.out]
-    result = subprocess.run(command, cwd=ROOT, capture_output=True, text=True)
+    if stages_to_run:
+        command = [sys.executable, "scripts/global_validate.py", "--stages", *stages_to_run, "--stage-timeout-seconds", str(args.stage_timeout_seconds), "--out", args.out]
+        result = subprocess.run(command, cwd=ROOT, capture_output=True, text=True)
+    else:
+        result = subprocess.CompletedProcess([], 0, "", "")
     try:
         report = json.loads(Path(args.out).read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError):
         report = {"status": "FAIL_REPORT_NOT_CREATED", "validator_stdout": result.stdout, "validator_stderr": result.stderr}
-    stage_results = {item["stage_name"]: item["status"] for item in report.get("stage_results", [])}
+    raw_stage_results = report.get("stage_results", [])
+    if isinstance(raw_stage_results, dict):
+        stage_results = dict(raw_stage_results)
+    else:
+        stage_results = {item["stage_name"]: item["status"] for item in raw_stage_results}
+    stage_results.update(cached_results)
     skipped = [name for name, status in stage_results.items() if status.startswith("SKIPPED")]
     failed = [name for name, status in stage_results.items() if status.startswith("FAIL")]
     payload = {
@@ -145,6 +213,8 @@ def main() -> int:
         "changed_paths": paths,
         "ignored_generated_paths": generated_paths,
         "selected_stages": stages,
+        "stages_executed": stages_to_run,
+        "cached_stages": sorted(cached_results),
         "selected_stage_results": {name: stage_results.get(name, "MISSING") for name in stages},
         "stage_results": stage_results,
         "intentionally_skipped_stages": skipped,
@@ -154,6 +224,11 @@ def main() -> int:
         "underlying_exit_code": result.returncode,
         "underlying_report_path": str(Path(args.out).resolve()),
     }
+    for stage in stages:
+        if stage_results.get(stage) == "PASS":
+            cache[stage] = {"fingerprint": fingerprints[stage], "status": "PASS"}
+    cache["cache_version"] = CACHE_VERSION
+    save_cache(cache)
     Path(args.out).write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(json.dumps(payload, indent=2, sort_keys=True))
     return 2 if failed else 0
