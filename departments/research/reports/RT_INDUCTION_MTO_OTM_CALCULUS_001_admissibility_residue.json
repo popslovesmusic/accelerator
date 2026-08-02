@@ -1,0 +1,61 @@
+{
+  "report_id": "RT_INDUCTION_MTO_OTM_CALCULUS_001_ADMISSIBILITY_RESIDUE_001",
+  "packet_id": "RT_INDUCTION_MTO_OTM_CALCULUS_001",
+  "research_record_id": "RR_RT_INDUCTION_MTO_OTM_CALCULUS_001",
+  "status": "PROVISIONAL_ADMISSIBILITY_AND_RESIDUE_SEMANTICS",
+  "authority": "NON_CANONICAL_RESEARCH_MEMORY",
+  "canonical_math_modified": false,
+  "purpose": "Define a bounded candidate predicate for lawful aspect organizations and the minimum provenance residue required across closure and decomposition.",
+  "candidate_predicate": {
+    "name": "Lawful",
+    "signature": "Lawful : LawfulAspectOrganization × Context -> Boolean",
+    "formal_candidate": "Lawful(A,C) iff NonEmptyFiniteOrdered(A) AND TypedAspects(A) AND ContextDeclared(C) AND RoleCompatible(A,C) AND OrientationAdmissible(A,C) AND ComparisonDefined(A,C) AND Traceable(A)",
+    "status": "PROVISIONAL_CANDIDATE",
+    "clauses": [
+      {"id": "LAW-001", "name": "NonEmptyFiniteOrdered", "meaning": "The organization contains at least one Aspect in a finite ordered carrier."},
+      {"id": "LAW-002", "name": "TypedAspects", "meaning": "Every member is a computational Aspect and may have an analytical-condition representation."},
+      {"id": "LAW-003", "name": "ContextDeclared", "meaning": "The admissibility and comparison context is explicit rather than inferred."},
+      {"id": "LAW-004", "name": "RoleCompatible", "meaning": "Each Aspect occupies a permitted computational or analytical role for the context."},
+      {"id": "LAW-005", "name": "OrientationAdmissible", "meaning": "Required orientation information is present and satisfies the active orientation constraints."},
+      {"id": "LAW-006", "name": "ComparisonDefined", "meaning": "The internal comparison operation required for resolution is defined for the organization."},
+      {"id": "LAW-007", "name": "Traceable", "meaning": "Each Aspect and its primitive sources have recoverable provenance."}
+    ],
+    "unresolved_clauses": ["RoleCompatible", "OrientationAdmissible", "ComparisonDefined", "Traceable minimum fields"]
+  },
+  "residue_schema": {
+    "type_id": "ClosureResidue",
+    "status": "PROVISIONAL_MINIMUM_SCHEMA",
+    "required_fields": [
+      {"field": "residue_id", "meaning": "Stable identity for the residue record."},
+      {"field": "source_rt_or_input_id", "meaning": "Source RT or input organization reference."},
+      {"field": "primitive_references", "meaning": "References to contributing primitives without silently changing their identity."},
+      {"field": "aspect_references", "meaning": "Trace references to transient aspects; not a promise of aspect persistence."},
+      {"field": "organization_order", "meaning": "The order used by the candidate organization when order is semantically relevant."},
+      {"field": "context_id", "meaning": "Explicit admissibility and evaluation context."},
+      {"field": "orientation_data", "meaning": "Orientation information used during comparison and resolution."},
+      {"field": "admissibility_decisions", "meaning": "Accepted, rejected, and unresolved admissibility outcomes."},
+      {"field": "excluded_alternatives", "meaning": "Alternatives excluded by the active admissibility decision, when representable."},
+      {"field": "closure_operation_reference", "meaning": "Reference to the closure event or candidate MTO evaluation."},
+      {"field": "ordinal_position", "meaning": "Ordinal orientation or sequence position where required by the context."},
+      {"field": "source_hashes", "meaning": "Hashes for recoverable source artifacts when available."}
+    ],
+    "optional_fields": ["comparison_trace", "tie_break_candidates", "projection_data", "decomposition_trace", "error_history"],
+    "preservation_rule": "Residue preserves traceability and decision history; it does not preserve transient Aspect identity as an active continuation object."
+  },
+  "failure_semantics": [
+    {"code": "LAW-FAIL-001", "condition": "Organization is empty or non-finite.", "result": "LAWFULNESS_UNDEFINED_OR_REJECTED"},
+    {"code": "LAW-FAIL-002", "condition": "A member lacks Aspect typing.", "result": "MALFORMED_ASPECT_MEMBER"},
+    {"code": "LAW-FAIL-003", "condition": "Context is absent or ambiguous.", "result": "ADMISSIBILITY_CONTEXT_UNDECLARED"},
+    {"code": "LAW-FAIL-004", "condition": "Orientation requirements cannot be evaluated.", "result": "ORIENTATION_ADMISSIBILITY_UNRESOLVED"},
+    {"code": "LAW-FAIL-005", "condition": "Internal comparison is not defined.", "result": "COMPARISON_SEMANTICS_UNDEFINED"},
+    {"code": "LAW-FAIL-006", "condition": "Required source or residue trace is unavailable.", "result": "TRACEABILITY_FAILURE"},
+    {"code": "RES-FAIL-001", "condition": "Closure output omits required residue fields.", "result": "CLOSURE_RESIDUE_INCOMPLETE"}
+  ],
+  "nonclaims": [
+    "The predicate does not establish that any current organization is lawful.",
+    "The residue schema does not prove identity persistence or equivalence.",
+    "No deterministic MTO selector is defined.",
+    "No OTM implementation or canonical mathematical object is created."
+  ],
+  "next_action": "Instantiate the predicate against bounded fixtures and identify which clauses remain unresolved without inferring lawfulness."
+}
