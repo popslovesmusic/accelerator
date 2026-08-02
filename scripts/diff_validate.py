@@ -205,7 +205,7 @@ def main() -> int:
         stage_results = {item["stage_name"]: item["status"] for item in raw_stage_results}
     stage_results.update(cached_results)
     skipped = [name for name, status in stage_results.items() if status.startswith("SKIPPED")]
-    failed = [name for name, status in stage_results.items() if status.startswith("FAIL")]
+    failed = [name for name in stages if stage_results.get(name) != "PASS"]
     payload = {
         "status": "FAIL_DIFF_VALIDATION" if failed else "PASS_DIFF_VALIDATION",
         "started_at": started,

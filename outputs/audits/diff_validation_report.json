@@ -1,18 +1,17 @@
 {
   "base": "HEAD",
-  "cached_stages": [
-    "implementation_validation",
-    "registry_validation"
-  ],
+  "cached_stages": [],
   "changed_paths": [
-    ".gitignore",
     "registry/math_core_hashes.json",
+    "scripts/db/snapshot_registries.py",
     "scripts/diff_validate.py"
   ],
-  "db_validation_required": false,
+  "db_validation_required": true,
   "failed_selected_stages": [],
   "full_validation_required": true,
   "ignored_generated_paths": [
+    "departments/analysis/crawl_reports/analysis_crawl_20260802_governed_state_reconciliation_001.json",
+    "departments/analysis/crawl_reports/analysis_crawl_20260802_governed_state_reconciliation_001.md",
     "outputs/audits/diff_validation_report.json",
     "outputs/audits/global_health_report.json",
     "outputs/audits/q0_report_write_repair.json",
@@ -216,23 +215,25 @@
   "intentionally_skipped_stages": [
     "engine_validation",
     "math_validation",
-    "db_validation",
     "math_test_provenance_validation",
     "math_program_validation",
     "textbook_projection_freshness_validation",
     "evidence_validation",
     "campaign_validation",
     "governance_integrity_validation",
-    "db_runtime_validation",
     "patch_chain_validation"
   ],
   "selected_stage_results": {
+    "db_runtime_validation": "PASS",
+    "db_validation": "PASS",
     "hygiene_validation": "PASS",
     "implementation_validation": "PASS",
     "registry_validation": "PASS",
     "unified_manifest_validation": "PASS"
   },
   "selected_stages": [
+    "db_runtime_validation",
+    "db_validation",
     "hygiene_validation",
     "implementation_validation",
     "registry_validation",
@@ -240,8 +241,8 @@
   ],
   "stage_results": {
     "campaign_validation": "SKIPPED_REQUIRED",
-    "db_runtime_validation": "SKIPPED_REQUIRED",
-    "db_validation": "SKIPPED_REQUIRED",
+    "db_runtime_validation": "PASS",
+    "db_validation": "PASS",
     "engine_validation": "SKIPPED_REQUIRED",
     "evidence_validation": "SKIPPED_REQUIRED",
     "governance_integrity_validation": "SKIPPED_REQUIRED",
@@ -257,10 +258,14 @@
     "unified_manifest_validation": "PASS"
   },
   "stages_executed": [
+    "db_runtime_validation",
+    "db_validation",
     "hygiene_validation",
+    "implementation_validation",
+    "registry_validation",
     "unified_manifest_validation"
   ],
-  "started_at": "2026-08-02T05:38:25.668272+00:00",
+  "started_at": "2026-08-02T05:43:36.586442+00:00",
   "status": "PASS_DIFF_VALIDATION",
   "underlying_exit_code": 1,
   "underlying_report_path": "D:\\projects\\acellorator\\outputs\\audits\\diff_validation_report.json"

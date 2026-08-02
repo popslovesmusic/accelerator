@@ -129,6 +129,8 @@ def snapshot_registries(db_path):
         "registry/lexicon_gap_queue.json",
         "registry/lexicon_validation_registry.json",
         "registry/math_source_registry.json",
+        "registry/math_hashes.json",
+        "registry/math_core_hashes.json",
         "registry/compliance_charter_v2_3.json",
     ]
 
