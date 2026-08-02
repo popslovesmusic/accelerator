@@ -1,0 +1,79 @@
+{
+  "campaign_metadata": {
+    "campaign_id": "analysis_crawl_20260802_d_post_stop_evidence_frontier_001",
+    "crawl_type": "BOUNDED_READ_ONLY_ANALYSIS_CRAWL",
+    "agent_role": "RT_AGENT_INFINITE_THEORY_ANALYST",
+    "created_at": "2026-08-02",
+    "claim_ceiling": "C1_DEFINED_PROVISIONAL",
+    "human_review_required": true
+  },
+  "repository_snapshot": {
+    "global_validation_run": "GV-20260802T115107.098555-8248",
+    "global_validation_outcome": "PASS_WITH_WARNINGS",
+    "global_validation_failed_stages": [],
+    "global_validation_warning_stage": "math_program_validation",
+    "db_snapshot_status": "fresh",
+    "db_blocker_count": 0,
+    "intake_sync_status": "PASS_READ_ONLY_CHECK"
+  },
+  "scope": {
+    "object_ids": ["P126", "P127", "P128", "MPF_D_SEMANTICS_PROOF_PACKAGE_001", "DEBT_D_SEMANTICS_PROOF_001"],
+    "domains": ["mathematics", "analysis", "governance", "validation"],
+    "time_range": "changes since analysis_d_theorem_eligibility_review_20260802_002",
+    "include_superseded": true,
+    "finite_stopping_condition": "Compare canonical D evidence artifacts, gate records, and commits since the last eligibility review; stop when no new authoritative evidence is found."
+  },
+  "source_artifact_set": [
+    {"path": "registry/math/d_semantics_obligation_registry.json", "sha256": "21B7C53312AF0639C79C3AA23ADEA3638456ABE5013B625A10297007B81C5318"},
+    {"path": "registry/proof_registry.json", "sha256": "08A41C22F5DFCD54300A797F167360F859DE22E3194F1009246E2555D2CA7F2B"},
+    {"path": "registry/theorem_registry.json", "sha256": "F4C1B10452F78FC8CAFE6146C9C53F2B680D762992C357E66A9B4FD68A13E54F"},
+    {"path": "registry/claim_registry.json", "sha256": "1600C64CC3F296F4657386B77BE98C8A2E403415280ED8118C764BFA03813D0F"},
+    {"path": "registry/governance/d_semantics_enablement_registry.json", "sha256": "542EEA3CB473E993D5E567D5A18C0F7C339BC56384D6570B74944989FF8427D9"},
+    {"path": "docs/theory/foundational/5_03_26 unity/math/proofs/P126_d_typed_projection_type_preservation_scope_closure.md", "sha256": "9065504ABD77A0EAB7D95E92DD05B1BF99DD90FBE6A84EFAA6F3FF651AF44511"},
+    {"path": "docs/theory/foundational/5_03_26 unity/math/proofs/P127_d_representable_distinction_preservation_bounded_candidate.md", "sha256": "E7DFFEB80FEC98F0ADBB21F8B6AD06914D8D0A00D18F91BF71DDC9CF8DECF3DF"},
+    {"path": "docs/theory/foundational/5_03_26 unity/math/proofs/P128_d_noncollapse_boundary_bounded_candidate.md", "sha256": "78CF9E325A344181AB2403C3D0BED47B710E04989C9F8FE1A3E47B30648395C9"},
+    {"path": "departments/analysis/crawl_reports/analysis_d_theorem_eligibility_review_20260802_002.json", "sha256": "E34AD9583719EBAB49E0B47B364157DE90E88C0F64D890A0A0BA5FF82086BB6B"}
+  ],
+  "normalization_rule": "Canonical D evidence and promotion-gate records control eligibility; crawl reports are observations and cannot alter the gate.",
+  "mathematical_delta": {"new_objects": 0, "status_changes_observed": 0, "canonical_mutations": 0, "summary": "No new authoritative D evidence or canonical status change was found after the prior stop decision."},
+  "object_inventory": {
+    "obligation_count": 5,
+    "obligation_status_counts": {"DISCHARGED": 1, "DISCHARGED_BOUNDED": 4},
+    "p126_status": "COMPLETE_ARGUMENT_UNVERIFIED",
+    "p127_status": "COMPLETE_ARGUMENT_BOUNDED_HUMAN_APPROVED",
+    "p128_status": "COMPLETE_ARGUMENT_BOUNDED_HUMAN_APPROVED",
+    "d_enablement_proof_discharge": false,
+    "claim_package_status": "C1_DEFINED_PROVISIONAL_PROMOTION_BLOCKED",
+    "eligible_d_theorem_target": false
+  },
+  "dependency_graph": {
+    "upstream": ["P126", "P127", "P128", "d_semantics_enablement_registry"],
+    "downstream_blocked_surfaces": ["D_semantics_theorem_promotion", "claims_above_C1"],
+    "evidence_delta": "none"
+  },
+  "findings": {
+    "discovery_id": "DISCOVERY_ANALYSIS_20260802_D_POST_STOP_NO_NEW_EVIDENCE_001",
+    "discovery_class": "NO_NEW_INFORMATION",
+    "title": "D eligibility stop remains current",
+    "statement": "The canonical D proof, theorem, claim, enablement, and obligation artifacts have unchanged hashes and no commits affecting them since the prior eligibility review.",
+    "proof_method": "repository comparison and commit-frontier inspection",
+    "proof_status": "NOT_ATTEMPTED",
+    "epistemic_status": "OBSERVED",
+    "canonical_promotion_allowed": false,
+    "human_review_required": true
+  },
+  "proof_state": {"proof_candidates": 0, "proof_discharge_claimed": false, "promotion_status": "BLOCKED"},
+  "blockers": {"blocker_id": "BLOCK-D-PROMOTION-GATE", "status": "ACTIVE", "effect": "Theorem promotion and claims above C1 remain blocked."},
+  "contradictions": [],
+  "counterexamples": {"performed": false, "result": null},
+  "not_established": ["new independent D evidence", "P126 verification", "universal D semantics", "theorem eligibility", "external physical validity"],
+  "risk_register": [{"risk_id": "RISK_D_STOP_STALE_001", "risk": "A later evidence artifact may be missed if the frontier is not recrawled.", "mitigation": "Reopen only on a new authorized evidence package, counterexample, or premise failure."}],
+  "conceptual_compression": {"mapping": "no new evidence -> unchanged gate -> retain bounded C1 ceiling", "uncertainty": "absence of repository evidence is not evidence of mathematical impossibility"},
+  "recommended_next_actions": [{"priority": 1, "action": "STOP_UNTIL_NEW_EVIDENCE", "owner": "Human-authorized mathematics/governance workflow", "completion_test": "A new independently checked evidence package changes the eligibility matrix.", "does_not_authorize": ["registry mutation", "theorem promotion", "claim elevation", "simulation execution"]}],
+  "frontier": {"open_branches": ["new independent D evidence", "P126 verification"], "blocked_branches": ["theorem promotion", "claims above C1"], "deferred_branches": ["universal D semantics", "external physical interpretation"]},
+  "campaign_assessment": {"outcome": "NO_NEW_INFORMATION", "confidence": "high for repository state", "objective_completion": "The post-stop evidence frontier was checked and no new authoritative evidence was found.", "proof_readiness": "BLOCKED", "recommended_executive_action": "STOP_UNTIL_NEW_EVIDENCE"},
+  "termination_reason": "Finite post-stop evidence frontier inspected; no new authoritative D evidence was found.",
+  "continuation_token": "analysis_crawl_20260802_d_post_stop_evidence_frontier_001::new_evidence",
+  "what_this_crawl_does_not_authorize": ["canonical registry mutation", "proof discharge", "theorem promotion", "claim elevation", "simulation execution", "external physical interpretation"],
+  "crawl_result": "SUCCESS_BOUNDED_NO_NEW_INFORMATION"
+}
