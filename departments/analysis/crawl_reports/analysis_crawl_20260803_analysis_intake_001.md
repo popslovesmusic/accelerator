@@ -18,7 +18,7 @@ The Analysis and Analysis Intake surfaces are active and structurally populated,
 
 ## Direct observations
 
-The intake queue has 18 `NOT_REVIEWED`, 3 `PARTIAL`, and 1 `APPROVED_FOR_INDUCTION_SCOPE_ONLY` entry. Twenty entries remain `HOLD_C1`; four have `PENDING_REVIEW` synchronization status. Two receipts have capture hashes that do not match their current captured source: `GOV_INDUCTION_AUTHORITY_TRANSITION_001` and `RT_MTO_CONTEXT_C_ORI_002_20260802_001`.
+The intake queue has 18 `NOT_REVIEWED`, 3 `PARTIAL`, and 1 `APPROVED_FOR_INDUCTION_SCOPE_ONLY` entry. Twenty entries remain `HOLD_C1`; four have `PENDING_REVIEW` synchronization status. A follow-up literal-path audit cleared the two initially reported receipt mismatches; both hashes and sizes match their captures.
 
 Recent density/entropy packets are preserved in chat captures and remain provisional. The analysis campaign surface includes the recent calculus syntax/semantics and general semantic/model-theoretic packages, whose artifacts explicitly remain noncanonical.
 
@@ -28,7 +28,7 @@ Intake preservation and provenance precede review; analysis synthesis precedes s
 
 ## Debt and obligation inventory
 
-Highest-priority obligations are provenance audit for the two mismatches, review of four pending synchronization entries, classification of three partial entries, and maintaining C1 hold status until evidence and authority gates are satisfied.
+Highest-priority obligations are review of four pending synchronization entries, classification of three partial entries, and maintaining C1 hold status until evidence and authority gates are satisfied.
 
 ## Support and epistemic status
 
@@ -36,7 +36,7 @@ This is a C1 repository-state audit: direct inventory plus bounded synthesis. It
 
 ## Recommendation
 
-Audit the two mismatched receipts first. Then review the pending synchronization entries before any queue-state change or canonical synchronization. Do not repair hashes or alter queue status within this crawl.
+Review the pending synchronization entries before any queue-state change or canonical synchronization. The two receipt mismatches require no repair; retain the follow-up audit as provenance evidence.
 
 ## What this crawl does not authorize
 
