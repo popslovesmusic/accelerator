@@ -1,0 +1,18 @@
+{
+  "true_cases": [
+    {"name":"distinct_processes","expr":{"kind":"Distinct","left":{"kind":"ProcessVar","name":"E"},"right":{"kind":"ProcessVar","name":"E2"}},"expected":true},
+    {"name":"admissible_E_x","expr":{"kind":"Admissible","process":{"kind":"ProcessVar","name":"E"},"context":{"kind":"ContextConst","name":"x"}},"expected":true},
+    {"name":"closed_E_R_x","expr":{"kind":"Closure","process":{"kind":"ProcessVar","name":"E"},"residue":{"kind":"ResidueVar","name":"R"},"context":{"kind":"ContextConst","name":"x"}},"expected":true},
+    {"name":"couples_E_E2","expr":{"kind":"Relation","name":"couples","left":{"kind":"ProcessVar","name":"E"},"right":{"kind":"ProcessVar","name":"E2"},"context":{"kind":"ContextConst","name":"x"}},"expected":true}
+  ],
+  "false_cases": [
+    {"name":"non_distinct_same_process","expr":{"kind":"Distinct","left":{"kind":"ProcessVar","name":"E"},"right":{"kind":"ProcessVar","name":"E"}},"expected":false},
+    {"name":"inadmissible_E_y","expr":{"kind":"Admissible","process":{"kind":"ProcessVar","name":"E"},"context":{"kind":"ContextConst","name":"y"}},"expected":false},
+    {"name":"unclosed_E_R2_x","expr":{"kind":"Closure","process":{"kind":"ProcessVar","name":"E"},"residue":{"kind":"ResidueVar","name":"R2"},"context":{"kind":"ContextConst","name":"x"}},"expected":false},
+    {"name":"missing_relation_edge","expr":{"kind":"Relation","name":"couples","left":{"kind":"ProcessVar","name":"E"},"right":{"kind":"ProcessVar","name":"E3"},"context":{"kind":"ContextConst","name":"x"}},"expected":false}
+  ],
+  "invalid_cases": [
+    {"name":"unknown_process","expr":{"kind":"Admissible","process":{"kind":"ProcessVar","name":"MISSING"},"context":{"kind":"ContextConst","name":"x"}}},
+    {"name":"missing_context","expr":{"kind":"Admissible","process":{"kind":"ProcessVar","name":"E"},"context":{"kind":"ContextConst","name":"MISSING"}}}
+  ]
+}
