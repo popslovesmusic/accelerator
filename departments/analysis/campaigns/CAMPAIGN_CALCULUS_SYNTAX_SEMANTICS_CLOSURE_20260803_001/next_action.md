@@ -1,3 +1,3 @@
 # Next Action
 
-Completed: independent review passed and binder-rich substitution now covers ordinary replacement, shadowing protection, and capture-avoiding alpha-renaming. Next: perform a separate model-class comparison, preserving all current artifacts and the noncanonical boundary.
+Completed: model-class comparison passed across two finite relational models. One structural distinction case was invariant; admissibility, closure, and relation truth were model-dependent. Next: rerun independent review including model sensitivity and finalize the bounded package assessment.
