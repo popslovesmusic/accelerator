@@ -1,0 +1,130 @@
+{
+  "campaign_id": "analysis_crawl_20260802_governed_state_reconciliation_001",
+  "crawl_type": "BOUNDED_READ_ONLY_ANALYSIS_CRAWL",
+  "agent_role": "RT_AGENT_INFINITE_THEORY_ANALYST",
+  "scope": {
+    "object_ids": [
+      "current_governed_state",
+      "analysis_projection_freshness",
+      "induction_queue",
+      "D_semantics_obligations",
+      "incremental_validation"
+    ],
+    "domains": ["governance", "analysis", "induction", "formal_obligations", "validation"],
+    "time_range": "current repository state as of 2026-08-02",
+    "include_superseded": true
+  },
+  "source_artifact_set": [
+    "departments/analysis/AGENTS.md",
+    "departments/analysis/GEMINI.md",
+    "departments/analysis/department_ssot.md",
+    "departments/analysis/program_state_report.json",
+    "departments/analysis/dependency_report.json",
+    "departments/analysis/recommended_action_queue.json",
+    "departments/analysis_intake/induction_queue/queue_registry.json",
+    "governance/live/master_work_index.json",
+    "registry/math/d_semantics_obligation_registry.json",
+    "outputs/audits/global_health_report.json",
+    "scripts/query_governance.py",
+    "scripts/diff_validate.py",
+    "outputs/audits/diff_validation_report.json"
+  ],
+  "normalization_rule": "Live queue and canonical registries control current lifecycle and obligation status; Analysis projections and runtime reports are compared as projections and retained as historical evidence when stale.",
+  "results": {
+    "objects_analyzed": 15,
+    "theorem_candidates": 0,
+    "lemma_candidates": 0,
+    "proof_gaps": 0,
+    "concept_candidates": 0,
+    "contradictions": 1,
+    "counterexamples": 0,
+    "research_campaigns": 1,
+    "duplicates_rejected": 0
+  },
+  "findings": [
+    {
+      "discovery_id": "DISCOVERY_ANALYSIS_20260802_D_STATUS_PROJECTION_DRIFT_001",
+      "discovery_class": "CONTRADICTION",
+      "title": "D-semantics source status and Analysis projection diverge",
+      "statement": "The canonical D-semantics obligation registry records OBL-D-001A through OBL-D-001E as discharged or discharged-bounded, while the Analysis SSOT still describes C/D/E obligations as open.",
+      "source_object_ids": ["registry/math/d_semantics_obligation_registry.json", "departments/analysis/department_ssot.md", "departments/analysis/program_state_report.json"],
+      "epistemic_status": "OBSERVED",
+      "proof_status": "NOT_ATTEMPTED",
+      "support": "C3_REPOSITORY_COMPARISON",
+      "blocking_condition": "Projection freshness and supersession links are not aligned.",
+      "falsification_condition": "A current authoritative supersession record shows that the Analysis projection intentionally retains the older D status."
+    },
+    {
+      "discovery_id": "DISCOVERY_ANALYSIS_20260802_INDUCTION_FRONTIER_001",
+      "discovery_class": "RESEARCH_CAMPAIGN",
+      "title": "MTO/OTM calculus is registered but remains provisional",
+      "statement": "RT_INDUCTION_MTO_OTM_CALCULUS_001 is queue-registered and research-registered with preserved literal source, NOT_REVIEWED, HOLD_C1, and NON_CANONICAL_CANDIDATE status.",
+      "source_object_ids": ["departments/analysis_intake/induction_queue/queue_registry.json", "departments/analysis_intake/chat_captures/RT_INDUCTION_MTO_OTM_CALCULUS_001.json"],
+      "epistemic_status": "SOURCE_REPORTED",
+      "proof_status": "OBLIGATIONS_IDENTIFIED",
+      "support": "C1_MODEL_RELATIVE",
+      "blocking_condition": "Formal semantics, admissibility, orientation resolution, and independent validation remain open in the inducted proposal.",
+      "falsification_condition": "A governed review identifies a source or typing conflict that invalidates the proposed calculus package."
+    },
+    {
+      "discovery_id": "DISCOVERY_ANALYSIS_20260802_VALIDATION_CACHE_BOUNDARY_001",
+      "discovery_class": "GOVERNANCE_DEFECT",
+      "title": "Incremental validation currently operates at stage scope",
+      "statement": "The diff validator now selects affected stages and caches unchanged passing stage fingerprints; it does not yet provide per-record validation reuse inside a selected stage.",
+      "source_object_ids": ["scripts/diff_validate.py", "outputs/audits/diff_validation_report.json"],
+      "epistemic_status": "MECHANICALLY_VERIFIED",
+      "proof_status": "FORMALLY_CHECKED",
+      "support": "C1_OPERATIONAL_VALIDATION",
+      "blocking_condition": "Per-item cache semantics and validator-specific invalidation rules are not defined.",
+      "falsification_condition": "A validator contract demonstrates stable item-level identities and supports safe filtered execution."
+    }
+  ],
+  "current_inventory": {
+    "induction_queue_entries": 15,
+    "latest_induction": "RT_INDUCTION_MTO_OTM_CALCULUS_001",
+    "latest_induction_status": "RESEARCH_REGISTERED / NOT_REVIEWED / HOLD_C1",
+    "visible_partial_source_blockers": ["RT_ASYM_SYMBOL_TYPE_RECONCILIATION_20260728_001: PARTIAL_SOURCE_PAYLOAD"],
+    "d_semantics_registry_statuses": {
+      "OBL-D-001A": "DISCHARGED",
+      "OBL-D-001B": "DISCHARGED_BOUNDED",
+      "OBL-D-001C": "DISCHARGED_BOUNDED",
+      "OBL-D-001D": "DISCHARGED_BOUNDED",
+      "OBL-D-001E": "DISCHARGED_BOUNDED"
+    },
+    "global_health": "pass",
+    "diff_validation": "PASS_DIFF_VALIDATION",
+    "runtime_query_warning": "DB snapshot reported stale relative to source worktree despite a latest successful registry snapshot refresh."
+  },
+  "frontier": {
+    "open_branches": [
+      "reconcile Analysis D-semantics projections with canonical discharged-bounded statuses",
+      "define and validate MTO/OTM calculus semantics without promoting the induction",
+      "specify safe per-item validation cache contracts"
+    ],
+    "blocked_branches": [
+      "runtime freshness conclusion until the source-marker discrepancy is explained"
+    ],
+    "deferred_branches": [
+      "theorem or canonical promotion of the MTO/OTM proposal",
+      "external or physical interpretation of RT therapeutic concepts"
+    ]
+  },
+  "assessment": {
+    "outcome": "PARTIAL_SUCCESS",
+    "confidence": "high for observed inventory; moderate for projection-drift classification",
+    "reason": "The crawl reconciled the current queue, canonical D status, validation behavior, and runtime warnings, but it did not alter stale projections or discharge new formal obligations.",
+    "recommended_next_action": "Run a bounded projection-reconciliation task for the D-semantics status conflict, then separately define the MTO/OTM formalization and validation obligations."
+  },
+  "termination_reason": "Declared bounded current-state scope completed; further progress requires an authorized projection repair or new formal evidence.",
+  "continuation_token": "analysis_crawl_20260802_governed_state_reconciliation_001::projection_reconciliation",
+  "what_this_crawl_does_not_authorize": [
+    "canonical registry mutation",
+    "projection repair",
+    "proof discharge",
+    "theorem promotion",
+    "review or promotion of the MTO/OTM induction",
+    "runtime database refresh",
+    "external physical interpretation"
+  ],
+  "crawl_result": "PARTIAL_SUCCESS_BOUNDED_READ_ONLY_SYNTHESIS"
+}

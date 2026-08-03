@@ -1,0 +1,113 @@
+{
+  "campaign_id": "analysis_crawl_20260802_mto_otm_formalization_001",
+  "crawl_type": "BOUNDED_NONCANONICAL_FORMALIZATION_ASSESSMENT",
+  "source_object_ids": ["RT_INDUCTION_MTO_OTM_CALCULUS_001"],
+  "source_artifacts": [
+    "departments/analysis_intake/chat_captures/RT_INDUCTION_MTO_OTM_CALCULUS_001.json",
+    "departments/analysis_intake/induction_queue/queue_registry.json",
+    "departments/analysis/GEMINI.md",
+    "departments/analysis/department_ssot.md"
+  ],
+  "scope": {
+    "maximum_reasoning_depth": 5,
+    "maximum_candidate_count": 12,
+    "include_superseded": false,
+    "finite_stopping_condition": "Typed candidate signatures, role distinctions, failure fixtures, and unresolved proof obligations recorded."
+  },
+  "provisional_typed_model": {
+    "Primitive": "P",
+    "Aspect": "A[C, P*] where C is an explicit computational or analysis context and P* is a finite primitive organization",
+    "RT": "R",
+    "MTO_candidate": "MTO_C : AdmissibleAspect_C^n -> RT_C",
+    "OTM_candidate": "OTM : RT_C -> PrimitiveMultiset",
+    "continuation_candidate": "Only RT_C may enter the post-closure calculation relation unless a separately typed projection is defined.",
+    "status": "PROVISIONAL_CANDIDATE_ONLY"
+  },
+  "findings": [
+    {
+      "discovery_id": "DISCOVERY_MTO_OTM_001",
+      "discovery_class": "MISSING_DOMAIN",
+      "title": "MTO requires an explicit admissibility domain",
+      "statement": "The proposal requires a lawful subset of aspect organizations before MTO can be typed as a total or deterministic construction.",
+      "epistemic_status": "SOURCE_REPORTED",
+      "proof_status": "OBLIGATIONS_IDENTIFIED",
+      "required_evidence": ["AdmissibleAspect_C definition", "arity rule", "orientation compatibility rule", "failure semantics"]
+    },
+    {
+      "discovery_id": "DISCOVERY_MTO_OTM_002",
+      "discovery_class": "MISSING_DISTINCTION",
+      "title": "Aspect has two proposed roles that must be context-indexed",
+      "statement": "An expression such as 2+2 may be a computational aspect during MTO and an analysis condition when used as an observed relational object; the roles cannot be collapsed without a context or role tag.",
+      "epistemic_status": "CONJECTURED",
+      "proof_status": "OBLIGATIONS_IDENTIFIED",
+      "required_evidence": ["role-indexed Aspect signature", "cross-context admissibility rule", "non-confusion fixture"]
+    },
+    {
+      "discovery_id": "DISCOVERY_MTO_OTM_003",
+      "discovery_class": "MISSING_DISTINCTION",
+      "title": "OTM output should preserve primitive multiplicity if multiplicity matters",
+      "statement": "The source says OTM returns a Primitive Set, but a set may erase repeated primitive occurrence. A multiset or structured primitive decomposition is therefore a safer candidate until multiplicity irrelevance is established.",
+      "epistemic_status": "CONJECTURED",
+      "proof_status": "OBLIGATIONS_IDENTIFIED",
+      "required_evidence": ["multiplicity fixture", "primitive identity rule", "proof that set projection is lossless if retained"]
+    },
+    {
+      "discovery_id": "DISCOVERY_MTO_OTM_004",
+      "discovery_class": "EQUIVALENCE_CANDIDATE",
+      "title": "MTO-output equivalence is conditional, not established",
+      "statement": "The proposed relation A1 equivalent A2 iff MTO(A1)=MTO(A2) is admissible only after RT output identity/equivalence and deterministic MTO selection are independently defined.",
+      "epistemic_status": "CONJECTURED",
+      "proof_status": "BLOCKED",
+      "blocking_obligations": ["RT identity/equivalence", "MTO single-valuedness", "canonical output representation"],
+      "nonclaim": "Equal observed arithmetic values alone do not establish aspect equivalence."
+    },
+    {
+      "discovery_id": "DISCOVERY_MTO_OTM_005",
+      "discovery_class": "MISSING_MECHANISM",
+      "title": "Orientation resolution needs a deterministic selector",
+      "statement": "An orientation field cannot resolve to one RT until comparison, admissibility, tie-breaking, and failure behavior are specified.",
+      "epistemic_status": "SOURCE_REPORTED",
+      "proof_status": "OBLIGATIONS_IDENTIFIED",
+      "required_evidence": ["orientation field type", "comparison rule", "tie-break rule", "non-resolution result"]
+    }
+  ],
+  "fixtures": {
+    "positive": [
+      {"id": "MTO-POS-001", "case": "A[computational, 2+2] is admissible in a declared MTO context", "expected": "role-typed aspect"},
+      {"id": "MTO-POS-002", "case": "A[analysis, 2+2] is admissible as an observed condition in a declared analysis context", "expected": "role-typed aspect"},
+      {"id": "MTO-POS-003", "case": "OTM(R) returns primitive decomposition without historical aspect reconstruction", "expected": "primitive multiset or explicitly lossless primitive structure"}
+    ],
+    "rejection": [
+      {"id": "MTO-REJ-001", "case": "Use one untyped Aspect object interchangeably in computational and analysis roles", "expected": "ROLE_CONTEXT_REQUIRED"},
+      {"id": "MTO-REJ-002", "case": "Infer A1 equivalent A2 from equal arithmetic output without deterministic MTO and RT identity", "expected": "EQUIVALENCE_UNESTABLISHED"},
+      {"id": "MTO-REJ-003", "case": "Recover historical aspects from OTM(R)", "expected": "HISTORICAL_ASPECT_RECONSTRUCTION_FORBIDDEN"},
+      {"id": "MTO-REJ-004", "case": "Use an unordered Primitive Set where repeated primitive occurrence affects later MTO", "expected": "MULTIPLICITY_LOSS_UNRESOLVED"},
+      {"id": "MTO-REJ-005", "case": "Resolve an orientation field by implementation order", "expected": "NONCANONICAL_SELECTOR_FORBIDDEN"}
+    ]
+  },
+  "open_obligations": [
+    "Define AdmissibleAspect_C and arity.",
+    "Define context-indexed Aspect roles and legal role transitions.",
+    "Define RT identity/equivalence separately from aspect equivalence.",
+    "Prove or test deterministic MTO output selection.",
+    "Define OTM decomposition carrier and multiplicity semantics.",
+    "Define orientation comparison, tie-breaking, and failure semantics.",
+    "Specify whether post-closure calculation accepts only RT or also governed RT projections."
+  ],
+  "assessment": {
+    "outcome": "PARTIAL_SUCCESS",
+    "confidence": "moderate",
+    "reason": "The proposal can be given a bounded typed candidate model and concrete rejection fixtures, but its equivalence, totality, determinism, and decomposition claims remain unresolved.",
+    "recommended_next_action": "Create an independent finite fixture evaluator for role-indexed aspects, deterministic MTO candidates, and OTM multiplicity preservation."
+  },
+  "termination_reason": "Finite formalization scope completed; further progress requires executable fixtures or authorized mathematical definitions.",
+  "what_this_does_not_authorize": [
+    "canonical mathematical registry updates",
+    "theorem or proof promotion",
+    "claim elevation above C1",
+    "treating Aspect as unconditionally transient or persistent across all contexts",
+    "treating equal MTO outputs as established mathematical equivalence",
+    "external physical interpretation"
+  ],
+  "crawl_result": "PARTIAL_SUCCESS_NONCANONICAL_FORMALIZATION"
+}

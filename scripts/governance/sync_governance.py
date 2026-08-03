@@ -50,7 +50,10 @@ def main():
     print("Database snapshot refreshed.")
     
     # Step 3: Run global validation
-    success, output = run_command([sys.executable, "scripts/global_validate.py"])
+    # Synchronization validates governance/runtime structure only. The
+    # research math-program campaign is a separate research validation path
+    # and must not block a governance sync.
+    success, output = run_command([sys.executable, "scripts/global_validate.py", "--governance-only"])
     if not success:
         print("PROCESS_OUTCOME=FAIL")
         sys.exit(1)

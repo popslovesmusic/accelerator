@@ -1,9 +1,9 @@
 {
-  "run_id": "GV-20260801T232901.631985-12212",
+  "run_id": "GV-20260802T232921.929699-17648",
   "validation_mode": "full",
-  "started_at": "2026-08-01T23:29:01.631985",
-  "completed_at": "2026-08-01T23:40:42.117414",
-  "duration_seconds": 700.469448,
+  "started_at": "2026-08-02T23:29:21.929699",
+  "completed_at": "2026-08-02T23:29:58.038394",
+  "duration_seconds": 36.110414,
   "validation_options": {
     "quick": false,
     "registries_only": false,
@@ -11,9 +11,9 @@
     "patch_chain_only": false,
     "db_only": false,
     "math_only": false,
-    "no_db_log": false,
+    "no_db_log": true,
     "stage_timeout_seconds": null,
-    "profile": false,
+    "profile": true,
     "history": false,
     "trend": false,
     "trend_baseline": null,
@@ -26,7 +26,7 @@
     "errors": [],
     "warnings": [],
     "items_checked": 479,
-    "duration_seconds": 0.001982199988560751,
+    "duration_seconds": 0.0019895000150427222,
     "timed_out": false,
     "failure_class": null,
     "stage_name": "unified_manifest_validation",
@@ -35,7 +35,7 @@
   "registry_validation": {
     "status": "success",
     "errors": [],
-    "duration_seconds": 0.006314800004474819,
+    "duration_seconds": 0.007635399990249425,
     "timed_out": false,
     "failure_class": null,
     "stage_name": "registry_validation",
@@ -78,7 +78,7 @@
     "failed_count": 0,
     "error_count": 0,
     "zero_work_reason": null,
-    "duration_seconds": 15.755787599977339,
+    "duration_seconds": 12.64080270001432,
     "timed_out": false,
     "failure_class": null,
     "stage_name": "engine_validation",
@@ -223,7 +223,7 @@
       "Results Structure Unverified: '_legacy_bad_filenames' has no reports/run_metadata.json (treated as non-script run).",
       "Results Structure Unverified: '_legacy_root_pollution_2026-05-25' has no reports/run_metadata.json (treated as non-script run)."
     ],
-    "duration_seconds": 0.010501100041437894,
+    "duration_seconds": 0.00984519999474287,
     "timed_out": false,
     "failure_class": null,
     "stage_name": "hygiene_validation",
@@ -233,7 +233,7 @@
     "status": "success",
     "errors": [],
     "warnings": [],
-    "duration_seconds": 0.09541100001661107,
+    "duration_seconds": 0.09579710004618391,
     "timed_out": false,
     "failure_class": null,
     "stage_name": "math_validation",
@@ -262,7 +262,7 @@
         "artifacts": 111457,
         "audit_reports": 497,
         "tool_health": 93,
-        "registry_snapshots": 2780,
+        "registry_snapshots": 3235,
         "claim_evidence_links": 18,
         "supersession_edges": 73,
         "orientation_status_types": 9,
@@ -306,7 +306,7 @@
       "ssot_boundary": "pass",
       "maintenance_recommendations": []
     },
-    "duration_seconds": 630.0143066999735,
+    "duration_seconds": 5.556064100004733,
     "timed_out": false,
     "failure_class": null,
     "stage_name": "db_validation",
@@ -319,7 +319,7 @@
     "checked_files": [
       "outputs/math_tests/mt_counterexample_orientation_locking_result.json"
     ],
-    "duration_seconds": 0.04741090000607073,
+    "duration_seconds": 0.0003914999542757869,
     "timed_out": false,
     "failure_class": null,
     "stage_name": "math_test_provenance_validation",
@@ -327,7 +327,7 @@
   },
   "math_program_validation": {
     "status": "warning",
-    "timestamp": "2026-08-01T23:39:47.598043",
+    "timestamp": "2026-08-02T23:29:40.241345",
     "validators_run": [
       "../validation/validate_core_expression_presence.py",
       "validate_formal_objects.py",
@@ -830,7 +830,7 @@
       "s_arbitration": {
         "status": "pass",
         "validation_id": "VAL-S-ARB-001",
-        "timestamp": "2026-08-01T23:40:17.557799",
+        "timestamp": "2026-08-02T23:29:41.468109",
         "closure_gaps": {
           "count": 0,
           "items": []
@@ -905,7 +905,7 @@
       "equivalence_relations": {
         "status": "pass",
         "validation_id": "VAL-EQ-VALID-001",
-        "timestamp": "2026-08-01T23:40:18.013914",
+        "timestamp": "2026-08-02T23:29:41.726040",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -1828,14 +1828,32 @@
         }
       },
       "minimal_theorems": {
-        "status": "warning",
+        "status": "pass",
         "closure_gaps": {
           "count": 0,
           "items": []
         },
         "warnings": {
-          "count": 0,
-          "items": []
+          "count": 14,
+          "items": [
+            "Theorem MT-SYN-001 references unknown operator: D",
+            "Theorem MT-SYN-001 references unknown operator: <=>_R",
+            "Theorem MT-ONT-001 references unknown operator: (*|*)",
+            "Theorem MT-ONT-001 references unknown operator: <-S->",
+            "Theorem MT-ONT-001 references unknown operator: (A|E)"
+          ],
+          "truncated": true
+        },
+        "dependency_gaps": {
+          "count": 14,
+          "items": [
+            "Theorem MT-SYN-001 references unknown operator: D",
+            "Theorem MT-SYN-001 references unknown operator: <=>_R",
+            "Theorem MT-ONT-001 references unknown operator: (*|*)",
+            "Theorem MT-ONT-001 references unknown operator: <-S->",
+            "Theorem MT-ONT-001 references unknown operator: (A|E)"
+          ],
+          "truncated": true
         }
       },
       "sum_operator_convergence": {
@@ -2263,8 +2281,8 @@
         }
       },
       "mt_law_a_foundations_audit": {
-        "status": "unknown",
-        "timestamp": "2026-08-01T23:40:27.213878",
+        "status": "pass",
+        "timestamp": "2026-08-02T23:29:48.084983",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2273,7 +2291,7 @@
       "operator_discipline": {
         "status": "pass",
         "validation_id": "VAL-OP-DISC-001",
-        "timestamp": "2026-08-01T23:40:27.775523",
+        "timestamp": "2026-08-02T23:29:48.617355",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2282,7 +2300,7 @@
       "ltc_selection_gate": {
         "status": "pass",
         "validation_id": "VAL-LTC-GATE-001",
-        "timestamp": "2026-08-01T23:40:27.846728",
+        "timestamp": "2026-08-02T23:29:48.668338",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2291,7 +2309,7 @@
       "pi_a_persistence_scaffold": {
         "status": "pass",
         "validation_id": "VAL-LTC-SCAFFOLD-001",
-        "timestamp": "2026-08-01T23:40:27.901049",
+        "timestamp": "2026-08-02T23:29:48.711391",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2300,7 +2318,7 @@
       "pi_a_boundary_mapping": {
         "status": "pass",
         "validation_id": "VAL-PO-BOUNDARY-MAP-001",
-        "timestamp": "2026-08-01T23:40:27.966051",
+        "timestamp": "2026-08-02T23:29:48.751726",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2308,7 +2326,7 @@
       },
       "mt_law_a_foundations_resolution": {
         "status": "pass",
-        "timestamp": "2026-08-01T23:40:28.065240",
+        "timestamp": "2026-08-02T23:29:48.807938",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2317,7 +2335,7 @@
       "pi_a_proof_attempt": {
         "status": "pass",
         "validation_id": "VAL-LTC-ATTEMPT-001",
-        "timestamp": "2026-08-01T23:40:28.144240",
+        "timestamp": "2026-08-02T23:29:48.850876",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2326,7 +2344,7 @@
       "pi_a_counterexample_campaign": {
         "status": "pass",
         "validation_id": "VAL-LTC-CAMPAIGN-001",
-        "timestamp": "2026-08-01T23:40:28.204754",
+        "timestamp": "2026-08-02T23:29:48.884569",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2335,7 +2353,7 @@
       "pi_a_reconciliation_atlas": {
         "status": "pass",
         "validation_id": "VAL-LTC-ATLAS-001",
-        "timestamp": "2026-08-01T23:40:28.259987",
+        "timestamp": "2026-08-02T23:29:48.935014",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2344,7 +2362,7 @@
       "recursive_basin_classification": {
         "status": "pass",
         "validation_id": "VAL-LTC-BASIN-001",
-        "timestamp": "2026-08-01T23:40:28.345500",
+        "timestamp": "2026-08-02T23:29:48.985022",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2353,7 +2371,7 @@
       "stable_basin_eligibility": {
         "status": "pass",
         "validation_id": "VAL-LTC-ELIG-001",
-        "timestamp": "2026-08-01T23:40:28.423922",
+        "timestamp": "2026-08-02T23:29:49.034943",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2362,7 +2380,7 @@
       "restricted_proof_segment": {
         "status": "pass",
         "validation_id": "VAL-RLP-DRAFT-001",
-        "timestamp": "2026-08-01T23:40:28.491847",
+        "timestamp": "2026-08-02T23:29:49.076580",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2371,7 +2389,7 @@
       "restricted_proof_consistency": {
         "status": "pass",
         "validation_id": "VAL-RLP-CONS-VALID-001",
-        "timestamp": "2026-08-01T23:40:28.553499",
+        "timestamp": "2026-08-02T23:29:49.116522",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2380,7 +2398,7 @@
       "restricted_stability_consolidation": {
         "status": "pass",
         "validation_id": "VAL-RLSC-VALID-001",
-        "timestamp": "2026-08-01T23:40:28.621903",
+        "timestamp": "2026-08-02T23:29:49.164086",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2389,7 +2407,7 @@
       "local_theorem_readiness": {
         "status": "pass",
         "validation_id": "VAL-LTRA-VALID-001",
-        "timestamp": "2026-08-01T23:40:28.682297",
+        "timestamp": "2026-08-02T23:29:49.200815",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2398,7 +2416,7 @@
       "ts4_review_gate": {
         "status": "pass",
         "validation_id": "VAL-TS4-RG-VALID-001",
-        "timestamp": "2026-08-01T23:40:28.743977",
+        "timestamp": "2026-08-02T23:29:49.258984",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2407,7 +2425,7 @@
       "ts4_restricted_review": {
         "status": "pass",
         "validation_id": "VAL-TS4-RLR-VALID-001",
-        "timestamp": "2026-08-01T23:40:28.806960",
+        "timestamp": "2026-08-02T23:29:49.306794",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2416,7 +2434,7 @@
       "ts4_stability_reconciliation": {
         "status": "pass",
         "validation_id": "VAL-TS4-SR-VALID-001",
-        "timestamp": "2026-08-01T23:40:28.852958",
+        "timestamp": "2026-08-02T23:29:49.338853",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2425,7 +2443,7 @@
       "ts4_boundary_hardening": {
         "status": "pass",
         "validation_id": "VAL-TS4-BH-VALID-001",
-        "timestamp": "2026-08-01T23:40:28.952687",
+        "timestamp": "2026-08-02T23:29:49.385128",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2434,7 +2452,7 @@
       "mpf_sim_001_stability": {
         "status": "pass",
         "validation_id": "VAL-SIM-001-VALID",
-        "timestamp": "2026-08-01T23:40:29.009329",
+        "timestamp": "2026-08-02T23:29:49.434977",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2443,7 +2461,7 @@
       "mpf_sim_002_boundary_inflation": {
         "status": "pass",
         "validation_id": "VAL-SIM-002-VALID",
-        "timestamp": "2026-08-01T23:40:29.063330",
+        "timestamp": "2026-08-02T23:29:49.477011",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2452,7 +2470,7 @@
       "mpf_sim_003_metastability": {
         "status": "pass",
         "validation_id": "VAL-SIM-003-VALID",
-        "timestamp": "2026-08-01T23:40:29.119350",
+        "timestamp": "2026-08-02T23:29:49.518333",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2461,7 +2479,7 @@
       "mpf_sim_004_lambda": {
         "status": "pass",
         "validation_id": "VAL-SIM-004-VALID",
-        "timestamp": "2026-08-01T23:40:29.199440",
+        "timestamp": "2026-08-02T23:29:49.567329",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2470,7 +2488,7 @@
       "mpf_sim_005_phase_transition": {
         "status": "pass",
         "validation_id": "VAL-SIM-005-VALID",
-        "timestamp": "2026-08-01T23:40:29.260552",
+        "timestamp": "2026-08-02T23:29:49.601676",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2479,7 +2497,7 @@
       "mpf_sim_006_atlas": {
         "status": "pass",
         "validation_id": "VAL-SIM-006-VALID",
-        "timestamp": "2026-08-01T23:40:29.332182",
+        "timestamp": "2026-08-02T23:29:49.651756",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2488,7 +2506,7 @@
       "mpf_sim_007_repair_queue": {
         "status": "pass",
         "validation_id": "VAL-SIM-007-VALID",
-        "timestamp": "2026-08-01T23:40:29.427363",
+        "timestamp": "2026-08-02T23:29:49.700776",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2497,7 +2515,7 @@
       "mpf_sim_008_recovery": {
         "status": "pass",
         "validation_id": "VAL-SIM-008-VALID",
-        "timestamp": "2026-08-01T23:40:29.509700",
+        "timestamp": "2026-08-02T23:29:49.734609",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2506,7 +2524,7 @@
       "mpf_sim_009_memory": {
         "status": "pass",
         "validation_id": "VAL-SIM-009-VALID",
-        "timestamp": "2026-08-01T23:40:29.581217",
+        "timestamp": "2026-08-02T23:29:49.788236",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2515,7 +2533,7 @@
       "mpf_sim_011_hysteresis": {
         "status": "pass",
         "validation_id": "VAL-SIM-011-VALID",
-        "timestamp": "2026-08-01T23:40:29.637248",
+        "timestamp": "2026-08-02T23:29:49.835121",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2524,7 +2542,7 @@
       "mpf_sim_012_geology": {
         "status": "pass",
         "validation_id": "VAL-SIM-012-VALID",
-        "timestamp": "2026-08-01T23:40:29.704567",
+        "timestamp": "2026-08-02T23:29:49.886570",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2533,7 +2551,7 @@
       "mpf_sim_013_impact_audit": {
         "status": "pass",
         "validation_id": "VAL-SIM-013-VALID",
-        "timestamp": "2026-08-01T23:40:29.768941",
+        "timestamp": "2026-08-02T23:29:49.918358",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2542,7 +2560,7 @@
       "mpf_dep_001_reconciliation": {
         "status": "pass",
         "validation_id": "VAL-DEP-VALID-001",
-        "timestamp": "2026-08-01T23:40:29.830889",
+        "timestamp": "2026-08-02T23:29:49.967518",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2551,7 +2569,7 @@
       "mpf_dep_002_rc_map": {
         "status": "pass",
         "validation_id": "VAL-RC-MAP-VALID",
-        "timestamp": "2026-08-01T23:40:29.920319",
+        "timestamp": "2026-08-02T23:29:50.019775",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2560,7 +2578,7 @@
       "mpf_dep_003_rc_repair": {
         "status": "pass",
         "validation_id": "VAL-RC-EXEC-VALID",
-        "timestamp": "2026-08-01T23:40:30.011596",
+        "timestamp": "2026-08-02T23:29:50.068777",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2569,7 +2587,7 @@
       "mpf_dep_004_firewall": {
         "status": "pass",
         "validation_id": "VAL-RIF-VALID",
-        "timestamp": "2026-08-01T23:40:30.069825",
+        "timestamp": "2026-08-02T23:29:50.101820",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2578,7 +2596,7 @@
       "mpf_dep_005_admission": {
         "status": "pass",
         "validation_id": "VAL-RDAG-VALID",
-        "timestamp": "2026-08-01T23:40:30.154363",
+        "timestamp": "2026-08-02T23:29:50.152757",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2587,7 +2605,7 @@
       "mpf_dep_006_closure_audit": {
         "status": "pass",
         "validation_id": "VAL-DRCA-VALID-001",
-        "timestamp": "2026-08-01T23:40:30.304283",
+        "timestamp": "2026-08-02T23:29:50.205906",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2596,7 +2614,7 @@
       "mpf_res_001_taxonomy": {
         "status": "pass",
         "validation_id": "VAL-URS-VALID-001",
-        "timestamp": "2026-08-01T23:40:30.395565",
+        "timestamp": "2026-08-02T23:29:50.249118",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2605,7 +2623,7 @@
       "mpf_res_002_queue": {
         "status": "pass",
         "validation_id": "VAL-URS-RES-VALID-001",
-        "timestamp": "2026-08-01T23:40:30.460103",
+        "timestamp": "2026-08-02T23:29:50.288992",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2614,7 +2632,7 @@
       "mpf_res_003_lifecycle": {
         "status": "pass",
         "validation_id": "VAL-URS-LC-VALID-001",
-        "timestamp": "2026-08-01T23:40:30.547410",
+        "timestamp": "2026-08-02T23:29:50.335004",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2624,7 +2642,7 @@
       "mpf_res_005_drift_audit": {
         "status": "pass",
         "validation_id": "VAL-RGD-FRAME-VALID-001",
-        "timestamp": "2026-08-01T23:40:30.624407",
+        "timestamp": "2026-08-02T23:29:50.385827",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2633,7 +2651,7 @@
       "mpf_res_006_containment_stress": {
         "status": "pass",
         "validation_id": "VAL-RCS-FRAME-VALID-001",
-        "timestamp": "2026-08-01T23:40:30.698454",
+        "timestamp": "2026-08-02T23:29:50.432100",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2642,7 +2660,7 @@
       "mpf_res_006_failure_geometry": {
         "status": "pass",
         "validation_id": "VAL-CFG-REG-VALID-001",
-        "timestamp": "2026-08-01T23:40:30.775726",
+        "timestamp": "2026-08-02T23:29:50.476556",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2651,7 +2669,7 @@
       "mpf_res_006_boundary_isolation": {
         "status": "pass",
         "validation_id": "VAL-RGD-ISO-VALID-001",
-        "timestamp": "2026-08-01T23:40:30.827446",
+        "timestamp": "2026-08-02T23:29:50.518457",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2660,7 +2678,7 @@
       "mpf_res_006_quarantine_integrity": {
         "status": "pass",
         "validation_id": "VAL-RCS-QUAR-VALID-001",
-        "timestamp": "2026-08-01T23:40:30.884229",
+        "timestamp": "2026-08-02T23:29:50.551522",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2669,7 +2687,7 @@
       "mpf_res_006_cross_lane_containment": {
         "status": "pass",
         "validation_id": "VAL-RCS-LANE-VALID-001",
-        "timestamp": "2026-08-01T23:40:30.935517",
+        "timestamp": "2026-08-02T23:29:50.601730",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2678,7 +2696,7 @@
       "mpf_res_007_adaptive_incompleteness": {
         "status": "pass",
         "validation_id": "VAL-AIS-REG-VALID-001",
-        "timestamp": "2026-08-01T23:40:30.995480",
+        "timestamp": "2026-08-02T23:29:50.648534",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2688,7 +2706,7 @@
       "mpf_res_007_irreducible_preservation": {
         "status": "pass",
         "validation_id": "VAL-IPP-REG-VALID-001",
-        "timestamp": "2026-08-01T23:40:31.061110",
+        "timestamp": "2026-08-02T23:29:50.684585",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2698,7 +2716,7 @@
       "mpf_res_008_ecology_registry": {
         "status": "pass",
         "validation_id": "VAL-RBE-REG-VALID-001",
-        "timestamp": "2026-08-01T23:40:31.121320",
+        "timestamp": "2026-08-02T23:29:50.735155",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2708,7 +2726,7 @@
       "mpf_res_008_topology": {
         "status": "pass",
         "validation_id": "VAL-BIT-REG-VALID-001",
-        "timestamp": "2026-08-01T23:40:31.183931",
+        "timestamp": "2026-08-02T23:29:50.784005",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2717,7 +2735,7 @@
       "mpf_res_008_pressure_fields": {
         "status": "pass",
         "validation_id": "VAL-EPF-REG-VALID-001",
-        "timestamp": "2026-08-01T23:40:31.259943",
+        "timestamp": "2026-08-02T23:29:50.826641",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2726,7 +2744,7 @@
       "mpf_res_009_climate_registry": {
         "status": "pass",
         "validation_id": "VAL-ECR-REG-VALID-001",
-        "timestamp": "2026-08-01T23:40:31.312818",
+        "timestamp": "2026-08-02T23:29:50.873477",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2735,7 +2753,7 @@
       "mpf_res_009_climate_thresholds": {
         "status": "pass",
         "validation_id": "VAL-ECT-REG-VALID-001",
-        "timestamp": "2026-08-01T23:40:31.358952",
+        "timestamp": "2026-08-02T23:29:50.914421",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2744,7 +2762,7 @@
       "mpf_res_010_resumption_gate": {
         "status": "pass",
         "validation_id": "VAL-GRR-REG-VALID-001",
-        "timestamp": "2026-08-01T23:40:31.424534",
+        "timestamp": "2026-08-02T23:29:50.961438",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2753,7 +2771,7 @@
       "mpf_res_010_topology_constraints": {
         "status": "pass",
         "validation_id": "VAL-TER-REG-VALID-001",
-        "timestamp": "2026-08-01T23:40:31.500161",
+        "timestamp": "2026-08-02T23:29:51.001770",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2762,7 +2780,7 @@
       "mpf_topo_001_restart": {
         "status": "pass",
         "validation_id": "VAL-RLT-REG-VALID-001",
-        "timestamp": "2026-08-01T23:40:31.560427",
+        "timestamp": "2026-08-02T23:29:51.051707",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2771,7 +2789,7 @@
       "mpf_topo_001_constraints": {
         "status": "pass",
         "validation_id": "VAL-LTEC-REG-VALID-001",
-        "timestamp": "2026-08-01T23:40:31.619250",
+        "timestamp": "2026-08-02T23:29:51.085647",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2780,7 +2798,7 @@
       "mpf_topo_002_bounded_transition": {
         "status": "pass",
         "validation_id": "VAL-BLT-REG-VALID-001",
-        "timestamp": "2026-08-01T23:40:31.686984",
+        "timestamp": "2026-08-02T23:29:51.135116",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2790,7 +2808,7 @@
       "mpf_topo_002_transition_constraints": {
         "status": "pass",
         "validation_id": "VAL-LTC-REG-VALID-001",
-        "timestamp": "2026-08-01T23:40:31.747891",
+        "timestamp": "2026-08-02T23:29:51.186872",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2799,7 +2817,7 @@
       "mpf_topo_003_reconfiguration": {
         "status": "pass",
         "validation_id": "VAL-LCR-REG-VALID-001",
-        "timestamp": "2026-08-01T23:40:31.822794",
+        "timestamp": "2026-08-02T23:29:51.218365",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2809,7 +2827,7 @@
       "mpf_topo_003_reconfig_constraints": {
         "status": "pass",
         "validation_id": "VAL-RCR-REG-VALID-001",
-        "timestamp": "2026-08-01T23:40:31.880990",
+        "timestamp": "2026-08-02T23:29:51.265841",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2818,7 +2836,7 @@
       "mpf_topo_003_topology_maps": {
         "status": "pass",
         "validation_id": "VAL-LCTM-REG-VALID-001",
-        "timestamp": "2026-08-01T23:40:31.945261",
+        "timestamp": "2026-08-02T23:29:51.313013",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2828,7 +2846,7 @@
       "mpf_topo_004_orientation_field": {
         "status": "pass",
         "validation_id": "VAL-BOFD-REG-VALID-001",
-        "timestamp": "2026-08-01T23:40:31.993559",
+        "timestamp": "2026-08-02T23:29:51.351837",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2838,7 +2856,7 @@
       "mpf_topo_004_orientation_constraints": {
         "status": "pass",
         "validation_id": "VAL-OFC-REG-VALID-001",
-        "timestamp": "2026-08-01T23:40:32.066520",
+        "timestamp": "2026-08-02T23:29:51.397662",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2847,7 +2865,7 @@
       "mpf_topo_004_gradient_maps": {
         "status": "pass",
         "validation_id": "VAL-OGM-REG-VALID-001",
-        "timestamp": "2026-08-01T23:40:32.113657",
+        "timestamp": "2026-08-02T23:29:51.435118",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2857,7 +2875,7 @@
       "mpf_topo_005_corridor_analysis": {
         "status": "pass",
         "validation_id": "VAL-FACA-REG-VALID-001",
-        "timestamp": "2026-08-01T23:40:32.169313",
+        "timestamp": "2026-08-02T23:29:51.482108",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2867,7 +2885,7 @@
       "mpf_topo_005_corridor_constraints": {
         "status": "pass",
         "validation_id": "VAL-CC-REG-VALID-001",
-        "timestamp": "2026-08-01T23:40:32.241186",
+        "timestamp": "2026-08-02T23:29:51.529333",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2876,7 +2894,7 @@
       "mpf_topo_005_pathway_maps": {
         "status": "pass",
         "validation_id": "VAL-APM-REG-VALID-001",
-        "timestamp": "2026-08-01T23:40:32.297257",
+        "timestamp": "2026-08-02T23:29:51.577049",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2886,7 +2904,7 @@
       "mpf_topo_006_basin_formation": {
         "status": "pass",
         "validation_id": "VAL-LCB-REG-VALID-001",
-        "timestamp": "2026-08-01T23:40:32.397266",
+        "timestamp": "2026-08-02T23:29:51.624021",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2896,7 +2914,7 @@
       "mpf_topo_006_basin_constraints": {
         "status": "pass",
         "validation_id": "VAL-BC-REG-VALID-001",
-        "timestamp": "2026-08-01T23:40:32.462887",
+        "timestamp": "2026-08-02T23:29:51.671681",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2905,7 +2923,7 @@
       "mpf_topo_006_basin_maps": {
         "status": "pass",
         "validation_id": "VAL-CBM-REG-VALID-001",
-        "timestamp": "2026-08-01T23:40:32.513583",
+        "timestamp": "2026-08-02T23:29:51.719030",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2915,7 +2933,7 @@
       "mpf_topo_core_001_primitives": {
         "status": "pass",
         "validation_id": "VAL-TOPO-PRIM-001",
-        "timestamp": "2026-08-01T23:40:32.596580",
+        "timestamp": "2026-08-02T23:29:51.766727",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2924,7 +2942,7 @@
       "mpf_topo_bound_001_boundaries": {
         "status": "pass",
         "validation_id": "VAL-TOPO-BOUND-001",
-        "timestamp": "2026-08-01T23:40:32.650232",
+        "timestamp": "2026-08-02T23:29:51.813878",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2933,7 +2951,7 @@
       "mpf_topo_trans_001_transitions": {
         "status": "pass",
         "validation_id": "VAL-TOPO-TRANS-001",
-        "timestamp": "2026-08-01T23:40:32.721915",
+        "timestamp": "2026-08-02T23:29:51.861406",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2942,7 +2960,7 @@
       "mpf_topo_reconfig_001_audit": {
         "status": "pass",
         "validation_id": "VAL-TOPO-RECONFIG-001",
-        "timestamp": "2026-08-01T23:40:32.776007",
+        "timestamp": "2026-08-02T23:29:51.909113",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2952,7 +2970,7 @@
       "mpf_topo_dist_001_distinctions": {
         "status": "pass",
         "validation_id": "VAL-TOPO-DIST-001",
-        "timestamp": "2026-08-01T23:40:32.837211",
+        "timestamp": "2026-08-02T23:29:51.950825",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2961,7 +2979,7 @@
       "mpf_topo_007_flow": {
         "status": "pass",
         "validation_id": "VAL-BCF-REG-VALID-001",
-        "timestamp": "2026-08-01T23:40:32.927042",
+        "timestamp": "2026-08-02T23:29:52.001291",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2971,7 +2989,7 @@
       "mpf_topo_007_flow_constraints": {
         "status": "pass",
         "validation_id": "VAL-FC-REG-VALID-001",
-        "timestamp": "2026-08-01T23:40:32.978955",
+        "timestamp": "2026-08-02T23:29:52.035243",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2980,7 +2998,7 @@
       "mpf_topo_007_flow_mapping": {
         "status": "pass",
         "validation_id": "VAL-CFM-REG-VALID-001",
-        "timestamp": "2026-08-01T23:40:33.039455",
+        "timestamp": "2026-08-02T23:29:52.085224",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2990,7 +3008,7 @@
       "mpf_palg_001_phase": {
         "status": "pass",
         "validation_id": "VAL-PALG-PHASE-001",
-        "timestamp": "2026-08-01T23:40:33.088039",
+        "timestamp": "2026-08-02T23:29:52.135125",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -2999,7 +3017,7 @@
       "mpf_palg_002_bc_equivalence": {
         "status": "pass",
         "validation_id": "VAL-OP-BCR-VALID-001",
-        "timestamp": "2026-08-01T23:40:33.144739",
+        "timestamp": "2026-08-02T23:29:52.168666",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3008,7 +3026,7 @@
       "mpf_palg_003_exclusion": {
         "status": "pass",
         "validation_id": "VAL-OP-EAA-VALID-001",
-        "timestamp": "2026-08-01T23:40:33.197567",
+        "timestamp": "2026-08-02T23:29:52.218510",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3017,7 +3035,7 @@
       "mpf_palg_004_polarity_preservation": {
         "status": "pass",
         "validation_id": "VAL-LAW-RPP-VALID-001",
-        "timestamp": "2026-08-01T23:40:33.252554",
+        "timestamp": "2026-08-02T23:29:52.270959",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3026,7 +3044,7 @@
       "mpf_palg_005_non_separability": {
         "status": "pass",
         "validation_id": "VAL-PRIN-ANSP-VALID-001",
-        "timestamp": "2026-08-01T23:40:33.307386",
+        "timestamp": "2026-08-02T23:29:52.320887",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3035,7 +3053,7 @@
       "mpf_palg_006_projection_governance": {
         "status": "pass",
         "validation_id": "VAL-PBG-VALID-001",
-        "timestamp": "2026-08-01T23:40:33.368780",
+        "timestamp": "2026-08-02T23:29:52.354487",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3044,7 +3062,7 @@
       "mpf_palg_007_aspect_trace": {
         "status": "pass",
         "validation_id": "VAL-PALG-TRACE-VALID-001",
-        "timestamp": "2026-08-01T23:40:33.442323",
+        "timestamp": "2026-08-02T23:29:52.401964",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3053,13 +3071,13 @@
       "mpf_palg_008_whole_relation_gate": {
         "status": "pass",
         "validation_id": "VAL-PALG-GATE-AUDIT-001",
-        "timestamp": "2026-08-01T23:40:33.493224",
+        "timestamp": "2026-08-02T23:29:52.459036",
         "failed_checks": 0
       },
       "mpf_palg_009_minimal_expressions": {
         "status": "pass",
         "validation_id": "VAL-PALG-EXPR-VALID-001",
-        "timestamp": "2026-08-01T23:40:33.568791",
+        "timestamp": "2026-08-02T23:29:52.519152",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3068,7 +3086,7 @@
       "mpf_palg_010_expansion_queue": {
         "status": "pass",
         "validation_id": "VAL-PALG-QUEUE-VALID-001",
-        "timestamp": "2026-08-01T23:40:33.624604",
+        "timestamp": "2026-08-02T23:29:52.567628",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3077,7 +3095,7 @@
       "mpf_palg_011_nested_review": {
         "status": "pass",
         "validation_id": "VAL-PALG-NWR-VALID-001",
-        "timestamp": "2026-08-01T23:40:33.687577",
+        "timestamp": "2026-08-02T23:29:52.611683",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3086,7 +3104,7 @@
       "mpf_palg_012_semantics_governance": {
         "status": "pass",
         "validation_id": "VAL-NRSG-VALID-001",
-        "timestamp": "2026-08-01T23:40:33.744109",
+        "timestamp": "2026-08-02T23:29:52.659408",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3095,7 +3113,7 @@
       "mpf_palg_013_projected_equality": {
         "status": "pass",
         "validation_id": "VAL-PDE-VALID-001",
-        "timestamp": "2026-08-01T23:40:33.812061",
+        "timestamp": "2026-08-02T23:29:52.701851",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3104,7 +3122,7 @@
       "mpf_palg_014_projected_implication": {
         "status": "pass",
         "validation_id": "VAL-PDI-VALID-001",
-        "timestamp": "2026-08-01T23:40:33.852981",
+        "timestamp": "2026-08-02T23:29:52.751685",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3113,7 +3131,7 @@
       "mpf_palg_015_projected_composition": {
         "status": "pass",
         "validation_id": "VAL-PDC-VALID-001",
-        "timestamp": "2026-08-01T23:40:33.930517",
+        "timestamp": "2026-08-02T23:29:52.803706",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3122,7 +3140,7 @@
       "mpf_palg_016_projected_biconditional": {
         "status": "pass",
         "validation_id": "VAL-PDB-VALID-001",
-        "timestamp": "2026-08-01T23:40:33.983161",
+        "timestamp": "2026-08-02T23:29:52.834200",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3131,15 +3149,15 @@
       "mpf_palg_017_loss_matrix": {
         "status": "pass",
         "validation_id": "VAL-PLAM-VALID-001",
-        "timestamp": "2026-08-01T23:40:34.041825",
+        "timestamp": "2026-08-02T23:29:52.885136",
         "governance_violations": {
           "count": 0,
           "items": []
         }
       },
       "mpf_palg_018_simultaneity": {
-        "status": "unknown",
-        "timestamp": "2026-08-01T23:40:34.088495",
+        "status": "pass",
+        "timestamp": "2026-08-02T23:29:52.935217",
         "overall_status": "PASS",
         "failed_checks": {
           "count": 0,
@@ -3153,7 +3171,7 @@
       "mpf_palg_019_flattening_risk": {
         "status": "pass",
         "validation_id": "VAL-WRF-VAL-001",
-        "timestamp": "2026-08-01T23:40:34.151787",
+        "timestamp": "2026-08-02T23:29:52.991644",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3163,7 +3181,7 @@
       "mpf_palg_021_projection_operators": {
         "status": "pass",
         "validation_id": "VAL-POF-VALID-001",
-        "timestamp": "2026-08-01T23:40:34.230542",
+        "timestamp": "2026-08-02T23:29:53.035138",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3173,7 +3191,7 @@
       "mpf_palg_022_projection_depth": {
         "status": "pass",
         "validation_id": "VAL-PDT-VALID-001",
-        "timestamp": "2026-08-01T23:40:34.288669",
+        "timestamp": "2026-08-02T23:29:53.086629",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3183,7 +3201,7 @@
       "mpf_palg_023_recoverability_limits": {
         "status": "pass",
         "validation_id": "VAL-PRL-VALID-001",
-        "timestamp": "2026-08-01T23:40:34.346849",
+        "timestamp": "2026-08-02T23:29:53.131356",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3193,7 +3211,7 @@
       "mpf_palg_024_multi_projection_coherence": {
         "status": "pass",
         "validation_id": "VAL-MPC-VALID-001",
-        "timestamp": "2026-08-01T23:40:34.434765",
+        "timestamp": "2026-08-02T23:29:53.168486",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3203,7 +3221,7 @@
       "mpf_palg_025_projection_geometry": {
         "status": "pass",
         "validation_id": "VAL-PIGG-VALID-001",
-        "timestamp": "2026-08-01T23:40:34.485588",
+        "timestamp": "2026-08-02T23:29:53.219122",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3213,7 +3231,7 @@
       "mpf_palg_026_persistence_dynamics": {
         "status": "pass",
         "validation_id": "VAL-PPD-VALID-001",
-        "timestamp": "2026-08-01T23:40:34.543190",
+        "timestamp": "2026-08-02T23:29:53.269890",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3223,7 +3241,7 @@
       "mpf_palg_027_orientation_dynamics": {
         "status": "pass",
         "validation_id": "VAL-POD-VALID-001",
-        "timestamp": "2026-08-01T23:40:34.603721",
+        "timestamp": "2026-08-02T23:29:53.318259",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3233,7 +3251,7 @@
       "mpf_palg_028_failure_atlas": {
         "status": "pass",
         "validation_id": "VAL-PFM-VALID-001",
-        "timestamp": "2026-08-01T23:40:34.669180",
+        "timestamp": "2026-08-02T23:29:53.361731",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3243,7 +3261,7 @@
       "mpf_palg_029_stress_scaffold": {
         "status": "pass",
         "validation_id": "VAL-PCST-VALID-001",
-        "timestamp": "2026-08-01T23:40:34.728241",
+        "timestamp": "2026-08-02T23:29:53.412725",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3253,7 +3271,7 @@
       "mpf_palg_030_consolidation_review": {
         "status": "pass",
         "validation_id": "VAL-PMCR-VALID-001",
-        "timestamp": "2026-08-01T23:40:34.790681",
+        "timestamp": "2026-08-02T23:29:53.454265",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3263,7 +3281,7 @@
       "mpf_palg_031_bridge_phase": {
         "status": "pass",
         "validation_id": "VAL-RPBP-VALID-001",
-        "timestamp": "2026-08-01T23:40:34.838460",
+        "timestamp": "2026-08-02T23:29:53.502788",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3283,7 +3301,7 @@
       "mpf_palg_032_qm_domain": {
         "status": "pass",
         "validation_id": "VAL-QMPD-VALID-001",
-        "timestamp": "2026-08-01T23:40:34.902492",
+        "timestamp": "2026-08-02T23:29:53.535826",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3303,7 +3321,7 @@
       "mpf_palg_033_gr_domain": {
         "status": "pass",
         "validation_id": "VAL-GRPD-VALID-001",
-        "timestamp": "2026-08-01T23:40:34.954458",
+        "timestamp": "2026-08-02T23:29:53.585344",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3323,7 +3341,7 @@
       "mpf_palg_034_bridge_schema": {
         "status": "pass",
         "validation_id": "VAL-BCS-VALID-001",
-        "timestamp": "2026-08-01T23:40:35.025833",
+        "timestamp": "2026-08-02T23:29:53.644628",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3343,7 +3361,7 @@
       "mpf_palg_035_bridge_gate": {
         "status": "pass",
         "gate_id": "PBNU-AUDIT-001",
-        "timestamp": "2026-08-01T23:40:35.087915",
+        "timestamp": "2026-08-02T23:29:53.689039",
         "failed_checks": {
           "count": 0,
           "items": []
@@ -3352,7 +3370,7 @@
       "mpf_palg_bridge_metrics": {
         "status": "pass",
         "validation_id": "VAL-BMCR-VALID-001",
-        "timestamp": "2026-08-01T23:40:35.160990",
+        "timestamp": "2026-08-02T23:29:53.751851",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3371,7 +3389,7 @@
       "mpf_rtop_reconstruction_topology": {
         "status": "pass",
         "validation_id": "VAL-RTC-VALID-001",
-        "timestamp": "2026-08-01T23:40:35.228441",
+        "timestamp": "2026-08-02T23:29:53.801891",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3390,7 +3408,7 @@
       "mpf_rdyn_reconstruction_dynamics": {
         "status": "pass",
         "validation_id": "VAL-RDC-VALID-001",
-        "timestamp": "2026-08-01T23:40:35.318376",
+        "timestamp": "2026-08-02T23:29:53.850868",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3410,7 +3428,7 @@
       "mpf_rsem_reconstruction_semantics": {
         "status": "pass",
         "validation_id": "VAL-RSC-VALID-001",
-        "timestamp": "2026-08-01T23:40:35.399536",
+        "timestamp": "2026-08-02T23:29:53.901833",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3430,7 +3448,7 @@
       "mpf_fsub_formal_substrate": {
         "status": "pass",
         "validation_id": "VAL-FSC-VALID-001",
-        "timestamp": "2026-08-01T23:40:35.459217",
+        "timestamp": "2026-08-02T23:29:53.951816",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3450,7 +3468,7 @@
       "mpf_rpcr_proof_candidate_review": {
         "status": "pass",
         "validation_id": "VAL-RPC-CON-VALID-001",
-        "timestamp": "2026-08-01T23:40:35.526482",
+        "timestamp": "2026-08-02T23:29:53.988742",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3470,7 +3488,7 @@
       "mpf_frpr_formal_proof_review": {
         "status": "pass",
         "validation_id": "VAL-FPC-CON-VALID-001",
-        "timestamp": "2026-08-01T23:40:35.602922",
+        "timestamp": "2026-08-02T23:29:54.035291",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3490,7 +3508,7 @@
       "mpf_palg_conv_repair": {
         "status": "pass",
         "validation_id": "VAL-CONV-REPAIR-001",
-        "timestamp": "2026-08-01T23:40:35.689729",
+        "timestamp": "2026-08-02T23:29:54.085329",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3508,7 +3526,7 @@
       "mpf_law_cons_consolidation": {
         "status": "pass",
         "validation_id": "VAL-LAW-CONS-AGGREGATE-001",
-        "timestamp": "2026-08-01T23:40:35.754950",
+        "timestamp": "2026-08-02T23:29:54.161146",
         "sub_validators": {
           "count": 8,
           "items": [
@@ -3524,7 +3542,7 @@
       "mpf_rfpr_peer_review_prep": {
         "status": "pass",
         "validation_id": "VAL-RFPR-AGGREGATE-001",
-        "timestamp": "2026-08-01T23:40:36.502555",
+        "timestamp": "2026-08-02T23:29:54.735237",
         "sub_validators": {
           "count": 9,
           "items": [
@@ -3540,7 +3558,7 @@
       "mpf_pfs_participatory_scrutiny": {
         "status": "pass",
         "validation_id": "VAL-PSC-REG-VALID-001",
-        "timestamp": "2026-08-01T23:40:37.243500",
+        "timestamp": "2026-08-02T23:29:55.322011",
         "governance_violations": {
           "count": 0,
           "items": []
@@ -3559,7 +3577,7 @@
       "mpf_par_participatory_refinement": {
         "status": "pass",
         "validation_id": "VAL-PAR-AGGREGATE-001",
-        "timestamp": "2026-08-01T23:40:37.331132",
+        "timestamp": "2026-08-02T23:29:55.385370",
         "sub_validators": {
           "count": 9,
           "items": [
@@ -3575,7 +3593,7 @@
       "mpf_pstab_formal_stabilization": {
         "status": "pass",
         "validation_id": "VAL-PSTAB-AGGREGATE-001",
-        "timestamp": "2026-08-01T23:40:38.022002",
+        "timestamp": "2026-08-02T23:29:55.972254",
         "sub_validators": {
           "count": 9,
           "items": [
@@ -3600,19 +3618,31 @@
       "Validation here is structural and fixture-based; mechanism-specific pruning implementations remain local validation targets.",
       "Validation is fixture-based and structural; engine-specific pruning implementations still require local runtime corroboration."
     ],
-    "warnings": [],
-    "duration_seconds": 51.10941009997623,
+    "warnings": [
+      "Theorem MT-SYN-001 references unknown operator: D",
+      "Theorem MT-SYN-001 references unknown operator: <=>_R",
+      "Theorem MT-ONT-001 references unknown operator: (*|*)",
+      "Theorem MT-ONT-001 references unknown operator: <-S->",
+      "Theorem MT-ONT-001 references unknown operator: (A|E)",
+      "Theorem MT-RT-001 references unknown operator: D",
+      "Theorem MT-ASYM-001 references unknown operator: Omega_a",
+      "Theorem MT-ASYM-001 references unknown operator: O*",
+      "Theorem MT-SIGN-001 references unknown operator: Sign",
+      "Theorem MT-GOV-001 references unknown operator: Gov",
+      "Theorem MT-GOV-001 references unknown operator: Admissibility",
+      "Theorem MT-BRD-001 references unknown operator: F_proj",
+      "Theorem MT-BRD-001 references unknown operator: Closure",
+      "Theorem MT-PALG-001 references unknown operator: \u21d4R"
+    ],
+    "duration_seconds": 16.32377349998569,
     "timed_out": false,
     "failure_class": null,
     "stage_name": "math_program_validation",
     "normalized_status": "warning"
   },
   "textbook_projection_freshness_validation": {
-    "status": "failed",
-    "errors": [
-      "Textbook projection hash mismatch: expected BFFFEA47BE4EFD1B6BEE1BA4D992042A31A33C052F27D9944C255F78DA821BEB, observed F4825BA4174008EEE2A11C626681FB8A707780935D802F1EA6D5BC652F53B032.",
-      "Textbook source drift: registry/induction_registry.json; expected 5128A7B6947623683E921B31BC6D4665DEC520870B563C3881686DCD76E30D83, observed A5758BDB88CC11269E523FF315D7369013202715F9933C7E3EBB334A1C238301."
-    ],
+    "status": "success",
+    "errors": [],
     "warnings": [],
     "items_checked": 21,
     "work_expectation": "REQUIRED",
@@ -3620,8 +3650,8 @@
     "targets_discovered": 1,
     "targets_attempted": 1,
     "targets_completed": 1,
-    "passed_count": 0,
-    "failed_count": 1,
+    "passed_count": 1,
+    "failed_count": 0,
     "evidence_paths": [
       "governance/live/textbook_projection_freshness_contract.json",
       "docs/textbook/mono_process_textbook_complete.md",
@@ -3647,19 +3677,19 @@
       "docs/governance/GLOBAL_VALIDATION_ROUTINE.md"
     ],
     "contract_id": "TEXTBOOK_PROJECTION_FRESHNESS_CONTRACT_001",
-    "canonical_snapshot_id": "REFRESH-20260731T080450119615Z",
+    "canonical_snapshot_id": "REFRESH-20260802T052510203819Z",
     "dependency_count": 20,
-    "duration_seconds": 0.12112670001806691,
+    "duration_seconds": 0.025653199991211295,
     "timed_out": false,
-    "failure_class": "semantic_failure",
+    "failure_class": null,
     "stage_name": "textbook_projection_freshness_validation",
-    "normalized_status": "failed"
+    "normalized_status": "success"
   },
   "implementation_validation": {
     "status": "success",
     "errors": [],
     "warnings": [],
-    "duration_seconds": 0.002036699966993183,
+    "duration_seconds": 0.0024089000071398914,
     "timed_out": false,
     "failure_class": null,
     "stage_name": "implementation_validation",
@@ -3669,7 +3699,7 @@
     "status": "success",
     "errors": [],
     "warnings": [],
-    "duration_seconds": 0.0002835000050254166,
+    "duration_seconds": 0.00023549998877570033,
     "timed_out": false,
     "failure_class": null,
     "stage_name": "evidence_validation",
@@ -3679,7 +3709,7 @@
     "status": "success",
     "errors": [],
     "warnings": [],
-    "duration_seconds": 0.00021119997836649418,
+    "duration_seconds": 0.0003405000315979123,
     "timed_out": false,
     "failure_class": null,
     "stage_name": "campaign_validation",
@@ -3690,7 +3720,7 @@
     "errors": [],
     "warnings": [],
     "verified_count": 115,
-    "duration_seconds": 0.6420389999984764,
+    "duration_seconds": 0.016200400015804917,
     "timed_out": false,
     "failure_class": null,
     "stage_name": "governance_integrity_validation",
@@ -3708,7 +3738,7 @@
       "patch_chain_view_present"
     ],
     "items_checked": 4,
-    "duration_seconds": 0.001869700034148991,
+    "duration_seconds": 0.0012601999915204942,
     "timed_out": false,
     "failure_class": null,
     "stage_name": "db_runtime_validation",
@@ -3795,9 +3825,9 @@
       ]
     },
     "governance_status": "mixed",
-    "logging_mode": "default",
+    "logging_mode": "suppressed",
     "items_checked": 178,
-    "duration_seconds": 2.6603827999788336,
+    "duration_seconds": 1.4276415000203997,
     "timed_out": false,
     "failure_class": null,
     "stage_name": "patch_chain_validation",
@@ -3808,7 +3838,7 @@
       "stage": "unified_manifest_validation",
       "status": "success",
       "failure_class": "none",
-      "duration_seconds": 0.001982,
+      "duration_seconds": 0.00199,
       "timed_out": false,
       "error_count": 0,
       "warning_count": 0,
@@ -3847,7 +3877,7 @@
       "stage": "registry_validation",
       "status": "success",
       "failure_class": "none",
-      "duration_seconds": 0.006315,
+      "duration_seconds": 0.007635,
       "timed_out": false,
       "error_count": 0,
       "warning_count": 0,
@@ -3886,7 +3916,7 @@
       "stage": "engine_validation",
       "status": "success",
       "failure_class": "none",
-      "duration_seconds": 15.755788,
+      "duration_seconds": 12.640803,
       "timed_out": false,
       "error_count": 0,
       "warning_count": 0,
@@ -3935,7 +3965,7 @@
       "stage": "hygiene_validation",
       "status": "success",
       "failure_class": "none",
-      "duration_seconds": 0.010501,
+      "duration_seconds": 0.009845,
       "timed_out": false,
       "error_count": 0,
       "warning_count": 0,
@@ -3974,7 +4004,7 @@
       "stage": "math_validation",
       "status": "success",
       "failure_class": "none",
-      "duration_seconds": 0.095411,
+      "duration_seconds": 0.095797,
       "timed_out": false,
       "error_count": 0,
       "warning_count": 0,
@@ -4013,7 +4043,7 @@
       "stage": "db_validation",
       "status": "success",
       "failure_class": "none",
-      "duration_seconds": 630.014307,
+      "duration_seconds": 5.556064,
       "timed_out": false,
       "error_count": 0,
       "warning_count": 0,
@@ -4052,7 +4082,7 @@
       "stage": "math_test_provenance_validation",
       "status": "pass",
       "failure_class": "none",
-      "duration_seconds": 0.047411,
+      "duration_seconds": 0.000391,
       "timed_out": false,
       "error_count": 0,
       "warning_count": 0,
@@ -4093,14 +4123,18 @@
       "stage": "math_program_validation",
       "status": "warning",
       "failure_class": "none",
-      "duration_seconds": 51.10941,
+      "duration_seconds": 16.323773,
       "timed_out": false,
       "error_count": 0,
-      "warning_count": 0,
+      "warning_count": 14,
       "result_snapshot": {
         "status": "warning",
         "errors": [],
-        "warnings": [],
+        "warnings": [
+          "Theorem MT-SYN-001 references unknown operator: D",
+          "Theorem MT-SYN-001 references unknown operator: <=>_R",
+          "Theorem MT-ONT-001 references unknown operator: (*|*)"
+        ],
         "items_checked": 267,
         "work_expectation": "REQUIRED",
         "work_state": "WORK_COMPLETED",
@@ -4130,18 +4164,15 @@
     },
     {
       "stage": "textbook_projection_freshness_validation",
-      "status": "failed",
-      "failure_class": "semantic_failure",
-      "duration_seconds": 0.121127,
+      "status": "success",
+      "failure_class": "none",
+      "duration_seconds": 0.025653,
       "timed_out": false,
-      "error_count": 2,
+      "error_count": 0,
       "warning_count": 0,
       "result_snapshot": {
-        "status": "failed",
-        "errors": [
-          "Textbook projection hash mismatch: expected BFFFEA47BE4EFD1B6BEE1BA4D992042A31A33C052F27D9944C255F78DA821BEB, observed F4825BA4174008EEE2A11C626681FB8A707780935D802F1EA6D5BC652F53B032.",
-          "Textbook source drift: registry/induction_registry.json; expected 5128A7B6947623683E921B31BC6D4665DEC520870B563C3881686DCD76E30D83, observed A5758BDB88CC11269E523FF315D7369013202715F9933C7E3EBB334A1C238301."
-        ],
+        "status": "success",
+        "errors": [],
         "warnings": [],
         "items_checked": 21,
         "work_expectation": "REQUIRED",
@@ -4150,8 +4181,8 @@
         "targets_selected": null,
         "targets_attempted": 1,
         "targets_completed": 1,
-        "passed_count": 0,
-        "failed_count": 1,
+        "passed_count": 1,
+        "failed_count": 0,
         "error_count": null,
         "zero_work_reason": null,
         "checked_patches": null,
@@ -4185,7 +4216,7 @@
       "stage": "implementation_validation",
       "status": "success",
       "failure_class": "none",
-      "duration_seconds": 0.002037,
+      "duration_seconds": 0.002409,
       "timed_out": false,
       "error_count": 0,
       "warning_count": 0,
@@ -4224,7 +4255,7 @@
       "stage": "evidence_validation",
       "status": "success",
       "failure_class": "none",
-      "duration_seconds": 0.000284,
+      "duration_seconds": 0.000235,
       "timed_out": false,
       "error_count": 0,
       "warning_count": 0,
@@ -4263,7 +4294,7 @@
       "stage": "campaign_validation",
       "status": "success",
       "failure_class": "none",
-      "duration_seconds": 0.000211,
+      "duration_seconds": 0.000341,
       "timed_out": false,
       "error_count": 0,
       "warning_count": 0,
@@ -4302,7 +4333,7 @@
       "stage": "governance_integrity_validation",
       "status": "success",
       "failure_class": "none",
-      "duration_seconds": 0.642039,
+      "duration_seconds": 0.0162,
       "timed_out": false,
       "error_count": 0,
       "warning_count": 0,
@@ -4341,7 +4372,7 @@
       "stage": "db_runtime_validation",
       "status": "success",
       "failure_class": "none",
-      "duration_seconds": 0.00187,
+      "duration_seconds": 0.00126,
       "timed_out": false,
       "error_count": 0,
       "warning_count": 0,
@@ -4380,7 +4411,7 @@
       "stage": "patch_chain_validation",
       "status": "success",
       "failure_class": "none",
-      "duration_seconds": 2.660383,
+      "duration_seconds": 1.427642,
       "timed_out": false,
       "error_count": 0,
       "warning_count": 0,
@@ -4494,7 +4525,7 @@
     {
       "stage_name": "unified_manifest_validation",
       "status": "PASS",
-      "duration_seconds": 0.001982,
+      "duration_seconds": 0.00199,
       "items_checked": 479,
       "failure_code": null,
       "failure_summary": null,
@@ -4509,7 +4540,7 @@
     {
       "stage_name": "registry_validation",
       "status": "PASS",
-      "duration_seconds": 0.006315,
+      "duration_seconds": 0.007635,
       "items_checked": 0,
       "failure_code": null,
       "failure_summary": null,
@@ -4524,7 +4555,7 @@
     {
       "stage_name": "engine_validation",
       "status": "PASS",
-      "duration_seconds": 15.755788,
+      "duration_seconds": 12.640803,
       "items_checked": 9,
       "failure_code": null,
       "failure_summary": null,
@@ -4539,7 +4570,7 @@
     {
       "stage_name": "hygiene_validation",
       "status": "PASS",
-      "duration_seconds": 0.010501,
+      "duration_seconds": 0.009845,
       "items_checked": 0,
       "failure_code": null,
       "failure_summary": null,
@@ -4554,7 +4585,7 @@
     {
       "stage_name": "math_validation",
       "status": "PASS",
-      "duration_seconds": 0.095411,
+      "duration_seconds": 0.095797,
       "items_checked": 0,
       "failure_code": null,
       "failure_summary": null,
@@ -4569,7 +4600,7 @@
     {
       "stage_name": "db_validation",
       "status": "PASS",
-      "duration_seconds": 630.014307,
+      "duration_seconds": 5.556064,
       "items_checked": 0,
       "failure_code": null,
       "failure_summary": null,
@@ -4584,7 +4615,7 @@
     {
       "stage_name": "math_test_provenance_validation",
       "status": "PASS",
-      "duration_seconds": 0.047411,
+      "duration_seconds": 0.000391,
       "items_checked": 1,
       "failure_code": null,
       "failure_summary": null,
@@ -4601,10 +4632,10 @@
     {
       "stage_name": "math_program_validation",
       "status": "WARNING",
-      "duration_seconds": 51.10941,
+      "duration_seconds": 16.323773,
       "items_checked": 267,
       "failure_code": "WARNING",
-      "failure_summary": null,
+      "failure_summary": "Theorem MT-SYN-001 references unknown operator: D",
       "evidence_paths": [],
       "work_expectation": "REQUIRED",
       "work_state": "WORK_COMPLETED",
@@ -4615,11 +4646,11 @@
     },
     {
       "stage_name": "textbook_projection_freshness_validation",
-      "status": "FAIL_SEMANTIC",
-      "duration_seconds": 0.121127,
+      "status": "PASS",
+      "duration_seconds": 0.025653,
       "items_checked": 1,
-      "failure_code": "FAIL_SEMANTIC",
-      "failure_summary": "Textbook projection hash mismatch: expected BFFFEA47BE4EFD1B6BEE1BA4D992042A31A33C052F27D9944C255F78DA821BEB, observed F4825BA4174008EEE2A11C626681FB8A707780935D802F1EA6D5BC652F53B032.",
+      "failure_code": null,
+      "failure_summary": null,
       "evidence_paths": [
         "governance/live/textbook_projection_freshness_contract.json",
         "docs/textbook/mono_process_textbook_complete.md",
@@ -4642,7 +4673,7 @@
     {
       "stage_name": "implementation_validation",
       "status": "PASS",
-      "duration_seconds": 0.002037,
+      "duration_seconds": 0.002409,
       "items_checked": 0,
       "failure_code": null,
       "failure_summary": null,
@@ -4657,7 +4688,7 @@
     {
       "stage_name": "evidence_validation",
       "status": "PASS",
-      "duration_seconds": 0.000284,
+      "duration_seconds": 0.000235,
       "items_checked": 0,
       "failure_code": null,
       "failure_summary": null,
@@ -4672,7 +4703,7 @@
     {
       "stage_name": "campaign_validation",
       "status": "PASS",
-      "duration_seconds": 0.000211,
+      "duration_seconds": 0.000341,
       "items_checked": 0,
       "failure_code": null,
       "failure_summary": null,
@@ -4687,7 +4718,7 @@
     {
       "stage_name": "governance_integrity_validation",
       "status": "PASS",
-      "duration_seconds": 0.642039,
+      "duration_seconds": 0.0162,
       "items_checked": 0,
       "failure_code": null,
       "failure_summary": null,
@@ -4702,7 +4733,7 @@
     {
       "stage_name": "db_runtime_validation",
       "status": "PASS",
-      "duration_seconds": 0.00187,
+      "duration_seconds": 0.00126,
       "items_checked": 4,
       "failure_code": null,
       "failure_summary": null,
@@ -4719,7 +4750,7 @@
     {
       "stage_name": "patch_chain_validation",
       "status": "PASS",
-      "duration_seconds": 2.660383,
+      "duration_seconds": 1.427642,
       "items_checked": 178,
       "failure_code": null,
       "failure_summary": null,
@@ -4733,11 +4764,12 @@
     },
     {
       "stage_name": "report_write",
-      "status": "STALE_REPORT_WARNING",
+      "status": "PASS",
       "duration_seconds": 0.0,
       "items_checked": 1,
-      "failure_code": "STALE_REPORT_WARNING",
-      "failure_summary": "Existing global health report was stale before this run.",
+      "failure_code": null,
+      "failure_summary": null,
+      "prior_report_stale": false,
       "evidence_paths": [
         "outputs/audits/global_health_report.json"
       ],
@@ -4770,45 +4802,66 @@
   "missing_required_stages": [],
   "incomplete_stages": [],
   "degraded_stages": [
-    "math_program_validation",
-    "report_write"
+    "math_program_validation"
   ],
-  "failed_stages": [
-    "textbook_projection_freshness_validation"
-  ],
+  "failed_stages": [],
   "unknown_status_stages": [],
   "slowest_stages": [
     {
-      "stage_name": "db_validation",
-      "status": "PASS",
-      "duration_seconds": 630.014307,
-      "items_checked": 0
-    },
-    {
       "stage_name": "math_program_validation",
       "status": "WARNING",
-      "duration_seconds": 51.10941,
+      "duration_seconds": 16.323773,
       "items_checked": 267
     },
     {
       "stage_name": "engine_validation",
       "status": "PASS",
-      "duration_seconds": 15.755788,
+      "duration_seconds": 12.640803,
       "items_checked": 9
+    },
+    {
+      "stage_name": "db_validation",
+      "status": "PASS",
+      "duration_seconds": 5.556064,
+      "items_checked": 0
     }
   ],
   "runtime_failures": [],
   "tooling_failures": [],
-  "semantic_failures": [
-    {
-      "stage_name": "textbook_projection_freshness_validation",
-      "status": "FAIL_SEMANTIC",
-      "failure_summary": "Textbook projection hash mismatch: expected BFFFEA47BE4EFD1B6BEE1BA4D992042A31A33C052F27D9944C255F78DA821BEB, observed F4825BA4174008EEE2A11C626681FB8A707780935D802F1EA6D5BC652F53B032.",
-      "duration_seconds": 0.121127
-    }
-  ],
-  "stale_report_warning": true,
-  "overall_status": "fail",
+  "semantic_failures": [],
+  "stale_report_warning": false,
+  "profile": {
+    "total_duration_seconds": 36.110414,
+    "selected_stage_count": 15,
+    "completed_stage_count": 15,
+    "timed_out_stage_count": 0,
+    "failure_class_counts": {
+      "none": 15
+    },
+    "slowest_stages": [
+      {
+        "stage_name": "math_program_validation",
+        "status": "WARNING",
+        "duration_seconds": 16.323773,
+        "items_checked": 267
+      },
+      {
+        "stage_name": "engine_validation",
+        "status": "PASS",
+        "duration_seconds": 12.640803,
+        "items_checked": 9
+      },
+      {
+        "stage_name": "db_validation",
+        "status": "PASS",
+        "duration_seconds": 5.556064,
+        "items_checked": 0
+      }
+    ]
+  },
+  "overall_status": "pass",
+  "process_outcome": "PASS",
+  "outcome_policy": "GOV_PROCESS_OUTCOME_PASS_FAIL_ONLY_001",
   "history_write_status": "disabled",
   "trend_status": "disabled",
   "trend_write_status": "disabled"
