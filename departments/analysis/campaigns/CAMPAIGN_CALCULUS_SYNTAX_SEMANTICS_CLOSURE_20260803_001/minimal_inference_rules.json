@@ -1,0 +1,11 @@
+{
+  "ruleset_id": "MINIMAL_INFERENCE_RULES_DRAFT_001",
+  "status": "NONCANONICAL_BOUNDED_RULESET",
+  "rules": [
+    {"id":"AND_INTRO","premises":["Prop","Prop"],"conclusion":"And(premise_1,premise_2)","condition":"both premises are derivable in the same context"},
+    {"id":"AND_ELIM_LEFT","premises":["And(phi,psi)"],"conclusion":"phi","condition":"structural projection"},
+    {"id":"AND_ELIM_RIGHT","premises":["And(phi,psi)"],"conclusion":"psi","condition":"structural projection"}
+  ],
+  "explicitly_not_included": ["modus ponens", "relation symmetry", "closure introduction", "global completeness", "general operator rewrite"],
+  "soundness_target": "Truth of all premises in the frozen finite model implies truth of the conclusion."
+}
