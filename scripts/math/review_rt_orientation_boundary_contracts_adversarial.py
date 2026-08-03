@@ -20,6 +20,13 @@ CASES = [
     ("ADV-PROP-001", "cross-RT propagation is rejected", "internal_carrier", {"carrier": "RT-1", "target_carrier": "RT-2", "cross_boundary_transfer": True}),
     ("ADV-CLOSE-001", "closure order loss is rejected", "closure_order", {"children": ["p1", "p2", "p3"], "output_order": ["p2", "p1", "p3"]}),
     ("ADV-EVAL-001", "scalar primitive evaluation is rejected", "orientation_field", {"evaluation_output_type": "scalar", "scalar_magnitude": 1}),
+    ("ADV-BOUNDARY-001", "missing boundary condition is rejected", "boundary_condition", {"boundary_update": False}),
+    ("ADV-ALIGN-001", "invalid reference alignment is rejected", "reference_alignment", {"alignment_status": "unresolved"}),
+    ("ADV-ID-001", "duplicate child identity is rejected", "child_identity", {"children": ["RT-1", "RT-1"]}),
+    ("ADV-DEPTH-001", "invalid bit depth is rejected", "bit_depth", {"bit_depth": -1}),
+    ("ADV-DENSITY-001", "density loss during closure is rejected", "closure_density", {"density_before": 4, "density_after": 3}),
+    ("ADV-ZERO-DOF-001", "zero-DOF active continuation is rejected", "zero_dof", {"dof": 0, "state": "active"}),
+    ("ADV-MTO-OTM-001", "invalid MTO-OTM transition is rejected", "mto_otm", {"input_cardinality": "many", "output_cardinality": "many"}),
 ]
 
 
@@ -40,6 +47,20 @@ def reject(case: dict) -> tuple[bool, str]:
         rejected = value["children"] != value["output_order"]
     elif contract == "orientation_field":
         rejected = value["evaluation_output_type"] == "scalar" or value["scalar_magnitude"] is not None
+    elif contract == "boundary_condition":
+        rejected = not value["boundary_update"]
+    elif contract == "reference_alignment":
+        rejected = value["alignment_status"] != "resolved"
+    elif contract == "child_identity":
+        rejected = len(value["children"]) != len(set(value["children"]))
+    elif contract == "bit_depth":
+        rejected = value["bit_depth"] < 0
+    elif contract == "closure_density":
+        rejected = value["density_after"] != value["density_before"]
+    elif contract == "zero_dof":
+        rejected = value["dof"] == 0 and value["state"] == "active"
+    elif contract == "mto_otm":
+        rejected = (value["input_cardinality"], value["output_cardinality"]) not in {("many", "one"), ("one", "many")}
     else:
         return False, f"unknown contract: {contract}"
     return rejected, "REJECTED" if rejected else "invalid case escaped contract"
