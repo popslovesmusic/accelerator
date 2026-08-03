@@ -4946,8 +4946,8 @@ _None recorded._
   - Queue: `bound_to_registry`; Registry: `C1_DEFINED_PROVISIONAL`
   - Source: `departments/analysis_intake/chat_captures/D_VALID_REL_TOKEN_C_DEFINITION_AND_PLACEMENT_20260727_001.json`; receipt: `NOT_RECORDED`; SHA-256: `27313E9353442BA23A65543EF62595EFD2A849CA4375FBE47E3D87560664EB4C`
 
-- **RT Asym Observation Orientation Exclusion** (`RT_ASYM_OBSERVATION_ORIENTATION_EXCLUSION_INDUCTION_20260728_001`): Research registration only. Not reviewed, promoted, or treated as canonical mathematics.
-  - Capture: `PRESERVED_LITERAL_FIRST_CONTACT`; Review: `NOT_REVIEWED`; Promotion: `HOLD_C1`; Induction: `INDUCTED`
+- **RT Asym Observation Orientation Exclusion** (`RT_ASYM_OBSERVATION_ORIENTATION_EXCLUSION_INDUCTION_20260728_001`): Research registration with partial bounded review. Pending human canonicalization; not promoted or treated as canonical mathematics.
+  - Capture: `PRESERVED_LITERAL_FIRST_CONTACT`; Review: `PARTIAL`; Promotion: `HOLD_C1`; Induction: `INDUCTED`
   - Queue: `queued`; Registry: `C1_DEFINED_PROVISIONAL`
   - Source: `departments/analysis_intake/chat_captures/RT_ASYM_OBSERVATION_ORIENTATION_EXCLUSION_INDUCTION_20260728_001.json`; receipt: `departments/analysis_intake/chat_captures/RT_ASYM_OBSERVATION_ORIENTATION_EXCLUSION_INDUCTION_20260728_001_induction_receipt.json`; SHA-256: `2914CE5209999B12A3483027225E7CB1BC82F0E3E7F44DED45D35EF12C7193BD`
 
@@ -4956,8 +4956,8 @@ _None recorded._
   - Queue: `blocked_visible`; Registry: `RESEARCH_BLOCKED_VISIBLE`
   - Source: `departments/analysis_intake/chat_captures/RT_ASYM_SYMBOL_TYPE_RECONCILIATION_20260728_001.json`; receipt: `departments/analysis_intake/chat_captures/RT_ASYM_SYMBOL_TYPE_RECONCILIATION_20260728_001_induction_receipt.json`; SHA-256: `0CBE75AE63BD6AD855103A2D7E1B190768BA9B76D88033AE3BB7D1BACDB10789`
 
-- **RT Boundary Orientation Asymmetry** (`RT_BOUNDARY_ORIENTATION_ASYM_INDUCTION_20260728_001`): Research registration only. Not reviewed, promoted, or treated as canonical mathematics.
-  - Capture: `PRESERVED_LITERAL_FIRST_CONTACT`; Review: `NOT_REVIEWED`; Promotion: `HOLD_C1`; Induction: `INDUCTED`
+- **RT Boundary Orientation Asymmetry** (`RT_BOUNDARY_ORIENTATION_ASYM_INDUCTION_20260728_001`): Research registration with partial bounded compatibility review. Proof and canonical redefinition remain unresolved; not promoted or treated as canonical mathematics.
+  - Capture: `PRESERVED_LITERAL_FIRST_CONTACT`; Review: `PARTIAL`; Promotion: `HOLD_C1`; Induction: `INDUCTED`
   - Queue: `queued`; Registry: `C1_DEFINED_PROVISIONAL`
   - Source: `departments/analysis_intake/chat_captures/RT_BOUNDARY_ORIENTATION_ASYM_INDUCTION_20260728_001.json`; receipt: `departments/analysis_intake/chat_captures/RT_BOUNDARY_ORIENTATION_ASYM_INDUCTION_20260728_001_induction_receipt.json`; SHA-256: `AB070028C0099229CF0583ECAE081A690E20F287AEEC51C015A3B84EBB2908A2`
 
@@ -4976,8 +4976,8 @@ _None recorded._
   - Queue: `queued`; Registry: `C1_DEFINED_PROVISIONAL`
   - Source: `departments/analysis_intake/induction_queue/payloads/RT_INDUCTION_ATOMIC_VALUE_PROJECTION_001.json`; receipt: `NOT_RECORDED`; SHA-256: `c5b992ef3b53e9dbb676f630079fc9bf9337f7a9f0722d58faab76ede8debbba`
 
-- **MTO/OTM Closure Calculus, Aspect Equivalence, and Orientation Resolution** (`RT_INDUCTION_MTO_OTM_CALCULUS_001`): Research registration only. Not reviewed, promoted, or treated as canonical mathematics. Proposed equivalences and closure rules remain open research objects.
-  - Capture: `PRESERVED_LITERAL`; Review: `NOT_REVIEWED`; Promotion: `HOLD_C1`; Induction: `INDUCTED`
+- **MTO/OTM Closure Calculus, Aspect Equivalence, and Orientation Resolution** (`RT_INDUCTION_MTO_OTM_CALCULUS_001`): Research registration with partial bounded fixture review. Counterexamples reopened the boundary and proposed equivalences and closure rules remain open research objects; not promoted or treated as canonical mathematics.
+  - Capture: `PRESERVED_LITERAL`; Review: `PARTIAL`; Promotion: `HOLD_C1`; Induction: `INDUCTED`
   - Queue: `queued`; Registry: `C1_DEFINED_PROVISIONAL`
   - Source: `departments/analysis_intake/chat_captures/RT_INDUCTION_MTO_OTM_CALCULUS_001.json`; receipt: `departments/analysis_intake/receipts/RT_INDUCTION_MTO_OTM_CALCULUS_001.receipt.json`; SHA-256: `44C92D1B68E491C9E732DEFC4AEB75C12CFB3D69AE4FA3B054E9DCBC0D4BE252`
 
