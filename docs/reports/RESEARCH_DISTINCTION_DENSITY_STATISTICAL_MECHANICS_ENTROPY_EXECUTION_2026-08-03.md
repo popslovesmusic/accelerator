@@ -70,6 +70,18 @@ Reference entropy changes for the two-level and Ising systems were positive acro
 
 The primary H1 criterion therefore failed.
 
+### 6.1 Independent Python verification
+
+An independent Python implementation was executed without importing or calling the campaign runner. It recomputed the ideal-gas, two-level, and 2×2 Ising references and candidate entropy changes from the frozen configuration.
+
+The independent verifier reproduced all recorded maximum-error and sign-agreement outcomes:
+
+- ideal gas: maximum error `3.33e-16`, signs agree;
+- two-level: maximum error `0.32006144`, signs fail;
+- 2×2 Ising: maximum error `1.92999063`, signs fail.
+
+Independent reproduction status: **PASS**. This verifies reproducibility of the bounded campaign failure; it does not validate the model or establish that all possible distinction-density generators fail.
+
 ## 7. Inferred inside the framework
 
 The executed result indicates that the current minimal density definition does not contain enough temperature- or interaction-sensitive structure to reproduce the tested canonical entropy changes across regimes. The ideal-gas match arose from the declared volume-dependent support size, while the finite-state proxies remained uniform and therefore insensitive to thermodynamic state changes.
@@ -89,6 +101,7 @@ This execution does not prove that distinction density is thermodynamic entropy,
 - The operationalization was intentionally minimal and may omit the unresolved state-dependent density law.
 - The ideal-gas support rule is structurally informative but may be considered an imported volume-to-capacity assumption.
 - The finite two-level and Ising candidates were deliberately uniform; their failure diagnoses missing structure but does not select the missing structure.
+- The independent verifier confirmed the recorded values after aligning its maximum-error calculation with the campaign’s direct first-to-last transition metric.
 - A future candidate must be frozen before reference scoring and must not encode Boltzmann weights under a different name.
 - A future campaign must add a genuine construction/holdout split for any fitted or learned density generator.
 
