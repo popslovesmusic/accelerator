@@ -1,3 +1,3 @@
 # Next Action
 
-Completed: model-interface validation and countermodels pass. Semantic evaluations are deterministic; well-typed uninterpreted relations return `UNDEFINED_TYPED`, while malformed or unknown operands return `INVALID_ILL_TYPED`. Next: test alpha-equivalence/substitution preservation across both model classes.
+Completed: model-interface validation, countermodels, semantic determinism, and typed result-channel tests pass. Alpha-renaming preserves tested semantics in both finite models; arbitrary substitution is correctly left conditional on valuation preservation. Next: test inference soundness across both model classes.
