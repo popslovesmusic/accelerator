@@ -1,3 +1,3 @@
 # Next Action
 
-Completed: typed syntax validation passed 4 valid and 5 invalid cases, and the finite semantic model passed 4 true, 4 false, and 2 invalid truth-condition fixtures repeatably. Next: specify substitution/binding preservation and partial-operator failure semantics; do not change authoritative registries.
+Completed: typed syntax, finite truth conditions, substitution, and partial composition fixtures pass. Substitution preserves structure; compatible composition succeeds; endpoint and context mismatches return explicit failures. Next: define a minimal inference-rule closure and test soundness over the finite model; do not change authoritative registries.

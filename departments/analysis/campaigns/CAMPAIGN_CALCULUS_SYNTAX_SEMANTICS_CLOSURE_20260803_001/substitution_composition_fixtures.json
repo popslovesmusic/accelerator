@@ -1,0 +1,11 @@
+{
+  "substitution": [
+    {"name":"replace_E_in_distinct","expr":{"kind":"Distinct","left":{"kind":"ProcessVar","name":"E"},"right":{"kind":"ProcessVar","name":"E2"}},"variable":"E","replacement":{"kind":"ProcessVar","name":"E3"},"expected_left":"E3"},
+    {"name":"nonmatching_substitution","expr":{"kind":"Distinct","left":{"kind":"ProcessVar","name":"E2"},"right":{"kind":"ProcessVar","name":"E3"}},"variable":"E","replacement":{"kind":"ProcessVar","name":"E"},"expected_left":"E2"}
+  ],
+  "composition": [
+    {"name":"compatible_context_chain","left":{"name":"r1","left":"E","right":"E2","context":"x"},"right":{"name":"r2","left":"E2","right":"E3","context":"x"},"expected":"COMPOSED"},
+    {"name":"endpoint_mismatch","left":{"name":"r1","left":"E","right":"E2","context":"x"},"right":{"name":"r2","left":"E3","right":"E","context":"x"},"expected":"FAIL_ENDPOINT_MISMATCH"},
+    {"name":"context_mismatch","left":{"name":"r1","left":"E","right":"E2","context":"x"},"right":{"name":"r2","left":"E2","right":"E3","context":"y"},"expected":"FAIL_CONTEXT_MISMATCH"}
+  ]
+}
