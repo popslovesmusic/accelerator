@@ -1,0 +1,13 @@
+{
+  "tests": [
+    {"id":"MODEL-001","name":"model schema validation","pass":"every model declares all carriers and interpretations"},
+    {"id":"SEM-001","name":"semantic determinism","pass":"same model and expression produce same result"},
+    {"id":"SEM-002","name":"typed partiality","pass":"undefined and ill-typed results are distinct"},
+    {"id":"SUB-002","name":"alpha/substitution preservation","pass":"capture-avoiding substitution preserves interpretation where defined"},
+    {"id":"MOD-002","name":"countermodel completeness","pass":"each rejected general rule has a recorded countermodel"},
+    {"id":"INF-002","name":"cross-model soundness","pass":"declared inference rules preserve truth in every tested model"},
+    {"id":"BOUND-001","name":"claim boundary","pass":"no completeness or consistency claim without its proof obligation"}
+  ],
+  "required_model_classes": ["finite_relational", "finite_graph_relational", "one independently chosen typed model class"],
+  "failure_statuses": ["MODEL_INTERFACE_INCOMPLETE", "SEMANTIC_NONDETERMINISM", "COUNTERMODEL_MISSING", "SOUNDNESS_UNPROVEN", "CLAIM_ESCALATION"]
+}
