@@ -1,3 +1,3 @@
 # Next Action
 
-Completed: typed syntax, finite truth conditions, substitution, partial composition, minimal inference soundness, and bounded operator algebra fixtures pass. Compatible composition, endpoint identity, and one associativity triple pass; non-commutativity and context failure remain explicit. Next: independent review of the noncanonical package and reconciliation against the textbook gap ledger.
+Completed: independent review passed; all five validators rerun successfully and the package remains noncanonical. Bounded gaps are separated from unresolved general closure. Next: add binder-rich syntax/substitution cases or perform a separate model-class comparison, preserving all current artifacts.
