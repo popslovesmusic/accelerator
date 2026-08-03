@@ -1,0 +1,34 @@
+{
+  "specification_id": "INTAKE_SEMANTIC_SPEC_FREEZE_20260803_001",
+  "status": "FROZEN_NONCANONICAL_C1",
+  "scope": [
+    "RT_ASYM_OBSERVATION_ORIENTATION_EXCLUSION_INDUCTION_20260728_001",
+    "RT_BOUNDARY_ORIENTATION_ASYM_INDUCTION_20260728_001",
+    "RT_INDUCTION_RECURSIVE_PATTERN_AND_DOMAIN_LIFT_001"
+  ],
+  "semantics": {
+    "056_exclusion": {
+      "valid_boundaries": ["north-facing", "east-facing"],
+      "invalid_boundary_result": "INVALID_BOUNDARY",
+      "empty_result": "EMPTY_ADMISSIBLE_FAMILY",
+      "rule": "A valid boundary excludes its declared opposing orientation; it does not mutate the source orientation family."
+    },
+    "057_orientation": {
+      "required_fields": ["source_domain", "source_primitive", "target_domain", "target_primitive", "relation", "context"],
+      "identity_rule": "Full typed equality includes all required fields.",
+      "inverse_rule": "Exchange source and target domain/primitive roles; preserve relation and context.",
+      "self_inverse_exception": "A genuinely identical source/target typed orientation may be self-inverse."
+    },
+    "060_recursive_domain_lift": {
+      "mto_selector": "Lexicographic ordering of primitive identifiers within the finite candidate model.",
+      "history_policy": "Retain original aspect sequence separately from resolved RT output.",
+      "otm_output": "Ordered primitive sequence; repeated primitive occurrences are preserved.",
+      "termination": "Reject continuation beyond the declared finite depth limit with DEPTH_LIMIT.",
+      "empty_input": "Return EMPTY_INPUT; do not synthesize an RT."
+    }
+  },
+  "falsification_policy": "Any broader model that violates these frozen rules is a counterexample to this specification, not grounds for silent repair.",
+  "claim_ceiling": "C1",
+  "canonicality": "NON_CANONICAL",
+  "promotion_status": "HOLD_C1"
+}
