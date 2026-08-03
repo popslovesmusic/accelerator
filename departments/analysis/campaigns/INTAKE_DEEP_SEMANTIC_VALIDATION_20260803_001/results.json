@@ -1,0 +1,155 @@
+{
+  "campaign_id": "INTAKE_DEEP_SEMANTIC_VALIDATION_20260803_001",
+  "status": "BOUNDED_FINITE_MODEL_EXECUTION",
+  "results": [
+    {
+      "packet_id": "RT_ASYM_OBSERVATION_ORIENTATION_EXCLUSION_INDUCTION_20260728_001",
+      "checks": [
+        {
+          "name": "boundary_conditions_change_admissible_family",
+          "passed": true,
+          "detail": "distinct boundaries yield distinct admissible families"
+        },
+        {
+          "name": "excluded_orientation_is_not_symmetry_mutation",
+          "passed": true,
+          "detail": "source family remains unchanged"
+        },
+        {
+          "name": "exclusion_is_deterministic",
+          "passed": true,
+          "detail": "repeat evaluation identical"
+        },
+        {
+          "name": "reference_orientation_is_relational",
+          "passed": true,
+          "detail": "result depends on boundary relation"
+        },
+        {
+          "name": "invalid_boundary_does_not_synthesize_result",
+          "passed": true,
+          "detail": "undefined boundary returns empty result"
+        }
+      ],
+      "status": "PASS_FINITE_SEMANTIC_MODEL",
+      "limitation": "Finite toy orientation family; no proof of the proposed operator in general."
+    },
+    {
+      "packet_id": "RT_BOUNDARY_ORIENTATION_ASYM_INDUCTION_20260728_001",
+      "checks": [
+        {
+          "name": "typed_orientation_has_context",
+          "passed": true,
+          "detail": "ctx-1"
+        },
+        {
+          "name": "inverse_exchanges_domains",
+          "passed": true,
+          "detail": [
+            "D_B",
+            "D_A"
+          ]
+        },
+        {
+          "name": "inverse_exchanges_primitives",
+          "passed": true,
+          "detail": [
+            "P_B",
+            "P_A"
+          ]
+        },
+        {
+          "name": "inverse_preserves_relation",
+          "passed": true,
+          "detail": "boundary-reference"
+        },
+        {
+          "name": "double_inverse_is_identity",
+          "passed": true,
+          "detail": "double inverse reconstructed original typed orientation"
+        },
+        {
+          "name": "context_free_orientation_rejected",
+          "passed": true,
+          "detail": "empty context is invalid"
+        },
+        {
+          "name": "same_scalar_projection_does_not_equal_typed_identity",
+          "passed": true,
+          "detail": "typed fields retain distinction"
+        }
+      ],
+      "status": "PASS_FINITE_SEMANTIC_MODEL",
+      "limitation": "Finite typed relation model; no external empirical validation."
+    },
+    {
+      "packet_id": "RT_INDUCTION_RECURSIVE_PATTERN_AND_DOMAIN_LIFT_001",
+      "checks": [
+        {
+          "name": "domain_lift_preserves_primitive_multiplicity",
+          "passed": true,
+          "detail": [
+            "p1",
+            "p1",
+            "p2"
+          ]
+        },
+        {
+          "name": "mto_is_deterministic_under_declared_rule",
+          "passed": true,
+          "detail": [
+            [
+              "p1",
+              "p2"
+            ],
+            [
+              "p1",
+              "p2"
+            ]
+          ]
+        },
+        {
+          "name": "otm_mto_roundtrip_for_closed_rt",
+          "passed": true,
+          "detail": [
+            [
+              "p1",
+              "p2"
+            ],
+            [
+              "p1",
+              "p2"
+            ]
+          ]
+        },
+        {
+          "name": "empty_aspect_set_fails_without_synthesized_rt",
+          "passed": true,
+          "detail": null
+        },
+        {
+          "name": "primitive_cycle_is_domain_relative",
+          "passed": true,
+          "detail": "primitive -> aspect -> RT -> primitive set"
+        },
+        {
+          "name": "different_aspect_order_is_same_output_only_under_declared_equivalence",
+          "passed": true,
+          "detail": "order-insensitive candidate rule explicitly declared"
+        },
+        {
+          "name": "identity_loss_boundary_is_visible",
+          "passed": true,
+          "detail": "distinct aspect histories collapse to equivalent RT output"
+        }
+      ],
+      "status": "PASS_FINITE_SEMANTIC_MODEL",
+      "limitation": "Finite candidate semantics exposes identity loss and does not establish uniqueness of the general calculus."
+    }
+  ],
+  "omitted_packet": {
+    "packet_id": "RT_INDUCTION_MTO_OTM_CALCULUS_001",
+    "reason": "Existing adversarial campaign already supplies the deeper fixture and counterexample evidence; this pass does not overwrite it."
+  },
+  "claim_ceiling": "C1"
+}
