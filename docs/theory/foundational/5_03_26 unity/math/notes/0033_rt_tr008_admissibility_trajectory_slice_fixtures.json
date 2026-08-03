@@ -1,0 +1,14 @@
+{
+  "fixture_set_id": "0033_rt_tr008_admissibility_trajectory_slice_fixtures",
+  "source_note": "docs/theory/foundational/5_03_26 unity/math/notes/0033_rt_tr008_admissibility_trajectory_slice_contracts_20260803_001.md",
+  "claim_ceiling": "C1_MODEL_RELATIVE",
+  "cases": [
+    {"case_id": "TR008-VALID-001", "name": "valid admissible trajectory and ordered slice", "input": {"proposition": "P-health", "source": "A", "target": "B", "trajectory": ["A", "m1", "B"], "declared_edges": [["A", "m1"], ["m1", "B"]], "interface": "face-1", "positions": [0, 1, 2], "declared_positions": [0, 1, 2]}, "expected": "PASS"},
+    {"case_id": "TR008-ADMISS-001", "name": "proposition mismatch rejected", "input": {"proposition": "P-network", "declared_proposition": "P-health"}, "expected": "INADMISSIBLE"},
+    {"case_id": "TR008-TRAJ-001", "name": "invalid endpoints rejected", "input": {"trajectory": ["X", "m1", "B"], "start": "A", "stop": "B"}, "expected": "INVALID_TRAJECTORY"},
+    {"case_id": "TR008-TRAJ-002", "name": "duplicate marker rejected", "input": {"trajectory": ["A", "m1", "m1", "B"], "start": "A", "stop": "B"}, "expected": "INVALID_TRAJECTORY"},
+    {"case_id": "TR008-TRAJ-003", "name": "undeclared edge rejected", "input": {"trajectory": ["A", "m2", "B"], "declared_edges": [["A", "m1"], ["m1", "B"]]}, "expected": "INVALID_TRAJECTORY"},
+    {"case_id": "TR008-SLICE-001", "name": "unknown interface rejected", "input": {"interface": "face-9", "known_interfaces": ["face-1", "face-2"]}, "expected": "INVALID_SLICE"},
+    {"case_id": "TR008-SLICE-002", "name": "slice order loss rejected", "input": {"positions": [2, 1, 0], "declared_positions": [0, 1, 2]}, "expected": "INVALID_SLICE"}
+  ]
+}
