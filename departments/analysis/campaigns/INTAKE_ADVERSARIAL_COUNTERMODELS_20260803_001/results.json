@@ -1,0 +1,69 @@
+{
+  "campaign_id": "INTAKE_ADVERSARIAL_COUNTERMODELS_20260803_001",
+  "status": "COUNTERMODELS_FOUND",
+  "claim_ceiling": "C1",
+  "results": [
+    {
+      "case": "056_boundary_semantics_nonunique",
+      "counterexample_found": true,
+      "detail": "The same boundary label can admit different exclusion interpretations without a fixed semantic rule.",
+      "implication": "The exclusion operator needs a frozen semantics or model class."
+    },
+    {
+      "case": "056_empty_admissible_family",
+      "counterexample_found": true,
+      "detail": "A boundary can yield no admissible orientations.",
+      "implication": "Failure semantics must distinguish invalid, empty, and resolved outcomes."
+    },
+    {
+      "case": "056_boundary_free_orientation",
+      "counterexample_found": true,
+      "detail": "An orientation family can be supplied without a boundary argument in an unconstrained model.",
+      "implication": "The claimed dependency orientation <- boundary is not universal without an admissibility axiom."
+    },
+    {
+      "case": "057_scalar_projection_collapse",
+      "counterexample_found": true,
+      "detail": "Distinct ordered orientations map to the same scalar.",
+      "implication": "Scalar projection cannot define orientation identity."
+    },
+    {
+      "case": "057_context_removal_collapse",
+      "counterexample_found": false,
+      "detail": "Removing context makes otherwise distinct relation instances indistinguishable in a repeated fixture.",
+      "implication": "Context is semantically necessary where relation identity is reused."
+    },
+    {
+      "case": "057_self_inverse_exception",
+      "counterexample_found": false,
+      "detail": "A self-loop orientation is its own inverse under role exchange.",
+      "implication": "Non-identity of O and Inv(O) requires an explicit self-inverse exception."
+    },
+    {
+      "case": "060_nondeterministic_mto",
+      "counterexample_found": true,
+      "detail": "The same admissible aspect pair is permitted two distinct RT outputs.",
+      "implication": "MTO single-valuedness requires an explicit selector or tie-break rule."
+    },
+    {
+      "case": "060_identity_history_collapse",
+      "counterexample_found": true,
+      "detail": "Distinct aspect orderings resolve to the same order-insensitive RT representation.",
+      "implication": "Historical aspect identity is not recoverable from RT output alone."
+    },
+    {
+      "case": "060_recursive_nontermination_cycle",
+      "counterexample_found": true,
+      "detail": "A finite recursive transition graph contains a cycle.",
+      "implication": "Domain termination cannot be assumed without a well-foundedness or stop condition."
+    },
+    {
+      "case": "060_multiplicity_loss_under_set_otm",
+      "counterexample_found": true,
+      "detail": "Set-valued OTM output erases repeated primitive occurrences.",
+      "implication": "OTM must be multiset/sequence-valued when multiplicity is semantically relevant."
+    }
+  ],
+  "summary": "Adversarial finite models expose unresolved semantic obligations for all three tested proposal families.",
+  "prohibited_inference": "Countermodels to a declared candidate semantics do not by themselves falsify every possible formulation of the intake proposals."
+}
