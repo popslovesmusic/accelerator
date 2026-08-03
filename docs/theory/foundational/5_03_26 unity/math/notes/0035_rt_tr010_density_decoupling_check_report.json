@@ -1,0 +1,71 @@
+{
+  "report_id": "0035_rt_tr010_density_decoupling_check_report",
+  "fixture_set_id": "0035_rt_tr010_density_decoupling_fixtures",
+  "status": "PASS",
+  "claim_ceiling": "C1_MODEL_RELATIVE",
+  "case_count": 8,
+  "passed_count": 8,
+  "failed_count": 0,
+  "results": [
+    {
+      "case_id": "TR010-VALID-001",
+      "name": "closure conserves active density",
+      "status": "PASS",
+      "actual": "PASS",
+      "expected": "PASS"
+    },
+    {
+      "case_id": "TR010-VALID-002",
+      "name": "redistribution conserves declared total",
+      "status": "PASS",
+      "actual": "PASS",
+      "expected": "PASS"
+    },
+    {
+      "case_id": "TR010-VALID-003",
+      "name": "zero-DOF decoupling transfers to reservoir",
+      "status": "PASS",
+      "actual": "PASS",
+      "expected": "PASS"
+    },
+    {
+      "case_id": "TR010-CLOSE-001",
+      "name": "closure density increase rejected",
+      "status": "PASS",
+      "actual": "CLOSURE_NONCONSERVING",
+      "expected": "CLOSURE_NONCONSERVING"
+    },
+    {
+      "case_id": "TR010-REDIST-001",
+      "name": "redistribution density increase rejected",
+      "status": "PASS",
+      "actual": "DENSITY_CREATED_OR_LOST",
+      "expected": "DENSITY_CREATED_OR_LOST"
+    },
+    {
+      "case_id": "TR010-DENS-001",
+      "name": "negative density rejected",
+      "status": "PASS",
+      "actual": "INVALID_ACCOUNTING",
+      "expected": "INVALID_ACCOUNTING"
+    },
+    {
+      "case_id": "TR010-DOF-001",
+      "name": "active zero-DOF rejected",
+      "status": "PASS",
+      "actual": "INERT_STATE_REQUIRED",
+      "expected": "INERT_STATE_REQUIRED"
+    },
+    {
+      "case_id": "TR010-DECOUPLE-001",
+      "name": "decoupling without zero DOF rejected",
+      "status": "PASS",
+      "actual": "INVALID_DECOUPLING",
+      "expected": "INVALID_DECOUPLING"
+    }
+  ],
+  "limitations": [
+    "Finite accounting interface only; density is not treated as a physical quantity.",
+    "No thermodynamic, empirical, or external conservation claim is tested."
+  ]
+}

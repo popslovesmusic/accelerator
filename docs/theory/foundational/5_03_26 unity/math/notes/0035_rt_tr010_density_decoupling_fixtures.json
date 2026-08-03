@@ -1,0 +1,15 @@
+{
+  "fixture_set_id": "0035_rt_tr010_density_decoupling_fixtures",
+  "source_note": "docs/theory/foundational/5_03_26 unity/math/notes/0035_rt_tr010_density_decoupling_contracts_20260803_001.md",
+  "claim_ceiling": "C1_MODEL_RELATIVE",
+  "cases": [
+    {"case_id": "TR010-VALID-001", "name": "closure conserves active density", "input": {"operation": "closure", "before": 10, "after": 10}, "expected": "PASS"},
+    {"case_id": "TR010-VALID-002", "name": "redistribution conserves declared total", "input": {"operation": "redistribution", "before": 10, "after": 10}, "expected": "PASS"},
+    {"case_id": "TR010-VALID-003", "name": "zero-DOF decoupling transfers to reservoir", "input": {"operation": "decoupling", "dof": 0, "active_before": 10, "released": 3, "active_after": 7, "reservoir_before": 2, "reservoir_after": 5}, "expected": "PASS"},
+    {"case_id": "TR010-CLOSE-001", "name": "closure density increase rejected", "input": {"operation": "closure", "before": 10, "after": 11}, "expected": "CLOSURE_NONCONSERVING"},
+    {"case_id": "TR010-REDIST-001", "name": "redistribution density increase rejected", "input": {"operation": "redistribution", "before": 10, "after": 12}, "expected": "DENSITY_CREATED_OR_LOST"},
+    {"case_id": "TR010-DENS-001", "name": "negative density rejected", "input": {"operation": "closure", "before": -1, "after": -1}, "expected": "INVALID_ACCOUNTING"},
+    {"case_id": "TR010-DOF-001", "name": "active zero-DOF rejected", "input": {"operation": "active", "dof": 0}, "expected": "INERT_STATE_REQUIRED"},
+    {"case_id": "TR010-DECOUPLE-001", "name": "decoupling without zero DOF rejected", "input": {"operation": "decoupling", "dof": 1, "active_before": 10, "released": 3, "active_after": 7, "reservoir_before": 2, "reservoir_after": 5}, "expected": "INVALID_DECOUPLING"}
+  ]
+}
