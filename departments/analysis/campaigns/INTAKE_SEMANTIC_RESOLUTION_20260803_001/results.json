@@ -1,0 +1,81 @@
+{
+  "campaign_id": "INTAKE_SEMANTIC_RESOLUTION_20260803_001",
+  "status": "UNRESOLVED_SEMANTIC_GAPS",
+  "results": [
+    {
+      "question": "DIV-01 boundary exclusion semantics",
+      "candidate_a": {
+        "boundary_conditioned": true,
+        "source_family_unchanged": true,
+        "typed_empty_failure": true,
+        "rule": "exclude_opposing"
+      },
+      "candidate_b": {
+        "boundary_conditioned": true,
+        "source_family_unchanged": true,
+        "typed_empty_failure": true,
+        "rule": "retain_aligned"
+      },
+      "commitments_tested": {
+        "boundary_conditioned": true,
+        "source_family_unchanged": true,
+        "typed_empty_failure": true
+      },
+      "observations": "Both candidates satisfy the currently declared commitments; their admissible families differ.",
+      "candidate_a_satisfies_declared_commitments": true,
+      "candidate_b_satisfies_declared_commitments": true,
+      "selects_unique_candidate": false
+    },
+    {
+      "question": "DIV-03 MTO selection",
+      "candidate_a": {
+        "deterministic": true,
+        "history_retained": true,
+        "selector": "lexicographic"
+      },
+      "candidate_b": {
+        "deterministic": true,
+        "history_retained": true,
+        "selector": "frequency_ranked"
+      },
+      "commitments_tested": {
+        "deterministic": true,
+        "history_retained": true
+      },
+      "observations": "Both selectors satisfy determinism and provenance retention but produce different RT outputs.",
+      "candidate_a_satisfies_declared_commitments": true,
+      "candidate_b_satisfies_declared_commitments": true,
+      "selects_unique_candidate": false
+    },
+    {
+      "question": "DIV-04 recursive termination",
+      "candidate_a": {
+        "termination_declared": true,
+        "finite_guard": true,
+        "policy": "depth_limit"
+      },
+      "candidate_b": {
+        "termination_declared": true,
+        "finite_guard": true,
+        "policy": "cycle_detection"
+      },
+      "commitments_tested": {
+        "termination_declared": true,
+        "finite_guard": true
+      },
+      "observations": "Both policies prevent the tested finite runaway, but produce different continuation traces; neither is derived by a well-founded measure.",
+      "candidate_a_satisfies_declared_commitments": true,
+      "candidate_b_satisfies_declared_commitments": true,
+      "selects_unique_candidate": false
+    }
+  ],
+  "unresolved_questions": [
+    "DIV-01 boundary exclusion semantics",
+    "DIV-03 MTO selection",
+    "DIV-04 recursive termination"
+  ],
+  "new_campaign_required": true,
+  "claim_ceiling": "C1",
+  "canonicality": "NON_CANONICAL",
+  "promotion_status": "HOLD_C1"
+}
