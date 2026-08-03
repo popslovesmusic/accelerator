@@ -1,0 +1,64 @@
+{
+  "report_id": "0034_rt_tr009_projection_continuation_check_report",
+  "fixture_set_id": "0034_rt_tr009_projection_continuation_fixtures",
+  "status": "PASS",
+  "claim_ceiling": "C1_MODEL_RELATIVE",
+  "case_count": 7,
+  "passed_count": 7,
+  "failed_count": 0,
+  "results": [
+    {
+      "case_id": "TR009-VALID-001",
+      "name": "ordered typed pipeline accepted",
+      "status": "PASS",
+      "actual": "PASS",
+      "expected": "PASS"
+    },
+    {
+      "case_id": "TR009-STAGE-001",
+      "name": "missing projection rejected",
+      "status": "PASS",
+      "actual": "INVALID_PIPELINE",
+      "expected": "INVALID_PIPELINE"
+    },
+    {
+      "case_id": "TR009-STAGE-002",
+      "name": "reordered stages rejected",
+      "status": "PASS",
+      "actual": "INVALID_PIPELINE",
+      "expected": "INVALID_PIPELINE"
+    },
+    {
+      "case_id": "TR009-ORG-001",
+      "name": "empty organization rejected",
+      "status": "PASS",
+      "actual": "INVALID_PIPELINE",
+      "expected": "INVALID_PIPELINE"
+    },
+    {
+      "case_id": "TR009-CONT-001",
+      "name": "non-finite continuation rejected",
+      "status": "PASS",
+      "actual": "INVALID_PIPELINE",
+      "expected": "INVALID_PIPELINE"
+    },
+    {
+      "case_id": "TR009-ID-001",
+      "name": "condition and RT collapse rejected",
+      "status": "PASS",
+      "actual": "ONTOLOGY_COLLAPSE",
+      "expected": "ONTOLOGY_COLLAPSE"
+    },
+    {
+      "case_id": "TR009-CTX-001",
+      "name": "proposition drift rejected",
+      "status": "PASS",
+      "actual": "CONTEXT_DRIFT",
+      "expected": "CONTEXT_DRIFT"
+    }
+  ],
+  "limitations": [
+    "Finite pipeline interface only; no external ontology or physical projection is tested.",
+    "The validator does not define the internal mathematics of projection or continuation."
+  ]
+}
