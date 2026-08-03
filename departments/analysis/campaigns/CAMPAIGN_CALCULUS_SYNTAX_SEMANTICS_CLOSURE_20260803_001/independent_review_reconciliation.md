@@ -12,7 +12,7 @@ Remaining gaps are: a complete grammar, general semantic interpretation, model-t
 
 ## Direct observations
 
-All five validators reran successfully. The finite model truth report, inference report, and operator algebra report preserve their declared bounded scopes. The unsound admissibility-to-closure rule remains falsified.
+All seven validators reran successfully. The finite model truth report, inference report, operator algebra report, binder substitution report, and model comparison report preserve their declared bounded scopes. The unsound admissibility-to-closure rule remains falsified. The model comparison found one invariant structural case and three model-dependent semantic cases.
 
 ## Inference inside the framework
 
@@ -24,4 +24,4 @@ No canonical registry update, theorem promotion, C6 promotion, bridge expansion,
 
 ## Next action
 
-Retain the package as a reviewed candidate and prepare a separately authorized binder-rich syntax extension or formal model-class comparison. Any extension must preserve current artifacts and add counterexamples rather than silently replacing them.
+Retain the package as a reviewed candidate. The package reduces several bounded obligations but does not establish calculus completeness. Any future extension must preserve current artifacts and add counterexamples rather than silently replacing them.

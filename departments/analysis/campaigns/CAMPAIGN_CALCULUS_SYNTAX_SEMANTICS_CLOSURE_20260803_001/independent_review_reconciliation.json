@@ -12,7 +12,10 @@
     "finite_model_truth_report.json": true,
     "substitution_composition_report.json": true,
     "inference_soundness_report.json": true,
-    "operator_algebra_report.json": true
+    "operator_algebra_report.json": true,
+    "binder_extension_schema.json": true,
+    "binder_substitution_report.json": true,
+    "model_class_comparison_report.json": true
   },
   "validator_reruns": [
     {
@@ -37,6 +40,16 @@
     },
     {
       "script": "test_operator_algebra.py",
+      "returncode": 0,
+      "passed": true
+    },
+    {
+      "script": "test_binder_substitution.py",
+      "returncode": 0,
+      "passed": true
+    },
+    {
+      "script": "model_class_comparison.py",
       "returncode": 0,
       "passed": true
     }
@@ -86,6 +99,11 @@
       "state": "finite_test_model_only",
       "evidence": "finite_model.json",
       "remaining": "no general satisfiability/consistency result"
+    },
+    "model_sensitivity": {
+      "state": "observed",
+      "evidence": "model_class_comparison_report.json",
+      "remaining": "no model-independent semantics established"
     }
   },
   "promotion_status": "NOT_AUTHORIZED",
