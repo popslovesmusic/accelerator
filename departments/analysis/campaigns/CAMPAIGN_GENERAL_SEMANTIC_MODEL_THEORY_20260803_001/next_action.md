@@ -1,3 +1,3 @@
 # Next Action
 
-Completed: the model-interface validator passed for both declared finite models, and `Admissible -> Closure` has explicit countermodels in each. Next: test semantic determinism and distinguish `UNDEFINED_TYPED` from `INVALID_ILL_TYPED` using malformed and partial interpretations.
+Completed: model-interface validation and countermodels pass. Semantic evaluations are deterministic; well-typed uninterpreted relations return `UNDEFINED_TYPED`, while malformed or unknown operands return `INVALID_ILL_TYPED`. Next: test alpha-equivalence/substitution preservation across both model classes.
