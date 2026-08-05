@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://acellorator.local/schemas/rt_attack_transfer_manifest_v1.json",
+  "title": "RT Calculus Attack Transfer Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_id",
+    "schema_version",
+    "transfer_id",
+    "source_program",
+    "destination_program",
+    "direction",
+    "reverse_channel",
+    "package_name",
+    "package_path",
+    "generated_utc",
+    "intake_status",
+    "authority_status",
+    "file_count",
+    "files"
+  ],
+  "properties": {
+    "schema_id": { "const": "rt_attack_transfer_manifest_v1" },
+    "schema_version": { "const": "1.0.0" },
+    "transfer_id": { "type": "string", "minLength": 1 },
+    "source_program": { "const": "RT_CALCULUS" },
+    "destination_program": { "const": "ACELLORATOR" },
+    "direction": { "const": "RT_CALCULUS_TO_ACELLORATOR_ONLY" },
+    "reverse_channel": { "const": "DISABLED" },
+    "package_name": { "type": "string", "minLength": 1 },
+    "package_path": { "type": "string", "minLength": 1 },
+    "generated_utc": { "type": "string", "minLength": 1 },
+    "intake_status": { "enum": ["NOT_SUBMITTED", "SUBMITTED", "REJECTED", "ACCEPTED"] },
+    "authority_status": { "const": "NON_CANONICAL_PROVISIONAL_EVIDENCE" },
+    "file_count": { "type": "integer", "minimum": 1 },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["relative_path", "sha256", "byte_size"],
+        "properties": {
+          "relative_path": { "type": "string", "pattern": "^(?!/)(?!.*(?:^|/)(?:\\.\\.?)(?:/|$))(?!.*\\\\)" },
+          "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+          "byte_size": { "type": "integer", "minimum": 0 }
+        }
+      }
+    }
+  }
+}
