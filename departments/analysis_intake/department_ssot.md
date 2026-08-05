@@ -195,6 +195,9 @@ The intake department SHALL recommend routing but SHALL NOT execute, promote, or
 ### ANALYSIS_INTAKE_005
 Approved or explicitly user-authorized definitions introduced through intake SHALL be inducted into the canonical root lexicon gap queue before downstream use. Induction SHALL preserve source provenance and keep the term at `GAP_OPEN` or another explicitly authorized provisional status; lexicon induction does not constitute validation, promotion, theorem registration, or execution authority.
 
+### ANALYSIS_INTAKE_006
+Every evidence intake, including imported external evidence packages and their derived review notes, SHALL perform a lexicon-delta pass. The pass SHALL compare governed terms and operator names in the imported evidence, extracted findings, and candidate patches against the canonical lexicon and existing gap queue. Each genuinely new governed term SHALL be added to `registry/lexicon_gap_queue.json` as `GAP_OPEN` before downstream review, synthesis, or notes induction. The entry SHALL retain the evidence package identifier, source path or excerpt, and available manifest/archive or source hash. Ordinary prose, unqualified common-language modifiers, and terms already represented canonically or as aliases need not be duplicated; ambiguous cases SHALL be routed to review.
+
 ---
 
 ## Validation / Falsification Status

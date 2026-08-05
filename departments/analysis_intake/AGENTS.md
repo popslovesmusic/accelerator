@@ -32,6 +32,7 @@ Agents working here must:
 - route ambiguous content to review instead of forcing a classification,
 - keep proposed artifacts separate from authoritative registries,
 - extract candidate claims, terms, operators, risks, and work items when present,
+- during every evidence intake, extract newly introduced governed terms and route each genuinely new term to `registry/lexicon_gap_queue.json` as `GAP_OPEN`, preserving the source excerpt, source path, package identity, and hash where available,
 - preserve source excerpts and source paths for all routed items,
 - keep intake results reproducible from the same input packet.
 
