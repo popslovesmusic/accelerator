@@ -1,0 +1,65 @@
+{
+  "target": {
+    "target_id": "FAT-17-PRIMITIVE-SLOT",
+    "source_passages": [
+      "$(D)_n$ represents the process's internal organizational capacity...",
+      "The subscript $n$ denotes the number of independent Relational Axes..."
+    ],
+    "exact_claim": "An OTM primitive slot represents unrealized relational capacity and is not itself a distinction.",
+    "declared_terms": [
+      "OTM",
+      "Slot",
+      "Capacity",
+      "Distinction"
+    ],
+    "declared_dependencies": [
+      "FAT-16-OTM-CAPACITY-PRIMITIVE"
+    ],
+    "claimed_output": "Primitive slots can exist without importing distinction or identity.",
+    "scope": "Foundations",
+    "explicit_nonclaims": [
+      "MTO realization does not require distinction"
+    ],
+    "falsification_conditions": [
+      "Program M: Unlabeled slots collapse to 1 degree of freedom (loss of capacity complexity).",
+      "Program S: Unlabeled elements collapse to a singleton set."
+    ],
+    "attack_bounds": {
+      "max_steps": 1,
+      "max_models": 100
+    }
+  },
+  "program_m": {
+    "m1_single_slot": true,
+    "m2_multiple_slots": true,
+    "m3_unordered_slots": [
+      "slot_3",
+      "slot_1",
+      "slot_2"
+    ],
+    "m4_collapsed": true,
+    "m5_collapse_checks": true,
+    "status": "Fails"
+  },
+  "program_s": {
+    "formal_objects": [
+      "Variable",
+      "Basis vector",
+      "Index set"
+    ],
+    "logical_form": "s_i where i in I requires i != j for all i,j",
+    "type_signature": "s: Index -> Variable",
+    "standard_attack_families": [
+      "Equivalence class quotient collapse",
+      "Linear independence ablation"
+    ],
+    "representation_losses": [
+      "None"
+    ],
+    "status": "Fails"
+  },
+  "ruling": {
+    "outcome": "CONCEPT_FALSIFIED",
+    "details": "Both native procedure and standard mathematics fail. Multiple slots cannot exist as independent degrees of freedom without slot identity/labels, proving that Capacity Slots inherently import Distinction/Identity before realization."
+  }
+}

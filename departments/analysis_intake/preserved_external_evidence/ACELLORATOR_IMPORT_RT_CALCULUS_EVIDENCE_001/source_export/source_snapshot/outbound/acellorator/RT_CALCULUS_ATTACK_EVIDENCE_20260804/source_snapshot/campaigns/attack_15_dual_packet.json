@@ -1,0 +1,66 @@
+{
+  "target": {
+    "target_id": "FAT-15-PROCESS-PRIORITY",
+    "source_passages": [
+      "Within the current continuation-first reduction, process is treated as ontologically prior to distinction..."
+    ],
+    "exact_claim": "Process \\succ_{ont} Distinction",
+    "declared_terms": [
+      "Process",
+      "Distinction",
+      "\\succ_{ont}"
+    ],
+    "declared_dependencies": [],
+    "claimed_output": "Process can be defined/exist independently of Distinction",
+    "scope": "Foundations",
+    "explicit_nonclaims": [
+      "temporal priority"
+    ],
+    "falsification_conditions": [
+      "Program M: OTM-decomposition loses identity when Distinction is removed.",
+      "Program S: Set-theoretic cardinality of state space collapses to <= 1 without distinguishability."
+    ],
+    "attack_bounds": {
+      "max_steps": 1,
+      "max_models": 100
+    }
+  },
+  "program_m": {
+    "otm_decomposition": [
+      "R",
+      "rho",
+      "K",
+      "delta",
+      "orientation"
+    ],
+    "mto_recomposition": "ZERO_STATE",
+    "identity_invariants": [
+      "Process must contain non-zero distinction"
+    ],
+    "native_failure_conditions": [
+      "Distinction aspect is missing"
+    ],
+    "status": "Fails"
+  },
+  "program_s": {
+    "formal_objects": [
+      "State Space X",
+      "Transition function f",
+      "Distinguishability relation D"
+    ],
+    "logical_form": "f: X -> X where D(x,y) = True is a prerequisite for |X| > 1",
+    "type_signature": "X: Set, f: X -> X, D: X x X -> Bool",
+    "standard_attack_families": [
+      "Set-theoretic collapse",
+      "Trivial transition analysis"
+    ],
+    "representation_losses": [
+      "None"
+    ],
+    "status": "Fails"
+  },
+  "ruling": {
+    "outcome": "CONCEPT_FALSIFIED",
+    "details": "Strong failure signal; both native procedure and standard mathematics require Distinction to define a non-trivial Process."
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "target": {
+    "target_id": "FAT-24-TRIPLET-IDENTITY-EQUIVALENCE",
+    "source_passages": [
+      "Two reference-centered triplets are computationally equivalent...",
+      "Syntactic equality is not assumed."
+    ],
+    "exact_claim": "Two reference-centered triplets are computationally equivalent only when they preserve the same whole-triplet relational organization relative to the declared symmetry reference, even if their observed slices differ.",
+    "declared_terms": [
+      "Triplet Equivalence",
+      "Relational Organization",
+      "Observed Slice"
+    ],
+    "declared_dependencies": [
+      "FAT-23-REFERENCE-CENTERED-ORDERED-RELATION"
+    ],
+    "claimed_output": "The triplet identity equivalence rule is consistent and non-collapsing.",
+    "scope": "Identity",
+    "explicit_nonclaims": [
+      "None"
+    ],
+    "falsification_conditions": [
+      "Program M: Equivalent classification depends only on component counts.",
+      "Program S: Standard observational equivalence models represent triplet identity without collapse."
+    ],
+    "attack_bounds": {
+      "max_steps": 1,
+      "max_models": 100
+    }
+  },
+  "program_m": {
+    "structural_replay": true,
+    "orientation_reversal": true,
+    "reference_substitution": true,
+    "projection_alias": true,
+    "capacity_deformation": true,
+    "status": "Survives"
+  },
+  "program_s": {
+    "formal_objects": [
+      "Pointed Structure P",
+      "Bisimulation relation B",
+      "Symmetry Group G"
+    ],
+    "logical_form": "Observational equivalence collapses distinct pre-closure phase signatures",
+    "type_signature": "Equivalence: Triplet x Triplet -> Bool",
+    "standard_attack_families": [
+      "Isomorphism verification",
+      "Bisimulation collapse check"
+    ],
+    "representation_losses": [
+      "Bisimulation collapses distinct pre-closure phase signatures",
+      "Observational equivalence collapses structural aliases"
+    ],
+    "status": "Fails"
+  },
+  "ruling": {
+    "outcome": "PROJECTION_FALSIFIED",
+    "details": "Disagreement located: the native triplet identity equivalence rule survives (successfully distinguishes structural aliases and many-to-one closure properties using whole-relation invariants), but standard mathematical representations fail. Standard observational-equivalence and bisimulation models collapse structural aliases and pre-closure phase signatures, resulting in representation collapse. This validates the native Triplet Identity Equivalence rule."
+  }
+}

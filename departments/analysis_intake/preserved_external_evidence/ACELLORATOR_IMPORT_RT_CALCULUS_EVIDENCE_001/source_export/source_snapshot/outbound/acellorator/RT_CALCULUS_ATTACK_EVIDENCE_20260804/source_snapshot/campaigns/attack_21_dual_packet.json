@@ -1,0 +1,107 @@
+{
+  "target": {
+    "target_id": "FAT-21-ADMISSIBILITY-COMPUTATION",
+    "source_passages": [
+      "T is the primary object evaluated by the Admissibility Filter...",
+      "An event happens only if T is admissible."
+    ],
+    "exact_claim": "A finite orientation domain possesses computational capability only relative to a reference operating through an admissibility sphere.",
+    "declared_terms": [
+      "Admissibility",
+      "Orientation Domain",
+      "Reference",
+      "Computation"
+    ],
+    "declared_dependencies": [
+      "FAT-20-RELATIONAL-ORDERING"
+    ],
+    "claimed_output": "Admissibility is the primitive computational operator.",
+    "scope": "Foundations / Computation",
+    "explicit_nonclaims": [
+      "None"
+    ],
+    "falsification_conditions": [
+      "Program M: Computation stabilizes without admissibility.",
+      "Program S: Conventional Turing machines represent observer-relative gating as a primitive."
+    ],
+    "attack_bounds": {
+      "max_steps": 1,
+      "max_models": 100
+    }
+  },
+  "program_m": {
+    "no_admissibility_traj": [
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "ref_1_traj": [
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "ref_4_traj": [
+      0.0,
+      5.0,
+      4.0,
+      4.0,
+      4.0,
+      4.0,
+      4.0,
+      4.0,
+      4.0,
+      4.0,
+      4.0
+    ],
+    "dynamic_traj": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+      4.0,
+      4.0
+    ],
+    "status": "Survives"
+  },
+  "program_s": {
+    "formal_objects": [
+      "Turing Machine M",
+      "Guarded Rewrite Rule R",
+      "Constraint Predicate P"
+    ],
+    "logical_form": "Transitions are unconditionally determined by state, lacking observer-relative gating",
+    "type_signature": "Transition: State x Input -> State",
+    "standard_attack_families": [
+      "Turing completeness verification",
+      "Rewrite termination check"
+    ],
+    "representation_losses": [
+      "Observer-relative dynamic gating is lost in conventional models"
+    ],
+    "status": "Fails"
+  },
+  "ruling": {
+    "outcome": "PROJECTION_FALSIFIED",
+    "details": "Disagreement located: the native observer-relative admissibility-driven computation survives (requires admissibility gating to stabilize and compute), but conventional models (Turing machine, lambda calculus) fail to represent this gating as a primitive. This confirms a representation loss in conventional computation rather than a native defect."
+  }
+}
