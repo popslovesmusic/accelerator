@@ -1,0 +1,208 @@
+{
+  "governance_patch": {
+    "id": "ARTIFACT_HYGIENE_GOVERNANCE_PATCH_V1",
+    "purpose": "Make repository artifact hygiene an explicit governance requirement so campaign runs, validation scripts, audits, and generated configs never pollute the repository root.",
+    "status": "proposed_for_induction",
+    "priority": "hard_rule",
+    "canonical_policy": {
+      "repo_root_rule": {
+        "statement": "The repository root is not a run-output location.",
+        "allowed_root_content": [
+          "source directories",
+          "governance files",
+          "README/license files",
+          "top-level stable config templates",
+          "project metadata"
+        ],
+        "forbidden_root_content": [
+          "*_out/",
+          "*_config.json",
+          "run summaries",
+          "campaign outputs",
+          "temporary audit outputs",
+          "generated markdown reports",
+          "generated JSON reports",
+          "seed outputs",
+          "dt sweep outputs",
+          "falsification outputs",
+          "cross-model outputs",
+          "malformed template-expansion filenames"
+        ]
+      },
+      "canonical_landing_zones": {
+        "campaign_runs": "results/<timestamp>_<campaign_id>/",
+        "script_runs": "results/<timestamp>_<script_id>/",
+        "configs": "results/<run_id>/configs/",
+        "outputs": "results/<run_id>/outputs/",
+        "reports": "results/<run_id>/reports/",
+        "logs": "results/<run_id>/logs/",
+        "raw_data": "results/<run_id>/raw/",
+        "audit_reports": "outputs/audits/",
+        "validation_reports": "outputs/validation/",
+        "temporary_scratch": "scratch/",
+        "legacy_root_cleanup": "results/_legacy_root_pollution_<date>/",
+        "legacy_bad_filenames": "results/_legacy_bad_filenames/"
+      },
+      "mandatory_run_id": {
+        "format": "<YYYY-MM-DD_HHMMSS>_<campaign_or_script_id>",
+        "required_for": [
+          "campaign runs",
+          "falsification runs",
+          "uncertainty runs",
+          "dt sweeps",
+          "cross-model validation",
+          "lexicon validation",
+          "multi-seed ensembles",
+          "hardware/backend comparisons"
+        ]
+      }
+    },
+    "script_requirements": {
+      "all_run_scripts_must": [
+        "accept --out or --run-dir",
+        "default output to results/<run_id>/ if no output path is supplied",
+        "write configs under results/<run_id>/configs/",
+        "write raw outputs under results/<run_id>/raw/ or results/<run_id>/outputs/",
+        "write summaries under results/<run_id>/reports/",
+        "persist the resolved config used for the run",
+        "persist seed and backend metadata",
+        "never write generated artifacts to CWD unless CWD is an approved run directory"
+      ],
+      "offending_scripts_to_patch": [
+        "scripts/run_dt_sweep_triadic.py",
+        "scripts/run_falsification_triadic.py",
+        "scripts/run_uq_triadic.py",
+        "scripts/validate_triadic_lexicon.py",
+        "scripts/run_cross_model_triadic.py",
+        "scripts/multi_model_lexicon_validation.py"
+      ],
+      "reference_pattern": {
+        "approved_example": "scripts/triadic_campaign_harness.py",
+        "reason": "Already places outputs under results/<timestamp>_<campaign_id>/"
+      },
+      "shared_helper_required": {
+        "path": "scripts/utils/run_artifacts.py",
+        "functions": [
+          "make_run_id(script_id, campaign_id=null)",
+          "create_run_dirs(run_id)",
+          "resolve_run_dir(run_id)",
+          "write_resolved_config(run_dir, name, data)",
+          "resolve_output_path(run_dir, category, name)",
+          "write_report(run_dir, name, data)"
+        ]
+      }
+    },
+    "validation_requirements": {
+      "new_validator": {
+        "id": "root_artifact_pollution_check",
+        "location": "scripts/global_validate.py",
+        "severity": "fail",
+        "fails_if_repo_root_contains": [
+          "*_out/",
+          "*_config.json",
+          "@+*+@",
+          "dt_sweep_*",
+          "fv_*",
+          "uq_seed_*",
+          "lex_val_*",
+          "lex_multi_tri_*",
+          "cross_*_out/",
+          "cross_*_config.json"
+        ],
+        "allowed_exceptions": []
+      },
+      "global_validate_must_check": [
+        "no generated run directories in repo root",
+        "no generated config files in repo root",
+        "no malformed template-expansion filenames in repo root",
+        "all recent campaign artifacts are under results/",
+        "all audit reports are under outputs/audits/",
+        "all validation reports are under outputs/validation/"
+      ]
+    },
+    "git_hygiene": {
+      "gitignore_required_additions": [
+        "# Generated run artifacts",
+        "*_out/",
+        "*_config.json",
+        "results/",
+        "scratch/",
+        "@+*+@"
+      ],
+      "rule": "Ignoring artifacts is not a substitute for writing them to the correct location. Scripts must still be patched."
+    },
+    "cleanup_migration": {
+      "required": true,
+      "steps": [
+        {
+          "step": 1,
+          "action": "Create results/_legacy_root_pollution_2026-05-25/"
+        },
+        {
+          "step": 2,
+          "action": "Move dt_sweep_*_out/ and dt_sweep_*.json into legacy cleanup directory."
+        },
+        {
+          "step": 3,
+          "action": "Move fv_*_out/ and fv_*_config.json into legacy cleanup directory."
+        },
+        {
+          "step": 4,
+          "action": "Move uq_seed_*_out/ and uq_seed_*_config.json into legacy cleanup directory."
+        },
+        {
+          "step": 5,
+          "action": "Move lex_val_*, lex_multi_tri_*, cross_* artifacts into legacy cleanup directory."
+        },
+        {
+          "step": 6,
+          "action": "Move malformed '@+$outJson+@' and '@+$outMd+@' files into results/_legacy_bad_filenames/."
+        },
+        {
+          "step": 7,
+          "action": "Patch offending scripts to use canonical landing zones."
+        },
+        {
+          "step": 8,
+          "action": "Run python -m scripts.global_validate."
+        },
+        {
+          "step": 9,
+          "action": "Confirm git status shows only intentional source/governance changes."
+        }
+      ]
+    },
+    "claim_governance_connection": {
+      "rule": "Campaign claims may not be promoted if artifact provenance is polluted or unrecoverable.",
+      "claim_gate_effect": {
+        "root_pollution_detected": "block promotion",
+        "missing_resolved_config": "block promotion",
+        "missing_seed_metadata": "block promotion",
+        "missing_backend_metadata": "block promotion",
+        "unrecoverable_output_location": "downgrade claim to exploratory"
+      }
+    },
+    "agent_role_script": {
+      "role": "Artifact Hygiene Enforcement Agent",
+      "instructions": [
+        "Before running any campaign or validation script, determine the canonical run directory.",
+        "Never allow generated artifacts to land in repository root.",
+        "Patch scripts that write to CWD before executing them.",
+        "Preserve resolved configs, raw outputs, reports, logs, seeds, and backend metadata under the run directory.",
+        "After execution, run global validation and report any hygiene violations.",
+        "Do not promote rigor or publish status while artifact hygiene checks fail."
+      ]
+    },
+    "acceptance_criteria": {
+      "patch_is_complete_when": [
+        "offending scripts no longer write configs or outputs to repo root",
+        "legacy root artifacts are moved under results/",
+        "malformed template filenames are quarantined",
+        ".gitignore includes generated-artifact protections",
+        "global_validate.py fails on future root pollution",
+        "a new campaign run produces no repo-root artifacts",
+        "claim gate refuses promotion when artifact hygiene fails"
+      ]
+    }
+  }
+}

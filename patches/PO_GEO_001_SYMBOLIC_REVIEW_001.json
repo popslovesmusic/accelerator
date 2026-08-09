@@ -1,0 +1,116 @@
+{
+  "patch_id": "PO_GEO_001_SYMBOLIC_REVIEW_001",
+  "status": "APPLIED",
+  "applied_date": "2026-06-18T17:27:21-04:00",
+  "scope": "C1_MODEL_RELATIVE_ONLY",
+  "target": "L099 / PO-GEO-001 — symbolic review",
+  "purpose": "Run the governed symbolic review for Projection Legality and determine whether L099 may advance from SYMBOLIC_CHECK_READY to symbolic_checked.",
+  "outcome": "PASS_ALL — L099 advanced to symbolic_checked",
+  "governance_note": "Passing this review only means the projection legality lemma is symbolically well-formed under declared definitions. It does not validate Pi_geo empirically, establish physical geometry, or unblock downstream application claims.",
+
+  "review_checks": [
+    {
+      "id": "SR-GEO-001",
+      "name": "Domain completeness",
+      "result": "PASS",
+      "pass_condition": "Dom(Pi_geo) admits only T with complete Trace_geo(T) labels before projection.",
+      "evidence": "Dom(Pi_geo) admission_rule: 'T enters Dom(Pi_geo) only if all four labels are present and non-null in Trace_geo(T) prior to projection.' Trace_geo attachment_rule: 'No field may be inferred after projection.' Missing/null/conflicted labels exclude T from Dom. No post-projection inference pathway exists.",
+      "fail_condition_active": false
+    },
+    {
+      "id": "SR-GEO-002",
+      "name": "Codomain containment",
+      "result": "PASS",
+      "pass_condition": "Cod(Pi_geo) contains only G for which tau_geo(G) recovers all four labels. geometry_app not treated as physical space.",
+      "evidence": "Cod(Pi_geo) admission_rule requires all four labels recoverable by tau_geo without conflict or alias. forbidden_reading explicitly states Cod is NOT physical space, metric manifold, field content, or matter content. must_not_claim enumerates physical geometry, metric realism, field_app/matter_app support.",
+      "fail_condition_active": false
+    },
+    {
+      "id": "SR-GEO-003",
+      "name": "Trace non-inversion",
+      "result": "PASS",
+      "pass_condition": "tau_geo is a partial recoverability check only, not a full inverse of Pi_geo.",
+      "evidence": "tau_geo_undefined_conditions.definition: 'tau_geo is a partial recoverability operator.' TAU-UNDEF-1 through TAU-UNDEF-4 establish four classes of undefinedness — a total inverse would be defined everywhere. must_not_claim[0]: 'tau_geo is a full inverse of Pi_geo'. OBJ-GEO-TRACE-001 operator_note confirms: 'tau_geo is NOT a full inverse of Pi_geo.'",
+      "fail_condition_active": false
+    },
+    {
+      "id": "SR-GEO-004",
+      "name": "Distinction preservation",
+      "result": "PASS",
+      "pass_condition": "PO-GEO-001A active; distinction_alias failure mode not suppressed; ~_geo non-collapsing.",
+      "evidence": "PO-GEO-001A: current_status=explicit_defined, failure_active=true, failure_mode=distinction_alias. ~_geo equivalence_relation_declaration constraint: 'may not collapse T objects that are distinct under the Topology_app equivalence relation.' TAU-UNDEF-2 fires on missing distinction_class.",
+      "fail_condition_active": false
+    },
+    {
+      "id": "SR-GEO-005",
+      "name": "Admissibility preservation",
+      "result": "PASS",
+      "pass_condition": "PO-GEO-001B active; admissibility_violation not suppressed; FAIL-T blocked from Dom.",
+      "evidence": "PO-GEO-001B: current_status=explicit_defined, failure_active=true, failure_mode=admissibility_violation. Dom admission_rule excludes FAIL-admissibility T before projection begins. check_mechanism: 'A PASS-to-FAIL transition is a failure event.' No path where FAIL geometry_app is accepted.",
+      "fail_condition_active": false
+    },
+    {
+      "id": "SR-GEO-006",
+      "name": "Orientation trace preservation",
+      "result": "PASS",
+      "pass_condition": "PO-GEO-001C active; orientation_trace_loss not suppressed; loss renders Pi_geo inadmissible.",
+      "evidence": "PO-GEO-001C: current_status=explicit_defined, failure_active=true, failure_mode=orientation_trace_loss. check_mechanism: 'Any mismatch, null, or undefined return from tau_geo is a failure event (TAU-UNDEF-2).' TAU-UNDEF-2 consequence: 'Pi_geo is inadmissible for this input class.' No orientation loss silently accepted.",
+      "fail_condition_active": false
+    },
+    {
+      "id": "SR-GEO-007",
+      "name": "Closure trace preservation",
+      "result": "PASS",
+      "pass_condition": "PO-GEO-001D active; closure_trace_loss_or_alias not suppressed; mapping injective.",
+      "evidence": "PO-GEO-001D: current_status=explicit_defined, failure_active=true, failure_mode=closure_trace_loss_or_alias. Two-part check: (1) recovery equality; (2) injectivity across T objects. TAU-UNDEF-4 covers aliasing: 'PO-GEO-001D is failed. tau_geo is not injective on closure classes for this input pair.'",
+      "fail_condition_active": false
+    },
+    {
+      "id": "SR-GEO-008",
+      "name": "No downstream leakage",
+      "result": "PASS",
+      "pass_condition": "geometry_app remains C1_STRUCTURAL_PROJECTION_ONLY; field_app/matter_app/gravity_app remain blocked; symbolic_checked not used as application support.",
+      "evidence": "PO-GEO-001 promotion_gate: 'geometry_app remains C1_STRUCTURAL_PROJECTION_ONLY after symbolic_checked unless GEO-CAMPAIGN-001 also passes.' Caps from GEO_GAP_REDUCTION_SEQUENCE_001: field_app supports_blocked, matter_app supports_blocked, gravity_app REVIEW_LOCK — none modified by this review. L100 remains CONDITIONAL. No automatic propagation chain exists.",
+      "fail_condition_active": false
+    }
+  ],
+
+  "status_transitions": {
+    "L099": {"before": "SYMBOLIC_CHECK_READY", "after": "symbolic_checked"},
+    "PO_GEO_001": {"before": "explicit_defined_pending_symbolic_check", "after": "symbolic_review_passed"},
+    "geometry_app": "C1_STRUCTURAL_PROJECTION_ONLY — UNCHANGED",
+    "field_app": "supports_blocked — UNCHANGED",
+    "matter_app": "supports_blocked — UNCHANGED",
+    "gravity_app": "REVIEW_LOCK — UNCHANGED"
+  },
+
+  "what_this_means": {
+    "L099_symbolic_checked": "The projection legality lemma is symbolically well-formed under the declared definitions. Pi_geo's domain, codomain, trace map, and all four invariant preservation checks are formally consistent within C1 scope.",
+    "what_it_does_not_mean": [
+      "Pi_geo has been empirically validated",
+      "geometry_app has been promoted beyond C1",
+      "physical geometry has been established",
+      "downstream application claims (field, matter, gravity) have been unblocked",
+      "OPEN_BRIDGE_001 has been promoted",
+      "GEO-CAMPAIGN-001 has been discharged"
+    ]
+  },
+
+  "remaining_gate": {
+    "id": "GEO-CAMPAIGN-001",
+    "action": "Execute GEO_PROJECTION_VALIDATION_001",
+    "requirement": "All four adversarial control runs must pass. Simulation evidence required.",
+    "result_if_passed": "geometry_app may be considered for advancement beyond C1_STRUCTURAL_PROJECTION_ONLY; further claim-level review required before any application support is restored."
+  },
+
+  "files_modified": [
+    "registry/math/theorem_status_registry.json",
+    "registry/math/proof_obligation_registry.json"
+  ],
+  "files_created": [
+    "patches/PO_GEO_001_SYMBOLIC_REVIEW_001.json"
+  ],
+
+  "human_arbitration_required": false,
+  "claim_class": "C1"
+}

@@ -1,0 +1,142 @@
+{
+  "phase_3_formal_stability_baseline_report": {
+    "timestamp": "2026-05-24T14:33:06.436138",
+    "status": "phase_3_baseline_established",
+    "summary": "Unified Phase 3 formal stability baseline across recursive operator systems and theorem scaffolds.",
+    "perturbation_classes": [
+      {
+        "class": "epsilon_null_boundary_perturbation",
+        "description": "Variation of the null threshold epsilon_null."
+      },
+      {
+        "class": "admissibility_window_perturbation",
+        "description": "Deformation or shift of the admissibility window A."
+      },
+      {
+        "class": "residue_state_perturbation",
+        "description": "Injection of noise or bias into the residue state R."
+      },
+      {
+        "class": "orientation_frame_perturbation",
+        "description": "Rotation or drift of the orientation frame -(i)."
+      },
+      {
+        "class": "branch_width_perturbation",
+        "description": "Variation in the number of concurrent continuation branches."
+      },
+      {
+        "class": "transport_path_perturbation",
+        "description": "Change in the length or connectivity of transport paths in NavT."
+      },
+      {
+        "class": "equivalence_relation_perturbation",
+        "description": "Alteration of the criteria for formal object equivalence."
+      },
+      {
+        "class": "symbolic_reduction_order_perturbation",
+        "description": "Change in the application sequence of symbolic rewrite rules."
+      },
+      {
+        "class": "recursive_depth_scaling",
+        "description": "Scaling of the number of recursive iterations T."
+      },
+      {
+        "class": "mixed_constraint_perturbation",
+        "description": "Simultaneous variation of multiple constraint parameters."
+      }
+    ],
+    "baseline_tests": [
+      {
+        "test_id": "P3-STAB-001",
+        "target": "delta",
+        "domain": "branch_growth_control",
+        "perturbation_class": "branch_width_perturbation",
+        "expected_behavior": "conditionally_bounded",
+        "known_instability_modes": [
+          "RFM-002"
+        ],
+        "readiness": "scaffolded"
+      },
+      {
+        "test_id": "P3-STAB-002",
+        "target": "NavT",
+        "domain": "transport_closure_retention",
+        "perturbation_class": "transport_path_perturbation",
+        "expected_behavior": "conditional",
+        "known_instability_modes": [
+          "RFM-007"
+        ],
+        "readiness": "scaffolded"
+      },
+      {
+        "test_id": "P3-STAB-003",
+        "target": "Pi_A",
+        "domain": "equivalence_collapse_stability",
+        "perturbation_class": "admissibility_window_perturbation",
+        "expected_behavior": "locally_stable",
+        "known_instability_modes": [
+          "RFM-005",
+          "RFM-011"
+        ],
+        "readiness": "scaffolded"
+      },
+      {
+        "test_id": "P3-STAB-004",
+        "target": "residue_update",
+        "domain": "residue_drift_control",
+        "perturbation_class": "residue_state_perturbation",
+        "expected_behavior": "conditional",
+        "known_instability_modes": [
+          "RFM-009"
+        ],
+        "readiness": "scaffolded"
+      },
+      {
+        "test_id": "P3-STAB-005",
+        "target": "symbolic_reduction_chains",
+        "domain": "symbolic_reduction_termination",
+        "perturbation_class": "symbolic_reduction_order_perturbation",
+        "expected_behavior": "undefined_until_tested",
+        "known_instability_modes": [
+          "RFM-003",
+          "RFM-004"
+        ],
+        "readiness": "none"
+      },
+      {
+        "test_id": "P3-STAB-006",
+        "target": "MT-001",
+        "domain": "theorem_obligation_pressure",
+        "perturbation_class": "admissibility_window_perturbation",
+        "expected_behavior": "conditional",
+        "known_instability_modes": [
+          "RFM-012"
+        ],
+        "readiness": "scaffolded"
+      },
+      {
+        "test_id": "P3-STAB-007",
+        "target": "MT-002",
+        "domain": "theorem_obligation_pressure",
+        "perturbation_class": "transport_path_perturbation",
+        "expected_behavior": "conditional",
+        "known_instability_modes": [
+          "RFM-012"
+        ],
+        "readiness": "scaffolded"
+      },
+      {
+        "test_id": "P3-STAB-008",
+        "target": "MT-003",
+        "domain": "theorem_obligation_pressure",
+        "perturbation_class": "branch_width_perturbation",
+        "expected_behavior": "branch_sensitive",
+        "known_instability_modes": [
+          "RFM-002",
+          "RFM-012"
+        ],
+        "readiness": "scaffolded"
+      }
+    ]
+  }
+}

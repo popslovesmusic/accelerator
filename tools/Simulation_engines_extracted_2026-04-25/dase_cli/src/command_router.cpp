@@ -404,9 +404,9 @@ json CommandRouter::handleCreateEngine(const json& params) {
     double kappa = params.value("kappa", 1.0);
     double gamma = params.value("gamma", 0.1);
     double dt = params.value("dt", 0.01);
-    int N_x = params.value("N_x", params.value("width", 0));
-    int N_y = params.value("N_y", params.value("height", 0));
-    int N_z = params.value("N_z", params.value("depth", 0));
+    int N_x = params.value("N_x", params.value("width", params.value("nx", 0)));
+    int N_y = params.value("N_y", params.value("height", params.value("ny", 0)));
+    int N_z = params.value("N_z", params.value("depth", params.value("nz", 0)));
 
     if (engine_type == "igsoa_complex_2d") {
         if (N_x <= 0 || N_y <= 0) {
@@ -423,7 +423,7 @@ json CommandRouter::handleCreateEngine(const json& params) {
         }
 
         num_nodes = static_cast<int>(expected_nodes);
-    } else if (engine_type == "igsoa_complex_3d") {
+    } else if (engine_type == "igsoa_complex_3d" || engine_type == "igsoa_gw" || engine_type == "satp_higgs_3d") {
         if (N_x <= 0 || N_y <= 0 || N_z <= 0) {
             return createErrorResponse("create_engine",
                                        "Invalid 3D dimensions (N_x, N_y, N_z must be > 0)",
@@ -645,6 +645,13 @@ json CommandRouter::handleGetMetrics(const json& params) {
         {"ns_per_op", metrics.ns_per_op},
         {"ops_per_sec", metrics.ops_per_sec},
         {"total_operations", metrics.total_operations},
+        {"phi_rms", metrics.phi_rms},
+        {"h_rms", metrics.h_rms},
+        {"energy_density", metrics.energy_density},
+        {"echo_intensity", metrics.echo_intensity},
+        {"entropy_rate", metrics.entropy_rate},
+        {"psi_squared_mean", metrics.psi_squared_mean},
+        {"mean_phi", metrics.mean_phi},
         {"uhd770", {
             {"used", metrics.uhd770_used},
             {"gpu_time_ms", metrics.uhd770_time_ms},

@@ -1,3 +1,8 @@
+PCD-Formal-Stack: v1
+Compliance-Charter: v2.3
+Claim-Support-Matrix: required
+Math-Source-Binding: required
+
 # Persistent Nonzero Structure in a Governed Coupled Nonlinear ODE System: Regime Mapping, Collapse Resistance, and Near-Floor Behavior
 
 ## Signature Block

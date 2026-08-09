@@ -1,0 +1,52 @@
+{
+  "rc001_derivation_closure_attempt_report": {
+    "timestamp": "2026-05-12T19:01:33.001648",
+    "target_chain": "RC-001",
+    "status": "strengthening_attempt_in_progress",
+    "step_status": [
+      {
+        "step_id": "STEP-01",
+        "status": "derivation_supported",
+        "basis": "Mapped to MT-001 formal verification and symbolic idempotence derivation.",
+        "evidence_links": [
+          "DE-STEP-RC001-01",
+          "PA-MT001-001"
+        ]
+      },
+      {
+        "step_id": "STEP-02",
+        "status": "scaffolded",
+        "basis": "Mapped to transport reduction scaffold; closure remains partial due to unresolved convergence gap.",
+        "evidence_links": [
+          "DE-STEP-RC001-02",
+          "SRC-002"
+        ],
+        "blockers": [
+          "GAP-001"
+        ]
+      }
+    ],
+    "explicit_evidence_linked": [
+      {
+        "evidence_id": "RE-RC001-S01-001",
+        "step_id": "STEP-01",
+        "type": "formal_verification_mapping",
+        "path": "proofs/MT-001/formal_verification.json",
+        "description": "Verification that E > 0 implies continuation necessity under stable admissibility."
+      },
+      {
+        "evidence_id": "RE-RC001-S02-001",
+        "step_id": "STEP-02",
+        "type": "symbolic_scaffold_mapping",
+        "path": "registry/math/symbolic_reduction_chain_registry.json#SRC-002",
+        "description": "Mapping of NavT sum to integrated influence vector scaffold."
+      }
+    ],
+    "closure_criteria_check": {
+      "all_steps_supported": false,
+      "blockers_resolved": false,
+      "ready_for_closure": false
+    },
+    "governance_note": "RC-001 remains in 'strengthening_attempt_in_progress' and cannot be closed due to active blocker GAP-001."
+  }
+}

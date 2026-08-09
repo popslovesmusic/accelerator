@@ -12,7 +12,8 @@ def run():
     
     os.makedirs(args.out, exist_ok=True)
     
-    exe_path = os.path.abspath(r"tools\stochastic_sim_cpp\stochastic_sim.exe")
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    exe_path = os.path.join(script_dir, "stochastic_sim.exe")
     config_path = os.path.abspath(args.config)
     out_dir = os.path.abspath(args.out)
     

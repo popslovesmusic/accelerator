@@ -1,0 +1,149 @@
+{
+  "schema_id": "q0_db_runtime_boundary_closure_inventory_v1",
+  "generated_at": "2026-07-14T23:40:00-04:00",
+  "source_patch": "PATCH_GOVERNANCE_Q0_REMAINING_OPEN_WORK_CLASSIFICATION_013",
+  "source_inventory": "outputs/governance_inventory/q0_remaining_open_work_inventory.json",
+  "selection_rule": "Only items already classified as NEUTRALIZED_BY_LATER_GOVERNANCE and uniquely proven to belong to the DB runtime boundary are in scope.",
+  "queue_state": {
+    "before_queue_artifact": "outputs/governance_inventory/q0_next_bounded_work_queue.json",
+    "before_count": 5,
+    "after_queue_artifact": "outputs/governance_inventory/q0_next_bounded_work_queue_active.json",
+    "after_count": 4
+  },
+  "selected_items": [
+    {
+      "item_id": "Q0-OPEN-002",
+      "ambiguity_id": "AMB-GOV-SURF-1046",
+      "source_artifact": "outputs/governance_inventory/q0_resolution_packet.json",
+      "original_path": "registry/db/acellorator_index.sqlite::governance_decision_log",
+      "original_ambiguity_statement": "Separate database-table authority family inside registry/db/acellorator_index.sqlite; queue proximity alone is insufficient to bridge it into the selected file-based control plane.",
+      "patch_013_classification": "NEUTRALIZED_BY_LATER_GOVERNANCE",
+      "later_governance_mechanism": [
+        "role-aware authority access",
+        "exact registry-scope enforcement",
+        "generated evidence authority effect NONE for the Q0 file-based partition"
+      ],
+      "current_live_runtime_evidence": [
+        {
+          "path": "outputs/governance_inventory/q0_resolution_packet.json",
+          "note": "The Q0 cluster packet excludes the decision-log table from the file-based governance validation control plane as a different governed target family."
+        },
+        {
+          "path": "governance/core_rules/GOVERNANCE_AUTHORITY_SCOPE_PARTITION_001.json",
+          "note": "The active Q0 partition limits governed authority access to declared file-based surfaces and blocks generic mixed-role access."
+        },
+        {
+          "path": "tools/runtime_authority/__init__.py",
+          "note": "resolve_role_aware_authority('REGISTRY_STATE_AUTHORITY', target) returns defer when the target is not part of the governed Q0 authority surface."
+        },
+        {
+          "path": "registry/db/README.md",
+          "note": "governance_decision_log is a runtime decision log and the event/log layer does not replace registry authority."
+        }
+      ],
+      "closure_decision": "PROSPECTIVELY_CLOSED",
+      "deterministic_reason": "Current enforced role-aware authority access classifies the table as NOT_AUTHORITY_ACCESS for the Q0 partition, so it cannot control live Q0 file-based authority resolution or registry mutation."
+    },
+    {
+      "item_id": "Q0-OPEN-003",
+      "ambiguity_id": "AMB-GOV-SURF-1047",
+      "source_artifact": "outputs/governance_inventory/q0_resolution_packet.json",
+      "original_path": "registry/db/acellorator_index.sqlite::governance_events",
+      "original_ambiguity_statement": "Separate database-table authority family inside registry/db/acellorator_index.sqlite; queue proximity alone is insufficient to bridge it into the selected file-based control plane.",
+      "patch_013_classification": "NEUTRALIZED_BY_LATER_GOVERNANCE",
+      "later_governance_mechanism": [
+        "role-aware authority access",
+        "exact registry-scope enforcement",
+        "generated evidence authority effect NONE for append-only runtime events"
+      ],
+      "current_live_runtime_evidence": [
+        {
+          "path": "outputs/governance_inventory/q0_resolution_packet.json",
+          "note": "The Q0 cluster packet excludes governance_events as a separate DB runtime family."
+        },
+        {
+          "path": "tools/runtime_authority/__init__.py",
+          "note": "The active Q0 role map contains no DB-table authority target for governance_events, so role-aware access defers it as outside governed Q0 authority."
+        },
+        {
+          "path": "registry/db/README.md",
+          "note": "governance_events is append-only runtime event-bus evidence and does not replace registry authority."
+        }
+      ],
+      "closure_decision": "PROSPECTIVELY_CLOSED",
+      "deterministic_reason": "The table remains a runtime event-bus surface, but current Q0 authority enforcement excludes it from live file-based authority resolution and mutation."
+    },
+    {
+      "item_id": "Q0-OPEN-004",
+      "ambiguity_id": "AMB-GOV-SURF-1050",
+      "source_artifact": "outputs/governance_inventory/q0_resolution_packet.json",
+      "original_path": "registry/db/acellorator_index.sqlite::semantic_authority_events",
+      "original_ambiguity_statement": "Separate database-table authority family inside registry/db/acellorator_index.sqlite; queue proximity alone is insufficient to bridge it into the selected file-based control plane.",
+      "patch_013_classification": "NEUTRALIZED_BY_LATER_GOVERNANCE",
+      "later_governance_mechanism": [
+        "role-aware authority access",
+        "exact registry-scope enforcement",
+        "append-only semantic authority history does not receive Q0 registry-state authority"
+      ],
+      "current_live_runtime_evidence": [
+        {
+          "path": "outputs/governance_inventory/q0_resolution_packet.json",
+          "note": "The Q0 cluster packet excludes semantic_authority_events as a different governed target family."
+        },
+        {
+          "path": "tools/runtime_authority/__init__.py",
+          "note": "No Q0 role target mapping exists for semantic_authority_events, so role-aware authority access defers it as out of governed surface."
+        },
+        {
+          "path": "registry/db/README.md",
+          "note": "semantic_authority_events is append-only semantic-authority change history rather than canonical registry state."
+        }
+      ],
+      "closure_decision": "PROSPECTIVELY_CLOSED",
+      "deterministic_reason": "Current governed enforcement prevents the semantic-authority event history table from acting as live Q0 registry-state authority or writer authority."
+    },
+    {
+      "item_id": "Q0-OPEN-005",
+      "ambiguity_id": "AMB-GOV-SURF-1051",
+      "source_artifact": "outputs/governance_inventory/q0_resolution_packet.json",
+      "original_path": "registry/db/acellorator_index.sqlite::semantic_authority_map",
+      "original_ambiguity_statement": "Separate database-table authority family inside registry/db/acellorator_index.sqlite; queue proximity alone is insufficient to bridge it into the selected file-based control plane.",
+      "patch_013_classification": "NEUTRALIZED_BY_LATER_GOVERNANCE",
+      "later_governance_mechanism": [
+        "role-aware authority access",
+        "exact registry-scope enforcement",
+        "Q0 writer-contract enforcement blocks registry/db writes"
+      ],
+      "current_live_runtime_evidence": [
+        {
+          "path": "outputs/governance_inventory/q0_resolution_packet.json",
+          "note": "The Q0 cluster packet excludes semantic_authority_map as a separate DB runtime family."
+        },
+        {
+          "path": "tools/runtime_authority/__init__.py",
+          "note": "Role-aware authority resolution treats semantic_authority_map as outside the governed Q0 authority surface."
+        },
+        {
+          "path": "tools/runtime_authority/__init__.py",
+          "note": "validate_write_boundary('registry/db', 'WRITE', ...) blocks with writer_missing because no Q0 writer contract exists for registry/db."
+        },
+        {
+          "path": "scripts/query_governance.py",
+          "note": "Authority resolution against registry/db/acellorator_index.sqlite::semantic_authority_map returns no governed authority surface matched the target."
+        }
+      ],
+      "closure_decision": "PROSPECTIVELY_CLOSED",
+      "deterministic_reason": "Even though the semantic-authority map exists in the DB runtime, current Q0 role-aware access and writer-boundary enforcement prevent it from acting as live file-based Q0 control-plane authority."
+    }
+  ],
+  "excluded_as_out_of_scope": [],
+  "remains_open": [],
+  "completion_assertions": {
+    "historical_ambiguity_records_rewritten": 0,
+    "patch_002_status_changed": false,
+    "out_of_scope_items_changed": 0,
+    "full_project_validation_run": false,
+    "closed_item_count": 4,
+    "remaining_q0_item_count": 8
+  }
+}

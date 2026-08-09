@@ -1,0 +1,54 @@
+{
+  "report_id": "KNOWLEDGE_INGESTION_AUDIT_AND_REBUILD_V1_REPORT",
+  "timestamp": "2026-05-10T22:00:00Z",
+  "status": "COMPLETED",
+  "patch_id": "PCD_KNOWLEDGE_INGESTION_AUDIT_AND_REBUILD_V1",
+  "summary": "Implemented the knowledge ingestion audit and rebuild layer. Established the audit registry, rebuild manifest, report schema, and rebuild script scaffold. Implemented governance guardrails to ensure context packets and agent memory remain synchronized with canonical sources.",
+  "operations_summary": [
+    {
+      "operation": "create_knowledge_ingestion_audit",
+      "target": "registry/knowledge_ingestion_audit.json",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "create_rebuild_script",
+      "path": "scripts/rebuild_knowledge_index.py",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "define_rebuild_inputs_and_checks",
+      "target": "registry/knowledge_ingestion_rebuild_manifest.json",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "define_rebuild_report_schema",
+      "target": "registry/knowledge_rebuild_report_schema.json",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "bind_rebuild_to_context_assembly",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "add_knowledge_rebuild_guardrails",
+      "target": "registry/lexicon_gap_queue.json",
+      "status": "SUCCESS",
+      "guardrails_added": [
+        "no_stale_knowledge_index_for_governed_review_v1",
+        "no_unrecoverable_context_source_v1",
+        "no_rebuild_without_report_v1"
+      ]
+    }
+  ],
+  "knowledge_system_status": {
+    "audit_registry_active": true,
+    "rebuild_manifest_defined": true,
+    "rebuild_script_ready": true,
+    "sync_binding_active": true
+  },
+  "charter_compliance_check": {
+    "charter_version": "2.3",
+    "status": "COMPLIANT",
+    "notes": "The knowledge ingestion audit and rebuild system ensures that derived search indexes remain synchronized with canonical governance artifacts, fulfilling the mandate for auditable and high-rigor research support."
+  }
+}

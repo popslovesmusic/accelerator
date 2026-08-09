@@ -1,0 +1,38 @@
+{
+  "artifact_type": "PROVISIONAL_PARTIAL_CLASSIFICATION_POLICY",
+  "artifact_id": "RT_ADMOBS_UNDEFINED_PARTIAL_POLICY_20260728_001",
+  "status": "PROVISIONAL_READY_FOR_HUMAN_REVIEW",
+  "canonicality": "NON_CANONICAL_CANDIDATE",
+  "claim_ceiling": "C1_MODEL_RELATIVE",
+  "source_decision": "RT_ADMOBS_UNDEFINED_POLICY_HUMAN_REVIEW_20260728_001",
+  "policy": {
+    "partial_result": "Excl_obs_x_partial(Omega_obs) := (Omega_x_pos, Omega_x_neg, Omega_x_undef)",
+    "Omega_x_pos": "{o in Omega_obs | AdmObs_x(o) = TRUE}",
+    "Omega_x_neg": "{o in Omega_obs | AdmObs_x(o) = FALSE}",
+    "Omega_x_undef": "{o in Omega_obs | AdmObs_x(o) = UNDEFINED}",
+    "IsTotal_x": "Omega_x_undef = empty"
+  },
+  "state_rules": {
+    "TOTAL_CLASSIFICATION": "Every orientation classified.",
+    "PARTIAL_CLASSIFICATION": "Some orientations classified and some undefined.",
+    "TOTAL_ORIENTATION_EXCLUSION": "Omega_x_pos = empty and Omega_x_undef = empty.",
+    "INDETERMINATE_ADMISSIBILITY": "Omega_x_pos = empty and Omega_x_undef != empty.",
+    "TOTAL_UNDEFINED_INVOCATION": "Omega_x_undef = Omega_obs."
+  },
+  "invariants": [
+    "UNDEFINED is neither TRUE nor FALSE.",
+    "Undefined classifications remain explicit provenance.",
+    "Established TRUE/FALSE witnesses remain valid for their evaluated orientations.",
+    "Undefined cannot be coerced to FALSE.",
+    "Total exclusion requires total classification.",
+    "Empty admissible family is not symmetry annihilation."
+  ],
+  "downstream": {
+    "default": "RefOrient requires TOTAL_CLASSIFICATION.",
+    "exception": "PARTIAL_SUFFICIENCY_WITNESS may permit provisional RefOrient only when every permitted resolution preserves the selected orientation's admissibility and reference-determining role.",
+    "delta_a": "UNDEFINED AdmObs_x leaves Gamma_O undefined and cannot yield positive delta_a admission."
+  },
+  "next_action": "Define PartialSufficiencyWitness and decide whether provisional RefOrient outputs can enter delta_a or remain non-realizing candidates.",
+  "not_changed": ["delta_a", "delta_alpha", "P_adm", "D-semantics obligations", "canonical textbook", "canonical registries"],
+  "human_review_required": true
+}

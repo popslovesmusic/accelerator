@@ -1,0 +1,57 @@
+{
+  "schema_id": "q3_c03_executed_pass_semantic_pattern_summary_090_v1",
+  "generated_at": "2026-07-15T00:00:00-04:00",
+  "patch_id": "PATCH_GOVERNANCE_Q3_C03_EXECUTED_PASS_PROPOSAL_SEMANTICS_ANALYSIS_090",
+  "patterns": [
+    {
+      "pattern": "EXECUTED_PROPOSAL_NON_AUTHORITY",
+      "member_global_ambiguity_ids": [
+        "AMB-GOV-SURF-0695",
+        "AMB-GOV-SURF-0703",
+        "AMB-GOV-SURF-0704",
+        "AMB-GOV-SURF-0705",
+        "AMB-GOV-SURF-0706",
+        "AMB-GOV-SURF-0707",
+        "AMB-GOV-SURF-0708",
+        "AMB-GOV-SURF-0709",
+        "AMB-GOV-SURF-0710",
+        "AMB-GOV-SURF-0712",
+        "AMB-GOV-SURF-0725",
+        "AMB-GOV-SURF-0726",
+        "AMB-GOV-SURF-0727",
+        "AMB-GOV-SURF-0729",
+        "AMB-GOV-SURF-0733",
+        "AMB-GOV-SURF-0734",
+        "AMB-GOV-SURF-0735",
+        "AMB-GOV-SURF-0736",
+        "AMB-GOV-SURF-0737",
+        "AMB-GOV-SURF-0740",
+        "AMB-GOV-SURF-0869",
+        "AMB-GOV-SURF-0870",
+        "AMB-GOV-SURF-0871"
+      ],
+      "evidence_shape": "status=EXECUTED, validation.result=pass, governance_status present, no authority_effect, no explicit lifecycle transition",
+      "authority_conclusion": "Execution state is bounded process evidence, not authority promotion."
+    },
+    {
+      "pattern": "PASS_VALIDATION_NON_AUTHORITY_WITH_IMPLEMENTED_EFFECTS",
+      "member_global_ambiguity_ids": [
+        "AMB-GOV-SURF-0742",
+        "AMB-GOV-SURF-0743"
+      ],
+      "evidence_shape": "status=PASS, validation_results and validation_commands present, files_changed present, rollback_result present, no authority_effect",
+      "authority_conclusion": "PASS validation and implemented effects describe bounded work and verification; patch-record authority remains separate."
+    }
+  ],
+  "field_separation_contracts": [
+    "status separates execution/process state from authority.",
+    "validation.result and validation_results separate verification state from authority.",
+    "files_changed separates implementation evidence from authority.",
+    "authority_effect is the existing explicit authority dimension, and it is absent for all C03 items."
+  ],
+  "shared_lookup_leak": {
+    "decision": "allow",
+    "reason": "Registry surfaces remain authoritative for governed ledger, debt, and patch records.",
+    "consequence": "Generic lookup still collapses registry patch-record presence into live authority candidacy for both executed-only and pass-bundle records."
+  }
+}

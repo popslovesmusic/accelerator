@@ -1,0 +1,116 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Candidate Policy Registry Schema",
+  "description": "Registry of governed finite candidate policies.",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "policies"
+  ],
+  "properties": {
+    "schema_id": {
+      "type": "string",
+      "const": "candidate_policy_registry_v1"
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "policies": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/policy"
+      }
+    }
+  },
+  "$defs": {
+    "policy": {
+      "type": "object",
+      "required": [
+        "candidate_policy_id",
+        "candidate_type",
+        "universe_source",
+        "eligibility_filters",
+        "authority_filters",
+        "freshness_filters",
+        "scope_filters",
+        "compatibility_filters",
+        "ranking_method",
+        "maximum_candidates",
+        "empty_set_behavior",
+        "tie_behavior",
+        "policy_version",
+        "status"
+      ],
+      "properties": {
+        "candidate_policy_id": {
+          "type": "string"
+        },
+        "candidate_type": {
+          "type": "string"
+        },
+        "universe_source": {
+          "type": "string"
+        },
+        "eligibility_filters": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "authority_filters": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "freshness_filters": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scope_filters": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "compatibility_filters": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ranking_method": {
+          "type": "string"
+        },
+        "maximum_candidates": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "empty_set_behavior": {
+          "type": "string"
+        },
+        "tie_behavior": {
+          "type": "string"
+        },
+        "policy_version": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "ACTIVE",
+            "LATENT",
+            "DEPRECATED",
+            "DISABLED"
+          ]
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

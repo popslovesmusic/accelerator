@@ -1,0 +1,113 @@
+{
+  "registry_id": "PCD_VALIDATION_INHERITANCE_REGISTRY",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "inheritance_id",
+      "source_type",
+      "source_name",
+      "inherits_from",
+      "inheritance_scope",
+      "max_inheritable_status",
+      "blocking_conditions",
+      "notes"
+    ]
+  },
+  "inheritance_links": [
+    {
+      "inheritance_id": "VI-ONTO-001",
+      "source_type": "derived_shorthand",
+      "source_name": "state",
+      "inherits_from": "process",
+      "inheritance_scope": "semantic_and_claim_constraints",
+      "max_inheritable_status": "L3",
+      "blocking_conditions": [
+        "primitive_reification_detected",
+        "domain_specific_overloading"
+      ],
+      "notes": "State inherits validation only as shorthand for stabilized process expression."
+    },
+    {
+      "inheritance_id": "VI-ONTO-002",
+      "source_type": "derived_shorthand",
+      "source_name": "field",
+      "inherits_from": "process",
+      "inheritance_scope": "semantic_and_claim_constraints",
+      "max_inheritable_status": "L3",
+      "blocking_conditions": [
+        "field_as_primitive_detected"
+      ],
+      "notes": "Field inherits validation only as locally resolved process expression."
+    },
+    {
+      "inheritance_id": "VI-OPER-001",
+      "source_type": "observable_family",
+      "source_name": "projection_derived_observables",
+      "inherits_from": "projection",
+      "inheritance_scope": "operator_validity",
+      "max_inheritable_status": "L2",
+      "blocking_conditions": [
+        "observable_not_operationalized",
+        "projection_scope_missing"
+      ],
+      "notes": "Projection-derived observables inherit bounded operational validity from the projection operator."
+    },
+    {
+      "inheritance_id": "VI-OPER-002",
+      "source_type": "residue_update_family",
+      "source_name": "Psi_derived_updates",
+      "inherits_from": "Psi",
+      "inheritance_scope": "update_operator_behavior",
+      "max_inheritable_status": "L2",
+      "blocking_conditions": [
+        "missing_residue_context",
+        "memoryless_behavior_detected"
+      ]
+    },
+    {
+      "inheritance_id": "VI-ALIAS-001",
+      "source_type": "alias",
+      "source_name": "delta",
+      "inherits_from": "Delta",
+      "inheritance_scope": "role_specific_validation",
+      "max_inheritable_status": "equal_to_source",
+      "blocking_conditions": [
+        "contextual_role_shift"
+      ]
+    },
+    {
+      "inheritance_id": "VI-ALIAS-002",
+      "source_type": "alias",
+      "source_name": "deviation",
+      "inherits_from": "Delta",
+      "inheritance_scope": "role_specific_validation",
+      "max_inheritable_status": "equal_to_source",
+      "blocking_conditions": [
+        "non_transition_usage_detected"
+      ]
+    },
+    {
+      "inheritance_id": "VI-THEOREM-001",
+      "source_type": "lemma_bound_term",
+      "source_name": "projection",
+      "inherits_from": "P004",
+      "inheritance_scope": "proof_constrained_operator_use",
+      "max_inheritable_status": "TS3",
+      "blocking_conditions": [
+        "open_gap_dependency",
+        "proof_downgrade"
+      ]
+    },
+    {
+      "inheritance_id": "VI-THEOREM-002",
+      "source_type": "lemma_bound_term",
+      "source_name": "observable",
+      "inherits_from": "projection",
+      "inheritance_scope": "projection_constrained_observable_use",
+      "max_inheritable_status": "L2",
+      "blocking_conditions": [
+        "observable_claim_exceeds_projection_scope"
+      ]
+    }
+  ]
+}

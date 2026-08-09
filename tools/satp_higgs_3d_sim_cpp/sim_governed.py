@@ -12,7 +12,8 @@ def run():
     
     os.makedirs(args.out, exist_ok=True)
     
-    exe_path = os.path.abspath(r"tools\satp_higgs_3d_sim_cpp\satp_higgs_3d_sim.exe")
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    exe_path = os.path.join(script_dir, "satp_higgs_3d_sim.exe")
     config_path = os.path.abspath(args.config)
     out_dir = os.path.abspath(args.out)
 

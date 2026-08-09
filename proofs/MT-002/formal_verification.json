@@ -1,0 +1,42 @@
+{
+  "meta": {
+    "version": "1.0",
+    "theorem_id": "MT-002",
+    "status": "formal_proof_artifact"
+  },
+  "formal_verification": {
+    "target": "NavT(x, P_null) ~ x",
+    "equivalence_relation": "EQ-002",
+    "quantifier": {
+      "type": "local_universal",
+      "path_condition": "NI-001",
+      "state_condition": "NI-002"
+    },
+    "logical_trace": [
+      { "step": 1, "logic": "x' = NavT(x, P_null)", "basis": "operation" },
+      { "step": 2, "logic": "invariant(R, Frame, A)", "basis": "NI-003, NI-004, NI-005" },
+      { "step": 3, "logic": "x' = x", "basis": "null path definition" },
+      { "step": 4, "logic": "x' ~ x", "basis": "EQ-002 reflexivity" }
+    ],
+    "verification_status": "symbolic_verified_under_assumptions",
+    "proof_obligations": [
+      "PO-002"
+    ],
+    "validated_against": [
+      "registry/math/proof_obligation_registry.json",
+      "registry/math/theorem_proof_strengthening_registry.json",
+      "registry/math/theorem_promotion_blocker_registry.json"
+    ],
+    "traceability": {
+      "proof_file": "proofs/MT-002/proof.md",
+      "review_package": "registry/math/mt002_formal_review_package.json",
+      "evidence_file": "outputs/math_tests/p3_stab_002_navt_symbolic_result.json"
+    },
+    "promotion_gate": {
+      "must_not_promote": false,
+      "reason": "formal promotion authorized; symbolic verification under assumptions remains recorded as evidence"
+    },
+    "failure_modes_addressed": ["NTFM-003", "TIFM-005"],
+    "must_not_promote": false
+  }
+}

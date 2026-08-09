@@ -1,0 +1,79 @@
+{
+  "crawl_id": "analysis_crawl_20260730_general_governed_state_003",
+  "crawl_type": "BOUNDED_READ_ONLY_ANALYSIS_CRAWL",
+  "crawl_date": "2026-07-30",
+  "campaign_id": "CAMPAIGN_GENERAL_GOVERNED_STATE_20260730_003",
+  "agent_role": "RT_AGENT_INFINITE_THEORY_ANALYST",
+  "scope": {
+    "domains": ["analysis_intake", "induction_queue", "research_debt", "master_work_index", "program_state", "dependency_state", "validation_health", "textbook_projection"],
+    "finite_input_scope": true,
+    "include_superseded": true,
+    "maximum_reasoning_depth": 8,
+    "maximum_candidate_count": 1000,
+    "stopping_rule": "Bounded source set inspected; further reconciliation requires an authorized patch or new evidence."
+  },
+  "normalization_rule": "Canonical/live registries remain authoritative; local intake captures remain provisional; analysis does not synchronize, promote, execute, or repair state.",
+  "source_artifacts": [
+    {"path": "departments/analysis_intake/induction_queue/queue_registry.json", "sha256": "F3447D4D12D8F0E35D4A31948BBA4D69E9FC0210637AB7AF83768024E0D0D501"},
+    {"path": "departments/analysis_intake/chat_captures/RT_GR_BRIDGE_TRIANGLE_CLOSURE_RESIDUE_CAT_INDUCTION_20260730_001.md", "sha256": "7528D468305D6CD494FE317ACCD5F561D311E3BD9DAADDE8D01ABC6C24A1E40E"},
+    {"path": "departments/analysis_intake/chat_captures/RT_ORIENTATION_ORDINAL_MTO_INDUCTION_20260730_002.md", "sha256": "A9213ED21B32BB3D680FEC79F41519F43A7FBADDA030958AA52C0CCE5356D47E"},
+    {"path": "governance/live/induction_queue.json", "sha256": "56D38546536899D0887CFDAC67EBDF1EE069A8BA62C222FFB3C2DB81DC918417"},
+    {"path": "governance/live/research_debt_registry.json", "sha256": "A1108B86C1BBED92A678C36E88B91885FE134BE95F1182A24E840D170798B626"},
+    {"path": "governance/live/master_work_index.json", "sha256": "3539C6CE10CE7DCA624D505D534AF79D64CE1561ED05C59F58C3A6BCE80B3CD2"},
+    {"path": "departments/analysis/program_state_report.json", "sha256": "AED0C73CCF54670919F9590AEA137921263B3D0C81A0035E600FE0F91AF9FF98"},
+    {"path": "departments/analysis/dependency_report.json", "sha256": "B5DDD6B79BF9A067CE5EA282352C90FE7794A7CCFA6C5AB471E6441B74EC3C45"},
+    {"path": "outputs/audits/global_health_report.json", "sha256": "E76F9D07571805EA6877D198FD61F6B9CDF9069A78A8B151212DD73582EF17F4"},
+    {"path": "docs/textbook/mono_process_textbook_complete.md", "sha256": "BB760AD5D09C5F10B416AE67C90404194AD0AB1CEFBF9560BA1E9F834D6401A9"}
+  ],
+  "normalization_and_dependency_findings": [
+    {"discovery_id": "DISCOVERY_INTAKE_LIVE_QUEUE_RECONCILIATION_20260730", "discovery_class": "GOVERNANCE_DEFECT", "epistemic_status": "OBSERVED", "proof_status": "NOT_ATTEMPTED", "statement": "The local intake queue contains IQ_2026_07_30_046 and IQ_2026_07_30_047, while the inspected live induction queue contains 45 entries and no matching records for those two packets.", "blocking_condition": "Downstream live-queue binding is absent or not represented in the inspected live surface.", "recommended_next_action": "Human review of whether these provisional captures should receive live queue bindings; do not auto-bind during crawl."},
+    {"discovery_id": "DISCOVERY_D_DEBT_REPORT_DRIFT_20260730", "discovery_class": "CONTRADICTION", "epistemic_status": "OBSERVED", "proof_status": "OBLIGATIONS_IDENTIFIED", "statement": "governance/live/research_debt_registry.json records DEBT_D_SEMANTICS_PROOF_001 as resolved with C1-bounded support, while departments/analysis/program_state_report.json still lists it as open and blocking theorem promotion.", "blocking_condition": "Stale analysis projection or incomplete reconciliation; theorem promotion remains blocked by the stricter claim gate regardless.", "recommended_next_action": "Reconcile the program-state report against the live debt registry in a separate authorized maintenance task."},
+    {"discovery_id": "DISCOVERY_WORK_INDEX_CLOSED_SOURCE_STATE_ACTIVE_20260730", "discovery_class": "UNRESOLVED", "epistemic_status": "OBSERVED", "proof_status": "NOT_ATTEMPTED", "statement": "The master work index has 91 items with 0 active_work_items in the program-state projection, while source registries retain active, bounded, and provisional states.", "blocking_condition": "Future evidence must be routed through source registries and represented by fresh governed work items; the closed index is not evidence that source obligations disappeared.", "recommended_next_action": "Preserve source-scoped watchlist and reopen only on new evidence."},
+    {"discovery_id": "DISCOVERY_VALIDATION_HYGIENE_WARNINGS_20260730", "discovery_class": "GOVERNANCE_DEFECT", "epistemic_status": "OBSERVED", "proof_status": "NOT_ATTEMPTED", "statement": "Global validation reports registry, math, and DB success but hygiene warnings for legacy result naming and unverified result structures.", "blocking_condition": "Validation health is warning-level rather than clean.", "recommended_next_action": "Address hygiene warnings through a separately authorized maintenance campaign; do not rewrite historical result paths during crawl."}
+  ],
+  "candidate_discoveries": [
+    {"discovery_id": "DISCOVERY_GR_CLOSURE_RESIDUE_CANDIDATE_20260730", "discovery_class": "GENERALIZATION_CANDIDATE", "epistemic_status": "CONJECTURED", "proof_status": "OBLIGATIONS_IDENTIFIED", "statement": "A model-relative mapping may treat failed cyclic relational closure as a typed residue comparable to geometric curvature.", "source_object_ids": ["RT_GR_BRIDGE_TRIANGLE_CLOSURE_RESIDUE_CAT_INDUCTION_20260730_001"], "uncertainty": "Analogy/model mapping only; coordinate independence, tensor structure, continuum limit, and stress-energy relation remain unshown.", "falsification_condition": "A bounded formalization fails to produce a coordinate-independent residue with the required transport/curvature correspondence."},
+    {"discovery_id": "DISCOVERY_ORIENTATION_MTO_CANDIDATE_SET_20260730", "discovery_class": "CONCEPT_CANDIDATE", "epistemic_status": "SOURCE_REPORTED", "proof_status": "OBLIGATIONS_IDENTIFIED", "statement": "The orientation/ordinal/MTO packet contains 20 separable candidates, prioritized as symmetry-to-orientations, ordinal alternation-to-wave projection, and MTO closure.", "source_object_ids": ["RT_ORIENTATION_ORDINAL_MTO_INDUCTION_20260730_002"], "uncertainty": "Diagrams, formal types, ordinal domain, and MTO contract are not supplied.", "falsification_condition": "A typed countermodel shows the proposed orientation basis is nonminimal, non-admissible, or unable to preserve the stated closure invariant."}
+  ],
+  "evidence_alignment": {
+    "local_intake_preservation": "pass",
+    "live_induction_binding_for_new_packets": "not_found",
+    "live_debt_registry": "bounded_resolution_recorded",
+    "program_state_projection": "contradictory_on_D_debt",
+    "master_work_index": "no_active_work_items_in_projection",
+    "global_health": "warning",
+    "db_health": "pass",
+    "textbook_projection": "no_patch_authorized_or_required_for_provisional_candidates"
+  },
+  "results": {
+    "objects_analyzed": 10,
+    "theorem_candidates": 0,
+    "lemma_candidates": 0,
+    "proof_gaps": 2,
+    "concept_candidates": 1,
+    "contradictions": 1,
+    "counterexamples": 0,
+    "research_campaigns": 1,
+    "governance_defects": 2,
+    "duplicates_rejected": 0
+  },
+  "frontier": {
+    "open_branches": ["live binding decision for new intake packets", "D-debt projection reconciliation", "hygiene warning remediation"],
+    "blocked_branches": ["theorem promotion", "universal MTO claim", "external quantum/GR identity claim"],
+    "deferred_branches": ["formal orientation basis", "formal MTO history-preservation invariant", "curvature-residue bridge formalization"]
+  },
+  "recommended_next_action": {
+    "recommendation": "RECONCILE_LIVE_PROJECTIONS_BEFORE_NEW_THEORY_WORK",
+    "action": "Run a human-approved maintenance reconciliation for the local/live induction queues and the D-semantics program-state projection, then separately scope hygiene remediation.",
+    "unlock": "Restores a consistent governed starting state for reviewing the new induction candidates.",
+    "do_not_begin_with": "promotion, theorem admission, simulation execution, or external-physics interpretation"
+  },
+  "success_assessment": {
+    "outcome": "PARTIAL_SUCCESS",
+    "reason": "The crawl preserved source scope, connected the new induction packets to current governance state, and exposed actionable queue/projection mismatches; it did not resolve them because crawl is read-only.",
+    "confidence": "high"
+  },
+  "termination_reason": "Finite source scope completed; further progress requires authorized reconciliation or new evidence.",
+  "continuation_token": "CRAWL_FRONTIER_20260730_GENERAL_003_RECONCILE_QUEUE_AND_D_PROJECTION",
+  "what_this_crawl_does_not_authorize": ["registry mutation", "live queue binding", "claim promotion", "theorem or proof admission", "simulation execution", "textbook patch", "external physical interpretation", "closing debt or campaigns"]
+}

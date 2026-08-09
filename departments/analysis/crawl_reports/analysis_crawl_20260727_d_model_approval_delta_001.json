@@ -1,0 +1,22 @@
+{
+  "crawl_id": "analysis_crawl_20260727_d_model_approval_delta_001",
+  "campaign_id": "CAMPAIGN_D_MODEL_APPROVAL_DELTA_20260727_001",
+  "crawl_date": "2026-07-27",
+  "mode": "GOVERNED_ANALYSIS_CRAWL",
+  "read_only": true,
+  "scope": {"obligations": ["OBL-D-001D", "OBL-D-001E"], "domains": ["mathematics", "governance", "analysis"], "include_superseded": true, "maximum_reasoning_depth": 4, "maximum_candidate_count": 100},
+  "source_artifacts": ["departments/analysis/AGENTS.md", "departments/analysis/department_ssot.md", "departments/analysis/GEMINI.md", "registry/math/d_semantics_obligation_registry.json", "departments/analysis/campaigns/CAMPAIGN_D_OBL_D_001D_001E_FORMAL_MODELING_20260727_001/human_review_approval.json", "departments/analysis/campaigns/CAMPAIGN_D_OBL_D_001D_001E_FORMAL_MODELING_20260727_001/model_check_report.json", "departments/analysis/campaigns/CAMPAIGN_D_COMBINED_GATE_REVIEW_20260726_017/gate_review_report.json", "outputs/audits/global_health_report.json", "registry/db/acellorator_index.sqlite"],
+  "normalization_rule": "Canonical obligation registry controls status; approved campaign artifacts provide bounded evidence only; runtime and DB are projections and freshness evidence.",
+  "directly_observed": {"approval_status": "APPROVED_BOUNDED_CANDIDATE_PACKAGE", "model_check": {"status": "PASS_BOUNDED_FORMAL_MODEL", "fixtures": 9, "passed": 9, "failed": 0}, "obligations": {"OBL-D-001D": "OPEN", "OBL-D-001E": "OPEN"}, "claim_ceiling": "C1_DEFINED_PROVISIONAL", "promotion_authorized": false, "discharge_authorized": false, "db_snapshot_status": "fresh", "textbook_freshness": "pass", "global_validation": "warning_with_no_failed_stages"},
+  "discoveries": [
+    {"discovery_id":"DISCOVERY_D_APPROVAL_ALIGNMENT_001","discovery_class":"PROOF_OBLIGATION","title":"Approval preserves bounded evidence without changing obligation status","statement":"The approved package and canonical registry both retain D/E as open and C1-bounded.","epistemic_status":"OBSERVED","proof_status":"BLOCKED","support_level":"C1_DEFINED_PROVISIONAL","falsification_condition":"A current authorized registry update records accepted discharge evidence."},
+    {"discovery_id":"DISCOVERY_D_MODEL_CHECK_001","discovery_class":"UNEXPLAINED_RESULT","title":"Finite model checker passes declared cases","statement":"All 9 declared fixtures match expected outcomes, including negative linkage and threshold cases.","epistemic_status":"MECHANICALLY_VERIFIED","proof_status":"OBLIGATIONS_IDENTIFIED","support_level":"C1_MODEL_RELATIVE","falsification_condition":"A rerun produces a failed fixture or the model contract changes."}
+  ],
+  "open_research_debt": ["OBL-D-001D", "OBL-D-001E", "independent formal adequacy review"],
+  "recommended_next_action": {"executive_recommendation":"CONTINUE_RESEARCH","action":"Obtain independent formal assessment of witness provenance, history sufficiency, and Pi_D,C model adequacy.","unlock":"Determines whether the bounded candidate can support a stronger governed obligation package."},
+  "assessment": {"outcome":"PARTIAL_SUCCESS","confidence":"high_for_status_and_fixture_observation","objective_completion":{"objectives_completed":1,"objectives_total":2,"completion_percent":50},"novelty":{"new_concepts":0,"duplicate_findings":0,"superseded_findings":0,"novelty_score":0.1},"proof_readiness":{"proved":0,"blocked":2,"proof_obligations_remaining":2},"quality":{"scope_coverage":"bounded_delta","dependency_resolution":"partial","reasoning_depth_used":3,"termination_quality":"scope_covered","evidence_quality":"mechanically_verified_and_source_reported"}},
+  "frontier": {"open_branches":["independent D model assessment","bounded E threshold review"],"blocked_branches":["discharge","promotion"],"deferred_branches":["universal semantics","external correspondence"]},
+  "termination_reason":"Approval delta reconciled; independent formal evidence remains required.",
+  "continuation_token":"CONTINUE_CAMPAIGN_D_MODEL_APPROVAL_DELTA_20260727_001",
+  "what_this_crawl_does_not_authorize":["registry mutation","obligation discharge","theorem promotion","claim elevation","external interpretation","unbounded execution"]
+}

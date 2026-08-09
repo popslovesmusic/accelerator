@@ -1,0 +1,35 @@
+{
+  "fixture_set_id": "AX-R10-COMMUTATIVITY-FIXTURES-001",
+  "axiom_id": "AX-R10_COMMUTATIVITY",
+  "status": "RESOLVED_INAPPLICABLE",
+  "positive": [
+    {"fixture_id":"AX-R10-POS-001","expression":"<S> | >S<","expected":"WELL_FORMED_FORWARD_APPLICATION","return_type":"SymmetryCondition"},
+    {"fixture_id":"AX-R10-POS-002","expression":"b | u","expected":"WELL_FORMED_FORWARD_APPLICATION","return_type":"SymmetryCondition"}
+  ],
+  "failure": [
+    {"fixture_id":"AX-R10-COMM-FAIL-001","expression":">S< | <S>","expected":"MALFORMED_OPERAND_ORDER"},
+    {"fixture_id":"AX-R10-COMM-FAIL-002","expression":"u | b","expected":"MALFORMED_OPERAND_ORDER"},
+    {"fixture_id":"AX-R10-COMM-FAIL-003","expression":"b | u = u | b","expected":"COMMUTATIVITY_INAPPLICABLE","secondary_error":"REVERSED_SIDE_MALFORMED"},
+    {"fixture_id":"AX-R10-COMM-FAIL-004","expression":"b | u != u | b","expected":"NONCOMMUTATIVITY_NOT_TYPABLE"},
+    {"fixture_id":"AX-R10-COMM-FAIL-005","attempt":"Evaluate reversed expression and compare its result with the forward expression.","expected":"REVERSED_RELATION_UNDEFINED"},
+    {"fixture_id":"AX-R10-COMM-FAIL-006","attempt":"Automatically reorder u | b into b | u.","expected":"AUTOMATIC_OPERAND_REORDERING_FORBIDDEN"},
+    {"fixture_id":"AX-R10-COMM-FAIL-007","attempt":"Treat malformed reversal as a counterexample proving noncommutativity.","expected":"MALFORMED_EXPRESSION_NOT_COUNTEREXAMPLE"},
+    {"fixture_id":"AX-R10-COMM-FAIL-008","attempt":"Infer commutativity from wider SymmetryCondition family membership.","expected":"ROLE_SENSITIVE_SUBTYPES_PREVENT_PERMUTATION"},
+    {"fixture_id":"AX-R10-COMM-FAIL-009","attempt":"Use MTO/OTM duality to authorize operand swapping.","expected":"DUALITY_MAP_UNDEFINED_FOR_OPERAND_SWAP"},
+    {"fixture_id":"AX-R10-COMM-FAIL-010","attempt":"Infer a reverse relation with signature UnboundedSymmetry × BoundedSymmetry -> SymmetryCondition.","expected":"REVERSE_RELATION_NOT_AUTHORIZED"}
+  ],
+  "commutativity_matrix": [
+    {"domain":"BoundedSymmetry","status":"INAPPLICABLE"},
+    {"domain":"UnboundedSymmetry","status":"INAPPLICABLE"},
+    {"domain":"BoundedSymmetry × UnboundedSymmetry","status":"ORDERED_HETEROGENEOUS_DOMAIN"},
+    {"domain":"BoundedSymmetry union UnboundedSymmetry","status":"INAPPLICABLE"},
+    {"domain":"SymmetryCondition","status":"INAPPLICABLE_TO_CURRENT_SIGNATURE"},
+    {"domain":"CompleteRT","status":"OPEN_SEPARATE_DOMAIN"}
+  ],
+  "error_codes": ["COMMUTATIVITY_INAPPLICABLE","REVERSED_SIDE_MALFORMED","NONCOMMUTATIVITY_NOT_TYPABLE","AUTOMATIC_OPERAND_REORDERING_FORBIDDEN","REVERSE_RELATION_NOT_AUTHORIZED","MALFORMED_EXPRESSION_NOT_COUNTEREXAMPLE"],
+  "new_commutativity_law": false,
+  "new_noncommutativity_theorem": false,
+  "new_reverse_relation": false,
+  "new_operand_coercion": false,
+  "whole_rt_commutativity": "OPEN_SEPARATE_OBLIGATION"
+}

@@ -1,0 +1,54 @@
+{
+  "report_id": "CSI_MEMBERSHIP_ALGEBRA_V1_REPORT",
+  "timestamp": "2026-05-10T09:00:00Z",
+  "status": "COMPLETED",
+  "patch_id": "PCD_CSI_MEMBERSHIP_ALGEBRA_V1",
+  "summary": "Defined the first algebraic rules for CSI (Causal Sphere of Influence) membership. Established the CSI membership registry, defined admissibility-overlap induction, residue-incompatibility exclusion, and inert propagation behavior.",
+  "operations_summary": [
+    {
+      "operation": "create_csi_membership_registry",
+      "target": "registry/csi_membership_registry.json",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "register_csi_membership_rules",
+      "status": "SUCCESS",
+      "rules_count": 2
+    },
+    {
+      "operation": "define_empty_csi_behavior",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "add_csi_guardrails",
+      "target": "registry/lexicon_gap_queue.json",
+      "status": "SUCCESS",
+      "guardrails_added": [
+        "no_csi_membership_without_admissibility_overlap_v1",
+        "no_interaction_with_incompatible_residue_v1"
+      ]
+    },
+    {
+      "operation": "update_gap_dependency_graph",
+      "gap_id": "GAP_3",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "update_operator_algebra_closure_registry",
+      "operator_id": "csi",
+      "status": "SUCCESS",
+      "new_closure_status": "PARTIAL_CSI_ALGEBRA_DEFINED"
+    }
+  ],
+  "algebra_status": {
+    "operator_id": "csi",
+    "membership_induction_active": "admissibility_overlap",
+    "residue_gating_active": true,
+    "inert_propagation_defined": true
+  },
+  "charter_compliance_check": {
+    "charter_version": "2.3",
+    "status": "COMPLIANT",
+    "notes": "The CSI membership algebra correctly enforces pre-condition checks for process coupling, ensuring that neighborhood membership is induced from primary admissibility and residue constraints rather than assumed as a substrate property."
+  }
+}

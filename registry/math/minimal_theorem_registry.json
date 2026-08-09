@@ -1,0 +1,634 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Registry of minimal local theorems, propositions, and conjectures.",
+    "status": "consolidated"
+  },
+  "theorems": [
+    {
+      "theorem_id": "MT-001",
+      "name": "Projection Idempotence Under Stable Admissibility",
+      "statement": "Pi_A(Pi_A(x)) ~ Pi_A(x) under stable admissibility conditions SA-001 through SA-005.",
+      "entry_type": "theorem",
+      "scope": "conditional",
+      "status": "formal",
+      "dependencies": {
+        "operators": [
+          "Pi_A"
+        ],
+        "well_posedness_entries": [
+          "WP-001"
+        ],
+        "composition_laws": [
+          "OC-001",
+          "OC-002"
+        ],
+        "proof_scaffold": "registry/math/pi_a_idempotence_proof_scaffold.json"
+      },
+      "assumptions": [
+        "SA-001: Non-empty admissibility window A",
+        "SA-002: Pi_A maps into A",
+        "SA-003: Fixed point property for y in A",
+        "SA-004: Stability of residue/orientation constraints",
+        "SA-005: Absence of boundary drift"
+      ],
+      "proof_obligations": [
+        "PO-001"
+      ],
+      "known_failure_modes": [
+        "FM-007",
+        "CFM-004",
+        "RUFM-003"
+      ],
+      "closure_status": "conditional",
+      "claim_boundary": "formal_procedural_only",
+      "provisional_status": false
+    },
+    {
+      "theorem_id": "MT-002",
+      "name": "Transport Identity on Null Path",
+      "statement": "NavT_identity(x) ~ x under identity transport conditions NI-001 through NI-005.",
+      "entry_type": "proposition",
+      "scope": "local",
+      "status": "formal",
+      "dependencies": {
+        "operators": [
+          "NavT"
+        ],
+        "well_posedness_entries": [
+          "WP-002"
+        ],
+        "nonlocal_transport_entries": [
+          "NTC-001"
+        ],
+        "proof_scaffold": "registry/math/navt_identity_proof_scaffold.json"
+      },
+      "assumptions": [
+        "NI-001: Null-length transport path",
+        "NI-002: Locally closed process state",
+        "NI-003: Residue invariance",
+        "NI-004: Orientation invariance",
+        "NI-005: Absence of window drift"
+      ],
+      "proof_obligations": [
+        "PO-002"
+      ],
+      "known_failure_modes": [
+        "FM-008",
+        "NTFM-006",
+        "RUFM-004"
+      ],
+      "closure_status": "local",
+      "claim_boundary": "formal_procedural_only",
+      "provisional_status": false
+    },
+    {
+      "theorem_id": "MT-003",
+      "name": "Continuation Requires Non-Empty Admissible Image",
+      "statement": "existence(continuation_event) => image(Pi_A \u2218 delta_selection(candidate_set)) != empty under conditions NEI-001 through NEI-005.",
+      "entry_type": "lemma",
+      "scope": "conditional",
+      "status": "formal",
+      "dependencies": {
+        "operators": [
+          "Pi_A",
+          "delta"
+        ],
+        "object_classes": [
+          "continuation_event",
+          "participation_space",
+          "continuation_space",
+          "admissibility_window"
+        ],
+        "proof_scaffold": "registry/math/continuation_nonempty_image_proof_scaffold.json"
+      },
+      "assumptions": [
+        "NEI-001: Non-null participation_space",
+        "NEI-002: Non-empty admissibility_window",
+        "NEI-003: Pi_A maps at least one candidate into window",
+        "NEI-004: delta has at least one admissible candidate after constraints",
+        "NEI-005: Residue/orientation do not eliminate all candidates"
+      ],
+      "proof_obligations": [
+        "PO-003"
+      ],
+      "known_failure_modes": [
+        "FM-001",
+        "CFM-006",
+        "RUFM-005"
+      ],
+      "closure_status": "conditional",
+      "claim_boundary": "formal_procedural_only",
+      "provisional_status": false
+    },
+    {
+      "theorem_id": "MT-ART-001",
+      "name": "aRT Membership and Closure Preservation Lemma",
+      "statement": "If an aRT satisfies its declared membership, distinction-preservation, admissible-ordering, and closure-support conditions, then an admissible update to one or more member RTs preserves aRT status provided those conditions remain satisfied after the update.",
+      "entry_type": "lemma",
+      "scope": "local",
+      "status": "FORMAL_PROCEDURAL_ONLY",
+      "dependencies": {
+        "operators": [
+          "aRT"
+        ],
+        "proof_scaffold": "docs/theory/foundational/5_03_26 unity/math/proofs/P_ART_001_closure_preservation.md"
+      },
+      "proof_obligations": [
+        "PO-ART-001"
+      ],
+      "provisional_status": true
+    },
+    {
+      "theorem_id": "MT-O-CALC-001",
+      "name": "O_calculus Partial Composition Lemma",
+      "statement": "Orientation transformations compose lawfully iff they preserve typed admissible continuation and closure class.",
+      "entry_type": "lemma",
+      "scope": "local",
+      "status": "FORMAL_PROCEDURAL_ONLY",
+      "dependencies": {
+        "operators": [
+          "O_calculus"
+        ],
+        "proof_scaffold": "docs/theory/foundational/5_03_26 unity/math/proofs/P_O_CALC_001_partial_composition.md"
+      },
+      "proof_obligations": [
+        "PO-O-001"
+      ],
+      "provisional_status": true
+    },
+    {
+      "theorem_id": "MT-OTIMES-001",
+      "name": "otimes Non-Identity Composition Lemma",
+      "statement": "If X and Z are typed lawful process operands and X otimes_Y Z is defined under context Y, then the composition creates a lawful typed coupling without implying X = Z, X = X otimes_Y Z, or Z = X otimes_Y Z, unless a separate identity-preserving rule is explicitly declared.",
+      "entry_type": "lemma",
+      "scope": "local",
+      "status": "FORMAL_PROCEDURAL_ONLY",
+      "dependencies": {
+        "operators": [
+          "otimes"
+        ],
+        "proof_scaffold": "docs/theory/foundational/5_03_26 unity/math/proofs/P_OTIMES_001_non_identity_composition.md"
+      },
+      "proof_obligations": [
+        "PO-OTIMES-001"
+      ],
+      "provisional_status": true
+    },
+    {
+      "theorem_id": "MT-IFFS-001",
+      "name": "iff_s Projection Identity Firewall",
+      "statement": "Statistical projection iff_s marks a representation layer and does not establish process identity.",
+      "entry_type": "lemma",
+      "scope": "local",
+      "status": "FORMAL_PROCEDURAL_ONLY",
+      "dependencies": {
+        "operators": [
+          "iff_s"
+        ],
+        "proof_scaffold": "docs/theory/foundational/5_03_26 unity/math/proofs/P_IFFS_001_projection_identity_firewall.md"
+      },
+      "proof_obligations": [
+        "PO-IFFS-001"
+      ],
+      "provisional_status": true
+    },
+    {
+      "theorem_id": "MT-CG-TRIAD-001",
+      "name": "Constraint Geometry Triadic Knot-Closure",
+      "statement": "Within these models, Constraint Geometry is represented as the triadic geometric closure of RT, QM_app, and GR_app, restating the Core co-generative relation as a geometric knot-closure.",
+      "entry_type": "induction",
+      "scope": "provisional_bridge",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "formula": "CG := \u25b3(RT, QM_app, GR_app)",
+      "dependencies": {
+        "vertices": [
+          "RT",
+          "QM_app",
+          "GR_app"
+        ],
+        "principles": [
+          "Knot Theorem",
+          "Core co-generative structure"
+        ]
+      },
+      "legality_rules": [
+        "L1_no_linearization",
+        "L2_whole_triangle_primacy",
+        "L3_distinction_preservation",
+        "L4_closure_unity"
+      ],
+      "provisional_status": true
+    },
+    {
+      "theorem_id": "MT-SIG-001",
+      "name": "Projection Signature Hardening Rules",
+      "statement": "Within these models, a Projection Signature (Sig_app) is represented as a recognizable pattern of constraints, outputs, and preserved relations showing that a process expression has lawfully projected into an application-facing domain.",
+      "entry_type": "proposition",
+      "scope": "local",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "dependencies": {
+        "lemmas": [
+          "L110"
+        ],
+        "operators": [
+          "Pi_geo",
+          "iff_s",
+          "otimes"
+        ]
+      },
+      "rules": [
+        "validation_rule",
+        "comparison_rule",
+        "exclusion_rule"
+      ],
+      "provisional_status": true
+    },
+    {
+      "theorem_id": "MT-TZR-001",
+      "name": "Typed Zero-Condition Recoupling Principle",
+      "statement": "Within these models, a locally collapsed same-direction expression may participate in higher-order RT only if its zero-condition remains typed and is compared against an oppositely typed zero-condition.",
+      "entry_type": "proposition",
+      "scope": "local",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "dependencies": {
+        "lemmas": [
+          "L111"
+        ],
+        "operators": [
+          "otimes",
+          "recoupling"
+        ]
+      },
+      "formula": "[0_minus <g>_y 0_plus] -> RT_admissible_candidate",
+      "rules": [
+        "GOV-RT-ZERO-RECOUPLING-001"
+      ],
+      "provisional_status": true
+    },
+    {
+      "theorem_id": "MT-RTN-001",
+      "name": "RT Nesting, Condition Primacy, and Family Constitution Principle",
+      "statement": "Within these models, X is RT iff X constructively traces its dependency lineage to RT_core without breaking core constraints; distinction participants are process conditions, not states; and the minimum coupled nesting form is mutually constituted with the <*>_x family space.",
+      "entry_type": "proposition",
+      "scope": "local",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "dependencies": {
+        "lemmas": [
+          "L112"
+        ],
+        "operators": [
+          "otimes",
+          "recoupling"
+        ]
+      },
+      "formula": "[D(A|-B) <f>_x D(C|+D)] -> RT_out",
+      "rules": [
+        "GOV-RT-ZERO-RECOUPLING-001",
+        "GOV-MRF-001"
+      ],
+      "provisional_status": true
+    },
+    {
+      "theorem_id": "MT-RTM-001",
+      "name": "RT Mechanics as Recursive Relational Completion",
+      "statement": "Within these models, RT mechanics is provisionally defined by the reduction D(*|r) -> D(x|r) iff the field F' containing D(x|r) satisfies PRIN_001 closure traceable to RT_core, with x-admissibility and RT constitution mutually co-produced through residue-conditioned closure.",
+      "entry_type": "proposition",
+      "scope": "local",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "dependencies": {
+        "inductions": [
+          "MT-RTN-001",
+          "MT-TZR-001"
+        ],
+        "principles": [
+          "PRIN_001",
+          "PRIN_003",
+          "GOV-RT-ZERO-RECOUPLING-001"
+        ]
+      },
+      "formula": "D(*|r) -> D(x|r) iff F' containing D(x|r) satisfies PRIN_001 closure",
+      "rules": [
+        "PRIN_001",
+        "PRIN_003",
+        "GOV-RT-ZERO-RECOUPLING-001"
+      ],
+      "proof_obligations": [
+        "OQ_RTM_001",
+        "OQ_RTM_002",
+        "OQ_RTM_003"
+      ],
+      "provisional_status": true
+    },
+    {
+      "theorem_id": "MT-COND-001",
+      "name": "Conditioning as Primitive Relational Process",
+      "statement": "Within these models, conditioning is provisionally treated as the primitive relational process by which one distinction supplies admissibility context for another, with arithmetic operations interpreted only as derived projections of lawful conditioning order.",
+      "entry_type": "proposition",
+      "scope": "local",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "dependencies": {
+        "inductions": [
+          "MT-RTN-001",
+          "MT-RTM-001"
+        ],
+        "principles": [
+          "RT-AX-COND-001",
+          "RT-RULE-COND-001",
+          "RT-RULE-COND-004"
+        ]
+      },
+      "formula": "D(a) -> <a>_b",
+      "rules": [
+        "RT-RULE-COND-001",
+        "RT-RULE-COND-002",
+        "RT-RULE-COND-003",
+        "RT-RULE-COND-004"
+      ],
+      "provisional_status": true
+    },
+    {
+      "theorem_id": "PRIN_COND_001",
+      "name": "Primitive Conditioning Principle",
+      "statement": "Within this provisional ontology reduction, the conditioned distinction <a>_b is treated as the smallest admissible RT-mechanics object, while D(a) is retained only as a context-suppressed abstraction.",
+      "entry_type": "principle",
+      "scope": "local",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "dependencies": {
+        "inductions": [
+          "MT-COND-001",
+          "MT-RTM-001"
+        ],
+        "principles": [
+          "AX_COND_001",
+          "AX_COND_002",
+          "AX_COND_003"
+        ]
+      },
+      "formula": "<a>_b",
+      "rules": [
+        "AX_COND_001",
+        "AX_COND_002",
+        "AX_COND_003"
+      ],
+      "proof_obligations": [
+        "OQ_COND_001",
+        "OQ_COND_002",
+        "OQ_COND_003",
+        "OQ_COND_004",
+        "OQ_COND_005"
+      ],
+      "provisional_status": true
+    },
+    {
+      "theorem_id": "MT-VBAR-001",
+      "name": "Vertical Bar Operator Admissibility Principle",
+      "statement": "Within these models, the vertical bar operator | is the primitive admissible participation separator, which is order-sensitive, requires type-checked operands, and gates co-participation as D(A|B) > epsilon_a.",
+      "entry_type": "proposition",
+      "scope": "local",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "dependencies": {
+        "lemmas": [
+          "L113"
+        ],
+        "operators": [
+          "|"
+        ]
+      },
+      "formula": "Adm_|(A,B) := [Typed_a(A) \u2227 Typed_a(B) \u2227 Eval_D(A|B) \u2227 D(A|B) > epsilon_a]",
+      "rules": [
+        "GOV-VBAR-001"
+      ],
+      "provisional_status": true
+    },
+    {
+      "theorem_id": "MT-GBC-001",
+      "name": "Grouped Bar Closure Principle",
+      "statement": "Within these models, grouped bar expressions require explicit graph co-participation closure Adm_|^G preserving consistent orientation, default to non-associative and non-permutable, and require mandatory middle term role typing in triadic structures.",
+      "entry_type": "proposition",
+      "scope": "local",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "dependencies": {
+        "lemmas": [
+          "L114"
+        ],
+        "operators": [
+          "|"
+        ]
+      },
+      "formula": "Adm_|^G(A_1,...,A_n; G) := [\u2200A_i Typed_a(A_i)] \u2227 [\u2200e_ij \u2208 E(G), Adm_|(A_i,A_j)] \u2227 Preserve_O(G) \u2227 Eval_D^G(G) \u2227 D_G(G) > epsilon_a",
+      "rules": [
+        "GOV-GBC-001"
+      ],
+      "provisional_status": true
+    },
+    {
+      "theorem_id": "MT-ORG-001",
+      "name": "Admissible Organization Axioms",
+      "statement": "Within these models, the organization of co-participation graphs G under Org_a is governed by three axioms: Inventory Preservation (traceable distinction), Admissibility Conservation (no updates below epsilon_a), and Topological Consistency (orientation preservation).",
+      "entry_type": "proposition",
+      "scope": "local",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "dependencies": {
+        "lemmas": [
+          "L115"
+        ],
+        "operators": [
+          "Org_a"
+        ]
+      },
+      "formula": "Adm_Org(G) := Adm_|^G(G) \u2227 \u2203o\u2208O(G) Adm_O(G,o) \u2227 D_G(G)>epsilon_a \u2227 InvPres_D(G) \u2227 AdmCons_a(G) \u2227 TopCons_O(G)",
+      "rules": [
+        "GOV-ORG-001"
+      ],
+      "provisional_status": true
+    },
+    {
+      "theorem_id": "MT-SYN-001",
+      "name": "Core Calculus Syntax and Semantic Closure",
+      "statement": "The core calculus of the Mono-Process Framework forms a syntactically and semantically closed language L_COD. All well-formed formulas map to distinct types, operators compose algebraically, natural deduction is sound, and satisfiability holds over graph-theoretic models.",
+      "entry_type": "proposition",
+      "scope": "local",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "dependencies": {
+        "lemmas": [
+          "L116",
+          "L117",
+          "L118",
+          "L119",
+          "L120"
+        ],
+        "operators": [
+          "D",
+          "<=>_R",
+          "delta_a",
+          "Pi_A",
+          "NavT",
+          "otimes"
+        ]
+      },
+      "formula": "Closed_L_COD(L) := Syntax_Closed(L116) \u2227 Semantic_Closed(L117) \u2227 Closed_Algebra(L118) \u2227 Sound_Deduction(L119) \u2227 Satisfiable_Model(L120)",
+      "rules": [
+        "GOV-SYN-001"
+      ],
+      "provisional_status": true
+    },
+    {
+      "theorem_id": "MT-ONT-001",
+      "name": "Ontological Distinction Emergence",
+      "statement": "The operational existence of distinction emerges co-dependently from a primitive relational condition (*|*) via a domain-specific symmetric relational biconditional, resolving into an Affect-Effect gradient without reifying background coordinate space.",
+      "entry_type": "proposition",
+      "scope": "local",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "dependencies": {
+        "lemmas": [
+          "L121"
+        ],
+        "operators": [
+          "(*|*)",
+          "<-S->",
+          "(A|E)"
+        ]
+      },
+      "formula": "(*|*) <=>_S delta_a(E!=0) -> (A|E)",
+      "rules": [
+        "GOV-ONT-001"
+      ],
+      "provisional_status": true
+    },
+    {
+      "theorem_id": "MT-RT-001",
+      "name": "Relational Transition Core Equivalence",
+      "statement": "A precursor distinction stabilizes into a Relational Transition if and only if it exceeds the context floor and forms a triadic closure cycle. The stabilized relational form is process-equivalent to the canonical core expression under local projection.",
+      "entry_type": "proposition",
+      "scope": "local",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "dependencies": {
+        "lemmas": [
+          "L122",
+          "L123"
+        ],
+        "operators": [
+          "D",
+          "<*>_x"
+        ]
+      },
+      "formula": "RT := [D != 0 <*>_x D = 0] <=> [ (E != 0) <=>_R delta_a(E > 0) ]",
+      "rules": [
+        "GOV-RT-001"
+      ],
+      "provisional_status": true
+    },
+    {
+      "theorem_id": "MT-ASYM-001",
+      "name": "Asymmetry-to-Orientation Selection Operator",
+      "statement": "Relational asymmetry breaks directional symmetry, permitting the selection operator O* to uniquely resolve to an oriented local reference frame -(i) that minimizes relational friction, regulated and bounded by the context floor.",
+      "entry_type": "proposition",
+      "scope": "local",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "dependencies": {
+        "lemmas": [
+          "L124",
+          "L125"
+        ],
+        "operators": [
+          "Omega_a",
+          "O*"
+        ]
+      },
+      "formula": "O*(Omega_a)_c := -(i) iff Omega_a != 1 \u2227 Friction(-(i)) = min mu_rel(-(i') * Omega_a)",
+      "rules": [
+        "GOV-ASYM-001"
+      ],
+      "provisional_status": true
+    },
+    {
+      "theorem_id": "MT-SIGN-001",
+      "name": "Sign Semantics and Generative Pathways",
+      "statement": "Sign polarities (+, -) emerge dynamically to represent accumulation and exclusion dynamics along directed process pathways, preserving algebraic product rules through composition of crossing layer modifications.",
+      "entry_type": "proposition",
+      "scope": "local",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "dependencies": {
+        "lemmas": [
+          "L126"
+        ],
+        "operators": [
+          "Sign"
+        ]
+      },
+      "formula": "Sign(Delta P)_c := { + if Delta Crossings > 0, - if Delta Crossings < 0, 0 if Delta Crossings = 0 }",
+      "rules": [
+        "GOV-SIGN-001"
+      ],
+      "provisional_status": true
+    },
+    {
+      "theorem_id": "MT-GOV-001",
+      "name": "Evaluation Architecture and Governance Homomorphism",
+      "statement": "Platform metadata governance represents a formal category-theoretic homomorphic projection of the underlying graph-theoretic relational admissibility transitions, preserving identities, composition, and collapse boundary mapping.",
+      "entry_type": "proposition",
+      "scope": "local",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "dependencies": {
+        "lemmas": [
+          "L127"
+        ],
+        "operators": [
+          "Gov",
+          "Admissibility"
+        ]
+      },
+      "formula": "Gov(Claim) >= Threshold <=> Admissibility(E) >= epsilon_a",
+      "rules": [
+        "GOV-META-001"
+      ],
+      "provisional_status": true
+    },
+    {
+      "theorem_id": "MT-BRD-001",
+      "name": "Functorial Braid Projection and Confinement",
+      "statement": "Relational co-participation graph updates map functorially via F_proj to topological braids, where closed loops map to topological braid closures (knots/links) representing stable, self-reinforcing confinement regimes.",
+      "entry_type": "proposition",
+      "scope": "local",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "dependencies": {
+        "lemmas": [
+          "L128",
+          "L129"
+        ],
+        "operators": [
+          "F_proj",
+          "Closure"
+        ]
+      },
+      "formula": "F_proj: E -> B",
+      "rules": [
+        "BRD-TOPO-001"
+      ],
+      "provisional_status": true
+    },
+    {
+      "theorem_id": "MT-PALG-001",
+      "name": "Polarity Closure and Nested Semantics",
+      "statement": "The constraint realization loop (primary axiom) is recursively isomorphic to the generative tension between exclusion (-1) and accumulation (+1) pathways.",
+      "entry_type": "proposition",
+      "scope": "local",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "dependencies": {
+        "lemmas": [
+          "L130"
+        ],
+        "operators": [
+          "\u21d4R",
+          "delta"
+        ]
+      },
+      "formula": "(E\u22600) \u21d4R \u03b4(E>0) \u21d4R [(-1) \u21d4R (+1)]",
+      "rules": [
+        "PALG-NESTED-001"
+      ],
+      "provisional_status": true
+    }
+  ]
+}

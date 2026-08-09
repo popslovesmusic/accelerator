@@ -1,0 +1,368 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_037",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-05",
+  "type": "governance_patch",
+  "artifact_type": "governance_patch",
+  "title": "Recursive Continuation Semantics",
+  "priority": "HIGH",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_036"
+  ],
+  "mode": "additive",
+  "basis": {
+    "source_patches": [
+      "PATCH_PI_RT_CALCULUS_036"
+    ],
+    "source_surfaces": [
+      "docs/textbook/mono_process_textbook_complete.md",
+      "registry/formal_object_registry.json",
+      "registry/math_source_registry.json",
+      "registry/lexicon_gap_queue.json",
+      "registry/registry/lexicon_gap_queue.json",
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_036.json"
+    ],
+    "scope": "Introduce recursive continuation structure as the first expressiveness extension after bounded strategy correctness; explicit recursion is guarded and depth-bounded, bounded unfolding may defer as pNF(C), and recovery, sigma_RT, and operational-regime execution remain deferred."
+  },
+  "core_rule": {
+    "statement": "Recursive continuation semantics apply only after EVAL_024 and only to explicit recursive references that satisfy GuardRec(C); bounded unfolding may proceed through Unfold(Rec(C)) while preserving process equivalence where defined; lawful recursion that exceeds the current calculus boundary returns pNF(C), and recursive guard failure returns classified ⊥C_x; RT_core remains unchanged."
+  },
+  "purpose": "Introduce recursive continuation structure as the first expressiveness extension after bounded strategy correctness, while preserving the existing reduction kernel and keeping recovery, sigma_RT, and operational-regime execution deferred.",
+  "canonical_claims": [
+    {
+      "id": "CLAIM_037_001",
+      "statement": "Recursive continuation structure is explicit only; implicit self-reference is inadmissible.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_037_002",
+      "statement": "Recursive unfolding is gated by GuardRec(C) and the bounded recursive depth boundary.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_037_003",
+      "statement": "Lawful recursive continuation that exceeds the current calculus boundary returns pNF(C).",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_037_004",
+      "statement": "Recursive admissibility failure returns classified continuation failure ⊥C_x.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_037_005",
+      "statement": "RT_core remains unchanged.",
+      "status": "canonical"
+    }
+  ],
+  "scope": {
+    "adds": [
+      "Recursive continuation object",
+      "Recursive continuation unfolding",
+      "Recursive admissibility guard",
+      "Recursive depth boundary",
+      "Recursive continuation class"
+    ],
+    "does_not_add": [
+      "Recovery operator",
+      "sigma_RT selector",
+      "Operational regime execution",
+      "General fixed-point theorem",
+      "Universal recursive termination proof",
+      "Parser implementation"
+    ]
+  },
+  "formal_objects": [
+    {
+      "id": "OBJ-CTN-REC-037",
+      "object_class": "state",
+      "title": "Recursive Continuation",
+      "status": "provisional",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_037.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-EVAL-024",
+        "OBJ-CTN-REDALG-025",
+        "OBJ-CTN-OUTCOME-026",
+        "OBJ-CTN-PNF-026",
+        "OBJ-CTN-STRAT-035",
+        "OBJ-CTN-STRATCORR-036",
+        "OBJ-CTN-DET-030",
+        "OBJ-CTN-TERM-031",
+        "OBJ-CTN-WF-018",
+        "OBJ-CTN-TYPE-019",
+        "OBJ-CTN-TRACE-EQUIV-028"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "Rec(C)",
+      "canonical_form": "Rec(C) := explicit recursive continuation expression with guarded self-reference",
+      "formal_definition": "A continuation expression whose lawful evaluation may refer back to a prior continuation state under an explicit recursive admissibility guard."
+    },
+    {
+      "id": "OBJ-CTN-UNFOLDREC-037",
+      "object_class": "operator",
+      "title": "Recursive Unfolding",
+      "status": "provisional",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_037.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-REC-037",
+        "OBJ-CTN-EVAL-024",
+        "OBJ-CTN-REDALG-025",
+        "OBJ-CTN-OUTCOME-026",
+        "OBJ-CTN-PNF-026",
+        "OBJ-CTN-STRAT-035",
+        "OBJ-CTN-STRATCORR-036"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "Unfold(Rec(C))",
+      "canonical_form": "Unfold(Rec(C)) := bounded expansion of an admissible recursive continuation into a continuation sequence",
+      "formal_definition": "The bounded expansion of a recursive continuation into an admissible continuation sequence."
+    },
+    {
+      "id": "OBJ-CTN-RECGUARD-037",
+      "object_class": "constraint",
+      "title": "Recursive Admissibility Guard",
+      "status": "provisional",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_037.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-WF-018",
+        "OBJ-CTN-TYPE-019",
+        "OBJ-CTN-FAIL-022",
+        "OBJ-CTN-FAIL-CLASS-023",
+        "OBJ-CTN-EVAL-024",
+        "OBJ-CTN-REDALG-025",
+        "OBJ-CTN-REC-037"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "GuardRec(C)",
+      "canonical_form": "GuardRec(C) := recursive admissibility condition governing lawful unfolding",
+      "formal_definition": "The condition that determines whether a recursive continuation may lawfully unfold."
+    },
+    {
+      "id": "OBJ-CTN-RECDEPTH-037",
+      "object_class": "principle",
+      "title": "Recursive Depth Boundary",
+      "status": "provisional",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_037.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-REC-037",
+        "OBJ-CTN-PNF-026",
+        "OBJ-CTN-TERM-031",
+        "OBJ-CTN-OUTCOME-026",
+        "OBJ-CTN-REDALG-025"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "depthRec(C)",
+      "canonical_form": "depthRec(C) := bounded recursive depth available under the current calculus boundary",
+      "formal_definition": "The bounded recursive depth available to a recursive continuation under the current calculus boundary."
+    },
+    {
+      "id": "OBJ-CTN-RECCLASS-037",
+      "object_class": "state",
+      "title": "Recursive Continuation Class",
+      "status": "provisional",
+      "source_bindings": [
+        "registry/governance/patches/PATCH_PI_RT_CALCULUS_037.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "dependency_links": [
+        "OBJ-CTN-REC-037",
+        "OBJ-CTN-UNFOLDREC-037",
+        "OBJ-CTN-RECGUARD-037",
+        "OBJ-CTN-RECDEPTH-037",
+        "OBJ-CTN-OUTCOME-026",
+        "OBJ-CTN-PNF-026"
+      ],
+      "claim_scope": "theoretical",
+      "governance_bindings": [
+        "charter_v2.3"
+      ],
+      "runtime_visibility": true,
+      "symbol": "ClassRec",
+      "canonical_form": "ClassRec := {C | Rec(C) is explicit, guarded, and bounded or deferred as pNF(C)}",
+      "formal_definition": "Classification of continuation expressions according to recursive admissibility and bounded unfolding behavior."
+    }
+  ],
+  "definitions": {
+    "recursive_continuation": {
+      "symbol": "Rec(C)",
+      "requirements": [
+        "WF(C)",
+        "Typed(C)",
+        "Explicit recursive reference",
+        "GuardRec(C) satisfied",
+        "depthRec(C) bounded or classified as pNF(C)",
+        "Unfolding preserves process equivalence where defined"
+      ]
+    }
+  },
+  "recursive_pipeline": [
+    {
+      "step": 1,
+      "operation": "Evaluate C using EVAL_024."
+    },
+    {
+      "step": 2,
+      "operation": "Detect explicit recursive continuation structure Rec(C)."
+    },
+    {
+      "step": 3,
+      "operation": "Check GuardRec(C)."
+    },
+    {
+      "step": 4,
+      "operation": "Evaluate depthRec(C)."
+    },
+    {
+      "step": 5,
+      "operation": "If admissible and bounded, apply Unfold(Rec(C))."
+    },
+    {
+      "step": 6,
+      "operation": "If recursion is lawful but not presently unfoldable, return pNF(C)."
+    },
+    {
+      "step": 7,
+      "operation": "If recursive admissibility fails, return classified ⊥C_x."
+    }
+  ],
+  "recursive_classes": [
+    {
+      "class": "BoundedRecursive",
+      "description": "Recursive continuation admits lawful bounded unfolding."
+    },
+    {
+      "class": "DeferredRecursive",
+      "description": "Recursive continuation is lawful but exceeds the current calculus boundary and returns pNF(C)."
+    },
+    {
+      "class": "FailedRecursive",
+      "description": "Recursive continuation violates admissibility and returns classified ⊥C_x."
+    }
+  ],
+  "admissibility_rules": [
+    "Recursive continuation must be explicit.",
+    "Implicit self-reference is not admitted.",
+    "Recursive unfolding requires GuardRec(C).",
+    "Recursive depth must be bounded or deferred as pNF(C).",
+    "Recursive unfolding must preserve typed continuation rules.",
+    "Recursive unfolding must preserve process equivalence where defined."
+  ],
+  "relationships": {
+    "reduction": "REDUCE_025 may reduce recursive continuations only after recursive admissibility is established.",
+    "partial_normal_form": "Lawful but currently unexpandable recursion terminates as pNF(C).",
+    "failure": "Recursive guard failure returns a classified continuation failure.",
+    "termination": "Recursive termination is not universally asserted by this patch.",
+    "strategy": "S(C) may select recursive unfolding only as an admissible candidate."
+  },
+  "invariants": [
+    "RT_core remains unchanged.",
+    "Recursive continuation does not introduce recovery.",
+    "Recursive continuation does not introduce sigma_RT.",
+    "Recursive continuation does not execute operational regimes.",
+    "Recursive unfolding is bounded or deferred.",
+    "Implicit recursion is inadmissible.",
+    "Recovery remains deferred."
+  ],
+  "future_dependencies": [
+    "PATCH_PI_RT_CALCULUS_038 (Recursive Continuation Correctness)",
+    "PATCH_PI_RT_CALCULUS_039 (Higher-Order Continuations)"
+  ],
+  "textbook_changes": {
+    "chapter": "2.3.19",
+    "title": "Recursive Continuation Semantics",
+    "summary": [
+      "Introduce Rec(C).",
+      "Define recursive unfolding Unfold(Rec(C)).",
+      "Define GuardRec(C).",
+      "Define depthRec(C).",
+      "Classify bounded, deferred, and failed recursion."
+    ]
+  },
+  "registry_updates": {
+    "formal_object_registry": [
+      "OBJ-CTN-REC-037",
+      "OBJ-CTN-UNFOLDREC-037",
+      "OBJ-CTN-RECGUARD-037",
+      "OBJ-CTN-RECDEPTH-037",
+      "OBJ-CTN-RECCLASS-037"
+    ],
+    "math_source_registry": [
+      "PATCH_PI_RT_CALCULUS_037"
+    ],
+    "lexicon_gap_queue": [
+      "recursive_continuation",
+      "recursive_unfolding",
+      "recursive_admissibility_guard",
+      "recursive_depth_boundary",
+      "recursive_class"
+    ]
+  },
+  "rt_core_impact": {
+    "modified": false,
+    "statement": "RT := [(ℰ≠0) ⇔R δα(ℰ>0)] remains unchanged."
+  },
+  "validation_requirements": [
+    "Patch record parses cleanly.",
+    "Patch depends on PATCH_PI_RT_CALCULUS_036.",
+    "Recursive semantics are gated by EVAL_024 and GuardRec(C).",
+    "Bounded recursion returns pNF(C) when lawful but presently unexpandable.",
+    "Recursive guard failure returns classified continuation failure.",
+    "RT_core remains unchanged."
+  ],
+  "required_repo_changes": [
+    "Update docs/textbook/mono_process_textbook_complete.md with the recursive continuation section and recursive-class documentation.",
+    "Update registry/formal_object_registry.json with the recursive continuation formal objects.",
+    "Update registry/math_source_registry.json with the patch source entry.",
+    "Relock registry/math_hashes.json and registry/math_core_hashes.json after the source registry update.",
+    "Update registry/lexicon_gap_queue.json with the recursive continuation, recursive unfolding, recursive admissibility guard, recursive depth boundary, and recursive class terms.",
+    "Update registry/registry/lexicon_gap_queue.json with the mirrored recursive continuation, recursive unfolding, recursive admissibility guard, recursive depth boundary, and recursive class terms.",
+    "Update registry/governance_change_ledger.json with the corresponding governance ledger entry."
+  ],
+  "target_files": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/formal_object_registry.json",
+    "registry/math_source_registry.json",
+    "registry/math_hashes.json",
+    "registry/math_core_hashes.json",
+    "registry/lexicon_gap_queue.json",
+    "registry/registry/lexicon_gap_queue.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_037.json"
+  ],
+  "success_criteria": {
+    "recursive_semantics_documented": true,
+    "recursive_prereqs_registered": true,
+    "recursive_class_registered": true,
+    "boundedness_preserved": true,
+    "rt_core_unchanged": true
+  }
+}

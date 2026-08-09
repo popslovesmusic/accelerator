@@ -1,0 +1,28 @@
+{
+  "campaign_id": "NB19_EXCLUSION_GENERATES_RESIDUE_001",
+  "status": "POST_EXECUTION_RECONSTRUCTION",
+  "specification_gate": "NOT_SATISFIED",
+  "note": "This specification was reconstructed from the executed notebook and archive. It is not an immutable pre-execution experiment specification and cannot remove the C2 gate blocker.",
+  "research_question": "Does exclusion of an admissible distinction generate residue, and do sufficiency, necessity, or biconditional relations survive in the bounded model?",
+  "hypotheses": {
+    "primary": "Residue is generated if and only if a projection excludes at least one admissible distinction.",
+    "null": "Exclusion and residue are not equivalent under the operational definitions.",
+    "interpretation_rule": "Any exclusion-without-residue case falsifies sufficiency; any residue-without-exclusion case falsifies necessity."
+  },
+  "independent_variables": ["source_domain", "target_domain", "source_size", "target_size", "admissibility_class", "projection_mapping"],
+  "dependent_variables": ["exclusion_vector", "information_residue", "structural_residue", "total_residue", "sufficiency", "necessity", "biconditional_verdict"],
+  "controls": ["fixed finite relational organization model", "fixed admissibility operators", "fixed residue operationalizations", "seeded deterministic block handling"],
+  "random_seed": 190019,
+  "parameter_space": {
+    "source_domains": ["core", "ordinal", "gradient"],
+    "target_domains": ["ordinal", "gradient", "temporal"],
+    "source_sizes": [1, 2, 3],
+    "target_sizes": [1, 2, 3],
+    "admissibility_classes": ["weak", "strong"],
+    "residue_criteria": ["information", "structural", "total"],
+    "target_block_limit": 500
+  },
+  "termination_conditions": ["all configured blocks complete", "deliverables exported", "validation predicates evaluated"],
+  "expected_outputs": ["projection_records.csv", "mechanism_classification.csv", "biconditional_test_results.csv", "counterexample tables", "run_manifest19.json", "findings19.json", "figures"],
+  "interpretation_protocol": ["report weak and strong admissibility separately", "report sufficiency and necessity separately", "treat surviving relations as bounded model results only", "do not infer ontological causation from association", "preserve counterexamples and operational definitions"]
+}

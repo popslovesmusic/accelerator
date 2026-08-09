@@ -1,0 +1,28 @@
+{
+  "crawl_id": "analysis_crawl_20260730_d_proof_evidence_reconciliation_001",
+  "crawl_type": "BOUNDED_READ_ONLY_ANALYSIS_CRAWL",
+  "crawl_date": "2026-07-30",
+  "campaign_id": "CAMPAIGN_D_PROOF_EVIDENCE_RECONCILIATION_20260730_001",
+  "scope": {"domains": ["D_semantics", "mathematical_registry", "validation", "DB_freshness", "textbook_freshness"], "finite_input_scope": true},
+  "normalization_rule": "Canonical registries remain authoritative; proof candidates and finite checks are evidence surfaces, not obligation closure certificates.",
+  "source_artifacts": [
+    {"path": "registry/math/d_semantics_obligation_registry.json", "sha256": "975CEC520392AB9BDD4F24D1276C8BB3B0A2B50F81928B7423B105D40B5BBD54"},
+    {"path": "registry/governance_manifest.json", "sha256": "394C63A5B8AE95446BF9614C09B5AF9EBCF41D6405FA854EE5E63D3561E5874D"},
+    {"path": "registry/math_hashes.json", "sha256": "6E361A1FD75DDED1F0736B554BD0C136DB222E9473342D0ED3EDDDB4802AB136"},
+    {"path": "docs/theory/foundational/5_03_26 unity/math/proofs/P127_P128_bounded_candidate_check_report.json", "sha256": "10D207048473913E191C12F3EACE888F62A773F81DEDA2536DAF0E7A9061F4AE"},
+    {"path": "docs/theory/foundational/5_03_26 unity/math/proofs/P127_d_representable_distinction_preservation_bounded_candidate.md", "sha256": "C3779DF1275302C5BEAEAB0E828CE81B076810EE4EC447511916ADCCB179E42D"},
+    {"path": "docs/theory/foundational/5_03_26 unity/math/proofs/P128_d_noncollapse_boundary_bounded_candidate.md", "sha256": "805DECD40C85A013AB8D22085811DDB4952E0C733AE13B06565E5F55A7DED3B3"},
+    {"path": "outputs/audits/global_health_report.json", "sha256": "3EECC04ABF73A427AA0D7C2A4EB74C121D9C0B9C8AB031974E41C44A00583423"},
+    {"path": "docs/textbook/mono_process_textbook_complete.md", "sha256": "BB760AD5D09C5F10B416AE67C90404194AD0AB1CEFBF9560BA1E9F834D6401A9"}
+  ],
+  "findings": [
+    {"discovery_id": "DISCOVERY_P127_P128_REGISTERED_20260730", "classification": "EVIDENCE_REGISTERED", "statement": "P127 and P128 are present in the unified mathematical manifest and linked from the active D-obligation registry."},
+    {"discovery_id": "DISCOVERY_P127_P128_BOUNDED_CHECK_20260730", "classification": "BOUNDED_CHECK", "statement": "The proof-candidate checker passes 6/6 finite cases, including admitted premises and blocked missing-history, cross-context, subthreshold, and invalid-profile cases."},
+    {"discovery_id": "DISCOVERY_D_OBLIGATIONS_REMAIN_OPEN_20260730", "classification": "OPEN_OBLIGATION", "statement": "OBL-D-001D and OBL-D-001E remain OPEN; the proof candidates are restricted local arguments with human review pending."},
+    {"discovery_id": "DISCOVERY_VALIDATION_WARNING_20260730", "classification": "UNRESOLVED", "statement": "Global validation is warning-level with no failed stages and degraded hygiene, math-program, and report-write stages."}
+  ],
+  "evidence_alignment": {"proof_candidate_check": "PASS_BOUNDED_PROOF_CANDIDATE_CHECK", "proof_fixture_count": 6, "db_snapshot_status": "fresh", "textbook_projection_freshness": "pass", "global_health": "warning"},
+  "recommended_next_action": {"recommendation": "HUMAN_REVIEW_P127_P128", "action": "Obtain independent human/formal review of the P127/P128 premises, derivation scope, and falsification vectors before any D-obligation status change.", "unlock": "A governed acceptance decision can determine whether either obligation receives a bounded discharge certificate or requires another proof refinement.", "do_not_begin_with": "registry status promotion or universalization of the conditional derivations"},
+  "success_assessment": {"outcome": "PARTIAL_SUCCESS", "reason": "Proof candidates are registered and their finite boundary checks pass, but the canonical obligations remain open pending acceptance.", "confidence": "high"},
+  "what_this_crawl_does_not_authorize": ["proof discharge", "registry status promotion", "claim elevation", "simulation execution", "DB mutation", "textbook patch", "commit"]
+}

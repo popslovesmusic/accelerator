@@ -1,0 +1,160 @@
+{
+  "schema_id": "q0_live_command_boundary_closure_inventory_v1",
+  "generated_at": "2026-07-15T00:10:00-04:00",
+  "source_patch": "PATCH_GOVERNANCE_Q0_REMAINING_OPEN_WORK_CLASSIFICATION_013",
+  "source_inventory": "outputs/governance_inventory/q0_remaining_open_work_inventory.json",
+  "selection_rule": "Only items already classified as NEUTRALIZED_BY_LATER_GOVERNANCE and uniquely proven to belong to the live command or governed invocation boundary are in scope.",
+  "queue_state": {
+    "before_queue_artifact": "outputs/governance_inventory/q0_next_bounded_work_queue_active.json",
+    "before_count": 4,
+    "after_queue_artifact": "outputs/governance_inventory/q0_next_bounded_work_queue_active.json",
+    "after_count": 3
+  },
+  "live_command_surfaces": [
+    {
+      "path": "scripts/global_validate.py",
+      "classification": "CANONICAL_ENTRY_POINT",
+      "reason": "The Q0 runtime authority layer classifies this script as VALIDATION_INVOCATION_AUTHORITY and the validator partition names `python -m scripts.global_validate` as the canonical invocation."
+    },
+    {
+      "path": "scripts/validate_governance_surface.py",
+      "classification": "ROLE_AWARE_SUPPORTING_COMMAND",
+      "reason": "This script invokes only the governance validation stages beneath the canonical validation surface and does not acquire terminal governance mutation authority."
+    },
+    {
+      "path": "scripts/query_governance.py",
+      "classification": "ROLE_AWARE_SUPPORTING_COMMAND",
+      "reason": "This command supports governed runtime queries, but generic mixed-role lookup is fail-closed and explicit authority-role declaration is required for governed Q0 authority surfaces."
+    },
+    {
+      "path": "governance/live/debt_discharge_command.json",
+      "classification": "OUT_OF_SCOPE",
+      "reason": "This is a live governance command declaration surface, but it is outside the selected Q0 validation control plane and does not become the canonical validation invocation entry point."
+    },
+    {
+      "path": "governance/live/program_debt_discharge_command.json",
+      "classification": "OUT_OF_SCOPE",
+      "reason": "This is a live program-debt sequencing surface outside the selected Q0 validation control plane and outside the canonical invocation path."
+    },
+    {
+      "path": "governance/live/work_reduction_framework.json",
+      "classification": "OUT_OF_SCOPE",
+      "reason": "This framework governs work routing and queue projection, but not the live Q0 validation invocation boundary itself."
+    }
+  ],
+  "selected_items": [
+    {
+      "item_id": "Q0-OPEN-006",
+      "ambiguity_id": "AMB-GOV-SURF-0127",
+      "source_artifact": "outputs/governance_inventory/q0_resolution_packet.json",
+      "original_path": "governance/live/program_debt_discharge_command.json",
+      "original_ambiguity_statement": "Separate live-governance command or manifest surface; no strong coherence key links it to the selected validation control plane.",
+      "patch_013_classification": "NEUTRALIZED_BY_LATER_GOVERNANCE",
+      "affected_command_or_invocation_surface": "governance/live/program_debt_discharge_command.json",
+      "later_governance_mechanism": [
+        "canonical invocation authority enforced",
+        "instruction authority separated from mutation authority",
+        "generic mixed-role lookup blocked"
+      ],
+      "current_live_runtime_evidence": [
+        {
+          "path": "outputs/governance_inventory/q0_resolution_packet.json",
+          "note": "The Q0 cluster packet excludes program_debt_discharge_command as a separate live-governance command surface with no direct Q0 path."
+        },
+        {
+          "path": "tools/runtime_authority/__init__.py",
+          "note": "The Q0 role map assigns scripts/global_validate.py to VALIDATION_INVOCATION_AUTHORITY while AGENTS.md, GEMINI.md, and other procedural surfaces are separated into INSTRUCTION_AUTHORITY; no validation-invocation role is assigned to program_debt_discharge_command.json."
+        },
+        {
+          "path": "scripts/query_governance.py",
+          "note": "Generic mixed-role authority lookup is blocked and explicit role declaration is required, preventing this surface from being queried as interchangeable Q0 authority."
+        },
+        {
+          "path": "scripts/global_validate.py",
+          "note": "The canonical validation entry point remains the governed executable surface for live Q0 validation behavior."
+        }
+      ],
+      "closure_decision": "PROSPECTIVELY_CLOSED",
+      "deterministic_reason": "Current enforced role separation confines live Q0 validation invocation to canonical executable surfaces and prevents program_debt_discharge_command.json from controlling validation-plane authority or mutation behavior."
+    },
+    {
+      "item_id": "Q0-OPEN-007",
+      "ambiguity_id": "AMB-GOV-SURF-0133",
+      "source_artifact": "outputs/governance_inventory/q0_resolution_packet.json",
+      "original_path": "governance/live/work_reduction_framework.json",
+      "original_ambiguity_statement": "Separate live-governance command or manifest surface; no strong coherence key links it to the selected validation control plane.",
+      "patch_013_classification": "NEUTRALIZED_BY_LATER_GOVERNANCE",
+      "affected_command_or_invocation_surface": "governance/live/work_reduction_framework.json",
+      "later_governance_mechanism": [
+        "canonical invocation authority enforced",
+        "supporting command prevented from acquiring terminal authority",
+        "generated evidence prevented from becoming live authority"
+      ],
+      "current_live_runtime_evidence": [
+        {
+          "path": "outputs/governance_inventory/q0_resolution_packet.json",
+          "note": "The selected Q0 cluster excludes work_reduction_framework as a separate live-governance framework surface outside the direct validation control-plane family."
+        },
+        {
+          "path": "governance/live/work_reduction_framework.json",
+          "note": "The framework states that queues are projections of governed work rather than independent governance authorities."
+        },
+        {
+          "path": "scripts/validate_governance_surface.py",
+          "note": "The supporting governance validation command executes bounded validation stages under the canonical validation surface rather than through the work-reduction framework."
+        },
+        {
+          "path": "tools/runtime_authority/__init__.py",
+          "note": "The generated-evidence and supporting-command boundaries keep queue and work-projection surfaces from becoming terminal validation or writer authority."
+        }
+      ],
+      "closure_decision": "PROSPECTIVELY_CLOSED",
+      "deterministic_reason": "Current governed enforcement leaves work_reduction_framework.json as a routing and queue-projection surface, while live Q0 validation authority remains confined to canonical executable entry points."
+    },
+    {
+      "item_id": "Q0-OPEN-008",
+      "ambiguity_id": "AMB-GOV-SURF-0113",
+      "source_artifact": "outputs/governance_inventory/q0_resolution_packet.json",
+      "original_path": "governance/live/debt_discharge_command.json",
+      "original_ambiguity_statement": "Separate live-governance command or manifest surface; no strong coherence key links it to the selected validation control plane.",
+      "patch_013_classification": "NEUTRALIZED_BY_LATER_GOVERNANCE",
+      "affected_command_or_invocation_surface": "governance/live/debt_discharge_command.json",
+      "later_governance_mechanism": [
+        "instruction authority separated from mutation authority",
+        "canonical invocation authority enforced",
+        "fail-closed handling of missing or ambiguous role"
+      ],
+      "current_live_runtime_evidence": [
+        {
+          "path": "outputs/governance_inventory/q0_resolution_packet.json",
+          "note": "The Q0 cluster packet excludes debt_discharge_command as a separate live-governance command surface with no direct Q0 path."
+        },
+        {
+          "path": "governance/live/debt_discharge_command.json",
+          "note": "The command governs debt-reduction order while the governance-first gate is active, but it is not the canonical validation invocation surface."
+        },
+        {
+          "path": "scripts/query_governance.py",
+          "note": "When a target belongs to a governed Q0 surface, missing or ambiguous authority-role declaration is fail-closed; generic mixed-role lookup is prohibited."
+        },
+        {
+          "path": "scripts/global_validate.py",
+          "note": "The canonical executable validation boundary remains outside debt_discharge_command.json and governs live Q0 validation behavior."
+        }
+      ],
+      "closure_decision": "PROSPECTIVELY_CLOSED",
+      "deterministic_reason": "Later governed enforcement preserves debt_discharge_command.json as a procedural live-command surface while preventing it from controlling live Q0 validation invocation, role resolution, or registry mutation."
+    }
+  ],
+  "excluded_as_out_of_scope": [],
+  "remains_open": [],
+  "completion_assertions": {
+    "historical_ambiguity_records_rewritten": 0,
+    "patch_002_status_changed": false,
+    "out_of_scope_items_changed": 0,
+    "full_project_validation_run": false,
+    "selected_item_count": 3,
+    "prospectively_closed_item_count": 3,
+    "remaining_q0_item_count": 5
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "patch_id": "PATCH_DB_GOVERNANCE_RUNTIME_014",
+  "campaign_id": "CAMPAIGN_DB_GOVERNANCE_RUNTIME_001",
+  "campaign": "CAMPAIGN_DB_GOVERNANCE_RUNTIME_001",
+  "type": "governance_runtime_extension",
+  "status": "APPLIED",
+  "applied_on": "2026-07-05",
+  "title": "Semantic RT and Debt Residue Projection",
+  "goal": "Project the canonical RT core into the live current-state capsule and surface governed debt blockers and historical residue as structured runtime records.",
+  "problem": {
+    "current_state": "The DB governance runtime exposes current-state, authority, and debt surfaces, but the live capsule does not yet carry the semantic RT projection and structured residue views required to fully collapse the top runtime debt.",
+    "gap": "Agents still need to infer the canonical RT core and the runtime debt residue structure from multiple surfaces instead of reading a single governed projection."
+  },
+  "objectives": [
+    "Expose the canonical RT core and meta bindings directly in the current-state capsule.",
+    "Project debt items into structured blocker and residue views.",
+    "Mark the top DB governance/runtime views debt as resolved without duplicating registry content."
+  ],
+  "runtime_changes": {
+    "current_state_view": [
+      "current_rt",
+      "semantic_projection_state",
+      "historical_residue_state"
+    ],
+    "debt_runtime_view": [
+      "blocker_projection",
+      "residue_projection"
+    ],
+    "python_capsule": [
+      "semantic_rt_projection",
+      "debt_blocker_projection",
+      "historical_residue_projection"
+    ]
+  },
+  "registry_updates": [
+    "registry/research_debt_registry.json",
+    "registry/governance_change_ledger.json"
+  ],
+  "acceptance_criteria": [
+    "current-state output includes the canonical RT projection.",
+    "debt runtime output includes structured blocker and residue projections.",
+    "DEBT_DB_GOVERNANCE_RUNTIME_VIEWS_001 is resolved in the registry.",
+    "global_validate.py reports no new validation regressions from the runtime projection change."
+  ],
+  "updated_artifacts": [
+    "scripts/query_governance.py",
+    "registry/db/migrations/20260703_governance_runtime_current_state_002.sql",
+    "registry/db/migrations/20260703_governance_runtime_debt_view_005.sql",
+    "registry/research_debt_registry.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_DB_GOVERNANCE_RUNTIME_014.json"
+  ],
+  "summary": {
+    "status": "pass",
+    "runtime": {
+      "db_first_gate": "active",
+      "authority_boundary": "mixed"
+    },
+    "warnings": [
+      "Follow-on governance/runtime debt remains open in DEBT_DB_GOVERNANCE_RUNTIME_STATE_002 and DEBT_DB_GOVERNANCE_RUNTIME_EVENT_REPLAY_006."
+    ]
+  },
+  "validation": {
+    "result": "pending"
+  }
+}

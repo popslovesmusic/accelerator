@@ -1,0 +1,34 @@
+{
+  "audit_id": "PI_A_IMPLEMENTATION_BINDING_AUDIT_20260726_001",
+  "status": "PASS_NONCANONICAL_ADAPTER_BINDING",
+  "fixture_set": "PI_A_DETERMINISTIC_LOCAL_FIXTURES_20260726_001",
+  "searched_surfaces": ["scripts", "tools", "tests", "docs/theory", "registry/math"],
+  "formal_artifacts_found": [
+    "registry/math/operator_registry.json",
+    "registry/math/pi_a_composition_table.json",
+    "registry/math/pi_a_idempotence_proof_scaffold.json",
+    "registry/math/pi_a_local_persistence_proof_scaffold_registry.json",
+    "registry/math/pi_a_counterexample_injection_registry.json"
+  ],
+  "candidate_runtime_rejected": {
+    "path": "tools/ca_admissibility_sim_v1/ca_engine.py",
+    "reason": "The cellular automaton implements a mismatch/residue grid update with an admissibility mask; it is not a declared Pi_A operator implementation and has no Pi_A fixture adapter or signature binding."
+  },
+  "approved_campaign_adapter": {
+    "manifest": "pi_a_bound_adapter_manifest.json",
+    "implementation": "pi_a_local_adapter.py",
+    "execution_result": "pi_a_bound_adapter_execution.json",
+    "fixtures_passed": 6,
+    "fixtures_total": 6,
+    "status": "PASS_NONCANONICAL_ADAPTER"
+  },
+  "fixture_execution": {
+    "specification_evaluator": "PASS_FIXTURE_EXECUTION_ONLY",
+    "noncanonical_campaign_adapter": "PASS_NONCANONICAL_ADAPTER",
+    "actual_operator_engine": "NOT_EXECUTED"
+  },
+  "governance_boundary": "Adding or modifying an engine implementation requires explicit authorization; this audit makes no engine change.",
+  "canonical_mutations": [],
+  "lexicon_result": "KEEP_L0_GAP_OPEN",
+  "next_action": "Subject the noncanonical adapter to independent review and, if desired, separately authorize promotion into a governed implementation surface; retain lexicon at L0 meanwhile."
+}

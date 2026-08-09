@@ -1,0 +1,45 @@
+{
+  "policy_id": "MPF_AGENT_AUTHORITY_RESOLUTION_POLICY_V1",
+  "schema_version": "1.0.0",
+  "status": "ACTIVE",
+  "admitted_from_packet": "SEA_CALC_AUTHORITY_ARCHITECTURE_REAUDIT_2026_07_20",
+  "purpose": "Prevent runtime agents from treating unadmitted Markdown or prose declarations as canonical operational authority.",
+  "authority_source": "governance/live/authority_architecture.json",
+  "resolution_order": [
+    "canonical_database",
+    "live_governance_ledgers",
+    "global_canonical_registries",
+    "validated_markdown_projection",
+    "historical_record",
+    "working_note"
+  ],
+  "rules": [
+    {
+      "id": "AAR-001",
+      "rule": "Runtime agents must query admitted canonical database state when available for governed authority questions."
+    },
+    {
+      "id": "AAR-002",
+      "rule": "If database authority resolution returns defer, agents must report the defer state and use the governed fallback hierarchy without treating Markdown as a competing operational SSOT."
+    },
+    {
+      "id": "AAR-003",
+      "rule": "Generated Markdown may be used for human-facing explanation only when projection metadata identifies canonical snapshot, object IDs, and validator run."
+    },
+    {
+      "id": "AAR-004",
+      "rule": "Human source, working notes, and historical records may guide proposals or audits but may not directly drive runtime authority."
+    },
+    {
+      "id": "AAR-005",
+      "rule": "Authority-deferred objects fail closed for promotion, demotion, proof elevation, evidence-class upgrade, and external-validity claims."
+    }
+  ],
+  "negative_controls_required": [
+    "NEG-AUTH-001",
+    "NEG-AUTH-002",
+    "NEG-AUTH-003",
+    "NEG-AUTH-004",
+    "NEG-AUTH-005"
+  ]
+}

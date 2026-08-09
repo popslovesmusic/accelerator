@@ -9,11 +9,13 @@
 #include <string>
 #include <vector>
 
-#if defined(DASE_ENABLE_UHD770_SYCL)
+#if defined(DASE_ENABLE_UHD770_SYCL) || defined(DASE_HAS_SYCL_RUNTIME)
   #if defined(__has_include)
     #if __has_include(<sycl/sycl.hpp>)
       #include <sycl/sycl.hpp>
-      #define DASE_HAS_SYCL_RUNTIME 1
+      #ifndef DASE_HAS_SYCL_RUNTIME
+        #define DASE_HAS_SYCL_RUNTIME 1
+      #endif
     #endif
   #endif
 #endif

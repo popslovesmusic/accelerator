@@ -1,0 +1,63 @@
+{
+  "orientation_sensitive_equivalence_geometry": {
+    "version": "1.0",
+    "description": "Formal scaffold for the geometry of orientation-sensitive equivalence classes.",
+    "core_principles": [
+      "Orientation operator -(i) provides a secondary refinement layer for reconstruction preimages.",
+      "Orientation-splitting occurs when histories with identical metric traces have distinct orientation states.",
+      "Orientation-erasing occurs when operator-induced loss destroys orientation information."
+    ],
+    "refinement_classes": [
+      {
+        "id": "OSE-001",
+        "name": "orientation_preserving_equivalence",
+        "operator": "-(i)",
+        "description": "Histories remain indistinguishable even under orientation refinement.",
+        "condition": "Shared orientation history across all members of the metric equivalence class."
+      },
+      {
+        "id": "OSE-002",
+        "name": "orientation_splitting_equivalence",
+        "operator": "delta",
+        "description": "History indistinguishable by metrics is split into sub-classes by orientation state.",
+        "condition": "Metric class contains preimages with divergent -(i) signatures."
+      },
+      {
+        "id": "OSE-003",
+        "name": "orientation_erasing_projection",
+        "description": "Orientation information is lost at the projection boundary.",
+        "operator": "Pi_A",
+        "impact": "Collapses orientation-distinct preimages into a single null class."
+      },
+      {
+        "id": "OSE-004",
+        "name": "orientation_smearing_transport",
+        "description": "Non-local aggregation erases granular orientation data.",
+        "operator": "NavT",
+        "impact": "Averages -(i) contributions over the CSI interaction domain."
+      },
+      {
+        "id": "OSE-005",
+        "name": "orientation_bias_transport",
+        "operator": "NavT",
+        "description": "Systematic bias in orientation frame persists through aggregate transport.",
+        "impact": "Induces drift in the selection of continuation preimages."
+      },
+      {
+        "id": "OSE-006",
+        "name": "angular_degeneracy_equivalence",
+        "operator": "delta",
+        "description": "Multiple preimages satisfy both mismatch and -(i) minimization.",
+        "impact": "Irreducible multiplicity under current selection rules."
+      },
+      {
+        "id": "OSE-007",
+        "name": "drift_minimization_refinement",
+        "operator": "-(i)",
+        "description": "Selection rule targeted at minimizing long-term orientation variance.",
+        "impact": "Stabilizes recursive equivalence basins."
+      }
+    ],
+    "last_updated": "2026-05-13"
+  }
+}

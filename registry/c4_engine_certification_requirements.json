@@ -1,0 +1,76 @@
+{
+  "registry_id": "PCD_C4_ENGINE_rigor endorsement_REQUIREMENTS",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "tool_id",
+      "current_rigor endorsement_level",
+      "target_rigor endorsement_level",
+      "runtime_requirements",
+      "scientific_validity_requirements",
+      "falsification_requirements",
+      "uncertainty_requirements",
+      "provenance_requirements",
+      "promotion_gate"
+    ]
+  },
+  "mandatory_c4_ladder": {
+    "runtime_requirements": [
+      "binary_manifest_present",
+      "required_binaries_exist",
+      "binary_hash_recorded",
+      "runtime_dependencies_recorded",
+      "smoke_run_passes"
+    ],
+    "scientific_validity_requirements": [
+      "known_control_cases_pass",
+      "observable_mapping_declared",
+      "numerical_stability_or_discrete_stability_checked",
+      "reproducibility_verified"
+    ],
+    "falsification_requirements": [
+      "negative_control_available",
+      "expected_failure_case_available",
+      "FV-1_supported",
+      "FV-2_supported"
+    ],
+    "uncertainty_requirements": [
+      "minimum_three_seed_runs",
+      "seed_sensitivity_report",
+      "parameter_sensitivity_report",
+      "known_limits_documented"
+    ],
+    "provenance_requirements": [
+      "config_snapshot",
+      "source_commit",
+      "tool_rigor endorsement_manifest",
+      "recoverable_outputs",
+      "runtime_binary_hash"
+    ],
+    "evidence_template_requirement": {
+      "statement": "C4 rigor endorsement requires a completed engine_rigor endorsement_evidence_template entry and passing check_c4_engine_rigor endorsement.py.",
+      "failure_behavior": "retain_current_rigor endorsement"
+    },
+    "promotion_gate": "scripts/check_c4_engine_rigor endorsement.py"
+  },
+  "target_tools": [
+    {
+      "tool_id": "graph_dynamics_sim_v1_cpp",
+      "current_rigor endorsement_level": "C1",
+      "target_rigor endorsement_level": "C4",
+      "required_for": ["MSV-001"]
+    },
+    {
+      "tool_id": "ca_admissibility_sim_v1_cpp",
+      "current_rigor endorsement_level": "C1",
+      "target_rigor endorsement_level": "C4",
+      "required_for": ["MSV-001"]
+    },
+    {
+      "tool_id": "fsa_rule_engine_sim_v1_cpp",
+      "current_rigor endorsement_level": "runtime_failed",
+      "target_rigor endorsement_level": "C4",
+      "required_for": ["MSV-001_alternate_or_recoupling_probe"]
+    }
+  ]
+}

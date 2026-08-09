@@ -1,0 +1,331 @@
+{
+  "artifact_type": "PROVISIONAL_FCI005_MAP04_CANDIDATE_MAPPING_RULE_DEFINITIONS",
+  "artifact_id": "RT_ADMOBS_FCI005_MAP04_CANDIDATE_MAPPING_RULE_DEFINITIONS_20260729_001",
+  "status": "MAP_04_CANDIDATE_RULE_DEFINITIONS_CONSTRUCTED_READY_FOR_REVIEW",
+  "canonicality": "NON_CANONICAL",
+  "claim_ceiling": "C1_MODEL_RELATIVE",
+  "campaign_id": "RT_ADMOBS_FCI005_MAPPING_SEMANTICS_CONSTRUCTION_20260729_001",
+  "construction_authority": {
+    "decision_id": "FCI005-MAP-CONSTRUCTION-AUTH-001",
+    "decision": "AUTHOR_NEW_PROVISIONAL_MAPPING_SEMANTICS",
+    "authority_level": "HUMAN_PROVISIONAL_C1",
+    "effective_phase": "MAP_04",
+    "scope": "Candidate mapping-rule definitions only",
+    "evidence_artifact": "RT_ADMOBS_FCI005_MAPPING_SEMANTICS_CONSTRUCTION_AUTHORITY_DECISION_EVIDENCE_20260729_001",
+    "verified": true
+  },
+  "verified_inputs": [
+    {
+      "artifact_id": "RT_ADMOBS_FCI005_CARRIER_RELATION_HYPOTHESES_REPAIRED_SCHEMA_NORMALIZED_20260729_001",
+      "sha256": "DF9F34DC7BF843289AB822A3E3E847BF48432462383D1ADAA17952F7B9CD34BE",
+      "role": "Accepted MAP-02 result-type normalization"
+    },
+    {
+      "artifact_id": "RT_ADMOBS_FCI005_CARRIER_RELATION_HYPOTHESES_REPAIRED_20260729_001",
+      "sha256": "FEBBA547569BB8ACBA6AABE4262626B5D9606C11735D59FBE6F9AC941C95B67E",
+      "role": "Closed carrier hypothesis definitions"
+    },
+    {
+      "artifact_id": "RT_ADMOBS_FCI005_CONTEXT_MAPPING_HYPOTHESES_FINAL_20260729_001",
+      "sha256": "80BD8EE9852C9C0949A632FE4A8C4A57FCB9126C9E63557E726054DC7FD11A7A",
+      "role": "Closed MAP-03 context hypothesis definitions"
+    },
+    {
+      "artifact_id": "RT_ADMOBS_FCI005_CONTEXT_MAPPING_HYPOTHESES_FINAL_REVIEW_20260729_001",
+      "sha256": "08CFB3DCA531FDBFC00CB6C1999EB260C39D0D1BA583C3082DA279FCE5BDDB95",
+      "role": "MAP-03 closure review"
+    },
+    {
+      "artifact_id": "RT_ADMOBS_FCI005_MAPPING_SEMANTICS_CONSTRUCTION_AUTHORITY_DECISION_EVIDENCE_20260729_001",
+      "sha256": "DBBC8F4D9A86D45CD987157A50E0CDD6860BA60CF8CC0C423295E8347A8A267E",
+      "role": "Explicit human candidate-construction authority"
+    },
+    {
+      "artifact_id": "RT_ADMOBS_FCI005_MAPPING_RULE_INSTANTIATION_BLOCKER_20260729_001",
+      "sha256": "2F8CB2DA5E165728D3FC07E68873D5C470E32FA5CAD05846D6BD58A6CA4483B6",
+      "role": "Active record, provenance, dependency, and witness blocker"
+    }
+  ],
+  "construction_scope": {
+    "authorized": [
+      "Define provisional carrier mapping-rule candidates.",
+      "Define provisional boundary, domain, and residue context mapping-rule candidates.",
+      "Define candidate completeness rules for target-level non-relation.",
+      "Declare applicability, evaluation, authority, provenance, and dependency contracts for later records."
+    ],
+    "not_authorized": [
+      "Instantiate CarrierMappingRuleRecord_x.",
+      "Instantiate ContextMappingRuleRecord_x.",
+      "Instantiate RuleAuthorityRecord_x.",
+      "Instantiate BridgeProvenanceRecord_x.",
+      "Instantiate DependencyGraphCompletenessRecord_x.",
+      "Instantiate carrier or context mapping records.",
+      "Construct witness fixtures.",
+      "Bind BCon_x.",
+      "Declare H_x.",
+      "Modify delta_a.",
+      "Promote any candidate to canonical authority."
+    ]
+  },
+  "type_scope": {
+    "source_operands": "X,Z : RT_OR_ART_TYPED_OPERAND; exact governed source declarations remain unresolved.",
+    "source_context": "Y : SOURCE_COMPOSITION_CONTEXT; exact governed context declaration remains unresolved.",
+    "observation_target": "o : ObservationOrientation; provisional target parameter with Applicability_x(o;D_rel).",
+    "boundary_target": "B_x : BoundaryInteraction_x; provisional role-scoped target parameter.",
+    "domain_target": "D_rel : RelationalDomain_x; provisional role-scoped target parameter.",
+    "residue_target": "R : Residue_x; provisional role-scoped target parameter."
+  },
+  "evaluation_result_types": {
+    "PositiveRuleEvaluationResult_x[W,N,U]": {
+      "variants": {
+        "SUPPORTS_RELATION": {
+          "payload_type": "W",
+          "payload": "w_rule"
+        },
+        "REJECTS_RULE_ONLY": {
+          "payload_type": "N",
+          "payload": "n_local"
+        },
+        "UNDEFINED": {
+          "payload_type": "U",
+          "payload": "u_rule"
+        }
+      },
+      "guard": "REJECTS_RULE_ONLY rejects only the evaluated positive rule family; it never establishes target-level DOES_NOT_RELATE."
+    },
+    "RelationDeterminationResult_x[W,N,U]": {
+      "variants": {
+        "RELATES": {
+          "payload_type": "W",
+          "payload": "w_rel"
+        },
+        "DOES_NOT_RELATE": {
+          "payload_type": "N",
+          "payload": "n_complete"
+        },
+        "UNDEFINED": {
+          "payload_type": "U",
+          "payload": "u_rel"
+        }
+      },
+      "guard": "DOES_NOT_RELATE requires complete applicable-rule-set evidence and cannot be emitted by a single positive rule."
+    }
+  },
+  "candidate_rule_definitions": [
+    {
+      "candidate_rule_id": "MAP04-CR1-CARRIER-ASPECT-PROJECTION",
+      "family": "CARRIER_POSITIVE",
+      "derived_from_hypothesis": "MAP02-H1-ASPECT-PROJECTION",
+      "signature": "EvalCarrierAspectProjectionRule_x(X,o;Y,D_rel) : PositiveRuleEvaluationResult_x[CarrierRelationSupportWitness_x,CarrierAspectRuleLocalRejection_x,UnresolvedCarrierAspectRuleEvidence_x]",
+      "applicability_conditions": [
+        "DeclaredSourceOperandType_x(X)",
+        "CandidateObservationOrientation_x(o)",
+        "Applicability_x(o;D_rel)",
+        "ApplicableContextIndex_x(Y,D_rel)",
+        "PRE_REF_ORIENT_AVAILABLE_x(X,Y,D_rel)"
+      ],
+      "support_condition": "EvalExtractOrientAspect_x(X;D_rel)=EXTRACTED(a_x) AND GovernedRelateOrientAspect_x(a_x,o;D_rel)=ACCEPTS(w_rule)",
+      "local_rejection_condition": "Complete extractor returns NO_ASPECT OR EXTRACTED(a_x) and the governed aspect relation returns REJECTS(n_local).",
+      "undefined_condition": "Any source type, target applicability, extractor, relation evaluator, authority, provenance, context, or dependency evidence is unresolved.",
+      "same_target_guard": "REJECTS_RULE_ONLY does not establish CarrierRelation_x(X,o;Y,D_rel)=DOES_NOT_RELATE.",
+      "threshold_independence": "No D(X|Z)>epsilon_src or d_obs(o_i,o_j)>epsilon_obs outcome participates in applicability or evaluation.",
+      "future_rule_record_type": "CarrierMappingRuleRecord_x",
+      "record_status": "NOT_INSTANTIATED"
+    },
+    {
+      "candidate_rule_id": "MAP04-CR2-CARRIER-TYPED-CLASS-MEDIATION",
+      "family": "CARRIER_POSITIVE",
+      "derived_from_hypothesis": "MAP02-H2-TYPED-CLASS-MEDIATION",
+      "signature": "EvalCarrierClassMediationRule_x(X,o;Y,D_rel) : PositiveRuleEvaluationResult_x[CarrierClassRelationSupportWitness_x,CarrierClassRuleLocalRejection_x,UnresolvedCarrierClassRuleEvidence_x]",
+      "applicability_conditions": [
+        "DeclaredSourceOperandType_x(X)",
+        "DeclaredSourceOrientClassField_x(X)",
+        "DeclaredObservationOrientClassField_x(o)",
+        "Applicability_x(o;D_rel)",
+        "ApplicableContextIndex_x(Y,D_rel)",
+        "PRE_REF_ORIENT_AVAILABLE_x(X,Y,D_rel)"
+      ],
+      "support_condition": "SourceOrientClass_x(X)=c_src AND ObsOrientClass_x(o)=c_obs AND GovernedClassBridge_x(c_src,c_obs;D_rel)=ACCEPTS(w_rule)",
+      "local_rejection_condition": "A governed applicable source-target class pair exists and GovernedClassBridge_x returns REJECTS(n_local).",
+      "undefined_condition": "Any class field, bridge, applicability, authority, provenance, context, or dependency evidence is unresolved.",
+      "same_target_guard": "REJECTS_RULE_ONLY does not establish CarrierRelation_x(X,o;Y,D_rel)=DOES_NOT_RELATE.",
+      "threshold_independence": "No source or observation distinction-floor outcome participates in applicability or evaluation.",
+      "future_rule_record_type": "CarrierMappingRuleRecord_x",
+      "record_status": "NOT_INSTANTIATED"
+    },
+    {
+      "candidate_rule_id": "MAP04-CR3-CARRIER-COMPLETE-NONRELATION",
+      "family": "CARRIER_TARGET_LOCAL_NON_RELATION",
+      "derived_from_hypothesis": "MAP02-H3-NO-ORIENTATION-BEARING-SURFACE",
+      "signature": "DetermineCarrierNonRelation_x(X,o;Y,D_rel) : RelationDeterminationResult_x[CarrierRelationWitness_x,CompleteCarrierNonRelationEvidence_x,UnresolvedCarrierRelationEvidence_x]",
+      "applicability_conditions": [
+        "Declared exact source and target types.",
+        "CompleteApplicableCarrierRuleSet_x(X,o;Y,D_rel).",
+        "Every applicable carrier rule has a governed RuleAuthorityRecord_x.",
+        "Every applicable carrier rule has independently validated provenance.",
+        "PRE_REF_ORIENT dependency completeness is independently established."
+      ],
+      "does_not_relate_condition": "All authorized applicable carrier positive rules return REJECTS_RULE_ONLY and complete governed analysis establishes no additional applicable carrier rule.",
+      "falsification_condition": "Any authorized applicable carrier rule returns SUPPORTS_RELATION.",
+      "undefined_condition": "Rule-set completeness, rule authority, provenance, applicability, exact typing, or dependency evidence is incomplete.",
+      "global_guard": "Absence of a discovered rule is not complete non-relation evidence.",
+      "threshold_independence": "No threshold agreement or disagreement establishes this result.",
+      "future_rule_record_type": "CarrierMappingRuleRecord_x",
+      "record_status": "NOT_INSTANTIATED"
+    },
+    {
+      "candidate_rule_id": "MAP04-CTX1-BOUNDARY-ASPECT-MEDIATION",
+      "family": "CONTEXT_BOUNDARY_POSITIVE",
+      "derived_from_hypothesis": "MAP03-H1-BOUNDARY-ASPECT",
+      "signature": "EvalBoundaryContextRule_x(Y,B_x) : PositiveRuleEvaluationResult_x[BoundaryRelationSupportWitness_x,BoundaryRuleLocalRejection_x,UnresolvedBoundaryRuleEvidence_x]",
+      "applicability_conditions": [
+        "DeclaredSourceCompositionContext_x(Y)",
+        "ApplicableBoundaryTarget_x(Y,B_x)",
+        "PRE_REF_ORIENT_AVAILABLE_x(Y,B_x)"
+      ],
+      "support_condition": "EvalExtractBoundaryAspect_x(Y)=EXTRACTED(b_y) AND GovernedRelateBoundaryAspect_x(b_y,B_x)=ACCEPTS(w_rule)",
+      "local_rejection_condition": "Complete extractor returns NO_ASPECT OR EXTRACTED(b_y) and the governed boundary relation returns REJECTS(n_local).",
+      "undefined_condition": "Any context type, target applicability, extractor, relation evaluator, authority, provenance, or dependency evidence is unresolved.",
+      "same_target_guard": "REJECTS_RULE_ONLY does not establish NoContextRelation_x(Y,B_x).",
+      "threshold_independence": "No source or observation distinction-floor outcome participates.",
+      "future_rule_record_type": "ContextMappingRuleRecord_x",
+      "record_status": "NOT_INSTANTIATED"
+    },
+    {
+      "candidate_rule_id": "MAP04-CTX2-DOMAIN-ASPECT-MEDIATION",
+      "family": "CONTEXT_DOMAIN_POSITIVE",
+      "derived_from_hypothesis": "MAP03-H2-DOMAIN-ASPECT",
+      "signature": "EvalDomainContextRule_x(Y,D_rel) : PositiveRuleEvaluationResult_x[DomainRelationSupportWitness_x,DomainRuleLocalRejection_x,UnresolvedDomainRuleEvidence_x]",
+      "applicability_conditions": [
+        "DeclaredSourceCompositionContext_x(Y)",
+        "ApplicableDomainTarget_x(Y,D_rel)",
+        "PRE_REF_ORIENT_AVAILABLE_x(Y,D_rel)"
+      ],
+      "support_condition": "EvalExtractDomainAspect_x(Y)=EXTRACTED(d_y) AND GovernedRelateDomainAspect_x(d_y,D_rel)=ACCEPTS(w_rule)",
+      "local_rejection_condition": "Complete extractor returns NO_ASPECT OR EXTRACTED(d_y) and the governed domain relation returns REJECTS(n_local).",
+      "undefined_condition": "Any context type, target applicability, extractor, relation evaluator, authority, provenance, or dependency evidence is unresolved.",
+      "same_target_guard": "REJECTS_RULE_ONLY does not establish NoContextRelation_x(Y,D_rel).",
+      "threshold_independence": "No source or observation distinction-floor outcome participates.",
+      "future_rule_record_type": "ContextMappingRuleRecord_x",
+      "record_status": "NOT_INSTANTIATED"
+    },
+    {
+      "candidate_rule_id": "MAP04-CTX3-RESIDUE-ASPECT-MEDIATION",
+      "family": "CONTEXT_RESIDUE_POSITIVE",
+      "derived_from_hypothesis": "MAP03-H3-RESIDUE-ASPECT",
+      "signature": "EvalResidueContextRule_x(Y,R) : PositiveRuleEvaluationResult_x[ResidueRelationSupportWitness_x,ResidueRuleLocalRejection_x,UnresolvedResidueRuleEvidence_x]",
+      "applicability_conditions": [
+        "DeclaredSourceCompositionContext_x(Y)",
+        "ApplicableResidueTarget_x(Y,R)",
+        "PRE_REF_ORIENT_AVAILABLE_x(Y,R)"
+      ],
+      "support_condition": "EvalExtractResidueAspect_x(Y)=EXTRACTED(r_y) AND GovernedRelateResidueAspect_x(r_y,R)=ACCEPTS(w_rule)",
+      "local_rejection_condition": "Complete extractor returns NO_ASPECT OR EXTRACTED(r_y) and the governed residue relation returns REJECTS(n_local).",
+      "undefined_condition": "Any context history/type, target applicability, extractor, relation evaluator, authority, provenance, or dependency evidence is unresolved.",
+      "same_target_guard": "REJECTS_RULE_ONLY does not establish NoContextRelation_x(Y,R).",
+      "threshold_independence": "No source or observation distinction-floor outcome participates.",
+      "future_rule_record_type": "ContextMappingRuleRecord_x",
+      "record_status": "NOT_INSTANTIATED"
+    },
+    {
+      "candidate_rule_id": "MAP04-CTX4A-BOUNDARY-COMPLETE-NONRELATION",
+      "family": "CONTEXT_BOUNDARY_NON_RELATION",
+      "derived_from_hypothesis": "MAP03-H4A-NO-BOUNDARY-RELATION",
+      "signature": "DetermineBoundaryNonRelation_x(Y,B_x) : RelationDeterminationResult_x[BoundaryRelationWitness_x,CompleteBoundaryNonRelationEvidence_x,UnresolvedBoundaryRelationEvidence_x]",
+      "does_not_relate_condition": "CompleteApplicableBoundaryRuleSet_x(Y,B_x) AND all authorized applicable boundary rules return REJECTS_RULE_ONLY AND NoAdditionalApplicableAuthorizedBoundaryRule_x(Y,B_x).",
+      "falsification_condition": "Any authorized applicable boundary rule returns SUPPORTS_RELATION.",
+      "undefined_condition": "Boundary rule-set completeness, rule authority, provenance, applicability, exact typing, or dependency evidence is incomplete.",
+      "future_rule_record_type": "ContextMappingRuleRecord_x",
+      "record_status": "NOT_INSTANTIATED"
+    },
+    {
+      "candidate_rule_id": "MAP04-CTX4B-DOMAIN-COMPLETE-NONRELATION",
+      "family": "CONTEXT_DOMAIN_NON_RELATION",
+      "derived_from_hypothesis": "MAP03-H4B-NO-DOMAIN-RELATION",
+      "signature": "DetermineDomainNonRelation_x(Y,D_rel) : RelationDeterminationResult_x[DomainRelationWitness_x,CompleteDomainNonRelationEvidence_x,UnresolvedDomainRelationEvidence_x]",
+      "does_not_relate_condition": "CompleteApplicableDomainRuleSet_x(Y,D_rel) AND all authorized applicable domain rules return REJECTS_RULE_ONLY AND NoAdditionalApplicableAuthorizedDomainRule_x(Y,D_rel).",
+      "falsification_condition": "Any authorized applicable domain rule returns SUPPORTS_RELATION.",
+      "undefined_condition": "Domain rule-set completeness, rule authority, provenance, applicability, exact typing, or dependency evidence is incomplete.",
+      "future_rule_record_type": "ContextMappingRuleRecord_x",
+      "record_status": "NOT_INSTANTIATED"
+    },
+    {
+      "candidate_rule_id": "MAP04-CTX4C-RESIDUE-COMPLETE-NONRELATION",
+      "family": "CONTEXT_RESIDUE_NON_RELATION",
+      "derived_from_hypothesis": "MAP03-H4C-NO-RESIDUE-RELATION",
+      "signature": "DetermineResidueNonRelation_x(Y,R) : RelationDeterminationResult_x[ResidueRelationWitness_x,CompleteResidueNonRelationEvidence_x,UnresolvedResidueRelationEvidence_x]",
+      "does_not_relate_condition": "CompleteApplicableResidueRuleSet_x(Y,R) AND all authorized applicable residue rules return REJECTS_RULE_ONLY AND NoAdditionalApplicableAuthorizedResidueRule_x(Y,R).",
+      "falsification_condition": "Any authorized applicable residue rule returns SUPPORTS_RELATION.",
+      "undefined_condition": "Residue rule-set completeness, rule authority, provenance, applicability, exact typing, or dependency evidence is incomplete.",
+      "future_rule_record_type": "ContextMappingRuleRecord_x",
+      "record_status": "NOT_INSTANTIATED"
+    }
+  ],
+  "derived_global_candidate": {
+    "symbol": "GlobalNoContextRelation_x(Y)",
+    "definition": "NoContextRelation_x(Y,B_x) AND NoContextRelation_x(Y,D_rel) AND NoContextRelation_x(Y,R)",
+    "status": "DERIVED_CANDIDATE_ONLY",
+    "guard": "A relation to one target falsifies the global conjunction and decides only that target; it does not decide either remaining target."
+  },
+  "rule_authority_contract": {
+    "current_status": "NO_RULE_AUTHORITY_RECORDS_INSTANTIATED",
+    "requirement": "Each candidate rule must receive an independent RuleAuthorityRecord_x before it may be treated as governed or included in an applicable-rule-set completeness claim.",
+    "construction_authority_non_equivalence": "The human decision authorizes candidate definition construction; it is not a RuleAuthorityRecord_x for any candidate.",
+    "required_future_fields": [
+      "candidate_rule_id",
+      "exact source type",
+      "exact target type",
+      "applicability scope",
+      "authority decision",
+      "authority provenance",
+      "limitations",
+      "effective phase",
+      "canonicality"
+    ]
+  },
+  "provenance_contract": {
+    "current_status": "NO_BRIDGE_PROVENANCE_RECORDS_INSTANTIATED",
+    "requirement": "Every future governed rule and mapping record must carry independently validated lineage to the source hypotheses, reviews, construction decision, and exact type declarations.",
+    "absence_guard": "Artifact citation alone does not establish semantic provenance completeness."
+  },
+  "dependency_contract": {
+    "current_status": "NO_DEPENDENCY_GRAPH_COMPLETENESS_RECORD_INSTANTIATED",
+    "requirement": "PRE_REF_ORIENT availability must be established by an independently extracted dependency graph and completeness record.",
+    "evaluation_effect": "Until dependency completeness is verified, every candidate rule evaluation remains UNDEFINED even when its local syntactic conditions appear satisfied."
+  },
+  "completeness_contract": {
+    "carrier": "CompleteApplicableCarrierRuleSet_x cannot be asserted until all candidate and externally governed carrier rules for the exact typed pair have authority, provenance, applicability, and dependency decisions.",
+    "boundary": "CompleteApplicableBoundaryRuleSet_x cannot be asserted until the boundary rule family is independently closed.",
+    "domain": "CompleteApplicableDomainRuleSet_x cannot be asserted until the domain rule family is independently closed.",
+    "residue": "CompleteApplicableResidueRuleSet_x cannot be asserted until the residue rule family is independently closed.",
+    "negative_evidence_guard": "Repository search exhaustion is not equivalent to semantic rule-set completeness."
+  },
+  "review_questions": [
+    "Are positive-rule local rejection and target-level non-relation sufficiently separated?",
+    "Are the carrier aspect and class mediation candidates exhaustive enough to begin authority review without claiming rule-set completeness?",
+    "Are boundary, domain, and residue targets still correctly provisional?",
+    "Does PRE_REF_ORIENT dependency completeness remain an independent prerequisite?",
+    "Should any additional positive carrier or context rule family be hypothesized before rule authority review begins?"
+  ],
+  "phase_gate": {
+    "MAP_01": "COMPLETE_PARTIAL",
+    "MAP_02": "CLOSED_HYPOTHESIS_SCOPE_SCHEMA_NORMALIZED",
+    "MAP_03": "CLOSED_FINAL_SCHEMA_NORMALIZED_HYPOTHESIS_SCOPE",
+    "MAP_04": "CANDIDATE_RULE_DEFINITIONS_CONSTRUCTED_REVIEW_REQUIRED",
+    "MAP_05": "BLOCKED",
+    "MAP_06": "BLOCKED"
+  },
+  "preserved_state": {
+    "mapping_rule_record_instantiation": "NOT_PERFORMED",
+    "mapping_record_instantiation": "NOT_PERFORMED",
+    "RuleAuthorityRecord_x": "NOT_INSTANTIATED",
+    "BridgeProvenanceRecord_x": "NOT_INSTANTIATED",
+    "DependencyGraphCompletenessRecord_x": "NOT_INSTANTIATED",
+    "witness_fixture_construction": "NOT_PERFORMED",
+    "BCon_x": "UNBOUND",
+    "H_x": "UNDECLARED",
+    "delta_a": "UNCHANGED"
+  },
+  "next_authorized_action": "Independent review of the nine MAP-04 candidate rule definitions only.",
+  "final_result": "PASS_MAP04_CANDIDATE_RULE_DEFINITIONS_CONSTRUCTED_NO_RECORDS_OR_WITNESSES_INSTANTIATED"
+}

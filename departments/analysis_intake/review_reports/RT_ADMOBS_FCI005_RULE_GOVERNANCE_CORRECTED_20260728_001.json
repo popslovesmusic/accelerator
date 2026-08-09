@@ -1,0 +1,70 @@
+{
+  "artifact_type": "PROVISIONAL_CORRECTED_RULE_GOVERNANCE",
+  "artifact_id": "RT_ADMOBS_FCI005_RULE_GOVERNANCE_CORRECTED_20260728_001",
+  "status": "PROVISIONAL_PARTIAL_RULE_GOVERNANCE",
+  "canonicality": "NON_CANONICAL_CANDIDATE",
+  "claim_ceiling": "C1_MODEL_RELATIVE",
+  "source_review": "RT_ADMOBS_FCI005_RULE_GOVERNANCE_CRAWL_REVIEW_20260728_001",
+  "threshold_agreement": {
+    "result_type": "ThresholdRouteAgreementResult_x := {AGREE, DISAGREE, UNDEFINED}",
+    "evaluator": "EvalThresholdRoutesAgree_x(shared_evidence, explicit_evidence; D_rel) : ThresholdRouteAgreementResult_x",
+    "valid_valid_rows": [
+      {"agreement":"AGREE","result":"VALID"},
+      {"agreement":"DISAGREE","result":"INCONSISTENT"},
+      {"agreement":"UNDEFINED","result":"UNDEFINED"}
+    ],
+    "policy": "The VALID/VALID route is not accepted without an explicit agreement result."
+  },
+  "rule_authority": {
+    "RuleAuthorityRecord_x": {
+      "signature": "RuleAuthorityRecord_x := (rule_id, authority_scope, authority_rank_or_relation, supersession, provenance)"
+    },
+    "RuleAuthorityComparisonResult_x": {
+      "variants": ["LEFT_PRECEDES", "RIGHT_PRECEDES", "EQUIVALENT", "INCOMPARABLE", "UNDEFINED"]
+    },
+    "MaximalApplicableRuleSet_x": {
+      "signature": "MaximalApplicableRuleSet_x(applicable_rules, authority_records)"
+    },
+    "aggregation": {
+      "REPRESENTED": "Every maximal authoritative rule is defined, at least one returns RELATES, and none returns DOES_NOT_RELATE.",
+      "NOT_REPRESENTED": "Every maximal authoritative rule returns DOES_NOT_RELATE.",
+      "UNDEFINED": "A maximal rule is unresolved, maximal rules conflict, authority is incomparable without policy, or maximality cannot be determined.",
+      "lower_authority_guard": "Lower-authority rules may be ignored only under explicit governed precedence."
+    }
+  },
+  "explicit_empty_policy": {
+    "carrier": {
+      "EXPLICIT_EMPTY_WITH_COMPLETE_CLOSED_WORLD_SCOPE": "NOT_REPRESENTED",
+      "EXPLICIT_EMPTY_WITHOUT_COMPLETENESS_AUTHORITY": "UNDEFINED",
+      "ABSENT_OR_UNDECLARED": "UNDEFINED"
+    },
+    "context": "For a required context component, empty mapping is MISMATCH only when the domain explicitly defines absence as rejection; otherwise UNDEFINED."
+  },
+  "context_rule_sets": {
+    "ApplicableBoundaryRuleSet_x": "ApplicableBoundaryRuleSet_x(Y, B_x)",
+    "ApplicableDomainRuleSet_x": "ApplicableDomainRuleSet_x(Y, D_rel)",
+    "ApplicableResidueRuleSet_x": "ApplicableResidueRuleSet_x(Y, R)",
+    "MaximalApplicableContextRuleSet_x": "Apply maximal-authority and conflict semantics independently to all three components."
+  },
+  "import_closure": {
+    "manifest_artifact": "RT_ADMOBS_FCI005_BRIDGE_SYMBOL_IMPORT_MANIFEST_20260728_002",
+    "legacy_alias_policy": {
+      "OrientCarrierBridge_x": "LEGACY_PROJECTION_ONLY; active semantics operationalized by EvalOrientCarrierBridge_x.",
+      "SourceContextBridge_x": "LEGACY_PROJECTION_ONLY; active semantics operationalized by EvalSourceContextBridge_x."
+    },
+    "supersedes_field_rule": "supersedes_symbol_from identifies a symbol only; supersedes_source_artifact_id identifies an artifact."
+  },
+  "external_instantiation": {
+    "carrier_mapping_records": "MISSING",
+    "context_mapping_records": "MISSING",
+    "dependency_completeness_records": "MISSING",
+    "provenance_records": "MISSING",
+    "witness_fixtures": "NOT_AUTHORIZED"
+  },
+  "BCon_x": "UNBOUND",
+  "H_x": "UNDECLARED",
+  "delta_a": "UNCHANGED",
+  "final_state": "PARTIAL_RULE_GOVERNANCE_WITH_MAPPING_AUTHORITY_AND_IMPORT_CLOSURE_BLOCKED",
+  "next_action": "Obtain independently governed mapping and dependency records after this governance layer is human-reviewed.",
+  "human_review_required": true
+}

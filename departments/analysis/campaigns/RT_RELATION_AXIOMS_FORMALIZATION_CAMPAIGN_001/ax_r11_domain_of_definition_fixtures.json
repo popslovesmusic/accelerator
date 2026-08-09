@@ -1,0 +1,38 @@
+{
+  "fixture_set_id": "AX-R11-DOMAIN-OF-DEFINITION-FIXTURES-001",
+  "axiom_id": "AX-R11_DOMAIN_OF_DEFINITION",
+  "status": "FORMALIZED_WITH_TOTALITY_BLOCKED",
+  "domain_id": "DOM-R11-SYMMETRY-CONDITION-RELATION",
+  "domain": "BoundedSymmetry × UnboundedSymmetry",
+  "ordered": true,
+  "predicate": "InDomain_R11",
+  "positive": [
+    {"fixture_id":"AX-R11-POS-001","expression":"<S> | >S<","domain_status":"IN_DOMAIN","evaluation_status":"ELIGIBLE_FOR_SEMANTIC_EVALUATION"},
+    {"fixture_id":"AX-R11-POS-002","expression":"b | u","domain_status":"IN_DOMAIN"},
+    {"fixture_id":"AX-R11-POS-003","expression":"alias_b | alias_u","domain_status":"IN_DOMAIN_AFTER_ALIAS_NORMALIZATION"}
+  ],
+  "failure": [
+    {"fixture_id":"AX-R11-FAIL-001","expression":">S< | <S>","expected":"OUTSIDE_ORDERED_DOMAIN"},
+    {"fixture_id":"AX-R11-FAIL-002","expression":"<S> | <S>","expected":"OUTSIDE_TYPED_DOMAIN"},
+    {"fixture_id":"AX-R11-FAIL-003","expression":">S< | >S<","expected":"OUTSIDE_TYPED_DOMAIN"},
+    {"fixture_id":"AX-R11-FAIL-004","expression":"S | >S<","expected":"OUTSIDE_TYPED_DOMAIN"},
+    {"fixture_id":"AX-R11-FAIL-005","expression":"<S> | S","expected":"OUTSIDE_TYPED_DOMAIN"},
+    {"fixture_id":"AX-R11-FAIL-006","expression":"(<S> | >S<) | >S<","expected":"OUTSIDE_TYPED_DOMAIN","secondary_error":"RELATION_RESULT_REENTRY_LEFT"},
+    {"fixture_id":"AX-R11-FAIL-007","expression":"<S> | (<S> | >S<)","expected":"OUTSIDE_TYPED_DOMAIN","secondary_error":"RELATION_RESULT_REENTRY_RIGHT"},
+    {"fixture_id":"AX-R11-FAIL-008","expression":"| >S<","expected":"OUTSIDE_SYNTACTIC_DOMAIN"},
+    {"fixture_id":"AX-R11-FAIL-009","expression":"<S> |","expected":"OUTSIDE_SYNTACTIC_DOMAIN"},
+    {"fixture_id":"AX-R11-FAIL-010","expression":"<S> | >S< | <S>","expected":"OUTSIDE_SYNTACTIC_DOMAIN"},
+    {"fixture_id":"AX-R11-FAIL-011","expression":"unknown_b | >S<","expected":"DOMAIN_MEMBERSHIP_UNRESOLVED"},
+    {"fixture_id":"AX-R11-FAIL-012","attempt":"Widen Dom(|) to SymmetryCondition × SymmetryCondition.","expected":"INVALID_DOMAIN_WIDENING"},
+    {"fixture_id":"AX-R11-FAIL-013","attempt":"Treat generic SymmetryCondition as a legal operand through implicit coercion.","expected":"IMPLICIT_DOMAIN_COERCION_FORBIDDEN"}
+  ],
+  "blocked": [
+    {"fixture_id":"AX-R11-BLOCK-001","attempt":"Infer complete executable totality for every member of Dom(|).","expected":"EXECUTABLE_TOTALITY_NOT_ESTABLISHED"}
+  ],
+  "domain_failure_semantics": ["OUTSIDE_TYPED_DOMAIN","OUTSIDE_ORDERED_DOMAIN","OUTSIDE_SYNTACTIC_DOMAIN","DOMAIN_MEMBERSHIP_UNRESOLVED","EXECUTABLE_TOTALITY_NOT_ESTABLISHED","INVALID_DOMAIN_WIDENING","IMPLICIT_DOMAIN_COERCION_FORBIDDEN"],
+  "new_domain_widening": false,
+  "new_operand_types": [],
+  "new_coercions": [],
+  "asym_compatibility": "SEPARATE_OPEN_OBLIGATION",
+  "semantic_totality": "UNESTABLISHED"
+}

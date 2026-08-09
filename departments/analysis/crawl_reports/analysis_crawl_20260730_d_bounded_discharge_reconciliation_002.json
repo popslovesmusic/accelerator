@@ -1,0 +1,26 @@
+{
+  "crawl_id": "analysis_crawl_20260730_d_bounded_discharge_reconciliation_002",
+  "crawl_type": "BOUNDED_READ_ONLY_ANALYSIS_CRAWL",
+  "crawl_date": "2026-07-30",
+  "campaign_id": "CAMPAIGN_D_BOUNDED_DISCHARGE_RECONCILIATION_20260730_002",
+  "scope": {"domains": ["D_semantics", "research_debt", "approval_provenance", "validation", "DB_freshness", "textbook_freshness"], "finite_input_scope": true},
+  "normalization_rule": "Canonical registries remain authoritative; bounded discharge does not elevate claims beyond the recorded C1 ceiling.",
+  "source_artifacts": [
+    {"path": "registry/math/d_semantics_obligation_registry.json", "sha256": "21B7C53312AF0639C79C3AA23ADEA3638456ABE5013B625A10297007B81C5318"},
+    {"path": "registry/research_debt_registry.json", "sha256": "DD9268CF7926DC08F59D6B70AF154D601DB7F82731B54CDA147779C16B22FD50"},
+    {"path": "governance/live/research_debt_registry.json", "sha256": "A1108B86C1BBED92A678C36E88B91885FE134BE95F1182A24E840D170798B626"},
+    {"path": "registry/governance/patches/D_HUMAN_REVIEW_APPROVAL_P127_P128_20260730_001.json", "sha256": "064B053D4FF21A81DD5A3B9A73C469B792385AC285D96D35FE5F4C5AF1BAFF30"},
+    {"path": "outputs/audits/global_health_report.json", "sha256": "F91246E61334401265014EDD790946E8CC1DB8BBE8870F33CC44C9A024BD7D14"},
+    {"path": "docs/textbook/mono_process_textbook_complete.md", "sha256": "BB760AD5D09C5F10B416AE67C90404194AD0AB1CEFBF9560BA1E9F834D6401A9"}
+  ],
+  "findings": [
+    {"discovery_id": "DISCOVERY_D_BOUNDED_DISCHARGE_20260730", "classification": "BOUNDED_DISCHARGE_CONFIRMED", "statement": "OBL-D-001A through OBL-D-001C remain discharged/discharged-bounded, and OBL-D-001D/E are now DISCHARGED_BOUNDED under the recorded human approval patch."},
+    {"discovery_id": "DISCOVERY_D_DEBT_RESOLVED_BOUNDED_20260730", "classification": "DEBT_STATE_RECONCILED", "statement": "The canonical and live research-debt surfaces record the D proof debt as resolved in bounded scope."},
+    {"discovery_id": "DISCOVERY_D_CLAIM_GATE_RETAINED_20260730", "classification": "CLAIM_BOUNDARY", "statement": "The approval record retains C1_DEFINED_PROVISIONAL and blocks theorem promotion, universal preservation, injectivity, reversibility, and external physical validity."},
+    {"discovery_id": "DISCOVERY_HEALTH_WARNING_20260730_003", "classification": "UNRESOLVED", "statement": "Global validation remains warning-level with no failed stages and degraded hygiene and math-program stages."}
+  ],
+  "evidence_alignment": {"d_obligation_state": "DISCHARGED_BOUNDED", "approval_state": "APPLIED", "db_snapshot_status": "fresh", "runtime_decision": "allow", "textbook_projection_freshness": "pass", "global_health": "warning"},
+  "recommended_next_action": {"recommendation": "REVIEW_D_THEOREM_ELIGIBILITY", "action": "Reaudit theorem eligibility and claim-support boundaries using the bounded D discharge artifacts; address validation warnings before any claim elevation.", "unlock": "Determines whether a later governed request may advance beyond C1 without conflating bounded discharge with universal theorem proof.", "do_not_begin_with": "automatic theorem promotion or external-physics interpretation"},
+  "success_assessment": {"outcome": "PARTIAL_SUCCESS", "reason": "The crawl confirms bounded D discharge and preserved claim gates; theorem eligibility and validation-warning remediation remain outstanding.", "confidence": "high"},
+  "what_this_crawl_does_not_authorize": ["theorem promotion", "claim elevation", "external physical interpretation", "DB mutation", "textbook patch", "simulation execution", "commit"]
+}

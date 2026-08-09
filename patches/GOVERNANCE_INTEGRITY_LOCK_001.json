@@ -1,0 +1,50 @@
+{
+  "patch_id": "GOVERNANCE_INTEGRITY_LOCK_001",
+  "status": "APPLIED",
+  "priority": "CRITICAL",
+  "purpose": "Protect governance assets from unauthorized modification and establish validator-enforced governance integrity checks.",
+  "protected_assets": [
+    "GEMINI.md",
+    "AGENTS.md",
+    "registry/compliance_charter_*.json",
+    "registry/tools_rigor_endorsement_registry.json",
+    "registry/claim_gate_registry.json",
+    "registry/tool_manifest.json",
+    "registry/tool_index.json",
+    "docs/governance/*"
+  ],
+  "required_actions": [
+    {
+      "action_id": "LOC-001",
+      "description": "Initialize claim gate registry file baseline.",
+      "targets": ["registry/claim_gate_registry.json"]
+    },
+    {
+      "action_id": "LOC-002",
+      "description": "Implement governance integrity check logic and hashes baseline.",
+      "targets": [
+        "scripts/governance/enforce_governance_integrity.py",
+        "registry/governance_hash_registry.json"
+      ]
+    },
+    {
+      "action_id": "LOC-003",
+      "description": "Integrate governance integrity lock validation checks into global validation pipeline.",
+      "targets": [
+        "scripts/governance/enforce_locks.py",
+        "scripts/global_validate.py"
+      ]
+    },
+    {
+      "action_id": "LOC-004",
+      "description": "Establish approved change ledger baseline.",
+      "targets": ["registry/governance_change_ledger.json"]
+    }
+  ],
+  "success_criteria_met": true,
+  "governance_hold": {
+    "retain_hold": false,
+    "release_condition": "Initialization successfully validated."
+  },
+  "applied_timestamp": "2026-06-20T22:20:33-04:00"
+}

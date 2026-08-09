@@ -1,0 +1,36 @@
+{
+  "experiment_id": "G1-REF-2026-05-10-ORIENTATION",
+  "intent": "validate_gap_1_orientation",
+  "seeds": [201, 302, 403, 504, 605],
+  "components": [
+    {
+      "tool": "structural_box_sim_cpp",
+      "base_config": {
+        "num_nodes": 256,
+        "L": 1.0,
+        "epsilon_source": 15.0,
+        "steps": 200,
+        "dt": 0.005
+      },
+      "variations": [
+        {"name": "narrow_window", "config_override": {"kappa": 0.05}},
+        {"name": "wide_window", "config_override": {"kappa": 0.25}}
+      ],
+      "observable": "alignment_success_rate"
+    },
+    {
+      "tool": "agent_based_sim_v1_cpp",
+      "base_config": {
+        "agent_count": 1000,
+        "steps": 300,
+        "dt": 0.01,
+        "kappa": 0.5,
+        "R_c": 1.0,
+        "K_phi": 0.5,
+        "mismatch_rate": 0.05,
+        "residue_decay": 0.1
+      },
+      "observable": "order_parameter"
+    }
+  ]
+}

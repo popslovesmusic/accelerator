@@ -1,0 +1,103 @@
+{
+  "crawl_id": "analysis_crawl_20260731_notebook25_26_cleanroom_frontier_001",
+  "crawl_type": "BOUNDED_READ_ONLY_ANALYSIS_CRAWL",
+  "crawl_date": "2026-07-31",
+  "agent_role": "RT_AGENT_INFINITE_THEORY_ANALYST",
+  "scope": {
+    "object_ids": [
+      "MPF_SIM_D_E_ORACLE_ADVERSARIAL_001_RESULTS_001",
+      "RT_NOTEBOOK_26_D_E_CLEANROOM_CANDIDATE_COMPARISON_001_RESULTS_001",
+      "RT_NOTEBOOK_26_D_E_SELF_CONTAINED_001_RESULTS_001",
+      "RT_D_E_CLEAN_ROOM_ORACLE_SELF_TEST_20260731_001",
+      "DEBT_D_SEMANTICS_PROOF_001",
+      "DEBT_ANALYSIS_INTAKE_DISCOVERABILITY_001"
+    ],
+    "domains": ["D/E semantics", "adversarial oracle testing", "clean-room harness validation", "research debt", "textbook freshness"],
+    "time_range": "repository state through 2026-07-31",
+    "include_superseded": true
+  },
+  "source_artifact_set": [
+    "departments/analysis/AGENTS.md",
+    "departments/analysis/GEMINI.md",
+    "departments/analysis/department_ssot.md",
+    "registry/colab_result_archive_registry.json",
+    "governance/live/research_debt_registry.json",
+    "registry/math/d_semantics_obligation_registry.json",
+    "registry/governance/notebook_23_exclusion_freeze_registry.json",
+    "departments/colab/results/MPF_SIM_D_E_ORACLE_ADVERSARIAL_001_processing_manifest.json",
+    "departments/colab/results/MPF_SIM_D_E_ORACLE_ADVERSARIAL_001_analysis_20260731.md",
+    "departments/colab/results/RT_NOTEBOOK_26_D_E_CLEANROOM_CANDIDATE_COMPARISON_001_processing_manifest.json",
+    "departments/colab/results/RT_NOTEBOOK_26_D_E_CLEANROOM_CANDIDATE_COMPARISON_001_analysis_20260731.md",
+    "departments/colab/results/RT_NOTEBOOK_26_D_E_SELF_CONTAINED_001_processing_manifest.json",
+    "departments/colab/results/RT_NOTEBOOK_26_D_E_SELF_CONTAINED_001_analysis_20260731.md",
+    "departments/colab/notebook_designs/rt_d_e_clean_room_oracle_20260731_001/self_test_report.json",
+    "docs/textbook/mono_process_textbook_complete.md"
+  ],
+  "source_hashes": {
+    "oracle_adversarial_archive": "FBDC2C572F1200BA68BE485633E70A1BA0CACFD12B9F32DCE26600289D67D635",
+    "notebook26_reference_archive": "E6777751D83C1B69BEA02ED72021B8DBDCE1A17050D64C843434DCBC0B24B4F4",
+    "notebook26_self_contained_archive": "3B7A3AC0CEA153642D111B7086EE10B93ABB8D08F5AB6481F01926736E45CCAB",
+    "clean_room_self_test": "C2610109822B5B22D5F6B25C9984B5A4C228B3911EE7D6B0507078238ACA5457"
+  },
+  "normalization_and_dependency_rule": "Live registries control status; result manifests control recoverable archive identity; excluded Notebook 23 remains quarantined and is not evidence; analysis outputs are noncanonical projections.",
+  "inventory": {
+    "archive_registry_count": 17,
+    "induction_queue_count": 56,
+    "lexicon_gap_queue_count": 236,
+    "research_debt_count": 17,
+    "open_research_debt_count": 1,
+    "d_registry_status": "ACTIVE_OPEN",
+    "d_claim_ceiling": "C1_DEFINED_PROVISIONAL",
+    "d_obligation_statuses": {"A": "DISCHARGED", "B": "DISCHARGED_BOUNDED", "C": "DISCHARGED_BOUNDED", "D": "DISCHARGED_BOUNDED", "E": "DISCHARGED_BOUNDED"},
+    "textbook_freshness_observation": "Notebook 25 is referenced; no Notebook 26 reference was found in the complete textbook. Crawl cannot patch canonical textbook content."
+  },
+  "evidence_alignment": {
+    "notebook25": {
+      "discovery_class": "INVARIANT_CANDIDATE",
+      "epistemic_status": "PARTIALLY_SUPPORTED",
+      "proof_status": "NOT_ATTEMPTED",
+      "observations": {"baselines": 54, "adversarial_families": 11, "total_evaluations": 1296, "invariant_checks": 270, "oracle_disagreements": 0, "invariant_failures": 0, "falsification_flags": 0, "replay_agreement": true},
+      "support_level": "C2 bounded computational output",
+      "limitations": ["finite adversarial domain", "internal declarative oracle", "source_notebook metadata omitted from generated spec", "formal semantics remain open"],
+      "falsification_condition": "Any disagreement, invariant failure, replay divergence, provenance/hash failure, or out-of-domain counterexample reopens the candidate."
+    },
+    "notebook26_reference_harness": {
+      "discovery_class": "UNEXPLAINED_RESULT",
+      "epistemic_status": "OBSERVED",
+      "proof_status": "NOT_ATTEMPTED",
+      "observations": {"baselines": 128, "fault_families": 16, "total_evaluations": 4352, "invariant_checks": 768, "counterexamples": 0, "invariant_failures": 0, "replay_agreement": true},
+      "support_level": "C1 execution reconstruction",
+      "interpretation": "The harness and reference-stand-in path operated as specified; no governed candidate comparison occurred.",
+      "claim_ceiling": "C1_EXECUTION_RECONSTRUCTION"
+    },
+    "notebook26_self_contained": {
+      "discovery_class": "UNEXPLAINED_RESULT",
+      "epistemic_status": "OBSERVED",
+      "proof_status": "NOT_ATTEMPTED",
+      "observations": {"baselines": 128, "fault_families": 25, "total_evaluations": 6656, "invariant_checks": 2816, "counterexamples": 0, "invariant_failures": 0, "replay_agreement": true},
+      "support_level": "C1 execution reconstruction",
+      "interpretation": "The self-contained harness passed with its embedded reference stand-in; external candidate provenance and comparison are absent.",
+      "claim_ceiling": "C1_EXECUTION_RECONSTRUCTION"
+    },
+    "clean_room_self_test": {
+      "discovery_class": "UNEXPLAINED_RESULT",
+      "epistemic_status": "OBSERVED",
+      "proof_status": "NOT_ATTEMPTED",
+      "observations": ["5 Python tests passed", "Lean scaffold compiled"],
+      "interpretation": "Implementation health only; equivalence to P127/P128 was not tested."
+    }
+  },
+  "open_frontier": [
+    {"id": "FRONTIER-01", "class": "PROOF_GAP", "statement": "No formal equivalence or universal D/E semantics follows from the bounded runs.", "next_evidence": "Typed formal semantics and independently reviewed equivalence obligations."},
+    {"id": "FRONTIER-02", "class": "MISSING_MECHANISM", "statement": "Notebook 26 still lacks the exact governed frozen candidate adapter and provenance.", "next_evidence": "Human-approved candidate identity, hash, adapter, and clean-room review sign-off."},
+    {"id": "FRONTIER-03", "class": "GOVERNANCE_DEFECT", "statement": "The D registry remains ACTIVE_OPEN and the research-debt record remains a promotion blocker despite bounded obligation statuses.", "next_evidence": "Separate authorized human governance disposition."},
+    {"id": "FRONTIER-04", "class": "UNRESOLVED", "statement": "Textbook coverage is current for Notebook 25 but not visibly synchronized for Notebook 26.", "next_evidence": "Authorized textbook synchronization patch and validation."},
+    {"id": "FRONTIER-05", "class": "GOVERNANCE_DEFECT", "statement": "Analysis Intake discoverability debt remains open.", "next_evidence": "Explicit crawl source binding for the Analysis Intake queue, without treating entries as reviewed or promoted."}
+  ],
+  "recommended_next_action": "FORMALIZE",
+  "success_assessment": {"outcome": "PARTIAL_SUCCESS", "reason": "The crawl classified the new adversarial and clean-room artifacts, preserved their distinct evidence ceilings, and isolated the missing candidate-comparison and governance/textbook frontiers.", "confidence": "high"},
+  "termination_reason": "The incremental Notebook 25/26 and clean-room scope is classified; further crawl depth would not supply the missing candidate provenance, formal equivalence, or authorized textbook/governance disposition.",
+  "what_this_crawl_does_not_authorize": ["canonical registry mutation", "textbook edit", "claim or theorem promotion", "D-obligation closure", "simulation execution", "DB artifact indexing", "external physical interpretation", "Git commit"],
+  "crawl_result": "PASS_BOUNDED_READ_ONLY_SYNTHESIS",
+  "continuation_token": "CONTINUE_WITH_AUTHORIZED_NOTEBOOK26_CANDIDATE_COMPARISON_20260731_001"
+}

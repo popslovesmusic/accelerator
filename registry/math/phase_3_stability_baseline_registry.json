@@ -1,0 +1,121 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Registry for Phase 3 formal stability baseline tests across recursive operator systems.",
+    "status": "provisional",
+    "last_updated": "2026-05-12"
+  },
+  "stability_test_domains": [
+    "recursive_operator_iteration",
+    "perturbation_response",
+    "branch_growth_control",
+    "equivalence_collapse_stability",
+    "transport_closure_retention",
+    "symbolic_reduction_termination",
+    "reconstruction_ambiguity_growth",
+    "residue_drift_control",
+    "orientation_drift_control",
+    "theorem_obligation_pressure"
+  ],
+  "baseline_tests": [
+    {
+      "test_id": "P3-STAB-001",
+      "target": "delta",
+      "domain": "branch_growth_control",
+      "perturbation_class": "branch_width_perturbation",
+      "expected_behavior": "conditionally_bounded",
+      "failure_modes": [
+        "RFM-002"
+      ],
+      "proof_status": "scaffolded",
+      "provisional_status": true
+    },
+    {
+      "test_id": "P3-STAB-002",
+      "target": "NavT",
+      "domain": "transport_closure_retention",
+      "perturbation_class": "transport_path_perturbation",
+      "expected_behavior": "conditional",
+      "failure_modes": [
+        "RFM-007"
+      ],
+      "proof_status": "scaffolded",
+      "provisional_status": true
+    },
+    {
+      "test_id": "P3-STAB-003",
+      "target": "Pi_A",
+      "domain": "equivalence_collapse_stability",
+      "perturbation_class": "admissibility_window_perturbation",
+      "expected_behavior": "locally_stable",
+      "failure_modes": [
+        "RFM-005",
+        "RFM-011"
+      ],
+      "proof_status": "scaffolded",
+      "provisional_status": true
+    },
+    {
+      "test_id": "P3-STAB-004",
+      "target": "residue_update",
+      "domain": "residue_drift_control",
+      "perturbation_class": "residue_state_perturbation",
+      "expected_behavior": "conditional",
+      "failure_modes": [
+        "RFM-009"
+      ],
+      "proof_status": "scaffolded",
+      "provisional_status": true
+    },
+    {
+      "test_id": "P3-STAB-005",
+      "target": "symbolic_reduction_chains",
+      "domain": "symbolic_reduction_termination",
+      "perturbation_class": "symbolic_reduction_order_perturbation",
+      "expected_behavior": "undefined_until_tested",
+      "failure_modes": [
+        "RFM-003",
+        "RFM-004"
+      ],
+      "proof_status": "none",
+      "provisional_status": true
+    },
+    {
+      "test_id": "P3-STAB-006",
+      "target": "MT-001",
+      "domain": "theorem_obligation_pressure",
+      "perturbation_class": "admissibility_window_perturbation",
+      "expected_behavior": "conditional",
+      "failure_modes": [
+        "RFM-012"
+      ],
+      "proof_status": "scaffolded",
+      "provisional_status": true
+    },
+    {
+      "test_id": "P3-STAB-007",
+      "target": "MT-002",
+      "domain": "theorem_obligation_pressure",
+      "perturbation_class": "transport_path_perturbation",
+      "expected_behavior": "conditional",
+      "failure_modes": [
+        "RFM-012"
+      ],
+      "proof_status": "scaffolded",
+      "provisional_status": true
+    },
+    {
+      "test_id": "P3-STAB-008",
+      "target": "MT-003",
+      "domain": "theorem_obligation_pressure",
+      "perturbation_class": "branch_width_perturbation",
+      "expected_behavior": "branch_sensitive",
+      "failure_modes": [
+        "RFM-002",
+        "RFM-012"
+      ],
+      "proof_status": "scaffolded",
+      "provisional_status": true
+    }
+  ]
+}

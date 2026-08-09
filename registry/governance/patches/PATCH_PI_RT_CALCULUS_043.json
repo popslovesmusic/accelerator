@@ -1,0 +1,184 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_043",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-06",
+  "type": "governance_patch",
+  "artifact_type": "governance_patch",
+  "title": "Fixed-Point Uniqueness Conditions",
+  "priority": "HIGH",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_042"
+  ],
+  "mode": "additive",
+  "basis": {
+    "source_patches": [
+      "PATCH_PI_RT_CALCULUS_042"
+    ],
+    "source_surfaces": [
+      "docs/textbook/mono_process_textbook_complete.md",
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_042.json"
+    ],
+    "scope": "Introduce bounded fixed-point uniqueness conditions for correct continuation fixed points. This patch classifies uniqueness only after correctness and bounded equivalence-class preservation, without asserting universal uniqueness or universal existence."
+  },
+  "core_rule": {
+    "statement": "CorrectFix(C) is classified as UniqueFix(C) only when every other correct fixed point in the same ClassFix and bounded evaluation regime belongs to EqClassFix(C); bounded fixed-point uniqueness remains diagnostic, and RT_core remains unchanged."
+  },
+  "purpose": "Introduce bounded fixed-point uniqueness conditions for correct continuation fixed points. This patch distinguishes uniqueness classification from correctness while leaving universal uniqueness, universal existence, and recovery deferred.",
+  "canonical_claims": [
+    {
+      "id": "CLAIM_043_001",
+      "statement": "Fixed-point uniqueness is bounded and applies only after correctness.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_043_002",
+      "statement": "EqClassFix(C) captures equivalence under the declared continuation, trace, and fixed-point evaluation semantics.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_043_003",
+      "statement": "UniqueFix(C) requires that every other correct fixed point in the same bounded class belong to EqClassFix(C).",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_043_004",
+      "statement": "FailUniqueFix(C) classifies uniqueness failure without asserting universal uniqueness or universal existence.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_043_005",
+      "statement": "RT_core remains unchanged.",
+      "status": "canonical"
+    }
+  ],
+  "scope": {
+    "adds": [
+      "Fixed-point uniqueness conditions",
+      "Fixed-point equivalence class",
+      "Fixed-point uniqueness failure",
+      "Bounded equivalence-class preservation",
+      "Correct fixed-point uniqueness classification"
+    ],
+    "does_not_add": [
+      "Universal fixed-point uniqueness",
+      "Universal fixed-point existence",
+      "Correctness change",
+      "Recovery operator",
+      "sigma_RT selector",
+      "RT_core change"
+    ]
+  },
+  "formal_objects": [
+    {
+      "id": "FIX_UNIQUENESS_043",
+      "symbol": "UniqueFix(C)",
+      "name": "Fixed-Point Uniqueness",
+      "definition": "The condition that a correct fixed point is the only continuation fixed point satisfying the declared bounded fixed-point semantics within its fixed-point class and evaluation regime."
+    },
+    {
+      "id": "FIX_EQUIVALENCE_CLASS_043",
+      "symbol": "EqClassFix(C)",
+      "name": "Fixed-Point Equivalence Class",
+      "definition": "The class of fixed-point candidates considered equivalent under the declared continuation, trace, and fixed-point evaluation semantics."
+    },
+    {
+      "id": "FIX_UNIQUENESS_FAILURE_043",
+      "symbol": "FailUniqueFix(C)",
+      "name": "Fixed-Point Uniqueness Failure",
+      "definition": "The classified failure state produced when more than one non-equivalent correct fixed point exists within the declared bounded fixed-point class."
+    }
+  ],
+  "uniqueness_rule": {
+    "id": "FIX_UNIQUENESS_RULE_043",
+    "statement": "CorrectFix(C) is classified as UniqueFix(C) only when every other correct fixed point in the same ClassFix and bounded evaluation regime belongs to EqClassFix(C)."
+  },
+  "failure_conditions": [
+    "Semantic preservation does not isolate a single equivalence class representative.",
+    "More than one non-equivalent correct fixed point exists in the bounded fixed-point class.",
+    "The continuation exits the declared admissible evaluation regime."
+  ],
+  "non_claims": [
+    "Does not assert universal fixed-point uniqueness.",
+    "Does not assert universal fixed-point existence.",
+    "Does not alter fixed-point correctness.",
+    "Does not introduce recovery.",
+    "Does not introduce sigma_RT.",
+    "Does not alter RT_core."
+  ],
+  "deferred_to_future_patches": {
+    "044": "Recursive / Fixed-Point Interaction",
+    "045": "RT Calculus Specification v1.0 Consolidation"
+  },
+  "governance_notes": [
+    "Uniqueness is established only after admissibility and correctness.",
+    "Equivalence-class membership is bounded by the declared continuation, trace, and evaluation semantics.",
+    "Uniqueness does not imply existence or correctness."
+  ],
+  "textbook_changes": {
+    "chapter": "2.3.25",
+    "title": "Fixed-Point Uniqueness Conditions",
+    "summary": [
+      "Introduce UniqueFix(C).",
+      "Define EqClassFix(C).",
+      "Define FailUniqueFix(C).",
+      "Bind uniqueness to correct fixed points inside the declared equivalence class and bounded regime.",
+      "Keep universal uniqueness and existence deferred."
+    ]
+  },
+  "registry_updates": {
+    "formal_object_registry": [
+      "FIX_UNIQUENESS_043",
+      "FIX_EQUIVALENCE_CLASS_043",
+      "FIX_UNIQUENESS_FAILURE_043"
+    ],
+    "math_source_registry": [
+      "PATCH_PI_RT_CALCULUS_043"
+    ],
+    "lexicon_gap_queue": [
+      "fixed_point_uniqueness",
+      "fixed_point_equivalence_class",
+      "fixed_point_uniqueness_failure"
+    ]
+  },
+  "rt_core_impact": {
+    "modified": false,
+    "statement": "RT := [(ℰ≠0) ⇔R δα(ℰ>0)] remains unchanged."
+  },
+  "validation_requirements": [
+    "Patch record parses cleanly.",
+    "Patch depends on PATCH_PI_RT_CALCULUS_042.",
+    "UniqueFix(C) is available only after CorrectFix(C).",
+    "EqClassFix(C) is bounded by the declared continuation, trace, and fixed-point evaluation semantics.",
+    "No universal uniqueness or universal existence theorem is claimed.",
+    "RT_core remains unchanged."
+  ],
+  "required_repo_changes": [
+    "Update docs/textbook/mono_process_textbook_complete.md with the fixed-point uniqueness section and appendix entries.",
+    "Add docs/theory/foundational/5_03_26 unity/math/notes/0005_fixed_point_uniqueness_conditions.md as the additive theorem note.",
+    "Update registry/formal_object_registry.json with the fixed-point uniqueness formal objects.",
+    "Update registry/math_source_registry.json with the patch source entry.",
+    "Relock registry/math_hashes.json after the source registry update.",
+    "Update registry/lexicon_gap_queue.json with the fixed-point uniqueness terms.",
+    "Update registry/registry/lexicon_gap_queue.json with the mirrored fixed-point uniqueness terms.",
+    "Update registry/governance_change_ledger.json with the corresponding governance ledger entry."
+  ],
+  "target_files": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "docs/theory/foundational/5_03_26 unity/math/notes/0005_fixed_point_uniqueness_conditions.md",
+    "registry/formal_object_registry.json",
+    "registry/math_source_registry.json",
+    "registry/math_hashes.json",
+    "registry/lexicon_gap_queue.json",
+    "registry/registry/lexicon_gap_queue.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_043.json"
+  ],
+  "success_criteria": {
+    "fixed_point_uniqueness_documented": true,
+    "fixed_point_equivalence_registered": true,
+    "fixed_point_failure_registered": true,
+    "boundedness_preserved": true,
+    "rt_core_unchanged": true
+  }
+}

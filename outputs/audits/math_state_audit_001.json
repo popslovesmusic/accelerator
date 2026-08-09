@@ -1,0 +1,57 @@
+{
+  "audit_id": "MATH_STATE_AUDIT_001",
+  "mode": "read_only_verify",
+  "root": "D:/projects/acellorator",
+  "overall_result": "PASS",
+  "verified_at": "2026-07-02",
+  "claims": [
+    {
+      "id": "CLAIM_MATH_ROOT_PLACEHOLDER",
+      "result": "PASS",
+      "path": "departments/mathematics/README.md",
+      "evidence": {
+        "line_numbers": [7, 8, 9],
+        "matches": [
+          "department induction: pending",
+          "local SSOT: not yet created",
+          "local AGENTS.md: not yet created"
+        ]
+      }
+    },
+    {
+      "id": "CLAIM_THEOREM_COUNTS",
+      "result": "PASS",
+      "path": "registry/math/theorem_status_registry.json",
+      "evidence": {
+        "subset_scope": "theorem objects only",
+        "subset_count_by_status": {
+          "FORMALLY_PROVEN": 3,
+          "REVIEW_LOCK": 1
+        },
+        "expected_ids": [
+          "THM_PADM_001",
+          "THM_PADM_002",
+          "THM_PADM_003",
+          "TC_asym"
+        ],
+        "line_numbers": [467, 470, 494, 497, 521, 524, 109, 112]
+      },
+      "note": "Registry-wide status counts differ because non-theorem objects are also present; the claim is satisfied for the theorem subset identified by the expected ids."
+    },
+    {
+      "id": "CLAIM_MST_NOT_PROMOTED",
+      "result": "PASS",
+      "path": "registry/proof_registry.json",
+      "evidence": {
+        "proof_id": "P007",
+        "proof_status": "PROOF_PLAN_REGISTERED",
+        "line_numbers": [114, 136]
+      },
+      "interpretation": "MST-001 obligations may be discharged, but theorem-level closure is not promoted unless proof registry status changes."
+    }
+  ],
+  "notes": [
+    "The math department root remains a placeholder and is not yet inducted as a local department package.",
+    "The theorem-status claim is verified against the theorem subset; the full registry also contains non-theorem REVIEW_LOCK entries."
+  ]
+}

@@ -1,0 +1,233 @@
+{
+  "formalization_id": "FORMAL_MEMORY_TENSOR_RT_OPERATORS_001",
+  "patch_id": "PATCH_PI_MEMORY_TENSOR_RT_008",
+  "campaign_id": "CAMPAIGN_MEMORY_TENSOR_RT_IMPLEMENTATION_001",
+  "status": "provisional",
+  "title": "Formalize Conditional Displacement Tensor Operators",
+  "purpose": "Define the mathematical operator layer for Memory Tensor RT after the core-action/displacement refinement, so future simulations and neuroscience mappings use the same formal structure.",
+  "depends_on": [
+    "PATCH_PI_MEMORY_TENSOR_RT_006",
+    "PATCH_PI_MEMORY_TENSOR_RT_007"
+  ],
+  "parent_induction": "PI_MEMORY_TENSOR_RT_001",
+  "parent_operator_scaffold": "OP_SCAFFOLD_MEMORY_TENSOR_RT_001",
+  "governance_contract": "SEM_MEMORY_TENSOR_RT_001",
+  "core_refinement": "REF_MEMORY_TENSOR_CORE_DISPLACEMENT_001",
+  "domain_translation": "DOMAIN_TRANSLATION_CORE_TO_TENSOR_DISPLACEMENT_001",
+  "axiom_set": "AX_MEMORY_TENSOR_RT_001",
+  "semantics": "COMP_MEMORY_TENSOR_RT_001",
+  "core_primitives": {
+    "S": {
+      "symbol": "<S>",
+      "name": "Symmetric Condition",
+      "definition": "The pre-distinction condition from which symmetry-breaking action becomes expressible."
+    },
+    "delta_alpha": {
+      "symbol": "δα(A|<S>)",
+      "name": "Symmetry-Breaking Action",
+      "definition": "Core-domain action by which <S> breaks into distinguishable orientation A."
+    },
+    "delta": {
+      "symbol": "ΔA",
+      "name": "Tensor Displacement Trace",
+      "definition": "Tensor-domain representation of δα(A|<S>)."
+    },
+    "triadic_comparison": {
+      "symbol": "δα(A|<S>) <*>_x δα(B|<S>)",
+      "name": "Triadic Comparison",
+      "definition": "Comparison of two symmetry-breaking actions sharing the same symmetric condition."
+    },
+    "resolution": {
+      "symbol": "ρ",
+      "name": "Resolution",
+      "definition": "Local settlement of triadic tension into observable identity or memory output."
+    }
+  },
+  "operator_definitions": [
+    {
+      "operator_id": "OP-SYM-BREAK-001",
+      "symbol": "δα",
+      "signature": "δα(X|<S>) -> core_action_X",
+      "domain": "core_rt",
+      "description": "Produces a distinguishable symmetry-breaking action from a symmetric condition."
+    },
+    {
+      "operator_id": "OP-PROJECT-001",
+      "symbol": "Π_T",
+      "signature": "Π_T(δα(X|<S>)) -> ΔX",
+      "domain": "core_rt_to_tensor",
+      "description": "Projects a core-domain symmetry-breaking action into tensor-domain displacement."
+    },
+    {
+      "operator_id": "OP-COMPARE-001",
+      "symbol": "<*>_x",
+      "signature": "<*>_x(δα(A|<S>), δα(B|<S>)) -> tension_AB",
+      "domain": "core_rt",
+      "description": "Compares two symmetry-breaking actions that share the same source condition."
+    },
+    {
+      "operator_id": "OP-RESOLVE-001",
+      "symbol": "ρ",
+      "signature": "ρ(tension_AB) -> I",
+      "domain": "core_rt_to_observable",
+      "description": "Resolves triadic tension into an observable identity."
+    },
+    {
+      "operator_id": "OP-RECALL-001",
+      "symbol": "R_M",
+      "signature": "R_M(TA, κ, m?) -> (M, C)",
+      "domain": "memory_tensor_rt",
+      "description": "Generates memory and confidence from tensor traversal under coupling and optional implied memory."
+    },
+    {
+      "operator_id": "OP-OBSERVE-001",
+      "symbol": "Obs",
+      "signature": "Obs(A_affect, B_affect) -> observation_relation",
+      "domain": "affect_domain",
+      "description": "Performs a procedural relational coupling between explicitly rebound affect-domain participants without treating observation as an object or measurement."
+    }
+  ],
+  "admissibility_rules": [
+    {
+      "rule_id": "ADM-001",
+      "statement": "A triadic comparison is admissible only when both operands reference a common symmetric condition <S>."
+    },
+    {
+      "rule_id": "ADM-002",
+      "statement": "ΔX may be used in tensor calculations only when it is traceable to a corresponding δα(X|<S>) action trace."
+    },
+    {
+      "rule_id": "ADM-003",
+      "statement": "Observable identity I must not be treated as prior to symmetry-breaking action."
+    },
+    {
+      "rule_id": "ADM-004",
+      "statement": "Memory output M is an identity-like resolution within the memory domain, not a stored primitive object."
+    }
+  ],
+  "canonical_forms": {
+    "core_action": "δα(A|<S>)",
+    "tensor_projection": "Π_T(δα(A|<S>)) = ΔA",
+    "triadic_tension": "δα(A|<S>) <*>_x δα(B|<S>)",
+    "resolution_to_identity": "ρ(δα(A|<S>) <*>_x δα(B|<S>)) -> I",
+    "conditioned_memory": "R_M(TA, κ, m) -> (M, C)"
+  },
+  "traceability": {
+    "parent_campaign": "CAMPAIGN_MEMORY_TENSOR_RT_IMPLEMENTATION_001",
+    "core_refinement": "REF_MEMORY_TENSOR_CORE_DISPLACEMENT_001",
+    "domain_translation": "DOMAIN_TRANSLATION_CORE_TO_TENSOR_DISPLACEMENT_001",
+    "axiom_set": "AX_MEMORY_TENSOR_RT_001",
+    "semantics": "COMP_MEMORY_TENSOR_RT_001",
+    "source_artifacts": [
+      "registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_006.json",
+      "registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_007.json",
+      "registry/axioms/memory_tensor_rt_axioms.json",
+      "registry/computational_semantics/memory_tensor_rt_semantics.json",
+      "registry/domain_translations/core_tensor_displacement_translation.json",
+      "registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_016.json",
+      "registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_017.json",
+      "registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_018.json",
+      "registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_019.json",
+      "registry/domain_translations/meta_core_affect_symbol_bindings.json",
+      "governance/live/semantic_contracts/memory_tensor_rt_semantic_contract.json"
+    ]
+  },
+  "meta_core_symbol_binding": {
+    "binding_id": "BIND_META_CORE_AB_001",
+    "status": "provisional",
+    "canonical_core_expression": "RT := [(ℰ≠0) ⇔R δα(ℰ>0)]",
+    "compact_expression": "RT := [B ⇔R A]",
+    "A_meta": "δα(ℰ>0)",
+    "B_meta": "(ℰ≠0)",
+    "domain_separation": {
+      "meta_domain_note": "A and B are placeholders for the core effective pair only.",
+      "higher_domain_note": "A and B may be rebound in higher domains only with explicit domain labeling and traceability."
+    },
+    "forbidden_collapses": [
+      "Do not treat meta-domain A/B as affect-domain participants without rebinding.",
+      "Do not detach δα(ℰ>0) from the non-null effective condition (ℰ≠0).",
+      "Do not treat RT as an object independent of the relational pair."
+    ]
+  },
+  "symbol_governance": {
+    "reserved_symbols": {
+      "A_meta": "Î´Î±(â„°>0)",
+      "B_meta": "(â„°â‰ 0)"
+    },
+    "prohibited_aliases": [
+      "A_meta == A_affect",
+      "B_meta == B_affect",
+      "A_meta reused as affect participant",
+      "B_meta reused as affect participant"
+    ],
+    "required_rebinding": {
+      "rule": "Affect-domain A/B shall only exist after explicit domain rebinding.",
+      "example": {
+        "A_affect": "domain-specific participant",
+        "B_affect": "domain-specific participant"
+      }
+    }
+  },
+  "affect_domain_rebinding_layer": {
+    "rebinding_id": "REBIND_AFFECT_DOMAIN_AB_001",
+    "status": "provisional",
+    "parent_meta_core_binding": "BIND_META_CORE_AB_001",
+    "A_affect": {
+      "definition": "A distinguishable affect-domain participant, orientation, or basin after explicit rebinding.",
+      "not_equal_to": "A_meta"
+    },
+    "B_affect": {
+      "definition": "A second distinguishable affect-domain participant, orientation, or basin after explicit rebinding.",
+      "not_equal_to": "B_meta"
+    },
+    "relation": {
+      "form": "A_affect <*>_x B_affect",
+      "meaning": "Domain-local coupling or comparison between explicitly rebound affect participants."
+    },
+    "observation_relation": {
+      "relation_id": "OBS_AFFECT_DOMAIN_001",
+      "status": "provisional",
+      "name": "Primitive Observation",
+      "notation": "Obs(A_affect, B_affect)",
+      "definition": "Observation is a relational coupling event between explicitly rebound affect-domain participants.",
+      "scope": "affect_domain_only",
+      "properties": [
+        "Observation is procedural.",
+        "Observation requires distinguishable participants.",
+        "Observation is domain-local.",
+        "Observation does not modify the canonical meta-domain bindings."
+      ],
+      "participants": [
+        "A_affect",
+        "B_affect"
+      ],
+      "traceability": {
+        "parent_patch": "PATCH_PI_MEMORY_TENSOR_RT_019",
+        "parent_campaign": "CAMPAIGN_MEMORY_TENSOR_RT_IMPLEMENTATION_001",
+        "domain_translation": "registry/formal_math/memory_tensor_rt_formal_operators.json"
+      }
+    },
+    "governance_constraints": [
+      "Do not reuse A_affect or B_affect as aliases of A_meta or B_meta.",
+      "Do not infer affect-domain coupling from meta-domain binding alone.",
+      "Do not alter the canonical RT expression."
+    ],
+    "traceability": {
+      "parent_patch": "PATCH_PI_MEMORY_TENSOR_RT_018",
+      "follow_on_patch": "PATCH_PI_MEMORY_TENSOR_RT_019",
+      "parent_campaign": "CAMPAIGN_MEMORY_TENSOR_RT_IMPLEMENTATION_001",
+      "domain_translation": "registry/domain_translations/meta_core_affect_symbol_bindings.json"
+    }
+  },
+  "validation": {
+    "required": [
+      "formalization_id_unique",
+      "operator_ids_unique",
+      "admissibility_rules_present",
+      "canonical_forms_present",
+      "all_tensor_displacements_trace_to_core_actions",
+      "global_validate_pass"
+    ],
+    "result": "pass"
+  }
+}

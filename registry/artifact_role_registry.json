@@ -1,0 +1,124 @@
+{
+  "registry_id": "MPF_ARTIFACT_ROLE_REGISTRY_V1",
+  "schema_version": "1.0.0",
+  "status": "ACTIVE",
+  "admitted_from_packet": "SEA_CALC_AUTHORITY_ARCHITECTURE_REAUDIT_2026_07_20",
+  "purpose": "Assign directional authority roles to repository artifacts so runtime agents do not infer authority from prose, title, path, or SSOT wording alone.",
+  "required_metadata": [
+    "artifact_id",
+    "artifact_role",
+    "authority_scope",
+    "canonical_source_id",
+    "canonical_source_version",
+    "generated_at",
+    "validator_run_id",
+    "projection_status",
+    "supersedes",
+    "superseded_by"
+  ],
+  "roles": [
+    {
+      "role": "HUMAN_SOURCE",
+      "definition": "Human-authored source material awaiting extraction or admission.",
+      "may_drive_runtime_directly": false
+    },
+    {
+      "role": "GOVERNED_SUBMISSION",
+      "definition": "Structured JSON proposal submitted to governance.",
+      "may_drive_runtime_directly": false
+    },
+    {
+      "role": "CANONICAL_STATE",
+      "definition": "Admitted database state authoritative for agents.",
+      "may_drive_runtime_directly": true
+    },
+    {
+      "role": "GENERATED_PROJECTION",
+      "definition": "Human-readable rendering produced from canonical state.",
+      "may_drive_runtime_directly": false
+    },
+    {
+      "role": "VALIDATION_EVIDENCE",
+      "definition": "Evidence produced by validators against canonical state, runtime behavior, or projections.",
+      "may_drive_runtime_directly": false
+    },
+    {
+      "role": "HISTORICAL_RECORD",
+      "definition": "Immutable lineage, superseded state, prior audit, or patch evidence.",
+      "may_drive_runtime_directly": false
+    },
+    {
+      "role": "WORKING_NOTE",
+      "definition": "Exploratory non-authoritative material.",
+      "may_drive_runtime_directly": false
+    }
+  ],
+  "artifact_assignments": [
+    {
+      "artifact_id": "DB-ACELLORATOR-INDEX",
+      "path": "registry/db/acellorator_index.sqlite",
+      "artifact_role": "CANONICAL_STATE",
+      "authority_scope": "agent operational retrieval and admitted canonical-state projection",
+      "projection_status": "current_subject_to_runtime_freshness"
+    },
+    {
+      "artifact_id": "AUTH-ARCH-V1",
+      "path": "governance/live/authority_architecture.json",
+      "artifact_role": "CANONICAL_STATE",
+      "authority_scope": "authority architecture and artifact-role interpretation",
+      "projection_status": "current"
+    },
+    {
+      "artifact_id": "AUTH-MANIFEST-V1",
+      "path": "governance/live/authority_manifest.json",
+      "artifact_role": "CANONICAL_STATE",
+      "authority_scope": "authority routing and artifact class ordering",
+      "projection_status": "current"
+    },
+    {
+      "artifact_id": "SEA-CALC-2026-07-20-001",
+      "path": "docs/reports/staged_external_calculus_registry_audit_2026_07_20.md",
+      "artifact_role": "HISTORICAL_RECORD",
+      "authority_scope": "prior audit evidence retained for reinterpretation",
+      "projection_status": "historical"
+    },
+    {
+      "artifact_id": "SEA-CALC-REMED-2026-07-20-001",
+      "path": "docs/reports/staged_external_calculus_remediation_ledger_2026_07_20.md",
+      "artifact_role": "HISTORICAL_RECORD",
+      "authority_scope": "prior remediation evidence retained for reinterpretation",
+      "projection_status": "historical"
+    },
+    {
+      "artifact_id": "SEA-CALC-2026-07-20-002",
+      "path": "docs/reports/staged_external_calculus_authority_reaudit_2026_07_20.md",
+      "artifact_role": "GENERATED_PROJECTION",
+      "authority_scope": "human-facing projection of the authority architecture reaudit",
+      "canonical_source_id": "MPF_AUTHORITY_ARCHITECTURE_V1",
+      "canonical_source_version": "1.0.0",
+      "validator_run_id": "GV-20260720T231200.393918-1052",
+      "projection_status": "current",
+      "validation_summary": "Current projection with residual global validation warnings; see outputs/audits/global_health_report.json."
+    },
+    {
+      "artifact_id": "MPF-TEXTBOOK-COMPLETE",
+      "path": "docs/textbook/mono_process_textbook_complete.md",
+      "artifact_role": "GENERATED_PROJECTION",
+      "authority_scope": "human-facing synthesis of the declared governed calculus source set",
+      "canonical_source_id": "DB-ACELLORATOR-INDEX+TEXTBOOK-DECLARED-SOURCE-SET",
+      "canonical_source_version": "2026-07-22",
+      "canonical_snapshot_id": "REFRESH-20260723T012130493162Z",
+      "generated_at": "2026-07-22T21:30:00-04:00",
+      "validator_run_id": "TEXTBOOK-FRESHNESS-BOOTSTRAP-001",
+      "projection_status": "current",
+      "supersedes": [],
+      "superseded_by": [],
+      "freshness_contract": "governance/live/textbook_projection_freshness_contract.json"
+    }
+  ],
+  "rules": [
+    "Runtime authority must be resolved by artifact_role and governed admission state, not prose confidence.",
+    "Generated projections may report canonical state but may not mutate it.",
+    "Historical records remain recoverable but cannot override current canonical state."
+  ]
+}

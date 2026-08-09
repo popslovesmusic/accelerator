@@ -1,0 +1,167 @@
+﻿{
+  "audit_metadata": {
+    "mode": "strict_read_only",
+    "cwd": "D:\\projects\\acellorator",
+    "date": "2026-05-11",
+    "repo_file_writes": "none during audit; this file saved after explicit user request",
+    "note": "Engine smoke capture used PowerShell stdout/stderr redirection to %TEMP%; no repo files were modified during the audit commands."
+  },
+  "filesystem_walk": {
+    "claim": "Scoped filesystem traversal was performed against the requested include set.",
+    "evidence_type": "directory_walk",
+    "source_path": "D:\\projects\\acellorator",
+    "command_used": "Get-ChildItem -LiteralPath <scope> -Recurse -Force with exclusions",
+    "raw_output_excerpt": "registry count=260; docs count=385; scripts count=103; tools count=1510; src MISSING; engines MISSING; oneproc count=5; configs count=55; .gemini MISSING; tests count=1",
+    "confidence": "verified"
+  },
+  "directory_counts": {
+    "registry": { "files": 255, "dirs": 5 },
+    "docs": { "files": 311, "dirs": 74 },
+    "scripts": { "files": 103, "dirs": 0 },
+    "tools": { "files": 1255, "dirs": 255 },
+    "src": "MISSING",
+    "engines": "MISSING",
+    "oneproc": { "files": 0, "dirs": 5 },
+    "configs": { "files": 47, "dirs": 8 },
+    ".gemini": "MISSING",
+    "tests": { "files": 1, "dirs": 0 }
+  },
+  "canonical_files_detected": [
+    {
+      "claim": "Canonical governance files are present and JSON-parseable.",
+      "evidence_type": "registry_validation",
+      "source_path": "registry/tool_manifest.json:1; registry/lexicon_canonical.json:1; registry/compliance_charter_v2_3.json:1",
+      "command_used": "python JSON parse validation",
+      "raw_output_excerpt": "JSON_OK registry/tool_manifest.json; JSON_OK registry/lexicon_canonical.json; JSON_OK registry/lexicon_validation_registry.json; JSON_OK registry/compliance_charter_v2_3.json",
+      "confidence": "verified"
+    },
+    {
+      "claim": "Current registry counts: 56 manifest tools, 876 canonical terms, 822 aliases, 46 gap candidates, 64 validation-registry terms.",
+      "evidence_type": "registry_content_count",
+      "source_path": "registry/tool_manifest.json:1; registry/lexicon_canonical.json:1; registry/lexicon_alias_map.json:1; registry/lexicon_gap_queue.json:1; registry/lexicon_validation_registry.json:1",
+      "command_used": "canonical registry content counts",
+      "raw_output_excerpt": "tools_count 56; terms_count 876; aliases_count 822; candidate_new_terms_count 46; terms_count 64",
+      "confidence": "verified"
+    }
+  ],
+  "duplicate_or_shadow_files": [
+    {
+      "claim": "Overlapping validation artifact names are widespread across tool directories.",
+      "evidence_type": "duplicate_detection",
+      "source_path": "tools",
+      "command_used": "Group-Object Name where Count -gt 1",
+      "raw_output_excerpt": "certification_manifest.json (57); README.md (53); expected_observables.json (48); known_control_cases.json (47); smoke_report.json (47)",
+      "confidence": "verified"
+    },
+    {
+      "claim": "Explicit backup/shadow suffix files exist.",
+      "evidence_type": "shadow_file_detection",
+      "source_path": "tools\\Simulation_engines_extracted_2026-04-25\\src\\cpp\\analog_universal_node_engine_avx2.cpp.backup:1",
+      "command_used": "Name match backup|old|copy|shadow|bak|deprecated|legacy",
+      "raw_output_excerpt": "analog_universal_node_engine_avx2.cpp.backup; analog_universal_node_engine_avx2.h.backup; igsoa_physics.h.backup; registry\\legacy_tools_backup.json",
+      "confidence": "verified"
+    }
+  ],
+  "runtime_command_results": {
+    "python": "Python 3.14.4",
+    "registry_runtime_check": "PASS",
+    "empirical_governance_check": "PASS with all package subchecks PENDING"
+  },
+  "registry_validation_results": [
+    {
+      "claim": "Runtime governance check currently passes.",
+      "evidence_type": "runtime_command",
+      "source_path": "scripts/runtime_governance_check.py:1",
+      "command_used": "python scripts/runtime_governance_check.py",
+      "raw_output_excerpt": "{ \"status\": \"PASS\", \"failures\": [], \"warnings\": [] }",
+      "confidence": "verified"
+    }
+  ],
+  "dependency_validation_results": [
+    {
+      "claim": "External Python dependencies are missing for dashboard/API components.",
+      "evidence_type": "direct_import_trace",
+      "source_path": "tools\\accelerator_sim_v1_cpp\\accelerator_dashboard.py:1; tools\\signal_scope_phase_continuation_engine\\native_platform\\api.py:1",
+      "command_used": "python direct import traces for dash, plotly, fastapi, uvicorn, streamlit",
+      "raw_output_excerpt": "ModuleNotFoundError: No module named 'dash'; 'plotly'; 'fastapi'; 'uvicorn'; 'streamlit'",
+      "confidence": "verified"
+    },
+    {
+      "claim": "AST import scan found 27 unresolved import roots across 254 Python files.",
+      "evidence_type": "dependency_scan",
+      "source_path": "scripts; tools; tests",
+      "command_used": "AST import discovery + importlib.util.find_spec",
+      "raw_output_excerpt": "PY_FILES_SCANNED 254; UNIQUE_IMPORTS 71; PARSE_ERRORS 0; MISSING_IMPORTS 27",
+      "confidence": "verified"
+    }
+  ],
+  "engine_validation_results": [
+    {
+      "claim": "Selected C++ benchmark engines load and run: agent, CA, graph, FSA.",
+      "evidence_type": "engine_runtime_smoke",
+      "source_path": "tools\\agent_based_sim_v1_cpp\\agent_sim_benchmark.exe; tools\\ca_admissibility_sim_v1_cpp\\ca_sim_benchmark.exe; tools\\graph_dynamics_sim_v1_cpp\\network_sim_benchmark.exe; tools\\fsa_rule_engine_sim_v1_cpp\\fsa_sim_benchmark.exe",
+      "command_used": "Start-Process <exe> --help",
+      "raw_output_excerpt": "exit_code=0 for four engines; emitted final metrics including Order Parameter, Active Fraction, Edge Count, Active Count",
+      "confidence": "verified"
+    },
+    {
+      "claim": "Selected spectral and TDA C++ benchmark engines fail at process load/runtime.",
+      "evidence_type": "engine_runtime_smoke",
+      "source_path": "tools\\spectral_analysis_v1_cpp\\spectral_analysis_benchmark.exe; tools\\tda_module_v1_cpp\\tda_benchmark.exe",
+      "command_used": "Start-Process <exe> --help",
+      "raw_output_excerpt": "exit_code=-1073741515; stdout empty; stderr empty",
+      "confidence": "verified"
+    }
+  ],
+  "verified_blockers": [
+    {
+      "claim": "No active src, engines, or .gemini directory exists in scoped filesystem.",
+      "evidence_type": "directory_walk",
+      "source_path": "src; engines; .gemini",
+      "command_used": "Test-Path for scoped include dirs",
+      "raw_output_excerpt": "src MISSING; engines MISSING; .gemini MISSING",
+      "confidence": "verified"
+    },
+    {
+      "claim": "Spectral/TDA C++ benchmark execution is currently blocked by runtime load failure.",
+      "evidence_type": "engine_runtime_smoke",
+      "source_path": "tools\\spectral_analysis_v1_cpp\\spectral_analysis_benchmark.exe; tools\\tda_module_v1_cpp\\tda_benchmark.exe",
+      "command_used": "Start-Process <exe> --help",
+      "raw_output_excerpt": "exit_code=-1073741515",
+      "confidence": "verified"
+    }
+  ],
+  "unverified_residue_claims": [
+    {
+      "claim": "The C4 checker says graph_dynamics_sim_v1_cpp is missing uncertainty_report.json.",
+      "evidence_type": "conflicting_runtime_vs_filesystem",
+      "source_path": "scripts/check_c4_engine_certification.py:1; tools\\graph_dynamics_sim_v1_cpp\\validation\\uncertainty_report.json:1",
+      "command_used": "python scripts/check_c4_engine_certification.py graph_dynamics_sim_v1_cpp; Get-ChildItem validation",
+      "raw_output_excerpt": "checker: Missing uncertainty_report.json; filesystem: uncertainty_report.json Length 7",
+      "confidence": "unverified_residue"
+    }
+  ],
+  "orientation_conflicts": [
+    {
+      "claim": "Historical report files exist but were not used as authority for current-state claims.",
+      "evidence_type": "filesystem_presence_only",
+      "source_path": "registry\\reports",
+      "command_used": "directory_walk",
+      "raw_output_excerpt": "registry\\reports present with many report JSON files",
+      "confidence": "verified_as_residue_only"
+    }
+  ],
+  "raw_command_log": [
+    "scoped directory existence and full traversal",
+    "scoped file and directory counts",
+    "duplicate/shadow detection by identical leaf filename",
+    "explicit backup/shadow suffix files",
+    "python version and JSON parse validation",
+    "runtime_governance_check.py",
+    "check_empirical_governance.py registry/claim_registry.json",
+    "check_c4_engine_certification.py graph_dynamics_sim_v1_cpp",
+    "AST dependency scan",
+    "direct dependency import traces",
+    "selected C++ engine smoke runs"
+  ]
+}

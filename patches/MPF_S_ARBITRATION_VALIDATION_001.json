@@ -1,0 +1,36 @@
+{
+  "patch_id": "MPF_S_ARBITRATION_VALIDATION_001",
+  "status": "PASSED_PENDING_RIGOR_ENDORSEMENT",
+  "scope": "definition_validation",
+  "claim_effect": "NO_THEOREM_PROMOTION",
+  "target": "S_arbitration_rule",
+  "purpose": "Validate that S behaves as a pruning operator distinct from Arb_A.",
+  "tests": [
+    "S reduces candidate set cardinality",
+    "S may leave candidate set unchanged",
+    "S never increases candidate set cardinality",
+    "Arb_A operates only on C_t^S",
+    "Removing S changes candidate pool but does not collapse Arb_A semantics",
+    "S does not perform realization selection"
+  ],
+  "required_outputs": [
+    "outputs/s_validation/s_validation_results.json",
+    "outputs/s_validation/s_validation_report.md",
+    "outputs/s_validation/s_operator_audit.json"
+  ],
+  "success_condition": {
+    "S": "validated as pruning stage",
+    "Arb_A": "validated as arbitration stage"
+  },
+  "status_if_passed": {
+    "S_arbitration_rule": "VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT"
+  },
+  "ruling": {
+    "S_reduces_cardinality": "PASS",
+    "S_can_leave_pool_unchanged": "PASS",
+    "S_never_increases_cardinality": "PASS",
+    "Arb_A_operates_on_pruned_pool": "PASS",
+    "removing_S_changes_pool_without_collapsing_Arb_A_role": "PASS",
+    "S_does_not_select_realization": "PASS"
+  }
+}

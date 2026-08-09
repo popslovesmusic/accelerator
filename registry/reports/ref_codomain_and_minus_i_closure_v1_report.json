@@ -1,0 +1,45 @@
+{
+  "report_id": "REF_CODOMAIN_AND_MINUS_I_CLOSURE_V1_REPORT",
+  "timestamp": "2026-05-09T06:00:00Z",
+  "status": "COMPLETED",
+  "patch_id": "PCD_REF_CODOMAIN_AND_MINUS_I_CLOSURE_V1",
+  "summary": "Partially closed the -(i) derivation gap by defining the Ref(.) codomain and updating operator metadata. Established a dedicated registry for reference codomains and implemented guardrails for local admissibility references.",
+  "operations_summary": [
+    {
+      "operation": "create_reference_codomain_registry",
+      "target": "registry/reference_codomain_registry.json",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "define_ref_codomain",
+      "id": "REF_MINUS_I_V1",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "update_minus_i_entry",
+      "term": "-(i)",
+      "status": "SUCCESS",
+      "closure_status": "PARTIALLY_CLOSED"
+    },
+    {
+      "operation": "add_minus_i_guardrails",
+      "target": "registry/lexicon_gap_queue.json",
+      "status": "SUCCESS",
+      "guardrails_added": [
+        "no_minus_i_absolute_reference_v1",
+        "no_minus_i_full_closure_without_O_algebra_v1"
+      ]
+    }
+  ],
+  "minus_i_status": {
+    "definition_mode": "partially_derived_definition",
+    "codomain": "orientation_space",
+    "remaining_gaps_count": 4,
+    "closure_update": "Ref(.) codomain partially closed by REF_MINUS_I_V1"
+  },
+  "charter_compliance_check": {
+    "charter_version": "2.3",
+    "status": "COMPLIANT",
+    "notes": "The -(i) closure update correctly maintains process-primitivity by strictly defining references as local admissibility-minimizing selection outcomes rather than absolute coordinate frames."
+  }
+}

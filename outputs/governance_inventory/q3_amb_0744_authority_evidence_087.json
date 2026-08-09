@@ -1,0 +1,63 @@
+{
+  "schema_id": "q3_amb_0744_authority_evidence_087_v1",
+  "patch_id": "PATCH_GOVERNANCE_Q3_AMB_0744_PARTIAL_CLOSEOUT_AUTHORITY_RECONSTRUCTION_087",
+  "target_patch_surface": "registry/governance/patches/PATCH_ACCELERATOR_INFERENCE_CONSERVATION_CLOSEOUT_055.json",
+  "generic_lookup_behavior": {
+    "authority_owner": "registry",
+    "authority_source": "registry/governance/patches/PATCH_ACCELERATOR_INFERENCE_CONSERVATION_CLOSEOUT_055.json",
+    "supersession_status": "current",
+    "superseded_by": [],
+    "conflict_state": "clear",
+    "decision": "allow",
+    "reason": "Registry surfaces remain authoritative for governed ledger, debt, and patch records.",
+    "evidence_paths": [
+      "registry/governance_change_ledger.json",
+      "registry/research_debt_registry.json",
+      "docs/governance/GLOBAL_VALIDATION_ROUTINE.md"
+    ],
+    "warnings": []
+  },
+  "report_lookup_behavior": {
+    "authority_owner": "unknown",
+    "authority_source": null,
+    "supersession_status": "unavailable",
+    "superseded_by": [],
+    "conflict_state": "unavailable",
+    "decision": "defer",
+    "reason": "No governed authority surface matched the target.",
+    "evidence_paths": [
+      "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+      "outputs/audits/global_health_report.json"
+    ],
+    "warnings": [
+      "The target is not covered by the current authority catalog."
+    ]
+  },
+  "independent_live_surface": {
+    "surface": "scripts/global_validate.py",
+    "role": "VALIDATION_INVOCATION_AUTHORITY",
+    "role_aware_query": {
+      "target": "scripts/global_validate.py",
+      "authority_owner": "runtime",
+      "decision": "allow",
+      "reason": "Canonical governed validation invocation boundary.",
+      "conflict_state": "clear",
+      "warning_count": 0,
+      "warnings": [],
+      "evidence_paths": [
+        "governance/core_rules/GOVERNANCE_AUTHORITY_SCOPE_PARTITION_001.json",
+        "scripts/global_validate.py"
+      ],
+      "authority_source": "scripts/global_validate.py",
+      "supersession": {
+        "status": "current",
+        "superseded_by": []
+      },
+      "requested_evidence_level": "summary",
+      "evidence_level": "summary"
+    }
+  },
+  "explicit_authority_effect_present": false,
+  "governance_ledger_entry_found": false,
+  "finding": "The current authority basis for Patch 055 itself is only the generic registry patch fallback. Independently live authority in scope, such as scripts/global_validate.py, resolves through its own explicit role."
+}

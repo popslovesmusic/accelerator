@@ -1,0 +1,44 @@
+{
+  "patch_id": "PATCH_DB_GOVERNANCE_RUNTIME_012A",
+  "title": "Math Registry Provenance Reconciliation",
+  "campaign": "CAMPAIGN_DB_GOVERNANCE_RUNTIME_001",
+  "type": "provenance_repair",
+  "status": "PROPOSED",
+  "depends_on": [
+    "PATCH_DB_GOVERNANCE_RUNTIME_012"
+  ],
+  "motivation": {
+    "issue": "Runtime validation reports missing registry/math_registry.json.",
+    "audit_result": "Existing math_source_registry.json was identified as the foundational mathematical registry source.",
+    "conclusion": "The warning is caused by registry naming divergence rather than loss of mathematical governance."
+  },
+  "decision": {
+    "canonical_registry": "registry/math_source_registry.json",
+    "deprecated_expectation": "registry/math_registry.json",
+    "strategy": "Reconcile runtime expectations to the existing canonical registry instead of introducing a duplicate registry."
+  },
+  "implementation": [
+    "Update runtime and validators to reference registry/math_source_registry.json.",
+    "If backward compatibility is required, provide a compatibility alias or lightweight forwarding stub for registry/math_registry.json.",
+    "Record the naming reconciliation in governance_change_ledger.json.",
+    "Preserve complete provenance; do not duplicate mathematical registry contents."
+  ],
+  "acceptance_criteria": [
+    "global_validate.py reports no missing math registry warning.",
+    "All runtime references resolve to math_source_registry.json.",
+    "No duplicate mathematical registry exists.",
+    "Registry provenance remains continuous.",
+    "Documentation reflects the reconciled canonical name."
+  ],
+  "expected_result": {
+    "warning_removed": true,
+    "duplicate_registry_created": false,
+    "provenance_preserved": true,
+    "runtime_behavior": "unchanged",
+    "governance_consistency": "improved"
+  },
+  "notes": [
+    "A source registry is architecturally preferable because it records authoritative origins rather than derived mathematical content.",
+    "Future semantic authority expansion can reference this registry directly."
+  ]
+}

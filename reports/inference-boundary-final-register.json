@@ -1,0 +1,90 @@
+{
+  "report_id": "inference_boundary_final_register_v1",
+  "patch_id": "PATCH_ACCELERATOR_INFERENCE_CONSERVATION_CLOSEOUT_055",
+  "captured_at": "2026-07-12T16:42:09.7754460-04:00",
+  "scan_method": "tools.inference_governance.scan_repository_inference_boundaries",
+  "scan_root": "D:/projects/acellorator",
+  "summary": {
+    "registered": 1,
+    "active": 0,
+    "latent": 1,
+    "ungated": 0,
+    "unregistered": 0,
+    "test_only_surfaces": 1,
+    "activation_surfaces": 1,
+    "false_positives": 1
+  },
+  "registered_boundaries": [
+    {
+      "boundary_id": "SEMANTIC_READOUT_OPTIONAL_OPENAI_001",
+      "path": "tools/signal_scope_phase_continuation_engine/core/semantic_readout.py",
+      "symbol": "_openai_compatible_reply",
+      "status": "LATENT",
+      "owner": "tools.signal_scope_phase_continuation_engine.core.semantic_readout",
+      "allowed_callers": [
+        "analysis_intake.worker"
+      ],
+      "allowed_purposes": [
+        "HUMAN_READABLE_SUMMARY",
+        "AMBIGUITY_EXPLANATION",
+        "OPTIONAL_SEMANTIC_COMMENTARY"
+      ],
+      "allowed_modes": [
+        "CONSTRAINED"
+      ],
+      "authority_class": "PRESENTATION_ONLY",
+      "default_budget": {
+        "maximum_calls": 0,
+        "maximum_retries": 0,
+        "maximum_input_tokens": 0,
+        "maximum_output_tokens": 0,
+        "maximum_latency_ms": 0
+      },
+      "budget_ceiling": {
+        "maximum_calls": 1,
+        "maximum_retries": 1,
+        "maximum_input_tokens": 12000,
+        "maximum_output_tokens": 500,
+        "maximum_latency_ms": 12000
+      },
+      "retry_policy": {
+        "default_retry_budget": 0,
+        "automatic_retry": false
+      },
+      "deterministic_fallback": {
+        "symbol": "_local_reply",
+        "reply_source": "LOCAL_DETERMINISTIC"
+      },
+      "output_schema": "semantic_readout_reply_v1",
+      "telemetry_schema": "semantic_readout_boundary_event_v1",
+      "last_audited": "2026-07-12T09:42:00-04:00",
+      "line_range": "1252-1474"
+    }
+  ],
+  "test_only_surfaces": [
+    {
+      "path": "tests/test_semantic_readout_capability_gate.py",
+      "symbol": "SemanticReadoutCapabilityGateTests",
+      "classification": "TEST_ONLY",
+      "line_range": "133-133"
+    }
+  ],
+  "activation_surfaces": [
+    {
+      "path": "tools/signal_scope_phase_continuation_engine/config/config_v14_terminal.json",
+      "symbol": "semantic_readout",
+      "classification": "LATENT_CONFIGURATION",
+      "line_range": "119-119"
+    }
+  ],
+  "false_positives": [
+    {
+      "path": "gpt_folder_bridge/bridge.py",
+      "symbol": "API_KEY",
+      "classification": "FALSE_POSITIVE",
+      "reason": "Local authenticated file bridge stub; no model/provider invocation.",
+      "line_range": "5-5"
+    }
+  ],
+  "conclusion": "One registered latent inference boundary remains. No active or ungated boundary is registered, and the shipped default remains deterministic local."
+}

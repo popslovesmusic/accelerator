@@ -1,0 +1,76 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Registry for formal epsilon_null classes and boundary rules in Phase 2 of the Mono-Process Formal Law Program.",
+    "status": "provisional",
+    "last_updated": "2026-05-12"
+  },
+  "epsilon_null_classes": [
+    {
+      "class": "exact_zero_exclusion",
+      "meaning": "Nullity is defined only by exact zero."
+    },
+    {
+      "class": "tolerance_floor",
+      "meaning": "Nullity includes values below a declared formal or numerical epsilon_null."
+    },
+    {
+      "class": "mechanism_specific_floor",
+      "meaning": "epsilon_null depends on mechanism class, resolution, or observable extraction rule."
+    },
+    {
+      "class": "dynamic_floor",
+      "meaning": "epsilon_null may vary with residue, orientation, or admissibility context."
+    },
+    {
+      "class": "undefined_floor",
+      "meaning": "No formal null threshold has been declared."
+    }
+  ],
+  "epsilon_null_entries": [
+    {
+      "entry_id": "EN-001",
+      "target_law": "MPF-PV-001",
+      "epsilon_class": "exact_zero_exclusion",
+      "null_rule": "E_alpha == 0",
+      "boundary_behavior": "sharp",
+      "stability_implication": "conditional",
+      "failure_modes": [
+        "NBFM-003"
+      ],
+      "proof_status": "scaffolded",
+      "claim_boundary": "formal_procedural_only",
+      "provisional_status": true
+    },
+    {
+      "entry_id": "EN-002",
+      "target_law": "MPF-PV-001",
+      "epsilon_class": "tolerance_floor",
+      "null_rule": "abs(E_alpha) < epsilon_null",
+      "boundary_behavior": "tolerant",
+      "stability_implication": "stabilizing",
+      "failure_modes": [
+        "NBFM-001",
+        "NBFM-002"
+      ],
+      "proof_status": "scaffolded",
+      "claim_boundary": "formal_procedural_only",
+      "provisional_status": true
+    },
+    {
+      "entry_id": "EN-003",
+      "target_law": "MPF-PV-001",
+      "epsilon_class": "dynamic_floor",
+      "null_rule": "abs(E_alpha) < f(residue, orientation)",
+      "boundary_behavior": "dynamic",
+      "stability_implication": "conditional",
+      "failure_modes": [
+        "NBFM-004",
+        "NBFM-008"
+      ],
+      "proof_status": "scaffolded",
+      "claim_boundary": "formal_procedural_only",
+      "provisional_status": true
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "report_id": "RT_INDUCTION_MTO_OTM_CALCULUS_001_COMPARISON_ADMISSIBILITY_001",
+  "packet_id": "RT_INDUCTION_MTO_OTM_CALCULUS_001",
+  "status": "PROVISIONAL_COMPARISON_TO_ADMISSIBILITY_MAPPING",
+  "authority": "NON_CANONICAL_RESEARCH_MEMORY",
+  "canonical_math_modified": false,
+  "mapping": {
+    "signature": "OrientationPolicy : ComparisonResult × Context -> OrientationDisposition",
+    "dispositions": ["ADMISSIBLE_CANDIDATE", "REJECTED", "BLOCKED_UNRESOLVED"],
+    "rules": [
+      {"comparison": "EQUAL", "default_disposition": "ADMISSIBLE_CANDIDATE", "guard": "canonical reference identity must be established within Context"},
+      {"comparison": "COMPATIBLE", "default_disposition": "ADMISSIBLE_CANDIDATE", "guard": "Context must explicitly permit joint compatibility"},
+      {"comparison": "ORDERED", "default_disposition": "ADMISSIBLE_CANDIDATE", "guard": "Context must explicitly declare the ordering relation"},
+      {"comparison": "CONFLICT", "default_disposition": "REJECTED", "guard": "an explicit conflict witness is required"},
+      {"comparison": "INCOMPARABLE", "default_disposition": "BLOCKED_UNRESOLVED", "guard": "absence of comparison is not rejection"}
+    ],
+    "status": "PROVISIONAL"
+  },
+  "lawful_mapping": {
+    "candidate_rule": "Lawful(A,C) requires every orientation comparison required by C to resolve to an allowed disposition and requires no explicit conflict.",
+    "allowed_results": "Context-selected subset of EQUAL, COMPATIBLE, and ORDERED",
+    "blocking_results": ["INCOMPARABLE", "missing comparison", "missing context policy"],
+    "rejecting_results": ["CONFLICT", "malformed orientation", "traceability failure"],
+    "status": "PROVISIONAL"
+  },
+  "mto_candidates_mapping": {
+    "signature": "MTO_Candidates : LawfulAspectOrganization × Context -> Set(ResolvedRT)",
+    "precondition": "Lawful(A,C) must be ADMISSIBLE_CANDIDATE",
+    "outcomes": [
+      {"candidate_set": "empty", "meaning": "no resolved RT candidate was generated; not automatically a failure of the organization"},
+      {"candidate_set": "singleton", "meaning": "one candidate exists; deterministic MTO still requires canonical selection and totality"},
+      {"candidate_set": "multiple", "meaning": "candidate ambiguity; MTO selection is blocked without a selector"}
+    ],
+    "status": "PROVISIONAL_REVIEW_SIGNATURE"
+  },
+  "fixture_application": [
+    {"fixture_id": "ORI-FIX-001", "comparison": "EQUAL", "orientation_disposition": "ADMISSIBLE_CANDIDATE", "mto_effect": "eligible_for_MTO_Candidates"},
+    {"fixture_id": "ORI-FIX-002", "comparison": "COMPATIBLE", "orientation_disposition": "ADMISSIBLE_CANDIDATE_IF_CONTEXT_PERMITS", "mto_effect": "conditionally_eligible"},
+    {"fixture_id": "ORI-FIX-003", "comparison": "ORDERED", "orientation_disposition": "ADMISSIBLE_CANDIDATE_IF_CONTEXT_PERMITS", "mto_effect": "conditionally_eligible"},
+    {"fixture_id": "ORI-FIX-004", "comparison": "CONFLICT", "orientation_disposition": "REJECTED", "mto_effect": "not_eligible"},
+    {"fixture_id": "ORI-FIX-005", "comparison": "INCOMPARABLE", "orientation_disposition": "BLOCKED_UNRESOLVED", "mto_effect": "evaluation_blocked"}
+  ],
+  "failure_semantics": [
+    {"code": "CMP-ADM-001", "condition": "Context policy missing for COMPATIBLE or ORDERED.", "result": "ADMISSIBILITY_POLICY_UNDEFINED"},
+    {"code": "CMP-ADM-002", "condition": "CONFLICT lacks an explicit witness.", "result": "CONFLICT_WITNESS_UNRESOLVED"},
+    {"code": "CMP-ADM-003", "condition": "INCOMPARABLE result supplied to MTO.", "result": "MTO_BLOCKED_INCOMPARABLE_ORIENTATION"},
+    {"code": "CMP-MTO-004", "condition": "Multiple RT candidates lack a selector.", "result": "MTO_SELECTION_UNDEFINED"}
+  ],
+  "summary": {"orientation_fixtures_admissible_candidate": 1, "conditionally_eligible": 2, "rejected": 1, "blocked": 1, "deterministic_mto_established": false},
+  "open_obligations": [
+    "Define Context policy for COMPATIBLE and ORDERED.",
+    "Define explicit conflict witnesses.",
+    "Define candidate-set equality and RT result identity.",
+    "Define MTO selection only after candidate ambiguity is characterized."
+  ],
+  "nonclaims": ["Candidate eligibility is not lawfulness proof.", "A singleton candidate set does not by itself establish deterministic MTO.", "No canonical operator or equivalence relation is created."]
+}

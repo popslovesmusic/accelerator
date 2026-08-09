@@ -3,7 +3,7 @@ import json
 import math
 import subprocess
 from dataclasses import dataclass
-from datetime import datetime, timezone
+import datetime
 from pathlib import Path
 from typing import Any
 
@@ -14,7 +14,7 @@ ENTRYPOINT = REPO_ROOT / "tools" / TOOL / "sim_governed.py"
 
 
 def _utc_now() -> str:
-    return datetime.now(timezone.utc).isoformat()
+    return datetime.datetime.now(datetime.timezone.utc).isoformat()
 
 
 def _load_json(path: Path) -> Any:

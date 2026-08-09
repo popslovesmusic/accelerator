@@ -1,0 +1,32 @@
+{
+  "crawl_id": "analysis_crawl_20260730_math_tiebreak_runtime_followup_004",
+  "crawl_type": "BOUNDED_READ_ONLY_VALIDATION_FOLLOWUP",
+  "campaign_id": "CAMPAIGN_MATH_TIEBREAK_RUNTIME_CORROBORATION_20260730_004",
+  "scope": {
+    "domains": ["RC-026 degenerate minima tie-break dynamics", "S/Arb_A separation", "engine runtime corroboration"],
+    "finite_input_scope": true,
+    "maximum_reasoning_depth": 4,
+    "stopping_rule": "Existing approved structural validators completed; runtime corroboration stopped because no approved engine exposes an S/Arb_A contract or trace surface."
+  },
+  "source_artifacts": [
+    {"path": "registry/math/rc026_degenerate_minima_tiebreak_dynamics_registry.json", "sha256": "D304778877BBB302A7F4EA565C4A64134B0E7EB160FA541127C677A9571F45AF"},
+    {"path": "registry/math/s_arbitration_validation_registry.json", "sha256": "F12537D47C2125B251933611C066C1044D1D38B6ACA454E66932B42285709429"},
+    {"path": "outputs/s_validation/s_validation_results.json", "sha256": "4CBDF3CBAF0914C019FD88433A656D874F016014A1AD1F6630B99202846F0F84"},
+    {"path": "outputs/s_validation/s_validation_report.md", "sha256": "4C4137C44BB5D4355C1AC7A1008B15CC0A5FA9DE1943B4156FB731057D98F254"}
+  ],
+  "direct_observations": [
+    {"discovery_id": "DISCOVERY_RC026_VALIDATION_PASS_20260730", "discovery_class": "INVARIANT_CANDIDATE", "epistemic_status": "MECHANICALLY_VERIFIED", "proof_status": "OBLIGATIONS_IDENTIFIED", "statement": "RC-026 validation passes one registry entry with eight conditions, five candidate tie-break modes, and eight preserved failure modes; no prohibited global uniqueness, deterministic global resolution, exact identity, global closure, or physics claim is present."},
+    {"discovery_id": "DISCOVERY_S_ARBA_SEPARATION_PASS_20260730", "discovery_class": "EQUIVALENCE_CANDIDATE", "epistemic_status": "MECHANICALLY_VERIFIED", "proof_status": "OBLIGATIONS_IDENTIFIED", "statement": "Six S/Arb_A fixture tests pass: pruning reduces or preserves candidate cardinality, Arb_A consumes the pruned set, and S does not perform realization selection."},
+    {"discovery_id": "DISCOVERY_ENGINE_TRACE_MISSING_20260730", "discovery_class": "MISSING_MECHANISM", "epistemic_status": "OBSERVED", "proof_status": "BLOCKED", "statement": "The inspected approved engine interfaces do not expose a governed S/Arb_A implementation contract or runtime trace sufficient to corroborate engine-specific pruning/arbitration behavior.", "blocking_condition": "No engine-specific runtime evidence can be aligned to the fixture semantics without a declared adapter/trace contract."}
+  ],
+  "bounded_successor_campaign": {
+    "research_hypothesis": "For an engine with an explicit S/Arb_A trace contract, S preserves candidate-pool non-expansion and Arb_A selects only from the S-pruned pool under the declared tie policy.",
+    "null_hypothesis": "At least one approved engine violates the declared separation or produces an untyped/undecidable tie outcome.",
+    "required_artifacts": ["approved engine adapter", "immutable input fixture", "candidate-pool trace before and after S", "Arb_A selection trace", "tie-policy outcome", "failure report"],
+    "falsification_criteria": ["S increases candidate cardinality", "Arb_A selects a removed candidate", "tie resolution changes without declared policy", "trace cannot preserve candidate identity"],
+    "finite_stopping_condition": "Two independent approved engine adapters pass or fail the same fixture suite, or an adapter contract cannot be admitted after bounded review."
+  },
+  "recommended_next_action": "AUTHORIZE_OR_REJECT_A_TYPED_ENGINE_TRACE_ADAPTER",
+  "support_level": "C1_MODEL_RELATIVE_WITH_MECHANICALLY_VERIFIED_FIXTURE_SUPPORT",
+  "what_this_followup_does_not_authorize": ["tie-break theorem promotion", "universal tie-break claim", "engine equivalence", "physics claim", "global closure claim", "simulation execution without an approved adapter contract"]
+}

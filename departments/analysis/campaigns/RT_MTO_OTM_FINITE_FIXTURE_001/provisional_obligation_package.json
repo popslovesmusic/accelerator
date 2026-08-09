@@ -1,0 +1,60 @@
+{
+  "package_id": "RT_MTO_OTM_PROVISIONAL_OBLIGATIONS_001",
+  "source": "RT_INDUCTION_MTO_OTM_CALCULUS_001",
+  "status": "PROVISIONAL_NONCANONICAL",
+  "claim_ceiling": "C1_MODEL_RELATIVE",
+  "obligations": [
+    {
+      "id": "MTO-OBL-001",
+      "objective": "Make context an explicit input to Aspect role interpretation and MTO evaluation.",
+      "acceptance_test": "Same primitive organization under two contexts yields separately typed results or an explicit context conflict.",
+      "failure": "CONTEXT_OMISSION",
+      "escalation": "Block equivalence and MTO claims until context is supplied."
+    },
+    {
+      "id": "MTO-OBL-002",
+      "objective": "Establish single-valued MTO selection or an explicit unresolved-result path.",
+      "acceptance_test": "Repeated evaluation of the same declared candidate input returns one candidate RT or the same unresolved diagnostic.",
+      "failure": "MTO_NONDETERMINISTIC_OUTPUT",
+      "escalation": "Block deterministic execution and require a canonical selector."
+    },
+    {
+      "id": "MTO-OBL-003",
+      "objective": "Preserve primitive multiplicity through OTM or prove that multiplicity is irrelevant.",
+      "acceptance_test": "Inputs with repeated primitives remain distinguishable after decomposition whenever later MTO can observe multiplicity.",
+      "failure": "OTM_MULTIPLICITY_COLLAPSE",
+      "escalation": "Reject set-only decomposition for affected domains."
+    },
+    {
+      "id": "MTO-OBL-004",
+      "objective": "Define unique canonical orientation tie keys and deterministic tie-breaking.",
+      "acceptance_test": "Permuting candidate discovery order produces the same selected orientation; duplicate keys are rejected.",
+      "failure": "ORIENTATION_TIE_AMBIGUITY",
+      "escalation": "Return unresolved orientation and block MTO closure."
+    },
+    {
+      "id": "MTO-OBL-005",
+      "objective": "Prevent inference of aspect equivalence from matching observed outputs alone.",
+      "acceptance_test": "Distinct organizations with equal observed output remain equivalence-unestablished absent a declared MTO/RT identity rule.",
+      "failure": "OUTPUT_EQUALITY_OVERREACH",
+      "escalation": "Reject substitution/equivalence inference and retain both source organizations."
+    }
+  ],
+  "dependencies": [
+    "RT identity/equivalence formalization",
+    "AdmissibleAspect context and role typing",
+    "deterministic orientation selector",
+    "OTM decomposition carrier definition"
+  ],
+  "required_evidence": [
+    "independent fixture implementation",
+    "permutation cross-validation",
+    "adversarial counterexample results",
+    "human review of candidate semantics"
+  ],
+  "promotion": {
+    "canonical_promotion_allowed": false,
+    "human_review_required": true,
+    "reopen_on_counterexample": true
+  }
+}

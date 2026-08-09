@@ -1,0 +1,115 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_021",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-05",
+  "type": "governance_patch",
+  "artifact_type": "governance_patch",
+  "title": "Typed Continuation Composition Guards",
+  "priority": "HIGH",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_013",
+    "PATCH_PI_RT_CALCULUS_018",
+    "PATCH_PI_RT_CALCULUS_019",
+    "PATCH_PI_RT_CALCULUS_020"
+  ],
+  "purpose": "Strengthen continuation composition by requiring endpoint compatibility, admissibility, residue propagation, and typed-domain compatibility.",
+  "core_claim": "Continuation composition is lawful only when endpoint matching, admissibility, residue propagation, and typed-domain compatibility all hold.",
+  "canonical_claims": [
+    {
+      "id": "CLAIM_021_001",
+      "statement": "Continuation composition is lawful only when endpoint matching and type compatibility both hold.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_021_002",
+      "statement": "Typed-domain mismatch blocks composition unless an explicit typed transition rule exists.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_021_003",
+      "statement": "Projection-domain transitions require \u03a0_D or an equivalent canonical projection rule.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_021_004",
+      "statement": "Composition failure produces no continuation object.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_021_005",
+      "statement": "Reduction of composed continuations is permitted only after typed composition guards pass.",
+      "status": "canonical"
+    }
+  ],
+  "formal_objects": [
+    {
+      "symbol": "TCG_021",
+      "name": "Typed Continuation Composition Guards",
+      "definition": "Lawful continuation composition guards requiring endpoint matching, admissibility, residue propagation, and typed-domain compatibility.",
+      "primitive": false,
+      "domain": "continuation_composition_layer"
+    }
+  ],
+  "typed_composition_rules": [
+    {
+      "id": "TCG_021_001",
+      "name": "Endpoint Match Guard",
+      "formal": "C(A,B) \u2218 C(B,C) is structurally composable only if cod(C(A,B)) = dom(C(B,C))"
+    },
+    {
+      "id": "TCG_021_002",
+      "name": "Type Compatibility Guard",
+      "formal": "type(cod(C1)) = type(dom(C2)) or explicit_transition(type(cod(C1)), type(dom(C2)))"
+    },
+    {
+      "id": "TCG_021_003",
+      "name": "Admissibility Guard",
+      "formal": "Compose(C1,C2) exists only if admissible(C1,C2)"
+    },
+    {
+      "id": "TCG_021_004",
+      "name": "Residue Propagation Guard",
+      "formal": "Compose(C1,C2) must preserve lawful residue propagation"
+    },
+    {
+      "id": "TCG_021_005",
+      "name": "Guarded Reduction Dependency",
+      "formal": "C(A,B) \u2218 C(B,C) ->red C(A,C) only after TCG_021_001 through TCG_021_004 pass"
+    }
+  ],
+  "explicitly_out_of_scope": [
+    "Full parser implementation",
+    "sigma_RT selector",
+    "Operational-regime execution",
+    "DB event replay debt",
+    "Complete confluence proof"
+  ],
+  "validation_requirements": [
+    "Composition now requires type compatibility.",
+    "Projection transition exceptions require typed transition rules.",
+    "Reduction rules are guarded by typed composition validity.",
+    "RT_core remains unchanged."
+  ],
+  "required_file_updates": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_021.json",
+    "registry/formal_object_registry.json",
+    "registry/math_source_registry.json",
+    "registry/lexicon_gap_queue.json",
+    "registry/registry/lexicon_gap_queue.json"
+  ],
+  "success_criteria": {
+    "composition_requires_type_compatibility": true,
+    "projection_exceptions_require_explicit_transition": true,
+    "guarded_reduction_enabled": true,
+    "composition_failure_produces_no_object": true,
+    "rt_core_unchanged": true
+  },
+  "next_recommended_patch": {
+    "patch_id": "PATCH_PI_RT_CALCULUS_022",
+    "title": "Continuation Failure Object and Undefined Composition",
+    "purpose": "Define the failure object or undefined-state semantics for inadmissible continuation composition."
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "report_id": "RT_INDUCTION_MTO_OTM_CALCULUS_001_CONTEXT_POLICY_CANDIDATES_001",
+  "packet_id": "RT_INDUCTION_MTO_OTM_CALCULUS_001",
+  "status": "PROVISIONAL_CONTEXT_POLICY_AND_CANDIDATE_IDENTITY",
+  "authority": "NON_CANONICAL_RESEARCH_MEMORY",
+  "canonical_math_modified": false,
+  "context_policy": {
+    "type_id": "MTOContextPolicy",
+    "required_fields": ["policy_id", "allowed_comparison_results", "orientation_order_policy", "conflict_witness_policy", "candidate_identity_policy"],
+    "compatible_rule": "COMPATIBLE is admissible only when the policy explicitly lists COMPATIBLE and supplies a joint-admissibility witness or rule.",
+    "ordered_rule": "ORDERED is admissible only when the policy explicitly lists ORDERED and supplies a typed ordering relation over the orientation domain.",
+    "conflict_rule": "CONFLICT rejects only when an explicit incompatible-constraint witness is present; otherwise the result is unresolved.",
+    "incomparable_rule": "INCOMPARABLE blocks admissibility evaluation and is never converted to rejection by absence alone.",
+    "status": "CANDIDATE_ONLY"
+  },
+  "conflict_witness_schema": {
+    "required_fields": ["witness_id", "left_orientation", "right_orientation", "context_id", "incompatible_constraints", "source_trace", "validation_status"],
+    "validation_statuses": ["VALID", "INVALID", "UNRESOLVED"],
+    "rule": "An unvalidated conflict claim cannot reject an organization."
+  },
+  "candidate_identity": {
+    "type_id": "CandidateRTIdentityPolicy",
+    "conservative_rule": "Two candidate outputs collapse only when CanonicalRef(candidate_1) equals CanonicalRef(candidate_2).",
+    "distinct_reference_rule": "Distinct candidate references remain distinct even when labels, structures, finite outputs, or contexts appear similar.",
+    "alternative_representation_rule": "Alternative representations are not collapsed without a separate authorized result-equivalence relation.",
+    "status": "REFERENCE_IDENTITY_ONLY"
+  },
+  "candidate_set_outcomes": [
+    {"case": "empty", "meaning": "No candidate result generated; reason must be recorded and is not automatically a contradiction."},
+    {"case": "singleton", "meaning": "One candidate reference exists; deterministic MTO still requires totality and canonical selection semantics."},
+    {"case": "multiple_distinct", "meaning": "Multiple distinct candidate references exist; MTO selection is blocked."},
+    {"case": "multiple_same_canonical_ref", "meaning": "Candidates normalize to one canonical reference; duplicate representation may be removed by normalization only."}
+  ],
+  "policy_fixtures": [
+    {"fixture_id": "POL-FIX-001", "policy": {"allowed_comparison_results": ["EQUAL"], "candidate_identity": "REFERENCE_IDENTITY_ONLY"}, "result": "VALID_POLICY"},
+    {"fixture_id": "POL-FIX-002", "policy": {"allowed_comparison_results": ["COMPATIBLE"], "joint_admissibility_witness": "W_COMPAT_001"}, "result": "VALID_POLICY_IF_WITNESS_VALID"},
+    {"fixture_id": "POL-FIX-003", "policy": {"allowed_comparison_results": ["ORDERED"], "ordering_relation": "<_{C}"}, "result": "VALID_POLICY_IF_ORDER_TYPED"},
+    {"fixture_id": "POL-FIX-004", "policy": {"allowed_comparison_results": ["CONFLICT"], "conflict_witness": null}, "result": "INVALID_REJECTION_POLICY"},
+    {"fixture_id": "POL-FIX-005", "candidate_set": ["RT_a", "RT_b"], "canonical_refs": ["RT_a", "RT_b"], "result": "MTO_SELECTION_BLOCKED"},
+    {"fixture_id": "POL-FIX-006", "candidate_set": ["alias_a", "RT_a"], "canonical_refs": ["RT_a", "RT_a"], "result": "REFERENCE_NORMALIZATION_ALLOWED"}
+  ],
+  "open_obligations": [
+    "Define the concrete joint-admissibility witness.",
+    "Define the typed ordering relation for ORDERED orientations.",
+    "Define candidate RT canonical references and their source authority.",
+    "Define deterministic selection only after multiple-distinct candidate behavior is characterized.",
+    "Define whether empty candidate sets are expected, blocked, or invalid for each context."
+  ],
+  "nonclaims": ["No COMPATIBLE or ORDERED policy is active canonically.", "No conflict is valid without a witness.", "No substantive result equivalence is defined.", "No deterministic MTO selector is authorized."]
+}

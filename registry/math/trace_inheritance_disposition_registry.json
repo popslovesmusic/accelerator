@@ -1,0 +1,77 @@
+{
+  "registry_id": "TRACE_INHERITANCE_DISPOSITION_REGISTRY",
+  "patch_id": "APPENDIX_F_SECTION_2_TRACE_INHERITANCE_001",
+  "status": "SCOPED_DISPOSITION_VALIDATED",
+  "authority_level": "L0_TO_L2_EVIDENCE_SYNCHRONIZATION",
+  "source_obligation": "OQ_RTM_001",
+  "source_induction": "MPF_IND_RT_MECHANICS_RECURSIVE_COMPLETION_001",
+  "campaign_reference": "MPF_RTM_RECURSIVE_CAMPAIGN_RUN_001",
+  "question": "Under lawful nesting, does trace-admissible RT_n pass trace-admissibility into RT_{n+1} without exhaustive re-derivation from RT_core?",
+  "disposition": {
+    "answer": "supported_under_coherent_nesting_controls",
+    "summary": "Trace-admissibility is supported as a hereditary invariant under coherent nesting when RT_n is PRIN_001 trace-admissible, the continuation coupling satisfies PRIN_003, typed residue/non-collapse constraints are preserved, and GOV-RT-ZERO-RECOUPLING-001 is not violated.",
+    "classification": "PASSED_PENDING_RIGOR_ENDORSEMENT"
+  },
+  "formal_scaffold": {
+    "premises": [
+      "TraceAdm(RT_n)",
+      "Nest_003(RT_n, continuation, x)",
+      "ResiduePreserved(RT_n, continuation)",
+      "NonCollapse(RT_n, continuation)",
+      "ZeroRecouplingLawful(GOV-RT-ZERO-RECOUPLING-001)"
+    ],
+    "candidate_rule": "TraceAdm(RT_n) and LawfulNest(RT_n, continuation, x) => TraceAdm(RT_{n+1})",
+    "recursive_form": "RT_{n+1} := Red_x(D(RT_n | continuation), ...)",
+    "scope": "model-relative recursive mechanics only"
+  },
+  "campaign_evidence": {
+    "result_path": "outputs/rt_mechanics_campaign/rt_mechanics_results.json",
+    "report_path": "outputs/rt_mechanics_campaign/rt_mechanics_report.md",
+    "num_seeds": 64,
+    "depths_checked": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "coherent_coupling_rate": "1.0 at all checked depths",
+    "ablated_depth_10_rate": 0.09882671195339951,
+    "verdict": "SUPPORTED"
+  },
+  "failure_conditions": [
+    "RT_n is not trace-admissible under PRIN_001.",
+    "The nesting relation does not satisfy PRIN_003.",
+    "Continuation admissibility is undeclared or fails.",
+    "Typed residue is erased, aliased, or collapsed.",
+    "Zero recoupling violates GOV-RT-ZERO-RECOUPLING-001.",
+    "The inheritance claim is used to bypass local well-formedness or typed-continuation checks.",
+    "The result is treated as physical recurrence, conservation, or ontological permanence."
+  ],
+  "appendix_f_effect": {
+    "obligation": "OQ_RTM_001",
+    "from": "REGISTERED_LATE",
+    "to": "PASSED_PENDING_RIGOR_ENDORSEMENT",
+    "remaining_work": [
+      "Convert the campaign-supported scaffold into a formal proof artifact if theorem promotion is requested.",
+      "Run independent rigor endorsement before raising the induction ceiling.",
+      "Keep continuation admissibility and base-case trace boundaries explicit for OQ_RTM_002 and OQ_RTM_003.",
+      "Audit all recursive-engine uses for attempts to bypass local well-formedness checks."
+    ]
+  },
+  "claim_boundary": {
+    "evidence_class": "C2_CAMPAIGN_SUPPORTED_PENDING_RIGOR_ENDORSEMENT",
+    "promotion": "none",
+    "does_not_prove": [
+      "Unrestricted theorem status.",
+      "Universal recursive soundness outside declared nesting controls.",
+      "Physical recurrence or conservation.",
+      "Ontological permanence."
+    ]
+  }
+}

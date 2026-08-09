@@ -1,0 +1,129 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Registry for provisional operator composition laws, ordering constraints, and dependency conditions.",
+    "status": "provisional",
+    "last_updated": "2026-05-12"
+  },
+  "composition_classes": [
+    {
+      "class": "well_typed_composition",
+      "meaning": "Codomain of the first operator is admissible input to the next operator."
+    },
+    {
+      "class": "conditionally_closed_composition",
+      "meaning": "Composition closes only under declared residue, orientation, branch, or admissibility constraints."
+    },
+    {
+      "class": "order_sensitive_composition",
+      "meaning": "Changing operator order changes output class, ambiguity, stability, or admissibility."
+    },
+    {
+      "class": "non_commuting_composition",
+      "meaning": "Two operators are not interchangeable under declared conditions."
+    },
+    {
+      "class": "associativity_conditional",
+      "meaning": "Associativity holds only under stable intermediate residue/admissibility conditions."
+    },
+    {
+      "class": "undefined_composition",
+      "meaning": "Composition relation is not yet formalized."
+    }
+  ],
+  "composition_entries": [
+    {
+      "entry_id": "OC-001",
+      "composition": "Pi_A \u2218 delta",
+      "composition_class": "conditionally_closed_composition",
+      "interpretation": "delta proposes continuation candidates; Pi_A filters/projects them into admissibility.",
+      "expected_behavior": "admissibility_filtering",
+      "operators": [
+        "delta",
+        "Pi_A"
+      ],
+      "failure_modes": [
+        "CFM-001",
+        "CFM-008"
+      ],
+      "provisional_status": true
+    },
+    {
+      "entry_id": "OC-002",
+      "composition": "delta \u2218 Pi_A",
+      "composition_class": "order_sensitive_composition",
+      "interpretation": "pre-filtering by Pi_A may reduce continuation candidates before delta selection.",
+      "expected_behavior": "candidate_restriction",
+      "operators": [
+        "Pi_A",
+        "delta"
+      ],
+      "failure_modes": [
+        "CFM-003",
+        "CFM-004"
+      ],
+      "provisional_status": true
+    },
+    {
+      "entry_id": "OC-003",
+      "composition": "residue_update \u2218 NavT",
+      "composition_class": "conditionally_closed_composition",
+      "interpretation": "transport changes continuation context before residue is updated.",
+      "expected_behavior": "residue_transport_conditioned",
+      "operators": [
+        "NavT",
+        "residue_update"
+      ],
+      "failure_modes": [
+        "CFM-005"
+      ],
+      "provisional_status": true
+    },
+    {
+      "entry_id": "OC-004",
+      "composition": "NavT \u2218 residue_update",
+      "composition_class": "order_sensitive_composition",
+      "interpretation": "residue update alters transport admissibility before transition.",
+      "expected_behavior": "transport_bias_shift",
+      "operators": [
+        "residue_update",
+        "NavT"
+      ],
+      "failure_modes": [
+        "CFM-003",
+        "CFM-005"
+      ],
+      "provisional_status": true
+    },
+    {
+      "entry_id": "OC-005",
+      "composition": "branch_pruning \u2218 delta",
+      "composition_class": "conditionally_closed_composition",
+      "interpretation": "multi-valued delta branches are reduced by declared pruning rules.",
+      "expected_behavior": "branch_bound_enforcement",
+      "operators": [
+        "delta",
+        "branch_pruning"
+      ],
+      "failure_modes": [
+        "CFM-006"
+      ],
+      "provisional_status": true
+    },
+    {
+      "entry_id": "OC-006",
+      "composition": "orientation_minimization \u2218 delta",
+      "composition_class": "order_sensitive_composition",
+      "interpretation": "delta selection is constrained by orientation minimization.",
+      "expected_behavior": "orientation_weighted_selection",
+      "operators": [
+        "delta",
+        "orientation_minimization"
+      ],
+      "failure_modes": [
+        "CFM-007"
+      ],
+      "provisional_status": true
+    }
+  ]
+}

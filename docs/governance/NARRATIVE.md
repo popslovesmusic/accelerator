@@ -2,7 +2,7 @@
 
 Welcome, Researcher. You have just stepped into the **Acellorator Research Ecosystem**. 
 
-This is not merely a repository of simulation scripts; it is a governed engine for exploring **"THE LAW OF THE ONE PROCESS."** Our mission is to move beyond "object-oriented" physics and into a world where everything—from particle swarms to the vacuum itself—is understood as a series of irreducible processes.
+This is not merely a repository of simulation scripts; it is a governed engine for exploring **"THE LAW OF THE ONE PROCESS."** Our mission is to move beyond "object-oriented" physics\_app and into a world where everything—from particle\_analog swarms to the vacuum\_analog itself—is understood as a series of irreducible processes\_proc.
 
 Here is your guide to surviving and contributing to this high-rigor environment.
 
@@ -17,6 +17,14 @@ In this repo, we do not believe in "things" that interact. We believe in **proce
 *   **$-(i)$:** Admissibility orientation.
 
 If you can’t describe your simulation results using these terms, you aren't doing "One Process" science yet.
+
+### 1.1 The Math Core (Interpretation, Not Proof)
+The repository includes a stabilized **math core** (`docs/math/` and `registry/math/`) that defines operators, law families, failure families, gaps, and proof obligations. It functions as an **interpretive and governance layer**:
+- it constrains what simulation outputs are allowed to mean,
+- it labels formal status (e.g., NOT_PROVEN / restricted-domain),
+- and it blocks claim inflation (no theorem elevation, no ontology closure, no physics escalation).
+
+All writing that uses simulation evidence must use claim-humble language, beginning with: **"Within these models..."**.
 
 ### 2. The Two Worlds: Python and C++
 Our ecosystem is built on a **Requirement of Equivalence**. 
@@ -45,6 +53,38 @@ The most important rule in this ecosystem is **Humility**.
 We do not claim to find "Universal Truth." All your papers, reports, and READMEs must begin with the phrase: **“Within these models…”** 
 
 We are simulators of process, not masters of reality.
+
+---
+
+### 5.1 Adversarial Hardening as Living SSOT Maintenance
+Adversarial hardening is now an official **Living SSOT maintenance process** rather than an ad hoc cleanup activity. The active anchor for this process is `MPF_ADV_HARDENING_SERIES_001_GOVERNANCE_ANCHOR`, recorded in `registry/governance/adversarial_hardening_registry.json`.
+
+This maintenance layer exists to absorb recurring attack lessons before they re-enter the theory stack as hidden assumptions. Its minimum required checks are:
+1. **Ontology leakage review:** Detect when projection, implementation, or object-language drifts into process-ontology claims.
+2. **Meta-level declaration:** Require every critique, patch, and formal argument to declare the level being addressed.
+3. **Whole-expression compliance:** Prevent aspect analysis from being misread as ontological independence.
+4. **Aspect decomposition governance:** Preserve analytical decomposition as an inspection method rather than a foundation claim.
+5. **Implementation firewall review:** Block code structure, array layout, update order, or execution artifacts from being used as ontology evidence.
+
+The current adversarial hardening backfill order is:
+1. `MPF_ADV_HARDENING_SERIES_001_GOVERNANCE_ANCHOR`
+2. `MPF_ADV_HARDENING_SERIES_002_WHOLE_EXPRESSION_BACKFILL`
+3. `MPF_ADV_HARDENING_SERIES_003_AFFECT_EFFECT_BACKFILL`
+4. `MPF_ADV_HARDENING_SERIES_004_DUAL_INSCRIPTION_BACKFILL`
+5. `MPF_ADV_HARDENING_SERIES_005_META_LEVEL_STACK_BACKFILL`
+6. `MPF_ADV_HARDENING_SERIES_006_CONDITIONAL_ARRAY_BACKFILL`
+7. `MPF_ADV_HARDENING_SERIES_007_CLOSURE_NEIGHBORHOOD_BACKFILL`
+
+This order is governance infrastructure first, theory backfill second. No downstream rewrite in the series is treated as authoritative until the hardening anchor remains synchronized across the registry layer, the textbook, the claim ledger, and the validation annotations.
+
+---
+
+### 5.2 Historical Specification Handling
+Historical specification artifacts remain useful for lineage, but they are not current authority.
+
+When a proposal-shaped specification, superseded note, or archived narrative differs from the live ledgers, the live ledgers define current governance state and the older material is read as historical residue only.
+
+Use this boundary to keep archived specifications from being mistaken for executable governance, and to keep current routing anchored in the live authority surfaces.
 
 ---
 

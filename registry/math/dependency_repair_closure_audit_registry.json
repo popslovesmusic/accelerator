@@ -1,0 +1,57 @@
+{
+  "audit_id": "VAL-DRCA-001",
+  "patch_id": "MPF-DEP-006",
+  "name": "Dependency Repair Closure Audit Registry",
+  "status": "active",
+  "purpose": "Audit whether the DEP repair sequence has successfully prevented unresolved RC, symbolic, partial, deceptive, or blocked artifacts from entering theorem-facing or review-facing infrastructure.",
+  "closure_audit_targets": [
+    {
+      "target_id": "DRCA-T001",
+      "name": "RC Repair Closure",
+      "requirement": "All RC entries must be classified as repaired, quarantined, superseded, blocked-persistent, ready-for-simulation, or ready-for-review."
+    },
+    {
+      "target_id": "DRCA-T002",
+      "name": "Inheritance Firewall Verification",
+      "requirement": "Blocked, symbolic, partial, deceptive, and quarantined artifacts must not propagate into theorem-facing infrastructure."
+    },
+    {
+      "target_id": "DRCA-T003",
+      "name": "Admission Gate Verification",
+      "requirement": "All admitted dependencies must have explicit admission class, allowed targets, and constraints."
+    },
+    {
+      "target_id": "DRCA-T004",
+      "name": "Failure Geometry Preservation",
+      "requirement": "All blocked or unstable artifacts must remain linked to failure geometry or quarantine references."
+    },
+    {
+      "target_id": "DRCA-T005",
+      "name": "LAW034 Global Closure Protection",
+      "requirement": "No dependency repair outcome may imply global compositional closure."
+    }
+  ],
+  "closure_classes": [
+    {
+      "class_id": "DEP-CLOSURE-COMPLETE",
+      "meaning": "Repair sequence closed with no unresolved dependency leakage."
+    },
+    {
+      "class_id": "DEP-CLOSURE-COMPLETE-WITH-QUARANTINE",
+      "meaning": "Repair sequence closed, but some artifacts remain quarantined or blocked-persistent."
+    },
+    {
+      "class_id": "DEP-CLOSURE-PARTIAL",
+      "meaning": "Some repair entries remain unresolved but are isolated from theorem-facing use."
+    },
+    {
+      "class_id": "DEP-CLOSURE-BLOCKED",
+      "meaning": "Dependency leakage or unresolved recursive inheritance remains active."
+    }
+  ],
+  "governance": {
+    "theorem_status": "NOT_PROVEN",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL"
+  }
+}

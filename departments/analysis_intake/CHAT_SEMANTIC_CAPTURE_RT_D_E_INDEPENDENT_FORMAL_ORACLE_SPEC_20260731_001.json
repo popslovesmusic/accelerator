@@ -1,0 +1,56 @@
+{
+  "capture_type": "CHAT_SEMANTIC_CAPTURE",
+  "packet_id": "RT_D_E_INDEPENDENT_FORMAL_ORACLE_SPEC_20260731_001",
+  "capture_timestamp": "2026-07-31T01:40:00Z",
+  "conversation_channel": "chat",
+  "source_provenance": "user-submitted Python artifact-construction payload",
+  "canonical_capture_hash": "d9a8ae20c330b852eb8cfa3c14cfe510a3ea38dbaa486c1f1aa6cfd1729c8ce1",
+  "limitations": [
+    "The received content defines a proposed artifact whose output path is /mnt/data; no external /mnt/data write was performed.",
+    "The specification is preserved semantically for intake and remains subject to human review and freeze confirmation."
+  ],
+  "semantic_content": {
+    "artifact_id": "RT_D_E_INDEPENDENT_FORMAL_ORACLE_SPEC_20260731_001",
+    "artifact_type": "INDEPENDENT_FORMAL_ORACLE_SPECIFICATION",
+    "schema_version": "1.0.0",
+    "status": "PROPOSED_FROZEN_SPEC",
+    "domain": ["RT", "D-semantics", "E-semantics", "formal oracle", "bounded semantic verification"],
+    "purpose": [
+      "Define an implementation-independent formal oracle for bounded D/E admissibility and non-collapse evaluation.",
+      "Provide a semantic reference that does not import or call candidate implementations.",
+      "Expose shared assumptions and support later Lean formalization, independent reimplementation, and adversarial comparison."
+    ],
+    "authority": "HUMAN_REVIEW_REQUIRED",
+    "mutation_policy": "IMMUTABLE_AFTER_FREEZE",
+    "canonical_promotion_allowed": false,
+    "claim_ceiling": "C2_LIMITATION_OR_NEGATIVE_RESULT",
+    "proof_status": "NOT_ATTEMPTED",
+    "repository_action": "ADD_SPECIFICATION_ONLY",
+    "independence_boundary": {
+      "excluded": ["P127 implementation", "P128 implementation", "Notebook 23 evaluator", "Notebook 24 evaluator", "Notebook 25 subject functions", "candidate predicate functions", "subject helpers", "prior expected-label fixtures"],
+      "allowed": ["symbol names", "registry identifiers", "domain vocabulary", "non-executable provenance metadata"],
+      "clean_room_condition": "A clean-room implementer must construct the oracle from the specification without reading candidate implementation code."
+    },
+    "formal_scope": [
+      "Typed domains: ContextId, RelationType, ProfileId, Payload, Witness, HistoryStep, History, DistinctionValue, ThresholdEnvironment, DRecord.",
+      "Primitives: ExactBind, SameContext, OrderedHistory, TerminatesAt, KnownProfile, PositiveDistinction, AboveThreshold.",
+      "Relations: Representable_D, NonCollapsed_E, Admissible_DE.",
+      "Rejection precedence for type, context, profile, witness, history, and threshold outcomes.",
+      "Eight semantic invariants and eight countermodel classes.",
+      "Clean-room implementation, comparison, replay, falsification, and preservation protocols."
+    ],
+    "proof_obligations": ["PO-DE-ORACLE-001", "PO-DE-ORACLE-002", "PO-DE-ORACLE-003", "PO-DE-ORACLE-004", "PO-DE-ORACLE-005", "PO-DE-ORACLE-006"],
+    "expected_evidence_classes": {
+      "clean_computational_agreement": "C2_BOUNDED_SUPPORT",
+      "bounded_disagreement": "C2_LIMITATION_OR_NEGATIVE_RESULT",
+      "formal_equivalence_proof": "C3_CANDIDATE_FORMAL_SUPPORT_PENDING_GOVERNANCE",
+      "universal_theorem": "NOT_AUTHORIZED_BY_THIS_SPEC"
+    },
+    "required_deliverables": ["frozen_specification.json", "clean_room_oracle_source", "test_corpus.jsonl", "oracle_outputs.jsonl", "candidate_outputs.jsonl", "comparison_report.json", "falsification_report.json", "manifest.json", "archive.zip"],
+    "recommended_next_action": "IMPLEMENT_CLEAN_ROOM_ORACLE",
+    "preferred_target": "Lean 4 formalization plus separately authored Python reference evaluator",
+    "explicit_non_authorizations": ["claim promotion above C2", "theorem promotion", "D-obligation discharge", "textbook semantic replacement", "registry closure", "counterexample suppression", "universal correctness inference"],
+    "provenance": ["Notebook 24 metamorphic independence review", "Notebook 25 oracle adversarial execution", "approved-tool replication requirement", "oracle-independence frontier"],
+    "generation_note": "Additive independent formalization proposal; it does not certify any existing implementation."
+  }
+}

@@ -1,0 +1,170 @@
+{
+  "patch_id": "GOV_WORK_REDUCTION_FRAMEWORK_002",
+  "title": "Universal Work Reduction Discovery and Execution",
+  "status": "APPLIED",
+  "type": "governance_patch",
+  "applied_on": "2026-07-02",
+  "depends_on": [
+    "GOV_WORK_REDUCTION_FRAMEWORK_001"
+  ],
+  "purpose": "Extend the Work Reduction Framework into the canonical discovery, prioritization, and execution interface for all governed work across the Acellorator.",
+  "governance_class": "LIVE_AUTHORITY",
+  "principles": [
+    "Every governed work item SHALL be discoverable.",
+    "Every work item SHALL belong to exactly one primary domain.",
+    "Every work item SHALL expose an executable lifecycle.",
+    "Queues are projections of governed work, not independent authorities."
+  ],
+  "canonical_dimensions": {
+    "actions": [
+      "audit",
+      "reduce",
+      "prioritize",
+      "summarize",
+      "validate",
+      "execute",
+      "review",
+      "close",
+      "defer"
+    ],
+    "domains": [
+      "governance",
+      "mathematics",
+      "economics",
+      "physics",
+      "engineering",
+      "theology",
+      "simulation",
+      "lexicon",
+      "proof",
+      "validator",
+      "documentation",
+      "research"
+    ],
+    "work_types": [
+      "debt",
+      "queue",
+      "campaign",
+      "review",
+      "validation",
+      "maintenance",
+      "research",
+      "documentation",
+      "registry",
+      "induction"
+    ]
+  },
+  "canonical_work_item": {
+    "required_fields": [
+      "id",
+      "title",
+      "domain",
+      "work_type",
+      "status",
+      "priority",
+      "owner",
+      "authority",
+      "source_registry"
+    ],
+    "optional_fields": [
+      "dependencies",
+      "blocked_by",
+      "unlocks",
+      "estimated_effort",
+      "execution_state",
+      "next_action",
+      "related_items"
+    ]
+  },
+  "execution_state": {
+    "states": [
+      "ready",
+      "blocked",
+      "active",
+      "review",
+      "completed",
+      "deferred",
+      "archived"
+    ],
+    "required_metadata": [
+      "blocked_by",
+      "dependency_depth",
+      "unlock_count",
+      "next_action"
+    ]
+  },
+  "queue_projection_rule": {
+    "statement": "Queues SHALL be treated as filtered projections of governed work rather than independent governance authorities.",
+    "examples": [
+      "induction_queue.json",
+      "lexicon_gap_queue.json",
+      "proof_elevation_campaign_registry.json",
+      "process_algebra_expansion_review_queue.json"
+    ]
+  },
+  "discovery_rules": [
+    {
+      "id": "GOV_WORK_DISCOVERY_001",
+      "text": "Every governed work artifact SHALL be discoverable through the Work Reduction Framework."
+    },
+    {
+      "id": "GOV_WORK_DISCOVERY_002",
+      "text": "Every queue, campaign, review registry, induction registry, validator backlog, and debt registry SHALL identify its governing work domain."
+    },
+    {
+      "id": "GOV_WORK_DISCOVERY_003",
+      "text": "No governed work SHALL exist outside the Work Reduction Framework."
+    }
+  ],
+  "execution_rules": [
+    {
+      "id": "GOV_WORK_EXECUTION_001",
+      "text": "Reduction SHALL operate on governed work items rather than directly on queue files."
+    },
+    {
+      "id": "GOV_WORK_EXECUTION_002",
+      "text": "Blocking dependencies SHALL be reported before execution begins."
+    },
+    {
+      "id": "GOV_WORK_EXECUTION_003",
+      "text": "Work reduction SHALL prioritize dependency resolution when it unlocks downstream governed work."
+    },
+    {
+      "id": "GOV_WORK_EXECUTION_004",
+      "text": "Completion SHALL update the originating registry and refresh all projected queue views."
+    }
+  ],
+  "command_model": {
+    "grammar": "<action> <domain> <work_type>",
+    "examples": [
+      "reduce governance debt",
+      "reduce mathematics induction",
+      "audit mathematics campaigns",
+      "summarize lexicon queue",
+      "validate proof review",
+      "prioritize governance maintenance"
+    ]
+  },
+  "expected_outputs": {
+    "summary": {
+      "total_items": 0,
+      "ready": 0,
+      "blocked": 0,
+      "active": 0,
+      "completed": 0
+    },
+    "dependency_analysis": {
+      "highest_priority_blockers": [],
+      "largest_unlock_opportunities": [],
+      "critical_path": []
+    },
+    "recommended_execution_order": []
+  },
+  "success_criteria": [
+    "All governed work is discoverable through the framework.",
+    "All queues become projections rather than independent authorities.",
+    "Every work item reports execution readiness.",
+    "Dependency analysis is available before reduction.",
+    "A single command grammar operates across all departments."
+  ]
+}

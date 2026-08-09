@@ -1,0 +1,24 @@
+{
+  "core_rule_id": "CORE-GOV-RESEARCH-INTAKE-COMPLETION",
+  "title": "Induction Continues Through Research Registration",
+  "status": "LIVE",
+  "authority_type": "CORE_GOVERNANCE_RULE",
+  "statement": "Induction is not terminal; explicitly inducted work continues through research identity, provisional structure, projections, and validation until research registration or a visible governed blocker.",
+  "formal_expression": "EXPLICIT_INDUCTION(x) => PRESERVE(x) AND QUEUE_REGISTER(x) AND CONTINUE_UNTIL(RESEARCH_REGISTERED(x) OR RESEARCH_BLOCKED_VISIBLE(x))",
+  "research_registration_requirements": [
+    "research_record_id", "source_trace", "concept_registration_or_visible_blocker",
+    "derivation_registration_or_visible_blocker", "dependency_and_open_question_records",
+    "research_index_entry", "validated_representations"
+  ],
+  "invariants": [
+    "NO_INDUCTION_WITHOUT_RESEARCH_IDENTITY",
+    "NO_WORKFLOW_STOP_AT_INDUCTION",
+    "RESEARCH_TRACE_REQUIRED",
+    "VISIBLE_FAILURE_ONLY",
+    "MANUAL_NOTES_IMMUTABLE",
+    "IDEMPOTENT_RESEARCH_REGISTRATION",
+    "NO_PROMOTION_BY_RESEARCH_REGISTRATION"
+  ],
+  "source_packet": "GOV_RESEARCH_INTAKE_COMPLETION_001",
+  "parent_rule": "CORE-GOV-PRESERVATION-EXECUTION-CONTINUITY"
+}

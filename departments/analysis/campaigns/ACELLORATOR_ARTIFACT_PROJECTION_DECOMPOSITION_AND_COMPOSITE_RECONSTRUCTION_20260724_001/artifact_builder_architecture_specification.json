@@ -1,0 +1,100 @@
+{
+  "architecture_id": "ARTIFACTS_COMPOSITE_BUILDER_ARCH_20260724_001",
+  "status": "SPECIFICATION_ONLY",
+  "builders": [
+    {
+      "builder_id": "B-GOV",
+      "projection": "governed_source_inventory",
+      "inputs": [
+        "authoritative source corpus manifest",
+        "governed JSON/Markdown"
+      ],
+      "outputs": [
+        "governed_source_inventory rows"
+      ],
+      "dependencies": []
+    },
+    {
+      "builder_id": "B-WS",
+      "projection": "workspace_artifact_catalog",
+      "inputs": [
+        "bounded workspace inventory"
+      ],
+      "outputs": [
+        "workspace artifact rows"
+      ],
+      "dependencies": [
+        "B-GOV"
+      ]
+    },
+    {
+      "builder_id": "B-GEN",
+      "projection": "generated_artifact_catalog",
+      "inputs": [
+        "campaign manifests",
+        "output roots",
+        "build metadata"
+      ],
+      "outputs": [
+        "generated artifact rows"
+      ],
+      "dependencies": [
+        "B-GOV",
+        "B-WS"
+      ]
+    },
+    {
+      "builder_id": "B-RT",
+      "projection": "runtime_transient_catalog",
+      "inputs": [
+        "runtime/database sidecar observation"
+      ],
+      "outputs": [
+        "transient rows"
+      ],
+      "dependencies": [
+        "B-WS"
+      ]
+    },
+    {
+      "builder_id": "B-HIST",
+      "projection": "historical_artifact_register",
+      "inputs": [
+        "legacy snapshot and historical provenance"
+      ],
+      "outputs": [
+        "historical rows"
+      ],
+      "dependencies": []
+    },
+    {
+      "builder_id": "B-COMP",
+      "projection": "artifacts_composite_compatibility_view",
+      "inputs": [
+        "all subprojections"
+      ],
+      "outputs": [
+        "production and compatibility views"
+      ],
+      "dependencies": [
+        "B-GOV",
+        "B-WS",
+        "B-GEN",
+        "B-RT",
+        "B-HIST"
+      ]
+    }
+  ],
+  "execution_order": [
+    "B-GOV",
+    "B-WS",
+    "B-GEN",
+    "B-RT",
+    "B-HIST",
+    "B-COMP"
+  ],
+  "cycle_check": "PASS",
+  "idempotency": "content-addressed upsert into versioned candidate only; no source mutation",
+  "checkpoint_policy": "checkpoint after each subprojection and inventory chunk",
+  "implementation_status": "NOT_IMPLEMENTED"
+}

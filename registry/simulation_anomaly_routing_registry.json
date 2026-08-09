@@ -1,0 +1,70 @@
+{
+  "registry_id": "PCD_SIMULATION_ANOMALY_ROUTING_REGISTRY",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "anomaly_id",
+      "trigger_condition",
+      "classification",
+      "affected_objects",
+      "required_review_lane",
+      "claim_effect",
+      "required_followup"
+    ]
+  },
+  "anomalies": [
+    {
+      "anomaly_id": "ANOM-001",
+      "trigger_condition": "one mechanism passes while another fails under same validation target",
+      "classification": "cross_mechanism_contradiction",
+      "affected_objects": ["MST-001", "OASSOC-001"],
+      "required_review_lane": "mechanism_dependence_review",
+      "claim_effect": "block_TS4_promotion",
+      "required_followup": [
+        "compare observables",
+        "check tool rigor endorsement",
+        "check config equivalence",
+        "inspect theorem assumptions"
+      ]
+    },
+    {
+      "anomaly_id": "ANOM-002",
+      "trigger_condition": "falsification vector produces expected support instead of expected failure",
+      "classification": "falsification_inversion",
+      "affected_objects": ["falsification_vectors", "stability_claims"],
+      "required_review_lane": "falsification_protocol_review",
+      "claim_effect": "mark_contested",
+      "required_followup": [
+        "inspect falsification vector definition",
+        "check implementation",
+        "expand gap dependency graph"
+      ]
+    },
+    {
+      "anomaly_id": "ANOM-003",
+      "trigger_condition": "observables pass but provenance or runtime validation fails",
+      "classification": "invalid_evidence_with_apparent_signal",
+      "affected_objects": ["evidence_source", "rigor endorsement_level"],
+      "required_review_lane": "runtime_provenance_review",
+      "claim_effect": "block_claim_support",
+      "required_followup": [
+        "repair provenance",
+        "rerun validation",
+        "do not preserve support status"
+      ]
+    },
+    {
+      "anomaly_id": "ANOM-004",
+      "trigger_condition": "simulation reveals behavior not covered by current theorem assumptions",
+      "classification": "assumption_gap_exposed",
+      "affected_objects": ["theorem_assumptions", "closure_status"],
+      "required_review_lane": "gap_expansion_review",
+      "claim_effect": "downgrade_to_provisional_or_conditional",
+      "required_followup": [
+        "create or update gap entry",
+        "update theorem closure registry",
+        "revise interpretation ceiling"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "registry_id": "PCD_WINDOW_METRIC_REGISTRY",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "metric_id",
+      "space",
+      "distance_function",
+      "domain",
+      "codomain",
+      "overlap_behavior",
+      "boundedness_conditions",
+      "claim_limits"
+    ]
+  },
+  "entries": [
+    {
+      "metric_id": "PHI_METRIC_V1",
+      "space": "admissibility_window_space",
+      "distance_function": "d_Phi",
+      "domain": "admissibility_window_space × admissibility_window_space",
+      "codomain": "nonnegative_real",
+      "overlap_behavior": "d_Phi(A_i, A_j) = 0 iff the windows are identical; decreases as volume of A_i ∩ A_j increases relative to union.",
+      "boundedness_conditions": [
+        "finite transition space measure",
+        "declared residue context",
+        "declared participation alpha"
+      ],
+      "claim_limits": [
+        "metric scaffold only",
+        "not yet a full metric proof",
+        "exact functional form (e.g., Jaccard-style) remains implementation-dependent"
+      ]
+    }
+  ],
+  "usage_rules": [
+    {
+      "name": "coupling_strength_rule_v1",
+      "statement": "The strength of coupling between processes i and j is inversely proportional to the window distance d_Phi(A_i, A_j)."
+    },
+    {
+      "name": "boundary_stability_rule_v1",
+      "statement": "A CSI boundary is stable if the window distance d_Phi to any non-member process remains above a declared exclusion threshold tau_A."
+    }
+  ]
+}

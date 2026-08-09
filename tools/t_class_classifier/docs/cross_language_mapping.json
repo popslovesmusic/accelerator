@@ -1,0 +1,50 @@
+{
+  "patch_id": "MPF_T_CLASS_IMPLEMENTATION_ARCHITECTURE_001",
+  "language_symmetry": [
+    {
+      "python_module": "tools/t_class_classifier/python/schemas.py",
+      "cpp_header": "tools/t_class_classifier/cpp/schemas.hpp",
+      "symmetric_elements": ["TraceSchema", "TSigSchema", "ClassType"]
+    },
+    {
+      "python_module": "tools/t_class_classifier/python/ingest.py",
+      "cpp_implementation": "tools/t_class_classifier/cpp/ingest.cpp",
+      "symmetric_elements": ["read_trace_file"]
+    },
+    {
+      "python_module": "tools/t_class_classifier/python/sanitize.py",
+      "cpp_implementation": "tools/t_class_classifier/cpp/sanitize.cpp",
+      "symmetric_elements": ["strip_forbidden_fields", "validate_schema_integrity"]
+    },
+    {
+      "python_module": "tools/t_class_classifier/python/feature_extract.py",
+      "cpp_implementation": "tools/t_class_classifier/cpp/feature_extract.cpp",
+      "symmetric_elements": ["compute_loop_nesting_depth", "compute_braid_proxies"]
+    },
+    {
+      "python_module": "tools/t_class_classifier/python/t_signature.py",
+      "cpp_implementation": "tools/t_class_classifier/cpp/t_signature.cpp",
+      "symmetric_elements": ["build_t_sig"]
+    },
+    {
+      "python_module": "tools/t_class_classifier/python/classify.py",
+      "cpp_implementation": "tools/t_class_classifier/cpp/classify.cpp",
+      "symmetric_elements": ["assign_t_class"]
+    },
+    {
+      "python_module": "tools/t_class_classifier/python/distribution.py",
+      "cpp_implementation": "tools/t_class_classifier/cpp/distribution.cpp",
+      "symmetric_elements": ["compute_statistical_aggregates"]
+    },
+    {
+      "python_module": "tools/t_class_classifier/python/audit.py",
+      "cpp_implementation": "tools/t_class_classifier/cpp/audit.cpp",
+      "symmetric_elements": ["write_decision_audit"]
+    },
+    {
+      "python_module": "tools/t_class_classifier/python/main.py",
+      "cpp_implementation": "tools/t_class_classifier/cpp/main.cpp",
+      "symmetric_elements": ["orchestrate_pipeline"]
+    }
+  ]
+}

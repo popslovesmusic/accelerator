@@ -1,0 +1,48 @@
+{
+  "audit_id": "PALG-GOV-HARDENING-CLASSIFICATION-001",
+  "timestamp": "2026-05-16T17:50:00.000000",
+  "failures": [
+    {
+      "patch_id": "MPF-PALG-008",
+      "validator": "validate_whole_relation_gate.py",
+      "issue": "Widespread missing boilerplate for source traceability and non-separability.",
+      "failure_class": "missing governance rule",
+      "affected_artifacts_count": 25,
+      "root_cause": "Boilerplate fields 'source_relation' and 'non_separability_acknowledged' were omitted during rapid patch generation."
+    },
+    {
+      "patch_id": "MPF-PALG-008",
+      "validator": "validate_whole_relation_gate.py",
+      "issue": "Forbidden phrase 'proof of reality' detected in descriptive fields.",
+      "failure_class": "forbidden language drift",
+      "affected_artifacts": [
+        "gr_like_projection_domain_registry.json",
+        "qm_like_projection_domain_registry.json",
+        "gr_like_projection_domain_registry.md"
+      ],
+      "root_cause": "Used forbidden phrase to define what the gate is *preventing*, but without sufficient negative context markers detected by the validator."
+    },
+    {
+      "patch_id": "MPF-PALG-035",
+      "validator": "validate_projection_bridge_gate.py",
+      "issue": "gate_status mismatch between registry and validator.",
+      "failure_class": "status mismatch",
+      "registry_status": "CANDIDATE_NON_UNIFICATION_GATE",
+      "expected_status": "CANDIDATE_BRIDGE_GATE",
+      "root_cause": "Terminology drift between registry schema design and validator implementation."
+    },
+    {
+      "patch_id": "MPF-PALG-018",
+      "validator": "validate_recursive_aspect_simultaneity.py",
+      "issue": "Sequential causal terms detected in non-temporal analytical fields.",
+      "failure_class": "hidden sequentialization",
+      "detected_terms": ["after", "then"],
+      "affected_artifacts": [
+        "gr_like_projection_domain_registry.json",
+        "projection_coherence_stress_test_scaffold.json",
+        "gr_like_projection_domain_registry.md"
+      ],
+      "root_cause": "Colloquial use of 'after' (e.g., 'after transformation') in analytical descriptions."
+    }
+  ]
+}

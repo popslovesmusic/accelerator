@@ -1,0 +1,24 @@
+{
+  "campaign_id": "EC-20260517-HIGGS-001",
+  "tool_family": "field_dynamics",
+  "prediction_binding_id": "PB-001-THRESHOLD",
+  "dataset_ids": ["DS-001-SYNTHETIC-STOCHASTIC"],
+  "tools": {
+    "cpp": "satp_higgs_sim_cpp",
+    "python": "satp_higgs_sim_v1"
+  },
+  "metrics": ["phi_rms", "precision_drift"],
+  "tolerances": {
+    "absolute": 1e-6,
+    "relative": 1e-4
+  },
+  "falsification_protocols": [
+    "shuffle_control",
+    "parameter_ablation"
+  ],
+  "governance_boilerplate": {
+    "source_relation": "(E≠0) ⇔R δ(E>0)",
+    "non_separability_acknowledged": true,
+    "required_statement": "Observed signatures are interpreted only through restricted local analog structure."
+  }
+}

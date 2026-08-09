@@ -1,0 +1,80 @@
+{
+  "patch_id": "MPF-RDYN-007",
+  "name": "Embedded Observer Dynamic Constraints Registry",
+  "status": "active",
+  "metric_status": "DYNAMICS_SCAFFOLD_ONLY",
+  "purpose": "Track how embedded participation dynamically alters reconstruction accessibility and projection stability.",
+  "governance_status": {
+    "theorem_status": "NOT_PROVEN",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL",
+    "non_separability_acknowledged": true,
+    "source_relation": "(E≠0) ⇔R δ(E>0)"
+  },
+  "dynamic_constraints": [
+    {
+      "constraint_id": "observer_trace_feedback",
+      "definition": "The act of reconstruction creates new trace metadata that the observer then perceives as part of the local neighborhood.",
+      "dynamic_impact": "FEEDBACK_LOOP"
+    },
+    {
+      "constraint_id": "measurement_deformation",
+      "definition": "Sequential dynamic measurements within a neighborhood distort the remaining recoverable structures.",
+      "dynamic_impact": "RECONSTRUCTION_DISTORTION"
+    },
+    {
+      "constraint_id": "tool_generated_projection_shift",
+      "definition": "Refining analysis tools within a dynamic flow alters the observer's projection-domain alignment.",
+      "dynamic_impact": "ALIGNMENT_DRIFT"
+    },
+    {
+      "constraint_id": "recursive_reference_amplification",
+      "definition": "Embedded observers tend to over-weight local stabilization basins as universal references.",
+      "dynamic_impact": "LOCAL_BIAS_AMPLIFICATION"
+    },
+    {
+      "constraint_id": "embedded_accessibility_decay",
+      "definition": "The gradual loss of accessibility to distal neighborhoods as the observer stabilizes within a local flow.",
+      "dynamic_impact": "HORIZON_CONTRACTION"
+    }
+  ],
+  "dynamic_bounds": [
+    {
+      "bound_id": "EOD_LOCAL_FEEDBACK_ONLY",
+      "definition": "Observer dynamics remain contained within the local neighborhood stabilization basin.",
+      "dynamic_scope": "LOCAL"
+    },
+    {
+      "bound_id": "EOD_PARTIAL_TRACE_LOCK",
+      "definition": "The observer is dynamically locked into a subset of available aspect roles due to feedback history.",
+      "dynamic_scope": "RESTRICTED"
+    },
+    {
+      "bound_id": "EOD_CONFLICT_DEPENDENT",
+      "definition": "Observer stability is dependent on the persistence of specific projection tensions.",
+      "dynamic_scope": "CONFLICT_STABILIZED"
+    },
+    {
+      "bound_id": "EOD_EXTERNALITY_FORBIDDEN",
+      "definition": "Total reconstruction is blocked by the impossibility of detached observer dynamics.",
+      "dynamic_scope": "BLOCKING"
+    }
+  ],
+  "governance_rules": [
+    {
+      "rule_id": "EOD-RULE-001",
+      "rule": "Every dynamic reconstruction analysis must account for observer-trace feedback."
+    },
+    {
+      "rule_id": "EOD-RULE-002",
+      "rule": "Claims of 'objective observer dynamics' or 'measurement-independent reconstruction' trigger immediate REJECT_ESCALATION."
+    }
+  ],
+  "forbidden_claims": [
+    "Embedded observers can achieve detached dynamic analysis.",
+    "Measurement deformation can be 'compensated' for to reveal source truth.",
+    "Dynamic bounds derive the observer-dependent physics of relativity."
+  ],
+  "source_relation": "(E≠0) ⇔R δ(E>0)",
+  "non_separability_acknowledged": true
+}

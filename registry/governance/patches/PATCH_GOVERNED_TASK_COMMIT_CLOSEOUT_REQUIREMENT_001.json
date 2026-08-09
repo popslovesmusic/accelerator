@@ -1,0 +1,50 @@
+{
+  "patch_id": "PATCH_GOVERNED_TASK_COMMIT_CLOSEOUT_REQUIREMENT_001",
+  "title": "Governed Task Commit Closeout Requirement",
+  "status": "APPLIED",
+  "applied_on": "2026-07-23T01:52:50Z",
+  "type": "governance_closeout_rule",
+  "mode": "surgical_additive",
+  "authority_effect": "CLOSEOUT_PROCEDURE_ENFORCEMENT_ONLY",
+  "user_authorization": "add to governance a requirement to commit after each task",
+  "db_runtime_gate": {
+    "queried_before_patch": true,
+    "freshness_decision": "allow",
+    "agents_instruction_authority": "allow",
+    "gemini_instruction_authority": "allow",
+    "validation_routine_instruction_authority": "allow",
+    "governance_constitution_decision": "defer_to_canonical_fallback",
+    "fallback_applied": true
+  },
+  "purpose": "Require governed state-changing tasks to close with an intentional task-scoped Git commit after validation and textbook synchronization, while keeping dirty-worktree closeout failures explicit rather than silent.",
+  "modified_surfaces": [
+    "AGENTS.md",
+    "GEMINI.md",
+    "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+    "governance/live/governance_constitution.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance_hash_registry.json",
+    "registry/governance/patches/PATCH_GOVERNED_TASK_COMMIT_CLOSEOUT_REQUIREMENT_001.json"
+  ],
+  "enforced_invariants": [
+    "Every governed task that changes repository state must end with an intentional Git commit before closeout.",
+    "The commit must be created only after required validation and textbook synchronization are complete.",
+    "The commit must cover the task-scoped governed delta rather than unrelated worktree residue.",
+    "If unrelated dirty state prevents an isolated commit, the task remains open and the blocker must be recorded explicitly.",
+    "Read-only audit tasks remain exempt because they do not modify governed state."
+  ],
+  "textbook_audit": {
+    "status": "NO_LINKED_STALE_SECTION_FOUND",
+    "result": "The textbook mentions textbook synchronization and source_commit provenance, but no section projects governed task closeout policy in a way that required patching for this rule."
+  },
+  "closeout_commit_status": {
+    "status": "BLOCKED_BY_PREEXISTING_DIRTY_WORKTREE",
+    "reason": "The repository already contains unrelated pending modifications across governed authority and output surfaces, so an isolated task-scoped closeout commit cannot be created safely within this turn."
+  },
+  "local_governance": {
+    "root_agents_applied": true,
+    "local_gemini_found_and_applied": true,
+    "docs_agents_applied": true,
+    "registry_agents_applied": true
+  }
+}

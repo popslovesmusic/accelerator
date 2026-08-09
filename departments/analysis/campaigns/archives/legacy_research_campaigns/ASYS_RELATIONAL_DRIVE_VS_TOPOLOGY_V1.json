@@ -1,0 +1,102 @@
+{
+  "campaign_spec": {
+    "id": "ASYS_RELATIONAL_DRIVE_VS_TOPOLOGY_V1",
+    "critical_open_problem": "Can large-scale ordering be shown to arise primarily from asymmetric relational dynamics rather than from favorable topology/coherence propagation effects?",
+    "status": "proposed_for_induction",
+
+    "hypothesis": {
+      "statement": "Large-scale relational ordering is a causal consequence of the orientation-mediated asymmetric relational compass -(i_a); favorable topology acts only as an amplifier, not a primary driver. In the absence of node asymmetry, even optimal topologies fail to generate persistent ordering fields.",
+      "canonical_grounding": [
+        "Pi_sel[D(S1|S2)] <->_xa Pi_sel[D(S2|S1)] ↑ -(i_a)",
+        "D(S1|S2) != D(S2|S1)"
+      ]
+    },
+
+    "rigor_mandate": {
+      "level": "C6_Publishable",
+      "required_tools": [
+        "triadic_closure_substrate_sim_cpp",
+        "optical_reservoir_sim_v1"
+      ],
+      "independent_measurement_count": 2,
+      "minimum_seeds": 32,
+      "backend_preference": "C++ (SYCL)"
+    },
+
+    "test_design_decoupled_control": {
+      "strategy": "Topological Decoupling",
+      "description": "Systematically isolate asymmetry from topology by testing four configuration quadrants.",
+      "quadrants": [
+        {
+          "id": "Q1_ASYM_TOP",
+          "name": "Asymmetric / Optimal Topology",
+          "parameters": { "asymmetry": 1.0, "topology": "ring_ordered" },
+          "prediction": "Maximum ordering coherence."
+        },
+        {
+          "id": "Q2_SYM_TOP",
+          "name": "Symmetric / Optimal Topology",
+          "parameters": { "asymmetry": 0.0, "topology": "ring_ordered" },
+          "prediction": "Coherence collapse or noise dominance (Critical Falsification)."
+        },
+        {
+          "id": "Q3_ASYM_RAND",
+          "name": "Asymmetric / Random Topology",
+          "parameters": { "asymmetry": 1.0, "topology": "random_sparse" },
+          "prediction": "Emergent local ordering despite unfavorable topology (Evidence for hypothesis)."
+        },
+        {
+          "id": "Q4_SYM_RAND",
+          "name": "Symmetric / Random Topology",
+          "parameters": { "asymmetry": 0.0, "topology": "random_sparse" },
+          "prediction": "Absolute disorder."
+        }
+      ]
+    },
+
+    "measurement_protocol": {
+      "primary_observable": "relational_compass_coherence",
+      "secondary_observables": [
+        "space_app_ordering_metric",
+        "global_inside_rate",
+        "residue_density"
+      ],
+      "scaling_target": "100,000 to 1,000,000 triads"
+    },
+
+    "falsification_attacks_highest_rigor": {
+      "vectors": [
+        {
+          "id": "FV_TOPO_DOMINANCE",
+          "name": "Topology Dominance Test",
+          "attack": "Use perfectly ordered lattice with symmetric D(S1|S2)=D(S2|S1).",
+          "failure_condition": "System generates persistent large-scale ordering field without asymmetry.",
+          "implication": "Topology is a primary driver, falsifying the asymmetry-first hypothesis."
+        },
+        {
+          "id": "FV_ORIENTATION_SHUFFLE",
+          "name": "Orientation Reference Scramble",
+          "attack": "Maintain asymmetry but continuously randomize -(i_a) orientation references.",
+          "failure_condition": "Ordering fields survive randomization.",
+          "implication": "Asymmetry alone is insufficient; orientation mediation is required."
+        },
+        {
+          "id": "FV_RESIDUE_NULL",
+          "name": "Zero-Residue High-Asymmetry",
+          "attack": "Maximum asymmetry but zero residue persistence (R=0).",
+          "failure_condition": "Large-scale ordering fields are stable and persistent.",
+          "implication": "Asymmetry is necessary but residue is not required for persistence, contradicting the MPF closure model."
+        }
+      ]
+    },
+
+    "success_metrics": {
+      "alpha_significance": 0.01,
+      "correlation_requirement": "Asymmetry-to-Ordering correlation > 0.8; Topology-to-Ordering correlation < 0.4 (when asymmetry is fixed)."
+    },
+
+    "maximum_supported_claim": {
+      "statement": "Large-scale ordering is causally driven by orientation-mediated asymmetric relational dynamics; favorable topology is a secondary amplifier that cannot sustain ordering in the absence of node asymmetry."
+    }
+  }
+}

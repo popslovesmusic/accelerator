@@ -1,0 +1,43 @@
+{
+  "patch_id": "PATCH_PI_MEMORY_TENSOR_RT_007",
+  "campaign_id": "CAMPAIGN_MEMORY_TENSOR_RT_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-03",
+  "type": "governance_patch",
+  "title": "Register Missing Computational Semantics Provenance",
+  "depends_on": [
+    "PATCH_PI_MEMORY_TENSOR_RT_006"
+  ],
+  "purpose": "Resolve the missing PATCH_PI_MEMORY_TENSOR_RT_005 registry gap without fabricating prior execution history.",
+  "created_artifacts": [
+    "registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_005.json"
+  ],
+  "updated_artifacts": [
+    "registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_006.json"
+  ],
+  "notes": [
+    "PATCH_PI_MEMORY_TENSOR_RT_005 was registered as a late provenance entry.",
+    "PATCH_PI_MEMORY_TENSOR_RT_006 now records the dependency repair without asserting prior execution history."
+  ],
+  "summary": {
+    "late_entry": "PATCH_PI_MEMORY_TENSOR_RT_005",
+    "original_status": "design_present_not_registry_committed",
+    "registry_repair_claim": "claimed",
+    "execution_claim": "not_claimed",
+    "history_integrity": "preserved"
+  },
+  "source_artifacts": [
+    "registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_006.json",
+    "registry/computational_semantics/memory_tensor_rt_semantics.json",
+    "registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_005.json"
+  ],
+  "validation": {
+    "required": [
+      "late_entry_declares_no_execution_claim",
+      "registry_repair_claim_present",
+      "dependency_note_updated",
+      "global_validate_pass"
+    ],
+    "result": "pass"
+  }
+}

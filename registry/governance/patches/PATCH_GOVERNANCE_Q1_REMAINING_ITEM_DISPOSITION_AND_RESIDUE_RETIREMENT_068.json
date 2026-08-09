@@ -1,0 +1,115 @@
+{
+  "patch_id": "PATCH_GOVERNANCE_Q1_REMAINING_ITEM_DISPOSITION_AND_RESIDUE_RETIREMENT_068",
+  "title": "Q1 Remaining Item Disposition and Residue Retirement",
+  "status": "APPLIED",
+  "applied_on": "2026-07-15T16:05:00-04:00",
+  "type": "disposition_and_residue_retirement",
+  "depends_on": [
+    "PATCH_GOVERNANCE_Q1_GOVERNED_CONTEXT_CAPSULE_SUPPORTING_VALIDATOR_SCOPE_RESOLUTION_067"
+  ],
+  "mode": "additive",
+  "authority_effect": "NONE",
+  "purpose": "Process the six remaining Q1 items by prospectively closing the single neutralized validation-authority item, retiring two obsolete residue items, and reclassifying three items outside Q1 without marking them globally resolved.",
+  "summary": "This patch exhausts the local Q1 queue without changing live validation authority. Q1-VAL-004 is prospectively closed because later governance already neutralizes the historical audit ambiguity. Q1-VAL-007 and Q1-VAL-009 are retired as obsolete compiled-test residue with no invocation, reduction, registry-write, or live governance mutation effect. Q1-VAL-001, Q1-VAL-005, and Q1-VAL-006 are removed from Q1 and reclassified outside the validation-authority family while remaining globally unresolved pending downstream family assignment.",
+  "q1_item_disposition_per_item": {
+    "Q1-VAL-001": {
+      "global_ambiguity_id": "AMB-GOV-SURF-0882",
+      "prior_q1_state": "OUTSIDE_Q1_SCOPE",
+      "final_q1_disposition": "RECLASSIFIED_OUTSIDE_Q1",
+      "global_resolution_status": "UNRESOLVED_RECLASSIFIED_OUT_OF_Q1",
+      "destination_family_if_reclassified": "UNASSIGNED_PENDING_CLASSIFICATION"
+    },
+    "Q1-VAL-004": {
+      "global_ambiguity_id": "AMB-GOV-SURF-0107",
+      "prior_q1_state": "NEUTRALIZED_BY_EXISTING_GOVERNANCE",
+      "final_q1_disposition": "PROSPECTIVELY_CLOSED_NEUTRALIZED_BY_EXISTING_GOVERNANCE",
+      "global_resolution_status": "PROSPECTIVELY_CLOSED"
+    },
+    "Q1-VAL-005": {
+      "global_ambiguity_id": "AMB-GOV-SURF-0664",
+      "prior_q1_state": "OUTSIDE_Q1_SCOPE",
+      "final_q1_disposition": "RECLASSIFIED_OUTSIDE_Q1",
+      "global_resolution_status": "UNRESOLVED_RECLASSIFIED_OUT_OF_Q1",
+      "destination_family_if_reclassified": "UNASSIGNED_PENDING_CLASSIFICATION"
+    },
+    "Q1-VAL-006": {
+      "global_ambiguity_id": "AMB-GOV-SURF-0676",
+      "prior_q1_state": "OUTSIDE_Q1_SCOPE",
+      "final_q1_disposition": "RECLASSIFIED_OUTSIDE_Q1",
+      "global_resolution_status": "UNRESOLVED_RECLASSIFIED_OUT_OF_Q1",
+      "destination_family_if_reclassified": "UNASSIGNED_PENDING_CLASSIFICATION"
+    },
+    "Q1-VAL-007": {
+      "global_ambiguity_id": "AMB-GOV-SURF-1007",
+      "prior_q1_state": "OBSOLETE_TEST_OR_CONTEXT_RESIDUE",
+      "final_q1_disposition": "RETIRED_AS_OBSOLETE_RESIDUE",
+      "global_resolution_status": "RETIRED_AS_OBSOLETE_RESIDUE"
+    },
+    "Q1-VAL-009": {
+      "global_ambiguity_id": "AMB-GOV-SURF-1008",
+      "prior_q1_state": "OBSOLETE_TEST_OR_CONTEXT_RESIDUE",
+      "final_q1_disposition": "RETIRED_AS_OBSOLETE_RESIDUE",
+      "global_resolution_status": "RETIRED_AS_OBSOLETE_RESIDUE"
+    }
+  },
+  "prospectively_closed_item_ids": [
+    "Q1-VAL-004"
+  ],
+  "retired_residue_item_ids": [
+    "Q1-VAL-007",
+    "Q1-VAL-009"
+  ],
+  "reclassified_item_ids": [
+    "Q1-VAL-001",
+    "Q1-VAL-005",
+    "Q1-VAL-006"
+  ],
+  "destination_family_per_reclassified_item": {
+    "Q1-VAL-001": "UNASSIGNED_PENDING_CLASSIFICATION",
+    "Q1-VAL-005": "UNASSIGNED_PENDING_CLASSIFICATION",
+    "Q1-VAL-006": "UNASSIGNED_PENDING_CLASSIFICATION"
+  },
+  "counts": {
+    "q1_count_before": 6,
+    "q1_count_after": 0,
+    "global_blocking_ambiguity_count_before": 490,
+    "global_blocking_ambiguity_count_after": 487
+  },
+  "patch_002_state": {
+    "status": "PARTIAL",
+    "authority_effect": "NONE",
+    "remaining_blocking_ambiguities": 487,
+    "changed": false
+  },
+  "completion_assertions": {
+    "q1_items_processed": 6,
+    "q1_remaining_item_count": 0,
+    "reclassified_items_marked_globally_resolved": false,
+    "patch_002_status_changed": false,
+    "patch_002_authority_effect_changed": false,
+    "full_project_validation_run": false
+  },
+  "artifacts": {
+    "disposition_record": "outputs/governance_inventory/q1_remaining_item_disposition.json",
+    "updated_q1_queue": "outputs/governance_inventory/q1_remaining_item_disposition_active_queue.json",
+    "updated_global_dispositions": "outputs/governance_inventory/q1_remaining_item_disposition_global_updates.json"
+  },
+  "validation_results": {
+    "targeted_q1_disposition_test": {
+      "command": "python -m pytest tests/governance_validation/test_patch_068_q1_remaining_item_disposition_and_residue_retirement.py -q",
+      "status": "PASS"
+    },
+    "json_parse": {
+      "status": "PASS"
+    },
+    "git_diff_check": {
+      "command": "git diff --check",
+      "status": "PASS_WITH_CRLF_WARNINGS_ONLY"
+    },
+    "git_status": {
+      "command": "git status --short",
+      "status": "PASS_REVIEWED"
+    }
+  },
+  "full_project_validation_status": "SUSPENDED_PENDING_VALIDATOR_DEPARTMENT_COMPLETION"
+}

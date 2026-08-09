@@ -1,0 +1,128 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_023",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-05",
+  "type": "governance_patch",
+  "artifact_type": "governance_patch",
+  "title": "Continuation Failure Classification and Recovery Boundaries",
+  "priority": "HIGH",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_021",
+    "PATCH_PI_RT_CALCULUS_022"
+  ],
+  "purpose": "Classify continuation failure modes and define the boundary between diagnostic failure, recoverable failure, and non-recoverable undefined composition.",
+  "core_claim": "⊥C is the general diagnostic continuation-failure marker; typed subclasses refine why the continuation failed without creating lawful continuation objects.",
+  "canonical_claims": [
+    {
+      "id": "CLAIM_023_001",
+      "statement": "⊥C is the general diagnostic continuation-failure marker.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_023_002",
+      "statement": "Typed failure classes refine ⊥C without creating lawful continuation objects.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_023_003",
+      "statement": "Failure classification records why continuation failed.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_023_004",
+      "statement": "Classification is diagnostic and does not itself recover continuation.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_023_005",
+      "statement": "Recovery requires an explicit future recovery rule and is not automatic.",
+      "status": "canonical"
+    }
+  ],
+  "formal_objects": [
+    {
+      "symbol": "FC_023",
+      "name": "Continuation Failure Classification",
+      "definition": "Diagnostic classification of continuation failure into endpoint, type, admissibility, and residue subclasses.",
+      "primitive": false,
+      "domain": "continuation_failure_layer"
+    }
+  ],
+  "failure_classes": [
+    {
+      "id": "FC_023_001",
+      "name": "Endpoint Failure",
+      "symbol": "⊥C_endpoint",
+      "meaning": "Failure caused by codomain/domain mismatch."
+    },
+    {
+      "id": "FC_023_002",
+      "name": "Type Failure",
+      "symbol": "⊥C_type",
+      "meaning": "Failure caused by incompatible typed continuation domains without an explicit transition rule."
+    },
+    {
+      "id": "FC_023_003",
+      "name": "Admissibility Failure",
+      "symbol": "⊥C_adm",
+      "meaning": "Failure caused by violation of admissibility constraints."
+    },
+    {
+      "id": "FC_023_004",
+      "name": "Residue Failure",
+      "symbol": "⊥C_res",
+      "meaning": "Failure caused by invalid residue propagation."
+    }
+  ],
+  "recovery_boundaries": [
+    {
+      "id": "REC_BOUND_023_001",
+      "formal": "⊥C_x does not imply C(A,B)",
+      "meaning": "Classifying failure never creates a lawful continuation."
+    },
+    {
+      "id": "REC_BOUND_023_002",
+      "formal": "Recover(⊥C_x) undefined in this patch",
+      "meaning": "Recovery is deferred."
+    },
+    {
+      "id": "REC_BOUND_023_003",
+      "formal": "NF(⊥C_x) undefined",
+      "meaning": "Failure classes do not normalize into continuation normal forms."
+    }
+  ],
+  "explicitly_out_of_scope": [
+    "Recovery algorithm",
+    "Crisis-regime recursion",
+    "sigma_RT selector",
+    "Operational-regime execution",
+    "DB runtime debt"
+  ],
+  "validation_requirements": [
+    "Failure classes registered as diagnostic subclasses of ⊥C.",
+    "No failure class is treated as a lawful continuation.",
+    "Recovery is explicitly deferred.",
+    "RT_core remains unchanged."
+  ],
+  "required_file_updates": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_023.json",
+    "registry/formal_object_registry.json",
+    "registry/math_source_registry.json",
+    "registry/lexicon_gap_queue.json",
+    "registry/registry/lexicon_gap_queue.json"
+  ],
+  "success_criteria": {
+    "failure_classes_registered": true,
+    "no_lawful_continuation_from_failure": true,
+    "recovery_explicitly_deferred": true,
+    "rt_core_unchanged": true
+  },
+  "next_recommended_patch": {
+    "patch_id": "PATCH_PI_RT_CALCULUS_024",
+    "title": "Continuation Recovery Operator",
+    "purpose": "Define the first governed recovery operator for continuation failure subclasses, if and only if a recovery semantics patch is authorized."
+  }
+}

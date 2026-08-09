@@ -1,0 +1,243 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_035",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-05",
+  "type": "governance_patch",
+  "artifact_type": "governance_patch",
+  "title": "Canonical Reduction Strategy",
+  "priority": "HIGH",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_034"
+  ],
+  "mode": "additive",
+  "basis": {
+    "source_patches": [
+      "PATCH_PI_RT_CALCULUS_034"
+    ],
+    "source_surfaces": [
+      "docs/textbook/mono_process_textbook_complete.md",
+      "registry/formal_object_registry.json",
+      "registry/math_source_registry.json",
+      "registry/lexicon_gap_queue.json",
+      "registry/registry/lexicon_gap_queue.json",
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_034.json"
+    ],
+    "scope": "Canonical reduction strategy for lawful candidate selection after EVAL_024 within bounded deterministic continuation classes; bounded confluence assumptions and process equivalence are preserved, and no strategy-correctness or universal-optimality claim is made."
+  },
+  "core_rule": {
+    "statement": "Canonical reduction strategy applies only after EVAL_024 has succeeded and a lawful candidate set has been constructed; inadmissible reductions are discarded, admissible candidates are ordered canonically, and the highest-priority lawful reduction is selected within bounded deterministic classes. The strategy preserves process equivalence and bounded confluence assumptions, and RT_core remains unchanged."
+  },
+  "purpose": "Define the canonical reduction strategy used by REDUCE_025 whenever multiple lawful reduction candidates are simultaneously admissible. This patch establishes reduction strategy semantics but does not yet prove correctness.",
+  "canonical_claims": [
+    {
+      "id": "CLAIM_035_001",
+      "statement": "Canonical reduction strategy is only evaluated after EVAL_024 has produced a lawful candidate context.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_035_002",
+      "statement": "Candidate selection is restricted to admissible lawful reductions and preserves process equivalence.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_035_003",
+      "statement": "Canonical ordering ranks admissible candidates deterministically within bounded deterministic classes.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_035_004",
+      "statement": "Canonical strategy does not alter bounded confluence assumptions or the reduction outcome taxonomy.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_035_005",
+      "statement": "RT_core remains unchanged.",
+      "status": "canonical"
+    }
+  ],
+  "scope": {
+    "adds": [
+      "Canonical reduction strategy",
+      "Reduction candidate set",
+      "Strategy ordering",
+      "Strategy admissibility",
+      "Canonical strategy invariants"
+    ],
+    "does_not_add": [
+      "Strategy correctness proof",
+      "Universal reduction optimality",
+      "Recovery operator",
+      "Parser implementation",
+      "Operational regime execution",
+      "sigma_RT selector"
+    ]
+  },
+  "formal_objects": [
+    {
+      "id": "CANONICAL_STRATEGY_035",
+      "symbol": "S(C)",
+      "name": "Canonical Reduction Strategy",
+      "definition": "The canonical strategy governing lawful reduction selection whenever multiple admissible reduction candidates exist."
+    },
+    {
+      "id": "REDUCTION_CANDIDATES_035",
+      "symbol": "Cand(C)",
+      "name": "Reduction Candidate Set",
+      "definition": "The complete set of lawful reduction candidates available after EVAL_024."
+    },
+    {
+      "id": "STRATEGY_ORDER_035",
+      "symbol": "≺S",
+      "name": "Strategy Ordering",
+      "definition": "The canonical ordering relation used to rank lawful reduction candidates."
+    },
+    {
+      "id": "STRATEGY_CLASS_035",
+      "symbol": "ClassS",
+      "name": "Strategy Class",
+      "definition": "Classification of continuation expressions according to canonical strategy applicability."
+    }
+  ],
+  "strategy_pipeline": [
+    {
+      "step": 1,
+      "operation": "Evaluate continuation using EVAL_024."
+    },
+    {
+      "step": 2,
+      "operation": "Generate Cand(C)."
+    },
+    {
+      "step": 3,
+      "operation": "Filter inadmissible candidates."
+    },
+    {
+      "step": 4,
+      "operation": "Order candidates using ≺S."
+    },
+    {
+      "step": 5,
+      "operation": "Select the canonical reduction."
+    },
+    {
+      "step": 6,
+      "operation": "Execute reduction."
+    },
+    {
+      "step": 7,
+      "operation": "Repeat until terminal outcome."
+    }
+  ],
+  "strategy_ordering_rules": [
+    "Evaluation order always precedes reduction ordering.",
+    "Only lawful candidates may participate in ordering.",
+    "Failure classification precedes candidate generation.",
+    "Canonical ordering operates only on admissible candidates.",
+    "Equivalent traces do not affect ordering.",
+    "Strategy selection is deterministic within bounded deterministic classes."
+  ],
+  "strategy_classes": [
+    {
+      "class": "Canonical",
+      "description": "Exactly one highest-priority lawful reduction exists."
+    },
+    {
+      "class": "Ambiguous",
+      "description": "Canonical ordering is presently insufficient to distinguish lawful candidates."
+    },
+    {
+      "class": "Failure",
+      "description": "No admissible reduction candidates exist because evaluation terminated in ⊥C_x."
+    }
+  ],
+  "relationships": {
+    "evaluation": "EVAL_024 precedes S(C).",
+    "determinism": "Det(C) relies upon S(C) within bounded deterministic classes.",
+    "trace": "Trace(C) records strategy decisions but does not influence them.",
+    "complexity": "κ(C) characterizes reduction complexity independently of strategy choice."
+  },
+  "invariants": [
+    "RT_core remains unchanged.",
+    "Canonical strategy operates only after successful evaluation.",
+    "Canonical strategy does not alter process equivalence.",
+    "Canonical strategy preserves bounded determinism.",
+    "Canonical strategy preserves bounded confluence assumptions.",
+    "Recovery remains deferred."
+  ],
+  "future_dependencies": [
+    "PATCH_PI_RT_CALCULUS_036 (Canonical Reduction Strategy Correctness)",
+    "PATCH_PI_RT_CALCULUS_037 (Recursive Continuation Semantics)"
+  ],
+  "textbook_changes": {
+    "chapter": "2.3.17",
+    "title": "Canonical Reduction Strategy",
+    "summary": [
+      "Introduce S(C).",
+      "Define the reduction candidate set Cand(C).",
+      "Define the strategy ordering relation ≺S.",
+      "Specify the canonical reduction pipeline.",
+      "Prepare for the strategy correctness theorem."
+    ]
+  },
+  "registry_updates": {
+    "formal_object_registry": [
+      "CANONICAL_STRATEGY_035",
+      "REDUCTION_CANDIDATES_035",
+      "STRATEGY_ORDER_035",
+      "STRATEGY_CLASS_035"
+    ],
+    "math_source_registry": [
+      "PATCH_PI_RT_CALCULUS_035"
+    ],
+    "lexicon_gap_queue": [
+      "canonical_reduction_strategy",
+      "reduction_candidate_set",
+      "strategy_ordering",
+      "strategy_class"
+    ]
+  },
+  "rt_core_impact": {
+    "modified": false,
+    "statement": "RT := [(ℰ≠0) ⇔R δα(ℰ>0)] remains unchanged."
+  },
+  "validation_requirements": [
+    "Patch record parses cleanly.",
+    "Patch depends on PATCH_PI_RT_CALCULUS_034.",
+    "The strategy is bounded by EVAL_024 and the lawful candidate set.",
+    "Strategy selection preserves process equivalence.",
+    "RT_core remains unchanged."
+  ],
+  "required_repo_changes": [
+    "Update docs/textbook/mono_process_textbook_complete.md with the canonical reduction strategy section and strategy-class documentation.",
+    "Update registry/formal_object_registry.json with the canonical reduction strategy formal objects.",
+    "Update registry/math_source_registry.json with the patch source entry.",
+    "Relock registry/math_hashes.json and registry/math_core_hashes.json after the source registry update.",
+    "Update registry/lexicon_gap_queue.json with the canonical reduction strategy, reduction candidate set, strategy ordering, and strategy class terms.",
+    "Update registry/registry/lexicon_gap_queue.json with the mirrored canonical reduction strategy, reduction candidate set, strategy ordering, and strategy class terms.",
+    "Update registry/governance_change_ledger.json with the corresponding governance ledger entry."
+  ],
+  "target_files": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/formal_object_registry.json",
+    "registry/math_source_registry.json",
+    "registry/math_hashes.json",
+    "registry/math_core_hashes.json",
+    "registry/lexicon_gap_queue.json",
+    "registry/registry/lexicon_gap_queue.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_035.json"
+  ],
+  "success_criteria": {
+    "strategy_documented": true,
+    "candidate_set_registered": true,
+    "ordering_registered": true,
+    "bounded_admissibility_preserved": true,
+    "rt_core_unchanged": true
+  },
+  "next_recommended_patch": {
+    "patch_id": "PATCH_PI_RT_CALCULUS_036",
+    "title": "Canonical Reduction Strategy Correctness",
+    "purpose": "Establish the bounded correctness of the canonical reduction strategy S(C) for admissible continuation classes without asserting universal correctness."
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "patch_id": "GOV_INDUCTION_AUTHORITY_AND_VISIBILITY_001",
+  "title": "Induction Authority and Visibility",
+  "status": "APPLIED",
+  "applied_on": "2026-08-01",
+  "priority": "CRITICAL",
+  "mode": "governed_transition",
+  "transition_authorized": true,
+  "transition_record_id": "GTR_INDUCTION_AUTHORITY_001",
+  "migration_plan_id": "MIG_INDUCTION_AUTHORITY_AND_RESEARCH_CONTINUITY_001",
+  "basis": [
+    "departments/analysis_intake/semantic_captures/GOV_INDUCTION_AUTHORITY_TRANSITION_001.json",
+    "departments/analysis_intake/receipts/GOV_INDUCTION_AUTHORITY_TRANSITION_001.receipt.json"
+  ],
+  "core_rule": {
+    "rule_id": "CORE-GOV-PRESERVATION-EXECUTION-CONTINUITY",
+    "path": "governance/core_rules/CORE-GOV-PRESERVATION-EXECUTION-CONTINUITY.json"
+  },
+  "source_artifact": {
+    "path": "departments/analysis_intake/semantic_captures/GOV_INDUCTION_AUTHORITY_TRANSITION_001.json",
+    "sha256": "227A99ECA80801DF5ECC8BDF5D0B719837833EE18F1EF3F7146AC3375571271A",
+    "size_bytes": 4869
+  },
+  "target_files": [
+    "departments/analysis_intake/induction_queue/queue_registry.json",
+    "governance/live/representation_ledger.json",
+    "scripts/sync_governance.py"
+  ],
+  "required_repo_changes": [
+    "Register explicit induction authority and visible blocked-state semantics.",
+    "Preserve source hashes and queue identity continuity.",
+    "Synchronize ledger, notes, and runtime projections after validated queue registration.",
+    "Do not mutate source artifacts or promote claims."
+  ],
+  "success_criteria": [
+    "Governed transition gate returns allow.",
+    "Repeated migration is idempotent.",
+    "Eligible records reach research registration or visible blocked state.",
+    "No preserved source is modified."
+  ],
+  "depends_on": []
+}

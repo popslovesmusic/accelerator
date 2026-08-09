@@ -1,0 +1,72 @@
+{
+  "campaign_id": "distinction_density_entropy_001",
+  "status": "EXECUTED",
+  "mapping": "S_D/k_B = -sum(q_D log q_D), q_D = rho_D/sum(rho_D)",
+  "candidate_generator": "ideal_gas: 16 uniform admissible cells per volume unit; two_level and ising_2x2: uniform state density",
+  "forbidden_candidate_inputs": [
+    "Omega",
+    "S_SM",
+    "Z",
+    "p_SM",
+    "target_entropy"
+  ],
+  "tolerance": 1e-10,
+  "benchmarks": {
+    "ideal_gas": {
+      "states": [
+        {
+          "volume": 1.0
+        },
+        {
+          "volume": 2.0
+        },
+        {
+          "volume": 4.0
+        },
+        {
+          "volume": 8.0
+        }
+      ]
+    },
+    "two_level": {
+      "states": [
+        {
+          "temperature": 0.5
+        },
+        {
+          "temperature": 1.0
+        },
+        {
+          "temperature": 2.0
+        },
+        {
+          "temperature": 4.0
+        }
+      ]
+    },
+    "ising_2x2": {
+      "states": [
+        {
+          "temperature": 0.5,
+          "field": 0.0
+        },
+        {
+          "temperature": 1.0,
+          "field": 0.0
+        },
+        {
+          "temperature": 2.0,
+          "field": 0.0
+        },
+        {
+          "temperature": 4.0,
+          "field": 0.0
+        }
+      ]
+    }
+  },
+  "controls": [
+    "uniform_density",
+    "permutation_control"
+  ]
+}

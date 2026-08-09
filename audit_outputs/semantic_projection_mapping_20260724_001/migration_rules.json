@@ -1,0 +1,138 @@
+{
+  "packet_id": "ACELLORATOR_SEMANTIC_PROJECTION_MAPPING_20260724_001",
+  "rules": [
+    {
+      "legacy_table": "artifacts",
+      "classification": "PROJECTION",
+      "source": [
+        "registry JSON/Markdown source manifests",
+        "docs Markdown/JSON"
+      ],
+      "rule": "Index each governed source file by path/hash and preserve stable artifact identifiers."
+    },
+    {
+      "legacy_table": "audit_reports",
+      "classification": "PROJECTION",
+      "source": [
+        "governed JSON reports",
+        "governed Markdown reports"
+      ],
+      "rule": "Project report metadata from governed JSON/Markdown reports."
+    },
+    {
+      "legacy_table": "claim_evidence_links",
+      "classification": "PROJECTION",
+      "source": [
+        "governed JSON reports",
+        "governed Markdown reports"
+      ],
+      "rule": "Resolve claim and evidence references by stable IDs and hashes."
+    },
+    {
+      "legacy_table": "compressed_residue",
+      "classification": "DERIVED",
+      "source": [
+        "deterministic runtime/index derivation from source inventory"
+      ],
+      "rule": "Derived compression/materialization output; recomputable."
+    },
+    {
+      "legacy_table": "db_snapshot_refresh_metadata",
+      "classification": "DERIVED",
+      "source": [
+        "deterministic runtime/index derivation from source inventory"
+      ],
+      "rule": "Derived snapshot freshness metadata."
+    },
+    {
+      "legacy_table": "debt_runtime_projection",
+      "classification": "DERIVED",
+      "source": [
+        "deterministic runtime/index derivation from source inventory"
+      ],
+      "rule": "Recompute from research debt and runtime inputs."
+    },
+    {
+      "legacy_table": "governance_decision_log",
+      "classification": "PROJECTION",
+      "source": [
+        "registry JSON governance records",
+        "audit_outputs/* governance packets"
+      ],
+      "rule": "Project governance JSON metadata; store evidence by content-addressed reference, not inline duplication."
+    },
+    {
+      "legacy_table": "governance_events",
+      "classification": "PROJECTION",
+      "source": [
+        "registry JSON governance records",
+        "audit_outputs/* governance packets"
+      ],
+      "rule": "Project decision events from governance records."
+    },
+    {
+      "legacy_table": "orientation_status_types",
+      "classification": "AUTHORITATIVE",
+      "source": [
+        "registry authority JSON",
+        "governance Markdown"
+      ],
+      "rule": "Load governed enumerated status definitions."
+    },
+    {
+      "legacy_table": "registry_snapshots",
+      "classification": "PROJECTION",
+      "source": [
+        "registry JSON/Markdown source manifests",
+        "docs Markdown/JSON"
+      ],
+      "rule": "Materialize source inventory roots and deterministic deltas."
+    },
+    {
+      "legacy_table": "semantic_authority_events",
+      "classification": "PROJECTION",
+      "source": [
+        "registry authority JSON",
+        "governance Markdown"
+      ],
+      "rule": "Project authority events in sequence order."
+    },
+    {
+      "legacy_table": "semantic_authority_map",
+      "classification": "PROJECTION",
+      "source": [
+        "registry authority JSON",
+        "governance Markdown"
+      ],
+      "rule": "Project authority declarations from registry records."
+    },
+    {
+      "legacy_table": "sqlite_sequence",
+      "classification": "OBSOLETE_OR_UNCLASSIFIED",
+      "source": [],
+      "rule": "No deterministic rule assigned."
+    },
+    {
+      "legacy_table": "supersession_edges",
+      "classification": "PROJECTION",
+      "source": [
+        "governed JSON reports",
+        "governed Markdown reports"
+      ],
+      "rule": "Build deterministic edges from supersession fields."
+    },
+    {
+      "legacy_table": "tool_health",
+      "classification": "DERIVED",
+      "source": [
+        "deterministic runtime/index derivation from source inventory"
+      ],
+      "rule": "Recompute from deterministic tool/runtime observations."
+    }
+  ],
+  "prohibited": [
+    "overwrite legacy database",
+    "automatic cutover",
+    "delete unmatched legacy records"
+  ]
+}

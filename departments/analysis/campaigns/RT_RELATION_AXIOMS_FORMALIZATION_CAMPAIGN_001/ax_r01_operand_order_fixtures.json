@@ -1,0 +1,25 @@
+{
+  "fixture_set_id": "AX-R01_OPERAND_ORDER_FIXTURES_001",
+  "axiom_id": "AX-R01_OPERAND_ORDER",
+  "status": "PROVISIONAL_PENDING_VALIDATION",
+  "typed_signature": "| : BoundedSymmetry × UnboundedSymmetry -> SymmetryCondition",
+  "order_sensitive": true,
+  "positive": [
+    {"fixture_id":"AX-R01-POS-001","expression":"<S> | >S<","left_type":"BoundedSymmetry","right_type":"UnboundedSymmetry","expected":"WELL_FORMED","expected_return_type":"SymmetryCondition"},
+    {"fixture_id":"AX-R01-POS-002","expression":"b | u","premises":["b : BoundedSymmetry","u : UnboundedSymmetry"],"expected":"WELL_FORMED","expected_return_type":"SymmetryCondition"}
+  ],
+  "reversed": [
+    {"fixture_id":"AX-R01-REV-001","expression":">S< | <S>","left_type":"UnboundedSymmetry","right_type":"BoundedSymmetry","expected":"MALFORMED_OPERAND_ORDER"},
+    {"fixture_id":"AX-R01-REV-002","expression":"u | b","premises":["u : UnboundedSymmetry","b : BoundedSymmetry"],"expected":"MALFORMED_OPERAND_ORDER"}
+  ],
+  "malformed": [
+    {"fixture_id":"AX-R01-MAL-001","expression":"<S> | <S>","expected":"MALFORMED_RIGHT_OPERAND_TYPE"},
+    {"fixture_id":"AX-R01-MAL-002","expression":">S< | >S<","expected":"MALFORMED_LEFT_OPERAND_TYPE"},
+    {"fixture_id":"AX-R01-MAL-003","expression":"S | >S<","expected":"MALFORMED_LEFT_OPERAND_TYPE"},
+    {"fixture_id":"AX-R01-MAL-004","expression":"<S> | S","expected":"MALFORMED_RIGHT_OPERAND_TYPE"},
+    {"fixture_id":"AX-R01-MAL-005","expression":"| <S> >S<","expected":"MALFORMED_SYNTAX"},
+    {"fixture_id":"AX-R01-MAL-006","expression":"<S> |","expected":"MISSING_RIGHT_OPERAND"},
+    {"fixture_id":"AX-R01-MAL-007","expression":"| >S<","expected":"MISSING_LEFT_OPERAND"}
+  ],
+  "negative_scope_assertions": ["No commutativity conclusion", "No substitution rule", "No composition rule", "No generic SymmetryCondition coercion"]
+}

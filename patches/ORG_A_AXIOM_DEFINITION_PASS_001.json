@@ -1,0 +1,168 @@
+{
+  "patch_id": "ORG_A_AXIOM_DEFINITION_PASS_001",
+  "status": "ACTIVE",
+  "target": "Org_a",
+  "stage": "1_ORGANIZATIONAL_CLOSURE",
+  "purpose": "Define Org_a as admissible organization over distinction-generating participation fields, using vertical-bar closure, grouped-bar closure, and orientation preservation as explicit prerequisites.",
+  "depends_on": [
+    "VERTICAL_BAR_OPERATOR_DEFINITION_PASS_001",
+    "VERTICAL_BAR_OPERATOR_GROUP_CLOSURE_PASS_001",
+    "ORIENTATION_SPACE_DEFINITION_PASS_001"
+  ],
+  "definition": {
+    "name": "Admissible Organization Operator",
+    "symbol": "Org_a",
+    "canonical_form": "Org_a(G)",
+    "reading": "Org_a(G) denotes a legally preserved organization of admissible distinction participation over a typed participation graph G.",
+    "not_equal_to": [
+      "ordinary set collection",
+      "object bundle",
+      "state container",
+      "semantic category",
+      "projection-domain taxonomy"
+    ]
+  },
+  "input_requirements": {
+    "G": "typed grouped participation graph",
+    "requires": [
+      "Adm_|^G(G)",
+      "exists o in O(G) such that Adm_O(G,o)",
+      "Eval_D^G(G)",
+      "D_G(G) > epsilon_a"
+    ],
+    "invalid_inputs": [
+      "untyped operand lists",
+      "binary pairs without declared grouping",
+      "orientation-free structures",
+      "projection-only analogies",
+      "scalar equality classes"
+    ]
+  },
+  "axioms": [
+    {
+      "axiom_id": "ORG_A_AX_001",
+      "name": "Inventory Preservation",
+      "statement": "Legal transformations under Org_a must preserve the admissible distinction inventory of G.",
+      "candidate_form": "Inv_D(G) = Inv_D(G') under G iff_R G'",
+      "meaning": "The organization may deform, regroup, or transform only if the participating distinction inventory remains traceable."
+    },
+    {
+      "axiom_id": "ORG_A_AX_002",
+      "name": "Admissibility Conservation",
+      "statement": "Every legal transformation under Org_a must preserve admissibility of the organized participation field.",
+      "candidate_form": "Org_a(G) and G iff_R G' implies Adm_a(G')",
+      "meaning": "No organization remains legal if transformation causes its distinction participation to fall below epsilon_a or violate typed participation."
+    },
+    {
+      "axiom_id": "ORG_A_AX_003",
+      "name": "Topological Consistency",
+      "statement": "Legal transformations under Org_a must preserve orientation-consistent participation structure.",
+      "candidate_form": "Org_a(G) and G iff_R G' implies G ≃_O G'",
+      "meaning": "The organization is preserved through admissible relational structure, not by visual shape or object identity."
+    }
+  ],
+  "derived_closure_candidate": {
+    "symbol": "Adm_Org",
+    "candidate_formula": "Adm_Org(G) := Adm_|^G(G) \u2227 \u2203o\u2208O(G) Adm_O(G,o) \u2227 Eval_D^G(G) \u2227 D_G(G)>epsilon_a \u2227 InvPres_D(G) \u2227 AdmCons_a(G) \u2227 TopCons_O(G)",
+    "interpretation": "An Org_a expression is admissibly closed only when grouped participation, orientation, distinction evaluation, inventory preservation, admissibility conservation, and topological consistency all hold."
+  },
+  "relationship_to_D": {
+    "statement": "Org_a does not create distinction from nothing; it organizes already evaluable admissible distinction participation.",
+    "minimal_source": "D(A|B) > epsilon_a",
+    "group_source": "D_G(G) > epsilon_a"
+  },
+  "relationship_to_iff_R": {
+    "statement": "iff_R supplies the admissible preservation relation under which Org_a transformations are judged.",
+    "candidate_rule": "G iff_R G' is legal for Org_a only when inventory, admissibility, and orientation-consistent topology are preserved."
+  },
+  "relationship_to_Sigma_D": {
+    "status": "DIRECT_UNBLOCKING_INPUT",
+    "statement": "Sigma_D can now be drafted as an equivalence class or signature of Org_a-closed distinction organizations.",
+    "candidate_next_form": "Sigma_D := [G]_{Org_a, iff_R, \u2243_O}",
+    "warning": "Sigma_D should not be defined by object identity, scalar D value, or projection-domain sameness."
+  },
+  "relationship_to_economics_debt": {
+    "ECON_DEBT_0001": {
+      "status_after_patch": "PARTIALLY_RESOLVED_PENDING_DERIVATION_PASS",
+      "reason": "Org_a axioms are now explicit, but each axiom still requires derivation or qualification from D(A|B)>epsilon_a and iff_R."
+    },
+    "ECON_DEBT_0002": {
+      "status_after_patch": "STILL_BLOCKED_PENDING_SIGMA_D_PASS",
+      "reason": "Sigma_D criteria require Org_a closure first."
+    }
+  },
+  "registry_updates_required": [
+    {
+      "file": "operator_registry.json",
+      "action": "Update Org_a from open/undefined to axiom_definition_candidate",
+      "required_fields": [
+        "symbol",
+        "canonical_form",
+        "input_requirements",
+        "axioms",
+        "derived_closure_candidate",
+        "dependencies",
+        "downstream_unblocks"
+      ]
+    },
+    {
+      "file": "formal_object_registry.json",
+      "action": "Register Org_a closure structure or update existing Org_a formal object entry",
+      "required_fields": [
+        "definition",
+        "axiom_ids",
+        "relationship_to_D",
+        "relationship_to_iff_R",
+        "relationship_to_orientation",
+        "relationship_to_Sigma_D"
+      ]
+    },
+    {
+      "file": "lexicon_gap_queue.json",
+      "action": "Move Org_a from GAP_OPEN to GAP_AXIOM_DEFINITION_CANDIDATE",
+      "condition": "Only after schema validation passes."
+    },
+    {
+      "file": "procedural_economics_ssot.md",
+      "action": "Annotate ECON_DEBT_0001 with Org_a axiom candidate references",
+      "condition": "Do not mark closed until derivation pass succeeds."
+    }
+  ],
+  "textbook_patch_required": {
+    "target_section": "Chapter 14 Stage 1 subsection or organization appendix",
+    "insert_title": "Org_a: Admissible Organization Axioms",
+    "must_state": [
+      "Org_a organizes admissible distinction participation; it does not collect objects.",
+      "Org_a requires grouped bar closure and orientation preservation.",
+      "Inventory Preservation, Admissibility Conservation, and Topological Consistency are the candidate axioms.",
+      "These axioms are definition candidates until derived or qualified from D(A|B)>epsilon_a and iff_R.",
+      "Sigma_D depends on Org_a and should not be closed before Org_a qualification."
+    ]
+  },
+  "validation_requirements": [
+    "Global validation must pass.",
+    "No economics debt may be marked fully closed by this patch alone.",
+    "OPEN_BRIDGE_001 remains open.",
+    "Sigma_D moves to ready-for-definition-pass only after Org_a candidate is registered.",
+    "Org_a must be tagged as candidate, not theorem."
+  ],
+  "forbidden_claims": [
+    "Org_a is a set operator.",
+    "Org_a closes economics_app by itself.",
+    "Org_a axioms are fully proven by this patch.",
+    "Inventory preservation means object identity preservation.",
+    "Topological consistency means visual shape preservation.",
+    "Sigma_D is now closed automatically."
+  ],
+  "expected_status_after_patch": {
+    "Org_a": "GAP_AXIOM_DEFINITION_CANDIDATE",
+    "ECON_DEBT_0001": "PARTIALLY_RESOLVED_PENDING_DERIVATION_PASS",
+    "Sigma_D": "READY_FOR_DEFINITION_PASS",
+    "ECON_DEBT_0002": "OPEN_PENDING_SIGMA_D",
+    "OPEN_BRIDGE_001": "UNCHANGED_OPEN"
+  },
+  "recommended_next_patch": {
+    "patch_id": "SIGMA_D_EQUIVALENCE_DEFINITION_PASS_001",
+    "goal": "Define Sigma_D admissible equivalence criteria using Org_a closure, iff_R preservation, and orientation equivalence."
+  }
+}

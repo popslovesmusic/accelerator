@@ -1,0 +1,80 @@
+{
+  "governance_id": "VAL-PRL-001",
+  "patch_id": "MPF-PALG-023",
+  "name": "Projection Recoverability Limits Registry",
+  "status": "active",
+  "governance_status": {
+    "theorem_status": "NOT_PROVEN",
+    "governance_status": "CANDIDATE_RECOVERABILITY_LIMITS",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL"
+  },
+  "core_rule": {
+    "name": "projection_non_recoverability_rule",
+    "short_form": "Πx(A ⇔R B) ↛ recover(A ⇔R B)",
+    "definition": "A projection output cannot reconstruct its original ⇔R source relation unless external trace metadata preserves the lost aspect, residue, and source-relation context."
+  },
+  "recoverability_classes": [
+    {
+      "class_id": "RCOV-0",
+      "name": "not_recoverable",
+      "definition": "Projected form lacks sufficient source metadata for reconstruction."
+    },
+    {
+      "class_id": "RCOV-1",
+      "name": "trace_recoverable",
+      "definition": "Projected form can point back to source relation through external trace metadata, but cannot internally reconstruct it."
+    },
+    {
+      "class_id": "RCOV-2",
+      "name": "partially_context_recoverable",
+      "definition": "Projected form preserves enough metadata to recover some aspect roles, but not full simultaneity or residue-history."
+    },
+    {
+      "class_id": "RCOV-3",
+      "name": "restricted_whole_reference_recoverable",
+      "definition": "Projected form preserves source pointer, aspect roles, and loss accounting sufficient to re-enter governed whole-relation analysis."
+    }
+  ],
+  "projection_recoverability_defaults": [
+    {
+      "projection": "equality",
+      "default_class": "RCOV-1",
+      "reason": "Equality retains substitutability only; source relation requires external trace metadata."
+    },
+    {
+      "projection": "implication",
+      "default_class": "RCOV-1",
+      "reason": "Implication preserves direction only; simultaneity and mutuality are lost."
+    },
+    {
+      "projection": "composition",
+      "default_class": "RCOV-1",
+      "reason": "Composition preserves ordering only; indivisible co-presence is lost."
+    },
+    {
+      "projection": "logical_biconditional",
+      "default_class": "RCOV-1",
+      "reason": "Biconditional preserves reciprocal truth readability only; residue-bound closure is lost."
+    }
+  ],
+  "minimum_metadata_for_reentry": [
+    "source_relation",
+    "projection_operator_id",
+    "projection_depth",
+    "aspect_roles",
+    "retained_features",
+    "lost_or_abstracted_features",
+    "non_separability_acknowledged",
+    "traceability_preserved",
+    "claim_level"
+  ],
+  "forbidden_claims": [
+    "Projection output reconstructs ⇔R by itself.",
+    "Equality recovers full residue-history.",
+    "Implication recovers simultaneity.",
+    "Composition recovers indivisibility.",
+    "Biconditional recovers recursive co-generation.",
+    "Deep projection can serve as primitive evidence."
+  ]
+}

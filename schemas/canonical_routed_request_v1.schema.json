@@ -1,0 +1,72 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Canonical Routed Request Schema",
+  "description": "Canonical request envelope produced by tools.inference_governance.request_normalization.",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "request_id",
+    "operation_code",
+    "target_scope",
+    "target_identifiers",
+    "constraints",
+    "authority_requirements",
+    "freshness_requirements",
+    "output_contract",
+    "presentation_preferences",
+    "candidate_policy_id",
+    "source_request_digest",
+    "normalization_record"
+  ],
+  "properties": {
+    "schema_id": {
+      "type": "string",
+      "const": "canonical_routed_request_v1"
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "request_id": {
+      "type": "string"
+    },
+    "operation_code": {
+      "type": "string"
+    },
+    "target_scope": {
+      "type": "object"
+    },
+    "target_identifiers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "constraints": {
+      "type": "object"
+    },
+    "authority_requirements": {
+      "type": "object"
+    },
+    "freshness_requirements": {
+      "type": "object"
+    },
+    "output_contract": {
+      "type": "object"
+    },
+    "presentation_preferences": {
+      "type": "object"
+    },
+    "candidate_policy_id": {
+      "type": "string"
+    },
+    "source_request_digest": {
+      "type": "string"
+    },
+    "normalization_record": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": true
+}

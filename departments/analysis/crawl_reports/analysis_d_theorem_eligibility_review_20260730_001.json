@@ -1,0 +1,36 @@
+{
+  "review_id": "analysis_d_theorem_eligibility_review_20260730_001",
+  "review_type": "BOUNDED_READ_ONLY_THEOREM_ELIGIBILITY_REVIEW",
+  "review_date": "2026-07-30",
+  "scope": "Assess whether the approved bounded D discharge authorizes theorem or claim elevation.",
+  "source_artifacts": [
+    {"path": "registry/math/d_semantics_obligation_registry.json", "sha256": "21B7C53312AF0639C79C3AA23ADEA3638456ABE5013B625A10297007B81C5318"},
+    {"path": "registry/proof_registry.json", "sha256": "B757F97FFD729C48842A50B59DCEA075AAD4C94E0D753CB974AC0113002E3A02"},
+    {"path": "registry/theorem_registry.json", "sha256": "F4C1B10452F78FC8CAFE6146C9C53F2B680D762992C357E66A9B4FD68A13E54F"},
+    {"path": "registry/claim_registry.json", "sha256": "07A3402B279B7D3AFA9F95A820A8EE2505746E4F75A33440FB4623B9261B450F"},
+    {"path": "registry/governance/patches/D_HUMAN_REVIEW_APPROVAL_P127_P128_20260730_001.json", "sha256": "064B053D4FF21A81DD5A3B9A73C469B792385AC285D96D35FE5F4C5AF1BAFF30"},
+    {"path": "outputs/audits/global_health_report.json", "sha256": "F91246E61334401265014EDD790946E8CC1DB8BBE8870F33CC44C9A024BD7D14"},
+    {"path": "docs/textbook/mono_process_textbook_complete.md", "sha256": "BB760AD5D09C5F10B416AE67C90404194AD0AB1CEFBF9560BA1E9F834D6401A9"}
+  ],
+  "direct_observations": [
+    "D obligations A-E are discharged or discharged-bounded in registry/math/d_semantics_obligation_registry.json.",
+    "The approval patch retains the C1_DEFINED_PROVISIONAL ceiling and blocks theorem promotion.",
+    "P125 in registry/proof_registry.json remains SCAFFOLD_PENDING_DISCHARGE and lists OBL-D-001D/E as open.",
+    "registry/theorem_registry.json contains no D theorem target eligible for promotion.",
+    "Global validation is warning-level with no failed stages."
+  ],
+  "eligibility_assessment": {
+    "status": "NOT_YET_ELIGIBLE",
+    "decision": "BLOCK",
+    "reason": "The proof registry projection is stale relative to the approved bounded D-obligation disposition, and the claim ceiling remains C1. The mismatch must be reconciled before theorem eligibility can be assessed consistently.",
+    "theorem_promotion": "BLOCKED",
+    "claim_elevation": "BLOCKED"
+  },
+  "required_reconciliation": [
+    "Update or supersede P125 proof-registry disposition so it no longer reports D-001D/E as open, while preserving its bounded limitations.",
+    "Rerun registry alignment, textbook freshness, and global validation.",
+    "Perform a second theorem-eligibility review after the projections agree."
+  ],
+  "next_action": "RECONCILE_P125_PROOF_REGISTRY",
+  "what_this_review_does_not_authorize": ["proof-registry mutation", "theorem promotion", "claim elevation", "external physical interpretation"]
+}

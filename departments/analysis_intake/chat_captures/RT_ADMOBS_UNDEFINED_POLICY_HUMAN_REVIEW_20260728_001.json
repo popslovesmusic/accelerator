@@ -1,0 +1,48 @@
+{
+  "capture_type": "CHAT_SEMANTIC_CAPTURE",
+  "source_channel": "current_conversation_chat",
+  "packet_id": "RT_ADMOBS_UNDEFINED_POLICY_HUMAN_REVIEW_20260728_001",
+  "packet_type": "RT_HUMAN_SEMANTIC_DECISION",
+  "capture_timestamp_utc": "2026-07-28T17:35:00Z",
+  "status": "APPROVED_FOR_PROVISIONAL_PLACEMENT",
+  "canonicality": "NON_CANONICAL_CANDIDATE",
+  "claim_ceiling": "C1_MODEL_RELATIVE",
+  "decision": {"selected_policy": "EXPLICIT_PARTIAL_CLASSIFICATION", "summary": "Undefined orientation evaluations do not invalidate established classifications, but they prevent Excl_obs_x from claiming total-family closure."},
+  "classification_model": {
+    "admissible_family": "Omega_x_pos := {o in Omega_obs | AdmObs_x(o) = TRUE}",
+    "excluded_family": "Omega_x_neg := {o in Omega_obs | AdmObs_x(o) = FALSE}",
+    "undefined_family": "Omega_x_undef := {o in Omega_obs | AdmObs_x(o) = UNDEFINED}",
+    "partial_result": "Excl_obs_x_partial(Omega_obs) := (Omega_x_pos, Omega_x_neg, Omega_x_undef)",
+    "totality_condition": "IsTotal_x := (Omega_x_undef = empty)"
+  },
+  "semantic_rules": [
+    "UNDEFINED is neither TRUE nor FALSE.",
+    "Undefined evaluation for one orientation does not revoke witnesses established for others.",
+    "Any nonempty Omega_x_undef prevents total Excl_obs_x classification.",
+    "Omega_x_undef remains explicit provenance and may not be discarded.",
+    "TOTAL_ORIENTATION_EXCLUSION requires Omega_x_pos = empty and Omega_x_undef = empty.",
+    "Omega_x_pos = empty with Omega_x_undef nonempty is INDETERMINATE_ADMISSIBILITY."
+  ],
+  "result_states": {
+    "TOTAL_CLASSIFICATION": "Omega_x_undef = empty",
+    "PARTIAL_CLASSIFICATION": "Omega_x_undef != empty and (Omega_x_pos != empty or Omega_x_neg != empty)",
+    "TOTAL_ORIENTATION_EXCLUSION": "Omega_x_pos = empty and Omega_x_undef = empty",
+    "INDETERMINATE_ADMISSIBILITY": "Omega_x_pos = empty and Omega_x_undef != empty",
+    "TOTAL_UNDEFINED_INVOCATION": "Omega_x_undef = Omega_obs"
+  },
+  "downstream_policy": {
+    "default_rule": "RefOrient requires TOTAL_CLASSIFICATION.",
+    "partial_exception": {"name": "PARTIAL_SUFFICIENCY_WITNESS", "required_statement": "A selected admissible orientation remains admissible and reference-determining under every permitted resolution of Omega_x_undef.", "effect": "RefOrient may proceed provisionally without treating unresolved orientations as excluded.", "status": "EXPLICIT_WITNESS_REQUIRED"},
+    "prohibited_inference": "One admissible orientation does not prove unresolved orientations are irrelevant."
+  },
+  "delta_a_bridge": {
+    "true": "AdmObs_x(o) = TRUE permits Gamma_O for that orientation.",
+    "false": "AdmObs_x(o) = FALSE rejects Gamma_O for that orientation.",
+    "undefined": "AdmObs_x(o) = UNDEFINED leaves Gamma_O undefined and cannot produce positive delta_a admission.",
+    "restriction": "Undefined is not coerced to FALSE."
+  },
+  "rationale": ["Blocking the entire family discards valid local witnesses.", "Coercing undefined to exclusion confuses missing evaluation with negative evaluation.", "Explicit partial classification preserves unresolved distinction as residue.", "Totality remains a stronger closure property rather than an assumption."],
+  "authorized_chain": {"total_path": "AdmObs_x evaluations -> Excl_obs_x total partition -> RefOrient -> [Asym]_x -> <S>_x", "partial_path": "AdmObs_x evaluations -> Excl_obs_x partial partition -> unresolved residue OR PartialSufficiencyWitness -> provisional RefOrient"},
+  "next_action": "Define PartialSufficiencyWitness and determine whether provisional RefOrient outputs may enter delta_a or remain non-realizing candidates.",
+  "authorization_limits": ["Provisional placement only", "No canonical registry mutation", "No textbook mutation", "No delta_a rebinding", "No D-obligation discharge", "Human review remains required"]
+}

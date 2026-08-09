@@ -1,0 +1,58 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Registry for Phase 2 operational stability test cases and iteration rules.",
+    "status": "provisional",
+    "last_updated": "2026-05-11"
+  },
+  "test_cases": [
+    {
+      "case_id": "STC-001",
+      "test_reference": "OST-PV-001",
+      "description": "Epsilon perturbation near null boundary.",
+      "perturbation_magnitude": "small",
+      "iterations": 1,
+      "expected_outcome": "transition from non-participating to participating or vice versa"
+    },
+    {
+      "case_id": "STC-002",
+      "test_reference": "OST-RCV-001",
+      "description": "Recursive coupling persistence test.",
+      "perturbation_magnitude": "none",
+      "iterations": 100,
+      "expected_outcome": "stabilization score remains above 0.8"
+    }
+  ],
+  "stability_dimensions": [
+    {
+      "name": "null_boundary_stability",
+      "applies_to": "MPF-PV-001",
+      "question": "Does participation classification remain stable under small perturbations near epsilon_null?"
+    },
+    {
+      "name": "admissible_transition_stability",
+      "applies_to": "MPF-CV-001",
+      "question": "Do continuation legality decisions remain bounded under small changes in residue, orientation, and admissibility window?"
+    },
+    {
+      "name": "recursive_coupling_stability",
+      "applies_to": "MPF-RCV-001",
+      "question": "Does recursive residue-mediated coupling preserve or lose stabilized recurrence under iteration?"
+    },
+    {
+      "name": "boundary_collapse_detection",
+      "applies_to": "all",
+      "question": "Do admissibility windows collapse to empty or degenerate sets?"
+    },
+    {
+      "name": "residue_sensitivity",
+      "applies_to": "MPF-CV-001 and MPF-RCV-001",
+      "question": "How sensitive are continuation and coupling decisions to residue variation?"
+    },
+    {
+      "name": "iteration_consistency",
+      "applies_to": "MPF-RCV-001",
+      "question": "Do repeated applications preserve declared object classes and closure boundaries?"
+    }
+  ]
+}

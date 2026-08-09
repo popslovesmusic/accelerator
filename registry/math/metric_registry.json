@@ -1,0 +1,284 @@
+{
+  "registry_id": "MPF_METRIC_REGISTRY",
+  "version": "1.0.0",
+  "purpose": "Canonical registry for formally defined metric candidates in the Mono-Process Mathematical Program. Tracks definition status, canonical inputs, forbidden inputs, non-circularity constraints, and proof-obligation bindings. Separate from the executable_metric_registry (operational definitions for simulation) and orientation_metric_registry (orientation-specific metric structures).",
+  "governance_note": "All entries are DEFINITION_CANDIDATE_PENDING_VALIDATION unless explicitly promoted. A metric may not be used in claim promotion above its current definition status.",
+  "metrics": [
+    {
+      "metric_id": "C_orient_metric",
+      "symbol": "C_orient",
+      "name": "Orientation Coherence Metric",
+      "status": "VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT",
+      "definition_source": "textbook §5.1.5 (Formal Statement 5.1.5)",
+      "patch_id": "MPF_C_ORIENT_METRIC_DEFINITION_PATCH_001",
+      "basis": [
+        "MPF_ORIENTATION_STALENESS_AUDIT_001",
+        "MPF_ORIENTATION_CANONICALIZATION_PATCH_001"
+      ],
+      "range": [
+        0.0,
+        1.0
+      ],
+      "reading": "Degree of coherence among admissible orientation-pattern assignments over a shared RT-expression field.",
+      "candidate_form": "C_orient(chi_D) := 1 - Var_norm({-(i)_k | -(i)_k in O_adm(chi_D)})",
+      "interpretations": {
+        "approx_0": "Orientation assignments are mutually incoherent or randomly dispersed across O_adm(chi_D).",
+        "approx_1": "Orientation assignments converge to a coherent admissible pattern."
+      },
+      "canonical_inputs": {
+        "orientation_operator": "-(i)",
+        "orientation_family": "O := {-(i)_k}",
+        "distinction_array": "chi_D",
+        "admissibility_context": "A_adm or delta_a-context"
+      },
+      "forbidden_inputs": [
+        "K",
+        "T_class",
+        "S_closure",
+        "knot_class_label",
+        "closure_stability_result",
+        "post-hoc topology classification"
+      ],
+      "non_circularity_constraint": {
+        "rule_id": "C_ORIENT_NONCIRCULARITY_001",
+        "statement": "C_orient must be computable before topology class, knot class, or closure stability is evaluated.",
+        "reason": "PO_001 requires orientation coherence to be measurable without presupposing closure topology.",
+        "status": "CONSTRAINT_ACTIVE"
+      },
+      "proof_obligation_bindings": [
+        {
+          "po_id": "PO_001",
+          "registry": "registry/math/open_bridge_proof_obligation_registry.json",
+          "bridge_id": "OPEN_BRIDGE_001",
+          "role": "primary_measurable — PO_001 tests whether this metric can be computed without topology-class or closure-stability inputs"
+        }
+      ],
+      "validation_requirements": [
+        "Show C_orient is computable from chi_D and admissible orientation assignments only.",
+        "Show no dependency on T_class_metric or S_closure.",
+        "Show shuffled/random orientation lowers or decorrelates C_orient under matched input conditions.",
+        "Show fixed coherent regimes increase C_orient without using topology labels."
+      ],
+      "expected_unblocks_conditional_on_validation": [
+        "PO_001 becomes testable",
+        "PO_003 can compare knot-class variance conditional on C_orient bins",
+        "OPEN_BRIDGE_001 family support is separately resolved in open_bridge_registry.json; this metric remains STRUCTURAL_ONLY pending rigor endorsement before downstream reuse"
+      ],
+      "governance_status_after_patch": {
+        "C_orient_metric": "VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT",
+        "OPEN_BRIDGE_001": "SUPPORTED_STRUCTURAL_ONLY_SEPARATE_FROM_METRIC_RIGOR",
+        "orientation_operator": "CANONICAL",
+        "orientation_space_O": "RESOLVED_AS_DERIVED_CONTAINER"
+      },
+      "induction_timestamp": "2026-06-19T07:17:00.000000",
+      "validation_design_status": "VALIDATED",
+      "validation_design_ref": "registry/math/po001_validation_design.json",
+      "po001_validation_patch": "MPF_PO001_C_ORIENT_VALIDATION_PATCH_001",
+      "po001_validation_execution_patch": "MPF_PO001_C_ORIENT_VALIDATION_EXECUTION_PATCH_001",
+      "governance_note": "PO_001 validation execution passed (VT_001 through VT_004 all pass, status promoted to PASSED_PENDING_RIGOR_ENDORSEMENT via MPF_PO001_C_ORIENT_VALIDATION_EXECUTION_PATCH_001). OPEN_BRIDGE_001 family support is resolved in open_bridge_registry.json; this metric remains pending rigor endorsement before downstream reuse."
+    },
+    {
+      "metric_id": "T_class_metric",
+      "symbol": "T_class_metric",
+      "name": "Topology-Class Metric",
+      "status": "VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT",
+      "definition_source": "textbook section 11.X (Formal Statement 11.X)",
+      "patch_id": "MPF_T_CLASS_METRIC_DEFINITION_PATCH_001",
+      "basis": [
+        "MPF_ORIENTATION_CANONICALIZATION_PATCH_001",
+        "MPF_C_ORIENT_METRIC_DEFINITION_PATCH_001"
+      ],
+      "input": "realized_closure_trace K_obs or closure graph G_K",
+      "output": "topology_class_label T_k plus optional braid_index b(T_k)",
+      "reading": "A measurement procedure that assigns observed closure structures to topology classes without using orientation coherence as an input.",
+      "candidate_form": {
+        "closure_trace": "K_obs := trace(Delta -> R -> T -> A_adm -> delta_a -> Delta')",
+        "topology_graph": "G_K := graph(K_obs)",
+        "class_assignment": "T_class_metric(G_K) := [T_k, b(T_k), inv(G_K)]",
+        "distribution": "P(T_k) := count(T_k) / N",
+        "variance_target": "Var(T) := dispersion({T_k}) over matched runs"
+      },
+      "minimal_class_family": {
+        "status": "candidate",
+        "classes": {
+          "T_0": "null_or_no_closure",
+          "T_1": "simple_closure_organization",
+          "T_2": "linked_closure_organization",
+          "T_3": "low_index_braided_organization",
+          "T_4": "high_index_braided_organization",
+          "T_x": "valid_but_unclassified_topological_organization"
+        },
+        "note": "Intentionally operational. May be replaced by stricter knot/braid invariants without superseding this statement."
+      },
+      "allowed_inputs": [
+        "realized closure trace",
+        "closure graph adjacency",
+        "braid/loop/crossing structure",
+        "connectivity preservation record",
+        "residue-conditioned closure output"
+      ],
+      "forbidden_inputs": [
+        "C_orient",
+        "-(i)",
+        "O (orientation family)",
+        "orientation regime label",
+        "S_closure score",
+        "campaign outcome label"
+      ],
+      "non_circularity_constraint": {
+        "rule_id": "T_CLASS_NONCIRCULARITY_001",
+        "statement": "T_class_metric must classify topology after closure observation but before orientation-conditioned variance claims are evaluated.",
+        "reason": "PO_003 requires comparing Var(T | C_orient high) against Var(T | C_orient low); therefore T must not be computed from C_orient.",
+        "status": "CONSTRAINT_ACTIVE"
+      },
+      "proof_obligation_bindings": [
+        {
+          "po_id": "PO_002",
+          "registry": "registry/math/open_bridge_proof_obligation_registry.json",
+          "bridge_id": "OPEN_BRIDGE_001",
+          "role": "primary_measurable - PO_002 tests whether topology-class distribution is classifiable from observed closure traces"
+        },
+        {
+          "po_id": "PO_003",
+          "registry": "registry/math/open_bridge_proof_obligation_registry.json",
+          "bridge_id": "OPEN_BRIDGE_001",
+          "role": "distributional_target - PO_003 uses Var(T) binned by C_orient to test selector claim"
+        }
+      ],
+      "validation_requirements": [
+        "Classify observed closure traces without C_orient input.",
+        "Produce a stable class label T_k or T_x for every valid observed closure.",
+        "Distinguish null/no-closure from valid closure.",
+        "Produce distribution P(T_k) over repeated runs.",
+        "Produce Var(T) or equivalent dispersion measure for PO_003.",
+        "Remain blind to orientation regime during classification.",
+        "Pass Trace Ingestion Test (PO002_IT_001)",
+        "Pass Null Closure Separation Test (PO002_IT_002)",
+        "Pass Valid Closure Assignment Test (PO002_IT_003)",
+        "Pass Orientation Blindness Test (PO002_IT_004)",
+        "Pass Distribution Output Test (PO002_IT_005)"
+      ],
+      "expected_unblocks_conditional_on_validation": [
+        "PO_002 passes pending rigor endorsement",
+        "PO_003 becomes structurally testable once C_orient validation also passes",
+        "OPEN_BRIDGE_001 family support is separately resolved in open_bridge_registry.json; T_class_metric remains pending rigor endorsement before downstream reuse"
+      ],
+      "governance_status_after_patch": {
+        "T_class_metric": "VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT",
+        "PO_002": "PASSED_PENDING_RIGOR_ENDORSEMENT",
+        "PO_003": "PASSED_PENDING_RIGOR_ENDORSEMENT",
+        "OPEN_BRIDGE_001": "SUPPORTED_STRUCTURAL_ONLY_SEPARATE_FROM_METRIC_RIGOR"
+      },
+      "induction_timestamp": "2026-06-19T07:22:00.000000",
+      "validation_closure_patch": {
+        "patch_id": "MPF_PO002_VALIDATION_CLOSURE_PATCH_001",
+        "scope": "validation_status_update",
+        "claim_effect": "NO_THEOREM_PROMOTION",
+        "ruling": {
+          "fixture_correctness": "PASS",
+          "python_cpp_equivalence": "PASS_100_PERCENT",
+          "negative_fixture_rejection": "PASS",
+          "batch_metrics": "PASS",
+          "audit_actual_output_alignment": "PASS"
+        },
+        "authoritative_outputs": [
+          "outputs/t_class_test_results/cpp_t_class_test_results.json",
+          "outputs/t_class_test_results/python_cpp_equivalence_results.json",
+          "outputs/t_class_test_results/t_class_implementation_audit.md"
+        ],
+        "excluded_stale_artifact": {
+          "file": "outputs/t_class_test_results/python_t_class_test_results.json",
+          "reason": "older sidecar artifact not regenerated by authoritative rerun"
+        },
+        "next_required_work": [
+          "Run or complete PO_001 validation for C_orient non-circular computability.",
+          "Then reopen PO_003 variance test design."
+        ]
+      },
+      "ontology_clarification": {
+        "patch_id": "MPF_T_ONTOLOGY_CLARIFICATION_001",
+        "status": "PROPOSED",
+        "ruling": {
+          "T": "topological organization generated by continuation under constraint",
+          "K": "stabilized closure regime of T",
+          "graph": "projection of T",
+          "braid_index": "projection of T",
+          "closure_trace": "projection of continuation history leading to T"
+        },
+        "consequence": {
+          "T_class_metric": "classifies topological organizations",
+          "implementation_metrics": [
+            "graph features",
+            "cycle structure",
+            "braid proxies",
+            "closure invariants"
+          ],
+          "restriction": "implementation observables must not be conflated with T itself"
+        }
+      },
+      "t_signature_mapping": {
+        "definition_id": "MPF_T_SIGNATURE_DEFINITION_PATCH_001",
+        "symbol": "T_sig",
+        "form": "[C_count, L_depth, R_conn, B_cross, A_branch]"
+      },
+      "requires_T_sig_intermediate": true
+    },
+    {
+      "metric_id": "delta_alpha",
+      "symbol": "delta_alpha",
+      "name": "Admissibility Deviation",
+      "status": "VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT",
+      "definition_source": "vortex admissibility campaign (configs/vortex_admissibility_campaign.json)",
+      "patch_id": "MPF_VORTEX_REMEDIATION_EXECUTION_001",
+      "basis": [
+        "MPF_DEVIATED_CONSTRAINT_DYNAMICS_PATCH_001"
+      ],
+      "range": [
+        0.1,
+        5.0
+      ],
+      "reading": "Systematic shift of the active admissibility filter from the baseline constraint configuration.",
+      "candidate_form": "delta_alpha := mean(abs(alpha_next - alpha_base))",
+      "interpretations": {
+        "approx_0": "Active admissibility filter matches the baseline constraint exactly.",
+        "greater_than_0": "Admissibility filter has deviated from the baseline state, recording historical process residue."
+      },
+      "canonical_inputs": {
+        "active_filter": "alpha_next",
+        "baseline_filter": "alpha_base"
+      },
+      "forbidden_inputs": [
+        "D",
+        "organization_score"
+      ]
+    },
+    {
+      "metric_id": "organization_score",
+      "symbol": "organization_score",
+      "name": "Admissibility Organization Score",
+      "status": "VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT",
+      "definition_source": "vortex admissibility campaign (configs/vortex_admissibility_campaign.json)",
+      "patch_id": "MPF_VORTEX_REMEDIATION_EXECUTION_001",
+      "basis": [
+        "MPF_DEVIATED_CONSTRAINT_DYNAMICS_PATCH_001"
+      ],
+      "range": [
+        0.0,
+        1.0
+      ],
+      "reading": "Degree of alignment between the direction of future aspect distinction changes and the direction of prior admissibility deviation.",
+      "candidate_form": "organization_score := abs(dot(bias_direction, A - B)) / (norm(bias_direction) * norm(A - B) + 1e-8)",
+      "interpretations": {
+        "approx_0": "Future distinction events are uncorrelated with prior admissibility filter deviations.",
+        "approx_1": "Future distinction events align perfectly with prior admissibility filter deviations, indicating self-conditioning organization."
+      },
+      "canonical_inputs": {
+        "bias_direction": "alpha - alpha_base",
+        "aspect_comparison_vectors": "A, B"
+      },
+      "forbidden_inputs": [
+        "D"
+      ]
+    }
+  ]
+}

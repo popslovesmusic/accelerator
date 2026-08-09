@@ -1,0 +1,109 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_004",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-04",
+  "type": "governance_patch",
+  "artifact_type": "governance_patch",
+  "title": "Linear Operational Regime Derivation",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_001",
+    "PATCH_PI_RT_CALCULUS_002",
+    "PATCH_PI_RT_CALCULUS_003"
+  ],
+  "purpose": "Define the linear operational regime as a derived RT classification selected when orientation-governed continuation is locally composable, role-preserving, and stable under bounded residue influence.",
+  "motivation": {
+    "problem": "RT and orientation now support derived regime classification, but the linear regime itself is not yet governed as a derived result.",
+    "resolution": "L is registered as a derived regime classification rather than a primitive mathematics floor."
+  },
+  "core_definition": {
+    "L": "The linear operational regime derived from RT_core when orientation-governed continuation is locally composable, role-preserving, and stable under bounded residue influence.",
+    "not_primitive": true,
+    "not_axiomatic_floor": true,
+    "trace_requirement": "Every L-classified regime must constructively trace to RT_core."
+  },
+  "derivation_rule": {
+    "from": "RT_core → Orientation → RT_operational_regime",
+    "to": "L",
+    "condition": "A regime is L-classified iff its oriented continuation admits local composition without residue-induced deformation of the composition rule."
+  },
+  "governance_rules": [
+    {
+      "id": "RTCALC_LINEAR_001",
+      "name": "Derived Linear Classification",
+      "statement": "L is a derived regime classification, not a primitive mathematics."
+    },
+    {
+      "id": "RTCALC_LINEAR_002",
+      "name": "Representation Downstream",
+      "statement": "L may support linear-algebraic representation only after its RT derivation is declared."
+    },
+    {
+      "id": "RTCALC_LINEAR_003",
+      "name": "RT Trace Bound",
+      "statement": "L remains trace-bound to RT_core."
+    },
+    {
+      "id": "RTCALC_LINEAR_004",
+      "name": "Composition Failure Conditions",
+      "statement": "L fails when residue, orientation shift, or admissibility deformation changes the composition rule."
+    }
+  ],
+  "deferred_items": [
+    "Formal proof of L closure",
+    "Formal boundary between L and NL",
+    "Nonlinear operational regime derivation"
+  ],
+  "effects": [
+    "Registers the linear regime as a governed derived classification.",
+    "Keeps linear-algebraic representation downstream of RT derivation.",
+    "Preserves RT_core as the trace source for L."
+  ],
+  "backward_compatibility": {
+    "breaking": false,
+    "notes": [
+      "Existing RT definitions remain canonical.",
+      "Orientation classification remains the governing classifier.",
+      "Future nonlinear derivations attach after this linear regime derivation."
+    ]
+  },
+  "created_artifacts": [],
+  "updated_artifacts": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/lexicon_gap_queue.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_004.json"
+  ],
+  "source_artifacts": [
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_001.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_002.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_003.json",
+    "docs/textbook/mono_process_textbook_complete.md"
+  ],
+  "governance": {
+    "execution_claim": "not_claimed",
+    "registry_claim": "proposed_only",
+    "fabricated_history": false,
+    "notes": [
+      "The linear regime is derived from RT_core and orientation-governed continuation.",
+      "Linear-algebraic representation is permitted only after RT derivation is declared."
+    ]
+  },
+  "validation": {
+    "required": [
+      "derived_linear_regime_present",
+      "orientation_governed_derivation_present",
+      "not_primitive",
+      "not_axiomatic_floor",
+      "trace_requirement_present",
+      "linear_representation_downstream",
+      "lexicon_gap_registered",
+      "global_validate_pass"
+    ],
+    "result": "pass"
+  },
+  "notes": [
+    "This patch is governance and architecture only.",
+    "The linear regime is derived from RT_core through orientation-governed classification and does not supersede the canonical root expression."
+  ]
+}

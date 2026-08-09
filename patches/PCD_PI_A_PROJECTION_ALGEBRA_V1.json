@@ -1,0 +1,99 @@
+{
+  "patch_id": "PCD_PI_A_PROJECTION_ALGEBRA_V1",
+  "priority": "ACTIVE_FORMAL_REASONING",
+  "intent": "Define the first algebraic rules for Pi_A (Admissibility Projection), including idempotence, composition with NavT, and interaction with gate.",
+  "operations": [
+    {
+      "op": "create_pi_a_composition_table",
+      "target_file": "registry/pi_a_composition_table.json",
+      "schema": {
+        "required_fields": [
+          "expression",
+          "result",
+          "property",
+          "condition",
+          "failure_mode"
+        ]
+      }
+    },
+    {
+      "op": "register_pi_a_rules",
+      "target_file": "registry/pi_a_composition_table.json",
+      "rules": [
+        {
+          "expression": "Pi_A(Pi_A(Delta))",
+          "result": "Pi_A(Delta)",
+          "property": "idempotence",
+          "condition": "projection into a stable admissibility window remains in the window",
+          "failure_mode": "unstable_window_drift"
+        },
+        {
+          "expression": "Pi_A(Delta) where gate(Delta) == false",
+          "result": "0_transition",
+          "property": "null_projection",
+          "condition": "inadmissible increments are projected to null",
+          "failure_mode": "leaky_admissibility_filter"
+        },
+        {
+          "expression": "Pi_A(NavT(a,b))",
+          "result": "admissible_transport_contribution",
+          "property": "transport_filtering",
+          "condition": "raw transport contributions must be projected through Pi_A before accumulation",
+          "failure_mode": "unprojected_transport_violation"
+        }
+      ]
+    },
+    {
+      "op": "define_pi_a_identity_rules",
+      "target_file": "registry/pi_a_composition_table.json",
+      "rules": [
+        {
+          "expression": "Pi_A(Delta) where Delta is already in A",
+          "result": "Delta",
+          "property": "identity_within_window",
+          "condition": "admissible increments are preserved under projection",
+          "failure_mode": "over-projection_distortion"
+        }
+      ]
+    },
+    {
+      "op": "add_pi_a_guardrails",
+      "target_file": "registry/lexicon_gap_queue.json",
+      "rules": [
+        {
+          "name": "no_non_idempotent_projection_v1",
+          "statement": "Pi_A must be idempotent; multiple projections of the same increment into a stable window must not change the result.",
+          "failure_behavior": "mark_projection_unstable"
+        },
+        {
+          "name": "no_unprojected_transport_accumulation_v1",
+          "statement": "Transport contributions must be projected through Pi_A before they are summed or applied to state updates.",
+          "failure_behavior": "mark_update_illegal"
+        }
+      ]
+    },
+    {
+      "op": "update_operator_algebra_closure_registry",
+      "target_file": "registry/operator_algebra_closure_registry.json",
+      "operator_id": "Pi_A",
+      "updates": {
+        "closure_status": "PARTIAL_PROJECTION_ALGEBRA_DEFINED",
+        "closed_items": [
+          "idempotence rule",
+          "null projection rule",
+          "transport filtering requirement",
+          "identity within window rule"
+        ],
+        "remaining_gaps": [
+          "interaction with varying residue context",
+          "formal composition law with non-local NavT",
+          "idempotence stability under window drift"
+        ]
+      }
+    },
+    {
+      "op": "emit_report",
+      "output_path": "registry/reports/pi_a_projection_algebra_v1_report.json"
+    }
+  ]
+}

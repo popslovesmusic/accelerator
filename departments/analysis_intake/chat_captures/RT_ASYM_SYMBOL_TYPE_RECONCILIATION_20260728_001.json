@@ -1,0 +1,75 @@
+{
+  "capture_type": "CHAT_SEMANTIC_CAPTURE",
+  "source_channel": "current_conversation_chat",
+  "packet_id": "RT_ASYM_SYMBOL_TYPE_RECONCILIATION_20260728_001",
+  "packet_type": "RT_PROVISIONAL_SYMBOL_TYPE_RECONCILIATION",
+  "capture_timestamp_utc": "2026-07-28T17:25:00Z",
+  "status": "PROVISIONAL_RECONCILIATION_READY_FOR_REVIEW",
+  "canonicality": "NON_CANONICAL_CANDIDATE",
+  "depends_on": ["RT_ASYM_OBSERVATION_ORIENTATION_EXCLUSION_INDUCTION_20260728_001", "analysis_crawl_20260728_boundary_orientation_asym_001"],
+  "purpose": "Assign non-circular provisional meanings and signatures to the boundary-orientation-[Asym]-bounded-symmetry chain while preserving that observation orientations, not symmetry, are excluded.",
+  "governing_statement": "Boundary interaction excludes inadmissible observation orientations. The resulting reference orientation is expressed as [Asym], which conditions unbounded symmetry into a bounded symmetry expression without destroying symmetry.",
+  "core_chain": "B_x -> Excl_obs_x(Omega_obs) -> Omega_x_adm -> o_x -> [Asym]_x -> <S>_x",
+  "type_universe": {
+    "SymWhole": "Underlying relational symmetry whole; not separate ontological substances.",
+    "BoundaryInteraction": "Relational interaction condition capable of affecting symmetry reference orientation.",
+    "ObservationOrientation": "Possible reference-relative orientation under which symmetry may be evaluated.",
+    "OrientationFamily": "Family or class of possible observation orientations.",
+    "AdmissibleOrientationFamily": "Orientations not excluded relative to a boundary interaction and relational domain.",
+    "ReferenceOrientation": "Selected or equivalence-class reference induced by the conditioned admissible orientation family.",
+    "SymmetryCondition": "Condition internal to the symmetry whole constraining relational expression.",
+    "BoundedSymmetry": "Distinguishable realizable symmetry expression bounded relative to a reference orientation.",
+    "RelationalDomain": "Typed domain for interaction, orientation admissibility, and distinguishability.",
+    "Residue": "Provisional trace of how prior interaction conditions subsequent admissibility or continuation.",
+    "AdmissibilityResult": "Typed result of an admissibility or deviation operator; exact delta_alpha form unresolved."
+  },
+  "symbol_table": [
+    {"symbol": ">S<", "preferred_name": "unbounded symmetry", "type": "SymWhole", "role": "Unconditioned or unbounded symmetry expression.", "status": "RETAIN_EXISTING_PROVISIONAL_MEANING"},
+    {"symbol": "B_x", "preferred_name": "boundary interaction at x", "type": "BoundaryInteraction", "signature": "B_x : BoundaryInteraction(>S<, D_rel)", "status": "NARROWED_REBINDING_REQUIRED", "guard": "Not an already individuated bounded object or container wall."},
+    {"symbol": "D_rel", "preferred_name": "relational evaluation domain", "type": "RelationalDomain", "signature": "D_rel : RelationalDomain", "status": "NEW_PROVISIONAL_TYPE"},
+    {"symbol": "Omega_obs", "preferred_name": "possible observation-orientation family", "type": "OrientationFamily", "signature": "Omega_obs(>S<, D_rel) : OrientationFamily", "status": "NEW_PROVISIONAL_SYMBOL"},
+    {"symbol": "Excl_obs_x", "preferred_name": "observation-orientation exclusion operator", "type": "OrientationFamily -> AdmissibleOrientationFamily", "signature": "Excl_obs_x : (BoundaryInteraction, OrientationFamily, RelationalDomain) -> AdmissibleOrientationFamily", "application": "Omega_x_adm := Excl_obs_x(B_x, Omega_obs, D_rel)", "status": "NEW_PROVISIONAL_OPERATOR"},
+    {"symbol": "Omega_x_adm", "preferred_name": "conditioned admissible orientation family", "type": "AdmissibleOrientationFamily", "signature": "Omega_x_adm : AdmissibleOrientationFamily(B_x, D_rel)", "status": "NEW_PROVISIONAL_SYMBOL", "guard": "Need not contain only one orientation."},
+    {"symbol": "o_x", "preferred_name": "reference orientation at x", "type": "ReferenceOrientation", "signature": "o_x := RefOrient(Omega_x_adm, B_x, D_rel)", "status": "RETAIN_WITH_TYPE_QUALIFICATION", "guard": "Representative or equivalence class; uniqueness not assumed."},
+    {"symbol": "[Asym]_x", "preferred_name": "orientation-conditioned symmetry condition", "type": "SymmetryCondition", "signature": "[Asym]_x := SymCond(>S<, o_x, D_rel)", "status": "AUTHORITATIVE_SEMANTIC_CORRECTION_PROVISIONAL_TYPE", "guard": "Not non-symmetry, loss, negation, or destruction of >S<."},
+    {"symbol": "<S>_x", "preferred_name": "bounded symmetry expression at x", "type": "BoundedSymmetry", "signature": "<S>_x := ProjectBounded([Asym]_x, >S<, D_rel)", "equivalent_compact_form": "[Asym]_x(>S<) = <S>_x", "status": "RETAIN_WITH_DIRECTION_GUARD"},
+    {"symbol": "r_x", "preferred_name": "orientation-conditioning residue", "type": "Residue", "signature": "r_x := ResidueOf(B_x, Omega_x_adm, o_x, [Asym]_x, D_rel)", "status": "OPTIONAL_PROVISIONAL_SYMBOL_PENDING_RESIDUE_REVIEW"},
+    {"symbol": "delta_alpha", "preferred_name": "admissible deviation or distinction-density operator", "type": "UNRESOLVED", "candidate_signature": "delta_alpha : ([Asym]_x, D_rel) -> AdmissibilityResult", "status": "OPEN_SIGNATURE_COLLISION", "guard": "Must not silently replace existing unary, binary, ordinal-stage, or textbook signatures."}
+  ],
+  "non_circular_construction": {
+    "primitive_input": "A boundary interaction condition B_x within >S< and D_rel.",
+    "not_assumed": ["pre-existing bounded object", "pre-existing unique observer", "prior [Asym] condition", "prior <S> identity"],
+    "steps": ["Generate or expose Omega_obs relative to scope.", "Apply Excl_obs_x using B_x and D_rel.", "Obtain Omega_x_adm without excluding symmetry.", "Derive a reference orientation or equivalence class o_x.", "Express the relational distinction as [Asym]_x.", "Project >S< through [Asym]_x to obtain <S>_x."],
+    "circularity_guard": "B_x may not be defined by reference to the completed <S>_x that B_x conditions."
+  },
+  "operator_contracts": {
+    "Excl_obs_x": {"preconditions": ["B_x valid in D_rel", "Omega_obs valid relative to >S< and D_rel"], "postconditions": ["Omega_x_adm is domain-admissible", "at least one orientation remains if bounded realization is required", "symmetry remains the underlying whole"], "failure_condition": "If all observation orientations are excluded, no bounded distinguishable expression is realized under the current interaction and domain; this does not imply symmetry absence."},
+    "RefOrient": {"preconditions": ["Omega_x_adm is non-empty or supports a valid orientation relation"], "postconditions": ["returns a reference orientation or adequate equivalence class"], "open_question": "Selection, quotient, projection, or emergent relation remains unresolved."},
+    "ProjectBounded": {"preconditions": ["[Asym]_x is a valid SymmetryCondition", ">S< is the symmetry whole", "D_rel supplies bounded admissibility"], "postconditions": ["returns <S>_x", "does not consume, destroy, or separate the symmetry whole"]}
+  },
+  "collision_reconciliation": [
+    {"collision": "asymmetry generated through exclusion", "resolution": "Qualify exclusion as exclusion of observation orientations.", "classification": "LEGACY_LANGUAGE_NARROWING"},
+    {"collision": "symmetry breaking", "resolution": "Permit only as domain-relative shorthand for bounded differentiation; prohibit destruction reading.", "classification": "TERMINOLOGY_GUARD"},
+    {"collision": "B_x as boundary object", "resolution": "Rebind B_x to boundary interaction or later replace it with I_x^partial.", "classification": "TYPE_REBINDING"},
+    {"collision": "o_x as uniquely selected orientation", "resolution": "Keep uniqueness open; permit representative or equivalence-class semantics.", "classification": "CARDINALITY_AND_SELECTION_GUARD"},
+    {"collision": "delta_alpha([Asym]_x, D_rel)", "resolution": "Retain only as candidate pending signature inventory and mapping.", "classification": "OPEN_OPERATOR_COLLISION"}
+  ],
+  "admissibility_tests": [
+    {"test_id": "ASYM-TYPE-001", "statement": "The construction must not exclude or negate >S<.", "expected": "PASS"},
+    {"test_id": "ASYM-TYPE-002", "statement": "The excluded target must be an observation orientation or relation.", "expected": "PASS"},
+    {"test_id": "ASYM-TYPE-003", "statement": "B_x must be typed without presupposing <S>_x.", "expected": "PASS"},
+    {"test_id": "ASYM-TYPE-004", "statement": "[Asym]_x must type as SymmetryCondition.", "expected": "PASS"},
+    {"test_id": "ASYM-TYPE-005", "statement": "Projection remains [Asym]_x(>S<) = <S>_x.", "expected": "PASS"},
+    {"test_id": "ASYM-TYPE-006", "statement": "No unique o_x without an explicit selection or quotient rule.", "expected": "PASS"},
+    {"test_id": "ASYM-TYPE-007", "statement": "No delta_alpha signature is promoted.", "expected": "PASS"}
+  ],
+  "formalization_frontier": {
+    "resolved_for_current_scope": ["exclusion targets observation orientation, not symmetry", "[Asym] remains a symmetry condition", "boundary is interaction rather than presupposed object", "projection direction is >S< through [Asym] to <S>"],
+    "still_open": ["mathematical representation of Omega_obs", "whether exclusion is filtering, incompatibility, quotienting, or admissibility failure", "whether o_x is singular, plural, representative, or equivalence-class valued", "orientation exclusion and residue relationship", "delta_alpha signature and compatibility", "mapping into D-semantics witness and representability structures"]
+  },
+  "recommended_next_action": {"packet_id": "RT_ASYM_EXCLUSION_OPERATOR_DEFINITION_20260728_001", "action": "Define Excl_obs_x as a typed partial operator with explicit success, failure, and non-annihilation conditions.", "reason": "The table isolates the exclusion operator as the next minimal unresolved formal object.", "do_not_begin_with": "delta_alpha", "human_review_required": true},
+  "authorization_limits": ["No canonical promotion.", "No textbook mutation.", "No registry mutation.", "No theorem claim.", "No physical-law claim.", "No D-obligation discharge.", "No delta_alpha rebinding."],
+  "capture_completeness": "PARTIAL_SEMANTIC_CAPTURE",
+  "capture_limitations": ["The submitted chat payload visibly ended mid-object at authorization_limits without a closing JSON structure.", "This capture preserves the visible symbol/type table, construction, operator contracts, collision rules, tests, frontier, recommendation, and authorization limits; missing trailing source content cannot be reconstructed without a resend.", "No canonical state was changed."],
+  "routing": {"target": "departments/analysis_intake/induction_queue", "review_status": "NOT_REVIEWED", "promotion_status": "HOLD_C1", "execution_authority": "NONE"}
+}

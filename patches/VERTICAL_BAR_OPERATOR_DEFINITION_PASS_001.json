@@ -1,0 +1,143 @@
+{
+  "patch_id": "VERTICAL_BAR_OPERATOR_DEFINITION_PASS_001",
+  "status": "ACTIVE",
+  "target": "vertical_bar_operator",
+  "symbol": "|",
+  "stage": "0_PRIMITIVE_PARTICIPATION_CLOSURE",
+  "purpose": "Define the vertical bar operator as the primitive admissible participation separator used inside distinction-generating expressions.",
+  "definition": {
+    "name": "Admissible Participation Separator",
+    "symbol": "|",
+    "canonical_form": "A | B",
+    "reading": "A | B denotes an oriented participation interface between A and B inside a distinction-generating expression.",
+    "core_expression": "D(A | B) > epsilon_a",
+    "primitive_role": "The operator does not by itself assert equality, division, opposition, or object-boundary separation. It establishes the structured interface through which distinction can be evaluated."
+  },
+  "operand_rules": {
+    "valid_operands": [
+      "primitive distinction candidates",
+      "already-admissible distinction expressions",
+      "grouped participation expressions",
+      "domain-specific projections explicitly typed as admissible operands"
+    ],
+    "invalid_operands": [
+      "untyped raw objects",
+      "unverified state labels",
+      "pure scalar quantities without participation type",
+      "projection-only analogies",
+      "semantic placeholders with no admissibility trace"
+    ],
+    "operand_requirement": "Each operand must either carry an admissibility trace or be explicitly marked as awaiting admissibility qualification."
+  },
+  "orientation_rules": {
+    "order_sensitive": true,
+    "orientation_statement": "A | B is not generally equivalent to B | A.",
+    "candidate_relation": "D(A | B) may differ from D(B | A) because the participation interface carries orientation.",
+    "allowed_equivalence": "A | B may be equivalent to B | A only under an explicitly proven admissible reversal condition.",
+    "forbidden_assumption": "Do not assume symmetry of | by default."
+  },
+  "closure_rules": {
+    "local_closure": "A bar expression is locally closed when both operands are admissibly typed and the interface relation is legally evaluable under D.",
+    "grouped_closure": "Grouped bar expressions require a separate group-closure rule and are not automatically reducible to binary closure.",
+    "admissibility_gate": "D(A | B) > epsilon_a is the minimal positive admissibility gate for distinction participation.",
+    "nonclosure_conditions": [
+      "operand lacks admissibility trace",
+      "orientation reversal is assumed without proof",
+      "bar is treated as syntactic punctuation only",
+      "bar is treated as ordinary division or set separation",
+      "projection-domain meaning is imported without typed bridge"
+    ]
+  },
+  "formal_candidate": {
+    "binary_participation_expression": "P_|(A,B) := (A | B)",
+    "admissible_bar_expression": "Adm_|(A,B) := [Typed_a(A) ∧ Typed_a(B) ∧ Eval_D(A|B) ∧ D(A|B) > epsilon_a]",
+    "orientation_noncommutativity": "Adm_|(A,B) does not imply Adm_|(B,A)",
+    "reversal_condition_placeholder": "Rev_|(A,B) := condition under which A|B iff_R B|A"
+  },
+  "relationship_to_D": {
+    "status": "PRIMARY_USAGE_CONTEXT",
+    "statement": "| becomes mathematically active when placed inside D(*|*) or another explicitly registered distinction-evaluating context.",
+    "warning": "A|B alone is a participation expression, not yet a realized distinction unless evaluated by D or a lawful successor context."
+  },
+  "relationship_to_Org_a": {
+    "status": "UNBLOCKING_PRIMITIVE",
+    "statement": "Org_a may organize collections of admissible bar expressions only after the bar expressions satisfy local admissible participation closure.",
+    "future_dependency": "Org_a axioms may cheat Adm_|(A,B) as a prerequisite."
+  },
+  "relationship_to_Sigma_D": {
+    "status": "INDIRECT_DEPENDENCY",
+    "statement": "Sigma_D equivalence cannot be defined by operand identity alone; it must preserve admissible bar participation structure and orientation behavior."
+  },
+  "registry_updates_required": [
+    {
+      "file": "formal_object_registry.json",
+      "action": "Update vertical_bar_operator from registered_open to definition_candidate",
+      "required_fields": [
+        "symbol",
+        "canonical_form",
+        "definition",
+        "operand_rules",
+        "orientation_rules",
+        "closure_rules",
+        "dependencies",
+        "blocked_downstream_objects"
+      ]
+    },
+    {
+      "file": "operator_registry.json",
+      "action": "Update vertical_bar_operator with primitive operator definition candidate",
+      "required_fields": [
+        "arity",
+        "order_sensitive",
+        "admissibility_gate",
+        "noncommutative_by_default",
+        "group_closure_status"
+      ]
+    },
+    {
+      "file": "lexicon_gap_queue.json",
+      "action": "Move vertical_bar_operator from GAP_OPEN to GAP_DEFINITION_CANDIDATE",
+      "condition": "Only after registry schema validation passes."
+    }
+  ],
+  "textbook_patch_required": {
+    "target_section": "Chapter 14 or primitive operator appendix",
+    "insert_title": "Vertical Bar Operator: Admissible Participation Separator",
+    "must_state": [
+      "The vertical bar is not ordinary division.",
+      "The vertical bar is not mere notation.",
+      "A|B is order-sensitive unless reversal is proven.",
+      "D(A|B) > epsilon_a is the minimal admissible distinction gate.",
+      "Grouped bar expressions require a later group-closure pass."
+    ]
+  },
+  "validation_requirements": [
+    "All revised registries must pass schema validation.",
+    "No downstream debt object may be marked closed by this patch alone.",
+    "ECON_DEBT_0001 remains open.",
+    "ECON_DEBT_0002 remains open.",
+    "OPEN_BRIDGE_001 remains open.",
+    "Group closure remains unresolved until VERTICAL_BAR_OPERATOR_GROUP_CLOSURE_PASS_001."
+  ],
+  "forbidden_claims": [
+    "| fully defines Org_a",
+    "| fully defines Sigma_D",
+    "| is symmetric by default",
+    "| is equivalent to set partition",
+    "| is equivalent to logical OR",
+    "| is equivalent to division",
+    "D(A|B) is a state label",
+    "A|B alone is a completed truth object"
+  ],
+  "expected_status_after_patch": {
+    "vertical_bar_operator": "GAP_DEFINITION_CANDIDATE",
+    "grouped_bar_closure": "OPEN_REQUIRED_NEXT",
+    "Org_a": "STILL_BLOCKED_PENDING_GROUP_CLOSURE_AND_ORIENTATION",
+    "Sigma_D": "STILL_BLOCKED_PENDING_ORG_A",
+    "orientation_space_O": "NEXT_PRIMITIVE_TARGET"
+  },
+  "recommended_next_patch": {
+    "patch_id": "VERTICAL_BAR_OPERATOR_GROUP_CLOSURE_PASS_001",
+    "goal": "Define grouped bar participation rules for expressions such as A|B|C, (A|B)|C, A|(B|C), and triadic closures like Law|Operator|Truth."
+  }
+}

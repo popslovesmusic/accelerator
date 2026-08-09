@@ -1,0 +1,186 @@
+{
+  "patch_id": "ORIENTATION_SPACE_DEFINITION_PASS_001",
+  "status": "ACTIVE",
+  "target": "orientation_space_O",
+  "symbol": "O",
+  "stage": "0_PRIMITIVE_PARTICIPATION_CLOSURE",
+  "purpose": "Define Orientation Space O as the admissible space of participation directions governing bar expressions, Org_a preservation, and knot-class selection.",
+  "depends_on": [
+    "VERTICAL_BAR_OPERATOR_DEFINITION_PASS_001",
+    "VERTICAL_BAR_OPERATOR_GROUP_CLOSURE_PASS_001"
+  ],
+  "definition": {
+    "name": "Orientation Space",
+    "symbol": "O",
+    "canonical_form": "O(G)",
+    "reading": "O(G) denotes the admissible orientation structure of a participation graph or grouped bar expression G.",
+    "primitive_role": "Orientation determines how distinction participates. It is not merely geometric direction, object location, or visual layout."
+  },
+  "core_claim": {
+    "statement": "Orientation is a participation constraint on admissible distinction organization.",
+    "not_equal_to": [
+      "spatial direction only",
+      "coordinate axis only",
+      "object position",
+      "visual angle",
+      "arbitrary ordering",
+      "projection artifact"
+    ]
+  },
+  "formal_candidate": {
+    "participation_graph": "G := (V, E_|, τ, ρ)",
+    "components": {
+      "V": "typed admissible participants",
+      "E_|": "declared vertical-bar participation interfaces",
+      "tau": "operand/interface typing map",
+      "rho": "role map declaring participant function such as ordinary participant, mediator, operator, core, residue-carrier, or projection-domain object"
+    },
+    "orientation_space": "O(G) := set of admissible orientation assignments over E_| and role-typed participants in G",
+    "orientation_assignment": "o ∈ O(G)",
+    "admissible_orientation": "Adm_O(G,o) := [o preserves typed interface direction, role participation, admissible regrouping constraints, and distinction-evaluable closure]"
+  },
+  "relationship_to_bar_operator": {
+    "statement": "A|B carries orientation by default. Therefore A|B is not generally equivalent to B|A.",
+    "binary_case": "O(A|B) records the legal participation direction of the interface.",
+    "group_case": "O(G) records the legal orientation structure of grouped bar expressions.",
+    "reversal_rule": "A reversal is legal only if Rev_|(A,B) or a higher grouped orientation equivalence is proven."
+  },
+  "relationship_to_grouped_closure": {
+    "statement": "Grouped bar closure requires Preserve_O(G).",
+    "definition_candidate": "Preserve_O(G -> G') := ∃o ∈ O(G), ∃o' ∈ O(G') such that G iff_R G' while preserving admissible orientation participation.",
+    "forbidden_move": "Do not treat regrouping or permutation as legal unless orientation preservation is demonstrated."
+  },
+  "relationship_to_Org_a": {
+    "status": "DIRECT_DEPENDENCY",
+    "statement": "Org_a must preserve admissible orientation structure across legal transformations.",
+    "axiom_dependency": "Topological Consistency and Admissibility Conservation require Preserve_O over organized participation fields.",
+    "candidate_rule": "Org_a may act on G only if Adm_|^G(G) and ∃o ∈ O(G) satisfying Adm_O(G,o)."
+  },
+  "relationship_to_Sigma_D": {
+    "status": "DIRECT_DEPENDENCY",
+    "statement": "Sigma_D equivalence must preserve orientation participation class, not merely operand inventory.",
+    "candidate_rule": "Sigma_D(G) = Sigma_D(G') only if G and G' preserve admissible distinction inventory, grouped bar closure, and orientation equivalence under iff_R."
+  },
+  "relationship_to_OPEN_BRIDGE_001": {
+    "status": "PRIMARY_BRIDGE_INPUT",
+    "bridge_hypothesis": "Orientation functions as a topological selector constraint on admissible knot-class selection.",
+    "candidate_bridge_statement": "For a participation graph G, admissible orientation assignment o ∈ O(G) restricts the admissible knot class K(G,o).",
+    "unblocked_objects": [
+      "K_knot_object_definition",
+      "B_K",
+      "TC_asym",
+      "topology_app",
+      "topology_to_geometry_transform"
+    ],
+    "warning": "This patch does not close OPEN_BRIDGE_001; it supplies the missing primitive required to attempt closure."
+  },
+  "orientation_equivalence": {
+    "symbol": "≃_O",
+    "definition_candidate": "G ≃_O G' iff there exist admissible orientations o ∈ O(G), o' ∈ O(G') such that their participation directions, typed roles, and closure behavior are preserved under iff_R.",
+    "not_sufficient": [
+      "same participant labels",
+      "same number of operands",
+      "same scalar D value",
+      "same visual graph shape",
+      "same projection-domain diagram"
+    ]
+  },
+  "orientation_failure_modes": [
+    {
+      "name": "direction_erasure",
+      "description": "A|B is treated as equivalent to B|A without reversal proof."
+    },
+    {
+      "name": "role_erasure",
+      "description": "A mediator/core/operator participant is treated as an ordinary participant without typed justification."
+    },
+    {
+      "name": "group_flattening",
+      "description": "A grouped expression is reduced to an unordered list."
+    },
+    {
+      "name": "projection_import",
+      "description": "A domain-specific orientation meaning is imported before a bridge is registered."
+    },
+    {
+      "name": "topological_overclaim",
+      "description": "Orientation is claimed to define K before knot object rules are formally closed."
+    }
+  ],
+  "registry_updates_required": [
+    {
+      "file": "formal_object_registry.json",
+      "action": "Update orientation_space_O from registered_open to definition_candidate",
+      "required_fields": [
+        "symbol",
+        "canonical_form",
+        "definition",
+        "participation_graph_model",
+        "orientation_assignment",
+        "orientation_equivalence",
+        "relationship_to_bar_operator",
+        "relationship_to_Org_a",
+        "relationship_to_OPEN_BRIDGE_001"
+      ]
+    },
+    {
+      "file": "operator_registry.json",
+      "action": "Update vertical_bar_operator orientation dependency fields",
+      "required_fields": [
+        "orientation_space",
+        "reversal_rule",
+        "group_preservation_rule",
+        "noncommutative_by_default"
+      ]
+    },
+    {
+      "file": "lexicon_gap_queue.json",
+      "action": "Move orientation_space_O from GAP_OPEN to GAP_DEFINITION_CANDIDATE",
+      "condition": "Only after registry schema validation passes."
+    },
+    {
+      "file": "bridge_registry.json",
+      "action": "Annotate OPEN_BRIDGE_001 with orientation_space_O as required primitive input",
+      "condition": "Do not mark bridge closed."
+    }
+  ],
+  "textbook_patch_required": {
+    "target_section": "Chapter 14 Stage 0 subsection or primitive object appendix",
+    "insert_title": "Orientation Space O",
+    "must_state": [
+      "Orientation is a participation constraint, not merely spatial direction.",
+      "A|B is order-sensitive because its interface carries orientation.",
+      "Grouped bar closure requires orientation preservation.",
+      "Org_a must preserve admissible orientation structure.",
+      "OPEN_BRIDGE_001 can now be attacked through the hypothesis that orientation selects admissible knot classes."
+    ]
+  },
+  "validation_requirements": [
+    "Global validation must pass.",
+    "No downstream debt object may be marked closed by this patch alone.",
+    "OPEN_BRIDGE_001 remains open.",
+    "K remains open.",
+    "Org_a becomes definition-draftable but not automatically closed.",
+    "Sigma_D remains blocked pending Org_a."
+  ],
+  "forbidden_claims": [
+    "Orientation is only geometric direction.",
+    "Orientation is arbitrary ordering.",
+    "O alone defines K.",
+    "O closes OPEN_BRIDGE_001 by itself.",
+    "A|B and B|A are equivalent by default.",
+    "Grouped expressions are orientation-free.",
+    "Projection-domain orientation can be imported without bridge validation."
+  ],
+  "expected_status_after_patch": {
+    "orientation_space_O": "GAP_DEFINITION_CANDIDATE",
+    "vertical_bar_operator": "PRIMITIVE_DEFINITION_CANDIDATE_WITH_GROUP_AND_ORIENTATION_DEPENDENCIES",
+    "Org_a": "READY_FOR_AXIOM_DEFINITION_PASS",
+    "Sigma_D": "STILL_BLOCKED_PENDING_ORG_A",
+    "OPEN_BRIDGE_001": "READY_FOR_ORIENTATION_CLOSURE_ATTACK"
+  },
+  "recommended_next_patch": {
+    "patch_id": "ORG_A_AXIOM_DEFINITION_PASS_001",
+    "goal": "Define Org_a axioms using admissible bar closure, grouped closure, and orientation preservation as explicit prerequisites."
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "alignment_status": "PARTIAL",
+  "blockers": [
+    {
+      "id": "B1",
+      "issue": "Closure is not defined for the proposed distinction between unevaluated 2|4 and closed (2|4)_RT.",
+      "repair": "Specify a typed closure predicate and evaluation context without changing RT_core."
+    },
+    {
+      "id": "B2",
+      "issue": "The operand types and reference semantics of ordinal 2 and 4 are not governed.",
+      "repair": "Introduce a non-colliding typed ordinal/reference notation and bind it to declared <S>, >S< conditions."
+    },
+    {
+      "id": "B3",
+      "issue": "Pi_Euclid and Length_Euclid are not registered or defined.",
+      "repair": "Define domain, codomain, units/normalization, admissibility, and output determinism."
+    },
+    {
+      "id": "B4",
+      "issue": "Preserved invariants under projection are unspecified.",
+      "repair": "State treatment of admissibility, orientation, closure trace, and nonnegative effect."
+    },
+    {
+      "id": "B5",
+      "issue": "Uniqueness or family membership of Pi_Euclid is unresolved.",
+      "repair": "Enumerate candidate maps and define a selection law or explicitly retain a projection family."
+    },
+    {
+      "id": "B6",
+      "issue": "Orientation reversal behavior for (2|4)_RT versus (4|2)_RT is untested.",
+      "repair": "Add reversal and degeneracy tests before any value claim."
+    }
+  ],
+  "notation_conflicts": [
+    {
+      "symbol": "alpha / α",
+      "conflict": "The operator register reserves α exclusively for basin index; the packet uses alpha_L and alpha_R for ordinal relation.",
+      "status": "BLOCKING",
+      "repair": "Use a new governed symbol, e.g. rho_L/rho_R, or obtain an explicit namespace rule."
+    },
+    {
+      "symbol": "Pi / Π",
+      "conflict": "Π_D, Π_A, and projection-family notation already exist; Pi_Euclid is not registered.",
+      "status": "OPEN",
+      "repair": "Register a domain-qualified projection candidate and codomain."
+    },
+    {
+      "symbol": "a",
+      "conflict": "a appears in conditioned distinction notation, aRT, and asymmetry-related labels; it is also proposed as Euclidean length.",
+      "status": "BLOCKING",
+      "repair": "Use a typed target symbol such as a_Euclid and declare namespace."
+    },
+    {
+      "symbol": "D",
+      "conflict": "D is governed as directed distinction/evaluation; Close_D introduces an undefined closure operator role.",
+      "status": "BLOCKING",
+      "repair": "Separate evaluator, closure predicate, and distinction notation."
+    },
+    {
+      "symbol": "<S> and >S<",
+      "conflict": "The supplied textbook defines S as a process-state aspect, but these bracketed directional forms are not established as reference constructors.",
+      "status": "OPEN",
+      "repair": "Define reference-condition syntax or replace with registered forms."
+    },
+    {
+      "symbol": "Asym",
+      "conflict": "Relational Asymmetry and asym_app are existing labels; Asym as a typed condition is not registered.",
+      "status": "OPEN",
+      "repair": "Declare whether Asym is a condition, predicate, or domain label."
+    },
+    {
+      "symbol": "Length_Euclid",
+      "conflict": "No current codomain/type declaration was found in the inspected textbook/operator register.",
+      "status": "BLOCKING",
+      "repair": "Add a candidate type and unit/normalization contract outside canonical promotion."
+    }
+  ],
+  "accepted_claims": [
+    "The proposal preserves the governed whole-expression reading of the bar and does not reduce it to division, ratio, punctuation, tuple construction, or subtraction.",
+    "The proposal preserves order sensitivity as a requirement rather than erasing operand order.",
+    "The proposal treats a domain value as a projection rather than an identity with the RT atom.",
+    "The proposal remains appropriately capped at C1_DEFINED_PROVISIONAL and disclaims theorem-level Euclidean/Pythagorean claims.",
+    "The target chain is directionally aligned with the existing projection route from distinction/deviation toward geometry, subject to missing formal gates."
+  ],
+  "rejected_claims": [
+    "The claim that (2|4) is already a closed Atom_RT is not accepted as currently defined.",
+    "The claim Pi_Euclid((2|4)_RT)=a is not accepted as a defined projection law.",
+    "The claim that (2|4) realizes the whole truth of Asym is not accepted without typed references, closure, and evaluation rules.",
+    "Any scalarization of 2 and 4 is rejected unless separately declared as the projection map."
+  ],
+  "required_repairs": [
+    "Add a provisional typed closure/Atom_RT contract to the induction registry, not the canonical theorem layer.",
+    "Resolve alpha notation collision before using alpha_L/alpha_R.",
+    "Register operand/reference types and define <S>, >S< or replace them with governed syntax.",
+    "Define Pi_Euclid: Atom_RT -> Length_Euclid with units/normalization, invariants, reversal behavior, and uniqueness/family status.",
+    "Run the proposed type, projection candidate, reversal, degeneracy, and triangle-antecedent validation phases.",
+    "Keep the textbook addition provisional and add it only after human approval with exact patch locations."
+  ],
+  "proposed_patch": {
+    "action": "ADD_PROVISIONAL_SUBSECTION_AFTER_EXISTING_TYPED_PROJECTION_TRANSITION_RULES",
+    "target_file": "docs/textbook/mono_process_textbook_complete.md",
+    "target_anchor": "After the existing typed projection transition material around Section 1.2.2B and before later metric/geometry projection discussion.",
+    "heading": "Closed Relational Atoms and Domain-Projected Atomic Values",
+    "status": "PROPOSED_NOT_APPLIED",
+    "text_constraints": [
+      "Preserve bar whole-expression semantics.",
+      "Use non-colliding typed ordinal notation.",
+      "State Pi_Euclid and Length_Euclid are undefined candidates.",
+      "Retain C1_DEFINED_PROVISIONAL labels and open obligations."
+    ]
+  },
+  "promotion_recommendation": "HOLD_C1"
+}

@@ -1,0 +1,104 @@
+{
+  "report_id": "ANALYSIS_CRAWL_20260726_D001D_FRONTIER_001",
+  "crawl_type": "BOUNDED_READ_ONLY_ANALYSIS_CRAWL",
+  "generated_at": "2026-07-26",
+  "agent_role": "RT_AGENT_INFINITE_THEORY_ANALYST",
+  "source_artifact_set": [
+    "AGENTS.md",
+    "GEMINI.md",
+    "departments/analysis/AGENTS.md",
+    "departments/analysis/department_ssot.md",
+    "governance/live/master_work_index.json",
+    "governance/live/research_debt_registry.json",
+    "governance/live/induction_queue.json",
+    "departments/analysis/program_state_report.json",
+    "departments/analysis/recommended_action_queue.json",
+    "outputs/audits/global_health_report.json",
+    "registry/math/d_semantics_obligation_registry.json",
+    "registry/research_debt_registry.json",
+    "departments/analysis/campaigns/CAMPAIGN_D_OBL_D_001D_TYPED_REPRESENTABILITY_20260725_001/validation_report.json",
+    "departments/analysis/campaigns/CAMPAIGN_D_OBL_D_001D_SEMANTIC_REVIEW_20260725_001/semantic_review_report.json",
+    "departments/analysis/campaigns/CAMPAIGN_D_OBL_D_001D_SEMANTIC_REVIEW_20260725_001/human_review_decision.json",
+    "docs/textbook/mono_process_textbook_complete.md"
+  ],
+  "read_only_controls": {
+    "canonical_registries_modified": false,
+    "authority_bearing_sources_modified": false,
+    "sqlite_artifact_index_refreshed": false,
+    "work_items_executed": false,
+    "required_noncanonical_deliverables_written": true
+  },
+  "scope": {
+    "domains": ["governance", "mathematics", "documentation", "analysis"],
+    "include_superseded": true,
+    "focus": "OBL-D-001D frontier and current D-semantics promotion gate"
+  },
+  "budgets": {
+    "maximum_reasoning_depth": 8,
+    "maximum_candidate_count": 1000,
+    "maximum_compute_units": null
+  },
+  "results": {
+    "objects_analyzed": 16,
+    "proof_obligations": 3,
+    "contradictions": 1,
+    "research_campaigns": 1,
+    "theorem_candidates": 0,
+    "lemma_candidates": 0,
+    "counterexamples": 0,
+    "duplicates_rejected": 0
+  },
+  "discoveries": [
+    {
+      "discovery_id": "DISCOVERY_CRAWL_20260726_D001D_001",
+      "discovery_class": "PROOF_OBLIGATION",
+      "title": "Typed representability remains a candidate scope",
+      "statement": "The tested predicate requires typed projected values, a typed witness, compatible trace, and explicit history; finite fixtures reject projection-only and outcome-label-only proxies.",
+      "epistemic_status": "SOURCE_REPORTED",
+      "proof_status": "OBLIGATIONS_IDENTIFIED",
+      "supporting_evidence_ids": ["CAMPAIGN_D_OBL_D_001D_TYPED_REPRESENTABILITY_20260725_001", "CAMPAIGN_D_OBL_D_001D_SEMANTIC_REVIEW_20260725_001"],
+      "falsification_conditions": ["Independent checking shows the components insufficient within the declared scope."],
+      "canonical_promotion_allowed": false,
+      "human_review_required": true
+    },
+    {
+      "discovery_id": "DISCOVERY_CRAWL_20260726_DOC_001",
+      "discovery_class": "CONTRADICTION",
+      "title": "Textbook preservation wording conflicts with live D status",
+      "statement": "Some textbook passages state representable-distinction preservation as established while the live D registry and D package summary retain it as unresolved.",
+      "epistemic_status": "OBSERVED",
+      "proof_status": "OBLIGATIONS_IDENTIFIED",
+      "supporting_evidence_ids": ["docs/textbook/mono_process_textbook_complete.md", "registry/math/d_semantics_obligation_registry.json"],
+      "falsification_conditions": ["A synchronized documentation audit removes the conflicting wording."],
+      "canonical_promotion_allowed": false,
+      "human_review_required": true
+    }
+  ],
+  "obligations": [
+    {"id": "OBL-D-001D", "status": "OPEN", "claim_ceiling": "C1_DEFINED_PROVISIONAL", "blocking_effect": "D theorem promotion"},
+    {"id": "OBL-D-001E", "status": "OPEN", "claim_ceiling": "C1_DEFINED_PROVISIONAL", "blocking_effect": "D theorem promotion", "depends_on": ["OBL-D-001D"]},
+    {"id": "DEBT_D_SEMANTICS_PROOF_001", "status": "open", "blocking_effect": "D-semantics theorem promotion", "required_resolution": ["OBL-D-001D", "OBL-D-001E"]}
+  ],
+  "frontier": {
+    "open_branches": ["independently accept the typed representability predicate", "reconcile textbook wording", "specify and test the non-collapse boundary"],
+    "blocked_branches": ["D-semantics theorem promotion", "claim escalation above C1"],
+    "deferred_branches": ["external physical interpretation", "production artifact projection"],
+    "termination_reason": "bounded scope completed; further progress requires new independent evidence or authorized documentation maintenance",
+    "continuation_token": "CONTINUE_D_SEMANTICS_D001D_TO_D001E_20260726"
+  },
+  "governance_health": {
+    "runtime_status": "warn",
+    "runtime_blockers": [],
+    "db_snapshot_status": "stale",
+    "global_health_status": "warning",
+    "degraded_stages": ["hygiene_validation", "math_program_validation", "report_write"]
+  },
+  "executive_recommendation": "FORMALIZE",
+  "campaign_assessment": "PARTIAL_SUCCESS",
+  "confidence": "high for source states; moderate for cross-document contradiction",
+  "authorization_boundary": "No registry mutation, textbook patch, promotion, proof discharge, execution, artifact indexing, SQLite refresh, or external validity claim is authorized.",
+  "deliverables": [
+    "departments/analysis/crawl_reports/analysis_crawl_20260726_d001d_frontier_001.json",
+    "departments/analysis/crawl_reports/analysis_crawl_20260726_d001d_frontier_001.md"
+  ]
+}

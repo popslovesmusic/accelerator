@@ -1,0 +1,27 @@
+{
+  "patch_id": "MPF-ACELL-EQUIV-007",
+  "name": "Optimization Drift Sentinel Registry",
+  "status": "active",
+  "series_status": "EQUIVALENCE_HARDENING_ONLY",
+  "purpose": "Detect semantic drift introduced by performance optimizations or backend substitutions.",
+  "governance_status": {
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL",
+    "non_separability_acknowledged": true,
+    "source_relation": "(E≠0) ⇔R δ(E>0)"
+  },
+  "sentinel_checks": [
+    { "id": "backend_equivalence", "description": "Verify CPU vs GPU results for identical configurations.", "status": "ACTIVE" },
+    { "id": "distributional_equivalence", "description": "Verify statistical ensemble overlap across implementations.", "status": "ACTIVE" },
+    { "id": "phase_behavior_equivalence", "description": "Verify that critical phase boundaries remain unchanged by optimization.", "status": "ACTIVE" },
+    { "id": "seed_stability", "description": "Verify that backend precision doesn't cause chaotic seed divergence.", "status": "ACTIVE" },
+    { "id": "output_class_stability", "description": "Verify that output schemas and units remain consistent across versions.", "status": "ACTIVE" }
+  ],
+  "governance_rules": [
+    {
+      "rule_id": "ODS-RULE-001",
+      "rule": "Drift detection failure triggers an immediate 'rigor endorsement_REVOKED' status for the affected tool."
+    }
+  ],
+  "source_relation": "(E≠0) ⇔R δ(E>0)",
+  "non_separability_acknowledged": true
+}

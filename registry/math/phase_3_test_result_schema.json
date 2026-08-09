@@ -1,0 +1,82 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Structured schema for Phase 3 stability test results, perturbations, outcomes, failures, and cautions.",
+    "status": "provisional",
+    "last_updated": "2026-05-12"
+  },
+  "definitions": {
+    "test_result": {
+      "type": "object",
+      "properties": {
+        "test_id": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "perturbation_class": {
+          "type": "string"
+        },
+        "expected_behavior": {
+          "type": "string"
+        },
+        "observed_behavior": {
+          "enum": [
+            "pass",
+            "warning",
+            "fail",
+            "not_executed",
+            "inconclusive"
+          ]
+        },
+        "failure_modes_triggered": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "stability_class_observed": {
+          "type": "string"
+        },
+        "evidence_type": {
+          "const": "formal_model_evidence"
+        },
+        "claim_boundary": {
+          "const": "formal_procedural_only"
+        },
+        "theorem_implications": {
+          "type": "object",
+          "properties": {
+            "may_support": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "must_not_promote": {
+              "const": true
+            }
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "raw_trace": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "test_id",
+        "target",
+        "observed_behavior"
+      ]
+    }
+  }
+}

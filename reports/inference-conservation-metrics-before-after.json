@@ -1,0 +1,140 @@
+{
+  "report_id": "inference_conservation_metrics_before_after_v1",
+  "patch_id": "PATCH_ACCELERATOR_INFERENCE_CONSERVATION_CLOSEOUT_055",
+  "captured_at": "2026-07-12T16:42:09.7754460-04:00",
+  "patches": {
+    "050": {
+      "name": "PATCH_ACCELERATOR_CANONICAL_CONTEXT_CAPSULE_050",
+      "before": {
+        "temp_cache_probe": {
+          "same_hash": false,
+          "first_cache_status": "MISS",
+          "second_cache_status": "MISS"
+        },
+        "cli_probe": {
+          "same_hash": false,
+          "first_cache_status": "MISS",
+          "second_cache_status": "MISS"
+        }
+      },
+      "after": {
+        "stable_hash": "2bad0759d48f35c8fbc746bcc47533f8e52a3802f0bab55166fb542c8f465ce1",
+        "temp_cache_probe": {
+          "same_hash": true,
+          "first_cache_status": "MISS",
+          "second_cache_status": "HIT",
+          "cold_build_time_ms": 2343.64,
+          "warm_build_time_ms": 2346.762,
+          "cold_wall_time_ms": 2353.844,
+          "warm_wall_time_ms": 2348.993
+        },
+        "cli_probe": {
+          "same_hash": true,
+          "first_cache_status": "MISS",
+          "second_cache_status": "HIT"
+        }
+      }
+    },
+    "051": {
+      "name": "PATCH_ACCELERATOR_SEMANTIC_READOUT_CAPABILITY_GATE_051",
+      "before": {
+        "default_backend": "local",
+        "enable_network_semantic_readout": false,
+        "network_retry_budget": 0,
+        "network_requests_observed": 0,
+        "retry_count_observed": 0,
+        "repo_local_callers_found": 0
+      },
+      "after": {
+        "default_request_count": 0,
+        "gate_denials_observed": 4,
+        "authorized_mock_request_count": 1,
+        "failure_request_count": 1,
+        "retry_count": 0,
+        "default_runtime_inference_calls": 0,
+        "default_runtime_network_requests": 0
+      }
+    },
+    "052": {
+      "name": "PATCH_ACCELERATOR_INFERENCE_NECESSITY_GATE_052",
+      "before": {
+        "boundaries_found": 1,
+        "test_only_surfaces": 1,
+        "activation_surfaces": 1,
+        "false_positives": 1,
+        "direct_provider_matches": 1
+      },
+      "after": {
+        "registered_boundaries": 1,
+        "active": 0,
+        "latent": 1,
+        "ungated": 0,
+        "shared_gate_default_decision": "DENY",
+        "semantic_readout_registered": true,
+        "semantic_readout_default_budget_zero": true
+      }
+    },
+    "053": {
+      "name": "PATCH_ACCELERATOR_DETERMINISTIC_DECISION_CACHE_053",
+      "before": {
+        "cache_lookups": 0,
+        "cache_hits": 0,
+        "network_repeat": {
+          "urlopen_call_count": 2
+        },
+        "local_repeat": {
+          "local_reply_call_count": 2
+        }
+      },
+      "after": {
+        "cache_lookups": 4,
+        "cache_hits": 2,
+        "cache_hit_rate": 0.5,
+        "deterministic_result_hits": 1,
+        "accepted_output_hits": 1,
+        "inference_calls_avoided": 1,
+        "network_requests_avoided": 1,
+        "deterministic_work_avoided": 1,
+        "default_runtime_inference_calls": 0,
+        "default_runtime_network_requests": 0,
+        "default_runtime_retries": 0
+      }
+    },
+    "054": {
+      "name": "PATCH_ACCELERATOR_DETERMINISTIC_ROUTING_AND_CANDIDATE_BOUNDING_054",
+      "before": {
+        "request_paths_observed": 3,
+        "surface_variants_per_operation": 3,
+        "distinct_cache_keys_for_equivalent_requests": 2,
+        "independent_router_count": 1,
+        "unbounded_candidate_paths": 1,
+        "requests_reaching_inference_gate": 1
+      },
+      "after": {
+        "canonical_operation_count": 6,
+        "aliases_collapsed": 1,
+        "equivalent_requests_converged": 3,
+        "cache_keys_eliminated": 2,
+        "independent_routers_removed_or_wrapped": 1,
+        "unbounded_candidate_paths_remaining": 0,
+        "zero_candidate_resolutions": 1,
+        "single_candidate_resolutions": 1,
+        "dominant_candidate_resolutions": 1,
+        "cache_hits_from_normalization": 3,
+        "requests_prevented_from_reaching_gate": 0,
+        "actual_inference_calls": 0
+      }
+    }
+  },
+  "closeout_defaults": {
+    "default_runtime": {
+      "inference_calls": 0,
+      "network_requests": 0,
+      "retries": 0
+    }
+  },
+  "notes": [
+    "The before/after values are consolidated from the patch 050-054 evidence files already present in the repository.",
+    "The remaining semantic-readout boundary stays latent and presentation-only, so the closeout is partial rather than a full elimination."
+  ]
+}

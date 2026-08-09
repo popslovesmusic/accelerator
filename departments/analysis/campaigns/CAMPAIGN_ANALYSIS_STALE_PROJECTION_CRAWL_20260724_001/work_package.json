@@ -1,0 +1,392 @@
+{
+  "standard": "ACTIONABLE_OBLIGATION_STANDARD_V2",
+  "campaign_id": "CAMPAIGN_ANALYSIS_STALE_PROJECTION_CRAWL_20260724_001",
+  "source_work_package": "../CAMPAIGN_D_SEMANTICS_THEORY_CRAWL_20260723_002/work_package.json",
+  "packages": [
+    {
+      "obligation_id": "STALE_ANALYSIS_PROJECTIONS_001",
+      "title": "Refresh stale analysis routing and supersession links",
+      "objective": "Classify every stale active analysis surface against current authority and add explicit supersession or current-state links.",
+      "why_it_exists": "Current-state analysis trust is degraded when live routing surfaces contradict the reconciled work index or D certificates.",
+      "priority": "CRITICAL",
+      "critical_path": true,
+      "estimated_effort": "MEDIUM",
+      "estimated_compute_cost": "LOW",
+      "repository_value": "HIGH",
+      "required_inputs": [
+        "stale_projection_matrix.json",
+        "governance/live/master_work_index.json",
+        "departments/analysis/program_state_report.json",
+        "registry/math/d_semantics_obligation_registry.json"
+      ],
+      "assumptions": [
+        "historical analysis surfaces may be preserved if they are explicitly marked historical",
+        "canonical registries remain primary"
+      ],
+      "blocking_dependencies": [],
+      "execution_steps": [
+        {
+          "step": 1,
+          "description": "Map each stale active analysis surface to the current authority surface."
+        },
+        {
+          "step": 2,
+          "description": "Add current-state or supersession links without erasing historical wording."
+        },
+        {
+          "step": 3,
+          "description": "Recheck that no active analysis summary contradicts the live A/B or work-index state."
+        }
+      ],
+      "expected_deliverables": [
+        {
+          "artifact": "analysis refresh patch",
+          "required": true
+        },
+        {
+          "artifact": "current-state D addendum",
+          "required": true
+        },
+        {
+          "artifact": "updated analysis routing summary",
+          "required": true
+        }
+      ],
+      "validation": {
+        "acceptance_tests": [
+          "Every stale active analysis surface is classified current, superseded, or historical",
+          "No active analysis summary contradicts live A/B or work-index status"
+        ],
+        "required_reviews": [
+          "human review"
+        ],
+        "mechanized_checks": [
+          "fresh current-state verification"
+        ],
+        "simulation_checks": []
+      },
+      "success_definition": "Analysis routing is again reproducible from current governed state without stale status conflicts.",
+      "failure_conditions": [
+        "Any stale active analysis surface remains ambiguous",
+        "Historical wording is silently overwritten"
+      ],
+      "unlocks": {
+        "proofs": [],
+        "theorems": [],
+        "definitions": [],
+        "campaigns": [
+          "CAMPAIGN_ANALYSIS_STALE_PROJECTION_REFRESH_20260724_001"
+        ],
+        "repository_objects": [
+          "TASK-D-001C-TYPE-PRESERVATION"
+        ]
+      },
+      "recommended_agent": "RT_AGENT_INFINITE_THEORY_ANALYST",
+      "escalation": {
+        "if_blocked": "Escalate conflicting active sources to human review.",
+        "if_contradiction_found": "Preserve both surfaces and record the contradiction.",
+        "if_counterexample_found": "Reopen the stale-classification mapping."
+      },
+      "completion_state": {
+        "status": "OPEN",
+        "completion_percent": 0
+      }
+    },
+    {
+      "obligation_id": "OBL-D-001C",
+      "title": "Typed transition preservation",
+      "objective": "Show which type properties are preserved when A|E maps through Pi_D into TYPE_PROJECTION.",
+      "why_it_exists": "A projection claim requires typed derivation rather than analogy.",
+      "priority": "HIGH",
+      "critical_path": true,
+      "estimated_effort": "HIGH",
+      "estimated_compute_cost": "MEDIUM",
+      "repository_value": "VERY_HIGH",
+      "required_inputs": [
+        "OBL-D-001A certificate",
+        "TYPE_PROJECTION",
+        "P125 typed transition obligations"
+      ],
+      "assumptions": [
+        "Eval_D,C remains typed",
+        "non-invertibility remains allowed"
+      ],
+      "blocking_dependencies": [
+        "TYPE_PROJECTION"
+      ],
+      "execution_steps": [
+        {
+          "step": 1,
+          "description": "Formalize transition premises."
+        },
+        {
+          "step": 2,
+          "description": "Derive preservation cases."
+        },
+        {
+          "step": 3,
+          "description": "Mechanize positive and negative fixtures."
+        },
+        {
+          "step": 4,
+          "description": "Review proof and update certificate."
+        }
+      ],
+      "expected_deliverables": [
+        {
+          "artifact": "typed preservation proof",
+          "required": true
+        },
+        {
+          "artifact": "mechanized fixture",
+          "required": true
+        },
+        {
+          "artifact": "negative-case report",
+          "required": true
+        }
+      ],
+      "validation": {
+        "acceptance_tests": [
+          "All valid transitions pass",
+          "All negative fixtures reject",
+          "No hidden invertibility assumption"
+        ],
+        "required_reviews": [
+          "formal proof review",
+          "human review"
+        ],
+        "mechanized_checks": [
+          "proof or type checker"
+        ],
+        "simulation_checks": []
+      },
+      "success_definition": "The transition preservation claim is formally specified and independently checked.",
+      "failure_conditions": [
+        "Proof depends on undefined D types",
+        "Negative fixtures pass",
+        "Invertibility is assumed"
+      ],
+      "unlocks": {
+        "proofs": [
+          "P125 completion"
+        ],
+        "theorems": [],
+        "definitions": [
+          "typed projection preservation"
+        ],
+        "campaigns": [
+          "CAMPAIGN_D_MECHANIZED_PROJECTION_001"
+        ],
+        "repository_objects": [
+          "OBL-D-001D",
+          "OBL-D-001E"
+        ]
+      },
+      "recommended_agent": "FORMAL_PROOF_ANALYST",
+      "escalation": {
+        "if_blocked": "Return to the TYPE_PROJECTION contract and keep OPEN.",
+        "if_contradiction_found": "Preserve both derivations and open contradiction review.",
+        "if_counterexample_found": "Invalidate the preservation candidate and reopen definition."
+      },
+      "completion_state": {
+        "status": "OPEN",
+        "completion_percent": 60
+      }
+    },
+    {
+      "obligation_id": "OBL-D-001D",
+      "title": "Representable distinction preservation",
+      "objective": "Define and test what distinction relation Pi_D preserves.",
+      "why_it_exists": "It separates semantic preservation from residue proxies and outcome labels.",
+      "priority": "HIGH",
+      "critical_path": true,
+      "estimated_effort": "HIGH",
+      "estimated_compute_cost": "MEDIUM",
+      "repository_value": "HIGH",
+      "required_inputs": [
+        "OBL-D-001C certificate",
+        "Notebook 18-20 archives",
+        "immutable experiment specification"
+      ],
+      "assumptions": [
+        "representable distinction is not defined from outcome labels"
+      ],
+      "blocking_dependencies": [
+        "OBL-D-001C"
+      ],
+      "execution_steps": [
+        {
+          "step": 1,
+          "description": "Define representable distinction independently of topology outcome."
+        },
+        {
+          "step": 2,
+          "description": "Construct matched-image, context, and history cases."
+        },
+        {
+          "step": 3,
+          "description": "Search counterexamples."
+        },
+        {
+          "step": 4,
+          "description": "Review evidence and update certificate."
+        }
+      ],
+      "expected_deliverables": [
+        {
+          "artifact": "representable distinction definition",
+          "required": true
+        },
+        {
+          "artifact": "matched-case evidence table",
+          "required": true
+        },
+        {
+          "artifact": "counterexample report",
+          "required": true
+        }
+      ],
+      "validation": {
+        "acceptance_tests": [
+          "Predicate is computable without outcome labels",
+          "Matched cases reproduce preservation and failure"
+        ],
+        "required_reviews": [
+          "empirical evidence review",
+          "human review"
+        ],
+        "mechanized_checks": [],
+        "simulation_checks": [
+          "matched-image experiment"
+        ]
+      },
+      "success_definition": "Representable distinction has an independent bounded predicate with explicit failure cases.",
+      "failure_conditions": [
+        "Predicate is circular",
+        "History is omitted without justification",
+        "Counterexamples are suppressed"
+      ],
+      "unlocks": {
+        "proofs": [],
+        "theorems": [],
+        "definitions": [
+          "representable distinction"
+        ],
+        "campaigns": [
+          "CAMPAIGN_D_HISTORY_AUGMENTED_PROJECTION_COUNTERMODEL_001"
+        ],
+        "repository_objects": [
+          "OBL-D-001E"
+        ]
+      },
+      "recommended_agent": "EMPIRICAL_EVIDENCE_ANALYST",
+      "escalation": {
+        "if_blocked": "Request additional immutable specification or approved tool.",
+        "if_contradiction_found": "Open empirical contradiction record.",
+        "if_counterexample_found": "Reopen the preservation claim."
+      },
+      "completion_state": {
+        "status": "OPEN",
+        "completion_percent": 90
+      }
+    },
+    {
+      "obligation_id": "OBL-D-001E",
+      "title": "Non-collapse boundary",
+      "objective": "Specify the boundary between residue and loss of representability.",
+      "why_it_exists": "Projection semantics need an explicit typed failure boundary.",
+      "priority": "HIGH",
+      "critical_path": true,
+      "estimated_effort": "HIGH",
+      "estimated_compute_cost": "HIGH",
+      "repository_value": "HIGH",
+      "required_inputs": [
+        "OBL-D-001D certificate",
+        "Notebook 18 degeneracy evidence",
+        "Notebook 20 counterexamples"
+      ],
+      "assumptions": [
+        "collapse is typed partiality or loss of required representability"
+      ],
+      "blocking_dependencies": [
+        "OBL-D-001D"
+      ],
+      "execution_steps": [
+        {
+          "step": 1,
+          "description": "Define collapse and residue as separate typed outcomes."
+        },
+        {
+          "step": 2,
+          "description": "Construct positive, negative, and boundary fixtures."
+        },
+        {
+          "step": 3,
+          "description": "Search minimal countermodels."
+        },
+        {
+          "step": 4,
+          "description": "Issue certificate only after all tests pass."
+        }
+      ],
+      "expected_deliverables": [
+        {
+          "artifact": "non-collapse boundary specification",
+          "required": true
+        },
+        {
+          "artifact": "minimal countermodel archive",
+          "required": true
+        },
+        {
+          "artifact": "negative-result report",
+          "required": true
+        }
+      ],
+      "validation": {
+        "acceptance_tests": [
+          "Positive, negative, and boundary fixtures classify consistently",
+          "Counterexamples are exhausted within declared scope"
+        ],
+        "required_reviews": [
+          "counterexample review",
+          "human review"
+        ],
+        "mechanized_checks": [],
+        "simulation_checks": [
+          "boundary fixture sweep"
+        ]
+      },
+      "success_definition": "A typed rule distinguishes residue from collapse across the declared fixtures and bounded countermodel space.",
+      "failure_conditions": [
+        "Collapse is defined only by post-hoc label",
+        "Boundary fixtures are absent",
+        "Counterexample space is narrowed without justification"
+      ],
+      "unlocks": {
+        "proofs": [],
+        "theorems": [],
+        "definitions": [
+          "non-collapse boundary"
+        ],
+        "campaigns": [
+          "CAMPAIGN_D_NONCOLLAPSE_BOUNDARY_001"
+        ],
+        "repository_objects": [
+          "D theorem promotion gate"
+        ]
+      },
+      "recommended_agent": "COUNTEREXAMPLE_SEARCHER",
+      "escalation": {
+        "if_blocked": "Suspend until OBL-D-001D is valid.",
+        "if_contradiction_found": "Preserve contradiction and reopen boundary definition.",
+        "if_counterexample_found": "Automatically reopen this obligation."
+      },
+      "completion_state": {
+        "status": "OPEN",
+        "completion_percent": 90
+      }
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "artifact_id": "delta_ordinal_transition_rules_055",
+  "artifact_type": "ordinal_transition_rules",
+  "status": "DRAFT_PROVISIONAL",
+  "scope": "documentation_only",
+  "source_patch_id": "PATCH_PI_RT_CALCULUS_055",
+  "revision_target": "PATCH_PI_RT_CALCULUS_055",
+  "purpose": "Record the ordinal transition rules available to Delta under a declared <S> and residue-asymmetry parameter r_a without assigning numeric step sizes.",
+  "inherited_classes": [
+    "NO_EXPRESSED_MISMATCH",
+    "LOW_MISMATCH",
+    "MODERATE_MISMATCH",
+    "HIGH_MISMATCH",
+    "ADMISSIBILITY_BREAK"
+  ],
+  "transition_rules": {
+    "local_step": [
+      {
+        "from": "NO_EXPRESSED_MISMATCH",
+        "to": "LOW_MISMATCH",
+        "condition": "A limited mismatch becomes expressible under the declared coupling."
+      },
+      {
+        "from": "LOW_MISMATCH",
+        "to": "MODERATE_MISMATCH",
+        "condition": "The declared comparison exposes a stronger but still admissible mismatch."
+      },
+      {
+        "from": "MODERATE_MISMATCH",
+        "to": "HIGH_MISMATCH",
+        "condition": "The declared comparison exposes a strong ordinal mismatch without numeric magnitude."
+      },
+      {
+        "from": "HIGH_MISMATCH",
+        "to": "ADMISSIBILITY_BREAK",
+        "condition": "The declared comparison no longer preserves admissible comparison under the current regime."
+      }
+    ],
+    "reverse_local_step": [
+      {
+        "from": "LOW_MISMATCH",
+        "to": "NO_EXPRESSED_MISMATCH",
+        "condition": "A prior mismatch is relieved under the same declared comparison regime."
+      },
+      {
+        "from": "MODERATE_MISMATCH",
+        "to": "LOW_MISMATCH",
+        "condition": "The mismatch expression weakens while staying admissible."
+      },
+      {
+        "from": "HIGH_MISMATCH",
+        "to": "MODERATE_MISMATCH",
+        "condition": "The mismatch expression weakens after a declared update in A, E, <S>, or r_a."
+      }
+    ],
+    "jump_transition": {
+      "allowed": true,
+      "conditions": [
+        "The trace records an explicit discontinuity.",
+        "The substrate or reference coupling changes.",
+        "A residue-asymmetry shock is declared.",
+        "An admissibility failure is recorded."
+      ]
+    }
+  },
+  "prohibited_assumptions": [
+    "Do not assume equal interval spacing between classes.",
+    "Do not treat one ordinal step as a numeric unit.",
+    "Do not read class ordering as a metric line.",
+    "Do not infer topology from the ordinal order.",
+    "Do not infer physical measurement from the ordinal order."
+  ],
+  "claim_humility": {
+    "current_status": "candidate_witness_only",
+    "non_claims": [
+      "Does not assign numeric distances.",
+      "Does not define a norm.",
+      "Does not define a topology.",
+      "Does not imply physical measurement.",
+      "Does not modify RT_core."
+    ]
+  },
+  "non_claims": [
+    "Does not assign numeric distances.",
+    "Does not define a norm.",
+    "Does not define a topology.",
+    "Does not imply physical measurement.",
+    "Does not modify RT_core."
+  ]
+}

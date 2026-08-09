@@ -1,0 +1,75 @@
+{
+  "campaign_spec": {
+    "id": "ASYM_ORIENTATION_ORDERING_V1",
+    "critical_open_problem": "Does large-scale ordering depend primarily on the directional asymmetry of the orientation reference -(i_a) rather than node-level relational asymmetry?",
+    "status": "proposed_for_induction",
+
+    "hypothesis": {
+      "statement": "Large-scale ordering fields arise from the directional asymmetry of local orientation references -(i_a), which act as a relational compass for admissible continuation. This mechanism is independent of node-level relational asymmetry and is sustained by recursive residue inscription.",
+      "canonical_grounding": [
+        "-(i_a) as directional orientation reference",
+        "Pi_sel[D] ↑ -(i_a)"
+      ]
+    },
+
+    "rigor_mandate": {
+      "level": "C6_Publishable",
+      "required_tools": [
+        "triadic_closure_substrate_sim_cpp",
+        "optical_reservoir_sim_v1"
+      ],
+      "independent_measurement_count": 2,
+      "minimum_seeds": 32,
+      "backend_preference": "C++ (SYCL)"
+    },
+
+    "test_design": {
+      "strategy": "Orientation-Relational Decoupling",
+      "description": "Systematically vary orientation coherence and reference asymmetry while maintaining relational symmetry.",
+      "tests": [
+        {
+          "id": "T1_ORIENTATION_ALIGNMENT_SWEEP",
+          "name": "Orientation Coherence Sweep",
+          "description": "Measure ordering metric as local -(i_a) references transition from random (symmetric entropy) to aligned (asymmetric field), while relations remain symmetric.",
+          "target_observable": "global_ordering_metric vs orientation_entropy"
+        },
+        {
+          "id": "T2_RELATIONAL_SYMMETRY_STRESS",
+          "name": "Symmetric Substrate Persistence",
+          "description": "Demonstrate stable ordering in a 1,000,000 triad system with perfect relational symmetry but coherent orientation references.",
+          "target_observable": "basin_persistence_score"
+        }
+      ]
+    },
+
+    "falsification_attacks_highest_rigor": {
+      "vectors": [
+        {
+          "id": "FV_SYMMETRIC_REFERENCE",
+          "name": "Orientation Symmetry Attack",
+          "attack": "Replace the directional (vector) reference -(i_a) with a non-directional (scalar/symmetric) reference.",
+          "failure_condition": "Ordering fields survive the loss of reference directionality.",
+          "implication": "Asymmetric orientation is not the primary driver."
+        },
+        {
+          "id": "FV_ASYS_RELATIONAL_OVERRIDE",
+          "name": "Asymmetric Relational Noise",
+          "attack": "Maximize node-level relational asymmetry but scramble orientation references.",
+          "failure_condition": "Ordering survives despite orientation scrambling.",
+          "implication": "Relational asymmetry is the true driver, contradicting the current hypothesis."
+        },
+        {
+          "id": "FV_RESIDUE_DECOUPLING",
+          "name": "Residue-Orientation Decoupling",
+          "attack": "Maintain orientation alignment but disable residue-conditioned cost reduction.",
+          "failure_condition": "Ordering remains stable and persistent over long time-scales.",
+          "implication": "Orientation alignment is sufficient without recursive residue stabilization."
+        }
+      ]
+    },
+
+    "maximum_supported_claim": {
+      "statement": "Large-scale ordering fields are causally driven by the directional asymmetry of orientation references; relational asymmetry is an emergent byproduct of the orientation-selection process."
+    }
+  }
+}

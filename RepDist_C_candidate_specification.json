@@ -1,0 +1,41 @@
+{
+  "symbol": "RepDist_C",
+  "candidate_status": "NON_CANONICAL_CANDIDATE",
+  "signature": "RepDist_C : TYPE_PROJECTION_C x TYPE_PROJECTION_C x TYPE_WITNESS_C -> Prop",
+  "domain": "TYPE_PROJECTION_C x TYPE_PROJECTION_C x TYPE_WITNESS_C",
+  "codomain": "Prop",
+  "formation_rules": [
+    "p and q must have type TYPE_PROJECTION_C",
+    "w must satisfy TypedWitness_C(w)"
+  ],
+  "semantic_truth_conditions": "RepDist_C(p, q, w) iff type(p) = TYPE_PROJECTION_C and type(q) = TYPE_PROJECTION_C and TypedWitness_C(w) and Relation_C(p, q, w) and TraceCompatible_C(w)",
+  "required_premises": [
+    "Relation_C(p, q, w)",
+    "TraceCompatible_C(w) where TraceCompatible_C is explicitly indexed by context C"
+  ],
+  "invariants": [
+    "Independence from downstream outcome labels",
+    "Independence from residue presence"
+  ],
+  "failure_conditions": [
+    "w is missing (D-D-WITNESS-MISSING-001)",
+    "p or q has wrong type (D-D-WITNESS-WRONG-TYPE-001)",
+    "Trace incompatible (D-D-WITNESS-TRACE-001)",
+    "Relation_C evaluates to false"
+  ],
+  "exclusions": [
+    "Outcome labels (reconvergence, obstruction)",
+    "Downstream geometric coordinates"
+  ],
+  "source_traceability": [
+    "docs/theory/foundational/5_03_26 unity/math/notes/0014_d_representable_distinction_candidate.md",
+    "DEC-SEM-002 resolution (TraceCompatible_C explicitly context-indexed)"
+  ],
+  "unsupported_gaps": [
+    "Formal definition of Relation_C",
+    "Formal definition of TraceCompatible_C"
+  ],
+  "open_questions": [
+    "Is Relation_C context-free or must it be explicitly context-indexed for all C?"
+  ]
+}

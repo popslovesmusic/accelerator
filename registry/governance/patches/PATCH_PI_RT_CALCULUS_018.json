@@ -1,0 +1,135 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_018",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-05",
+  "type": "governance_patch",
+  "artifact_type": "governance_patch",
+  "title": "Well-Formed Continuation Expressions",
+  "priority": "HIGH",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_012",
+    "PATCH_PI_RT_CALCULUS_013",
+    "PATCH_PI_RT_CALCULUS_014",
+    "PATCH_PI_RT_CALCULUS_015",
+    "PATCH_PI_RT_CALCULUS_016",
+    "PATCH_PI_RT_CALCULUS_017"
+  ],
+  "purpose": "Define the grammar, typing, and domain constraints for valid RT continuation expressions so reduction rules operate only on well-formed continuation structures.",
+  "canonical_claims": [
+    {
+      "id": "CLAIM_018_001",
+      "statement": "Reduction is only lawful over well-formed continuation expressions.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_018_002",
+      "statement": "Composition is only lawful when endpoints match and domain constraints are preserved.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_018_003",
+      "statement": "Identity continuations are well-formed only over lawful RT conditions.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_018_004",
+      "statement": "Domain errors block reduction and composition.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_018_005",
+      "statement": "Well-formedness is structural and semantic, not merely syntactic.",
+      "status": "canonical"
+    }
+  ],
+  "formal_objects": [
+    {
+      "symbol": "WF(C)",
+      "name": "Well-Formed Continuation Expression",
+      "definition": "A continuation expression whose endpoints, composition structure, domain bindings, and governing constraints are valid.",
+      "primitive": false,
+      "domain": "continuation_algebra"
+    }
+  ],
+  "grammar_seed": {
+    "continuation_expression": [
+      "C(A,B)",
+      "I(A)",
+      "C(A,B) \u2218 C(B,C)",
+      "C ->red C'",
+      "NF(C)"
+    ],
+    "condition_expression": [
+      "A",
+      "B",
+      "A|E",
+      "D(*|*)",
+      "\u03a0_D(A|E)"
+    ]
+  },
+  "well_formedness_rules": [
+    {
+      "id": "WF_018_001",
+      "name": "Endpoint Validity",
+      "formal": "WF(C(A,B)) only if A and B are lawful RT conditions."
+    },
+    {
+      "id": "WF_018_002",
+      "name": "Composition Compatibility",
+      "formal": "WF(C(A,B) \u2218 C(B,C)) only if cod(C(A,B)) = dom(C(B,C))."
+    },
+    {
+      "id": "WF_018_003",
+      "name": "Identity Validity",
+      "formal": "WF(I(A)) iff A is a lawful RT condition."
+    },
+    {
+      "id": "WF_018_004",
+      "name": "Reduction Validity",
+      "formal": "C ->red C' requires WF(C) and WF(C')."
+    },
+    {
+      "id": "WF_018_005",
+      "name": "Domain Guard",
+      "formal": "Meta-domain, affect/effect-domain, projection-domain, and continuation-domain symbols must not be substituted across domains without an explicit projection or binding rule."
+    }
+  ],
+  "explicitly_out_of_scope": [
+    "Full parser implementation",
+    "Executable grammar",
+    "Complete type checker",
+    "sigma_RT",
+    "Arrow-family expansion",
+    "Confluence and termination proofs"
+  ],
+  "required_file_updates": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_018.json",
+    "registry/formal_object_registry.json",
+    "registry/math_source_registry.json",
+    "registry/lexicon_gap_queue.json",
+    "registry/registry/lexicon_gap_queue.json"
+  ],
+  "validation_requirements": [
+    "JSON parses cleanly.",
+    "Patch ledger includes PATCH_PI_RT_CALCULUS_018.",
+    "No occurrence treats WF(C) as primitive.",
+    "Continuation endpoints remain domain-guarded.",
+    "Reduction rules reference WF(C).",
+    "global_validate.py passes."
+  ],
+  "success_criteria": {
+    "wf_defined": true,
+    "domain_guard_added": true,
+    "reduction_requires_wf": true,
+    "composition_requires_wf": true,
+    "rt_core_unchanged": true
+  },
+  "next_recommended_patch": {
+    "patch_id": "PATCH_PI_RT_CALCULUS_019",
+    "title": "Typed Continuation Domains",
+    "purpose": "Refine WF(C) by introducing explicit continuation-domain typing across meta, affect/effect, projection, observation, and operational-regime layers."
+  }
+}

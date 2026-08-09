@@ -1,0 +1,121 @@
+{
+  "audit_id": "SEA-CALC-2026-07-20-002",
+  "title": "Revised External Audit of Calculus Authority, Admission, and Projection Integrity",
+  "status": "CONDITIONAL_FAIL",
+  "generated_at": "2026-07-20",
+  "source_packet": "SEA_CALC_AUTHORITY_ARCHITECTURE_REAUDIT_2026_07_20",
+  "mode": "governed_architecture_reaudit_after_bounded_repairs",
+  "validator_run_id": "GV-20260720T231200.393918-1052",
+  "validation_summary": {
+    "global_validate_exit_code": 0,
+    "overall_status": "warning",
+    "failed_stages": [],
+    "clean_pass_eligible": false
+  },
+  "canonical_architecture": "governance/live/authority_architecture.json",
+  "finding_ledger": "registry/governance/sea_calc_reaudit_finding_ledger.json",
+  "human_report": "docs/reports/staged_external_calculus_authority_reaudit_2026_07_20.md",
+  "claim_boundary": {
+    "scope": "repository authority architecture, projection integrity, and audit interpretation",
+    "does_not_promote": [
+      "theorems",
+      "lemmas",
+      "laws",
+      "claims",
+      "lexicon terms",
+      "proof status",
+      "evidence class",
+      "external validity"
+    ]
+  },
+  "stage_results": [
+    {
+      "stage": "R0",
+      "name": "Architecture confirmation",
+      "result": "CONDITIONAL_PASS",
+      "evidence": [
+        "governance/live/authority_architecture.json",
+        "governance/live/authority_manifest.json",
+        "runtime/policies/agent_authority_resolution.json"
+      ],
+      "residual_risk": "Architecture is now encoded, but runtime enforcement remains policy-level until negative controls are implemented."
+    },
+    {
+      "stage": "R1",
+      "name": "Admission traceability",
+      "result": "CONDITIONAL_FAIL",
+      "evidence": [
+        "governance/schemas/canonical_admission_packet.schema.json",
+        "registry/artifact_role_registry.json"
+      ],
+      "residual_risk": "Schema exists, but complete provenance for every canonical Calculus object was not established."
+    },
+    {
+      "stage": "R2",
+      "name": "Canonical database integrity",
+      "result": "CONDITIONAL_FAIL",
+      "evidence": [
+        "registry/db/acellorator_index.sqlite",
+        "outputs/audits/ai_db_retrieval_path_audit_2026_07_03.json"
+      ],
+      "residual_risk": "Prior DB audit classifies the DB as useful but partial; current semantic object closure and status namespaces remain open."
+    },
+    {
+      "stage": "R3",
+      "name": "Runtime authority enforcement",
+      "result": "CONDITIONAL_FAIL",
+      "evidence": [
+        "runtime/policies/agent_authority_resolution.json"
+      ],
+      "residual_risk": "Policy exists, but executable negative controls are not yet implemented."
+    },
+    {
+      "stage": "R4",
+      "name": "Validation integrity",
+      "result": "CONDITIONAL_FAIL",
+      "evidence": [
+        "registry/governance/sea_calc_reaudit_finding_ledger.json"
+      ],
+      "residual_risk": "Required validators are enumerated but not implemented."
+    },
+    {
+      "stage": "R5",
+      "name": "Markdown projection integrity",
+      "result": "CONDITIONAL_FAIL",
+      "evidence": [
+        "governance/schemas/generated_projection_metadata.schema.json",
+        "docs/reports/staged_external_calculus_authority_reaudit_2026_07_20.md"
+      ],
+      "residual_risk": "Projection metadata schema exists, but full Markdown projection coverage is incomplete."
+    },
+    {
+      "stage": "R6",
+      "name": "Bidirectional audit trace",
+      "result": "CONDITIONAL_FAIL",
+      "evidence": [
+        "registry/artifact_role_registry.json"
+      ],
+      "residual_risk": "Primary audit artifacts are role-typed; end-to-end provenance for all sampled canonical objects remains incomplete."
+    },
+    {
+      "stage": "R7",
+      "name": "Final attestation",
+      "result": "CONDITIONAL_FAIL",
+      "evidence": [
+        "docs/reports/staged_external_calculus_authority_reaudit_2026_07_20.md"
+      ],
+      "residual_risk": "The corrected architecture removes the competing-Markdown-vs-DB interpretation, but implementation controls remain incomplete."
+    }
+  ],
+  "required_followup_changes": [
+    "Implement VAL-AUTH-PIPELINE-001",
+    "Implement VAL-RUNTIME-AUTH-001",
+    "Implement VAL-PROJECTION-TRACE-001",
+    "Implement VAL-PROJECTION-FRESHNESS-001",
+    "Implement VAL-STATUS-NAMESPACE-001",
+    "Implement VAL-CANONICAL-EXPRESSION-001",
+    "Implement VAL-WORKTREE-EVIDENCE-001",
+    "Add generated projection metadata to primary Markdown projections",
+    "Populate artifact roles beyond the primary audit and architecture surfaces"
+  ]
+}

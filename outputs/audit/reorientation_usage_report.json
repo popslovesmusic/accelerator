@@ -1,0 +1,89 @@
+{
+  "audit_id": "MPF_REORIENTATION_TRIGGER_AUDIT_001",
+  "target": "Re_orientation_Trigger_Condition",
+  "usage_summary": {
+    "governance_patch": "present",
+    "lexicon_canonical": "present",
+    "lexicon_gap_queue": "present",
+    "operator_registry": "present",
+    "formal_object_registry": "absent_as_standalone_object",
+    "math_operator_registry": "absent_as_standalone_rule",
+    "simulation_registry": "absent_as_named_simulation_object",
+    "textbook": "present",
+    "orientation_audit_outputs": "indirect_only"
+  },
+  "observed_references": [
+    {
+      "location": "registry/governance/patches/MPF_PATCH_R_DUAL_PHASE_FIXES_002.json",
+      "kind": "candidate_rule_origin",
+      "symbol": "Trigger_Reorient",
+      "note": "Defines escalation from Arb_A to orientation-selection."
+    },
+    {
+      "location": "registry/lexicon_canonical.json",
+      "kind": "canonical_term",
+      "symbol": "Trigger_Reorient",
+      "note": "Canonical mechanism term exists."
+    },
+    {
+      "location": "registry/lexicon_gap_queue.json",
+      "kind": "induction_lineage",
+      "symbol": "Trigger_Reorient",
+      "note": "Shows origin from governance patch and resolution to canonical term."
+    },
+    {
+      "location": "registry/operator_registry.json",
+      "kind": "operator_embedded_rule",
+      "symbol": "Arb_A.candidate_rules.Trigger_Reorient",
+      "note": "Most explicit current trigger condition."
+    },
+    {
+      "location": "registry/operator_registry.json",
+      "kind": "operator_failure_review",
+      "symbol": "S",
+      "note": "S empty-pruned-pool failure routes to branch collapse or re-orientation trigger review."
+    },
+    {
+      "location": "docs/textbook/mono_process_textbook_complete.md",
+      "kind": "chapter_6_fork",
+      "symbol": "delta_a emptyset fork",
+      "note": "Re-orientation or 0-state collapse described at the textbook level."
+    },
+    {
+      "location": "docs/textbook/mono_process_textbook_complete.md",
+      "kind": "appendix_gap",
+      "symbol": "Re-orientation Trigger Condition",
+      "note": "Still listed as an unresolved high-priority gap."
+    }
+  ],
+  "negative_findings": [
+    {
+      "location": "registry/formal_object_registry.json",
+      "note": "No standalone object ID was found for Re_orientation_Trigger or Trigger_Reorient."
+    },
+    {
+      "location": "registry/math/operator_registry.json",
+      "note": "No standalone math-layer operator or control rule was found for the trigger."
+    },
+    {
+      "location": "docs/economics/evidence/simulation_registry.json",
+      "note": "No simulation entry names the re-orientation trigger directly."
+    },
+    {
+      "location": "outputs/audits/orientation_selection_law.json",
+      "note": "Contains orientation_collapse flags, but not a distinct Trigger_Reorient implementation."
+    }
+  ],
+  "alias_risk": [
+    {
+      "observed_name": "orientation_collapse",
+      "classification": "related_but_not_equivalent",
+      "reason": "This is an outcome marker in orientation audit outputs, not a formal trigger condition."
+    },
+    {
+      "observed_name": "NavT reorientation",
+      "classification": "downstream_role_not_trigger",
+      "reason": "Textbook language uses NavT for the reorientation branch, but that does not isolate the trigger itself."
+    }
+  ]
+}

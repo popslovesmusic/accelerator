@@ -1,0 +1,195 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_026",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-05",
+  "type": "governance_patch",
+  "artifact_type": "governance_patch",
+  "title": "Partial Normal Form Semantics",
+  "priority": "HIGH",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_025"
+  ],
+  "mode": "additive",
+  "basis": {
+    "source_patches": [
+      "PATCH_PI_RT_CALCULUS_025"
+    ],
+    "source_surfaces": [
+      "docs/textbook/mono_process_textbook_complete.md",
+      "registry/formal_object_registry.json",
+      "registry/math_source_registry.json",
+      "registry/lexicon_gap_queue.json",
+      "registry/registry/lexicon_gap_queue.json",
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_025.json"
+    ],
+    "scope": "Canonical semantics for partial normal form, reduction outcome classification, and admissible incomplete continuation reduction states after the minimal reduction algorithm is in place."
+  },
+  "core_rule": {
+    "statement": "pNF(C) is an admissible, type-correct continuation state whose lawful reductions are incomplete at the current calculus boundary; Outcome(C) classifies REDUCE_025 outputs into NF(C), pNF(C), or classified \u22a5C_x; pNF(C) is distinct from NF(C) and from continuation failure; RT_core remains unchanged."
+  },
+  "purpose": "Formally define the semantics of Partial Normal Form (pNF), distinguish it from complete Normal Form (NF) and continuation failure (\u22a5C_x), and establish the canonical reduction outcome classification.",
+  "canonical_claims": [
+    {
+      "id": "CLAIM_026_001",
+      "statement": "pNF(C) is an admissible but incomplete continuation reduction state.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_026_002",
+      "statement": "pNF(C) is distinct from NF(C) and from continuation failure.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_026_003",
+      "statement": "Outcome(C) canonically classifies reduction outputs into NF(C), pNF(C), or \u22a5C_x.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_026_004",
+      "statement": "pNF(C) does not imply failure.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_026_005",
+      "statement": "RT_core remains unchanged.",
+      "status": "canonical"
+    }
+  ],
+  "formal_objects": [
+    {
+      "id": "PNF_026",
+      "symbol": "pNF(C)",
+      "name": "Partial Normal Form",
+      "definition": "A well-formed, type-correct continuation expression whose lawful reductions are presently incomplete due to the current calculus boundary, while no continuation failure has occurred."
+    },
+    {
+      "id": "REDUCTION_OUTCOME_026",
+      "symbol": "Outcome(C)",
+      "name": "Reduction Outcome Classification",
+      "definition": "The canonical classification of REDUCE_025 outputs into NF(C), pNF(C), or \u22a5C_x."
+    }
+  ],
+  "algorithm_reference": {
+    "algorithm": "REDUCE_025",
+    "postcondition": [
+      "Return NF(C)",
+      "Return pNF(C)",
+      "Return classified \u22a5C_x"
+    ]
+  },
+  "outputs": [
+    "NF(C)",
+    "pNF(C)",
+    "\u22a5C_x"
+  ],
+  "scope": {
+    "adds": [
+      "Partial Normal Form semantic definition",
+      "Reduction outcome classification",
+      "Canonical pNF invariants",
+      "Termination outcome hierarchy",
+      "Registry objects for pNF semantics"
+    ],
+    "does_not_add": [
+      "Recovery operator",
+      "Parser implementation",
+      "Operational regime execution",
+      "sigma_RT selector",
+      "Confluence proof",
+      "Termination proof"
+    ]
+  },
+  "definitions": {
+    "normal_form": {
+      "symbol": "NF(C)",
+      "requirements": [
+        "WF(C)",
+        "Typed(C)",
+        "No continuation failure",
+        "No lawful reductions remain",
+        "Canonical continuation form reached"
+      ]
+    },
+    "partial_normal_form": {
+      "symbol": "pNF(C)",
+      "requirements": [
+        "WF(C)",
+        "Typed(C)",
+        "No continuation failure",
+        "Reduction halted",
+        "Additional lawful reductions exist outside the current executable calculus boundary"
+      ]
+    }
+  },
+  "distinctions": [
+    {
+      "statement": "pNF(C) != NF(C)",
+      "reason": "A partial normal form may admit additional lawful reductions in future calculus extensions."
+    },
+    {
+      "statement": "pNF(C) != \u22a5C_x",
+      "reason": "Partial normal form is admissible and well-formed; continuation failure is not."
+    },
+    {
+      "statement": "NF(C) != \u22a5C_x",
+      "reason": "Normal form is a successful reduction result."
+    }
+  ],
+  "partial_normal_form_causes": [
+    "Deferred calculus feature",
+    "Future operator implementation",
+    "Evaluation boundary",
+    "Governance restriction",
+    "Intentional reduction deferral"
+  ],
+  "reduction_outcomes": [
+    {
+      "condition": "Continuation failure detected",
+      "result": "\u22a5C_x"
+    },
+    {
+      "condition": "No lawful reductions remain",
+      "result": "NF(C)"
+    },
+    {
+      "condition": "Lawful reductions exist but are outside the current executable calculus boundary",
+      "result": "pNF(C)"
+    }
+  ],
+  "validation_requirements": [
+    "Patch record parses cleanly.",
+    "Patch depends on PATCH_PI_RT_CALCULUS_025.",
+    "pNF(C) is distinct from NF(C) and continuation failure.",
+    "Outcome(C) classifies reduction outputs canonically.",
+    "RT_core remains unchanged."
+  ],
+  "required_repo_changes": [
+    "Update docs/textbook/mono_process_textbook_complete.md with the Partial Normal Form section and outcome classification.",
+    "Update registry/formal_object_registry.json with the pNF and outcome formal objects.",
+    "Update registry/math_source_registry.json with the patch source entry.",
+    "Update registry/lexicon_gap_queue.json with the pNF and reduction outcome terms.",
+    "Update registry/registry/lexicon_gap_queue.json with the mirrored pNF and reduction outcome terms.",
+    "Update registry/governance_change_ledger.json with the corresponding governance ledger entry."
+  ],
+  "target_files": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/formal_object_registry.json",
+    "registry/math_source_registry.json",
+    "registry/lexicon_gap_queue.json",
+    "registry/registry/lexicon_gap_queue.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_026.json"
+  ],
+  "success_criteria": {
+    "pnf_semantics_documented": true,
+    "outcome_classification_registered": true,
+    "failure_distinguished": true,
+    "rt_core_unchanged": true
+  },
+  "next_recommended_patch": {
+    "patch_id": "PATCH_PI_RT_CALCULUS_027",
+    "title": "Reduction Trace Semantics",
+    "purpose": "Define the canonical reduction trace object produced by REDUCE_025, so every reduction outcome records the lawful sequence by which it was reached."
+  }
+}

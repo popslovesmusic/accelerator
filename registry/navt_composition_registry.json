@@ -1,0 +1,52 @@
+{
+  "registry_id": "PCD_NAVT_COMPOSITION_REGISTRY",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "expression",
+      "result",
+      "property",
+      "condition",
+      "failure_mode"
+    ]
+  },
+  "rules": [
+    {
+      "expression": "NavT(a,b) ∘ NavT(b,c)",
+      "result": "NavT(a,c) + delta_T",
+      "property": "chain_composition",
+      "condition": "composition of transport operators along an admissible chain",
+      "failure_mode": "transport_discontinuity"
+    },
+    {
+      "expression": "NavT(a,a)",
+      "result": "I_transport",
+      "property": "identity_transport",
+      "condition": "transport to self is the identity transform",
+      "failure_mode": "identity_drift"
+    }
+  ],
+  "residual_rules": [
+    {
+      "name": "transport_residual_rule_v1",
+      "statement": "The transport residual delta_T = (NavT(a,b) ∘ NavT(b,c)) - NavT(a,c) must remain below a declared threshold tau_T for the chain to be considered consistent.",
+      "failure_behavior": "mark_propagation_inconsistent"
+    }
+  ],
+  "non_local_composition": [
+    {
+      "expression": "NavT_path(i, ..., k) = NavT(i,j) ∘ NavT(j, ..., k)",
+      "result": "composed_transport_chain",
+      "property": "path_composition",
+      "condition": "recursive composition along a sequence of coupled neighbors",
+      "failure_mode": "path_discontinuity"
+    }
+  ],
+  "non_local_residual_rules": [
+    {
+      "name": "path_residual_accumulation_rule_v1",
+      "statement": "The path residual delta_T_path = (NavT(i,j) ∘ NavT(j,k)) - NavT(i,k) accumulates along the chain; stability requires the total residual to remain bounded by a topology-dependent threshold Tau_T(path).",
+      "failure_behavior": "mark_path_unstable"
+    }
+  ]
+}

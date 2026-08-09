@@ -1,0 +1,41 @@
+{
+  "registry_id": "PCD_MT_LAW_A_BUDGET_BINDING",
+  "version": "1.0.0",
+  "description": "Mathematical binding between MT-LAW-A persistence and LAW021 budget constraints, requiring all persistence claims to be finite-budget bounded.",
+  "governance_status": "PROVISIONAL_HARDENING_SERIES",
+  "binding_logic": {
+    "budget_constrained_persistence": "MT-LAW-A persistence is not a primitive property but a budget-constrained outcome. Persistence (S_achieved) is only valid while the local admissibility budget B_A (LAW021) is non-zero and covers the maintenance cost P_stab.",
+    "resilience_as_headroom": "The Cost-to-Destabilize (S_C) is mathematically bounded by the available budget headroom: S_C <= (B_A - Cost_A_maintenance)."
+  },
+  "formal_mappings": [
+    {
+      "pcd_object": "MT-LAW-A:S_C",
+      "law_object": "LAW021:B_A - Cost_A",
+      "mapping_type": "upper_bound_constraint",
+      "operational_note": "A channel cannot resist a perturbation larger than its remaining admissibility budget can damp."
+    },
+    {
+      "pcd_object": "MT-LAW-A:Persistence_Failure",
+      "law_object": "LAW021:SaturationCondition",
+      "mapping_type": "event_equivalence",
+      "operational_note": "Persistence failure in MT-LAW-A is operationally equivalent to budget saturation in LAW021."
+    }
+  ],
+  "enforcement_rules": [
+    {
+      "id": "BIND-LAW021-001",
+      "description": "All TS4 persistence claims MUST report the local budget state B_A and maintenance cost Cost_A.",
+      "requirement_level": "MANDATORY_FOR_TS4"
+    },
+    {
+      "id": "BIND-LAW021-002",
+      "description": "If B_A < Cost_A, the claim status MUST be downgraded to 'FAILED' or 'TRANSITIONING', regardless of current S_achieved.",
+      "failure_action": "automatic_downgrade"
+    }
+  ],
+  "provenance": {
+    "patch_id": "MT-LAW-A-TS4-004",
+    "series": "MT-LAW-A-TS4-STABILITY-HARDENING-001-010",
+    "status": "INITIAL_DRAFT"
+  }
+}

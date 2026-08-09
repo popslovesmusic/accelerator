@@ -1,0 +1,134 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Fixture-backed validation registry for the S arbitration rule as a pruning stage distinct from Arb_A.",
+    "status": "provisional",
+    "last_updated": "2026-06-19"
+  },
+  "target": "S_arbitration_rule",
+  "claim_effect": "NO_THEOREM_PROMOTION",
+  "tests": [
+    {
+      "id": "SVT-001",
+      "name": "S reduces candidate set cardinality",
+      "fixture": "reduce_case",
+      "pass_condition": "len(C_t^S) < len(C_t)"
+    },
+    {
+      "id": "SVT-002",
+      "name": "S may leave candidate set unchanged",
+      "fixture": "unchanged_case",
+      "pass_condition": "len(C_t^S) = len(C_t)"
+    },
+    {
+      "id": "SVT-003",
+      "name": "S never increases candidate set cardinality",
+      "fixture": "all_cases",
+      "pass_condition": "For every fixture, len(C_t^S) <= len(C_t)"
+    },
+    {
+      "id": "SVT-004",
+      "name": "Arb_A operates only on C_t^S",
+      "fixture": "reduce_case",
+      "pass_condition": "Selected candidate is drawn from C_t^S and the validation audit records no raw-pool realization."
+    },
+    {
+      "id": "SVT-005",
+      "name": "Removing S changes candidate pool but does not collapse Arb_A semantics",
+      "fixture": "reduce_case",
+      "pass_condition": "Raw and pruned pools differ, while Arb_A still returns one candidate when given a nonempty pool."
+    },
+    {
+      "id": "SVT-006",
+      "name": "S does not perform realization selection",
+      "fixture": "multi_survivor_case",
+      "pass_condition": "S returns more than one surviving candidate where available and does not emit a realized singleton."
+    }
+  ],
+  "fixtures": {
+    "reduce_case": {
+      "candidates": [
+        {
+          "id": "q_valid_mid",
+          "typed": true,
+          "distinction_ok": true,
+          "residue_ok": true,
+          "topology_ok": true,
+          "orientation_ok": true,
+          "mismatch": 0.3
+        },
+        {
+          "id": "q_illegal_low_mismatch",
+          "typed": true,
+          "distinction_ok": true,
+          "residue_ok": false,
+          "topology_ok": true,
+          "orientation_ok": true,
+          "mismatch": 0.05
+        },
+        {
+          "id": "q_invalid_orientation",
+          "typed": true,
+          "distinction_ok": true,
+          "residue_ok": true,
+          "topology_ok": true,
+          "orientation_ok": false,
+          "mismatch": 0.1
+        }
+      ]
+    },
+    "unchanged_case": {
+      "candidates": [
+        {
+          "id": "q_valid_a",
+          "typed": true,
+          "distinction_ok": true,
+          "residue_ok": true,
+          "topology_ok": true,
+          "orientation_ok": true,
+          "mismatch": 0.25
+        },
+        {
+          "id": "q_valid_b",
+          "typed": true,
+          "distinction_ok": true,
+          "residue_ok": true,
+          "topology_ok": true,
+          "orientation_ok": true,
+          "mismatch": 0.4
+        }
+      ]
+    },
+    "multi_survivor_case": {
+      "candidates": [
+        {
+          "id": "q_survivor_a",
+          "typed": true,
+          "distinction_ok": true,
+          "residue_ok": true,
+          "topology_ok": true,
+          "orientation_ok": true,
+          "mismatch": 0.2
+        },
+        {
+          "id": "q_survivor_b",
+          "typed": true,
+          "distinction_ok": true,
+          "residue_ok": true,
+          "topology_ok": true,
+          "orientation_ok": true,
+          "mismatch": 0.22
+        },
+        {
+          "id": "q_rejected_type",
+          "typed": false,
+          "distinction_ok": true,
+          "residue_ok": true,
+          "topology_ok": true,
+          "orientation_ok": true,
+          "mismatch": 0.01
+        }
+      ]
+    }
+  }
+}

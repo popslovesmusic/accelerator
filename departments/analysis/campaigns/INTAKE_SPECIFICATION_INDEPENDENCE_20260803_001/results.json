@@ -1,0 +1,68 @@
+{
+  "campaign_id": "INTAKE_SPECIFICATION_INDEPENDENCE_20260803_001",
+  "status": "SPECIFICATION_DEPENDENCE_FOUND",
+  "tests": [
+    {
+      "test": "056_exclusion_rule",
+      "invariant": false,
+      "observed": {
+        "repaired": [
+          "east",
+          "north",
+          "west"
+        ],
+        "alternate": [
+          "north"
+        ]
+      },
+      "implication": "Boundary-conditioned admissibility is specification-dependent unless the operator semantics are frozen."
+    },
+    {
+      "test": "057_identity_equivalence_rule",
+      "invariant": false,
+      "observed": {
+        "full_typed_equal": false,
+        "relation_only_equal": true
+      },
+      "implication": "Orientation identity depends on whether context and endpoint typing are part of equality."
+    },
+    {
+      "test": "060_mto_selector",
+      "invariant": false,
+      "observed": {
+        "lexicographic": [
+          "p0",
+          "p1",
+          "p2",
+          "p2"
+        ],
+        "frequency_ranked": [
+          "p2",
+          "p1",
+          "p0"
+        ]
+      },
+      "implication": "MTO output depends on the declared selector when ordering and multiplicity interact."
+    },
+    {
+      "test": "060_termination_policy",
+      "invariant": false,
+      "observed": {
+        "depth_stop": [
+          "RT_A",
+          "RT_B",
+          "RT_A"
+        ],
+        "cycle_stop": [
+          "RT_A",
+          "RT_B"
+        ]
+      },
+      "implication": "Termination policy changes the finite continuation trace."
+    }
+  ],
+  "divergence_count": 4,
+  "claim_ceiling": "C1",
+  "conclusion": "The tested bounded results depend materially on semantic choices for exclusion, identity equivalence, MTO selection, and termination.",
+  "required_action": "Freeze these semantics as explicit model parameters before any broader claim."
+}

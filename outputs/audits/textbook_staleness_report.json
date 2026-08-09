@@ -1,0 +1,75 @@
+{
+  "audit_id": "AUDIT_TEXTBOOK_STRUCTURAL_STALENESS_001",
+  "title": "Mono Process Textbook Staleness Report",
+  "canonical_core": {
+    "legacy_expression": "RT := [(E != 0) iff_R delta_a(E > 0)]",
+    "canonical_expression": "RT_core := [(E\u22600) \u21d4R \u03b4\u03b1(E>0)]",
+    "legacy_occurrences": [
+      "docs/textbook/mono_process_textbook_complete.md:40",
+      "docs/textbook/mono_process_textbook_complete.md:85",
+      "docs/textbook/mono_process_textbook_complete.md:101",
+      "docs/textbook/mono_process_textbook_complete.md:104",
+      "docs/textbook/mono_process_textbook_complete.md:265",
+      "docs/textbook/mono_process_textbook_complete.md:525",
+      "docs/textbook/mono_process_textbook_complete.md:601",
+      "docs/textbook/mono_process_textbook_complete.md:666",
+      "docs/textbook/mono_process_textbook_complete.md:944",
+      "docs/textbook/mono_process_textbook_complete.md:1474",
+      "docs/textbook/mono_process_textbook_complete.md:3085"
+    ],
+    "canonical_occurrences": [
+      "docs/textbook/mono_process_textbook_complete.md:141",
+      "docs/textbook/mono_process_textbook_complete.md:144",
+      "docs/textbook/mono_process_textbook_complete.md:147"
+    ],
+    "assessment": "The textbook is internally mixed. The canonical RT_core form is present and current, but legacy aliasing remains visible in the front matter, trace-admissibility block, summaries, and one failure-condition equation. That is acceptable only if the legacy form is explicitly labeled historical residue."
+  },
+  "staleness_findings": [
+    {
+      "section": "Chapter 1 front matter",
+      "lines": [
+        40,
+        85,
+        101,
+        104
+      ],
+      "issue": "The opening statements still present the legacy \u0064elta_a/iff_R core formula before the later canonical block appears.",
+      "risk": "Readers may infer that the older notation is still canonical."
+    },
+    {
+      "section": "1.2D RT Trace-Admissibility",
+      "lines": [
+        265,
+        266,
+        267
+      ],
+      "issue": "The trace-admissibility block still defines RT_core using A_meta/B_meta with delta_a and iff_R rather than the canonical RT_core spelling.",
+      "risk": "Trace admissibility reads like a second canonical definition instead of a legacy alias."
+    },
+    {
+      "section": "Legacy summaries and failure condition",
+      "lines": [
+        525,
+        601,
+        666,
+        944,
+        1474,
+        3085
+      ],
+      "issue": "Later summary blocks still echo the legacy core expression.",
+      "risk": "The canonical RT-core spelling is diluted by repeated legacy recitation."
+    }
+  ],
+  "governance_drift_notes": [
+    {
+      "line": 3217,
+      "issue": "Memory Tensor RT keeps the meta-domain A_meta/B_meta pair reserved while also introducing A_affect/B_affect and Obs(A_affect, B_affect).",
+      "assessment": "Current and consistent with the affect-domain rebinding language."
+    },
+    {
+      "line": 3380,
+      "issue": "The affect/effect distinction projection patch is reflected in the textbook.",
+      "assessment": "Current and consistent with PATCH_PI_RT_CALCULUS_009."
+    }
+  ]
+}

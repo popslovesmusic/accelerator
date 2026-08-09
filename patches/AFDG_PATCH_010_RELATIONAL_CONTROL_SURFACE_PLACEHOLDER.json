@@ -1,0 +1,21 @@
+{
+  "patch_id": "AFDG_PATCH_010_RELATIONAL_CONTROL_SURFACE_PLACEHOLDER",
+  "status": "APPLIED",
+  "applied_date": "2026-07-20T09:38:00-04:00",
+  "scope": "C1_MODEL_RELATIVE_ONLY",
+  "target": "Relational Control Surfaces Placeholder Concept Record",
+  "purpose": "Define placeholder concept record for treating constants or coupling factors as control-surface projections inside relational process.",
+  "governance_note": "Placeholder-closed under PROVISIONAL_PLACEHOLDER_P1. Enforces no-externalization guard (disallows fixed external background parameters).",
+  "schema": {
+    "type": "object",
+    "required": ["surface_id", "projected_parameter", "relational_origin", "no_externalization_guard", "claim_ceiling"],
+    "properties": {
+      "surface_id": { "type": "string" },
+      "projected_parameter": { "type": "string" },
+      "relational_origin": { "type": "string" },
+      "no_externalization_guard": { "type": "boolean" },
+      "claim_ceiling": { "type": "string", "enum": ["PROVISIONAL_PLACEHOLDER_P1"] }
+    }
+  },
+  "claim_class": "C1"
+}

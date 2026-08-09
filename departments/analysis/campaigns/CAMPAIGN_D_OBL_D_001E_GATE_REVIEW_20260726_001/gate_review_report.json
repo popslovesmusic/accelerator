@@ -1,0 +1,42 @@
+{
+  "campaign_id": "CAMPAIGN_D_OBL_D_001E_GATE_REVIEW_20260726_001",
+  "campaign_type": "BOUNDED_DEPENDENT_PROMOTION_GATE_REVIEW",
+  "generated_at": "2026-07-26",
+  "obligation_id": "OBL-D-001E",
+  "source_artifacts": [
+    "registry/math/d_semantics_obligation_registry.json",
+    "departments/analysis/campaigns/CAMPAIGN_D_SEMANTICS_THEORY_CRAWL_20260723_002/d_noncollapse_boundary_fixture_check_20260723.json",
+    "departments/analysis/campaigns/CAMPAIGN_D_SEMANTICS_THEORY_CRAWL_20260723_002/d_noncollapse_boundary_countermodel_search_20260723.json",
+    "departments/analysis/campaigns/CAMPAIGN_D_SEMANTICS_THEORY_CRAWL_20260723_002/human_review_approval_b_e_20260723.json",
+    "departments/analysis/campaigns/CAMPAIGN_D_SEMANTICS_THEORY_CRAWL_20260723_002/d_promotion_gate_audit_20260723.json",
+    "departments/analysis/campaigns/CAMPAIGN_D_OBL_D_001D_SEMANTIC_REVIEW_20260725_001/semantic_review_report.json"
+  ],
+  "directly_observed": {
+    "fixture_check": {"status": "PASS", "cases_checked": 5, "cases_passed": 5, "cases_failed": 0},
+    "countermodel_sweep": {"status": "PASS_BOUNDED_BOUNDARY_SWEEP", "rows": 48, "rule_violations": 0, "classification_counts": {"COLLAPSED": 9, "DEFINED_REPRESENTABLE": 2, "DEFINED_RESIDUAL": 1, "REJECT_BEFORE_COLLAPSE_CLASSIFICATION": 36}},
+    "human_review": "APPROVED",
+    "live_obligation_status": "OPEN",
+    "promotion_allowed": false,
+    "d001d_status": "OPEN"
+  },
+  "gate_rule": "No promotion above C1 until OBL-D-001A through OBL-D-001E have formal or independently checked bounded support and required review.",
+  "assessment": "The OBL-D-001E candidate boundary is internally consistent over the declared finite fixture space, but this does not discharge the obligation or permit theorem promotion.",
+  "gate_result": "BLOCKED_NOT_READY",
+  "blocking_reasons": [
+    "OBL-D-001D remains OPEN and is upstream of the dependent gate.",
+    "The E evidence is finite and synthetic.",
+    "The boundary is not a universal collapse classification.",
+    "D-semantics promotion remains capped at C1_DEFINED_PROVISIONAL."
+  ],
+  "epistemic_status": "SOURCE_REPORTED",
+  "proof_status": "OBLIGATIONS_IDENTIFIED",
+  "recommended_next_action": "Independently accept or reject the OBL-D-001D typed representability predicate, then rerun the combined D-semantics gate with E as a dependent review.",
+  "falsification_conditions": [
+    "A typed admissible case violates the declared three-way boundary classification.",
+    "A defined projection with required witness is shown to collapse under the declared semantics.",
+    "A nonempty residue is shown to be sufficient for collapse rather than a distinct residual case.",
+    "The domain or witness predicates are shown to be circular or undefined in the declared scope."
+  ],
+  "non_authorized": ["obligation discharge", "theorem promotion", "axiom promotion", "canonical definition replacement", "external physical interpretation"],
+  "result": "PASS_BOUNDED_GATE_REVIEW_REMAINS_BLOCKED"
+}

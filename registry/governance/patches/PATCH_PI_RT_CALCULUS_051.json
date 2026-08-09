@@ -1,0 +1,193 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_051",
+  "status": "APPLIED",
+  "applied_on": "2026-07-06T23:30:17.2707662-04:00",
+  "type": "textbook_update_patch",
+  "campaign": "RT_CALCULUS",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "title": "Controlled Textbook Integration for Projection and A|E Nesting",
+  "authorized_by": "PATCH_PI_RT_CALCULUS_050",
+  "mode": "additive",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_046",
+    "PATCH_PI_RT_CALCULUS_047",
+    "PATCH_PI_RT_CALCULUS_048",
+    "PATCH_PI_RT_CALCULUS_049",
+    "PATCH_PI_RT_CALCULUS_050"
+  ],
+  "basis": {
+    "source_patches": [
+      "PATCH_PI_RT_CALCULUS_046",
+      "PATCH_PI_RT_CALCULUS_047",
+      "PATCH_PI_RT_CALCULUS_048",
+      "PATCH_PI_RT_CALCULUS_049",
+      "PATCH_PI_RT_CALCULUS_050"
+    ],
+    "source_surfaces": [
+      "docs/governance/worked_example_operational_046.json",
+      "docs/governance/admissibility_trace_046.json",
+      "docs/governance/swap_test_046.json",
+      "docs/governance/projection_example_048.json",
+      "docs/governance/projection_trace_048.json",
+      "docs/governance/projection_invariants_048.json",
+      "docs/governance/projection_invariant_trace_049.json",
+      "docs/governance/projection_variant_table_049.json",
+      "docs/governance/projection_counterexample_049.json",
+      "docs/governance/textbook_integration_plan_050.json",
+      "docs/governance/textbook_claim_discipline_050.json",
+      "docs/governance/textbook_section_targets_050.json"
+    ],
+    "scope": "Apply the section-targeted textbook edits authorized by PATCH_PI_RT_CALCULUS_050. The basis remains documentary and governed; it keeps RT_core unchanged, keeps projection claims provisional, preserves A/E asymmetry, and respects the invariant/variant boundary."
+  },
+  "core_rule": {
+    "statement": "Textbook edits may add controlled provenance notes and section-targeted cross-references for the applied 046-049 sequence only when each note remains humble, provisional, and RT_core-invariant."
+  },
+  "required_repo_changes": [
+    {
+      "path": "docs/textbook/mono_process_textbook_complete.md",
+      "change": "Edit only the section targets named in the 050 integration plan: 1.2.2B.1, 1.2.2B.9, 6.4, 7.1, 7.2, 7.3, 7.4A, 7.4B, 11.1A, 11.3, 11.4A, 14.8, and Appendix F / Chapter 6.4 Provenance-Explicit Admissibility Failure."
+    }
+  ],
+  "textbook_sections": [
+    {
+      "section_id": "1.2.2B.1",
+      "title": "RT Calculus Foundation (PATCH_PI_RT_CALCULUS_001)",
+      "planned_action": "Make the primitive-to-RT relationship explicit: every primitive is RT, but not every RT is primitive.",
+      "source_basis": [
+        "PATCH_PI_RT_CALCULUS_046",
+        "PATCH_PI_RT_CALCULUS_047",
+        "PATCH_PI_RT_CALCULUS_048",
+        "PATCH_PI_RT_CALCULUS_049",
+        "PATCH_PI_RT_CALCULUS_050"
+      ]
+    },
+    {
+      "section_id": "1.2.2B.9",
+      "title": "Primitive Distinction Projection Algebra (PATCH_PI_RT_CALCULUS_010)",
+      "planned_action": "Keep the projection layer RT-governed while explicitly non-primitive.",
+      "source_basis": [
+        "PATCH_PI_RT_CALCULUS_048",
+        "PATCH_PI_RT_CALCULUS_050"
+      ]
+    },
+    {
+      "section_id": "6.4",
+      "title": "Admissibility Failure: The Empty Set Condition",
+      "planned_action": "Replace the deferred-note language with provenance-explicit failure-lineage text and keep recovery deferred.",
+      "source_basis": [
+        "PATCH_PI_RT_CALCULUS_046",
+        "PATCH_PI_RT_CALCULUS_048",
+        "PATCH_PI_RT_CALCULUS_049",
+        "PATCH_PI_RT_CALCULUS_050"
+      ]
+    },
+    {
+      "section_id": "7.1",
+      "title": "From Relation to Measurement",
+      "planned_action": "State that metric extraction is a projection-layer readout, not a primitive identity claim.",
+      "source_basis": [
+        "PATCH_PI_RT_CALCULUS_048",
+        "PATCH_PI_RT_CALCULUS_049"
+      ]
+    },
+    {
+      "section_id": "7.2",
+      "title": "The Asymmetry Ratio: $\\Omega_a$",
+      "planned_action": "Keep asymmetry structural and explicitly separate metric projection from symmetry claims.",
+      "source_basis": [
+        "PATCH_PI_RT_CALCULUS_047",
+        "PATCH_PI_RT_CALCULUS_049"
+      ]
+    },
+    {
+      "section_id": "7.3",
+      "title": "Statistical Projections: $\\iff_s$",
+      "planned_action": "Keep the statistical carrier distinct from the observer-facing probability readout.",
+      "source_basis": [
+        "PATCH_PI_RT_CALCULUS_049"
+      ]
+    },
+    {
+      "section_id": "7.4A",
+      "title": "Projection Domain Equivalence",
+      "planned_action": "Bound indexed invariants by the 048-049 witness family and require explicit closure verification.",
+      "source_basis": [
+        "PATCH_PI_RT_CALCULUS_048",
+        "PATCH_PI_RT_CALCULUS_049"
+      ]
+    },
+    {
+      "section_id": "7.4B",
+      "title": "Projection Signatures",
+      "planned_action": "State the counterexample-bounded boundary between lawful projection and carrier invariance.",
+      "source_basis": [
+        "PATCH_PI_RT_CALCULUS_049"
+      ]
+    },
+    {
+      "section_id": "11.1A",
+      "title": "Relational Basin Signatures ($\\Sigma_R$)",
+      "planned_action": "Cross-reference the bounded nested RT witness family without converting it into a universal theorem.",
+      "source_basis": [
+        "PATCH_PI_RT_CALCULUS_046",
+        "PATCH_PI_RT_CALCULUS_047"
+      ]
+    },
+    {
+      "section_id": "11.3",
+      "title": "Topology $\\iff$ Geometry",
+      "planned_action": "Keep topology-to-geometry language in projection form and avoid primitive reclassification.",
+      "source_basis": [
+        "PATCH_PI_RT_CALCULUS_048",
+        "PATCH_PI_RT_CALCULUS_049"
+      ]
+    },
+    {
+      "section_id": "11.4A",
+      "title": "Topology-to-Geometry Legality Transform",
+      "planned_action": "Align the legality transform with the controlled projection witness while preserving projection-versus-primitive separation.",
+      "source_basis": [
+        "PATCH_PI_RT_CALCULUS_048",
+        "PATCH_PI_RT_CALCULUS_049"
+      ]
+    },
+    {
+      "section_id": "14.8",
+      "title": "Evidence Integration Workflow",
+      "planned_action": "Record the applied 046-049 sequence as governed evidence inputs and preserve the gate-before-edit order.",
+      "source_basis": [
+        "PATCH_PI_RT_CALCULUS_046",
+        "PATCH_PI_RT_CALCULUS_047",
+        "PATCH_PI_RT_CALCULUS_048",
+        "PATCH_PI_RT_CALCULUS_049",
+        "PATCH_PI_RT_CALCULUS_050"
+      ]
+    },
+    {
+      "section_id": "Appendix F / Chapter 6.4 Provenance-Explicit Admissibility Failure",
+      "title": "Known Missing Definitions and Open Bridges",
+      "planned_action": "Synchronize the Appendix F open item with the provenance-explicit Chapter 6.4 note and keep recovery deferred.",
+      "source_basis": [
+        "PATCH_PI_RT_CALCULUS_046",
+        "PATCH_PI_RT_CALCULUS_050"
+      ]
+    }
+  ],
+  "claim_humility": {
+    "current_status": "proposed_only",
+    "non_claims": [
+      "Does not edit the textbook by itself.",
+      "Does not modify RT_core.",
+      "Does not claim all RTs are projections.",
+      "Does not claim A/E role symmetry.",
+      "Does not claim universal A/E slot occupancy.",
+      "Does not promote any governed note to theorem status."
+    ]
+  },
+  "validation_expectation": {
+    "json_parse": "required",
+    "registry_record_only": "required",
+    "textbook_update": "required",
+    "rt_core_unchanged": "required"
+  }
+}

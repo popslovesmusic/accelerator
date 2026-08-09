@@ -1,0 +1,31 @@
+{
+  "fixture_set_id": "AX-R09-ASSOCIATIVITY-FIXTURES-001",
+  "axiom_id": "AX-R09_ASSOCIATIVITY",
+  "status": "RESOLVED_INAPPLICABLE",
+  "positive": [
+    {"fixture_id":"AX-R09-POS-001","expression":"<S> | >S<","expected":"WELL_FORMED_SINGLE_APPLICATION","return_type":"SymmetryCondition"},
+    {"fixture_id":"AX-R09-POS-002","expression":"b | u","expected":"WELL_FORMED_SINGLE_APPLICATION","return_type":"SymmetryCondition"}
+  ],
+  "failure": [
+    {"fixture_id":"AX-R09-ASSOC-FAIL-001","expression":"(<S> | >S<) | >S<","expected":"ASSOCIATIVITY_INAPPLICABLE","secondary_error":"RELATION_RESULT_REENTRY_LEFT"},
+    {"fixture_id":"AX-R09-ASSOC-FAIL-002","expression":"<S> | (<S> | >S<)","expected":"ASSOCIATIVITY_INAPPLICABLE","secondary_error":"RELATION_RESULT_REENTRY_RIGHT"},
+    {"fixture_id":"AX-R09-ASSOC-FAIL-003","expression":"(b1 | u1) | u2 = b1 | (u1 | u2)","expected":"MALFORMED_ASSOCIATIVITY_LAW"},
+    {"fixture_id":"AX-R09-ASSOC-FAIL-004","expression":"(b1 | u1) | (b2 | u2)","expected":"MALFORMED_BOTH_OPERAND_TYPES"},
+    {"fixture_id":"AX-R09-ASSOC-FAIL-005","attempt":"Infer associativity from matching validation errors.","expected":"MATCHING_FAILURES_DO_NOT_ESTABLISH_ASSOCIATIVITY"},
+    {"fixture_id":"AX-R09-ASSOC-FAIL-006","attempt":"Infer nonassociativity because chained expressions are malformed.","expected":"INAPPLICABLE_NOT_NONASSOCIATIVE"},
+    {"fixture_id":"AX-R09-ASSOC-FAIL-007","attempt":"Implicitly project an inner SymmetryCondition into an operand domain.","expected":"IMPLICIT_PROJECTION_FORBIDDEN"},
+    {"fixture_id":"AX-R09-ASSOC-FAIL-008","attempt":"Use whole-RT recursion as evidence that | is associative.","expected":"CATEGORY_ERROR_WHOLE_RT_RECURSION_NOT_OPERATOR_ASSOCIATIVITY"}
+  ],
+  "associativity_matrix": [
+    {"domain":"BoundedSymmetry","status":"INAPPLICABLE"},
+    {"domain":"UnboundedSymmetry","status":"INAPPLICABLE"},
+    {"domain":"BoundedSymmetry union UnboundedSymmetry","status":"INAPPLICABLE"},
+    {"domain":"SymmetryCondition","status":"INAPPLICABLE_TO_CURRENT_SIGNATURE"},
+    {"domain":"CompleteRT","status":"OPEN_SEPARATE_OBLIGATION"}
+  ],
+  "new_associativity_law": false,
+  "new_composition_operator": false,
+  "new_carrier": false,
+  "new_projection": false,
+  "whole_rt_associativity": "OPEN_SEPARATE_OBLIGATION"
+}

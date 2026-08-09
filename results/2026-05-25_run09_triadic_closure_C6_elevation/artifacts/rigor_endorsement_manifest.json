@@ -1,0 +1,47 @@
+{
+  "tool_name": "triadic_closure_substrate_sim_cpp",
+  "model_class": "cellular_automata",
+  "version": "1.1.0",
+  "rigor_endorsement_level": "C5",
+  "validated_observables": [
+    "closure_strength",
+    "residue_density",
+    "survival_rate",
+    "space_app_ordering_metric"
+  ],
+  "known_controls": [
+    "smoke_test_TRI-SMOKE-001",
+    "FV-1_dyadic_collapse",
+    "FV-2_floor_sensitivity",
+    "FV-3_amputation",
+    "FV-4_orientation_schism"
+  ],
+  "known_limits": [
+    "Requires full SYCL port for UHD 770 offloading to support massive substrate counts (>1M triads)."
+  ],
+  "required_metadata": [
+    "triad_count",
+    "steps",
+    "dt",
+    "floor",
+    "coupling_strength",
+    "seed"
+  ],
+  "scientific_validity": {
+    "implementation_verified": true,
+    "numerical_stability_verified": true,
+    "model_validation_passed": true,
+    "reproducibility_verified": true,
+    "cross_model_validated": true,
+    "falsification_verified": true,
+    "uncertainty_quantified": true,
+    "provenance_verified": true
+  },
+  "audit_notes": {
+    "numerical_stability": "Verified via dt-sweep. Strict dt <= 0.01 limit enforced in wrapper.",
+    "falsification": "Passed four independent vectors. FV-4 confirmed -(i) necessity for relational ordering.",
+    "uncertainty": "Characterized via 10-seed ensemble.",
+    "cross_model": "Qualitative synchronization alignment confirmed.",
+    "build_portability": "MSVC/vswhere dynamic detection implemented."
+  }
+}

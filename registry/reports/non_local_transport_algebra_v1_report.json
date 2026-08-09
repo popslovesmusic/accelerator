@@ -1,0 +1,45 @@
+{
+  "report_id": "NON_LOCAL_TRANSPORT_ALGEBRA_V1_REPORT",
+  "timestamp": "2026-05-10T10:00:00Z",
+  "status": "COMPLETED",
+  "patch_id": "PCD_NON_LOCAL_TRANSPORT_ALGEBRA_V1",
+  "summary": "Defined the first algebraic rules for non-local NavT (Transport). Established path-composition rules, path residual accumulation logic, and intermediate-neighbor propagation mandates, while implementing governance guardrails for non-local coupling.",
+  "operations_summary": [
+    {
+      "operation": "update_navt_composition_registry",
+      "target": "registry/navt_composition_registry.json",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "add_non_local_navt_guardrails",
+      "target": "registry/lexicon_gap_queue.json",
+      "status": "SUCCESS",
+      "guardrails_added": [
+        "no_non_local_transport_without_path_validity_v1",
+        "no_instantaneous_non_local_coupling_v1"
+      ]
+    },
+    {
+      "operation": "update_gap_dependency_graph",
+      "gap_id": "GAP_2",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "update_operator_algebra_closure_registry",
+      "operator_id": "NavT",
+      "status": "SUCCESS",
+      "new_closure_status": "PARTIAL_NON_LOCAL_TRANSPORT_ALGEBRA_DEFINED"
+    }
+  ],
+  "algebra_status": {
+    "operator_id": "NavT",
+    "path_composition_active": true,
+    "residual_accumulation_governed": true,
+    "non_local_coupling_gated": true
+  },
+  "charter_compliance_check": {
+    "charter_version": "2.3",
+    "status": "COMPLIANT",
+    "notes": "The non-local transport algebra correctly enforces path-dependent propagation and residual tracking, ensuring that non-local interactions are auditable and grounded in local coupling chains rather than assumed as instantaneous effects."
+  }
+}

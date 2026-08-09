@@ -1,0 +1,54 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Formal-candidate readiness registry for MT-003: Continuation Requires Non-Empty Admissible Image.",
+    "status": "provisional",
+    "last_updated": "2026-07-03"
+  },
+  "readiness_summary": {
+    "theorem_id": "MT-003",
+    "current_status": "formal",
+    "readiness_level": "formal",
+    "evidence_links": [
+      "outputs/math_tests/p3_stab_001_delta_symbolic_result.json",
+      "registry/math/continuation_nonempty_image_proof_scaffold.json"
+    ]
+  },
+  "blocker_status": [
+    {
+      "blocker_id": "BLK-001",
+      "status": "formalized",
+      "requirement": "Explicit existential quantifier for continuation_event",
+      "resolution_link": "registry/math/theorem_quantifier_registry.json#TQ-002"
+    },
+    {
+      "blocker_id": "BLK-003",
+      "status": "formalized",
+      "requirement": "Empty image and branch explosion case classification",
+      "resolution_link": "registry/math/theorem_boundary_condition_registry.json"
+    }
+  ],
+  "readiness_criteria_check": [
+    {
+      "criterion": "all proof obligations have symbolic support",
+      "status": "satisfied",
+      "evidence": "PO-003 supported by P3-STAB-001"
+    },
+    {
+      "criterion": "all quantifiers are explicit",
+      "status": "satisfied",
+      "evidence": "TQ-002 defines bounded existential scope"
+    },
+    {
+      "criterion": "all boundary cases are classified",
+      "status": "satisfied",
+      "evidence": "theorem_boundary_condition_registry.json bindings complete for MT-003"
+    },
+    {
+      "criterion": "all reduction steps are symbolic_supported or stronger",
+      "status": "satisfied",
+      "evidence": "RC-001/STEP-01 and RC-002 elevated to symbolic_supported"
+    }
+  ],
+  "pending_requirements": []
+}

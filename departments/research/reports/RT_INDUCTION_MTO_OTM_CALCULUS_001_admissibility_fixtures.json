@@ -1,0 +1,76 @@
+{
+  "report_id": "RT_INDUCTION_MTO_OTM_CALCULUS_001_ADMISSIBILITY_FIXTURES_001",
+  "packet_id": "RT_INDUCTION_MTO_OTM_CALCULUS_001",
+  "predicate": "Lawful(A,C)",
+  "evaluation_mode": "BOUNDED_PROVISIONAL_FIXTURE_REVIEW",
+  "status": "COMPLETE_WITH_UNRESOLVED_CASES",
+  "lawfulness_claim": false,
+  "fixtures": [
+    {
+      "fixture_id": "LAW-FIX-001",
+      "organization": ["2+2"],
+      "context": {"context_id": "C_FIX_001", "orientation": "o_1", "comparison": "defined", "trace": "verified"},
+      "checks": {"NonEmptyFiniteOrdered": "PASS", "TypedAspects": "PASS_CANDIDATE", "ContextDeclared": "PASS", "RoleCompatible": "UNRESOLVED", "OrientationAdmissible": "UNRESOLVED", "ComparisonDefined": "PASS_CANDIDATE", "Traceable": "PASS"},
+      "result": "UNRESOLVED",
+      "reason": "Role and orientation admissibility predicates are not yet canonical."
+    },
+    {
+      "fixture_id": "LAW-FIX-002",
+      "organization": ["1+3", "2+2"],
+      "context": {"context_id": "C_FIX_002", "orientation": "o_1,o_2", "comparison": "defined", "trace": "verified"},
+      "checks": {"NonEmptyFiniteOrdered": "PASS", "TypedAspects": "PASS_CANDIDATE", "ContextDeclared": "PASS", "RoleCompatible": "UNRESOLVED", "OrientationAdmissible": "UNRESOLVED", "ComparisonDefined": "PASS_CANDIDATE", "Traceable": "PASS"},
+      "result": "UNRESOLVED",
+      "reason": "Ordered organization is syntactically eligible but lawfulness is not established."
+    },
+    {
+      "fixture_id": "LAW-FIX-003",
+      "organization": [],
+      "context": {"context_id": "C_FIX_003"},
+      "checks": {"NonEmptyFiniteOrdered": "FAIL"},
+      "result": "REJECTED",
+      "failure_code": "LAWFULNESS_UNDEFINED_OR_REJECTED"
+    },
+    {
+      "fixture_id": "LAW-FIX-004",
+      "organization": ["RT4"],
+      "context": {"context_id": "C_FIX_004", "orientation": "o_1", "comparison": "defined", "trace": "verified"},
+      "checks": {"NonEmptyFiniteOrdered": "PASS", "TypedAspects": "FAIL"},
+      "result": "REJECTED",
+      "failure_code": "MALFORMED_ASPECT_MEMBER"
+    },
+    {
+      "fixture_id": "LAW-FIX-005",
+      "organization": ["2+2"],
+      "context": null,
+      "checks": {"NonEmptyFiniteOrdered": "PASS", "TypedAspects": "PASS_CANDIDATE", "ContextDeclared": "FAIL"},
+      "result": "UNRESOLVED",
+      "failure_code": "ADMISSIBILITY_CONTEXT_UNDECLARED"
+    },
+    {
+      "fixture_id": "LAW-FIX-006",
+      "organization": ["2+2"],
+      "context": {"context_id": "C_FIX_006", "comparison": "defined", "trace": "verified"},
+      "checks": {"NonEmptyFiniteOrdered": "PASS", "TypedAspects": "PASS_CANDIDATE", "ContextDeclared": "PASS", "OrientationAdmissible": "FAIL_TO_EVALUATE"},
+      "result": "UNRESOLVED",
+      "failure_code": "ORIENTATION_ADMISSIBILITY_UNRESOLVED"
+    },
+    {
+      "fixture_id": "LAW-FIX-007",
+      "organization": ["2+2"],
+      "context": {"context_id": "C_FIX_007", "orientation": "o_1", "comparison": "undefined", "trace": "verified"},
+      "checks": {"NonEmptyFiniteOrdered": "PASS", "TypedAspects": "PASS_CANDIDATE", "ContextDeclared": "PASS", "OrientationAdmissible": "UNRESOLVED", "ComparisonDefined": "FAIL"},
+      "result": "UNRESOLVED",
+      "failure_code": "COMPARISON_SEMANTICS_UNDEFINED"
+    },
+    {
+      "fixture_id": "LAW-FIX-008",
+      "organization": ["2+2"],
+      "context": {"context_id": "C_FIX_008", "orientation": "o_1", "comparison": "defined", "trace": null},
+      "checks": {"NonEmptyFiniteOrdered": "PASS", "TypedAspects": "PASS_CANDIDATE", "ContextDeclared": "PASS", "Traceable": "FAIL"},
+      "result": "REJECTED",
+      "failure_code": "TRACEABILITY_FAILURE"
+    }
+  ],
+  "summary": {"candidate_admissible": 0, "rejected": 3, "unresolved": 5, "lawful_established": false},
+  "next_action": "Define RoleCompatible and OrientationAdmissible before converting any unresolved fixture into an admissible result."
+}

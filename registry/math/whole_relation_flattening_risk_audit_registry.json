@@ -1,0 +1,109 @@
+{
+  "audit_id": "VAL-WRF-AUDIT-001",
+  "patch_id": "MPF-PALG-019",
+  "name": "Whole-Relation Flattening Risk Audit Registry",
+  "status": "active",
+  "audit_status": "CANDIDATE_RISK_AUDIT",
+  "purpose": "Detect symbolic collapse of indivisible ⇔R relations into hidden equality, implication, composition, biconditional, arithmetic, or physics claims.",
+  "governance_status": {
+    "theorem_status": "NOT_PROVEN",
+    "audit_status": "CANDIDATE_RISK_AUDIT",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL"
+  },
+  "audit_targets": [
+    "registry/math/*process_algebra*.json",
+    "registry/math/*projection*.json",
+    "registry/math/*aspect*.json",
+    "docs/math/*process_algebra*.md",
+    "docs/math/*projection*.md",
+    "docs/math/*aspect*.md"
+  ],
+  "risk_categories": [
+    {
+      "risk_id": "WRF-001",
+      "name": "equality_flattening",
+      "description": "Detects cases where ⇔R is treated as ordinary equality or substitutability."
+    },
+    {
+      "risk_id": "WRF-002",
+      "name": "implication_flattening",
+      "description": "Detects cases where ⇔R is treated as directional implication or causal sequence."
+    },
+    {
+      "risk_id": "WRF-003",
+      "name": "composition_flattening",
+      "description": "Detects cases where ⇔R is treated as ordered composition or process chaining."
+    },
+    {
+      "risk_id": "WRF-004",
+      "name": "biconditional_flattening",
+      "description": "Detects cases where ⇔R is treated as ordinary logical iff."
+    },
+    {
+      "risk_id": "WRF-005",
+      "name": "arithmetic_escalation",
+      "description": "Detects claims that process algebra replaces standard arithmetic or licenses numeric identities such as -1 = +1."
+    },
+    {
+      "risk_id": "WRF-006",
+      "name": "physics_escalation",
+      "description": "Detects claims that process algebra proves physical reality, derives QM/GR, or establishes physical laws."
+    },
+    {
+      "risk_id": "WRF-007",
+      "name": "primitive_fragmentation",
+      "description": "Detects unnecessary introduction of separate primitive operators that fragment ⇔R."
+    }
+  ],
+  "flag_patterns": {
+    "equality_flattening": [
+      "⇔R means equals",
+      "A ⇔R B means A = B",
+      "substitute freely",
+      "-1 = +1"
+    ],
+    "implication_flattening": [
+      "A ⇔R B means A causes B",
+      "A leads to B",
+      "first A then B",
+      "therefore B follows after A"
+    ],
+    "composition_flattening": [
+      "⇔R composes",
+      "ordinary composition",
+      "A then B then C",
+      "chain of operations"
+    ],
+    "biconditional_flattening": [
+      "⇔R is iff",
+      "same as logical biconditional",
+      "truth-functional equivalence"
+    ],
+    "arithmetic_escalation": [
+      "replaces arithmetic",
+      "new arithmetic proves",
+      "-1 equals +1",
+      "zero is impossible in standard math"
+    ],
+    "physics_escalation": [
+      "proves QM/GR unification",
+      "derives general relativity",
+      "derives quantum mechanics",
+      "physical proof",
+      "law of reality"
+    ],
+    "primitive_fragmentation": [
+      "new primitive operator",
+      "separate composition operator",
+      "external glue operator",
+      "independent aspect primitive"
+    ]
+  },
+  "severity_levels": {
+    "LOW": "Language ambiguity requiring clarification.",
+    "MEDIUM": "Projection loss missing or reduced form not marked.",
+    "HIGH": "A projection is treated as primitive or ⇔R is flattened.",
+    "CRITICAL": "Physics, arithmetic, or theorem escalation detected."
+  }
+}

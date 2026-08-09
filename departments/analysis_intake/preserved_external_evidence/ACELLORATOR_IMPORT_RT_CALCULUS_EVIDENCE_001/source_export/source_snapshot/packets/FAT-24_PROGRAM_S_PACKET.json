@@ -1,0 +1,32 @@
+{
+  "program": "PROGRAM_S",
+  "timestamp": "2026-08-04T16:57:57.092457Z",
+  "tests": {
+    "S1_isomorphism": "VALID",
+    "S2_reversal": "DUALITY",
+    "S3_reference_preservation": "REQUIRED",
+    "S4_observational_alias": "COLLAPSED_BY_OBSERVATION",
+    "S5_behavioral_equivalence": "COLLAPSED_BY_BISIMULATION",
+    "S6_congruence": "CONGRUENT",
+    "S7_binary_reduction_loss": "INFORMATION_LOST",
+    "S8_invariant_sufficiency": "INSUFFICIENT_BISIMULATION"
+  },
+  "must_report": {
+    "formal_equivalence_predicate": "Isomorphism over pointed ternary relational structures (A, R, s)",
+    "reflexivity": "Holds trivially (T is isomorphic to T)",
+    "symmetry": "Holds (if T1 isomorphic to T2, then T2 isomorphic to T1)",
+    "transitivity": "Holds (isomorphism composition)",
+    "compositional_congruence": "Fails for behavioral equivalence (bisimulation), holds for structural isomorphism",
+    "reference_preservation": "Strictly required; mapping must preserve the pointed element s",
+    "orientation_preservation": "Roles left/right mapped to distinct roles (no collapse to single element)",
+    "representation_losses": [
+      "Binary reduction to (L,S) and (R,S) loses joint complementary ternary dependency",
+      "Set-theoretic coordinates required to prevent quotient collapse of identical elements"
+    ],
+    "countermodels": [
+      "Observational alias: T_A and T_B produce same slice but are structurally non-equivalent",
+      "Bisimulation collapse: Two triplets with different pre-closure phase signatures collapse under bisimulation"
+    ]
+  },
+  "status": "Fails"
+}

@@ -1,0 +1,17 @@
+{
+  "fixture_set_id": "CROSS_CONTEXT_EPSILON_INPUT_LAW_FIXTURES_001",
+  "obligation_id": "OBL-D-001E",
+  "contexts": {
+    "C_ALPHA":{"inputs":{"a":1,"d":"DENSE_2","m":"EXACT_MINIMUM"},"expected_epsilon":1},
+    "C_BETA":{"inputs":{"a":1,"d":"DENSE_2","m":"EXACT_MINIMUM"},"expected_epsilon":1},
+    "C_GAMMA":{"inputs":{"a":0.5,"d":"DENSE_2","m":"EXACT_MINIMUM"},"expected_epsilon":0.5},
+    "C_EMPTY":{"inputs":{"a":null,"d":"EMPTY","m":"UNDEFINED"},"expected_epsilon":null},
+    "C_INVALID":{"inputs":{"a":0,"d":"DENSE_2","m":"EXACT_MINIMUM"},"expected_epsilon":null}
+  },
+  "comparisons": [
+    {"id":"PROFILE_EQUALITY_EQUAL_THRESHOLD_001","left":"C_ALPHA","right":"C_BETA","expected":"EQUAL_THRESHOLDS"},
+    {"id":"PROFILE_DIFFERENCE_NO_EQUALITY_001","left":"C_ALPHA","right":"C_GAMMA","expected":"NO_EQUALITY_ASSERTED"},
+    {"id":"PROFILE_EMPTY_UNDEFINED_001","left":"C_ALPHA","right":"C_EMPTY","expected":"UNDEFINED_PARTICIPANT"},
+    {"id":"PROFILE_INVALID_REJECTED_001","left":"C_ALPHA","right":"C_INVALID","expected":"REJECTED_PARTICIPANT"}
+  ]
+}

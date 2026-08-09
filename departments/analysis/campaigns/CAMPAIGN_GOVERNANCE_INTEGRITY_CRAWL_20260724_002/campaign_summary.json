@@ -1,0 +1,46 @@
+{
+  "campaign": "CAMPAIGN_GOVERNANCE_INTEGRITY_CRAWL_20260724_002",
+  "purpose": "Analyze and document the repository's governance integrity and database snapshot freshness status following commit 1aee6f842.",
+  "overall_result": "BLOCKED",
+  "assessment_reason": "Repository global health validation is failing due to unregistered governance changes, and the database snapshot is stale.",
+  "confidence": "high",
+  "objects_analyzed": 18,
+  "objectives_completed": 3,
+  "objectives_total": 4,
+  "completion_percent": 75,
+  "major_discoveries": [
+    "Commit 1aee6f842 modified governance files without updating registry/governance_hash_registry.json.",
+    "Global validate script fails with FAIL_SEMANTIC on the governance integrity validation stage.",
+    "The SQLite database snapshot is stale.",
+    "Obligation OBL-D-001C is discharged, routing the active proof frontier to OBL-D-001D."
+  ],
+  "important_non_discoveries": [
+    "No new theorems or proofs were derived.",
+    "No canonical registries were mutated."
+  ],
+  "proof_progress": {
+    "obligations_discharged_or_bounded": [
+      "OBL-D-001A",
+      "OBL-D-001B",
+      "OBL-D-001C"
+    ],
+    "proof_obligations_remaining": 2,
+    "promotion_gate": "blocked"
+  },
+  "new_contradictions": 1,
+  "open_research_debt": [
+    "DEBT_D_SEMANTICS_PROOF_001",
+    "OBL-D-001D",
+    "OBL-D-001E"
+  ],
+  "recommended_next_campaign": "CAMPAIGN_GOVERNANCE_HASH_REPAIR_20260724_001",
+  "reason_for_termination": "The governance defect and blocking conditions are fully mapped. Further crawl depth would duplicate findings without resolving the validation block.",
+  "executive_recommendation": "FORMALIZE",
+  "actionable_obligations": {
+    "total_open_obligations": 2,
+    "critical_obligations": 1,
+    "new_obligations_created": 0,
+    "obligations_discharged": 1,
+    "highest_priority_next_task": "TASK-MNT-001-GOVERNANCE-HASH-UPDATE"
+  }
+}

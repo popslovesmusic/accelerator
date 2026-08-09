@@ -1,0 +1,15 @@
+{
+  "fixture_set_id": "0034_rt_tr009_projection_continuation_fixtures",
+  "source_note": "docs/theory/foundational/5_03_26 unity/math/notes/0034_rt_tr009_projection_continuation_pipeline_20260803_001.md",
+  "claim_ceiling": "C1_MODEL_RELATIVE",
+  "required_stages": ["condition", "projection", "organization", "continuation", "rt"],
+  "cases": [
+    {"case_id": "TR009-VALID-001", "name": "ordered typed pipeline accepted", "input": {"stages": ["condition", "projection", "organization", "continuation", "rt"], "organization_nonempty": true, "continuation_finite": true, "proposition": "P-health", "provenance": "src-1", "stage_propositions": ["P-health", "P-health", "P-health", "P-health", "P-health"], "stage_provenance": ["src-1", "src-1", "src-1", "src-1", "src-1"], "condition_id": "C-1", "rt_id": "RT-1"}, "expected": "PASS"},
+    {"case_id": "TR009-STAGE-001", "name": "missing projection rejected", "input": {"stages": ["condition", "organization", "continuation", "rt"]}, "expected": "INVALID_PIPELINE"},
+    {"case_id": "TR009-STAGE-002", "name": "reordered stages rejected", "input": {"stages": ["condition", "organization", "projection", "continuation", "rt"]}, "expected": "INVALID_PIPELINE"},
+    {"case_id": "TR009-ORG-001", "name": "empty organization rejected", "input": {"stages": ["condition", "projection", "organization", "continuation", "rt"], "organization_nonempty": false, "continuation_finite": true}, "expected": "INVALID_PIPELINE"},
+    {"case_id": "TR009-CONT-001", "name": "non-finite continuation rejected", "input": {"stages": ["condition", "projection", "organization", "continuation", "rt"], "organization_nonempty": true, "continuation_finite": false}, "expected": "INVALID_PIPELINE"},
+    {"case_id": "TR009-ID-001", "name": "condition and RT collapse rejected", "input": {"stages": ["condition", "projection", "organization", "continuation", "rt"], "organization_nonempty": true, "continuation_finite": true, "condition_id": "X", "rt_id": "X"}, "expected": "ONTOLOGY_COLLAPSE"},
+    {"case_id": "TR009-CTX-001", "name": "proposition drift rejected", "input": {"stages": ["condition", "projection", "organization", "continuation", "rt"], "organization_nonempty": true, "continuation_finite": true, "proposition": "P-health", "stage_propositions": ["P-health", "P-network", "P-health", "P-health", "P-health"], "provenance": "src-1", "stage_provenance": ["src-1", "src-1", "src-1", "src-1", "src-1"], "condition_id": "C-1", "rt_id": "RT-1"}, "expected": "CONTEXT_DRIFT"}
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "campaign_id": "EC-20260517-RD-001",
+  "tool_family": "reaction_diffusion",
+  "prediction_binding_id": "PB-001-THRESHOLD",
+  "dataset_ids": ["DS-001-SYNTHETIC-STOCHASTIC"],
+  "tools": {
+    "cpp": "rd_moving_boundary_sim_v1_cpp",
+    "python": "rd_moving_boundary_sim_v1"
+  },
+  "metrics": ["boundary_position_difference", "pattern_persistence_delta", "fragmentation_consistency", "diffusion_field_similarity", "transition_threshold_alignment"],
+  "tolerances": {
+    "absolute": 1e-6,
+    "relative": 1e-4
+  },
+  "falsification_protocols": [
+    "shuffle_control",
+    "parameter_ablation"
+  ],
+  "governance_boilerplate": {
+    "source_relation": "(E≠0) ⇔R δ(E>0)",
+    "non_separability_acknowledged": true,
+    "required_statement": "Observed signatures are interpreted only through restricted local analog structure."
+  }
+}

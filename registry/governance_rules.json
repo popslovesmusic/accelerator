@@ -1,0 +1,32 @@
+{
+  "meta": {
+    "registry_id": "GOVERNANCE_RULES",
+    "version": "1.0.0",
+    "generated_at": "2026-05-25",
+    "notes": [
+      "Local governance add-ons for language blocking / claim-elevation gating.",
+      "This file is a governance registry artifact; enforcement depends on the active gate implementation."
+    ]
+  },
+  "rules": [
+    {
+      "id": "GATE-MST001-FV4-BLOCK",
+      "severity": "hard_block",
+      "condition": "claim_id == PCD-CLM-MST-001 && unresolved_falsification_vector == FV-4",
+      "action": "Block C6, formally_proven, closed, universal, and unqualified mechanism-independent language."
+    },
+    {
+      "id": "RIGOR_TOOL_001",
+      "severity": "hard_block",
+      "condition": "simulation_result.tool_rigor_status != RIGOR_ENDORSED && requested_action in [promotion, endorsement, theorem_advancement, dependency_propagation, framework_validation]",
+      "action": "Demote result to PROVISIONAL_PENDING_RIGOR, cap claims at C1_DEFINED_PROVISIONAL, require mandatory provisional labeling, and block promotion until tool review, implementation audit, metric audit, reproducibility audit, and governance approval are complete."
+    },
+    {
+      "id": "MPF_GATE_SIM_EXECUTION_PROVENANCE_001",
+      "severity": "hard_block",
+      "condition": "simulation_claim.has_engine_invocation_log == false || simulation_claim.has_raw_per_seed_data == false || simulation_claim.wall_clock_runtime_implausible == true || simulation_claim.all_pass_first_exec == true",
+      "action": "Automatically reject simulation result as COMPLETED or cited evidence pending manual inspection. Require: (1) actual engine invocation log naming approved engine; (2) raw per-seed output data; (3) wall-clock runtime consistent with mechanisms and seed count; (4) manual review for any zero-error/all-pass initial execution."
+    }
+  ]
+}
+

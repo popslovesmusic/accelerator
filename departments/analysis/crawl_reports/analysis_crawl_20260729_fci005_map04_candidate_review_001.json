@@ -1,0 +1,136 @@
+{
+  "artifact_type": "ANALYSIS_CRAWL_REPORT",
+  "artifact_id": "analysis_crawl_20260729_fci005_map04_candidate_review_001",
+  "created_at": "2026-07-29",
+  "status": "BOUNDED_PROVISIONAL_ANALYSIS",
+  "canonicality": "NON_CANONICAL",
+  "claim_ceiling": "C1_MODEL_RELATIVE",
+  "crawl_scope": "MAP-04 candidate mapping-rule definitions, their independent review, self-contained transfer packet, and active mapping-rule instantiation blocker.",
+  "source_artifacts": [
+    {
+      "artifact_id": "RT_ADMOBS_FCI005_MAP04_SELF_CONTAINED_REVIEW_PACKET_20260729_001",
+      "path": "departments/analysis_intake/chat_captures/RT_ADMOBS_FCI005_MAP04_SELF_CONTAINED_REVIEW_PACKET_20260729_001.json",
+      "sha256": "65DE7C3C2036E3DD498D0F7D65476138467F109403BADF3E47C3E73C3D62A84F",
+      "role": "Exact-byte transfer and review packet"
+    },
+    {
+      "artifact_id": "RT_ADMOBS_FCI005_MAP04_CANDIDATE_MAPPING_RULE_DEFINITIONS_20260729_001",
+      "path": "departments/analysis_intake/chat_captures/RT_ADMOBS_FCI005_MAP04_CANDIDATE_MAPPING_RULE_DEFINITIONS_20260729_001.json",
+      "sha256": "69299CE6D8DA718E4A0DF2F4577C49FDED12FB386128943E3BE109CD0784C7D9",
+      "role": "Primary MAP-04 candidate definitions"
+    },
+    {
+      "artifact_id": "RT_ADMOBS_FCI005_MAP04_CANDIDATE_MAPPING_RULE_DEFINITIONS_REVIEW_20260729_001",
+      "path": "departments/analysis_intake/review_reports/RT_ADMOBS_FCI005_MAP04_CANDIDATE_MAPPING_RULE_DEFINITIONS_REVIEW_20260729_001.json",
+      "sha256": "E26355A2A4F75BD8DAF7460D7CF3DDDF90E429EB015BC4166E8CD0B6C0BC4330",
+      "role": "Independent candidate-definition review"
+    },
+    {
+      "artifact_id": "RT_ADMOBS_FCI005_MAPPING_RULE_INSTANTIATION_BLOCKER_20260729_001",
+      "path": "departments/analysis_intake/review_reports/RT_ADMOBS_FCI005_MAPPING_RULE_INSTANTIATION_BLOCKER_20260729_001.json",
+      "sha256": "2F8CB2DA5E165728D3FC07E68873D5C470E32FA5CAD05846D6BD58A6CA4483B6",
+      "role": "Active mapping-rule, provenance, dependency, and witness blocker"
+    }
+  ],
+  "executive_dashboard": {
+    "repository_health": "Crawl inputs parsed and hash-identified; no canonical surface was modified.",
+    "assessment": "MAP-04 candidate definitions are structurally reviewed but not governed rule instances.",
+    "discoveries": [
+      "Exactly nine candidate rules are present.",
+      "All nine candidate records report NOT_INSTANTIATED.",
+      "Positive-rule rejection is separated from target-level non-relation.",
+      "CR3 and CTX4A-CTX4C require complete applicable-rule-set evidence.",
+      "The independent review reports PASS_MAP04_CANDIDATE_RULE_DEFINITIONS_REVIEW_COMPLETE_WITH_GOVERNED_RECORD_GATE."
+    ],
+    "critical_path": [
+      "RuleAuthorityRecord_x instantiation and independent validation",
+      "Carrier and boundary/domain/residue mapping-rule completeness",
+      "BridgeProvenanceRecord_x validation",
+      "Independent dependency graph and completeness evidence",
+      "Witness-backed testing"
+    ],
+    "next_action": "Keep MAP-04 at candidate-review scope and resolve governed record gates in order; do not bind FCI005-G02 yet.",
+    "human_decision_state": "Construction authority exists for candidate definitions; no authority exists for rule instances, witnesses, BCon_x, H_x, or delta_a."
+  },
+  "debt_and_obligation_inventory": [
+    {
+      "obligation_id": "FCI005-MAP04-RULE-AUTHORITY",
+      "status": "OPEN",
+      "objective": "Independently adjudicate authority for each applicable candidate rule.",
+      "completion_test": "All applicable rules have RuleAuthorityRecord_x decisions with provenance and scope."
+    },
+    {
+      "obligation_id": "FCI005-MAP04-MAPPING-COMPLETENESS",
+      "status": "OPEN",
+      "objective": "Establish complete applicable carrier and context rule sets.",
+      "completion_test": "No applicable authoritative rule is omitted, and conflicts are resolved or remain typed UNDEFINED."
+    },
+    {
+      "obligation_id": "FCI005-MAP04-PROVENANCE",
+      "status": "OPEN",
+      "objective": "Validate provenance for each governed mapping rule.",
+      "completion_test": "Every governed rule has independently validated BridgeProvenanceRecord_x."
+    },
+    {
+      "obligation_id": "FCI005-MAP05-DEPENDENCY-COMPLETENESS",
+      "status": "OPEN",
+      "objective": "Demonstrate pre-RefOrient availability independently of the candidate witness.",
+      "completion_test": "DependencyGraphCompletenessRecord_x validates a graph with no prohibited downstream ancestor."
+    },
+    {
+      "obligation_id": "FCI005-MAP06-WITNESS-TESTING",
+      "status": "BLOCKED",
+      "objective": "Test positive, negative, undefined, variance, and downstream-dependency cases.",
+      "completion_test": "All required fixtures pass after the preceding record gates pass."
+    }
+  ],
+  "synthesis": {
+    "normalization_rule": "Candidate-definition approval is distinct from governed rule-instance authority and from mapping-rule completeness.",
+    "dependency_rule": "Until typing, applicability, authority, provenance, and independent PRE_REF_ORIENT dependency evidence are available, candidate evaluation remains UNDEFINED.",
+    "recommendation_class": "DEFER_BINDING_AND_ADVANCE_GOVERNED_RECORD_GATES",
+    "support_level": "Directly observed artifact contents plus bounded structural comparison.",
+    "epistemic_status": "Provisional, model-relative, non-canonical.",
+    "proof_status": "No mapping relation, non-relation, or pairwise admissibility result is established."
+  },
+  "falsification_and_blockers": [
+    "A governed type mismatch rejects a candidate rule.",
+    "An omitted or conflicting maximal-authority rule prevents a definite relation result.",
+    "Missing or invalid provenance prevents governance.",
+    "Any prohibited downstream dependency rejects PRE_REF_ORIENT eligibility.",
+    "A witness variance or undefined branch blocks stable binary compatibility."
+  ],
+  "recommendation": {
+    "recommendation_id": "ANL_FCI005_MAP04_001",
+    "recommended_action": "Retain the nine MAP-04 definitions as provisional candidates and proceed only with independently governed rule-authority, completeness, provenance, and dependency evidence.",
+    "supporting_evidence": [
+      "RT_ADMOBS_FCI005_MAP04_CANDIDATE_MAPPING_RULE_DEFINITIONS_20260729_001",
+      "RT_ADMOBS_FCI005_MAP04_CANDIDATE_MAPPING_RULE_DEFINITIONS_REVIEW_20260729_001",
+      "RT_ADMOBS_FCI005_MAPPING_RULE_INSTANTIATION_BLOCKER_20260729_001"
+    ],
+    "confidence": "HIGH_FOR_SCOPE_BOUNDARY; UNDEFINED_FOR_MAPPING SEMANTICS",
+    "expected_benefit": "Preserves the candidate construction while preventing favorable-rule selection, false completeness, and premature BCon_x binding.",
+    "does_not_authorize": [
+      "RuleAuthorityRecord_x creation by inference",
+      "Mapping-record or witness construction without independent evidence",
+      "BCon_x binding",
+      "H_x declaration",
+      "delta_a modification",
+      "Canonical promotion"
+    ]
+  },
+  "phase_gate": {
+    "MAP_01": "COMPLETE_PARTIAL",
+    "MAP_02": "CLOSED_HYPOTHESIS_SCOPE_SCHEMA_NORMALIZED",
+    "MAP_03": "CLOSED_FINAL_SCHEMA_NORMALIZED_HYPOTHESIS_SCOPE",
+    "MAP_04": "CANDIDATE_DEFINITIONS_REVIEWED_PROVISIONALLY",
+    "MAP_05": "BLOCKED_PENDING_DEPENDENCY_COMPLETENESS",
+    "MAP_06": "BLOCKED_PENDING_GOVERNED_WITNESS_TESTING"
+  },
+  "final_result": "CRAWL_COMPLETE_MAP04_CANDIDATE_SCOPE_CONFIRMED_GOVERNED_RECORD_GATES_OPEN",
+  "crawl_limitations": [
+    "This crawl did not construct or validate mapping-rule instances.",
+    "This crawl did not establish source-to-observation semantics.",
+    "This crawl did not modify canonical registries, textbook files, or authority-bearing state.",
+    "This crawl is not a promotion or execution authorization."
+  ]
+}

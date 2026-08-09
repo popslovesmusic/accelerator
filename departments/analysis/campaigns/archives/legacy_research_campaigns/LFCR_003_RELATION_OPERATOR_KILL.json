@@ -1,0 +1,189 @@
+{
+  "campaign_id": "LFCR_003_RELATION_OPERATOR_KILL",
+  "mode": "falsification_attack",
+  "intent": "Test whether <*>_x / relation-mediated continuation is load-bearing, or whether observed persistence is explainable by generic state update, density, topology, smoothing, or attractor dynamics.",
+  "target_claim": {
+    "formal": "(ℰ≠0) ⇔_r δ_a(ℰ>0) ->_a *<*>_x* ->_a K_family",
+    "plain": "Stable identity-like closure requires relation-mediated continuation, not specific triads, nodes, or orientation objects."
+  },
+  "null_hypothesis": {
+    "formal": "K_obs persists when <*>_x is removed, randomized, memoryless, or replaced by generic adjacency.",
+    "plain": "The relation operator is not load-bearing; stable structures arise from ordinary coupling or attractor dynamics."
+  },
+  "invariant_under_test": "(ℰ≠0)",
+  "load_bearing_candidate": "<*>_x",
+  "demoted_non_primitives": [
+    "D1",
+    "D2",
+    "triad",
+    "-(i)",
+    "-(i_a)",
+    "-(i_ra)",
+    "K"
+  ],
+  "required_observables": {
+    "S_closure": "survival_cycles / total_cycles",
+    "I_persist": "identity_persistence_under_state_replacement",
+    "R_link": "relational_correspondence_retained_across_updates",
+    "T_transport": "continuity_of_closure_handoff_across_loci",
+    "B_boundary": "fraction_of updates mediated through explicit relation boundary",
+    "X_noncollapse": "degree of preserved non-identity under coupling",
+    "K_detect": "closure-family detection score"
+  },
+  "thresholds": {
+    "minimum_effect_tau": 0.05,
+    "identity_persistence_minimum": 0.70,
+    "relational_correspondence_minimum": 0.70,
+    "transport_continuity_minimum": 0.65,
+    "noncollapse_minimum": 0.80
+  },
+  "baseline_model": {
+    "id": "M0_RELATION_FULL",
+    "expression": "(ℰ≠0) ⇔_r δ_a(ℰ>0) ->_a *<*>_x* ->_a K_family",
+    "requirements": [
+      "nonzero_distinction_enabled",
+      "admissible_continuation_enabled",
+      "residue_conditioning_enabled",
+      "explicit_relation_operator_enabled",
+      "noncollapse_boundary_enabled",
+      "identity_tracking_enabled"
+    ]
+  },
+  "ablations": [
+    {
+      "id": "M1_NO_RELATION_OPERATOR",
+      "change": "Remove <*>_x entirely; allow only local state updates.",
+      "falsifies_if": "I_persist and S_closure match M0 within tau"
+    },
+    {
+      "id": "M2_RANDOM_RELATION",
+      "change": "Replace <*>_x with random pairwise coupling preserving degree distribution.",
+      "falsifies_if": "R_link and I_persist match M0 within tau"
+    },
+    {
+      "id": "M3_MEMORYLESS_RELATION",
+      "change": "Allow relation coupling but remove residue/history dependence.",
+      "falsifies_if": "identity persistence survives state replacement"
+    },
+    {
+      "id": "M4_ADJACENCY_ONLY",
+      "change": "Replace relational correspondence with generic graph adjacency.",
+      "falsifies_if": "K_detect and transport continuity match M0"
+    },
+    {
+      "id": "M5_IDENTITY_REPLICATION",
+      "change": "Permit copying of state signatures without relational boundary preservation.",
+      "falsifies_if": "I_persist remains high despite X_noncollapse failure"
+    },
+    {
+      "id": "M6_TOPOLOGY_ONLY",
+      "change": "Preserve topology/connectivity but scramble relational labels and histories.",
+      "falsifies_if": "closure family survives without R_link"
+    },
+    {
+      "id": "M7_DENSITY_SPOOF",
+      "change": "Match local coupling density while destroying relation-specific correspondence.",
+      "falsifies_if": "M7 reproduces M0 closure and transport"
+    },
+    {
+      "id": "M8_BOUNDARY_BYPASS",
+      "change": "Allow direct object-to-object update without D(*|*) boundary mediation.",
+      "falsifies_if": "M8 matches or outperforms M0"
+    },
+    {
+      "id": "M9_INVARIANT_ONLY",
+      "change": "Preserve only (ℰ≠0) and δ_a while removing structured relation semantics.",
+      "falsifies_if": "stable identity-like K_family still emerges"
+    }
+  ],
+  "run_matrix": {
+    "mechanism_classes_required": [
+      "cellular_automata",
+      "graph_dynamics",
+      "pde_or_field",
+      "agent_based"
+    ],
+    "seeds_per_model_minimum": 100,
+    "parameter_regimes": [
+      "low_noise",
+      "critical_noise",
+      "high_noise",
+      "sparse_coupling",
+      "dense_coupling",
+      "high_replacement_rate",
+      "boundary_instability",
+      "near_zero_distinction_floor"
+    ]
+  },
+  "primary_tests": [
+    {
+      "name": "state_replacement_identity_test",
+      "purpose": "Determine whether identity persists through replacement only when relational correspondence is preserved.",
+      "pass_for_framework": "M0 maintains I_persist while M1/M2/M3 fail."
+    },
+    {
+      "name": "transport_handoff_test",
+      "purpose": "Determine whether closure handoff requires <*>_x rather than adjacency.",
+      "pass_for_framework": "T_transport(M0) - T_transport(M4) >= tau."
+    },
+    {
+      "name": "noncollapse_test",
+      "purpose": "Determine whether relation-mediated coupling preserves distinction instead of collapsing into identity or noise.",
+      "pass_for_framework": "X_noncollapse remains high only in M0."
+    },
+    {
+      "name": "topology_spoof_test",
+      "purpose": "Determine whether topology alone explains closure.",
+      "pass_for_framework": "M6 fails despite preserved connectivity."
+    }
+  ],
+  "success_condition_for_framework": {
+    "plain": "<*>_x survives only if relation-specific correspondence predicts identity persistence better than density, topology, random coupling, or memoryless adjacency.",
+    "formal": "I_persist(M0) - I_persist(Mi) >= tau for M1,M2,M3,M4,M6,M7,M8 in at least three mechanism classes"
+  },
+  "failure_condition_for_framework": {
+    "plain": "If stable identity-like closure survives without relation semantics, <*>_x is not load-bearing.",
+    "formal": "exists Mi in {M1,M2,M3,M4,M6,M7,M8,M9} such that abs(I_persist(M0)-I_persist(Mi)) < tau"
+  },
+  "hard_fail_conditions": [
+    "M1_NO_RELATION_OPERATOR preserves identity persistence",
+    "M2_RANDOM_RELATION matches M0",
+    "M4_ADJACENCY_ONLY matches M0",
+    "M6_TOPOLOGY_ONLY preserves K_family",
+    "M8_BOUNDARY_BYPASS matches or outperforms M0",
+    "Results fail to reproduce across at least three mechanism classes"
+  ],
+  "outputs_required": [
+    "raw_state_logs",
+    "relation_event_logs",
+    "identity_lineage_logs",
+    "boundary_update_logs",
+    "seed_table",
+    "parameter_table",
+    "observable_timeseries",
+    "ablation_comparison_csv",
+    "effect_size_report",
+    "mechanism_class_comparison",
+    "failure_case_examples",
+    "reproducibility_manifest",
+    "claim_update_recommendation"
+  ],
+  "governance": {
+    "default_result": "do_not_promote",
+    "if_pass": "retain_<*>_x_as_candidate_load_bearing_relation_operator",
+    "if_fail": "downgrade_<*>_x_to_descriptive_or_non_load_bearing",
+    "if_mixed": "restrict_<*>_x_claim_to_mechanism_specific_regimes",
+    "publication_language_allowed": [
+      "falsification-tested candidate",
+      "relation-operator-dependent in tested regimes",
+      "mechanism-class limited support",
+      "provisional support"
+    ],
+    "publication_language_blocked": [
+      "proved",
+      "fundamental operator",
+      "universal relation law",
+      "established physical law"
+    ]
+  }
+}

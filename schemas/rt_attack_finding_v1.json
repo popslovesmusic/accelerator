@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://acellorator.local/schemas/rt_attack_finding_v1.json",
+  "title": "RT Cross-Attack Finding",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_id", "finding_id", "source_attacks", "finding", "status", "claim_ceiling", "blockers"],
+  "properties": {
+    "schema_id": { "const": "rt_attack_finding_v1" },
+    "finding_id": { "type": "string", "pattern": "^FINDING_[A-Z0-9_]+$" },
+    "source_attacks": { "type": "array", "minItems": 1, "items": { "type": "string", "pattern": "^FAT-[0-9]+$" } },
+    "finding": { "type": "string", "minLength": 1 },
+    "status": { "enum": ["PROVISIONAL_SYNTHESIS", "REVIEW_READY", "REVIEWED", "REJECTED", "DEFERRED"] },
+    "claim_ceiling": { "enum": ["C0_definition", "C1_model_relative", "C2_simulation_observed", "C3_structural_comparison", "C4_external_reproduction"] },
+    "blockers": { "type": "array", "items": { "type": "string" } },
+    "impacted_rt_concepts": { "type": "array", "items": { "type": "string" } },
+    "supporting_reviews": { "type": "array", "items": { "type": "string" } }
+  }
+}

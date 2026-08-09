@@ -1,0 +1,61 @@
+{
+  "experiment_id": "BOOK_CAMPAIGN_PHASE_01_MASTER_CLS_004_AGENT_BASED",
+  "title": "CLS_004 Cooperative Admissibility Validation",
+  "base_config": {
+    "agent_count": 200,
+    "steps": 2000,
+    "dt": 0.1,
+    "kappa": 0.1,
+    "R_c": 2.0,
+    "K_phi": 1.5,
+    "mismatch_rate": 0.5,
+    "residue_decay": 0.25,
+    "omega_mean": 0.0,
+    "omega_std": 0.1,
+    "x_std": 0.5,
+    "p_std": 0.5
+  },
+  "seeds": [
+    101,
+    202,
+    303,
+    404,
+    505
+  ],
+  "variations": [
+    {
+      "name": "baseline",
+      "config_override": {}
+    },
+    {
+      "name": "high_gain",
+      "config_override": {
+        "K_phi": 2.5
+      }
+    },
+    {
+      "name": "coherence_erosion",
+      "config_override": {
+        "K_phi": 0.0
+      }
+    },
+    {
+      "name": "zero_residue_collapse",
+      "config_override": {
+        "residue_decay": 0.5
+      }
+    },
+    {
+      "name": "mismatch_injection",
+      "config_override": {
+        "mismatch_rate": 1.0
+      }
+    },
+    {
+      "name": "fragmentation",
+      "config_override": {
+        "R_c": 0.5
+      }
+    }
+  ]
+}

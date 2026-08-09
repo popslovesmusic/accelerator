@@ -1,0 +1,96 @@
+{
+  "registry_id": "PCD_EPISTEMIC_LANGUAGE_REGISTRY",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "term",
+      "language_class",
+      "allowed_statuses",
+      "blocked_statuses",
+      "required_context",
+      "replacement_if_blocked"
+    ]
+  },
+  "entries": [
+    {
+      "term": "proves",
+      "language_class": "strong_theorem_language",
+      "allowed_statuses": ["TS3", "TS4", "TS5"],
+      "blocked_statuses": ["TS0", "TS1", "TS2"],
+      "required_context": "must specify proof scope or formal stack",
+      "replacement_if_blocked": "suggests"
+    },
+    {
+      "term": "demonstrates",
+      "language_class": "simulation_support_language",
+      "allowed_statuses": ["TS4", "TS5"],
+      "blocked_statuses": ["TS0", "TS1", "TS2"],
+      "required_context": "requires recoverable governed artifacts",
+      "replacement_if_blocked": "is consistent with"
+    },
+    {
+      "term": "establishes",
+      "language_class": "strong_claim_language",
+      "allowed_statuses": ["TS3", "TS4", "TS5"],
+      "blocked_statuses": ["TS0", "TS1"],
+      "required_context": "requires explicit dependency chain",
+      "replacement_if_blocked": "proposes"
+    },
+    {
+      "term": "suggests",
+      "language_class": "provisional_language",
+      "allowed_statuses": ["TS0", "TS1", "TS2", "TS3", "TS4", "TS5"],
+      "blocked_statuses": [],
+      "required_context": "must preserve uncertainty scope"
+    },
+    {
+      "term": "is consistent with",
+      "language_class": "compatibility_language",
+      "allowed_statuses": ["TS0", "TS1", "TS2", "TS3", "TS4", "TS5"],
+      "blocked_statuses": [],
+      "required_context": "must avoid equivalence implication"
+    },
+    {
+      "term": "humility",
+      "language_class": "epistemic_posture",
+      "allowed_statuses": ["TS0", "TS1", "TS2", "TS3", "TS4", "TS5"],
+      "required_context": "used to indicate bounded claims and explicit uncertainty"
+    },
+    {
+      "term": "rigor",
+      "language_class": "governance_posture",
+      "allowed_statuses": ["TS2", "TS3", "TS4", "TS5"],
+      "required_context": "requires dependency tracking, provenance, or proof governance"
+    },
+    {
+      "term": "provisional",
+      "language_class": "uncertainty_scope",
+      "allowed_statuses": ["TS0", "TS1", "TS2"],
+      "required_context": "must identify unresolved dependency or evidence gap"
+    },
+    {
+      "term": "supported",
+      "language_class": "evidence_language",
+      "allowed_statuses": ["TS3", "TS4", "TS5"],
+      "required_context": "requires explicit support source declaration"
+    },
+    {
+      "term": "final theory",
+      "language_class": "forbidden_universalism",
+      "blocked_statuses": ["TS0", "TS1", "TS2", "TS3", "TS4", "TS5"],
+      "replacement_if_blocked": "framework proposal"
+    },
+    {
+      "term": "scientifically proven",
+      "language_class": "forbidden_overclaim",
+      "blocked_statuses": ["TS0", "TS1", "TS2", "TS3", "TS4"],
+      "replacement_if_blocked": "proved within the PCD formal stack"
+    },
+    {
+      "term": "disproves physics",
+      "language_class": "forbidden_overclaim",
+      "blocked_statuses": ["TS0", "TS1", "TS2", "TS3", "TS4", "TS5"],
+      "replacement_if_blocked": "offers an alternative formal interpretation"
+    }
+  ]
+}

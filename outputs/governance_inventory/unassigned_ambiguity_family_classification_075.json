@@ -1,0 +1,145 @@
+{
+  "patch_id": "PATCH_GOVERNANCE_UNASSIGNED_AMBIGUITY_FAMILY_CLASSIFICATION_075",
+  "mode": "READ_ONLY_ANALYSIS",
+  "generated_at": "2026-07-15T18:35:00-04:00",
+  "global_accounting_preservation": {
+    "q1_local_queue": 0,
+    "global_blocking_ambiguities_before": 487,
+    "global_blocking_ambiguities_after": 487,
+    "ambiguities_resolved": 0,
+    "ambiguities_closed": 0,
+    "patch_002_status": "PARTIAL",
+    "patch_002_authority_effect": "NONE",
+    "full_project_validation_status": "SUSPENDED_PENDING_VALIDATOR_DEPARTMENT_COMPLETION",
+    "full_project_validation_run": false
+  },
+  "items": [
+    {
+      "local_id": "Q1-VAL-001",
+      "global_id": "AMB-GOV-SURF-0882",
+      "item_evidence": {
+        "source_surface": "registry/governance_hash_registry.json",
+        "current_live_role": "INTEGRITY_REGISTRY_ONLY",
+        "current_runtime_behavior": "Role-aware lookup allows GENERATED_EVIDENCE for the hash registry and blocks generic mixed-role authority lookup for Q0 partition surfaces.",
+        "original_ambiguity_statement": "Integrity registry inclusion can be mistaken for validator ownership or live validation authority even though the surface is integrity-only.",
+        "later_governance": [
+          "outputs/governance_inventory/q1_remaining_validation_authority_state_refresh.json marks the surface INTEGRITY_REGISTRY_ONLY and OUTSIDE_Q1_SCOPE.",
+          "outputs/governance_inventory/governance_surface_inventory.json distinguishes GOV-SURF-0881 as EXPLICIT_LIVE_AUTHORITY at registry/governance_change_ledger.json and GOV-SURF-0882 as EXPLICIT_NON_AUTHORITATIVE at registry/governance_hash_registry.json."
+        ],
+        "authority_candidates": [
+          "GOV-SURF-0881",
+          "GOV-SURF-0882"
+        ],
+        "risk_dimensions": [
+          "AUTHORITY_LINEAGE_MISSING",
+          "DUPLICATE_IDENTITY_UNCLEAR",
+          "VALIDATION_AUTHORITY_UNCLEAR"
+        ]
+      },
+      "substantive_unresolved_problem": "The blocking problem is not current validation authority. It is the duplicate canonical-looking identity between the live governance ledger and the non-authoritative hash registry, both carrying the same GOVERNANCE_INTEGRITY_LOCK_001 title, which still leaves identity disambiguation unresolved for downstream governance consumers.",
+      "excluded_families": [
+        {
+          "family": "Q2_AUTHORITY_LINEAGE",
+          "reason": "Lineage evidence is still requested, but the immediate ambiguity is not predecessor-successor descent between competing authorities. The live split between ledger authority and hash-registry non-authority is already known; the blocking question is distinguishing same-looking surfaces."
+        },
+        {
+          "family": "Q3_LIVE_PROPOSAL_HISTORY_CLASSIFICATION",
+          "reason": "The conflict is not between current live state and historical or proposal material."
+        },
+        {
+          "family": "Q4_GENERATED_VIEW_BOUNDARY",
+          "reason": "The hash registry is already proven non-authoritative and derived. What remains unresolved is not whether it is generated, but how to disambiguate it from the ledger surface with the same integrity-lock identity."
+        }
+      ],
+      "selected_family": "Q5_DUPLICATE_IDENTITY_DOCUMENTATION",
+      "classification_confidence": "HIGH"
+    },
+    {
+      "local_id": "Q1-VAL-005",
+      "global_id": "AMB-GOV-SURF-0664",
+      "item_evidence": {
+        "source_surface": "registry/db/acellorator_index.sqlite",
+        "current_live_role": "DB_RUNTIME_GATE_STORAGE",
+        "current_runtime_behavior": "Role-aware lookup allows the SQLite file as a DB runtime gate surface and not as validation invocation or reduction authority.",
+        "original_ambiguity_statement": "The live DB runtime substrate can be confused with validation authority even though it is an operational projection surface rather than a validator role.",
+        "later_governance": [
+          "outputs/governance_inventory/q1_remaining_validation_authority_state_refresh.json marks the item OUTSIDE_Q1_SCOPE with live role DB_RUNTIME_GATE_STORAGE.",
+          "outputs/governance_inventory/governance_surface_inventory.json marks registry/db/acellorator_index.sqlite EXPLICIT_NON_AUTHORITATIVE with declared owner db-projection-layer."
+        ],
+        "risk_dimensions": [
+          "DUPLICATE_IDENTITY_UNCLEAR",
+          "VALIDATION_AUTHORITY_UNCLEAR"
+        ],
+        "supporting_evidence": [
+          "registry/db/README.md states the database is not a source of truth for semantics, lexicon definitions, or claim status.",
+          "outputs/governance_inventory/validation_department_systems_audit_reconciliation_069.json classifies the SQLite substrate as derived DB runtime state rather than live validation authority."
+        ]
+      },
+      "substantive_unresolved_problem": "The blocking problem is the boundary between DB runtime projection state and authoritative source state. The SQLite index remains live infrastructure, but it is still vulnerable to being treated as an authoritative governance or validation source instead of a derived runtime substrate.",
+      "excluded_families": [
+        {
+          "family": "Q2_AUTHORITY_LINEAGE",
+          "reason": "The unresolved issue is not predecessor-successor descent or missing supersession among authority owners."
+        },
+        {
+          "family": "Q3_LIVE_PROPOSAL_HISTORY_CLASSIFICATION",
+          "reason": "The surface is a live runtime substrate, not a proposal or historical record classification problem."
+        },
+        {
+          "family": "Q5_DUPLICATE_IDENTITY_DOCUMENTATION",
+          "reason": "Duplicate identity is present as a secondary risk dimension, but the substantive blocking issue is the DB projection being mistaken for authoritative source state."
+        }
+      ],
+      "selected_family": "Q4_GENERATED_VIEW_BOUNDARY",
+      "classification_confidence": "HIGH"
+    },
+    {
+      "local_id": "Q1-VAL-006",
+      "global_id": "AMB-GOV-SURF-0676",
+      "item_evidence": {
+        "source_surface": "registry/db/migrations/20260703_governance_runtime_semantic_authority_013.sql",
+        "current_live_role": "SEMANTIC_AUTHORITY_RUNTIME_PROJECTION",
+        "current_runtime_behavior": "Role-aware lookup allows the migration under db_runtime; the migration seeds semantic_authority_map records used by runtime semantic queries and does not assign validation invocation or reduction ownership.",
+        "original_ambiguity_statement": "The semantic-authority runtime migration may be mistaken for validation authority even though it governs semantic ownership rather than validator ownership.",
+        "later_governance": [
+          "outputs/governance_inventory/q1_remaining_validation_authority_state_refresh.json marks the item OUTSIDE_Q1_SCOPE with live role SEMANTIC_AUTHORITY_RUNTIME_PROJECTION.",
+          "registry/db/README.md states the initial semantic authority seed is mirrored from registry/theorem_registry.json and projected into the DB runtime from there."
+        ],
+        "risk_dimensions": [
+          "VALIDATION_AUTHORITY_UNCLEAR"
+        ],
+        "supporting_evidence": [
+          "outputs/governance_inventory/q1_remaining_conflict_components.json isolates the semantic-authority migration as a separate projection family rather than a validator-role cluster.",
+          "scripts/query_governance.py resolves semantic authority from registry source and uses the DB map as a runtime gate and projection layer."
+        ]
+      },
+      "substantive_unresolved_problem": "The blocking problem is the boundary between projected semantic-authority runtime state and authoritative source state. The migration participates in a live runtime projection seeded from registry authority, but the unresolved issue is preventing that projection surface from being mistaken for validator ownership or another primary authority source.",
+      "excluded_families": [
+        {
+          "family": "Q2_AUTHORITY_LINEAGE",
+          "reason": "The registry source for semantic authority is already identified, and the unresolved problem is not tracing predecessor-successor authority descent."
+        },
+        {
+          "family": "Q3_LIVE_PROPOSAL_HISTORY_CLASSIFICATION",
+          "reason": "The migration is neither archival nor proposal-only; it is a live runtime projection surface."
+        },
+        {
+          "family": "Q5_DUPLICATE_IDENTITY_DOCUMENTATION",
+          "reason": "There is no primary naming-collision or duplicate-canonical-surface problem shown in the evidence."
+        }
+      ],
+      "selected_family": "Q4_GENERATED_VIEW_BOUNDARY",
+      "classification_confidence": "MEDIUM_HIGH"
+    }
+  ],
+  "summary": {
+    "classified_to_existing_family": {
+      "Q1-VAL-001": "Q5_DUPLICATE_IDENTITY_DOCUMENTATION",
+      "Q1-VAL-005": "Q4_GENERATED_VIEW_BOUNDARY",
+      "Q1-VAL-006": "Q4_GENERATED_VIEW_BOUNDARY"
+    },
+    "left_unassigned": [],
+    "resolution_status_changed": false,
+    "blocking_status_changed": false
+  }
+}

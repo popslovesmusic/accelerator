@@ -1,0 +1,124 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_053",
+  "status": "APPLIED",
+  "applied_on": "2026-07-07T00:05:44.0105280-04:00",
+  "type": "operator_discipline_patch",
+  "campaign": "RT_CALCULUS",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "title": "Delta Evaluation Discipline for A|E Metric Bridge",
+  "mode": "additive",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_052"
+  ],
+  "basis": {
+    "source_patches": [
+      "PATCH_PI_RT_CALCULUS_052"
+    ],
+    "source_surfaces": [
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_052.json",
+      "docs/governance/ae_metric_candidate_052.json",
+      "docs/governance/symmetry_reference_trace_052.json",
+      "docs/governance/ra_symbol_discipline_052.json"
+    ],
+    "scope": "Define the governance discipline for Delta in A|E := Delta(A <S>_ra E) before any numerical metric formalization is attempted. The basis is additive and documentary, using the applied 052 metric-bridge candidate and its execution surface while leaving RT_core unchanged."
+  },
+  "core_rule": {
+    "id": "DELTA_EVALUATION_DISCIPLINE_001",
+    "statement": "Delta evaluates expressed mismatch/asymmetry under a declared symmetry-reference coupling <S>; it does not by itself define ordinary distance, magnitude, measurement units, or numerical metric space."
+  },
+  "symbol_bindings": {
+    "Delta": "mismatch/asymmetry evaluation operator",
+    "A": "affect-side condition",
+    "E": "effect-side condition",
+    "<S>": "declared symmetry-reference coupling condition",
+    "r_a": "residue-asymmetry parameter"
+  },
+  "allowed_readings": [
+    "Delta may classify mismatch.",
+    "Delta may compare asymmetry under a fixed declared <S>.",
+    "Delta may expose whether a distinction is admissible under the reference coupling.",
+    "Delta may carry qualitative or ordinal structure before numerical measurement is defined."
+  ],
+  "forbidden_readings": [
+    "Delta is not automatically Euclidean distance.",
+    "Delta is not automatically scalar magnitude.",
+    "Delta does not imply units.",
+    "Delta does not imply role symmetry.",
+    "Delta does not imply universal measurability.",
+    "Delta does not erase residue-asymmetry r_a.",
+    "Delta does not modify RT_core."
+  ],
+  "formal_schema": {
+    "candidate_expression": "A|E := Delta(A <S>_ra E)",
+    "required_inputs": [
+      "typed A",
+      "typed E",
+      "declared <S>",
+      "declared r_a"
+    ],
+    "minimum_output": "mismatch/asymmetry evaluation under <S>",
+    "not_yet_defined": [
+      "numeric value",
+      "metric norm",
+      "unit scale",
+      "distance function",
+      "topology"
+    ]
+  },
+  "relationship_to_prior_patches": {
+    "052": "Introduced A|E as symmetry-referenced mismatch evaluation.",
+    "053": "Constrains Delta so the metric bridge does not collapse prematurely into ordinary distance."
+  },
+  "required_execution_surface": [
+    "delta_operator_discipline_053.json",
+    "delta_allowed_forbidden_readings_053.json",
+    "delta_non_metric_counterexample_053.json"
+  ],
+  "required_repo_changes": [
+    {
+      "path": "docs/governance/delta_operator_discipline_053.json",
+      "description": "Add the operator-discipline witness that constrains Delta as mismatch/asymmetry evaluation."
+    },
+    {
+      "path": "docs/governance/delta_allowed_forbidden_readings_053.json",
+      "description": "Add the allowed and forbidden readings that keep Delta non-metric and non-symmetric by default."
+    },
+    {
+      "path": "docs/governance/delta_non_metric_counterexample_053.json",
+      "description": "Add the counterexample that prevents ordinary distance or unit-space collapse."
+    }
+  ],
+  "success_criteria": [
+    "Delta is explicitly constrained as mismatch/asymmetry evaluation.",
+    "Ordinary distance, norm, scalar magnitude, and units remain unclaimed.",
+    "A|E asymmetry from 047 and metric bridge from 052 are preserved.",
+    "RT_core remains unchanged."
+  ],
+  "non_claims": [
+    "Does not finalize metric calculus.",
+    "Does not define a norm.",
+    "Does not define a topology.",
+    "Does not assert physical measurability.",
+    "Does not update textbook surfaces.",
+    "Does not modify RT_core."
+  ],
+  "claim_humility": {
+    "current_status": "proposed_only",
+    "non_claims": [
+      "Does not finalize metric calculus.",
+      "Does not define a norm.",
+      "Does not define a topology.",
+      "Does not assert physical measurability.",
+      "Does not update textbook surfaces.",
+      "Does not modify RT_core."
+    ]
+  },
+  "validation_expectation": {
+    "json_parse": "required",
+    "registry_record_only": "required",
+    "execution_surface": "required",
+    "textbook_update": "deferred",
+    "rt_core_unchanged": "required"
+  },
+  "agent_instruction": "Create PATCH_PI_RT_CALCULUS_053 as PROPOSED only. Use additive mode, cite applied PATCH_PI_RT_CALCULUS_052 as provenance, build the execution surface, and do not apply until patch-gate returns apply."
+}

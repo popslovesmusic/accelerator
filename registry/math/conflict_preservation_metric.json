@@ -1,0 +1,63 @@
+{
+  "patch_id": "MPF-PALG-044",
+  "name": "Conflict Preservation Metric",
+  "status": "active",
+  "metric_status": "METRICS_SCAFFOLD_ONLY",
+  "purpose": "Evaluate whether bridge artifacts preserve projection conflicts instead of erasing them into unity language.",
+  "source_relation": "(E≠0) ⇔R δ(E>0)",
+  "non_separability_acknowledged": true,
+  "no_unification_guardrail": "no QM/GR unification, derivation, replacement, or physics claim; only analog projection behavior",
+  "governance_status": {
+    "theorem_status": "NOT_PROVEN",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL"
+  },
+  "metrics": [
+    {
+      "metric_id": "conflict_record_completeness",
+      "definition": "Measures the fraction of identified projection-domain conflicts that are explicitly preserved in the bridge artifact.",
+      "calculation": "ratio of preserved_conflicts to total_identified_conflicts"
+    },
+    {
+      "metric_id": "discrete_smooth_conflict_preserved",
+      "definition": "Specifically tracks if the tension between discrete-transition (QM-like) and smooth-flow (GR-like) projections is maintained.",
+      "value_type": "boolean"
+    },
+    {
+      "metric_id": "threshold_flow_conflict_preserved",
+      "definition": "Tracks if the tension between participation-thresholding and continuous-constraint-flow is maintained.",
+      "value_type": "boolean"
+    },
+    {
+      "metric_id": "conflict_erasure_risk",
+      "definition": "Detects language that attempts to 'resolve' or 'unify' conflicts without proper source-relation derivation.",
+      "calculation": "count of resolution_keywords vs conflict_keywords"
+    },
+    {
+      "metric_id": "conflict_resolution_claim_blocked",
+      "definition": "Enforcement check: all claims of conflict resolution must be blocked unless C5+ evidence is provided (which is blocked by other rules).",
+      "value_type": "boolean"
+    }
+  ],
+  "preservation_requirements": [
+    "conflict_record_completeness == 1.0",
+    "discrete_smooth_conflict_preserved == true",
+    "threshold_flow_conflict_preserved == true",
+    "conflict_resolution_claim_blocked == true"
+  ],
+  "governance_rules": [
+    {
+      "rule_id": "CPM-RULE-001",
+      "rule": "Erasure of projection conflicts is a critical validation failure."
+    },
+    {
+      "rule_id": "CPM-RULE-002",
+      "rule": "Bridge artifacts must report conflicts as 'preserved' rather than 'resolved'."
+    }
+  ],
+  "forbidden_claims": [
+    "Bridge metrics resolve the discrete/continuous conflict.",
+    "Threshold/flow agreement eliminates projection tension.",
+    "Conflict preservation is optional for high-coherence results."
+  ]
+}

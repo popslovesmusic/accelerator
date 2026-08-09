@@ -1,0 +1,30 @@
+{
+  "loss_saturation_basin": {
+    "version": "1.0",
+    "description": "Registry of stable basins where information loss saturates under recursive continuation.",
+    "basins": [
+      {
+        "id": "LSB-001",
+        "name": "dissipative_transport_basin",
+        "target": "NavT",
+        "condition": "Stable fixed-point reached; aggregate flux is invariant under further iteration.",
+        "loss_state": "saturated_noninvertible"
+      },
+      {
+        "id": "LSB-002",
+        "name": "admissibility_manifold_basin",
+        "target": "Pi_A",
+        "condition": "State remains within the interior of the admissibility window (epsilon > epsilon_threshold).",
+        "loss_state": "stable_local_recoverability"
+      },
+      {
+        "id": "LSB-003",
+        "name": "branch_pruning_equilibrium",
+        "target": "delta",
+        "condition": "Rate of branch generation equals rate of pruning (OMR-001).",
+        "loss_state": "bounded_multi_preimage"
+      }
+    ],
+    "last_updated": "2026-05-13"
+  }
+}

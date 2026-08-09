@@ -1,0 +1,88 @@
+{
+  "patch_id": "PATCH_GOVERNANCE_Q1_VALIDATION_AUTHORITY_FIRST_BOUNDED_CLUSTER_SELECTION_064",
+  "title": "Q1 Validation Authority First Bounded Cluster Selection",
+  "status": "APPLIED",
+  "applied_on": "2026-07-15T10:30:00-04:00",
+  "type": "analysis_audit",
+  "depends_on": [
+    "PATCH_GOVERNANCE_Q0_PATCH_002_COMPLETION_GATE_FOLLOW_ON_018"
+  ],
+  "mode": "additive",
+  "authority_effect": "NONE",
+  "purpose": "Inventory the exact nine Q1 validation-authority items, classify the authority question each actually raises, build the conflict graph, and select one coherent first bounded cluster without resolving authority in the same patch.",
+  "summary": "This patch records nine Q1 validation-authority items and selects a two-item first cluster around the validation-invocation boundary between the DB runtime ownership projection and instruction/descriptor surfaces. It does not assign a new canonical validator, alter the validator-department suspension, or change terminal reduction authority.",
+  "q1_total_item_count": 9,
+  "classification_count_by_authority_question": {
+    "INVOCATION_AUTHORITY_AMBIGUITY": 1,
+    "TERMINAL_REDUCTION_AUTHORITY_AMBIGUITY": 0,
+    "SUPPORTING_VALIDATOR_SCOPE_AMBIGUITY": 1,
+    "SCOPED_VS_COMPLETE_VALIDATION_AMBIGUITY": 0,
+    "INSTRUCTION_VS_EXECUTABLE_AUTHORITY_AMBIGUITY": 1,
+    "GENERATED_EVIDENCE_AUTHORITY_AMBIGUITY": 3,
+    "OUTSIDE_VALIDATION_AUTHORITY_SCOPE": 3,
+    "UNPROVEN": 0
+  },
+  "selected_cluster_item_ids": [
+    "Q1-VAL-002",
+    "Q1-VAL-003"
+  ],
+  "selected_cluster_authority_role": "VALIDATION_INVOCATION_AUTHORITY boundary with INSTRUCTION_AUTHORITY and runtime ownership projection",
+  "selected_candidate_surfaces": [
+    "scripts/global_validate.py",
+    "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+    "registry/db/migrations/20260703_governance_runtime_authority_resolution_003.sql",
+    "registry/db/README.md",
+    "scripts/query_governance.py"
+  ],
+  "selected_resolution_modes": [
+    "PARTITION_DISTINCT_ROLES",
+    "PROVE_SINGLE_EXISTING_AUTHORITY",
+    "PROSPECTIVELY_NEUTRALIZE_LEGACY_CLAIM"
+  ],
+  "remaining_q1_item_ids": [
+    "Q1-VAL-001",
+    "Q1-VAL-004",
+    "Q1-VAL-005",
+    "Q1-VAL-006",
+    "Q1-VAL-007",
+    "Q1-VAL-008",
+    "Q1-VAL-009"
+  ],
+  "artifacts": {
+    "item_inventory": "outputs/governance_inventory/q1_validation_authority_item_inventory.json",
+    "conflict_graph": "outputs/governance_inventory/q1_validation_authority_conflict_graph.json",
+    "cluster_selection": "outputs/governance_inventory/q1_first_bounded_cluster_selection.json",
+    "resolution_packet": "outputs/governance_inventory/q1_first_validation_authority_resolution_packet.json"
+  },
+  "completion_assertions": {
+    "q1_total_items": 9,
+    "selected_cluster_item_count": 2,
+    "selected_cluster_item_ids": [
+      "Q1-VAL-002",
+      "Q1-VAL-003"
+    ],
+    "remaining_q1_item_count": 7,
+    "q1_items_resolved": 0,
+    "validation_authority_changed": false,
+    "patch_002_changed": false,
+    "full_project_validation_run": false
+  },
+  "validation_results": {
+    "targeted_q1_selection_test": {
+      "command": "python -m pytest tests/governance_validation/test_patch_064_q1_validation_authority_first_bounded_cluster_selection.py -q",
+      "status": "PASS"
+    },
+    "json_parse": {
+      "status": "PASS_REQUIRED"
+    },
+    "git_diff_check": {
+      "command": "git diff --check",
+      "status": "PASS_WITH_CRLF_WARNINGS_ONLY"
+    },
+    "git_status": {
+      "command": "git status --short",
+      "status": "PASS_REVIEWED"
+    }
+  },
+  "full_project_validation_status": "SUSPENDED_PENDING_VALIDATOR_DEPARTMENT_COMPLETION"
+}

@@ -1,0 +1,48 @@
+{
+  "registry_id": "PCD_MSV_001_THEOREM_PROMOTION_GATE",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "gate_id",
+      "target_theorems",
+      "required_execution_plan",
+      "required_results_template",
+      "required_runtime_validator_result",
+      "required_mechanism_classes",
+      "required_seed_counts",
+      "required_falsification_status",
+      "required_provenance_status",
+      "promotion_outcomes",
+      "downgrade_outcomes"
+    ]
+  },
+  "gates": [
+    {
+      "gate_id": "MSV-001-THEOREM-PROMOTION-GATE-V1",
+      "target_theorems": [
+        "MST-001",
+        "OASSOC-001"
+      ],
+      "required_execution_plan": "MSV-001-FULL-EXECUTION-V1",
+      "required_results_template": "registry/msv_001_results_template.json",
+      "required_runtime_validator_result": "PASS_TS4_ELIGIBLE",
+      "required_mechanism_classes": [
+        "graph_dynamics",
+        "cellular_automata"
+      ],
+      "required_seed_counts": {
+        "graph_dynamics": 3,
+        "cellular_automata": 3
+      },
+      "required_falsification_status": "FV-1_through_FV-4_executed_and_classified",
+      "required_provenance_status": "recoverable_outputs_verified",
+      "promotion_outcomes": {
+        "full_pass": "promote_to_TS4_simulation_supported_theorem",
+        "formal_pass_single_mechanism": "retain_TS2_with_single_mechanism_probe_note",
+        "formal_pass_missing_falsification": "retain_TS2_or_downgrade_TS1",
+        "cross_mechanism_contradiction": "mark_contested_or_inconclusive",
+        "runtime_validation_failure": "block_promotion"
+      }
+    }
+  ]
+}

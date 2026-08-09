@@ -1,0 +1,174 @@
+{
+  "patch_id": "PATCH_TOOL_INDEX_NORMALIZATION_V1",
+  "title": "Tool Index Normalization",
+  "status": "PROPOSED",
+  "target_files": [
+    "registry/tool_index.json",
+    "registry/tool_manifest.json",
+    "registry/governance_rule_archival.json"
+  ],
+  "purpose": "Normalize tool path semantics, separate implementation model labels from governed mechanism classes, sync missing manifest tools, and prevent C++ preference routing errors.",
+  "change_type": "registry_consistency_patch",
+  "preserve_existing_fields": true,
+  "rules": {
+    "path_normalization": {
+      "tool_path": "MUST be repo-root-relative and begin with tools/",
+      "validation_path": "MUST be repo-root-relative and begin with tools/<tool_name>/validation",
+      "legacy_relative_path_behavior": "deprecated"
+    },
+    "taxonomy_separation": {
+      "model_class": "preserve existing implementation/domain label",
+      "mechanism_class": "new governance-facing field mapped to allowed mechanism classes",
+      "model_class_must_not_be_used_for_claim_gate": true
+    },
+    "cpp_preference": {
+      "for_C4_or_higher": "prefer tools where implementation_language == cpp or backend == cpp",
+      "if_python_C4_and_cpp_counterpart_lower": "flag rigor endorsement_asymmetry",
+      "do_not_auto_promote_cpp_counterpart": true
+    }
+  },
+  "allowed_mechanism_classes": [
+    "ode_oscillator",
+    "reaction_diffusion",
+    "cellular_automata",
+    "agent_based",
+    "graph_dynamics",
+    "topological_analysis",
+    "field_dynamics",
+    "fractional_field_dynamics",
+    "spectral_analysis",
+    "accelerator_dynamics",
+    "optimization",
+    "ensemble_sampling"
+  ],
+  "model_to_mechanism_mapping": {
+    "agent": "agent_based",
+    "agent_based": "agent_based",
+    "discrete_ca": "cellular_automata",
+    "ca": "cellular_automata",
+    "finite_state": "cellular_automata",
+    "network": "graph_dynamics",
+    "graph": "graph_dynamics",
+    "pde": "reaction_diffusion",
+    "reaction_diffusion": "reaction_diffusion",
+    "ode": "ode_oscillator",
+    "ode_oscillator": "ode_oscillator",
+    "kuramoto": "ode_oscillator",
+    "topology": "topological_analysis",
+    "tda": "topological_analysis",
+    "topology_analyzer": "topological_analysis",
+    "spectral_analyzer": "spectral_analysis",
+    "spectral": "spectral_analysis",
+    "optimizer": "optimization",
+    "parameter_optimizer": "optimization",
+    "mc_ensemble": "ensemble_sampling",
+    "ensemble": "ensemble_sampling",
+    "orchestrator": "ensemble_sampling",
+    "stochastic": "ensemble_sampling",
+    "accelerator": "accelerator_dynamics",
+    "field": "field_dynamics",
+    "field_simulation": "field_dynamics",
+    "analog_simulation": "field_dynamics",
+    "gw_simulator": "fractional_field_dynamics",
+    "fractional_solver": "fractional_field_dynamics",
+    "hamiltonian": "ode_oscillator",
+    "lattice_boltzmann": "reaction_diffusion",
+    "analyzer": "spectral_analysis",
+    "post_processor": "spectral_analysis",
+    "falsification_harness": "ensemble_sampling"
+  },
+  "tool_index_record_schema_v2": {
+    "tool_name": "",
+    "tool_path": "tools/<tool_name>",
+    "entry_point": "tools/<tool_name>/<entry_file>",
+    "validation_path": "tools/<tool_name>/validation",
+    "model_class": "",
+    "mechanism_class": "",
+    "implementation_language": "python | cpp | hybrid | unknown",
+    "backend": "python | cpp | avx2 | sycl | unknown",
+    "rigor endorsement_level": "C0 | C1 | C2 | C3 | C4",
+    "claim_use_limit": "",
+    "manifest_synced": true,
+    "rigor endorsement_asymmetry": false,
+    "cpp_counterpart": "",
+    "python_counterpart": "",
+    "governance_warnings": []
+  },
+  "required_actions": [
+    {
+      "action": "normalize_paths",
+      "description": "Rewrite all tool_path and validation_path values to repo-root-relative paths beginning with tools/."
+    },
+    {
+      "action": "add_mechanism_class",
+      "description": "Populate mechanism_class from model_class using model_to_mechanism_mapping. Preserve model_class unchanged."
+    },
+    {
+      "action": "sync_manifest_missing_tools",
+      "description": "Add signal_scope_phase_continuation_engine and tda_module_v2_cpp to tool_index.json from tool_manifest.json."
+    },
+    {
+      "action": "detect_rigor endorsement_asymmetry",
+      "description": "For Python/C++ counterpart pairs with mismatched rigor endorsement levels, mark rigor endorsement_asymmetry=true and add governance warning."
+    },
+    {
+      "action": "update_orchestrator_selection_rule",
+      "description": "For C4+ claims, select by mechanism_class and rigor endorsement_level, then prefer C++/hybrid implementations when available."
+    }
+  ],
+  "governance_warnings_to_emit": [
+    {
+      "warning": "ambiguous_tool_path",
+      "condition": "tool_path does not begin with tools/"
+    },
+    {
+      "warning": "ambiguous_validation_path",
+      "condition": "validation_path does not begin with tools/"
+    },
+    {
+      "warning": "unknown_mechanism_class",
+      "condition": "model_class cannot be mapped to allowed mechanism_class"
+    },
+    {
+      "warning": "rigor endorsement_asymmetry",
+      "condition": "Python and C++ counterpart tools have different rigor endorsement levels"
+    },
+    {
+      "warning": "manifest_index_mismatch",
+      "condition": "tool exists in manifest but not tool_index, or vice versa"
+    },
+    {
+      "warning": "cpp_preference_conflict",
+      "condition": "Python tool is C4 while C++ counterpart is below C3"
+    }
+  ],
+  "claim_gate_change": {
+    "before": "Claim gate may accidentally treat model_class as mechanism_class.",
+    "after": "Claim gate MUST use mechanism_class for independence checks and model_class only as implementation/domain metadata."
+  },
+  "expected_effect": {
+    "tool_routing": "less ambiguous",
+    "claim_validation": "more rigorous",
+    "cpp_preference": "less likely to select Python C4 when C++ counterpart exists but is undercertified",
+    "registry_health": "manifest and index become consistent"
+  },
+  "post_patch_validation": [
+    "Every tool_index record has repo-root-relative tool_path.",
+    "Every validation_path begins with tools/<tool_name>/validation.",
+    "Every record has mechanism_class.",
+    "No manifest tool is missing from tool_index.",
+    "Every Python/C++ counterpart mismatch is explicitly flagged.",
+    "Claim gate uses mechanism_class, not model_class, for independence checks."
+  ],
+  "execution_record": {
+    "status": "applied",
+    "applied_at": "2026-05-03T01:22:02Z",
+    "applied_by": "codex_cli",
+    "notes": [
+      "Rewrote registry/tool_index.json to add mechanism_class, entry_point, implementation_language, backend, and counterpart metadata.",
+      "Normalized tool_path/validation_path to repo-root-relative tools/<tool_name>/... semantics.",
+      "Synced tool_index with tool_manifest (added missing tools).",
+      "Annotated tool_manifest tool entries with mechanism_class and implementation metadata (non-breaking additive fields)."
+    ]
+  }
+}

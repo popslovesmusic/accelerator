@@ -1,0 +1,46 @@
+{
+  "registry_id": "MATH_CAMPAIGN_EXECUTION_ORDER_001",
+  "version": "1.0.0",
+  "status": "active",
+  "last_updated": "2026-07-03",
+  "purpose": "Canonical execution order for active mathematics campaigns after the shared prerequisite cluster was discharged.",
+  "basis": [
+    "outputs/analysis/unlock_priority_report.json",
+    "analysis/dependency_report.json",
+    "analysis/program_state_report.json",
+    "governance/live/master_work_index.json",
+    "registry/math/proof_elevation_campaign_registry.json",
+    "registry/math/mt_proof_elevation_campaign_registry.json",
+    "registry/math/mt_counterexample_campaign_registry.json"
+  ],
+  "order": [
+    {
+      "phase": "PHASE_1_FORMAL_FOLLOW_THROUGH",
+      "tasks": [
+        "PROOF-ELEVATION-CAMPAIGN-001",
+        "MT-PROOF-ELEVATION-001"
+      ],
+      "next_action": "continue formal artifact follow-through"
+    },
+    {
+      "phase": "PHASE_2_ADVERSARIAL_CONTINUATION",
+      "tasks": [
+        "MT-COUNTEREXAMPLE-001"
+      ],
+      "next_action": "continue adversarial testing and preserve failure modes"
+    },
+    {
+      "phase": "PHASE_3_REPAIR_AND_CONFIRMATION",
+      "tasks": [
+        "SIM-REPAIR-QUEUE-001",
+        "VAL-RC-EXEC-001",
+        "VAL-URS-RES-001"
+      ],
+      "next_action": "execute repair and resolve queued structure items"
+    }
+  ],
+  "notes": [
+    "The shared prerequisite cluster MT-001, MT-002, MT-003, recursive_convergence, operator_composition, and selection_uniqueness is discharged at the blocker level.",
+    "This order formalizes execution follow-through only and does not promote theorem or proof status."
+  ]
+}

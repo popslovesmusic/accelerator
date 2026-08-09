@@ -1,0 +1,180 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_010",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-05",
+  "type": "governance_patch",
+  "artifact_type": "governance_patch",
+  "title": "Primitive Distinction Projection Algebra",
+  "priority": "HIGH",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_009"
+  ],
+  "purpose": "Establish the first formal algebraic bridge from the primitive affect/effect distinction condition A|E to its representational distinction projection D(*|*), without introducing D(*|*) as a primitive.",
+  "canonical_claims": [
+    {
+      "id": "CLAIM_010_001",
+      "statement": "A|E is the primitive affect/effect distinction condition.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_010_002",
+      "statement": "D(*|*) is not primitive.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_010_003",
+      "statement": "D(*|*) is the formal distinction projection of A|E.",
+      "formal": "D(*|*) := Π_D(A|E)",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_010_004",
+      "statement": "Π_D is a projection operator, not a generative primitive.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_010_005",
+      "statement": "Projection preserves representable distinction while not exhausting the full affect/effect condition.",
+      "status": "canonical"
+    }
+  ],
+  "formal_additions": {
+    "objects": [
+      {
+        "symbol": "A|E",
+        "name": "Primitive Affect/Effect Distinction Condition",
+        "domain": "affect_effect_domain",
+        "primitive": true,
+        "notes": "Not interchangeable with A_meta or B_meta."
+      },
+      {
+        "symbol": "Π_D",
+        "name": "Distinction Projection Operator",
+        "domain": "projection_layer",
+        "primitive": false,
+        "definition": "Projection from primitive affect/effect distinction condition into formal distinction representation."
+      },
+      {
+        "symbol": "D(*|*)",
+        "name": "Formal Distinction Projection",
+        "domain": "representational_distinction_layer",
+        "primitive": false,
+        "definition": "D(*|*) := Π_D(A|E)"
+      }
+    ],
+    "laws": [
+      {
+        "id": "LAW_010_001",
+        "name": "Distinction Projection Law",
+        "formal": "D(*|*) := Π_D(A|E)",
+        "meaning": "Formal distinction notation arises by projecting the primitive affect/effect distinction condition."
+      },
+      {
+        "id": "LAW_010_002",
+        "name": "Non-Primitivity of Distinction Notation",
+        "formal": "Primitive(D(*|*)) = false",
+        "meaning": "The distinction notation is representational and must not be treated as foundational."
+      },
+      {
+        "id": "LAW_010_003",
+        "name": "Projection Non-Exhaustion",
+        "formal": "Π_D(A|E) ⊂repr A|E",
+        "meaning": "The projection captures representable distinction but not the full primitive condition."
+      }
+    ]
+  },
+  "domain_separation": {
+    "meta_domain": {
+      "A_meta": "δα(ℰ>0)",
+      "B_meta": "(ℰ≠0)",
+      "RT_core": "RT := [B_meta ⇔R A_meta]"
+    },
+    "affect_effect_domain": {
+      "A": "Affect",
+      "E": "Effect",
+      "primitive_condition": "A|E"
+    },
+    "rule": "A|E must never be interpreted as A_meta|B_meta or substituted into RT_core bindings."
+  },
+  "architecture_update": [
+    "RT_core",
+    "A|E",
+    "Π_D",
+    "D(*|*)",
+    "Orientation",
+    "σRT",
+    "Operational Regime",
+    "{Linear, Nonlinear, Mixed}"
+  ],
+  "explicitly_out_of_scope": [
+    "sigma_RT formal selector mathematics",
+    "RT Condition object",
+    "operational regime transition equations",
+    "recursive crisis/recovery formalism",
+    "memory tensor implementation",
+    "new primitive operators"
+  ],
+  "required_file_updates": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_010.json",
+    "registry/formal_object_registry.json",
+    "registry/math_source_registry.json",
+    "registry/lexicon_gap_queue.json"
+  ],
+  "validation_requirements": [
+    "JSON parses cleanly.",
+    "Patch ledger includes PATCH_PI_RT_CALCULUS_010.",
+    "No occurrence treats D(*|*) as primitive.",
+    "A|E remains affect/effect-domain only.",
+    "RT_core remains unchanged.",
+    "global_validate.py passes."
+  ],
+  "success_criteria": {
+    "rt_core_modified": false,
+    "d_bar_marked_nonprimitive": true,
+    "pi_d_defined": true,
+    "a_effect_domain_separated": true,
+    "projection_law_added": true
+  },
+  "updated_artifacts": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/formal_object_registry.json",
+    "registry/math_source_registry.json",
+    "registry/lexicon_gap_queue.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_010.json"
+  ],
+  "source_artifacts": [
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_009.json",
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/lexicon_gap_queue.json"
+  ],
+  "governance": {
+    "execution_claim": "not_claimed",
+    "registry_claim": "proposed_only",
+    "fabricated_history": false,
+    "notes": [
+      "A|E remains governed inside the affect/effect domain and is not a meta-domain binding.",
+      "D(*|*) remains a projected whole-expression schema and is not a detached primitive object."
+    ]
+  },
+  "validation": {
+    "required": [
+      "canonical_claims_present",
+      "projection_operator_present",
+      "distinction_projection_present",
+      "nonprimitive_projection_preserved",
+      "affect_domain_only",
+      "rt_core_unchanged",
+      "global_validate_pass"
+    ],
+    "result": "pass"
+  },
+  "notes": [
+    "This patch is governance and architecture only.",
+    "The projection law is domain-local and does not alter the canonical RT core or the Memory Tensor meta-domain bindings.",
+    "σRT remains deferred and is not formalized here."
+  ]
+}

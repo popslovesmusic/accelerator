@@ -1,0 +1,64 @@
+{
+  "registry_id": "PCD_EMPIRICAL_GOVERNANCE_END_TO_END_AUDIT",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "audit_id",
+      "target_scope",
+      "required_registries",
+      "runtime_scripts",
+      "checks",
+      "blocking_failures",
+      "warnings",
+      "readiness_status"
+    ]
+  },
+  "audits": [
+    {
+      "audit_id": "EMP-GOV-E2E-V1",
+      "target_scope": "Full Empirical Governance Chain",
+      "required_registries": {
+        "registry/engine_rigor endorsement_backlog.json": "EXISTS",
+        "registry/engine_full_rigor endorsement_execution_plan.json": "EXISTS",
+        "registry/empirical_result_package_schema.json": "EXISTS",
+        "registry/empirical_confidence_propagation_registry.json": "EXISTS",
+        "registry/empirical_claim_ledger.json": "EXISTS",
+        "registry/publication_evidence_binding_registry.json": "EXISTS",
+        "registry/epistemic_drift_monitor_registry.json": "EXISTS",
+        "registry/runtime_rulepack_registry.json": "EXISTS"
+      },
+      "runtime_scripts": {
+        "scripts/check_runtime_binaries.py": "EXISTS",
+        "scripts/check_c4_engine_rigor endorsement.py": "EXISTS",
+        "scripts/run_full_engine_rigor endorsement.py": "EXISTS",
+        "scripts/check_empirical_governance.py": "EXISTS",
+        "scripts/governance_gate.py": "EXISTS"
+      },
+      "checks": [
+        {
+          "check_id": "CHAIN-INT-001",
+          "name": "registry_interlinkage",
+          "status": "PASS",
+          "notes": "Logical links from engine outputs to publication bindings are defined in registries."
+        },
+        {
+          "check_id": "CHAIN-INT-002",
+          "name": "runtime_integration",
+          "status": "PASS",
+          "notes": "governance_gate.py successfully invokes check_empirical_governance.py."
+        },
+        {
+          "check_id": "CEIL-001",
+          "name": "status_ceiling_enforcement",
+          "status": "PASS",
+          "notes": "Confidence bands and theorem statuses are correctly capped by tool rigor."
+        }
+      ],
+      "blocking_failures": [],
+      "warnings": [
+        "WARN-E2E-001: Most engine rigor endorsements remain at C1 pending execution of the full C4 plan."
+      ],
+      "readiness_status": "READY_FOR_GOVERNED_EXECUTION"
+    }
+  ]
+}

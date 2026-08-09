@@ -1,0 +1,96 @@
+{
+  "simulation_id": "MPF-SIM-003",
+  "timestamp": "2026-05-15T16:45:36.555922",
+  "status": "pass",
+  "scenario_results": [
+    {
+      "scenario_id": "SIM003-S001",
+      "name": "Bounded Metastable Basin",
+      "basin_class": "RSB-METASTABLE",
+      "metastability_score": 0.45,
+      "projection_cycle_period": null,
+      "idempotence_error_envelope": {
+        "min": 0.001,
+        "max": 0.015,
+        "mean": 0.008,
+        "drift": 0.0001
+      },
+      "threshold_crossing_count": 0,
+      "failure_geometry_triggered": [],
+      "proof_eligibility_impact": "review_required"
+    },
+    {
+      "scenario_id": "SIM003-S002",
+      "name": "Oscillatory Projection Cycle",
+      "basin_class": "RSB-OSCILLATORY",
+      "metastability_score": 0.0,
+      "projection_cycle_period": 2,
+      "idempotence_error_envelope": {
+        "min": 0.0,
+        "max": 0.5,
+        "mean": 0.25,
+        "drift": 0.0
+      },
+      "threshold_crossing_count": 0,
+      "failure_geometry_triggered": [],
+      "proof_eligibility_impact": "blocked"
+    },
+    {
+      "scenario_id": "SIM003-S003",
+      "name": "Threshold-Sensitive Transition",
+      "basin_class": "RSB-METASTABLE",
+      "metastability_score": 0.95,
+      "projection_cycle_period": null,
+      "idempotence_error_envelope": {
+        "min": 0.0,
+        "max": 0.0,
+        "mean": 0.0,
+        "drift": 0.0
+      },
+      "threshold_crossing_count": 3,
+      "failure_geometry_triggered": [
+        "FG-A006"
+      ],
+      "proof_eligibility_impact": "blocked"
+    },
+    {
+      "scenario_id": "SIM003-S004",
+      "name": "False Stability Trap",
+      "basin_class": "RSB-AMBIGUOUS",
+      "metastability_score": 0.0,
+      "projection_cycle_period": null,
+      "idempotence_error_envelope": {
+        "min": 0.0,
+        "max": 0.8,
+        "mean": 0.1,
+        "drift": 0.05
+      },
+      "threshold_crossing_count": 0,
+      "failure_geometry_triggered": [
+        "FG-A002"
+      ],
+      "proof_eligibility_impact": "blocked"
+    },
+    {
+      "scenario_id": "SIM003-S005",
+      "name": "Stable Control Basin",
+      "basin_class": "RSB-STABLE",
+      "metastability_score": 0.0,
+      "projection_cycle_period": null,
+      "idempotence_error_envelope": {
+        "min": 0.0,
+        "max": 0.0001,
+        "mean": 5e-05,
+        "drift": 0.0
+      },
+      "threshold_crossing_count": 0,
+      "failure_geometry_triggered": [],
+      "proof_eligibility_impact": "eligible"
+    }
+  ],
+  "governance": {
+    "theorem_status": "NOT_PROVEN",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL"
+  }
+}

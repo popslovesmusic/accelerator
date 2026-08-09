@@ -1,0 +1,227 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_034",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-05",
+  "type": "governance_patch",
+  "artifact_type": "governance_patch",
+  "title": "Bounded Confluence Theorem",
+  "priority": "HIGH",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_033"
+  ],
+  "mode": "additive",
+  "basis": {
+    "source_patches": [
+      "PATCH_PI_RT_CALCULUS_033"
+    ],
+    "source_surfaces": [
+      "docs/textbook/mono_process_textbook_complete.md",
+      "registry/formal_object_registry.json",
+      "registry/math_source_registry.json",
+      "registry/lexicon_gap_queue.json",
+      "registry/registry/lexicon_gap_queue.json",
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_033.json"
+    ],
+    "scope": "Canonical bounded confluence semantics for continuation classes that already satisfy well-formedness, typing, local confluence, determinism, termination, and uniqueness prerequisites."
+  },
+  "core_rule": {
+    "statement": "Bounded confluence applies only to admissible bounded continuation classes satisfying WF(C), Typed(C), C ⇓L, Det(C), Term(C), and Unique(C); every lawful reduction branch from such a class terminates and the terminating branches are process-equivalent modulo ≡P; RT_core remains unchanged."
+  },
+  "purpose": "Establish the first bounded confluence theorem for the RT Calculus. The theorem applies only to continuation classes satisfying the previously established local confluence, determinism, termination, and uniqueness conditions. No claim of universal confluence is made.",
+  "canonical_claims": [
+    {
+      "id": "CLAIM_034_001",
+      "statement": "Bounded confluence applies only to continuation classes satisfying the established prerequisite bundle.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_034_002",
+      "statement": "Every lawful reduction branch from an admissible bounded continuation class terminates.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_034_003",
+      "statement": "All terminating branches are process-equivalent modulo ≡P.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_034_004",
+      "statement": "Bounded confluence does not imply global confluence or Church-Rosser.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_034_005",
+      "statement": "RT_core remains unchanged.",
+      "status": "canonical"
+    }
+  ],
+  "scope": {
+    "adds": [
+      "Bounded confluence theorem",
+      "Theorem prerequisites",
+      "Bounded proof obligations",
+      "Confluence class semantics"
+    ],
+    "does_not_add": [
+      "Universal confluence theorem",
+      "Church-Rosser theorem",
+      "Universal termination proof",
+      "Recovery operator",
+      "Operational regime execution",
+      "sigma_RT selector"
+    ]
+  },
+  "formal_objects": [
+    {
+      "id": "BOUNDED_CONFLUENCE_034",
+      "symbol": "Conf_B(C)",
+      "name": "Bounded Confluence",
+      "definition": "The property that all lawful reduction branches belonging to an admissible bounded continuation class converge to process-equivalent canonical outcomes."
+    },
+    {
+      "id": "CONFLUENCE_CLASS_034",
+      "symbol": "ClassConf",
+      "name": "Confluence Class",
+      "definition": "A continuation class satisfying all bounded confluence prerequisites."
+    }
+  ],
+  "theorem": {
+    "name": "Bounded Confluence Theorem",
+    "statement": {
+      "if": [
+        "WF(C)",
+        "Typed(C)",
+        "C ⇓L",
+        "Det(C)",
+        "Term(C)",
+        "Unique(C)"
+      ],
+      "then": [
+        "Every lawful reduction branch from C terminates.",
+        "All terminating branches are process-equivalent modulo ≡P.",
+        "Representative canonical forms belong to the same equivalence class [NF(C)]≡P."
+      ]
+    }
+  },
+  "proof_obligations": [
+    {
+      "requirement": "Well-formedness",
+      "description": "Continuation satisfies WF(C)."
+    },
+    {
+      "requirement": "Type Safety",
+      "description": "All reduction steps satisfy typed transition rules."
+    },
+    {
+      "requirement": "Local Confluence",
+      "description": "Every critical reduction pair is joinable."
+    },
+    {
+      "requirement": "Determinism",
+      "description": "Canonical reduction priority is fixed."
+    },
+    {
+      "requirement": "Termination",
+      "description": "Reduction reaches a finite outcome."
+    },
+    {
+      "requirement": "Canonical Uniqueness",
+      "description": "NF(C) is unique modulo ≡P."
+    }
+  ],
+  "bounded_results": [
+    {
+      "result": "Equivalent reduction branches preserve process equivalence."
+    },
+    {
+      "result": "Trace equivalence is not required."
+    },
+    {
+      "result": "Canonical representatives remain unique modulo ≡P."
+    },
+    {
+      "result": "Reduction outcome classification remains unchanged."
+    }
+  ],
+  "limitations": [
+    "Applies only to bounded continuation classes.",
+    "Does not establish global confluence.",
+    "Does not imply Church-Rosser.",
+    "Does not establish universal reduction uniqueness outside bounded classes."
+  ],
+  "invariants": [
+    "RT_core remains unchanged.",
+    "Bounded confluence preserves process equivalence.",
+    "Trace identity is independent of confluence.",
+    "Equivalent reduction outcomes remain classified as NF(C), pNF(C), or ⊥C_x.",
+    "Recovery remains deferred."
+  ],
+  "future_dependencies": [
+    "PATCH_PI_RT_CALCULUS_035 (Canonical Reduction Strategy)",
+    "PATCH_PI_RT_CALCULUS_036 (Canonical Reduction Strategy Correctness)"
+  ],
+  "textbook_changes": {
+    "chapter": "2.3.16",
+    "title": "Bounded Confluence Theorem",
+    "summary": [
+      "State the first bounded confluence theorem.",
+      "List all theorem prerequisites.",
+      "Define bounded confluence classes.",
+      "Differentiate bounded confluence from universal confluence.",
+      "Prepare the calculus for canonical reduction strategies."
+    ]
+  },
+  "registry_updates": {
+    "formal_object_registry": [
+      "BOUNDED_CONFLUENCE_034",
+      "CONFLUENCE_CLASS_034"
+    ],
+    "math_source_registry": [
+      "PATCH_PI_RT_CALCULUS_034"
+    ],
+    "lexicon_gap_queue": [
+      "bounded_confluence",
+      "confluence_class",
+      "bounded_confluence_theorem",
+      "proof_obligation"
+    ]
+  },
+  "rt_core_impact": {
+    "modified": false,
+    "statement": "RT := [(ℰ≠0) ⇔R δα(ℰ>0)] remains unchanged."
+  },
+  "validation_requirements": [
+    "Patch record parses cleanly.",
+    "Patch depends on PATCH_PI_RT_CALCULUS_033.",
+    "The theorem prerequisites bound the result to bounded continuation classes.",
+    "Bounded confluence does not imply global confluence or Church-Rosser.",
+    "RT_core remains unchanged."
+  ],
+  "required_repo_changes": [
+    "Update docs/textbook/mono_process_textbook_complete.md with the bounded confluence theorem section and confluence-class documentation.",
+    "Update registry/formal_object_registry.json with the bounded confluence formal objects.",
+    "Update registry/math_source_registry.json with the patch source entry.",
+    "Update registry/lexicon_gap_queue.json with the bounded confluence, confluence class, bounded confluence theorem, and proof-obligation terms.",
+    "Update registry/registry/lexicon_gap_queue.json with the mirrored bounded confluence, confluence class, bounded confluence theorem, and proof-obligation terms.",
+    "Update registry/governance_change_ledger.json with the corresponding governance ledger entry.",
+    "Update registry/governance/patches/PATCH_PI_RT_CALCULUS_033.json with the forward chain reference to PATCH_PI_RT_CALCULUS_034."
+  ],
+  "target_files": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/formal_object_registry.json",
+    "registry/math_source_registry.json",
+    "registry/lexicon_gap_queue.json",
+    "registry/registry/lexicon_gap_queue.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_033.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_034.json"
+  ],
+  "success_criteria": {
+    "theorem_documented": true,
+    "prerequisites_registered": true,
+    "confluence_class_registered": true,
+    "boundedness_preserved": true,
+    "rt_core_unchanged": true
+  }
+}

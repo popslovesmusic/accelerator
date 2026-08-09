@@ -1,0 +1,79 @@
+{
+  "report_id": "MATH_COUNTEREXAMPLE_CONTINUATION_005",
+  "timestamp": "2026-07-06T03:25:32.7530788-04:00",
+  "campaign_id": "MT-COUNTEREXAMPLE-001",
+  "source_basis": [
+    "registry/math/mt_counterexample_campaign_registry.json",
+    "registry/math/rc024_window_perturbation_flux_bounds_registry.json",
+    "outputs/math_tests/rc024_window_perturbation_flux_bounds_result.json",
+    "outputs/audits/math_window_boundary_fragmentation_validation_001.json",
+    "outputs/audits/math_counterexample_continuation_004.json",
+    "outputs/audits/math_counterexample_continuation_004.md",
+    "analysis/recommended_action_queue.json",
+    "outputs/audits/global_health_report.json"
+  ],
+  "current_state": {
+    "status": "active_adversarial_testing",
+    "current_vector": "window_boundary_fragmentation",
+    "trace_focus": {
+      "query_id": "RC-024",
+      "target": "window_perturbation_flux_bounds",
+      "support_class": "symbolically_supported_candidate",
+      "class_meaning": "Window perturbation remains bounded only within admissibility-window flux limits and does not imply global closure.",
+      "constraints": [
+        "bounded_window_flux_response",
+        "orientation_sensitive_flux_perturbation",
+        "epsilon_sensitive_window_drift",
+        "recursive_flux_fragmentation_control",
+        "window_constrained_transport_flux"
+      ]
+    },
+    "declared_vectors_remaining": [
+      "operator_chain_nonclosure"
+    ]
+  },
+  "bounded_window_evidence": {
+    "rc024": {
+      "observed_behavior": "pass",
+      "is_window_perturbation_bounded": true,
+      "summary": "Window perturbation flux remained symbolically supported and bounded under the governed RC-024 surface."
+    },
+    "validation": {
+      "status": "pass",
+      "entry_count": 1,
+      "condition_count": 8,
+      "flux_mode_count": 5,
+      "failure_mode_count": 8
+    }
+  },
+  "recommended_next_action": {
+    "action": "execute bounded window boundary fragmentation",
+    "target": "MT-COUNTEREXAMPLE-001",
+    "previous_focus_vector": "selection_reconstruction_failure",
+    "focus_vector": "window_boundary_fragmentation",
+    "scope": "bounded",
+    "supporting_evidence": [
+      "outputs/audits/math_counterexample_continuation_004.json",
+      "outputs/audits/math_window_boundary_fragmentation_validation_001.json",
+      "outputs/math_tests/rc024_window_perturbation_flux_bounds_result.json",
+      "registry/math/rc024_window_perturbation_flux_bounds_registry.json",
+      "registry/math/mt_counterexample_campaign_registry.json"
+    ],
+    "constraints": [
+      "preserve_failure_modes",
+      "preserve_counterexample_space",
+      "no_global_closure_claims",
+      "no_physics_claims",
+      "results_remain_nonfinal"
+    ]
+  },
+  "validation_state": {
+    "latest_global_validation": "pass",
+    "reference": "outputs/audits/global_health_report.json"
+  },
+  "notes": [
+    "The selection-reconstruction branch remains recorded as completed context.",
+    "The window-boundary branch is the current bounded follow-through.",
+    "The campaign remains active and nonfinal."
+  ]
+}

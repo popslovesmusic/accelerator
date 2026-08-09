@@ -1,0 +1,41 @@
+{
+  "obligation_id": "OBL-D-001D",
+  "counterexample_search_scope": {
+    "projected_images": ["P7|P7", "P8|P9", "P10|P10", "P11|P12", "P13|P13", "P14|P15"],
+    "witness_states": ["typed_relation_witness", "missing", "wrong_type"],
+    "trace_states": ["compatible", "incompatible"],
+    "history_states": ["present", "omitted"],
+    "outcome_labels": ["reconvergence", "partial_reconvergence", "obstruction"]
+  },
+  "counterexamples_found": [
+    {
+      "search_id": "D_REPRESENTABLE_DISTINCTION_COUNTEREXAMPLE_SEARCH_20260723",
+      "count": 4,
+      "description": "Falsifies projection-only representability proxy. For example, projected image P7|P7 has different representability values depending on whether a witness is present or missing.",
+      "representative": {
+        "projected_image": "P7|P7",
+        "case_a": {"witness": "typed_relation_witness", "trace": "compatible", "representable": true, "outcome_label": "reconvergence"},
+        "case_b": {"witness": null, "trace": "compatible", "representable": false, "outcome_label": "obstruction"}
+      }
+    },
+    {
+      "search_id": "D_REPRESENTABLE_DISTINCTION_BROADER_SEARCH_20260723",
+      "count": 594,
+      "description": "Falsifies outcome-label-only representability proxy. In this broader space, the same projected image P7|P7 with the same outcome label 'reconvergence' has representable=true when history is present, but representable=false when history is omitted.",
+      "representative": {
+        "projected_image": "P7|P7",
+        "representable_case": {"witness": "typed_relation_witness", "trace": "compatible", "history": "present", "outcome_label": "reconvergence", "representable": true},
+        "nonrepresentable_case": {"witness": "typed_relation_witness", "trace": "compatible", "history": "omitted", "outcome_label": "reconvergence", "representable": false}
+      }
+    }
+  ],
+  "unresolved_failure_classes": [
+    "typed_but_unrepresentable_successor",
+    "undefined_representation_predicate",
+    "domain_escape",
+    "distinction_erasure",
+    "projection_information_loss",
+    "collapse_state"
+  ],
+  "obligation_falsification_status": "PROXIES_FALSIFIED_CANDIDATE_UNFALSIFIED"
+}

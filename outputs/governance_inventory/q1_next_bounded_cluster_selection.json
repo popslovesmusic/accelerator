@@ -1,0 +1,65 @@
+{
+  "schema_id": "q1_next_bounded_cluster_selection_v1",
+  "generated_at": "2026-07-15T14:10:00-04:00",
+  "source_refresh_artifact": "outputs/governance_inventory/q1_remaining_validation_authority_state_refresh.json",
+  "source_component_artifact": "outputs/governance_inventory/q1_remaining_conflict_components.json",
+  "selection_policy": [
+    "Select the smallest coherent component or subcluster with live runtime or governance effect.",
+    "Prefer an authority question that can be resolved without full project validation.",
+    "Do not mix supporting-validator scope with obsolete residue unless the residue is required to prove the scope boundary.",
+    "Do not include items already neutralized by existing governance.",
+    "Do not include OUTSIDE_Q1_SCOPE items in the next Q1 authority-resolution patch."
+  ],
+  "candidate_rejections": [
+    {
+      "item_ids": [
+        "Q1-VAL-004"
+      ],
+      "reason": "Already neutralized by existing governance and no longer a live supporting-validator dispute."
+    },
+    {
+      "item_ids": [
+        "Q1-VAL-001",
+        "Q1-VAL-005",
+        "Q1-VAL-006"
+      ],
+      "reason": "Current live role is outside Q1 validation-authority scope."
+    },
+    {
+      "item_ids": [
+        "Q1-VAL-007",
+        "Q1-VAL-009"
+      ],
+      "reason": "Obsolete residue connected to the live test surface but not required to decide the next live authority question."
+    }
+  ],
+  "selected_component_id": "Q1-REM-COMP-005",
+  "selected_cluster_id": "Q1-REM-NEXT-001",
+  "selected_cluster_type": "SUPPORTING_VALIDATOR_SCOPE",
+  "selected_cluster_item_count": 1,
+  "selected_cluster_item_ids": [
+    "Q1-VAL-008"
+  ],
+  "selected_cluster_authority_question": "Whether tests/test_governed_context_capsule_v1.py is a bounded SUPPORTING_VALIDATOR for governed context capsule contract checks rather than an independent validation authority or terminal-status authority.",
+  "selected_candidate_surfaces": [
+    "tests/test_governed_context_capsule_v1.py",
+    "schemas/governed_context_capsule_v1.schema.json",
+    "scripts/query_governance.py"
+  ],
+  "selected_resolution_modes": [
+    "BOUND_SUPPORTING_VALIDATOR_SCOPE",
+    "PROVE_EXISTING_NON_TERMINAL_ROLE",
+    "DEFER_PENDING_VALIDATOR_DEPARTMENT_COMPLETION"
+  ],
+  "selection_rationale": [
+    "Q1-VAL-008 is the smallest remaining live authority question after removing neutralized, outside-scope, and residue-only items.",
+    "Its runtime effect is bounded to governed-context-capsule contract checks and does not require full project validation to analyze.",
+    "The repository evidence does not support the earlier hypothesis that Q1-VAL-004 is the next live supporting-validator candidate; that item is historical audit evidence only."
+  ],
+  "current_state_counts": {
+    "live_unresolved": 1,
+    "neutralized": 1,
+    "obsolete_residue": 2,
+    "outside_q1_scope": 3
+  }
+}

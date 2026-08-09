@@ -1,0 +1,112 @@
+{
+  "artifact_type": "PROVISIONAL_THREE_WAY_BINARY_GUARD_EVALUATOR",
+  "artifact_id": "RT_ADMOBS_FCI005_GUARD_STAGE_VERDICT_REPAIRED_20260728_001",
+  "status": "PROVISIONAL_READY_FOR_DEFINITION_LEVEL_TESTING",
+  "canonicality": "NON_CANONICAL_CANDIDATE",
+  "claim_ceiling": "C1_MODEL_RELATIVE",
+  "source_review": "RT_ADMOBS_FCI005_REPAIRED_PRETEST_HUMAN_REVIEW_20260728_001",
+  "result_types": {
+    "ThresholdDecision_x": {
+      "variants": ["PASS", "FAIL", "UNDEFINED"],
+      "evaluator": "EvalThreshold_x(d, epsilon) : ThresholdDecision_x"
+    },
+    "ThresholdMapResult_x": {
+      "variants": ["VALID", "INVALID", "UNDEFINED"],
+      "evaluator": "EvalThresholdMap_x(epsilon_src, epsilon_obs; D_rel) : ThresholdMapResult_x"
+    },
+    "BridgePairVerdict_x": {
+      "variants": ["PAIR_PASS", "PAIR_FAIL", "UNDEFINED"]
+    },
+    "BinaryConstraintResult_x": {
+      "variants": ["COMPATIBLE", "INCOMPATIBLE", "UNDEFINED"]
+    }
+  },
+  "structural_witness": {
+    "symbol": "FCI005DistinctionBridgeWitness_x",
+    "signature": "FCI005DistinctionBridgeWitness_x(w, o_i, o_j; epsilon_src, epsilon_obs, B_x, D_rel, R) : Prop",
+    "definition": [
+      "w is a BridgeWitnessRecord_x.",
+      "PermittedFCI005BridgeWitness_x(w, o_i, o_j; B_x, D_rel, R).",
+      "D(w.X|w.Z) is prebound and evaluable before RefOrient_x and delta_a.",
+      "d_obs(o_i,o_j) is prebound and evaluable before RefOrient_x and delta_a.",
+      "Either SharedDistinctionScale_x holds or EvalThresholdMap_x(epsilon_src, epsilon_obs; D_rel) = VALID.",
+      "DistinctionThresholdBridge_x(D(w.X|w.Z), d_obs(o_i,o_j), epsilon_src, epsilon_obs; D_rel) = PRESERVED."
+    ],
+    "removed_pass_requirements": ["D(w.X|w.Z) > epsilon_src", "d_obs(o_i,o_j) > epsilon_obs"],
+    "purpose": "Establish bridge structure without predetermining PASS or FAIL."
+  },
+  "threshold_map": {
+    "signature": "EvalThresholdMap_x(epsilon_src, epsilon_obs; D_rel) : ThresholdMapResult_x",
+    "VALID": "A meaning-preserving threshold relation is declared.",
+    "INVALID": "A declared translation fails to preserve required threshold semantics.",
+    "UNDEFINED": "No governed translation or shared-scale proof is available."
+  },
+  "per_witness_verdict": {
+    "signature": "EvalFCI005BridgePairVerdict_x(w, o_i, o_j; epsilon_src, epsilon_obs, B_x, D_rel, R) : BridgePairVerdict_x",
+    "PAIR_PASS": [
+      "Structural witness holds.",
+      "EvalThreshold_x(D(w.X|w.Z), epsilon_src) = PASS.",
+      "EvalThreshold_x(d_obs(o_i,o_j), epsilon_obs) = PASS."
+    ],
+    "PAIR_FAIL": [
+      "Structural witness holds.",
+      "EvalThreshold_x(D(w.X|w.Z), epsilon_src) = FAIL.",
+      "EvalThreshold_x(d_obs(o_i,o_j), epsilon_obs) = FAIL."
+    ],
+    "UNDEFINED": [
+      "Structural witness unavailable.",
+      "A threshold decision is undefined.",
+      "Source and observation decisions disagree.",
+      "Threshold map is INVALID or UNDEFINED.",
+      "Distinction bridge is NOT_PRESERVED or UNDEFINED."
+    ]
+  },
+  "witness_invariance": {
+    "signature": "BridgeVerdictInvariant_x(o_i, o_j; epsilon_src, epsilon_obs, B_x, D_rel, R) : Prop",
+    "definition": "There exists v in {PAIR_PASS, PAIR_FAIL} such that every permitted witness for the ordered pair returns v.",
+    "requirements": [
+      "At least one permitted witness exists.",
+      "No permitted witness produces UNDEFINED.",
+      "All permitted witnesses produce the same final pair verdict."
+    ],
+    "variance_result": "Any PASS/FAIL or defined/undefined disagreement yields UNDEFINED_WITNESS_VARIANCE."
+  },
+  "binary_evaluator": {
+    "signature": "EvalBCon_FCI005Distinction_x(o_i, o_j; epsilon_src, epsilon_obs, B_x, D_rel, R) : BinaryConstraintResult_x",
+    "COMPATIBLE": "At least one permitted witness exists, BridgeVerdictInvariant_x holds, and the invariant verdict is PAIR_PASS.",
+    "INCOMPATIBLE": "At least one permitted witness exists, BridgeVerdictInvariant_x holds, and the invariant verdict is PAIR_FAIL.",
+    "UNDEFINED": "No permitted witness exists, any required bridge or translation is undefined, any witness is undefined, or permitted witnesses disagree.",
+    "projections": {
+      "positive": "BCon_FCI005Distinction_x(...) : Prop iff evaluator = COMPATIBLE",
+      "negative": "NotBCon_FCI005Distinction_x(...) : Prop iff evaluator = INCOMPATIBLE",
+      "undefined": "UndefBCon_FCI005Distinction_x(...) : Prop iff evaluator = UNDEFINED"
+    }
+  },
+  "pairwise_aggregation": {
+    "signature": "EvalPairwiseCompatible_x(F_x; BCon_x, B_x, D_rel, R) : BinaryConstraintResult_x",
+    "COMPATIBLE": "Every applicable binary evaluator returns COMPATIBLE.",
+    "INCOMPATIBLE": "At least one applicable binary evaluator returns INCOMPATIBLE.",
+    "UNDEFINED": "No evaluator returns INCOMPATIBLE and at least one applicable evaluator returns UNDEFINED.",
+    "guard": "The proposition BCon_FCI005Distinction_x is not the sole family-classification input."
+  },
+  "definition_level_fixtures": {
+    "pass_fixture": "One permitted witness with defined VALID threshold map and PASS/PASS decisions.",
+    "fail_fixture": "One permitted witness with defined VALID threshold map and FAIL/FAIL decisions.",
+    "undefined_fixture": "No permitted witness, or undefined map, or witness verdict disagreement.",
+    "aggregation_fixture": "One COMPATIBLE plus one UNDEFINED evaluator aggregates to UNDEFINED; one INCOMPATIBLE plus any other result aggregates to INCOMPATIBLE."
+  },
+  "expanded_bridge_suite": [
+    "FCI005-BRIDGE-TEST-001: carrier representation",
+    "FCI005-BRIDGE-TEST-002: context mapping",
+    "FCI005-BRIDGE-TEST-003: threshold-decision preservation",
+    "FCI005-BRIDGE-TEST-004: threshold type, provenance, and map definedness",
+    "FCI005-BRIDGE-TEST-005: dependency acyclicity",
+    "FCI005-BRIDGE-TEST-006: final pair-verdict invariance",
+    "FCI005-BRIDGE-TEST-007: reachability of COMPATIBLE and INCOMPATIBLE",
+    "FCI005-BRIDGE-TEST-008: UNDEFINED preservation through aggregation"
+  ],
+  "BCon_x": "UNBOUND",
+  "H_x": "UNDECLARED",
+  "delta_a": "UNCHANGED",
+  "human_review_required": true
+}

@@ -1,0 +1,86 @@
+{
+  "artifact_id": "projection_invariants_048",
+  "source_patch_id": "PATCH_PI_RT_CALCULUS_048",
+  "status": "DRAFT_PROVISIONAL",
+  "scope": "governance_execution_surface",
+  "purpose": "Audit which quantities are preserved and which are transformed under the candidate projection witness from the Core Expression into an existing RT expression.",
+  "source_artifacts": [
+    "docs/governance/projection_example_048.json",
+    "docs/governance/projection_trace_048.json",
+    "docs/governance/worked_example_operational_046.json"
+  ],
+  "claim_humility": {
+    "current_status": "candidate_witness_only",
+    "non_claims": [
+      "Does not assert universal invariance.",
+      "Does not assert theorem status.",
+      "Does not assert projection uniqueness.",
+      "Does not assert projection invertibility.",
+      "Does not modify RT_core."
+    ]
+  },
+  "invariants": [
+    {
+      "quantity": "RT_core",
+      "status": "preserved",
+      "reading": "The projection witness leaves RT_core unchanged."
+    },
+    {
+      "quantity": "domain_typing",
+      "status": "transformed",
+      "reading": "The Core Expression is typed into projection_regime_xb before candidate projection."
+    },
+    {
+      "quantity": "projection_typing",
+      "status": "transformed",
+      "reading": "The projection is structured by domain, scale, and admissibility."
+    },
+    {
+      "quantity": "closure_condition",
+      "status": "preserved_in_witness_if_verified",
+      "reading": "RT closure is preserved only for the witness if the candidate closes under the governing RT condition."
+    },
+    {
+      "quantity": "residue_history",
+      "status": "transformed",
+      "reading": "Residue records the projection history rather than a claim of identity."
+    },
+    {
+      "quantity": "orientation",
+      "status": "transformed",
+      "reading": "Projection changes orientation by rebinding the Core Expression into the receiving witness context."
+    },
+    {
+      "quantity": "identity",
+      "status": "undetermined",
+      "reading": "Identity between the Core Expression and the governed RT witness is not assumed."
+    },
+    {
+      "quantity": "invertibility",
+      "status": "not_assumed",
+      "reading": "The projection is not treated as invertible by default."
+    }
+  ],
+  "summary": {
+    "preserved": [
+      "RT_core",
+      "verified RT closure in the witness, if the candidate closes"
+    ],
+    "transformed": [
+      "domain_typing",
+      "projection_typing",
+      "residue_history",
+      "orientation"
+    ],
+    "undetermined": [
+      "identity",
+      "invertibility"
+    ]
+  },
+  "non_claims": [
+    "Does not assert all RTs are projections.",
+    "Does not assert different projections must yield the same RT.",
+    "Does not assert projection removes residue.",
+    "Does not update textbook surfaces."
+  ]
+}

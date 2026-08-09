@@ -1,0 +1,32 @@
+{
+  "registry_id": "PCD_PUBLIC_DATASET_REGISTRY",
+  "version": "1.0.0",
+  "governance_status": {
+    "series_status": "MATH_BOUND_EVIDENCE_ONLY",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL",
+    "non_separability_acknowledged": true,
+    "source_relation": "(E≠0) ⇔R δ(E>0)"
+  },
+  "datasets": [
+    {
+      "dataset_id": "DS-001-SYNTHETIC-STOCHASTIC",
+      "dataset_name": "Synthetic Stochastic Neighborhood Drift",
+      "source_url": "local://synthetic/stochastic_drift_v1.csv",
+      "dataset_domain": "synthetic_analog",
+      "provenance_status": "VERIFIED",
+      "license_status": "OPEN",
+      "allowed_analysis_scope": "STRICTLY_LOCAL",
+      "known_limitations": ["Finite step resolution", "Boundary reflection artifacts"],
+      "associated_prediction_bindings": ["PB-001-THRESHOLD"]
+    }
+  ],
+  "governance_rules": [
+    {
+      "rule_id": "PDR-RULE-001",
+      "rule": "Only datasets with 'VERIFIED' provenance status may support C4+ evidence levels."
+    }
+  ],
+  "source_relation": "(E≠0) ⇔R δ(E>0)",
+  "non_separability_acknowledged": true,
+  "required_statement": "Observed signatures are interpreted only through restricted local analog structure."
+}

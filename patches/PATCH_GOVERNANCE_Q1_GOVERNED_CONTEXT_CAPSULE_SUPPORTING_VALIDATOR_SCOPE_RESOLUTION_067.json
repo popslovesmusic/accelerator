@@ -1,0 +1,97 @@
+{
+  "patch_id": "PATCH_GOVERNANCE_Q1_GOVERNED_CONTEXT_CAPSULE_SUPPORTING_VALIDATOR_SCOPE_RESOLUTION_067",
+  "title": "Q1 Governed Context Capsule Supporting Validator Scope Resolution",
+  "status": "APPLIED",
+  "applied_on": "2026-07-15T15:20:00-04:00",
+  "type": "boundary_resolution",
+  "depends_on": [
+    "PATCH_GOVERNANCE_Q1_REMAINING_VALIDATION_AUTHORITY_CLUSTER_SELECTION_066"
+  ],
+  "mode": "additive",
+  "authority_effect": "NONE",
+  "purpose": "Resolve Q1-VAL-008 by proving and enforcing that the governed-context-capsule test surface is a bounded supporting validator with no independent invocation, terminal reduction, registry write, or generated-evidence promotion authority.",
+  "summary": "This patch resolves Q1-VAL-008 from existing governed evidence plus one minimal runtime boundary explicitness change. tests/test_governed_context_capsule_v1.py is a bounded SUPPORTING_VALIDATOR, schemas/governed_context_capsule_v1.schema.json is a SCHEMA_CONSTRAINT_SURFACE, and scripts/query_governance.py is a ROLE_AWARE_AUTHORITY_QUERY_SURFACE. No live authority leakage was found. Neighbor residue items Q1-VAL-007 and Q1-VAL-009 remain open for separate retirement.",
+  "resolved_q1_item_ids": [
+    "Q1-VAL-008"
+  ],
+  "resolved_global_ambiguity_ids": [
+    "AMB-GOV-SURF-1032"
+  ],
+  "role_per_candidate_surface": {
+    "tests/test_governed_context_capsule_v1.py": "SUPPORTING_VALIDATOR",
+    "schemas/governed_context_capsule_v1.schema.json": "SCHEMA_CONSTRAINT_SURFACE",
+    "scripts/query_governance.py": "ROLE_AWARE_AUTHORITY_QUERY_SURFACE"
+  },
+  "supporting_validator_contract": {
+    "may": [
+      "exercise schema-conformance behavior",
+      "assert bounded invariants",
+      "emit test pass or fail evidence",
+      "contribute supporting validation evidence"
+    ],
+    "may_not": [
+      "become VALIDATION_INVOCATION_AUTHORITY",
+      "emit terminal project validation status",
+      "become VALIDATION_REDUCTION_AUTHORITY",
+      "write authoritative registry state",
+      "promote its own test output into live authority",
+      "override the full-validation suspension"
+    ]
+  },
+  "live_authority_leakage_found": false,
+  "enforcement_changes_applied": [
+    "tools/runtime_authority/__init__.py: add explicit SUPPORTING_VALIDATOR classification for tests/test_governed_context_capsule_v1.py",
+    "tools/runtime_authority/__init__.py: add explicit SCHEMA_CONSTRAINT_SURFACE classification for schemas/governed_context_capsule_v1.schema.json",
+    "tools/runtime_authority/__init__.py: reclassify scripts/query_governance.py as ROLE_AWARE_AUTHORITY_QUERY_SURFACE and preserve mismatch blocking"
+  ],
+  "counts": {
+    "q1_count_before": 7,
+    "q1_count_after": 6,
+    "global_blocking_ambiguity_count_before": 491,
+    "global_blocking_ambiguity_count_after": 490
+  },
+  "patch_002_state": {
+    "status": "PARTIAL",
+    "authority_effect": "NONE",
+    "changed": false
+  },
+  "completion_assertions": {
+    "resolved_q1_item_ids": [
+      "Q1-VAL-008"
+    ],
+    "q1_items_resolved_count": 1,
+    "q1_items_remaining_count": 6,
+    "supporting_validator_surface": "tests/test_governed_context_capsule_v1.py",
+    "validation_invocation_authority_granted": false,
+    "validation_reduction_authority_granted": false,
+    "registry_write_authority_granted": false,
+    "generated_evidence_promoted": false,
+    "neighbor_residue_items_closed": false,
+    "patch_002_status_changed": false,
+    "patch_002_authority_effect_changed": false,
+    "full_project_validation_run": false
+  },
+  "artifacts": {
+    "resolution_record": "outputs/governance_inventory/q1_governed_context_capsule_supporting_validator_scope_resolution.json",
+    "updated_q1_queue": "outputs/governance_inventory/q1_governed_context_capsule_supporting_validator_active_queue.json",
+    "updated_global_dispositions": "outputs/governance_inventory/q1_governed_context_capsule_supporting_validator_global_disposition_updates.json"
+  },
+  "validation_results": {
+    "targeted_q1_resolution_test": {
+      "command": "python -m pytest tests/governance_validation/test_patch_067_q1_governed_context_capsule_supporting_validator_scope_resolution.py -q",
+      "status": "PASS"
+    },
+    "json_parse": {
+      "status": "PASS"
+    },
+    "git_diff_check": {
+      "command": "git diff --check",
+      "status": "PASS_WITH_CRLF_WARNINGS_ONLY"
+    },
+    "git_status": {
+      "command": "git status --short",
+      "status": "PASS_REVIEWED"
+    }
+  },
+  "full_project_validation_status": "SUSPENDED_PENDING_VALIDATOR_DEPARTMENT_COMPLETION"
+}

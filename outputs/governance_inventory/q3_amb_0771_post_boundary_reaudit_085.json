@@ -1,0 +1,17 @@
+{
+  "schema_id": "q3_amb_0771_post_boundary_reaudit_085_v1",
+  "patch_id": "PATCH_GOVERNANCE_Q3_EXPLICIT_NONE_AUTHORITY_EFFECT_LIVE_LOOKUP_BOUNDARY_085",
+  "global_ambiguity_id": "AMB-GOV-SURF-0771",
+  "target_patch_surface": "registry/governance/patches/PATCH_GOVERNANCE_GLOBAL_INVENTORY_002.json",
+  "pre_085_problem": "Generic lookup returned the partial patch record itself as a live authority candidate despite explicit authority_effect=NONE.",
+  "post_085_lookup_behavior": {
+    "decision": "defer",
+    "reason": "Patch record explicitly declares authority_effect=NONE and therefore cannot participate as live authority lookup. Referenced or associated surfaces may remain independently governed under their own roles.",
+    "authority_source": "registry/governance/patches/PATCH_GOVERNANCE_GLOBAL_INVENTORY_002.json"
+  },
+  "independent_remaining_problem": null,
+  "classification": "PROSPECTIVELY_CLOSABLE_AFTER_085",
+  "classification_reason": "The shared live-lookup leak for the target record is removed by honoring explicit authority_effect=NONE before generic patch fallback. No independent live-versus-proposal/history ambiguity remains evidenced for the patch record itself.",
+  "recommended_next_action": "Prepare a bounded prospective-closure disposition for AMB-GOV-SURF-0771 only; do not alter AMB-GOV-SURF-0744 in the same step.",
+  "global_blocking_status": "REMAINS_BLOCKING_UNTIL_SEPARATE_DISPOSITION_PATCH"
+}

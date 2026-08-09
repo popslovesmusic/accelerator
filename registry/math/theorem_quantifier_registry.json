@@ -1,0 +1,54 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Registry binding theorems MT-001 and MT-003 to explicit quantifier structures and bounds.",
+    "status": "provisional",
+    "last_updated": "2026-05-12"
+  },
+  "quantifier_entries": [
+    {
+      "entry_id": "TQ-001",
+      "theorem_id": "MT-001",
+      "statement_target": "Pi_A(Pi_A(x)) ~ Pi_A(x)",
+      "required_quantifier": "for all x in declared Pi_A domain D_A satisfying stable admissibility conditions",
+      "scope_type": "bounded_universal",
+      "definitions": {
+        "domain": "D_A",
+        "admissibility_window": "A",
+        "condition_set": "SA-001 through SA-005",
+        "equivalence_relation": "EQ-001 (admissibility_equivalence)",
+        "boundary_rule": "exclude_null_boundary"
+      },
+      "failure_modes": [
+        "QFM-001",
+        "QFM-006",
+        "QFM-007"
+      ],
+      "proof_status": "scaffolded",
+      "provisional_status": true
+    },
+    {
+      "entry_id": "TQ-002",
+      "theorem_id": "MT-003",
+      "statement_target": "continuation_event exists only if admissible image is non-empty",
+      "required_quantifier": "there exists at least one candidate c in continuation candidate set C such that Pi_A(delta_selection(c)) lies in admissible image",
+      "scope_type": "bounded_existential",
+      "definitions": {
+        "candidate_set": "C",
+        "admissible_image": "image(Pi_A \u2218 delta_selection)",
+        "witness_condition": "NEI-004",
+        "pruning_constraints": "BP-001 through BP-004",
+        "failure_cases": [
+          "empty_continuation_image"
+        ]
+      },
+      "failure_modes": [
+        "QFM-003",
+        "QFM-004",
+        "QFM-008"
+      ],
+      "proof_status": "scaffolded",
+      "provisional_status": true
+    }
+  ]
+}

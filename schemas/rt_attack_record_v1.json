@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://acellorator.local/schemas/rt_attack_record_v1.json",
+  "title": "RT Attack Evidence Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_id", "attack_id", "source_package_id", "evidence_class", "status", "observations", "claims", "blockers"],
+  "properties": {
+    "schema_id": { "const": "rt_attack_record_v1" },
+    "attack_id": { "type": "string", "pattern": "^FAT-[0-9]+$" },
+    "source_package_id": { "type": "string", "minLength": 1 },
+    "evidence_class": { "enum": ["C0_definition", "C1_model_relative", "C2_simulation_observed", "C3_structural_comparison", "C4_external_reproduction", "C5_external_claim"] },
+    "status": { "enum": ["PRESERVED", "DECOMPOSED", "REPLAY_PENDING", "REVIEW_PARTIAL", "REVIEW_COMPLETE", "QUARANTINED"] },
+    "observations": { "type": "array", "items": { "type": "string" } },
+    "claims": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["program_m", "program_s", "comparative"],
+      "properties": {
+        "program_m": { "type": "array", "items": { "type": "string" } },
+        "program_s": { "type": "array", "items": { "type": "string" } },
+        "comparative": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "blockers": { "type": "array", "items": { "type": "string" } },
+    "source_paths": { "type": "array", "items": { "type": "string" } }
+  }
+}

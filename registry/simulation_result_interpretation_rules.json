@@ -1,0 +1,126 @@
+{
+  "registry_id": "PCD_SIMULATION_RESULT_INTERPRETATION_RULES",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "rule_id",
+      "input_condition",
+      "allowed_interpretation",
+      "blocked_interpretation",
+      "result_classification",
+      "required_followup"
+    ]
+  },
+  "rules": [
+    {
+      "rule_id": "SIM-INT-001",
+      "input_condition": "multi_mechanism agreement with successful falsification behavior",
+      "allowed_interpretation": [
+        "simulation-supported theorem behavior",
+        "cross-mechanism consistency"
+      ],
+      "blocked_interpretation": [
+        "physical proof",
+        "universal validation"
+      ],
+      "result_classification": "SUPPORTED_SIMULATION_RESULT",
+      "required_followup": [
+        "update theorem status review",
+        "record confidence limits"
+      ]
+    },
+    {
+      "rule_id": "SIM-INT-002",
+      "input_condition": "single mechanism agreement only",
+      "allowed_interpretation": [
+        "exploratory support",
+        "mechanism-local consistency"
+      ],
+      "blocked_interpretation": [
+        "cross-mechanism support",
+        "TS4 promotion"
+      ],
+      "result_classification": "SINGLE_MECHANISM_PROBE",
+      "required_followup": [
+        "seek independent mechanism replication"
+      ]
+    },
+    {
+      "rule_id": "SIM-INT-003",
+      "input_condition": "cross-mechanism contradiction",
+      "allowed_interpretation": [
+        "contested behavior",
+        "possible hidden assumption",
+        "possible mechanism dependence"
+      ],
+      "blocked_interpretation": [
+        "theorem closure",
+        "strong support language"
+      ],
+      "result_classification": "CONTRADICTED_OR_INCONCLUSIVE",
+      "required_followup": [
+        "dependency cascade review",
+        "contradiction analysis",
+        "gap expansion if needed"
+      ]
+    },
+    {
+      "rule_id": "SIM-INT-004",
+      "input_condition": "falsification vectors fail unexpectedly",
+      "allowed_interpretation": [
+        "possible instability",
+        "possible invalid operator assumptions",
+        "possible implementation defect"
+      ],
+      "blocked_interpretation": [
+        "simulation-supported theorem"
+      ],
+      "result_classification": "FAILED_FALSIFICATION_REVIEW",
+      "required_followup": [
+        "route to falsification review"
+      ]
+    },
+    {
+      "rule_id": "SIM-INT-005",
+      "input_condition": "runtime or provenance failure",
+      "allowed_interpretation": [
+        "invalid evidence source"
+      ],
+      "blocked_interpretation": [
+        "claim support",
+        "rigor endorsement support"
+      ],
+      "result_classification": "INVALID_RUNTIME_OR_PROVENANCE",
+      "required_followup": [
+        "runtime repair",
+        "provenance recovery"
+      ]
+    }
+  ],
+  "confidence_banding": [
+    {
+      "band": "CB0",
+      "meaning": "runtime invalid or unrecoverable"
+    },
+    {
+      "band": "CB1",
+      "meaning": "exploratory single-run behavior"
+    },
+    {
+      "band": "CB2",
+      "meaning": "repeatable within one mechanism"
+    },
+    {
+      "band": "CB3",
+      "meaning": "cross-mechanism agreement with controlled limits"
+    },
+    {
+      "band": "CB4",
+      "meaning": "cross-mechanism agreement with successful falsification handling and recoverable provenance"
+    }
+  ],
+  "result_package_binding": {
+    "statement": "Simulation interpretation classifications must be derived from a valid empirical result package.",
+    "failure_behavior": "route_to_result_package_review"
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "artifact_type": "PROVISIONAL_FORMAL_OPERATOR_SPECIFICATION",
+  "artifact_id": "RT_ASYM_EXCLUSION_OPERATOR_DEFINITION_20260728_001",
+  "packet_type": "RT_PROVISIONAL_EXCLUSION_OPERATOR_DEFINITION",
+  "status": "PROVISIONAL_READY_FOR_HUMAN_REVIEW",
+  "canonicality": "NON_CANONICAL_CANDIDATE",
+  "claim_ceiling": "C1_MODEL_RELATIVE",
+  "source_basis": [
+    "RT_ASYM_SYMBOL_TYPE_RECONCILIATION_20260728_001",
+    "RT_ASYM_OBSERVATION_ORIENTATION_EXCLUSION_INDUCTION_20260728_001",
+    "RT_ASYM_OBSERVATION_ORIENTATION_RECONCILIATION_20260728_001",
+    "analysis_crawl_20260728_asym_symbol_type_reconciliation_001"
+  ],
+  "governing_statement": "Excl_obs_x excludes inadmissible observation orientations relative to a declared boundary interaction and relational domain; it never excludes, negates, destroys, or removes the underlying symmetry whole.",
+  "type_universe": {
+    "BoundaryInteraction": "A relational interaction condition capable of conditioning orientation admissibility.",
+    "OrientationFamily": "A family of possible observation orientations relative to a declared symmetry scope.",
+    "AdmissibleOrientationFamily": "The orientation family remaining admissible after boundary and domain conditioning.",
+    "RelationalDomain": "The declared typed domain governing interaction, orientation, and admissibility.",
+    "ExclusionResidue": "A provisional trace of excluded orientations and the conditions producing their exclusion.",
+    "ExclObsResult": "A diagnostic result distinguishing successful admissible-family construction from invalid input or empty admissible output."
+  },
+  "formal_signature": {
+    "operator": "Excl_obs_x",
+    "partial_signature": "Excl_obs_x : BoundaryInteraction × OrientationFamily × RelationalDomain ⇀ AdmissibleOrientationFamily",
+    "diagnostic_signature": "ValidateExcl_obs_x : BoundaryInteraction × OrientationFamily × RelationalDomain -> ExclObsResult",
+    "source_scope": "The operator acts on observation orientations only; >S< is a conditioning reference and never an exclusion target."
+  },
+  "result_type": {
+    "success": "EXCL_OBS_SUCCESS(Omega_x_adm, R_Excl,x)",
+    "empty_admissible_family": "BOTTOM_EXCL_OBS_EMPTY_ADMISSIBLE_ORIENTATION",
+    "invalid_boundary": "BOTTOM_EXCL_OBS_INVALID_BOUNDARY",
+    "invalid_orientation_family": "BOTTOM_EXCL_OBS_INVALID_ORIENTATION_FAMILY",
+    "domain_mismatch": "BOTTOM_EXCL_OBS_DOMAIN_MISMATCH",
+    "undefined_admissibility": "BOTTOM_EXCL_OBS_ADMISSIBILITY_UNDEFINED",
+    "repair_rule": "The result classifier reports failure and does not construct a replacement boundary, orientation family, or bounded symmetry."
+  },
+  "provisional_definition": {
+    "candidate_rule": "Omega_x_adm := { omega in Omega_obs | AdmObs_x(B_x, omega, D_rel) = true }",
+    "operator_rule": "Excl_obs_x(B_x, Omega_obs, D_rel) := Omega_x_adm when B_x, Omega_obs, D_rel are well typed and the admissibility predicate is defined.",
+    "success_condition": "Excl_obs_x succeeds only when Omega_x_adm is a valid AdmissibleOrientationFamily; non-emptiness is required for subsequent bounded realization.",
+    "empty_condition": "If Omega_x_adm is empty, Excl_obs_x returns BOTTOM_EXCL_OBS_EMPTY_ADMISSIBLE_ORIENTATION for the current interaction and domain.",
+    "non_annihilation_condition": "An empty Omega_x_adm does not imply >S< = empty, symmetry absence, symmetry destruction, or an ontological zero-state.",
+    "selection_separation": "Excl_obs_x filters orientation admissibility but does not select a dominant orientation. DomOrient_x or an explicit quotient/equivalence rule is a separate downstream operation.",
+    "residue_rule": "When successful, R_Excl,x may record excluded orientations and exclusion conditions; residue is diagnostic provenance, not a substance or replacement output."
+  },
+  "preconditions": [
+    "B_x is a valid BoundaryInteraction within D_rel.",
+    "Omega_obs is a valid OrientationFamily relative to >S< and D_rel.",
+    "D_rel is declared and compatible with B_x and Omega_obs.",
+    "AdmObs_x is defined for the supplied interaction, orientation, and domain.",
+    "No pre-existing bounded identity <S>_x is required."
+  ],
+  "postconditions": [
+    "The output contains only observation orientations admissible under B_x and D_rel.",
+    "The underlying symmetry whole remains unchanged and is not an output exclusion target.",
+    "A successful output may be passed to RefOrient or DomOrient_x.",
+    "A successful output does not by itself establish [Asym]_x or <S>_x.",
+    "A failure output does not construct a corrected candidate."
+  ],
+  "failure_semantics": {
+    "empty_family": "No bounded distinguishable expression is realized under the declared interaction and domain because no observation orientation remains admissible.",
+    "scope": "The failure is local to B_x, Omega_obs, D_rel, and the declared admissibility rule.",
+    "forbidden_inference": "Do not infer symmetry absence, ontological nothingness, universal impossibility, or D-semantics collapse."
+  },
+  "downstream_chain": {
+    "expression": "B_x -> Excl_obs_x(B_x, Omega_obs, D_rel) -> Omega_x_adm -> DomOrient_x -> o_x -> [Asym]_x -> ProjectBounded([Asym]_x, >S<, D_rel) = <S>_x",
+    "direction_guard": "The permitted direction is from orientation admissibility through [Asym] to bounded symmetry; the reverse direction is not defined by this artifact.",
+    "delta_alpha": "Unchanged and unresolved; Excl_obs_x does not define or rebind delta_alpha."
+  },
+  "adversarial_tests": [
+    {"test_id": "EXCL-OBS-T001", "name": "SYMMETRY_NOT_TARGET", "setup": "Supply a valid B_x and Omega_obs.", "expected": "The operator filters orientations and does not remove >S<."},
+    {"test_id": "EXCL-OBS-T002", "name": "EMPTY_ORIENTATION_FAILURE", "setup": "All observation orientations fail AdmObs_x.", "expected": "Return BOTTOM_EXCL_OBS_EMPTY_ADMISSIBLE_ORIENTATION; do not emit <S>_x."},
+    {"test_id": "EXCL-OBS-T003", "name": "NO_DOMINANCE_SELECTION", "setup": "Multiple orientations remain admissible.", "expected": "Return Omega_x_adm without choosing a unique o_x."},
+    {"test_id": "EXCL-OBS-T004", "name": "INVALID_BOUNDARY", "setup": "B_x is not a valid BoundaryInteraction.", "expected": "Return BOTTOM_EXCL_OBS_INVALID_BOUNDARY."},
+    {"test_id": "EXCL-OBS-T005", "name": "DOMAIN_MISMATCH", "setup": "B_x and Omega_obs are incompatible with D_rel.", "expected": "Return BOTTOM_EXCL_OBS_DOMAIN_MISMATCH."},
+    {"test_id": "EXCL-OBS-T006", "name": "DELTA_ALPHA_INDEPENDENCE", "setup": "Change or omit delta_alpha.", "expected": "Excl_obs_x semantics are unchanged because delta_alpha is not an input."},
+    {"test_id": "EXCL-OBS-T007", "name": "NO_REPAIR", "setup": "Supply malformed inputs.", "expected": "Classify failure without repairing or constructing replacement inputs."}
+  ],
+  "open_obligations": [
+    "Define AdmObs_x and its admissibility evidence.",
+    "Choose set, family, quotient, or relational representation for Omega_obs.",
+    "Define R_Excl,x and its propagation boundary.",
+    "Define DomOrient_x separately from Excl_obs_x.",
+    "Map the candidate against existing orientation pruning and reorientation operators.",
+    "Reconcile or explicitly separate delta_alpha signatures.",
+    "Determine whether and how the operator maps into D-semantics structures."
+  ],
+  "authorization_limits": [
+    "No canonical promotion.",
+    "No textbook mutation.",
+    "No registry mutation.",
+    "No theorem or physical-law claim.",
+    "No D-obligation discharge.",
+    "No delta_alpha rebinding.",
+    "No executable implementation."
+  ],
+  "human_review_required": true,
+  "next_recommended_action": "Review the operator contract and decide whether AdmObs_x should be defined as filtering, incompatibility, quotienting, or another admissibility construction."
+}

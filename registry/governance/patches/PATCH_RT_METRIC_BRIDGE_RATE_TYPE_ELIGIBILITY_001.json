@@ -1,0 +1,171 @@
+{
+  "patch_id": "PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_001",
+  "title": "Rate-Type Eligibility Predicate",
+  "status": "APPLIED",
+  "applied_on": "2026-07-09T02:03:38.792460-04:00",
+  "type": "provisional_governance_predicate",
+  "campaign": "RT Calculus Metric Bridge",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_059",
+    "PATCH_PI_RT_CALCULUS_060",
+    "PATCH_PI_RT_CALCULUS_061"
+  ],
+  "rt_core_modified": false,
+  "claim_level": "PROVISIONAL_INDUCTION",
+  "mode": "additive",
+  "purpose": "Introduce RATE_TYPE_ELIGIBLE(x, phi) as the first governed admissibility predicate for metric-bridge evaluation while keeping promotion, theorem status, and RT_core unchanged.",
+  "summary": "This patch registers a governed predicate that screens rate-typed metric-bridge evaluation before any bridge testing is admitted. Passing the screen only admits the candidate to bridge testing; it does not promote any bridge claim or modify RT_core.",
+  "basis": {
+    "source_patches": [
+      "PATCH_PI_RT_CALCULUS_059",
+      "PATCH_PI_RT_CALCULUS_060",
+      "PATCH_PI_RT_CALCULUS_061"
+    ],
+    "source_surfaces": [
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_059.json",
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_060.json",
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_061.json",
+      "docs/governance/metric_invariants_candidate_059.json",
+      "docs/governance/empirical_bridge_framework_060.json",
+      "docs/governance/bridge_admissibility_protocol_061.json",
+      "docs/governance/propagation_rate_density_endpoint_candidate_003.json",
+      "docs/textbook/mono_process_textbook_complete.md"
+    ],
+    "scope": "Provisional governance-predicate witness that extends the metric-bridge induction path into an explicit admissibility screen while leaving RT_core unchanged and keeping bridge testing deferred."
+  },
+  "core_rule": {
+    "id": "RTE_001",
+    "statement": "RATE_TYPE_ELIGIBLE(x, phi) may be introduced only as a governance screen for rate-typed metric-bridge evaluation, and passing the screen admits bridge testing only after the declared reference, coupled A|E relation, ordered intermediate relation, endpoint compatibility, and generative exclusion conditions are all recorded."
+  },
+  "canonical_objects": {
+    "RateTypeEligibilityPredicate": {
+      "symbol": "RATE_TYPE_ELIGIBLE(x, phi)",
+      "definition": "A governed admissibility predicate stating that system x is eligible for rate-typed metric-bridge evaluation only relative to declared reference phi.",
+      "canonical_form": "RATE_TYPE_ELIGIBLE(x, phi) := DOF(x) > 0 ∧ Coupled_AE(x) ∧ Declared(phi) ∧ OrderedIntermediate(x, phi) ∧ EndpointCompatible(x, phi) ∧ GenExclusionBeforeClosure(x, phi)",
+      "status": "PROVISIONAL_GOVERNANCE_PREDICATE"
+    },
+    "RateTypeFailure": {
+      "symbol": "RTE_FAIL",
+      "definition": "The recorded failure class returned when a rate-typed bridge candidate does not satisfy the declared eligibility conditions."
+    },
+    "BridgeAdmissibilityScreen": {
+      "symbol": "BAS_RTE",
+      "definition": "The governed screen that separates bridge admission from bridge testing and keeps admissibility distinct from promotion."
+    }
+  },
+  "formal_reading": {
+    "predicate": "RATE_TYPE_ELIGIBLE(x, phi)",
+    "interpretation": "The predicate is an admission screen, not a bridge proof, not a theorem, and not a modification of RT_core."
+  },
+  "governance_rules": [
+    {
+      "rule_id": "GOV_RTE_001",
+      "rule": "No rate-based metric bridge may be evaluated until RATE_TYPE_ELIGIBLE(x, phi) is checked and its pass or failure class is recorded."
+    },
+    {
+      "rule_id": "GOV_RTE_002",
+      "rule": "Passing RATE_TYPE_ELIGIBLE(x, phi) does not promote RATE_UNIFICATION_001, DENSITY_BRIDGE_001, or Non-Realizability of Decoupled Endpoints. It only admits the candidate to bridge testing."
+    },
+    {
+      "rule_id": "GR_RATE_001",
+      "rule": "Narrative expansion without a new predicate, invariant, or falsifiable consequence is not validation."
+    }
+  ],
+  "failure_modes": [
+    {
+      "code": "RATE_TYPE_INELIGIBLE_ZERO_DOF",
+      "meaning": "The system has zero degrees of freedom."
+    },
+    {
+      "code": "RATE_TYPE_INELIGIBLE_DECOUPLED_AE",
+      "meaning": "The A|E relation is not coupled."
+    },
+    {
+      "code": "RATE_TYPE_INELIGIBLE_UNDECLARED_REFERENCE",
+      "meaning": "The reference phi is not declared."
+    },
+    {
+      "code": "RATE_TYPE_INELIGIBLE_ENDPOINT_ONLY_EVALUATION",
+      "meaning": "Evaluation is attempted only at the endpoints."
+    },
+    {
+      "code": "RATE_TYPE_INELIGIBLE_ENDPOINT_MISMATCH",
+      "meaning": "The endpoint relation is not compatible with the declared reference."
+    },
+    {
+      "code": "RATE_TYPE_INELIGIBLE_NO_GENERATIVE_EXCLUSION",
+      "meaning": "Generative exclusion before closure is missing."
+    }
+  ],
+  "forbidden_inferences": [
+    "Passing RATE_TYPE_ELIGIBLE does not prove bridge truth.",
+    "Passing RATE_TYPE_ELIGIBLE does not promote DENSITY_BRIDGE_001.",
+    "Passing RATE_TYPE_ELIGIBLE does not promote RATE_UNIFICATION_001.",
+    "Passing RATE_TYPE_ELIGIBLE does not imply endpoint realizability.",
+    "Passing RATE_TYPE_ELIGIBLE does not modify RT_core."
+  ],
+  "required_execution_surface": [
+    "docs/governance/rate_type_eligibility_candidate_001.json",
+    "docs/governance/rate_type_eligibility_trace_001.json",
+    "docs/governance/rate_type_eligibility_counterexample_001.json"
+  ],
+  "target_files": [
+    "docs/governance/rate_type_eligibility_candidate_001.json",
+    "docs/governance/rate_type_eligibility_trace_001.json",
+    "docs/governance/rate_type_eligibility_counterexample_001.json"
+  ],
+  "required_repo_changes": [
+    {
+      "path": "docs/governance/rate_type_eligibility_candidate_001.json",
+      "description": "Add the candidate witness that defines RATE_TYPE_ELIGIBLE(x, phi) as the admissibility screen for rate-typed bridge evaluation."
+    },
+    {
+      "path": "docs/governance/rate_type_eligibility_trace_001.json",
+      "description": "Add the ordered trace that records the failure-first evaluation pipeline for RATE_TYPE_ELIGIBLE(x, phi)."
+    },
+    {
+      "path": "docs/governance/rate_type_eligibility_counterexample_001.json",
+      "description": "Add the counterexample witness that blocks zero-DOF, decoupled, undeclared, endpoint-only, mismatch, and no-exclusion readings."
+    },
+    {
+      "path": "docs/textbook/mono_process_textbook_complete.md",
+      "description": "Add the governed rate-type eligibility clarification and lexicon debt entry for the new predicate."
+    },
+    {
+      "path": "registry/lexicon_gap_queue.json",
+      "description": "Register RATE_TYPE_ELIGIBLE, propagation_position, and Non-Realizability of Decoupled Endpoints as GAP_OPEN terms."
+    },
+    {
+      "path": "registry/governance_change_ledger.json",
+      "description": "Register the proposed rate-type eligibility execution-surface update in the governance ledger."
+    },
+    {
+      "path": "registry/governance_hash_registry.json",
+      "description": "Register the new documentation surfaces, the patch record, and the updated textbook and ledger hashes."
+    }
+  ],
+  "validation_expectations": {
+    "json_parse": "PASS_REQUIRED",
+    "registry_validation": "PASS_REQUIRED",
+    "patch_chain": "PASS_REQUIRED",
+    "patch_gate": "PASS_REQUIRED",
+    "global_validate": "PASS_REQUIRED"
+  },
+  "textbook_integration": {
+    "recommended_location": "Section 2.8, immediately after Delta Ordinal Boundary Dynamics and before the field-candidate note.",
+    "section_title": "Rate-Type Eligibility Predicate",
+    "integration_note": "Introduce RATE_TYPE_ELIGIBLE(x, phi) as the governance screen that must be checked before any rate-based metric-bridge evaluation. Passing the screen admits bridge testing only; it does not promote any bridge claim."
+  },
+  "governance_notes": [
+    "This patch adds an admissibility predicate, not a bridge promotion.",
+    "The predicate keeps failure classes explicit and records them before any bridge testing.",
+    "RT_core remains unchanged."
+  ],
+  "next_expected_patch": {
+    "patch_id": "PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_TESTS_002",
+    "title": "Rate-Type Eligibility Adversarial Tests",
+    "purpose": "Define adversarial test cases for RATE_TYPE_ELIGIBLE(x, phi) across pass, failure, and edge-case domains."
+  },
+  "agent_instruction": "Create PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_001 as PROPOSED only. Use additive mode, cite the applied metric bridge and bridge admissibility surfaces plus the rate-density intake witness as provenance, build the execution surface, and do not apply until patch-gate returns apply."
+}

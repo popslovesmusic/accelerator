@@ -1,0 +1,150 @@
+{
+  "spec_id": "NB13_TOPOLOGICAL_INVARIANTS_CONTINUATION_GEOMETRY_002",
+  "schema_version": "1.0.0",
+  "status": "IMMUTABLE_SPEC",
+  "created_at": "2026-07-22T00:00:00Z",
+  "source_notebook": "departments/colab/notebook_designs/notebook_13_topological_invariants/RT_Notebook_13_v2_Ordered_Chunked.ipynb",
+  "research_question": "Can topology alone classify universal reconvergence, partial reconvergence, and obstruction across the continuation graphs generated from the bounded Notebook 12 configuration domain?",
+  "hypothesis": "Within the bounded Notebook 12 domain, graph-topological invariants mediate the sequence local mechanisms -> continuation graph topology -> reconvergence geometry -> J. Version 2 tests the same hypothesis with ordered, chunked, checkpointed execution to avoid Colab state loss.",
+  "independent_variables": [
+    {
+      "name": "continuation_graph_topology",
+      "definition": "Topology-only representation of each regenerated Notebook 12 continuation graph after removing mechanism labels from the classifier feature set.",
+      "units_or_scale": "graph invariant vector",
+      "allowed_values_or_range": "One invariant vector per Notebook 12 factorial configuration."
+    },
+    {
+      "name": "execution_chunk",
+      "definition": "Contiguous row chunk from the Notebook 12 factorial table.",
+      "units_or_scale": "row interval",
+      "allowed_values_or_range": "Non-overlapping chunks covering all available rows."
+    }
+  ],
+  "dependent_variables": [
+    {
+      "name": "geometry_class",
+      "definition": "Notebook 12 reconvergence geometry label.",
+      "units_or_scale": "categorical",
+      "allowed_values_or_range": "universal_reconvergence | partial_reconvergence | obstruction | depth_censored | invalid_system"
+    },
+    {
+      "name": "J",
+      "definition": "Notebook 12 branch-pair reconvergence fraction.",
+      "units_or_scale": "unit interval",
+      "allowed_values_or_range": "0 <= J <= 1"
+    }
+  ],
+  "controls": [
+    {
+      "name": "cell_order_control",
+      "purpose": "Prevent missing-name errors from partial or out-of-order execution.",
+      "implementation": "All imports, paths, graph reconstruction, and invariant functions are defined in one bootstrap cell."
+    },
+    {
+      "name": "checkpoint_resume_control",
+      "purpose": "Prevent Colab crashes from destroying completed work.",
+      "implementation": "Each chunk writes a persistent checkpoint file and reruns skip completed chunk files."
+    },
+    {
+      "name": "notebook_12_column_mapping_control",
+      "purpose": "Prevent incorrect SystemConfig mappings.",
+      "implementation": "SystemConfig is reconstructed only from Notebook 12 columns: state_modulus, max_depth, branch_width, initial_value, initial_suffix, schedule_seed, and mechanism booleans."
+    },
+    {
+      "name": "mechanism_label_exclusion",
+      "purpose": "Prevent mechanism identity from leaking into topology-only classifier features.",
+      "implementation": "Classifier feature selection excludes mask_bits, mechanism booleans, active_mechanism_count, config_id, geometry, and J."
+    }
+  ],
+  "random_seed": {
+    "value": 130013,
+    "seed_scope": "train/test splits, randomized baselines, and deterministic chunk metadata",
+    "derivation_policy": "Fixed before execution; derived seeds must be deterministic functions of 130013 and recorded in output manifests."
+  },
+  "parameter_space": [
+    {
+      "name": "notebook_12_factorial_domain",
+      "values_or_range": "All configurations loaded from rt_notebook_12_outputs_results.zip/factorial_results.parquet",
+      "units_or_scale": "bounded external notebook configuration domain",
+      "default": "complete domain",
+      "sampling_rule": "exhaustive enumeration by resumable chunks"
+    },
+    {
+      "name": "chunk_size",
+      "values_or_range": "Default 250; may be lowered for Colab RAM/runtime stability before execution starts.",
+      "units_or_scale": "rows per chunk",
+      "default": "250",
+      "sampling_rule": "contiguous deterministic row chunks"
+    }
+  ],
+  "termination_conditions": [
+    "Every available Notebook 12 row is processed or has a recoverable skip reason.",
+    "Chunk checkpoints are written under the governed output directory.",
+    "Aggregated invariant table, skip table, classifier report, counterexample catalog, and manifest are written.",
+    "No post-hoc invariant family is added without a superseding specification."
+  ],
+  "expected_outputs": [
+    {
+      "name": "chunk_checkpoints",
+      "path_pattern": "departments/colab/results/NB13_TOPOLOGICAL_INVARIANTS_CONTINUATION_GEOMETRY_002/chunks/chunk_*.parquet",
+      "required": true,
+      "interpretation_role": "Recoverable partial progress for Colab runtime stability."
+    },
+    {
+      "name": "topological_invariant_table",
+      "path_pattern": "departments/colab/results/NB13_TOPOLOGICAL_INVARIANTS_CONTINUATION_GEOMETRY_002/topological_invariants.parquet",
+      "required": true,
+      "interpretation_role": "Primary topology-only invariant table joined to Notebook 12 geometry/J labels."
+    },
+    {
+      "name": "classification_report",
+      "path_pattern": "departments/colab/results/NB13_TOPOLOGICAL_INVARIANTS_CONTINUATION_GEOMETRY_002/topology_classification_report.json",
+      "required": true,
+      "interpretation_role": "Reports whether topology-only features classify geometry above controls inside the bounded domain."
+    },
+    {
+      "name": "output_manifest",
+      "path_pattern": "departments/colab/results/NB13_TOPOLOGICAL_INVARIANTS_CONTINUATION_GEOMETRY_002/manifest.json",
+      "required": true,
+      "interpretation_role": "Binds inputs, outputs, hashes, seed, chunking, and claim ceiling."
+    }
+  ],
+  "interpretation_protocol": {
+    "claim_ceiling": "C1_SPECIFICATION_ONLY",
+    "decision_rules": [
+      "SUCCESS_C2_CANDIDATE: topology-only invariant families classify geometry above baseline and graph-size controls with recoverable outputs.",
+      "PARTIAL_C2_CANDIDATE: topology separates obstruction from non-obstruction or predicts J strata but fails full three-class classification.",
+      "FAILURE_OR_LIMITATION_C2_CANDIDATE: topology-equivalent signatures produce different geometry/J labels or performance collapses under controls.",
+      "INCONCLUSIVE: data loading, graph regeneration, or dependency constraints prevent complete evaluation."
+    ],
+    "allowed_interpretations": [
+      "Bounded Notebook 12 domain observation about topology-only classification.",
+      "Execution-stability repair of Notebook 13 v1."
+    ],
+    "blocked_interpretations": [
+      "Claim that Notebook 13 succeeded before execution.",
+      "Claim that topology universally governs reconvergence outside Notebook 12.",
+      "External physical validation.",
+      "Claim promotion above C2 without approved-tool replication and independent measurements."
+    ]
+  },
+  "provenance": {
+    "source_paths": [
+      "departments/colab/notebook_designs/notebook_13_topological_invariants/experiment_spec.json",
+      "departments/colab/notebook_designs/notebook_13_topological_invariants/RT_Notebook_13_Topological_Invariants_of_Continuation_Geometry.ipynb",
+      "D:/projects/New folder/RT_Notebook_12_Mechanism_Isolation.ipynb",
+      "D:/projects/New folder/rt_notebook_12_outputs_results.zip"
+    ],
+    "artifact_hashes": {
+      "departments/colab/notebook_designs/notebook_13_topological_invariants/experiment_spec.json": "F7D9BE0011AF756F68CD280551D05361AE57F90F070B185E5DDFA167C2254437",
+      "departments/colab/notebook_designs/notebook_13_topological_invariants/RT_Notebook_13_Topological_Invariants_of_Continuation_Geometry.ipynb": "9BE3C8D7C5DFE75C01F053A20265E7E19C058DBF163DBF524A8982A3C4211EF8",
+      "D:/projects/New folder/RT_Notebook_12_Mechanism_Isolation.ipynb": "A0A29F067FEDDDA93AFDA450A499BBB2CF6EF18C1950FE661261EFE4D3E0C20E",
+      "D:/projects/New folder/rt_notebook_12_outputs_results.zip": "7F7C6788C4BE1A77F571A5340D30E15112EC98E5F6877C11B061DA256CE8AF12"
+    }
+  },
+  "immutability": {
+    "frozen_before_execution": true,
+    "content_sha256": "TO_BE_RECORDED_AFTER_NOTEBOOK_CREATION",
+    "supersession_policy": "Supersedes NB13_TOPOLOGICAL_INVARIANTS_CONTINUATION_GEOMETRY_001 for Colab execution robustness; do not edit after execution starts."
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "taxonomy_id": "VAL-PDT-001",
+  "patch_id": "MPF-PALG-022",
+  "name": "Projection Depth Taxonomy Registry",
+  "status": "active",
+  "taxonomy_status": "CANDIDATE_PROJECTION_TAXONOMY",
+  "purpose": "Classify projection operators by structural flattening depth and retained fidelity to simultaneous recursive aspect-binding.",
+  "governance_status": {
+    "theorem_status": "NOT_PROVEN",
+    "taxonomy_status": "CANDIDATE_PROJECTION_TAXONOMY",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL"
+  },
+  "depth_levels": [
+    {
+      "depth_id": "PD-1",
+      "name": "shallow_projection",
+      "definition": "Projection retains source traceability, aspect context, and limited residue metadata while reducing expression complexity.",
+      "retained_features": [
+        "source_relation_traceability",
+        "aspect_role_context",
+        "partial_residue_metadata"
+      ],
+      "lost_features": [
+        "full_whole_relation_indivisibility"
+      ],
+      "risk_level": "LOW"
+    },
+    {
+      "depth_id": "PD-2",
+      "name": "moderate_projection",
+      "definition": "Projection retains source traceability but abstracts simultaneity into directional, comparative, or local symbolic form.",
+      "retained_features": [
+        "source_relation_traceability",
+        "local_symbolic_readability"
+      ],
+      "lost_features": [
+        "aspect_simultaneity",
+        "partial_residue_history",
+        "non_separability_depth"
+      ],
+      "risk_level": "MEDIUM"
+    },
+    {
+      "depth_id": "PD-3",
+      "name": "deep_projection",
+      "definition": "Projection produces ordinary symbolic structures such as equality, implication, composition, or biconditional while preserving only minimal source traceability.",
+      "retained_features": [
+        "minimal_source_traceability",
+        "projection_context"
+      ],
+      "lost_features": [
+        "residue_history",
+        "recursive_co_generation",
+        "whole_relation_indivisibility",
+        "aspect_simultaneity"
+      ],
+      "risk_level": "HIGH",
+      "reconstruction_warning": "Source reconstruction is not available from projected form alone."
+    },
+    {
+      "depth_id": "PD-4",
+      "name": "terminal_projection",
+      "definition": "Projection output is highly flattened and cannot be used to reconstruct the source relation except through external trace metadata.",
+      "retained_features": [
+        "external_trace_pointer_only"
+      ],
+      "lost_features": [
+        "residue_history",
+        "recursive_co_generation",
+        "whole_relation_indivisibility",
+        "aspect_simultaneity",
+        "admissibility_context",
+        "orientation_context",
+        "non_separability_depth"
+      ],
+      "risk_level": "CRITICAL",
+      "primitive_evidence_blocked": true
+    }
+  ],
+  "operator_depth_assignments": [
+    {
+      "operator_id": "\u03a0_equal",
+      "default_depth": "PD-3",
+      "reason": "Equality flattens recursive binding into restricted substitutability."
+    },
+    {
+      "operator_id": "\u03a0_imply",
+      "default_depth": "PD-3",
+      "reason": "Implication sequentializes simultaneous aspect-binding."
+    },
+    {
+      "operator_id": "\u03a0_compose",
+      "default_depth": "PD-3",
+      "reason": "Composition orders indivisible co-presence into structural chaining."
+    },
+    {
+      "operator_id": "\u03a0_biconditional",
+      "default_depth": "PD-3",
+      "reason": "Logical biconditional retains reciprocal truth readability but loses residue-bound closure."
+    }
+  ],
+  "depth_governance_rules": [
+    {
+      "rule_id": "PDT-RULE-001",
+      "rule": "All projections must declare projection_depth."
+    },
+    {
+      "rule_id": "PDT-RULE-002",
+      "rule": "PD-3 and PD-4 projections require explicit warning that source reconstruction is not available from projected form alone."
+    },
+    {
+      "rule_id": "PDT-RULE-003",
+      "rule": "PD-4 projections may not be used as evidence for primitive relation structure."
+    },
+    {
+      "rule_id": "PDT-RULE-004",
+      "rule": "Higher depth implies higher flattening risk and stricter loss accounting."
+    }
+  ],
+  "forbidden_uses": [
+    "Using deep projections as primitive evidence.",
+    "Treating terminal projections as reconstructive.",
+    "Omitting projection depth.",
+    "Claiming flattening preserves full \u21d4R semantics.",
+    "Using projection depth to promote physical or theorem claims."
+  ],
+  "source_relation": "(E\u22600) \u21d4R \u03b4(E>0)",
+  "non_separability_acknowledged": true
+}

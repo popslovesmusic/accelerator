@@ -1,0 +1,288 @@
+{
+  "patch_id": "PATCH_GOVERNANCE_Q0_CLUSTER_SELECTION_AND_RESOLUTION_PACKET_006",
+  "title": "Q0 Governance Cluster Selection and Resolution Packet",
+  "status": "PARTIAL",
+  "timestamp": "2026-07-13T23:15:00-04:00",
+  "mode": "additive",
+  "depends_on": [
+    "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002",
+    "PATCH_GOVERNANCE_INVENTORY_PROVENANCE_AND_ADDITIVE_AUTHORITY_004",
+    "PATCH_GOVERNANCE_AMBIGUITY_RISK_CLASSIFICATION_AND_REMEDIATION_QUEUE_005"
+  ],
+  "dependency_requirements": {
+    "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002": {
+      "type": "REQUIRES_EXISTING_EVIDENCE",
+      "reason": "Patch 006 selects the Q0 cluster from surviving inventory evidence; the transitional inventory must exist but need not be globally complete."
+    },
+    "PATCH_GOVERNANCE_INVENTORY_PROVENANCE_AND_ADDITIVE_AUTHORITY_004": {
+      "type": "REQUIRES_EXISTING_EVIDENCE",
+      "reason": "Patch 006 requires the additive inventory provenance registration artifacts as stable inputs."
+    },
+    "PATCH_GOVERNANCE_AMBIGUITY_RISK_CLASSIFICATION_AND_REMEDIATION_QUEUE_005": {
+      "type": "REQUIRES_EXISTING_EVIDENCE",
+      "reason": "Patch 006 consumes the deterministic queue and classification outputs produced by patch 005."
+    }
+  },
+  "live_semantic_dependencies": {
+    "classification": "SEMANTICS_SURVIVE_ELSEWHERE",
+    "historical_reference": {
+      "patch_id": "PATCH_GOVERNANCE_STATUS_SEMANTICS_AND_BLOCKING_REDUCTION_003",
+      "status": "UNMATERIALIZED_HISTORICAL_REFERENCE",
+      "git_history_status": "NO_MATCHING_COMMITTED_HISTORY_FOUND",
+      "live_dependency_allowed": false
+    },
+    "surviving_authorities": [
+      {
+        "semantic_rule_id": "GOVERNANCE_VALIDATION_FAIL_CLOSED_001",
+        "authority_role": "VALIDATION_REDUCTION_AUTHORITY",
+        "artifact_path": "governance/authority_partitions/Q0_AUTHORITY_SCOPE_PARTITION_001.json",
+        "artifact_field": "validation_partition.terminal_reducer_rule_id",
+        "evidence_type": "REGISTERED_PARTITION_ARTIFACT"
+      },
+      {
+        "semantic_rule_id": "GOVERNANCE_VALIDATION_FAIL_CLOSED_001",
+        "authority_role": "VALIDATION_REDUCTION_AUTHORITY",
+        "artifact_path": "outputs/governance_inventory/q0_validator_authority_partition.json",
+        "artifact_field": "terminal_reducer_rule_id",
+        "evidence_type": "REGISTERED_GOVERNANCE_INVENTORY_OUTPUT"
+      },
+      {
+        "semantic_rule_id": "GOVERNANCE_VALIDATION_FAIL_CLOSED_001",
+        "authority_role": "VALIDATION_INVOCATION_AUTHORITY",
+        "artifact_path": "scripts/global_validate.py",
+        "artifact_field": "ValidationReducerAuthorityValidator and overall_status reduction",
+        "evidence_type": "LIVE_IMPLEMENTATION"
+      }
+    ]
+  },
+  "objective": {
+    "primary": "Select the highest-priority coherent cluster from Q0_COMPETING_AUTHORITY_AND_WRITE_PATHS using deterministic queue and relationship evidence.",
+    "secondary": "Produce a complete authority-resolution packet containing candidate authorities, consumers, writers, validators, provenance, lineage, and recommended resolution mode.",
+    "tertiary": "Define the exact bounded scope for the first authority-resolution patch.",
+    "non_goals": [
+      "Do not select a canonical authority in this patch.",
+      "Do not change authority status.",
+      "Do not disable writers.",
+      "Do not redirect readers.",
+      "Do not delete or archive surfaces.",
+      "Do not mark ambiguities resolved.",
+      "Do not process more than one coherent Q0 cluster.",
+      "Do not repair the missing full-test dependencies."
+    ]
+  },
+  "core_rule": {
+    "rule_id": "GOVERNANCE_Q0_CLUSTER_COHERENCE_001",
+    "path": "governance/core_rules/GOVERNANCE_Q0_CLUSTER_COHERENCE_001.json",
+    "hash": "20e1e6198ce1baef1f80c50708568fa1a2d7677e2c99197cd58195e23acc8e68",
+    "status": "LIVE",
+    "scope": "Governance cluster selection and resolution packet construction for Q0_COMPETING_AUTHORITY_AND_WRITE_PATHS only.",
+    "effect": "Constrains cluster selection and packet construction; does not authorize any inventoried surface."
+  },
+  "queue_source_hashes": {
+    "outputs/governance_inventory/governance_ambiguity_register.json": "eaf761397f3e16e1035b99386ba9da5c047d792a7c0a90538a1b444cf3aea280",
+    "outputs/governance_inventory/governance_ambiguity_risk_classification.json": "f8f7c7cd8eb78d446c9efb2b3a64a74d0e55da501f155a6d704b489d82cd1528",
+    "outputs/governance_inventory/governance_authority_relationships.json": "a2b95d4fa15cfb7f967b294f27dcc99f7eb822623893789cddd087681aacad60",
+    "outputs/governance_inventory/governance_remediation_queue.json": "daf385ee72b525982d13375fc4d47d0a48f376b7681c9f8c5d48c1a98db1b56d",
+    "outputs/governance_inventory/governance_surface_inventory.json": "f51033a89b407a81f414e66269f5833dff89c682b7f31761edd091ea6b1e72e2"
+  },
+  "source_snapshot": {
+    "workspace_root_identity": "acellorator@6ebf84a1e",
+    "repository_commit": "6ebf84a1e",
+    "included_roots": [
+      "docs/governance",
+      "docs/manual_repository_audit_2026_07_13.md",
+      "docs/textbook/mono_process_textbook_complete.md",
+      "governance/core_rules",
+      "governance/evidence_sets",
+      "governance/provenance",
+      "outputs/governance_inventory",
+      "patches",
+      "registry/governance"
+    ],
+    "excluded_roots": [
+      "Validation Department activation",
+      "database migration",
+      "fixing discovered conflicts",
+      "governance rewriting",
+      "mathematical claim promotion",
+      "repository cleanup",
+      "schema redesign",
+      "scientific truth evaluation"
+    ],
+    "source_artifact_hashes": {
+      "docs/manual_repository_audit_2026_07_13.md": "a16f4997f1ba7b17b11f4e3f188ecf530a38b2d9730052d1eefcb9ca290e30c7",
+      "docs/textbook/mono_process_textbook_complete.md": "33e1679ad16969eb2370c2f8fe30bbef44b94b802db6c1add19e585252146503",
+      "governance/core_rules/GOVERNANCE_AMBIGUITY_REMEDIATION_ORDER_001.json": "4c7354addbfd00e92382db5ea7091e6787004a8036dd64884c73a15ff6a9d18c",
+      "governance/core_rules/GOVERNANCE_INVENTORY_TRANSITIONAL_EVIDENCE_001.json": "f1c448c7aeba076bd6b5a5734e432e897272e57219e17004d3ee1773741a2ec5",
+      "governance/evidence_sets/GOVERNANCE_GLOBAL_INVENTORY_2026_07_13.json": "6c70dfd706da66dbcee459d1fb99e6ef548ed2827aab8fb2d58ac71f7b8766ec",
+      "governance/provenance/governance_inventory_2026_07_13_provenance.json": "570fe78ee26f99265df24ff6008534eed482aa666d5ce6b396551d5822dcdf7f",
+      "outputs/governance_inventory/governance_ambiguity_register.json": "eaf761397f3e16e1035b99386ba9da5c047d792a7c0a90538a1b444cf3aea280",
+      "outputs/governance_inventory/governance_ambiguity_risk_classification.json": "f8f7c7cd8eb78d446c9efb2b3a64a74d0e55da501f155a6d704b489d82cd1528",
+      "outputs/governance_inventory/governance_authority_relationships.json": "a2b95d4fa15cfb7f967b294f27dcc99f7eb822623893789cddd087681aacad60",
+      "outputs/governance_inventory/governance_inventory_summary.json": "4bd48ba74e6717613fb82c9b68d06617e6e1018fa7f6edd5c9337d4ceebfe94d",
+      "outputs/governance_inventory/governance_remediation_queue.json": "daf385ee72b525982d13375fc4d47d0a48f376b7681c9f8c5d48c1a98db1b56d",
+      "outputs/governance_inventory/governance_surface_inventory.json": "f51033a89b407a81f414e66269f5833dff89c682b7f31761edd091ea6b1e72e2",
+      "registry/governance/patches/PATCH_GOVERNANCE_GLOBAL_INVENTORY_002.json": "57df558e2844f357920664456135aac48d230610a83f4083ccf482a03e17cd10"
+    },
+    "file_count_scanned": 1017,
+    "surface_count_detected": 1083,
+    "working_tree_dirty": true,
+    "unrelated_changes_preserved": true,
+    "logical_snapshot_sha256": "8fc8f67f728d60dec0979c259304d6963a0cdd407e8cf7d91bdaa101a68b6f67"
+  },
+  "selection_summary": {
+    "cluster_id": "Q0-CLUSTER-D3129CA0B3C98DED",
+    "seed_ambiguity_id": "AMB-GOV-SURF-0972",
+    "selected_q0_count": 10,
+    "excluded_q0_count": 11,
+    "candidate_authority_count": 10,
+    "candidate_validator_count": 9,
+    "candidate_resolution_option_count": 3,
+    "missing_provenance_count": 0,
+    "missing_lineage_count": 10,
+    "packet_logical_sha256": "40632dd3f6ed0fb3430dff4b1d4a6e18a7824e801c98ada6baa0c147a3eeedda"
+  },
+  "artifact_bundle": {
+    "cluster": {
+      "path": "D:\\projects\\acellorator\\outputs\\governance_inventory\\q0_selected_resolution_cluster.json",
+      "hash": "ebb98d335c8c0eaa3afadf3e9f393be4159b66f968b98be23ed140792d089693"
+    },
+    "authority_candidates": {
+      "path": "D:\\projects\\acellorator\\outputs\\governance_inventory\\q0_resolution_authority_candidates.json",
+      "hash": "4037fa0d971ead39b3f720c7389fed62619d2219bcd52882f9f1f586ea0629f9"
+    },
+    "write_paths": {
+      "path": "D:\\projects\\acellorator\\outputs\\governance_inventory\\q0_resolution_write_paths.json",
+      "hash": "ea34f5f5a7bff93a658d50fa8fd99daac8d0984855bd0cc6268c13d0e87d645e"
+    },
+    "read_paths": {
+      "path": "D:\\projects\\acellorator\\outputs\\governance_inventory\\q0_resolution_read_paths.json",
+      "hash": "54007f38c019ffacbf5e7b824710c4dad82e95d6283348ed70635bcff5d5b5d3"
+    },
+    "validation_paths": {
+      "path": "D:\\projects\\acellorator\\outputs\\governance_inventory\\q0_resolution_validation_paths.json",
+      "hash": "6565398ddbff73e3298c9820da72110a4408d1f79aab1beefca2542f1b040294"
+    },
+    "lineage": {
+      "path": "D:\\projects\\acellorator\\outputs\\governance_inventory\\q0_resolution_lineage.json",
+      "hash": "22f78e30f505e9e0901e26a06bccfcc3175a472fa0e030d2b287306ed5e57487"
+    },
+    "packet": {
+      "path": "D:\\projects\\acellorator\\outputs\\governance_inventory\\q0_resolution_packet.json",
+      "hash": "77f382773a2731d25cbf30c5af44f61eb71bae54f8c099464362a687242ff257"
+    },
+    "review": {
+      "path": "D:\\projects\\acellorator\\docs\\governance\\q0_resolution_packet_review.md",
+      "hash": "821fe694783e2ea0dacf3ae7fd213b972feff0133104f117aee53ab402647bdd"
+    }
+  },
+  "validation_results": {
+    "focused_governance_validation": {
+      "status": "pass",
+      "test_count": 16,
+      "passed": 16,
+      "failed": 0
+    },
+    "governance_only_validator": {
+      "status": "pass",
+      "command": "python -m scripts.global_validate --governance-only --no-db-log",
+      "overall_status": "pass",
+      "stage_result_count": 14,
+      "stale_report_warning": false,
+      "report_path": "outputs/audits/global_health_report.json",
+      "report_hash": "c562fd8039275a36767d2aeacd7daaf61b8ead0f7a71e81ae4c2f7b77a65d23d"
+    },
+    "full_pytest_collection": {
+      "status": "blocked",
+      "collected_tests": 66,
+      "collection_errors": 3,
+      "missing_modules": [
+        "typer",
+        "rd_moving_boundary_sim_v1",
+        "tda_module_v1"
+      ]
+    }
+  },
+  "patch_002_additive_mode_evidence": {
+    "patch_id": "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002",
+    "path": "registry/governance/patches/PATCH_GOVERNANCE_GLOBAL_INVENTORY_002.json",
+    "hash": "57df558e2844f357920664456135aac48d230610a83f4083ccf482a03e17cd10",
+    "patch_mode": "ADDITIVE_ONLY",
+    "status": "PARTIAL",
+    "authority_effect": "NONE",
+    "registration_gate": "PASS",
+    "inventory_completion_gate": "BLOCKED",
+    "blocking_ambiguities": 514
+  },
+  "authority_comparison": {
+    "pre_patch_live_authority_count": 77,
+    "post_patch_live_authority_count": 77,
+    "pre_patch_live_authority_digest": "e69d8cd0477cef5fc4b9defc55ca61e7fa5c34945af4ee16e135f72cbe2f6e76",
+    "post_patch_live_authority_digest": "e69d8cd0477cef5fc4b9defc55ca61e7fa5c34945af4ee16e135f72cbe2f6e76",
+    "live_authority_replacement_detected": false,
+    "proposal_status_changes": 0,
+    "historical_status_changes": 0,
+    "generated_view_status_changes": 0,
+    "ambiguity_records_removed": 0,
+    "ambiguity_records_resolved": 0
+  },
+  "inventory_counts": {
+    "total_surfaces": 1083,
+    "explicit_live_authorities": 77,
+    "proposals": 52,
+    "historical_surfaces": 177,
+    "superseded_surfaces": 0,
+    "generated_views": 587,
+    "implied_authorities": 17,
+    "conflicting_authorities": 0,
+    "authority_unknown": 0,
+    "file_authoritative_candidates": 142,
+    "database_authoritative_candidates": 4,
+    "duplicate_truth_candidates": 0,
+    "staleness_rule_surfaces": 9,
+    "data_preservation_rule_surfaces": 13,
+    "blocking_ambiguities": 514
+  },
+  "completion_record_requirements": {
+    "patch_artifact": "patches/PATCH_GOVERNANCE_Q0_CLUSTER_SELECTION_AND_RESOLUTION_PACKET_006.json",
+    "must_record": [
+      "Core rule identifier and canonical hash",
+      "All five artifact SHA-256 values",
+      "Source snapshot logical hash",
+      "Provenance record identifiers",
+      "Evidence-set identifier",
+      "Patch 002 additive-mode evidence",
+      "Pre-patch and post-patch live authority comparison",
+      "Proposal, historical, and generated-view preservation evidence",
+      "Inventory count reproduction",
+      "Three-blocker resolution evidence",
+      "Remaining 514-ambiguity blocker evidence",
+      "Focused test count",
+      "Complete regression test count",
+      "Confirmation that unrelated changes were preserved"
+    ]
+  },
+  "known_limitations": [
+    "The inventory completion gate remains blocked by 514 unresolved ambiguities.",
+    "The full regression suite is blocked during collection by unrelated missing dependencies in this environment.",
+    "No inventoried surface gained authority from this patch."
+  ],
+  "validation_commands": [
+    "python -m compileall tools tests scripts",
+    "python -m pytest tests/governance_validation -v",
+    "python -m pytest -v",
+    "python -m scripts.global_validate --no-db-log",
+    "python -m scripts.global_validate --governance-only --no-db-log",
+    "git diff --check",
+    "git status --short"
+  ],
+  "rollback_procedure": [
+    "Restore the pre-patch governed snapshot.",
+    "Remove only newly added core-rule, provenance, evidence-set, test, and registry entries.",
+    "Leave the original inventory artifacts untouched.",
+    "Restore PATCH_GOVERNANCE_GLOBAL_INVENTORY_002 to its prior blocked state if the additive registration must be undone.",
+    "Re-run governance status-semantics tests.",
+    "Record the exact additive-authority violation."
+  ],
+  "unrelated_changes_preserved": true
+}

@@ -1,0 +1,147 @@
+{
+  "patch_id": "GOV_DEPARTMENT_SSOT_AUTHORITY_001",
+  "title": "Department SSOT Governance Authority",
+  "status": "proposed",
+  "type": "governance_patch",
+  "effective_scope": "All governed departments",
+  "purpose": "Explicitly distinguish design authority from execution authority while making Department SSOTs mandatory for all modification activities.",
+  "governance": {
+    "principle": "Design authority and execution authority are complementary and intentionally separated.",
+    "normative": true
+  },
+  "authority_model": {
+    "design_authority": {
+      "authoritative_sources": [
+        "department_ssot",
+        "governance_constitution",
+        "authority_manifest"
+      ],
+      "purpose": [
+        "Defines departmental architecture.",
+        "Defines intent.",
+        "Defines ownership.",
+        "Defines design rationale.",
+        "Defines induction requirements.",
+        "Defines canonical implementation goals."
+      ]
+    },
+    "execution_authority": {
+      "authoritative_sources": [
+        "registries",
+        "validators",
+        "proof_registries",
+        "status_registries",
+        "audit_contracts"
+      ],
+      "purpose": [
+        "Defines current executable state.",
+        "Defines canonical runtime truth.",
+        "Defines validation results.",
+        "Defines promotion state.",
+        "Defines executable governance."
+      ]
+    }
+  },
+  "agent_modes": {
+    "runtime": {
+      "description": "Execution, validation, audit, reporting.",
+      "required_inputs": [
+        "registries",
+        "validators",
+        "audit_contracts"
+      ],
+      "optional_inputs": [
+        "department_ssot"
+      ],
+      "rules": [
+        "Do not infer implementation intent.",
+        "Do not modify architecture.",
+        "Treat execution registries as authoritative."
+      ]
+    },
+    "update": {
+      "description": "Implementation, maintenance, migration, governance updates.",
+      "required_inputs": [
+        "department_ssot",
+        "authority_manifest",
+        "governance_constitution",
+        "registries"
+      ],
+      "rules": [
+        "The Department SSOT SHALL be parsed before any department-owned modification.",
+        "Implementation SHALL conform to Department SSOT intent.",
+        "Registries SHALL be updated only after implementation satisfies Department SSOT requirements.",
+        "Validators SHALL execute before promotion.",
+        "Audit SHALL verify resulting execution state."
+      ]
+    }
+  },
+  "department_induction": {
+    "requirements": [
+      {
+        "id": "IND_001",
+        "requirement": "Department SSOT exists.",
+        "mandatory": true
+      },
+      {
+        "id": "IND_002",
+        "requirement": "Department AGENTS.md exists.",
+        "mandatory": true
+      },
+      {
+        "id": "IND_003",
+        "requirement": "Department registered in authority manifest.",
+        "mandatory": true
+      },
+      {
+        "id": "IND_004",
+        "requirement": "Department ownership established.",
+        "mandatory": true
+      },
+      {
+        "id": "IND_005",
+        "requirement": "Execution registries validate successfully.",
+        "mandatory": true
+      }
+    ]
+  },
+  "normative_rules": [
+    {
+      "id": "GOV_DEPT_SSOT_001",
+      "text": "Every governed department SHALL maintain a live Department SSOT."
+    },
+    {
+      "id": "GOV_DEPT_SSOT_002",
+      "text": "Department SSOTs are living governance artifacts and SHALL be continuously updated as departmental architecture evolves."
+    },
+    {
+      "id": "GOV_DEPT_SSOT_003",
+      "text": "Any agent performing implementation or maintenance within a department SHALL parse the current Department SSOT before proposing or applying changes."
+    },
+    {
+      "id": "GOV_DEPT_SSOT_004",
+      "text": "Failure to consult the Department SSOT prior to modification SHALL constitute a governance violation."
+    },
+    {
+      "id": "GOV_DEPT_SSOT_005",
+      "text": "Department SSOTs define design intent but do not directly establish executable state."
+    },
+    {
+      "id": "GOV_DEPT_SSOT_006",
+      "text": "Executable state SHALL be determined exclusively from governed registries, validators, and approved audit artifacts."
+    },
+    {
+      "id": "GOV_DEPT_SSOT_007",
+      "text": "Where Department SSOT intent and executable state diverge, the divergence SHALL be resolved through governed implementation and validation rather than reinterpretation of either artifact."
+    },
+    {
+      "id": "GOV_DEPT_SSOT_008",
+      "text": "Department induction SHALL NOT occur until a live Department SSOT exists, because the SSOT is the canonical update authority for all future departmental modifications."
+    }
+  ],
+  "summary": {
+    "design_truth": "Department SSOT",
+    "execution_truth": "Governed registries and validators",
+    "agent_contract": "Update agents consume both design truth and execution truth; runtime agents consume execution truth only."
+  }
+}

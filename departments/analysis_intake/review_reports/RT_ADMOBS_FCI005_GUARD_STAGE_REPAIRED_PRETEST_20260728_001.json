@@ -1,0 +1,78 @@
+{
+  "artifact_type": "PROVISIONAL_REPAIRED_BINARY_GUARD_PRETEST_CANDIDATE",
+  "artifact_id": "RT_ADMOBS_FCI005_GUARD_STAGE_REPAIRED_PRETEST_20260728_001",
+  "status": "PROVISIONAL_PRETEST_CANDIDATE",
+  "canonicality": "NON_CANONICAL_CANDIDATE",
+  "claim_ceiling": "C1_MODEL_RELATIVE",
+  "source_review": "RT_ADMOBS_FCI005_GUARD_STAGE_CORRECTED_REVIEW_20260728_001",
+  "threshold_bridge": {
+    "result_type": "ThresholdBridgeResult_x",
+    "variants": ["PRESERVED", "NOT_PRESERVED", "UNDEFINED"],
+    "signature": "DistinctionThresholdBridge_x(d_src, d_obs, epsilon_src, epsilon_obs; D_rel) : ThresholdBridgeResult_x",
+    "positive_predicate": "ThresholdBridgePreserved_x(...) : Prop iff DistinctionThresholdBridge_x(...) = PRESERVED",
+    "negative_predicate": "ThresholdBridgeRejected_x(...) : Prop iff DistinctionThresholdBridge_x(...) = NOT_PRESERVED",
+    "undefined_predicate": "ThresholdBridgeUndefined_x(...) : Prop iff DistinctionThresholdBridge_x(...) = UNDEFINED",
+    "guard": "UNDEFINED is not coerced to NOT_PRESERVED."
+  },
+  "witness_governance": {
+    "BridgeWitnessRecord_x": {
+      "signature": "BridgeWitnessRecord_x := (X, Z, Y, source_ids, mapping_provenance, context_provenance)",
+      "role": "Retain exact source carriers and context supporting the projected observation pair."
+    },
+    "PermittedFCI005BridgeWitness_x": {
+      "signature": "PermittedFCI005BridgeWitness_x(w, o_i, o_j; B_x, D_rel, R) : Prop",
+      "status": "PROVISIONAL_PREDICATE"
+    },
+    "BridgeVerdictInvariant_x": {
+      "signature": "BridgeVerdictInvariant_x(o_i, o_j; epsilon_src, epsilon_obs, B_x, D_rel, R) : Prop",
+      "definition": "All permitted bridge witnesses for the same ordered observation pair produce the same defined distinction-threshold verdict.",
+      "nonfunctional_policy": "Required unless the bridge mapping is proved functional.",
+      "variance_result": "Disagreement yields UNDEFINED_WITNESS_VARIANCE."
+    }
+  },
+  "threshold_policy": {
+    "parameters": ["epsilon_src", "epsilon_obs"],
+    "signature": "ThresholdMap_x(epsilon_src, epsilon_obs; D_rel) : Prop",
+    "shared_threshold_exception": "A single threshold is permitted only under SharedDistinctionScale_x proving a common ordered codomain and common interpretation.",
+    "required_preservation": "D(X|Z) > epsilon_src and d_obs(o_i,o_j) > epsilon_obs preserve the same relevant pass/fail meaning under ThresholdMap_x."
+  },
+  "revised_bridge_witness": {
+    "symbol": "FCI005DistinctionBridgeWitness_x",
+    "signature": "FCI005DistinctionBridgeWitness_x(w, o_i, o_j; epsilon_src, epsilon_obs, B_x, D_rel, R) : Prop",
+    "definition": [
+      "w is a BridgeWitnessRecord_x.",
+      "PermittedFCI005BridgeWitness_x(w, o_i, o_j; B_x, D_rel, R).",
+      "D(w.X|w.Z) is prebound and evaluable.",
+      "d_obs(o_i,o_j) is prebound and evaluable.",
+      "ThresholdMap_x(epsilon_src, epsilon_obs; D_rel) holds unless a shared scale is proved.",
+      "DistinctionThresholdBridge_x(D(w.X|w.Z), d_obs(o_i,o_j), epsilon_src, epsilon_obs; D_rel) = PRESERVED.",
+      "D(w.X|w.Z) > epsilon_src.",
+      "d_obs(o_i,o_j) > epsilon_obs."
+    ]
+  },
+  "binary_evaluator": {
+    "result_type": "BinaryConstraintResult_x",
+    "variants": ["COMPATIBLE", "INCOMPATIBLE", "UNDEFINED"],
+    "signature": "EvalBCon_FCI005Distinction_x(o_i, o_j; epsilon_src, epsilon_obs, B_x, D_rel, R) : BinaryConstraintResult_x",
+    "rules": {
+      "COMPATIBLE": "At least one permitted witness exists, every bridge is defined, BridgeVerdictInvariant_x holds, and the preserved distinction-floor result passes.",
+      "INCOMPATIBLE": "At least one permitted witness exists, every bridge is defined, BridgeVerdictInvariant_x holds, and the preserved distinction-floor result fails.",
+      "UNDEFINED": "No permitted witness exists, a required bridge or threshold translation is undefined, or permitted witnesses disagree."
+    },
+    "propositional_projection": "BCon_FCI005Distinction_x(...) : Prop iff EvalBCon_FCI005Distinction_x(...) = COMPATIBLE"
+  },
+  "expanded_bridge_suite": [
+    "FCI005-BRIDGE-TEST-001: carrier representation",
+    "FCI005-BRIDGE-TEST-002: context mapping",
+    "FCI005-BRIDGE-TEST-003: threshold-verdict preservation",
+    "FCI005-BRIDGE-TEST-004: threshold type and provenance",
+    "FCI005-BRIDGE-TEST-005: dependency acyclicity",
+    "FCI005-BRIDGE-TEST-006: witness-verdict invariance"
+  ],
+  "test_status": "NOT_RUN_PENDING_HUMAN_AUTHORIZATION_AFTER_REPAIR",
+  "BCon_x_binding": "NOT_AUTHORIZED",
+  "H_x": "UNDECLARED",
+  "next_action": "Run the expanded six-test bridge suite.",
+  "failure_condition": "Any witness disagreement, undefined threshold translation, or downstream dependency disqualifies FCI005-G02 from BCon_x.",
+  "human_review_required": true
+}

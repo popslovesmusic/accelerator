@@ -1,0 +1,37 @@
+{
+  "registry_id": "PCD_TEMPORAL_EVOLUTION_AUDIT_REGISTRY",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "audit_id",
+      "object_id",
+      "object_class",
+      "events_checked",
+      "missing_events",
+      "invalid_transitions",
+      "lineage_breaks",
+      "replay_status",
+      "final_state_reconstructed",
+      "final_status"
+    ]
+  },
+  "valid_transition_rules": [
+    {
+      "name": "no_promotion_after_invalidated_without_restoration_v1",
+      "statement": "An invalidated object may not be promoted unless a RESTORED event with recovery evidence exists."
+    },
+    {
+      "name": "no_superseded_object_as_active_support_v1",
+      "statement": "A superseded object may not remain active support unless explicitly marked legacy-compatible."
+    },
+    {
+      "name": "no_confidence_band_jump_without_source_event_v1",
+      "statement": "Confidence bands may not jump upward without a source result package, validation event, or rerigor endorsement event."
+    },
+    {
+      "name": "no_rigor endorsement_restore_without_runtime_recheck_v1",
+      "statement": "Tool rigor endorsement may not be restored after runtime drift without binary/provenance recheck."
+    }
+  ],
+  "audits": []
+}

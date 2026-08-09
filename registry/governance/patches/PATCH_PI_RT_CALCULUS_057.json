@@ -1,0 +1,211 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_057",
+  "status": "APPLIED",
+  "applied_on": "2026-07-07T12:03:54.3935867-04:00",
+  "type": "field_candidate_patch",
+  "campaign": "RT_CALCULUS",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "campaign_label": "RT Calculus Metric Bridge",
+  "baseline_date": "2026-07-07",
+  "title": "Provisional Mismatch Field Candidate",
+  "mode": "additive",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_052",
+    "PATCH_PI_RT_CALCULUS_053",
+    "PATCH_PI_RT_CALCULUS_054",
+    "PATCH_PI_RT_CALCULUS_055",
+    "PATCH_PI_RT_CALCULUS_056"
+  ],
+  "rt_core_modified": false,
+  "claim_level": "PROVISIONAL_INDUCTION",
+  "purpose": "Introduce a provisional mismatch field candidate downstream of ordinal mismatch transition and admissibility-boundary dynamics, without introducing scalar metrics, units, topology, coordinates, or empirical physical interpretation.",
+  "summary": "This patch defines the first candidate organization of repeated Delta evaluations. The field is not yet a metric space. It records governed variation of ordinal mismatch evaluations across declared domain, scale, residue-asymmetry, and symmetry-reference coupling conditions.",
+  "core_rule": {
+    "id": "MISMATCH_FIELD_CANDIDATE_001",
+    "statement": "Repeated Delta evaluations may be organized as a provisional field candidate only when each evaluation is tied to a declared Ctx_Δ and preserved as trace-linked ordinal variation; this reading does not introduce scalar magnitude, topology, units, coordinates, or physical field claims."
+  },
+  "basis": {
+    "source_patches": [
+      "PATCH_PI_RT_CALCULUS_052",
+      "PATCH_PI_RT_CALCULUS_053",
+      "PATCH_PI_RT_CALCULUS_054",
+      "PATCH_PI_RT_CALCULUS_055",
+      "PATCH_PI_RT_CALCULUS_056"
+    ],
+    "source_surfaces": [
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_052.json",
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_053.json",
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_054.json",
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_055.json",
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_056.json",
+      "docs/governance/ae_metric_candidate_052.json",
+      "docs/governance/symmetry_reference_trace_052.json",
+      "docs/governance/ra_symbol_discipline_052.json",
+      "docs/governance/delta_operator_discipline_053.json",
+      "docs/governance/delta_allowed_forbidden_readings_053.json",
+      "docs/governance/delta_non_metric_counterexample_053.json",
+      "docs/governance/ordinal_mismatch_classes_054.json",
+      "docs/governance/ordinal_mismatch_trace_054.json",
+      "docs/governance/ordinal_non_metric_counterexample_054.json",
+      "docs/governance/delta_ordinal_transition_rules_055.json",
+      "docs/governance/delta_transition_trace_schema_055.json",
+      "docs/governance/delta_transition_counterexample_055.json",
+      "docs/governance/admissibility_boundary_dynamics_056.json",
+      "docs/governance/admissibility_boundary_trace_056.json",
+      "docs/governance/admissibility_boundary_counterexample_056.json"
+    ],
+    "scope": "Provisional field-candidate witness that extends the governed ordinal transition and admissibility-boundary layers into a traceable organization of repeated Delta evaluations while leaving RT_core unchanged and keeping quantitative metric construction deferred."
+  },
+  "canonical_objects": {
+    "MismatchFieldCandidate": {
+      "symbol": "MF_Δ",
+      "definition": "A provisional organization of repeated Delta evaluations over declared evaluation contexts.",
+      "canonical_form": "MF_Δ := FieldCandidate({ Delta_i(A_i <S_i>_{r_a,i} E_i) } over declared evaluation context Ctx_Δ,i)",
+      "status": "PROVISIONAL_FIELD_CANDIDATE"
+    },
+    "EvaluationContext": {
+      "symbol": "Ctx_Δ",
+      "definition": "The declared context required for any field-candidate reading of Delta evaluations.",
+      "required_fields": [
+        "domain",
+        "scale",
+        "Affect-side condition A",
+        "Effect-side condition E",
+        "symmetry-reference coupling <S>",
+        "residue-asymmetry parameter r_a",
+        "admissibility boundary state",
+        "ordinal mismatch class",
+        "transition trace"
+      ]
+    },
+    "FieldTrace": {
+      "symbol": "Trace(MF_Δ)",
+      "definition": "The ordered diagnostic record of repeated Delta evaluations and ordinal transitions used to support a field-candidate reading.",
+      "note": "Trace(MF_Δ) is diagnostic, not itself a metric or topology."
+    }
+  },
+  "formal_reading": {
+    "base_expression": "A|E := Delta(A <S>_ra E)",
+    "field_candidate": "MF_Δ := FieldCandidate({ Delta_i(A_i <S_i>_{r_a,i} E_i) } | Ctx_Δ declared for each i)",
+    "ordinal_projection": "class(Delta_i) in { NO_EXPRESSED_MISMATCH, LOW_MISMATCH, MODERATE_MISMATCH, HIGH_MISMATCH, ADMISSIBILITY_BREAK }",
+    "transition_dependency": "Ordinal transitions remain governed by PATCH_PI_RT_CALCULUS_055.",
+    "boundary_dependency": "Admissibility-boundary behavior remains governed by PATCH_PI_RT_CALCULUS_056."
+  },
+  "governance_rules": [
+    {
+      "rule_id": "MF057_001",
+      "rule": "MF_Δ may be introduced only after Delta evaluation, ordinal class, transition discipline, and admissibility-boundary state are declared."
+    },
+    {
+      "rule_id": "MF057_002",
+      "rule": "MF_Δ does not introduce scalar magnitude, equal spacing, coordinate distance, topology, unit, or physical metric."
+    },
+    {
+      "rule_id": "MF057_003",
+      "rule": "Variation across repeated Delta evaluations may be described qualitatively as a provisional field only when the evaluation contexts are explicitly recorded."
+    },
+    {
+      "rule_id": "MF057_004",
+      "rule": "A field-candidate reading is invalid if it collapses Delta into distance(A,E) or treats <S> as midpoint, endpoint, substrate, or metric center."
+    },
+    {
+      "rule_id": "MF057_005",
+      "rule": "MF_Δ does not modify RT_core and does not promote projection from provisional induction to theorem."
+    }
+  ],
+  "forbidden_inferences": [
+    "MF_Δ is not a metric space.",
+    "MF_Δ is not a vector field.",
+    "MF_Δ is not a topology.",
+    "MF_Δ is not a manifold.",
+    "MF_Δ is not a scalar field.",
+    "MF_Δ is not a physical field.",
+    "MF_Δ does not imply continuity in the analytic sense.",
+    "MF_Δ does not imply differentiability.",
+    "MF_Δ does not imply numerical magnitude.",
+    "MF_Δ does not license empirical measurement claims."
+  ],
+  "admissibility_conditions": [
+    "Each Delta evaluation must have a declared Ctx_Δ.",
+    "Each ordinal class assignment must be traceable to governed Delta evaluation.",
+    "Each transition between ordinal classes must obey PATCH_PI_RT_CALCULUS_055.",
+    "Each boundary-related state must obey PATCH_PI_RT_CALCULUS_056.",
+    "FieldTrace must preserve evaluation order and context identity."
+  ],
+  "failure_modes": {
+    "FAIL_MF_UNDECLARED_CONTEXT": "A field-candidate reading is attempted without declared Ctx_Δ.",
+    "FAIL_MF_NUMERIC_IMPORT": "Scalar, unit, coordinate, or metric magnitude is introduced without governance.",
+    "FAIL_MF_TOPOLOGY_IMPORT": "Topological or manifold language is introduced before topology governance.",
+    "FAIL_MF_DELTA_COLLAPSE": "Delta is treated as distance, norm, or physical metric.",
+    "FAIL_MF_TRACE_BREAK": "Repeated evaluations cannot be trace-linked under declared context."
+  },
+  "textbook_integration": {
+    "recommended_location": "After Delta Ordinal Transition Discipline and Admissibility Boundary Dynamics.",
+    "section_title": "Continuous Mismatch Field Candidate",
+    "integration_note": "Present this as the first field-candidate layer, not as a completed field or metric space."
+  },
+  "next_expected_patch": {
+    "patch_id": "PATCH_PI_RT_CALCULUS_058",
+    "title": "Emergent Metric Structure Candidate",
+    "purpose": "Define the conditions under which metric-like structure may emerge from MF_Δ without importing external metric assumptions."
+  },
+  "target_files": [
+    "docs/governance/continuous_mismatch_field_candidate_057.json",
+    "docs/governance/continuous_mismatch_field_trace_057.json",
+    "docs/governance/continuous_mismatch_field_counterexample_057.json"
+  ],
+  "required_repo_changes": [
+    {
+      "path": "docs/governance/continuous_mismatch_field_candidate_057.json",
+      "description": "Add the field-candidate witness that introduces MF_Δ as a provisional organization of repeated Delta evaluations."
+    },
+    {
+      "path": "docs/governance/continuous_mismatch_field_trace_057.json",
+      "description": "Add the trace schema that records context-typed repeated Delta evaluations without metric magnitude."
+    },
+    {
+      "path": "docs/governance/continuous_mismatch_field_counterexample_057.json",
+      "description": "Add the counterexample that blocks numeric, topological, and physical-field readings of MF_Δ."
+    },
+    {
+      "path": "registry/governance_hash_registry.json",
+      "description": "Register the new documentation surfaces by hash for governance visibility."
+    }
+  ],
+  "required_execution_surface": [
+    "continuous_mismatch_field_candidate_057.json",
+    "continuous_mismatch_field_trace_057.json",
+    "continuous_mismatch_field_counterexample_057.json"
+  ],
+  "validation_expectations": {
+    "json_parse": "PASS_REQUIRED",
+    "registry_validation": "PASS_REQUIRED",
+    "patch_chain": "PASS_REQUIRED",
+    "patch_gate": "PASS_REQUIRED",
+    "global_validate": "PASS_REQUIRED"
+  },
+  "claim_humility": {
+    "current_status": "proposed_only",
+    "non_claims": [
+      "Does not modify RT_core.",
+      "Does not assert a finalized metric.",
+      "Does not claim universal measurability.",
+      "Does not promote any governed note to theorem status.",
+      "Does not update textbook surfaces by itself."
+    ]
+  },
+  "non_claims": [
+    "Does not modify RT_core.",
+    "Does not assert a finalized metric.",
+    "Does not claim universal measurability.",
+    "Does not promote any governed note to theorem status.",
+    "Does not update textbook surfaces by itself."
+  ],
+  "governance_notes": [
+    "This patch begins the field-candidate phase of the metric bridge.",
+    "It remains qualitative and provisional.",
+    "It depends on the ordinal transition and boundary-dynamics layers.",
+    "It does not introduce quantitative calculus yet."
+  ],
+  "agent_instruction": "Create PATCH_PI_RT_CALCULUS_057 as PROPOSED only. Use additive mode, cite applied PATCH_PI_RT_CALCULUS_052 through PATCH_PI_RT_CALCULUS_056 as provenance, build the execution surface, and do not apply until patch-gate returns apply."
+}

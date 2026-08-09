@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "mpf://governance/schemas/generated_projection_metadata.schema.json",
+  "title": "Generated Projection Metadata",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "artifact_id",
+    "artifact_role",
+    "authority_scope",
+    "canonical_source_id",
+    "canonical_source_version",
+    "canonical_snapshot_id",
+    "generated_at",
+    "validator_run_id",
+    "projection_status"
+  ],
+  "properties": {
+    "artifact_id": { "type": "string" },
+    "artifact_role": { "const": "GENERATED_PROJECTION" },
+    "authority_scope": { "type": "string" },
+    "canonical_source_id": { "type": "string" },
+    "canonical_source_version": { "type": "string" },
+    "canonical_snapshot_id": { "type": "string" },
+    "source_object_ids": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "generated_at": { "type": "string" },
+    "validator_run_id": { "type": "string" },
+    "projection_status": {
+      "enum": ["current", "pending_validation", "stale", "historical", "superseded"]
+    },
+    "supersedes": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "superseded_by": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}

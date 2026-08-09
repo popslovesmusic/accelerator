@@ -6,6 +6,10 @@ class MetricsEngineCPP:
     def __init__(self):
         # Add oneAPI bin directory to DLL search path on Windows
         if os.name == 'nt':
+            dll_dir = os.path.dirname(__file__)
+            if os.path.exists(dll_dir):
+                os.add_dll_directory(os.path.abspath(dll_dir))
+                
             oneapi_bin = r"C:\Program Files (x86)\Intel\oneAPI\compiler\latest\bin"
             if os.path.exists(oneapi_bin):
                 os.add_dll_directory(oneapi_bin)

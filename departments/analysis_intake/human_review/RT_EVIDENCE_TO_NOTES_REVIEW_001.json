@@ -1,0 +1,51 @@
+{
+  "packet_id": "ACELLORATOR_RT_EVIDENCE_TO_NOTES_WORKFLOW_001",
+  "review_packet_id": "RT_EVIDENCE_TO_NOTES_REVIEW_001",
+  "status": "REVIEW_DECISIONS_RECORDED_PENDING_INDUCTION",
+  "source_import": "ACELLORATOR_IMPORT_RT_CALCULUS_EVIDENCE_001",
+  "source_attacks": ["FAT-23","FAT-24","FAT-25","FAT-26"],
+  "included_outputs": {
+    "review_records": "departments/analysis_intake/review_records/index.json",
+    "finding_registry": "departments/analysis_intake/finding_registry/index.json",
+    "research_propositions": "departments/analysis_intake/research_propositions/index.json",
+    "notes_impact_map": "departments/analysis_intake/notes_impact_maps/RT_TEXTBOOK_IMPACT_MAP_001.json",
+    "candidate_notes_patches": "departments/analysis_intake/candidate_notes_patches/index.json"
+  },
+  "review_decisions_required": ["ACCEPT","REVISE","DEFER","REJECT"],
+  "review_decisions_received": {
+    "RT_NOTES_PATCH_001": "ACCEPT",
+    "RT_NOTES_PATCH_002": "ACCEPT",
+    "RT_NOTES_PATCH_003": "ACCEPT",
+    "RT_NOTES_PATCH_004": "ACCEPT",
+    "RT_NOTES_PATCH_005": "ACCEPT",
+    "RT_NOTES_PATCH_006": "REVISE",
+    "RT_NOTES_PATCH_007": "ACCEPT"
+  },
+  "revision_record": "RT_NOTES_PATCH_006 was revised to state recoverability as an open research question and to limit FAT-24 to one tested mapping.",
+  "provenance_requirement": {
+    "field": "provenance",
+    "visibility": "INTERNAL_ONLY_NOT_FOR_TEXTBOOK_RENDERING",
+    "required_for": "every_candidate_notes_patch",
+    "contents": ["supporting_findings","source_attacks","evidence_package_id","manifest_sha256","archive_sha256","preserved_evidence_path"],
+    "purpose": "Maintain sentence-level traceability without adding provenance clutter to published notes."
+  },
+  "independent_decisions": [
+    "PROP_RT_REFERENCE_CENTERED_WHOLE_EXPRESSION_001",
+    "RT_NOTES_PATCH_001",
+    "RT_NOTES_PATCH_002",
+    "RT_NOTES_PATCH_003",
+    "RT_NOTES_PATCH_004",
+    "RT_NOTES_PATCH_005",
+    "RT_NOTES_PATCH_006",
+    "RT_NOTES_PATCH_007"
+  ],
+  "reviewer_instructions": [
+    "Check each source attack against its preserved report and run artifacts.",
+    "Decide each finding and notes patch independently.",
+    "Keep negative and unresolved results visible.",
+    "Do not treat any report as a proof or external validation.",
+    "Do not apply an accepted patch in this workflow."
+  ],
+  "not_authorized": ["modify RT_Calculs.md","modify chapter files","promote findings","induct accepted patches"],
+  "next_required_authorization": "USER_AUTHORIZATION_TO_INDUCT_ACCEPTED_NOTES_PATCHES"
+}

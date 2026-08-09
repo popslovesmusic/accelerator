@@ -1,0 +1,65 @@
+{
+  "id": "MT-LAW-A019",
+  "name": "Bounded Continuation Persistence Restricted-Domain Stability Consolidation",
+  "status": "implemented",
+  "stability_regions": [
+    {
+      "stability_region_id": "SR-A001",
+      "name": "Bounded Budget Stability Region",
+      "required_conditions": ["C_A <= B_local(alpha)"],
+      "linked_excluded_domains": ["ED-A001"],
+      "linked_reentry_conditions": ["RE-A001"],
+      "linked_counterexamples": ["CE-A001"],
+      "known_instabilities": ["budget overflow instability"],
+      "scope_limitations": "STRICTLY_LOCAL",
+      "status": "CONSOLIDATED"
+    },
+    {
+      "stability_region_id": "SR-A002",
+      "name": "Topology Accessibility Stability Region",
+      "required_conditions": ["T_access > severance_threshold"],
+      "linked_excluded_domains": ["ED-A002"],
+      "linked_reentry_conditions": ["RE-A002"],
+      "linked_counterexamples": ["CE-A003"],
+      "known_instabilities": ["topology severance divergence"],
+      "scope_limitations": "STRICTLY_LOCAL",
+      "status": "CONSOLIDATED"
+    },
+    {
+      "stability_region_id": "SR-A003",
+      "name": "Bounded Reconstruction Stability Region",
+      "required_conditions": ["R_divergence <= epsilon_crit"],
+      "linked_excluded_domains": ["ED-A003"],
+      "linked_reentry_conditions": ["RE-A003"],
+      "linked_counterexamples": ["CE-A006"],
+      "known_instabilities": ["reconstruction ambiguity"],
+      "scope_limitations": "STRICTLY_LOCAL",
+      "status": "CONSOLIDATED"
+    },
+    {
+      "stability_region_id": "SR-A004",
+      "name": "Bounded Continuity-Class Stability Region",
+      "required_conditions": ["I_continuity remains non-fragmented within local tolerance"],
+      "linked_excluded_domains": ["ED-A004"],
+      "linked_reentry_conditions": ["RE-A004"],
+      "linked_counterexamples": ["CE-A004"],
+      "known_instabilities": ["identity fragmentation"],
+      "scope_limitations": "STRICTLY_LOCAL",
+      "status": "CONSOLIDATED"
+    }
+  ],
+  "preserved_instabilities": [
+    "budget overflow instability",
+    "topology severance divergence",
+    "identity fragmentation",
+    "oscillatory non-stabilization",
+    "cross-mechanism divergence",
+    "reconstruction ambiguity"
+  ],
+  "governance_flags": {
+    "proof_status": "TS3_stability_consolidation_only",
+    "theorem_status": "NOT_PROVEN",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL"
+  }
+}

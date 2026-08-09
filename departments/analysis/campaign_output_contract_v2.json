@@ -1,0 +1,26 @@
+{
+  "contract_id": "ANALYSIS_CAMPAIGN_OUTPUT_CONTRACT_V2",
+  "status": "ACTIVE",
+  "applies_to": "all Analysis Department crawl campaigns",
+  "outcome_values": ["SUCCESS", "PARTIAL_SUCCESS", "NO_NEW_INFORMATION", "FAILED", "BLOCKED", "INVALID_SCOPE"],
+  "executive_recommendation_values": ["PROMOTE", "CONTINUE_RESEARCH", "EXPAND_SCOPE", "SEEK_COUNTEREXAMPLES", "FORMALIZE", "RUN_SIMULATIONS", "STOP_UNTIL_NEW_EVIDENCE"],
+  "required_outputs": ["campaign_summary.md", "campaign_summary.json", "proof_readiness_dashboard.json", "research_debt_progress.json", "next_campaign.json", "human_review_checklist.md", "obligation_summary.md", "actionable_tasks.json", "executive_dashboard.json", "unlock_analysis.json", "cost_benefit_report.json", "agent_handoff.json", "repository_health.json", "work_package.json", "execution_plan.md", "validation_report.json", "unlock_report.json", "completion_certificate.json"],
+  "obligation_standard": "ACTIONABLE_OBLIGATION_STANDARD_V2",
+  "work_package_requirements": ["one measurable objective", "why_it_exists", "required_inputs", "assumptions", "blocking_dependencies", "ordered execution steps", "expected deliverables", "acceptance tests", "required reviews", "mechanized checks", "simulation checks", "failure conditions", "unlocks", "escalation rules", "recommended specialist", "completion certificate"],
+  "completion_certificate_rules": ["all required deliverables exist", "all acceptance tests pass", "counterexample reopens obligation", "upstream changes invalidate certificate", "discharge does not imply theorem promotion"],
+  "actionable_obligation_requirements": ["task_id", "description", "objective", "required_inputs", "expected_outputs", "completion_test", "estimated_effort", "dependencies", "priority", "assigned_agent_role", "evidence_requirements", "blocked_by", "blocks", "critical_path", "recommended_next_action"],
+  "obligation_success_criteria": ["Definition complete", "Formal specification complete", "Proof obligations discharged", "Counterexamples exhausted", "Governance review complete"],
+  "allowed_next_actions": ["Write formal definition", "Generate theorem candidates", "Search counterexamples", "Run simulations", "Mechanize proof", "Expand dependency graph", "Human review", "Suspend until new evidence"],
+  "required_task_impact_fields": ["unlocks", "blocked_objects", "future_campaigns_enabled", "estimated_effort", "estimated_compute_cost", "expected_repository_value", "blocking_tasks_removed", "risk", "confidence", "repository_unlock_value", "proof_impact", "dependency_reduction", "research_debt_reduction", "governance_importance"],
+  "required_handoff_fields": ["current_agent", "recommended_next_agent", "reason", "mission", "expected_outputs", "success_definition"],
+  "required_exit_reasons": ["Objective completed", "Evidence exhausted", "Awaiting formalization", "Awaiting simulation", "Awaiting human review", "Blocked by dependency", "Novelty exhausted"],
+  "required_metrics": {
+    "objective_completion": ["objectives_completed", "objectives_total", "completion_percent"],
+    "novelty": ["new_concepts", "duplicate_findings", "superseded_findings", "novelty_score"],
+    "proof_readiness": ["candidate_theorems", "proved", "blocked", "counterexamples_found", "proof_obligations_remaining"],
+    "quality": ["scope_coverage", "dependency_resolution", "reasoning_depth_used", "termination_quality", "evidence_quality"]
+  },
+  "required_summary_sections": ["Campaign Purpose", "Scope", "Objects Analyzed", "What Was Learned", "What Was Not Learned", "Major Discoveries", "Proof Progress", "New Contradictions", "Open Research Debt", "Campaign Assessment", "Recommended Next Campaign", "Reason Campaign Stopped"],
+  "required_review_questions": ["Do you accept the findings?", "Should candidate objects be preserved?", "Should the proposed campaign be executed?", "Are additional sources required?", "Should governance records be updated?"],
+  "authority": {"canonical_promotion": false, "execution_authority": false, "human_review_required": true}
+}

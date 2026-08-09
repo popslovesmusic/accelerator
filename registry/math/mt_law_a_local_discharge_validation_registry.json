@@ -1,0 +1,129 @@
+{
+  "id": "MT-LAW-A013",
+  "name": "Bounded Continuation Persistence Local Discharge Validation",
+  "status": "implemented",
+  "validation_targets": [
+    {
+      "id": "LV-A001",
+      "name": "Assumption Consistency Validation",
+      "must_verify": "Candidate local discharges do not contradict declared local assumptions."
+    },
+    {
+      "id": "LV-A002",
+      "name": "Counterexample Preservation Validation",
+      "must_verify": "Counterexamples remain active and are not silently bypassed."
+    },
+    {
+      "id": "LV-A003",
+      "name": "Stress Domain Consistency Validation",
+      "must_verify": "Candidate discharges survive declared stress domains within bounded scope."
+    },
+    {
+      "id": "LV-A004",
+      "name": "Cross-Mechanism Consistency Validation",
+      "must_verify": "Candidate discharges remain structurally consistent across mechanism classes where applicable."
+    },
+    {
+      "id": "LV-A005",
+      "name": "Failure Boundary Integrity Validation",
+      "must_verify": "Failure boundaries remain explicit and machine-traceable."
+    },
+    {
+      "id": "LV-A006",
+      "name": "Non-Universality Validation",
+      "must_verify": "Local discharge candidates do not escalate into global claims."
+    }
+  ],
+  "validation_results": [
+    {
+      "obligation_id": "PO-A001",
+      "candidate_status": "PARTIALLY_DISCHARGED_LOCAL",
+      "outcome": "CONSISTENT_LOCAL",
+      "validated_scope": "LOCAL_RESTRICTED_DOMAIN_ONLY",
+      "supporting_assumptions": ["LA-A001"],
+      "supporting_stress_domains": ["SD-A001"],
+      "mechanism_consistency_status": "ALIGNED",
+      "counterexample_integrity_status": "PRESERVED",
+      "remaining_blockers": ["formal cost recovery mechanics undefined"],
+      "governance_status": "COMPLIANT"
+    },
+    {
+      "obligation_id": "PO-A002",
+      "candidate_status": "PARTIALLY_DISCHARGED_LOCAL",
+      "outcome": "CONSISTENT_LOCAL",
+      "validated_scope": "LOCAL_RESTRICTED_DOMAIN_ONLY",
+      "supporting_assumptions": ["LA-A005"],
+      "supporting_stress_domains": ["SD-A001", "SD-A005"],
+      "mechanism_consistency_status": "ALIGNED",
+      "counterexample_integrity_status": "PRESERVED",
+      "remaining_blockers": ["nonlinear stability thresholds not fully mapped"],
+      "governance_status": "COMPLIANT"
+    },
+    {
+      "obligation_id": "PO-A003",
+      "candidate_status": "PARTIALLY_DISCHARGED_LOCAL",
+      "outcome": "CONSISTENT_LOCAL",
+      "validated_scope": "LOCAL_RESTRICTED_DOMAIN_ONLY",
+      "supporting_assumptions": ["LA-A005"],
+      "supporting_stress_domains": ["SD-A005", "SD-A006"],
+      "mechanism_consistency_status": "ALIGNED",
+      "counterexample_integrity_status": "PRESERVED",
+      "remaining_blockers": ["cascade propagation depth limits undefined"],
+      "governance_status": "COMPLIANT"
+    },
+    {
+      "obligation_id": "PO-A004",
+      "candidate_status": "BLOCKED",
+      "outcome": "BLOCKED_BY_SCOPE_LIMIT",
+      "validated_scope": "RECONSTRUCTION_DOMAIN_ONLY",
+      "supporting_assumptions": ["LA-A003"],
+      "supporting_stress_domains": ["SD-A004"],
+      "mechanism_consistency_status": "DIVERGENT",
+      "counterexample_integrity_status": "PRESERVED",
+      "remaining_blockers": ["reconstruction equivalence incompleteness"],
+      "governance_status": "COMPLIANT"
+    },
+    {
+      "obligation_id": "PO-A005",
+      "candidate_status": "PARTIALLY_DISCHARGED_LOCAL",
+      "outcome": "CONSISTENT_LOCAL",
+      "validated_scope": "LOCAL_RESTRICTED_DOMAIN_ONLY",
+      "supporting_assumptions": ["LA-A002"],
+      "supporting_stress_domains": ["SD-A002"],
+      "mechanism_consistency_status": "ALIGNED",
+      "counterexample_integrity_status": "PRESERVED",
+      "remaining_blockers": ["topology severance divergence hotspots"],
+      "governance_status": "COMPLIANT"
+    },
+    {
+      "obligation_id": "PO-A006",
+      "candidate_status": "PARTIALLY_DISCHARGED_LOCAL",
+      "outcome": "CONSISTENT_LOCAL",
+      "validated_scope": "LOCAL_RESTRICTED_DOMAIN_ONLY",
+      "supporting_assumptions": ["LA-A004"],
+      "supporting_stress_domains": ["SD-A003"],
+      "mechanism_consistency_status": "ALIGNED",
+      "counterexample_integrity_status": "PRESERVED",
+      "remaining_blockers": ["identity continuity ambiguity"],
+      "governance_status": "COMPLIANT"
+    },
+    {
+      "obligation_id": "PO-A007",
+      "candidate_status": "PARTIALLY_DISCHARGED_LOCAL",
+      "outcome": "CONSISTENT_LOCAL",
+      "validated_scope": "ANALOG_MODEL_DOMAIN_ONLY",
+      "supporting_assumptions": ["LA-A005"],
+      "supporting_stress_domains": ["SD-A001", "SD-A002"],
+      "mechanism_consistency_status": "ALIGNED",
+      "counterexample_integrity_status": "PRESERVED",
+      "remaining_blockers": ["cross-mechanism divergence regions"],
+      "governance_status": "COMPLIANT"
+    }
+  ],
+  "governance_flags": {
+    "proof_status": "TS3_local_validation_only",
+    "theorem_status": "NOT_PROVEN",
+    "validation_scope": "LOCAL_RESTRICTED_DOMAIN_ONLY",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL"
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "registry_id": "PCD_THEOREM_STATUS_REGISTRY",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "status_id",
+      "label",
+      "definition",
+      "allowed_claim_classes",
+      "promotion_requirements",
+      "publication_language",
+      "blocked_language"
+    ]
+  },
+  "statuses": [
+    {
+      "status_id": "TS0",
+      "label": "unbound_statement",
+      "definition": "A mathematical statement not yet bound to a lemma, proof, source document, or dependency graph.",
+      "allowed_claim_classes": [
+        "C1"
+      ],
+      "promotion_requirements": [
+        "Bind to source document",
+        "Define lemma/conjecture ID"
+      ],
+      "publication_language": "may be discussed only as an informal motivation or open note",
+      "blocked_language": "lemma, theorem, proven, established"
+    },
+    {
+      "status_id": "TS1",
+      "label": "registered_conjecture",
+      "definition": "A statement registered with source context and dependencies but lacking proof.",
+      "allowed_claim_classes": [
+        "C2"
+      ],
+      "promotion_requirements": [
+        "Formalize statement",
+        "Define dependency chain"
+      ],
+      "publication_language": "conjecture, proposed relation, open formal target",
+      "blocked_language": "proven, derived result, theorem"
+    },
+    {
+      "status_id": "TS2",
+      "label": "conditional_lemma",
+      "definition": "A lemma with a valid dependency chain but conditional on declared assumptions or open gaps.",
+      "allowed_claim_classes": [
+        "C3"
+      ],
+      "promotion_requirements": [
+        "Provide partial proof",
+        "Identify blocking gaps"
+      ],
+      "publication_language": "conditional lemma, under stated assumptions",
+      "blocked_language": "unconditional theorem, closed proof"
+    },
+    {
+      "status_id": "TS3",
+      "label": "proved_within_formal_stack",
+      "definition": "A lemma or theorem proved within the current PCD formal stack, with all dependencies registered.",
+      "allowed_claim_classes": [
+        "C4"
+      ],
+      "promotion_requirements": [
+        "Closed proof document",
+        "All lemma dependencies resolved or at TS3+"
+      ],
+      "publication_language": "proved within the PCD formal stack",
+      "blocked_language": "physical law, empirical fact"
+    },
+    {
+      "status_id": "TS4",
+      "label": "simulation_supported_theorem",
+      "definition": "A formal result with matching governed simulation support and recoverable artifacts.",
+      "allowed_claim_classes": [
+        "C4",
+        "C5"
+      ],
+      "promotion_requirements": [
+        "Matching C4+ simulation evidence",
+        "Simulation-Proof Binding registry entry"
+      ],
+      "publication_language": "formal result with governed simulation support",
+      "blocked_language": "universally verified, experimentally established"
+    },
+    {
+      "status_id": "TS5",
+      "label": "externally_validated_result",
+      "definition": "A formal result with independent reproduction, recoverable artifacts, and external validation.",
+      "allowed_claim_classes": [
+        "C6"
+      ],
+      "promotion_requirements": [
+        "Multi-model independent validation",
+        "External peer review or independent replication"
+      ],
+      "publication_language": "externally validated within stated model class",
+      "blocked_language": "final universal proof"
+    }
+  ],
+  "promotion_gates": [
+    {
+      "theorem_id": "MST-001",
+      "promotion_gate": "MSV-001-THEOREM-PROMOTION-GATE-V1",
+      "current_ceiling": "TS2",
+      "maximum_after_gate_pass": "TS4"
+    },
+    {
+      "theorem_id": "OASSOC-001",
+      "promotion_gate": "MSV-001-THEOREM-PROMOTION-GATE-V1",
+      "current_ceiling": "TS2",
+      "maximum_after_gate_pass": "TS4"
+    }
+  ],
+  "interpretation_bindings": [
+    {
+      "classification": "SUPPORTED_SIMULATION_RESULT",
+      "max_allowed_status": "TS4"
+    },
+    {
+      "classification": "SINGLE_MECHANISM_PROBE",
+      "max_allowed_status": "TS2"
+    },
+    {
+      "classification": "CONTRADICTED_OR_INCONCLUSIVE",
+      "max_allowed_status": "TS1_or_contested"
+    },
+    {
+      "classification": "INVALID_RUNTIME_OR_PROVENANCE",
+      "max_allowed_status": "BLOCKED"
+    }
+  ]
+}

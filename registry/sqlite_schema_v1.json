@@ -1,0 +1,156 @@
+{
+  "registry_id": "PCD_SQLITE_SCHEMA",
+  "version": "1.0.0",
+  "tables": {
+    "tech_notes": [
+      "note_id",
+      "title",
+      "path",
+      "created",
+      "status",
+      "tags_json",
+      "linked_theorems_json",
+      "linked_operators_json",
+      "linked_claims_json",
+      "confidence_scope",
+      "content_hash",
+      "full_text"
+    ],
+    "formal_objects": [
+      "object_id",
+      "object_class",
+      "title",
+      "status",
+      "source_path",
+      "dependency_links_json",
+      "content_hash"
+    ],
+    "theorems": [
+      "theorem_id",
+      "status",
+      "closure_status",
+      "proof_ids_json",
+      "gap_dependencies_json",
+      "claim_scope"
+    ],
+    "claims": [
+      "claim_id",
+      "claim_class",
+      "claim_status",
+      "required_theorems_json",
+      "required_tools_json",
+      "confidence_band",
+      "publication_allowed"
+    ],
+    "tools": [
+      "tool_id",
+      "model_class",
+      "rigor endorsement_level",
+      "runtime_status",
+      "manifest_path",
+      "required_for_json"
+    ],
+    "empirical_results": [
+      "result_package_id",
+      "execution_id",
+      "tool_ids_json",
+      "mechanism_classes_json",
+      "confidence_band",
+      "interpretation_classification",
+      "provenance_status",
+      "path"
+    ],
+    "publications": [
+      "publication_id",
+      "publication_type",
+      "status",
+      "linked_claims_json",
+      "linked_result_packages_json",
+      "maximum_allowed_language"
+    ],
+    "simulation_artifacts": [
+      "artifact_id",
+      "execution_id",
+      "artifact_type",
+      "canonical_path",
+      "content_hash",
+      "size_bytes",
+      "storage_tier",
+      "retention_policy",
+      "compression_status",
+      "provenance_binding",
+      "summary_json"
+    ],
+    "agent_memory": [
+      "memory_id",
+      "memory_type",
+      "created_at",
+      "linked_objects_json",
+      "confidence_scope",
+      "summary_text",
+      "source_hashes_json",
+      "retention_policy",
+      "visibility_scope"
+    ],
+    "reasoning_traces": [
+      "trace_id",
+      "trigger_event",
+      "selected_action",
+      "review_required",
+      "summary_text",
+      "linked_outputs_json",
+      "created_at"
+    ],
+    "semantic_relationships": [
+      "relationship_id",
+      "source_object",
+      "target_object",
+      "relationship_type",
+      "relationship_status",
+      "confidence_scope",
+      "evidence_or_source_path",
+      "review_required",
+      "created_at"
+    ],
+    "semantic_objects": [
+      "object_id",
+      "object_class",
+      "title",
+      "canonical_path",
+      "status",
+      "content_hash"
+    ],
+    "temporal_events": [
+      "event_id",
+      "object_id",
+      "object_class",
+      "event_type",
+      "previous_state_json",
+      "new_state_json",
+      "timestamp",
+      "source_artifact",
+      "reason",
+      "affected_downstream_objects_json",
+      "review_required"
+    ],
+    "object_state_history": [
+      "object_id",
+      "object_class",
+      "state_hash",
+      "state_json",
+      "valid_from",
+      "valid_to",
+      "source_artifact"
+    ]
+    },  "fts_tables": [
+    {
+      "name": "tech_notes_fts",
+      "source_table": "tech_notes",
+      "indexed_columns": [
+        "title",
+        "full_text",
+        "tags_json"
+      ]
+    }
+  ]
+}

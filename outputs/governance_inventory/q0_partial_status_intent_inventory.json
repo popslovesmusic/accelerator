@@ -1,0 +1,169 @@
+{
+  "schema_id": "q0_partial_status_intent_inventory_v1",
+  "generated_at": "2026-07-14T20:00:00-04:00",
+  "scope": [
+    "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002",
+    "PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007",
+    "PATCH_GOVERNANCE_MISSING_DEPENDENCY_003_CHAIN_REPAIR_008",
+    "PATCH_GOVERNANCE_PATCH_002_TYPED_DEPENDENCY_RUNTIME_009",
+    "PATCH_GOVERNANCE_Q0_TYPED_DEPENDENCY_RUNTIME_SNAPSHOT_010"
+  ],
+  "summary": {
+    "dependency_chain_failures": 0,
+    "classification_counts": {
+      "INTENTIONALLY_TRANSITIONAL": 1,
+      "IMPLEMENTED_BUT_COMPLETION_RECORD_MISSING": 3,
+      "FORWARD_COMPLETION_PATCH_REQUIRED": 0,
+      "BLOCKED_BY_EXTERNAL_PROGRAM_GATE": 0,
+      "STATUS_METADATA_STALE": 1,
+      "UNPROVEN": 0
+    },
+    "status_mutations_performed": 0
+  },
+  "patches": [
+    {
+      "patch_id": "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002",
+      "current_status": "PARTIAL",
+      "classification": "INTENTIONALLY_TRANSITIONAL",
+      "patch_local_requirements_complete": false,
+      "remaining_patch_local_work": [
+        "Resolve the 514 blocking ambiguities recorded in inventory_completion_gate before the inventory can claim complete governance coverage.",
+        "Satisfy the patch's own objective of a complete machine-readable governance inventory rather than only a registered transitional evidence set."
+      ],
+      "external_gate": null,
+      "recommended_status_action": "KEEP_PARTIAL",
+      "evidence": [
+        {
+          "path": "registry/governance/patches/PATCH_GOVERNANCE_GLOBAL_INVENTORY_002.json",
+          "note": "authority_effect.classification is NONE, registration_gate is PASS, and inventory_completion_gate remains BLOCKED with 514 unresolved ambiguities."
+        },
+        {
+          "path": "registry/governance/patches/PATCH_GOVERNANCE_GLOBAL_INVENTORY_002.json",
+          "note": "authority_registration.inventory_registration marks the artifact as TRANSITIONAL_GOVERNANCE_EVIDENCE_SET with status PARTIAL."
+        },
+        {
+          "path": "outputs/governance_inventory/q0_typed_dependency_runtime_snapshot.json",
+          "note": "The corrected runtime preserves patch 002 as PARTIAL with authority effect NONE and no dependency-chain blocker."
+        }
+      ]
+    },
+    {
+      "patch_id": "PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007",
+      "current_status": "PARTIAL",
+      "classification": "IMPLEMENTED_BUT_COMPLETION_RECORD_MISSING",
+      "patch_local_requirements_complete": true,
+      "remaining_patch_local_work": [],
+      "external_gate": null,
+      "recommended_status_action": "CREATE_FORWARD_COMPLETION_RECORD_OR_UPDATE_STATUS_THROUGH_AUTHORIZED_GOVERNANCE_PATH",
+      "evidence": [
+        {
+          "path": "patches/PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007.json",
+          "note": "The patch declares materialization of the Q0 authority partition, role-aware access, exclusive write boundaries, and validator reduction boundaries as its primary contract."
+        },
+        {
+          "path": "patches/PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007.json",
+          "note": "artifact_bundle contains the registered core rule, partition artifact, before/after state, diff, write owners, validator partition, instruction partition, queue, review, and live authority access inventory."
+        },
+        {
+          "path": "patches/PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007.json",
+          "note": "validation_results show focused governance validation pass and governance-only validator pass; full project validation was a non-goal and remains suspended globally."
+        },
+        {
+          "path": "tests/governance_validation/test_q0_authority_scope_partition_completion_record.py",
+          "note": "The completion-record test proves the registered artifacts and validation evidence exist and are synchronized."
+        }
+      ]
+    },
+    {
+      "patch_id": "PATCH_GOVERNANCE_MISSING_DEPENDENCY_003_CHAIN_REPAIR_008",
+      "current_status": "PARTIAL",
+      "classification": "STATUS_METADATA_STALE",
+      "patch_local_requirements_complete": true,
+      "remaining_patch_local_work": [],
+      "external_gate": null,
+      "recommended_status_action": "CREATE_FORWARD_STATUS_CORRECTION_WITH_EVIDENCE",
+      "evidence": [
+        {
+          "path": "patches/PATCH_GOVERNANCE_MISSING_DEPENDENCY_003_CHAIN_REPAIR_008.json",
+          "note": "The declared repair outcome is HISTORICAL_REFERENCE_UNMATERIALIZED_LIVE_DEPENDENCY_REPAIRED and the patch-local scope is limited to removing the absent patch 003 as a live dependency."
+        },
+        {
+          "path": "tests/governance_validation/test_patch_008_missing_dependency_chain_repair.py",
+          "note": "The targeted test proves patch 003 was removed as a live dependency without fabricating historical artifacts."
+        },
+        {
+          "path": "outputs/governance_inventory/q0_typed_dependency_runtime_snapshot.json",
+          "note": "The later runtime snapshot proves there is no remaining dependency-chain blocker in the repaired Q0 chain."
+        },
+        {
+          "path": "patches/PATCH_GOVERNANCE_MISSING_DEPENDENCY_003_CHAIN_REPAIR_008.json",
+          "note": "validation_results.targeted_patch_chain_resolution still records dependency_chain_not_satisfied as the remaining blocker, which conflicts with the later governed runtime evidence."
+        }
+      ]
+    },
+    {
+      "patch_id": "PATCH_GOVERNANCE_PATCH_002_TYPED_DEPENDENCY_RUNTIME_009",
+      "current_status": "PARTIAL",
+      "classification": "IMPLEMENTED_BUT_COMPLETION_RECORD_MISSING",
+      "patch_local_requirements_complete": true,
+      "remaining_patch_local_work": [],
+      "external_gate": null,
+      "recommended_status_action": "CREATE_FORWARD_COMPLETION_RECORD_OR_UPDATE_STATUS_THROUGH_AUTHORIZED_GOVERNANCE_PATH",
+      "evidence": [
+        {
+          "path": "patches/PATCH_GOVERNANCE_PATCH_002_TYPED_DEPENDENCY_RUNTIME_009.json",
+          "note": "The patch purpose is fully bounded to adding typed dependency semantics to the runtime so transitional evidence predecessors satisfy existence-based edges without false promotion."
+        },
+        {
+          "path": "outputs/governance_inventory/patch_002_dependency_edge_inventory.json",
+          "note": "The governed inventory records the before/after runtime reduction behavior and the proven typed dependency model for patch 002."
+        },
+        {
+          "path": "tests/governance_validation/test_patch_009_typed_dependency_runtime.py",
+          "note": "The targeted runtime test proves PARTIAL normalizes to partial and the Q0 chain no longer reports dependency_chain_not_satisfied."
+        },
+        {
+          "path": "patches/PATCH_GOVERNANCE_PATCH_002_TYPED_DEPENDENCY_RUNTIME_009.json",
+          "note": "validation_results show targeted dependency-chain tests, targeted pytest, compileall, git diff check, and git status all passing."
+        }
+      ]
+    },
+    {
+      "patch_id": "PATCH_GOVERNANCE_Q0_TYPED_DEPENDENCY_RUNTIME_SNAPSHOT_010",
+      "current_status": "PARTIAL",
+      "classification": "IMPLEMENTED_BUT_COMPLETION_RECORD_MISSING",
+      "patch_local_requirements_complete": true,
+      "remaining_patch_local_work": [],
+      "external_gate": null,
+      "recommended_status_action": "CREATE_FORWARD_COMPLETION_RECORD_OR_UPDATE_STATUS_THROUGH_AUTHORIZED_GOVERNANCE_PATH",
+      "evidence": [
+        {
+          "path": "patches/PATCH_GOVERNANCE_Q0_TYPED_DEPENDENCY_RUNTIME_SNAPSHOT_010.json",
+          "note": "The patch purpose is solely to freeze the corrected runtime state and classify the remaining non-blocking edges."
+        },
+        {
+          "path": "outputs/governance_inventory/q0_typed_dependency_runtime_snapshot.json",
+          "note": "The snapshot artifact exists and records zero runtime blocking edges, with partial/defer caused by self-status rather than dependency failure."
+        },
+        {
+          "path": "tests/governance_validation/test_patch_010_q0_typed_dependency_runtime_snapshot.py",
+          "note": "The targeted test proves the snapshot classification counts and hash registration are correct."
+        },
+        {
+          "path": "patches/PATCH_GOVERNANCE_Q0_TYPED_DEPENDENCY_RUNTIME_SNAPSHOT_010.json",
+          "note": "validation_results show targeted runtime snapshot checks, targeted edge-classification tests, compileall, git diff check, and git status all passing."
+        }
+      ]
+    }
+  ],
+  "conclusion": {
+    "patch_local_completion_and_program_completion_are_distinct": true,
+    "patch_002_should_remain_partial": true,
+    "recommended_forward_status_corrections": [
+      "PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007",
+      "PATCH_GOVERNANCE_MISSING_DEPENDENCY_003_CHAIN_REPAIR_008",
+      "PATCH_GOVERNANCE_PATCH_002_TYPED_DEPENDENCY_RUNTIME_009",
+      "PATCH_GOVERNANCE_Q0_TYPED_DEPENDENCY_RUNTIME_SNAPSHOT_010"
+    ]
+  }
+}

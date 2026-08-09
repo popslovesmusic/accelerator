@@ -1,0 +1,194 @@
+{
+  "registry_id": "LIVING_FALSIFICATION_CAMPAIGN_REGISTRY",
+  "version": "1.0.0",
+  "campaigns": [
+    {
+      "campaign_id": "LFCR_ORIENTATION_TRIADIC_CLOSURE_ATTACK_001",
+      "campaign_name": "Orientation-Triadic Closure Falsification Attack",
+      "campaign_type": "living_falsification_campaign",
+      "status": "HISTORICAL_FALSIFIED_DIRECT_SUPPORT_FORMULATION",
+      "target_claim": {
+        "claim_id": "MPF_CLAIM_ORIENTATION_RESIDUE_TRIADIC_CLOSURE_REQUIRED",
+        "statement": "Stable non-collapsing triadic closure requires orientation-conditioned admissibility plus residue support.",
+        "current_claim_level": "FALSIFIED",
+        "claim_cap_downstream": "REVIEW_LOCK"
+      },
+      "target_bridge": {
+        "bridge_id": "OPEN_BRIDGE_001",
+        "bridge_name": "Orientation-Closure Bridge (superseded direct-support formulation)",
+        "textbook_location": "Chapter 5.2A",
+        "status": "SUPERSEDED_BY_TOPOLOGICAL_SELECTOR_REFORMULATION"
+      },
+      "scope_note": "This campaign records the falsification of the earlier direct-support bridge claim. It does not override the later reformulated topological-selector result recorded for OPEN_BRIDGE_001.",
+      "linked_sections": {
+        "primary": [
+          "Chapter 5.2A",
+          "Chapter 4.X",
+          "Chapter 10.1-10.2"
+        ],
+        "appendices": [
+          "Appendix B",
+          "Appendix D",
+          "Appendix E",
+          "Appendix F"
+        ]
+      },
+      "attack_method": {
+        "method_id": "CENTER_CONTROL_FALSIFICATION_ATTACK",
+        "installed_by_patch": "MPF_PATCH_001F_TEXTBOOK_LINKED_ATTACK_FLOW",
+        "attack_surfaces": [
+          "orientation_removal",
+          "orientation_randomization",
+          "orientation_shuffling",
+          "residue_dominance",
+          "admissibility_dominance",
+          "topology_fixed_no_orientation",
+          "matched_random_admissibility"
+        ]
+      },
+      "active_patch_series": [
+        "MPF_PATCH_001A_OPEN_BRIDGE_001_FORMALIZATION",
+        "MPF_PATCH_001B_BRIDGE_DEPENDENCY_MAP",
+        "MPF_PATCH_001C_ATTACK_SURFACE_MAP",
+        "MPF_PATCH_001D_PROOF_OBLIGATION_OBJECT",
+        "MPF_PATCH_001E_ACTUAL_ATTACK_PROTOCOL",
+        "MPF_PATCH_001F_TEXTBOOK_LINKED_ATTACK_FLOW",
+        "MPF_PATCH_001G_TEXTBOOK_STATUS_TABLE_INSERT",
+        "MPF_PATCH_001H_SIMULATION_CONFIG_MATRIX",
+        "MPF_PATCH_001I_EVIDENCE_REPORT_SCHEMA",
+        "MPF_PATCH_001J_TEXTBOOK_UPDATE_PATCH_TEMPLATE",
+        "MPF_PATCH_001K_CAMPAIGN_AUDIT_TRAIL_SCHEMA",
+        "MPF_PATCH_001L_CAMPAIGN_REGISTRY_BOOTSTRAP_ENTRY",
+        "MPF_PATCH_001M_RUN_MANIFEST_TEMPLATE"
+      ],
+      "current_artifact_status": {
+        "bridge_formalization": "DEFINED",
+        "dependency_map": "DEFINED",
+        "attack_surface_map": "DEFINED",
+        "proof_obligation": "DEFINED",
+        "actual_attack_protocol": "DEFINED",
+        "textbook_link_flow": "DEFINED",
+        "status_table_entry": "DEFINED",
+        "simulation_config_matrix": "READY",
+        "evidence_report_schema": "DEFINED",
+        "textbook_update_template": "DEFINED",
+        "audit_trail_schema": "DEFINED",
+        "run_manifest_template": "DEFINED"
+      },
+      "simulation_status": {
+        "sim_campaign_id": "SIM_ORIENTATION_CLOSURE_ATTACK_001",
+        "status": "READY_FOR_IMPLEMENTATION",
+        "required_models": [
+          "M0_full",
+          "M1_no_orientation",
+          "M2_random_orientation",
+          "M3_shuffled_orientation",
+          "M4_residue_only",
+          "M5_admissibility_only",
+          "M6_fixed_topology_no_orientation",
+          "M7_random_admissibility"
+        ],
+        "minimum_seed_count": 64,
+        "minimum_main_sample_size": 100000
+      },
+      "decision_state": {
+        "current_result": "FALSIFIED_HISTORICAL_SCOPE_RETAINED",
+        "support_condition": "M0_full outperforms every attack model by tau >= 0.05 with stable seed variance.",
+        "downgrade_condition": "M0_full wins weakly, inconsistently, or only under tuned parameters.",
+        "falsification_condition": "Any attack model matches or exceeds M0_full within tau."
+      },
+      "textbook_sync": {
+        "sync_status": "LIVE_LINKED",
+        "on_result_update": [
+          "Update Chapter 5.2A bridge status.",
+          "Update Appendix E simulation evidence.",
+          "Update Appendix F open bridge status.",
+          "Update Appendix D claim-level governance.",
+          "Create audit trail entry."
+        ]
+      },
+      "governance_blocks": [
+        "Do not promote TC_asym above OPEN_BRIDGE_001 claim level.",
+        "Do not promote K or B_K above OPEN_BRIDGE_001 claim level.",
+        "Do not promote topology_app, geometry_app, field_app, gravity_app, or QM_app_GR_app_bridge using this campaign alone.",
+        "Do not mark bridge closed without validated evidence report."
+      ]
+    }
+  ],
+  "audit_trails": [
+    {
+      "audit_trail_id": "AUDIT_LFCR_001",
+      "campaign_id": "LFCR_ORIENTATION_TRIADIC_CLOSURE_ATTACK_001",
+      "bridge_id": "OPEN_BRIDGE_001",
+      "created_at": "2026-05-29",
+      "last_updated": "2026-05-29",
+      "entries": [
+        {
+          "entry_id": "AUDIT_LFCR_001_BOOTSTRAP",
+          "entry_type": "PATCH",
+          "timestamp": "2026-05-29T10:00:00",
+          "actor": "agent",
+          "source_patch_id": "MPF_PATCH_001L_CAMPAIGN_REGISTRY_BOOTSTRAP_ENTRY",
+          "source_artifact": "registry/governance/living_falsification_campaign_registry.json",
+          "affected_sections": [
+            "Chapter 5.2A",
+            "Chapter 4.X",
+            "Chapter 10.1-10.2",
+            "Appendix D",
+            "Appendix E",
+            "Appendix F"
+          ],
+          "old_status": "UNREGISTERED",
+          "new_status": "ACTIVE_UNDER_ATTACK",
+          "reason": "Bootstrap first living falsification campaign into registry and textbook-linked update flow.",
+          "hash_or_reference": "pending_repository_commit"
+        },
+        {
+          "entry_id": "AUDIT_LFCR_001_RUN_MANIFEST",
+          "entry_type": "PATCH",
+          "timestamp": "2026-05-29T11:00:00",
+          "actor": "agent",
+          "source_patch_id": "MPF_PATCH_001M_RUN_MANIFEST_TEMPLATE",
+          "source_artifact": "registry/governance/schemas/RUN_MANIFEST_V1.json",
+          "affected_sections": [],
+          "old_status": "DEFINED",
+          "new_status": "ACTIVE",
+          "reason": "Define canonical run manifest template for reproducible and auditable falsification runs.",
+          "hash_or_reference": "pending_repository_commit"
+        },
+        {
+          "entry_id": "AUDIT_LFCR_001_FALSIFICATION",
+          "entry_type": "CLAIM_LEVEL_CHANGE",
+          "timestamp": "2026-05-30T10:00:00Z",
+          "actor": "agent",
+          "source_patch_id": "MPF_PATCH_002J",
+          "source_artifact": "results/LFCR_001_stress_ensemble/evidence_report.json",
+          "affected_sections": [
+            "Chapter 5.2A",
+            "Appendix D",
+            "Appendix F"
+          ],
+          "old_status": "ACTIVE_UNDER_ATTACK",
+          "new_status": "FALSIFIED",
+          "reason": "Orientation effect (0.008) failed threshold tau=0.05. Strong participatory claim (Model B) falsified.",
+          "hash_or_reference": "e8d2f3c1"
+        },
+        {
+          "entry_id": "AUDIT_LFCR_001_RESOLUTION_INIT",
+          "entry_type": "REWRITE",
+          "timestamp": "2026-05-30T11:00:00Z",
+          "actor": "agent",
+          "source_patch_id": "MPF_PATCH_002L",
+          "source_artifact": "registry/math/open_bridge_registry.json",
+          "affected_sections": [
+            "Chapter 5.2A"
+          ],
+          "old_status": "FALSIFIED",
+          "new_status": "REWRITE_PENDING",
+          "reason": "Transition to Model A (Orientation as Consequence) following falsification of Model B.",
+          "hash_or_reference": "pending_v2_formalization"
+        }
+      ]
+    }
+  ]
+}

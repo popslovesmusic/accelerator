@@ -1,0 +1,66 @@
+{
+  "artifact_id": "metric_invariants_trace_059",
+  "artifact_type": "metric_invariant_trace_schema",
+  "status": "DRAFT_PROVISIONAL",
+  "scope": "documentation_only",
+  "source_patch_id": "PATCH_PI_RT_CALCULUS_059",
+  "purpose": "Record ordered invariant-preservation checks for admissible context-preserving transformations of EMS_Δ.",
+  "trace_fields": [
+    "source_context",
+    "target_context",
+    "transformation_id",
+    "declared_EMS_Δ",
+    "preserved_ordinal_order",
+    "preserved_transition_trace",
+    "preserved_boundary_classification",
+    "preserved_context_identity",
+    "RT_core_state",
+    "diagnostic_result"
+  ],
+  "trace_pattern": [
+    {
+      "step": "1",
+      "operation": "declare",
+      "note": "State the context and admitted EMS_Δ before comparing transformations."
+    },
+    {
+      "step": "2",
+      "operation": "transform",
+      "note": "Apply T_inv only if the context remains explicit."
+    },
+    {
+      "step": "3",
+      "operation": "compare",
+      "note": "Check ordinal ordering, trace reconstructibility, boundary identity, and context identity."
+    },
+    {
+      "step": "4",
+      "operation": "diagnose",
+      "note": "Record structural preservation or failure without importing numerical value."
+    }
+  ],
+  "transition_types": [
+    "PRESERVATION",
+    "CONTEXT_SHIFT",
+    "TRACE_BREAK",
+    "BOUNDARY_RECLASSIFICATION",
+    "INVALID_METRIC_IMPORT"
+  ],
+  "governance_rules": [
+    "Trace order must be preserved.",
+    "Context identity must be explicit.",
+    "No numeric magnitude is recorded.",
+    "No topology or differentiability is inferred."
+  ],
+  "forbidden_inferences": [
+    "Trace does not imply metric space.",
+    "Trace does not imply equality.",
+    "Trace does not imply physical measurement."
+  ],
+  "non_claims": [
+    "Does not define a metric tensor.",
+    "Does not define topology.",
+    "Does not define a coordinate chart.",
+    "Does not modify RT_core."
+  ]
+}

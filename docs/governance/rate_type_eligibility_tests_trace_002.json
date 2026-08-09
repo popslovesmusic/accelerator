@@ -1,0 +1,103 @@
+{
+  "document_id": "DOC_RATE_TYPE_ELIGIBILITY_TESTS_TRACE_002",
+  "artifact_type": "rate_type_eligibility_test_trace",
+  "status": "DRAFT_PROVISIONAL",
+  "scope": "governance_execution_surface",
+  "source_patch_id": "PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_TESTS_002",
+  "source_artifacts": [
+    {
+      "path": "docs/governance/rate_type_eligibility_tests_002.json",
+      "status": "current_governance_witness",
+      "used_for": "test suite specification"
+    },
+    {
+      "path": "docs/governance/rate_type_eligibility_candidate_001.json",
+      "status": "current_governance_witness",
+      "used_for": "predicate witness under test"
+    },
+    {
+      "path": "docs/governance/bridge_admissibility_protocol_061.json",
+      "status": "current_governance_surface",
+      "used_for": "declared mapping and admissibility discipline"
+    },
+    {
+      "path": "docs/governance/propagation_rate_density_endpoint_candidate_003.json",
+      "status": "current_governance_witness",
+      "used_for": "boundary and endpoint context"
+    }
+  ],
+  "purpose": "Show the ordered adversarial evaluation pipeline for RATE_TYPE_ELIGIBLE(x, phi) across pass, fail, and edge-case candidates.",
+  "claim_humility": {
+    "current_status": "candidate_trace_only",
+    "non_claims": [
+      "Does not prove bridge truth.",
+      "Does not promote any bridge candidate.",
+      "Does not modify RT_core.",
+      "Does not replace adversarial testing.",
+      "Does not collapse admission into validation."
+    ]
+  },
+  "ordered_trace": [
+    {
+      "test_id": "RTE_TEST_PASS_001",
+      "domain": "coupled interior propagation",
+      "candidate_x": "X_RTE_PASS_001",
+      "reference_phi": "phi_declared_001",
+      "condition_checks": {
+        "DOF(x) > 0": true,
+        "Coupled_AE(x)": true,
+        "Declared(phi)": true,
+        "OrderedIntermediate(x, phi)": true,
+        "EndpointCompatible(x, phi)": true,
+        "GenExclusionBeforeClosure(x, phi)": true
+      },
+      "failure_class": null,
+      "result": "PASS",
+      "notes": "Admits further bridge development only; no promotion follows from the pass."
+    },
+    {
+      "test_id": "RTE_TEST_FAIL_001",
+      "domain": "true decoupled endpoint",
+      "candidate_x": "X_RTE_FAIL_001",
+      "reference_phi": "phi_declared_001",
+      "condition_checks": {
+        "DOF(x) > 0": false,
+        "Coupled_AE(x)": false,
+        "Declared(phi)": true,
+        "OrderedIntermediate(x, phi)": false,
+        "EndpointCompatible(x, phi)": false,
+        "GenExclusionBeforeClosure(x, phi)": false
+      },
+      "failure_class": "RATE_TYPE_INELIGIBLE_ZERO_DOF",
+      "result": "FAIL",
+      "notes": "A true 0 DOF endpoint cannot support rate-typed bridge evaluation."
+    },
+    {
+      "test_id": "RTE_TEST_EDGE_001",
+      "domain": "near-tie below floor",
+      "candidate_x": "X_RTE_EDGE_001",
+      "reference_phi": "phi_declared_edge_001",
+      "condition_checks": {
+        "DOF(x) > 0": true,
+        "Coupled_AE(x)": true,
+        "Declared(phi)": true,
+        "OrderedIntermediate(x, phi)": true,
+        "EndpointCompatible(x, phi)": true,
+        "GenExclusionBeforeClosure(x, phi)": false
+      },
+      "failure_class": "RATE_TYPE_INELIGIBLE_NO_GENERATIVE_EXCLUSION",
+      "result": "EDGE",
+      "notes": "The candidate remains structurally interior but fails declared admissibility under phi, so the trace preserves ambiguity rather than collapsing into pass/fail."
+    }
+  ],
+  "forbidden_inference": [
+    "A pass does not imply promotion.",
+    "A fail does not invalidate RT_core.",
+    "An edge result does not resolve admissibility ambiguity.",
+    "The trace does not define a completed metric."
+  ],
+  "trace_reading": {
+    "status": "candidate_only",
+    "statement": "The trace records a governance screen that must be satisfied before rate-based bridge testing, not a promotion rule for the bridge itself."
+  }
+}

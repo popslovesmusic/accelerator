@@ -1,0 +1,158 @@
+{
+  "document_id": "DOC_RATE_TYPE_ELIGIBILITY_RESULTS_TRACE_003",
+  "artifact_type": "rate_type_eligibility_results_trace",
+  "status": "DRAFT_PROVISIONAL",
+  "scope": "governance_execution_surface",
+  "source_patch_id": "PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_RESULTS_003",
+  "source_artifacts": [
+    {
+      "path": "docs/governance/rate_type_eligibility_results_003.json",
+      "status": "current_governance_witness",
+      "used_for": "concrete result classes and trace requirements"
+    },
+    {
+      "path": "docs/governance/rate_type_eligibility_tests_002.json",
+      "status": "current_governance_witness",
+      "used_for": "PASS, FAIL, and EDGE class protocol"
+    },
+    {
+      "path": "docs/governance/rate_type_eligibility_candidate_001.json",
+      "status": "current_governance_witness",
+      "used_for": "predicate witness under test"
+    },
+    {
+      "path": "docs/governance/bridge_admissibility_protocol_061.json",
+      "status": "current_governance_surface",
+      "used_for": "declared mapping and admissibility discipline"
+    },
+    {
+      "path": "docs/textbook/mono_process_textbook_complete.md",
+      "status": "current_textbook_surface",
+      "used_for": "governed results context"
+    }
+  ],
+  "purpose": "Show the ordered trace for the three concrete rate-type eligibility outcomes under declared phi values.",
+  "claim_humility": {
+    "current_status": "candidate_trace_only",
+    "non_claims": [
+      "Does not prove bridge truth.",
+      "Does not promote any bridge candidate.",
+      "Does not modify RT_core.",
+      "Does not replace adversarial testing.",
+      "Does not collapse admission into validation."
+    ]
+  },
+  "ordered_trace": [
+    {
+      "test_id": "RTE_RESULT_PASS_001",
+      "domain": "physics-domain propagation interior",
+      "candidate_x": "Coupled interior propagation candidate",
+      "reference_phi": "phi_phys := declared propagation-reference frame for bounded coupled continuation",
+      "condition_checks": {
+        "DOF(x) > 0": "PASS",
+        "Coupled_AE(x)": "PASS",
+        "Declared(phi)": "PASS",
+        "OrderedIntermediate(x, phi)": "PASS",
+        "EndpointCompatible(x, phi)": "PASS",
+        "GenExclusionBeforeClosure(x, phi)": "PASS"
+      },
+      "primary_failure_class": null,
+      "secondary_failure_classes_if_any": [],
+      "result_class": "PASS",
+      "result": "RATE_TYPE_ELIGIBLE",
+      "promotion_effect": "None",
+      "notes": "The candidate remains inside the coupled interior and is eligible for further bridge testing only."
+    },
+    {
+      "test_id": "RTE_RESULT_FAIL_001",
+      "domain": "endpoint limit / decoupled symmetry",
+      "candidate_x": "True 0 DOF endpoint candidate",
+      "reference_phi": "phi_endpoint := declared endpoint-reference frame",
+      "condition_checks": {
+        "DOF(x) > 0": "FAIL",
+        "Coupled_AE(x)": "FAIL",
+        "Declared(phi)": "PASS",
+        "OrderedIntermediate(x, phi)": "FAIL",
+        "EndpointCompatible(x, phi)": "FAIL",
+        "GenExclusionBeforeClosure(x, phi)": "FAIL"
+      },
+      "primary_failure_class": "RATE_TYPE_INELIGIBLE_ZERO_DOF",
+      "secondary_failure_classes_if_any": [
+        "RATE_TYPE_INELIGIBLE_DECOUPLED_AE",
+        "RATE_TYPE_INELIGIBLE_ENDPOINT_ONLY_EVALUATION",
+        "RATE_TYPE_INELIGIBLE_ENDPOINT_MISMATCH",
+        "RATE_TYPE_INELIGIBLE_NO_GENERATIVE_EXCLUSION"
+      ],
+      "result_class": "FAIL",
+      "result": "RATE_TYPE_INELIGIBLE",
+      "promotion_effect": "None",
+      "notes": "A true 0 DOF endpoint cannot support rate-typed bridge evaluation."
+    },
+    {
+      "test_id": "RTE_RESULT_EDGE_001",
+      "domain": "probability/statistical near-tie regime",
+      "candidate_x": "Near-tie distinction-density candidate below declared admissibility floor",
+      "reference_phi": "phi_stat := declared statistical admissibility-floor reference",
+      "condition_checks": {
+        "DOF(x) > 0": "PASS",
+        "Coupled_AE(x)": "PASS",
+        "Declared(phi)": "PASS",
+        "OrderedIntermediate(x, phi)": "EDGE",
+        "EndpointCompatible(x, phi)": "PASS",
+        "GenExclusionBeforeClosure(x, phi)": "EDGE"
+      },
+      "primary_failure_class": "UNRESOLVED_BELOW_FLOOR_INDETERMINACY",
+      "secondary_failure_classes_if_any": [],
+      "result_class": "EDGE",
+      "result": "RATE_TYPE_EDGE_CASE",
+      "promotion_effect": "None",
+      "notes": "The candidate remains structurally interior but fails declared admissibility under phi, so the trace preserves ambiguity rather than collapsing into pass/fail."
+    }
+  ],
+  "trace_order": [
+    "declare phi",
+    "evaluate DOF",
+    "evaluate A|E coupling",
+    "evaluate ordered intermediate relation",
+    "evaluate endpoint compatibility",
+    "evaluate generative exclusion before closure",
+    "assign result class",
+    "record promotion effect"
+  ],
+  "failure_class_map": [
+    {
+      "condition": "DOF(x) > 0",
+      "failure_code": "RATE_TYPE_INELIGIBLE_ZERO_DOF"
+    },
+    {
+      "condition": "Coupled_AE(x)",
+      "failure_code": "RATE_TYPE_INELIGIBLE_DECOUPLED_AE"
+    },
+    {
+      "condition": "Declared(phi)",
+      "failure_code": "RATE_TYPE_INELIGIBLE_UNDECLARED_REFERENCE"
+    },
+    {
+      "condition": "OrderedIntermediate(x, phi)",
+      "failure_code": "RATE_TYPE_INELIGIBLE_ENDPOINT_ONLY_EVALUATION"
+    },
+    {
+      "condition": "EndpointCompatible(x, phi)",
+      "failure_code": "RATE_TYPE_INELIGIBLE_ENDPOINT_MISMATCH"
+    },
+    {
+      "condition": "GenExclusionBeforeClosure(x, phi)",
+      "failure_code": "RATE_TYPE_INELIGIBLE_NO_GENERATIVE_EXCLUSION"
+    }
+  ],
+  "forbidden_inference": [
+    "A pass does not imply promotion.",
+    "A fail does not invalidate RT_core.",
+    "An edge result does not resolve admissibility ambiguity.",
+    "The trace does not define a completed metric."
+  ],
+  "trace_reading": {
+    "status": "candidate_only",
+    "statement": "The trace records a governance screen that must be satisfied before rate-based bridge testing, not a promotion rule for the bridge itself."
+  }
+}

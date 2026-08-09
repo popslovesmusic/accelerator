@@ -1,0 +1,18 @@
+{
+  "fixture_set_id": "AX-R02_TYPE_COMPATIBILITY_FIXTURES_001",
+  "axiom_id": "AX-R02_TYPE_COMPATIBILITY",
+  "status": "PROVISIONAL_PENDING_VALIDATION",
+  "typed_signature": "| : BoundedSymmetry × UnboundedSymmetry -> SymmetryCondition",
+  "positive": [
+    {"fixture_id":"AX-R02-POS-001","expression":"<S> | >S<","left_type":"BoundedSymmetry","right_type":"UnboundedSymmetry","expected":"TYPE_COMPATIBLE","expected_return_type":"SymmetryCondition"},
+    {"fixture_id":"AX-R02-POS-002","expression":"b | u","premises":["b : BoundedSymmetry","u : UnboundedSymmetry"],"expected":"TYPE_COMPATIBLE","expected_return_type":"SymmetryCondition"}
+  ],
+  "rejected": [
+    {"fixture_id":"AX-R02-NEG-001","expression":"<S> | <S>","left_type":"BoundedSymmetry","right_type":"BoundedSymmetry","expected":"TYPE_ERROR_RIGHT_OPERAND"},
+    {"fixture_id":"AX-R02-NEG-002","expression":">S< | >S<","left_type":"UnboundedSymmetry","right_type":"UnboundedSymmetry","expected":"TYPE_ERROR_LEFT_OPERAND"},
+    {"fixture_id":"AX-R02-NEG-003","expression":"S | >S<","left_type":"SymmetryCondition","right_type":"UnboundedSymmetry","expected":"TYPE_ERROR_LEFT_OPERAND","reason":"Generic SymmetryCondition is not coerced to BoundedSymmetry."},
+    {"fixture_id":"AX-R02-NEG-004","expression":"<S> | S","left_type":"BoundedSymmetry","right_type":"SymmetryCondition","expected":"TYPE_ERROR_RIGHT_OPERAND","reason":"Generic SymmetryCondition is not coerced to UnboundedSymmetry."},
+    {"fixture_id":"AX-R02-NEG-005","expression":"x | y","left_type":"Unknown","right_type":"Unknown","expected":"TYPE_ERROR_BOTH_OPERANDS"}
+  ],
+  "negative_scope_assertions": ["No generic subtype coercion", "No substitution rule", "No composition rule", "No commutativity conclusion"]
+}

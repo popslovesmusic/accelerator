@@ -1,0 +1,86 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Registry for recursive selection-stability conditions in Phase 3.",
+    "status": "provisional",
+    "last_updated": "2026-05-12"
+  },
+  "selection_stability_entries": [
+    {
+      "id": "RC-005",
+      "name": "Selection Stability Under Recursion",
+      "status": "symbolic_supported_candidate",
+      "purpose": "Represent bounded recursive selection behavior without collapsing nondeterministic continuation structure.",
+      "depends_on": [
+        "RC-004",
+        "delta_selection",
+        "selection_uniqueness",
+        "branch_pruning",
+        "orientation_minimization",
+        "recursive_convergence",
+        "transition_flux_convergence",
+        "residue_behavior"
+      ],
+      "selection_stability_conditions": [
+        {
+          "id": "SSC-001",
+          "name": "recursive_selection_remains_admissible",
+          "description": "Each selected recursive update must satisfy current admissibility constraints."
+        },
+        {
+          "id": "SSC-002",
+          "name": "branch_retention_remains_bounded",
+          "description": "The number of concurrent process branches does not diverge under recursive selection."
+        },
+        {
+          "id": "SSC-003",
+          "name": "orientation_drift_remains_bounded",
+          "description": "Deviation from the base orientation frame stays within the recurrence-basin limits."
+        },
+        {
+          "id": "SSC-004",
+          "name": "transport_flux_remains_finite",
+          "description": "Transition flux does not exhibit infinite growth per recursive step."
+        },
+        {
+          "id": "SSC-005",
+          "name": "selection_does_not_force_unique_continuation",
+          "description": "Recursive selection logic does not bypass multi-valued continuation where required."
+        },
+        {
+          "id": "SSC-006",
+          "name": "delta_nondeterminism_preserved",
+          "description": "Core delta non-determinism remains active across the recursion chain."
+        },
+        {
+          "id": "SSC-007",
+          "name": "branch_pruning_preserves_required_witness",
+          "description": "Pruning does not result in an empty admissible candidate set during recursive updates."
+        },
+        {
+          "id": "SSC-008",
+          "name": "residue_accumulation_does_not_force_basin_escape",
+          "description": "Residue update sequence remains below the threshold for regime switching or basin escape."
+        }
+      ],
+      "failure_modes_to_preserve": [
+        "selection_instability",
+        "branch_explosion",
+        "degenerate_minima",
+        "orientation_locking",
+        "recursive_drift_accumulation",
+        "transport_divergence",
+        "basin_escape",
+        "selection_collapse_to_determinism"
+      ],
+      "governance_constraints": {
+        "deterministic_selection_claimed": false,
+        "unique_continuation_claimed": false,
+        "global_convergence_claimed": false,
+        "physics_validation_claimed": false,
+        "global_closure_claimed": false
+      },
+      "provisional_status": true
+    }
+  ]
+}

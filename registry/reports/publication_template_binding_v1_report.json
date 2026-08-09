@@ -1,0 +1,46 @@
+{
+  "report_id": "PUBLICATION_TEMPLATE_BINDING_V1_REPORT",
+  "timestamp": "2026-05-08T13:15:00Z",
+  "status": "COMPLETED",
+  "patch_id": "PCD_PUBLICATION_TEMPLATE_BINDING_V1",
+  "summary": "Formalized the binding of governed PCD publications to the formal stack and claim-support matrix. Established publication template registry and implemented guardrails for formal papers.",
+  "operations_summary": [
+    {
+      "operation": "create_publication_template_schema",
+      "target": "registry/publication_template_registry.json",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "register_pcd_paper_template_v1",
+      "target": "registry/publication_template_registry.json",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "bind_existing_papers",
+      "target": "registry/publication_template_registry.json",
+      "status": "SUCCESS",
+      "papers_bound": 4
+    },
+    {
+      "operation": "add_publication_guardrails",
+      "target": "registry/lexicon_gap_queue.json",
+      "status": "SUCCESS",
+      "guardrails_added": [
+        "no_paper_without_stack_header_v1",
+        "no_empirical_claim_without_recoverable_artifact_v1",
+        "no_theoretical_claim_without_math_binding_v1"
+      ]
+    }
+  ],
+  "publication_governance_status": {
+    "canonical_template": "PCD_PAPER_TEMPLATE_V1",
+    "mandatory_sections_count": 11,
+    "conclusion_rule_active": true,
+    "provenance_policy_enforced": true
+  },
+  "charter_compliance_check": {
+    "charter_version": "2.3",
+    "status": "COMPLIANT",
+    "notes": "Publication template binding ensures that all research outputs are explicitly linked to the formal PCD baseline, enforcing section completeness and prefix-humility in conclusions."
+  }
+}

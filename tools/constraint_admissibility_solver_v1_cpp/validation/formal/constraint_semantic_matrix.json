@@ -1,0 +1,32 @@
+{
+  "constraint_families": [
+    {
+      "type": "triad_closure",
+      "arity": 3,
+      "native_logic": "not (active_count == 2)",
+      "cnf_logic": "clauses restricting pairs of active variables from co-occurring with inactive third variable",
+      "equivalence_verified": true
+    },
+    {
+      "type": "coupling_membership",
+      "arity": 2,
+      "native_logic": "val1 == val2 (or pair in allowed_pairs)",
+      "cnf_logic": "implication or exclusion clauses mapping pairs of values",
+      "equivalence_verified": true
+    },
+    {
+      "type": "projection_membership",
+      "arity": 1,
+      "native_logic": "val1 in allowed_values",
+      "cnf_logic": "exclusion unit clauses for all values not in allowed_values",
+      "equivalence_verified": true
+    },
+    {
+      "type": "composition",
+      "arity": 3,
+      "native_logic": "f * g == h under domain/codomain rules",
+      "cnf_logic": "implication clauses mapping inputs to compositions plus domain/codomain exclusions",
+      "equivalence_verified": true
+    }
+  ]
+}

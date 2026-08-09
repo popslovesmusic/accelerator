@@ -1,0 +1,50 @@
+{
+  "patch_id": "PATCH_PI_MEMORY_TENSOR_RT_014",
+  "campaign_id": "CAMPAIGN_MEMORY_TENSOR_RT_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-03",
+  "type": "governance_patch",
+  "title": "Add Minimal Memory Tensor RT Simulation Fixture",
+  "depends_on": [
+    "PATCH_PI_MEMORY_TENSOR_RT_013"
+  ],
+  "purpose": "Provide a deterministic seed input fixture for the minimal Memory Tensor RT simulation harness so the first executable run can be validated without relying on ad hoc data.",
+  "created_artifacts": [
+    "inputs/simulations/memory_tensor_rt_minimal_input.json"
+  ],
+  "updated_artifacts": [
+    "registry/governance/campaign_ledgers/memory_tensor_rt_campaign_ledger.json",
+    "docs/textbook/mono_process_textbook_complete.md"
+  ],
+  "source_artifacts": [
+    "registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_013.json",
+    "registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_012.json",
+    "registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_011.json",
+    "registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_008.json",
+    "registry/simulation_harnesses/memory_tensor_rt_minimal_harness.json",
+    "registry/simulation_protocols/memory_tensor_rt_minimal_simulation.json",
+    "registry/governance/campaign_ledgers/memory_tensor_rt_campaign_ledger.json"
+  ],
+  "summary": {
+    "fixture_id": "FIXTURE_MEMORY_TENSOR_RT_MINIMAL_001",
+    "simulation_seed": 1729,
+    "run_label": "minimal_prompt_conditioning_fixture",
+    "tensor_rank": 2,
+    "tensor_shape": [
+      3,
+      3
+    ]
+  },
+  "validation": {
+    "required": [
+      "fixture_id_unique",
+      "tensor_rank_matches_shape",
+      "all_cells_have_action_trace_id",
+      "all_cells_have_source_symmetry_condition",
+      "at_least_two_prompts_present",
+      "ground_truth_not_used_for_confidence",
+      "global_validate_pass"
+    ],
+    "result": "pass"
+  }
+}

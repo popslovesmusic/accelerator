@@ -1,0 +1,61 @@
+{
+  "audit_id": "VAL-LTRA-001",
+  "patch_id": "MPF-PF-020",
+  "name": "Local Theorem Readiness Audit Registry",
+  "status": "active",
+  "readiness_checks": [
+    {
+      "check_id": "LTRA-001",
+      "name": "Proof Chain Completeness",
+      "requirement": "All steps from candidate selection through stability consolidation must be present and traceable."
+    },
+    {
+      "check_id": "LTRA-002",
+      "name": "Operator Typing Integrity",
+      "requirement": "All proof-facing operators must preserve declared typed signatures."
+    },
+    {
+      "check_id": "LTRA-003",
+      "name": "Restricted Scope Integrity",
+      "requirement": "No proof element may rely on global, universal, or unrestricted continuation."
+    },
+    {
+      "check_id": "LTRA-004",
+      "name": "Failure Preservation Integrity",
+      "requirement": "All counterexamples, excluded domains, and blockers remain preserved."
+    },
+    {
+      "check_id": "LTRA-005",
+      "name": "Local Stability Support",
+      "requirement": "Only RLSC-STABLE-LOCAL or RLSC-STABLE-WITH-OPEN-BLOCKERS may support readiness."
+    },
+    {
+      "check_id": "LTRA-006",
+      "name": "Theorem Promotion Block",
+      "requirement": "Audit may declare readiness for review only, not theorem proof."
+    }
+  ],
+  "readiness_outcomes": [
+    {
+      "outcome_id": "LTRA-READY-FOR-LOCAL-REVIEW",
+      "meaning": "The chain is eligible for formal restricted-local theorem review.",
+      "theorem_status": "NOT_PROVEN"
+    },
+    {
+      "outcome_id": "LTRA-READY-WITH-OPEN-BLOCKERS",
+      "meaning": "The chain is reviewable, but blockers remain active and must be carried forward.",
+      "theorem_status": "NOT_PROVEN"
+    },
+    {
+      "outcome_id": "LTRA-NOT-READY",
+      "meaning": "The chain has unresolved trace, scope, typing, or stability failures.",
+      "theorem_status": "NOT_PROVEN"
+    }
+  ],
+  "governance": {
+    "theorem_status": "NOT_PROVEN",
+    "proof_status": "LTC_readiness_audit_only",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL"
+  }
+}

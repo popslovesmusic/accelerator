@@ -4,14 +4,14 @@ Status: C4 candidate registration scaffold.
 
 This tool home records the intended induction path for `signal_scope_phase_continuation_engine`, a discrete agent-based phase-continuation simulation intended to test RUC, `-(i)`, residue closure, survivability gating, groove memory, inductive continuation, disconnect/recouple behavior, and falsification through mismatch, PLV, alignment, rejection, and survival metrics.
 
-This is not a medical tool. EEG-style inputs are admissible only as stress-test surfaces for signal continuity, dropout, noise, spike transitions, and mixed-band stress. They do not define the certification identity of the engine and must not be reported as diagnostic or clinical functionality.
+This is not a medical tool. EEG-style inputs are admissible only as stress-test surfaces for signal continuity, dropout, noise, spike transitions, and mixed-band stress. They do not define the rigor endorsement identity of the engine and must not be reported as diagnostic or clinical functionality.
 
 ## Proposed Model Class
 
 - Tool name: `signal_scope_phase_continuation_engine`
 - Proposed class: `agent_based_phase_continuation_sim`
 - Mechanism class: `agent_phase_continuation`
-- Current certification level: `C0`
+- Current rigor endorsement level: `C0`
 - Candidate target: `C4_candidate`
 
 ## Theory Mapping

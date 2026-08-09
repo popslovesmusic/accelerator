@@ -1,0 +1,128 @@
+{
+  "artifact_type": "PROVISIONAL_FAMILY_CONSTRAINT_SET_INVENTORY",
+  "artifact_id": "RT_ADMOBS_FAMILY_CONSTRAINT_SET_INVENTORY_20260728_001",
+  "status": "PROVISIONAL_READY_FOR_HUMAN_REVIEW",
+  "canonicality": "NON_CANONICAL_CANDIDATE",
+  "claim_ceiling": "C1_MODEL_RELATIVE",
+  "purpose": "Inventory existing RT structures that may inform H_x without rebinding them as JointlyCompatible_x.",
+  "source_artifacts": [
+    "docs/theory/foundational/5_03_26 unity/math/07_asymmetry_to_orientation_selection_operator.md",
+    "docs/theory/foundational/5_03_26 unity/math/MATHEMATICAL_SCHEMA_SCRATCH_V1.md",
+    "docs/theory/foundational/5_03_26 unity/math/lemmas/L058_orientation_driven_ordering.md",
+    "docs/theory/foundational/5_03_26 unity/math/proofs/P_O_CALC_001_partial_composition.md",
+    "registry/operator_registry.json",
+    "registry/math/metric_registry.json",
+    "registry/math/open_bridge_proof_obligation_registry.json"
+  ],
+  "constraint_inventory": [
+    {
+      "candidate_id": "FCI-001",
+      "symbol": "O_adm",
+      "source_role": "Admissible orientation family used by orientation selection.",
+      "scope": "Family/container",
+      "arity": "Not a constraint; membership family",
+      "provenance": "07_asymmetry_to_orientation_selection_operator.md",
+      "pairwise_decomposable": "NOT_APPLICABLE",
+      "H_x_eligibility": "SOURCE_DATA_ONLY",
+      "reason": "Does not itself assert family-level joint compatibility."
+    },
+    {
+      "candidate_id": "FCI-002",
+      "symbol": "W_adm",
+      "source_role": "Context-indexed admissible orientation window.",
+      "scope": "Context-to-family restriction",
+      "arity": "Unary membership/window condition",
+      "provenance": "MATHEMATICAL_SCHEMA_SCRATCH_V1.md §7.1",
+      "pairwise_decomposable": "NOT_APPLICABLE",
+      "H_x_eligibility": "SOURCE_DATA_ONLY",
+      "reason": "Restricts candidate domain but does not establish joint coherence."
+    },
+    {
+      "candidate_id": "FCI-003",
+      "symbol": "S(C;c) subset C",
+      "source_role": "Set-valued selection/pruning operator.",
+      "scope": "Whole candidate family under context c",
+      "arity": "Family-level pruning; internal constraint arity unspecified",
+      "provenance": "MATHEMATICAL_SCHEMA_SCRATCH_V1.md §5.2",
+      "pairwise_decomposable": "UNRESOLVED",
+      "H_x_eligibility": "POSSIBLE_CONSTRAINT_SOURCE",
+      "reason": "Family-level operation exists, but its pruning rule is not typed as orientation joint compatibility."
+    },
+    {
+      "candidate_id": "FCI-004",
+      "symbol": "O_b composed with O_a",
+      "source_role": "Lawful partial composition requires typed admissible continuation and compatible orientation classes.",
+      "scope": "Two successive orientation transformations",
+      "arity": "Binary/stepwise",
+      "provenance": "P_O_CALC_001_partial_composition.md",
+      "pairwise_decomposable": "YES_FOR_LOCAL_COMPOSITION_ONLY",
+      "H_x_eligibility": "BINARY_SUBCONSTRAINT_CANDIDATE",
+      "reason": "Supports pairwise constraints but does not establish arbitrary family-level coherence."
+    },
+    {
+      "candidate_id": "FCI-005",
+      "symbol": "otimes",
+      "source_role": "Typed partial composition with admissibility, distinction, residue, and closure-class guards.",
+      "scope": "Two operands under context Y",
+      "arity": "Binary/context-bound",
+      "provenance": "registry/operator_registry.json",
+      "pairwise_decomposable": "YES_FOR_OPERAND_COMPOSITION_ONLY",
+      "H_x_eligibility": "BINARY_SUBCONSTRAINT_CANDIDATE",
+      "reason": "The operator is not an orientation-family constraint and associativity is explicitly not assumed globally."
+    },
+    {
+      "candidate_id": "FCI-006",
+      "symbol": "N=3 independent closure constraints",
+      "source_role": "K stabilization composition requirement.",
+      "scope": "Closure organization",
+      "arity": "At least three; potentially higher-order",
+      "provenance": "registry/operator_registry.json entry for K",
+      "pairwise_decomposable": "NOT_ESTABLISHED",
+      "H_x_eligibility": "POSSIBLE_HIGHER_ORDER_CANDIDATE",
+      "reason": "Explicit multi-constraint requirement exists, but it is not typed as an observation-orientation family constraint."
+    },
+    {
+      "candidate_id": "FCI-007",
+      "symbol": "C_orient",
+      "source_role": "Coherence metric over admissible orientation-pattern assignments.",
+      "scope": "Whole orientation assignment family",
+      "arity": "Family-level measure",
+      "provenance": "registry/math/metric_registry.json and open_bridge_proof_obligation_registry.json",
+      "pairwise_decomposable": "NOT_APPLICABLE",
+      "H_x_eligibility": "DIAGNOSTIC_SUPPORT_ONLY",
+      "reason": "A metric may rank or compare families but does not decide compatibility without a separate threshold bridge."
+    },
+    {
+      "candidate_id": "FCI-008",
+      "symbol": "R residue continuation constraint",
+      "source_role": "History-conditioned admissibility and residue propagation.",
+      "scope": "Continuation context and composition",
+      "arity": "Contextual; exact family arity unresolved",
+      "provenance": "L058_orientation_driven_ordering.md and operator_registry.json",
+      "pairwise_decomposable": "UNRESOLVED",
+      "H_x_eligibility": "CONTEXT_INPUT_NOT_DIRECT_CONSTRAINT",
+      "reason": "Residue conditions every candidate but are not themselves an explicit orientation-family constraint set."
+    }
+  ],
+  "inventory_result": {
+    "direct_H_x_constraint_set_found": false,
+    "binary_constraint_candidates": ["FCI-004", "FCI-005"],
+    "higher_order_candidate": ["FCI-006"],
+    "family_measure_only": ["FCI-007"],
+    "source_or_context_only": ["FCI-001", "FCI-002", "FCI-008"],
+    "pairwise_sufficiency_status": "NOT_PROVED",
+    "higher_order_compatibility_status": "REQUIRED_OR_EXPLICITLY_UNRESOLVED"
+  },
+  "recommendation": {
+    "single_next_action": "Create a human-review H_x binding proposal for FCI-004, FCI-005, and FCI-006, with explicit type tests before any binding.",
+    "required_tests": [
+      "Orientation element type matches Omega_obs.",
+      "Boundary, domain, and residue context matches.",
+      "Constraint scope is explicit.",
+      "Arity and pairwise decomposability are recorded.",
+      "No metric is promoted to a predicate."
+    ]
+  },
+  "not_changed": ["O_adm", "W_adm", "C_orient", "delta_a", "delta_alpha", "canonical textbook", "canonical registries", "D-semantics obligations"],
+  "human_review_required": true
+}

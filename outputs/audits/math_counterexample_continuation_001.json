@@ -1,0 +1,68 @@
+{
+  "report_id": "MATH_COUNTEREXAMPLE_CONTINUATION_001",
+  "timestamp": "2026-07-03T00:00:00-04:00",
+  "campaign_id": "MT-COUNTEREXAMPLE-001",
+  "source_basis": [
+    "registry/math/mt_counterexample_campaign_registry.json",
+    "outputs/math_tests/mt_counterexample_campaign_result.json",
+    "registry/math/math_campaign_execution_order.json",
+    "analysis/recommended_action_queue.json"
+  ],
+  "current_state": {
+    "status": "active_adversarial_testing",
+    "initial_findings": [
+      {
+        "theorem": "MT-001",
+        "attack": "degenerate_minima_instability",
+        "result": "resilient_under_standard_params"
+      },
+      {
+        "theorem": "MT-002",
+        "attack": "recursive_divergence_attack",
+        "result": "bounded_drift_observed"
+      },
+      {
+        "theorem": "MT-003",
+        "attack": "branch_explosion_attack",
+        "result": "pruning_held_at_scale_10"
+      }
+    ],
+    "remaining_declared_attack_vectors": [
+      "orientation_locking_attack",
+      "nonlocal_transport_fragmentation",
+      "selection_reconstruction_failure",
+      "window_boundary_fragmentation",
+      "operator_chain_nonclosure"
+    ]
+  },
+  "recommended_next_action": {
+    "action": "build dedicated orientation locking harness",
+    "target": "MT-COUNTEREXAMPLE-001",
+    "previous_focus_vector": "orientation_locking_attack",
+    "focus_vector": "dedicated_orientation_locking_harness",
+    "scope": "bounded",
+    "supporting_evidence": [
+      "schemas/math_test_result.schema.json",
+      "governance/live/research_debt_registry.json",
+      "outputs/math_tests/mt_counterexample_orientation_locking_result.json",
+      "outputs/math_tests/rc008_orientation_sensitivity_representation_result.json",
+      "outputs/math_tests/rc005_selection_stability_under_recursion_result.json"
+    ],
+    "constraints": [
+      "preserve_failure_modes",
+      "preserve_counterexample_space",
+      "no_global_closure_claims",
+      "no_physics_claims",
+      "results_remain_nonfinal"
+    ]
+  },
+  "validation_state": {
+    "latest_global_validation": "pass",
+    "reference": "outputs/audits/global_health_report.json"
+  },
+  "notes": [
+    "The orientation-locking artifact was downgraded to review-only because no dedicated harness provenance is attached.",
+    "This report is now positioned for the dedicated orientation-locking harness debt.",
+    "No authoritative registry was modified."
+  ]
+}

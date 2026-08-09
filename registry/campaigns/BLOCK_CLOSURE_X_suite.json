@@ -1,0 +1,72 @@
+{
+  "campaign_id": "BLOCK-CLOSURE-X",
+  "target_theorem": "MST-001",
+  "rigor_level": "C6",
+  "tests": [
+    {
+      "name": "FV-1: Residue Suppression (Zero-History Fracture)",
+      "engine": "graph_dynamics_sim_v1_cpp",
+      "config": {
+        "n_nodes": 50,
+        "steps": 500,
+        "K": 1.0,
+        "theta_de": 0.1,
+        "theta_re": 0.1,
+        "P_re": 0.0,
+        "seed": 42
+      },
+      "assertions": [
+        "order_parameter < 0.1",
+        "edge_count < 10"
+      ],
+      "intent": "Verify that without residue (P_re=0), orientational locking fails, falsifying 'intrinsic' selection stability."
+    },
+    {
+      "name": "FV-2: Degeneracy Chatter (Saddle Point Jam)",
+      "engine": "ca_admissibility_sim_v1_cpp",
+      "config": {
+        "width": 64,
+        "height": 64,
+        "steps": 100,
+        "D": 0.5,
+        "source_strength": 1.0,
+        "degeneracy_injection": true,
+        "seed": 42
+      },
+      "assertions": [
+        "d_Omega_divergence > 0.05",
+        "selection_entropy > 0.8"
+      ],
+      "intent": "Force a state where multiple minimizers are identical to see if set-valued rules fail to prevent divergence."
+    },
+    {
+      "name": "FV-3: Admissibility Jamming (Stroboscopic Fracture)",
+      "engine": "kuramoto_sim_v1_cpp",
+      "config": {
+        "n_nodes": 100,
+        "steps": 200,
+        "K_modulation": "square_wave",
+        "K_freq": 0.5,
+        "seed": 42
+      },
+      "assertions": [
+        "order_parameter < 0.3",
+        "sync_loss_rate > 0.7"
+      ],
+      "intent": "Oscillate coupling faster than relaxation to prove that 'Admissibility Preservation' is time-scale dependent."
+    },
+    {
+      "name": "FV-4: Mechanism Implementation Schism",
+      "engine": "cross_model_comparison",
+      "config": {
+        "regime": "critical_resolution_limit",
+        "N": 5,
+        "seed": 42
+      },
+      "assertions": [
+        "graph_ca_agreement < 0.5"
+      ],
+      "intent": "Identify implementing artifacts that violate the Mechanism Independence mandate at low resolution."
+    }
+  ]
+}

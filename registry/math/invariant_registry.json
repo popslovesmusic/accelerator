@@ -1,0 +1,57 @@
+{
+  "registry_id": "INVARIANT_REGISTRY",
+  "version": "1.0.0",
+  "patch_id": "MPF-P1-003",
+  "status": "ACTIVE",
+  "purpose": "Define the initial invariant family required for indexed projectional equivalence claims.",
+  "invariants": {
+    "I_closure": {
+      "definition": "Preservation of recursive closure structure.",
+      "pass_condition": "A and B both sustain non-collapsing recursive continuation.",
+      "failure_condition": "One side collapses, terminates, or cannot preserve recursive return."
+    },
+    "I_admissibility": {
+      "definition": "Preservation of admissible continuation condition.",
+      "pass_condition": "A and B both require filtered continuation rather than automatic realization.",
+      "failure_condition": "One side permits unconstrained realization or lacks a selection filter."
+    },
+    "I_residue": {
+      "definition": "Preservation of history-conditioned continuation.",
+      "pass_condition": "A and B both carry prior-state influence into later admissible states.",
+      "failure_condition": "One side is memoryless under transition."
+    },
+    "I_orientation": {
+      "definition": "Preservation of orientation-reference relation.",
+      "pass_condition": "A and B both require a reference relation that orders transition direction.",
+      "failure_condition": "One side permits unordered transition without orientation reference."
+    },
+    "I_selection": {
+      "definition": "Preservation of selection/filtering rule.",
+      "pass_condition": "A and B both distinguish candidate states from realized states.",
+      "failure_condition": "One side has no candidate-realization distinction."
+    }
+  },
+  "governance_rules": [
+    {
+      "rule_id": "R-INV-001",
+      "rule": "No invariant may be used in ⇔x[I_k] unless it appears in the invariant registry."
+    },
+    {
+      "rule_id": "R-INV-002",
+      "rule": "Each invariant must include definition, pass condition, and failure condition."
+    },
+    {
+      "rule_id": "R-INV-003",
+      "rule": "A projectional equivalence claim fails if its indexed invariant fails."
+    },
+    {
+      "rule_id": "R-INV-004",
+      "rule": "Multiple invariant claims must be listed independently rather than collapsed into a general equivalence claim."
+    }
+  ],
+  "valid_multi_invariant_form": {
+    "form": "(A) ⇔x[{I_1, I_2, ..., I_n}] (B)",
+    "truth_condition": "All listed invariants must pass independently.",
+    "example": "(QM_app) ⇔x[{I_closure, I_admissibility, I_residue}] (GR_app)"
+  }
+}

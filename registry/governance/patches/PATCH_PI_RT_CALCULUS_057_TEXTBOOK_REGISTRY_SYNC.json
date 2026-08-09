@@ -1,0 +1,208 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_057_TEXTBOOK_REGISTRY_SYNC",
+  "title": "Textbook Registry Sync for RT Calculus Metric Bridge and Provisional Field Candidate",
+  "status": "APPLIED",
+  "applied_on": "2026-07-07T12:21:14.4677519-04:00",
+  "type": "textbook_registry_sync_patch",
+  "campaign": "RT Calculus Metric Bridge",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "authorized_by": "PATCH_PI_RT_CALCULUS_057",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_052",
+    "PATCH_PI_RT_CALCULUS_053",
+    "PATCH_PI_RT_CALCULUS_054",
+    "PATCH_PI_RT_CALCULUS_055",
+    "PATCH_PI_RT_CALCULUS_056",
+    "PATCH_PI_RT_CALCULUS_057",
+    "PATCH_PI_RT_CALCULUS_056_TEXTBOOK_REGISTRY_SYNC"
+  ],
+  "rt_core_modified": false,
+  "mode": "additive",
+  "purpose": "Synchronize the textbook SSOT and registry surfaces with the applied 056-057 extension of the RT Calculus metric bridge while leaving RT_core unchanged.",
+  "basis": {
+    "source_patches": [
+      "PATCH_PI_RT_CALCULUS_052",
+      "PATCH_PI_RT_CALCULUS_053",
+      "PATCH_PI_RT_CALCULUS_054",
+      "PATCH_PI_RT_CALCULUS_055",
+      "PATCH_PI_RT_CALCULUS_056",
+      "PATCH_PI_RT_CALCULUS_057",
+      "PATCH_PI_RT_CALCULUS_056_TEXTBOOK_REGISTRY_SYNC"
+    ],
+    "source_surfaces": [
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_052.json",
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_053.json",
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_054.json",
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_055.json",
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_056.json",
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_057.json",
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_056_TEXTBOOK_REGISTRY_SYNC.json",
+      "docs/governance/ae_metric_candidate_052.json",
+      "docs/governance/symmetry_reference_trace_052.json",
+      "docs/governance/ra_symbol_discipline_052.json",
+      "docs/governance/delta_operator_discipline_053.json",
+      "docs/governance/delta_allowed_forbidden_readings_053.json",
+      "docs/governance/delta_non_metric_counterexample_053.json",
+      "docs/governance/ordinal_mismatch_classes_054.json",
+      "docs/governance/ordinal_mismatch_trace_054.json",
+      "docs/governance/ordinal_non_metric_counterexample_054.json",
+      "docs/governance/delta_ordinal_transition_rules_055.json",
+      "docs/governance/delta_transition_trace_schema_055.json",
+      "docs/governance/delta_transition_counterexample_055.json",
+      "docs/governance/admissibility_boundary_dynamics_056.json",
+      "docs/governance/admissibility_boundary_trace_056.json",
+      "docs/governance/admissibility_boundary_counterexample_056.json",
+      "docs/governance/continuous_mismatch_field_candidate_057.json",
+      "docs/governance/continuous_mismatch_field_trace_057.json",
+      "docs/governance/continuous_mismatch_field_counterexample_057.json",
+      "docs/textbook/mono_process_textbook_complete.md"
+    ],
+    "scope": "Synchronize the textbook and registry SSOTs for the RT Calculus metric bridge through the applied boundary-dynamics and provisional-field-candidate layers. The basis is additive, documentary, and claim-disciplined; it keeps RT_core unchanged while binding the textbook narrative to the applied 056-057 extension surfaces."
+  },
+  "core_rule": {
+    "id": "RT_CALCULUS_TEXTBOOK_REGISTRY_SYNC_002",
+    "statement": "Textbook and registry synchronization may record applied governance surfaces and provenance notes only when the inserted language remains humble, additive, RT_core-invariant, and does not promote provisional field-candidate language into metric, vector-field, topology, or differentiability claims."
+  },
+  "sync_requirements": [
+    {
+      "requirement": "Add or update textbook section for A|E metric bridge",
+      "canonical_statement": "A|E := Delta(A <S>_ra E)",
+      "notes": [
+        "A|E is not distance(A,E).",
+        "Mismatch is evaluated relative to a symmetry-reference coupling.",
+        "<S> is not a midpoint, endpoint, substrate object, or metric center.",
+        "r_a is a residue-asymmetry parameter distinct from R and generic r."
+      ]
+    },
+    {
+      "requirement": "Add or update textbook section for Delta evaluation discipline",
+      "canonical_statement": "Delta evaluates mismatch under a declared symmetry-reference coupling.",
+      "forbidden_readings": [
+        "distance",
+        "norm",
+        "scalar magnitude",
+        "Euclidean metric",
+        "physical unit",
+        "topological measure"
+      ]
+    },
+    {
+      "requirement": "Add or update textbook section for ordinal mismatch classes",
+      "classes": [
+        "NO_EXPRESSED_MISMATCH",
+        "LOW_MISMATCH",
+        "MODERATE_MISMATCH",
+        "HIGH_MISMATCH",
+        "ADMISSIBILITY_BREAK"
+      ],
+      "notes": [
+        "Classes are ordinal only.",
+        "No equal spacing is implied.",
+        "No numerical values are introduced.",
+        "No topology or units are introduced."
+      ]
+    },
+    {
+      "requirement": "Add or update textbook section for PATCH_PI_RT_CALCULUS_055",
+      "section_title": "Delta Ordinal Transition Discipline",
+      "canonical_statement": "Ordinal mismatch classes may transition only through governed transition rules.",
+      "notes": [
+        "Ordinary adjacent transitions are permitted when admissibility is preserved.",
+        "Jump transitions require explicit admissibility reasoning.",
+        "Transition does not imply scalar distance or metric magnitude.",
+        "Delta evaluates mismatch; transition discipline governs change between ordinal classifications."
+      ]
+    },
+    {
+      "requirement": "Add or update textbook section for PATCH_PI_RT_CALCULUS_056",
+      "section_title": "Delta Ordinal Boundary Dynamics",
+      "canonical_statement": "Boundary dynamics classify approach, contact, crossing, retreat, and persistence as ordinal governed states under a declared admissibility boundary.",
+      "notes": [
+        "Boundary behavior remains ordinal only.",
+        "Boundary contact does not by itself imply admissibility break.",
+        "Boundary crossing requires explicit admissibility reasoning.",
+        "No numeric threshold, topology, or metric magnitude is introduced."
+      ]
+    },
+    {
+      "requirement": "Add or update textbook section for PATCH_PI_RT_CALCULUS_057",
+      "section_title": "Provisional Mismatch Field Candidate",
+      "canonical_statement": "MF_Delta is a provisional organization of repeated Delta evaluations over declared evaluation contexts.",
+      "notes": [
+        "The candidate reading is trace-linked and context-typed.",
+        "Repeated Delta evaluations may be discussed as a provisional field only in the governed candidate sense.",
+        "No scalar field, vector field, topology, manifold, analytic continuity claim, differentiability claim, or physical field is introduced.",
+        "The reading does not promote the bridge to metric status."
+      ]
+    }
+  ],
+  "required_textbook_insert": {
+    "recommended_location": "Chapter 2, immediately after the existing RT Calculus and continuation material.",
+    "section_heading": "Delta Ordinal Boundary Dynamics and Provisional Mismatch Field Candidate",
+    "body": "### Governed Clarification 2.8.5: Delta Ordinal Boundary Dynamics (PATCH_PI_RT_CALCULUS_056)\nBoundary dynamics classify approach, contact, crossing, retreat, and persistence as ordinal governed states under a declared admissibility boundary. The layer is qualitative and trace-explicit: it does not introduce numeric thresholds, units, topology, or metric magnitude. Boundary contact does not by itself imply admissibility break, boundary crossing requires explicit admissibility reasoning, and boundary persistence remains a repeated near-boundary classification rather than a quantitative distance reading. [Source: PATCH_PI_RT_CALCULUS_056]\n\n### Governed Clarification 2.8.6: Provisional Mismatch Field Candidate (PATCH_PI_RT_CALCULUS_057)\nThe field-candidate reading is a provisional organization of repeated Delta evaluations over declared evaluation contexts. It is field-like only in the governed provisional sense established by PATCH_PI_RT_CALCULUS_057: a trace-linked organization of repeated Delta evaluations, not a scalar field, vector field, topology, manifold, analytic continuity claim, differentiability claim, or physical field. The diagnostic trace preserves evaluation order and context identity, but the reading remains candidate only and does not promote the bridge to metric status. [Source: PATCH_PI_RT_CALCULUS_057]"
+  },
+  "required_repo_changes": [
+    {
+      "path": "docs/textbook/mono_process_textbook_complete.md",
+      "change": "Insert the 2.8.5 and 2.8.6 governed clarifications after the existing ordinal transition discipline, and add Appendix F.8 bullets for boundary dynamics and the provisional mismatch field candidate."
+    },
+    {
+      "path": "registry/formal_object_registry.json",
+      "change": "Extend the governed Delta and A|E source bindings to include PATCH_PI_RT_CALCULUS_056 and PATCH_PI_RT_CALCULUS_057 provenance."
+    },
+    {
+      "path": "registry/math_source_registry.json",
+      "change": "Append PATCH_PI_RT_CALCULUS_056 and PATCH_PI_RT_CALCULUS_057 as governed source documents."
+    },
+    {
+      "path": "registry/math_hashes.json",
+      "change": "Append the SHA-256 hashes for PATCH_PI_RT_CALCULUS_056 and PATCH_PI_RT_CALCULUS_057."
+    },
+    {
+      "path": "registry/governance_change_ledger.json",
+      "change": "Add the sync change ledger record for the 056-057 textbook/registry update."
+    }
+  ],
+  "registry_alignment_rules": [
+    "Every textbook statement added by this patch must cite or reference the corresponding applied governance patch.",
+    "No textbook language may promote projection from provisional induction to theorem.",
+    "No textbook language may modify RT_core.",
+    "No textbook language may collapse A_meta/B_meta into affect-domain A/E.",
+    "No textbook language may treat Delta as a quantitative metric.",
+    "No textbook language may collapse the provisional field candidate into a metric, vector field, topology, manifold, or differentiability claim."
+  ],
+  "validation_expectations": {
+    "json_parse": "PASS_REQUIRED",
+    "registry_validation": "PASS_REQUIRED",
+    "patch_chain": "PASS_REQUIRED",
+    "patch_gate": "PASS_REQUIRED",
+    "global_validate": "PASS_REQUIRED"
+  },
+  "claim_level": "TEXTBOOK_SYNC",
+  "governance_notes": [
+    "This patch is documentation/provenance synchronization only.",
+    "It does not introduce new theory beyond applied patches 052 through 057.",
+    "It resolves textbook staleness relative to the current RT Calculus Metric Bridge registry state.",
+    "The provisional mismatch field candidate remains qualitative and does not become a metric structure."
+  ],
+  "claim_humility": {
+    "current_status": "proposed_only",
+    "non_claims": [
+      "Does not modify RT_core.",
+      "Does not assert a finalized metric.",
+      "Does not claim universal measurability.",
+      "Does not promote any governed note to theorem status.",
+      "Does not update textbook surfaces by itself.",
+      "Does not imply scalar field, vector field, topology, manifold, continuity, or differentiability."
+    ]
+  },
+  "non_claims": [
+    "Does not modify RT_core.",
+    "Does not assert a finalized metric.",
+    "Does not claim universal measurability.",
+    "Does not promote any governed note to theorem status.",
+    "Does not update textbook surfaces by itself.",
+    "Does not imply scalar field, vector field, topology, manifold, continuity, or differentiability."
+  ],
+  "agent_instruction": "Create PATCH_PI_RT_CALCULUS_057_TEXTBOOK_REGISTRY_SYNC as PROPOSED only. Use additive mode, cite applied PATCH_PI_RT_CALCULUS_052 through PATCH_PI_RT_CALCULUS_057 and PATCH_PI_RT_CALCULUS_056_TEXTBOOK_REGISTRY_SYNC as provenance, build the textbook/registry synchronization surface, and do not apply until patch-gate returns apply."
+}

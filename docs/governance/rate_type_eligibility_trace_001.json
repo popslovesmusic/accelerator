@@ -1,0 +1,119 @@
+{
+  "document_id": "DOC_RATE_TYPE_ELIGIBILITY_TRACE_001",
+  "artifact_type": "rate_type_eligibility_trace",
+  "status": "DRAFT_PROVISIONAL",
+  "scope": "governance_execution_surface",
+  "source_patch_id": "PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_001",
+  "source_artifacts": [
+    {
+      "path": "docs/governance/rate_type_eligibility_candidate_001.json",
+      "status": "current_governance_witness",
+      "used_for": "candidate predicate witness"
+    },
+    {
+      "path": "docs/governance/bridge_admissibility_protocol_061.json",
+      "status": "current_governance_surface",
+      "used_for": "bridge admission screen before evaluation"
+    },
+    {
+      "path": "docs/governance/propagation_rate_density_endpoint_candidate_003.json",
+      "status": "current_governance_witness",
+      "used_for": "intake-level bridge and endpoint non-realizability context"
+    },
+    {
+      "path": "docs/textbook/mono_process_textbook_complete.md",
+      "status": "current_textbook_surface",
+      "used_for": "governed bridge and lexicon context"
+    }
+  ],
+  "purpose": "Show the ordered failure-first evaluation pipeline for RATE_TYPE_ELIGIBLE(x, phi) before any bridge testing is admitted.",
+  "claim_humility": {
+    "current_status": "candidate_trace_only",
+    "non_claims": [
+      "Does not prove bridge truth.",
+      "Does not promote any bridge candidate.",
+      "Does not modify RT_core.",
+      "Does not replace adversarial testing.",
+      "Does not collapse admissibility into validation."
+    ]
+  },
+  "ordered_trace": [
+    {
+      "step": 1,
+      "action": "Declare phi before evaluation.",
+      "result": "The reference is explicit and the screen is not evaluated against an implicit floor."
+    },
+    {
+      "step": 2,
+      "action": "Check DOF(x) > 0.",
+      "result": "Zero-DOF systems fail immediately with RATE_TYPE_INELIGIBLE_ZERO_DOF."
+    },
+    {
+      "step": 3,
+      "action": "Check Coupled_AE(x).",
+      "result": "Decoupled A|E systems fail with RATE_TYPE_INELIGIBLE_DECOUPLED_AE."
+    },
+    {
+      "step": 4,
+      "action": "Check OrderedIntermediate(x, phi).",
+      "result": "Endpoint-only evaluation fails with RATE_TYPE_INELIGIBLE_ENDPOINT_ONLY_EVALUATION."
+    },
+    {
+      "step": 5,
+      "action": "Check EndpointCompatible(x, phi).",
+      "result": "Mismatch with the declared reference fails with RATE_TYPE_INELIGIBLE_ENDPOINT_MISMATCH."
+    },
+    {
+      "step": 6,
+      "action": "Check GenExclusionBeforeClosure(x, phi).",
+      "result": "Missing generative exclusion fails with RATE_TYPE_INELIGIBLE_NO_GENERATIVE_EXCLUSION."
+    },
+    {
+      "step": 7,
+      "action": "Return pass or failure class.",
+      "result": "A pass admits bridge testing only; it does not promote DENSITY_BRIDGE_001, RATE_UNIFICATION_001, or RP001."
+    },
+    {
+      "step": 8,
+      "action": "Preserve RT_core unchanged.",
+      "result": "The governance screen changes no core expression, theorem status, or external claim."
+    }
+  ],
+  "failure_class_map": [
+    {
+      "condition": "DOF(x) > 0",
+      "failure_code": "RATE_TYPE_INELIGIBLE_ZERO_DOF"
+    },
+    {
+      "condition": "Coupled_AE(x)",
+      "failure_code": "RATE_TYPE_INELIGIBLE_DECOUPLED_AE"
+    },
+    {
+      "condition": "Declared(phi)",
+      "failure_code": "RATE_TYPE_INELIGIBLE_UNDECLARED_REFERENCE"
+    },
+    {
+      "condition": "OrderedIntermediate(x, phi)",
+      "failure_code": "RATE_TYPE_INELIGIBLE_ENDPOINT_ONLY_EVALUATION"
+    },
+    {
+      "condition": "EndpointCompatible(x, phi)",
+      "failure_code": "RATE_TYPE_INELIGIBLE_ENDPOINT_MISMATCH"
+    },
+    {
+      "condition": "GenExclusionBeforeClosure(x, phi)",
+      "failure_code": "RATE_TYPE_INELIGIBLE_NO_GENERATIVE_EXCLUSION"
+    }
+  ],
+  "forbidden_inference": [
+    "A pass does not imply bridge truth.",
+    "A pass does not imply theorem status.",
+    "A failure does not modify RT_core.",
+    "A failure does not invalidate the bridge framework.",
+    "The trace does not collapse admissibility into validation."
+  ],
+  "trace_reading": {
+    "status": "candidate_only",
+    "statement": "The trace records a governance screen that must be satisfied before rate-based bridge testing, not a promotion rule for the bridge itself."
+  }
+}

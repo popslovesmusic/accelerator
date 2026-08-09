@@ -1,0 +1,69 @@
+{
+  "registry_id": "CONTINUATION_ADMISSIBILITY_DISPOSITION_REGISTRY",
+  "patch_id": "APPENDIX_F_SECTION_2_CONTINUATION_ADMISSIBILITY_001",
+  "status": "SCOPED_DISPOSITION_VALIDATED",
+  "authority_level": "L0_TO_L2_EVIDENCE_SYNCHRONIZATION",
+  "source_obligation": "OQ_RTM_002",
+  "source_induction": "MPF_IND_RT_MECHANICS_RECURSIVE_COMPLETION_001",
+  "campaign_reference": "MPF_RTM_RECURSIVE_CAMPAIGN_RUN_001",
+  "question": "What formal condition constrains the admissible continuation term in D(RT_n | continuation) so the recursive engine remains inside the lawful distinction domain?",
+  "disposition": {
+    "answer": "supported_under_typed_continuation_controls",
+    "summary": "A continuation term C is supported as admissible when it is a typed distinction-domain member with nonzero distinction, declared admissibility context, PRIN_003-compatible coupling to RT_n, distinguishable typed residue, and preservation of distinction, admissibility, residue closure, and non-collapse.",
+    "classification": "PASSED_PENDING_RIGOR_ENDORSEMENT"
+  },
+  "formal_scaffold": {
+    "candidate_condition": "ContAdm(C; RT_n, x) := Type(C)=distinction_domain and E(C)!=0 and AdmCtx(C)!=empty and Coupl_003(RT_n,C,x) and ResidueDistinct(RT_n,C) and NonCollapse(RT_n,C)",
+    "continuation_rule": "D(RT_n | C) -> RT_{n+1} only if ContAdm(C; RT_n, x)",
+    "premises": [
+      "C is a typed member of the distinction domain.",
+      "E(C)!=0 under the declared representation.",
+      "C carries an explicit admissibility context.",
+      "C couples to RT_n through a declared PRIN_003 family relation.",
+      "C carries typed residue distinguishable from the residue of RT_n.",
+      "The coupled continuation preserves distinction, admissibility, residue closure, and non-collapse.",
+      "Zero-residue participation, if present, satisfies GOV-RT-ZERO-RECOUPLING-001."
+    ],
+    "exclusion_rule": "Candidates that are untyped, null, residue-erasing, PRIN_003-incompatible, or collapse distinction are inadmissible continuations.",
+    "scope": "model-relative recursive mechanics only"
+  },
+  "campaign_evidence": {
+    "result_path": "outputs/rt_mechanics_campaign/rt_mechanics_results.json",
+    "report_path": "outputs/rt_mechanics_campaign/rt_mechanics_report.md",
+    "num_seeds": 64,
+    "admissible_continuation_mean_stability": 0.9781445324423154,
+    "inadmissible_continuation_mean_stability": 0.11929774653208729,
+    "verdict": "SUPPORTED"
+  },
+  "failure_conditions": [
+    "The continuation term is untyped.",
+    "The continuation term has zero or non-realizable distinction under the declared context.",
+    "The admissibility context is missing.",
+    "No PRIN_003-compatible coupling to RT_n is declared.",
+    "Typed residue is erased, aliased, or overlaps in a way that collapses traceability.",
+    "The coupled continuation collapses distinction, admissibility, or residue closure.",
+    "Zero recoupling violates GOV-RT-ZERO-RECOUPLING-001.",
+    "The condition is used to bypass local well-formedness, typed residue, or trace-admissibility checks."
+  ],
+  "appendix_f_effect": {
+    "obligation": "OQ_RTM_002",
+    "from": "REGISTERED_LATE",
+    "to": "PASSED_PENDING_RIGOR_ENDORSEMENT",
+    "remaining_work": [
+      "Convert the campaign-supported condition into a formal proof artifact if theorem promotion is requested.",
+      "Run independent rigor endorsement before raising the induction ceiling.",
+      "Check compatibility with OQ_RTM_001 trace inheritance and OQ_RTM_003 base-case trace.",
+      "Audit recursive-engine uses for attempts to bypass typed continuation checks."
+    ]
+  },
+  "claim_boundary": {
+    "evidence_class": "C2_CAMPAIGN_SUPPORTED_PENDING_RIGOR_ENDORSEMENT",
+    "promotion": "none",
+    "does_not_prove": [
+      "Unrestricted theorem status.",
+      "Universal recursive soundness outside declared continuation controls.",
+      "Physical recurrence, conservation, or ontological permanence.",
+      "That every syntactic continuation term is admissible."
+    ]
+  }
+}

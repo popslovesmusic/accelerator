@@ -1,0 +1,260 @@
+{
+  "patch_id": "PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_RESULTS_003",
+  "title": "Rate-Type Eligibility Concrete Test Results",
+  "status": "APPLIED",
+  "applied_on": "2026-07-09T03:31:18.2385975-04:00",
+  "type": "provisional_governance_results",
+  "campaign": "RT Calculus Metric Bridge",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "depends_on": [
+    "PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_001",
+    "PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_TESTS_002"
+  ],
+  "rt_core_modified": false,
+  "claim_level": "PROVISIONAL_INDUCTION",
+  "mode": "additive",
+  "purpose": "Record concrete pass, fail, and edge-case adversarial traces for RATE_TYPE_ELIGIBLE(x, phi) without promoting RATE_UNIFICATION_001 or DENSITY_BRIDGE_001.",
+  "summary": "This patch records one pass, one fail, and one edge-case result for RATE_TYPE_ELIGIBLE(x, phi). The records are diagnostic only: eligibility is not validation, and no bridge claim is promoted.",
+  "basis": {
+    "source_patches": [
+      "PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_001",
+      "PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_TESTS_002"
+    ],
+    "source_surfaces": [
+      "registry/governance/patches/PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_001.json",
+      "registry/governance/patches/PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_TESTS_002.json",
+      "docs/governance/rate_type_eligibility_candidate_001.json",
+      "docs/governance/rate_type_eligibility_tests_002.json",
+      "docs/governance/rate_type_eligibility_tests_trace_002.json",
+      "docs/governance/rate_type_eligibility_tests_counterexample_002.json",
+      "docs/textbook/mono_process_textbook_complete.md"
+    ],
+    "scope": "Provisional results witness that records concrete rate-type eligibility outcomes while keeping RT_core unchanged and leaving bridge promotion deferred."
+  },
+  "core_rule": {
+    "id": "RTE_RESULTS_003_001",
+    "statement": "Concrete rate-type eligibility results may be recorded only after phi is declared and the candidate is evaluated under the governed predicate; PASS, FAIL, and EDGE remain diagnostic result classes and do not promote any bridge claim or modify RT_core."
+  },
+  "canonical_objects": {
+    "EligibilityResultSet": {
+      "symbol": "RTE_RS",
+      "definition": "A governed record of PASS, FAIL, and EDGE traces for RATE_TYPE_ELIGIBLE(x, phi)."
+    },
+    "ConcreteEligibilityTrace": {
+      "symbol": "RTE_CT",
+      "definition": "A trace that records declared phi, condition checks, result, and promotion effect in order."
+    },
+    "ResultCounterexample": {
+      "symbol": "RTE_CE",
+      "definition": "A governed counterexample witness that blocks any reading in which eligibility becomes validation or bridge promotion."
+    }
+  },
+  "formal_reading": {
+    "result_set": "RTE_RS := {PASS, FAIL, EDGE}",
+    "interpretation": "The recorded results are diagnostic governance artifacts. PASS admits further bridge testing, FAIL records generative exclusion, and EDGE preserves unresolved admissibility under the declared phi."
+  },
+  "governance_rules": [
+    {
+      "rule_id": "GOV_RTE_RESULTS_001",
+      "rule": "Concrete RATE_TYPE_ELIGIBLE(x, phi) results are admissible only when phi is declared before evaluation."
+    },
+    {
+      "rule_id": "GOV_RTE_RESULTS_002",
+      "rule": "A PASS result admits further bridge testing but does not promote RATE_UNIFICATION_001, DENSITY_BRIDGE_001, or any physical, probabilistic, statistical, or entropic bridge claim."
+    },
+    {
+      "rule_id": "GOV_RTE_RESULTS_003",
+      "rule": "A FAIL result must preserve its failure class as generative exclusion evidence rather than treating failure as mere absence."
+    },
+    {
+      "rule_id": "GOV_RTE_RESULTS_004",
+      "rule": "An EDGE result must remain unresolved unless a later patch either promotes it to PASS through explicit derivation or demotes it to FAIL through a recorded failure class."
+    }
+  ],
+  "claim_humility": {
+    "current_status": "candidate_witness_only",
+    "non_claims": [
+      "Does not validate DENSITY_BRIDGE_001.",
+      "Does not promote RATE_UNIFICATION_001.",
+      "Does not modify RT_core.",
+      "Does not assert external physical truth.",
+      "Does not assert theorem status.",
+      "Does not define a completed metric."
+    ]
+  },
+  "does_not_modify": [
+    "RT_core",
+    "RATE_TYPE_ELIGIBLE(x, phi)",
+    "failure_classes",
+    "DENSITY_BRIDGE_001",
+    "RATE_UNIFICATION_001"
+  ],
+  "concrete_tests": [
+    {
+      "test_id": "RTE_RESULT_PASS_001",
+      "class": "PASS",
+      "domain": "Physics-domain propagation interior",
+      "candidate_x": "Coupled interior propagation candidate",
+      "reference_phi": "phi_phys := declared propagation-reference frame for bounded coupled continuation",
+      "condition_checks": {
+        "DOF(x) > 0": "PASS",
+        "Coupled_AE(x)": "PASS",
+        "Declared(phi)": "PASS",
+        "OrderedIntermediate(x, phi)": "PASS",
+        "EndpointCompatible(x, phi)": "PASS",
+        "GenExclusionBeforeClosure(x, phi)": "PASS"
+      },
+      "result": "RATE_TYPE_ELIGIBLE",
+      "failure_class": null,
+      "interpretation": "The candidate remains inside the coupled interior and is eligible for rate-typed bridge testing.",
+      "promotion_effect": "None"
+    },
+    {
+      "test_id": "RTE_RESULT_FAIL_001",
+      "class": "FAIL",
+      "domain": "Endpoint limit / decoupled symmetry",
+      "candidate_x": "True 0 DOF endpoint candidate",
+      "reference_phi": "phi_endpoint := declared endpoint-reference frame",
+      "condition_checks": {
+        "DOF(x) > 0": "FAIL",
+        "Coupled_AE(x)": "FAIL",
+        "Declared(phi)": "PASS",
+        "OrderedIntermediate(x, phi)": "FAIL",
+        "EndpointCompatible(x, phi)": "FAIL",
+        "GenExclusionBeforeClosure(x, phi)": "FAIL"
+      },
+      "result": "RATE_TYPE_INELIGIBLE",
+      "failure_class": "RATE_TYPE_INELIGIBLE_ZERO_DOF",
+      "secondary_failure_classes": [
+        "RATE_TYPE_INELIGIBLE_DECOUPLED_AE",
+        "RATE_TYPE_INELIGIBLE_ENDPOINT_ONLY_EVALUATION",
+        "RATE_TYPE_INELIGIBLE_ENDPOINT_MISMATCH",
+        "RATE_TYPE_INELIGIBLE_NO_GENERATIVE_EXCLUSION"
+      ],
+      "interpretation": "A true 0 DOF decoupled endpoint cannot be rate-typed because no coupled continuation remains available for rate evaluation.",
+      "promotion_effect": "None"
+    },
+    {
+      "test_id": "RTE_RESULT_EDGE_001",
+      "class": "EDGE",
+      "domain": "Probability/statistical near-tie regime",
+      "candidate_x": "Near-tie distinction-density candidate below declared admissibility floor",
+      "reference_phi": "phi_stat := declared statistical admissibility-floor reference",
+      "condition_checks": {
+        "DOF(x) > 0": "PASS",
+        "Coupled_AE(x)": "PASS",
+        "Declared(phi)": "PASS",
+        "OrderedIntermediate(x, phi)": "EDGE",
+        "EndpointCompatible(x, phi)": "PASS",
+        "GenExclusionBeforeClosure(x, phi)": "EDGE"
+      },
+      "result": "RATE_TYPE_EDGE_CASE",
+      "failure_class": "UNRESOLVED_BELOW_FLOOR_INDETERMINACY",
+      "interpretation": "The candidate is not a clean failure because coupled structure remains present, but it is not a clean pass because the declared phi places the near-tie below admissible resolution. This preserves CP001 as test-relevant rather than promoted.",
+      "promotion_effect": "None"
+    }
+  ],
+  "trace_requirements": {
+    "each_trace_must_record": [
+      "test_id",
+      "domain",
+      "candidate_x",
+      "reference_phi",
+      "condition_checks",
+      "primary_failure_class",
+      "secondary_failure_classes_if_any",
+      "result",
+      "promotion_effect",
+      "notes"
+    ],
+    "trace_order": [
+      "declare phi",
+      "evaluate DOF",
+      "evaluate A|E coupling",
+      "evaluate ordered intermediate relation",
+      "evaluate endpoint compatibility",
+      "evaluate generative exclusion before closure",
+      "assign result class",
+      "record promotion effect"
+    ]
+  },
+  "counterexample_record": {
+    "id": "RTE_COUNTEREXAMPLE_003",
+    "target": "Any claim that passing RATE_TYPE_ELIGIBLE(x, phi) validates DENSITY_BRIDGE_001",
+    "counterexample": "RTE_RESULT_PASS_001 passes eligibility while leaving distinction density, propagation position, and projection validity underived.",
+    "ruling": "Eligibility is not validation."
+  },
+  "required_execution_surface": [
+    "docs/governance/rate_type_eligibility_results_003.json",
+    "docs/governance/rate_type_eligibility_results_trace_003.json",
+    "docs/governance/rate_type_eligibility_results_counterexample_003.json"
+  ],
+  "target_files": [
+    "docs/governance/rate_type_eligibility_results_003.json",
+    "docs/governance/rate_type_eligibility_results_trace_003.json",
+    "docs/governance/rate_type_eligibility_results_counterexample_003.json"
+  ],
+  "required_repo_changes": [
+    {
+      "path": "docs/governance/rate_type_eligibility_results_003.json",
+      "description": "Add the concrete results witness that records one pass, one fail, and one edge case for RATE_TYPE_ELIGIBLE(x, phi)."
+    },
+    {
+      "path": "docs/governance/rate_type_eligibility_results_trace_003.json",
+      "description": "Add the ordered trace that records declared phi, condition checks, result, and promotion effect for the three concrete outcomes."
+    },
+    {
+      "path": "docs/governance/rate_type_eligibility_results_counterexample_003.json",
+      "description": "Add the counterexample witness that blocks validation, promotion, and edge conflation readings."
+    },
+    {
+      "path": "docs/textbook/mono_process_textbook_complete.md",
+      "description": "Add the governed concrete-results clarification and lexicon entry for the new results record."
+    },
+    {
+      "path": "registry/governance_change_ledger.json",
+      "description": "Register the proposed results execution-surface update in the governance ledger."
+    },
+    {
+      "path": "registry/governance_hash_registry.json",
+      "description": "Register the new documentation surfaces, the patch record, and the updated textbook and ledger hashes."
+    }
+  ],
+  "validation_expectations": {
+    "json_parse": "PASS_REQUIRED",
+    "registry_validation": "PASS_REQUIRED",
+    "patch_chain": "PASS_REQUIRED",
+    "patch_gate": "PASS_REQUIRED",
+    "global_validate": "PASS_REQUIRED"
+  },
+  "textbook_integration": {
+    "section_title": "Rate-Type Eligibility Concrete Test Results",
+    "recommended_location": "Section 2.8, immediately after the chain repair clarification.",
+    "integration_note": "Record one pass, one fail, and one edge trace for RATE_TYPE_ELIGIBLE(x, phi). Eligibility remains diagnostic only and does not validate or promote the bridge claim."
+  },
+  "ledger_entry_candidate": {
+    "event": "Recorded concrete PASS/FAIL/EDGE adversarial results for RATE_TYPE_ELIGIBLE(x, phi).",
+    "promotion_state": "No bridge claim promoted.",
+    "rt_core_changed": false
+  },
+  "hash_registry_targets": [
+    "registry/governance/patches/PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_RESULTS_003.json",
+    "docs/governance/rate_type_eligibility_results_003.json",
+    "docs/governance/rate_type_eligibility_results_trace_003.json",
+    "docs/governance/rate_type_eligibility_results_counterexample_003.json",
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/governance_change_ledger.json",
+    "registry/governance_hash_registry.json"
+  ],
+  "expected_outcome": {
+    "PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_RESULTS_003": "active_allow_or_proposed_until_applied",
+    "RATE_TYPE_ELIGIBLE(x, phi)": "concrete_tested",
+    "RATE_UNIFICATION_001": "still_candidate",
+    "DENSITY_BRIDGE_001": "still_candidate"
+  },
+  "next_after_success": {
+    "patch_id": "PATCH_RT_METRIC_BRIDGE_DENSITY_MINIMAL_DEFINITION_004",
+    "purpose": "Define distinction density minimally without importing probability, statistics, entropy, or metric distance as primitives."
+  },
+  "agent_instruction": "Create PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_RESULTS_003 as PROPOSED only. Use additive mode, cite the applied rate-type eligibility patch and tests patch as provenance, build the execution surface, and do not apply until patch-gate returns apply."
+}

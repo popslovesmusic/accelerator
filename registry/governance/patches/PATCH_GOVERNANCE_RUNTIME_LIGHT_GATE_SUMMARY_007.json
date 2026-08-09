@@ -1,0 +1,107 @@
+{
+  "patch_id": "PATCH_GOVERNANCE_RUNTIME_LIGHT_GATE_SUMMARY_007",
+  "title": "Lightweight Patch Gate Summary Path",
+  "type": "governance_runtime_extension",
+  "mode": "additive",
+  "status": "APPLIED",
+  "applied_on": "2026-07-09T09:43:08.7979210-04:00",
+  "goal": "Add a lightweight runtime path for patch-gate and patch-chain summaries that reports only verdict, status, reason, and minimal blockers without serializing full governance evidence.",
+  "problem_statement": {
+    "current_state": "The governance runtime already supports patch-chain and patch-gate evaluation, but the full result payload can be too heavy for direct operator consumption when only the outcome is needed.",
+    "gap": "There is no bounded summary mode for patch-chain or patch-gate commands that can return a report-grade verdict without emitting the full evidence tree.",
+    "risk": "Large governance payloads can stall or fail during serialization even when the decision itself is already known."
+  },
+  "basis": {
+    "source_patches": [
+      "PATCH_DB_GOVERNANCE_RUNTIME_020"
+    ],
+    "source_surfaces": [
+      "scripts/query_governance.py",
+      "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+      "docs/textbook/mono_process_textbook_complete.md"
+    ],
+    "scope": "Add bounded summary output for patch-chain and patch-gate without changing decision logic, patch semantics, or promotion rules."
+  },
+  "target_files": [
+    "scripts/query_governance.py",
+    "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+    "docs/textbook/mono_process_textbook_complete.md"
+  ],
+  "required_repo_changes": [
+    {
+      "path": "scripts/query_governance.py",
+      "description": "Add the --summary CLI flag, bounded patch-chain and patch-gate summary builders, and serialization fallback from the full result to the lightweight summary."
+    },
+    {
+      "path": "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+      "description": "Document the new summary mode for patch-chain and patch-gate and describe the bounded report-grade payload."
+    },
+    {
+      "path": "docs/textbook/mono_process_textbook_complete.md",
+      "description": "Synchronize the textbook runtime instructions with the new summary option."
+    }
+  ],
+  "runtime_changes": {
+    "cli_flags": [
+      "--summary"
+    ],
+    "patch_chain_summary_fields": [
+      "patch_id",
+      "query",
+      "status",
+      "verdict",
+      "reason",
+      "blockers",
+      "runtime_path",
+      "full_report_available"
+    ],
+    "patch_gate_summary_fields": [
+      "patch_id",
+      "query",
+      "status",
+      "verdict",
+      "reason",
+      "blockers",
+      "runtime_path",
+      "full_report_available"
+    ],
+    "summary_runtime_path": "light_summary",
+    "serialization_fallback": "summary payload returned if full JSON serialization fails",
+    "decision_semantics": "unchanged"
+  },
+  "registry_updates": [
+    "scripts/query_governance.py",
+    "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/governance/patches/PATCH_GOVERNANCE_RUNTIME_LIGHT_GATE_SUMMARY_007.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance_hash_registry.json"
+  ],
+  "acceptance_criteria": [
+    "python scripts/query_governance.py patch-chain --patch-id <PATCH_ID> --summary returns a bounded summary payload.",
+    "python scripts/query_governance.py patch-gate --patch-id <PATCH_ID> --target <path-or-surface> --summary returns a bounded summary payload.",
+    "Default patch-chain and patch-gate behavior remains unchanged.",
+    "Summary mode does not alter chain or gate decisions."
+  ],
+  "summary": {
+    "status": "pass",
+    "runtime": {
+      "summary_path": "active",
+      "decision_semantics": "unchanged",
+      "authority_boundary": "unchanged"
+    },
+    "warnings": [
+      "Summary mode is additive and does not alter gate or chain logic.",
+      "Full report generation remains available when --summary is omitted."
+    ]
+  },
+  "validation": {
+    "required": [
+      "summary_chain_command_pass",
+      "summary_gate_command_pass",
+      "py_compile_pass",
+      "governance_validation_pass"
+    ],
+    "result": "pass"
+  }
+}

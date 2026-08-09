@@ -1,0 +1,32 @@
+{
+  "crawl_id": "analysis_crawl_20260730_governed_current_state_001",
+  "crawl_type": "BOUNDED_READ_ONLY_ANALYSIS_CRAWL",
+  "crawl_date": "2026-07-30",
+  "campaign_id": "CAMPAIGN_GOVERNED_CURRENT_STATE_CRAWL_20260730_001",
+  "scope": {"domains": ["governance", "research_debt", "D_semantics", "lexicon", "intake", "analysis_state", "validation", "textbook_freshness"], "include_superseded": true, "finite_input_scope": true},
+  "budgets": {"maximum_reasoning_depth": 8, "maximum_candidate_count": 1000, "compute_budget": "read-only local inspection"},
+  "source_artifacts": [
+    {"path": "registry/research_debt_registry.json", "sha256": "650484912330F32DDCFE7FF34723DBBB260BEB8130E1FD3A3BAC966545C6A3B5"},
+    {"path": "registry/math/d_semantics_obligation_registry.json", "sha256": "FBC2C8377E18ADF11202123F683F31FA75A216F1E1D50FFFFCB2317D1962C409"},
+    {"path": "registry/lexicon_gap_queue.json", "sha256": "7DAE15B770BD54471C0B176CC825C0FC55650A469DF5393B0FE1A3500A8BCF76"},
+    {"path": "registry/lexicon_validation_registry.json", "sha256": "C72AE65829BD87498F04CD73C4FA59B2137FBF804DDB94B071A74AE38B797548"},
+    {"path": "governance/live/master_work_index.json", "sha256": "3539C6CE10CE7DCA624D505D534AF79D64CE1561ED05C59F58C3A6BCE80B3CD2"},
+    {"path": "departments/analysis/program_state_report.json", "sha256": "AED0C73CCF54670919F9590AEA137921263B3D0C81A0035E600FE0F91AF9FF98"},
+    {"path": "departments/analysis/dependency_report.json", "sha256": "B5DDD6B79BF9A067CE5EA282352C90FE7794A7CCFA6C5AB471E6441B74EC3C45"},
+    {"path": "departments/analysis/recommended_action_queue.json", "sha256": "6A361424CD383F275B437260886354CE71BD1B6E4C9A8FBC1BCDBF99FE0F6D47"},
+    {"path": "outputs/audits/global_health_report.json", "sha256": "163A986C54BBAF23113452BD753CE3A1E267D590DC8D13BB8444565717FD6EED"},
+    {"path": "docs/textbook/mono_process_textbook_complete.md", "sha256": "BB760AD5D09C5F10B416AE67C90404194AD0AB1CEFBF9560BA1E9F834D6401A9"}
+  ],
+  "normalization_rule": "Canonical registries remain authoritative; DB runtime is an operational projection. Current analysis projections are compared against source registries, preserving status and claim ceilings.",
+  "findings": [
+    {"discovery_id": "DISCOVERY_D_SEMANTICS_FRONTIER_20260730", "discovery_class": "PROOF_OBLIGATION", "title": "D-semantics remains source-open despite empty runtime debt", "statement": "The runtime reports open_debt_count=0, while the canonical D-semantics registry remains ACTIVE_OPEN with two OPEN obligations and the research-debt registry retains DEBT_D_SEMANTICS_PROOF_001.", "epistemic_status": "OBSERVED", "proof_status": "BLOCKED", "support": "high", "falsification_condition": "A later canonical registry snapshot marks the debt and both obligations discharged with required evidence."},
+    {"discovery_id": "DISCOVERY_LEXICON_FRONTIER_20260730", "discovery_class": "GOVERNANCE_DEFECT", "title": "Lexicon gap queue retains an 11-term open frontier", "statement": "The canonical lexicon gap queue contains 11 GAP_OPEN entries while validation terms are mostly provisional or partially verified; no L2 promotion follows from the count.", "epistemic_status": "OBSERVED", "proof_status": "OBLIGATIONS_IDENTIFIED", "support": "high", "falsification_condition": "The source queue is refreshed and no GAP_OPEN entries remain."},
+    {"discovery_id": "DISCOVERY_HEALTH_WARNING_20260730", "discovery_class": "UNRESOLVED", "title": "Validation is warning-level rather than clean-pass", "statement": "The health report has overall_status=warning, clean_pass_eligible=false, and degraded stages hygiene_validation, math_program_validation, and report_write, with no failed stages.", "epistemic_status": "SOURCE_REPORTED", "proof_status": "NOT_ATTEMPTED", "support": "high", "falsification_condition": "A subsequent validation report is clean-pass eligible with no degraded stages."}
+  ],
+  "inventory": {"research_debt_items": 7, "research_debt_open": 1, "d_semantics_obligations": 5, "d_semantics_open": 2, "lexicon_gap_open": 11, "lexicon_gap_resolved_to_canonical": 98, "lexicon_gap_c1_provisional": 125, "master_work_index_items": 91, "analysis_dependency_blockers": 0, "analysis_active_work_items": 0, "analysis_blocked_work_items": 0},
+  "evidence_alignment": {"db_snapshot_status": "fresh", "runtime_open_debt_count": 0, "source_registry_open_debt_count": 1, "global_health": "warning", "textbook_projection_freshness": "pass"},
+  "recommended_next_action": "FORMALIZE",
+  "success_assessment": {"outcome": "PARTIAL_SUCCESS", "reason": "The crawl reconciled runtime and source-layer state and bounded the remaining D-semantics, lexicon, and validation frontiers; it discharged no obligation.", "confidence": "high"},
+  "termination_reason": "Finite current-state scope completed; further progress requires formal evidence, queue review, or an authorized validation refresh rather than additional crawl inference.",
+  "what_this_crawl_does_not_authorize": ["registry mutation", "DB indexing or refresh", "proof discharge", "lexicon validation or promotion", "claim elevation", "simulation execution", "textbook patch", "commit"]
+}

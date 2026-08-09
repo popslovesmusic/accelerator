@@ -1,0 +1,73 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Equivalence Evidence Packet Schema",
+  "description": "Standardized schema for emitted implementation-equivalence evidence. Required for all C4+ high-performance tools.",
+  "type": "object",
+  "required": [
+    "packet_id",
+    "tool_name",
+    "reference_baseline_id",
+    "config_hash",
+    "tool_hash",
+    "reference_hash",
+    "seed_set",
+    "metric_suite",
+    "tolerances",
+    "equivalence_verdict",
+    "timestamp"
+  ],
+  "properties": {
+    "packet_id": { "type": "string" },
+    "tool_name": { "type": "string" },
+    "reference_baseline_id": { "type": "string" },
+    "config_hash": { "type": "string" },
+    "tool_hash": { "type": "string" },
+    "reference_hash": { "type": "string" },
+    "seed_set": {
+      "type": "array",
+      "items": { "type": "integer" }
+    },
+    "metric_suite": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "tool_value": { "type": "number" },
+          "ref_value": { "type": "number" },
+          "diff_abs": { "type": "number" },
+          "diff_rel": { "type": "number" }
+        }
+      }
+    },
+    "tolerances": {
+      "type": "object",
+      "properties": {
+        "absolute": { "type": "number" },
+        "relative": { "type": "number" }
+      }
+    },
+    "failure_cases": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "seed": { "type": "integer" },
+          "metric": { "type": "string" },
+          "tool_value": { "type": "number" },
+          "ref_value": { "type": "number" },
+          "verdict": { "type": "string" }
+        }
+      }
+    },
+    "equivalence_verdict": { "type": "string", "enum": ["PASS", "FAIL", "PARTIAL"] },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "claim_scope": { "type": "string" },
+    "governance_boilerplate": {
+      "type": "object",
+      "properties": {
+        "source_relation": { "type": "string", "const": "(E≠0) ⇔R δ(E>0)" },
+        "non_separability_acknowledged": { "type": "boolean", "const": true }
+      }
+    }
+  }
+}

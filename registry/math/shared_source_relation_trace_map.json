@@ -1,0 +1,118 @@
+{
+  "trace_map_id": "SHARED_SOURCE_RELATION_TRACE_MAP_001",
+  "patch_id": "MPF-PALG-036",
+  "title": "Shared Source Relation Trace Map",
+  "classification": "trace_mapping_patch",
+  "purpose": "Map QM-like and GR-like projection analogs back to indivisible ⇔R source relations while preserving projection-loss, recoverability, and conflict records.",
+  "status": {
+    "theorem_status": "NOT_PROVEN",
+    "trace_status": "CANDIDATE_SHARED_SOURCE_TRACE_MAP",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL"
+  },
+  "depends_on": [
+    "MPF-PALG-032",
+    "MPF-PALG-033",
+    "MPF-PALG-034",
+    "MPF-PALG-035"
+  ],
+  "core_rule": {
+    "name": "shared_trace_not_identity_rule",
+    "definition": "QM-like and GR-like projections may share a source relation without becoming identical, unified, or physically equivalent.",
+    "short_form": "shared_trace(QM_like, GR_like) ≠ identity(QM, GR)"
+  },
+  "trace_map_schema": {
+    "trace_map_id": "string",
+    "shared_source_relation": "string",
+    "qm_like_projection_ref": "string",
+    "gr_like_projection_ref": "string",
+    "qm_retained_features": ["string"],
+    "gr_retained_features": ["string"],
+    "shared_retained_features": ["string"],
+    "qm_lost_features": ["string"],
+    "gr_lost_features": ["string"],
+    "loss_differential": ["string"],
+    "conflict_records": ["string"],
+    "recoverability_pair": [
+      "RCOV-0 | RCOV-1 | RCOV-2 | RCOV-3",
+      "RCOV-0 | RCOV-1 | RCOV-2 | RCOV-3"
+    ],
+    "claim_level": "BRIDGE_ANALOG_ONLY",
+    "source_identity_claim": false,
+    "physical_unification_claim": false
+  },
+  "initial_trace_maps": [
+    {
+      "trace_map_id": "SSTM-001",
+      "shared_source_relation": "(E≠0) ⇔R δ(E>0)",
+      "qm_like_projection_ref": "QMP-REL-001",
+      "gr_like_projection_ref": "GRP-REL-001",
+      "qm_retained_features": [
+        "distinction_density",
+        "exclusion_gating",
+        "participation_thresholding"
+      ],
+      "gr_retained_features": [
+        "continuation_flow",
+        "smoothness_readability",
+        "constraint_flow_channeling"
+      ],
+      "shared_retained_features": [
+        "source_relation_traceability",
+        "local_admissibility_structure"
+      ],
+      "qm_lost_features": [
+        "smooth_continuation_readability",
+        "geometry_like_persistence_emphasis"
+      ],
+      "gr_lost_features": [
+        "distinction_density_emphasis",
+        "participation_thresholding_emphasis"
+      ],
+      "loss_differential": [
+        "QM_like retains distinction-heavy features",
+        "GR_like retains continuation-heavy features"
+      ],
+      "conflict_records": [
+        "discrete_transition_readability_vs_smoothness_readability",
+        "threshold_emphasis_vs_flow_emphasis"
+      ],
+      "recoverability_pair": [
+        "RCOV-1",
+        "RCOV-1"
+      ],
+      "claim_level": "BRIDGE_ANALOG_ONLY",
+      "source_identity_claim": false,
+      "physical_unification_claim": false
+    }
+  ],
+  "governance_rules": [
+    {
+      "rule_id": "SSTM-RULE-001",
+      "rule": "Every bridge trace map must declare a shared_source_relation."
+    },
+    {
+      "rule_id": "SSTM-RULE-002",
+      "rule": "Shared source traceability does not imply source identity."
+    },
+    {
+      "rule_id": "SSTM-RULE-003",
+      "rule": "QM-like and GR-like retained features must be recorded separately before overlap is recorded."
+    },
+    {
+      "rule_id": "SSTM-RULE-004",
+      "rule": "Loss differentials and conflict records are mandatory."
+    },
+    {
+      "rule_id": "SSTM-RULE-005",
+      "rule": "Trace maps cannot be used as evidence for physical unification."
+    }
+  ],
+  "forbidden_uses": [
+    "Using shared trace as proof of QM/GR unification.",
+    "Collapsing QM-like and GR-like projections into one domain.",
+    "Deleting conflict records after identifying shared source relation.",
+    "Treating trace map as source reconstruction.",
+    "Treating retained-feature overlap as physical evidence."
+  ]
+}

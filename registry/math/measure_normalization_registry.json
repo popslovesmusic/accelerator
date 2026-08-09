@@ -1,0 +1,28 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Registry for measure-based normalization rules and density metrics.",
+    "status": "provisional",
+    "last_updated": "2026-05-12"
+  },
+  "normalization_rules": [
+    {
+      "rule_id": "NR-001",
+      "name": "discrete_cardinality_ratio",
+      "expression": "density = count(non_null) / count(total)",
+      "applicability": "finite_cardinality"
+    },
+    {
+      "rule_id": "NR-002",
+      "name": "measure_theoretic_ratio",
+      "expression": "density = measure(non_null_region) / measure(total_domain)",
+      "applicability": "sigma_finite_measure"
+    },
+    {
+      "rule_id": "NR-003",
+      "name": "weighted_sum_ratio",
+      "expression": "density = sum(weights_non_null) / sum(weights_total)",
+      "applicability": "weighted_measure"
+    }
+  ]
+}

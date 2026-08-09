@@ -1,0 +1,109 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_006",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-04",
+  "type": "governance_patch",
+  "artifact_type": "governance_patch",
+  "title": "L/NL Regime Boundary and Transition",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_001",
+    "PATCH_PI_RT_CALCULUS_002",
+    "PATCH_PI_RT_CALCULUS_003",
+    "PATCH_PI_RT_CALCULUS_004",
+    "PATCH_PI_RT_CALCULUS_005"
+  ],
+  "purpose": "Define the governed boundary and transition rule between the linear and nonlinear RT operational regimes without altering RT_core.",
+  "motivation": {
+    "problem": "The derived linear and nonlinear regime classifications exist, but the governed boundary and transition between them is not separately classified.",
+    "resolution": "L/NL change is governed as a regime-classification transition under declared orientation, residue, admissibility, and context without changing RT_core."
+  },
+  "core_definition": {
+    "lnl_boundary": "The governed classification boundary between linear and nonlinear RT operational regimes.",
+    "transition_rule": "An RT operational regime transitions from L to NL when residue, history, threshold, feedback, admissibility, or context deforms local composition; it transitions from NL to L when that deformation stabilizes into a locally composable orientation.",
+    "not_primitive": true,
+    "not_axiomatic_floor": true,
+    "trace_requirement": "Every boundary- or transition-classified regime change must constructively trace to RT_core."
+  },
+  "governance_rules": [
+    {
+      "id": "RTCALC_BOUNDARY_001",
+      "name": "No Separate Foundations",
+      "statement": "L and NL are not separate foundations."
+    },
+    {
+      "id": "RTCALC_BOUNDARY_002",
+      "name": "Classification Not Core Change",
+      "statement": "L/NL transition is a regime-classification change, not a change of RT_core."
+    },
+    {
+      "id": "RTCALC_BOUNDARY_003",
+      "name": "Declared Boundary Evaluation",
+      "statement": "Boundary evaluation must declare orientation, residue, admissibility, and context."
+    },
+    {
+      "id": "RTCALC_BOUNDARY_004",
+      "name": "Mixed Regime Separation",
+      "statement": "Mixed regimes are permitted only when their L and NL components are explicitly separated by domain, scale, or context."
+    }
+  ],
+  "deferred_items": [
+    "Formal transition metric",
+    "Mixed-regime calculus",
+    "Representation rules for linear algebra and nonlinear algebra"
+  ],
+  "effects": [
+    "Registers the governed boundary between L and NL derived regimes.",
+    "Keeps transition classification trace-bound to RT_core and orientation.",
+    "Allows mixed regimes only with explicit separation across domain, scale, or context."
+  ],
+  "backward_compatibility": {
+    "breaking": false,
+    "notes": [
+      "Existing RT, L, and NL definitions remain canonical.",
+      "Boundary and transition rules do not alter RT_core.",
+      "Future mixed-regime derivations attach under the declared boundary conditions."
+    ]
+  },
+  "created_artifacts": [],
+  "updated_artifacts": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/lexicon_gap_queue.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_006.json"
+  ],
+  "source_artifacts": [
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_001.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_002.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_003.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_004.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_005.json",
+    "docs/textbook/mono_process_textbook_complete.md"
+  ],
+  "governance": {
+    "execution_claim": "not_claimed",
+    "registry_claim": "proposed_only",
+    "fabricated_history": false,
+    "notes": [
+      "The L/NL boundary is a governed classification boundary, not a replacement for RT_core.",
+      "Mixed regimes remain scope-limited until explicit separation by domain, scale, or context is declared."
+    ]
+  },
+  "validation": {
+    "required": [
+      "boundary_definition_present",
+      "transition_rule_present",
+      "trace_requirement_present",
+      "mixed_regime_scope_present",
+      "not_primitive",
+      "not_axiomatic_floor",
+      "lexicon_gap_registered",
+      "global_validate_pass"
+    ],
+    "result": "pass"
+  },
+  "notes": [
+    "This patch is governance and architecture only.",
+    "The L/NL boundary governs regime-classification change and does not supersede the canonical root expression."
+  ]
+}

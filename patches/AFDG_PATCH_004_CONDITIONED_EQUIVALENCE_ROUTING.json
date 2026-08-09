@@ -1,0 +1,22 @@
+{
+  "patch_id": "AFDG_PATCH_004_CONDITIONED_EQUIVALENCE_ROUTING",
+  "status": "APPLIED",
+  "applied_date": "2026-07-20T09:38:00-04:00",
+  "scope": "C1_MODEL_RELATIVE_ONLY",
+  "target": "OQ_COND_002 / OQ_COND_003 — Conditioning Invariants & Conditioned Equivalence Routing Metadata Schema",
+  "purpose": "Provide schema and routing metadata for conditioned equivalence decisions requiring declared context, lineage, and equivalence subtypes.",
+  "governance_note": "Metadata-closed under PROVISIONAL_METADATA_P1. Blocks unconditional equivalence claims without declared context.",
+  "schema": {
+    "type": "object",
+    "required": ["equivalence_id", "left_expression", "right_expression", "equivalence_subtype", "context_carrier", "lineage_trace"],
+    "properties": {
+      "equivalence_id": { "type": "string" },
+      "left_expression": { "type": "string" },
+      "right_expression": { "type": "string" },
+      "equivalence_subtype": { "type": "string" },
+      "context_carrier": { "type": "string" },
+      "lineage_trace": { "type": "array", "items": { "type": "string" } }
+    }
+  },
+  "claim_class": "C1"
+}

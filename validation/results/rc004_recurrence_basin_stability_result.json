@@ -1,0 +1,40 @@
+{
+  "rc004_recurrence_basin_stability_result": {
+    "timestamp": "2026-07-11T05:36:58.432339",
+    "target": "RC-004",
+    "objective": "strengthen_local_basin_retention",
+    "observed_behavior": "pass",
+    "stability_audit": {
+      "iteration": "bounded_sequence_verified",
+      "membership": "preserved_inside_basin_A",
+      "drift": "orientation_deviation < threshold_escape",
+      "flux": "transport_count_finite",
+      "residue": "legal_accumulation_limit_respected",
+      "window": "non_null_A_maintained",
+      "witness": "continuation_candidate_exists",
+      "perturbation": "bounded_drift_response_observed"
+    },
+    "retention_status": {
+      "is_stable": true,
+      "scope": "local_recurrence_basin",
+      "evidence": "Observed 10-cycle stability with zero basin escape under finite perturbation.",
+      "constraints": [
+        "SA-004 (residue stability)",
+        "SA-005 (window stability)"
+      ]
+    },
+    "failure_modes_tracked": [
+      "basin_escape",
+      "orientation_drift_accumulation",
+      "residue_saturation",
+      "window_collapse",
+      "transport_flux_divergence",
+      "branch_explosion",
+      "degenerate_minima",
+      "selection_instability"
+    ],
+    "readiness": "symbolic_supported_candidate",
+    "must_not_promote": true,
+    "governance_constraints_satisfied": true
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "id": "AUDIT-005",
+  "name": "Poisson Sign Convention Audit",
+  "status": "active",
+  "timestamp": "2026-05-13T12:00:00Z",
+  "audit_findings": {
+    "poisson_equation": "\u2207\u00b2\u03c6 = -\u03c1",
+    "solver_kernel": "1/k\u00b2",
+    "potential_sign_for_positive_rho": "positive",
+    "electric_field_convention": "E = -\u2207\u03c6",
+    "force_behavior": "repulsive",
+    "internal_consistency": "verified"
+  },
+  "reviewed_files": [
+    "tools/accelerator_sim_v1_cpp/PoissonSolver.cpp",
+    "tools/accelerator_sim_v1_cpp/PoissonSolver.h",
+    "tools/accelerator_sim_v1_cpp/LatticeElements.h"
+  ],
+  "policy_document": "docs/math/poisson_sign_convention_audit.md",
+  "governance_constraints": [
+    "no_silent_sign_change",
+    "no_physics_validation_claim_introduced",
+    "downstream_alignment_verified"
+  ]
+}

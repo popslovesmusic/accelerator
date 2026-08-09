@@ -1,0 +1,68 @@
+{
+  "patch_id": "APPENDIX_F_TODO_CLEARANCE_PASS_002",
+  "patch_type": "TEXTBOOK_TODO_CLEARANCE",
+  "status": "APPLIED_VALIDATED",
+  "date": "2026-07-19",
+  "authority_level": "L0_BOOKKEEPING",
+  "scope": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/math/metric_registry.json"
+  ],
+  "objective": "Clear low-risk Appendix F todo debt by resolving a completed textbook-sync item and separating metric rigor status from the already-supported OPEN_BRIDGE_001 family status.",
+  "governance_query": {
+    "task": "APPENDIX_F_TODO_CLEARANCE_PASS_002",
+    "runtime": "scripts/query_governance.py context-capsule",
+    "database_health_status": "pass",
+    "authority_state": "allow",
+    "freshness_state": "fresh"
+  },
+  "cleared_items": [
+    {
+      "item": "Formal difference between R_leftrightarrow and leftrightarrow_R",
+      "previous_status": "RESOLVED_PENDING_CANONICAL_TEXTBOOK_SYNC",
+      "new_status": "RESOLVED",
+      "basis": "Chapter 2 already contains the separation between residue-as-operand and closure-support-through-residue."
+    },
+    {
+      "item": "C_orient / T_class_metric bridge-status drift",
+      "previous_issue": "Metric registry notes retained stale OPEN_BRIDGE_001 provisional language.",
+      "new_disposition": "Metric entries now state that OPEN_BRIDGE_001 family support is separately resolved while the metrics remain pending rigor endorsement before downstream reuse."
+    }
+  ],
+  "claim_humility_review": {
+    "promotions_made": false,
+    "new_theorem_claims": false,
+    "metric_promotion": false,
+    "bridge_promotion": false,
+    "claim_class": "C0 bookkeeping"
+  },
+  "remaining_appendix_f_priorities": [
+    "Formalize AE overlap directionality K_R(A -> E).",
+    "Formalize typed-zero provenance carrier, outer recoupling relation, and collapse conditions.",
+    "Audit vortex governance hold disposition.",
+    "Continue hardening topology-to-geometry, EMS, statistical projection, and meta-relation family obligations."
+  ],
+  "verification": {
+    "commands": [
+      "JSON parse checks",
+      "python scripts/governance/authorize_lock_update.py",
+      "python scripts/sync_math_registry.py",
+      "python scripts/db/snapshot_registries.py",
+      "python scripts/global_validate.py"
+    ],
+    "results": {
+      "json_parse": "pass",
+      "lock_update": "pass",
+      "math_registry_sync": "pass_179_items",
+      "db_snapshot": "pass_REFRESH-20260720T001104711532Z",
+      "global_validate_exit": "pass_exit_0",
+      "global_health_overall_status": "warning",
+      "blocking_failures": false,
+      "warning_sources": [
+        "hygiene_validation",
+        "math_program_validation",
+        "report_write"
+      ]
+    }
+  }
+}

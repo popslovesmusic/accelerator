@@ -1,0 +1,95 @@
+{
+  "patch_id": "PATCH_VALIDATION_DEPARTMENT_GEMINI_ENCODING_REPAIR_073",
+  "generated_at": "2026-07-15T20:45:00-04:00",
+  "authority_role_determination": {
+    "surface": "GEMINI.md",
+    "authority_role": "INSTRUCTION_AUTHORITY",
+    "authority_state": "EXPLICIT_LIVE_AUTHORITY",
+    "runtime_query": "python -m scripts.query_governance authority --target GEMINI.md --authority-role INSTRUCTION_AUTHORITY --level summary --json => allow",
+    "authority_owner": "docs",
+    "reason": "Prescriptive guidance for operators and agents. It may name procedures but cannot mutate live state by itself."
+  },
+  "corruption_identification": {
+    "confirmed_corrupted_spans": [
+      {
+        "line": 25,
+        "field": "core_expression",
+        "pre_repair_text_span": "(â„°â‰ 0) â‡”_R Î´(â„°>0)",
+        "pre_repair_unicode_escape": "(\\xe2\\u201e\\xb0\\xe2\\u2030\\xa00) \\xe2\\u2021\\u201d_R \\xce\\xb4(\\xe2\\u201e\\xb0>0)",
+        "post_repair_text_span": "(ℰ≠0) ⇔_R δ(ℰ>0)",
+        "post_repair_unicode_escape": "(\\u2130\\u22600) \\u21d4_R \\u03b4(\\u2130>0)"
+      },
+      {
+        "line": 48,
+        "field": "claim_class_range",
+        "pre_repair_text_span": "C0Ã¢â‚¬â€œC5",
+        "pre_repair_unicode_escape": "C0\\xc3\\xa2\\xe2\\u201a\\xac\\xe2\\u20ac\\u0153C5",
+        "post_repair_text_span": "C0–C5",
+        "post_repair_unicode_escape": "C0\\u2013C5"
+      }
+    ],
+    "additional_corruption_found": false,
+    "scan_result": "No additional mojibake spans remained in GEMINI.md after the bounded repair beyond the two identified spans."
+  },
+  "source_text_corroboration": {
+    "core_expression_sources": [
+      {
+        "path": "registry/math/core_expression_guardrails.json",
+        "confirmed_text": "(ℰ≠0) ⇔_R δ(ℰ>0)"
+      },
+      {
+        "path": "registry/math/core_expression_registry.json",
+        "confirmed_text": "(ℰ≠0) ⇔_R δ(ℰ>0)"
+      },
+      {
+        "path": "registry/campaigns/campaign_design_schema.json",
+        "confirmed_text": "(ℰ≠0) ⇔_R δ(ℰ>0)"
+      },
+      {
+        "path": "docs/reviewer_notes/core_expression_orientation_note.md",
+        "confirmed_text": "(ℰ≠0) ⇔_R δ(ℰ>0)"
+      }
+    ],
+    "claim_range_corroboration": {
+      "basis": "The mojibake sequence encodes an en dash and restores the existing evidence-class range wording without altering semantics."
+    }
+  },
+  "bounded_repair": {
+    "modified_surface": "GEMINI.md",
+    "modified_lines": [
+      25,
+      48
+    ],
+    "surrounding_text_changed": false,
+    "line_26_after": "**Non-Occlusive Humility Clause:** No unrestricted ontological, physical, mathematical, or universal truth claims may be made from framework structure, metaphor, simulation, analogy, or internal consistency alone. You MUST report what was observed, defined, simulated, compared, or structurally mapped, with explicit scope.",
+    "line_47_after": "- **Recoverable Output:** No empirical claim is valid without a recoverable output path in `results/`.",
+    "line_49_after": "- **Reporting Structure:** Every report/paper MUST follow the structure:"
+  },
+  "semantic_equivalence_check": {
+    "core_expression_semantics_changed": false,
+    "claim_range_semantics_changed": false,
+    "authority_role_changed": false,
+    "meaning_statement": "The patch restores intended Unicode characters only. It does not revise the primitive, notation policy, or instruction meaning."
+  },
+  "focused_test_results": {
+    "pytest_status": "PASS",
+    "pytest_summary": "5 passed in 0.07s",
+    "json_parse_status": "PASS",
+    "git_diff_check_status": "PASS_WITH_CRLF_WARNINGS_ONLY"
+  },
+  "unchanged_surrounding_content": {
+    "verified_lines": [
+      26,
+      47,
+      49
+    ],
+    "line_endings_note": "No line-ending-only normalization was intentionally introduced by this patch."
+  },
+  "governed_state_preservation": {
+    "q1_local_queue": 0,
+    "global_blocking_ambiguities": 487,
+    "patch_002_status": "PARTIAL",
+    "patch_002_authority_effect": "NONE",
+    "full_project_validation": "SUSPENDED_PENDING_VALIDATOR_DEPARTMENT_COMPLETION"
+  }
+}

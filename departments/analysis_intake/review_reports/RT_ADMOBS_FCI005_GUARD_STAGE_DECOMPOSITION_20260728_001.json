@@ -1,0 +1,95 @@
+{
+  "artifact_type": "PROVISIONAL_GUARD_STAGE_DEPENDENCY_DECOMPOSITION",
+  "artifact_id": "RT_ADMOBS_FCI005_GUARD_STAGE_DECOMPOSITION_20260728_001",
+  "status": "PROVISIONAL_READY_FOR_HUMAN_REVIEW",
+  "canonicality": "NON_CANONICAL_CANDIDATE",
+  "claim_ceiling": "C1_MODEL_RELATIVE",
+  "source_artifacts": [
+    "registry/operator_registry.json",
+    "docs/theory/foundational/5_03_26 unity/math/proofs/P_O_CALC_001_partial_composition.md",
+    "RT_ADMOBS_FCI004_FCI005_BRIDGE_RESULTS_REVIEW_20260728_001"
+  ],
+  "stage_definitions": {
+    "PRE_ADMISSIBILITY": "Evaluable before delta_a, completed RefOrient_x, [Asym]_x, and <S>_x.",
+    "DELTA_A_DEPENDENT": "Requires delta_a evaluation, realized continuation, or a downstream witness produced after reference construction.",
+    "COMPOSITION_LAW": "Governs chains, associativity, or composition algebra rather than a binary observation-assignment compatibility relation.",
+    "UNRESOLVED": "Source dependency or typing is insufficiently explicit for classification."
+  },
+  "guard_inventory": [
+    {
+      "guard_id": "FCI005-G01",
+      "source_guard": "Type(X), Type(Z), and Context(Y) are declared.",
+      "stage": "PRE_ADMISSIBILITY",
+      "BCon_eligibility": "CONDITIONAL",
+      "dependency": "Operand/context typing only.",
+      "circularity": "NONE_IDENTIFIED",
+      "required_bridge": "Map source operand and context types to observation-orientation carriers and B_x, D_rel, R."
+    },
+    {
+      "guard_id": "FCI005-G02",
+      "source_guard": "D(X|Z) remains above epsilon.",
+      "stage": "PRE_ADMISSIBILITY",
+      "BCon_eligibility": "CONDITIONAL",
+      "dependency": "Declared distinction values and epsilon floor.",
+      "circularity": "NONE_IDENTIFIED_IF_SOURCE_VALUES_PREBOUND",
+      "required_bridge": "Show the distinction-floor test is over the candidate pair and does not require completed RefOrient or bounded realization."
+    },
+    {
+      "guard_id": "FCI005-G03",
+      "source_guard": "delta_a(X otimes_Y Z) is nonempty.",
+      "stage": "DELTA_A_DEPENDENT",
+      "BCon_eligibility": "PROHIBITED",
+      "dependency": "Downstream admissible continuation evaluation.",
+      "circularity": "POTENTIAL_CIRCULARITY",
+      "required_action": "Keep outside BCon_x and PermittedResolution_x pre-guard projection."
+    },
+    {
+      "guard_id": "FCI005-G04",
+      "source_guard": "Result remains in RT union aRT union typed_closure_candidate.",
+      "stage": "UNRESOLVED",
+      "BCon_eligibility": "NOT_AUTOMATIC",
+      "dependency": "Result typing and possible closure-candidate construction.",
+      "circularity": "UNRESOLVED",
+      "required_bridge": "Determine whether result typing is checked on source operands or only after downstream realization."
+    },
+    {
+      "guard_id": "FCI005-G05",
+      "source_guard": "Associativity is context-bound only.",
+      "stage": "COMPOSITION_LAW",
+      "BCon_eligibility": "NOT_AUTOMATIC",
+      "dependency": "Chains of more than one composition.",
+      "circularity": "NOT_APPLICABLE",
+      "required_action": "Do not project into PairwiseCompatible_x without a separate typing argument."
+    },
+    {
+      "guard_id": "FCI005-G06",
+      "source_guard": "Closure-class compatibility.",
+      "stage": "UNRESOLVED",
+      "BCon_eligibility": "CONDITIONAL",
+      "dependency": "May be prebound source class or may depend on completed closure support.",
+      "circularity": "POTENTIAL_CIRCULARITY",
+      "required_bridge": "Show closure-class data is available before RefOrient and ProjectBounded."
+    },
+    {
+      "guard_id": "FCI005-G07",
+      "source_guard": "Failure on missing or invalid operand typing, undefined context, distinction collapse, empty admissibility, closure incompatibility, or ordering collapse.",
+      "stage": "MIXED",
+      "BCon_eligibility": "PARTIAL_ONLY",
+      "dependency": "Individual failure branches have different dependency stages.",
+      "circularity": "MIXED",
+      "required_action": "Retain only individually proven pre-admissibility branches; do not project the aggregate failure set wholesale."
+    }
+  ],
+  "decomposition_result": {
+    "eligible_pre_guard_candidates": ["FCI005-G01", "FCI005-G02"],
+    "prohibited_downstream_guards": ["FCI005-G03"],
+    "composition_law_guards": ["FCI005-G05"],
+    "unresolved_guards": ["FCI005-G04", "FCI005-G06", "FCI005-G07"],
+    "BCon_x": "REMAINS_UNBOUND",
+    "H_x": "REMAINS_UNDECLARED",
+    "full_FCI005_projection": "PROHIBITED"
+  },
+  "next_action": "Resolve the pre-admissibility type and context bridges for FCI005-G01 and FCI005-G02 without defining a total transformation-to-observation assignment map.",
+  "not_changed": ["otimes", "FCI-004", "BCon_x", "H_x", "delta_a", "O_adm", "W_adm", "C_orient", "canonical registries", "canonical textbook"],
+  "human_review_required": true
+}

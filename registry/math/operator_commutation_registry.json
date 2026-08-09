@@ -1,0 +1,59 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Registry for known or conjectured commutation, non-commutation, and order-sensitive operator pairs.",
+    "status": "provisional",
+    "last_updated": "2026-05-12"
+  },
+  "commutation_statuses": [
+    "commuting",
+    "non_commuting",
+    "conditional",
+    "non_commuting_under_selection",
+    "non_commuting_under_residue_variation",
+    "undefined"
+  ],
+  "commutation_entries": [
+    {
+      "entry_id": "COM-001",
+      "operator_pair": [
+        "Pi_A",
+        "delta"
+      ],
+      "commutation_status": "non_commuting_under_selection",
+      "reason": "Filtering before continuation and filtering after continuation can produce different admissible branches.",
+      "failure_modes": [
+        "CFM-003",
+        "CFM-004"
+      ],
+      "provisional_status": true
+    },
+    {
+      "entry_id": "COM-002",
+      "operator_pair": [
+        "NavT",
+        "residue_update"
+      ],
+      "commutation_status": "non_commuting_under_residue_variation",
+      "reason": "Residue update changes transport admissibility and transport changes residue update context.",
+      "failure_modes": [
+        "CFM-003",
+        "CFM-005"
+      ],
+      "provisional_status": true
+    },
+    {
+      "entry_id": "COM-003",
+      "operator_pair": [
+        "orientation_minimization",
+        "branch_pruning"
+      ],
+      "commutation_status": "conditional",
+      "reason": "Order may commute only when pruning ranking and orientation metric are aligned.",
+      "failure_modes": [
+        "CFM-007"
+      ],
+      "provisional_status": true
+    }
+  ]
+}

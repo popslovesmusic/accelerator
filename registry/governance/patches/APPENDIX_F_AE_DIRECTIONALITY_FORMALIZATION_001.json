@@ -1,0 +1,78 @@
+{
+  "patch_id": "APPENDIX_F_AE_DIRECTIONALITY_FORMALIZATION_001",
+  "patch_type": "APPENDIX_F_OBLIGATION_REDUCTION",
+  "status": "APPLIED_VALIDATED",
+  "date": "2026-07-19",
+  "authority_level": "L0_TO_C1_PROVISIONAL_FORMALIZATION",
+  "scope": [
+    "registry/math/operator_registry.json",
+    "registry/math/open_bridge_registry.json",
+    "registry/lexicon_gap_queue.json",
+    "registry/lexicon_validation_registry.json",
+    "docs/textbook/mono_process_textbook_complete.md"
+  ],
+  "objective": "Reduce the AE overlap bridge directionality obligation by provisionally typing K_R(A -> E; B,O,M_R) as the Affect-to-Effect pre-squared directionality carrier.",
+  "governance_query": {
+    "task": "APPENDIX_F_AE_DIRECTIONALITY_FORMALIZATION_001",
+    "runtime": "scripts/query_governance.py context-capsule",
+    "database_health_status": "pass",
+    "authority_state": "allow",
+    "freshness_state": "fresh"
+  },
+  "formalization": {
+    "operator": "K_R",
+    "name": "Directional Relational Amplitude",
+    "canonical_form": "K_R(A -> E; B,O,M_R)",
+    "projection_form": "P_R(E <- A) = |K_R(A -> E; B,O,M_R)|^2",
+    "role": "Preserve represented Affect-to-Effect directionality before squared projection.",
+    "directionality_rule": "K_R(A -> E) and K_R(E -> A) are not interchangeable unless explicit symmetry metadata is declared."
+  },
+  "obligation_reduction": {
+    "bridge_id": "OPEN_BRIDGE_AE_OVERLAP_001",
+    "previous_obligation": "Define directional relational amplitude K_R(A -> E) or equivalent directionality carrier.",
+    "new_disposition": "PROVISIONALLY_FORMALIZED_PENDING_VALIDATION",
+    "remaining_obligations": [
+      "Validate or refine K_R under concrete representation choices.",
+      "Define whether M_R is linear, nonlinear, or domain-selected.",
+      "Define C_RT and V_R domains/codomains.",
+      "Specify whether Affect and Effect occupy the same representation space or dual spaces.",
+      "Define probability normalization over mutually distinguishable candidate effects before probability language is permitted."
+    ]
+  },
+  "claim_humility_review": {
+    "bridge_promotion": false,
+    "probability_promotion": false,
+    "quantum_identity_claim": false,
+    "external_physics_claim": false,
+    "claim_class": "C1_DEFINED_PROVISIONAL"
+  },
+  "negative_constraints": [
+    "K_R is not probability by default.",
+    "K_R does not identify raw Affect and Effect with quantum states.",
+    "K_R does not make symmetric squared overlap a full realization-process model.",
+    "K_R remains representation-relative and metadata-dependent."
+  ],
+  "verification": {
+    "commands": [
+      "JSON parse checks",
+      "python scripts/governance/authorize_lock_update.py",
+      "python scripts/sync_math_registry.py",
+      "python scripts/db/snapshot_registries.py",
+      "python scripts/global_validate.py"
+    ],
+    "results": {
+      "json_parse": "pass",
+      "lock_update": "pass",
+      "math_registry_sync": "pass_179_items",
+      "db_snapshot": "pass_REFRESH-20260720T003036923666Z",
+      "global_validate_exit": "pass_exit_0",
+      "global_health_overall_status": "warning",
+      "blocking_failures": false,
+      "warning_sources": [
+        "hygiene_validation",
+        "math_program_validation",
+        "report_write"
+      ]
+    }
+  }
+}

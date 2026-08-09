@@ -1,0 +1,103 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_024",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-05",
+  "type": "governance_patch",
+  "artifact_type": "governance_patch",
+  "title": "Continuation Expression Evaluation Order",
+  "priority": "HIGH",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_018",
+    "PATCH_PI_RT_CALCULUS_019",
+    "PATCH_PI_RT_CALCULUS_020",
+    "PATCH_PI_RT_CALCULUS_021",
+    "PATCH_PI_RT_CALCULUS_022",
+    "PATCH_PI_RT_CALCULUS_023"
+  ],
+  "purpose": "Define the ordered evaluation pipeline for continuation expressions before introducing recovery or executable reduction algorithms.",
+  "core_claim": "Continuation evaluation is ordered, and failure classification occurs before composition is admitted.",
+  "canonical_claims": [
+    {
+      "id": "CLAIM_024_001",
+      "statement": "Continuation evaluation is ordered.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_024_002",
+      "statement": "Failure classification occurs before composition is admitted.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_024_003",
+      "statement": "Reduction is permitted only after well-formedness, typing, transition, endpoint, admissibility, and residue checks pass.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_024_004",
+      "statement": "Evaluation order does not modify RT_core.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_024_005",
+      "statement": "Recovery remains deferred.",
+      "status": "canonical"
+    }
+  ],
+  "formal_objects": [
+    {
+      "symbol": "EVAL_024",
+      "name": "Continuation Expression Evaluation Order",
+      "definition": "Ordered evaluation pipeline for continuation expressions from parsing through reduction eligibility.",
+      "primitive": false,
+      "domain": "continuation_evaluation_layer"
+    }
+  ],
+  "evaluation_order": [
+    "parse expression",
+    "check WF(C)",
+    "check domain types",
+    "apply explicit typed transitions",
+    "check endpoint compatibility",
+    "check admissibility",
+    "check residue propagation",
+    "classify failure if checks fail",
+    "permit composition if checks pass",
+    "permit reduction toward NF(C)"
+  ],
+  "explicitly_out_of_scope": [
+    "Recovery operator",
+    "Crisis-regime recursion",
+    "Executable parser implementation",
+    "sigma_RT selector",
+    "Operational regime execution",
+    "DB/runtime debt"
+  ],
+  "validation_requirements": [
+    "Evaluation order is registered as an ordered pipeline.",
+    "Failure classification precedes composition admission.",
+    "Reduction remains gated by WF(C), typing, transition, endpoint, admissibility, and residue checks.",
+    "RT_core remains unchanged."
+  ],
+  "required_file_updates": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_024.json",
+    "registry/formal_object_registry.json",
+    "registry/math_source_registry.json",
+    "registry/lexicon_gap_queue.json",
+    "registry/registry/lexicon_gap_queue.json"
+  ],
+  "success_criteria": {
+    "evaluation_order_registered": true,
+    "failure_classification_before_admission": true,
+    "reduction_gated_by_checks": true,
+    "rt_core_unchanged": true,
+    "recovery_deferred": true
+  },
+  "next_recommended_patch": {
+    "patch_id": "PATCH_PI_RT_CALCULUS_025",
+    "title": "Minimal Continuation Reduction Algorithm",
+    "purpose": "Introduce the smallest governed reduction procedure after evaluation order and failure boundaries are fixed."
+  }
+}

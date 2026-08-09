@@ -1,0 +1,62 @@
+{
+  "review_packet_id": "RT_MTO_OTM_HUMAN_REVIEW_PACKET_001",
+  "source": "RT_INDUCTION_MTO_OTM_CALCULUS_001",
+  "review_status": "PENDING_HUMAN_REVIEW",
+  "claim_ceiling": "C1_MODEL_RELATIVE",
+  "evidence": [
+    "finite_fixture_report.json",
+    "orientation_fixture_report.json",
+    "independent_cross_validation_report.json",
+    "adversarial_counterexample_report.json",
+    "provisional_obligation_package.json"
+  ],
+  "review_items": [
+    {
+      "obligation_id": "MTO-OBL-001",
+      "proposed_disposition": "ACCEPT_AS_BOUNDED_OPEN_OBLIGATION",
+      "basis": "Context omission was identified as a counterexample boundary.",
+      "human_decision": null,
+      "required_question": "Is context sufficient as an explicit input, or is a stronger role ontology required?"
+    },
+    {
+      "obligation_id": "MTO-OBL-002",
+      "proposed_disposition": "ACCEPT_AS_BOUNDED_OPEN_OBLIGATION",
+      "basis": "Candidate fixtures require single-valued MTO or explicit unresolved output.",
+      "human_decision": null,
+      "required_question": "What source-defined selector, if any, may determine MTO output?"
+    },
+    {
+      "obligation_id": "MTO-OBL-003",
+      "proposed_disposition": "ACCEPT_AS_BOUNDED_OPEN_OBLIGATION",
+      "basis": "Set projection produced a finite multiplicity collision.",
+      "human_decision": null,
+      "required_question": "Is primitive multiplicity semantically relevant in the intended RT domain?"
+    },
+    {
+      "obligation_id": "MTO-OBL-004",
+      "proposed_disposition": "ACCEPT_AS_BOUNDED_OPEN_OBLIGATION",
+      "basis": "Permutation fixtures pass only with unique canonical tie keys.",
+      "human_decision": null,
+      "required_question": "What canonical data are authorized to define orientation tie keys?"
+    },
+    {
+      "obligation_id": "MTO-OBL-005",
+      "proposed_disposition": "ACCEPT_AS_BOUNDED_OPEN_OBLIGATION",
+      "basis": "Equal observed outputs were correctly prevented from implying equivalence.",
+      "human_decision": null,
+      "required_question": "What independent RT identity/equivalence rule would be required before this implication could be considered?"
+    }
+  ],
+  "automated_pre_review": {
+    "fixture_schema_valid": true,
+    "primary_fixtures_pass": true,
+    "orientation_fixtures_pass": true,
+    "independent_cross_validation_pass": true,
+    "adversarial_boundaries_recorded": true,
+    "canonical_registry_modified": false,
+    "promotion_performed": false
+  },
+  "human_decision_required": true,
+  "canonical_promotion_allowed": false,
+  "next_gate": "HUMAN_REVIEW_DISPOSITION"
+}

@@ -1,0 +1,146 @@
+{
+  "registry_id": "GEO_PROJECTION_LEGALITY_DEFINITIONS",
+  "version": "1.0",
+  "status": "provisional",
+  "description": "Canonical formal definitions required for the PO-GEO-001 symbolic check pass. Declares Dom(Pi_geo), Cod(Pi_geo), Trace_geo(T), and the undefined conditions for tau_geo. C1 scope only — no physical interpretation.",
+  "claim_scope": "C1_MODEL_RELATIVE_ONLY",
+  "patch_applied": "PO_GEO_001_EXPLICIT_DEFINITION_PASS_001",
+  "patch_date": "2026-06-18T17:23:21-04:00",
+  "governance_bindings": ["charter_v2.3"],
+  "source_context": {
+    "source_type": "patches",
+    "source_path_or_note": "patches/PO_GEO_001_EXPLICIT_DEFINITION_PASS_001.json"
+  },
+  "non_separability_acknowledged": true,
+
+  "definitions": {
+
+    "Dom_Pi_geo": {
+      "symbol": "Dom(Pi_geo)",
+      "name": "Domain of Pi_geo",
+      "definition": "The class of admissible Topology_app objects T for which all four invariant labels are declared before projection commences.",
+      "required_labels": [
+        "distinction_class",
+        "admissibility_status",
+        "orientation_class",
+        "closure_class"
+      ],
+      "admission_rule": "T enters Dom(Pi_geo) only if all four labels are present and non-null in Trace_geo(T) prior to projection. A T with any missing, null, or conflicted label is outside Dom(Pi_geo) and Pi_geo is undefined for that input.",
+      "must_not_claim": [
+        "Dom(Pi_geo) is the set of all possible topologies",
+        "Dom(Pi_geo) is a physical domain",
+        "Dom(Pi_geo) implies metric structure"
+      ],
+      "provisional_status": true
+    },
+
+    "Cod_Pi_geo": {
+      "symbol": "Cod(Pi_geo)",
+      "name": "Codomain of Pi_geo",
+      "definition": "The class of Geometry_app projections G that carry trace-accessible invariant labels inherited from their Topology_app source T via tau_geo.",
+      "required_label_accessibility": [
+        "distinction_class — readable from tau_geo(G)",
+        "admissibility_status — readable from tau_geo(G)",
+        "orientation_class — readable from tau_geo(G)",
+        "closure_class — readable from tau_geo(G)"
+      ],
+      "admission_rule": "G enters Cod(Pi_geo) only if tau_geo(G) returns all four labels without conflict or alias. A G for which any label is unrecoverable is outside Cod(Pi_geo).",
+      "forbidden_reading": "Cod(Pi_geo) is NOT physical space, a metric manifold, a spacetime, a field content space, or a matter content space. It is a label-trace-accessible projection class.",
+      "must_not_claim": [
+        "Cod(Pi_geo) is physical geometry",
+        "Cod(Pi_geo) entails metric realism",
+        "Cod(Pi_geo) supports field_app or matter_app automatically"
+      ],
+      "provisional_status": true
+    },
+
+    "Trace_geo": {
+      "symbol": "Trace_geo(T)",
+      "name": "Topology-Origin Trace Record",
+      "definition": "A finite label record attached to a Topology_app object T before any projection under Pi_geo commences. It is the ground truth against which tau_geo recoverability is measured.",
+      "fields": {
+        "T_id": "Unique identifier for the topology-origin object T",
+        "distinction_class": "The distinction class of T — non-null, from a declared distinction vocabulary",
+        "admissibility_status": "PASS or FAIL — evaluated by P_adm before projection",
+        "orientation_class": "The orientation class label of T — non-null, declared by the admissibility-orientation binding",
+        "closure_class": "The closure identity class of T — non-null, declared by the closure-residue binding"
+      },
+      "attachment_rule": "Trace_geo(T) must be fully populated before T enters Dom(Pi_geo). Partial records are inadmissible. No field may be inferred after projection.",
+      "usage": "After projection, tau_geo(Pi_geo(T)) is compared field-by-field against Trace_geo(T). A mismatch in any field constitutes an invariant loss event.",
+      "must_not_claim": [
+        "Trace_geo(T) is a physical coordinate record",
+        "Trace_geo(T) captures all information in T",
+        "Trace_geo(T) implies metric or curvature content"
+      ],
+      "provisional_status": true
+    },
+
+    "tau_geo_undefined_conditions": {
+      "symbol": "tau_geo(G) — undefined when:",
+      "name": "Tau_geo Undefined Conditions",
+      "definition": "tau_geo is a partial recoverability operator. It is explicitly undefined under the following conditions, each of which constitutes a projection legality failure.",
+      "undefined_when": [
+        {
+          "condition_id": "TAU-UNDEF-1",
+          "condition": "G was not produced by Pi_geo",
+          "consequence": "tau_geo has no trace record to recover from. The projection path is broken. G is not a legal Cod(Pi_geo) member."
+        },
+        {
+          "condition_id": "TAU-UNDEF-2",
+          "condition": "Any required trace label (distinction_class, admissibility_status, orientation_class, closure_class) is missing from the recoverable record",
+          "consequence": "Partial trace recovery constitutes label loss. Pi_geo is inadmissible for this input class. The relevant sub-obligation (A, B, C, or D) is failed."
+        },
+        {
+          "condition_id": "TAU-UNDEF-3",
+          "condition": "Any recovered trace label conflicts with the Trace_geo(T) ground truth",
+          "consequence": "Conflicting label recovery is treated as recovery failure. The sub-obligation is failed."
+        },
+        {
+          "condition_id": "TAU-UNDEF-4",
+          "condition": "closure_class is aliased — tau_geo(Pi_geo(T_A)).closure_class == tau_geo(Pi_geo(T_B)).closure_class for T_A and T_B with distinct closure classes",
+          "consequence": "Closure aliasing destroys closure lineage traceability. PO-GEO-001D is failed. tau_geo is not injective on closure classes for this input pair."
+        }
+      ],
+      "must_not_claim": [
+        "tau_geo is a full inverse of Pi_geo",
+        "tau_geo recovers all information in T",
+        "tau_geo undefined conditions are edge cases to be ignored"
+      ],
+      "provisional_status": true
+    }
+  },
+
+  "equivalence_relation_declaration": {
+    "name": "Geometry_app equivalence relation",
+    "symbol": "~_geo",
+    "definition": "Two Geometry_app projections G_A and G_B are ~_geo-equivalent iff tau_geo(G_A) and tau_geo(G_B) return the same distinction_class, admissibility_status, orientation_class, and closure_class.",
+    "constraint": "~_geo must be coarser than or equal to the source topology equivalence. It may not collapse T objects that are distinct under the Topology_app equivalence relation.",
+    "role": "PO-GEO-001A is satisfied only if the restriction of ~_geo to distinction classes is non-collapsing on the topology equivalence.",
+    "provisional_status": true
+  },
+
+  "symbolic_check_rule": {
+    "L099_may_advance_to_symbolic_checked_if": [
+      "Dom(Pi_geo) explicitly declared — SATISFIED by this patch",
+      "Cod(Pi_geo) explicitly declared — SATISFIED by this patch",
+      "Trace_geo(T) explicitly declared — SATISFIED by this patch",
+      "tau_geo undefined conditions explicitly declared — SATISFIED by this patch",
+      "PO-GEO-001A through PO-GEO-001D all marked explicit_defined — SATISFIED by this patch",
+      "All four failure modes remain active and testable — VERIFIED: distinction_alias, admissibility_violation, orientation_trace_loss, closure_trace_loss_or_alias all declared"
+    ],
+    "must_remain_blocked_if": [
+      "any trace label is optional — BLOCKED: all four labels are mandatory in Trace_geo(T)",
+      "tau_geo is treated as full inverse — BLOCKED: tau_geo undefined conditions prohibit full-inverse reading",
+      "geometry_app is interpreted as physical space — BLOCKED: Cod(Pi_geo) forbidden_reading declared",
+      "metric reconstruction is inferred — BLOCKED: must_not_claim in all definitions",
+      "downstream support is restored automatically — BLOCKED: geometry_app cap unchanged"
+    ]
+  },
+
+  "source_bindings": [
+    "patches/PO_GEO_001_EXPLICIT_DEFINITION_PASS_001.json",
+    "registry/math/proof_obligation_registry.json",
+    "registry/math/observable_projection_registry.json",
+    "registry/formal_object_registry.json"
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Registry binding theorems MT-001, MT-002, and MT-003 to explicit boundary and failure conditions.",
+    "status": "provisional",
+    "last_updated": "2026-05-12"
+  },
+  "boundary_status_values": [
+    "excluded_by_domain",
+    "handled_by_condition",
+    "handled_by_failure_mode",
+    "requires_symbolic_case_split",
+    "requires_simulation_case_split",
+    "unresolved"
+  ],
+  "theorem_bindings": [
+    {
+      "theorem_id": "MT-001",
+      "boundary_cases": [
+        {
+          "case": "admissibility_window_collapse",
+          "status": "handled_by_failure_mode",
+          "details": "Triggered when window A becomes empty during idempotence check."
+        },
+        {
+          "case": "epsilon_null_boundary_flip",
+          "status": "requires_symbolic_case_split",
+          "details": "Requires analysis of candidates mapping exactly to the threshold boundary."
+        },
+        {
+          "case": "equivalence_boundary_failure",
+          "status": "handled_by_condition",
+          "details": "Addressed by SA-003 fixed point property and equivalence definition."
+        }
+      ]
+    },
+    {
+      "theorem_id": "MT-002",
+      "boundary_cases": [
+        {
+          "case": "transport_closure_failure",
+          "status": "handled_by_failure_mode",
+          "details": "Triggered when NavT leaves locally closed neighborhood."
+        },
+        {
+          "case": "residue_drift",
+          "status": "requires_symbolic_case_split",
+          "details": "Requires check of residue invariance condition NI-003."
+        },
+        {
+          "case": "orientation_drift",
+          "status": "requires_symbolic_case_split",
+          "details": "Requires check of orientation invariance condition NI-004."
+        }
+      ]
+    },
+    {
+      "theorem_id": "MT-003",
+      "boundary_cases": [
+        {
+          "case": "empty_continuation_image",
+          "status": "handled_by_failure_mode",
+          "details": "Triggers failure if no candidate survives all selection/pruning rules."
+        },
+        {
+          "case": "branch_explosion",
+          "status": "handled_by_failure_mode",
+          "details": "Accounted for by branch_width_perturbation tests and pruning bounds."
+        },
+        {
+          "case": "total_branch_pruning",
+          "status": "requires_symbolic_case_split",
+          "details": "Requires analysis of pruning logic completeness under NEI-004."
+        }
+      ]
+    }
+  ]
+}

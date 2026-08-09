@@ -1,0 +1,44 @@
+{
+  "fixture_set_id": "AX-R07-MALFORMED-CONSTRUCTION-FIXTURES-001",
+  "axiom_id": "AX-R07_MALFORMED_CONSTRUCTION",
+  "status": "FORMALIZED_PENDING_VALIDATION",
+  "legal_shape": "b | u where b : BoundedSymmetry and u : UnboundedSymmetry",
+  "malformed_result": {"type":"MalformedConstruction","classification":"VALIDATION_RESULT_NOT_MATHEMATICAL_OUTPUT","returns_symmetry_condition":false},
+  "positive": [
+    {"fixture_id":"AX-R07-POS-001","expression":"<S> | >S<","expected":"WELL_FORMED","return_type":"SymmetryCondition"},
+    {"fixture_id":"AX-R07-POS-002","expression":"b | u","expected":"WELL_FORMED","return_type":"SymmetryCondition"},
+    {"fixture_id":"AX-R07-POS-003","expression":"alias_b | alias_u","expected":"WELL_FORMED_AFTER_ALIAS_NORMALIZATION","return_type":"SymmetryCondition"}
+  ],
+  "failure": [
+    {"fixture_id":"AX-R07-FAIL-001","expression":"| >S<","expected_error":"MISSING_LEFT_OPERAND"},
+    {"fixture_id":"AX-R07-FAIL-002","expression":"<S> |","expected_error":"MISSING_RIGHT_OPERAND"},
+    {"fixture_id":"AX-R07-FAIL-003","expression":"|","expected_error":"MISSING_BOTH_OPERANDS"},
+    {"fixture_id":"AX-R07-FAIL-004","expression":"<S> | >S< | <S>","expected_error":"UNSUPPORTED_CHAIN"},
+    {"fixture_id":"AX-R07-FAIL-005","expression":">S< | <S>","expected_error":"MALFORMED_OPERAND_ORDER"},
+    {"fixture_id":"AX-R07-FAIL-006","expression":"<S> | <S>","expected_error":"SAME_TYPE_OPERAND_PAIR","secondary_error":"MALFORMED_RIGHT_OPERAND_TYPE"},
+    {"fixture_id":"AX-R07-FAIL-007","expression":">S< | >S<","expected_error":"SAME_TYPE_OPERAND_PAIR","secondary_error":"MALFORMED_LEFT_OPERAND_TYPE"},
+    {"fixture_id":"AX-R07-FAIL-008","expression":"S | >S<","expected_error":"GENERIC_SYMMETRY_CONDITION_AS_LEFT_OPERAND"},
+    {"fixture_id":"AX-R07-FAIL-009","expression":"<S> | S","expected_error":"GENERIC_SYMMETRY_CONDITION_AS_RIGHT_OPERAND"},
+    {"fixture_id":"AX-R07-FAIL-010","expression":"(<S> | >S<) | >S<","expected_error":"RELATION_RESULT_REENTRY_LEFT"},
+    {"fixture_id":"AX-R07-FAIL-011","expression":"<S> | (<S> | >S<)","expected_error":"RELATION_RESULT_REENTRY_RIGHT"},
+    {"fixture_id":"AX-R07-FAIL-012","expression":"(<S> | >S<) | (<S> | >S<)","expected_error":"RELATION_RESULT_REENTRY_BOTH"},
+    {"fixture_id":"AX-R07-FAIL-013","expression":"|(<S>, >S<)","expected_error":"INVALID_PREFIX_FORM"},
+    {"fixture_id":"AX-R07-FAIL-014","expression":"(<S>, >S<)|","expected_error":"INVALID_POSTFIX_FORM"},
+    {"fixture_id":"AX-R07-FAIL-015","attempt":"Implicitly convert generic SymmetryCondition into BoundedSymmetry.","expected_error":"IMPLICIT_COERCION_FORBIDDEN"},
+    {"fixture_id":"AX-R07-FAIL-016","attempt":"Implicitly convert generic SymmetryCondition into UnboundedSymmetry.","expected_error":"IMPLICIT_COERCION_FORBIDDEN"},
+    {"fixture_id":"AX-R07-FAIL-017","expression":"unknown_left | >S<","expected_error":"UNKNOWN_OPERAND_TYPE"},
+    {"fixture_id":"AX-R07-FAIL-018","expression":"<S> | unknown_right","expected_error":"UNKNOWN_OPERAND_TYPE"},
+    {"fixture_id":"AX-R07-FAIL-019","expression":"invalid_alias | >S<","expected_error":"ALIAS_RESOLUTION_FAILURE"},
+    {"fixture_id":"AX-R07-FAIL-020","attempt":"Replace b1 with distinct b2 without an authorized substitution rule.","expected_error":"UNAUTHORIZED_SUBSTITUTION"}
+  ],
+  "error_taxonomy": [
+    "MISSING_LEFT_OPERAND","MISSING_RIGHT_OPERAND","MISSING_BOTH_OPERANDS","EXCESS_OPERANDS","MALFORMED_LEFT_OPERAND_TYPE","MALFORMED_RIGHT_OPERAND_TYPE","MALFORMED_BOTH_OPERAND_TYPES","MALFORMED_OPERAND_ORDER","SAME_TYPE_OPERAND_PAIR","GENERIC_SYMMETRY_CONDITION_AS_LEFT_OPERAND","GENERIC_SYMMETRY_CONDITION_AS_RIGHT_OPERAND","RELATION_RESULT_REENTRY_LEFT","RELATION_RESULT_REENTRY_RIGHT","RELATION_RESULT_REENTRY_BOTH","IMPLICIT_COERCION_FORBIDDEN","UNSUPPORTED_CHAIN","UNSUPPORTED_NESTING","INVALID_PREFIX_FORM","INVALID_POSTFIX_FORM","UNKNOWN_OPERAND_TYPE","AMBIGUOUS_OPERAND_TYPE","ALIAS_RESOLUTION_FAILURE","SUPERSEDED_OPERAND_REFERENCE","UNAUTHORIZED_SUBSTITUTION"
+  ],
+  "error_precedence": ["MISSING_BOTH_OPERANDS","MISSING_LEFT_OPERAND_OR_MISSING_RIGHT_OPERAND","UNSUPPORTED_CHAIN_OR_UNSUPPORTED_NESTING","UNKNOWN_OR_AMBIGUOUS_OPERAND_TYPE","MALFORMED_OPERAND_ORDER","SAME_TYPE_OPERAND_PAIR","MALFORMED_OPERAND_TYPE","IMPLICIT_COERCION_OR_UNAUTHORIZED_SUBSTITUTION"],
+  "pre_evaluation_rejection": true,
+  "automatic_repair": false,
+  "reordering": false,
+  "new_operand_types": [],
+  "new_coercions": [],
+  "new_recovery_semantics": false
+}

@@ -1,0 +1,192 @@
+{
+  "patch_id": "PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007",
+  "title": "Q0 Authority Scope Partition and Enforcement",
+  "status": "PARTIAL",
+  "timestamp": "2026-07-14T16:00:00-04:00",
+  "mode": "additive",
+  "depends_on": [
+    "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002",
+    "PATCH_GOVERNANCE_INVENTORY_PROVENANCE_AND_ADDITIVE_AUTHORITY_004",
+    "PATCH_GOVERNANCE_AMBIGUITY_RISK_CLASSIFICATION_AND_REMEDIATION_QUEUE_005",
+    "PATCH_GOVERNANCE_Q0_CLUSTER_SELECTION_AND_RESOLUTION_PACKET_006"
+  ],
+  "dependency_requirements": {
+    "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002": {
+      "type": "REQUIRES_EXISTING_EVIDENCE",
+      "reason": "Patch 007 partitions authority over the already-registered inventory surfaces and does not require the unresolved inventory ambiguities to be globally closed."
+    },
+    "PATCH_GOVERNANCE_INVENTORY_PROVENANCE_AND_ADDITIVE_AUTHORITY_004": {
+      "type": "REQUIRES_EXISTING_EVIDENCE",
+      "reason": "Patch 007 requires the additive provenance/core-rule registration from patch 004 as bounded evidence input."
+    },
+    "PATCH_GOVERNANCE_AMBIGUITY_RISK_CLASSIFICATION_AND_REMEDIATION_QUEUE_005": {
+      "type": "REQUIRES_EXISTING_EVIDENCE",
+      "reason": "Patch 007 consumes the remediation queue and risk classification outputs rather than requiring patch 005 to become a terminal authority."
+    },
+    "PATCH_GOVERNANCE_Q0_CLUSTER_SELECTION_AND_RESOLUTION_PACKET_006": {
+      "type": "REQUIRES_EXISTING_EVIDENCE",
+      "reason": "Patch 007 materializes the selected Q0 packet produced by patch 006 and therefore requires that packet to exist and verify."
+    }
+  },
+  "live_semantic_dependencies": {
+    "classification": "SEMANTICS_SURVIVE_ELSEWHERE",
+    "historical_reference": {
+      "patch_id": "PATCH_GOVERNANCE_STATUS_SEMANTICS_AND_BLOCKING_REDUCTION_003",
+      "status": "UNMATERIALIZED_HISTORICAL_REFERENCE",
+      "git_history_status": "NO_MATCHING_COMMITTED_HISTORY_FOUND",
+      "live_dependency_allowed": false
+    },
+    "surviving_authorities": [
+      {
+        "semantic_rule_id": "GOVERNANCE_VALIDATION_FAIL_CLOSED_001",
+        "authority_role": "VALIDATION_REDUCTION_AUTHORITY",
+        "artifact_path": "governance/authority_partitions/Q0_AUTHORITY_SCOPE_PARTITION_001.json",
+        "artifact_field": "validation_partition.terminal_reducer_rule_id",
+        "evidence_type": "REGISTERED_PARTITION_ARTIFACT"
+      },
+      {
+        "semantic_rule_id": "GOVERNANCE_VALIDATION_FAIL_CLOSED_001",
+        "authority_role": "VALIDATION_REDUCTION_AUTHORITY",
+        "artifact_path": "outputs/governance_inventory/q0_validator_authority_partition.json",
+        "artifact_field": "terminal_reducer_rule_id",
+        "evidence_type": "REGISTERED_GOVERNANCE_INVENTORY_OUTPUT"
+      },
+      {
+        "semantic_rule_id": "GOVERNANCE_VALIDATION_FAIL_CLOSED_001",
+        "authority_role": "VALIDATION_INVOCATION_AUTHORITY",
+        "artifact_path": "scripts/global_validate.py",
+        "artifact_field": "ValidationReducerAuthorityValidator and overall_status reduction",
+        "evidence_type": "LIVE_IMPLEMENTATION"
+      }
+    ]
+  },
+  "classification": [
+    "GOVERNANCE_REMEDIATION",
+    "AUTHORITY_SCOPE_PARTITION",
+    "ROLE_AWARE_ACCESS",
+    "EXCLUSIVE_WRITE_BOUNDARY",
+    "VALIDATOR_REDUCTION_BOUNDARY",
+    "AMBIGUITY_RESOLUTION"
+  ],
+  "objective": {
+    "primary": "Materialize the Q0 authority-role partition as governed repository state using the actual next sequential patch id.",
+    "secondary": "Enforce role-aware governance access so generic mixed-role lookup is blocked for the selected Q0 surfaces.",
+    "tertiary": "Constrain governed writes to one declared writer per scope with fail-closed preconditions.",
+    "quaternary": "Separate validator invocation authority from terminal validation reduction while keeping supporting validators bounded.",
+    "non_goals": [
+      "Do not run complete project validation.",
+      "Do not resolve ambiguities outside the selected Q0 cluster.",
+      "Do not claim a predecessor scope-partition patch existed when it did not.",
+      "Do not modify unrelated dirty files."
+    ]
+  },
+  "core_rule": {
+    "rule_id": "GOVERNANCE_AUTHORITY_SCOPE_PARTITION_001",
+    "path": "governance/core_rules/GOVERNANCE_AUTHORITY_SCOPE_PARTITION_001.json",
+    "hash": "5e8f99eb4146a7222ac63cc7e4e0770bb6f66d5e8173923190ffe50b5f0761aa",
+    "status": "LIVE",
+    "authority_effect": "LIVE_SCOPE_CONSTRAINT"
+  },
+  "selection_summary": {
+    "cluster_id": "Q0-CLUSTER-D3129CA0B3C98DED",
+    "resolved_record_count": 10,
+    "resolved_question_count": 12,
+    "remaining_blocking_ambiguities": 504,
+    "completion_mode": "SEPARATE_NON_OVERLAPPING_SCOPES"
+  },
+  "artifact_bundle": {
+    "core_rule": {
+      "path": "governance/core_rules/GOVERNANCE_AUTHORITY_SCOPE_PARTITION_001.json",
+      "hash": "5e8f99eb4146a7222ac63cc7e4e0770bb6f66d5e8173923190ffe50b5f0761aa"
+    },
+    "partition": {
+      "path": "governance/authority_partitions/Q0_AUTHORITY_SCOPE_PARTITION_001.json",
+      "hash": "701bf793ad1fb492c5f96cdaa3c9bcf4073738d5d1e59471c679121cfcaab75a"
+    },
+    "before_state": {
+      "path": "outputs/governance_inventory/q0_scope_partition_before.json",
+      "hash": "e0eee645de791306d3705bb8928d9b126e03dd97b9b127f30d263f8a6182d32e"
+    },
+    "after_state": {
+      "path": "outputs/governance_inventory/q0_scope_partition_after.json",
+      "hash": "37be7d3fc07a4a89777b5ea9c7057d37ba44bb9dfb7fdbc75e3dd41f0dd8d85d"
+    },
+    "diff": {
+      "path": "outputs/governance_inventory/q0_scope_partition_diff.json",
+      "hash": "01b3a4effdc725ffc80515c5a1b2a9d3cf539a5208b449b295b489c32c94f27d"
+    },
+    "write_owners": {
+      "path": "outputs/governance_inventory/q0_exclusive_write_owners.json",
+      "hash": "00ca1ece6dedcdcd51976b2fb71bf0142677c5d19fabdd81b6f28ff39abd15e1"
+    },
+    "validation": {
+      "path": "outputs/governance_inventory/q0_validator_authority_partition.json",
+      "hash": "1f338769a7e5972a62896aca13274817178451a44ee6b9f236be7851a82cb518"
+    },
+    "instruction": {
+      "path": "outputs/governance_inventory/q0_instruction_authority_partition.json",
+      "hash": "c3f2c68441e70a9cb32703b676a95cbb4575a2237ccc66be7136749f4c772003"
+    },
+    "queue": {
+      "path": "outputs/governance_inventory/q0_scope_partition_queue.json",
+      "hash": "5e7f4e62b3a41f68de7849689ccb5727675392a64233a92f90d7c27b7302b84e"
+    },
+    "review": {
+      "path": "docs/governance/q0_authority_scope_partition.md",
+      "hash": "51e51878e1c94920ed09299f1dd7da9d10f824e6ab411205091586defb869eab"
+    },
+    "live_authority_access_inventory": {
+      "path": "outputs/governance_inventory/q0_live_authority_access_inventory.json",
+      "hash": "3f22354bf4561d2a149f325789b21fa44b61e990b4330eb011b0699729df63be"
+    }
+  },
+  "authority_enforcement": {
+    "required_operations": [
+      "get_registry_state_authority",
+      "get_registry_write_authority",
+      "get_validation_invocation_authority",
+      "get_validation_reduction_authority",
+      "get_instruction_authority",
+      "get_generated_evidence"
+    ],
+    "generic_mixed_role_lookup": "BLOCKED_FOR_Q0_SURFACES",
+    "live_authority_access_inventory_path": "outputs/governance_inventory/q0_live_authority_access_inventory.json"
+  },
+  "validation_results": {
+    "focused_governance_validation": {
+      "status": "pass",
+      "test_count": 6,
+      "passed": 6,
+      "failed": 0
+    },
+    "governance_only_validator": {
+      "status": "pass",
+      "command": "python -m scripts.global_validate --governance-only --no-db-log --out outputs/audits/q0_scope_partition_global_health_report.json",
+      "overall_status": "pass",
+      "stage_result_count": 17,
+      "stale_report_warning": true,
+      "report_path": "outputs/audits/q0_scope_partition_global_health_report.json",
+      "report_hash": "e33860a3eeffb9d3c2798a0ca832e45e8e1fec893fb3a9b76e4467bce7504326"
+    },
+    "full_pytest_collection": {
+      "status": "blocked",
+      "phase": "COLLECTION",
+      "missing_modules": [
+        "typer",
+        "rd_moving_boundary_sim_v1",
+        "tda_module_v1"
+      ]
+    }
+  },
+  "affected_runtime_surfaces": [
+    "scripts/query_governance.py",
+    "scripts/global_validate.py",
+    "scripts/validate_governance_surface.py",
+    "scripts/governance/register_q0_authority_scope_partition.py",
+    "tools/governance_inventory/authority_scope_partition.py",
+    "tools/runtime_authority/__init__.py",
+    "registry/governance/patches/PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007.json"
+  ],
+  "full_project_validation": "SUSPENDED_PENDING_VALIDATOR_DEPARTMENT_COMPLETION",
+  "unrelated_changes_preserved": true
+}

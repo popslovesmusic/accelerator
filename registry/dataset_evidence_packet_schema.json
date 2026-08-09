@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Dataset Evidence Packet Schema",
+  "description": "Standardized schema for emitted dataset-analysis evidence. Required for all math-bound evidence campaigns.",
+  "type": "object",
+  "required": [
+    "packet_id",
+    "dataset_id",
+    "prediction_binding_id",
+    "config_hash",
+    "proxy_metrics",
+    "falsification_results",
+    "support_verdict",
+    "timestamp"
+  ],
+  "properties": {
+    "packet_id": { "type": "string" },
+    "dataset_id": { "type": "string" },
+    "prediction_binding_id": { "type": "string" },
+    "config_hash": { "type": "string" },
+    "proxy_metrics": {
+      "type": "object",
+      "additionalProperties": { "type": "number" }
+    },
+    "null_model_results": { "type": "object" },
+    "negative_results": { "type": "array" },
+    "falsification_results": {
+      "type": "object",
+      "additionalProperties": { "type": "string", "enum": ["PASS", "FAIL", "MARGINAL"] }
+    },
+    "support_verdict": { "type": "string", "enum": ["STRONG_SUPPORT", "PARTIAL_SUPPORT", "NULL_SUPPORT", "FALSIFIED"] },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "claim_scope": { "type": "string", "const": "STRICTLY_LOCAL_RESTRICTED_ANALOG" },
+    "governance_boilerplate": {
+      "type": "object",
+      "properties": {
+        "source_relation": { "type": "string", "const": "(E≠0) ⇔R δ(E>0)" },
+        "non_separability_acknowledged": { "type": "boolean", "const": true }
+      }
+    }
+  }
+}

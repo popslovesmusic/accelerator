@@ -1,0 +1,55 @@
+{
+  "recursive_loss_accumulation": {
+    "version": "1.0",
+    "description": "Formal analysis of information loss dynamics under recursive continuation.",
+    "loss_dynamics_classes": [
+      {
+        "id": "RLD-001",
+        "name": "monotone_loss_accumulation",
+        "description": "Reconstruction ambiguity increases monotonically with each iteration N."
+      },
+      {
+        "id": "RLD-002",
+        "name": "loss_saturation",
+        "description": "Loss increases initially but converges to a stable structural limit or basin."
+      },
+      {
+        "id": "RLD-003",
+        "name": "branch_amplified_loss",
+        "description": "Loss scales with the multiplicity of branch generation in deltaActualization."
+      },
+      {
+        "id": "RLD-004",
+        "name": "asymptotic_reconstruction_failure",
+        "description": "Ambiguity reaches full state-space dimension in the N->infinity limit."
+      }
+    ],
+    "operator_dynamics_mapping": [
+      {
+        "operator": "NavT",
+        "dynamic": "loss_saturation",
+        "basis": "Aggregate transport flux stabilizes in local dissipation basins (fixed points).",
+        "recoverability_limit": "asymptotic_nonreconstructable"
+      },
+      {
+        "operator": "Pi_A",
+        "dynamic": "monotone_loss_accumulation",
+        "basis": "Iterative boundary clipping erases sub-threshold state components.",
+        "recoverability_limit": "projection_limited"
+      },
+      {
+        "operator": "delta",
+        "dynamic": "branch_amplified_loss",
+        "basis": "Non-unique selection under degenerate minima compounds preimage multiplicity.",
+        "recoverability_limit": "multi_branch_bounded"
+      },
+      {
+        "operator": "observable_projection",
+        "dynamic": "monotone_loss_accumulation",
+        "basis": "Repeated mapping to lower-dimensional metrics erases high-dimensional history.",
+        "recoverability_limit": "globally_blocked"
+      }
+    ],
+    "last_updated": "2026-05-13"
+  }
+}

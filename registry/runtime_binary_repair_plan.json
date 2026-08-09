@@ -1,0 +1,40 @@
+{
+  "registry_id": "PCD_RUNTIME_BINARY_REPAIR_PLAN",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "repair_id",
+      "tool_id",
+      "failure_class",
+      "missing_or_invalid_artifact",
+      "repair_steps",
+      "post_repair_checks",
+      "rigor endorsement_ceiling_before_repair",
+      "rigor endorsement_ceiling_after_repair"
+    ]
+  },
+  "repairs": [
+    {
+      "repair_id": "RT-REPAIR-FSA-001",
+      "tool_id": "fsa_rule_engine_sim_v1_cpp",
+      "failure_class": "RT-001_missing_binary",
+      "missing_or_invalid_artifact": "tools/fsa_rule_engine_sim_v1_cpp/fsa_capi.dll",
+      "repair_steps": [
+        "locate source files and build script for fsa_capi",
+        "compile fsa_capi.dll for windows_x64",
+        "place DLL beside fsa_cpp_wrapper.py or update loader path explicitly",
+        "record compiler version, source commit, build flags, target architecture, and binary hash",
+        "rerun engine validation smoke test"
+      ],
+      "post_repair_checks": [
+        "dll_exists",
+        "ctypes_loads_successfully",
+        "smoke_run_emits_recoverable_output",
+        "runtime_binary_manifest_updated",
+        "rigor endorsement_manifest_updated"
+      ],
+      "rigor endorsement_ceiling_before_repair": "C1",
+      "rigor endorsement_ceiling_after_repair": "C2_pending_scientific_validation"
+    }
+  ]
+}

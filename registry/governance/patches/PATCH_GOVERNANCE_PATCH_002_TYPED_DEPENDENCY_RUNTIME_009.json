@@ -1,0 +1,38 @@
+{
+  "patch_id": "PATCH_GOVERNANCE_PATCH_002_TYPED_DEPENDENCY_RUNTIME_009",
+  "title": "Patch 002 Typed Dependency Runtime Semantics",
+  "type": "governance_runtime_extension",
+  "patch_type": "typed_dependency_semantics",
+  "mode": "additive",
+  "status": "PARTIAL",
+  "depends_on": [
+    "PATCH_DB_GOVERNANCE_RUNTIME_004",
+    "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002",
+    "PATCH_GOVERNANCE_INVENTORY_PROVENANCE_AND_ADDITIVE_AUTHORITY_004",
+    "PATCH_GOVERNANCE_AMBIGUITY_RISK_CLASSIFICATION_AND_REMEDIATION_QUEUE_005",
+    "PATCH_GOVERNANCE_Q0_CLUSTER_SELECTION_AND_RESOLUTION_PACKET_006",
+    "PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007",
+    "PATCH_GOVERNANCE_MISSING_DEPENDENCY_003_CHAIN_REPAIR_008"
+  ],
+  "dependency_requirements": {
+    "PATCH_DB_GOVERNANCE_RUNTIME_004": {
+      "type": "REQUIRES_COMPLETED_PREDECESSOR",
+      "reason": "Patch 009 extends the runtime patch-chain implementation itself."
+    },
+    "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002": {
+      "type": "REQUIRES_EXISTING_EVIDENCE",
+      "reason": "Patch 009 repairs the dependency interpretation for the registered transitional inventory artifact without promoting its completion state."
+    },
+    "PATCH_GOVERNANCE_INVENTORY_PROVENANCE_AND_ADDITIVE_AUTHORITY_004": "REQUIRES_EXISTING_EVIDENCE",
+    "PATCH_GOVERNANCE_AMBIGUITY_RISK_CLASSIFICATION_AND_REMEDIATION_QUEUE_005": "REQUIRES_EXISTING_EVIDENCE",
+    "PATCH_GOVERNANCE_Q0_CLUSTER_SELECTION_AND_RESOLUTION_PACKET_006": "REQUIRES_EXISTING_EVIDENCE",
+    "PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007": "REQUIRES_EXISTING_EVIDENCE",
+    "PATCH_GOVERNANCE_MISSING_DEPENDENCY_003_CHAIN_REPAIR_008": "REQUIRES_EXISTING_EVIDENCE"
+  },
+  "purpose": "Register typed dependency semantics for transitional evidence predecessors in the governance patch-chain runtime.",
+  "updated_artifacts": [
+    "scripts/query_governance.py",
+    "outputs/governance_inventory/patch_002_dependency_edge_inventory.json",
+    "registry/governance/patches/PATCH_GOVERNANCE_PATCH_002_TYPED_DEPENDENCY_RUNTIME_009.json"
+  ]
+}

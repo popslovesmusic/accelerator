@@ -1,0 +1,129 @@
+{
+  "audit_id": "AUDIT_TEXTBOOK_STRUCTURAL_STALENESS_001",
+  "title": "Comprehensive Mono Process Textbook Structural Audit",
+  "version": "1.0",
+  "status": "complete",
+  "scope": {
+    "primary_document": "docs/textbook/mono_process_textbook_complete.md",
+    "supporting_sources": [
+      "registry/governance_change_ledger.json",
+      "registry/formal_object_registry.json",
+      "registry/math_source_registry.json",
+      "registry/runtime_governance_manifest.json",
+      "registry/lexicon_gap_queue.json",
+      "registry/governance/patches/",
+      "outputs/audits/"
+    ]
+  },
+  "summary": {
+    "critical_issues": 1,
+    "high_issues": 3,
+    "medium_issues": 2,
+    "explicit_open_gap_items": 35,
+    "lexicon_terms_without_direct_textbook_coverage": 5,
+    "broken_markdown_links": 4,
+    "broken_source_citation_paths": 0
+  },
+  "findings": [
+    {
+      "finding_id": "TSA-001",
+      "severity": "critical",
+      "category": "canonical_drift",
+      "title": "Legacy RT-core notation persists alongside the canonical RT-core form",
+      "evidence": [
+        "docs/textbook/mono_process_textbook_complete.md:40",
+        "docs/textbook/mono_process_textbook_complete.md:85",
+        "docs/textbook/mono_process_textbook_complete.md:101",
+        "docs/textbook/mono_process_textbook_complete.md:104",
+        "docs/textbook/mono_process_textbook_complete.md:265",
+        "docs/textbook/mono_process_textbook_complete.md:141",
+        "docs/textbook/mono_process_textbook_complete.md:144",
+        "docs/textbook/mono_process_textbook_complete.md:147"
+      ],
+      "impact": "The textbook presents two active-looking RT-core forms: the legacy \u0064elta_a/iff_R form and the updated canonical RT_core form. The later canonical block exists, but the earlier form is not marked as historical residue, so a reader can treat both as current authority.",
+      "suggested_correction": "Mark the legacy form as historical residue or replace it everywhere with the canonical RT_core form. Keep only one current canonical expression in the textbook body.",
+      "governance_patch_recommendation": "Add a textbook-sync patch that normalizes chapter 1 and chapter 1.2D to the canonical RT_core spelling and explicitly labels any retained legacy notation as backward-compatibility aliasing."
+    },
+    {
+      "finding_id": "TSA-002",
+      "severity": "high",
+      "category": "completion",
+      "title": "Section 6.4 closes before the crisis fork is fully formalized",
+      "evidence": [
+        "docs/textbook/mono_process_textbook_complete.md:1462",
+        "docs/textbook/mono_process_textbook_complete.md:1464",
+        "docs/textbook/mono_process_textbook_complete.md:1467",
+        "docs/textbook/mono_process_textbook_complete.md:1470",
+        "docs/textbook/mono_process_textbook_complete.md:1473",
+        "docs/textbook/mono_process_textbook_complete.md:1477",
+        "docs/textbook/mono_process_textbook_complete.md:1481"
+      ],
+      "impact": "The section introduces the empty-set failure case and two branches, but it does not supply the full crisis branch, recovery branch, state-transition equations, convergence proof, or return condition that the heading advertises.",
+      "suggested_correction": "Expand 6.4 with the formal crisis branch, empty admissibility resolution, orientation reselection, recursive continuation, explicit transition equations, proof of convergence, failure branch, recovery branch, and return-to-stable-regime condition.",
+      "governance_patch_recommendation": "Create a textbook refactor patch for section 6.4 and bind it to the admissibility kernel governance chain."
+    },
+    {
+      "finding_id": "TSA-003",
+      "severity": "high",
+      "category": "notation",
+      "title": "Chapter 13 contains a malformed trace chain ending in an undefined \u005cto_x token",
+      "evidence": [
+        "docs/textbook/mono_process_textbook_complete.md:2377",
+        "docs/textbook/mono_process_textbook_complete.md:2909"
+      ],
+      "impact": "The displayed relation chain `(*|*) -> (A|E) -> <*>_x -> ->_x` ends with an undefined transition token. The same `x` is explicitly reserved as a discussion placeholder elsewhere, so the equation reads as truncated or malformed rather than complete.",
+      "suggested_correction": "Replace the dangling \u005cto_x fragment with a defined operator or a complete domain label, and ensure the chain terminates with an actual target expression.",
+      "governance_patch_recommendation": "Add a notation repair patch for the economics projection block and mirror the fix into any paired SSOT artifact."
+    },
+    {
+      "finding_id": "TSA-004",
+      "severity": "high",
+      "category": "reference_integrity",
+      "title": "Appendix G points to non-existent docs/registry targets",
+      "evidence": [
+        "docs/textbook/mono_process_textbook_complete.md:3454",
+        "docs/textbook/mono_process_textbook_complete.md:3455",
+        "docs/textbook/mono_process_textbook_complete.md:3456"
+      ],
+      "impact": "The three registry links in the secondary references section use a docs/registry root that does not exist in the repository.",
+      "suggested_correction": "Retarget the links to registry/compliance_charter_v2_3.json, registry/operator_registry.json, and registry/lexicon_canonical.json.",
+      "governance_patch_recommendation": "Add a documentation sync patch for Appendix G registry links."
+    },
+    {
+      "finding_id": "TSA-005",
+      "severity": "medium",
+      "category": "reference_integrity",
+      "title": "Appendix G links a missing results artifact",
+      "evidence": [
+        "docs/textbook/mono_process_textbook_complete.md:3440"
+      ],
+      "impact": "The CLS_003 reference points to results/2026-06-16_run03_CLS_003_EXTREME/paper.md, but the result folder and paper are absent from the repository.",
+      "suggested_correction": "Restore the missing result artifact, or retarget the citation to the actual archived paper if the run was moved or renamed.",
+      "governance_patch_recommendation": "Create a result-archive repair note or update the citation matrix."
+    },
+    {
+      "finding_id": "TSA-006",
+      "severity": "medium",
+      "category": "lexicon_coverage",
+      "title": "Five open memory-tensor lexicon terms are not surfaced as explicit textbook entries",
+      "evidence": [
+        "registry/lexicon_gap_queue.json:3729",
+        "registry/lexicon_gap_queue.json:3749",
+        "registry/lexicon_gap_queue.json:3769",
+        "registry/lexicon_gap_queue.json:3789",
+        "registry/lexicon_gap_queue.json:3809",
+        "docs/textbook/mono_process_textbook_complete.md:587",
+        "docs/textbook/mono_process_textbook_complete.md:3211",
+        "docs/textbook/mono_process_textbook_complete.md:3217"
+      ],
+      "impact": "The queue still carries memory_tensor_array, implied_memory, conditioned_memory_frame, memory_slice_trajectory, and gradient_based_memory_inference as GAP_OPEN items, but the textbook only mentions the memory-tensor program at a high level.",
+      "suggested_correction": "Add explicit Appendix F entries or chapter notes for the five memory-tensor terms, or mark them as intentionally deferred TODOs in the textbook itself.",
+      "governance_patch_recommendation": "Add a memory-tensor lexicon sync patch or annotate the terms as deferred in Appendix F."
+    }
+  ],
+  "notes": [
+    "All explicit file:/// links in the textbook resolved successfully.",
+    "All inline path-like [Source: ...] citations that look like local files resolved successfully.",
+    "Appendix F contains many deliberate open items; those are tracked rather than silently omitted."
+  ]
+}

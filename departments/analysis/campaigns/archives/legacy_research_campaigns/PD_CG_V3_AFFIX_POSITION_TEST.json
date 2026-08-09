@@ -1,0 +1,101 @@
+{
+  "campaign_id": "PD_CG_V3_AFFIX_POSITION_TEST",
+  "title": "Affix Position Test for Reciprocal Relation Notation",
+  "status": "COMPLETED_WITHIN_MODEL",
+  "purpose": "Test whether bare, subscripted, and prefixed reciprocal relations behave differently in the current procedural model.",
+  "reason": "Affix position may be semantically binding: <=>, <=>_x, and x_<=> must not be assumed equivalent.",
+  "root_expression": "(E != 0) iff_R delta_a(E > 0)",
+  "governance_rules": [
+    {
+      "rule_id": "R-AFFIX-001",
+      "statement": "Affix position is semantically binding. Bare, subscripted, and prefixed relations are distinct candidate notations."
+    },
+    {
+      "rule_id": "R-SUB-001",
+      "statement": "A subscript on a relation is retained only if it outperforms the bare baseline."
+    }
+  ],
+  "notations_to_test": {
+    "bare": {
+      "formal": "(A <=> a) ->_r O_-i ->_r partial_W_a ->_r W_a",
+      "reading": "Affecting and admissibility stand in an unqualified reciprocal procedural relation."
+    },
+    "subscripted": {
+      "formal": "(A <=>_x a) ->_r O_-i ->_r partial_W_a ->_r W_a",
+      "reading": "The reciprocal relation is evaluated under x-conditioning."
+    },
+    "prefixed": {
+      "formal": "(A x_<=> a) ->_r O_-i ->_r partial_W_a ->_r W_a",
+      "reading": "An x-mode procedure governs or generates the reciprocal relation."
+    }
+  },
+  "candidate_x_modes": [
+    {
+      "symbol": "r",
+      "status": "candidate_mode",
+      "note": "Use lowercase r to avoid conflating with prior _R relational-conditioning correction unless your registry requires uppercase."
+    }
+  ],
+  "primary_comparisons": [
+    {
+      "id": "COMPARE_BARE_VS_SUBSCRIPT",
+      "left": "(A <=> a)",
+      "right": "(A <=>_r a)",
+      "question": "Does r-conditioning on the relation outperform the bare reciprocal relation?"
+    },
+    {
+      "id": "COMPARE_BARE_VS_PREFIX",
+      "left": "(A <=> a)",
+      "right": "(A r_<=> a)",
+      "question": "Does r-mode generation/governance of the relation outperform the bare reciprocal relation?"
+    },
+    {
+      "id": "COMPARE_SUBSCRIPT_VS_PREFIX",
+      "left": "(A <=>_r a)",
+      "right": "(A r_<=> a)",
+      "question": "Are subscripted and prefixed r-forms behaviorally distinct?"
+    }
+  ],
+  "metrics": [
+    "basin_survival_gain",
+    "basin_reformation_gain",
+    "admissibility_class_recovery_gain",
+    "boundary_front_mediation_gain",
+    "whole_expression_RT_pass_rate",
+    "affix_position_separation_score"
+  ],
+  "decision_rules": {
+    "if_bare_wins": "Retain <=> without affix for this route. Do not promote <=>_r or r_<=>.",
+    "if_subscript_wins": "Treat <=>_r as a candidate conditioning-qualified reciprocal relation. Require root-trace note before promotion.",
+    "if_prefix_wins": "Treat r_<=> as a candidate procedural generator/modifier. Do not collapse it into <=>_r.",
+    "if_all_equal": "Affix is not justified in this model; use bare <=> as baseline.",
+    "if_subscript_and_prefix_differ": "Induct R-AFFIX-001 as confirmed within model: affix position changes behavior."
+  },
+  "blocked_claims": [
+    "OPEN_BRIDGE_001 resolved",
+    "external physical truth",
+    "universal validation",
+    "<=>_r equals r_<=>",
+    "affix position does not matter without testing"
+  ],
+  "required_outputs": [
+    "campaign JSON",
+    "results JSON",
+    "short report markdown",
+    "lexicon gap queue entries for <=>, <=>_r, and r_<=>",
+    "textbook note: affix position is under test and not assumed equivalent"
+  ],
+  "execution_record": {
+    "executed_at_utc": "2026-06-17T01:20:13.071506+00:00",
+    "results_path": "results/pd_cg_v3_affix_position_test/affix_position_results.json",
+    "report_path": "results/pd_cg_v3_affix_position_test/affix_position_report.md",
+    "decision_summary": {
+      "winning_form_within_model": "bare",
+      "subscript_outperforms_bare": false,
+      "prefix_outperforms_bare": false,
+      "subscript_and_prefix_are_behaviorally_distinct": true,
+      "supports_R_AFFIX_001_within_model": true,
+      "supports_open_bridge_001_promotion": false
+    }
+  }
+}

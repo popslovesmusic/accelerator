@@ -12,7 +12,8 @@ def run():
     
     os.makedirs(args.out, exist_ok=True)
     
-    exe_path = os.path.abspath(r"tools\dase_analog_sim_cpp\dase_analog_sim.exe")
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    exe_path = os.path.join(script_dir, "dase_analog_sim.exe")
     config_path = os.path.abspath(args.config)
     out_dir = os.path.abspath(args.out)
 

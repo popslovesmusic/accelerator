@@ -1,0 +1,57 @@
+{
+  "sim_id": "CLS_003_RUN_001_EXTREME",
+  "nx": 512,
+  "dt": 0.0001,
+  "length": 1.0,
+  "D_epsilon": 0.0006,
+  "D_rho": 0.0004,
+  "D_R": 0.0002,
+  "a": 0.6,
+  "b": 1.2,
+  "c": 2.0,
+  "alpha": 0.7,
+  "beta": 0.8,
+  "gamma": 1.2,
+  "u": 0.15,
+  "v": 0.08,
+  "kappa": 0.1,
+  "lambda_R": 0.8,
+  "h": 0.08,
+  "activity_thresh": 0.05,
+  "initial_condition": {
+    "epsilon_kind": "gaussian",
+    "epsilon_base": 0.0,
+    "amplitude": 0.32,
+    "sigma": 0.08,
+    "offset": 0.0,
+    "rho_base": 0.25,
+    "residue_base": 0.0
+  },
+  "sequence": [
+    {
+      "name": "baseline_stability",
+      "steps": 1000,
+      "s": 0.01
+    },
+    {
+      "name": "collapse_basin_entry",
+      "steps": 3000,
+      "s": 5.0
+    },
+    {
+      "name": "distinguishability_floor_contact",
+      "steps": 2000,
+      "s": 5.0
+    },
+    {
+      "name": "reformation_boundary",
+      "steps": 5000,
+      "s": 0.001
+    }
+  ],
+  "zeta_probes": {
+    "target": "orientation_equilibrium_manifold",
+    "observable_proxy": "u_v_coupling_residual",
+    "intent": "Verify that zeta-projection survives the collapse/reformation cycle"
+  }
+}

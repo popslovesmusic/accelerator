@@ -1,0 +1,17 @@
+{
+  "core_rule_id": "CORE-GOV-PRESERVATION-EXECUTION-CONTINUITY",
+  "title": "Authorized Work Must Remain Preserved, Visible, and Continuously Routed",
+  "status": "LIVE",
+  "authority_type": "CORE_GOVERNANCE_RULE",
+  "statement": "When the user explicitly submits an artifact for induction, the instruction authorizes preservation, queue registration, and continued governed processing until the artifact is represented in research or a visible governed blocker is recorded.",
+  "formal_expression": "EXPLICIT_INDUCTION(x) => PRESERVE(x) AND QUEUE_REGISTER(x) AND CONTINUE_UNTIL(RESEARCH_REGISTERED(x) OR RESEARCH_BLOCKED_VISIBLE(x))",
+  "invariants": [
+    "NO_AUTHORIZED_ARTIFACT_WITHOUT_PRESERVED_SOURCE",
+    "NO_AUTHORIZED_ARTIFACT_WITHOUT_QUEUE_IDENTITY",
+    "NO_WORKFLOW_TERMINATION_AT_INDUCTION",
+    "NO_SILENT_FAILURE",
+    "NO_SOURCE_MUTATION",
+    "NO_PROMOTION_BY_INDUCTION"
+  ],
+  "source_packet": "GOV_INDUCTION_AUTHORITY_TRANSITION_001"
+}

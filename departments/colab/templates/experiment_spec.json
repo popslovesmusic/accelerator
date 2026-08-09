@@ -1,0 +1,82 @@
+{
+  "spec_id": "EXPERIMENT_SPEC_REPLACE_WITH_STABLE_ID",
+  "schema_version": "1.0.0",
+  "status": "IMMUTABLE_SPEC",
+  "created_at": "2026-07-22T00:00:00Z",
+  "source_notebook": "path/to/notebook.ipynb",
+  "research_question": "State the bounded question this notebook or simulation is allowed to address.",
+  "hypothesis": "State the pre-execution hypothesis, including the null or expected limitation when applicable.",
+  "independent_variables": [
+    {
+      "name": "parameter_or_condition_name",
+      "definition": "Operational definition used by this experiment.",
+      "units_or_scale": "unitless",
+      "allowed_values_or_range": "declared before execution"
+    }
+  ],
+  "dependent_variables": [
+    {
+      "name": "measured_output_name",
+      "definition": "Operational definition of the measured output.",
+      "units_or_scale": "unitless",
+      "allowed_values_or_range": "declared before execution"
+    }
+  ],
+  "controls": [
+    {
+      "name": "control_name",
+      "purpose": "What inference or failure mode this control constrains.",
+      "implementation": "How the control is implemented or generated."
+    }
+  ],
+  "random_seed": {
+    "value": 0,
+    "seed_scope": "all stochastic notebook cells and generated outputs",
+    "derivation_policy": "Fixed before execution; derived seeds must be deterministic and listed in output manifests."
+  },
+  "parameter_space": [
+    {
+      "name": "parameter_name",
+      "values_or_range": "declared values, range, or grid",
+      "units_or_scale": "unitless",
+      "default": "declared default",
+      "sampling_rule": "grid, enumeration, Latin hypercube, fixed list, or other explicit rule"
+    }
+  ],
+  "termination_conditions": [
+    "Stop condition declared before execution."
+  ],
+  "expected_outputs": [
+    {
+      "name": "primary_output",
+      "path_pattern": "results/{spec_id}/primary_output.json",
+      "required": true,
+      "interpretation_role": "Primary bounded output for the stated question."
+    }
+  ],
+  "interpretation_protocol": {
+    "claim_ceiling": "C1_SPECIFICATION_ONLY",
+    "decision_rules": [
+      "Declare in advance how observed outputs map to support, limitation, null, inconclusive, or counterexample status."
+    ],
+    "allowed_interpretations": [
+      "Bounded notebook-domain observation."
+    ],
+    "blocked_interpretations": [
+      "External physical validation.",
+      "C5/C6 claim promotion.",
+      "Post-hoc expansion beyond the declared parameter space."
+    ]
+  },
+  "provenance": {
+    "source_paths": [
+      "path/to/notebook.ipynb"
+    ],
+    "artifact_hashes": {}
+  },
+  "immutability": {
+    "frozen_before_execution": true,
+    "content_sha256": "TO_BE_COMPUTED_AFTER_FINALIZATION",
+    "supersession_policy": "Do not edit after execution starts; create a new spec_id and link the superseding specification."
+  }
+}

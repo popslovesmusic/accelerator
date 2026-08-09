@@ -1,0 +1,62 @@
+{
+  "patch_id": "D_TYPED_PROJECTION_SCOPE_QUALIFICATION_20260724_001",
+  "campaign_id": "CAMPAIGN_D_MECHANIZED_PROJECTION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-24",
+  "type": "governance_patch",
+  "artifact_type": "governance_patch",
+  "title": "Scope Qualification for Typed D Projection Preservation",
+  "priority": "HIGH",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_020",
+    "D_TYPED_PROJECTION_INDEPENDENT_REVIEW_001",
+    "D_B_FIXED_SEED_AND_PROMOTION_GATE_001"
+  ],
+  "purpose": "Qualify the live D projection wording so OBL-D-001C is treated as a bounded type-level result only, while keeping semantic representable-distinction preservation under OBL-D-001D.",
+  "core_claim": "Current OBL-D-001C support closes the declared type route into TYPE_PROJECTION only; semantic preservation remains unresolved.",
+  "canonical_claims": [
+    {
+      "id": "CLAIM_D_001C_QUAL_001",
+      "statement": "The typed route A|E ->p Pi_D(A|E) -> D(*|*) currently supports type preservation into TYPE_PROJECTION under declared codomain and explicit invocation conditions only.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_D_001C_QUAL_002",
+      "statement": "Representable-distinction preservation is not established by OBL-D-001C and remains governed by OBL-D-001D.",
+      "status": "canonical"
+    }
+  ],
+  "required_file_updates": [
+    "docs/theory/foundational/5_03_26 unity/math/proofs/P126_d_typed_projection_type_preservation_scope_closure.md",
+    "docs/theory/foundational/5_03_26 unity/math/REGISTRY_proofs.md",
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/claim_registry.json",
+    "registry/proof_registry.json",
+    "registry/formal_object_registry.json",
+    "registry/math_source_registry.json",
+    "registry/math_hashes.json",
+    "registry/math_core_hashes.json",
+    "registry/math/d_semantics_obligation_registry.json",
+    "governance/live/research_debt_registry.json",
+    "registry/research_debt_registry.json",
+    "governance/live/textbook_projection_freshness_contract.json",
+    "registry/governance_change_ledger.json"
+  ],
+  "success_criteria": {
+    "scope_correction_applied": true,
+    "textbook_projection_wording_qualified": true,
+    "live_d_package_synced_to_A_B_discharge_state": true,
+    "human_review_not_fabricated": true
+  },
+  "claim_boundary": {
+    "claim_ceiling": "C1_DEFINED_PROVISIONAL",
+    "does_not_promote": [
+      "theorem status",
+      "semantic representable-distinction preservation",
+      "injectivity",
+      "reversibility",
+      "complete information preservation",
+      "external validity"
+    ]
+  }
+}

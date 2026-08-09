@@ -1,0 +1,40 @@
+{
+  "patch_id": "GOV_RESEARCH_INTAKE_COMPLETION_001",
+  "title": "Research Intake Completion",
+  "status": "APPLIED",
+  "applied_on": "2026-08-02",
+  "priority": "CRITICAL",
+  "mode": "governed_workflow_extension",
+  "transition_authorized": true,
+  "transition_record_id": "GTR_RESEARCH_INTAKE_COMPLETION_001",
+  "migration_plan_id": "MIG_RESEARCH_INTAKE_COMPLETION_001",
+  "basis": [
+    "departments/analysis_intake/semantic_captures/GOV_RESEARCH_INTAKE_COMPLETION_001.json",
+    "departments/analysis_intake/receipts/GOV_RESEARCH_INTAKE_COMPLETION_001.receipt.json"
+  ],
+  "core_rule": {"rule_id": "CORE-GOV-RESEARCH-INTAKE-COMPLETION", "path": "governance/core_rules/CORE-GOV-RESEARCH-INTAKE-COMPLETION.json"},
+  "source_artifact": {"path": "departments/analysis_intake/semantic_captures/GOV_RESEARCH_INTAKE_COMPLETION_001.json", "sha256": "B08F2AD107A785B94F4867BD79ABA2E5B050FEA68F27ED7FC604E1E1649B5961", "size_bytes": 1964},
+  "target_files": [
+    "departments/research/records",
+    "departments/research/concepts",
+    "departments/research/derivations",
+    "departments/research/dependencies",
+    "departments/research/open_questions",
+    "departments/research/indexes",
+    "scripts/sync_governance.py"
+  ],
+  "required_repo_changes": [
+    "Create non-canonical research records for inducted artifacts.",
+    "Register provisional concepts and derivations without promotion.",
+    "Keep incomplete extraction visibly blocked.",
+    "Preserve source hashes and queue identity continuity.",
+    "Do not modify preserved sources or manual notes."
+  ],
+  "success_criteria": [
+    "Pre-application governance gate returns apply.",
+    "Every migrated record has research registration or visible blocking.",
+    "Repeated migration is idempotent.",
+    "No preserved source is modified."
+  ],
+  "depends_on": ["GOV_INDUCTION_AUTHORITY_AND_VISIBILITY_001"]
+}

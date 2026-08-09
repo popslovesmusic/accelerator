@@ -1,0 +1,47 @@
+{
+  "schema_id": "MPF_LFCR_EVIDENCE_REPORT_V1",
+  "patch_id": "MPF_PATCH_001I",
+  "status": "ACTIVE",
+  "purpose": "Define the required evidence report format for simulation and mathematical attack results.",
+  "required_fields": {
+    "report_id": "string",
+    "campaign_id": "string",
+    "linked_bridge": "string",
+    "claim_under_attack": "string",
+    "run_metadata": {
+      "date": "string",
+      "engine": "string",
+      "engine_version": "string",
+      "seed_count": "integer",
+      "sample_size": "integer",
+      "config_hash": "string",
+      "result_hash": "string"
+    },
+    "model_results": {
+      "M0_full": "object",
+      "attack_models": "object"
+    },
+    "comparative_tests": {
+      "effect_size_analysis": "object",
+      "confidence_interval_95": "object",
+      "matched_control_pass": "boolean",
+      "seed_stability_pass": "boolean"
+    },
+    "decision": {
+      "result": "enum(SUPPORT, DOWNGRADE, FALSIFY, INCONCLUSIVE)",
+      "reason": "string",
+      "textbook_update_required": "boolean",
+      "review_lock_triggered": "boolean"
+    },
+    "textbook_update_intent": {
+      "affected_sections": "array"
+    }
+  },
+  "validation_rules": [
+    "Report is invalid without M0_full and all declared attack models.",
+    "Report is invalid without seed variance.",
+    "Report is invalid without matched initial-condition declaration.",
+    "Report is invalid without explicit decision result.",
+    "Report cannot promote downstream app claims automatically."
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "fixture_set_id": "0032_rt_orientation_boundary_coupling_contracts_fixtures",
+  "source_note": "docs/theory/foundational/5_03_26 unity/math/notes/0032_rt_orientation_boundary_coupling_contracts_20260802_001.md",
+  "claim_ceiling": "C1_MODEL_RELATIVE",
+  "status": "CANDIDATE_VALIDATION_FIXTURES",
+  "cases": [
+    {
+      "case_id": "ROLE-001",
+      "name": "proposition-relative-role-reclassification",
+      "input": {"rt_id": "RT-1", "propositions": ["P-health", "P-network"], "roles": ["primitive", "aspect"]},
+      "expected": {"identity_invariant": true, "role_contextual": true}
+    },
+    {
+      "case_id": "SUFF-001",
+      "name": "primitive-sufficiency-and-unresolved-child",
+      "input": {"closed": true, "sufficient": true, "child_status": "not_needed"},
+      "expected": {"stop": true, "classification": "primitive"}
+    },
+    {
+      "case_id": "SUFF-002",
+      "name": "insufficient-closure-fails-closed",
+      "input": {"closed": false, "sufficient": false, "child_status": "unresolved"},
+      "expected": {"stop": false, "classification": "UNRESOLVED"}
+    },
+    {
+      "case_id": "ORDER-001",
+      "name": "byte-and-bit-order-preservation",
+      "input": {"bytes": [17, 34, 51], "byte_order": "ascending-index", "bit_order": "msb-to-lsb", "permutation": [2, 1, 0]},
+      "expected": {"declared_permutation": false, "result": "ORDER_UNDEFINED"}
+    },
+    {
+      "case_id": "COUPLE-001",
+      "name": "boundary-coupling-no-interior-transport",
+      "input": {"source": "RT-1", "target": "RT-2", "coupling_site": "boundary", "interior_transfer": false, "boundary_update": true},
+      "expected": {"coupling": true, "no_transport": true}
+    },
+    {
+      "case_id": "PROP-001",
+      "name": "internal-propagation-carrier-preservation",
+      "input": {"carrier": "RT-1", "boundary_update": "delta_BC", "reference_alignment": "delta_ref", "target_carrier": "RT-1", "cross_boundary_transfer": false},
+      "expected": {"propagation": true, "carrier_identity_preserved": true, "no_transport": true}
+    },
+    {
+      "case_id": "CLOSE-001",
+      "name": "closure-preserves-child-order",
+      "input": {"children": ["RT-a", "RT-b", "RT-c"], "closed_children": true, "output_order": ["RT-a", "RT-b", "RT-c"], "scalar_estimate_at_evaluation": false},
+      "expected": {"closure": true, "order_preserved": true, "field_before_scalar": true}
+    },
+    {
+      "case_id": "EVAL-001",
+      "name": "primitive-evaluation-rejects-scalar-sign",
+      "input": {"primitive_class": "+", "evaluation_output_type": "orientation_field", "scalar_magnitude": null, "downstream_estimate": "angle"},
+      "expected": {"placeholder_only": true, "scalar_rejected_at_evaluation": true, "downstream_estimate_allowed": true}
+    }
+  ]
+}

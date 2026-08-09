@@ -1,0 +1,215 @@
+{
+  "patch_id": "MPF_GOV_PROGRAM_TASK_REGISTRY_001",
+  "status": "proposed",
+  "evidence_class": "C1_DEFINED_PROVISIONAL",
+  "modifies_ssot_structure": false,
+  "title": "Program Task Registry",
+  "purpose": "Establish a universal governed task registry for gaps, bridges, dependencies, validation work, infrastructure, documentation, research debt follow-ups, and promotion candidates across all MPF departments.",
+  "depends_on": [
+    "MPF_GOV_CANONICAL_OWNERSHIP_001",
+    "MPF_GOV_DEPARTMENT_ROOT_INDUCTION_001",
+    "MPF_GOV_DEPARTMENT_REGISTRY_001"
+  ],
+  "constitutional_rules": [
+    {
+      "id": "PTR-001",
+      "rule": "Program-level tasks SHALL be tracked in a universal Program Task Registry."
+    },
+    {
+      "id": "PTR-002",
+      "rule": "Local department tasks MAY remain inside department SSOTs, but cross-department or governance-visible tasks SHALL be registered globally."
+    },
+    {
+      "id": "PTR-003",
+      "rule": "Every bridge task SHALL identify all affected departments."
+    },
+    {
+      "id": "PTR-004",
+      "rule": "Every task SHALL declare priority, category, status, owner, dependencies, and completion criteria."
+    },
+    {
+      "id": "PTR-005",
+      "rule": "A task SHALL NOT be promoted by completion alone; promotion remains governed by claim class and evidence status."
+    },
+    {
+      "id": "PTR-006",
+      "rule": "Program tasks SHOULD be computable as a dependency graph."
+    }
+  ],
+  "registry_location": {
+    "recommended_path": "governance/program_task_registry.json",
+    "owner": "Global Governance"
+  },
+  "task_categories": [
+    "gap",
+    "bridge",
+    "dependency",
+    "validation",
+    "governance",
+    "documentation",
+    "refactor",
+    "infrastructure",
+    "research",
+    "promotion",
+    "research_debt_resolution"
+  ],
+  "priority_levels": [
+    "blocker",
+    "foundation",
+    "enabler",
+    "improvement",
+    "future"
+  ],
+  "status_lifecycle": [
+    "planned",
+    "active",
+    "blocked",
+    "review",
+    "validated",
+    "promoted",
+    "archived",
+    "retired"
+  ],
+  "task_record_schema": {
+    "task_id": "",
+    "title": "",
+    "owner": "",
+    "department": "",
+    "affected_departments": [],
+    "tier": null,
+    "category": "",
+    "priority": "",
+    "status": "planned",
+    "claim_class": "",
+    "summary": "",
+    "depends_on": [],
+    "blocks": [],
+    "linked_debt": [],
+    "linked_assets": [],
+    "linked_bridges": [],
+    "deliverables": [],
+    "completion_criteria": [],
+    "references": [],
+    "notes": ""
+  },
+  "tier_order": [
+    {
+      "tier": 0,
+      "name": "Constitutional Obligations"
+    },
+    {
+      "tier": 1,
+      "name": "Global Core"
+    },
+    {
+      "tier": 2,
+      "name": "Department Gaps"
+    },
+    {
+      "tier": 3,
+      "name": "Cross-Department Bridges"
+    },
+    {
+      "tier": 4,
+      "name": "Validation"
+    },
+    {
+      "tier": 5,
+      "name": "Infrastructure"
+    },
+    {
+      "tier": 6,
+      "name": "Documentation"
+    },
+    {
+      "tier": 7,
+      "name": "Future Research"
+    }
+  ],
+  "initial_backfill_tasks": [
+    {
+      "task_id": "PTR_BACKFILL_DEPT_LAYOUT_001",
+      "title": "Normalize Department Peer Directory Layout",
+      "owner": "Global Governance",
+      "department": "governance",
+      "affected_departments": [
+        "mathematics",
+        "physics",
+        "economics",
+        "theology"
+      ],
+      "tier": 0,
+      "category": "governance",
+      "priority": "foundation",
+      "status": "planned",
+      "summary": "Ensure all departments exist as peers under departments/ without structurally privileging any department.",
+      "depends_on": [
+        "MPF_GOV_DEPARTMENT_ROOT_INDUCTION_001"
+      ],
+      "completion_criteria": [
+        "All active and planned departments have peer directory records.",
+        "Department Registry reflects directory paths.",
+        "No department is treated as structurally global by folder location."
+      ],
+      "notes": "Backfill task. Current registry records already acknowledge planned peer layout even where directories do not yet exist."
+    },
+    {
+      "task_id": "PTR_BACKFILL_PHYSICS_SSOT_001",
+      "title": "Create Physics Department SSOT and AGENTS.md",
+      "owner": "Physics Department",
+      "department": "physics",
+      "affected_departments": [
+        "physics",
+        "mathematics"
+      ],
+      "tier": 2,
+      "category": "gap",
+      "priority": "foundation",
+      "status": "planned",
+      "summary": "Create a local Physics Department SSOT and local AGENTS.md for physical interpretation, correspondence, models, predictions, and validation.",
+      "depends_on": [
+        "MPF_GOV_DEPARTMENT_REGISTRY_001"
+      ],
+      "completion_criteria": [
+        "departments/physics/department_ssot.md exists.",
+        "departments/physics/AGENTS.md exists.",
+        "Physics scope and prohibited promotions are declared.",
+        "Physics dependence on mathematics is declared."
+      ],
+      "notes": "Current repo state uses departments/physics/physics_ssot.md. This task remains planned because the canonical filename has not yet been normalized to department_ssot.md."
+    },
+    {
+      "task_id": "PTR_BACKFILL_MATH_PHYS_BOUNDARY_001",
+      "title": "Separate Mathematics and Physics Claim Routing",
+      "owner": "Global Governance",
+      "department": "governance",
+      "affected_departments": [
+        "mathematics",
+        "physics"
+      ],
+      "tier": 3,
+      "category": "bridge",
+      "priority": "blocker",
+      "status": "planned",
+      "summary": "Prevent formal mathematical derivations from being treated as physical claims and prevent physical interpretations from being treated as mathematical theorems.",
+      "depends_on": [
+        "MPF_GOV_CANONICAL_OWNERSHIP_001",
+        "MPF_GOV_DEPARTMENT_REGISTRY_001"
+      ],
+      "completion_criteria": [
+        "Mathematics allowed claims are declared.",
+        "Physics allowed claims are declared.",
+        "Correspondence rule requirement is declared.",
+        "Vector routing policy distinguishes math from physics."
+      ],
+      "notes": "Backfill task. The cleanup rule exists in governance, but this task remains planned until the program registry is used as the canonical global tracker."
+    }
+  ],
+  "implementation": {
+    "requires_file_moves": false,
+    "requires_directory_changes": false,
+    "creates_registry": true,
+    "backfill_only": true,
+    "note": "This patch establishes program-level task tracking without changing existing SSOT structure."
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "registry_id": "PCD_MSV_001_RESULTS_TEMPLATE",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "result_id",
+      "execution_id",
+      "mechanism_results",
+      "cross_mechanism_summary",
+      "observable_summary",
+      "falsification_summary",
+      "runtime_validation_results",
+      "claim_support_outcome",
+      "theorem_status_recommendation",
+      "downgrades_or_blocks",
+      "known_limits"
+    ]
+  },
+  "mechanism_result_block": {
+    "mechanism_class": "",
+    "tool_id": "",
+    "seeds_completed": [],
+    "validator_results": [],
+    "observables": {
+      "minimizer_switch_count": null,
+      "ref_equivalence_preservation_rate": null,
+      "d_Omega_max": null,
+      "d_Omega_mean": null,
+      "degeneracy_region_count": null,
+      "set_valued_reference_events": null,
+      "recoupling_event_count": null,
+      "invalid_transition_count": null,
+      "orientation_conflict_count": null
+    },
+    "falsification_vectors": {
+      "FV-1_shuffle_or_zero_mismatch_control": "",
+      "FV-2_boundary_collapse": "",
+      "FV-3_primitive_suppression_ablation": "",
+      "FV-4_adversarial_initialization": ""
+    },
+    "recoverable_outputs": []
+  },
+  "cross_mechanism_summary": {
+    "mechanism_classes_count": 0,
+    "minimum_seeds_per_mechanism_met": false,
+    "observable_agreement": "",
+    "contradictions_detected": [],
+    "mechanism_dependence_detected": false,
+    "interpretation": ""
+  },
+  "theorem_status_decision_rules": [
+    {
+      "condition": "all required mechanisms pass, all seeds pass, all required outputs validate, all falsification vectors pass or behave as expected",
+      "recommendation": "TS4_simulation_supported_theorem"
+    },
+    {
+      "condition": "formal outputs pass but only one mechanism class completes",
+      "recommendation": "retain_TS2_conditional_theorem_with_single_mechanism_probe_note"
+    },
+    {
+      "condition": "outputs validate but falsification is incomplete",
+      "recommendation": "retain_TS2_or_downgrade_to_TS1"
+    },
+    {
+      "condition": "contradictory cross-mechanism behavior appears",
+      "recommendation": "mark_inconclusive_or_contested"
+    },
+    {
+      "condition": "required provenance or runtime validation fails",
+      "recommendation": "block_claim_support"
+    }
+  ]
+}

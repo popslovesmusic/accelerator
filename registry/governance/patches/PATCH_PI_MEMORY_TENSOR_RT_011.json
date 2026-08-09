@@ -1,0 +1,38 @@
+{
+  "patch_id": "PATCH_PI_MEMORY_TENSOR_RT_011",
+  "campaign_id": "CAMPAIGN_MEMORY_TENSOR_RT_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-03",
+  "type": "governance_patch",
+  "title": "Resolve Formal Operator Layer Provenance",
+  "depends_on": [
+    "PATCH_PI_MEMORY_TENSOR_RT_010"
+  ],
+  "purpose": "Resolve the unresolved PATCH_PI_MEMORY_TENSOR_RT_008 status before advancing to empirical or simulation protocol work.",
+  "updated_artifacts": [
+    "registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_008.json",
+    "registry/governance/campaign_ledgers/memory_tensor_rt_campaign_ledger.json"
+  ],
+  "source_artifacts": [
+    "registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_010.json",
+    "registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_008.json",
+    "registry/governance/campaign_ledgers/memory_tensor_rt_campaign_ledger.json"
+  ],
+  "summary": {
+    "resolution_id": "RESOLVE_PATCH_PI_MEMORY_TENSOR_RT_008_001",
+    "unresolved_patch": "PATCH_PI_MEMORY_TENSOR_RT_008",
+    "outcome": "found_applied_archive",
+    "execution_claim": "preserved_from_archive",
+    "ledger_status": "applied",
+    "advance_gate": "empirical_and_simulation_protocols_allowed_only_after_resolution"
+  },
+  "validation": {
+    "required": [
+      "patch_008_status_resolved",
+      "ledger_updated",
+      "no_execution_claim_if_late_registered",
+      "global_validate_pass"
+    ],
+    "result": "pass"
+  }
+}

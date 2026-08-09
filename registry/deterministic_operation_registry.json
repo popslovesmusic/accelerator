@@ -1,0 +1,280 @@
+{
+  "schema_id": "deterministic_operation_registry_v1",
+  "schema_version": "1.0.0",
+  "operations": [
+    {
+      "operation_code": "governed_context_capsule",
+      "canonical_name": "Governed Context Capsule",
+      "aliases": [
+        "context-capsule",
+        "governed_context_capsule_v1",
+        "current-state",
+        "memory_context",
+        "trace_context",
+        "claim_context",
+        "execution_context"
+      ],
+      "request_patterns": [
+        {
+          "field": "surface_name",
+          "equals": "governed_context_capsule_v1"
+        },
+        {
+          "field": "request_type",
+          "equals": "governed_context_capsule"
+        },
+        {
+          "field": "request_type",
+          "equals": "memory_context"
+        },
+        {
+          "field": "request_type",
+          "equals": "trace_context"
+        },
+        {
+          "field": "request_type",
+          "equals": "claim_context"
+        },
+        {
+          "field": "request_type",
+          "equals": "execution_context"
+        },
+        {
+          "field": "command",
+          "equals": "context-capsule"
+        }
+      ],
+      "required_fields": [
+        "db_path"
+      ],
+      "optional_fields": [
+        "target",
+        "task",
+        "query",
+        "limit"
+      ],
+      "default_values": {
+        "limit": 20
+      },
+      "candidate_policy_id": "governed_context_artifact_candidates_v1",
+      "allowed_output_contracts": [
+        "governed_context_capsule_v1",
+        "gemini_trace_context_v1",
+        "gemini_claim_context_v1",
+        "gemini_execution_context_v1"
+      ],
+      "authority_class": "GOVERNED_CONTEXT",
+      "freshness_policy": "CAPSULE_STATE",
+      "handler_id": "scripts.query_governance.build_governed_context_capsule_v1",
+      "fallback_behavior": "ROUTE_UNRESOLVED",
+      "status": "ACTIVE"
+    },
+    {
+      "operation_code": "artifact_retrieval",
+      "canonical_name": "Artifact Retrieval",
+      "aliases": [
+        "orientation_retrieval",
+        "artifact_lookup",
+        "memory_retrieval",
+        "residue_packet"
+      ],
+      "request_patterns": [
+        {
+          "field": "surface_name",
+          "equals": "orientation_retrieval"
+        },
+        {
+          "field": "surface_name",
+          "equals": "memory_retrieval"
+        },
+        {
+          "field": "surface_name",
+          "equals": "residue_packet"
+        },
+        {
+          "field": "request_type",
+          "equals": "artifact_retrieval"
+        },
+        {
+          "field": "request_type",
+          "equals": "memory_retrieval"
+        },
+        {
+          "field": "request_type",
+          "equals": "residue_packet"
+        }
+      ],
+      "required_fields": [
+        "db_path"
+      ],
+      "optional_fields": [
+        "query",
+        "status_filter",
+        "limit"
+      ],
+      "default_values": {
+        "limit": 20
+      },
+      "candidate_policy_id": "governed_context_artifact_candidates_v1",
+      "allowed_output_contracts": [
+        "orientation_retrieval_v1",
+        "memory_context_v1",
+        "residue_packet_v1"
+      ],
+      "authority_class": "READ_ONLY_CONTEXT",
+      "freshness_policy": "ARTIFACT_ROWS",
+      "handler_id": "scripts.orientation_retrieval.retrieve_artifacts",
+      "fallback_behavior": "ROUTE_UNRESOLVED",
+      "status": "ACTIVE"
+    },
+    {
+      "operation_code": "registry_runtime_trace",
+      "canonical_name": "Registry Runtime Trace",
+      "aliases": [
+        "runtime_trace",
+        "trace_registry"
+      ],
+      "request_patterns": [
+        {
+          "field": "surface_name",
+          "equals": "registry_runtime_trace"
+        },
+        {
+          "field": "request_type",
+          "equals": "registry_runtime_trace"
+        }
+      ],
+      "required_fields": [
+        "db_path"
+      ],
+      "optional_fields": [
+        "query",
+        "limit"
+      ],
+      "default_values": {
+        "limit": 20
+      },
+      "candidate_policy_id": "registry_runtime_trace_candidates_v1",
+      "allowed_output_contracts": [
+        "registry_runtime_trace_v1"
+      ],
+      "authority_class": "READ_ONLY_CONTEXT",
+      "freshness_policy": "RUNTIME_TRACE_ROWS",
+      "handler_id": "scripts.registry_runtime_trace.run_registry_runtime_trace",
+      "fallback_behavior": "ROUTE_UNRESOLVED",
+      "status": "ACTIVE"
+    },
+    {
+      "operation_code": "execution_plan",
+      "canonical_name": "Execution Plan",
+      "aliases": [
+        "orientation_execution_plan"
+      ],
+      "request_patterns": [
+        {
+          "field": "surface_name",
+          "equals": "orientation_execution_plan"
+        },
+        {
+          "field": "request_type",
+          "equals": "execution_plan"
+        }
+      ],
+      "required_fields": [
+        "query",
+        "db_path"
+      ],
+      "optional_fields": [
+        "limit"
+      ],
+      "default_values": {
+        "limit": 10
+      },
+      "candidate_policy_id": "execution_plan_action_candidates_v1",
+      "allowed_output_contracts": [
+        "orientation_execution_plan_v1"
+      ],
+      "authority_class": "READ_ONLY_CONTEXT",
+      "freshness_policy": "ARTIFACT_ROWS",
+      "handler_id": "scripts.orientation_execution_plan.generate_execution_plan",
+      "fallback_behavior": "ROUTE_UNRESOLVED",
+      "status": "ACTIVE"
+    },
+    {
+      "operation_code": "residue_packet",
+      "canonical_name": "Residue Packet",
+      "aliases": [
+        "residue_packet_builder",
+        "compress_residue"
+      ],
+      "request_patterns": [
+        {
+          "field": "surface_name",
+          "equals": "residue_packet_builder"
+        },
+        {
+          "field": "request_type",
+          "equals": "residue_packet"
+        }
+      ],
+      "required_fields": [
+        "query",
+        "db_path"
+      ],
+      "optional_fields": [
+        "mode",
+        "limit"
+      ],
+      "default_values": {
+        "limit": 20,
+        "mode": "lossy_summary"
+      },
+      "candidate_policy_id": "residue_packet_artifact_candidates_v1",
+      "allowed_output_contracts": [
+        "residue_packet_v1"
+      ],
+      "authority_class": "READ_ONLY_CONTEXT",
+      "freshness_policy": "ARTIFACT_ROWS",
+      "handler_id": "scripts.residue.residue_packet_builder.build_residue_packet",
+      "fallback_behavior": "ROUTE_UNRESOLVED",
+      "status": "ACTIVE"
+    },
+    {
+      "operation_code": "legacy_lookup",
+      "canonical_name": "Legacy Lookup Compatibility",
+      "aliases": [
+        "tech_note",
+        "theorem",
+        "tool",
+        "claim",
+        "open_gaps"
+      ],
+      "request_patterns": [
+        {
+          "field": "request_type",
+          "equals": "legacy_lookup"
+        }
+      ],
+      "required_fields": [
+        "db_path"
+      ],
+      "optional_fields": [
+        "tech_note",
+        "theorem",
+        "tool",
+        "claim",
+        "open_gaps"
+      ],
+      "default_values": {},
+      "candidate_policy_id": "governed_context_artifact_candidates_v1",
+      "allowed_output_contracts": [
+        "legacy_lookup_v1"
+      ],
+      "authority_class": "READ_ONLY_CONTEXT",
+      "freshness_policy": "ARTIFACT_ROWS",
+      "handler_id": "scripts.query_governance.legacy_lookup",
+      "fallback_behavior": "ROUTE_UNRESOLVED",
+      "status": "ACTIVE"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "meta": {
+    "version": "1.0",
+    "theorem_id": "MT-001",
+    "status": "formal_proof_artifact"
+  },
+  "formal_verification": {
+    "target": "Pi_A(Pi_A(x)) ~ Pi_A(x)",
+    "equivalence_relation": "EQ-001",
+    "quantifier": {
+      "type": "bounded_universal",
+      "domain": "D_A",
+      "conditions": ["SA-001", "SA-002", "SA-003", "SA-004", "SA-005"]
+    },
+    "logical_trace": [
+      { "step": 1, "logic": "y = Pi_A(x) -> y in A", "basis": "SA-002" },
+      { "step": 2, "logic": "Pi_A(y) ~ y", "basis": "SA-003" },
+      { "step": 3, "logic": "Pi_A(Pi_A(x)) ~ Pi_A(x)", "basis": "substitution" }
+    ],
+    "verification_status": "symbolic_verified_under_assumptions",
+    "proof_obligations": [
+      "PO-001"
+    ],
+    "validated_against": [
+      "registry/math/proof_obligation_registry.json",
+      "registry/math/theorem_proof_strengthening_registry.json",
+      "registry/math/theorem_promotion_blocker_registry.json"
+    ],
+    "traceability": {
+      "proof_file": "proofs/MT-001/proof.md",
+      "review_package": "registry/math/mt001_formal_review_package.json",
+      "evidence_file": "outputs/math_tests/p3_stab_003_pi_a_symbolic_result.json"
+    },
+    "promotion_gate": {
+      "must_not_promote": false,
+      "reason": "formal promotion authorized; symbolic verification under assumptions remains recorded as evidence"
+    },
+    "failure_modes_addressed": ["EQFM-008", "RBFM-009", "OFM-001"],
+    "must_not_promote": false
+  }
+}

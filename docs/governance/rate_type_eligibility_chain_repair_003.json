@@ -1,0 +1,27 @@
+{
+  "patch_id": "PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_CHAIN_REPAIR_003",
+  "title": "Rate-Type Eligibility Chain Repair",
+  "status": "APPLIED",
+  "applied_on": "2026-07-09T01:54:31.8961811-04:00",
+  "diagnosis": {
+    "blocked_patch_id": "PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_001",
+    "upstream_witness": "PATCH_PI_RT_CALCULUS_061",
+    "root_cause": "The upstream bridge-admissibility witness existed in the runtime decision log but was still recorded as PROPOSED in the patch registry, so patch-chain resolution continued to treat it as unresolved."
+  },
+  "repair": {
+    "action": "Synchronize PATCH_PI_RT_CALCULUS_061.json to APPLIED and record the repair in the governed ledger.",
+    "result": "PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_001 becomes chain-satisfied once the refreshed registry is read.",
+    "downstream_scope": "PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_TESTS_002 remains separate and still depends on the eligibility predicate."
+  },
+  "verification": {
+    "expected_patch_chain_001": "allow",
+    "expected_patch_chain_002": "blocked_until_001_applied",
+    "resolved_failure_class": "dependency_chain_not_satisfied"
+  },
+  "evidence_paths": [
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_061.json",
+    "registry/governance/patches/PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_001.json",
+    "registry/governance/patches/PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_TESTS_002.json",
+    "outputs/audits/global_health_report.json"
+  ]
+}

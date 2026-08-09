@@ -1,0 +1,23 @@
+{
+  "campaign_id": "EC-20260517-FSA-001",
+  "prediction_binding_id": "PB-001-THRESHOLD",
+  "dataset_ids": ["DS-001-SYNTHETIC-STOCHASTIC"],
+  "tools": {
+    "cpp": "fsa_rule_engine_sim_v1_cpp",
+    "python": "fsa_rule_engine_sim_v1"
+  },
+  "metrics": ["residue_mean", "active_fraction", "mismatch_total"],
+  "tolerances": {
+    "absolute": 1e-6,
+    "relative": 1e-4
+  },
+  "falsification_protocols": [
+    "shuffle_control",
+    "parameter_ablation"
+  ],
+  "governance_boilerplate": {
+    "source_relation": "(E≠0) ⇔R δ(E>0)",
+    "non_separability_acknowledged": true,
+    "required_statement": "Observed signatures are interpreted only through restricted local analog structure."
+  }
+}

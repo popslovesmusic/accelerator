@@ -1,0 +1,129 @@
+{
+  "artifact_type": "PROVISIONAL_FCI005_CONTEXT_RELATION_HYPOTHESES_REPAIRED",
+  "artifact_id": "RT_ADMOBS_FCI005_CONTEXT_MAPPING_HYPOTHESES_REPAIRED_20260729_001",
+  "derived_from": "RT_ADMOBS_FCI005_CONTEXT_MAPPING_HYPOTHESES_20260729_001",
+  "source_sha256": "D8BC6B806FE22B9856B36AAA21B100041442DBA585412C3FDE1839EE60139113",
+  "lineage": {
+    "accepted_MAP02_artifact":"RT_ADMOBS_FCI005_CARRIER_RELATION_HYPOTHESES_REPAIRED_SCHEMA_NORMALIZED_20260729_001",
+    "accepted_MAP02_sha256":"DF9F34DC7BF843289AB822A3E3E847BF48432462383D1ADAA17952F7B9CD34BE",
+    "MAP02_review":"RT_ADMOBS_FCI005_CARRIER_RELATION_HYPOTHESES_REPAIRED_REVIEW_20260729_001",
+    "MAP03_review":"RT_ADMOBS_FCI005_CONTEXT_MAPPING_HYPOTHESES_REVIEW_20260729_001"
+  },
+  "status":"MAP_03_REPAIRED_HYPOTHESES_READY_FOR_REVIEW",
+  "canonicality":"NON_CANONICAL",
+  "claim_ceiling":"C1_MODEL_RELATIVE",
+  "campaign_id":"RT_ADMOBS_FCI005_MAPPING_SEMANTICS_CONSTRUCTION_20260729_001",
+  "source_context":"Y : SOURCE_COMPOSITION_CONTEXT",
+  "target_type_scope": {
+    "B_x":"BoundaryInteraction_x : provisional target parameter; role label only, governed identity not established.",
+    "D_rel":"RelationalDomain_x : provisional target parameter; role label only, governed identity not established.",
+    "R":"Residue_x : provisional target parameter; role label only, governed identity not established."
+  },
+  "applicability_predicates": {
+    "B_x":"ApplicableBoundaryTarget_x(Y, B_x) : Prop",
+    "D_rel":"ApplicableDomainTarget_x(Y, D_rel) : Prop",
+    "R":"ApplicableResidueTarget_x(Y, R) : Prop"
+  },
+  "target_role_guard":"Boundary, relational-domain, and residue are hypothesis roles; their labels do not establish target identity, type, or authority.",
+  "result_type":"ContextAspectExtractionResult_x[A,E] := EXTRACTED(a:A) | NO_ASPECT | UNDEFINED(e:E)",
+  "extractors": {
+    "boundary":"EvalExtractBoundaryAspect_x(Y) : ContextAspectExtractionResult_x[BoundaryAspect_x, UnresolvedBoundaryEvidence_x]",
+    "domain":"EvalExtractDomainAspect_x(Y) : ContextAspectExtractionResult_x[DomainAspect_x, UnresolvedDomainEvidence_x]",
+    "residue":"EvalExtractResidueAspect_x(Y) : ContextAspectExtractionResult_x[ResidueAspect_x, UnresolvedResidueEvidence_x]"
+  },
+  "undefined_guard":"UNDEFINED is not coerced to NO_ASPECT or MISMATCH.",
+  "hypotheses":[
+    {
+      "hypothesis_id":"MAP03-H1-BOUNDARY-ASPECT",
+      "target":"B_x",
+      "class":"POSITIVE_CANDIDATE",
+      "relation_bearing_surface":"A boundary-interaction aspect extracted from Y under the declared context scope.",
+      "relation_definition_candidate":"EvalExtractBoundaryAspect_x(Y)=EXTRACTED(b_y) AND RelateBoundaryAspect_x(b_y,B_x)",
+      "positive_condition":"Extractor returns EXTRACTED(b_y) and a typed relation relates b_y to B_x.",
+      "local_rejection_condition":"Complete extractor returns NO_ASPECT OR an extracted aspect exists and the governed boundary relation definitively rejects B_x.",
+      "undefined_condition":"Extractor, applicability, target typing, authority, provenance, or dependency evidence is unresolved.",
+      "global_guard":"Rejecting boundary mediation does not establish target-level non-relation for D_rel or R.",
+      "provenance_basis":["RT_ADMOBS_FCI005_CONTEXT_MAPPING_HYPOTHESES_20260729_001","RT_ADMOBS_FCI005_CONTEXT_MAPPING_HYPOTHESES_REVIEW_20260729_001","RT_ADMOBS_FCI005_MAPPING_RULE_INSTANTIATION_BLOCKER_20260729_001"]
+    },
+    {
+      "hypothesis_id":"MAP03-H2-DOMAIN-ASPECT",
+      "target":"D_rel",
+      "class":"POSITIVE_CANDIDATE",
+      "relation_bearing_surface":"A relational-domain aspect extracted from Y that constrains applicability without identifying Y with D_rel.",
+      "relation_definition_candidate":"EvalExtractDomainAspect_x(Y)=EXTRACTED(d_y) AND RelateDomainAspect_x(d_y,D_rel)",
+      "positive_condition":"Extractor returns EXTRACTED(d_y) and a typed relation establishes applicability to D_rel.",
+      "local_rejection_condition":"Complete extractor returns NO_ASPECT OR an extracted aspect exists and the governed domain relation definitively rejects D_rel.",
+      "undefined_condition":"Extractor, applicability, target typing, authority, provenance, or dependency evidence is unresolved.",
+      "global_guard":"Rejecting domain mediation does not establish target-level non-relation for B_x or R.",
+      "provenance_basis":["RT_ADMOBS_FCI005_CONTEXT_MAPPING_HYPOTHESES_20260729_001","RT_ADMOBS_FCI005_CONTEXT_MAPPING_HYPOTHESES_REVIEW_20260729_001","RT_ADMOBS_FCI005_MAPPING_RULE_INSTANTIATION_BLOCKER_20260729_001"]
+    },
+    {
+      "hypothesis_id":"MAP03-H3-RESIDUE-ASPECT",
+      "target":"R",
+      "class":"POSITIVE_CANDIDATE",
+      "relation_bearing_surface":"A residue-relevant aspect or history reference carried by Y without identifying Y with R.",
+      "relation_definition_candidate":"EvalExtractResidueAspect_x(Y)=EXTRACTED(r_y) AND RelateResidueAspect_x(r_y,R)",
+      "positive_condition":"Extractor returns EXTRACTED(r_y) and a typed residue relation establishes the relevant linkage.",
+      "local_rejection_condition":"Complete extractor returns NO_ASPECT OR an extracted aspect exists and the governed residue relation definitively rejects R.",
+      "undefined_condition":"Extractor, applicability, target typing, authority, provenance, or dependency evidence is unresolved.",
+      "global_guard":"Rejecting residue mediation does not establish target-level non-relation for B_x or D_rel.",
+      "provenance_basis":["RT_ADMOBS_FCI005_CONTEXT_MAPPING_HYPOTHESES_20260729_001","RT_ADMOBS_FCI005_CONTEXT_MAPPING_HYPOTHESES_REVIEW_20260729_001","RT_ADMOBS_FCI005_MAPPING_RULE_INSTANTIATION_BLOCKER_20260729_001"]
+    },
+    {
+      "hypothesis_id":"MAP03-H4A-NO-BOUNDARY-RELATION",
+      "target":"B_x",
+      "class":"TARGET_LOCAL_DEFINITE_NON_RELATION_CANDIDATE",
+      "definition_candidate":"CompleteApplicableBoundaryRuleSet_x(Y,B_x) AND NoContextRelation_x(Y,B_x)",
+      "positive_condition":"Not applicable; complete rule-set evidence is required.",
+      "negative_condition":"Complete applicable boundary rules establish no authorized relation for B_x.",
+      "undefined_condition":"Boundary rule-set completeness, authority, provenance, applicability, or dependency evidence is incomplete.",
+      "falsification_case":"An authorized applicable boundary relation is found.",
+      "provenance_basis":["RT_ADMOBS_FCI005_CONTEXT_MAPPING_HYPOTHESES_REVIEW_20260729_001","RT_ADMOBS_FCI005_MAPPING_RULE_INSTANTIATION_BLOCKER_20260729_001"]
+    },
+    {
+      "hypothesis_id":"MAP03-H4B-NO-DOMAIN-RELATION",
+      "target":"D_rel",
+      "class":"TARGET_LOCAL_DEFINITE_NON_RELATION_CANDIDATE",
+      "definition_candidate":"CompleteApplicableDomainRuleSet_x(Y,D_rel) AND NoContextRelation_x(Y,D_rel)",
+      "positive_condition":"Not applicable; complete rule-set evidence is required.",
+      "negative_condition":"Complete applicable domain rules establish no authorized relation for D_rel.",
+      "undefined_condition":"Domain rule-set completeness, authority, provenance, applicability, or dependency evidence is incomplete.",
+      "falsification_case":"An authorized applicable domain relation is found.",
+      "provenance_basis":["RT_ADMOBS_FCI005_CONTEXT_MAPPING_HYPOTHESES_REVIEW_20260729_001","RT_ADMOBS_FCI005_MAPPING_RULE_INSTANTIATION_BLOCKER_20260729_001"]
+    },
+    {
+      "hypothesis_id":"MAP03-H4C-NO-RESIDUE-RELATION",
+      "target":"R",
+      "class":"TARGET_LOCAL_DEFINITE_NON_RELATION_CANDIDATE",
+      "definition_candidate":"CompleteApplicableResidueRuleSet_x(Y,R) AND NoContextRelation_x(Y,R)",
+      "positive_condition":"Not applicable; complete rule-set evidence is required.",
+      "negative_condition":"Complete applicable residue rules establish no authorized relation for R.",
+      "undefined_condition":"Residue rule-set completeness, authority, provenance, applicability, or dependency evidence is incomplete.",
+      "falsification_case":"An authorized applicable residue relation is found.",
+      "provenance_basis":["RT_ADMOBS_FCI005_CONTEXT_MAPPING_HYPOTHESES_REVIEW_20260729_001","RT_ADMOBS_FCI005_MAPPING_RULE_INSTANTIATION_BLOCKER_20260729_001"]
+    },
+    {
+      "hypothesis_id":"MAP03-H5-UNDERDETERMINED-CONTEXT",
+      "target":"B_x|D_rel|R",
+      "class":"UNDEFINED_CANDIDATE",
+      "definition_candidate":"ContextRelation_x(Y,target)=UNDEFINED when required type, aspect, rule, authority, provenance, applicability, or dependency evidence is unresolved.",
+      "positive_condition":"Not applicable while required evidence is unresolved.",
+      "negative_condition":"Not applicable; undefined context is not coerced to mismatch.",
+      "undefined_condition":"Any required context evidence is missing or unresolved.",
+      "falsification_case":"Not applicable to unresolved-status classification.",
+      "resolution_case":"Complete governed evidence resolves each selected target relation to relates or does-not-relate.",
+      "provenance_basis":["RT_ADMOBS_FCI005_CONTEXT_MAPPING_HYPOTHESES_REVIEW_20260729_001","RT_ADMOBS_FCI005_MAPPING_RULE_INSTANTIATION_BLOCKER_20260729_001"]
+    }
+  ],
+  "global_non_relation_candidate":"GlobalNoContextRelation_x(Y) := NoContextRelation_x(Y,B_x) AND NoContextRelation_x(Y,D_rel) AND NoContextRelation_x(Y,R)",
+  "global_guard":"A relation found for one target falsifies only that target's non-relation and the global conjunction; it does not decide the other targets.",
+  "threshold_independence":"All context hypotheses are formed without source or observation distinction-floor outcomes.",
+  "phase_gate":{"MAP_01":"COMPLETE_PARTIAL","MAP_02":"CLOSED_HYPOTHESIS_SCOPE_SCHEMA_NORMALIZED","MAP_03":"PASS_REPAIRED_HYPOTHESES_ONLY","MAP_04":"BLOCKED","MAP_05":"BLOCKED","MAP_06":"BLOCKED"},
+  "mapping_rule_instantiation":"NOT_PERFORMED",
+  "mapping_record_instantiation":"NOT_PERFORMED",
+  "witness_fixture_construction":"NOT_PERFORMED",
+  "BCon_x":"UNBOUND",
+  "H_x":"UNDECLARED",
+  "delta_a":"UNCHANGED",
+  "final_result":"PASS_MAP03_REPAIRED_CONTEXT_HYPOTHESES_ONLY"
+}

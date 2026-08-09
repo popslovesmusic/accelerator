@@ -1,0 +1,91 @@
+{
+  "harness_id": "HARNESS_MEMORY_TENSOR_RT_MINIMAL_001",
+  "patch_id": "PATCH_PI_MEMORY_TENSOR_RT_013",
+  "campaign_id": "CAMPAIGN_MEMORY_TENSOR_RT_IMPLEMENTATION_001",
+  "status": "provisional",
+  "title": "Specify Minimal Memory Tensor RT Simulation Harness",
+  "purpose": "Define the repository-level harness requirements for executing the minimal Memory Tensor RT simulation protocol and producing auditable outputs.",
+  "protocol": "SIM_MEMORY_TENSOR_RT_MINIMAL_001",
+  "entrypoint": "scripts/simulations/run_memory_tensor_rt_minimal.py",
+  "expected_input_file": "inputs/simulations/memory_tensor_rt_minimal_input.json",
+  "expected_output_dir": "outputs/simulations/memory_tensor_rt_minimal/",
+  "input_schema": {
+    "tensor_rank": "integer >= 2",
+    "tensor_shape": "array_of_integers",
+    "cells": "array_of_displacement_trace_cells",
+    "prompts": "array_of_prompt_conditions",
+    "simulation_seed": "integer",
+    "run_label": "string"
+  },
+  "output_schema": {
+    "run_id": "unique_string",
+    "run_label": "string",
+    "simulation_seed": "integer",
+    "prompt_results": [
+      {
+        "prompt": "string",
+        "implied_memory_m": "string_or_reference",
+        "coupling_kappa": "object",
+        "orientation_O": "object",
+        "slice_id": "string",
+        "trajectory_tau": "array",
+        "resolution_stability": "number_0_to_1",
+        "memory_output_M": "string_or_label",
+        "confidence_C": "number_0_to_1",
+        "trace_log": "array"
+      }
+    ],
+    "audit": {
+      "protocol_id": "SIM_MEMORY_TENSOR_RT_MINIMAL_001",
+      "harness_id": "HARNESS_MEMORY_TENSOR_RT_MINIMAL_001",
+      "formal_operator_layer": "FORMAL_MEMORY_TENSOR_RT_OPERATORS_001",
+      "generated_at": "timestamp"
+    }
+  },
+  "required_runtime_checks": [
+    "input_schema_valid",
+    "tensor_rank_at_least_2",
+    "all_cells_have_action_trace_id",
+    "all_displacements_trace_to_source_symmetry_condition",
+    "confidence_derived_from_resolution_stability",
+    "orientation_derived_after_coupling",
+    "output_schema_valid"
+  ],
+  "required_output_files": [
+    "run_result.json",
+    "trace_log.jsonl",
+    "summary_report.json"
+  ],
+  "forbidden_runtime_behavior": [
+    "direct memory lookup without traversal",
+    "confidence generated independently of resolution stability",
+    "orientation generated before coupling",
+    "missing action_trace_id on displacement cells"
+  ],
+  "traceability": {
+    "simulation_protocol": "SIM_MEMORY_TENSOR_RT_MINIMAL_001",
+    "campaign_ledger": "LEDGER_MEMORY_TENSOR_RT_CAMPAIGN_001",
+    "parent_campaign": "CAMPAIGN_MEMORY_TENSOR_RT_IMPLEMENTATION_001",
+    "source_artifacts": [
+      "registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_012.json",
+      "registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_011.json",
+      "registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_008.json",
+      "registry/governance/patches/PATCH_PI_MEMORY_TENSOR_RT_009.json",
+      "inputs/simulations/memory_tensor_rt_minimal_input.json",
+      "registry/simulation_protocols/memory_tensor_rt_minimal_simulation.json",
+      "registry/governance/campaign_ledgers/memory_tensor_rt_campaign_ledger.json"
+    ]
+  },
+  "validation": {
+    "required": [
+      "harness_id_unique",
+      "entrypoint_declared",
+      "input_schema_present",
+      "output_schema_present",
+      "runtime_checks_present",
+      "required_output_files_present",
+      "global_validate_pass"
+    ],
+    "result": "pass"
+  }
+}

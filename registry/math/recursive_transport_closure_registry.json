@@ -1,0 +1,115 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Registry for recursive transport-closure classes and iteration conditions in Phase 3.",
+    "status": "provisional",
+    "last_updated": "2026-05-12"
+  },
+  "transport_closure_classes": [
+    {
+      "class": "finite_step_closed",
+      "meaning": "Transport remains closed within a fixed, finite number of steps."
+    },
+    {
+      "class": "locally_closed",
+      "meaning": "Transport remains restricted to and closed within bounded/local admissibility neighborhoods."
+    },
+    {
+      "class": "bounded_nonlocal_closed",
+      "meaning": "Transport may connect distant loci but closure is preserved under explicit global constraints."
+    },
+    {
+      "class": "conditionally_closed_under_iteration",
+      "meaning": "Closure is maintained only if specific residue, orientation, and pruning conditions are satisfied per iteration."
+    },
+    {
+      "class": "eventually_leaky",
+      "meaning": "Transport closure degrades under long-term iteration, resulting in admissibility leakage."
+    },
+    {
+      "class": "non_closing",
+      "meaning": "The transport operator permits states to map outside all declared admissible domains."
+    },
+    {
+      "class": "undefined",
+      "meaning": "Closure status for the recursive transport system has not been established."
+    }
+  ],
+  "closure_entries": [
+    {
+      "entry_id": "RTC-001",
+      "target": "NavT",
+      "closure_class": "locally_closed",
+      "metric_class": "local_neighborhood_distance",
+      "iteration_scope": "finite",
+      "conditions": [
+        "transport path remains inside declared local admissibility neighborhood",
+        "residue and orientation drift remain bounded",
+        "local_process_state_equivalence is preserved"
+      ],
+      "failure_modes": [
+        "TIFM-001",
+        "TIFM-002"
+      ],
+      "proof_status": "scaffolded",
+      "provisional_status": true
+    },
+    {
+      "entry_id": "RTC-002",
+      "target": "NavT",
+      "closure_class": "bounded_nonlocal_closed",
+      "metric_class": "bounded_CSI_distance",
+      "iteration_scope": "bounded_recursive",
+      "conditions": [
+        "CSI contribution is finite or effectively truncated",
+        "transport path remains within declared bounded nonlocal domain",
+        "transport leakage failure modes remain active"
+      ],
+      "failure_modes": [
+        "TIFM-002",
+        "TIFM-003",
+        "TIFM-007"
+      ],
+      "proof_status": "scaffolded",
+      "provisional_status": true
+    },
+    {
+      "entry_id": "RTC-003",
+      "target": "MPF-RCV-001",
+      "closure_class": "conditionally_closed_under_iteration",
+      "metric_class": "orientation_weighted_distance",
+      "iteration_scope": "recursive",
+      "conditions": [
+        "recursive transport preserves admissibility reentry",
+        "orientation drift remains within minimization tolerance",
+        "residue balance remains bounded or saturating",
+        "branch growth remains pruned"
+      ],
+      "failure_modes": [
+        "TIFM-001",
+        "TIFM-005",
+        "TIFM-006"
+      ],
+      "proof_status": "scaffolded",
+      "provisional_status": true
+    },
+    {
+      "entry_id": "RTC-004",
+      "target": "infinite_recursive_transport",
+      "closure_class": "undefined",
+      "metric_class": "undefined_distance",
+      "iteration_scope": "infinite",
+      "conditions": [
+        "global infinite-recursion transport closure is not proven",
+        "transport closure loss remains registered",
+        "recurrence-basin escape remains registered"
+      ],
+      "failure_modes": [
+        "TIFM-001",
+        "TIFM-006"
+      ],
+      "proof_status": "none",
+      "provisional_status": true
+    }
+  ]
+}

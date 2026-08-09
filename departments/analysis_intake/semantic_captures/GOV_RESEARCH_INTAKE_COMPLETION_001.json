@@ -1,0 +1,33 @@
+{
+  "capture_type": "CHAT_SEMANTIC_CAPTURE",
+  "source_channel": "current_conversation_chat",
+  "packet_id": "GOV_RESEARCH_INTAKE_COMPLETION_001",
+  "packet_type": "GOVERNANCE_WORKFLOW_PATCH",
+  "capture_timestamp_utc": "2026-08-01T19:30:00Z",
+  "status": "PRESERVED_LITERAL",
+  "canonicality": "GOVERNANCE_PROPOSAL_PENDING_APPLICATION",
+  "source_summary": "Defines research-intake completion as the governed transaction from first-contact preservation through queue registration, research identity, provisional research structure, projection, validation, and terminal research registration or visible blocking.",
+  "core_rule": "USER_INDUCTS_ARTIFACT => PRESERVE => QUEUE_REGISTER => RESEARCH_REGISTER => VALIDATE => TERMINATE",
+  "terminal_states": ["RESEARCH_REGISTERED", "RESEARCH_BLOCKED_VISIBLE"],
+  "non_terminal_states": [
+    "FIRST_CONTACT_PRESERVED", "QUEUE_IDENTITY_REGISTERED", "INDUCTED_NOT_REVIEWED",
+    "RESEARCH_RECORD_RESERVED", "RESEARCH_CONTENT_PROJECTED", "CONCEPTS_REGISTERED",
+    "DERIVATIONS_REGISTERED", "DEPENDENCIES_REGISTERED", "OPEN_QUESTIONS_REGISTERED",
+    "RESEARCH_INDEX_UPDATED"
+  ],
+  "required_research_outputs": [
+    "research_record", "concept_records", "derivation_records", "dependency_records",
+    "open_question_records", "representation_ledger_update", "research_notes_projection",
+    "research_index_update", "synchronization_report", "validation_report"
+  ],
+  "governance_limits": [
+    "NON_CANONICAL_RESEARCH_MEMORY",
+    "NO_THEOREM_OR_PHYSICAL_VALIDATION",
+    "NO_PROMOTION",
+    "NO_PRESERVED_SOURCE_MUTATION",
+    "MANUAL_NOTES_IMMUTABLE"
+  ],
+  "migration_scope": "inducted records lacking research identity or required research projections",
+  "capture_limitations": ["Chat semantic capture is normalized from the received governance packet; preserved source remains immutable."],
+  "routing": {"target": "departments/analysis_intake", "review_status": "NOT_REVIEWED", "promotion_status": "HOLD_C1"}
+}

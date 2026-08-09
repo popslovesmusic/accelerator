@@ -1,0 +1,39 @@
+{
+  "patch_id": "MPF_VORTEX_ADMISSIBILITY_EXECUTION_PATCH_001",
+  "status": "ACTIVE",
+  "purpose": "Create the first runnable campaign for D -> δα dynamics.",
+  "inputs": {
+    "cycles": 1000,
+    "runs": 100,
+    "comparison_modes": [
+      "no_bar",
+      "collapse_bar",
+      "random_bar",
+      "valid_bar"
+    ]
+  },
+  "tracked_state": {
+    "D": 0,
+    "delta_alpha": 0,
+    "organization_score": 0
+  },
+  "execution_loop": [
+    "generate comparison",
+    "compute D",
+    "update delta_alpha",
+    "measure organization",
+    "repeat"
+  ],
+  "outputs": [
+    "vortex_results.csv",
+    "vortex_results.json",
+    "vortex_summary.md",
+    "vortex_plot.png"
+  ],
+  "success_test": [
+    "delta_alpha accumulates",
+    "organization_score diverges from controls",
+    "future D becomes biased by prior delta_alpha"
+  ],
+  "applied_timestamp": "2026-06-20T12:43:24-04:00"
+}

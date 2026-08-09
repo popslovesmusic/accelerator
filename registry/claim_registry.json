@@ -1,328 +1,1538 @@
 {
-  "meta": {
-    "version": "1.0",
-    "description": "Central registry of all formalized claims and their validation status.",
-    "claim_registry_note": "Claims supported only up to C3 until all C4 reports pass.",
-    "status_ladder": {
-      "C0_unformed": "Idea exists but not formalized",
-      "C1_defined": "Claim clearly stated with scope",
-      "C2_test_designed": "Falsifiable test defined",
-      "C3_single_mechanism_supported": "Supported by one mechanism with UQ",
-      "C4_dual_mechanism_supported": "Supported by two independent mechanisms",
-      "C5_replicated": "Validated across tools, seeds, and parameter sweeps",
-      "C6_external_ready": "Ready for publication or external critique",
-      "H_on_hold": "Paused due to ambiguity or missing tooling",
-      "R_rejected": "Falsified or contradicted"
-    },
-    "governance_extension_fields": {
-      "independent_measurement_count": 0,
-      "measurement_evidence_ids": [],
-      "cpp_tools_used": [],
-      "python_tools_used": [],
-      "cpp_preference_violation": false
-    }
-  },
   "claims": [
     {
-      "claim_id": "SSPCE_C1_RUC_SURVIVABILITY_FILTER",
-      "tool_name": "signal_scope_phase_continuation_engine",
-      "claim_statement": "The Signal Scope phase-continuation engine is intended to implement RUC as an admissibility filter over phase continuation candidates.",
+      "claim_id": "L5_RIGOR_FORKED_ATTACK",
+      "source_claim_id": "L5_RIGOR_FORKED_ATTACK",
+      "title": "paper.md",
+      "claim_statement": "See linked paper for scoped claim statement.",
       "status": "C4_dual_mechanism_supported",
-      "claim_type": "provisional",
-      "model_class": "agent_based_phase_continuation_sim",
-      "observables": [
-        "survivability_decision",
-        "rejection_rate",
-        "continuation_mismatch"
+      "claim_type": "verified",
+      "classification": "supported",
+      "model_class": "multi_mechanism",
+      "models_used": [
+        "graph_dynamics_sim_v1_cpp",
+        "ca_admissibility_sim_v1_cpp"
       ],
-      "primitive_mapping": [
-        "epsilon",
-        "mu",
-        "orientation_minus_i"
+      "model_classes": [
+        "graph_dynamics",
+        "cellular_automata"
       ],
+      "seeds_used": 500,
+      "falsification_run": true,
       "evidence_paths": [
-        "tools/signal_scope_phase_continuation_engine/claim_registry.json",
-        "tools/signal_scope_phase_continuation_engine/c4_induction_packet.md"
+        "results/2026-05-25_L5_RIGOR_FORKED_ATTACK"
       ],
-      "claim_limits": [
-        "Induction scaffold only.",
-        "No executable Acellorator validation has been run.",
-        "Cannot support empirical claims until validation artifacts are populated."
+      "terms_used": [
+        "knot-class selection",
+        "orientation coherence"
       ],
-      "concept_ids": [],
-      "independent_measurement": {
-        "present": false,
-        "count": 0,
-        "measurement_types": [],
-        "evidence_ids": [],
-        "confirmed_observables": [],
-        "notes": "Induction phase only; no measurement layer integrated."
+      "paper_path": "results\\2026-05-25_L5_RIGOR_FORKED_ATTACK\\paper.md",
+      "last_updated": "2026-05-25",
+      "last_gate_check": {
+        "timestamp": "2026-06-16T17:05:00.000000+00:00",
+        "paper_path": "results\\2026-05-25_L5_RIGOR_FORKED_ATTACK\\paper.md",
+        "target_level": "L5_rigor_endorsed",
+        "final_level": "C5",
+        "gate_result": "pass",
+        "requested_classification": "supported",
+        "final_classification": "supported",
+        "downgrades_applied": [],
+        "blocked_reasons": [],
+        "maintenance_rule": "Lexicon terms reached L2 via CLS_003. Claim elevated to supported C5."
       }
     },
     {
-      "claim_id": "SSPCE_C2_RESIDUE_CLOSURE",
-      "tool_name": "signal_scope_phase_continuation_engine",
-      "claim_statement": "The Signal Scope phase-continuation engine is intended to test whether residue, trace segments, and groove memory alter future admissibility and continuity.",
-      "status": "C4_dual_mechanism_supported",
-      "claim_type": "provisional",
-      "model_class": "agent_based_phase_continuation_sim",
-      "observables": [
-        "groove_state",
-        "survival_metrics",
-        "continuation_mismatch"
+      "claim_id": "OPT-SMOKE-001",
+      "source_claim_id": "OPT-SMOKE-001",
+      "title": "Optical Reservoir Smoke Test",
+      "claim_statement": "The optical_reservoir_sim_v1 tool produces recoverable output consistent with the expected mechanism class behavior.",
+      "status": "C2_test_designed",
+      "claim_type": "verified",
+      "classification": "provisional",
+      "model_class": "optical_reservoir",
+      "models_used": [
+        "optical_reservoir_sim_v1"
       ],
-      "primitive_mapping": [
-        "residue",
-        "rho",
-        "epsilon"
+      "model_classes": [
+        "optical_reservoir"
+      ],
+      "seeds_used": 1,
+      "falsification_run": false,
+      "evidence_paths": [
+        "results/2026-05-25_run02_optical_reservoir_smoke_test/"
+      ],
+      "paper_path": "results/2026-05-25_run02_optical_reservoir_smoke_test/paper.md",
+      "last_updated": "2026-05-25"
+    },
+    {
+      "claim_id": "OPT-ELEV-001",
+      "source_claim_id": "OPT-ELEV-001",
+      "title": "Optical Reservoir C4 Elevation",
+      "claim_statement": "The optical_reservoir_sim_v1 tool demonstrates robust numerical stability and correct mechanism response for supported research.",
+      "status": "C4_rigor_endorsed",
+      "claim_type": "verified",
+      "classification": "supported",
+      "model_class": "optical_reservoir",
+      "models_used": [
+        "optical_reservoir_sim_v1"
+      ],
+      "model_classes": [
+        "optical_reservoir"
+      ],
+      "seeds_used": 3,
+      "falsification_run": true,
+      "evidence_paths": [
+        "results/2026-05-25_run03_optical_reservoir_C4_elevation/"
+      ],
+      "paper_path": "results/2026-05-25_run03_optical_reservoir_C4_elevation/paper.md",
+      "last_updated": "2026-05-25"
+    },
+    {
+      "claim_id": "TRI-SMOKE-001",
+      "source_claim_id": "TRI-SMOKE-001",
+      "title": "Triadic Closure Smoke Test",
+      "claim_statement": "The triadic_closure_substrate_sim_cpp engine successfully executes the triadic closure update loop and produces recoverable JSON observables.",
+      "status": "C2_test_designed",
+      "claim_type": "verified",
+      "classification": "provisional",
+      "model_class": "cellular_automata",
+      "models_used": [
+        "triadic_closure_substrate_sim_cpp"
+      ],
+      "model_classes": [
+        "cellular_automata"
+      ],
+      "seeds_used": 1,
+      "falsification_run": false,
+      "evidence_paths": [
+        "results/2026-05-25_run04_triadic_closure_smoke_test/"
+      ],
+      "paper_path": "results/2026-05-25_run04_triadic_closure_smoke_test/paper.md",
+      "last_updated": "2026-05-25"
+    },
+    {
+      "claim_id": "TRI-ELEV-001",
+      "source_claim_id": "TRI-ELEV-001",
+      "title": "Triadic Closure C4 Elevation",
+      "claim_statement": "The triadic_closure_substrate_sim_cpp engine demonstrates high numerical stability and theoretical falsifiability for triadic structure.",
+      "status": "C4_rigor_endorsed",
+      "claim_type": "verified",
+      "classification": "supported",
+      "model_class": "cellular_automata",
+      "models_used": [
+        "triadic_closure_substrate_sim_cpp"
+      ],
+      "model_classes": [
+        "cellular_automata"
+      ],
+      "seeds_used": 10,
+      "falsification_run": true,
+      "evidence_paths": [
+        "results/2026-05-25_run05_triadic_closure_C4_elevation/"
+      ],
+      "paper_path": "results/2026-05-25_run05_triadic_closure_C4_elevation/paper.md",
+      "last_updated": "2026-05-25"
+    },
+    {
+      "claim_id": "TRI-ELEV-003",
+      "source_claim_id": "TRI-ELEV-003",
+      "title": "Triadic Closure C6 Elevation",
+      "claim_statement": "The triadic_closure_substrate_sim_cpp engine achieves architectural scale-out and multi-model mechanism independence.",
+      "status": "C6_publishable",
+      "claim_type": "verified",
+      "classification": "publish",
+      "model_class": "cellular_automata",
+      "models_used": [
+        "triadic_closure_substrate_sim_cpp"
+      ],
+      "model_classes": [
+        "cellular_automata"
+      ],
+      "seeds_used": 10,
+      "falsification_run": true,
+      "mechanism_independence_count": 2,
+      "independent_models": [
+        "optical_reservoir_sim_v1",
+        "kuramoto_sim_v1_cpp"
       ],
       "evidence_paths": [
-        "tools/signal_scope_phase_continuation_engine/claim_registry.json",
-        "tools/signal_scope_phase_continuation_engine/c4_induction_packet.md"
+        "results/2026-05-25_run09_triadic_closure_C6_elevation/"
       ],
-      "claim_limits": [
-        "Induction scaffold only.",
-        "No executable Acellorator validation has been run.",
-        "Cannot support empirical claims until validation artifacts are populated."
+      "paper_path": "results/2026-05-25_run09_triadic_closure_C6_elevation/paper.md",
+      "last_updated": "2026-05-25"
+    },
+    {
+      "claim_id": "TRI-EMERGENT-001",
+      "source_claim_id": "TRI-EMERGENT-001",
+      "title": "Emergent Relational Ordering Campaign",
+      "claim_statement": "Interacting recursive triadic basins generate persistent higher-order relational ordering structures through residue-conditioned asymmetric coupling.",
+      "status": "C6_publishable",
+      "claim_type": "verified",
+      "classification": "publish",
+      "model_class": "cellular_automata",
+      "models_used": [
+        "triadic_closure_substrate_sim_cpp"
       ],
-      "concept_ids": [],
-      "independent_measurement": {
-        "present": false,
-        "count": 0,
-        "measurement_types": [],
-        "evidence_ids": [],
-        "confirmed_observables": [],
-        "notes": "Induction phase only."
+      "model_classes": [
+        "cellular_automata"
+      ],
+      "seeds_used": 16,
+      "falsification_run": true,
+      "evidence_paths": [
+        "results/2026-05-25_224615_EMERGENT_RELATIONAL_ORDERING_CAMPAIGN_V1/"
+      ],
+      "paper_path": "results/2026-05-25_224615_EMERGENT_RELATIONAL_ORDERING_CAMPAIGN_V1/campaign_report.json",
+      "last_updated": "2026-05-25"
+    },
+    {
+      "claim_id": "CLS_004_BASIN_SIGNATURE_V1",
+      "source_claim_id": "CLS_004",
+      "title": "Basin Signature Formalization",
+      "claim_statement": "Basin signatures based on peak/valley magnitudes and quadrant occupancy identify unique trajectories but lack class stability.",
+      "status": "partially_supported",
+      "claim_type": "empirical",
+      "classification": "provisional",
+      "model_class": "procedural_topology",
+      "models_used": [
+        "synthetic_basin_generator"
+      ],
+      "seeds_used": 20,
+      "falsification_run": true,
+      "evidence_paths": [
+        "results/2026-06-16_run04_CLS_004_BasinSignature/"
+      ],
+      "paper_path": "results/2026-06-16_run04_CLS_004_BasinSignature/paper.md",
+      "last_updated": "2026-06-16"
+    },
+    {
+      "claim_id": "CLS_004R_RELATIONAL_BASIN_SIGNATURE_V1",
+      "source_claim_id": "CLS_004R",
+      "title": "Relational Basin Signature Pivot",
+      "claim_statement": "Basin identity is determined by a root-traceable relational hierarchy where admissibility windows (Wa) are perfectly stable invariants (100%), while quadrant volatility is reclassified as boundary-front interaction.",
+      "status": "C5_supported",
+      "claim_type": "verified",
+      "classification": "supported",
+      "motivation": "Verified via PD_CG_V1 root-trace derivation and adversarial simulation.",
+      "revised_signature": {
+        "symbol": "Sigma_R",
+        "definition": [
+          "Wa",
+          "rho_D",
+          "chi",
+          "R_minus_i",
+          "M_dom"
+        ]
+      },
+      "evidence_paths": [
+        "results/cls_004R_relational_analysis/falsification_attack_results.json"
+      ],
+      "paper_path": "results/2026-06-16_run04_CLS_004_BasinSignature/pd_cg_v1_report.md",
+      "last_updated": "2026-06-16"
+    },
+    {
+      "claim_id": "UOMEGA_RIGHT_PRIMARY_001",
+      "source_claim_id": "UOMEGA_RIGHT_PRIMARY_001",
+      "title": "U\u00ce\u00a9 Right-Primary Falsification Attack: Right-Primary Reconstruction Survival",
+      "claim_statement": "Lawful admissible continuation requires reconstructable non-null distinction organization.",
+      "status": "C2_test_designed",
+      "claim_type": "verified",
+      "classification": "supported",
+      "model_class": "multi_mechanism",
+      "models_used": [
+        "structural_box_sim_cpp"
+      ],
+      "model_classes": [
+        "pde"
+      ],
+      "seeds_used": 1,
+      "falsification_run": true,
+      "evidence_paths": [
+        "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/data/BASELINE",
+        "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/data/ADD-FA-002",
+        "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/data/ADD-FA-005",
+        "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/data/ADD-FA-007",
+        "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/data/ADD-FA-009"
+      ],
+      "terms_used": [],
+      "paper_path": "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/paper.md",
+      "last_updated": "2026-06-17",
+      "last_gate_check": {
+        "timestamp": "2026-06-17T03:52:21.710498+00:00",
+        "paper_path": "results/2026-06-16_run05_UOMEGA_RIGHT_PRIMARY_ATTACK/paper.md",
+        "target_level": "C2",
+        "final_level": "C2",
+        "gate_result": "block",
+        "requested_classification": "proposed_interpretation",
+        "final_classification": "proposed_interpretation",
+        "downgrades_applied": [
+          "lexicon_term_below_L2_caps_classification"
+        ],
+        "blocked_reasons": []
       }
     },
     {
-      "claim_id": "SSPCE_C3_ORIENTATION_SELECTION",
-      "tool_name": "signal_scope_phase_continuation_engine",
-      "claim_statement": "The Signal Scope phase-continuation engine is intended to test whether the operator family `++`, `--`, `+-`, `-+` functions as an implementation surface of `-(i)` orientation selection.",
-      "status": "C4_dual_mechanism_supported",
+      "claim_id": "PRIN_2X_ADMISS_EVOL_001",
+      "source_claim_id": "PRIN_2X_ADMISS_EVOL_001",
+      "title": "Empirical Validation of Formal Principle 2.X: Admissibility Evolution",
+      "claim_statement": "Admissibility is not a fixed rule set; it evolves through residue-conditioned topological deformation.",
+      "status": "C2_test_designed",
       "claim_type": "provisional",
-      "model_class": "agent_based_phase_continuation_sim",
-      "observables": [
-        "operator_path",
-        "phase_error",
-        "trajectory_alignment"
+      "classification": "supported",
+      "model_class": "multi_mechanism",
+      "models_used": [
+        "structural_box_sim_cpp"
       ],
-      "primitive_mapping": [
-        "orientation_minus_i",
-        "epsilon",
-        "mu"
+      "model_classes": [
+        "pde"
       ],
+      "seeds_used": 1,
+      "falsification_run": true,
       "evidence_paths": [
-        "tools/signal_scope_phase_continuation_engine/claim_registry.json",
-        "tools/signal_scope_phase_continuation_engine/c4_induction_packet.md"
+        "results/2026-06-16_run07_PRIN_2X_ADMISS_EVOL/data"
       ],
-      "claim_limits": [
-        "Induction scaffold only.",
-        "No executable Acellorator validation has been run.",
-        "Cannot support empirical claims until validation artifacts are populated."
-      ],
-      "concept_ids": [],
-      "independent_measurement": {
-        "present": false,
-        "count": 0,
-        "measurement_types": [],
-        "evidence_ids": [],
-        "confirmed_observables": [],
-        "notes": "Induction phase only."
+      "terms_used": [],
+      "paper_path": "results/2026-06-16_run07_PRIN_2X_ADMISS_EVOL/paper.md",
+      "last_updated": "2026-06-17",
+      "last_gate_check": {
+        "timestamp": "2026-06-17T04:01:48.990361+00:00",
+        "paper_path": "results/2026-06-16_run07_PRIN_2X_ADMISS_EVOL/paper.md",
+        "target_level": "C2",
+        "final_level": "C2",
+        "gate_result": "pass",
+        "requested_classification": "supported",
+        "final_classification": "supported",
+        "downgrades_applied": [],
+        "blocked_reasons": []
       }
     },
     {
-      "claim_id": "SSPCE_C4_DISCONNECT_RECOUPLE_CONTINUITY",
-      "tool_name": "signal_scope_phase_continuation_engine",
-      "claim_statement": "The Signal Scope phase-continuation engine is intended to test whether inductive continuation preserves bounded phase motion during disconnect and restabilizes during recouple without teacher leakage.",
-      "status": "C4_dual_mechanism_supported",
+      "claim_id": "PO_OPEN_BRIDGE_001_SATISFACTION_REPORT",
+      "source_claim_id": "PO_OPEN_BRIDGE_001_SATISFACTION_REPORT",
+      "title": "Empirical Satisfaction of Orientation-Closure Proof Obligations",
+      "claim_statement": "Within these models, orientation coherence may narrow the distribution of admissible knot-classes, but this result is retained as provisional pending tool-rigor qualification.",
+      "status": "C1_defined",
       "claim_type": "provisional",
-      "model_class": "agent_based_phase_continuation_sim",
-      "observables": [
-        "phase_locking_value",
-        "trajectory_alignment",
-        "phase_error",
-        "survival_metrics"
+      "classification": "PROVISIONAL_PENDING_RIGOR",
+      "model_class": "multi_mechanism",
+      "models_used": [
+        "structural_box_sim_cpp",
+        "tda_module_v2_cpp"
       ],
-      "primitive_mapping": [
-        "rho",
-        "residue",
-        "epsilon",
-        "orientation_minus_i"
+      "model_classes": [
+        "pde",
+        "topological_analysis"
       ],
+      "seeds_used": 64,
+      "falsification_run": true,
       "evidence_paths": [
-        "tools/signal_scope_phase_continuation_engine/claim_registry.json",
-        "tools/signal_scope_phase_continuation_engine/c4_induction_packet.md"
+        "results/2026-06-16_run08_OPEN_BRIDGE_001_SATISFACTION/data"
       ],
-      "claim_limits": [
-        "Induction scaffold only.",
-        "No executable Acellorator validation has been run.",
-        "Cannot support empirical claims until validation artifacts are populated."
-      ],
-      "concept_ids": [],
-      "independent_measurement": {
-        "present": false,
-        "count": 0,
-        "measurement_types": [],
-        "evidence_ids": [],
-        "confirmed_observables": [],
-        "notes": "Induction phase only."
+      "terms_used": [],
+      "paper_path": "results/2026-06-16_run08_OPEN_BRIDGE_001_SATISFACTION/paper.md",
+      "last_updated": "2026-06-17",
+      "tool_rigor_status": "UNDER_REVIEW",
+      "governance_label": "[PROVISIONAL_PENDING_RIGOR]",
+      "evidentiary_weight": "LOW",
+      "last_gate_check": {
+        "timestamp": "2026-06-17T04:41:04.982564+00:00",
+        "paper_path": "results/2026-06-16_run08_OPEN_BRIDGE_001_SATISFACTION/paper.md",
+        "target_level": "C4",
+        "final_level": "C1",
+        "gate_result": "downgrade",
+        "requested_classification": "supported",
+        "final_classification": "PROVISIONAL_PENDING_RIGOR",
+        "downgrades_applied": [
+          "RIGOR_TOOL_001",
+          "mixed_or_unreviewed_toolchain_caps_claim_at_C1"
+        ],
+        "blocked_reasons": [
+          "promotion_block_pending_tool_review",
+          "promotion_block_pending_metric_validation",
+          "promotion_block_pending_governance_approval"
+        ]
       }
     },
     {
-      "claim_id": "RT1-AD-2026-04-30",
-      "claim_statement": "Realization of phase mismatch (ε) is strictly constrained by a dynamically evolving admissibility window; activation requires a prior admissible margin (μ > 0).",
-      "status": "C3_single_mechanism_supported",
-      "claim_type": "empirical",
+      "claim_id": "SIGMA_R_PREDICTIVE_MAPPING_001",
+      "source_claim_id": "CLS_004R",
+      "title": "Relational Signature Predictive Mapping",
+      "claim_statement": "Wa membership perfectly predicts macroscopic survival response under uniform perturbation, verifying Sigma_R as a predictive class marker.",
+      "status": "C4_supported",
+      "claim_type": "verified",
       "classification": "supported",
-      "model_class": "multi_mechanism",
-      "observables": [
-        "active_fraction",
-        "order_parameter"
+      "model_class": "pde",
+      "models_used": [
+        "structural_box_sim_cpp"
       ],
-      "primitive_mapping": [
-        "epsilon",
-        "residue",
-        "rho",
-        "mu"
+      "model_classes": [
+        "pde",
+        "topological_analysis"
       ],
+      "seeds_used": 16,
+      "falsification_run": true,
       "evidence_paths": [
-        "outputs/runs/research_admissibility_recoupling_rt1_2026-04-30/claim_gate_report.json",
-        "docs/reports/papers/TECHNICAL_PAPER_ADMISSIBILITY_RECOUPLING_RT1_2026-04-30.md"
+        "results/2026-06-17_run01_SigmaR_Predictive_Mapping"
       ],
-      "evidence_links": [
-        "EVID-0001",
-        "EVID-0002"
-      ],
-      "concept_ids": ["CONC-0001", "CONC-0005"],
-      "independent_measurement": {
-        "present": false,
-        "count": 0,
-        "measurement_types": [],
-        "evidence_ids": [],
-        "confirmed_observables": [],
-        "notes": "L3 dynamics only; no independent measurement layer."
-      },
-      "last_updated": "2026-04-30"
+      "paper_path": "results/2026-06-17_run01_SigmaR_Predictive_Mapping/paper.md",
+      "last_updated": "2026-06-17"
     },
     {
-      "claim_id": "CLAIM-0001",
-      "source_claim_id": "ONE_PROCESS_STABILITY_V1",
-      "title": "Phase Packet Stability as Residue-Supported Recurrence",
-      "claim_statement": "Structural identity emerges and stabilizes only under non-zero residue accumulation; zero-residue conditions produce incoherent runaway, and this transition is confirmed by independent spectral stability measurement.",
-      "status": "C5_replicated",
-      "claim_type": "empirical",
-      "classification": "supported",
-      "model_class": "multi_mechanism",
-      "observables": [
-        "active_fraction",
-        "order_parameter",
-        "residue_mean",
-        "spectral_power_distribution"
-      ],
-      "primitive_mapping": [
-        "residue",
-        "epsilon",
-        "kappa"
-      ],
-      "evidence_paths": [
-        "outputs/runs/research_one_process_stability_2026-05-01/claim_gate_report.json",
-        "docs/reports/papers/TECHNICAL_PAPER_ONE_PROCESS_STABILITY_2026-05-01.md"
-      ],
-      "evidence_links": [
-        "EVID-0001",
-        "EVID-0002",
-        "EVID-0003"
-      ],
-      "concept_ids": ["CONC-0002", "CONC-0005"],
-      "independent_measurement": {
-        "present": true,
-        "count": 1,
-        "measurement_types": ["spectral_analyzer"],
-        "evidence_ids": ["EVID-0003"],
-        "confirmed_observables": ["spectral_power_distribution"],
-        "notes": "Verified temporal stability via PSD analysis."
-      },
-      "last_updated": "2026-05-01"
+      "claim_id": "INSIGHT_RT_FORMATION_PATH",
+      "statement": "Distinction is not equivalent to RT; RT status is acquired through relational participation rather than mere existence.",
+      "status": "PROVISIONAL",
+      "claim_type": "theoretical",
+      "classification": "provisional",
+      "source_induction": "MPF_IND_2026_06_17_CORE_REDUCTION_AND_EVAL_PROCESS",
+      "last_updated": "2026-06-17"
     },
     {
-      "claim_id": "FLOOR_CONVERGENCE_V1",
-      "source_claim_id": "pivot_synthesis_near_floor",
-      "title": "Near-Floor Convergence and Residue-Enforced Admissibility",
-      "claim_statement": "The L0 NOT Axiom (non-zero mismatch) is actively maintained by residue accumulation; under extreme suppressive pressure, the system does not collapse but converges to a dynamic, residue-supported low-epsilon floor.",
-      "status": "C5_replicated",
-      "claim_type": "empirical",
-      "classification": "supported",
-      "model_class": "multi_mechanism",
-      "observables": [
-        "mean_mismatch",
-        "epsilon_mean",
-        "active_fraction",
-        "residue_mean"
-      ],
-      "primitive_mapping": [
-        "residue",
-        "epsilon",
-        "kappa"
-      ],
-      "evidence_paths": [
-        "outputs/runs/research_floor_convergence_2026-05-01/claim_gate_report.json",
-        "docs/reports/papers/TECHNICAL_PAPER_FLOOR_CONVERGENCE_2026-05-01.md"
-      ],
-      "evidence_links": [
-        "EVID-0004",
-        "EVID-0005",
-        "EVID-0006"
-      ],
-      "concept_ids": ["CONC-0001", "CONC-0003", "CONC-0005"],
-      "independent_measurement": {
-        "present": true,
-        "count": 1,
-        "measurement_types": ["spectral_analyzer"],
-        "evidence_ids": ["EVID-0006"],
-        "confirmed_observables": ["spectral_stability"],
-        "notes": "Verified temporal invariance of the floor manifold via PSD."
-      },
-      "last_updated": "2026-05-01"
+      "claim_id": "INSIGHT_RESIDUE_PREVENTS_EXACT_RETURN",
+      "statement": "Residue actively deforms topology and prevents exact collapse, driving emergence of history-conditioned continuation.",
+      "status": "PROVISIONAL",
+      "claim_type": "theoretical",
+      "classification": "provisional",
+      "source_induction": "MPF_IND_2026_06_17_CORE_REDUCTION_AND_EVAL_PROCESS",
+      "last_updated": "2026-06-17"
     },
     {
-      "claim_id": "EMERGENCE_THRESHOLD_V1",
-      "source_claim_id": "pivot_synthesis_emergence_threshold",
-      "title": "Threshold Mechanics of structural Identity Emergence",
-      "claim_statement": "The transition from a continuous relational floor (SS2) to discrete structural identity (SS3 Phase Packets) occurs strictly above a joint critical threshold of interaction reach and residue accumulation rate.",
-      "status": "C5_replicated",
-      "claim_type": "empirical",
-      "classification": "supported",
-      "model_class": "multi_mechanism",
-      "observables": [
-        "order_parameter",
-        "epsilon_mean",
-        "spectral_power_distribution"
-      ],
-      "primitive_mapping": [
-        "residue",
-        "epsilon",
-        "kappa",
-        "coupling"
+      "claim_id": "INSIGHT_EVALUATION_PROCESS_PRIMACY",
+      "statement": "The primary controllable variable is the evaluation process architecture rather than the identity of operands; Governance is a first-class process component.",
+      "status": "PROVISIONAL",
+      "claim_type": "theoretical",
+      "classification": "provisional",
+      "source_induction": "MPF_IND_2026_06_17_CORE_REDUCTION_AND_EVAL_PROCESS",
+      "last_updated": "2026-06-17"
+    },
+    {
+      "claim_id": "MPF_ADV_HARDENING_SERIES_001_GOVERNANCE_ANCHOR",
+      "statement": "Adversarial hardening enters the Mono-Process repository as governance infrastructure before theory backfill patches, and all downstream backfills in the series remain sequenced under explicit ontology leakage, meta-level, whole-expression, array-classification, residue-inscription, and implementation-firewall review.",
+      "status": "ACTIVE_GOVERNANCE_ANCHOR",
+      "claim_type": "governance_maintenance",
+      "classification": "provisional",
+      "evidence_type": "governance_infrastructure",
+      "simulation_required": false,
+      "promotion_block": true,
+      "series_order": [
+        "MPF_ADV_HARDENING_SERIES_001_GOVERNANCE_ANCHOR",
+        "MPF_ADV_HARDENING_SERIES_002_WHOLE_EXPRESSION_BACKFILL",
+        "MPF_ADV_HARDENING_SERIES_003_AFFECT_EFFECT_BACKFILL",
+        "MPF_ADV_HARDENING_SERIES_004_DUAL_INSCRIPTION_BACKFILL",
+        "MPF_ADV_HARDENING_SERIES_005_META_LEVEL_STACK_BACKFILL",
+        "MPF_ADV_HARDENING_SERIES_006_CONDITIONAL_ARRAY_BACKFILL",
+        "MPF_ADV_HARDENING_SERIES_007_CLOSURE_NEIGHBORHOOD_BACKFILL"
       ],
       "evidence_paths": [
-        "outputs/runs/research_emergence_threshold_2026-05-01/claim_gate_report.json",
-        "docs/reports/papers/TECHNICAL_PAPER_EMERGENCE_THRESHOLD_2026-05-01.md"
+        "registry/governance/adversarial_hardening_registry.json",
+        "docs/governance/NARRATIVE.md",
+        "docs/textbook/mono_process_textbook_complete.md"
       ],
-      "evidence_links": [
-        "EVID-0007",
-        "EVID-0008"
+      "last_updated": "2026-06-18"
+    },
+    {
+      "claim_id": "MPF_ADV_HARDENING_SERIES_002_WHOLE_EXPRESSION_BACKFILL",
+      "statement": "Whole Expression Primacy dictates that an RT expression is the minimum indivisible unit of analysis, preventing modular ablation, state-first, node-first, or component-first readings, and defining structural aspect decomposition as purely analytical projection.",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "claim_type": "governance_maintenance",
+      "classification": "provisional",
+      "evidence_type": "governance_infrastructure",
+      "simulation_required": false,
+      "promotion_block": true,
+      "evidence_paths": [
+        "patches/MPF_PATCH_RT_WHOLE_EXPRESSION_PRIMACY_001.json",
+        "registry/math/mpf_patch_rt_whole_expression_primacy_001.json",
+        "registry/governance/patches/MPF_ADV_HARDENING_SERIES_002_WHOLE_EXPRESSION_BACKFILL.json"
       ],
-      "concept_ids": ["CONC-0002", "CONC-0004"],
-      "independent_measurement": {
-        "present": true,
-        "count": 1,
-        "measurement_types": ["spectral_analyzer"],
-        "evidence_ids": ["EVID-0008"],
-        "confirmed_observables": ["spectral_modes"],
-        "notes": "Verified qualitative structural transition via spectral power concentration shift."
+      "last_updated": "2026-06-21"
+    },
+    {
+      "claim_id": "MPF_ADV_HARDENING_SERIES_003_AFFECT_EFFECT_BACKFILL",
+      "statement": "Affect and Effect are inseparable, co-generative process aspect-positions of the mono-process within the RT/Core expression, where Affect establishes the continuous tension/necessity aspect and Effect represents discrete realization, neither possessing ontological priority or substrate primitivity.",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "claim_type": "governance_maintenance",
+      "classification": "provisional",
+      "evidence_type": "governance_infrastructure",
+      "simulation_required": false,
+      "promotion_block": true,
+      "evidence_paths": [
+        "registry/lexicon/AFFECT_induction.json",
+        "registry/lexicon/EFFECT_induction.json",
+        "registry/governance/patches/MPF_ADV_HARDENING_SERIES_003_AFFECT_EFFECT_BACKFILL.json"
+      ],
+      "last_updated": "2026-06-21"
+    },
+    {
+      "claim_id": "MPF_ADV_HARDENING_SERIES_004_DUAL_INSCRIPTION_BACKFILL",
+      "statement": "Dual Inscription dictates that residue update events are partitioned into realized continuation inscription (Psi_plus) and excluded boundary inscription (Psi_minus), preventing any hidden-state ontology drift and ensuring both active updates and boundary exclusions constrain future admissibility.",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "claim_type": "governance_maintenance",
+      "classification": "provisional",
+      "evidence_type": "governance_infrastructure",
+      "simulation_required": false,
+      "promotion_block": true,
+      "evidence_paths": [
+        "docs/theory/foundational/5_03_26 unity/math/lemmas/L106_dual_inscription.md",
+        "docs/theory/foundational/5_03_26 unity/math/proofs/P106_dual_inscription_proof.md",
+        "registry/governance/patches/MPF_ADV_HARDENING_SERIES_004_DUAL_INSCRIPTION_BACKFILL.json"
+      ],
+      "last_updated": "2026-06-21"
+    },
+    {
+      "claim_id": "MPF_ADV_HARDENING_SERIES_005_META_LEVEL_STACK_BACKFILL",
+      "statement": "The Abstraction Meta-Level Stack stratifies process arguments into eight levels (Projection, Realization, Arbitration, Admissibility, Relation, Participation, Evaluation, and RT/Core), mandating explicit declaration of level scope for critiques, patches, and proofs to prevent illicit layer movement.",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "claim_type": "governance_maintenance",
+      "classification": "provisional",
+      "evidence_type": "governance_infrastructure",
+      "simulation_required": false,
+      "promotion_block": true,
+      "evidence_paths": [
+        "docs/theory/foundational/5_03_26 unity/math/lemmas/L107_meta_level_stack.md",
+        "docs/theory/foundational/5_03_26 unity/math/proofs/P107_meta_level_stack_proof.md",
+        "registry/governance/patches/MPF_ADV_HARDENING_SERIES_005_META_LEVEL_STACK_BACKFILL.json"
+      ],
+      "last_updated": "2026-06-21"
+    },
+    {
+      "claim_id": "MPF_ADV_HARDENING_SERIES_006_CONDITIONAL_ARRAY_BACKFILL",
+      "statement": "Array Classification Requirement mandates that all arrays in formalisms and simulations declare their type (conditional, projection, residue, or participation), strictly banning generic state arrays to prevent snapshot/substance ontology leakage under recursive updates.",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "claim_type": "governance_maintenance",
+      "classification": "provisional",
+      "evidence_type": "governance_infrastructure",
+      "simulation_required": false,
+      "promotion_block": true,
+      "evidence_paths": [
+        "docs/theory/foundational/5_03_26 unity/math/lemmas/L108_conditional_arrays.md",
+        "docs/theory/foundational/5_03_26 unity/math/proofs/P108_conditional_arrays_proof.md",
+        "registry/governance/patches/MPF_ADV_HARDENING_SERIES_006_CONDITIONAL_ARRAY_BACKFILL.json"
+      ],
+      "last_updated": "2026-06-21"
+    },
+    {
+      "claim_id": "MPF_ADV_HARDENING_SERIES_007_CLOSURE_NEIGHBORHOOD_BACKFILL",
+      "statement": "Closure Neighborhoods Requirement mandates that all process coupling neighborhoods (or closure neighborhoods) be defined and computed strictly via local process-connectivity relations (such as mutual admissibility window overlap or explicit orientation-array topology crossings) rather than assuming a primitive spatial coordinate metric or persistent node objects.",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "claim_type": "governance_maintenance",
+      "classification": "provisional",
+      "evidence_type": "governance_infrastructure",
+      "simulation_required": false,
+      "promotion_block": true,
+      "evidence_paths": [
+        "docs/theory/foundational/5_03_26 unity/math/lemmas/L109_closure_neighborhoods.md",
+        "docs/theory/foundational/5_03_26 unity/math/proofs/P109_closure_neighborhoods_proof.md",
+        "registry/governance/patches/MPF_ADV_HARDENING_SERIES_007_CLOSURE_NEIGHBORHOOD_BACKFILL.json"
+      ],
+      "last_updated": "2026-06-21"
+    },
+    {
+      "claim_id": "MPF_TOPOLOGY_GEOMETRY_LEGALITY_C1_DEFINITION_001",
+      "statement": "Topology-to-Geometry Legality Transform (Pi_geo) defines a projection condition under which a stabilized topological organization may be represented as geometry_app without treating geometry as primitive, provided it preserves distinction class, admissibility status, orientation traceability, and closure traceability as defined in L099 and L100.",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "claim_type": "theoretical",
+      "classification": "provisional",
+      "evidence_type": "formal_structural_argument",
+      "simulation_required": false,
+      "promotion_block": true,
+      "evidence_paths": [
+        "docs/theory/foundational/5_03_26 unity/math/lemmas/L099_projection_legality.md",
+        "docs/theory/foundational/5_03_26 unity/math/lemmas/L100_topology_geometry_hardening_gate.md",
+        "docs/theory/foundational/5_03_26 unity/math/proofs/P_GEO_001_projection_legality_scaffold.md"
+      ],
+      "last_updated": "2026-06-21"
+    },
+    {
+      "claim_id": "MPF_PROJECTION_SIGNATURE_C1_DEFINITION_001",
+      "statement": "Within these models, a Projection Signature (Sig_app) is represented as a recognizable pattern of constraints, outputs, and preserved relations showing that a process expression has lawfully projected into an application-facing domain.",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "claim_type": "governance_maintenance",
+      "classification": "provisional",
+      "evidence_type": "governance_infrastructure",
+      "simulation_required": false,
+      "promotion_block": true,
+      "evidence_paths": [
+        "registry/governance/patches/MPF_ADV_HARDENING_SERIES_009_PROJECTION_SIGNATURE_HARDENING.json"
+      ],
+      "last_updated": "2026-06-21"
+    },
+    {
+      "claim_id": "MPF_IND_TYPED_ZERO_RECOUPLING_001",
+      "statement": "Within these models, same-direction RT forms collapse locally, but opposite typed collapse residues (0_minus and 0_plus) may participate in higher-order RT and become admissible under a declared higher-order comparison, provided they retain directional provenance and are not reduced to undifferentiated zero.",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "claim_type": "induction",
+      "classification": "provisional",
+      "evidence_type": "theoretical_scaffold",
+      "simulation_required": false,
+      "promotion_block": true,
+      "evidence_paths": [
+        "registry/governance/patches/MPF_IND_TYPED_ZERO_RECOUPLING_001.json"
+      ],
+      "last_updated": "2026-06-21"
+    },
+    {
+      "claim_id": "MPF_IND_RT_NESTING_CONDITIONS_FAMILY_001",
+      "statement": "Within these models, X is RT iff X constructively traces its dependency lineage to RT_core without breaking distinction, admissibility, residue closure, or non-collapse. Nesting participants are process conditions, not states. The minimum complete nesting form is [D(*|-*) <f>_x D(*|+*)] under <*>_x Meta-Relation Family, whose members are mutually constituted with primary conditions.",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "claim_type": "induction",
+      "classification": "provisional",
+      "evidence_type": "theoretical_scaffold",
+      "simulation_required": false,
+      "promotion_block": true,
+      "evidence_paths": [
+        "registry/governance/patches/MPF_IND_RT_NESTING_CONDITIONS_FAMILY_001.json"
+      ],
+      "last_updated": "2026-06-21"
+    },
+    {
+      "claim_id": "MPF_IND_RT_MECHANICS_RECURSIVE_COMPLETION_001",
+      "statement": "Within these models, RT mechanics is provisionally defined as recursive relational completion: D(*|r) is reduced to D(x|r) when the surrounding field F' containing D(x|r) constructively satisfies PRIN_001 closure traceable to RT_core, with x-admissibility and RT constitution mutually co-produced rather than independently specified.",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "claim_type": "induction",
+      "classification": "provisional",
+      "evidence_type": "theoretical_scaffold",
+      "simulation_required": false,
+      "promotion_block": true,
+      "evidence_paths": [
+        "registry/math/mpf_ind_rt_mechanics_recursive_completion_001.json",
+        "registry/governance/patches/MPF_IND_RT_MECHANICS_RECURSIVE_COMPLETION_001.json"
+      ],
+      "last_updated": "2026-06-24"
+    },
+    {
+      "claim_id": "RT-IND-Conditioning-001",
+      "statement": "Within these models, conditioning is provisionally treated as the primitive relational process by which one distinction supplies admissibility context for another, while arithmetic operations are treated as admissible projections rather than primitive mechanics.",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "claim_type": "induction",
+      "classification": "provisional",
+      "evidence_type": "theoretical_scaffold",
+      "simulation_required": false,
+      "promotion_block": true,
+      "evidence_paths": [
+        "registry/math/rt_ind_conditioning_001.json",
+        "registry/governance/patches/RT-IND-Conditioning-001.json"
+      ],
+      "last_updated": "2026-06-24"
+    },
+    {
+      "claim_id": "MPF_PRIMITIVE_CONDITIONING_REDUCTION_001",
+      "statement": "Within these models, the conditioned distinction <a>_b is provisionally treated as the smallest admissible RT-mechanics object, while D(a) is treated as a context-suppressed abstraction and arithmetic juxtaposition remains a derived projection.",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "claim_type": "ontology_reduction",
+      "classification": "provisional",
+      "evidence_type": "theoretical_scaffold",
+      "simulation_required": false,
+      "promotion_block": true,
+      "evidence_paths": [
+        "registry/math/mpf_primitive_conditioning_reduction_001.json",
+        "registry/governance/patches/MPF_PRIMITIVE_CONDITIONING_REDUCTION_001.json"
+      ],
+      "last_updated": "2026-06-24"
+    },
+    {
+      "claim_id": "VERTICAL_BAR_OPERATOR_DEFINITION_PASS_001",
+      "statement": "Within these models, the vertical bar | is defined as the primitive admissible participation separator, establishing the structured interface through which distinction can be evaluated, and is order-sensitive, requires type-checked operands, and gates co-participation as D(A|B) > epsilon_a.",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "claim_type": "induction",
+      "classification": "provisional",
+      "evidence_type": "theoretical_scaffold",
+      "simulation_required": false,
+      "promotion_block": true,
+      "evidence_paths": [
+        "patches/VERTICAL_BAR_OPERATOR_DEFINITION_PASS_001.json"
+      ],
+      "last_updated": "2026-06-22"
+    },
+    {
+      "claim_id": "VERTICAL_BAR_OPERATOR_GROUP_CLOSURE_PASS_001",
+      "statement": "Within these models, grouped bar expressions are defined via graph G co-participation closure Adm_|^G preserving consistent orientation, defaults to non-associative and non-permutable, and mandates triadic role typing.",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "claim_type": "induction",
+      "classification": "provisional",
+      "evidence_type": "theoretical_scaffold",
+      "simulation_required": false,
+      "promotion_block": true,
+      "evidence_paths": [
+        "patches/VERTICAL_BAR_OPERATOR_GROUP_CLOSURE_PASS_001.json"
+      ],
+      "last_updated": "2026-06-22"
+    },
+    {
+      "claim_id": "ORG_A_AXIOM_DEFINITION_PASS_001",
+      "statement": "Within these models, Org_a is defined as the admissible organization operator over a typed grouped participation graph G, governed by candidate axioms of Inventory Preservation, Admissibility Conservation, and Topological Consistency.",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "claim_type": "induction",
+      "classification": "provisional",
+      "evidence_type": "theoretical_scaffold",
+      "simulation_required": false,
+      "promotion_block": true,
+      "evidence_paths": [
+        "patches/ORG_A_AXIOM_DEFINITION_PASS_001.json"
+      ],
+      "last_updated": "2026-06-22"
+    },
+    {
+      "claim_id": "MPF_ART_CLOSURE_PRESERVATION_LEMMA_001",
+      "statement": "If an aRT satisfies its declared membership, distinction-preservation, admissible-ordering, and closure-support conditions, then an admissible update to one or more member RTs preserves aRT status provided those conditions remain satisfied after the update.",
+      "status": "FORMAL_PROCEDURAL_ONLY",
+      "claim_type": "proof_hardening",
+      "classification": "provisional",
+      "evidence_type": "formal_structural_argument",
+      "simulation_required": false,
+      "last_updated": "2026-06-18"
+    },
+    {
+      "claim_id": "MPF_O_CALCULUS_PARTIAL_COMPOSITION_LEMMA_001",
+      "statement": "Orientation transformations compose lawfully iff they preserve typed admissible continuation and closure class.",
+      "status": "FORMAL_PROCEDURAL_ONLY",
+      "claim_type": "proof_hardening",
+      "classification": "provisional",
+      "evidence_type": "formal_structural_argument",
+      "simulation_required": false,
+      "promotion_block": true,
+      "last_updated": "2026-06-18"
+    },
+    {
+      "claim_id": "MPF_IFFS_PROJECTION_IDENTITY_FIREWALL_001",
+      "statement": "Statistical projection iff_s marks a representation layer and does not establish process identity.",
+      "status": "FORMAL_PROCEDURAL_ONLY",
+      "claim_type": "proof_hardening",
+      "classification": "provisional",
+      "evidence_type": "formal_structural_argument",
+      "simulation_required": false,
+      "promotion_block": true,
+      "last_updated": "2026-06-18"
+    },
+    {
+      "claim_id": "MPF_OTIMES_NON_IDENTITY_COMPOSITION_LEMMA_001",
+      "statement": "If X and Z are typed lawful process operands and X otimes_Y Z is defined under context Y, then the composition creates a lawful typed coupling without implying X = Z, X = X otimes_Y Z, or Z = X otimes_Y Z, unless a separate identity-preserving rule is explicitly declared.",
+      "status": "FORMAL_PROCEDURAL_ONLY",
+      "claim_type": "proof_hardening",
+      "classification": "provisional",
+      "evidence_type": "formal_structural_argument",
+      "simulation_required": false,
+      "promotion_block": true,
+      "last_updated": "2026-06-18"
+    },
+    {
+      "claim_id": "MPF_RT_RELATIONAL_MECHANICS_COMPUTATIONAL_001",
+      "statement": "RT formation is computationally defined as [delta_a(B_L) <*>_x delta_a(B_R)], requiring distinction-bearing generative paths, block admissibility, polarity preservation, and non-identity between blocks.",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "claim_type": "induction",
+      "classification": "provisional",
+      "evidence_type": "theoretical_scaffold",
+      "simulation_required": true,
+      "promotion_block": true,
+      "last_updated": "2026-06-19"
+    },
+    {
+      "claim_id": "MPF_RT_CG_TRIAD_KNOT_REFINEMENT_001",
+      "statement": "Within these models, Constraint Geometry is represented as the triangular knot-closure △(RT, QM_app, GR_app), geometrically restating the Core co-generative structure and providing a triadic bridge where grammar and projections remain distinguishable inside one lawful closure.",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "claim_type": "induction",
+      "classification": "provisional",
+      "evidence_type": "theoretical_refinement",
+      "simulation_required": true,
+      "promotion_block": true,
+      "last_updated": "2026-06-21"
+    },
+    {
+      "claim_id": "MPF_RT_BICONDITIONAL_LADDER_001",
+      "statement": "Within these models, organizational scale is represented as a recursively nested biconditional ladder of RT expressions mediated by deviation and continuation.",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "claim_type": "induction",
+      "classification": "provisional",
+      "evidence_type": "theoretical_scaffold",
+      "simulation_required": true,
+      "promotion_block": true,
+      "last_updated": "2026-06-21"
+    },
+    {
+      "claim_id": "MPF_VERTICAL_BAR_INDUCTION_001",
+      "statement": "The vertical bar | functions as the distinction-preserving comparison operator by which one process-aspect is compared to another, generating realized distinction D and deviated admissibility delta_alpha within the same process — not through creation of a separate process or stored residue object.",
+      "status": "C2_test_designed",
+      "claim_type": "verified",
+      "classification": "provisional",
+      "evidence_type": "campaign_completed",
+      "simulation_required": true,
+      "promotion_block": true,
+      "patch_source": "MPF_VERTICAL_BAR_INDUCTION_001",
+      "sub_claims": [
+        {
+          "hypothesis_id": "H1_bar_necessity",
+          "form": "not(|) -> not D or D approx 0",
+          "testable": true,
+          "status": "C2_test_designed"
+        },
+        {
+          "hypothesis_id": "H2_bar_complexity",
+          "form": "higher-order A|B|C structures increase organization_score when admissibility preserved",
+          "testable": true,
+          "status": "C2_test_designed"
+        },
+        {
+          "hypothesis_id": "H3_deviated_admissibility",
+          "form": "D(A|B) -> delta_a_after != delta_a_before",
+          "testable": true,
+          "status": "C2_test_designed"
+        },
+        {
+          "hypothesis_id": "H4_no_memory_object",
+          "form": "same_process + deviated_constraint (no separate residue object required)",
+          "testable": "indirect",
+          "status": "C2_test_designed"
+        }
+      ],
+      "promotion_conditions": [
+        "|-enabled runs produce significantly more D than no-bar controls",
+        "D-producing runs produce measurable delta_alpha",
+        "delta_alpha affects the next cycle's admissibility or Affect renewal",
+        "results survive randomized and collapse-comparison controls"
+      ],
+      "failure_conditions": [
+        "D appears equally without |",
+        "D does not produce measurable admissibility deviation",
+        "bar complexity has no detectable organizational effect",
+        "results require a separate memory object rather than same-process deviated constraint"
+      ],
+      "forbidden_use": [
+        "theorem promotion",
+        "framework confirmation",
+        "ontology confirmation",
+        "rigor endorsement"
+      ],
+      "last_updated": "2026-06-20"
+    },
+    {
+      "claim_id": "MPF_DEVIATED_CONSTRAINT_DYNAMICS_001",
+      "statement": "Distinction does not create a new process; rather, distinction creates deviated constraint (D -> delta_alpha) within the same process, preserving process identity.",
+      "status": "C1_defined",
+      "claim_type": "verified",
+      "classification": "provisional",
+      "evidence_type": "theoretical_scaffold",
+      "simulation_required": true,
+      "promotion_block": true,
+      "patch_source": "MPF_DEVIATED_CONSTRAINT_DYNAMICS_PATCH_001",
+      "sub_claims": [
+        {
+          "hypothesis_id": "H1_vortex_admissibility",
+          "form": "δα1 conditions D2, which generates δα2",
+          "testable": true,
+          "status": "EVIDENCE_UNDER_GOVERNANCE_AUDIT"
+        },
+        {
+          "hypothesis_id": "H2_non_markov_organization",
+          "form": "future admissibility depends on accumulated organization",
+          "testable": true,
+          "status": "SCAFFOLD_READY"
+        }
+      ],
+      "forbidden_use": [
+        "theorem promotion",
+        "framework confirmation",
+        "ontology confirmation",
+        "rigor endorsement"
+      ],
+      "last_updated": "2026-06-20"
+    },
+    {
+      "claim_id": "NEW_FOLDER_OPERATOR_ALGEBRA_INTAKE_001",
+      "statement": "Within the external source report only, fixed-kernel, transient state-conditioning, and persistent state-conditioning regimes produced different finite generated operator-algebra summaries and law-check outcomes.",
+      "status": "C2_EXTERNAL_BOUNDED_INDUCTION",
+      "claim_type": "induction",
+      "classification": "provisional",
+      "evidence_type": "external_computational_report",
+      "simulation_required": true,
+      "promotion_block": true,
+      "evidence_paths": [
+        "outputs/analysis_intake/intake_report_NEW_FOLDER_STAGED_INDUCTION_PACKET_2026_07_22.json",
+        "D:/projects/New folder/complete_algebra_report.md"
+      ],
+      "forbidden_use": [
+        "C5/C6 promotion",
+        "external mathematical universality claim",
+        "unreplicated theorem support"
+      ],
+      "last_updated": "2026-07-22"
+    },
+    {
+      "claim_id": "NEW_FOLDER_RESIDUE_CAUSALITY_PILOT_001",
+      "statement": "Within the external residue-causality pilot only, explicitly accumulated residue showed positive pilot metrics against matched controls, but the source campaign outcome remains INCONCLUSIVE.",
+      "status": "C2_EXTERNAL_INCONCLUSIVE_PILOT",
+      "claim_type": "induction",
+      "classification": "provisional",
+      "evidence_type": "external_exploratory_computational_evidence",
+      "simulation_required": true,
+      "promotion_block": true,
+      "evidence_paths": [
+        "outputs/analysis_intake/intake_report_NEW_FOLDER_STAGED_INDUCTION_PACKET_2026_07_22.json",
+        "D:/projects/New folder/results/MPF_SIM_RESIDUE_CAUSALITY_001/20260721T070622Z/primary_analysis.json",
+        "D:/projects/New folder/results/MPF_SIM_RESIDUE_CAUSALITY_001/20260721T070622Z/falsification_report.md"
+      ],
+      "forbidden_use": [
+        "residue validation claim",
+        "physical residue claim",
+        "claim stronger than INCONCLUSIVE without confirmatory controls"
+      ],
+      "last_updated": "2026-07-22"
+    },
+    {
+      "claim_id": "NEW_FOLDER_PHASE_MAP_NULL_RESULT_001",
+      "statement": "Within the external phase-map pilot only, no stable region was detected across the sampled parameter surface.",
+      "status": "C2_EXTERNAL_NEGATIVE_EVIDENCE",
+      "claim_type": "induction",
+      "classification": "provisional",
+      "evidence_type": "external_negative_computational_evidence",
+      "simulation_required": true,
+      "promotion_block": true,
+      "evidence_paths": [
+        "outputs/analysis_intake/intake_report_NEW_FOLDER_STAGED_INDUCTION_PACKET_2026_07_22.json",
+        "D:/projects/New folder/results/MPF_SIM_PHASE_MAP_001/20260721T071843Z/phase_boundary.json",
+        "D:/projects/New folder/results/MPF_SIM_PHASE_MAP_001/20260721T071843Z/recommend_next_campaign.json"
+      ],
+      "forbidden_use": [
+        "stable-region support claim",
+        "parameter generality claim"
+      ],
+      "last_updated": "2026-07-22"
+    },
+    {
+      "claim_id": "NEW_FOLDER_RT_NB10_RECONSTRUCTION_001",
+      "statement": "Within the supplied Notebook 10 artifacts only, continuation-domain geometry was reconstructed as an R1 execution-validated dataset; the source endorsement states it is not an exact historical reproduction.",
+      "status": "C2_EXTERNAL_RECONSTRUCTED_EXECUTABLE",
+      "claim_type": "induction",
+      "classification": "provisional",
+      "evidence_type": "external_reconstructed_dataset",
+      "simulation_required": true,
+      "promotion_block": true,
+      "evidence_paths": [
+        "outputs/analysis_intake/intake_report_NEW_FOLDER_STAGED_INDUCTION_PACKET_2026_07_22.json",
+        "D:/projects/New folder/rt_notebook_10_outputs.zip"
+      ],
+      "forbidden_use": [
+        "historical reproduction claim",
+        "replacement of missing original implementation",
+        "independent mechanism claim"
+      ],
+      "last_updated": "2026-07-22"
+    },
+    {
+      "claim_id": "NEW_FOLDER_RT_NB11_NON_IDENTIFIABILITY_001",
+      "statement": "Within the supplied Notebook 11 artifacts only, the Notebook 10 reconstruction cannot identify the prespecified overlap mechanism because completion-comparable J is constant and reachable-domain overlap is definitionally identical to J.",
+      "status": "C2_EXTERNAL_LIMITATION_EVIDENCE",
+      "claim_type": "induction",
+      "classification": "provisional",
+      "evidence_type": "external_limitation_evidence",
+      "simulation_required": true,
+      "promotion_block": true,
+      "evidence_paths": [
+        "outputs/analysis_intake/intake_report_NEW_FOLDER_STAGED_INDUCTION_PACKET_2026_07_22.json",
+        "D:/projects/New folder/rt_notebook_11_outputs.zip"
+      ],
+      "forbidden_use": [
+        "reachability-overlap causal validation",
+        "Notebook 10 mechanism promotion"
+      ],
+      "last_updated": "2026-07-22"
+    },
+    {
+      "claim_id": "NEW_FOLDER_RT_NB12_MECHANISM_ISOLATION_001",
+      "statement": "Within the explicitly enumerated Notebook 12 domain only, mechanism masks and candidate invariants were associated with bounded reconvergence geometries, minimal witnesses, and cataloged counterexamples.",
+      "status": "C2_EXTERNAL_BOUNDED_ENUMERATION",
+      "claim_type": "induction",
+      "classification": "provisional",
+      "evidence_type": "external_bounded_enumerated_computational_evidence",
+      "simulation_required": true,
+      "promotion_block": true,
+      "evidence_paths": [
+        "outputs/analysis_intake/intake_report_NEW_FOLDER_STAGED_INDUCTION_PACKET_2026_07_22.json",
+        "D:/projects/New folder/rt_notebook_12_outputs_results.zip"
+      ],
+      "forbidden_use": [
+        "unrestricted necessity claim",
+        "unrestricted sufficiency claim",
+        "external physical mechanism claim"
+      ],
+      "last_updated": "2026-07-22"
+    },
+    {
+      "claim_id": "COLAB_DEPARTMENT_INDUCTION_001",
+      "statement": "The Colab Department is established as a C1 governance structure for classifying notebook, result zip, and external Colab-style simulation artifacts; C2 status is reserved for manifest/hash-backed bounded outputs or limitation/negative-result evidence.",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "claim_type": "governance_maintenance",
+      "classification": "provisional",
+      "evidence_type": "governance_structure",
+      "simulation_required": false,
+      "promotion_block": true,
+      "evidence_paths": [
+        "departments/colab/department_ssot.md",
+        "governance/live/department_registry.json",
+        "registry/governance/patches/COLAB_DEPARTMENT_INDUCTION_001.json"
+      ],
+      "forbidden_use": [
+        "tool approval",
+        "claim promotion",
+        "C2 assignment to bare .ipynb files",
+        "C5/C6 notebook evidence claim"
+      ],
+      "last_updated": "2026-07-22"
+    },
+    {
+      "claim_id": "COLAB_EXPERIMENT_SPEC_OBJECT_001",
+      "statement": "The Colab Department recognizes immutable pre-execution experiment specifications as C1 design/provenance evidence and as a required gate for future C2 notebook/result classifications when paired with recoverable outputs, manifests, hashes, and bounded interpretation.",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "claim_type": "governance_maintenance",
+      "classification": "provisional",
+      "evidence_type": "governance_structure",
+      "simulation_required": false,
+      "promotion_block": true,
+      "evidence_paths": [
+        "departments/colab/department_ssot.md",
+        "departments/colab/schemas/experiment_spec.schema.json",
+        "departments/colab/templates/experiment_spec.json",
+        "registry/governance/patches/COLAB_EXPERIMENT_SPEC_OBJECT_001.json"
+      ],
+      "forbidden_use": [
+        "result validation by specification alone",
+        "post-hoc expansion of notebook claim scope",
+        "C5/C6 notebook evidence claim",
+        "external physical validation"
+      ],
+      "last_updated": "2026-07-22"
+    },
+    {
+      "claim_id": "NB13_TOPOLOGICAL_INVARIANTS_CONTINUATION_GEOMETRY_001",
+      "statement": "Notebook 13 is specified as a pre-execution, topology-only test of whether declared continuation-graph invariants can classify universal reconvergence, partial reconvergence, and obstruction across the bounded Notebook 12 domain.",
+      "status": "C1_SPECIFICATION_ONLY",
+      "claim_type": "experiment_design",
+      "classification": "provisional",
+      "evidence_type": "pre_execution_experiment_specification",
+      "simulation_required": true,
+      "promotion_block": true,
+      "evidence_paths": [
+        "departments/colab/notebook_designs/notebook_13_topological_invariants/experiment_spec.json",
+        "departments/colab/notebook_designs/notebook_13_topological_invariants/experiment_spec.freeze_manifest.json",
+        "departments/colab/notebook_designs/notebook_13_topological_invariants/notebook_13_design.md",
+        "departments/colab/notebook_designs/notebook_13_topological_invariants/RT_Notebook_13_Topological_Invariants_of_Continuation_Geometry.ipynb",
+        "registry/governance/patches/NB13_TOPOLOGICAL_INVARIANTS_CONTINUATION_GEOMETRY_001.json"
+      ],
+      "forbidden_use": [
+        "claim that Notebook 13 has succeeded before execution",
+        "implementation-independent theory claim",
+        "external physical validation",
+        "claim promotion above C1 before recoverable outputs exist"
+      ],
+      "last_updated": "2026-07-22"
+    },
+    {
+      "claim_id": "COLAB_RESULTS_DIRECTORY_ARCHIVE_REGISTRY_001",
+      "statement": "The Colab Department has a governed results directory and result-archive registry requiring every Colab result zip to be inducted, queue-bound, hash-recorded, and registered before citation or interpretation.",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "claim_type": "governance_maintenance",
+      "classification": "provisional",
+      "evidence_type": "governance_structure",
+      "simulation_required": false,
+      "promotion_block": true,
+      "evidence_paths": [
+        "departments/colab/results/README.md",
+        "registry/colab_result_archive_registry.json",
+        "departments/colab/department_ssot.md",
+        "registry/governance/patches/COLAB_RESULTS_DIRECTORY_ARCHIVE_REGISTRY_001.json"
+      ],
+      "forbidden_use": [
+        "automatic C2 classification of new zips",
+        "claim validation by archive placement alone",
+        "citation of uninducted result zips",
+        "in-place zip replacement"
+      ],
+      "last_updated": "2026-07-22"
+    },
+    {
+      "claim_id": "NB13_TOPOLOGICAL_INVARIANTS_CONTINUATION_GEOMETRY_002",
+      "statement": "Notebook 13 v2 is specified as an ordered, chunked, checkpointed Colab execution scaffold that supersedes the v1 scaffold after user-reported Colab path, cell-order, runtime reset, column-mapping, and crash/lost-data failures.",
+      "status": "C1_SPECIFICATION_ONLY",
+      "claim_type": "experiment_design_repair",
+      "classification": "provisional",
+      "evidence_type": "pre_execution_experiment_specification",
+      "simulation_required": true,
+      "promotion_block": true,
+      "evidence_paths": [
+        "departments/colab/notebook_designs/notebook_13_topological_invariants/notebook_13_colab_error_explanation.md",
+        "departments/colab/notebook_designs/notebook_13_topological_invariants/experiment_spec_v2.json",
+        "departments/colab/notebook_designs/notebook_13_topological_invariants/experiment_spec_v2.freeze_manifest.json",
+        "departments/colab/notebook_designs/notebook_13_topological_invariants/RT_Notebook_13_v2_Ordered_Chunked.ipynb",
+        "registry/governance/patches/NB13_TOPOLOGICAL_INVARIANTS_COLAB_V2_ORDERED_CHUNKED_001.json"
+      ],
+      "forbidden_use": [
+        "claim that Notebook 13 v2 has executed successfully",
+        "topology-governs-reconvergence claim",
+        "external physical validation",
+        "claim promotion above C1 before recoverable outputs exist"
+      ],
+      "last_updated": "2026-07-22"
+    },
+    {
+      "claim_id": "NB13_TOPOLOGICAL_INVARIANTS_RESULTS_001",
+      "statement": "Within the regenerated Notebook 12 domain only, Notebook 13 v2 produced complete zero-skip topology-invariant outputs in which the extracted topology signature separates the recorded reconvergence geometry/J labels; interpretation is limited because direct topology proxies for the label definition are present and planned graph-size/grouped controls are missing.",
+      "status": "C2_BOUNDED_NOTEBOOK_OUTPUT_WITH_LIMITATIONS",
+      "claim_type": "notebook_result_review",
+      "classification": "provisional",
+      "evidence_type": "bounded_colab_notebook_output",
+      "simulation_required": true,
+      "promotion_block": true,
+      "evidence_paths": [
+        "departments/colab/results/NB13_TOPOLOGICAL_INVARIANTS_CONTINUATION_GEOMETRY_002.zip",
+        "registry/colab_result_archive_registry.json",
+        "outputs/analysis_intake/review_NB13_TOPOLOGICAL_INVARIANTS_CONTINUATION_GEOMETRY_002.md",
+        "outputs/analysis_intake/review_NB13_TOPOLOGICAL_INVARIANTS_CONTINUATION_GEOMETRY_002.json"
+      ],
+      "observations": {
+        "rows_loaded": 13824,
+        "invariant_rows": 13824,
+        "skip_count": 0,
+        "dummy_balanced_accuracy": 0.25,
+        "topology_balanced_accuracy": 1.0,
+        "simple_separation_rule_agreement": 1.0
       },
-      "last_updated": "2026-05-01"
+      "blockers": [
+        "graph_size_only_baseline_missing",
+        "grouped_evaluation_missing",
+        "definition_proxy_features_present",
+        "approved_tool_replication_pending"
+      ],
+      "forbidden_use": [
+        "implementation-independent theory claim",
+        "external physical validation",
+        "claim that topology universally governs reconvergence",
+        "C5/C6 promotion"
+      ],
+      "last_updated": "2026-07-22"
+    },
+    {
+      "claim_id": "NB14_GENERIC_TOPOLOGY_FEATURE_ABLATION_001",
+      "statement": "Notebook 14 is specified as a pre-execution feature-ablation test that excludes near-definitional branch-pair and merge-depth features from Notebook 13 v2 and measures whether generic topology feature families still classify reconvergence geometry.",
+      "status": "C1_SPECIFICATION_ONLY",
+      "claim_type": "experiment_design",
+      "classification": "provisional",
+      "evidence_type": "pre_execution_experiment_specification",
+      "simulation_required": true,
+      "promotion_block": true,
+      "evidence_paths": [
+        "departments/colab/notebook_designs/notebook_14_feature_ablation/experiment_spec.json",
+        "departments/colab/notebook_designs/notebook_14_feature_ablation/experiment_spec.freeze_manifest.json",
+        "departments/colab/notebook_designs/notebook_14_feature_ablation/notebook_14_design.md",
+        "departments/colab/notebook_designs/notebook_14_feature_ablation/RT_Notebook_14_Generic_Topology_Feature_Ablation.ipynb",
+        "registry/governance/patches/NB14_GENERIC_TOPOLOGY_FEATURE_ABLATION_001.json"
+      ],
+      "forbidden_use": [
+        "claim that Notebook 14 has executed successfully",
+        "implementation-independent theory claim",
+        "external physical validation",
+        "C5/C6 promotion"
+      ],
+      "last_updated": "2026-07-22"
+    },
+    {
+      "claim_id": "NB14_GENERIC_TOPOLOGY_FEATURE_ABLATION_RESULTS_001",
+      "statement": "Within the Notebook 13 v2 / Notebook 12 bounded domain only, Notebook 14 results show that generic topology features retain strong geometry classification after the declared near-definitional branch-pair and merge-depth proxy features are excluded; articulation hierarchy has the largest observed single-family ablation effect, but interpretation is limited by an external-to-zip manifest, missing grouped evaluation, and pending approved-tool replication.",
+      "status": "C2_BOUNDED_NOTEBOOK_OUTPUT_WITH_LIMITATIONS",
+      "claim_type": "notebook_result_review",
+      "classification": "provisional",
+      "evidence_type": "bounded_colab_notebook_output",
+      "simulation_required": true,
+      "promotion_block": true,
+      "evidence_paths": [
+        "departments/colab/results/NB14_GENERIC_TOPOLOGY_FEATURE_ABLATION_001.zip",
+        "registry/colab_result_archive_registry.json",
+        "outputs/analysis_intake/review_NB14_GENERIC_TOPOLOGY_FEATURE_ABLATION_001.md",
+        "outputs/analysis_intake/review_NB14_GENERIC_TOPOLOGY_FEATURE_ABLATION_001.json"
+      ],
+      "observations": {
+        "all_generic_balanced_accuracy": 0.9318426815377745,
+        "graph_size_only_balanced_accuracy": 0.7109709006885445,
+        "forbidden_proxy_only_balanced_accuracy": 1.0,
+        "remove_articulation_hierarchy_delta": 0.117537694448425
+      },
+      "blockers": [
+        "manifest_external_to_zip",
+        "grouped_evaluation_missing",
+        "possible_correlated_split_leakage",
+        "graph_diameter_feature_absent",
+        "approved_tool_replication_pending"
+      ],
+      "forbidden_use": [
+        "implementation-independent theory claim",
+        "external physical validation",
+        "claim that topology universally governs reconvergence",
+        "C5/C6 promotion"
+      ],
+      "last_updated": "2026-07-22"
+    },
+    {
+      "claim_id": "MPF_SIM_PROJECTION_DOF_ISOLATION_001",
+      "statement": "Notebook 16 is specified as a pre-execution Colab campaign that varies organizational degree of freedom while keeping the primitive binding law fixed, then measures lawful organization growth, novelty rates, and lower-DoF projection loss inside a bounded symbolic model.",
+      "status": "C1_SPECIFICATION_ONLY",
+      "claim_type": "experiment_design",
+      "classification": "provisional",
+      "evidence_type": "pre_execution_experiment_specification",
+      "simulation_required": true,
+      "promotion_block": true,
+      "evidence_paths": [
+        "departments/colab/notebook_designs/notebook_16_projection_dof_isolation/experiment_spec.json",
+        "departments/colab/notebook_designs/notebook_16_projection_dof_isolation/experiment_spec.freeze_manifest.json",
+        "departments/colab/notebook_designs/notebook_16_projection_dof_isolation/notebook_16_design.md",
+        "departments/colab/notebook_designs/notebook_16_projection_dof_isolation/RT_Notebook_16_Projection_DoF_Isolation.ipynb",
+        "registry/governance/patches/MPF_SIM_PROJECTION_DOF_ISOLATION_001.json"
+      ],
+      "forbidden_use": [
+        "claim that Notebook 16 has executed successfully without recoverable outputs",
+        "implementation-independent theory claim",
+        "ontology-expansion claim",
+        "external physical validation",
+        "C5/C6 promotion"
+      ],
+      "last_updated": "2026-07-23"
+    },
+    {
+      "claim_id": "MPF_SIM_PROJECTION_DOF_ISOLATION_RESULTS_001",
+      "statement": "Within the bounded symbolic organizational model defined by Notebook 16 only, the supplied result archive shows increasing lawful organization counts with higher organizational DoF, primitive preservation remaining at 1.0, nonzero novel-organization rates from DoF 2 upward, and frequently lossy lower-DoF projection; interpretation is limited by the stale manifest execution state, the bounded DoF/depth sweep, and the absence of approved-tool replication.",
+      "status": "C2_BOUNDED_NOTEBOOK_OUTPUT_WITH_LIMITATIONS",
+      "claim_type": "notebook_result_review",
+      "classification": "provisional",
+      "evidence_type": "bounded_colab_notebook_output",
+      "simulation_required": true,
+      "promotion_block": true,
+      "evidence_paths": [
+        "departments/colab/results/MPF_SIM_PROJECTION_DOF_ISOLATION_001.zip",
+        "registry/colab_result_archive_registry.json",
+        "outputs/analysis_intake/review_MPF_SIM_PROJECTION_DOF_ISOLATION_001.md",
+        "outputs/analysis_intake/review_MPF_SIM_PROJECTION_DOF_ISOLATION_001.json"
+      ],
+      "observations": {
+        "dof_count": 6,
+        "lawful_organization_count_dof_1": 4,
+        "lawful_organization_count_dof_6": 188,
+        "primitive_preservation_rate_all_dof": 1.0,
+        "novel_organization_rate_dof_2": 0.9333333333333332,
+        "novel_organization_rate_dof_6": 0.1702127659574468,
+        "projection_lossless_rate": 0.2996031746031746,
+        "closure_preserved_rate": 0.6502976190476191,
+        "symmetry_preserved_rate": 0.7157738095238095
+      },
+      "blockers": [
+        "manifest_execution_state_stale",
+        "symbolic_operationalization_only",
+        "bounded_dof_depth_domain",
+        "approved_tool_replication_pending"
+      ],
+      "forbidden_use": [
+        "implementation-independent theory claim",
+        "ontology-expansion claim outside the bounded symbolic model",
+        "external physical validation",
+        "C5/C6 promotion"
+      ],
+      "last_updated": "2026-07-23"
+    },
+    {
+      "claim_id": "NB15_ARTICULATION_CONTINUATION_GEOMETRY_THEORY_001",
+      "statement": "Notebook 15 is specified as a pre-execution theorem-candidate notebook that investigates whether articulation structure is mathematically linked to continuation geometry rather than merely predictive of it.",
+      "status": "C1_SPECIFICATION_ONLY",
+      "claim_type": "experiment_design",
+      "classification": "provisional",
+      "evidence_type": "pre_execution_experiment_specification",
+      "simulation_required": true,
+      "promotion_block": true,
+      "evidence_paths": [
+        "departments/colab/notebook_designs/notebook_15_articulation_theory/experiment_spec.json",
+        "departments/colab/notebook_designs/notebook_15_articulation_theory/experiment_spec.freeze_manifest.json",
+        "departments/colab/notebook_designs/notebook_15_articulation_theory/notebook_15_design.md",
+        "departments/colab/notebook_designs/notebook_15_articulation_theory/RT_Notebook_15_Articulation_and_Continuation_Geometry.ipynb",
+        "registry/governance/patches/NB15_ARTICULATION_CONTINUATION_GEOMETRY_THEORY_001.json"
+      ],
+      "forbidden_use": [
+        "formal theorem claim",
+        "causal articulation claim",
+        "implementation-independent theory claim",
+        "external physical validation",
+        "C5/C6 promotion"
+      ],
+      "last_updated": "2026-07-22"
+    },
+    {
+      "claim_id": "NB15_ARTICULATION_CONTINUATION_GEOMETRY_THEORY_RESULTS_001",
+      "statement": "Within the bounded Notebook 13 v2 invariant domain only, Notebook 15 produced theorem-candidate evidence: obstruction was consistently accompanied by articulation, defined articulation depth, multiple terminal basins, and nontrivial closure lattice structure, while the claim that universal reconvergence excludes articulation was refuted by counterexamples.",
+      "status": "C2_THEOREM_CANDIDATE_EVIDENCE_WITH_LIMITATIONS",
+      "claim_type": "notebook_result_review",
+      "classification": "provisional",
+      "evidence_type": "bounded_colab_theorem_candidate_output",
+      "simulation_required": true,
+      "promotion_block": true,
+      "evidence_paths": [
+        "departments/colab/results/NB15_ARTICULATION_CONTINUATION_GEOMETRY_THEORY_001.zip",
+        "registry/colab_result_archive_registry.json",
+        "outputs/analysis_intake/review_NB15_ARTICULATION_CONTINUATION_GEOMETRY_THEORY_001.md",
+        "outputs/analysis_intake/review_NB15_ARTICULATION_CONTINUATION_GEOMETRY_THEORY_001.json"
+      ],
+      "observations": {
+        "rows_loaded": 13824,
+        "candidate_count": 5,
+        "supported_within_enumerated_domain": 4,
+        "refuted_by_counterexample": 1,
+        "universal_excludes_articulation_counterexamples": 6022
+      },
+      "blockers": [
+        "formal_proof_not_provided",
+        "causal_direction_unresolved",
+        "approved_tool_replication_pending"
+      ],
+      "forbidden_use": [
+        "formal theorem claim",
+        "causal articulation claim",
+        "implementation-independent theory claim",
+        "external physical validation",
+        "C5/C6 promotion"
+      ],
+      "last_updated": "2026-07-22"
+    },
+    {
+      "claim_id": "MPF_SIM_PROJECTION_DOF_MEANINGFUL_001",
+      "statement": "Within the bounded symbolic ordered rooted expression-graph encoding used by the Notebook 16 meaningful follow-on, normalized organizational enrichment increases with organizational DoF and novel catalog classes occur from DoF 2 onward; this is bounded computational output and not a universal or implementation-independent result.",
+      "status": "C2_BOUNDED_NOTEBOOK_OUTPUT_WITH_LIMITATIONS",
+      "claim_type": "notebook_result_review",
+      "classification": "provisional",
+      "evidence_type": "bounded_colab_notebook_output",
+      "simulation_required": true,
+      "promotion_block": true,
+      "evidence_paths": [
+        "departments/colab/notebook_designs/notebook_16_projection_dof_isolation/RT_Notebook_16_Projection_DoF_Meaningful_Experiment.ipynb",
+        "departments/colab/results/MPF_SIM_PROJECTION_DOF_MEANINGFUL_001_RESULTS.zip",
+        "registry/colab_result_archive_registry.json",
+        "outputs/analysis_intake/review_MPF_SIM_PROJECTION_DOF_MEANINGFUL_001.md",
+        "outputs/analysis_intake/review_MPF_SIM_PROJECTION_DOF_MEANINGFUL_001.json"
+      ],
+      "observations": {
+        "rows_loaded": 527,
+        "rows_parsed": 527,
+        "parse_failure_count": 0,
+        "lawful_organization_count_dof_1": 4,
+        "lawful_organization_count_dof_6": 188,
+        "enrichment_spearman_rho": 0.4122981763859641,
+        "enrichment_bootstrap_ci_95": [0.3343559305890878, 0.48622253764774154],
+        "novel_rate_dof_1": 0.0,
+        "novel_rate_dof_2": 0.9333333333333333,
+        "novel_rate_dof_6": 0.1702127659574468
+      },
+      "blockers": [
+        "distinct_immutable_pre_execution_spec_missing",
+        "symbolic_operationalization_only",
+        "bounded_dof_and_depth_domain",
+        "approved_tool_replication_pending"
+      ],
+      "forbidden_use": [
+        "formal theorem",
+        "implementation-independent conclusion",
+        "ontology-expansion claim outside the encoded model",
+        "external physical validation",
+        "C5/C6 promotion"
+      ],
+      "last_updated": "2026-07-23"
+    },
+    {
+      "claim_id": "MPF_SIM_ORGANIZATION_RESOLUTION_CALCULUS_001",
+      "statement": "Within the bounded symbolic Notebook 16 domain, Notebook 17 produced operational organization candidates and reference-dependent distinction-density resolution, with the candidate metrics retaining some nonredundant signal after graph controls; projection monotonicity was only partial and counterexample-bearing.",
+      "status": "C2_BOUNDED_NOTEBOOK_OUTPUT_WITH_LIMITATIONS",
+      "claim_type": "notebook_result_review",
+      "classification": "provisional",
+      "evidence_type": "bounded_colab_notebook_output",
+      "simulation_required": true,
+      "promotion_block": true,
+      "evidence_paths": [
+        "departments/colab/notebook_designs/notebook_17_organization_resolution_calculus/RT_Notebook_17_Organization_Resolution_Calculus.ipynb",
+        "departments/colab/notebook_designs/notebook_17_organization_resolution_calculus/experiment_spec.reconstructed.json",
+        "departments/colab/notebook_designs/notebook_17_organization_resolution_calculus/experiment_spec.reconstruction_manifest.json",
+        "departments/colab/notebook_designs/notebook_17_organization_resolution_calculus/notebook_17_design.md",
+        "departments/colab/results/MPF_SIM_ORGANIZATION_RESOLUTION_CALCULUS_001_RESULTS.zip",
+        "registry/colab_result_archive_registry.json",
+        "outputs/analysis_intake/review_MPF_SIM_ORGANIZATION_RESOLUTION_CALCULUS_001.md",
+        "outputs/analysis_intake/review_MPF_SIM_ORGANIZATION_RESOLUTION_CALCULUS_001.json"
+      ],
+      "observations": {
+        "organizations_loaded": 527,
+        "projection_rows_loaded": 2016,
+        "perturbation_rows_loaded": 15810,
+        "best_operational_candidate": "O_MAX",
+        "reference_nonzero_range_rate": 0.9772296015180265,
+        "best_projection_monotonic_rate": 0.8273809523809523,
+        "organization_status": "CANDIDATE_RETAINS_NONREDUNDANT_SIGNAL",
+        "resolution_status": "REFERENCE_DEPENDENT_RESOLUTION_OBSERVED",
+        "projection_status": "PROJECTION_AXIOM_PARTIALLY_SUPPORTED"
+      },
+      "blockers": [
+        "distinct_immutable_pre_execution_spec_missing",
+        "projection_monotonicity_counterexamples",
+        "primitive_preservation_not_testable",
+        "perturbation_level_delta_data_missing",
+        "approved_tool_replication_pending"
+      ],
+      "forbidden_use": [
+        "formal primitive claim",
+        "unique organization metric claim",
+        "implementation-independent organization calculus claim",
+        "universal projection monotonicity claim",
+        "external physical validation",
+        "C5/C6 promotion"
+      ],
+      "last_updated": "2026-07-23"
+    },
+    {
+      "claim_id": "NB18_DOMAIN_PROJECTION_RESIDUE_RESULTS_001",
+      "statement": "Within the finite bounded Notebook 18 projection model, the information, structural, and reference residue criteria were falsified by observed zero-residue counterexamples; the typed criterion was not falsified in the tested model class but is partly definition-dependent. This is bounded computational evidence, not a universal residue law or unrestricted primitive hierarchy claim.",
+      "status": "C2_BOUNDED_NOTEBOOK_OUTPUT_WITH_LIMITATIONS",
+      "claim_type": "notebook_result_review",
+      "classification": "provisional",
+      "evidence_type": "bounded_colab_notebook_output",
+      "simulation_required": true,
+      "promotion_block": true,
+      "evidence_paths": [
+        "departments/colab/notebook_designs/notebook_18_domain_projection_primitive_hierarchy/RT_Notebook_18_Every_Domain_Projection_Generates_Residue.ipynb",
+        "departments/colab/results/RT_Notebook_18_outputs.zip",
+        "departments/colab/results/findings18.json",
+        "registry/colab_result_archive_registry.json",
+        "outputs/analysis_intake/review_NB18_DOMAIN_PROJECTION_RESIDUE_001.md",
+        "outputs/analysis_intake/review_NB18_DOMAIN_PROJECTION_RESIDUE_001.json"
+      ],
+      "observations": {
+        "seed": 180018,
+        "projection_record_count": 1217346,
+        "strong_projection_count": 11762,
+        "information_zero_residue_counterexample_count": 1672,
+        "information_zero_residue_counterexample_rate": 0.14215269511987758,
+        "structural_zero_residue_counterexample_count": 2608,
+        "structural_zero_residue_counterexample_rate": 0.2217309981295698,
+        "reference_zero_residue_counterexample_count": 7408,
+        "reference_zero_residue_counterexample_rate": 0.629824859717735,
+        "typed_zero_residue_counterexample_count": 0,
+        "typed_status": "NOT_FALSIFIED_IN_TESTED_MODEL_CLASS",
+        "typed_residue_definition_dependence": true
+      },
+      "blockers": [
+        "distinct_immutable_pre_execution_spec_missing",
+        "typed_residue_partly_definitional",
+        "finite_bounded_model_class",
+        "deterministic_stratification_above_target_safety_threshold",
+        "operational_residue_vector_not_exhaustive",
+        "approved_tool_replication_pending"
+      ],
+      "forbidden_use": [
+        "universal residue law",
+        "unrestricted primitive hierarchy",
+        "external physical validation",
+        "C5/C6 promotion"
+      ],
+      "last_updated": "2026-07-23"
+    },
+    {
+      "claim_id": "NB19_EXCLUSION_GENERATES_RESIDUE_RESULTS_001",
+      "statement": "Within the bounded finite Notebook 19 model, strong information and structural exclusion/residue criteria falsify both sufficiency and necessity. Strong total residue does not falsify sufficiency, but necessity and the full biconditional are falsified. These are operational bounded results, not a universal exclusion law or causal claim.",
+      "status": "C2_BOUNDED_NOTEBOOK_OUTPUT_WITH_LIMITATIONS",
+      "claim_type": "notebook_result_review",
+      "classification": "provisional",
+      "evidence_type": "bounded_colab_notebook_output",
+      "simulation_required": true,
+      "promotion_block": true,
+      "evidence_paths": ["departments/colab/notebook_designs/notebook_19_exclusion_generates_residue/RT_Notebook_19_Exclusion_Generates_Residue.ipynb", "departments/colab/results/RT_Notebook_19_outputs.zip", "registry/colab_result_archive_registry.json", "outputs/analysis_intake/review_NB19_EXCLUSION_GENERATES_RESIDUE_001.md", "outputs/analysis_intake/review_NB19_EXCLUSION_GENERATES_RESIDUE_001.json"],
+      "observations": {
+        "seed": 190019,
+        "record_count": 1217346,
+        "strong_record_count": 11762,
+        "strong_information_exclusion_without_residue": 162,
+        "strong_information_residue_without_exclusion": 382,
+        "strong_structural_exclusion_without_residue": 1098,
+        "strong_structural_residue_without_exclusion": 382,
+        "strong_total_exclusion_without_residue": 0,
+        "strong_total_residue_without_exclusion": 706,
+        "strong_total_sufficiency": "NOT_FALSIFIED",
+        "strong_total_necessity": "FALSIFIED",
+        "strong_total_biconditional": "FALSIFIED"
+      },
+      "blockers": ["distinct_immutable_pre_execution_spec_missing", "finite_bounded_model_class", "deterministic_stratification_possible", "operational_exclusion_and_residue_definitions", "association_not_causation", "approved_tool_replication_pending"],
+      "forbidden_use": ["universal exclusion law", "primitive causal law", "implementation-independent conclusion", "external physical validation", "C5/C6 promotion"],
+      "last_updated": "2026-07-23"
+    },
+    {
+      "claim_id": "MPF_D_SEMANTICS_PROOF_PACKAGE_001",
+      "statement": "Within the Mathematics Department interpretation, Eval_D,C has bounded domain/codomain support, epsilon_a,C has bounded threshold support, and D(*|*) remains provisionally bound to Pi_D(A|E) through a typed projection route. OBL-D-001C has bounded human-reviewed type-preservation support, and OBL-D-001D/OBL-D-001E have bounded human-approved P127/P128 dispositions within finite declared scopes.",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "claim_type": "formal_definition_and_proof_obligation_package",
+      "classification": "provisional",
+      "evidence_type": "additive_mathematical_definition_and_proof_scaffold",
+      "simulation_required": false,
+      "promotion_block": true,
+      "evidence_paths": ["docs/theory/foundational/5_03_26 unity/math/notes/0010_d_semantics_proof_todo.md", "docs/theory/foundational/5_03_26 unity/math/lemmas/L131_d_evaluation_and_projection_semantics.md", "docs/theory/foundational/5_03_26 unity/math/proofs/P125_d_typed_projection_transition_obligations.md", "docs/theory/foundational/5_03_26 unity/math/proofs/P126_d_typed_projection_type_preservation_scope_closure.md", "departments/analysis/campaigns/CAMPAIGN_D_MECHANIZED_PROJECTION_001/human_review_approval_c_20260724.json", "registry/math/d_semantics_obligation_registry.json", "registry/formal_object_registry.json"],
+      "open_obligations": [],
+      "bounded_scope_followups": ["reopen on counterexample or premise failure", "retain universal preservation and universal threshold derivation as blocked"],
+      "forbidden_use": ["formal theorem", "unique Eval_D implementation", "Pi_D injectivity", "complete information preservation", "semantic representable-distinction preservation without OBL-D-001D", "universal operator semantics", "external physical validity", "C5/C6 promotion"],
+      "last_updated": "2026-07-24"
+    },
+    {
+      "claim_id": "NB20_DISTINCTION_CONSERVATION_EXCLUSION_DYNAMICS_RESULTS_001",
+      "statement": "Within the bounded finite Notebook 20 model, distinction conservation was not falsified in the tested model class, while the strong form that residue is determined by the excluded distinction set was falsified by 478 matched-exclusion counterexamples. This is bounded computational evidence, not a universal conservation or causal residue law.",
+      "status": "C2_BOUNDED_NOTEBOOK_OUTPUT_WITH_LIMITATIONS",
+      "claim_type": "notebook_result_review",
+      "classification": "provisional",
+      "evidence_type": "bounded_colab_notebook_output",
+      "simulation_required": true,
+      "promotion_block": true,
+      "evidence_paths": ["departments/colab/notebook_designs/notebook_20_distinction_conservation_exclusion_dynamics/RT_Notebook_20_Distinction_Conservation_and_Exclusion_Dynamics.ipynb", "departments/colab/results/RT_Notebook_20_outputs.zip", "registry/colab_result_archive_registry.json", "outputs/analysis_intake/review_NB20_DISTINCTION_CONSERVATION_EXCLUSION_DYNAMICS_001.md", "outputs/analysis_intake/review_NB20_DISTINCTION_CONSERVATION_EXCLUSION_DYNAMICS_001.json"],
+      "observations": {"seed": 200020, "tested_projections": 4813425, "tested_distinction_instances": 25478208, "conservation_failures": 0, "conservation_verdict": "NOT_FALSIFIED_IN_TESTED_MODEL_CLASS", "matched_exclusion_counterexample_count": 478, "strong_form_residue_verdict": "FALSIFIED_IN_TESTED_MODEL_CLASS", "best_reported_linear_r_squared": 0.11829570459320626},
+      "blockers": ["distinct_immutable_pre_execution_spec_missing", "finite_bounded_model_class", "pairwise_distinction_model", "operational_residue_definition", "conservation_partition_definition_dependence", "deterministic_stratification_possible", "approved_tool_replication_pending"],
+      "forbidden_use": ["universal distinction conservation law", "causal residue law", "implementation-independent conclusion", "external physical validation", "C5/C6 promotion"],
+      "last_updated": "2026-07-23"
+    },
+    {
+      "claim_id": "MPF_SIM_D_THRESHOLD_SENSITIVITY_RESULTS_001",
+      "title": "Context-indexed threshold sensitivity in Notebook 21",
+      "claim_statement": "Within the declared Notebook 21 finite grid, explicit context-indexed epsilon_a,C thresholds produced deterministic replay and 21 threshold-sensitive classification cases.",
+      "status": "C2_bounded_notebook_output_with_limitations",
+      "claim_type": "empirical_bounded",
+      "classification": "provisional",
+      "model_class": "bounded_context_threshold_grid",
+      "models_used": ["RT_Notebook_21_D_Threshold_Sensitivity"],
+      "seeds_used": 3,
+      "falsification_run": false,
+      "evidence_paths": ["departments/colab/results/MPF_SIM_D_THRESHOLD_SENSITIVITY_001.zip", "outputs/analysis_intake/review_MPF_SIM_D_THRESHOLD_SENSITIVITY_001.json"],
+      "observations": {"rows": 108, "replay_equal": true, "threshold_sensitive_cases": 21},
+      "blockers": ["synthetic_bounded_value_generation", "finite_context_grid", "approved_tool_replication_pending"],
+      "forbidden_use": ["universal threshold law", "causal claim", "external physical validation", "C5/C6 promotion"],
+      "last_updated": "2026-07-23"
+    },
+    {
+      "claim_id": "MPF_SIM_D_E_METAMORPHIC_INDEPENDENCE_RESULTS_001",
+      "statement": "Within the finite Notebook 24 generated domain, the frozen P127/P128 candidate predicates agreed with an independently expressed declarative oracle across 648 metamorphic checks and preserved order-shuffled replay agreement. This is bounded computational evidence, not universal D/E semantics.",
+      "status": "C2_LIMITATION_OR_NEGATIVE_RESULT",
+      "claim_type": "notebook_result_review",
+      "classification": "provisional",
+      "evidence_type": "bounded_colab_notebook_output",
+      "simulation_required": true,
+      "promotion_block": true,
+      "evidence_paths": ["departments/colab/notebook_designs/RT_Notebook_24_D_E_Metamorphic_Independence.ipynb", "departments/colab/notebook_designs/notebook_24_d_e_metamorphic_independence/experiment_spec.json", "departments/colab/results/MPF_SIM_D_E_METAMORPHIC_INDEPENDENCE_001_RESULTS.zip", "departments/colab/results/MPF_SIM_D_E_METAMORPHIC_INDEPENDENCE_001_analysis_20260731.md", "registry/colab_result_archive_registry.json"],
+      "observations": {"baseline_count": 54, "check_count": 648, "relation_count": 10, "subject_oracle_disagreements": 0, "metamorphic_disagreements": 0, "replay_agreement": true, "falsification_flag_count": 0},
+      "blockers": ["finite_metamorphic_grid", "internal_declarative_oracle_scope", "approved_tool_replication_pending", "universal_D_semantics_blocked", "theorem_promotion_blocked", "C5/C6_promotion_blocked"],
+      "forbidden_use": ["universal D/E semantics", "theorem closure", "injectivity", "reversibility", "external physical validity", "C5/C6 promotion"],
+      "last_updated": "2026-07-31"
+    },
+    {
+      "claim_id": "MPF_SIM_D_E_ORACLE_ADVERSARIAL_RESULTS_001",
+      "statement": "Within the finite Notebook 25 adversarial domain, the bounded subject predicates and independently expressed declarative oracle agreed across 1,296 evaluations, with zero invariant failures and order-shuffled replay agreement. This is bounded computational evidence only.",
+      "status": "C2_LIMITATION_OR_NEGATIVE_RESULT",
+      "claim_type": "notebook_result_review",
+      "classification": "provisional",
+      "evidence_type": "bounded_colab_notebook_output",
+      "simulation_required": true,
+      "promotion_block": true,
+      "evidence_paths": ["departments/colab/notebook_designs/RT_Notebook_25_D_E_Oracle_Adversarial.ipynb", "departments/colab/notebook_designs/notebook_25_d_e_oracle_adversarial/experiment_spec.json", "departments/colab/results/MPF_SIM_D_E_ORACLE_ADVERSARIAL_001_RESULTS_001.zip", "departments/colab/results/MPF_SIM_D_E_ORACLE_ADVERSARIAL_001_analysis_20260731.md", "registry/colab_result_archive_registry.json"],
+      "observations": {"baseline_count": 54, "adversarial_family_count": 11, "rows_per_pass": 648, "total_evaluations": 1296, "invariant_checks": 270, "subject_oracle_disagreements": 0, "invariant_failures": 0, "replay_agreement": true, "falsification_flag_count": 0, "approved_tool_replication": true, "replication_independence_level": "ENVIRONMENT"},
+      "blockers": ["finite_adversarial_domain", "internal_declarative_oracle_scope", "generated_spec_source_notebook_metadata_omitted", "environment_level_replication_only", "universal_D_E_semantics_blocked", "theorem_promotion_blocked", "C5/C6_promotion_blocked"],
+      "forbidden_use": ["universal D/E semantics", "theorem closure", "injectivity", "reversibility", "external physical validity", "C5/C6 promotion"],
+      "last_updated": "2026-07-31"
     }
   ]
 }

@@ -1,0 +1,48 @@
+{
+  "falsification_runtime_policy": {
+    "mode": "first_class_equal_to_program",
+    "default_rule": "No meaningful run is complete unless paired with adversarial pressure.",
+    "run_levels": {
+      "every_run": {
+        "name": "micro_attack_suite",
+        "purpose": "Catch regressions and obvious hidden dependencies.",
+        "required": true,
+        "examples": [
+          "shuffle_control",
+          "zero_mismatch_probe",
+          "boundary_collapse_probe",
+          "seed_variance_check",
+          "observer_projection_sanity_check"
+        ]
+      },
+      "regular": {
+        "name": "standard_attack_suite",
+        "purpose": "Stress operators, topology, residue, continuation, and projection layers.",
+        "cadence": "daily_or_major_change",
+        "examples": [
+          "symmetry_forcing",
+          "continuation_starvation",
+          "topology_scramble",
+          "primitive_reduction",
+          "phase_drift",
+          "scheduler_inversion",
+          "parameter_extreme_scan"
+        ]
+      },
+      "full_scale": {
+        "name": "catastrophic_attack_campaign",
+        "purpose": "Attempt total structural failure across engines and assumptions.",
+        "cadence": "weekly_or_release_gate",
+        "examples": [
+          "multi_seed_long_horizon_drift",
+          "compound_attack_chains",
+          "adaptive_adversary_search",
+          "projection_corruption",
+          "governance_overclaim_attack",
+          "telemetry_spoofing",
+          "observer_illusion_attack"
+        ]
+      }
+    }
+  }
+}

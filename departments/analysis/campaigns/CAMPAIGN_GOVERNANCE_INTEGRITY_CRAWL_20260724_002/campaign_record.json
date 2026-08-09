@@ -1,0 +1,32 @@
+{
+  "campaign_id": "CAMPAIGN_GOVERNANCE_INTEGRITY_CRAWL_20260724_002",
+  "agent_role": "RT_AGENT_INFINITE_THEORY_ANALYST",
+  "mode": "governance_integrity_crawl",
+  "scope": [
+    "git commit 1aee6f842 changes",
+    "registry/governance_hash_registry.json",
+    "SQLite index freshness status",
+    "global_validate.py output"
+  ],
+  "assessment": {
+    "value": "BLOCKED",
+    "reason": "Repository global health validation is failing due to unregistered governance changes, and the database snapshot is stale.",
+    "confidence": "high"
+  },
+  "objective_completion": {
+    "objectives_completed": 3,
+    "objectives_total": 4,
+    "completion_percent": 75
+  },
+  "results": {
+    "modified_files_detected": 4,
+    "hash_mismatches_identified": 2,
+    "db_snapshot_stale": true,
+    "validation_failures": 1
+  },
+  "highest_priority_next_task": "TASK-MNT-001-GOVERNANCE-HASH-UPDATE",
+  "executive_recommendation": "FORMALIZE",
+  "termination_reason": "The governance defect and blocking conditions are fully mapped. Further crawl depth would duplicate findings without resolving the validation block.",
+  "continuation_token": "GOVERNANCE_CRAWL_TO_REPAIR_001",
+  "human_review_required": true
+}

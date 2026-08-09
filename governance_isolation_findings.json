@@ -1,0 +1,46 @@
+{
+  "findings": [
+    {
+      "module_id": "ISO-001",
+      "status": "PASS",
+      "summary": "Verified that the certificate certifies the active commit (Git HEAD). Working tree changes and DB index status are bound via the DB snapshot freshness check, ensuring that working tree modifications or stale indexes are detected. The certificate is excluded from registry integrity checks, eliminating circular self-reference issues.",
+      "evidence": "Commit verification uses 'git rev-parse HEAD'. Hash checks use 'scripts.governance.enforce_governance_integrity'. DB freshness checks use 'scripts.query_governance.build_db_snapshot_freshness_result'."
+    },
+    {
+      "module_id": "ISO-002",
+      "status": "PASS",
+      "summary": "Confirmed that mathematical validations consume the certificate without re-performing repository integrity checks, database freshness validation, or git hook verification.",
+      "evidence": "Lines 2220-2222 of scripts/global_validate.py bypass all governance stages when running in math-only mode and instead execute only the _check_repository_health_certificate check."
+    },
+    {
+      "module_id": "ISO-003",
+      "status": "PASS",
+      "summary": "Verified that repository governance contains no evaluation of proofs, lemmas, theorems, semantic correctness, calculus correctness, or research conclusions.",
+      "evidence": "scripts/governance_audit.py executes strictly structural checks (existence of Geminimarkdown files, schema syntax, database connectivity, and filesystem file checks) and does not contain any mathematical evaluation logic."
+    },
+    {
+      "module_id": "ISO-004",
+      "status": "PASS",
+      "summary": "Confirmed that the GOV-005 module checks only the physical existence of evidence files in results/ without evaluating their scientific correctness or mathematical validity.",
+      "evidence": "run_gov_005_executable_evidence_audit checks that 'path.exists()' evaluates to true for each evidence path referenced in the claims registry."
+    },
+    {
+      "module_id": "ISO-005",
+      "status": "PASS",
+      "summary": "Confirmed that if the certificate overall status is FAIL or if the file is missing, mathematical validation is blocked immediately before execution of any math checks. Governance cannot mutate proof status, theorem state, or proof obligations.",
+      "evidence": "_enforce_repository_health_certificate_if_applicable terminates execution with exit code 1 if the certificate check fails, blocking mathematical stages."
+    },
+    {
+      "module_id": "ISO-006",
+      "status": "PASS",
+      "summary": "Mathematical validation stages no longer contain repository-level integrity, sqlite indexing freshness, or git hook checks.",
+      "evidence": "In math-only mode, only math stages (math_validation, math_program_validation, etc.) are executed."
+    },
+    {
+      "module_id": "ISO-007",
+      "status": "PASS",
+      "summary": "Governance and mathematical authorities remain independent. Governance has sole authority over repository integrity and certification. Mathematical audits have sole authority over theorems, lemmas, calculus, and logical correctness.",
+      "evidence": "Domain boundaries are cleanly partitioned; scripts/governance_audit.py and scripts/global_validate.py do not cross-over or leak authorities."
+    }
+  ]
+}

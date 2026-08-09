@@ -1,0 +1,45 @@
+{
+  "spec_id": "MPF_SIM_D_THRESHOLD_SENSITIVITY_001",
+  "schema_version": "1.0.0",
+  "status": "IMMUTABLE_SPEC",
+  "created_at": "2026-07-23T00:00:00Z",
+  "source_notebook": "departments/colab/notebook_designs/notebook_21_d_threshold_sensitivity/RT_Notebook_21_D_Threshold_Sensitivity.ipynb",
+  "research_question": "Within the declared finite context grid, does an explicit context-indexed epsilon_a,C produce reproducible admissibility classifications across fixed seeds and contexts?",
+  "hypothesis": "H1: classifications are reproducible when the threshold is materialized in the context and the comparison rule is fixed. H0: classifications vary silently across equivalent contexts or require an implicit global threshold.",
+  "independent_variables": [
+    {"name": "context_id", "definition": "Declared admissibility context identifier", "units_or_scale": "categorical", "allowed_values_or_range": "C1, C2, C3"},
+    {"name": "epsilon_a_C", "definition": "Positive threshold materialized by the context", "units_or_scale": "unitless", "allowed_values_or_range": "0.05, 0.10, 0.20"},
+    {"name": "seed", "definition": "Deterministic seed for generated bounded distinction values", "units_or_scale": "integer", "allowed_values_or_range": "101, 202, 303"}
+  ],
+  "dependent_variables": [
+    {"name": "admissibility_classification", "definition": "ADMISSIBLE iff value > epsilon_a,C; otherwise UNDEFINED_INADMISSIBLE", "units_or_scale": "categorical", "allowed_values_or_range": "ADMISSIBLE or UNDEFINED_INADMISSIBLE"},
+    {"name": "classification_reproducibility", "definition": "Agreement of repeated deterministic evaluations under identical context and seed", "units_or_scale": "boolean", "allowed_values_or_range": "true or false"},
+    {"name": "threshold_sensitivity", "definition": "Classification change under declared context threshold changes with value and seed held fixed", "units_or_scale": "boolean", "allowed_values_or_range": "true or false"}
+  ],
+  "controls": [
+    {"name": "primitive_law", "purpose": "Prevent threshold study from changing RT_core", "implementation": "No primitive or continuation rule is modified by the notebook."},
+    {"name": "comparison_rule", "purpose": "Prevent operator drift", "implementation": "Use strict value > epsilon_a,C for every context."},
+    {"name": "seed_replay", "purpose": "Test deterministic reproducibility", "implementation": "Repeat every declared seed/context pair without changing generated values."},
+    {"name": "context_materialization", "purpose": "Prevent hidden global thresholds", "implementation": "Carry context id and threshold in every output row."}
+  ],
+  "random_seed": {"value": [101, 202, 303], "seed_scope": "bounded distinction-value generation", "derivation_policy": "Fixed before execution; no undeclared seeds."},
+  "parameter_space": [
+    {"name": "contexts", "values_or_range": "C1:0.05, C2:0.10, C3:0.20", "units_or_scale": "unitless", "default": "C2", "sampling_rule": "full grid"},
+    {"name": "generated_values_per_seed", "values_or_range": "12", "units_or_scale": "count", "default": 12, "sampling_rule": "deterministic seeded list"},
+    {"name": "repetitions", "values_or_range": "2", "units_or_scale": "count", "default": 2, "sampling_rule": "exact replay"}
+  ],
+  "termination_conditions": ["All context/seed combinations and both replay passes complete.", "A missing context field or undeclared threshold is detected.", "Any output fails schema validation.", "No post-hoc expansion of contexts, seeds, or generated-value count."],
+  "expected_outputs": [
+    {"name": "sensitivity_rows", "path_pattern": "departments/colab/results/MPF_SIM_D_THRESHOLD_SENSITIVITY_001/sensitivity_rows.json", "required": true, "interpretation_role": "Recoverable bounded classification rows."},
+    {"name": "summary", "path_pattern": "departments/colab/results/MPF_SIM_D_THRESHOLD_SENSITIVITY_001/summary.json", "required": true, "interpretation_role": "Reproducibility and sensitivity summary."},
+    {"name": "manifest", "path_pattern": "departments/colab/results/MPF_SIM_D_THRESHOLD_SENSITIVITY_001/manifest.json", "required": true, "interpretation_role": "Output provenance and hashes."}
+  ],
+  "interpretation_protocol": {
+    "claim_ceiling": "C2_BOUNDED_NOTEBOOK_OUTPUT",
+    "decision_rules": ["Support only bounded reproducibility inside the declared grid if all replay classifications agree.", "Report threshold sensitivity as an observation, not a causal or universal law.", "Any hidden-threshold or replay mismatch is a limitation and blocks positive interpretation."],
+    "allowed_interpretations": ["Bounded context-indexed threshold behavior in the declared notebook domain."],
+    "blocked_interpretations": ["Universal threshold semantics.", "External physical validity.", "Theorem or proof promotion.", "C5/C6 elevation.", "Post-hoc parameter expansion."]
+  },
+  "provenance": {"source_paths": ["departments/colab/notebook_designs/notebook_21_d_threshold_sensitivity/RT_Notebook_21_D_Threshold_Sensitivity.ipynb"], "artifact_hashes": {}},
+  "immutability": {"frozen_before_execution": true, "content_sha256": "TO_BE_RECORDED_AFTER_NOTEBOOK_CREATION", "supersession_policy": "Do not edit after execution starts; create a new spec_id for changes."}
+}

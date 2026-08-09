@@ -1,0 +1,161 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Registry for branch-pruning rule classes and delta continuation constraints.",
+    "status": "provisional",
+    "last_updated": "2026-05-11"
+  },
+  "pruning_classes": [
+    {
+      "class": "admissibility_pruning",
+      "meaning": "Discard branches outside the admissibility window."
+    },
+    {
+      "class": "orientation_pruning",
+      "meaning": "Downselect branches by orientation deviation or minimization rule."
+    },
+    {
+      "class": "residue_weighted_pruning",
+      "meaning": "Downselect branches by residue compatibility or stabilization history."
+    },
+    {
+      "class": "bounded_width_retention",
+      "meaning": "Retain at most N admissible branches according to declared ranking rules."
+    },
+    {
+      "class": "equivalence_class_collapse",
+      "meaning": "Merge branches that are equivalent under declared projection or residue equivalence."
+    },
+    {
+      "class": "no_pruning",
+      "meaning": "Retain all branches; may permit divergence or branch explosion."
+    }
+  ],
+  "pruning_entries": [
+    {
+      "entry_id": "BP-001",
+      "target_operator": "delta",
+      "target_law": "MPF-CV-001",
+      "pruning_class": "admissibility_pruning",
+      "selection_dependency": [],
+      "orientation_dependency": [],
+      "residue_dependency": [],
+      "admissibility_dependency": [
+        "AR-001"
+      ],
+      "branch_bound": "conditionally_finite",
+      "stability_implication": "stabilizing",
+      "convergence_implication": "supports_convergence",
+      "failure_modes": [
+        "BFM-003",
+        "BFM-009"
+      ],
+      "proof_status": "scaffolded",
+      "claim_boundary": "formal_procedural_only",
+      "provisional_status": true,
+      "open_questions": []
+    },
+    {
+      "entry_id": "BP-002",
+      "target_operator": "delta",
+      "target_law": "MPF-CV-001",
+      "pruning_class": "orientation_pruning",
+      "selection_dependency": [
+        "DSR-001"
+      ],
+      "orientation_dependency": [
+        "OMR-001"
+      ],
+      "residue_dependency": [],
+      "admissibility_dependency": [],
+      "branch_bound": "conditionally_finite",
+      "stability_implication": "conditional",
+      "convergence_implication": "requires_bound",
+      "failure_modes": [
+        "BFM-002",
+        "BFM-006"
+      ],
+      "proof_status": "scaffolded",
+      "claim_boundary": "formal_procedural_only",
+      "provisional_status": true,
+      "open_questions": []
+    },
+    {
+      "entry_id": "BP-003",
+      "target_operator": "delta",
+      "target_law": "MPF-RCV-001",
+      "pruning_class": "residue_weighted_pruning",
+      "selection_dependency": [
+        "DSR-002"
+      ],
+      "orientation_dependency": [],
+      "residue_dependency": [
+        "RB-003"
+      ],
+      "admissibility_dependency": [],
+      "branch_bound": "conditionally_finite",
+      "stability_implication": "conditional",
+      "convergence_implication": "requires_bound",
+      "failure_modes": [
+        "BFM-007",
+        "BFM-008"
+      ],
+      "proof_status": "scaffolded",
+      "claim_boundary": "formal_procedural_only",
+      "provisional_status": true,
+      "open_questions": []
+    },
+    {
+      "entry_id": "BP-004",
+      "target_operator": "delta",
+      "target_law": "MPF-RCV-001",
+      "pruning_class": "no_pruning",
+      "selection_dependency": [
+        "DSR-003"
+      ],
+      "orientation_dependency": [],
+      "residue_dependency": [],
+      "admissibility_dependency": [],
+      "branch_bound": "unbounded",
+      "stability_implication": "destabilizing",
+      "convergence_implication": "permits_divergence",
+      "failure_modes": [
+        "BFM-001"
+      ],
+      "proof_status": "none",
+      "claim_boundary": "formal_procedural_only",
+      "provisional_status": true,
+      "open_questions": []
+    },
+    {
+      "entry_id": "BP-005",
+      "target_operator": "S",
+      "target_law": "MPF-CV-001",
+      "pruning_class": "admissibility_pruning",
+      "selection_dependency": [],
+      "orientation_dependency": [
+        "OMR-001"
+      ],
+      "residue_dependency": [
+        "RB-003"
+      ],
+      "admissibility_dependency": [
+        "AR-001"
+      ],
+      "branch_bound": "conditionally_finite",
+      "stability_implication": "stabilizing",
+      "convergence_implication": "supports_convergence",
+      "failure_modes": [
+        "BFM-003",
+        "BFM-004",
+        "BFM-009"
+      ],
+      "proof_status": "validated_candidate",
+      "claim_boundary": "formal_procedural_only",
+      "provisional_status": true,
+      "open_questions": [
+        "Validation here is structural and fixture-based; mechanism-specific pruning implementations remain local validation targets."
+      ]
+    }
+  ]
+}

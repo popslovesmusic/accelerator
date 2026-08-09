@@ -1,0 +1,119 @@
+{
+  "patch_id": "PCD_MECHANISM_SPECIFIC_ALGEBRA_MAPPING_V1",
+  "priority": "ACTIVE_FORMAL_REASONING",
+  "intent": "Define mechanism-specific thresholds, topology rules, and operator mappings for graph_dynamics, cellular_automata, and ode_oscillator classes.",
+  "operations": [
+    {
+      "op": "create_mechanism_mapping_registry",
+      "target_file": "registry/mechanism_algebra_mapping_registry.json",
+      "schema": {
+        "required_fields": [
+          "mechanism_class",
+          "target_operators",
+          "thresholds",
+          "topology_rules",
+          "observable_mappings"
+        ]
+      }
+    },
+    {
+      "op": "register_graph_dynamics_mapping",
+      "target_file": "registry/mechanism_algebra_mapping_registry.json",
+      "mapping": {
+        "mechanism_class": "graph_dynamics",
+        "target_operators": ["NavT", "csi", "Pi_A"],
+        "thresholds": {
+          "tau_T": 1e-6,
+          "tau_A": 0.5,
+          "degeneracy_epsilon": 1e-9
+        },
+        "topology_rules": {
+          "csi_membership": "adjacency_list_overlap",
+          "NavT_composition": "edge_weight_multiplication",
+          "Pi_A_projection": "node_degree_scaling"
+        },
+        "observable_mappings": {
+          "minimizer_switch_count": "edge_reversal_events",
+          "ref_equivalence_preservation_rate": "clique_stability_index",
+          "active_fraction": "nonzero_node_fraction"
+        }
+      }
+    },
+    {
+      "op": "register_cellular_automata_mapping",
+      "target_file": "registry/mechanism_algebra_mapping_registry.json",
+      "mapping": {
+        "mechanism_class": "cellular_automata",
+        "target_operators": ["NavT", "csi", "Pi_A"],
+        "thresholds": {
+          "tau_T": 0.0,
+          "tau_A": 1.0,
+          "degeneracy_epsilon": 0.0
+        },
+        "topology_rules": {
+          "csi_membership": "moore_neighborhood_overlap",
+          "NavT_composition": "discrete_shift_composition",
+          "Pi_A_projection": "local_rule_masking"
+        },
+        "observable_mappings": {
+          "minimizer_switch_count": "rule_set_transition_events",
+          "ref_equivalence_preservation_rate": "pattern_persistence_rate",
+          "active_fraction": "alive_cell_fraction"
+        }
+      }
+    },
+    {
+      "op": "register_ode_oscillator_mapping",
+      "target_file": "registry/mechanism_algebra_mapping_registry.json",
+      "mapping": {
+        "mechanism_class": "ode_oscillator",
+        "target_operators": ["NavT", "csi", "Pi_A"],
+        "thresholds": {
+          "tau_T": 1e-4,
+          "tau_A": 0.1,
+          "degeneracy_epsilon": 1e-7
+        },
+        "topology_rules": {
+          "csi_membership": "phase_coherence_threshold",
+          "NavT_composition": "phase_shift_addition",
+          "Pi_A_projection": "amplitude_thresholding"
+        },
+        "observable_mappings": {
+          "minimizer_switch_count": "bifurcation_events",
+          "ref_equivalence_preservation_rate": "synchronization_index",
+          "active_fraction": "super_threshold_amplitude_fraction"
+        }
+      }
+    },
+    {
+      "op": "update_gap_dependency_graph",
+      "target_file": "registry/gap_dependency_graph.json",
+      "gap_updates": [
+        {
+          "gap_id": "GAP_2_transport_structure_for_propagation",
+          "closure_progress": [
+            "mechanism-specific thresholds tau_T defined"
+          ],
+          "still_blocking": [
+            "formal proof of path invariance",
+            "simulation verification of long-path consistency"
+          ]
+        },
+        {
+          "gap_id": "GAP_3_csi_membership_rule",
+          "closure_progress": [
+            "mapping to graph/CA/ODE topology rules defined"
+          ],
+          "still_blocking": [
+            "formal proof of d_Phi properties",
+            "simulation validation of csi boundary transitions"
+          ]
+        }
+      ]
+    },
+    {
+      "op": "emit_report",
+      "output_path": "registry/reports/mechanism_algebra_mapping_v1_report.json"
+    }
+  ]
+}

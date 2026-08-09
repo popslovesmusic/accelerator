@@ -1,0 +1,56 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Registry for continuation laws and right-aspect formal derivations from delta(E > 0).",
+    "status": "provisional",
+    "last_updated": "2026-05-11"
+  },
+  "laws": [
+    {
+      "law_id": "MPF-CV-001",
+      "source_expression": "delta(E > 0)",
+      "aspect": "right_projection",
+      "domain": [
+        "continuation",
+        "update",
+        "transition_legality",
+        "admissible_propagation"
+      ],
+      "input_objects": [
+        "process_state",
+        "non_null_mismatch_condition",
+        "residue_state",
+        "orientation_frame",
+        "admissibility_window"
+      ],
+      "output_objects": [
+        "continuation_event",
+        "continuation_space"
+      ],
+      "operators": [
+        "delta",
+        "Pi_A",
+        "residue_update"
+      ],
+      "metrics": [
+        "transition_flux",
+        "admissible_transition_count",
+        "rejected_transition_count",
+        "projection_rejection_ratio"
+      ],
+      "success_condition": "only admissible continuation propagates",
+      "claim_boundary": "formal_procedural_only",
+      "closure_status": "conditional",
+      "proof_status": "scaffolded",
+      "provisional_status": true,
+      "open_questions": []
+    }
+  ],
+  "definitions": {
+    "continuation_space": "The set of candidate continuation events admitted by delta under current residue, orientation, and admissibility constraints.",
+    "transition_legality": "A transition is legal if it lies inside the relevant admissibility window and satisfies residue/orientation constraints.",
+    "transition_flux": "A measure or count of admissible continuation events propagated across the evaluated domain.",
+    "continuation_success_condition": "Only admissible continuation events propagate; inadmissible candidates are rejected or projected out.",
+    "right_aspect_boundary": "This validator tests actualized or candidate continuation legality only and does not define initial discussability."
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "epsilon_null_boundary_geometry": {
+    "version": "1.0",
+    "description": "Geometric formalization of the epsilon-null singularity boundary.",
+    "boundary_definitions": [
+      {
+        "target": "process_necessity_limit",
+        "condition": "epsilon -> 0",
+        "geometry": "singular_point | zero_measure_set",
+        "impact": "Continuation undefined; participation measure collapse."
+      },
+      {
+        "target": "saturation_limit",
+        "condition": "epsilon -> epsilon_max",
+        "geometry": "window_upper_boundary",
+        "impact": "Transition to non-local dissipation or state rupture."
+      }
+    ],
+    "mappings": [
+      {
+        "operator": "Pi_A",
+        "interaction": "defines_boundary_threshold",
+        "basis": "epsilon_null_registry.json"
+      },
+      {
+        "operator": "delta",
+        "interaction": "actualizes_at_boundary",
+        "basis": "transition_flux_convergence_registry.json"
+      }
+    ],
+    "last_updated": "2026-05-13"
+  }
+}

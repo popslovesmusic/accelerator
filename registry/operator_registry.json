@@ -1,0 +1,760 @@
+{
+  "registry_id": "MPF_OPERATOR_REGISTRY_V1",
+  "version": "1.0.0",
+  "status": "AUTHORIZED",
+  "endorsement_level": "C5",
+  "governance": {
+    "anti_reification": true,
+    "analogy_scoped": true,
+    "no_primitive_time": true
+  },
+  "meta_schemas": [
+    {
+      "symbol": "<*>_x",
+      "name": "Meta Relation Schema",
+      "classification": "META_LANGUAGE_ONLY",
+      "meaning": "Generic admissible relation schema for legal typed binary relation operators.",
+      "reading": "A stands in some legal typed relation to B along an admissible continuation path x.",
+      "reserved_path_variable": "x",
+      "reserved_path_variable_note": "Reserved for generic discussion only within this meta-schema; not a proof operator suffix.",
+      "scope": [
+        "definitions",
+        "induction notes",
+        "registry discussions"
+      ],
+      "restrictions": [
+        "Not a legal proof operator.",
+        "May not appear in proofs, derivations, or theorem statements.",
+        "Does not itself confer truth conditions."
+      ],
+      "operand_constraints": [
+        "A and B must be typed operands with declared admissibility context.",
+        "Bare physical objects, undefined metaphors, and untyped scalar outputs are forbidden operands.",
+        "Projection signatures are legal only when explicitly marked with _app or another declared projection suffix."
+      ],
+      "instantiates": [
+        "\u2194_R",
+        "->a",
+        "<-a",
+        "->r",
+        "<-r",
+        "<\u2260>_X"
+      ]
+    }
+  ],
+  "operators": [
+    {
+      "symbol": "P_adm",
+      "latex": "P_{adm}",
+      "name": "Admissibility Predicate",
+      "domain": "Candidate state x', context c, residue R, orientation -(i)",
+      "codomain": "{0, 1}",
+      "closure_condition": "AND conjunction of Gamma_E, Gamma_R, Gamma_T, Gamma_O",
+      "collapse_mode": "Legality Failure (Any Gamma_j = 0)",
+      "composition_rules": [
+        "Basis for delta_a set-builder",
+        "Non-transitive due to residue evolution",
+        "Separates kernel shell from mechanism constraints"
+      ],
+      "status": "CORE_v0.1_GAMMA_SEP"
+    },
+    {
+      "symbol": "T",
+      "latex": "T",
+      "name": "Topological Organization Object",
+      "domain": "Process state aspects",
+      "codomain": "Constraint structure (Lambda, N, B, O, K, R)",
+      "closure_condition": "Maintains connectivity and closure class invariants",
+      "collapse_mode": "Topological Rupture",
+      "composition_rules": [
+        "Updated by residue relation operand (R_\u2194 -> T)",
+        "Input to admissibility (T -> A_adm)"
+      ],
+      "status": "PROVISIONAL_v0.1"
+    },
+    {
+      "symbol": "delta_a",
+      "latex": "\\delta_a",
+      "name": "Admissibility-Constrained Continuation",
+      "domain": "Nonzero distinguishability (E != 0) OR comparison block B",
+      "codomain": "Admissible continuation candidate set {Q_alpha} OR admissible block A",
+      "closure_condition": "Selection of a single future state within admissibility window A, OR filtering of a block to its lawful subset.",
+      "collapse_mode": "Realization Failure (No admissible candidates available)",
+      "composition_rules": [
+        "L082 Precedence",
+        "L083 Idempotence",
+        "Consumes the S-stage pruned candidate set before final arbitration",
+        "Filters a comparison block, yielding only the subset accepted as a lawful comparison object"
+      ]
+    },
+    {
+      "symbol": "<*>_x",
+      "latex": "\\langle * \\rangle_x",
+      "name": "Typed Relational Comparison Operator",
+      "class": "typed_relational_comparison_operator",
+      "domain": "Two conditioned distinctions <a>_b and <c>_d, or explicitly declared context-suppressed abstractions thereof",
+      "codomain": "conditioned_relational_composition_candidate",
+      "closure_condition": "A lawful conditioned relational composition candidate forms when two conditioned distinctions enter typed whole-expression comparison without identity collapse and with declared conditioning lineage preserved.",
+      "operand_types": [
+        "conditioned_distinction",
+        "conditioned_distinction"
+      ],
+      "composition_rules": [
+        "Default signature: <a>_b <*>_x <c>_d",
+        "Context-suppressed abstractions such as D(a) are legal only when their suppressed conditioning context is explicitly declared",
+        "Ordering is semantically binding unless a symmetric conditioning promotion is separately declared"
+      ],
+      "failure_conditions": [
+        "FAIL_RT_001: coupling_context_undefined",
+        "FAIL_RT_002: typed_identity_collapse",
+        "FAIL_RT_003: no_new_relation_generated",
+        "FAIL_RT_004: whole_expression_violation",
+        "FAIL_RT_005: conditioning_lineage_undefined"
+      ],
+      "status": "C1_DEFINED_PROVISIONAL"
+    },
+    {
+      "symbol": "O_calculus",
+      "latex": "O_{calculus}",
+      "name": "Orientation Calculus",
+      "class": "orientation_calculus",
+      "domain": "Typed orientation conditions over RT and aRT operands",
+      "codomain": "Admissible orientation actions, equivalence classes, identity action, and partial compositions",
+      "closure_condition": "Orientation transformation remains lawful only while typed distinction, admissibility, and closure class are preserved",
+      "collapse_mode": "Orientation degeneracy / admissibility empty-set / typed closure failure",
+      "composition_rules": [
+        "Includes typed action O_x over RT and aRT operands",
+        "Includes partial composition only when output orientation class is an admissible input for the next action",
+        "Includes identity action id_O preserving typed operand and closure class"
+      ],
+      "operand_types": [
+        "RT",
+        "aRT",
+        "orientation_condition"
+      ],
+      "failure_conditions": [
+        "FAIL_O_001: orientation degeneracy prevents selection of a determinate admissible class",
+        "FAIL_O_002: distinction collapses below operative floor epsilon",
+        "FAIL_O_003: closure support fails for the typed operand",
+        "FAIL_O_004: operand typing fails",
+        "FAIL_O_005: admissible continuation set becomes empty",
+        "FAIL_O_006: composition attempts to chain incompatible orientation classes"
+      ],
+      "dependency_links": [
+        "rt_core_expression",
+        "aspectual_rt_structure",
+        "admissibility_structure",
+        "residue_relation"
+      ],
+      "status": "C1_DEFINED_PROVISIONAL"
+    },
+    {
+      "symbol": "O_x",
+      "latex": "O_x",
+      "name": "Orientation Action Operator",
+      "class": "orientation_action_operator",
+      "domain": "Orientation condition o in O, typed operand X in {RT, aRT}",
+      "codomain": "Retuned typed operand X_o",
+      "closure_condition": "Lawful only if distinction, admissibility, and closure class are preserved under context x",
+      "collapse_mode": "Typed operand violation / closure-support loss / distinction collapse",
+      "operand_types": [
+        "RT",
+        "aRT"
+      ],
+      "status": "C1_DEFINED_PROVISIONAL"
+    },
+    {
+      "symbol": "NavT",
+      "latex": "\\text{NavT}",
+      "name": "Orientation-Array Transport",
+      "class": "orientation_transport_operator",
+      "domain": "Orientation condition o_k, residue relation R_<->, admissibility structure A_adm, transition organization T",
+      "codomain": "Next admissible orientation condition o_{k+1}",
+      "closure_condition": "Reconciliation is lawful only when the next orientation condition remains admissible for the typed operand and preserves closure class",
+      "collapse_mode": "Transport decoherence / array fragmentation / admissible next-orientation failure",
+      "operand_types": [
+        "orientation_condition",
+        "residue_relation",
+        "admissibility_structure",
+        "transition_event"
+      ],
+      "composition_rules": [
+        "Transitivity across admissibility chains",
+        "Maps among admissible orientation conditions in O rather than through primitive space",
+        "Acts as confirmed reorientation transport mechanism invoked by Trigger_Reorient"
+      ],
+      "status": "REORIENTATION_TRANSPORT_ROLE_CONFIRMED"
+    },
+    {
+      "symbol": "Trigger_Reorient",
+      "latex": "\\text{Trigger}_{Reorient}",
+      "name": "Re-orientation Trigger Condition",
+      "class": "control_rule",
+      "domain": "State x, context c, residue relation R_↔, candidate set C_t, pruned set C_t^S",
+      "codomain": "boolean",
+      "closure_condition": "Evaluates to TRUE to divert pipeline to reassessment when admissible continuation is unsustainable, else FALSE.",
+      "collapse_mode": "No admissible orientation reference exists under NavT -> 0-state collapse review",
+      "pipeline_position": "after δ_a/S failure or closure-support degradation, before ordinary Arb_A realization",
+      "trigger_logic": "Trigger_Reorient(x,c,R_↔,C_t,C_t^S) = TRUE iff [δ_a(x;c)=∅] OR [C_t^S=∅] OR [S_closure < τ_R] OR [Def_a(x,c) requires new -(i)]",
+      "branches": {
+        "false_case": "If FALSE, ordinary Arb_A realization proceeds over C_t^S.",
+        "success_branch": "If TRUE and NavT can produce admissible -(i)', re-enter δ_a under -(i)'.",
+        "failure_branch": "If TRUE and no admissible orientation exists, enter 0-state collapse review."
+      },
+      "role_separation": {
+        "Trigger_Reorient": "invokes orientation reassessment",
+        "NavT": "performs reorientation transport / orientation-reference update",
+        "Arb_A": "selects realized continuation only after admissible candidate pool exists",
+        "S": "prunes candidate pool before Arb_A"
+      },
+      "negative_constraints": [
+        "Trigger_Reorient is not Arb_A.",
+        "Trigger_Reorient is not NavT.",
+        "Trigger_Reorient is not realization.",
+        "Trigger_Reorient is not orientation generation itself.",
+        "Trigger_Reorient does not select q*.",
+        "Trigger_Reorient does not promote topology, geometry, or physics-app claims."
+      ],
+      "status": "DEFINITION_CANDIDATE_PENDING_VALIDATION"
+    },
+    {
+      "symbol": "Arb_A",
+      "latex": "\\text{Arb}_A",
+      "name": "Admissibility-Governed Arbitration",
+      "domain": "Continuation candidate set {Q_alpha}",
+      "codomain": "Realized future state S_t+1",
+      "closure_condition": "Optimal mismatch minimization (O*) under constraint A",
+      "collapse_mode": "Admissibility collapse (empty candidate intersection)",
+      "composition_rules": [
+        "Precedes interaction and projection",
+        "Ordinary Arb_A realization proceeds over C_t^S only when Trigger_Reorient = FALSE. Arb_A does not own reorientation trigger semantics.",
+        "Consumes the S-stage pruned candidate set before realization"
+      ],
+      "candidate_rules": {
+        "Trigger_Reorient": "Invoked when the current admissible candidate set is empty, closure support drops below its admissible threshold, or admissible deformation requires a new orientation reference.",
+        "S_stage_pruning_order": [
+          "type admissibility",
+          "epsilon / nonzero distinction check",
+          "residue compatibility",
+          "topology preservation",
+          "orientation compatibility",
+          "arbitration ranking"
+        ]
+      },
+      "status": "TRIGGER_OWNERSHIP_REMOVED"
+    },
+    {
+      "symbol": "S",
+      "latex": "S_{R,A}",
+      "name": "Sequential Pruning Operator",
+      "class": "sequential_pruning_operator",
+      "canonical_object_id": "S_arbitration_rule",
+      "canonical_form": "S_{R,A}(C_t) -> C_t^S",
+      "domain": "Candidate continuation set C_t under delta_a, distinction organization chi_D, residue relation R_<->, admissibility structure A_adm",
+      "codomain": "Pruned candidate continuation set C_t^S",
+      "closure_condition": "Removes candidates that fail sequential admissibility constraints before Arb_A ranks and selects a realized continuation.",
+      "collapse_mode": "Admissibility branch collapse or re-orientation trigger review when C_t^S = emptyset",
+      "composition_rules": [
+        "Positioned as an internal delta_a stage after candidate generation and before Arb_A realization arbitration",
+        "Prunes candidates sequentially by type admissibility, nonzero distinction, residue compatibility, topology preservation, and orientation compatibility",
+        "Does not select the realized continuation and does not use post-realization outcomes"
+      ],
+      "formal_candidate": {
+        "candidate_set": "C_t := {q_i | q_i is admissible under initial delta_a constraints}",
+        "pruned_set": "C_t^S := {q_i in C_t | S_R,A(q_i, chi_D, R_<->, A_adm) = PASS}",
+        "failure_condition": "C_t^S = emptyset -> admissibility branch collapse or re-orientation trigger review"
+      },
+      "pipeline_position": [
+        "E(chi_D) > 0",
+        "delta_a generates candidate continuation set C_t",
+        "S_R,A prunes C_t into C_t^S",
+        "Arb_A selects q* from C_t^S",
+        "Delta realizes q*"
+      ],
+      "negative_constraints": [
+        "S is not Arb_A",
+        "S does not select the realized continuation",
+        "S does not compute T_class",
+        "S does not define residue",
+        "S must not depend on post-realization outcomes",
+        "S does not promote topology, geometry, or physics-app claims"
+      ],
+      "validation_basis": [
+        "VAL-S-ARB-001",
+        "outputs/s_validation/s_validation_report.md"
+      ],
+      "validation_closure_note": "Validated as a pruning stage distinct from Arb_A. Tie-break behavior remains open inside Arb_A, and future engines must not conflate S pruning with Arb_A arbitration.",
+      "explicit_limits": [
+        "No theorem promotion",
+        "No topology, geometry, or physics-app promotion",
+        "Tie-break behavior inside Arb_A remains open",
+        "Future engines must not conflate S pruning with Arb_A arbitration"
+      ],
+      "dependency_links": [
+        "delta_a",
+        "Arb_A",
+        "R_<->"
+      ],
+      "status": "VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT"
+    },
+    {
+      "symbol": "R_\u2194",
+      "latex": "R_{\\leftrightarrow}",
+      "name": "Residue Relation Operand",
+      "domain": "Residue conditions produced by lawful continuation",
+      "codomain": "Structured trace-relation among residue conditions",
+      "closure_condition": "Trace-relation remains legible enough to condition topology without becoming a direct update operator",
+      "collapse_mode": "Trace break / residue relation incompatibility",
+      "composition_rules": [
+        "Inscribed by lawful continuation (Delta -> R_\u2194)",
+        "Conditions topology (R_\u2194 -> T)",
+        "Not itself the closure operator",
+        "Not a direct causal updater"
+      ],
+      "status": "C1_DEFINED_PROVISIONAL"
+    },
+    {
+      "symbol": "K",
+      "latex": "K",
+      "name": "Recursive Knot Stabilization (Identity)",
+      "domain": "Circular relational pressure sum (oint Delta_R)",
+      "codomain": "Stable identity manifold / knot",
+      "closure_condition": "Fixed-point convergence under update operator Psi where loop > Theta_D",
+      "collapse_mode": "Symmetry fracture (asymmetry vanishing; N < 3)",
+      "composition_rules": [
+        "Requires N=3 independent closure constraints"
+      ]
+    },
+    {
+      "symbol": "->a",
+      "latex": "\\rightarrow_a",
+      "name": "Forward Admissibility Projection",
+      "domain": "Domain A",
+      "codomain": "Domain B (admissibly reachable)",
+      "closure_condition": "Existence of admissible correspondence from A to B",
+      "status": "CANDIDATE"
+    },
+    {
+      "symbol": "<-a",
+      "latex": "\\leftarrow_a",
+      "name": "Reverse Admissibility Projection",
+      "domain": "Domain B",
+      "codomain": "Domain A (admissibly reachable)",
+      "closure_condition": "Existence of admissible correspondence from B to A",
+      "status": "CANDIDATE"
+    },
+    {
+      "symbol": "->r",
+      "latex": "\\rightarrow_r",
+      "name": "Forward Residue Continuation",
+      "domain": "Residue source A",
+      "codomain": "Residue sink B",
+      "closure_condition": "Residue in A supports continuation toward B",
+      "status": "CANDIDATE"
+    },
+    {
+      "symbol": "<-r",
+      "latex": "\\leftarrow_r",
+      "name": "Reverse Residue Support",
+      "domain": "Residue source B",
+      "codomain": "Residue sink A",
+      "closure_condition": "B provides residue support relative to A",
+      "status": "CANDIDATE"
+    },
+    {
+      "symbol": "->a \u2297 <-r",
+      "latex": "\\rightarrow_a \\otimes \\leftarrow_r",
+      "name": "Admissibility-Residue Coupling Operator",
+      "domain": "Relational basins A, B",
+      "codomain": "Stabilized correspondence state",
+      "closure_condition": "Joint support from forward admissibility and reverse residue",
+      "status": "C1_DEFINED_PROVISIONAL"
+    },
+    {
+      "symbol": "otimes",
+      "latex": "\\otimes",
+      "name": "Typed Partial Composition Operator",
+      "class": "typed_partial_composition_operator",
+      "domain": "Typed operands X and Z under declared composition context Y",
+      "codomain": "A lawful RT, aRT, or typed_closure_candidate result",
+      "closure_condition": "Composition is lawful only when operand typing, distinction preservation, admissibility, and closure-class compatibility all remain satisfied under Y",
+      "collapse_mode": "Typing failure / admissibility empty-set / closure incompatibility / ordering collapse / projection equivalence drift",
+      "operand_types": [
+        "RT",
+        "aRT",
+        "orientation_conditioned_RT",
+        "orientation_conditioned_aRT",
+        "typed_closure_candidate"
+      ],
+      "forbidden_operand_types": [
+        "bare_scalar",
+        "projection_only_observable",
+        "undefined_metaphor",
+        "untyped_simulation_output"
+      ],
+      "properties": {
+        "partial": true,
+        "commutative": "not_assumed",
+        "associative": "context_bound_only",
+        "identity": "I_otimes"
+      },
+      "composition_rules": [
+        "X otimes_Y Z is defined only when Type(X), Type(Z), and Context(Y) are declared",
+        "D(X|Z) must remain above epsilon unless a collapse-boundary event is explicitly declared",
+        "delta_a(X otimes_Y Z) must remain non-empty",
+        "Result must remain in RT union aRT union typed_closure_candidate",
+        "Associativity may hold only inside a declared compatible closure class"
+      ],
+      "failure_conditions": [
+        "FAIL_OTIMES_001: missing or invalid operand typing",
+        "FAIL_OTIMES_002: undefined composition context",
+        "FAIL_OTIMES_003: distinction collapse below epsilon",
+        "FAIL_OTIMES_004: admissibility empty-set",
+        "FAIL_OTIMES_005: closure-class incompatibility",
+        "FAIL_OTIMES_006: ordering collapse",
+        "FAIL_OTIMES_007: projection equivalence mistaken for process identity",
+        "FAIL_OTIMES_008: unproven commutativity or associativity assumed"
+      ],
+      "dependency_links": [
+        "rt_core_expression",
+        "aspectual_rt_structure",
+        "orientation_calculus",
+        "admissibility_structure",
+        "residue_relation"
+      ],
+      "status": "C1_DEFINED_PROVISIONAL"
+    },
+    {
+      "symbol": "Omega_a",
+      "latex": "\\Omega_a",
+      "name": "Asymmetry Ratio",
+      "domain": "Relational distinction pair (D(S1|S2), D(S2|S1))",
+      "codomain": "Orientation regulation scalar",
+      "closure_condition": "D12/D21 regulated by distinguishability floor epsilon",
+      "status": "CANDIDATE"
+    },
+    {
+      "symbol": "=>Omega_a",
+      "latex": "\\Rightarrow_{\\Omega_a}",
+      "name": "Asymmetry Bridge Operator",
+      "domain": "Distinction asymmetry state (D1 != D2)",
+      "codomain": "Local orientation reference -(i)",
+      "closure_condition": "Generative induction of orientation from asymmetry ratio",
+      "status": "EXPERIMENTAL_CANDIDATE"
+    },
+    {
+      "symbol": "xb",
+      "latex": "\\Leftrightarrow_{xb}",
+      "name": "Cross-Basin Projection (Bridge)",
+      "domain": "Micro-procedural update density sum(delta_a,i)",
+      "codomain": "Coarse macro-relational topology (geometry_app)",
+      "closure_condition": "Update density crosses scale threshold tau and satisfies homogenization (L094)",
+      "collapse_mode": "Projection failure (update density < tau or variance too high)",
+      "composition_rules": [
+        "Gated by stabilization operator K",
+        "Subject to non-invertibility and information loss (L093)",
+        "Requires relational convolution kernel K (L092)"
+      ]
+    },
+    {
+      "symbol": "\u2194_R",
+      "latex": "\\Leftrightarrow_R",
+      "aliases": [
+        "iff_R"
+      ],
+      "name": "Residue-Conditioned Closure",
+      "domain": "Typed operands A, B under admissibility support",
+      "codomain": "Truth-valued closure relation between operands",
+      "closure_condition": "A \u2194_R B is true only while admissible residue-conditioned topology preserves closure support between the operands",
+      "collapse_mode": "Decoupling (truth transition True -> False) when distinction, admissibility support, trace relation, operand typing, or closure topology fails",
+      "composition_rules": [
+        "Not the residue state itself",
+        "Not a proof operator",
+        "Depends on admissibility support generated through Delta -> R_\u2194 -> T -> A_adm",
+        "Operates over typed operands such as RT expressions, aRT expressions, distinction-nodes, triadic closure candidates, admissible topology signatures, and explicitly marked projection signatures"
+      ],
+      "status": "C1_DEFINED_PROVISIONAL"
+    },
+    {
+      "symbol": "B_K",
+      "latex": "B_K",
+      "name": "Orientation Braid Operator",
+      "domain": "Admissible orientation-state distributions {Psi_app}",
+      "codomain": "Quantized state signatures (spin_app, charge_app)",
+      "closure_condition": "Fixed-point closure (B_K^m Psi = Psi) for integer/half-integer m",
+      "collapse_mode": "De-braiding / knot dissolution",
+      "composition_rules": [
+        "Composition of n orientation updates around knot K"
+      ]
+    },
+    {
+      "symbol": "Pi",
+      "latex": "\\Pi",
+      "name": "Projection Operators (Pi_A, Pi_R)",
+      "domain": "Substrate process states",
+      "codomain": "Analogy-layer observables (_app)",
+      "closure_condition": "Mapping to invariant relational signatures",
+      "collapse_mode": "Mapping drift / information loss",
+      "composition_rules": [
+        "Terminal derivation stage"
+      ]
+    },
+    {
+      "symbol": "\u21d4_m",
+      "latex": "\\Leftrightarrow_m",
+      "name": "Metric Projection Operator",
+      "domain": "Asymmetry domain ((asym_app)nDOF)",
+      "codomain": "Asymmetry metrics (D1, D2)",
+      "closure_condition": "Successful mapping of relational structure to scalar metrics",
+      "status": "CANDIDATE"
+    },
+    {
+      "symbol": "\u21d4_s",
+      "latex": "\\Leftrightarrow_s",
+      "name": "Statistical Projection Operator",
+      "class": "typed_statistical_projection_operator",
+      "domain": "Typed process structures X in {RT, aRT, typed_composition_structure, metric_projection, asymmetry_ratio, admissibility_distribution_candidate}",
+      "codomain": "Statistical observables P_X explicitly marked as statistical_projection_app",
+      "closure_condition": "Projection is lawful only when operand typing, declared projection map, non-empty admissibility support, and normalization status all remain explicit",
+      "collapse_mode": "Typing failure / undeclared projection map / admissibility empty-set / undeclared normalization / projection identity drift",
+      "operand_types": [
+        "RT",
+        "aRT",
+        "typed_composition_structure",
+        "metric_projection",
+        "asymmetry_ratio",
+        "admissibility_distribution_candidate"
+      ],
+      "forbidden_operand_types": [
+        "untyped_scalar",
+        "raw_simulation_output",
+        "projection_only_identity_claim",
+        "undefined_probability_metaphor"
+      ],
+      "properties": {
+        "projection_operator": true,
+        "identity_preserving": false,
+        "requires_normalization_status": true,
+        "requires_declared_projection_map": true
+      },
+      "composition_rules": [
+        "X iff_s P_X is defined only when Type(X) and ProjectionMap_s(X) are declared",
+        "A_adm(X) must remain non-empty",
+        "P_X must be marked as statistical_projection_app",
+        "Norm(P_X) must be declared as normalized, conditionally_normalized, or comparative_weight",
+        "P_X = P_Y does not imply X = Y"
+      ],
+      "failure_conditions": [
+        "FAIL_IFF_S_001: missing or invalid operand typing",
+        "FAIL_IFF_S_002: undeclared statistical projection map",
+        "FAIL_IFF_S_003: admissibility empty-set",
+        "FAIL_IFF_S_004: normalization status undeclared",
+        "FAIL_IFF_S_005: projection equivalence mistaken for process identity",
+        "FAIL_IFF_S_006: raw simulation frequency treated as governed probability",
+        "FAIL_IFF_S_007: probability assigned outside declared admissibility window"
+      ],
+      "dependency_links": [
+        "rt_core_expression",
+        "aspectual_rt_structure",
+        "typed_composition_structure",
+        "metric_projection",
+        "admissibility_structure"
+      ],
+      "status": "C1_DEFINED_PROVISIONAL"
+    },
+    {
+      "symbol": "<\u2260>",
+      "latex": "<\\neq>",
+      "name": "Preserved Distinction",
+      "operator_family": "preserved_distinction_relation",
+      "domain": "Two distinguishable process relata A, B with active distinction D(A|B) > 0",
+      "codomain": "A baseline relation claim asserting procedural participation without identity collapse",
+      "closure_condition": "Relation and distinction co-survive without collapsing A and B into the same operational role",
+      "collapse_mode": "Identity collapse / relation without distinction / untested conditioning drift",
+      "composition_rules": [
+        "Acts as the bare preserved-distinction baseline",
+        "Subscripts are candidate conditioning qualifiers and must outperform the bare baseline before retention",
+        "Does not replace residue-conditioned closure \u2194_R",
+        "Remains provisional until truth conditions and counterexamples are formally settled"
+      ],
+      "status": "CANDIDATE_BASELINE_RELATION"
+    },
+    {
+      "symbol": "<\u2260>_X",
+      "latex": "<\\neq>_X",
+      "name": "Preserved Non-Identity Relation",
+      "operator_family": "preserved_distinction_relation",
+      "domain": "Typed operands A, B under declared context X",
+      "codomain": "Relation claim preserving typed non-identity under context X",
+      "truth_conditions": [
+        "D(A|B) > epsilon or typed nonzero distinction is preserved",
+        "A and B remain coupled under context X",
+        "A and B do not collapse into the same operational role",
+        "Updates preserve typed role distinction"
+      ],
+      "failure_conditions": [
+        "distinction collapses below epsilon",
+        "coupling fails",
+        "role identity collapses",
+        "context X is undefined"
+      ],
+      "composition_rules": [
+        "Does not replace \u2194_R",
+        "Adds a non-collapse constraint to an already typed relation context",
+        "Remains provisional until directional and counterexample behavior is formally settled"
+      ],
+      "status": "C1_DEFINED_PROVISIONAL"
+    },
+    {
+      "symbol": "|",
+      "latex": "|",
+      "name": "vertical_bar_operator",
+      "canonical_name": "distinction-preserving comparison operator",
+      "domain": "Two typed process-aspects compared under preserved distinction",
+      "codomain": "A comparison interface eligible for distinction generation when evaluated by D",
+      "closure_condition": "A | B marks the oriented comparison interface through which A and B are compared while preserving non-collapse sufficient for distinction generation.",
+      "collapse_mode": "Legality Failure",
+      "composition_rules": [
+        "Used within TC_asym to mark co-participation in grouped expressions",
+        "Must be defined before Org_a closure is attempted",
+        "Does not itself assert realized distinction until evaluated by D or a registered successor comparison context"
+      ],
+      "status": "C1_DEFINED_PROVISIONAL",
+      "arity": 2,
+      "order_sensitive": true,
+      "admissibility_gate": "D(A|B) > epsilon_a",
+      "noncommutative_by_default": true,
+      "group_closure_status": "DEFINITION_CANDIDATE",
+      "group_closure_symbol": "Adm_|^G",
+      "associativity_default": "NON_ASSOCIATIVE_UNTIL_PROVEN",
+      "permutation_default": "NON_PERMUTABLE_UNTIL_PROVEN",
+      "triadic_special_case": true,
+      "orientation_dependency": "Preserve_O(G)",
+      "orientation_space": "O",
+      "reversal_rule": "Reversal is legal only if Rev_|(A,B) or higher grouped orientation equivalence is proven.",
+      "group_preservation_rule": "Preserve_O(G -> G') := \u2203o \u2208 O(G), \u2203o' \u2208 O(G') such that G iff_R G' while preserving admissible orientation.",
+      "reading": "A compared to B under preserved distinction.",
+      "negative_constraints": [
+        "not logical OR",
+        "not division",
+        "not mere separator",
+        "not equality",
+        "not additive combination",
+        "not multiplicative combination",
+        "not a memory object",
+        "not a stored residue container"
+      ],
+      "primitive_role": {
+        "bar": "comparison condition",
+        "D": "realized distinction generated from comparison",
+        "delta_alpha": "deviated admissibility produced after distinction",
+        "Affect_prime": "renewed Affect under deviated constraint"
+      },
+      "same_process_constraint_note": "D(A|B) is governed as deviated constraint within the same process, not as creation of a separate process or stored residue object.",
+      "formal_candidate_expression": {
+        "form": "A | B := Compare_C(A,B) ∧ D_C(A|B) > ε_a",
+        "reading": "A compared to B without collapse under declared context C.",
+        "output_type": "comparison condition, not distinction itself",
+        "Compare_C_note": "Compare_C denotes the declared comparison context under which A and B are placed in a distinction-eligible relation. It is not a stored state or memory object; it is the minimal contextual license for D_C to evaluate.",
+        "D_C_note": "D_C(A|B) is the distinction evaluator scoped to context C. It does not assert realized distinction on its own; it gates the bar expression as admissibly active.",
+        "patch_source": "MPF_VERTICAL_BAR_OPERATOR_DEFINITION_PATCH_001"
+      },
+      "TS0_definition_record": {
+        "claim_level": "C1_DEFINED",
+        "theorem_status": "TS0",
+        "evidence_status": "NO_EVIDENCE_YET",
+        "definition_layer": "formal_candidate",
+        "allowed_use": "campaign design and hypothesis generation",
+        "forbidden_use": "theorem promotion or framework confirmation",
+        "note": "TS0 applies to the formal Compare_C candidate expression. The broader induction package remains at C1_DEFINED_TO_C2_TESTABLE_CANDIDATE per MPF_VERTICAL_BAR_INDUCTION_001."
+      },
+      "campaign_hypotheses": [
+        "H1_bar_necessity: removing | collapses or sharply degrades D generation",
+        "H2_bar_complexity: higher-order bar structures increase admissible organization opportunities when preservation holds",
+        "H3_deviated_admissibility: D(A|B) leaves admissibility different than before",
+        "H4_no_memory_object: observed persistence remains explainable as same-process deviated constraint"
+      ],
+      "governance_status": {
+        "claim_level": "C1_DEFINED_TO_C2_TESTABLE_CANDIDATE",
+        "theorem_status": "not_theorem",
+        "evidence_status": "campaign_design_required",
+        "allowed_use": [
+          "simulation design",
+          "operator registry candidate",
+          "textbook induction target",
+          "hypothesis generation"
+        ],
+        "forbidden_use": [
+          "theorem promotion",
+          "framework confirmation",
+          "ontology confirmation",
+          "rigor endorsement"
+        ]
+      }
+    },
+    {
+      "symbol": "Org_a",
+      "name": "Admissible Organization Operator",
+      "class": "admissible_organization",
+      "canonical_form": "Org_a(G)",
+      "status": "axiom_definition_candidate",
+      "arity": 1,
+      "domain": "Typed grouped participation graph G satisfying Adm_|^G(G) and O(G)",
+      "codomain": "Legally preserved organization of admissible distinction participation",
+      "input_requirements": {
+        "G": "typed grouped participation graph",
+        "requires": [
+          "Adm_|^G(G)",
+          "exists o in O(G) such that Adm_O(G,o)",
+          "Eval_D^G(G)",
+          "D_G(G) > epsilon_a"
+        ],
+        "invalid_inputs": [
+          "untyped operand lists",
+          "binary pairs without declared grouping",
+          "orientation-free structures",
+          "projection-only analogies",
+          "scalar equality classes"
+        ]
+      },
+      "axioms": [
+        {
+          "axiom_id": "ORG_A_AX_001",
+          "name": "Inventory Preservation",
+          "statement": "Legal transformations under Org_a must preserve the admissible distinction inventory of G.",
+          "candidate_form": "Inv_D(G) = Inv_D(G') under G iff_R G'",
+          "meaning": "The organization may deform, regroup, or transform only if the participating distinction inventory remains traceable."
+        },
+        {
+          "axiom_id": "ORG_A_AX_002",
+          "name": "Admissibility Conservation",
+          "statement": "Every legal transformation under Org_a must preserve admissibility of the organized participation field.",
+          "candidate_form": "Org_a(G) and G iff_R G' implies Adm_a(G')",
+          "meaning": "No organization remains legal if transformation causes its distinction participation to fall below epsilon_a or violate typed participation."
+        },
+        {
+          "axiom_id": "ORG_A_AX_003",
+          "name": "Topological Consistency",
+          "statement": "Legal transformations under Org_a must preserve orientation-consistent participation structure.",
+          "candidate_form": "Org_a(G) and G iff_R G' implies G \u2243_O G'",
+          "meaning": "The organization is preserved through admissible relational structure, not by visual shape or object identity."
+        }
+      ],
+      "derived_closure_candidate": {
+        "symbol": "Adm_Org",
+        "candidate_formula": "Adm_Org(G) := Adm_|^G(G) \u2227 \u2203o\u2208O(G) Adm_O(G,o) \u2227 Eval_D^G(G) \u2227 D_G(G)>epsilon_a \u2227 InvPres_D(G) \u2227 AdmCons_a(G) \u2227 TopCons_O(G)",
+        "interpretation": "An Org_a expression is admissibly closed only when grouped participation, orientation, distinction evaluation, inventory preservation, admissibility conservation, and topological consistency all hold."
+      },
+      "dependencies": [
+        "VERTICAL_BAR_OPERATOR_DEFINITION_PASS_001",
+        "VERTICAL_BAR_OPERATOR_GROUP_CLOSURE_PASS_001",
+        "ORIENTATION_SPACE_DEFINITION_PASS_001"
+      ],
+      "downstream_unblocks": [
+        "Sigma_D_equivalence_criteria",
+        "ECON_DEBT_0001",
+        "ECON_DEBT_0002"
+      ]
+    }
+  ]
+}

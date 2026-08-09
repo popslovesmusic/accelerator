@@ -1,0 +1,45 @@
+{
+  "schema_id": "governance_q0_live_authority_access_inventory_v1",
+  "role_ids": [
+    "REGISTRY_STATE_AUTHORITY",
+    "REGISTRY_WRITE_AUTHORITY",
+    "VALIDATION_INVOCATION_AUTHORITY",
+    "VALIDATION_REDUCTION_AUTHORITY",
+    "INSTRUCTION_AUTHORITY",
+    "GENERATED_EVIDENCE"
+  ],
+  "records": [
+    {
+      "path": "scripts/query_governance.py",
+      "classification": "MIXED_ROLE_LOOKUP",
+      "behavior": "Resolves and returns authority information across multiple Q0 roles; generic access is now blocked unless a role is declared."
+    },
+    {
+      "path": "tools/governance_inventory/__init__.py",
+      "classification": "INSTRUCTION_AUTHORITY",
+      "behavior": "Exports partition builders and inventory helpers without mutating governance state."
+    },
+    {
+      "path": "tools/governance_inventory/authority_scope_partition.py",
+      "classification": "REGISTRY_WRITE_AUTHORITY",
+      "behavior": "Defines the governed role partition and exclusive write-owner contracts for Q0 registry state."
+    },
+    {
+      "path": "scripts/governance/register_q0_authority_scope_partition.py",
+      "classification": "REGISTRY_WRITE_AUTHORITY",
+      "behavior": "Canonical writer entry point for Q0 partition artifacts, ledger sync, and hash sync."
+    },
+    {
+      "path": "scripts/global_validate.py",
+      "classification": "VALIDATION_INVOCATION_AUTHORITY",
+      "behavior": "Canonical governed validation entry point with fail-closed terminal reduction."
+    }
+  ],
+  "primary_targets": [
+    "scripts/query_governance.py",
+    "tools/governance_inventory/__init__.py",
+    "tools/governance_inventory/authority_scope_partition.py",
+    "scripts/governance/register_q0_authority_scope_partition.py",
+    "scripts/global_validate.py"
+  ]
+}

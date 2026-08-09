@@ -1,0 +1,65 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Operator signature registry for type discipline and composition constraints.",
+    "status": "implemented"
+  },
+  "signatures": [
+    {
+      "operator": "Pi_A",
+      "input_space": ["process_state", "admissibility_window"],
+      "output_space": ["process_state"],
+      "operation_class": "projection",
+      "closure_condition": "conditional (SA-001 through SA-005)",
+      "composition_constraints": ["idempotent under MT-001"]
+    },
+    {
+      "operator": "NavT",
+      "input_space": ["process_state"],
+      "output_space": ["csi_domain"],
+      "operation_class": "transport",
+      "closure_condition": "partial",
+      "composition_constraints": ["identity on null path (MT-002)"]
+    },
+    {
+      "operator": "delta",
+      "input_space": ["process_state", "residue_state", "orientation_frame", "admissibility_window", "pressure"],
+      "output_space": ["continuation_event"],
+      "operation_class": "actualization",
+      "closure_condition": "conditional (NEI-001 through NEI-005)",
+      "composition_constraints": ["sequential"]
+    },
+    {
+      "operator": "R",
+      "input_space": ["residue_state", "process_state", "continuation_event"],
+      "output_space": ["residue_state"],
+      "operation_class": "update",
+      "closure_condition": "partial",
+      "composition_constraints": ["recursive"]
+    },
+    {
+      "operator": "-(i)",
+      "input_space": ["continuation_space"],
+      "output_space": ["orientation_frame"],
+      "operation_class": "orientation",
+      "closure_condition": "partial",
+      "composition_constraints": ["minimization"]
+    },
+    {
+      "operator": "K",
+      "input_space": ["process_state"],
+      "output_space": ["coupling_reach"],
+      "operation_class": "metric",
+      "closure_condition": "finite flux (LAW004)",
+      "composition_constraints": ["additive"]
+    },
+    {
+      "operator": "⇔_R",
+      "input_space": ["epsilon", "delta"],
+      "output_space": ["closure_relation"],
+      "operation_class": "higher_order_relation",
+      "closure_condition": "residue-conditioned",
+      "composition_constraints": ["non-decomposable"]
+    }
+  ]
+}

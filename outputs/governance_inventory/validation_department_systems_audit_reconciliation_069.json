@@ -1,0 +1,311 @@
+{
+  "patch_id": "PATCH_VALIDATION_DEPARTMENT_SYSTEMS_AUDIT_RECONCILIATION_069",
+  "mode": "READ_ONLY_ANALYSIS",
+  "generated_at": "2026-07-15T17:10:00-04:00",
+  "executive_disposition": {
+    "priority_question_answer": "YES",
+    "priority_question_basis": [
+      "The current validation reducer in scripts/global_validate.py sets overall_status to pass when every stage status is in {success, warning, pass, skipped}.",
+      "The current full-mode stage selector excludes db_runtime_validation and patch_chain_validation, so both stages are emitted as skipped in a full run.",
+      "The Q0 authority partition explicitly prohibits VALIDATION_REDUCTION_AUTHORITY from treating skipped as pass."
+    ],
+    "secondary_question_answer": "Only a subset of the Systems Audit findings are live defects. Others are expected suspension effects, environment-specific failures, derived DB-state observations, or findings lacking a governed contract."
+  },
+  "governed_state_confirmed": {
+    "q1_local_queue": 0,
+    "global_blocking_ambiguities": 487,
+    "global_inventory_patch": {
+      "patch_id": "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002",
+      "status": "PARTIAL",
+      "authority_effect": "NONE"
+    },
+    "full_project_validation": "SUSPENDED_PENDING_VALIDATOR_DEPARTMENT_COMPLETION",
+    "latest_completed_patch": "PATCH_GOVERNANCE_Q1_REMAINING_ITEM_DISPOSITION_AND_RESIDUE_RETIREMENT_068",
+    "evidence": [
+      "outputs/governance_inventory/q1_remaining_item_disposition.json",
+      "patches/PATCH_GOVERNANCE_Q1_REMAINING_ITEM_DISPOSITION_AND_RESIDUE_RETIREMENT_068.json"
+    ]
+  },
+  "validation_invocation_and_reduction_map": {
+    "validation_invocation_authority": {
+      "surface": "scripts/global_validate.py",
+      "canonical_command": "python -m scripts.global_validate",
+      "classification": "EXPLICIT_LIVE_AUTHORITY",
+      "evidence": [
+        "python -m scripts.query_governance authority --target scripts/global_validate.py --authority-role VALIDATION_INVOCATION_AUTHORITY --level summary --json => allow",
+        "governance/authority_partitions/Q0_AUTHORITY_SCOPE_PARTITION_001.json: validation_partition.canonical_invocation",
+        "tests/governance_validation/test_q0_authority_scope_partition.py"
+      ]
+    },
+    "validation_reduction_authority": {
+      "surface": "scripts/global_validate.py",
+      "rule_id": "GOVERNANCE_VALIDATION_FAIL_CLOSED_001",
+      "classification": "EXPLICIT_LIVE_AUTHORITY",
+      "evidence": [
+        "governance/authority_partitions/Q0_AUTHORITY_SCOPE_PARTITION_001.json: role_assignments for GOV-SURF-0972 include VALIDATION_REDUCTION_AUTHORITY",
+        "governance/authority_partitions/Q0_AUTHORITY_SCOPE_PARTITION_001.json: validation_partition.terminal_reducer_surface_path = scripts/global_validate.py",
+        "tests/governance_validation/test_q0_authority_scope_partition.py"
+      ]
+    },
+    "role_boundaries": {
+      "instruction_authority_examples": [
+        "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+        "AGENTS.md",
+        "GEMINI.md"
+      ],
+      "generated_evidence_examples": [
+        "registry/governance_hash_registry.json",
+        "governance/live/master_work_index.json"
+      ]
+    }
+  },
+  "pass_semantics_analysis": {
+    "current_full_mode_selection": {
+      "selected_stages": [
+        "unified_manifest_validation",
+        "registry_validation",
+        "engine_validation",
+        "hygiene_validation",
+        "math_validation",
+        "db_validation",
+        "math_test_provenance_validation",
+        "math_program_validation",
+        "implementation_validation",
+        "evidence_validation",
+        "campaign_validation",
+        "governance_integrity_validation"
+      ],
+      "skipped_in_full_mode": [
+        "db_runtime_validation",
+        "patch_chain_validation"
+      ],
+      "evidence": [
+        "scripts/global_validate.py:_selected_stage_names(full)",
+        "outputs/audits/global_health_report.json: stage_trace and stage_results"
+      ]
+    },
+    "reduction_logic": {
+      "current_rule": "overall_status = pass iff every stage status is in {success, warning, pass, skipped}",
+      "code_path": "scripts/global_validate.py",
+      "conflict_with_governed_rule": "The Q0 partition forbids VALIDATION_REDUCTION_AUTHORITY from TREAT_SKIPPED_AS_PASS.",
+      "additional_transparency_conflict": "docs/governance/oversight_prosthetic_phase_declaration.md forbids hiding warnings behind aggregated PASS statuses."
+    },
+    "stage_result_summarizer_defect": {
+      "finding": "stage_results collapses warning stages and many success stages into PASS and often records items_checked=0 because only a narrow set of counters is inspected.",
+      "evidence": [
+        "scripts/global_validate.py:_collect_stage_items_checked",
+        "scripts/global_validate.py:_summarize_stage_failure",
+        "outputs/audits/global_health_report.json: stage_results"
+      ]
+    }
+  },
+  "suspension_effect_analysis": {
+    "full_validation_suspension_state": "ACTIVE",
+    "effect_on_current_report": "The repository is under suspended full-project validation by governance, but the observed global_validate run still executed in validation_mode=full. The skipped db_runtime and patch_chain stages are not caused by the suspension flag; they are caused by current full-mode stage selection.",
+    "intentional_or_not": {
+      "db_runtime_validation": "INTENTIONALLY_SKIPPED_BY_CURRENT_CODE_PATH",
+      "patch_chain_validation": "INTENTIONALLY_SKIPPED_BY_CURRENT_CODE_PATH",
+      "overall_pass_reduction": "NOT_GOVERNED_SAFE under current fail-closed rule"
+    }
+  },
+  "database_role_analysis": {
+    "sqlite_surface_role": "DERIVED_DB_RUNTIME_SUBSTRATE_NON_AUTHORITATIVE",
+    "authority_effect": "NONE",
+    "freshness_state": {
+      "status": "stale",
+      "query_result": "python -m scripts.query_governance freshness --target registry/db/acellorator_index.sqlite --level summary --json => defer/stale",
+      "meaning": "Runtime freshness is source-change gated; the stale condition affects DB-dependent runtime confidence, not validation invocation authority itself."
+    },
+    "db_validation_gap": {
+      "finding": "scripts/db/db_health_check.py does not fail or warn merely because claim_evidence_links has zero rows, and it records last_artifact_index without comparing it to current worktree state.",
+      "effect": "db_validation can report success while runtime freshness is stale."
+    }
+  },
+  "test_environment_analysis": {
+    "environment_contract_observed": {
+      "root_test_config_files": [
+        "requirements.txt",
+        "requirements.lock.txt"
+      ],
+      "missing_root_test_config_files": [
+        "pytest.ini",
+        "pyproject.toml",
+        "setup.py",
+        "conftest.py"
+      ]
+    },
+    "import_and_dependency_results": {
+      "typer_import": "ModuleNotFoundError",
+      "tools_import": "OK",
+      "tools.runtime_authority_import": "OK",
+      "pytest_collect_only": {
+        "collected": 109,
+        "collection_errors": [
+          "tests/test_lexicon_cli.py -> ModuleNotFoundError: typer",
+          "tests/test_rd_boundary_scaling_policy.py -> ModuleNotFoundError: rd_moving_boundary_sim_v1",
+          "tests/test_tda_adjacency_threshold.py -> ModuleNotFoundError: tda_module_v1"
+        ]
+      }
+    },
+    "discovery_boundary_observation": {
+      "current_collect_output": "Observed collection under tests/ and some tool-local test files. outputs/ and results/ traversal was not observed in the reproduced collection output.",
+      "classification": "POSSIBLE_BUT_NOT_PROVEN"
+    }
+  },
+  "documentation_surface_analysis": {
+    "GEMINI.md": {
+      "authority_state": "EXPLICIT_LIVE_AUTHORITY",
+      "issue": "Contains mojibake in the canonical Mono-Process root expression and claim-class range line.",
+      "classification": "CONFIRMED_LIVE_DEFECT"
+    },
+    "MATH_PROGRAM_NARRATIVE.md": {
+      "authority_state": "EXPLICIT_NON_AUTHORITATIVE",
+      "issue": "Contains escalation-style language such as formal proof of reality-scale theorems and strong externalized verdicts.",
+      "classification": "NON_AUTHORITATIVE_SURFACE",
+      "note": "This is a content-governance concern, but not a live validation-authority defect under the current role map."
+    }
+  },
+  "finding_by_finding_classification": [
+    {
+      "id": "SYS-AUDIT-001",
+      "classification": "CONFIRMED_LIVE_DEFECT",
+      "disposition": "A full-mode run emitted overall_status=pass while db_runtime_validation and patch_chain_validation were skipped by mode and the reducer currently accepts skipped as pass."
+    },
+    {
+      "id": "SYS-AUDIT-002",
+      "classification": "PROBABLE_LIVE_DEFECT_REQUIRES_BOUNDARY_CONFIRMATION",
+      "disposition": "engine_validation returned success with tools_tested empty. The code permits zero-work success, but no explicit governed minimum-work contract for that stage was found."
+    },
+    {
+      "id": "SYS-AUDIT-003",
+      "classification": "CONFIRMED_LIVE_DEFECT",
+      "disposition": "The report-layer stage_results emitted PASS with items_checked=0 for math_program_validation even though the underlying stage ran many validators and returned warning. This is a stage summarization defect, not proof of zero substantive math validation work."
+    },
+    {
+      "id": "SYS-AUDIT-004",
+      "classification": "CONFIRMED_LIVE_DEFECT",
+      "disposition": "hygiene_validation returned warning but stage_results reduced it to PASS, conflicting with governance transparency language."
+    },
+    {
+      "id": "SYS-AUDIT-005",
+      "classification": "VALID_NON_BLOCKING_STATE",
+      "disposition": "stale_report_warning is an explicit informational/degraded signal. The defect is not the flag itself, but allowing a global pass to remain trustworthy in its presence."
+    },
+    {
+      "id": "SYS-AUDIT-006",
+      "classification": "DERIVED_OR_GENERATED_STATE",
+      "disposition": "The DB snapshot is stale by runtime freshness rules. The SQLite surface is non-authoritative runtime substrate, so staleness affects DB-backed diagnostics and retrieval confidence rather than live validation authority directly."
+    },
+    {
+      "id": "SYS-AUDIT-007",
+      "classification": "MISSING_GOVERNED_CONTRACT",
+      "disposition": "claim_evidence_links exists as a non-authoritative DB table, but no authoritative contract requiring nonzero population was found. Zero rows alone is not currently a governed defect."
+    },
+    {
+      "id": "SYS-AUDIT-008",
+      "classification": "ENVIRONMENT_SPECIFIC_FAILURE",
+      "disposition": "typer is missing in the active interpreter and blocks full pytest collection, but this is an environment/dependency state rather than a validation-authority defect."
+    },
+    {
+      "id": "SYS-AUDIT-009",
+      "classification": "INSUFFICIENT_EVIDENCE",
+      "disposition": "The reproduced import-path failures are rd_moving_boundary_sim_v1 and tda_module_v1, not tools modules. In the current interpreter, importing tools and tools.runtime_authority succeeds."
+    },
+    {
+      "id": "SYS-AUDIT-010",
+      "classification": "INSUFFICIENT_EVIDENCE",
+      "disposition": "With no root pytest config, broad traversal is possible, but the reproduced collect-only output did not show traversal into outputs/ or results/."
+    },
+    {
+      "id": "SYS-AUDIT-011",
+      "classification": "CONFIRMED_LIVE_DEFECT",
+      "disposition": "GEMINI.md is a live instruction-authority surface and contains mojibake in canonical governance text."
+    },
+    {
+      "id": "SYS-AUDIT-012",
+      "classification": "NON_AUTHORITATIVE_SURFACE",
+      "disposition": "MATH_PROGRAM_NARRATIVE.md contains over-escalated language, but the surface is already classified EXPLICIT_NON_AUTHORITATIVE."
+    }
+  ],
+  "existing_ambiguity_mapping_candidates": [
+    {
+      "finding_id": "SYS-AUDIT-006",
+      "ambiguity_id": "AMB-GOV-SURF-1057",
+      "surface": "registry/db/acellorator_index.sqlite::db_snapshot_freshness_view",
+      "basis": "Existing global ambiguity record already tracks the non-authoritative freshness view."
+    },
+    {
+      "finding_id": "SYS-AUDIT-007",
+      "ambiguity_id": "AMB-GOV-SURF-1042",
+      "surface": "registry/db/acellorator_index.sqlite::claim_evidence_links",
+      "basis": "Existing global ambiguity record already tracks the non-authoritative claim_evidence_links table."
+    }
+  ],
+  "potential_new_governance_gaps": [
+    {
+      "topic": "Validation reduction semantics",
+      "reason": "Current reducer behavior conflicts with the fail-closed prohibition on treating skipped as pass and with oversight transparency rules for warning collapse."
+    },
+    {
+      "topic": "Minimum substantive work semantics for stage PASS",
+      "reason": "engine_validation and stage_results currently allow zero-work or uncounted-work PASS states without an explicit governed contract."
+    },
+    {
+      "topic": "Supported pytest environment contract",
+      "reason": "requirements files exist, but the authoritative test execution environment and import model remain under-specified."
+    }
+  ],
+  "confirmed_live_defects": [
+    "SYS-AUDIT-001",
+    "SYS-AUDIT-003",
+    "SYS-AUDIT-004",
+    "SYS-AUDIT-011"
+  ],
+  "non_defects": [
+    "SYS-AUDIT-005",
+    "SYS-AUDIT-006",
+    "SYS-AUDIT-007",
+    "SYS-AUDIT-012"
+  ],
+  "insufficiently_evidenced_findings": [
+    "SYS-AUDIT-009",
+    "SYS-AUDIT-010"
+  ],
+  "minimal_future_remediation_sequence": [
+    {
+      "order": 1,
+      "scope": "Validation reducer semantics",
+      "goal": "Make VALIDATION_REDUCTION_AUTHORITY fail-closed for skipped required stages and stop collapsing warning states into undifferentiated PASS."
+    },
+    {
+      "order": 2,
+      "scope": "Stage accounting semantics",
+      "goal": "Define and enforce substantive-work counters for engine_validation and stage_results, especially math_program_validation."
+    },
+    {
+      "order": 3,
+      "scope": "Validation environment contract",
+      "goal": "State one supported pytest environment and package-resolution contract before treating collection failures as repository defects."
+    },
+    {
+      "order": 4,
+      "scope": "Authoritative instruction text hygiene",
+      "goal": "Repair mojibake on GEMINI.md after a bounded authority-safe content patch."
+    },
+    {
+      "order": 5,
+      "scope": "DB-side optional contracts",
+      "goal": "Decide whether claim_evidence_links population and DB freshness must become required validation gates or remain advisory/generated-state observations."
+    }
+  ],
+  "stop_conditions": [
+    "No authority-bearing files were modified.",
+    "No database contents or schemas were modified.",
+    "No dependencies were installed.",
+    "No validation authority or reduction authority was changed.",
+    "Q1 local queue remained at zero.",
+    "Global blocking ambiguity count remained 487.",
+    "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002 remained PARTIAL with authority effect NONE.",
+    "Full project validation remained suspended."
+  ]
+}

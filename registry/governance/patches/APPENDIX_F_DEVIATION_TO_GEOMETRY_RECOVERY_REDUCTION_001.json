@@ -1,0 +1,59 @@
+{
+  "patch_id": "APPENDIX_F_DEVIATION_TO_GEOMETRY_RECOVERY_REDUCTION_001",
+  "status": "APPLIED_VALIDATED",
+  "date": "2026-07-20",
+  "objective": "Reduce the Appendix F Deviation-to-Geometry Recovery obligation by defining a provisional projection route from RT deviation to distance-like projection, organized distance-like structure, and geometry_app through Pi_geo legality.",
+  "governance_context": {
+    "task": "APPENDIX_F_DEVIATION_TO_GEOMETRY_RECOVERY_REDUCTION_001",
+    "db_runtime_queried": true,
+    "db_decision": "allow",
+    "db_health": "pass",
+    "authority_state": "allow",
+    "freshness_state": "fresh",
+    "remaining_advisory": "resolve_patch_chain"
+  },
+  "direct_reduction": {
+    "appendix_f_item": "Deviation-to-Geometry Recovery",
+    "old_status": "OPEN",
+    "new_status": "PROVISIONALLY_FORMALIZED_PENDING_VALIDATION",
+    "projection_route": "Dev_RT --Pi_dist[R,B,O,A_adm]--> Dist_like --Org_a--> OrgDist --Pi_geo--> geometry_app",
+    "claim_cap": "THEORETICAL_ONLY"
+  },
+  "source_basis": [
+    "docs/textbook/mono_process_textbook_complete.md#3.4A",
+    "docs/textbook/mono_process_textbook_complete.md#11.4A",
+    "registry/math/geo_projection_legality_definitions.json",
+    "registry/math/operator_registry.json"
+  ],
+  "non_promotion_boundaries": [
+    "Does not prove geometry recovery.",
+    "Does not define physical geometry.",
+    "Does not define Euclidean distance.",
+    "Does not introduce metric units.",
+    "Does not modify RT_core.",
+    "Does not promote geometry_app to primitive status."
+  ],
+  "validation": {
+    "status": "passed_with_warning_global_health",
+    "commands": [
+      "python scripts/governance/authorize_lock_update.py",
+      "python scripts/sync_math_registry.py",
+      "python scripts/db/snapshot_registries.py",
+      "python scripts/global_validate.py"
+    ],
+    "results": {
+      "json_parse": "pass",
+      "authorize_lock_update": "pass",
+      "sync_math_registry": "pass_179_items",
+      "db_snapshot_refresh_id": "REFRESH-20260720T005803735297Z",
+      "db_snapshot_warnings": [],
+      "global_validate_exit_code": 0,
+      "global_health_overall_status": "warning",
+      "failed_stages": [],
+      "missing_required_stages": [],
+      "runtime_failures": [],
+      "tooling_failures": [],
+      "semantic_failures": []
+    }
+  }
+}

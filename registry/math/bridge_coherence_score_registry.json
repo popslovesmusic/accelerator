@@ -1,0 +1,62 @@
+{
+  "patch_id": "MPF-PALG-045",
+  "name": "Bridge Coherence Score Registry",
+  "status": "active",
+  "metric_status": "METRICS_SCAFFOLD_ONLY",
+  "purpose": "Define analog-only coherence scores for comparing projection alignment without implying identity, source recovery, or unification.",
+  "source_relation": "(E≠0) ⇔R δ(E>0)",
+  "non_separability_acknowledged": true,
+  "no_unification_guardrail": "no QM/GR unification, derivation, replacement, or physics claim; only analog projection behavior",
+  "governance_status": {
+    "theorem_status": "NOT_PROVEN",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL"
+  },
+  "metrics": [
+    {
+      "metric_id": "shared_trace_score",
+      "definition": "Measures the alignment of source-relation pointers between compared projections.",
+      "calculation": "score based on trace-link identity and metadata consistency"
+    },
+    {
+      "metric_id": "feature_overlap_score",
+      "definition": "Quantifies the structural similarity between retained features in distinct domains.",
+      "calculation": "set-theoretic similarity of normalized feature sets"
+    },
+    {
+      "metric_id": "loss_compatibility_score",
+      "definition": "Evaluates whether the losses in one domain are consistent with the preserved features in the other (differential check).",
+      "calculation": "cross-match of preserved vs lost features across domains"
+    },
+    {
+      "metric_id": "recoverability_alignment_score",
+      "definition": "Measures if compared projections share a consistent recoverability class or target context.",
+      "value_type": "float"
+    },
+    {
+      "metric_id": "coherence_without_identity_score",
+      "definition": "A composite score reflecting alignment while penalizing claims that drift toward identity or unification.",
+      "calculation": "weighted sum of other scores minus identity_language_penalty"
+    }
+  ],
+  "coherence_requirements": [
+    "shared_trace_score >= 0.9",
+    "feature_overlap_score >= 0.4",
+    "coherence_without_identity_score <= 0.8"
+  ],
+  "governance_rules": [
+    {
+      "rule_id": "BCS-RULE-001",
+      "rule": "Coherence scores are indicators of analog alignment, not source truth."
+    },
+    {
+      "rule_id": "BCS-RULE-002",
+      "rule": "Score results cannot be used as theorem evidence for unification."
+    }
+  ],
+  "forbidden_claims": [
+    "High coherence scores prove source identity.",
+    "Feature overlap derives shared physical laws.",
+    "Compatibility scores eliminate the need for conflict preservation."
+  ]
+}

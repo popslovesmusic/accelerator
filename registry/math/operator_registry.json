@@ -1,0 +1,546 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Registry for operators, domains, codomains, and composition semantics.",
+    "status": "provisional"
+  },
+  "operators": [
+    {
+      "symbol": "Transition_Operator",
+      "name": "Transition Operator",
+      "domain": [
+        "process_state"
+      ],
+      "codomain": [
+        "process_state"
+      ],
+      "arity": "unary",
+      "orientation_requirements": [
+        "orientation_frame"
+      ],
+      "residue_constraints": [
+        "residue_state"
+      ],
+      "composition_rules": [
+        "sequential"
+      ],
+      "closure_status": "partial",
+      "known_failures": [],
+      "open_questions": [],
+      "provisional_status": true
+    },
+    {
+      "symbol": "Pi_A",
+      "name": "Admissibility Projection",
+      "domain": [
+        "process_state",
+        "admissibility_window"
+      ],
+      "codomain": [
+        "process_state"
+      ],
+      "arity": "binary",
+      "orientation_requirements": [
+        "orientation_frame"
+      ],
+      "closure_status": "conditional",
+      "closure_condition": "Pi_A maps any admissible input candidate into the declared admissibility_window codomain when the admissibility window is non-empty, stable under the projection rule, and residue/orientation constraints are satisfied.",
+      "known_failure_modes": [
+        "FM-001",
+        "FM-006",
+        "FM-007",
+        "FM-004",
+        "FM-011"
+      ],
+      "open_questions": [],
+      "provisional_status": true
+    },
+    {
+      "symbol": "NavT",
+      "name": "Transport Operator",
+      "domain": [
+        "process_state"
+      ],
+      "codomain": [
+        "csi_domain"
+      ],
+      "arity": "unary",
+      "orientation_requirements": [
+        "orientation_frame"
+      ],
+      "closure_status": "partial",
+      "known_failures": [],
+      "open_questions": [],
+      "provisional_status": true
+    },
+    {
+      "symbol": "residue_update",
+      "name": "Residue Update Operator",
+      "domain": [
+        "residue_state",
+        "process_state",
+        "continuation_event"
+      ],
+      "codomain": [
+        "residue_state"
+      ],
+      "arity": "binary",
+      "closure_status": "partial",
+      "known_failures": [],
+      "open_questions": [],
+      "provisional_status": true
+    },
+    {
+      "symbol": "delta",
+      "name": "delta_continuation_operator",
+      "role": "actualization_or_continuation_operator",
+      "domain": [
+        "process_state",
+        "residue_state",
+        "orientation_frame",
+        "admissibility_window",
+        "non_null_mismatch_condition"
+      ],
+      "codomain": [
+        "continuation_event"
+      ],
+      "arity": "n-ary",
+      "closure_status": "partial",
+      "proof_status": "none",
+      "known_failure_modes": [
+        "empty_admissible_domain",
+        "non_unique_continuation",
+        "orientation_conflict",
+        "residue_divergence",
+        "threshold_instability"
+      ],
+      "selection_rules": "registry/math/delta_selection_registry.json",
+      "open_questions": [],
+      "provisional_status": true
+    },
+    {
+      "symbol": "orientation_minimization",
+      "name": "Orientation Minimization Operator",
+      "domain": [
+        "continuation_space",
+        "orientation_frame"
+      ],
+      "codomain": [
+        "continuation_event"
+      ],
+      "arity": "binary",
+      "closure_status": "partial",
+      "proof_status": "none",
+      "known_failure_modes": [
+        "OFM-001",
+        "OFM-002",
+        "OFM-003",
+        "OFM-008"
+      ],
+      "open_questions": [],
+      "provisional_status": true
+    },
+    {
+      "symbol": "⇔_R",
+      "name": "Residue-Conditioned Closure Relation",
+      "arity": "binary",
+      "core_expression": "(ℰ≠0) ⇔_R δ(ℰ>0)",
+      "input_domain": {
+        "epsilon": "ℰ≠0",
+        "description": "Non-null mismatch/pressure condition"
+      },
+      "output_domain": {
+        "delta": "δ(ℰ>0)",
+        "description": "Governed continuation actualization under pressure"
+      },
+      "governance_rule": "residue-conditioned closure",
+      "closure_constraints": [
+        "Block decomposition into independent left/right claims without full-relation trace"
+      ],
+      "closure_status": "typed",
+      "provisional_status": true
+    },
+    {
+      "symbol": "\u21d4_x",
+      "name": "Projectional Equivalence Operator",
+      "arity": "n-ary",
+      "definition": "Bidirectional preservation of declared operational invariants across distinct domains or representations.",
+      "input_domain": [
+        "representation_A",
+        "representation_B",
+        "invariant_set_I"
+      ],
+      "codomain": [
+        "boolean_equivalence_status"
+      ],
+      "governance_status": "C2_scaffold",
+      "required_registry": "registry/invariant_registry.json",
+      "multi_invariant_form": "(A) \u21d4x[{I_k}] (B)",
+      "closure_status": "scaffolded",
+      "provisional_status": true
+    },
+    {
+      "symbol": "aRT",
+      "name": "Higher-Order RT Operator",
+      "definition": "Governs the membership and closure of recursively contained RT sets.",
+      "arity": "unary",
+      "provisional_status": true
+    },
+    {
+      "symbol": "O_calculus",
+      "name": "Orientation Calculus Operator",
+      "definition": "Governs orientation transformations over RT/aRT structures.",
+      "arity": "n-ary",
+      "provisional_status": true
+    },
+    {
+      "symbol": "otimes",
+      "name": "Typed Partial Composition Operator",
+      "definition": "Typed partial relational composition operator X otimes_Y Z. It couples declared typed operands under a declared context without identity collapse; the projection-window specialization is Pi_A otimes_intersection Pi_B := Pi_(A intersection B).",
+      "domain": [
+        "typed_operand_X",
+        "typed_operand_Z",
+        "declared_composition_context_Y"
+      ],
+      "codomain": [
+        "lawful_RT_candidate",
+        "lawful_aRT_candidate",
+        "typed_closure_candidate",
+        "undefined_composition"
+      ],
+      "arity": "binary",
+      "closure_status": "conditional",
+      "governance_status": "C1_DEFINED_PROVISIONAL",
+      "source_registry": "registry/math/otimes_typed_partial_composition_registry.json",
+      "negative_constraints": [
+        "not_standard_tensor_product",
+        "not_logical_and",
+        "not_scalar_product",
+        "not_untyped_interference_rule",
+        "does_not_imply_identity_preservation",
+        "commutativity_not_assumed",
+        "associativity_context_bound_only"
+      ],
+      "provisional_status": true
+    },
+    {
+      "symbol": "iff_s",
+      "name": "Statistical Projection Operator",
+      "definition": "Maps process structure to statistical observables.",
+      "arity": "binary",
+      "provisional_status": true
+    },
+    {
+      "symbol": "|",
+      "name": "Distinction-Preserving Comparison Operator",
+      "definition": "Compares one typed process-aspect to another while preserving non-collapse sufficient for distinction generation.",
+      "domain": [
+        "typed_process_aspect",
+        "typed_process_aspect"
+      ],
+      "codomain": [
+        "comparison_interface"
+      ],
+      "arity": "binary",
+      "closure_status": "conditional",
+      "closure_condition": "A|B becomes mathematically active only when evaluated by D or a registered successor comparison context.",
+      "known_failure_modes": [
+        "identity_collapse",
+        "untyped_operand",
+        "admissibility_failure",
+        "memory_object_reification"
+      ],
+      "negative_constraints": [
+        "not_logical_or",
+        "not_division",
+        "not_mere_separator",
+        "not_memory_object"
+      ],
+      "governance_status": "C1_DEFINED_TO_C2_TESTABLE_CANDIDATE",
+      "provisional_status": true
+    },
+    {
+      "symbol": "delta_a",
+      "name": "Admissibility Filter Operator",
+      "definition": "Filters a comparison block, yielding only the subset accepted as a lawful comparison object.",
+      "arity": "unary",
+      "provisional_status": true
+    },
+    {
+      "symbol": "S",
+      "name": "Sequential Pruning Operator",
+      "definition": "Internal delta_a stage that prunes a candidate continuation set before realization arbitration.",
+      "domain": [
+        "continuation_space",
+        "residue_state",
+        "orientation_frame",
+        "admissibility_window"
+      ],
+      "codomain": [
+        "continuation_space"
+      ],
+      "arity": "n-ary",
+      "closure_status": "conditional",
+      "governance_status": "VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT",
+      "branch_pruning_rules": "registry/math/branch_pruning_registry.json",
+      "known_failure_modes": [
+        "BFM-003",
+        "BFM-004",
+        "BFM-009"
+      ],
+      "negative_constraints": [
+        "does_not_select_realized_continuation",
+        "does_not_increase_candidate_set_cardinality",
+        "does_not_depend_on_post_realization_outcomes"
+      ],
+      "provisional_status": true
+    },
+    {
+      "symbol": "Arb_A",
+      "name": "Admissibility-Governed Arbitration",
+      "definition": "Selection stage operating only on the S-pruned candidate set C_t^S to realize one continuation event.",
+      "domain": [
+        "continuation_space",
+        "residue_state",
+        "orientation_frame"
+      ],
+      "codomain": [
+        "continuation_event"
+      ],
+      "arity": "n-ary",
+      "closure_status": "conditional",
+      "selection_rules": "registry/math/delta_selection_registry.json",
+      "known_failure_modes": [
+        "DSFM-001",
+        "DSFM-002",
+        "DSFM-005",
+        "DSFM-006"
+      ],
+      "provisional_status": true
+    },
+    {
+      "symbol": "<*>_x",
+      "name": "Typed Relational Comparison Operator",
+      "definition": "Composes conditioned distinctions: <a>_b <*>_x <c>_d.",
+      "arity": "binary",
+      "provisional_status": true
+    },
+    {
+      "symbol": "K_R",
+      "name": "Directional Relational Amplitude",
+      "definition": "Reference-relative pre-squared carrier for Affect-to-Effect directionality. K_R(A -> E) records represented directional compatibility before bounded projection by squared magnitude.",
+      "domain": [
+        "affect_condition_A",
+        "effect_condition_E",
+        "reference_condition_R",
+        "boundary_condition_B",
+        "orientation_condition_O",
+        "representation_map_M_R"
+      ],
+      "codomain": [
+        "directional_amplitude_value"
+      ],
+      "arity": "n-ary",
+      "canonical_form": "K_R(A -> E; B,O,M_R)",
+      "bounded_projection": "P_R(E <- A) = |K_R(A -> E; B,O,M_R)|^2",
+      "directionality_rule": "K_R(A -> E) and K_R(E -> A) are not interchangeable unless an explicit symmetry condition on reference, boundary, orientation, and representation is declared.",
+      "metadata_requirements": [
+        "reference_condition",
+        "boundary_condition",
+        "orientation_condition",
+        "representation_map",
+        "overlap_or_amplitude_rule"
+      ],
+      "closure_status": "provisional_formal_definition",
+      "known_failure_modes": [
+        "symmetric_overlap_used_as_full_realization_process",
+        "missing_representation_map",
+        "missing_reference_boundary_orientation_metadata",
+        "probability_language_without_normalization",
+        "raw_RT_condition_treated_as_quantum_state"
+      ],
+      "negative_constraints": [
+        "not_probability_by_default",
+        "not_quantum_state_identity",
+        "not_symmetric_unless_declared",
+        "not_identical_to_qualitative_AE_relation"
+      ],
+      "source_patch": "APPENDIX_F_AE_DIRECTIONALITY_FORMALIZATION_001",
+      "source_bridge": "OPEN_BRIDGE_AE_OVERLAP_001",
+      "provisional_status": true
+    },
+    {
+      "symbol": "Pi_geo",
+      "name": "Topology-Geometry Projection Operator",
+      "definition": "Candidate projection operator for scope-bound topology-to-geometry reduction under the registered projection-legality gate.",
+      "domain": [
+        "process_state",
+        "orientation_frame"
+      ],
+      "codomain": [
+        "process_state"
+      ],
+      "arity": "unary",
+      "closure_status": "conditional",
+      "known_failure_modes": [
+        "distinction_alias",
+        "admissibility_violation",
+        "orientation_trace_loss",
+        "closure_trace_loss_or_alias"
+      ],
+      "source_registry": "registry/math/geo_projection_legality_definitions.json",
+      "provisional_status": true
+    },
+    {
+      "symbol": "Pi_dist",
+      "name": "Deviation-to-Distance-Like Projection",
+      "definition": "Projection from declared RT deviation context to a distance-like representation when reference, boundary, orientation, and admissibility metadata remain recoverable.",
+      "domain": [
+        "rt_deviation_class",
+        "reference_condition",
+        "boundary_condition",
+        "orientation_condition",
+        "admissibility_context"
+      ],
+      "codomain": [
+        "distance_like_projection",
+        "continuation_failure"
+      ],
+      "arity": "n-ary",
+      "canonical_form": "Pi_dist(Dev_RT; R,B,O,A_adm) -> Dist_like | bottom_C^{trace}",
+      "closure_status": "provisional_formal_definition",
+      "known_failure_modes": [
+        "missing_reference_condition",
+        "missing_boundary_condition",
+        "missing_orientation_condition",
+        "missing_admissibility_context",
+        "metric_reification",
+        "geometry_reification"
+      ],
+      "negative_constraints": [
+        "not_Euclidean_distance_operator",
+        "not_metric_manifold_operator",
+        "not_physical_space_operator",
+        "not_scalar_magnitude_by_default",
+        "not_geometry_by_itself"
+      ],
+      "source_registry": "registry/math/deviation_geometry_recovery_registry.json",
+      "source_patch": "APPENDIX_F_DEVIATION_TO_GEOMETRY_RECOVERY_REDUCTION_001",
+      "provisional_status": true
+    },
+    {
+      "symbol": "recoupling",
+      "name": "Residue-Mediated Recoupling Operator",
+      "definition": "Restores admissible coupling after decoupling when residue context and admissibility windows permit a governed transition.",
+      "domain": [
+        "process_state",
+        "residue_state",
+        "orientation_frame"
+      ],
+      "codomain": [
+        "continuation_event"
+      ],
+      "arity": "binary",
+      "closure_status": "conditional",
+      "known_failure_modes": [
+        "memoryless_reopening",
+        "residue_as_independent_agent",
+        "unscoped_orientation_conflict",
+        "missing_admissibility_window_change"
+      ],
+      "source_registry": "registry/residue_mediated_recoupling_registry.json",
+      "provisional_status": true
+    },
+    {
+      "symbol": "<g>_y",
+      "name": "Typed-Zero Recoupling Relation",
+      "definition": "Typed meta-relation family instance governing recoupling between complete typed-zero provenance carriers TZR(0_minus) and TZR(0_plus) under declared context y.",
+      "domain": [
+        "typed_zero_provenance_carrier",
+        "typed_zero_provenance_carrier",
+        "recoupling_context_y"
+      ],
+      "codomain": [
+        "RT_admissible_candidate",
+        "0_untyped"
+      ],
+      "arity": "binary_with_context",
+      "canonical_form": "TZR(0_minus) <g>_y TZR(0_plus)",
+      "closure_status": "provisional_formal_definition",
+      "known_failure_modes": [
+        "missing_source_trace",
+        "missing_polarity",
+        "same_polarity_recoupling",
+        "missing_admissibility_context",
+        "identity_collapse",
+        "carrier_reified_as_zero_object"
+      ],
+      "negative_constraints": [
+        "not_new_primitive",
+        "not_identity_relation",
+        "not_support_without_PRIN_001_trace",
+        "not_bridge_promotion"
+      ],
+      "source_registry": "registry/math/typed_zero_provenance_registry.json",
+      "source_patch": "APPENDIX_F_TYPED_ZERO_PROVENANCE_FORMALIZATION_001",
+      "provisional_status": true
+    },
+    {
+      "symbol": "H_adm",
+      "name": "Admissibility-Preserving Handoff",
+      "definition": "Typed cross-domain handoff operator that carries an unresolved continuation candidate across a declared projection boundary only when domain-transition typing, admissibility context, trace invariants, and orientation-reference continuity are preserved.",
+      "domain": [
+        "unresolved_continuation",
+        "domain_transition_type"
+      ],
+      "codomain": [
+        "unresolved_continuation",
+        "continuation_failure"
+      ],
+      "arity": "binary",
+      "canonical_form": "H_adm(UC_i, tau_{i->j}) -> UC_j | bottom_C^{type} | bottom_C^{adm} | bottom_C^{trace}",
+      "closure_status": "provisional_formal_definition",
+      "known_failure_modes": [
+        "missing_domain_transition_type",
+        "missing_projection_boundary",
+        "admissibility_context_mismatch",
+        "trace_invariant_loss",
+        "orientation_reference_discontinuity",
+        "identity_survival_claim"
+      ],
+      "negative_constraints": [
+        "not_time_evolution_operator",
+        "not_observer_persistence_operator",
+        "not_consciousness_persistence_operator",
+        "not_identity_survival_operator",
+        "not_empirical_continuity_claim"
+      ],
+      "source_registry": "registry/math/cross_domain_continuation_trace_registry.json",
+      "source_patch": "APPENDIX_F_CROSS_DOMAIN_CONTINUATION_TRACE_001",
+      "provisional_status": true
+    },
+    {
+      "symbol": "Org_a",
+      "name": "Admissible Organization Operator",
+      "definition": "Organizes admissible distinction participation over a typed process graph while preserving inventory, admissibility, and orientation consistency.",
+      "domain": [
+        "process_state",
+        "orientation_frame",
+        "admissibility_window"
+      ],
+      "codomain": [
+        "process_state"
+      ],
+      "arity": "n-ary",
+      "closure_status": "conditional",
+      "known_failure_modes": [
+        "inventory_loss",
+        "admissibility_violation",
+        "orientation_drift",
+        "scope_overextension"
+      ],
+      "source_registry": "registry/math/topological_organization_registry.json",
+      "provisional_status": true
+    }
+  ]
+}

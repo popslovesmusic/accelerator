@@ -1,0 +1,119 @@
+{
+  "packet_id": "D_DEPENDENT_PATCH_GATE_REEVALUATION_20260728_001",
+  "diagnostic_id": "DIAG_D_DEPENDENT_PATCH_GATE_REEVALUATION_20260728_001",
+  "execution_timestamp": "2026-07-28T06:51:35.169907Z",
+  "repository_head_before": "646065a84052c0e2956e5d249460ee01fd098421",
+  "repository_head_after": "646065a84052c0e2956e5d249460ee01fd098421",
+  "repository_status_before": {
+    "existing_changes_preserved": true,
+    "metadata_mutation": false,
+    "protected_work_preserved": true
+  },
+  "protected_artifact_hash_verification": {
+    "result": "PASS",
+    "observed": {
+      "source_definition": "7560FDB4FED62DA3FC6096250C9412F777A6830FA3471C68F898B0BAB35860BF",
+      "source_patch": "844F321EF9DCB17FA3C06331A76F0A1AE275D9F409C75ADCC37E52E8B8DB26EC",
+      "derive_definition": "44D98661CB177CAF4BCE747A0BE4AA3E7831836AD0C1A1F928DFA2BC57992860",
+      "derive_patch": "32E2B1393B794C6B6141FDE3DAD104F6A5BEC94E9288BF8E8398C37B4A783B51",
+      "valid_token_definition": "578D0F6DEDBD5DAA6B3B41A578A273E47F3264A80311C55292DA9C8FC733845F",
+      "valid_token_patch": "259BD67F4644CE5CBC311B88F309BB47E8A0B18716606EDA9DF5FC48C6B5FDB3",
+      "indexer": "04B0E5793D83E2360B79DDA91A945B3B7B9FBAF1FC2D65BCF604CCD6D003DB3D",
+      "indexer_test": "B68CB0FBF0A7BE406ABF5D2EAB2FC8996B754AD193F612EB2FF1D27E9567413D"
+    }
+  },
+  "patch_gate_implementation_path": "scripts/query_governance.py",
+  "patch_gate_implementation_sha256": "4AD3CDC2D2E33D47C89C9BFB23EACF9A0A7A6CE813839DEA43C9B6045D2B0E6F",
+  "patch_chain_evaluator_path": "scripts/query_governance.py::build_patch_chain_result",
+  "patch_chain_evaluator_sha256": "4AD3CDC2D2E33D47C89C9BFB23EACF9A0A7A6CE813839DEA43C9B6045D2B0E6F",
+  "patch_chain_applied_semantics": {
+    "normalizer": "normalize_patch_chain_status",
+    "condition": "raw status applied or approved normalizes to applied; APPLIED_VALIDATED is not recognized and normalizes to unknown",
+    "dependent_satisfaction_condition": "dependency_requirement_is_satisfied returns true for REQUIRES_COMPLETED_PREDECESSOR exactly when dep_status == applied",
+    "already_applied_gate_condition": "patch_already_resolved is true when patch_chain.status is applied or late_registered",
+    "decision_mapping": "build_patch_chain_result returns decision defer and reason Patch is already applied for status applied",
+    "classification": "SATISFIED_ALREADY_APPLIED_NONBLOCKING_DEFER"
+  },
+  "dependency_satisfaction_semantics": {
+    "source_as_derive_predecessor": "satisfied=true",
+    "source_dependency_status": "applied",
+    "source_dependency_decision": "defer",
+    "interpretation": "Dependency satisfaction consumes status applied, not the predecessor gate decision."
+  },
+  "source_gate_existing_result": {
+    "decision": "defer",
+    "reason": "Deferred pending: patch_chain_applied",
+    "patch_chain_status": "applied",
+    "blocking_conditions": [],
+    "defer_conditions": ["patch_chain_applied"],
+    "decision_id": "DEC-12F423260210",
+    "classification_basis": "An already-applied patch is non-blocking for dependency purposes; defer reflects requested-action/authority eligibility rather than lifecycle invalidity."
+  },
+  "source_gate_classification": "SATISFIED_ALREADY_APPLIED_NONBLOCKING_DEFER",
+  "derive_gate_command": "python scripts/query_governance.py patch-gate --patch-id PATCH_D_DERIVE_REL_C_20260727_001 --target registry/governance/patches/PATCH_D_DERIVE_REL_C_20260727_001.json --level governance",
+  "derive_gate_result": {
+    "decision": "defer",
+    "reason": "Deferred pending: patch_chain_unknown, authority_deferred_target:docs/theory/foundational/5_03_26 unity/math/notes/d_derive_rel_c_definition_20260727_001.json, authority_deferred_target:registry/math/dependency_graph_registry.json, authority_deferred_target:registry/induction_registry.json, authority_deferred_target:governance/live/induction_queue.json",
+    "blocking_conditions": [],
+    "defer_conditions": [
+      "patch_chain_unknown",
+      "authority_deferred_target:docs/theory/foundational/5_03_26 unity/math/notes/d_derive_rel_c_definition_20260727_001.json",
+      "authority_deferred_target:registry/math/dependency_graph_registry.json",
+      "authority_deferred_target:registry/induction_registry.json",
+      "authority_deferred_target:governance/live/induction_queue.json"
+    ],
+    "patch_chain_status": "unknown",
+    "predecessor_states": {
+      "PATCH_D_SOURCE_RELATION_C_20260727_001": {
+        "status": "applied",
+        "decision": "defer",
+        "satisfied": true
+      }
+    }
+  },
+  "derive_gate_decision_id": "DEC-DFE6B98DEBF8",
+  "derive_gate_external_evidence": {
+    "path": "outputs/governance/evidence/PATCH_D_DERIVE_REL_C_20260727_001/20260728T065038.335920Z_evidence.json",
+    "sha256": "450e72f0e95b9050e4e27e04a4d0a5613a2d759db54993843dd0f1207f0ccb0d"
+  },
+  "derive_gate_classification": "SOURCE_SATISFIED_DERIVE_METADATA_BLOCKED",
+  "valid_token_gate_executed": false,
+  "valid_token_gate_command": "python scripts/query_governance.py patch-gate --patch-id PATCH_D_VALID_REL_TOKEN_C_20260727_001 --target registry/governance/patches/PATCH_D_VALID_REL_TOKEN_C_20260727_001.json --level governance",
+  "valid_token_gate_result": "NOT_EXECUTED_DERIVE_NOT_SATISFIED",
+  "valid_token_gate_decision_id": null,
+  "valid_token_gate_external_evidence": null,
+  "valid_token_gate_classification": "NOT_APPLICABLE",
+  "complete_patch_chain_classification": "SOURCE_SATISFIED_DERIVE_METADATA_BLOCKED",
+  "registry_alignment_result": "PASS",
+  "global_validation_result": "PASS",
+  "database_snapshot_refresh_id": "REFRESH-20260728T065135149903Z",
+  "final_freshness_result": "FRESH_ALLOW",
+  "runtime_governance_check_result": "PASS",
+  "claim_level_after": "C1_DEFINED_PROVISIONAL",
+  "OBL-D-001D_status_after": "OPEN",
+  "OBL-D-001E_status_after": "OPEN",
+  "Notebook_22_status_after": "C2_LIMITATION_OR_NEGATIVE_RESULT_UNCHANGED",
+  "authorized_query_side_effects": {
+    "source_gate": "PRESERVED",
+    "derive_gate": "PRESERVED",
+    "valid_token_gate": "NOT_EXECUTED",
+    "surfaces": [
+      "registry/db/acellorator_index.sqlite::governance_decision_log",
+      "registry/db/acellorator_index.sqlite::governance_events",
+      "outputs/governance/evidence/PATCH_D_SOURCE_RELATION_C_20260727_001/",
+      "outputs/governance/evidence/PATCH_D_DERIVE_REL_C_20260727_001/"
+    ]
+  },
+  "protected_surface_diff_summary": "No definitions, patch metadata, lifecycle records, ledger entries, dependencies, obligations, claim level, witness, project_w, Notebook 22, RT_core, indexer, or indexer tests were modified.",
+  "unexpected_mutations": {
+    "result": "NONE_RETAINED",
+    "details": "The post-query global validation generated unrelated tracked output drift; 199 such files were restored. Existing user changes and authorized gate evidence were preserved."
+  },
+  "repository_status_after": {
+    "head_unchanged": true,
+    "commit_created": false,
+    "metadata_mutation": false,
+    "protected_work_preserved": true
+  },
+  "final_result": "PASS_SOURCE_SATISFIED_DERIVE_BLOCKED"
+}

@@ -1,0 +1,92 @@
+{
+  "patch_id": "PATCH_DB_GOVERNANCE_RUNTIME_017",
+  "campaign_id": "CAMPAIGN_DB_GOVERNANCE_RUNTIME_001",
+  "campaign": "CAMPAIGN_DB_GOVERNANCE_RUNTIME_001",
+  "type": "governance_runtime_extension",
+  "status": "APPLIED",
+  "applied_on": "2026-07-07T00:49:20.5527834-04:00",
+  "mode": "additive",
+  "title": "Docs Governance JSON Authority Resolution Sync",
+  "goal": "Resolve docs/governance/*.json surfaces through the live authority view while keeping the runtime fallback aligned.",
+  "problem": {
+    "current_state": "The DB authority view handled registry and markdown governance surfaces, but docs/governance JSON execution artifacts still depended on fallback-only resolution.",
+    "gap": "Agents could see the JSON artifacts in governance records but could not resolve them as first-class governed docs through the DB authority view."
+  },
+  "objectives": [
+    "Add a docs/governance/*.json authority row to authority_resolution_view.",
+    "Keep the Python fallback aligned with the same docs authority rule.",
+    "Preserve registry canonical authority and RT_core invariance.",
+    "Record the change as an applied governance artifact."
+  ],
+  "basis": {
+    "source_patches": [
+      "PATCH_PI_RT_CALCULUS_054",
+      "PATCH_DB_GOVERNANCE_RUNTIME_003"
+    ],
+    "source_surfaces": [
+      "registry/db/migrations/20260703_governance_runtime_authority_resolution_003.sql",
+      "scripts/query_governance.py",
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_054.json"
+    ],
+    "scope": "Formalize the DB runtime authority sync for governance JSON execution artifacts without changing canonical registry ownership or RT_core."
+  },
+  "target_files": [
+    "registry/db/migrations/20260703_governance_runtime_authority_resolution_003.sql",
+    "scripts/query_governance.py"
+  ],
+  "required_repo_changes": [
+    {
+      "path": "registry/db/migrations/20260703_governance_runtime_authority_resolution_003.sql",
+      "description": "Add docs/governance/*.json to the authority_resolution_view surface."
+    },
+    {
+      "path": "scripts/query_governance.py",
+      "description": "Mirror docs/governance/*.json resolution in the runtime fallback path."
+    }
+  ],
+  "runtime_changes": {
+    "authority_resolution_view": [
+      "docs/governance/*.json"
+    ],
+    "python_fallback": [
+      "docs/governance/*.json"
+    ]
+  },
+  "registry_updates": [
+    "registry/db/migrations/20260703_governance_runtime_authority_resolution_003.sql",
+    "scripts/query_governance.py",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_DB_GOVERNANCE_RUNTIME_017.json"
+  ],
+  "acceptance_criteria": [
+    "authority command resolves docs/governance JSON surfaces through the DB authority view.",
+    "patch-gate no longer defers on docs/governance JSON surfaces.",
+    "Fallback authority resolution remains aligned with the DB view.",
+    "global_validate.py passes."
+  ],
+  "updated_artifacts": [
+    "registry/db/migrations/20260703_governance_runtime_authority_resolution_003.sql",
+    "scripts/query_governance.py",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_DB_GOVERNANCE_RUNTIME_017.json"
+  ],
+  "summary": {
+    "status": "pass",
+    "runtime": {
+      "db_first_gate": "active",
+      "authority_boundary": "mixed"
+    },
+    "warnings": [
+      "Target-specific authority resolution for docs/governance/*.json is now available; aggregate current-state boundary remains mixed because deeper semantic arbitration is still open."
+    ]
+  },
+  "validation": {
+    "required": [
+      "authority_resolution_view_present",
+      "authority_command_present",
+      "patch_gate_target_authority_resolution_present",
+      "global_validate_pass"
+    ],
+    "result": "pass"
+  }
+}

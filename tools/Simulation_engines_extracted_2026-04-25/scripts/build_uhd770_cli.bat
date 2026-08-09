@@ -16,6 +16,12 @@ icpx -fsycl -DDASE_ENABLE_UHD770_SYCL -DDASE_UHD770_FP32_DEFAULT -DUSE_FFTW3 -O2
   dase_cli\src\analysis_router.cpp ^
   dase_cli\src\engine_fft_analysis.cpp ^
   dase_cli\src\python_bridge.cpp ^
+  src\cpp\igsoa_gw_engine\core\symmetry_field.cpp ^
+  src\cpp\igsoa_gw_engine\core\fractional_solver.cpp ^
+  src\cpp\igsoa_gw_engine\core\source_manager.cpp ^
+  src\cpp\igsoa_gw_engine\core\projection_operators.cpp ^
+  src\cpp\igsoa_gw_engine\core\echo_generator.cpp ^
+  src\cpp\utils\logger.cpp ^
   libfftw3-3.lib ^
   -o "%BIN_DIR%\dase_cli_json_uhd770.exe"
 

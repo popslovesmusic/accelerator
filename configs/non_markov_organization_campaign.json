@@ -1,0 +1,67 @@
+{
+  "campaign_spec": {
+    "id": "MPF_NON_MARKOV_ORGANIZATION_TEST_001",
+    "template_binding": "TPL-NON-MARKOV-ORGANIZATION-001",
+    "critical_open_problem": "Does future admissibility organization depend on accumulated prior deviations, or is it strictly determined by the immediately preceding state (Markov vs. Non-Markov)?",
+    "status": "proposed_for_induction",
+    "hypothesis": {
+      "statement": "Future admissibility organization depends on accumulated prior deviations rather than only the immediately previous state.",
+      "canonical_grounding": [
+        "V_n = F(D_n, δα_n, history[δα_1...δα_{n-1}])"
+      ]
+    },
+    "rigor_mandate": {
+      "level": "C2_TESTABLE_CANDIDATE",
+      "required_tools": [
+        "triadic_closure_substrate_sim_cpp"
+      ],
+      "independent_measurement_count": 2,
+      "minimum_seeds": 4,
+      "backend_preference": "C++"
+    },
+    "test_design": {
+      "strategy": "Non-Markov Memory Dynamics Investigation",
+      "description": "Examine divergence of full-history runs compared to last-state-only, shuffled, and truncated controls.",
+      "tests": [
+        {
+          "id": "last_state_only_control",
+          "name": "Last State Control",
+          "description": "Admissibility transition relies only on the immediately prior state.",
+          "target_observable": "matched_state_divergence"
+        },
+        {
+          "id": "history_shuffle_control",
+          "name": "History Shuffle Control",
+          "description": "The sequence of historical admissibility changes is randomized prior to transition evaluation.",
+          "target_observable": "history_dependence_score"
+        },
+        {
+          "id": "history_truncation_control",
+          "name": "History Truncation Control",
+          "description": "History length is truncated to a small window.",
+          "target_observable": "long_range_constraint_bias"
+        },
+        {
+          "id": "full_history_accumulative_run",
+          "name": "Full History Run",
+          "description": "System transition depends on the complete accumulated history of deviations.",
+          "target_observable": "predictive_gain_from_history"
+        }
+      ]
+    },
+    "falsification_attacks_highest_rigor": {
+      "vectors": [
+        {
+          "id": "FV_NON_MARKOV_INDEPENDENCE",
+          "name": "Markovian Sufficiency Check",
+          "attack": "Compare divergence of full history runs against last-state-only control.",
+          "failure_condition": "Divergence metrics and predictive gains from history are statistically insignificant (below epsilon threshold).",
+          "implication": "The process can be fully modeled as a Markovian system, falsifying the non-Markov cumulative organization hypothesis."
+        }
+      ]
+    },
+    "maximum_supported_claim": {
+      "statement": "Admissibility dynamics exhibit historical dependence, wherein past deviation states condition future organization patterns beyond the last state."
+    }
+  }
+}

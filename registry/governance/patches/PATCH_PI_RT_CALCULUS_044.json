@@ -1,0 +1,203 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_044",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-06",
+  "type": "governance_patch",
+  "artifact_type": "governance_patch",
+  "title": "Recursive / Fixed-Point Interaction",
+  "priority": "HIGH",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_043"
+  ],
+  "mode": "additive",
+  "basis": {
+    "source_patches": [
+      "PATCH_PI_RT_CALCULUS_043"
+    ],
+    "source_surfaces": [
+      "docs/textbook/mono_process_textbook_complete.md",
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_043.json"
+    ],
+    "scope": "Define bounded interaction between recursive continuation semantics and fixed-point semantics without asserting universal convergence or universal reachability."
+  },
+  "core_rule": {
+    "statement": "RecFix(C) is classified as AlignRecFix(C) only when Rec(C), EvalPhi(C), and Fix(C) are declared in compatible continuation domains and bounded under the same evaluation regime; bounded recursive/fixed-point interaction remains diagnostic, and RT_core remains unchanged."
+  },
+  "purpose": "Define the bounded interaction between recursive continuation semantics and fixed-point semantics without asserting that recursion always converges to a fixed point.",
+  "canonical_claims": [
+    {
+      "id": "CLAIM_044_001",
+      "statement": "Recursive/fixed-point interaction is bounded and applies only inside the declared comparison regime.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_044_002",
+      "statement": "AlignRecFix(C) requires equivalent continuation semantics under bounded recursive unfolding and fixed-point evaluation.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_044_003",
+      "statement": "DivRecFix(C) records bounded mismatch without implying universal failure or global divergence.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_044_004",
+      "statement": "FailRecFix(C) classifies interaction failure when typing, boundedness, or comparison cannot be satisfied.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_044_005",
+      "statement": "RT_core remains unchanged.",
+      "status": "canonical"
+    }
+  ],
+  "scope": {
+    "adds": [
+      "Recursive fixed-point interaction layer",
+      "Recursive fixed-point alignment condition",
+      "Recursive fixed-point divergence condition",
+      "Recursive fixed-point interaction failure",
+      "Bounded comparison of recursive and fixed-point semantics"
+    ],
+    "does_not_add": [
+      "Universal recursive convergence",
+      "Universal recursive reachability of fixed points",
+      "Recovery operator",
+      "sigma_RT selector",
+      "Operational regime execution",
+      "RT_core change"
+    ]
+  },
+  "formal_objects": [
+    {
+      "id": "REC_FIX_INTERACTION_044",
+      "symbol": "RecFix(C)",
+      "name": "Recursive Fixed-Point Interaction",
+      "definition": "The bounded semantic relation between recursive continuation evaluation Rec(C) and fixed-point evaluation EvalPhi(C)."
+    },
+    {
+      "id": "REC_FIX_ALIGNMENT_044",
+      "symbol": "AlignRecFix(C)",
+      "name": "Recursive Fixed-Point Alignment",
+      "definition": "The condition where recursive continuation unfolding and fixed-point evaluation preserve the same continuation semantics within the declared bounded regime."
+    },
+    {
+      "id": "REC_FIX_DIVERGENCE_044",
+      "symbol": "DivRecFix(C)",
+      "name": "Recursive Fixed-Point Divergence",
+      "definition": "The classified condition where recursive unfolding does not align with bounded fixed-point evaluation."
+    },
+    {
+      "id": "REC_FIX_FAILURE_044",
+      "symbol": "FailRecFix(C)",
+      "name": "Recursive Fixed-Point Interaction Failure",
+      "definition": "The failure state produced when recursive/fixed-point interaction cannot be typed, bounded, or evaluated under the declared regime."
+    }
+  ],
+  "interaction_rule": {
+    "id": "REC_FIX_INTERACTION_RULE_044",
+    "statement": "RecFix(C) is admitted only when Rec(C), EvalPhi(C), and Fix(C) are declared in compatible continuation domains, bounded under the same evaluation regime, and their evaluated continuation semantics can be compared without altering RT_core."
+  },
+  "alignment_rule": {
+    "id": "REC_FIX_ALIGNMENT_RULE_044",
+    "statement": "AlignRecFix(C) holds when bounded recursive unfolding Rec(C) and bounded fixed-point evaluation EvalPhi(C) preserve equivalent continuation semantics for C."
+  },
+  "divergence_rule": {
+    "id": "REC_FIX_DIVERGENCE_RULE_044",
+    "statement": "DivRecFix(C) holds when Rec(C) is well-formed and bounded, but its recursive unfolding does not preserve equivalent continuation semantics with EvalPhi(C)."
+  },
+  "failure_conditions": [
+    "Rec(C) is undeclared.",
+    "EvalPhi(C) is undeclared.",
+    "C is not typed in a compatible continuation domain.",
+    "Recursive unfolding exceeds its declared bound.",
+    "Fixed-point evaluation exceeds its declared bound.",
+    "Rec(C) and EvalPhi(C) cannot be compared under a shared evaluation regime."
+  ],
+  "non_claims": [
+    "Does not assert that recursion always reaches a fixed point.",
+    "Does not assert that every fixed point is recursively reachable.",
+    "Does not assert universal recursive convergence.",
+    "Does not introduce recovery.",
+    "Does not introduce sigma_RT.",
+    "Does not alter RT_core."
+  ],
+  "deferred_to_future_patches": {
+    "045": "RT Calculus Specification v1.0 Consolidation"
+  },
+  "governance_notes": [
+    "This patch is an interaction layer only.",
+    "It connects Rec(C) and Fix(C) without collapsing them into the same object.",
+    "Alignment, divergence, and failure are distinct outcomes.",
+    "Recursive unfolding remains separate from fixed-point correctness and uniqueness."
+  ],
+  "textbook_changes": {
+    "chapter": "2.3.26",
+    "title": "Recursive / Fixed-Point Interaction",
+    "summary": [
+      "Introduce RecFix(C).",
+      "Define AlignRecFix(C).",
+      "Define DivRecFix(C).",
+      "Define FailRecFix(C).",
+      "Keep universal convergence and reachability deferred."
+    ]
+  },
+  "registry_updates": {
+    "formal_object_registry": [
+      "REC_FIX_INTERACTION_044",
+      "REC_FIX_ALIGNMENT_044",
+      "REC_FIX_DIVERGENCE_044",
+      "REC_FIX_FAILURE_044"
+    ],
+    "math_source_registry": [
+      "PATCH_PI_RT_CALCULUS_044"
+    ],
+    "lexicon_gap_queue": [
+      "recursive_fixed_point_interaction",
+      "recursive_fixed_point_alignment",
+      "recursive_fixed_point_divergence",
+      "recursive_fixed_point_failure"
+    ]
+  },
+  "rt_core_impact": {
+    "modified": false,
+    "statement": "RT := [(ℰ≠0) ⇔R δα(ℰ>0)] remains unchanged."
+  },
+  "validation_requirements": [
+    "Patch record parses cleanly.",
+    "Patch depends on PATCH_PI_RT_CALCULUS_043.",
+    "RecFix(C) is bounded to compatible continuation domains and a shared evaluation regime.",
+    "AlignRecFix(C) and DivRecFix(C) are comparative, bounded outcomes rather than universal convergence claims.",
+    "No universal recursive convergence or universal recursive reachability theorem is claimed.",
+    "RT_core remains unchanged."
+  ],
+  "required_repo_changes": [
+    "Update docs/textbook/mono_process_textbook_complete.md with the recursive/fixed-point interaction section and appendix entries.",
+    "Add docs/theory/foundational/5_03_26 unity/math/notes/0006_recursive_fixed_point_interaction.md as the additive interaction note.",
+    "Update registry/formal_object_registry.json with the recursive/fixed-point interaction formal objects.",
+    "Update registry/math_source_registry.json with the patch source entry.",
+    "Relock registry/math_hashes.json after the source registry update.",
+    "Update registry/lexicon_gap_queue.json with the recursive/fixed-point interaction terms.",
+    "Update registry/registry/lexicon_gap_queue.json with the mirrored recursive/fixed-point interaction terms.",
+    "Update registry/governance_change_ledger.json with the corresponding governance ledger entry."
+  ],
+  "target_files": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "docs/theory/foundational/5_03_26 unity/math/notes/0006_recursive_fixed_point_interaction.md",
+    "registry/formal_object_registry.json",
+    "registry/math_source_registry.json",
+    "registry/math_hashes.json",
+    "registry/lexicon_gap_queue.json",
+    "registry/registry/lexicon_gap_queue.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_044.json"
+  ],
+  "success_criteria": {
+    "recursive_fixed_point_interaction_documented": true,
+    "alignment_condition_registered": true,
+    "divergence_condition_registered": true,
+    "failure_registered": true,
+    "rt_core_unchanged": true
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "manifest_id": "MPF_TOOL_ROUTING_MANIFEST_LIVE_V1",
+  "schema_version": "1.0.0",
+  "authority": "Global Governance",
+  "last_updated": "2026-07-01",
+  "purpose": "Provide deterministic tool routing metadata separate from raw rigor level declarations.",
+  "routing_resolution_order": [
+    "registry/tool_index.json",
+    "registry/tool_manifest.json"
+  ],
+  "required_routing_fields": [
+    "tool_name",
+    "tool_path",
+    "entry_point",
+    "implementation_language",
+    "backend",
+    "mechanism_class",
+    "active_or_archived",
+    "allowed_use_class",
+    "invocation_contract"
+  ],
+  "policy": {
+    "statement": "Agents SHALL resolve tool routing from this manifest and its declared sources, not from rigor level alone.",
+    "separation_rule": "Rigor level determines evidentiary ceiling; allowed-use class determines what kinds of governed tasks the tool may be used for.",
+    "allowed_use_classes": [
+      "governance_validation",
+      "simulation_execution",
+      "analysis_postprocessing",
+      "falsification_harness",
+      "test_harness",
+      "migration_utility"
+    ]
+  },
+  "canonical_entries": [
+    {
+      "tool_name": "global_validate",
+      "resolved_from": "scripts/global_validate.py",
+      "tool_path": "scripts",
+      "entry_point": "scripts/global_validate.py",
+      "implementation_language": "python",
+      "backend": "python",
+      "mechanism_class": "governance_validation",
+      "active_or_archived": "active",
+      "allowed_use_class": "governance_validation",
+      "invocation_contract": {
+        "canonical_command": "python -m scripts.global_validate",
+        "alternate_command": "python scripts/global_validate.py",
+        "output_artifact": "outputs/audits/global_health_report.json"
+      }
+    },
+    {
+      "tool_name": "sync_economics_hashes",
+      "resolved_from": "scripts/sync_economics_hashes.py",
+      "tool_path": "scripts",
+      "entry_point": "scripts/sync_economics_hashes.py",
+      "implementation_language": "python",
+      "backend": "python",
+      "mechanism_class": "migration_utility",
+      "active_or_archived": "active",
+      "allowed_use_class": "migration_utility",
+      "invocation_contract": {
+        "canonical_command": "python scripts/sync_economics_hashes.py",
+        "output_artifact": "registry/economics/economics_hashes.json"
+      }
+    },
+    {
+      "tool_name": "graph_dynamics_sim_v1_cpp",
+      "resolved_from": "registry/tool_index.json",
+      "tool_path": "tools/graph_dynamics_sim_v1_cpp",
+      "entry_point": "tools/graph_dynamics_sim_v1_cpp/sim_governed.py",
+      "implementation_language": "cpp",
+      "backend": "cpp",
+      "mechanism_class": "graph_dynamics",
+      "active_or_archived": "active",
+      "allowed_use_class": "simulation_execution",
+      "invocation_contract": {
+        "canonical_wrapper": "sim_governed.py",
+        "requires_config": true,
+        "requires_out_dir": true
+      }
+    },
+    {
+      "tool_name": "ca_admissibility_sim_v1_cpp",
+      "resolved_from": "registry/tool_index.json",
+      "tool_path": "tools/ca_admissibility_sim_v1_cpp",
+      "entry_point": "tools/ca_admissibility_sim_v1_cpp/sim_governed.py",
+      "implementation_language": "cpp",
+      "backend": "cpp",
+      "mechanism_class": "cellular_automata",
+      "active_or_archived": "active",
+      "allowed_use_class": "simulation_execution",
+      "invocation_contract": {
+        "canonical_wrapper": "sim_governed.py",
+        "requires_config": true,
+        "requires_out_dir": true
+      }
+    },
+    {
+      "tool_name": "falsification_suite_v1",
+      "resolved_from": "registry/tool_index.json",
+      "tool_path": "tools/falsification_suite_v1",
+      "entry_point": "tools/falsification_suite_v1/run_falsification.py",
+      "implementation_language": "python",
+      "backend": "python",
+      "mechanism_class": "ensemble_sampling",
+      "active_or_archived": "active",
+      "allowed_use_class": "falsification_harness",
+      "invocation_contract": {
+        "requires_config": true,
+        "requires_out_dir": true
+      }
+    },
+    {
+      "tool_name": "test_vortex_admissibility",
+      "resolved_from": "registry/tool_index.json",
+      "tool_path": "tests",
+      "entry_point": "tests/test_vortex_admissibility.py",
+      "implementation_language": "python",
+      "backend": "python",
+      "mechanism_class": "cellular_automata",
+      "active_or_archived": "active",
+      "allowed_use_class": "test_harness",
+      "invocation_contract": {
+        "requires_test_runner": true
+      }
+    }
+  ]
+}

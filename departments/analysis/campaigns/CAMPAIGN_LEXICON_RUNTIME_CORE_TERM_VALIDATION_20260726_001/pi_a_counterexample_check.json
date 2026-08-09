@@ -1,0 +1,32 @@
+{
+  "check_id": "PI_A_COUNTEREXAMPLE_CHECK_20260726_001",
+  "target_obligations": ["PO-010-001", "PO-010-002", "PO-010-003"],
+  "status": "GOVERNANCE_CHECKS_PASS_NO_OBLIGATION_DISCHARGE",
+  "claim_ceiling": "C1_DEFINED_PROVISIONAL",
+  "validators": [
+    {
+      "id": "VAL-LTC-ATLAS-001",
+      "result": "PASS",
+      "counterexamples_reconciled": 5,
+      "recoverable_result": "validation/results/pi_a_counterexample_reconciliation_atlas_result.json"
+    },
+    {
+      "id": "VAL-LTC-CAMPAIGN-001",
+      "result": "PASS",
+      "counterexample_classes_verified": 5,
+      "recoverable_result": "validation/results/pi_a_counterexample_injection_campaign_result.json"
+    }
+  ],
+  "coverage_assessment": [
+    {"obligation": "PO-010-001", "coverage": "PARTIAL", "counterexample_classes": ["CE-013-001"], "result": "NOT_DISCHARGED"},
+    {"obligation": "PO-010-002", "coverage": "PARTIAL", "counterexample_classes": ["CE-013-001", "CE-013-005"], "result": "NOT_DISCHARGED"},
+    {"obligation": "PO-010-003", "coverage": "PARTIAL", "counterexample_classes": ["CE-013-002", "CE-013-003", "CE-013-004"], "result": "NOT_DISCHARGED"}
+  ],
+  "limitations": [
+    "The validators verify registry completeness, scope, and non-discharge governance; they do not execute independent mathematical counterexample tests.",
+    "scripts/math/run_pi_a_counterexample_campaign.py uses random outcomes and emits simulated labels, so it is not accepted as reproducible independent evidence.",
+    "All five reconciliation entries remain NOT_DISCHARGED and theorem status remains NOT_PROVEN."
+  ],
+  "canonical_mutations": [],
+  "next_action": "Replace the stochastic runner with deterministic local-domain fixtures or formal checks that expose membership, composition, and failure-boundary outcomes for PO-010-001 through PO-010-003."
+}

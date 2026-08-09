@@ -1,0 +1,84 @@
+{
+  "patch_id": "PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_CHAIN_REPAIR_003",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "title": "Rate-Type Eligibility Chain Repair",
+  "type": "provenance_repair",
+  "status": "APPLIED",
+  "applied_on": "2026-07-09T01:54:31.8961811-04:00",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_061"
+  ],
+  "motivation": {
+    "issue": "PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_001 remained blocked because PATCH_PI_RT_CALCULUS_061 was active in runtime decisions but still recorded as PROPOSED in the patch registry.",
+    "audit_result": "The chain block is a status-reconciliation mismatch, not a missing conceptual dependency.",
+    "conclusion": "Synchronize the upstream witness status to APPLIED and record the repair explicitly."
+  },
+  "decision": {
+    "registry_fix": "Update PATCH_PI_RT_CALCULUS_061.json to APPLIED with a recorded applied_on timestamp.",
+    "chain_effect": "PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_001 becomes chain-satisfied once the refreshed registry is read.",
+    "downstream_scope": "PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_TESTS_002 remains separate and still depends on the eligibility predicate."
+  },
+  "implementation": [
+    "Synchronize the bridge-admissibility witness status in registry/governance/patches/PATCH_PI_RT_CALCULUS_061.json.",
+    "Record the repair in docs/governance/rate_type_eligibility_chain_repair_003.json.",
+    "Update docs/textbook/mono_process_textbook_complete.md with the chain-repair clarification.",
+    "Register the repair in registry/governance_change_ledger.json.",
+    "Refresh registry/governance_hash_registry.json for the touched governance surfaces."
+  ],
+  "target_files": [
+    "docs/governance/rate_type_eligibility_chain_repair_003.json",
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/governance_change_ledger.json",
+    "registry/governance_hash_registry.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_061.json"
+  ],
+  "required_repo_changes": [
+    {
+      "path": "registry/governance/patches/PATCH_PI_RT_CALCULUS_061.json",
+      "description": "Synchronize the upstream witness status to APPLIED and record an applied_on timestamp."
+    },
+    {
+      "path": "docs/governance/rate_type_eligibility_chain_repair_003.json",
+      "description": "Record the dependency-chain repair diagnosis and verification trace."
+    },
+    {
+      "path": "docs/textbook/mono_process_textbook_complete.md",
+      "description": "Add the governed chain-repair clarification and lexicon entry."
+    },
+    {
+      "path": "registry/governance_change_ledger.json",
+      "description": "Register the repair event in the governance ledger."
+    },
+    {
+      "path": "registry/governance_hash_registry.json",
+      "description": "Refresh hashes for the touched governance surfaces."
+    }
+  ],
+  "acceptance_criteria": [
+    "patch-chain for PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_001 returns allow.",
+    "patch-chain for PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_TESTS_002 no longer inherits the upstream block from PATCH_PI_RT_CALCULUS_061.",
+    "global_validate.py --governance-only reports pass."
+  ],
+  "source_artifacts": [
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_061.json",
+    "registry/governance/patches/PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_001.json",
+    "registry/governance/patches/PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_TESTS_002.json",
+    "outputs/audits/global_health_report.json",
+    "docs/governance/rate_type_eligibility_candidate_001.json",
+    "docs/governance/rate_type_eligibility_tests_002.json"
+  ],
+  "validation": {
+    "required": [
+      "upstream_witness_status_reconciled",
+      "dependency_chain_not_satisfied_resolved",
+      "patch_chain_001_allow",
+      "global_validate_pass"
+    ],
+    "result": "pass"
+  },
+  "notes": [
+    "The repair changes registry state only.",
+    "The repair does not promote the bridge claim.",
+    "The repair does not modify RT_core."
+  ]
+}

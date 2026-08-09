@@ -1,0 +1,138 @@
+{
+  "registry_id": "PCD_EVIDENCE_CAMPAIGN_TEMPLATE_REGISTRY",
+  "version": "1.0.0",
+  "governance_status": {
+    "series_status": "EVIDENCE_CAMPAIGN_EXECUTION_ONLY",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL",
+    "non_separability_acknowledged": true,
+    "source_relation": "(E≠0) ⇔R δ(E>0)"
+  },
+  "templates": [
+    {
+      "template_id": "TPL-EVID-STOCHASTIC-TRANSITION",
+      "prediction_binding_id": "PB-001-THRESHOLD",
+      "primary_dataset": "DS-001-SYNTHETIC-STOCHASTIC",
+      "counterexample_dataset": "DS-002-GAUSSIAN-NOISE-BASELINE",
+      "null_model": "linear_random_walk",
+      "proxy_metrics": ["transition_point", "jump_discontinuity_magnitude"],
+      "falsification_vectors": ["shuffle_control", "parameter_ablation"],
+      "claim_scope": "STRICTLY_LOCAL_RESTRICTED_ANALOG"
+    },
+    {
+      "template_id": "GEO_PROJECTION_VALIDATION_001",
+      "prediction_binding_id": "PB-GEO-PROJECTION-001",
+      "primary_dataset": "DS-GEO-PROJECTION-TRACES",
+      "counterexample_dataset": "DS-002-GAUSSIAN-NOISE-BASELINE",
+      "null_model": "orientation_shuffled",
+      "proxy_metrics": [
+        "distinction_loss_rate",
+        "orientation_loss_rate",
+        "closure_loss_rate",
+        "admissibility_violation_rate"
+      ],
+      "falsification_vectors": [
+        "orientation_shuffled",
+        "residue_depleted",
+        "closure_preserved",
+        "closure_perturbed"
+      ],
+      "claim_scope": "STRICTLY_LOCAL_RESTRICTED_ANALOG"
+    },
+    {
+      "template_id": "TPL-VERTICAL-BAR-INDUCTION-001",
+      "campaign_source": "MPF_VERTICAL_BAR_INDUCTION_001",
+      "claim_id": "MPF_VERTICAL_BAR_INDUCTION_001",
+      "hypotheses": ["H1_bar_necessity", "H2_bar_complexity", "H3_deviated_admissibility", "H4_no_memory_object"],
+      "controls": {
+        "C0_no_bar": {
+          "description": "Operands exist without comparison operator. Distinction generation expected to collapse or approach zero.",
+          "role": "null_control"
+        },
+        "C1_collapse_bar": {
+          "description": "Comparison forced toward identity A=B. D approaches zero; admissibility deviation expected minimal.",
+          "role": "collapse_control"
+        },
+        "C2_random_bar": {
+          "description": "Comparison occurs but distinction preservation is randomized. Expected: unstable or noisy organization.",
+          "role": "noise_control"
+        },
+        "C3_valid_bar": {
+          "description": "Distinction-preserving comparison allowed. Expected: D generation followed by measurable delta_alpha.",
+          "role": "positive_condition"
+        }
+      },
+      "primary_proxy_metrics": [
+        "D_count",
+        "D_strength",
+        "organization_score",
+        "constraint_deviation",
+        "Affect_renewal_score"
+      ],
+      "bar_complexity_ladder": ["A|B", "A|B|C", "A|B|C|D"],
+      "falsification_vectors": [
+        "C0_no_bar",
+        "C1_collapse_bar",
+        "C2_random_bar",
+        "H4_indirect_process_identity_check"
+      ],
+      "null_model": "no_bar_baseline",
+      "claim_scope": "STRICTLY_LOCAL_RESTRICTED_ANALOG",
+      "promotion_gate": "All four controls must show differential D_count and measurable constraint_deviation in C3 vs C0, C1, C2.",
+      "campaign_id": "MPF_BAR_OPERATOR_VALIDATION_001",
+      "governance_status": "CAMPAIGN_COMPLETED"
+    },
+    {
+      "template_id": "TPL-VORTEX-ADMISSIBILITY-001",
+      "campaign_source": "MPF_DEVIATED_CONSTRAINT_DYNAMICS_PATCH_001",
+      "claim_id": "MPF_DEVIATED_CONSTRAINT_DYNAMICS_001",
+      "hypotheses": ["H1_vortex_admissibility"],
+      "controls": {
+        "C0_no_vortex": {
+          "description": "Admissibility updates are memoryless and do not feedback into future updates.",
+          "role": "null_control"
+        },
+        "C1_valid_vortex": {
+          "description": "Admissibility organization systematically conditions subsequent distinction events.",
+          "role": "positive_condition"
+        }
+      },
+      "primary_proxy_metrics": ["constraint_deviation", "affect_renewal_score"],
+      "null_model": "no_vortex_baseline",
+      "claim_scope": "STRICTLY_LOCAL_RESTRICTED_ANALOG",
+      "promotion_gate": "Positive vortex control must show cumulative shift in constraint_deviation over successive cycles.",
+      "campaign_id": "MPF_VORTEX_ADMISSIBILITY_CAMPAIGN_001",
+      "governance_status": "RECORDED_UNDER_AUDIT"
+    },
+    {
+      "template_id": "TPL-NON-MARKOV-ORGANIZATION-001",
+      "campaign_source": "MPF_DEVIATED_CONSTRAINT_DYNAMICS_PATCH_001",
+      "claim_id": "MPF_DEVIATED_CONSTRAINT_DYNAMICS_001",
+      "hypotheses": ["H2_non_markov_organization"],
+      "controls": {
+        "C0_markov_baseline": {
+          "description": "State transition depends strictly on prior state.",
+          "role": "null_control"
+        },
+        "C1_non_markov_history": {
+          "description": "State transition conditions depend on multi-step history integration.",
+          "role": "positive_condition"
+        }
+      },
+      "primary_proxy_metrics": ["organization_score", "constraint_deviation"],
+      "null_model": "markov_baseline",
+      "claim_scope": "STRICTLY_LOCAL_RESTRICTED_ANALOG",
+      "promotion_gate": "Non-Markov runs must demonstrate organizational persistence variations correlated with cumulative history.",
+      "campaign_id": "MPF_NON_MARKOV_ORGANIZATION_TEST_001",
+      "governance_status": "CAMPAIGN_SCAFFOLD_READY"
+    }
+  ],
+  "governance_rules": [
+    {
+      "rule_id": "CTR-RULE-001",
+      "rule": "Every campaign template must specify a counterexample dataset or an adversarial null model."
+    }
+  ],
+  "source_relation": "(E≠0) ⇔R δ(E>0)",
+  "non_separability_acknowledged": true,
+  "required_statement": "Observed signatures are interpreted only through restricted local analog structure."
+}

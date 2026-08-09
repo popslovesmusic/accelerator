@@ -1,0 +1,48 @@
+{
+  "spec_id": "MPF_SIM_D_E_ORACLE_ADVERSARIAL_001",
+  "schema_version": "1.0.0",
+  "status": "FROZEN_PREEXECUTION_DESIGN",
+  "source_notebook": "departments/colab/notebook_designs/RT_Notebook_25_D_E_Oracle_Adversarial.ipynb",
+  "research_question": "Do frozen bounded D/E candidate predicates remain consistent with an independently expressed declarative oracle under adversarial malformed, boundary, transport, and history/witness perturbations?",
+  "claim_ceiling": "C2_LIMITATION_OR_NEGATIVE_RESULT",
+  "independence_controls": [
+    "The oracle is declarative and does not call the subject predicate functions.",
+    "Adversarial cases are generated from mutation operators rather than copied fixture labels.",
+    "Expected outcomes are derived from explicit semantic requirements.",
+    "Replay order is shuffled independently while normalized digests must remain equal.",
+    "Every disagreement is preserved; no post-hoc deletion or relabeling is allowed."
+  ],
+  "adversarial_families": [
+    "missing_required_field",
+    "wrong_type",
+    "cross_context_transport",
+    "witness_payload_corruption",
+    "history_order_corruption",
+    "threshold_below_boundary",
+    "threshold_exact_boundary",
+    "threshold_above_boundary",
+    "unknown_profile",
+    "duplicate_or_conflicting_trace",
+    "combined_faults"
+  ],
+  "seeds": [719, 811, 907],
+  "contexts": ["C7", "C8", "C9"],
+  "profiles": {"low": 0.2, "mid": 0.5, "high": 0.8},
+  "replay_passes": 2,
+  "termination_conditions": [
+    "All declared baseline and adversarial cases complete twice.",
+    "Any required evaluator component changes after execution begins.",
+    "Any output cannot be canonically serialized or hashed.",
+    "Any disagreement is omitted from the falsification report."
+  ],
+  "allowed_interpretation": "Finite bounded evidence concerning agreement or disagreement between the frozen subject predicates and the independently expressed oracle over the declared adversarial domain.",
+  "blocked_interpretations": [
+    "Universal D/E preservation",
+    "Universal non-collapse",
+    "Injectivity",
+    "Reversibility",
+    "Theorem promotion",
+    "External physical validity"
+  ],
+  "content_sha256": "af78788bfa218d3d59ae4d19be9d2c579b4f4909d0f54105ca25a25bf7739540"
+}

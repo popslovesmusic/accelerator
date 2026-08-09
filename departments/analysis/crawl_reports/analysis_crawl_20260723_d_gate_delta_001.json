@@ -1,0 +1,108 @@
+{
+  "campaign_id": "CAMPAIGN_ANALYSIS_CRAWL_D_GATE_DELTA_20260723_001",
+  "agent_role": "RT_AGENT_INFINITE_THEORY_ANALYST",
+  "mode": "crawl",
+  "scope": {
+    "domains": ["formal calculus", "proof obligations", "Colab evidence", "governance", "textbook projection"],
+    "object_ids": ["DEBT_D_SEMANTICS_PROOF_001", "OBL-D-001A", "OBL-D-001B", "OBL-D-001C", "OBL-D-001D", "OBL-D-001E", "D_PROMOTION_GATE_AUDIT_20260723"],
+    "include_superseded": true,
+    "source_artifacts": ["registry/math/d_semantics_obligation_registry.json", "departments/analysis/campaigns/CAMPAIGN_D_SEMANTICS_THEORY_CRAWL_20260723_002", "departments/colab/results/MPF_SIM_D_THRESHOLD_SENSITIVITY_001.zip", "governance/live/research_debt_registry.json", "docs/textbook/mono_process_textbook_complete.md", "registry/db/acellorator_index.sqlite"]
+  },
+  "budgets": {"maximum_reasoning_depth": 6, "maximum_candidate_count": 50, "maximum_compute_units": "bounded local inspection"},
+  "normalization_rule": "Canonical obligation registry and governed completion certificates control status; campaign dashboards and historical reports are subordinate projections and may be stale.",
+  "results": {
+    "objects_analyzed": 18,
+    "theorem_candidates": 0,
+    "lemma_candidates": 0,
+    "proof_gaps": 2,
+    "concept_candidates": 1,
+    "contradictions": 1,
+    "counterexamples": 0,
+    "research_campaigns": 1,
+    "duplicates_rejected": 0,
+    "obligations_discharged_or_bounded": ["OBL-D-001B"],
+    "promotion_gate_status": "BLOCKED_NOT_READY"
+  },
+  "findings": [
+    {
+      "discovery_id": "DISCOVERY_ANALYSIS_D_GATE_001",
+      "discovery_class": "PROOF_OBLIGATION",
+      "title": "B threshold obligation is bounded-discharged",
+      "statement": "OBL-D-001B has an approved completion certificate after independent reconstruction of 108 archived rows, exact archive matching, deterministic replay, and 21 threshold-sensitive cases.",
+      "epistemic_status": "MECHANICALLY_VERIFIED",
+      "proof_status": "COMPLETE_ARGUMENT_UNVERIFIED",
+      "supporting_evidence_ids": ["D_THRESHOLD_FIXED_SEED_INDEPENDENT_CHECK_20260723", "OBL-D-001B_completion_certificate.json", "MPF_SIM_D_THRESHOLD_SENSITIVITY_001"],
+      "claim_ceiling": "C1_DEFINED_PROVISIONAL",
+      "promotion_allowed": false,
+      "human_review_required": false
+    },
+    {
+      "discovery_id": "DISCOVERY_ANALYSIS_D_GATE_002",
+      "discovery_class": "PROOF_GAP",
+      "title": "D promotion gate remains blocked",
+      "statement": "The D promotion gate remains blocked by unresolved C semantic-preservation support, D review and wording qualification, and E dependent gate review.",
+      "epistemic_status": "SOURCE_REPORTED",
+      "proof_status": "OBLIGATIONS_IDENTIFIED",
+      "supporting_evidence_ids": ["D_PROMOTION_GATE_AUDIT_20260723", "c_independent_proof_review_20260723.json", "registry/math/d_semantics_obligation_registry.json"],
+      "falsification_conditions": ["A valid certificate and required review are added for each remaining blocker."],
+      "promotion_allowed": false,
+      "human_review_required": true
+    },
+    {
+      "discovery_id": "DISCOVERY_ANALYSIS_D_GATE_003",
+      "discovery_class": "CONTRADICTION",
+      "title": "Stale subordinate campaign projections conflict with current B status",
+      "statement": "The current certificate and registry mark B DISCHARGED_BOUNDED, while human_review_approval_b_e_20260723.json, d_semantic_definition_matrix.json, and subordinate dashboard artifacts still describe B as open or undefined.",
+      "epistemic_status": "OBSERVED",
+      "proof_status": "NOT_ATTEMPTED",
+      "implicit_assumptions": ["The canonical registry and completion certificate are authoritative over subordinate campaign projections."],
+      "recommended_next_action": "Reconcile subordinate campaign projections, preserve their historical wording, and add supersession links rather than silently overwriting history.",
+      "promotion_allowed": false,
+      "human_review_required": true
+    },
+    {
+      "discovery_id": "DISCOVERY_ANALYSIS_D_GATE_004",
+      "discovery_class": "CONCEPT_CANDIDATE",
+      "title": "Bounded discharge versus theorem readiness",
+      "statement": "The corpus requires a distinct status separating obligation completion within a declared finite evidence scope from readiness for theorem promotion.",
+      "formal_statement": "DISCHARGED_BOUNDED(o) does not imply PROMOTION_READY(o).",
+      "epistemic_status": "CONJECTURED",
+      "proof_status": "OBLIGATIONS_IDENTIFIED",
+      "source_object_ids": ["OBL-D-001B_completion_certificate.json", "D_PROMOTION_GATE_AUDIT_20260723", "registry/math/d_semantics_obligation_registry.json"],
+      "falsification_conditions": ["A governed status model demonstrates that bounded obligation discharge and promotion readiness are identical for all applicable obligations."],
+      "recommended_next_action": "Add the distinction to the analysis reporting schema or confirm an existing canonical status taxonomy.",
+      "promotion_allowed": false,
+      "human_review_required": true
+    }
+  ],
+  "open_research_debt": [
+    {"id": "DEBT_D_SEMANTICS_PROOF_001", "status": "OPEN", "completion_percent": 88, "blocking_effect": "D theorem promotion"},
+    {"id": "STALE_D_CAMPAIGN_PROJECTIONS_001", "status": "NEW_ANALYSIS_DEBT", "completion_percent": 0, "blocking_effect": "Progress reporting consistency, not theorem validity"},
+    {"id": "OBL-D-001C", "status": "OPEN", "completion_percent": 60, "blocking_effect": "D promotion gate"},
+    {"id": "OBL-D-001D", "status": "OPEN", "completion_percent": 90, "blocking_effect": "D promotion gate"},
+    {"id": "OBL-D-001E", "status": "OPEN", "completion_percent": 90, "blocking_effect": "D promotion gate"}
+  ],
+  "synthesis": {
+    "hypothesis": "Typed, context-indexed evidence can discharge local obligations without establishing a universal theorem; promotion readiness is a stricter conjunction of obligation completion, scope review, and dependency closure.",
+    "mapping": "immutable experiment specification -> recoverable bounded result -> independent reconstruction -> obligation certificate -> promotion gate audit",
+    "preserved_structure": ["finite scope", "typed context", "reproducible seed behavior", "explicit claim ceiling"],
+    "competing_explanations": ["The apparent threshold result may be an artifact of the finite synthetic grid.", "Subordinate report conflict may reflect stale projections rather than a semantic disagreement."],
+    "falsification_condition": "A new independently checked result outside the declared finite grid invalidates the bounded interpretation or a canonical status rule collapses discharge and promotion readiness."
+  },
+  "quality": {"scope_coverage": 0.92, "dependency_resolution": 0.84, "reasoning_depth_used": 6, "evidence_quality": "bounded mixed formal/empirical", "termination_quality": "high"},
+  "assessment": {"overall_result": "PARTIAL_SUCCESS", "reason": "The crawl verified the B discharge and current D gate while exposing stale subordinate projections and unresolved C/D/E work.", "confidence": "high"},
+  "executive_recommendation": "FORMALIZE",
+  "recommended_next_campaign": {
+    "campaign_id": "CAMPAIGN_ANALYSIS_D_PROJECTION_RECONCILIATION_20260723_001",
+    "objective": "Reconcile all subordinate D campaign projections with the current canonical obligation statuses while preserving historical records.",
+    "inputs": ["current D registry", "all D campaign JSON reports", "completion certificates", "governance change ledger"],
+    "expected_outputs": ["projection reconciliation matrix", "supersession links", "updated analysis dashboard", "human review checklist"],
+    "stopping_conditions": ["Every stale B reference is classified as current, superseded, or historical", "No current report contradicts the canonical B status", "C/D/E blockers remain explicitly represented"],
+    "human_review_required": true
+  },
+  "frontier": {"open_branches": ["reconcile subordinate D projections", "complete OBL-D-001C", "review OBL-D-001D", "review OBL-D-001E gate"], "blocked_branches": ["D theorem promotion"], "deferred_branches": ["external interpretation", "universal semantics"]},
+  "termination_reason": "Bounded delta scope exhausted; further progress requires reconciliation edits or new evidence.",
+  "continuation_token": "ANALYSIS_CRAWL_D_GATE_DELTA_FRONTIER_001",
+  "what_this_does_not_authorize": ["No theorem promotion", "No canonical claim escalation", "No silent historical rewrite", "No external validity claim"],
+  "created_at": "2026-07-23T23:10:00Z"
+}

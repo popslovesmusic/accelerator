@@ -1,0 +1,104 @@
+{
+  "patch_id": "PCD_CSI_MEMBERSHIP_ALGEBRA_V1",
+  "priority": "ACTIVE_FORMAL_REASONING",
+  "intent": "Define the first algebraic rules for CSI (Causal Sphere of Influence) membership, induced by admissibility-window overlap and residue consistency.",
+  "operations": [
+    {
+      "op": "create_csi_membership_registry",
+      "target_file": "registry/csi_membership_registry.json",
+      "schema": {
+        "required_fields": [
+          "expression",
+          "result",
+          "property",
+          "condition",
+          "failure_mode"
+        ]
+      }
+    },
+    {
+      "op": "register_csi_membership_rules",
+      "target_file": "registry/csi_membership_registry.json",
+      "rules": [
+        {
+          "expression": "j ∈ csi(i) iff A_i ∩ A_j ≠ Ø",
+          "result": "admissibility_overlap_membership",
+          "property": "overlap_induction",
+          "condition": "coupling exists if process windows overlap in transition space",
+          "failure_mode": "untracked_interaction"
+        },
+        {
+          "expression": "j ∈ csi(i) where R_i ⊥ R_j",
+          "result": "Ø",
+          "property": "residue_incompatibility_exclusion",
+          "condition": "membership requires consistent residue context; mutually exclusive constraints block coupling",
+          "failure_mode": "illegal_recoupling_assumption"
+        }
+      ]
+    },
+    {
+      "op": "define_empty_csi_behavior",
+      "target_file": "registry/csi_membership_registry.json",
+      "rule": {
+        "name": "inert_propagation_rule_v1",
+        "statement": "If csi(i) is empty, the target process i propagates according to its own local admissibility and residue without external transport contribution.",
+        "outcome": "local_admissible_geodesic"
+      }
+    },
+    {
+      "op": "add_csi_guardrails",
+      "target_file": "registry/lexicon_gap_queue.json",
+      "rules": [
+        {
+          "name": "no_csi_membership_without_admissibility_overlap_v1",
+          "statement": "CSI membership must not be assumed without demonstrating admissibility-window overlap or a declared non-local coupling rule.",
+          "failure_behavior": "route_to_csi_review"
+        },
+        {
+          "name": "no_interaction_with_incompatible_residue_v1",
+          "statement": "Processes with mutually exclusive residue constraints (R_i ⊥ R_j) must be excluded from mutual CSI membership.",
+          "failure_behavior": "mark_interaction_illegal"
+        }
+      ]
+    },
+    {
+      "op": "update_gap_dependency_graph",
+      "target_file": "registry/gap_dependency_graph.json",
+      "gap_id": "GAP_3_csi_membership_rule",
+      "updates": {
+        "closure_progress": [
+          "admissibility-overlap membership rule defined",
+          "residue-incompatibility exclusion rule defined",
+          "empty-neighborhood (inert) behavior defined"
+        ],
+        "still_blocking": [
+          "formal metric on window distance",
+          "mapping to specific graph-engine topology rules",
+          "simulation validation of csi boundary transitions"
+        ]
+      }
+    },
+    {
+      "op": "update_operator_algebra_closure_registry",
+      "target_file": "registry/operator_algebra_closure_registry.json",
+      "operator_id": "csi",
+      "updates": {
+        "closure_status": "PARTIAL_CSI_ALGEBRA_DEFINED",
+        "closed_items": [
+          "overlap induction rule",
+          "residue incompatibility rule",
+          "inert propagation condition"
+        ],
+        "remaining_gaps": [
+          "metric for window overlap magnitude",
+          "asymmetric membership conditions",
+          "simulation verification of neighborhood stability"
+        ]
+      }
+    },
+    {
+      "op": "emit_report",
+      "output_path": "registry/reports/csi_membership_algebra_v1_report.json"
+    }
+  ]
+}

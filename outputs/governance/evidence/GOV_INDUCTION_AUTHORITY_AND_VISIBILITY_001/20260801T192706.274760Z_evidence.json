@@ -1,0 +1,154 @@
+{
+  "generated_at": "2026-08-01T19:27:06.275770+00:00",
+  "decision_record": {
+    "decision_id": "DEC-6602AC3C3291",
+    "patch_id": "GOV_INDUCTION_AUTHORITY_AND_VISIBILITY_001",
+    "campaign_id": null,
+    "requested_action": "propose",
+    "decision": "defer",
+    "reason": "Deferred pending: patch_chain_applied",
+    "blocking_conditions": [],
+    "defer_conditions": [
+      "patch_chain_applied"
+    ],
+    "warnings": [
+      "No modified or untracked files were detected; using the latest repository commit as fallback freshness evidence.",
+      "No modified or untracked files were detected; using the latest repository commit as fallback freshness evidence."
+    ],
+    "authority_resolution": {
+      "winning_authority": "mixed",
+      "rule": "Authority is resolved per target surface before application; the runtime returns allow/block/defer for each governed surface.",
+      "runtime_boundary": "registry_primary_mixed_sources",
+      "target_decisions": [
+        {
+          "target": "departments/analysis_intake/induction_queue/queue_registry.json",
+          "authority_owner": "analysis_intake",
+          "authority_source": "departments/analysis_intake/AGENTS.md",
+          "supersession": {
+            "status": "current",
+            "superseded_by": []
+          },
+          "conflict_state": "clear",
+          "decision": "allow",
+          "reason": "The Analysis Intake local queue is governed by its department rules and explicit induction authority transition.",
+          "evidence_paths": [
+            "departments/analysis_intake/induction_queue/queue_registry.json",
+            "departments/analysis_intake/AGENTS.md",
+            "registry/governance/patches/GOV_INDUCTION_AUTHORITY_AND_VISIBILITY_001.json",
+            "registry/db/migrations/20260703_governance_runtime_authority_resolution_003.sql",
+            "registry/db/migrations/20260703_governance_runtime_current_state_002.sql",
+            "outputs/audits/global_health_report.json"
+          ],
+          "warnings": [
+            "No modified or untracked files were detected; using the latest repository commit as fallback freshness evidence.",
+            "Current-state capsule reports warnings."
+          ],
+          "source": "authority_resolution_view"
+        },
+        {
+          "target": "governance/live/representation_ledger.json",
+          "authority_owner": "governance",
+          "authority_source": "registry/governance/patches/GOV_INDUCTION_AUTHORITY_AND_VISIBILITY_001.json",
+          "supersession": {
+            "status": "current",
+            "superseded_by": []
+          },
+          "conflict_state": "clear",
+          "decision": "allow",
+          "reason": "The representation ledger is a governed projection synchronized from preserved sources and queue state.",
+          "evidence_paths": [
+            "governance/live/representation_ledger.json",
+            "registry/governance/patches/GOV_INDUCTION_AUTHORITY_AND_VISIBILITY_001.json",
+            "registry/db/migrations/20260703_governance_runtime_authority_resolution_003.sql",
+            "registry/db/migrations/20260703_governance_runtime_current_state_002.sql",
+            "outputs/audits/global_health_report.json"
+          ],
+          "warnings": [
+            "No modified or untracked files were detected; using the latest repository commit as fallback freshness evidence.",
+            "Current-state capsule reports warnings."
+          ],
+          "source": "authority_resolution_view"
+        },
+        {
+          "target": "scripts/sync_governance.py",
+          "authority_owner": "db_runtime",
+          "authority_source": "scripts/sync_governance.py",
+          "supersession": {
+            "status": "current",
+            "superseded_by": []
+          },
+          "conflict_state": "clear",
+          "decision": "allow",
+          "reason": "The governance synchronization script is an approved execution surface for validated projection updates.",
+          "evidence_paths": [
+            "scripts/sync_governance.py",
+            "registry/governance/patches/GOV_INDUCTION_AUTHORITY_AND_VISIBILITY_001.json",
+            "registry/db/migrations/20260703_governance_runtime_authority_resolution_003.sql",
+            "registry/db/migrations/20260703_governance_runtime_current_state_002.sql",
+            "outputs/audits/global_health_report.json"
+          ],
+          "warnings": [
+            "No modified or untracked files were detected; using the latest repository commit as fallback freshness evidence.",
+            "Current-state capsule reports warnings."
+          ],
+          "source": "authority_resolution_view"
+        }
+      ],
+      "decision": "allow",
+      "reason": "All target surfaces resolved by authority lookup."
+    },
+    "dependency_resolution": {
+      "declared": [],
+      "missing": []
+    },
+    "provenance_resolution": {
+      "has_basis": true,
+      "has_core_rule": true
+    },
+    "validator_resolution": {
+      "required_repo_changes_declared": true,
+      "success_criteria_declared": true
+    },
+    "db_snapshot_at": "2026-08-01 15:44:32",
+    "operator": "scripts/query_governance.py",
+    "metadata_json": {
+      "runtime_surface": "governance_decision_log",
+      "bootstrap_migration": "D:\\projects\\acellorator\\registry\\db\\migrations\\20260703_governance_runtime_bootstrap_001.sql",
+      "current_state_migration": "D:\\projects\\acellorator\\registry\\db\\migrations\\20260703_governance_runtime_current_state_002.sql",
+      "authority_resolution_migration": "D:\\projects\\acellorator\\registry\\db\\migrations\\20260703_governance_runtime_authority_resolution_003.sql",
+      "patch_chain_migration": "D:\\projects\\acellorator\\registry\\db\\migrations\\20260703_governance_runtime_patch_chain_004.sql",
+      "debt_runtime_migration": "D:\\projects\\acellorator\\registry\\db\\migrations\\20260703_governance_runtime_debt_view_005.sql",
+      "semantic_authority_migration": "D:\\projects\\acellorator\\registry\\db\\migrations\\20260703_governance_runtime_semantic_authority_013.sql",
+      "freshness_migration": "D:\\projects\\acellorator\\registry\\db\\migrations\\20260703_governance_runtime_freshness_gate_010.sql",
+      "stale_snapshot": false,
+      "freshness_status": "fresh",
+      "defer_conditions": [
+        "patch_chain_applied"
+      ]
+    }
+  },
+  "evidence_summary": {
+    "patch_chain_status": "applied",
+    "patch_chain_decision": "defer",
+    "patch_gate_decision": "defer",
+    "dependency_patch_ids": [],
+    "failure_codes": [
+      "defer_conditions:patch_chain_applied"
+    ],
+    "summary_counts": {
+      "blocking_conditions": 0,
+      "defer_conditions": 1,
+      "warnings": 2,
+      "dependency_patch_ids": 0,
+      "artifact_paths": 34,
+      "artifact_hashes": 30,
+      "patch_chain_blockers": 0,
+      "patch_chain_missing_dependencies": 0,
+      "patch_chain_evidence_paths": 4,
+      "authority_targets": 3,
+      "semantic_targets": 0,
+      "required_repo_changes": 4,
+      "full_evidence_keys": 13
+    }
+  }
+}

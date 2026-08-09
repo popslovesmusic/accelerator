@@ -1,0 +1,93 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Registry for bounded selection-reconstruction limit conditions and candidate modes in Phase 3.",
+    "status": "provisional",
+    "last_updated": "2026-05-12"
+  },
+  "reconstruction_limit_entries": [
+    {
+      "id": "RC-010",
+      "name": "Selection Reconstruction Limits",
+      "status": "symbolic_supported_candidate",
+      "purpose": "Represent bounded reconstruction ambiguity and observable-selection recovery limits across recursive admissibility structures.",
+      "depends_on": [
+        "RC-008",
+        "RC-009",
+        "reconstruction",
+        "reconstruction_uniqueness",
+        "selection_reconstruction",
+        "selection_uniqueness",
+        "orientation_minimization",
+        "nonlocal_transport"
+      ],
+      "reconstruction_conditions": [
+        {
+          "id": "RLC-001",
+          "name": "partial_selection_reconstruction_permitted",
+          "description": "Formal support for recovering a subset of selection parameters from observed events."
+        },
+        {
+          "id": "RLC-002",
+          "name": "multi_valued_preimage_structure_preserved",
+          "description": "Reconstruction must not collapse multiple possible preimages into a single false unique result."
+        },
+        {
+          "id": "RLC-003",
+          "name": "noninvertible_transport_preserved",
+          "description": "Propagation history reconstruction must respect the path-dependent non-invertibility of NavT."
+        },
+        {
+          "id": "RLC-004",
+          "name": "orientation_sensitive_reconstruction_remains_bounded",
+          "description": "Reconstructing orientation frames from directional updates must stay within stable basin bounds."
+        },
+        {
+          "id": "RLC-005",
+          "name": "observable_projection_does_not_force_unique_preimage",
+          "description": "Mapping from projected observables back to process states must acknowledge information loss."
+        },
+        {
+          "id": "RLC-006",
+          "name": "recursive_reconstruction_updates_remain_admissible",
+          "description": "Each step in an iterative reconstruction must satisfy current process admissibility windows."
+        },
+        {
+          "id": "RLC-007",
+          "name": "branch_pruning_preserves_required_reconstruction_witness",
+          "description": "Reconstruction of pruned branches must not imply unrecoverable selection bias."
+        },
+        {
+          "id": "RLC-008",
+          "name": "reconstruction_instability_detectable",
+          "description": "Formal mechanisms must exist to detect and register divergence or aliasing in reconstruction."
+        }
+      ],
+      "candidate_reconstruction_modes": [
+        "bounded_partial_reconstruction",
+        "orientation_sensitive_reconstruction",
+        "residue_constrained_reconstruction",
+        "window_constrained_preimage_recovery",
+        "multi_branch_observable_reconstruction"
+      ],
+      "failure_modes_to_preserve": [
+        "forced_unique_reconstruction",
+        "preimage_collapse",
+        "orientation_locked_inversion",
+        "recursive_reconstruction_divergence",
+        "observable_projection_aliasing",
+        "multi_branch_reconstruction_instability",
+        "transport_induced_reconstruction_loss",
+        "reconstruction_basin_escape"
+      ],
+      "governance_constraints": {
+        "unique_preimage_recovery_claimed": false,
+        "deterministic_inversion_claimed": false,
+        "exact_observable_reconstruction_claimed": false,
+        "physics_validation_claimed": false,
+        "global_closure_claimed": false
+      },
+      "provisional_status": true
+    }
+  ]
+}

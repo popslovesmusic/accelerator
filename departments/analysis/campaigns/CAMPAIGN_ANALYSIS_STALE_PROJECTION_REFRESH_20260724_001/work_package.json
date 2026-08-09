@@ -1,0 +1,69 @@
+{
+  "standard": "ACTIONABLE_OBLIGATION_STANDARD_V2",
+  "campaign_id": "CAMPAIGN_ANALYSIS_STALE_PROJECTION_REFRESH_20260724_001",
+  "objective": "Refresh stale analysis routing surfaces and add current-state links to historical July 23, 2026 entrypoints.",
+  "execution_steps": [
+    {
+      "step": 1,
+      "description": "Update active routing surfaces to the current work-index and D obligation state."
+    },
+    {
+      "step": 2,
+      "description": "Add explicit current-state addenda to the historical July 23, 2026 campaign entrypoints."
+    },
+    {
+      "step": 3,
+      "description": "Verify that the next live proof task is unambiguously TASK-D-001C-TYPE-PRESERVATION."
+    }
+  ],
+  "expected_deliverables": [
+    {
+      "artifact": "analysis routing refresh patch",
+      "required": true
+    },
+    {
+      "artifact": "historical-package addenda",
+      "required": true
+    },
+    {
+      "artifact": "refresh closeout package",
+      "required": true
+    }
+  ],
+  "validation": {
+    "acceptance_tests": [
+      "Active routing surfaces match the live work index and D registry.",
+      "Historical packages carry explicit addenda.",
+      "The next live proof task is TASK-D-001C-TYPE-PRESERVATION."
+    ],
+    "required_reviews": [
+      "human review"
+    ],
+    "mechanized_checks": [
+      "JSON parse validation",
+      "DB freshness verification"
+    ],
+    "simulation_checks": []
+  },
+  "success_definition": "Current-state analysis routing is trustworthy and the historical packages are clearly superseded for live use.",
+  "failure_conditions": [
+    "Any active routing surface still points to the stale SIM-REPAIR path.",
+    "Any historical package entrypoint still appears current without an addendum."
+  ],
+  "unlocks": {
+    "proofs": [],
+    "theorems": [],
+    "definitions": [],
+    "campaigns": [
+      "CAMPAIGN_D_MECHANIZED_PROJECTION_001"
+    ],
+    "repository_objects": [
+      "TASK-D-001C-TYPE-PRESERVATION"
+    ]
+  },
+  "recommended_agent": "RT_AGENT_INFINITE_THEORY_ANALYST",
+  "completion_state": {
+    "status": "COMPLETED",
+    "completion_percent": 100
+  }
+}

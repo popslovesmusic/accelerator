@@ -1,0 +1,147 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_046",
+  "status": "APPLIED",
+  "applied_on": "2026-07-06",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "type": "additive_governance_patch",
+  "artifact_type": "governance_patch",
+  "campaign": "RT_CALCULUS",
+  "title": "A|E Slot-Occupancy Law and Role-Symmetry Audit",
+  "priority": "HIGH",
+  "supersedes_proposal": "PATCH_PI_RT_CALCULUS_040_PROPOSED_COLLIDED",
+  "collision_resolution": {
+    "collided_patch_id": "PATCH_PI_RT_CALCULUS_040",
+    "reason": "040 is already occupied by an applied fixed-point semantics patch.",
+    "resolution": "Renumber proposed A|E nesting audit to PATCH_PI_RT_CALCULUS_046."
+  },
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_045"
+  ],
+  "mode": "additive",
+  "basis": {
+    "source_patches": [
+      "PATCH_PI_RT_CALCULUS_045"
+    ],
+    "source_surfaces": [
+      "docs/governance/worked_example.json",
+      "docs/governance/worked_example.md",
+      "docs/governance/worked_example_operational_046.json",
+      "docs/governance/admissibility_trace_046.json",
+      "docs/governance/swap_test_046.json",
+      "docs/textbook/mono_process_textbook_complete.md",
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_045.json"
+    ],
+    "scope": "Introduce a governed A|E slot-occupancy and role-symmetry audit for completed RT expressions under explicit role typing and domain rebinding. This patch records candidate occupancy and swap-check boundaries without asserting universal symmetry, universal occupancy, recovery, or any RT_core change."
+  },
+  "core_rule": {
+    "statement": "Completed RT expressions may be considered candidate occupants of A-slot or E-slot only after explicit role typing and domain rebinding into the receiving domain; swap checks remain required before any symmetry conclusion, and RT_core remains unchanged."
+  },
+  "required_repo_changes": [
+    {
+      "path": "docs/governance/worked_example_operational_046.json",
+      "change": "Add a content-filled operational witness instantiating C_A, C_E, normalization, RT closure, rebinding, A/E slot occupancy, and candidate nested RT formation from an existing basin/projection case."
+    },
+    {
+      "path": "docs/governance/admissibility_trace_046.json",
+      "change": "Add a stepwise admissibility trace showing why completed RT occupants become A/E slot candidates only after explicit domain rebinding."
+    },
+    {
+      "path": "docs/governance/swap_test_046.json",
+      "change": "Add a local swap test for the selected basin/projection witness and record whether admissibility changes under swapped roles."
+    }
+  ],
+  "success_criteria": [
+    "The operational witness uses existing basin/projection content rather than a newly invented domain.",
+    "The admissibility trace distinguishes continuation declaration, normalization, RT closure, domain rebinding, slot typing, and candidate nesting.",
+    "The swap test evaluates the swapped construction independently and records a bounded local result.",
+    "PATCH_PI_RT_CALCULUS_046 remains PROPOSED unless the governance gate accepts promotion.",
+    "No textbook surface is updated by this execution-surface pass.",
+    "PATCH_PI_RT_CALCULUS_047 remains untouched."
+  ],
+  "purpose": "Introduce an explicit governed audit surface for whether completed RT expressions may occupy A-slots and E-slots inside another A|E admissibility window.",
+  "standing_corrections": {
+    "RT": "RT is a closure condition, not a primitive rank.",
+    "primitive_rule": "Primitive(x) -> RT(x); RT(x) does not imply Primitive(x).",
+    "A_E_current_status": "A|E is currently governed as a whole-expression primitive affect/effect distinction condition, with D(*|*) as projection.",
+    "operator_family": "<*>_x is a typed meta-relation / composition schema, not a proof operator.",
+    "R_vs_r": {
+      "R": "relation",
+      "r": "residue/history parameter"
+    }
+  },
+  "new_governance_claims_proposed": {
+    "slot_occupancy_law": {
+      "statement": "A completed RT expression may be considered as a candidate occupant of an A-slot or E-slot only after explicit role typing and domain rebinding.",
+      "status": "PROPOSED_NOT_GRANTED"
+    },
+    "role_symmetry_statement": {
+      "statement": "A-slot and E-slot occupancy are not presumed symmetric. Symmetry, asymmetry, or conditional symmetry must be established by admissibility checks.",
+      "status": "PROPOSED_AUDIT_RULE"
+    },
+    "ae_nesting_constraint": {
+      "statement": "<A|E>_r is not a governed <*>_x instance until its A-role, E-role, substrate/scale, residue parameter, and closure condition are explicitly typed.",
+      "status": "PROPOSED"
+    }
+  },
+  "explicit_non_claims": [
+    "This patch does not assert that completed RTs already occupy A/E slots.",
+    "This patch does not assert role symmetry.",
+    "This patch does not modify RT_core.",
+    "This patch does not promote <A|E>_r to theorem status.",
+    "This patch does not identify OPEN_BRIDGE_001 closure with basin closure.",
+    "This patch does not treat Memory Tensor metaphor as mechanism-level proof."
+  ],
+  "required_audit_checks": [
+    {
+      "check_id": "CHECK_046_A",
+      "description": "Define candidate A-slot occupancy requirements for a completed RT expression."
+    },
+    {
+      "check_id": "CHECK_046_B",
+      "description": "Define candidate E-slot occupancy requirements for a completed RT expression."
+    },
+    {
+      "check_id": "CHECK_046_C",
+      "description": "Compare A-slot and E-slot requirements for symmetry, asymmetry, or conditional symmetry."
+    },
+    {
+      "check_id": "CHECK_046_D",
+      "description": "Specify whether residue parameter r preserves, breaks, or records role asymmetry."
+    },
+    {
+      "check_id": "CHECK_046_E",
+      "description": "Produce one worked nesting example before textbook promotion."
+    }
+  ],
+  "worked_nesting_example": {
+    "status": "DRAFT_PROVISIONAL",
+    "example_name": "Shared-substrate A/E occupant pair",
+    "premises": [
+      "Let CompletedRT_A := NF(C_A) and CompletedRT_E := NF(C_E) be completed RT expressions.",
+      "Let x declare the shared nesting domain.",
+      "Let S denote the shared substrate/scale; S is continuous substrate, not a third endpoint.",
+      "Let r record residue/history for the enclosing window."
+    ],
+    "candidate_nesting": "<CompletedRT_A | CompletedRT_E>_r",
+    "role_typing": {
+      "A_slot": "CompletedRT_A",
+      "E_slot": "CompletedRT_E"
+    },
+    "rebinding_note": "Both occupants are considered only after explicit role typing and domain rebinding into x.",
+    "audit_reading": "This is a candidate witness for slot occupancy, not a theorem. It shows that one completed RT may be placed in each slot of the same window only under explicit typing; it does not prove symmetry, universal occupancy, or admissibility in all contexts.",
+    "swap_observation": "Swapping CompletedRT_A and CompletedRT_E must be checked separately; if admissibility changes, the roles are not symmetric."
+  },
+  "downstream_dependencies": [
+    "OPEN_BRIDGE_001 closure versus basin-closure cross-check",
+    "Mandela-effect basin worked example",
+    "Memory Tensor primitive/RT wording correction",
+    "metric-primitive floor-to-substrate correction",
+    "future Planck_unit_app bridge theorem"
+  ],
+  "validation_expectation": {
+    "json_parse": "required",
+    "registry_update": "required_if_applied",
+    "textbook_update": "deferred_until_worked_example",
+    "lexicon_update": "required_for_slot_occupancy_terms"
+  }
+}

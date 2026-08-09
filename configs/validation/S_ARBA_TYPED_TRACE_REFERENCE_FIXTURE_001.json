@@ -1,0 +1,32 @@
+{
+  "evidence_class": "REFERENCE_FIXTURE_NOT_ENGINE_EVIDENCE",
+  "engine_id": "REFERENCE_ONLY",
+  "fixture_id": "S_ARBA_TYPED_TRACE_FIXTURE_001",
+  "trace_schema_version": "1.0.0",
+  "trace_events": [
+    "candidate_pool_before_S",
+    "candidate_pool_after_S",
+    "removed_candidate_reasons",
+    "arb_a_input_pool",
+    "arb_a_output_selection_or_tie_set",
+    "tie_policy_identifier",
+    "admissibility_preservation_check",
+    "candidate_identity_provenance"
+  ],
+  "s_input_ids": ["q_valid_a", "q_valid_b", "q_invalid"],
+  "s_output_ids": ["q_valid_a", "q_valid_b"],
+  "s_removed": [{"id": "q_invalid", "reason": "inadmissible"}],
+  "arb_a_input_ids": ["q_valid_a", "q_valid_b"],
+  "arb_a_output": {
+    "selected_id": null,
+    "tie_set": ["q_valid_a", "q_valid_b"],
+    "policy_id": "PRESERVE_TIE_SET_UNTIL_LOCAL_POLICY"
+  },
+  "invariants": {
+    "s_does_not_increase_cardinality": true,
+    "arb_a_consumes_s_output": true,
+    "selected_id_is_in_arb_a_input_or_null": true,
+    "tie_policy_explicit": true
+  },
+  "runtime_provenance": {}
+}

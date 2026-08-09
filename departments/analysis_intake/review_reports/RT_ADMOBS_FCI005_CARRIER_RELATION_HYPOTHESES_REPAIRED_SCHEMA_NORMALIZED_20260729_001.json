@@ -1,0 +1,41 @@
+{
+  "artifact_type": "PROVISIONAL_FCI005_CARRIER_RELATION_HYPOTHESES_SCHEMA_NORMALIZED",
+  "artifact_id": "RT_ADMOBS_FCI005_CARRIER_RELATION_HYPOTHESES_REPAIRED_SCHEMA_NORMALIZED_20260729_001",
+  "derived_from": "RT_ADMOBS_FCI005_CARRIER_RELATION_HYPOTHESES_REPAIRED_20260729_001",
+  "source_sha256": "FEBBA547569BB8ACBA6AABE4262626B5D9606C11735D59FBE6F9AC941C95B67E",
+  "status": "MAP_02_SCHEMA_NORMALIZED_FOR_MAP_03",
+  "canonicality": "NON_CANONICAL",
+  "claim_ceiling": "C1_MODEL_RELATIVE",
+  "support_result_types": {
+    "OrientationAspectExtractionResult_x": {
+      "tagged_union": true,
+      "variants": {
+        "EXTRACTED": {"payload_type":"OrientationBearingAspect_x","payload":"a_x"},
+        "NO_ASPECT": {"payload":null},
+        "UNDEFINED": {"payload_type":"UnresolvedExtractionEvidence_x","payload":"e_x"}
+      },
+      "evaluator":"EvalExtractOrientAspect_x(X; D_rel) : OrientationAspectExtractionResult_x",
+      "guard":"UNDEFINED is not coerced to NO_ASPECT."
+    }
+  },
+  "preserved_semantics": [
+    "ObservationOrientation remains a provisional target type parameter.",
+    "H1 and H2 failures remain local and do not establish global NOT_REPRESENTED.",
+    "H3 requires complete applicable-rule evidence.",
+    "H4 remains the default while source, authority, provenance, and dependency evidence are unresolved.",
+    "Threshold independence and prohibited source-target identity guards remain unchanged."
+  ],
+  "provenance_verification": {
+    "artifact":"departments/analysis_intake/chat_captures/RT_ADMOBS_FCI005_SOURCE_TARGET_TYPE_ANALYSIS_REVIEW_20260729_001.json",
+    "exists":true,
+    "json_parse":"PASS",
+    "decision_supports_MAP02":true
+  },
+  "mapping_rule_instantiation":"NOT_PERFORMED",
+  "mapping_record_instantiation":"NOT_PERFORMED",
+  "witness_fixture_construction":"NOT_PERFORMED",
+  "BCon_x":"UNBOUND",
+  "H_x":"UNDECLARED",
+  "delta_a":"UNCHANGED",
+  "final_result":"PASS_MAP02_SCHEMA_NORMALIZED_PROVENANCE_VERIFIED"
+}

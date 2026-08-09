@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://acellorator.local/schemas/rt_attack_review_record_v1.json",
+  "title": "RT Attack Review Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_id", "review_id", "attack_id", "lane", "status", "reviewer", "observations", "blockers"],
+  "properties": {
+    "schema_id": { "const": "rt_attack_review_record_v1" },
+    "review_id": { "type": "string", "minLength": 1 },
+    "attack_id": { "type": "string", "pattern": "^FAT-[0-9]+$" },
+    "lane": { "enum": ["reproducibility", "mathematical", "native_semantic", "independence"] },
+    "status": { "enum": ["NOT_STARTED", "IN_PROGRESS", "PASSED", "FAILED", "INCONCLUSIVE", "BLOCKED"] },
+    "reviewer": { "type": "string", "minLength": 1 },
+    "observations": { "type": "array", "items": { "type": "string" } },
+    "blockers": { "type": "array", "items": { "type": "string" } },
+    "replay_artifacts": { "type": "array", "items": { "type": "string" } }
+  }
+}

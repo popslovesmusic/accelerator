@@ -1,0 +1,103 @@
+{
+  "registry_id": "PCD_ENGINE_FULL_rigor endorsement_EXECUTION_PLAN",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "execution_id",
+      "tool_id",
+      "depends_on",
+      "target_rigor endorsement",
+      "runtime_checks",
+      "control_cases",
+      "stability_runs",
+      "falsification_runs",
+      "uncertainty_runs",
+      "provenance_outputs",
+      "promotion_gate"
+    ]
+  },
+  "plans": [
+    {
+      "execution_id": "CERT-FULL-GRAPH-001",
+      "tool_id": "graph_dynamics_sim_v1_cpp",
+      "depends_on": [
+        "CERT-DRY-GRAPH-001"
+      ],
+      "target_rigor endorsement": "C4",
+      "runtime_checks": [
+        "binary_manifest_present",
+        "binary_hash_recorded",
+        "smoke_run_passes"
+      ],
+      "control_cases": [
+        "known_static_graph_control",
+        "known_disconnected_graph_control",
+        "known_transition_threshold_control"
+      ],
+      "stability_runs": {
+        "minimum_seeds": 3,
+        "parameter_sensitivity_required": true,
+        "discrete_stability_required": true
+      },
+      "falsification_runs": [
+        "FV-1_shuffle_or_zero_mismatch_control",
+        "FV-2_boundary_collapse",
+        "expected_failure_case"
+      ],
+      "uncertainty_runs": [
+        "seed_sensitivity_report",
+        "parameter_sensitivity_report",
+        "known_limits_report"
+      ],
+      "provenance_outputs": [
+        "config_snapshot.json",
+        "source_commit.txt",
+        "tool_rigor endorsement_manifest.json",
+        "runtime_binary_hash.txt",
+        "recoverable_output_index.json"
+      ],
+      "promotion_gate": "check_c4_engine_rigor endorsement.py must pass"
+    },
+    {
+      "execution_id": "CERT-FULL-CA-001",
+      "tool_id": "ca_admissibility_sim_v1_cpp",
+      "depends_on": [
+        "CERT-DRY-CA-001"
+      ],
+      "target_rigor endorsement": "C4",
+      "runtime_checks": [
+        "binary_manifest_present",
+        "binary_hash_recorded",
+        "smoke_run_passes"
+      ],
+      "control_cases": [
+        "known_all_admissible_control",
+        "known_all_blocked_control",
+        "known_boundary_transition_control"
+      ],
+      "stability_runs": {
+        "minimum_seeds": 3,
+        "parameter_sensitivity_required": true,
+        "discrete_stability_required": true
+      },
+      "falsification_runs": [
+        "FV-1_shuffle_or_zero_mismatch_control",
+        "FV-2_boundary_collapse",
+        "expected_failure_case"
+      ],
+      "uncertainty_runs": [
+        "seed_sensitivity_report",
+        "parameter_sensitivity_report",
+        "known_limits_report"
+      ],
+      "provenance_outputs": [
+        "config_snapshot.json",
+        "source_commit.txt",
+        "tool_rigor endorsement_manifest.json",
+        "runtime_binary_hash.txt",
+        "recoverable_output_index.json"
+      ],
+      "promotion_gate": "check_c4_engine_rigor endorsement.py must pass"
+    }
+  ]
+}

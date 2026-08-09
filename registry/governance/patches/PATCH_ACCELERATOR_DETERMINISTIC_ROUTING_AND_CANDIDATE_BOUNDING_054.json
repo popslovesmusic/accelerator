@@ -1,0 +1,229 @@
+{
+  "patch_id": "PATCH_ACCELERATOR_DETERMINISTIC_ROUTING_AND_CANDIDATE_BOUNDING_054",
+  "title": "Deterministic Routing, Semantic Normalization, and Candidate Bounding",
+  "status": "PASS",
+  "predecessor_patches": [
+    "PATCH_ACCELERATOR_CANONICAL_CONTEXT_CAPSULE_050",
+    "PATCH_ACCELERATOR_SEMANTIC_READOUT_CAPABILITY_GATE_051",
+    "PATCH_ACCELERATOR_INFERENCE_NECESSITY_GATE_052",
+    "PATCH_ACCELERATOR_DETERMINISTIC_DECISION_CACHE_053"
+  ],
+  "objective": "Resolve request routing and candidate generation deterministically before cache lookup or inference-gate evaluation so equivalent requests converge on the same normalized operation, bounded candidate set, and stable cache identity.",
+  "files_changed": [
+    "registry/candidate_policy_registry.json",
+    "registry/deterministic_operation_registry.json",
+    "registry/governance/patches/PATCH_ACCELERATOR_DETERMINISTIC_ROUTING_AND_CANDIDATE_BOUNDING_054.json",
+    "patches/PATCH_ACCELERATOR_DETERMINISTIC_ROUTING_AND_CANDIDATE_BOUNDING_054.json",
+    "outputs/audits/global_health_report.json",
+    "reports/authority-freshness-cache-key-freeze.json",
+    "reports/deterministic-routing-and-candidate-bounding-result.json",
+    "reports/deterministic-routing-divergence-baseline.json",
+    "reports/routing-and-candidate-flow.md",
+    "schemas/bounded_candidate_set_v1.schema.json",
+    "schemas/candidate_policy_registry_v1.schema.json",
+    "schemas/canonical_routed_request_v1.schema.json",
+    "schemas/deterministic_operation_registry_v1.schema.json",
+    "scripts/orientation_execution_plan.py",
+    "scripts/orientation_retrieval.py",
+    "scripts/query_governance.py",
+    "scripts/registry_runtime_trace.py",
+    "scripts/residue/residue_packet_builder.py",
+    "tests/test_deterministic_routing_and_candidate_bounding.py",
+    "tests/test_semantic_readout_capability_gate.py",
+    "tools/inference_governance/__init__.py",
+    "tools/inference_governance/candidate_builder.py",
+    "tools/inference_governance/candidate_policy.py",
+    "tools/inference_governance/deterministic_router.py",
+    "tools/inference_governance/request_normalization.py",
+    "tools/signal_scope_phase_continuation_engine/core/semantic_readout.py"
+  ],
+  "request_entry_points": [
+    "scripts/query_governance.py::build_governed_context_capsule_v1",
+    "scripts/orientation_retrieval.py::retrieve_artifacts",
+    "scripts/registry_runtime_trace.py::run_registry_runtime_trace",
+    "scripts/orientation_execution_plan.py::generate_execution_plan",
+    "scripts/residue/residue_packet_builder.py::build_residue_packet",
+    "tools/signal_scope_phase_continuation_engine/core/semantic_readout.py::_openai_compatible_reply"
+  ],
+  "divergence_register": [
+    {
+      "code": "DIV_12_INCIDENTAL_METADATA",
+      "surface": "governed_context_capsule",
+      "before": "Equivalent task/query requests produced different capsule hashes because request_id was hashed.",
+      "after": "request_id is excluded from the governed capsule hash basis; task/query now converge."
+    },
+    {
+      "code": "DIV_01_SURFACE_SYNONYM",
+      "surface": "artifact_retrieval",
+      "before": "Whitespace and case variants of the same query could diverge in repeated-work behavior.",
+      "after": "foo,  foo , and FOO share one candidate-set hash and one result path."
+    },
+    {
+      "code": "DIV_04_IDENTIFIER_ALIAS",
+      "surface": "request_routing",
+      "before": "orientation_retrieval and memory_retrieval were separate surface names.",
+      "after": "Both route to artifact_retrieval with the same candidate_policy_id."
+    }
+  ],
+  "operation_registry": {
+    "path": "registry/deterministic_operation_registry.json",
+    "operation_count": 6,
+    "alias_count": 21,
+    "unknown_operation_behavior": "ROUTE_UNRESOLVED",
+    "route_status_values": [
+      "ROUTED",
+      "ROUTE_UNRESOLVED",
+      "ROUTE_AMBIGUOUS",
+      "ROUTE_DENIED",
+      "ROUTE_INVALID"
+    ]
+  },
+  "deterministic_router": {
+    "path": "tools/inference_governance/deterministic_router.py",
+    "function": "route_parsed_request",
+    "route_status_values": [
+      "ROUTED",
+      "ROUTE_UNRESOLVED",
+      "ROUTE_AMBIGUOUS",
+      "ROUTE_DENIED",
+      "ROUTE_INVALID"
+    ],
+    "model_calls": 0
+  },
+  "candidate_policy_registry": {
+    "path": "registry/candidate_policy_registry.json",
+    "policy_count": 10,
+    "candidate_types": [
+      "TOOL",
+      "HANDLER",
+      "FILE",
+      "ARTIFACT",
+      "PATCH",
+      "ACTION",
+      "VALIDATOR",
+      "OUTPUT_TEMPLATE"
+    ],
+    "finite_universes": 10
+  },
+  "canonical_request_schema": {
+    "path": "schemas/canonical_routed_request_v1.schema.json",
+    "schema_version": "1.0.0",
+    "hash_participating_fields": [
+      "operation_code",
+      "target_scope",
+      "target_identifiers",
+      "constraints",
+      "authority_requirements",
+      "freshness_requirements",
+      "output_contract",
+      "candidate_policy_id"
+    ]
+  },
+  "candidate_set_schema": {
+    "path": "schemas/bounded_candidate_set_v1.schema.json",
+    "candidate_hash_implemented": true,
+    "deterministic_ordering": true,
+    "exclusion_reason_codes": [
+      "OUT_OF_SCOPE",
+      "AUTHORITY_DENIED",
+      "STALE",
+      "INCOMPATIBLE",
+      "DISABLED",
+      "DEPRECATED",
+      "MISSING_DEPENDENCY",
+      "WRONG_TYPE",
+      "DUPLICATE_ALIAS",
+      "POLICY_EXCLUDED",
+      "CANDIDATE_LIMIT_PRUNED"
+    ]
+  },
+  "cache_key_changes": {
+    "request_semantics_schema": "canonical_routed_request_v1",
+    "candidate_set_hash_added_before_lookup": true,
+    "presentation_preferences_excluded_from_identity": true,
+    "request_id_excluded_from_identity": true,
+    "route_canonicalization_before_cache_lookup": true
+  },
+  "authority_freshness_freeze": {
+    "result": "NO_NEW_FIELDS_REQUIRED",
+    "authority_fields_added": [],
+    "freshness_fields_added": [],
+    "cache_key_schema_before": "decision_cache_key_v1",
+    "cache_key_schema_after": "decision_cache_key_v1",
+    "prior_entries_invalidated": true
+  },
+  "static_enforcement": {
+    "repository_router_scan_violations": [],
+    "repository_candidate_scan_violations": [],
+    "synthetic_router_violation_detected": true,
+    "synthetic_unbounded_candidate_violation_detected": true
+  },
+  "schemas_added_or_changed": [
+    "schemas/canonical_routed_request_v1.schema.json",
+    "schemas/deterministic_operation_registry_v1.schema.json",
+    "schemas/candidate_policy_registry_v1.schema.json",
+    "schemas/bounded_candidate_set_v1.schema.json"
+  ],
+  "tests_added_or_changed": [
+    "tests/test_deterministic_routing_and_candidate_bounding.py",
+    "tests/test_semantic_readout_capability_gate.py"
+  ],
+  "baseline_metrics": {
+    "request_paths_observed": 3,
+    "surface_variants_per_operation": 3,
+    "distinct_cache_keys_for_equivalent_requests": 2,
+    "independent_router_count": 1,
+    "candidate_builder_count": 0,
+    "unbounded_candidate_paths": 1,
+    "requests_reaching_cache": 3,
+    "requests_reaching_inference_gate": 1
+  },
+  "post_change_metrics": {
+    "canonical_operation_count": 6,
+    "aliases_collapsed": 1,
+    "equivalent_requests_converged": 3,
+    "cache_keys_eliminated": 2,
+    "independent_routers_removed_or_wrapped": 1,
+    "candidate_policies_registered": 10,
+    "unbounded_candidate_paths_remaining": 0,
+    "zero_candidate_resolutions": 1,
+    "single_candidate_resolutions": 1,
+    "dominant_candidate_resolutions": 1,
+    "cache_hits_from_normalization": 3,
+    "requests_prevented_from_reaching_gate": 0,
+    "actual_inference_calls": 0
+  },
+  "validation_commands": [
+    "python -m py_compile scripts\\query_governance.py scripts\\orientation_retrieval.py scripts\\registry_runtime_trace.py scripts\\orientation_execution_plan.py scripts\\residue\\residue_packet_builder.py tools\\inference_governance\\__init__.py tools\\inference_governance\\request_normalization.py tools\\inference_governance\\candidate_policy.py tools\\inference_governance\\candidate_builder.py tools\\inference_governance\\deterministic_router.py tools\\signal_scope_phase_continuation_engine\\core\\semantic_readout.py tests\\test_semantic_readout_capability_gate.py tests\\test_deterministic_routing_and_candidate_bounding.py tests\\inference_governance\\test_decision_cache.py tests\\inference_governance\\test_no_ungated_inference_boundaries.py",
+    "python -m unittest tests.test_deterministic_routing_and_candidate_bounding tests.test_governed_context_capsule_v1 tests.test_semantic_readout_capability_gate tests.inference_governance.test_decision_cache tests.inference_governance.test_no_ungated_inference_boundaries",
+    "git diff --check",
+    "python scripts/global_validate.py --quick"
+  ],
+  "validation_results": {
+    "python_compilation": "pass",
+    "deterministic_routing_unittest": "pass",
+    "governed_context_capsule_unittest": "pass",
+    "semantic_readout_unittest": "pass",
+    "decision_cache_unittest": "pass",
+    "ungated_boundary_unittest": "pass",
+    "git_diff_check": "pass",
+    "global_validate_quick": "pass"
+  },
+  "rollback_procedure": [
+    "Record the patch 053 repository snapshot or governed file hashes.",
+    "Back up any revised registries and cache schema state.",
+    "Apply patch 054.",
+    "Run validation.",
+    "Restore patch 053 code, registries, and cache-key semantics.",
+    "Remove or invalidate patch 054 cache entries.",
+    "Verify exact restoration.",
+    "Reapply only after rollback proof succeeds."
+  ],
+  "rollback_result": "not_executed",
+  "known_limitations": [
+    "The patch adds deterministic routing and candidate resolution; it does not introduce networked shared cache reuse.",
+    "Rollback proof has not been executed as a destructive repository restore in this turn.",
+    "The cache-key schema remained decision_cache_key_v1; the governed request semantics changed underneath it."
+  ],
+  "next_patch": "PATCH_ACCELERATOR_DETERMINISTIC_FAILURE_CLASSIFICATION_055"
+}

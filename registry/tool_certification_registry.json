@@ -1,0 +1,68 @@
+{
+  "registry_id": "PCD_TOOL_rigor endorsement_REGISTRY",
+  "version": "2.0.0",
+  "governance_status": {
+    "series_status": "EQUIVALENCE_HARDENING_ONLY",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL",
+    "non_separability_acknowledged": true,
+    "source_relation": "(E≠0) ⇔R δ(E>0)"
+  },
+  "rigor endorsement_states": {
+    "UNVERIFIED": "Tool registered but no validation evidence exists.",
+    "REFERENCE_BASELINE_ONLY": "Tool is a governed reference (Python) but has no performance equivalent.",
+    "EQUIVALENCE_PENDING": "Performance implementation exists but equivalence check is incomplete.",
+    "EQUIVALENCE_VERIFIED": "Performance implementation passes equivalence against reference baseline.",
+    "CERTIFIED_C1": "Runs and emits recoverable output.",
+    "CERTIFIED_C2": "Observable mapping and core scientific validity checks exist.",
+    "CERTIFIED_C3": "Cross-model validation and falsification available.",
+    "CERTIFIED_C4": "Multi-seed stable, uncertainty characterized, equivalence verified.",
+    "rigor endorsement_REVOKED": "Tool failed drift or equivalence audit and is blocked from claim support."
+  },
+  "tool_rigor_status_field": {
+    "field_name": "tool_rigor_status",
+    "allowed_values": [
+      "UNREVIEWED",
+      "UNDER_REVIEW",
+      "RIGOR_ENDORSED",
+      "REVOKED"
+    ],
+    "default_for_ad_hoc_or_unindexed_toolchains": "UNREVIEWED",
+    "governance_effect": "UNREVIEWED and UNDER_REVIEW toolchains are hypothesis-generating only and cannot support promotion or endorsement."
+  },
+  "tools": [
+    { "name": "fsa_rule_engine_sim_v1_cpp", "state": "CERTIFIED_C4", "last_audit": "2026-05-06" },
+    { "name": "ca_admissibility_sim_v1_cpp", "state": "CERTIFIED_C1", "last_audit": "2026-05-06" },
+    { "name": "graph_dynamics_sim_v1_cpp", "state": "CERTIFIED_C1", "last_audit": "2026-05-06" },
+    { "name": "tda_module_v1_cpp", "state": "CERTIFIED_C4", "last_audit": "2026-05-06" },
+    { "name": "tda_module_v2_cpp", "state": "CERTIFIED_C4", "last_audit": "2026-05-06" },
+    { "name": "symplectic_sim_v1_cpp", "state": "CERTIFIED_C4", "last_audit": "2026-05-06" },
+    { "name": "spectral_analysis_v1_cpp", "state": "CERTIFIED_C4", "last_audit": "2026-05-06" },
+    { "name": "mc_ensemble_sim_v1_cpp", "state": "CERTIFIED_C4", "last_audit": "2026-05-06" },
+    { "name": "parameter_optimizer_v1_cpp", "state": "CERTIFIED_C4", "last_audit": "2026-05-06" },
+    { "name": "stochastic_sim_cpp", "state": "CERTIFIED_C4", "last_audit": "2026-05-06" },
+    { "name": "structural_box_sim_cpp", "state": "CERTIFIED_C4", "last_audit": "2026-05-06" },
+    { "name": "agent_based_sim_v1_cpp", "state": "CERTIFIED_C4", "last_audit": "2026-05-06" },
+    { "name": "dase_analog_sim_cpp", "state": "CERTIFIED_C4", "last_audit": "2026-05-06" },
+    { "name": "satp_higgs_sim_cpp", "state": "CERTIFIED_C4", "last_audit": "2026-05-06" },
+    { "name": "satp_higgs_3d_sim_cpp", "state": "CERTIFIED_C4", "last_audit": "2026-05-06" },
+    { "name": "igsoa_gw_core_cpp", "state": "CERTIFIED_C4", "last_audit": "2026-05-06" },
+    { "name": "igsoa_complex_1d_cpp", "state": "CERTIFIED_C4", "last_audit": "2026-05-06" },
+    { "name": "igsoa_complex_2d_cpp", "state": "CERTIFIED_C4", "last_audit": "2026-05-06" },
+    { "name": "igsoa_complex_3d_cpp", "state": "CERTIFIED_C4", "last_audit": "2026-05-06" },
+    { "name": "satp_higgs_1d_cpp", "state": "CERTIFIED_C4", "last_audit": "2026-05-06" },
+    { "name": "optical_reservoir_sim_v1", "state": "CERTIFIED_C4", "last_audit": "2026-05-25" },
+    { "name": "triadic_closure_substrate_sim_cpp", "state": "CERTIFIED_C4", "last_audit": "2026-05-25", "note": "Elevated to C6-Publishable via Campaign TRI-ELEV-003. SYCL offloading verified." }
+  ],
+  "governance_rules": [
+    {
+      "rule_id": "TCR-RULE-001",
+      "rule": "C4 rigor endorsement requires verified implementation equivalence against a reference baseline."
+    },
+    {
+      "rule_id": "RIGOR_TOOL_001",
+      "rule": "No simulation result may be used for promotion, endorsement, theorem advancement, dependency propagation, or framework validation unless produced by a Rigor-Endorsed toolchain."
+    }
+  ],
+  "source_relation": "(E≠0) ⇔R δ(E>0)",
+  "non_separability_acknowledged": true
+}

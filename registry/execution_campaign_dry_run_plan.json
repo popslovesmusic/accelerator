@@ -1,0 +1,62 @@
+{
+  "registry_id": "PCD_EXECUTION_CAMPAIGN_DRY_RUN_PLAN",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "dry_run_id",
+      "campaign_id",
+      "target_tools",
+      "phases_checked",
+      "mock_outputs_generated",
+      "schemas_validated",
+      "failure_routes_tested",
+      "expected_result"
+    ]
+  },
+  "dry_runs": [
+    {
+      "dry_run_id": "P0-C4-ELEVATION-DRY-RUN-001",
+      "campaign_id": "P0-C4-ELEVATION-ORCH-V1",
+      "target_tools": [
+        "graph_dynamics_sim_v1_cpp",
+        "ca_admissibility_sim_v1_cpp"
+      ],
+      "phases_checked": [
+        "runtime_smoke",
+        "control_cases",
+        "multi_seed_stability",
+        "parameter_sensitivity",
+        "falsification",
+        "uncertainty_quantification",
+        "provenance_packaging",
+        "c4_gate_check"
+      ],
+      "mock_outputs_generated": [
+        "stability_report.json",
+        "falsification_report.json",
+        "uncertainty_report.json",
+        "cross_model_validation_report.json",
+        "provenance_manifest.json",
+        "recoverable_output_index.json",
+        "engine_rigor endorsement_evidence_package.json",
+        "governed_execution_orchestrator_result.json"
+      ],
+      "schemas_validated": [
+        "governed_execution_orchestrator_manifest.json",
+        "governed_execution_orchestrator_result_schema.json",
+        "p0_engine_c4_evidence_generation_matrix.json",
+        "engine_rigor endorsement_evidence_template.json"
+      ],
+      "failure_routes_tested": [
+        "runtime_failure",
+        "control_case_failure",
+        "stability_failure",
+        "falsification_failure",
+        "cross_model_contradiction",
+        "provenance_failure",
+        "rigor endorsement_gate_failure"
+      ],
+      "expected_result": "DRY_RUN_PASS_READY_FOR_REAL_EXECUTION"
+    }
+  ]
+}

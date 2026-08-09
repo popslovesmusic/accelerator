@@ -1,0 +1,29 @@
+{
+  "capture_type": "CHAT_SEMANTIC_CAPTURE",
+  "packet_id": "RT_PATCH_APPROVED_TOOL_REPLICATION_20260731_001",
+  "capture_timestamp": "2026-07-31T01:30:00Z",
+  "conversation_channel": "chat",
+  "canonical_capture_hash": "efe637536db86d1310022bc47472c666d85b061279edcb74a56603a4b6a3ff14",
+  "source_provenance": "user-submitted governed patch packet",
+  "limitations": ["Chat capture preserves received semantic content; byte identity is not applicable."],
+  "packet": {
+    "packet_id": "RT_PATCH_APPROVED_TOOL_REPLICATION_20260731_001",
+    "packet_type": "GOVERNANCE_PATCH",
+    "schema_version": "1.0.0",
+    "operation": "ADD_EVIDENCE_AND_UPDATE_STATUS",
+    "authority": "HUMAN_REVIEW_REQUIRED",
+    "target_objects": ["MPF_SIM_D_E_ORACLE_ADVERSARIAL_001_RESULTS_001", "MPF_SIM_D_E_ORACLE_ADVERSARIAL_001_PROCESSING_001", "DEBT_D_SEMANTICS_PROOF_001"],
+    "preconditions": ["Processing manifest present.", "Results archive SHA-256 verified.", "Execution notebook hash verified.", "No artifact mutation after hash verification."],
+    "actions": [
+      {"action": "VERIFY_HASH", "artifact": "MPF_SIM_D_E_ORACLE_ADVERSARIAL_001_RESULTS_001.zip", "required": true},
+      {"action": "REGISTER_REPLICATION_EVENT", "event_type": "APPROVED_TOOL_REPLICATION", "execution_status": "SUCCESS", "scope": "COMPUTATIONAL_REPLICATION_ONLY", "independence_level": "ENVIRONMENT", "notes": ["Execution completed in approved Colab environment.", "Replay agreement verified.", "No oracle disagreements observed.", "No invariant failures observed.", "No falsification flags observed."]},
+      {"action": "UPDATE_RESULT_RECORD", "object_id": "MPF_SIM_D_E_ORACLE_ADVERSARIAL_001_RESULTS_001", "fields": {"execution_status": "APPROVED_TOOL_REPLICATED", "replication_status": "VERIFIED", "bounded_result": "PASS_BOUNDED_NO_COUNTEREXAMPLE", "replay_verified": true, "oracle_disagreements": 0, "invariant_failures": 0, "falsification_flags": 0}},
+      {"action": "ADD_EVIDENCE", "classification": "COMPUTATIONAL_REPLICATION", "supports": ["Deterministic replay", "Artifact reproducibility", "Execution reproducibility"], "does_not_support": ["Formal proof", "Theorem promotion", "Universal D semantics", "Claim promotion above C2"]},
+      {"action": "UPDATE_GOVERNANCE_NOTE", "text": "Approved-tool computational replication completed successfully. Evidence strengthens reproducibility only. Formal semantics, oracle independence, and theorem obligations remain open."}
+    ],
+    "explicit_non_authorizations": ["Do not promote claim ceiling.", "Do not discharge remaining proof obligations.", "Do not modify textbook semantics.", "Do not mark theorem proven.", "Do not close oracle-independence frontier.", "Do not infer universal correctness."],
+    "expected_final_state": {"replication_status": "VERIFIED", "execution_status": "APPROVED_TOOL_REPLICATED", "claim_ceiling": "C2_LIMITATION_OR_NEGATIVE_RESULT", "promotion_status": "BLOCKED_ABOVE_C2", "proof_status": "NOT_ATTEMPTED", "repository_mutation": "EVIDENCE_ONLY"},
+    "human_review_required": true,
+    "idempotent": true
+  }
+}

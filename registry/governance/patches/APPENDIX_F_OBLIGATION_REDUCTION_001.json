@@ -1,0 +1,87 @@
+{
+  "patch_id": "APPENDIX_F_OBLIGATION_REDUCTION_001",
+  "patch_type": "TEXTBOOK_OBLIGATION_REDUCTION",
+  "status": "APPLIED_VALIDATED",
+  "date": "2026-07-19",
+  "authority_level": "L0_BOOKKEEPING",
+  "scope": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/math/open_bridge_registry.json"
+  ],
+  "objective": "Reduce Appendix F obligation ambiguity by synchronizing bridge status rows with the open bridge registry and separating active obligations from historical, completed, deferred, and designed campaign dispositions.",
+  "governance_query": {
+    "task": "APPENDIX_F_OBLIGATION_REDUCTION_001",
+    "runtime": "scripts/query_governance.py context-capsule",
+    "database_health_status": "pass",
+    "authority_state": "allow",
+    "freshness_state": "fresh"
+  },
+  "priority_order": [
+    {
+      "priority": 1,
+      "target": "F.3 Open Bridge Ledger",
+      "action": "Add OPEN_BRIDGE_AE_OVERLAP_001 and convert OPEN_BRIDGE_002 / OPEN_BRIDGE_003 from unregistered OPEN narrative debt to registry-synchronized deferred formalization obligations."
+    },
+    {
+      "priority": 2,
+      "target": "F.4 Bridge Dependency Tables",
+      "action": "Add AE overlap formalization obligations and non-promotion constraints."
+    },
+    {
+      "priority": 3,
+      "target": "F.5 Attack Campaigns",
+      "action": "Replace the active-campaign label with campaign disposition language so historical, completed, governance-hold, and designed campaigns do not all count as active obligations."
+    }
+  ],
+  "registry_changes": [
+    {
+      "bridge_id": "OPEN_BRIDGE_002",
+      "status": "DEFERRED_PENDING_FORMALIZATION",
+      "claim_cap": "THEORETICAL_ONLY",
+      "non_promotion_note": "No higher-order RT support until directional zero provenance, outer recoupling relation, and collapse conditions are formally defined."
+    },
+    {
+      "bridge_id": "OPEN_BRIDGE_003",
+      "status": "DEFERRED_PENDING_FORMALIZATION",
+      "claim_cap": "THEORETICAL_ONLY",
+      "non_promotion_note": "No subjective continuity, consciousness persistence, trans-domain identity, or empirical continuation claim is licensed."
+    }
+  ],
+  "textbook_changes": [
+    "Appendix F.3 now includes OPEN_BRIDGE_AE_OVERLAP_001 and matches bridge registry disposition for OPEN_BRIDGE_002 and OPEN_BRIDGE_003.",
+    "Appendix F.4 now names AE overlap bridge formalization duties and non-promotion boundaries.",
+    "Appendix F.5 now records attack campaign disposition instead of treating every listed campaign as active."
+  ],
+  "claim_humility_review": {
+    "promotions_made": false,
+    "external_reality_claims_added": false,
+    "unsupported_terms_promoted": false,
+    "claim_class": "C0 bookkeeping with C1-defined-provisional bridge references where already registered"
+  },
+  "remaining_obligations": [
+    "Formalize typed-zero provenance and collapse conditions for OPEN_BRIDGE_002.",
+    "Formalize continuation trace invariants and handoff criteria for OPEN_BRIDGE_003.",
+    "Formalize AE overlap directionality before any probability or quantum-like interpretation is promoted."
+  ],
+  "verification": {
+    "commands": [
+      "python scripts/governance/authorize_lock_update.py",
+      "python scripts/sync_math_registry.py",
+      "python scripts/db/snapshot_registries.py",
+      "python scripts/global_validate.py"
+    ],
+    "results": {
+      "lock_update": "pass",
+      "math_registry_sync": "pass_179_items",
+      "db_snapshot": "pass_REFRESH-20260720T000406272382Z",
+      "global_validate_exit": "pass_exit_0",
+      "global_health_overall_status": "warning",
+      "blocking_failures": false,
+      "warning_sources": [
+        "hygiene_validation",
+        "math_program_validation",
+        "report_write"
+      ]
+    }
+  }
+}

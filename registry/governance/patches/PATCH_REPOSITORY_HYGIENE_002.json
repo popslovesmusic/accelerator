@@ -1,0 +1,53 @@
+{
+  "patch_id": "PATCH_REPOSITORY_HYGIENE_002",
+  "campaign": "CAMPAIGN_REPOSITORY_STABILIZATION_001",
+  "title": "Root Pollution Quarantine",
+  "type": "repository_hygiene",
+  "artifact_type": "governance_patch",
+  "status": "APPLIED",
+  "applied_on": "2026-07-05",
+  "priority": "HIGH",
+  "purpose": "Move four misplaced root-level registry and protocol artifacts into the canonical registry directory so validation can pass without reclassifying unresolved runtime debt.",
+  "implementation": [
+    "Move cross_agent_contradiction_registry.json into registry/cross_agent_contradiction_registry.json without changing content.",
+    "Move cross_dataset_pairing_registry.json into registry/cross_dataset_pairing_registry.json without changing content.",
+    "Move cross_mechanism_signature_registry.json into registry/cross_mechanism_signature_registry.json without changing content.",
+    "Move cross_verification_protocol.json into registry/cross_verification_protocol.json without changing content.",
+    "Update the remaining bare doc reference to the canonical registry path.",
+    "Record the quarantine in governance_change_ledger.json.",
+    "Keep the three runtime debts explicitly open and do not alter RT Calculus patches."
+  ],
+  "source_artifacts": [
+    "cross_agent_contradiction_registry.json",
+    "cross_dataset_pairing_registry.json",
+    "cross_mechanism_signature_registry.json",
+    "cross_verification_protocol.json",
+    "docs/governance/cross_agent_contradiction_detection.md"
+  ],
+  "affected_assets": [
+    "registry/cross_agent_contradiction_registry.json",
+    "registry/cross_dataset_pairing_registry.json",
+    "registry/cross_mechanism_signature_registry.json",
+    "registry/cross_verification_protocol.json",
+    "docs/governance/cross_agent_contradiction_detection.md",
+    "governance_change_ledger.json"
+  ],
+  "validation_requirements": [
+    "No root-level cross_* registry or protocol files remain.",
+    "The cross-agent contradiction doc points to registry/cross_agent_contradiction_registry.json.",
+    "The quarantine is recorded in governance_change_ledger.json.",
+    "global_validate.py reports no root-pollution violations.",
+    "The three governance/runtime debts remain open or partial."
+  ],
+  "success_criteria": {
+    "root_pollution_removed": true,
+    "provenance_preserved": true,
+    "documentation_reference_updated": true,
+    "runtime_debts_unchanged": true
+  },
+  "governance": {
+    "execution_claim": "claimed",
+    "registry_claim": "applied",
+    "fabricated_history": false
+  }
+}

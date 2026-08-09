@@ -1,0 +1,89 @@
+{
+  "command_id": "GOV_DEBT_DISCHARGE_COMMAND_001",
+  "authority": "Global Governance",
+  "last_updated": "2026-07-01",
+  "status": "active",
+  "command_name": "discharge_governance_debt",
+  "purpose": "Provide the explicit governed execution order for reducing live program debt while the governance-first execution gate is active.",
+  "execution_rule": {
+    "statement": "While PTR_GOV_SECTION_CLOSURE_001 remains active, agents SHALL reduce debt only in the order declared here and SHALL NOT initiate non-governance program work.",
+    "scope_limit": "Governance-only until live governance sections are satisfied and the execution gate is explicitly lifted."
+  },
+  "debt_reduction_order": [
+    {
+      "sequence": 1,
+      "debt_id": "DEBT_GOV_LIVE_LEDGER_AMBIGUITY_001",
+      "why_first": "All later governance actions depend on live authority being unambiguous."
+    },
+    {
+      "sequence": 2,
+      "debt_id": "DEBT_GOV_INDUCTION_ROUTING_001",
+      "why_second": "New induction growth must be contained before any further conceptual expansion occurs."
+    },
+    {
+      "sequence": 3,
+      "debt_id": "DEBT_VALIDATOR_IMPORT_PATH_001",
+      "why_third": "Validation must have one canonical governed invocation before broader closure work can be trusted."
+    },
+    {
+      "sequence": 4,
+      "debt_id": "DEBT_GOV_TOOL_ROUTING_METADATA_001",
+      "why_fourth": "Deterministic tool routing is required before agents can safely execute broader governance repair."
+    },
+    {
+      "sequence": 5,
+      "debt_id": "DEBT_GOV_LEXICON_UNDERCLASSIFICATION_001",
+      "why_fifth": "Term classification must be reduced before new claim or induction traffic can be read consistently."
+    },
+    {
+      "sequence": 6,
+      "debt_id": "DEBT_GOV_DEPARTMENT_LAYOUT_001",
+      "why_sixth": "Department structure should be normalized only after authority, routing, and intake control are stabilized."
+    },
+    {
+      "sequence": 7,
+      "debt_id": "DEBT_GOV_ECONOMICS_INDUCTION_001",
+      "why_seventh": "Economics department induction depends on the department layout decision."
+    },
+    {
+      "sequence": 8,
+      "debt_id": "DEBT_GOV_THEOLOGY_INDUCTION_001",
+      "why_eighth": "Theology department induction depends on the department layout decision."
+    },
+    {
+      "sequence": 9,
+      "debt_id": "DEBT_GOV_PHYSICS_SSOT_NORMALIZATION_001",
+      "why_ninth": "Physics naming normalization is lower-risk cleanup after the structural governance blockers above."
+    }
+  ],
+  "deferred_until_gate_lifted": [
+    {
+      "task_or_debt": "PTR_BACKFILL_MATH_PHYS_BOUNDARY_001",
+      "reason": "Important blocker, but it is a downstream routing hardening pass after the core governance section closure and intake controls above."
+    },
+    {
+      "task_or_debt": "mathematics-domain primitive-form debts",
+      "reason": "These are not governance-first section blockers while GOV-EXEC-002 remains active."
+    },
+    {
+      "task_or_debt": "economics local foundational debts",
+      "reason": "These remain frozen until governance-only closure is satisfied."
+    }
+  ],
+  "per_step_requirements": [
+    "Patch live governance artifacts first, then sync the textbook if governance-facing sections become stale.",
+    "Run governed validation through python -m scripts.global_validate after each substantive discharge step or batch.",
+    "If a new induction is introduced during debt reduction, create both registry/induction_registry.json and governance/live/induction_queue.json entries before citing it."
+  ],
+  "required_report_structure": [
+    "command invoked",
+    "debt id targeted",
+    "artifacts changed",
+    "validation command used",
+    "validation result",
+    "textbook sections synchronized",
+    "remaining blockers",
+    "next debt in sequence"
+  ],
+  "completion_condition": "This command remains in force until PTR_GOV_SECTION_CLOSURE_001 is closed or explicitly superseded by a later live governance command."
+}

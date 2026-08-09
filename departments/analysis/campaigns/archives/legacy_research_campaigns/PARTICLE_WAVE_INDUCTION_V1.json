@@ -1,0 +1,42 @@
+{
+  "experiment_id": "PARTICLE_WAVE_INDUCTION_2026-05-29",
+  "intent": "Resolve_FV4_Induce_Operators",
+  "seeds": [101, 202, 303],
+  "components": [
+    {
+      "name": "CA_Directional_Induction",
+      "tool": "triadic_closure_substrate_sim_cpp",
+      "base_config": {
+        "units": 1024,
+        "steps": 2000,
+        "structure": 3,
+        "coupling_strength": 0.2,
+        "coupling_symmetry": false,
+        "admissibility_window": 0.85,
+        "residue_diffusion_rate": 0.05
+      },
+      "variations": [
+        {"name": "inductive_coupling", "config_override": {"coupling_symmetry": false}},
+        {"name": "symmetric_control", "config_override": {"coupling_symmetry": true}}
+      ]
+    },
+    {
+      "name": "PDE_Directional_Induction",
+      "tool": "procedural_pde_engine",
+      "base_config": {
+        "nx": 128,
+        "ny": 128,
+        "steps": 1000,
+        "diff_eps": 0.1,
+        "diff_R": 0.05,
+        "gamma_R": 0.8,
+        "orient_smooth": 0.6,
+        "A_min": 0.15
+      },
+      "variations": [
+        {"name": "inductive_coupling", "config_override": {"gamma_R": 0.8}},
+        {"name": "symmetric_control", "config_override": {"gamma_R": 0.0}}
+      ]
+    }
+  ]
+}

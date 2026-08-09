@@ -1,0 +1,74 @@
+{
+  "artifact_id": "ENGINE_TRACE_ADAPTER_SPEC_20260730_005",
+  "artifact_type": "NONCANONICAL_TYPED_ENGINE_TRACE_ADAPTER_SPECIFICATION",
+  "status": "PROPOSED_BLOCKED_PENDING_HUMAN_REVIEW",
+  "claim_ceiling": "C1_MODEL_RELATIVE",
+  "authority_boundary": "Specification only. No engine code, engine configuration, canonical registry, executable work item, or claim status is changed by this artifact.",
+  "target_engines": [
+    "ca_admissibility_sim_v1_cpp",
+    "graph_dynamics_sim_v1_cpp"
+  ],
+  "current_interface_finding": "The inspected sim_governed.py interfaces expose aggregate final_metrics only; they do not expose typed candidate-pool, S-stage, Arb_A-stage, or tie-resolution traces.",
+  "adapter_contract": {
+    "input": {
+      "fixture_id": "S_ARBA_TYPED_TRACE_FIXTURE_001",
+      "candidate_records": [
+        {"id": "q_valid_a", "admissible": true, "mismatch_cost": 1.0, "orientation_key": "o_a"},
+        {"id": "q_valid_b", "admissible": true, "mismatch_cost": 1.0, "orientation_key": "o_b"},
+        {"id": "q_invalid", "admissible": false, "mismatch_cost": 0.5, "orientation_key": "o_invalid"}
+      ],
+      "tie_case": "q_valid_a and q_valid_b share the minimum mismatch cost",
+      "declared_tie_policy": "preserve_set_or_emit_explicit_local_tie_break; never silently collapse to a globally unique identity"
+    },
+    "required_trace_events": [
+      "candidate_pool_before_S",
+      "candidate_pool_after_S",
+      "removed_candidate_reasons",
+      "arb_a_input_pool",
+      "arb_a_output_selection_or_tie_set",
+      "tie_policy_identifier",
+      "admissibility_preservation_check",
+      "candidate_identity_provenance"
+    ],
+    "output_schema": {
+      "engine_id": "string",
+      "fixture_id": "string",
+      "trace_schema_version": "1.0.0",
+      "s_input_ids": "array[string]",
+      "s_output_ids": "array[string]",
+      "s_removed": "array[{id:string,reason:string}]",
+      "arb_a_input_ids": "array[string]",
+      "arb_a_output": "{selected_id:string|null,tie_set:array[string],policy_id:string}",
+      "invariants": {
+        "s_does_not_increase_cardinality": "boolean",
+        "arb_a_consumes_s_output": "boolean",
+        "selected_id_is_in_arb_a_input_or_null": "boolean",
+        "tie_policy_explicit": "boolean"
+      },
+      "runtime_provenance": "{config_sha256:string,tool_sha256:string,run_id:string}"
+    }
+  },
+  "acceptance_tests": [
+    "S output cardinality is less than or equal to S input cardinality.",
+    "Arb_A input IDs exactly equal S output IDs.",
+    "Any selected ID is present in Arb_A input IDs.",
+    "A tied minimum emits either a tie set or an explicit local tie-policy ID.",
+    "No trace field asserts global uniqueness, universal closure, or external physical validity.",
+    "Two independent approved engine adapters produce schema-valid traces for the same fixture."
+  ],
+  "falsification_conditions": [
+    "S increases candidate cardinality.",
+    "Arb_A selects a candidate removed by S.",
+    "A tied minimum is silently collapsed without a policy identifier.",
+    "Candidate identity cannot be preserved from input through arbitration.",
+    "The two engines produce incompatible trace semantics under the same declared fixture."
+  ],
+  "implementation_blockers": [
+    "Neither inspected target interface currently exposes candidate-level S/Arb_A traces.",
+    "No adapter implementation has been authorized or added.",
+    "Engine-specific mapping from aggregate admissibility/rewiring metrics to candidate records is undefined."
+  ],
+  "next_action": "Human review of this adapter contract; if accepted, authorize a separate implementation task that may modify only adapter/wrapper surfaces and must use approved tools.",
+  "canonical_promotion_allowed": false,
+  "created_at": "2026-07-30T22:56:00Z"
+}

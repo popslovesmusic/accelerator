@@ -44,21 +44,37 @@ def coerce_number(v: Any) -> float | None:
     return None
 
 
-def read_summary(path: Path) -> dict[str, Any]:
-    payload = json.loads(path.read_text(encoding="utf-8"))
-    final_metrics = payload.get("final_metrics") or payload.get("final") or {}
-    record: dict[str, Any] = {
-        "run_dir": str(path.parent),
-        "run_name": path.parent.name,
-        "summary_path": str(path),
-    }
-    record.update(flatten(payload.get("config", {}), prefix="config"))
-    record.update(flatten(final_metrics, prefix="final"))
-    # keep a couple common high-signal top-level keys, if present
-    for k in ("status", "total_halted", "first_box_violation"):
-        if k in payload:
-            record[k] = json.dumps(payload[k], ensure_ascii=False) if isinstance(payload[k], (dict, list)) else payload[k]
-    return record
+def read_summaries(path: Path) -> list[dict[str, Any]]:
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except Exception as e:
+        print(f"Error reading {path}: {e}")
+        return []
+
+    if isinstance(payload, list):
+        items = payload
+    else:
+        items = [payload]
+
+    records = []
+    for item in items:
+        if not isinstance(item, dict):
+            continue
+        final_metrics = item.get("final_metrics") or item.get("final") or {}
+        record: dict[str, Any] = {
+            "run_dir": str(path.parent),
+            "run_name": path.parent.name,
+            "summary_path": str(path),
+        }
+        record.update(flatten(item.get("config", {}), prefix="config"))
+        record.update(flatten(final_metrics, prefix="final"))
+        # keep a couple common high-signal top-level keys, if present
+        for k in ("status", "total_halted", "first_box_violation", "engine", "exit_code"):
+            if k in item:
+                val = item[k]
+                record[k] = json.dumps(val, ensure_ascii=False) if isinstance(val, (dict, list)) else val
+        records.append(record)
+    return records
 
 
 def find_summaries(root: Path, pattern: str) -> list[Path]:
@@ -66,6 +82,8 @@ def find_summaries(root: Path, pattern: str) -> list[Path]:
 
 
 def write_csv(rows: list[dict[str, Any]], out_path: Path) -> None:
+    if not rows:
+        return
     out_path.parent.mkdir(parents=True, exist_ok=True)
     fieldnames: list[str] = sorted({k for r in rows for k in r.keys()})
     with out_path.open("w", encoding="utf-8", newline="") as f:
@@ -172,7 +190,7 @@ def make_sweep_plot(
 
 def parse_args(argv: Iterable[str] | None = None) -> argparse.Namespace:
     p = argparse.ArgumentParser(description="Summarize runs/**/summary.json into a tidy CSV (+ optional plots).")
-    p.add_argument("--root", default="outputs", help="Root directory to scan (default: outputs).")
+    p.add_argument("--root", default=".", help="Root directory to scan (default: current).")
     p.add_argument("--pattern", default="**/summary.json", help="Glob pattern under root (default: **/summary.json).")
     p.add_argument("--out", default=None, help="Output directory (default: <root>/analysis_summaries).")
     p.add_argument("--csv", default=None, help="CSV path (default: <out>/runs_summary.csv).")
@@ -193,17 +211,25 @@ def main() -> None:
 
     summaries = find_summaries(root, args.pattern)
     if not summaries:
-        raise SystemExit(f"No summaries found under {root} with pattern {args.pattern!r}.")
+        print(f"No summaries found under {root} with pattern {args.pattern!r}.")
+        return
 
-    rows = [read_summary(p) for p in summaries]
-    write_csv(rows, csv_path)
+    all_rows = []
+    for p in summaries:
+        all_rows.extend(read_summaries(p))
+
+    if not all_rows:
+        print("No valid run records found.")
+        return
+
+    write_csv(all_rows, csv_path)
 
     if args.plots:
         plots_dir = out_dir / "plots"
-        written = make_histograms(rows, plots_dir, max_metrics=args.max_hists)
+        written = make_histograms(all_rows, plots_dir, max_metrics=args.max_hists)
         if args.sweep_x and args.sweep_y:
             make_sweep_plot(
-                rows,
+                all_rows,
                 plots_dir,
                 x_key=args.sweep_x,
                 y_key=args.sweep_y,

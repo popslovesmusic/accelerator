@@ -24,28 +24,34 @@ public:
     void compute_histogram(const float* data, size_t n, float min_val, float max_val, uint32_t* bins, int num_bins) {
         if (n == 0) return;
         
-        // Ensure bins are cleared (could be done on host, but GPU fill is fast)
         q_.fill(bins, 0u, num_bins).wait();
 
         float range = max_val - min_val;
         if (range <= 1e-9f) {
-            // All data in one bin if range is effectively zero
             uint32_t count = static_cast<uint32_t>(n);
             q_.memcpy(bins, &count, sizeof(uint32_t)).wait();
             return;
         }
 
-        q_.parallel_for(sycl::range<1>(n), [=](sycl::id<1> idx) {
-            float val = data[idx[0]];
-            if (val >= min_val && val <= max_val) {
-                int bin_idx = static_cast<int>((val - min_val) / range * num_bins);
-                if (bin_idx >= num_bins) bin_idx = num_bins - 1;
-                if (bin_idx < 0) bin_idx = 0;
+        {
+            sycl::buffer<float, 1> data_buf(data, sycl::range<1>(n));
+            
+            q_.submit([&](sycl::handler& h) {
+                auto data_acc = data_buf.get_access<sycl::access::mode::read>(h);
                 
-                auto bin_ref = sycl::atomic_ref<uint32_t, sycl::memory_order::relaxed, sycl::memory_scope::device, sycl::access::address_space::global_space>(bins[bin_idx]);
-                bin_ref.fetch_add(1);
-            }
-        }).wait();
+                h.parallel_for(sycl::range<1>(n), [=](sycl::id<1> idx) {
+                    float val = data_acc[idx[0]];
+                    if (val >= min_val && val <= max_val) {
+                        int bin_idx = static_cast<int>((val - min_val) / range * num_bins);
+                        if (bin_idx >= num_bins) bin_idx = num_bins - 1;
+                        if (bin_idx < 0) bin_idx = 0;
+                        
+                        auto bin_ref = sycl::atomic_ref<uint32_t, sycl::memory_order::relaxed, sycl::memory_scope::device, sycl::access::address_space::global_space>(bins[bin_idx]);
+                        bin_ref.fetch_add(1);
+                    }
+                });
+            }).wait();
+        }
     }
 
     /**
@@ -67,24 +73,34 @@ public:
              return;
         }
 
-        q_.parallel_for(sycl::range<1>(n), [=](sycl::id<1> idx) {
-            float xv = x_data[idx[0]];
-            float yv = y_data[idx[0]];
-            
-            if (xv >= x_min && xv <= x_max && yv >= y_min && yv <= y_max) {
-                int bx = static_cast<int>((xv - x_min) / x_range * num_bins);
-                int by = static_cast<int>((yv - y_min) / y_range * num_bins);
+        {
+            sycl::buffer<float, 1> x_buf(x_data, sycl::range<1>(n));
+            sycl::buffer<float, 1> y_buf(y_data, sycl::range<1>(n));
+
+            q_.submit([&](sycl::handler& h) {
+                auto x_acc = x_buf.get_access<sycl::access::mode::read>(h);
+                auto y_acc = y_buf.get_access<sycl::access::mode::read>(h);
                 
-                if (bx >= num_bins) bx = num_bins - 1;
-                if (bx < 0) bx = 0;
-                if (by >= num_bins) by = num_bins - 1;
-                if (by < 0) by = 0;
-                
-                int bin_idx = by * num_bins + bx;
-                auto bin_ref = sycl::atomic_ref<uint32_t, sycl::memory_order::relaxed, sycl::memory_scope::device, sycl::access::address_space::global_space>(bins[bin_idx]);
-                bin_ref.fetch_add(1);
-            }
-        }).wait();
+                h.parallel_for(sycl::range<1>(n), [=](sycl::id<1> idx) {
+                    float xv = x_acc[idx[0]];
+                    float yv = y_acc[idx[0]];
+                    
+                    if (xv >= x_min && xv <= x_max && yv >= y_min && yv <= y_max) {
+                        int bx = static_cast<int>((xv - x_min) / x_range * num_bins);
+                        int by = static_cast<int>((yv - y_min) / y_range * num_bins);
+                        
+                        if (bx >= num_bins) bx = num_bins - 1;
+                        if (bx < 0) bx = 0;
+                        if (by >= num_bins) by = num_bins - 1;
+                        if (by < 0) by = 0;
+                        
+                        int bin_idx = by * num_bins + bx;
+                        auto bin_ref = sycl::atomic_ref<uint32_t, sycl::memory_order::relaxed, sycl::memory_scope::device, sycl::access::address_space::global_space>(bins[bin_idx]);
+                        bin_ref.fetch_add(1);
+                    }
+                });
+            }).wait();
+        }
     }
 
     sycl::queue& get_queue() { return q_; }

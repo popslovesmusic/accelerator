@@ -32,11 +32,22 @@ def compute_spatial_topology(grid, threshold=0.5):
         "active_fraction": float(np.mean(binary_mask))
     }
 
-def compute_network_topology(adj_matrix):
+def compute_network_topology(adj_matrix, adjacency_threshold=0.0):
     """
     Identifies connected components in a graph.
+    
+    Args:
+        adj_matrix: Weighted adjacency matrix.
+        adjacency_threshold: Values with absolute magnitude <= threshold are treated as non-edges.
+                           Default 0.0 preserves legacy behavior (any nonzero is an edge).
     """
-    G = nx.from_numpy_array(adj_matrix)
+    # Create a copy or boolean mask to apply threshold without modifying input
+    if adjacency_threshold > 0:
+        cleaned_adj = np.where(np.abs(adj_matrix) > adjacency_threshold, adj_matrix, 0.0)
+    else:
+        cleaned_adj = adj_matrix
+        
+    G = nx.from_numpy_array(cleaned_adj)
     components = list(nx.connected_components(G))
     num_features = len(components)
     

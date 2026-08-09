@@ -1,0 +1,101 @@
+{
+  "registry_id": "PCD_GOVERNED_CONTEXT_ASSEMBLY_REGISTRY",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "context_packet_id",
+      "request_type",
+      "required_sources",
+      "retrieval_scope",
+      "status_filters",
+      "confidence_filters",
+      "provenance_requirements",
+      "output_format"
+    ]
+  },
+  "packet_types": [
+    {
+      "context_packet_id": "CTX-THEOREM-REVIEW",
+      "request_type": "theorem_review",
+      "required_sources": [
+        "formal_object_registry",
+        "theorem_status_registry",
+        "theorem_closure_registry",
+        "proof_registry",
+        "gap_dependency_graph",
+        "empirical_claim_ledger"
+      ],
+      "retrieval_scope": "theorem_and_dependencies",
+      "status_filters": [],
+      "confidence_filters": [],
+      "provenance_requirements": "not_specified",
+      "output_format": "json_and_markdown_summary"
+    },
+    {
+      "context_packet_id": "CTX-ENGINE-rigor endorsement",
+      "request_type": "engine_rigor endorsement_review",
+      "required_sources": [
+        "tool_manifest",
+        "runtime_binary_manifest",
+        "engine_rigor endorsement_evidence_template",
+        "engine_rigor endorsement_backlog",
+        "simulation_artifact_governance"
+      ],
+      "retrieval_scope": "tool_runtime_and_evidence_chain",
+      "status_filters": [],
+      "confidence_filters": [],
+      "provenance_requirements": "auditable_provenance_required",
+      "output_format": "json"
+    },
+    {
+      "context_packet_id": "CTX-PUBLICATION-REVIEW",
+      "request_type": "publication_review",
+      "required_sources": [
+        "publication_evidence_binding_registry",
+        "claim_support_matrix",
+        "empirical_result_package_schema",
+        "epistemic_drift_monitor_registry",
+        "rhetorical_scope_registry"
+      ],
+      "retrieval_scope": "publication_claims_evidence_and_language",
+      "status_filters": [],
+      "confidence_filters": [],
+      "provenance_requirements": "full_chain_provenance_required",
+      "output_format": "markdown_review_packet"
+    },
+    {
+      "context_packet_id": "CTX-TECH-NOTE-SEARCH",
+      "request_type": "tech_note_search",
+      "required_sources": [
+        "docs/tech_notes",
+        "pcd_governance.db",
+        "sqlite_ingestion_report"
+      ],
+      "retrieval_scope": "full_text_and_frontmatter",
+      "status_filters": [],
+      "confidence_filters": [],
+      "provenance_requirements": "filesystem_sync_required",
+      "output_format": "ranked_results_with_paths"
+    }
+  ],
+  "knowledge_rebuild_binding": {
+  "statement": "Governed context packets must declare the latest successful knowledge rebuild or ingestion report used for retrieval.",
+  "failure_behavior": "mark_context_packet_stale"
+  },
+  "semantic_relationship_binding": {
+  "statement": "Context packets should include semantic relationship neighborhoods for requested theorems, operators, claims, tools, or publications.",
+  "failure_behavior": "warn_relationship_graph_missing"
+  },
+  "graph_traversal_binding": {
+    "statement": "Governed context packets should include graph traversal results for theorem, claim, publication, and engine-rigor endorsement reviews.",
+    "failure_behavior": "mark_context_packet_incomplete"
+  },
+  "traversal_audit_binding": {
+  "statement": "Context packets using semantic graph neighborhoods must include a traversal audit result before being used for governed review.",
+  "failure_behavior": "mark_context_packet_graph_unverified"
+  },
+  "temporal_replay_binding": {
+  "statement": "Context packets for governed reviews should include replayable state history for high-impact objects when temporal history exists.",
+  "failure_behavior": "warn_temporal_context_incomplete"
+  }
+  }

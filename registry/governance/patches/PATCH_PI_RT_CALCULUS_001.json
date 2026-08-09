@@ -1,0 +1,90 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_001",
+  "artifact_type": "governance_patch",
+  "date": "2026-07-04",
+  "applied_on": "2026-07-04",
+  "status": "APPLIED",
+  "campaign": "RT_CALCULUS_IMPLEMENTATION_001",
+  "title": "RT Calculus Foundation",
+  "authority": "Framework Foundation",
+  "summary": "Establishes RT as the primitive calculus from which linear and nonlinear operational regimes are derived. This patch explicitly prohibits treating either linearity or nonlinearity as an axiomatic floor.",
+  "motivation": {
+    "problem": "Previous discussion considered linear and nonlinear mathematics as possible foundational primitives. This risks importing mathematical structure into the framework rather than deriving it from RT.",
+    "resolution": "RT remains the sole primitive calculus. Linear and nonlinear behavior become derived operational regimes."
+  },
+  "canonical_foundation": {
+    "RT_core": "RT := [(ℰ≠0) ⇔R δα(ℰ>0)]",
+    "meta_bindings": {
+      "A_meta": "δα(ℰ>0)",
+      "B_meta": "(ℰ≠0)"
+    }
+  },
+  "governance_rules": [
+    {
+      "id": "RTCALC_GOV_001",
+      "name": "RT Primacy",
+      "statement": "RT_core is the unique primitive calculus of the framework."
+    },
+    {
+      "id": "RTCALC_GOV_002",
+      "name": "Derived Mathematical Regimes",
+      "statement": "Linear and nonlinear operational behavior shall be treated as derived from RT_core rather than as independent primitives."
+    },
+    {
+      "id": "RTCALC_GOV_003",
+      "name": "No Imported Mathematical Floor",
+      "statement": "No external mathematical formalism, including linear algebra or nonlinear algebra, may be treated as the axiomatic foundation of the framework unless independently derived from RT."
+    }
+  ],
+  "deferred_items": [
+    "Formal derivation of the linear regime.",
+    "Formal derivation of the nonlinear regime.",
+    "Transition operators between regimes.",
+    "Proof obligations for regime emergence.",
+    "Computational realization."
+  ],
+  "dependencies": [
+    "Canonical RT Core",
+    "Meta-domain bindings",
+    "Typed Meta-Relation Family <*>_x"
+  ],
+  "effects": [
+    "Preserves RT as the unique foundation.",
+    "Prevents premature importation of external algebraic assumptions.",
+    "Opens a new calculus branch in which mathematical regimes become derivable objects."
+  ],
+  "theorem_impact": "None. Governance and architectural clarification only.",
+  "backward_compatibility": {
+    "breaking": false,
+    "notes": [
+      "Existing RT definitions remain canonical.",
+      "Existing tensor work is unaffected.",
+      "Future linear/nonlinear derivations will attach to this foundation."
+    ]
+  },
+  "updated_artifacts": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_001.json"
+  ],
+  "source_artifacts": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/governance/patches/MPF_DOMINANT_DOMAIN_LINEAR_NONLINEAR_001.json",
+    "registry/governance/patches/PATCH_MPF_TEXTBOOK_STALENESS_RESOLUTION_001.json"
+  ],
+  "validation": {
+    "required": [
+      "canonical_rt_expression_present",
+      "meta_bindings_present",
+      "rt_core_precedence_preserved",
+      "linear_and_nonlinear_derived_not_primitive",
+      "no_axiomatic_floor_for_linear_or_nonlinear",
+      "global_validate_pass"
+    ],
+    "result": "pass"
+  },
+  "notes": [
+    "This patch is governance and architecture only.",
+    "Linear and nonlinear regime language remains downstream of RT_core and does not supersede the canonical root expression."
+  ]
+}

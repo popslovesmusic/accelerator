@@ -1,0 +1,43 @@
+{
+  "patch_id": "MPF_VERTICAL_BAR_EXECUTABLE_MODEL_PATCH_001",
+  "status": "ACTIVE",
+  "purpose": "Construct the minimum executable environment in which | can be tested.",
+  "simulation_world": {
+    "entities": [
+      "A",
+      "B"
+    ],
+    "state": {
+      "A": "binary or scalar process-aspect",
+      "B": "binary or scalar process-aspect"
+    }
+  },
+  "operators": {
+    "bar": "A|B",
+    "distinction": "D(A|B)",
+    "admissibility": "δa",
+    "constraint_deviation": "Δa := distance(δa_before, δa_after)"
+  },
+  "execution_cycle": [
+    "initialize A,B",
+    "evaluate A|B",
+    "compute D(A|B)",
+    "update admissibility",
+    "measure Δa",
+    "repeat"
+  ],
+  "recorded_metrics": [
+    "D",
+    "Δa",
+    "cycle_index"
+  ],
+  "minimum_success_condition": [
+    "D > 0",
+    "Δa > 0"
+  ],
+  "minimum_failure_condition": [
+    "D = 0",
+    "Δa = 0"
+  ],
+  "applied_timestamp": "2026-06-20T12:31:00-04:00"
+}

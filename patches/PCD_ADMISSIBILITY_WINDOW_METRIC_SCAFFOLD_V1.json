@@ -1,0 +1,112 @@
+{
+  "patch_id": "PCD_ADMISSIBILITY_WINDOW_METRIC_SCAFFOLD_V1",
+  "priority": "ACTIVE_FORMAL_REASONING",
+  "intent": "Define a first scaffold for a metric on admissibility_window_space so neighborhood overlap, boundary stability, and coupling strength can be quantified.",
+  "operations": [
+    {
+      "op": "create_window_metric_registry",
+      "target_file": "registry/window_metric_registry.json",
+      "schema": {
+        "required_fields": [
+          "metric_id",
+          "space",
+          "distance_function",
+          "domain",
+          "codomain",
+          "overlap_behavior",
+          "boundedness_conditions",
+          "claim_limits"
+        ]
+      }
+    },
+    {
+      "op": "define_window_metric_scaffold",
+      "target_file": "registry/window_metric_registry.json",
+      "entry": {
+        "metric_id": "PHI_METRIC_V1",
+        "space": "admissibility_window_space",
+        "distance_function": "d_Phi",
+        "domain": "admissibility_window_space × admissibility_window_space",
+        "codomain": "nonnegative_real",
+        "overlap_behavior": "d_Phi(A_i, A_j) = 0 iff the windows are identical; decreases as volume of A_i ∩ A_j increases relative to union.",
+        "boundedness_conditions": [
+          "finite transition space measure",
+          "declared residue context",
+          "declared participation alpha"
+        ],
+        "claim_limits": [
+          "metric scaffold only",
+          "not yet a full metric proof",
+          "exact functional form (e.g., Jaccard-style) remains implementation-dependent"
+        ]
+      }
+    },
+    {
+      "op": "define_window_distance_rules",
+      "target_file": "registry/window_metric_registry.json",
+      "rules": [
+        {
+          "name": "coupling_strength_rule_v1",
+          "statement": "The strength of coupling between processes i and j is inversely proportional to the window distance d_Phi(A_i, A_j)."
+        },
+        {
+          "name": "boundary_stability_rule_v1",
+          "statement": "A CSI boundary is stable if the window distance d_Phi to any non-member process remains above a declared exclusion threshold tau_A."
+        }
+      ]
+    },
+    {
+      "op": "add_window_metric_guardrails",
+      "target_file": "registry/lexicon_gap_queue.json",
+      "rules": [
+        {
+          "name": "no_full_window_metric_claim_without_proof_v1",
+          "statement": "d_Phi must not be described as a full metric until identity, symmetry, and triangle inequality are proven for window sets.",
+          "failure_behavior": "rewrite_as_window_metric_scaffold"
+        },
+        {
+          "name": "no_coupling_strength_without_d_Phi_v1",
+          "statement": "Quantitative claims about coupling strength must cite d_Phi or an equivalent window-distance metric.",
+          "failure_behavior": "route_to_window_metric_review"
+        }
+      ]
+    },
+    {
+      "op": "update_gap_dependency_graph",
+      "target_file": "registry/gap_dependency_graph.json",
+      "gap_id": "GAP_3_csi_membership_rule",
+      "updates": {
+        "closure_progress": [
+          "admissibility_window distance scaffold registered as PHI_METRIC_V1"
+        ],
+        "still_blocking": [
+          "formal proof of d_Phi properties",
+          "mapping to specific graph-engine topology rules",
+          "simulation validation of csi boundary transitions"
+        ]
+      }
+    },
+    {
+      "op": "update_operator_algebra_closure_registry",
+      "target_file": "registry/operator_algebra_closure_registry.json",
+      "operator_id": "csi",
+      "updates": {
+        "closure_status": "WINDOW_METRIC_SCAFFOLD_REGISTERED",
+        "closed_items": [
+          "window distance scaffold",
+          "coupling strength rule",
+          "boundary stability rule"
+        ],
+        "remaining_gaps": [
+          "formal metric proof for d_Phi",
+          "mapping to graph topology",
+          "simulation verification of neighborhood stability"
+        ]
+      }
+    },
+    {
+      "op": "emit_report",
+      "output_path": "registry/reports/admissibility_window_metric_scaffold_v1_report.json"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "rollback_steps": [
+    {
+      "step_index": 1,
+      "description": "Locate registry/formal_object_registry.json and remove the OBJ-TYPE_WITNESS_C, OBJ-project_w, OBJ-AX-WITNESS-REPDIST, and OBJ-AX-REALIZATION-WITNESS JSON objects from the $.objects array.",
+      "target_file": "registry/formal_object_registry.json"
+    },
+    {
+      "step_index": 2,
+      "description": "Locate registry/math_hashes.json and remove the 'D_relation_witness_foundational_candidate' key-value mapping.",
+      "target_file": "registry/math_hashes.json"
+    },
+    {
+      "step_index": 3,
+      "description": "Locate docs/textbook/mono_process_textbook_complete.md and delete the section detailing TYPE_WITNESS_C and project_w induction.",
+      "target_file": "docs/textbook/mono_process_textbook_complete.md"
+    }
+  ],
+  "rollback_files": [
+    "registry/formal_object_registry.json",
+    "registry/math_hashes.json",
+    "docs/textbook/mono_process_textbook_complete.md"
+  ],
+  "rollback_validation": "Run scripts/global_validate.py to ensure the repository returns to its exact prior health-certified state."
+}

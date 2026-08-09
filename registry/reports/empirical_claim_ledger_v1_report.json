@@ -1,0 +1,46 @@
+{
+  "report_id": "EMPIRICAL_CLAIM_LEDGER_V1_REPORT",
+  "timestamp": "2026-05-10T11:00:00Z",
+  "status": "COMPLETED",
+  "patch_id": "PCD_EMPIRICAL_CLAIM_LEDGER_V1",
+  "summary": "Implemented the Empirical Claim Ledger to track the durable history of simulation-supported results. Bound the ledger to confidence propagation and runtime drift events and implemented governance guardrails for status changes.",
+  "operations_summary": [
+    {
+      "operation": "create_empirical_claim_ledger",
+      "target": "registry/empirical_claim_ledger.json",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "define_status_history_events",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "bind_ledger_to_confidence_propagation",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "bind_ledger_to_runtime_drift",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "add_ledger_guardrails",
+      "target": "registry/lexicon_gap_queue.json",
+      "status": "SUCCESS",
+      "guardrails_added": [
+        "no_empirical_status_change_without_ledger_v1",
+        "no_restored_claim_without_rerigor endorsement_event_v1"
+      ]
+    }
+  ],
+  "ledger_status": {
+    "registry_active": true,
+    "event_types_defined": 8,
+    "propagation_binding_active": true,
+    "drift_binding_active": true
+  },
+  "charter_compliance_check": {
+    "charter_version": "2.3",
+    "status": "COMPLIANT",
+    "notes": "The empirical claim ledger correctly enforces provenance mandates by requiring a durable historical record of all status changes, ensuring that empirical support is always traceable to specific results and runtime contexts."
+  }
+}

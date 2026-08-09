@@ -1,0 +1,29 @@
+{
+  "analysis_id": "CRAWL_DEPENDENCY_CYCLE_20260731_001",
+  "nodes": [
+    {"id":"bounded_symmetry","classification":"PRIMITIVE_DEFINITION","status":"PROVISIONALLY_DEFINED"},
+    {"id":"unbounded_symmetry","classification":"PRIMITIVE_DEFINITION","status":"PROVISIONALLY_DEFINED"},
+    {"id":"symmetry_condition","classification":"DERIVED_DEFINITION","status":"PROVISIONALLY_DEFINED"},
+    {"id":"symmetry_condition_relation","classification":"DERIVED_DEFINITION","status":"PROVISIONALLY_DEFINED"},
+    {"id":"distinction_permitting_symmetry_condition","classification":"NOTATION_ALIAS","status":"PROVISIONALLY_DEFINED"},
+    {"id":"dominant_domain_projection","classification":"DERIVED_DEFINITION","status":"BLOCKED"},
+    {"id":"relation_axioms","classification":"PROOF_OBLIGATION","status":"BLOCKED"},
+    {"id":"executable_semantics","classification":"EXECUTABLE_SEMANTICS","status":"BLOCKED"}
+  ],
+  "edges": [
+    {"from":"symmetry_condition_relation","to":"bounded_symmetry","type":"CONSUMES_TYPE"},
+    {"from":"symmetry_condition_relation","to":"unbounded_symmetry","type":"CONSUMES_TYPE"},
+    {"from":"symmetry_condition_relation","to":"symmetry_condition","type":"RETURNS_TYPE"},
+    {"from":"distinction_permitting_symmetry_condition","to":"symmetry_condition","type":"ALIASES"},
+    {"from":"dominant_domain_projection","to":"symmetry_condition","type":"CONSUMES_TYPE"},
+    {"from":"dominant_domain_projection","to":"relation_axioms","type":"BLOCKED_BY"},
+    {"from":"relation_axioms","to":"symmetry_condition_relation","type":"REQUIRES_PROOF_OF"},
+    {"from":"executable_semantics","to":"relation_axioms","type":"DEPENDS_ON"}
+  ],
+  "roots": ["bounded_symmetry","unbounded_symmetry"],
+  "leaves": ["relation_axioms","executable_semantics"],
+  "orphans": [],
+  "cycles": [],
+  "transitive_blocker_propagation": [{"blocker":"relation_axioms","blocked_downstream":["dominant_domain_projection","executable_semantics"]}],
+  "cycle_policy": "No cycles detected in the declared active graph; benign recursive boundedness language is not treated as a cycle without a dependency edge."
+}

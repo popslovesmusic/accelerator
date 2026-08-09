@@ -1,0 +1,95 @@
+{
+  "registry_id": "TYPED_ZERO_PROVENANCE_REGISTRY",
+  "version": "1.0.0",
+  "status": "C1_DEFINED_PROVISIONAL",
+  "source_patch": "APPENDIX_F_TYPED_ZERO_PROVENANCE_FORMALIZATION_001",
+  "source_bridge": "OPEN_BRIDGE_002",
+  "purpose": "Define the provisional provenance carrier, outer recoupling relation, and collapse conditions for typed zero-conditions 0_minus and 0_plus.",
+  "carrier": {
+    "symbol": "TZR",
+    "name": "Typed-Zero Provenance Carrier",
+    "definition": "A typed record attached to a locally collapsed zero-condition that preserves role polarity, source expression lineage, collapse context, and admissibility context without treating zero as an independent object.",
+    "canonical_form": "TZR(0_sigma) := {sigma, source_trace, collapse_context, admissibility_context, relation_slot}",
+    "allowed_sigma": [
+      "minus",
+      "plus"
+    ],
+    "required_fields": [
+      "sigma",
+      "source_trace",
+      "collapse_context",
+      "admissibility_context",
+      "relation_slot"
+    ],
+    "negative_constraints": [
+      "not_independent_zero_object",
+      "not_nonexistence",
+      "not_logical_null",
+      "not_admissible_without_recoupling",
+      "not_evidence_if_required_fields_missing"
+    ]
+  },
+  "typed_zero_conditions": [
+    {
+      "symbol": "0_minus",
+      "carrier_form": "TZR(0_minus)",
+      "meaning": "Collapsed zero-condition retaining minus-directed provenance from its source trace.",
+      "lawful_use": "May participate in higher-order RT only when recoupled with an oppositely typed zero-condition under the declared typed-zero recoupling relation."
+    },
+    {
+      "symbol": "0_plus",
+      "carrier_form": "TZR(0_plus)",
+      "meaning": "Collapsed zero-condition retaining plus-directed provenance from its source trace.",
+      "lawful_use": "May participate in higher-order RT only when recoupled with an oppositely typed zero-condition under the declared typed-zero recoupling relation."
+    }
+  ],
+  "outer_recoupling_relation": {
+    "relation_id": "TZR_RECOUPLE_RELATION_001",
+    "family_member": "<g>_y",
+    "family": "<*>_x",
+    "canonical_form": "TZR(0_minus) <g>_y TZR(0_plus)",
+    "reading": "A typed meta-relation family instance that compares oppositely typed zero-condition carriers under a declared recoupling context y.",
+    "context_y_requirements": [
+      "source_trace_compatibility",
+      "opposite_polarity",
+      "admissibility_context_compatibility",
+      "non_identity_collapse",
+      "constructive_trace_to_RT_core"
+    ],
+    "admission_rule": "The recoupled expression is an RT_admissible_candidate only if both carriers are complete, polarities are opposite, context y is declared, and PRIN_001 trace-admissibility is preserved.",
+    "non_promotion_note": "This relation defines a provisional admissibility candidate only; it does not prove higher-order RT support or promote OPEN_BRIDGE_002 to SUPPORTED."
+  },
+  "collapse_conditions": {
+    "typed_status_retained_when": [
+      "carrier_fields_complete",
+      "source_trace_recoverable",
+      "polarity_sigma_recoverable",
+      "admissibility_context_recoverable",
+      "relation_slot_declared"
+    ],
+    "collapses_to_undifferentiated_zero_when": [
+      "source_trace_missing",
+      "polarity_sigma_missing_or_erased",
+      "admissibility_context_missing",
+      "relation_slot_missing",
+      "same_polarity_recoupling_attempted",
+      "carrier_used_as_independent_zero_object",
+      "constructive_trace_to_RT_core_fails"
+    ],
+    "collapse_result": "0_untyped",
+    "collapse_consequence": "0_untyped cannot participate as typed evidence in higher-order RT recoupling and must be treated as outside the distinction domain unless a new lawful asymmetric recoupling event is supplied."
+  },
+  "bridge_disposition": {
+    "bridge_id": "OPEN_BRIDGE_002",
+    "previous_status": "DEFERRED_PENDING_FORMALIZATION",
+    "new_status": "PROVISIONALLY_FORMALIZED_PENDING_VALIDATION",
+    "claim_cap": "THEORETICAL_ONLY",
+    "promotion_allowed": false
+  },
+  "remaining_validation_obligations": [
+    "Validate that TZR carrier fields are sufficient for all uses of 0_minus and 0_plus in nested RT traces.",
+    "Audit existing <g>_y and <*>_x usages for compatibility with typed-zero recoupling.",
+    "Construct a PRIN_001 trace example showing lawful typed-zero recoupling without identity collapse.",
+    "Construct a counterexample showing collapse to 0_untyped when provenance fields are missing."
+  ]
+}

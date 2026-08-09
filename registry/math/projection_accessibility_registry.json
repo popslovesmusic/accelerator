@@ -1,0 +1,70 @@
+{
+  "patch_id": "MPF-RTOP-003",
+  "name": "Projection Accessibility Relation Registry",
+  "status": "active",
+  "metric_status": "TOPOLOGY_SCAFFOLD_ONLY",
+  "purpose": "Formalize directional accessibility relations between projections without implying equivalence, identity, or reversibility.",
+  "governance_status": {
+    "theorem_status": "NOT_PROVEN",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL"
+  },
+  "accessibility_relations": [
+    {
+      "relation_id": "ACCESS_PARTIAL",
+      "definition": "A directional link where some lost features of projection B can be analytically estimated from projection A.",
+      "reversibility": "NOT_GUARANTEED"
+    },
+    {
+      "relation_id": "ACCESS_TRACE_ONLY",
+      "definition": "Only the shared source-relation pointer is accessible; no internal features can be reconstructed.",
+      "reversibility": "TRACE_ONLY"
+    },
+    {
+      "relation_id": "ACCESS_CONFLICT_PRESERVING",
+      "definition": "Accessibility that explicitly carries the conflict metadata of the source neighborhood.",
+      "reversibility": "RESTRICTED"
+    },
+    {
+      "relation_id": "ACCESS_DEFORMATION_BOUND",
+      "definition": "Accessibility limited by the maximum allowable deformation of the projected form.",
+      "reversibility": "NONE"
+    },
+    {
+      "relation_id": "ACCESS_BLOCKED",
+      "definition": "No directional accessibility is permitted due to loss accumulation or domain conflict.",
+      "reversibility": "NONE"
+    }
+  ],
+  "mandatory_constraints": [
+    {
+      "constraint_id": "ACC-CON-001",
+      "statement": "Accessibility does not imply identity."
+    },
+    {
+      "constraint_id": "ACC-CON-002",
+      "statement": "Accessibility does not imply reversibility."
+    },
+    {
+      "constraint_id": "ACC-CON-003",
+      "statement": "Accessibility does not imply source equivalence."
+    }
+  ],
+  "governance_rules": [
+    {
+      "rule_id": "ACC-RULE-001",
+      "rule": "Every accessibility relation must specify directionality and reversibility status."
+    },
+    {
+      "rule_id": "ACC-RULE-002",
+      "rule": "Accessibility between QM-like and GR-like analogs must remain ACCESS_CONFLICT_PRESERVING or lower."
+    }
+  ],
+  "forbidden_claims": [
+    "Accessibility proves that projection A is projection B.",
+    "Mutual accessibility implies full source recovery.",
+    "Accessibility paths derive physical interaction constants."
+  ],
+  "source_relation": "(E\u22600) \u21d4R \u03b4(E>0)",
+  "non_separability_acknowledged": true
+}

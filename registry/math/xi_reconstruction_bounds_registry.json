@@ -1,0 +1,54 @@
+{
+  "xi_reconstruction_bounds": {
+    "version": "1.0",
+    "target_operator": "Xi",
+    "status": "bounded_reconstruction_scaffold",
+    "bound_classes": [
+      {
+        "id": "XRB-001",
+        "name": "locally_unique_reconstruction",
+        "condition": "Within open admissibility window (epsilon > 0) with unique orientation and single-branch history.",
+        "description": "Xi recovers a unique formal state preimage."
+      },
+      {
+        "id": "XRB-002",
+        "name": "bounded_multi_preimage_reconstruction",
+        "condition": "Finite multi-branch history with stable orientation-sensitive tie-breaking.",
+        "description": "Xi recovers a finite, bounded set of admissible preimages."
+      },
+      {
+        "id": "XRB-003",
+        "name": "partial_trace_reconstruction",
+        "condition": "Partial information loss from Pi_A clipping or low-dimensional observable mapping.",
+        "description": "Xi recovers state components preserved by the projection/mapping only."
+      },
+      {
+        "id": "XRB-004",
+        "name": "globally_blocked_reconstruction",
+        "condition": "Intrinsic many-to-one aggregation in NavT or irreducible branching in delta.",
+        "description": "Global causal history recovery is formally impossible."
+      }
+    ],
+    "operator_mapping": [
+      {
+        "operator": "NavT",
+        "primary_bound": "globally_blocked_reconstruction",
+        "secondary_bound": "partial_trace_reconstruction",
+        "loss_mechanism": "noninvertibility_induced"
+      },
+      {
+        "operator": "Pi_A",
+        "primary_bound": "locally_unique_reconstruction",
+        "secondary_bound": "epsilon_boundary_failed_reconstruction",
+        "loss_mechanism": "projection_induced"
+      },
+      {
+        "operator": "delta",
+        "primary_bound": "bounded_multi_preimage_reconstruction",
+        "secondary_bound": "multi_branch_limited_reconstruction",
+        "loss_mechanism": "multi_branch_induced"
+      }
+    ],
+    "last_updated": "2026-05-13"
+  }
+}

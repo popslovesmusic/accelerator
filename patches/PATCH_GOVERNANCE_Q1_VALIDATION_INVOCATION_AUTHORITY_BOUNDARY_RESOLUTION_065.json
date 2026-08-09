@@ -1,0 +1,91 @@
+{
+  "patch_id": "PATCH_GOVERNANCE_Q1_VALIDATION_INVOCATION_AUTHORITY_BOUNDARY_RESOLUTION_065",
+  "title": "Q1 Validation Invocation Authority Boundary Resolution",
+  "status": "APPLIED",
+  "applied_on": "2026-07-15T12:15:00-04:00",
+  "type": "boundary_resolution",
+  "depends_on": [
+    "PATCH_GOVERNANCE_Q1_VALIDATION_AUTHORITY_FIRST_BOUNDED_CLUSTER_SELECTION_064"
+  ],
+  "mode": "additive",
+  "authority_effect": "NONE",
+  "purpose": "Resolve the first bounded Q1 validation-authority cluster by proving the single current validation invocation authority, partitioning adjacent instruction and DB runtime projection roles, and prospectively neutralizing the exact legacy claims that still collapse those roles.",
+  "summary": "This patch resolves Q1-VAL-002 and Q1-VAL-003 from existing governed evidence. scripts/global_validate.py remains the single current VALIDATION_INVOCATION_AUTHORITY. docs/governance/GLOBAL_VALIDATION_ROUTINE.md remains INSTRUCTION_AUTHORITY, the DB authority-resolution migration remains a DB runtime ownership projection, registry/db/README.md remains descriptive runtime guidance, and scripts/query_governance.py remains the role-aware authority query surface. Historical ambiguity records remain unchanged and are prospectively neutralized through exact disposition updates only.",
+  "resolved_q1_item_ids": [
+    "Q1-VAL-002",
+    "Q1-VAL-003"
+  ],
+  "resolved_global_ambiguity_ids": [
+    "AMB-GOV-SURF-0665",
+    "AMB-GOV-SURF-0663"
+  ],
+  "validation_invocation_authority": "scripts/global_validate.py",
+  "validation_invocation_authority_count": 1,
+  "role_per_candidate_surface": {
+    "scripts/global_validate.py": "VALIDATION_INVOCATION_AUTHORITY",
+    "docs/governance/GLOBAL_VALIDATION_ROUTINE.md": "INSTRUCTION_AUTHORITY",
+    "registry/db/migrations/20260703_governance_runtime_authority_resolution_003.sql": "DB_RUNTIME_OWNERSHIP_PROJECTION",
+    "registry/db/README.md": "DESCRIPTIVE_RUNTIME_GUIDANCE",
+    "scripts/query_governance.py": "ROLE_AWARE_AUTHORITY_QUERY_SURFACE"
+  },
+  "legacy_claims_review_result": "ACTIVE_LEGACY_CLAIMS_FOUND",
+  "legacy_claims_neutralized": [
+    "QUEUE-AMB-GOV-SURF-0665",
+    "QUEUE-AMB-GOV-SURF-0663",
+    "RISK-AMB-GOV-SURF-0665",
+    "RISK-AMB-GOV-SURF-0663"
+  ],
+  "counts": {
+    "q1_count_before": 9,
+    "q1_count_after": 7,
+    "global_blocking_ambiguity_count_before": 493,
+    "global_blocking_ambiguity_count_after": 491
+  },
+  "artifacts": {
+    "resolution_record": "outputs/governance_inventory/q1_validation_invocation_boundary_resolution.json",
+    "updated_q1_active_queue": "outputs/governance_inventory/q1_validation_authority_active_queue.json",
+    "updated_global_dispositions": "outputs/governance_inventory/q1_validation_invocation_global_disposition_updates.json"
+  },
+  "patch_002_state": {
+    "status": "PARTIAL",
+    "authority_effect": "NONE",
+    "changed": false
+  },
+  "historical_record_policy": {
+    "historical_ambiguity_records_rewritten": false,
+    "closure_is_prospective_not_retroactive": true
+  },
+  "completion_assertions": {
+    "q1_items_resolved": [
+      "Q1-VAL-002",
+      "Q1-VAL-003"
+    ],
+    "q1_items_resolved_count": 2,
+    "remaining_q1_items_count": 7,
+    "validation_invocation_authority_count": 1,
+    "validation_invocation_authority": "scripts/global_validate.py",
+    "instruction_authority_promoted": false,
+    "db_runtime_projection_promoted": false,
+    "query_surface_promoted": false,
+    "patch_002_authority_effect_changed": false,
+    "full_project_validation_run": false
+  },
+  "validation_results": {
+    "targeted_q1_resolution_test": {
+      "command": "python -m pytest tests/governance_validation/test_patch_065_q1_validation_invocation_boundary_resolution.py -q",
+      "status": "PASS"
+    },
+    "json_parse": {
+      "status": "PASS"
+    },
+    "git_diff_check": {
+      "command": "git diff --check",
+      "status": "PASS_WITH_CRLF_WARNINGS_ONLY"
+    },
+    "git_status": {
+      "command": "git status --short",
+      "status": "PASS_REVIEWED"
+    }
+  },
+  "full_project_validation_status": "SUSPENDED_PENDING_VALIDATOR_DEPARTMENT_COMPLETION"
+}

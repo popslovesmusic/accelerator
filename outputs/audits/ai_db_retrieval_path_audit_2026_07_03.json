@@ -1,0 +1,377 @@
+{
+  "audit_id": "AI_DB_RETRIEVAL_PATH_AUDIT_2026_07_03",
+  "mode": "read_only",
+  "scope": "repository audit of DB-first retrieval and token-cost reduction",
+  "summary": {
+    "finding": "The repository has a real SQLite projection layer, but agents are not routed through it first and the DB cannot yet answer several current-state questions directly.",
+    "classification": "partial_db_layer_not_db_first",
+    "token_cost_strategy": "combine DB-first routing, missing view creation, and doc compression",
+    "current_db_snapshot": {
+      "artifact_count": 21242,
+      "audit_report_count": 22,
+      "claim_evidence_link_count": 0,
+      "compressed_residue_count": 0,
+      "orientation_status_type_count": 9,
+      "registry_snapshot_count": 7,
+      "supersession_edge_count": 73,
+      "tool_health_count": 39,
+      "latest_artifact_indexed_at": "2026-06-17 19:11:32"
+    }
+  },
+  "database_surfaces_found": {
+    "live_surfaces": [
+      {
+        "path": "registry/db/acellorator_index.sqlite",
+        "role": "live SQLite projection/index layer",
+        "status": "live",
+        "notes": [
+          "Populated and queryable.",
+          "Current snapshot is older than the current worktree, so the index is live but not fully current.",
+          "Artifact table contains 21242 rows."
+        ]
+      },
+      {
+        "path": "registry/db/schema.sql",
+        "role": "live schema definition for the SQLite index",
+        "status": "live",
+        "notes": [
+          "Defines artifacts, audit_reports, tool_health, registry_snapshots, claim_evidence_links, supersession_edges, and orientation_status_types."
+        ]
+      },
+      {
+        "path": "registry/db/README.md",
+        "role": "live DB usage and boundary documentation",
+        "status": "live_but_stale_example_paths",
+        "notes": [
+          "States the DB is a retrieval accelerator and not a semantic SSOT.",
+          "Documents the retrieval scripts and status semantics.",
+          "Still contains older naming conventions in examples."
+        ]
+      },
+      {
+        "path": "scripts/db/db_health_check.py",
+        "role": "live DB validation script",
+        "status": "live",
+        "notes": [
+          "Checks required tables, orientation statuses, retrieval smoke, and supersession edge health."
+        ]
+      },
+      {
+        "path": "scripts/orientation_retrieval.py",
+        "role": "live retrieval entrypoint",
+        "status": "live",
+        "notes": [
+          "Ranks by orientation status, authority scope, evidence confidence, freshness, and text match.",
+          "Query behavior is path and keyword based rather than semantic current-state reasoning."
+        ]
+      },
+      {
+        "path": "scripts/claim_evidence_graph.py",
+        "role": "live graph helper for claim/evidence/supersession relationships",
+        "status": "live",
+        "notes": [
+          "Depends on DB tables that are present in schema, but claim_evidence_links is currently empty."
+        ]
+      }
+    ],
+    "helper_surfaces": [
+      {
+        "path": "scripts/gemini_claim_context.py",
+        "role": "context helper built on DB retrieval",
+        "status": "live_helper"
+      },
+      {
+        "path": "scripts/gemini_execution_context.py",
+        "role": "context helper built on DB retrieval and health",
+        "status": "live_helper"
+      },
+      {
+        "path": "scripts/gemini_memory_context.py",
+        "role": "context helper built on DB retrieval",
+        "status": "live_helper"
+      },
+      {
+        "path": "scripts/codex_memory_context.py",
+        "role": "context helper built on DB retrieval",
+        "status": "live_helper"
+      },
+      {
+        "path": "scripts/orientation_execution_plan.py",
+        "role": "advisory execution-plan helper",
+        "status": "live_helper"
+      },
+      {
+        "path": "scripts/registry_runtime_trace.py",
+        "role": "trace helper",
+        "status": "live_helper"
+      },
+      {
+        "path": "scripts/provenance/provenance_query.py",
+        "role": "provenance helper",
+        "status": "live_helper"
+      },
+      {
+        "path": "scripts/residue/compress_residue.py",
+        "role": "residue compression helper",
+        "status": "live_helper"
+      }
+    ],
+    "stale_or_residue_surfaces": [
+      {
+        "path": "registry/sqlite_governance_index_manifest.json",
+        "role": "index manifest",
+        "status": "stale_path_mismatch",
+        "issue": "Points to registry/db/pcd_governance.db while the live file present in registry/db is acellorator_index.sqlite."
+      },
+      {
+        "path": "registry/sqlite_schema_v1.json",
+        "role": "alternate or conceptual schema",
+        "status": "historical_or_noncanonical",
+        "issue": "Schema shape does not match the live SQLite tables used by the current DB."
+      },
+      {
+        "path": "scripts/query_governance.py",
+        "role": "governance query scaffold",
+        "status": "scaffold",
+        "issue": "Still describes a full implementation and prints no records in scaffold mode."
+      },
+      {
+        "path": "scripts/assemble_governed_context.py",
+        "role": "context assembly scaffold",
+        "status": "scaffold",
+        "issue": "Still references querying pcd_governance.db in comments rather than implementing a live entrypoint."
+      }
+    ]
+  },
+  "live_vs_residue_classification": {
+    "live_projection_layer": [
+      "registry/db/acellorator_index.sqlite",
+      "registry/db/schema.sql",
+      "scripts/db/db_health_check.py",
+      "scripts/orientation_retrieval.py",
+      "scripts/claim_evidence_graph.py"
+    ],
+    "mixed_or_partial_layer": [
+      "registry/db/README.md",
+      "registry/governed_context_assembly_registry.json",
+      "registry/knowledge_ingestion_rebuild_manifest.json"
+    ],
+    "historical_or_stale_layer": [
+      "registry/sqlite_governance_index_manifest.json",
+      "registry/sqlite_schema_v1.json",
+      "scripts/query_governance.py",
+      "scripts/assemble_governed_context.py"
+    ],
+    "assessment": [
+      "The DB is live and useful as a projection layer.",
+      "The DB does not yet behave as a full knowledge-state layer because the supporting link tables and query views are incomplete.",
+      "Several routing and manifest files still point to the older pcd_governance.db naming convention."
+    ]
+  },
+  "agent_retrieval_path": {
+    "observed_default_path": [
+      "Root AGENTS.md and docs/AGENTS.md direct work through governance, docs, and global validation checks.",
+      "docs/governance/GLOBAL_VALIDATION_ROUTINE.md requires the latest global health report.",
+      "registry/governed_context_assembly_registry.json uses docs/tech_notes together with pcd_governance.db only for specific packet types.",
+      "DB helpers exist, but they are optional utilities rather than the mandated first step."
+    ],
+    "db_usage_mode": "optional_helper",
+    "db_first_directive_found": false,
+    "evidence_paths": [
+      "AGENTS.md",
+      "docs/AGENTS.md",
+      "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+      "registry/governed_context_assembly_registry.json",
+      "scripts/query_governance.py",
+      "scripts/assemble_governed_context.py"
+    ]
+  },
+  "db_first_compliance": {
+    "status": "not_enforced",
+    "assessment": "Agents are not explicitly instructed to query the DB first.",
+    "evidence": [
+      "No DB-first routing instruction was found in root AGENTS.md.",
+      "No DB-first routing instruction was found in docs/AGENTS.md.",
+      "The validation routine still centers the latest global health report rather than a DB context capsule.",
+      "The DB-facing scripts are either helpers or scaffolds, not a mandatory retrieval gate."
+    ]
+  },
+  "query_capability_tests": [
+    {
+      "query": "global_health_report",
+      "command": "python scripts/orientation_retrieval.py --query global_health_report --limit 5 --explain",
+      "result": "pass",
+      "returned_path": "outputs/audits/global_health_report.json",
+      "interpretation": "The DB can answer a current-state artifact-path query when the artifact name is indexed."
+    },
+    {
+      "query": "mono_process",
+      "command": "python scripts/orientation_retrieval.py --query mono_process --limit 5 --explain",
+      "result": "pass",
+      "returned_path": "docs/MONO_PROCESS_MATHEMATICAL_SCHEMA_V1.md",
+      "interpretation": "The DB can retrieve doc artifacts by keyword/path, but this is still document retrieval rather than semantic current-state resolution."
+    },
+    {
+      "query": "current RT",
+      "command": "python scripts/orientation_retrieval.py --query \"current RT\" --limit 5 --explain",
+      "result": "fail_no_results",
+      "interpretation": "The DB does not answer the semantic current-state question directly."
+    },
+    {
+      "query": "open debt",
+      "command": "python scripts/orientation_retrieval.py --query \"open debt\" --limit 5 --explain",
+      "result": "fail_no_results",
+      "interpretation": "The DB does not currently surface debt state directly."
+    },
+    {
+      "query": "current authoritative files",
+      "command": "python scripts/orientation_retrieval.py --query \"current authoritative files\" --limit 5 --explain",
+      "result": "fail_no_results",
+      "interpretation": "The DB does not provide an authority view that can answer this without broader file scanning."
+    }
+  ],
+  "gaps": [
+    {
+      "gap": "No explicit DB-first routing policy",
+      "impact": "Agents default to docs and registries instead of a compressed context capsule.",
+      "evidence": [
+        "AGENTS.md",
+        "docs/AGENTS.md",
+        "docs/governance/GLOBAL_VALIDATION_ROUTINE.md"
+      ]
+    },
+    {
+      "gap": "Manifest path mismatch",
+      "impact": "The manifest still points to registry/db/pcd_governance.db while the live file is registry/db/acellorator_index.sqlite.",
+      "evidence": [
+        "registry/sqlite_governance_index_manifest.json",
+        "registry/db/README.md",
+        "registry/db/acellorator_index.sqlite"
+      ]
+    },
+    {
+      "gap": "No current_state_view or authority_view",
+      "impact": "Current-state questions still require broader scanning or custom helper logic.",
+      "evidence": [
+        "scripts/orientation_retrieval.py",
+        "scripts/query_governance.py"
+      ]
+    },
+    {
+      "gap": "No patch_chain_view or induction_view",
+      "impact": "Active, blocked, missing, and dependent work are not exposed as a single knowledge-state projection.",
+      "evidence": [
+        "registry/db/schema.sql",
+        "scripts/claim_evidence_graph.py"
+      ]
+    },
+    {
+      "gap": "No debt_view",
+      "impact": "Open debt cannot be answered directly from the DB.",
+      "evidence": [
+        "sqlite query results for open debt",
+        "registry/db/schema.sql"
+      ]
+    },
+    {
+      "gap": "No historical_residue_view",
+      "impact": "Historical residue is represented only by status annotations and not by a dedicated query surface.",
+      "evidence": [
+        "registry/db/schema.sql",
+        "registry/db/README.md"
+      ]
+    },
+    {
+      "gap": "claim_evidence_links is empty",
+      "impact": "Claim-to-evidence resolution is not yet populated enough to support knowledge-state reasoning.",
+      "evidence": [
+        "registry/db/acellorator_index.sqlite",
+        "scripts/claim_evidence_graph.py"
+      ]
+    },
+    {
+      "gap": "compressed_residue is empty",
+      "impact": "There is no material compressed residue layer to reduce document token cost further.",
+      "evidence": [
+        "registry/db/acellorator_index.sqlite",
+        "scripts/residue/compress_residue.py"
+      ]
+    }
+  ],
+  "recommended_patches": [
+    {
+      "patch_id": "GOV_DB_FIRST_RETRIEVAL_001",
+      "priority": "highest",
+      "goal": "Add an explicit DB-first retrieval rule to governing agent instructions.",
+      "why": "Without a hard routing rule, helpers remain optional and docs stay the default context path."
+    },
+    {
+      "patch_id": "GOV_DB_CURRENT_STATE_VIEW_001",
+      "priority": "high",
+      "goal": "Create a current_state_view that answers current RT, active files, and present claim gates.",
+      "why": "This is the main missing surface for replacing broad Markdown scanning."
+    },
+    {
+      "patch_id": "GOV_DB_AUTHORITY_VIEW_001",
+      "priority": "high",
+      "goal": "Create an authority_view that resolves live authority, supersession, and canonical ownership.",
+      "why": "The DB currently stores status metadata but not a single authoritative view."
+    },
+    {
+      "patch_id": "GOV_DB_PATCH_CHAIN_VIEW_001",
+      "priority": "high",
+      "goal": "Create a patch_chain_view for active, blocked, missing, and late-registered patch state.",
+      "why": "Patch state is a frequent current-state question and is not directly answered now."
+    },
+    {
+      "patch_id": "GOV_DB_DEBT_VIEW_001",
+      "priority": "high",
+      "goal": "Create a debt_view for governance, math, lexicon, induction, documentation, and research debt.",
+      "why": "Open debt currently requires ad hoc scanning and does not have a first-class DB projection."
+    },
+    {
+      "patch_id": "GOV_DB_INDUCTION_VIEW_001",
+      "priority": "medium",
+      "goal": "Create an induction_view for departmental readiness and backlog state.",
+      "why": "This would let agents answer department readiness questions without opening the full department docs."
+    },
+    {
+      "patch_id": "GOV_DB_HISTORICAL_RESIDUE_VIEW_001",
+      "priority": "medium",
+      "goal": "Create a historical_residue_view that explicitly separates live state from archived or superseded state.",
+      "why": "Residual artifacts should be returned only when relevant, not mixed into current-state retrieval."
+    },
+    {
+      "patch_id": "GOV_DB_AGENT_CONTEXT_CAPSULE_001",
+      "priority": "medium",
+      "goal": "Create an agent_context_capsule_view that returns the minimum authoritative context needed for an action.",
+      "why": "This is the direct token-cost reduction mechanism for normal agent work."
+    },
+    {
+      "patch_id": "GOV_DB_HELPER_IMPLEMENTATION_001",
+      "priority": "medium",
+      "goal": "Implement scripts/query_governance.py and scripts/assemble_governed_context.py beyond scaffold mode.",
+      "why": "The repository already points to these surfaces, but they are not operational enough to carry retrieval policy alone."
+    },
+    {
+      "patch_id": "GOV_DB_MANIFEST_ALIAS_001",
+      "priority": "medium",
+      "goal": "Reconcile the older pcd_governance.db naming convention with the live acellorator_index.sqlite file.",
+      "why": "The naming mismatch will keep producing confusion until it is normalized or aliased."
+    }
+  ],
+  "bottom_line": {
+    "answer": "No, the repository is not configured as DB-first today.",
+    "why": [
+      "The DB exists and is useful, but it is still a projection/index layer rather than a complete current-state knowledge layer.",
+      "Agents are still routed by docs and registries first, with DB helpers used opportunistically.",
+      "The DB can answer path-based retrieval queries, but not semantic questions like current RT or open debt."
+    ],
+    "recommended_token_cost_strategy": [
+      "Route supported queries through the DB first.",
+      "Add the missing current-state and residue views.",
+      "Keep the textbook and long-form docs as canonical narrative sources, but stop using them as the first retrieval hop when the DB can answer the question."
+    ],
+    "prior_audit_reclassification": "The prior audit should be treated as a document-surface audit, not as evidence that the DB layer does not exist."
+  }
+}

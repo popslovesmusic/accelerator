@@ -1,0 +1,63 @@
+{
+  "patch_id": "MPF-FRPR-006",
+  "name": "Counterexample Persistence Audit",
+  "status": "active",
+  "series_status": "RESTRICTED_FORMAL_PROOF_CONSTRUCTION",
+  "purpose": "Verify that all formal proof attempts preserve previously identified counterexamples and failure boundaries.",
+  "governance_status": {
+    "theorem_status": "LOCAL_PROOF_REVIEW_ONLY",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL",
+    "non_separability_acknowledged": true,
+    "source_relation": "(E≠0) ⇔R δ(E>0)"
+  },
+  "mandatory_checks": [
+    {
+      "check_id": "projection_non_idempotence_preserved",
+      "target_theorem": "MT-001",
+      "status": "VERIFIED",
+      "note": "Formal proof attempt (Section 5) explicitly identifies neighborhood instability as a boundary."
+    },
+    {
+      "check_id": "orientation_locking_preserved",
+      "target_theorem": "MT-002",
+      "status": "VERIFIED",
+      "note": "Formal proof attempt (Section 5) explicitly identifies orientation locking as a failure mode."
+    },
+    {
+      "check_id": "empty_admissible_image_preserved",
+      "target_theorem": "MT-003",
+      "status": "VERIFIED",
+      "note": "Formal proof attempt (Section 5) identifies non-reachable admissible states as a boundary."
+    },
+    {
+      "check_id": "branch_explosion_preserved",
+      "target_theorem": "MT-003",
+      "status": "VERIFIED",
+      "note": "Non-unique selection divergence is preserved as an exposure point."
+    },
+    {
+      "check_id": "recursive_divergence_preserved",
+      "target_theorem": "MT-001",
+      "status": "VERIFIED",
+      "note": "Neighborhood stability requirement explicitly excludes divergent history."
+    }
+  ],
+  "governance_rules": [
+    {
+      "rule_id": "CPA-RULE-001",
+      "rule": "Every formal proof must pass the counterexample persistence audit before derivability classification."
+    },
+    {
+      "rule_id": "CPA-RULE-002",
+      "rule": "Audit success does not imply that counterexamples have been 'solved', only that they remain visible."
+    }
+  ],
+  "forbidden_claims": [
+    "Formal proofs have eliminated counterexamples.",
+    "Counterexample persistence implies framework instability.",
+    "Failure cases are irrelevant for local theorem work."
+  ],
+  "source_relation": "(E≠0) ⇔R δ(E>0)",
+  "non_separability_acknowledged": true
+}

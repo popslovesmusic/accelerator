@@ -1,0 +1,107 @@
+{
+  "patch_id": "PATCH_ACCELERATOR_SEMANTIC_READOUT_CAPABILITY_GATE_051",
+  "title": "Explicit Semantic Readout Capability Gate",
+  "type": "tooling_runtime_boundary_hardening",
+  "artifact_type": "governance_patch",
+  "mode": "additive",
+  "status": "APPLIED",
+  "execution_date": "2026-07-11",
+  "applied_on": "2026-07-12T03:32:56.9320875-04:00",
+  "goal": "Add an explicit capability gate, caller identity requirement, governed capsule requirement, structured boundary telemetry, and zero-retry default to the optional semantic readout path while preserving the deterministic local fallback.",
+  "core_rule": {
+    "id": "GOV-SEMREAD-051",
+    "statement": "Network semantic readout must remain explicitly gated by capability, backend selection, model identity, endpoint permission, caller identity, and governed capsule provenance; deterministic local readout remains the default fallback.",
+    "effect": "Environment variables alone do not authorize network inference, and the optional boundary remains bounded by local fallback."
+  },
+  "problem_statement": {
+    "current_state": "The semantic readout boundary can reach a network backend when the backend is selected, but the code does not yet require an explicit capability flag, caller identity, or governed context capsule before attempting network inference.",
+    "gap": "The boundary is not yet hard-gated against implicit activation from environment variables alone, and it does not yet emit a structured authorization record for attempted, denied, successful, failed, and fallback outcomes.",
+    "risk": "An optional network path can become an unmeasured inference sink unless its authorization and telemetry are explicit."
+  },
+  "basis": {
+    "source_patches": [
+      "PATCH_ACCELERATOR_CANONICAL_CONTEXT_CAPSULE_050"
+    ],
+    "source_surfaces": [
+      "tools/signal_scope_phase_continuation_engine/core/semantic_readout.py",
+      "tools/signal_scope_phase_continuation_engine/config/config_v14_terminal.json"
+    ],
+    "scope": "Harden the optional semantic readout boundary without changing the deterministic local reply path or introducing automatic retries."
+  },
+  "target_files": [
+    "tools/signal_scope_phase_continuation_engine/core/semantic_readout.py",
+    "tools/signal_scope_phase_continuation_engine/config/config_v14_terminal.json"
+  ],
+  "required_repo_changes": [
+    {
+      "path": "tools/signal_scope_phase_continuation_engine/core/semantic_readout.py",
+      "description": "Add the explicit network capability flag, authorization predicate, structured reply helper, capsule validation, zero-retry default, and structured boundary telemetry while preserving the deterministic local fallback."
+    },
+    {
+      "path": "tools/signal_scope_phase_continuation_engine/config/config_v14_terminal.json",
+      "description": "Declare the network capability flag as disabled by default and record the permitted endpoint list and retry budget explicitly."
+    }
+  ],
+  "runtime_changes": {
+    "capability_flag": "enable_network_semantic_readout",
+    "authorization_predicate": "enable_network_semantic_readout AND explicit network backend selection AND nonempty model id AND permitted endpoint AND credential present AND caller identity present AND valid governed capsule present",
+    "fallback_policy": "Return the deterministic local reply when the network boundary is denied or the network call fails.",
+    "retry_policy": "No automatic retry; retry budget defaults to zero and requires a separate governed policy before changing.",
+    "structured_reply_fields": [
+      "reply_text",
+      "reply_source",
+      "summary_id",
+      "capsule_hash",
+      "backend_status",
+      "fallback_used"
+    ],
+    "telemetry_fields": [
+      "event_type",
+      "event_id",
+      "timestamp",
+      "caller_id",
+      "backend",
+      "model_id",
+      "capability_enabled",
+      "authorization_result",
+      "authorization_reason",
+      "capsule_hash",
+      "input_bytes",
+      "estimated_input_tokens",
+      "actual_input_tokens_if_reported",
+      "actual_output_tokens_if_reported",
+      "latency_ms",
+      "outcome",
+      "fallback_used",
+      "error_class"
+    ]
+  },
+  "acceptance_criteria": [
+    "Default shipped configuration does not attempt network semantic readout.",
+    "Environment variables alone do not activate the network boundary.",
+    "A missing caller identity or governed capsule denies the network boundary.",
+    "A permitted network failure falls back to the deterministic local reply.",
+    "No automatic retry occurs.",
+    "Structured telemetry is emitted for attempted, denied, successful, failed, and fallback outcomes.",
+    "The deterministic local reply path remains the default fallback."
+  ],
+  "success_criteria": [
+    "Default shipped configuration does not attempt network semantic readout.",
+    "Environment variables alone do not activate the network boundary.",
+    "A missing caller identity or governed capsule denies the network boundary.",
+    "A permitted network failure falls back to the deterministic local reply.",
+    "No automatic retry occurs.",
+    "Structured telemetry is emitted for attempted, denied, successful, failed, and fallback outcomes.",
+    "The deterministic local reply path remains the default fallback."
+  ],
+  "validation": {
+    "required": [
+      "py_compile_pass",
+      "default_local_smoke_pass",
+      "denial_smoke_pass",
+      "fallback_smoke_pass",
+      "structured_telemetry_smoke_pass"
+    ],
+    "result": "pass"
+  }
+}

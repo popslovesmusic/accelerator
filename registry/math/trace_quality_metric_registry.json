@@ -1,0 +1,64 @@
+{
+  "patch_id": "MPF-PALG-042",
+  "name": "Trace Quality Metric Registry",
+  "status": "active",
+  "metric_status": "METRICS_SCAFFOLD_ONLY",
+  "purpose": "Define metrics for source-relation trace completeness, retained-feature clarity, and loss-accounting sufficiency.",
+  "governance_status": {
+    "theorem_status": "NOT_PROVEN",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL"
+  },
+  "metrics": [
+    {
+      "metric_id": "source_trace_completeness",
+      "definition": "A measure of whether all required source-relation components are explicitly linked in the trace.",
+      "calculation": "ratio of linked_components to mandatory_components",
+      "thresholds": {
+        "GOLD": 1.0,
+        "SILVER": 0.8,
+        "BRONZE": 0.6
+      }
+    },
+    {
+      "metric_id": "retained_feature_specificity",
+      "definition": "Evaluates whether retained features are precisely defined within the projection domain.",
+      "calculation": "count of well_defined_features / total_retained_features"
+    },
+    {
+      "metric_id": "loss_accounting_completeness",
+      "definition": "Measures the thoroughness of documented abstractions and feature losses.",
+      "calculation": "qualitative audit score based on gap identification"
+    },
+    {
+      "metric_id": "projection_depth_declared",
+      "definition": "Boolean check if the projection depth (PD-1 to PD-4) is explicitly stated.",
+      "value_type": "boolean"
+    },
+    {
+      "metric_id": "recoverability_class_declared",
+      "definition": "Boolean check if the recoverability class (RCOV-0 to RCOV-3) is explicitly stated.",
+      "value_type": "boolean"
+    }
+  ],
+  "trace_quality_requirements": [
+    "source_trace_completeness >= SILVER",
+    "projection_depth_declared == true",
+    "loss_accounting_completeness >= 0.5"
+  ],
+  "governance_rules": [
+    {
+      "rule_id": "TQ-RULE-001",
+      "rule": "High trace quality scores do not imply physical identity."
+    },
+    {
+      "rule_id": "TQ-RULE-002",
+      "rule": "Low quality scores trigger mandatory REJECT_ESCALATION."
+    }
+  ],
+  "forbidden_claims": [
+    "Trace completeness proves source reconstruction.",
+    "High specificity allows physical promotion.",
+    "Metric scores replace manual audit of loss accounting."
+  ]
+}

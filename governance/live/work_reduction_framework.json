@@ -1,0 +1,206 @@
+{
+  "framework_id": "GOV_WORK_REDUCTION_FRAMEWORK_LIVE_V1",
+  "source_patch": "registry/governance/patches/GOV_WORK_REDUCTION_FRAMEWORK_002.json",
+  "status": "active",
+  "authority": "Global Governance",
+  "last_updated": "2026-07-02",
+  "purpose": "Provide a single governed execution model for reducing all categories of outstanding work.",
+  "governed_work_classes": [
+    {
+      "id": "governance_debt",
+      "command": "governance debt reduction",
+      "scope": "governance"
+    },
+    {
+      "id": "math_debt",
+      "command": "math debt reduction",
+      "scope": "mathematics"
+    },
+    {
+      "id": "lexicon_debt",
+      "command": "lexicon debt reduction",
+      "scope": "lexicon"
+    },
+    {
+      "id": "induction_debt",
+      "command": "induction debt reduction",
+      "scope": "induction"
+    },
+    {
+      "id": "campaign_backlog",
+      "command": "campaign reduction",
+      "scope": "campaigns"
+    },
+    {
+      "id": "proof_backlog",
+      "command": "proof reduction",
+      "scope": "proofs"
+    },
+    {
+      "id": "validator_backlog",
+      "command": "validator reduction",
+      "scope": "validators"
+    },
+    {
+      "id": "documentation_backlog",
+      "command": "documentation reduction",
+      "scope": "documentation"
+    }
+  ],
+  "execution_policy": {
+    "single_model": true,
+    "debt_and_backlog_unified": true,
+    "route_commands_through_live_ledgers": true,
+    "preserve_source_patch": true,
+    "no_theorem_promotion": true,
+    "no_proof_promotion": true
+  },
+  "routing_notes": [
+    "This live framework registers the user-facing work-reduction commands as governed execution routes.",
+    "It does not replace the patch archive or any existing live debt command.",
+    "It does not authorize theorem or proof status promotion."
+  ],
+  "governed_work_interface": {
+    "principles": [
+      "Every governed work item SHALL be discoverable.",
+      "Every work item SHALL belong to exactly one primary domain.",
+      "Every work item SHALL expose an executable lifecycle.",
+      "Queues are projections of governed work, not independent authorities."
+    ],
+    "canonical_dimensions": {
+      "actions": [
+        "audit",
+        "reduce",
+        "prioritize",
+        "summarize",
+        "validate",
+        "execute",
+        "review",
+        "close",
+        "defer"
+      ],
+      "domains": [
+        "governance",
+        "mathematics",
+        "economics",
+        "physics",
+        "engineering",
+        "theology",
+        "simulation",
+        "lexicon",
+        "proof",
+        "validator",
+        "documentation",
+        "research"
+      ],
+      "work_types": [
+        "debt",
+        "queue",
+        "campaign",
+        "review",
+        "validation",
+        "maintenance",
+        "research",
+        "documentation",
+        "registry",
+        "induction"
+      ]
+    },
+    "canonical_work_item": {
+      "required_fields": [
+        "id",
+        "title",
+        "domain",
+        "work_type",
+        "status",
+        "priority",
+        "owner",
+        "authority",
+        "source_registry"
+      ],
+      "optional_fields": [
+        "dependencies",
+        "blocked_by",
+        "unlocks",
+        "estimated_effort",
+        "execution_state",
+        "next_action",
+        "related_items"
+      ]
+    },
+    "execution_state": {
+      "states": [
+        "ready",
+        "blocked",
+        "active",
+        "review",
+        "completed",
+        "deferred",
+        "archived"
+      ],
+      "required_metadata": [
+        "blocked_by",
+        "dependency_depth",
+        "unlock_count",
+        "next_action"
+      ]
+    },
+    "queue_projection_rule": {
+      "statement": "Queues SHALL be treated as filtered projections of governed work rather than independent governance authorities.",
+      "examples": [
+        "induction_queue.json",
+        "lexicon_gap_queue.json",
+        "proof_elevation_campaign_registry.json",
+        "process_algebra_expansion_review_queue.json"
+      ]
+    },
+    "discovery_rules": [
+      {
+        "id": "GOV_WORK_DISCOVERY_001",
+        "text": "Every governed work artifact SHALL be discoverable through the Work Reduction Framework."
+      },
+      {
+        "id": "GOV_WORK_DISCOVERY_002",
+        "text": "Every queue, campaign, review registry, induction registry, validator backlog, and debt registry SHALL identify its governing work domain."
+      },
+      {
+        "id": "GOV_WORK_DISCOVERY_003",
+        "text": "No governed work SHALL exist outside the Work Reduction Framework."
+      }
+    ],
+    "execution_rules": [
+      {
+        "id": "GOV_WORK_EXECUTION_001",
+        "text": "Reduction SHALL operate on governed work items rather than directly on queue files."
+      },
+      {
+        "id": "GOV_WORK_EXECUTION_002",
+        "text": "Blocking dependencies SHALL be reported before execution begins."
+      },
+      {
+        "id": "GOV_WORK_EXECUTION_003",
+        "text": "Work reduction SHALL prioritize dependency resolution when it unlocks downstream governed work."
+      },
+      {
+        "id": "GOV_WORK_EXECUTION_004",
+        "text": "Completion SHALL update the originating registry and refresh all projected queue views."
+      }
+    ],
+    "command_model": {
+      "grammar": "<action> <domain> <work_type>",
+      "examples": [
+        "reduce governance debt",
+        "reduce mathematics induction",
+        "audit mathematics campaigns",
+        "summarize lexicon queue",
+        "validate proof review",
+        "prioritize governance maintenance"
+      ]
+    }
+  },
+  "indexing": {
+    "master_index_path": "governance/live/master_work_index.json",
+    "bootstrap_patch": "registry/governance/patches/GOV_WORK_INDEX_BOOTSTRAP_001.json",
+    "projection_rule": "The master work index is a projection of governed work and does not supersede the source registries."
+  }
+}

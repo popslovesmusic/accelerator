@@ -1,0 +1,142 @@
+{
+  "schema_id": "BRIDGE_COMPARISON_SCHEMA_001",
+  "patch_id": "MPF-PALG-034",
+  "title": "Bridge Comparison Schema",
+  "classification": "bridge_comparison_patch",
+  "purpose": "Compare QM-like and GR-like projection domains through source-relation traceability, retained-feature overlap, conflict tracking, and projection-loss accounting without permitting unification or physical derivation claims.",
+  "source_relation": "(E≠0) ⇔R δ(E>0)",
+  "non_separability_acknowledged": true,
+  "no_unification_guardrail": "no QM/GR unification, derivation, replacement, or physics claim; only analog projection behavior",
+  "status": {
+    "theorem_status": "NOT_PROVEN",
+    "bridge_status": "COMPARISON_ONLY",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL"
+  },
+  "depends_on": [
+    "MPF-PALG-031",
+    "MPF-PALG-032",
+    "MPF-PALG-033"
+  ],
+  "core_definition": {
+    "canonical_statement": "Bridge comparison evaluates projection-domain relationships through shared source traceability, retained-feature overlap, projection-loss differentials, and coherence constraints.",
+    "short_form": "bridge_compare := traceable_projection_comparison",
+    "non_unification_rule": "Comparison coherence does not imply physical equivalence, source identity, or unification."
+  },
+  "comparison_dimensions": [
+    {
+      "dimension_id": "BCD-001",
+      "name": "source_relation_traceability",
+      "definition": "Measures whether compared projection domains declare compatible ⇔R source relations."
+    },
+    {
+      "dimension_id": "BCD-002",
+      "name": "retained_feature_overlap",
+      "definition": "Measures overlap between projection-retained feature sets."
+    },
+    {
+      "dimension_id": "BCD-003",
+      "name": "projection_loss_differential",
+      "definition": "Measures differences in abstracted or lost whole-relation features."
+    },
+    {
+      "dimension_id": "BCD-004",
+      "name": "projection_depth_comparison",
+      "definition": "Compares flattening depth across projection domains."
+    },
+    {
+      "dimension_id": "BCD-005",
+      "name": "recoverability_alignment",
+      "definition": "Compares recoverability class compatibility across projection domains."
+    },
+    {
+      "dimension_id": "BCD-006",
+      "name": "coherence_vs_conflict_tracking",
+      "definition": "Tracks where projection structures align or diverge without collapsing differences."
+    }
+  ],
+  "comparison_record_schema": {
+    "bridge_comparison_id": "string",
+    "qm_like_reference": "string",
+    "gr_like_reference": "string",
+    "shared_source_relation": "string",
+    "projection_depth_pair": [
+      "PD-1 | PD-2 | PD-3 | PD-4",
+      "PD-1 | PD-2 | PD-3 | PD-4"
+    ],
+    "recoverability_pair": [
+      "RCOV-0 | RCOV-1 | RCOV-2 | RCOV-3",
+      "RCOV-0 | RCOV-1 | RCOV-2 | RCOV-3"
+    ],
+    "retained_feature_overlap": ["string"],
+    "projection_loss_differential": ["string"],
+    "coherence_features": ["string"],
+    "conflicting_features": ["string"],
+    "comparison_status": "COHERENT | PARTIAL | CONFLICTING | INDETERMINATE",
+    "claim_level": "BRIDGE_ANALOG_ONLY",
+    "physical_unification_claim": false
+  },
+  "example_records": [
+    {
+      "bridge_comparison_id": "BCS-EX-001",
+      "qm_like_reference": "QMP-REL-001",
+      "gr_like_reference": "GRP-REL-001",
+      "shared_source_relation": "(E≠0) ⇔R δ(E>0)",
+      "projection_depth_pair": [
+        "PD-3",
+        "PD-3"
+      ],
+      "recoverability_pair": [
+        "RCOV-1",
+        "RCOV-1"
+      ],
+      "retained_feature_overlap": [
+        "source_traceability",
+        "local_admissibility_constraints"
+      ],
+      "projection_loss_differential": [
+        "QM_like_retains_distinction_density",
+        "GR_like_retains_continuation_flow"
+      ],
+      "coherence_features": [
+        "shared_source_relation",
+        "bounded_projection_structure"
+      ],
+      "conflicting_features": [
+        "discrete_transition_readability_vs_smoothness_readability"
+      ],
+      "comparison_status": "PARTIAL",
+      "claim_level": "BRIDGE_ANALOG_ONLY",
+      "physical_unification_claim": false
+    }
+  ],
+  "governance_rules": [
+    {
+      "rule_id": "BCS-RULE-001",
+      "rule": "Bridge comparisons require declared shared source relations."
+    },
+    {
+      "rule_id": "BCS-RULE-002",
+      "rule": "Projection conflicts must be preserved rather than collapsed."
+    },
+    {
+      "rule_id": "BCS-RULE-003",
+      "rule": "Projection-loss differentials are mandatory."
+    },
+    {
+      "rule_id": "BCS-RULE-004",
+      "rule": "Bridge coherence cannot imply source identity or physical equivalence."
+    },
+    {
+      "rule_id": "BCS-RULE-005",
+      "rule": "Bridge artifacts remain ANALOG_ONLY and NON_PHYSICAL."
+    }
+  ],
+  "forbidden_uses": [
+    "Claiming QM-like and GR-like projections are unified.",
+    "Claiming projection coherence proves physical reality.",
+    "Removing conflicting feature tracking.",
+    "Treating bridge comparison as theorem evidence.",
+    "Treating retained feature overlap as source reconstruction."
+  ]
+}

@@ -33,7 +33,7 @@ These tools have passed multi-seed UQ, support standardized CLI arguments, and a
 | `signal_scope_phase_continuation_engine` | Python / AVX2 | agent_based_phase_continuation_sim | **C4** | RUC survivability gating & phase continuation |
 
 ## 3. C1-C2 Operational Tools (Regression Ready)
-These tools are functional and follow standardized interfaces but are held at lower certification pending full falsification or UQ completion.
+These tools are functional and follow standardized interfaces but are held at lower rigor endorsement pending full falsification or UQ completion.
 
 | Tool Name | Class | Status | Missing Requirements |
 | :--- | :--- | :---: | :--- |
@@ -50,7 +50,7 @@ These tools are functional and follow standardized interfaces but are held at lo
 
 ## 4. Evidence Repository
 - **UQ Results:** `outputs/c4_phase3_uq_all/uncertainty_summary.json`
-- **Verification Packet:** `outputs/c4_phase3_uq_all/certification_evidence_packet.json`
+- **Verification Packet:** `outputs/c4_phase3_uq_all/rigor endorsement_evidence_packet.json`
 - **Central Registry:** `registry/tool_manifest.json`
 
 ---

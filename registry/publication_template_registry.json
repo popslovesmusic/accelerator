@@ -1,0 +1,91 @@
+{
+  "registry_id": "PCD_PUBLICATION_TEMPLATE_REGISTRY",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "template_id",
+      "document_type",
+      "pcd_formal_stack_version",
+      "charter_version",
+      "math_source_bindings",
+      "claim_support_matrix_bindings",
+      "required_sections",
+      "conclusion_prefix_rule",
+      "provenance_policy"
+    ]
+  },
+  "templates": [
+    {
+      "template_id": "PCD_PAPER_TEMPLATE_V1",
+      "document_type": "research_paper",
+      "rhetorical_scope": "governed_theoretical_paper",
+      "pcd_formal_stack_version": "PCD-Formal-Stack: v1",
+      "charter_version": "2.3",
+      "required_sections": [
+        "Abstract",
+        "Theoretical Mapping",
+        "Experimental Setup",
+        "Observables",
+        "Results",
+        "Measurement",
+        "Cross-Model Comparison",
+        "Falsification",
+        "Artifact Analysis",
+        "Classification",
+        "Conclusion"
+      ],
+      "conclusion_prefix_rule": "Conclusion must begin with: Within these models",
+      "provenance_policy": "Empirical claims require recoverable output files; prior findings must be tagged; theoretical claims require lemma/proof or formal-stack binding."
+    },
+    {
+      "template_id": "ZENODO_PUBLICATION_V1",
+      "document_type": "archival_bundle",
+      "pcd_formal_stack_version": "PCD-Formal-Stack: v1",
+      "charter_version": "2.3",
+      "required_metadata": [
+        "title",
+        "authors",
+        "description",
+        "license",
+        "keywords",
+        "doi_or_placeholder"
+      ],
+      "required_bundle_contents": [
+        "paper.md",
+        "run_metadata.json",
+        "provenance_manifest.json",
+        "falsification_report.json",
+        "metrics.json",
+        "configs/"
+      ],
+      "data_availability_statement": "All simulation data and configuration files required to reproduce the results are included in this bundle.",
+      "citation_provenance_rule": "Every claim must cite its evidence_id and recovery_path within the bundle."
+    }
+  ],
+  "document_bindings": [
+    {
+      "document_id": "paper1_ode_persistent_nonzero_structure",
+      "template_id": "PCD_PAPER_TEMPLATE_V1",
+      "math_category": "empirical_model_math",
+      "requires_claim_support_matrix": true
+    },
+    {
+      "document_id": "paper2_phase_packet_detectability",
+      "template_id": "PCD_PAPER_TEMPLATE_V1",
+      "math_category": "operational_measurement_math",
+      "requires_claim_support_matrix": true
+    },
+    {
+      "document_id": "paper3_relational_geometry_gra_curvature",
+      "template_id": "PCD_PAPER_TEMPLATE_V1",
+      "math_category": "theoretical_relational_geometry",
+      "requires_claim_support_matrix": true
+    },
+    {
+      "document_id": "paper4_minus_i_selection_derivation",
+      "template_id": "PCD_PAPER_TEMPLATE_V1",
+      "math_category": "operator_derivation_math",
+      "requires_claim_support_matrix": true
+    }
+  ]
+}

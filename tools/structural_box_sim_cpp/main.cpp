@@ -41,34 +41,80 @@ Diagnostic calculate_diagnostics(size_t nx, const T* epsilon, const T* rho, cons
 }
 
 template<typename T>
-void run_sim(sycl::queue& q, size_t nx, int steps, T dt, T length,
+void save_grid(size_t nx, const T* data, const std::string& path) {
+    std::ofstream f(path);
+    if (f.is_open()) {
+        for (size_t i = 0; i < nx; ++i) {
+            f << static_cast<double>(data[i]) << (i == nx - 1 ? "" : ",");
+        }
+        f << std::endl;
+        f.close();
+    }
+}
+
+template<typename T>
+void run_sim(sycl::queue& q, size_t nx, T dt, T length,
              T D_epsilon, T D_rho, T D_R,
-             T a, T b, T c, T u, T s,
+             T a, T b, T c, T u,
              T alpha, T beta, T gamma, T v, T h,
              T kappa, T lambda_R, T activity_thresh,
-             const std::string& label, json& report) {
+             const json& init_config,
+             const json& sequence,
+             const std::string& label, json& report,
+             bool save_final_grid = false, const std::string& out_dir = "") {
     
     StructuralBoxEngineSYCL<T> engine(nx, q);
     T dx = length / nx;
 
-    // Default initialization from Python sim.py
-    engine.initialize_gaussian(static_cast<T>(0.0), static_cast<T>(0.32), static_cast<T>(0.08), static_cast<T>(0.0), length);
-    engine.initialize_uniform(engine.rho, static_cast<T>(0.25));
-    engine.initialize_uniform(engine.residue, static_cast<T>(0.0));
+    // Configurable initialization
+    std::string kind = init_config.value("epsilon_kind", "gaussian");
+    if (kind == "gaussian") {
+        T base = init_config.value("epsilon_base", static_cast<T>(0.0));
+        T amp = init_config.value("amplitude", static_cast<T>(0.32));
+        T sigma = init_config.value("sigma", static_cast<T>(0.08));
+        T offset = init_config.value("offset", static_cast<T>(0.0));
+        engine.initialize_gaussian(base, amp, sigma, offset, length);
+    } else if (kind == "uniform") {
+        T base = init_config.value("epsilon_base", static_cast<T>(0.0));
+        T noise = init_config.value("noise_std", static_cast<T>(0.01));
+        int seed = init_config.value("seed", 42);
+        engine.initialize_noise(base, noise, seed);
+    }
+
+    engine.initialize_uniform(engine.rho, init_config.value("rho_base", static_cast<T>(0.25)));
+    engine.initialize_uniform(engine.residue, init_config.value("residue_base", static_cast<T>(0.0)));
 
     auto start = std::chrono::high_resolution_clock::now();
-    for (int i = 0; i < steps; ++i) {
-        engine.step(dt, dx, D_epsilon, D_rho, D_R, a, b, c, u, s, alpha, beta, gamma, v, h, kappa, lambda_R);
+    
+    if (sequence.is_array() && !sequence.empty()) {
+        for (const auto& phase : sequence) {
+            int phase_steps = phase.value("steps", 0);
+            T phase_s = phase.value("s", static_cast<T>(0.0));
+            for (int i = 0; i < phase_steps; ++i) {
+                engine.step(dt, dx, D_epsilon, D_rho, D_R, a, b, c, u, phase_s, alpha, beta, gamma, v, h, kappa, lambda_R);
+            }
+        }
+    } else {
+        // Default 2000 steps if no sequence
+        for (int i = 0; i < 2000; ++i) {
+            engine.step(dt, dx, D_epsilon, D_rho, D_R, a, b, c, u, static_cast<T>(0.01), alpha, beta, gamma, v, h, kappa, lambda_R);
+        }
     }
+    
     auto end = std::chrono::high_resolution_clock::now();
 
     Diagnostic d = calculate_diagnostics(nx, engine.epsilon, engine.rho, engine.residue, activity_thresh);
     
+    if (save_final_grid && !out_dir.empty()) {
+        save_grid(nx, engine.epsilon, (std::filesystem::path(out_dir) / (label + "_epsilon.csv")).string());
+    }
+
     report[label] = {
         {"epsilon_max", d.epsilon_max},
         {"rho_min", d.rho_min},
         {"residue_max", d.residue_max},
         {"epsilon_active_fraction", d.epsilon_active_fraction},
+        {"alignment_success_rate", d.epsilon_active_fraction},
         {"time_ms", std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()}
     };
 }
@@ -85,7 +131,6 @@ int main(int argc, char** argv) {
 
     // Default parameters
     size_t nx = 256;
-    int steps = 2000;
     float dt = 1e-4f;
     float length = 1.0f;
     float D_epsilon = 6e-4f;
@@ -98,12 +143,14 @@ int main(int argc, char** argv) {
     float activity_thresh = 0.05f;
 
     json config_json;
+    json init_config = json::object(); 
+    json sequence = json::array();
+
     if (!config_path.empty()) {
         std::ifstream f(config_path);
         if (f.is_open()) {
             config_json = json::parse(f);
             nx = config_json.value("nx", nx);
-            steps = config_json.value("steps", steps);
             dt = config_json.value("dt", dt);
             length = config_json.value("length", length);
             D_epsilon = config_json.value("D_epsilon", D_epsilon);
@@ -122,6 +169,20 @@ int main(int argc, char** argv) {
             s = config_json.value("s", s);
             h = config_json.value("h", h);
             activity_thresh = config_json.value("activity_thresh", activity_thresh);
+            if (config_json.contains("initial_condition")) {
+                init_config = config_json["initial_condition"];
+            }
+            if (config_json.contains("sequence")) {
+                sequence = config_json["sequence"];
+            } else if (config_json.contains("steps")) {
+                // Compatibility with old format
+                int steps = config_json.value("steps", 2000);
+                int s_dur = config_json.value("s_duration", steps);
+                sequence.push_back({{"steps", s_dur}, {"s", s}});
+                if (steps > s_dur) {
+                    sequence.push_back({{"steps", steps - s_dur}, {"s", 0.0}});
+                }
+            }
         }
     }
 
@@ -129,28 +190,38 @@ int main(int argc, char** argv) {
     sycl::queue q_cpu(sycl::cpu_selector_v);
 
     json report;
-    report["sim_id"] = "structural_box_v2p3_sycl_precision_study";
-    report["run_date"] = "2026-04-30";
+    report["sim_id"] = "structural_box_v2p3_sycl_sequence_study";
+    report["run_date"] = "2026-05-03";
     report["hardware_gpu"] = q_gpu.get_device().get_info<sycl::info::device::name>();
     report["hardware_cpu"] = q_cpu.get_device().get_info<sycl::info::device::name>();
 
+    bool save_grid_flag = config_json.value("save_grid", false);
+
     std::cout << "Running FP32 on GPU..." << std::endl;
-    run_sim<float>(q_gpu, nx, steps, dt, length, D_epsilon, D_rho, D_R, a, b, c, u, s, alpha, beta, gamma, v, h, kappa, lambda_R, activity_thresh, "fp32_results", report);
+    run_sim<float>(q_gpu, nx, dt, length, D_epsilon, D_rho, D_R, a, b, c, u, alpha, beta, gamma, v, h, kappa, lambda_R, activity_thresh, init_config, sequence, "fp32_results", report, false, "");
 
     std::cout << "Running FP64 on CPU..." << std::endl;
-    run_sim<double>(q_cpu, nx, steps, static_cast<double>(dt), static_cast<double>(length), 
+    run_sim<double>(q_cpu, nx, static_cast<double>(dt), static_cast<double>(length), 
                     static_cast<double>(D_epsilon), static_cast<double>(D_rho), static_cast<double>(D_R),
-                    static_cast<double>(a), static_cast<double>(b), static_cast<double>(c), static_cast<double>(u), static_cast<double>(s),
+                    static_cast<double>(a), static_cast<double>(b), static_cast<double>(c), static_cast<double>(u),
                     static_cast<double>(alpha), static_cast<double>(beta), static_cast<double>(gamma), static_cast<double>(v), static_cast<double>(h),
-                    static_cast<double>(kappa), static_cast<double>(lambda_R), static_cast<double>(activity_thresh), "fp64_results", report);
+                    static_cast<double>(kappa), static_cast<double>(lambda_R), static_cast<double>(activity_thresh), init_config, sequence, "fp64_results", report, save_grid_flag, out_dir);
 
     // Falsification: Zero Mismatch (s=0) should lead to structural collapse or lower activity
     std::cout << "Running Falsification (Zero Mismatch)..." << std::endl;
-    run_sim<double>(q_cpu, nx, steps, static_cast<double>(dt), static_cast<double>(length), 
+    json fals_seq = json::array();
+    int total_steps = 0;
+    if (sequence.is_array()) {
+        for (const auto& p : sequence) total_steps += p.value("steps", 0);
+    }
+    if (total_steps == 0) total_steps = 2000;
+    fals_seq.push_back({{"steps", total_steps}, {"s", 0.0}});
+
+    run_sim<double>(q_cpu, nx, static_cast<double>(dt), static_cast<double>(length), 
                     static_cast<double>(D_epsilon), static_cast<double>(D_rho), static_cast<double>(D_R),
-                    static_cast<double>(a), static_cast<double>(b), static_cast<double>(c), static_cast<double>(u), 0.0,
+                    static_cast<double>(a), static_cast<double>(b), static_cast<double>(c), static_cast<double>(u),
                     static_cast<double>(alpha), static_cast<double>(beta), static_cast<double>(gamma), static_cast<double>(v), static_cast<double>(h),
-                    static_cast<double>(kappa), static_cast<double>(lambda_R), static_cast<double>(activity_thresh), "falsification_zero_s", report);
+                    static_cast<double>(kappa), static_cast<double>(lambda_R), static_cast<double>(activity_thresh), init_config, fals_seq, "falsification_zero_s", report, false, "");
 
     // Precision drift calculation
     double drift_e = std::abs(report["fp32_results"]["epsilon_max"].get<double>() - report["fp64_results"]["epsilon_max"].get<double>());

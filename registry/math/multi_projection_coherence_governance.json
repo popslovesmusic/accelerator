@@ -1,0 +1,131 @@
+{
+  "governance_id": "VAL-MPC-001",
+  "patch_id": "MPF-PALG-024",
+  "name": "Multi-Projection Coherence Governance Registry",
+  "status": "active",
+  "governance_status": {
+    "theorem_status": "NOT_PROVEN",
+    "governance_status": "CANDIDATE_MULTI_PROJECTION_COHERENCE",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL"
+  },
+  "core_rule": {
+    "name": "projection_agreement_not_identity_rule",
+    "short_form": "cohere(\u03a0a(WholeR), \u03a0b(WholeR)) != recover(WholeR)",
+    "definition": "Agreement between multiple projections may indicate shared source consistency, but it does not reconstruct or prove the full \u21d4R source relation."
+  },
+  "coherence_schema": {
+    "coherence_id": "string",
+    "source_relation": "string",
+    "projection_set": [
+      {
+        "projection_operator_id": "string",
+        "projection_expression": "string",
+        "projection_depth": "PD-1 | PD-2 | PD-3 | PD-4",
+        "recoverability_class": "RCOV-0 | RCOV-1 | RCOV-2 | RCOV-3"
+      }
+    ],
+    "shared_retained_features": [
+      "string"
+    ],
+    "conflicting_features": [
+      "string"
+    ],
+    "lost_features_union": [
+      "string"
+    ],
+    "coherence_status": "COHERENT | PARTIAL | CONFLICTING | INDETERMINATE",
+    "claim_level": "PROJECTION_ONLY",
+    "source_identity_proven": false
+  },
+  "coherence_classes": [
+    {
+      "class_id": "MPC-1",
+      "name": "shared_trace_coherence",
+      "definition": "Multiple projections retain compatible source_relation pointers."
+    },
+    {
+      "class_id": "MPC-2",
+      "name": "feature_overlap_coherence",
+      "definition": "Multiple projections retain compatible reduced features from the same source relation."
+    },
+    {
+      "class_id": "MPC-3",
+      "name": "loss-aware_partial_coherence",
+      "definition": "Projection agreement exists, but major or critical features remain lost."
+    },
+    {
+      "class_id": "MPC-4",
+      "name": "projection_conflict",
+      "definition": "Projected forms produce incompatible retained-feature claims or inconsistent source metadata."
+    }
+  ],
+  "example_records": [
+    {
+      "coherence_id": "PALG-MPC-001",
+      "source_relation": "(E!=0) \u21d4R delta(E>0)",
+      "projection_set": [
+        {
+          "projection_operator_id": "\u03a0_imply",
+          "projection_expression": "(E!=0) -> delta(E>0)",
+          "projection_depth": "PD-3",
+          "recoverability_class": "RCOV-1"
+        },
+        {
+          "projection_operator_id": "\u03a0_biconditional",
+          "projection_expression": "(E!=0) iff delta(E>0)",
+          "projection_depth": "PD-3",
+          "recoverability_class": "RCOV-1"
+        }
+      ],
+      "shared_retained_features": [
+        "local_explanatory_readability",
+        "source_relation_pointer"
+      ],
+      "conflicting_features": [
+        "directionality_vs_reciprocity"
+      ],
+      "lost_features_union": [
+        "residue_history",
+        "recursive_co_generation",
+        "aspect_simultaneity",
+        "whole_relation_indivisibility"
+      ],
+      "coherence_status": "PARTIAL",
+      "claim_level": "PROJECTION_ONLY",
+      "source_identity_proven": false
+    }
+  ],
+  "governance_rules": [
+    {
+      "rule_id": "MPC-RULE-001",
+      "rule": "Multiple projections may be compared only when they declare the same source_relation or explicitly governed source-link."
+    },
+    {
+      "rule_id": "MPC-RULE-002",
+      "rule": "Projection agreement cannot be treated as reconstruction of the source relation."
+    },
+    {
+      "rule_id": "MPC-RULE-003",
+      "rule": "Conflicting retained features must be recorded rather than collapsed."
+    },
+    {
+      "rule_id": "MPC-RULE-004",
+      "rule": "The union of lost features must be tracked for all compared projections."
+    },
+    {
+      "rule_id": "MPC-RULE-005",
+      "rule": "Multi-projection coherence cannot promote physics, arithmetic, or theorem claims."
+    }
+  ],
+  "forbidden_claims": [
+    "Projection agreement proves the source relation.",
+    "Multiple projections reconstruct \u21d4R by convergence alone.",
+    "QM-like and GR-like projection agreement proves unification.",
+    "Arithmetic-like projection agreement replaces standard arithmetic.",
+    "Conflicting projection features can be ignored.",
+    "Projection coherence is theorem evidence by default."
+  ],
+  "source_relation": "(E\u22600) \u21d4R \u03b4(E>0)",
+  "non_separability_acknowledged": true
+}

@@ -1,0 +1,101 @@
+{
+  "sim_id": "MPF-SIM-011",
+  "name": "Recursive Admissibility Hysteresis Mapping",
+  "status": "active",
+  "purpose": "Map whether admissibility response depends on recursive history, especially whether recovery, decay, and reset paths differ from the original instability path.",
+  "simulation_targets": [
+    {
+      "target_id": "SIM011-T001",
+      "name": "Admissibility Hysteresis Loop",
+      "metric": "hysteresis_loop_area"
+    },
+    {
+      "target_id": "SIM011-T002",
+      "name": "Recovery Path Asymmetry",
+      "metric": "recovery_asymmetry_index"
+    },
+    {
+      "target_id": "SIM011-T003",
+      "name": "Scar Irreversibility",
+      "metric": "scar_irreversibility_score"
+    },
+    {
+      "target_id": "SIM011-T004",
+      "name": "Reset Completeness",
+      "metric": "reset_completeness_score"
+    },
+    {
+      "target_id": "SIM011-T005",
+      "name": "Proof Eligibility Hysteresis",
+      "metric": "proof_eligibility_hysteresis"
+    }
+  ],
+  "simulation_scenarios": [
+    {
+      "scenario_id": "SIM011-S001",
+      "name": "Stable-to-Metastable-to-Stable Loop"
+    },
+    {
+      "scenario_id": "SIM011-S002",
+      "name": "Severance Scar Irreversibility"
+    },
+    {
+      "scenario_id": "SIM011-S003",
+      "name": "False Reset Hysteresis"
+    },
+    {
+      "scenario_id": "SIM011-S004",
+      "name": "Compressed Recovery Path"
+    },
+    {
+      "scenario_id": "SIM011-S005",
+      "name": "Control Reversible Basin"
+    }
+  ],
+  "hysteresis_classes": [
+    {
+      "class_id": "SIM-HYSTERESIS-REVERSIBLE",
+      "meaning": "Recovery path approximately retraces destabilization path.",
+      "proof_effect": "supports_review_only"
+    },
+    {
+      "class_id": "SIM-HYSTERESIS-ELASTIC",
+      "meaning": "Recovery path differs but remains bounded and locally admissible.",
+      "proof_effect": "review_required"
+    },
+    {
+      "class_id": "SIM-HYSTERESIS-PLASTIC",
+      "meaning": "System retains lasting deformation after recovery.",
+      "proof_effect": "review_required_or_blocked"
+    },
+    {
+      "class_id": "SIM-HYSTERESIS-SCARRED",
+      "meaning": "Prior failure geometry produces irreversible or recurring instability.",
+      "proof_effect": "blocked"
+    },
+    {
+      "class_id": "SIM-HYSTERESIS-DECEPTIVE",
+      "meaning": "System appears recovered but later reveals hidden instability from residual groove bias.",
+      "proof_effect": "blocked"
+    }
+  ],
+  "governance": {
+    "theorem_status": "NOT_PROVEN",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL",
+    "claim_limit": "hysteresis_behavior_supports_review_only_not_proof"
+  },
+  "dependencies": [
+    "MPF-SIM-010",
+    "MPF-SIM-009",
+    "MPF-SIM-008",
+    "MPF-SIM-005",
+    "LAW011",
+    "LAW021",
+    "LAW028",
+    "LAW032",
+    "LAW034",
+    "failure_geometry_registry",
+    "operator_signature_registry"
+  ]
+}

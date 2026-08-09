@@ -1,0 +1,45 @@
+{
+  "report_id": "MSV_001_OUTPUT_VALIDATION_RULES_V1_REPORT",
+  "timestamp": "2026-05-10T03:00:00Z",
+  "status": "COMPLETED",
+  "patch_id": "PCD_MSV_001_OUTPUT_VALIDATION_RULES_V1",
+  "summary": "Defined formal output validation rules for MSV-001 simulation validation. Established the output validation registry and implemented governance guardrails for claim integrity.",
+  "operations_summary": [
+    {
+      "operation": "create_output_validation_registry",
+      "target": "registry/msv_001_output_validation_registry.json",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "register_output_validation_rules",
+      "count": 6,
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "add_output_validation_guardrails",
+      "target": "registry/lexicon_gap_queue.json",
+      "status": "SUCCESS",
+      "guardrails_added": [
+        "no_MSV001_acceptance_without_output_validation_v1",
+        "no_stability_claim_without_switch_trace_v1"
+      ]
+    }
+  ],
+  "validation_status": {
+    "validation_id": "MSV-001",
+    "rules_active": 6,
+    "outputs_governed": [
+      "operator_trace.json",
+      "minimizer_switch_trace.csv",
+      "ref_equivalence_trace.csv",
+      "recoupling_trace.csv",
+      "falsification_report.json",
+      "provenance_manifest.json"
+    ]
+  },
+  "charter_compliance_check": {
+    "charter_version": "2.3",
+    "status": "COMPLIANT",
+    "notes": "The output validation rules ensure that framework empirical results are rejected if they lack the required structural detail, maintaining the mandate of auditable and evidence-based research."
+  }
+}

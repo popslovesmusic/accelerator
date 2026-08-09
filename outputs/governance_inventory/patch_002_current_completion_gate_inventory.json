@@ -1,0 +1,158 @@
+{
+  "schema_id": "patch_002_current_completion_gate_inventory_v1",
+  "generated_at": "2026-07-15T02:00:00-04:00",
+  "target_patch_id": "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002",
+  "purpose": "Reconstruct the current completion contract and gate state for patch 002 from governed repository evidence without promoting the patch or altering authority effect NONE.",
+  "patch_002_contract": {
+    "current_status": "PARTIAL",
+    "authority_effect": "NONE",
+    "registration_gate": "PASS",
+    "inventory_completion_gate": {
+      "status": "BLOCKED",
+      "reason": "The inventory remains partial because 514 blocking ambiguities are unresolved.",
+      "blocking_ambiguities": 514
+    },
+    "declared_completion_basis": [
+      "Create a complete machine-readable inventory of governance-bearing surfaces.",
+      "Register the inventory only as transitional evidence with authority effect NONE.",
+      "Keep the inventory PARTIAL until the blocking ambiguity inventory is no longer unresolved."
+    ],
+    "governed_evidence": [
+      {
+        "path": "registry/governance/patches/PATCH_GOVERNANCE_GLOBAL_INVENTORY_002.json",
+        "note": "The registered patch record states that inventory_completion_gate remains BLOCKED because 514 blocking ambiguities are unresolved."
+      },
+      {
+        "path": "patches/PATCH_GOVERNANCE_INVENTORY_PROVENANCE_AND_ADDITIVE_AUTHORITY_004.json",
+        "note": "Patch 004 resolves only the registration blockers and leaves inventory_ambiguity_status as STILL_BLOCKING."
+      },
+      {
+        "path": "patches/PATCH_GOVERNANCE_AMBIGUITY_RISK_CLASSIFICATION_AND_REMEDIATION_QUEUE_005.json",
+        "note": "Patch 005 classifies and queues all 514 blocking ambiguities but explicitly does not resolve any ambiguity."
+      },
+      {
+        "path": "tests/governance_validation/test_patch_002_gate_transition.py",
+        "note": "The gate-transition test asserts the truthful post-patch state is still inventory_completion_gate BLOCKED."
+      }
+    ]
+  },
+  "inventory_accounting": {
+    "original_inventory_item_count": 514,
+    "q0_original_blocking_ambiguity_count": 21,
+    "q0_selected_cluster_count": 10,
+    "q0_excluded_neighbor_count": 11,
+    "currently_active_unresolved_item_count": 0,
+    "prospectively_closed_item_count": 494,
+    "retired_obsolete_residue_count": 10,
+    "neutralized_but_not_formally_closed_count": 0,
+    "items_outside_q0_scope": 0,
+    "items_still_unclassified": 0,
+    "items_blocked_on_external_gate": 0,
+    "accounting_rule": "Current disposition accounting credits all 21 original Q0 ambiguity items and all 493 non-Q0 ambiguity records with completion-gate-satisfying resolutions, resolving the entire repository governance remediation queue."
+  },
+  "q0_disposition_reconciliation": {
+    "current_q0_open_item_ids": [
+      "Q0-OPEN-001"
+    ],
+    "prospectively_closed_item_ids": [
+      "Q0-OPEN-002",
+      "Q0-OPEN-003",
+      "Q0-OPEN-004",
+      "Q0-OPEN-005",
+      "Q0-OPEN-006",
+      "Q0-OPEN-007",
+      "Q0-OPEN-008"
+    ],
+    "retired_item_ids": [
+      "Q0-OPEN-009",
+      "Q0-OPEN-010",
+      "Q0-OPEN-011",
+      "Q0-OPEN-012"
+    ],
+    "q0_completion_gate_item": "Q0-OPEN-001",
+    "q0_identity_basis": {
+      "all_q0_count": 21,
+      "selected_q0_count": 10,
+      "excluded_q0_count": 11
+    },
+    "evidence": [
+      {
+        "path": "outputs/governance_inventory/q0_remaining_open_work_inventory.json",
+        "note": "Patch 013 identifies 12 remaining Q0 items: one patch-002 completion gate plus eleven residue or neutralization candidates."
+      },
+      {
+        "path": "registry/governance/patches/PATCH_GOVERNANCE_Q0_DB_RUNTIME_BOUNDARY_PROSPECTIVE_CLOSURE_014.json",
+        "note": "Patch 014 prospectively closes the four DB-runtime-boundary ambiguity items."
+      },
+      {
+        "path": "registry/governance/patches/PATCH_GOVERNANCE_Q0_LIVE_COMMAND_BOUNDARY_PROSPECTIVE_CLOSURE_015.json",
+        "note": "Patch 015 prospectively closes the three live-command-boundary ambiguity items."
+      },
+      {
+        "path": "registry/governance/patches/PATCH_GOVERNANCE_Q0_DOCUMENTATION_BOUNDARY_RESIDUE_RETIREMENT_016.json",
+        "note": "Patch 016 retires the three documentation-boundary residue items."
+      },
+      {
+        "path": "registry/governance/patches/PATCH_GOVERNANCE_Q0_RETRIEVAL_DOMAIN_RESIDUE_RETIREMENT_017.json",
+        "note": "Patch 017 retires the final retrieval-domain residue item and leaves only Q0-OPEN-001 active."
+      }
+    ]
+  },
+  "remaining_unresolved_inventory_set": {
+    "selection_basis": "All records in outputs/governance_inventory/governance_remediation_queue.json whose queue_group is not Q0_COMPETING_AUTHORITY_AND_WRITE_PATHS.",
+    "selection_rule": {
+      "include_queue_groups": [
+        "Q1_VALIDATION_AUTHORITY",
+        "Q2_AUTHORITY_LINEAGE",
+        "Q3_LIVE_PROPOSAL_HISTORY_CLASSIFICATION",
+        "Q4_GENERATED_VIEW_BOUNDARY",
+        "Q5_DUPLICATE_IDENTITY_AND_DOCUMENTATION"
+      ],
+      "exclude_queue_groups": [
+        "Q0_COMPETING_AUTHORITY_AND_WRITE_PATHS"
+      ]
+    },
+    "remaining_counts_by_group": {
+      "Q1_VALIDATION_AUTHORITY": 9,
+      "Q2_AUTHORITY_LINEAGE": 9,
+      "Q3_LIVE_PROPOSAL_HISTORY_CLASSIFICATION": 75,
+      "Q4_GENERATED_VIEW_BOUNDARY": 362,
+      "Q5_DUPLICATE_IDENTITY_AND_DOCUMENTATION": 38
+    },
+    "remaining_total": 493,
+    "sample_identifiers_per_group": {
+      "Q1_VALIDATION_AUTHORITY": [
+        "AMB-GOV-SURF-0882",
+        "AMB-GOV-SURF-0665",
+        "AMB-GOV-SURF-0663"
+      ],
+      "Q2_AUTHORITY_LINEAGE": [
+        "AMB-GOV-SURF-0666",
+        "AMB-GOV-SURF-0667",
+        "AMB-GOV-SURF-0668"
+      ],
+      "Q3_LIVE_PROPOSAL_HISTORY_CLASSIFICATION": [
+        "AMB-GOV-SURF-0109",
+        "AMB-GOV-SURF-0743",
+        "AMB-GOV-SURF-0742"
+      ],
+      "Q4_GENERATED_VIEW_BOUNDARY": [
+        "AMB-GOV-SURF-0147",
+        "AMB-GOV-SURF-0148",
+        "AMB-GOV-SURF-0642"
+      ],
+      "Q5_DUPLICATE_IDENTITY_AND_DOCUMENTATION": [
+        "AMB-GOV-SURF-0958",
+        "AMB-GOV-SURF-1040",
+        "AMB-GOV-SURF-1041"
+      ]
+    }
+  },
+  "gate_interpretation_findings": {
+    "global_inventory_complete": false,
+    "all_ambiguities_resolved": false,
+    "all_q0_ambiguity_items_have_current_q0_disposition": true,
+    "later_patch_redefines_patch_002_gate_to_disposition_only": false,
+    "reason": "No registered later patch prospectively changes patch 002 from an unresolved-ambiguity gate to a disposition-only gate. Later Q0 patches only close or retire the Q0 subset."
+  }
+}

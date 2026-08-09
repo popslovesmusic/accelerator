@@ -1,0 +1,115 @@
+{
+  "artifact_id": "rate_type_eligibility_tests_002",
+  "artifact_type": "rate_type_eligibility_test_suite",
+  "status": "DRAFT_PROVISIONAL",
+  "scope": "governance_execution_surface",
+  "source_patch_id": "PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_TESTS_002",
+  "source_artifacts": [
+    {
+      "path": "registry/governance/patches/PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_001.json",
+      "status": "current_governance_patch",
+      "used_for": "predicate definition and failure-class inheritance"
+    },
+    {
+      "path": "docs/governance/rate_type_eligibility_candidate_001.json",
+      "status": "current_governance_witness",
+      "used_for": "predicate witness under test"
+    },
+    {
+      "path": "docs/governance/bridge_admissibility_protocol_061.json",
+      "status": "current_governance_surface",
+      "used_for": "admission screen and declared mapping discipline"
+    },
+    {
+      "path": "docs/governance/propagation_rate_density_endpoint_candidate_003.json",
+      "status": "current_governance_witness",
+      "used_for": "distinction-density and endpoint-non-realizability context"
+    },
+    {
+      "path": "docs/textbook/mono_process_textbook_complete.md",
+      "status": "current_textbook_surface",
+      "used_for": "governed predicate and bridge context"
+    }
+  ],
+  "purpose": "Witness the adversarial test suite for RATE_TYPE_ELIGIBLE(x, phi), including pass, fail, and edge-case classes, while keeping admission distinct from bridge promotion.",
+  "claim_humility": {
+    "current_status": "candidate_witness_only",
+    "non_claims": [
+      "Does not assert bridge truth.",
+      "Does not assert theorem status.",
+      "Does not assert a completed metric.",
+      "Does not modify RT_core.",
+      "Does not assert empirical validation.",
+      "Does not promote DENSITY_BRIDGE_001 or RATE_UNIFICATION_001."
+    ]
+  },
+  "test_classes": [
+    {
+      "id": "RTE_TEST_PASS_001",
+      "name": "Coupled Interior Propagation Candidate",
+      "expected_result": "PASS",
+      "required_properties": [
+        "DOF(x) > 0",
+        "Coupled_AE(x)",
+        "Declared(phi)",
+        "OrderedIntermediate(x, phi)",
+        "EndpointCompatible(x, phi)",
+        "GenExclusionBeforeClosure(x, phi)"
+      ]
+    },
+    {
+      "id": "RTE_TEST_FAIL_001",
+      "name": "True Decoupled Endpoint Candidate",
+      "expected_result": "FAIL",
+      "expected_failure_class": "RATE_TYPE_INELIGIBLE_ZERO_DOF",
+      "reason": "A true 0 DOF endpoint cannot support rate-typed bridge evaluation."
+    },
+    {
+      "id": "RTE_TEST_EDGE_001",
+      "name": "Near-Tie Below Floor Candidate",
+      "expected_result": "EDGE",
+      "expected_issue": "May satisfy coupled interior structure while failing declared admissibility under phi."
+    }
+  ],
+  "mandatory_trace_fields": [
+    "test_id",
+    "domain",
+    "candidate_x",
+    "reference_phi",
+    "condition_checks",
+    "failure_class",
+    "result",
+    "notes"
+  ],
+  "governance_rule": {
+    "id": "GOV_RTE_TESTS_001",
+    "rule": "Every RATE_TYPE_ELIGIBLE(x, phi) test must record the declared phi before condition evaluation."
+  },
+  "anti_promotion_rule": {
+    "id": "GOV_RTE_TESTS_002",
+    "rule": "Passing the adversarial test suite admits further bridge development but does not promote DENSITY_BRIDGE_001 or RATE_UNIFICATION_001."
+  },
+  "test_reading": {
+    "status": "candidate_only",
+    "statement": "The suite discriminates pass, fail, and edge outcomes under a declared phi; it is diagnostic and does not itself validate the bridge."
+  },
+  "governance_rules": [
+    "Declared phi must precede condition evaluation.",
+    "PASS does not mean promotion.",
+    "FAIL does not invalidate RT_core.",
+    "EDGE records admissibility ambiguity without collapsing it into truth.",
+    "The suite does not define a completed metric."
+  ],
+  "forbidden_inferences": [
+    "A passing test is not bridge promotion.",
+    "A failing test does not invalidate RT_core.",
+    "An edge-case test does not collapse into pass/fail without recorded ambiguity.",
+    "The suite does not define a completed metric."
+  ],
+  "non_claims": [
+    "Does not prove the bridge is externally true.",
+    "Does not prove the bridge is unique.",
+    "Does not prove endpoint non-realizability outside the framework.",
+    "Does not modify RT_core."
+  ]
+}

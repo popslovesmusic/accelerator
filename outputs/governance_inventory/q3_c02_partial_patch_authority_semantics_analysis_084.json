@@ -1,0 +1,315 @@
+{
+  "schema_id": "q3_c02_partial_patch_authority_semantics_analysis_084_v1",
+  "generated_at": "2026-07-15T00:00:00-04:00",
+  "patch_id": "PATCH_GOVERNANCE_Q3_C02_PARTIAL_PATCH_AUTHORITY_SEMANTICS_ANALYSIS_084",
+  "post_083_c02_reconciliation": {
+    "component_id": "Q3-078-C02",
+    "component_ids_from_078": [
+      "AMB-GOV-SURF-0744",
+      "AMB-GOV-SURF-0771"
+    ],
+    "component_size_from_078": 2,
+    "all_c02_ids_still_in_post_083_active_q3_queue": true,
+    "missing_from_post_083_active_q3_queue": [],
+    "current_governed_state_reconciliation": {
+      "q3_nominal_queue": 52,
+      "q3_live_unresolved_items": 50,
+      "q3_pending_outside_scope_q5_items": 2,
+      "global_blocking_ambiguities": 460,
+      "rule": "Use post-083 active Q3 queue plus prior governed disposition deltas as the live state; no repository artifact is mutated in Patch 084."
+    }
+  },
+  "observed_partial_status_usage": {
+    "c02_records": [
+      {
+        "global_ambiguity_id": "AMB-GOV-SURF-0744",
+        "status": "PARTIAL",
+        "authority_effect_present": false,
+        "actual_partial_dimension": [
+          "PATCH_WORK_STATUS",
+          "ACCOUNTING_STATE"
+        ]
+      },
+      {
+        "global_ambiguity_id": "AMB-GOV-SURF-0771",
+        "status": "PARTIAL",
+        "authority_effect_present": true,
+        "actual_partial_dimension": [
+          "PATCH_WORK_STATUS",
+          "ACCOUNTING_STATE",
+          "PARTIAL_WORK_NO_AUTHORITY_EFFECT"
+        ]
+      }
+    ],
+    "summary": "PARTIAL is not used uniformly. In Patch 055 it behaves like incomplete closeout/work-package accounting over already-verified predecessor effects. In Patch 002 it marks transitional inventory/accounting incompleteness while the patch record itself explicitly has authority_effect NONE."
+  },
+  "patch_status_vs_authority_effect_analysis": {
+    "shared_finding": "Patch work status and authority effect are independent dimensions in the current governed evidence.",
+    "existing_distinguishing_fields": [
+      "status",
+      "authority_effect.classification",
+      "registration_gate.status",
+      "inventory_completion_gate.status",
+      "patches_verified",
+      "validation_results",
+      "known_limitations",
+      "remaining_debt",
+      "further_patch_required",
+      "authority_registration"
+    ],
+    "item_findings": {
+      "AMB-GOV-SURF-0744": "No explicit authority_effect field is present. The record reads as a closeout bundle over predecessor implementation state, so PARTIAL does not by itself prove a live authority effect.",
+      "AMB-GOV-SURF-0771": "authority_effect.classification=NONE explicitly separates patch status from authority effect; PARTIAL here is driven by completion/accounting gates rather than a live authority claim."
+    }
+  },
+  "implementation_surface_authority_analysis": {
+    "shared_finding": "Affected implementation surfaces can possess independent roles even when the partial patch record itself is ambiguous under generic lookup.",
+    "examples": [
+      {
+        "surface": "scripts/global_validate.py",
+        "role": "VALIDATION_INVOCATION_AUTHORITY",
+        "relevance": "Shows that Patch 055 references an independently live implementation surface, so excluding the patch record cannot be the same as disabling the live validator."
+      },
+      {
+        "surface": "governance/core_rules/GOVERNANCE_INVENTORY_TRANSITIONAL_EVIDENCE_001.json",
+        "status": "LIVE by file content",
+        "relevance": "Shows that Patch 002 can register a live constraining rule while the patch record itself remains authority_effect NONE."
+      }
+    ],
+    "required_boundary": "Any future hardening must separate patch-record lookup from independent surface authority rather than treating PARTIAL as a surface-wide verdict."
+  },
+  "current_lookup_behavior": {
+    "shared_finding": "Both C02 patch records are still returned by generic authority lookup as allow/current registry surfaces.",
+    "mechanism_test_results": {
+      "Q3-084-M01": {
+        "question": "Does generic live-authority lookup return the PARTIAL patch record itself?",
+        "answer": "YES for both C02 items."
+      },
+      "Q3-084-M02": {
+        "question": "Does a live implementation surface changed by a PARTIAL patch resolve independently through its own authority role?",
+        "answer": "YES. scripts/global_validate.py resolves independently as VALIDATION_INVOCATION_AUTHORITY; Patch 002 also references a separate LIVE core rule by file content."
+      },
+      "Q3-084-M03": {
+        "question": "Would excluding all PARTIAL patch records from live lookup suppress any legitimate live authority?",
+        "answer": "YES, or at minimum it would risk conflating patch-record history with independently governed live effects. PARTIAL is too heterogeneous for a blanket rule."
+      },
+      "Q3-084-M04": {
+        "question": "Is authority_effect already sufficient to distinguish non-authoritative patch records from bounded authority-changing patches?",
+        "answer": "PARTIALLY. It is sufficient for Patch 002, but not for Patch 055 because no authority_effect field is present there."
+      },
+      "Q3-084-M05": {
+        "question": "Are there PARTIAL records with authority_effect NONE whose affected implementation surfaces are nevertheless legitimately live?",
+        "answer": "YES. Patch 002 explicitly has authority_effect NONE while separately registering a LIVE core rule and inventory artifacts that describe already-live authority sources."
+      }
+    }
+  },
+  "item_by_item_classification": [
+    {
+      "global_ambiguity_id": "AMB-GOV-SURF-0744",
+      "patch_surface": "registry/governance/patches/PATCH_ACCELERATOR_INFERENCE_CONSERVATION_CLOSEOUT_055.json",
+      "status": "PARTIAL",
+      "authority_effect": null,
+      "implementation_evidence": [
+        "Patch 055 verifies predecessor patches 050-054 as PASS/APPLIED and records deterministic_pipeline booleans all true.",
+        "Patch 055 files_changed are predominantly reports plus the patch record itself; it does not describe a new live authority grant.",
+        "Patch 055 validation_results are all passing, while known_limitations and remaining_debt keep the closeout recommendation at PARTIAL."
+      ],
+      "affected_live_surfaces": [
+        "scripts/global_validate.py"
+      ],
+      "affected_surface_roles": [
+        {
+          "surface": "registry/governance/patches/PATCH_ACCELERATOR_INFERENCE_CONSERVATION_CLOSEOUT_055.json",
+          "role": null,
+          "lookup_decision_if_patch_surface": "allow"
+        },
+        {
+          "surface": "outputs/audits/global_health_report.json",
+          "role": null,
+          "lookup_decision_if_patch_surface": null
+        },
+        {
+          "surface": "reports/deterministic-pipeline-final-call-graph.md",
+          "role": null,
+          "lookup_decision_if_patch_surface": null
+        },
+        {
+          "surface": "reports/inference-boundary-final-register.json",
+          "role": null,
+          "lookup_decision_if_patch_surface": null
+        },
+        {
+          "surface": "reports/inference-conservation-final-audit.json",
+          "role": null,
+          "lookup_decision_if_patch_surface": null
+        },
+        {
+          "surface": "reports/inference-conservation-final-summary.md",
+          "role": null,
+          "lookup_decision_if_patch_surface": null
+        },
+        {
+          "surface": "reports/inference-conservation-metrics-before-after.json",
+          "role": null,
+          "lookup_decision_if_patch_surface": null
+        },
+        {
+          "surface": "scripts/global_validate.py",
+          "role": "VALIDATION_INVOCATION_AUTHORITY",
+          "lookup_decision_if_patch_surface": null
+        }
+      ],
+      "validation_state": {
+        "tests_passed": true,
+        "schemas_valid": true,
+        "registries_valid": true,
+        "governance_validation_passed": true,
+        "git_diff_check_passed": true,
+        "rollback_proof_passed": true,
+        "bounded_reading": "Validation is complete for the closeout bundle, so PARTIAL is not primarily a failed validation state."
+      },
+      "supersession_state": {
+        "patch_record": "current",
+        "predecessor_patches_verified": [
+          "050 PASS",
+          "051 PASS",
+          "052 APPLIED",
+          "053 PASS",
+          "054 PASS"
+        ],
+        "explicit_supersession": "not declared"
+      },
+      "current_lookup_behavior": {
+        "decision": "allow",
+        "reason": "Registry surfaces remain authoritative for governed ledger, debt, and patch records.",
+        "authority_source": "registry/governance/patches/PATCH_ACCELERATOR_INFERENCE_CONSERVATION_CLOSEOUT_055.json",
+        "warnings": []
+      },
+      "actual_partial_dimension": [
+        "PATCH_WORK_STATUS",
+        "ACCOUNTING_STATE"
+      ],
+      "ambiguity_mechanism": "Generic lookup returns the partial closeout patch record itself as a registry authority surface even though repository evidence points to a closeout/reporting bundle over predecessor effects and independently live implementation surfaces.",
+      "classification": "AUTHORITY_EFFECT_UNRESOLVED",
+      "recommended_next_action": "Handle as an item-specific partial-closeout semantics case. A future bounded patch should prove whether the closeout record itself is non-authoritative while preserving independent live resolution of scripts/global_validate.py and predecessor effects."
+    },
+    {
+      "global_ambiguity_id": "AMB-GOV-SURF-0771",
+      "patch_surface": "registry/governance/patches/PATCH_GOVERNANCE_GLOBAL_INVENTORY_002.json",
+      "status": "PARTIAL",
+      "authority_effect": {
+        "creates_new_governance": false,
+        "modifies_live_governance": false,
+        "supersedes_existing_governance": false,
+        "activates_validation_department": false,
+        "classification": "NONE"
+      },
+      "implementation_evidence": [
+        "Patch 002 explicitly sets authority_effect.classification to NONE and says inventory registration is descriptive, not constitutive.",
+        "registration_gate.status is PASS while inventory_completion_gate.status is BLOCKED, showing implemented registration plus incomplete accounting/completion.",
+        "authority_registration.new_live_rule records a separate LIVE core governance rule constraining inventories without making the inventory patch itself authoritative."
+      ],
+      "affected_live_surfaces": [
+        "governance/core_rules/GOVERNANCE_INVENTORY_TRANSITIONAL_EVIDENCE_001.json"
+      ],
+      "affected_surface_roles": [
+        {
+          "surface": "registry/governance/patches/PATCH_GOVERNANCE_GLOBAL_INVENTORY_002.json",
+          "role": null,
+          "lookup_decision_if_patch_surface": "allow"
+        },
+        {
+          "surface": "docs/governance/",
+          "role": null,
+          "lookup_decision_if_patch_surface": null
+        },
+        {
+          "surface": "docs/governance/validation_department_mini_agent_architecture_001.json.",
+          "role": null,
+          "lookup_decision_if_patch_surface": null
+        },
+        {
+          "surface": "outputs/audits/",
+          "role": null,
+          "lookup_decision_if_patch_surface": null
+        },
+        {
+          "surface": "outputs/governance_inventory/",
+          "role": null,
+          "lookup_decision_if_patch_surface": null
+        },
+        {
+          "surface": "registry/governance_change_ledger.json.",
+          "role": null,
+          "lookup_decision_if_patch_surface": null
+        },
+        {
+          "surface": "registry/governance_hash_registry.json.",
+          "role": null,
+          "lookup_decision_if_patch_surface": null
+        }
+      ],
+      "validation_state": {
+        "registration_gate": "PASS",
+        "inventory_completion_gate": "BLOCKED",
+        "bounded_reading": "PARTIAL is driven by unresolved blocking ambiguities and completion/accounting state, not by a claimed live authority effect of the patch record."
+      },
+      "supersession_state": {
+        "patch_record": "current",
+        "explicit_supersession": "not declared",
+        "evidence_set_authority_effect": "NONE"
+      },
+      "current_lookup_behavior": {
+        "decision": "allow",
+        "reason": "Registry surfaces remain authoritative for governed ledger, debt, and patch records.",
+        "authority_source": "registry/governance/patches/PATCH_GOVERNANCE_GLOBAL_INVENTORY_002.json",
+        "warnings": []
+      },
+      "actual_partial_dimension": [
+        "PATCH_WORK_STATUS",
+        "ACCOUNTING_STATE",
+        "PARTIAL_WORK_NO_AUTHORITY_EFFECT"
+      ],
+      "ambiguity_mechanism": "Generic lookup returns the partial inventory patch record itself as registry authority even though the record explicitly says its authority effect is NONE and any operative constraint lives in separate governed rules or existing observed surfaces.",
+      "classification": "PATCH_RECORD_NON_AUTHORITY_BUT_IMPLEMENTED_SURFACE_MAY_BE_LIVE",
+      "recommended_next_action": "Use this as the smallest next implementation target: a bounded rule for PARTIAL patch records with explicit authority_effect NONE, without generalizing to all PARTIAL records."
+    }
+  ],
+  "shared_mechanisms": {
+    "shared": [
+      "Generic lookup currently treats both PARTIAL patch records themselves as current registry authority surfaces.",
+      "In both items, PARTIAL does not by itself tell you whether the live issue is work incompleteness, accounting blockage, or authority effect.",
+      "In both items, at least part of the relevant live behavior resides outside the patch record itself."
+    ],
+    "divergence": [
+      "AMB-GOV-SURF-0771 has explicit authority_effect NONE and explicit gate fields, so its non-authority reading is already strongly typed.",
+      "AMB-GOV-SURF-0744 lacks an explicit authority_effect field and instead relies on closeout semantics, predecessor verification, and affected-surface context."
+    ]
+  },
+  "unsafe_generalizations": [
+    "PARTIAL does not automatically mean live authority.",
+    "PARTIAL does not automatically mean non-live record.",
+    "Excluding all PARTIAL patch records from lookup would be overbroad because it would collapse distinct work-status, accounting, and effect-status meanings.",
+    "A patch record can remain PARTIAL while independently governed implementation surfaces are already live.",
+    "authority_effect NONE on a patch record does not imply that every related surface is non-live; it only constrains the patch record itself."
+  ],
+  "selected_next_component": {
+    "component_id": "Q3-084-C02A",
+    "member_global_ambiguity_ids": [
+      "AMB-GOV-SURF-0771"
+    ],
+    "why_smallest_justified": "Patch 002 already exposes the needed separation explicitly: status PARTIAL, authority_effect NONE, registration gate PASS, completion gate BLOCKED. That makes it the lowest-risk bounded implementation target for partial-patch lookup hardening without forcing a global PARTIAL ontology first.",
+    "deferred_related_item": "AMB-GOV-SURF-0744 remains a follow-on because its closeout record lacks an explicit authority_effect field and therefore needs additional item-specific proof before any reusable rule is widened.",
+    "proposed_boundary": "A future bounded patch may exclude from live authority lookup a PARTIAL patch record when existing governed fields explicitly say authority_effect NONE and the operative live constraints are separately located."
+  },
+  "global_accounting_preservation": {
+    "global_blocking_ambiguities_before": 460,
+    "global_blocking_ambiguities_after": 460,
+    "q3_nominal_queue_before": 52,
+    "q3_nominal_queue_after": 52,
+    "q3_live_unresolved_before": 50,
+    "q3_live_unresolved_after": 50,
+    "status_changes_applied": 0,
+    "lookup_behavior_changed": false
+  }
+}

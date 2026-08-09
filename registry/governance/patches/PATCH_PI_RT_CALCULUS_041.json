@@ -1,0 +1,194 @@
+﻿{
+  "patch_id": "PATCH_PI_RT_CALCULUS_041",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-05",
+  "type": "governance_patch",
+  "artifact_type": "governance_patch",
+  "title": "Fixed-Point Admissibility Conditions",
+  "priority": "HIGH",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_040"
+  ],
+  "mode": "additive",
+  "basis": {
+    "source_patches": [
+      "PATCH_PI_RT_CALCULUS_040"
+    ],
+    "source_surfaces": [
+      "docs/textbook/mono_process_textbook_complete.md",
+      "registry/formal_object_registry.json",
+      "registry/math_source_registry.json",
+      "registry/lexicon_gap_queue.json",
+      "registry/registry/lexicon_gap_queue.json",
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_040.json"
+    ],
+    "scope": "Introduce bounded fixed-point admissibility for continuation expressions. This patch defines the admissibility gate, boundary, invariance condition, and classified failure state without asserting correctness, uniqueness, or universal existence for all continuation classes."
+  },
+  "core_rule": {
+    "statement": "CandFix(C) is admissible as AdmFix(C) only when C is typed in ClassFix, Phi(C) is declared, EvalPhi(C) is bounded by BoundPhi(C), EvalPhi(C) yields Fix(C), and Fix(C) satisfies InvPhi(C); bounded fixed-point semantics remain diagnostic, and RT_core remains unchanged."
+  },
+  "purpose": "Introduce bounded fixed-point admissibility conditions for continuation expressions. This patch distinguishes admissible fixed-point semantics from candidate fixed-point semantics without asserting correctness, uniqueness, or universal existence for all continuation classes.",
+  "canonical_claims": [
+    {
+      "id": "CLAIM_041_001",
+      "statement": "Fixed-point admissibility is bounded and applies only to typed continuation expressions in ClassFix.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_041_002",
+      "statement": "BoundPhi(C) constrains the evaluation window for candidate fixed-point reasoning.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_041_003",
+      "statement": "InvPhi(C) is required for admissible fixed-point semantics within the bounded regime.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_041_004",
+      "statement": "FailAdmFix(C) classifies admissibility failure without asserting fixed-point correctness or uniqueness.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_041_005",
+      "statement": "RT_core remains unchanged.",
+      "status": "canonical"
+    }
+  ],
+  "scope": {
+    "adds": [
+      "Fixed-point admissibility gate",
+      "Fixed-point bound",
+      "Fixed-point invariance condition",
+      "Fixed-point admission failure",
+      "Bounded admissibility semantics"
+    ],
+    "does_not_add": [
+      "Fixed-point correctness theorem",
+      "Fixed-point uniqueness theorem",
+      "Universal fixed-point existence",
+      "Recovery operator",
+      "sigma_RT selector",
+      "Operational regime execution",
+      "RT_core change"
+    ]
+  },
+  "formal_objects": [
+    {
+      "id": "FIX_ADMISSIBILITY_041",
+      "symbol": "AdmFix(C)",
+      "name": "Fixed-Point Admissibility",
+      "definition": "The admissibility status assigned to a fixed-point candidate when typing, declaration, bounded evaluation, and invariance conditions all hold."
+    },
+    {
+      "id": "FIX_BOUND_041",
+      "symbol": "Bound\u03A6(C)",
+      "name": "Fixed-Point Bound",
+      "definition": "The declared finite evaluation boundary within which Eval\u03A6(C) must produce or fail to produce a fixed-point candidate."
+    },
+    {
+      "id": "FIX_INVARIANCE_041",
+      "symbol": "Inv\u03A6(C)",
+      "name": "Fixed-Point Invariance Condition",
+      "definition": "The condition that further declared applications of \u03A6 do not change the resulting continuation condition within the bounded evaluation regime."
+    },
+    {
+      "id": "FIX_ADMISSION_FAILURE_041",
+      "symbol": "FailAdmFix(C)",
+      "name": "Fixed-Point Admission Failure",
+      "definition": "The classified failure state produced when CandFix(C) does not satisfy fixed-point admissibility conditions."
+    }
+  ],
+  "admissibility_rule": {
+    "id": "FIX_ADMISSIBILITY_RULE_041",
+    "statement": "CandFix(C) is admissible as AdmFix(C) only when C is typed in ClassFix, Phi(C) is declared, EvalPhi(C) is bounded by BoundPhi(C), EvalPhi(C) yields Fix(C), and Fix(C) satisfies InvPhi(C)."
+  },
+  "failure_conditions": [
+    "C is not typed in ClassFix.",
+    "Phi(C) is undeclared.",
+    "EvalPhi(C) exceeds BoundPhi(C).",
+    "EvalPhi(C) fails to yield Fix(C).",
+    "Fix(C) fails InvPhi(C)."
+  ],
+  "non_claims": [
+    "Does not prove fixed-point correctness.",
+    "Does not prove fixed-point uniqueness.",
+    "Does not assert universal fixed-point existence.",
+    "Does not introduce recovery.",
+    "Does not introduce sigma_RT.",
+    "Does not alter RT_core."
+  ],
+  "deferred_to_future_patches": {
+    "042": "Fixed-Point Correctness Theorem",
+    "043": "Fixed-Point Uniqueness Conditions",
+    "044": "Recursive / Fixed-Point Interaction",
+    "045": "RT Calculus Specification v1.0 Consolidation"
+  },
+  "textbook_changes": {
+    "chapter": "2.3.23",
+    "title": "Fixed-Point Admissibility Conditions",
+    "summary": [
+      "Introduce AdmFix(C).",
+      "Define BoundPhi(C).",
+      "Define InvPhi(C).",
+      "Define FailAdmFix(C).",
+      "Separate fixed-point admissibility from candidate semantics."
+    ]
+  },
+  "registry_updates": {
+    "formal_object_registry": [
+      "FIX_ADMISSIBILITY_041",
+      "FIX_BOUND_041",
+      "FIX_INVARIANCE_041",
+      "FIX_ADMISSION_FAILURE_041"
+    ],
+    "math_source_registry": [
+      "PATCH_PI_RT_CALCULUS_041"
+    ],
+    "lexicon_gap_queue": [
+      "fixed_point_admissibility",
+      "fixed_point_bound",
+      "fixed_point_invariance_condition",
+      "fixed_point_admission_failure"
+    ]
+  },
+  "rt_core_impact": {
+    "modified": false,
+    "statement": "RT := [(\u2110\u22600) \u21d4R \u03b4\u03b1(\u2110>0)] remains unchanged."
+  },
+  "validation_requirements": [
+    "Patch record parses cleanly.",
+    "Patch depends on PATCH_PI_RT_CALCULUS_040.",
+    "Fixed-point admissibility is gated by EVAL_024 and bounded evaluation.",
+    "ClassFix eligibility and EvalPhi(C) boundedness are explicitly required.",
+    "No universal existence, uniqueness, admissibility, or correctness theorem is claimed.",
+    "RT_core remains unchanged."
+  ],
+  "required_repo_changes": [
+    "Update docs/textbook/mono_process_textbook_complete.md with the fixed-point admissibility section and appendix entries.",
+    "Update registry/formal_object_registry.json with the fixed-point admissibility formal objects.",
+    "Update registry/math_source_registry.json with the patch source entry.",
+    "Relock registry/math_hashes.json after the source registry update.",
+    "Update registry/lexicon_gap_queue.json with the fixed-point admissibility terms.",
+    "Update registry/registry/lexicon_gap_queue.json with the mirrored fixed-point admissibility terms.",
+    "Update registry/governance_change_ledger.json with the corresponding governance ledger entry."
+  ],
+  "target_files": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/formal_object_registry.json",
+    "registry/math_source_registry.json",
+    "registry/math_hashes.json",
+    "registry/lexicon_gap_queue.json",
+    "registry/registry/lexicon_gap_queue.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_041.json"
+  ],
+  "success_criteria": {
+    "fixed_point_admissibility_documented": true,
+    "fixed_point_prereqs_registered": true,
+    "fixed_point_failure_registered": true,
+    "boundedness_preserved": true,
+    "rt_core_unchanged": true
+  }
+}

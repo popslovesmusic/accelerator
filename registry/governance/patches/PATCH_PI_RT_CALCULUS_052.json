@@ -1,0 +1,113 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_052",
+  "status": "APPLIED",
+  "applied_on": "2026-07-06T23:51:50.3862912-04:00",
+  "type": "metric_bridge_candidate",
+  "campaign": "RT_CALCULUS",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "title": "A|E as Symmetry-Referenced Mismatch Evaluation",
+  "mode": "additive",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_047",
+    "PATCH_PI_RT_CALCULUS_049",
+    "PATCH_PI_RT_CALCULUS_051"
+  ],
+  "basis": {
+    "source_patches": [
+      "PATCH_PI_RT_CALCULUS_047",
+      "PATCH_PI_RT_CALCULUS_049",
+      "PATCH_PI_RT_CALCULUS_051"
+    ],
+    "source_surfaces": [
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_047.json",
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_049.json",
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_051.json",
+      "docs/textbook/mono_process_textbook_complete.md",
+      "docs/governance/projection_invariant_trace_049.json",
+      "docs/governance/projection_variant_table_049.json"
+    ],
+    "scope": "Introduce a provisional metric bridge that reads A|E as symmetry-referenced mismatch evaluation under a shared reference coupling. The basis is additive and documentary, using the applied 047 asymmetry witness, the applied 049 carrier audit, and the applied 051 textbook provenance update while leaving RT_core unchanged."
+  },
+  "core_candidate": {
+    "statement": "A|E := Δ(A <S>_ra E)",
+    "reading": "A|E is the evaluated mismatch Δ of A and E under a symmetry-reference coupling <S>, parameterized by residue-asymmetry r_a.",
+    "status": "PROVISIONAL_METRIC_BRIDGE"
+  },
+  "symbol_bindings": {
+    "A": "affect-side condition",
+    "E": "effect-side condition",
+    "Δ": "mismatch/asymmetry evaluation",
+    "<S>": "symmetry-reference coupling condition",
+    "r_a": "residue-asymmetry parameter"
+  },
+  "core_rule": {
+    "id": "AE_SYMMETRY_REFERENCED_MISMATCH_001",
+    "statement": "A|E is not ordinary pairwise distance between A and E; it is the evaluated asymmetry of A and E through a shared symmetry-reference coupling <S>."
+  },
+  "constraints": [
+    "<S> is not a third endpoint.",
+    "<S> is not a midpoint between A and E.",
+    "<S> is the reference condition that makes mismatch evaluable.",
+    "A|E does not imply role symmetry.",
+    "r_a must not be conflated with R as relation or r as generic residue/history."
+  ],
+  "relationship_to_prior_patches": {
+    "047": "A|E distinction conserves asymmetry rather than symmetry.",
+    "049": "Projection separates invariant and variant carriers.",
+    "051": "Textbook now carries governed provenance for RT/A|E nesting and projection language.",
+    "052": "Begins metric bridge by making A|E evaluable as symmetry-referenced mismatch."
+  },
+  "required_execution_surface": [
+    "ae_metric_candidate_052.json",
+    "symmetry_reference_trace_052.json",
+    "ra_symbol_discipline_052.json"
+  ],
+  "required_repo_changes": [
+    {
+      "path": "docs/governance/ae_metric_candidate_052.json",
+      "description": "Add the candidate witness that instantiates A|E as symmetry-referenced mismatch evaluation."
+    },
+    {
+      "path": "docs/governance/symmetry_reference_trace_052.json",
+      "description": "Add the ordered trace that shows the shared reference coupling and mismatch evaluation pipeline."
+    },
+    {
+      "path": "docs/governance/ra_symbol_discipline_052.json",
+      "description": "Add the symbol-discipline note separating r_a from R and generic r."
+    }
+  ],
+  "success_criteria": [
+    "Defines A|E as Δ(A <S>_ra E) without collapsing into ordinary distance.",
+    "Separates <S> as reference coupling rather than endpoint.",
+    "Separates r_a from R and generic r.",
+    "Preserves A|E asymmetry from Patch 047.",
+    "Leaves RT_core unchanged."
+  ],
+  "claim_humility": {
+    "current_status": "proposed_only",
+    "non_claims": [
+      "Does not modify RT_core.",
+      "Does not assert a finalized metric.",
+      "Does not claim Δ is numerically defined yet.",
+      "Does not claim <S> is a physical substrate.",
+      "Does not assert universal measurability.",
+      "Does not update textbook surfaces yet."
+    ]
+  },
+  "non_claims": [
+    "Does not modify RT_core.",
+    "Does not assert a finalized metric.",
+    "Does not claim Δ is numerically defined yet.",
+    "Does not claim <S> is a physical substrate.",
+    "Does not assert universal measurability.",
+    "Does not update textbook surfaces yet."
+  ],
+  "validation_expectation": {
+    "json_parse": "required",
+    "registry_record_only": "required",
+    "execution_surface": "required",
+    "textbook_update": "deferred",
+    "rt_core_unchanged": "required"
+  },
+  "agent_instruction": "Create PATCH_PI_RT_CALCULUS_052 as PROPOSED only. Use additive mode. Add provenance to applied patches 047, 049, and 051. Build the execution surface, but do not apply and do not update textbook surfaces until patch-gate returns apply."
+}

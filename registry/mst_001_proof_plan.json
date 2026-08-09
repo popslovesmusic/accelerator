@@ -1,0 +1,87 @@
+{
+  "registry_id": "PCD_MST_001_PROOF_PLAN",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "theorem_id",
+      "proof_goal",
+      "assumptions",
+      "required_definitions",
+      "required_lemmas",
+      "proof_obligations",
+      "failure_cases",
+      "promotion_criteria",
+      "remaining_gaps"
+    ]
+  },
+  "theorems": [
+    {
+      "theorem_id": "MST-001",
+      "proof_goal": "Show that O* minimizer switching is stable when admissibility is preserved, d_Omega divergence remains bounded or legally recoupled, mismatch-cost change is bounded, and degeneracy boundaries are explicitly handled.",
+      "assumptions": [
+        "A active admissibility window is declared",
+        "mu_rel is locally evaluable",
+        "O=(L,Q) family and L-before-Q precedence are active",
+        "Ref(.) codomain is orientation_space",
+        "d_Omega is available as a pseudometric scaffold",
+        "R_RECOUPLING_V1 governs equivalence-class changes",
+        "degenerate minimizer sets are preserved as set-valued references unless a tie-break rule is declared"
+      ],
+      "required_definitions": [
+        "REF_MINUS_I_V1",
+        "O_ADM_ORIENT_V1",
+        "REF_EQUIV_TOPOLOGY_V1",
+        "R_RECOUPLING_V1",
+        "OMEGA_METRIC_V1"
+      ],
+      "required_lemmas": [
+        "L006",
+        "L007"
+      ],
+      "proof_obligations": [
+        {
+          "obligation_id": "MST-PO-001",
+          "statement": "Show that equivalence-preserving O* switches preserve induced -(i) class under Ref(.)."
+        },
+        {
+          "obligation_id": "MST-PO-002",
+          "statement": "Show that bounded d_Omega divergence prevents untracked reference discontinuity within a declared admissibility window."
+        },
+        {
+          "obligation_id": "MST-PO-003",
+          "statement": "Show that degeneracy-boundary switches remain well-formed when the minimizer set is treated as set-valued."
+        },
+        {
+          "obligation_id": "MST-PO-004",
+          "statement": "Show that equivalence-class-changing switches require R_RECOUPLING_V1 or admissibility-window change."
+        },
+        {
+          "obligation_id": "MST-PO-005",
+          "statement": "Show that forbidden Q transitions, memoryless reopenings, or residue-as-agent readings invalidate stability."
+        }
+      ],
+      "failure_cases": [
+        "unbounded_ref_divergence",
+        "forbidden_Q_transition",
+        "memoryless_reopening",
+        "degeneracy_collapsed_without_rule",
+        "residue_as_independent_agent",
+        "missing_admissibility_window"
+      ],
+      "promotion_criteria": {
+        "from": "THEOREM_SCAFFOLD_PENDING_PROOF",
+        "to": "CONDITIONAL_THEOREM",
+        "requires": [
+          "all proof obligations discharged",
+          "all failure cases classified",
+          "dependency graph updated",
+          "theorem_status_registry updated"
+        ]
+      },
+      "remaining_gaps": [
+        "full metric proof on orientation_space / ~_Ref",
+        "full algebraic proof of O associativity under restricted conditions"
+      ]
+    }
+  ]
+}

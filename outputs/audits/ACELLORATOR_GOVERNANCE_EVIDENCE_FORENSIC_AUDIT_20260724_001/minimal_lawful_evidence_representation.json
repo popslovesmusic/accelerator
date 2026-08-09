@@ -1,0 +1,41 @@
+{
+  "packet_id": "ACELLORATOR_GOVERNANCE_EVIDENCE_FORENSIC_AUDIT_20260724_001",
+  "design_only": true,
+  "inline_envelope": [
+    "decision_id",
+    "created_at",
+    "decision",
+    "authority_level",
+    "evidence_manifest_id",
+    "raw_evidence_sha256",
+    "byte_length",
+    "schema_version",
+    "provenance_refs",
+    "claim_refs"
+  ],
+  "external_manifest_fields": [
+    "manifest_id",
+    "raw_sha256",
+    "byte_length",
+    "canonical_json_sha256",
+    "content_class",
+    "source_artifact_refs",
+    "producer",
+    "created_at",
+    "schema_version",
+    "compression",
+    "integrity_status"
+  ],
+  "rules": [
+    "Reference prior evidence by manifest ID, never embed complete prior payloads.",
+    "Preserve raw hash and length for legacy verification.",
+    "Represent snapshots as roots and deltas."
+  ],
+  "estimate": {
+    "current_inline_bytes": 11031215381,
+    "illustrative_inline_envelope_bytes_per_decision": 2048,
+    "illustrative_active_inline_bytes": 253952,
+    "external_storage": "UNRESOLVED until artifacts are hash-resolved"
+  },
+  "legacy_read_compatibility": "Read legacy inline evidence and new manifest references; not applied."
+}

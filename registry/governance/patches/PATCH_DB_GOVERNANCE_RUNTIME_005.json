@@ -1,0 +1,62 @@
+{
+  "patch_id": "PATCH_DB_GOVERNANCE_RUNTIME_005",
+  "campaign_id": "CAMPAIGN_DB_GOVERNANCE_RUNTIME_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-03",
+  "type": "governance_runtime_patch",
+  "patch_type": "governance_runtime_projection",
+  "title": "Debt Runtime View",
+  "mode": "additive",
+  "depends_on": [
+    "PATCH_DB_GOVERNANCE_RUNTIME_001",
+    "PATCH_DB_GOVERNANCE_RUNTIME_002",
+    "PATCH_DB_GOVERNANCE_RUNTIME_003",
+    "PATCH_DB_GOVERNANCE_RUNTIME_004"
+  ],
+  "purpose": "Expose open, blocking, partially resolved, stale, and resolved governance/runtime debt as first-class runtime state.",
+  "updated_artifacts": [
+    "scripts/query_governance.py",
+    "registry/db/migrations/20260703_governance_runtime_debt_view_005.sql",
+    "registry/research_debt_registry.json",
+    "registry/governance_change_ledger.json",
+    "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+    "registry/db/README.md",
+    "docs/textbook/mono_process_textbook_complete.md"
+  ],
+  "summary": {
+    "status": "pass",
+    "health_source": "outputs/audits/global_health_report.json",
+    "runtime": {
+      "db_first_gate": "active",
+      "authority_boundary": "mixed"
+    },
+    "blockers": [],
+    "open_debt": [
+      "DEBT_DB_GOVERNANCE_RUNTIME_VIEWS_001",
+      "DEBT_DB_GOVERNANCE_RUNTIME_STATE_002",
+      "DEBT_DB_GOVERNANCE_RUNTIME_CHAIN_003",
+      "DEBT_DB_GOVERNANCE_RUNTIME_DEBT_004"
+    ],
+    "latest_decisions": [],
+    "warnings": [
+      "Debt runtime projection is now available, but deeper semantic resolution and stale snapshot handling remain open."
+    ],
+    "evidence_paths": [
+      "scripts/query_governance.py",
+      "registry/db/migrations/20260703_governance_runtime_debt_view_005.sql",
+      "registry/research_debt_registry.json",
+      "registry/governance_change_ledger.json",
+      "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+      "registry/db/README.md"
+    ]
+  },
+  "validation": {
+    "required": [
+      "debt_runtime_view_present",
+      "debt_command_present",
+      "patch_gate_consults_debt",
+      "global_validate_pass"
+    ],
+    "result": "pass"
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_022",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-05",
+  "type": "governance_patch",
+  "artifact_type": "governance_patch",
+  "title": "Continuation Failure Object and Undefined Composition",
+  "priority": "HIGH",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_014",
+    "PATCH_PI_RT_CALCULUS_018",
+    "PATCH_PI_RT_CALCULUS_019",
+    "PATCH_PI_RT_CALCULUS_021"
+  ],
+  "purpose": "Define what happens when continuation composition, reduction, or typed transition fails admissibility or domain guards.",
+  "core_claim": "Continuation failure is a marked diagnostic state, not a lawful continuation object.",
+  "canonical_claims": [
+    {
+      "id": "CLAIM_022_001",
+      "statement": "Failed composition does not produce a continuation object.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_022_002",
+      "statement": "Continuation failure is a marked diagnostic state, not an RT condition.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_022_003",
+      "statement": "⊥C records inadmissibility without modifying RT_core.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_022_004",
+      "statement": "Typed-domain failure, endpoint mismatch, admissibility failure, or residue-propagation failure may produce ⊥C.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_022_005",
+      "statement": "⊥C must not be reduced into NF(C).",
+      "status": "canonical"
+    }
+  ],
+  "formal_objects": [
+    {
+      "symbol": "⊥C",
+      "name": "Continuation Failure",
+      "definition": "The marked failure state produced when a proposed continuation cannot be admitted as a lawful continuation object.",
+      "primitive": false,
+      "domain": "continuation_failure_layer"
+    }
+  ],
+  "failure_rules": [
+    {
+      "id": "FAIL_022_001",
+      "name": "Endpoint Failure",
+      "formal": "cod(C1) != dom(C2) => Compose(C1,C2) = ⊥C"
+    },
+    {
+      "id": "FAIL_022_002",
+      "name": "Type Failure",
+      "formal": "type(cod(C1)) != type(dom(C2)) and no explicit_transition => Compose(C1,C2) = ⊥C"
+    },
+    {
+      "id": "FAIL_022_003",
+      "name": "Admissibility Failure",
+      "formal": "not admissible(C1,C2) => Compose(C1,C2) = ⊥C"
+    },
+    {
+      "id": "FAIL_022_004",
+      "name": "Residue Propagation Failure",
+      "formal": "not residue_preserved(C1,C2) => Compose(C1,C2) = ⊥C"
+    },
+    {
+      "id": "FAIL_022_005",
+      "name": "Reduction Failure",
+      "formal": "WF(C) and not reducible(C) due to guard failure => Reduce(C) = ⊥C"
+    },
+    {
+      "id": "FAIL_022_006",
+      "name": "No Normalization of Failure",
+      "formal": "NF(⊥C) undefined"
+    }
+  ],
+  "explicitly_out_of_scope": [
+    "Recovery from failure",
+    "Crisis regime recursion",
+    "sigma_RT",
+    "Operational-regime execution",
+    "Full error taxonomy",
+    "DB event replay debt"
+  ],
+  "validation_requirements": [
+    "Register ⊥C as a non-primitive diagnostic failure marker.",
+    "Failure does not modify RT_core.",
+    "Failure is distinct from lawful continuation.",
+    "Composition or reduction failure does not produce C(A,C).",
+    "NF(⊥C) is explicitly undefined."
+  ],
+  "required_file_updates": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_022.json",
+    "registry/formal_object_registry.json",
+    "registry/math_source_registry.json",
+    "registry/lexicon_gap_queue.json",
+    "registry/registry/lexicon_gap_queue.json",
+    "analysis/recommended_action_queue.json"
+  ],
+  "success_criteria": {
+    "failure_object_registered": true,
+    "undefined_normalization_declared": true,
+    "rt_core_unchanged": true,
+    "failure_distinct_from_lawful_continuation": true,
+    "composition_or_reduction_failure_produces_no_lawful_object": true
+  },
+  "next_recommended_patch": {
+    "patch_id": "PATCH_PI_RT_CALCULUS_023",
+    "title": "Continuation Failure Classification and Recovery Boundaries",
+    "purpose": "Classify continuation failure modes and define the boundary between diagnostic failure and recovery semantics."
+  }
+}

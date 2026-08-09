@@ -1,0 +1,54 @@
+{
+  "audit_id": "PI_A_OBLIGATION_AUDIT_20260726_001",
+  "target": "LTC-001",
+  "status": "AUDITED_NO_OBLIGATIONS_CLOSED",
+  "claim_ceiling": "C1_DEFINED_PROVISIONAL",
+  "source_artifacts": [
+    "registry/math/pi_a_local_persistence_proof_scaffold_registry.json",
+    "registry/math/pi_a_proof_obligation_boundary_map.json",
+    "registry/math/operator_registry.json",
+    "registry/math/minimal_theorem_registry.json"
+  ],
+  "obligations": [
+    {
+      "id": "PO-010-001",
+      "boundary_conditions_present": true,
+      "condition_count": 3,
+      "scaffold_status": "OPEN",
+      "result": "NOT_DISCHARGED",
+      "reason": "Membership is declared as a required local input condition, but no independent derivation or test closes it."
+    },
+    {
+      "id": "PO-010-002",
+      "boundary_conditions_present": true,
+      "condition_count": 3,
+      "pi_a_signature_found": true,
+      "pi_a_closure_status": "conditional",
+      "scaffold_status": "OPEN",
+      "result": "NOT_DISCHARGED",
+      "reason": "A typed provisional operator and local composition boundary are present, but MT-001 remains a dependency rather than a discharged result."
+    },
+    {
+      "id": "PO-010-003",
+      "boundary_conditions_present": true,
+      "condition_count": 3,
+      "failure_geometry_links": 6,
+      "scaffold_status": "OPEN",
+      "result": "NOT_DISCHARGED",
+      "reason": "Failure domains are enumerated and excluded by scope, but counterexample exclusion is not demonstrated by this audit."
+    },
+    {
+      "id": "PO-010-004",
+      "boundary_conditions_present": true,
+      "condition_count": 3,
+      "theorem_status": "NOT_PROVEN",
+      "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+      "physics_status": "NON_PHYSICAL_ANALOG_MODEL",
+      "scaffold_status": "OPEN",
+      "result": "GUARDRAIL_PRESENT_NOT_DISCHARGED",
+      "reason": "The non-overclaim boundary is correctly stated, but this is a governance constraint, not proof of persistence."
+    }
+  ],
+  "canonical_mutations": [],
+  "next_action": "Run independent local-domain counterexample checks for PO-010-001 through PO-010-003; retain PO-010-004 as a permanent claim-boundary guardrail."
+}

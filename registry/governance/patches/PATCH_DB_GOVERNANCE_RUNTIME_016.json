@@ -1,0 +1,87 @@
+{
+  "patch_id": "PATCH_DB_GOVERNANCE_RUNTIME_016",
+  "campaign_id": "CAMPAIGN_DB_GOVERNANCE_RUNTIME_001",
+  "campaign": "CAMPAIGN_DB_GOVERNANCE_RUNTIME_001",
+  "type": "governance_runtime_extension",
+  "status": "APPLIED",
+  "applied_on": "2026-07-05",
+  "title": "Replay Reconciliation Coverage Projection",
+  "goal": "Surface bounded governance replay reconciliation coverage in the live current-state and context-capsule summaries while preserving diagnostic-only replay and non-mutating reconciliation boundaries.",
+  "problem": {
+    "current_state": "The runtime already supports append-only event capture, bounded replay, and diagnostic reconciliation, but the live agent-facing summaries still leave replay coverage underreported.",
+    "gap": "Agents must inspect replay and reconciliation command output separately to understand the coverage surfaced by the event replay scaffold."
+  },
+  "objectives": [
+    "Surface bounded replay reconciliation coverage in current-state.",
+    "Surface replay summary in context-capsule.",
+    "Preserve diagnostic-only replay boundaries.",
+    "Keep reconciliation non-mutating and registry-authority primary.",
+    "Resolve DEBT_DB_GOVERNANCE_RUNTIME_EVENT_REPLAY_006 in the governed debt registry."
+  ],
+  "runtime_changes": {
+    "current_state_runtime": [
+      "replay_reconciliation_state",
+      "replay_reconciliation_boundary_state",
+      "replay_reconciliation_coverage_state",
+      "replay_reconciliation_subject_count",
+      "replay_reconciliation_event_count",
+      "replay_reconciliation_latest_subject_id",
+      "replay_reconciliation_latest_subject_type",
+      "replay_reconciliation_latest_event_type",
+      "replay_reconciliation_latest_source_patch_id"
+    ],
+    "context_capsule_runtime": [
+      "replay_summary",
+      "bounded replay reconciliation coverage in evidence paths",
+      "debt registry evidence retained through the debt summary"
+    ],
+    "db_context_capsule_view": [
+      "replay_reconciliation_state",
+      "replay_boundary_state",
+      "replay_subject_count",
+      "replay_event_count",
+      "replay_latest_subject_id",
+      "replay_latest_event_type",
+      "replay_latest_source_patch_id"
+    ]
+  },
+  "registry_updates": [
+    "scripts/query_governance.py",
+    "registry/db/migrations/20260703_governance_runtime_context_capsule_006.sql",
+    "registry/db/README.md",
+    "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/research_debt_registry.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_DB_GOVERNANCE_RUNTIME_016.json"
+  ],
+  "acceptance_criteria": [
+    "current-state output includes replay reconciliation coverage summary.",
+    "context-capsule output includes replay summary.",
+    "replay-events remains diagnostic-only.",
+    "reconcile-events reports divergence without mutation.",
+    "DEBT_DB_GOVERNANCE_RUNTIME_EVENT_REPLAY_006 is marked resolved.",
+    "global_validate.py passes without introducing new governance regressions."
+  ],
+  "updated_artifacts": [
+    "scripts/query_governance.py",
+    "registry/db/migrations/20260703_governance_runtime_context_capsule_006.sql",
+    "registry/db/README.md",
+    "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/research_debt_registry.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_DB_GOVERNANCE_RUNTIME_016.json"
+  ],
+  "summary": {
+    "status": "pass",
+    "runtime": {
+      "db_first_gate": "active",
+      "authority_boundary": "mixed"
+    },
+    "warnings": []
+  },
+  "validation": {
+    "result": "pass"
+  }
+}

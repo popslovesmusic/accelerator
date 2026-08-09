@@ -1,0 +1,36 @@
+{
+  "recursive_reconstruction_ambiguity": {
+    "version": "1.0",
+    "description": "Mapping of recursive iteration count N to the geometry of reconstruction ambiguity.",
+    "ambiguity_propagation": [
+      {
+        "iteration_scale": "N=1",
+        "ambiguity_geometry": "locally_bounded",
+        "recoverability": "partial_reconstructable"
+      },
+      {
+        "iteration_scale": "finite_N",
+        "ambiguity_geometry": "equivalence_class_basin",
+        "recoverability": "set_bounded_reconstruction"
+      },
+      {
+        "iteration_scale": "N_asymptotic",
+        "ambiguity_geometry": "state_space_divergent",
+        "recoverability": "globally_nonreconstructable"
+      }
+    ],
+    "operator_horizons": [
+      {
+        "operator": "NavT",
+        "reconstruction_horizon": "finite_N_aggregation_limit",
+        "notes": "Causal history is erased once transport integrates over full CSI domain."
+      },
+      {
+        "operator": "delta",
+        "reconstruction_horizon": "branch_multiplicity_explosion",
+        "notes": "Recoverability lost when branch count exceeds unique selection capacity."
+      }
+    ],
+    "last_updated": "2026-05-13"
+  }
+}

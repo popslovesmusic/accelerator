@@ -1,0 +1,85 @@
+# Proof P027 — MST-001 Symbolic Trace (Minimizer Switching Stability)
+
+## 0. Metadata
+- **proof_id**: P027
+- **theorem_id**: MST-001
+- **status**: conditional_operational_lemma
+- **proof_type**: symbolic_trace
+- **rigor_level**: bounded / pending FV-4 resolution
+- **falsification_report**: [BLOCK-CLOSURE-X](../../../../../../results/2026-05-23_run12_BLOCK_CLOSURE_X_Attack/paper.md)
+- **closure_status**: falsification_challenged
+- **blocked_elevation**: true
+- **blocked_reason**: FV-4 Mechanism Implementation Schism (graph_ca_agreement=0.32)
+- **compliance**: [Compliance Charter v2.3](../../../../../../registry/compliance_charter_v2_3.json)
+
+## 1. Abstract
+This document provides a **Symbolic Trace** for the Master Theorem (MST-001), procedurally supporting under stated constraints the stability of local orientation selection ($O^*$) under minimizer switching. It is not treated as unconditional C6 closure while FV-4 remains unresolved; its role here is bounded traceability, dependency disclosure, and controlled operational reasoning.
+
+## 2. Symbolic Workflow Step 1: Primitive Formalization
+
+We map the framework's primitives to formal algebraic types:
+
+| Primitive | Algebraic Type | Properties |
+| :--- | :--- | :--- |
+| **ε (Mismatch)** | $e \in \mathcal{M}$ (Mismatch Space) | $\mathcal{M}$ is a normed vector space where $\|e\| = 0$ is the null state. |
+| **R (Residue)** | $r \in \mathcal{H}$ (History Manifold) | $\mathcal{H}$ represents the accumulated deformation of admissible paths. |
+| **ρ (Capacity)** | $\rho \in \mathbb{R}^+$ | The scalar bound on actualization density. |
+| **Δ (Mismatch Operator)** | $\Delta: \mathcal{M} \times \mathcal{M} \to \mathcal{M}$ | Defined as $\Delta(e_t, e_{t+1}) = e_{t+1} - e_t$. |
+| **θ (Threshold)** | $\theta \in \mathcal{M}$ | The minimum distinguishable mismatch norm. |
+| **-(i) (Orientation)** | $\omega \in \Omega$ (Orientation Space) | A directional unit vector in the admissible continuation domain. |
+
+## 3. Symbolic Workflow Step 2: Operator Trace
+
+The derivation follows the core biconditional $(\mathcal{E} \neq 0) \Leftrightarrow_R \delta_a(\mathcal{E} > 0)$ as a sequence of transformation steps:
+
+**Step 2.1: Selection Definition**
+The selection operator $O^*$ is defined as the argument that minimizes local mismatch under residue conditioning:
+$$O^*(e, r) = \text{argmin}_{\omega \in \mathcal{W}_{adm}} \|\mathcal{E}(\omega, r)\|$$
+where $\mathcal{W}_{adm}$ is the local admissibility window.
+
+**Step 2.2: The Switch Condition**
+Consider a transition from state $S_1$ to $S_2$ where the optimal minimizer shifts from $\omega_1$ to $\omega_2$.
+$$S_1: \omega_1 = O^*(e_1, r_1)$$
+$$S_2: \omega_2 = O^*(e_2, r_2)$$
+
+**Step 2.3: Equivalence Mapping**
+Under the **Ref(.) Equivalence Rule** (L006), two selections are equivalent ($\omega_1 \sim_{Ref} \omega_2$) if they map to the same orientational class:
+$$\omega_1 \sim_{Ref} \omega_2 \iff Ref(\omega_1) = Ref(\omega_2)$$
+The trace demonstrates that for all $\omega \in \mathcal{W}_{adm}$, if the mismatch change $\|\Delta \mathcal{E}\|$ is bounded by $\theta$, then the reference class is preserved:
+$$\|\mathcal{E}(\omega_2, r_2) - \mathcal{E}(\omega_1, r_1)\| < \theta \Rightarrow Ref(\omega_1) = Ref(\omega_2)$$
+
+## 4. Symbolic Workflow Step 3: Mechanism Independence Check
+
+The trace is valid across all mechanism classes defined in `GEMINI.md`:
+
+- **Network Class (Graph):** $O^*$ is the selection of edge reinforcement paths.
+- **Discrete CA Class:** $O^*$ is the rule selection for cell state transitions.
+- **Continuous PDE Class:** $O^*$ is the gradient descent path in the potential field.
+
+**Empirical Verification (bounded):**
+The cross-model verification campaign (`MSV-001-CROSS-V1`) and resolution sweep (`RES-LIMIT-01`) support cross-mechanism alignment only within declared resolution bounds and constraints. The adversarial report `BLOCK-CLOSURE-X` records an FV-4 mechanism-implementation schism; therefore, unqualified “mechanism independence” language is blocked pending FV-4 resolution.
+
+**The Resolution Constant:**
+The campaign `RES-LIMIT-01` identified the critical resolution constant as **$N_{crit} = 50$**. Below this threshold, implementational artifacts dominate the relational grammar. Above this threshold, the Graph and CA implementations converge to within $\Delta < 0.01$ in primary stability metrics.
+
+## 5. Symbolic Workflow Step 4: Convergence Proof
+
+We prove that the recursive cycle $C: S_t \to S_{t+1}$ converges to the stable theorem state $T$:
+
+1.  **Existence:** Since $\mathcal{W}_{adm}$ is non-empty and $\|\mathcal{E}\|$ is bounded below by zero, a minimizer $\omega^*$ always exists.
+2.  **Uniqueness (Mod Ref):** While $\omega^*$ may be non-unique (degeneracy), the class $[Ref(\omega^*)]$ is unique within a stable basin.
+3.  **Stability:** The residue $R$ acts as a restorative force. Any deviation $\delta \mathcal{E}$ that stays within the admissibility window is "folded back" into the dominant orientation through the minimization of mismatch.
+4.  **Convergence:** The sequence $\{\omega_t\}$ produced by the recursive application of $O^*$ is a Cauchy sequence in $\Omega / \sim_{Ref}$, converging to the fixed-point orientation $-(i)_{Dom}$.
+
+## 6. Conclusion
+Within these formal constraints, MST-001 is supported as a bounded conditional operational stability claim. Unqualified closure language (“formally closed”, “necessary consequence” without scope) is blocked pending FV-4 resolution and any superseding governed report.
+
+## 7. Status
+- **Status:** conditional_operational_lemma
+- **Proof Type:** symbolic_trace
+- **Evidence:** [MSV-001-CROSS-V1](../../../../../../results/2026-05-23_run06_MSV_001_Cross_Model_Verification/paper.md)
+
+## 8. Status Footer
+- **Compliance:** [Compliance Charter v2.3](../../../../../../registry/compliance_charter_v2_3.json)
+- **Gate:** C6 elevation blocked pending FV-4 resolution.
+- **Authority:** Mono-Process Framework Core Math Program. ∎

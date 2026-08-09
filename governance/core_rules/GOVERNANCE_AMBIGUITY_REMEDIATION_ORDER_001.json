@@ -1,0 +1,23 @@
+{
+  "rule_id": "GOVERNANCE_AMBIGUITY_REMEDIATION_ORDER_001",
+  "title": "Governance Ambiguity Remediation Order",
+  "status": "LIVE",
+  "authority_type": "CORE_GOVERNANCE_RULE",
+  "scope": "Governance ambiguity classification and remediation queue ordering only.",
+  "effect": "Determines the remediation order for ambiguous governance surfaces without resolving any ambiguity or conferring authority.",
+  "authority_effect": "NONE",
+  "statement": "Governance ambiguities must be remediated in descending order of their potential to permit competing live authority, unauthorized writes, incorrect validation acceptance, or loss of provenance. Queue position does not resolve an ambiguity or confer authority.",
+  "constraints": [
+    "Queue ordering is deterministic and evidence-backed.",
+    "Queue position does not change authority state.",
+    "A later resolution patch is required to resolve any ambiguity.",
+    "The remediation queue is non-authoritative transitional evidence."
+  ],
+  "prohibited_interpretations": [
+    "queue position means resolved",
+    "queue position means approved",
+    "classification creates authority",
+    "ordering changes surface status"
+  ],
+  "source_patch_id": "PATCH_GOVERNANCE_AMBIGUITY_RISK_CLASSIFICATION_AND_REMEDIATION_QUEUE_005"
+}

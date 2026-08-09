@@ -1,0 +1,241 @@
+{
+  "patch_id": "GOV_WORK_INDEX_BOOTSTRAP_001",
+  "title": "Bootstrap Master Work Index",
+  "status": "APPLIED",
+  "applied_on": "2026-07-02",
+  "purpose": "Create the first canonical indexed view of governed queues, campaigns, reviews, debt registries, induction items, and backlog artifacts so the Work Reduction Framework has a concrete reduction target.",
+  "mode": "read_only_discovery_then_index_write",
+  "root": "D:/projects/acellorator",
+  "authority": {
+    "framework": "governance/live/work_reduction_framework.json",
+    "index": "governance/live/master_work_index.json",
+    "source_registries_remain_authoritative": true
+  },
+  "creates": [
+    {
+      "path": "governance/live/master_work_index.json",
+      "role": "Canonical live projection of governed work items"
+    },
+    {
+      "path": "outputs/audits/master_work_index_bootstrap_001.json",
+      "role": "Machine-readable bootstrap audit"
+    },
+    {
+      "path": "outputs/audits/master_work_index_bootstrap_001.md",
+      "role": "Human-readable bootstrap audit"
+    }
+  ],
+  "reads": [
+    "governance/live/work_reduction_framework.json",
+    "governance/live/induction_queue.json",
+    "registry/lexicon_gap_queue.json",
+    "registry/lexicon/lexicon_gap_queue.json",
+    "registry/human_arbitration_queue.json",
+    "registry/math/process_algebra_expansion_review_queue.json",
+    "registry/math/*campaign*_registry.json",
+    "registry/math/*queue*.json",
+    "registry/*debt*.json",
+    "governance/live/*debt*.json",
+    "registry/governance/**/*debt*.json"
+  ],
+  "non_destructive_rules": [
+    "Do not execute queued work during bootstrap.",
+    "Do not close work during bootstrap.",
+    "Do not promote theorem, proof, lemma, or campaign status.",
+    "Do not rewrite source registries.",
+    "The master work index is a projection/index, not a replacement authority."
+  ],
+  "normalization_schema": {
+    "work_item_required_fields": [
+      "id",
+      "title",
+      "domain",
+      "work_type",
+      "status",
+      "priority",
+      "owner",
+      "source_path",
+      "source_id",
+      "authority",
+      "execution_state",
+      "next_action"
+    ],
+    "work_item_optional_fields": [
+      "dependencies",
+      "blocked_by",
+      "unlocks",
+      "related_items",
+      "evidence_paths",
+      "notes",
+      "last_seen"
+    ],
+    "default_values": {
+      "priority": "unassigned",
+      "owner": "unassigned",
+      "execution_state": "needs_mapping",
+      "next_action": "classify_and_map"
+    }
+  },
+  "domain_mapping_rules": [
+    {
+      "match_path": "governance/live/**",
+      "domain": "governance"
+    },
+    {
+      "match_path": "registry/math/**",
+      "domain": "mathematics"
+    },
+    {
+      "match_path": "registry/lexicon/**",
+      "domain": "lexicon"
+    },
+    {
+      "match_path": "registry/lexicon_gap_queue.json",
+      "domain": "lexicon"
+    },
+    {
+      "match_path": "registry/human_arbitration_queue.json",
+      "domain": "governance"
+    }
+  ],
+  "work_type_mapping_rules": [
+    {
+      "match_path": "*induction_queue*",
+      "work_type": "induction"
+    },
+    {
+      "match_path": "*lexicon_gap_queue*",
+      "work_type": "queue"
+    },
+    {
+      "match_path": "*campaign*",
+      "work_type": "campaign"
+    },
+    {
+      "match_path": "*review_queue*",
+      "work_type": "review"
+    },
+    {
+      "match_path": "*debt*",
+      "work_type": "debt"
+    },
+    {
+      "match_path": "*validator*",
+      "work_type": "validation"
+    }
+  ],
+  "execution_state_rules": [
+    {
+      "source_status_values": [
+        "bound_to_registry",
+        "registered",
+        "pending",
+        "open"
+      ],
+      "execution_state": "ready_or_needs_dependency_check"
+    },
+    {
+      "source_status_values": [
+        "in_progress",
+        "active",
+        "active_adversarial_testing"
+      ],
+      "execution_state": "active"
+    },
+    {
+      "source_status_values": [
+        "review",
+        "under_review",
+        "REVIEW_LOCK"
+      ],
+      "execution_state": "review"
+    },
+    {
+      "source_status_values": [
+        "blocked",
+        "blocked_by_c1_tool_status",
+        "not_ready"
+      ],
+      "execution_state": "blocked"
+    },
+    {
+      "source_status_values": [
+        "complete",
+        "completed",
+        "closed",
+        "FORMALLY_PROVEN"
+      ],
+      "execution_state": "completed"
+    }
+  ],
+  "known_seed_sources": [
+    {
+      "path": "governance/live/induction_queue.json",
+      "expected_items": 4,
+      "known_ids": [
+        "MPF_IND_PRIMITIVE_FORM_DOMINANT_DOMAIN_001",
+        "MPF_IND_RT_MECHANICS_RECURSIVE_COMPLETION_001",
+        "RT-IND-Conditioning-001",
+        "ECON_IND_AE_TRACE_001"
+      ]
+    },
+    {
+      "path": "registry/lexicon_gap_queue.json",
+      "expected_items": 33
+    },
+    {
+      "path": "registry/lexicon/lexicon_gap_queue.json",
+      "expected_items": 0
+    },
+    {
+      "path": "registry/human_arbitration_queue.json",
+      "expected_items": 0
+    },
+    {
+      "path": "registry/math/process_algebra_expansion_review_queue.json",
+      "expected_items": 1,
+      "known_ids": [
+        "PALG-QUEUE-001"
+      ]
+    }
+  ],
+  "index_shape": {
+    "metadata": {
+      "index_id": "MASTER_WORK_INDEX_001",
+      "generated_by_patch": "GOV_WORK_INDEX_BOOTSTRAP_001",
+      "source_framework": "GOV_WORK_REDUCTION_FRAMEWORK_002",
+      "projection_only": true
+    },
+    "summary": {
+      "total_items": 0,
+      "by_domain": {},
+      "by_work_type": {},
+      "by_execution_state": {},
+      "needs_mapping": 0
+    },
+    "items": []
+  },
+  "audit_requirements": [
+    "Report total indexed items.",
+    "Report all source files scanned.",
+    "Report source files with zero items.",
+    "Report items that could not be normalized.",
+    "Report items missing owner, priority, domain, or next_action.",
+    "Report whether all known seed sources were represented.",
+    "Confirm no source registry status was changed."
+  ],
+  "success_criteria": [
+    "governance/live/master_work_index.json exists.",
+    "All known live queues are represented.",
+    "All known active/in-progress campaigns are represented.",
+    "Every item retains source_path and source_id.",
+    "Items that cannot be classified are marked needs_mapping rather than guessed.",
+    "No theorem/proof/lemma/campaign promotion occurs.",
+    "python -m scripts.global_validate passes."
+  ],
+  "final_decision": {
+    "PASS": "Master Work Index is ready as the canonical reduction target.",
+    "PASS_WITH_MAPPING_GAPS": "Index exists but some work items require mapping refinement.",
+    "FAIL": "Index cannot be trusted as a governed projection."
+  }
+}

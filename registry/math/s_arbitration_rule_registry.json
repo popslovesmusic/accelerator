@@ -1,0 +1,97 @@
+{
+  "registry_id": "S_ARBITRATION_RULE_REGISTRY",
+  "version": "1.0.0",
+  "status": "VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT",
+  "last_updated": "2026-07-20",
+  "target": "S_arbitration_rule",
+  "claim_effect": "NO_THEOREM_PROMOTION",
+  "evidence_class": "C1_DEFINITION_WITH_FIXTURE_VALIDATION",
+  "canonical_object": {
+    "symbol": "S",
+    "latex": "S_{R,A}",
+    "name": "Sequential Pruning Operator",
+    "canonical_form": "S_{R,A}(C_t) -> C_t^S",
+    "role": "Internal delta_a stage that prunes candidate continuation sets before Arb_A realization arbitration."
+  },
+  "signature": {
+    "domain": [
+      "candidate_continuation_set_C_t",
+      "declared_reference_R",
+      "admissibility_structure_A_adm",
+      "distinction_organization_chi_D",
+      "residue_relation_R_lr",
+      "orientation_frame"
+    ],
+    "codomain": [
+      "pruned_candidate_continuation_set_C_t_S",
+      "empty_pruned_set_failure_signal"
+    ],
+    "failure_condition": "C_t^S = emptyset -> admissibility branch collapse or re-orientation trigger review"
+  },
+  "ordered_checks": [
+    "type_admissibility",
+    "nonzero_distinction",
+    "residue_compatibility",
+    "topology_preservation",
+    "orientation_compatibility"
+  ],
+  "validated_fixture_properties": [
+    {
+      "id": "SVT-001",
+      "property": "S can reduce candidate-set cardinality.",
+      "status": "PASS"
+    },
+    {
+      "id": "SVT-002",
+      "property": "S can leave candidate-set cardinality unchanged.",
+      "status": "PASS"
+    },
+    {
+      "id": "SVT-003",
+      "property": "S never increases candidate-set cardinality over registered fixtures.",
+      "status": "PASS"
+    },
+    {
+      "id": "SVT-004",
+      "property": "Arb_A operates only on C_t^S.",
+      "status": "PASS"
+    },
+    {
+      "id": "SVT-005",
+      "property": "Removing S changes the candidate pool without collapsing Arb_A role semantics.",
+      "status": "PASS"
+    },
+    {
+      "id": "SVT-006",
+      "property": "S does not perform realization selection.",
+      "status": "PASS"
+    }
+  ],
+  "negative_constraints": [
+    "S is not Arb_A.",
+    "S does not select the realized continuation.",
+    "S does not compute T_class.",
+    "S does not define residue.",
+    "S must not depend on post-realization outcomes.",
+    "S does not promote topology, geometry, physics-app, or empirical claims."
+  ],
+  "open_limits": [
+    "Tie-break behavior inside Arb_A remains open.",
+    "Fixture validation is structural and does not prove that all engines implement the same pruning internals.",
+    "Mechanism-specific pruning implementations remain local validation targets."
+  ],
+  "evidence_paths": [
+    "outputs/audits/s_arbitration_audit.md",
+    "outputs/audits/s_reclassification_recommendation.json",
+    "outputs/s_validation/s_validation_report.md",
+    "outputs/s_validation/s_validation_results.json",
+    "registry/math/s_arbitration_validation_registry.json",
+    "registry/math/branch_pruning_registry.json",
+    "registry/operator_registry.json"
+  ],
+  "textbook_sync": {
+    "surface": "docs/textbook/mono_process_textbook_complete.md",
+    "appendix_f_2_status": "VALIDATED_CANDIDATE_PENDING_RIGOR_ENDORSEMENT",
+    "body_sync": "Chapter 6.1 S Selection/Pruning bullet now states the registry signature, ordered pruning role, and negative constraints."
+  }
+}

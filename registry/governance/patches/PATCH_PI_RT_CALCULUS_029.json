@@ -1,0 +1,240 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_029",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-05",
+  "type": "governance_patch",
+  "artifact_type": "governance_patch",
+  "title": "Local Confluence Conditions",
+  "priority": "HIGH",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_028"
+  ],
+  "mode": "additive",
+  "basis": {
+    "source_patches": [
+      "PATCH_PI_RT_CALCULUS_028"
+    ],
+    "source_surfaces": [
+      "docs/textbook/mono_process_textbook_complete.md",
+      "registry/formal_object_registry.json",
+      "registry/math_source_registry.json",
+      "registry/lexicon_gap_queue.json",
+      "registry/registry/lexicon_gap_queue.json",
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_028.json"
+    ],
+    "scope": "Canonical local confluence conditions for divergent lawful reductions from a common origin, including branch objects, joinability, critical pair classification, and the explicit distinction from global confluence and termination."
+  },
+  "core_rule": {
+    "statement": "Local confluence is a bounded property of lawful reduction branches from a common origin; joinability compares process-equivalent branch outcomes under the current reduction system; critical pairs are the immediate divergent branch pairs evaluated by the local condition; RT_core remains unchanged."
+  },
+  "purpose": "Define the necessary and sufficient local conditions under which divergent lawful reductions may be considered locally confluent without asserting global confluence.",
+  "canonical_claims": [
+    {
+      "id": "CLAIM_029_001",
+      "statement": "Local confluence is a bounded reduction property over lawful branches from a common origin.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_029_002",
+      "statement": "Joinability is the branch-level condition used to compare process-equivalent continuation outcomes.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_029_003",
+      "statement": "Critical pairs are the immediate divergent lawful reductions used for local confluence evaluation.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_029_004",
+      "statement": "Local confluence does not imply global confluence or termination.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_029_005",
+      "statement": "RT_core remains unchanged.",
+      "status": "canonical"
+    }
+  ],
+  "formal_objects": [
+    {
+      "id": "LOCAL_CONFLUENCE_029",
+      "symbol": "⇓L",
+      "name": "Local Confluence",
+      "definition": "A property stating that two lawful reductions diverging from the same continuation may be reduced to equivalent continuation outcomes under the current reduction system."
+    },
+    {
+      "id": "REDUCTION_BRANCH_029",
+      "symbol": "Branch(C)",
+      "name": "Reduction Branch",
+      "definition": "A lawful reduction path originating from a common continuation expression."
+    },
+    {
+      "id": "JOINABILITY_029",
+      "symbol": "⇓J",
+      "name": "Joinability",
+      "definition": "A relation indicating that two lawful reduction branches can be reduced to process-equivalent continuation outcomes."
+    },
+    {
+      "id": "CRITICAL_PAIR_029",
+      "symbol": "CP(C)",
+      "name": "Critical Reduction Pair",
+      "definition": "A pair of immediately divergent lawful reductions originating from the same continuation requiring local confluence evaluation."
+    }
+  ],
+  "definitions": {
+    "local_confluence": {
+      "symbol": "C ⇓L",
+      "requirements": [
+        "Common reduction origin",
+        "Lawful reduction branches",
+        "Joinability established",
+        "Equivalent reduction outcomes",
+        "Process equivalence preserved"
+      ]
+    }
+  },
+  "canonical_conditions": [
+    {
+      "condition": "Common Origin",
+      "description": "Both branches originate from the same continuation expression."
+    },
+    {
+      "condition": "Lawful Divergence",
+      "description": "Each branch satisfies WF(C), typing, admissibility, residue propagation, and evaluation order."
+    },
+    {
+      "condition": "Independent Validity",
+      "description": "Each branch independently satisfies all reduction requirements."
+    },
+    {
+      "condition": "Joinability",
+      "description": "Both branches may be reduced to equivalent continuation outcomes."
+    },
+    {
+      "condition": "Outcome Preservation",
+      "description": "Equivalent NF(C), pNF(C), or identical classified ⊥C_x outcomes are preserved."
+    }
+  ],
+  "critical_pair_classification": [
+    {
+      "type": "Joinable",
+      "result": "Locally confluent"
+    },
+    {
+      "type": "Non-joinable",
+      "result": "Confluence not established"
+    },
+    {
+      "type": "Reduction failure",
+      "result": "Deferred to failure taxonomy"
+    }
+  ],
+  "branch_rules": [
+    "Each branch must preserve process equivalence.",
+    "Branches may differ in intermediate reductions.",
+    "Branch ordering is not required to be identical.",
+    "Trace equivalence remains independent of branch identity.",
+    "Joinability is evaluated after lawful reduction."
+  ],
+  "invariants": [
+    "RT_core remains unchanged.",
+    "Local confluence does not imply global confluence.",
+    "Joinability does not imply identical traces.",
+    "Reduction traces remain diagnostic.",
+    "Process equivalence is preserved.",
+    "Failure taxonomy remains unchanged.",
+    "Recovery remains deferred."
+  ],
+  "future_dependencies": [
+    "PATCH_PI_RT_CALCULUS_030 (Reduction Determinism)",
+    "PATCH_PI_RT_CALCULUS_031 (Termination Conditions)"
+  ],
+  "textbook_changes": {
+    "chapter": "2.3.11",
+    "title": "Local Confluence Conditions",
+    "summary": [
+      "Introduce local confluence (⇓L).",
+      "Define reduction branches.",
+      "Define joinability (⇓J).",
+      "Classify critical reduction pairs.",
+      "Explicitly distinguish local from global confluence."
+    ]
+  },
+  "registry_updates": {
+    "formal_object_registry": [
+      "LOCAL_CONFLUENCE_029",
+      "REDUCTION_BRANCH_029",
+      "JOINABILITY_029",
+      "CRITICAL_PAIR_029"
+    ],
+    "math_source_registry": [
+      "PATCH_PI_RT_CALCULUS_029"
+    ],
+    "lexicon_gap_queue": [
+      "local_confluence",
+      "reduction_branch",
+      "joinability",
+      "critical_pair"
+    ]
+  },
+  "rt_core_impact": {
+    "modified": false,
+    "statement": "RT := [(ℰ≠0) ⇔R δα(ℰ>0)] remains unchanged."
+  },
+  "scope": {
+    "adds": [
+      "Local confluence relation",
+      "Reduction branch object",
+      "Joinability relation",
+      "Critical reduction pair classification",
+      "Local confluence conditions"
+    ],
+    "does_not_add": [
+      "Global confluence proof",
+      "Termination proof",
+      "Parser implementation",
+      "Recovery operator",
+      "Operational regime execution",
+      "σRT selector"
+    ]
+  },
+  "validation_requirements": [
+    "Patch record parses cleanly.",
+    "Patch depends on PATCH_PI_RT_CALCULUS_028.",
+    "The declared branch, joinability, and critical-pair objects match the local confluence semantics.",
+    "Local confluence remains bounded and does not imply global confluence or termination.",
+    "RT_core remains unchanged."
+  ],
+  "required_repo_changes": [
+    "Update docs/textbook/mono_process_textbook_complete.md with the local confluence section and branch-joinability documentation.",
+    "Update registry/formal_object_registry.json with the local confluence formal objects.",
+    "Update registry/math_source_registry.json with the patch source entry.",
+    "Update registry/lexicon_gap_queue.json with the local confluence, branch, joinability, and critical pair terms.",
+    "Update registry/registry/lexicon_gap_queue.json with the mirrored local confluence, branch, joinability, and critical pair terms.",
+    "Update registry/governance_change_ledger.json with the corresponding governance ledger entry.",
+    "Maintain the forward chain reference in registry/governance/patches/PATCH_PI_RT_CALCULUS_028.json to PATCH_PI_RT_CALCULUS_029."
+  ],
+  "target_files": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/formal_object_registry.json",
+    "registry/math_source_registry.json",
+    "registry/lexicon_gap_queue.json",
+    "registry/registry/lexicon_gap_queue.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_028.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_029.json"
+  ],
+  "success_criteria": {
+    "local_confluence_documented": true,
+    "branch_objects_registered": true,
+    "joinability_registered": true,
+    "critical_pair_classification_registered": true,
+    "rt_core_unchanged": true
+  },
+  "next_recommended_patch": {
+    "patch_id": "PATCH_PI_RT_CALCULUS_030",
+    "title": "Reduction Determinism Conditions",
+    "purpose": "Define the bounded conditions under which REDUCE_025 is deterministic. This patch specifies deterministic execution for admissible continuation subclasses without asserting universal determinism."
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "patch_id": "PATCH_DB_GOVERNANCE_RUNTIME_004",
+  "campaign_id": "CAMPAIGN_DB_GOVERNANCE_RUNTIME_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-03",
+  "type": "governance_runtime_patch",
+  "patch_type": "governance_runtime_projection",
+  "title": "Patch Chain Gate View",
+  "mode": "additive",
+  "depends_on": [
+    "PATCH_DB_GOVERNANCE_RUNTIME_001",
+    "PATCH_DB_GOVERNANCE_RUNTIME_002",
+    "PATCH_DB_GOVERNANCE_RUNTIME_003"
+  ],
+  "purpose": "Add runtime patch-chain resolution for active, blocked, missing, late-registered, superseded, and dependency-bound patch state before application.",
+  "updated_artifacts": [
+    "scripts/query_governance.py",
+    "registry/db/migrations/20260703_governance_runtime_patch_chain_004.sql",
+    "registry/research_debt_registry.json",
+    "registry/governance_change_ledger.json",
+    "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+    "registry/db/README.md",
+    "docs/textbook/mono_process_textbook_complete.md"
+  ],
+  "summary": {
+    "status": "pass",
+    "health_source": "outputs/audits/global_health_report.json",
+    "runtime": {
+      "db_first_gate": "active",
+      "authority_boundary": "mixed"
+    },
+    "blockers": [],
+    "open_debt": [
+      "DEBT_DB_GOVERNANCE_RUNTIME_VIEWS_001",
+      "DEBT_DB_GOVERNANCE_RUNTIME_STATE_002",
+      "DEBT_DB_GOVERNANCE_RUNTIME_CHAIN_003"
+    ],
+    "latest_decisions": [],
+    "warnings": [
+      "Patch-chain resolution is now available, but the aggregate current-state authority boundary remains mixed because deeper semantic conflict arbitration is still open."
+    ],
+    "evidence_paths": [
+      "scripts/query_governance.py",
+      "registry/db/migrations/20260703_governance_runtime_patch_chain_004.sql",
+      "registry/research_debt_registry.json",
+      "registry/governance_change_ledger.json",
+      "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+      "registry/db/README.md"
+    ]
+  },
+  "validation": {
+    "required": [
+      "patch_chain_view_present",
+      "patch_chain_command_present",
+      "patch_gate_consults_patch_chain",
+      "global_validate_pass"
+    ],
+    "result": "pass"
+  }
+}

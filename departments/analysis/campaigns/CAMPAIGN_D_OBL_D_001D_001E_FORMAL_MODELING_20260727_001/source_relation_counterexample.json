@@ -1,0 +1,20 @@
+{
+  "counterexample_id": "D_SOURCE_RELATION_NONINJECTIVITY_20260727_001",
+  "status": "PASS_BOUNDED_COUNTEREXAMPLE",
+  "claim_ceiling": "C1_DEFINED_PROVISIONAL",
+  "context": "C1",
+  "projection_rule": "Pi_D,C(x) = TYPE_PROJECTION(C, projection_prefix(C) + x.value)",
+  "source_cases": [
+    {"case_id":"R1","relation_id":"rel-alpha","source":{"id":"source-A","value":"same"},"target":{"id":"target-A","value":"target"}},
+    {"case_id":"R2","relation_id":"rel-beta","source":{"id":"source-B","value":"same"},"target":{"id":"target-B","value":"target"}}
+  ],
+  "projected_cases": [
+    {"case_id":"R1","projected_source":"C1::same","projected_target":"C1::target"},
+    {"case_id":"R2","projected_source":"C1::same","projected_target":"C1::target"}
+  ],
+  "observed_collision": "Distinct source identities and relation identifiers yield the same projected pair under the declared finite prefix rule.",
+  "supports": ["bounded non-injectivity of the specified projection with respect to source identity and relation identifier"],
+  "does_not_support": ["universal information loss", "failure of every possible enriched projection", "external or physical claims"],
+  "falsification_condition": "The projected pairs differ after applying the declared rule to both source cases.",
+  "promotion_authorized": false
+}

@@ -1,0 +1,102 @@
+{
+  "symbolic_reduction_chain_report": {
+    "timestamp": "2026-05-12T11:01:26.541270",
+    "status": "baseline_established",
+    "summary": "Unified Phase 2 symbolic reduction-chain baseline across scaffolded operators and theorems.",
+    "reduction_rules": [
+      {
+        "rule_id": "RR-001",
+        "expression": "Pi_A(Pi_A(x)) -> Pi_A(x)",
+        "condition": "stable admissibility equivalence",
+        "implication": "idempotence_scaffolded"
+      },
+      {
+        "rule_id": "RR-002",
+        "expression": "branch_equivalent(a,b) -> representative(a,b)",
+        "condition": "declared branch equivalence relation",
+        "implication": "branch_reduction"
+      },
+      {
+        "rule_id": "RR-003",
+        "expression": "projection_equivalent(x,y) -> observable_class(x)",
+        "condition": "projection equivalence holds",
+        "implication": "projection_reduction"
+      },
+      {
+        "rule_id": "RR-004",
+        "expression": "orientation_minimized(delta(x)) -> reduced_candidate_set",
+        "condition": "orientation metric defined",
+        "implication": "selection_constrained"
+      },
+      {
+        "rule_id": "RR-005",
+        "expression": "bounded_transport_chain -> transport_normal_form",
+        "condition": "transport closure preserved",
+        "implication": "transport_reduction"
+      }
+    ],
+    "classifications": [
+      {
+        "target": "MT-001",
+        "reduction_class": "admissibility_preserving_reduction",
+        "rules_applied": [
+          "RR-001"
+        ],
+        "known_failure_modes": [
+          "RFM-003",
+          "RFM-010"
+        ],
+        "readiness": "scaffolded"
+      },
+      {
+        "target": "MT-002",
+        "reduction_class": "transport_reduction",
+        "rules_applied": [
+          "RR-005"
+        ],
+        "known_failure_modes": [
+          "RFM-006",
+          "RFM-008"
+        ],
+        "readiness": "scaffolded"
+      },
+      {
+        "target": "MT-003",
+        "reduction_class": "branch_reduction",
+        "rules_applied": [
+          "RR-002",
+          "RR-004"
+        ],
+        "known_failure_modes": [
+          "RFM-004",
+          "RFM-009"
+        ],
+        "readiness": "scaffolded"
+      },
+      {
+        "target": "Pi_A \u00e2\u02c6\u02dc delta",
+        "reduction_class": "projection_reduction",
+        "rules_applied": [
+          "RR-003"
+        ],
+        "known_failure_modes": [
+          "RFM-005"
+        ],
+        "readiness": "scaffolded"
+      },
+      {
+        "target": "NavT \u00e2\u02c6\u02dc residue_update",
+        "reduction_class": "recursive_reduction",
+        "rules_applied": [
+          "RR-005"
+        ],
+        "known_failure_modes": [
+          "RFM-001",
+          "RFM-002",
+          "RFM-007"
+        ],
+        "readiness": "scaffolded"
+      }
+    ]
+  }
+}

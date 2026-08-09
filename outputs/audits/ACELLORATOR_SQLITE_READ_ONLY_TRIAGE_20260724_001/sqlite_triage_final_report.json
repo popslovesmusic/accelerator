@@ -1,0 +1,81 @@
+{
+  "report_id": "SQLITE-TRIAGE-FINAL-20260724-001",
+  "packet_id": "ACELLORATOR_SQLITE_READ_ONLY_TRIAGE_20260724_001",
+  "started_at": "2026-07-24T20:58:21.621516+00:00",
+  "completed_at": "2026-07-24T21:06:05.888283+00:00",
+  "auditor": "Codex",
+  "host": "J",
+  "database_targets": [
+    "D:\\projects\\acellorator\\registry\\db\\acellorator_index.sqlite",
+    "D:\\projects\\acellorator\\registry\\registry\\db\\acellorator_index.sqlite"
+  ],
+  "read_only_controls_verified": true,
+  "authoritative_database_path": "D:\\projects\\acellorator\\registry\\db\\acellorator_index.sqlite",
+  "authority_confidence": "AUTHORITATIVE_PROBABLE",
+  "authority_evidence": [
+    "Runtime default path in query_governance.py",
+    "Nested path absent from bounded source references",
+    "Read-only comparison performed"
+  ],
+  "database_relationship": "EXACT_DUPLICATE",
+  "schema_divergence_summary": "See database_divergence_report.json; schema and row-level comparisons recorded without payload export.",
+  "row_divergence_summary": "See database_divergence_report.json; stable-key and row-count comparisons retained.",
+  "evidence_storage_severity": "CRITICAL",
+  "largest_payload_summary": {
+    "max_bytes": 963426339,
+    "share_of_total": 0.08733637280434131
+  },
+  "duplicate_payload_summary": "Exact duplicate raw payload hashes are quantified in governance_evidence_duplicate_report.json.",
+  "nested_database_origin": "The nested path is a hard-link alias of the primary database, likely exposed by recursive registry path construction or indexing. It is not an independent database; runtime authority remains assigned to the primary path because that is the configured runtime default.",
+  "origin_confidence": "HIGH",
+  "immediate_risks": [
+    "Large evidence_json rows increase query, backup, integrity-check, and governance-runtime costs.",
+    "Nested database creates authority ambiguity and may be a recursive-copy artifact."
+  ],
+  "recommended_next_action": "Human review of the four triage reports, followed by a separately authorized DATABASE_REMEDIATION_PATCH; do not delete or relocate either database based on this audit alone.",
+  "destructive_actions_taken": [],
+  "source_files_modified": [],
+  "deliverable_manifest": [
+    {
+      "filename": "database_divergence_report.json",
+      "sha256": "c69fd342562e3d8f38f30c22afb5eab1f2a75a8f6f72b582c82e15740f57013b",
+      "bytes": 10444188
+    },
+    {
+      "filename": "database_file_identity_report.json",
+      "sha256": "d8f03d0169b6b24741815bed8a16ccddc332e14ee4f10cabe37271e719764397",
+      "bytes": 1465
+    },
+    {
+      "filename": "governance_evidence_duplicate_report.json",
+      "sha256": "b37c342377572f33eaf9ba275325ef1bcee5bd1ead964782aee4312e18d1b439",
+      "bytes": 324
+    },
+    {
+      "filename": "governance_evidence_size_profile.json",
+      "sha256": "189215b7c1a057266b1254f7bed5ba36174309ca691578f49ae6189cdf38d93c",
+      "bytes": 126299
+    },
+    {
+      "filename": "governance_evidence_structure_report.json",
+      "sha256": "ff4bd00a3d1991225470b3d580193beffcdda2bc6210bc8d3e1ef40ab7806ebf",
+      "bytes": 22176
+    },
+    {
+      "filename": "largest_governance_evidence_rows.json",
+      "sha256": "a08569b0526dbaf10cf39cdd326ba3c47767e3474e10f922b6a57decb5948bf1",
+      "bytes": 98090
+    },
+    {
+      "filename": "nested_database_origin_report.json",
+      "sha256": "DC9A26E47A6DFFB257BF48070F4537ADA9F2A1D552469CA256C55D9515BF9CEA",
+      "bytes": 968
+    },
+    {
+      "filename": "runtime_database_authority_report.json",
+      "sha256": "999cbbbd85935adfa74b133b852c1196894a6a219cc3ea2a3702238c80ef2706",
+      "bytes": 674
+    }
+  ],
+  "audit_result": "PASS_TRIAGE_COMPLETE"
+}

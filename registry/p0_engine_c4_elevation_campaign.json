@@ -1,0 +1,72 @@
+{
+  "registry_id": "PCD_P0_ENGINE_C4_ELEVATION_CAMPAIGN",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "campaign_id",
+      "tool_id",
+      "current_level",
+      "target_level",
+      "blocking_gaps",
+      "required_execution_plans",
+      "required_evidence_packages",
+      "required_falsification_vectors",
+      "required_outputs",
+      "promotion_gate"
+    ]
+  },
+  "campaigns": [
+    {
+      "campaign_id": "P0-C4-GRAPH-001",
+      "tool_id": "graph_dynamics_sim_v1_cpp",
+      "current_level": "C4",
+      "target_level": "C4",
+      "blocking_gaps": [],
+      "required_execution_plans": [
+        "CERT-FULL-GRAPH-001"
+      ],
+      "required_evidence_packages": [
+        "engine_rigor endorsement_evidence_template"
+      ],
+      "required_falsification_vectors": [
+        "FV-1_shuffle_or_zero_mismatch_control",
+        "FV-2_boundary_collapse",
+        "expected_failure_case"
+      ],
+      "required_outputs": [
+        "stability_report.json",
+        "falsification_report.json",
+        "uncertainty_report.json",
+        "provenance_manifest.json",
+        "recoverable_output_index.json"
+      ],
+      "promotion_gate": "check_c4_engine_rigor endorsement.py"
+    },
+    {
+      "campaign_id": "P0-C4-CA-001",
+      "tool_id": "ca_admissibility_sim_v1_cpp",
+      "current_level": "C4",
+      "target_level": "C4",
+      "blocking_gaps": [],
+      "required_execution_plans": [
+        "CERT-FULL-CA-001"
+      ],
+      "required_evidence_packages": [
+        "engine_rigor endorsement_evidence_template"
+      ],
+      "required_falsification_vectors": [
+        "FV-1_shuffle_or_zero_mismatch_control",
+        "FV-2_boundary_collapse",
+        "expected_failure_case"
+      ],
+      "required_outputs": [
+        "stability_report.json",
+        "falsification_report.json",
+        "uncertainty_report.json",
+        "provenance_manifest.json",
+        "recoverable_output_index.json"
+      ],
+      "promotion_gate": "check_c4_engine_rigor endorsement.py"
+    }
+  ]
+}

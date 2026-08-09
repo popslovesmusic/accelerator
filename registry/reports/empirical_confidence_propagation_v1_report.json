@@ -1,0 +1,44 @@
+{
+  "report_id": "EMPIRICAL_CONFIDENCE_PROPAGATION_V1_REPORT",
+  "timestamp": "2026-05-10T10:00:00Z",
+  "status": "COMPLETED",
+  "patch_id": "PCD_EMPIRICAL_CONFIDENCE_PROPAGATION_V1",
+  "summary": "Defined the formal rules for empirical confidence propagation and decay. Established the confidence propagation registry and implemented governance guardrails to ensure that simulation-supported claims are tied to explicit evidence quality and auditable provenance.",
+  "operations_summary": [
+    {
+      "operation": "create_confidence_propagation_registry",
+      "target": "registry/empirical_confidence_propagation_registry.json",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "register_confidence_propagation_rules",
+      "count": 3,
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "define_confidence_decay_rules",
+      "count": 2,
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "add_confidence_propagation_guardrails",
+      "target": "registry/lexicon_gap_queue.json",
+      "status": "SUCCESS",
+      "guardrails_added": [
+        "no_confidence_propagation_without_conditions_v1",
+        "no_confidence_survival_after_runtime_drift_v1"
+      ]
+    }
+  ],
+  "propagation_status": {
+    "registry_active": true,
+    "confidence_bands_governed": ["CB0", "CB1", "CB2", "CB3", "CB4"],
+    "decay_rules_active": true,
+    "status_promotion_linked": true
+  },
+  "charter_compliance_check": {
+    "charter_version": "2.3",
+    "status": "COMPLIANT",
+    "notes": "The confidence propagation rules ensure that empirical certainty is explicitly quantified and subject to decay under runtime drift or contradiction, fulfilling the mandate for humility and recoverable provenance."
+  }
+}

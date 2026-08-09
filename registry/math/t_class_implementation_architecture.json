@@ -1,0 +1,69 @@
+{
+  "patch_id": "MPF_T_CLASS_IMPLEMENTATION_ARCHITECTURE_001",
+  "status": "PROPOSED",
+  "scope": "implementation_architecture",
+  "claim_effect": "NO_THEOREM_PROMOTION",
+  "purpose": "Define the canonical module structure for Python and C++ implementations before coding begins.",
+  "principle": "One theory, one architecture, two language realizations.",
+  "python_layout": {
+    "root": "tools/t_class_classifier/python/",
+    "modules": [
+      "schemas.py",
+      "ingest.py",
+      "sanitize.py",
+      "feature_extract.py",
+      "t_signature.py",
+      "classify.py",
+      "distribution.py",
+      "audit.py",
+      "main.py"
+    ]
+  },
+  "cpp_layout": {
+    "root": "tools/t_class_classifier/cpp/",
+    "modules": [
+      "schemas.hpp",
+      "ingest.cpp",
+      "sanitize.cpp",
+      "feature_extract.cpp",
+      "t_signature.cpp",
+      "classify.cpp",
+      "distribution.cpp",
+      "audit.cpp",
+      "main.cpp"
+    ]
+  },
+  "shared_pipeline": [
+    "ingest",
+    "sanitize",
+    "feature_extract",
+    "t_signature_build",
+    "class_assign",
+    "distribution_compute",
+    "audit_emit"
+  ],
+  "canonical_intermediate": {
+    "object": "T_sig",
+    "rule": "All classification decisions must be made from T_sig rather than directly from raw projections."
+  },
+  "forbidden_shortcuts": [
+    "direct graph to class mapping",
+    "orientation-aware classification",
+    "campaign-specific rules",
+    "fixture-specific branching"
+  ],
+  "required_design_docs": [
+    "module_dependency_graph.json",
+    "python_architecture.md",
+    "cpp_architecture.md",
+    "cross_language_mapping.json"
+  ],
+  "acceptance_condition": {
+    "statement": "Both implementations expose the same logical stages and produce the same audit-visible decision path."
+  },
+  "status_after_patch": {
+    "architecture": "DEFINED_PENDING_BUILD",
+    "python": "READY_FOR_CODING",
+    "cpp": "READY_FOR_CODING"
+  }
+}

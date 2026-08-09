@@ -1,0 +1,173 @@
+{
+  "packet_id": "ACELLORATOR_PROJECTION_SEMANTICS_CLOSURE_20260724_001",
+  "relationships": [
+    {
+      "projection_name": "artifacts",
+      "rules": [
+        {
+          "from_table": "artifacts",
+          "from_field": "orientation_status",
+          "to_table": "orientation_status_types",
+          "to_field": "status",
+          "dependency_type": "FOREIGN_KEY"
+        },
+        {
+          "from_table": "supersession_edges",
+          "from_field": "to_artifact_id",
+          "to_table": "artifacts",
+          "to_field": "id",
+          "dependency_type": "FOREIGN_KEY"
+        },
+        {
+          "from_table": "supersession_edges",
+          "from_field": "from_artifact_id",
+          "to_table": "artifacts",
+          "to_field": "id",
+          "dependency_type": "FOREIGN_KEY"
+        }
+      ]
+    },
+    {
+      "projection_name": "audit_reports",
+      "rules": [
+        {
+          "from_table": "audit_reports",
+          "from_field": "evidence_orientation",
+          "to_table": "orientation_status_types",
+          "to_field": "status",
+          "dependency_type": "FOREIGN_KEY"
+        }
+      ]
+    },
+    {
+      "projection_name": "claim_evidence_links",
+      "rules": [
+        {
+          "from_table": "claim_evidence_links",
+          "from_field": "orientation_status",
+          "to_table": "orientation_status_types",
+          "to_field": "status",
+          "dependency_type": "FOREIGN_KEY"
+        }
+      ]
+    },
+    {
+      "projection_name": "compressed_residue",
+      "rules": [
+        {
+          "from_table": "compressed_residue",
+          "from_field": "orientation_status",
+          "to_table": "orientation_status_types",
+          "to_field": "status",
+          "dependency_type": "FOREIGN_KEY"
+        }
+      ]
+    },
+    {
+      "projection_name": "db_snapshot_refresh_metadata",
+      "rules": []
+    },
+    {
+      "projection_name": "debt_runtime_projection",
+      "rules": []
+    },
+    {
+      "projection_name": "governance_decision_log",
+      "rules": []
+    },
+    {
+      "projection_name": "governance_events",
+      "rules": [
+        {
+          "from_table": "governance_events",
+          "to_table": "semantic_authority_events",
+          "dependency_type": "HEURISTIC_IDENTIFIER_REFERENCE"
+        },
+        {
+          "from_table": "semantic_authority_events",
+          "to_table": "governance_events",
+          "dependency_type": "HEURISTIC_IDENTIFIER_REFERENCE"
+        }
+      ]
+    },
+    {
+      "projection_name": "orientation_status_types",
+      "rules": [
+        {
+          "from_table": "artifacts",
+          "from_field": "orientation_status",
+          "to_table": "orientation_status_types",
+          "to_field": "status",
+          "dependency_type": "FOREIGN_KEY"
+        },
+        {
+          "from_table": "audit_reports",
+          "from_field": "evidence_orientation",
+          "to_table": "orientation_status_types",
+          "to_field": "status",
+          "dependency_type": "FOREIGN_KEY"
+        },
+        {
+          "from_table": "claim_evidence_links",
+          "from_field": "orientation_status",
+          "to_table": "orientation_status_types",
+          "to_field": "status",
+          "dependency_type": "FOREIGN_KEY"
+        },
+        {
+          "from_table": "compressed_residue",
+          "from_field": "orientation_status",
+          "to_table": "orientation_status_types",
+          "to_field": "status",
+          "dependency_type": "FOREIGN_KEY"
+        }
+      ]
+    },
+    {
+      "projection_name": "registry_snapshots",
+      "rules": []
+    },
+    {
+      "projection_name": "semantic_authority_events",
+      "rules": [
+        {
+          "from_table": "governance_events",
+          "to_table": "semantic_authority_events",
+          "dependency_type": "HEURISTIC_IDENTIFIER_REFERENCE"
+        },
+        {
+          "from_table": "semantic_authority_events",
+          "to_table": "governance_events",
+          "dependency_type": "HEURISTIC_IDENTIFIER_REFERENCE"
+        }
+      ]
+    },
+    {
+      "projection_name": "semantic_authority_map",
+      "rules": []
+    },
+    {
+      "projection_name": "supersession_edges",
+      "rules": [
+        {
+          "from_table": "supersession_edges",
+          "from_field": "to_artifact_id",
+          "to_table": "artifacts",
+          "to_field": "id",
+          "dependency_type": "FOREIGN_KEY"
+        },
+        {
+          "from_table": "supersession_edges",
+          "from_field": "from_artifact_id",
+          "to_table": "artifacts",
+          "to_field": "id",
+          "dependency_type": "FOREIGN_KEY"
+        }
+      ]
+    },
+    {
+      "projection_name": "tool_health",
+      "rules": []
+    }
+  ]
+}

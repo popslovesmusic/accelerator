@@ -1,0 +1,48 @@
+{
+  "rc011_branch_explosion_limits_result": {
+    "timestamp": "2026-07-11T05:41:55.973278",
+    "target": "RC-011",
+    "objective": "analyze_branch_growth_limits",
+    "observed_behavior": "pass",
+    "branch_audit": {
+      "growth_detection": "active (monitor set cardinality)",
+      "pruning_thresholds": "bounded (T_prune > 0.05)",
+      "multi_branching": "preserved (stable set of 3 branches)",
+      "nondeterminism": "maintained (delta remains multi-valued)",
+      "frame_bias": "bounded (orientation drift < threshold)",
+      "admissibility": "legal (scaling updates respect Pi_A)",
+      "flux_influence": "stable (no runaway propagation)",
+      "runaway_detection": "verified (threshold trigger operational)"
+    },
+    "control_modes_tested": [
+      "bounded_branch_retention",
+      "orientation_sensitive_pruning",
+      "window_constrained_branch_survival",
+      "residue_sensitive_branch_decay",
+      "recursive_branch_scaling_limits"
+    ],
+    "stability_status": {
+      "is_scaling_stable": true,
+      "domain": "recursive_continuation_structure",
+      "evidence": "Simulated bounded branch growth across 10 recursive iterations with effective pruning.",
+      "constraints": [
+        "no total elimination",
+        "no unique survival forced"
+      ]
+    },
+    "failure_modes_tracked": [
+      "unbounded_branch_explosion",
+      "forced_unique_branch_survival",
+      "orientation_locked_pruning",
+      "recursive_branch_divergence",
+      "transport_induced_branch_instability",
+      "residue_saturation_branch_collapse",
+      "pruning_threshold_instability",
+      "branch_basin_escape"
+    ],
+    "readiness": "symbolic_supported_candidate",
+    "must_not_promote": true,
+    "governance_constraints_satisfied": true,
+    "notes": "No unique branch survival or total branch elimination claimed."
+  }
+}

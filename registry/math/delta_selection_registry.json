@@ -1,0 +1,131 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Provisional registry for continuation selection-rule classes for the delta operator.",
+    "status": "provisional",
+    "last_updated": "2026-05-11"
+  },
+  "selection_classes": [
+    {
+      "selection_class": "orientation_minimization",
+      "description": "Select continuation candidates minimizing orientation deviation relative to declared orientation frame."
+    },
+    {
+      "selection_class": "residue_weighted",
+      "description": "Select continuation candidates weighted by residue compatibility or persistence history."
+    },
+    {
+      "selection_class": "admissibility_priority",
+      "description": "Prefer candidates maximizing admissibility-window preservation."
+    },
+    {
+      "selection_class": "multi_branch_retention",
+      "description": "Retain multiple admissible candidates simultaneously without immediate collapse."
+    },
+    {
+      "selection_class": "stochastic_or_undefined",
+      "description": "Selection behavior intentionally unspecified or probabilistically modeled."
+    }
+  ],
+  "selection_rules": [
+    {
+      "selection_id": "DSR-001",
+      "selection_class": "orientation_minimization",
+      "target_operator": "delta",
+      "input_objects": [
+        "process_state",
+        "orientation_frame"
+      ],
+      "selection_metric": "orientation_deviation",
+      "ambiguity_behavior": "weighted",
+      "stability_dependency": [
+        "OST-CV-001"
+      ],
+      "failure_modes": [
+        "DSFM-001",
+        "DSFM-002"
+      ],
+      "closure_dependency": [],
+      "expected_behavior": "bounded",
+      "proof_status": "scaffolded",
+      "claim_boundary": "formal_procedural_only",
+      "provisional_status": true,
+      "open_questions": []
+    },
+    {
+      "selection_id": "DSR-002",
+      "selection_class": "residue_weighted",
+      "target_operator": "delta",
+      "input_objects": [
+        "process_state",
+        "residue_state"
+      ],
+      "selection_metric": "residue_compatibility",
+      "ambiguity_behavior": "weighted",
+      "stability_dependency": [
+        "OST-CV-002"
+      ],
+      "failure_modes": [
+        "DSFM-004",
+        "DSFM-006"
+      ],
+      "closure_dependency": [],
+      "expected_behavior": "bifurcation_possible",
+      "proof_status": "scaffolded",
+      "claim_boundary": "formal_procedural_only",
+      "provisional_status": true,
+      "open_questions": []
+    },
+    {
+      "selection_id": "DSR-003",
+      "selection_class": "multi_branch_retention",
+      "target_operator": "delta",
+      "input_objects": [
+        "process_state",
+        "admissibility_window"
+      ],
+      "selection_metric": "none",
+      "ambiguity_behavior": "branching",
+      "stability_dependency": [],
+      "failure_modes": [
+        "DSFM-003",
+        "DSFM-008"
+      ],
+      "closure_dependency": [],
+      "expected_behavior": "undefined",
+      "proof_status": "scaffolded",
+      "claim_boundary": "formal_procedural_only",
+      "provisional_status": true,
+      "open_questions": []
+    },
+    {
+      "selection_id": "DSR-004",
+      "selection_class": "admissibility_priority",
+      "target_operator": "Arb_A",
+      "input_objects": [
+        "continuation_space",
+        "residue_state",
+        "orientation_frame"
+      ],
+      "selection_metric": "least_mismatch_over_pruned_pool",
+      "ambiguity_behavior": "weighted",
+      "stability_dependency": [
+        "OST-CV-001",
+        "OST-CV-002"
+      ],
+      "failure_modes": [
+        "DSFM-001",
+        "DSFM-002",
+        "DSFM-005"
+      ],
+      "closure_dependency": [],
+      "expected_behavior": "single_realization_from_pruned_pool",
+      "proof_status": "validated_candidate",
+      "claim_boundary": "formal_procedural_only",
+      "provisional_status": true,
+      "open_questions": [
+        "Tie-break semantics remain implementation-specific once multiple pruned candidates share the same mismatch cost."
+      ]
+    }
+  ]
+}

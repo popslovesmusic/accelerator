@@ -18,6 +18,7 @@ def run_simulation(config_path, output_dir):
     steps = config['steps']
     
     print(f"Starting Reaction-Diffusion simulation on {config['grid_size']}x{config['grid_size']} grid...")
+    print(f"Boundary Mode: {engine.boundary_mode}, dx: {engine.dx}, dy: {engine.dy}")
     
     for step in range(steps):
         engine.step()
@@ -38,10 +39,17 @@ def run_simulation(config_path, output_dir):
     df = pd.DataFrame(history)
     df.to_csv(os.path.join(output_dir, 'metrics.csv'), index=False)
     
+    # Save final S field for TDA
+    np.savetxt(os.path.join(output_dir, 'final_S_field.csv'), engine.S, delimiter=',')
+
     # Save final summary
+    final_metrics = history[-1] if history else engine.get_metrics()
+    if 'step' not in final_metrics:
+        final_metrics['step'] = steps - 1 if steps > 0 else 0
+
     summary = {
         "config": config,
-        "final_metrics": history[-1],
+        "final_metrics": final_metrics,
         "status": "completed"
     }
     with open(os.path.join(output_dir, 'summary.json'), 'w') as f:

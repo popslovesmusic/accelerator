@@ -1,0 +1,28 @@
+{
+  "recursive_stability_boundary": {
+    "version": "1.0",
+    "description": "Mapping of recursive stability boundaries and attractor basins.",
+    "boundaries": [
+      {
+        "id": "RSB-001",
+        "target": "dissipative_attractor_basin",
+        "condition": "residue_update dissipation > transport_flux accumulation",
+        "geometry": "stable_fixed_point_manifold"
+      },
+      {
+        "id": "RSB-002",
+        "target": "recursive_divergence_limit",
+        "condition": "Lyapunov_exponent > 0",
+        "geometry": "chaotic_boundary_surface",
+        "status": "asymptotically_inaccessible"
+      },
+      {
+        "id": "RSB-003",
+        "target": "branch_explosion_threshold",
+        "condition": "branch_count > implementation_limit",
+        "geometry": "tree_complexity_boundary"
+      }
+    ],
+    "last_updated": "2026-05-13"
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "report_id": "RT_INDUCTION_MTO_OTM_CALCULUS_001_WITNESSES_001",
+  "packet_id": "RT_INDUCTION_MTO_OTM_CALCULUS_001",
+  "status": "PROVISIONAL_WITNESS_SCHEMAS",
+  "authority": "NON_CANONICAL_RESEARCH_MEMORY",
+  "canonical_math_modified": false,
+  "witness_schemas": {
+    "CompatibilityWitness": {
+      "required_fields": ["witness_id", "context_id", "left_orientation", "right_orientation", "joint_admissibility_rule", "source_trace", "validation_status"],
+      "validity_rule": "The rule must explicitly admit both orientations together in the same context and preserve their relevant distinctions."
+    },
+    "OrderingWitness": {
+      "required_fields": ["witness_id", "context_id", "left_orientation", "right_orientation", "ordering_relation_id", "ordering_result", "source_trace", "validation_status"],
+      "validity_rule": "The ordering relation must be typed over the context orientation domain and return a determinate result."
+    },
+    "ConflictWitness": {
+      "required_fields": ["witness_id", "context_id", "left_orientation", "right_orientation", "incompatible_constraints", "conflict_explanation", "source_trace", "validation_status"],
+      "validity_rule": "The witness must identify incompatible active constraints; similarity or absence of compatibility is insufficient."
+    },
+    "CanonicalCandidateReference": {
+      "required_fields": ["canonical_ref", "candidate_type", "source_trace", "validation_status"],
+      "validity_rule": "Reference identity must resolve from an active canonical source; labels alone are insufficient."
+    }
+  },
+  "witness_fixtures": [
+    {
+      "fixture_id": "WIT-FIX-001",
+      "type": "CompatibilityWitness",
+      "payload": {"witness_id": "W_COMPAT_001", "context_id": "C_ORI_002", "left_orientation": "o_1", "right_orientation": "o_2", "joint_admissibility_rule": "C_ORI_002 permits both orientations", "source_trace": "fixture", "validation_status": "VALID"},
+      "result": "COMPATIBLE_WITNESS_VALID"
+    },
+    {
+      "fixture_id": "WIT-FIX-002",
+      "type": "OrderingWitness",
+      "payload": {"witness_id": "W_ORDER_001", "context_id": "C_ORI_003", "left_orientation": "o_1", "right_orientation": "o_2", "ordering_relation_id": "ORD_C_ORI_003", "ordering_result": "o_1 < o_2", "source_trace": "fixture", "validation_status": "VALID"},
+      "result": "ORDERING_WITNESS_VALID"
+    },
+    {
+      "fixture_id": "WIT-FIX-003",
+      "type": "ConflictWitness",
+      "payload": {"witness_id": "W_CONFLICT_001", "context_id": "C_ORI_004", "left_orientation": "o_1", "right_orientation": "o_2", "incompatible_constraints": ["C_ORI_004 requires exclusive orientation assignment"], "conflict_explanation": "Both orientations cannot satisfy the active context constraint simultaneously.", "source_trace": "fixture", "validation_status": "VALID"},
+      "result": "CONFLICT_WITNESS_VALID"
+    },
+    {
+      "fixture_id": "WIT-FIX-004",
+      "type": "ConflictWitness",
+      "payload": {"witness_id": "W_CONFLICT_002", "context_id": "C_ORI_004", "left_orientation": "o_1", "right_orientation": "o_2", "incompatible_constraints": [], "conflict_explanation": "They look different.", "source_trace": null, "validation_status": "UNRESOLVED"},
+      "result": "CONFLICT_WITNESS_INVALID_FOR_REJECTION"
+    },
+    {
+      "fixture_id": "WIT-FIX-005",
+      "type": "CanonicalCandidateReference",
+      "payload": {"canonical_ref": "RT_a", "candidate_type": "ResolvedRT", "source_trace": "active canonical source", "validation_status": "VALID"},
+      "result": "REFERENCE_IDENTITY_VALID"
+    },
+    {
+      "fixture_id": "WIT-FIX-006",
+      "type": "CanonicalCandidateReference",
+      "payload": {"canonical_ref": "label_only_a", "candidate_type": "ResolvedRT", "source_trace": null, "validation_status": "UNRESOLVED"},
+      "result": "REFERENCE_IDENTITY_UNRESOLVED"
+    }
+  ],
+  "policy_effects": [
+    {"policy_case": "COMPATIBLE", "required_witness": "CompatibilityWitness", "effect": "ADMISSIBLE_CANDIDATE_ONLY"},
+    {"policy_case": "ORDERED", "required_witness": "OrderingWitness", "effect": "ADMISSIBLE_CANDIDATE_ONLY"},
+    {"policy_case": "CONFLICT", "required_witness": "ConflictWitness", "effect": "REJECTED_IF_VALID"},
+    {"policy_case": "MULTIPLE_CANDIDATES", "required_witness": "CanonicalCandidateReference per candidate", "effect": "MTO_SELECTION_BLOCKED_IF_DISTINCT"}
+  ],
+  "remaining_obligations": [
+    "Replace fixture-only source traces with governed source evidence.",
+    "Define the actual context orientation domain.",
+    "Prove ordering relation properties where ORDERED is used.",
+    "Define candidate RT canonical reference authority.",
+    "Keep deterministic MTO selection blocked until candidate semantics are complete."
+  ],
+  "nonclaims": ["Fixture witnesses are not general proofs.", "No compatibility, ordering, or conflict witness is active outside its declared context.", "No deterministic MTO selector is defined."]
+}

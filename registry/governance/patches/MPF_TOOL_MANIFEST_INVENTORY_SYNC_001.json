@@ -1,0 +1,36 @@
+{
+  "patch_id": "MPF_TOOL_MANIFEST_INVENTORY_SYNC_001",
+  "status": "applied",
+  "applied_on": "2026-07-20T12:02:00-04:00",
+  "authorizer": "USER",
+  "scope": "registry inventory synchronization",
+  "description": "Synchronize registry/tool_manifest.json with discovered tools/*_cpp directories reported by scripts/check_manifest_gaps.py without promoting certification or evidence status.",
+  "affected_assets": [
+    "registry/tool_manifest.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/MPF_TOOL_MANIFEST_INVENTORY_SYNC_001.json"
+  ],
+  "changes": [
+    {
+      "asset": "registry/tool_manifest.json",
+      "change": "Added conservative C1 inventory entries for 11 existing C++ tool directories that were absent from the tool manifest."
+    },
+    {
+      "asset": "registry/tool_manifest.json",
+      "change": "Set certification, falsification, numerical stability, uncertainty, and provenance flags to false where no tool-local certification manifest was used."
+    }
+  ],
+  "non_claims": [
+    "No tool was promoted to C4, C5, or C6.",
+    "No validation evidence was fabricated or inferred from directory presence.",
+    "This patch records inventory presence only."
+  ],
+  "verification": {
+    "precondition": "scripts/check_manifest_gaps.py reported 11 C++ directories missing from registry/tool_manifest.json.",
+    "required_checks": [
+      "python scripts/check_manifest_gaps.py",
+      "python scripts/check_tool_manifest_sync.py",
+      "python scripts/global_validate.py"
+    ]
+  }
+}

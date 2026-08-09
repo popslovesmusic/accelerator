@@ -1,0 +1,86 @@
+{
+  "report_id": "MATH_COUNTEREXAMPLE_CONTINUATION_004",
+  "timestamp": "2026-07-06T03:15:41.2951679-04:00",
+  "campaign_id": "MT-COUNTEREXAMPLE-001",
+  "source_basis": [
+    "registry/math/mt_counterexample_campaign_registry.json",
+    "registry/math/selection_reconstruction_registry.json",
+    "registry/math/selection_reconstruction_failure_modes.json",
+    "registry/math/rc010_selection_reconstruction_limits_registry.json",
+    "registry/math/rc023_preimage_uniqueness_constraints_registry.json",
+    "outputs/audits/math_selection_reconstruction_trace_001.json",
+    "outputs/audits/math_selection_reconstruction_validation_001.json",
+    "outputs/math_tests/rc010_selection_reconstruction_limits_result.json",
+    "outputs/math_tests/rc023_preimage_uniqueness_constraints_result.json",
+    "analysis/recommended_action_queue.json",
+    "outputs/audits/global_health_report.json"
+  ],
+  "current_state": {
+    "status": "active_adversarial_testing",
+    "current_vector": "selection_reconstruction_failure",
+    "trace_focus": {
+      "query_id": "SR-004",
+      "target": "selection_trace",
+      "reconstruction_class": "conditionally_reconstructable",
+      "class_meaning": "Selection can be recovered only under strict orientation, residue, and admissibility constraints.",
+      "constraints": [
+        "requires_strict_orientation_constraints",
+        "requires_residue_history",
+        "requires_branch_pruning_audit"
+      ]
+    },
+    "declared_vectors_remaining": [
+      "window_boundary_fragmentation",
+      "operator_chain_nonclosure"
+    ]
+  },
+  "bounded_reconstruction_evidence": {
+    "rc010": {
+      "observed_behavior": "pass",
+      "is_reconstruction_bounded": true,
+      "summary": "Partial selection recovery remains possible only under bounded reconstruction limits."
+    },
+    "rc023": {
+      "observed_behavior": "pass",
+      "is_preimage_stable": true,
+      "summary": "Orientation-sensitive preimage recovery remains ambiguous and non-global."
+    }
+  },
+  "selection_reconstruction_validation": {
+    "status": "pass",
+    "entry_count": 4,
+    "condition_count": 3,
+    "failure_mode_count": 5
+  },
+  "recommended_next_action": {
+    "action": "execute bounded selection reconstruction failure",
+    "target": "MT-COUNTEREXAMPLE-001",
+    "focus_vector": "selection_reconstruction_failure",
+    "scope": "bounded",
+    "supporting_evidence": [
+      "outputs/audits/math_selection_reconstruction_trace_001.json",
+      "outputs/audits/math_selection_reconstruction_validation_001.json",
+      "outputs/math_tests/rc010_selection_reconstruction_limits_result.json",
+      "outputs/math_tests/rc023_preimage_uniqueness_constraints_result.json",
+      "registry/math/selection_reconstruction_registry.json",
+      "registry/math/selection_reconstruction_failure_modes.json",
+      "registry/math/rc023_preimage_uniqueness_constraints_registry.json"
+    ],
+    "constraints": [
+      "preserve_failure_modes",
+      "preserve_counterexample_space",
+      "no_global_invertibility_claims",
+      "no_physics_claims",
+      "results_remain_nonfinal"
+    ]
+  },
+  "validation_state": {
+    "latest_global_validation": "pass",
+    "reference": "outputs/audits/global_health_report.json"
+  },
+  "notes": [
+    "The nonlocal transport and orientation-locking artifacts remain preserved as boundary cases.",
+    "The selection reconstruction branch is conditional and bounded, not globally invertible.",
+    "The campaign remains active and nonfinal."
+  ]
+}

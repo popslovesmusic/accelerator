@@ -1,0 +1,114 @@
+{
+  "schema_id": "q0_documentation_boundary_residue_retirement_inventory_v1",
+  "generated_at": "2026-07-15T00:35:00-04:00",
+  "source_patch": "PATCH_GOVERNANCE_Q0_REMAINING_OPEN_WORK_CLASSIFICATION_013",
+  "source_inventory": "outputs/governance_inventory/q0_remaining_open_work_inventory.json",
+  "selection_rule": "Only items already classified as OBSOLETE_RESIDUE and uniquely proven to belong to the documentation boundary are in scope.",
+  "queue_state": {
+    "before_queue_artifact": "outputs/governance_inventory/q0_next_bounded_work_queue_active.json",
+    "before_count": 3,
+    "after_queue_artifact": "outputs/governance_inventory/q0_next_bounded_work_queue_active.json",
+    "after_count": 2
+  },
+  "selected_items": [
+    {
+      "item_id": "Q0-OPEN-009",
+      "ambiguity_id": "AMB-GOV-SURF-0006",
+      "source_path": "docs/governance/NARRATIVE.md",
+      "original_residue_statement": "Documentation or evidence surface outside the selected validation control plane; adjacent queue position does not establish cluster membership.",
+      "current_classification": "OBSOLETE_RESIDUE",
+      "current_authority_role": "PROCEDURAL_GUIDANCE_ONLY_OUTSIDE_Q0_CONTROL_PLANE",
+      "reason_obsolete": "The runtime may still return documentation guidance for generic authority queries, but Q0 role-aware resolution defers this document for registry, write, and validation-reduction roles because it is not part of the governed Q0 authority surface.",
+      "evidence": [
+        {
+          "path": "outputs/governance_inventory/q0_resolution_packet.json",
+          "note": "The selected Q0 cluster classifies NARRATIVE.md as documentation_boundary outside the selected validation control plane."
+        },
+        {
+          "path": "python -m scripts.query_governance authority --target docs/governance/NARRATIVE.md --authority-role REGISTRY_STATE_AUTHORITY --json",
+          "note": "Returns defer: target is not part of the governed Q0 authority surface."
+        },
+        {
+          "path": "python -m scripts.query_governance authority --target docs/governance/NARRATIVE.md --authority-role VALIDATION_REDUCTION_AUTHORITY --json",
+          "note": "Returns defer: target is not part of the governed Q0 authority surface."
+        },
+        {
+          "path": "python -m scripts.query_governance authority --target docs/governance/GLOBAL_VALIDATION_ROUTINE.md --authority-role INSTRUCTION_AUTHORITY --json",
+          "note": "The active Q0 instruction authority is explicitly anchored in GLOBAL_VALIDATION_ROUTINE.md rather than NARRATIVE.md."
+        }
+      ],
+      "retirement_decision": "RETIRE_AS_OBSOLETE_RESIDUE",
+      "deterministic_reason": "NARRATIVE.md may guide operators descriptively, but current Q0 enforcement excludes it from live control-plane authority resolution and blocks it from acting as registry state, registry write, or validation reduction authority."
+    },
+    {
+      "item_id": "Q0-OPEN-011",
+      "ambiguity_id": "AMB-GOV-SURF-0026",
+      "source_path": "docs/governance/dataset_evidence_packets.md",
+      "original_residue_statement": "Documentation or evidence surface outside the selected validation control plane; adjacent queue position does not establish cluster membership.",
+      "current_classification": "OBSOLETE_RESIDUE",
+      "current_authority_role": "DOCUMENTATION_EVIDENCE_GUIDANCE_ONLY_OUTSIDE_Q0_CONTROL_PLANE",
+      "reason_obsolete": "The document remains a governance-facing evidence-packet policy surface, but the Q0 authority layer defers it for registry-write resolution and excludes it from the selected validation control plane.",
+      "evidence": [
+        {
+          "path": "outputs/governance_inventory/q0_resolution_packet.json",
+          "note": "The selected Q0 cluster classifies dataset_evidence_packets.md as documentation_boundary outside the selected control plane."
+        },
+        {
+          "path": "python -m scripts.query_governance authority --target docs/governance/dataset_evidence_packets.md --authority-role REGISTRY_WRITE_AUTHORITY --json",
+          "note": "Returns defer: target is not part of the governed Q0 authority surface."
+        },
+        {
+          "path": "tools/runtime_authority/__init__.py",
+          "note": "Only declared Q0 targets participate in role-aware authority resolution; dataset_evidence_packets.md is not in the role target map."
+        },
+        {
+          "path": "scripts/global_validate.py",
+          "note": "The canonical validation invocation remains executable code and does not route through dataset_evidence_packets.md."
+        }
+      ],
+      "retirement_decision": "RETIRE_AS_OBSOLETE_RESIDUE",
+      "deterministic_reason": "dataset_evidence_packets.md may still define documentation policy, but current Q0 role-aware resolution excludes it from live authority selection and from registry-write or validation-reduction control."
+    },
+    {
+      "item_id": "Q0-OPEN-012",
+      "ambiguity_id": "AMB-GOV-SURF-0043",
+      "source_path": "docs/governance/equivalence_failure_protocols.md",
+      "original_residue_statement": "Documentation or evidence surface outside the selected validation control plane; adjacent queue position does not establish cluster membership.",
+      "current_classification": "OBSOLETE_RESIDUE",
+      "current_authority_role": "POLICY_GUIDANCE_ONLY_OUTSIDE_Q0_CONTROL_PLANE",
+      "reason_obsolete": "The document remains a policy surface for equivalence-failure handling, but the Q0 authority layer defers it for generated-evidence and live authority roles because it is outside the governed Q0 authority surface.",
+      "evidence": [
+        {
+          "path": "outputs/governance_inventory/q0_resolution_packet.json",
+          "note": "The selected Q0 cluster classifies equivalence_failure_protocols.md as documentation_boundary outside the selected validation control plane."
+        },
+        {
+          "path": "python -m scripts.query_governance authority --target docs/governance/equivalence_failure_protocols.md --authority-role GENERATED_EVIDENCE --json",
+          "note": "Returns defer: target is not part of the governed Q0 authority surface."
+        },
+        {
+          "path": "python -m scripts.query_governance authority --target docs/governance/GLOBAL_VALIDATION_ROUTINE.md --authority-role VALIDATION_REDUCTION_AUTHORITY --json",
+          "note": "Instruction authority is explicitly prevented from becoming validation reduction authority."
+        },
+        {
+          "path": "scripts/query_governance.py",
+          "note": "Role-aware authority lookup is fail-closed for mismatched or out-of-surface targets."
+        }
+      ],
+      "retirement_decision": "RETIRE_AS_OBSOLETE_RESIDUE",
+      "deterministic_reason": "equivalence_failure_protocols.md may remain explanatory policy, but current enforced Q0 role separation prevents it from controlling generated-evidence promotion, registry authority, or validation reduction."
+    }
+  ],
+  "excluded_as_out_of_scope": [],
+  "remains_open": [],
+  "completion_assertions": {
+    "historical_records_rewritten": 0,
+    "patch_002_status_changed": false,
+    "live_authority_assignments_changed": 0,
+    "retrieval_domain_items_changed": 0,
+    "full_project_validation_run": false,
+    "selected_item_count": 3,
+    "retired_item_count": 3,
+    "remaining_q0_item_count": 2
+  }
+}

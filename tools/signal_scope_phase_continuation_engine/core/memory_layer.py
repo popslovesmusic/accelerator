@@ -295,7 +295,9 @@ class CommittedResidueRecord:
 @dataclass
 class PersistentMemoryState:
     """
-    Memory is continuation bias. It stores only committed residues + derived priors.
+    Memory is continuation bias. In accordance with L036 (Ratchet Deformation of Admissibility), 
+    memory is not a static record but an active deformation of future admissibility manifolds.
+    It stores committed residues which act as dynamic constraints on continuation.
     """
 
     turn_counter: int = 0

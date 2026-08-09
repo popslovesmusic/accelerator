@@ -1,0 +1,201 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_027",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-05",
+  "type": "governance_patch",
+  "artifact_type": "governance_patch",
+  "title": "Reduction Trace Semantics",
+  "priority": "HIGH",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_026"
+  ],
+  "mode": "additive",
+  "basis": {
+    "source_patches": [
+      "PATCH_PI_RT_CALCULUS_026"
+    ],
+    "source_surfaces": [
+      "docs/textbook/mono_process_textbook_complete.md",
+      "registry/formal_object_registry.json",
+      "registry/math_source_registry.json",
+      "registry/lexicon_gap_queue.json",
+      "registry/registry/lexicon_gap_queue.json",
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_026.json"
+    ],
+    "scope": "Canonical reduction trace semantics for REDUCE_025 outputs, including trace-step records, halt reasons, and outcome-linked diagnostic records."
+  },
+  "core_rule": {
+    "statement": "Trace(C) is a diagnostic record, not a continuation; every REDUCE_025 result carries a trace; trace steps preserve the distinction between NF(C), pNF(C), and classified ⊥C_x; RT_core remains unchanged."
+  },
+  "purpose": "Define the canonical reduction trace object produced by REDUCE_025, so every reduction outcome records the lawful sequence by which it was reached.",
+  "canonical_claims": [
+    {
+      "id": "CLAIM_027_001",
+      "statement": "Every REDUCE_025 result must have a trace.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_027_002",
+      "statement": "Trace(C) is diagnostic, not a continuation.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_027_003",
+      "statement": "Trace(C) preserves the distinction between NF(C), pNF(C), and continuation failure.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_027_004",
+      "statement": "Trace(C) may record failure, but failure remains non-continuational.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_027_005",
+      "statement": "RT_core remains unchanged.",
+      "status": "canonical"
+    }
+  ],
+  "formal_objects": [
+    {
+      "id": "TRACE_027",
+      "symbol": "Trace(C)",
+      "name": "Reduction Trace",
+      "definition": "The ordered diagnostic record of the evaluation, validation, lawful reduction, halt, and failure-classification steps applied to a continuation expression C during REDUCE_025."
+    },
+    {
+      "id": "TRACE_STEP_027",
+      "symbol": "τ_i",
+      "name": "Trace Step",
+      "definition": "A single evaluation, validation, reduction, halt, or failure-classification event within Trace(C)."
+    }
+  ],
+  "trace_schema": {
+    "symbol": "Trace(C)",
+    "fields": [
+      "input_expression",
+      "evaluation_result",
+      "steps",
+      "halt_reason",
+      "outcome"
+    ],
+    "step_fields": [
+      "index",
+      "operation",
+      "pre_state",
+      "post_state",
+      "rule_applied",
+      "admissibility_status",
+      "residue_status",
+      "failure_class"
+    ]
+  },
+  "canonical_trace_outcomes": {
+    "normal_form": {
+      "outcome": "NF(C)",
+      "required_halt_reason": "no_lawful_reductions_remain"
+    },
+    "partial_normal_form": {
+      "outcome": "pNF(C)",
+      "required_halt_reason": "lawful_reductions_deferred_by_current_calculus_boundary"
+    },
+    "failure": {
+      "outcome": "⊥C_x",
+      "required_halt_reason": "classified_continuation_failure"
+    }
+  },
+  "invariants": [
+    "RT_core remains unchanged.",
+    "Trace(C) is diagnostic, not a continuation.",
+    "Trace(C) does not modify reduction semantics.",
+    "Every REDUCE_025 result must have a trace.",
+    "Trace(C) preserves the distinction between NF(C), pNF(C), and ⊥C_x.",
+    "Trace(C) may record failure, but failure remains non-continuational.",
+    "NF(⊥C) remains undefined.",
+    "pNF(⊥C) remains undefined.",
+    "Recovery remains deferred."
+  ],
+  "textbook_changes": {
+    "chapter": "2.3.9",
+    "title": "Reduction Trace Semantics",
+    "summary": [
+      "Define Trace(C) as the canonical diagnostic record for REDUCE_025.",
+      "Define trace steps τ_i.",
+      "Require every reduction outcome to carry a trace.",
+      "Preserve the distinction between successful, partial, and failed reduction outcomes."
+    ]
+  },
+  "registry_updates": {
+    "formal_object_registry": [
+      "TRACE_027",
+      "TRACE_STEP_027"
+    ],
+    "math_source_registry": [
+      "PATCH_PI_RT_CALCULUS_027"
+    ],
+    "lexicon_gap_queue": [
+      "reduction_trace",
+      "trace_step",
+      "trace_outcome",
+      "halt_reason"
+    ]
+  },
+  "rt_core_impact": {
+    "modified": false,
+    "statement": "RT := [(ℰ≠0) ⇔R δα(ℰ>0)] remains unchanged."
+  },
+  "scope": {
+    "adds": [
+      "Reduction trace object",
+      "Trace step semantics",
+      "Outcome-linked trace records",
+      "Trace invariants for NF(C), pNF(C), and ⊥C_x"
+    ],
+    "does_not_add": [
+      "Recovery operator",
+      "Parser implementation",
+      "Operational regime execution",
+      "sigma_RT selector",
+      "Confluence proof",
+      "Termination proof"
+    ]
+  },
+  "validation_requirements": [
+    "Patch record parses cleanly.",
+    "Patch depends on PATCH_PI_RT_CALCULUS_026.",
+    "Every REDUCE_025 result carries a trace.",
+    "Trace(C) is diagnostic, not a continuation.",
+    "RT_core remains unchanged."
+  ],
+  "required_repo_changes": [
+    "Update docs/textbook/mono_process_textbook_complete.md with the reduction trace semantics section and trace-linked outcome documentation.",
+    "Update registry/formal_object_registry.json with the trace formal objects.",
+    "Update registry/math_source_registry.json with the patch source entry.",
+    "Update registry/lexicon_gap_queue.json with the trace and halt-reason terms.",
+    "Update registry/registry/lexicon_gap_queue.json with the mirrored trace and halt-reason terms.",
+    "Update registry/governance_change_ledger.json with the corresponding governance ledger entry.",
+    "Update registry/governance/patches/PATCH_PI_RT_CALCULUS_026.json with the forward chain reference to PATCH_PI_RT_CALCULUS_027."
+  ],
+  "target_files": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/formal_object_registry.json",
+    "registry/math_source_registry.json",
+    "registry/lexicon_gap_queue.json",
+    "registry/registry/lexicon_gap_queue.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_026.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_027.json"
+  ],
+  "success_criteria": {
+    "trace_semantics_documented": true,
+    "trace_objects_registered": true,
+    "trace_outcome_linked": true,
+    "failure_distinguished": true,
+    "rt_core_unchanged": true
+  },
+  "next_recommended_patch": {
+    "patch_id": "PATCH_PI_RT_CALCULUS_028",
+    "title": "Reduction Trace Equivalence",
+    "purpose": "Define when two reduction traces are equivalent despite differing reduction paths, provided they preserve lawful continuation semantics and identical reduction outcomes."
+  }
+}

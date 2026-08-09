@@ -1,0 +1,15 @@
+{
+  "definition_id": "DEF-D-SOURCE-RELATION-C-001",
+  "name": "SourceRelation_C",
+  "status": "DEFINED_PROVISIONAL",
+  "claim_level": "C1_DEFINED_PROVISIONAL",
+  "signature": "SourceRelation_C(C, r, x_r) : Prop",
+  "definition": "SourceRelation_C(C, r, x_r) iff DeclaredContext(C) and TypedSourceRelation_C(C, r) and WellFormedSourceRelation_C(C, r) and ValidSourceRealization_C(C, r, x_r) and Defined(SourceRelationSem_C(C, r, x_r)) and SourceLocal_C(SourceRelationSem_C(C, r, x_r), C, r, x_r).",
+  "semantic_record": {
+    "constructor": "SourceRelationSem_C(C, r, x_r)",
+    "fields": ["whole_relation_identity", "relation_member", "ordered_role_signature", "conditioning_context", "source_lineage"],
+    "restriction": "Every field must be recoverable exclusively from C, r, and x_r before projection."
+  },
+  "invariants": ["pre_projection_independence", "no_target_leakage", "no_token_circularity", "whole_expression_primacy", "ordered_role_preservation", "relation_member_visibility", "context_indexing", "source_realization_lineage"],
+  "blocked_implications": ["SourceRelation_C does not imply project_w success.", "SourceRelation_C does not imply relation preservation.", "SourceRelation_C does not imply non-collapse.", "SourceRelation_C does not discharge OBL-D-001D or OBL-D-001E."]
+}

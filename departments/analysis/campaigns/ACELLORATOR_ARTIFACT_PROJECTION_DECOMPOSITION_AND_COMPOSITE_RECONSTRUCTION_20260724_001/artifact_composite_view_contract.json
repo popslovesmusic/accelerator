@@ -1,0 +1,68 @@
+{
+  "composite_projection_name": "artifacts_composite_compatibility_view",
+  "subprojection_sources": [
+    "governed_source_inventory",
+    "workspace_artifact_catalog",
+    "generated_artifact_catalog",
+    "runtime_transient_catalog",
+    "historical_artifact_register"
+  ],
+  "row_inclusion_rules": {
+    "default_production_view": "governed_source_inventory UNION workspace_artifact_catalog UNION generated_artifact_catalog UNION historical_artifact_register",
+    "compatibility_view": "default_production_view UNION runtime_transient_catalog",
+    "primary_allocation": "exactly one subprojection per legacy row"
+  },
+  "field_mapping": {
+    "path": "raw path retained; normalized_path derived",
+    "artifact_type": "source or deterministic classifier",
+    "orientation_status": "source/legacy value; unknown otherwise",
+    "authority_scope": "governed source field or explicit unknown",
+    "evidence_confidence": "evidence status only",
+    "created_at": "source timestamp if present",
+    "modified_at": "source/filesystem timestamp if reproducible",
+    "indexed_at": "derived materialization timestamp excluded from determinism identity",
+    "checksum": "content hash if available",
+    "source_hash": "governed source hash if available",
+    "metadata": "bounded metadata only"
+  },
+  "field_precedence": [
+    "governed_source_inventory",
+    "generated_artifact_catalog",
+    "workspace_artifact_catalog",
+    "historical_artifact_register",
+    "runtime_transient_catalog"
+  ],
+  "class_tagging": "mandatory primary_subprojection_id and legacy_class_id",
+  "identity_rule": "subprojection-specific identity; composite key = primary_subprojection_id + stable_identity",
+  "duplicate_resolution": "same composite key with conflicting values blocks materialization and emits conflict report; no silent overwrite",
+  "relationship_rules": [
+    "legacy row id retained only in compatibility mapping",
+    "generated records may reference source records by content/source hash",
+    "transient database sidecars may reference parent database path",
+    "historical records retain legacy provenance"
+  ],
+  "ordering_rule": "primary_subprojection_id, stable_identity, normalized_path, raw path",
+  "transient_policy": "separate by default; compatibility view opt-in",
+  "historical_record_policy": "retain in historical register until explicit human disposition",
+  "provenance_requirements": [
+    "source path",
+    "source hash where available",
+    "classification rule version",
+    "inventory run id",
+    "legacy reference when applicable"
+  ],
+  "behavioral_compatibility_requirements": [
+    "support legacy artifact lookup by raw path",
+    "support normalized path lookup",
+    "support orientation/status filtering",
+    "support joins from claim/evidence and supersession tooling through compatibility mapping"
+  ],
+  "acceptance_tests": [
+    "allocation sum",
+    "identity stability",
+    "class uniqueness",
+    "source precedence",
+    "query compatibility",
+    "repeat-build equality"
+  ]
+}

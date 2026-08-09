@@ -1,0 +1,112 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Registry for residue-balance classes, conservation conditions, dissipation conditions, and saturation/amplification regimes in Phase 3.",
+    "status": "provisional",
+    "last_updated": "2026-05-12"
+  },
+  "residue_balance_classes": [
+    {
+      "class": "strictly_conserved",
+      "meaning": "Total residue measure is exactly preserved under the target operation."
+    },
+    {
+      "class": "conditionally_conserved",
+      "meaning": "Conservation holds only under specific admissibility, orientation, or residue conditions."
+    },
+    {
+      "class": "redistributed_bounded",
+      "meaning": "Residue is moved between loci while maintaining a bounded total measure."
+    },
+    {
+      "class": "dissipative",
+      "meaning": "Residue measure decreases or disperses under iterative update."
+    },
+    {
+      "class": "saturating",
+      "meaning": "Residue accumulation approaches a declared ceiling or upper bound."
+    },
+    {
+      "class": "amplifying",
+      "meaning": "Residue increases non-linearly, potentially leading to divergence."
+    },
+    {
+      "class": "source_sink_balanced",
+      "meaning": "Residue gains and losses are balanced over a declared recurrence cycle."
+    },
+    {
+      "class": "undefined",
+      "meaning": "No formal balance condition has been established for the target system."
+    }
+  ],
+  "balance_entries": [
+    {
+      "entry_id": "RCON-001",
+      "target": "residue_update",
+      "balance_class": "saturating",
+      "stability_implication": "supports_recursive_boundedness",
+      "conditions": [
+        "residue_update has declared upper bound or admissibility ceiling",
+        "amplification slows or halts near saturation",
+        "saturation collapse remains registered as failure mode"
+      ],
+      "failure_modes": [
+        "RBFM-005"
+      ],
+      "proof_status": "scaffolded",
+      "provisional_status": true
+    },
+    {
+      "entry_id": "RCON-002",
+      "target": "NavT",
+      "balance_class": "redistributed_bounded",
+      "stability_implication": "supports_transport_boundedness",
+      "conditions": [
+        "transport may redistribute residue across loci",
+        "total residue measure remains bounded under declared transport domain",
+        "non-conservative transport remains registered as failure mode"
+      ],
+      "failure_modes": [
+        "RBFM-004"
+      ],
+      "proof_status": "scaffolded",
+      "provisional_status": true
+    },
+    {
+      "entry_id": "RCON-003",
+      "target": "MPF-RCV-001",
+      "balance_class": "conditionally_conserved",
+      "stability_implication": "supports_stabilized_recurrence_only_under_conditions",
+      "conditions": [
+        "recursive coupling does not amplify residue faster than pruning/projection suppresses branch growth",
+        "admissibility windows remain non-collapsed",
+        "residue drift remains within equivalence-preserving tolerance"
+      ],
+      "failure_modes": [
+        "RBFM-001",
+        "RBFM-007",
+        "RBFM-009"
+      ],
+      "proof_status": "scaffolded",
+      "provisional_status": true
+    },
+    {
+      "entry_id": "RCON-004",
+      "target": "recursive_convergence",
+      "balance_class": "undefined",
+      "stability_implication": "global_convergence_not_supported",
+      "conditions": [
+        "infinite-iteration residue balance is not globally proven",
+        "residue amplification loop remains active failure mode",
+        "universal conservation is not claimed"
+      ],
+      "failure_modes": [
+        "RBFM-001",
+        "RBFM-007",
+        "RBFM-010"
+      ],
+      "proof_status": "none",
+      "provisional_status": true
+    }
+  ]
+}

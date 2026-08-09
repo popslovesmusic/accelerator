@@ -1,0 +1,50 @@
+{
+  "patch_id": "MPF_T_CLASS_IMPLEMENTATION_ARCHITECTURE_001",
+  "pipeline_stages": {
+    "schemas": {
+      "dependencies": [],
+      "role": "Define common structural types, including realized_closure_trace, T_sig, and classification classes."
+    },
+    "ingest": {
+      "dependencies": ["schemas"],
+      "role": "Load raw closure traces from files or data structures."
+    },
+    "sanitize": {
+      "dependencies": ["schemas", "ingest"],
+      "role": "Clean and filter inputs, stripping forbidden fields (e.g. C_orient, -(i))."
+    },
+    "feature_extract": {
+      "dependencies": ["schemas", "sanitize"],
+      "role": "Compute topological projections (loop count, crossing count, braid index proxies)."
+    },
+    "t_signature": {
+      "dependencies": ["schemas", "feature_extract"],
+      "role": "Build canonical intermediate T_sig (topological signature)."
+    },
+    "classify": {
+      "dependencies": ["schemas", "t_signature"],
+      "role": "Assign classes T0-Tx based strictly on T_sig."
+    },
+    "distribution": {
+      "dependencies": ["schemas", "classify"],
+      "role": "Calculate statistic distributions across runs."
+    },
+    "audit": {
+      "dependencies": ["schemas", "classify", "t_signature"],
+      "role": "Emit verification-friendly decision traces and implementation verification output."
+    },
+    "main": {
+      "dependencies": [
+        "schemas",
+        "ingest",
+        "sanitize",
+        "feature_extract",
+        "t_signature",
+        "classify",
+        "distribution",
+        "audit"
+      ],
+      "role": "Orchestrator executable entry point."
+    }
+  }
+}

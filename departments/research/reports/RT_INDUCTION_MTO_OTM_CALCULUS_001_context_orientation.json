@@ -1,0 +1,57 @@
+{
+  "report_id": "RT_INDUCTION_MTO_OTM_CALCULUS_001_CONTEXT_ORIENTATION_001",
+  "packet_id": "RT_INDUCTION_MTO_OTM_CALCULUS_001",
+  "status": "PROVISIONAL_CONTEXT_AND_ORIENTATION_SEMANTICS",
+  "authority": "NON_CANONICAL_RESEARCH_MEMORY",
+  "canonical_math_modified": false,
+  "context_schema": {
+    "type_id": "MTOContext",
+    "required_fields": [
+      "context_id",
+      "scope",
+      "permitted_aspect_roles",
+      "orientation_domain",
+      "comparison_relation",
+      "admissibility_policy",
+      "trace_policy"
+    ],
+    "optional_fields": ["ordinal_orientation", "higher_order_rt_embedding", "tie_break_policy", "evaluation_parameters"],
+    "role_rule": "An Aspect may be computational, analytical-condition-represented, or both when the context explicitly permits the role.",
+    "rt_embedding_rule": "A ResolvedRT may enter an Aspect role only when higher_order_rt_embedding is explicitly enabled.",
+    "status": "CANDIDATE_ONLY"
+  },
+  "orientation_rules": {
+    "orientation_type": "ContextIndexedOrientation",
+    "equality": "OrientEqual(o1,o2,C) holds only when both resolve to the same canonical orientation reference within C.",
+    "conflict": "OrientConflict(o1,o2,C) holds when the active constraints in C require incompatible orientation assignments.",
+    "incomparability": "OrientIncomparable(o1,o2,C) is returned when C lacks an admissible comparison relation; it is not equality or conflict.",
+    "preservation": "ComparePreservesOrientation(compare,A,C) requires the comparison output to retain every orientation distinction declared relevant by C.",
+    "selection": "No orientation tie-break or canonical selector is defined by this report."
+  },
+  "analytical_view_mapping": {
+    "forward": "View_A : Aspect × Context -> ConditionView",
+    "reverse": "Ref_A : ConditionView × Context -> Option(Aspect)",
+    "computational_input_rule": "A ConditionView cannot enter MTO as an Aspect unless Ref_A resolves it uniquely in the active context.",
+    "nonreversibility": "A non-unique or unavailable Ref_A result is unresolved, not evidence that the view is a distinct Aspect.",
+    "status": "PROVISIONAL_PARTIAL_MAPPING"
+  },
+  "fixture_recheck": {
+    "LAW-FIX-001": "UNRESOLVED_CONTEXT_ORIENTATION_RULE",
+    "LAW-FIX-002": "UNRESOLVED_MULTIPLE_ORIENTATION_COMPARISON",
+    "LAW-FIX-003": "REJECTED_EMPTY_ORGANIZATION",
+    "LAW-FIX-004": "REJECTED_NON_ASPECT_MEMBER",
+    "LAW-FIX-005": "UNRESOLVED_CONTEXT_UNDECLARED",
+    "LAW-FIX-006": "UNRESOLVED_ORIENTATION_MISSING",
+    "LAW-FIX-007": "UNRESOLVED_COMPARISON_UNDEFINED",
+    "LAW-FIX-008": "REJECTED_TRACEABILITY_FAILURE"
+  },
+  "summary": {"candidate_admissible": 0, "rejected": 3, "unresolved": 5, "lawful_established": false},
+  "open_obligations": [
+    "Define concrete orientation domain elements.",
+    "Define comparison relation completeness and preservation.",
+    "Define conflict precedence when multiple constraints apply.",
+    "Define Ref_A uniqueness criteria.",
+    "Define higher-order RT embedding semantics and residue requirements."
+  ],
+  "nonclaims": ["No context is currently canonical.", "No orientation pair is classified equal or conflicting without concrete context data.", "No deterministic MTO selection is established."]
+}

@@ -1,0 +1,63 @@
+{
+  "substitution": [
+    {
+      "name": "replace_E_in_distinct",
+      "status": "PASS",
+      "result": {
+        "kind": "Distinct",
+        "left": {
+          "kind": "ProcessVar",
+          "name": "E3"
+        },
+        "right": {
+          "kind": "ProcessVar",
+          "name": "E2"
+        }
+      }
+    },
+    {
+      "name": "nonmatching_substitution",
+      "status": "PASS",
+      "result": {
+        "kind": "Distinct",
+        "left": {
+          "kind": "ProcessVar",
+          "name": "E2"
+        },
+        "right": {
+          "kind": "ProcessVar",
+          "name": "E3"
+        }
+      }
+    }
+  ],
+  "composition": [
+    {
+      "name": "compatible_context_chain",
+      "status": "PASS",
+      "result": {
+        "status": "COMPOSED",
+        "left": "E",
+        "middle": "E2",
+        "right": "E3",
+        "context": "x"
+      }
+    },
+    {
+      "name": "endpoint_mismatch",
+      "status": "PASS",
+      "result": {
+        "status": "FAIL_ENDPOINT_MISMATCH"
+      }
+    },
+    {
+      "name": "context_mismatch",
+      "status": "PASS",
+      "result": {
+        "status": "FAIL_CONTEXT_MISMATCH"
+      }
+    }
+  ],
+  "status": "PASS",
+  "failure_is_explicit": true
+}

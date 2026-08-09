@@ -1,0 +1,74 @@
+{
+  "gate_id": "VAL-WRG-001",
+  "patch_id": "MPF-PALG-008",
+  "name": "Whole-Relation Validation Gate Registry",
+  "status": "active",
+  "gate_status": "CANDIDATE_VALIDATION_GATE",
+  "purpose": "Reject any process-algebra artifact which treats aspects, projections, or analogies as independent primitives without traceability.",
+  "governance_status": {
+    "theorem_status": "NOT_PROVEN",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL"
+  },
+  "short_rule": "No aspect without source relation.",
+  "required_checks": [
+    {
+      "check_id": "WRG-001",
+      "name": "source_relation_required",
+      "rule": "Every aspect, projection, or domain analogy must declare source_relation."
+    },
+    {
+      "check_id": "WRG-002",
+      "name": "non_separability_acknowledged",
+      "rule": "Every isolated aspect must acknowledge non-separability from the whole relation."
+    },
+    {
+      "check_id": "WRG-003",
+      "name": "primitive_status_false",
+      "rule": "No aspect or projection may set primitive_status=true."
+    },
+    {
+      "check_id": "WRG-004",
+      "name": "loss_accounting_required",
+      "rule": "Every projection must record lost_or_abstracted_features."
+    },
+    {
+      "check_id": "WRG-005",
+      "name": "claim_level_restricted",
+      "rule": "Claim level must not exceed ANALOG_MODEL_ONLY."
+    },
+    {
+      "check_id": "WRG-006",
+      "name": "no_physics_escalation",
+      "rule": "Artifacts must not claim physical derivation, physical proof, or QM/GR unification."
+    },
+    {
+      "check_id": "WRG-007",
+      "name": "no_arithmetic_replacement",
+      "rule": "Artifacts must not claim replacement of standard arithmetic or numeric identity."
+    },
+    {
+      "check_id": "WRG-008",
+      "name": "operator_fragmentation_guard",
+      "rule": "New process-algebra operators require justification against fragmentation."
+    }
+  ],
+  "failure_conditions": [
+    "missing_source_relation",
+    "primitive_status_true_without_promotion_governance",
+    "projection_without_loss_accounting",
+    "claim_level_exceeds_allowed_scope",
+    "physics_unification_claim_detected",
+    "arithmetic_replacement_claim_detected",
+    "new_operator_without_non_fragmentation_review",
+    "aspect_treated_as_standalone_entity"
+  ],
+  "input_targets": [
+    "registry/math/*process_algebra*.json",
+    "registry/math/*projection*.json",
+    "registry/math/*aspect*.json",
+    "docs/math/*process_algebra*.md",
+    "docs/math/*projection*.md",
+    "docs/math/*aspect*.md"
+  ]
+}

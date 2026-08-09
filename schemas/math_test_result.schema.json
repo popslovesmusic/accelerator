@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Math Test Result Provenance Schema",
+  "type": "object",
+  "required": [
+    "artifact_type",
+    "claim_basis",
+    "dedicated_harness_executed",
+    "harness_id",
+    "run_id",
+    "execution_log",
+    "instrumentation_map",
+    "observed_behavior"
+  ],
+  "properties": {
+    "artifact_type": {
+      "type": "string"
+    },
+    "claim_basis": {
+      "type": "string",
+      "enum": [
+        "direct_run",
+        "derived",
+        "review_only",
+        "provisional_inference"
+      ]
+    },
+    "dedicated_harness_executed": {
+      "type": "boolean"
+    },
+    "harness_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "run_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "execution_log": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "instrumentation_map": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "observed_behavior": {
+      "type": "string"
+    },
+    "promotion_status": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": true
+}

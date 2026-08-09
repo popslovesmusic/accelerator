@@ -1,0 +1,130 @@
+{
+  "patch_id": "PATCH_GOVERNANCE_Q0_TYPED_DEPENDENCY_RUNTIME_SNAPSHOT_010",
+  "title": "Q0 Typed Dependency Runtime Snapshot and Remaining Edge Classification",
+  "status": "PARTIAL",
+  "timestamp": "2026-07-14T19:05:00-04:00",
+  "mode": "additive",
+  "depends_on": [
+    "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002",
+    "PATCH_GOVERNANCE_INVENTORY_PROVENANCE_AND_ADDITIVE_AUTHORITY_004",
+    "PATCH_GOVERNANCE_AMBIGUITY_RISK_CLASSIFICATION_AND_REMEDIATION_QUEUE_005",
+    "PATCH_GOVERNANCE_Q0_CLUSTER_SELECTION_AND_RESOLUTION_PACKET_006",
+    "PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007",
+    "PATCH_GOVERNANCE_MISSING_DEPENDENCY_003_CHAIN_REPAIR_008",
+    "PATCH_GOVERNANCE_PATCH_002_TYPED_DEPENDENCY_RUNTIME_009"
+  ],
+  "dependency_requirements": {
+    "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002": {
+      "type": "REQUIRES_EXISTING_EVIDENCE",
+      "reason": "Patch 010 records the runtime state of the registered transitional inventory artifact without promoting its completion status."
+    },
+    "PATCH_GOVERNANCE_INVENTORY_PROVENANCE_AND_ADDITIVE_AUTHORITY_004": {
+      "type": "REQUIRES_EXISTING_EVIDENCE",
+      "reason": "Patch 010 classifies the surviving Q0-chain edges against the additive provenance registration evidence."
+    },
+    "PATCH_GOVERNANCE_AMBIGUITY_RISK_CLASSIFICATION_AND_REMEDIATION_QUEUE_005": {
+      "type": "REQUIRES_EXISTING_EVIDENCE",
+      "reason": "Patch 010 records the remaining queue-linked runtime edges without requiring patch 005 to become terminal authority."
+    },
+    "PATCH_GOVERNANCE_Q0_CLUSTER_SELECTION_AND_RESOLUTION_PACKET_006": {
+      "type": "REQUIRES_EXISTING_EVIDENCE",
+      "reason": "Patch 010 snapshots the Q0 packet edge semantics as implemented in the live runtime."
+    },
+    "PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007": {
+      "type": "REQUIRES_EXISTING_EVIDENCE",
+      "reason": "Patch 010 records the corrected runtime state for patch 007 while preserving its partial/defer classification."
+    },
+    "PATCH_GOVERNANCE_MISSING_DEPENDENCY_003_CHAIN_REPAIR_008": {
+      "type": "REQUIRES_EXISTING_EVIDENCE",
+      "reason": "Patch 010 records the post-repair runtime state for patch 008 without re-opening the historical dependency gap."
+    },
+    "PATCH_GOVERNANCE_PATCH_002_TYPED_DEPENDENCY_RUNTIME_009": {
+      "type": "REQUIRES_EXISTING_EVIDENCE",
+      "reason": "Patch 010 freezes the typed dependency runtime behavior implemented by patch 009 as governed evidence."
+    }
+  },
+  "classification": [
+    "GOVERNANCE_RUNTIME_EVIDENCE",
+    "PATCH_CHAIN_STATE_SNAPSHOT",
+    "EDGE_CLASSIFICATION_INVENTORY",
+    "TRANSITIONAL_STATUS_PRESERVATION"
+  ],
+  "purpose": "Freeze the corrected Q0 typed dependency runtime state as a governed evidence artifact and classify the remaining non-blocking dependency edges without forcing any partial/defer patch to PASS.",
+  "updated_artifacts": [
+    "outputs/governance_inventory/q0_typed_dependency_runtime_snapshot.json",
+    "patches/PATCH_GOVERNANCE_Q0_TYPED_DEPENDENCY_RUNTIME_SNAPSHOT_010.json",
+    "registry/governance/patches/PATCH_GOVERNANCE_Q0_TYPED_DEPENDENCY_RUNTIME_SNAPSHOT_010.json",
+    "tests/governance_validation/test_patch_010_q0_typed_dependency_runtime_snapshot.py",
+    "registry/governance_change_ledger.json",
+    "registry/governance_hash_registry.json"
+  ],
+  "snapshot_findings": {
+    "snapshot_output": "outputs/governance_inventory/q0_typed_dependency_runtime_snapshot.json",
+    "captured_patch_ids": [
+      "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002",
+      "PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007",
+      "PATCH_GOVERNANCE_MISSING_DEPENDENCY_003_CHAIN_REPAIR_008",
+      "PATCH_GOVERNANCE_PATCH_002_TYPED_DEPENDENCY_RUNTIME_009"
+    ],
+    "remaining_edge_chain_patch_ids": [
+      "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002",
+      "PATCH_GOVERNANCE_INVENTORY_PROVENANCE_AND_ADDITIVE_AUTHORITY_004",
+      "PATCH_GOVERNANCE_AMBIGUITY_RISK_CLASSIFICATION_AND_REMEDIATION_QUEUE_005",
+      "PATCH_GOVERNANCE_Q0_CLUSTER_SELECTION_AND_RESOLUTION_PACKET_006",
+      "PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007",
+      "PATCH_GOVERNANCE_MISSING_DEPENDENCY_003_CHAIN_REPAIR_008",
+      "PATCH_GOVERNANCE_PATCH_002_TYPED_DEPENDENCY_RUNTIME_009"
+    ],
+    "runtime_blocking_edges": 0,
+    "dominant_remaining_cause": "SELF_STATUS_PARTIAL_TRANSITIONAL_EVIDENCE_OR_INCOMPLETE_GOVERNANCE_WORK",
+    "patch_002_status_preserved": "PARTIAL",
+    "patch_002_authority_effect_preserved": "NONE"
+  },
+  "validation_policy": {
+    "full_project_validation": "SUSPENDED_PENDING_VALIDATOR_DEPARTMENT_COMPLETION",
+    "allowed_checks": [
+      "targeted_patch_chain_runtime_snapshot",
+      "targeted_edge_classification_tests",
+      "json_parse_checks",
+      "compile",
+      "git_diff_check",
+      "git_status"
+    ]
+  },
+  "validation_results": {
+    "targeted_patch_chain_runtime_snapshot": {
+      "status": "pass",
+      "checked_patch_ids": [
+        "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002",
+        "PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007",
+        "PATCH_GOVERNANCE_MISSING_DEPENDENCY_003_CHAIN_REPAIR_008",
+        "PATCH_GOVERNANCE_PATCH_002_TYPED_DEPENDENCY_RUNTIME_009"
+      ],
+      "runtime_blocking_edges": 0,
+      "partial_defer_preserved": true
+    },
+    "targeted_edge_classification_tests": {
+      "status": "pass",
+      "test_files": [
+        "tests/governance_validation/test_patch_009_typed_dependency_runtime.py",
+        "tests/governance_validation/test_patch_010_q0_typed_dependency_runtime_snapshot.py"
+      ],
+      "passed": 5,
+      "failed": 0
+    },
+    "compileall": {
+      "status": "pass"
+    },
+    "git_diff_check": {
+      "status": "pass",
+      "warnings": [
+        "CRLF normalization warnings were reported by Git without content-level diff errors."
+      ]
+    },
+    "git_status": {
+      "status": "pass",
+      "scope": "patch_local_governance_runtime_snapshot_worktree_only"
+    }
+  },
+  "unrelated_changes_preserved": true
+}

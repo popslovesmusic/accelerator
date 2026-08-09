@@ -1,0 +1,20 @@
+{
+  "experiment_id": "G3-REF-2026-05-10-NEIGHBORHOOD",
+  "intent": "validate_gap_3_neighborhood",
+  "seeds": [1201, 1302, 1403, 1504, 1605],
+  "components": [
+    {
+      "tool": "graph_dynamics_sim_v1_cpp",
+      "base_config": {
+        "n_nodes": 500,
+        "steps": 100,
+        "K": 1.2
+      },
+      "variations": [
+        {"name": "high_coupling", "config_override": {"theta_re": 0.1}},
+        {"name": "low_coupling", "config_override": {"theta_re": 0.8}}
+      ],
+      "observable": "avg_degree"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "registry_id": "PCD_O_COMPOSITION_ASSOCIATIVITY_REGISTRY",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "associativity_case_id",
+      "operator_sequence",
+      "left_grouping",
+      "right_grouping",
+      "associativity_status",
+      "required_conditions",
+      "failure_modes",
+      "claim_limits"
+    ]
+  },
+  "rules": [
+    {
+      "associativity_case_id": "O-ASSOC-001",
+      "operator_sequence": [
+        "O_a",
+        "O_b",
+        "O_c"
+      ],
+      "left_grouping": "(O_a ∘ O_b) ∘ O_c",
+      "right_grouping": "O_a ∘ (O_b ∘ O_c)",
+      "associativity_status": "conditional",
+      "required_conditions": [
+        "all intermediate L compositions remain admissible or legally recoupled",
+        "Q compositions preserve Ref(.) equivalence or cross declared legal boundaries",
+        "no unresolved degeneracy collapse occurs",
+        "residue context is consistent across both groupings"
+      ],
+      "failure_modes": [
+        "blocked_L_composition",
+        "forbidden_Q_transition",
+        "untracked_Ref_equivalence_change",
+        "inconsistent_residue_context",
+        "memoryless_recoupling"
+      ],
+      "claim_limits": [
+        "O composition is not globally associative by default",
+        "associativity claims must declare admissibility and residue context"
+      ]
+    }
+  ],
+  "grouping_equivalence_rules": [
+    {
+      "name": "o_grouping_equivalence_rule_v1",
+      "statement": "Two O-composition groupings are equivalent only if they produce the same admissibility status, Ref(.) equivalence class, transition legality, and residue update eligibility."
+    }
+  ]
+}

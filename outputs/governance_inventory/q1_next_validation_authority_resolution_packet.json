@@ -1,0 +1,75 @@
+{
+  "schema_id": "q1_next_validation_authority_resolution_packet_v1",
+  "generated_at": "2026-07-15T14:10:00-04:00",
+  "selected_q1_item_ids": [
+    "Q1-VAL-008"
+  ],
+  "selected_global_ambiguity_ids": [
+    "AMB-GOV-SURF-1032"
+  ],
+  "exact_authority_role_under_dispute": "Whether tests/test_governed_context_capsule_v1.py is a bounded SUPPORTING_VALIDATOR for governed context capsule contract checks rather than an independent validation invocation or terminal validation reduction authority.",
+  "all_live_candidate_surfaces": [
+    "tests/test_governed_context_capsule_v1.py",
+    "schemas/governed_context_capsule_v1.schema.json",
+    "scripts/query_governance.py"
+  ],
+  "current_runtime_behavior": {
+    "tests/test_governed_context_capsule_v1.py": "Imports scripts.query_governance, checks the governed context capsule schema contract, verifies cache behavior, and emits pass/fail test evidence only.",
+    "schemas/governed_context_capsule_v1.schema.json": "Defines the bounded payload contract that the test asserts.",
+    "scripts/query_governance.py": "Builds and validates governed context capsules but does not itself classify the test as a terminal validator."
+  },
+  "registered_authority_evidence": [
+    "outputs/governance_inventory/governance_surface_inventory.json marks tests/test_governed_context_capsule_v1.py as EXPLICIT_NON_AUTHORITATIVE TEST.",
+    "outputs/governance_inventory/q1_validation_authority_item_inventory.json records the item as a bounded test evidence producer tied to scripts.query_governance and the governed context capsule schema.",
+    "tests/test_governed_context_capsule_v1.py shows only bounded schema/contract assertions and no full-validation or terminal reduction entry point."
+  ],
+  "relationships": {
+    "canonical_validation_invocation": "No direct relationship beyond being an auxiliary test surface. The canonical invocation authority remains scripts/global_validate.py as proven by patch 065.",
+    "terminal_validation_reduction": "No direct relationship. The test emits ordinary test pass/fail evidence and does not reduce global validation status.",
+    "generated_evidence": [
+      {
+        "item_id": "Q1-VAL-007",
+        "relationship": "Compiled pytest bytecode residue generated from the selected test surface."
+      },
+      {
+        "item_id": "Q1-VAL-009",
+        "relationship": "Compiled Python bytecode residue generated from the selected test surface."
+      }
+    ]
+  },
+  "facts_already_proven": [
+    "The surface is executable and currently live.",
+    "The surface is explicitly non-authoritative in the governance inventory.",
+    "The test scope is bounded to governed context capsule schema, contract, and cache behavior.",
+    "No evidence shows the test invoking full project validation or terminal validation reduction."
+  ],
+  "facts_still_missing": [
+    "An explicit governed declaration naming the surface as SUPPORTING_VALIDATOR or equivalent bounded validator scope.",
+    "A validator-department rule that states whether this class of test is merely auxiliary evidence or a recognized supporting validator.",
+    "A final disposition rule for the pyc residues after the supporting-validator scope is resolved."
+  ],
+  "candidate_resolution_modes": [
+    "BOUND_SUPPORTING_VALIDATOR_SCOPE",
+    "PROVE_EXISTING_NON_TERMINAL_ROLE",
+    "DEFER_PENDING_VALIDATOR_DEPARTMENT_COMPLETION"
+  ],
+  "non_selected_related_items": [
+    {
+      "item_id": "Q1-VAL-007",
+      "state": "OBSOLETE_TEST_OR_CONTEXT_RESIDUE",
+      "reason_not_selected_now": "Residue only; included here as generated-evidence context but excluded from the next live authority-resolution patch."
+    },
+    {
+      "item_id": "Q1-VAL-009",
+      "state": "OBSOLETE_TEST_OR_CONTEXT_RESIDUE",
+      "reason_not_selected_now": "Residue only; included here as generated-evidence context but excluded from the next live authority-resolution patch."
+    }
+  ],
+  "patch_constraints": {
+    "must_not_change_validation_invocation_authority": true,
+    "must_not_change_terminal_validation_reduction_authority": true,
+    "must_not_promote_generated_evidence": true,
+    "must_not_run_full_project_validation": true,
+    "full_project_validation_status": "SUSPENDED_PENDING_VALIDATOR_DEPARTMENT_COMPLETION"
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "registry_id": "PCD_ADMISSIBILITY_COMPOSITION_REGISTRY",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "composition_id",
+      "operators",
+      "source_space",
+      "target_space",
+      "composition_rule",
+      "identity_condition",
+      "closure_condition",
+      "failure_condition",
+      "claim_limits"
+    ]
+  },
+  "compositions": [
+    {
+      "composition_id": "ACOMP-001",
+      "operators": ["NavT", "Pi_A"],
+      "source_space": "orientation_space",
+      "target_space": "transition_space",
+      "composition_rule": "NavT contributions must be projected through Π_A before contributing to admissible transition structure.",
+      "identity_condition": "Neutral/no-update contribution if empty projection.",
+      "closure_condition": "Π_A(NavT(...)) remains inside the active admissibility domain.",
+      "failure_condition": "Projected contribution is empty, unstable, or forbidden.",
+      "claim_limits": "L2 Theoretical"
+    },
+    {
+      "composition_id": "ACOMP-002",
+      "operators": ["Pi_A", "gate"],
+      "source_space": "transition_space",
+      "target_space": "selection_rule",
+      "composition_rule": "The gate evaluates admissibility-projected transition candidates under the active constraint context.",
+      "identity_condition": "N/A",
+      "closure_condition": "gate(Π_A(candidate)) returns admissible.",
+      "failure_condition": "gate returns unstable or forbidden.",
+      "claim_limits": "L2 Theoretical"
+    },
+    {
+      "composition_id": "ACOMP-003",
+      "operators": ["Delta", "Psi", "residue"],
+      "source_space": "transition_space",
+      "target_space": "constraint_memory_space",
+      "composition_rule": "Only admissible transitions may be written into residue through Ψ.",
+      "identity_condition": "Residue context identity if no admissible transition occurs.",
+      "closure_condition": "Ψ updates R without violating residue-context consistency.",
+      "failure_condition": "memoryless update, passive residue agency, or missing admissibility context.",
+      "claim_limits": "L2 Theoretical"
+    }
+  ],
+  "identity_rules": [
+    {
+      "name": "empty_projection_identity_v1",
+      "statement": "If no admissible component survives Π_A, the update contribution is the neutral/no-update contribution for that chain."
+    },
+    {
+      "name": "residue_context_identity_v1",
+      "statement": "If residue context is unchanged and no admissible transition occurs, Ψ must not create new residue inscription except through explicit decay/saturation rules."
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "version": "1.1",
+    "description": "Registry mapping formal objects/operators to observable structures.",
+    "source_relation": "(E!=0) <=>R delta(E>0)",
+    "non_separability_acknowledged": true,
+    "status": "provisional",
+    "last_updated": "2026-06-18T17:17:49-04:00"
+  },
+  "projections": [
+    {
+      "id": "PROJ-001",
+      "source": "process_state",
+      "target": "order_parameter",
+      "mapping_type": "projection",
+      "information_retained": [
+        "coherence",
+        "orientation"
+      ],
+      "information_lost": [
+        "local residue",
+        "exact delta history"
+      ],
+      "provisional_status": true
+    },
+    {
+      "id": "PROJ-GEO-001",
+      "source": "Topology_app",
+      "target": "Geometry_app",
+      "mapping_type": "projection",
+      "operator": "Pi_geo",
+      "trace_map": {
+        "operator": "tau_geo",
+        "formal_object_id": "OBJ-GEO-TRACE-001",
+        "symbol": "tau_geo",
+        "form": "tau_geo : Geometry_app -> Topology_app_trace",
+        "purpose": "Recoverability check: verify that required invariant labels (orientation class, closure identity) of topology-origin T remain readable from Pi_geo(T).",
+        "critical_test": "tau_geo(Pi_geo(T)) preserves required invariant labels of T",
+        "failure_reading": "If tau_geo fails to recover any required label, Pi_geo is inadmissible for that input class."
+      },
+      "information_retained": [
+        "distinction_class",
+        "admissibility_status",
+        "orientation_traceability",
+        "closure_traceability"
+      ],
+      "information_lost": [
+        "full whole-relation simultaneity",
+        "residue-history detail unless separately preserved",
+        "non-projected aspect coupling"
+      ],
+      "legality_prerequisites": [
+        "L099",
+        "L100",
+        "GEO_PROJECTION_VALIDATION_001"
+      ],
+      "sub_obligation_bindings": [
+        {"id": "PO-GEO-001A", "invariant": "distinction", "check": "D_topology(A|B) > 0 implies D_geometry(Pi_geo(A)|Pi_geo(B)) > 0"},
+        {"id": "PO-GEO-001B", "invariant": "admissibility", "check": "P_adm(T)=1 implies P_adm(Pi_geo(T))=1"},
+        {"id": "PO-GEO-001C", "invariant": "orientation_trace", "check": "tau_geo(Pi_geo(T)) retains orientation class label of T"},
+        {"id": "PO-GEO-001D", "invariant": "closure_trace", "check": "tau_geo(Pi_geo(T)) retains closure identity; tau_geo injective w.r.t. closure equivalence"}
+      ],
+      "governance_status": "RESOLVED_L2",
+      "provisional_status": true,
+      "patch_applied": "PO_GEO_001_SYMBOLIC_CHECK_PREP_001",
+      "patch_date": "2026-06-18T17:17:49-04:00"
+    }
+  ]
+}

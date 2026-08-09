@@ -1,0 +1,47 @@
+{
+  "registry_id": "PCD_MT_LAW_A_BASIN_GEOMETRY_REGISTRY",
+  "version": "1.0.0",
+  "description": "Geometric and topological registry for MT-LAW-A admissibility basins and destabilization surfaces.",
+  "governance_status": "PROVISIONAL_GEOMETRY_SERIES",
+  "surfaces": [
+    {
+      "id": "SURF-SC-001",
+      "name": "Cost-to-Destabilize (S_C) Surface",
+      "dimensions": [
+        "s (Forcing)",
+        "kappa (Coupling)"
+      ],
+      "topology_type": "Saturation_Plane",
+      "critical_transition_points": [
+        {
+          "point": {"s": 0.40},
+          "transition": "Global_Saturation_Avalanche",
+          "signature": "active_fraction -> 1.0"
+        },
+        {
+          "point": {"s": 0.00},
+          "transition": "Extinction_Collapse",
+          "signature": "active_fraction -> 0.0"
+        }
+      ],
+      "curvature_notes": "Zero curvature with respect to kappa for kappa > 0.1. Sharp first-order transition at s=0.40."
+    }
+  ],
+  "basins": [
+    {
+      "id": "BASIN-PERSIST-001",
+      "name": "Metastable Persistence Basin",
+      "bounds": {
+        "s": [0.01, 0.39],
+        "kappa": [0.1, 1.0]
+      },
+      "stability_status": "METASTABLE",
+      "reference_mechanism": "structural_box_sim_cpp"
+    }
+  ],
+  "provenance": {
+    "patch_id": "MT-LAW-A-TS4-012",
+    "series": "MT-LAW-A-TS4-THRESHOLD-GEOMETRY-012-020",
+    "evidence_path": "results/2026-05-17_run02_MT-LAW-A_TS4_Threshold_Geometry_Mapping/"
+  }
+}

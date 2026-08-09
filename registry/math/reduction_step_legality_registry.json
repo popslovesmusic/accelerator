@@ -1,0 +1,67 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Registry for reduction-step legality and preservation conditions in Phase 3.",
+    "status": "provisional",
+    "last_updated": "2026-05-12"
+  },
+  "legality_conditions": [
+    {
+      "condition_id": "LC-001",
+      "name": "participation_preservation",
+      "description": "Reduction must not eliminate participating loci required for the next operator application."
+    },
+    {
+      "condition_id": "LC-002",
+      "name": "residue_legality_preservation",
+      "description": "Reduction must preserve residue-state equivalence and conditioning roles."
+    },
+    {
+      "condition_id": "LC-003",
+      "name": "non_null_continuation",
+      "description": "Reduction must ensure that continuation candidate sets remain non-empty where existence is required."
+    },
+    {
+      "condition_id": "LC-004",
+      "name": "orientation_compatibility",
+      "description": "Reduction must maintain alignment with the local orientation frame or minimization rules."
+    },
+    {
+      "condition_id": "LC-005",
+      "name": "branch_pruning_stability",
+      "description": "Reduction must remain within declared branch-width and pruning bounds."
+    }
+  ],
+  "legality_entries": [
+    {
+      "entry_id": "RSL-RC002-S01",
+      "chain_id": "RC-002",
+      "step_id": "STEP-01",
+      "legality_status": "symbolic_verified",
+      "satisfied_conditions": [
+        "LC-001",
+        "LC-004"
+      ],
+      "evidence_links": [
+        "EN-001",
+        "PA-MT002-001"
+      ],
+      "provisional_status": true
+    },
+    {
+      "entry_id": "RSL-RC002-S02",
+      "chain_id": "RC-002",
+      "step_id": "STEP-02",
+      "legality_status": "symbolic_verified",
+      "satisfied_conditions": [
+        "LC-003",
+        "LC-005"
+      ],
+      "evidence_links": [
+        "SRC-003",
+        "PA-MT003-001"
+      ],
+      "provisional_status": true
+    }
+  ]
+}

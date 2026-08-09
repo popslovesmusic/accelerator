@@ -1,0 +1,83 @@
+{
+  "patch_id": "PCD_NON_LOCAL_TRANSPORT_ALGEBRA_V1",
+  "priority": "ACTIVE_FORMAL_REASONING",
+  "intent": "Define the first algebraic rules for non-local NavT (Transport), including path-composition, topological distance dependence, and non-local residual thresholding.",
+  "operations": [
+    {
+      "op": "update_navt_composition_registry",
+      "target_file": "registry/navt_composition_registry.json",
+      "updates": {
+        "non_local_composition": [
+          {
+            "expression": "NavT_path(i, ..., k) = NavT(i,j) ∘ NavT(j, ..., k)",
+            "result": "composed_transport_chain",
+            "property": "path_composition",
+            "condition": "recursive composition along a sequence of coupled neighbors",
+            "failure_mode": "path_discontinuity"
+          }
+        ],
+        "non_local_residual_rules": [
+          {
+            "name": "path_residual_accumulation_rule_v1",
+            "statement": "The path residual delta_T_path = (NavT(i,j) ∘ NavT(j,k)) - NavT(i,k) accumulates along the chain; stability requires the total residual to remain bounded by a topology-dependent threshold Tau_T(path).",
+            "failure_behavior": "mark_path_unstable"
+          }
+        ]
+      }
+    },
+    {
+      "op": "add_non_local_navt_guardrails",
+      "target_file": "registry/lexicon_gap_queue.json",
+      "rules": [
+        {
+          "name": "no_non_local_transport_without_path_validity_v1",
+          "statement": "Non-local transport claims must show an admissible chain of local coupling neighbors and a bounded total transport residual.",
+          "failure_behavior": "rewrite_as_provisional_propagation_claim"
+        },
+        {
+          "name": "no_instantaneous_non_local_coupling_v1",
+          "statement": "Non-local interaction must propagate through intermediate NavT composition unless a verified non-local mechanism (e.g., long-range graph edge) is explicitly declared.",
+          "failure_behavior": "route_to_topology_review"
+        }
+      ]
+    },
+    {
+      "op": "update_gap_dependency_graph",
+      "target_file": "registry/gap_dependency_graph.json",
+      "gap_id": "GAP_2_transport_structure_for_propagation",
+      "updates": {
+        "closure_progress": [
+          "path-composition rule for non-local NavT defined",
+          "path residual accumulation rule defined",
+          "intermediate-neighbor propagation mandate defined"
+        ],
+        "still_blocking": [
+          "explicit threshold Tau_T per mechanism class",
+          "mapping to specific ODE/Relational curvature metrics",
+          "simulation verification of long-path consistency"
+        ]
+      }
+    },
+    {
+      "op": "update_operator_algebra_closure_registry",
+      "operator_id": "NavT",
+      "updates": {
+        "closure_status": "PARTIAL_NON_LOCAL_TRANSPORT_ALGEBRA_DEFINED",
+        "closed_items": [
+          "non-local path composition rule",
+          "path residual accumulation logic",
+          "non-local coupling guardrails"
+        ],
+        "remaining_gaps": [
+          "explicit threshold values per model",
+          "formal proof of path invariance under admissible re-routing",
+          "associativity proof for complex graph topologies"
+        ]
+      }
+    },
+    {
+      "op": "emit_report",
+      "output_path": "registry/reports/non_local_transport_algebra_v1_report.json"
+    }
+  ]
+}

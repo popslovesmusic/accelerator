@@ -1,0 +1,190 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_042",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-06",
+  "type": "governance_patch",
+  "artifact_type": "governance_patch",
+  "title": "Fixed-Point Correctness Theorem",
+  "priority": "HIGH",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_041"
+  ],
+  "mode": "additive",
+  "basis": {
+    "source_patches": [
+      "PATCH_PI_RT_CALCULUS_041"
+    ],
+    "source_surfaces": [
+      "docs/textbook/mono_process_textbook_complete.md",
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_041.json"
+    ],
+    "scope": "Introduce bounded fixed-point correctness conditions for admissible continuation expressions. This patch classifies correctness only after admissibility and bounded semantic preservation, without asserting uniqueness or universal existence for all continuation classes."
+  },
+  "core_rule": {
+    "statement": "AdmFix(C) is classified as CorrectFix(C) only when EvalPhi(C) preserves the continuation semantics of Fix(C) under every declared bounded application of Phi; bounded fixed-point correctness remains diagnostic, and RT_core remains unchanged."
+  },
+  "purpose": "Introduce bounded fixed-point correctness conditions for admissible continuation expressions. This patch distinguishes correctness classification from admissibility while leaving uniqueness, universal existence, and recovery deferred."
+  ,
+  "canonical_claims": [
+    {
+      "id": "CLAIM_042_001",
+      "statement": "Fixed-point correctness is bounded and applies only after admissibility.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_042_002",
+      "statement": "EvalPhi(C) must preserve continuation semantics under declared bounded applications of Phi.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_042_003",
+      "statement": "FailCorrectFix(C) classifies correctness failure without asserting uniqueness or universal existence.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_042_004",
+      "statement": "Correctness remains subordinate to admissibility and bounded evaluation.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_042_005",
+      "statement": "RT_core remains unchanged.",
+      "status": "canonical"
+    }
+  ],
+  "scope": {
+    "adds": [
+      "Fixed-point correctness theorem",
+      "Fixed-point correctness classification",
+      "Fixed-point correctness failure",
+      "Bounded continuation-semantic preservation",
+      "Admissible fixed-point correctness"
+    ],
+    "does_not_add": [
+      "Fixed-point uniqueness theorem",
+      "Universal fixed-point existence",
+      "Recovery operator",
+      "sigma_RT selector",
+      "Operational regime execution",
+      "RT_core change"
+    ]
+  },
+  "formal_objects": [
+    {
+      "id": "FIX_CORRECTNESS_042",
+      "symbol": "CorrectFix(C)",
+      "name": "Fixed-Point Correctness",
+      "definition": "The correctness classification assigned to an admissible fixed point that satisfies the declared continuation semantics under bounded repeated applications of the declared fixed-point operator."
+    },
+    {
+      "id": "FIX_CORRECTNESS_THEOREM_042",
+      "symbol": "ThmCorrectFix",
+      "name": "Fixed-Point Correctness Theorem",
+      "definition": "An admissible fixed point is correct when bounded evaluation preserves continuation semantics under repeated applications of the declared fixed-point operator."
+    },
+    {
+      "id": "FIX_CORRECTNESS_FAILURE_042",
+      "symbol": "FailCorrectFix(C)",
+      "name": "Fixed-Point Correctness Failure",
+      "definition": "The classified failure state produced when an admissible fixed point fails correctness verification."
+    }
+  ],
+  "correctness_rule": {
+    "id": "FIX_CORRECTNESS_RULE_042",
+    "statement": "AdmFix(C) is classified as CorrectFix(C) only when EvalPhi(C) preserves the continuation semantics of Fix(C) under every declared bounded application of Phi."
+  },
+  "theorem": {
+    "id": "FIX_CORRECTNESS_THEOREM_042",
+    "statement": "For every admissible continuation fixed point AdmFix(C), if bounded evaluation preserves the continuation semantics under repeated applications of Phi, then CorrectFix(C) holds."
+  },
+  "failure_conditions": [
+    "Semantic preservation fails under bounded evaluation.",
+    "Repeated declared applications of Phi alter the continuation semantics.",
+    "The continuation exits the declared admissible evaluation regime."
+  ],
+  "non_claims": [
+    "Does not assert uniqueness.",
+    "Does not assert universal fixed-point existence.",
+    "Does not assert every admissible fixed point is unique.",
+    "Does not introduce recovery.",
+    "Does not introduce sigma_RT.",
+    "Does not alter RT_core."
+  ],
+  "deferred_to_future_patches": {
+    "043": "Fixed-Point Uniqueness Conditions",
+    "044": "Recursive / Fixed-Point Interaction",
+    "045": "RT Calculus Specification v1.0 Consolidation"
+  },
+  "governance_notes": [
+    "Correctness is established only after admissibility.",
+    "Uniqueness remains an independent property.",
+    "Correctness does not imply existence or uniqueness."
+  ],
+  "textbook_changes": {
+    "chapter": "2.3.24",
+    "title": "Fixed-Point Correctness Theorem",
+    "summary": [
+      "Introduce CorrectFix(C).",
+      "Define ThmCorrectFix.",
+      "Define FailCorrectFix(C).",
+      "State bounded correctness as subordinate to admissibility.",
+      "Keep uniqueness and universal existence deferred."
+    ]
+  },
+  "registry_updates": {
+    "formal_object_registry": [
+      "FIX_CORRECTNESS_042",
+      "FIX_CORRECTNESS_THEOREM_042",
+      "FIX_CORRECTNESS_FAILURE_042"
+    ],
+    "math_source_registry": [
+      "PATCH_PI_RT_CALCULUS_042"
+    ],
+    "lexicon_gap_queue": [
+      "fixed_point_correctness",
+      "fixed_point_correctness_theorem",
+      "fixed_point_correctness_failure"
+    ]
+  },
+  "rt_core_impact": {
+    "modified": false,
+    "statement": "RT := [(â„°â‰ 0) â‡”R Î´Î±(â„°>0)] remains unchanged."
+  },
+  "validation_requirements": [
+    "Patch record parses cleanly.",
+    "Patch depends on PATCH_PI_RT_CALCULUS_041.",
+    "CorrectFix(C) applies only after AdmFix(C).",
+    "EvalPhi(C) preserves continuation semantics under bounded repeated applications of Phi.",
+    "No uniqueness or universal existence theorem is claimed.",
+    "RT_core remains unchanged."
+  ],
+  "required_repo_changes": [
+    "Update docs/textbook/mono_process_textbook_complete.md with the fixed-point correctness theorem section and appendix entries.",
+    "Add docs/theory/foundational/5_03_26 unity/math/notes/0004_fixed_point_correctness_theorem.md as the additive theorem note.",
+    "Update registry/formal_object_registry.json with the fixed-point correctness formal objects.",
+    "Update registry/math_source_registry.json with the patch source entry.",
+    "Relock registry/math_hashes.json after the source registry update.",
+    "Update registry/lexicon_gap_queue.json with the fixed-point correctness terms.",
+    "Update registry/registry/lexicon_gap_queue.json with the mirrored fixed-point correctness terms.",
+    "Update registry/governance_change_ledger.json with the corresponding governance ledger entry."
+  ],
+  "target_files": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "docs/theory/foundational/5_03_26 unity/math/notes/0004_fixed_point_correctness_theorem.md",
+    "registry/formal_object_registry.json",
+    "registry/math_source_registry.json",
+    "registry/math_hashes.json",
+    "registry/lexicon_gap_queue.json",
+    "registry/registry/lexicon_gap_queue.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_042.json"
+  ],
+  "success_criteria": {
+    "fixed_point_correctness_documented": true,
+    "fixed_point_prereqs_registered": true,
+    "fixed_point_failure_registered": true,
+    "boundedness_preserved": true,
+    "rt_core_unchanged": true
+  }
+}

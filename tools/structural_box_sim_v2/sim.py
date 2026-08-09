@@ -289,8 +289,29 @@ def step_fields(
     return next_epsilon, next_rho, next_residue
 
 
+def check_stability(grid: GridConfig, model: ModelConfig) -> list[str]:
+    warnings = []
+    d_max = max(model.D_epsilon, model.D_rho, model.D_R)
+    if d_max > 0:
+        cfl_limit = (grid.dx * grid.dx) / (2.0 * d_max)
+        if grid.dt > 0.5 * cfl_limit:
+            warnings.append(f"STABILITY WARNING: dt ({grid.dt:.2e}) is approaching or exceeding 50% of the diffusion stability limit ({cfl_limit:.2e}).")
+    
+    linear_coeffs = [model.a, model.alpha, model.lambda_R, model.kappa]
+    max_coeff = max(linear_coeffs)
+    if grid.dt * max_coeff > 0.1:
+        warnings.append(f"STABILITY WARNING: dt * max(linear_coeffs) = {grid.dt * max_coeff:.2f} > 0.1. Stiffness risk detected.")
+        
+    return warnings
+
+
 def simulate(config: RunConfig) -> dict[str, Any]:
     validate_run_config(config)
+    
+    stability_warnings = check_stability(config.grid, config.model)
+    for w in stability_warnings:
+        print(w)
+        
     rng = np.random.default_rng(config.initial_condition.seed)
     epsilon = build_field(
         config.grid,
@@ -371,6 +392,7 @@ def simulate(config: RunConfig) -> dict[str, Any]:
         "residue_snapshots": np.stack(residue_snapshots, axis=0),
         "box_analysis": box_analysis,
         "first_box_violation": first_box_violation,
+        "stability_warnings": stability_warnings,
     }
 
 
@@ -389,6 +411,7 @@ def write_outputs(result: dict[str, Any], output_dir: Path) -> None:
         "config": result["config"],
         "box_analysis": result["box_analysis"],
         "first_box_violation": result["first_box_violation"],
+        "stability_warnings": result["stability_warnings"],
         "final": dict(result["diagnostics"][-1], saved_steps=len(result["diagnostics"])),
     }
     (output_dir / "summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")

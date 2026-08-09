@@ -1,0 +1,84 @@
+{
+  "registry_id": "PCD_MSV_001_EXECUTION_PLAN",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "execution_id",
+      "depends_on",
+      "configs",
+      "mechanism_classes",
+      "tools",
+      "seed_sets",
+      "falsification_vectors",
+      "output_root",
+      "validation_script",
+      "success_gate",
+      "failure_gate"
+    ]
+  },
+  "plans": [
+    {
+      "execution_id": "MSV-001-FULL-EXECUTION-V1",
+      "depends_on": [
+        "PCD_MSV_001_DRY_RUN_HARNESS_V1",
+        "dry_run_result_pass"
+      ],
+      "configs": [
+        "experiments/msv_001/configs/msv_001_graph_dynamics_reference_v1.json",
+        "experiments/msv_001/configs/msv_001_ca_admissibility_reference_v1.json"
+      ],
+      "mechanism_classes": [
+        "graph_dynamics",
+        "cellular_automata"
+      ],
+      "tools": [
+        "graph_dynamics_sim_v1_cpp",
+        "ca_admissibility_sim_v1_cpp"
+      ],
+      "seed_sets": {
+        "graph_dynamics": [
+          101,
+          202,
+          303
+        ],
+        "cellular_automata": [
+          404,
+          505,
+          606
+        ]
+      },
+      "falsification_vectors": [
+        "FV-1_shuffle_or_zero_mismatch_control",
+        "FV-2_boundary_collapse",
+        "FV-3_primitive_suppression_ablation",
+        "FV-4_adversarial_initialization"
+      ],
+      "output_root": "results/msv_001/full_execution_v1/",
+      "validation_script": "scripts/validate_msv_001_run.py",
+      "success_gate": {
+        "minimum_mechanism_classes": 2,
+        "minimum_seeds_per_mechanism": 3,
+        "required_validator_result": "PASS_TS4_ELIGIBLE",
+        "required_outputs": [
+          "run_metadata.json",
+          "config_snapshot.json",
+          "summary.json",
+          "metrics.json",
+          "operator_trace.json",
+          "minimizer_switch_trace.csv",
+          "ref_equivalence_trace.csv",
+          "recoupling_trace.csv",
+          "falsification_report.json",
+          "provenance_manifest.json"
+        ]
+      },
+      "failure_gate": {
+        "missing_mechanism_class": "downgrade_to_single_mechanism_probe",
+        "missing_seed_count": "downgrade_to_exploratory_probe",
+        "validator_failure": "block_TS4_promotion",
+        "missing_falsification": "block_TS4_promotion",
+        "missing_provenance": "block_claim_support"
+      }
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "campaign_id": "EC-20260517-SIGNALSCOPE-001",
+  "tool_family": "signal_scope",
+  "prediction_binding_id": "PB-002-COHERENCE",
+  "dataset_ids": ["DS-001-SYNTHETIC-STOCHASTIC"],
+  "tools": {
+    "cpp": "signal_scope_phase_continuation_engine_cpp",
+    "python": "signal_scope_phase_continuation_engine"
+  },
+  "metrics": ["phase_locking_value", "coherence_mean", "residue_trace_similarity"],
+  "tolerances": {
+    "absolute": 1e-6,
+    "relative": 1e-4
+  },
+  "falsification_protocols": [
+    "shuffle_control",
+    "parameter_ablation"
+  ],
+  "governance_boilerplate": {
+    "source_relation": "(E≠0) ⇔R δ(E>0)",
+    "non_separability_acknowledged": true,
+    "required_statement": "Observed signatures are interpreted only through restricted local analog structure."
+  }
+}

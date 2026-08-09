@@ -1,0 +1,81 @@
+{
+  "patch_id": "PATCH_ACCELERATOR_DETERMINISTIC_ROUTING_AND_CANDIDATE_BOUNDING_054",
+  "status": "PASS",
+  "observed_at": "2026-07-12",
+  "summary": "Equivalent governed requests now converge before cache lookup, candidate sets are finite and deterministically ordered, and zero/single/dominant candidate cases resolve without inference.",
+  "routing": {
+    "orientation_retrieval": {
+      "route_status": "ROUTED",
+      "operation_code": "artifact_retrieval",
+      "candidate_policy_id": "governed_context_artifact_candidates_v1"
+    },
+    "memory_retrieval": {
+      "route_status": "ROUTED",
+      "operation_code": "artifact_retrieval",
+      "candidate_policy_id": "governed_context_artifact_candidates_v1"
+    },
+    "unknown_operation": {
+      "route_status": "ROUTE_UNRESOLVED",
+      "operation_code": ""
+    }
+  },
+  "retrieval": {
+    "foo": {
+      "result_count": 1,
+      "candidate_set_hash": "b32799a478848a86ebd1a111da2e60162a36550cb7776771b65672b17b643955",
+      "result_paths": [
+        "tools\\Simulation_engines_extracted_2026-04-25\\build_uhd770\\CMakeFiles\\ShowIncludes\\foo.h"
+      ]
+    },
+    "space_foo_space": {
+      "result_count": 1,
+      "candidate_set_hash": "b32799a478848a86ebd1a111da2e60162a36550cb7776771b65672b17b643955",
+      "result_paths": [
+        "tools\\Simulation_engines_extracted_2026-04-25\\build_uhd770\\CMakeFiles\\ShowIncludes\\foo.h"
+      ]
+    },
+    "upper_foo": {
+      "result_count": 1,
+      "candidate_set_hash": "b32799a478848a86ebd1a111da2e60162a36550cb7776771b65672b17b643955",
+      "result_paths": [
+        "tools\\Simulation_engines_extracted_2026-04-25\\build_uhd770\\CMakeFiles\\ShowIncludes\\foo.h"
+      ]
+    }
+  },
+  "trace": {
+    "foo": "bdd409ef608e34324efa4955ef0e604cbdd3f7501321430043914bb85f1cc92f",
+    "space_foo_space": "bdd409ef608e34324efa4955ef0e604cbdd3f7501321430043914bb85f1cc92f"
+  },
+  "capsule": {
+    "task_hash": "687f3cb320d146d4f2b9218ffbb03ed924089daef1008cdfd1c8f72bf00f8429",
+    "query_hash": "687f3cb320d146d4f2b9218ffbb03ed924089daef1008cdfd1c8f72bf00f8429",
+    "task_request_id": "governed_context_capsule_v1:021b788fd97f3e3b",
+    "query_request_id": "governed_context_capsule_v1:b9ac776a34f7eca5",
+    "candidate_set_hash": "6ffefb95ed32f24225178c1893df71518521a6132f7fa8af1522d62486010ee4"
+  },
+  "candidate_resolution": {
+    "candidate_set_hash": "95bf64eef08483e51b6f06a12aae3f2788f7d2268e4817eb87e9b441b4749501",
+    "resolution_status": "DETERMINISTIC_TOP_CANDIDATE",
+    "reason_code": "STRICT_GOVERNED_DOMINANCE",
+    "selected_candidate_id": "B",
+    "strict_dominance": true
+  },
+  "metrics": {
+    "surface_variants_tested": 3,
+    "equivalent_requests_converged": 3,
+    "alias_routes_collapsed": 1,
+    "candidate_hash_matches": 3,
+    "zero_candidate_resolutions": 1,
+    "single_candidate_resolutions": 1,
+    "dominant_candidate_resolutions": 1,
+    "out_of_set_rejections": 1,
+    "unbounded_candidate_paths_remaining": 0,
+    "actual_inference_calls": 0
+  },
+  "static_enforcement": {
+    "repository_router_scan_violations": [],
+    "repository_candidate_scan_violations": [],
+    "synthetic_router_violation_detected": true,
+    "synthetic_unbounded_candidate_violation_detected": true
+  }
+}

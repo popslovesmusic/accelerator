@@ -1,0 +1,148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/inference_gate_event_v1.schema.json",
+  "title": "Inference Gate Event Schema",
+  "description": "Structured telemetry event emitted by the shared inference necessity gate.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "event_type",
+    "event_id",
+    "timestamp",
+    "boundary_id",
+    "caller_id",
+    "purpose_code",
+    "request_id",
+    "capsule_hash",
+    "decision",
+    "reason_code",
+    "authorized_mode",
+    "deterministic_methods_considered",
+    "deterministic_methods_executed",
+    "remaining_uncertainty",
+    "candidate_count",
+    "effective_budget",
+    "actual_calls",
+    "actual_input_tokens",
+    "actual_output_tokens",
+    "latency_ms",
+    "fallback_used",
+    "error_class"
+  ],
+  "properties": {
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "GATE_EVALUATED",
+        "GATE_DENIED",
+        "GATE_AUTHORIZED",
+        "INFERENCE_STARTED",
+        "INFERENCE_SUCCEEDED",
+        "INFERENCE_FAILED",
+        "DETERMINISTIC_FALLBACK_USED"
+      ]
+    },
+    "event_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "timestamp": {
+      "type": "string",
+      "minLength": 1
+    },
+    "boundary_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "caller_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "purpose_code": {
+      "type": "string",
+      "minLength": 1
+    },
+    "request_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "capsule_hash": {
+      "type": "string",
+      "minLength": 1
+    },
+    "decision": {
+      "type": "string",
+      "enum": [
+        "DENY_DETERMINISTIC_RESULT_AVAILABLE",
+        "DENY_CACHE_RESULT_AVAILABLE",
+        "DENY_MACHINE_READABLE_STRUCTURE",
+        "DENY_FINITE_SEARCH_AVAILABLE",
+        "DENY_KNOWN_FAILURE_SIGNATURE",
+        "DENY_CONTEXT_INVALID",
+        "DENY_AUTHORITY_INVALID",
+        "DENY_PURPOSE_NOT_ALLOWED",
+        "DENY_CALLER_NOT_ALLOWED",
+        "DENY_BUDGET_EXHAUSTED",
+        "DENY_UNCERTAINTY_NOT_MATERIAL",
+        "DENY_BOUNDARY_NOT_REGISTERED",
+        "AUTHORIZE_CONSTRAINED_INFERENCE",
+        "AUTHORIZE_OPEN_INFERENCE"
+      ]
+    },
+    "reason_code": {
+      "type": "string",
+      "minLength": 1
+    },
+    "authorized_mode": {
+      "type": "string",
+      "enum": [
+        "NONE",
+        "CONSTRAINED",
+        "OPEN"
+      ]
+    },
+    "deterministic_methods_considered": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "deterministic_methods_executed": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "remaining_uncertainty": {
+      "type": "object"
+    },
+    "candidate_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "effective_budget": {
+      "type": "object"
+    },
+    "actual_calls": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "actual_input_tokens": {
+      "type": ["integer", "null"]
+    },
+    "actual_output_tokens": {
+      "type": ["integer", "null"]
+    },
+    "latency_ms": {
+      "type": ["number", "null"]
+    },
+    "fallback_used": {
+      "type": "boolean"
+    },
+    "error_class": {
+      "type": ["string", "null"]
+    }
+  }
+}

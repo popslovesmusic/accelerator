@@ -1,0 +1,61 @@
+{
+  "registry_id": "PCD_SEMANTIC_RELATIONSHIP_REGISTRY",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "relationship_id",
+      "source_object",
+      "target_object",
+      "relationship_type",
+      "relationship_status",
+      "evidence_or_source_path",
+      "confidence_scope",
+      "created_at",
+      "review_required"
+    ]
+  },
+  "relationship_types": {
+    "derives_from": "Source is derived from target.",
+    "depends_on": "Source requires target for validity or interpretation.",
+    "supports": "Source provides governed support for target within declared limits.",
+    "contradicts": "Source conflicts with target or exposes an inconsistency.",
+    "supersedes": "Source replaces target while preserving lineage.",
+    "refines": "Source narrows, clarifies, or improves target.",
+    "aliases": "Source is a surface or symbolic variant of target.",
+    "blocks": "Source prevents promotion or claim elevation of target.",
+    "tests": "Source is an empirical or simulation test of target.",
+    "documents": "Source explains or records target."
+  },
+  "object_classes": [
+    "theorem",
+    "lemma",
+    "proof",
+    "operator",
+    "gap",
+    "claim",
+    "tool",
+    "simulation_result",
+    "empirical_result_package",
+    "publication",
+    "tech_note",
+    "runtime_artifact",
+    "governance_rule",
+    "contradiction",
+    "confidence_band"
+  ],
+  "relationship_review_rules": [
+    {
+      "name": "support_requires_evidence_v1",
+      "statement": "A supports relationship requires a governed evidence path, proof path, theorem binding, or empirical result package."
+    },
+    {
+      "name": "contradiction_requires_review_v1",
+      "statement": "A contradicts relationship must trigger contradiction or anomaly review before dependent claims remain active."
+    },
+    {
+      "name": "supersession_requires_lineage_v1",
+      "statement": "A supersedes relationship must preserve the superseded object path and reason for replacement."
+    }
+  ],
+  "entries": []
+}

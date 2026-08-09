@@ -1,0 +1,115 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Deterministic Operation Registry Schema",
+  "description": "Registry of deterministic request operations and their routed handlers.",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "operations"
+  ],
+  "properties": {
+    "schema_id": {
+      "type": "string",
+      "const": "deterministic_operation_registry_v1"
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "operations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/operation"
+      }
+    }
+  },
+  "$defs": {
+    "operation": {
+      "type": "object",
+      "required": [
+        "operation_code",
+        "canonical_name",
+        "aliases",
+        "request_patterns",
+        "required_fields",
+        "optional_fields",
+        "default_values",
+        "candidate_policy_id",
+        "allowed_output_contracts",
+        "authority_class",
+        "freshness_policy",
+        "handler_id",
+        "fallback_behavior",
+        "status"
+      ],
+      "properties": {
+        "operation_code": {
+          "type": "string"
+        },
+        "canonical_name": {
+          "type": "string"
+        },
+        "aliases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "request_patterns": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "required_fields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "optional_fields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "default_values": {
+          "type": "object"
+        },
+        "candidate_policy_id": {
+          "type": "string"
+        },
+        "allowed_output_contracts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "authority_class": {
+          "type": "string"
+        },
+        "freshness_policy": {
+          "type": "string"
+        },
+        "handler_id": {
+          "type": "string"
+        },
+        "fallback_behavior": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "ACTIVE",
+            "LATENT",
+            "DEPRECATED",
+            "DISABLED"
+          ]
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

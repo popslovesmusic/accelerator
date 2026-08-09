@@ -1,0 +1,82 @@
+{
+  "audit_id": "VAL-DEP-REC-001",
+  "patch_id": "MPF-DEP-001",
+  "name": "Interrupted Series Dependency Reconciliation Registry",
+  "status": "active",
+  "purpose": "Audit unfinished or shortened patch series and determine whether current MPF-PF and MPF-SIM results rely on unresolved or stale upstream artifacts.",
+  "dependency_families": [
+    {
+      "family_id": "RC-SERIES",
+      "range": "RC001-RC031",
+      "description": "Recursive constraint campaigns",
+      "status": "PARTIAL_INTERRUPTED"
+    },
+    {
+      "family_id": "MT-LAW-A",
+      "range": "MT-LAW-A001-026",
+      "description": "Bounded Continuation Persistence patch chain",
+      "status": "COMPLETE_FOR_TS4"
+    },
+    {
+      "family_id": "MPF-PF",
+      "range": "MPF-PF-001-024",
+      "description": "Path forward stabilization series",
+      "status": "IMPLEMENTED"
+    },
+    {
+      "family_id": "MPF-SIM",
+      "range": "MPF-SIM-001-013",
+      "description": "Empirical simulation evidence base",
+      "status": "IMPLEMENTED"
+    }
+  ],
+  "pressure_points": [
+    {
+      "id": "DEP-PRESSURE-001",
+      "name": "RC-Series Truncation Risk",
+      "status": "ACTIVE_REPAIR_REQUIRED"
+    },
+    {
+      "id": "DEP-PRESSURE-002",
+      "name": "LAW034 Composition Dependency",
+      "status": "ACTIVE_REPAIR_STAGED"
+    },
+    {
+      "id": "DEP-PRESSURE-003",
+      "name": "Constraint Geology Back-Dependency",
+      "status": "ACTIVE_MONITORING"
+    },
+    {
+      "id": "DEP-PRESSURE-004",
+      "name": "MT-LAW-A / SIM Evidence Interface",
+      "status": "GOVERNED"
+    }
+  ],
+  "output_classes": [
+    {
+      "class_id": "DEP-CLEAR",
+      "meaning": "Dependency is present, validated, and safe for current restricted-local use."
+    },
+    {
+      "class_id": "DEP-SYMBOLIC",
+      "meaning": "Dependency exists but remains symbolic or not operationally tested."
+    },
+    {
+      "class_id": "DEP-INCOMPLETE",
+      "meaning": "Dependency chain was started but not fully closed."
+    },
+    {
+      "class_id": "DEP-BLOCKING",
+      "meaning": "Dependency gap blocks theorem-facing or sim-facing use."
+    },
+    {
+      "class_id": "DEP-REPAIR-QUEUE",
+      "meaning": "Dependency does not block current work but must be repaired before promotion or expansion."
+    }
+  ],
+  "governance": {
+    "theorem_status": "NOT_PROVEN",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL"
+  }
+}

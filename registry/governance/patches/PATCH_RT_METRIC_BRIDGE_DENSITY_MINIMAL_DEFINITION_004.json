@@ -1,0 +1,273 @@
+{
+  "patch_id": "PATCH_RT_METRIC_BRIDGE_DENSITY_MINIMAL_DEFINITION_004",
+  "refinement_version": "004A",
+  "refinement_status": "RECOMMENDED_REFINEMENT",
+  "title": "Minimal Distinction Density Definition",
+  "status": "APPLIED",
+  "applied_on": "2026-07-09T09:24:43.5212657-04:00",
+  "type": "provisional_governance_definition",
+  "campaign": "RT Calculus Metric Bridge",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "depends_on": [
+    "PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_001",
+    "PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_TESTS_002",
+    "PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_RESULTS_003"
+  ],
+  "rt_core_modified": false,
+  "claim_level": "PROVISIONAL_INDUCTION",
+  "mode": "additive",
+  "purpose": "Define distinction density as an RT-native bridge quantity through an organizational definition that remains faithful to RT-first ontology and prevents implicit importation of metric mathematics.",
+  "summary": "This patch introduces distinction density as a provisional bridge quantity defined organizationally as the ordered concentration of admissible non-null distinction relative to declared reference phi. Any later representational equation is downstream and does not serve as the ontological definition.",
+  "basis": {
+    "source_patches": [
+      "PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_001",
+      "PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_TESTS_002",
+      "PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_RESULTS_003"
+    ],
+    "source_surfaces": [
+      "registry/governance/patches/PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_001.json",
+      "registry/governance/patches/PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_TESTS_002.json",
+      "registry/governance/patches/PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_RESULTS_003.json",
+      "docs/governance/rate_type_eligibility_candidate_001.json",
+      "docs/governance/rate_type_eligibility_tests_002.json",
+      "docs/governance/rate_type_eligibility_results_003.json",
+      "docs/governance/rate_type_eligibility_results_trace_003.json",
+      "docs/governance/rate_type_eligibility_results_counterexample_003.json",
+      "docs/governance/propagation_rate_density_endpoint_candidate_003.json",
+      "docs/textbook/mono_process_textbook_complete.md"
+    ],
+    "scope": "Provisional distinction-density witness that defines an RT-native bridge quantity downstream of the governed eligibility results while leaving RT_core unchanged and keeping bridge promotion deferred."
+  },
+  "core_rule": {
+    "id": "DD_004_001",
+    "statement": "DISTINCTION_DENSITY(x, phi) may be introduced only as an RT-native bridge quantity after phi is declared. Bridge quantities are defined by organizational behavior before representational mathematics, and any later mathematical form is downstream of that definition."
+  },
+  "canonical_objects": {
+    "DistinctionDensity": {
+      "symbol": "rho_D(x, phi)",
+      "definition": "The ordered concentration of admissible non-null distinction relative to declared reference phi.",
+      "organization_definition": "The organizational condition describing how admissible distinction is distributed within the continuation structure determined by phi.",
+      "projection_note": "Probability, statistics, entropy, spatial density, metric density, and propagation quantities are downstream projections of distinction density and are not part of its definition.",
+      "status": "PROVISIONAL_BRIDGE_QUANTITY"
+    },
+    "ResolutionWindow": {
+      "symbol": "DeclaredResolutionWindow(x, phi)",
+      "definition": "The declared continuation window that bounds the governed reading of distinction density."
+    },
+    "OrderedDistinction": {
+      "symbol": "OrderedNonNullDistinction(x, phi)",
+      "definition": "The governed ordering of non-null distinction available for admissible continuation."
+    }
+  },
+  "formal_reading": {
+    "quantity": "The ordered concentration of admissible non-null distinction relative to declared reference phi.",
+    "interpretation": "Probability, statistics, entropy, spatial density, metric density, and propagation quantities are downstream projections and are not part of the definition."
+  },
+  "minimal_conditions": [
+    {
+      "id": "DD001",
+      "condition": "Declared(phi)",
+      "failure": "DISTINCTION_DENSITY_UNDECLARED_REFERENCE"
+    },
+    {
+      "id": "DD002",
+      "condition": "E(x) != 0",
+      "failure": "DISTINCTION_DENSITY_NULL_DISTINCTION"
+    },
+    {
+      "id": "DD003",
+      "condition": "OrderedNonNullDistinction(x, phi)",
+      "failure": "DISTINCTION_DENSITY_UNORDERED_DISTINCTION"
+    },
+    {
+      "id": "DD004",
+      "condition": "DeclaredResolutionWindow(x, phi)",
+      "failure": "DISTINCTION_DENSITY_NO_RESOLUTION_WINDOW"
+    },
+    {
+      "id": "DD005",
+      "condition": "AdmissibleContinuationContext(x, phi)",
+      "failure": "DISTINCTION_DENSITY_NO_ADMISSIBLE_CONTEXT"
+    }
+  ],
+  "forbidden_imports": [
+    "probability as primitive",
+    "statistics as primitive",
+    "entropy as primitive",
+    "metric distance as primitive",
+    "physical propagation constant as primitive",
+    "observer measurement as identity condition"
+  ],
+  "governance_rules": [
+    {
+      "id": "GOV_DD_001",
+      "rule": "Distinction density may be used only after phi is declared."
+    },
+    {
+      "id": "GOV_DD_002",
+      "rule": "Distinction density is a bridge quantity, not a primitive."
+    },
+    {
+      "id": "GOV_DD_003",
+      "rule": "A defined distinction density does not validate DENSITY_BRIDGE_001; it only supplies a candidate quantity for later projection tests."
+    }
+  ],
+  "governing_properties": [
+    {
+      "id": "GDP001",
+      "property": "rho_D increases when admissible distinction becomes more organizationally concentrated."
+    },
+    {
+      "id": "GDP002",
+      "property": "rho_D decreases when admissible distinction becomes more organizationally diffuse."
+    },
+    {
+      "id": "GDP003",
+      "property": "rho_D is undefined when E = 0."
+    },
+    {
+      "id": "GDP004",
+      "property": "rho_D is reference-dependent through the declared phi."
+    },
+    {
+      "id": "GDP005",
+      "property": "rho_D does not require a metric space."
+    },
+    {
+      "id": "GDP006",
+      "property": "rho_D is invariant under lawful representational rebinding."
+    }
+  ],
+  "governance_additions": [
+    {
+      "id": "GOV_DD_004",
+      "rule": "Bridge quantities shall be defined by organizational behavior before representational mathematics."
+    },
+    {
+      "id": "GOV_DD_005",
+      "rule": "Representational equations may be introduced only after the bridge quantity has been independently defined."
+    },
+    {
+      "id": "GOV_DD_006",
+      "rule": "No mathematical representation shall be interpreted as the ontological definition of a bridge quantity."
+    }
+  ],
+  "bridge_hierarchy": {
+    "status": "PROVISIONAL_ARCHITECTURE",
+    "layers": [
+      {
+        "level": 0,
+        "name": "RT Primitive",
+        "examples": [
+          "Distinction"
+        ]
+      },
+      {
+        "level": 1,
+        "name": "RT Bridge Quantity",
+        "examples": [
+          "Distinction Density"
+        ]
+      },
+      {
+        "level": 2,
+        "name": "Projection Quantity",
+        "examples": [
+          "Probability",
+          "Statistics",
+          "Entropy",
+          "Propagation Position"
+        ]
+      },
+      {
+        "level": 3,
+        "name": "Measured Quantity",
+        "examples": [
+          "Observed probability",
+          "Measured entropy",
+          "Measured propagation limit"
+        ]
+      }
+    ]
+  },
+  "claim_humility": {
+    "current_status": "candidate_witness_only",
+    "non_claims": [
+      "Does not validate DENSITY_BRIDGE_001.",
+      "Does not promote RATE_UNIFICATION_001.",
+      "Does not modify RT_core.",
+      "Does not assert external physical truth.",
+      "Does not assert theorem status.",
+      "Does not assert a completed metric.",
+      "Does not require a metric space."
+    ]
+  },
+  "counterexample_record": {
+    "id": "DD_COUNTEREXAMPLE_004",
+    "target": "Any claim that distinction density is equivalent to probability",
+    "counterexample": "A system may exhibit organized non-null distinction before any statistical ensemble, frequency distribution, or probability measure is declared.",
+    "ruling": "Probability is downstream projection, not identity."
+  },
+  "textbook_insertion_candidate": {
+    "section": "Metric Bridge Governance / Distinction Density",
+    "text": "Distinction density rho_D(x, phi) is provisionally introduced as the ordered concentration of admissible non-null distinction relative to declared reference phi. It is an RT-native bridge quantity and not a primitive. Probability, statistics, entropy, spatial density, metric density, and propagation quantities remain downstream of the organizational definition rather than inside it."
+  },
+  "ledger_entry_candidate": {
+    "event": "Refined the provisional minimal definition of distinction density from representational shorthand to organizational definition.",
+    "promotion_state": "No bridge claim promoted.",
+    "rt_core_changed": false
+  },
+  "required_execution_surface": [
+    "docs/governance/distinction_density_minimal_definition_004.json",
+    "docs/governance/distinction_density_counterexample_004.json"
+  ],
+  "target_files": [
+    "docs/governance/distinction_density_minimal_definition_004.json",
+    "docs/governance/distinction_density_counterexample_004.json"
+  ],
+  "required_repo_changes": [
+    {
+      "path": "docs/governance/distinction_density_minimal_definition_004.json",
+      "description": "Add the minimal-definition witness that introduces distinction density as an RT-native bridge quantity through an organizational, RT-first definition."
+    },
+    {
+      "path": "docs/governance/distinction_density_counterexample_004.json",
+      "description": "Add the counterexample witness that blocks probability-equivalence and primitive-metric readings."
+    },
+    {
+      "path": "docs/textbook/mono_process_textbook_complete.md",
+      "description": "Add the governed distinction-density clarification and lexicon entry for the new bridge quantity."
+    },
+    {
+      "path": "registry/governance_change_ledger.json",
+      "description": "Register the proposed distinction-density execution-surface update in the governance ledger."
+    },
+    {
+      "path": "registry/governance_hash_registry.json",
+      "description": "Register the new documentation surfaces, the patch record, and the updated textbook and ledger hashes."
+    }
+  ],
+  "validation_expectations": {
+    "json_parse": "PASS_REQUIRED",
+    "registry_validation": "PASS_REQUIRED",
+    "patch_chain": "PASS_REQUIRED",
+    "patch_gate": "PASS_REQUIRED",
+    "global_validate": "PASS_REQUIRED"
+  },
+  "textbook_integration": {
+    "section_title": "Minimal Distinction Density Definition",
+    "recommended_location": "Section 2.8, immediately after the concrete results clarification.",
+    "integration_note": "Introduce distinction density as a bridge quantity, not a primitive, and keep probability, statistics, entropy, spatial density, metric density, and propagation quantities downstream of the organizational definition rather than inside it."
+  },
+  "expected_outcome": {
+    "DISTINCTION_DENSITY(x, phi)": "defined_provisionally",
+    "DENSITY_BRIDGE_001": "still_candidate",
+    "RATE_UNIFICATION_001": "still_candidate",
+    "RT_core": "unchanged"
+  },
+  "next_after_success": {
+    "patch_id": "PATCH_RT_METRIC_BRIDGE_DENSITY_TESTS_005",
+    "purpose": "Define adversarial tests for distinction density across non-null, null, and unresolved near-floor cases."
+  },
+  "agent_instruction": "Create PATCH_RT_METRIC_BRIDGE_DENSITY_MINIMAL_DEFINITION_004 as PROPOSED only. Use additive mode, cite the applied rate-type eligibility patches and the concrete results patch as provenance, build the execution surface, and do not apply until patch-gate returns apply."
+}

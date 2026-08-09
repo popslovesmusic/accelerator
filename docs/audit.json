@@ -1,0 +1,839 @@
+{
+  "audit_id": "ACELLORATOR_FINE_TUNE_READINESS_AUDIT_001",
+  "timestamp": "2026-06-26T10:39:03.1727801-04:00",
+  "repo_root": "D:\\projects\\acellorator",
+  "executive_summary": {
+    "status": "conditional_not_ready",
+    "ruling": "NOT_READY_SCHEMA_GAPS",
+    "summary": "The repository already contains a strong governance corpus, multiple machine-readable registries, campaign schemas, and many reusable supervised examples. It does not yet contain a single canonical input schema and output schema for a local 7B governance/router agent. Fine-tuning now would likely bake in repository fragmentation and inconsistent decision formats. Prompt+RAG testing is viable first; synthetic dataset construction becomes rational after a small schema-closure patch series.",
+    "evidence_class": "C0_AUDIT"
+  },
+  "ssot_inventory": {
+    "canonical": [
+      {
+        "artifact": "AGENTS.md",
+        "role": "Top-level agent governance authority for audit/patch/research behavior",
+        "refs": [
+          "AGENTS.md:1",
+          "AGENTS.md:25",
+          "AGENTS.md:43-48",
+          "AGENTS.md:57"
+        ],
+        "status": "canonical"
+      },
+      {
+        "artifact": "GEMINI.md",
+        "role": "Parallel local governance authority; adds explicit approved-tool constraint",
+        "refs": [
+          "GEMINI.md:1",
+          "GEMINI.md:43-48",
+          "GEMINI.md:57",
+          "GEMINI.md:62"
+        ],
+        "status": "canonical"
+      },
+      {
+        "artifact": "docs/textbook/mono_process_textbook_complete.md",
+        "role": "Canonical textbook and governance overview with appendices for operator registry, claim governance, evidence index, and Appendix F gaps",
+        "refs": [
+          "docs/textbook/mono_process_textbook_complete.md:31-35",
+          "docs/textbook/mono_process_textbook_complete.md:39",
+          "docs/textbook/mono_process_textbook_complete.md:2482",
+          "docs/textbook/mono_process_textbook_complete.md:2612",
+          "docs/textbook/mono_process_textbook_complete.md:2931",
+          "docs/textbook/mono_process_textbook_complete.md:3096",
+          "docs/textbook/mono_process_textbook_complete.md:3114-3115"
+        ],
+        "status": "canonical"
+      },
+      {
+        "artifact": "docs/MPF_Core_Formalism_v1.md",
+        "role": "Authorized SSOT for primitive terms, generative conditions, and core operator algebra",
+        "refs": [
+          "docs/MPF_Core_Formalism_v1.md:8",
+          "docs/MPF_Core_Formalism_v1.md:15",
+          "docs/textbook/mono_process_textbook_complete.md:3096"
+        ],
+        "status": "canonical"
+      },
+      {
+        "artifact": "docs/MONO_PROCESS_MATHEMATICAL_SCHEMA_V2_1.md",
+        "role": "Authorized SSOT for projection calculus edition",
+        "refs": [
+          "docs/MONO_PROCESS_MATHEMATICAL_SCHEMA_V2_1.md:8",
+          "docs/MONO_PROCESS_MATHEMATICAL_SCHEMA_V2_1.md:29",
+          "docs/MONO_PROCESS_MATHEMATICAL_SCHEMA_V2_1.md:81"
+        ],
+        "status": "canonical"
+      },
+      {
+        "artifact": "docs/MONO_PROCESS_MATHEMATICAL_SCHEMA_V2_2.md",
+        "role": "Authorized SSOT for emergent dynamics update",
+        "refs": [
+          "docs/MONO_PROCESS_MATHEMATICAL_SCHEMA_V2_2.md:8"
+        ],
+        "status": "canonical"
+      },
+      {
+        "artifact": "registry/db/README.md",
+        "role": "Explicit SSOT boundary declaration; database is not semantic authority",
+        "refs": [
+          "registry/db/README.md:8",
+          "registry/db/README.md:75",
+          "registry/db/README.md:246",
+          "registry/db/README.md:266"
+        ],
+        "status": "canonical_boundary"
+      },
+      {
+        "artifact": "registry/lexicon_canonical.json",
+        "role": "Semantic authority for primitives and derived terms",
+        "refs": [
+          "docs/textbook/mono_process_textbook_complete.md:3115",
+          "registry/db/README.md:8"
+        ],
+        "status": "canonical"
+      },
+      {
+        "artifact": "registry/claim_registry.json",
+        "role": "Claim ledger and promotion-block tracking",
+        "refs": [
+          "registry/db/README.md:8"
+        ],
+        "status": "canonical"
+      },
+      {
+        "artifact": "registry/lexicon_validation_registry.json",
+        "role": "Validation-based lexicon promotion authority",
+        "refs": [
+          "AGENTS.md:44",
+          "registry/lexicon_validation_registry.json:8",
+          "registry/lexicon_validation_registry.json:14",
+          "registry/lexicon_validation_registry.json:29"
+        ],
+        "status": "canonical"
+      },
+      {
+        "artifact": "registry/lexicon_gap_queue.json",
+        "role": "Mandatory induction queue for new terms and rich governance sidecar",
+        "refs": [
+          "AGENTS.md:43",
+          "registry/lexicon_gap_queue.json:5",
+          "registry/lexicon_gap_queue.json:7"
+        ],
+        "status": "canonical"
+      },
+      {
+        "artifact": "registry/theorem_status_registry.json",
+        "role": "Theorem status, promotion requirements, and blocked language",
+        "refs": [
+          "registry/theorem_status_registry.json:5-12",
+          "registry/theorem_status_registry.json:102",
+          "registry/theorem_status_registry.json:116"
+        ],
+        "status": "canonical"
+      },
+      {
+        "artifact": "registry/compliance_charter_v2_3.json",
+        "role": "Compliance and empirical provenance authority",
+        "refs": [
+          "AGENTS.md:95",
+          "registry/compliance_charter_v2_3.json:8",
+          "registry/compliance_charter_v2_3.json:11",
+          "registry/compliance_charter_v2_3.json:35",
+          "registry/compliance_charter_v2_3.json:738"
+        ],
+        "status": "canonical"
+      },
+      {
+        "artifact": "docs/economics/ssot/procedural_economics_ssot.md",
+        "role": "Department-level SSOT for economics projection work",
+        "refs": [
+          "docs/economics/ssot/procedural_economics_ssot.md:1",
+          "docs/textbook/mono_process_textbook_complete.md:2378"
+        ],
+        "status": "canonical_domain_specific"
+      }
+    ],
+    "provisional": [
+      {
+        "artifact": "MATH_PROGRAM_NARRATIVE.md",
+        "role": "Important active governance narrative but contains strong theorem/finality language that is not a clean training target for a governor model",
+        "refs": [
+          "MATH_PROGRAM_NARRATIVE.md:1"
+        ],
+        "status": "provisional_for_training"
+      },
+      {
+        "artifact": "registry/governance/patches/*.json",
+        "role": "Governed patch records and decision exemplars",
+        "refs": [
+          "registry/governance/patches/MPF_GOV_DEMOTION_UNENDORSED_TOOL_001.json:1"
+        ],
+        "status": "provisional_examples"
+      }
+    ],
+    "brainstorm_or_noncanonical": [
+      {
+        "artifact": "docs/theory/holding/*",
+        "role": "Holding area, not primary SSOT",
+        "status": "noncanonical"
+      },
+      {
+        "artifact": "docs/theory/Your recent insights significantly.txt",
+        "role": "Loose notes, not governed authority",
+        "status": "brainstorm"
+      }
+    ],
+    "deprecated_or_superseded": [
+      {
+        "artifact": "final_audit.json",
+        "role": "Historical audit explicitly superseded by current health report",
+        "refs": [
+          "final_audit.json:4-9"
+        ],
+        "status": "superseded"
+      }
+    ]
+  },
+  "schema_inventory": {
+    "input_schemas_present": [
+      {
+        "artifact": "registry/campaigns/campaign_design_schema.json",
+        "role": "Campaign/task-like input schema",
+        "refs": [
+          "registry/campaigns/campaign_design_schema.json:2",
+          "registry/campaigns/campaign_design_schema.json:6"
+        ],
+        "scope": "campaign design only"
+      },
+      {
+        "artifact": "registry/governance/schemas/RUN_MANIFEST_V1.json",
+        "role": "Canonical run manifest schema",
+        "refs": [
+          "registry/governance/schemas/RUN_MANIFEST_V1.json:2",
+          "registry/governance/schemas/RUN_MANIFEST_V1.json:6",
+          "registry/governance/schemas/RUN_MANIFEST_V1.json:64"
+        ],
+        "scope": "simulation campaign execution only"
+      },
+      {
+        "artifact": "registry/execution_campaign_dry_run_plan.json",
+        "role": "Dry-run execution plan schema",
+        "refs": [
+          "registry/execution_campaign_dry_run_plan.json:2",
+          "registry/execution_campaign_dry_run_plan.json:5"
+        ],
+        "scope": "dry-run planning only"
+      }
+    ],
+    "output_schemas_present": [
+      {
+        "artifact": "registry/governed_execution_orchestrator_result_schema.json",
+        "role": "Canonical governed execution result schema",
+        "refs": [
+          "registry/governed_execution_orchestrator_result_schema.json:2",
+          "registry/governed_execution_orchestrator_result_schema.json:5",
+          "registry/governed_execution_orchestrator_result_schema.json:22",
+          "registry/governed_execution_orchestrator_result_schema.json:57"
+        ],
+        "scope": "campaign execution results, not general governor outputs"
+      },
+      {
+        "artifact": "registry/governance/schemas/LFCR_EVIDENCE_REPORT_V1.json",
+        "role": "Evidence decision schema",
+        "refs": [
+          "registry/governance/schemas/LFCR_EVIDENCE_REPORT_V1.json:2",
+          "registry/governance/schemas/LFCR_EVIDENCE_REPORT_V1.json:6",
+          "registry/governance/schemas/LFCR_EVIDENCE_REPORT_V1.json:30"
+        ],
+        "scope": "falsification evidence reports only"
+      },
+      {
+        "artifact": "registry/governance/schemas/CAMPAIGN_AUDIT_TRAIL_V1.json",
+        "role": "Audit trail schema",
+        "refs": [
+          "registry/governance/schemas/CAMPAIGN_AUDIT_TRAIL_V1.json:2",
+          "registry/governance/schemas/CAMPAIGN_AUDIT_TRAIL_V1.json:6"
+        ],
+        "scope": "campaign audit trail only"
+      },
+      {
+        "artifact": "registry/agent_memory_registry.json",
+        "role": "Reasoning/execution memory record schema",
+        "refs": [
+          "registry/agent_memory_registry.json:2",
+          "registry/agent_memory_registry.json:5",
+          "registry/agent_memory_registry.json:23-29"
+        ],
+        "scope": "memory records, not external governor response"
+      },
+      {
+        "artifact": "registry/empirical_result_package_schema.json",
+        "role": "Empirical package schema",
+        "refs": [
+          "registry/empirical_result_package_schema.json:2",
+          "registry/empirical_result_package_schema.json:5"
+        ],
+        "scope": "empirical artifacts only"
+      }
+    ],
+    "missing_or_noncanonical": [
+      {
+        "item": "Canonical task input JSON schema for a local governance/router agent",
+        "classification": "blocking",
+        "reason": "No repo-wide schema found for task/audit/patch/router requests across all governance actions. Existing schemas are campaign- or artifact-specific."
+      },
+      {
+        "item": "Canonical output schema for route/refuse/propose_patch/request_tool/report_evidence",
+        "classification": "blocking",
+        "reason": "No single output contract found. Decision fields exist in scattered schemas, but not one governor response format."
+      },
+      {
+        "item": "Top-level schemas directory promised by audit scope",
+        "classification": "important",
+        "reason": "No `schemas/` directory exists at repo root; schema material is fragmented under `registry/` and `registry/governance/schemas/`."
+      }
+    ],
+    "answer_Q002": "Partial. There are canonical campaign and execution schemas, but no canonical general-purpose task input schema suitable for a local governance/router model.",
+    "answer_Q003": "Partial. There are canonical campaign output schemas, audit trail schemas, evidence report schemas, and execution result schemas, but no single canonical governor output schema for routing, refusal, patch proposal, audit decision, and tool request."
+  },
+  "governance_rule_inventory": {
+    "core_rules": [
+      {
+        "rule": "No autonomous self-assigned repair or promotion without evidence/user authorization",
+        "refs": [
+          "AGENTS.md:13",
+          "GEMINI.md:13"
+        ]
+      },
+      {
+        "rule": "Gap Queue Induction for new terms",
+        "refs": [
+          "AGENTS.md:43",
+          "GEMINI.md:43"
+        ]
+      },
+      {
+        "rule": "L2 lexicon promotion requires simulation evidence",
+        "refs": [
+          "AGENTS.md:44",
+          "GEMINI.md:44",
+          "registry/lexicon_validation_registry.json:14",
+          "registry/lexicon_validation_registry.json:29-38"
+        ]
+      },
+      {
+        "rule": "No empirical claim without recoverable output",
+        "refs": [
+          "AGENTS.md:47",
+          "GEMINI.md:47",
+          "registry/compliance_charter_v2_3.json:35"
+        ]
+      },
+      {
+        "rule": "Every claim must include evidence class; C5 blocked by default",
+        "refs": [
+          "AGENTS.md:48",
+          "GEMINI.md:48",
+          "governance/claim_policy.json:30-40"
+        ]
+      },
+      {
+        "rule": "Textbook synchronization required after governed work",
+        "refs": [
+          "AGENTS.md:57",
+          "GEMINI.md:57"
+        ]
+      },
+      {
+        "rule": "Use only approved tools for simulations",
+        "refs": [
+          "GEMINI.md:62",
+          "registry/tool_manifest.json:1"
+        ]
+      },
+      {
+        "rule": "Non-occlusive humility framing and forbidden rhetoric",
+        "refs": [
+          "governance/claim_policy.json:5",
+          "governance/claim_policy.json:8",
+          "governance/claim_policy.json:50",
+          "governance/claim_policy.json:58",
+          "governance/claim_policy.json:76"
+        ]
+      },
+      {
+        "rule": "Theorem publication language and promotion requirements are status-gated",
+        "refs": [
+          "registry/theorem_status_registry.json:5-12",
+          "registry/theorem_status_registry.json:17-99",
+          "registry/theorem_status_registry.json:102-116"
+        ]
+      },
+      {
+        "rule": "Runtime governance manifests and rulepacks enforce parse, provenance, theorem binding, rhetoric, anomaly routing",
+        "refs": [
+          "registry/runtime_governance_manifest.json:1-37",
+          "registry/runtime_rulepack_registry.json:1-113"
+        ]
+      }
+    ],
+    "forbidden_operations": [
+      {
+        "operation": "Promote claims above evidence/support level",
+        "refs": [
+          "AGENTS.md:70",
+          "GEMINI.md:73"
+        ]
+      },
+      {
+        "operation": "Present analogy as identity or simulation as physical fact",
+        "refs": [
+          "AGENTS.md:73-74",
+          "governance/claim_policy.json:76-86"
+        ]
+      },
+      {
+        "operation": "Auto-promote unknown terms or bypass gap queue",
+        "refs": [
+          "registry/lexicon_rules_sidecar.json:16-24"
+        ]
+      },
+      {
+        "operation": "Use unendorsed tools as promotion evidence",
+        "refs": [
+          "registry/governance/patches/MPF_GOV_DEMOTION_UNENDORSED_TOOL_001.json:69-104",
+          "registry/governance/patches/MPF_GOV_DEMOTION_UNENDORSED_TOOL_001.json:119-154"
+        ]
+      }
+    ]
+  },
+  "tool_inventory": {
+    "deterministic_tools_or_routed_utilities": [
+      {
+        "category": "Global validators",
+        "examples": [
+          "scripts/global_validate.py",
+          "scripts/check_empirical_governance.py",
+          "scripts/validate_tools_rigor_endorsement.py"
+        ],
+        "refs": [
+          "AGENTS.md:83",
+          "registry/runtime_rulepack_registry.json:69-103"
+        ]
+      },
+      {
+        "category": "Lexicon validators",
+        "examples": [
+          "scripts/validate_triadic_lexicon.py",
+          "scripts/validate_lexicon_resolution.py",
+          "scripts/validate_lexicon_orientation.py",
+          "scripts/validate_lexicon_corridor.py",
+          "scripts/validate_lexicon_superposition.py"
+        ],
+        "refs": [
+          "rg inventory of scripts"
+        ]
+      },
+      {
+        "category": "Campaign/runtime orchestrators",
+        "examples": [
+          "scripts/run_governed_execution_campaign.py",
+          "scripts/run_governed_execution_campaign_dry_run.py",
+          "scripts/run_mst001_resolution_frontier_campaign.py"
+        ],
+        "refs": [
+          "registry/governed_execution_orchestrator_manifest.json:61-89",
+          "registry/governed_execution_orchestrator_result_schema.json:5-57"
+        ]
+      },
+      {
+        "category": "Graph/retrieval/audit utilities",
+        "examples": [
+          "scripts/audit_governed_graph_traversal.py",
+          "scripts/audit_semantic_relationship_graph.py",
+          "scripts/assemble_governed_context.py",
+          "scripts/capture_reasoning_trace.py"
+        ],
+        "refs": [
+          "registry/runtime_rulepack_registry.json:103-113",
+          "registry/agent_memory_registry.json:23-29"
+        ]
+      },
+      {
+        "category": "Math/governance validators",
+        "examples": [
+          "scripts/validation/validate_process_first_ontology.py",
+          "scripts/validation/validate_projection_lineage.py",
+          "scripts/math/validate_ts4_restricted_local_review.py",
+          "scripts/math/validate_unresolved_structure_resolution_queue.py"
+        ],
+        "refs": [
+          "rg inventory of scripts"
+        ]
+      },
+      {
+        "category": "Simulation tool registry",
+        "examples": [
+          "triadic_closure_substrate_sim_cpp",
+          "graph_dynamics_sim_v1_cpp",
+          "ca_admissibility_sim_v1_cpp",
+          "procedural_pde_engine_cpp",
+          "agent_based_sim_v1_cpp"
+        ],
+        "refs": [
+          "registry/tool_manifest.json:1"
+        ]
+      }
+    ],
+    "answer_Q004": "Yes. The repo already has a large deterministic tool surface for validation, audit, routing, governed execution, and result checking. A local governor should mostly route to these existing scripts and manifests rather than generate free-form decisions."
+  },
+  "training_example_inventory": {
+    "strong_positive_examples": [
+      {
+        "type": "Governance patch with explicit allowed/forbidden behavior",
+        "artifact": "registry/governance/patches/MPF_GOV_DEMOTION_UNENDORSED_TOOL_001.json",
+        "refs": [
+          "registry/governance/patches/MPF_GOV_DEMOTION_UNENDORSED_TOOL_001.json:1-154"
+        ],
+        "use": "Refusal/demotion/promotion-block training"
+      },
+      {
+        "type": "Patch series and definitional reductions",
+        "artifact": "registry/governance/patches/MPF_PRIMITIVE_CONDITIONING_REDUCTION_001.json",
+        "refs": [
+          "registry/governance/patches/MPF_PRIMITIVE_CONDITIONING_REDUCTION_001.json:1"
+        ],
+        "use": "Patch proposal and schema-constrained maintenance outputs"
+      },
+      {
+        "type": "Campaign audit trail example",
+        "artifact": "registry/governance/living_falsification_campaign_registry.json",
+        "refs": [
+          "registry/governance/living_falsification_campaign_registry.json:1-181"
+        ],
+        "use": "Status transitions, review locks, route decisions"
+      },
+      {
+        "type": "System audit example",
+        "artifact": "final_audit.json",
+        "refs": [
+          "final_audit.json:1-58"
+        ],
+        "use": "Audit-style summaries with inventory and blocker handling"
+      },
+      {
+        "type": "Governance integrity audit outputs",
+        "artifact": "audits/governance/governance_integrity_report.md",
+        "use": "Narrative audit examples"
+      },
+      {
+        "type": "Vortex governance audit package",
+        "artifact": "audits/AUDIT_VORTEX_GOVERNANCE_001/*",
+        "use": "Violation register, remediation plan, object traceability examples"
+      },
+      {
+        "type": "Lexicon promotion result packages",
+        "artifact": "results/2026-05-06_run05_lexicon_l2_promotion_v2/l2_promotion_report.json",
+        "use": "Promotion gate examples"
+      },
+      {
+        "type": "Governed results with run manifests and provenance",
+        "artifact": "results/2026-05-17_run01_MT-LAW-A_TS4_FV2_Threshold_Verification/*",
+        "use": "Manifest -> preflight -> paper -> uncertainty chain"
+      },
+      {
+        "type": "Registry reports describing new governance infrastructure",
+        "artifact": "registry/reports/*",
+        "use": "Synthetic instruction/response seeds if cleaned and labeled"
+      }
+    ],
+    "weak_or_noisy_examples": [
+      {
+        "artifact": "MATH_PROGRAM_NARRATIVE.md",
+        "reason": "High rhetorical force; poor direct target for a constrained governance router"
+      },
+      {
+        "artifact": "Loose theory notes and holding documents",
+        "reason": "Not cleanly canonical"
+      }
+    ],
+    "answer_Q006": "Yes. The repository already contains enough audits, governed patches, decision registries, manifests, evidence reports, and promotion/demotion artifacts to seed a supervised dataset after canonicalization and labeling."
+  },
+  "negative_example_requirements": {
+    "needed": [
+      {
+        "case": "Invalid claim promotion",
+        "classification": "blocking",
+        "why": "Model must learn to cap outputs below theorem/evidence gates",
+        "source_candidates": [
+          "governance/claim_policy.json:30-40",
+          "registry/theorem_status_registry.json:17-99"
+        ]
+      },
+      {
+        "case": "Uncited theorem/proof language",
+        "classification": "blocking",
+        "why": "Model must refuse 'theorem/proven/established' when status is TS0-TS2",
+        "source_candidates": [
+          "registry/theorem_status_registry.json:28",
+          "registry/theorem_status_registry.json:42",
+          "registry/theorem_status_registry.json:56"
+        ]
+      },
+      {
+        "case": "Metaphor treated as mechanism or identity",
+        "classification": "blocking",
+        "why": "Core humility requirement",
+        "source_candidates": [
+          "governance/claim_policy.json:58-74"
+        ]
+      },
+      {
+        "case": "Missing SSOT reference or using advisory DB as authority",
+        "classification": "important",
+        "why": "Must prefer canonical registries over retrieval/index layers",
+        "source_candidates": [
+          "registry/db/README.md:8",
+          "registry/db/README.md:266"
+        ]
+      },
+      {
+        "case": "Illegal file change or canonical overwrite",
+        "classification": "important",
+        "why": "Governor must know when to block edits",
+        "source_candidates": [
+          "AGENTS.md:69-74",
+          "registry/lexicon_rules_sidecar.json:16-24"
+        ]
+      },
+      {
+        "case": "Unknown term bypasses gap queue",
+        "classification": "blocking",
+        "why": "Critical induction rule",
+        "source_candidates": [
+          "AGENTS.md:43",
+          "registry/lexicon_rules_sidecar.json:21-24"
+        ]
+      },
+      {
+        "case": "Unsupported tool route / unendorsed tool used as evidence",
+        "classification": "blocking",
+        "why": "Tool router is a core governor function",
+        "source_candidates": [
+          "GEMINI.md:62",
+          "registry/governance/patches/MPF_GOV_DEMOTION_UNENDORSED_TOOL_001.json:69-104"
+        ]
+      },
+      {
+        "case": "Schema violation in result package/audit trail/run manifest",
+        "classification": "important",
+        "why": "Model must emit structured outputs that validate",
+        "source_candidates": [
+          "registry/governance/schemas/RUN_MANIFEST_V1.json:6",
+          "registry/governance/schemas/CAMPAIGN_AUDIT_TRAIL_V1.json:6",
+          "registry/governance/schemas/LFCR_EVIDENCE_REPORT_V1.json:6"
+        ]
+      }
+    ],
+    "answer_Q007": "Negative examples are required and are currently under-specified as a first-class dataset. The rules exist, but paired bad-input -> refusal/correction records are not yet standardized."
+  },
+  "rag_vs_finetune_assessment": {
+    "ruling": "READY_FOR_PROMPT_RAG_TESTING",
+    "reasoning": [
+      "The canonical corpus is already retrieval-friendly in parts: strong headings, explicit registries, and machine-readable JSON.",
+      "The main failure mode is not missing knowledge; it is fragmented authority and missing unified agent schemas.",
+      "A local 7B model can likely route acceptably with prompt+RAG if retrieval is limited to AGENTS.md, GEMINI.md, textbook anchors, compliance charter, theorem status registry, lexicon registries, runtime manifests, and approved-tool manifests."
+    ],
+    "evidence": [
+      "docs/textbook/mono_process_textbook_complete.md:31-35",
+      "registry/db/README.md:8",
+      "registry/runtime_governance_manifest.json:1-37",
+      "registry/runtime_rulepack_registry.json:1-113"
+    ],
+    "limitations": [
+      "Prompt+RAG alone will still be brittle on output formatting until a governor output schema exists.",
+      "Conflicting or superseded materials remain present and need explicit retrieval filtering."
+    ],
+    "answer_Q008": "Yes, for initial testing. Prompt+RAG is sufficient before fine-tuning and is the lower-risk next step."
+  },
+  "missing_information": [
+    {
+      "item": "Canonical local-governor task input schema",
+      "classification": "blocking"
+    },
+    {
+      "item": "Canonical local-governor output schema with route/refuse/patch_proposal/tool_request/audit_report decision types",
+      "classification": "blocking"
+    },
+    {
+      "item": "Canonical allowed-tools registry specifically for governor routing decisions, not just simulation/tool rigor inventory",
+      "classification": "important"
+    },
+    {
+      "item": "Canonical source bundle manifest for RAG-safe authority ordering and supersession filtering",
+      "classification": "important"
+    },
+    {
+      "item": "Labeled negative-example corpus",
+      "classification": "important"
+    },
+    {
+      "item": "Training split policy distinguishing canonical/provisional/brainstorm/deprecated artifacts",
+      "classification": "important"
+    },
+    {
+      "item": "Agent-facing schema tests that fail on missing line refs, claim classes, forbidden actions, and absent source refs",
+      "classification": "important"
+    }
+  ],
+  "recommended_repo_changes": {
+    "smallest_next_patch_series": {
+      "series_name": "ACELLORATOR_GOVERNOR_DATASET_PREP_SERIES_001",
+      "purpose": "Create the minimal canonical contracts needed before synthetic dataset build",
+      "patches": [
+        {
+          "patch_id": "AGDP_PATCH_001_GOVERNOR_INPUT_SCHEMA",
+          "change": "Add one canonical JSON schema for local-governor task inputs",
+          "classification": "blocking"
+        },
+        {
+          "patch_id": "AGDP_PATCH_002_GOVERNOR_OUTPUT_SCHEMA",
+          "change": "Add one canonical JSON schema for governor decisions: route, refuse, patch_proposal, audit_report, tool_request",
+          "classification": "blocking"
+        },
+        {
+          "patch_id": "AGDP_PATCH_003_AUTHORITY_MANIFEST",
+          "change": "Add machine-readable SSOT authority manifest with precedence and supersession rules",
+          "classification": "important"
+        },
+        {
+          "patch_id": "AGDP_PATCH_004_TRAINING_EXAMPLE_MANIFEST",
+          "change": "Register which artifacts are canonical/provisional/brainstorm/deprecated and whether they are allowed for SFT",
+          "classification": "important"
+        },
+        {
+          "patch_id": "AGDP_PATCH_005_GOVERNOR_SCHEMA_TESTS",
+          "change": "Add tests validating new governor input/output examples against schemas and governance rules",
+          "classification": "important"
+        }
+      ]
+    },
+    "additional_changes": [
+      {
+        "change": "Create top-level `schemas/` or a canonical schema index aliasing scattered registry schema files",
+        "classification": "important"
+      },
+      {
+        "change": "Create `datasets/governor_sft/` with signed example manifests",
+        "classification": "optional"
+      },
+      {
+        "change": "Add explicit refusal examples tied to claim-policy and theorem-status violations",
+        "classification": "important"
+      },
+      {
+        "change": "Add an approved-tools routing manifest for local governor actions",
+        "classification": "important"
+      }
+    ],
+    "answer_Q009": "Before fine-tuning becomes rational, the repo needs unified governor I/O schemas, an authority manifest, labeled training-example eligibility, and validation tests. The biggest gap is structure, not raw content."
+  },
+  "recommended_dataset_shape": {
+    "format": "jsonl",
+    "record_schema": {
+      "instruction": "Natural-language task or operator request",
+      "input_json": {
+        "task_id": "string",
+        "mode": "audit|route|patch_proposal|refusal|tool_request|claim_review",
+        "user_request": "string",
+        "repo_scope": "object",
+        "retrieved_context_refs": "array[path:line]",
+        "evidence_class_ceiling": "string",
+        "allowed_tools": "array",
+        "forbidden_actions": "array"
+      },
+      "expected_output_json": {
+        "decision": "ROUTE|REFUSE|AUDIT_ONLY|PROPOSE_PATCH|REQUEST_TOOL|DOWNGRADE",
+        "decision_class": "string",
+        "reason": "string",
+        "evidence_class": "string",
+        "source_refs": "array[path:line]",
+        "claim_scope": "string",
+        "tool_requests": "array",
+        "patch_targets": "array",
+        "refusal_message": "string|null",
+        "validation_checks": "array",
+        "notes_on_uncertainty": "array"
+      },
+      "source_refs": "array[path:line]",
+      "evidence_class": "C0-C5",
+      "allowed_tools": "array",
+      "forbidden_actions": "array",
+      "acceptance_tests": "array"
+    },
+    "record_families": [
+      "audit-only inventory",
+      "patch request triage",
+      "claim downgrade/refusal",
+      "unknown-term gap-queue routing",
+      "tool endorsement block",
+      "textbook sync reminder",
+      "simulation result interpretation limits",
+      "theorem-language refusal",
+      "schema-validation failure"
+    ],
+    "bootstrap_mix": {
+      "positive_examples": 0.6,
+      "negative_examples": 0.25,
+      "contrastive_near_miss_examples": 0.15
+    },
+    "answer_Q010": "The first dataset should be schema-first and decision-first, not prose-first. Each record should force the model to cite authority, obey evidence ceilings, and choose among a small controlled decision set."
+  },
+  "risk_register": [
+    {
+      "risk": "Fine-tuning before schema closure will entrench inconsistent output formats",
+      "severity": "high",
+      "classification": "blocking"
+    },
+    {
+      "risk": "Training on provisional or superseded material will leak noncanonical doctrine into routing behavior",
+      "severity": "high",
+      "classification": "blocking"
+    },
+    {
+      "risk": "Rhetorically strong narrative documents may overpower humility gating if used naively as training targets",
+      "severity": "medium",
+      "classification": "important"
+    },
+    {
+      "risk": "Open Appendix F gaps make some ontology decisions inherently unsettled",
+      "severity": "medium",
+      "classification": "important",
+      "refs": [
+        "docs/textbook/mono_process_textbook_complete.md:2989-3018",
+        "docs/textbook/mono_process_textbook_complete.md:3073-3084"
+      ]
+    },
+    {
+      "risk": "Tool-routing errors if simulation tool rigor and governor allowed-tool policy are conflated",
+      "severity": "medium",
+      "classification": "important",
+      "refs": [
+        "registry/tool_manifest.json:1",
+        "registry/governance/patches/MPF_GOV_DEMOTION_UNENDORSED_TOOL_001.json:69-104"
+      ]
+    },
+    {
+      "risk": "Noisy filesystem examples and legacy artifacts may pollute dataset curation",
+      "severity": "medium",
+      "classification": "important"
+    }
+  ],
+  "final_ruling": {
+    "value": "NOT_READY_SCHEMA_GAPS",
+    "yes_no_conditional": "conditional",
+    "explanation": "Ready for prompt+RAG testing now. Ready for synthetic dataset build after a small schema/authority patch series. Not ready for fine-tuning yet because there is no single canonical governor input schema, no single canonical governor output schema, and no explicit training-manifest layer separating canonical from provisional material."
+  }
+}

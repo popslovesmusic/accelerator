@@ -1,0 +1,252 @@
+{
+  "packet_id": "ACELLORATOR_SEMANTIC_PROJECTION_MAPPING_20260724_001",
+  "objects": [
+    "sqlite_sequence"
+  ],
+  "indexes": [
+    {
+      "type": "index",
+      "name": "idx_artifacts_path",
+      "table": "artifacts",
+      "sql": "CREATE INDEX idx_artifacts_path ON artifacts(path)"
+    },
+    {
+      "type": "index",
+      "name": "idx_artifacts_status",
+      "table": "artifacts",
+      "sql": "CREATE INDEX idx_artifacts_status ON artifacts(orientation_status)"
+    },
+    {
+      "type": "index",
+      "name": "idx_audit_reports_report_id",
+      "table": "audit_reports",
+      "sql": "CREATE INDEX idx_audit_reports_report_id ON audit_reports(report_id)"
+    },
+    {
+      "type": "index",
+      "name": "idx_governance_decision_log_campaign_id",
+      "table": "governance_decision_log",
+      "sql": "CREATE INDEX idx_governance_decision_log_campaign_id\n    ON governance_decision_log(campaign_id)"
+    },
+    {
+      "type": "index",
+      "name": "idx_governance_decision_log_created_at",
+      "table": "governance_decision_log",
+      "sql": "CREATE INDEX idx_governance_decision_log_created_at\n    ON governance_decision_log(created_at)"
+    },
+    {
+      "type": "index",
+      "name": "idx_governance_decision_log_patch_id",
+      "table": "governance_decision_log",
+      "sql": "CREATE INDEX idx_governance_decision_log_patch_id\n    ON governance_decision_log(patch_id)"
+    },
+    {
+      "type": "index",
+      "name": "idx_governance_events_created_at",
+      "table": "governance_events",
+      "sql": "CREATE INDEX idx_governance_events_created_at\n    ON governance_events(created_at)"
+    },
+    {
+      "type": "index",
+      "name": "idx_governance_events_event_type",
+      "table": "governance_events",
+      "sql": "CREATE INDEX idx_governance_events_event_type\n    ON governance_events(event_type)"
+    },
+    {
+      "type": "index",
+      "name": "idx_governance_events_source_patch_id",
+      "table": "governance_events",
+      "sql": "CREATE INDEX idx_governance_events_source_patch_id\n    ON governance_events(source_patch_id)"
+    },
+    {
+      "type": "index",
+      "name": "idx_governance_events_subject_id",
+      "table": "governance_events",
+      "sql": "CREATE INDEX idx_governance_events_subject_id\n    ON governance_events(subject_id)"
+    },
+    {
+      "type": "index",
+      "name": "idx_semantic_authority_events_created_at",
+      "table": "semantic_authority_events",
+      "sql": "CREATE INDEX idx_semantic_authority_events_created_at\n    ON semantic_authority_events(created_at)"
+    },
+    {
+      "type": "index",
+      "name": "idx_semantic_authority_events_key",
+      "table": "semantic_authority_events",
+      "sql": "CREATE INDEX idx_semantic_authority_events_key\n    ON semantic_authority_events(semantic_key)"
+    },
+    {
+      "type": "index",
+      "name": "idx_semantic_authority_events_type",
+      "table": "semantic_authority_events",
+      "sql": "CREATE INDEX idx_semantic_authority_events_type\n    ON semantic_authority_events(event_type)"
+    },
+    {
+      "type": "index",
+      "name": "idx_semantic_authority_map_rank",
+      "table": "semantic_authority_map",
+      "sql": "CREATE INDEX idx_semantic_authority_map_rank\n    ON semantic_authority_map(authority_rank)"
+    },
+    {
+      "type": "index",
+      "name": "idx_semantic_authority_map_source",
+      "table": "semantic_authority_map",
+      "sql": "CREATE INDEX idx_semantic_authority_map_source\n    ON semantic_authority_map(authority_source)"
+    },
+    {
+      "type": "index",
+      "name": "idx_semantic_authority_map_status",
+      "table": "semantic_authority_map",
+      "sql": "CREATE INDEX idx_semantic_authority_map_status\n    ON semantic_authority_map(status)"
+    },
+    {
+      "type": "index",
+      "name": "idx_semantic_authority_map_type",
+      "table": "semantic_authority_map",
+      "sql": "CREATE INDEX idx_semantic_authority_map_type\n    ON semantic_authority_map(semantic_type)"
+    },
+    {
+      "type": "index",
+      "name": "sqlite_autoindex_artifacts_1",
+      "table": "artifacts",
+      "sql": null
+    },
+    {
+      "type": "index",
+      "name": "sqlite_autoindex_audit_reports_1",
+      "table": "audit_reports",
+      "sql": null
+    },
+    {
+      "type": "index",
+      "name": "sqlite_autoindex_compressed_residue_1",
+      "table": "compressed_residue",
+      "sql": null
+    },
+    {
+      "type": "index",
+      "name": "sqlite_autoindex_db_snapshot_refresh_metadata_1",
+      "table": "db_snapshot_refresh_metadata",
+      "sql": null
+    },
+    {
+      "type": "index",
+      "name": "sqlite_autoindex_debt_runtime_projection_1",
+      "table": "debt_runtime_projection",
+      "sql": null
+    },
+    {
+      "type": "index",
+      "name": "sqlite_autoindex_governance_decision_log_1",
+      "table": "governance_decision_log",
+      "sql": null
+    },
+    {
+      "type": "index",
+      "name": "sqlite_autoindex_governance_events_1",
+      "table": "governance_events",
+      "sql": null
+    },
+    {
+      "type": "index",
+      "name": "sqlite_autoindex_orientation_status_types_1",
+      "table": "orientation_status_types",
+      "sql": null
+    },
+    {
+      "type": "index",
+      "name": "sqlite_autoindex_semantic_authority_events_1",
+      "table": "semantic_authority_events",
+      "sql": null
+    },
+    {
+      "type": "index",
+      "name": "sqlite_autoindex_semantic_authority_map_1",
+      "table": "semantic_authority_map",
+      "sql": null
+    }
+  ],
+  "triggers": [],
+  "views": [
+    {
+      "type": "view",
+      "name": "authority_resolution_view",
+      "table": "authority_resolution_view",
+      "sql": "CREATE VIEW authority_resolution_view AS\nSELECT\n    'registry/formal_object_registry.json' AS target_pattern,\n    'registry' AS authority_owner,\n    'registry/governance/patches/STAGED_DSEM_ENABLEMENT_008.json' AS authority_source,\n    'current' AS supersession_status,\n    '[]' AS superseded_by,\n    'clear' AS conflict_state,\n    'allow' AS decision,\n    'Manual-approved additive candidate and provisional formal-object registration.' AS reason,\n    '[\"registry/formal_object_registry.json\",\"registry/governance/patches/STAGED_DSEM_ENABLEMENT_008.json\"]' AS evidence_paths,\n    '[]' AS warnings\nUNION ALL\nSELECT\n    'registry/math_hashes.json' AS target_pattern,\n    'registry' AS authority_owner,\n    'registry/governance/patches/STAGED_DSEM_ENABLEMENT_008.json' AS authority_source,\n    'current' AS supersession_status,\n    '[]' AS superseded_by,\n    'clear' AS conflict_state,\n    'allow' AS decision,\n    'Manual-approved derived hash update.' AS reason,\n    '[\"registry/math_hashes.json\",\"registry/governance/patches/STAGED_DSEM_ENABLEMENT_008.json\"]' AS evidence_paths,\n    '[]' AS warnings\nUNION ALL\nSELECT\n    'registry/math/d_semantics_obligation_registry.json' AS target_pattern,\n    'registry' AS authority_owner,\n    'registry/governance/patches/STAGED_DSEM_ENABLEMENT_008.json' AS authority_source,\n    'current' AS supersession_status,\n    '[]' AS superseded_by,\n    'clear' AS conflict_state,\n    'allow' AS decision,\n    'Manual-approved metadata update retaining OBL-D-001D OPEN.' AS reason,\n    '[\"registry/math/d_semantics_obligation_registry.json\",\"registry/governance/patches/STAGED_DSEM_ENABLEMENT_008.json\"]' AS evidence_paths,\n    '[]' AS warnings\nUNION ALL\nSELECT\n    'registry/governance/d_semantics_enablement_registry.json' AS target_pattern,\n    'registry' AS authority_owner,\n    'registry/governance/patches/STAGED_DSEM_ENABLEMENT_008.json' AS authority_source,\n    'current' AS supersession_status,\n    '[]' AS superseded_by,\n    'clear' AS conflict_state,\n    'allow' AS decision,\n    'Manual-approved governed evidence registry surface.' AS reason,\n    '[\"registry/governance/d_semantics_enablement_registry.json\",\"registry/governance/patches/STAGED_DSEM_ENABLEMENT_008.json\"]' AS evidence_paths,\n    '[]' AS warnings\nUNION ALL\nSELECT\n    'registry/governance/patches/STAGED_DSEM_ENABLEMENT_008.json' AS target_pattern,\n    'registry' AS authority_owner,\n    'registry/governance/patches/STAGED_DSEM_ENABLEMENT_008.json' AS authority_source,\n    'current' AS supersession_status,\n    '[]' AS superseded_by,\n    'clear' AS conflict_state,\n    'allow' AS decision,\n    'Manual-approved composite patch registration.' AS reason,\n    '[\"registry/governance/patches/STAGED_DSEM_ENABLEMENT_008.json\"]' AS evidence_paths,\n    '[]' AS warnings\nUNION ALL\nSELECT\n    'registry/governance_change_ledger.json' AS target_pattern,\n    'registry' AS authority_owner,\n    'registry/governance_change_ledger.json' AS authority_source,\n    'current' AS supersession_status,\n    '[]' AS superseded_by,\n    'clear' AS conflict_state,\n    'allow' AS decision,\n    'The governance change ledger is the canonical registry authority for live governance changes.' AS reason,\n    '[\"registry/governance_change_ledger.json\",\"docs/governance/GLOBAL_VALIDATION_ROUTINE.md\"]' AS evidence_paths,\n    '[]' AS warnings\nUNION ALL\nSELECT\n    'registry/research_debt_registry.json' AS target_pattern,\n    'registry' AS authority_owner,\n    'registry/research_debt_registry.json' AS authority_source,\n    'current' AS supersession_status,\n    '[]' AS superseded_by,\n    'clear' AS conflict_state,\n    'allow' AS decision,\n    'The research debt registry is the canonical registry authority for open and partially resolved governance debt.' AS reason,\n    '[\"registry/research_debt_registry.json\",\"docs/governance/GLOBAL_VALIDATION_ROUTINE.md\"]' AS evidence_paths,\n    '[]' AS warnings\nUNION ALL\nSELECT\n    'registry/governance/patches/PATCH_DB_GOVERNANCE_RUNTIME_003.json' AS target_pattern,\n    'registry' AS authority_owner,\n    'registry/governance/patches/PATCH_DB_GOVERNANCE_RUNTIME_003.json' AS authority_source,\n    'current' AS supersession_status,\n    '[]' AS superseded_by,\n    'clear' AS conflict_state,\n    'allow' AS decision,\n    'Patch registry entries remain governed registry surfaces and are writable only through governed change paths.' AS reason,\n    '[\"registry/governance_change_ledger.json\",\"docs/governance/GLOBAL_VALIDATION_ROUTINE.md\"]' AS evidence_paths,\n    '[]' AS warnings\nUNION ALL\nSELECT\n    'registry/db/migrations/20260703_governance_runtime_bootstrap_001.sql' AS target_pattern,\n    'db_runtime' AS authority_owner,\n    'registry/db/migrations/20260703_governance_runtime_bootstrap_001.sql' AS authority_source,\n    'superseded' AS supersession_status,\n    '[\"registry/db/migrations/20260703_governance_runtime_current_state_002.sql\",\"registry/db/migrations/20260703_governance_runtime_authority_resolution_003.sql\"]' AS superseded_by,\n    'stale' AS conflict_state,\n    'defer' AS decision,\n    'The bootstrap migration is superseded by later runtime migrations and should not be treated as the live authority surface.' AS reason,\n    '[\"registry/db/migrations/20260703_governance_runtime_current_state_002.sql\",\"registry/db/migrations/20260703_governance_runtime_authority_resolution_003.sql\"]' AS evidence_paths,\n    '[\"Use the later runtime migrations instead of the bootstrap surface.\"]' AS warnings\nUNION ALL\nSELECT\n    'registry/db/migrations/20260703_governance_runtime_current_state_002.sql' AS target_pattern,\n    'db_runtime' AS authority_owner,\n    'registry/db/migrations/20260703_governance_runtime_current_state_002.sql' AS authority_source,\n    'current' AS supersession_status,\n    '[]' AS superseded_by,\n    'clear' AS conflict_state,\n    'allow' AS decision,\n    'The current-state migration is the live runtime projection for state queries.' AS reason,\n    '[\"registry/db/migrations/20260703_governance_runtime_current_state_002.sql\",\"registry/db/README.md\"]' AS evidence_paths,\n    '[]' AS warnings\nUNION ALL\nSELECT\n    'registry/db/migrations/20260703_governance_runtime_authority_resolution_003.sql' AS target_pattern,\n    'db_runtime' AS authority_owner,\n    'registry/db/migrations/20260703_governance_runtime_authority_resolution_003.sql' AS authority_source,\n    'current' AS supersession_status,\n    '[]' AS superseded_by,\n    'clear' AS conflict_state,\n    'allow' AS decision,\n    'The authority-resolution migration is the live runtime projection for ownership and supersession queries.' AS reason,\n    '[\"registry/db/migrations/20260703_governance_runtime_authority_resolution_003.sql\",\"registry/db/README.md\"]' AS evidence_paths,\n    '[]' AS warnings\nUNION ALL\nSELECT\n    'registry/math_source_registry.json' AS target_pattern,\n    'registry' AS authority_owner,\n    'registry/math_source_registry.json' AS authority_source,\n    'current' AS supersession_status,\n    '[]' AS superseded_by,\n    'clear' AS conflict_state,\n    'allow' AS decision,\n    'The math source registry is the canonical registry source for foundational mathematical documents and provenance.' AS reason,\n    '[\"registry/math_source_registry.json\",\"docs/math/codex_master_index.md\"]' AS evidence_paths,\n    '[]' AS warnings\nUNION ALL\nSELECT\n    'registry/math_registry.json' AS target_pattern,\n    'registry' AS authority_owner,\n    'registry/math_source_registry.json' AS authority_source,\n    'superseded' AS supersession_status,\n    '[\"registry/math_source_registry.json\"]' AS superseded_by,\n    'deprecated' AS conflict_state,\n    'defer' AS decision,\n    'The legacy math registry name is deprecated in favor of registry/math_source_registry.json.' AS reason,\n    '[\"registry/math_source_registry.json\",\"docs/math/codex_master_index.md\",\"docs/math/open_questions_map.md\"]' AS evidence_paths,\n    '[\"Use registry/math_source_registry.json instead.\"]' AS warnings\nUNION ALL\nSELECT\n    'scripts/query_governance.py' AS target_pattern,\n    'db_runtime' AS authority_owner,\n    'scripts/query_governance.py' AS authority_source,\n    'current' AS supersession_status,\n    '[]' AS superseded_by,\n    'clear' AS conflict_state,\n    'allow' AS decision,\n    'The query_governance runtime script is part of the live DB governance gate implementation.' AS reason,\n    '[\"scripts/query_governance.py\",\"registry/db/migrations/20260703_governance_runtime_current_state_002.sql\",\"registry/db/migrations/20260703_governance_runtime_authority_resolution_003.sql\"]' AS evidence_paths,\n    '[]' AS warnings\nUNION ALL\nSELECT\n    'registry/db/README.md' AS target_pattern,\n    'registry' AS authority_owner,\n    'registry/db/README.md' AS authority_source,\n    'current' AS supersession_status,\n    '[]' AS superseded_by,\n    'clear' AS conflict_state,\n    'allow' AS decision,\n    'The DB README is a governed registry document that describes the live runtime surfaces.' AS reason,\n    '[\"registry/db/README.md\",\"docs/governance/GLOBAL_VALIDATION_ROUTINE.md\"]' AS evidence_paths,\n    '[]' AS warnings\nUNION ALL\nSELECT\n    'docs/governance/GLOBAL_VALIDATION_ROUTINE.md' AS target_pattern,\n    'docs' AS authority_owner,\n    'docs/governance/GLOBAL_VALIDATION_ROUTINE.md' AS authority_source,\n    'current' AS supersession_status,\n    '[]' AS superseded_by,\n    'clear' AS conflict_state,\n    'allow' AS decision,\n    'Governance documentation remains the narrative authority for procedural guidance.' AS reason,\n    '[\"docs/governance/GLOBAL_VALIDATION_ROUTINE.md\",\"outputs/audits/global_health_report.json\"]' AS evidence_paths,\n    '[]' AS warnings\nUNION ALL\nSELECT\n    'docs/governance/*.json' AS target_pattern,\n    'docs' AS authority_owner,\n    'docs/governance/GLOBAL_VALIDATION_ROUTINE.md' AS authority_source,\n    'current' AS supersession_status,\n    '[]' AS superseded_by,\n    'clear' AS conflict_state,\n    'allow' AS decision,\n    'Governance JSON surfaces remain narrative authority for governed execution artifacts.' AS reason,\n    '[\"docs/governance/GLOBAL_VALIDATION_ROUTINE.md\",\"outputs/audits/global_health_report.json\"]' AS evidence_paths,\n    '[]' AS warnings\nUNION ALL\nSELECT\n    'docs/textbook/mono_process_textbook_complete.md' AS target_pattern,\n    'textbook' AS authority_owner,\n    'docs/textbook/mono_process_textbook_complete.md' AS authority_source,\n    'current' AS supersession_status,\n    '[]' AS superseded_by,\n    'clear' AS conflict_state,\n    'allow' AS decision,\n    'The textbook remains the long-form narrative authority and is not replaced by runtime projections.' AS reason,\n    '[\"docs/textbook/mono_process_textbook_complete.md\",\"docs/governance/GLOBAL_VALIDATION_ROUTINE.md\"]' AS evidence_paths,\n    '[]' AS warnings"
+    },
+    {
+      "type": "view",
+      "name": "context_capsule_view",
+      "table": "context_capsule_view",
+      "sql": "CREATE VIEW context_capsule_view AS\nWITH\ncurrent_state AS (\n    SELECT\n        db_first_gate_state,\n        authority_boundary,\n        latest_decision_id,\n        latest_decision_patch_id,\n        latest_decision_decision,\n        latest_decision_reason,\n        coverage_state\n    FROM current_state_view\n    LIMIT 1\n),\nauthority_state AS (\n    SELECT\n        authority_owner,\n        authority_source,\n        conflict_state,\n        decision,\n        reason,\n        warnings\n    FROM authority_resolution_view\n    ORDER BY\n        CASE conflict_state\n            WHEN 'mixed' THEN 0\n            WHEN 'stale' THEN 1\n            WHEN 'unavailable' THEN 2\n            ELSE 3\n        END,\n        target_pattern\n    LIMIT 1\n),\npatch_state AS (\n    SELECT\n        patch_id,\n        status,\n        decision,\n        reason,\n        blocking_conditions\n    FROM patch_chain_view\n    ORDER BY COALESCE(created_at, db_snapshot_at) DESC\n    LIMIT 1\n),\nreplay_state AS (\n    SELECT\n        COUNT(*) AS replay_subject_count,\n        COALESCE(SUM(event_count), 0) AS replay_event_count,\n        CASE\n            WHEN COUNT(*) > 0 THEN 'projected'\n            ELSE 'empty'\n        END AS replay_reconciliation_state,\n        CASE\n            WHEN COUNT(*) > 0 THEN 'diagnostic_only'\n            ELSE 'unavailable'\n        END AS replay_boundary_state,\n        (SELECT subject_id FROM governance_replay_reconciliation_view ORDER BY latest_created_at DESC, subject_id DESC LIMIT 1) AS replay_latest_subject_id,\n        (SELECT subject_type FROM governance_replay_reconciliation_view ORDER BY latest_created_at DESC, subject_id DESC LIMIT 1) AS replay_latest_subject_type,\n        (SELECT latest_event_id FROM governance_replay_reconciliation_view ORDER BY latest_created_at DESC, subject_id DESC LIMIT 1) AS replay_latest_event_id,\n        (SELECT latest_event_type FROM governance_replay_reconciliation_view ORDER BY latest_created_at DESC, subject_id DESC LIMIT 1) AS replay_latest_event_type,\n        (SELECT latest_source_patch_id FROM governance_replay_reconciliation_view ORDER BY latest_created_at DESC, subject_id DESC LIMIT 1) AS replay_latest_source_patch_id,\n        (SELECT latest_source_path FROM governance_replay_reconciliation_view ORDER BY latest_created_at DESC, subject_id DESC LIMIT 1) AS replay_latest_source_path,\n        (SELECT latest_created_at FROM governance_replay_reconciliation_view ORDER BY latest_created_at DESC, subject_id DESC LIMIT 1) AS replay_latest_created_at\n    FROM governance_replay_reconciliation_view\n),\ndebt_state AS (\n    SELECT\n        COUNT(*) AS debt_count,\n        SUM(CASE WHEN status IN ('open', 'partial') THEN 1 ELSE 0 END) AS open_or_partial_count,\n        SUM(CASE WHEN decision_effect = 'block' THEN 1 ELSE 0 END) AS blocking_count,\n        GROUP_CONCAT(debt_id, ',') AS debt_ids\n    FROM debt_runtime_view\n)\nSELECT\n    COALESCE((SELECT db_first_gate_state FROM current_state), 'unknown') AS global_runtime_status,\n    COALESCE((SELECT conflict_state FROM authority_state), (SELECT authority_boundary FROM current_state), 'unknown') AS authority_boundary,\n    COALESCE((SELECT status FROM patch_state), 'unknown') AS patch_status,\n    CASE\n        WHEN COALESCE((SELECT debt_count FROM debt_state), 0) = 0 THEN 'unknown'\n        WHEN COALESCE((SELECT blocking_count FROM debt_state), 0) > 0 THEN 'blocking'\n        WHEN COALESCE((SELECT open_or_partial_count FROM debt_state), 0) > 0 THEN 'partial'\n        ELSE 'resolved'\n    END AS debt_status,\n    COALESCE((SELECT replay_reconciliation_state FROM replay_state), 'unknown') AS replay_reconciliation_state,\n    COALESCE((SELECT replay_boundary_state FROM replay_state), 'unknown') AS replay_boundary_state,\n    COALESCE((SELECT replay_subject_count FROM replay_state), 0) AS replay_subject_count,\n    COALESCE((SELECT replay_event_count FROM replay_state), 0) AS replay_event_count,\n    (SELECT replay_latest_subject_id FROM replay_state) AS replay_latest_subject_id,\n    (SELECT replay_latest_subject_type FROM replay_state) AS replay_latest_subject_type,\n    (SELECT replay_latest_event_id FROM replay_state) AS replay_latest_event_id,\n    (SELECT replay_latest_event_type FROM replay_state) AS replay_latest_event_type,\n    (SELECT replay_latest_source_patch_id FROM replay_state) AS replay_latest_source_patch_id,\n    (SELECT replay_latest_source_path FROM replay_state) AS replay_latest_source_path,\n    (SELECT replay_latest_created_at FROM replay_state) AS replay_latest_created_at,\n    COALESCE((SELECT reason FROM authority_state), (SELECT latest_decision_reason FROM current_state), '') AS warnings,\n    COALESCE((SELECT debt_ids FROM debt_state), '') AS minimal_evidence_paths,\n    COALESCE((SELECT coverage_state FROM current_state), 'bootstrap') AS coverage_state"
+    },
+    {
+      "type": "view",
+      "name": "current_state_view",
+      "table": "current_state_view",
+      "sql": "CREATE VIEW current_state_view AS\nSELECT\n    (SELECT MAX(indexed_at) FROM artifacts) AS latest_artifact_indexed_at,\n    (SELECT COUNT(*) FROM artifacts) AS artifact_count,\n    (SELECT COUNT(*) FROM artifacts WHERE orientation_status = 'canonical_active') AS canonical_active_count,\n    (SELECT COUNT(*) FROM artifacts WHERE orientation_status = 'active_runtime') AS active_runtime_count,\n    (SELECT COUNT(*) FROM artifacts WHERE orientation_status IN (\n        'historical_residue',\n        'archived',\n        'superseded',\n        'invalidated',\n        'unverified_residue'\n    )) AS residue_count,\n    (SELECT COUNT(*) FROM artifacts WHERE orientation_status = 'invalidated') AS invalidated_count,\n    (SELECT COUNT(*) FROM governance_decision_log) AS decision_count,\n    (SELECT decision_id FROM governance_decision_log ORDER BY COALESCE(created_at, db_snapshot_at) DESC, id DESC LIMIT 1) AS latest_decision_id,\n    (SELECT patch_id FROM governance_decision_log ORDER BY COALESCE(created_at, db_snapshot_at) DESC, id DESC LIMIT 1) AS latest_decision_patch_id,\n    (SELECT decision FROM governance_decision_log ORDER BY COALESCE(created_at, db_snapshot_at) DESC, id DESC LIMIT 1) AS latest_decision_decision,\n    (SELECT reason FROM governance_decision_log ORDER BY COALESCE(created_at, db_snapshot_at) DESC, id DESC LIMIT 1) AS latest_decision_reason,\n    (SELECT created_at FROM governance_decision_log ORDER BY COALESCE(created_at, db_snapshot_at) DESC, id DESC LIMIT 1) AS latest_decision_at,\n    'RT := [(ℰ≠0) ⇔R δα(ℰ>0)]' AS current_rt,\n    CASE\n        WHEN (\n            SELECT COUNT(*)\n            FROM semantic_authority_view\n            WHERE semantic_key IN ('RT_CORE', 'META_A_BINDING', 'META_B_BINDING')\n              AND status = 'active'\n        ) = 3 THEN 'semantic_projection_ready'\n        ELSE 'semantic_projection_partial'\n    END AS semantic_projection_state,\n    (SELECT COUNT(*) FROM semantic_authority_view) AS semantic_authority_count,\n    CASE\n        WHEN (SELECT COUNT(*) FROM semantic_authority_view) > 0 THEN 'projected'\n        ELSE 'empty'\n    END AS semantic_authority_graph_state,\n    (SELECT COUNT(*) FROM claim_evidence_links) AS claim_evidence_link_count,\n    (SELECT COUNT(DISTINCT claim_id) FROM claim_evidence_links) AS claim_evidence_claim_count,\n    CASE\n        WHEN (SELECT COUNT(*) FROM claim_evidence_links) > 0 THEN 'projected'\n        ELSE 'empty'\n    END AS claim_evidence_state,\n    CASE\n        WHEN (SELECT COUNT(*) FROM artifacts WHERE orientation_status IN (\n            'historical_residue',\n            'archived',\n            'superseded',\n            'invalidated',\n            'unverified_residue'\n        )) > 0 THEN 'historical_residue_compressed'\n        ELSE 'historical_residue_clear'\n    END AS historical_residue_state,\n    'active' AS db_first_gate_state,\n    'registry' AS active_authority,\n    'registry_primary_mixed_sources' AS authority_boundary,\n    NULL AS open_runtime_debt_count,\n    NULL AS live_blocker_count,\n    CASE\n        WHEN (SELECT MAX(indexed_at) FROM artifacts) IS NULL THEN 'unknown'\n        WHEN julianday('now') - julianday((SELECT MAX(indexed_at) FROM artifacts)) > 14 THEN 'stale_snapshot_warning'\n        ELSE 'current'\n    END AS snapshot_freshness,\n    CASE\n        WHEN (SELECT COUNT(*) FROM governance_decision_log) > 0 THEN 'stateful_projection'\n        ELSE 'bootstrap_projection'\n    END AS coverage_state"
+    },
+    {
+      "type": "view",
+      "name": "db_snapshot_freshness_view",
+      "table": "db_snapshot_freshness_view",
+      "sql": "CREATE VIEW db_snapshot_freshness_view AS\nSELECT\n    (SELECT MAX(indexed_at) FROM artifacts) AS indexed_at,\n    CASE\n        WHEN (SELECT MAX(indexed_at) FROM artifacts) IS NULL THEN 'unknown'\n        WHEN julianday('now') - julianday((SELECT MAX(indexed_at) FROM artifacts)) > 14 THEN 'stale'\n        ELSE 'fresh'\n    END AS db_snapshot_status,\n    CASE\n        WHEN (SELECT MAX(indexed_at) FROM artifacts) IS NULL THEN NULL\n        ELSE CAST(julianday('now') - julianday((SELECT MAX(indexed_at) FROM artifacts)) AS INTEGER)\n    END AS snapshot_age_days,\n    CASE\n        WHEN (SELECT MAX(indexed_at) FROM artifacts) IS NULL THEN 'unavailable'\n        WHEN julianday('now') - julianday((SELECT MAX(indexed_at) FROM artifacts)) > 14 THEN 'refresh_required'\n        ELSE 'fresh_within_threshold'\n    END AS freshness_class,\n    'db_projection' AS coverage_state,\n    'DB snapshot freshness is projected from indexed artifact timestamps; worktree recency is assessed by the runtime gate.' AS rule_text"
+    },
+    {
+      "type": "view",
+      "name": "db_snapshot_refresh_view",
+      "table": "db_snapshot_refresh_view",
+      "sql": "CREATE VIEW db_snapshot_refresh_view AS\n        SELECT\n            scope,\n            refresh_id,\n            last_refresh_attempt,\n            last_refresh_result,\n            indexed_at,\n            source_worktree_marker,\n            runtime_worktree_marker,\n            error_reason,\n            registry_count,\n            indexed_registry_count,\n            updated_at\n        FROM db_snapshot_refresh_metadata\n        WHERE scope = 'global'"
+    },
+    {
+      "type": "view",
+      "name": "debt_runtime_view",
+      "table": "debt_runtime_view",
+      "sql": "CREATE VIEW debt_runtime_view AS\nSELECT\n    debt_id,\n    title,\n    department,\n    status,\n    severity,\n    domain,\n    blocking_scope,\n    owner_surface,\n    resolution_patch,\n    decision_effect,\n    evidence_paths,\n    warnings,\n    source_path,\n    introduced_by,\n    affects,\n    blocks,\n    depends_on,\n    required_resolution,\n    blocker_projection,\n    residue_projection,\n    raw_status,\n    raw_severity,\n    updated_at,\n    'registry_projection' AS coverage_state\nFROM debt_runtime_projection"
+    },
+    {
+      "type": "view",
+      "name": "governance_event_count_by_subject_view",
+      "table": "governance_event_count_by_subject_view",
+      "sql": "CREATE VIEW governance_event_count_by_subject_view AS\nSELECT\n    subject_id,\n    subject_type,\n    COUNT(*) AS event_count,\n    MAX(COALESCE(created_at, '')) AS latest_created_at\nFROM governance_events\nGROUP BY subject_id, subject_type"
+    },
+    {
+      "type": "view",
+      "name": "governance_event_latest_by_subject_view",
+      "table": "governance_event_latest_by_subject_view",
+      "sql": "CREATE VIEW governance_event_latest_by_subject_view AS\nSELECT\n    event_id,\n    event_type,\n    subject_id,\n    subject_type,\n    source_patch_id,\n    source_path,\n    payload_json,\n    evidence_paths_json,\n    created_at,\n    event_count\nFROM (\n    SELECT\n        governance_events.*,\n        COUNT(*) OVER (PARTITION BY subject_id, subject_type) AS event_count,\n        ROW_NUMBER() OVER (\n            PARTITION BY subject_id, subject_type\n            ORDER BY COALESCE(created_at, '') DESC, event_id DESC\n        ) AS row_rank\n    FROM governance_events\n)\nWHERE row_rank = 1"
+    },
+    {
+      "type": "view",
+      "name": "governance_replay_reconciliation_view",
+      "table": "governance_replay_reconciliation_view",
+      "sql": "CREATE VIEW governance_replay_reconciliation_view AS\nSELECT\n    l.subject_id,\n    l.subject_type,\n    l.event_id AS latest_event_id,\n    l.event_type AS latest_event_type,\n    l.source_patch_id AS latest_source_patch_id,\n    l.source_path AS latest_source_path,\n    c.event_count,\n    c.latest_created_at\nFROM governance_event_latest_by_subject_view AS l\nLEFT JOIN governance_event_count_by_subject_view AS c\n    ON c.subject_id = l.subject_id\n   AND c.subject_type = l.subject_type"
+    },
+    {
+      "type": "view",
+      "name": "governance_runtime_decision_view",
+      "table": "governance_runtime_decision_view",
+      "sql": "CREATE VIEW governance_runtime_decision_view AS\nSELECT\n    decision_id,\n    patch_id,\n    campaign_id,\n    requested_action,\n    decision,\n    reason,\n    blocking_conditions,\n    authority_resolution,\n    dependency_resolution,\n    provenance_resolution,\n    validator_resolution,\n    db_snapshot_at,\n    created_at\nFROM governance_decision_log"
+    },
+    {
+      "type": "view",
+      "name": "patch_application_gate_view",
+      "table": "patch_application_gate_view",
+      "sql": "CREATE VIEW patch_application_gate_view AS\nSELECT\n    decision_id,\n    patch_id,\n    campaign_id,\n    requested_action AS action,\n    decision,\n    reason,\n    blocking_conditions,\n    created_at\nFROM governance_decision_log"
+    },
+    {
+      "type": "view",
+      "name": "patch_chain_view",
+      "table": "patch_chain_view",
+      "sql": "CREATE VIEW patch_chain_view AS\nSELECT\n    patch_id,\n    requested_action,\n    decision,\n    reason,\n    blocking_conditions,\n    dependency_resolution,\n    provenance_resolution,\n    validator_resolution,\n    db_snapshot_at,\n    created_at,\n    'decision_log_projection' AS coverage_state\nFROM governance_decision_log"
+    },
+    {
+      "type": "view",
+      "name": "semantic_authority_view",
+      "table": "semantic_authority_view",
+      "sql": "CREATE VIEW semantic_authority_view AS\nSELECT\n    semantic_key,\n    semantic_type,\n    authority_source,\n    authority_rank,\n    supersedes,\n    status,\n    canonical_expression,\n    notes,\n    created_at,\n    updated_at\nFROM semantic_authority_map"
+    }
+  ],
+  "status": "No object is safe to remove; unclassified objects require human schema decision."
+}

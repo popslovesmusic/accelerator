@@ -1,0 +1,21 @@
+{
+  "hotfix_id": "HOTFIX_008_LEXICON_JSON_REPAIR",
+  "timestamp": "2026-05-08T02:35:00Z",
+  "repairs": [
+    {
+      "file": "registry/lexicon_canonical.json",
+      "issue": "Missing comma and dangling fields/braces in 'continuation' term after bad replacement.",
+      "action": "Surgically removed malformed boundary and restored object closure."
+    },
+    {
+      "file": "registry/lexicon_alias_map.json",
+      "issue": "Extra closing brace at the end of the file.",
+      "action": "Removed trailing character."
+    }
+  ],
+  "verification": {
+    "json_validation": "passed for both files",
+    "smoke_test": "governance_gate.py successfully loaded registries (confirmed by traceback passing initialization phase)"
+  },
+  "status": "success"
+}

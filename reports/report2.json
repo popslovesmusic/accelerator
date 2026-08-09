@@ -1,0 +1,142 @@
+{
+  "audit_metadata": {
+    "id": "PCD_CLEAN_STRUCTURAL_AUDIT_20260511_V1",
+    "timestamp": "2026-05-11T11:00:00Z",
+    "auditor": "Gemini-CLI",
+    "objective": "Clean-scope structural audit excluding historical residue",
+    "superseded_by": "outputs/audits/global_health_report.json"
+  },
+  "directory_listing": {
+    "registry": [
+      "db/",
+      "governance/",
+      "reports/",
+      "lexicon_canonical.json",
+      "math_registry.json",
+      "compliance_charter_v2_3.json"
+    ],
+    "docs": [
+      "governance/",
+      "theory/foundational/5_03_26 unity/math/lemmas/"
+    ],
+    "scripts": [
+      "global_validate.py",
+      "governance_gate.py",
+      "multi_sim_runner.py"
+    ],
+    "tools": [
+      "agent_based_sim_v1_cpp/",
+      "structural_box_sim_cpp/",
+      "fsa_rule_engine_sim_v1_cpp/"
+    ],
+    "oneproc": [
+      "commands/",
+      "governance/",
+      "workers/"
+    ],
+    "configs": [
+      "canonical/",
+      "runs/",
+      "validation/"
+    ],
+    ".gemini/": [
+      "GEMINI.md"
+    ],
+    "tests": [
+      "test_lexicon_cli.py"
+    ]
+  },
+  "active_authority_sources": [
+    "D:/projects/acellorator/GEMINI.md",
+    "D:/projects/acellorator/registry/compliance_charter_v2_3.json",
+    "D:/projects/acellorator/registry/lexicon_canonical.json",
+    "D:/projects/acellorator/registry/math_registry.json",
+    "D:/projects/acellorator/registry/tool_manifest.json"
+  ],
+  "ignored_paths": [
+    "results/",
+    "outputs/",
+    "experiments/",
+    "governance_backups/",
+    "reports/ (excluding those in registry/reports)",
+    "__pycache__/",
+    ".venv/",
+    ".git/"
+  ],
+  "orientation_conflicts": [
+    {
+      "type": "shadow_registry",
+      "active": "registry/lexicon_canonical.json",
+      "shadow": "registry/lexicon.json",
+      "risk": "Potential terminology drift if legacy file is used by un-governed scripts."
+    },
+    {
+      "type": "shadow_math",
+      "active": "lemmas/L001_admissible_increment_v3.md",
+      "shadow": [
+        "L001_admissible_increment.md",
+        "L001_admissible_increment_v2.md"
+      ],
+      "risk": "Version confusion during manual derivation or review."
+    },
+    {
+      "type": "historical_residue_in_runtime_path",
+      "path": "tools/Simulation_engines_extracted_2026-04-25",
+      "risk": "Active scripts might inadvertently reference outdated engine logic."
+    }
+  ],
+  "runtime_health": {
+    "global_validation": "PASS",
+    "engine_loadability": "12/12 tested C++ engines loadable",
+    "dependency_issues": [
+      "oneAPI dependency missing for C++ FSA engine in local environment"
+    ]
+  },
+  "governance_health": {
+    "structural_lock": "ACTIVE",
+    "charter_compliance": "v2.3 ENFORCED",
+    "claim_ladder": "C1-C6 ACTIVE"
+  },
+  "lexicon_health": {
+    "canonical_terms": 876,
+    "gap_queue_depth": 46,
+    "validated_roles": 64,
+    "status": "PARTIAL"
+  },
+  "math_health": {
+    "registered_lemmas": 33,
+    "verified_status": [
+      "L005 verified at Rigor-5"
+    ],
+    "unresolved_primitives": [
+      "delta (implicit in update logic)"
+    ],
+    "status": "CURRENT (with versioning residue)"
+  },
+  "engine_health": {
+    "total_registered": 55,
+    "c4_active": 11,
+    "c1_blocked": 13,
+    "preferred_backend": "C++/AVX2"
+  },
+  "current_blockers": [
+    {
+      "id": "BLOCK-P0-CERT",
+      "desc": "Historical blocker retained for residue tracking only; superseded by later governed health evidence."
+    },
+    {
+      "id": "CPP-DEP-FAIL",
+      "desc": "Intel oneAPI dependency prevents C++ FSA execution."
+    }
+  ],
+  "warnings": [
+    "Ground-Zero v2.3 makes all historical results unrecoverable.",
+    "Math registry contains multiple overlapping versions of the same lemmas.",
+    "Current engine/governance status should be read from outputs/audits/global_health_report.json rather than this May 2026 snapshot."
+  ],
+  "recommended_cleanup_targets": [
+    "registry/lexicon.json",
+    "tools/Simulation_engines_extracted_2026-04-25",
+    "D:/projects/acellorator/docs/theory/foundational/5_03_26 unity/math/lemmas/ (older versions)"
+  ]
+}

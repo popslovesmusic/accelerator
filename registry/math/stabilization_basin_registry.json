@@ -1,0 +1,72 @@
+{
+  "patch_id": "MPF-RDYN-004",
+  "name": "Stabilization Basin Registry",
+  "status": "active",
+  "metric_status": "DYNAMICS_SCAFFOLD_ONLY",
+  "purpose": "Define non-final persistence structures where reconstruction configurations remain locally stable under bounded deformation.",
+  "governance_status": {
+    "theorem_status": "NOT_PROVEN",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL",
+    "non_separability_acknowledged": true,
+    "source_relation": "(E≠0) ⇔R δ(E>0)"
+  },
+  "basin_classes": [
+    {
+      "class_id": "SB_LOCAL_PERSISTENCE",
+      "definition": "Local configurations where reconstruction accessibility is maintained despite minor coordinate or scale shifts.",
+      "stability_type": "LOCAL"
+    },
+    {
+      "class_id": "SB_CONFLICT_STABILIZED",
+      "definition": "Basins where stability is achieved through the balancing of opposing projection tensions (e.g., discrete/smooth).",
+      "stability_type": "CONFLICT_MEDIATED"
+    },
+    {
+      "class_id": "SB_DRIFT_RESISTANT",
+      "definition": "Configurations that actively resist semantic or topological drift away from the local neighborhood.",
+      "stability_type": "ROBUST"
+    },
+    {
+      "class_id": "SB_TEMPORARY_ALIGNMENT",
+      "definition": "Short-lived stability structures resulting from transient projection overlaps.",
+      "stability_type": "METASTABLE"
+    },
+    {
+      "class_id": "SB_COLLAPSE_PRONE",
+      "definition": "Configurations nearing a deformation threshold where the stabilization structure is likely to fail.",
+      "stability_type": "UNSTABLE"
+    }
+  ],
+  "forbidden_interpretations": [
+    {
+      "interpretation_id": "SB-FI-001",
+      "statement": "Attractor as primitive object."
+    },
+    {
+      "interpretation_id": "SB-FI-002",
+      "statement": "Final equilibrium."
+    },
+    {
+      "interpretation_id": "SB-FI-003",
+      "statement": "Absolute convergence."
+    }
+  ],
+  "governance_rules": [
+    {
+      "rule_id": "SB-RULE-001",
+      "rule": "Stabilization basins are analytical persistence markers, not physical attractors or regions."
+    },
+    {
+      "rule_id": "SB-RULE-002",
+      "rule": "Every basin must declare its deformation threshold and stability type."
+    }
+  ],
+  "forbidden_claims": [
+    "Stabilization basins prove that the source relation has 'fixed points'.",
+    "Persistent alignment derives physical mass or energy density.",
+    "Basin stability justifies the assume of observer-independent convergence."
+  ],
+  "source_relation": "(E≠0) ⇔R δ(E>0)",
+  "non_separability_acknowledged": true
+}

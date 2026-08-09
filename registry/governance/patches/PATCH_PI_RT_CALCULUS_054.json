@@ -1,0 +1,117 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_054",
+  "status": "APPLIED",
+  "applied_on": "2026-07-07T00:36:29.8663104-04:00",
+  "type": "operator_classification_patch",
+  "campaign": "RT_CALCULUS",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "title": "A|E Ordinal Mismatch Classes",
+  "mode": "additive",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_053"
+  ],
+  "basis": {
+    "source_patches": [
+      "PATCH_PI_RT_CALCULUS_053"
+    ],
+    "source_surfaces": [
+      "registry/governance/patches/PATCH_PI_RT_CALCULUS_053.json",
+      "docs/governance/delta_operator_discipline_053.json",
+      "docs/governance/delta_allowed_forbidden_readings_053.json",
+      "docs/governance/delta_non_metric_counterexample_053.json"
+    ],
+    "scope": "Define qualitative and ordinal Delta outputs under a declared <S> before numerical metric values are introduced. The basis is additive and documentary, extending the applied Delta discipline while leaving RT_core unchanged."
+  },
+  "core_rule": {
+    "id": "ORDINAL_MISMATCH_CLASSES_001",
+    "statement": "Delta may return ordinal mismatch classes under a declared <S> before any scalar magnitude, norm, unit, or topology is defined."
+  },
+  "candidate_classes": [
+    "NO_EXPRESSED_MISMATCH",
+    "LOW_MISMATCH",
+    "MODERATE_MISMATCH",
+    "HIGH_MISMATCH",
+    "ADMISSIBILITY_BREAK"
+  ],
+  "formal_schema": {
+    "candidate_expression": "A|E := Delta(A <S>_ra E)",
+    "required_inputs": [
+      "typed A",
+      "typed E",
+      "declared <S>",
+      "declared r_a"
+    ],
+    "minimum_output": "ordinal mismatch class under <S>",
+    "not_yet_defined": [
+      "numeric value",
+      "metric norm",
+      "unit scale",
+      "distance function",
+      "topology"
+    ],
+    "ordinal_outputs": [
+      "NO_EXPRESSED_MISMATCH",
+      "LOW_MISMATCH",
+      "MODERATE_MISMATCH",
+      "HIGH_MISMATCH",
+      "ADMISSIBILITY_BREAK"
+    ]
+  },
+  "relationship_to_prior_patches": {
+    "053": "Constrains Delta so the metric bridge does not collapse prematurely into ordinary distance.",
+    "054": "Adds a governed ordinal layer for Delta outputs without introducing numeric metric claims."
+  },
+  "target_files": [
+    "docs/governance/ordinal_mismatch_classes_054.json",
+    "docs/governance/ordinal_mismatch_trace_054.json",
+    "docs/governance/ordinal_non_metric_counterexample_054.json"
+  ],
+  "required_repo_changes": [
+    {
+      "path": "docs/governance/ordinal_mismatch_classes_054.json",
+      "description": "Record the ordinal output classes available to Delta under a declared <S>."
+    },
+    {
+      "path": "docs/governance/ordinal_mismatch_trace_054.json",
+      "description": "Show the ordered pipeline from declared A|E inputs to an ordinal Delta class."
+    },
+    {
+      "path": "docs/governance/ordinal_non_metric_counterexample_054.json",
+      "description": "Show that ordinal mismatch classes do not collapse into ordinary metric values."
+    }
+  ],
+  "non_claims": [
+    "Does not define a numeric distance.",
+    "Does not define a Euclidean metric.",
+    "Does not define a norm.",
+    "Does not define units.",
+    "Does not define a topology.",
+    "Does not assert physical measurement.",
+    "Does not modify RT_core."
+  ],
+  "required_execution_surface": [
+    "ordinal_mismatch_classes_054.json",
+    "ordinal_mismatch_trace_054.json",
+    "ordinal_non_metric_counterexample_054.json"
+  ],
+  "validation_expectation": {
+    "json_parse": "required",
+    "registry_record_only": "required",
+    "execution_surface": "required",
+    "textbook_update": "deferred",
+    "rt_core_unchanged": "required"
+  },
+  "claim_humility": {
+    "current_status": "proposed_only",
+    "non_claims": [
+      "Does not define a numeric distance.",
+      "Does not define a Euclidean metric.",
+      "Does not define a norm.",
+      "Does not define units.",
+      "Does not define a topology.",
+      "Does not assert physical measurement.",
+      "Does not modify RT_core."
+    ]
+  },
+  "agent_instruction": "Create PATCH_PI_RT_CALCULUS_054 as PROPOSED only. Use additive mode, cite applied PATCH_PI_RT_CALCULUS_053 as provenance, build the execution surface, and do not apply until patch-gate returns apply."
+}

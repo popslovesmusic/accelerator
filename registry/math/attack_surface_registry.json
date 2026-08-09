@@ -1,0 +1,96 @@
+{
+  "registry_id": "ATTACK_SURFACE_REGISTRY",
+  "version": "1.0.0",
+  "surfaces": [
+    {
+      "bridge_id": "OPEN_BRIDGE_001",
+      "attack_surfaces": [
+        {
+          "surface_id": "AS_001",
+          "name": "Orientation Removal",
+          "description": "Completely eliminate -(i) from closure formation.",
+          "attack_question": "Can closure survive without orientation?",
+          "priority": 1
+        },
+        {
+          "surface_id": "AS_002",
+          "name": "Orientation Randomization",
+          "description": "Replace coherent orientation with random orientation updates.",
+          "attack_question": "Can random orientation perform equally?",
+          "priority": 2
+        },
+        {
+          "surface_id": "AS_003",
+          "name": "Orientation Shuffling",
+          "description": "Preserve orientation count but destroy ordering.",
+          "attack_question": "Does ordering matter?",
+          "priority": 6
+        },
+        {
+          "surface_id": "AS_004",
+          "name": "Symmetry Injection",
+          "description": "Force D(Sa|Sb)=D(Sb|Sa).",
+          "attack_question": "Does asymmetry actually generate orientation?",
+          "priority": 7
+        },
+        {
+          "surface_id": "AS_005",
+          "name": "Residue Dominance",
+          "description": "Increase residue influence while degrading orientation.",
+          "attack_question": "Is residue doing all the work?",
+          "priority": 3
+        },
+        {
+          "surface_id": "AS_006",
+          "name": "Admissibility Dominance",
+          "description": "Increase delta_a influence while degrading orientation.",
+          "attack_question": "Is admissibility doing all the work?",
+          "priority": 4
+        },
+        {
+          "surface_id": "AS_007",
+          "name": "Topology Dominance",
+          "description": "Keep topology fixed while removing orientation.",
+          "attack_question": "Is topology the actual stabilizer?",
+          "priority": 8
+        },
+        {
+          "surface_id": "AS_008",
+          "name": "Selection Dominance",
+          "description": "Replace orientation-driven selection with direct optimization.",
+          "attack_question": "Can Arb_A bypass orientation?",
+          "priority": 5
+        }
+      ],
+      "failure_modes": {
+        "FM_001": {
+          "name": "Orientation Irrelevance",
+          "condition": "Closure unaffected by orientation changes."
+        },
+        "FM_002": {
+          "name": "Orientation Redundancy",
+          "condition": "Another mechanism completely explains closure."
+        },
+        "FM_003": {
+          "name": "Orientation Substitution",
+          "condition": "Random or alternate mechanisms replace orientation."
+        },
+        "FM_004": {
+          "name": "Orientation Epiphenomenon",
+          "condition": "Orientation appears after closure rather than causing closure."
+        },
+        "FM_005": {
+          "name": "Orientation Dependency Collapse",
+          "condition": "Bridge cannot be isolated from residue or admissibility."
+        }
+      },
+      "output_requirements": [
+        "survival_rate",
+        "collapse_rate",
+        "effect_size",
+        "confidence_interval",
+        "comparison_to_control"
+      ]
+    }
+  ]
+}

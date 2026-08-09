@@ -1,0 +1,41 @@
+{
+  "report_id": "RT_INDUCTION_MTO_OTM_CALCULUS_001_INDEPENDENT_VALIDATION_SET_001",
+  "packet_id": "RT_INDUCTION_MTO_OTM_CALCULUS_001",
+  "status": "VALIDATION_SPECIFICATION_NOT_RUN",
+  "validation_mode": "INDEPENDENT_BOUNDED_FIXTURES",
+  "authority": "NON_CANONICAL_RESEARCH_MEMORY",
+  "canonical_math_modified": false,
+  "independence_rule": "Fixtures are authored as a separate validation set and do not reuse the proposal's arithmetic examples as their sole evidence.",
+  "contexts": [
+    {"context_id": "C_ORI_002", "rule": "o_a and o_b are jointly admissible when the compatibility witness is valid."},
+    {"context_id": "C_ORI_003", "rule": "o_a precedes o_b under the declared typed ordering relation."},
+    {"context_id": "C_ORI_004", "rule": "o_a and o_b conflict under an exclusive assignment constraint."}
+  ],
+  "fixtures": [
+    {"fixture_id": "IND-VAL-001", "context_id": "C_ORI_002", "left": "o_a", "right": "o_b", "evidence": "valid_joint_admissibility_witness", "expected": "COMPATIBLE"},
+    {"fixture_id": "IND-VAL-002", "context_id": "C_ORI_003", "left": "o_a", "right": "o_b", "evidence": "valid_typed_order_witness", "expected": "ORDERED"},
+    {"fixture_id": "IND-VAL-003", "context_id": "C_ORI_004", "left": "o_a", "right": "o_b", "evidence": "valid_exclusive_conflict_witness", "expected": "CONFLICT"},
+    {"fixture_id": "IND-VAL-004", "context_id": null, "left": "o_a", "right": "o_b", "evidence": "none", "expected": "INCOMPARABLE_OR_UNRESOLVED"},
+    {"fixture_id": "IND-VAL-005", "context_id": "C_ORI_003", "left": "o_a", "right": "o_b", "evidence": "ordering_relation_missing", "expected": "INCOMPARABLE_OR_UNRESOLVED"},
+    {"fixture_id": "IND-VAL-006", "context_id": "C_ORI_004", "left": "o_a", "right": "o_b", "evidence": "conflict_claim_without_witness", "expected": "UNRESOLVED_NOT_CONFLICT"},
+    {"fixture_id": "IND-VAL-007", "context_id": "C_ORI_002", "left": "o_a", "right": "o_x", "evidence": "right_orientation_outside_domain", "expected": "MALFORMED_OR_UNRESOLVED"},
+    {"fixture_id": "IND-VAL-008", "context_id": "C_ORI_003", "left": "o_b", "right": "o_a", "evidence": "reverse_order_without_rule", "expected": "INCOMPARABLE_OR_UNRESOLVED"}
+  ],
+  "negative_controls": [
+    "missing context",
+    "missing ordering witness",
+    "conflict assertion without incompatible-constraint witness",
+    "orientation outside declared domain",
+    "reversed ordering without declared reverse relation"
+  ],
+  "execution_record": {
+    "status": "NOT_RUN",
+    "runner": null,
+    "input_hash": null,
+    "output_hash": null,
+    "run_timestamp": null,
+    "result": null
+  },
+  "acceptance_rule": "Only a reproducible run with matching expected outcomes may update witness status; fixture specification alone cannot activate witnesses.",
+  "nonclaims": ["No fixture has passed.", "No witness is active.", "No MTO selection is enabled."]
+}

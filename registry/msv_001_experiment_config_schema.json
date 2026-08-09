@@ -1,0 +1,96 @@
+{
+  "registry_id": "PCD_MSV_001_EXPERIMENT_CONFIG_SCHEMA",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "experiment_id",
+      "target_theorems",
+      "mechanism_class",
+      "tool_id",
+      "seed_set",
+      "operator_family",
+      "admissibility_window",
+      "mismatch_cost_function",
+      "ref_equivalence_rule",
+      "orientation_metric",
+      "degeneracy_tolerance",
+      "recoupling_rule",
+      "observables",
+      "falsification_vectors",
+      "output_requirements"
+    ]
+  },
+  "seed_and_mechanism_requirements": {
+    "minimum_mechanism_classes": 2,
+    "minimum_seeds_per_mechanism": 3,
+    "preferred_backends": [
+      "C++",
+      "hybrid_cpp_python"
+    ],
+    "claim_ceiling_without_two_mechanisms": "single_mechanism_probe_only"
+  },
+  "required_observables": {
+    "minimizer_switch_count": {
+      "type": "integer",
+      "required": true
+    },
+    "ref_equivalence_preservation_rate": {
+      "type": "float",
+      "range": [
+        0.0,
+        1.0
+      ],
+      "required": true
+    },
+    "d_Omega_max": {
+      "type": "float",
+      "required": true
+    },
+    "d_Omega_mean": {
+      "type": "float",
+      "required": true
+    },
+    "degeneracy_region_count": {
+      "type": "integer",
+      "required": true
+    },
+    "set_valued_reference_events": {
+      "type": "integer",
+      "required": true
+    },
+    "recoupling_event_count": {
+      "type": "integer",
+      "required": true
+    },
+    "invalid_transition_count": {
+      "type": "integer",
+      "required": true
+    },
+    "orientation_conflict_count": {
+      "type": "integer",
+      "required": true
+    }
+  },
+  "falsification_config_requirements": {
+    "vectors": {
+      "FV-1_shuffle_or_zero_mismatch_control": "required",
+      "FV-2_boundary_collapse": "required",
+      "FV-3_primitive_suppression_ablation": "required",
+      "FV-4_adversarial_initialization": "required"
+    }
+  },
+  "output_contract": {
+    "required_outputs": [
+      "run_metadata.json",
+      "config_snapshot.json",
+      "summary.json",
+      "metrics.json",
+      "operator_trace.json",
+      "minimizer_switch_trace.csv",
+      "ref_equivalence_trace.csv",
+      "recoupling_trace.csv",
+      "falsification_report.json",
+      "provenance_manifest.json"
+    ]
+  }
+}

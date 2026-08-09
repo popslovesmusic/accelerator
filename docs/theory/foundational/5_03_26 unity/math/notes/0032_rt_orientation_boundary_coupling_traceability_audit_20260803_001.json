@@ -1,0 +1,38 @@
+{
+  "report_id": "0032_rt_orientation_boundary_coupling_traceability_audit_20260803_001",
+  "source_packets": [
+    "RT_ORIENTATION_CONTEXTUAL_ROLE_CLOSURE_HEXAHEDRON_INDUCTION_20260802_001",
+    "RT_BOUNDARY_COUPLING_INTERNAL_PROPAGATION_BYTE_ARRAY_INDUCTION_20260802_001"
+  ],
+  "source_formalization": "0032_rt_orientation_boundary_coupling_contracts_20260802_001",
+  "fixture_set": "0032_rt_orientation_boundary_coupling_contracts_fixtures",
+  "adversarial_review": "0032_rt_orientation_boundary_coupling_contracts_adversarial_review_report",
+  "status": "TRACEABILITY_COMPLETE_WITH_OPEN_GAPS",
+  "claim_ceiling": "C1",
+  "summary": {
+    "intake_targets": 11,
+    "covered": 2,
+    "partial": 5,
+    "open_gaps": 4
+  },
+  "mappings": [
+    {"target_id": "TR-001", "target": "Contextual RT role and identity preservation", "status": "COVERED", "evidence": ["ROLE-001", "ADV-ROLE-001"]},
+    {"target_id": "TR-002", "target": "Contextual primitive sufficiency and unresolved-child handling", "status": "PARTIAL", "evidence": ["SUFF-001", "SUFF-002", "ADV-SUFF-001"], "gap": "No executable sufficiency decision procedure is defined."},
+    {"target_id": "TR-003", "target": "Ordered byte-array representation", "status": "PARTIAL", "evidence": ["ORDER-001", "ADV-ORDER-001", "ADV-DEPTH-001"], "gap": "Child addressing, mutation rules, and bit-level traversal are not executable."},
+    {"target_id": "TR-004", "target": "Non-scalar orientation-field evaluation", "status": "PARTIAL", "evidence": ["EVAL-001", "ADV-EVAL-001"], "gap": "Field schema and field aggregation remain unspecified."},
+    {"target_id": "TR-005", "target": "Boundary coupling and no interior transport", "status": "PARTIAL", "evidence": ["COUPLE-001", "ADV-COUPLE-001", "ADV-BOUNDARY-001"], "gap": "Admissibility predicate and boundary-condition payload are not defined."},
+    {"target_id": "TR-006", "target": "Reference alignment and internal propagation", "status": "PARTIAL", "evidence": ["PROP-001", "ADV-PROP-001", "ADV-ALIGN-001"], "gap": "Alignment transformation and propagation transition rule are not executable."},
+    {"target_id": "TR-007", "target": "Recursive closure with ordered field reconstruction", "status": "PARTIAL", "evidence": ["CLOSE-001", "ADV-CLOSE-001", "ADV-DENSITY-001"], "gap": "Only order preservation is tested; field aggregation, provenance, and density accounting are open."},
+    {"target_id": "TR-008", "target": "Sphere admissibility, geodesic trajectory, and observed slice", "status": "OPEN_GAP", "evidence": [], "gap": "No bounded representation or fixture exists for sphere boundary, admissibility, trajectory, or slice selection."},
+    {"target_id": "TR-009", "target": "Underlying condition to projection to finite continuation", "status": "OPEN_GAP", "evidence": [], "gap": "The proposed upstream distinctions are not represented in the current contracts or fixtures."},
+    {"target_id": "TR-010", "target": "Zero-DOF decoupling and distinction-density behavior", "status": "OPEN_GAP", "evidence": ["ADV-ZERO-DOF-001"], "gap": "Only invalid active zero-DOF state is rejected; decoupling and conservation semantics are unmodeled."},
+    {"target_id": "TR-011", "target": "MTO/OTM composition and decomposition", "status": "OPEN_GAP", "evidence": ["ADV-MTO-OTM-001"], "gap": "Only invalid many-to-many cardinality is rejected; valid many-to-one and one-to-many behavior is untested."}
+  ],
+  "recommended_next_action": "Define bounded schemas and positive/negative fixtures for TR-008 through TR-011 before any promotion or physical interpretation.",
+  "limitations": [
+    "This is a documentation and fixture traceability audit, not proof of the framework.",
+    "Coverage means a finite contract test exists; it does not establish semantic completeness.",
+    "Gemini-generated commentary in the intake remains non-authoritative.",
+    "No external, physical, thermodynamic, or geometric claim is validated."
+  ]
+}

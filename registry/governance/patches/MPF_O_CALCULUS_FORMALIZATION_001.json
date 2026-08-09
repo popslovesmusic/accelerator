@@ -1,0 +1,111 @@
+{
+  "patch_id": "MPF_O_CALCULUS_FORMALIZATION_001",
+  "status": "ACTIVE",
+  "objective": "Formalize O_calculus as the typed operator calculus governing admissible orientation transformations over RT and aRT structures.",
+  "trigger": {
+    "previous_patch": "MPF_ART_FORMALIZATION_CAMPAIGN_001",
+    "unlocked_by": "aRT promoted to typed formal object",
+    "current_debt_target": "incomplete O calculus"
+  },
+  "formal_definition": {
+    "title": "Formal Principle 5.X: Orientation Calculus O_calculus",
+    "status": "C1_DEFINED_PROVISIONAL",
+    "core_definition": "O_calculus is the typed calculus of admissible transformations among orientation conditions over RT and aRT structures.",
+    "formal_skeleton": [
+      "O := { o_k | o_k preserves typed admissible continuation over X, X in RT union aRT }",
+      "O_x : O x X -> X_o",
+      "NavT : O_k x R_<-> x A_adm x T -> O_{k+1}",
+      "o_a sim_O o_b iff o_a and o_b preserve the same admissible closure class under bounded deformation",
+      "id_O(X) = X where closure_class(X), admissibility_status(X), and typed_identity(X) are preserved",
+      "O_b circ O_a is defined iff codomain(O_a) is an admissible domain for O_b"
+    ],
+    "failure_conditions": [
+      "FAIL_O_001: orientation degeneracy prevents selection of a determinate admissible class",
+      "FAIL_O_002: distinction collapses below operative floor epsilon",
+      "FAIL_O_003: closure support fails for the typed operand",
+      "FAIL_O_004: operand typing fails",
+      "FAIL_O_005: admissible continuation set becomes empty",
+      "FAIL_O_006: composition attempts to chain incompatible orientation classes"
+    ],
+    "anti_reification_note": "Orientation transformations do not move objects through space. They retune admissible relation-patterns over RT and aRT structures."
+  },
+  "registry_updates": {
+    "formal_object_registry": {
+      "id": "orientation_calculus",
+      "symbol": "O_calculus",
+      "status": "C1_DEFINED_PROVISIONAL",
+      "depends_on": [
+        "rt_core_expression",
+        "aspectual_rt_structure",
+        "admissibility_structure",
+        "residue_relation"
+      ],
+      "provides": [
+        "orientation_space_typing",
+        "orientation_action_rule",
+        "orientation_transport_rule",
+        "orientation_failure_rule"
+      ]
+    },
+    "operator_registry": [
+      {
+        "operator": "O_x",
+        "class": "orientation_action_operator",
+        "operand_types": [
+          "RT",
+          "aRT"
+        ],
+        "status": "C1_DEFINED_PROVISIONAL"
+      },
+      {
+        "operator": "NavT",
+        "class": "orientation_transport_operator",
+        "operand_types": [
+          "orientation_condition",
+          "residue_relation",
+          "admissibility_structure",
+          "transition_event"
+        ],
+        "status": "C1_DEFINED_PROVISIONAL"
+      }
+    ]
+  },
+  "appendix_f_update": {
+    "move_from": "D1_FORMAL_MISSING",
+    "move_to": "C1_DEFINED_PROVISIONAL",
+    "item": "O_calculus",
+    "note": "O_calculus no longer listed as incomplete missing formalism after minimum formal typing and failure rules were added."
+  },
+  "governance_constraints": {
+    "allowed": [
+      "formal definition",
+      "operator typing",
+      "failure condition definition",
+      "dependency registry update",
+      "glossary synchronization"
+    ],
+    "forbidden": [
+      "bridge closure",
+      "physics application promotion",
+      "simulation-backed theorem promotion",
+      "claim that orientation is a proven closure driver"
+    ],
+    "status_cap": "C1_DEFINED_PROVISIONAL"
+  },
+  "success_condition": {
+    "minimum_completed": [
+      "O_space formally typed",
+      "O_action over RT/aRT defined",
+      "NavT transport rule defined",
+      "O_equivalence rule defined",
+      "O_composition rule defined as partial or context-bound",
+      "O_failure conditions explicit",
+      "Appendix F debt status updated"
+    ],
+    "result": "O_calculus reduced from incomplete formal debt to typed provisional operator calculus."
+  },
+  "next_dependency_unlocked": [
+    "MPF_OTIMES_COMPOSITION_OPERATOR_001"
+  ],
+  "governance_note": "This patch is a formal scaffold closure only. It does not close bridges, promote physics applications, or certify orientation as a proven closure driver."
+}

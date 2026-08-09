@@ -1,0 +1,74 @@
+{
+  "registry_id": "CONDITIONING_INVARIANTS_DISPOSITION_REGISTRY",
+  "patch_id": "APPENDIX_F_SECTION_2_CONDITIONING_INVARIANTS_001",
+  "status": "SCOPED_DISPOSITION_VALIDATED",
+  "authority_level": "L0_TO_L2_EVIDENCE_SYNCHRONIZATION",
+  "source_obligation": "OQ_COND_002",
+  "source_induction": "RT-IND-Conditioning-001",
+  "source_reduction": "MPF_PRIMITIVE_CONDITIONING_REDUCTION_001",
+  "campaign_reference": "MPF_COND_CAMPAIGN_RUN_001",
+  "question": "What invariants are preserved under conditioning?",
+  "disposition": {
+    "answer": "asymmetry_and_typed_residue_supported_under_lawful_conditioning_controls",
+    "summary": "The conditioning campaign supports asymmetry and typed residue as stable candidate invariants under lawful conditioning when order, lineage, admissibility context, and non-collapse are preserved.",
+    "classification": "PASSED_PENDING_RIGOR_ENDORSEMENT"
+  },
+  "formal_scaffold": {
+    "candidate_invariant_set": [
+      "directional_asymmetry",
+      "typed_residue"
+    ],
+    "preservation_form": "CondInv(<a>_b -> <a'>_b', x) holds only if AsymmetryTracePreserved, TypedResiduePreserved, LineagePreserved, AdmCtxPreserved, and NonCollapse all hold.",
+    "preservation_requirements": [
+      "The conditioned distinction is typed before and after the conditioning step.",
+      "Directional asymmetry remains recoverable after conditioning.",
+      "Typed residue remains recoverable after conditioning.",
+      "Conditioning lineage remains recoverable after conditioning.",
+      "Admissibility context remains recoverable after conditioning.",
+      "Distinct conditioned classes are not aliased by the invariant comparison."
+    ],
+    "exclusion_rule": "An invariant-preservation claim is inadmissible if conditioning order, lineage, typed residue, or admissibility context is erased or if arithmetic projection is treated as the primitive invariant surface.",
+    "scope": "model-relative conditioning theory only"
+  },
+  "campaign_evidence": {
+    "result_path": "outputs/conditioning_campaign/conditioning_results.json",
+    "report_path": "outputs/conditioning_campaign/conditioning_report.md",
+    "num_seeds": 64,
+    "mean_preservation_rate": 0.9904674917540086,
+    "reported_stable_invariants": [
+      "asymmetry",
+      "typed residue"
+    ],
+    "verdict": "SUPPORTED"
+  },
+  "failure_conditions": [
+    "The conditioned term is untyped before or after conditioning.",
+    "Directional asymmetry is erased or reversed without declaration.",
+    "Typed residue is erased, aliased, or overwritten.",
+    "Conditioning lineage is not recoverable.",
+    "Admissibility context is collapsed.",
+    "Distinct conditioned classes are aliased by the invariant comparison.",
+    "The result is used to claim universal invariance, theorem promotion, or physical conservation."
+  ],
+  "appendix_f_effect": {
+    "obligation": "OQ_COND_002",
+    "from": "REGISTERED_LATE",
+    "to": "PASSED_PENDING_RIGOR_ENDORSEMENT",
+    "remaining_work": [
+      "Convert the campaign-supported invariant scaffold into a formal proof artifact if theorem promotion is requested.",
+      "Run independent rigor endorsement before raising the conditioning induction ceiling.",
+      "Audit conditioning-family uses for attempts to treat asymmetry or typed residue as unqualified universal invariants.",
+      "Keep OQ_COND_003 through OQ_COND_005 separately tracked until each Appendix F item is synchronized."
+    ]
+  },
+  "claim_boundary": {
+    "evidence_class": "C2_CAMPAIGN_SUPPORTED_PENDING_RIGOR_ENDORSEMENT",
+    "promotion": "none",
+    "does_not_prove": [
+      "Unrestricted theorem status.",
+      "Universal invariance across all conditioning systems.",
+      "Physical conservation of asymmetry or residue.",
+      "That arithmetic projection is the primitive invariant surface."
+    ]
+  }
+}

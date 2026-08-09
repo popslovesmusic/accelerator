@@ -1,0 +1,80 @@
+{
+  "artifact_type": "FCI005_MAP04_GOVERNED_RECORD_GATE_ASSESSMENT",
+  "artifact_id": "RT_ADMOBS_FCI005_MAP04_GOVERNED_RECORD_GATE_ASSESSMENT_20260729_001",
+  "status": "PROVISIONAL_GATE_ASSESSMENT_WITH_EVIDENCE_BLOCK",
+  "canonicality": "NON_CANONICAL",
+  "claim_ceiling": "C1_MODEL_RELATIVE",
+  "campaign_id": "RT_ADMOBS_FCI005_MAPPING_SEMANTICS_CONSTRUCTION_20260729_001",
+  "source_artifacts": [
+    {
+      "artifact_id": "RT_ADMOBS_FCI005_MAP04_CANDIDATE_MAPPING_RULE_DEFINITIONS_20260729_001",
+      "sha256": "69299CE6D8DA718E4A0DF2F4577C49FDED12FB386128943E3BE109CD0784C7D9"
+    },
+    {
+      "artifact_id": "RT_ADMOBS_FCI005_MAP04_CANDIDATE_MAPPING_RULE_DEFINITIONS_REVIEW_20260729_001",
+      "sha256": "E26355A2A4F75BD8DAF7460D7CF3DDDF90E429EB015BC4166E8CD0B6C0BC4330"
+    },
+    {
+      "artifact_id": "RT_ADMOBS_FCI005_MAPPING_RULE_INSTANTIATION_BLOCKER_20260729_001",
+      "sha256": "2F8CB2DA5E165728D3FC07E68873D5C470E32FA5CAD05846D6BD58A6CA4483B6"
+    }
+  ],
+  "execution_boundary": {
+    "performed": "Assessment only",
+    "rule_authority_records_instantiated": false,
+    "mapping_records_instantiated": false,
+    "provenance_records_instantiated": false,
+    "dependency_completeness_records_instantiated": false,
+    "witnesses_constructed": false,
+    "BCon_x_bound": false,
+    "H_x_declared": false,
+    "delta_a_modified": false
+  },
+  "candidate_gate_results": [
+    {"candidate_rule_id":"MAP04-CR1-CARRIER-ASPECT-PROJECTION","authority":"UNDEFINED","provenance":"UNDEFINED","dependency":"UNDEFINED","overall":"UNDEFINED"},
+    {"candidate_rule_id":"MAP04-CR2-CARRIER-TYPED-CLASS-MEDIATION","authority":"UNDEFINED","provenance":"UNDEFINED","dependency":"UNDEFINED","overall":"UNDEFINED"},
+    {"candidate_rule_id":"MAP04-CR3-CARRIER-COMPLETE-NONRELATION","authority":"UNDEFINED","provenance":"UNDEFINED","dependency":"UNDEFINED","overall":"UNDEFINED"},
+    {"candidate_rule_id":"MAP04-CTX1-BOUNDARY-ASPECT-MEDIATION","authority":"UNDEFINED","provenance":"UNDEFINED","dependency":"UNDEFINED","overall":"UNDEFINED"},
+    {"candidate_rule_id":"MAP04-CTX2-DOMAIN-ASPECT-MEDIATION","authority":"UNDEFINED","provenance":"UNDEFINED","dependency":"UNDEFINED","overall":"UNDEFINED"},
+    {"candidate_rule_id":"MAP04-CTX3-RESIDUE-ASPECT-MEDIATION","authority":"UNDEFINED","provenance":"UNDEFINED","dependency":"UNDEFINED","overall":"UNDEFINED"},
+    {"candidate_rule_id":"MAP04-CTX4A-BOUNDARY-COMPLETE-NONRELATION","authority":"UNDEFINED","provenance":"UNDEFINED","dependency":"UNDEFINED","overall":"UNDEFINED"},
+    {"candidate_rule_id":"MAP04-CTX4B-DOMAIN-COMPLETE-NONRELATION","authority":"UNDEFINED","provenance":"UNDEFINED","dependency":"UNDEFINED","overall":"UNDEFINED"},
+    {"candidate_rule_id":"MAP04-CTX4C-RESIDUE-COMPLETE-NONRELATION","authority":"UNDEFINED","provenance":"UNDEFINED","dependency":"UNDEFINED","overall":"UNDEFINED"}
+  ],
+  "gate_findings": [
+    {
+      "gate": "RULE_AUTHORITY",
+      "result": "BLOCKED_UNDEFINED",
+      "reason": "No independent RuleAuthorityRecord_x instances exist for the candidate rules; construction authority is not rule authority."
+    },
+    {
+      "gate": "RULE_SET_COMPLETENESS",
+      "result": "BLOCKED_UNDEFINED",
+      "reason": "Complete applicable carrier, boundary, domain, and residue rule sets are not established."
+    },
+    {
+      "gate": "PROVENANCE",
+      "result": "BLOCKED_UNDEFINED",
+      "reason": "No independently validated BridgeProvenanceRecord_x instances exist for governed mapping rules."
+    },
+    {
+      "gate": "DEPENDENCY_COMPLETENESS",
+      "result": "BLOCKED_UNDEFINED",
+      "reason": "No independently extracted DependencyGraph_x and DependencyGraphCompletenessRecord_x are available."
+    }
+  ],
+  "next_executable_action": {
+    "action": "Obtain or author, under explicit provisional authority, independently reviewable RuleAuthorityRecord_x evidence for the nine candidates.",
+    "completion_test": "Each applicable candidate has a typed authority decision, scope, precedence relation, provenance, limitations, and effective phase; unresolved cases remain UNDEFINED.",
+    "unlock": "Permits governed maximal-rule-set evaluation without treating construction authority as rule authority.",
+    "failure_condition": "Any missing, conflicting, or self-certified authority evidence keeps the rule gate blocked."
+  },
+  "required_follow_on_gates": [
+    "Complete applicable rule-set evidence",
+    "BridgeProvenanceRecord_x validation",
+    "Independent dependency extraction and completeness validation",
+    "Governed positive, negative, and undefined witness fixtures",
+    "Human review for any provisional BCon_x eligibility"
+  ],
+  "final_result": "MAP04_GATE_ASSESSMENT_COMPLETE_ALL_CANDIDATES_UNDEFINED_RULE_AUTHORITY_PROVENANCE_AND_DEPENDENCY_EVIDENCE_ABSENT"
+}

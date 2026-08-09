@@ -1,0 +1,93 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Registry for handling exact degenerate minima under recursive selection dynamics in Phase 3.",
+    "status": "provisional",
+    "last_updated": "2026-05-12"
+  },
+  "degenerate_resolution_entries": [
+    {
+      "id": "RC-006",
+      "name": "Degenerate Minima Resolution",
+      "status": "symbolic_supported_candidate",
+      "purpose": "Represent bounded tie-resolution behavior under admissible recursive selection without collapsing nondeterministic continuation structure.",
+      "depends_on": [
+        "RC-005",
+        "delta_selection",
+        "selection_uniqueness",
+        "orientation_minimization",
+        "branch_pruning",
+        "reconstruction_uniqueness",
+        "recursive_convergence",
+        "transition_flux_convergence"
+      ],
+      "degenerate_resolution_conditions": [
+        {
+          "id": "DRC-001",
+          "name": "equivalent_local_minima_detectable",
+          "description": "Selection metrics must be capable of identifying multiple candidates with identical extremal values."
+        },
+        {
+          "id": "DRC-002",
+          "name": "multi_branch_retention_permitted",
+          "description": "Process framework must allow concurrent actualization or tracking of multiple admissible paths."
+        },
+        {
+          "id": "DRC-003",
+          "name": "deterministic_collapse_not_required",
+          "description": "System does not force a unique choice among degenerate candidates unless explicitly constrained."
+        },
+        {
+          "id": "DRC-004",
+          "name": "orientation_bias_remains_bounded",
+          "description": "Any weighting or resolution rule must not result in divergent frame orientation drift."
+        },
+        {
+          "id": "DRC-005",
+          "name": "branch_pruning_preserves_required_witness",
+          "description": "Tie-resolution does not allow pruning of all valid candidates."
+        },
+        {
+          "id": "DRC-006",
+          "name": "transport_flux_remains_finite",
+          "description": "Propagation of multiple degenerate branches must remain within finite flux bounds."
+        },
+        {
+          "id": "DRC-007",
+          "name": "recursive_selection_remains_admissible",
+          "description": "Each step of tie-resolution must respect current admissibility windows."
+        },
+        {
+          "id": "DRC-008",
+          "name": "residue_accumulation_does_not_force_unique_resolution",
+          "description": "Historical traces do not automatically collapse future degeneracy into uniqueness."
+        }
+      ],
+      "candidate_resolution_modes": [
+        "bounded_multi_branch_retention",
+        "orientation_weighted_selection",
+        "residue_sensitive_branch_preference",
+        "window_constrained_branch_survival",
+        "local_tie_preservation"
+      ],
+      "failure_modes_to_preserve": [
+        "selection_collapse_to_determinism",
+        "unbounded_branch_explosion",
+        "orientation_locking",
+        "recursive_drift_accumulation",
+        "degenerate_cycle_instability",
+        "transport_divergence",
+        "basin_escape",
+        "forced_unique_reconstruction"
+      ],
+      "governance_constraints": {
+        "deterministic_delta_claimed": false,
+        "unique_resolution_claimed": false,
+        "global_resolution_claimed": false,
+        "physics_validation_claimed": false,
+        "global_closure_claimed": false
+      },
+      "provisional_status": true
+    }
+  ]
+}

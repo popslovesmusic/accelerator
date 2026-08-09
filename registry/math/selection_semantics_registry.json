@@ -1,0 +1,80 @@
+{
+  "patch_id": "MPF-FSUB-007",
+  "name": "Selection Semantics Registry",
+  "status": "active",
+  "series_status": "FORMAL_SUBSTRATE_SCAFFOLD",
+  "purpose": "Clarify whether δ is treated as a relation, set-valued map, partial function, or selected update rule under restricted conditions.",
+  "governance_status": {
+    "theorem_status": "NOT_PROVEN",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL",
+    "non_separability_acknowledged": true,
+    "source_relation": "(E≠0) ⇔R δ(E>0)"
+  },
+  "selection_semantics_classes": [
+    {
+      "class_id": "DELTA_RELATIONAL",
+      "definition": "δ is treated as a general relation between process states and continuation events.",
+      "uniqueness": "NONE"
+    },
+    {
+      "class_id": "DELTA_SET_VALUED",
+      "definition": "δ is a map from states to sets of admissible continuation candidates.",
+      "uniqueness": "SET_VALUED"
+    },
+    {
+      "class_id": "DELTA_PARTIAL_FUNCTION_UNDER_RULE",
+      "definition": "δ behaves as a partial function when a specific selection rule (e.g., minimization) is applied.",
+      "uniqueness": "CONDITIONAL"
+    },
+    {
+      "class_id": "DELTA_SINGLE_VALUED_WITH_TIE_BREAK",
+      "definition": "A refined semantic where δ always returns a single actualization via a mandatory tie-breaking policy.",
+      "uniqueness": "SINGLE_VALUED"
+    },
+    {
+      "class_id": "DELTA_UNDEFINED_ON_FAILURE",
+      "definition": "δ is formally undefined if the admissible image Im_A is empty.",
+      "uniqueness": "UNDEFINED"
+    }
+  ],
+  "required_policies": [
+    {
+      "policy_id": "degeneracy_handling",
+      "definition": "Rule for managing multiple equivalent admissible images."
+    },
+    {
+      "policy_id": "tie_breaking_policy",
+      "definition": "Formal mechanism for selecting a single continuation from a degenerate set."
+    },
+    {
+      "policy_id": "empty_image_policy",
+      "definition": "Governance for cases where no admissible continuation exists (orientation locking)."
+    },
+    {
+      "policy_id": "branch_explosion_policy",
+      "definition": "Limits on the recursive actualization of multiple divergent pathways."
+    },
+    {
+      "policy_id": "failure_preservation_policy",
+      "definition": "Requirement to record selection failures as structural information."
+    }
+  ],
+  "governance_rules": [
+    {
+      "rule_id": "SS-RULE-001",
+      "rule": "δ must specify its active semantic class and associated policies."
+    },
+    {
+      "rule_id": "SS-RULE-002",
+      "rule": "Selection semantics remain strictly local to the declared CSI neighborhood."
+    }
+  ],
+  "forbidden_claims": [
+    "Selection semantics prove physical choice or free will.",
+    "Tie-breaking policies derive physical selection constants.",
+    "Divergent selection justifies the assumption of absolute parallel universes."
+  ],
+  "source_relation": "(E≠0) ⇔R δ(E>0)",
+  "non_separability_acknowledged": true
+}

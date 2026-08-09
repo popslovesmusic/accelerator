@@ -1,0 +1,47 @@
+{
+  "schema_id": "MPF_TEXTBOOK_UPDATE_PATCH_V1",
+  "patch_id": "MPF_PATCH_001J",
+  "status": "ACTIVE",
+  "purpose": "Define the required format for textbook update patches triggered by falsification campaign outcomes.",
+  "template_name": "living_campaign_textbook_update_patch",
+  "required_inputs": {
+    "evidence_report_id": "string",
+    "campaign_id": "string",
+    "bridge_id": "string",
+    "decision": "enum(SUPPORT, DOWNGRADE, FALSIFY, INCONCLUSIVE)",
+    "reason": "string",
+    "affected_sections": "array"
+  },
+  "update_logic": {
+    "SUPPORT": {
+      "bridge_status": "PROVISIONAL_PENDING_RIGOR",
+      "claim_level_cap": "C1_structural_only_pending_tool_rigor",
+      "prohibited_actions": [
+        "promote_gravity_app",
+        "promote_field_app",
+        "promote_QM_GR_bridge",
+        "promote_TC_asym_without_rewrite_or_direct_test"
+      ]
+    },
+    "DOWNGRADE": {
+      "bridge_status": "DOWNGRADED_OR_UNRESOLVED",
+      "claim_level_cap": "C2_to_C3"
+    },
+    "FALSIFY": {
+      "bridge_status": "FALSIFIED_OR_REWRITE_REQUIRED",
+      "dependency_status": "REVIEW_LOCK",
+      "claim_level_cap": "BLOCKED"
+    },
+    "INCONCLUSIVE": {
+      "bridge_status": "UNDER_ATTACK",
+      "claim_level_cap": "NO_PROMOTION"
+    }
+  },
+  "non_regression_rules": [
+    "No textbook update may erase prior falsification evidence.",
+    "No support result may automatically promote downstream application projections.",
+    "No bridge may be marked closed without both mathematical and simulation evidence.",
+    "Every update must preserve the evidence report hash.",
+    "Every status change must include a reason."
+  ]
+}

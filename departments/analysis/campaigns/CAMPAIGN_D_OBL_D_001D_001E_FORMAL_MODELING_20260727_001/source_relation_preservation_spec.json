@@ -1,0 +1,18 @@
+{
+  "spec_id": "D_SOURCE_RELATION_PRESERVATION_PREDICATE_20260727_001",
+  "status": "BOUNDED_CANDIDATE_PREDICATE",
+  "claim_ceiling": "C1_DEFINED_PROVISIONAL",
+  "predicate": "PreserveRelation_C(r,w,h) iff Typed_C(r) and Defined(Pi_D,C(src(r))) and Defined(Pi_D,C(tgt(r))) and EndpointMatch_C(r,w) and RelationIdentityMatch_C(r,w) and TraceCompatible_C(w) and HistorySufficient_C(h,w)",
+  "required_components": [
+    "typed source relation",
+    "defined context-indexed endpoint projections",
+    "endpoint match between source relation and witness",
+    "relation identity match or explicitly declared relation-token preservation",
+    "compatible trace",
+    "ordered payload-linked history sufficient for the witness"
+  ],
+  "bare_projection_assessment": "FAILS_RELATION_IDENTITY_COMPONENT",
+  "enriched_witness_assessment": "CANDIDATE_PASS_IF_RELATION_TOKEN_IS_TYPED_AND_LINKED",
+  "limitations": ["candidate predicate is not a theorem", "relation-token preservation is not supplied by the bare prefix projection", "no universal source-relation semantics is inferred"],
+  "promotion_authorized": false
+}

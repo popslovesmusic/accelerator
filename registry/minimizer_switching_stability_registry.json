@@ -1,0 +1,56 @@
+{
+  "registry_id": "PCD_MINIMIZER_SWITCHING_STABILITY_REGISTRY",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "theorem_id",
+      "statement",
+      "assumptions",
+      "stability_conditions",
+      "allowed_switch_modes",
+      "failure_modes",
+      "proof_status",
+      "blocked_claims"
+    ]
+  },
+  "theorems": [
+    {
+      "theorem_id": "MST-001",
+      "statement": "A local O* minimizer transition is stable when the switch preserves admissibility, remains bounded in mismatch cost, and either preserves Ref(.) equivalence or crosses a declared degeneracy/recoupling boundary.",
+      "assumptions": [
+        "active admissibility window A is declared",
+        "mismatch cost functional mu_rel is locally evaluable",
+        "Ref(.) codomain is orientation_space",
+        "O family members and L-before-Q precedence are active",
+        "residue-mediated recoupling rule is available when equivalence class changes"
+      ],
+      "metric_dependency": "OMEGA_METRIC_V1",
+      "stability_conditions": [
+        "bounded_mismatch_cost_change",
+        "d_Omega remains below declared tolerance or crosses a legal recoupling boundary",
+        "admissibility_not_violated",
+        "Ref_equivalence_preserved_or_legally_recoupled",
+        "degeneracy_boundary_declared_when minimizer_set_is_nonunique"
+      ],
+      "allowed_switch_modes": [
+        "equivalence_preserving_switch",
+        "degeneracy_boundary_switch",
+        "residue_mediated_recoupling_switch",
+        "admissibility_window_change_switch"
+      ],
+      "failure_modes": [
+        "unbounded_ref_divergence",
+        "forbidden_Q_transition",
+        "memoryless_reopening",
+        "degeneracy_collapsed_without_rule",
+        "residue_as_independent_agent"
+      ],
+      "proof_status": "THEOREM_SCAFFOLD_PENDING_PROOF",
+      "blocked_claims": [
+        "full_minus_i_derivation",
+        "closed_orientation_algebra",
+        "unconditional_GRA_foundation"
+      ]
+    }
+  ]
+}

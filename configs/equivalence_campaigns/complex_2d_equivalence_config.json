@@ -1,0 +1,24 @@
+{
+  "campaign_id": "EC-20260517-COMPLEX2D-001",
+  "tool_family": "cellular_automata",
+  "prediction_binding_id": "PB-001-THRESHOLD",
+  "dataset_ids": ["DS-001-SYNTHETIC-STOCHASTIC"],
+  "tools": {
+    "cpp": "igsoa_complex_2d_cpp",
+    "python": "tools/igsoa_complex_2d_cpp/reference/sim_reference.py"
+  },
+  "metrics": ["mean_phi", "psi_squared_mean", "entropy_rate"],
+  "tolerances": {
+    "absolute": 1e-6,
+    "relative": 1e-4
+  },
+  "falsification_protocols": [
+    "shuffle_control",
+    "parameter_ablation"
+  ],
+  "governance_boilerplate": {
+    "source_relation": "(E≠0) ⇔R δ(E>0)",
+    "non_separability_acknowledged": true,
+    "required_statement": "Observed signatures are interpreted only through restricted local analog structure."
+  }
+}

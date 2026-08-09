@@ -1,0 +1,78 @@
+{
+  "artifact_id": "admissibility_trace_046",
+  "source_patch_id": "PATCH_PI_RT_CALCULUS_046",
+  "status": "DRAFT_PROVISIONAL",
+  "scope": "governance_execution_surface",
+  "purpose": "Show why each occupant in the operational Patch 046 witness is admissible only after explicit domain rebinding.",
+  "source_artifacts": [
+    "docs/governance/worked_example_operational_046.json",
+    "outputs/compression/dependency_graph_v1.json"
+  ],
+  "trace": [
+    {
+      "step": 1,
+      "operation": "declare_continuations",
+      "A_path": "C_A := basin continuation from dependency_graph_v1.basin",
+      "E_path": "C_E := geometry_proj continuation from dependency_graph_v1.geometry_proj",
+      "admissibility_state": "not_slot_admissible",
+      "reason": "At declaration time the continuations have source content but no receiving domain x and no A-slot or E-slot role type."
+    },
+    {
+      "step": 2,
+      "operation": "normalize",
+      "A_path": "NF(C_A) -> BasinClosureRT_B0",
+      "E_path": "NF(C_E) -> GeometryProjectionRT_tau",
+      "admissibility_state": "completed_rt_only",
+      "reason": "Normalization records completed RT candidates internal to their source objects, but completion alone does not grant A/E slot occupancy."
+    },
+    {
+      "step": 3,
+      "operation": "verify_rt_closure_fields",
+      "A_path": "BasinClosureRT_B0 has distinguishability, admissibility, continuation, residue, and failure-boundary fields.",
+      "E_path": "GeometryProjectionRT_tau has distinguishability, admissibility, continuation, residue, and failure-boundary fields.",
+      "admissibility_state": "closed_but_unrebound",
+      "reason": "RT closure verifies candidate integrity, but the receiving A|E window has not yet assigned slot roles."
+    },
+    {
+      "step": 4,
+      "operation": "declare_receiving_domain",
+      "domain": "x := projection_regime_xb",
+      "shared_substrate_or_scale": "stabilized continuation paths expressed as procedural update density over a scale boundary",
+      "admissibility_state": "domain_available",
+      "reason": "The shared domain gives the two completed RTs a common comparison context, but does not itself assign A/E roles."
+    },
+    {
+      "step": 5,
+      "operation": "rebind_A_slot",
+      "input": "BasinClosureRT_B0",
+      "output": "A_x(BasinClosureRT_B0)",
+      "admissibility_state": "A_slot_candidate_admissible",
+      "reason": "The basin object is now explicitly typed as the admissibility-window occupant inside projection_regime_xb."
+    },
+    {
+      "step": 6,
+      "operation": "rebind_E_slot",
+      "input": "GeometryProjectionRT_tau",
+      "output": "E_x(GeometryProjectionRT_tau)",
+      "admissibility_state": "E_slot_candidate_admissible",
+      "reason": "The projection object is now explicitly typed as the expressed projection occupant inside projection_regime_xb."
+    },
+    {
+      "step": 7,
+      "operation": "form_candidate_nested_rt",
+      "expression": "<A_x(BasinClosureRT_B0) | E_x(GeometryProjectionRT_tau)>_r_bp046",
+      "admissibility_state": "candidate_nested_rt_formed",
+      "reason": "Both occupants are typed in the same receiving domain with explicit slot roles and shared residue history."
+    }
+  ],
+  "forbidden_inferences": [
+    "BasinClosureRT_B0 alone does not imply A_x(BasinClosureRT_B0).",
+    "GeometryProjectionRT_tau alone does not imply E_x(GeometryProjectionRT_tau).",
+    "RT closure does not erase the need for role typing.",
+    "Shared domain x does not imply role symmetry."
+  ],
+  "conclusion": {
+    "status": "candidate_trace_only",
+    "statement": "The operational witness is admissible only after explicit domain rebinding and slot typing. It remains a candidate execution surface, not a theorem."
+  }
+}

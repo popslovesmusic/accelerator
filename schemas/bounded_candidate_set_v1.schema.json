@@ -1,0 +1,193 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Bounded Candidate Set Schema",
+  "description": "Canonical finite candidate set produced by governed candidate bounding.",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "candidate_type",
+    "candidate_policy_id",
+    "candidate_policy_version",
+    "operation_code",
+    "universe_source",
+    "universe_hash",
+    "eligible_candidates",
+    "excluded_candidates",
+    "candidate_set_hash",
+    "ranking_record",
+    "authority_hash",
+    "freshness_hash",
+    "policy_version",
+    "candidate_count",
+    "excluded_count",
+    "maximum_candidates",
+    "empty_set_behavior"
+  ],
+  "properties": {
+    "schema_id": {
+      "type": "string",
+      "const": "bounded_candidate_set_v1"
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "candidate_type": {
+      "type": "string"
+    },
+    "candidate_policy_id": {
+      "type": "string"
+    },
+    "candidate_policy_version": {
+      "type": "string"
+    },
+    "operation_code": {
+      "type": "string"
+    },
+    "universe_source": {
+      "type": "string"
+    },
+    "universe_hash": {
+      "type": "string"
+    },
+    "eligible_candidates": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/candidate"
+      }
+    },
+    "excluded_candidates": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/exclusion"
+      }
+    },
+    "candidate_set_hash": {
+      "type": "string"
+    },
+    "ranking_record": {
+      "type": "object",
+      "required": [
+        "ranking_method",
+        "tie_behavior",
+        "maximum_candidates",
+        "ordered_candidate_ids",
+        "empty_set_behavior"
+      ],
+      "properties": {
+        "ranking_method": {
+          "type": "string"
+        },
+        "tie_behavior": {
+          "type": "string"
+        },
+        "maximum_candidates": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "ordered_candidate_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "empty_set_behavior": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "authority_hash": {
+      "type": "string"
+    },
+    "freshness_hash": {
+      "type": "string"
+    },
+    "policy_version": {
+      "type": "string"
+    },
+    "candidate_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "excluded_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "maximum_candidates": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "empty_set_behavior": {
+      "type": "string"
+    }
+  },
+  "$defs": {
+    "candidate": {
+      "type": "object",
+      "required": [
+        "candidate_id",
+        "canonical_name",
+        "eligibility_status",
+        "authority_status",
+        "freshness_status",
+        "compatibility_status",
+        "rank_score",
+        "rank_components",
+        "provenance"
+      ],
+      "properties": {
+        "candidate_id": {
+          "type": "string"
+        },
+        "canonical_name": {
+          "type": "string"
+        },
+        "eligibility_status": {
+          "type": "string"
+        },
+        "authority_status": {
+          "type": "string"
+        },
+        "freshness_status": {
+          "type": "string"
+        },
+        "compatibility_status": {
+          "type": "string"
+        },
+        "rank_score": {
+          "type": "number"
+        },
+        "rank_components": {
+          "type": "object"
+        },
+        "provenance": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": true
+    },
+    "exclusion": {
+      "type": "object",
+      "required": [
+        "candidate_id",
+        "reason_code",
+        "policy_rule_id"
+      ],
+      "properties": {
+        "candidate_id": {
+          "type": "string"
+        },
+        "reason_code": {
+          "type": "string"
+        },
+        "policy_rule_id": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

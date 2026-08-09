@@ -1,0 +1,84 @@
+{
+  "id": "MT-LAW-A002",
+  "name": "Bounded Continuation Persistence Counterexample Obligations",
+  "status": "implemented",
+  "counterexample_classes": [
+    {
+      "id": "CE-A001",
+      "name": "Budget Overflow",
+      "condition": "C_A(x_alpha -> x_prime_alpha) > B_local(alpha)",
+      "trigger": "continuation_cost_exceeds_available_budget",
+      "signature": "inadmissible_transition_flag",
+      "metric_threshold": "B_local",
+      "simulation_hook": "budget_saturation_test"
+    },
+    {
+      "id": "CE-A002",
+      "name": "Admissibility Exhaustion",
+      "condition": "A_alpha becomes empty or collapses",
+      "trigger": "empty_admissible_window",
+      "signature": "null_projection_event",
+      "metric_threshold": "mu_A > epsilon_null",
+      "simulation_hook": "window_collapse_simulation"
+    },
+    {
+      "id": "CE-A003",
+      "name": "Topology Severance",
+      "condition": "Reach(alpha, beta) is false for required loci",
+      "trigger": "accessibility_link_fracture",
+      "signature": "disjoint_reconciliation_basins",
+      "metric_threshold": "W_CSI < delta_min",
+      "simulation_hook": "topology_fragmentation_analysis"
+    },
+    {
+      "id": "CE-A004",
+      "name": "Identity Fragmentation",
+      "condition": "Id_A(C_P, C_P') fails under mutation",
+      "trigger": "excessive_mutation_drift",
+      "signature": "branch_ambiguity_divergence",
+      "metric_threshold": "drift_A > eta_ID",
+      "simulation_hook": "mutation_drift_tracking"
+    },
+    {
+      "id": "CE-A005",
+      "name": "Channel Destabilization",
+      "condition": "C_P loses recursive reinforcement",
+      "trigger": "perturbation_amplification_crosses_resilience",
+      "signature": "persistence_channel_collapse",
+      "metric_threshold": "P_survival < threshold_persistence",
+      "simulation_hook": "perturbation_cascade_simulation"
+    },
+    {
+      "id": "CE-A006",
+      "name": "Reconstruction Divergence",
+      "condition": "multiple prehistories yield identical observables",
+      "trigger": "reconstruction_fidelity_loss",
+      "signature": "history_ambiguity_region",
+      "metric_threshold": "F_Xi < theta_Xi",
+      "simulation_hook": "history_compression_equivalence_test"
+    },
+    {
+      "id": "CE-A007",
+      "name": "Persistent Oscillatory Instability",
+      "condition": "non-convergent continuation cycle",
+      "trigger": "cyclic_budget_depletion_without_stabilization",
+      "signature": "metastable_oscillation_runaway",
+      "metric_threshold": "P_survival_variance > tolerance",
+      "simulation_hook": "unstable_oscillation_test"
+    }
+  ],
+  "proof_blockers": [
+    "need explicit metric for CE-A007 stability",
+    "need formal budget recovery rules",
+    "need multi-valued delta arbitration criteria"
+  ],
+  "governance_flags": {
+    "promote_to_theorem": false,
+    "claim_proof_completion": false,
+    "claim_global_closure": false,
+    "claim_physics_validation": false,
+    "erase_failure_modes": false,
+    "hide_branch_ambiguity": false,
+    "reintroduce_primitive_identity": false
+  }
+}

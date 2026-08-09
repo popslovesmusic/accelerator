@@ -1,0 +1,40 @@
+{
+  "patch_id": "MPF_PO003_VARIANCE_EXECUTION_AUTHORIZATION_PATCH_001",
+  "status": "PROPOSED",
+  "scope": "campaign_execution_authorization",
+  "claim_effect": "NO_THEOREM_PROMOTION",
+  "target": "PO_003",
+  "basis": [
+    "PO_001_PASSED_PENDING_RIGOR_ENDORSEMENT",
+    "PO_002_PASSED_PENDING_RIGOR_ENDORSEMENT",
+    "MPF_OPEN_BRIDGE_DEPENDENCY_AUDIT_001"
+  ],
+  "purpose": "Authorize execution of the PO_003 campaign testing whether high C_orient narrows T_class variance.",
+  "statement_under_test": "Var(T | C_orient_high) < Var(T | C_orient_low)",
+  "minimum_seeds": 64,
+  "required_controls": [
+    "full_mechanism",
+    "orientation_shuffled",
+    "fixed_orientation_regimes",
+    "residue_depleted"
+  ],
+  "required_outputs": [
+    "po003_variance_results.json",
+    "po003_variance_summary.csv",
+    "po003_variance_report.md",
+    "po003_control_comparison.json"
+  ],
+  "success_condition": {
+    "selector_effect": "positive variance narrowing under high C_orient",
+    "control_survival": "effect persists against shuffled/fixed/residue-depleted controls",
+    "interpretation_limit": "supports selector-form only, not closure-stability or app projections"
+  },
+  "failure_condition": {
+    "selector_effect": "no narrowing or control-equivalent narrowing",
+    "result": "OPEN_BRIDGE_001 remains unpromoted or is rerouted/falsified depending on failure mode"
+  },
+  "status_after_patch": {
+    "PO_003": "EXECUTION_AUTHORIZED_PENDING_RUN",
+    "OPEN_BRIDGE_001": "AWAITING_FIRST_DIRECT_EVIDENCE"
+  }
+}

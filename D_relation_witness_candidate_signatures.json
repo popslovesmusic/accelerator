@@ -1,0 +1,61 @@
+{
+  "candidate_signatures": {
+    "FO-001": {
+      "symbol": "C",
+      "name": "context",
+      "universe": "ContextUniverse",
+      "identity": "Context ID",
+      "equality": "Context equivalence relation (=_C)"
+    },
+    "FO-002": {
+      "symbol": "Rel_C",
+      "name": "context-indexed relation",
+      "signature": "Rel_C : TYPE_PROJECTION_C x TYPE_PROJECTION_C x TYPE_WITNESS_C -> Prop",
+      "arity": 3,
+      "admissibility": "Defined only on well-typed projections and valid relation witnesses"
+    },
+    "FO-003": {
+      "symbol": "Dist_C",
+      "name": "context-indexed distinction",
+      "signature": "Dist_C : Expr_D x Expr_D -> Prop",
+      "relation_to_Eval_D": "Distinct inputs must have defined Eval_D evaluations exceeding epsilon_a,C threshold"
+    },
+    "FO-004": {
+      "symbol": "RepDist_C",
+      "name": "representable distinction judgment",
+      "signature": "RepDist_C : TYPE_PROJECTION_C x TYPE_PROJECTION_C x TYPE_WITNESS_C -> Prop",
+      "truth_conditions": "RepDist_C(p, q, w) iff type(p) = TYPE_PROJECTION_C ∧ type(q) = TYPE_PROJECTION_C ∧ TypedWitness_C(w) ∧ Rel_C(p, q, w) ∧ TraceCompatible_C(w)"
+    },
+    "FO-005": {
+      "symbol": "TypedWitness_C",
+      "name": "typed semantic relation witness",
+      "signature": "TypedWitness_C : TYPE_WITNESS_C -> Prop",
+      "witness_target": "Validates relation witness w in context C, independent of concrete realization"
+    },
+    "FO-006": {
+      "symbol": "Realizes_C",
+      "name": "witness realization relation",
+      "signature": "Realizes_C : TYPE_REALIZATION x TYPE_WITNESS_C -> Prop",
+      "soundness_direction": "Realizes_C(r, w) ∧ ValidRealization(r) → TypedWitness_C(w)"
+    },
+    "FO-007": {
+      "symbol": "TraceCompatible_C",
+      "name": "context-indexed trace compatibility judgment",
+      "signature": "TraceCompatible_C : TYPE_TRACE x TYPE_WITNESS_C -> Prop",
+      "context_dependency": "Explicitly context-indexed (TraceCompatible_C) based on DEC-SEM-002"
+    },
+    "FO-008": {
+      "symbol": "Transport_C",
+      "name": "witness transport across transition",
+      "signature": "Transport_C : TYPE_TRANSITION x TYPE_WITNESS_C x TYPE_WITNESS_C -> Prop",
+      "partiality": "Partial (not guaranteed to be total for all typed transitions)"
+    }
+  },
+  "typing_dependencies": {
+    "RepDist_C": ["TYPE_PROJECTION_C", "TYPE_WITNESS_C", "TypedWitness_C", "TraceCompatible_C"],
+    "Realizes_C": ["TYPE_REALIZATION", "TYPE_WITNESS_C"]
+  },
+  "unresolved_signature_choices": [
+    "Should project_w mapping be explicitly parameterised by context C?"
+  ]
+}

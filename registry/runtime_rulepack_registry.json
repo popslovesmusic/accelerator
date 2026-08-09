@@ -1,0 +1,150 @@
+{
+  "registry_id": "PCD_RUNTIME_RULEPACK_REGISTRY",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "rulepack_id",
+      "source_registry",
+      "checks",
+      "failure_level",
+      "repair_hint"
+    ]
+  },
+  "rulepacks": [
+    {
+      "rulepack_id": "lexicon_core_integrity",
+      "source_registry": "registry/lexicon_canonical.json",
+      "checks": [
+        "json_parse_ok",
+        "core_terms_validated",
+        "ontology_class_present",
+        "definition_mode_present"
+      ],
+      "failure_level": "BLOCK",
+      "repair_hint": "Check lexicon_canonical.json for parse errors and ensure core terms in meta are present in the terms list."
+    },
+    {
+      "rulepack_id": "alias_integrity",
+      "source_registry": "registry/lexicon_alias_map.json",
+      "checks": [
+        "alias_targets_exist",
+        "no_invalid_alias_canonical_collision"
+      ],
+      "failure_level": "BLOCK",
+      "repair_hint": "Run resolve_lexicon_collisions.py and audit_scaling_cycle.py to fix alias-to-canonical targets."
+    },
+    {
+      "rulepack_id": "proof_claim_integrity",
+      "source_registry": "registry/claim_support_matrix.json",
+      "checks": [
+        "claim_has_theorem_status",
+        "claim_has_required_lemmas",
+        "claim_has_required_operators",
+        "claim_has_provenance_policy"
+      ],
+      "failure_level": "DOWNGRADE",
+      "repair_hint": "Ensure claim_support_matrix.json entries declare required mathematical and operator support chains."
+    },
+    {
+      "rulepack_id": "epistemic_language_integrity",
+      "source_registry": "registry/epistemic_language_registry.json",
+      "checks": [
+        "no_forbidden_rhetoric",
+        "claim_verbs_match_theorem_status",
+        "humility_scope_present"
+      ],
+      "failure_level": "DOWNGRADE",
+      "repair_hint": "Review epistemic_language_registry.json for blocked rhetoric and verify allowed_statuses for claim verbs."
+    },
+    {
+      "rulepack_id": "dependency_cascade_integrity",
+      "source_registry": "registry/dependency_cascade_registry.json",
+      "checks": [
+        "source_objects_exist",
+        "dependent_objects_exist",
+        "trigger_conditions_declared",
+        "cascade_actions_declared"
+      ],
+      "failure_level": "BLOCK",
+      "repair_hint": "Ensure dependency_cascade_registry.json correctly maps valid sources to dependents with explicit actions."
+    },
+    {
+      "rulepack_id": "formal_consistency_engine_v1",
+      "source_registry": "registry/consistency_engine_manifest.json",
+      "checks": [
+        "no_claim_above_dependency_status",
+        "no_supported_claim_with_open_gap",
+        "no_operator_signature_mismatch",
+        "no_publication_language_above_status",
+        "no_simulation_support_without_certified_binding"
+      ],
+      "failure_level": "BLOCK_OR_DOWNGRADE",
+      "repair_hint": "Review contradiction_and_consistency_engine_v1_report.json for recommended downgrades and dependency conflicts."
+    },
+    {
+      "rulepack_id": "msv_001_runtime_validation",
+      "source_registry": "registry/msv_001_output_validation_registry.json",
+      "script": "scripts/validate_msv_001_run.py",
+      "checks": [
+        "config_schema_conformance",
+        "required_outputs_exist",
+        "required_fields_present",
+        "falsification_vectors_present",
+        "provenance_manifest_complete"
+      ],
+      "failure_level": "BLOCK_OR_DOWNGRADE",
+      "repair_hint": "Check run directory for missing traces or falsification reports. Use validate_msv_001_run.py for details."
+    },
+    {
+      "rulepack_id": "simulation_anomaly_routing_v1",
+      "source_registry": "registry/simulation_anomaly_routing_registry.json",
+      "checks": [
+        "cross_mechanism_contradiction_detection",
+        "falsification_inversion_detection",
+        "runtime_provenance_mismatch_detection",
+        "assumption_gap_detection"
+      ],
+      "failure_level": "BLOCK_OR_DOWNGRADE"
+    },
+    {
+      "rulepack_id": "empirical_governance_runtime_v1",
+      "source_registries": [
+        "registry/empirical_result_package_schema.json",
+        "registry/empirical_confidence_propagation_registry.json",
+        "registry/empirical_claim_ledger.json",
+        "registry/publication_evidence_binding_registry.json",
+        "registry/epistemic_drift_monitor_registry.json"
+      ],
+      "script": "scripts/check_empirical_governance.py",
+      "checks": [
+        "result_package_required_for_empirical_claims",
+        "confidence_band_conditions_satisfied",
+        "ledger_entry_exists_for_status_change",
+        "publication_bound_to_result_package",
+        "epistemic_drift_scan_passed"
+      ],
+      "failure_level": "BLOCK_OR_DOWNGRADE"
+    },
+    {
+      "rulepack_id": "agent_reasoning_trace_v1",
+      "source_registry": "registry/agent_memory_registry.json",
+      "script": "scripts/capture_reasoning_trace.py",
+      "checks": [
+        "high_impact_action_traceable",
+        "context_lineage_preserved",
+        "provenance_links_validated"
+      ],
+      "failure_level": "WARNING",
+      "repair_hint": "Ensure high-impact governance actions emit a reasoning trace. Use capture_reasoning_trace.py to record decision logic."
+    },
+    {
+      "rulepack_id": "temporal_knowledge_evolution_v1",
+      "source_registry": "registry/temporal_knowledge_evolution_registry.json",
+      "script": "scripts/track_temporal_knowledge_evolution.py",
+      "rule": {
+        "statement": "High-impact actions such as theorem promotion, claim downgrade, operator refinement, contradiction resolution, confidence propagation, publication supersession, and rigor endorsement change must emit temporal evolution events.",
+        "failure_behavior": "mark_action_history_incomplete"
+      }
+    }
+  ]
+}

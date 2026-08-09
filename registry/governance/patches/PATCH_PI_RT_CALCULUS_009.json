@@ -1,0 +1,105 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_009",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-05",
+  "type": "governance_patch",
+  "artifact_type": "governance_patch",
+  "title": "Affect-Effect Primitive Distinction Projection",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_001"
+  ],
+  "purpose": "Define A|E as the primitive affect/effect distinction condition in its own domain and D(*|*) as the formal distinction-schema projection of that condition.",
+  "motivation": {
+    "problem": "The framework already governs the primitive distinction form, dominant-domain realization, and RT calculus chain, but the affect/effect-domain projection from A|E to D(*|*) remains implicit.",
+    "resolution": "A|E is governed as the primitive affect/effect distinction condition and D(*|*) is registered as its formal distinction-schema projection without altering the meta-domain bindings or the canonical RT core."
+  },
+  "core_definition": {
+    "A_E": "A|E is the primitive affect/effect distinction condition.",
+    "D_star_star": "D(*|*) is the formal distinction-schema projection of A|E.",
+    "trace_requirement": "Every D(*|*) projection must constructively trace to A|E and remain domain-bound."
+  },
+  "projection_rule": {
+    "form": "D(*|*) := \u03a0_D(A|E)",
+    "reading": "The primitive affect/effect distinction condition projects into formal distinction notation as D(*|*)."
+  },
+  "governance_rules": [
+    {
+      "id": "RTCALC_AE_001",
+      "name": "Domain Separation",
+      "statement": "A|E is not the meta-domain A_meta/B_meta binding."
+    },
+    {
+      "id": "RTCALC_AE_002",
+      "name": "Affect-Effect Scope",
+      "statement": "A|E belongs to the affect/effect domain."
+    },
+    {
+      "id": "RTCALC_AE_003",
+      "name": "Projected Schema Not Detached Primitive",
+      "statement": "D(*|*) is projected from A|E, not independently primitive as a detached object."
+    },
+    {
+      "id": "RTCALC_AE_004",
+      "name": "Whole-Expression Schema",
+      "statement": "D(*|*) remains a whole-expression schema and must not be decomposed into independent primitive parts."
+    }
+  ],
+  "calculus_chain_update": [
+    "RT_core",
+    "A|E primitive distinction condition",
+    "D(*|*) distinction projection",
+    "Orientation",
+    "RT operational regime",
+    "L / NL / Mixed"
+  ],
+  "effects": [
+    "Registers A|E as a domain-local primitive distinction condition.",
+    "Treats D(*|*) as a formal projection of A|E rather than a detached primitive object.",
+    "Preserves the existing RT core and meta-domain binding separation."
+  ],
+  "backward_compatibility": {
+    "breaking": false,
+    "notes": [
+      "The canonical RT expression remains unchanged.",
+      "The meta-domain A_meta/B_meta bindings remain reserved for Memory Tensor RT.",
+      "The zero-state D(*|*) shorthand elsewhere in the textbook remains a separate governed reading."
+    ]
+  },
+  "updated_artifacts": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/lexicon_gap_queue.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_009.json"
+  ],
+  "source_artifacts": [
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_001.json",
+    "registry/governance/patches/MPF_IND_PRIMITIVE_FORM_DOMINANT_DOMAIN_001.json",
+    "docs/textbook/mono_process_textbook_complete.md"
+  ],
+  "governance": {
+    "execution_claim": "not_claimed",
+    "registry_claim": "proposed_only",
+    "fabricated_history": false,
+    "notes": [
+      "A|E is governed within the affect/effect domain and remains distinct from the Memory Tensor meta-domain binding.",
+      "D(*|*) is a projected whole-expression schema and not a decomposed primitive object."
+    ]
+  },
+  "validation": {
+    "required": [
+      "primitive_affect_effect_condition_present",
+      "distinction_schema_projection_present",
+      "not_meta_domain_binding",
+      "affect_domain_only",
+      "whole_expression_schema",
+      "trace_requirement_present",
+      "global_validate_pass"
+    ],
+    "result": "pass"
+  },
+  "notes": [
+    "This patch is governance and architecture only.",
+    "The projection rule is domain-local and does not alter the canonical RT core or the primitive form governance."
+  ]
+}

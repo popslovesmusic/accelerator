@@ -1,0 +1,297 @@
+{
+  "registry_id": "OPEN_BRIDGE_PROOF_OBLIGATION_REGISTRY",
+  "version": "1.0.0",
+  "obligations": [
+    {
+      "obligation_id": "PO_OPEN_BRIDGE_001_ORIENTATION_SELECTION",
+      "bridge_id": "OPEN_BRIDGE_001",
+      "bridge_name": "Orientation-Closure Bridge (Topological Selection)",
+      "claim": "Orientation coherence conditions admissible knot-class selection (T) but is not independently sufficient for closure stability.",
+      "must_establish": [
+        {
+          "id": "PO_001",
+          "requirement": "Orientation coherence is measurable.",
+          "formal_need": "Define C_orient in a way that does not presuppose closure topology.",
+          "candidate_definition_status": "VALIDATED_ENDORSED",
+          "candidate_definition_source": "textbook \u00a75.1.5 (Formal Statement 5.1.5); patch MPF_C_ORIENT_METRIC_DEFINITION_PATCH_001",
+          "candidate_form": "C_orient(chi_D) := 1 - Var_norm({-(i)_k | -(i)_k \u2208 O_adm(chi_D)})",
+          "non_circularity_constraint": {
+            "rule_id": "C_ORIENT_NONCIRCULARITY_001",
+            "statement": "C_orient must be computable before topology class, knot class, or closure stability is evaluated.",
+            "forbidden_inputs": [
+              "K",
+              "T_class",
+              "S_closure",
+              "knot_class_label",
+              "closure_stability_result",
+              "post-hoc topology classification"
+            ],
+            "status": "CONSTRAINT_ACTIVE"
+          },
+          "testability_status": "PASSED_ENDORSED",
+          "validation_design": {
+            "patch_id": "MPF_PO001_C_ORIENT_VALIDATION_PATCH_001",
+            "design_status": "PO_001_TESTABLE_PENDING_EXECUTION",
+            "allowed_inputs": [
+              "chi_D",
+              "O_adm(chi_D)",
+              "-(i)_k assignments",
+              "admissibility context",
+              "orientation-pattern dispersion"
+            ],
+            "forbidden_inputs": [
+              "T_class_metric",
+              "T_k",
+              "K",
+              "S_closure",
+              "knot label",
+              "closure survival",
+              "post-run topology classification"
+            ],
+            "validation_tests": [
+              {
+                "id": "PO001_VT_001",
+                "name": "Input Isolation Test",
+                "question": "Can C_orient be computed before any closure topology is classified?",
+                "method": "Run C_orient calculation pipeline on chi_D and admissible orientation assignments only; confirm output does not require a prior T_class or closure step.",
+                "pass_condition": "C_orient output exists using only chi_D and admissible orientation assignments.",
+                "fail_condition": "Pipeline errors or returns null without topology input.",
+                "status": "PASSED"
+              },
+              {
+                "id": "PO001_VT_002",
+                "name": "Topology Blindness Test",
+                "question": "Does C_orient remain unchanged when topology labels are withheld or permuted?",
+                "method": "Compute C_orient twice: once with T_class labels present in environment, once with T_class labels removed or randomly permuted. Compare outputs.",
+                "pass_condition": "C_orient values are invariant under removal/permutation of T_class labels.",
+                "fail_condition": "C_orient values differ when T_class labels change.",
+                "status": "PASSED"
+              },
+              {
+                "id": "PO001_VT_003",
+                "name": "Closure Stability Blindness Test",
+                "question": "Does C_orient avoid dependence on S_closure?",
+                "method": "Compute C_orient with and without S_closure outputs in environment. Compare.",
+                "pass_condition": "C_orient values are invariant under withholding S_closure outputs.",
+                "fail_condition": "C_orient values differ when S_closure is withheld.",
+                "status": "PASSED"
+              },
+              {
+                "id": "PO001_VT_004",
+                "name": "Orientation Shuffling Sensitivity Test",
+                "question": "Does shuffling orientation assignments lower or decorrelate C_orient under matched chi_D?",
+                "method": "Run matched pairs: (a) coherent orientation assignment, (b) shuffled orientation assignment over same chi_D. Compare C_orient distributions.",
+                "pass_condition": "Shuffled orientation regimes produce lower or decorrelated C_orient than coherent regimes.",
+                "fail_condition": "Shuffled and coherent regimes produce indistinguishable C_orient values.",
+                "status": "PASSED"
+              }
+            ],
+            "expected_outputs": [
+              "po001_validation_report.md",
+              "c_orient_input_dependency_audit.json",
+              "c_orient_validation_results.json",
+              "c_orient_validation_summary.csv"
+            ],
+            "status_if_all_pass": "PO_001_TESTABLE_PENDING_EXECUTION",
+            "status_if_any_fail": "CANDIDATE_DEFINITION_REQUIRES_REVISION"
+          },
+          "status": "satisfied"
+        },
+        {
+          "id": "PO_002",
+          "requirement": "Knot-class distribution is measurable.",
+          "formal_need": "Define a topological metric (e.g., braid index) to categorize observed closures.",
+          "candidate_definition_status": "VALIDATED_ENDORSED",
+          "candidate_definition_source": "textbook section 11.X (Formal Statement 11.X); patch MPF_T_CLASS_METRIC_DEFINITION_PATCH_001",
+          "candidate_form": "T_class_metric(G_K) := [T_k, b(T_k), inv(G_K)] where G_K := graph(K_obs)",
+          "minimal_class_family": {
+            "T_0": "null_or_no_closure",
+            "T_1": "simple_closure_organization",
+            "T_2": "linked_closure_organization",
+            "T_3": "low_index_braided_organization",
+            "T_4": "high_index_braided_organization",
+            "T_x": "valid_but_unclassified_topological_organization"
+          },
+          "non_circularity_constraint": {
+            "rule_id": "T_CLASS_NONCIRCULARITY_001",
+            "statement": "T_class_metric must classify topology without C_orient input.",
+            "status": "CONSTRAINT_ACTIVE"
+          },
+          "testability_status": "PASSED_ENDORSED",
+          "ontology_ruling": {
+            "ruling_id": "MPF_T_ONTOLOGY_CLARIFICATION_001",
+            "statement": "T_class_metric classifies topological organizations generated by continuation under constraint, not bare graphs or braid index projections directly."
+          },
+          "execution_contract": {
+            "contract_id": "MPF_T_CLASS_EXECUTION_CONTRACT_001",
+            "principle": "One theory, two implementations.",
+            "canonical_order": [
+              "ingest",
+              "sanitize",
+              "feature_extract",
+              "organization_signature",
+              "class_assign",
+              "distribution_compute",
+              "audit_emit"
+            ]
+          },
+          "t_signature": {
+            "definition_id": "MPF_T_SIGNATURE_DEFINITION_PATCH_001",
+            "candidate_form": {
+              "T_sig": "[C_count, L_depth, R_conn, B_cross, A_branch]"
+            },
+            "components": [
+              {
+                "symbol": "C_count",
+                "reading": "Closure organization count",
+                "metric_proxy": "components"
+              },
+              {
+                "symbol": "L_depth",
+                "reading": "Loop nesting depth",
+                "metric_proxy": "cycle_nesting"
+              },
+              {
+                "symbol": "R_conn",
+                "reading": "Connectivity persistence",
+                "metric_proxy": "edge_preservation"
+              },
+              {
+                "symbol": "B_cross",
+                "reading": "Crossing or braid complexity proxy",
+                "metric_proxy": "crossing_count"
+              },
+              {
+                "symbol": "A_branch",
+                "reading": "Branching organization measure",
+                "metric_proxy": "average_vertex_degree"
+              }
+            ]
+          },
+          "note": "PO_002 classification now proceeds through T_sig before T0-Tx assignment.",
+          "validation_closure": {
+            "patch_id": "MPF_PO002_VALIDATION_CLOSURE_PATCH_001",
+            "claim_effect": "NO_THEOREM_PROMOTION",
+            "ruling": {
+              "fixture_correctness": "PASS",
+              "python_cpp_equivalence": "PASS_100_PERCENT",
+              "negative_fixture_rejection": "PASS",
+              "batch_metrics": "PASS",
+              "audit_actual_output_alignment": "PASS"
+            },
+            "authoritative_outputs": [
+              "outputs/t_class_test_results/cpp_t_class_test_results.json",
+              "outputs/t_class_test_results/python_cpp_equivalence_results.json",
+              "outputs/t_class_test_results/t_class_implementation_audit.md"
+            ],
+            "excluded_stale_artifact": {
+              "file": "outputs/t_class_test_results/python_t_class_test_results.json",
+              "reason": "older sidecar artifact not regenerated by authoritative rerun"
+            }
+          },
+          "status": "satisfied"
+        },
+        {
+          "id": "PO_003",
+          "requirement": "Orientation coherence narrows admissible knot-classes.",
+          "formal_need": "Show that Var(T | C_orient > 0.8) < Var(T | C_orient approx 0).",
+          "candidate_definition_status": "VALIDATED_ENDORSED",
+          "dependency_note": "PO_003 variance narrowing campaign executed successfully via patch MPF_PO003_VARIANCE_CAMPAIGN_RUN_001. Selector evidence present.",
+          "testability_status": "PASSED_ENDORSED",
+          "variance_test_design_patch": "MPF_PO003_VARIANCE_TEST_DESIGN_PATCH_001",
+          "variance_execution_auth_patch": "MPF_PO003_VARIANCE_EXECUTION_AUTHORIZATION_PATCH_001",
+          "variance_campaign_run_patch": "MPF_PO003_VARIANCE_CAMPAIGN_RUN_001",
+          "status": "satisfied"
+        },
+        {
+          "id": "PO_004",
+          "requirement": "Stability arises from Principle 2.X, not orientation.",
+          "formal_need": "Show that closure survival S_closure is highly correlated with R_support but poorly correlated with C_orient once T is fixed.",
+          "status": "satisfied"
+        },
+        {
+          "id": "PO_005",
+          "requirement": "Orientation acts as a selector.",
+          "formal_need": "Verify that specific knot-classes T_k only emerge in compatible orientation regimes.",
+          "candidate_definition_status": "VALIDATED_ENDORSED",
+          "dependency_note": "PO_005 selector specificity campaign executed successfully via patch MPF_PO005_SELECTOR_CAMPAIGN_RUN_001. Selector evidence present.",
+          "testability_status": "PASSED_ENDORSED",
+          "selector_test_design_patch": "MPF_PO005_SELECTOR_TEST_DESIGN_PATCH_001",
+          "selector_execution_auth_patch": "MPF_PO005_SELECTOR_EXECUTION_AUTHORIZATION_PATCH_001",
+          "selector_campaign_run_patch": "MPF_PO005_SELECTOR_CAMPAIGN_RUN_001",
+          "status": "satisfied"
+        }
+      ],
+      "formal_minimum": {
+        "orientation_coherence_metric": "C_orient",
+        "topological_class_variance": "Var(T)",
+        "minimum_relation": "Effect(C_orient -> T_class) > tau"
+      },
+      "hypotheses": {
+        "null": {
+          "id": "H0_OPEN_BRIDGE_001_REFORMULATED",
+          "statement": "Orientation coherence has no independent effect on knot-class selection or admissible topology T."
+        },
+        "alternative": {
+          "id": "H1_OPEN_BRIDGE_001_REFORMULATED",
+          "statement": "Orientation coherence narrows the set of admissible knot-classes T."
+        }
+      },
+      "mathematical_obligation": {
+        "must_define": [
+          "C_orient",
+          "T_class_metric",
+          "S_closure",
+          "R_support",
+          "tau"
+        ],
+        "required_form": {
+          "controlled_relation": "T_class = f(C_orient, R_support, Delta) + noise",
+          "support_condition": "Orientation coherence significantly shifts the modal T_class.",
+          "failure_condition": "T_class distribution is invariant to orientation structure."
+        }
+      },
+      "simulation_obligation": {
+        "required_controls": [
+          "full_mechanism",
+          "orientation_shuffled",
+          "fixed_orientation_regimes",
+          "residue_depleted"
+        ],
+        "required_reports": [
+          "knot_class_histogram",
+          "mean_topological_stability",
+          "residue_contribution_to_S",
+          "orientation_contribution_to_T"
+        ],
+        "minimum_seed_count": 64
+      },
+      "decision_rules": {
+        "support": {
+          "condition": "Orientation coherence significantly and predictably narrows the distribution of knot-classes.",
+          "allowed_claim_level": "C4_candidate"
+        },
+        "downgrade": {
+          "condition": "Orientation effect on T is weak or easily overridden by high residue pressure.",
+          "allowed_claim_level": "C2_to_C3"
+        },
+        "falsify": {
+          "condition": "Topological selection is independent of orientation coherence.",
+          "allowed_claim_level": "FALSIFIED_OR_REWRITE_REQUIRED"
+        }
+      },
+      "governance_effect": {
+        "if_supported": [
+          "OPEN_BRIDGE_001 may be promoted to SUPPORTED.",
+          "Triadic closure TC_asym may exit REVIEW_LOCK into T-class specific promotion."
+        ],
+        "if_falsified": [
+          "Orientation is retired as a structural selector.",
+          "Knot-class selection must be rerouted to pure residue-admissibility dynamics."
+        ]
+      },
+      "patch_reference": "PD_CG_PATCH_004_BRIDGE_REFORMULATION"
+    }
+  ],
+  "status": "endorsed"
+}

@@ -1,0 +1,48 @@
+{
+  "registry_id": "PCD_RESIDUE_MEDIATED_RECOUPLING_REGISTRY",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "recoupling_id",
+      "source_condition",
+      "required_context",
+      "admissibility_change",
+      "residue_condition",
+      "allowed_transition",
+      "failure_mode",
+      "claim_limits"
+    ]
+  },
+  "recoupling_rules": [
+    {
+      "recoupling_id": "R_RECOUPLING_V1",
+      "source_condition": [
+        "blocked_transition",
+        "orientation_conflict",
+        "Ref_equivalence_class_change",
+        "inadmissible_to_admissible_reopening"
+      ],
+      "required_context": [
+        "current_residue_state_R",
+        "active_admissibility_window_A",
+        "prior_operator_state_O_prev",
+        "candidate_operator_state_O_next",
+        "declared_mismatch_cost_change"
+      ],
+      "admissibility_change": "A transition may reopen only if the active admissibility window changes or residue context permits a new admissible continuation class.",
+      "residue_condition": "R may condition recoupling but must not independently generate continuation outside admissibility.",
+      "allowed_transition": "inadmissible_or_conflicted_state -> conditionally_admissible_state",
+      "failure_mode": [
+        "memoryless_reopening",
+        "residue_as_independent_agent",
+        "unscoped_orientation_conflict",
+        "missing_admissibility_window_change"
+      ],
+      "claim_limits": [
+        "theoretical_rule",
+        "not_empirical_without_simulation_binding",
+        "does_not_close_full_O_algebra"
+      ]
+    }
+  ]
+}

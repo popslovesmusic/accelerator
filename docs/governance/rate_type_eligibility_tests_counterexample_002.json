@@ -1,0 +1,56 @@
+{
+  "artifact_id": "rate_type_eligibility_tests_counterexample_002",
+  "artifact_type": "rate_type_eligibility_test_counterexamples",
+  "status": "DRAFT_PROVISIONAL",
+  "scope": "documentation_only",
+  "source_patch_id": "PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_TESTS_002",
+  "revision_target": "PATCH_RT_METRIC_BRIDGE_RATE_TYPE_ELIGIBILITY_TESTS_002",
+  "purpose": "Show the failure cases that prevent the adversarial test suite from being misread as bridge promotion, bridge invalidation, or edge-case collapse.",
+  "counterexamples": [
+    {
+      "failure_code": "FALSE_PASS_PROMOTION",
+      "counterexample": "A coupled interior candidate with declared phi is treated as bridge promotion rather than as a test pass.",
+      "why_blocked": "Passing the suite admits further bridge development only; it does not promote DENSITY_BRIDGE_001 or RATE_UNIFICATION_001.",
+      "governance_effect": "Reject the promotion reading."
+    },
+    {
+      "failure_code": "FALSE_FAIL_INVALIDATION",
+      "counterexample": "A failing decoupled endpoint test is treated as invalidation of RT_core.",
+      "why_blocked": "The failure class only blocks the candidate; it does not modify the formal calculus.",
+      "governance_effect": "Reject the invalidation reading."
+    },
+    {
+      "failure_code": "EDGE_CONFLATION",
+      "counterexample": "A near-tie below-floor candidate is collapsed into either pass or fail without recording ambiguity.",
+      "why_blocked": "Edge cases must preserve admissibility ambiguity under phi rather than being forced into binary closure.",
+      "governance_effect": "Require explicit edge recording."
+    }
+  ],
+  "blocked_readings": [
+    "A suite pass is not bridge promotion.",
+    "A suite failure is not RT_core invalidation.",
+    "An edge result is not a binary verdict without recorded ambiguity."
+  ],
+  "forbidden_inference": [
+    "The counterexamples do not prove the bridge is impossible.",
+    "The counterexamples do not define a completed metric.",
+    "The counterexamples do not modify RT_core."
+  ],
+  "claim_humility": {
+    "current_status": "candidate_witness_only",
+    "non_claims": [
+      "Does not prove bridge failure in general.",
+      "Does not prove a completed metric is impossible.",
+      "Does not define a norm.",
+      "Does not modify RT_core.",
+      "Does not assert external physical truth."
+    ]
+  },
+  "non_claims": [
+    "Does not prove bridge failure in general.",
+    "Does not prove a completed metric is impossible.",
+    "Does not define a norm.",
+    "Does not modify RT_core.",
+    "Does not assert external physical truth."
+  ]
+}

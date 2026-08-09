@@ -1,0 +1,26 @@
+{
+  "campaign_id": "NB20_DISTINCTION_CONSERVATION_EXCLUSION_DYNAMICS_001",
+  "status": "POST_EXECUTION_RECONSTRUCTION",
+  "specification_gate": "NOT_SATISFIED",
+  "note": "Reconstructed from the executed notebook and archive after execution; not an immutable pre-execution specification.",
+  "research_question": "Does every source distinction partition exactly once into preserved or excluded distinction, and is residue determined by the excluded distinction set?",
+  "hypotheses": {
+    "primary": "Every source distinction is partitioned exactly once into preserved or excluded distinction.",
+    "secondary": "Residue is determined by the excluded distinction set.",
+    "falsification": ["Any distinction classified as neither or both falsifies conservation.", "Identical exclusion signatures with different residue values falsify the strong form."]
+  },
+  "independent_variables": ["source_domain", "target_domain", "source_size", "target_size", "projection_mapping", "exclusion_signature"],
+  "dependent_variables": ["distinctions_before", "distinctions_preserved", "distinctions_excluded", "residue_components", "conservation_holds", "strong_form_status"],
+  "controls": ["finite relational organization generator", "fixed distinction inventory", "fixed projection and residue operationalization", "deterministic block handling"],
+  "random_seed": 200020,
+  "parameter_space": {
+    "domains": ["binary", "ternary", "relational"],
+    "source_sizes": [2, 3, 4],
+    "target_sizes": [1, 2, 3, 4],
+    "max_source_states_per_block": 10,
+    "max_target_states_per_block": 10
+  },
+  "termination_conditions": ["all configured blocks complete", "conservation validation complete", "matched-signature comparison complete", "deliverables exported"],
+  "expected_outputs": ["projection_records.csv", "distinction_inventory.csv", "conservation_test_results.csv", "conservation_violations.csv", "matched_exclusion_counterexamples.csv", "run_manifest20.json", "findings20.json", "figures"],
+  "interpretation_protocol": ["separate conservation from residue determination", "report sampled and exhaustive blocks separately", "treat surviving conservation as bounded model evidence", "preserve matched-exclusion counterexamples", "do not infer universal causation or ontological conservation"]
+}

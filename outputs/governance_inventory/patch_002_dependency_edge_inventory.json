@@ -1,0 +1,98 @@
+{
+  "schema_id": "governance_patch_dependency_edge_inventory_v1",
+  "generated_at": "2026-07-14T18:05:00-04:00",
+  "target_patch_id": "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002",
+  "starting_subject_patches": [
+    "PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007",
+    "PATCH_GOVERNANCE_MISSING_DEPENDENCY_003_CHAIN_REPAIR_008"
+  ],
+  "classification": {
+    "runtime_behavior_before_repair": [
+      "DEPENDENCY_TYPE_COLLAPSE",
+      "STATUS_SEMANTIC_COLLAPSE"
+    ],
+    "runtime_behavior_after_repair": "REQUIRES_EXISTING_EVIDENCE_RECOGNIZED"
+  },
+  "dependency_model": {
+    "allowed_types": [
+      "REQUIRES_COMPLETED_PREDECESSOR",
+      "REQUIRES_EXISTING_EVIDENCE",
+      "REQUIRES_SEMANTIC_RULE",
+      "HISTORICAL_LINEAGE_ONLY"
+    ],
+    "proven_q0_type_for_patch_002": "REQUIRES_EXISTING_EVIDENCE"
+  },
+  "edge_inventory": [
+    {
+      "from_patch_id": "PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007",
+      "to_patch_id": "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002",
+      "edge_scope": "DIRECT",
+      "recorded_in": "patches/PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007.json",
+      "dependency_type_before_repair": "IMPLICIT_REQUIRES_COMPLETED_PREDECESSOR",
+      "dependency_type_after_repair": "REQUIRES_EXISTING_EVIDENCE",
+      "reason": "Patch 007 partitions authority over surfaces produced by the transitional inventory and does not require inventory completion."
+    },
+    {
+      "from_patch_id": "PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007",
+      "to_patch_id": "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002",
+      "edge_scope": "TRANSITIVE",
+      "path": [
+        "PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007",
+        "PATCH_GOVERNANCE_INVENTORY_PROVENANCE_AND_ADDITIVE_AUTHORITY_004",
+        "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002"
+      ],
+      "dependency_type_after_repair": "REQUIRES_EXISTING_EVIDENCE"
+    },
+    {
+      "from_patch_id": "PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007",
+      "to_patch_id": "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002",
+      "edge_scope": "TRANSITIVE",
+      "path": [
+        "PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007",
+        "PATCH_GOVERNANCE_AMBIGUITY_RISK_CLASSIFICATION_AND_REMEDIATION_QUEUE_005",
+        "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002"
+      ],
+      "dependency_type_after_repair": "REQUIRES_EXISTING_EVIDENCE"
+    },
+    {
+      "from_patch_id": "PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007",
+      "to_patch_id": "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002",
+      "edge_scope": "TRANSITIVE",
+      "path": [
+        "PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007",
+        "PATCH_GOVERNANCE_Q0_CLUSTER_SELECTION_AND_RESOLUTION_PACKET_006",
+        "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002"
+      ],
+      "dependency_type_after_repair": "REQUIRES_EXISTING_EVIDENCE"
+    },
+    {
+      "from_patch_id": "PATCH_GOVERNANCE_MISSING_DEPENDENCY_003_CHAIN_REPAIR_008",
+      "to_patch_id": "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002",
+      "edge_scope": "DIRECT",
+      "recorded_in": "patches/PATCH_GOVERNANCE_MISSING_DEPENDENCY_003_CHAIN_REPAIR_008.json",
+      "dependency_type_before_repair": "IMPLICIT_REQUIRES_COMPLETED_PREDECESSOR",
+      "dependency_type_after_repair": "REQUIRES_EXISTING_EVIDENCE",
+      "reason": "Patch 008 diagnoses and repairs dependency semantics against the registered transitional inventory artifact and does not require inventory completion."
+    },
+    {
+      "from_patch_id": "PATCH_GOVERNANCE_MISSING_DEPENDENCY_003_CHAIN_REPAIR_008",
+      "to_patch_id": "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002",
+      "edge_scope": "TRANSITIVE",
+      "path": [
+        "PATCH_GOVERNANCE_MISSING_DEPENDENCY_003_CHAIN_REPAIR_008",
+        "PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007",
+        "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002"
+      ],
+      "dependency_type_after_repair": "REQUIRES_EXISTING_EVIDENCE"
+    }
+  ],
+  "runtime_reduction_evidence": {
+    "dependency_record": "scripts/query_governance.py reads only depends_on by default.",
+    "runtime_resolver_branch_before_repair": "unresolved_dependencies used dep_result.status not in {'applied'}",
+    "status_mapping_before_repair": "PARTIAL normalized to unknown",
+    "resulting_chain_state_before_repair": "dependency_chain_not_satisfied",
+    "runtime_resolver_branch_after_repair": "dependency_evaluation resolves per-edge requirement_type",
+    "status_mapping_after_repair": "PARTIAL normalizes to partial",
+    "resulting_chain_state_after_repair": "partial/defer without dependency_chain_not_satisfied"
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "math_program_audit": {
+    "timestamp": "2026-05-11T23:21:33.683430Z",
+    "task_id": "MATH-PROGRAM-AUDIT-POST-DELTA-PIA-001",
+    "status": "warning",
+    "evidence_orientation": "current_command_evidence",
+    "validator_results": {
+      "formal_objects": "pass",
+      "well_posedness": "pass",
+      "reconstruction": "pass",
+      "reduction_chains": "pass",
+      "minimal_theorems": "pass",
+      "consolidated_math_program": "pass"
+    },
+    "resolved_items": [
+      {
+        "item": "operator_registry_presence",
+        "residue_update_registered": true,
+        "Delta_registered": true,
+        "delta_registered": true,
+        "Pi_A_registered": true
+      }
+    ],
+    "remaining_gaps": [
+      {
+        "id": "GAP-001",
+        "name": "sum_operator_convergence",
+        "description": "Non-local CSI sum lacks a proof of convergence for large CSI radii."
+      },
+      {
+        "id": "GAP-002",
+        "name": "orientation_minimization_rule",
+        "description": "No formal operator defined for orientation frame selection."
+      },
+      {
+        "id": "GAP-003",
+        "name": "residue_transport_conservation",
+        "description": "Conservation of total residue R across NavT is unproven."
+      },
+      {
+        "id": "GAP-004",
+        "name": "delta_operator_formalization",
+        "description": "Explicit symbolic representation of Delta transformation is undefined."
+      }
+    ],
+    "open_proof_obligations": [
+      {
+        "obligation_id": "PO-001",
+        "theorem_id": "MT-001",
+        "description": "Formalize stable admissibility condition as a constraint on Pi_A image.",
+        "required_for_status": "symbolic_checked",
+        "current_status": "open"
+      },
+      {
+        "obligation_id": "PO-002",
+        "theorem_id": "MT-002",
+        "description": "Symbolically check NavT identity mapping for locally closed process states.",
+        "required_for_status": "symbolic_checked",
+        "current_status": "open"
+      }
+    ],
+    "local_theorem_candidates": [
+      {
+        "theorem_id": "MT-001",
+        "note": "Pi_A idempotence candidate; PO-001 open"
+      },
+      {
+        "theorem_id": "MT-002",
+        "note": "NavT identity mapping candidate; PO-002 open"
+      },
+      {
+        "theorem_id": "MT-003",
+        "note": "Continuation requires non-empty admissible image; conditional scaffold"
+      }
+    ],
+    "ready_for_local_theorem_work": true,
+    "ready_for_global_closure_claims": false,
+    "ready_for_physics_claims": false,
+    "recommended_next_patches": [
+      "Address GAP-004 delta_operator_formalization (Delta vs delta unification/semantics)",
+      "Address GAP-002 orientation_minimization_rule",
+      "Address GAP-003 residue_transport_conservation",
+      "Address GAP-001 sum_operator_convergence",
+      "Close PO-001 and PO-002 to elevate MT-001/MT-002"
+    ],
+    "warnings": [
+      "Audit-only: no registries were modified and no closure/physics claims are asserted.",
+      "Program reports readiness for local theorem work but explicitly not for global closure or physics claims.",
+      "Delta appears twice (Delta and delta) in operator_registry; treat as an open formalization/standardization risk until GAP-004 is resolved."
+    ],
+    "command_evidence": [
+      {
+        "command": "python scripts/math/math_program_validate.py --out outputs/audits/math_program_validation_post_delta_pia_2026-05-11.json",
+        "saved_path": "outputs/audits/math_program_validation_post_delta_pia_2026-05-11.json",
+        "status": "pass"
+      },
+      {
+        "command": "python scripts/math/math_program_status.py --out outputs/audits/math_program_status_post_delta_pia_2026-05-11.json",
+        "saved_path": "outputs/audits/math_program_status_post_delta_pia_2026-05-11.json",
+        "readiness": {
+          "ready_for_local_theorem_work": true,
+          "ready_for_global_closure_claims": false,
+          "ready_for_physics_claims": false
+        }
+      },
+      {
+        "registry_file": "registry/math/operator_registry.json",
+        "operator_symbols_present": [
+          "Delta",
+          "NavT",
+          "Pi_A",
+          "delta",
+          "residue_update"
+        ]
+      },
+      {
+        "registry_file": "registry/math/reduction_gap_registry.json",
+        "gap_ids": [
+          "GAP-001",
+          "GAP-002",
+          "GAP-003",
+          "GAP-004"
+        ]
+      },
+      {
+        "registry_file": "registry/math/proof_obligation_registry.json",
+        "open_obligation_ids": [
+          "PO-001",
+          "PO-002"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "campaign_spec": {
+    "id": "MPF_BAR_OPERATOR_VALIDATION_001",
+    "template_binding": "TPL-VERTICAL-BAR-INDUCTION-001",
+    "critical_open_problem": "Does the distinction-preserving comparison operator | generate measurable distinctions D and produce deviated admissibility δα without collapsing the operands A and B?",
+    "status": "proposed_for_induction",
+    "hypothesis": {
+      "statement": "|-enabled comparisons generate measurable D and D produces deviated admissibility δα.",
+      "canonical_grounding": [
+        "A | B := Compare_C(A,B) ∧ D_C(A|B) > ε_a"
+      ]
+    },
+    "rigor_mandate": {
+      "level": "C2_TESTABLE_CANDIDATE",
+      "required_tools": [
+        "triadic_closure_substrate_sim_cpp"
+      ],
+      "independent_measurement_count": 2,
+      "minimum_seeds": 4,
+      "backend_preference": "C++"
+    },
+    "test_design": {
+      "strategy": "Comparison Condition Perturbation Sweep",
+      "description": "Evaluate distinction generation under four structural controls ranging from no comparison to collapsed, randomized, and valid distinction-preserving comparison.",
+      "tests": [
+        {
+          "id": "C0_no_bar",
+          "name": "No Bar Baseline",
+          "description": "A and B present but not compared",
+          "target_observable": "D_count"
+        },
+        {
+          "id": "C1_collapse_bar",
+          "name": "Collapsed Bar",
+          "description": "A|B forced toward identity (A=B)",
+          "target_observable": "D_count"
+        },
+        {
+          "id": "C2_random_bar",
+          "name": "Randomized Bar",
+          "description": "Comparison randomized / preservation degraded",
+          "target_observable": "organization_score"
+        },
+        {
+          "id": "C3_valid_bar",
+          "name": "Valid Bar Operator",
+          "description": "Valid distinction-preserving comparison",
+          "target_observable": "D_count"
+        }
+      ]
+    },
+    "falsification_attacks_highest_rigor": {
+      "vectors": [
+        {
+          "id": "FV_COLLAPSE_DEVIATION",
+          "name": "Identity Collapse Check",
+          "attack": "Check if C1_collapse_bar generates non-trivial constraint deviation.",
+          "failure_condition": "Constraint deviation in C1 is comparable to C3.",
+          "implication": "Distinction preservation is not required for constraint deviation."
+        },
+        {
+          "id": "FV_RANDOM_ORGANIZATION",
+          "name": "Randomized Persistence Check",
+          "attack": "Check if C2_random_bar results in structured organization.",
+          "failure_condition": "Organization score in C2 is comparable to C3.",
+          "implication": "Distinction-preservation order is not required for persistence."
+        }
+      ]
+    },
+    "maximum_supported_claim": {
+      "statement": "The bar operator | allows comparison without collapse, facilitating distinction-generation and subsequent admissibility-deviation in local analog model systems."
+    }
+  }
+}

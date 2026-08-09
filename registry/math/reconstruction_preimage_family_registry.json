@@ -1,0 +1,50 @@
+{
+  "reconstruction_preimage_family": {
+    "version": "1.0",
+    "description": "Registry for classifying families of preimages associated with specific reconstruction outcomes.",
+    "family_classes": [
+      {
+        "id": "RPF-001",
+        "name": "locally_unique_family",
+        "cardinality": "1",
+        "description": "Preimage set consists of a single point (strict recoverability)."
+      },
+      {
+        "id": "RPF-002",
+        "name": "discrete_branch_family",
+        "cardinality": "finite_discrete",
+        "description": "Preimage set consists of N discrete symmetric branches (delta multiplicity)."
+      },
+      {
+        "id": "RPF-003",
+        "name": "manifold_fiber_family",
+        "cardinality": "uncountable_bounded",
+        "description": "Preimage set is a continuous manifold or fiber (projection loss)."
+      },
+      {
+        "id": "RPF-004",
+        "name": "asymptotic_state_family",
+        "cardinality": "unbounded",
+        "description": "Preimage set expands to the full admissible state space (asymptotic failure)."
+      }
+    ],
+    "operator_family_mapping": [
+      {
+        "operator": "delta",
+        "target_family": "discrete_branch_family",
+        "condition": "Degenerate minima (RC-026)"
+      },
+      {
+        "operator": "Pi_A",
+        "target_family": "manifold_fiber_family",
+        "condition": "Sub-threshold states outside window"
+      },
+      {
+        "operator": "NavT",
+        "target_family": "manifold_fiber_family",
+        "condition": "Aggregate CSI domain integration"
+      }
+    ],
+    "last_updated": "2026-05-13"
+  }
+}

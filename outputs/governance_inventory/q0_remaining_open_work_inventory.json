@@ -1,0 +1,304 @@
+{
+  "schema_id": "q0_remaining_open_work_inventory_v1",
+  "generated_at": "2026-07-14T23:10:00-04:00",
+  "starting_patch": "PATCH_GOVERNANCE_Q0_PATCH_LOCAL_COMPLETION_AND_STATUS_CORRECTION_012",
+  "scope": "Q0 substantive remaining governance work after patch-local completion and dependency repair",
+  "source_of_truth": {
+    "artifacts": [
+      "outputs/governance_inventory/q0_partial_status_intent_inventory.json",
+      "outputs/governance_inventory/q0_patch_local_completion_and_status_correction_evidence.json",
+      "outputs/governance_inventory/q0_typed_dependency_runtime_snapshot.json",
+      "outputs/governance_inventory/q0_scope_partition_queue.json",
+      "outputs/governance_inventory/q0_live_authority_access_inventory.json",
+      "outputs/governance_inventory/q0_validator_authority_partition.json",
+      "outputs/governance_inventory/q0_resolution_packet.json",
+      "outputs/governance_inventory/governance_remediation_queue.json"
+    ],
+    "rules": [
+      "Do not reopen completed patches 007 through 012 without contradictory evidence.",
+      "Do not promote PATCH_GOVERNANCE_GLOBAL_INVENTORY_002 from PARTIAL.",
+      "Do not treat stale queue membership as proof of live unresolved Q0 behavior."
+    ],
+    "q0_identity_basis": {
+      "selected_q0_count": 10,
+      "excluded_q0_count": 11,
+      "all_q0_count": 21,
+      "selected_cluster_patch": "PATCH_GOVERNANCE_Q0_CLUSTER_SELECTION_AND_RESOLUTION_PACKET_006",
+      "resolution_patch": "PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007"
+    }
+  },
+  "current_runtime_state": {
+    "dependency_chain_health": "NO_KNOWN_Q0_DEPENDENCY_CHAIN_BLOCKER",
+    "patch_012_patch_chain_summary": {
+      "status": "unknown",
+      "decision": "defer",
+      "reason": "Patch is registered as partial or transitional evidence.",
+      "blockers": []
+    },
+    "full_project_validation": "SUSPENDED_PENDING_VALIDATOR_DEPARTMENT_COMPLETION"
+  },
+  "summary_counts": {
+    "total_remaining_q0_items": 12,
+    "blocked_on_global_inventory": 1,
+    "ready_for_bounded_resolution": 0,
+    "neutralized_by_later_governance": 7,
+    "obsolete_residue": 4,
+    "genuinely_unresolved_authority_conflicts": 0,
+    "validator_department_gated": 0,
+    "unproven": 0
+  },
+  "items": [
+    {
+      "item_id": "Q0-OPEN-001",
+      "subject_type": "PATCH_COMPLETION_GATE",
+      "subject_id": "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002",
+      "current_state": "PARTIAL",
+      "classification": "BLOCKED_ON_GLOBAL_INVENTORY",
+      "required_action": "KEEP_OPEN",
+      "current_live_effect": "TRANSITIONAL_EVIDENCE_ONLY",
+      "reason": "Patch 002 remains intentionally PARTIAL and cannot complete until its own inventory completion gate is satisfied by resolving the unresolved governance ambiguity inventory.",
+      "gate": "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002.inventory_completion_gate",
+      "evidence": [
+        {
+          "path": "outputs/governance_inventory/q0_partial_status_intent_inventory.json",
+          "note": "Patch 011 classifies patch 002 as INTENTIONALLY_TRANSITIONAL and recommends KEEP_PARTIAL."
+        },
+        {
+          "path": "outputs/governance_inventory/q0_patch_local_completion_and_status_correction_evidence.json",
+          "note": "Patch 012 preserves patch 002 as TRANSITIONAL_PARTIAL and records no status mutation."
+        },
+        {
+          "path": "registry/governance/patches/PATCH_GOVERNANCE_GLOBAL_INVENTORY_002.json",
+          "note": "inventory_completion_gate remains BLOCKED and authority_effect is NONE."
+        }
+      ]
+    },
+    {
+      "item_id": "Q0-OPEN-002",
+      "subject_type": "AMBIGUITY_RECORD",
+      "subject_id": "AMB-GOV-SURF-1046",
+      "surface_path": "registry/db/acellorator_index.sqlite::governance_decision_log",
+      "classification": "NEUTRALIZED_BY_LATER_GOVERNANCE",
+      "required_action": "ELIGIBLE_FOR_PROSPECTIVE_CLOSURE_RECORD",
+      "current_live_effect": "SEPARATE_DB_RUNTIME_FAMILY",
+      "reason": "The Q0 cluster packet already classifies this table as a separate database-table authority family outside the selected file-based governance validation control plane.",
+      "evidence": [
+        {
+          "path": "outputs/governance_inventory/q0_resolution_packet.json",
+          "note": "Excluded neighbor record states that governance_decision_log is a different governed target family and was not part of the selected file-based Q0 control plane."
+        },
+        {
+          "path": "outputs/governance_inventory/q0_typed_dependency_runtime_snapshot.json",
+          "note": "No remaining Q0 dependency-chain blocker is present in current governed runtime evidence."
+        }
+      ]
+    },
+    {
+      "item_id": "Q0-OPEN-003",
+      "subject_type": "AMBIGUITY_RECORD",
+      "subject_id": "AMB-GOV-SURF-1047",
+      "surface_path": "registry/db/acellorator_index.sqlite::governance_events",
+      "classification": "NEUTRALIZED_BY_LATER_GOVERNANCE",
+      "required_action": "ELIGIBLE_FOR_PROSPECTIVE_CLOSURE_RECORD",
+      "current_live_effect": "SEPARATE_DB_RUNTIME_FAMILY",
+      "reason": "The Q0 cluster packet classifies this table as a separate database-table authority family rather than an unresolved file-based Q0 control-plane authority conflict.",
+      "evidence": [
+        {
+          "path": "outputs/governance_inventory/q0_resolution_packet.json",
+          "note": "Excluded neighbor record states that governance_events belongs to a different governed target family."
+        },
+        {
+          "path": "outputs/governance_inventory/q0_scope_partition_queue.json",
+          "note": "This record remained queued only because it was not directly closed by the file-based scope partition, not because it still controls live Q0 behavior."
+        }
+      ]
+    },
+    {
+      "item_id": "Q0-OPEN-004",
+      "subject_type": "AMBIGUITY_RECORD",
+      "subject_id": "AMB-GOV-SURF-1050",
+      "surface_path": "registry/db/acellorator_index.sqlite::semantic_authority_events",
+      "classification": "NEUTRALIZED_BY_LATER_GOVERNANCE",
+      "required_action": "ELIGIBLE_FOR_PROSPECTIVE_CLOSURE_RECORD",
+      "current_live_effect": "SEPARATE_DB_RUNTIME_FAMILY",
+      "reason": "Current governed evidence places semantic_authority_events in the separate DB runtime family rather than in the unresolved file-based Q0 control plane.",
+      "evidence": [
+        {
+          "path": "outputs/governance_inventory/q0_resolution_packet.json",
+          "note": "Excluded neighbor record identifies semantic_authority_events as a database-table authority family outside the selected Q0 cluster."
+        },
+        {
+          "path": "outputs/governance_inventory/q0_live_authority_access_inventory.json",
+          "note": "The active file-based Q0 authority access inventory no longer treats this table as a live role-bearing Q0 file-surface authority."
+        }
+      ]
+    },
+    {
+      "item_id": "Q0-OPEN-005",
+      "subject_type": "AMBIGUITY_RECORD",
+      "subject_id": "AMB-GOV-SURF-1051",
+      "surface_path": "registry/db/acellorator_index.sqlite::semantic_authority_map",
+      "classification": "NEUTRALIZED_BY_LATER_GOVERNANCE",
+      "required_action": "ELIGIBLE_FOR_PROSPECTIVE_CLOSURE_RECORD",
+      "current_live_effect": "SEPARATE_DB_RUNTIME_FAMILY",
+      "reason": "Current governed evidence isolates semantic_authority_map into the database-table runtime family, so it no longer acts as an unresolved competing file-based Q0 authority surface.",
+      "evidence": [
+        {
+          "path": "outputs/governance_inventory/q0_resolution_packet.json",
+          "note": "Excluded neighbor record identifies semantic_authority_map as a separate database-table authority family."
+        },
+        {
+          "path": "outputs/governance_inventory/q0_typed_dependency_runtime_snapshot.json",
+          "note": "The corrected Q0 runtime state has no dependency-chain blocker attributable to this excluded DB surface."
+        }
+      ]
+    },
+    {
+      "item_id": "Q0-OPEN-006",
+      "subject_type": "AMBIGUITY_RECORD",
+      "subject_id": "AMB-GOV-SURF-0127",
+      "surface_path": "governance/live/program_debt_discharge_command.json",
+      "classification": "NEUTRALIZED_BY_LATER_GOVERNANCE",
+      "required_action": "ELIGIBLE_FOR_PROSPECTIVE_CLOSURE_RECORD",
+      "current_live_effect": "SEPARATE_LIVE_GOVERNANCE_COMMAND_SURFACE",
+      "reason": "The cluster packet classifies this surface as a separate live-governance command surface with no strong coherence key linking it to the selected Q0 validation control plane.",
+      "evidence": [
+        {
+          "path": "outputs/governance_inventory/q0_resolution_packet.json",
+          "note": "Excluded neighbor record marks this surface as cross-domain and lacking a direct Q0 path."
+        },
+        {
+          "path": "governance/authority_partitions/Q0_AUTHORITY_SCOPE_PARTITION_001.json",
+          "note": "The Q0 authority scope partition explicitly limits its decision scope to the governance validation control plane."
+        }
+      ]
+    },
+    {
+      "item_id": "Q0-OPEN-007",
+      "subject_type": "AMBIGUITY_RECORD",
+      "subject_id": "AMB-GOV-SURF-0133",
+      "surface_path": "governance/live/work_reduction_framework.json",
+      "classification": "NEUTRALIZED_BY_LATER_GOVERNANCE",
+      "required_action": "ELIGIBLE_FOR_PROSPECTIVE_CLOSURE_RECORD",
+      "current_live_effect": "SEPARATE_LIVE_GOVERNANCE_COMMAND_SURFACE",
+      "reason": "The selected Q0 cluster explicitly excluded this live governance framework surface as outside the direct validation control-plane family.",
+      "evidence": [
+        {
+          "path": "outputs/governance_inventory/q0_resolution_packet.json",
+          "note": "Excluded neighbor record marks this surface as cross-domain with no direct Q0 path."
+        },
+        {
+          "path": "outputs/governance_inventory/q0_scope_partition_queue.json",
+          "note": "This item remained queued only because it was not part of the directly closable selected cluster."
+        }
+      ]
+    },
+    {
+      "item_id": "Q0-OPEN-008",
+      "subject_type": "AMBIGUITY_RECORD",
+      "subject_id": "AMB-GOV-SURF-0113",
+      "surface_path": "governance/live/debt_discharge_command.json",
+      "classification": "NEUTRALIZED_BY_LATER_GOVERNANCE",
+      "required_action": "ELIGIBLE_FOR_PROSPECTIVE_CLOSURE_RECORD",
+      "current_live_effect": "SEPARATE_LIVE_GOVERNANCE_COMMAND_SURFACE",
+      "reason": "The Q0 cluster packet excludes this debt-discharge command as a separate live-governance command surface, so it no longer represents an unresolved direct Q0 authority conflict in live behavior.",
+      "evidence": [
+        {
+          "path": "outputs/governance_inventory/q0_resolution_packet.json",
+          "note": "Excluded neighbor record classifies the surface as cross-domain with no direct Q0 path."
+        },
+        {
+          "path": "outputs/governance_inventory/q0_patch_local_completion_and_status_correction_evidence.json",
+          "note": "Patch 012 records no remaining Q0 dependency-chain blocker after the later runtime corrections."
+        }
+      ]
+    },
+    {
+      "item_id": "Q0-OPEN-009",
+      "subject_type": "AMBIGUITY_RECORD",
+      "subject_id": "AMB-GOV-SURF-0006",
+      "surface_path": "docs/governance/NARRATIVE.md",
+      "classification": "OBSOLETE_RESIDUE",
+      "required_action": "ELIGIBLE_FOR_GOVERNED_RETIREMENT",
+      "current_live_effect": "DOCUMENTATION_BOUNDARY_ONLY",
+      "reason": "The old Q0 competing-authority classification for this documentation surface is obsolete residue after the file-based control-plane scope partition; queue adjacency is no longer sufficient evidence of live Q0 authority conflict.",
+      "evidence": [
+        {
+          "path": "outputs/governance_inventory/q0_resolution_packet.json",
+          "note": "Excluded neighbor record classifies this path as a documentation boundary outside the selected validation control plane."
+        },
+        {
+          "path": "governance/authority_partitions/Q0_AUTHORITY_SCOPE_PARTITION_001.json",
+          "note": "Decision scope is explicitly limited to the governance validation control plane rather than all governance documentation."
+        }
+      ]
+    },
+    {
+      "item_id": "Q0-OPEN-010",
+      "subject_type": "AMBIGUITY_RECORD",
+      "subject_id": "AMB-GOV-SURF-0986",
+      "surface_path": "scripts/orientation_retrieval.py",
+      "classification": "OBSOLETE_RESIDUE",
+      "required_action": "ELIGIBLE_FOR_GOVERNED_RETIREMENT",
+      "current_live_effect": "SEPARATE_RETRIEVAL_DOMAIN",
+      "reason": "Current governed evidence shows this script belongs to a separate retrieval domain, so its historic inclusion in the Q0 competing-authority queue is obsolete residue rather than live remaining Q0 work.",
+      "evidence": [
+        {
+          "path": "outputs/governance_inventory/q0_resolution_packet.json",
+          "note": "Excluded neighbor record identifies scripts/orientation_retrieval.py as a different governed target family."
+        },
+        {
+          "path": "outputs/governance_inventory/q0_live_authority_access_inventory.json",
+          "note": "The live Q0 authority access inventory does not classify this script as an active Q0 role-bearing authority surface."
+        }
+      ]
+    },
+    {
+      "item_id": "Q0-OPEN-011",
+      "subject_type": "AMBIGUITY_RECORD",
+      "subject_id": "AMB-GOV-SURF-0026",
+      "surface_path": "docs/governance/dataset_evidence_packets.md",
+      "classification": "OBSOLETE_RESIDUE",
+      "required_action": "ELIGIBLE_FOR_GOVERNED_RETIREMENT",
+      "current_live_effect": "DOCUMENTATION_BOUNDARY_ONLY",
+      "reason": "This documentation surface was excluded from the selected Q0 control plane, so its remaining Q0 queue entry is obsolete residue rather than active unresolved Q0 governance work.",
+      "evidence": [
+        {
+          "path": "outputs/governance_inventory/q0_resolution_packet.json",
+          "note": "Excluded neighbor record classifies the path as documentation boundary outside the selected control plane."
+        },
+        {
+          "path": "outputs/governance_inventory/q0_scope_partition_queue.json",
+          "note": "Remaining status was inherited from the unresolved global queue, not from later live behavior."
+        }
+      ]
+    },
+    {
+      "item_id": "Q0-OPEN-012",
+      "subject_type": "AMBIGUITY_RECORD",
+      "subject_id": "AMB-GOV-SURF-0043",
+      "surface_path": "docs/governance/equivalence_failure_protocols.md",
+      "classification": "OBSOLETE_RESIDUE",
+      "required_action": "ELIGIBLE_FOR_GOVERNED_RETIREMENT",
+      "current_live_effect": "DOCUMENTATION_BOUNDARY_ONLY",
+      "reason": "Current governed evidence shows this policy document is outside the selected live Q0 validation control plane, making its old competing-authority queue label obsolete residue.",
+      "evidence": [
+        {
+          "path": "outputs/governance_inventory/q0_resolution_packet.json",
+          "note": "Excluded neighbor record classifies this path as documentation boundary outside the selected validation control plane."
+        },
+        {
+          "path": "outputs/governance_inventory/q0_patch_local_completion_and_status_correction_evidence.json",
+          "note": "Patch 012 records no need to reopen patch-local Q0 control-plane completions to address this documentation-only residue."
+        }
+      ]
+    }
+  ],
+  "conclusion": {
+    "completed_patches_007_through_012_reopened": false,
+    "patch_002_promoted": false,
+    "remaining_live_q0_dependency_chain_blocker": false,
+    "remaining_work_is_bounded": true,
+    "remaining_work_summary": "One item remains blocked on the intentionally transitional global inventory gate. The other eleven current Q0 queue remnants are either neutralized by later governance boundary enforcement or obsolete queue residue eligible for prospective closure or retirement."
+  }
+}

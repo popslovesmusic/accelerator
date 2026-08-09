@@ -1,0 +1,57 @@
+{
+  "patch_id": "PATCH_DB_GOVERNANCE_RUNTIME_012",
+  "campaign_id": "CAMPAIGN_DB_GOVERNANCE_RUNTIME_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-04",
+  "type": "governance_runtime_patch",
+  "patch_type": "governance_runtime_freshness_stability_guard",
+  "title": "Refresh-Stability Guard",
+  "mode": "additive",
+  "depends_on": [
+    "PATCH_DB_GOVERNANCE_RUNTIME_011"
+  ],
+  "purpose": "Prevent routine runtime DB writes such as decision logs from immediately invalidating a freshly refreshed DB snapshot.",
+  "updated_artifacts": [
+    "scripts/query_governance.py",
+    "scripts/db/snapshot_registries.py",
+    "registry/db/migrations/20260703_governance_runtime_refresh_stability_012.sql",
+    "registry/db/README.md",
+    "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/research_debt_registry.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_DB_GOVERNANCE_RUNTIME_012.json"
+  ],
+  "summary": {
+    "status": "pass",
+    "health_source": "outputs/audits/global_health_report.json",
+    "runtime": {
+      "db_first_gate": "active",
+      "authority_boundary": "mixed"
+    },
+    "warnings": [
+      "Runtime-only DB churn is compared against the runtime marker and no longer stales a freshly refreshed source projection."
+    ],
+    "evidence_paths": [
+      "scripts/query_governance.py",
+      "scripts/db/snapshot_registries.py",
+      "registry/db/migrations/20260703_governance_runtime_refresh_stability_012.sql",
+      "registry/db/README.md",
+      "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+      "docs/textbook/mono_process_textbook_complete.md",
+      "registry/research_debt_registry.json",
+      "registry/governance_change_ledger.json"
+    ]
+  },
+  "validation": {
+    "required": [
+      "source_and_runtime_markers_are_separate",
+      "source_changes_still_stale_snapshot",
+      "current_state_reports_staleness_cause",
+      "runtime_churn_reports_allow_with_note_or_none",
+      "patch_gate_consults_freshness",
+      "global_validate_pass"
+    ],
+    "result": "pass"
+  }
+}

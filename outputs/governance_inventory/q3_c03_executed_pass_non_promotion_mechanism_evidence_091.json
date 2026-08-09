@@ -1,0 +1,47 @@
+{
+  "schema_id": "q3_c03_executed_pass_non_promotion_mechanism_evidence_091_v1",
+  "generated_at": "2026-07-17T03:35:00-04:00",
+  "patch_id": "PATCH_GOVERNANCE_Q3_C03_EXECUTED_PASS_NON_PROMOTION_LIVE_LOOKUP_BOUNDARY_091",
+  "mechanism_verification": {
+    "boundary_method": "tools.runtime_authority.classify_patch_record_executed_pass_boundary",
+    "integration_source": "scripts/query_governance.py",
+    "conditions_checked": [
+      "target starts with registry/governance/patches/",
+      "status is EXECUTED, PASS, or PASS_WITH_WARNINGS (or validation.result inside payload matches)",
+      "patch_id is not in {PATCH_ACCELERATOR_DETERMINISTIC_DECISION_CACHE_053, PATCH_ACCELERATOR_DETERMINISTIC_ROUTING_AND_CANDIDATE_BOUNDING_054}",
+      "no explicit authority_effect transition is present"
+    ]
+  },
+  "evidence_records": [
+    {
+      "case": "proposed/candidate without execution",
+      "example_patch": "registry/governance/patches/DEBT_VALIDATOR_IMPORT_PATH_001.json",
+      "expected_disposition": "defer",
+      "reason": "Lifecycle status is proposed/candidate and not executed or pass, handled by classify_patch_record_lifecycle."
+    },
+    {
+      "case": "executed proposal patch",
+      "example_patch": "registry/governance/patches/ECONOMICS_SIGMA_D_EQUIVALENCE_PASS_001.json",
+      "expected_disposition": "defer",
+      "reason": "Matches the non-promotion boundary for executed proposal patch records."
+    },
+    {
+      "case": "PASS patch from deferred subcomponent (0742)",
+      "example_patch": "registry/governance/patches/PATCH_ACCELERATOR_DETERMINISTIC_DECISION_CACHE_053.json",
+      "expected_disposition": "allow",
+      "reason": "Explicitly excluded from the non-promotion boundary to preserve existing routing behavior."
+    },
+    {
+      "case": "PASS patch from deferred subcomponent (0743)",
+      "example_patch": "registry/governance/patches/PATCH_ACCELERATOR_DETERMINISTIC_ROUTING_AND_CANDIDATE_BOUNDING_054.json",
+      "expected_disposition": "allow",
+      "reason": "Explicitly excluded from the non-promotion boundary to preserve existing routing behavior."
+    },
+    {
+      "case": "applied patch record",
+      "example_patch": "registry/governance/patches/PATCH_PI_RT_CALCULUS_005.json",
+      "expected_disposition": "allow",
+      "reason": "Status is APPLIED, which represents an explicitly transitioned/completed patch."
+    }
+  ]
+}

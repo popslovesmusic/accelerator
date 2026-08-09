@@ -1,0 +1,272 @@
+{
+  "registry_id": "MPF_DEPARTMENT_RELATIONSHIP_REGISTRY_LIVE_V1",
+  "schema_version": "1.0.0",
+  "authority": "Global Governance",
+  "last_updated": "2026-07-02",
+  "purpose": "Canonical directional interaction graph for governed departments without conferring authority.",
+  "principles": [
+    "Relationships are directional.",
+    "Relationships do not imply authority.",
+    "Authority is governed exclusively by the Authority Manifest.",
+    "Departments remain independently governed."
+  ],
+  "relationship_types": [
+    "governs",
+    "supports",
+    "consumes",
+    "produces",
+    "routes_to",
+    "maintains",
+    "documents",
+    "validates",
+    "analyzes",
+    "indexes",
+    "shares_with",
+    "depends_on"
+  ],
+  "department_relationships": [
+    {
+      "department": "governance",
+      "relationships": [
+        {
+          "type": "governs",
+          "target": "*"
+        }
+      ]
+    },
+    {
+      "department": "mathematics",
+      "relationships": [
+        {
+          "type": "supports",
+          "target": "physics"
+        },
+        {
+          "type": "supports",
+          "target": "economics"
+        },
+        {
+          "type": "supports",
+          "target": "theology"
+        },
+        {
+          "type": "supports",
+          "target": "ethics"
+        },
+        {
+          "type": "supports",
+          "target": "analysis"
+        },
+        {
+          "type": "supports",
+          "target": "analysis_intake"
+        },
+        {
+          "type": "supports",
+          "target": "neuroscience"
+        },
+        {
+          "type": "supports",
+          "target": "colab"
+        }
+      ]
+    },
+    {
+      "department": "physics",
+      "relationships": [
+        {
+          "type": "depends_on",
+          "target": "mathematics"
+        }
+      ]
+    },
+    {
+      "department": "economics",
+      "relationships": [
+        {
+          "type": "depends_on",
+          "target": "mathematics"
+        }
+      ]
+    },
+    {
+      "department": "theology",
+      "relationships": [
+        {
+          "type": "depends_on",
+          "target": "mathematics"
+        }
+      ]
+    },
+    {
+      "department": "ethics",
+      "relationships": [
+        {
+          "type": "depends_on",
+          "target": "mathematics"
+        },
+        {
+          "type": "shares_with",
+          "target": "theology"
+        },
+        {
+          "type": "shares_with",
+          "target": "economics"
+        }
+      ]
+    },
+    {
+      "department": "analysis",
+      "relationships": [
+        {
+          "type": "consumes",
+          "target": "master_work_index"
+        },
+        {
+          "type": "analyzes",
+          "target": "*"
+        },
+        {
+          "type": "produces",
+          "target": "recommendations"
+        }
+      ]
+    },
+    {
+      "department": "analysis_intake",
+      "relationships": [
+        {
+          "type": "routes_to",
+          "target": "analysis"
+        },
+        {
+          "type": "routes_to",
+          "target": "mathematics"
+        },
+        {
+          "type": "routes_to",
+          "target": "documentation"
+        },
+        {
+          "type": "routes_to",
+          "target": "economics"
+        },
+        {
+          "type": "routes_to",
+          "target": "physics"
+        },
+        {
+          "type": "routes_to",
+          "target": "neuroscience"
+        },
+        {
+          "type": "routes_to",
+          "target": "theology"
+        },
+        {
+          "type": "routes_to",
+          "target": "colab"
+        }
+      ]
+    },
+    {
+      "department": "neuroscience",
+      "relationships": [
+        {
+          "type": "depends_on",
+          "target": "mathematics"
+        },
+        {
+          "type": "shares_with",
+          "target": "physics"
+        }
+      ]
+    },
+    {
+      "department": "documentation",
+      "relationships": [
+        {
+          "type": "documents",
+          "target": "*"
+        },
+        {
+          "type": "maintains",
+          "target": "documentation_surfaces"
+        }
+      ]
+    },
+    {
+      "department": "colab",
+      "relationships": [
+        {
+          "type": "depends_on",
+          "target": "analysis_intake"
+        },
+        {
+          "type": "depends_on",
+          "target": "analysis"
+        },
+        {
+          "type": "depends_on",
+          "target": "mathematics"
+        },
+        {
+          "type": "indexes",
+          "target": "ipynb_notebooks"
+        },
+        {
+          "type": "indexes",
+          "target": "result_zip_archives"
+        },
+        {
+          "type": "routes_to",
+          "target": "tool_review"
+        },
+        {
+          "type": "routes_to",
+          "target": "approved_tool_replication"
+        }
+      ]
+    }
+  ],
+  "governance_rules": [
+    {
+      "id": "DEPT_REL_001",
+      "text": "Department relationships SHALL describe operational interaction only."
+    },
+    {
+      "id": "DEPT_REL_002",
+      "text": "No relationship SHALL grant authority."
+    },
+    {
+      "id": "DEPT_REL_003",
+      "text": "Authority SHALL remain exclusively defined by the Authority Manifest."
+    },
+    {
+      "id": "DEPT_REL_004",
+      "text": "Relationship changes SHALL be versioned and governed."
+    },
+    {
+      "id": "DEPT_REL_005",
+      "text": "Every inducted department SHALL participate in the relationship registry."
+    }
+  ],
+  "agent_contract": {
+    "rules": [
+      "Consult the relationship registry before cross-department modifications.",
+      "Use relationships for routing, coordination, and dependency analysis.",
+      "Do not infer authority from relationships."
+    ]
+  },
+  "metrics": {
+    "total_departments": 11,
+    "inducted_departments": 10,
+    "relationship_edges": 37
+  },
+  "success_criteria": [
+    "Every inducted department appears in the relationship registry.",
+    "Cross-department interactions are explicitly represented.",
+    "Authority and interaction are formally separated.",
+    "Analysis and Intake can use the registry for deterministic routing."
+  ]
+}

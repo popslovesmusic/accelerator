@@ -1,0 +1,21 @@
+{
+  "fixture_set_id": "AX-R04_SUBSTITUTION_DISPOSITION_FIXTURES_001",
+  "axiom_id": "AX-R04_SUBSTITUTION",
+  "status": "BLOCKED_PENDING_EQUIVALENCE",
+  "general_substitution_permitted": false,
+  "rejection": [
+    {"fixture_id":"AX-R04-REJ-001","attempt":"Replace b1 with b2 solely because both are BoundedSymmetry.","expected":"SUBSTITUTION_REJECTED_EQUIVALENCE_UNDEFINED"},
+    {"fixture_id":"AX-R04-REJ-002","attempt":"Replace u1 with u2 solely because both are UnboundedSymmetry.","expected":"SUBSTITUTION_REJECTED_EQUIVALENCE_UNDEFINED"},
+    {"fixture_id":"AX-R04-REJ-003","attempt":"Infer substitution from matching observable labels.","expected":"SUBSTITUTION_REJECTED_PROXY_EQUIVALENCE"},
+    {"fixture_id":"AX-R04-REJ-004","attempt":"Infer universal substitution from matching finite fixture outputs.","expected":"SUBSTITUTION_REJECTED_BOUNDED_AGREEMENT_INSUFFICIENT"},
+    {"fixture_id":"AX-R04-REJ-005","attempt":"Replace a BoundedSymmetry operand with an UnboundedSymmetry operand.","expected":"MALFORMED_OPERAND_ROLE"},
+    {"fixture_id":"AX-R04-REJ-006","attempt":"Replace an operand with generic SymmetryCondition.","expected":"MALFORMED_OPERAND_TYPE"},
+    {"fixture_id":"AX-R04-REJ-007","attempt":"Infer operand equivalence from equal relation results.","expected":"INVALID_REVERSE_SUBSTITUTION_INFERENCE"}
+  ],
+  "normalization": [
+    {"fixture_id":"AX-R04-POS-001","case":"CANONICAL_SELF_REPLACEMENT","expected":"REFERENCE_NORMALIZATION_ALLOWED","not_general_substitution":true},
+    {"fixture_id":"AX-R04-POS-002","case":"GOVERNED_ALIAS_EXPANSION","expected":"ALIAS_NORMALIZATION_ALLOWED","not_general_substitution":true}
+  ],
+  "new_obligations": ["OBL-R04-TYPED-EQUIVALENCE","OBL-R04-CONGRUENCE"],
+  "negative_scope_assertions": ["No equivalence relation invented", "No role crossing", "No result-to-operand reverse inference"]
+}

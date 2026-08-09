@@ -1,0 +1,108 @@
+{
+  "registry_id": "PCD_RUNTIME_BINARY_MANIFEST",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "tool_id",
+      "binary_type",
+      "entrypoints",
+      "required_binaries",
+      "required_runtime_dependencies",
+      "python_bindings",
+      "backend_targets",
+      "build_provenance",
+      "runtime_validation_status",
+      "rigor endorsement_ceiling"
+    ]
+  },
+  "entries": [
+    {
+      "tool_id": "fsa_rule_engine_sim_v1_cpp",
+      "binary_type": "cpp_python_hybrid",
+      "entrypoints": [
+        "sim_governed.py",
+        "fsa_cpp_wrapper.py"
+      ],
+      "required_binaries": [
+        "fsa_capi.dll"
+      ],
+      "required_runtime_dependencies": [
+        "python>=3.14",
+        "ctypes",
+        "msvc_runtime"
+      ],
+      "python_bindings": [
+        "ctypes.CDLL"
+      ],
+      "backend_targets": [
+        "windows_x64"
+      ],
+      "build_provenance": {
+        "status": "UNRESOLVED_PENDING_BUILD"
+      },
+      "runtime_validation_status": "FAILED_MISSING_BINARY",
+      "rigor endorsement_ceiling": "C1_until_runtime_restored"
+    },
+    {
+      "tool_id": "graph_dynamics_sim_v1_cpp",
+      "binary_type": "cpp_native",
+      "entrypoints": [
+        "sim_governed.py"
+      ],
+      "required_binaries": [],
+      "required_runtime_dependencies": [
+        "msvc_runtime"
+      ],
+      "python_bindings": [],
+      "backend_targets": [
+        "windows_x64"
+      ],
+      "build_provenance": {
+        "status": "UNRESOLVED_PENDING_BUILD"
+      },
+      "runtime_validation_status": "NOT_YET_CERTIFIED",
+      "rigor endorsement_ceiling": "C1"
+    },
+    {
+      "tool_id": "ca_admissibility_sim_v1_cpp",
+      "binary_type": "cpp_native",
+      "entrypoints": [
+        "sim_governed.py"
+      ],
+      "required_binaries": [],
+      "required_runtime_dependencies": [
+        "msvc_runtime"
+      ],
+      "python_bindings": [],
+      "backend_targets": [
+        "windows_x64"
+      ],
+      "build_provenance": {
+        "status": "UNRESOLVED_PENDING_BUILD"
+      },
+      "runtime_validation_status": "NOT_YET_CERTIFIED",
+      "rigor endorsement_ceiling": "C1"
+    }
+  ],
+  "build_provenance_contract": {
+    "required_build_fields": [
+      "source_commit",
+      "compiler_version",
+      "build_timestamp",
+      "target_architecture",
+      "linked_libraries",
+      "optimization_flags",
+      "binary_hash"
+    ],
+    "required_runtime_fields": [
+      "runtime_os",
+      "python_version",
+      "runtime_loader",
+      "dll_resolution_status"
+    ]
+  },
+  "ledger_binding": {
+    "statement": "Runtime binary hash, tool rigor endorsement, provenance, or environment drift must create a ledger event for all dependent empirical claims.",
+    "failure_behavior": "mark_dependent_claims_pending_reassessment"
+  }
+}

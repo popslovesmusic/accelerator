@@ -1,0 +1,86 @@
+{
+  "patch_id": "PATCH_GOVERNANCE_Q1_REMAINING_VALIDATION_AUTHORITY_CLUSTER_SELECTION_066",
+  "title": "Q1 Remaining Validation Authority Cluster Selection",
+  "status": "APPLIED",
+  "applied_on": "2026-07-15T14:10:00-04:00",
+  "type": "analysis_audit",
+  "depends_on": [
+    "PATCH_GOVERNANCE_Q1_VALIDATION_INVOCATION_AUTHORITY_BOUNDARY_RESOLUTION_065"
+  ],
+  "mode": "additive",
+  "authority_effect": "NONE",
+  "purpose": "Verify the prior Q1 resolution was actually applied, refresh the seven remaining Q1 items against live governance/runtime evidence, partition the remaining conflicts into independent components, and select the next smallest coherent live cluster without resolving it in the same patch.",
+  "summary": "The prior Q1 resolution patch 065 is verified as applied and registered. Of the seven remaining items, one remains a live Q1 validation-authority ambiguity (Q1-VAL-008), one is neutralized by existing governance (Q1-VAL-004), two are obsolete residue (Q1-VAL-007 and Q1-VAL-009), and three are outside Q1 validation-authority scope (Q1-VAL-001, Q1-VAL-005, and Q1-VAL-006). The next bounded live cluster is the single-item supporting-validator scope question around tests/test_governed_context_capsule_v1.py.",
+  "previous_q1_resolution_patch_verified": true,
+  "previous_q1_resolution_patch_id": "PATCH_GOVERNANCE_Q1_VALIDATION_INVOCATION_AUTHORITY_BOUNDARY_RESOLUTION_065",
+  "remaining_q1_item_ids": [
+    "Q1-VAL-001",
+    "Q1-VAL-004",
+    "Q1-VAL-005",
+    "Q1-VAL-006",
+    "Q1-VAL-007",
+    "Q1-VAL-008",
+    "Q1-VAL-009"
+  ],
+  "selected_next_cluster_item_ids": [
+    "Q1-VAL-008"
+  ],
+  "selected_next_cluster_authority_question": "Whether tests/test_governed_context_capsule_v1.py is a bounded SUPPORTING_VALIDATOR rather than an independent validation or terminal-status authority.",
+  "selected_candidate_surfaces": [
+    "tests/test_governed_context_capsule_v1.py",
+    "schemas/governed_context_capsule_v1.schema.json",
+    "scripts/query_governance.py"
+  ],
+  "selected_resolution_modes": [
+    "BOUND_SUPPORTING_VALIDATOR_SCOPE",
+    "PROVE_EXISTING_NON_TERMINAL_ROLE",
+    "DEFER_PENDING_VALIDATOR_DEPARTMENT_COMPLETION"
+  ],
+  "artifacts": {
+    "remaining_state_refresh": "outputs/governance_inventory/q1_remaining_validation_authority_state_refresh.json",
+    "conflict_components": "outputs/governance_inventory/q1_remaining_conflict_components.json",
+    "cluster_selection": "outputs/governance_inventory/q1_next_bounded_cluster_selection.json",
+    "resolution_packet": "outputs/governance_inventory/q1_next_validation_authority_resolution_packet.json"
+  },
+  "patch_002_state": {
+    "status": "PARTIAL",
+    "authority_effect": "NONE",
+    "changed": false
+  },
+  "completion_assertions": {
+    "previous_q1_resolution_verified": true,
+    "remaining_q1_items_before_analysis": 7,
+    "q1_items_resolved_by_this_patch": 0,
+    "selected_next_cluster_item_count": 1,
+    "selected_next_cluster_item_ids": [
+      "Q1-VAL-008"
+    ],
+    "remaining_items_classified_neutralized": 1,
+    "remaining_items_classified_obsolete_residue": 2,
+    "remaining_items_classified_outside_q1_scope": 3,
+    "validation_authority_changed": false,
+    "full_project_validation_run": false
+  },
+  "validation_results": {
+    "targeted_q1_selection_test": {
+      "command": "python -m pytest tests/governance_validation/test_patch_066_q1_remaining_validation_authority_cluster_selection.py -q",
+      "status": "PASS"
+    },
+    "json_parse": {
+      "status": "PASS"
+    },
+    "git_diff_check": {
+      "command": "git diff --check",
+      "status": "PASS_WITH_CRLF_WARNINGS_ONLY"
+    },
+    "git_status": {
+      "command": "git status --short",
+      "status": "PASS_REVIEWED"
+    }
+  },
+  "full_project_validation_status": "SUSPENDED_PENDING_VALIDATOR_DEPARTMENT_COMPLETION",
+  "local_governance": {
+    "gemini_found": true,
+    "gemini_applied": true
+  }
+}

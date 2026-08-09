@@ -1,0 +1,133 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_014",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-05",
+  "type": "governance_patch",
+  "artifact_type": "governance_patch",
+  "title": "Continuation Identity and Admissibility",
+  "priority": "HIGH",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_011",
+    "PATCH_PI_RT_CALCULUS_012",
+    "PATCH_PI_RT_CALCULUS_013"
+  ],
+  "purpose": "Define the identity continuation and establish the conditions under which continuation either succeeds or fails.",
+  "canonical_claims": [
+    {
+      "id": "CLAIM_014_001",
+      "statement": "Identity is a continuation, not a static state.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_014_002",
+      "statement": "Identity is the neutral element of continuation composition.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_014_003",
+      "statement": "Admissibility governs the existence of continuation.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_014_004",
+      "statement": "Failed continuation does not produce a continuation object.",
+      "status": "canonical"
+    }
+  ],
+  "formal_objects": [
+    {
+      "symbol": "I(A)",
+      "name": "Identity Continuation",
+      "definition": "The lawful continuation that preserves condition A without changing its semantic state.",
+      "primitive": false,
+      "domain": "continuation_algebra"
+    }
+  ],
+  "laws": [
+    {
+      "id": "LAW_014_001",
+      "name": "Identity Law",
+      "formal": "I(A) = C(A,A)",
+      "meaning": "Every lawful condition possesses an identity continuation."
+    },
+    {
+      "id": "LAW_014_002",
+      "name": "Left Identity",
+      "formal": "I(A) \u2218 C(A,B) = C(A,B)",
+      "meaning": "Identity does not alter continuation."
+    },
+    {
+      "id": "LAW_014_003",
+      "name": "Right Identity",
+      "formal": "C(A,B) \u2218 I(B) = C(A,B)",
+      "meaning": "Identity preserves continuation after composition."
+    },
+    {
+      "id": "LAW_014_004",
+      "name": "Admissibility Gate",
+      "formal": "C(A,B) exists only if admissible(A,B)",
+      "meaning": "Continuation cannot exist without satisfying admissibility."
+    },
+    {
+      "id": "LAW_014_005",
+      "name": "Composition Failure",
+      "formal": "If admissibility fails, composition is undefined.",
+      "meaning": "Failed continuation is not a valid continuation object."
+    }
+  ],
+  "architecture_update": {
+    "old": [
+      "Condition",
+      "Identity",
+      "Continuation",
+      "Composition",
+      "Admissibility",
+      "Projection"
+    ],
+    "new": [
+      "Condition",
+      "Identity",
+      "Continuation",
+      "Composition",
+      "Admissibility",
+      "Projection"
+    ]
+  },
+  "deferred": [
+    "Branching continuations",
+    "Continuation inversion",
+    "Arrow family generalization",
+    "Reduction algorithm",
+    "Normal forms",
+    "Process equivalence",
+    "sigma_RT"
+  ],
+  "required_file_updates": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/formal_object_registry.json",
+    "registry/math_source_registry.json",
+    "registry/lexicon_gap_queue.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_014.json"
+  ],
+  "validation_requirements": [
+    "Identity continuation registered in the formal object registry.",
+    "Identity laws added to the textbook.",
+    "Composition examples verify left and right identity.",
+    "No change to RT_core.",
+    "No new primitive operators introduced."
+  ],
+  "success_criteria": {
+    "identity_defined": true,
+    "identity_composition_verified": true,
+    "admissibility_gate_defined": true,
+    "composition_failure_defined": true,
+    "rt_core_unchanged": true
+  },
+  "next_recommended_patch": {
+    "patch_id": "PATCH_PI_RT_CALCULUS_015",
+    "title": "Process Equivalence and Canonical Continuation Forms",
+    "purpose": "Define when two continuation networks are behaviorally equivalent and introduce canonical reduction forms."
+  }
+}

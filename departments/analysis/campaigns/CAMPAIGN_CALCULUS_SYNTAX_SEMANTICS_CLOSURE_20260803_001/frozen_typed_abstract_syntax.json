@@ -1,0 +1,27 @@
+{
+  "schema_id": "TAS_CLOSURE_DRAFT_001",
+  "status": "NONCANONICAL_FROZEN_FIXTURE_SCHEMA",
+  "types": ["Process", "Residue", "Context", "Domain", "Relation", "Prop", "Bool"],
+  "nodes": {
+    "ProcessVar": {"fields": {"name": "string"}, "type": "Process"},
+    "ResidueVar": {"fields": {"name": "string"}, "type": "Residue"},
+    "ContextConst": {"fields": {"name": "string"}, "type": "Context"},
+    "DomainConst": {"fields": {"name": "string"}, "type": "Domain"},
+    "Distinct": {"fields": {"left": "Process", "right": "Process"}, "type": "Prop"},
+    "Admissible": {"fields": {"process": "Process", "context": "Context"}, "type": "Prop"},
+    "Closure": {"fields": {"process": "Process", "residue": "Residue", "context": "Context"}, "type": "Prop"},
+    "Relation": {"fields": {"name": "string", "left": "Process", "right": "Process", "context": "Context"}, "type": "Prop"},
+    "And": {"fields": {"left": "Prop", "right": "Prop"}, "type": "Prop"},
+    "Not": {"fields": {"value": "Prop"}, "type": "Prop"}
+  },
+  "formation_rules": [
+    "variables and constants require nonempty names",
+    "child nodes must satisfy the declared field type",
+    "only Prop nodes may occur under And and Not",
+    "unknown node kinds are invalid",
+    "missing fields are invalid",
+    "governance labels and evidence classes are not object-language nodes"
+  ],
+  "binding_rule": "Names are local identifiers only; this fixture schema has no implicit capture or free-variable substitution semantics.",
+  "authority_boundary": "analysis fixture; not canonical mathematical syntax"
+}

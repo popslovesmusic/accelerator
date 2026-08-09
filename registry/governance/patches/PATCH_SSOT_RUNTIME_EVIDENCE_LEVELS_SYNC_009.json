@@ -1,0 +1,45 @@
+{
+  "patch_id": "PATCH_SSOT_RUNTIME_EVIDENCE_LEVELS_SYNC_009",
+  "title": "SSOT Runtime Evidence Levels Sync",
+  "type": "documentation_governance_sync",
+  "mode": "additive",
+  "status": "APPLIED",
+  "applied_on": "2026-07-09T12:03:30.1307762-04:00",
+  "depends_on": [
+    "PATCH_GOVERNANCE_RUNTIME_EVIDENCE_LEVELS_008"
+  ],
+  "purpose": "Synchronize the local SSOT surfaces with the governed runtime evidence-level vocabulary so documentation-oriented source-of-truth files describe the same inspection path as the DB governance runtime.",
+  "does_not_modify": [
+    "RT_core",
+    "governance decisions",
+    "patch semantics",
+    "promotion rules",
+    "validation logic"
+  ],
+  "updated_artifacts": [
+    "departments/documentation/department_ssot.md",
+    "departments/economics/department_ssot.md",
+    "departments/theology/department_ssot.md",
+    "docs/economics/ssot/procedural_economics_ssot.md",
+    "docs/theology/procedural_theology_ssot.md",
+    "registry/governance/patches/PATCH_SSOT_RUNTIME_EVIDENCE_LEVELS_SYNC_009.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance_hash_registry.json"
+  ],
+  "summary": {
+    "status": "pass",
+    "decision_semantics": "unchanged",
+    "runtime_path": "documentation_sync",
+    "warnings": [
+      "Evidence levels affect presentation only and do not change governed decisions.",
+      "SSOT sync uses the same runtime vocabulary as the governed DB inspection path."
+    ]
+  },
+  "validation": {
+    "required": [
+      "governance_validation_pass",
+      "hash_registry_refresh_pass"
+    ],
+    "result": "pass"
+  }
+}

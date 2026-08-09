@@ -1,0 +1,511 @@
+{
+  "meta": {
+    "version": "1.2",
+    "description": "Registry of proof obligations required to elevate theorem status.",
+    "status": "provisional",
+    "last_updated": "2026-06-24T00:00:00-04:00"
+  },
+  "obligations": [
+    {
+      "obligation_id": "PO-001",
+      "theorem_id": "MT-001",
+      "description": "Formalize stable admissibility condition as a constraint on Pi_A image.",
+      "required_for_status": "symbolic_checked",
+      "current_status": "satisfied",
+      "satisfaction_criteria": [
+        "Explicit registration of SA-001 through SA-005",
+        "Symbolic mapping of Pi_A(Pi_A(x)) ~ Pi_A(x)",
+        "Validation of equivalence under admissibility_equivalence"
+      ],
+      "provisional_status": true
+    },
+    {
+      "obligation_id": "PO-002",
+      "theorem_id": "MT-002",
+      "description": "Symbolically check NavT identity mapping for locally closed process states.",
+      "required_for_status": "symbolic_checked",
+      "current_status": "satisfied",
+      "satisfaction_criteria": [
+        "Explicit registration of NI-001 through NI-005",
+        "Symbolic mapping of NavT_identity(x) ~ x",
+        "Validation of equivalence under local_process_state_equivalence"
+      ],
+      "provisional_status": true
+    },
+    {
+      "obligation_id": "PO-003",
+      "theorem_id": "MT-003",
+      "description": "Formalize requirements for non-empty image in continuation existence.",
+      "required_for_status": "symbolic_checked",
+      "current_status": "satisfied",
+      "satisfaction_criteria": [
+        "Explicit registration of NEI-001 through NEI-005",
+        "Symbolic check of existence dependency on admissible image",
+        "Verification of failure mode coverage for empty-image cases"
+      ],
+      "provisional_status": true
+    },
+    {
+      "obligation_id": "PO-ART-001",
+      "theorem_id": "MT-ART-001",
+      "description": "Formalize membership and closure preservation for aRT.",
+      "current_status": "satisfied",
+      "campaign_reference": "MPF_ART_CAMPAIGN_RUN_001",
+      "provisional_status": true
+    },
+    {
+      "obligation_id": "PO-O-001",
+      "theorem_id": "MT-O-CALC-001",
+      "description": "Formalize partial composition rules for Orientation Calculus.",
+      "current_status": "satisfied",
+      "campaign_reference": "MPF_O_CALC_CAMPAIGN_RUN_001",
+      "provisional_status": true
+    },
+    {
+      "obligation_id": "PO-OTIMES-001",
+      "theorem_id": "MT-OTIMES-001",
+      "description": "Formalize non-identity composition firewall for otimes.",
+      "current_status": "satisfied",
+      "campaign_reference": "MPF_OTIMES_CAMPAIGN_RUN_001",
+      "provisional_status": true
+    },
+    {
+      "obligation_id": "PO-IFFS-001",
+      "theorem_id": "MT-IFFS-001",
+      "description": "Formalize projection identity firewall for iff_s.",
+      "current_status": "satisfied",
+      "campaign_reference": "MPF_IFFS_CAMPAIGN_RUN_001",
+      "provisional_status": true
+    },
+    {
+      "obligation_id": "PO-GEO-001",
+      "theorem_id": "GEO_LEMMA_001",
+      "target_lemma": "L099",
+      "description": "Discharge the projection-legality obligation for Pi_geo across distinction, admissibility, orientation, and closure preservation.",
+      "required_for_status": "symbolic_checked_and_campaign_bound",
+      "current_status": "symbolic_review_passed",
+      "current_status_note": "All 8 symbolic review checks (SR-GEO-001 through SR-GEO-008) passed under PO_GEO_001_SYMBOLIC_REVIEW_001. L099 has advanced to symbolic_checked. No failure condition was suppressed. geometry_app remains C1_STRUCTURAL_PROJECTION_ONLY. The sole remaining gate is GEO-CAMPAIGN-001 (empirical validation).",
+      "symbolic_review_result": {
+        "review_id": "PO_GEO_001_SYMBOLIC_REVIEW_001",
+        "review_date": "2026-06-18T17:27:21-04:00",
+        "outcome": "PASS_ALL",
+        "checks_passed": 8,
+        "checks_failed": 0,
+        "failure_conditions_suppressed": false,
+        "check_summary": [
+          {
+            "id": "SR-GEO-001",
+            "name": "Domain completeness",
+            "result": "PASS"
+          },
+          {
+            "id": "SR-GEO-002",
+            "name": "Codomain containment",
+            "result": "PASS"
+          },
+          {
+            "id": "SR-GEO-003",
+            "name": "Trace non-inversion",
+            "result": "PASS"
+          },
+          {
+            "id": "SR-GEO-004",
+            "name": "Distinction preservation",
+            "result": "PASS"
+          },
+          {
+            "id": "SR-GEO-005",
+            "name": "Admissibility preservation",
+            "result": "PASS"
+          },
+          {
+            "id": "SR-GEO-006",
+            "name": "Orientation trace preservation",
+            "result": "PASS"
+          },
+          {
+            "id": "SR-GEO-007",
+            "name": "Closure trace preservation",
+            "result": "PASS"
+          },
+          {
+            "id": "SR-GEO-008",
+            "name": "No downstream leakage",
+            "result": "PASS"
+          }
+        ]
+      },
+      "formal_definitions_registry": "registry/math/geo_projection_legality_definitions.json",
+      "definitions_satisfied": {
+        "Dom_Pi_geo": "DECLARED",
+        "Cod_Pi_geo": "DECLARED",
+        "Trace_geo": "DECLARED",
+        "tau_geo_undefined_conditions": "DECLARED",
+        "geometry_app_equivalence_relation": "DECLARED"
+      },
+      "symbolic_check_requirements": {
+        "must_define": [
+          "domain of Pi_geo \u2014 SATISFIED: Dom(Pi_geo) declared",
+          "codomain of Pi_geo \u2014 SATISFIED: Cod(Pi_geo) declared",
+          "equivalence relation used for geometry_app \u2014 SATISFIED: ~_geo declared",
+          "trace map tau_geo from Geometry_app back to Topology_app_trace \u2014 SATISFIED: OBJ-GEO-TRACE-001 registered",
+          "failure conditions for invariant loss \u2014 SATISFIED: all four failure modes declared"
+        ],
+        "must_not_claim": [
+          "physical geometry",
+          "metric realism",
+          "field support",
+          "matter support",
+          "gravity support",
+          "bridge promotion"
+        ]
+      },
+      "critical_test": {
+        "condition": "tau_geo(Pi_geo(T)) preserves required invariant labels of T",
+        "reading": "Projection is legal only if its topology-origin trace remains recoverable."
+      },
+      "promotion_gate": {
+        "symbolic_checked": "All four sub-obligations are now explicit_defined. Symbolic_checked requires a governed symbolic review confirming all four checks hold and no failure condition is suppressed.",
+        "geometry_app_unaffected": "geometry_app remains C1_STRUCTURAL_PROJECTION_ONLY after symbolic_checked unless GEO-CAMPAIGN-001 also passes."
+      },
+      "satisfaction_criteria": [
+        "Explicit binding of Pi_geo to Topology_app -> Geometry_app in the observable projection registry \u2014 SATISFIED",
+        "Declared invariant set: distinction, admissibility, orientation, closure \u2014 SATISFIED",
+        "Proof-facing linkage from L099 to L100 recorded in formal object and dependency registries \u2014 SATISFIED",
+        "Validation campaign GEO_PROJECTION_VALIDATION_001 remains attached as the empirical legality check \u2014 SATISFIED",
+        "All four sub-obligations PO-GEO-001A through D explicitly defined with failure conditions \u2014 SATISFIED",
+        "tau_geo trace map registered as OBJ-GEO-TRACE-001 in formal_object_registry.json \u2014 SATISFIED"
+      ],
+      "sub_obligations": [
+        {
+          "id": "PO-GEO-001A",
+          "name": "Distinction Preservation",
+          "current_status": "explicit_defined",
+          "status_history": [
+            "defined_pending_explicit_check",
+            "explicit_defined"
+          ],
+          "claim": "D_topology(A|B) > 0 implies D_geometry(Pi_geo(A)|Pi_geo(B)) > 0",
+          "formal_reading": "For all topological states A, B in Dom(Pi_geo): if A and B are topologically distinct, then their geometric images under Pi_geo must remain distinct.",
+          "explicit_definition": "Distinction preservation holds iff distinct topology-origin distinction classes remain distinct after projection and recover through tau_geo.",
+          "explicit_check": "Trace_geo(T_A).distinction_class != Trace_geo(T_B).distinction_class implies tau_geo(Pi_geo(T_A)).distinction_class != tau_geo(Pi_geo(T_B)).distinction_class",
+          "check_mechanism": "Compare Trace_geo(T).distinction_class against tau_geo(Pi_geo(T)).distinction_class for all T in Dom(Pi_geo). Any case where distinct source classes map to the same image class is a failure event.",
+          "failure_mode": "distinction_alias",
+          "failure_consequence": "Pi_geo is a lossy compression, not a legal projection. Geometry_app would alias distinct topological states and cannot be admitted.",
+          "failure_active": true,
+          "equivalence_constraint": "~_geo must not collapse non-equivalent Topology_app distinction classes; see geo_projection_legality_definitions.json equivalence_relation_declaration",
+          "provisional_status": true,
+          "patch_applied": "PO_GEO_001_EXPLICIT_DEFINITION_PASS_001"
+        },
+        {
+          "id": "PO-GEO-001B",
+          "name": "Admissibility Preservation",
+          "current_status": "explicit_defined",
+          "status_history": [
+            "defined_pending_explicit_check",
+            "explicit_defined"
+          ],
+          "claim": "P_adm(T) = 1 implies P_adm(Pi_geo(T)) = 1",
+          "formal_reading": "If a topological state T is admissible, then its geometric image Pi_geo(T) must also be admissible.",
+          "explicit_definition": "Admissibility preservation holds iff every projected Geometry_app object retains PASS admissibility status under inherited topology-origin labels.",
+          "explicit_check": "Trace_geo(T).admissibility_status == PASS implies tau_geo(Pi_geo(T)).admissibility_status == PASS",
+          "check_mechanism": "For all T in Dom(Pi_geo) where Trace_geo(T).admissibility_status == PASS: confirm tau_geo(Pi_geo(T)).admissibility_status == PASS. A PASS-to-FAIL transition is a failure event. Note: T with admissibility_status == FAIL is outside Dom(Pi_geo) by admission_rule.",
+          "failure_mode": "admissibility_violation",
+          "failure_consequence": "Pi_geo would generate inadmissible states from admissible inputs, breaking the admissibility invariant. geometry_app would not be a lawful continuation.",
+          "failure_active": true,
+          "provisional_status": true,
+          "patch_applied": "PO_GEO_001_EXPLICIT_DEFINITION_PASS_001"
+        },
+        {
+          "id": "PO-GEO-001C",
+          "name": "Orientation Trace Preservation",
+          "current_status": "explicit_defined",
+          "status_history": [
+            "defined_pending_explicit_check",
+            "explicit_defined"
+          ],
+          "claim": "orientation class of T remains recoverable from Pi_geo(T)",
+          "formal_reading": "For any T in Dom(Pi_geo), the orientation class label declared in Trace_geo(T) must be recoverable from Pi_geo(T) via tau_geo.",
+          "explicit_definition": "Orientation trace preservation holds iff the orientation class declared before projection is recoverable after projection.",
+          "explicit_check": "tau_geo(Pi_geo(T)).orientation_class == Trace_geo(T).orientation_class",
+          "check_mechanism": "For all T in Dom(Pi_geo): compute tau_geo(Pi_geo(T)).orientation_class and compare against Trace_geo(T).orientation_class. Any mismatch, null, or undefined return from tau_geo is a failure event (TAU-UNDEF-2).",
+          "failure_mode": "orientation_trace_loss",
+          "failure_consequence": "The orientation-conditioned selection routing through Topology_app becomes opaque after projection. OPEN_BRIDGE_001 structural routing becomes untraceable. The selector-routing role of OPEN_BRIDGE_001 is undermined.",
+          "failure_active": true,
+          "tau_geo_dependency": "OBJ-GEO-TRACE-001 \u2014 undefined if orientation class is missing or conflicted (TAU-UNDEF-2, TAU-UNDEF-3)",
+          "provisional_status": true,
+          "patch_applied": "PO_GEO_001_EXPLICIT_DEFINITION_PASS_001"
+        },
+        {
+          "id": "PO-GEO-001D",
+          "name": "Closure Trace Preservation",
+          "current_status": "explicit_defined",
+          "status_history": [
+            "defined_pending_explicit_check",
+            "explicit_defined"
+          ],
+          "claim": "closure identity of T remains traceable after Pi_geo(T)",
+          "formal_reading": "For any T in Dom(Pi_geo), the closure class declared in Trace_geo(T) must remain traceable in Pi_geo(T) via tau_geo. Distinct closures must not be aliased.",
+          "explicit_definition": "Closure trace preservation holds iff closure classes remain recoverable and non-aliased after projection.",
+          "explicit_check": "tau_geo(Pi_geo(T)).closure_class == Trace_geo(T).closure_class AND closure_class mapping is injective across compared T objects",
+          "check_mechanism": "Two-part check: (1) For all T in Dom(Pi_geo): tau_geo(Pi_geo(T)).closure_class must equal Trace_geo(T).closure_class. (2) For all T_A, T_B in Dom(Pi_geo) with distinct closure classes: tau_geo(Pi_geo(T_A)).closure_class must differ from tau_geo(Pi_geo(T_B)).closure_class. Failure of either part is a failure event (TAU-UNDEF-4 for aliasing).",
+          "failure_mode": "closure_trace_loss_or_alias",
+          "failure_consequence": "Closure-stability arguments grounding Topology_app become untraceable in Geometry_app. Any downstream structural claim invoking closure support is disconnected from its basis.",
+          "failure_active": true,
+          "tau_geo_dependency": "OBJ-GEO-TRACE-001 \u2014 undefined if closure class is missing, conflicted, or aliased (TAU-UNDEF-2, TAU-UNDEF-3, TAU-UNDEF-4)",
+          "provisional_status": true,
+          "patch_applied": "PO_GEO_001_EXPLICIT_DEFINITION_PASS_001"
+        }
+      ],
+      "provisional_status": true,
+      "patches_applied": [
+        "PO_GEO_001_SYMBOLIC_CHECK_PREP_001",
+        "PO_GEO_001_EXPLICIT_DEFINITION_PASS_001",
+        "PO_GEO_001_SYMBOLIC_REVIEW_001"
+      ],
+      "patch_date": "2026-06-18T17:27:21-04:00"
+    },
+    {
+      "obligation_id": "OQ_RTM_001",
+      "theorem_id": "MT-RTM-001",
+      "description": "Establish whether trace-admissibility is inherited from lawful RT_n into RT_{n+1} under PRIN_003 and GOV-RT-ZERO-RECOUPLING-001 without exhaustive re-derivation from RT_core.",
+      "required_for_status": "symbolic_checked",
+      "current_status": "satisfied",
+      "satisfaction_criteria": [
+        "Formal statement of the inheritance condition across one nesting step",
+        "Declared preservation mapping from RT_n trace labels into the coupled field defining RT_{n+1}",
+        "Explicit failure conditions for nesting forms that break distinction, admissibility, residue closure, or non-collapse"
+      ],
+      "campaign_reference": "MPF_RTM_RECURSIVE_CAMPAIGN_RUN_001",
+      "provisional_status": true
+    },
+    {
+      "obligation_id": "OQ_RTM_002",
+      "theorem_id": "MT-RTM-001",
+      "description": "Define the admissibility condition on the continuation term in D(RT_n | continuation) so the recursive engine remains inside the lawful distinction domain.",
+      "required_for_status": "symbolic_checked",
+      "current_status": "satisfied",
+      "satisfaction_criteria": [
+        "Typed domain declaration for admissible continuation candidates",
+        "Formal coupling condition linking continuation to PRIN_003 family members",
+        "Explicit exclusion conditions for continuation candidates that erase typed residue or collapse distinction"
+      ],
+      "campaign_reference": "MPF_RTM_RECURSIVE_CAMPAIGN_RUN_001",
+      "provisional_status": true
+    },
+    {
+      "obligation_id": "OQ_RTM_003",
+      "theorem_id": "MT-RTM-001",
+      "description": "Constructively trace the base-case reduction D(*|1) -> D(0|1) to RT_core while preserving distinction, admissibility, residue closure, and non-collapse.",
+      "required_for_status": "symbolic_checked",
+      "current_status": "satisfied",
+      "satisfaction_criteria": [
+        "Declared mapping from the base-case distinction field into RT_core-relevant terms",
+        "Stepwise verification that x=0 is uniquely admissible in the stated base field",
+        "Recorded failure modes for any step that breaks PRIN_001 closure"
+      ],
+      "campaign_reference": "MPF_RTM_RECURSIVE_CAMPAIGN_RUN_001",
+      "provisional_status": true
+    },
+    {
+      "obligation_id": "OQ_COND_001",
+      "theorem_id": "PRIN_COND_001",
+      "description": "Define lawful composition conditions for conditioned distinctions without collapsing directional order or admissibility context.",
+      "required_for_status": "symbolic_checked",
+      "current_status": "satisfied",
+      "satisfaction_criteria": [
+        "Declared typed domain and codomain for conditioned composition",
+        "Explicit rule preserving conditioning order or declaring lawful symmetry conditions",
+        "Failure conditions for composition attempts with undefined lineage or collapsed context"
+      ],
+      "campaign_reference": "MPF_COND_CAMPAIGN_RUN_001",
+      "provisional_status": true
+    },
+    {
+      "obligation_id": "OQ_COND_002",
+      "theorem_id": "PRIN_COND_001",
+      "description": "State the invariants preserved under lawful conditioning.",
+      "required_for_status": "symbolic_checked",
+      "current_status": "satisfied",
+      "satisfaction_criteria": [
+        "Declared candidate invariant set",
+        "Traceable preservation rule under one conditioning step",
+        "Counterexample class for invariant failure"
+      ],
+      "campaign_reference": "MPF_COND_CAMPAIGN_RUN_001",
+      "provisional_status": true
+    },
+    {
+      "obligation_id": "OQ_COND_003",
+      "theorem_id": "PRIN_COND_001",
+      "description": "Define equivalence conditions for two conditioned distinctions.",
+      "required_for_status": "symbolic_checked",
+      "current_status": "satisfied",
+      "satisfaction_criteria": [
+        "Typed equivalence relation over conditioned distinctions",
+        "Non-identity safeguards preventing projection equivalence from being mistaken for process identity",
+        "Failure conditions for order-reversal and context-erasure cases"
+      ],
+      "campaign_reference": "MPF_COND_CAMPAIGN_RUN_001",
+      "provisional_status": true
+    },
+    {
+      "obligation_id": "OQ_COND_004",
+      "theorem_id": "PRIN_COND_001",
+      "description": "Define whether admissibility can be measured independently of arithmetic projection.",
+      "required_for_status": "symbolic_checked",
+      "current_status": "satisfied",
+      "satisfaction_criteria": [
+        "Declared admissibility measure candidate outside arithmetic projection",
+        "Mapping from conditioned distinction structure into that measure",
+        "Failure modes showing where arithmetic projection remains necessary or contaminating"
+      ],
+      "campaign_reference": "MPF_COND_CAMPAIGN_RUN_001",
+      "provisional_status": true
+    },
+    {
+      "obligation_id": "OQ_COND_005",
+      "theorem_id": "PRIN_COND_001",
+      "description": "Define how conditioning induces lawful relational propagation.",
+      "required_for_status": "symbolic_checked",
+      "current_status": "satisfied",
+      "satisfaction_criteria": [
+        "Declared propagation rule over conditioned distinctions",
+        "Trace condition showing how propagation preserves admissibility lineage",
+        "Failure conditions for propagation that collapses distinction or erases context"
+      ],
+      "campaign_reference": "MPF_COND_CAMPAIGN_RUN_001",
+      "provisional_status": true
+    },
+    {
+      "obligation_id": "PO-OP-001",
+      "theorem_id": "MT-OP-001",
+      "description": "Establish stability and distinction preservation for the composed operator delta o Pi_A o NavT.",
+      "current_status": "satisfied",
+      "campaign_reference": "MPF_OP_DYNAMICS_CAMPAIGN_RUN_001",
+      "provisional_status": true
+    },
+    {
+      "obligation_id": "PO-OP-002",
+      "theorem_id": "MT-OP-002",
+      "description": "Establish the selection reconstruction bounds and verify non-invertibility of transport.",
+      "current_status": "satisfied",
+      "campaign_reference": "MPF_OP_DYNAMICS_CAMPAIGN_RUN_001",
+      "provisional_status": true
+    },
+    {
+      "obligation_id": "PO-RT-001",
+      "theorem_id": "RT-REDTEAM-001",
+      "description": "Verify the stability of RT core statement and Emergent Geometry under Operation Cut the Rope.",
+      "current_status": "satisfied",
+      "campaign_reference": "RT-REDTEAM-001",
+      "provisional_status": true
+    },
+    {
+      "obligation_id": "PO-SYN-001",
+      "theorem_id": "MT-SYN-001",
+      "description": "Establish syntactic and semantic closure of the core calculus including well-formed term rules, valuation uniqueness, operator algebra, and graph model satisfiability.",
+      "current_status": "satisfied",
+      "satisfaction_criteria": [
+        "Formal definition of L_COD typed alphabet and term/formula rules under L116 and P110",
+        "Unique semantic valuation definition and 0-state boundary mapping under L117 and P111",
+        "Composition, identity, and associativity closure of projection operators under L118 and P112",
+        "Soundness proof for admissibility filter natural deduction under L119 and P113",
+        "Satisfiability proof for graph model class under L120 and P114"
+      ],
+      "campaign_reference": "manual_governance_review",
+      "provisional_status": true
+    },
+    {
+      "obligation_id": "PO-ONT-001",
+      "theorem_id": "MT-ONT-001",
+      "description": "Formally prove the co-dependent emergence of distinction from the primitive relational condition (*|*) under the symmetric relational biconditional <-S->.",
+      "current_status": "satisfied",
+      "satisfaction_criteria": [
+        "Formal definition of pre-distinction locus primitive condition (*|*) and symmetric biconditional <=>_S under L121 and P115",
+        "Derivation showing distinction and the Affect-Effect gradient emerge as admissible co-dependent states under L121 and P115",
+        "Verification that coordinate container background space is not reified under L121 and P115"
+      ],
+      "campaign_reference": "manual_governance_review",
+      "provisional_status": true
+    },
+    {
+      "obligation_id": "PO-RT-002",
+      "theorem_id": "MT-RT-001",
+      "description": "Prove transition stabilization of precursor distinctions under triadic embedding and the process-equivalence to the core expression.",
+      "current_status": "satisfied",
+      "satisfaction_criteria": [
+        "Formal definition of the admissibility condition A(D) for precursor distinction under L122 and P116",
+        "Proof that binary distinction collapses in isolation while triadic closure stabilizes under L122 and P116",
+        "Formal bidirectional mapping and failure condition preservation between RT form and core expression under L123 and P117"
+      ],
+      "campaign_reference": "manual_governance_review",
+      "provisional_status": true
+    },
+    {
+      "obligation_id": "PO-ASYM-001",
+      "theorem_id": "MT-ASYM-001",
+      "description": "Establish mathematical bridge from directed relational asymmetry to local orientation selection reference framework.",
+      "current_status": "satisfied",
+      "satisfaction_criteria": [
+        "Formal definition of bounded asymmetry ratio Omega_a under context floor constraint L124 and P118",
+        "Proof that Omega_a remains strictly bounded within positive range L124 and P118",
+        "Formal definition of selection operator O* mapping asymmetry to unique minimum of relational friction L125 and P119",
+        "Proof that selection resolves uniquely if and only if symmetry is broken (Omega_a != 1) under L125 and P119"
+      ],
+      "campaign_reference": "manual_governance_review",
+      "provisional_status": true
+    },
+    {
+      "obligation_id": "PO-SIGN-001",
+      "theorem_id": "MT-SIGN-001",
+      "description": "Formalize sign polarities as directional pathway accumulation and exclusion process dynamics.",
+      "current_status": "satisfied",
+      "satisfaction_criteria": [
+        "Formal definition of the sign mapping function tracking relational crossings under L126 and P120",
+        "Proof that accumulation maps to positive polarity and exclusion maps to negative polarity under L126 and P120",
+        "Proof of the isomorphism between algebraic sign multiplication rules and process step compositions under L126 and P120"
+      ],
+      "campaign_reference": "manual_governance_review",
+      "provisional_status": true
+    },
+    {
+      "obligation_id": "PO-GOV-001",
+      "theorem_id": "MT-GOV-001",
+      "description": "Map platform metadata governance as a homomorphic category-theoretic projection of relational admissibility graph transitions.",
+      "current_status": "satisfied",
+      "satisfaction_criteria": [
+        "Formal definition of category projection mapping f between relational transitions and registry validations under L127 and P121",
+        "Proof that identity transitions map to status checks preserving existing locks under L127 and P121",
+        "Proof that composite relational transitions map to sequential registry state modifications preserving composition under L127 and P121"
+      ],
+      "campaign_reference": "manual_governance_review",
+      "provisional_status": true
+    },
+    {
+      "obligation_id": "PO-BRD-001",
+      "theorem_id": "MT-BRD-001",
+      "description": "Map relational co-participation graph trajectories to topological braid spaces, preserving morphism composition and braid closures.",
+      "current_status": "satisfied",
+      "satisfaction_criteria": [
+        "Covariant functor mapping F_proj preserves identity transitions under L128 and P122",
+        "Composition of graph update morphisms preserves braid multiplication under L128 and P122",
+        "Topological braid closures correspond to stable self-reinforcing relational basins under L129 and P123"
+      ],
+      "campaign_reference": "manual_braid_projection_review",
+      "provisional_status": true
+    },
+    {
+      "obligation_id": "PO-PALG-001",
+      "theorem_id": "MT-PALG-001",
+      "description": "Map nested whole-relation aspects connecting closure and polarity under PALG-QUEUE-001.",
+      "current_status": "satisfied",
+      "satisfaction_criteria": [
+        "Well-formed equivalence mapping between constraint realization and polarity components under L130 and P124",
+        "Proof of non-separability showing both elements must be evaluated together under L130 and P124"
+      ],
+      "campaign_reference": "manual_polarity_closure_review",
+      "provisional_status": true
+    }
+  ]
+}

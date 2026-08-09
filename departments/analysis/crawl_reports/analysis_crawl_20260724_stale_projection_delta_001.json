@@ -1,0 +1,256 @@
+{
+  "campaign_id": "CAMPAIGN_ANALYSIS_STALE_PROJECTION_CRAWL_20260724_001",
+  "agent_role": "RT_AGENT_INFINITE_THEORY_ANALYST",
+  "mode": "crawl",
+  "scope": {
+    "domains": [
+      "analysis governance",
+      "D-semantics proof obligations",
+      "work-index disposition",
+      "textbook synchronization"
+    ],
+    "object_ids": [
+      "ANALYSIS_DEPARTMENT_SSOT",
+      "ANALYSIS_PROGRAM_STATE_REPORT_001",
+      "ANALYSIS_RECOMMENDED_ACTION_QUEUE_001",
+      "MASTER_WORK_INDEX_001",
+      "DEBT_D_SEMANTICS_PROOF_001",
+      "D_SEMANTICS_OBLIGATION_REGISTRY_001",
+      "CAMPAIGN_D_SEMANTICS_THEORY_CRAWL_20260723_002",
+      "D_PROMOTION_GATE_AUDIT_20260723"
+    ],
+    "include_superseded": true,
+    "source_artifacts": [
+      "departments/analysis/department_ssot.md",
+      "departments/analysis/program_state_report.json",
+      "departments/analysis/dependency_report.json",
+      "departments/analysis/recommended_action_queue.json",
+      "governance/live/master_work_index.json",
+      "registry/research_debt_registry.json",
+      "registry/math/d_semantics_obligation_registry.json",
+      "departments/analysis/campaigns/CAMPAIGN_D_SEMANTICS_THEORY_CRAWL_20260723_002/campaign_summary.json",
+      "departments/analysis/campaigns/CAMPAIGN_D_SEMANTICS_THEORY_CRAWL_20260723_002/campaign_record.json",
+      "departments/analysis/campaigns/CAMPAIGN_D_SEMANTICS_THEORY_CRAWL_20260723_002/completion_certificate.json",
+      "departments/analysis/campaigns/CAMPAIGN_D_SEMANTICS_THEORY_CRAWL_20260723_002/actionable_tasks.json",
+      "departments/analysis/campaigns/CAMPAIGN_D_SEMANTICS_THEORY_CRAWL_20260723_002/OBL-D-001A_completion_certificate.json",
+      "departments/analysis/campaigns/CAMPAIGN_D_SEMANTICS_THEORY_CRAWL_20260723_002/OBL-D-001B_completion_certificate.json",
+      "departments/analysis/campaigns/CAMPAIGN_D_SEMANTICS_THEORY_CRAWL_20260723_002/d_promotion_gate_audit_20260723.json",
+      "docs/textbook/mono_process_textbook_complete.md"
+    ]
+  },
+  "budgets": {
+    "maximum_reasoning_depth": 6,
+    "maximum_candidate_count": 40,
+    "maximum_compute_units": "bounded local inspection"
+  },
+  "normalization_rule": "Canonical registries, item-level reconciled work-index records, completion certificates, and fresh DB current-state results control current status. Earlier analysis projections remain historical unless an explicit current-state supersession link says otherwise.",
+  "results": {
+    "objects_analyzed": 16,
+    "contradictions": 2,
+    "governance_defects": 1,
+    "proof_gaps": 1,
+    "concept_candidates": 1,
+    "research_campaigns": 1,
+    "duplicates_rejected": 0,
+    "stale_projection_surfaces": 8,
+    "open_d_obligations": 3,
+    "promotion_gate_status": "BLOCKED_NOT_READY"
+  },
+  "findings": [
+    {
+      "discovery_id": "DISCOVERY_ANALYSIS_STALE_001",
+      "discovery_class": "CONTRADICTION",
+      "title": "Analysis Department SSOT live execution block is stale",
+      "statement": "The active live-execution block in departments/analysis/department_ssot.md still reports active_work_items = 9 and routes ANL_REC_001 to SIM-REPAIR-QUEUE-001, while the current program-state report and reconciled master work index record 0 active work items, an empty critical path, and ANL_REC_001 as no unclassified work-index action remains.",
+      "epistemic_status": "OBSERVED",
+      "proof_status": "NOT_ATTEMPTED",
+      "supporting_evidence_ids": [
+        "departments/analysis/department_ssot.md",
+        "departments/analysis/program_state_report.json",
+        "departments/analysis/dependency_report.json",
+        "governance/live/master_work_index.json"
+      ],
+      "recommended_next_action": "Replace the stale live-snapshot block with a current-state summary or explicitly mark the block historical.",
+      "promotion_allowed": false,
+      "human_review_required": true
+    },
+    {
+      "discovery_id": "DISCOVERY_ANALYSIS_STALE_002",
+      "discovery_class": "CONTRADICTION",
+      "title": "D campaign closeout package remained pre-discharge after same-day certificates",
+      "statement": "The July 23, 2026 D-semantics campaign summary, campaign record, completion certificate, and task-routing surfaces still describe OBL-D-001A and OBL-D-001B as open or undischarged even though later same-day completion certificates and the live obligation registry record A as DISCHARGED and B as DISCHARGED_BOUNDED.",
+      "epistemic_status": "OBSERVED",
+      "proof_status": "NOT_ATTEMPTED",
+      "supporting_evidence_ids": [
+        "departments/analysis/campaigns/CAMPAIGN_D_SEMANTICS_THEORY_CRAWL_20260723_002/campaign_summary.json",
+        "departments/analysis/campaigns/CAMPAIGN_D_SEMANTICS_THEORY_CRAWL_20260723_002/campaign_record.json",
+        "departments/analysis/campaigns/CAMPAIGN_D_SEMANTICS_THEORY_CRAWL_20260723_002/completion_certificate.json",
+        "departments/analysis/campaigns/CAMPAIGN_D_SEMANTICS_THEORY_CRAWL_20260723_002/actionable_tasks.json",
+        "departments/analysis/campaigns/CAMPAIGN_D_SEMANTICS_THEORY_CRAWL_20260723_002/OBL-D-001A_completion_certificate.json",
+        "departments/analysis/campaigns/CAMPAIGN_D_SEMANTICS_THEORY_CRAWL_20260723_002/OBL-D-001B_completion_certificate.json",
+        "registry/math/d_semantics_obligation_registry.json"
+      ],
+      "recommended_next_action": "Publish a current-state addendum or supersession package for the July 23, 2026 D campaign closeout surfaces rather than silently overwriting them.",
+      "promotion_allowed": false,
+      "human_review_required": true
+    },
+    {
+      "discovery_id": "DISCOVERY_ANALYSIS_STALE_003",
+      "discovery_class": "GOVERNANCE_DEFECT",
+      "title": "Textbook D threshold paragraph lagged the current bounded certificate",
+      "statement": "The textbook paragraph labeled OBL-D-001B threshold candidate still said sensitivity testing and human review were pending even though the later bounded completion certificate and promotion-gate audit record both events as complete within the declared finite scope.",
+      "epistemic_status": "OBSERVED",
+      "proof_status": "NOT_ATTEMPTED",
+      "supporting_evidence_ids": [
+        "docs/textbook/mono_process_textbook_complete.md",
+        "departments/analysis/campaigns/CAMPAIGN_D_SEMANTICS_THEORY_CRAWL_20260723_002/OBL-D-001B_completion_certificate.json",
+        "departments/analysis/campaigns/CAMPAIGN_D_SEMANTICS_THEORY_CRAWL_20260723_002/d_promotion_gate_audit_20260723.json"
+      ],
+      "recommended_next_action": "Update the textbook paragraph so it reflects the bounded OBL-D-001B completion state and the remaining C/D/E promotion blockers.",
+      "promotion_allowed": false,
+      "human_review_required": true
+    },
+    {
+      "discovery_id": "DISCOVERY_ANALYSIS_STALE_004",
+      "discovery_class": "PROOF_GAP",
+      "title": "D promotion gate is reduced but still blocked",
+      "statement": "The D promotion gate is no longer blocked by OBL-D-001A or OBL-D-001B, but it remains blocked by OBL-D-001C typed preservation support, OBL-D-001D review and wording qualification, and OBL-D-001E dependent gate review.",
+      "epistemic_status": "SOURCE_REPORTED",
+      "proof_status": "OBLIGATIONS_IDENTIFIED",
+      "supporting_evidence_ids": [
+        "registry/math/d_semantics_obligation_registry.json",
+        "departments/analysis/campaigns/CAMPAIGN_D_SEMANTICS_THEORY_CRAWL_20260723_002/d_promotion_gate_audit_20260723.json",
+        "registry/research_debt_registry.json"
+      ],
+      "recommended_next_action": "Execute TASK-D-001C-TYPE-PRESERVATION before D and E review are rerouted.",
+      "promotion_allowed": false,
+      "human_review_required": true
+    },
+    {
+      "discovery_id": "DISCOVERY_ANALYSIS_STALE_005",
+      "discovery_class": "CONCEPT_CANDIDATE",
+      "title": "Completed work-index disposition does not imply inactive source scope",
+      "statement": "A completed work-index execution_state can coexist with an active bounded source campaign or registry scope.",
+      "formal_statement": "WORK_INDEX_EXECUTION_COMPLETED(x) does not imply SOURCE_SCOPE_INACTIVE(x).",
+      "epistemic_status": "CONJECTURED",
+      "proof_status": "OBLIGATIONS_IDENTIFIED",
+      "supporting_evidence_ids": [
+        "governance/live/master_work_index.json",
+        "campaigns/BOOK_CAMPAIGN_PHASE_01_MASTER.json",
+        "registry/p0_engine_c4_elevation_campaign.json"
+      ],
+      "falsification_conditions": [
+        "A governed status model proves that completed work-index disposition and inactive source scope are identical for all campaign and debt objects.",
+        "The cited source campaigns are reclassified as inactive historical records without bounded live scope."
+      ],
+      "recommended_next_action": "Encode the distinction in analysis reporting guidance so current-state summaries stop conflating disposition and source activity.",
+      "promotion_allowed": false,
+      "human_review_required": true
+    }
+  ],
+  "open_research_debt": [
+    {
+      "id": "DEBT_D_SEMANTICS_PROOF_001",
+      "status": "OPEN",
+      "blocking_effect": "D theorem promotion"
+    },
+    {
+      "id": "STALE_ANALYSIS_PROJECTIONS_001",
+      "status": "NEW_ANALYSIS_DEBT",
+      "blocking_effect": "Current-state analysis trust and task routing clarity"
+    },
+    {
+      "id": "OBL-D-001C",
+      "status": "OPEN",
+      "completion_percent": 60,
+      "blocking_effect": "D promotion gate"
+    },
+    {
+      "id": "OBL-D-001D",
+      "status": "OPEN",
+      "completion_percent": 90,
+      "blocking_effect": "D promotion gate"
+    },
+    {
+      "id": "OBL-D-001E",
+      "status": "OPEN",
+      "completion_percent": 90,
+      "blocking_effect": "D promotion gate"
+    }
+  ],
+  "synthesis": {
+    "hypothesis": "Analysis projections age on a different timeline than current-state authority surfaces; once A and B moved on July 23, 2026, any surface without explicit supersession stopped being trustworthy as a live-routing summary even if its historical evidence remained useful.",
+    "mapping": "fresh DB runtime and reconciled work index -> current program-state projections -> D certificates and obligation registry -> stale analysis surface classification -> bounded successor campaign",
+    "preserved_structure": [
+      "history preservation",
+      "registry-first authority",
+      "bounded claim ceiling",
+      "separation of disposition from live source scope"
+    ],
+    "competing_explanations": [
+      "Some stale assertions may be intentional historical snapshots rather than maintenance defects.",
+      "The mixed work-index and source-campaign states may reflect deliberate projection layering rather than a reporting error."
+    ],
+    "falsification_condition": "If a higher-authority registry reopens OBL-D-001A or OBL-D-001B, or if the work index is reclassified away from the current reconciled item records, the stale-projection classification must be revised."
+  },
+  "quality": {
+    "scope_coverage": 0.95,
+    "dependency_resolution": 0.9,
+    "reasoning_depth_used": 6,
+    "evidence_quality": "high for current-state classification; bounded for downstream D proof readiness",
+    "termination_quality": "high"
+  },
+  "assessment": {
+    "overall_result": "SUCCESS",
+    "reason": "The crawl replaced stale July 23, 2026 analysis routing with a current-state classification, reduced the live D frontier to C/D/E, and isolated the remaining hygiene surfaces without mutating canonical registries.",
+    "confidence": "high"
+  },
+  "executive_recommendation": "FORMALIZE",
+  "recommended_next_campaign": {
+    "campaign_id": "CAMPAIGN_ANALYSIS_STALE_PROJECTION_REFRESH_20260724_001",
+    "objective": "Refresh stale analysis surfaces with explicit supersession or current-state links, then hand off OBL-D-001C typed preservation formalization.",
+    "inputs": [
+      "departments/analysis/department_ssot.md",
+      "departments/analysis/campaigns/CAMPAIGN_D_SEMANTICS_THEORY_CRAWL_20260723_002 closeout artifacts",
+      "registry/math/d_semantics_obligation_registry.json",
+      "governance/live/master_work_index.json",
+      "departments/analysis/program_state_report.json"
+    ],
+    "expected_outputs": [
+      "stale projection refresh patch",
+      "current-state addendum for the D campaign",
+      "updated analysis dashboard text",
+      "OBL-D-001C handoff note"
+    ],
+    "stopping_conditions": [
+      "Every active analysis surface that previously contradicted A/B status is marked current, superseded, or historical.",
+      "No active analysis summary routes ANL_REC_001 to the pre-reconciliation work-index path.",
+      "The next proof task is unambiguously TASK-D-001C-TYPE-PRESERVATION."
+    ],
+    "human_review_required": true
+  },
+  "frontier": {
+    "open_branches": [
+      "refresh stale analysis surfaces",
+      "complete OBL-D-001C",
+      "review OBL-D-001D scope and wording",
+      "rerun OBL-D-001E gate after D"
+    ],
+    "blocked_branches": [
+      "D theorem promotion"
+    ],
+    "deferred_branches": [
+      "source-registry mutation",
+      "external physical interpretation"
+    ]
+  },
+  "termination_reason": "Bounded stale-state crawl completed; further progress requires an analysis refresh patch or new formal evidence for OBL-D-001C.",
+  "continuation_token": "ANALYSIS_CRAWL_STALE_PROJECTION_FRONTIER_001",
+  "what_this_does_not_authorize": [
+    "No theorem promotion",
+    "No canonical registry mutation",
+    "No claim escalation above C1_DEFINED_PROVISIONAL",
+    "No silent overwrite of July 23, 2026 analysis history"
+  ],
+  "created_at": "2026-07-24T01:17:49-04:00"
+}

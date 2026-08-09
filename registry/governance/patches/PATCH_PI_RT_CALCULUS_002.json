@@ -1,0 +1,67 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_002",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-04",
+  "type": "governance_patch",
+  "patch_type": "formal_definition",
+  "title": "RT Operational Regime Definition",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_001"
+  ],
+  "purpose": "Define an RT operational regime as a derived behavior-mode of RT_core without yet naming L or NL as specific regimes.",
+  "core_definition": {
+    "RT_operational_regime": "A repeatable derived mode of RT_core continuation under declared admissibility, residue, orientation, and context conditions.",
+    "not_primitive": true,
+    "trace_requirement": "Every regime must constructively trace to RT_core := [(ℰ≠0) ⇔R δα(ℰ>0)].",
+    "regime_naming": "No specific regime-family labels are assigned in this patch."
+  },
+  "governance_rules": [
+    "A regime is not an axiomatic floor.",
+    "A regime must declare its admissibility context.",
+    "A regime must specify whether residue affects continuation.",
+    "A regime cannot supersede RT_core."
+  ],
+  "deferred_items": [
+    "Linear regime derivation",
+    "Nonlinear regime derivation",
+    "Regime transition rules"
+  ],
+  "created_artifacts": [],
+  "updated_artifacts": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/lexicon_gap_queue.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_002.json"
+  ],
+  "source_artifacts": [
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_001.json",
+    "docs/textbook/mono_process_textbook_complete.md"
+  ],
+  "governance": {
+    "execution_claim": "not_claimed",
+    "registry_claim": "proposed_only",
+    "fabricated_history": false,
+    "notes": [
+      "The regime definition is derived from RT_core and does not introduce a new axiomatic floor.",
+      "Specific regime names remain deferred."
+    ]
+  },
+  "validation": {
+    "required": [
+      "canonical_rt_expression_present",
+      "operational_regime_present",
+      "not_primitive",
+      "trace_requirement_present",
+      "unnamed_regime_family_preserved",
+      "lexicon_gap_registered",
+      "global_validate_pass"
+    ],
+    "result": "pass"
+  },
+  "notes": [
+    "This patch is governance and architecture only.",
+    "The regime definition remains downstream of RT_core and does not supersede the canonical root expression.",
+    "The new term is also registered in the lexicon gap queue as a GAP_OPEN candidate."
+  ]
+}

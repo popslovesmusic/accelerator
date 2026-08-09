@@ -1,0 +1,71 @@
+{
+  "audit_id": "VAL-RLP-CONSISTENCY-001",
+  "patch_id": "MPF-PF-018",
+  "name": "Restricted Local Proof Consistency Audit Registry",
+  "status": "active",
+  "audit_targets": [
+    {
+      "target_id": "CONS-001",
+      "name": "Operator Type Consistency",
+      "requirement": "All operators in the proof segment must preserve declared input/output typing."
+    },
+    {
+      "target_id": "CONS-002",
+      "name": "Restricted Scope Preservation",
+      "requirement": "No proof step may implicitly invoke unrestricted or global continuation."
+    },
+    {
+      "target_id": "CONS-003",
+      "name": "Failure Geometry Integrity",
+      "requirement": "All preserved blockers and excluded domains must remain active and traceable."
+    },
+    {
+      "target_id": "CONS-004",
+      "name": "Projection Sequence Coherence",
+      "requirement": "The RLP-001 through RLP-005 sequence must not violate admissibility ordering."
+    },
+    {
+      "target_id": "CONS-005",
+      "name": "LAW034 Composition Boundary Review",
+      "requirement": "No local composition step may imply unresolved global compositional closure."
+    },
+    {
+      "target_id": "CONS-006",
+      "name": "Counterexample Lineage Preservation",
+      "requirement": "Every proof-supporting basin must remain linked to originating counterexample audits."
+    }
+  ],
+  "consistency_failure_classes": [
+    {
+      "failure_id": "RLP-CF-001",
+      "name": "Implicit Globalization",
+      "meaning": "A local proof step improperly assumes unrestricted continuation behavior."
+    },
+    {
+      "failure_id": "RLP-CF-002",
+      "name": "Typing Drift",
+      "meaning": "Operator input/output structure diverges from declared signature registry."
+    },
+    {
+      "failure_id": "RLP-CF-003",
+      "name": "Boundary Collapse",
+      "meaning": "Restricted admissibility boundaries become compositionally undefined."
+    },
+    {
+      "failure_id": "RLP-CF-004",
+      "name": "Counterexample Severance",
+      "meaning": "Proof support becomes detached from preserved failure lineage."
+    },
+    {
+      "failure_id": "RLP-CF-005",
+      "name": "False Stability Attribution",
+      "meaning": "Metastable or oscillatory basin incorrectly classified as stable."
+    }
+  ],
+  "governance": {
+    "theorem_status": "NOT_PROVEN",
+    "proof_status": "LTC_consistency_audit_active",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL"
+  }
+}

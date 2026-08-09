@@ -1,0 +1,73 @@
+{
+  "report_id": "SIMULATION_PROOF_BINDING_V1_REPORT",
+  "timestamp": "2026-05-08T12:45:00Z",
+  "status": "COMPLETED",
+  "patch_id": "PCD_SIMULATION_PROOF_BINDING_V1",
+  "summary": "Bound simulation tools and outputs to the PCD lemma/proof system, operator stack, and claim-support rules. Established central binding registry and implemented governance guardrails for simulation-backed claims.",
+  "operations_summary": [
+    {
+      "operation": "create_simulation_proof_binding_registry",
+      "target": "registry/simulation_proof_binding_registry.json",
+      "status": "SUCCESS"
+    },
+    {
+      "operation": "register_initial_bindings",
+      "target": "registry/simulation_proof_binding_registry.json",
+      "status": "SUCCESS",
+      "bindings_count": 3
+    },
+    {
+      "operation": "add_binding_guardrails",
+      "target": "registry/lexicon_gap_queue.json",
+      "status": "SUCCESS",
+      "guardrails_added": [
+        "no_simulation_claim_without_binding_v1",
+        "no_claim_support_above_tool_rigor endorsement_v1",
+        "no_lemma_support_without_operator_instantiation_v1"
+      ]
+    }
+  ],
+  "registered_bindings": [
+    {
+      "binding_id": "SPB_structural_box_sim_cpp_v1",
+      "tool_id": "structural_box_sim_cpp",
+      "tested_lemmas": ["L001", "L004", "L005"],
+      "supported_claim_classes": ["C4"]
+    },
+    {
+      "binding_id": "SPB_tda_module_v2_cpp_v1",
+      "tool_id": "tda_module_v2_cpp",
+      "tested_lemmas": ["L001", "L004"],
+      "supported_claim_classes": ["C4"]
+    },
+    {
+      "binding_id": "SPB_signal_scope_phase_continuation_engine_v1",
+      "tool_id": "signal_scope_phase_continuation_engine",
+      "tested_lemmas": ["L005"],
+      "supported_claim_classes": ["C4"]
+    }
+  ],
+  "unbound_c4_tools": [
+    "agent_based_sim_v1_cpp",
+    "dase_analog_sim_cpp",
+    "satp_higgs_sim_cpp",
+    "satp_higgs_3d_sim_cpp",
+    "igsoa_gw_core_cpp",
+    "igsoa_complex_1d_cpp",
+    "igsoa_complex_2d_cpp",
+    "igsoa_complex_3d_cpp",
+    "satp_higgs_1d_cpp",
+    "symplectic_sim_v1_cpp",
+    "spectral_analysis_v1_cpp",
+    "mc_ensemble_sim_v1_cpp",
+    "parameter_optimizer_v1_cpp",
+    "stochastic_sim_cpp"
+  ],
+  "claim_support_limits": "Tools restricted to testing only registered lemmas and laws within their certified capability (C1-C4).",
+  "operator_instantiation_gaps": [],
+  "charter_compliance_check": {
+    "charter_version": "2.3",
+    "status": "COMPLIANT",
+    "notes": "Simulation-proof binding enforces traceable evidence chains by requiring tools to declare their instantiated operators and tested lemmas before supporting governed research claims."
+  }
+}

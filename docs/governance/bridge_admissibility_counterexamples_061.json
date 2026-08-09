@@ -1,0 +1,58 @@
+{
+  "document_id": "DOC_BRIDGE_ADMISSIBILITY_COUNTEREXAMPLES_061",
+  "artifact_type": "bridge_admissibility_counterexamples",
+  "status": "DRAFT_PROVISIONAL",
+  "scope": "governance_only",
+  "source_patch_id": "PATCH_PI_RT_CALCULUS_061",
+  "source_patches": [
+    "PATCH_PI_RT_CALCULUS_060"
+  ],
+  "purpose": "Show the failure cases that prevent a bridge hypothesis from entering empirical testing.",
+  "counterexamples": [
+    {
+      "failure_code": "FAIL_B_UNDECLARED_OBJECT",
+      "counterexample": "A bridge references a formal object that is not present in the governed registry.",
+      "why_blocked": "The hypothesis cannot be admitted without a governed formal object.",
+      "governance_effect": "Reject prior to empirical evaluation."
+    },
+    {
+      "failure_code": "FAIL_B_UNDEFINED_OBSERVABLE",
+      "counterexample": "A bridge defines the observable using RT terminology or leaves it unnamed.",
+      "why_blocked": "The observable is not independently defined.",
+      "governance_effect": "Require revision before admission."
+    },
+    {
+      "failure_code": "FAIL_B_NO_MAPPING",
+      "counterexample": "A bridge states a formal object and observable but omits the correspondence relation.",
+      "why_blocked": "The formal-to-empirical mapping is unspecified.",
+      "governance_effect": "Reject until mapping is explicit."
+    },
+    {
+      "failure_code": "FAIL_B_NO_DOMAIN",
+      "counterexample": "A bridge provides no domain of validity.",
+      "why_blocked": "The admissibility screen cannot determine the scope of use.",
+      "governance_effect": "Require revision before admission."
+    },
+    {
+      "failure_code": "FAIL_B_NOT_FALSIFIABLE",
+      "counterexample": "A bridge is written so that no possible observation could contradict it.",
+      "why_blocked": "The bridge cannot be empirically tested.",
+      "governance_effect": "Reject prior to evaluation."
+    },
+    {
+      "failure_code": "FAIL_B_CATEGORY_CONFLICT",
+      "counterexample": "A bridge simultaneously claims to be predictive, explanatory, and proof-like without priority or scope control.",
+      "why_blocked": "The bridge claims incompatible purposes simultaneously.",
+      "governance_effect": "Require category discipline before admission."
+    }
+  ],
+  "claim_humility": {
+    "status": "provisional",
+    "non_claims": [
+      "Does not invalidate the formal calculus.",
+      "Does not assert empirical truth.",
+      "Does not modify RT_core.",
+      "Does not replace empirical evidence."
+    ]
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "review_id": "analysis_d_status_mapping_review_20260802_001",
+  "review_type": "BOUNDED_READ_ONLY_STATUS_MAPPING_REVIEW",
+  "review_date": "2026-08-02",
+  "scope": "Reconcile D obligation disposition, proof-package status, research-debt status, and theorem-promotion eligibility.",
+  "source_artifacts": [
+    "registry/math/d_semantics_obligation_registry.json",
+    "registry/proof_registry.json",
+    "registry/theorem_registry.json",
+    "governance/live/research_debt_registry.json",
+    "registry/research_debt_registry.json",
+    "registry/governance/patches/D_HUMAN_REVIEW_APPROVAL_P127_P128_20260730_001.json",
+    "departments/analysis/department_ssot.md",
+    "departments/analysis/crawl_reports/analysis_d_theorem_eligibility_review_20260730_001.json",
+    "outputs/audits/global_health_report.json"
+  ],
+  "direct_observations": [
+    "OBL-D-001A is DISCHARGED and OBL-D-001B through OBL-D-001E are DISCHARGED_BOUNDED in the canonical D obligation registry.",
+    "P125 is COMPLETE_ARGUMENT_BOUNDED_HUMAN_APPROVED, has no open_obligations, and links P127 and P128 as supporting proofs.",
+    "P127 and P128 are COMPLETE_ARGUMENT_BOUNDED_HUMAN_APPROVED with C1_DEFINED_PROVISIONAL classification and explicit no-promotion limitations.",
+    "P126 remains COMPLETE_ARGUMENT_UNVERIFIED and bounded to type-level closure.",
+    "The theorem registry contains no D theorem target eligible for promotion.",
+    "The live research-debt record is resolved for the bounded package but retains D_semantics_theorem_promotion and Pi_D_preservation_claim blockers.",
+    "The D obligation registry promotion gate blocks theorem promotion and claims above C1."
+  ],
+  "status_mapping": {
+    "obligation_disposition": {
+      "meaning": "Finite obligation evidence has been accepted within the declared scope.",
+      "current_value": "DISCHARGED or DISCHARGED_BOUNDED",
+      "does_not_imply": "theorem eligibility or universal claim support"
+    },
+    "proof_package_status": {
+      "meaning": "The proof artifact has a bounded human-approved argument or a bounded unverified argument.",
+      "current_values": ["COMPLETE_ARGUMENT_BOUNDED_HUMAN_APPROVED", "COMPLETE_ARGUMENT_UNVERIFIED"],
+      "does_not_imply": "universal preservation, injectivity, reversibility, or promotion"
+    },
+    "research_debt_status": {
+      "meaning": "The bounded research package has a recorded disposition.",
+      "current_value": "resolved",
+      "required_companion_fields": ["claim_ceiling", "blocks", "remaining_requirements"],
+      "current_boundary": "C1 bounded; promotion blockers remain active"
+    },
+    "promotion_eligibility": {
+      "meaning": "Independent gate for theorem or claim elevation.",
+      "current_value": "BLOCKED",
+      "basis": ["C1_DEFINED_PROVISIONAL ceiling", "active D promotion gate", "no eligible D theorem target"]
+    }
+  },
+  "reconciliation_result": {
+    "status": "ALIGNED_WITH_EXPLICIT_BOUNDARY",
+    "p125_repair_needed": false,
+    "prior_review_disposition": "The 2026-07-30 P125 stale-projection finding is superseded by the current proof-registry record; retain it as historical evidence.",
+    "remaining_ambiguity": "Aggregate words such as resolved and ACTIVE_OPEN should be understood through the layer mapping above; no authoritative machine-readable alias record was found.",
+    "promotion_decision": "BLOCK"
+  },
+  "findings": [
+    {
+      "discovery_id": "DISCOVERY_ANALYSIS_20260802_D_STATUS_MAPPING_RESOLVED_001",
+      "discovery_class": "GOVERNANCE_DEFECT",
+      "title": "Proof projection is reconciled; lifecycle aliasing remains implicit",
+      "statement": "The current proof registry no longer has the P125 open-obligation mismatch identified by the earlier review. The remaining issue is that bounded disposition, debt resolution, and promotion eligibility are represented in separate fields without an explicit shared lifecycle mapping.",
+      "epistemic_status": "OBSERVED",
+      "proof_status": "FORMALLY_CHECKED",
+      "support": "C3_REPOSITORY_COMPARISON",
+      "falsification_condition": "A current authoritative status-mapping record demonstrates that the separate fields are intentionally and unambiguously linked.",
+      "recommended_next_action": "Perform the second D theorem-eligibility review against the current P125/P126/P127/P128 and gate records.",
+      "canonical_promotion_allowed": false,
+      "human_review_required": true
+    }
+  ],
+  "open_obligations": [
+    "Second theorem-eligibility review after current proof-registry reconciliation",
+    "Explicit lifecycle/status mapping if projections continue to use aggregate resolved or ACTIVE_OPEN labels",
+    "Any stronger or universal D claim requires separately governed evidence and a reopened gate assessment"
+  ],
+  "blockers": [
+    "D theorem promotion remains blocked.",
+    "Claims above C1 remain blocked.",
+    "P126 is not independently verified beyond its bounded type-level scope."
+  ],
+  "not_established": [
+    "A universal D preservation theorem",
+    "Theorem eligibility",
+    "Injectivity, reversibility, or complete information preservation",
+    "External physical validity"
+  ],
+  "recommended_next_action": {
+    "action": "SECOND_D_THEOREM_ELIGIBILITY_REVIEW",
+    "inputs": [
+      "registry/math/d_semantics_obligation_registry.json",
+      "registry/proof_registry.json",
+      "registry/theorem_registry.json",
+      "registry/governance/patches/D_HUMAN_REVIEW_APPROVAL_P127_P128_20260730_001.json",
+      "current claim and promotion gates"
+    ],
+    "completion_test": "The eligibility result is current, cites P125/P126/P127/P128, preserves the C1 ceiling, and explicitly records the promotion decision.",
+    "does_not_authorize": ["proof-registry mutation", "theorem promotion", "claim elevation", "external physical interpretation"]
+  },
+  "assessment": {
+    "outcome": "PARTIAL_SUCCESS",
+    "confidence": "high for current proof and obligation fields; moderate for implicit aggregate lifecycle semantics",
+    "reason": "The earlier P125 mismatch is no longer current. The status layers can be mapped operationally, but the promotion gate remains blocked and no canonical lifecycle alias record was found."
+  },
+  "what_this_review_does_not_authorize": [
+    "canonical registry mutation",
+    "proof discharge",
+    "theorem promotion",
+    "claim elevation",
+    "external physical interpretation"
+  ]
+}

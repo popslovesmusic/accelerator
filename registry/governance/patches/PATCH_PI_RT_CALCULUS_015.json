@@ -1,0 +1,136 @@
+{
+  "patch_id": "PATCH_PI_RT_CALCULUS_015",
+  "campaign_id": "RT_CALCULUS_IMPLEMENTATION_001",
+  "status": "APPLIED",
+  "applied_on": "2026-07-05",
+  "type": "governance_patch",
+  "artifact_type": "governance_patch",
+  "title": "Process Equivalence and Canonical Continuation Forms",
+  "priority": "HIGH",
+  "depends_on": [
+    "PATCH_PI_RT_CALCULUS_012",
+    "PATCH_PI_RT_CALCULUS_013",
+    "PATCH_PI_RT_CALCULUS_014"
+  ],
+  "purpose": "Define when two continuation expressions are process-equivalent and introduce canonical forms for continuation algebra.",
+  "canonical_claims": [
+    {
+      "id": "CLAIM_015_001",
+      "statement": "Symbolic equality is not sufficient for RT Calculus equivalence.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_015_002",
+      "statement": "Process equivalence compares lawful continuation behavior.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_015_003",
+      "statement": "Two continuation expressions may differ syntactically while being process-equivalent.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_015_004",
+      "statement": "Every well-formed continuation expression should reduce toward a canonical continuation form when admissibility holds.",
+      "status": "canonical"
+    },
+    {
+      "id": "CLAIM_015_005",
+      "statement": "Canonical forms support auditability, comparison, and eventual execution.",
+      "status": "canonical"
+    }
+  ],
+  "formal_objects": [
+    {
+      "symbol": "≡P",
+      "name": "Process Equivalence",
+      "definition": "A binary process-equivalence relation on continuation expressions that holds when they produce the same admissible continuation behavior under the same governing conditions; it is not mere symbolic equality.",
+      "primitive": false,
+      "domain": "continuation_algebra"
+    },
+    {
+      "symbol": "NF(C)",
+      "name": "Canonical Continuation Form",
+      "definition": "The canonical representative of a continuation expression when admissibility holds; it supports auditability and comparison without specifying the reduction algorithm.",
+      "primitive": false,
+      "domain": "continuation_algebra"
+    }
+  ],
+  "laws": [
+    {
+      "id": "LAW_015_001",
+      "name": "Process Equivalence",
+      "formal": "C1 ≡P C2 iff Behavior(C1) = Behavior(C2) under shared admissibility, residue, orientation, and context constraints",
+      "meaning": "Two continuations are process-equivalent only when they induce the same lawful continuation behavior under the same governing conditions."
+    },
+    {
+      "id": "LAW_015_002",
+      "name": "Canonical Form",
+      "formal": "NF(C) = canonical representative of C",
+      "meaning": "A canonical continuation form names the normalized representative of a continuation expression when admissibility holds."
+    },
+    {
+      "id": "LAW_015_003",
+      "name": "Equivalence by Normal Form",
+      "formal": "NF(C1) = NF(C2) => C1 ≡P C2",
+      "meaning": "Matching canonical continuation forms imply process equivalence."
+    },
+    {
+      "id": "LAW_015_004",
+      "name": "Non-Converse Warning",
+      "formal": "C1 ≡P C2 does not necessarily imply identical syntax",
+      "meaning": "Process equivalence compares lawful behavior and does not collapse into surface equality."
+    }
+  ],
+  "architecture_update": {
+    "old": [
+      "Condition",
+      "Continuation",
+      "Composition",
+      "Admissibility",
+      "Projection"
+    ],
+    "new": [
+      "Condition",
+      "Continuation",
+      "Composition",
+      "Admissibility",
+      "Projection",
+      "Process Equivalence",
+      "Canonical Form"
+    ]
+  },
+  "deferred": [
+    "Full reduction algorithm",
+    "Complete parser grammar",
+    "sigma_RT",
+    "Executable implementation",
+    "Decision procedure for equivalence"
+  ],
+  "required_file_updates": [
+    "docs/textbook/mono_process_textbook_complete.md",
+    "registry/formal_object_registry.json",
+    "registry/math_source_registry.json",
+    "registry/lexicon_gap_queue.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_015.json"
+  ],
+  "validation_requirements": [
+    "Process equivalence registered in the formal object registry.",
+    "Canonical continuation form registered in the formal object registry.",
+    "No change to RT_core.",
+    "Do not collapse process equivalence into symbolic equality.",
+    "Keep the reduction algorithm deferred."
+  ],
+  "success_criteria": {
+    "process_equivalence_defined": true,
+    "canonical_form_defined": true,
+    "reduction_algorithm_deferred": true,
+    "rt_core_unchanged": true
+  },
+  "next_recommended_patch": {
+    "patch_id": "PATCH_PI_RT_CALCULUS_016",
+    "title": "Continuation Reduction Rules",
+    "purpose": "Define the first normalization rules for reducing continuation expressions into canonical forms."
+  }
+}

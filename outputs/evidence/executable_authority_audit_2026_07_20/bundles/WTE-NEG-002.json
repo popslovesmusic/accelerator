@@ -1,0 +1,39 @@
+{
+  "evidence_bundle_id": "EE-VAL-WORKTREE-EVIDENCE-001-WTE-NEG-002-001",
+  "audit_packet_id": "SEA_CALC_EXECUTABLE_EVIDENCE_AUDIT_2026_07_20",
+  "validator_id": "VAL-WORKTREE-EVIDENCE-001",
+  "validator_version": "production query_governance current workspace",
+  "test_id": "WTE-NEG-002",
+  "test_class": "negative_control",
+  "expected_result": {
+    "git_dirty": true,
+    "runtime_reports_dirty": true,
+    "decision": "consistent"
+  },
+  "observed_result": {
+    "git_dirty": true,
+    "has_untracked": true,
+    "runtime_reports_dirty": false,
+    "runtime_no_dirty_warning": true,
+    "source_change_count": 0,
+    "runtime_only_change_count": 0
+  },
+  "result": "FAIL",
+  "entry_point": [
+    "git status --short",
+    "python scripts/query_governance.py freshness --level summary",
+    "python scripts/query_governance.py context-capsule --target outputs/evidence/executable_authority_audit_2026_07_20/test_manifest.json --level summary"
+  ],
+  "command": "see baseline command records",
+  "exit_code": 0,
+  "stdout_hash": "dfdf3fe39eb950eb2cfbdc858eb5d0b6511f918c3da48e0a4d9fa758000aa80b",
+  "stderr_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "fixture_hash": "ea0b9145832dc17c67f7f3cff23131aaeff7701aac1709291ffce1ba6d27616f",
+  "repository_commit": "7dfe26ce4bd4205b4999ed35f2b1d5826bfb4337",
+  "worktree_hash": "ea0b9145832dc17c67f7f3cff23131aaeff7701aac1709291ffce1ba6d27616f",
+  "database_snapshot_id": "b0184ef768f8706f3548308093a7b004c52af583d2b17b326dc6a8e5af27a692",
+  "started_at": "2026-07-21T03:24:47.564383+00:00",
+  "completed_at": "2026-07-21T03:24:54.493097+00:00",
+  "cleanup_status": "no_mutating_fixture_created",
+  "assurance_boundary": "worktree observation and freshness reporting only"
+}

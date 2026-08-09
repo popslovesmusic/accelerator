@@ -1,0 +1,31 @@
+{
+  "id": "AUDIT-004",
+  "name": "RD Boundary Scaling Policy",
+  "status": "active",
+  "timestamp": "2026-05-13T11:00:00Z",
+  "depends_on": [
+    "AUDIT-001",
+    "AUDIT-002",
+    "AUDIT-003"
+  ],
+  "policy_conditions_met": [
+    "periodic_boundary_default_documented",
+    "np_roll_boundary_implication_documented",
+    "unit_grid_scaling_default_documented",
+    "dx_dy_scaling_status_documented",
+    "legacy_behavior_preserved_by_default",
+    "future_boundary_modes_staged_not_silent",
+    "future_dx_dy_scaling_patch_staged_not_silent",
+    "no_theorem_or_physics_claim_changed"
+  ],
+  "policy_document": "docs/math/rd_boundary_scaling_policy.md",
+  "verification_test": "tests/test_rd_boundary_scaling_policy.py",
+  "implementation": {
+    "engine": "tools/rd_moving_boundary_sim_v1/rd_engine.py",
+    "defaults": {
+      "boundary_mode": "periodic",
+      "dx": 1.0,
+      "dy": 1.0
+    }
+  }
+}

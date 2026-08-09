@@ -1,0 +1,52 @@
+{
+    "config": {
+        "experiment_id": "MSI-REF-2026-05-10-L005",
+        "tool": "agent_based_sim_v1_cpp",
+        "intent": "validate_lemma_L005",
+        "seeds": [
+            606,
+            707,
+            808,
+            909,
+            1010
+        ],
+        "base_config": {
+            "agent_count": 500,
+            "steps": 200,
+            "R_c": 1.5,
+            "K_phi": 0.3
+        },
+        "variations": [
+            {
+                "name": "L005_residue_closure_low",
+                "config_override": {
+                    "residue_decay": 0.8
+                },
+                "description": "High decay (low residue) to test baseline connectivity."
+            },
+            {
+                "name": "L005_residue_closure_high",
+                "config_override": {
+                    "residue_decay": 0.05
+                },
+                "description": "Low decay (high residue) to test residue-conditioned closure and cluster stability (L005)."
+            }
+        ],
+        "post_processing": {
+            "tool": "tda_module_v2_cpp",
+            "params": {
+                "mode": "betti_0",
+                "thresh_min": 0.1,
+                "thresh_max": 2.0,
+                "thresh_steps": 10
+            }
+        }
+    },
+    "final_metrics": {
+        "x_mean": 0.003119418097508591,
+        "x_rms": 0.5011423953310087,
+        "order_parameter": 0.006281169925761109,
+        "residue_mean": 0.004837420455577559,
+        "runtime_ms": 28555.177211761475
+    }
+}

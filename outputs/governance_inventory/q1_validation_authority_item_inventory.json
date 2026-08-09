@@ -1,0 +1,204 @@
+{
+  "schema_id": "q1_validation_authority_item_inventory_v1",
+  "generated_at": "2026-07-15T10:30:00-04:00",
+  "source_artifacts": [
+    "outputs/governance_inventory/governance_remediation_queue.json",
+    "outputs/governance_inventory/governance_ambiguity_register.json",
+    "outputs/governance_inventory/governance_surface_inventory.json",
+    "registry/governance/patches/PATCH_GOVERNANCE_Q0_PATCH_002_COMPLETION_GATE_FOLLOW_ON_018.json"
+  ],
+  "q1_total_item_count": 9,
+  "items": [
+    {
+      "item_id": "Q1-VAL-001",
+      "ambiguity_id": "AMB-GOV-SURF-0882",
+      "surface_id": "GOV-SURF-0882",
+      "source_path": "registry/governance_hash_registry.json",
+      "ambiguity_statement": "Integrity registry inclusion can be mistaken for validator ownership or live validation authority even though the surface is integrity-only.",
+      "candidate_authority_surfaces": [
+        "registry/governance_change_ledger.json",
+        "registry/governance_hash_registry.json"
+      ],
+      "current_runtime_role_if_known": "INTEGRITY_REGISTRY_ONLY",
+      "current_status": "QUEUED",
+      "current_queue_group": "Q1_VALIDATION_AUTHORITY",
+      "authority_question_classification": "OUTSIDE_VALIDATION_AUTHORITY_SCOPE",
+      "classification_basis": [
+        "governance_surface_inventory marks registry/governance_hash_registry.json as EXPLICIT_NON_AUTHORITATIVE.",
+        "The ambiguity register states the surface is integrity-registry only and inclusion does not imply authority."
+      ]
+    },
+    {
+      "item_id": "Q1-VAL-002",
+      "ambiguity_id": "AMB-GOV-SURF-0665",
+      "surface_id": "GOV-SURF-0665",
+      "source_path": "registry/db/migrations/20260703_governance_runtime_authority_resolution_003.sql",
+      "ambiguity_statement": "The DB runtime authority-resolution projection may be mistaken for the canonical validation invoker rather than the runtime ownership map that points to live surfaces.",
+      "candidate_authority_surfaces": [
+        "registry/db/migrations/20260703_governance_runtime_authority_resolution_003.sql",
+        "scripts/global_validate.py",
+        "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+        "registry/db/README.md",
+        "scripts/query_governance.py"
+      ],
+      "current_runtime_role_if_known": "DB_RUNTIME_OWNERSHIP_PROJECTION",
+      "current_status": "QUEUED",
+      "current_queue_group": "Q1_VALIDATION_AUTHORITY",
+      "authority_question_classification": "INVOCATION_AUTHORITY_AMBIGUITY",
+      "classification_basis": [
+        "Runtime authority query allows the migration as the live runtime projection for ownership and supersession queries.",
+        "Runtime authority query allows scripts/global_validate.py as the canonical governed validation invocation boundary."
+      ]
+    },
+    {
+      "item_id": "Q1-VAL-003",
+      "ambiguity_id": "AMB-GOV-SURF-0663",
+      "surface_id": "GOV-SURF-0663",
+      "source_path": "registry/db/README.md",
+      "ambiguity_statement": "The DB README describes live runtime surfaces and can be confused with executable validation authority even though it is a governed descriptive surface.",
+      "candidate_authority_surfaces": [
+        "registry/db/README.md",
+        "registry/db/migrations/20260703_governance_runtime_authority_resolution_003.sql",
+        "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+        "scripts/global_validate.py"
+      ],
+      "current_runtime_role_if_known": "INSTRUCTION_AUTHORITY_DESCRIPTOR",
+      "current_status": "QUEUED",
+      "current_queue_group": "Q1_VALIDATION_AUTHORITY",
+      "authority_question_classification": "INSTRUCTION_VS_EXECUTABLE_AUTHORITY_AMBIGUITY",
+      "classification_basis": [
+        "Runtime authority query allows registry/db/README.md as a governed registry document that describes live runtime surfaces.",
+        "governance_surface_inventory marks the README as EXPLICIT_NON_AUTHORITATIVE and the ambiguity register says the DB runtime is projection-layer only, not semantic SSOT."
+      ]
+    },
+    {
+      "item_id": "Q1-VAL-004",
+      "ambiguity_id": "AMB-GOV-SURF-0107",
+      "surface_id": "GOV-SURF-0107",
+      "source_path": "docs/manual_repository_audit_2026_07_13.md",
+      "ambiguity_statement": "The manual repository audit discusses validation health and may be mistaken for live validation authority rather than historical audit evidence.",
+      "candidate_authority_surfaces": [
+        "docs/manual_repository_audit_2026_07_13.md",
+        "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+        "scripts/global_validate.py"
+      ],
+      "current_runtime_role_if_known": "HISTORICAL_AUDIT_EVIDENCE",
+      "current_status": "QUEUED",
+      "current_queue_group": "Q1_VALIDATION_AUTHORITY",
+      "authority_question_classification": "GENERATED_EVIDENCE_AUTHORITY_AMBIGUITY",
+      "classification_basis": [
+        "Runtime authority query defers because no governed authority surface matches the audit document.",
+        "governance_surface_inventory marks the audit as EXPLICIT_NON_AUTHORITATIVE and HISTORICAL_RECORD."
+      ]
+    },
+    {
+      "item_id": "Q1-VAL-005",
+      "ambiguity_id": "AMB-GOV-SURF-0664",
+      "surface_id": "GOV-SURF-0664",
+      "source_path": "registry/db/acellorator_index.sqlite",
+      "ambiguity_statement": "The live DB runtime substrate can be confused with validation authority even though it is an operational projection surface rather than a validator role.",
+      "candidate_authority_surfaces": [
+        "registry/db/acellorator_index.sqlite",
+        "registry/db/migrations/20260703_governance_runtime_current_state_002.sql",
+        "registry/db/migrations/20260703_governance_runtime_authority_resolution_003.sql"
+      ],
+      "current_runtime_role_if_known": "DB_RUNTIME_GATE_STORAGE",
+      "current_status": "QUEUED",
+      "current_queue_group": "Q1_VALIDATION_AUTHORITY",
+      "authority_question_classification": "OUTSIDE_VALIDATION_AUTHORITY_SCOPE",
+      "classification_basis": [
+        "Runtime authority query allows registry/db/acellorator_index.sqlite as a DB runtime gate surface, not as a validator role.",
+        "governance_surface_inventory marks the database file as EXPLICIT_NON_AUTHORITATIVE."
+      ]
+    },
+    {
+      "item_id": "Q1-VAL-006",
+      "ambiguity_id": "AMB-GOV-SURF-0676",
+      "surface_id": "GOV-SURF-0676",
+      "source_path": "registry/db/migrations/20260703_governance_runtime_semantic_authority_013.sql",
+      "ambiguity_statement": "The semantic-authority runtime migration may be mistaken for validation authority even though it governs semantic ownership rather than validator ownership.",
+      "candidate_authority_surfaces": [
+        "registry/db/migrations/20260703_governance_runtime_semantic_authority_013.sql",
+        "registry/theorem_registry.json",
+        "registry/db/README.md",
+        "scripts/query_governance.py"
+      ],
+      "current_runtime_role_if_known": "SEMANTIC_AUTHORITY_RUNTIME_PROJECTION",
+      "current_status": "QUEUED",
+      "current_queue_group": "Q1_VALIDATION_AUTHORITY",
+      "authority_question_classification": "OUTSIDE_VALIDATION_AUTHORITY_SCOPE",
+      "classification_basis": [
+        "The migration creates semantic_authority_map and semantic_authority_events rather than validator role tables.",
+        "Its seeded records bind theorem and runtime-rule semantic keys, not validation invocation or reduction roles."
+      ]
+    },
+    {
+      "item_id": "Q1-VAL-007",
+      "ambiguity_id": "AMB-GOV-SURF-1007",
+      "surface_id": "GOV-SURF-1007",
+      "source_path": "tests/__pycache__/test_governed_context_capsule_v1.cpython-312-pytest-9.1.1.pyc",
+      "ambiguity_statement": "Compiled test residue can be mistaken for a live validation surface even though it is generated bytecode with no governed authority role.",
+      "candidate_authority_surfaces": [
+        "tests/__pycache__/test_governed_context_capsule_v1.cpython-312-pytest-9.1.1.pyc",
+        "tests/test_governed_context_capsule_v1.py"
+      ],
+      "current_runtime_role_if_known": "COMPILED_TEST_RESIDUE",
+      "current_status": "QUEUED",
+      "current_queue_group": "Q1_VALIDATION_AUTHORITY",
+      "authority_question_classification": "GENERATED_EVIDENCE_AUTHORITY_AMBIGUITY",
+      "classification_basis": [
+        "governance_surface_inventory marks the pyc surface as EXPLICIT_NON_AUTHORITATIVE TEST.",
+        "The ambiguity register evidence is bytecode content rather than executable governed authority."
+      ]
+    },
+    {
+      "item_id": "Q1-VAL-008",
+      "ambiguity_id": "AMB-GOV-SURF-1032",
+      "surface_id": "GOV-SURF-1032",
+      "source_path": "tests/test_governed_context_capsule_v1.py",
+      "ambiguity_statement": "The governed-context-capsule test validates a bounded contract and may be mistaken for a validator with independent terminal authority.",
+      "candidate_authority_surfaces": [
+        "tests/test_governed_context_capsule_v1.py",
+        "scripts/query_governance.py",
+        "schemas/governed_context_capsule_v1.schema.json"
+      ],
+      "current_runtime_role_if_known": "BOUNDED_TEST_EVIDENCE_PRODUCER",
+      "current_status": "QUEUED",
+      "current_queue_group": "Q1_VALIDATION_AUTHORITY",
+      "authority_question_classification": "SUPPORTING_VALIDATOR_SCOPE_AMBIGUITY",
+      "classification_basis": [
+        "Runtime authority query defers because no governed authority surface matches the test file.",
+        "The test imports scripts.query_governance and verifies a bounded capsule contract rather than emitting terminal governance status."
+      ]
+    },
+    {
+      "item_id": "Q1-VAL-009",
+      "ambiguity_id": "AMB-GOV-SURF-1008",
+      "surface_id": "GOV-SURF-1008",
+      "source_path": "tests/__pycache__/test_governed_context_capsule_v1.cpython-312.pyc",
+      "ambiguity_statement": "Compiled test bytecode can be mistaken for live validation authority even though it is generated residue derived from a non-authoritative test surface.",
+      "candidate_authority_surfaces": [
+        "tests/__pycache__/test_governed_context_capsule_v1.cpython-312.pyc",
+        "tests/test_governed_context_capsule_v1.py"
+      ],
+      "current_runtime_role_if_known": "COMPILED_TEST_RESIDUE",
+      "current_status": "QUEUED",
+      "current_queue_group": "Q1_VALIDATION_AUTHORITY",
+      "authority_question_classification": "GENERATED_EVIDENCE_AUTHORITY_AMBIGUITY",
+      "classification_basis": [
+        "governance_surface_inventory marks the pyc surface as EXPLICIT_NON_AUTHORITATIVE TEST.",
+        "The pyc depends on tests/test_governed_context_capsule_v1.py and has no independent governed role."
+      ]
+    }
+  ],
+  "classification_count_by_authority_question": {
+    "INVOCATION_AUTHORITY_AMBIGUITY": 1,
+    "TERMINAL_REDUCTION_AUTHORITY_AMBIGUITY": 0,
+    "SUPPORTING_VALIDATOR_SCOPE_AMBIGUITY": 1,
+    "SCOPED_VS_COMPLETE_VALIDATION_AMBIGUITY": 0,
+    "INSTRUCTION_VS_EXECUTABLE_AUTHORITY_AMBIGUITY": 1,
+    "GENERATED_EVIDENCE_AUTHORITY_AMBIGUITY": 3,
+    "OUTSIDE_VALIDATION_AUTHORITY_SCOPE": 3,
+    "UNPROVEN": 0
+  }
+}

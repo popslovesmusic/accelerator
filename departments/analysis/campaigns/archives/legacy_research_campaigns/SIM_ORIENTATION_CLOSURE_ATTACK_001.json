@@ -1,0 +1,228 @@
+{
+  "campaign_id": "SIM_ORIENTATION_CLOSURE_ATTACK_001",
+  "patch_id": "MPF_PATCH_001H",
+  "target": "LFCR_ORIENTATION_TRIADIC_CLOSURE_ATTACK_001",
+  "status": "READY_FOR_IMPLEMENTATION",
+  "evidence_report_schema": "registry/governance/schemas/LFCR_EVIDENCE_REPORT_V1.json",
+  "global_parameters": {
+    "seed_count_minimum": 64,
+    "debug_sample_size": 1000,
+    "main_sample_size": 100000,
+    "stress_sample_size": 1000000,
+    "tau_min_effect_threshold": 0.05,
+    "confidence_level": 0.95,
+    "matched_control_required": true,
+    "same_initial_conditions_required": true
+  },
+  "model_matrix": {
+    "M0_full": {
+      "description": "Full claimed mechanism.",
+      "orientation": {
+        "mode": "coherent",
+        "coherence": 1.0,
+        "ordered_node_link": true
+      },
+      "residue": {
+        "mode": "history_conditioned",
+        "strength": "baseline"
+      },
+      "admissibility": {
+        "mode": "governed_delta_a",
+        "width": "baseline"
+      },
+      "topology": {
+        "mode": "natural"
+      }
+    },
+    "M1_no_orientation": {
+      "description": "Direct removal attack.",
+      "orientation": {
+        "mode": "removed",
+        "coherence": 0.0,
+        "ordered_node_link": false
+      },
+      "residue": {
+        "mode": "history_conditioned",
+        "strength": "baseline"
+      },
+      "admissibility": {
+        "mode": "governed_delta_a",
+        "width": "baseline"
+      },
+      "topology": {
+        "mode": "natural"
+      }
+    },
+    "M2_random_orientation": {
+      "description": "Random orientation attack.",
+      "orientation": {
+        "mode": "randomized",
+        "coherence": "sampled_random",
+        "ordered_node_link": false,
+        "distribution": "matched_to_M0"
+      },
+      "residue": {
+        "mode": "history_conditioned",
+        "strength": "baseline"
+      },
+      "admissibility": {
+        "mode": "governed_delta_a",
+        "width": "baseline"
+      },
+      "topology": {
+        "mode": "natural"
+      }
+    },
+    "M3_shuffled_orientation": {
+      "description": "Ordering destruction attack.",
+      "orientation": {
+        "mode": "shuffled",
+        "coherence": "value_preserved_order_destroyed",
+        "ordered_node_link": false
+      },
+      "residue": {
+        "mode": "history_conditioned",
+        "strength": "baseline"
+      },
+      "admissibility": {
+        "mode": "governed_delta_a",
+        "width": "baseline"
+      },
+      "topology": {
+        "mode": "natural"
+      }
+    },
+    "M4_residue_only": {
+      "description": "Residue dominance attack.",
+      "orientation": {
+        "mode": "degraded",
+        "coherence": 0.0,
+        "ordered_node_link": false
+      },
+      "residue": {
+        "mode": "history_conditioned",
+        "strength": "dominant"
+      },
+      "admissibility": {
+        "mode": "governed_delta_a",
+        "width": "baseline"
+      },
+      "topology": {
+        "mode": "natural"
+      }
+    },
+    "M5_admissibility_only": {
+      "description": "Admissibility dominance attack.",
+      "orientation": {
+        "mode": "degraded",
+        "coherence": 0.0,
+        "ordered_node_link": false
+      },
+      "residue": {
+        "mode": "history_conditioned",
+        "strength": "baseline"
+      },
+      "admissibility": {
+        "mode": "governed_delta_a_dominant",
+        "width": "wide_or_optimized"
+      },
+      "topology": {
+        "mode": "natural"
+      }
+    },
+    "M6_fixed_topology_no_orientation": {
+      "description": "Topology dominance attack.",
+      "orientation": {
+        "mode": "removed",
+        "coherence": 0.0,
+        "ordered_node_link": false
+      },
+      "residue": {
+        "mode": "history_conditioned",
+        "strength": "baseline"
+      },
+      "admissibility": {
+        "mode": "governed_delta_a",
+        "width": "baseline"
+      },
+      "topology": {
+        "mode": "fixed_from_M0"
+      }
+    },
+    "M7_random_admissibility": {
+      "description": "Matched random admissibility control.",
+      "orientation": {
+        "mode": "coherent",
+        "coherence": 1.0,
+        "ordered_node_link": true
+      },
+      "residue": {
+        "mode": "history_conditioned",
+        "strength": "baseline"
+      },
+      "admissibility": {
+        "mode": "matched_random_filter",
+        "width": "matched_to_M0"
+      },
+      "topology": {
+        "mode": "natural"
+      }
+    }
+  },
+  "run_matrix": {
+    "debug": {
+      "sample_size": 1000,
+      "seeds": 8,
+      "purpose": "Catch implementation errors before main run."
+    },
+    "main": {
+      "sample_size": 100000,
+      "seeds": 64,
+      "purpose": "Primary claim-level evaluation."
+    },
+    "stress": {
+      "sample_size": 1000000,
+      "seeds": 64,
+      "purpose": "Variance, edge-case, and parameter sensitivity check."
+    }
+  },
+  "required_metrics": {
+    "primary": [
+      "closure_survival_rate",
+      "closure_duration_mean",
+      "collapse_rate"
+    ],
+    "explanatory": [
+      "orientation_coherence",
+      "residue_support",
+      "admissibility_width",
+      "topology_preservation"
+    ],
+    "statistical": [
+      "effect_size_vs_M0",
+      "confidence_interval_95",
+      "seed_variance",
+      "p_value_or_nonparametric_equivalent"
+    ],
+    "governance": [
+      "support_flag",
+      "downgrade_flag",
+      "falsification_flag",
+      "review_lock_trigger"
+    ]
+  },
+  "decision_rules": {
+    "support": {
+      "condition": "M0_full outperforms every attack model by tau >= 0.05 with stable seed variance.",
+      "textbook_update_trigger": "SUPPORTED_PENDING_REPLICATION"
+    },
+    "downgrade": {
+      "condition": "M0_full outperforms attack models weakly, inconsistently, or only under tuned parameters.",
+      "textbook_update_trigger": "MIXED_RESULT"
+    },
+    "falsify": {
+      "condition": "Any attack model matches or exceeds M0_full within tau.",
+      "textbook_update_trigger": "FALSIFICATION_EVENT"
+    }
+  }
+}

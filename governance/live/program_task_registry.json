@@ -1,0 +1,912 @@
+{
+  "registry_id": "MPF_PROGRAM_TASK_REGISTRY_LIVE_V1",
+  "schema_version": "1.0.0",
+  "authority": "Global Governance",
+  "last_updated": "2026-07-12",
+  "entries": [
+    {
+      "task_id": "PTR_GOV_SECTION_CLOSURE_001",
+      "title": "Governance-Only Closure Until Live Sections Are Satisfied",
+      "owner": "Global Governance",
+      "department": "governance",
+      "affected_departments": [
+        "governance",
+        "mathematics",
+        "physics",
+        "economics",
+        "theology",
+        "ethics"
+      ],
+      "tier": 0,
+      "category": "governance",
+      "priority": "blocker",
+      "status": "resolved",
+      "claim_class": "C1_DEFINED_PROVISIONAL",
+      "summary": "Freeze non-governance program work until live governance sections, routing rules, and authority layers are explicitly satisfied.",
+      "depends_on": [],
+      "blocks": [
+        "new_non_governance_program_tasks",
+        "new_department_expansion_work",
+        "new_bridge_expansion_work",
+        "new_theory_expansion_work",
+        "new_application_expansion_work"
+      ],
+      "linked_debt": [
+        "DEBT_GOV_LIVE_LEDGER_AMBIGUITY_001",
+        "DEBT_GOV_TOOL_ROUTING_METADATA_001",
+        "DEBT_GOV_LEXICON_UNDERCLASSIFICATION_001",
+        "DEBT_VALIDATOR_IMPORT_PATH_001",
+        "DEBT_GOV_INDUCTION_ROUTING_001"
+      ],
+      "linked_assets": [
+        "governance/live/governance_constitution.json",
+        "governance/live/authority_manifest.json",
+        "governance/live/program_task_registry.json",
+        "governance/live/research_debt_registry.json",
+        "governance/live/induction_queue.json",
+        "registry/induction_registry.json"
+      ],
+      "linked_bridges": [],
+      "deliverables": [
+        "Governance-first execution gate",
+        "Live governance section closure plan",
+        "Freeze rule for non-governance work"
+      ],
+      "completion_criteria": [
+        "All active governance blocker tasks are resolved or explicitly demoted by governance authority.",
+        "Live governance routing is complete enough to support deterministic agent execution.",
+        "The execution gate is explicitly lifted in the live Program Task Registry."
+      ],
+      "references": [
+        "governance/live/governance_constitution.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "notes": "Resolved on 2026-07-02 after the ordered governance debt list was fully discharged, live routing surfaces were normalized, and the governance-only closure condition was satisfied."
+    },
+    {
+      "task_id": "PTR_GOV_INDUCTION_ROUTING_001",
+      "title": "Require Registry and Queue for All New Inductions",
+      "owner": "Global Governance",
+      "department": "governance",
+      "affected_departments": [
+        "governance",
+        "mathematics",
+        "physics",
+        "economics",
+        "theology",
+        "ethics"
+      ],
+      "tier": 0,
+      "category": "governance",
+      "priority": "blocker",
+      "status": "resolved",
+      "claim_class": "C1_DEFINED_PROVISIONAL",
+      "summary": "Establish a governed induction intake system in which every new induction must be both canonically registered and live-queued before use.",
+      "depends_on": [
+        "PTR_GOV_SECTION_CLOSURE_001"
+      ],
+      "blocks": [
+        "unqueued_induction_use",
+        "unregistered_induction_use"
+      ],
+      "linked_debt": [
+        "DEBT_GOV_INDUCTION_ROUTING_001"
+      ],
+      "linked_assets": [
+        "governance/live/induction_queue.json",
+        "registry/induction_registry.json",
+        "registry/lexicon_gap_queue.json"
+      ],
+      "linked_bridges": [],
+      "deliverables": [
+        "Canonical induction registry",
+        "Live induction intake queue",
+        "Queue-to-registry routing rule"
+      ],
+      "completion_criteria": [
+        "Every new induction has both a registry entry and a queue entry.",
+        "Lexicon gap routing is linked from induction intake.",
+        "Ungoverned inductions are blocked from downstream program use."
+      ],
+      "references": [
+        "registry/lexicon_gap_queue.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "notes": "Resolved on 2026-07-01 after creating the live induction queue, canonical induction registry, textbook routing rule, and backfilling active inductions into both surfaces."
+    },
+    {
+      "task_id": "PTR_GOV_DEBT_DISCHARGE_ORDER_001",
+      "title": "Execute Governance Debt Discharge Command in Declared Order",
+      "owner": "Global Governance",
+      "department": "governance",
+      "affected_departments": [
+        "governance",
+        "mathematics",
+        "physics",
+        "economics",
+        "theology",
+        "ethics"
+      ],
+      "tier": 0,
+      "category": "governance",
+      "priority": "blocker",
+      "status": "resolved",
+      "claim_class": "C1_DEFINED_PROVISIONAL",
+      "summary": "Reduce governance debt in the explicit live-command order and report each discharge step under governed validation.",
+      "depends_on": [
+        "PTR_GOV_SECTION_CLOSURE_001",
+        "PTR_GOV_INDUCTION_ROUTING_001"
+      ],
+      "blocks": [
+        "out_of_order_governance_repair",
+        "ungoverned_debt_discharge_reporting"
+      ],
+      "linked_debt": [
+        "DEBT_GOV_LIVE_LEDGER_AMBIGUITY_001",
+        "DEBT_GOV_INDUCTION_ROUTING_001",
+        "DEBT_VALIDATOR_IMPORT_PATH_001",
+        "DEBT_GOV_TOOL_ROUTING_METADATA_001",
+        "DEBT_GOV_LEXICON_UNDERCLASSIFICATION_001",
+        "DEBT_GOV_DEPARTMENT_LAYOUT_001",
+        "DEBT_GOV_ECONOMICS_INDUCTION_001",
+        "DEBT_GOV_THEOLOGY_INDUCTION_001",
+        "DEBT_GOV_PHYSICS_SSOT_NORMALIZATION_001"
+      ],
+      "linked_assets": [
+        "governance/live/debt_discharge_command.json",
+        "governance/live/program_task_registry.json",
+        "governance/live/research_debt_registry.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "linked_bridges": [],
+      "deliverables": [
+        "Explicit live governance debt command",
+        "Ordered debt discharge execution",
+        "Per-step governed report trail"
+      ],
+      "completion_criteria": [
+        "Debts listed in governance/live/debt_discharge_command.json are reduced in the declared order or explicitly justified if blocked.",
+        "Each discharge step produces a governed report aligned to the required report structure.",
+        "The active governance-first execution gate can be reevaluated after the ordered list is complete."
+      ],
+      "references": [
+        "governance/live/debt_discharge_command.json",
+        "governance/live/research_debt_registry.json"
+      ],
+      "notes": "Resolved on 2026-07-02 after all debts listed in governance/live/debt_discharge_command.json were discharged in order with governed validation."
+    },
+    {
+      "task_id": "PTR_BACKFILL_DEPT_LAYOUT_001",
+      "title": "Normalize Department Peer Directory Layout",
+      "owner": "Global Governance",
+      "department": "governance",
+      "affected_departments": [
+        "mathematics",
+        "physics",
+        "economics",
+        "theology"
+      ],
+      "tier": 0,
+      "category": "governance",
+      "priority": "foundation",
+      "status": "resolved",
+      "claim_class": "C1_DEFINED_PROVISIONAL",
+      "summary": "Ensure all departments exist as peers under departments/ without structurally privileging any department.",
+      "depends_on": [
+        "MPF_GOV_DEPARTMENT_ROOT_INDUCTION_001"
+      ],
+      "blocks": [],
+      "linked_debt": [
+        "DEBT_GOV_DEPARTMENT_LAYOUT_001",
+        "DEBT_GOV_THEOLOGY_INDUCTION_001",
+        "DEBT_GOV_ECONOMICS_INDUCTION_001"
+      ],
+      "linked_assets": [
+        "governance/live/department_registry.json"
+      ],
+      "linked_bridges": [],
+      "deliverables": [
+        "Peer directory records for all inducted and planned departments",
+        "Normalized department root usage"
+      ],
+      "completion_criteria": [
+        "All active and planned departments have peer directory records.",
+        "Department Registry reflects directory paths.",
+        "No department is treated as structurally global by folder location."
+      ],
+      "references": [
+        "docs/textbook/mono_process_textbook_complete.md",
+        "governance/live/department_registry.json"
+      ],
+      "notes": "Resolved on 2026-07-02 by creating placeholder peer roots for mathematics, economics, and theology, and by recording the peer-root versus induction boundary in the live department layout manifest."
+    },
+    {
+      "task_id": "PTR_BACKFILL_PHYSICS_SSOT_001",
+      "title": "Normalize Physics Department SSOT Naming",
+      "owner": "Physics Department",
+      "department": "physics",
+      "affected_departments": [
+        "physics",
+        "mathematics"
+      ],
+      "tier": 2,
+      "category": "gap",
+      "priority": "foundation",
+      "status": "resolved",
+      "claim_class": "C1_DEFINED_PROVISIONAL",
+      "summary": "Normalize the Physics Department local SSOT filename to the common department_ssot.md convention or explicitly ratify the exception.",
+      "depends_on": [
+        "MPF_GOV_DEPARTMENT_REGISTRY_001"
+      ],
+      "blocks": [],
+      "linked_debt": [
+        "DEBT_GOV_PHYSICS_SSOT_NORMALIZATION_001"
+      ],
+      "linked_assets": [
+        "departments/physics/department_ssot.md",
+        "governance/live/department_registry.json"
+      ],
+      "linked_bridges": [],
+      "deliverables": [
+        "Normalized local SSOT filename or explicit exception record"
+      ],
+      "completion_criteria": [
+        "departments/physics/department_ssot.md exists or an explicit naming exception is recorded.",
+        "Physics scope and prohibited promotions remain declared.",
+        "Physics dependence on mathematics remains declared."
+      ],
+      "references": [
+        "departments/physics/department_ssot.md",
+        "governance/live/department_registry.json"
+      ],
+      "notes": "Resolved on 2026-07-02 by renaming the local physics SSOT to departments/physics/department_ssot.md and updating live routing references."
+    },
+    {
+      "task_id": "PTR_BACKFILL_MATH_PHYS_BOUNDARY_001",
+      "title": "Separate Mathematics and Physics Claim Routing",
+      "owner": "Global Governance",
+      "department": "governance",
+      "affected_departments": [
+        "mathematics",
+        "physics"
+      ],
+      "tier": 3,
+      "category": "bridge",
+      "priority": "blocker",
+      "status": "resolved",
+      "claim_class": "C1_DEFINED_PROVISIONAL",
+      "summary": "Prevent formal mathematical derivations from being treated as physical claims and prevent physical interpretations from being treated as mathematical theorems.",
+      "depends_on": [
+        "MPF_GOV_CANONICAL_OWNERSHIP_001",
+        "MPF_GOV_DEPARTMENT_REGISTRY_001"
+      ],
+      "blocks": [],
+      "linked_debt": [
+        "DEBT_GOV_MATH_PHYS_BOUNDARY_001"
+      ],
+      "linked_assets": [
+        "registry/governance/patches/MPF_CLEANUP_MATH_PHYS_BOUNDARY_001.json"
+      ],
+      "linked_bridges": [],
+      "deliverables": [
+        "Declared mathematics allowed claims",
+        "Declared physics allowed claims",
+        "Correspondence rule requirement",
+        "Vector routing split"
+      ],
+      "completion_criteria": [
+        "Mathematics allowed claims are declared.",
+        "Physics allowed claims are declared.",
+        "Correspondence rule requirement is declared.",
+        "Vector routing policy distinguishes math from physics."
+      ],
+      "references": [
+        "registry/governance/patches/MPF_CLEANUP_MATH_PHYS_BOUNDARY_001.json"
+      ],
+      "notes": "Resolved on 2026-07-02 by translating the existing cleanup patch into a live math/physics boundary manifest, binding the routing and claim-class rules into the authority layer, and aligning the textbook and physics SSOT with the same boundary."
+    },
+    {
+      "task_id": "PTR_PROGRAM_DEBT_DISCHARGE_ORDER_001",
+      "title": "Execute Non-Governance Program Debt Discharge Command in Declared Order",
+      "owner": "Global Governance",
+      "department": "governance",
+      "affected_departments": [
+        "mathematics",
+        "physics",
+        "economics",
+        "theology",
+        "ethics"
+      ],
+      "tier": 1,
+      "category": "governance",
+      "priority": "blocker",
+      "status": "resolved",
+      "claim_class": "C1_DEFINED_PROVISIONAL",
+      "summary": "Reduce remaining non-governance program debt in one explicit live-command order and report each discharge step under governed validation.",
+      "depends_on": [
+        "PTR_GOV_DEBT_DISCHARGE_ORDER_001"
+      ],
+      "blocks": [
+        "unordered_non_governance_debt_repair",
+        "ungoverned_non_governance_discharge_reporting"
+      ],
+      "linked_debt": [
+        "DEBT_PRIMITIVE_FORM_001",
+        "DEBT_DOMINANT_DOMAIN_001",
+        "DEBT_REALIZATION_RELATION_001",
+        "DEBT_D_NOTATION_ALIGNMENT_001",
+        "DEBT_OPERATOR_GENEALOGY_001"
+      ],
+      "linked_assets": [
+        "governance/live/program_debt_discharge_command.json",
+        "governance/live/program_task_registry.json",
+        "governance/live/research_debt_registry.json",
+        "docs/textbook/mono_process_textbook_complete.md"
+      ],
+      "linked_bridges": [],
+      "deliverables": [
+        "Explicit live non-governance debt command",
+        "Ordered non-governance debt discharge execution",
+        "Per-step governed report trail"
+      ],
+      "completion_criteria": [
+        "Debts listed in governance/live/program_debt_discharge_command.json are reduced in the declared order or explicitly justified if blocked.",
+        "Each discharge step produces a governed report aligned to the required report structure.",
+        "The remaining non-governance debt lane becomes explicitly auditable."
+      ],
+      "references": [
+        "governance/live/program_debt_discharge_command.json",
+        "governance/live/research_debt_registry.json"
+      ],
+      "notes": "Resolved on 2026-07-02 after the ordered non-governance debt list was fully discharged in sequence and the final operator-genealogy debt was closed under governed validation."
+    },
+    {
+      "task_id": "PTR_GOV_LIVE_LEDGER_TRANSITION_001",
+      "title": "Transition Governance from Proposal Specs to Live Ledgers",
+      "owner": "Global Governance",
+      "department": "governance",
+      "affected_departments": [
+        "governance",
+        "physics",
+        "ethics",
+        "theology",
+        "economics",
+        "mathematics"
+      ],
+      "tier": 0,
+      "category": "governance",
+      "priority": "blocker",
+      "status": "resolved",
+      "claim_class": "C1_DEFINED_PROVISIONAL",
+      "summary": "Separate governance specifications from live canonical ledgers and require operational consumers to read live ledgers only.",
+      "depends_on": [],
+      "blocks": [],
+      "linked_debt": [
+        "DEBT_GOV_LIVE_LEDGER_AMBIGUITY_001"
+      ],
+      "linked_assets": [
+        "governance/live/governance_constitution.json",
+        "governance/live/authority_manifest.json",
+        "governance/live/department_registry.json",
+        "governance/live/program_task_registry.json",
+        "governance/live/research_debt_registry.json"
+      ],
+      "linked_bridges": [],
+      "deliverables": [
+        "Live ledger layer",
+        "Specification layer",
+        "Authority manifest"
+      ],
+      "completion_criteria": [
+        "Operational governance artifacts are distinguishable from proposal specifications.",
+        "Live ledgers contain no proposal metadata.",
+        "Operational routing can resolve live ledgers deterministically."
+      ],
+      "references": [
+        "docs/external_program_audit_2026_06_28.md"
+      ],
+      "notes": "Live-ledger separation and authority routing are now established in the operational governance layer."
+    },
+    {
+      "task_id": "PTR_COLAB_DEPARTMENT_INDUCTION_001",
+      "title": "Induct Colab Department for Notebook and Result Archive Intake",
+      "owner": "Global Governance",
+      "department": "governance",
+      "affected_departments": [
+        "governance",
+        "analysis_intake",
+        "analysis",
+        "mathematics",
+        "colab"
+      ],
+      "tier": 1,
+      "category": "governance",
+      "priority": "medium",
+      "status": "resolved",
+      "claim_class": "C1_DEFINED_PROVISIONAL",
+      "summary": "Create the Colab Department and define C1/C2 evidence classification for .ipynb notebooks, result zips, and external Colab-style simulation bundles.",
+      "depends_on": [
+        "PTR_GOV_INDUCTION_ROUTING_001"
+      ],
+      "blocks": [],
+      "linked_debt": [],
+      "linked_assets": [
+        "departments/colab/department_ssot.md",
+        "departments/colab/AGENTS.md",
+        "departments/colab/README.md",
+        "governance/live/department_registry.json",
+        "governance/live/department_layout_manifest.json",
+        "governance/live/department_relationship_registry.json",
+        "registry/governance/patches/COLAB_DEPARTMENT_INDUCTION_001.json"
+      ],
+      "linked_bridges": [],
+      "deliverables": [
+        "Colab Department peer root",
+        "Local SSOT and AGENTS.md",
+        "Department registry binding",
+        "Evidence class split for notebook/result-zip artifacts"
+      ],
+      "completion_criteria": [
+        "Colab Department exists under departments/ with SSOT and AGENTS.md.",
+        "Live department registry, layout manifest, and relationship registry include colab.",
+        "Notebook and result zip evidence classes distinguish C1 provenance from C2 bounded outputs."
+      ],
+      "references": [
+        "registry/governance/patches/COLAB_DEPARTMENT_INDUCTION_001.json",
+        "departments/colab/department_ssot.md"
+      ],
+      "notes": "Resolved on 2026-07-22. Department establishment is C1; manifest/hash-backed bounded notebook outputs may be C2 inside declared domains."
+    },
+    {
+      "task_id": "PTR_COLAB_EXPERIMENT_SPEC_OBJECT_001",
+      "title": "Add Immutable Experiment Specification Object to Colab Evidence Protocol",
+      "owner": "Global Governance",
+      "department": "governance",
+      "affected_departments": [
+        "governance",
+        "analysis_intake",
+        "analysis",
+        "mathematics",
+        "colab"
+      ],
+      "tier": 1,
+      "category": "governance",
+      "priority": "medium",
+      "status": "resolved",
+      "claim_class": "C1_EXPERIMENT_SPECIFICATION",
+      "summary": "Add experiment_spec.json as an immutable pre-execution design object for Colab notebook and result-archive evidence.",
+      "depends_on": [
+        "PTR_COLAB_DEPARTMENT_INDUCTION_001"
+      ],
+      "blocks": [],
+      "linked_debt": [],
+      "linked_assets": [
+        "departments/colab/department_ssot.md",
+        "departments/colab/AGENTS.md",
+        "departments/colab/schemas/experiment_spec.schema.json",
+        "departments/colab/templates/experiment_spec.json",
+        "registry/governance/patches/COLAB_EXPERIMENT_SPEC_OBJECT_001.json"
+      ],
+      "linked_bridges": [],
+      "deliverables": [
+        "Experiment specification schema",
+        "Experiment specification template",
+        "C1 specification evidence class",
+        "Future C2 gate rule"
+      ],
+      "completion_criteria": [
+        "Colab SSOT requires immutable pre-execution experiment_spec.json for future C2 notebook/result classifications.",
+        "Template and schema exist under departments/colab/.",
+        "Claim and lexicon registries record C1/GAP_OPEN status without promotion."
+      ],
+      "references": [
+        "registry/governance/patches/COLAB_EXPERIMENT_SPEC_OBJECT_001.json",
+        "departments/colab/department_ssot.md"
+      ],
+      "notes": "Resolved on 2026-07-22. The specification is C1 design/provenance evidence and does not validate results by itself."
+    },
+    {
+      "task_id": "PTR_NB13_TOPOLOGICAL_INVARIANTS_CONTINUATION_GEOMETRY_001",
+      "title": "Design Notebook 13 Topological Invariants of Continuation Geometry",
+      "owner": "Colab Department",
+      "department": "colab",
+      "affected_departments": [
+        "colab",
+        "analysis_intake",
+        "analysis",
+        "mathematics",
+        "governance"
+      ],
+      "tier": 1,
+      "category": "research_design",
+      "priority": "high",
+      "status": "resolved",
+      "claim_class": "C1_SPECIFICATION_ONLY",
+      "summary": "Create a frozen pre-execution design for Notebook 13 to test whether topology-only continuation-graph invariants classify Notebook 12 reconvergence geometry and J.",
+      "depends_on": [
+        "PTR_COLAB_EXPERIMENT_SPEC_OBJECT_001"
+      ],
+      "blocks": [],
+      "linked_debt": [],
+      "linked_assets": [
+        "departments/colab/notebook_designs/notebook_13_topological_invariants/experiment_spec.json",
+        "departments/colab/notebook_designs/notebook_13_topological_invariants/experiment_spec.freeze_manifest.json",
+        "departments/colab/notebook_designs/notebook_13_topological_invariants/notebook_13_design.md",
+        "departments/colab/notebook_designs/notebook_13_topological_invariants/RT_Notebook_13_Topological_Invariants_of_Continuation_Geometry.ipynb",
+        "registry/governance/patches/NB13_TOPOLOGICAL_INVARIANTS_CONTINUATION_GEOMETRY_001.json"
+      ],
+      "linked_bridges": [],
+      "deliverables": [
+        "Frozen experiment specification",
+        "Notebook 13 design protocol",
+        "Notebook 13 scaffold",
+        "Lexicon GAP_OPEN entries for invariant terms",
+        "Governed C1 registry binding"
+      ],
+      "completion_criteria": [
+        "Notebook 13 has a frozen experiment_spec.json and freeze manifest.",
+        "Notebook scaffold defines the required invariant families and topology-only classification protocol.",
+        "Registries preserve C1 status and block claims of success before execution."
+      ],
+      "references": [
+        "registry/governance/patches/NB13_TOPOLOGICAL_INVARIANTS_CONTINUATION_GEOMETRY_001.json",
+        "departments/colab/notebook_designs/notebook_13_topological_invariants/notebook_13_design.md"
+      ],
+      "notes": "Resolved on 2026-07-22 as design work only. Execution remains pending."
+    },
+    {
+      "task_id": "PTR_COLAB_RESULTS_DIRECTORY_ARCHIVE_REGISTRY_001",
+      "title": "Add Governed Colab Results Directory and Archive Registry",
+      "owner": "Colab Department",
+      "department": "colab",
+      "affected_departments": [
+        "colab",
+        "analysis_intake",
+        "analysis",
+        "governance"
+      ],
+      "tier": 1,
+      "category": "governance",
+      "priority": "medium",
+      "status": "resolved",
+      "claim_class": "C1_DEFINED_PROVISIONAL",
+      "summary": "Create a governed Colab output root and archive registry requiring every result zip to be inducted and registered before citation or interpretation.",
+      "depends_on": [
+        "PTR_COLAB_DEPARTMENT_INDUCTION_001",
+        "PTR_COLAB_EXPERIMENT_SPEC_OBJECT_001"
+      ],
+      "blocks": [],
+      "linked_debt": [],
+      "linked_assets": [
+        "departments/colab/results/README.md",
+        "registry/colab_result_archive_registry.json",
+        "departments/colab/department_ssot.md",
+        "departments/colab/AGENTS.md",
+        "registry/governance/patches/COLAB_RESULTS_DIRECTORY_ARCHIVE_REGISTRY_001.json"
+      ],
+      "linked_bridges": [],
+      "deliverables": [
+        "Colab results directory",
+        "Colab result archive registry",
+        "Zip induction and registration rule",
+        "SSOT and AGENTS.md enforcement text"
+      ],
+      "completion_criteria": [
+        "departments/colab/results exists with local rules.",
+        "registry/colab_result_archive_registry.json exists and defines required zip fields.",
+        "Colab SSOT blocks zip citation without induction and archive-registry binding."
+      ],
+      "references": [
+        "registry/governance/patches/COLAB_RESULTS_DIRECTORY_ARCHIVE_REGISTRY_001.json",
+        "registry/colab_result_archive_registry.json",
+        "departments/colab/results/README.md"
+      ],
+      "notes": "Resolved on 2026-07-22. This creates governance routing only; archive entries remain empty until zips are inducted."
+    },
+    {
+      "task_id": "PTR_NB13_TOPOLOGICAL_INVARIANTS_COLAB_V2_ORDERED_CHUNKED_001",
+      "title": "Repair Notebook 13 Colab Scaffold with Ordered Chunked Execution",
+      "owner": "Colab Department",
+      "department": "colab",
+      "affected_departments": [
+        "colab",
+        "analysis_intake",
+        "analysis",
+        "governance"
+      ],
+      "tier": 1,
+      "category": "research_design_repair",
+      "priority": "high",
+      "status": "resolved",
+      "claim_class": "C1_SPECIFICATION_ONLY",
+      "summary": "Explain the Notebook 13 Colab NameError cascade and add a superseding ordered, chunked, checkpointed v2 notebook scaffold.",
+      "depends_on": [
+        "PTR_NB13_TOPOLOGICAL_INVARIANTS_CONTINUATION_GEOMETRY_001",
+        "PTR_COLAB_RESULTS_DIRECTORY_ARCHIVE_REGISTRY_001"
+      ],
+      "blocks": [],
+      "linked_debt": [],
+      "linked_assets": [
+        "departments/colab/notebook_designs/notebook_13_topological_invariants/notebook_13_colab_error_explanation.md",
+        "departments/colab/notebook_designs/notebook_13_topological_invariants/experiment_spec_v2.json",
+        "departments/colab/notebook_designs/notebook_13_topological_invariants/experiment_spec_v2.freeze_manifest.json",
+        "departments/colab/notebook_designs/notebook_13_topological_invariants/RT_Notebook_13_v2_Ordered_Chunked.ipynb",
+        "registry/governance/patches/NB13_TOPOLOGICAL_INVARIANTS_COLAB_V2_ORDERED_CHUNKED_001.json"
+      ],
+      "linked_bridges": [],
+      "deliverables": [
+        "Colab error explanation",
+        "Frozen v2 experiment specification",
+        "Ordered chunked Notebook 13 v2 scaffold",
+        "C1 registry binding"
+      ],
+      "completion_criteria": [
+        "NameError cascade is documented as downstream of missing path/state/function setup.",
+        "Notebook v2 contains a single ordered bootstrap cell and checkpointed chunk execution.",
+        "Registries preserve C1 status and block result interpretation before output induction."
+      ],
+      "references": [
+        "registry/governance/patches/NB13_TOPOLOGICAL_INVARIANTS_COLAB_V2_ORDERED_CHUNKED_001.json",
+        "departments/colab/notebook_designs/notebook_13_topological_invariants/notebook_13_colab_error_explanation.md"
+      ],
+      "notes": "Resolved on 2026-07-22 as scaffold repair only. Execution remains pending."
+    },
+    {
+      "task_id": "PTR_NB13_TOPOLOGICAL_INVARIANTS_RESULTS_001",
+      "title": "Review Notebook 13 v2 Result Archive",
+      "owner": "Colab Department",
+      "department": "colab",
+      "affected_departments": [
+        "colab",
+        "analysis_intake",
+        "analysis",
+        "governance",
+        "mathematics"
+      ],
+      "tier": 1,
+      "category": "result_review",
+      "priority": "high",
+      "status": "resolved",
+      "claim_class": "C2_BOUNDED_NOTEBOOK_OUTPUT_WITH_LIMITATIONS",
+      "summary": "Review and register the Notebook 13 v2 Colab result zip as bounded C2 output with limitations.",
+      "depends_on": [
+        "PTR_NB13_TOPOLOGICAL_INVARIANTS_COLAB_V2_ORDERED_CHUNKED_001",
+        "PTR_COLAB_RESULTS_DIRECTORY_ARCHIVE_REGISTRY_001"
+      ],
+      "blocks": [],
+      "linked_debt": [],
+      "linked_assets": [
+        "departments/colab/results/NB13_TOPOLOGICAL_INVARIANTS_CONTINUATION_GEOMETRY_002.zip",
+        "registry/colab_result_archive_registry.json",
+        "outputs/analysis_intake/review_NB13_TOPOLOGICAL_INVARIANTS_CONTINUATION_GEOMETRY_002.md",
+        "outputs/analysis_intake/review_NB13_TOPOLOGICAL_INVARIANTS_CONTINUATION_GEOMETRY_002.json",
+        "registry/governance/patches/NB13_TOPOLOGICAL_INVARIANTS_RESULTS_001.json"
+      ],
+      "linked_bridges": [],
+      "deliverables": [
+        "Archive registry entry",
+        "Result review report",
+        "C2 bounded-with-limitations claim binding",
+        "Live work index routing"
+      ],
+      "completion_criteria": [
+        "Result zip is hash-recorded and registered.",
+        "Review report records directly observed metrics and limitations.",
+        "Claim registry blocks implementation-independent and external validation claims."
+      ],
+      "references": [
+        "registry/governance/patches/NB13_TOPOLOGICAL_INVARIANTS_RESULTS_001.json",
+        "outputs/analysis_intake/review_NB13_TOPOLOGICAL_INVARIANTS_CONTINUATION_GEOMETRY_002.md"
+      ],
+      "notes": "Resolved on 2026-07-22. Follow-up controls remain required before stronger interpretation."
+    },
+    {
+      "task_id": "PTR_NB14_GENERIC_TOPOLOGY_FEATURE_ABLATION_001",
+      "title": "Design Notebook 14 Generic Topology Feature Ablation",
+      "owner": "Colab Department",
+      "department": "colab",
+      "affected_departments": [
+        "colab",
+        "analysis_intake",
+        "analysis",
+        "governance",
+        "mathematics"
+      ],
+      "tier": 1,
+      "category": "research_design",
+      "priority": "high",
+      "status": "resolved",
+      "claim_class": "C1_SPECIFICATION_ONLY",
+      "summary": "Create a frozen Notebook 14 design that excludes near-definitional Notebook 13 proxy features and runs generic topology feature-family ablations.",
+      "depends_on": [
+        "PTR_NB13_TOPOLOGICAL_INVARIANTS_RESULTS_001"
+      ],
+      "blocks": [],
+      "linked_debt": [],
+      "linked_assets": [
+        "departments/colab/notebook_designs/notebook_14_feature_ablation/experiment_spec.json",
+        "departments/colab/notebook_designs/notebook_14_feature_ablation/experiment_spec.freeze_manifest.json",
+        "departments/colab/notebook_designs/notebook_14_feature_ablation/notebook_14_design.md",
+        "departments/colab/notebook_designs/notebook_14_feature_ablation/RT_Notebook_14_Generic_Topology_Feature_Ablation.ipynb",
+        "registry/governance/patches/NB14_GENERIC_TOPOLOGY_FEATURE_ABLATION_001.json"
+      ],
+      "linked_bridges": [],
+      "deliverables": [
+        "Frozen experiment specification",
+        "Notebook 14 ablation design protocol",
+        "Notebook 14 scaffold",
+        "Lexicon GAP_OPEN entries",
+        "C1 registry binding"
+      ],
+      "completion_criteria": [
+        "Notebook 14 explicitly excludes branch-pair and merge-depth proxy features.",
+        "Notebook 14 defines all-generic, graph-size-only, forbidden-proxy-only, and one-family-removed ablation conditions.",
+        "Registries preserve C1 status and block result interpretation before output induction."
+      ],
+      "references": [
+        "registry/governance/patches/NB14_GENERIC_TOPOLOGY_FEATURE_ABLATION_001.json",
+        "departments/colab/notebook_designs/notebook_14_feature_ablation/notebook_14_design.md"
+      ],
+      "notes": "Resolved on 2026-07-22 as design work only. Execution remains pending."
+    },
+    {
+      "task_id": "PTR_NB14_GENERIC_TOPOLOGY_FEATURE_ABLATION_RESULTS_001",
+      "title": "Review Notebook 14 Generic Topology Feature Ablation Results",
+      "owner": "Colab Department",
+      "department": "colab",
+      "affected_departments": [
+        "colab",
+        "analysis_intake",
+        "analysis",
+        "governance",
+        "mathematics"
+      ],
+      "tier": 1,
+      "category": "result_review",
+      "priority": "high",
+      "status": "resolved",
+      "claim_class": "C2_BOUNDED_NOTEBOOK_OUTPUT_WITH_LIMITATIONS",
+      "summary": "Review and register the Notebook 14 feature-ablation result zip as bounded C2 output with limitations.",
+      "depends_on": [
+        "PTR_NB14_GENERIC_TOPOLOGY_FEATURE_ABLATION_001",
+        "PTR_COLAB_RESULTS_DIRECTORY_ARCHIVE_REGISTRY_001"
+      ],
+      "blocks": [],
+      "linked_debt": [],
+      "linked_assets": [
+        "departments/colab/results/NB14_GENERIC_TOPOLOGY_FEATURE_ABLATION_001.zip",
+        "registry/colab_result_archive_registry.json",
+        "outputs/analysis_intake/review_NB14_GENERIC_TOPOLOGY_FEATURE_ABLATION_001.md",
+        "outputs/analysis_intake/review_NB14_GENERIC_TOPOLOGY_FEATURE_ABLATION_001.json",
+        "registry/governance/patches/NB14_GENERIC_TOPOLOGY_FEATURE_ABLATION_RESULTS_001.json"
+      ],
+      "linked_bridges": [],
+      "deliverables": [
+        "Archive registry entry",
+        "Result review report",
+        "C2 bounded-with-limitations claim binding",
+        "Live work index routing"
+      ],
+      "completion_criteria": [
+        "Result zip is hash-recorded and registered.",
+        "Review report records observed ablation metrics and limitations.",
+        "Claim registry blocks implementation-independent and external validation claims."
+      ],
+      "references": [
+        "registry/governance/patches/NB14_GENERIC_TOPOLOGY_FEATURE_ABLATION_RESULTS_001.json",
+        "outputs/analysis_intake/review_NB14_GENERIC_TOPOLOGY_FEATURE_ABLATION_001.md"
+      ],
+      "notes": "Resolved on 2026-07-22. Manifest is present beside the zip but should be bundled inside future archives; grouped-evaluation controls remain required before stronger interpretation."
+    },
+    {
+      "task_id": "PTR_NB15_ARTICULATION_CONTINUATION_GEOMETRY_THEORY_001",
+      "title": "Design Notebook 15 Articulation and Continuation Geometry Theory",
+      "owner": "Colab Department",
+      "department": "colab",
+      "affected_departments": [
+        "colab",
+        "analysis_intake",
+        "analysis",
+        "governance",
+        "mathematics"
+      ],
+      "tier": 1,
+      "category": "research_design",
+      "priority": "high",
+      "status": "resolved",
+      "claim_class": "C1_SPECIFICATION_ONLY",
+      "summary": "Create a frozen Notebook 15 design that moves from articulation feature importance to theorem-candidate and proof-obligation analysis.",
+      "depends_on": [
+        "PTR_NB14_GENERIC_TOPOLOGY_FEATURE_ABLATION_RESULTS_001"
+      ],
+      "blocks": [],
+      "linked_debt": [],
+      "linked_assets": [
+        "departments/colab/notebook_designs/notebook_15_articulation_theory/experiment_spec.json",
+        "departments/colab/notebook_designs/notebook_15_articulation_theory/experiment_spec.freeze_manifest.json",
+        "departments/colab/notebook_designs/notebook_15_articulation_theory/notebook_15_design.md",
+        "departments/colab/notebook_designs/notebook_15_articulation_theory/RT_Notebook_15_Articulation_and_Continuation_Geometry.ipynb",
+        "registry/governance/patches/NB15_ARTICULATION_CONTINUATION_GEOMETRY_THEORY_001.json"
+      ],
+      "linked_bridges": [],
+      "deliverables": [
+        "Frozen experiment specification",
+        "Notebook 15 articulation theory design",
+        "Notebook 15 scaffold",
+        "Lexicon GAP_OPEN entries",
+        "C1 registry binding"
+      ],
+      "completion_criteria": [
+        "Notebook 15 does not use ML classifier accuracy as its primary method.",
+        "Notebook 15 produces theorem-candidate, counterexample, and proof-obligation outputs when executed.",
+        "Registries preserve C1 status and block theorem/causal claims before proof work."
+      ],
+      "references": [
+        "registry/governance/patches/NB15_ARTICULATION_CONTINUATION_GEOMETRY_THEORY_001.json",
+        "departments/colab/notebook_designs/notebook_15_articulation_theory/notebook_15_design.md"
+      ],
+      "notes": "Resolved on 2026-07-22 as design work only. Execution and formal proof remain pending."
+    },
+    {
+      "task_id": "PTR_NB15_ARTICULATION_CONTINUATION_GEOMETRY_THEORY_RESULTS_001",
+      "title": "Review Notebook 15 Articulation Theory Results",
+      "owner": "Colab Department",
+      "department": "colab",
+      "affected_departments": [
+        "colab",
+        "analysis_intake",
+        "analysis",
+        "governance",
+        "mathematics"
+      ],
+      "tier": 1,
+      "category": "result_review",
+      "priority": "high",
+      "status": "resolved",
+      "claim_class": "C2_THEOREM_CANDIDATE_EVIDENCE_WITH_LIMITATIONS",
+      "summary": "Review and register the Notebook 15 articulation theorem-candidate result zip as bounded C2 theorem-candidate evidence with limitations.",
+      "depends_on": [
+        "PTR_NB15_ARTICULATION_CONTINUATION_GEOMETRY_THEORY_001",
+        "PTR_COLAB_RESULTS_DIRECTORY_ARCHIVE_REGISTRY_001"
+      ],
+      "blocks": [],
+      "linked_debt": [],
+      "linked_assets": [
+        "departments/colab/results/NB15_ARTICULATION_CONTINUATION_GEOMETRY_THEORY_001.zip",
+        "registry/colab_result_archive_registry.json",
+        "outputs/analysis_intake/review_NB15_ARTICULATION_CONTINUATION_GEOMETRY_THEORY_001.md",
+        "outputs/analysis_intake/review_NB15_ARTICULATION_CONTINUATION_GEOMETRY_THEORY_001.json",
+        "registry/governance/patches/NB15_ARTICULATION_CONTINUATION_GEOMETRY_THEORY_RESULTS_001.json"
+      ],
+      "linked_bridges": [],
+      "deliverables": [
+        "Archive registry entry",
+        "Result review report",
+        "C2 theorem-candidate evidence binding",
+        "Live work index routing"
+      ],
+      "completion_criteria": [
+        "Result zip is hash-recorded and registered.",
+        "Review report records theorem-candidate statuses and counterexamples.",
+        "Claim registry blocks formal theorem, causal, implementation-independent, and external validation claims."
+      ],
+      "references": [
+        "registry/governance/patches/NB15_ARTICULATION_CONTINUATION_GEOMETRY_THEORY_RESULTS_001.json",
+        "outputs/analysis_intake/review_NB15_ARTICULATION_CONTINUATION_GEOMETRY_THEORY_001.md"
+      ],
+      "notes": "Resolved on 2026-07-22. Formal proof and causal direction remain pending."
+    }
+  ],
+  "metrics": {
+    "total_tasks": 18,
+    "planned_tasks": 0,
+    "active_tasks": 0,
+    "blocked_tasks": 0,
+    "tasks_by_tier": {
+      "0": 5,
+      "1": 11,
+      "2": 1,
+      "3": 1
+    }
+  }
+}

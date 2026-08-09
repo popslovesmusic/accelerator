@@ -1,0 +1,79 @@
+{
+  "discovery_method": "read-only repository text search for artifacts table consumers and DB documentation",
+  "known_dependencies": [
+    {
+      "dependency_id": "BEH-001",
+      "consumer": "scripts/build_claim_packet.py",
+      "observed_behavior": "Joins supersession_edges to artifacts twice to resolve from/to artifact paths.",
+      "required_mapping": "compatibility view must expose stable id mapping and path for both endpoints.",
+      "subprojections": [
+        "workspace_artifact_catalog",
+        "governed_source_inventory",
+        "generated_artifact_catalog",
+        "historical_artifact_register"
+      ],
+      "status": "MAPPED"
+    },
+    {
+      "dependency_id": "BEH-002",
+      "consumer": "scripts/claim_evidence_graph.py",
+      "observed_behavior": "Reads all artifacts and their orientation fields to construct claim/evidence graph nodes.",
+      "required_mapping": "composite compatibility view must preserve id, path, orientation_status, and class tag.",
+      "subprojections": [
+        "governed_source_inventory",
+        "workspace_artifact_catalog",
+        "generated_artifact_catalog",
+        "historical_artifact_register"
+      ],
+      "status": "MAPPED"
+    },
+    {
+      "dependency_id": "BEH-003",
+      "consumer": "scripts/db/audit_supersession_edges.py",
+      "observed_behavior": "LEFT JOINs supersession edges to artifacts and reports missing endpoint resolution.",
+      "required_mapping": "historical register and compatibility mapping must preserve legacy ids and unresolved endpoints.",
+      "subprojections": [
+        "historical_artifact_register",
+        "workspace_artifact_catalog",
+        "generated_artifact_catalog"
+      ],
+      "status": "MAPPED"
+    },
+    {
+      "dependency_id": "BEH-004",
+      "consumer": "scripts/db/build_supersession_edges.py",
+      "observed_behavior": "Resolves artifact ids by exact path and writes supersession edges in its own maintenance operation.",
+      "required_mapping": "exact raw-path lookup remains available; builder mutation remains outside this campaign.",
+      "subprojections": [
+        "all"
+      ],
+      "status": "MAPPED_WITH_MUTATION_BOUNDARY"
+    },
+    {
+      "dependency_id": "BEH-005",
+      "consumer": "registry/candidate_policy_registry.json",
+      "observed_behavior": "Declares registry db artifacts table as candidate universe source for some policies.",
+      "required_mapping": "candidate policies must identify whether they consume default production or compatibility view.",
+      "subprojections": [
+        "all"
+      ],
+      "status": "MAPPED_REQUIRES_POLICY_VERSION"
+    },
+    {
+      "dependency_id": "BEH-006",
+      "consumer": "scripts/db/index_artifacts.py and registry/db/README.md",
+      "observed_behavior": "Filesystem indexing is a separate projection/maintenance operation and not Analysis crawl.",
+      "required_mapping": "composite builder must remain separate from Analysis crawl routing.",
+      "subprojections": [
+        "workspace_artifact_catalog",
+        "generated_artifact_catalog",
+        "runtime_transient_catalog"
+      ],
+      "status": "MAPPED"
+    }
+  ],
+  "unresolved_dependencies": [
+    "dynamic SQL or external consumers not present in repository text search"
+  ],
+  "compatibility_rule": "No known static dependency may be dropped from the composite compatibility view."
+}

@@ -1,0 +1,43 @@
+{
+  "report_id": "GTR_INDUCTION_AUTHORITY_001_REPORT",
+  "patch_id": "GOV_INDUCTION_AUTHORITY_AND_VISIBILITY_001",
+  "transition_record_id": "GTR_INDUCTION_AUTHORITY_001",
+  "status": "APPLIED",
+  "gate_decision": "APPLY",
+  "gate_command": "python scripts/query_governance.py patch-gate --patch-id GOV_INDUCTION_AUTHORITY_AND_VISIBILITY_001 --target departments/analysis_intake/induction_queue/queue_registry.json --level diagnostic",
+  "resolved_preconditions": [
+    "PATCH_RECORD_REGISTERED",
+    "PROVENANCE_RECORD_REGISTERED",
+    "SOURCE_HASH_VERIFIED",
+    "CORE_RULE_BINDING_RESOLVES",
+    "TRANSITION_AUTHORITY_PACKET_REGISTERED",
+    "MIGRATION_PLAN_REGISTERED"
+  ],
+  "defer_conditions": [],
+  "reason": "Authority bindings resolved; eligible records were migrated and projections synchronized.",
+  "migration_executed": true,
+  "migrated_records": [
+    "RT_ASYM_OBSERVATION_ORIENTATION_EXCLUSION_INDUCTION_20260728_001",
+    "RT_BOUNDARY_ORIENTATION_ASYM_INDUCTION_20260728_001",
+    "RT_ASYM_SYMBOL_TYPE_RECONCILIATION_20260728_001"
+  ],
+  "research_registered": [
+    "RT_ASYM_OBSERVATION_ORIENTATION_EXCLUSION_INDUCTION_20260728_001",
+    "RT_BOUNDARY_ORIENTATION_ASYM_INDUCTION_20260728_001"
+  ],
+  "research_blocked_visible": [
+    "RT_ASYM_SYMBOL_TYPE_RECONCILIATION_20260728_001"
+  ],
+  "synchronization_report": "audit_outputs/governance_sync/sync_governance_20260801.json",
+  "validation": {
+    "source_hashes": "PASS",
+    "traceability": "PASS",
+    "runtime_refresh": "PASS",
+    "idempotence": "PASS",
+    "manual_notes_protected": "PASS"
+  },
+  "queue_mutated": false,
+  "preserved_sources_modified": false,
+  "promotion_performed": false,
+  "next_required_action": "Review the four pre-existing queued records with pending canonical registry bindings; they remain visible and were not silently altered."
+}

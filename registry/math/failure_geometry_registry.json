@@ -1,0 +1,61 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Registry for failure geometry, mapping preserved blockers to laws, operators, and excluded domains.",
+    "status": "implemented"
+  },
+  "failure_modes": [
+    {
+      "id": "FG-A001",
+      "name": "topology severance divergence hotspots",
+      "associated_laws": ["LAW028", "LAW033"],
+      "associated_operators": ["NavT", "Pi_A"],
+      "excluded_domain_link": "ED-A002",
+      "description": "Regions where topological reachability collapses, forcing divergent continuation histories."
+    },
+    {
+      "id": "FG-A002",
+      "name": "identity continuity ambiguity",
+      "associated_laws": ["LAW020", "LAW023"],
+      "associated_operators": ["residue_update", "Pi_A"],
+      "excluded_domain_link": "ED-A004",
+      "description": "Ambiguity regions where multiple histories satisfy local identity thresholds."
+    },
+    {
+      "id": "FG-A003",
+      "name": "reconstruction equivalence incompleteness",
+      "associated_laws": ["LAW016", "LAW017", "LAW023"],
+      "associated_operators": ["Xi", "Pi_A"],
+      "excluded_domain_link": "ED-A003",
+      "description": "Formal incompleteness in the mapping between observable projections and hidden continuation states."
+    },
+    {
+      "id": "FG-A004",
+      "name": "oscillatory non-stabilization regions",
+      "associated_laws": ["LAW011", "LAW022"],
+      "associated_operators": ["delta", "Pi_A"],
+      "excluded_domain_link": "ED-A005",
+      "description": "Persistence cycles that never reach a stabilized fixed point within the admissibility budget."
+    },
+    {
+      "id": "FG-A005",
+      "name": "cross-mechanism divergence regions",
+      "associated_laws": ["MT-LAW-A007", "LAW031"],
+      "associated_operators": ["delta", "K"],
+      "excluded_domain_link": "ED-A006",
+      "description": "Regimes where independent model classes (e.g., CA vs Agent) produce non-mappable outcomes."
+    },
+    {
+      "id": "FG-A006",
+      "name": "threshold-sensitive metastability",
+      "associated_laws": ["LAW021", "LAW027"],
+      "associated_operators": ["Pi_A"],
+      "excluded_domain_link": "ED-A001",
+      "description": "Meta-stable states whose persistence is hyper-sensitive to infinitesimal budget or threshold variations."
+    }
+  ],
+  "governance": {
+    "blocker_status": "preserved",
+    "counterexample_status": "not_discharged"
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "patch_id": "PATCH_GOVERNANCE_PATCH_002_TYPED_DEPENDENCY_RUNTIME_009",
+  "title": "Patch 002 Typed Dependency Runtime Semantics",
+  "status": "PARTIAL",
+  "timestamp": "2026-07-14T18:05:00-04:00",
+  "mode": "additive",
+  "depends_on": [
+    "PATCH_DB_GOVERNANCE_RUNTIME_004",
+    "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002",
+    "PATCH_GOVERNANCE_INVENTORY_PROVENANCE_AND_ADDITIVE_AUTHORITY_004",
+    "PATCH_GOVERNANCE_AMBIGUITY_RISK_CLASSIFICATION_AND_REMEDIATION_QUEUE_005",
+    "PATCH_GOVERNANCE_Q0_CLUSTER_SELECTION_AND_RESOLUTION_PACKET_006",
+    "PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007",
+    "PATCH_GOVERNANCE_MISSING_DEPENDENCY_003_CHAIN_REPAIR_008"
+  ],
+  "dependency_requirements": {
+    "PATCH_DB_GOVERNANCE_RUNTIME_004": {
+      "type": "REQUIRES_COMPLETED_PREDECESSOR",
+      "reason": "Patch 009 extends the runtime patch-chain implementation itself."
+    },
+    "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002": {
+      "type": "REQUIRES_EXISTING_EVIDENCE",
+      "reason": "Patch 009 repairs the dependency interpretation for the registered transitional inventory artifact without promoting its completion state."
+    },
+    "PATCH_GOVERNANCE_INVENTORY_PROVENANCE_AND_ADDITIVE_AUTHORITY_004": "REQUIRES_EXISTING_EVIDENCE",
+    "PATCH_GOVERNANCE_AMBIGUITY_RISK_CLASSIFICATION_AND_REMEDIATION_QUEUE_005": "REQUIRES_EXISTING_EVIDENCE",
+    "PATCH_GOVERNANCE_Q0_CLUSTER_SELECTION_AND_RESOLUTION_PACKET_006": "REQUIRES_EXISTING_EVIDENCE",
+    "PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007": "REQUIRES_EXISTING_EVIDENCE",
+    "PATCH_GOVERNANCE_MISSING_DEPENDENCY_003_CHAIN_REPAIR_008": "REQUIRES_EXISTING_EVIDENCE"
+  },
+  "classification": [
+    "GOVERNANCE_RUNTIME_EXTENSION",
+    "DEPENDENCY_SEMANTICS_REPAIR",
+    "TRANSITIONAL_EVIDENCE_BOUNDARY",
+    "PATCH_CHAIN_REDUCTION_FIX"
+  ],
+  "diagnosis": {
+    "primary": "DEPENDENCY_TYPE_COLLAPSE",
+    "secondary": "STATUS_SEMANTIC_COLLAPSE",
+    "evidence": [
+      "Patch-chain resolver previously treated every depends_on edge as requiring status applied.",
+      "Patch-chain status normalizer previously mapped PARTIAL to unknown.",
+      "Patch 002 is explicitly registered as transitional evidence with registration_gate PASS and inventory_completion_gate BLOCKED."
+    ]
+  },
+  "purpose": "Add typed dependency semantics to the governance patch-chain runtime so transitional evidence predecessors can satisfy existence-based edges without being falsely promoted to completed authority.",
+  "updated_artifacts": [
+    "scripts/query_governance.py",
+    "patches/PATCH_GOVERNANCE_INVENTORY_PROVENANCE_AND_ADDITIVE_AUTHORITY_004.json",
+    "patches/PATCH_GOVERNANCE_AMBIGUITY_RISK_CLASSIFICATION_AND_REMEDIATION_QUEUE_005.json",
+    "patches/PATCH_GOVERNANCE_Q0_CLUSTER_SELECTION_AND_RESOLUTION_PACKET_006.json",
+    "patches/PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007.json",
+    "registry/governance/patches/PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007.json",
+    "patches/PATCH_GOVERNANCE_MISSING_DEPENDENCY_003_CHAIN_REPAIR_008.json",
+    "registry/governance/patches/PATCH_GOVERNANCE_MISSING_DEPENDENCY_003_CHAIN_REPAIR_008.json",
+    "outputs/governance_inventory/patch_002_dependency_edge_inventory.json",
+    "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+    "docs/textbook/mono_process_textbook_complete.md",
+    "tests/governance_validation/test_patch_009_typed_dependency_runtime.py",
+    "registry/governance_change_ledger.json",
+    "registry/governance_hash_registry.json"
+  ],
+  "dependency_model": {
+    "allowed_dependency_types": {
+      "REQUIRES_COMPLETED_PREDECESSOR": "Dependency must reach its required terminal completion state.",
+      "REQUIRES_EXISTING_EVIDENCE": "Dependency must exist and be verifiable, but need not be complete or authoritative.",
+      "REQUIRES_SEMANTIC_RULE": "Dependency is satisfied by the named surviving rule or semantic authority.",
+      "HISTORICAL_LINEAGE_ONLY": "Dependency records provenance or sequence but does not gate runtime execution."
+    },
+    "default_type": "REQUIRES_COMPLETED_PREDECESSOR",
+    "proven_q0_reclassification": "REQUIRES_EXISTING_EVIDENCE"
+  },
+  "validation_policy": {
+    "full_project_validation": "SUSPENDED_PENDING_VALIDATOR_DEPARTMENT_COMPLETION",
+    "allowed_checks": [
+      "targeted_dependency_chain_tests",
+      "targeted_runtime_tests",
+      "json_parse_checks",
+      "compile",
+      "git_diff_check",
+      "git_status"
+    ]
+  },
+  "validation_results": {
+    "targeted_dependency_chain_tests": {
+      "status": "pass",
+      "checked_patch_ids": [
+        "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002",
+        "PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007",
+        "PATCH_GOVERNANCE_MISSING_DEPENDENCY_003_CHAIN_REPAIR_008"
+      ],
+      "chain_blocker_removed": "dependency_chain_not_satisfied",
+      "post_repair_runtime_state": {
+        "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002": "partial/defer",
+        "PATCH_GOVERNANCE_Q0_AUTHORITY_SCOPE_PARTITION_007": "partial/defer",
+        "PATCH_GOVERNANCE_MISSING_DEPENDENCY_003_CHAIN_REPAIR_008": "partial/defer"
+      }
+    },
+    "compileall": {
+      "status": "pass"
+    },
+    "git_diff_check": {
+      "status": "pass",
+      "warnings": [
+        "CRLF normalization warnings were reported by Git without content-level diff errors."
+      ]
+    },
+    "git_status": {
+      "status": "pass",
+      "scope": "patch_local_governance_runtime_repair_worktree_only"
+    },
+    "targeted_pytest": {
+      "status": "pass",
+      "test_files": [
+        "tests/governance_validation/test_patch_008_missing_dependency_chain_repair.py",
+        "tests/governance_validation/test_patch_009_typed_dependency_runtime.py"
+      ],
+      "passed": 4,
+      "failed": 0
+    }
+  },
+  "unrelated_changes_preserved": true
+}

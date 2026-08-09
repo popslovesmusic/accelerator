@@ -10,7 +10,11 @@ import hashlib
 import math
 import statistics
 from pathlib import Path
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import ThreadPoolExecutor, wait, FIRST_COMPLETED
+
+
+DEFAULT_SAFE_MAX_WORKERS = 2
+STDERR_TAIL_LINES = 20
 
 def log(msg, level="INFO"):
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -32,6 +36,25 @@ def hash_file(path):
         return hasher.hexdigest()
     except:
         return "unknown"
+
+def load_json_if_exists(path):
+    try:
+        p = Path(path)
+        if not p.exists():
+            return None
+        with open(p, "r", encoding="utf-8-sig") as f:
+            return json.load(f)
+    except:
+        return None
+
+
+def read_log_tail(path, max_lines=STDERR_TAIL_LINES):
+    try:
+        with open(path, "r", encoding="utf-8", errors="replace") as f:
+            lines = f.readlines()
+        return "".join(lines[-max_lines:]).strip()
+    except:
+        return ""
 
 class MultiSimRunner:
     def __init__(self, config_path, dry_run=False, max_workers=None, stop_on_failure=None):
@@ -59,6 +82,7 @@ class MultiSimRunner:
         (self.output_root / "jobs").mkdir(exist_ok=True)
 
         manifest_path = Path(self.config.get("manifest_path", "registry/tool_manifest.json"))
+        self.manifest_hash = hash_file(str(manifest_path))
         log(f"Loading tool manifest from {manifest_path}")
         with open(manifest_path, 'r') as f:
             self.manifest = json.load(f)
@@ -67,6 +91,7 @@ class MultiSimRunner:
 
         if self.max_workers is None:
             self.max_workers = self.config.get("execution", {}).get("max_workers", 4)
+        self.max_workers = self._resolve_safe_worker_count(self.max_workers)
         
         if self.stop_on_failure is None:
             self.stop_on_failure = self.config.get("governance", {}).get("stop_on_failure", True)
@@ -85,6 +110,8 @@ class MultiSimRunner:
             "config_path": str(self.config_path),
             "config_hash": self.config_hash,
             "source_commit": self.source_commit,
+            "tool_manifest_path": str(manifest_path),
+            "tool_manifest_hash": self.manifest_hash,
             "output_root": str(self.output_root),
             "jobs_count": len(self.config["jobs"]),
             "expanded_jobs_count": len(self.expanded_jobs),
@@ -95,6 +122,21 @@ class MultiSimRunner:
 
         if self.config.get("governance", {}).get("dry_run_first", True) and not self.dry_run:
             self.generate_dry_run_plan()
+
+    def _resolve_safe_worker_count(self, requested_workers):
+        execution_cfg = self.config.get("execution", {})
+        unsafe_parallelism = execution_cfg.get("allow_unsafe_parallelism", False)
+        if unsafe_parallelism:
+            return max(1, int(requested_workers))
+
+        worker_cap = int(execution_cfg.get("memory_safe_max_workers", DEFAULT_SAFE_MAX_WORKERS))
+        safe_workers = max(1, min(int(requested_workers), worker_cap))
+        if safe_workers != requested_workers:
+            log(
+                f"Clamping parallel workers from {requested_workers} to {safe_workers} for memory-safe execution.",
+                "WARNING",
+            )
+        return safe_workers
 
     def validate_jobs(self):
         log("Validating jobs...")
@@ -141,7 +183,7 @@ class MultiSimRunner:
             if not cert_exists:
                 readiness["missing_artifacts"][tool_name] = readiness["missing_artifacts"].get(tool_name, []) + ["certification_manifest"]
                 if governance.get("require_tool_certification", False):
-                    msg = f"Certification manifest missing for tool '{tool_name}' at {cert_path}"
+                    msg = f"Rigor Endorsement manifest missing for tool '{tool_name}' at {cert_path}"
                     log(msg, "ERROR")
                     readiness["runner_readiness_status"] = "blocked"
                     raise ValueError(msg)
@@ -320,27 +362,25 @@ class MultiSimRunner:
             cmd_list = shlex.split(cmd)
 
         try:
-            res = subprocess.run(
-                cmd_list,
-                capture_output=True,
-                text=True,
-                env=env,
-                timeout=self.config.get("execution", {}).get("timeout_seconds", 3600),
-                cwd=cwd
-            )
+            with open(stdout_log, 'w', encoding='utf-8', errors='replace') as stdout_handle, open(stderr_log, 'w', encoding='utf-8', errors='replace') as stderr_handle:
+                res = subprocess.run(
+                    cmd_list,
+                    stdout=stdout_handle,
+                    stderr=stderr_handle,
+                    text=True,
+                    env=env,
+                    timeout=self.config.get("execution", {}).get("timeout_seconds", 3600),
+                    cwd=cwd
+                )
             exit_code = res.returncode
-            stdout = res.stdout
-            stderr = res.stderr
         except Exception as e:
             exit_code = -1
-            stdout = ""
-            stderr = str(e)
+            with open(stderr_log, 'w', encoding='utf-8', errors='replace') as stderr_handle:
+                stderr_handle.write(str(e))
             log(f"Job {job_full_id} failed with error: {e}", "ERROR")
 
         end_time = time.time()
-        
-        with open(stdout_log, 'w') as f: f.write(stdout)
-        with open(stderr_log, 'w') as f: f.write(stderr)
+        stderr_tail = read_log_tail(stderr_log)
         
         result = {
             "job_id": job["job_id"],
@@ -353,7 +393,9 @@ class MultiSimRunner:
             "output_dir": str(out_dir),
             "tool": job["tool"],
             "claim_role": job.get("claim_role", "exploratory"),
-            "config_path": job_config
+            "config_path": job_config,
+            "falsification_vector": job.get("falsification_vector") or job.get("args", {}).get("falsification_vector"),
+            "stderr_tail": stderr_tail
         }
         return result
 
@@ -367,14 +409,33 @@ class MultiSimRunner:
 
     def run_parallel(self):
         with ThreadPoolExecutor(max_workers=self.max_workers) as executor:
-            future_to_job = {executor.submit(self.execute_job, job): job for job in self.expanded_jobs}
-            for future in as_completed(future_to_job):
-                res = future.result()
-                self.results.append(res)
-                if res["exit_code"] != 0 and self.stop_on_failure:
-                    log(f"Job {res['job_id']} failed. stop_on_failure is True, but parallel execution continues for already started jobs.", "WARNING")
-                    # Note: We can't easily cancel already running threads with ThreadPoolExecutor without more complexity
-                    # But we can avoid starting new ones if we had a queue.
+            pending_jobs = iter(self.expanded_jobs)
+            in_flight = {}
+            stop_submitting = False
+
+            while True:
+                while not stop_submitting and len(in_flight) < self.max_workers:
+                    try:
+                        job = next(pending_jobs)
+                    except StopIteration:
+                        break
+                    future = executor.submit(self.execute_job, job)
+                    in_flight[future] = job
+
+                if not in_flight:
+                    break
+
+                done, _ = wait(in_flight.keys(), return_when=FIRST_COMPLETED)
+                for future in done:
+                    res = future.result()
+                    del in_flight[future]
+                    self.results.append(res)
+                    if res["exit_code"] != 0 and self.stop_on_failure:
+                        stop_submitting = True
+                        log(
+                            f"Job {res['job_id']} failed. Halting submission of new parallel jobs; waiting for in-flight jobs to finish.",
+                            "WARNING",
+                        )
 
     def run_dependency_graph(self):
         log("Running dependency graph mode (simple implementation)...")
@@ -432,6 +493,8 @@ class MultiSimRunner:
             "timestamp": datetime.datetime.now().isoformat(),
             "source_commit": self.source_commit,
             "config_hash": self.config_hash,
+            "tool_manifest_path": str(self.config.get("manifest_path", "registry/tool_manifest.json")),
+            "tool_manifest_hash": getattr(self, "manifest_hash", "unknown"),
             "results": self.results
         }
         with open(self.output_root / "run_manifest.json", 'w') as f:
@@ -452,6 +515,22 @@ class MultiSimRunner:
 
     def generate_claim_gate_input(self):
         log("Generating claim gate input packet...")
+        scope_binding_path = self.config.get("governance", {}).get(
+            "claim_scope_binding_registry",
+            "registry/claim_scope_binding_registry.json"
+        )
+        scope_binding = load_json_if_exists(scope_binding_path)
+        mandatory_scope_phrase = None
+        if scope_binding and isinstance(scope_binding, dict):
+            mandatory_scope_phrase = (scope_binding.get("meta") or {}).get("mandatory_scope_phrase")
+
+        concept_mapping_path = self.config.get("math_core", {}).get(
+            "concept_mapping_path",
+            "registry/simulation_math_concept_mapping.json"
+        )
+        concept_mapping = load_json_if_exists(concept_mapping_path) or {"tool_mappings": {}}
+        tool_mappings = concept_mapping.get("tool_mappings", {}) if isinstance(concept_mapping, dict) else {}
+
         tools_used = {}
         for res in self.results:
             tname = res["tool"]
@@ -460,23 +539,49 @@ class MultiSimRunner:
                 tools_used[tname] = {
                     "tool_name": tname,
                     "model_class": t.get("model_class", ""),
+                    "mechanism_class": t.get("mechanism_class", ""),
+                    "implementation_language": t.get("implementation_language", ""),
+                    "backend": t.get("backend", ""),
                     "certification_level": t.get("certification_level", ""),
+                    "reference_implementation": t.get("reference_implementation"),
+                    "has_reference_implementation": t.get("has_reference_implementation"),
+                    "math_core_mapping": tool_mappings.get(tname, {}),
                     "recoverable_outputs": []
                 }
             tools_used[tname]["recoverable_outputs"].append(res["output_dir"])
+
+        mechanism_labels = [
+            (t.get("mechanism_class") or t.get("model_class") or "").strip()
+            for t in tools_used.values()
+        ]
+        mechanism_labels = [m for m in mechanism_labels if m]
 
         claim_gate_input = {
             "run_id": self.config["run_id"],
             "generated_by": "multi_sim_runner.py",
             "source_commit": self.source_commit,
             "config_hash": self.config_hash,
+            "tool_manifest_hash": getattr(self, "manifest_hash", "unknown"),
             "claim_interpretation_allowed": False,
+            "mandatory_scope_phrase": mandatory_scope_phrase or "Within these models...",
+            "claim_scope_binding_registry": scope_binding_path,
+            "math_core": {
+                "concept_mapping_path": concept_mapping_path,
+                "operator_registry_path": "registry/math/operator_registry.json"
+            },
             "tools": list(tools_used.values()),
             "evidence": {
-                "model_classes_count": len(set(t["model_class"] for t in tools_used.values())),
+                "model_classes_count": len(set(mechanism_labels)),
+                "mechanism_classes_count": len(set(mechanism_labels)),
                 "seeds_used": len(set(res["seed"] for res in self.results if res["seed"] is not None)),
+                "seed_set": sorted(list(set(res["seed"] for res in self.results if res["seed"] is not None))),
                 "recoverable_output_paths": [res["output_dir"] for res in self.results],
                 "falsification_run": any(res["claim_role"] == "falsification" for res in self.results),
+                "falsification_vectors": sorted(list(set(
+                    (res.get("falsification_vector") or "").strip()
+                    for res in self.results
+                    if res.get("falsification_vector")
+                ))),
                 "observables": [] # To be filled by analysis
             },
             "notes": ["This packet is evidence input only. It does not classify claims."]
@@ -555,12 +660,18 @@ class MultiSimRunner:
             collection[prefix].append(data)
 
     def generate_certification_evidence_packet(self):
-        log("Generating certification evidence packet...")
+        log("Generating rigor endorsement evidence packet...")
         tools_used = sorted(list(set(res["tool"] for res in self.results)))
         seeds = sorted(list(set(res["seed"] for res in self.results if res["seed"] is not None)))
         outputs = [res["output_dir"] for res in self.results]
         failures = [res["job_id"] for res in self.results if res["exit_code"] != 0]
-        
+
+        concept_mapping_path = self.config.get("math_core", {}).get(
+            "concept_mapping_path",
+            "registry/simulation_math_concept_mapping.json"
+        )
+        concept_mapping = load_json_if_exists(concept_mapping_path) or {"tool_mappings": {}}
+
         found_artifacts = []
         missing_artifacts = []
         
@@ -579,12 +690,20 @@ class MultiSimRunner:
 
         packet = {
             "run_id": self.config["run_id"],
+            "source_commit": self.source_commit,
+            "config_hash": self.config_hash,
+            "tool_manifest_hash": getattr(self, "manifest_hash", "unknown"),
             "tools_used": tools_used,
             "seeds_executed": seeds,
             "outputs_generated": outputs,
             "validation_artifacts_found": found_artifacts,
             "validation_artifacts_missing": missing_artifacts,
             "execution_failures": failures,
+            "math_core": {
+                "concept_mapping_path": concept_mapping_path,
+                "operator_registry_path": "registry/math/operator_registry.json",
+                "tool_mappings_present": sorted(list((concept_mapping.get("tool_mappings") or {}).keys())) if isinstance(concept_mapping, dict) else []
+            },
             "provenance_ready": len(missing_artifacts) == 0 and len(failures) == 0
         }
         

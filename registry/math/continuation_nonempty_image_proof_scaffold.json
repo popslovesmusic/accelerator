@@ -1,0 +1,68 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Symbolic proof scaffold for continuation requiring non-empty admissible image.",
+    "status": "provisional",
+    "last_updated": "2026-05-12"
+  },
+  "proof_scaffold": {
+    "theorem_reference": "MT-003",
+    "obligation_reference": "PO-003",
+    "target_statement": "A continuation_event exists only if the admissible image of the continuation candidate set under Pi_A and delta selection is non-empty.",
+    "logical_form": "existence(continuation_event) => image(Pi_A \u2218 delta_selection(candidate_set)) != empty",
+    "conditions": [
+      {
+        "condition_id": "NEI-001",
+        "statement": "The participation_space contains at least one non-null locus under the declared epsilon_null rule."
+      },
+      {
+        "condition_id": "NEI-002",
+        "statement": "The relevant admissibility_window is non-empty."
+      },
+      {
+        "condition_id": "NEI-003",
+        "statement": "Pi_A maps at least one candidate continuation into the admissibility_window."
+      },
+      {
+        "condition_id": "NEI-004",
+        "statement": "delta has at least one admissible candidate after selection and branch-pruning constraints are applied."
+      },
+      {
+        "condition_id": "NEI-005",
+        "statement": "No residue/orientation condition eliminates all candidate continuations."
+      }
+    ],
+    "symbolic_steps": [
+      {
+        "step": 1,
+        "expression": "C = { candidates | delta proposes candidates }",
+        "description": "Establish initial candidate set for continuation."
+      },
+      {
+        "step": 2,
+        "expression": "C_A = { c in C | Pi_A(c) == c }",
+        "description": "Filter candidates into admissibility window. If C_A is empty, no continuation possible (NEI-003)."
+      },
+      {
+        "step": 3,
+        "expression": "C_S = delta_selection(C_A)",
+        "description": "Apply selection and pruning rules. If C_S is empty, continuation fails (NEI-004)."
+      },
+      {
+        "step": 4,
+        "expression": "continuation_event in C_S",
+        "description": "The resulting event must be a member of the non-empty admissible selected set."
+      }
+    ],
+    "proof_status": "scaffolded",
+    "claim_boundary": "formal_procedural_only",
+    "not_claimed": [
+      "global continuation existence",
+      "unique continuation",
+      "physical actualization",
+      "continuation under empty admissibility window",
+      "continuation under total residue/orientation rejection"
+    ],
+    "provisional_status": true
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "campaign_id": "CAMPAIGN_D_OBL_D_001D_SEMANTIC_REVIEW_20260725_001",
+  "campaign_type": "BOUNDED_READ_ONLY_OBLIGATION_REVIEW",
+  "status": "REVIEW_COMPLETE_DISCHARGE_NOT_CLAIMED",
+  "obligation_id": "OBL-D-001D",
+  "claim_ceiling": "C1_DEFINED_PROVISIONAL",
+  "source_artifacts": [
+    "registry/math/d_semantics_obligation_registry.json",
+    "departments/analysis/campaigns/CAMPAIGN_D_SEMANTICS_THEORY_CRAWL_20260723_002/d_obligation_evidence_ledger.json",
+    "departments/analysis/campaigns/CAMPAIGN_D_SEMANTICS_THEORY_CRAWL_20260723_002/d_representable_distinction_counterexample_search_20260723.json",
+    "departments/analysis/campaigns/CAMPAIGN_D_SEMANTICS_THEORY_CRAWL_20260723_002/d_representable_distinction_broader_search_20260723.json",
+    "departments/analysis/campaigns/CAMPAIGN_D_MECHANIZED_PROJECTION_001/next_campaign.json",
+    "registry/governance/patches/PATCH_PI_RT_CALCULUS_020.json"
+  ],
+  "directly_observed": {
+    "live_status": "OPEN",
+    "research_state": "SEMANTIC_COMPONENTS_PROVISIONALLY_SPECIFIED",
+    "bridge_state": "DEFINEDNESS_RELATION_UNRESOLVED",
+    "proof_discharge_claimed": false,
+    "bounded_search_status": "PASS_BOUNDED_BROADER_SEARCH",
+    "bounded_search_rows": 216,
+    "matched_image_counterexamples": 594,
+    "outcome_label_proxy_collisions": 3,
+    "outcome_labels_with_both_representability_values": ["reconvergence", "partial_reconvergence", "obstruction"],
+    "remaining_requirements": ["human review", "qualification of CLAIM_020_005", "formal representability predicate review"]
+  },
+  "review_findings": [
+    {
+      "finding_id": "D001D-F1",
+      "finding": "Projection-only representability is not supported by the bounded search.",
+      "basis": "The same projected image can occur with different witness, trace, or history conditions and different representability values.",
+      "status": "BOUNDED_SUPPORT_FOR_REJECTION"
+    },
+    {
+      "finding_id": "D001D-F2",
+      "finding": "Outcome labels are not sufficient representability predicates.",
+      "basis": "All three tested outcome labels contain both representable and nonrepresentable cases.",
+      "status": "BOUNDED_SUPPORT_FOR_REJECTION"
+    },
+    {
+      "finding_id": "D001D-F3",
+      "finding": "The candidate predicate requires typed witness, compatible trace, and explicit history in the tested model.",
+      "basis": "The broader search declares that predicate and reports history omission as a representative divergence.",
+      "status": "CANDIDATE_SCOPE_ONLY"
+    }
+  ],
+  "canonical_claim_review": {
+    "claim_id": "CLAIM_020_005",
+    "current_statement": "Projection preserves representable distinction while not exhausting the primitive affect/effect condition.",
+    "decision": "QUALIFICATION_REQUIRED_BEFORE_TREATING_AS_SUPPORTED",
+    "reason": "The broad statement exceeds the bounded evidence, whose result rejects projection-only proxies but does not establish general semantic preservation.",
+    "proposed_bounded_wording": "Within a declared typed witness, compatible trace, and explicit-history scope, the candidate representability predicate may be preserved under the tested projection route; broader preservation remains unresolved.",
+    "application_status": "BOUNDED_QUALIFICATION_APPROVED_BY_HUMAN_REVIEW_RECORD"
+  },
+  "obligation_disposition": {
+    "status": "OPEN",
+    "discharge_claimed": false,
+    "promotion_allowed": false,
+    "human_review_decision": "HUMAN_REVIEW_CLAIM_020_005_20260725_001",
+    "next_gate": "Human review of the candidate predicate and explicit decision on CLAIM_020_005 qualification, followed by an independently checked typed representability specification."
+  },
+  "blocking_conditions": [
+    "No formal semantic representability predicate has been independently accepted.",
+    "The search is finite and synthetic.",
+    "Human review remains pending.",
+    "OBL-D-001E remains dependent on OBL-D-001D.",
+    "D theorem promotion remains blocked."
+  ],
+  "actions_not_taken": [
+    "No canonical claim wording was changed.",
+    "No obligation was closed.",
+    "No theorem or axiom was promoted.",
+    "No Lean or source implementation was modified.",
+    "No simulation or external validation was executed."
+  ],
+  "result": "PASS_BOUNDED_SEMANTIC_REVIEW_OPEN_OBLIGATION"
+}

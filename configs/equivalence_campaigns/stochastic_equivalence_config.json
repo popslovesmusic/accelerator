@@ -1,0 +1,24 @@
+{
+  "campaign_id": "EC-20260517-STOCHASTIC-001",
+  "tool_family": "stochastic",
+  "prediction_binding_id": "PB-001-THRESHOLD",
+  "dataset_ids": ["DS-001-SYNTHETIC-STOCHASTIC"],
+  "tools": {
+    "cpp": "stochastic_sim_cpp",
+    "python": "stochastic_sim_v1"
+  },
+  "metrics": ["crossing_fraction", "mean_x", "std_x"],
+  "tolerances": {
+    "absolute": 1e-6,
+    "relative": 1e-4
+  },
+  "falsification_protocols": [
+    "shuffle_control",
+    "parameter_ablation"
+  ],
+  "governance_boilerplate": {
+    "source_relation": "(E≠0) ⇔R δ(E>0)",
+    "non_separability_acknowledged": true,
+    "required_statement": "Observed signatures are interpreted only through restricted local analog structure."
+  }
+}

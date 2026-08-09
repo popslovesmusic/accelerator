@@ -1,0 +1,106 @@
+{
+  "registry_id": "CROSS_DOMAIN_CONTINUATION_TRACE_REGISTRY",
+  "version": "1.0.0",
+  "status": "C1_DEFINED_PROVISIONAL",
+  "source_patch": "APPENDIX_F_CROSS_DOMAIN_CONTINUATION_TRACE_001",
+  "source_bridge": "OPEN_BRIDGE_003",
+  "purpose": "Define provisional typed cross-domain continuation trace, admissibility-preserving handoff, trace preservation, and orientation-reference continuity without promoting observer, time, consciousness, or identity-survival claims.",
+  "claim_cap": "THEORETICAL_ONLY",
+  "unresolved_continuation": {
+    "symbol": "UC",
+    "name": "Unresolved Continuation",
+    "canonical_form": "UC(C_i; D_i, R_i, O_i, B_i)",
+    "definition": "A well-formed continuation candidate whose admissibility status remains undecided at a declared projection boundary.",
+    "required_fields": [
+      "continuation_candidate",
+      "source_domain",
+      "residue_context",
+      "orientation_reference",
+      "projection_boundary"
+    ],
+    "negative_constraints": [
+      "not_temporal_waiting_state",
+      "not_subjective_experience",
+      "not_identity_persistence",
+      "not_observer_survival",
+      "not_consciousness_claim"
+    ]
+  },
+  "handoff_operator": {
+    "symbol": "H_adm",
+    "name": "Admissibility-Preserving Handoff",
+    "canonical_form": "H_adm(UC_i, tau_{i->j}) -> UC_j | bottom_C^{type} | bottom_C^{adm} | bottom_C^{trace}",
+    "definition": "A typed transition rule that carries a scoped unresolved continuation candidate across a declared domain transition only when type compatibility, admissibility context, residue trace, and orientation-reference continuity are preserved.",
+    "domain": [
+      "unresolved_continuation",
+      "domain_transition_type"
+    ],
+    "codomain": [
+      "unresolved_continuation",
+      "continuation_failure"
+    ],
+    "required_transition_fields": [
+      "source_domain",
+      "target_domain",
+      "projection_boundary",
+      "admissibility_context",
+      "trace_invariant_set",
+      "orientation_reference_map"
+    ],
+    "failure_outputs": {
+      "bottom_C_type": "Produced when source and target domains lack a declared transition type.",
+      "bottom_C_adm": "Produced when the target admissibility context cannot admit the carried continuation candidate.",
+      "bottom_C_trace": "Produced when declared trace invariants or orientation-reference continuity are not preserved."
+    }
+  },
+  "trace_preservation": {
+    "symbol": "TraceInv",
+    "canonical_form": "TraceInv(C_i, C_j, tau_{i->j})",
+    "definition": "The declared invariant set that must remain recoverable before and after a domain transition.",
+    "minimum_invariants": [
+      "source_domain",
+      "target_domain",
+      "projection_boundary",
+      "residue_trace",
+      "admissibility_context",
+      "orientation_reference"
+    ],
+    "preservation_rule": "Trace preservation holds only when each required invariant remains recoverable after applying H_adm.",
+    "collapse_rule": "If any required invariant is missing, aliased, or contradicted, the handoff yields bottom_C^{trace} rather than a lawful continuation object."
+  },
+  "orientation_reference_continuity": {
+    "symbol": "ORC",
+    "canonical_form": "ORC(O_i, O_j; tau_{i->j})",
+    "definition": "A declared compatibility relation between source and target orientation references under a projection-boundary transition.",
+    "requirements": [
+      "source_orientation_reference_declared",
+      "target_orientation_reference_declared",
+      "orientation_reference_map_declared",
+      "no_spatial_direction_substitution",
+      "no_primitive_time_substitution"
+    ],
+    "failure_output": "bottom_C^{trace}"
+  },
+  "bridge_disposition": {
+    "bridge_id": "OPEN_BRIDGE_003",
+    "previous_status": "DEFERRED_PENDING_FORMALIZATION",
+    "new_status": "PROVISIONALLY_FORMALIZED_PENDING_VALIDATION",
+    "promotion_allowed": false,
+    "claim_cap": "THEORETICAL_ONLY"
+  },
+  "validation_obligations": [
+    "Construct a positive typed handoff example across two declared projection domains.",
+    "Construct a type-failure counterexample where no tau_{i->j} is declared.",
+    "Construct a trace-failure counterexample where residue or orientation-reference invariants are lost.",
+    "Audit existing typed-continuation-domain rules for compatibility with H_adm.",
+    "Define whether H_adm composes associatively across more than one projection boundary."
+  ],
+  "non_promotion_boundaries": [
+    "No subjective continuity claim.",
+    "No consciousness persistence claim.",
+    "No trans-domain identity survival claim.",
+    "No primitive time claim.",
+    "No observer persistence claim.",
+    "No empirical continuity claim."
+  ]
+}

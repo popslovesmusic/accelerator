@@ -1,0 +1,129 @@
+{
+  "registry_id": "MPF_ECONOMICS_STATUS_REGISTRY_V1",
+  "status": "ACTIVE",
+  "purpose": "Canonical live status registry for all formal objects in the Economics Program.",
+  "object_types": [
+    "INDUCTION",
+    "AXIOM",
+    "DEFINITION",
+    "LEMMA",
+    "APPLICATION_PROJECTION",
+    "INDEX",
+    "CAMPAIGN"
+  ],
+  "status_records": [
+    {
+      "object_id": "ECONOMICS_APP_INDUCTION_001",
+      "object_name": "Economics Application Induction",
+      "object_type": "INDUCTION",
+      "current_status": "PROVISIONAL_INDUCTION_TARGET",
+      "claim_level": {
+        "current": "C1_PROVISIONAL_APPLICATION_SCAFFOLD",
+        "maximum_allowed": "C1_PROVISIONAL_APPLICATION_SCAFFOLD"
+      },
+      "dependency_tracking": {
+        "depends_on": [
+          "D(A|B)>epsilon_a",
+          "Org_a"
+        ],
+        "supports": [
+          "ECON_APP_ORG_A_001",
+          "ECON_APP_SIGMA_D_001",
+          "ECON_APP_DEFORMATION_001",
+          "ECON_APP_DWI_001"
+        ]
+      },
+      "audit_tracking": {
+        "last_update": "2026-06-18T18:24:42-04:00"
+      }
+    },
+    {
+      "object_id": "ECON_APP_ORG_A_001",
+      "object_name": "Org_a Axioms",
+      "object_type": "AXIOM",
+      "current_status": "C1_DEFINED_PROVISIONAL",
+      "claim_level": {
+        "current": "C1_defined_provisional",
+        "maximum_allowed": "C1_defined_provisional"
+      },
+      "dependency_tracking": {
+        "depends_on": [
+          "ECONOMICS_APP_INDUCTION_001"
+        ],
+        "supports": [
+          "ECON_APP_SIGMA_D_001"
+        ]
+      },
+      "audit_tracking": {
+        "last_update": "2026-06-18T18:36:19-04:00"
+      }
+    },
+    {
+      "object_id": "ECON_APP_SIGMA_D_001",
+      "object_name": "Sigma_D Structures",
+      "object_type": "DEFINITION",
+      "current_status": "PROVISIONAL_INDUCTION_TARGET",
+      "claim_level": {
+        "current": "C1_defined_provisional",
+        "maximum_allowed": "C1_defined_provisional"
+      },
+      "dependency_tracking": {
+        "depends_on": [
+          "ECON_APP_ORG_A_001"
+        ],
+        "supports": [
+          "ECON_APP_DEFORMATION_001"
+        ]
+      },
+      "audit_tracking": {
+        "last_update": "2026-06-18T18:24:42-04:00"
+      }
+    },
+    {
+      "object_id": "ECON_APP_DEFORMATION_001",
+      "object_name": "Admissible Deformation of Sigma_D",
+      "object_type": "LEMMA",
+      "current_status": "PROVISIONAL_INDUCTION_TARGET",
+      "claim_level": {
+        "current": "C1_defined_provisional",
+        "maximum_allowed": "C1_defined_provisional"
+      },
+      "dependency_tracking": {
+        "depends_on": [
+          "ECON_APP_SIGMA_D_001"
+        ],
+        "supports": [
+          "ECON_APP_DWI_001"
+        ]
+      },
+      "audit_tracking": {
+        "last_update": "2026-06-18T18:24:42-04:00"
+      }
+    },
+    {
+      "object_id": "ECON_APP_DWI_001",
+      "object_name": "Distinction Wealth Index",
+      "object_type": "INDEX",
+      "current_status": "PROVISIONAL_INDUCTION_TARGET",
+      "claim_level": {
+        "current": "C1_defined_provisional",
+        "maximum_allowed": "C1_defined_provisional"
+      },
+      "dependency_tracking": {
+        "depends_on": [
+          "ECON_APP_DEFORMATION_001"
+        ],
+        "supports": []
+      },
+      "audit_tracking": {
+        "last_update": "2026-06-18T18:24:42-04:00"
+      }
+    }
+  ],
+  "governance_rules": [
+    {
+      "rule_id": "ECON_TSR_001",
+      "rule": "No economics projection, metric, or law may be promoted without a corresponding status registry entry in this file."
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "spec_id": "NB18_DOMAIN_PROJECTION_RESIDUE_001_RECONSTRUCTED_SPEC",
+  "campaign_id": "NB18_DOMAIN_PROJECTION_RESIDUE_001",
+  "schema_version": "1.0.0",
+  "status": "POST_EXECUTION_RECONSTRUCTION",
+  "created_at": "2026-07-23T00:00:00Z",
+  "execution_manifest_created_at": "NOT_DECLARED_IN_RUN_MANIFEST",
+  "source_notebooks": [
+    "departments/colab/notebook_designs/notebook_18_domain_projection_primitive_hierarchy/RT_Notebook_18_Domain_Projection_and_Primitive_Hierarchy.ipynb",
+    "departments/colab/notebook_designs/notebook_18_domain_projection_primitive_hierarchy/RT_Notebook_18_Domain_Projection_and_Primitive_Hierarchy_COMPLETE.ipynb",
+    "departments/colab/notebook_designs/notebook_18_domain_projection_primitive_hierarchy/RT_Notebook_18_Every_Domain_Projection_Generates_Residue.ipynb"
+  ],
+  "source_result_archive": "departments/colab/results/RT_Notebook_18_outputs.zip",
+  "provenance_warning": "This document reconstructs the declared design and operational settings after execution. It is not a pre-execution immutable specification and does not satisfy the future-C2 specification gate.",
+  "research_question": "How can a single primitive relational condition remain invariant while richer structures become admissible as domain degrees of freedom increase, and does every genuine projection between distinct domains necessarily generate residue?",
+  "null_hypothesis": "No coherent domain-relative primitive hierarchy exists, and at least one admissible cross-domain projection can have zero residue under each non-definitional residue criterion.",
+  "experimental_hypothesis": "The core primitive remains invariant across declared domains, while every genuine cross-domain projection generates positive residue under an appropriately operationalized residue criterion.",
+  "independent_variables": [
+    {
+      "name": "source_domain",
+      "values": ["core", "ordinal", "gradient"],
+      "definition": "Declared source domain of the finite relational organization."
+    },
+    {
+      "name": "target_domain",
+      "values": ["ordinal", "gradient", "temporal"],
+      "definition": "Declared target domain of the finite relational organization."
+    },
+    {
+      "name": "source_size",
+      "values": [1, 2, 3],
+      "definition": "Finite source organization size."
+    },
+    {
+      "name": "target_size",
+      "values": [1, 2, 3],
+      "definition": "Finite target organization size."
+    },
+    {
+      "name": "admissibility_class",
+      "values": ["weak", "strong"],
+      "definition": "Weak total-map admissibility versus conservative coverage/reference/orientation/relation-preserving admissibility."
+    },
+    {
+      "name": "residue_criterion",
+      "values": ["information", "structural", "reference", "typed"],
+      "definition": "Operational residue criterion used to test the universal hypothesis."
+    }
+  ],
+  "dependent_variables": [
+    "projection_record_count",
+    "strong_projection_count",
+    "residue_component_rates",
+    "zero_residue_counterexample_count",
+    "counterexample_rate",
+    "universal_hypothesis_survival_by_criterion"
+  ],
+  "controls": [
+    "Finite relational organizations only.",
+    "Binary orientation labels, undirected relational edges, optional reference member, and declared domain type are explicit model fields.",
+    "Weak and strong admissibility are reported separately.",
+    "The target safety threshold is 500; oversized target blocks use deterministic stratified enumeration recorded in the run manifest.",
+    "The falsification rule is fixed before interpretation: one admissible zero-residue cross-domain projection falsifies the universal claim for that criterion and model class.",
+    "Typed residue is reported separately because domain mismatch contributes directly to it."
+  ],
+  "random_seed": 180018,
+  "parameter_space": {
+    "source_domains": ["core", "ordinal", "gradient"],
+    "target_domains": ["ordinal", "gradient", "temporal"],
+    "source_sizes": [1, 2, 3],
+    "target_sizes": [1, 2, 3],
+    "projection_classes": ["weak", "strong"],
+    "residue_criteria": ["information", "structural", "reference", "typed"],
+    "target_safety_threshold": 500,
+    "projection_record_count": 1217346,
+    "strong_projection_count": 11762
+  },
+  "termination_conditions": [
+    "Enumerate all declared finite blocks and total maps, subject to deterministic target stratification above the safety threshold.",
+    "Stop after all weak and strong admissible records are evaluated.",
+    "Export counterexamples rather than suppressing them.",
+    "Mark typed residue as definition-dependent in interpretation."
+  ],
+  "expected_outputs": [
+    "projection_records.csv",
+    "projection_summary.csv",
+    "zero_residue_counterexamples.csv",
+    "residue_component_rates.csv",
+    "hypothesis_test_results.csv",
+    "figure_residue_rates.png",
+    "figure_zero_residue_by_domain_pair.png",
+    "findings18.json",
+    "run_manifest18.json",
+    "block_manifest.csv"
+  ],
+  "interpretation_protocol": [
+    "A single zero-residue admissible projection falsifies the universal residue claim only for the tested criterion and finite model class.",
+    "A surviving criterion is not a theorem or proof outside the tested model class.",
+    "Typed residue must be labeled partly definitional because domain mismatch contributes directly.",
+    "Preserve non-identifiability, counterexamples, bounded enumeration, and stratified-block limitations.",
+    "Cap the result at C2 bounded notebook output with limitations."
+  ]
+}

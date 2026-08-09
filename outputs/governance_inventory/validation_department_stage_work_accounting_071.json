@@ -1,0 +1,194 @@
+{
+  "patch_id": "PATCH_VALIDATION_DEPARTMENT_STAGE_WORK_ACCOUNTING_071",
+  "mode": "BOUNDED_IMPLEMENTATION",
+  "generated_at": "2026-07-15T19:10:00-04:00",
+  "stage_contract_determination": {
+    "engine_validation": {
+      "implementation": "scripts/global_validate.py::EngineValidator.run",
+      "governed_role": "REQUIRED_STAGE_WITH_CONDITIONAL_WORK_SURFACE",
+      "work_expectation": "CONDITIONALLY_REQUIRED",
+      "basis": [
+        "scripts/global_validate.py::_build_validation_stage_plan includes engine_validation in the full governed stage plan.",
+        "docs/governance/GLOBAL_VALIDATION_ROUTINE.md classifies engine remediation around C4 engine smoke-test execution.",
+        "Work is validly absent only when no eligible C4 engine surfaces exist."
+      ]
+    },
+    "math_program_validation": {
+      "implementation": [
+        "scripts/global_validate.py::MathProgramValidator.run",
+        "scripts/math/math_program_validate.py::validate_math_program"
+      ],
+      "governed_role": "REQUIRED_STAGE_WITH_REQUIRED_WORK_SURFACE",
+      "work_expectation": "REQUIRED",
+      "basis": [
+        "scripts/global_validate.py::_build_validation_stage_plan includes math_program_validation in the full governed stage plan.",
+        "scripts/math/math_program_validate.py defines a fixed governed validator catalog and therefore expects substantive validator execution when invoked."
+      ]
+    }
+  },
+  "pre_patch_work_accounting": {
+    "engine_validation": {
+      "status_behavior": "Returned success even when tools_tested was empty.",
+      "missing_fields": [
+        "work_expectation",
+        "work_state",
+        "targets_discovered",
+        "targets_attempted",
+        "targets_completed",
+        "zero_work_reason"
+      ]
+    },
+    "math_program_validation": {
+      "status_behavior": "Returned pass or warning based on aggregate sub-validator status without explicit substantive-work accounting.",
+      "report_defect": "Patch 069 observed items_checked=0 at the report layer because stage accounting was not carried through truthfully."
+    }
+  },
+  "zero_work_paths": {
+    "engine_validation": [
+      {
+        "condition": "No C4 engine tool surfaces discovered",
+        "work_state": "VALID_NO_APPLICABLE_WORK"
+      },
+      {
+        "condition": "C4 tool surfaces discovered but none match smoke-test selection contract",
+        "work_state": "SELECTION_EMPTY"
+      },
+      {
+        "condition": "Eligible engine surfaces selected but no attempts complete",
+        "work_state": "EVALUATION_EMPTY"
+      }
+    ],
+    "math_program_validation": [
+      {
+        "condition": "Validator catalog empty",
+        "work_state": "DISCOVERY_EMPTY"
+      },
+      {
+        "condition": "Validators cataloged but none attempted or completed",
+        "work_state": "EVALUATION_EMPTY"
+      }
+    ]
+  },
+  "implemented_work_state_model": {
+    "states": [
+      "WORK_COMPLETED",
+      "VALID_NO_APPLICABLE_WORK",
+      "ZERO_WORK_UNEXPECTED",
+      "DISCOVERY_EMPTY",
+      "SELECTION_EMPTY",
+      "EVALUATION_EMPTY",
+      "WORK_ACCOUNTING_UNKNOWN"
+    ],
+    "authoritative_surfaces": [
+      "scripts/global_validate.py",
+      "scripts/math/math_program_validate.py"
+    ]
+  },
+  "engine_validation_disposition": {
+    "work_expectation": "CONDITIONALLY_REQUIRED",
+    "implemented_fields": [
+      "work_expectation",
+      "work_state",
+      "targets_discovered",
+      "targets_selected",
+      "targets_attempted",
+      "targets_completed",
+      "passed_count",
+      "failed_count",
+      "error_count",
+      "zero_work_reason"
+    ],
+    "clean_pass_rule": "Engine validation may be clean-pass eligible only when substantive smoke-test work completes, or when no eligible C4 engine targets validly exist."
+  },
+  "math_program_validation_disposition": {
+    "work_expectation": "REQUIRED",
+    "implemented_fields": [
+      "validators_attempted",
+      "validators_completed",
+      "validators_passed",
+      "validators_failed",
+      "validators_errored",
+      "items_checked",
+      "work_expectation",
+      "work_state",
+      "targets_discovered",
+      "targets_selected",
+      "targets_attempted",
+      "targets_completed",
+      "passed_count",
+      "failed_count",
+      "error_count",
+      "zero_work_reason"
+    ],
+    "clean_pass_rule": "Math-program validation may not be clean-pass eligible when zero validators complete under the governed required-work contract."
+  },
+  "reduction_integration": {
+    "surface": "scripts/global_validate.py::_reduce_validation_outcome",
+    "rule": "Patch 070 reduction now consumes explicit work-state statuses from stage_results rather than relying on implicit stage success.",
+    "non_clean_work_states_block_clean_pass": [
+      "ZERO_WORK_UNEXPECTED",
+      "DISCOVERY_EMPTY",
+      "SELECTION_EMPTY",
+      "EVALUATION_EMPTY",
+      "WORK_ACCOUNTING_UNKNOWN"
+    ],
+    "valid_non_blocking_work_state": [
+      "VALID_NO_APPLICABLE_WORK"
+    ]
+  },
+  "focused_test_results": {
+    "test_file": "tests/governance_validation/test_patch_071_validation_department_stage_work_accounting.py",
+    "command": "python -m pytest tests/governance_validation/test_patch_070_validation_department_truthful_reduction_semantics.py tests/governance_validation/test_patch_071_validation_department_stage_work_accounting.py -q",
+    "cases": [
+      {
+        "id": "VAL-071-T01",
+        "status": "PASS"
+      },
+      {
+        "id": "VAL-071-T02",
+        "status": "PASS"
+      },
+      {
+        "id": "VAL-071-T03",
+        "status": "PASS"
+      },
+      {
+        "id": "VAL-071-T04",
+        "status": "PASS"
+      },
+      {
+        "id": "VAL-071-T05",
+        "status": "PASS"
+      },
+      {
+        "id": "VAL-071-T06",
+        "status": "PASS"
+      },
+      {
+        "id": "VAL-071-T07",
+        "status": "PASS"
+      },
+      {
+        "id": "VAL-071-T08",
+        "status": "PASS"
+      }
+    ],
+    "pytest_status": "PASS",
+    "pytest_summary": "18 passed in 0.15s",
+    "json_parse_status": "PASS",
+    "git_diff_check_status": "PASS_WITH_CRLF_WARNINGS_ONLY"
+  },
+  "remaining_validation_department_gaps": [
+    "The broader full-validation suspension remains active; focused stage-accounting tests do not certify full-project validation.",
+    "Other stages still rely on legacy counting fields and may need future contract-specific work accounting if governed evidence later requires it."
+  ],
+  "governed_state_preservation": {
+    "q1_local_queue": 0,
+    "global_blocking_ambiguities": 487,
+    "patch_002_status": "PARTIAL",
+    "patch_002_authority_effect": "NONE",
+    "full_project_validation": "SUSPENDED_PENDING_VALIDATOR_DEPARTMENT_COMPLETION",
+    "validation_authority_changed": false,
+    "textbook_sync": "UPDATED"
+  }
+}

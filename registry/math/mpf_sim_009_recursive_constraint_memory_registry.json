@@ -1,0 +1,98 @@
+{
+  "sim_id": "MPF-SIM-009",
+  "name": "Recursive Constraint Memory Persistence",
+  "status": "active",
+  "purpose": "Test whether recursive admissibility behavior leaves persistent constraint-memory traces that influence future basin stability, recovery, severance, or proof eligibility outcomes.",
+  "simulation_targets": [
+    {
+      "target_id": "SIM009-T001",
+      "name": "Constraint Memory Persistence",
+      "metric": "constraint_memory_score"
+    },
+    {
+      "target_id": "SIM009-T002",
+      "name": "Recovery Memory Retention",
+      "metric": "recovery_memory_retention"
+    },
+    {
+      "target_id": "SIM009-T003",
+      "name": "Recursive Path Dependence",
+      "metric": "path_dependence_index"
+    },
+    {
+      "target_id": "SIM009-T004",
+      "name": "Failure Geometry Residual Activation",
+      "metric": "residual_failure_activation_rate"
+    },
+    {
+      "target_id": "SIM009-T005",
+      "name": "Admissibility Groove Formation",
+      "metric": "groove_stability_index"
+    }
+  ],
+  "simulation_scenarios": [
+    {
+      "scenario_id": "SIM009-S001",
+      "name": "Stable Basin Memory Reinforcement"
+    },
+    {
+      "scenario_id": "SIM009-S002",
+      "name": "Metastable Recovery Residue"
+    },
+    {
+      "scenario_id": "SIM009-S003",
+      "name": "Topology Severance Scar"
+    },
+    {
+      "scenario_id": "SIM009-S004",
+      "name": "Path Dependence Divergence"
+    },
+    {
+      "scenario_id": "SIM009-S005",
+      "name": "False Stability Groove Entrenchment"
+    }
+  ],
+  "memory_classes": [
+    {
+      "class_id": "SIM-MEMORY-STABLE",
+      "meaning": "Recursive history reinforces admissible stability.",
+      "proof_effect": "supports_review_only"
+    },
+    {
+      "class_id": "SIM-MEMORY-FRAGILE",
+      "meaning": "Recursive history reinforces metastable or compressed admissibility.",
+      "proof_effect": "review_required"
+    },
+    {
+      "class_id": "SIM-MEMORY-SCARRED",
+      "meaning": "Prior severance or instability leaves persistent destabilizing influence.",
+      "proof_effect": "blocked_or_review_required"
+    },
+    {
+      "class_id": "SIM-MEMORY-DECEPTIVE",
+      "meaning": "Recursive history creates false-stability appearance without genuine admissibility persistence.",
+      "proof_effect": "blocked"
+    }
+  ],
+  "governance": {
+    "theorem_status": "NOT_PROVEN",
+    "scope_status": "STRICTLY_LOCAL_RESTRICTED_DOMAIN",
+    "physics_status": "NON_PHYSICAL_ANALOG_MODEL",
+    "claim_limit": "constraint_memory_behavior_supports_review_only_not_proof"
+  },
+  "dependencies": [
+    "MPF-SIM-003",
+    "MPF-SIM-005",
+    "MPF-SIM-006",
+    "MPF-SIM-007",
+    "MPF-SIM-008",
+    "MPF-PF-023",
+    "LAW011",
+    "LAW021",
+    "LAW028",
+    "LAW032",
+    "LAW034",
+    "failure_geometry_registry",
+    "operator_signature_registry"
+  ]
+}

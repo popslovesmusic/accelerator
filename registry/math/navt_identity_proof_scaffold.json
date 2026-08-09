@@ -1,0 +1,68 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Symbolic proof scaffold for NavT identity mapping under locally closed process states.",
+    "status": "provisional",
+    "last_updated": "2026-05-12"
+  },
+  "proof_scaffold": {
+    "theorem_reference": "MT-002",
+    "obligation_reference": "PO-002",
+    "target_statement": "NavT_identity(x) ~ x under identity transport conditions NI-001 through NI-005.",
+    "equivalence_relation": "local_process_state_equivalence",
+    "conditions": [
+      {
+        "condition_id": "NI-001",
+        "statement": "The transport path is declared identity or null-length within the relevant local transport neighborhood."
+      },
+      {
+        "condition_id": "NI-002",
+        "statement": "The source process_state is locally closed under the identity transport context."
+      },
+      {
+        "condition_id": "NI-003",
+        "statement": "Residue state remains invariant or equivalent under identity transport."
+      },
+      {
+        "condition_id": "NI-004",
+        "statement": "Orientation frame remains invariant or equivalent under identity transport."
+      },
+      {
+        "condition_id": "NI-005",
+        "statement": "No admissibility-window boundary drift occurs during identity transport."
+      }
+    ],
+    "symbolic_steps": [
+      {
+        "step": 1,
+        "expression": "path = NULL",
+        "description": "Establish null-length transport path per NI-001."
+      },
+      {
+        "step": 2,
+        "expression": "x' = NavT(x, path)",
+        "description": "Apply transport operator along null path."
+      },
+      {
+        "step": 3,
+        "expression": "x' ~ x",
+        "description": "By NI-002 through NI-005, all process determinants (state, residue, orientation, window) are invariant."
+      },
+      {
+        "step": 4,
+        "expression": "NavT_identity(x) ~ x",
+        "description": "Confirm identity mapping under closed local context."
+      }
+    ],
+    "proof_status": "scaffolded",
+    "claim_boundary": "formal_procedural_only",
+    "not_claimed": [
+      "global NavT identity",
+      "identity preservation under residue drift",
+      "identity preservation under orientation conflict",
+      "identity preservation under non-local transport ambiguity",
+      "physical truth"
+    ],
+    "provisional_status": true
+  }
+}

@@ -1,0 +1,212 @@
+{
+  "document_id": "MPF-ATTACK-STRATEGIES-2026-05-29",
+  "document_type": "formal_strategy_register",
+  "charter_version": "v2.3",
+  "date": "2026-05-29",
+  "category": "theorem_attack_strategies",
+  "category_status": "ESTABLISHED",
+  "purpose": "Formal taxonomy of standard attack vectors against provisional theorem candidates. Used for adversarial stress-testing, gap prioritization, and defensive formalization planning.",
+  "humility_prefix": "Within this framework and these governance structures",
+  "attack_strategies": [
+    {
+      "strategy_id": "ATK-001",
+      "label": "Attrition",
+      "class": "accumulative_erosion",
+      "plain_english": "Not a single decisive refutation. Accumulated small objections that erode the supporting structure over time. No individual blow is fatal — the death is by a thousand qualifications.",
+      "mechanism": "Each supporting claim is questioned individually. None is definitively refuted, but the cumulative weight makes the theorem appear unstable.",
+      "target": "Supporting claim structure — the numbered propositions and lemmas beneath the theorem candidate",
+      "signature": "Reviewer says 'but what about X' repeatedly across different sub-claims without ever engaging the core assertion directly",
+      "vulnerability_condition": "Load-bearing claims are implicit, unnumbered, or bundled together — objections have no precise landing point and accumulate as general doubt",
+      "defense": {
+        "primary": "Make every load-bearing claim explicitly numbered and governed under Charter classification. Objections must land somewhere precise or they cannot accumulate.",
+        "secondary": "Maintain a running objection log that forces each objection to name the specific claim it targets.",
+        "formal_instrument": "Dependency map + claim register"
+      },
+      "mpf_relevance": "High — provisional theorem candidates TC-001 through TC-003 have multiple implicit sub-claims not yet formally numbered"
+    },
+    {
+      "strategy_id": "ATK-002",
+      "label": "Tempo — Definition Capture",
+      "class": "initiative_seizure",
+      "plain_english": "An underdefined theorem lets the critic set the terms of debate. They get to choose what the theorem means and attack that version. The author is always defending a position they did not take.",
+      "mechanism": "Critic proposes an interpretation of an undefined or loosely defined operator, derives a contradiction or absurdity from that interpretation, and attributes the failure to the theorem.",
+      "target": "Undefined or loosely bounded operators — anywhere notation is introduced without formal definition",
+      "signature": "Critic says 'if X means Y then the theorem fails' — and the author has no formal record of what X was defined to mean",
+      "vulnerability_condition": "GAP_OPEN operators used in theorem statements without candidate definitions on record",
+      "defense": {
+        "primary": "Own the definitions before the theorem is published. Every operator in a theorem statement must have at minimum a candidate definition on record, even if provisional.",
+        "secondary": "Explicitly state what the theorem does NOT claim. Scope boundaries are part of the theorem.",
+        "formal_instrument": "Operator definition register + scope boundary statement in theorem record"
+      },
+      "mpf_relevance": "Critical — <=>_x is GAP_OPEN and appears in TC-003. Arb_A formal rule is GAP_OPEN and appears implicitly in TC-001 and TC-002. Both are active tempo vulnerabilities."
+    },
+    {
+      "strategy_id": "ATK-003",
+      "label": "Resource Denial — Premise Attack",
+      "class": "foundation_undermining",
+      "plain_english": "Attack the premises rather than the conclusion. If what the theorem depends on can be undermined, the theorem collapses without ever being directly addressed.",
+      "mechanism": "Critic identifies a foundational premise the theorem rests on and demonstrates it is either undefined, ungrounded, or itself dependent on an unresolved assumption.",
+      "target": "Dependency chain — the foundational axioms and prior results the theorem candidate cites",
+      "signature": "Critic ignores the theorem statement entirely and asks 'but where does X come from?' where X is a premise",
+      "vulnerability_condition": "Dependency chain is long, implicit, or contains a known unresolved gap that the theorem inherits without acknowledgment",
+      "defense": {
+        "primary": "Explicit dependency mapping. Know exactly what each theorem candidate rests on so you can see where pressure is being applied and respond at the correct level.",
+        "secondary": "Acknowledge inherited gaps explicitly in the theorem record. A theorem that says 'this result holds conditional on GAP-X being resolved' is stronger than one that pretends the gap does not exist.",
+        "formal_instrument": "Dependency graph + conditional qualification in theorem statement"
+      },
+      "mpf_relevance": "High — E computation rule (GAP-E-RULE) is inherited by TC-001, TC-002, TC-003. Any attack on the E functional definition propagates to all three theorem candidates."
+    },
+    {
+      "strategy_id": "ATK-004",
+      "label": "Misdirection — False Acceptance",
+      "class": "terrain_manipulation",
+      "plain_english": "A theorem gets praised or accepted for the wrong reasons. It is then cited or extended on those false grounds, and later attacked on the same false grounds. The author never agreed to the false reading but also never corrected it.",
+      "mechanism": "Theorem is accepted into discourse under a simplified or distorted interpretation. Later work builds on that interpretation. When the distortion fails, the original theorem is blamed.",
+      "target": "The public record of what the theorem claims — abstracts, summaries, informal descriptions",
+      "signature": "Third-party citations describe the theorem differently than the formal statement. No correction was ever issued.",
+      "vulnerability_condition": "Theorem is described informally in multiple places with slightly different framings, none of which is marked as the canonical statement",
+      "defense": {
+        "primary": "Be explicit about what the theorem actually claims and does not claim at every level of description — formal, plain-English, and summary. Do not let friendly misreading build into the record.",
+        "secondary": "Canonical statement is always the formal record. Informal descriptions explicitly reference it.",
+        "formal_instrument": "Canonical theorem record with explicit NOT-claims section; plain-English gloss marked as gloss not definition"
+      },
+      "mpf_relevance": "Medium — the physics bridge candidate in IND-004 is particularly vulnerable. The claim that 'physics is what arbitration looks like projected into metric space' is evocative and could be misread as a stronger claim than C1 provisional."
+    },
+    {
+      "strategy_id": "ATK-005",
+      "label": "Overwhelming Force at One Point — Gap Exploitation",
+      "class": "local_superiority",
+      "plain_english": "A critic finds one genuine gap and presses it hard enough to make the whole structure look unstable. The local vulnerability is real but the inference to global failure is not.",
+      "mechanism": "Critic identifies a real GAP_OPEN item, demonstrates it is unresolved, and argues the entire theorem is therefore unsound. The gap becomes a lever to dismiss the whole.",
+      "target": "Any single GAP_OPEN item in the dependency chain, especially if it is prominent or load-bearing",
+      "signature": "Critic says 'you haven't defined X therefore the theorem fails' — where X is a real gap but the theorem may be sound conditional on X",
+      "vulnerability_condition": "Gaps are not distinguished from structural failures. No formal record of which gaps are load-bearing and which are secondary.",
+      "defense": {
+        "primary": "Distinguish local gaps from structural failure explicitly. A gap in one operator definition does not invalidate the theorem — it marks where work remains. The theorem record must say this.",
+        "secondary": "Classify gaps by severity: structural (theorem cannot stand without resolution) vs secondary (theorem stands conditionally, gap affects scope or instantiation).",
+        "formal_instrument": "Gap severity classification in theorem record + conditional theorem statement"
+      },
+      "mpf_relevance": "High — GAP-ARB-A-RULE is load-bearing for the character claim in IND-004. If pressed, this gap could be used to dismiss the physics bridge candidate entirely. Needs severity classification."
+    },
+    {
+      "strategy_id": "ATK-006",
+      "label": "Patience — Overextension",
+      "class": "rope_a_dope",
+      "plain_english": "The theorem makes a claim slightly beyond what the formalism currently supports. The critic does nothing. Just waits for the theorem to be cited somewhere it cannot hold, then strikes when it is extended.",
+      "mechanism": "Theorem is stated at claim level C1 but gets cited or used as if it were C3 or C4. The critic waits for the overextension to appear in the record, then demonstrates the failure at the point of overuse.",
+      "target": "The gap between current claim level and the level at which the theorem is being treated",
+      "signature": "The theorem appears in a downstream argument doing more work than its claim level licenses. No one noticed the level change.",
+      "vulnerability_condition": "Claim level classifications are not enforced downstream. C1 provisional results get treated as established in later arguments without explicit elevation.",
+      "defense": {
+        "primary": "The Charter claim classification system is the defense. Do not let C1 provisional results get treated as C4 verified ones in any downstream use.",
+        "secondary": "Every citation of a theorem candidate in downstream work must explicitly carry the claim level of the cited result.",
+        "formal_instrument": "Charter v2.3 claim classification enforcement; induction elevation criteria (C1 → C2 → C3 → C4) formally documented"
+      },
+      "mpf_relevance": "Medium-High — TC-003 Projection Domain Equivalence is C1 provisional but its conclusion (that relational and selection views are projectionally equivalent) is structurally attractive and could easily be cited as if established before <=>_x is formally defined."
+    },
+    {
+      "strategy_id": "ATK-007",
+      "label": "Fork — Internal Contradiction",
+      "class": "double_threat",
+      "plain_english": "Derive two incompatible requirements from the same operator or primitive. The author is forced to choose, and either choice breaks a different part of the framework.",
+      "mechanism": "Identify an operator that participates in two different closure relations. Derive a definition from Relation A that produces a contradiction in Relation B.",
+      "target": "Multi-role operators — operators that bridge different domains or levels of the framework",
+      "signature": "Critic says 'If X satisfies the requirements of Lemma A, it necessarily violates Lemma B.'",
+      "vulnerability_condition": "Operator semantics are derived locally for specific theorems without global consistency checks across domain boundaries.",
+      "defense": {
+        "primary": "Multi-domain consistency testing. Every operator definition must be checked against all active closure relations it participates in.",
+        "secondary": "Use the Invariant Registry to index what must be preserved across roles.",
+        "formal_instrument": "Operator Registry + Multi-domain validation suite"
+      },
+      "mpf_relevance": "High — <=>_x (Projectional Equivalence) bridges relational and selection domains. A fork could be derived where preserving admissibility (Relational) breaks residue-conditioned closure (Selection)."
+    },
+    {
+      "strategy_id": "ATK-008",
+      "label": "Smothering — Domain Restriction",
+      "class": "over_conditioning",
+      "plain_english": "The theorem is technically correct but only under such narrow conditions that it has no descriptive power. The framework's 'universal' claim is smothered by its own qualifications.",
+      "mechanism": "Critic identifies all the edge cases and failure modes where the theorem fails, forcing the author to add more and more conditions until the domain of validity is trivial.",
+      "target": "The scope of application — the 'where and when' of the theorem's validity",
+      "signature": "Critic says 'This only works if X is true AND Y is constant AND Z is zero.'",
+      "vulnerability_condition": "Theorem candidates rely on multiple 'soft' assumptions or tuned parameters that aren't explicitly declared as part of the core regime.",
+      "defense": {
+        "primary": "Define clear Regime Envelopes. State explicitly the parameter space where the theorem is expected to hold and where it is expected to fail.",
+        "secondary": "Report failure modes as data, not as defects. Survival in the face of known limits is stronger than claims of universal truth.",
+        "formal_instrument": "Regime Registry + Falsification Vector reports"
+      },
+      "mpf_relevance": "High — matter_app and energy_app as basins. If these only exist in extremely high-residue, perfectly coherent regimes, the framework loses its ability to describe general process activity."
+    },
+    {
+      "strategy_id": "ATK-009",
+      "label": "Pin — Fixed Definition",
+      "class": "immobility_lock",
+      "plain_english": "Force a hard mathematical definition for an operator that works for a local proof but breaks the 'Mechanism Independence' requirement. The definition is 'pinned' to one tool and cannot move to another.",
+      "mechanism": "Critic proposes a specific algebraic instantiation of an operator (e.g., from a PDE model) and shows it cannot be translated into an Agent-based model without losing the theorem's core result.",
+      "target": "Mechanism Independence — the requirement that results hold across ODE, CA, Agent, and Graph classes",
+      "signature": "Critic says 'You've defined X as a gradient, but my model doesn't have gradients, so your theorem doesn't apply to the mono-process generally.'",
+      "vulnerability_condition": "Definitions are written using tool-specific terminology rather than canonical primitives (epsilon, R, delta, orientation).",
+      "defense": {
+        "primary": "Primitive-only formalization. All theorem statements and operator definitions must be written in the shared language of the Core Primitives.",
+        "secondary": "Cross-model validation requirement for every L2+ term role.",
+        "formal_instrument": "Lexicon Canonical + Tool rigor endorsement manifest"
+      },
+      "mpf_relevance": "Critical — The Floor epsilon. If pinned to a specific spatial resolution, the framework fails its monistic goal of deriving space rather than assuming it."
+    },
+    {
+      "strategy_id": "ATK-010",
+      "label": "Exchange — Triviality Reduction",
+      "class": "equivalence_collapse",
+      "plain_english": "Argue that the new, complex notation is just a fancy way of saying something already well-known in standard physics or math. The framework is 'exchanged' for a simpler, pre-existing theory, losing its unique identity.",
+      "mechanism": "Map the framework's primitives and operators directly to standard ones (e.g., D = Distance, R = Memory, delta = Probability) and show that the framework produces the same results with more steps.",
+      "target": "Operational Novelty — the 'why does this matter' of the framework",
+      "signature": "Critic says 'Your <=>_R is just a Markov Chain with a different name.'",
+      "vulnerability_condition": "The unique procedural/recursive nature of the framework is not emphasized in the formal derivations, allowing them to be collapsed into static equivalents.",
+      "defense": {
+        "primary": "Highlight the Non-Identity relations. Explicitly state where the framework's behavior diverges from the 'simplification' (e.g., non-symmetry, residue-coupling).",
+        "secondary": "Maintain the 'app' projection boundary to prevent ontological collapse.",
+        "formal_instrument": "NOT-claims section + Semantic Projection policy"
+      },
+      "mpf_relevance": "Medium — Directed Distinction D(Sa|Sb). If collapsed into Euclidean distance, the entire structural derivation of orientation and asymmetry fails."
+    }
+  ],
+  "defense_instruments_summary": {
+    "dependency_map": "Explicit graph of what each theorem candidate rests on — axioms, prior results, operator definitions",
+    "claim_register": "Numbered list of all load-bearing sub-claims beneath each theorem candidate",
+    "operator_definition_register": "Candidate definitions for all operators appearing in theorem statements, including GAP_OPEN items with candidate semantics on record",
+    "gap_severity_classification": "Each GAP_OPEN item classified as structural or secondary relative to each theorem candidate that inherits it",
+    "canonical_theorem_record": "Formal statement + NOT-claims section + plain-English gloss marked as gloss + dependency chain",
+    "claim_level_enforcement": "Charter v2.3 classification carried explicitly in all downstream citations",
+    "multi_domain_validation": "Suite of tests ensuring operator consistency across different closure regimes",
+    "regime_registry": "Documented parameter envelopes for theorem validity",
+    "primitive_formalization": "Requirement to use only canonical primitives in formal definitions to ensure mechanism independence"
+  },
+  "current_vulnerability_summary": {
+    "critical": [
+      "ATK-002 Tempo — <=>_x GAP_OPEN appears in TC-003 theorem statement",
+      "ATK-002 Tempo — Arb_A formal rule GAP_OPEN appears implicitly in TC-001 and TC-002",
+      "ATK-009 Pin — Floor epsilon at risk of tool-specific pinning"
+    ],
+    "high": [
+      "ATK-001 Attrition — TC-001 through TC-003 have implicit unnumbered sub-claims",
+      "ATK-003 Resource Denial — GAP-E-RULE inherited by all three theorem candidates",
+      "ATK-005 Gap Exploitation — GAP-ARB-A-RULE needs severity classification",
+      "ATK-007 Fork — <=>_x bridges domains without global consistency check",
+      "ATK-008 Smothering — App-domain basins need regime envelope definitions"
+    ],
+    "medium": [
+      "ATK-004 Misdirection — physics bridge candidate in IND-004 at risk of misreading",
+      "ATK-006 Overextension — TC-003 attractive for premature citation before <=>_x defined",
+      "ATK-010 Exchange — D(Sa|Sb) vulnerable to distance simplification"
+    ]
+  },
+  "session_notes": {
+    "origin": "Derived from plain-English analogy session mapping general strategic attack categories onto formal theorem defense. Chess-inspired taxonomy expanded to 10 strategies.",
+    "category_status": "ESTABLISHED by James A. Hoskins 2026-05-29",
+    "next_actions": [
+      "Apply gap severity classification to all GAP_OPEN items relative to TC-001, TC-002, TC-003",
+      "Add NOT-claims section to each theorem candidate record",
+      "Record candidate semantics for <=>_x formally to reduce ATK-002 and ATK-007 exposure",
+      "Define regime envelopes for matter_app and energy_app basins to prevent ATK-008 smothering"
+    ]
+  }
+}

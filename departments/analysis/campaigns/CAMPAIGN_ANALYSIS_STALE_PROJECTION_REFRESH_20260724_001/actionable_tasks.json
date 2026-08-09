@@ -1,0 +1,114 @@
+{
+  "completed_refresh_task": "TASK-ANL-001-REFRESH-STALE-PROJECTIONS",
+  "highest_priority_next_task": "TASK-D-001C-TYPE-PRESERVATION",
+  "task_impact_profiles": [
+    {
+      "task_id": "TASK-D-001C-TYPE-PRESERVATION",
+      "unlocks": [
+        "OBL-D-001D",
+        "OBL-D-001E",
+        "reduced D promotion gate"
+      ],
+      "blocked_objects": [
+        "typed projection preservation",
+        "representable distinction review",
+        "non-collapse boundary review"
+      ],
+      "future_campaigns_enabled": [
+        "CAMPAIGN_D_MECHANIZED_PROJECTION_001"
+      ],
+      "estimated_effort": "HIGH",
+      "estimated_compute_cost": "MEDIUM",
+      "expected_repository_value": "VERY_HIGH",
+      "blocking_tasks_removed": 3,
+      "risk": "medium",
+      "confidence": "high"
+    },
+    {
+      "task_id": "TASK-D-001D-REPRESENTABLE-DISTINCTION",
+      "unlocks": [
+        "OBL-D-001E"
+      ],
+      "blocked_objects": [
+        "representable distinction review"
+      ],
+      "future_campaigns_enabled": [
+        "CAMPAIGN_D_HISTORY_AUGMENTED_PROJECTION_COUNTERMODEL_001"
+      ],
+      "estimated_effort": "HIGH",
+      "estimated_compute_cost": "MEDIUM",
+      "expected_repository_value": "HIGH",
+      "blocking_tasks_removed": 1,
+      "risk": "medium",
+      "confidence": "high"
+    }
+  ],
+  "tasks": [
+    {
+      "task_id": "TASK-D-001C-TYPE-PRESERVATION",
+      "objective": "Show which type properties are preserved when A|E maps through Pi_D into TYPE_PROJECTION.",
+      "required_inputs": [
+        "../CAMPAIGN_D_SEMANTICS_THEORY_CRAWL_20260723_002/work_package.json",
+        "../CAMPAIGN_D_SEMANTICS_THEORY_CRAWL_20260723_002/current_state_addendum_20260724.json",
+        "registry/math/d_semantics_obligation_registry.json"
+      ],
+      "expected_outputs": [
+        "typed preservation proof",
+        "mechanized fixture",
+        "negative-case report"
+      ],
+      "completion_test": "All valid transitions pass, all negative fixtures reject, and no hidden invertibility assumption remains.",
+      "estimated_effort": "HIGH",
+      "dependencies": [
+        "TYPE_PROJECTION"
+      ],
+      "priority": "CRITICAL",
+      "assigned_agent_role": "FORMAL_PROOF_ANALYST",
+      "recommended_next_action": "Execute the existing OBL-D-001C work package."
+    },
+    {
+      "task_id": "TASK-D-001D-REPRESENTABLE-DISTINCTION",
+      "objective": "Define representable distinction and test what Pi_D preserves after OBL-D-001C.",
+      "required_inputs": [
+        "OBL-D-001C certificate",
+        "Notebook 18-20 archives",
+        "immutable experiment specification"
+      ],
+      "expected_outputs": [
+        "representable distinction definition",
+        "matched-case evidence table",
+        "counterexample report"
+      ],
+      "completion_test": "The predicate is computable without outcome labels and independently reproduced across preservation and failure cases.",
+      "estimated_effort": "HIGH",
+      "dependencies": [
+        "OBL-D-001C"
+      ],
+      "priority": "HIGH",
+      "assigned_agent_role": "EMPIRICAL_EVIDENCE_ANALYST",
+      "recommended_next_action": "Keep routed behind OBL-D-001C."
+    },
+    {
+      "task_id": "TASK-D-001E-NONCOLLAPSE-BOUNDARY",
+      "objective": "Specify the non-collapse boundary once representable distinction is current.",
+      "required_inputs": [
+        "OBL-D-001D certificate",
+        "Notebook 18 degeneracy evidence",
+        "Notebook 20 counterexamples"
+      ],
+      "expected_outputs": [
+        "non-collapse boundary specification",
+        "minimal countermodel archive",
+        "negative-result report"
+      ],
+      "completion_test": "Positive, negative, and boundary fixtures classify consistently under one typed rule.",
+      "estimated_effort": "HIGH",
+      "dependencies": [
+        "OBL-D-001D"
+      ],
+      "priority": "HIGH",
+      "assigned_agent_role": "COUNTEREXAMPLE_SEARCHER",
+      "recommended_next_action": "Keep routed behind OBL-D-001D."
+    }
+  ]
+}

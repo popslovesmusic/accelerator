@@ -1,0 +1,219 @@
+{
+  "campaign_id": "MPF_SIM_ARRAY_GRAPH_001",
+  "title": "Array-Backed Directed Relational Graph Exploratory Simulation",
+  "status": "DESIGN_READY",
+  "purpose": "Test whether U_Omega can generate persistent asymmetric triadic closures from random distinction-array noise.",
+  "core_position": {
+    "substrate": "chi_D distinction array",
+    "interpretation_layer": "directed weighted graph",
+    "primitive_cell": "chi_D[a,b] := D(S_a|S_b)",
+    "not_allowed": [
+      "treating nodes as primitive objects",
+      "treating grid position as physical space",
+      "treating adjacency as metric distance",
+      "promoting visual pattern as proof"
+    ]
+  },
+  "formal_targets": {
+    "root_schema": "U_Omega := [chi_D -> E -> delta_a -> Arb_A -> Delta -> chi_D']",
+    "distinction_floor": "epsilon > 0",
+    "closure_target": "TC_asym := N1 iff_R (N2 | N3)",
+    "node_reading": "N_ab := D(S_a|S_b) > 0",
+    "array_reading": "Persistent oriented relation pattern over chi_D"
+  },
+  "simulation_state": {
+    "chi_D": {
+      "type": "NxN directed distinction matrix",
+      "diagonal": "forced_zero_or_excluded",
+      "value_range": "[0,1]",
+      "entry_meaning": "directed distinction intensity"
+    },
+    "orientation_array": {
+      "symbol": "I_minus",
+      "type": "NxN or NxNxK orientation/tuning pattern",
+      "entry_meaning": "orientation condition affecting admissibility and selection"
+    },
+    "residue_array": {
+      "symbol": "R",
+      "type": "NxN historical persistence trace",
+      "entry_meaning": "prior lawful continuation support"
+    },
+    "admissibility_mask": {
+      "symbol": "A_adm",
+      "type": "NxN boolean/weighted legality mask",
+      "entry_meaning": "currently admissible directed relations"
+    }
+  },
+  "initial_conditions": {
+    "N_values": [32, 64, 128, 256],
+    "random_seed_count": 100,
+    "initial_distribution": "uniform_random",
+    "sparsity_modes": [
+      "dense",
+      "medium_sparse",
+      "high_sparse"
+    ],
+    "epsilon_values": [0.01, 0.03, 0.05, 0.08, 0.13],
+    "orientation_modes": [
+      "random",
+      "coherent_patch",
+      "rotational_bias",
+      "null_orientation"
+    ],
+    "residue_modes": [
+      "none",
+      "weak_decay",
+      "medium_decay",
+      "strong_decay"
+    ]
+  },
+  "update_loop": {
+    "iterations": 5000,
+    "cycle": [
+      "compute E(chi_D) = mu_rel(chi_D)",
+      "apply affect gate: E != 0",
+      "generate candidate continuations Q",
+      "apply delta_a admissibility filter",
+      "select q_star via Arb_A",
+      "update chi_D via Delta",
+      "inscribe lawful continuation into R",
+      "recompute admissibility topology"
+    ],
+    "floor_rule": {
+      "if": "chi_D[a,b] < epsilon",
+      "then": "relation excluded or severed",
+      "note": "exclusion is boundary-generation, not automatically total 0-state"
+    },
+    "zero_state_rule": {
+      "if": "global E(chi_D) == 0 or admissible Q is empty everywhere",
+      "then": "campaign run classified as collapse"
+    }
+  },
+  "primary_metrics": {
+    "E_global": "total non-null distinction pressure",
+    "relation_survival_rate": "fraction of chi_D entries remaining above epsilon",
+    "TC_asym_count": "number of stable directed asymmetric triadic closures",
+    "TC_asym_lifetime_mean": "mean persistence duration of detected closures",
+    "orientation_coherence": "consistency of orientation pattern inside closure candidates",
+    "residue_support": "degree to which prior persistence predicts future relation survival",
+    "topology_preservation": "stability of directed connectivity under perturbation",
+    "freeze_index": "degree of static non-updating persistence",
+    "collapse_index": "degree of global severance/disconnection"
+  },
+  "triadic_detection_rule": {
+    "candidate": [
+      "chi_D[a,b] > epsilon",
+      "chi_D[b,c] > epsilon",
+      "chi_D[c,a] > epsilon"
+    ],
+    "asymmetry_required": [
+      "chi_D[a,b] != chi_D[b,a]",
+      "chi_D[b,c] != chi_D[c,b]",
+      "chi_D[c,a] != chi_D[a,c]"
+    ],
+    "persistence_required": "candidate survives >= tau_lifetime iterations",
+    "closure_class": "TC_asym_candidate"
+  },
+  "control_models": {
+    "M0_full": {
+      "description": "Full U_Omega-inspired update with distinction, admissibility, arbitration, orientation, and residue."
+    },
+    "M1_random_arbitration": {
+      "description": "Replace Arb_A with random selection."
+    },
+    "M2_no_residue": {
+      "description": "Disable R inscription and history-conditioned admissibility."
+    },
+    "M3_no_orientation": {
+      "description": "Remove orientation/tuning array from admissibility and selection."
+    },
+    "M4_no_floor": {
+      "description": "Remove epsilon floor and allow distinction to drift to zero."
+    },
+    "M5_static_admissibility": {
+      "description": "Freeze admissibility mask so topology cannot evolve through residue."
+    },
+    "M6_memoryless_noise": {
+      "description": "Random update process with matched value distribution but no U_Omega chain."
+    }
+  },
+  "falsification_tests": {
+    "FA_SIM_001": {
+      "name": "Zero-distinction continuation attack",
+      "failure_condition": "system continues lawful updates when E_global == 0"
+    },
+    "FA_SIM_002": {
+      "name": "Random-equivalence attack",
+      "failure_condition": "M1 or M6 matches M0 on TC_asym persistence within tolerance"
+    },
+    "FA_SIM_003": {
+      "name": "Residue-irrelevance attack",
+      "failure_condition": "M2 performs equal or better than M0 on closure lifetime"
+    },
+    "FA_SIM_004": {
+      "name": "Orientation-decorative attack",
+      "failure_condition": "M3 shows no measurable change in closure class selection"
+    },
+    "FA_SIM_005": {
+      "name": "Floor-irrelevance attack",
+      "failure_condition": "M4 avoids collapse/freeze as well as M0"
+    },
+    "FA_SIM_006": {
+      "name": "Projection-aliasing attack",
+      "failure_condition": "same final visual topology is treated as same process history"
+    }
+  },
+  "promotion_rules": {
+    "claim_level": "exploratory_only",
+    "no_promotion_without": [
+      "matched controls",
+      "seed replication",
+      "ablation survival",
+      "failure-mode accounting",
+      "trace-level evidence",
+      "separation from visual projection"
+    ],
+    "allowed_result": "supports further induction",
+    "forbidden_result": "proves physics or proves ontology"
+  },
+  "expected_outputs": {
+    "data_files": [
+      "run_config.json",
+      "metrics_by_seed.csv",
+      "closure_events.jsonl",
+      "failure_modes.csv",
+      "trace_samples.jsonl"
+    ],
+    "plots": [
+      "TC_asym_count_over_time",
+      "closure_lifetime_distribution",
+      "collapse_vs_freeze_phase_map",
+      "M0_vs_controls_metric_table"
+    ],
+    "reports": [
+      "simulation_summary.md",
+      "falsification_audit.md",
+      "governance_update_patch.json"
+    ]
+  },
+  "first_implementation_recommendation": {
+    "language": "Python",
+    "backend_phase_1": "numpy",
+    "inspection": "networkx optional",
+    "acceleration_later": ["numba", "cupy", "rust"],
+    "minimum_viable_run": {
+      "N": 64,
+      "seeds": 20,
+      "iterations": 1000,
+      "epsilon": 0.05,
+      "models": ["M0_full", "M1_random_arbitration", "M2_no_residue", "M3_no_orientation"]
+    }
+  },
+  "governance_notes": [
+    "Graphs are interpretive projections of chi_D, not primitive substrates.",
+    "Arrays are not state containers; they are relation-addressing organizations.",
+    "Nodes are addressable participation sites, not objects.",
+    "Stable triangles count only as TC_asym candidates until persistence and ablation tests pass.",
+    "Failure is informative: collapse, freeze, and disconnection are first-class outcomes."
+  ]
+}

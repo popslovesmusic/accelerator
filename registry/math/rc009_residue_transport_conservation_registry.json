@@ -1,0 +1,93 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Registry for bounded residue-transport conservation conditions and modes in Phase 3.",
+    "status": "provisional",
+    "last_updated": "2026-05-12"
+  },
+  "residue_transport_conservation_entries": [
+    {
+      "id": "RC-009",
+      "name": "Residue-Transport Conservation",
+      "status": "symbolic_supported_candidate",
+      "purpose": "Represent bounded residue persistence and conservation-sensitive transport behavior across recursive continuation structures.",
+      "depends_on": [
+        "RC-007",
+        "RC-008",
+        "residue_conservation",
+        "residue_behavior",
+        "nonlocal_transport",
+        "recursive_transport_closure",
+        "transition_flux_convergence",
+        "orientation_minimization"
+      ],
+      "residue_transport_conditions": [
+        {
+          "id": "RTC-001",
+          "name": "bounded_residue_balance_preserved",
+          "description": "Reduction steps must maintain residue measures within established local balance relations."
+        },
+        {
+          "id": "RTC-002",
+          "name": "transport_flux_remains_finite",
+          "description": "Transported continuation measure must not diverge during recursive balance calculation."
+        },
+        {
+          "id": "RTC-003",
+          "name": "residue_transport_updates_remain_admissible",
+          "description": "Each step in the recursive transport update must satisfy current admissibility windows."
+        },
+        {
+          "id": "RTC-004",
+          "name": "orientation_sensitive_transport_remains_bounded",
+          "description": "Directional transport flux must stay within defined stability thresholds to preserve local balance."
+        },
+        {
+          "id": "RTC-005",
+          "name": "residue_dissipation_detectable",
+          "description": "Formal mechanisms must exist to detect and register residue dispersion or loss."
+        },
+        {
+          "id": "RTC-006",
+          "name": "residue_accumulation_does_not_force_transport_divergence",
+          "description": "Residue levels must remain below the point where transport flux becomes unstable."
+        },
+        {
+          "id": "RTC-007",
+          "name": "branch_pruning_preserves_required_residue_witness",
+          "description": "Pruning of divergent residue states must not eliminate all admissible balance paths."
+        },
+        {
+          "id": "RTC-008",
+          "name": "transport_does_not_force_exact_global_conservation",
+          "description": "Local balance updates do not bypass the fundamental noninvertibility or dissipative nature of the process."
+        }
+      ],
+      "candidate_conservation_modes": [
+        "bounded_residue_persistence",
+        "dissipative_transport_balance",
+        "orientation_sensitive_residue_transport",
+        "window_constrained_residue_flow",
+        "recursive_residue_redistribution"
+      ],
+      "failure_modes_to_preserve": [
+        "residue_saturation",
+        "transport_divergence",
+        "recursive_flux_instability",
+        "orientation_transport_locking",
+        "forced_exact_conservation",
+        "residue_dissipation_collapse",
+        "nonlocal_balance_breakdown",
+        "basin_escape_via_transport_instability"
+      ],
+      "governance_constraints": {
+        "exact_global_conservation_claimed": false,
+        "lossless_transport_identity_claimed": false,
+        "infinite_recursive_stability_claimed": false,
+        "physics_validation_claimed": false,
+        "global_closure_claimed": false
+      },
+      "provisional_status": true
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "campaign_metadata": {
+    "campaign_id": "INTERACTION_HIERARCHY_FALSIFICATION_C4",
+    "description": "Adversarial 'claim-killing' suite for the Interaction Projection Hierarchy.",
+    "status": "initialized",
+    "date": "2026-05-24",
+    "target_certification": "C4",
+    "governance_locks": {
+      "root_expression": "(ℰ≠0) ⇔_R δ(ℰ>0)",
+      "semantic_projection": "mandatory_app_suffix"
+    }
+  },
+  "mechanism_classes": [
+    "field_substrate",
+    "local_confinement",
+    "transport_oscillation",
+    "topology_volume_overlap",
+    "stochastic_ensemble"
+  ],
+  "tools": [
+    "dase_analog_sim_cpp",
+    "satp_higgs_3d_sim_cpp",
+    "structural_box_sim_cpp",
+    "agent_based_sim_v1_cpp",
+    "signal_scope_phase_continuation_engine",
+    "spectral_analysis_v1_cpp",
+    "tda_module_v2_cpp",
+    "tda_module_v1_cpp",
+    "mc_ensemble_sim_v1_cpp",
+    "stochastic_sim_cpp",
+    "parameter_optimizer_v1_cpp"
+  ],
+  "parameter_sweeps": {
+    "seeds": 200,
+    "Delta_R": [0, 0.1, 0.5, 1.0, -1.0],
+    "node_count": [2, 3, 4, 8],
+    "overlap_density": [0.0, 0.2, 0.5, 1.0],
+    "noise_level": [0.0, 0.01, 0.1, 0.25],
+    "transport_reinforcement": [0.0, 0.5, 1.0]
+  },
+  "metrics": {
+    "Delta_R": "ordered_mismatch_asymmetry",
+    "P_delta": "recursive_phase_mismatch_pressure",
+    "T3_lock": "triadic_stabilization_score",
+    "B_overlap": "recursive_mismatch_volume_overlap",
+    "C_transport": "persistent_transport_channel_coherence",
+    "A_narrowing": "arbitration_narrowing_index",
+    "G_A": "admissibility_gradient_strength",
+    "K_app": "projected_curvature_signature"
+  },
+  "falsification_vectors": [
+    {
+      "id": "FV-1",
+      "name": "Zero-mismatch kill test",
+      "condition": "Delta_R == 0",
+      "target": "all_regimes",
+      "failure_if": "any_regime_stabilizes"
+    },
+    {
+      "id": "FV-2",
+      "name": "Direction reversal attack",
+      "condition": "swap(D_12, D_21)",
+      "target": "transport_orientation",
+      "failure_if": "orientation_unaffected"
+    },
+    {
+      "id": "FV-4",
+      "name": "Edge-only attack",
+      "condition": "disable_interior_mismatch_volume",
+      "target": "confinement_gravity",
+      "failure_if": "results_unchanged"
+    },
+    {
+      "id": "FV-5",
+      "name": "Overlap removal attack",
+      "condition": "isolate_triads",
+      "target": "gravity_app",
+      "failure_if": "gravity_app_persists"
+    },
+    {
+      "id": "FV-8",
+      "name": "Saturation attack",
+      "condition": "increase_triad_density",
+      "target": "confinement_vs_gravity",
+      "failure_if": "gravity_saturates_with_confinement"
+    },
+    {
+      "id": "FV-10",
+      "name": "Cross-mechanism contradiction",
+      "condition": "all_engines",
+      "target": "regime_separation",
+      "failure_if": "regimes_only_separate_in_one_engine"
+    }
+  ],
+  "claim_gate_conditions": [
+    "T1: binary systems show decay or transition (weak_force_app)",
+    "T2: triads uniquely stabilize confinement (strong_force_app)",
+    "T3: strong local confinement does not equal gravity_app",
+    "T4: volume overlap produces admissibility gradients (gravity_app)",
+    "T5: persistent transport channels form without basin closure (electromotive_app)"
+  ],
+  "output_configuration": {
+    "directory": "results/2026-05-24_run01_interaction_hierarchy_falsification/",
+    "required_artifacts": [
+      "metrics.json",
+      "falsification_summary.json",
+      "cross_mechanism_agreement_matrix.csv"
+    ]
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "claim_id": "PCD-CLM-MST-001",
+  "theorem_id": "T005",
+  "declared_status": "formally_proven",
+  "declared_rigor_level": "C6",
+  "governed_claim_type": "conditional_lemma",
+  "governed_claim_ceiling_before_execution": "TS2",
+  "governed_claim_ceiling_after_success": "TS4",
+  "falsification_report_result": "FALSIFIED",
+  "failed_vectors": [
+    "FV-4: Mechanism Implementation Schism"
+  ],
+  "survived_vectors": [
+    "FV-1: Residue Suppression (Zero-History Fracture)",
+    "FV-2: Degeneracy Chatter (Saddle Point Jam)",
+    "FV-3: Admissibility Jamming (Stroboscopic Fracture)"
+  ],
+  "first_failed_metric": "graph_ca_agreement=0.32 (FV-4)",
+  "first_failed_condition": "Cross-mechanism agreement fell to 0.32 under FV-4 (Mechanism Implementation Schism). Threshold for failure not stated in the report; report labels this a fracture point.",
+  "first_failed_assumption": "Global mechanism-independence / cross-mechanism stability for MST-001 without fully enumerating resolution-dependent and scope-limit preconditions.",
+  "failure_classes": [
+    "FC-01",
+    "FC-02",
+    "FC-05",
+    "FC-07",
+    "FC-08"
+  ],
+  "scope_of_failure": "bounded",
+  "recommended_action": "restrict",
+  "salvageable_form": "Preserve MST-001 as a bounded conditional stability claim: O* minimizer switching stability holds only within an explicit admissibility + residue reinscription regime, and only at/above a declared resolution frontier (e.g., N>=N_crit) with cross-mechanism agreement explicitly measured and gated; prohibit unconditional C6/formally_proven language until FV-4 is resolved or superseded by a governed report.",
+  "blocked_language": [
+    "formally_proven",
+    "C6",
+    "The theorem holds across Graph Dynamics, Cellular Automata, and PDE mechanism classes",
+    "mechanism-independent (unqualified/global)",
+    "necessary consequence (unqualified/global)",
+    "closed"
+  ],
+  "allowed_language": [
+    "conditional",
+    "bounded",
+    "resolution-dependent",
+    "scope-limited",
+    "model-scoped",
+    "pending reformulation / pending FV-4 resolution",
+    "useful as an operational stability heuristic inside declared constraints"
+  ],
+  "evidence_paths_checked": [
+    "docs/theory/foundational/5_03_26 unity/math/theorems/T005_minimizer_switching_stability.md",
+    "docs/theory/foundational/5_03_26 unity/math/proofs/P027_MST_001_symbolic_trace.md",
+    "registry/claim_support_matrix.json",
+    "results/2026-05-23_run12_BLOCK_CLOSURE_X_Attack/paper.md",
+    "results/2026-05-23_run12_BLOCK_CLOSURE_X_Attack/data/attack_report.json",
+    "results/2026-05-23_run14_RES-LIMIT-01/paper.md"
+  ],
+  "missing_evidence_paths": [],
+  "notes": [
+    "Decision rule applied: falsification report contains 'FALSIFIED' => block C6/formally_proven language unless superseded by a later governed report that resolves FV-4.",
+    "Decision rule applied: claim_support_matrix marks MST-001 as conditional_lemma with TS2/TS4 ceilings and requires execution plan MSV-001-FULL-EXECUTION-V1 => do not classify MST-001 as C6 by default.",
+    "BLOCK-CLOSURE-X scope limit statement: MST-001 stability is contingent on non-zero residue reinscription rate (P_re>0) and minimum admissibility window stability duration (from results/2026-05-23_run12_BLOCK_CLOSURE_X_Attack/paper.md).",
+    "RES-LIMIT-01 statement: mechanism independence is not global; it emerges at specific resolution scales and further mapping is required before elevating MST-001 to C6 (from results/2026-05-23_run14_RES-LIMIT-01/paper.md).",
+    "Primary localized failure is FV-4 (cross-mechanism schism), which does not by itself invalidate the entire framework; it challenges the unqualified mechanism-independence / closure classification asserted in T005/P027 for MST-001."
+  ]
+}
+

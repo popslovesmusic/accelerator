@@ -1,0 +1,45 @@
+{
+  "report_id": "ASYM_DOMAIN_COMPATIBILITY_REASSESSMENT_20260801_001",
+  "scope": "Governance and reporting reassessment only",
+  "claim_ceiling": "C1_MODEL_RELATIVE",
+  "obligation_id": "OBL-R11-ASYM-DOMAIN-COMPATIBILITY",
+  "status": "OPEN_UNRESOLVED",
+  "runtime_snapshot": {"status":"FRESH","decision":"ALLOW","staleness_cause":"NONE"},
+  "sources": [
+    {"path":"departments/analysis/campaigns/RT_RELATION_AXIOMS_FORMALIZATION_CAMPAIGN_001/relation_axiom_registry.json","sha256":"E71FED4343D158C731F5120292DEE6478A098F3920BCB2D4D07B5A5E600CDF61"},
+    {"path":"departments/analysis/campaigns/RT_RELATION_AXIOMS_FORMALIZATION_CAMPAIGN_001/relation_axiom_dependency_graph.json","sha256":"6D3EDD13AECF19FD9CC44DBD127C34D0F161C159E95D795327F86136724810C2"},
+    {"path":"registry/lexicon_gap_queue.json","sha256":"8CD56363E50AE79AF11257FC7C5B9662237CF4D8ECDF886750F11F1C3C4CC252"}
+  ],
+  "finding": {
+    "statement": "Active canonical sources do not establish [Asym] as BoundedSymmetry, UnboundedSymmetry, or a legal operand subtype for |.",
+    "classification": "TYPE_COMPATIBILITY_UNRESOLVED",
+    "confidence": "HIGH",
+    "repository_state_claim": true
+  },
+  "role_matrix": {
+    "left_operand_BoundedSymmetry": "UNESTABLISHED",
+    "right_operand_UnboundedSymmetry": "UNESTABLISHED",
+    "generic_SymmetryCondition": "INSUFFICIENT",
+    "cross_role_use": "MALFORMED_UNAUTHORIZED",
+    "implicit_coercion": "FORBIDDEN"
+  },
+  "evidence_boundary": {
+    "asymmetry_references_exist": true,
+    "canonical_Asym_subtype_record_exists": false,
+    "legal_operand_role_established": false,
+    "relation_domain_widened": false
+  },
+  "failure_semantics": [
+    {"attempt":"Use [Asym] as the left operand without canonical BoundedSymmetry typing.","result":"DOMAIN_MEMBERSHIP_UNRESOLVED"},
+    {"attempt":"Use [Asym] as the right operand without canonical UnboundedSymmetry typing.","result":"DOMAIN_MEMBERSHIP_UNRESOLVED"},
+    {"attempt":"Treat generic asymmetry terminology as a subtype declaration.","result":"TYPE_RULE_INSUFFICIENT"},
+    {"attempt":"Silently coerce [Asym] into an operand subtype.","result":"IMPLICIT_DOMAIN_COERCION_FORBIDDEN"}
+  ],
+  "dependencies": [
+    {"from":"OBL-R11-ASYM-DOMAIN-COMPATIBILITY","type":"DEPENDS_ON","to":"canonical typing of [Asym]"},
+    {"from":"symmetry_condition_relation","type":"BLOCKED_BY","to":"OBL-R11-ASYM-DOMAIN-COMPATIBILITY"}
+  ],
+  "not_established": ["[Asym] operand role", "subtype conversion", "projection compatibility", "executable semantics", "physical correspondence"],
+  "validation": {"source_hashes_verified":true,"dependency_paths_resolve":true,"cycle_check":"PASS","mathematical_content_modified":false},
+  "recommendation": "Keep OBL-R11-ASYM-DOMAIN-COMPATIBILITY OPEN. Require a separately governed canonical typing record before [Asym] can enter Dom(|)."
+}

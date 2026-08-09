@@ -1,0 +1,80 @@
+{
+  "patch_id": "PATCH_GOVERNANCE_Q0_REMAINING_OPEN_WORK_CLASSIFICATION_013",
+  "title": "Q0 Remaining Open Work Classification and Bounded Queue",
+  "status": "APPLIED",
+  "applied_on": "2026-07-14T23:10:00-04:00",
+  "type": "analysis_audit",
+  "depends_on": [
+    "PATCH_GOVERNANCE_Q0_PATCH_LOCAL_COMPLETION_AND_STATUS_CORRECTION_012"
+  ],
+  "mode": "additive",
+  "purpose": "Determine the substantive Q0 governance work that remains after patch-local completion and dependency repair, without reopening completed Q0 patches or promoting the intentionally transitional global inventory patch.",
+  "summary": "This patch creates a deterministic remaining-open-work inventory and prioritized bounded next-work queue. It records one remaining patch-002 completion gate blocked on the global inventory and eleven legacy Q0 queue items that are now either neutralized by later governance boundary enforcement or obsolete queue residue.",
+  "mutation_policy": {
+    "analysis_only": true,
+    "status_mutations_performed": false,
+    "authority_mutations_performed": false,
+    "completed_patches_reopened": false
+  },
+  "source_of_truth": [
+    "outputs/governance_inventory/q0_partial_status_intent_inventory.json",
+    "outputs/governance_inventory/q0_patch_local_completion_and_status_correction_evidence.json",
+    "outputs/governance_inventory/q0_typed_dependency_runtime_snapshot.json",
+    "outputs/governance_inventory/q0_scope_partition_queue.json",
+    "outputs/governance_inventory/q0_live_authority_access_inventory.json",
+    "outputs/governance_inventory/q0_validator_authority_partition.json",
+    "outputs/governance_inventory/q0_resolution_packet.json",
+    "outputs/governance_inventory/governance_remediation_queue.json"
+  ],
+  "core_rule": {
+    "rule_id": "Q0_REMAINING_OPEN_WORK_CLASSIFICATION_013",
+    "statement": "Historical patch cleanup, patch-local completion, dependency-chain health, and Q0 program completion must be treated as distinct conditions. Completed Q0 patches 007 through 012 are not reopened without contradictory evidence, and PATCH_GOVERNANCE_GLOBAL_INVENTORY_002 remains intentionally PARTIAL until its own completion gate is satisfied."
+  },
+  "artifacts": {
+    "inventory": "outputs/governance_inventory/q0_remaining_open_work_inventory.json",
+    "queue": "outputs/governance_inventory/q0_next_bounded_work_queue.json"
+  },
+  "summary_counts": {
+    "total_remaining_q0_items": 12,
+    "blocked_on_global_inventory": 1,
+    "ready_for_bounded_resolution": 0,
+    "neutralized_by_later_governance": 7,
+    "obsolete_residue": 4,
+    "genuinely_unresolved_authority_conflicts": 0,
+    "validator_department_gated": 0,
+    "unproven": 0
+  },
+  "next_queue_summary": {
+    "queue_size": 5,
+    "executable_items": 4,
+    "deferred_items": 1
+  },
+  "validation_results": {
+    "targeted_inventory_test": {
+      "command": "python -m pytest tests/governance_validation/test_patch_013_q0_remaining_open_work_classification.py -q",
+      "status": "PASS"
+    },
+    "json_parse": {
+      "status": "PASS_REQUIRED"
+    },
+    "git_diff_check": {
+      "command": "git diff --check",
+      "status": "PASS_WITH_CRLF_WARNINGS_ONLY"
+    },
+    "git_status": {
+      "command": "git status --short",
+      "status": "PASS_REVIEWED"
+    }
+  },
+  "success_criteria": [
+    "Every currently known remaining Q0 item is represented exactly once in the inventory.",
+    "No completed Q0 patch from 007 through 012 is reopened without contradictory evidence.",
+    "PATCH_GOVERNANCE_GLOBAL_INVENTORY_002 remains PARTIAL with authority effect NONE.",
+    "The next bounded work queue prioritizes executable neutralized or residue closures ahead of blocked global inventory work."
+  ],
+  "governance_notes": [
+    "This patch is analysis-only and does not resolve ambiguity items directly.",
+    "This patch preserves the full-project-validation suspension.",
+    "This patch does not allocate future patch numbers for the queued follow-on items."
+  ]
+}

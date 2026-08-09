@@ -1,0 +1,43 @@
+{
+  "patch_id": "COLAB_RESULTS_DIRECTORY_ARCHIVE_REGISTRY_001",
+  "title": "Add Governed Colab Results Directory and Zip Archive Registry",
+  "status": "APPLIED_C1_GOVERNANCE_MAINTENANCE",
+  "created_at": "2026-07-22T00:00:00Z",
+  "authority": "Global Governance",
+  "department": "colab",
+  "trigger": "User requested a results directory to house Colab output and governance requiring each zip be inducted and registered.",
+  "scope": {
+    "included": [
+      "Colab results directory",
+      "Colab result archive registry",
+      "SSOT and local agent rule updates",
+      "claim registry synchronization",
+      "induction registry and queue binding",
+      "lexicon gap synchronization",
+      "textbook synchronization"
+    ],
+    "excluded": [
+      "moving existing external Notebook 10-12 zips",
+      "validating any new result zip",
+      "claim promotion",
+      "approved tool admission"
+    ]
+  },
+  "created_artifacts": [
+    "departments/colab/results/README.md",
+    "departments/colab/results/.gitkeep",
+    "registry/colab_result_archive_registry.json",
+    "registry/governance/patches/COLAB_RESULTS_DIRECTORY_ARCHIVE_REGISTRY_001.json"
+  ],
+  "governance_rule": "Every Colab result zip must be inducted through registry/induction_registry.json, bound to governance/live/induction_queue.json, and registered in registry/colab_result_archive_registry.json before citation or interpretation.",
+  "claim_ceiling": "C1_DEFINED_PROVISIONAL",
+  "claim_humility_review": {
+    "status": "passed",
+    "bounded_statement": "This patch establishes output routing and registration requirements only. It does not classify any new zip as C2 or validate any notebook result."
+  },
+  "validation_required": [
+    "JSON parse validation",
+    "scripts/global_validate.py",
+    "DB registry snapshot/freshness sync"
+  ]
+}

@@ -1,0 +1,246 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/inference_boundary_registry_v1.schema.json",
+  "title": "Inference Boundary Registry Schema",
+  "description": "Registry of repository inference boundaries and false positives.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_id",
+    "schema_version",
+    "generated_at",
+    "boundaries",
+    "false_positives"
+  ],
+  "properties": {
+    "schema_id": {
+      "type": "string",
+      "const": "inference_boundary_registry_v1"
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "generated_at": {
+      "type": "string"
+    },
+    "boundaries": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/boundary"
+      }
+    },
+    "false_positives": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/falsePositive"
+      }
+    }
+  },
+  "$defs": {
+    "budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "maximum_calls",
+        "maximum_retries",
+        "maximum_input_tokens",
+        "maximum_output_tokens",
+        "maximum_latency_ms"
+      ],
+      "properties": {
+        "maximum_calls": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "maximum_retries": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "maximum_input_tokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "maximum_output_tokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "maximum_latency_ms": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "boundary_id",
+        "path",
+        "symbol",
+        "status",
+        "owner",
+        "allowed_callers",
+        "allowed_purposes",
+        "allowed_modes",
+        "default_budget",
+        "budget_ceiling",
+        "deterministic_fallback",
+        "output_schema",
+        "telemetry_schema",
+        "retry_policy",
+        "authority_class",
+        "last_audited"
+      ],
+      "properties": {
+        "boundary_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "symbol": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "ACTIVE",
+            "LATENT",
+            "TEST_ONLY",
+            "EXTERNAL_ONLY",
+            "DEPRECATED",
+            "DISABLED"
+          ]
+        },
+        "owner": {
+          "type": "string",
+          "minLength": 1
+        },
+        "allowed_callers": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "allowed_purposes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "allowed_modes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "CONSTRAINED",
+              "OPEN"
+            ]
+          }
+        },
+        "default_budget": {
+          "$ref": "#/$defs/budget"
+        },
+        "budget_ceiling": {
+          "$ref": "#/$defs/budget"
+        },
+        "deterministic_fallback": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "symbol",
+            "reply_source"
+          ],
+          "properties": {
+            "symbol": {
+              "type": "string",
+              "minLength": 1
+            },
+            "reply_source": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "output_schema": {
+          "type": "string",
+          "minLength": 1
+        },
+        "telemetry_schema": {
+          "type": "string",
+          "minLength": 1
+        },
+        "retry_policy": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "default_retry_budget",
+            "automatic_retry"
+          ],
+          "properties": {
+            "default_retry_budget": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "automatic_retry": {
+              "type": "boolean"
+            }
+          }
+        },
+        "authority_class": {
+          "type": "string",
+          "enum": [
+            "PRESENTATION_ONLY",
+            "ADVISORY",
+            "PLAN_PROPOSAL",
+            "TOOL_PROPOSAL",
+            "EXECUTION_FORBIDDEN"
+          ]
+        },
+        "last_audited": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "falsePositive": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "symbol",
+        "classification",
+        "reason",
+        "line_range"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "symbol": {
+          "type": "string",
+          "minLength": 1
+        },
+        "classification": {
+          "type": "string",
+          "const": "FALSE_POSITIVE"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "line_range": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

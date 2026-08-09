@@ -1,0 +1,121 @@
+{
+  "patch_id": "PATCH_ACCELERATOR_INFERENCE_NECESSITY_GATE_052",
+  "title": "Repository-Wide Inference Necessity Gate",
+  "type": "repository_wide_inference_governance",
+  "artifact_type": "governance_patch",
+  "mode": "additive",
+  "status": "APPLIED",
+  "execution_date": "2026-07-12",
+  "applied_on": "2026-07-12T04:48:17.7812995-04:00",
+  "predecessor_patches": [
+    "PATCH_ACCELERATOR_CANONICAL_CONTEXT_CAPSULE_050",
+    "PATCH_ACCELERATOR_SEMANTIC_READOUT_CAPABILITY_GATE_051"
+  ],
+  "objective": "Establish one reusable repository-wide decision boundary that denies inference unless deterministic methods have been exhausted, material uncertainty remains, a valid governed context capsule exists, and an explicit bounded inference budget authorizes the call.",
+  "core_invariant": "No subsystem may invoke inference directly. Every inference request must pass through the canonical inference necessity gate.",
+  "files_changed": [
+    "tools/inference_governance/__init__.py",
+    "tools/inference_governance/inference_necessity_gate.py",
+    "tools/signal_scope_phase_continuation_engine/core/semantic_readout.py",
+    "registry/inference_boundary_registry.json",
+    "schemas/inference_boundary_registry_v1.schema.json",
+    "schemas/inference_gate_event_v1.schema.json",
+    "tests/inference_governance/__init__.py",
+    "tests/inference_governance/test_no_ungated_inference_boundaries.py",
+    "reports/inference-boundary-register-baseline.json",
+    "reports/inference-necessity-gate-result.json",
+    "reports/inference-boundary-call-graph.md",
+    "registry/governance/patches/PATCH_ACCELERATOR_INFERENCE_NECESSITY_GATE_052.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance_hash_registry.json"
+  ],
+  "boundary_registry": {
+    "path": "registry/inference_boundary_registry.json",
+    "boundaries_discovered": 1,
+    "boundaries_registered": 1,
+    "active": 0,
+    "latent": 1,
+    "test_only": 1,
+    "deprecated": 0,
+    "false_positives": [
+      "gpt_folder_bridge/bridge.py"
+    ]
+  },
+  "shared_gate_path": "tools/inference_governance/inference_necessity_gate.py",
+  "gate_contract": {
+    "gate_id": "inference_necessity_gate_v1",
+    "schema_version": "1.0.0",
+    "default_decision": "DENY",
+    "decision_values": [
+      "DENY_DETERMINISTIC_RESULT_AVAILABLE",
+      "DENY_CACHE_RESULT_AVAILABLE",
+      "DENY_MACHINE_READABLE_STRUCTURE",
+      "DENY_FINITE_SEARCH_AVAILABLE",
+      "DENY_KNOWN_FAILURE_SIGNATURE",
+      "DENY_CONTEXT_INVALID",
+      "DENY_AUTHORITY_INVALID",
+      "DENY_PURPOSE_NOT_ALLOWED",
+      "DENY_CALLER_NOT_ALLOWED",
+      "DENY_BUDGET_EXHAUSTED",
+      "DENY_UNCERTAINTY_NOT_MATERIAL",
+      "DENY_BOUNDARY_NOT_REGISTERED",
+      "AUTHORIZE_CONSTRAINED_INFERENCE",
+      "AUTHORIZE_OPEN_INFERENCE"
+    ]
+  },
+  "semantic_readout_migration": {
+    "registered": true,
+    "routed_through_shared_gate": true,
+    "default_budget_zero": true,
+    "open_mode_disabled": true,
+    "local_fallback_preserved": true,
+    "no_duplicate_authorization_path": true
+  },
+  "static_enforcement": {
+    "scan_path": "tests/inference_governance/test_no_ungated_inference_boundaries.py",
+    "direct_provider_patterns": [
+      "urllib.request.urlopen(",
+      "chat.completions.create(",
+      "responses.create(",
+      "generateContent(",
+      "OpenAI(",
+      "Anthropic("
+    ],
+    "ungated_boundaries_found": [],
+    "synthetic_violation_detected": false
+  },
+  "schemas_added_or_changed": [
+    "schemas/inference_boundary_registry_v1.schema.json",
+    "schemas/inference_gate_event_v1.schema.json"
+  ],
+  "tests_added_or_changed": [
+    "tests/inference_governance/__init__.py",
+    "tests/inference_governance/test_no_ungated_inference_boundaries.py"
+  ],
+  "validation_commands": [
+    "python -m py_compile tools\\inference_governance\\inference_necessity_gate.py tools\\signal_scope_phase_continuation_engine\\core\\semantic_readout.py tests\\inference_governance\\test_no_ungated_inference_boundaries.py",
+    "python -m unittest tests.test_semantic_readout_capability_gate tests.test_governed_context_capsule_v1 tests.inference_governance.test_no_ungated_inference_boundaries",
+    "git diff --check -- tools/inference_governance/inference_necessity_gate.py tools/signal_scope_phase_continuation_engine/core/semantic_readout.py registry/inference_boundary_registry.json schemas/inference_boundary_registry_v1.schema.json schemas/inference_gate_event_v1.schema.json tests/inference_governance/__init__.py tests/inference_governance/test_no_ungated_inference_boundaries.py reports/inference-boundary-register-baseline.json reports/inference-necessity-gate-result.json reports/inference-boundary-call-graph.md"
+  ],
+  "validation_results": {
+    "python_compilation": "pass",
+    "semantic_readout_unittest": "pass",
+    "governed_context_capsule_unittest": "pass",
+    "inference_governance_unittest": "pass",
+    "targeted_git_diff_check": "pass",
+    "full_repo_git_diff_check": "partial_due_existing_unrelated_trailing_whitespace_in_outputs/audits/global_health_report.json"
+  },
+  "rollback_procedure": [
+    "Back up the 052 state to a temp directory.",
+    "Restore the pre-052 semantic-readout and repository boundary state.",
+    "Run the 050/051 test suites against the rolled-back tree.",
+    "Restore the backed-up 052 state.",
+    "Re-run the restored-state tests and compile checks."
+  ],
+  "rollback_result": "pass",
+  "known_limitations": [
+    "The full-tree git diff check is blocked by an unrelated pre-existing whitespace issue in outputs/audits/global_health_report.json.",
+    "The direct provider scan is intentionally limited to repository source roots and excludes the enforcement test itself to avoid self-matching regex literals."
+  ],
+  "next_patch": "PATCH_ACCELERATOR_DETERMINISTIC_DECISION_CACHE_053"
+}

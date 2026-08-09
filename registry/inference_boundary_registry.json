@@ -1,0 +1,60 @@
+{
+  "schema_id": "inference_boundary_registry_v1",
+  "schema_version": "1.0.0",
+  "generated_at": "2026-07-12T09:42:00-04:00",
+  "boundaries": [
+    {
+      "boundary_id": "SEMANTIC_READOUT_OPTIONAL_OPENAI_001",
+      "path": "tools/signal_scope_phase_continuation_engine/core/semantic_readout.py",
+      "symbol": "_openai_compatible_reply",
+      "status": "LATENT",
+      "owner": "tools.signal_scope_phase_continuation_engine.core.semantic_readout",
+      "allowed_callers": [
+        "analysis_intake.worker"
+      ],
+      "allowed_purposes": [
+        "HUMAN_READABLE_SUMMARY",
+        "AMBIGUITY_EXPLANATION",
+        "OPTIONAL_SEMANTIC_COMMENTARY"
+      ],
+      "allowed_modes": [
+        "CONSTRAINED"
+      ],
+      "default_budget": {
+        "maximum_calls": 0,
+        "maximum_retries": 0,
+        "maximum_input_tokens": 0,
+        "maximum_output_tokens": 0,
+        "maximum_latency_ms": 0
+      },
+      "budget_ceiling": {
+        "maximum_calls": 1,
+        "maximum_retries": 1,
+        "maximum_input_tokens": 12000,
+        "maximum_output_tokens": 500,
+        "maximum_latency_ms": 12000
+      },
+      "deterministic_fallback": {
+        "symbol": "_local_reply",
+        "reply_source": "LOCAL_DETERMINISTIC"
+      },
+      "output_schema": "semantic_readout_reply_v1",
+      "telemetry_schema": "semantic_readout_boundary_event_v1",
+      "retry_policy": {
+        "default_retry_budget": 0,
+        "automatic_retry": false
+      },
+      "authority_class": "PRESENTATION_ONLY",
+      "last_audited": "2026-07-12T09:42:00-04:00"
+    }
+  ],
+  "false_positives": [
+    {
+      "path": "gpt_folder_bridge/bridge.py",
+      "symbol": "API_KEY",
+      "classification": "FALSE_POSITIVE",
+      "reason": "Local authenticated file bridge stub; no model/provider invocation.",
+      "line_range": "5-11"
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "spec_id": "MPF_SIM_D_E_HELD_OUT_STRESS_001",
+  "schema_version": "1.0.0",
+  "status": "IMMUTABLE_SPEC",
+  "created_at": "2026-07-30T00:00:00Z",
+  "source_notebook": "departments/colab/notebook_designs/notebook_23_d_e_held_out_stress/RT_Notebook_23_D_E_Held_Out_Stress.ipynb",
+  "research_question": "Within newly declared held-out contexts and source-relation cases, do the frozen bounded P127 representability and P128 non-collapse predicates retain their declared classifications under deterministic replay?",
+  "hypotheses": {
+    "H1_bounded_replay": "The frozen predicates produce identical classifications under exact replay for every held-out row.",
+    "H0_falsification": "At least one held-out row produces a replay mismatch, an expected-positive rejection, an expected-negative admission, or a context/history leakage violation.",
+    "scope_note": "Neither hypothesis is a universal theorem claim; the test is a finite stress and counterexample search."
+  },
+  "independent_variables": [
+    {"name": "context_family", "definition": "Held-out context family not used by the P127/P128 fixture set", "units_or_scale": "categorical", "allowed_values_or_range": "C4, C5, C6"},
+    {"name": "source_relation_case", "definition": "Declared source relation with controlled witness, history, type, and cross-context conditions", "units_or_scale": "categorical", "allowed_values_or_range": "positive, missing_witness, missing_history, wrong_type, cross_context, threshold_boundary"},
+    {"name": "witness_mode", "definition": "Whether the typed witness carries the complete declared source relation token", "units_or_scale": "categorical", "allowed_values_or_range": "bare, enriched"},
+    {"name": "seed", "definition": "Deterministic generation seed for held-out values and traces", "units_or_scale": "integer", "allowed_values_or_range": "401, 503, 607"},
+    {"name": "threshold_profile", "definition": "Declared context-indexed threshold profile selected before execution", "units_or_scale": "categorical", "allowed_values_or_range": "low, mid, high"}
+  ],
+  "dependent_variables": [
+    {"name": "representability_classification", "definition": "Frozen P127 candidate predicate result and explicit rejection reason", "units_or_scale": "categorical", "allowed_values_or_range": "REPRESENTABLE, REJECT_TYPE, REJECT_CONTEXT, REJECT_WITNESS, REJECT_HISTORY, REJECT_PROFILE"},
+    {"name": "noncollapse_classification", "definition": "Frozen P128 boundary result under the declared epsilon_a,C profile", "units_or_scale": "categorical", "allowed_values_or_range": "NON_COLLAPSED, REJECT_DISTINCTION, REJECT_SUBTHRESHOLD, REJECT_PROFILE"},
+    {"name": "replay_agreement", "definition": "Exact agreement across two independent notebook replay passes", "units_or_scale": "boolean", "allowed_values_or_range": "true or false"},
+    {"name": "falsification_flag", "definition": "Whether a declared negative control is admitted or a declared positive control is rejected", "units_or_scale": "boolean", "allowed_values_or_range": "true or false"}
+  ],
+  "controls": [
+    {"name": "frozen_predicates", "purpose": "Prevent rule drift", "implementation": "Use the P127/P128 candidate definitions and failure labels exactly as frozen before execution."},
+    {"name": "held_out_split", "purpose": "Prevent fixture memorization", "implementation": "Use only C4-C6 contexts and generated cases; do not reuse the existing P127/P128 fixture rows as test rows."},
+    {"name": "blind_expected_labels", "purpose": "Prevent outcome-conditioned acceptance", "implementation": "Store expected positive/negative control labels in a pre-execution control file separate from the evaluator input path."},
+    {"name": "complete_field_binding", "purpose": "Test source-relation preservation", "implementation": "Require context, ordered source payload, witness token, trace, and history fields to be checked independently."},
+    {"name": "replay_control", "purpose": "Detect hidden state or nondeterminism", "implementation": "Run each frozen row twice with identical seed and compare canonical serialized outputs."},
+    {"name": "counterexample_preservation", "purpose": "Preserve negative evidence", "implementation": "Any mismatch or unexpected admission is recorded as a limitation/counterexample and cannot be discarded. "}
+  ],
+  "random_seed": {"value": [401, 503, 607], "seed_scope": "held-out value and trace generation", "derivation_policy": "Frozen before execution; no undeclared seeds."},
+  "parameter_space": [
+    {"name": "context_families", "values_or_range": "C4, C5, C6", "units_or_scale": "categorical", "default": "all", "sampling_rule": "complete declared set"},
+    {"name": "source_relation_cases", "values_or_range": "6 cases per context and witness mode", "units_or_scale": "count", "default": 6, "sampling_rule": "complete declared set"},
+    {"name": "witness_modes", "values_or_range": "bare, enriched", "units_or_scale": "categorical", "default": "both", "sampling_rule": "complete declared set"},
+    {"name": "seeds", "values_or_range": "401, 503, 607", "units_or_scale": "count", "default": 3, "sampling_rule": "complete declared set"},
+    {"name": "repetitions", "values_or_range": 2, "units_or_scale": "count", "default": 2, "sampling_rule": "exact replay"}
+  ],
+  "expected_control_matrix": [
+    {"case": "positive", "expected_representability": "REPRESENTABLE", "expected_noncollapse": "NON_COLLAPSED"},
+    {"case": "missing_witness", "expected_representability": "REJECT_WITNESS", "expected_noncollapse": "NON_COLLAPSED"},
+    {"case": "missing_history", "expected_representability": "REJECT_HISTORY", "expected_noncollapse": "NON_COLLAPSED"},
+    {"case": "wrong_type", "expected_representability": "REJECT_TYPE", "expected_noncollapse": "NON_COLLAPSED"},
+    {"case": "cross_context", "expected_representability": "REJECT_CONTEXT", "expected_noncollapse": "REJECT_PROFILE"},
+    {"case": "threshold_boundary", "expected_representability": "REPRESENTABLE", "expected_noncollapse": "REJECT_SUBTHRESHOLD"}
+  ],
+  "termination_conditions": [
+    "All declared context/case/witness/seed combinations and both replay passes complete.",
+    "Any required source, witness, trace, history, context, or threshold field is missing.",
+    "Any evaluator rule differs from the frozen P127/P128 definitions.",
+    "Any output fails schema, canonical serialization, or manifest hashing.",
+    "No post-hoc context, seed, case, threshold, or expected-label expansion."
+  ],
+  "expected_outputs": [
+    {"name": "held_out_rows", "path_pattern": "departments/colab/results/MPF_SIM_D_E_HELD_OUT_STRESS_001/held_out_rows.jsonl", "required": true, "interpretation_role": "Recoverable per-row classifications and failure reasons."},
+    {"name": "summary", "path_pattern": "departments/colab/results/MPF_SIM_D_E_HELD_OUT_STRESS_001/summary.json", "required": true, "interpretation_role": "Replay, control, and falsification summary."},
+    {"name": "falsification_report", "path_pattern": "departments/colab/results/MPF_SIM_D_E_HELD_OUT_STRESS_001/falsification_report.json", "required": true, "interpretation_role": "Explicit counterexamples, mismatches, and negative controls."},
+    {"name": "manifest", "path_pattern": "departments/colab/results/MPF_SIM_D_E_HELD_OUT_STRESS_001/manifest.json", "required": true, "interpretation_role": "Notebook/spec/output provenance and hashes."}
+  ],
+  "interpretation_protocol": {
+    "claim_ceiling": "C2_LIMITATION_OR_NEGATIVE_RESULT",
+    "decision_rules": [
+      "Support only bounded replay consistency inside the frozen held-out design if every control and replay condition passes.",
+      "Treat any unexpected admission, rejection, mismatch, or leakage as preserved counterexample/limitation evidence.",
+      "Do not convert finite held-out support into universal preservation, injectivity, reversibility, or theorem closure."
+    ],
+    "allowed_interpretations": ["Bounded behavior of the frozen D/E predicates on declared held-out contexts and cases."],
+    "blocked_interpretations": ["Universal source-relation preservation.", "Universal threshold derivation.", "Injectivity or reversibility.", "Theorem promotion or C5/C6 elevation.", "External physical validity."]
+  },
+  "provenance": {"source_paths": ["registry/math/d_semantics_obligation_registry.json", "registry/governance/patches/D_HUMAN_REVIEW_APPROVAL_P127_P128_20260730_001.json", "departments/colab/notebook_designs/notebook_22_enriched_relation_token_witness/experiment_spec.json"], "artifact_hashes": {}},
+  "immutability": {"frozen_before_execution": true, "content_sha256": "c8b796265606d70fe14c78a8989898a591d77d8361376d64b4ad82fd326426bd", "hash_method": "SHA-256 of canonical JSON with content_sha256 blanked", "supersession_policy": "Do not edit after execution starts; create a new spec_id for changes."}
+}

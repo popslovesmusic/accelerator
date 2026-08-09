@@ -1,0 +1,33 @@
+{
+  "AX-WITNESS-REPDIST": {
+    "axiom_id": "AX-WITNESS-REPDIST",
+    "classification": "FORMATION_AND_DIRECTIONALITY_AXIOM",
+    "statement": "∀ (C : ContextUniverse) (r : Rel_C(C)) (d : Dist_C(C)) (w : TYPE_WITNESS_C(C,r,d)) (x_d : Expr_D(C)), TypedWitness_C(C, w, x_d) → RepDist_C(C, x_d)",
+    "guards": [
+      "Must bind the same context C",
+      "w must be a well-typed witness of TYPE_WITNESS_C(C, r, d)",
+      "x_d must be a valid target distinction expression Expr_D(C)"
+    ],
+    "prohibited_strengthenings": [
+      "RepDist_C(C, x_d) → ∃ w, TypedWitness_C(C, w, x_d)",
+      "TypedWitness_C(C, w, x_d) ↔ RepDist_C(C, x_d)",
+      "Axiom does not imply witness preservation across transition"
+    ]
+  },
+  "AX-REALIZATION-WITNESS": {
+    "axiom_id": "AX-REALIZATION-WITNESS",
+    "classification": "FORMATION_AND_REALIZATION_SOUNDNESS_AXIOM",
+    "statement": "∀ (C : ContextUniverse) (r : Rel_C(C)) (d : Dist_C(C)) (x_r : Realization_C(C)) (x_d : Expr_D(C)) (w : TYPE_WITNESS_C(C,r,d)), project_w(C, r, d, x_r, x_d) = Some(w) → TypedWitness_C(C, w, x_d)",
+    "guards": [
+      "Must bind the same context C",
+      "Projection must succeed (Some(w))",
+      "Realization x_r must match target relation r and distinction compatibility d for semantic target x_d"
+    ],
+    "prohibited_strengthenings": [
+      "Every witness has a realization",
+      "Every realization projects successfully",
+      "Every realization determines a unique witness",
+      "TraceCompatible_C alone implies projection success"
+    ]
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "capture_type": "CHAT_SEMANTIC_CAPTURE",
+  "source_channel": "current_conversation_chat",
+  "packet_id": "RT_DEVADM_ADMOBS_DELTA_A_HUMAN_REVIEW_20260728_001",
+  "packet_type": "RT_HUMAN_SEMANTIC_DECISION",
+  "capture_timestamp_utc": "2026-07-28T17:30:00Z",
+  "status": "HUMAN_DECISION_APPROVED_FOR_PROVISIONAL_PLACEMENT",
+  "canonicality": "NON_CANONICAL_CANDIDATE",
+  "claim_ceiling": "C1_MODEL_RELATIVE",
+  "decision": {
+    "selected_option": "DEFINE_EXPLICIT_MAPPING",
+    "formal_statement": "AdmObs_x := Map_obs(DevAdm_x, candidate_orientation, B_x, D_rel, R)",
+    "identity_ruling": "DevAdm_x != AdmObs_x != delta_a",
+    "summary": "DevAdm_x remains orientation-specific; AdmObs_x is its typed observation-orientation projection; delta_a remains the whole-continuation admissibility filter."
+  },
+  "typed_roles": {
+    "DevAdm_x": {"role": "Evaluate deviation admissibility for a candidate observation orientation under boundary, domain, and residue.", "result_type": "DevAdmissibilityResult", "results": ["ADMISSIBLE", "INADMISSIBLE", "UNDEFINED"]},
+    "AdmObs_x": {"role": "Expose the DevAdm_x result as the observation-orientation predicate consumed by Excl_obs_x.", "signature": "AdmObs_x(o; B_x, D_rel, R) : PartialProposition", "consumer": "Excl_obs_x"},
+    "delta_a": {"role": "Filter complete candidate continuations through P_adm", "kernel": "P_adm = Gamma_E AND Gamma_R AND Gamma_T AND Gamma_O", "relationship": "AdmObs_x may instantiate or support Gamma_O only."}
+  },
+  "mapping": {
+    "candidate_deviation": "d_x(o) := DevRel_x(o, B_x, D_rel)",
+    "evaluation": "v := DevAdm_x(d_x(o); B_x, D_rel, R)",
+    "ADMISSIBLE": "AdmObs_x(o; B_x, D_rel, R) = TRUE, preserving witness w as orientation-admissibility provenance.",
+    "INADMISSIBLE": "AdmObs_x(o; B_x, D_rel, R) = FALSE, preserving witness w as orientation-exclusion provenance.",
+    "UNDEFINED": "AdmObs_x(o; B_x, D_rel, R) = UNDEFINED; Excl_obs_x returns UNDEFINED_INVOCATION rather than a valid exclusion result."
+  },
+  "exclusion_bridge": {
+    "admissible_family": "Omega_x_adm := {o in Omega_obs | AdmObs_x(o; B_x, D_rel, R) = TRUE}",
+    "excluded_family": "Omega_x_exc := {o in Omega_obs | AdmObs_x(o; B_x, D_rel, R) = FALSE}",
+    "undefined_guard": "An UNDEFINED orientation prevents total-family classification unless explicit partial-family semantics are declared."
+  },
+  "delta_a_bridge": {
+    "orientation_clause": "Gamma_O(q, c, R, -(i)) := AdmObs_x(ObsOrient(q); B_x(c), D_rel(c), R)",
+    "full_filter": "delta_a(Q; c, R, -(i)) := {q in Q | Gamma_E(q) AND Gamma_R(q) AND Gamma_T(q) AND Gamma_O(q)}",
+    "restriction": "AdmObs_x cannot approve a continuation independently of Gamma_E, Gamma_R, and Gamma_T."
+  },
+  "authorized_chain": "B_x -> DevAdm_x -> AdmObs_x -> Excl_obs_x(Omega_obs) -> Omega_x_adm -> RefOrient -> [Asym]_x -> <S>_x",
+  "circularity_guards": ["DevAdm_x does not require completed o_x.", "DevAdm_x does not require [Asym]_x.", "DevAdm_x and AdmObs_x do not require <S>_x.", "Mapping occurs before RefOrient and ProjectBounded.", "Empty Omega_x_adm is not symmetry annihilation."],
+  "rejected_identifications": ["DevAdm_x = delta_a", "AdmObs_x = delta_a", "DevAdm_x disconnected from AdmObs_x"],
+  "placement_action": "Replace generic Adm_x in the provisional Excl_obs_x specification with AdmObs_x and attach the explicit DevAdm_x mapping.",
+  "preserved_surfaces": ["Excl_obs_x partiality", "UNDEFINED_INVOCATION distinction", "total-versus-partial orientation exclusion", "symmetry non-annihilation", "no unique reference orientation", "delta_a core definition", "P_adm conjunctive structure", "D-semantics obligations"],
+  "next_action": "Prepare and place a narrow Excl_obs_x predicate-mapping patch implementing AdmObs_x and its Gamma_O bridge without rebinding delta_a.",
+  "authorization_limits": ["Provisional placement only", "No canonical registry mutation", "No textbook rewrite", "No delta_a rebinding", "No D-obligation discharge", "Human review remains required"]
+}

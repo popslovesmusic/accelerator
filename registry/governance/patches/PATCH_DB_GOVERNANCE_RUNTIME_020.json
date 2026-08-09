@@ -1,0 +1,125 @@
+{
+  "patch_id": "PATCH_DB_GOVERNANCE_RUNTIME_020",
+  "campaign_id": "CAMPAIGN_DB_GOVERNANCE_RUNTIME_001",
+  "campaign": "CAMPAIGN_DB_GOVERNANCE_RUNTIME_001",
+  "type": "governance_runtime_extension",
+  "status": "APPLIED",
+  "applied_on": "2026-07-07T22:17:22.4889322-04:00",
+  "mode": "additive",
+  "title": "Validator Trend and Regression Analytics",
+  "goal": "Add longitudinal validator analytics so governance health can be compared across validation runs, enabling runtime regression detection, stage-duration tracking, warning-count deltas, and SSOT growth monitoring.",
+  "problem_statement": {
+    "current_state": "PATCH_DB_GOVERNANCE_RUNTIME_019 introduced staged validation, partial modes, profiling, and richer reports.",
+    "remaining_gap": "Each validation report is still primarily point-in-time. The runtime does not yet analyze whether governance health, validator duration, registry size, warning counts, or stage costs are improving or regressing over time.",
+    "risk": "Slow validator degradation, registry drift, warning growth, or patch-chain expansion may remain invisible until they cause a hard failure."
+  },
+  "basis": {
+    "source_patches": [
+      "PATCH_DB_GOVERNANCE_RUNTIME_019"
+    ],
+    "source_surfaces": [
+      "scripts/global_validate.py",
+      "docs/governance/GLOBAL_VALIDATION_ROUTINE.md"
+    ],
+    "scope": "Add compact validation history logging and trend analytics without changing validation semantics, RT_core, or authority-bearing patch decisions."
+  },
+  "target_files": [
+    "scripts/global_validate.py",
+    "docs/governance/GLOBAL_VALIDATION_ROUTINE.md"
+  ],
+  "required_repo_changes": [
+    {
+      "path": "scripts/global_validate.py",
+      "description": "Add longitudinal history logging, baseline selection, trend comparison, and compact regression analytics without changing default validator semantics."
+    },
+    {
+      "path": "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+      "description": "Document the history and trend flags, output files, baseline selection behavior, and the claim that trend telemetry does not alter validation outcomes."
+    }
+  ],
+  "runtime_changes": {
+    "validator_flags": [
+      "--history",
+      "--trend",
+      "--trend-baseline",
+      "--no-history"
+    ],
+    "history_outputs": [
+      "outputs/audits/validation_history.jsonl",
+      "outputs/audits/validation_trend_report.json"
+    ],
+    "history_record_fields": [
+      "run_id",
+      "timestamp",
+      "validation_mode",
+      "overall_status",
+      "duration_seconds",
+      "stage_durations",
+      "stage_statuses",
+      "warning_count",
+      "semantic_failure_count",
+      "runtime_failure_count",
+      "tooling_failure_count",
+      "registry_file_count",
+      "patch_record_count",
+      "ledger_entry_count",
+      "hash_registry_entry_count",
+      "slowest_stage"
+    ],
+    "trend_report_fields": [
+      "current_run_id",
+      "baseline_run_id",
+      "duration_delta_seconds",
+      "duration_delta_percent",
+      "stage_duration_deltas",
+      "warning_count_delta",
+      "failure_count_delta",
+      "registry_growth_delta",
+      "patch_count_delta",
+      "ledger_growth_delta",
+      "hash_registry_growth_delta",
+      "regression_flags",
+      "improvement_flags"
+    ],
+    "trend_statuses": [
+      "ready",
+      "TREND_HISTORY_UNAVAILABLE",
+      "TREND_HISTORY_CORRUPT"
+    ]
+  },
+  "registry_updates": [
+    "scripts/global_validate.py",
+    "docs/governance/GLOBAL_VALIDATION_ROUTINE.md",
+    "registry/governance_hash_registry.json",
+    "registry/governance_change_ledger.json",
+    "registry/governance/patches/PATCH_DB_GOVERNANCE_RUNTIME_020.json"
+  ],
+  "acceptance_criteria": [
+    "python scripts/global_validate.py --history appends one compact JSONL summary.",
+    "python scripts/global_validate.py --trend generates validation_trend_report.json using the most recent passing full run by default.",
+    "Trend analytics do not alter semantic validation outcomes.",
+    "History records remain compact and exclude recursive evidence trees.",
+    "Default validation remains backward compatible."
+  ],
+  "summary": {
+    "status": "pass",
+    "runtime": {
+      "history_telemetry": "active",
+      "trend_analytics": "active",
+      "authority_boundary": "unchanged"
+    },
+    "warnings": [
+      "Trend telemetry is additive and does not alter RT_core.",
+      "History and trend outputs are audit artifacts, not authority surfaces."
+    ]
+  },
+  "validation": {
+    "required": [
+      "history_write_pass",
+      "trend_report_pass",
+      "full_validation_backward_compatible",
+      "report_semantics_unchanged"
+    ],
+    "result": "pass"
+  }
+}

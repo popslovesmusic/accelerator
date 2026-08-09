@@ -1,0 +1,103 @@
+{
+  "artifact_type": "PROVISIONAL_CORRECTED_BINARY_GUARD_DEFINITION",
+  "artifact_id": "RT_ADMOBS_FCI005_GUARD_STAGE_CORRECTED_20260728_001",
+  "status": "PROVISIONAL_SIGNATURE_READY_FOR_BRIDGE_TESTING",
+  "canonicality": "NON_CANONICAL_CANDIDATE",
+  "claim_ceiling": "C1_MODEL_RELATIVE",
+  "source_review": "RT_ADMOBS_FCI005_GUARD_STAGE_NORMALIZED_REVIEW_20260728_001",
+  "corrections_applied": [
+    "SOURCE_WITNESSES_HIDDEN",
+    "THRESHOLD_PRESERVATION_REQUIRED",
+    "STAGE_LABEL_NORMALIZED",
+    "BRIDGE_SYMBOL_REFERENCE_NORMALIZED"
+  ],
+  "stage_normalization": {
+    "FCI005-G04B": {
+      "stage": "DELTA_A_DEPENDENT",
+      "qualification": "Apply when result membership requires realization evidence; otherwise use G04A."
+    },
+    "FCI005-G01": {
+      "stage": "BRIDGE_PRECONDITION",
+      "consumer": "OrientCarrierBridge_x or ProjectBinaryGuard_x"
+    }
+  },
+  "support_objects": {
+    "OrientCarrierBridge_x": {
+      "signature": "OrientCarrierBridge_x(X, o; D_rel) : Prop",
+      "role": "Relate a source operand or transformation carrier to an observation orientation without identifying the two types."
+    },
+    "SourceContextBridge_x": {
+      "signature": "SourceContextBridge_x(Y; B_x, D_rel, R) : Prop",
+      "role": "Relate the source composition context to the observation admissibility context."
+    },
+    "DistinctionThresholdBridge_x": {
+      "signature": "DistinctionThresholdBridge_x(d_src, d_obs, epsilon_x; D_rel) : Prop",
+      "role": "Preserve the source distinction-floor decision and its failure semantics under projection.",
+      "undefined_policy": "Undefined threshold comparison or translation yields UNDEFINED_BRIDGE, not FALSE."
+    },
+    "FCI005DistinctionBridgeWitness_x": {
+      "signature": "FCI005DistinctionBridgeWitness_x(X, Z, Y, o_i, o_j; epsilon_x, B_x, D_rel, R) : Prop",
+      "definition": [
+        "OrientCarrierBridge_x(X, o_i; D_rel).",
+        "OrientCarrierBridge_x(Z, o_j; D_rel).",
+        "SourceContextBridge_x(Y; B_x, D_rel, R).",
+        "D(X|Z) is prebound and evaluable before RefOrient_x and delta_a.",
+        "d_obs(o_i,o_j) is evaluable before RefOrient_x and delta_a.",
+        "DistinctionThresholdBridge_x(D(X|Z), d_obs(o_i,o_j), epsilon_x; D_rel).",
+        "D(X|Z) > epsilon_x.",
+        "d_obs(o_i,o_j) > epsilon_x."
+      ]
+    }
+  },
+  "binary_candidate": {
+    "symbol": "BCon_FCI005Distinction_x",
+    "signature": "BCon_FCI005Distinction_x(o_i, o_j; epsilon_x, B_x, D_rel, R) : Prop",
+    "definition": "Exists X, Z, Y such that FCI005DistinctionBridgeWitness_x(X, Z, Y, o_i, o_j; epsilon_x, B_x, D_rel, R).",
+    "source_witness_policy": "X, Z, and Y are existential bridge witnesses, not public BCon_x parameters.",
+    "threshold_policy": "The source and observation distinction-floor decisions must be linked by DistinctionThresholdBridge_x; d_obs > epsilon_x may not silently replace D(X|Z) > epsilon_x.",
+    "symmetry_policy": "Unless the source distinction is directed, require or prove BCon_FCI005Distinction_x(o_i,o_j) iff BCon_FCI005Distinction_x(o_j,o_i).",
+    "BCon_x_binding": "NOT_YET_AUTHORIZED"
+  },
+  "bridge_tests": [
+    {
+      "test_id": "FCI005-BRIDGE-TEST-001",
+      "target": "OrientCarrierBridge_x",
+      "success": "Source carriers have observation-orientation representatives without type identity or completed RefOrient dependency.",
+      "status": "PENDING"
+    },
+    {
+      "test_id": "FCI005-BRIDGE-TEST-002",
+      "target": "SourceContextBridge_x",
+      "success": "Source context maps to B_x, D_rel, and R before [Asym]_x, <S>_x, and delta_a realization.",
+      "status": "PENDING"
+    },
+    {
+      "test_id": "FCI005-BRIDGE-TEST-003",
+      "target": "DistinctionThresholdBridge_x",
+      "success": "Projected threshold decision preserves source distinction-collapse success and failure states.",
+      "status": "PENDING"
+    },
+    {
+      "test_id": "FCI005-BRIDGE-TEST-004",
+      "target": "epsilon_x",
+      "success": "Threshold type, domain, provenance, and translation rule are declared.",
+      "status": "PENDING"
+    },
+    {
+      "test_id": "FCI005-BRIDGE-TEST-005",
+      "target": "Dependency acyclicity",
+      "success": "No bridge requires RefOrient_x, [Asym]_x, <S>_x, delta_a, or realized closure.",
+      "status": "PENDING"
+    }
+  ],
+  "prohibited": [
+    "Binding G01 as a binary constraint.",
+    "Projecting any delta_a-dependent guard upstream.",
+    "Binding FCI005-G06A without proving prebound class availability.",
+    "Binding BCon_FCI005Distinction_x before all bridge tests pass.",
+    "Binding anything into H_x."
+  ],
+  "next_action": "Run the five bridge tests against FCI005-G02.",
+  "failure_condition": "Any dependency on completed RefOrient_x, [Asym]_x, <S>_x, delta_a, or realized closure disqualifies FCI005-G02 from BCon_x eligibility.",
+  "human_review_required": true
+}

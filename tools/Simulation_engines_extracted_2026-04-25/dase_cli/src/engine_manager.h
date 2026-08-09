@@ -11,11 +11,12 @@
 #include <vector>
 #include <atomic>
 #include "json.hpp"
+#include "../../src/cpp/uhd770_runtime.h"
 
 // Engine instance wrapper
 struct EngineInstance {
     std::string engine_id;
-    std::string engine_type; // "phase4b", "igsoa_complex", or IGSOA lattice variants
+    std::string engine_type; // "phase4b", "igsoa_complex", "igsoa_gw", or IGSOA lattice variants
     void* engine_handle;      // Opaque handle to DLL engine
     int num_nodes;
     double created_timestamp;
@@ -108,6 +109,16 @@ public:
         double ops_per_sec;
         uint64_t total_operations;
         double speedup_factor;
+
+        // Scientific observables
+        double phi_rms;
+        double h_rms;
+        double energy_density;
+        double echo_intensity;
+        double entropy_rate;
+        double psi_squared_mean;
+        double mean_phi;
+
         double uhd770_time_ms;
         double cpu_reference_time_ms;
         double max_abs_drift;
@@ -121,6 +132,10 @@ public:
 private:
     std::map<std::string, std::unique_ptr<EngineInstance>> engines;
     std::atomic<int> next_engine_id;
+
+#if DASE_HAS_SYCL_RUNTIME
+    std::unique_ptr<sycl::queue> sycl_q_;
+#endif
 
     std::string generateEngineId();
     double getCurrentTimestamp();

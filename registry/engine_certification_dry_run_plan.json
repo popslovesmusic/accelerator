@@ -1,0 +1,66 @@
+{
+  "registry_id": "PCD_ENGINE_rigor endorsement_DRY_RUN_PLAN",
+  "version": "1.0.0",
+  "schema": {
+    "required_fields": [
+      "dry_run_id",
+      "tool_id",
+      "target_rigor endorsement",
+      "evidence_template",
+      "mock_or_existing_inputs",
+      "checks_to_execute",
+      "expected_result",
+      "claim_limit"
+    ]
+  },
+  "dry_runs": [
+    {
+      "dry_run_id": "CERT-DRY-GRAPH-001",
+      "tool_id": "graph_dynamics_sim_v1_cpp",
+      "target_rigor endorsement": "C4",
+      "evidence_template": "registry/engine_rigor endorsement_evidence_template.json",
+      "mock_or_existing_inputs": [
+        "runtime manifest",
+        "smoke output skeleton",
+        "control-case skeleton",
+        "falsification skeleton",
+        "uncertainty-report skeleton",
+        "provenance skeleton"
+      ],
+      "checks_to_execute": [
+        "template_completeness",
+        "required_runtime_fields_present",
+        "required_scientific_blocks_present",
+        "required_falsification_blocks_present",
+        "required_uncertainty_blocks_present",
+        "provenance_fields_present"
+      ],
+      "expected_result": "DRY_RUN_PASS_OR_REPAIR_REQUIRED",
+      "claim_limit": "no rigor endorsement upgrade; readiness only"
+    },
+    {
+      "dry_run_id": "CERT-DRY-CA-001",
+      "tool_id": "ca_admissibility_sim_v1_cpp",
+      "target_rigor endorsement": "C4",
+      "evidence_template": "registry/engine_rigor endorsement_evidence_template.json",
+      "mock_or_existing_inputs": [
+        "runtime manifest",
+        "smoke output skeleton",
+        "control-case skeleton",
+        "falsification skeleton",
+        "uncertainty-report skeleton",
+        "provenance skeleton"
+      ],
+      "checks_to_execute": [
+        "template_completeness",
+        "required_runtime_fields_present",
+        "required_scientific_blocks_present",
+        "required_falsification_blocks_present",
+        "required_uncertainty_blocks_present",
+        "provenance_fields_present"
+      ],
+      "expected_result": "DRY_RUN_PASS_OR_REPAIR_REQUIRED",
+      "claim_limit": "no rigor endorsement upgrade; readiness only"
+    }
+  ]
+}

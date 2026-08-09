@@ -1,0 +1,105 @@
+{
+  "patch_id": "PO_GEO_001_SYMBOLIC_CHECK_PREP_001",
+  "status": "APPLIED",
+  "applied_date": "2026-06-18T17:17:49-04:00",
+  "scope": "C1_MODEL_RELATIVE_ONLY",
+  "target": "PO-GEO-001 Projection Legality / L099",
+  "purpose": "Prepare L099 for symbolic_checked review by decomposing PO-GEO-001 into four individually checkable sub-obligations and registering the tau_geo trace map operator. Does not promote geometry_app.",
+  "current_state_at_application": {
+    "L099_status_before": "UNPROVEN",
+    "L099_status_after": "SYMBOLIC_CHECK_IN_PROGRESS",
+    "PO_GEO_001_status_before": "open",
+    "PO_GEO_001_status_after": "decomposed_symbolic_prep",
+    "geometry_app_status": "HARD_CAPPED_C1_STRUCTURAL_PROJECTION_ONLY",
+    "downstream_support": "BLOCKED",
+    "GEO_PROJECTION_VALIDATION_001": "DESIGNED_ADVERSARIAL_CONTROLS_REQUIRED"
+  },
+  "sub_obligations_registered": [
+    {
+      "id": "PO-GEO-001A",
+      "name": "Distinction Preservation",
+      "claim": "D_topology(A|B) > 0 implies D_geometry(Pi_geo(A)|Pi_geo(B)) > 0",
+      "failure_mode": "projection collapses distinct topology into indistinguishable geometry",
+      "symbolic_check_target": "Equivalence relation on Geometry_app may not collapse non-equivalent topology classes",
+      "status": "defined_pending_explicit_check"
+    },
+    {
+      "id": "PO-GEO-001B",
+      "name": "Admissibility Preservation",
+      "claim": "P_adm(T) = 1 implies P_adm(Pi_geo(T)) = 1",
+      "failure_mode": "projection creates illegal geometry from admissible topology",
+      "symbolic_check_target": "P_adm must apply to the codomain without exception",
+      "status": "defined_pending_explicit_check"
+    },
+    {
+      "id": "PO-GEO-001C",
+      "name": "Orientation Trace Preservation",
+      "claim": "orientation class of T remains recoverable from Pi_geo(T)",
+      "failure_mode": "selector information becomes unrecoverable after projection",
+      "symbolic_check_target": "tau_geo(Pi_geo(T)) retains orientation class label; requires OBJ-GEO-TRACE-001",
+      "status": "defined_pending_explicit_check"
+    },
+    {
+      "id": "PO-GEO-001D",
+      "name": "Closure Trace Preservation",
+      "claim": "closure identity of T remains traceable after Pi_geo(T)",
+      "failure_mode": "projection destroys closure lineage or aliases distinct closures",
+      "symbolic_check_target": "tau_geo(Pi_geo(T)) retains closure identity; tau_geo injective w.r.t. closure equivalence classes; requires OBJ-GEO-TRACE-001",
+      "status": "defined_pending_explicit_check"
+    }
+  ],
+  "new_formal_objects_registered": [
+    {
+      "object_id": "OBJ-GEO-TRACE-001",
+      "symbol": "tau_geo",
+      "classification": "recoverability_trace_operator",
+      "form": "tau_geo : Geometry_app -> Topology_app_trace",
+      "critical_test": "tau_geo(Pi_geo(T)) preserves required invariant labels of T",
+      "claim_scope": "C1_STRUCTURAL_PROJECTION_ONLY",
+      "must_not_claim": ["full inverse of Pi_geo", "physical recoverability", "metric reconstruction", "matter or field content recovery"]
+    }
+  ],
+  "promotion_gate": {
+    "PO-GEO-001_to_symbolic_checked": "All four sub-obligations must reach explicit_defined; no failure condition may be suppressed",
+    "L099_to_symbolic_checked": "Follows from PO-GEO-001 symbolic_checked; geometry_app remains at C1_STRUCTURAL_PROJECTION_ONLY",
+    "geometry_app_unaffected": "geometry_app remains C1_STRUCTURAL_PROJECTION_ONLY even after L099 reaches symbolic_checked; requires GEO-CAMPAIGN-001 separately"
+  },
+  "files_modified": [
+    "registry/math/proof_obligation_registry.json",
+    "registry/math/theorem_status_registry.json",
+    "registry/formal_object_registry.json",
+    "registry/math/observable_projection_registry.json"
+  ],
+  "files_created": [
+    "patches/PO_GEO_001_SYMBOLIC_CHECK_PREP_001.json"
+  ],
+  "open_obligations_after_patch": [
+    {
+      "id": "PO-GEO-001A",
+      "description": "Run explicit symbolic check for distinction preservation",
+      "status": "defined_pending_explicit_check"
+    },
+    {
+      "id": "PO-GEO-001B",
+      "description": "Run explicit symbolic check for admissibility preservation",
+      "status": "defined_pending_explicit_check"
+    },
+    {
+      "id": "PO-GEO-001C",
+      "description": "Run explicit symbolic check for orientation trace via tau_geo",
+      "status": "defined_pending_explicit_check"
+    },
+    {
+      "id": "PO-GEO-001D",
+      "description": "Run explicit symbolic check for closure trace via tau_geo; verify tau_geo injectivity on closure classes",
+      "status": "defined_pending_explicit_check"
+    },
+    {
+      "id": "GEO-CAMPAIGN-001",
+      "description": "Execute GEO_PROJECTION_VALIDATION_001 with all four adversarial controls",
+      "status": "PENDING_EXECUTION"
+    }
+  ],
+  "human_arbitration_required": false,
+  "claim_class": "C1"
+}

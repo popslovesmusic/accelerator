@@ -1,0 +1,63 @@
+{
+  "packet_id": "ACELLORATOR_IMPORT_RT_CALCULUS_EVIDENCE_001",
+  "packet_type": "ANALYSIS_INTAKE_IMPORT",
+  "execution_mode": "READ_ONLY_IMPORT",
+  "source": {
+    "type": "EXTERNAL_EVIDENCE_PACKAGE",
+    "expected_location": "D:\\projects\\RT calculus\\exports",
+    "selected_export": "RT_CALCULUS_ATTACK_EVIDENCE_20260804_002",
+    "required_contents": [
+      "source_snapshot/",
+      "manifest.json",
+      "snapshot_receipt.json",
+      "export_record.json",
+      "evidence_index.md",
+      "independence_audit.md",
+      "reproducibility_report.md",
+      "claim_scope_matrix.json",
+      "limitations_and_blockers.md",
+      "transfer_validation_report.json"
+    ]
+  },
+  "import_scope": {
+    "import_entire_package": true,
+    "import_individual_files": false,
+    "trust_manifest": true,
+    "verify_every_file_against_manifest": true
+  },
+  "verification": {
+    "required": [
+      "schema_id_present",
+      "schema_version_supported",
+      "manifest_hash_valid",
+      "snapshot_hash_valid",
+      "archive_hash_valid",
+      "all_manifest_files_present",
+      "all_sha256_values_match",
+      "one_way_transfer_validation_passed"
+    ],
+    "fail_behavior": "REJECT_IMPORT"
+  },
+  "explicitly_do_not": [
+    "Modify imported evidence.",
+    "Rewrite reports.",
+    "Create findings.",
+    "Create research propositions.",
+    "Create candidate actions.",
+    "Promote claims.",
+    "Modify RT.",
+    "Discard historical limitations.",
+    "Upgrade verification status."
+  ],
+  "initial_disposition": {
+    "classification": "PRESERVED_EXTERNAL_EVIDENCE",
+    "review_status": "NOT_REVIEWED",
+    "promotion_status": "HOLD",
+    "authority_effect": "NONE"
+  },
+  "completion_condition": {
+    "success": "Package is preserved, verified, indexed, and available to Acellorator review under governance.",
+    "stop_after_import": true,
+    "next_stage": "Await separate governed Review workflow."
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "patch_id": "PATCH_ACCELERATOR_DETERMINISTIC_ROUTING_AND_CANDIDATE_BOUNDING_054",
+  "status": "BASELINE",
+  "observed_at": "2026-07-12",
+  "summary": "Pre-change repeated work diverged on incidental request metadata and presentation variants before deterministic routing and candidate bounding were added.",
+  "observations": {
+    "capsule_task_query": {
+      "task_hash": "9a1bd0a134e8d46fdfe2ef6a51d80b5a07e9cdf9cb950245e8123f50b65f4ce0",
+      "query_hash": "3fdb616f27a73d9a5ea88ca0708a02361395dae2a740376c875029f057139e1b",
+      "candidate_set_hash": "35200340303a7c8b00a0efe012344b88832b854782213857244f1b1195314be7",
+      "divergence_source": "request_id was still participating in the governed capsule hash basis"
+    },
+    "retrieval_variants": {
+      "foo": {
+        "result_count": 1,
+        "candidate_set_hash": null
+      },
+      "space_foo_space": {
+        "result_count": 0,
+        "candidate_set_hash": null
+      },
+      "upper_foo": {
+        "result_count": 1,
+        "candidate_set_hash": null
+      }
+    }
+  },
+  "divergence_register": [
+    {
+      "code": "DIV_12_INCIDENTAL_METADATA",
+      "path": "scripts/query_governance.py",
+      "symptom": "Equivalent task and query requests produced different governed capsule hashes because request_id was hashed.",
+      "pre_change_effect": "Repeated work could not converge on the same capsule identity."
+    },
+    {
+      "code": "DIV_01_SURFACE_SYNONYM",
+      "path": "scripts/orientation_retrieval.py",
+      "symptom": "Whitespace and casing variants of the same query reached distinct pre-change retrieval behavior.",
+      "pre_change_effect": "Repeated equivalent retrieval surfaced avoidable duplicate work."
+    }
+  ],
+  "evidence_notes": [
+    "Pre-change retrieval replay came from the HEAD version of scripts/orientation_retrieval.py and the pre-patch capsule probe used by patch 054 discovery.",
+    "The baseline state did not yet have deterministic operation routing or bounded candidate resolution in place."
+  ]
+}

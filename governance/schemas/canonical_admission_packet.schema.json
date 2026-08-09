@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "mpf://governance/schemas/canonical_admission_packet.schema.json",
+  "title": "Canonical Admission Packet",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "packet_id",
+    "packet_type",
+    "version",
+    "status",
+    "human_source",
+    "authority_scope",
+    "proposed_objects",
+    "claim_boundary",
+    "provenance"
+  ],
+  "properties": {
+    "packet_id": { "type": "string", "minLength": 1 },
+    "packet_type": { "const": "canonical_admission_packet" },
+    "version": { "type": "string", "minLength": 1 },
+    "status": {
+      "type": "string",
+      "enum": ["PROPOSED", "ADMITTED", "DEFERRED", "REJECTED", "SUPERSEDED"]
+    },
+    "human_source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_id", "source_role", "submitted_by", "submitted_at"],
+      "properties": {
+        "source_id": { "type": "string" },
+        "source_role": { "enum": ["HUMAN_SOURCE", "HISTORICAL_RECORD", "WORKING_NOTE"] },
+        "submitted_by": { "type": "string" },
+        "submitted_at": { "type": "string" },
+        "source_paths": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "authority_scope": { "type": "string" },
+    "proposed_objects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": ["object_id", "object_type", "intended_authority_role"],
+        "properties": {
+          "object_id": { "type": "string" },
+          "object_type": { "type": "string" },
+          "intended_authority_role": {
+            "enum": ["CANONICAL_STATE", "GOVERNED_SUBMISSION", "VALIDATION_EVIDENCE", "GENERATED_PROJECTION"]
+          }
+        }
+      }
+    },
+    "claim_boundary": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["source_artifacts", "admission_record"]
+    }
+  }
+}

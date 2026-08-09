@@ -1,0 +1,60 @@
+{
+  "patch_id": "RT-IND-2026-07-19-LEXICON-DEBT-REDUCTION-001",
+  "patch_type": "LEXICON_DEBT_REDUCTION",
+  "status": "EXECUTED",
+  "date": "2026-07-19",
+  "authority_level": "L0_CONCEPTUAL",
+  "claim_class": "C1_DEFINED_PROVISIONAL",
+  "scope": {
+    "objective": "Reduce open lexicon debt for accepted patch-and-gap exploratory packets without promoting terms to canonical or live induction status.",
+    "source_packets": [
+      "RT-IND-2026-07-19-RELATIONAL-PROGRESSION-001",
+      "RT-IND-2026-07-19-RELATIONAL-PROGRESSION-001_OPERATOR_PARTITION_001",
+      "RT-IND-2026-07-19-PROCEDURAL-MONISM-INU-001"
+    ]
+  },
+  "terms_reduced": [
+    "relational_progression",
+    "dynamic_relational_array",
+    "U_alpha",
+    "bridge_operator",
+    "Pi_QM",
+    "Pi_GR",
+    "inu_logic",
+    "distinction_propagation"
+  ],
+  "registry_actions": [
+    {
+      "path": "registry/lexicon_gap_queue.json",
+      "action": "Set listed terms from GAP_OPEN / PROVISIONAL to C1_DEFINED_PROVISIONAL with governance_status lexicon_debt_reduced_no_promotion."
+    },
+    {
+      "path": "registry/lexicon_validation_registry.json",
+      "action": "Add provisional L0 validation entries with empty evidence arrays and explicit promotion boundaries."
+    },
+    {
+      "path": "docs/textbook/mono_process_textbook_complete.md",
+      "action": "Synchronize Appendix F language with the debt-reduced provisional status."
+    }
+  ],
+  "non_promotion_boundary": [
+    "No edits to registry/induction_registry.json.",
+    "No edits to governance/live/induction_queue.json.",
+    "No promotion to canonical L2 or L3 lexicon status.",
+    "No physical, mathematical, or universal truth claim is inferred from the provisional definitions."
+  ],
+  "db_snapshot_sync": {
+    "required": true,
+    "script": "scripts/db/snapshot_registries.py",
+    "status": "success",
+    "refresh_id": "REFRESH-20260719T230416942116Z",
+    "indexed_registry_count": 7,
+    "warnings": []
+  },
+  "verification_plan": [
+    "python scripts/governance/authorize_lock_update.py",
+    "python scripts/sync_math_registry.py",
+    "python scripts/db/snapshot_registries.py",
+    "python scripts/global_validate.py"
+  ]
+}

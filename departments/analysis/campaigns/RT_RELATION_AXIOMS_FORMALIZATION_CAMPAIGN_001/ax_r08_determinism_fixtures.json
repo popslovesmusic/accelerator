@@ -1,0 +1,24 @@
+{
+  "fixture_set_id": "AX-R08-DETERMINISM-FIXTURES-001",
+  "axiom_id": "AX-R08_DETERMINISM",
+  "status": "PARTIALLY_RESOLVED_BLOCKED",
+  "established_layers": ["SOURCE_RESOLUTION_DETERMINISM","SYNTAX_DETERMINISM","TYPE_DETERMINISM","WELL_FORMEDNESS_DETERMINISM","FAILURE_DIAGNOSTIC_DETERMINISM"],
+  "positive": [
+    {"fixture_id":"AX-R08-POS-001","input":"<S> | >S<","repeat_count":3,"expected":"IDENTICAL_WELL_FORMEDNESS_RESULT"},
+    {"fixture_id":"AX-R08-POS-002","input":">S< | <S>","repeat_count":3,"expected":"IDENTICAL_PRIMARY_ERROR","expected_error":"MALFORMED_OPERAND_ORDER"},
+    {"fixture_id":"AX-R08-POS-003","input":"<S> | <S>","repeat_count":3,"expected":"IDENTICAL_PRIMARY_AND_SECONDARY_DIAGNOSTICS"},
+    {"fixture_id":"AX-R08-POS-004","input":"governed_alias_b | governed_alias_u","repeat_count":3,"expected":"IDENTICAL_CANONICAL_RESOLUTION"}
+  ],
+  "blocked": [
+    {"fixture_id":"AX-R08-BLOCK-001","attempt":"Assert one unique semantic result for b | u without executable semantics.","expected":"SEMANTIC_DETERMINISM_NOT_ESTABLISHED"},
+    {"fixture_id":"AX-R08-BLOCK-002","attempt":"Select one of two admissible projection candidates without a canonical rule.","expected":"CANONICAL_PROJECTION_SELECTION_UNDEFINED"},
+    {"fixture_id":"AX-R08-BLOCK-003","attempt":"Use filesystem, registry row, or discovery order as a semantic tie breaker.","expected":"NONCANONICAL_SELECTION_FORBIDDEN"},
+    {"fixture_id":"AX-R08-BLOCK-004","attempt":"Infer relation determinism from deterministic crawl output.","expected":"CATEGORY_ERROR_CRAWL_DETERMINISM_NOT_RELATION_DETERMINISM"},
+    {"fixture_id":"AX-R08-BLOCK-005","attempt":"Classify an undefined semantic output as nondeterministic.","expected":"UNDEFINED_NOT_NONDETERMINISTIC"}
+  ],
+  "failure_semantics": ["SEMANTIC_DETERMINISM_NOT_ESTABLISHED","CANONICAL_PROJECTION_SELECTION_UNDEFINED","NONCANONICAL_SELECTION_FORBIDDEN","EXECUTABLE_SEMANTICS_INCOMPLETE","DETERMINISM_CONTEXT_UNDECLARED"],
+  "new_projection_selector": false,
+  "complete_executable_semantics": false,
+  "full_determinism_claim": false,
+  "operational_fallback": {"runtime_authority":"UNAVAILABLE","canonical_fallback_governance":"USED","mathematical_effect":"NONE"}
+}
